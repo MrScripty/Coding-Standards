@@ -728,6 +728,28 @@
   compatibility layer. A1 has no global supersession, mutable head, or temporal
   stale outcome; those semantics remain reserved for A2 authoring.
 
+## 2026-08-24: Milestone 4 And Plan A1 Acceptance
+
+- Committed the single-state implementation as
+  `94b295b40bc1cef9a6281355d68115f3a98ed112`, tree
+  `ff032da51fcaff45533c07daa8de464065b8e55c`.
+- Replaced packet, report, hidden-session, and global-supersession authority
+  with one immutable `AnalysisState` and `AnalysisHandle`; pending and
+  complete results are deterministic projections.
+- Closed SENA-003, SENA-007, SENA-018, SENA-019, and SENA-020. Existing move,
+  split, and merge impact fixtures satisfy the lifecycle acceptance row.
+- The frozen coverage projection and 28 requirement subjects remained valid;
+  no coverage-authority input changed, so no additional attestation renewal
+  was required.
+- Verified 80 analysis tests, 30 Standards Engine tests, 12 applicability
+  tests, 7 policy-impact tests, 17 metadata tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, and the complete checkpoint with 53
+  retained Bash checkers.
+- Accepted Milestone 4 and completed Plan A1. Controlled authoring,
+  evidence-oracle policy, and external project baselines remain outside this
+  plan.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

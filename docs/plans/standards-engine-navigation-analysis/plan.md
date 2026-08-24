@@ -1,13 +1,17 @@
 # Plan: Standards Engine Navigation And Analysis
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 4 single-state resolution and A1 acceptance
+**Current phase:** A1 accepted
 
-**Next slice:** verify the implemented single-state replacement across focused
-and broad checks, freeze the final horizon, and record A1 acceptance
+**Next slice:** none; controlled authoring requires an independently admitted
+Plan A2
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
+
+**Accepted implementation:** commit
+`94b295b40bc1cef9a6281355d68115f3a98ed112`, tree
+`ff032da51fcaff45533c07daa8de464065b8e55c`
 
 **Recovery boundary:** commit
 `13a9f48b95ed7532f480e4604d9dfa23443e8f43`, tree
@@ -571,8 +575,9 @@ repository state.
 - [x] Make only requirements material to the final fixed point completion
   blocking; retain dormant-valid observations and dispositions while excluding
   derived requirement history from state authority.
-- [ ] Freeze the resulting horizon and renew affected coverage attestations
-  only after every fact-contract, schema, registry, and test input is final.
+- [x] Freeze the resulting horizon after every fact-contract, schema, registry,
+  and test input is final; prove the existing 28-subject attestations remain
+  valid because no coverage-authority input changed.
 - [x] Derive `CompleteResult` only from exact final reached/disposition
   and fact-requirement/observation set equality and resolution of every
   non-consumer obligation, applicability, authorization, evidence, and audit
@@ -586,9 +591,9 @@ repository state.
 - [x] Implement deterministic compact text rendering from typed results only.
 - [x] Run complete typed-agent modification, addition, and removal workflows,
   including iterative obligation expansion and negative disposition cases.
-- [ ] Run move, split, and merge behavioral fixtures before claiming their
+- [x] Run move, split, and merge behavioral fixtures before claiming their
   contracts complete.
-- [ ] Record final objective evidence, exact commit and tree, and any deferred
+- [x] Record final objective evidence, exact commit and tree, and any deferred
   findings with owners and triggers.
 
 **Acceptance gate:** Every objective acceptance row has matching evidence; the
@@ -598,7 +603,8 @@ and cross-snapshot cases fail with the required typed result; schema drift,
 serialization, package, verifier, graph, declarative, freshness, link, and plan
 checks pass from one clean recorded tree.
 
-**Status:** `Active`
+**Status:** `Accepted` through the
+[single-state acceptance](reports/milestone-4-single-state-acceptance.md)
 
 ## Blockers
 
@@ -610,16 +616,10 @@ missing independent corpus authority, failed attestation bootstrap review,
 ambiguous evidence or authorization resolution, or need to change another
 graph authority remains a re-plan trigger rather than an implicit blocker.
 
-SENA-020's conflict is resolved architecturally by the accepted single-state
-model. Implementation is admitted only as one replacement: packet and report
-identities, stored derivations, global supersession, and temporal A1 staleness
-must disappear together. A compatibility layer or partial dual runtime is a
-new re-plan trigger.
-
-Runtime implementation is admitted from the recorded implementation base and
-remains bounded by the active milestone, exact next slice, allowed write set,
-and serial shared-authority checks. A newly admitted overlapping verifier or
-shared-authority proposal triggers re-planning before further source edits.
+No active blocker remains for Plan A1. SENA-020 is resolved by the accepted
+single-state replacement, and no packet/report compatibility runtime remains.
+Controlled authoring, evidence-oracle policy, and external project baselines
+remain owned by their separately admitted future plans.
 
 ## Re-Plan Triggers
 
