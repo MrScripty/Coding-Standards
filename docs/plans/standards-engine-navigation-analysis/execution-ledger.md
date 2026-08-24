@@ -952,6 +952,32 @@
 - Kept Plan A1 `Verifying`, retained SENA-022 as active, and left Plan A2
   inactive while Repair V proceeded against the canonical serializer.
 
+## 2026-08-24: A1 Boundary Repair V Implemented
+
+- Recorded the repair implementation at commit
+  `e7e0e1e20762f994e644f2e3c88d017d1625266c`, tree
+  `22c263b4f30c706b94ce3125c8f0537e5d210fe6`.
+- Removed the generated decoder's independent equality semantics. Generated
+  constants, enums, and `uniqueItems` now use the canonical serializer owned by
+  `standards_metadata`, including type-sensitive Boolean/integer handling and
+  NFC Unicode normalization.
+- Added differential regressions that submit the same mixed numeric and
+  canonically equivalent Unicode values to canonical validation and generated
+  models. Both entrypoints now accept or reject identically.
+- Made the plan fixture harness compare the complete checker output line,
+  including the exact fixture path and diagnostic text, rather than accepting
+  a matching fragment.
+- Verified 82 analysis tests, 45 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, every current plan, and the complete
+  checkpoint with 53 retained Bash checkers. Generated freshness, scoped Ruff,
+  and Git diff integrity also passed.
+- Plan A1 remains `Verifying`, SENA-022 remains active pending independent
+  acceptance review, and Plan A2 remains inactive.
+- Published the exact evidence as
+  [A1 boundary repair V candidate](reports/a1-boundary-repair-v-candidate.md).
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
