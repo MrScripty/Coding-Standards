@@ -785,6 +785,26 @@
   fixtures, all 218 declarative suites, and the complete checkpoint with 53
   retained Bash checkers.
 
+## 2026-08-24: A1 Boundary Repair Accepted
+
+- Accepted the repaired Plan A1 implementation at commit
+  `51dcd258942b0774c73ae8b620227c7ce34d1129`, tree
+  `f8d028e887f4061a1d03ad6e75b9776a5fc3966b`.
+- Closed SENA-021 after immutable snapshot reads, semantic-contract-bound
+  snapshot identity, generated interface projections, exhaustive inspection,
+  canonical key normalization, exact continuation bindings, and coherent plan
+  acceptance projections were implemented and verified.
+- Verified 82 analysis tests, 39 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, and the complete checkpoint with 53
+  retained Bash checkers.
+- Reaccepted Milestone 4 and satisfied objective rows A1 through A9. The
+  withdrawn `94b295b4` boundary remains historical evidence and is not
+  relabeled green.
+- Completed read-only Plan A1. Controlled authoring requires separate Plan A2
+  review and admission; Plans B and C remain inactive.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
