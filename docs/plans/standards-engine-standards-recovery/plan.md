@@ -2,12 +2,12 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** re-planning after independent admission rejection
+**Current phase:** independent discovery admission
 
-**Next slice:** revise the plan to separate reproduction/consumer-audit admission
-from policy implementation admission, resolve Verification-engine and Licensing
-authority, bind the accepted A1 boundary, and request another exact-tree review;
-implementation remains unavailable
+**Next slice:** independently review this revised plan for a discovery-only
+Milestone 0 that reproduces accepted A1 behavior and completes the consumer
+audit; policy implementation remains unavailable until a second post-audit
+exact-tree admission
 
 **Acceptance status:** `pending`
 
@@ -15,11 +15,16 @@ implementation remains unavailable
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
 `0ff4af77ebe5056c9478f04bf65dd87141f573d8`
 
-**Admitted implementation base:** `pending`; the independent plan-admission
-record must bind the exact reviewed planning commit and tree before `start`
+**Historical A1 reproduction boundary:** commit
+`2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
+`97c850ab718287007c1e1daac538f40869f71a1d`
 
-**Admission review:** `rejected`; see
-[standards-recovery-plan-admission.md](reports/standards-recovery-plan-admission.md)
+**Admitted discovery/audit base:** `pending`; the first independent admission
+must bind the exact reviewed planning commit and tree before Milestone 0 `start`
+
+**Admitted policy-implementation base:** `pending`; a second independent
+admission must bind the exact post-audit planning commit and tree before any
+normative policy mutation
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -82,7 +87,7 @@ controlled authoring Plan A2.
   independent consumer-coverage audit, attestations, and change-specific
   dispositions for every changed unit.
 - Planning and implementation prompts, the plan template, behavioral fixtures,
-  suite registrations, and executable verifier/checker support required by the
+  suite registrations, and Python-verifier declarative support required by the
   new policy.
 - Reproduction and durable recording of every historical A1 repair family,
   including the existing JSON Schema equality disagreement, before any later
@@ -100,6 +105,10 @@ controlled authoring Plan A2.
   `tools/graph_engine/`.
 - Correcting the JSON Schema equality defect during the reproduction slice or
   as an incidental standards-recovery change.
+- Vendoring an external JSON or JSON Schema corpus, adding a third-party
+  dependency, or adding JSON-specific standards or permanent verifier machinery.
+- Adding a Bash checker or extending a retained Bash checker. The active
+  verification-engine migration owns retirement of that surface.
 - Controlled authoring, change sessions, proposal mutation, semantic
   acceptance, repository apply, rollback, or recovery from Plan A2.
 - External-project baselines or Plan C.
@@ -114,10 +123,10 @@ controlled authoring Plan A2.
 - Commit `3439aae9540786d9734431e633ea5b62afb50592` is the immutable comparison
   baseline for the brief, prior-state inventory, and policy-impact comparison.
   It is not the implementation checkout after planning commits are added.
-- The independent admission report must bind one later exact planning commit
-  and tree as the implementation base. `start` is unavailable until that value
-  replaces `pending`; implementation from any other base requires re-planning
-  and a refreshed current-state inventory.
+- The first independent admission binds only the discovery/audit base and may
+  authorize only Milestone 0. The second independent admission binds the exact
+  post-audit policy-implementation base; normative mutation from any other base
+  requires re-planning and a refreshed current-state inventory.
 - No implementation invocation is admitted while this plan is `Blocked`.
   Independent admission must bind the reviewed commit and tree, confirm the
   bounded write sets, and transition the plan to `Planned` before `start` is
@@ -149,18 +158,14 @@ controlled authoring Plan A2.
   horizon can represent the required consumers without runtime changes. A need
   for a new relation kind, provider behavior, or compiler capability is a
   re-plan trigger.
-- Declarative suites and existing Bash checker adapters can enforce the new
-  standards without changing A1 runtime packages. This must be proven during
-  the implementation milestone rather than assumed at acceptance.
-- The external executable oracle is the official
-  `json-schema-org/JSON-Schema-Test-Suite` at commit
-  `b01af8c8d50244a2eb4dd3e01073e24823aa8691`. Milestone 0 vendors the exact
-  upstream `LICENSE` and Draft 2020-12 `const.json`, `enum.json`,
-  `uniqueItems.json`, `pattern.json`, and `type.json` files, records their
-  digests, and executes only the subset supported by current A1 declarations.
-  The normative equality oracle remains Draft 2020-12 Core section 4.2.2 and
-  Validation section 6.4.3. Focused Unicode vectors not present upstream must
-  identify the specification rule that determines each expected result.
+- Registered declarative suites executed by the Python standards verifier can
+  enforce the new standards without changing A1 runtime packages or adding to
+  the Bash surface. A missing Python capability requires coordination with the
+  active verification-engine migration and a write-set re-plan.
+- The historical equality reproduction uses existing accepted A1 inputs, a
+  temporary invocation outside repository authority, and the normative Draft
+  2020-12 Core section 4.2.2 and Validation section 6.4.3. No upstream test
+  corpus, executable, dependency, or copied test vector enters the repository.
 
 ## Binding Decisions
 
@@ -172,7 +177,8 @@ controlled authoring Plan A2.
 | The generic Generated Contract profile applies to program-consumed generated representations; Language Binding specializes it only for a real native/host or cross-language boundary. | Router and Contracts | Authoring brief section 5.2 | Stretching Language Binding over unrelated generation |
 | Schema instance equality, domain-value equality, and content-identity canonicalization are separate authority domains. This recovery establishes the policy distinction but does not implement A1b semantics. | Contracts | Authoring brief sections 3 and 6.3 | Reusing identity serialization as schema equality |
 | Independent evidence must prove the claimed property; freshness, local agreement, literal matching, mutation detection, and cold-process replay remain distinct claims. | Verification | Authoring brief section 5.1 | One undifferentiated green-check oracle |
-| External schema conformance uses a pinned official corpus and normative specification, retained with upstream licensing; local focused vectors may extend coverage but cannot replace that oracle. | Verification and Licensing | JSON Schema Test Suite commit `b01af8c8d50244a2eb4dd3e01073e24823aa8691` and Draft 2020-12 | Unpinned network content or two local implementations as sole oracle |
+| The accepted A1 JSON Schema disagreement is one bounded historical reproduction, not a new repository focus. Existing A1 inputs and directly applicable normative specification clauses determine the expected result; no external test corpus is incorporated. | Verification | Draft 2020-12 Core section 4.2.2 and Validation section 6.4.3 | Vendored JSON Schema fixtures, a new dependency, or JSON-specific recovery policy |
+| Recovery enforcement uses registered Python declarative suites and adds no Bash checker or Bash-checker behavior. | Verification-engine migration | [Active verification-engine plan](../standards-verification-engine/plan.md) | Temporary Bash enforcement or duplicate migration authority |
 | Current and proposed impact results are evidence inputs, not completeness proof. Coverage and per-consumer dispositions are mandatory. | Planning and coverage authority | `workflows/planning.md` projection-completeness policy | Treating zero edges as no impact |
 
 ## Simplicity And Ownership Review
@@ -237,20 +243,20 @@ changes in this plan.
 
 | Repair family | Required reproduction | Independent or higher-fidelity boundary | Insufficient evidence |
 | --- | --- | --- | --- |
-| Generated public closure | Exercise fields, types, defaults, requiredness, minimum/other constraints, discriminants, nested request/submission variants, complete result variants, and generated native classes from the canonical schema. | Canonical schema plus pinned official keyword cases for the supported subset; mutation of each represented semantic feature must affect generated/runtime acceptance. | Field-name equality or generator freshness alone. |
+| Generated public closure | Exercise fields, types, defaults, requiredness, minimum/other constraints, discriminants, nested request/submission variants, complete result variants, and generated native classes from the canonical schema. | Existing accepted A1 contract and public entry points; mutation of each represented semantic feature must affect generated/runtime acceptance, with limitations recorded for later A1b design. | Field-name equality or generator freshness alone. |
 | Public result and package ownership | Call public `prepare` and `resolve`, assert exported generated result classes, exhaust every result conversion, preserve engine programming errors, and verify documented public imports. | Actual package facade and agent-tool adapter, with import inspection across package boundaries. | Constructing generated classes directly or injecting internal result objects. |
 | Immutable snapshot reads | Capture a snapshot, mutate source files, then repeat whole-module read and policy inspection through the old handle and compare the complete result. | Captured immutable content through the public engine. | Policy-unit-only reads or handle-string equality. |
 | Cold reconstruction | Persist analysis and authority inputs, destroy process state, create a fresh public engine, then inspect the analysis plus every advertised context, requirement, observation, disposition, and certificate handle. | Separate process with only declared persisted authority. | Reusing an in-memory store or injecting private authorizations, providers, graph state, or caches. |
 | Semantic-version identity | Hold repository bytes constant while changing each interpretation-affecting contract version, then verify the owning snapshot or analysis identity changes; vary implementation provenance separately and verify identity stability. | Domain-specific identity fixtures derived from the accepted contract-version list. | Displayed version fields that do not participate in identity. |
-| Equality and validation | Exercise Boolean/integer type distinctions, Unicode codepoint distinctions, `const`, `enum`, `uniqueItems`, and regular-expression search semantics through canonical and generated public entry points. | Draft 2020-12 specification plus pinned official test corpus; focused Unicode vectors cite the exact normative rule. | Agreement between canonical and generated local implementations. |
+| Equality and validation | Reproduce the accepted A1 Boolean/integer and Unicode behavior through canonical and generated public entry points, including the known disagreement, without adding permanent JSON-specific fixtures. | Existing accepted A1 inputs and directly applicable Draft 2020-12 specification clauses recorded in the reproduction report. | Agreement between canonical and generated local implementations. |
 | Acceptance oracles | Recreate malformed negative fixtures, substring diagnostics, incomplete differential matrices, copied expected literals, freshness-only checks, and sampled mutation claims; then demonstrate the intended stronger check. | Otherwise-valid fixtures, exact diagnostics, complete named matrices, and explicit claim/domain/oracle/unsupported-domain records. | Any nonzero exit, matching substring, or a subject-derived expected value. |
 
 ## Milestones
 
-### Milestone 0: Reproduction And Frozen Admission Baseline
+### Milestone 0: Historical Reproduction And Consumer Audit
 
-**Goal:** Establish a reviewed, reproducible defect and impact baseline without
-changing policy or A1 runtime behavior.
+**Goal:** Reproduce the accepted A1 boundary and complete the independent
+consumer audit without changing policy, verifier behavior, or A1 runtime.
 
 **Allowed write set:**
 
@@ -258,30 +264,25 @@ changing policy or A1 runtime behavior.
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
 - `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
+- `docs/plans/standards-engine-standards-recovery/reports/pre-policy-consumer-audit.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md`
 - `docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md`
-- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-plan-admission.md`
-- `evaluation/standards-effectiveness/fixtures/contracts/json-schema-test-suite-b01af8c8/LICENSE` (new, byte-identical upstream file)
-- `evaluation/standards-effectiveness/fixtures/contracts/json-schema-test-suite-b01af8c8/const.json` (new, byte-identical upstream file)
-- `evaluation/standards-effectiveness/fixtures/contracts/json-schema-test-suite-b01af8c8/enum.json` (new, byte-identical upstream file)
-- `evaluation/standards-effectiveness/fixtures/contracts/json-schema-test-suite-b01af8c8/pattern.json` (new, byte-identical upstream file)
-- `evaluation/standards-effectiveness/fixtures/contracts/json-schema-test-suite-b01af8c8/type.json` (new, byte-identical upstream file)
-- `evaluation/standards-effectiveness/fixtures/contracts/json-schema-test-suite-b01af8c8/uniqueItems.json` (new, byte-identical upstream file)
-- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-discovery-admission.md` (new, independent reviewer owned)
 
 **Tasks:**
 
-- [ ] Obtain independent plan admission bound to the exact planning commit and
-  tree; confirm scope, write sets, consumer audit, independent oracles, and the
-  absence of A1b/A2 implementation.
+- [ ] Obtain independent discovery admission bound to the exact planning commit
+  and tree; confirm the bounded reproduction/audit method and write set, with no
+  claim that the not-yet-executed consumer audit is complete.
 - [ ] Transition this plan from `Blocked` to `Planned`, then admit `start` for
-  this milestone from the reviewed boundary.
-- [ ] Reproduce current `const`, `enum`, and `uniqueItems` behavior for composed
-  and decomposed Unicode strings and compare it with the pinned Draft 2020-12
-  contract or official test corpus.
-- [ ] Retrieve the six admitted upstream files from exact commit
-  `b01af8c8d50244a2eb4dd3e01073e24823aa8691`, preserve their bytes and license,
-  record source and SHA-256 digests, and reject any fetch or digest mismatch.
+  this milestone only from the reviewed discovery boundary.
+- [ ] Bind every reproduction to accepted A1 commit
+  `2359a98740b6035a0414bfaf5427ceaa1301a1c8` and tree
+  `97c850ab718287007c1e1daac538f40869f71a1d`.
+- [ ] Reproduce the known A1 schema-equality disagreement using only existing
+  accepted A1 inputs and a temporary invocation; cite the exact normative
+  specification clauses and add no external corpus, dependency, or permanent
+  JSON-specific fixture.
 - [ ] Reproduce the complete generated-contract closure family: field names,
   types, defaults, requiredness, constraints, nested variants, result shapes,
   and generated native result ownership.
@@ -303,21 +304,57 @@ changing policy or A1 runtime behavior.
 - [ ] Record commands, versions, exact inputs, expected and actual outcomes,
   claimed property, independent oracle, and unsupported domain for every
   historical family without changing runtime code.
+- [ ] Enumerate every independent-horizon member relevant to each proposed
+  policy unit, review every known missing consumer class, and record its planned
+  `updated`, `reviewed-no-change`, `not-applicable`, or `blocked` disposition.
 - [ ] Re-run current policy-impact and coverage analysis for every proposed
-  policy owner and replace any incomplete inventory row before normative edits.
+  owner, complete the pre-policy consumer-audit report, and replace every
+  incomplete or unaudited inventory row before policy admission.
 - [ ] Record A1b planning and all A2 work as unavailable while recovery remains
   incomplete.
 
-**Acceptance gate:** Independent plan-admission report accepts the exact plan
-tree and binds it as the implementation base; every historical repair family
-has a reproducible current-state result, the JSON Schema disagreement is
-reproducible through both current public and canonical validation paths against
-an independent oracle, no file outside the allowed write set changed, and no
-runtime behavior was corrected.
+**Acceptance gate:** The discovery-admission report accepts the exact plan tree
+and binds only the discovery/audit base; every historical repair family has a
+reproducible result from the accepted A1 boundary; the bounded schema-equality
+disagreement is recorded against normative specification authority; the
+independent horizon and every missing consumer class have planned dispositions;
+no external corpus, policy, verifier behavior, or A1 runtime changed.
 
-**Status:** `Blocked` pending independent plan admission
+**Status:** `Blocked` pending independent discovery admission
 
-### Milestone 1: Coordinated Standards Authority Cutover
+### Milestone 1: Policy-Implementation Admission
+
+**Goal:** Independently accept the complete post-audit scope, consumer map, and
+exact policy write set before any normative mutation.
+
+**Allowed write set:**
+
+- `docs/plans/standards-engine-standards-recovery/plan.md`
+- `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
+- `docs/plans/standards-engine-standards-recovery/issues.md`
+- `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
+- `docs/plans/standards-engine-standards-recovery/reports/pre-policy-consumer-audit.md`
+- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-policy-admission.md` (new, independent reviewer owned)
+
+**Tasks:**
+
+- [ ] Bind one clean post-audit candidate commit and tree without changing
+  normative policy, Router authority, verifier behavior, or A1 runtime.
+- [ ] Independently confirm every horizon member and missing consumer class has
+  a planned disposition, every proposed policy locator is coherent, and the
+  Milestone 2 write/read sets cover every selected consumer.
+- [ ] Confirm recovery enforcement uses only registered Python declarative
+  suites and does not add or extend Bash checkers.
+- [ ] Bind the accepted candidate as the policy-implementation base and admit
+  Milestone 2 only.
+
+**Acceptance gate:** The independent policy-admission report accepts the exact
+post-audit commit and tree, finds no missing or unaudited consumer class, binds
+the policy-implementation base, and admits no A1b or A2 work.
+
+**Status:** `Blocked` by Milestone 0
+
+### Milestone 2: Coordinated Standards Authority Cutover
 
 **Goal:** Introduce the six policy families and all required routing,
 semantic-graph, agent, template, fixture, and enforcement projections as one
@@ -369,10 +406,6 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml` (new)
 - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml` (new)
 - `evaluation/standards-effectiveness/suite-registry.toml`
-- `evaluation/standards-effectiveness/check-plan-structure.sh`
-- `evaluation/standards-effectiveness/verify-plan-fixtures.sh`
-- `evaluation/standards-effectiveness/verify-standards-recovery.sh` (new)
-- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -384,7 +417,6 @@ coherent candidate authority.
 - `workflows/build.md`
 - `workflows/documentation.md`
 - `workflows/tooling.md`
-- `topics/licensing.md`
 - `workflows/implementation.md`
 - `profiles/applications/library.md`
 - `profiles/boundaries/language-bindings.md`
@@ -397,6 +429,7 @@ coherent candidate authority.
 - `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-v-candidate.md`
 - `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-vi-candidate.md`
 - `docs/plans/standards-engine-navigation-analysis/reports/a1-final-acceptance.md`
+- `docs/plans/standards-verification-engine/plan.md`
 - `tools/standards_engine/**`
 - `tools/standards_analysis/**`
 - `tools/standards_applicability/**`
@@ -433,9 +466,9 @@ write set. Runtime-package edits are not admitted by this plan.
   and cold-process behavioral fixtures.
 - [ ] Ensure every negative fixture satisfies unrelated preconditions and
   asserts the exact intended diagnostic, not generic failure.
-- [ ] Add executable checker and suite support using an independent oracle when
-  the claim is external conformance; generation freshness remains a separate
-  check.
+- [ ] Register Python declarative suites for every recovery behavior and keep
+  generation freshness separate from semantic correctness; add or extend no
+  Bash checker.
 - [ ] Run prior/current graph comparison after each metadata batch and update
   the disposition report for every selected consumer.
 - [ ] Reject any remaining missing or unaudited consumer rather than accepting
@@ -448,9 +481,9 @@ disposition; focused suites separately prove SR-A6 through SR-A10;
 forbidden runtime paths remain unchanged; all affected declarative and static
 verification passes.
 
-**Status:** `Blocked` by Milestone 0
+**Status:** `Blocked` by Milestone 1
 
-### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
+### Milestone 3: Coverage Freeze And Exact-Tree Acceptance
 
 **Goal:** Freeze the complete semantic authority, renew coverage exactly once,
 and obtain independent acceptance of one clean standards-recovery tree.
@@ -472,7 +505,6 @@ and obtain independent acceptance of one clean standards-recovery tree.
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-consumer-dispositions.md`
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-candidate.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-acceptance.md` (new, independent reviewer owned)
-- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 
 **Tasks:**
 
@@ -498,7 +530,7 @@ commit and tree; all SR-A1 through SR-A15 claims have matching evidence; every
 non-deferred milestone is accepted; no consumer is blocked; no A1b or A2
 implementation exists.
 
-**Status:** `Blocked` by Milestone 1
+**Status:** `Blocked` by Milestone 2
 
 ## Verification Strategy
 
@@ -508,7 +540,7 @@ different claim:
 | Claim | Required oracle | Explicit non-proof |
 | --- | --- | --- |
 | Generated freshness | Regenerate and compare exact generated output to the checked-in projection. | Fresh output does not prove complete traversal or correct semantics. |
-| Generated semantic correctness | Mutation and behavioral cases checked against an official corpus, mature independent implementation, or independently reviewed executable specification. | Two local implementations agreeing is consistency only. |
+| Generated semantic correctness | Mutation and behavioral cases checked against a normative specification, mature independent implementation, or independently reviewed executable specification. | Two local implementations agreeing is consistency only. |
 | Schema instance equality | Selected Draft 2020-12 dialect/vocabulary oracle using codepoint-based string equality and schema data-model rules. | Identity canonicalization bytes and Python equality are not schema equality. |
 | Content identity | Domain-separated canonical serialization fixtures for the explicitly named identity contract. | Schema instance equality does not define identity normalization. |
 | Immutable authority closure | Capture, persist, destroy process state, reconstruct in a genuinely fresh process through public adapters, and compare complete results after source mutation. | Reusing an in-memory store, injected private cache, or live repository path is not cold reconstruction. |
@@ -516,9 +548,9 @@ different claim:
 
 ## Blockers
 
-- Independent plan admission rejected the current plan and semantic inventory.
-  No implementation operation is available; the exact findings are recorded in
-  [the admission report](reports/standards-recovery-plan-admission.md).
+- Independent discovery admission has not accepted the revised plan. No
+  Milestone 0 operation is available, and policy implementation requires a
+  separate post-audit admission.
 - The JSON Schema equality disagreement remains intentionally unresolved until
   Milestone 0 records an independent reproduction.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -529,22 +561,23 @@ different claim:
 
 - Independent admission rejects or materially changes the six-policy scope,
   consumer inventory, oracle selection, sequence, or write sets.
-- The independent admission record does not bind its exact reviewed planning
-  commit and tree as the implementation base, or implementation begins from a
-  different tree. The comparison baseline remains
-  `3439aae9540786d9734431e633ea5b62afb50592` and is not replaced by admission.
+- The first admission does not bind the exact discovery/audit base, the second
+  admission does not bind the exact policy-implementation base, or either slice
+  begins from a different tree. The comparison baseline remains `3439aae...`
+  and the historical A1 reproduction boundary remains `2359a987...`.
 - A proposed policy locator is missing, duplicated, overlapping, or cannot
   express one coherent semantic unit.
-- Impact analysis discovers a required consumer outside Milestone 1's write or
+- Impact analysis discovers a required consumer outside Milestone 2's write or
   explicit read-only sets, or a read-only consumer requires modification.
 - An empty impact result lacks current independent coverage, or the horizon is
   unable to discover consumers omitted from both the graph and node catalog.
 - A new or changed permanent relationship, node registration, suite input,
   policy unit, fact contract, provider, or horizon member invalidates an
   already-reviewed impact result or attestation.
-- Existing relation kinds, policy-unit schemas, Router projections,
-  declarative suites, or verifier/checker adapters cannot represent or enforce
-  the new policy without a runtime package change.
+- Existing relation kinds, policy-unit schemas, Router projections, or Python
+  declarative-suite capabilities cannot represent or enforce the new policy.
+  Coordinate any required Python-verifier change with the active migration plan
+  and re-plan its exact shared write set; never add a Bash fallback.
 - The Draft 2020-12 defect cannot be reproduced independently, the chosen
   external oracle is unavailable or ambiguous, or a local implementation is
   being used as its own only oracle.
@@ -574,7 +607,7 @@ may inspect immutable candidate trees and author only their named review report.
 
 ## Subsequent A1b Planning Gate
 
-Only after Milestone 2 is independently accepted may a separate A1b plan and
+Only after Milestone 3 is independently accepted may a separate A1b plan and
 superseding ADR be created. That planning phase must, at minimum:
 
 - evaluate a mature Draft 2020-12 validator against an explicitly bounded local

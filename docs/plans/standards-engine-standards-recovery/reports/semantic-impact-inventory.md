@@ -6,6 +6,12 @@ This is the pre-change inventory for the standards-recovery plan. It is bound
 to planning commit `3439aae9540786d9734431e633ea5b62afb50592`, tree
 `0ff4af77ebe5056c9478f04bf65dd87141f573d8`.
 
+Historical A1 behavior is reproduced from accepted commit
+`2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
+`97c850ab718287007c1e1daac538f40869f71a1d`. That historical boundary is
+distinct from both the standards comparison baseline and any later admitted
+policy-implementation base.
+
 It records proposed policy identities and the consumer families that must be
 reviewed before policy mutation. It is not a coverage attestation, policy
 acceptance, relationship declaration, or implementation admission.
@@ -22,6 +28,11 @@ At the planning base:
 
 Therefore every current empty impact result below is `unaudited`. It is not
 evidence that the policy has no consumers.
+
+The first admission may authorize only read-only reproduction and completion
+of this consumer audit. No normative policy mutation is eligible until every
+independent-horizon member and missing consumer class has a planned disposition
+and a second independent review accepts the exact post-audit plan tree.
 
 ## Disposition Vocabulary
 
@@ -103,8 +114,8 @@ No applicability may be inferred from explanatory prose or path names.
 | `prompts/implement-plan.md` | registered projection node | Ensure implementation records evidence fidelity and stops on invalid oracle/systemic finding | `pending-required` |
 | `templates/PLAN-TEMPLATE.md` | registered projection node | Determine the minimum explicit fields needed without duplicating Verification policy | `pending-required` |
 | `workflows/documentation.md` | canonical Documentation workflow | Review durable evidence and acceptance-report projection requirements for oracle-qualified claims | `pending-required`; expected `reviewed-no-change` unless a concrete policy gap is proven |
-| `evaluation/standards-effectiveness/check-plan-structure.sh` | not currently a policy-impact node | Audit exact diagnostic and acceptance-evidence checks | `pending-required`; missing consumer registration |
-| `evaluation/standards-effectiveness/verify-plan-fixtures.sh` | not currently a policy-impact node | Require the intended exact diagnostic, not arbitrary failure | `pending-required`; missing consumer registration |
+| `evaluation/standards-effectiveness/check-plan-structure.sh` | retained Bash checker under active migration authority | Review exact current behavior without extending it; new policy enforcement belongs in Python declarative suites | `pending-required`; expected `reviewed-no-change` pending retirement |
+| `evaluation/standards-effectiveness/verify-plan-fixtures.sh` | retained Bash checker under active migration authority | Review exact current behavior without extending it; new negative scenarios belong in Python declarative suites | `pending-required`; expected `reviewed-no-change` pending retirement |
 | Verification fixture family | horizon member through suite inputs | Add valid/invalid oracle, freshness-only, local-agreement-only, mutation-domain, and isolated-negative cases | `pending-required` |
 | Verification suites and suite registry | registered horizon/suite authority | Add enforcement suites and dependencies without copied policy prose as sole oracle | `pending-required` |
 | Acceptance and candidate reports | registered documentation/reference corpus through the independent horizon | Audit claims that freshness or local agreement proves semantics and confirm Documentation-owned traceability | `pending-required`; relationship representation must be decided during audit |
@@ -122,7 +133,6 @@ No applicability may be inferred from explanatory prose or path names.
 | `profiles/boundaries/language-bindings.md` | canonical profile | Confirm it applies only to genuine native/host or cross-language representation | `pending-required` |
 | `profiles/applications/library.md` | canonical profile | Confirm public package producer/consumer proof remains required | `pending-required` |
 | `workflows/documentation.md` | canonical Documentation workflow | Confirm generated contract decisions, supported semantics, and external-conformance limits are durably projected | `pending-required`; expected `reviewed-no-change` unless a concrete policy gap is proven |
-| `topics/licensing.md` | canonical Licensing topic | Review retention of the pinned official JSON Schema Test Suite files and upstream license | `pending-required`; expected `reviewed-no-change` unless incorporation requires another artifact |
 | `tools/standards_engine/contracts/a1-contract.schema.json` | A1 runtime authority, read-only | Reproduce dialect/equality defect; do not correct in recovery | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
 | `tools/standards_engine/contracts/generate_contract.py` | A1 runtime implementation, read-only | Inventory generated closure and equality behavior for A1b | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
 | `tools/standards_engine/standards_engine/_generated_contract.py` | generated public artifact, read-only | Reproduce generated-model semantics and public result behavior | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
@@ -162,7 +172,7 @@ No applicability may be inferred from explanatory prose or path names.
 | `templates/PLAN-TEMPLATE.md` | registered projection | Expose class-level acceptance and inventory/disposition fields only where material | `pending-required` |
 | `docs/plans/*/issues.md` contract | planning artifact model | Ensure issue records distinguish isolated repair from systemic re-plan trigger | `pending-required`; representation relationship must be audited |
 | Planning fixtures and `planning-consolidation` | registered evidence nodes | Add duplicated authority, incomplete projection, ambient authority, public/internal leak, and invalid-oracle cases | `pending-required` |
-| `check-plan-structure.sh` and `verify-plan-fixtures.sh` | executable checkers, not current graph nodes | Enforce recognized status/evidence and intended diagnostic behavior without claiming semantic review | `pending-required`; missing consumer registration |
+| Retained plan Bash checkers | active migration-owned consumers | Review current behavior and record `reviewed-no-change`; enforce new recognized-status/evidence and intended-diagnostic behavior through Python declarative suites | `pending-required`; do not add relationships that would preserve retiring implementations as permanent authority |
 
 ### Generated Contract Router completeness
 
