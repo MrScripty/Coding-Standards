@@ -1,6 +1,11 @@
 # Plan A1 Boundary Repair II Candidate
 
-**Status:** `Ready for independent review`
+**Status:** `Rework required`
+
+**Review outcome:** The candidate was not accepted. Generated models omitted
+numeric constraints and concrete result shapes, while cold child-artifact
+inspection depended on execution authority not carried by the immutable state.
+The implementation remains historical candidate evidence only.
 
 **Implementation commit:** `714ba23fb5186b549ab44865d36c77509dbf654a`
 

@@ -88,6 +88,7 @@ for file in "$@"; do
               heading = $column
               gsub(/^[[:space:]]+|[[:space:]]+$/, "", heading)
               if (heading == "Status") status_column = column
+              if (heading == "Evidence") evidence_column = column
             }
             next
           }
@@ -95,7 +96,10 @@ for file in "$@"; do
           value = status_column == 0 ? "" : $status_column
           gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
           gsub(/`/, "", value)
-          print id "\t" value
+          evidence = evidence_column == 0 ? "" : $evidence_column
+          gsub(/^[[:space:]]+|[[:space:]]+$/, "", evidence)
+          gsub(/`/, "", evidence)
+          print id "\t" value "\t" (evidence == "" ? "<missing>" : evidence)
         }
       '
   )"
@@ -103,10 +107,16 @@ for file in "$@"; do
     printf '%s: expected at least one objective-acceptance row\n' "$file" >&2
     exit 1
   fi
-  while IFS=$'\t' read -r objective_id objective_status; do
-    if [[ ! "$objective_status" =~ ^(pending|partial|blocked|satisfied)$ ]]; then
+  while IFS=$'\t' read -r objective_id objective_status objective_evidence; do
+    if [[ ! "$objective_status" =~ ^(pending|blocked|satisfied)$ ]]; then
       printf '%s: objective %s has invalid status %s\n' \
         "$file" "$objective_id" "$objective_status" >&2
+      exit 1
+    fi
+    if [[ "$objective_status" == "satisfied" ]] &&
+      [[ "$objective_evidence" == "<missing>" || "$objective_evidence" == "pending" ]]; then
+      printf '%s: satisfied objective %s requires evidence\n' \
+        "$file" "$objective_id" >&2
       exit 1
     fi
     if [[ "$status" == "Accepted" && "$objective_status" != "satisfied" ]]; then

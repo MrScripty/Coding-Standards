@@ -35,6 +35,7 @@ from tools.standards_engine.contracts.validate_contracts import (
 from tools.standards_engine.standards_engine import (
     AgentToolFacade,
     AnalysisRequest,
+    AnalysisState as ContractAnalysisState,
     DirectoryAnalysisStateStore,
     InMemoryAnalysisStateStore,
     InspectCall,
@@ -383,6 +384,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             set(value["completion"]["disposition_obligations"]),
         )
         state = self.engine.inspect(InspectCall(packet.handle))
+        self.assertIsInstance(state, ContractAnalysisState)
         validate(
             SCHEMA,
             SCHEMA["$defs"]["AnalysisState"],
@@ -390,7 +392,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             "$state",
         )
         self.assertEqual(
-            state.id,
+            state.handle.id,
             contract_identity(SCHEMA, "AnalysisState", state.as_contract()),
         )
 
@@ -550,9 +552,6 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 analysis_store=store,
             )
             cold_engine._policy_impact = conditional
-            cold_engine._authorizations = {
-                analyze_authorization.capability: analyze_authorization
-            }
             for handle, definition, field, expected in inspection_cases:
                 with self.subTest(definition=definition):
                     inspected = cold_engine.inspect(InspectCall(handle)).as_contract()
@@ -832,7 +831,47 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(reused.id, result.id)
         self.assertEqual(reused.as_contract(), result.as_contract())
         inspected = second_engine.inspect(InspectCall(reused.handle))
-        self.assertEqual(inspected.id, reused.handle["id"])
+        self.assertEqual(inspected.handle.id, reused.handle["id"])
+
+    def test_context_inspection_reopens_without_execution_authority(self) -> None:
+        capabilities = (
+            authorization("standards.analyze"),
+            authorization("standards.review.consumer"),
+            authorization("standards.review.impact"),
+            authorization("standards.review.audit"),
+        )
+        policy = "workflow.planning.written-plan-applicability"
+        with tempfile.TemporaryDirectory() as temporary:
+            store = DirectoryAnalysisStateStore(Path(temporary))
+            first_engine = StandardsEngine.open_analysis(
+                REPO_ROOT,
+                REPO_ROOT,
+                authorizations=capabilities,
+                analysis_store=store,
+            )
+            result = first_engine.prepare(
+                AnalysisRequest(
+                    first_engine.snapshot,
+                    first_engine.snapshot,
+                    (
+                        ChangeDescriptor(
+                            ChangeKind.MODIFICATION,
+                            (policy,),
+                            (policy,),
+                            ReviewScope("whole-artifact"),
+                        ),
+                    ),
+                    (),
+                )
+            )
+            cold_engine = StandardsEngine.open_repository(
+                REPO_ROOT,
+                analysis_store=store,
+            )
+
+            inspected = cold_engine.inspect(InspectCall(result.context.handle))
+
+            self.assertEqual(inspected.context.as_contract(), result.context.as_contract())
 
     def test_analysis_resolves_in_a_new_engine_without_supersession(self) -> None:
         store = InMemoryAnalysisStateStore()

@@ -485,6 +485,29 @@ def bind_analysis_kernel(
     )
 
 
+def bind_projection_kernel(
+    accepted: AnalysisAuthority,
+    proposed: AnalysisAuthority,
+    state: AnalysisState,
+) -> AnalysisKernel:
+    """Bind pure reprojection to the immutable authority views stored in state."""
+    if dict(state.base_snapshot) != dict(accepted.snapshot) or dict(
+        state.proposed_snapshot
+    ) != dict(proposed.snapshot):
+        raise _error(
+            "AUTHORITY.CONTEXT_MISMATCH",
+            "analysis state does not bind the supplied authority snapshots",
+            observed=state.id,
+        )
+    return AnalysisKernel(
+        accepted,
+        proposed,
+        state.authorization_view,
+        state.provider_view,
+        (),
+    )
+
+
 def project_analysis(
     kernel: AnalysisKernel,
     state: AnalysisState,
@@ -1612,6 +1635,7 @@ __all__ = (
     "advance_analysis",
     "analysis_state_from_contract",
     "bind_analysis_kernel",
+    "bind_projection_kernel",
     "build_authorization_view",
     "build_provider_view",
     "prepare_analysis",

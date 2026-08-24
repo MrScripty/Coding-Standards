@@ -20,7 +20,7 @@ Replace a contract.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | Producer and consumer contract evidence passes. | `contract` | `not-applicable` | `automated` | `partial` | `superseded by plan-v2.md` |
+| A1 | Producer and consumer contract evidence passes. | `contract` | `not-applicable` | `automated` | `pending` | `superseded by plan-v2.md` |
 
 ## Binding Decisions
 

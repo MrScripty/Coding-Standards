@@ -847,6 +847,49 @@
   [A1 boundary repair II candidate](reports/a1-boundary-repair-ii-candidate.md)
   for independent acceptance review.
 
+## 2026-08-24: A1 Boundary Repair II Review Failed
+
+- Independent review rejected candidate commit `714ba23f`, tree
+  `d5fa6ceed1aa35ec83fe1073f0c0a8818658cc1b`.
+- Generated dataclass construction omitted the schema's integer minimum, and
+  result variants remained arbitrary mapping wrappers outside the generated
+  native algebra.
+- Cold child-artifact inspection reprojected with the fresh engine's execution
+  authorizations and providers, while the advertised public behavior required
+  deterministic reconstruction from authority views stored in immutable state.
+- Objective rows A4 through A7 cited withdrawn evidence, `partial` remained an
+  unsupported accepted objective status, satisfied rows did not require
+  evidence, and the ADR still listed retired packet and report domains as
+  current.
+- Kept Plan A1 `Verifying`, retained SENA-022 as active, and left Plan A2
+  inactive while the remaining boundary repair proceeded.
+
+## 2026-08-24: A1 Boundary Repair III Implemented
+
+- Expanded generated Python authority from operation inputs to the complete
+  public input and result closure. Concrete result dataclasses, nested models,
+  required fields, constants, discriminants, and integer minimums now use one
+  recursive schema-derived decoder; incomplete results and revision zero are
+  rejected.
+- Made analysis-state inspection return the generated `AnalysisState` result
+  model rather than a handwritten domain object.
+- Added a projection-only analysis kernel that binds authorization and provider
+  authority from persisted immutable state and never invokes providers. Public
+  cold context inspection now succeeds without execution-authority injection;
+  requirement and observation inspection use the same state-bound path.
+- Replaced withdrawn A4 through A7 evidence with still-valid milestone
+  evidence, removed retired packet/report domains from the ADR's current list,
+  rejected `partial` objective status, and required evidence for every
+  satisfied objective row.
+- Verified 82 analysis tests, 43 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, every current plan, and the complete
+  checkpoint with 53 retained Bash checkers. Generated freshness, scoped Ruff,
+  and Git diff integrity also passed.
+- Plan A1 remains `Verifying`, SENA-022 remains active pending independent
+  acceptance review, and Plan A2 remains inactive.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

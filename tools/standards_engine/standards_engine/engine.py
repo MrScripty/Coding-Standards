@@ -49,6 +49,7 @@ from tools.standards_analysis.standards_analysis import (
     advance_analysis,
     analysis_state_from_contract,
     bind_analysis_kernel,
+    bind_projection_kernel,
     canonical_json_bytes,
     canonical_target_authority,
     compile_reading_plan,
@@ -82,6 +83,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from .model import (
+    AnalysisState as AnalysisStateResult,
     AnalysisContextInspectionResult,
     AnalysisRequest,
     CertificateInspectionResult,
@@ -591,7 +593,7 @@ class StandardsEngine:
                     "unavailable",
                     "The immutable analysis is unavailable from the state store.",
                 )
-            return state
+            return AnalysisStateResult.from_value(state.as_contract())
         embedded = handle.get("snapshot")
         if isinstance(embedded, Mapping):
             source = self._source_for(embedded)
@@ -807,17 +809,12 @@ class StandardsEngine:
         proposed = self._source_for(state.proposed_snapshot)
         if accepted is None or proposed is None:
             return None
-        try:
-            kernel = bind_analysis_kernel(
-                accepted._analysis_authority(),
-                proposed._analysis_authority(),
-                state,
-                authorizations=self._authorizations.values(),
-                providers=self._fact_providers,
-            )
-            return project_analysis(kernel, state)
-        except AnalysisError:
-            return None
+        kernel = bind_projection_kernel(
+            accepted._analysis_authority(),
+            proposed._analysis_authority(),
+            state,
+        )
+        return project_analysis(kernel, state)
 
     def _analysis_authority(self) -> AnalysisAuthority:
         return AnalysisAuthority(

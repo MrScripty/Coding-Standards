@@ -49,11 +49,16 @@ def _definition_references(node: object) -> set[str]:
     return references
 
 
-def _input_definitions(schema: dict[str, Any]) -> tuple[str, ...]:
-    pending = [
-        contract["input"]
-        for contract in schema["x-standards-engine-contract"]["public_operations"].values()
-    ]
+def _public_definitions(schema: dict[str, Any]) -> tuple[str, ...]:
+    operations = schema["x-standards-engine-contract"]["public_operations"].values()
+    pending = [contract["input"] for contract in operations]
+    pending.extend(
+        result
+        for contract in schema["x-standards-engine-contract"][
+            "public_operations"
+        ].values()
+        for result in contract["results"]
+    )
     selected: set[str] = set()
     while pending:
         name = pending.pop()
@@ -115,7 +120,12 @@ def _field_default(node: dict[str, Any], required: bool) -> str | None:
     return None if required else "None"
 
 
-def _class_projection(name: str, node: dict[str, Any]) -> list[str]:
+def _class_projection(
+    name: str,
+    node: dict[str, Any],
+    *,
+    result: bool,
+) -> list[str]:
     required = set(node.get("required", ()))
     selected = [
         (
@@ -131,7 +141,7 @@ def _class_projection(name: str, node: dict[str, Any]) -> list[str]:
     ordered += [item for item in selected if item[3] is not None and item[0] == "kind"]
     lines = [
         "@dataclass(frozen=True, slots=True)",
-        f"class {name}(ContractObject):",
+        f"class {name}({'ContractResult' if result else 'ContractObject'}):",
         f"    __definition__: ClassVar[str] = {name!r}",
     ]
     for _, python_name, annotation, default in ordered:
@@ -178,9 +188,9 @@ class ContractObject(Mapping[str, object]):
         return selected
 
     def as_contract(self) -> dict[str, object]:
-        required = set(INPUT_DEFINITION_SCHEMAS[self.__definition__].get("required", ()))
+        required = set(DEFINITION_SCHEMAS[self.__definition__].get("required", ()))
         result = {}
-        for contract_name, python_name in INPUT_FIELD_NAMES[self.__definition__].items():
+        for contract_name, python_name in FIELD_NAMES[self.__definition__].items():
             value = getattr(self, python_name)
             if value is None and contract_name not in required:
                 continue
@@ -195,6 +205,10 @@ class ContractObject(Mapping[str, object]):
 
     def __len__(self) -> int:
         return len(self.as_contract())
+
+
+class ContractResult(ContractObject):
+    pass
 
 
 def _encode(value: object) -> object:
@@ -214,12 +228,17 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
     variants = node.get("oneOf")
     if isinstance(variants, list):
         failures = []
+        matches = []
         for variant in variants:
             try:
-                return _decode_node(variant, value)
+                matches.append(_decode_node(variant, value))
             except (TypeError, ValueError) as error:
                 failures.append(str(error))
-        raise TypeError("value matches no generated union variant: " + "; ".join(failures))
+        if len(matches) == 1:
+            return matches[0]
+        if not matches:
+            raise TypeError("value matches no generated union variant: " + "; ".join(failures))
+        raise ValueError("value matches more than one generated union variant")
     if "const" in node and _encode(value) != node["const"]:
         raise ValueError(f"expected constant {node['const']!r}")
     if "enum" in node and value not in node["enum"]:
@@ -233,6 +252,8 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
         raise ValueError("string does not match the generated pattern")
     if value_type == "integer" and (not isinstance(value, int) or isinstance(value, bool)):
         raise TypeError("expected integer")
+    if value_type == "integer" and "minimum" in node and value < node["minimum"]:
+        raise ValueError("integer is below the generated minimum")
     if value_type == "boolean" and not isinstance(value, bool):
         raise TypeError("expected boolean")
     if value_type == "null" and value is not None:
@@ -251,15 +272,30 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
             value = value.as_contract()
         if not isinstance(value, Mapping):
             raise TypeError("expected object")
+        properties = node.get("properties", {})
+        required = set(node.get("required", ()))
+        missing = required - set(value)
+        if missing:
+            raise ValueError(f"object is missing {sorted(missing)!r}")
         additional = node.get("additionalProperties")
-        if isinstance(additional, Mapping):
-            return MappingProxyType({str(key): _decode_node(additional, item) for key, item in value.items()})
-        return _freeze(value)
+        extra = set(value) - set(properties)
+        if additional is False and extra:
+            raise ValueError(f"object has unexpected fields {sorted(extra)!r}")
+        result = {}
+        for key, item in value.items():
+            property_node = properties.get(key)
+            if isinstance(property_node, Mapping):
+                result[str(key)] = _decode_node(property_node, item)
+            elif isinstance(additional, Mapping):
+                result[str(key)] = _decode_node(additional, item)
+            else:
+                result[str(key)] = _freeze(item)
+        return MappingProxyType(result)
     return value
 
 
 def decode_contract(definition: str, value: object) -> object:
-    node = INPUT_DEFINITION_SCHEMAS.get(definition)
+    node = DEFINITION_SCHEMAS.get(definition)
     if node is None:
         raise ValueError(f"unknown generated input definition {definition!r}")
     selected = _CLASS_BY_DEFINITION.get(definition)
@@ -280,16 +316,16 @@ def decode_contract(definition: str, value: object) -> object:
     if extra:
         raise ValueError(f"{definition} has unexpected fields {sorted(extra)!r}")
     arguments = {}
-    for contract_name, python_name in INPUT_FIELD_NAMES[definition].items():
+    for contract_name, python_name in FIELD_NAMES[definition].items():
         if contract_name in value:
             arguments[python_name] = _decode_node(properties[contract_name], value[contract_name])
     return selected(**arguments)
 
 
 def _coerce_object(value: ContractObject) -> None:
-    node = INPUT_DEFINITION_SCHEMAS[value.__definition__]
+    node = DEFINITION_SCHEMAS[value.__definition__]
     required = set(node.get("required", ()))
-    for contract_name, python_name in INPUT_FIELD_NAMES[value.__definition__].items():
+    for contract_name, python_name in FIELD_NAMES[value.__definition__].items():
         selected = getattr(value, python_name)
         if selected is None and contract_name not in required:
             continue
@@ -300,14 +336,23 @@ def _coerce_object(value: ContractObject) -> None:
 def _python_projection(schema: dict[str, Any]) -> str:
     metadata = schema["x-standards-engine-contract"]
     results = _result_definitions(schema)
-    wrappers = tuple((name, kind) for name, kind in results if kind != "analysis-state")
     result_map = {kind: name for name, kind in results}
-    input_names = _input_definitions(schema)
-    input_schemas = {name: schema["$defs"][name] for name in input_names}
-    class_names = {name for name, node in input_schemas.items() if _structured_object(node)}
-    aliases = _alias_order(tuple(name for name in input_names if name not in class_names), input_schemas)
+    definition_names = _public_definitions(schema)
+    definition_schemas = {
+        name: schema["$defs"][name] for name in definition_names
+    }
+    class_names = {
+        name for name, node in definition_schemas.items() if _structured_object(node)
+    }
+    aliases = _alias_order(
+        tuple(name for name in definition_names if name not in class_names),
+        definition_schemas,
+    )
     field_names = {
-        name: {field: _python_name(field) for field in input_schemas[name].get("properties", {})}
+        name: {
+            field: _python_name(field)
+            for field in definition_schemas[name].get("properties", {})
+        }
         for name in sorted(class_names)
     }
     uses_default_factory = any(
@@ -319,7 +364,7 @@ def _python_projection(schema: dict[str, Any]) -> str:
                 field_name in set(node.get("required", ())),
             )
         ).startswith("field(")
-        for node in input_schemas.values()
+        for node in definition_schemas.values()
         for field_name, field_node in node.get("properties", {}).items()
     )
     lines = [
@@ -337,10 +382,10 @@ def _python_projection(schema: dict[str, Any]) -> str:
         "PUBLIC_OPERATIONS = MappingProxyType(",
         pprint.pformat(metadata["public_operations"], sort_dicts=True, width=88),
         ")",
-        "INPUT_DEFINITION_SCHEMAS = MappingProxyType(",
-        pprint.pformat(input_schemas, sort_dicts=True, width=88),
+        "DEFINITION_SCHEMAS = MappingProxyType(",
+        pprint.pformat(definition_schemas, sort_dicts=True, width=88),
         ")",
-        "INPUT_FIELD_NAMES = MappingProxyType(",
+        "FIELD_NAMES = MappingProxyType(",
         pprint.pformat(field_names, sort_dicts=True, width=88),
         ")",
         "RESULT_KIND_TO_DEFINITION = MappingProxyType(",
@@ -370,39 +415,24 @@ def _python_projection(schema: dict[str, Any]) -> str:
         "",
     ]
     for name in sorted(class_names):
-        lines += _class_projection(name, input_schemas[name]) + ["", ""]
+        lines += _class_projection(
+            name,
+            definition_schemas[name],
+            result=name in result_map.values(),
+        ) + ["", ""]
     lines += ["_CLASS_BY_DEFINITION = MappingProxyType({"]
     lines += [f"    {name!r}: {name}," for name in sorted(class_names)]
     lines += ["})", "", ""]
-    lines += [f"{name}: TypeAlias = {_annotation(input_schemas[name])}" for name in aliases]
     lines += [
-        "",
-        "",
-        "@dataclass(frozen=True, slots=True)",
-        "class ContractResult:",
-        "    _value: Mapping[str, object]",
-        "",
-        "    @classmethod",
-        "    def from_value(cls, value: dict[str, object]):",
-        "        return cls(_freeze(value))",
-        "",
-        "    @property",
-        "    def kind(self) -> str:",
-        "        return str(self._value['kind'])",
-        "",
-        "    def as_contract(self) -> dict[str, object]:",
-        "        return _thaw(self._value)",
-        "",
+        f"{name}: TypeAlias = {_annotation(definition_schemas[name])}"
+        for name in aliases
     ]
-    for name, _ in wrappers:
-        lines += ["", f"class {name}(ContractResult):", "    pass"]
     navigation = " | ".join(_refs(schema, "NavigationResult") + ("RejectedResult",))
-    inspections = " | ".join(name for name in _refs(schema, "InspectionResult") if name != "AnalysisState")
+    inspections = " | ".join(_refs(schema, "InspectionResult"))
     lines += ["", "", f"QueryResult: TypeAlias = {navigation}", f"ContractInspectionResult: TypeAlias = {inspections} | RejectedResult", ""]
     exported = sorted(
         {
-            *input_names,
-            *(name for name, _ in wrappers),
+            *definition_names,
             "ContractInspectionResult",
             "ContractObject",
             "ContractResult",

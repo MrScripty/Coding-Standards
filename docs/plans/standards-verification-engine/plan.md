@@ -44,8 +44,8 @@ evidence contracts.
 | --- | --- | --- | --- |
 | A1 | One documented command discovers and runs every registered suite once in dependency order. | `satisfied` | [Engine README](../../../tools/standards_verifier/README.md); current complete checkpoint |
 | A2 | Strict configuration, containment, dependency, assertion, and typed-diagnostic tests pass. | `satisfied` | Engine self-tests and registered declarative suites |
-| A3 | Required decision, text, table, metadata, migration, plan, route, and source-index contracts are represented without arbitrary command execution. | `partial` | Accepted assertion families and [architecture report](reports/architecture.md) |
-| A4 | Each migrated suite removes its replaced Bash checker while preserving positive, negative, ownership, disposition, and no-fallback evidence. | `partial` | [Package manifest](../../../evaluation/standards-effectiveness/checker-migration-packages.tsv) and [edge dispositions](../../../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
+| A3 | Required decision, text, table, metadata, migration, plan, route, and source-index contracts are represented without arbitrary command execution. | `pending` | Accepted assertion families and [architecture report](reports/architecture.md) |
+| A4 | Each migrated suite removes its replaced Bash checker while preserving positive, negative, ownership, disposition, and no-fallback evidence. | `pending` | [Package manifest](../../../evaluation/standards-effectiveness/checker-migration-packages.tsv) and [edge dispositions](../../../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
 | A5 | Final inventory reports no Bash verifier, verification helper, or migration launcher. | `pending` | Current generated inventory still reports retained Bash checkers |
 | A6 | The Python-only complete checkpoint passes and the temporary Bash reference model is absent. | `pending` | Milestones 6 and 7 |
 

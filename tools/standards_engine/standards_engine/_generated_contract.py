@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any, ClassVar, Iterator, Literal, Mapping, TypeAlias
 
@@ -26,8 +26,38 @@ PUBLIC_OPERATIONS = MappingProxyType(
              'input': 'ResolveCall',
              'results': ['PendingResult', 'CompleteResult', 'RejectedResult']}}
 )
-INPUT_DEFINITION_SCHEMAS = MappingProxyType(
-{'AnalysisContextHandle': {'additionalProperties': False,
+DEFINITION_SCHEMAS = MappingProxyType(
+{'AllExpression': {'additionalProperties': False,
+                   'properties': {'expressions': {'items': {'$ref': '#/$defs/ApplicabilityExpression'},
+                                                  'minItems': 1,
+                                                  'type': 'array'},
+                                  'operator': {'const': 'all'}},
+                   'required': ['operator', 'expressions'],
+                   'type': 'object'},
+ 'AlwaysExpression': {'additionalProperties': False,
+                      'properties': {'operator': {'const': 'always'}},
+                      'required': ['operator'],
+                      'type': 'object'},
+ 'AnalysisContext': {'additionalProperties': False,
+                     'properties': {'handle': {'$ref': '#/$defs/AnalysisContextHandle'},
+                                    'kind': {'const': 'analysis-context'},
+                                    'semantic_proposals': {'items': {'$ref': '#/$defs/SemanticProposal'},
+                                                           'type': 'array',
+                                                           'uniqueItems': True},
+                                    'subjects': {'items': {'$ref': '#/$defs/ChangedPolicyUnit'},
+                                                 'minItems': 1,
+                                                 'type': 'array',
+                                                 'uniqueItems': True}},
+                     'required': ['kind', 'handle', 'subjects', 'semantic_proposals'],
+                     'type': 'object',
+                     'x-standards-engine-identity': {'domain': 'coding-standards:analysis-context:v1',
+                                                     'exclude': ['handle.id',
+                                                                 'handle.kind',
+                                                                 'handle.schema_version'],
+                                                     'include': ['handle.context_kind',
+                                                                 'subjects',
+                                                                 'semantic_proposals']}},
+ 'AnalysisContextHandle': {'additionalProperties': False,
                            'properties': {'context_kind': {'const': 'standards-change'},
                                           'id': {'$ref': '#/$defs/AnalysisContextId'},
                                           'kind': {'const': 'analysis-context-handle'},
@@ -36,6 +66,11 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                            'type': 'object'},
  'AnalysisContextId': {'pattern': '^standards-change:sha256:[0-9a-f]{64}$',
                        'type': 'string'},
+ 'AnalysisContextInspectionResult': {'additionalProperties': False,
+                                     'properties': {'context': {'$ref': '#/$defs/AnalysisContext'},
+                                                    'kind': {'const': 'analysis-context-inspection-result'}},
+                                     'required': ['kind', 'context'],
+                                     'type': 'object'},
  'AnalysisHandle': {'additionalProperties': False,
                     'properties': {'id': {'$ref': '#/$defs/AnalysisId'},
                                    'kind': {'const': 'analysis-handle'},
@@ -62,7 +97,167 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                   'semantic_proposals',
                                   'contract_version'],
                      'type': 'object'},
+ 'AnalysisState': {'additionalProperties': False,
+                   'properties': {'authorization_view': {'$ref': '#/$defs/AuthorizationAuthorityView'},
+                                  'base_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                  'changes': {'items': {'$ref': '#/$defs/ChangeDescriptor'},
+                                              'type': 'array'},
+                                  'coverage_decisions': {'items': {'$ref': '#/$defs/CoverageDecision'},
+                                                         'type': 'array',
+                                                         'uniqueItems': True},
+                                  'dispositions': {'items': {'$ref': '#/$defs/DispositionRecord'},
+                                                   'type': 'array',
+                                                   'uniqueItems': True},
+                                  'fact_observations': {'items': {'$ref': '#/$defs/FactObservation'},
+                                                        'type': 'array',
+                                                        'uniqueItems': True},
+                                  'handle': {'$ref': '#/$defs/AnalysisHandle'},
+                                  'kind': {'const': 'analysis-state'},
+                                  'proposed_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                  'provenance': {'$ref': '#/$defs/AnalysisVersions'},
+                                  'provider_view': {'$ref': '#/$defs/ProviderAuthorityView'},
+                                  'semantic_proposals': {'items': {'$ref': '#/$defs/SemanticProposal'},
+                                                         'type': 'array',
+                                                         'uniqueItems': True}},
+                   'required': ['kind',
+                                'handle',
+                                'base_snapshot',
+                                'proposed_snapshot',
+                                'changes',
+                                'semantic_proposals',
+                                'authorization_view',
+                                'provider_view',
+                                'fact_observations',
+                                'dispositions',
+                                'coverage_decisions',
+                                'provenance'],
+                   'type': 'object',
+                   'x-standards-engine-identity': {'domain': 'coding-standards:analysis:v2',
+                                                   'exclude': ['kind',
+                                                               'handle',
+                                                               'provenance.interface_schema_version',
+                                                               'provenance.graph_engine_implementation_version',
+                                                               'provenance.analyzer_implementation_version'],
+                                                   'include': ['base_snapshot',
+                                                               'proposed_snapshot',
+                                                               'changes',
+                                                               'semantic_proposals',
+                                                               'authorization_view',
+                                                               'provider_view',
+                                                               'fact_observations',
+                                                               'dispositions',
+                                                               'coverage_decisions',
+                                                               'provenance.analysis_contract_version',
+                                                               'provenance.analysis_schema_version',
+                                                               'provenance.result_schema_version',
+                                                               'provenance.applicability_version',
+                                                               'provenance.authorization_contract_version',
+                                                               'provenance.metadata_api_version',
+                                                               'provenance.graph_engine_contract_version',
+                                                               'provenance.parser_versions',
+                                                               'provenance.evidence_provider_contract_versions']}},
+ 'AnalysisVersions': {'additionalProperties': False,
+                      'properties': {'analysis_contract_version': {'const': 5},
+                                     'analysis_schema_version': {'const': 2},
+                                     'analyzer_implementation_version': {'$ref': '#/$defs/NonEmptyString'},
+                                     'applicability_version': {'const': 3},
+                                     'authorization_contract_version': {'const': 'authorization-authority.v1'},
+                                     'evidence_provider_contract_versions': {'$ref': '#/$defs/VersionMap'},
+                                     'graph_engine_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                     'graph_engine_implementation_version': {'$ref': '#/$defs/NonEmptyString'},
+                                     'interface_schema_version': {'const': 9},
+                                     'metadata_api_version': {'$ref': '#/$defs/NonEmptyString'},
+                                     'parser_versions': {'$ref': '#/$defs/VersionMap'},
+                                     'result_schema_version': {'const': 1}},
+                      'required': ['analysis_contract_version',
+                                   'analysis_schema_version',
+                                   'result_schema_version',
+                                   'interface_schema_version',
+                                   'applicability_version',
+                                   'authorization_contract_version',
+                                   'metadata_api_version',
+                                   'graph_engine_contract_version',
+                                   'graph_engine_implementation_version',
+                                   'analyzer_implementation_version',
+                                   'parser_versions',
+                                   'evidence_provider_contract_versions'],
+                      'type': 'object'},
+ 'AnyExpression': {'additionalProperties': False,
+                   'properties': {'expressions': {'items': {'$ref': '#/$defs/ApplicabilityExpression'},
+                                                  'minItems': 1,
+                                                  'type': 'array'},
+                                  'operator': {'const': 'any'}},
+                   'required': ['operator', 'expressions'],
+                   'type': 'object'},
+ 'ApplicabilityExpression': {'oneOf': [{'$ref': '#/$defs/AlwaysExpression'},
+                                       {'$ref': '#/$defs/AllExpression'},
+                                       {'$ref': '#/$defs/AnyExpression'},
+                                       {'$ref': '#/$defs/NotExpression'},
+                                       {'$ref': '#/$defs/EqualsExpression'},
+                                       {'$ref': '#/$defs/InExpression'},
+                                       {'$ref': '#/$defs/ContainsExpression'},
+                                       {'$ref': '#/$defs/ExistsExpression'}]},
+ 'AuthorizationAuthorityView': {'additionalProperties': False,
+                                'properties': {'authorizations': {'items': {'$ref': '#/$defs/AuthorizationReference'},
+                                                                  'type': 'array',
+                                                                  'uniqueItems': True},
+                                               'capabilities': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                                'type': 'array',
+                                                                'uniqueItems': True},
+                                               'contract_version': {'const': 'authorization-authority.v1'},
+                                               'id': {'$ref': '#/$defs/CanonicalId'},
+                                               'issuers': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                           'type': 'array',
+                                                           'uniqueItems': True},
+                                               'kind': {'const': 'authorization-authority-view'},
+                                               'revocation_digest': {'$ref': '#/$defs/Digest'}},
+                                'required': ['kind',
+                                             'id',
+                                             'contract_version',
+                                             'issuers',
+                                             'capabilities',
+                                             'revocation_digest',
+                                             'authorizations'],
+                                'type': 'object'},
+ 'AuthorizationReference': {'additionalProperties': False,
+                            'properties': {'capability': {'$ref': '#/$defs/CanonicalId'},
+                                           'digest': {'$ref': '#/$defs/Digest'},
+                                           'id': {'$ref': '#/$defs/CanonicalId'}},
+                            'required': ['id', 'capability', 'digest'],
+                            'type': 'object'},
  'CanonicalId': {'pattern': '^[A-Za-z0-9][A-Za-z0-9._:/-]*$', 'type': 'string'},
+ 'CanonicalModuleDeclaration': {'additionalProperties': False,
+                                'properties': {'applies_when': {'$ref': '#/$defs/NonEmptyString'},
+                                               'does_not_apply_when': {'$ref': '#/$defs/NonEmptyString'},
+                                               'id': {'$ref': '#/$defs/CanonicalId'},
+                                               'kind': {'const': 'canonical-module'},
+                                               'level': {'enum': ['MUST',
+                                                                  'SHOULD',
+                                                                  'PROFILE',
+                                                                  'REFERENCE']},
+                                               'requires': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                            'type': 'array',
+                                                            'uniqueItems': True},
+                                               'role': {'enum': ['core',
+                                                                 'router',
+                                                                 'workflow',
+                                                                 'profile',
+                                                                 'topic',
+                                                                 'reference']},
+                                               'specializes': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                               'type': 'array',
+                                                               'uniqueItems': True},
+                                               'verification': {'$ref': '#/$defs/NonEmptyString'}},
+                                'required': ['kind',
+                                             'id',
+                                             'role',
+                                             'level',
+                                             'applies_when',
+                                             'does_not_apply_when',
+                                             'requires',
+                                             'specializes',
+                                             'verification'],
+                                'type': 'object'},
  'CertificateHandle': {'additionalProperties': False,
                        'properties': {'id': {'$ref': '#/$defs/CertificateId'},
                                       'kind': {'const': 'certificate-handle'},
@@ -70,6 +265,16 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                        'required': ['kind', 'id', 'schema_version'],
                        'type': 'object'},
  'CertificateId': {'pattern': '^certificate:sha256:[0-9a-f]{64}$', 'type': 'string'},
+ 'CertificateInspectionResult': {'additionalProperties': False,
+                                 'properties': {'certificate': {'$ref': '#/$defs/ConsumerCoverageCertificate'},
+                                                'kind': {'const': 'certificate-inspection-result'}},
+                                 'required': ['kind', 'certificate'],
+                                 'type': 'object'},
+ 'CertificateProvenance': {'additionalProperties': False,
+                           'properties': {'generated_at': {'$ref': '#/$defs/NonEmptyString'},
+                                          'generator': {'$ref': '#/$defs/NonEmptyString'}},
+                           'required': ['generator', 'generated_at'],
+                           'type': 'object'},
  'ChangeDescriptor': {'additionalProperties': False,
                       'properties': {'accepted_ids': {'items': {'$ref': '#/$defs/CanonicalId'},
                                                       'type': 'array',
@@ -113,6 +318,349 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                                                  'ID and at least two '
                                                                  'distinct proposed '
                                                                  'IDs'}},
+ 'ChangedPolicyUnit': {'additionalProperties': False,
+                       'properties': {'accepted_representation_digest': {'oneOf': [{'$ref': '#/$defs/Digest'},
+                                                                                   {'type': 'null'}]},
+                                      'accepted_semantic_revision': {'oneOf': [{'minimum': 1,
+                                                                                'type': 'integer'},
+                                                                               {'type': 'null'}]},
+                                      'accepted_structural_digest': {'oneOf': [{'$ref': '#/$defs/Digest'},
+                                                                               {'type': 'null'}]},
+                                      'change_kind': {'enum': ['modification',
+                                                               'addition',
+                                                               'removal',
+                                                               'move',
+                                                               'split-predecessor',
+                                                               'split-successor',
+                                                               'merge-predecessor',
+                                                               'merge-successor']},
+                                      'classification': {'enum': ['unchanged',
+                                                                  'representation-only-candidate',
+                                                                  'possibly-semantically-changed',
+                                                                  'semantically-changed',
+                                                                  'unresolved']},
+                                      'policy': {'$ref': '#/$defs/CanonicalId'},
+                                      'proposed_representation_digest': {'oneOf': [{'$ref': '#/$defs/Digest'},
+                                                                                   {'type': 'null'}]},
+                                      'proposed_semantic_revision': {'oneOf': [{'minimum': 1,
+                                                                                'type': 'integer'},
+                                                                               {'type': 'null'}]},
+                                      'proposed_structural_digest': {'oneOf': [{'$ref': '#/$defs/Digest'},
+                                                                               {'type': 'null'}]},
+                                      'scope': {'$ref': '#/$defs/ReviewScope'},
+                                      'semantic_state': {'enum': ['accepted-unchanged',
+                                                                  'proposed',
+                                                                  'removed',
+                                                                  'unresolved']}},
+                       'required': ['policy',
+                                    'change_kind',
+                                    'classification',
+                                    'accepted_representation_digest',
+                                    'proposed_representation_digest',
+                                    'accepted_structural_digest',
+                                    'proposed_structural_digest',
+                                    'accepted_semantic_revision',
+                                    'proposed_semantic_revision',
+                                    'semantic_state',
+                                    'scope'],
+                       'type': 'object',
+                       'x-standards-engine-invariants': {'addition': 'accepted digests '
+                                                                     'and revision are '
+                                                                     'null; proposed '
+                                                                     'digests exist; '
+                                                                     'proposed '
+                                                                     'semantic '
+                                                                     'revision is 1',
+                                                         'existing-policy': 'accepted '
+                                                                            'and '
+                                                                            'proposed '
+                                                                            'accepted-authority '
+                                                                            'sidecars '
+                                                                            'retain '
+                                                                            'the '
+                                                                            'accepted '
+                                                                            'semantic '
+                                                                            'revision; '
+                                                                            'a '
+                                                                            'proposed '
+                                                                            'increment '
+                                                                            'exists '
+                                                                            'only in '
+                                                                            'the '
+                                                                            'AnalysisRequest '
+                                                                            'semantic '
+                                                                            'overlay',
+                                                         'removal': 'proposed digests '
+                                                                    'and revision are '
+                                                                    'null; accepted '
+                                                                    'digests and '
+                                                                    'revision exist',
+                                                         'structural-equality': 'may '
+                                                                                'support '
+                                                                                'representation-only-candidate '
+                                                                                'but '
+                                                                                'never '
+                                                                                'proves '
+                                                                                'semantic '
+                                                                                'equivalence'}},
+ 'CompiledApplicabilityProgram': {'additionalProperties': False,
+                                  'properties': {'dependency_digest': {'$ref': '#/$defs/Digest'},
+                                                 'language_version': {'const': 1},
+                                                 'normalized_expression': {'$ref': '#/$defs/ApplicabilityExpression'},
+                                                 'referenced_facts': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                                      'type': 'array',
+                                                                      'uniqueItems': True},
+                                                 'schema_digest': {'$ref': '#/$defs/Digest'}},
+                                  'required': ['normalized_expression',
+                                               'referenced_facts',
+                                               'language_version',
+                                               'schema_digest',
+                                               'dependency_digest'],
+                                  'type': 'object',
+                                  'x-standards-engine-invariants': {'identity': 'dependency_digest '
+                                                                                'binds '
+                                                                                'language_version, '
+                                                                                'normalized_expression, '
+                                                                                'and '
+                                                                                'exact '
+                                                                                'referenced '
+                                                                                'fact '
+                                                                                'definitions '
+                                                                                'using '
+                                                                                'domain-separated '
+                                                                                'canonical '
+                                                                                'serialization'}},
+ 'CompiledPolicyImpactSemantics': {'additionalProperties': False,
+                                   'properties': {'applicability_program': {'$ref': '#/$defs/CompiledApplicabilityProgram'},
+                                                  'consumer': {'$ref': '#/$defs/CanonicalId'},
+                                                  'consumer_scope': {'oneOf': [{'$ref': '#/$defs/ReviewScope'},
+                                                                               {'type': 'null'}]},
+                                                  'declaration_source': {'$ref': '#/$defs/NonEmptyString'},
+                                                  'dependency_fingerprint': {'$ref': '#/$defs/Digest'},
+                                                  'edge_id': {'$ref': '#/$defs/EdgeId'},
+                                                  'evidence_owner': {'$ref': '#/$defs/CanonicalId'},
+                                                  'propagation': {'const': 'source-to-consumer'},
+                                                  'rationale': {'$ref': '#/$defs/NonEmptyString'},
+                                                  'relation': {'enum': ['normative-consumer',
+                                                                        'router-projection',
+                                                                        'prompt-projection',
+                                                                        'template-projection',
+                                                                        'reference-projection',
+                                                                        'fixture-projection',
+                                                                        'enforcement-suite-projection',
+                                                                        'documentation-projection']},
+                                                  'source': {'$ref': '#/$defs/CanonicalId'},
+                                                  'source_scope': {'oneOf': [{'$ref': '#/$defs/ReviewScope'},
+                                                                             {'type': 'null'}]}},
+                                   'required': ['edge_id',
+                                                'source',
+                                                'consumer',
+                                                'relation',
+                                                'applicability_program',
+                                                'source_scope',
+                                                'consumer_scope',
+                                                'propagation',
+                                                'evidence_owner',
+                                                'rationale',
+                                                'declaration_source',
+                                                'dependency_fingerprint'],
+                                   'type': 'object',
+                                   'x-standards-engine-invariants': {'applicability': 'the '
+                                                                                      'compiled '
+                                                                                      'program '
+                                                                                      'is '
+                                                                                      'produced '
+                                                                                      'once '
+                                                                                      'by '
+                                                                                      'standards_applicability '
+                                                                                      'and '
+                                                                                      'is '
+                                                                                      'consumed '
+                                                                                      'without '
+                                                                                      'reparsing',
+                                                                     'projection': 'the '
+                                                                                   'value '
+                                                                                   'is '
+                                                                                   'compiled '
+                                                                                   'from '
+                                                                                   'the '
+                                                                                   'same '
+                                                                                   'authoritative '
+                                                                                   'declaration '
+                                                                                   'as '
+                                                                                   'its '
+                                                                                   'generic '
+                                                                                   'edge '
+                                                                                   'and '
+                                                                                   'is '
+                                                                                   'never '
+                                                                                   'a '
+                                                                                   'second '
+                                                                                   'editable '
+                                                                                   'authority'}},
+ 'CompleteResult': {'additionalProperties': False,
+                    'properties': {'base_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                   'changed_units': {'items': {'$ref': '#/$defs/ChangedPolicyUnit'},
+                                                     'type': 'array'},
+                                   'changes': {'items': {'$ref': '#/$defs/ChangeDescriptor'},
+                                               'type': 'array'},
+                                   'completion': {'$ref': '#/$defs/CompletionProof'},
+                                   'context': {'$ref': '#/$defs/AnalysisContext'},
+                                   'coverage_certificates': {'items': {'$ref': '#/$defs/CertificateHandle'},
+                                                             'type': 'array',
+                                                             'uniqueItems': True},
+                                   'dispositions': {'items': {'$ref': '#/$defs/DispositionRecord'},
+                                                    'type': 'array'},
+                                   'fact_observations': {'items': {'$ref': '#/$defs/FactObservation'},
+                                                         'type': 'array',
+                                                         'uniqueItems': True},
+                                   'handle': {'$ref': '#/$defs/AnalysisHandle'},
+                                   'kind': {'const': 'complete-result'},
+                                   'proposed_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                   'provenance': {'$ref': '#/$defs/AnalysisVersions'},
+                                   'reading_plan': {'items': {'$ref': '#/$defs/ReadingPlanEntry'},
+                                                    'type': 'array'},
+                                   'status': {'const': 'complete'},
+                                   'summary': {'type': 'string'}},
+                    'required': ['kind',
+                                 'handle',
+                                 'base_snapshot',
+                                 'proposed_snapshot',
+                                 'status',
+                                 'context',
+                                 'changes',
+                                 'changed_units',
+                                 'coverage_certificates',
+                                 'fact_observations',
+                                 'dispositions',
+                                 'reading_plan',
+                                 'completion',
+                                 'provenance'],
+                    'type': 'object',
+                    'x-standards-engine-projection': {'authority': 'non-authoritative '
+                                                                   'deterministic '
+                                                                   'projection of '
+                                                                   'AnalysisState',
+                                                      'identity': 'handle is the '
+                                                                  "projected state's "
+                                                                  'AnalysisHandle'}},
+ 'CompletionProof': {'additionalProperties': False,
+                     'properties': {'applicability_resolved': {'const': True},
+                                    'authorization_valid': {'const': True},
+                                    'certificate_subjects': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                             'type': 'array',
+                                                             'uniqueItems': True},
+                                    'disposition_obligations': {'items': {'$ref': '#/$defs/ObligationId'},
+                                                                'type': 'array',
+                                                                'uniqueItems': True},
+                                    'evidence_valid': {'const': True},
+                                    'non_consumer_obligations_resolved': {'const': True},
+                                    'observed_fact_requirements': {'items': {'$ref': '#/$defs/FactRequirementId'},
+                                                                   'type': 'array',
+                                                                   'uniqueItems': True},
+                                    'reached_consumer_obligations': {'items': {'$ref': '#/$defs/ObligationId'},
+                                                                     'type': 'array',
+                                                                     'uniqueItems': True},
+                                    'required_coverage_subjects': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                                   'type': 'array',
+                                                                   'uniqueItems': True},
+                                    'required_fact_requirements': {'items': {'$ref': '#/$defs/FactRequirementId'},
+                                                                   'type': 'array',
+                                                                   'uniqueItems': True}},
+                     'required': ['required_coverage_subjects',
+                                  'certificate_subjects',
+                                  'reached_consumer_obligations',
+                                  'disposition_obligations',
+                                  'required_fact_requirements',
+                                  'observed_fact_requirements',
+                                  'non_consumer_obligations_resolved',
+                                  'applicability_resolved',
+                                  'authorization_valid',
+                                  'evidence_valid'],
+                     'type': 'object',
+                     'x-standards-engine-invariants': {'consumer_set_equality': 'reached_consumer_obligations '
+                                                                                'equals '
+                                                                                'disposition_obligations '
+                                                                                'as '
+                                                                                'sets',
+                                                       'coverage_set_equality': 'required_coverage_subjects '
+                                                                                'equals '
+                                                                                'certificate_subjects '
+                                                                                'as '
+                                                                                'sets '
+                                                                                'and '
+                                                                                'every '
+                                                                                'certificate '
+                                                                                'is '
+                                                                                'current '
+                                                                                'for '
+                                                                                'the '
+                                                                                'report '
+                                                                                'authority '
+                                                                                'view',
+                                                       'derived_truth': 'every Boolean '
+                                                                        'is generated '
+                                                                        'from current '
+                                                                        'resolved '
+                                                                        'state and '
+                                                                        'cannot be '
+                                                                        'caller-authored',
+                                                       'fact_set_equality': 'required_fact_requirements '
+                                                                            'equals '
+                                                                            'observed_fact_requirements '
+                                                                            'as sets '
+                                                                            'and every '
+                                                                            'observation '
+                                                                            'is exact '
+                                                                            'for the '
+                                                                            'derived '
+                                                                            'requirement'}},
+ 'ConsumerCoverageCertificate': {'additionalProperties': False,
+                                 'properties': {'attestation': {'$ref': '#/$defs/CoverageAttestationHandle'},
+                                                'attestation_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                                'coverage_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                                'coverage_view': {'$ref': '#/$defs/CoverageAuthorityViewHandle'},
+                                                'evidence_digests': {'items': {'$ref': '#/$defs/Digest'},
+                                                                     'type': 'array'},
+                                                'handle': {'$ref': '#/$defs/CertificateHandle'},
+                                                'horizon_digest': {'$ref': '#/$defs/Digest'},
+                                                'kind': {'const': 'consumer-coverage-certificate'},
+                                                'owner': {'$ref': '#/$defs/CanonicalId'},
+                                                'provenance': {'$ref': '#/$defs/CertificateProvenance'},
+                                                'relationship_digest': {'$ref': '#/$defs/Digest'},
+                                                'requirement': {'$ref': '#/$defs/CoverageRequirementHandle'},
+                                                'semantic_revision': {'minimum': 1,
+                                                                      'type': 'integer'},
+                                                'subject': {'$ref': '#/$defs/CanonicalId'}},
+                                 'required': ['kind',
+                                              'handle',
+                                              'coverage_view',
+                                              'requirement',
+                                              'attestation',
+                                              'subject',
+                                              'owner',
+                                              'semantic_revision',
+                                              'horizon_digest',
+                                              'relationship_digest',
+                                              'evidence_digests',
+                                              'coverage_contract_version',
+                                              'attestation_contract_version',
+                                              'provenance'],
+                                 'type': 'object',
+                                 'x-standards-engine-identity': {'domain': 'coding-standards:consumer-coverage-certificate:v1',
+                                                                 'exclude': ['handle',
+                                                                             'provenance'],
+                                                                 'include': ['coverage_view',
+                                                                             'requirement',
+                                                                             'attestation',
+                                                                             'subject',
+                                                                             'owner',
+                                                                             'semantic_revision',
+                                                                             'horizon_digest',
+                                                                             'relationship_digest',
+                                                                             'evidence_digests',
+                                                                             'coverage_contract_version',
+                                                                             'attestation_contract_version']}},
  'ConsumerDispositionSubmission': {'additionalProperties': False,
                                    'properties': {'evidence': {'items': {'$ref': '#/$defs/EvidenceReference'},
                                                                'minItems': 1,
@@ -132,6 +680,40 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                                 'evidence',
                                                 'fingerprint'],
                                    'type': 'object'},
+ 'ConsumerReviewContract': {'additionalProperties': False,
+                            'properties': {'authorization_capability': {'$ref': '#/$defs/CanonicalId'},
+                                           'evidence_contract': {'$ref': '#/$defs/CanonicalId'},
+                                           'id': {'$ref': '#/$defs/CanonicalId'},
+                                           'kind': {'const': 'consumer-review-contract'},
+                                           'permitted_dispositions': {'items': {'enum': ['updated',
+                                                                                         'reviewed-no-change',
+                                                                                         'not-applicable',
+                                                                                         'blocked']},
+                                                                      'minItems': 1,
+                                                                      'type': 'array',
+                                                                      'uniqueItems': True},
+                                           'semantics': {'$ref': '#/$defs/NonEmptyString'},
+                                           'version': {'minimum': 1,
+                                                       'type': 'integer'}},
+                            'required': ['kind',
+                                         'id',
+                                         'version',
+                                         'permitted_dispositions',
+                                         'evidence_contract',
+                                         'authorization_capability',
+                                         'semantics'],
+                            'type': 'object'},
+ 'ConsumerReviewObligationReadingReason': {'additionalProperties': False,
+                                           'properties': {'kind': {'const': 'consumer-review-obligation'},
+                                                          'obligation': {'$ref': '#/$defs/ObligationId'}},
+                                           'required': ['kind', 'obligation'],
+                                           'type': 'object'},
+ 'ContainsExpression': {'additionalProperties': False,
+                        'properties': {'fact': {'$ref': '#/$defs/CanonicalId'},
+                                       'operator': {'const': 'contains'},
+                                       'value': {'$ref': '#/$defs/ScalarValue'}},
+                        'required': ['operator', 'fact', 'value'],
+                        'type': 'object'},
  'CoverageAttestation': {'additionalProperties': False,
                          'properties': {'auditor_provenance': {'$ref': '#/$defs/NonEmptyString'},
                                         'conclusion': {'const': 'complete'},
@@ -172,12 +754,136 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                'type': 'object'},
  'CoverageAttestationId': {'pattern': '^coverage-attestation:sha256:[0-9a-f]{64}$',
                            'type': 'string'},
+ 'CoverageAttestationInspectionResult': {'additionalProperties': False,
+                                         'properties': {'attestation': {'$ref': '#/$defs/CoverageAttestation'},
+                                                        'kind': {'const': 'coverage-attestation-inspection-result'}},
+                                         'required': ['kind', 'attestation'],
+                                         'type': 'object'},
  'CoverageAttestationSubmission': {'additionalProperties': False,
                                    'properties': {'attestation': {'$ref': '#/$defs/CoverageAttestation'},
                                                   'kind': {'const': 'coverage-attestation'},
                                                   'obligation_id': {'$ref': '#/$defs/ObligationId'}},
                                    'required': ['kind', 'obligation_id', 'attestation'],
                                    'type': 'object'},
+ 'CoverageAuditRequirement': {'additionalProperties': False,
+                              'properties': {'coverage_view': {'$ref': '#/$defs/CoverageAuthorityViewHandle'},
+                                             'derived_from_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                             'handle': {'$ref': '#/$defs/CoverageRequirementHandle'},
+                                             'horizon': {'$ref': '#/$defs/CanonicalId'},
+                                             'kind': {'const': 'coverage-audit-requirement'},
+                                             'owner': {'$ref': '#/$defs/CanonicalId'},
+                                             'relationship_kinds': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                                    'type': 'array',
+                                                                    'uniqueItems': True},
+                                             'semantic_revision': {'minimum': 1,
+                                                                   'type': 'integer'},
+                                             'subject': {'$ref': '#/$defs/CanonicalId'}},
+                              'required': ['kind',
+                                           'handle',
+                                           'coverage_view',
+                                           'subject',
+                                           'owner',
+                                           'semantic_revision',
+                                           'relationship_kinds',
+                                           'horizon'],
+                              'type': 'object',
+                              'x-standards-engine-identity': {'domain': 'coding-standards:coverage-audit-requirement:v1',
+                                                              'exclude': ['handle',
+                                                                          'derived_from_snapshot'],
+                                                              'include': ['coverage_view',
+                                                                          'subject',
+                                                                          'owner',
+                                                                          'semantic_revision',
+                                                                          'relationship_kinds',
+                                                                          'horizon']}},
+ 'CoverageAuthorityView': {'additionalProperties': False,
+                           'properties': {'applicability_language_version': {'const': 1},
+                                          'applicability_program_digests': {'items': {'$ref': '#/$defs/Digest'},
+                                                                            'type': 'array',
+                                                                            'uniqueItems': True},
+                                          'attestation_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                          'authorization_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                          'coverage_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                          'evidence_provider_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                          'fact_schema_digest': {'$ref': '#/$defs/Digest'},
+                                          'handle': {'$ref': '#/$defs/CoverageAuthorityViewHandle'},
+                                          'horizon': {'additionalProperties': False,
+                                                      'properties': {'digest': {'$ref': '#/$defs/Digest'},
+                                                                     'id': {'$ref': '#/$defs/CanonicalId'},
+                                                                     'members': {'items': {'$ref': '#/$defs/CoverageHorizonMember'},
+                                                                                 'type': 'array'},
+                                                                     'provider': {'$ref': '#/$defs/CanonicalId'},
+                                                                     'version': {'minimum': 1,
+                                                                                 'type': 'integer'}},
+                                                      'required': ['id',
+                                                                   'provider',
+                                                                   'version',
+                                                                   'digest',
+                                                                   'members'],
+                                                      'type': 'object'},
+                                          'identity_resolution_contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                          'kind': {'const': 'coverage-authority-view'},
+                                          'owner': {'$ref': '#/$defs/CanonicalId'},
+                                          'relationship_fingerprints': {'items': {'additionalProperties': False,
+                                                                                  'properties': {'edge': {'$ref': '#/$defs/EdgeId'},
+                                                                                                 'fingerprint': {'$ref': '#/$defs/Digest'}},
+                                                                                  'required': ['edge',
+                                                                                               'fingerprint'],
+                                                                                  'type': 'object'},
+                                                                        'type': 'array',
+                                                                        'uniqueItems': True},
+                                          'relationship_kind_contract_version': {'minimum': 1,
+                                                                                 'type': 'integer'},
+                                          'relationship_kinds': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                                 'type': 'array',
+                                                                 'uniqueItems': True},
+                                          'relationship_provider_contract_digest': {'$ref': '#/$defs/Digest'},
+                                          'representation_digest': {'$ref': '#/$defs/Digest'},
+                                          'semantic_revision': {'minimum': 1,
+                                                                'type': 'integer'},
+                                          'structural_digest': {'$ref': '#/$defs/Digest'},
+                                          'subject': {'$ref': '#/$defs/CanonicalId'}},
+                           'required': ['kind',
+                                        'handle',
+                                        'subject',
+                                        'owner',
+                                        'semantic_revision',
+                                        'representation_digest',
+                                        'structural_digest',
+                                        'relationship_kinds',
+                                        'relationship_fingerprints',
+                                        'relationship_kind_contract_version',
+                                        'relationship_provider_contract_digest',
+                                        'applicability_language_version',
+                                        'applicability_program_digests',
+                                        'fact_schema_digest',
+                                        'horizon',
+                                        'identity_resolution_contract_version',
+                                        'coverage_contract_version',
+                                        'attestation_contract_version',
+                                        'authorization_contract_version',
+                                        'evidence_provider_contract_version'],
+                           'type': 'object',
+                           'x-standards-engine-identity': {'domain': 'coding-standards:coverage-authority-view:v1',
+                                                           'exclude': ['handle'],
+                                                           'include': ['subject',
+                                                                       'owner',
+                                                                       'semantic_revision',
+                                                                       'representation_digest',
+                                                                       'structural_digest',
+                                                                       'relationship_kinds',
+                                                                       'relationship_fingerprints',
+                                                                       'relationship_kind_contract_version',
+                                                                       'relationship_provider_contract_digest',
+                                                                       'applicability_language_version',
+                                                                       'applicability_program_digests',
+                                                                       'fact_schema_digest',
+                                                                       'horizon',
+                                                                       'identity_resolution_contract_version',
+                                                                       'coverage_contract_version',
+                                                                       'attestation_contract_version',
+                                                                       'authorization_contract_version',
+                                                                       'evidence_provider_contract_version']}},
  'CoverageAuthorityViewHandle': {'additionalProperties': False,
                                  'properties': {'id': {'$ref': '#/$defs/CoverageAuthorityViewId'},
                                                 'kind': {'const': 'coverage-authority-view-handle'},
@@ -186,6 +892,25 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                  'type': 'object'},
  'CoverageAuthorityViewId': {'pattern': '^coverage-view:sha256:[0-9a-f]{64}$',
                              'type': 'string'},
+ 'CoverageAuthorityViewInspectionResult': {'additionalProperties': False,
+                                           'properties': {'coverage_view': {'$ref': '#/$defs/CoverageAuthorityView'},
+                                                          'kind': {'const': 'coverage-authority-view-inspection-result'}},
+                                           'required': ['kind', 'coverage_view'],
+                                           'type': 'object'},
+ 'CoverageDecision': {'additionalProperties': False,
+                      'properties': {'attestation': {'$ref': '#/$defs/CoverageAttestation'},
+                                     'authorization': {'$ref': '#/$defs/AuthorizationReference'}},
+                      'required': ['attestation', 'authorization'],
+                      'type': 'object'},
+ 'CoverageHorizonMember': {'additionalProperties': False,
+                           'properties': {'fingerprint': {'$ref': '#/$defs/Digest'},
+                                          'id': {'$ref': '#/$defs/CanonicalId'},
+                                          'roles': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                    'minItems': 1,
+                                                    'type': 'array',
+                                                    'uniqueItems': True}},
+                           'required': ['id', 'roles', 'fingerprint'],
+                           'type': 'object'},
  'CoverageRequirementHandle': {'additionalProperties': False,
                                'properties': {'id': {'$ref': '#/$defs/CoverageRequirementId'},
                                               'kind': {'const': 'coverage-requirement-handle'},
@@ -194,6 +919,11 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                'type': 'object'},
  'CoverageRequirementId': {'pattern': '^coverage-requirement:sha256:[0-9a-f]{64}$',
                            'type': 'string'},
+ 'CoverageRequirementInspectionResult': {'additionalProperties': False,
+                                         'properties': {'kind': {'const': 'coverage-requirement-inspection-result'},
+                                                        'requirement': {'$ref': '#/$defs/CoverageAuditRequirement'}},
+                                         'required': ['kind', 'requirement'],
+                                         'type': 'object'},
  'DecisionDependency': {'additionalProperties': False,
                         'properties': {'class': {'enum': ['policy-unit',
                                                           'semantic-revision',
@@ -225,6 +955,24 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                       'dependencies'],
                          'type': 'object'},
  'Digest': {'pattern': '^sha256:[0-9a-f]{64}$', 'type': 'string'},
+ 'DispositionRecord': {'additionalProperties': False,
+                       'properties': {'authorization': {'$ref': '#/$defs/AuthorizationReference'},
+                                      'evidence': {'items': {'$ref': '#/$defs/EvidenceReference'},
+                                                   'type': 'array'},
+                                      'fingerprint': {'$ref': '#/$defs/DecisionFingerprint'},
+                                      'kind': {'enum': ['consumer-disposition',
+                                                        'impact-disposition']},
+                                      'obligation_id': {'$ref': '#/$defs/ObligationId'},
+                                      'rationale': {'$ref': '#/$defs/NonEmptyString'},
+                                      'result': {'$ref': '#/$defs/NonEmptyString'}},
+                       'required': ['obligation_id',
+                                    'kind',
+                                    'result',
+                                    'rationale',
+                                    'evidence',
+                                    'authorization',
+                                    'fingerprint'],
+                       'type': 'object'},
  'EdgeId': {'minLength': 1,
             'type': 'string',
             'x-standards-engine-invariants': {'authority': 'value must resolve exactly '
@@ -234,6 +982,12 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                                            'its identity contract and '
                                                            'no lookup inference or '
                                                            'fallback is permitted'}},
+ 'EqualsExpression': {'additionalProperties': False,
+                      'properties': {'fact': {'$ref': '#/$defs/CanonicalId'},
+                                     'operator': {'const': 'equals'},
+                                     'value': {'$ref': '#/$defs/ScalarValue'}},
+                      'required': ['operator', 'fact', 'value'],
+                      'type': 'object'},
  'EvidenceReference': {'additionalProperties': False,
                        'properties': {'digest': {'$ref': '#/$defs/Digest'},
                                       'id': {'$ref': '#/$defs/CanonicalId'},
@@ -244,6 +998,34 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                     'provider_contract',
                                     'provider_contract_version'],
                        'type': 'object'},
+ 'ExistsExpression': {'additionalProperties': False,
+                      'properties': {'fact': {'$ref': '#/$defs/CanonicalId'},
+                                     'operator': {'const': 'exists'}},
+                      'required': ['operator', 'fact'],
+                      'type': 'object'},
+ 'FactObservation': {'additionalProperties': False,
+                     'properties': {'authorization': {'$ref': '#/$defs/AuthorizationReference'},
+                                    'evidence': {'items': {'$ref': '#/$defs/EvidenceReference'},
+                                                 'minItems': 1,
+                                                 'type': 'array',
+                                                 'uniqueItems': True},
+                                    'handle': {'$ref': '#/$defs/FactObservationHandle'},
+                                    'kind': {'const': 'fact-observation'},
+                                    'requirement': {'$ref': '#/$defs/FactRequirementHandle'},
+                                    'value': {'$ref': '#/$defs/FactValue'}},
+                     'required': ['kind',
+                                  'handle',
+                                  'requirement',
+                                  'value',
+                                  'evidence',
+                                  'authorization'],
+                     'type': 'object',
+                     'x-standards-engine-identity': {'domain': 'coding-standards:fact-observation:v1',
+                                                     'exclude': ['kind', 'handle'],
+                                                     'include': ['requirement',
+                                                                 'value',
+                                                                 'evidence',
+                                                                 'authorization']}},
  'FactObservationHandle': {'additionalProperties': False,
                            'properties': {'id': {'$ref': '#/$defs/FactObservationId'},
                                           'kind': {'const': 'fact-observation-handle'},
@@ -252,6 +1034,54 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                            'type': 'object'},
  'FactObservationId': {'pattern': '^fact-observation:sha256:[0-9a-f]{64}$',
                        'type': 'string'},
+ 'FactObservationInspectionResult': {'additionalProperties': False,
+                                     'properties': {'kind': {'const': 'fact-observation-inspection-result'},
+                                                    'observation': {'$ref': '#/$defs/FactObservation'}},
+                                     'required': ['kind', 'observation'],
+                                     'type': 'object'},
+ 'FactRequirement': {'additionalProperties': False,
+                     'properties': {'answer_contract': {'$ref': '#/$defs/CanonicalId'},
+                                    'authorization_capability': {'$ref': '#/$defs/CanonicalId'},
+                                    'context': {'$ref': '#/$defs/AnalysisContextHandle'},
+                                    'dependent_programs': {'items': {'$ref': '#/$defs/NonEmptyString'},
+                                                           'minItems': 1,
+                                                           'type': 'array',
+                                                           'uniqueItems': True},
+                                    'evidence_contract': {'$ref': '#/$defs/CanonicalId'},
+                                    'fact': {'$ref': '#/$defs/CanonicalId'},
+                                    'fact_contract_digest': {'$ref': '#/$defs/Digest'},
+                                    'fact_semantic_revision': {'minimum': 1,
+                                                               'type': 'integer'},
+                                    'handle': {'$ref': '#/$defs/FactRequirementHandle'},
+                                    'kind': {'const': 'fact-requirement'},
+                                    'prompt': {'$ref': '#/$defs/NonEmptyString'},
+                                    'value_contract': {'$ref': '#/$defs/FactValueContract'}},
+                     'required': ['kind',
+                                  'handle',
+                                  'fact',
+                                  'fact_semantic_revision',
+                                  'fact_contract_digest',
+                                  'context',
+                                  'value_contract',
+                                  'answer_contract',
+                                  'evidence_contract',
+                                  'authorization_capability',
+                                  'prompt',
+                                  'dependent_programs'],
+                     'type': 'object',
+                     'x-standards-engine-identity': {'domain': 'coding-standards:fact-requirement:v1',
+                                                     'exclude': ['handle',
+                                                                 'kind',
+                                                                 'prompt',
+                                                                 'dependent_programs'],
+                                                     'include': ['fact',
+                                                                 'fact_semantic_revision',
+                                                                 'fact_contract_digest',
+                                                                 'context',
+                                                                 'value_contract',
+                                                                 'answer_contract',
+                                                                 'evidence_contract',
+                                                                 'authorization_capability']}},
  'FactRequirementHandle': {'additionalProperties': False,
                            'properties': {'id': {'$ref': '#/$defs/FactRequirementId'},
                                           'kind': {'const': 'fact-requirement-handle'},
@@ -260,6 +1090,11 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                            'type': 'object'},
  'FactRequirementId': {'pattern': '^fact-requirement:sha256:[0-9a-f]{64}$',
                        'type': 'string'},
+ 'FactRequirementInspectionResult': {'additionalProperties': False,
+                                     'properties': {'kind': {'const': 'fact-requirement-inspection-result'},
+                                                    'requirement': {'$ref': '#/$defs/FactRequirement'}},
+                                     'required': ['kind', 'requirement'],
+                                     'type': 'object'},
  'FactSet': {'additionalProperties': {'$ref': '#/$defs/FactValue'}, 'type': 'object'},
  'FactValue': {'oneOf': [{'additionalProperties': False,
                           'properties': {'state': {'const': 'known'},
@@ -304,6 +1139,86 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                                            'canonical-id']}},
                           'required': ['type', 'state'],
                           'type': 'object'}]},
+ 'FactValueContract': {'additionalProperties': False,
+                       'properties': {'nullable': {'type': 'boolean'},
+                                      'states': {'const': ['known', 'known-absent']},
+                                      'type': {'enum': ['boolean',
+                                                        'enum',
+                                                        'string',
+                                                        'string-set',
+                                                        'enum-set',
+                                                        'canonical-id']},
+                                      'values': {'items': {'type': 'string'},
+                                                 'minItems': 1,
+                                                 'type': 'array',
+                                                 'uniqueItems': True}},
+                       'required': ['type', 'states', 'nullable'],
+                       'type': 'object'},
+ 'GeneralSelectionReason': {'additionalProperties': False,
+                            'properties': {'edge': {'$ref': '#/$defs/EdgeId'},
+                                           'fact': {'$ref': '#/$defs/CanonicalId'},
+                                           'kind': {'enum': ['routing-fact',
+                                                             'requires',
+                                                             'specializes',
+                                                             'changed-policy',
+                                                             'question',
+                                                             'audit-coverage',
+                                                             'unmapped-normative-change',
+                                                             'structured-scope-analysis-unsupported']},
+                                           'question': {'$ref': '#/$defs/CanonicalId'},
+                                           'source': {'$ref': '#/$defs/CanonicalId'}},
+                            'required': ['kind'],
+                            'type': 'object'},
+ 'GitObjectId': {'pattern': '^[0-9a-f]{40,64}$', 'type': 'string'},
+ 'GitSnapshotInspection': {'additionalProperties': False,
+                           'properties': {'commit': {'$ref': '#/$defs/GitObjectId'},
+                                          'exclusions': {'items': {'$ref': '#/$defs/SnapshotExclusion'},
+                                                         'type': 'array'},
+                                          'handle': {'$ref': '#/$defs/SnapshotHandle'},
+                                          'kind': {'const': 'git-snapshot-inspection'},
+                                          'scope': {'items': {'$ref': '#/$defs/NonEmptyString'},
+                                                    'minItems': 1,
+                                                    'type': 'array',
+                                                    'uniqueItems': True},
+                                          'submodules': {'items': {'$ref': '#/$defs/SnapshotEntry'},
+                                                         'type': 'array'},
+                                          'tree': {'$ref': '#/$defs/GitObjectId'},
+                                          'versions': {'$ref': '#/$defs/AnalysisVersions'}},
+                           'required': ['kind',
+                                        'handle',
+                                        'tree',
+                                        'commit',
+                                        'scope',
+                                        'exclusions',
+                                        'submodules',
+                                        'versions'],
+                           'type': 'object',
+                           'x-standards-engine-identity': {'domain': 'coding-standards:snapshot:v2',
+                                                           'exclude': ['handle',
+                                                                       'commit',
+                                                                       'versions.graph_engine_implementation_version',
+                                                                       'versions.analyzer_implementation_version'],
+                                                           'include': ['tree',
+                                                                       'scope',
+                                                                       'exclusions',
+                                                                       'submodules',
+                                                                       'versions.analysis_contract_version',
+                                                                       'versions.analysis_schema_version',
+                                                                       'versions.result_schema_version',
+                                                                       'versions.interface_schema_version',
+                                                                       'versions.applicability_version',
+                                                                       'versions.authorization_contract_version',
+                                                                       'versions.metadata_api_version',
+                                                                       'versions.graph_engine_contract_version',
+                                                                       'versions.parser_versions',
+                                                                       'versions.evidence_provider_contract_versions']}},
+ 'ImmutableAuthorityHandle': {'additionalProperties': False,
+                              'properties': {'id': {'$ref': '#/$defs/CanonicalId'},
+                                             'kind': {'$ref': '#/$defs/CanonicalId'},
+                                             'schema_version': {'minimum': 1,
+                                                                'type': 'integer'}},
+                              'required': ['kind', 'id', 'schema_version'],
+                              'type': 'object'},
  'ImpactDispositionSubmission': {'additionalProperties': False,
                                  'properties': {'evidence': {'items': {'$ref': '#/$defs/EvidenceReference'},
                                                              'minItems': 1,
@@ -323,10 +1238,38 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                               'evidence',
                                               'fingerprint'],
                                  'type': 'object'},
+ 'ImpactTraceId': {'pattern': '^impact-trace:sha256:[0-9a-f]{64}$', 'type': 'string'},
+ 'ImpactTraceReference': {'additionalProperties': False,
+                          'properties': {'applicability': {'enum': ['true',
+                                                                    'false',
+                                                                    'unknown']},
+                                         'graph': {'enum': ['accepted', 'proposed']},
+                                         'id': {'$ref': '#/$defs/ImpactTraceId'}},
+                          'required': ['id', 'graph', 'applicability'],
+                          'type': 'object'},
+ 'InExpression': {'additionalProperties': False,
+                  'properties': {'fact': {'$ref': '#/$defs/CanonicalId'},
+                                 'operator': {'const': 'in'},
+                                 'values': {'items': {'$ref': '#/$defs/ScalarValue'},
+                                            'minItems': 1,
+                                            'type': 'array',
+                                            'uniqueItems': True}},
+                  'required': ['operator', 'fact', 'values'],
+                  'type': 'object'},
  'InspectCall': {'additionalProperties': False,
                  'properties': {'handle': {'$ref': '#/$defs/InspectableHandle'}},
                  'required': ['handle'],
                  'type': 'object'},
+ 'InspectNextOperation': {'additionalProperties': False,
+                          'properties': {'operation': {'const': 'inspect'},
+                                         'request_kind': {'const': 'inspect'},
+                                         'snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                         'target': {'$ref': '#/$defs/CanonicalId'}},
+                          'required': ['operation',
+                                       'request_kind',
+                                       'target',
+                                       'snapshot'],
+                          'type': 'object'},
  'InspectableHandle': {'oneOf': [{'$ref': '#/$defs/SnapshotHandle'},
                                  {'$ref': '#/$defs/NavigationHandle'},
                                  {'$ref': '#/$defs/AnalysisHandle'},
@@ -339,6 +1282,54 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                  {'$ref': '#/$defs/AnalysisContextHandle'},
                                  {'$ref': '#/$defs/FactRequirementHandle'},
                                  {'$ref': '#/$defs/FactObservationHandle'}]},
+ 'InspectionResult': {'oneOf': [{'$ref': '#/$defs/SnapshotInspectionResult'},
+                                {'$ref': '#/$defs/PolicyInspectionResult'},
+                                {'$ref': '#/$defs/RelationshipInspectionResult'},
+                                {'$ref': '#/$defs/NavigationInspectionResult'},
+                                {'$ref': '#/$defs/CertificateInspectionResult'},
+                                {'$ref': '#/$defs/CoverageAuthorityViewInspectionResult'},
+                                {'$ref': '#/$defs/CoverageRequirementInspectionResult'},
+                                {'$ref': '#/$defs/CoverageAttestationInspectionResult'},
+                                {'$ref': '#/$defs/AnalysisContextInspectionResult'},
+                                {'$ref': '#/$defs/FactRequirementInspectionResult'},
+                                {'$ref': '#/$defs/FactObservationInspectionResult'},
+                                {'$ref': '#/$defs/AnalysisState'}]},
+ 'ManifestSnapshotInspection': {'additionalProperties': False,
+                                'properties': {'entries': {'items': {'$ref': '#/$defs/SnapshotEntry'},
+                                                           'type': 'array'},
+                                               'handle': {'$ref': '#/$defs/SnapshotHandle'},
+                                               'kind': {'const': 'manifest-snapshot-inspection'},
+                                               'scope': {'items': {'$ref': '#/$defs/NonEmptyString'},
+                                                         'minItems': 1,
+                                                         'type': 'array',
+                                                         'uniqueItems': True},
+                                               'source_kind': {'enum': ['dirty-git',
+                                                                        'non-git']},
+                                               'versions': {'$ref': '#/$defs/AnalysisVersions'}},
+                                'required': ['kind',
+                                             'handle',
+                                             'source_kind',
+                                             'scope',
+                                             'entries',
+                                             'versions'],
+                                'type': 'object',
+                                'x-standards-engine-identity': {'domain': 'coding-standards:snapshot:v2',
+                                                                'exclude': ['handle',
+                                                                            'versions.graph_engine_implementation_version',
+                                                                            'versions.analyzer_implementation_version'],
+                                                                'include': ['source_kind',
+                                                                            'scope',
+                                                                            'entries',
+                                                                            'versions.analysis_contract_version',
+                                                                            'versions.analysis_schema_version',
+                                                                            'versions.result_schema_version',
+                                                                            'versions.interface_schema_version',
+                                                                            'versions.applicability_version',
+                                                                            'versions.authorization_contract_version',
+                                                                            'versions.metadata_api_version',
+                                                                            'versions.graph_engine_contract_version',
+                                                                            'versions.parser_versions',
+                                                                            'versions.evidence_provider_contract_versions']}},
  'NavigationHandle': {'additionalProperties': False,
                       'properties': {'id': {'$ref': '#/$defs/NavigationId'},
                                      'kind': {'const': 'navigation-handle'},
@@ -347,18 +1338,195 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                       'required': ['kind', 'id', 'snapshot', 'schema_version'],
                       'type': 'object'},
  'NavigationId': {'pattern': '^navigation:sha256:[0-9a-f]{64}$', 'type': 'string'},
+ 'NavigationInspectionResult': {'additionalProperties': False,
+                                'properties': {'kind': {'const': 'navigation-inspection-result'},
+                                               'navigation': {'$ref': '#/$defs/NavigationResult'},
+                                               'provenance': {'$ref': '#/$defs/AnalysisVersions'}},
+                                'required': ['kind', 'navigation', 'provenance'],
+                                'type': 'object'},
+ 'NavigationResult': {'oneOf': [{'$ref': '#/$defs/RouteResult'},
+                                {'$ref': '#/$defs/ReadResult'},
+                                {'$ref': '#/$defs/RelatedResult'}]},
+ 'NextOperation': {'oneOf': [{'$ref': '#/$defs/QueryNextOperation'},
+                             {'$ref': '#/$defs/ResolveNextOperation'},
+                             {'$ref': '#/$defs/InspectNextOperation'}]},
  'NonEmptyString': {'minLength': 1, 'type': 'string'},
+ 'NotExpression': {'additionalProperties': False,
+                   'properties': {'expression': {'$ref': '#/$defs/ApplicabilityExpression'},
+                                  'operator': {'const': 'not'}},
+                   'required': ['operator', 'expression'],
+                   'type': 'object'},
+ 'Obligation': {'additionalProperties': False,
+                'properties': {'applicability': {'enum': ['true',
+                                                          'false',
+                                                          'unknown',
+                                                          'not-declared']},
+                               'fingerprint': {'$ref': '#/$defs/DecisionFingerprint'},
+                               'id': {'$ref': '#/$defs/ObligationId'},
+                               'kind': {'enum': ['consumer-review',
+                                                 'impact-review',
+                                                 'lifecycle-impact-review',
+                                                 'audit-coverage',
+                                                 'unmapped-normative-change']},
+                               'permitted_submissions': {'items': {'enum': ['consumer-disposition',
+                                                                            'impact-disposition',
+                                                                            'coverage-attestation']},
+                                                         'minItems': 1,
+                                                         'type': 'array',
+                                                         'uniqueItems': True},
+                               'reasons': {'items': {'$ref': '#/$defs/SelectionReason'},
+                                           'minItems': 1,
+                                           'type': 'array',
+                                           'uniqueItems': True},
+                               'review_contract': {'$ref': '#/$defs/ConsumerReviewContract'},
+                               'scope': {'$ref': '#/$defs/ReviewScope'},
+                               'state': {'enum': ['required', 'resolved', 'blocked']},
+                               'target': {'$ref': '#/$defs/CanonicalId'}},
+                'required': ['id',
+                             'kind',
+                             'target',
+                             'scope',
+                             'reasons',
+                             'state',
+                             'permitted_submissions',
+                             'fingerprint'],
+                'type': 'object',
+                'x-standards-engine-identity': {'domain': 'coding-standards:obligation:v2',
+                                                'exclude': ['state',
+                                                            'permitted_submissions',
+                                                            'applicability'],
+                                                'include': ['kind',
+                                                            'target',
+                                                            'scope',
+                                                            'reasons',
+                                                            'fingerprint']}},
  'ObligationId': {'pattern': '^obligation:sha256:[0-9a-f]{64}$', 'type': 'string'},
+ 'PendingResult': {'additionalProperties': False,
+                   'properties': {'changed_units': {'items': {'$ref': '#/$defs/ChangedPolicyUnit'},
+                                                    'type': 'array'},
+                                  'changes': {'items': {'$ref': '#/$defs/ChangeDescriptor'},
+                                              'type': 'array'},
+                                  'context': {'$ref': '#/$defs/AnalysisContext'},
+                                  'fact_requirements': {'items': {'$ref': '#/$defs/FactRequirement'},
+                                                        'type': 'array'},
+                                  'handle': {'$ref': '#/$defs/AnalysisHandle'},
+                                  'kind': {'const': 'pending-result'},
+                                  'next_operations': {'items': {'$ref': '#/$defs/NextOperation'},
+                                                      'type': 'array'},
+                                  'obligations': {'items': {'$ref': '#/$defs/Obligation'},
+                                                  'type': 'array'},
+                                  'provenance': {'$ref': '#/$defs/AnalysisVersions'},
+                                  'reading_plan': {'items': {'$ref': '#/$defs/ReadingPlanEntry'},
+                                                   'type': 'array'},
+                                  'status': {'const': 'needs-action'},
+                                  'summary': {'type': 'string'}},
+                   'required': ['kind',
+                                'handle',
+                                'status',
+                                'context',
+                                'changes',
+                                'changed_units',
+                                'obligations',
+                                'fact_requirements',
+                                'reading_plan',
+                                'next_operations',
+                                'provenance'],
+                   'type': 'object',
+                   'x-standards-engine-projection': {'authority': 'non-authoritative '
+                                                                  'deterministic '
+                                                                  'projection of '
+                                                                  'AnalysisState',
+                                                     'identity': 'handle is the '
+                                                                 "projected state's "
+                                                                 'AnalysisHandle'}},
  'PolicyHandle': {'additionalProperties': False,
                   'properties': {'id': {'$ref': '#/$defs/CanonicalId'},
                                  'kind': {'const': 'policy-handle'},
                                  'snapshot': {'$ref': '#/$defs/SnapshotHandle'}},
                   'required': ['kind', 'id', 'snapshot'],
                   'type': 'object'},
+ 'PolicyImpactSelectionReason': {'additionalProperties': False,
+                                 'properties': {'edge': {'$ref': '#/$defs/EdgeId'},
+                                                'evidence_owner': {'$ref': '#/$defs/CanonicalId'},
+                                                'kind': {'const': 'policy-impact-edge'},
+                                                'relation': {'$ref': '#/$defs/CanonicalId'},
+                                                'source': {'$ref': '#/$defs/CanonicalId'},
+                                                'traces': {'items': {'$ref': '#/$defs/ImpactTraceReference'},
+                                                           'minItems': 1,
+                                                           'type': 'array',
+                                                           'uniqueItems': True}},
+                                 'required': ['kind',
+                                              'source',
+                                              'edge',
+                                              'relation',
+                                              'evidence_owner',
+                                              'traces'],
+                                 'type': 'object'},
+ 'PolicyInspectionResult': {'additionalProperties': False,
+                            'properties': {'declaration': {'oneOf': [{'$ref': '#/$defs/CanonicalModuleDeclaration'},
+                                                                     {'$ref': '#/$defs/PolicyUnitDeclaration'}]},
+                                           'kind': {'const': 'policy-inspection-result'},
+                                           'policy': {'$ref': '#/$defs/PolicyHandle'},
+                                           'provenance': {'$ref': '#/$defs/ProvenanceRecord'},
+                                           'representation_digest': {'$ref': '#/$defs/Digest'},
+                                           'structural_digest': {'$ref': '#/$defs/Digest'}},
+                            'required': ['kind',
+                                         'policy',
+                                         'declaration',
+                                         'representation_digest',
+                                         'structural_digest',
+                                         'provenance'],
+                            'type': 'object'},
+ 'PolicySummary': {'additionalProperties': False,
+                   'properties': {'authority': {'enum': ['normative',
+                                                         'projection',
+                                                         'contextual',
+                                                         'evidence']},
+                                  'handle': {'$ref': '#/$defs/PolicyHandle'},
+                                  'scope': {'$ref': '#/$defs/ReviewScope'}},
+                   'required': ['handle', 'authority', 'scope'],
+                   'type': 'object'},
+ 'PolicyUnitDeclaration': {'additionalProperties': False,
+                           'properties': {'aliases': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                      'type': 'array',
+                                                      'uniqueItems': True},
+                                          'heading_path': {'items': {'$ref': '#/$defs/NonEmptyString'},
+                                                           'minItems': 1,
+                                                           'type': 'array'},
+                                          'id': {'$ref': '#/$defs/CanonicalId'},
+                                          'kind': {'const': 'policy-unit'},
+                                          'lifecycle': {'const': 'active'},
+                                          'module': {'$ref': '#/$defs/CanonicalId'},
+                                          'predecessors': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                           'type': 'array',
+                                                           'uniqueItems': True},
+                                          'semantic_revision': {'minimum': 1,
+                                                                'type': 'integer'},
+                                          'successors': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                         'type': 'array',
+                                                         'uniqueItems': True}},
+                           'required': ['kind',
+                                        'id',
+                                        'module',
+                                        'heading_path',
+                                        'semantic_revision',
+                                        'lifecycle'],
+                           'type': 'object'},
  'PrepareCall': {'additionalProperties': False,
                  'properties': {'request': {'$ref': '#/$defs/AnalysisRequest'}},
                  'required': ['request'],
                  'type': 'object'},
+ 'ProvenanceRecord': {'additionalProperties': False,
+                      'properties': {'locator': {'$ref': '#/$defs/NonEmptyString'},
+                                     'snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                     'source_id': {'$ref': '#/$defs/CanonicalId'},
+                                     'source_kind': {'enum': ['manifest',
+                                                              'generator',
+                                                              'provider',
+                                                              'canonical-document',
+                                                              'sidecar']}},
+                      'required': ['source_id', 'source_kind', 'locator', 'snapshot'],
+                      'type': 'object'},
  'ProvideFactSubmission': {'additionalProperties': False,
                            'properties': {'evidence': {'items': {'$ref': '#/$defs/EvidenceReference'},
                                                        'minItems': 1,
@@ -369,19 +1537,153 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                           'value': {'$ref': '#/$defs/FactValue'}},
                            'required': ['kind', 'requirement', 'value', 'evidence'],
                            'type': 'object'},
+ 'ProviderAuthorityView': {'additionalProperties': False,
+                           'properties': {'contract_version': {'const': 'provider-authority.v1'},
+                                          'evidence_contracts': {'items': {'additionalProperties': False,
+                                                                           'properties': {'id': {'$ref': '#/$defs/CanonicalId'},
+                                                                                          'version': {'$ref': '#/$defs/NonEmptyString'}},
+                                                                           'required': ['id',
+                                                                                        'version'],
+                                                                           'type': 'object'},
+                                                                 'type': 'array',
+                                                                 'uniqueItems': True},
+                                          'id': {'$ref': '#/$defs/CanonicalId'},
+                                          'kind': {'const': 'provider-authority-view'},
+                                          'providers': {'items': {'$ref': '#/$defs/ProviderContractView'},
+                                                        'type': 'array',
+                                                        'uniqueItems': True}},
+                           'required': ['kind',
+                                        'id',
+                                        'contract_version',
+                                        'evidence_contracts',
+                                        'providers'],
+                           'type': 'object'},
+ 'ProviderContractView': {'additionalProperties': False,
+                          'properties': {'contract_version': {'$ref': '#/$defs/NonEmptyString'},
+                                         'id': {'$ref': '#/$defs/CanonicalId'},
+                                         'immutable_inputs': {'items': {'$ref': '#/$defs/ImmutableAuthorityHandle'},
+                                                              'type': 'array',
+                                                              'uniqueItems': True},
+                                         'input_contract': {'$ref': '#/$defs/CanonicalId'}},
+                          'required': ['id',
+                                       'contract_version',
+                                       'input_contract',
+                                       'immutable_inputs'],
+                          'type': 'object'},
  'QueryCall': {'additionalProperties': False,
                'properties': {'request': {'$ref': '#/$defs/QueryRequest'},
                               'snapshot': {'$ref': '#/$defs/SnapshotHandle'}},
                'required': ['snapshot', 'request'],
                'type': 'object'},
+ 'QueryNextOperation': {'additionalProperties': False,
+                        'properties': {'operation': {'const': 'query'},
+                                       'request_kind': {'enum': ['route',
+                                                                 'read',
+                                                                 'related']},
+                                       'snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                       'target': {'$ref': '#/$defs/CanonicalId'}},
+                        'required': ['operation', 'request_kind', 'snapshot'],
+                        'type': 'object'},
  'QueryRequest': {'oneOf': [{'$ref': '#/$defs/RouteRequest'},
                             {'$ref': '#/$defs/ReadRequest'},
                             {'$ref': '#/$defs/RelatedRequest'}]},
+ 'Question': {'additionalProperties': False,
+              'properties': {'id': {'$ref': '#/$defs/CanonicalId'},
+                             'kind': {'enum': ['applicability-fact',
+                                               'normative-classification',
+                                               'identity-resolution',
+                                               'scope-resolution']},
+                             'permitted_answers': {'items': {'$ref': '#/$defs/NonEmptyString'},
+                                                   'minItems': 1,
+                                                   'type': 'array',
+                                                   'uniqueItems': True},
+                             'prompt': {'$ref': '#/$defs/NonEmptyString'},
+                             'state': {'enum': ['required', 'answered', 'blocked']}},
+              'required': ['id', 'kind', 'prompt', 'state', 'permitted_answers'],
+              'type': 'object'},
  'ReadRequest': {'additionalProperties': False,
                  'properties': {'kind': {'const': 'read'},
                                 'target': {'$ref': '#/$defs/CanonicalId'}},
                  'required': ['kind', 'target'],
                  'type': 'object'},
+ 'ReadResult': {'additionalProperties': False,
+                'properties': {'content': {'type': 'string'},
+                               'handle': {'$ref': '#/$defs/NavigationHandle'},
+                               'kind': {'const': 'read-result'},
+                               'next_operations': {'items': {'$ref': '#/$defs/NextOperation'},
+                                                   'type': 'array'},
+                               'policy': {'$ref': '#/$defs/PolicySummary'},
+                               'related': {'items': {'$ref': '#/$defs/RelationshipSummary'},
+                                           'type': 'array'},
+                               'requires': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                            'type': 'array',
+                                            'uniqueItems': True},
+                               'specializes': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                               'type': 'array',
+                                               'uniqueItems': True},
+                               'summary': {'type': 'string'}},
+                'required': ['kind',
+                             'handle',
+                             'policy',
+                             'content',
+                             'requires',
+                             'specializes',
+                             'related',
+                             'next_operations'],
+                'type': 'object',
+                'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v2',
+                                                'exclude': ['handle.id',
+                                                            'next_operations',
+                                                            'summary'],
+                                                'include': ['handle.snapshot',
+                                                            'policy',
+                                                            'content',
+                                                            'requires',
+                                                            'specializes',
+                                                            'related']}},
+ 'ReadingPlanEntry': {'additionalProperties': False,
+                      'properties': {'authority': {'enum': ['normative',
+                                                            'projection',
+                                                            'contextual',
+                                                            'evidence']},
+                                     'reasons': {'items': {'$ref': '#/$defs/ReadingPlanReason'},
+                                                 'minItems': 1,
+                                                 'type': 'array',
+                                                 'uniqueItems': True},
+                                     'scope': {'$ref': '#/$defs/ReviewScope'},
+                                     'state': {'enum': ['selected',
+                                                        'conditional',
+                                                        'unresolved']},
+                                     'target': {'$ref': '#/$defs/CanonicalId'}},
+                      'required': ['target', 'scope', 'authority', 'reasons', 'state'],
+                      'type': 'object'},
+ 'ReadingPlanReason': {'oneOf': [{'$ref': '#/$defs/ConsumerReviewObligationReadingReason'},
+                                 {'$ref': '#/$defs/RoutingBaseReadingReason'},
+                                 {'$ref': '#/$defs/RoutingRuleReadingReason'},
+                                 {'$ref': '#/$defs/RequiresReadingReason'},
+                                 {'$ref': '#/$defs/SpecializesReadingReason'}]},
+ 'RejectedResult': {'additionalProperties': False,
+                    'properties': {'code': {'$ref': '#/$defs/CanonicalId'},
+                                   'details': {'additionalProperties': {'$ref': '#/$defs/ScalarValue'},
+                                               'type': 'object'},
+                                   'kind': {'const': 'rejected-result'},
+                                   'message': {'$ref': '#/$defs/NonEmptyString'},
+                                   'next_operations': {'items': {'$ref': '#/$defs/NextOperation'},
+                                                       'type': 'array'},
+                                   'outcome': {'enum': ['invalid',
+                                                        'unavailable',
+                                                        'unsupported',
+                                                        'stale',
+                                                        'unauthorized',
+                                                        'incomplete']},
+                                   'target': {'$ref': '#/$defs/CanonicalId'}},
+                    'required': ['kind',
+                                 'code',
+                                 'outcome',
+                                 'message',
+                                 'details',
+                                 'next_operations'],
+                    'type': 'object'},
  'RelatedRequest': {'additionalProperties': False,
                     'properties': {'direction': {'enum': ['incoming',
                                                           'outgoing',
@@ -395,17 +1697,105 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                    'transitive': {'default': False, 'type': 'boolean'}},
                     'required': ['kind', 'target', 'groups', 'direction', 'transitive'],
                     'type': 'object'},
+ 'RelatedResult': {'additionalProperties': False,
+                   'properties': {'handle': {'$ref': '#/$defs/NavigationHandle'},
+                                  'kind': {'const': 'related-result'},
+                                  'next_operations': {'items': {'$ref': '#/$defs/NextOperation'},
+                                                      'type': 'array'},
+                                  'policy_unit_mapping': {'additionalProperties': False,
+                                                          'properties': {'policy_units': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                                                          'type': 'array',
+                                                                                          'uniqueItems': True},
+                                                                         'reason': {'const': 'no-policy-units'},
+                                                                         'state': {'enum': ['exact-policy-unit',
+                                                                                            'policy-units-present',
+                                                                                            'incomplete']}},
+                                                          'required': ['state',
+                                                                       'policy_units'],
+                                                          'type': 'object'},
+                                  'relationships': {'items': {'$ref': '#/$defs/RelationshipSummary'},
+                                                    'type': 'array'},
+                                  'summary': {'type': 'string'},
+                                  'target': {'$ref': '#/$defs/CanonicalId'}},
+                   'required': ['kind',
+                                'handle',
+                                'target',
+                                'policy_unit_mapping',
+                                'relationships',
+                                'next_operations'],
+                   'type': 'object',
+                   'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v2',
+                                                   'exclude': ['handle.id',
+                                                               'next_operations',
+                                                               'summary'],
+                                                   'include': ['handle.snapshot',
+                                                               'target',
+                                                               'policy_unit_mapping',
+                                                               'relationships']}},
  'RelationshipHandle': {'additionalProperties': False,
                         'properties': {'id': {'$ref': '#/$defs/EdgeId'},
                                        'kind': {'const': 'relationship-handle'},
                                        'snapshot': {'$ref': '#/$defs/SnapshotHandle'}},
                         'required': ['kind', 'id', 'snapshot'],
                         'type': 'object'},
+ 'RelationshipInspectionResult': {'additionalProperties': False,
+                                  'properties': {'kind': {'const': 'relationship-inspection-result'},
+                                                 'policy_semantics': {'oneOf': [{'$ref': '#/$defs/CompiledPolicyImpactSemantics'},
+                                                                                {'type': 'null'}]},
+                                                 'provenance': {'$ref': '#/$defs/ProvenanceRecord'},
+                                                 'relationship': {'$ref': '#/$defs/RelationshipSummary'}},
+                                  'required': ['kind',
+                                               'relationship',
+                                               'policy_semantics',
+                                               'provenance'],
+                                  'type': 'object'},
+ 'RelationshipSummary': {'additionalProperties': False,
+                         'properties': {'applicability': {'enum': ['true',
+                                                                   'false',
+                                                                   'unknown',
+                                                                   'not-declared']},
+                                        'direction': {'enum': ['incoming', 'outgoing']},
+                                        'groups': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                   'minItems': 1,
+                                                   'type': 'array',
+                                                   'uniqueItems': True},
+                                        'handle': {'$ref': '#/$defs/RelationshipHandle'},
+                                        'relation': {'$ref': '#/$defs/CanonicalId'},
+                                        'source': {'$ref': '#/$defs/CanonicalId'},
+                                        'target': {'$ref': '#/$defs/CanonicalId'},
+                                        'traversal_eligible': {'type': 'boolean'}},
+                         'required': ['handle',
+                                      'source',
+                                      'target',
+                                      'relation',
+                                      'groups',
+                                      'direction',
+                                      'traversal_eligible',
+                                      'applicability'],
+                         'type': 'object'},
+ 'RequiresReadingReason': {'additionalProperties': False,
+                           'properties': {'edge': {'$ref': '#/$defs/EdgeId'},
+                                          'kind': {'const': 'requires'},
+                                          'source': {'$ref': '#/$defs/CanonicalId'}},
+                           'required': ['kind', 'edge', 'source'],
+                           'type': 'object'},
  'ResolveCall': {'additionalProperties': False,
                  'properties': {'analysis': {'$ref': '#/$defs/AnalysisHandle'},
                                 'submission': {'$ref': '#/$defs/Submission'}},
                  'required': ['analysis', 'submission'],
                  'type': 'object'},
+ 'ResolveNextOperation': {'additionalProperties': False,
+                          'properties': {'analysis': {'$ref': '#/$defs/AnalysisHandle'},
+                                         'obligation_id': {'$ref': '#/$defs/ObligationId'},
+                                         'operation': {'const': 'resolve'},
+                                         'request_kind': {'enum': ['provide-fact',
+                                                                   'consumer-disposition',
+                                                                   'impact-disposition',
+                                                                   'coverage-attestation']},
+                                         'requirement_id': {'$ref': '#/$defs/FactRequirementId'},
+                                         'target': {'$ref': '#/$defs/CanonicalId'}},
+                          'required': ['operation', 'request_kind', 'analysis'],
+                          'type': 'object'},
  'ReviewScope': {'oneOf': [{'$ref': '#/$defs/StructuredScope'},
                            {'$ref': '#/$defs/WholeArtifactScope'}]},
  'RouteRequest': {'additionalProperties': False,
@@ -413,6 +1803,48 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                  'kind': {'const': 'route'}},
                   'required': ['kind', 'facts'],
                   'type': 'object'},
+ 'RouteResult': {'additionalProperties': False,
+                 'properties': {'handle': {'$ref': '#/$defs/NavigationHandle'},
+                                'kind': {'const': 'route-result'},
+                                'next_operations': {'items': {'$ref': '#/$defs/NextOperation'},
+                                                    'type': 'array'},
+                                'reading_plan': {'items': {'$ref': '#/$defs/ReadingPlanEntry'},
+                                                 'type': 'array'},
+                                'summary': {'type': 'string'},
+                                'unresolved_questions': {'items': {'$ref': '#/$defs/Question'},
+                                                         'type': 'array'}},
+                 'required': ['kind',
+                              'handle',
+                              'reading_plan',
+                              'unresolved_questions',
+                              'next_operations'],
+                 'type': 'object',
+                 'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v2',
+                                                 'exclude': ['handle.id',
+                                                             'next_operations',
+                                                             'summary'],
+                                                 'include': ['handle.snapshot',
+                                                             'reading_plan',
+                                                             'unresolved_questions']}},
+ 'RoutingBaseReadingReason': {'additionalProperties': False,
+                              'properties': {'kind': {'const': 'routing-base'},
+                                             'projection': {'$ref': '#/$defs/CanonicalId'}},
+                              'required': ['kind', 'projection'],
+                              'type': 'object'},
+ 'RoutingRuleReadingReason': {'additionalProperties': False,
+                              'properties': {'facts': {'items': {'$ref': '#/$defs/CanonicalId'},
+                                                       'type': 'array',
+                                                       'uniqueItems': True},
+                                             'kind': {'const': 'routing-rule'},
+                                             'rule': {'$ref': '#/$defs/CanonicalId'}},
+                              'required': ['kind', 'rule', 'facts'],
+                              'type': 'object'},
+ 'ScalarValue': {'oneOf': [{'type': 'boolean'},
+                           {'type': 'integer'},
+                           {'type': 'string'},
+                           {'type': 'null'}]},
+ 'SelectionReason': {'oneOf': [{'$ref': '#/$defs/GeneralSelectionReason'},
+                               {'$ref': '#/$defs/PolicyImpactSelectionReason'}]},
  'SemanticProposal': {'additionalProperties': False,
                       'properties': {'accepted_semantic_revision': {'oneOf': [{'minimum': 1,
                                                                                'type': 'integer'},
@@ -428,6 +1860,62 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                                    'intent',
                                    'structural_digest'],
                       'type': 'object'},
+ 'SnapshotEntry': {'additionalProperties': False,
+                   'properties': {'checked_out_revision': {'$ref': '#/$defs/GitObjectId'},
+                                  'content_digest': {'$ref': '#/$defs/Digest'},
+                                  'entry_type': {'enum': ['file',
+                                                          'directory',
+                                                          'symlink',
+                                                          'gitlink',
+                                                          'nested-repository']},
+                                  'inclusion': {'enum': ['included', 'excluded']},
+                                  'mode': {'minimum': 0, 'type': 'integer'},
+                                  'nested_identity': {'$ref': '#/$defs/NonEmptyString'},
+                                  'nested_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
+                                  'path': {'$ref': '#/$defs/NonEmptyString'},
+                                  'reason': {'$ref': '#/$defs/NonEmptyString'},
+                                  'recorded_gitlink': {'$ref': '#/$defs/GitObjectId'},
+                                  'symlink_resolution': {'enum': ['not-followed',
+                                                                  'followed-contained',
+                                                                  'inert-escape']},
+                                  'symlink_target': {'type': 'string'},
+                                  'tracking': {'enum': ['tracked',
+                                                        'untracked',
+                                                        'not-applicable']},
+                                  'worktree_state': {'enum': ['clean',
+                                                              'dirty',
+                                                              'diverged',
+                                                              'dirty-and-diverged']}},
+                   'required': ['path',
+                                'entry_type',
+                                'mode',
+                                'tracking',
+                                'inclusion',
+                                'reason'],
+                   'type': 'object',
+                   'x-standards-engine-invariants': {'file': 'included files bind '
+                                                             'content_digest',
+                                                     'gitlink': 'recorded gitlink and '
+                                                                'checked-out state are '
+                                                                'explicit; dirty '
+                                                                'nested content binds '
+                                                                'nested_snapshot',
+                                                     'path': 'normalized '
+                                                             'repository-relative '
+                                                             'path; absolute paths, '
+                                                             'parent traversal, and '
+                                                             'normalization collisions '
+                                                             'are invalid',
+                                                     'symlink': 'target and resolution '
+                                                                'are required; escaped '
+                                                                'resolution is valid '
+                                                                'only as inert '
+                                                                'content'}},
+ 'SnapshotExclusion': {'additionalProperties': False,
+                       'properties': {'path': {'$ref': '#/$defs/NonEmptyString'},
+                                      'reason': {'$ref': '#/$defs/NonEmptyString'}},
+                       'required': ['path', 'reason'],
+                       'type': 'object'},
  'SnapshotHandle': {'additionalProperties': False,
                     'properties': {'id': {'$ref': '#/$defs/SnapshotId'},
                                    'kind': {'const': 'snapshot-handle'},
@@ -435,6 +1923,18 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                     'required': ['kind', 'id', 'schema_version'],
                     'type': 'object'},
  'SnapshotId': {'pattern': '^snapshot:sha256:[0-9a-f]{64}$', 'type': 'string'},
+ 'SnapshotInspectionResult': {'additionalProperties': False,
+                              'properties': {'kind': {'const': 'snapshot-inspection-result'},
+                                             'snapshot': {'oneOf': [{'$ref': '#/$defs/GitSnapshotInspection'},
+                                                                    {'$ref': '#/$defs/ManifestSnapshotInspection'}]}},
+                              'required': ['kind', 'snapshot'],
+                              'type': 'object'},
+ 'SpecializesReadingReason': {'additionalProperties': False,
+                              'properties': {'edge': {'$ref': '#/$defs/EdgeId'},
+                                             'kind': {'const': 'specializes'},
+                                             'source': {'$ref': '#/$defs/CanonicalId'}},
+                              'required': ['kind', 'edge', 'source'],
+                              'type': 'object'},
  'StructuredScope': {'additionalProperties': False,
                      'properties': {'heading_path': {'items': {'$ref': '#/$defs/NonEmptyString'},
                                                      'minItems': 1,
@@ -446,16 +1946,25 @@ INPUT_DEFINITION_SCHEMAS = MappingProxyType(
                           {'$ref': '#/$defs/ConsumerDispositionSubmission'},
                           {'$ref': '#/$defs/ImpactDispositionSubmission'},
                           {'$ref': '#/$defs/CoverageAttestationSubmission'}]},
+ 'VersionMap': {'additionalProperties': {'$ref': '#/$defs/NonEmptyString'},
+                'type': 'object'},
  'WholeArtifactScope': {'additionalProperties': False,
                         'properties': {'kind': {'const': 'whole-artifact'}},
                         'required': ['kind'],
                         'type': 'object'}}
 )
-INPUT_FIELD_NAMES = MappingProxyType(
-{'AnalysisContextHandle': {'context_kind': 'context_kind',
+FIELD_NAMES = MappingProxyType(
+{'AllExpression': {'expressions': 'expressions', 'operator': 'operator'},
+ 'AlwaysExpression': {'operator': 'operator'},
+ 'AnalysisContext': {'handle': 'handle',
+                     'kind': 'kind',
+                     'semantic_proposals': 'semantic_proposals',
+                     'subjects': 'subjects'},
+ 'AnalysisContextHandle': {'context_kind': 'context_kind',
                            'id': 'id',
                            'kind': 'kind',
                            'schema_version': 'schema_version'},
+ 'AnalysisContextInspectionResult': {'context': 'context', 'kind': 'kind'},
  'AnalysisHandle': {'id': 'id', 'kind': 'kind', 'schema_version': 'schema_version'},
  'AnalysisRequest': {'base_snapshot': 'base_snapshot',
                      'changes': 'changes',
@@ -464,19 +1973,139 @@ INPUT_FIELD_NAMES = MappingProxyType(
                      'prior_analysis': 'prior_analysis',
                      'proposed_snapshot': 'proposed_snapshot',
                      'semantic_proposals': 'semantic_proposals'},
+ 'AnalysisState': {'authorization_view': 'authorization_view',
+                   'base_snapshot': 'base_snapshot',
+                   'changes': 'changes',
+                   'coverage_decisions': 'coverage_decisions',
+                   'dispositions': 'dispositions',
+                   'fact_observations': 'fact_observations',
+                   'handle': 'handle',
+                   'kind': 'kind',
+                   'proposed_snapshot': 'proposed_snapshot',
+                   'provenance': 'provenance',
+                   'provider_view': 'provider_view',
+                   'semantic_proposals': 'semantic_proposals'},
+ 'AnalysisVersions': {'analysis_contract_version': 'analysis_contract_version',
+                      'analysis_schema_version': 'analysis_schema_version',
+                      'analyzer_implementation_version': 'analyzer_implementation_version',
+                      'applicability_version': 'applicability_version',
+                      'authorization_contract_version': 'authorization_contract_version',
+                      'evidence_provider_contract_versions': 'evidence_provider_contract_versions',
+                      'graph_engine_contract_version': 'graph_engine_contract_version',
+                      'graph_engine_implementation_version': 'graph_engine_implementation_version',
+                      'interface_schema_version': 'interface_schema_version',
+                      'metadata_api_version': 'metadata_api_version',
+                      'parser_versions': 'parser_versions',
+                      'result_schema_version': 'result_schema_version'},
+ 'AnyExpression': {'expressions': 'expressions', 'operator': 'operator'},
+ 'AuthorizationAuthorityView': {'authorizations': 'authorizations',
+                                'capabilities': 'capabilities',
+                                'contract_version': 'contract_version',
+                                'id': 'id',
+                                'issuers': 'issuers',
+                                'kind': 'kind',
+                                'revocation_digest': 'revocation_digest'},
+ 'AuthorizationReference': {'capability': 'capability', 'digest': 'digest', 'id': 'id'},
+ 'CanonicalModuleDeclaration': {'applies_when': 'applies_when',
+                                'does_not_apply_when': 'does_not_apply_when',
+                                'id': 'id',
+                                'kind': 'kind',
+                                'level': 'level',
+                                'requires': 'requires',
+                                'role': 'role',
+                                'specializes': 'specializes',
+                                'verification': 'verification'},
  'CertificateHandle': {'id': 'id', 'kind': 'kind', 'schema_version': 'schema_version'},
+ 'CertificateInspectionResult': {'certificate': 'certificate', 'kind': 'kind'},
+ 'CertificateProvenance': {'generated_at': 'generated_at', 'generator': 'generator'},
  'ChangeDescriptor': {'accepted_ids': 'accepted_ids',
                       'accepted_module': 'accepted_module',
                       'kind': 'kind',
                       'proposed_ids': 'proposed_ids',
                       'proposed_module': 'proposed_module',
                       'scope': 'scope'},
+ 'ChangedPolicyUnit': {'accepted_representation_digest': 'accepted_representation_digest',
+                       'accepted_semantic_revision': 'accepted_semantic_revision',
+                       'accepted_structural_digest': 'accepted_structural_digest',
+                       'change_kind': 'change_kind',
+                       'classification': 'classification',
+                       'policy': 'policy',
+                       'proposed_representation_digest': 'proposed_representation_digest',
+                       'proposed_semantic_revision': 'proposed_semantic_revision',
+                       'proposed_structural_digest': 'proposed_structural_digest',
+                       'scope': 'scope',
+                       'semantic_state': 'semantic_state'},
+ 'CompiledApplicabilityProgram': {'dependency_digest': 'dependency_digest',
+                                  'language_version': 'language_version',
+                                  'normalized_expression': 'normalized_expression',
+                                  'referenced_facts': 'referenced_facts',
+                                  'schema_digest': 'schema_digest'},
+ 'CompiledPolicyImpactSemantics': {'applicability_program': 'applicability_program',
+                                   'consumer': 'consumer',
+                                   'consumer_scope': 'consumer_scope',
+                                   'declaration_source': 'declaration_source',
+                                   'dependency_fingerprint': 'dependency_fingerprint',
+                                   'edge_id': 'edge_id',
+                                   'evidence_owner': 'evidence_owner',
+                                   'propagation': 'propagation',
+                                   'rationale': 'rationale',
+                                   'relation': 'relation',
+                                   'source': 'source',
+                                   'source_scope': 'source_scope'},
+ 'CompleteResult': {'base_snapshot': 'base_snapshot',
+                    'changed_units': 'changed_units',
+                    'changes': 'changes',
+                    'completion': 'completion',
+                    'context': 'context',
+                    'coverage_certificates': 'coverage_certificates',
+                    'dispositions': 'dispositions',
+                    'fact_observations': 'fact_observations',
+                    'handle': 'handle',
+                    'kind': 'kind',
+                    'proposed_snapshot': 'proposed_snapshot',
+                    'provenance': 'provenance',
+                    'reading_plan': 'reading_plan',
+                    'status': 'status',
+                    'summary': 'summary'},
+ 'CompletionProof': {'applicability_resolved': 'applicability_resolved',
+                     'authorization_valid': 'authorization_valid',
+                     'certificate_subjects': 'certificate_subjects',
+                     'disposition_obligations': 'disposition_obligations',
+                     'evidence_valid': 'evidence_valid',
+                     'non_consumer_obligations_resolved': 'non_consumer_obligations_resolved',
+                     'observed_fact_requirements': 'observed_fact_requirements',
+                     'reached_consumer_obligations': 'reached_consumer_obligations',
+                     'required_coverage_subjects': 'required_coverage_subjects',
+                     'required_fact_requirements': 'required_fact_requirements'},
+ 'ConsumerCoverageCertificate': {'attestation': 'attestation',
+                                 'attestation_contract_version': 'attestation_contract_version',
+                                 'coverage_contract_version': 'coverage_contract_version',
+                                 'coverage_view': 'coverage_view',
+                                 'evidence_digests': 'evidence_digests',
+                                 'handle': 'handle',
+                                 'horizon_digest': 'horizon_digest',
+                                 'kind': 'kind',
+                                 'owner': 'owner',
+                                 'provenance': 'provenance',
+                                 'relationship_digest': 'relationship_digest',
+                                 'requirement': 'requirement',
+                                 'semantic_revision': 'semantic_revision',
+                                 'subject': 'subject'},
  'ConsumerDispositionSubmission': {'evidence': 'evidence',
                                    'fingerprint': 'fingerprint',
                                    'kind': 'kind',
                                    'obligation_id': 'obligation_id',
                                    'rationale': 'rationale',
                                    'result': 'result'},
+ 'ConsumerReviewContract': {'authorization_capability': 'authorization_capability',
+                            'evidence_contract': 'evidence_contract',
+                            'id': 'id',
+                            'kind': 'kind',
+                            'permitted_dispositions': 'permitted_dispositions',
+                            'semantics': 'semantics',
+                            'version': 'version'},
+ 'ConsumerReviewObligationReadingReason': {'kind': 'kind', 'obligation': 'obligation'},
+ 'ContainsExpression': {'fact': 'fact', 'operator': 'operator', 'value': 'value'},
  'CoverageAttestation': {'auditor_provenance': 'auditor_provenance',
                          'conclusion': 'conclusion',
                          'evidence': 'evidence',
@@ -489,63 +2118,303 @@ INPUT_FIELD_NAMES = MappingProxyType(
  'CoverageAttestationHandle': {'id': 'id',
                                'kind': 'kind',
                                'schema_version': 'schema_version'},
+ 'CoverageAttestationInspectionResult': {'attestation': 'attestation', 'kind': 'kind'},
  'CoverageAttestationSubmission': {'attestation': 'attestation',
                                    'kind': 'kind',
                                    'obligation_id': 'obligation_id'},
+ 'CoverageAuditRequirement': {'coverage_view': 'coverage_view',
+                              'derived_from_snapshot': 'derived_from_snapshot',
+                              'handle': 'handle',
+                              'horizon': 'horizon',
+                              'kind': 'kind',
+                              'owner': 'owner',
+                              'relationship_kinds': 'relationship_kinds',
+                              'semantic_revision': 'semantic_revision',
+                              'subject': 'subject'},
+ 'CoverageAuthorityView': {'applicability_language_version': 'applicability_language_version',
+                           'applicability_program_digests': 'applicability_program_digests',
+                           'attestation_contract_version': 'attestation_contract_version',
+                           'authorization_contract_version': 'authorization_contract_version',
+                           'coverage_contract_version': 'coverage_contract_version',
+                           'evidence_provider_contract_version': 'evidence_provider_contract_version',
+                           'fact_schema_digest': 'fact_schema_digest',
+                           'handle': 'handle',
+                           'horizon': 'horizon',
+                           'identity_resolution_contract_version': 'identity_resolution_contract_version',
+                           'kind': 'kind',
+                           'owner': 'owner',
+                           'relationship_fingerprints': 'relationship_fingerprints',
+                           'relationship_kind_contract_version': 'relationship_kind_contract_version',
+                           'relationship_kinds': 'relationship_kinds',
+                           'relationship_provider_contract_digest': 'relationship_provider_contract_digest',
+                           'representation_digest': 'representation_digest',
+                           'semantic_revision': 'semantic_revision',
+                           'structural_digest': 'structural_digest',
+                           'subject': 'subject'},
  'CoverageAuthorityViewHandle': {'id': 'id',
                                  'kind': 'kind',
                                  'schema_version': 'schema_version'},
+ 'CoverageAuthorityViewInspectionResult': {'coverage_view': 'coverage_view',
+                                           'kind': 'kind'},
+ 'CoverageDecision': {'attestation': 'attestation', 'authorization': 'authorization'},
+ 'CoverageHorizonMember': {'fingerprint': 'fingerprint', 'id': 'id', 'roles': 'roles'},
  'CoverageRequirementHandle': {'id': 'id',
                                'kind': 'kind',
                                'schema_version': 'schema_version'},
+ 'CoverageRequirementInspectionResult': {'kind': 'kind', 'requirement': 'requirement'},
  'DecisionDependency': {'class': 'class_', 'digest': 'digest', 'identity': 'identity'},
  'DecisionFingerprint': {'decision_contract': 'decision_contract',
                          'decision_kind': 'decision_kind',
                          'dependencies': 'dependencies',
                          'schema_version': 'schema_version'},
+ 'DispositionRecord': {'authorization': 'authorization',
+                       'evidence': 'evidence',
+                       'fingerprint': 'fingerprint',
+                       'kind': 'kind',
+                       'obligation_id': 'obligation_id',
+                       'rationale': 'rationale',
+                       'result': 'result'},
+ 'EqualsExpression': {'fact': 'fact', 'operator': 'operator', 'value': 'value'},
  'EvidenceReference': {'digest': 'digest',
                        'id': 'id',
                        'provider_contract': 'provider_contract',
                        'provider_contract_version': 'provider_contract_version'},
+ 'ExistsExpression': {'fact': 'fact', 'operator': 'operator'},
+ 'FactObservation': {'authorization': 'authorization',
+                     'evidence': 'evidence',
+                     'handle': 'handle',
+                     'kind': 'kind',
+                     'requirement': 'requirement',
+                     'value': 'value'},
  'FactObservationHandle': {'id': 'id',
                            'kind': 'kind',
                            'schema_version': 'schema_version'},
+ 'FactObservationInspectionResult': {'kind': 'kind', 'observation': 'observation'},
+ 'FactRequirement': {'answer_contract': 'answer_contract',
+                     'authorization_capability': 'authorization_capability',
+                     'context': 'context',
+                     'dependent_programs': 'dependent_programs',
+                     'evidence_contract': 'evidence_contract',
+                     'fact': 'fact',
+                     'fact_contract_digest': 'fact_contract_digest',
+                     'fact_semantic_revision': 'fact_semantic_revision',
+                     'handle': 'handle',
+                     'kind': 'kind',
+                     'prompt': 'prompt',
+                     'value_contract': 'value_contract'},
  'FactRequirementHandle': {'id': 'id',
                            'kind': 'kind',
                            'schema_version': 'schema_version'},
+ 'FactRequirementInspectionResult': {'kind': 'kind', 'requirement': 'requirement'},
+ 'FactValueContract': {'nullable': 'nullable',
+                       'states': 'states',
+                       'type': 'type',
+                       'values': 'values'},
+ 'GeneralSelectionReason': {'edge': 'edge',
+                            'fact': 'fact',
+                            'kind': 'kind',
+                            'question': 'question',
+                            'source': 'source'},
+ 'GitSnapshotInspection': {'commit': 'commit',
+                           'exclusions': 'exclusions',
+                           'handle': 'handle',
+                           'kind': 'kind',
+                           'scope': 'scope',
+                           'submodules': 'submodules',
+                           'tree': 'tree',
+                           'versions': 'versions'},
+ 'ImmutableAuthorityHandle': {'id': 'id',
+                              'kind': 'kind',
+                              'schema_version': 'schema_version'},
  'ImpactDispositionSubmission': {'evidence': 'evidence',
                                  'fingerprint': 'fingerprint',
                                  'kind': 'kind',
                                  'obligation_id': 'obligation_id',
                                  'rationale': 'rationale',
                                  'result': 'result'},
+ 'ImpactTraceReference': {'applicability': 'applicability',
+                          'graph': 'graph',
+                          'id': 'id'},
+ 'InExpression': {'fact': 'fact', 'operator': 'operator', 'values': 'values'},
  'InspectCall': {'handle': 'handle'},
+ 'InspectNextOperation': {'operation': 'operation',
+                          'request_kind': 'request_kind',
+                          'snapshot': 'snapshot',
+                          'target': 'target'},
+ 'ManifestSnapshotInspection': {'entries': 'entries',
+                                'handle': 'handle',
+                                'kind': 'kind',
+                                'scope': 'scope',
+                                'source_kind': 'source_kind',
+                                'versions': 'versions'},
  'NavigationHandle': {'id': 'id',
                       'kind': 'kind',
                       'schema_version': 'schema_version',
                       'snapshot': 'snapshot'},
+ 'NavigationInspectionResult': {'kind': 'kind',
+                                'navigation': 'navigation',
+                                'provenance': 'provenance'},
+ 'NotExpression': {'expression': 'expression', 'operator': 'operator'},
+ 'Obligation': {'applicability': 'applicability',
+                'fingerprint': 'fingerprint',
+                'id': 'id',
+                'kind': 'kind',
+                'permitted_submissions': 'permitted_submissions',
+                'reasons': 'reasons',
+                'review_contract': 'review_contract',
+                'scope': 'scope',
+                'state': 'state',
+                'target': 'target'},
+ 'PendingResult': {'changed_units': 'changed_units',
+                   'changes': 'changes',
+                   'context': 'context',
+                   'fact_requirements': 'fact_requirements',
+                   'handle': 'handle',
+                   'kind': 'kind',
+                   'next_operations': 'next_operations',
+                   'obligations': 'obligations',
+                   'provenance': 'provenance',
+                   'reading_plan': 'reading_plan',
+                   'status': 'status',
+                   'summary': 'summary'},
  'PolicyHandle': {'id': 'id', 'kind': 'kind', 'snapshot': 'snapshot'},
+ 'PolicyImpactSelectionReason': {'edge': 'edge',
+                                 'evidence_owner': 'evidence_owner',
+                                 'kind': 'kind',
+                                 'relation': 'relation',
+                                 'source': 'source',
+                                 'traces': 'traces'},
+ 'PolicyInspectionResult': {'declaration': 'declaration',
+                            'kind': 'kind',
+                            'policy': 'policy',
+                            'provenance': 'provenance',
+                            'representation_digest': 'representation_digest',
+                            'structural_digest': 'structural_digest'},
+ 'PolicySummary': {'authority': 'authority', 'handle': 'handle', 'scope': 'scope'},
+ 'PolicyUnitDeclaration': {'aliases': 'aliases',
+                           'heading_path': 'heading_path',
+                           'id': 'id',
+                           'kind': 'kind',
+                           'lifecycle': 'lifecycle',
+                           'module': 'module',
+                           'predecessors': 'predecessors',
+                           'semantic_revision': 'semantic_revision',
+                           'successors': 'successors'},
  'PrepareCall': {'request': 'request'},
+ 'ProvenanceRecord': {'locator': 'locator',
+                      'snapshot': 'snapshot',
+                      'source_id': 'source_id',
+                      'source_kind': 'source_kind'},
  'ProvideFactSubmission': {'evidence': 'evidence',
                            'kind': 'kind',
                            'requirement': 'requirement',
                            'value': 'value'},
+ 'ProviderAuthorityView': {'contract_version': 'contract_version',
+                           'evidence_contracts': 'evidence_contracts',
+                           'id': 'id',
+                           'kind': 'kind',
+                           'providers': 'providers'},
+ 'ProviderContractView': {'contract_version': 'contract_version',
+                          'id': 'id',
+                          'immutable_inputs': 'immutable_inputs',
+                          'input_contract': 'input_contract'},
  'QueryCall': {'request': 'request', 'snapshot': 'snapshot'},
+ 'QueryNextOperation': {'operation': 'operation',
+                        'request_kind': 'request_kind',
+                        'snapshot': 'snapshot',
+                        'target': 'target'},
+ 'Question': {'id': 'id',
+              'kind': 'kind',
+              'permitted_answers': 'permitted_answers',
+              'prompt': 'prompt',
+              'state': 'state'},
  'ReadRequest': {'kind': 'kind', 'target': 'target'},
+ 'ReadResult': {'content': 'content',
+                'handle': 'handle',
+                'kind': 'kind',
+                'next_operations': 'next_operations',
+                'policy': 'policy',
+                'related': 'related',
+                'requires': 'requires',
+                'specializes': 'specializes',
+                'summary': 'summary'},
+ 'ReadingPlanEntry': {'authority': 'authority',
+                      'reasons': 'reasons',
+                      'scope': 'scope',
+                      'state': 'state',
+                      'target': 'target'},
+ 'RejectedResult': {'code': 'code',
+                    'details': 'details',
+                    'kind': 'kind',
+                    'message': 'message',
+                    'next_operations': 'next_operations',
+                    'outcome': 'outcome',
+                    'target': 'target'},
  'RelatedRequest': {'direction': 'direction',
                     'groups': 'groups',
                     'kind': 'kind',
                     'target': 'target',
                     'transitive': 'transitive'},
+ 'RelatedResult': {'handle': 'handle',
+                   'kind': 'kind',
+                   'next_operations': 'next_operations',
+                   'policy_unit_mapping': 'policy_unit_mapping',
+                   'relationships': 'relationships',
+                   'summary': 'summary',
+                   'target': 'target'},
  'RelationshipHandle': {'id': 'id', 'kind': 'kind', 'snapshot': 'snapshot'},
+ 'RelationshipInspectionResult': {'kind': 'kind',
+                                  'policy_semantics': 'policy_semantics',
+                                  'provenance': 'provenance',
+                                  'relationship': 'relationship'},
+ 'RelationshipSummary': {'applicability': 'applicability',
+                         'direction': 'direction',
+                         'groups': 'groups',
+                         'handle': 'handle',
+                         'relation': 'relation',
+                         'source': 'source',
+                         'target': 'target',
+                         'traversal_eligible': 'traversal_eligible'},
+ 'RequiresReadingReason': {'edge': 'edge', 'kind': 'kind', 'source': 'source'},
  'ResolveCall': {'analysis': 'analysis', 'submission': 'submission'},
+ 'ResolveNextOperation': {'analysis': 'analysis',
+                          'obligation_id': 'obligation_id',
+                          'operation': 'operation',
+                          'request_kind': 'request_kind',
+                          'requirement_id': 'requirement_id',
+                          'target': 'target'},
  'RouteRequest': {'facts': 'facts', 'kind': 'kind'},
+ 'RouteResult': {'handle': 'handle',
+                 'kind': 'kind',
+                 'next_operations': 'next_operations',
+                 'reading_plan': 'reading_plan',
+                 'summary': 'summary',
+                 'unresolved_questions': 'unresolved_questions'},
+ 'RoutingBaseReadingReason': {'kind': 'kind', 'projection': 'projection'},
+ 'RoutingRuleReadingReason': {'facts': 'facts', 'kind': 'kind', 'rule': 'rule'},
  'SemanticProposal': {'accepted_semantic_revision': 'accepted_semantic_revision',
                       'intent': 'intent',
                       'policy': 'policy',
                       'proposed_semantic_revision': 'proposed_semantic_revision',
                       'structural_digest': 'structural_digest'},
+ 'SnapshotEntry': {'checked_out_revision': 'checked_out_revision',
+                   'content_digest': 'content_digest',
+                   'entry_type': 'entry_type',
+                   'inclusion': 'inclusion',
+                   'mode': 'mode',
+                   'nested_identity': 'nested_identity',
+                   'nested_snapshot': 'nested_snapshot',
+                   'path': 'path',
+                   'reason': 'reason',
+                   'recorded_gitlink': 'recorded_gitlink',
+                   'symlink_resolution': 'symlink_resolution',
+                   'symlink_target': 'symlink_target',
+                   'tracking': 'tracking',
+                   'worktree_state': 'worktree_state'},
+ 'SnapshotExclusion': {'path': 'path', 'reason': 'reason'},
  'SnapshotHandle': {'id': 'id', 'kind': 'kind', 'schema_version': 'schema_version'},
+ 'SnapshotInspectionResult': {'kind': 'kind', 'snapshot': 'snapshot'},
+ 'SpecializesReadingReason': {'edge': 'edge', 'kind': 'kind', 'source': 'source'},
  'StructuredScope': {'heading_path': 'heading_path', 'kind': 'kind'},
  'WholeArtifactScope': {'kind': 'kind'}}
 )
@@ -599,9 +2468,9 @@ class ContractObject(Mapping[str, object]):
         return selected
 
     def as_contract(self) -> dict[str, object]:
-        required = set(INPUT_DEFINITION_SCHEMAS[self.__definition__].get("required", ()))
+        required = set(DEFINITION_SCHEMAS[self.__definition__].get("required", ()))
         result = {}
-        for contract_name, python_name in INPUT_FIELD_NAMES[self.__definition__].items():
+        for contract_name, python_name in FIELD_NAMES[self.__definition__].items():
             value = getattr(self, python_name)
             if value is None and contract_name not in required:
                 continue
@@ -616,6 +2485,10 @@ class ContractObject(Mapping[str, object]):
 
     def __len__(self) -> int:
         return len(self.as_contract())
+
+
+class ContractResult(ContractObject):
+    pass
 
 
 def _encode(value: object) -> object:
@@ -635,12 +2508,17 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
     variants = node.get("oneOf")
     if isinstance(variants, list):
         failures = []
+        matches = []
         for variant in variants:
             try:
-                return _decode_node(variant, value)
+                matches.append(_decode_node(variant, value))
             except (TypeError, ValueError) as error:
                 failures.append(str(error))
-        raise TypeError("value matches no generated union variant: " + "; ".join(failures))
+        if len(matches) == 1:
+            return matches[0]
+        if not matches:
+            raise TypeError("value matches no generated union variant: " + "; ".join(failures))
+        raise ValueError("value matches more than one generated union variant")
     if "const" in node and _encode(value) != node["const"]:
         raise ValueError(f"expected constant {node['const']!r}")
     if "enum" in node and value not in node["enum"]:
@@ -654,6 +2532,8 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
         raise ValueError("string does not match the generated pattern")
     if value_type == "integer" and (not isinstance(value, int) or isinstance(value, bool)):
         raise TypeError("expected integer")
+    if value_type == "integer" and "minimum" in node and value < node["minimum"]:
+        raise ValueError("integer is below the generated minimum")
     if value_type == "boolean" and not isinstance(value, bool):
         raise TypeError("expected boolean")
     if value_type == "null" and value is not None:
@@ -672,15 +2552,30 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
             value = value.as_contract()
         if not isinstance(value, Mapping):
             raise TypeError("expected object")
+        properties = node.get("properties", {})
+        required = set(node.get("required", ()))
+        missing = required - set(value)
+        if missing:
+            raise ValueError(f"object is missing {sorted(missing)!r}")
         additional = node.get("additionalProperties")
-        if isinstance(additional, Mapping):
-            return MappingProxyType({str(key): _decode_node(additional, item) for key, item in value.items()})
-        return _freeze(value)
+        extra = set(value) - set(properties)
+        if additional is False and extra:
+            raise ValueError(f"object has unexpected fields {sorted(extra)!r}")
+        result = {}
+        for key, item in value.items():
+            property_node = properties.get(key)
+            if isinstance(property_node, Mapping):
+                result[str(key)] = _decode_node(property_node, item)
+            elif isinstance(additional, Mapping):
+                result[str(key)] = _decode_node(additional, item)
+            else:
+                result[str(key)] = _freeze(item)
+        return MappingProxyType(result)
     return value
 
 
 def decode_contract(definition: str, value: object) -> object:
-    node = INPUT_DEFINITION_SCHEMAS.get(definition)
+    node = DEFINITION_SCHEMAS.get(definition)
     if node is None:
         raise ValueError(f"unknown generated input definition {definition!r}")
     selected = _CLASS_BY_DEFINITION.get(definition)
@@ -701,20 +2596,51 @@ def decode_contract(definition: str, value: object) -> object:
     if extra:
         raise ValueError(f"{definition} has unexpected fields {sorted(extra)!r}")
     arguments = {}
-    for contract_name, python_name in INPUT_FIELD_NAMES[definition].items():
+    for contract_name, python_name in FIELD_NAMES[definition].items():
         if contract_name in value:
             arguments[python_name] = _decode_node(properties[contract_name], value[contract_name])
     return selected(**arguments)
 
 
 def _coerce_object(value: ContractObject) -> None:
-    node = INPUT_DEFINITION_SCHEMAS[value.__definition__]
+    node = DEFINITION_SCHEMAS[value.__definition__]
     required = set(node.get("required", ()))
-    for contract_name, python_name in INPUT_FIELD_NAMES[value.__definition__].items():
+    for contract_name, python_name in FIELD_NAMES[value.__definition__].items():
         selected = getattr(value, python_name)
         if selected is None and contract_name not in required:
             continue
         object.__setattr__(value, python_name, _decode_node(node["properties"][contract_name], selected))
+
+
+@dataclass(frozen=True, slots=True)
+class AllExpression(ContractObject):
+    __definition__: ClassVar[str] = 'AllExpression'
+    expressions: tuple[ApplicabilityExpression, ...]
+    operator: Literal['all'] = 'all'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AlwaysExpression(ContractObject):
+    __definition__: ClassVar[str] = 'AlwaysExpression'
+    operator: Literal['always'] = 'always'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AnalysisContext(ContractObject):
+    __definition__: ClassVar[str] = 'AnalysisContext'
+    handle: AnalysisContextHandle
+    subjects: tuple[ChangedPolicyUnit, ...]
+    semantic_proposals: tuple[SemanticProposal, ...]
+    kind: Literal['analysis-context'] = 'analysis-context'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
 
 
 @dataclass(frozen=True, slots=True)
@@ -724,6 +2650,16 @@ class AnalysisContextHandle(ContractObject):
     context_kind: Literal['standards-change'] = 'standards-change'
     schema_version: Literal[1] = 1
     kind: Literal['analysis-context-handle'] = 'analysis-context-handle'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AnalysisContextInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'AnalysisContextInspectionResult'
+    context: AnalysisContext
+    kind: Literal['analysis-context-inspection-result'] = 'analysis-context-inspection-result'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -756,11 +2692,124 @@ class AnalysisRequest(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class AnalysisState(ContractResult):
+    __definition__: ClassVar[str] = 'AnalysisState'
+    handle: AnalysisHandle
+    base_snapshot: SnapshotHandle
+    proposed_snapshot: SnapshotHandle
+    changes: tuple[ChangeDescriptor, ...]
+    semantic_proposals: tuple[SemanticProposal, ...]
+    authorization_view: AuthorizationAuthorityView
+    provider_view: ProviderAuthorityView
+    fact_observations: tuple[FactObservation, ...]
+    dispositions: tuple[DispositionRecord, ...]
+    coverage_decisions: tuple[CoverageDecision, ...]
+    provenance: AnalysisVersions
+    kind: Literal['analysis-state'] = 'analysis-state'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AnalysisVersions(ContractObject):
+    __definition__: ClassVar[str] = 'AnalysisVersions'
+    metadata_api_version: NonEmptyString
+    graph_engine_contract_version: NonEmptyString
+    graph_engine_implementation_version: NonEmptyString
+    analyzer_implementation_version: NonEmptyString
+    parser_versions: VersionMap
+    evidence_provider_contract_versions: VersionMap
+    analysis_contract_version: Literal[5] = 5
+    analysis_schema_version: Literal[2] = 2
+    result_schema_version: Literal[1] = 1
+    interface_schema_version: Literal[9] = 9
+    applicability_version: Literal[3] = 3
+    authorization_contract_version: Literal['authorization-authority.v1'] = 'authorization-authority.v1'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AnyExpression(ContractObject):
+    __definition__: ClassVar[str] = 'AnyExpression'
+    expressions: tuple[ApplicabilityExpression, ...]
+    operator: Literal['any'] = 'any'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AuthorizationAuthorityView(ContractObject):
+    __definition__: ClassVar[str] = 'AuthorizationAuthorityView'
+    id: CanonicalId
+    issuers: tuple[CanonicalId, ...]
+    capabilities: tuple[CanonicalId, ...]
+    revocation_digest: Digest
+    authorizations: tuple[AuthorizationReference, ...]
+    contract_version: Literal['authorization-authority.v1'] = 'authorization-authority.v1'
+    kind: Literal['authorization-authority-view'] = 'authorization-authority-view'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class AuthorizationReference(ContractObject):
+    __definition__: ClassVar[str] = 'AuthorizationReference'
+    id: CanonicalId
+    capability: CanonicalId
+    digest: Digest
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CanonicalModuleDeclaration(ContractObject):
+    __definition__: ClassVar[str] = 'CanonicalModuleDeclaration'
+    id: CanonicalId
+    role: Literal['core', 'router', 'workflow', 'profile', 'topic', 'reference']
+    level: Literal['MUST', 'SHOULD', 'PROFILE', 'REFERENCE']
+    applies_when: NonEmptyString
+    does_not_apply_when: NonEmptyString
+    requires: tuple[CanonicalId, ...]
+    specializes: tuple[CanonicalId, ...]
+    verification: NonEmptyString
+    kind: Literal['canonical-module'] = 'canonical-module'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class CertificateHandle(ContractObject):
     __definition__: ClassVar[str] = 'CertificateHandle'
     id: CertificateId
     schema_version: Literal[1] = 1
     kind: Literal['certificate-handle'] = 'certificate-handle'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CertificateInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'CertificateInspectionResult'
+    certificate: ConsumerCoverageCertificate
+    kind: Literal['certificate-inspection-result'] = 'certificate-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CertificateProvenance(ContractObject):
+    __definition__: ClassVar[str] = 'CertificateProvenance'
+    generator: NonEmptyString
+    generated_at: NonEmptyString
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -781,6 +2830,121 @@ class ChangeDescriptor(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class ChangedPolicyUnit(ContractObject):
+    __definition__: ClassVar[str] = 'ChangedPolicyUnit'
+    policy: CanonicalId
+    change_kind: Literal['modification', 'addition', 'removal', 'move', 'split-predecessor', 'split-successor', 'merge-predecessor', 'merge-successor']
+    classification: Literal['unchanged', 'representation-only-candidate', 'possibly-semantically-changed', 'semantically-changed', 'unresolved']
+    accepted_representation_digest: Digest | None
+    proposed_representation_digest: Digest | None
+    accepted_structural_digest: Digest | None
+    proposed_structural_digest: Digest | None
+    accepted_semantic_revision: int | None
+    proposed_semantic_revision: int | None
+    semantic_state: Literal['accepted-unchanged', 'proposed', 'removed', 'unresolved']
+    scope: ReviewScope
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CompiledApplicabilityProgram(ContractObject):
+    __definition__: ClassVar[str] = 'CompiledApplicabilityProgram'
+    normalized_expression: ApplicabilityExpression
+    referenced_facts: tuple[CanonicalId, ...]
+    schema_digest: Digest
+    dependency_digest: Digest
+    language_version: Literal[1] = 1
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CompiledPolicyImpactSemantics(ContractObject):
+    __definition__: ClassVar[str] = 'CompiledPolicyImpactSemantics'
+    edge_id: EdgeId
+    source: CanonicalId
+    consumer: CanonicalId
+    relation: Literal['normative-consumer', 'router-projection', 'prompt-projection', 'template-projection', 'reference-projection', 'fixture-projection', 'enforcement-suite-projection', 'documentation-projection']
+    applicability_program: CompiledApplicabilityProgram
+    source_scope: ReviewScope | None
+    consumer_scope: ReviewScope | None
+    evidence_owner: CanonicalId
+    rationale: NonEmptyString
+    declaration_source: NonEmptyString
+    dependency_fingerprint: Digest
+    propagation: Literal['source-to-consumer'] = 'source-to-consumer'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CompleteResult(ContractResult):
+    __definition__: ClassVar[str] = 'CompleteResult'
+    handle: AnalysisHandle
+    base_snapshot: SnapshotHandle
+    proposed_snapshot: SnapshotHandle
+    context: AnalysisContext
+    changes: tuple[ChangeDescriptor, ...]
+    changed_units: tuple[ChangedPolicyUnit, ...]
+    coverage_certificates: tuple[CertificateHandle, ...]
+    fact_observations: tuple[FactObservation, ...]
+    dispositions: tuple[DispositionRecord, ...]
+    reading_plan: tuple[ReadingPlanEntry, ...]
+    completion: CompletionProof
+    provenance: AnalysisVersions
+    status: Literal['complete'] = 'complete'
+    summary: str | None = None
+    kind: Literal['complete-result'] = 'complete-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CompletionProof(ContractObject):
+    __definition__: ClassVar[str] = 'CompletionProof'
+    required_coverage_subjects: tuple[CanonicalId, ...]
+    certificate_subjects: tuple[CanonicalId, ...]
+    reached_consumer_obligations: tuple[ObligationId, ...]
+    disposition_obligations: tuple[ObligationId, ...]
+    required_fact_requirements: tuple[FactRequirementId, ...]
+    observed_fact_requirements: tuple[FactRequirementId, ...]
+    non_consumer_obligations_resolved: Literal[True] = True
+    applicability_resolved: Literal[True] = True
+    authorization_valid: Literal[True] = True
+    evidence_valid: Literal[True] = True
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ConsumerCoverageCertificate(ContractObject):
+    __definition__: ClassVar[str] = 'ConsumerCoverageCertificate'
+    handle: CertificateHandle
+    coverage_view: CoverageAuthorityViewHandle
+    requirement: CoverageRequirementHandle
+    attestation: CoverageAttestationHandle
+    subject: CanonicalId
+    owner: CanonicalId
+    semantic_revision: int
+    horizon_digest: Digest
+    relationship_digest: Digest
+    evidence_digests: tuple[Digest, ...]
+    coverage_contract_version: NonEmptyString
+    attestation_contract_version: NonEmptyString
+    provenance: CertificateProvenance
+    kind: Literal['consumer-coverage-certificate'] = 'consumer-coverage-certificate'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class ConsumerDispositionSubmission(ContractObject):
     __definition__: ClassVar[str] = 'ConsumerDispositionSubmission'
     obligation_id: ObligationId
@@ -789,6 +2953,42 @@ class ConsumerDispositionSubmission(ContractObject):
     evidence: tuple[EvidenceReference, ...]
     fingerprint: DecisionFingerprint
     kind: Literal['consumer-disposition'] = 'consumer-disposition'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ConsumerReviewContract(ContractObject):
+    __definition__: ClassVar[str] = 'ConsumerReviewContract'
+    id: CanonicalId
+    version: int
+    permitted_dispositions: tuple[Literal['updated', 'reviewed-no-change', 'not-applicable', 'blocked'], ...]
+    evidence_contract: CanonicalId
+    authorization_capability: CanonicalId
+    semantics: NonEmptyString
+    kind: Literal['consumer-review-contract'] = 'consumer-review-contract'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ConsumerReviewObligationReadingReason(ContractObject):
+    __definition__: ClassVar[str] = 'ConsumerReviewObligationReadingReason'
+    obligation: ObligationId
+    kind: Literal['consumer-review-obligation'] = 'consumer-review-obligation'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ContainsExpression(ContractObject):
+    __definition__: ClassVar[str] = 'ContainsExpression'
+    fact: CanonicalId
+    value: ScalarValue
+    operator: Literal['contains'] = 'contains'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -823,11 +3023,66 @@ class CoverageAttestationHandle(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class CoverageAttestationInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'CoverageAttestationInspectionResult'
+    attestation: CoverageAttestation
+    kind: Literal['coverage-attestation-inspection-result'] = 'coverage-attestation-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class CoverageAttestationSubmission(ContractObject):
     __definition__: ClassVar[str] = 'CoverageAttestationSubmission'
     obligation_id: ObligationId
     attestation: CoverageAttestation
     kind: Literal['coverage-attestation'] = 'coverage-attestation'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CoverageAuditRequirement(ContractObject):
+    __definition__: ClassVar[str] = 'CoverageAuditRequirement'
+    handle: CoverageRequirementHandle
+    coverage_view: CoverageAuthorityViewHandle
+    subject: CanonicalId
+    owner: CanonicalId
+    semantic_revision: int
+    relationship_kinds: tuple[CanonicalId, ...]
+    horizon: CanonicalId
+    derived_from_snapshot: SnapshotHandle | None = None
+    kind: Literal['coverage-audit-requirement'] = 'coverage-audit-requirement'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CoverageAuthorityView(ContractObject):
+    __definition__: ClassVar[str] = 'CoverageAuthorityView'
+    handle: CoverageAuthorityViewHandle
+    subject: CanonicalId
+    owner: CanonicalId
+    semantic_revision: int
+    representation_digest: Digest
+    structural_digest: Digest
+    relationship_kinds: tuple[CanonicalId, ...]
+    relationship_fingerprints: tuple[Mapping[str, object], ...]
+    relationship_kind_contract_version: int
+    relationship_provider_contract_digest: Digest
+    applicability_program_digests: tuple[Digest, ...]
+    fact_schema_digest: Digest
+    horizon: Mapping[str, object]
+    identity_resolution_contract_version: NonEmptyString
+    coverage_contract_version: NonEmptyString
+    attestation_contract_version: NonEmptyString
+    authorization_contract_version: NonEmptyString
+    evidence_provider_contract_version: NonEmptyString
+    applicability_language_version: Literal[1] = 1
+    kind: Literal['coverage-authority-view'] = 'coverage-authority-view'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -845,11 +3100,52 @@ class CoverageAuthorityViewHandle(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class CoverageAuthorityViewInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'CoverageAuthorityViewInspectionResult'
+    coverage_view: CoverageAuthorityView
+    kind: Literal['coverage-authority-view-inspection-result'] = 'coverage-authority-view-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CoverageDecision(ContractObject):
+    __definition__: ClassVar[str] = 'CoverageDecision'
+    attestation: CoverageAttestation
+    authorization: AuthorizationReference
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CoverageHorizonMember(ContractObject):
+    __definition__: ClassVar[str] = 'CoverageHorizonMember'
+    id: CanonicalId
+    roles: tuple[CanonicalId, ...]
+    fingerprint: Digest
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class CoverageRequirementHandle(ContractObject):
     __definition__: ClassVar[str] = 'CoverageRequirementHandle'
     id: CoverageRequirementId
     schema_version: Literal[1] = 1
     kind: Literal['coverage-requirement-handle'] = 'coverage-requirement-handle'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class CoverageRequirementInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'CoverageRequirementInspectionResult'
+    requirement: CoverageAuditRequirement
+    kind: Literal['coverage-requirement-inspection-result'] = 'coverage-requirement-inspection-result'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -879,12 +3175,62 @@ class DecisionFingerprint(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class DispositionRecord(ContractObject):
+    __definition__: ClassVar[str] = 'DispositionRecord'
+    obligation_id: ObligationId
+    kind: Literal['consumer-disposition', 'impact-disposition']
+    result: NonEmptyString
+    rationale: NonEmptyString
+    evidence: tuple[EvidenceReference, ...]
+    authorization: AuthorizationReference
+    fingerprint: DecisionFingerprint
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class EqualsExpression(ContractObject):
+    __definition__: ClassVar[str] = 'EqualsExpression'
+    fact: CanonicalId
+    value: ScalarValue
+    operator: Literal['equals'] = 'equals'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class EvidenceReference(ContractObject):
     __definition__: ClassVar[str] = 'EvidenceReference'
     id: CanonicalId
     digest: Digest
     provider_contract: CanonicalId
     provider_contract_version: NonEmptyString
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ExistsExpression(ContractObject):
+    __definition__: ClassVar[str] = 'ExistsExpression'
+    fact: CanonicalId
+    operator: Literal['exists'] = 'exists'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class FactObservation(ContractObject):
+    __definition__: ClassVar[str] = 'FactObservation'
+    handle: FactObservationHandle
+    requirement: FactRequirementHandle
+    value: FactValue
+    evidence: tuple[EvidenceReference, ...]
+    authorization: AuthorizationReference
+    kind: Literal['fact-observation'] = 'fact-observation'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -902,11 +3248,103 @@ class FactObservationHandle(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class FactObservationInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'FactObservationInspectionResult'
+    observation: FactObservation
+    kind: Literal['fact-observation-inspection-result'] = 'fact-observation-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class FactRequirement(ContractObject):
+    __definition__: ClassVar[str] = 'FactRequirement'
+    handle: FactRequirementHandle
+    fact: CanonicalId
+    fact_semantic_revision: int
+    fact_contract_digest: Digest
+    context: AnalysisContextHandle
+    value_contract: FactValueContract
+    answer_contract: CanonicalId
+    evidence_contract: CanonicalId
+    authorization_capability: CanonicalId
+    prompt: NonEmptyString
+    dependent_programs: tuple[NonEmptyString, ...]
+    kind: Literal['fact-requirement'] = 'fact-requirement'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class FactRequirementHandle(ContractObject):
     __definition__: ClassVar[str] = 'FactRequirementHandle'
     id: FactRequirementId
     schema_version: Literal[1] = 1
     kind: Literal['fact-requirement-handle'] = 'fact-requirement-handle'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class FactRequirementInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'FactRequirementInspectionResult'
+    requirement: FactRequirement
+    kind: Literal['fact-requirement-inspection-result'] = 'fact-requirement-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class FactValueContract(ContractObject):
+    __definition__: ClassVar[str] = 'FactValueContract'
+    type: Literal['boolean', 'enum', 'string', 'string-set', 'enum-set', 'canonical-id']
+    nullable: bool
+    states: tuple[Literal['known', 'known-absent'], ...] = field(default_factory=lambda: ('known', 'known-absent'))
+    values: tuple[str, ...] | None = None
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class GeneralSelectionReason(ContractObject):
+    __definition__: ClassVar[str] = 'GeneralSelectionReason'
+    kind: Literal['routing-fact', 'requires', 'specializes', 'changed-policy', 'question', 'audit-coverage', 'unmapped-normative-change', 'structured-scope-analysis-unsupported']
+    source: CanonicalId | None = None
+    fact: CanonicalId | None = None
+    edge: EdgeId | None = None
+    question: CanonicalId | None = None
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class GitSnapshotInspection(ContractObject):
+    __definition__: ClassVar[str] = 'GitSnapshotInspection'
+    handle: SnapshotHandle
+    tree: GitObjectId
+    commit: GitObjectId
+    scope: tuple[NonEmptyString, ...]
+    exclusions: tuple[SnapshotExclusion, ...]
+    submodules: tuple[SnapshotEntry, ...]
+    versions: AnalysisVersions
+    kind: Literal['git-snapshot-inspection'] = 'git-snapshot-inspection'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ImmutableAuthorityHandle(ContractObject):
+    __definition__: ClassVar[str] = 'ImmutableAuthorityHandle'
+    kind: CanonicalId
+    id: CanonicalId
+    schema_version: int
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -927,9 +3365,57 @@ class ImpactDispositionSubmission(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class ImpactTraceReference(ContractObject):
+    __definition__: ClassVar[str] = 'ImpactTraceReference'
+    id: ImpactTraceId
+    graph: Literal['accepted', 'proposed']
+    applicability: Literal['true', 'false', 'unknown']
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class InExpression(ContractObject):
+    __definition__: ClassVar[str] = 'InExpression'
+    fact: CanonicalId
+    values: tuple[ScalarValue, ...]
+    operator: Literal['in'] = 'in'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class InspectCall(ContractObject):
     __definition__: ClassVar[str] = 'InspectCall'
     handle: InspectableHandle
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class InspectNextOperation(ContractObject):
+    __definition__: ClassVar[str] = 'InspectNextOperation'
+    target: CanonicalId
+    snapshot: SnapshotHandle
+    operation: Literal['inspect'] = 'inspect'
+    request_kind: Literal['inspect'] = 'inspect'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ManifestSnapshotInspection(ContractObject):
+    __definition__: ClassVar[str] = 'ManifestSnapshotInspection'
+    handle: SnapshotHandle
+    source_kind: Literal['dirty-git', 'non-git']
+    scope: tuple[NonEmptyString, ...]
+    entries: tuple[SnapshotEntry, ...]
+    versions: AnalysisVersions
+    kind: Literal['manifest-snapshot-inspection'] = 'manifest-snapshot-inspection'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -948,6 +3434,65 @@ class NavigationHandle(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class NavigationInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'NavigationInspectionResult'
+    navigation: NavigationResult
+    provenance: AnalysisVersions
+    kind: Literal['navigation-inspection-result'] = 'navigation-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class NotExpression(ContractObject):
+    __definition__: ClassVar[str] = 'NotExpression'
+    expression: ApplicabilityExpression
+    operator: Literal['not'] = 'not'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class Obligation(ContractObject):
+    __definition__: ClassVar[str] = 'Obligation'
+    id: ObligationId
+    kind: Literal['consumer-review', 'impact-review', 'lifecycle-impact-review', 'audit-coverage', 'unmapped-normative-change']
+    target: CanonicalId
+    scope: ReviewScope
+    reasons: tuple[SelectionReason, ...]
+    state: Literal['required', 'resolved', 'blocked']
+    permitted_submissions: tuple[Literal['consumer-disposition', 'impact-disposition', 'coverage-attestation'], ...]
+    fingerprint: DecisionFingerprint
+    applicability: Literal['true', 'false', 'unknown', 'not-declared'] | None = None
+    review_contract: ConsumerReviewContract | None = None
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class PendingResult(ContractResult):
+    __definition__: ClassVar[str] = 'PendingResult'
+    handle: AnalysisHandle
+    context: AnalysisContext
+    changes: tuple[ChangeDescriptor, ...]
+    changed_units: tuple[ChangedPolicyUnit, ...]
+    obligations: tuple[Obligation, ...]
+    fact_requirements: tuple[FactRequirement, ...]
+    reading_plan: tuple[ReadingPlanEntry, ...]
+    next_operations: tuple[NextOperation, ...]
+    provenance: AnalysisVersions
+    status: Literal['needs-action'] = 'needs-action'
+    summary: str | None = None
+    kind: Literal['pending-result'] = 'pending-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class PolicyHandle(ContractObject):
     __definition__: ClassVar[str] = 'PolicyHandle'
     id: CanonicalId
@@ -959,9 +3504,77 @@ class PolicyHandle(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class PolicyImpactSelectionReason(ContractObject):
+    __definition__: ClassVar[str] = 'PolicyImpactSelectionReason'
+    source: CanonicalId
+    edge: EdgeId
+    relation: CanonicalId
+    evidence_owner: CanonicalId
+    traces: tuple[ImpactTraceReference, ...]
+    kind: Literal['policy-impact-edge'] = 'policy-impact-edge'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class PolicyInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'PolicyInspectionResult'
+    policy: PolicyHandle
+    declaration: CanonicalModuleDeclaration | PolicyUnitDeclaration
+    representation_digest: Digest
+    structural_digest: Digest
+    provenance: ProvenanceRecord
+    kind: Literal['policy-inspection-result'] = 'policy-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class PolicySummary(ContractObject):
+    __definition__: ClassVar[str] = 'PolicySummary'
+    handle: PolicyHandle
+    authority: Literal['normative', 'projection', 'contextual', 'evidence']
+    scope: ReviewScope
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class PolicyUnitDeclaration(ContractObject):
+    __definition__: ClassVar[str] = 'PolicyUnitDeclaration'
+    id: CanonicalId
+    module: CanonicalId
+    heading_path: tuple[NonEmptyString, ...]
+    semantic_revision: int
+    lifecycle: Literal['active'] = 'active'
+    aliases: tuple[CanonicalId, ...] | None = None
+    predecessors: tuple[CanonicalId, ...] | None = None
+    successors: tuple[CanonicalId, ...] | None = None
+    kind: Literal['policy-unit'] = 'policy-unit'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class PrepareCall(ContractObject):
     __definition__: ClassVar[str] = 'PrepareCall'
     request: AnalysisRequest
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ProvenanceRecord(ContractObject):
+    __definition__: ClassVar[str] = 'ProvenanceRecord'
+    source_id: CanonicalId
+    source_kind: Literal['manifest', 'generator', 'provider', 'canonical-document', 'sidecar']
+    locator: NonEmptyString
+    snapshot: SnapshotHandle
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -980,6 +3593,31 @@ class ProvideFactSubmission(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class ProviderAuthorityView(ContractObject):
+    __definition__: ClassVar[str] = 'ProviderAuthorityView'
+    id: CanonicalId
+    evidence_contracts: tuple[Mapping[str, object], ...]
+    providers: tuple[ProviderContractView, ...]
+    contract_version: Literal['provider-authority.v1'] = 'provider-authority.v1'
+    kind: Literal['provider-authority-view'] = 'provider-authority-view'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ProviderContractView(ContractObject):
+    __definition__: ClassVar[str] = 'ProviderContractView'
+    id: CanonicalId
+    contract_version: NonEmptyString
+    input_contract: CanonicalId
+    immutable_inputs: tuple[ImmutableAuthorityHandle, ...]
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class QueryCall(ContractObject):
     __definition__: ClassVar[str] = 'QueryCall'
     snapshot: SnapshotHandle
@@ -990,10 +3628,80 @@ class QueryCall(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class QueryNextOperation(ContractObject):
+    __definition__: ClassVar[str] = 'QueryNextOperation'
+    request_kind: Literal['route', 'read', 'related']
+    snapshot: SnapshotHandle
+    operation: Literal['query'] = 'query'
+    target: CanonicalId | None = None
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class Question(ContractObject):
+    __definition__: ClassVar[str] = 'Question'
+    id: CanonicalId
+    kind: Literal['applicability-fact', 'normative-classification', 'identity-resolution', 'scope-resolution']
+    prompt: NonEmptyString
+    state: Literal['required', 'answered', 'blocked']
+    permitted_answers: tuple[NonEmptyString, ...]
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class ReadRequest(ContractObject):
     __definition__: ClassVar[str] = 'ReadRequest'
     target: CanonicalId
     kind: Literal['read'] = 'read'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ReadResult(ContractResult):
+    __definition__: ClassVar[str] = 'ReadResult'
+    handle: NavigationHandle
+    policy: PolicySummary
+    content: str
+    requires: tuple[CanonicalId, ...]
+    specializes: tuple[CanonicalId, ...]
+    related: tuple[RelationshipSummary, ...]
+    next_operations: tuple[NextOperation, ...]
+    summary: str | None = None
+    kind: Literal['read-result'] = 'read-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class ReadingPlanEntry(ContractObject):
+    __definition__: ClassVar[str] = 'ReadingPlanEntry'
+    target: CanonicalId
+    scope: ReviewScope
+    authority: Literal['normative', 'projection', 'contextual', 'evidence']
+    reasons: tuple[ReadingPlanReason, ...]
+    state: Literal['selected', 'conditional', 'unresolved']
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RejectedResult(ContractResult):
+    __definition__: ClassVar[str] = 'RejectedResult'
+    code: CanonicalId
+    outcome: Literal['invalid', 'unavailable', 'unsupported', 'stale', 'unauthorized', 'incomplete']
+    message: NonEmptyString
+    details: Mapping[str, ScalarValue]
+    next_operations: tuple[NextOperation, ...]
+    target: CanonicalId | None = None
+    kind: Literal['rejected-result'] = 'rejected-result'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -1013,11 +3721,65 @@ class RelatedRequest(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class RelatedResult(ContractResult):
+    __definition__: ClassVar[str] = 'RelatedResult'
+    handle: NavigationHandle
+    target: CanonicalId
+    policy_unit_mapping: Mapping[str, object]
+    relationships: tuple[RelationshipSummary, ...]
+    next_operations: tuple[NextOperation, ...]
+    summary: str | None = None
+    kind: Literal['related-result'] = 'related-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class RelationshipHandle(ContractObject):
     __definition__: ClassVar[str] = 'RelationshipHandle'
     id: EdgeId
     snapshot: SnapshotHandle
     kind: Literal['relationship-handle'] = 'relationship-handle'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RelationshipInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'RelationshipInspectionResult'
+    relationship: RelationshipSummary
+    policy_semantics: CompiledPolicyImpactSemantics | None
+    provenance: ProvenanceRecord
+    kind: Literal['relationship-inspection-result'] = 'relationship-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RelationshipSummary(ContractObject):
+    __definition__: ClassVar[str] = 'RelationshipSummary'
+    handle: RelationshipHandle
+    source: CanonicalId
+    target: CanonicalId
+    relation: CanonicalId
+    groups: tuple[CanonicalId, ...]
+    direction: Literal['incoming', 'outgoing']
+    traversal_eligible: bool
+    applicability: Literal['true', 'false', 'unknown', 'not-declared']
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RequiresReadingReason(ContractObject):
+    __definition__: ClassVar[str] = 'RequiresReadingReason'
+    edge: EdgeId
+    source: CanonicalId
+    kind: Literal['requires'] = 'requires'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -1034,10 +3796,59 @@ class ResolveCall(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class ResolveNextOperation(ContractObject):
+    __definition__: ClassVar[str] = 'ResolveNextOperation'
+    request_kind: Literal['provide-fact', 'consumer-disposition', 'impact-disposition', 'coverage-attestation']
+    analysis: AnalysisHandle
+    operation: Literal['resolve'] = 'resolve'
+    target: CanonicalId | None = None
+    obligation_id: ObligationId | None = None
+    requirement_id: FactRequirementId | None = None
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class RouteRequest(ContractObject):
     __definition__: ClassVar[str] = 'RouteRequest'
     facts: FactSet
     kind: Literal['route'] = 'route'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RouteResult(ContractResult):
+    __definition__: ClassVar[str] = 'RouteResult'
+    handle: NavigationHandle
+    reading_plan: tuple[ReadingPlanEntry, ...]
+    unresolved_questions: tuple[Question, ...]
+    next_operations: tuple[NextOperation, ...]
+    summary: str | None = None
+    kind: Literal['route-result'] = 'route-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RoutingBaseReadingReason(ContractObject):
+    __definition__: ClassVar[str] = 'RoutingBaseReadingReason'
+    projection: CanonicalId
+    kind: Literal['routing-base'] = 'routing-base'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class RoutingRuleReadingReason(ContractObject):
+    __definition__: ClassVar[str] = 'RoutingRuleReadingReason'
+    rule: CanonicalId
+    facts: tuple[CanonicalId, ...]
+    kind: Literal['routing-rule'] = 'routing-rule'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -1057,11 +3868,64 @@ class SemanticProposal(ContractObject):
 
 
 @dataclass(frozen=True, slots=True)
+class SnapshotEntry(ContractObject):
+    __definition__: ClassVar[str] = 'SnapshotEntry'
+    path: NonEmptyString
+    entry_type: Literal['file', 'directory', 'symlink', 'gitlink', 'nested-repository']
+    mode: int
+    tracking: Literal['tracked', 'untracked', 'not-applicable']
+    inclusion: Literal['included', 'excluded']
+    reason: NonEmptyString
+    content_digest: Digest | None = None
+    symlink_target: str | None = None
+    symlink_resolution: Literal['not-followed', 'followed-contained', 'inert-escape'] | None = None
+    recorded_gitlink: GitObjectId | None = None
+    checked_out_revision: GitObjectId | None = None
+    nested_identity: NonEmptyString | None = None
+    nested_snapshot: SnapshotHandle | None = None
+    worktree_state: Literal['clean', 'dirty', 'diverged', 'dirty-and-diverged'] | None = None
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class SnapshotExclusion(ContractObject):
+    __definition__: ClassVar[str] = 'SnapshotExclusion'
+    path: NonEmptyString
+    reason: NonEmptyString
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
 class SnapshotHandle(ContractObject):
     __definition__: ClassVar[str] = 'SnapshotHandle'
     id: SnapshotId
     schema_version: Literal[2] = 2
     kind: Literal['snapshot-handle'] = 'snapshot-handle'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class SnapshotInspectionResult(ContractResult):
+    __definition__: ClassVar[str] = 'SnapshotInspectionResult'
+    snapshot: GitSnapshotInspection | ManifestSnapshotInspection
+    kind: Literal['snapshot-inspection-result'] = 'snapshot-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class SpecializesReadingReason(ContractObject):
+    __definition__: ClassVar[str] = 'SpecializesReadingReason'
+    edge: EdgeId
+    source: CanonicalId
+    kind: Literal['specializes'] = 'specializes'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -1087,36 +3951,107 @@ class WholeArtifactScope(ContractObject):
 
 
 _CLASS_BY_DEFINITION = MappingProxyType({
+    'AllExpression': AllExpression,
+    'AlwaysExpression': AlwaysExpression,
+    'AnalysisContext': AnalysisContext,
     'AnalysisContextHandle': AnalysisContextHandle,
+    'AnalysisContextInspectionResult': AnalysisContextInspectionResult,
     'AnalysisHandle': AnalysisHandle,
     'AnalysisRequest': AnalysisRequest,
+    'AnalysisState': AnalysisState,
+    'AnalysisVersions': AnalysisVersions,
+    'AnyExpression': AnyExpression,
+    'AuthorizationAuthorityView': AuthorizationAuthorityView,
+    'AuthorizationReference': AuthorizationReference,
+    'CanonicalModuleDeclaration': CanonicalModuleDeclaration,
     'CertificateHandle': CertificateHandle,
+    'CertificateInspectionResult': CertificateInspectionResult,
+    'CertificateProvenance': CertificateProvenance,
     'ChangeDescriptor': ChangeDescriptor,
+    'ChangedPolicyUnit': ChangedPolicyUnit,
+    'CompiledApplicabilityProgram': CompiledApplicabilityProgram,
+    'CompiledPolicyImpactSemantics': CompiledPolicyImpactSemantics,
+    'CompleteResult': CompleteResult,
+    'CompletionProof': CompletionProof,
+    'ConsumerCoverageCertificate': ConsumerCoverageCertificate,
     'ConsumerDispositionSubmission': ConsumerDispositionSubmission,
+    'ConsumerReviewContract': ConsumerReviewContract,
+    'ConsumerReviewObligationReadingReason': ConsumerReviewObligationReadingReason,
+    'ContainsExpression': ContainsExpression,
     'CoverageAttestation': CoverageAttestation,
     'CoverageAttestationHandle': CoverageAttestationHandle,
+    'CoverageAttestationInspectionResult': CoverageAttestationInspectionResult,
     'CoverageAttestationSubmission': CoverageAttestationSubmission,
+    'CoverageAuditRequirement': CoverageAuditRequirement,
+    'CoverageAuthorityView': CoverageAuthorityView,
     'CoverageAuthorityViewHandle': CoverageAuthorityViewHandle,
+    'CoverageAuthorityViewInspectionResult': CoverageAuthorityViewInspectionResult,
+    'CoverageDecision': CoverageDecision,
+    'CoverageHorizonMember': CoverageHorizonMember,
     'CoverageRequirementHandle': CoverageRequirementHandle,
+    'CoverageRequirementInspectionResult': CoverageRequirementInspectionResult,
     'DecisionDependency': DecisionDependency,
     'DecisionFingerprint': DecisionFingerprint,
+    'DispositionRecord': DispositionRecord,
+    'EqualsExpression': EqualsExpression,
     'EvidenceReference': EvidenceReference,
+    'ExistsExpression': ExistsExpression,
+    'FactObservation': FactObservation,
     'FactObservationHandle': FactObservationHandle,
+    'FactObservationInspectionResult': FactObservationInspectionResult,
+    'FactRequirement': FactRequirement,
     'FactRequirementHandle': FactRequirementHandle,
+    'FactRequirementInspectionResult': FactRequirementInspectionResult,
+    'FactValueContract': FactValueContract,
+    'GeneralSelectionReason': GeneralSelectionReason,
+    'GitSnapshotInspection': GitSnapshotInspection,
+    'ImmutableAuthorityHandle': ImmutableAuthorityHandle,
     'ImpactDispositionSubmission': ImpactDispositionSubmission,
+    'ImpactTraceReference': ImpactTraceReference,
+    'InExpression': InExpression,
     'InspectCall': InspectCall,
+    'InspectNextOperation': InspectNextOperation,
+    'ManifestSnapshotInspection': ManifestSnapshotInspection,
     'NavigationHandle': NavigationHandle,
+    'NavigationInspectionResult': NavigationInspectionResult,
+    'NotExpression': NotExpression,
+    'Obligation': Obligation,
+    'PendingResult': PendingResult,
     'PolicyHandle': PolicyHandle,
+    'PolicyImpactSelectionReason': PolicyImpactSelectionReason,
+    'PolicyInspectionResult': PolicyInspectionResult,
+    'PolicySummary': PolicySummary,
+    'PolicyUnitDeclaration': PolicyUnitDeclaration,
     'PrepareCall': PrepareCall,
+    'ProvenanceRecord': ProvenanceRecord,
     'ProvideFactSubmission': ProvideFactSubmission,
+    'ProviderAuthorityView': ProviderAuthorityView,
+    'ProviderContractView': ProviderContractView,
     'QueryCall': QueryCall,
+    'QueryNextOperation': QueryNextOperation,
+    'Question': Question,
     'ReadRequest': ReadRequest,
+    'ReadResult': ReadResult,
+    'ReadingPlanEntry': ReadingPlanEntry,
+    'RejectedResult': RejectedResult,
     'RelatedRequest': RelatedRequest,
+    'RelatedResult': RelatedResult,
     'RelationshipHandle': RelationshipHandle,
+    'RelationshipInspectionResult': RelationshipInspectionResult,
+    'RelationshipSummary': RelationshipSummary,
+    'RequiresReadingReason': RequiresReadingReason,
     'ResolveCall': ResolveCall,
+    'ResolveNextOperation': ResolveNextOperation,
     'RouteRequest': RouteRequest,
+    'RouteResult': RouteResult,
+    'RoutingBaseReadingReason': RoutingBaseReadingReason,
+    'RoutingRuleReadingReason': RoutingRuleReadingReason,
     'SemanticProposal': SemanticProposal,
+    'SnapshotEntry': SnapshotEntry,
+    'SnapshotExclusion': SnapshotExclusion,
     'SnapshotHandle': SnapshotHandle,
+    'SnapshotInspectionResult': SnapshotInspectionResult,
+    'SpecializesReadingReason': SpecializesReadingReason,
     'StructuredScope': StructuredScope,
     'WholeArtifactScope': WholeArtifactScope,
 })
@@ -1124,6 +4059,7 @@ _CLASS_BY_DEFINITION = MappingProxyType({
 
 AnalysisContextId: TypeAlias = str
 AnalysisId: TypeAlias = str
+ApplicabilityExpression: TypeAlias = AlwaysExpression | AllExpression | AnyExpression | NotExpression | EqualsExpression | InExpression | ContainsExpression | ExistsExpression
 CanonicalId: TypeAlias = str
 CertificateId: TypeAlias = str
 CoverageAttestationId: TypeAlias = str
@@ -1135,101 +4071,61 @@ FactObservationId: TypeAlias = str
 FactRequirementId: TypeAlias = str
 FactValue: TypeAlias = Mapping[str, object]
 FactSet: TypeAlias = Mapping[str, FactValue]
+GitObjectId: TypeAlias = str
+ImpactTraceId: TypeAlias = str
 InspectableHandle: TypeAlias = SnapshotHandle | NavigationHandle | AnalysisHandle | PolicyHandle | RelationshipHandle | CertificateHandle | CoverageAuthorityViewHandle | CoverageRequirementHandle | CoverageAttestationHandle | AnalysisContextHandle | FactRequirementHandle | FactObservationHandle
+InspectionResult: TypeAlias = SnapshotInspectionResult | PolicyInspectionResult | RelationshipInspectionResult | NavigationInspectionResult | CertificateInspectionResult | CoverageAuthorityViewInspectionResult | CoverageRequirementInspectionResult | CoverageAttestationInspectionResult | AnalysisContextInspectionResult | FactRequirementInspectionResult | FactObservationInspectionResult | AnalysisState
 NavigationId: TypeAlias = str
+NavigationResult: TypeAlias = RouteResult | ReadResult | RelatedResult
+NextOperation: TypeAlias = QueryNextOperation | ResolveNextOperation | InspectNextOperation
 NonEmptyString: TypeAlias = str
 ObligationId: TypeAlias = str
 QueryRequest: TypeAlias = RouteRequest | ReadRequest | RelatedRequest
+ReadingPlanReason: TypeAlias = ConsumerReviewObligationReadingReason | RoutingBaseReadingReason | RoutingRuleReadingReason | RequiresReadingReason | SpecializesReadingReason
 ReviewScope: TypeAlias = StructuredScope | WholeArtifactScope
+ScalarValue: TypeAlias = bool | int | str | None
+SelectionReason: TypeAlias = GeneralSelectionReason | PolicyImpactSelectionReason
 SnapshotId: TypeAlias = str
 Submission: TypeAlias = ProvideFactSubmission | ConsumerDispositionSubmission | ImpactDispositionSubmission | CoverageAttestationSubmission
-
-
-@dataclass(frozen=True, slots=True)
-class ContractResult:
-    _value: Mapping[str, object]
-
-    @classmethod
-    def from_value(cls, value: dict[str, object]):
-        return cls(_freeze(value))
-
-    @property
-    def kind(self) -> str:
-        return str(self._value['kind'])
-
-    def as_contract(self) -> dict[str, object]:
-        return _thaw(self._value)
-
-
-class RouteResult(ContractResult):
-    pass
-
-class ReadResult(ContractResult):
-    pass
-
-class RelatedResult(ContractResult):
-    pass
-
-class PendingResult(ContractResult):
-    pass
-
-class CompleteResult(ContractResult):
-    pass
-
-class RejectedResult(ContractResult):
-    pass
-
-class SnapshotInspectionResult(ContractResult):
-    pass
-
-class PolicyInspectionResult(ContractResult):
-    pass
-
-class RelationshipInspectionResult(ContractResult):
-    pass
-
-class NavigationInspectionResult(ContractResult):
-    pass
-
-class CertificateInspectionResult(ContractResult):
-    pass
-
-class CoverageAuthorityViewInspectionResult(ContractResult):
-    pass
-
-class CoverageRequirementInspectionResult(ContractResult):
-    pass
-
-class CoverageAttestationInspectionResult(ContractResult):
-    pass
-
-class AnalysisContextInspectionResult(ContractResult):
-    pass
-
-class FactRequirementInspectionResult(ContractResult):
-    pass
-
-class FactObservationInspectionResult(ContractResult):
-    pass
+VersionMap: TypeAlias = Mapping[str, NonEmptyString]
 
 
 QueryResult: TypeAlias = RouteResult | ReadResult | RelatedResult | RejectedResult
-ContractInspectionResult: TypeAlias = SnapshotInspectionResult | PolicyInspectionResult | RelationshipInspectionResult | NavigationInspectionResult | CertificateInspectionResult | CoverageAuthorityViewInspectionResult | CoverageRequirementInspectionResult | CoverageAttestationInspectionResult | AnalysisContextInspectionResult | FactRequirementInspectionResult | FactObservationInspectionResult | RejectedResult
+ContractInspectionResult: TypeAlias = SnapshotInspectionResult | PolicyInspectionResult | RelationshipInspectionResult | NavigationInspectionResult | CertificateInspectionResult | CoverageAuthorityViewInspectionResult | CoverageRequirementInspectionResult | CoverageAttestationInspectionResult | AnalysisContextInspectionResult | FactRequirementInspectionResult | FactObservationInspectionResult | AnalysisState | RejectedResult
 
 __all__ = (
+    'AllExpression',
+    'AlwaysExpression',
+    'AnalysisContext',
     'AnalysisContextHandle',
     'AnalysisContextId',
     'AnalysisContextInspectionResult',
     'AnalysisHandle',
     'AnalysisId',
     'AnalysisRequest',
+    'AnalysisState',
+    'AnalysisVersions',
+    'AnyExpression',
+    'ApplicabilityExpression',
+    'AuthorizationAuthorityView',
+    'AuthorizationReference',
     'CanonicalId',
+    'CanonicalModuleDeclaration',
     'CertificateHandle',
     'CertificateId',
     'CertificateInspectionResult',
+    'CertificateProvenance',
     'ChangeDescriptor',
+    'ChangedPolicyUnit',
+    'CompiledApplicabilityProgram',
+    'CompiledPolicyImpactSemantics',
     'CompleteResult',
+    'CompletionProof',
+    'ConsumerCoverageCertificate',
     'ConsumerDispositionSubmission',
+    'ConsumerReviewContract',
+    'ConsumerReviewObligationReadingReason',
+    'ContainsExpression',
     'ContractInspectionResult',
     'ContractObject',
     'ContractResult',
@@ -1238,58 +4134,103 @@ __all__ = (
     'CoverageAttestationId',
     'CoverageAttestationInspectionResult',
     'CoverageAttestationSubmission',
+    'CoverageAuditRequirement',
+    'CoverageAuthorityView',
     'CoverageAuthorityViewHandle',
     'CoverageAuthorityViewId',
     'CoverageAuthorityViewInspectionResult',
+    'CoverageDecision',
+    'CoverageHorizonMember',
     'CoverageRequirementHandle',
     'CoverageRequirementId',
     'CoverageRequirementInspectionResult',
     'DecisionDependency',
     'DecisionFingerprint',
     'Digest',
+    'DispositionRecord',
     'EdgeId',
+    'EqualsExpression',
     'EvidenceReference',
+    'ExistsExpression',
+    'FactObservation',
     'FactObservationHandle',
     'FactObservationId',
     'FactObservationInspectionResult',
+    'FactRequirement',
     'FactRequirementHandle',
     'FactRequirementId',
     'FactRequirementInspectionResult',
     'FactSet',
     'FactValue',
+    'FactValueContract',
+    'GeneralSelectionReason',
+    'GitObjectId',
+    'GitSnapshotInspection',
+    'ImmutableAuthorityHandle',
     'ImpactDispositionSubmission',
+    'ImpactTraceId',
+    'ImpactTraceReference',
+    'InExpression',
     'InspectCall',
+    'InspectNextOperation',
     'InspectableHandle',
+    'InspectionResult',
+    'ManifestSnapshotInspection',
     'NavigationHandle',
     'NavigationId',
     'NavigationInspectionResult',
+    'NavigationResult',
+    'NextOperation',
     'NonEmptyString',
+    'NotExpression',
+    'Obligation',
     'ObligationId',
     'PendingResult',
     'PolicyHandle',
+    'PolicyImpactSelectionReason',
     'PolicyInspectionResult',
+    'PolicySummary',
+    'PolicyUnitDeclaration',
     'PrepareCall',
+    'ProvenanceRecord',
     'ProvideFactSubmission',
+    'ProviderAuthorityView',
+    'ProviderContractView',
     'QueryCall',
+    'QueryNextOperation',
     'QueryRequest',
     'QueryResult',
+    'Question',
     'ReadRequest',
     'ReadResult',
+    'ReadingPlanEntry',
+    'ReadingPlanReason',
     'RejectedResult',
     'RelatedRequest',
     'RelatedResult',
     'RelationshipHandle',
     'RelationshipInspectionResult',
+    'RelationshipSummary',
+    'RequiresReadingReason',
     'ResolveCall',
+    'ResolveNextOperation',
     'ReviewScope',
     'RouteRequest',
     'RouteResult',
+    'RoutingBaseReadingReason',
+    'RoutingRuleReadingReason',
+    'ScalarValue',
+    'SelectionReason',
     'SemanticProposal',
+    'SnapshotEntry',
+    'SnapshotExclusion',
     'SnapshotHandle',
     'SnapshotId',
     'SnapshotInspectionResult',
+    'SpecializesReadingReason',
     'StructuredScope',
     'Submission',
+    'VersionMap',
     'WholeArtifactScope',
     'decode_contract',
 )

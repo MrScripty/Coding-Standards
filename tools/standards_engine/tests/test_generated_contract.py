@@ -50,15 +50,15 @@ class GeneratedContractTest(unittest.TestCase):
         }
         self.assertEqual(dict(generated.RESULT_KIND_TO_DEFINITION), expected_results)
 
-        expected_inputs = {
+        expected_definitions = {
             name: schema["$defs"][name]
-            for name in generate_contract._input_definitions(schema)
+            for name in generate_contract._public_definitions(schema)
         }
         self.assertEqual(
-            dict(generated.INPUT_DEFINITION_SCHEMAS),
-            expected_inputs,
+            dict(generated.DEFINITION_SCHEMAS),
+            expected_definitions,
         )
-        for name, contract_names in generated.INPUT_FIELD_NAMES.items():
+        for name, contract_names in generated.FIELD_NAMES.items():
             with self.subTest(definition=name):
                 request_type = getattr(generated, name)
                 self.assertEqual(
@@ -95,10 +95,34 @@ class GeneratedContractTest(unittest.TestCase):
         mutations = (
             ("type", lambda value: value["$defs"]["RelatedRequest"]["properties"]["transitive"].update(type="string")),
             ("default", lambda value: value["$defs"]["RelatedRequest"]["properties"]["transitive"].update(default=True)),
+            ("minimum", lambda value: value["$defs"]["SemanticProposal"]["properties"]["proposed_semantic_revision"].update(minimum=2)),
             ("const", lambda value: value["$defs"]["ReadRequest"]["properties"]["kind"].update(const="read-v2")),
             ("variant", lambda value: value["$defs"]["Submission"]["oneOf"].pop()),
         )
         for label, mutate in mutations:
+            with self.subTest(label=label):
+                candidate = copy.deepcopy(schema)
+                mutate(candidate)
+                self.assertNotEqual(
+                    generate_contract._python_projection(candidate),
+                    baseline,
+                )
+
+        result_mutations = (
+            (
+                "result-type",
+                lambda value: value["$defs"]["RouteResult"]["properties"][
+                    "summary"
+                ].update(type="integer"),
+            ),
+            (
+                "result-required",
+                lambda value: value["$defs"]["RouteResult"]["required"].append(
+                    "summary"
+                ),
+            ),
+        )
+        for label, mutate in result_mutations:
             with self.subTest(label=label):
                 candidate = copy.deepcopy(schema)
                 mutate(candidate)
@@ -127,6 +151,19 @@ class GeneratedContractTest(unittest.TestCase):
         decoded = generated.decode_contract("Submission", value)
         self.assertIsInstance(decoded, generated.ProvideFactSubmission)
         self.assertEqual(decoded.as_contract(), value)
+
+    def test_generated_models_enforce_schema_constraints_and_result_shape(self) -> None:
+        with self.assertRaises(ValueError):
+            generated.SemanticProposal(
+                policy="workflow.planning.written-plan-applicability",
+                accepted_semantic_revision=1,
+                proposed_semantic_revision=0,
+                intent="Exercise the generated minimum constraint.",
+                structural_digest="sha256:" + "a" * 64,
+            )
+
+        with self.assertRaises(ValueError):
+            generated.RouteResult.from_value({"kind": "route-result"})
 
     def test_generated_agent_tools_expose_every_public_operation(self) -> None:
         value = json.loads(

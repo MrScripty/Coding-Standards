@@ -4,12 +4,12 @@
 
 **Current phase:** A1 acceptance boundary repair II
 
-**Next slice:** commit the repaired candidate boundary and obtain an independent
+**Next slice:** commit the repaired implementation and obtain an independent
 acceptance review of its exact commit and tree
 
 **Acceptance status:** `pending`
 
-**Candidate repair II implementation boundary:** commit
+**Rejected repair II implementation boundary:** commit
 `714ba23fb5186b549ab44865d36c77509dbf654a`, tree
 `d5fa6ceed1aa35ec83fe1073f0c0a8818658cc1b`; evidence in
 [A1 boundary repair II candidate](reports/a1-boundary-repair-ii-candidate.md)
@@ -62,10 +62,10 @@ repository mutation, and external-project application outside A1.
 | A1 | Every canonical corpus member, module ID, alias, document path, `Requires` edge, and `Specializes` edge is loaded through one neutral metadata API, and every inventoried consumer uses that API without a parallel production loader. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](reports/milestone-1-neutral-metadata-cutover.md) |
 | A2 | Clean Git, dirty/non-Git, untracked-file, file-mode, symlink, submodule, exclusion, interpretation-affecting semantic-contract version, and integrity-closure inputs produce deterministic immutable snapshot identities under the accepted serialization contract; implementation releases that preserve those contracts remain provenance. | `contract` | `not-applicable` | `automated` | `pending` | Snapshot-stable read and inspection evidence |
 | A3 | A typed agent can route from structured facts, receive canonical IDs, read canonical content, navigate declared relations, and inspect advertised handles through follow-up requests bound to the same immutable snapshot or analysis without supplying repository paths. | `user-workflow` | `not-applicable` | `automated` | `pending` | Route/read and cold-process inspection fixtures |
-| A4 | Policy-unit identity, accepted and proposed semantic state, move, split, merge, retirement, successor, alias, and unmapped normative-change rules preserve identity and produce the required typed outcomes without treating structure as semantic proof. | `contract` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
-| A5 | Modification, addition, removal, move, split, and merge select deterministic seeds, traverse the accepted/proposed relation union through the existing graph engine, retain unknown applicability, and generate every required scoped obligation. | `integration` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
-| A6 | Derived coverage requirements plus authorized attestations generate deterministic reusable certificates, reject stale or unaudited coverage, and never infer successful empty impact from absent edges or convert unknown applicability into true. | `contract` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
-| A7 | `prepare` and iterative `resolve` return a `CompleteResult` only when final reached consumer-obligation IDs equal valid disposition IDs, derived fact-requirement IDs equal valid observation requirement IDs, and every other obligation, authorization, and coverage condition is resolved. | `integration` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
+| A4 | Policy-unit identity, accepted and proposed semantic state, move, split, merge, retirement, successor, alias, and unmapped normative-change rules preserve identity and produce the required typed outcomes without treating structure as semantic proof. | `contract` | `not-applicable` | `automated` | `satisfied` | [Lifecycle impact evidence](reports/milestone-3-lifecycle-impact-selection.md) |
+| A5 | Modification, addition, removal, move, split, and merge select deterministic seeds, traverse the accepted/proposed relation union through the existing graph engine, retain unknown applicability, and generate every required scoped obligation. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer-obligation recovery](reports/milestone-3-consumer-obligation-recovery.md) |
+| A6 | Derived coverage requirements plus authorized attestations generate deterministic reusable certificates, reject stale or unaudited coverage, and never infer successful empty impact from absent edges or convert unknown applicability into true. | `contract` | `not-applicable` | `automated` | `satisfied` | [Coverage identity cutover](reports/milestone-3-coverage-identity-cutover.md) |
+| A7 | `prepare` and iterative `resolve` return a `CompleteResult` only when final reached consumer-obligation IDs equal valid disposition IDs, derived fact-requirement IDs equal valid observation requirement IDs, and every other obligation, authorization, and coverage condition is resolved. | `integration` | `not-applicable` | `automated` | `satisfied` | [Single-state implementation evidence](reports/milestone-4-single-state-acceptance.md) |
 | A8 | One canonical interface schema mechanically governs Python types, defaults, discriminants, nested request and submission variants, JSON validation, agent-tool definitions, examples, identity-bearing serialization, result variants, derived `next_operations`, and text rendering; projection drift fails verification. | `contract` | `not-applicable` | `automated` | `pending` | Generated-algebra semantic mutation fixtures |
 | A9 | Representative modification, addition, and removal changes complete through the real typed agent adapter; move, split, and merge behavioral fixtures pass; focused package tests and affected broad repository verification pass from one recorded clean tree. | `user-workflow` | `not-applicable` | `automated` | `pending` | Superseding final A1 acceptance report |
 

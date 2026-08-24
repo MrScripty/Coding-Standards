@@ -232,9 +232,8 @@ bytes. The domains are:
 ```text
 coding-standards:snapshot:v2
 coding-standards:navigation:v2
-coding-standards:packet:v4
 coding-standards:obligation:v2
-coding-standards:analysis-report:v3
+coding-standards:analysis:v2
 coding-standards:analysis-context:v1
 coding-standards:fact-requirement:v1
 coding-standards:fact-observation:v1
@@ -243,6 +242,10 @@ coding-standards:coverage-audit-requirement:v1
 coding-standards:coverage-attestation:v1
 coding-standards:consumer-coverage-certificate:v1
 ```
+
+Historical packet domain `coding-standards:packet:v4` and report domain
+`coding-standards:analysis-report:v3` were retired by the single-state cutover
+and are not current identity authority.
 
 Human summaries, text rendering, timestamps, logging IDs, display-only order,
 and derived `next_operations` are excluded. Certificate timestamps live only in
