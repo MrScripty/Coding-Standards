@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 0 exact-head start
+**Current phase:** Milestone 0 implementation
 
-**Next slice:** start the corrected M0 implementation from the transition head
+**Next slice:** complete the coordinated policy-impact v2 authority cutover
 
 **Acceptance status:** `pending`
 
@@ -40,6 +40,10 @@ fixture-scope authorization by the replan triggered at commit
 `fcf91257f00b1d9aeb8fdb3e70a2fad06db460ce`; reviewer report commit
 `1bb79e125a1362e1b666122efc78ce9a5599fe67`, tree
 `2e3bc506c53f68467923b129068a163635d668bf`
+
+**Current implementation base:** public-consumer admission-transition commit
+`95cb97babff778497857e9e6be44ddc81e446564`, tree
+`1d85875000ddbf75256a4ec85e12fffcf196e04f`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -426,7 +430,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -533,4 +537,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Planned`
+- Final status: `Active`

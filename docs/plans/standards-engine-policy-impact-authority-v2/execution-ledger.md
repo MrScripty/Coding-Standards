@@ -259,3 +259,15 @@
   while this transition is current `HEAD` with a clean worktree, bind its
   exact commit/tree as the renewed implementation base, and move the plan and
   M0 to `Active` before the preserved implementation is restored.
+
+## 2026-08-25 - Public-Contract Consumer Exact-Head Start
+
+- The public-consumer admission-transition commit
+  `95cb97babff778497857e9e6be44ddc81e446564`, tree
+  `1d85875000ddbf75256a4ec85e12fffcf196e04f`, is current `HEAD` and the
+  worktree is clean at start.
+- That exact transition is the current implementation base. The plan and M0
+  move from `Planned` to `Active` before preserved implementation work is
+  restored.
+- Implementation remains bounded by the corrected M0 write set. PIA2-008
+  remains active pending exact public-closure and conformance evidence.
