@@ -1014,3 +1014,27 @@ superseded by the discovery-admission transition in the active plan.
 - Sole next operation: Router-projection verifier recovery `start`. It must run
   while this transition is current `HEAD`, record its exact commit/tree, and
   only then move the plan and Milestone 1 to `Active`.
+
+## 2026-08-25 - Router-Projection Verifier Recovery Start
+
+- Admitted transition base: commit
+  `6020c151fa2395f07687933c56d56e62bbce7893`, tree
+  `98377f5e28522eac249227f6cbc67f985934a942`.
+- Start precondition: the transition was current `HEAD`, its direct parent was
+  the independent admission-report commit, and the worktree was clean.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted`.
+- Authorized implementation: modify only
+  `tools/standards_verifier/standards_verifier/policy_impact.py`. Retain graph
+  target identity, use canonical corpus membership for module targets, require
+  exact catalog provenance for executable projection targets, and delegate to
+  the existing strict Router projection loader.
+- Verification boundary: M1 must advance the complete checkpoint from
+  `METADATA.FIELD_COUNT` to the independently reproduced
+  `COVERAGE.STALE_ATTESTATION`. Coverage renewal and final green verification
+  remain Milestone 2 work.
+- Exclusions: tests, coverage, policy, graph/compiler/provider contracts,
+  generated artifacts, checker sources, A1b, and A2 remain unchanged.
+- Next operation: implement the one-path repair, run focused verification and
+  the two-stage checkpoint assertion, then commit it independently. Stop on
+  any different diagnostic or broader required change.
