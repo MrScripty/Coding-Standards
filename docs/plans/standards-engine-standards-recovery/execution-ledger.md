@@ -701,3 +701,24 @@ superseded by the discovery-admission transition in the active plan.
   obtain a new independent exact-tree admission. No transferred test may
   change before the accepted report, mechanical transition, and exact-head
   `start`.
+
+## 2026-08-25 - M1 Cardinality-Recovery Admission Transition
+
+- Reviewed candidate: commit
+  `882335b276a9e74024e60060b863c225f6299e91`, tree
+  `83e7b7e1614e52b822d9182cbceca95ecc43bf8c`.
+- Independent admission report: commit
+  `5b1d3fb3677702c97837697570ba91975421ec94`, tree
+  `189ae67bdd47672bd6637cab7ba14d992aa58471`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, and SESR-026 lifecycle fields. Scope, tasks, evidence,
+  `W/S/E/R`, tests, policy, relationships, runtime, fixtures, suites, prompts,
+  templates, generated artifacts, A1b, and A2 remain unchanged.
+- Lifecycle transition: the plan and Milestone 1 move from `Blocked` to
+  `Planned`; Milestone 0 remains `Accepted`.
+- Recovery boundary: exactly four protected tests are admitted to future `W`
+  mutation under their semantic replacement contracts. No test edit is
+  authorized by this transition.
+- Sole next operation: cardinality-recovery `start`. It must run while this
+  transition is current `HEAD`, record the exact transition commit/tree, and
+  only then move the plan and Milestone 1 to `Active`.

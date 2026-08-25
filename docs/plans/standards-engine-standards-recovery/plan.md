@@ -1,12 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 1 live-authority cardinality test recovery
+**Current phase:** Milestone 1 cardinality recovery ready for `start`
 
-**Next slice:** obtain independent admission for the bounded transfer of four
-protected live-authority tests from `R` to `W`; policy-impact relationship
-registration remains unavailable
+**Next slice:** run cardinality-recovery `start` while the admission transition
+is current `HEAD`; no test edit is yet authorized
 
 **Acceptance status:** `partial`
 
@@ -61,6 +60,14 @@ registration remains unavailable
 **M1 scope-recovery admission:** report commit
 `d4376c3e410841676a0a8d3711254067f875d493`, tree
 `db23d1a417dd1fa4322b078d71bc6d377ca210d1`
+
+**Reviewed M1 cardinality-recovery candidate:** commit
+`882335b276a9e74024e60060b863c225f6299e91`, tree
+`83e7b7e1614e52b822d9182cbceca95ecc43bf8c`
+
+**M1 cardinality-recovery admission:** report commit
+`5b1d3fb3677702c97837697570ba91975421ec94`, tree
+`189ae67bdd47672bd6637cab7ba14d992aa58471`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -712,7 +719,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Blocked` by live-authority cardinality test recovery admission
+**Status:** `Planned`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -867,4 +874,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`
