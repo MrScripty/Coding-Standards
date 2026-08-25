@@ -1,13 +1,12 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** independent discovery admission
+**Current phase:** Milestone 0 ready for `start`
 
-**Next slice:** independently review this revised plan for a discovery-only
-Milestone 0 that reproduces accepted A1 behavior and completes the pre-policy
-scope audit; policy implementation remains unavailable until a second post-audit
-exact-tree admission
+**Next slice:** `start` Milestone 0 historical reproduction and pre-policy
+scope audit from the admitted transition base; policy implementation remains
+unavailable until a second post-scope-audit admission
 
 **Acceptance status:** `pending`
 
@@ -19,15 +18,17 @@ exact-tree admission
 `2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
 `97c850ab718287007c1e1daac538f40869f71a1d`
 
-**Reviewed discovery planning snapshot:** `pending`; the independent report
-must bind the exact planning commit and tree it reviewed
+**Reviewed discovery planning snapshot:** commit
+`39d5210dcb32611c725052e67a918b4f88de9cc7`, tree
+`ef5f626c9bc2300c648fe7f3aa0d482c58d85233`
 
-**Discovery admission transition:** `pending`; the independent report must
-authorize only the mechanical lifecycle transition defined below
+**Discovery admission transition:** report commit
+`2deb5439c5493522a5fb390096994524cf0a556b`, tree
+`c1ef4a940c0f08bcd81d70f2d2517d09cb2b7d86`
 
-**Admitted discovery/audit base:** `pending`; this is the commit produced by
-the authorized transition, and Milestone 0 `start` must record its exact commit
-and tree before changing the plan to `Active`
+**Admitted discovery/audit base:** the current mechanical transition commit;
+Milestone 0 `start` must record its exact commit and tree before changing the
+plan to `Active`, and any intervening commit invalidates admission
 
 **Admitted policy-implementation base:** `pending`; this is the mechanical
 transition commit authorized by the post-scope-audit admission report, and Milestone
@@ -388,7 +389,7 @@ subject is `pre-policy-scope-audit-complete` with all known horizon members and
 missing consumer classes mapped to planned dispositions; no final coverage,
 external corpus, policy, verifier behavior, or A1 runtime changed.
 
-**Status:** `Blocked` pending independent discovery admission
+**Status:** `Planned`
 
 ### Milestone 1: Coordinated Standards Authority Cutover
 
@@ -586,9 +587,9 @@ different claim:
 
 ## Blockers
 
-- Independent discovery admission has not accepted the revised plan. No
-  Milestone 0 operation is available, and policy implementation requires a
-  separate post-scope-audit admission.
+- Milestone 0 is admitted but has not started. `start` from the current
+  transition commit is the sole available operation; policy implementation
+  still requires a separate post-scope-audit admission.
 - The JSON Schema equality disagreement remains intentionally unresolved until
   Milestone 0 records an independent reproduction.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -669,4 +670,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `pending`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`

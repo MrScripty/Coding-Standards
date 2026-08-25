@@ -198,3 +198,25 @@ superseded by the discovery-admission transition in the active plan.
   the retained plan-fixture checker as affected evidence.
 - Lifecycle result: the plan remains `Blocked`. Independent review of the new
   planning snapshot is the sole next operation.
+
+## 2026-08-24 - Discovery Admission Transition
+
+- Reviewed planning snapshot: commit
+  `39d5210dcb32611c725052e67a918b4f88de9cc7`, tree
+  `ef5f626c9bc2300c648fe7f3aa0d482c58d85233`.
+- Independent admission report: commit
+  `2deb5439c5493522a5fb390096994524cf0a556b`, tree
+  `c1ef4a940c0f08bcd81d70f2d2517d09cb2b7d86`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, and SESR-009 in `issues.md`. Scope, tasks, write/read
+  sets, objectives, evidence contracts, and all other issue dispositions are
+  unchanged.
+- Lifecycle transition: the plan and Milestone 0 move from `Blocked` to
+  `Planned`. Milestone 0 has not started.
+- Discovery/audit base: this mechanical transition commit. The subsequent
+  `start` operation must run while it remains `HEAD` and must record its exact
+  commit/tree before creating the `Active` state.
+- Excluded authority: no policy, Router, fixture, verifier, runtime, A1b, A2,
+  or other milestone work is admitted by this transition.
+- Sole next operation: `start` Milestone 0 historical reproduction and
+  pre-policy scope audit.
