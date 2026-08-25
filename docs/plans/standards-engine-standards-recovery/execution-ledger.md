@@ -306,3 +306,25 @@ superseded by the discovery-admission transition in the active plan.
   and equality uses exact named accepted-tree test invocations.
 - Lifecycle result: the plan and Milestone 0 remain `Blocked`. A superseding
   exact-tree M0 recovery review is the sole next operation.
+
+## 2026-08-24 - M0 Recovery Admission Transition
+
+- Reviewed candidate: commit
+  `a1dd7b562d84263cca4d0e8ad34770c2effbc7e7`, tree
+  `4b46dfbaa44e486d3291f1d679d2ab777c1f5b51`.
+- Independent admission report: commit
+  `048f6a75512ba89efbf042f07ef8b8dda3baa337`, tree
+  `5747e25c8d176e90444aa7b69200cc576f58c2b4`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, SESR-009, and SESR-023. Scope, evidence, tasks, write
+  sets, objectives, policy authority, and all other issue dispositions remain
+  unchanged.
+- Lifecycle transition: the plan and Milestone 0 move from `Blocked` to
+  `Planned`. Recovery has not started.
+- M0 recovery base: this mechanical transition commit. `start` must run while
+  it remains `HEAD` and record its exact commit/tree before creating the
+  `Active` state.
+- Excluded authority: inventory regeneration, policy admission, policy or
+  Router mutation, runtime work, A1b, and A2 remain unavailable until their
+  respective transitions and gates.
+- Sole next operation: `start` Milestone 0 generated-evidence recovery.

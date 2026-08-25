@@ -1,14 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 0 recovery replan; generated-evidence closure is
-blocked pending independent M0 recovery admission
+**Current phase:** Milestone 0 generated-evidence recovery ready for `start`
 
-**Next slice:** an independent reviewer authors only
-`reports/standards-recovery-m0-recovery-admission.md` against the exact blocked
-replan candidate; generated inventory refresh and policy implementation remain
-unavailable
+**Next slice:** `start` Milestone 0 recovery from the admitted transition base;
+policy admission and implementation remain unavailable
 
 **Acceptance status:** `partial`
 
@@ -31,6 +28,18 @@ unavailable
 **Admitted discovery/audit base:** commit
 `3082cd9432371071d63d4d6084c9eb15731e6495`, tree
 `32e06eef2dddf3e3e235bda7e28c3916fc18c761`
+
+**Reviewed M0 recovery candidate:** commit
+`a1dd7b562d84263cca4d0e8ad34770c2effbc7e7`, tree
+`4b46dfbaa44e486d3291f1d679d2ab777c1f5b51`
+
+**M0 recovery admission:** report commit
+`048f6a75512ba89efbf042f07ef8b8dda3baa337`, tree
+`5747e25c8d176e90444aa7b69200cc576f58c2b4`
+
+**Admitted M0 recovery base:** the current mechanical transition commit; M0
+recovery `start` must record its exact commit and tree before changing the plan
+to `Active`, and any intervening commit invalidates admission
 
 **Admitted policy-implementation base:** `pending`; this is the mechanical
 transition commit authorized by the post-scope-audit admission report, and Milestone
@@ -442,7 +451,7 @@ inventory is fresh and satisfies the admitted field-level delta invariant; no
 final coverage, external corpus, policy, verifier behavior, or A1 runtime
 changed.
 
-**Status:** `Blocked`
+**Status:** `Planned`
 
 ### Milestone 1: Coordinated Standards Authority Cutover
 
@@ -642,10 +651,9 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 reproduction and scope-audit evidence is complete, but its
-  generated-evidence closure is blocked pending the distinct M0 recovery
-  admission. Policy admission and implementation remain unavailable until M0
-  subsequently passes its gate.
+- Milestone 0 recovery is admitted but has not started. `start` from the current
+  transition commit is the sole available operation; policy admission and
+  implementation remain unavailable until M0 subsequently passes its gate.
 - The JSON Schema equality disagreement is independently reproduced and remains
   intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -726,4 +734,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`
