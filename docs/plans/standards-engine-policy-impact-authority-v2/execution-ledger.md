@@ -176,3 +176,21 @@
   implementation is preserved outside the governance candidate. No
   implementation resumes until a reviewer-owned fixture-scope admission report,
   constrained transition, and exact-head start establish a renewed base.
+
+## 2026-08-25 - Fixture-Closure Candidate Admission Rejection
+
+- Reviewed candidate: commit
+  `2dd151525060505fbb4dbf45f06cf0358aa1c52d`, tree
+  `935e2682568ab91cbe67d8ccc13e22e744ef2bd8`.
+- Standards and Specification review rejected admission because the mechanical
+  transition would have resolved PIA2-007 before implementation evidence
+  existed, the M0 write set omitted the graph package export changed by catalog
+  source removal, and the plan's Blockers section omitted its current
+  fixture-scope admission dependency.
+- Candidate `2dd15152...` is `Superseded` by the next exact governance
+  candidate. The correction keeps PIA2-007 active through implementation, adds
+  `tools/standards_graph/standards_graph/__init__.py` to M0, and records the
+  current admission blocker.
+- The accepted ADR, fixture design, production relationship inventory,
+  public-v10 scope, and coverage design are unchanged. Implementation remains
+  preserved and unavailable pending renewed exact-tree admission.

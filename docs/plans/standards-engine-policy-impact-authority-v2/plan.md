@@ -260,8 +260,10 @@ ambient historical authority.
    closure, supersession, exclusions, and preserved architecture.
 3. If accepted, one mechanical transition commit whose direct parent contains
    that report may change only this `plan.md`, this `execution-ledger.md`,
-   and this `issues.md`. It records the candidate/report identities, resolves
-   PIA2-007, and moves this plan and Milestone 0 from `Blocked` to `Planned`.
+   and this `issues.md`. It records the candidate/report identities and moves
+   this plan and Milestone 0 from `Blocked` to `Planned`. PIA2-007 remains
+   active until implementation produces its exact fixture and inference-removal
+   evidence.
 4. `start` is valid only while that transition is current `HEAD`. It records
    the exact transition commit/tree, establishes the renewed implementation
    base, and moves this plan and Milestone 0 to `Active` before the preserved
@@ -289,6 +291,7 @@ expected intermediate blocker.
 - `tools/standards_policy_impact/standards_policy_impact/model.py`
 - `tools/standards_policy_impact/tests/test_compiler.py`
 - `tools/standards_graph/README.md`
+- `tools/standards_graph/standards_graph/__init__.py`
 - `tools/standards_graph/standards_graph/repository.py`
 - `tools/standards_graph/tests/test_metadata_graph.py`
 - `tools/standards_analysis/standards_analysis/coverage.py`
@@ -448,6 +451,8 @@ accepts one exact clean candidate.
 
 ## Blockers
 
+- This plan and Milestone 0 remain blocked pending independent exact-tree
+  admission of the corrected fixture and graph-package write-set closure.
 - The standards-recovery plan remains blocked and provides no implementation
   fallback while this prerequisite is unresolved.
 
