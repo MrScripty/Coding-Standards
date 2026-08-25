@@ -1,0 +1,17 @@
+schema_version = 2
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:686d99c504ffc290db7f1f8bd038bc2c78da018ff948137d6a2f144979ebf5d1"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+explicit_exclusions = []
+rationale = "The exact profile.boundary.generated-contract.applicability coverage view was reviewed against the frozen provider-v3 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:ce911f272fcff1edc7519b3bb147d94529503301888c56f9878e7ae3b636e685"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+explicit_exclusions = []
+rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view was reviewed against the frozen provider-v3 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"

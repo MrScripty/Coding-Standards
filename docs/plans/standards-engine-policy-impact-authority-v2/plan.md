@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Active`
+**Plan status:** `Implemented`
 
-**Current phase:** Milestone 1 coverage freeze and certification
+**Current phase:** Milestone 1 exact-tree verification
 
-**Next slice:** freeze the v2 authority and certify current coverage
+**Next slice:** commit one clean candidate and obtain independent acceptance
 
 **Acceptance status:** `pending`
 
@@ -94,8 +94,8 @@ or result-algebra redesign, and it does not activate A2.
 | PIA2-A4 | Graph edges and policy semantic records have equal identity sets, and graph composition uses the policy-impact provider for supplemental nodes, groups, and edges with no separate catalog source. | `integration` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) graph composition evidence |
 | PIA2-A5 | Verifier and coverage consume the compiled authority; no catalog TOML parsing or relation/path compatibility switch remains outside `standards_policy_impact`. | `integration` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) dependency and behavior evidence |
 | PIA2-A6 | A1 v10 public closure is reachable from the four operations, excludes `PolicyImpactDeclaration` and `CompiledPolicyImpactSemantics`, and returns typed operation-shaped relationship semantics. | `contract` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) generated and operation-closure evidence |
-| PIA2-A7 | Old v9 handles and states are explicitly unsupported; v10 query, prepare, resolve, inspect, persistence, and genuine cold-process reconstruction use the accepted version identities with no compatibility fallback. | `system` | `not-applicable` | `automated` | `pending` | Pending migration and cold-process evidence |
-| PIA2-A8 | One post-freeze certification pass derives current subjects and requirements mechanically and proves exact active-policy-unit/requirement/attestation/certificate equality, with no stale, duplicate, extra, missing, or blocked subject. Predecessor presence remains generated migration provenance and cannot change certification behavior or identity. | `integration` | `not-applicable` | `automated` | `pending` | Pending coverage-freeze evidence |
+| PIA2-A7 | Old v9 handles and states are explicitly unsupported; v10 query, prepare, resolve, inspect, persistence, and genuine cold-process reconstruction use the accepted version identities with no compatibility fallback. | `system` | `not-applicable` | `automated` | `satisfied` | [Prerequisite candidate](reports/prerequisite-candidate.md) version and cold-process evidence |
+| PIA2-A8 | One post-freeze certification pass derives current subjects and requirements mechanically and proves exact active-policy-unit/requirement/attestation/certificate equality, with no stale, duplicate, extra, missing, or blocked subject. Predecessor presence remains generated migration provenance and cannot change certification behavior or identity. | `integration` | `not-applicable` | `automated` | `satisfied` | [Current coverage certification](reports/certify-current-coverage.md) and [prerequisite candidate](reports/prerequisite-candidate.md) |
 | PIA2-A9 | One clean candidate passes focused package tests, generated freshness, registered declarative suites, the complete Python checkpoint, retained migration checks, and diff validation. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
 | PIA2-A10 | An independent reviewer accepts the exact candidate against repository Standards and this specification with no unresolved consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent acceptance report |
 
@@ -472,22 +472,22 @@ independently accept the prerequisite.
 
 **Tasks:**
 
-- [ ] Freeze contract, catalog, declarations, suites, provider, and horizon
+- [x] Freeze contract, catalog, declarations, suites, provider, and horizon
   before authoring any attestation.
-- [ ] Derive current subjects from the frozen canonical metadata corpus and
+- [x] Derive current subjects from the frozen canonical metadata corpus and
   current requirements from coverage compilation; obtain one authorized
   complete attestation for every current requirement through the same
   certification Interface.
-- [ ] Generate certificates and prove exact active-policy-unit, requirement,
+- [x] Generate certificates and prove exact active-policy-unit, requirement,
   attestation, and certificate subject equality.
-- [ ] Reproduce the admitted transition-provenance projection from predecessor
+- [x] Reproduce the admitted transition-provenance projection from predecessor
   commit `4baa63118a72fd0c185fc1d950dc149ab0c1808c`, tree
   `5a4d6d6786fa7a6ca8b373ca221a8eb1c90fa995`, and the frozen current
   canonical corpus. Require byte-identical output; any current-subject change is
   a re-plan trigger. Do not consume this projection during certification.
-- [ ] Finish the already admitted mutable-total test replacements using semantic
+- [x] Finish the already admitted mutable-total test replacements using semantic
   identity and cause-set assertions after coverage is valid.
-- [ ] Run all focused suites, generated checks, registered declarative suites,
+- [x] Run all focused suites, generated checks, registered declarative suites,
   complete Python checkpoint, retained migration checks, and diff validation.
 - [ ] Commit one clean candidate and obtain independent Standards/specification
   acceptance bound to its exact commit and tree.
@@ -500,7 +500,7 @@ record per subject; transition provenance reproduces exactly but does not
 influence certification; no consumer is blocked; and an independent report
 accepts one exact clean candidate.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ## Blockers
 
@@ -543,4 +543,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Active`
+- Final status: `Implemented`

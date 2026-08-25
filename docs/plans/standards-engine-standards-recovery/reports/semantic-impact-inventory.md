@@ -214,47 +214,45 @@ No applicability may be inferred from explanatory prose or path names.
 | Missing-fact fixture | absent | Produce unresolved/invalid routing instead of a smaller route | `pending-required` |
 | Planning and implementation prompts | registered projections | Consume Router output and unresolved facts, not a copied static module list | `pending-required` |
 
-## Missing Current Coverage Authority
+## Current Coverage Authority And Remaining Recovery Gaps
 
-The following are known gaps at the planning base and must be resolved before
-policy mutation can be accepted:
+The policy-impact authority v2 prerequisite now compiles the current Router,
+Verification, Contracts, Architecture, Dependencies, Planning, and Generated
+Contract source-owned declarations through one typed provider. The Generated
+Contract profile is canonical, its Router rule and policy units resolve, and
+every active policy unit has one current requirement, attestation, and
+generated certificate after an independent horizon review.
 
-- Canonical Router node `router` exists and is an existing impact consumer, but
-  the executable `router-projection.toml` has no direct relationship and Router
-  has no outgoing source authority for the new policy.
-- Router has no policy-unit declaration source, outgoing impact source, or
-  coverage attestation for the materially changed Generated Contract heading.
-- Plan checkers are not current policy-impact nodes.
-- Verification, Contracts, Architecture, and Dependencies have no declaration
-  sources or coverage attestations for the proposed meanings.
-- The Generated Contract profile, its policy units, Router rule, fixtures,
-  suite, relationships, and attestation do not exist.
-- The canonical module corpus does not contain the future Generated Contract
-  profile.
-- The Documentation workflow and durable acceptance-report projections have
-  not been dispositioned for the new evidence and generated-contract policies.
-- Licensing is applicable because Draft 2020-12 documentation is selected as
-  authority; the reference-only decision is recorded, but the final audit must
-  confirm that no later slice expands the activity.
-- A1 package files are not current provider-v2 horizon members and are not
-  represented as reviewed policy-impact consumers for these new units. The
-  recovery's registered Python suites must name the exact selected read-only
-  package inputs.
-- Historical reports are not current provider-v2 horizon members. Their role
-  in semantic coverage must be represented by exact registered suite inputs
-  and source-owned relationships.
-- The full-codebase planning prompt and pull-request template are selected
-  read-only consumers that were omitted from the initial Milestone 1 read set.
-  The completed scope audit adds them with expected `reviewed-no-change`
-  dispositions.
-- Existing Planning coverage covers revision-1 units only and cannot certify
-  the new systemic-finding unit.
+The prerequisite certification also covers registered suite inputs, package
+consumers, historical reports, prompts, templates, Documentation, Licensing,
+and retained migration artifacts through the independent horizon. A consumer
+does not need to become a permanent semantic graph node merely to be audited.
+The full-codebase prompt, pull-request template, Documentation workflow, and
+reference-only Licensing activity retain the dispositions recorded in the
+consumer-disposition report.
 
-Milestone 0 audited the independent horizon rather than closing these gaps by
-listing only already-known consumers. Newly discovered consumers updated this
-inventory and the planned read set. After policy authority exists, the
-source-owned graph declaration and final disposition report are updated and
-analysis is rerun. The pre-policy audit is not accepted policy coverage.
+The retained migration consumers
+`evaluation/standards-effectiveness/check-plan-structure.sh` and
+`evaluation/standards-effectiveness/verify-plan-fixtures.sh` remain explicit
+audited references. Their source and behavior are unchanged; new policy
+enforcement remains owned by registered Python suites.
+
+This closes the prerequisite's missing-coverage authority, not standards
+recovery acceptance. The remaining recovery work is to:
+
+- independently accept the exact prerequisite tree and admit a recovery-resume
+  transition;
+- finish every unchecked Milestone 1 projection and disposition task without
+  changing frozen authority implicitly;
+- rerun semantic impact after any admitted authority change;
+- freeze the final recovery authority and renew coverage exactly once if its
+  dependency identities changed; and
+- independently accept the final standards-recovery tree.
+
+The original pre-policy audit remains planning provenance rather than a
+certificate. Empty impact results remain invalid without current independent
+coverage, and any new or changed horizon input after certification is a
+re-plan trigger.
 
 ## Required Final Evidence
 

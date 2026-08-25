@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Milestone 1 candidate evidence`
+**Status:** `Milestone 1 candidate evidence; prerequisite implemented`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -92,6 +92,15 @@ pre-policy scope audit remains the exact path authority.
 | Dependency and toolchain manifests | `not-applicable` | Recovery adds no third-party implementation dependency and incorporates no external files. The reference-only specification decision remains separately recorded. |
 
 ## Policy-Subject Reconciliation
+
+The separately governed policy-impact authority v2 prerequisite has replaced
+the shared compiler, graph, analysis, verifier, public-contract, and coverage
+projections used by this report. Its current certification proves exact
+policy-unit/requirement/attestation/certificate subject equality through one
+compiled Interface. This migration changes no six-policy consumer disposition
+below and does not accept standards recovery. Independent prerequisite
+acceptance and a separately admitted recovery-resume transition remain
+required.
 
 | Policy-unit source | Consumer projection result |
 | --- | --- |

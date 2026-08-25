@@ -1,0 +1,125 @@
+# Policy-Impact Authority V2 Prerequisite Candidate
+
+**Status:** `Implemented; independent acceptance pending`
+
+**Frozen authority base:** commit
+`e6d075b5fbc1558e69ff7aa3c6779d31b07142e8`, tree
+`650493a43a34de541ccc4906604219f3b0065e17`
+
+This report records the source-complete prerequisite boundary. It does not
+claim its own commit identity recursively. The independent acceptance report
+must bind the exact clean candidate commit and tree that contain this report.
+It does not admit standards-recovery implementation, A1b, or A2.
+
+## Implemented Result
+
+- One version 2 policy-impact authoring contract owns artifact kinds,
+  relationship kinds, target compatibility, groups, propagation, evidence,
+  graph contribution, policy semantics, provenance, and coverage
+  fingerprints.
+- Canonical metadata remains the policy-unit membership owner. The generic
+  graph engine remains policy-neutral. Graph composition, analysis, and
+  verification consume one `CompiledPolicyImpactSet` and do not parse the
+  supplemental catalog independently.
+- Public A1 version 10 exposes operation-shaped relationship inspection and
+  excludes compiler-internal declaration and semantic models. Old version 9
+  handles and persisted states are unsupported without a compatibility
+  fallback.
+- Every active policy unit in the frozen canonical corpus has exactly one
+  mechanically derived coverage requirement, one valid schema-v2 attestation,
+  and one generated certificate. Equality is proved over canonical subject
+  identity sets, not a mutable repository total.
+- The accepted predecessor transition projection remains non-authoritative
+  provenance. Certification does not load it or vary based on predecessor
+  presence.
+
+## Bound Coverage
+
+| Authority | Exact identity |
+| --- | --- |
+| Coverage horizon | `sha256:538c9ef051b79129beb5d471394d9c399c7e3c2882567c6aad4c16c1b4d62f43` |
+| Compiled declarations | `sha256:77d2e5d6c53f8cbdef44dd37c51534a1e0ec690222486f3f255adfa99f030b8c` |
+| Provider contract | `sha256:2a75ced97772f942b14574aca2c2f4aefca289372269d342c5ab38b25d10df98` |
+| Transition projection | `sha256:b36112c64cb480e9c226bb832ada05577fb2345811bc731c201375b9afaf6b1e` |
+
+Direct coverage compilation proved:
+
+```text
+active policy-unit subjects
+  == requirement subjects
+  == attestation subjects
+  == certificate subjects
+```
+
+No set contains a duplicate, stale, extra, missing, or blocked subject. Every
+attestation requirement handle equals the requirement derived from the frozen
+coverage view. The [certification evidence](certify-current-coverage.md)
+records the independent horizon review, evidence, authorization, and
+invalidation contract.
+
+## Version And Reconstruction Evidence
+
+- Query, prepare, resolve, and inspect reject version 9 handles as unsupported
+  before ordinary argument decoding can reinterpret them.
+- The persisted-state decoder and directory store reject old state and handle
+  versions.
+- A fresh process reconstructs persisted version 10 analysis state using only
+  public adapters and immutable authority references, then produces the same
+  inspection and successor-state behavior.
+- Test helpers derive current attestation sources from the canonical registry.
+  They do not embed the historical owner list or use Router facts as trusted
+  standards-change observations.
+
+## Verification
+
+The following commands passed against the source-complete worktree:
+
+```text
+python3 -m unittest discover -s tools/standards_applicability/tests
+python3 -m unittest discover -s tools/standards_metadata/tests
+python3 -m unittest discover -s tools/graph_engine/tests
+python3 -m unittest discover -s tools/standards_policy_impact/tests
+python3 -m unittest discover -s tools/standards_graph/tests
+python3 -m unittest discover -s tools/standards_analysis/tests
+python3 -m unittest discover -s tools/standards_engine/tests
+python3 -m unittest discover -s tools/standards_verifier/tests
+python3 tools/standards_engine/contracts/generate_contract.py --check
+python3 tools/standards_engine/contracts/validate_contracts.py
+python3 tools/standards_verifier/generate_inventory.py --check
+python3 tools/standards_verifier/verify.py --all
+python3 tools/standards_verifier/verify.py --complete
+python3 -m ruff check --no-cache tools/standards_engine/tests/test_analysis.py tools/standards_engine/tests/test_navigation.py
+git diff --check
+```
+
+Observed results were all green: every focused package test passed, generated
+contract and retained-checker inventories were fresh, contract examples and
+identity fixtures validated, all registered declarative suites passed, and the
+complete checkpoint passed every retained Bash migration checker. The Bash
+surface was not extended.
+
+The transition-provenance TSV was also regenerated through the predecessor's
+package Interfaces from exact commit
+`4baa63118a72fd0c185fc1d950dc149ab0c1808c`, tree
+`5a4d6d6786fa7a6ca8b373ca221a8eb1c90fa995`, and joined to the frozen current
+corpus. The regenerated bytes and SHA-256 match the admitted artifact exactly.
+
+## Write-Set And Scope Result
+
+- Current coverage declarations, registry, evidence report, focused coverage
+  tests, and prerequisite governance changes remain inside the Milestone 1
+  write set.
+- Frozen relationship, catalog, suite, horizon, module, policy-unit, and public
+  contract authority did not change after attestation work began.
+- No new Bash checker, compatibility loader, graph-engine policy behavior,
+  third-party dependency, A1b runtime design, or A2 authoring work was added.
+- Temporary predecessor worktrees and generated scratch files were removed;
+  no stash or task-created branch remains.
+
+## Acceptance Request
+
+An independent reviewer must review the exact clean candidate against
+repository Standards and this plan, verify the commit/tree identity, and
+author only `prerequisite-acceptance.md`. PIA2-A9, PIA2-A10, PIA2-006, final
+plan acceptance, and standards-recovery resumption remain pending until that
+review and the subsequent mechanical lifecycle transition.

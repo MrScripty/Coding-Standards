@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -149,14 +150,18 @@ def replace_once(root: Path, relative: str, old: str, new: str) -> None:
 
 
 def clear_coverage_attestations(root: Path) -> None:
-    empty = "schema_version = 1\nattestations = []\n"
-    for owner in ("workflow.planning", "workflow.commit"):
-        path = (
-            root
-            / "evaluation/standards-effectiveness/policy-coverage/attestations"
-            / f"{owner}.toml"
+    registry_path = (
+        root
+        / "evaluation/standards-effectiveness/policy-coverage/"
+        "attestation-sources.toml"
+    )
+    with registry_path.open("rb") as handle:
+        registry = tomllib.load(handle)
+    for source in registry["sources"]:
+        (root / source).write_text(
+            "schema_version = 2\nattestations = []\n",
+            encoding="utf-8",
         )
-        path.write_text(empty, encoding="utf-8")
 
 
 def add_fixture_policy(root: Path) -> None:
@@ -280,19 +285,19 @@ def coverage_attestation(obligation: dict[str, object]) -> dict[str, object]:
         "handle": {
             "kind": "coverage-attestation-handle",
             "id": "coverage-attestation:sha256:" + "0" * 64,
-            "schema_version": 1,
+            "schema_version": 2,
         },
         "requirement": {
             "kind": "coverage-requirement-handle",
             "id": requirement_id,
-            "schema_version": 1,
+            "schema_version": 2,
         },
         "conclusion": "complete",
         "evidence": [evidence],
         "explicit_exclusions": [],
         "rationale": "The bounded fixture horizon was reviewed completely.",
         "auditor_provenance": "standards.review.audit:typed-agent-fixture",
-        "schema_version": 1,
+        "schema_version": 2,
     }
     value["handle"]["id"] = contract_identity(SCHEMA, "CoverageAttestation", value)
     return value

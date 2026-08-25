@@ -1070,3 +1070,18 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: commit the exact governance candidate, obtain independent
   admission of the prerequisite plan and proposed ADR, and apply only the
   admitted lifecycle transition before runtime implementation.
+
+## 2026-08-25 - Policy-Impact Authority V2 Implementation Complete
+
+- The separately governed prerequisite has reached `Implemented` with one
+  compiled typed authority, public A1 v10 replacement, frozen current coverage,
+  exact transition provenance, and a green complete repository checkpoint.
+- This recovery remains `Blocked`. The prerequisite implementation is not yet
+  acceptance evidence and does not reactivate the superseded Router-only
+  repair or authorize any standards-recovery mutation.
+- SESR-030 remains active through independent exact-tree prerequisite
+  acceptance and a separately admitted recovery-resume transition.
+- Supersession: the prior next operation to admit the prerequisite plan and ADR
+  is complete historical authority. The current next operation is independent
+  acceptance of the exact prerequisite implementation candidate.
+- A1b and A2 remain inactive.

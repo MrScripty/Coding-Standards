@@ -318,3 +318,35 @@
   authority, authors only the admitted attestation registry/files, and proves
   subject equality through generated certificates. No relationship, horizon,
   suite, module, policy-unit, or public-contract mutation is authorized.
+
+## 2026-08-25 - Milestone 1 Implemented Boundary
+
+- Frozen base: commit `e6d075b5fbc1558e69ff7aa3c6779d31b07142e8`,
+  tree `650493a43a34de541ccc4906604219f3b0065e17`.
+- The attestation registry now resolves one owner-local schema-v2 source for
+  every active policy-unit owner. Every mechanically derived current
+  requirement has exactly one valid attestation and one generated certificate;
+  the four subject sets are equal with no stale, duplicate, extra, missing, or
+  blocked subject.
+- The authority freeze remained intact. The coverage horizon, compiled
+  declarations, and provider-contract digests remain exactly those recorded
+  in the freeze entry and the current certification report.
+- The transition-provenance projection was regenerated from predecessor commit
+  `4baa63118a72fd0c185fc1d950dc149ab0c1808c`, tree
+  `5a4d6d6786fa7a6ca8b373ca221a8eb1c90fa995`, through predecessor package
+  Interfaces and joined to the frozen current corpus. It is byte-identical to
+  the admitted TSV with SHA-256
+  `b36112c64cb480e9c226bb832ada05577fb2345811bc731c201375b9afaf6b1e`.
+  Certification does not read that projection.
+- All focused Python packages pass, including genuine separate-process state
+  reconstruction. Generated A1 projection freshness and contract validation
+  pass. The registered declarative boundary passes completely, and the
+  canonical complete checkpoint passes every retained migration checker.
+- PIA2-004 is resolved. PIA2-006 remains active until independent acceptance
+  confirms the exact candidate and transition-provenance boundary.
+- Lifecycle: source work is complete, so this plan and Milestone 1 move from
+  `Active` to `Implemented`. Acceptance remains pending; A1b, A2, and
+  standards-recovery implementation remain unavailable.
+- Next operation: commit one clean exact-tree candidate, then obtain the
+  reviewer-owned prerequisite acceptance report. No additional implementation
+  or authority mutation is authorized before that review.

@@ -1,0 +1,25 @@
+schema_version = 2
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:94247fe7d0a3b6a079f4992a74c476ff64daeadc3ae991d5a50a41918d8e490f"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+explicit_exclusions = []
+rationale = "The exact topic.contracts.generated-semantic-conformance coverage view was reviewed against the frozen provider-v3 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:a93be23bf30cae2f967a649c5171ac57aebfb0eccc8dacf0a286f8fc14dac636"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+explicit_exclusions = []
+rationale = "The exact topic.contracts.schema-dialect-and-vocabulary coverage view was reviewed against the frozen provider-v3 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:d39621cbaad0f29add3993a94f633678d3795b709e68b43abfb87258ee583e44"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+explicit_exclusions = []
+rationale = "The exact topic.contracts.identity-versus-instance-equality coverage view was reviewed against the frozen provider-v3 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"

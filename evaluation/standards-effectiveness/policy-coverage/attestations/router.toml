@@ -1,0 +1,9 @@
+schema_version = 2
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:d1c5349c04b6626fed3b398be2ebad777cc96739c9f0385437330ad0c45705c3"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+explicit_exclusions = []
+rationale = "The exact router.generated-contract-profile-applicability coverage view was reviewed against the frozen provider-v3 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"

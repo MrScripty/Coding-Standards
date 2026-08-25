@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import json
 import csv
+import json
 import shutil
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -120,16 +121,28 @@ class NavigationTest(unittest.TestCase):
         result = self.engine.inspect(InspectCall(self.engine.snapshot))
         value = self.assert_contract("SnapshotInspectionResult", result)
         scope = set(value["snapshot"]["scope"])
-
-        self.assertTrue(
-            {
-                "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
-                "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
-                "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
-                "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
-                "docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md",
-            }.issubset(scope)
+        registry_path = (
+            "evaluation/standards-effectiveness/policy-coverage/"
+            "attestation-sources.toml"
         )
+        with (REPO_ROOT / registry_path).open("rb") as handle:
+            registry = tomllib.load(handle)
+        attestation_sources = set(registry["sources"])
+        evidence_sources: set[str] = set()
+        for source in attestation_sources:
+            with (REPO_ROOT / source).open("rb") as handle:
+                declaration = tomllib.load(handle)
+            for attestation in declaration["attestations"]:
+                evidence_sources.update(attestation["evidence"])
+                evidence_sources.update(attestation["explicit_exclusions"])
+
+        expected = {
+            "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
+            registry_path,
+            *attestation_sources,
+            *evidence_sources,
+        }
+        self.assertTrue(expected.issubset(scope))
 
     def test_route_unknown_categories_remain_visible_and_invalid_facts_reject(
         self,
