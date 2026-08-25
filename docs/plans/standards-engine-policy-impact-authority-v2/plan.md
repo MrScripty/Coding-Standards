@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 0 implementation
+**Current phase:** Milestone 0 public-contract consumer replan admission
 
-**Next slice:** complete the coordinated policy-impact v2 authority cutover
+**Next slice:** obtain exact-tree admission for the omitted conformance-test consumer
 
 **Acceptance status:** `pending`
 
@@ -284,6 +284,32 @@ ambient historical authority.
    ADR, production relationship inventory, public-v10 scope, coverage design,
    A1b, or A2.
 
+## Milestone 0 Public-Contract Consumer Recovery Admission
+
+1. Preserve the interrupted implementation outside the governance candidate.
+   Commit only this plan, its ledger, and its issue record from clean replan
+   base commit `67773d0f3341359d4fb8f0d3996ceceaafebb808`, tree
+   `4b7ae0c5397279e1952b887277a077fa8e44035a`.
+2. An independent reviewer authors only
+   `reports/policy-impact-public-consumer-replan-admission.md`, binding the exact
+   governance candidate commit/tree and reviewing the one-file write-set
+   correction, public operation closure, exclusions, and preserved architecture.
+3. If accepted, one mechanical transition commit whose direct parent contains
+   that report may change only this `plan.md`, this `execution-ledger.md`, and
+   this `issues.md`. It records the candidate/report identities and moves this
+   plan and Milestone 0 from `Blocked` to `Planned`. PIA2-008 remains active
+   until implementation produces its exact conformance evidence.
+4. `start` is valid only while that transition is current `HEAD`. It records
+   the exact transition commit/tree, establishes the renewed implementation
+   base, and moves this plan and Milestone 0 to `Active` before the preserved
+   implementation is restored.
+5. The admission authorizes only
+   `tools/standards_engine/tests/test_applicability_contract.py`. The test must
+   compare runtime applicability language authority with the operation-reachable
+   `CoverageAuthorityView.applicability_language_version`; it must not retain or
+   recreate a public compiled-program type. The ADR, public-v10 shapes, A1b,
+   and A2 remain unchanged.
+
 ## Milestones
 
 ### Milestone 0: Coordinated Authority And Public Contract Cutover
@@ -329,6 +355,7 @@ expected intermediate blocker.
 - `tools/standards_engine/standards_engine/rendering.py`
 - `tools/standards_engine/standards_engine/tools.py`
 - `tools/standards_engine/tests/test_analysis.py`
+- `tools/standards_engine/tests/test_applicability_contract.py`
 - `tools/standards_engine/tests/test_generated_contract.py`
 - `tools/standards_engine/tests/test_navigation.py`
 - `tools/standards_engine/tests/test_rendering.py`
@@ -393,7 +420,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Active`
+**Status:** `Blocked` pending public-contract consumer recovery admission
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -461,6 +488,8 @@ accepts one exact clean candidate.
 
 ## Blockers
 
+- This plan and Milestone 0 are blocked pending independent exact-tree
+  admission of the omitted conformance-test consumer.
 - The standards-recovery plan remains blocked and provides no implementation
   fallback while this prerequisite is unresolved.
 
@@ -500,4 +529,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Active`
+- Final status: `Blocked`

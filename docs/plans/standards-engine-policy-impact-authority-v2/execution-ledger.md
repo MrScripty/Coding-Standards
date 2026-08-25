@@ -223,3 +223,22 @@
   restored.
 - Implementation remains bounded by the corrected M0 write set and fixture
   recovery admission. PIA2-007 remains active pending implementation evidence.
+
+## 2026-08-25 - Public-Contract Consumer Write-Set Replan
+
+- Trigger: the v10 public-closure cutover removes the compiler-internal
+  `CompiledApplicabilityProgram` definition, but the generated-contract
+  conformance consumer
+  `tools/standards_engine/tests/test_applicability_contract.py` directly reads
+  that definition and was omitted from M0's exact write set.
+- Independent design review selected the existing operation-reachable
+  `CoverageAuthorityView.applicability_language_version` as the correct public
+  Interface for runtime/schema conformance. Retaining the internal type or
+  adding repeated per-relationship version data is rejected.
+- The active decision is replaced by a one-file write-set correction. The
+  accepted ADR, public-v10 shapes, policy-impact architecture, fixture recovery,
+  coverage design, A1b exclusion, and A2 inactivity are unchanged.
+- Lifecycle: this plan and M0 return to `Blocked`. The interrupted
+  implementation is preserved outside the governance candidate and cannot
+  resume until a reviewer-owned exact-tree admission report, constrained
+  transition, and exact-head start establish a renewed base.
