@@ -1,13 +1,12 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 1 coordinated standards authority cutover ready for
-`start`
+**Current phase:** Milestone 1 coordinated standards authority cutover
 
-**Next slice:** `start` Milestone 1 from the admitted policy-implementation
-transition base; policy mutation remains unavailable until `start` records that
-exact base
+**Next slice:** author the exact non-overlapping policy headings and Generated
+Contract profile/Router projection, then validate locator and routing closure
+before adding semantic relationships
 
 **Acceptance status:** `partial`
 
@@ -51,9 +50,9 @@ exact base
 `2adc885202cadd668b8d0ba66bbd9f1f0015d414`, tree
 `1ecfa9f8be664576a1521b82bf7bfca78643f168`
 
-**Admitted policy-implementation base:** the current mechanical transition
-commit; Milestone 1 `start` must record its exact commit and tree before
-changing the plan to `Active`, and any intervening commit invalidates admission
+**Admitted policy-implementation base:** commit
+`59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
+`669b9d98b3c4baccc96e5bac29ceee06e532dda0`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -598,7 +597,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -665,9 +664,9 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 is accepted and Milestone 1 admission is applied. `start` from
-  the current transition commit is the sole available operation; policy
-  mutation remains unavailable until that exact base is recorded.
+- Milestone 0 is accepted and Milestone 1 started from the exact admitted
+  transition base. Only the admitted M1 write set and protected-consumer
+  contract are active; runtime, A1b, and A2 work remain unavailable.
 - The JSON Schema equality disagreement is independently reproduced and remains
   intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -753,4 +752,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

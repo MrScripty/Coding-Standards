@@ -449,3 +449,21 @@ superseded by the discovery-admission transition in the active plan.
   unavailable until their respective lifecycle gates.
 - Sole next operation: `start` Milestone 1 coordinated standards authority
   cutover.
+
+## 2026-08-24 - Milestone 1 Start
+
+- Admitted transition base: commit
+  `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
+  `669b9d98b3c4baccc96e5bac29ceee06e532dda0`.
+- Start precondition: the transition base was current `HEAD`, the worktree was
+  clean, and the policy-admission report parent chain resolved exactly.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted`.
+- Authorized work: the exact M1 write set under the admitted `W/S/E/R`
+  protected mapped-consumer contract, including the field-constrained generated
+  inventory update after suite inputs and documentation are final.
+- Excluded work: protected-consumer mutation, runtime packages, Bash behavior,
+  A1b, and A2.
+- Next operation: author the exact policy headings and Generated Contract
+  profile/Router projection, then validate locator and routing closure before
+  semantic relationship registration.
