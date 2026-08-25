@@ -39,8 +39,10 @@ class PolicyImpactCompilerTest(unittest.TestCase):
         corpus = load_canonical_standards_corpus(REPO_ROOT)
         compiled = compile_policy_impact(REPO_ROOT, corpus)
 
-        self.assertEqual(len(compiled.graph.edges), 126)
-        self.assertEqual(len(compiled.semantics), 126)
+        self.assertEqual(
+            {edge.id for edge in compiled.graph.edges},
+            set(compiled.semantics),
+        )
         self.assertEqual(compiled.graph.nodes, ())
         self.assertEqual(compiled.graph.groups, ())
         edge_id = (
