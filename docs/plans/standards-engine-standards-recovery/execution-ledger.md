@@ -591,3 +591,16 @@ superseded by the discovery-admission transition in the active plan.
 - Cleanup postcondition to prove after deletion: the branch ref is absent,
   only accepted `main` owns the active lineage, the worktree remains on `main`,
   and no task-created recovery ref remains.
+
+## 2026-08-24 - Commit-Message Rewrite Branch Cleanup
+
+- Removed branch: `recovery/pre-message-rewrite-20260824`, formerly at
+  `b32df3e58d67f760fd2ec2f747abce7fab629cd9`.
+- Terminal branch state: `superseded`; commit disposition:
+  `discard-authorized` under the committed source-to-accepted mapping above.
+- Postcondition: no local or remote-tracking branch contains the superseded
+  tip; `main` is the only local branch; the sole registered worktree remains on
+  accepted `main`; and no task-created recovery ref remains.
+- Active implementation state is unchanged: the admitted focused Router test
+  correction remains the sole uncommitted work and Milestone 1 remains
+  `Active`.
