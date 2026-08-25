@@ -1038,3 +1038,35 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: implement the one-path repair, run focused verification and
   the two-stage checkpoint assertion, then commit it independently. Stop on
   any different diagnostic or broader required change.
+
+## 2026-08-25 - Systemic Policy-Impact Authority Replan
+
+- Trigger boundary: commit `cb6abdb89afaa4fca25706cd42f621a8c762480f`,
+  tree `24328086a11f9370a615ff62254de9aa1d825931`.
+- The Router-only repair was stopped before verifier source mutation. No
+  invalid partial implementation remains in the worktree.
+- Trigger: retaining canonical target identity exposed the next verifier
+  rejection: registered schema and Python consumers were authored as
+  `reference-projection` even though they are implementation artifacts.
+- Systemic audit: the compiler accepts target identity without typed
+  compatibility, graph composition loads the catalog separately, the verifier
+  infers compatibility from paths, coverage reparses raw catalog TOML, and the
+  public v9 schema duplicates repository/compiler relation enums.
+- Migration inventory: every affected relationship has an exact retain or
+  reclassify disposition in the linked prerequisite. Migration totals remain
+  historical evidence and are not admitted as mutable runtime assertions.
+- Supersession: SESR-029, its one-file write transfer, its two-stage diagnostic
+  contract, the assumption that existing relation kinds suffice, and the
+  post-recovery-only contract-migration gate are `Superseded` by the
+  [Policy-Impact Authority V2 plan](../standards-engine-policy-impact-authority-v2/plan.md).
+- Replacement: one internal v2 policy-impact contract owns artifact kinds,
+  relationship kinds, relation/target compatibility, graph contribution,
+  semantics, provenance, and coverage fingerprints. Public A1 v10 removes
+  repository declaration and compiler-internal shapes from its operation
+  closure.
+- Lifecycle: this recovery and Milestone 1 return to `Blocked`. A2 remains
+  inactive. The broader A1b equality, dependency, storage, and result-algebra
+  redesign remains outside the prerequisite.
+- Next operation: commit the exact governance candidate, obtain independent
+  admission of the prerequisite plan and proposed ADR, and apply only the
+  admitted lifecycle transition before runtime implementation.

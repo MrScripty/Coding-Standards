@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 1 Router-projection verifier implementation
+**Current phase:** Policy-impact authority v2 prerequisite replan
 
-**Next slice:** implement and verify the admitted one-path shared-contract repair
+**Next slice:** obtain independent admission of the policy-impact authority v2 plan and ADR
 
 **Acceptance status:** `partial`
 
@@ -118,6 +118,9 @@
 **Authoring brief:**
 [Standards Recovery And Standards Engine A1b Redesign](../standards-verification-engine/reports/standards-engine-a1b-redesign-authoring-brief.md)
 
+**Recovery-enabling prerequisite:**
+[Policy-Impact Authority V2](../standards-engine-policy-impact-authority-v2/plan.md)
+
 ## Objective
 
 Recover the standards authority needed to govern a later Standards Engine A1b
@@ -128,9 +131,13 @@ Generated Contract routing explicit and mutually consistent across normative
 policy, semantic metadata, agent entry points, fixtures, and executable
 verification.
 
-This plan changes standards and their projections only. It does not design or
-implement A1b runtime behavior, reopen historical A1 acceptance, or activate
-controlled authoring Plan A2.
+This plan changes standards and their projections. A systemic relationship
+authority defect now blocks its final graph and coverage acceptance. The
+separate recovery-enabling
+[Policy-Impact Authority V2 plan](../standards-engine-policy-impact-authority-v2/plan.md)
+owns the narrow compiled-authority and public v10 replacement needed to restore
+that boundary. Broader A1b work remains excluded, historical A1 acceptance is
+unchanged, and controlled authoring Plan A2 remains inactive.
 
 ## Objective Acceptance
 
@@ -181,12 +188,14 @@ controlled authoring Plan A2.
 ### Out Of Scope
 
 - Any A1b runtime redesign, contract compiler, validator replacement,
-  immutable authority repository, public result-algebra migration, handle
-  migration, or compatibility implementation.
+  immutable authority repository, or unrelated public result-algebra work.
+  The exact policy-impact authority v2/public v10 prerequisite is owned only by
+  its linked plan and does not authorize broader A1b implementation here.
 - Any production edit under `tools/standards_engine/`, `tools/standards_analysis/`,
   `tools/standards_applicability/`, `tools/standards_policy_impact/`,
   `tools/standards_metadata/`, `tools/standards_graph/`, or
-  `tools/graph_engine/`.
+  `tools/graph_engine/` under this plan. The linked prerequisite owns its own
+  exact package write set.
 - Any test edit under those package trees except these exact test-only recovery
   paths listed in the active Milestone 1 or Milestone 2 `W`:
   `tools/standards_analysis/tests/test_routing.py`,
@@ -205,8 +214,10 @@ controlled authoring Plan A2.
   acceptance, repository apply, rollback, or recovery from Plan A2.
 - External-project baselines or Plan C.
 - Rewriting the historical A1 plan, acceptance report, or accepted tree.
-- Creating the A1b plan or superseding ADR before this recovery is independently
-  accepted.
+- Creating the broader A1b plan or ADR before this recovery is independently
+  accepted. The proposed policy-impact authority v2 ADR is the bounded
+  recovery-enabling exception and does not decide A1b equality, dependency,
+  storage, or general contract-compilation architecture.
 
 ## Constraints And Assumptions
 
@@ -247,10 +258,10 @@ controlled authoring Plan A2.
 - Existing policy-unit heading locators can represent each proposed unit after
   the named headings are added. Duplicate, ambiguous, overlapping, or
   non-resolving locators trigger re-planning before policy mutation.
-- Existing policy-impact relation kinds and the provider-v2 independent audit
-  horizon can represent the required consumers without runtime changes. A need
-  for a new relation kind, provider behavior, or compiler capability is a
-  re-plan trigger.
+- The former assumption that existing policy-impact relation kinds and split
+  provider paths could represent every consumer without runtime changes is
+  `Superseded`. The linked prerequisite must add typed implementation
+  relationships and one compiled provider before this recovery resumes.
 - Registered declarative suites executed by the Python standards verifier can
   enforce the new standards without changing A1 runtime packages or adding to
   the Bash surface. A missing Python capability requires coordination with the
@@ -278,6 +289,7 @@ controlled authoring Plan A2.
 | Selecting Draft 2020-12 as reference authority invokes Licensing even though no file is copied. The accepted activity is citation and comparison only, with provenance retained and no incorporated or redistributed third-party content. | Licensing | [Reference-only Licensing decision](reports/draft-2020-12-reference-licensing-decision.md) | Treating no-copy use as Licensing non-applicability |
 | Recovery enforcement uses registered Python declarative suites and adds no Bash checker or Bash-checker behavior. | Verification-engine migration | [Active verification-engine plan](../standards-verification-engine/plan.md) | Temporary Bash enforcement or duplicate migration authority |
 | Current and proposed impact results are evidence inputs, not completeness proof. Coverage and per-consumer dispositions are mandatory. | Planning and coverage authority | `workflows/planning.md` projection-completeness policy | Treating zero edges as no impact |
+| One compiled policy-impact authority and public v10 prerequisite must be independently accepted before this recovery resumes. | [Policy-Impact Authority V2 plan](../standards-engine-policy-impact-authority-v2/plan.md) | Systemic relation/target audit at `cb6abdb8` | Router-only verifier dispatch and post-recovery-only contract migration |
 
 ## Simplicity And Ownership Review
 
@@ -635,7 +647,12 @@ re-plan trigger. The former blanket prohibition on verifier implementation is
 coverage-provider implementation, checker source, A1b, or A2 change is
 admitted.
 
-### Milestone 1 Router-Projection Verifier Recovery Admission
+### Superseded Milestone 1 Router-Projection Verifier Recovery Admission
+
+**Lifecycle:** `Superseded` by the policy-impact authority v2 prerequisite after
+the admitted one-path repair exposed a systemic relation/target contract defect.
+The following text is retained as historical scope; it is not current
+implementation authority.
 
 The frozen M1 relationship authority validly declares the executable Router
 projection as a `router-projection` consumer. The policy-impact compiler
@@ -922,8 +939,8 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Active`; only the admitted Router-projection verifier source change
-is authorized
+**Status:** `Blocked` by the policy-impact authority v2 prerequisite; the
+Router-only source authorization is `Superseded`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -1045,8 +1062,10 @@ different claim:
 - A third-party dependency or a decision to implement standardized semantics
   becomes necessary during recovery. That decision belongs to later A1b
   planning under the recovered Dependencies policy.
-- Any A1b runtime, migration, persisted-state, contract-version, handle-version,
-  or A2 authoring requirement enters the implementation scope.
+- Any broader A1b equality, dependency, immutable-storage, general
+  contract-compiler, result-algebra, or A2 authoring requirement enters the
+  implementation scope. The exact policy-impact authority v2/public v10
+  prerequisite follows its separate admitted plan.
 - A milestone misses its acceptance gate, a lower-fidelity check is proposed
   for a higher-fidelity claim, or an independent reviewer cannot accept the
   exact tree.
@@ -1059,10 +1078,12 @@ attestations, shared prompts/templates, suite registry, active plan, and final
 candidate commit remain serial integration-owner writes. Independent reviewers
 may inspect immutable candidate trees and author only their named review report.
 
-## Subsequent A1b Planning Gate
+## Subsequent Broader A1b Planning Gate
 
-Only after Milestone 2 is independently accepted may a separate A1b plan and
-superseding ADR be created. That planning phase must, at minimum:
+Only after Milestone 2 is independently accepted may the broader A1b plan and
+ADR be created. The policy-impact authority v2 prerequisite is a bounded
+recovery-enabling replacement and does not satisfy this gate. The later A1b
+planning phase must, at minimum:
 
 - evaluate a mature Draft 2020-12 validator against an explicitly bounded local
   implementation option;
@@ -1084,4 +1105,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`
