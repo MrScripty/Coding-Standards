@@ -808,3 +808,19 @@ superseded by the discovery-admission transition in the active plan.
   branch contains the former tip, one worktree exists, the current tree does
   not retain superseded identities except this historical mapping, and the
   restored replan remains the only uncommitted work.
+
+## 2026-08-25 - Cardinality-Recovery Rewrite Cleanup
+
+- Mapping boundary: commit
+  `d8737103e3e757fe19885680e24212b365a0a738`, tree
+  `21b351101f523fee9d80e9f9451cb11c9ef6bc97`, records the complete rewrite
+  mapping and the restored coverage-gated sequencing replan.
+- Terminal cleanup: deleted temporary branch
+  `recovery/pre-cardinality-message-rewrite-20260825` after its former tip and
+  every selected commit/tree disposition were recorded.
+- Reachability result: only local branch `main` remains, no local or remote
+  branch contains former tip `eefeede8841478633c81547551e10b96fa0affbe`,
+  and the repository has one worktree.
+- Lifecycle result: the old range remains `discard-authorized`; the rewritten
+  range is the sole selected lineage. No stash, temporary worktree, recovery
+  ref, or uncommitted source change remains from the rewrite operation.
