@@ -1,12 +1,12 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 1 scope recovery ready for `start`
+**Current phase:** Milestone 1 focused Router projection test recovery
 
-**Next slice:** run M1 scope-recovery `start` from this transition commit and
-record its exact commit/tree before modifying the focused Router projection
-test
+**Next slice:** replace the focused Router projection test's global
+cardinality assertions with targeted `routing.boundaries` and Generated
+Contract rule semantics, then resume locator/routing validation
 
 **Acceptance status:** `partial`
 
@@ -646,7 +646,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -801,4 +801,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

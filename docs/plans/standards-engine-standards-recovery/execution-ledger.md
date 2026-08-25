@@ -533,3 +533,21 @@ superseded by the discovery-admission transition in the active plan.
 - Sole next operation: M1 scope-recovery `start`. It must run while this
   transition remains current `HEAD` and record its exact commit/tree before the
   focused test is modified.
+
+## 2026-08-24 - M1 Scope-Recovery Start
+
+- Admitted transition base after the authorized commit-message rewrite: commit
+  `c4e46d3b035531b6eb07dbf95ef143fbc0cd801b`, tree
+  `256b2203cbb83a0b719856103ab2c6a397a2246c`.
+- Start precondition: the transition was current `HEAD`, the worktree was
+  clean, and the rewritten candidate/report/transition parent chain and exact
+  bindings resolved.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted`.
+- Authorized recovery: modify only
+  `tools/standards_analysis/tests/test_routing.py` beyond the originally
+  admitted M1 paths, remove global projection cardinality assertions, and
+  assert the targeted boundary fact and Generated Contract rule semantics.
+- Next operation: implement that focused test correction, rerun all Standards
+  Analysis tests, and resume locator/routing validation if no other protected
+  consumer fails.
