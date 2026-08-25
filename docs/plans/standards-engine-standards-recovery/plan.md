@@ -1,13 +1,12 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 1 protected Router-consumer re-plan
+**Current phase:** Milestone 1 scope recovery ready for `start`
 
-**Next slice:** independently review and admit the exact addition of the
-protected Router projection test to `W`; only after admission, update that test
-to replace incidental cardinality assertions with the new fact/rule semantics
-and resume locator/routing validation
+**Next slice:** run M1 scope-recovery `start` from this transition commit and
+record its exact commit/tree before modifying the focused Router projection
+test
 
 **Acceptance status:** `partial`
 
@@ -54,6 +53,14 @@ and resume locator/routing validation
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
 `669b9d98b3c4baccc96e5bac29ceee06e532dda0`
+
+**Reviewed M1 scope-recovery candidate:** commit
+`7a571ed26a132056368ef465d6041910c5a6ed48`, tree
+`b1bd7994e9ab3ec8298b57755a285cdf2a72e9f6`
+
+**M1 scope-recovery admission:** report commit
+`d4376c3e410841676a0a8d3711254067f875d493`, tree
+`db23d1a417dd1fa4322b078d71bc6d377ca210d1`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -639,7 +646,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Blocked`
+**Status:** `Planned`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -794,4 +801,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`

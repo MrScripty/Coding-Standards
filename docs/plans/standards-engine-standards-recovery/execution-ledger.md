@@ -512,3 +512,24 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: verify and commit the blocked candidate, then obtain that
   exact-tree admission. Policy implementation remains unavailable until the
   constrained transition authorizes the one test path.
+
+## 2026-08-24 - M1 Scope-Recovery Admission Transition
+
+- Reviewed candidate: commit
+  `7a571ed26a132056368ef465d6041910c5a6ed48`, tree
+  `b1bd7994e9ab3ec8298b57755a285cdf2a72e9f6`.
+- Independent admission report: commit
+  `d4376c3e410841676a0a8d3711254067f875d493`, tree
+  `db23d1a417dd1fa4322b078d71bc6d377ca210d1`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, and SESR-009/SESR-025 lifecycle fields. Normative
+  policy, Router authority, focused tests, tasks, evidence, and every other
+  closure member remain unchanged.
+- Lifecycle transition: the plan and Milestone 1 move from `Blocked` to
+  `Planned`. Milestone 0 remains `Accepted`.
+- Scope recovery: only
+  `tools/standards_analysis/tests/test_routing.py` transfers from `R` to `W`;
+  `S`, `E`, `W union R`, and every other closure rule remain unchanged.
+- Sole next operation: M1 scope-recovery `start`. It must run while this
+  transition remains current `HEAD` and record its exact commit/tree before the
+  focused test is modified.
