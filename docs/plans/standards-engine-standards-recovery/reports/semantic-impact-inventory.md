@@ -65,8 +65,10 @@ Every selected consumer must receive exactly one final disposition:
 `pending-required` below means the implementation milestone must assign one of
 the four final dispositions. It is not a completion result.
 
-Likewise, `pre-policy-scope-audit-complete` permits policy-scope admission but
-does not satisfy a final disposition or any accepted coverage claim.
+Likewise, `pre-policy-scope-audit-complete` is a prerequisite for later
+policy-scope admission, but does not make that review available, satisfy a
+final disposition, or establish any accepted coverage claim. Policy admission
+remains unavailable until the Milestone 0 recovery and gate are complete.
 
 ## Proposed Policy Units
 

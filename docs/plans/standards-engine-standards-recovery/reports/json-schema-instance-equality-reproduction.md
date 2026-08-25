@@ -39,10 +39,19 @@ git rev-parse '2359a98740b6035a0414bfaf5427ceaa1301a1c8^{tree}'
 ```
 
 The resolved tree was exactly
-`97c850ab718287007c1e1daac538f40869f71a1d`. The temporary Python invocation
-used only accepted A1 modules and values already exercised by
-`tools/standards_engine/tests/test_generated_contract.py`. No external test
-corpus, dependency, copied vector, or permanent fixture was added.
+`97c850ab718287007c1e1daac538f40869f71a1d`. From that extracted-tree working
+directory, the exact local-behavior invocation was:
+
+```bash
+PYTHONPATH=. python3 -m unittest -v \
+  tools.standards_engine.tests.test_generated_contract.GeneratedContractTest.test_generated_unique_items_matches_canonical_serialization \
+  tools.standards_engine.tests.test_generated_contract.GeneratedContractTest.test_generated_const_and_enum_use_canonical_serialization
+```
+
+Expected and actual exit status was `0`; both named tests passed. The tests use
+only accepted A1 modules and the complete Boolean/integer and Unicode values
+shown below. No external test corpus, dependency, copied vector, temporary
+unretained procedure, or permanent fixture was added.
 
 Environment: CPython `3.12.3`; Git `2.43.0`.
 

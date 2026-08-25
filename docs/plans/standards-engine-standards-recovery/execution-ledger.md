@@ -283,3 +283,26 @@ superseded by the discovery-admission transition in the active plan.
   field-level structural delta check, and keeps the later policy admission
   separate. Inventory regeneration, policy, A1b runtime, and A2 work remain
   unavailable.
+
+## 2026-08-24 - M0 Recovery Admission Rejection
+
+- Reviewed candidate: commit
+  `c87112d7df0d62daf45cbb228f3bdedb2b4146f4`, tree
+  `72f3533bd50bf7dc02c070d7234f6ca4dbd33970`.
+- Standards findings: active issues still claimed to block already-satisfied
+  bounded reproduction objectives; the version-identity evidence sampled only
+  one of ten interpretation fields; and cold/equality procedures depended on
+  unretained temporary invocations.
+- Specification finding: three scope-audit statements incorrectly implied
+  that policy-admission review was available before M0 generated-evidence
+  closure and its gate.
+- Correction: scope audit is now stated as a prerequisite only. M0 recovery
+  admission, inventory regeneration, invariant verification, and the complete
+  M0 gate must precede the separate policy-admission review.
+- Evidence correction: active policy issues no longer claim to block the
+  completed bounded reproduction objectives; all ten accepted snapshot
+  interpretation fields and both implementation-only fields are exercised;
+  exact cold-process and version-mutation sources are retained in the report;
+  and equality uses exact named accepted-tree test invocations.
+- Lifecycle result: the plan and Milestone 0 remain `Blocked`. A superseding
+  exact-tree M0 recovery review is the sole next operation.

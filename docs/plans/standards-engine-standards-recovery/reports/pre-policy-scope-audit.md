@@ -174,5 +174,8 @@ package, that is a re-plan trigger.
 | `profile.boundary.generated-contract.applicability` | Router, route fixtures, prompts, profile owner suite | `pre-policy-scope-audit-complete` |
 | `profile.boundary.generated-contract.semantic-closure` | required canonical owners, generated/public consumers, profile fixture/suite | `pre-policy-scope-audit-complete` |
 
-No planned disposition is `blocked`. This state authorizes only an independent
-policy-admission review. It does not authorize policy implementation.
+No planned disposition is `blocked`. This state is one prerequisite for later
+policy admission, but it does not authorize policy-admission review or policy
+implementation. Those remain unavailable until M0 recovery is independently
+admitted, the generated inventory is refreshed and verified, and the complete
+Milestone 0 gate passes.
