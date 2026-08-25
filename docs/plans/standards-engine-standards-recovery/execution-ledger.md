@@ -409,3 +409,20 @@ superseded by the discovery-admission transition in the active plan.
 - This ledger-only binding does not authorize implementation. Independent
   review must bind the resulting exact commit and tree before the reviewer-owned
   policy-admission report can be authored.
+
+## 2026-08-24 - Consumer-Closure Candidate Admission Rejection
+
+- Reviewed candidate: commit
+  `93235d3177e9ce02be46868e7d8f8bfa58fb90bb`, tree
+  `5f8a8f3c16a15a79be758a3e7e92b9dd35b3f03a`.
+- Specification review passed. Standards review rejected admission because the
+  replaced package-glob/read-only decision lacked an explicit lifecycle result.
+- Supersession: the former Milestone 1 `Read-only required consumers`
+  package-glob decision at
+  `fb84d84da013fa4b8674683d1234e2225318dbcf` /
+  `a981d89a974e10ca1af83c4a5e7140dadddcad41` is `Superseded` by the
+  `W/S/E/R` protected mapped-consumer closure introduced at
+  `b822dfaebe366fe7a8fb691ee44463e75c7adf6a`.
+- Scope, implementation authority, and the `W/S/E/R` contract are unchanged.
+  Milestone 0 remains `Implemented`; policy implementation remains unavailable
+  pending renewed exact-tree admission.
