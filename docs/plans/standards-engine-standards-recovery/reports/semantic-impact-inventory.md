@@ -46,8 +46,10 @@ The completed scope evidence is recorded in
 [pre-policy-scope-audit.md](pre-policy-scope-audit.md). It binds provider-v2
 horizon digest
 `sha256:35ed5271ffb9573eb1ae4dd6949debd9f6aad011bb9d0b43dbbfba9eb5b077e9`
-and reconciles 856 members. Policy implementation remains unavailable pending
-independent admission of this audited planning boundary.
+and reconciles 856 members. Milestone 0 is implemented; the first policy
+admission review rejected the incomplete M1 mapped-consumer boundary. Policy
+implementation remains unavailable pending independent admission of the exact
+repaired planning boundary.
 
 ## Disposition Vocabulary
 
@@ -65,10 +67,10 @@ Every selected consumer must receive exactly one final disposition:
 `pending-required` below means the implementation milestone must assign one of
 the four final dispositions. It is not a completion result.
 
-Likewise, `pre-policy-scope-audit-complete` is a prerequisite for later
-policy-scope admission, but does not make that review available, satisfy a
-final disposition, or establish any accepted coverage claim. Policy admission
-remains unavailable until the Milestone 0 recovery and gate are complete.
+Likewise, `pre-policy-scope-audit-complete` is a prerequisite for policy-scope
+admission, but does not satisfy a final disposition or establish any accepted
+coverage claim. Milestone 0's gate is complete; the remaining admission blocker
+is exact review of the repaired M1 mapped-consumer boundary.
 
 ## Proposed Policy Units
 

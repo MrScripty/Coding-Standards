@@ -10,8 +10,9 @@
 
 ## Purpose And Limits
 
-This report establishes the planned consumer map and bounded write/read sets
-before any policy exists. It is not a coverage attestation, certificate,
+This report establishes the planned consumer map, bounded write set, and
+protected mapped-consumer closure before any policy exists. It is not a
+coverage attestation, certificate,
 semantic acceptance, consumer disposition, or policy-implementation
 admission. Final coverage is possible only after policy units, relationships,
 suite inputs, and all other horizon-affecting authority are frozen.
@@ -130,6 +131,160 @@ The remaining registered suites and inputs have owners and decision domains
 outside the six policy families. Security and Diagnostics suites remain
 conditionally routed evidence, not projections of the new Router rule.
 
+### Registry-derived suite closure
+
+The 36 unique suite IDs above are the authority for the existing-suite
+selection. At this audit tree, canonical registry resolution produces 36 suite
+definitions and 80 distinct registered inputs, with 116 paths in their union.
+Admission and implementation must derive those paths through the same
+`suite ID -> registered definition -> path fields` traversal used by the
+coverage provider. An expanded path listing is evidence only and must not
+become a parallel manifest.
+
+### Exact Non-Registry Consumers
+
+The following exact paths are selected independently of suite-registry
+resolution. This list contains no wildcard. Paths that also occur in the
+registry-derived suite closure remain one mapped consumer after set
+canonicalization.
+
+**Standards, projections, and durable reports:**
+
+- `workflows/build.md`
+- `workflows/documentation.md`
+- `workflows/tooling.md`
+- `workflows/implementation.md`
+- `prompts/full-codebase-standards-refactor.md`
+- `templates/PULL_REQUEST_TEMPLATE.md`
+- `topics/licensing.md`
+- `profiles/applications/library.md`
+- `profiles/boundaries/language-bindings.md`
+- `profiles/boundaries/ipc.md`
+- `profiles/boundaries/persistence.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-acceptance.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-ii-candidate.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iii-candidate.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iv-candidate.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-v-candidate.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-vi-candidate.md`
+- `docs/plans/standards-engine-navigation-analysis/reports/a1-final-acceptance.md`
+- `docs/plans/standards-verification-engine/plan.md`
+
+**Retained migration-owned checkers:**
+
+The two exact `pending-required` checker paths in the semantic-impact
+inventory's `Evidence-oracle boundaries` matrix are adopted by reference. That
+matrix remains their path authority; repeating their basenames here would add
+another documentation inbound reference to the temporary generated inventory.
+
+**A1 contract, runtime, and composition sources:**
+
+- `tools/standards_engine/contracts/a1-contract.schema.json`
+- `tools/standards_engine/contracts/examples/a1-examples.json`
+- `tools/standards_engine/contracts/generated/agent-tools.json`
+- `tools/standards_engine/contracts/identity-fixtures.json`
+- `tools/standards_engine/contracts/generate_contract.py`
+- `tools/standards_engine/contracts/validate_contracts.py`
+- `tools/standards_engine/standards_engine/__init__.py`
+- `tools/standards_engine/standards_engine/_generated_contract.py`
+- `tools/standards_engine/standards_engine/engine.py`
+- `tools/standards_engine/standards_engine/model.py`
+- `tools/standards_engine/standards_engine/rendering.py`
+- `tools/standards_engine/standards_engine/tools.py`
+- `tools/standards_analysis/standards_analysis/__init__.py`
+- `tools/standards_analysis/standards_analysis/changes.py`
+- `tools/standards_analysis/standards_analysis/coverage.py`
+- `tools/standards_analysis/standards_analysis/facts.py`
+- `tools/standards_analysis/standards_analysis/impact.py`
+- `tools/standards_analysis/standards_analysis/obligations.py`
+- `tools/standards_analysis/standards_analysis/reading.py`
+- `tools/standards_analysis/standards_analysis/resolution.py`
+- `tools/standards_analysis/standards_analysis/results.py`
+- `tools/standards_analysis/standards_analysis/routing.py`
+- `tools/standards_analysis/standards_analysis/serialization.py`
+- `tools/standards_analysis/standards_analysis/snapshots.py`
+- `tools/standards_applicability/standards_applicability/__init__.py`
+- `tools/standards_applicability/standards_applicability/core.py`
+- `tools/standards_applicability/standards_applicability/errors.py`
+- `tools/standards_metadata/standards_metadata/__init__.py`
+- `tools/standards_metadata/standards_metadata/corpus.py`
+- `tools/standards_metadata/standards_metadata/errors.py`
+- `tools/standards_metadata/standards_metadata/loader.py`
+- `tools/standards_metadata/standards_metadata/model.py`
+- `tools/standards_metadata/standards_metadata/paths.py`
+- `tools/standards_metadata/standards_metadata/policy_units.py`
+- `tools/standards_metadata/standards_metadata/serialization.py`
+- `tools/standards_policy_impact/standards_policy_impact/__init__.py`
+- `tools/standards_policy_impact/standards_policy_impact/compiler.py`
+- `tools/standards_policy_impact/standards_policy_impact/errors.py`
+- `tools/standards_policy_impact/standards_policy_impact/model.py`
+- `tools/standards_graph/standards_graph/__init__.py`
+- `tools/standards_graph/standards_graph/metadata.py`
+- `tools/standards_graph/standards_graph/policy_units.py`
+- `tools/standards_graph/standards_graph/repository.py`
+
+**Existing Python-verifier adapters selected by the proposed suites:**
+
+- `tools/standards_verifier/standards_verifier/__init__.py`
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`
+- `tools/standards_verifier/standards_verifier/checks/decision.py`
+- `tools/standards_verifier/standards_verifier/checks/exact_text.py`
+- `tools/standards_verifier/standards_verifier/checks/inclusion.py`
+- `tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py`
+- `tools/standards_verifier/standards_verifier/checks/metadata.py`
+- `tools/standards_verifier/standards_verifier/checks/metadata_route.py`
+- `tools/standards_verifier/standards_verifier/checks/path_state.py`
+- `tools/standards_verifier/standards_verifier/checks/policy_impact.py`
+- `tools/standards_verifier/standards_verifier/checks/predicates.py`
+- `tools/standards_verifier/standards_verifier/checks/relation.py`
+- `tools/standards_verifier/standards_verifier/checks/text.py`
+- `tools/standards_verifier/standards_verifier/complete_checkpoint.py`
+- `tools/standards_verifier/standards_verifier/config.py`
+- `tools/standards_verifier/standards_verifier/diagnostics.py`
+- `tools/standards_verifier/standards_verifier/engine.py`
+- `tools/standards_verifier/standards_verifier/generated_artifacts.py`
+- `tools/standards_verifier/standards_verifier/inventory.py`
+- `tools/standards_verifier/standards_verifier/model.py`
+- `tools/standards_verifier/standards_verifier/policy_impact.py`
+- `tools/standards_verifier/standards_verifier/repository_graph.py`
+
+**Focused accepted-A1 and verifier tests:**
+
+- `tools/standards_engine/tests/test_analysis.py`
+- `tools/standards_engine/tests/test_applicability_contract.py`
+- `tools/standards_engine/tests/test_generated_contract.py`
+- `tools/standards_engine/tests/test_navigation.py`
+- `tools/standards_engine/tests/test_rendering.py`
+- `tools/standards_analysis/tests/test_changes.py`
+- `tools/standards_analysis/tests/test_coverage.py`
+- `tools/standards_analysis/tests/test_facts.py`
+- `tools/standards_analysis/tests/test_impact.py`
+- `tools/standards_analysis/tests/test_obligations.py`
+- `tools/standards_analysis/tests/test_reading.py`
+- `tools/standards_analysis/tests/test_results.py`
+- `tools/standards_analysis/tests/test_routing.py`
+- `tools/standards_analysis/tests/test_snapshots.py`
+- `tools/standards_applicability/tests/test_applicability.py`
+- `tools/standards_metadata/tests/test_metadata.py`
+- `tools/standards_metadata/tests/test_policy_units.py`
+- `tools/standards_policy_impact/tests/test_compiler.py`
+- `tools/standards_graph/tests/test_metadata_graph.py`
+- `tools/standards_verifier/tests/test_complete_checkpoint.py`
+- `tools/standards_verifier/tests/test_engine.py`
+- `tools/standards_verifier/tests/test_file_contracts.py`
+- `tools/standards_verifier/tests/test_generated_artifacts.py`
+- `tools/standards_verifier/tests/test_inventory.py`
+- `tools/standards_verifier/tests/test_metadata.py`
+- `tools/standards_verifier/tests/test_metadata_route.py`
+- `tools/standards_verifier/tests/test_policy_impact.py`
+- `tools/standards_verifier/tests/test_repository_graph.py`
+- `tools/standards_verifier/tests/test_routing_checks.py`
+
+These paths are the `E` input to the plan's protected-consumer derivation. If a
+future suite needs an unlisted verifier adapter or a mapped runtime/test/report
+consumer is discovered outside this list, policy admission or implementation
+must stop and re-plan before mutation.
+
 ## Missing Current Horizon Members
 
 The independent audit found that the current horizon does not yet contain:
@@ -174,8 +329,8 @@ package, that is a re-plan trigger.
 | `profile.boundary.generated-contract.applicability` | Router, route fixtures, prompts, profile owner suite | `pre-policy-scope-audit-complete` |
 | `profile.boundary.generated-contract.semantic-closure` | required canonical owners, generated/public consumers, profile fixture/suite | `pre-policy-scope-audit-complete` |
 
-No planned disposition is `blocked`. This state is one prerequisite for later
-policy admission, but it does not authorize policy-admission review or policy
-implementation. Those remain unavailable until M0 recovery is independently
-admitted, the generated inventory is refreshed and verified, and the complete
-Milestone 0 gate passes.
+No planned disposition is `blocked`. Milestone 0 later satisfied its complete
+gate, making policy-admission review available. The first such review rejected
+the candidate because the M1 protected mapped-consumer closure was incomplete.
+This revised audit supplies that closure for renewed exact-tree review; it still
+does not authorize policy implementation or claim final coverage.

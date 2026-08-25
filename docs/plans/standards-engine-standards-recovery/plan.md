@@ -2,12 +2,12 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** Milestone 0 implemented; independent policy-implementation
-admission pending
+**Current phase:** Milestone 0 implemented; policy-implementation admission
+rejected pending exact M1 consumer-closure repair
 
-**Next slice:** an independent reviewer authors only
-`reports/standards-recovery-policy-admission.md` against the exact Milestone 0
-candidate; policy implementation remains unavailable
+**Next slice:** obtain independent review of the exact blocked consumer-closure
+replan candidate; a policy-admission report and implementation remain
+unavailable until that review accepts the revised boundary
 
 **Acceptance status:** `partial`
 
@@ -371,8 +371,11 @@ identity. It may not change the audited consumer map, policy write set, or
 acceptance contracts.
 The report may accept only when every planned policy subject is
 `pre-policy-scope-audit-complete`, no planned disposition is blocked, the exact
-Milestone 1 write/read sets cover all mapped consumers, and Python-only fixture
-execution does not expand retained Bash behavior.
+Milestone 1 write set and protected mapped-consumer closure cover all mapped
+consumers, and Python-only fixture execution does not expand retained Bash
+behavior. The reviewer must mechanically resolve the 36 suite IDs selected by
+the pre-policy scope audit through the canonical suite registry at the reviewed
+tree; copied suite-definition or input lists are not admission authority.
 
 ## Milestones
 
@@ -507,44 +510,39 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml` (new)
 - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml` (new)
 - `evaluation/standards-effectiveness/suite-registry.toml`
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
 - `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-consumer-dispositions.md` (new)
 
-**Read-only required consumers:**
+**Protected mapped-consumer closure:**
 
-- `workflows/build.md`
-- `workflows/documentation.md`
-- `workflows/tooling.md`
-- `workflows/implementation.md`
-- `prompts/full-codebase-standards-refactor.md`
-- `templates/PULL_REQUEST_TEMPLATE.md`
-- `topics/licensing.md`
-- `profiles/applications/library.md`
-- `profiles/boundaries/language-bindings.md`
-- `profiles/boundaries/ipc.md`
-- `profiles/boundaries/persistence.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-acceptance.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-ii-candidate.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iii-candidate.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iv-candidate.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-v-candidate.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-vi-candidate.md`
-- `docs/plans/standards-engine-navigation-analysis/reports/a1-final-acceptance.md`
-- `docs/plans/standards-verification-engine/plan.md`
-- `tools/standards_engine/**`
-- `tools/standards_analysis/**`
-- `tools/standards_applicability/**`
-- `tools/standards_metadata/**`
-- `tools/standards_policy_impact/**`
-- `tools/standards_graph/**`
-- `tools/standards_verifier/**`
+The authoritative closure is derived rather than copied into this plan:
 
-If a read-only consumer requires a semantic update rather than a
-`reviewed-no-change` or `not-applicable` disposition, stop and re-plan its exact
-write set. Runtime-package edits are not admitted by this plan.
+- `W` is the exact Milestone 1 allowed write set above.
+- `S` is every suite definition and every registered input mechanically
+  resolved from the 36 stable suite IDs selected under `Selected Existing
+  Suites` in the pre-policy scope audit, using the canonical suite registry at
+  the admitted implementation base.
+- `E` is the exact non-registry consumer list under `Exact Non-Registry
+  Consumers` in the pre-policy scope audit. It contains no wildcard.
+- `R = (S union E) - W` is the protected mapped-consumer closure.
+
+Policy admission must prove that every selected suite still resolves to its
+admitted definition and inputs, every pre-existing path in `W union R` resolves
+at the reviewed tree, each absent `W` path is explicitly marked `(new)` with an
+existing parent, `W intersect R` is empty, and the mapped consumers are exactly
+`W union R`. The expanded `S` paths may appear in admission evidence, but the
+suite registry and selected suite IDs remain their sole authority.
+
+`R` is an audit and mutation-protection boundary, not a restriction on
+incidental repository reading. Its members require review and a disposition,
+may not be modified without replanning, and remain in final impact coverage.
+Only `W` authorizes mutation. If a protected consumer requires a semantic
+update rather than a `reviewed-no-change` or `not-applicable` disposition, stop
+and re-plan its exact write set. Runtime-package edits remain unavailable.
 
 **Tasks:**
 
@@ -573,6 +571,12 @@ write set. Runtime-package edits are not admitted by this plan.
 - [ ] Register Python declarative suites for every recovery behavior and keep
   generation freshness separate from semantic correctness; add or extend no
   Bash checker.
+- [ ] After M1 suite definitions, registered inputs, and documentation are
+  final, regenerate the existing checker structure inventory mechanically.
+  Permit changes only to inbound-reference count and file-list fields of the
+  checker rows explicitly selected by the pre-policy audit. Checker sources,
+  source/mechanism fields, executable and dependency fields, generated graph
+  artifacts, and every unrelated inventory row must remain unchanged.
 - [ ] Run prior/current graph comparison after each metadata batch and update
   the disposition report for every selected consumer.
 - [ ] Reject any missing consumer or unresolved final coverage subject rather
@@ -582,11 +586,12 @@ write set. Runtime-package edits are not admitted by this plan.
 and executable projection agree; current and proposed graph comparison has no
 unexplained edge change; every selected consumer has one non-blocked
 disposition; focused suites separately prove SR-A6 through SR-A10;
-forbidden runtime paths remain unchanged; all affected declarative and static
-verification passes.
+protected runtime paths remain unchanged; the generated checker inventory is
+fresh and satisfies its field-level M1 delta contract; all affected declarative
+and static verification passes.
 
-**Status:** `Blocked` pending Milestone 0 acceptance and the pre-milestone
-policy-implementation admission transition
+**Status:** `Blocked` pending the pre-milestone policy-implementation admission
+transition, which marks implemented Milestone 0 `Accepted`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -653,9 +658,10 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 is implemented and its exact candidate awaits independent policy
-  admission. Policy implementation remains unavailable until the separate
-  post-scope-audit admission transition is applied.
+- Milestone 0 is implemented. The first policy-admission review rejected the
+  incomplete M1 mapped-consumer boundary; policy implementation remains
+  unavailable until an independent review accepts the exact repaired candidate
+  and the separate post-scope-audit admission transition is applied.
 - The JSON Schema equality disagreement is independently reproduced and remains
   intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -673,8 +679,13 @@ different claim:
   reproduction boundary remains `2359a987...`.
 - A proposed policy locator is missing, duplicated, overlapping, or cannot
   express one coherent semantic unit.
-- Impact analysis discovers a required consumer outside Milestone 1's write or
-  explicit read-only sets, or a read-only consumer requires modification.
+- Impact analysis discovers a required consumer outside `W union R`, a
+  protected consumer requires modification, an `E` wildcard appears, or a
+  selected suite no longer resolves to its admitted definition and inputs.
+- M1 suite or documentation changes stale generated checker evidence outside
+  the admitted inbound-reference fields, alter an unrelated inventory row,
+  change a checker source/dependency field, or modify a generated dependency
+  graph artifact.
 - An empty impact result lacks current independent coverage, or the horizon is
   unable to discover consumers omitted from both the graph and node catalog.
 - A new or changed permanent relationship, node registration, suite input,

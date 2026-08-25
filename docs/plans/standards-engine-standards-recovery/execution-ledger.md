@@ -370,3 +370,30 @@ superseded by the discovery-admission transition in the active plan.
   candidate commit/tree.
 - Excluded work: no policy, Router, fixture, checker/verifier behavior, runtime,
   A1b, or A2 change was made.
+
+## 2026-08-24 - Policy Admission Rejection And Consumer-Closure Replan
+
+- Reviewed candidate: commit
+  `fb84d84da013fa4b8674683d1234e2225318dbcf`, tree
+  `a981d89a974e10ca1af83c4a5e7140dadddcad41`.
+- Admission result: rejected. Milestone 0 remains `Implemented`; the plan and
+  Milestone 1 remain `Blocked`. No policy-admission report or lifecycle
+  transition was created.
+- Standards correction: SESR-011 no longer cites the completed M0 gate as its
+  current blocker. It remains active through permanent consumer registration
+  and closes only after exact M2 certificate/disposition equality.
+- Scope correction: replace package-wide read globs with `R = (S union E) - W`.
+  `S` is derived from the 36 audit-selected suite IDs through the canonical
+  suite registry; `E` is the audit's exact non-registry list; `W` remains the
+  exact M1 write set. The closure protects mutation and disposition coverage,
+  not incidental reads.
+- Generated-evidence correction: add the existing checker structure inventory
+  to `W`. After M1 suite inputs and documentation are final, only admitted
+  inbound-reference fields of audit-selected checker rows may change; sources,
+  dependency fields, graph artifacts, and unrelated rows remain unchanged.
+- Authority rule: expanded suite definitions and inputs may be review evidence
+  but never a second manifest. The suite registry remains the sole mapping from
+  selected suite ID to definition and registered inputs.
+- Next operation: verify this blocked replan, commit an exact candidate, and
+  obtain independent policy-implementation admission review. Policy, runtime,
+  A1b, and A2 work remain unavailable.
