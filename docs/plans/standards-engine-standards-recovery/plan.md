@@ -1,12 +1,12 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 1 focused Router projection test recovery
+**Current phase:** Milestone 1 live-authority cardinality test recovery
 
-**Next slice:** register source-owned policy-impact relationships for the exact
-new policy units, run prior/current graph comparison, and stop on any unmapped
-or protected consumer
+**Next slice:** obtain independent admission for the bounded transfer of three
+protected live-authority tests from `R` to `W`; policy-impact relationship
+registration remains unavailable
 
 **Acceptance status:** `partial`
 
@@ -427,6 +427,51 @@ planned Milestone 2 coverage renewal. That expected intermediate outcome does
 not authorize navigation-test mutation or another `R` to `W` transfer. Any
 different protected-consumer failure still triggers a separate re-plan.
 
+### Milestone 1 Live-Authority Cardinality Recovery Admission
+
+The source-owned relationship batch exposed a systemic oracle defect in three
+protected tests: they assert fixed cardinalities of the mutable repository
+authority. Milestone 1 returns to `Blocked` and uses this bounded recovery
+protocol before relationship registration continues:
+
+1. Commit the exact blocked proposal and replan records without modifying any
+   newly transferred test. The candidate must inventory every live-repository
+   cardinality assertion in scope, distinguish it from fixed synthetic-fixture
+   cardinality, and specify the semantic replacement.
+2. An independent reviewer authors only
+   `reports/standards-recovery-m1-cardinality-recovery-admission.md`. The report
+   binds that exact commit/tree and may authorize only these transfers from
+   `R` to `W`:
+   - `tools/standards_policy_impact/tests/test_compiler.py`
+   - `tools/standards_verifier/tests/test_policy_impact.py`
+   - `tools/standards_engine/tests/test_navigation.py`
+3. If accepted, the integration owner creates one mechanical transition commit
+   whose parent is the admission-report commit and whose only changed files are
+   `plan.md`, `execution-ledger.md`, and `issues.md`. It records the reviewed
+   snapshot and report commit/tree, sets the plan and Milestone 1 to `Planned`,
+   and names cardinality recovery `start` as the sole next operation. It may
+   not change policy, relationships, tasks, evidence, or any other closure
+   member.
+4. `start` is valid only while that transition is current `HEAD`. It records
+   the transition commit/tree, returns the plan and Milestone 1 to `Active`,
+   and authorizes modification of only the three transferred tests beyond the
+   originally admitted `W`.
+5. The compiler test must compare the complete edge-ID and semantics-ID sets
+   and retain targeted relationship semantics without asserting their size.
+   The verifier test must retain named consumer and suite-owner closure checks
+   without asserting Planning or Commit consumer totals. The navigation test
+   must prove direct and dependency causes are present and deduplicated without
+   asserting a repository-topology count or threshold.
+6. Fixed cardinalities remain permitted only where the test constructs and
+   owns the complete bounded fixture and the cardinality is itself the claimed
+   behavior. Generated inventory counts remain derived evidence, not copied
+   acceptance oracles.
+
+After this test-only prerequisite passes its focused suites, commit it
+independently and resume relationship registration. Any additional
+live-authority cardinality oracle or protected consumer requiring mutation is a
+new re-plan trigger.
+
 ## Milestones
 
 ### Milestone 0: Historical Reproduction And Pre-Policy Scope Audit
@@ -562,6 +607,9 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 - `tools/standards_analysis/tests/test_routing.py`
+- `tools/standards_policy_impact/tests/test_compiler.py`
+- `tools/standards_verifier/tests/test_policy_impact.py`
+- `tools/standards_engine/tests/test_navigation.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -604,6 +652,10 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
   referenced fact, and `contains` expression; remove incidental global fact
   and rule cardinality assertions and do not change Router runtime
   implementation.
+- [ ] Replace live-repository policy-impact and navigation cardinality oracles
+  with semantic identity, exact projection-set agreement, owner closure, and
+  cause-presence/deduplication assertions; preserve bounded synthetic-fixture
+  cardinality tests.
 - [ ] Add the Generated Contract profile and route it from observable schema,
   generator, and program-consumer facts; preserve conditional IPC and Language
   Binding selection.
@@ -646,7 +698,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Active`
+**Status:** `Blocked` by live-authority cardinality test recovery admission
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -801,4 +853,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`

@@ -624,3 +624,45 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: register source-owned relationships for the exact new policy
   units and run prior/current graph comparison before changing prompts,
   templates, fixtures, suites, or final coverage authority.
+
+## 2026-08-25 - Live-Authority Cardinality Oracle Replan
+
+- Trigger: preflight for the source-owned relationship batch found that
+  protected repository tests assert fixed counts for compiled policy-impact
+  edges and semantics, Planning and Commit consumers, and dependency causes.
+  Legitimate standards growth would require updating those incidental numbers
+  even when every compiler, closure, and navigation invariant remains correct.
+- Systemic audit: the affected live-authority assertions are confined to
+  `tools/standards_policy_impact/tests/test_compiler.py`,
+  `tools/standards_verifier/tests/test_policy_impact.py`, and
+  `tools/standards_engine/tests/test_navigation.py`. Numeric assertions in
+  tests that construct their complete fixture remain valid and are outside
+  this recovery.
+- Lifecycle: the plan and Milestone 1 move from `Active` to `Blocked` before
+  any source-owned relationship declaration changes.
+- Supersession: the admitted closure decision that classified these three
+  tests only in `R` is `Superseded` by the proposed bounded transfer to `W`;
+  every other `W`, `S`, `E`, `R`, generated-inventory, policy, and runtime rule
+  remains unchanged.
+- Replacement contract: compare compiled edge and semantics identity sets;
+  retain named relationship semantics and suite-owner closure; prove direct
+  and dependency causes are present and deduplicated. Do not assert mutable
+  live-corpus totals or thresholds.
+- Admission protocol: commit this exact blocked candidate; an independent
+  reviewer authors only
+  `reports/standards-recovery-m1-cardinality-recovery-admission.md`; an accepted
+  report permits one mechanical plan/ledger/issues transition and exact-head
+  `start` before any of the three tests changes.
+- Exclusions: no policy-impact relationship, runtime, generated contract, A1b,
+  A2, fixture, suite, prompt, template, or retained Bash checker change is
+  authorized by this replan.
+- Candidate preflight: plan structure and `git diff --check` pass. The compiler
+  suite passes all seven tests. The focused verifier/navigation run reaches
+  only the previously recorded stale coverage requirement: two verifier tests
+  and navigation setup reject before their cardinality assertions execute.
+  The canonical checkpoint confirms generated freshness and 217 of 218
+  declarative suites; its sole failure is the same
+  `COVERAGE.STALE_ATTESTATION` in `policy-semantic-impact`. This recovery may
+  not renew coverage or treat that expected Milestone 2 work as a test defect.
+- Next operation: verify and commit the blocked replan candidate, then obtain
+  exact-tree cardinality-recovery admission.
