@@ -917,3 +917,23 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: create the exact blocked candidate, obtain independent
   reviewer-owned generated-evidence admission, apply only its mechanical
   transition, and run exact-head `start` before regeneration.
+
+## 2026-08-25 - M1 Generated-Evidence Admission Transition
+
+- Reviewed candidate: commit
+  `0a7fb2dad8160c15051bf9b64e4c25a14091f5c8`, tree
+  `d4982d521604132b566466b645f65130402ae520`.
+- Independent admission report: commit
+  `bcd9def5d4ca3680f917bb63b6b8079ba2c9df99`, tree
+  `384d42b2aa7ce06da719a6544a066efdf9993a4b`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, and SESR-028 lifecycle fields. Policy, relationships,
+  suites, fixtures, prompts, templates, generated artifacts, checker sources,
+  verifier/provider runtime, A1b, and A2 remain unchanged.
+- Lifecycle transition: the plan and Milestone 1 move from `Blocked` to
+  `Planned`; Milestone 0 remains `Accepted`.
+- Recovery boundary: regeneration remains unavailable until exact-head
+  `start`; the admitted edge and field set is unchanged.
+- Sole next operation: checker-consumer generated-evidence `start`. It must run
+  while this transition is current `HEAD`, record its exact commit/tree, and
+  only then move the plan and Milestone 1 to `Active`.

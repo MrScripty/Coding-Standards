@@ -1,11 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 1 checker-consumer and generated-evidence replan
+**Current phase:** Milestone 1 checker-consumer generated-evidence transition
 
-**Next slice:** obtain exact-tree admission for the bounded checker-consumer
-registration and generated-evidence closure
+**Next slice:** exact-head checker-consumer generated-evidence `start`
 
 **Acceptance status:** `partial`
 
@@ -84,6 +83,14 @@ registration and generated-evidence closure
 **Admitted M1 cardinality-sequencing base:** commit
 `65b80c05d7fce357eee9ddf9b8cbdd8a659880ee`, tree
 `8f2fe5eef487f4f0aab4bbfc8c42fe0acdde4b17`
+
+**Reviewed M1 generated-evidence candidate:** commit
+`0a7fb2dad8160c15051bf9b64e4c25a14091f5c8`, tree
+`d4982d521604132b566466b645f65130402ae520`
+
+**M1 generated-evidence admission:** report commit
+`bcd9def5d4ca3680f917bb63b6b8079ba2c9df99`, tree
+`384d42b2aa7ce06da719a6544a066efdf9993a4b`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -834,7 +841,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Blocked` pending checker-consumer generated-evidence admission
+**Status:** `Planned`; exact-head generated-evidence `start` is the sole next operation
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -995,4 +1002,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`
