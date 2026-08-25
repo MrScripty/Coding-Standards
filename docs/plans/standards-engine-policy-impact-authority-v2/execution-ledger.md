@@ -211,3 +211,15 @@
   while this transition is current `HEAD` with a clean worktree, bind its
   exact commit/tree as the renewed implementation base, and move the plan and
   M0 to `Active` before the preserved implementation is restored.
+
+## 2026-08-25 - Fixture-Scope Exact-Head Start
+
+- The fixture-scope admission-transition commit
+  `ec0d7bc7abaf44e88ee99cb23c65962ba3c25a79`, tree
+  `4b07fdb87c0e958eb321e114171d1ac68d8820dc`, is current `HEAD` and the
+  worktree is clean at start.
+- That exact transition is the renewed implementation base. The plan and M0
+  move from `Planned` to `Active` before preserved implementation work is
+  restored.
+- Implementation remains bounded by the corrected M0 write set and fixture
+  recovery admission. PIA2-007 remains active pending implementation evidence.
