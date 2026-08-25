@@ -91,10 +91,14 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-security-check
 contract_reference	evaluation/standards-effectiveness/milestone-7-security-checker-repairs.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml	templates/check-decision-traceability.sh
+contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/check-plan-structure.sh
+contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
+contract_reference	evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml	evaluation/standards-effectiveness/check-plan-structure.sh
+contract_reference	evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 executable_reference	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-decisions.sh
 executable_reference	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh

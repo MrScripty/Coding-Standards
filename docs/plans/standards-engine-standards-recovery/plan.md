@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 1 checker-consumer generated-evidence implementation
+**Current phase:** Milestone 1 Router-projection verifier replan
 
-**Next slice:** mechanically regenerate and verify the four admitted migration artifacts
+**Next slice:** obtain exact-tree admission for the bounded verifier shared-contract repair
 
 **Acceptance status:** `partial`
 
@@ -612,12 +612,76 @@ mechanical transition, and exact-head `start` sequence:
    authorizes mechanical regeneration of the four generated artifacts.
 5. Verification proves provider-v2 membership, exact generated field deltas,
    byte-identical checker and generator sources, both affected suites,
-   generated freshness, focused plan checks, complete checkpoints, and
-   `git diff --check` before M1 resumes.
+   generated freshness, focused plan checks, and `git diff --check`. The former
+   requirement to pass the complete checkpoint before M1 resumes is
+   `Superseded` by the Router-projection verifier recovery and Milestone 2
+   coverage sequence below.
 
 Any additional generated row, edge, field, source, or provider change is a new
-re-plan trigger. No verifier implementation, coverage-provider implementation,
-checker source, A1b, or A2 change is admitted.
+re-plan trigger. The former blanket prohibition on verifier implementation is
+`Superseded` only for the one shared-contract path admitted below. No
+coverage-provider implementation, checker source, A1b, or A2 change is
+admitted.
+
+### Milestone 1 Router-Projection Verifier Recovery Admission
+
+The frozen M1 relationship authority validly declares the executable Router
+projection as a `router-projection` consumer. The policy-impact compiler
+resolves that consumer through the canonical node catalog, but the static
+verifier discards the target node identity and assumes every consumer of that
+relation is a Markdown canonical module. The complete checkpoint therefore
+fails with `METADATA.FIELD_COUNT` while attempting to parse
+`router-projection.toml` as module metadata. Independent coverage compilation
+also confirms that the next outcome is the planned
+`COVERAGE.STALE_ATTESTATION`; coverage renewal remains Milestone 2 work.
+
+This recovery is a `shared-contract` change under the active verification
+migration plan. It uses the established exact-candidate, independent-report,
+mechanical-transition, and exact-head-start protocol:
+
+1. The exact blocked candidate contains the three already admitted generated
+   dependency-graph TSV deltas and these governance records. It contains no
+   verifier implementation.
+2. An independent reviewer authors only
+   `reports/standards-recovery-m1-router-projection-verifier-admission.md`.
+   The report binds the exact candidate commit/tree and may authorize only the
+   transfer of
+   `tools/standards_verifier/standards_verifier/policy_impact.py` from `R` to
+   `W` plus the two-stage verification sequence defined here.
+3. If accepted, the integration owner creates one mechanical transition commit
+   whose parent is the admission-report commit and whose only changed files are
+   `plan.md`, `execution-ledger.md`, and SESR-029 lifecycle fields. It records
+   the reviewed snapshot and report commit/tree, moves the plan and Milestone 1
+   to `Planned`, and names Router-projection verifier recovery `start` as the
+   sole next operation.
+4. `start` is valid only while that transition is current `HEAD`. It records
+   the exact transition commit/tree, moves the plan and Milestone 1 to `Active`,
+   and authorizes the one verifier source path.
+5. `ImpactEdge` must retain the canonical target node ID supplied by the graph.
+   Consumer validation first resolves that ID against the canonical module
+   corpus. A module consumer remains subject to module metadata validation and
+   must resolve to module ID `router`. A non-module consumer must resolve as the
+   exact catalog-registered projection node and be validated by the existing
+   strict `load_router_projection()` adapter using the already loaded canonical
+   module corpus and the edge's repository path.
+6. Classification must be registry-driven. Path suffixes, literal-path
+   allowlists, exception fallback from malformed module metadata, duplicate
+   TOML parsing, a new relation kind, relationship removal, and unrelated
+   catalog discriminators are prohibited. Existing typed `AnalysisError`
+   translation remains the error boundary. Relationship and provider contract
+   versions do not change.
+7. M1 focused verification must prove the two existing Router projection
+   relationships, generated freshness and exact TSV delta, and unchanged
+   unrelated suites. The complete checkpoint's sole permitted remaining
+   failure is `COVERAGE.STALE_ATTESTATION`; any metadata failure or different
+   diagnostic is a re-plan trigger.
+8. After all M1 authority is frozen, Milestone 2 renews coverage as already
+   planned. Only then must the unchanged `policy-semantic-impact` suite, the
+   affected verifier tests, and the complete checkpoint pass before recovery
+   acceptance.
+
+This protocol does not admit early coverage renewal, substitute coverage,
+private authority injection, policy/schema/compiler changes, A1b, or A2.
 
 ## Milestones
 
@@ -758,6 +822,7 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
 - `tools/standards_analysis/tests/test_routing.py`
 - `tools/standards_policy_impact/tests/test_compiler.py`
+- `tools/standards_verifier/standards_verifier/policy_impact.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -845,7 +910,8 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Active`; only the admitted generated-evidence regeneration is authorized
+**Status:** `Blocked`; generated evidence is present, but verifier implementation
+requires Router-projection recovery admission
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -1006,4 +1072,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`

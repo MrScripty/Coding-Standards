@@ -955,3 +955,41 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: regenerate, prove provider-v2 membership and exact structured
   delta, run the affected and complete verification gates, and commit the
   generated-evidence closure independently.
+
+## 2026-08-25 - Router-Projection Verifier Replan
+
+- Trigger: the admitted generated projections are fresh and satisfy their exact
+  field contract, but the complete checkpoint fails `policy-semantic-impact`
+  with `METADATA.FIELD_COUNT` while the static verifier parses the executable
+  Router projection as canonical Markdown module metadata.
+- Root cause: policy-impact compilation preserves the canonical consumer node,
+  while the verifier's `ImpactEdge` projection retains only its repository path.
+  The `router-projection` branch consequently cannot distinguish the canonical
+  Router module from its registered executable projection.
+- Independent options review: a `gpt-5.6-sol` subagent at `xhigh` reasoning
+  accepted a registry-driven adapter correction and rejected path/suffix
+  classification, duplicate TOML parsing, relationship removal, a new relation
+  kind, and early coverage renewal.
+- Secondary evidence: direct coverage compilation over the same frozen
+  authority returns `COVERAGE.STALE_ATTESTATION` for the existing Commit
+  attestation. This is the planned Milestone 2 boundary, not an M1 coverage
+  repair.
+- Supersession: the generated-evidence protocol's requirements for a green
+  complete checkpoint before M1 resumes and for no verifier implementation are
+  `Superseded` only by the bounded Router-projection verifier recovery in
+  `plan.md`.
+- Replacement boundary: classify the repair as verification migration
+  `shared-contract`; transfer only
+  `tools/standards_verifier/standards_verifier/policy_impact.py` from `R` to
+  `W`; retain graph target identity and delegate executable projection
+  validation to the existing strict Router loader.
+- Generated state: the three previously admitted dependency-graph TSV deltas
+  remain in this blocked candidate. Checker and generator sources, structure
+  inventory, component topology, policy/compiler/provider contracts, A1b, and
+  A2 remain unchanged.
+- Lifecycle: the plan and Milestone 1 return from `Active` to `Blocked`.
+  SESR-028 remains active pending final generated-evidence closure; SESR-029 is
+  active pending exact-tree admission and the two-stage M1/M2 verification.
+- Next operation: commit this exact blocked candidate without verifier code,
+  obtain the reviewer-owned Router-projection verifier admission, and apply
+  only its authorized mechanical transition before exact-head `start`.
