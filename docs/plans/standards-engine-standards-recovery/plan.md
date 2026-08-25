@@ -1,11 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 1 cardinality recovery ready for `start`
+**Current phase:** Milestone 1 live-authority cardinality test implementation
 
-**Next slice:** run cardinality-recovery `start` while the admission transition
-is current `HEAD`; no test edit is yet authorized
+**Next slice:** replace the four admitted live-authority cardinality oracles,
+run their focused suites, and commit the test-only prerequisite independently
 
 **Acceptance status:** `partial`
 
@@ -68,6 +68,10 @@ is current `HEAD`; no test edit is yet authorized
 **M1 cardinality-recovery admission:** report commit
 `5b1d3fb3677702c97837697570ba91975421ec94`, tree
 `189ae67bdd47672bd6637cab7ba14d992aa58471`
+
+**Admitted M1 cardinality-recovery base:** commit
+`0bc6343edc90b279733e6a956acefbc9d8b67fcd`, tree
+`acd0f113fad64d759b8b38c6799ed891165a5f2d`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -719,7 +723,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -874,4 +878,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

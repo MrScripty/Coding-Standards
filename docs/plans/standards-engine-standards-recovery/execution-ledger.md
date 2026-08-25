@@ -722,3 +722,20 @@ superseded by the discovery-admission transition in the active plan.
 - Sole next operation: cardinality-recovery `start`. It must run while this
   transition is current `HEAD`, record the exact transition commit/tree, and
   only then move the plan and Milestone 1 to `Active`.
+
+## 2026-08-25 - M1 Cardinality-Recovery Start
+
+- Admitted transition base: commit
+  `0bc6343edc90b279733e6a956acefbc9d8b67fcd`, tree
+  `acd0f113fad64d759b8b38c6799ed891165a5f2d`.
+- Start precondition: the transition was current `HEAD`, its direct parent was
+  the independent admission-report commit, and the worktree was clean.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted`.
+- Authorized prerequisite: modify only the four transferred tests beyond the
+  previously admitted Milestone 1 paths and apply only their reviewed semantic
+  replacement contracts. Production code and every other protected consumer
+  remain unavailable.
+- Next operation: implement and independently commit the four test-only
+  replacements, run the focused compiler/verifier/navigation/analysis suites,
+  and stop on any additional live-authority oracle or protected consumer.
