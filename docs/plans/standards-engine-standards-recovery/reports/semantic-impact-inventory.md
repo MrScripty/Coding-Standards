@@ -30,9 +30,17 @@ Therefore every current empty impact result below is `unaudited`. It is not
 evidence that the policy has no consumers.
 
 The first admission may authorize only read-only reproduction and completion
-of this consumer audit. No normative policy mutation is eligible until every
+of this pre-policy scope audit. No normative policy mutation is eligible until every
 independent-horizon member and missing consumer class has a planned disposition
-and a second independent review accepts the exact post-audit plan tree.
+and a second independent review accepts the exact post-scope-audit plan tree.
+
+Milestone 0 changes each proposed policy subject from `unaudited` to
+`pre-policy-scope-audit-complete` only after the independent horizon has been
+examined, every discovered consumer class is mapped, and every mapped consumer
+has a planned disposition in the admitted write/read sets. This planning state
+is not a coverage attestation or certificate. Final policy coverage cannot be
+derived until the policy units, relationships, and horizon-affecting inputs
+exist and are frozen.
 
 ## Disposition Vocabulary
 
@@ -50,9 +58,12 @@ Every selected consumer must receive exactly one final disposition:
 `pending-required` below means the implementation milestone must assign one of
 the four final dispositions. It is not a completion result.
 
+Likewise, `pre-policy-scope-audit-complete` permits policy-scope admission but
+does not satisfy a final disposition or any accepted coverage claim.
+
 ## Proposed Policy Units
 
-| Defect family | Proposed stable policy-unit ID | Owning module and exact proposed heading locator | Existing relationship state | Proposed relationship classes | Coverage state |
+| Defect family | Proposed stable policy-unit ID | Owning module and exact proposed heading locator | Existing relationship state | Proposed relationship classes | Pre-policy scope-audit state |
 | --- | --- | --- | --- | --- | --- |
 | Evidence-oracle boundaries | `workflow.verification.evidence-oracle-boundary` | `workflow.verification`; `Evidence Oracle Boundaries` | Unit and edges absent. Existing Verification unit covers only `Acceptance Is A Set Of Claims`. | prompt, template, documentation, fixture, enforcement-suite, and checker projections | `unaudited` |
 | Evidence-oracle boundaries | `workflow.verification.negative-fixture-isolation` | `workflow.verification`; `Negative Fixture Isolation` | Unit and edges absent. | planning/checker fixture and enforcement-suite projections | `unaudited` |
@@ -133,6 +144,7 @@ No applicability may be inferred from explanatory prose or path names.
 | `profiles/boundaries/language-bindings.md` | canonical profile | Confirm it applies only to genuine native/host or cross-language representation | `pending-required` |
 | `profiles/applications/library.md` | canonical profile | Confirm public package producer/consumer proof remains required | `pending-required` |
 | `workflows/documentation.md` | canonical Documentation workflow | Confirm generated contract decisions, supported semantics, and external-conformance limits are durably projected | `pending-required`; expected `reviewed-no-change` unless a concrete policy gap is proven |
+| `topics/licensing.md` | canonical Licensing topic selected by third-party specification use | Confirm the Draft 2020-12 activity remains reference/citation only and preserve the source, version, terms authority, and resulting obligations recorded in the reference Licensing decision | `pending-required`; expected `reviewed-no-change` unless copying, adaptation, or redistribution is proposed |
 | `tools/standards_engine/contracts/a1-contract.schema.json` | A1 runtime authority, read-only | Reproduce dialect/equality defect; do not correct in recovery | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
 | `tools/standards_engine/contracts/generate_contract.py` | A1 runtime implementation, read-only | Inventory generated closure and equality behavior for A1b | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
 | `tools/standards_engine/standards_engine/_generated_contract.py` | generated public artifact, read-only | Reproduce generated-model semantics and public result behavior | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
@@ -207,6 +219,9 @@ policy mutation can be accepted:
   profile.
 - The Documentation workflow and durable acceptance-report projections have
   not been dispositioned for the new evidence and generated-contract policies.
+- Licensing is applicable because Draft 2020-12 documentation is selected as
+  authority; the reference-only decision is recorded, but the final audit must
+  confirm that no later slice expands the activity.
 - A1 package files are present in the independent repository horizon but are
   not represented as reviewed policy-impact consumers for these new units.
 - Historical reports may contain acceptance-oracle claims, but their role in
@@ -214,10 +229,12 @@ policy mutation can be accepted:
 - Existing Planning coverage covers revision-1 units only and cannot certify
   the new systemic-finding unit.
 
-Implementation must audit the independent horizon rather than close these gaps
-by adding only the consumers already listed here. A newly discovered consumer
-updates this inventory, the source-owned graph declaration, and the disposition
-report, then triggers fresh analysis.
+Milestone 0 must audit the independent horizon rather than close these gaps by
+listing only already-known consumers. A newly discovered consumer updates this
+inventory and the planned write/read sets. After policy authority exists, the
+source-owned graph declaration and final disposition report are updated and
+analysis is rerun. The pre-policy audit must not be presented as accepted
+policy coverage.
 
 ## Required Final Evidence
 

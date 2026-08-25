@@ -38,12 +38,12 @@
 - Commit summary: `docs(planning): add standards recovery plan`; the resulting
   commit and tree are the candidate inputs for independent plan admission.
 
-## Next Ledger Entry
+## 2026-08-24 - Initial Admission Instruction (Superseded)
 
-The independent plan reviewer records an exact commit/tree review in
-`reports/standards-recovery-plan-admission.md`. If admitted, the integration
-owner updates the plan to `Planned` and names Milestone 0 reproduction as the
-sole next slice. No policy or runtime file may change before that transition.
+The initial candidate directed the reviewer to record an exact commit/tree
+review in `reports/standards-recovery-plan-admission.md`. Both reviews in that
+artifact rejected their candidates. It is historical evidence only and is
+superseded by the discovery-admission transition in the active plan.
 
 ## 2026-08-24 - Independent Admission Rejection
 
@@ -134,8 +134,9 @@ sole next slice. No policy or runtime file may change before that transition.
   normative specification clauses only.
 - Incorporation decision: no external JSON or JSON Schema corpus, dependency,
   executable, copied test vector, license file, or permanent JSON-specific
-  fixture enters the repository. Licensing incorporation review is therefore
-  not applicable to this recovery.
+  fixture enters the repository. Licensing remains applicable to selection of
+  the Draft 2020-12 documentation and is resolved through a narrow
+  reference-only provenance, terms, use, and obligation decision.
 - Admission direction: the first review may admit only historical reproduction
   and completion of the independent consumer audit. A second exact-tree review
   must accept the completed audit and policy write set before any normative
@@ -153,3 +154,47 @@ sole next slice. No policy or runtime file may change before that transition.
   Bash checkers changed one inbound-reference count in
   `generated/checker-structure-inventory.tsv`; the inventory was regenerated
   mechanically. No Bash checker source or behavior changed.
+
+## 2026-08-24 - Independent Admission Rejection III
+
+- Reviewed candidate: commit
+  `2160425e6c20ac5fabccdb7653997902fa3bd928`, tree
+  `172b9a3eb0cf324c5cf3937aa19f0d210c944628`.
+- Admission result: rejected. The plan remains `Blocked`; no milestone or
+  normative implementation is admitted.
+- Standards findings: admission was self-invalidating because report/status
+  changes were Milestone 0 tasks, Licensing applicability was incorrectly
+  excluded, and a stale ledger instruction named the superseded report.
+- Specification findings: a new `invalid-*.md` fixture would expand retained
+  Bash behavior; preliminary scope auditing was conflated with final policy
+  coverage; and SR-A7 could be read as requiring A1 conformance even though the
+  recovery must preserve and record a known nonconformance.
+- Repair direction: move both admissions outside milestones, record a
+  reference-only Licensing decision, separate pre-policy scope audit from final
+  coverage, place the negative scenario outside the Bash glob, and classify
+  rather than correct A1 conformance.
+
+## 2026-08-24 - Admission-Transition Repair Candidate
+
+- Lifecycle direction: each admission now reviews one immutable planning
+  snapshot, writes one reviewer-owned report, and authorizes a separate
+  mechanical status transition. The resulting transition commit is the
+  implementation base; `start` records its exact identity.
+- Scope-audit direction: Milestone 0 may establish only
+  `pre-policy-scope-audit-complete`. Attestations, certificates, and accepted
+  coverage remain downstream of frozen policy and horizon authority.
+- Verification direction: the systemic-finding negative scenario is planned
+  under `fixtures/planning/`, outside the retained `fixtures/plans/invalid-*`
+  Bash glob, and is executed only by a registered Python suite.
+- Conformance direction: recovery records local agreement and the known A1
+  Draft 2020-12 nonconformance separately; runtime correction remains A1b work.
+- Licensing direction: the exact selected publication, terms authority,
+  reference-only use, and resulting obligations are recorded in
+  `reports/draft-2020-12-reference-licensing-decision.md`.
+- Candidate gate: run plan structure and lifecycle fixtures, generated
+  inventory freshness, all registered declarative suites, all 53 retained Bash
+  checkers without modifying them, and `git diff --check` from the final tree.
+  The generated checker inventory changes only because `issues.md` now names
+  the retained plan-fixture checker as affected evidence.
+- Lifecycle result: the plan remains `Blocked`. Independent review of the new
+  planning snapshot is the sole next operation.

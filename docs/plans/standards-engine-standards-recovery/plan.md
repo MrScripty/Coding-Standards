@@ -5,8 +5,8 @@
 **Current phase:** independent discovery admission
 
 **Next slice:** independently review this revised plan for a discovery-only
-Milestone 0 that reproduces accepted A1 behavior and completes the consumer
-audit; policy implementation remains unavailable until a second post-audit
+Milestone 0 that reproduces accepted A1 behavior and completes the pre-policy
+scope audit; policy implementation remains unavailable until a second post-audit
 exact-tree admission
 
 **Acceptance status:** `pending`
@@ -19,12 +19,19 @@ exact-tree admission
 `2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
 `97c850ab718287007c1e1daac538f40869f71a1d`
 
-**Admitted discovery/audit base:** `pending`; the first independent admission
-must bind the exact reviewed planning commit and tree before Milestone 0 `start`
+**Reviewed discovery planning snapshot:** `pending`; the independent report
+must bind the exact planning commit and tree it reviewed
 
-**Admitted policy-implementation base:** `pending`; a second independent
-admission must bind the exact post-audit planning commit and tree before any
-normative policy mutation
+**Discovery admission transition:** `pending`; the independent report must
+authorize only the mechanical lifecycle transition defined below
+
+**Admitted discovery/audit base:** `pending`; this is the commit produced by
+the authorized transition, and Milestone 0 `start` must record its exact commit
+and tree before changing the plan to `Active`
+
+**Admitted policy-implementation base:** `pending`; this is the mechanical
+transition commit authorized by the post-scope-audit admission report, and Milestone
+1 `start` must record its exact commit and tree before normative mutation
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -60,7 +67,7 @@ controlled authoring Plan A2.
 | SR-A4 | Every selected consumer has exactly one current `updated`, `reviewed-no-change`, `not-applicable`, or `blocked` disposition supported by reviewed evidence. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent consumer-disposition review |
 | SR-A5 | Normative documents and profiles, policy-unit declarations, policy-impact relationships, prompts, templates, behavioral fixtures, and executable verifier support agree at one exact tree. | `integration` | `not-applicable` | `automated` | `pending` | Pending coordinated projection evidence |
 | SR-A6 | Generated freshness and generated semantic correctness are proved by separate checks. | `contract` | `not-applicable` | `automated` | `pending` | Pending freshness and semantic-conformance evidence |
-| SR-A7 | Local implementation agreement and external conformance are proved separately against an official or independently accepted oracle. | `contract` | `not-applicable` | `automated` | `pending` | Pending external-conformance evidence |
+| SR-A7 | Recovery distinguishes local agreement from external conformance, records the accepted A1 boundary's known nonconformance against independent authority, and assigns runtime correction to A1b without claiming A1 conformance. | `contract` | `not-applicable` | `automated` | `pending` | Pending conformance-classification and known-nonconformance evidence |
 | SR-A8 | Schema instance equality and content-identity canonicalization are exercised as separate contracts. | `contract` | `not-applicable` | `automated` | `pending` | Pending equality-domain fixtures |
 | SR-A9 | Immutable authority reconstruction succeeds through a genuinely fresh public process and remains unaffected by post-capture source mutation. | `system` | `not-applicable` | `automated` | `pending` | Pending cold-process reconstruction evidence |
 | SR-A10 | Every negative fixture satisfies unrelated preconditions and proves the exact intended diagnostic or failure point. | `focused` | `not-applicable` | `automated` | `pending` | Pending isolated negative-fixture evidence |
@@ -68,7 +75,7 @@ controlled authoring Plan A2.
 | SR-A12 | Immutable reads and cold reconstruction are reproduced through their real public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `pending` | Pending historical authority-reproduction report |
 | SR-A13 | Every historical acceptance-oracle failure is reproduced at its intended failure point without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `pending` | Pending historical oracle-reproduction report |
 | SR-A14 | One clean candidate commit and tree pass focused recovery checks and all current registered verification. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
-| SR-A15 | An independent reviewer accepts the exact standards candidate, its complete consumer audit, and every objective claim with no blocked consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent standards-recovery acceptance report |
+| SR-A15 | An independent reviewer accepts the exact standards candidate, its final consumer coverage and dispositions, and every objective claim with no blocked consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent standards-recovery acceptance report |
 
 ## Scope
 
@@ -92,6 +99,8 @@ controlled authoring Plan A2.
 - Reproduction and durable recording of every historical A1 repair family,
   including the existing JSON Schema equality disagreement, before any later
   A1b correction.
+- A reference-only Licensing decision for the selected Draft 2020-12
+  specification authority; no third-party content is incorporated.
 - Independent plan admission and independent exact-tree standards acceptance.
 
 ### Out Of Scope
@@ -123,14 +132,15 @@ controlled authoring Plan A2.
 - Commit `3439aae9540786d9734431e633ea5b62afb50592` is the immutable comparison
   baseline for the brief, prior-state inventory, and policy-impact comparison.
   It is not the implementation checkout after planning commits are added.
-- The first independent admission binds only the discovery/audit base and may
-  authorize only Milestone 0. The second independent admission binds the exact
-  post-audit policy-implementation base; normative mutation from any other base
-  requires re-planning and a refreshed current-state inventory.
+- Discovery and policy admissions are pre-milestone transitions, not milestone
+  tasks. Each independent report binds one reviewed snapshot and authorizes one
+  exact mechanical lifecycle transition. The resulting transition commit is
+  the implementation base; `start` records its exact commit and tree before
+  changing the plan from `Planned` to `Active`.
 - No implementation invocation is admitted while this plan is `Blocked`.
-  Independent admission must bind the reviewed commit and tree, confirm the
-  bounded write sets, and transition the plan to `Planned` before `start` is
-  valid.
+  Writing an independent admission report and applying its authorized
+  plan/ledger/issues lifecycle transition are governance operations outside the
+  milestones. Any additional transition delta invalidates admission.
 - Policy authority and every required projection are one coordinated outcome.
   No milestone may accept prose-only policy or executable behavior without its
   normative owner.
@@ -166,6 +176,10 @@ controlled authoring Plan A2.
   temporary invocation outside repository authority, and the normative Draft
   2020-12 Core section 4.2.2 and Validation section 6.4.3. No upstream test
   corpus, executable, dependency, or copied test vector enters the repository.
+- The selected specification is third-party documentation. Its exact identity,
+  source, terms authority, reference-only use, and resulting obligations are
+  recorded in the
+  [reference Licensing decision](reports/draft-2020-12-reference-licensing-decision.md).
 
 ## Binding Decisions
 
@@ -178,6 +192,7 @@ controlled authoring Plan A2.
 | Schema instance equality, domain-value equality, and content-identity canonicalization are separate authority domains. This recovery establishes the policy distinction but does not implement A1b semantics. | Contracts | Authoring brief sections 3 and 6.3 | Reusing identity serialization as schema equality |
 | Independent evidence must prove the claimed property; freshness, local agreement, literal matching, mutation detection, and cold-process replay remain distinct claims. | Verification | Authoring brief section 5.1 | One undifferentiated green-check oracle |
 | The accepted A1 JSON Schema disagreement is one bounded historical reproduction, not a new repository focus. Existing A1 inputs and directly applicable normative specification clauses determine the expected result; no external test corpus is incorporated. | Verification | Draft 2020-12 Core section 4.2.2 and Validation section 6.4.3 | Vendored JSON Schema fixtures, a new dependency, or JSON-specific recovery policy |
+| Selecting Draft 2020-12 as reference authority invokes Licensing even though no file is copied. The accepted activity is citation and comparison only, with provenance retained and no incorporated or redistributed third-party content. | Licensing | [Reference-only Licensing decision](reports/draft-2020-12-reference-licensing-decision.md) | Treating no-copy use as Licensing non-applicability |
 | Recovery enforcement uses registered Python declarative suites and adds no Bash checker or Bash-checker behavior. | Verification-engine migration | [Active verification-engine plan](../standards-verification-engine/plan.md) | Temporary Bash enforcement or duplicate migration authority |
 | Current and proposed impact results are evidence inputs, not completeness proof. Coverage and per-consumer dispositions are mandatory. | Planning and coverage authority | `workflows/planning.md` projection-completeness policy | Treating zero edges as no impact |
 
@@ -221,6 +236,19 @@ policy unit, implementation must preserve this control loop:
 The initial inventory records no accepted relationships for the proposed new
 units. That is an unaudited starting condition, not evidence of no impact.
 
+### Audit State Distinction
+
+`pre-policy-scope-audit-complete` means the independent horizon was examined
+against one planned policy meaning, every discovered consumer class was mapped,
+and the proposed write/read sets contain a planned disposition for each. It is
+planning evidence only. It does not assert that a not-yet-created policy unit,
+relationship set, or horizon snapshot has accepted semantic coverage.
+
+Final coverage exists only after the policy authority and horizon-affecting
+inputs are frozen, an exact coverage requirement is derived, an authorized
+attestation is accepted, and a certificate validates against that exact state.
+Pre-policy scope audit records cannot satisfy SR-A3, SR-A4, or final acceptance.
+
 ## Required Projection Matrix
 
 | Projection | Required agreement |
@@ -231,7 +259,7 @@ units. That is an unaudited starting condition, not evidence of no impact.
 | Semantic graph | Source each policy-impact relationship from the owning policy unit; record typed applicability and independently audited coverage. |
 | `prompts/planning.md` and `prompts/implement-plan.md` | Require routed owners, class-level replanning for systemic findings, explicit oracle claims, and complete consumer dispositions without copying a static standards list. |
 | `templates/PLAN-TEMPLATE.md` | Provides only the fields necessary to record systemic invariant audits, independent evidence, impact dispositions, and re-plan triggers. |
-| Behavioral fixtures | Exercise applicability and non-applicability, intended negative failures, external conformance, semantic mutation, and cold-process reconstruction claims. |
+| Behavioral fixtures | Exercise applicability and non-applicability, intended negative failures, external-conformance classification, semantic mutation, and cold-process reconstruction claims. |
 | Executable verification | Enforces Router projection, policy ownership, policy-unit/graph consistency, exact negative diagnostics, independent oracle provenance, and complete registered verification. |
 
 ## Historical A1 Repair Reproduction Matrix
@@ -251,12 +279,55 @@ changes in this plan.
 | Equality and validation | Reproduce the accepted A1 Boolean/integer and Unicode behavior through canonical and generated public entry points, including the known disagreement, without adding permanent JSON-specific fixtures. | Existing accepted A1 inputs and directly applicable Draft 2020-12 specification clauses recorded in the reproduction report. | Agreement between canonical and generated local implementations. |
 | Acceptance oracles | Recreate malformed negative fixtures, substring diagnostics, incomplete differential matrices, copied expected literals, freshness-only checks, and sampled mutation claims; then demonstrate the intended stronger check. | Otherwise-valid fixtures, exact diagnostics, complete named matrices, and explicit claim/domain/oracle/unsupported-domain records. | Any nonzero exit, matching substring, or a subject-derived expected value. |
 
+## Pre-Milestone Admission Transitions
+
+Admission is governance over a plan, not implementation of a milestone. The
+repository-local report necessarily changes the tree after the reviewed
+snapshot, so admission uses an explicitly authorized two-commit transition.
+
+### Discovery Admission
+
+1. An independent reviewer evaluates one exact `Blocked` planning snapshot and
+   authors only
+   `reports/standards-recovery-discovery-admission.md`. The report binds the
+   reviewed commit/tree and either rejects it or authorizes the mechanical
+   transition below.
+2. If accepted, the integration owner creates one transition commit whose
+   parent is the admission-report commit and whose only changed files are
+   `plan.md`, `execution-ledger.md`, and `issues.md`. The transition records the
+   reviewed snapshot and admission-report commit/tree, sets the plan and
+   Milestone 0 to `Planned`, and names Milestone 0 `start` as the sole next
+   operation. It may not change scope, tasks, write sets, objectives, or
+   evidence contracts.
+3. That transition commit is the admitted discovery/audit base. `start` is
+   valid only when it is the current `HEAD`; the `start` transition records its
+   exact commit/tree in the ledger before creating the `Active` state.
+
+Any intervening commit, additional transition delta, or inability to resolve
+the reviewed/report parent chain invalidates admission and requires another
+review. No milestone operation occurs while the plan is `Blocked`.
+
+### Policy-Implementation Admission
+
+After Milestone 0 satisfies its gate, the plan becomes `Blocked` on policy
+admission. The same protocol applies: an independent reviewer authors only
+`reports/standards-recovery-policy-admission.md` against the exact post-scope-audit
+snapshot; a separate mechanical transition commit may change only `plan.md`,
+`execution-ledger.md`, and `issues.md`, set the plan and Milestone 1 to
+`Planned`, and name Milestone 1 `start`. That transition commit is the admitted
+policy-implementation base, and `start` records its exact identity. It may not
+change the audited consumer map, policy write set, or acceptance contracts.
+The report may accept only when every planned policy subject is
+`pre-policy-scope-audit-complete`, no planned disposition is blocked, the exact
+Milestone 1 write/read sets cover all mapped consumers, and Python-only fixture
+execution does not expand retained Bash behavior.
+
 ## Milestones
 
-### Milestone 0: Historical Reproduction And Consumer Audit
+### Milestone 0: Historical Reproduction And Pre-Policy Scope Audit
 
 **Goal:** Reproduce the accepted A1 boundary and complete the independent
-consumer audit without changing policy, verifier behavior, or A1 runtime.
+pre-policy scope audit without changing policy, verifier behavior, or A1 runtime.
 
 **Allowed write set:**
 
@@ -264,18 +335,12 @@ consumer audit without changing policy, verifier behavior, or A1 runtime.
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
 - `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
-- `docs/plans/standards-engine-standards-recovery/reports/pre-policy-consumer-audit.md` (new)
-- `docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md`
-- `docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md`
-- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-discovery-admission.md` (new, independent reviewer owned)
+- `docs/plans/standards-engine-standards-recovery/reports/pre-policy-scope-audit.md` (new)
+- `docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md` (new)
+- `docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md` (new)
 
 **Tasks:**
 
-- [ ] Obtain independent discovery admission bound to the exact planning commit
-  and tree; confirm the bounded reproduction/audit method and write set, with no
-  claim that the not-yet-executed consumer audit is complete.
-- [ ] Transition this plan from `Blocked` to `Planned`, then admit `start` for
-  this milestone only from the reviewed discovery boundary.
 - [ ] Bind every reproduction to accepted A1 commit
   `2359a98740b6035a0414bfaf5427ceaa1301a1c8` and tree
   `97c850ab718287007c1e1daac538f40869f71a1d`.
@@ -307,54 +372,25 @@ consumer audit without changing policy, verifier behavior, or A1 runtime.
 - [ ] Enumerate every independent-horizon member relevant to each proposed
   policy unit, review every known missing consumer class, and record its planned
   `updated`, `reviewed-no-change`, `not-applicable`, or `blocked` disposition.
-- [ ] Re-run current policy-impact and coverage analysis for every proposed
-  owner, complete the pre-policy consumer-audit report, and replace every
-  incomplete or unaudited inventory row before policy admission.
+- [ ] Record current policy-impact results and independently enumerate the
+  horizon for every proposed owner, complete the pre-policy scope-audit report,
+  and mark every planned policy subject `pre-policy-scope-audit-complete`
+  before policy admission.
 - [ ] Record A1b planning and all A2 work as unavailable while recovery remains
   incomplete.
+- [ ] After every Milestone 0 criterion passes, set the plan to `Blocked` on the
+  policy-implementation admission transition; do not mutate normative policy.
 
-**Acceptance gate:** The discovery-admission report accepts the exact plan tree
-and binds only the discovery/audit base; every historical repair family has a
-reproducible result from the accepted A1 boundary; the bounded schema-equality
-disagreement is recorded against normative specification authority; the
-independent horizon and every missing consumer class have planned dispositions;
-no external corpus, policy, verifier behavior, or A1 runtime changed.
+**Acceptance gate:** Every historical repair family has a reproducible result
+from the accepted A1 boundary; the bounded schema-equality disagreement is
+recorded against normative specification authority; every planned policy
+subject is `pre-policy-scope-audit-complete` with all known horizon members and
+missing consumer classes mapped to planned dispositions; no final coverage,
+external corpus, policy, verifier behavior, or A1 runtime changed.
 
 **Status:** `Blocked` pending independent discovery admission
 
-### Milestone 1: Policy-Implementation Admission
-
-**Goal:** Independently accept the complete post-audit scope, consumer map, and
-exact policy write set before any normative mutation.
-
-**Allowed write set:**
-
-- `docs/plans/standards-engine-standards-recovery/plan.md`
-- `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
-- `docs/plans/standards-engine-standards-recovery/issues.md`
-- `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
-- `docs/plans/standards-engine-standards-recovery/reports/pre-policy-consumer-audit.md`
-- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-policy-admission.md` (new, independent reviewer owned)
-
-**Tasks:**
-
-- [ ] Bind one clean post-audit candidate commit and tree without changing
-  normative policy, Router authority, verifier behavior, or A1 runtime.
-- [ ] Independently confirm every horizon member and missing consumer class has
-  a planned disposition, every proposed policy locator is coherent, and the
-  Milestone 2 write/read sets cover every selected consumer.
-- [ ] Confirm recovery enforcement uses only registered Python declarative
-  suites and does not add or extend Bash checkers.
-- [ ] Bind the accepted candidate as the policy-implementation base and admit
-  Milestone 2 only.
-
-**Acceptance gate:** The independent policy-admission report accepts the exact
-post-audit commit and tree, finds no missing or unaudited consumer class, binds
-the policy-implementation base, and admits no A1b or A2 work.
-
-**Status:** `Blocked` by Milestone 0
-
-### Milestone 2: Coordinated Standards Authority Cutover
+### Milestone 1: Coordinated Standards Authority Cutover
 
 **Goal:** Introduce the six policy families and all required routing,
 semantic-graph, agent, template, fixture, and enforcement projections as one
@@ -398,7 +434,7 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv` (new)
 - `evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv` (new)
 - `evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv` (new)
-- `evaluation/standards-effectiveness/fixtures/plans/invalid-systemic-finding-missing-audit.md` (new)
+- `evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md` (new)
 - `evaluation/standards-effectiveness/suites/standards-recovery-routing.toml` (new)
 - `evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml` (new)
 - `evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml` (new)
@@ -418,6 +454,7 @@ coherent candidate authority.
 - `workflows/documentation.md`
 - `workflows/tooling.md`
 - `workflows/implementation.md`
+- `topics/licensing.md`
 - `profiles/applications/library.md`
 - `profiles/boundaries/language-bindings.md`
 - `profiles/boundaries/ipc.md`
@@ -453,8 +490,8 @@ write set. Runtime-package edits are not admitted by this plan.
   discovery, graph composition, Router output, and metadata closure all resolve
   the same canonical ID.
 - [ ] Give the materially changed Router heading its own stable policy unit,
-  source-owned impact declaration, complete consumer audit, and coverage
-  subject rather than treating Router prose as an unowned projection.
+  source-owned impact declaration, mapped consumer set, and coverage subject
+  rather than treating Router prose as an unowned projection.
 - [ ] Register every policy unit and compile source-owned relationships to all
   reviewed projections and evidence consumers.
 - [ ] Update Planning and implementation prompts and the plan template to
@@ -471,8 +508,8 @@ write set. Runtime-package edits are not admitted by this plan.
   Bash checker.
 - [ ] Run prior/current graph comparison after each metadata batch and update
   the disposition report for every selected consumer.
-- [ ] Reject any remaining missing or unaudited consumer rather than accepting
-  an empty result.
+- [ ] Reject any missing consumer or unresolved final coverage subject rather
+  than accepting an empty result.
 
 **Acceptance gate:** Every policy heading resolves exactly once; Router prose
 and executable projection agree; current and proposed graph comparison has no
@@ -481,9 +518,10 @@ disposition; focused suites separately prove SR-A6 through SR-A10;
 forbidden runtime paths remain unchanged; all affected declarative and static
 verification passes.
 
-**Status:** `Blocked` by Milestone 1
+**Status:** `Blocked` pending Milestone 0 acceptance and the pre-milestone
+policy-implementation admission transition
 
-### Milestone 3: Coverage Freeze And Exact-Tree Acceptance
+### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
 **Goal:** Freeze the complete semantic authority, renew coverage exactly once,
 and obtain independent acceptance of one clean standards-recovery tree.
@@ -530,7 +568,7 @@ commit and tree; all SR-A1 through SR-A15 claims have matching evidence; every
 non-deferred milestone is accepted; no consumer is blocked; no A1b or A2
 implementation exists.
 
-**Status:** `Blocked` by Milestone 2
+**Status:** `Blocked` by Milestone 1
 
 ## Verification Strategy
 
@@ -550,7 +588,7 @@ different claim:
 
 - Independent discovery admission has not accepted the revised plan. No
   Milestone 0 operation is available, and policy implementation requires a
-  separate post-audit admission.
+  separate post-scope-audit admission.
 - The JSON Schema equality disagreement remains intentionally unresolved until
   Milestone 0 records an independent reproduction.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -561,13 +599,14 @@ different claim:
 
 - Independent admission rejects or materially changes the six-policy scope,
   consumer inventory, oracle selection, sequence, or write sets.
-- The first admission does not bind the exact discovery/audit base, the second
-  admission does not bind the exact policy-implementation base, or either slice
-  begins from a different tree. The comparison baseline remains `3439aae...`
-  and the historical A1 reproduction boundary remains `2359a987...`.
+- Either admission omits the reviewed snapshot, reviewer-report commit/tree,
+  authorized transition delta, or resulting implementation base; the parent
+  chain differs; or `start` does not record the exact current transition base.
+  The comparison baseline remains `3439aae...` and the historical A1
+  reproduction boundary remains `2359a987...`.
 - A proposed policy locator is missing, duplicated, overlapping, or cannot
   express one coherent semantic unit.
-- Impact analysis discovers a required consumer outside Milestone 2's write or
+- Impact analysis discovers a required consumer outside Milestone 1's write or
   explicit read-only sets, or a read-only consumer requires modification.
 - An empty impact result lacks current independent coverage, or the horizon is
   unable to discover consumers omitted from both the graph and node catalog.
@@ -607,7 +646,7 @@ may inspect immutable candidate trees and author only their named review report.
 
 ## Subsequent A1b Planning Gate
 
-Only after Milestone 3 is independently accepted may a separate A1b plan and
+Only after Milestone 2 is independently accepted may a separate A1b plan and
 superseding ADR be created. That planning phase must, at minimum:
 
 - evaluate a mature Draft 2020-12 validator against an explicitly bounded local
