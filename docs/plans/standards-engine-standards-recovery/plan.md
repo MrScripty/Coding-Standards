@@ -1,11 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 1 coverage-gated cardinality sequencing replan
+**Current phase:** Milestone 1 compiler-only cardinality recovery ready for start
 
-**Next slice:** obtain independent admission for the split M1/M2 cardinality
-recovery sequence; no test edit or relationship registration is authorized
+**Next slice:** run exact-head cardinality-recovery `start`; no test edit or
+relationship registration is authorized before that transition
 
 **Acceptance status:** `partial`
 
@@ -72,6 +72,14 @@ recovery sequence; no test edit or relationship registration is authorized
 **Admitted M1 cardinality-recovery base:** commit
 `0bc6343edc90b279733e6a956acefbc9d8b67fcd`, tree
 `acd0f113fad64d759b8b38c6799ed891165a5f2d`
+
+**Reviewed M1 cardinality-sequencing candidate:** commit
+`310b5b9caca66771579ce63d9761eb6edf441f32`, tree
+`4e06942cea33f492968e8ac1479ecd71aefad176`
+
+**M1 cardinality-sequencing admission:** report commit
+`85e9ca2df94adc7b062f2fc31de397cee5c00ecf`, tree
+`548fb19aaa43cddf082d340db2f296020cd7eb4a`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -752,7 +760,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Blocked` by coverage-gated cardinality sequencing admission
+**Status:** `Planned`; exact-head cardinality-recovery `start` is next
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -914,4 +922,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`

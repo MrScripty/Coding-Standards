@@ -824,3 +824,25 @@ superseded by the discovery-admission transition in the active plan.
 - Lifecycle result: the old range remains `discard-authorized`; the rewritten
   range is the sole selected lineage. No stash, temporary worktree, recovery
   ref, or uncommitted source change remains from the rewrite operation.
+
+## 2026-08-25 - M1 Cardinality-Sequencing Admission Transition
+
+- Reviewed candidate: commit
+  `310b5b9caca66771579ce63d9761eb6edf441f32`, tree
+  `4e06942cea33f492968e8ac1479ecd71aefad176`.
+- Independent admission report: commit
+  `85e9ca2df94adc7b062f2fc31de397cee5c00ecf`, tree
+  `548fb19aaa43cddf082d340db2f296020cd7eb4a`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, and SESR-027 lifecycle evidence. Scope, tasks,
+  semantic replacement contracts, `W/S/E/R`, tests, policy, relationships,
+  runtime, fixtures, suites, prompts, templates, generated artifacts, A1b,
+  and A2 remain unchanged.
+- Lifecycle transition: the plan and Milestone 1 move from `Blocked` to
+  `Planned`; Milestone 0 remains `Accepted`.
+- Recovery boundary: only the compiler identity-set correction is eligible
+  after exact-head start. The verifier, navigation, and analysis corrections
+  remain in Milestone 2 after coverage renewal.
+- Sole next operation: cardinality-recovery `start`. It must run while this
+  transition is current `HEAD`, record the exact transition commit/tree, and
+  only then move the plan and Milestone 1 to `Active`.
