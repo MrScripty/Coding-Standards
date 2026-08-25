@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 0 fixture-scope replan admission
+**Current phase:** Milestone 0 exact-head start
 
-**Next slice:** obtain exact-tree admission for the corrected fixture closure
+**Next slice:** start the corrected M0 implementation from the transition head
 
 **Acceptance status:** `pending`
 
@@ -24,6 +24,12 @@
 fixture-scope authorization by the replan triggered at commit
 `6e3f784353f44cf8566b493442ef2b722a622286`, tree
 `79951ad72664962cfebc6b4a2cb11210f23be7ba`
+
+**Fixture-scope admission boundary:** candidate commit
+`a38e1c5da05e28cb876d57a4ca868ce9e65a4870`, tree
+`d34b95cb81a3279b30792d0c224bbc11a31a1681`; reviewer report commit
+`e84e8442ddb4cef766b6e7a64f84d068f466e154`, tree
+`130da772e45faddb5a6c737c5cf9afe6073f57dc`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -383,7 +389,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Blocked` pending fixture-scope recovery admission
+**Status:** `Planned`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -451,8 +457,6 @@ accepts one exact clean candidate.
 
 ## Blockers
 
-- This plan and Milestone 0 remain blocked pending independent exact-tree
-  admission of the corrected fixture and graph-package write-set closure.
 - The standards-recovery plan remains blocked and provides no implementation
   fallback while this prerequisite is unresolved.
 
@@ -492,4 +496,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Blocked`
+- Final status: `Planned`

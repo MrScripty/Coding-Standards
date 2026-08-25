@@ -194,3 +194,20 @@
 - The accepted ADR, fixture design, production relationship inventory,
   public-v10 scope, and coverage design are unchanged. Implementation remains
   preserved and unavailable pending renewed exact-tree admission.
+
+## 2026-08-25 - Fixture-Scope Exact-Tree Admission Transition
+
+- Independent review accepts candidate commit
+  `a38e1c5da05e28cb876d57a4ca868ce9e65a4870`, tree
+  `d34b95cb81a3279b30792d0c224bbc11a31a1681`, with no Standards or
+  Specification findings.
+- Reviewer-owned report commit
+  `e84e8442ddb4cef766b6e7a64f84d068f466e154`, tree
+  `130da772e45faddb5a6c737c5cf9afe6073f57dc`, is the direct child of the
+  reviewed candidate and changes only the authorized admission report.
+- This mechanical transition moves the plan and M0 from `Blocked` to
+  `Planned`. PIA2-007 remains active; no implementation evidence is claimed.
+- No implementation is authorized by this transition. `start` must execute
+  while this transition is current `HEAD` with a clean worktree, bind its
+  exact commit/tree as the renewed implementation base, and move the plan and
+  M0 to `Active` before the preserved implementation is restored.
