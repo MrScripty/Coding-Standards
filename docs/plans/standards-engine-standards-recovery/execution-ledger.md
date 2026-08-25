@@ -937,3 +937,21 @@ superseded by the discovery-admission transition in the active plan.
 - Sole next operation: checker-consumer generated-evidence `start`. It must run
   while this transition is current `HEAD`, record its exact commit/tree, and
   only then move the plan and Milestone 1 to `Active`.
+
+## 2026-08-25 - M1 Generated-Evidence Start
+
+- Admitted transition base: commit
+  `317ec818864140d6636118844bbb95323f696166`, tree
+  `205e8e95414aa32ab6347f5acd2d33a968b46699`.
+- Start precondition: the transition was current `HEAD`, its direct parent was
+  the independent admission-report commit, and the worktree was clean.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted`.
+- Authorized implementation: mechanically regenerate only the existing
+  structure inventory and three admitted dependency-graph TSVs. Retain exactly
+  the reviewed contract-reference and corresponding field delta.
+- Exclusions: checker and generator sources, verifier/provider runtime,
+  component topology, policy semantics, A1b, and A2 remain unavailable.
+- Next operation: regenerate, prove provider-v2 membership and exact structured
+  delta, run the affected and complete verification gates, and commit the
+  generated-evidence closure independently.
