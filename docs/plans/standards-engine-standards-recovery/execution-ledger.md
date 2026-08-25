@@ -993,3 +993,24 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: commit this exact blocked candidate without verifier code,
   obtain the reviewer-owned Router-projection verifier admission, and apply
   only its authorized mechanical transition before exact-head `start`.
+
+## 2026-08-25 - Router-Projection Verifier Admission Transition
+
+- Reviewed candidate: commit
+  `879475365ea43c8962dbb319347e80cff665a87d`, tree
+  `231db42d0f9af703fd2c48343095ff203676e0ab`.
+- Independent admission report: commit
+  `e742b0f4876915d3f9330333d23e03b8016e6229`, tree
+  `d951491316bd0b5377061921522f103124edb313`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, and SESR-029 lifecycle fields. Verifier code,
+  generated artifacts, tests, policy, compiler/provider contracts, coverage,
+  A1b, and A2 remain unchanged.
+- Lifecycle transition: the plan and Milestone 1 move from `Blocked` to
+  `Planned`; Milestone 0 remains `Accepted`.
+- Recovery boundary: verifier implementation remains unavailable until
+  exact-head `start`; the admitted one-path shared-contract design and
+  two-stage M1/M2 evidence sequence are unchanged.
+- Sole next operation: Router-projection verifier recovery `start`. It must run
+  while this transition is current `HEAD`, record its exact commit/tree, and
+  only then move the plan and Milestone 1 to `Active`.

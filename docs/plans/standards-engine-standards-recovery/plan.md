@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 1 Router-projection verifier replan
+**Current phase:** Milestone 1 Router-projection verifier recovery transition
 
-**Next slice:** obtain exact-tree admission for the bounded verifier shared-contract repair
+**Next slice:** exact-head Router-projection verifier recovery `start`
 
 **Acceptance status:** `partial`
 
@@ -95,6 +95,14 @@
 **Admitted M1 generated-evidence base:** commit
 `317ec818864140d6636118844bbb95323f696166`, tree
 `205e8e95414aa32ab6347f5acd2d33a968b46699`
+
+**Reviewed M1 Router-projection verifier candidate:** commit
+`879475365ea43c8962dbb319347e80cff665a87d`, tree
+`231db42d0f9af703fd2c48343095ff203676e0ab`
+
+**M1 Router-projection verifier admission:** report commit
+`e742b0f4876915d3f9330333d23e03b8016e6229`, tree
+`d951491316bd0b5377061921522f103124edb313`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -910,8 +918,8 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Blocked`; generated evidence is present, but verifier implementation
-requires Router-projection recovery admission
+**Status:** `Planned`; exact-head Router-projection verifier recovery `start` is
+the sole next operation
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -1072,4 +1080,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`
