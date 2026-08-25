@@ -45,6 +45,10 @@ fixture-scope authorization by the replan triggered at commit
 `95cb97babff778497857e9e6be44ddc81e446564`, tree
 `1d85875000ddbf75256a4ec85e12fffcf196e04f`
 
+**Milestone 0 implementation boundary:** commit
+`9bbc1e050a865131a41559b7b3a7ce96a9fb4f23`, tree
+`40d10d62031a8f12a5913c9704d289de53cd50a7`
+
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
 **Issues:** [issues.md](issues.md)

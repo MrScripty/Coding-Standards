@@ -298,3 +298,23 @@
   the sole current phase. Its first operation records the clean M0 commit/tree,
   freezes the authority, and performs one mechanically complete certification
   pass before any further horizon-affecting change.
+
+## 2026-08-25 - Milestone 1 Authority Freeze Entry
+
+- Milestone 0 implementation is exact commit
+  `9bbc1e050a865131a41559b7b3a7ce96a9fb4f23`, tree
+  `40d10d62031a8f12a5913c9704d289de53cd50a7`; its worktree was clean before
+  this governance-only entry.
+- The compiled v2 contract, catalog, declarations, suite registry, edge-source
+  registry, canonical metadata corpus, and horizon inputs are now frozen for
+  certification. Any subsequent change to one of those inputs is a re-plan
+  trigger and invalidates attestation work.
+- The current horizon digest is
+  `sha256:538c9ef051b79129beb5d471394d9c399c7e3c2882567c6aad4c16c1b4d62f43`.
+  Adding the M0 candidate report did not change that digest or the mechanically
+  derived requirement handles, confirming typed-role exclusion of governance
+  evidence from coverage identity.
+- The next operation derives the complete requirement set from this frozen
+  authority, authors only the admitted attestation registry/files, and proves
+  subject equality through generated certificates. No relationship, horizon,
+  suite, module, policy-unit, or public-contract mutation is authorized.
