@@ -1,4 +1,4 @@
-schema_version = 1
+schema_version = 2
 owner = "topic.contracts"
 
 [[relationships]]
@@ -52,7 +52,7 @@ rationale = "Implementation preserves the admitted generated-contract evidence d
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/contracts/generate_contract.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The generator must project every supported schema semantic rather than only declaration freshness."
@@ -60,7 +60,7 @@ rationale = "The generator must project every supported schema semantic rather t
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Generated public models are a semantic projection of the canonical schema."
@@ -68,7 +68,7 @@ rationale = "Generated public models are a semantic projection of the canonical 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/__init__.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The public package facade exposes the generated request and result algebra."
@@ -76,7 +76,7 @@ rationale = "The public package facade exposes the generated request and result 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/tools.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The agent facade decodes requests and returns results through the generated contract boundary."
@@ -116,7 +116,7 @@ rationale = "Unsupported schema semantics trigger an explicit implementation-ver
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The schema declares its dialect and vocabulary authority."
@@ -124,7 +124,7 @@ rationale = "The schema declares its dialect and vocabulary authority."
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "tools/standards_engine/contracts/generate_contract.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The generator rejects unsupported schema semantics instead of silently omitting them."
@@ -132,7 +132,7 @@ rationale = "The generator rejects unsupported schema semantics instead of silen
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "tools/standards_engine/contracts/validate_contracts.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Contract validation uses the declared dialect and an independent semantic oracle where required."
@@ -156,7 +156,7 @@ rationale = "Suite enforces dialect and vocabulary handling."
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
 consumer = "tools/standards_metadata/standards_metadata/serialization.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Identity canonicalization remains distinct from schema instance equality."
@@ -164,7 +164,7 @@ rationale = "Identity canonicalization remains distinct from schema instance equ
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
 consumer = "tools/standards_engine/contracts/validate_contracts.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Schema validation applies the declared schema equality domain rather than identity normalization."
@@ -172,7 +172,7 @@ rationale = "Schema validation applies the declared schema equality domain rathe
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Generated validators preserve the same schema equality semantics as the canonical contract."
@@ -180,7 +180,7 @@ rationale = "Generated validators preserve the same schema equality semantics as
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
 consumer = "tools/standards_applicability/standards_applicability/core.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Applicability values use their declared domain equality without inheriting schema or identity rules accidentally."
@@ -188,7 +188,7 @@ rationale = "Applicability values use their declared domain equality without inh
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
 consumer = "tools/standards_engine/standards_engine/model.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Persisted handles bind the explicit identity canonicalization domain."

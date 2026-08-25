@@ -46,11 +46,18 @@ class ApplicabilityContractTest(unittest.TestCase):
         self.assertEqual(states, set(SUPPORTED_FACT_STATES))
         self.assertEqual(truths, {item.value for item in Truth})
         self.assertEqual(
-            definitions["CompiledApplicabilityProgram"]["properties"][
-                "language_version"
+            definitions["CoverageAuthorityView"]["properties"][
+                "applicability_language_version"
             ]["const"],
             LANGUAGE_VERSION,
         )
+        self.assertIn("PolicyRelationshipInspection", definitions)
+        for internal_definition in (
+            "PolicyImpactDeclaration",
+            "CompiledPolicyImpactSemantics",
+            "CompiledApplicabilityProgram",
+        ):
+            self.assertNotIn(internal_definition, definitions)
         self.assertNotIn(
             "minItems",
             definitions["ApplicabilityFactSchema"]["properties"]["facts"],

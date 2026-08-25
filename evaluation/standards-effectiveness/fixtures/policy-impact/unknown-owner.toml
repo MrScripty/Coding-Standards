@@ -1,5 +1,7 @@
-schema_version = 1
+schema_version = 2
 source_id = "standards.policy-impact"
+authoring_contract = "tools/standards_policy_impact/contracts/policy-impact-authoring-v2.toml"
 node_catalog = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
 fact_catalog = "evaluation/standards-effectiveness/policy-impact-facts.toml"
+suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
 declaration_sources = ["evaluation/standards-effectiveness/fixtures/policy-impact/declarations/unknown-owner.toml"]

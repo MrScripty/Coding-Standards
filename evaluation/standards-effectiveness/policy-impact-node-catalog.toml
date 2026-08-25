@@ -1,260 +1,246 @@
-schema_version = 1
+schema_version = 2
 source_id = "standards.policy-impact-catalog"
-edges = []
 
 [[nodes]]
 id = "prompts/full-codebase-standards-refactor.md"
-metadata = { repository_path = "prompts/full-codebase-standards-refactor.md", authority = "projection" }
+metadata = { repository_path = "prompts/full-codebase-standards-refactor.md", artifact_kind = "prompt", authority = "projection" }
 
 [[nodes]]
 id = "prompts/implement-plan.md"
-metadata = { repository_path = "prompts/implement-plan.md", authority = "projection" }
+metadata = { repository_path = "prompts/implement-plan.md", artifact_kind = "prompt", authority = "projection" }
 
 [[nodes]]
 id = "prompts/planning.md"
-metadata = { repository_path = "prompts/planning.md", authority = "projection" }
+metadata = { repository_path = "prompts/planning.md", artifact_kind = "prompt", authority = "projection" }
 
 [[nodes]]
 id = "templates/PLAN-TEMPLATE.md"
-metadata = { repository_path = "templates/PLAN-TEMPLATE.md", authority = "projection" }
+metadata = { repository_path = "templates/PLAN-TEMPLATE.md", artifact_kind = "template", authority = "projection" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/README.md"
-metadata = { repository_path = "evaluation/standards-effectiveness/README.md", authority = "projection" }
+metadata = { repository_path = "evaluation/standards-effectiveness/README.md", artifact_kind = "documentation", authority = "projection" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "concurrent-plan-integration"
 aliases = ["evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml", suite_id = "concurrent-plan-integration", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml", suite_id = "concurrent-plan-integration", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "full-review-prompt-entrypoint"
 aliases = ["evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml", suite_id = "full-review-prompt-entrypoint", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml", suite_id = "full-review-prompt-entrypoint", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "plan-implementation-entrypoint"
 aliases = ["evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml", suite_id = "plan-implementation-entrypoint", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml", suite_id = "plan-implementation-entrypoint", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "plan-template-projection"
 aliases = ["evaluation/standards-effectiveness/suites/plan-template-projection.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-template-projection.toml", suite_id = "plan-template-projection", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-template-projection.toml", suite_id = "plan-template-projection", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "planning-admission"
 aliases = ["evaluation/standards-effectiveness/suites/planning-admission.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-admission.toml", suite_id = "planning-admission", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-admission.toml", suite_id = "planning-admission", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "planning-consolidation"
 aliases = ["evaluation/standards-effectiveness/suites/planning-consolidation.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml", suite_id = "planning-consolidation", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml", suite_id = "planning-consolidation", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "policy-semantic-impact"
 aliases = ["evaluation/standards-effectiveness/suites/policy-semantic-impact.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml", suite_id = "policy-semantic-impact", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml", suite_id = "policy-semantic-impact", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "s1-routing"
 aliases = ["evaluation/standards-effectiveness/suites/s1-routing.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/s1-routing.toml", suite_id = "s1-routing", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/s1-routing.toml", suite_id = "s1-routing", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "commit-consolidation-dispositions"
 aliases = ["evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml", suite_id = "commit-consolidation-dispositions", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml", suite_id = "commit-consolidation-dispositions", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "release-maintenance-policy"
 aliases = ["evaluation/standards-effectiveness/suites/release-maintenance-policy.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml", suite_id = "release-maintenance-policy", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml", suite_id = "release-maintenance-policy", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/router-projection.toml"
-metadata = { repository_path = "evaluation/standards-effectiveness/router-projection.toml", authority = "projection" }
+metadata = { repository_path = "evaluation/standards-effectiveness/router-projection.toml", artifact_kind = "routing-projection", authority = "projection" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "standards-recovery-routing"
 aliases = ["evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml", suite_id = "standards-recovery-routing", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml", suite_id = "standards-recovery-routing", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "evidence-oracle-boundaries"
 aliases = ["evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml", suite_id = "evidence-oracle-boundaries", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml", suite_id = "evidence-oracle-boundaries", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "generated-contract-semantic-conformance"
 aliases = ["evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml", suite_id = "generated-contract-semantic-conformance", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml", suite_id = "generated-contract-semantic-conformance", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "immutable-authority-closure"
 aliases = ["evaluation/standards-effectiveness/suites/immutable-authority-closure.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/immutable-authority-closure.toml", suite_id = "immutable-authority-closure", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/immutable-authority-closure.toml", suite_id = "immutable-authority-closure", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "implementation-versus-dependency"
 aliases = ["evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml", suite_id = "implementation-versus-dependency", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml", suite_id = "implementation-versus-dependency", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "systemic-finding-replanning"
 aliases = ["evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml", suite_id = "systemic-finding-replanning", authority = "evidence" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml", suite_id = "systemic-finding-replanning", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
-metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md", authority = "evidence" }
+metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md", artifact_kind = "documentation", authority = "evidence" }
 
 [[nodes]]
 id = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md"
-metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md", authority = "evidence" }
+metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md", artifact_kind = "documentation", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/contracts/a1-contract.schema.json"
-metadata = { repository_path = "tools/standards_engine/contracts/a1-contract.schema.json", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/contracts/a1-contract.schema.json", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/contracts/generate_contract.py"
-metadata = { repository_path = "tools/standards_engine/contracts/generate_contract.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/contracts/generate_contract.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/contracts/validate_contracts.py"
-metadata = { repository_path = "tools/standards_engine/contracts/validate_contracts.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/contracts/validate_contracts.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/standards_engine/_generated_contract.py"
-metadata = { repository_path = "tools/standards_engine/standards_engine/_generated_contract.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/standards_engine/_generated_contract.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/standards_engine/__init__.py"
-metadata = { repository_path = "tools/standards_engine/standards_engine/__init__.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/standards_engine/__init__.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/standards_engine/tools.py"
-metadata = { repository_path = "tools/standards_engine/standards_engine/tools.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/standards_engine/tools.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/standards_engine/engine.py"
-metadata = { repository_path = "tools/standards_engine/standards_engine/engine.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/standards_engine/engine.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/standards_engine/model.py"
-metadata = { repository_path = "tools/standards_engine/standards_engine/model.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_engine/standards_engine/model.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_metadata/standards_metadata/serialization.py"
-metadata = { repository_path = "tools/standards_metadata/standards_metadata/serialization.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_metadata/standards_metadata/serialization.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_applicability/standards_applicability/core.py"
-metadata = { repository_path = "tools/standards_applicability/standards_applicability/core.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_applicability/standards_applicability/core.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_analysis/standards_analysis/snapshots.py"
-metadata = { repository_path = "tools/standards_analysis/standards_analysis/snapshots.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/snapshots.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_analysis/standards_analysis/resolution.py"
-metadata = { repository_path = "tools/standards_analysis/standards_analysis/resolution.py", authority = "evidence" }
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/resolution.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_analysis/standards_analysis/results.py"
-metadata = { repository_path = "tools/standards_analysis/standards_analysis/results.py", authority = "evidence" }
-
-[[groups]]
-id = "policy-impact"
-purpose = "Reviewed policy owners and the semantic consumers requiring impact review."
-directions = ["incoming", "outgoing"]
-transitive = false
-validator = "standards-verifier:policy-impact"
-
-[[groups]]
-id = "semantic"
-purpose = "Explicit reviewed semantic relationships between repository artifacts."
-directions = ["incoming", "outgoing"]
-transitive = false
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/results.py", artifact_kind = "implementation-artifact", authority = "evidence" }

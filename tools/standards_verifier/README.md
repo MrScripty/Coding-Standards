@@ -59,14 +59,13 @@ rejected because these groups do not permit it.
 
 The standards verifier is a downstream policy adapter. It validates canonical
 owner metadata, contained consumers, supported policy relations, non-empty
-applicability, registered evidence owners, duplicate semantic identities,
-current policy-unit coverage certificates, and enforcement-suite closure. Every
-registered suite whose explicit `owner` is covered must have one matching
-enforcement-suite edge. Prompt, template, fixture, and other semantic edges
-remain explicitly reviewed; they are not inferred. Hyperlinks, lexical
-similarity, standards `Requires`, suite ownership, and the temporary Bash
-checker graph never create semantic impact edges. Missing edges require an
-explicit declaration correction.
+applicability, registered evidence owners, duplicate semantic identities, and
+current policy-unit coverage certificates. Every semantic consumer, including
+an enforcement suite, is selected only by an explicit compiled relationship.
+Hyperlinks, lexical similarity, standards `Requires`, suite ownership, and the
+temporary Bash checker graph never create semantic impact edges. The independent
+coverage horizon and authorized audit detect missing consumers; missing edges
+require an explicit declaration correction.
 
 Repository graph composition reads canonical standards membership from
 `evaluation/standards-effectiveness/canonical-module-corpus.toml`. That

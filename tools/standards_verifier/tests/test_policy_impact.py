@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 - repository package roots must be installed before imports.
+
 import tempfile
+import sys
 import textwrap
-import tomllib
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -10,7 +12,6 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
-import sys
 
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(ENGINE_ROOT))
@@ -21,16 +22,15 @@ from tools.standards_metadata.standards_metadata import (
     load_canonical_standards_corpus,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
+    DEFAULT_AUTHORING_CONTRACT,
     PolicyImpactError,
     compile_policy_impact,
 )
 
-from standards_verifier.config import load_registry
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.policy_impact import (
     DEFAULT_SOURCE_REGISTRY,
     load_policy_impact,
-    load_registered_policy_impact,
 )
 from standards_verifier.repository_graph import load_repository_registry
 
@@ -111,47 +111,34 @@ class PolicyImpactTest(unittest.TestCase):
         self.write(
             "catalog.toml",
             """
-            schema_version = 1
+            schema_version = 2
             source_id = "standards.policy-impact-catalog"
-            edges = []
 
             [[nodes]]
             id = "prompt-a"
-            metadata = { repository_path = "prompts/a.md" }
+            metadata = { repository_path = "prompts/a.md", artifact_kind = "prompt", authority = "projection" }
 
             [[nodes]]
             id = "prompt-b"
-            metadata = { repository_path = "prompts/b.md" }
-
-            [[nodes]]
-            id = "reference-a"
-            metadata = { repository_path = "reference/recipes/a.md" }
+            metadata = { repository_path = "prompts/b.md", artifact_kind = "prompt", authority = "projection" }
 
             [[nodes]]
             id = "documentation"
-            metadata = { repository_path = "evaluation/README.md" }
+            metadata = { repository_path = "evaluation/README.md", artifact_kind = "documentation", authority = "projection" }
 
             [[nodes]]
             id = "not-documentation"
-            metadata = { repository_path = "evaluation/not-documentation.tsv" }
+            metadata = { repository_path = "evaluation/not-documentation.tsv", artifact_kind = "fixture", authority = "evidence" }
 
             [[nodes]]
             id = "evidence"
             aliases = ["suites/evidence.toml"]
-            metadata = { repository_path = "suites/evidence.toml", suite_id = "evidence" }
-
-            [[groups]]
-            id = "policy-impact"
-            purpose = "Fixture policy impact."
-            directions = ["incoming", "outgoing"]
-            transitive = false
-
-            [[groups]]
-            id = "semantic"
-            purpose = "Fixture semantics."
-            directions = ["incoming", "outgoing"]
-            transitive = false
+            metadata = { repository_path = "suites/evidence.toml", artifact_kind = "enforcement-suite", suite_id = "evidence", authority = "evidence" }
             """,
+        )
+        self.write(
+            "contract.toml",
+            (REPO_ROOT / DEFAULT_AUTHORING_CONTRACT).read_text(encoding="utf-8"),
         )
         self.write(
             "facts.toml",
@@ -170,7 +157,14 @@ class PolicyImpactTest(unittest.TestCase):
         )
         self.write(
             "evaluation/standards-effectiveness/edge-source-registry.toml",
-            "schema_version = 1\nsources = []\n",
+            """
+            schema_version = 1
+
+            [[sources]]
+            id = "standards.policy-impact"
+            kind = "provider"
+            provider = "standards.policy-impact"
+            """,
         )
         self.write(
             "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
@@ -178,10 +172,9 @@ class PolicyImpactTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 2
+            version = 3
             suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
             edge_source_registry = "evaluation/standards-effectiveness/edge-source-registry.toml"
-            policy_impact_node_catalog = "catalog.toml"
             """,
         )
         self.write(
@@ -218,17 +211,19 @@ class PolicyImpactTest(unittest.TestCase):
         self.write(
             "declarations.toml",
             (
-                f'schema_version = 1\nowner = "{owner}"\n'
+                f'schema_version = 2\nowner = "{owner}"\n'
                 + ("".join(relationships) if relationships else "relationships = []\n")
             ),
         )
         self.write(
             "registry.toml",
             """
-            schema_version = 1
+            schema_version = 2
             source_id = "standards.policy-impact"
+            authoring_contract = "contract.toml"
             node_catalog = "catalog.toml"
             fact_catalog = "facts.toml"
+            suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
             declaration_sources = ["declarations.toml"]
             """,
         )
@@ -243,7 +238,7 @@ class PolicyImpactTest(unittest.TestCase):
             self.write(
                 "coverage-attestations.toml",
                 f"""
-                schema_version = 1
+                schema_version = 2
 
                 [[attestations]]
                 requirement = "{requirement.handle}"
@@ -289,13 +284,13 @@ class PolicyImpactTest(unittest.TestCase):
             self.load(self.relationship(evidence="suite:missing"))
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.EVIDENCE_OWNER")
 
-    def test_relation_specific_consumer_validation_remains_downstream(self) -> None:
+    def test_compiler_owns_relation_target_compatibility(self) -> None:
         with self.assertRaises(EngineError) as raised:
             self.load(self.relationship("prompt-a", "template-projection"))
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
-
-        reference = self.load(self.relationship("reference-a", "reference-projection"))
-        self.assertEqual(reference.consumers_for("workflow.planning")[0].consumer, "reference/recipes/a.md")
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "POLICY_IMPACT.INCOMPATIBLE_TARGET",
+        )
 
         documentation = self.load(
             self.relationship("documentation", "documentation-projection")
@@ -304,7 +299,10 @@ class PolicyImpactTest(unittest.TestCase):
 
         with self.assertRaises(EngineError) as raised:
             self.load(self.relationship("not-documentation", "documentation-projection"))
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "POLICY_IMPACT.INCOMPATIBLE_TARGET",
+        )
 
     def test_uncovered_owner_query_is_typed_unavailable(self) -> None:
         impact = self.load(self.relationship())
@@ -328,29 +326,19 @@ class PolicyImpactTest(unittest.TestCase):
             "POLICY_IMPACT.OWNER_NOT_AUDITED",
         )
 
-    def test_requires_enforcement_edge_for_every_suite_owned_by_covered_owner(self) -> None:
-        self.write(
-            "suites/evidence.toml",
-            'schema_version = 1\nid = "evidence"\nowner = "workflow.planning"\n',
-        )
-        with self.assertRaises(EngineError) as raised:
-            self.load(self.relationship())
-        self.assertEqual(
-            raised.exception.diagnostic.code,
-            "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
-        )
-
-    def test_current_planning_graph_has_complete_alias_and_suite_closure(self) -> None:
-        entries = load_registry(REPO_ROOT, "evaluation/standards-effectiveness/suite-registry.toml")
-        impact = load_registered_policy_impact(
-            REPO_ROOT,
-            DEFAULT_SOURCE_REGISTRY,
-            {entry.id: entry.path for entry in entries},
-        )
-        consumers = {edge.consumer for edge in impact.consumers_for("workflow.planning")}
+    def test_current_planning_graph_has_explicit_consumer_and_alias_closure(self) -> None:
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+        compiled = compile_policy_impact(REPO_ROOT, corpus)
         graph = load_repository_registry(REPO_ROOT, DEFAULT_SOURCE_REGISTRY)
+        consumers = {
+            compiled.artifact_for(semantics.consumer).repository_path
+            if semantics.consumer in compiled.artifacts
+            else graph.nodes[semantics.consumer].metadata["repository_path"]
+            for semantics in compiled.semantics.values()
+            if corpus.policy_unit_corpus.active_by_id(semantics.source).module
+            == "workflow.planning"
+        }
 
-        self.assertEqual(len(consumers), 24)
         self.assertTrue(
             {
                 "prompts/full-codebase-standards-refactor.md",
@@ -363,24 +351,24 @@ class PolicyImpactTest(unittest.TestCase):
             graph.incident("workflow.planning", ("policy-impact",)),
             graph.incident("workflows/planning.md", ("policy-impact",)),
         )
-        planning_owned_suites = set()
-        for entry in entries:
-            with (REPO_ROOT / entry.path).open("rb") as handle:
-                if tomllib.load(handle).get("owner") == "workflow.planning":
-                    planning_owned_suites.add(entry.path)
-        self.assertTrue(planning_owned_suites.issubset(consumers))
 
     def test_current_commit_graph_has_complete_alias_and_suite_closure(self) -> None:
-        entries = load_registry(REPO_ROOT, "evaluation/standards-effectiveness/suite-registry.toml")
-        impact = load_registered_policy_impact(
-            REPO_ROOT,
-            DEFAULT_SOURCE_REGISTRY,
-            {entry.id: entry.path for entry in entries},
-        )
-        consumers = {edge.consumer for edge in impact.consumers_for("workflow.commit")}
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+        compiled = compile_policy_impact(REPO_ROOT, corpus)
         graph = load_repository_registry(REPO_ROOT, DEFAULT_SOURCE_REGISTRY)
+        consumers = {
+            compiled.artifact_for(semantics.consumer).repository_path
+            if semantics.consumer in compiled.artifacts
+            else graph.nodes[semantics.consumer].metadata["repository_path"]
+            for semantics in compiled.semantics.values()
+            if corpus.policy_unit_corpus.active_by_id(semantics.source).module
+            == "workflow.commit"
+        }
 
-        self.assertEqual(len(consumers), 15)
+        self.assertIn(
+            "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
+            consumers,
+        )
         self.assertEqual(graph.outgoing("workflow.commit", ("policy-impact",)), ())
         self.assertEqual(
             graph.incident("workflow.commit", ("policy-impact",)),

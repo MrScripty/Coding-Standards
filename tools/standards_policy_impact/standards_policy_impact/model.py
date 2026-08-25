@@ -32,10 +32,23 @@ def thaw(value: Any) -> Any:
 @dataclass(frozen=True, slots=True)
 class RelationshipKind:
     id: str
+    target_class: str
     groups: tuple[str, ...]
     propagation: str
     traversable: bool
     evidence_required: bool
+
+
+@dataclass(frozen=True, slots=True)
+class PolicyImpactArtifact:
+    id: str
+    aliases: tuple[str, ...]
+    repository_path: str
+    artifact_kind: str
+    authority: str
+    suite_id: str | None
+    coverage_fingerprint: str
+    source_path: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,12 +77,17 @@ class PolicyImpactSemantics:
 class CompiledPolicyImpactSet:
     graph: GraphContribution
     semantics: Mapping[str, PolicyImpactSemantics]
+    artifacts: Mapping[str, PolicyImpactArtifact]
+    relationship_kinds: Mapping[str, RelationshipKind]
     fact_schema: FactSchema
     node_catalog: str
     declaration_sources: tuple[str, ...]
     input_sources: tuple[str, ...]
     declaration_digest: str
+    catalog_digest: str
+    authoring_contract_digest: str
     provider_contract_digest: str
+    relationship_kind_contract_version: int
 
     def __post_init__(self) -> None:
         object.__setattr__(
@@ -77,9 +95,22 @@ class CompiledPolicyImpactSet:
             "semantics",
             MappingProxyType(dict(sorted(self.semantics.items()))),
         )
+        object.__setattr__(
+            self,
+            "artifacts",
+            MappingProxyType(dict(sorted(self.artifacts.items()))),
+        )
+        object.__setattr__(
+            self,
+            "relationship_kinds",
+            MappingProxyType(dict(sorted(self.relationship_kinds.items()))),
+        )
 
     def semantics_for(self, edge_id: str) -> PolicyImpactSemantics:
         return self.semantics[edge_id]
+
+    def artifact_for(self, node_id: str) -> PolicyImpactArtifact:
+        return self.artifacts[node_id]
 
 
 @dataclass(frozen=True, slots=True)

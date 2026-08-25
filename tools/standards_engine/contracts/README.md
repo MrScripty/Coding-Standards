@@ -42,9 +42,10 @@ tool session is established. Callers receive that opaque handle rather than a
 repository path. Calls always carry it explicitly, and an adapter cannot
 substitute the ambient current tree for a missing or stale handle.
 
-Contract version `9` has one representation under A1 verification.
+Contract version `10` has one representation under A1 verification.
 Incompatible contract changes require a new version and migration decision;
-unknown versions are `unsupported` and do not select a compatibility parser.
+version `9` and unknown versions are `unsupported` and do not select a
+compatibility parser.
 
 ## Identity Serialization
 

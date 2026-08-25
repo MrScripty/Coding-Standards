@@ -132,7 +132,7 @@
           "const": "analysis-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 3
         }
       },
       "required": [
@@ -264,7 +264,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:analysis:v2",
+        "domain": "coding-standards:analysis:v3",
         "exclude": [
           "kind",
           "handle",
@@ -298,10 +298,10 @@
       "additionalProperties": false,
       "properties": {
         "analysis_contract_version": {
-          "const": 5
+          "const": 6
         },
         "analysis_schema_version": {
-          "const": 2
+          "const": 3
         },
         "analyzer_implementation_version": {
           "$ref": "#/$defs/NonEmptyString"
@@ -322,7 +322,7 @@
           "$ref": "#/$defs/NonEmptyString"
         },
         "interface_schema_version": {
-          "const": 9
+          "const": 10
         },
         "metadata_api_version": {
           "$ref": "#/$defs/NonEmptyString"
@@ -331,7 +331,7 @@
           "$ref": "#/$defs/VersionMap"
         },
         "result_schema_version": {
-          "const": 1
+          "const": 2
         }
       },
       "required": [
@@ -655,7 +655,7 @@
           "const": "certificate-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 2
         }
       },
       "required": [
@@ -874,124 +874,6 @@
         "existing-policy": "accepted and proposed accepted-authority sidecars retain the accepted semantic revision; a proposed increment exists only in the AnalysisRequest semantic overlay",
         "removal": "proposed digests and revision are null; accepted digests and revision exist",
         "structural-equality": "may support representation-only-candidate but never proves semantic equivalence"
-      }
-    },
-    "CompiledApplicabilityProgram": {
-      "additionalProperties": false,
-      "properties": {
-        "dependency_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "language_version": {
-          "const": 1
-        },
-        "normalized_expression": {
-          "$ref": "#/$defs/ApplicabilityExpression"
-        },
-        "referenced_facts": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "schema_digest": {
-          "$ref": "#/$defs/Digest"
-        }
-      },
-      "required": [
-        "normalized_expression",
-        "referenced_facts",
-        "language_version",
-        "schema_digest",
-        "dependency_digest"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "identity": "dependency_digest binds language_version, normalized_expression, and exact referenced fact definitions using domain-separated canonical serialization"
-      }
-    },
-    "CompiledPolicyImpactSemantics": {
-      "additionalProperties": false,
-      "properties": {
-        "applicability_program": {
-          "$ref": "#/$defs/CompiledApplicabilityProgram"
-        },
-        "consumer": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "consumer_scope": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/ReviewScope"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "declaration_source": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "dependency_fingerprint": {
-          "$ref": "#/$defs/Digest"
-        },
-        "edge_id": {
-          "$ref": "#/$defs/EdgeId"
-        },
-        "evidence_owner": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "propagation": {
-          "const": "source-to-consumer"
-        },
-        "rationale": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "relation": {
-          "enum": [
-            "normative-consumer",
-            "router-projection",
-            "prompt-projection",
-            "template-projection",
-            "reference-projection",
-            "fixture-projection",
-            "enforcement-suite-projection",
-            "documentation-projection"
-          ]
-        },
-        "source": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "source_scope": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/ReviewScope"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "edge_id",
-        "source",
-        "consumer",
-        "relation",
-        "applicability_program",
-        "source_scope",
-        "consumer_scope",
-        "propagation",
-        "evidence_owner",
-        "rationale",
-        "declaration_source",
-        "dependency_fingerprint"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "applicability": "the compiled program is produced once by standards_applicability and is consumed without reparsing",
-        "projection": "the value is compiled from the same authoritative declaration as its generic edge and is never a second editable authority"
       }
     },
     "CompleteResult": {
@@ -1231,7 +1113,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:consumer-coverage-certificate:v1",
+        "domain": "coding-standards:consumer-coverage-certificate:v2",
         "exclude": [
           "handle",
           "provenance"
@@ -1410,7 +1292,7 @@
           "$ref": "#/$defs/CoverageRequirementHandle"
         },
         "schema_version": {
-          "const": 1
+          "const": 2
         }
       },
       "required": [
@@ -1426,7 +1308,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-attestation:v1",
+        "domain": "coding-standards:coverage-attestation:v2",
         "exclude": [
           "handle"
         ],
@@ -1451,7 +1333,7 @@
           "const": "coverage-attestation-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 2
         }
       },
       "required": [
@@ -1549,7 +1431,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-audit-requirement:v1",
+        "domain": "coding-standards:coverage-audit-requirement:v2",
         "exclude": [
           "handle",
           "derived_from_snapshot"
@@ -1708,7 +1590,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-authority-view:v1",
+        "domain": "coding-standards:coverage-authority-view:v2",
         "exclude": [
           "handle"
         ],
@@ -1744,7 +1626,7 @@
           "const": "coverage-authority-view-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 2
         }
       },
       "required": [
@@ -1825,7 +1707,7 @@
           "const": "coverage-requirement-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 2
         }
       },
       "required": [
@@ -2698,7 +2580,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v2",
+        "domain": "coding-standards:snapshot:v3",
         "exclude": [
           "handle",
           "commit",
@@ -3000,7 +2882,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v2",
+        "domain": "coding-standards:snapshot:v3",
         "exclude": [
           "handle",
           "versions.graph_engine_implementation_version",
@@ -3033,7 +2915,7 @@
           "const": "navigation-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 3
         },
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -3308,66 +3190,6 @@
       ],
       "type": "object"
     },
-    "PolicyImpactDeclaration": {
-      "additionalProperties": false,
-      "properties": {
-        "applicability": {
-          "$ref": "#/$defs/ApplicabilityExpression"
-        },
-        "consumer": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "consumer_scope": {
-          "$ref": "#/$defs/ReviewScope"
-        },
-        "evidence_owner": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "kind": {
-          "const": "policy-impact-declaration"
-        },
-        "rationale": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "relation": {
-          "enum": [
-            "normative-consumer",
-            "router-projection",
-            "prompt-projection",
-            "template-projection",
-            "reference-projection",
-            "fixture-projection",
-            "enforcement-suite-projection",
-            "documentation-projection"
-          ]
-        },
-        "source": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "source_scope": {
-          "$ref": "#/$defs/ReviewScope"
-        }
-      },
-      "required": [
-        "kind",
-        "source",
-        "consumer",
-        "relation",
-        "applicability",
-        "evidence_owner",
-        "rationale"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "authority": "the declaration is the sole relationship authority; graph topology and typed semantics are compiled projections",
-        "canonical-references": "source and consumer reference upstream canonical IDs without redefining aliases, paths, corpus membership, Requires, or Specializes",
-        "coverage": "coverage association is derived downstream by standards_analysis and is not relationship semantics",
-        "evidence": "evidence_owner is authored relationship semantics and must resolve to exactly one registered evidence owner",
-        "natural-key": "source, relation, and consumer are unique and derive policy-impact:v1/<encoded-source>/<encoded-relation>/<encoded-consumer>, where each UTF-8 segment uses uppercase percent encoding for every byte outside unreserved URI characters",
-        "propagation": "the relationship-kind contract owns domain propagation; version 1 admits no per-declaration override",
-        "relationship-kind-contract": "standards_policy_impact owns one versioned code table for the eight admitted relation kinds; every current kind belongs to policy-impact and semantic, propagates source-to-consumer, is traversable, and requires an explicit evidence owner"
-      }
-    },
     "PolicyImpactSelectionReason": {
       "additionalProperties": false,
       "properties": {
@@ -3443,6 +3265,70 @@
         "provenance"
       ],
       "type": "object"
+    },
+    "PolicyRelationshipInspection": {
+      "additionalProperties": false,
+      "properties": {
+        "applicability": {
+          "$ref": "#/$defs/ApplicabilityExpression"
+        },
+        "consumer_scope": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ReviewScope"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_owner": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "propagation": {
+          "const": "source-to-consumer"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "relationship_kind": {
+          "enum": [
+            "normative-consumer",
+            "router-projection",
+            "prompt-projection",
+            "template-projection",
+            "reference-projection",
+            "fixture-projection",
+            "enforcement-suite-projection",
+            "documentation-projection",
+            "implementation-projection"
+          ]
+        },
+        "source_scope": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ReviewScope"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "relationship_kind",
+        "applicability",
+        "source_scope",
+        "consumer_scope",
+        "propagation",
+        "evidence_owner",
+        "rationale"
+      ],
+      "type": "object",
+      "x-standards-engine-invariants": {
+        "internal-boundary": "repository declaration paths, compiled program internals, and dependency fingerprints are not public",
+        "projection": "the value is an operation-shaped inspection of compiled relationship authority and is never an editable declaration"
+      }
     },
     "PolicySummary": {
       "additionalProperties": false,
@@ -3879,7 +3765,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v2",
+        "domain": "coding-standards:navigation:v3",
         "exclude": [
           "handle.id",
           "next_operations",
@@ -4107,7 +3993,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v2",
+        "domain": "coding-standards:navigation:v3",
         "exclude": [
           "handle.id",
           "next_operations",
@@ -4150,7 +4036,7 @@
         "policy_semantics": {
           "oneOf": [
             {
-              "$ref": "#/$defs/CompiledPolicyImpactSemantics"
+              "$ref": "#/$defs/PolicyRelationshipInspection"
             },
             {
               "type": "null"
@@ -4361,7 +4247,7 @@
       ],
       "type": "object",
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v2",
+        "domain": "coding-standards:navigation:v3",
         "exclude": [
           "handle.id",
           "next_operations",
@@ -4588,7 +4474,7 @@
           "const": "snapshot-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 3
         }
       },
       "required": [
@@ -4739,7 +4625,7 @@
     }
   },
   "canonical_schema": "../a1-contract.schema.json",
-  "schema_version": 9,
+  "schema_version": 10,
   "tools": [
     {
       "description": "Route, read, or navigate relationships in one exact standards snapshot.",

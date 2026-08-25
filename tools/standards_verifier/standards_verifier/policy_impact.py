@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-import tomllib
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from typing import Mapping
 
 from tools.graph_engine.graph_engine import EdgeRegistry, GraphError
-from tools.graph_engine.graph_engine.manifest import ManifestSource
 from tools.standards_applicability.standards_applicability import ApplicabilityProgram
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
@@ -18,11 +16,9 @@ from tools.standards_metadata.standards_metadata import (
     MetadataError,
     PolicyUnitCorpus,
     load_canonical_standards_corpus,
-    load_module_metadata,
 )
 from tools.standards_graph.standards_graph import PolicyUnitGraphSource
 from tools.standards_policy_impact.standards_policy_impact import (
-    CATALOG_SOURCE_ID,
     CompiledPolicyImpactSet,
     PolicyImpactError,
     PolicyImpactSource,
@@ -200,113 +196,6 @@ def _impact_edge(
     )
 
 
-def _load_module(root: Path, path: str, *, suite: str, check: str):
-    try:
-        return load_module_metadata(root, path)
-    except MetadataError as error:
-        failure = error.failure
-        raise _diagnostic(
-            failure.code,
-            failure.message,
-            path=failure.path,
-            field=failure.field,
-            observed=failure.observed,
-            suite=suite,
-            check=check,
-            unavailable=failure.outcome == "unavailable",
-        ) from error
-
-
-def _validate_consumer(
-    root: Path,
-    edge: ImpactEdge,
-    suite_paths: Mapping[str, str],
-    *,
-    suite: str,
-    check: str,
-) -> None:
-    contained_file(root, edge.consumer, suite=suite, check=check)
-    path = PurePosixPath(edge.consumer)
-    valid = False
-    if edge.relation == "normative-consumer":
-        _load_module(root, edge.consumer, suite=suite, check=check)
-        valid = True
-    elif edge.relation == "router-projection":
-        valid = _load_module(root, edge.consumer, suite=suite, check=check).module_id == "router"
-    elif edge.relation == "prompt-projection":
-        valid = path.parts[:1] == ("prompts",) and path.suffix == ".md"
-    elif edge.relation == "template-projection":
-        valid = path.parts[:1] == ("templates",) and path.suffix == ".md"
-    elif edge.relation == "reference-projection":
-        valid = path.parts[:1] == ("reference",) and path.suffix == ".md"
-    elif edge.relation == "documentation-projection":
-        valid = path.suffix == ".md"
-    elif edge.relation == "fixture-projection":
-        valid = path.parts[:3] == (
-            "evaluation",
-            "standards-effectiveness",
-            "fixtures",
-        )
-    elif edge.relation == "enforcement-suite-projection":
-        valid = edge.consumer in set(suite_paths.values())
-    if not valid:
-        raise _diagnostic(
-            "POLICY_IMPACT.UNKNOWN_CONSUMER",
-            "consumer does not resolve for its declared semantic relation",
-            path=edge.consumer,
-            field="consumer",
-            observed=edge.consumer,
-            suite=suite,
-            check=check,
-        )
-
-
-def _suite_owners(
-    root: Path,
-    suite_paths: Mapping[str, str],
-    *,
-    suite: str,
-    check: str,
-) -> dict[str, str]:
-    owners: dict[str, str] = {}
-    for suite_id, suite_path in suite_paths.items():
-        source = contained_file(root, suite_path, suite=suite, check=check)
-        try:
-            with source.open("rb") as handle:
-                raw = tomllib.load(handle)
-        except tomllib.TOMLDecodeError as error:
-            raise _diagnostic(
-                "POLICY_IMPACT.INVALID_TOML",
-                str(error),
-                path=suite_path,
-                suite=suite,
-                check=check,
-            ) from error
-        if raw.get("id") != suite_id:
-            raise _diagnostic(
-                "POLICY_IMPACT.SUITE_ID",
-                "registered suite ID does not match its suite file",
-                path=suite_path,
-                field="id",
-                observed=str(raw.get("id")),
-                suite=suite,
-                check=check,
-            )
-        owner = raw.get("owner")
-        if not isinstance(owner, str) or not owner:
-            raise _diagnostic(
-                "POLICY_IMPACT.SUITE_OWNER",
-                "registered suite owner must be a non-empty string",
-                path=suite_path,
-                field="owner",
-                observed=str(owner),
-                suite=suite,
-                check=check,
-            )
-        owners[suite_id] = owner
-    return owners
-
-
 def _validate_adapter(
     root: Path,
     registry: EdgeRegistry,
@@ -317,7 +206,6 @@ def _validate_adapter(
     suite: str,
     check: str,
 ) -> None:
-    identities: set[tuple[str, str, str]] = set()
     relationship_sources = {
         semantics.source for semantics in compiled.semantics.values()
     }
@@ -328,24 +216,7 @@ def _validate_adapter(
     }
     for owner in sorted(relationship_owners):
         for edge in _declared_consumers(registry, compiled, policy_units, owner):
-            _validate_consumer(root, edge, suite_paths, suite=suite, check=check)
-            identities.add((edge.owner, edge.consumer, edge.relation))
-
-    for suite_id, owner in sorted(
-        _suite_owners(root, suite_paths, suite=suite, check=check).items()
-    ):
-        if owner not in relationship_owners:
-            continue
-        identity = (owner, suite_paths[suite_id], "enforcement-suite-projection")
-        if identity not in identities:
-            raise _diagnostic(
-                "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
-                "suite owned by a relationship-owning policy module requires an enforcement-suite edge",
-                field="relationships",
-                observed=f"{suite_id}|{suite_paths[suite_id]}",
-                suite=suite,
-                check=check,
-            )
+            contained_file(root, edge.consumer, suite=suite, check=check)
 
 
 def load_policy_impact(
@@ -365,7 +236,6 @@ def load_policy_impact(
             (
                 metadata_dependency_source(corpus.modules),
                 PolicyUnitGraphSource(corpus.policy_unit_corpus),
-                ManifestSource(repo_root, CATALOG_SOURCE_ID, compiled.node_catalog),
                 PolicyImpactSource(compiled),
             ),
         )

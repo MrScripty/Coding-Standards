@@ -10,7 +10,6 @@ from .metadata import (
     metadata_dependency_source,
 )
 from .repository import (
-    POLICY_IMPACT_NODE_CATALOG,
     POLICY_IMPACT_REGISTRY,
     standards_navigation_registry,
 )
@@ -23,7 +22,6 @@ __all__ = (
     "METADATA_DEPENDENCIES",
     "METADATA_REQUIRES",
     "METADATA_SPECIALIZES",
-    "POLICY_IMPACT_NODE_CATALOG",
     "POLICY_IMPACT_REGISTRY",
     "POLICY_UNIT_SOURCE_ID",
     "MetadataModule",

@@ -537,21 +537,16 @@ class NavigationTest(unittest.TestCase):
         semantics = policy_inspection["policy_semantics"]
         self.assertIsNotNone(semantics)
         assert semantics is not None
-        self.assertEqual(semantics["edge_id"], policy_handle["id"])
-        self.assertTrue(semantics["source"].startswith("workflow.planning."))
-        self.assertNotEqual(semantics["source"], "workflow.planning")
-        program = semantics["applicability_program"]
-        self.assertEqual(program["normalized_expression"], {"operator": "always"})
-        self.assertEqual(program["referenced_facts"], [])
-        self.assertEqual(program["language_version"], 1)
-        self.assertTrue(program["schema_digest"].startswith("sha256:"))
-        self.assertTrue(program["dependency_digest"].startswith("sha256:"))
+        self.assertEqual(
+            semantics["relationship_kind"],
+            policy_inspection["relationship"]["relation"],
+        )
+        self.assertEqual(semantics["applicability"], {"operator": "always"})
         self.assertEqual(semantics["propagation"], "source-to-consumer")
         self.assertTrue(semantics["evidence_owner"].startswith("suite:"))
         self.assertTrue(semantics["rationale"])
-        self.assertTrue(
-            semantics["declaration_source"].endswith("workflow.planning.toml")
-        )
+        self.assertNotIn("declaration_source", semantics)
+        self.assertNotIn("dependency_fingerprint", semantics)
 
         navigation = self.engine.inspect(InspectCall(value["handle"]))
         navigation_value = self.assert_contract(

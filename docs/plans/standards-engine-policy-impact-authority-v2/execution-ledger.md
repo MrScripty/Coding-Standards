@@ -271,3 +271,30 @@
   restored.
 - Implementation remains bounded by the corrected M0 write set. PIA2-008
   remains active pending exact public-closure and conformance evidence.
+
+## 2026-08-25 - Milestone 0 Implemented Boundary
+
+- The internal policy-impact authoring contract, registry, typed artifact
+  catalog, all registered declaration sources, graph contribution, semantics,
+  provenance, coverage projection, verifier Adapter, and public A1 version 10
+  contract were replaced as one coordinated source change.
+- The admitted migration inventory now drives an exact identity-set test. It
+  stores no relationship, edge, policy-unit, or standards total.
+- Seven retained negative fixtures reach their exact diagnostics through the
+  production Interface. The obsolete owner-wide suite-inference fixture pair
+  and current inference claims were removed.
+- PIA2-001, PIA2-002, PIA2-003, PIA2-007, and PIA2-008 are resolved by the
+  linked M0 candidate evidence. PIA2-004 and PIA2-006 remain active through
+  coverage freeze, cold reconstruction, transition reproduction, and exact
+  certificate equality.
+- Focused compiler, graph, analysis, verifier, public-contract, generated, and
+  version checks pass. Generated migration evidence and every retained
+  migration checker pass. The complete declarative boundary has one failure:
+  production coverage attestations still use the predecessor schema and reject
+  with `COVERAGE.ATTESTATION_VERSION`.
+- That exact coverage-only failure is the admitted M0 intermediate boundary.
+  M0 is `Implemented`, not `Accepted`; no attestation or certificate is
+  accepted by this transition. Milestone 1 moves from `Blocked` to `Active` as
+  the sole current phase. Its first operation records the clean M0 commit/tree,
+  freezes the authority, and performs one mechanically complete certification
+  pass before any further horizon-affecting change.

@@ -12,7 +12,7 @@ from .errors import AnalysisError, AnalysisFailure
 from .serialization import digest_bytes, identity
 
 
-SNAPSHOT_DOMAIN = "coding-standards:snapshot:v2"
+SNAPSHOT_DOMAIN = "coding-standards:snapshot:v3"
 
 
 @dataclass(frozen=True, slots=True)
@@ -23,16 +23,16 @@ class AnalysisVersions:
     analyzer_implementation_version: str = "1"
     parser_versions: tuple[tuple[str, str], ...] = (("markdown-heading", "1"),)
     evidence_provider_contract_versions: tuple[tuple[str, str], ...] = (
-        ("policy-impact-consumer-horizon", "2"),
+        ("policy-impact-consumer-horizon", "3"),
         ("repository-content", "1"),
     )
 
     def as_contract(self) -> dict[str, object]:
         return {
-            "analysis_contract_version": 5,
-            "analysis_schema_version": 2,
-            "result_schema_version": 1,
-            "interface_schema_version": 9,
+            "analysis_contract_version": 6,
+            "analysis_schema_version": 3,
+            "result_schema_version": 2,
+            "interface_schema_version": 10,
             "applicability_version": 3,
             "authorization_contract_version": "authorization-authority.v1",
             "metadata_api_version": self.metadata_api_version,
@@ -144,7 +144,7 @@ def _handle(identity_value: dict[str, object]) -> dict[str, object]:
     return {
         "kind": "snapshot-handle",
         "id": identity(SNAPSHOT_DOMAIN, "snapshot", identity_value),
-        "schema_version": 2,
+        "schema_version": 3,
     }
 
 

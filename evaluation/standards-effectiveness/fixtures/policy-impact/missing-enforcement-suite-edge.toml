@@ -1,5 +1,0 @@
-schema_version = 1
-source_id = "standards.policy-impact"
-node_catalog = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
-fact_catalog = "evaluation/standards-effectiveness/policy-impact-facts.toml"
-declaration_sources = ["evaluation/standards-effectiveness/fixtures/policy-impact/declarations/missing-enforcement-suite-edge.toml"]

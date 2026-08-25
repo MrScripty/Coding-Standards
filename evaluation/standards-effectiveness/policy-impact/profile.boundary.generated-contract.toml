@@ -1,4 +1,4 @@
-schema_version = 1
+schema_version = 2
 owner = "profile.boundary.generated-contract"
 
 [[relationships]]
@@ -92,7 +92,7 @@ rationale = "Dependencies owns the decision to implement unsupported semantics o
 [[relationships]]
 source = "profile.boundary.generated-contract.semantic-closure"
 consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The authored schema is the serialized contract authority."
@@ -100,7 +100,7 @@ rationale = "The authored schema is the serialized contract authority."
 [[relationships]]
 source = "profile.boundary.generated-contract.semantic-closure"
 consumer = "tools/standards_engine/contracts/generate_contract.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The generator compiles the supported schema profile into public models."
@@ -108,7 +108,7 @@ rationale = "The generator compiles the supported schema profile into public mod
 [[relationships]]
 source = "profile.boundary.generated-contract.semantic-closure"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Generated models preserve the supported schema semantics."
@@ -116,7 +116,7 @@ rationale = "Generated models preserve the supported schema semantics."
 [[relationships]]
 source = "profile.boundary.generated-contract.semantic-closure"
 consumer = "tools/standards_engine/standards_engine/tools.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The public tool boundary consumes only the generated result algebra."

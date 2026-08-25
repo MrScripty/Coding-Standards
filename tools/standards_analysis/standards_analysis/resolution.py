@@ -75,7 +75,7 @@ from .serialization import canonical_json_bytes, identity
 from .snapshots import AnalysisVersions
 
 
-ANALYSIS_DOMAIN = "coding-standards:analysis:v2"
+ANALYSIS_DOMAIN = "coding-standards:analysis:v3"
 AUTHORIZATION_VIEW_DOMAIN = "coding-standards:authorization-authority-view:v1"
 PROVIDER_VIEW_DOMAIN = "coding-standards:provider-authority-view:v1"
 AUTHORIZATION_CONTRACT = "authorization-authority.v1"
@@ -321,7 +321,7 @@ class AnalysisState:
         return {
             "kind": "analysis-handle",
             "id": self.id,
-            "schema_version": 2,
+            "schema_version": 3,
         }
 
     def as_contract(self) -> dict[str, object]:
@@ -528,6 +528,18 @@ def analysis_state_from_contract(value: Mapping[str, object]) -> AnalysisState:
     """Reconstruct and verify one persisted immutable analysis state."""
     try:
         handle = _required_mapping(value, "handle")
+        provenance = _required_mapping(value, "provenance")
+        if (
+            handle.get("schema_version") != 3
+            or provenance.get("analysis_schema_version") != 3
+            or provenance.get("interface_schema_version") != 10
+        ):
+            raise _error(
+                "ANALYSIS.UNSUPPORTED_VERSION",
+                "persisted analysis state version is unsupported",
+                outcome="unsupported",
+                observed=str(handle.get("schema_version")),
+            )
         authorization_value = _required_mapping(value, "authorization_view")
         provider_value = _required_mapping(value, "provider_view")
         authorization_view = _authorization_view_from_contract(authorization_value)

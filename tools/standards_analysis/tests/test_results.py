@@ -45,7 +45,7 @@ SCHEMA = json.loads(
 ANALYSIS = {
     "kind": "analysis-handle",
     "id": "analysis:sha256:" + "8" * 64,
-    "schema_version": 2,
+    "schema_version": 3,
 }
 SCOPE = ReviewScope("whole-artifact")
 
@@ -290,7 +290,7 @@ class PendingResultTest(unittest.TestCase):
             (),
             "The bounded consumer horizon was reviewed.",
             "reviewer.authorized",
-            1,
+            2,
             "attestations/test.toml",
         )
         coverage = CoverageAttestationSubmission(obligation().id, attestation)

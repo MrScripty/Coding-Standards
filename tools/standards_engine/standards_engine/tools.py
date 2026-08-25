@@ -23,12 +23,17 @@ from .model import (
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
 
 
+class InterfaceVersionError(ValueError):
+    pass
+
+
 class AgentToolFacade:
     """Validated structured transport over the native Standards Engine API."""
 
     def __init__(self, engine: StandardsEngine, schema: Mapping[str, object]) -> None:
         self._engine = engine
         self._schema = schema
+        self._handle_versions = self._derive_handle_versions(schema)
 
     @classmethod
     def open_repository(cls, root: Path) -> AgentToolFacade:
@@ -74,6 +79,8 @@ class AgentToolFacade:
             call = decode_contract("QueryCall", value)
             if not isinstance(call, QueryCall):
                 raise RuntimeError("generated QueryCall decoder returned the wrong type")
+        except InterfaceVersionError as error:
+            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.query(call)
@@ -88,6 +95,8 @@ class AgentToolFacade:
             call = decode_contract("PrepareCall", value)
             if not isinstance(call, PrepareCall):
                 raise RuntimeError("generated PrepareCall decoder returned the wrong type")
+        except InterfaceVersionError as error:
+            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.prepare(call.request)
@@ -102,6 +111,8 @@ class AgentToolFacade:
             call = decode_contract("ResolveCall", value)
             if not isinstance(call, ResolveCall):
                 raise RuntimeError("generated ResolveCall decoder returned the wrong type")
+        except InterfaceVersionError as error:
+            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.resolve(call.analysis, call.submission)
@@ -116,6 +127,8 @@ class AgentToolFacade:
             call = decode_contract("InspectCall", value)
             if not isinstance(call, InspectCall):
                 raise RuntimeError("generated InspectCall decoder returned the wrong type")
+        except InterfaceVersionError as error:
+            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.inspect(call)
@@ -124,12 +137,55 @@ class AgentToolFacade:
         return output
 
     def _validate(self, definition: str, value: object) -> None:
+        self._require_supported_handle_versions(value)
         validate(
             self._schema,
             self._schema["$defs"][definition],
             value,
             "$arguments",
         )
+
+    @staticmethod
+    def _derive_handle_versions(schema: Mapping[str, object]) -> dict[str, int]:
+        definitions = schema.get("$defs")
+        if not isinstance(definitions, Mapping):
+            raise TypeError("canonical schema definitions must be an object")
+        versions: dict[str, int] = {}
+        for definition in definitions.values():
+            if not isinstance(definition, Mapping):
+                continue
+            properties = definition.get("properties")
+            if not isinstance(properties, Mapping):
+                continue
+            kind_schema = properties.get("kind")
+            version_schema = properties.get("schema_version")
+            if not isinstance(kind_schema, Mapping) or not isinstance(
+                version_schema, Mapping
+            ):
+                continue
+            kind = kind_schema.get("const")
+            version = version_schema.get("const")
+            if isinstance(kind, str) and kind.endswith("-handle") and isinstance(
+                version, int
+            ):
+                versions[kind] = version
+        return versions
+
+    def _require_supported_handle_versions(self, value: object) -> None:
+        if isinstance(value, Mapping):
+            kind = value.get("kind")
+            expected = self._handle_versions.get(str(kind))
+            observed = value.get("schema_version")
+            if expected is not None and observed != expected:
+                raise InterfaceVersionError(
+                    f"{kind} schema version {observed!r} is unsupported; "
+                    f"expected {expected}"
+                )
+            for item in value.values():
+                self._require_supported_handle_versions(item)
+        elif isinstance(value, (list, tuple)):
+            for item in value:
+                self._require_supported_handle_versions(item)
 
     def _validate_result(self, value: dict[str, object]) -> None:
         definition = RESULT_KIND_TO_DEFINITION[str(value["kind"])]

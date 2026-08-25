@@ -10,7 +10,7 @@ from typing import Any, ClassVar, Iterator, Literal, Mapping, TypeAlias
 
 from tools.standards_metadata.standards_metadata import canonical_json_bytes
 
-INTERFACE_SCHEMA_VERSION = 9
+INTERFACE_SCHEMA_VERSION = 10
 PUBLIC_OPERATIONS = MappingProxyType(
 {'inspect': {'capability': 'standards.read',
              'input': 'InspectCall',
@@ -76,7 +76,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'AnalysisHandle': {'additionalProperties': False,
                     'properties': {'id': {'$ref': '#/$defs/AnalysisId'},
                                    'kind': {'const': 'analysis-handle'},
-                                   'schema_version': {'const': 2}},
+                                   'schema_version': {'const': 3}},
                     'required': ['kind', 'id', 'schema_version'],
                     'type': 'object'},
  'AnalysisId': {'pattern': '^analysis:sha256:[0-9a-f]{64}$', 'type': 'string'},
@@ -134,7 +134,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                 'coverage_decisions',
                                 'provenance'],
                    'type': 'object',
-                   'x-standards-engine-identity': {'domain': 'coding-standards:analysis:v2',
+                   'x-standards-engine-identity': {'domain': 'coding-standards:analysis:v3',
                                                    'exclude': ['kind',
                                                                'handle',
                                                                'provenance.interface_schema_version',
@@ -159,18 +159,18 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                                                'provenance.parser_versions',
                                                                'provenance.evidence_provider_contract_versions']}},
  'AnalysisVersions': {'additionalProperties': False,
-                      'properties': {'analysis_contract_version': {'const': 5},
-                                     'analysis_schema_version': {'const': 2},
+                      'properties': {'analysis_contract_version': {'const': 6},
+                                     'analysis_schema_version': {'const': 3},
                                      'analyzer_implementation_version': {'$ref': '#/$defs/NonEmptyString'},
                                      'applicability_version': {'const': 3},
                                      'authorization_contract_version': {'const': 'authorization-authority.v1'},
                                      'evidence_provider_contract_versions': {'$ref': '#/$defs/VersionMap'},
                                      'graph_engine_contract_version': {'$ref': '#/$defs/NonEmptyString'},
                                      'graph_engine_implementation_version': {'$ref': '#/$defs/NonEmptyString'},
-                                     'interface_schema_version': {'const': 9},
+                                     'interface_schema_version': {'const': 10},
                                      'metadata_api_version': {'$ref': '#/$defs/NonEmptyString'},
                                      'parser_versions': {'$ref': '#/$defs/VersionMap'},
-                                     'result_schema_version': {'const': 1}},
+                                     'result_schema_version': {'const': 2}},
                       'required': ['analysis_contract_version',
                                    'analysis_schema_version',
                                    'result_schema_version',
@@ -263,7 +263,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'CertificateHandle': {'additionalProperties': False,
                        'properties': {'id': {'$ref': '#/$defs/CertificateId'},
                                       'kind': {'const': 'certificate-handle'},
-                                      'schema_version': {'const': 1}},
+                                      'schema_version': {'const': 2}},
                        'required': ['kind', 'id', 'schema_version'],
                        'type': 'object'},
  'CertificateId': {'pattern': '^certificate:sha256:[0-9a-f]{64}$', 'type': 'string'},
@@ -405,101 +405,6 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                                                                 'proves '
                                                                                 'semantic '
                                                                                 'equivalence'}},
- 'CompiledApplicabilityProgram': {'additionalProperties': False,
-                                  'properties': {'dependency_digest': {'$ref': '#/$defs/Digest'},
-                                                 'language_version': {'const': 1},
-                                                 'normalized_expression': {'$ref': '#/$defs/ApplicabilityExpression'},
-                                                 'referenced_facts': {'items': {'$ref': '#/$defs/CanonicalId'},
-                                                                      'type': 'array',
-                                                                      'uniqueItems': True},
-                                                 'schema_digest': {'$ref': '#/$defs/Digest'}},
-                                  'required': ['normalized_expression',
-                                               'referenced_facts',
-                                               'language_version',
-                                               'schema_digest',
-                                               'dependency_digest'],
-                                  'type': 'object',
-                                  'x-standards-engine-invariants': {'identity': 'dependency_digest '
-                                                                                'binds '
-                                                                                'language_version, '
-                                                                                'normalized_expression, '
-                                                                                'and '
-                                                                                'exact '
-                                                                                'referenced '
-                                                                                'fact '
-                                                                                'definitions '
-                                                                                'using '
-                                                                                'domain-separated '
-                                                                                'canonical '
-                                                                                'serialization'}},
- 'CompiledPolicyImpactSemantics': {'additionalProperties': False,
-                                   'properties': {'applicability_program': {'$ref': '#/$defs/CompiledApplicabilityProgram'},
-                                                  'consumer': {'$ref': '#/$defs/CanonicalId'},
-                                                  'consumer_scope': {'oneOf': [{'$ref': '#/$defs/ReviewScope'},
-                                                                               {'type': 'null'}]},
-                                                  'declaration_source': {'$ref': '#/$defs/NonEmptyString'},
-                                                  'dependency_fingerprint': {'$ref': '#/$defs/Digest'},
-                                                  'edge_id': {'$ref': '#/$defs/EdgeId'},
-                                                  'evidence_owner': {'$ref': '#/$defs/CanonicalId'},
-                                                  'propagation': {'const': 'source-to-consumer'},
-                                                  'rationale': {'$ref': '#/$defs/NonEmptyString'},
-                                                  'relation': {'enum': ['normative-consumer',
-                                                                        'router-projection',
-                                                                        'prompt-projection',
-                                                                        'template-projection',
-                                                                        'reference-projection',
-                                                                        'fixture-projection',
-                                                                        'enforcement-suite-projection',
-                                                                        'documentation-projection']},
-                                                  'source': {'$ref': '#/$defs/CanonicalId'},
-                                                  'source_scope': {'oneOf': [{'$ref': '#/$defs/ReviewScope'},
-                                                                             {'type': 'null'}]}},
-                                   'required': ['edge_id',
-                                                'source',
-                                                'consumer',
-                                                'relation',
-                                                'applicability_program',
-                                                'source_scope',
-                                                'consumer_scope',
-                                                'propagation',
-                                                'evidence_owner',
-                                                'rationale',
-                                                'declaration_source',
-                                                'dependency_fingerprint'],
-                                   'type': 'object',
-                                   'x-standards-engine-invariants': {'applicability': 'the '
-                                                                                      'compiled '
-                                                                                      'program '
-                                                                                      'is '
-                                                                                      'produced '
-                                                                                      'once '
-                                                                                      'by '
-                                                                                      'standards_applicability '
-                                                                                      'and '
-                                                                                      'is '
-                                                                                      'consumed '
-                                                                                      'without '
-                                                                                      'reparsing',
-                                                                     'projection': 'the '
-                                                                                   'value '
-                                                                                   'is '
-                                                                                   'compiled '
-                                                                                   'from '
-                                                                                   'the '
-                                                                                   'same '
-                                                                                   'authoritative '
-                                                                                   'declaration '
-                                                                                   'as '
-                                                                                   'its '
-                                                                                   'generic '
-                                                                                   'edge '
-                                                                                   'and '
-                                                                                   'is '
-                                                                                   'never '
-                                                                                   'a '
-                                                                                   'second '
-                                                                                   'editable '
-                                                                                   'authority'}},
  'CompleteResult': {'additionalProperties': False,
                     'properties': {'base_snapshot': {'$ref': '#/$defs/SnapshotHandle'},
                                    'changed_units': {'items': {'$ref': '#/$defs/ChangedPolicyUnit'},
@@ -649,7 +554,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                               'attestation_contract_version',
                                               'provenance'],
                                  'type': 'object',
-                                 'x-standards-engine-identity': {'domain': 'coding-standards:consumer-coverage-certificate:v1',
+                                 'x-standards-engine-identity': {'domain': 'coding-standards:consumer-coverage-certificate:v2',
                                                                  'exclude': ['handle',
                                                                              'provenance'],
                                                                  'include': ['coverage_view',
@@ -728,7 +633,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                         'kind': {'const': 'coverage-attestation'},
                                         'rationale': {'$ref': '#/$defs/NonEmptyString'},
                                         'requirement': {'$ref': '#/$defs/CoverageRequirementHandle'},
-                                        'schema_version': {'const': 1}},
+                                        'schema_version': {'const': 2}},
                          'required': ['kind',
                                       'handle',
                                       'requirement',
@@ -739,7 +644,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                       'auditor_provenance',
                                       'schema_version'],
                          'type': 'object',
-                         'x-standards-engine-identity': {'domain': 'coding-standards:coverage-attestation:v1',
+                         'x-standards-engine-identity': {'domain': 'coding-standards:coverage-attestation:v2',
                                                          'exclude': ['handle'],
                                                          'include': ['requirement',
                                                                      'conclusion',
@@ -751,7 +656,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'CoverageAttestationHandle': {'additionalProperties': False,
                                'properties': {'id': {'$ref': '#/$defs/CoverageAttestationId'},
                                               'kind': {'const': 'coverage-attestation-handle'},
-                                              'schema_version': {'const': 1}},
+                                              'schema_version': {'const': 2}},
                                'required': ['kind', 'id', 'schema_version'],
                                'type': 'object'},
  'CoverageAttestationId': {'pattern': '^coverage-attestation:sha256:[0-9a-f]{64}$',
@@ -789,7 +694,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                            'relationship_kinds',
                                            'horizon'],
                               'type': 'object',
-                              'x-standards-engine-identity': {'domain': 'coding-standards:coverage-audit-requirement:v1',
+                              'x-standards-engine-identity': {'domain': 'coding-standards:coverage-audit-requirement:v2',
                                                               'exclude': ['handle',
                                                                           'derived_from_snapshot'],
                                                               'include': ['coverage_view',
@@ -866,7 +771,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                         'authorization_contract_version',
                                         'evidence_provider_contract_version'],
                            'type': 'object',
-                           'x-standards-engine-identity': {'domain': 'coding-standards:coverage-authority-view:v1',
+                           'x-standards-engine-identity': {'domain': 'coding-standards:coverage-authority-view:v2',
                                                            'exclude': ['handle'],
                                                            'include': ['subject',
                                                                        'owner',
@@ -889,7 +794,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'CoverageAuthorityViewHandle': {'additionalProperties': False,
                                  'properties': {'id': {'$ref': '#/$defs/CoverageAuthorityViewId'},
                                                 'kind': {'const': 'coverage-authority-view-handle'},
-                                                'schema_version': {'const': 1}},
+                                                'schema_version': {'const': 2}},
                                  'required': ['kind', 'id', 'schema_version'],
                                  'type': 'object'},
  'CoverageAuthorityViewId': {'pattern': '^coverage-view:sha256:[0-9a-f]{64}$',
@@ -916,7 +821,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'CoverageRequirementHandle': {'additionalProperties': False,
                                'properties': {'id': {'$ref': '#/$defs/CoverageRequirementId'},
                                               'kind': {'const': 'coverage-requirement-handle'},
-                                              'schema_version': {'const': 1}},
+                                              'schema_version': {'const': 2}},
                                'required': ['kind', 'id', 'schema_version'],
                                'type': 'object'},
  'CoverageRequirementId': {'pattern': '^coverage-requirement:sha256:[0-9a-f]{64}$',
@@ -1195,7 +1100,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                         'submodules',
                                         'versions'],
                            'type': 'object',
-                           'x-standards-engine-identity': {'domain': 'coding-standards:snapshot:v2',
+                           'x-standards-engine-identity': {'domain': 'coding-standards:snapshot:v3',
                                                            'exclude': ['handle',
                                                                        'commit',
                                                                        'versions.graph_engine_implementation_version',
@@ -1315,7 +1220,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                              'entries',
                                              'versions'],
                                 'type': 'object',
-                                'x-standards-engine-identity': {'domain': 'coding-standards:snapshot:v2',
+                                'x-standards-engine-identity': {'domain': 'coding-standards:snapshot:v3',
                                                                 'exclude': ['handle',
                                                                             'versions.graph_engine_implementation_version',
                                                                             'versions.analyzer_implementation_version'],
@@ -1335,7 +1240,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'NavigationHandle': {'additionalProperties': False,
                       'properties': {'id': {'$ref': '#/$defs/NavigationId'},
                                      'kind': {'const': 'navigation-handle'},
-                                     'schema_version': {'const': 2},
+                                     'schema_version': {'const': 3},
                                      'snapshot': {'$ref': '#/$defs/SnapshotHandle'}},
                       'required': ['kind', 'id', 'snapshot', 'schema_version'],
                       'type': 'object'},
@@ -1479,6 +1384,60 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                          'structural_digest',
                                          'provenance'],
                             'type': 'object'},
+ 'PolicyRelationshipInspection': {'additionalProperties': False,
+                                  'properties': {'applicability': {'$ref': '#/$defs/ApplicabilityExpression'},
+                                                 'consumer_scope': {'oneOf': [{'$ref': '#/$defs/ReviewScope'},
+                                                                              {'type': 'null'}]},
+                                                 'evidence_owner': {'$ref': '#/$defs/CanonicalId'},
+                                                 'propagation': {'const': 'source-to-consumer'},
+                                                 'rationale': {'$ref': '#/$defs/NonEmptyString'},
+                                                 'relationship_kind': {'enum': ['normative-consumer',
+                                                                                'router-projection',
+                                                                                'prompt-projection',
+                                                                                'template-projection',
+                                                                                'reference-projection',
+                                                                                'fixture-projection',
+                                                                                'enforcement-suite-projection',
+                                                                                'documentation-projection',
+                                                                                'implementation-projection']},
+                                                 'source_scope': {'oneOf': [{'$ref': '#/$defs/ReviewScope'},
+                                                                            {'type': 'null'}]}},
+                                  'required': ['relationship_kind',
+                                               'applicability',
+                                               'source_scope',
+                                               'consumer_scope',
+                                               'propagation',
+                                               'evidence_owner',
+                                               'rationale'],
+                                  'type': 'object',
+                                  'x-standards-engine-invariants': {'internal-boundary': 'repository '
+                                                                                         'declaration '
+                                                                                         'paths, '
+                                                                                         'compiled '
+                                                                                         'program '
+                                                                                         'internals, '
+                                                                                         'and '
+                                                                                         'dependency '
+                                                                                         'fingerprints '
+                                                                                         'are '
+                                                                                         'not '
+                                                                                         'public',
+                                                                    'projection': 'the '
+                                                                                  'value '
+                                                                                  'is '
+                                                                                  'an '
+                                                                                  'operation-shaped '
+                                                                                  'inspection '
+                                                                                  'of '
+                                                                                  'compiled '
+                                                                                  'relationship '
+                                                                                  'authority '
+                                                                                  'and '
+                                                                                  'is '
+                                                                                  'never '
+                                                                                  'an '
+                                                                                  'editable '
+                                                                                  'declaration'}},
  'PolicySummary': {'additionalProperties': False,
                    'properties': {'authority': {'enum': ['normative',
                                                          'projection',
@@ -1633,7 +1592,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                              'related',
                              'next_operations'],
                 'type': 'object',
-                'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v2',
+                'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v3',
                                                 'exclude': ['handle.id',
                                                             'next_operations',
                                                             'summary'],
@@ -1726,7 +1685,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                                 'relationships',
                                 'next_operations'],
                    'type': 'object',
-                   'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v2',
+                   'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v3',
                                                    'exclude': ['handle.id',
                                                                'next_operations',
                                                                'summary'],
@@ -1742,7 +1701,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                         'type': 'object'},
  'RelationshipInspectionResult': {'additionalProperties': False,
                                   'properties': {'kind': {'const': 'relationship-inspection-result'},
-                                                 'policy_semantics': {'oneOf': [{'$ref': '#/$defs/CompiledPolicyImpactSemantics'},
+                                                 'policy_semantics': {'oneOf': [{'$ref': '#/$defs/PolicyRelationshipInspection'},
                                                                                 {'type': 'null'}]},
                                                  'provenance': {'$ref': '#/$defs/ProvenanceRecord'},
                                                  'relationship': {'$ref': '#/$defs/RelationshipSummary'}},
@@ -1821,7 +1780,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
                               'unresolved_questions',
                               'next_operations'],
                  'type': 'object',
-                 'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v2',
+                 'x-standards-engine-identity': {'domain': 'coding-standards:navigation:v3',
                                                  'exclude': ['handle.id',
                                                              'next_operations',
                                                              'summary'],
@@ -1921,7 +1880,7 @@ DEFINITION_SCHEMAS = MappingProxyType(
  'SnapshotHandle': {'additionalProperties': False,
                     'properties': {'id': {'$ref': '#/$defs/SnapshotId'},
                                    'kind': {'const': 'snapshot-handle'},
-                                   'schema_version': {'const': 2}},
+                                   'schema_version': {'const': 3}},
                     'required': ['kind', 'id', 'schema_version'],
                     'type': 'object'},
  'SnapshotId': {'pattern': '^snapshot:sha256:[0-9a-f]{64}$', 'type': 'string'},
@@ -2037,23 +1996,6 @@ FIELD_NAMES = MappingProxyType(
                        'proposed_structural_digest': 'proposed_structural_digest',
                        'scope': 'scope',
                        'semantic_state': 'semantic_state'},
- 'CompiledApplicabilityProgram': {'dependency_digest': 'dependency_digest',
-                                  'language_version': 'language_version',
-                                  'normalized_expression': 'normalized_expression',
-                                  'referenced_facts': 'referenced_facts',
-                                  'schema_digest': 'schema_digest'},
- 'CompiledPolicyImpactSemantics': {'applicability_program': 'applicability_program',
-                                   'consumer': 'consumer',
-                                   'consumer_scope': 'consumer_scope',
-                                   'declaration_source': 'declaration_source',
-                                   'dependency_fingerprint': 'dependency_fingerprint',
-                                   'edge_id': 'edge_id',
-                                   'evidence_owner': 'evidence_owner',
-                                   'propagation': 'propagation',
-                                   'rationale': 'rationale',
-                                   'relation': 'relation',
-                                   'source': 'source',
-                                   'source_scope': 'source_scope'},
  'CompleteResult': {'base_snapshot': 'base_snapshot',
                     'changed_units': 'changed_units',
                     'changes': 'changes',
@@ -2292,6 +2234,13 @@ FIELD_NAMES = MappingProxyType(
                             'provenance': 'provenance',
                             'representation_digest': 'representation_digest',
                             'structural_digest': 'structural_digest'},
+ 'PolicyRelationshipInspection': {'applicability': 'applicability',
+                                  'consumer_scope': 'consumer_scope',
+                                  'evidence_owner': 'evidence_owner',
+                                  'propagation': 'propagation',
+                                  'rationale': 'rationale',
+                                  'relationship_kind': 'relationship_kind',
+                                  'source_scope': 'source_scope'},
  'PolicySummary': {'authority': 'authority', 'handle': 'handle', 'scope': 'scope'},
  'PolicyUnitDeclaration': {'aliases': 'aliases',
                            'heading_path': 'heading_path',
@@ -2679,7 +2628,7 @@ class AnalysisContextInspectionResult(ContractResult):
 class AnalysisHandle(ContractObject):
     __definition__: ClassVar[str] = 'AnalysisHandle'
     id: AnalysisId
-    schema_version: Literal[2] = 2
+    schema_version: Literal[3] = 3
     kind: Literal['analysis-handle'] = 'analysis-handle'
 
     def __post_init__(self) -> None:
@@ -2730,10 +2679,10 @@ class AnalysisVersions(ContractObject):
     analyzer_implementation_version: NonEmptyString
     parser_versions: VersionMap
     evidence_provider_contract_versions: VersionMap
-    analysis_contract_version: Literal[5] = 5
-    analysis_schema_version: Literal[2] = 2
-    result_schema_version: Literal[1] = 1
-    interface_schema_version: Literal[9] = 9
+    analysis_contract_version: Literal[6] = 6
+    analysis_schema_version: Literal[3] = 3
+    result_schema_version: Literal[2] = 2
+    interface_schema_version: Literal[10] = 10
     applicability_version: Literal[3] = 3
     authorization_contract_version: Literal['authorization-authority.v1'] = 'authorization-authority.v1'
 
@@ -2798,7 +2747,7 @@ class CanonicalModuleDeclaration(ContractObject):
 class CertificateHandle(ContractObject):
     __definition__: ClassVar[str] = 'CertificateHandle'
     id: CertificateId
-    schema_version: Literal[1] = 1
+    schema_version: Literal[2] = 2
     kind: Literal['certificate-handle'] = 'certificate-handle'
 
     def __post_init__(self) -> None:
@@ -2853,39 +2802,6 @@ class ChangedPolicyUnit(ContractObject):
     proposed_semantic_revision: int | None
     semantic_state: Literal['accepted-unchanged', 'proposed', 'removed', 'unresolved']
     scope: ReviewScope
-
-    def __post_init__(self) -> None:
-        _coerce_object(self)
-
-
-@dataclass(frozen=True, slots=True)
-class CompiledApplicabilityProgram(ContractObject):
-    __definition__: ClassVar[str] = 'CompiledApplicabilityProgram'
-    normalized_expression: ApplicabilityExpression
-    referenced_facts: tuple[CanonicalId, ...]
-    schema_digest: Digest
-    dependency_digest: Digest
-    language_version: Literal[1] = 1
-
-    def __post_init__(self) -> None:
-        _coerce_object(self)
-
-
-@dataclass(frozen=True, slots=True)
-class CompiledPolicyImpactSemantics(ContractObject):
-    __definition__: ClassVar[str] = 'CompiledPolicyImpactSemantics'
-    edge_id: EdgeId
-    source: CanonicalId
-    consumer: CanonicalId
-    relation: Literal['normative-consumer', 'router-projection', 'prompt-projection', 'template-projection', 'reference-projection', 'fixture-projection', 'enforcement-suite-projection', 'documentation-projection']
-    applicability_program: CompiledApplicabilityProgram
-    source_scope: ReviewScope | None
-    consumer_scope: ReviewScope | None
-    evidence_owner: CanonicalId
-    rationale: NonEmptyString
-    declaration_source: NonEmptyString
-    dependency_fingerprint: Digest
-    propagation: Literal['source-to-consumer'] = 'source-to-consumer'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -3014,7 +2930,7 @@ class CoverageAttestation(ContractObject):
     rationale: NonEmptyString
     auditor_provenance: NonEmptyString
     conclusion: Literal['complete'] = 'complete'
-    schema_version: Literal[1] = 1
+    schema_version: Literal[2] = 2
     kind: Literal['coverage-attestation'] = 'coverage-attestation'
 
     def __post_init__(self) -> None:
@@ -3025,7 +2941,7 @@ class CoverageAttestation(ContractObject):
 class CoverageAttestationHandle(ContractObject):
     __definition__: ClassVar[str] = 'CoverageAttestationHandle'
     id: CoverageAttestationId
-    schema_version: Literal[1] = 1
+    schema_version: Literal[2] = 2
     kind: Literal['coverage-attestation-handle'] = 'coverage-attestation-handle'
 
     def __post_init__(self) -> None:
@@ -3102,7 +3018,7 @@ class CoverageAuthorityView(ContractObject):
 class CoverageAuthorityViewHandle(ContractObject):
     __definition__: ClassVar[str] = 'CoverageAuthorityViewHandle'
     id: CoverageAuthorityViewId
-    schema_version: Literal[1] = 1
+    schema_version: Literal[2] = 2
     kind: Literal['coverage-authority-view-handle'] = 'coverage-authority-view-handle'
 
     def __post_init__(self) -> None:
@@ -3144,7 +3060,7 @@ class CoverageHorizonMember(ContractObject):
 class CoverageRequirementHandle(ContractObject):
     __definition__: ClassVar[str] = 'CoverageRequirementHandle'
     id: CoverageRequirementId
-    schema_version: Literal[1] = 1
+    schema_version: Literal[2] = 2
     kind: Literal['coverage-requirement-handle'] = 'coverage-requirement-handle'
 
     def __post_init__(self) -> None:
@@ -3436,7 +3352,7 @@ class NavigationHandle(ContractObject):
     __definition__: ClassVar[str] = 'NavigationHandle'
     id: NavigationId
     snapshot: SnapshotHandle
-    schema_version: Literal[2] = 2
+    schema_version: Literal[3] = 3
     kind: Literal['navigation-handle'] = 'navigation-handle'
 
     def __post_init__(self) -> None:
@@ -3536,6 +3452,21 @@ class PolicyInspectionResult(ContractResult):
     structural_digest: Digest
     provenance: ProvenanceRecord
     kind: Literal['policy-inspection-result'] = 'policy-inspection-result'
+
+    def __post_init__(self) -> None:
+        _coerce_object(self)
+
+
+@dataclass(frozen=True, slots=True)
+class PolicyRelationshipInspection(ContractObject):
+    __definition__: ClassVar[str] = 'PolicyRelationshipInspection'
+    relationship_kind: Literal['normative-consumer', 'router-projection', 'prompt-projection', 'template-projection', 'reference-projection', 'fixture-projection', 'enforcement-suite-projection', 'documentation-projection', 'implementation-projection']
+    applicability: ApplicabilityExpression
+    source_scope: ReviewScope | None
+    consumer_scope: ReviewScope | None
+    evidence_owner: CanonicalId
+    rationale: NonEmptyString
+    propagation: Literal['source-to-consumer'] = 'source-to-consumer'
 
     def __post_init__(self) -> None:
         _coerce_object(self)
@@ -3760,7 +3691,7 @@ class RelationshipHandle(ContractObject):
 class RelationshipInspectionResult(ContractResult):
     __definition__: ClassVar[str] = 'RelationshipInspectionResult'
     relationship: RelationshipSummary
-    policy_semantics: CompiledPolicyImpactSemantics | None
+    policy_semantics: PolicyRelationshipInspection | None
     provenance: ProvenanceRecord
     kind: Literal['relationship-inspection-result'] = 'relationship-inspection-result'
 
@@ -3913,7 +3844,7 @@ class SnapshotExclusion(ContractObject):
 class SnapshotHandle(ContractObject):
     __definition__: ClassVar[str] = 'SnapshotHandle'
     id: SnapshotId
-    schema_version: Literal[2] = 2
+    schema_version: Literal[3] = 3
     kind: Literal['snapshot-handle'] = 'snapshot-handle'
 
     def __post_init__(self) -> None:
@@ -3979,8 +3910,6 @@ _CLASS_BY_DEFINITION = MappingProxyType({
     'CertificateProvenance': CertificateProvenance,
     'ChangeDescriptor': ChangeDescriptor,
     'ChangedPolicyUnit': ChangedPolicyUnit,
-    'CompiledApplicabilityProgram': CompiledApplicabilityProgram,
-    'CompiledPolicyImpactSemantics': CompiledPolicyImpactSemantics,
     'CompleteResult': CompleteResult,
     'CompletionProof': CompletionProof,
     'ConsumerCoverageCertificate': ConsumerCoverageCertificate,
@@ -4030,6 +3959,7 @@ _CLASS_BY_DEFINITION = MappingProxyType({
     'PolicyHandle': PolicyHandle,
     'PolicyImpactSelectionReason': PolicyImpactSelectionReason,
     'PolicyInspectionResult': PolicyInspectionResult,
+    'PolicyRelationshipInspection': PolicyRelationshipInspection,
     'PolicySummary': PolicySummary,
     'PolicyUnitDeclaration': PolicyUnitDeclaration,
     'PrepareCall': PrepareCall,
@@ -4127,8 +4057,6 @@ __all__ = (
     'CertificateProvenance',
     'ChangeDescriptor',
     'ChangedPolicyUnit',
-    'CompiledApplicabilityProgram',
-    'CompiledPolicyImpactSemantics',
     'CompleteResult',
     'CompletionProof',
     'ConsumerCoverageCertificate',
@@ -4199,6 +4127,7 @@ __all__ = (
     'PolicyHandle',
     'PolicyImpactSelectionReason',
     'PolicyInspectionResult',
+    'PolicyRelationshipInspection',
     'PolicySummary',
     'PolicyUnitDeclaration',
     'PrepareCall',

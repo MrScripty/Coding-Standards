@@ -51,17 +51,17 @@ SCHEMA_KEYS = {
 }
 
 IDENTITY_PREFIX = {
-    "coding-standards:snapshot:v2": "snapshot",
-    "coding-standards:navigation:v2": "navigation",
-    "coding-standards:analysis:v2": "analysis",
+    "coding-standards:snapshot:v3": "snapshot",
+    "coding-standards:navigation:v3": "navigation",
+    "coding-standards:analysis:v3": "analysis",
     "coding-standards:obligation:v2": "obligation",
     "coding-standards:analysis-context:v1": "standards-change",
     "coding-standards:fact-requirement:v1": "fact-requirement",
     "coding-standards:fact-observation:v1": "fact-observation",
-    "coding-standards:coverage-authority-view:v1": "coverage-view",
-    "coding-standards:coverage-audit-requirement:v1": "coverage-requirement",
-    "coding-standards:coverage-attestation:v1": "coverage-attestation",
-    "coding-standards:consumer-coverage-certificate:v1": "certificate",
+    "coding-standards:coverage-authority-view:v2": "coverage-view",
+    "coding-standards:coverage-audit-requirement:v2": "coverage-requirement",
+    "coding-standards:coverage-attestation:v2": "coverage-attestation",
+    "coding-standards:consumer-coverage-certificate:v2": "certificate",
 }
 
 

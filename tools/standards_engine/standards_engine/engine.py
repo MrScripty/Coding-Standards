@@ -112,7 +112,7 @@ from .model import (
 )
 
 
-NAVIGATION_DOMAIN = "coding-standards:navigation:v2"
+NAVIGATION_DOMAIN = "coding-standards:navigation:v3"
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
 
 
@@ -211,7 +211,9 @@ class DirectoryAnalysisStateStore:
     ) -> AnalysisState | None:
         try:
             source = self._path(handle)
-        except AnalysisError:
+        except AnalysisError as error:
+            if error.failure.outcome == "unsupported":
+                raise
             return None
         if not source.is_file():
             return None
@@ -243,7 +245,7 @@ class DirectoryAnalysisStateStore:
             handle = {
                 "kind": "analysis-handle",
                 "id": f"analysis:sha256:{source.stem}",
-                "schema_version": 2,
+                "schema_version": 3,
             }
             state = self.get(handle)
             if state is not None:
@@ -254,7 +256,6 @@ class DirectoryAnalysisStateStore:
         identifier = str(handle.get("id", ""))
         if (
             handle.get("kind") != "analysis-handle"
-            or handle.get("schema_version") != 2
             or not identifier.startswith("analysis:sha256:")
             or len(identifier) != len("analysis:sha256:") + 64
             or any(
@@ -267,6 +268,15 @@ class DirectoryAnalysisStateStore:
                     "invalid",
                     "analysis handle is malformed",
                     observed=identifier,
+                )
+            )
+        if handle.get("schema_version") != 3:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.UNSUPPORTED_VERSION",
+                    "unsupported",
+                    "analysis handle schema version is unsupported",
+                    observed=str(handle.get("schema_version")),
                 )
             )
         return self._root / f"{identifier[-64:]}.json"
@@ -463,7 +473,10 @@ class StandardsEngine:
             )
         prior_state = None
         if request.prior_analysis is not None:
-            prior_state = self._analysis_store.get(request.prior_analysis)
+            try:
+                prior_state = self._analysis_store.get(request.prior_analysis)
+            except AnalysisError as error:
+                return self._analysis_rejection(error)
             if prior_state is None:
                 return self._reject(
                     "ANALYSIS.PRIOR_ANALYSIS_UNAVAILABLE",
@@ -499,7 +512,10 @@ class StandardsEngine:
         submission,
     ) -> PendingResult | CompleteResult | RejectedResult:
         analysis_id = str(analysis.get("id", ""))
-        state = self._analysis_store.get(analysis)
+        try:
+            state = self._analysis_store.get(analysis)
+        except AnalysisError as error:
+            return self._analysis_rejection(error)
         if state is None:
             return self._reject(
                 "ANALYSIS.UNAVAILABLE",
@@ -601,7 +617,10 @@ class StandardsEngine:
         handle = dict(call.handle)
         kind = handle.get("kind")
         if kind == "analysis-handle":
-            state = self._analysis_store.get(handle)
+            try:
+                state = self._analysis_store.get(handle)
+            except AnalysisError as error:
+                return self._analysis_rejection(error)
             if state is None:
                 return self._reject(
                     "ANALYSIS.UNKNOWN_HANDLE",
@@ -1423,7 +1442,7 @@ class StandardsEngine:
             "kind": "navigation-handle",
             "id": identity(NAVIGATION_DOMAIN, "navigation", identity_value),
             "snapshot": self._snapshot.handle,
-            "schema_version": 2,
+            "schema_version": 3,
         }
 
     def _inspect_policy(self, requested: str) -> InspectionResult:
@@ -1477,20 +1496,15 @@ class StandardsEngine:
                     None
                     if semantics is None
                     else {
-                        "edge_id": semantics.edge_id,
-                        "source": semantics.source,
-                        "consumer": semantics.consumer,
-                        "relation": semantics.relation,
-                        "applicability_program": (
-                            semantics.applicability_program.as_projection()
+                        "relationship_kind": semantics.relation,
+                        "applicability": (
+                            semantics.applicability_program.as_expression()
                         ),
                         "source_scope": thaw(semantics.source_scope),
                         "consumer_scope": thaw(semantics.consumer_scope),
                         "propagation": semantics.propagation,
                         "evidence_owner": semantics.evidence_owner,
                         "rationale": semantics.rationale,
-                        "declaration_source": semantics.declaration_source,
-                        "dependency_fingerprint": semantics.dependency_fingerprint,
                     }
                 ),
                 "provenance": self._provenance(

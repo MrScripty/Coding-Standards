@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import tempfile
 import textwrap
 import unittest
@@ -7,7 +8,6 @@ from dataclasses import replace
 from pathlib import Path
 
 from tools.graph_engine.graph_engine import EdgeRegistry
-from tools.graph_engine.graph_engine.manifest import ManifestSource
 from tools.standards_applicability.standards_applicability import Truth
 from tools.standards_graph.standards_graph import (
     PolicyUnitGraphSource,
@@ -23,7 +23,7 @@ from tools.standards_metadata.standards_metadata import (
     load_canonical_standards_corpus,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
-    CATALOG_SOURCE_ID,
+    DEFAULT_AUTHORING_CONTRACT,
     PolicyImpactError,
     PolicyImpactSource,
     compile_policy_impact,
@@ -43,8 +43,22 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             {edge.id for edge in compiled.graph.edges},
             set(compiled.semantics),
         )
-        self.assertEqual(compiled.graph.nodes, ())
-        self.assertEqual(compiled.graph.groups, ())
+        self.assertEqual(
+            set(compiled.artifacts),
+            {node.id for node in compiled.graph.nodes},
+        )
+        self.assertEqual(
+            set(compiled.relationship_kinds),
+            {semantics.relation for semantics in compiled.semantics.values()},
+        )
+        self.assertEqual(
+            {group.id for group in compiled.graph.groups},
+            {"policy-impact", "semantic"},
+        )
+        self.assertEqual(
+            compiled.artifact_for("prompts/implement-plan.md").artifact_kind,
+            "prompt",
+        )
         edge_id = (
             "policy-impact:v1/workflow.planning.plan-admission/prompt-projection/"
             "prompts%2Fimplement-plan.md"
@@ -64,7 +78,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             "suite:plan-implementation-entrypoint",
         )
 
-    def test_compiled_edges_join_independent_nodes_groups_and_module_aliases(self) -> None:
+    def test_compiled_authority_joins_module_and_policy_unit_graph_sources(self) -> None:
         corpus = load_canonical_standards_corpus(REPO_ROOT)
         compiled = compile_policy_impact(REPO_ROOT, corpus)
         registry = EdgeRegistry(
@@ -72,11 +86,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             (
                 metadata_dependency_source(corpus.modules),
                 PolicyUnitGraphSource(corpus.policy_unit_corpus),
-                ManifestSource(
-                    REPO_ROOT,
-                    CATALOG_SOURCE_ID,
-                    "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
-                ),
                 PolicyImpactSource(compiled),
             ),
         )
@@ -90,6 +99,55 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             registry.incident("workflows/planning.md", ("policy-impact",)),
         )
         self.assertEqual(registry.outgoing("workflow.planning", ("policy-impact",)), ())
+
+    def test_repository_matches_admitted_relationship_migration_identity_sets(self) -> None:
+        inventory_path = (
+            REPO_ROOT
+            / "docs/plans/standards-engine-policy-impact-authority-v2/reports/relationship-migration.tsv"
+        )
+        with inventory_path.open(encoding="utf-8", newline="") as handle:
+            rows = tuple(csv.DictReader(handle, delimiter="\t"))
+
+        self.assertTrue(rows)
+        self.assertEqual(
+            len({row["old_edge_id"] for row in rows}),
+            len(rows),
+        )
+        self.assertEqual(
+            len({row["new_edge_id"] for row in rows}),
+            len(rows),
+        )
+
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+        compiled = compile_policy_impact(REPO_ROOT, corpus)
+        migrated_keys = {
+            (row["source"], row["consumer"])
+            for row in rows
+        }
+        actual_ids = {
+            edge_id
+            for edge_id, semantics in compiled.semantics.items()
+            if (semantics.source, semantics.consumer) in migrated_keys
+        }
+        expected_ids = {row["new_edge_id"] for row in rows}
+
+        self.assertEqual(actual_ids, expected_ids)
+        for row in rows:
+            with self.subTest(edge=row["new_edge_id"]):
+                semantics = compiled.semantics_for(row["new_edge_id"])
+                self.assertEqual(semantics.source, row["source"])
+                self.assertEqual(semantics.consumer, row["consumer"])
+                self.assertEqual(semantics.relation, row["new_relation"])
+                self.assertEqual(
+                    semantics.declaration_source,
+                    row["declaration_source"],
+                )
+                self.assertEqual(
+                    row["disposition"],
+                    "retain"
+                    if row["old_edge_id"] == row["new_edge_id"]
+                    else "reclassify",
+                )
 
     def test_invalid_declarations_reject_with_typed_failures(self) -> None:
         cases = (
@@ -127,6 +185,11 @@ class PolicyImpactCompilerTest(unittest.TestCase):
                     self.relationship(evidence="suite:missing")
                 ),
                 "POLICY_IMPACT.EVIDENCE_OWNER",
+            ),
+            (
+                "incompatible-target",
+                self.relationships(self.relationship(relation="template-projection")),
+                "POLICY_IMPACT.INCOMPATIBLE_TARGET",
             ),
         )
         for name, declarations, code in cases:
@@ -201,13 +264,12 @@ class PolicyImpactCompilerTest(unittest.TestCase):
                 compile_policy_impact(root, corpus, "registry.toml")
         self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.CROSS_OWNER_SOURCE")
 
-    def test_catalog_edges_reject(self) -> None:
+    def test_v1_and_dual_authority_inputs_reject_without_compatibility(self) -> None:
         with self.fixture(self.relationships(self.relationship())) as (root, modules):
             catalog = root / "catalog.toml"
             catalog.write_text(
-                catalog.read_text(encoding="utf-8").replace(
-                    "edges = []",
-                    textwrap.dedent(
+                catalog.read_text(encoding="utf-8")
+                + textwrap.dedent(
                     """
                     [[edges]]
                     id = "forbidden"
@@ -217,15 +279,28 @@ class PolicyImpactCompilerTest(unittest.TestCase):
                     groups = ["policy-impact"]
                     traversable = true
                     """
-                    ).strip(),
                 ),
                 encoding="utf-8",
             )
             with self.assertRaises(PolicyImpactError) as caught:
                 compile_policy_impact(root, modules, "registry.toml")
+            self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.INVALID")
+
+        with self.fixture(self.relationships(self.relationship())) as (root, corpus):
+            declarations = root / "declarations.toml"
+            declarations.write_text(
+                declarations.read_text(encoding="utf-8").replace(
+                    "schema_version = 2",
+                    "schema_version = 1",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaises(PolicyImpactError) as caught:
+                compile_policy_impact(root, corpus, "registry.toml")
             self.assertEqual(
                 caught.exception.failure.code,
-                "POLICY_IMPACT.DUAL_AUTHORITY",
+                "POLICY_IMPACT.UNSUPPORTED_DECLARATION",
             )
 
     def test_edge_identity_is_injective_for_separator_bearing_ids(self) -> None:
@@ -319,7 +394,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
 
     @staticmethod
     def relationships(*items: str) -> str:
-        return 'schema_version = 1\nowner = "workflow.planning"\n' + "".join(items)
+        return 'schema_version = 2\nowner = "workflow.planning"\n' + "".join(items)
 
     def fixture(self, declarations: str):
         case = tempfile.TemporaryDirectory()
@@ -328,41 +403,46 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             root,
             "registry.toml",
             """
-            schema_version = 1
+            schema_version = 2
             source_id = "standards.policy-impact"
+            authoring_contract = "contract.toml"
             node_catalog = "catalog.toml"
             fact_catalog = "facts.toml"
+            suite_registry = "suites.toml"
             declaration_sources = ["declarations.toml"]
             """,
         )
         self.write(
             root,
+            "contract.toml",
+            (REPO_ROOT / DEFAULT_AUTHORING_CONTRACT).read_text(encoding="utf-8"),
+        )
+        self.write(
+            root,
             "catalog.toml",
             """
-            schema_version = 1
+            schema_version = 2
             source_id = "standards.policy-impact-catalog"
-            edges = []
 
             [[nodes]]
             id = "prompt"
-            metadata = { repository_path = "prompt.md" }
+            metadata = { repository_path = "prompt.md", artifact_kind = "prompt", authority = "projection" }
 
             [[nodes]]
             id = "suite"
-            metadata = { repository_path = "suite.toml", suite_id = "evidence" }
+            metadata = { repository_path = "suite.toml", artifact_kind = "enforcement-suite", suite_id = "evidence", authority = "evidence" }
+            """,
+        )
+        self.write(
+            root,
+            "suites.toml",
+            """
+            schema_version = 1
 
-            [[groups]]
-            id = "policy-impact"
-            purpose = "Policy impact."
-            directions = ["incoming", "outgoing"]
-            transitive = false
-
-            [[groups]]
-            id = "semantic"
-            purpose = "Semantic relations."
-            directions = ["incoming", "outgoing"]
-            transitive = false
-
+            [[suites]]
+            id = "evidence"
+            path = "suite.toml"
+            requires = []
             """,
         )
         self.write(

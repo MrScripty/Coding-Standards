@@ -12,6 +12,7 @@ from pathlib import Path
 from tools.standards_applicability.standards_applicability import compile_fact_schema
 
 from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
     AuthorizationReference,
     AnalysisInput,
     ChangeDescriptor,
@@ -27,6 +28,7 @@ from tools.standards_analysis.standards_analysis import (
     bind_analysis_kernel,
     prepare_analysis,
     advance_analysis,
+    analysis_state_from_contract,
 )
 from tools.standards_engine.contracts.validate_contracts import (
     identity as contract_identity,
@@ -43,11 +45,6 @@ from tools.standards_engine.standards_engine import (
     PendingResult as ContractPendingResult,
     StandardsEngine,
 )
-from tools.standards_policy_impact.standards_policy_impact import (
-    CompiledPolicyImpactSet,
-)
-
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SCHEMA = json.loads(
     (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text(
@@ -119,15 +116,10 @@ def conditional_authority(engine, fact_declarations, expression):
     }
     return replace(
         authority,
-        policy_impact=CompiledPolicyImpactSet(
-            original.graph,
-            semantics,
-            fact_schema,
-            original.node_catalog,
-            original.declaration_sources,
-            original.input_sources,
-            original.declaration_digest,
-            original.provider_contract_digest,
+        policy_impact=replace(
+            original,
+            semantics=semantics,
+            fact_schema=fact_schema,
         ),
     )
 
@@ -461,15 +453,10 @@ class AnalysisWorkflowTest(unittest.TestCase):
             )
             for edge_id, item in original.semantics.items()
         }
-        conditional = CompiledPolicyImpactSet(
-            original.graph,
-            semantics,
-            fact_schema,
-            original.node_catalog,
-            original.declaration_sources,
-            original.input_sources,
-            original.declaration_digest,
-            original.provider_contract_digest,
+        conditional = replace(
+            original,
+            semantics=semantics,
+            fact_schema=fact_schema,
         )
         authority = replace(authority, policy_impact=conditional)
         request = AnalysisInput(
@@ -668,9 +655,9 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 ],
             }
         )
-        conditional = CompiledPolicyImpactSet(
-            original.graph,
-            {
+        conditional = replace(
+            original,
+            semantics={
                 edge_id: replace(
                     item,
                     applicability_program=fact_schema.compile(
@@ -685,12 +672,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 )
                 for edge_id, item in original.semantics.items()
             },
-            fact_schema,
-            original.node_catalog,
-            original.declaration_sources,
-            original.input_sources,
-            original.declaration_digest,
-            original.provider_contract_digest,
+            fact_schema=fact_schema,
         )
         authority = replace(authority, policy_impact=conditional)
         request = AnalysisInput(
@@ -1529,6 +1511,53 @@ print(json.dumps(tool.resolve(arguments), sort_keys=True, separators=(",", ":"))
                 }
             )
             self.assertEqual(result["kind"], "complete-result")
+
+
+class VersionCutoverTest(unittest.TestCase):
+    def test_v9_handles_and_persisted_state_are_unsupported(self) -> None:
+        old_handle = {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:" + "a" * 64,
+            "schema_version": 2,
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            store = DirectoryAnalysisStateStore(Path(temporary))
+            with self.assertRaises(AnalysisError) as caught:
+                store.get(old_handle)
+        self.assertEqual(caught.exception.failure.code, "ANALYSIS.UNSUPPORTED_VERSION")
+        self.assertEqual(caught.exception.failure.outcome, "unsupported")
+
+        with self.assertRaises(AnalysisError) as caught:
+            analysis_state_from_contract(
+                {
+                    "kind": "analysis-state",
+                    "handle": old_handle,
+                    "provenance": {
+                        "analysis_schema_version": 2,
+                        "interface_schema_version": 9,
+                    },
+                }
+            )
+        self.assertEqual(caught.exception.failure.code, "ANALYSIS.UNSUPPORTED_VERSION")
+        self.assertEqual(caught.exception.failure.outcome, "unsupported")
+
+        facade = AgentToolFacade(object(), SCHEMA)  # type: ignore[arg-type]
+        old_snapshot = {
+            "kind": "snapshot-handle",
+            "id": "snapshot:sha256:" + "b" * 64,
+            "schema_version": 2,
+        }
+        calls = (
+            ("query", facade.query, {"snapshot": old_snapshot}),
+            ("prepare", facade.prepare, {"request": {"base_snapshot": old_snapshot}}),
+            ("resolve", facade.resolve, {"analysis": old_handle}),
+            ("inspect", facade.inspect, {"handle": old_handle}),
+        )
+        for operation, call, arguments in calls:
+            with self.subTest(operation=operation):
+                result = call(arguments)
+                self.assertEqual(result["code"], "INTERFACE.UNSUPPORTED_VERSION")
+                self.assertEqual(result["outcome"], "unsupported")
 
 
 if __name__ == "__main__":

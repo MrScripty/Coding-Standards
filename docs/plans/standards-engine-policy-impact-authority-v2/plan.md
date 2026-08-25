@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 implementation
+**Current phase:** Milestone 1 coverage freeze and certification
 
-**Next slice:** complete the coordinated policy-impact v2 authority cutover
+**Next slice:** freeze the v2 authority and certify current coverage
 
 **Acceptance status:** `pending`
 
@@ -84,12 +84,12 @@ or result-algebra redesign, and it does not activate A2.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| PIA2-A1 | One internal v2 contract owns every supplemental artifact kind, relationship kind, graph group, propagation rule, evidence rule, and exact allowed target class. | `contract` | `not-applicable` | `automated` | `pending` | Pending compiler contract evidence |
-| PIA2-A2 | Every catalog node has one explicit admitted artifact kind, path changes do not change classification, and every relationship target is compatible by typed identity rather than path inference. | `integration` | `not-applicable` | `automated` | `pending` | Pending catalog and compatibility evidence |
-| PIA2-A3 | The migration inventory's exact old identity set is dispositioned to its exact replacement set; implementation consumers use `implementation-projection`, genuine references remain references, and no permanent mutable-total assertion is introduced. | `contract` | `not-applicable` | `automated` | `pending` | Pending exact migration-set comparison |
-| PIA2-A4 | Graph edges and policy semantic records have equal identity sets, and graph composition uses the policy-impact provider for supplemental nodes, groups, and edges with no separate catalog source. | `integration` | `not-applicable` | `automated` | `pending` | Pending graph composition evidence |
-| PIA2-A5 | Verifier and coverage consume the compiled authority; no catalog TOML parsing or relation/path compatibility switch remains outside `standards_policy_impact`. | `integration` | `not-applicable` | `automated` | `pending` | Pending dependency and behavior evidence |
-| PIA2-A6 | A1 v10 public closure is reachable from the four operations, excludes `PolicyImpactDeclaration` and `CompiledPolicyImpactSemantics`, and returns typed operation-shaped relationship semantics. | `contract` | `not-applicable` | `automated` | `pending` | Pending generated/public contract evidence |
+| PIA2-A1 | One internal v2 contract owns every supplemental artifact kind, relationship kind, graph group, propagation rule, evidence rule, and exact allowed target class. | `contract` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) compiler contract evidence |
+| PIA2-A2 | Every catalog node has one explicit admitted artifact kind, path changes do not change classification, and every relationship target is compatible by typed identity rather than path inference. | `integration` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) catalog and compatibility evidence |
+| PIA2-A3 | The migration inventory's exact old identity set is dispositioned to its exact replacement set; implementation consumers use `implementation-projection`, genuine references remain references, and no permanent mutable-total assertion is introduced. | `contract` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) exact inventory-derived set comparison |
+| PIA2-A4 | Graph edges and policy semantic records have equal identity sets, and graph composition uses the policy-impact provider for supplemental nodes, groups, and edges with no separate catalog source. | `integration` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) graph composition evidence |
+| PIA2-A5 | Verifier and coverage consume the compiled authority; no catalog TOML parsing or relation/path compatibility switch remains outside `standards_policy_impact`. | `integration` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) dependency and behavior evidence |
+| PIA2-A6 | A1 v10 public closure is reachable from the four operations, excludes `PolicyImpactDeclaration` and `CompiledPolicyImpactSemantics`, and returns typed operation-shaped relationship semantics. | `contract` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) generated and operation-closure evidence |
 | PIA2-A7 | Old v9 handles and states are explicitly unsupported; v10 query, prepare, resolve, inspect, persistence, and genuine cold-process reconstruction use the accepted version identities with no compatibility fallback. | `system` | `not-applicable` | `automated` | `pending` | Pending migration and cold-process evidence |
 | PIA2-A8 | One post-freeze certification pass derives current subjects and requirements mechanically and proves exact active-policy-unit/requirement/attestation/certificate equality, with no stale, duplicate, extra, missing, or blocked subject. Predecessor presence remains generated migration provenance and cannot change certification behavior or identity. | `integration` | `not-applicable` | `automated` | `pending` | Pending coverage-freeze evidence |
 | PIA2-A9 | One clean candidate passes focused package tests, generated freshness, registered declarative suites, the complete Python checkpoint, retained migration checks, and diff validation. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
@@ -403,26 +403,28 @@ expected intermediate blocker.
 
 **Tasks:**
 
-- [ ] Add the v2 internal contract and compile the typed catalog, groups,
+- [x] Add the v2 internal contract and compile the typed catalog, groups,
   relationships, semantics, provenance, and coverage projection once.
-- [ ] Migrate all eight registered relationship declaration sources to source
+- [x] Migrate all eight registered relationship declaration sources to source
   schema version 2 in the same cutover. Apply relation changes only to the three
   files named by the migration inventory; reject every version 1 source after
   cutover and provide no compatibility loader.
-- [ ] Require explicit artifact kinds and typed relation/target compatibility;
+- [x] Require explicit artifact kinds and typed relation/target compatibility;
   add complete positive and negative contract matrices.
-- [ ] Migrate the seven retained declarative verifier cases through the
+- [x] Migrate the seven retained declarative verifier cases through the
   production registry/declaration Interface. Delete the obsolete owner-wide
   suite-inference fixture pair and remove current documentation or tests that
   infer policy-impact consumers from suite ownership.
-- [ ] Reclassify the admitted migration identities and prove exact old/new set
+- [x] Reclassify the admitted migration identities and prove exact old/new set
   equality without a global relationship count.
-- [ ] Remove the separate catalog graph source, verifier path dispatch, and
+- [x] Remove the separate catalog graph source, verifier path dispatch, and
   coverage raw-catalog parser; update consumers to use the compiled authority.
-- [ ] Cut public schema, generated Python/tools, examples, engine adapters,
+- [x] Cut public schema, generated Python/tools, examples, engine adapters,
   inspection, rendering, and versions to v10 in one replacement.
-- [ ] Prove v9 unsupported outcomes and v10 public cold reconstruction.
-- [ ] Run focused package and contract checks. Record all expected stale
+- [x] Prove v9 unsupported outcomes through all four operations and persisted
+  state. The existing genuine v10 cold-process reconstruction remains pending
+  execution until Milestone 1 supplies current coverage.
+- [x] Run focused package and contract checks. Record all expected stale
   coverage subjects; any non-coverage failure blocks completion.
 
 **Acceptance gate:** All focused tests and public contract checks pass; exact
@@ -430,7 +432,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -494,7 +496,7 @@ record per subject; transition provenance reproduces exactly but does not
 influence certification; no consumer is blocked; and an independent report
 accepts one exact clean candidate.
 
-**Status:** `Blocked` by Milestone 0
+**Status:** `Active`
 
 ## Blockers
 

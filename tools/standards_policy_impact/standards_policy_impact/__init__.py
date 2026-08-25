@@ -1,11 +1,11 @@
 """Typed policy-impact declarations compiled into graph and semantic views."""
 
 from .compiler import (
+    DEFAULT_AUTHORING_CONTRACT,
     CATALOG_SOURCE_ID,
     DEFAULT_REGISTRY,
     POLICY_GROUP,
     RELATIONSHIP_KIND_CONTRACT_VERSION,
-    RELATIONSHIP_KINDS,
     SEMANTIC_GROUP,
     SOURCE_ID,
     compile_policy_impact,
@@ -14,6 +14,7 @@ from .compiler import (
 from .errors import PolicyImpactError, PolicyImpactFailure
 from .model import (
     CompiledPolicyImpactSet,
+    PolicyImpactArtifact,
     PolicyImpactSemantics,
     PolicyImpactSource,
     RelationshipKind,
@@ -21,14 +22,15 @@ from .model import (
 )
 
 __all__ = (
+    "DEFAULT_AUTHORING_CONTRACT",
     "CATALOG_SOURCE_ID",
     "DEFAULT_REGISTRY",
     "POLICY_GROUP",
     "RELATIONSHIP_KIND_CONTRACT_VERSION",
-    "RELATIONSHIP_KINDS",
     "SEMANTIC_GROUP",
     "SOURCE_ID",
     "CompiledPolicyImpactSet",
+    "PolicyImpactArtifact",
     "PolicyImpactError",
     "PolicyImpactFailure",
     "PolicyImpactSemantics",

@@ -4,6 +4,7 @@ import tempfile
 import textwrap
 import unittest
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from tools.graph_engine.graph_engine import GraphContribution
@@ -17,6 +18,7 @@ from tools.standards_metadata.standards_metadata import (
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     CompiledPolicyImpactSet,
+    PolicyImpactArtifact,
     PolicyImpactSemantics,
 )
 from tools.standards_engine.contracts.validate_contracts import validate
@@ -56,14 +58,10 @@ class CoverageTest(unittest.TestCase):
             '''
             schema_version = 1
             [[sources]]
-            id = "standards.policy-impact-catalog"
-            kind = "manifest"
-            path = "catalog.toml"
+            id = "standards.policy-impact"
+            kind = "provider"
+            provider = "standards.policy-impact"
             ''',
-        )
-        self.write(
-            "catalog.toml",
-            'schema_version = 1\nsource_id = "standards.policy-impact-catalog"\nedges = []\nnodes = []\ngroups = []\n',
         )
         self.write(
             "horizon.toml",
@@ -71,10 +69,9 @@ class CoverageTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 2
+            version = 3
             suite_registry = "suite-registry.toml"
             edge_source_registry = "edge-sources.toml"
-            policy_impact_node_catalog = "catalog.toml"
             """,
         )
         self.write("attestation-sources.toml", "schema_version = 1\nsources = []\n")
@@ -126,7 +123,12 @@ class CoverageTest(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
 
-    def compiled(self, *, relationship: bool = False) -> CompiledPolicyImpactSet:
+    def compiled(
+        self,
+        *,
+        relationship: bool = False,
+        artifact: PolicyImpactArtifact | None = None,
+    ) -> CompiledPolicyImpactSet:
         semantics = {}
         if relationship:
             program = self.schema.compile({"operator": "always"})
@@ -144,15 +146,30 @@ class CoverageTest(unittest.TestCase):
                 "policy-coverage/attestations/relationship.toml",
                 "sha256:" + "3" * 64,
             )
-        return CompiledPolicyImpactSet(
-            GraphContribution((), (), ()),
-            semantics,
-            self.schema,
+        selected_artifact = artifact or PolicyImpactArtifact(
+            "consumer",
+            (),
+            "inputs/consumer.md",
+            "documentation",
+            "projection",
+            None,
+            "sha256:" + "c" * 64,
             "catalog.toml",
-            ("declarations.toml",),
-            ("registry.toml", "catalog.toml"),
-            "sha256:" + ("4" if relationship else "5") * 64,
-            "sha256:" + "6" * 64,
+        )
+        return CompiledPolicyImpactSet(
+            graph=GraphContribution((), (), ()),
+            semantics=semantics,
+            artifacts={selected_artifact.id: selected_artifact},
+            relationship_kinds={},
+            fact_schema=self.schema,
+            node_catalog="catalog.toml",
+            declaration_sources=("declarations.toml",),
+            input_sources=("registry.toml", "catalog.toml"),
+            declaration_digest="sha256:" + ("4" if relationship else "5") * 64,
+            catalog_digest="sha256:" + "6" * 64,
+            authoring_contract_digest="sha256:" + "7" * 64,
+            provider_contract_digest="sha256:" + "8" * 64,
+            relationship_kind_contract_version=2,
         )
 
     def changes(self):
@@ -173,7 +190,7 @@ class CoverageTest(unittest.TestCase):
         self.write(
             "attestations.toml",
             f"""
-            schema_version = 1
+            schema_version = 2
             [[attestations]]
             requirement = "{requirement}"
             conclusion = "complete"
@@ -189,64 +206,50 @@ class CoverageTest(unittest.TestCase):
         )
 
     def test_horizon_uses_registered_suite_inputs_and_fingerprints_content(self) -> None:
-        first = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
+        compiled = self.compiled()
+        first = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
         ids = {member.id for member in first.members}
         self.assertIn("suite:coverage", ids)
         self.assertIn("repository:inputs/consumer.md", ids)
 
         self.write("inputs/consumer.md", "# Consumer\n\nNow consumes policy.\n")
-        second = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
+        second = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
         self.assertNotEqual(first.digest, second.digest)
 
-    def test_node_authority_is_snapshot_only_but_unknown_metadata_is_coverage_input(self) -> None:
-        self.write(
-            "catalog.toml",
-            '''
-            schema_version = 1
-            source_id = "standards.policy-impact-catalog"
-            edges = []
-            groups = []
-            [[nodes]]
-            id = "consumer"
-            metadata = { repository_path = "inputs/consumer.md", authority = "projection" }
-            ''',
+    def test_artifact_authority_is_snapshot_only_but_coverage_fingerprint_is_bound(
+        self,
+    ) -> None:
+        compiled = self.compiled()
+        first = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
         )
-        first = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
-
-        self.write(
-            "catalog.toml",
-            '''
-            schema_version = 1
-            source_id = "standards.policy-impact-catalog"
-            edges = []
-            groups = []
-            [[nodes]]
-            id = "consumer"
-            metadata = { repository_path = "inputs/consumer.md", authority = "evidence" }
-            ''',
-        )
+        artifact = compiled.artifact_for("consumer")
         reading_only = load_coverage_horizon(
             self.root,
             self.corpus,
+            replace(
+                compiled,
+                artifacts={"consumer": replace(artifact, authority="evidence")},
+            ),
             "horizon.toml",
         )
         self.assertEqual(first.digest, reading_only.digest)
-
-        self.write(
-            "catalog.toml",
-            '''
-            schema_version = 1
-            source_id = "standards.policy-impact-catalog"
-            edges = []
-            groups = []
-            [[nodes]]
-            id = "consumer"
-            metadata = { repository_path = "inputs/consumer.md", authority = "evidence", future_discovery_field = "changed" }
-            ''',
-        )
         discovery_unknown = load_coverage_horizon(
             self.root,
             self.corpus,
+            replace(
+                compiled,
+                artifacts={
+                    "consumer": replace(
+                        artifact,
+                        coverage_fingerprint="sha256:" + "d" * 64,
+                    )
+                },
+            ),
             "horizon.toml",
         )
         self.assertNotEqual(reading_only.digest, discovery_unknown.digest)
@@ -268,17 +271,14 @@ class CoverageTest(unittest.TestCase):
             "declarations.toml",
             "sha256:" + "7" * 64,
         )
-        changed = CompiledPolicyImpactSet(
-            compiled.graph,
-            {unrelated.edge_id: unrelated},
-            compiled.fact_schema,
-            compiled.node_catalog,
-            compiled.declaration_sources,
-            compiled.input_sources,
-            "sha256:" + "8" * 64,
-            compiled.provider_contract_digest,
+        changed = replace(
+            compiled,
+            semantics={unrelated.edge_id: unrelated},
+            declaration_digest="sha256:" + "8" * 64,
         )
-        horizon = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
+        horizon = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
         unit = self.corpus.policy_unit_corpus.units[0]
 
         self.assertEqual(
@@ -300,7 +300,7 @@ class CoverageTest(unittest.TestCase):
         self.write(
             "attestations.toml",
             f"""
-            schema_version = 1
+            schema_version = 2
             [[attestations]]
             requirement = "{requirement.handle}"
             conclusion = "complete"
@@ -461,7 +461,9 @@ class CoverageTest(unittest.TestCase):
         self.assertEqual([item.target for item in removed], ["workflow.policy.rule"])
 
     def test_stale_attestation_rejects_and_relationship_location_cannot_escape(self) -> None:
-        horizon = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
+        horizon = load_coverage_horizon(
+            self.root, self.corpus, self.compiled(), "horizon.toml"
+        )
         plain_view = derive_coverage_view(
             self.corpus.policy_units[0],
             self.compiled(),
@@ -479,7 +481,7 @@ class CoverageTest(unittest.TestCase):
         self.write(
             "attestations.toml",
             """
-            schema_version = 1
+            schema_version = 2
             [[attestations]]
             requirement = "coverage-requirement:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             conclusion = "complete"

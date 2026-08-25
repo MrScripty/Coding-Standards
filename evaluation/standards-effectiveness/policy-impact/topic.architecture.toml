@@ -1,4 +1,4 @@
-schema_version = 1
+schema_version = 2
 owner = "topic.architecture"
 
 [[relationships]]
@@ -12,7 +12,7 @@ rationale = "Persistence owns durable reopening of immutable authority and analy
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_engine/standards_engine/engine.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "The engine resolves reads and inspection from the exact captured authority view."
@@ -20,7 +20,7 @@ rationale = "The engine resolves reads and inspection from the exact captured au
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/snapshots.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "Snapshot identities bind every interpretation-affecting immutable input."
@@ -28,7 +28,7 @@ rationale = "Snapshot identities bind every interpretation-affecting immutable i
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/resolution.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "Analysis transitions consume only declared immutable authority and accepted decisions."
@@ -36,7 +36,7 @@ rationale = "Analysis transitions consume only declared immutable authority and 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/results.py"
-relation = "reference-projection"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "Result projection is reproducible from one immutable analysis state and authority resolver."

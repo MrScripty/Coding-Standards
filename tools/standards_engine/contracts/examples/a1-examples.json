@@ -58,9 +58,9 @@
           "snapshot": {
             "kind": "snapshot-handle",
             "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "schema_version": 2
+            "schema_version": 3
           },
-          "schema_version": 2
+          "schema_version": 3
         },
         "reading_plan": [
           {
@@ -119,7 +119,7 @@
             "snapshot": {
               "kind": "snapshot-handle",
               "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "schema_version": 2
+              "schema_version": 3
             }
           },
           {
@@ -129,7 +129,7 @@
             "snapshot": {
               "kind": "snapshot-handle",
               "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "schema_version": 2
+              "schema_version": 3
             }
           },
           {
@@ -139,7 +139,7 @@
             "snapshot": {
               "kind": "snapshot-handle",
               "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "schema_version": 2
+              "schema_version": 3
             }
           }
         ],
@@ -175,12 +175,12 @@
         "base_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 2
+          "schema_version": 3
         },
         "proposed_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 2
+          "schema_version": 3
         },
         "changes": [
           {
@@ -338,7 +338,7 @@
         "handle": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:7777777777777777777777777777777777777777777777777777777777777777",
-          "schema_version": 2
+          "schema_version": 3
         },
         "context": {
           "kind": "analysis-context",
@@ -495,13 +495,13 @@
             "analysis": {
               "kind": "analysis-handle",
               "id": "analysis:sha256:7777777777777777777777777777777777777777777777777777777777777777",
-              "schema_version": 2
+              "schema_version": 3
             }
           }
         ],
         "provenance": {
-          "analysis_contract_version": 5,
-          "interface_schema_version": 9,
+          "analysis_contract_version": 6,
+          "interface_schema_version": 10,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -514,8 +514,8 @@
           "evidence_provider_contract_versions": {
             "policy-impact": "1"
           },
-          "analysis_schema_version": 2,
-          "result_schema_version": 1,
+          "analysis_schema_version": 3,
+          "result_schema_version": 2,
           "authorization_contract_version": "authorization-authority.v1"
         },
         "summary": "One consumer review is required.",
@@ -656,17 +656,17 @@
         "handle": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:8888888888888888888888888888888888888888888888888888888888888888",
-          "schema_version": 2
+          "schema_version": 3
         },
         "base_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 2
+          "schema_version": 3
         },
         "proposed_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 2
+          "schema_version": 3
         },
         "changes": [
           {
@@ -691,8 +691,8 @@
         "fact_observations": [],
         "dispositions": [],
         "provenance": {
-          "analysis_contract_version": 5,
-          "interface_schema_version": 9,
+          "analysis_contract_version": 6,
+          "interface_schema_version": 10,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -705,8 +705,8 @@
           "evidence_provider_contract_versions": {
             "policy-impact": "1"
           },
-          "analysis_schema_version": 2,
-          "result_schema_version": 1,
+          "analysis_schema_version": 3,
+          "result_schema_version": 2,
           "authorization_contract_version": "authorization-authority.v1"
         },
         "semantic_proposals": [],
@@ -744,17 +744,17 @@
         "handle": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:9999999999999999999999999999999999999999999999999999999999999999",
-          "schema_version": 2
+          "schema_version": 3
         },
         "base_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 2
+          "schema_version": 3
         },
         "proposed_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 2
+          "schema_version": 3
         },
         "context": {
           "kind": "analysis-context",
@@ -832,7 +832,7 @@
           {
             "kind": "certificate-handle",
             "id": "certificate:sha256:3333333333333333333333333333333333333333333333333333333333333333",
-            "schema_version": 1
+            "schema_version": 2
           }
         ],
         "fact_observations": [],
@@ -906,8 +906,8 @@
           "evidence_valid": true
         },
         "provenance": {
-          "analysis_contract_version": 5,
-          "interface_schema_version": 9,
+          "analysis_contract_version": 6,
+          "interface_schema_version": 10,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -920,8 +920,8 @@
           "evidence_provider_contract_versions": {
             "policy-impact": "1"
           },
-          "analysis_schema_version": 2,
-          "result_schema_version": 1,
+          "analysis_schema_version": 3,
+          "result_schema_version": 2,
           "authorization_contract_version": "authorization-authority.v1"
         },
         "summary": "The bounded read-only impact analysis is complete.",
@@ -999,19 +999,6 @@
       }
     },
     {
-      "name": "compiled-applicability-program",
-      "definition": "CompiledApplicabilityProgram",
-      "value": {
-        "normalized_expression": {
-          "operator": "always"
-        },
-        "referenced_facts": [],
-        "language_version": 1,
-        "schema_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "dependency_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-      }
-    },
-    {
       "name": "applicability-expression",
       "definition": "ApplicabilityExpression",
       "value": {
@@ -1030,17 +1017,17 @@
       }
     },
     {
-      "name": "unconditional-policy-impact-declaration",
-      "definition": "PolicyImpactDeclaration",
+      "name": "policy-relationship-inspection",
+      "definition": "PolicyRelationshipInspection",
       "value": {
-        "kind": "policy-impact-declaration",
-        "source": "workflow.planning",
-        "consumer": "prompt.implement-plan",
-        "relation": "prompt-projection",
+        "relationship_kind": "prompt-projection",
         "applicability": {
           "operator": "always"
         },
-        "evidence_owner": "suite.plan-implementation-entrypoint",
+        "source_scope": null,
+        "consumer_scope": null,
+        "propagation": "source-to-consumer",
+        "evidence_owner": "suite:plan-implementation-entrypoint",
         "rationale": "The implementation prompt projects written-plan decisions."
       }
     },
@@ -1052,7 +1039,7 @@
         "handle": {
           "kind": "coverage-authority-view-handle",
           "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 1
+          "schema_version": 2
         },
         "subject": "workflow.verification.evidence-oracle-boundary",
         "owner": "workflow.verification",
@@ -1068,7 +1055,7 @@
             "fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
           }
         ],
-        "relationship_kind_contract_version": 1,
+        "relationship_kind_contract_version": 2,
         "relationship_provider_contract_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
         "applicability_language_version": 1,
         "applicability_program_digests": [
@@ -1078,7 +1065,7 @@
         "horizon": {
           "id": "audit-horizon.policy-impact-consumers",
           "provider": "standards-analysis:policy-impact-consumer-horizon",
-          "version": 2,
+          "version": 3,
           "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
           "members": [
             {
@@ -1091,8 +1078,8 @@
           ]
         },
         "identity_resolution_contract_version": "standards-metadata:v1",
-        "coverage_contract_version": "1",
-        "attestation_contract_version": "1",
+        "coverage_contract_version": "2",
+        "attestation_contract_version": "2",
         "authorization_contract_version": "repository-reviewed-attestation:v1",
         "evidence_provider_contract_version": "repository-content:v1"
       }
@@ -1105,12 +1092,12 @@
         "handle": {
           "kind": "coverage-requirement-handle",
           "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
-          "schema_version": 1
+          "schema_version": 2
         },
         "coverage_view": {
           "kind": "coverage-authority-view-handle",
           "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 1
+          "schema_version": 2
         },
         "subject": "workflow.verification.evidence-oracle-boundary",
         "owner": "workflow.verification",
@@ -1122,7 +1109,7 @@
         "derived_from_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 2
+          "schema_version": 3
         }
       }
     },
@@ -1134,12 +1121,12 @@
         "handle": {
           "kind": "coverage-attestation-handle",
           "id": "coverage-attestation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
-          "schema_version": 1
+          "schema_version": 2
         },
         "requirement": {
           "kind": "coverage-requirement-handle",
           "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
-          "schema_version": 1
+          "schema_version": 2
         },
         "conclusion": "complete",
         "evidence": [
@@ -1153,7 +1140,7 @@
         "explicit_exclusions": [],
         "rationale": "The registered horizon and every reached consumer were reviewed.",
         "auditor_provenance": "reviewer:standards-owner",
-        "schema_version": 1
+        "schema_version": 2
       }
     },
     {
@@ -1164,7 +1151,7 @@
         "handle": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 2
+          "schema_version": 3
         },
         "tree": "c27a1e2bbf52244c5b30eb1d21381be6e5c86d68",
         "commit": "13a9f48b95ed7532f480e4604d9dfa23443e8f43",
@@ -1174,8 +1161,8 @@
         "submodules": [],
         "exclusions": [],
         "versions": {
-          "analysis_contract_version": 5,
-          "interface_schema_version": 9,
+          "analysis_contract_version": 6,
+          "interface_schema_version": 10,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -1188,8 +1175,8 @@
           "evidence_provider_contract_versions": {
             "policy-impact": "1"
           },
-          "analysis_schema_version": 2,
-          "result_schema_version": 1,
+          "analysis_schema_version": 3,
+          "result_schema_version": 2,
           "authorization_contract_version": "authorization-authority.v1"
         }
       }
@@ -1202,7 +1189,7 @@
         "handle": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 2
+          "schema_version": 3
         },
         "source_kind": "dirty-git",
         "scope": [
@@ -1229,8 +1216,8 @@
           }
         ],
         "versions": {
-          "analysis_contract_version": 5,
-          "interface_schema_version": 9,
+          "analysis_contract_version": 6,
+          "interface_schema_version": 10,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -1243,8 +1230,8 @@
           "evidence_provider_contract_versions": {
             "policy-impact": "1"
           },
-          "analysis_schema_version": 2,
-          "result_schema_version": 1,
+          "analysis_schema_version": 3,
+          "result_schema_version": 2,
           "authorization_contract_version": "authorization-authority.v1"
         }
       }
@@ -1257,22 +1244,22 @@
         "handle": {
           "kind": "certificate-handle",
           "id": "certificate:sha256:3333333333333333333333333333333333333333333333333333333333333333",
-          "schema_version": 1
+          "schema_version": 2
         },
         "coverage_view": {
           "kind": "coverage-authority-view-handle",
           "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 1
+          "schema_version": 2
         },
         "requirement": {
           "kind": "coverage-requirement-handle",
           "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
-          "schema_version": 1
+          "schema_version": 2
         },
         "attestation": {
           "kind": "coverage-attestation-handle",
           "id": "coverage-attestation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
-          "schema_version": 1
+          "schema_version": 2
         },
         "subject": "workflow.verification.evidence-oracle-boundary",
         "owner": "workflow.verification",
@@ -1282,8 +1269,8 @@
         "evidence_digests": [
           "sha256:1111111111111111111111111111111111111111111111111111111111111111"
         ],
-        "coverage_contract_version": "1",
-        "attestation_contract_version": "1",
+        "coverage_contract_version": "2",
+        "attestation_contract_version": "2",
         "provenance": {
           "generator": "standards-analysis:consumer-coverage-certificate:v1",
           "generated_at": "2026-08-22T12:00:00Z"

@@ -1,7 +1,7 @@
 schema_version = 1
 id = "policy-semantic-impact"
 owner = "workflow.planning"
-description = "Policy-specific validation over the generic policy-impact edge group, including audited-owner suite closure, strict consumer and evidence resolution, and typed negative fixtures without inferred edges."
+description = "Policy-specific validation over the generic policy-impact edge group, including compiler-owned target compatibility, strict evidence resolution, and typed negative fixtures without inferred edges."
 
 [[checks]]
 id = "current-structure"
@@ -46,8 +46,3 @@ expected = ["PATH.OUTSIDE_REPOSITORY"]
 id = "missing-file"
 manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-file.toml"
 expected = ["INPUT.UNAVAILABLE"]
-
-[[checks.cases]]
-id = "missing-enforcement-suite-edge"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-enforcement-suite-edge.toml"
-expected = ["POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE"]

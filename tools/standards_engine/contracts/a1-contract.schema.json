@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v9",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v10",
   "title": "Standards Engine A1 contract",
   "description": "Canonical typed contract for snapshot-bound navigation and read-only standards-change analysis.",
   "oneOf": [
@@ -21,7 +21,6 @@
     { "$ref": "#/$defs/PolicyUnitDeclaration" },
     { "$ref": "#/$defs/PolicyUnitTombstone" },
     { "$ref": "#/$defs/ApplicabilityFactSchema" },
-    { "$ref": "#/$defs/PolicyImpactDeclaration" },
     { "$ref": "#/$defs/DecisionContract" },
     { "$ref": "#/$defs/AuditHorizonDeclaration" },
     { "$ref": "#/$defs/CoverageAuthorityView" },
@@ -30,8 +29,8 @@
     { "$ref": "#/$defs/ConsumerCoverageCertificate" }
   ],
   "x-standards-engine-contract": {
-    "contract_version": 9,
-    "schema_version": 9,
+    "contract_version": 10,
+    "schema_version": 10,
     "applicability_version": 3,
     "public_operations": {
       "query": {
@@ -195,7 +194,7 @@
       "properties": {
         "kind": { "const": "snapshot-handle" },
         "id": { "$ref": "#/$defs/SnapshotId" },
-        "schema_version": { "const": 2 }
+        "schema_version": { "const": 3 }
       },
       "additionalProperties": false
     },
@@ -206,7 +205,7 @@
         "kind": { "const": "navigation-handle" },
         "id": { "$ref": "#/$defs/NavigationId" },
         "snapshot": { "$ref": "#/$defs/SnapshotHandle" },
-        "schema_version": { "const": 2 }
+        "schema_version": { "const": 3 }
       },
       "additionalProperties": false
     },
@@ -216,7 +215,7 @@
       "properties": {
         "kind": { "const": "analysis-handle" },
         "id": { "$ref": "#/$defs/AnalysisId" },
-        "schema_version": { "const": 2 }
+        "schema_version": { "const": 3 }
       },
       "additionalProperties": false
     },
@@ -246,7 +245,7 @@
       "properties": {
         "kind": { "const": "certificate-handle" },
         "id": { "$ref": "#/$defs/CertificateId" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -256,7 +255,7 @@
       "properties": {
         "kind": { "const": "coverage-authority-view-handle" },
         "id": { "$ref": "#/$defs/CoverageAuthorityViewId" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -266,7 +265,7 @@
       "properties": {
         "kind": { "const": "coverage-requirement-handle" },
         "id": { "$ref": "#/$defs/CoverageRequirementId" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -276,7 +275,7 @@
       "properties": {
         "kind": { "const": "coverage-attestation-handle" },
         "id": { "$ref": "#/$defs/CoverageAttestationId" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -904,59 +903,12 @@
       },
       "additionalProperties": false
     },
-    "PolicyImpactDeclaration": {
+    "PolicyRelationshipInspection": {
       "type": "object",
-      "required": ["kind", "source", "consumer", "relation", "applicability", "evidence_owner", "rationale"],
+      "required": ["relationship_kind", "applicability", "source_scope", "consumer_scope", "propagation", "evidence_owner", "rationale"],
       "properties": {
-        "kind": { "const": "policy-impact-declaration" },
-        "source": { "$ref": "#/$defs/CanonicalId" },
-        "consumer": { "$ref": "#/$defs/CanonicalId" },
-        "relation": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "reference-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection"] },
-        "source_scope": { "$ref": "#/$defs/ReviewScope" },
-        "consumer_scope": { "$ref": "#/$defs/ReviewScope" },
+        "relationship_kind": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "reference-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection", "implementation-projection"] },
         "applicability": { "$ref": "#/$defs/ApplicabilityExpression" },
-        "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
-        "rationale": { "$ref": "#/$defs/NonEmptyString" }
-      },
-      "additionalProperties": false,
-      "x-standards-engine-invariants": {
-        "canonical-references": "source and consumer reference upstream canonical IDs without redefining aliases, paths, corpus membership, Requires, or Specializes",
-        "natural-key": "source, relation, and consumer are unique and derive policy-impact:v1/<encoded-source>/<encoded-relation>/<encoded-consumer>, where each UTF-8 segment uses uppercase percent encoding for every byte outside unreserved URI characters",
-        "authority": "the declaration is the sole relationship authority; graph topology and typed semantics are compiled projections",
-        "relationship-kind-contract": "standards_policy_impact owns one versioned code table for the eight admitted relation kinds; every current kind belongs to policy-impact and semantic, propagates source-to-consumer, is traversable, and requires an explicit evidence owner",
-        "propagation": "the relationship-kind contract owns domain propagation; version 1 admits no per-declaration override",
-        "evidence": "evidence_owner is authored relationship semantics and must resolve to exactly one registered evidence owner",
-        "coverage": "coverage association is derived downstream by standards_analysis and is not relationship semantics"
-      }
-    },
-    "CompiledApplicabilityProgram": {
-      "type": "object",
-      "required": ["normalized_expression", "referenced_facts", "language_version", "schema_digest", "dependency_digest"],
-      "properties": {
-        "normalized_expression": { "$ref": "#/$defs/ApplicabilityExpression" },
-        "referenced_facts": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": { "$ref": "#/$defs/CanonicalId" }
-        },
-        "language_version": { "const": 1 },
-        "schema_digest": { "$ref": "#/$defs/Digest" },
-        "dependency_digest": { "$ref": "#/$defs/Digest" }
-      },
-      "additionalProperties": false,
-      "x-standards-engine-invariants": {
-        "identity": "dependency_digest binds language_version, normalized_expression, and exact referenced fact definitions using domain-separated canonical serialization"
-      }
-    },
-    "CompiledPolicyImpactSemantics": {
-      "type": "object",
-      "required": ["edge_id", "source", "consumer", "relation", "applicability_program", "source_scope", "consumer_scope", "propagation", "evidence_owner", "rationale", "declaration_source", "dependency_fingerprint"],
-      "properties": {
-        "edge_id": { "$ref": "#/$defs/EdgeId" },
-        "source": { "$ref": "#/$defs/CanonicalId" },
-        "consumer": { "$ref": "#/$defs/CanonicalId" },
-        "relation": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "reference-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection"] },
-        "applicability_program": { "$ref": "#/$defs/CompiledApplicabilityProgram" },
         "source_scope": {
           "oneOf": [
             { "$ref": "#/$defs/ReviewScope" },
@@ -971,14 +923,12 @@
         },
         "propagation": { "const": "source-to-consumer" },
         "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
-        "rationale": { "$ref": "#/$defs/NonEmptyString" },
-        "declaration_source": { "$ref": "#/$defs/NonEmptyString" },
-        "dependency_fingerprint": { "$ref": "#/$defs/Digest" }
+        "rationale": { "$ref": "#/$defs/NonEmptyString" }
       },
       "additionalProperties": false,
       "x-standards-engine-invariants": {
-        "projection": "the value is compiled from the same authoritative declaration as its generic edge and is never a second editable authority",
-        "applicability": "the compiled program is produced once by standards_applicability and is consumed without reparsing"
+        "projection": "the value is an operation-shaped inspection of compiled relationship authority and is never an editable declaration",
+        "internal-boundary": "repository declaration paths, compiled program internals, and dependency fingerprints are not public"
       }
     },
     "SemanticProposal": {
@@ -1163,7 +1113,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v2",
+        "domain": "coding-standards:navigation:v3",
         "include": ["handle.snapshot", "reading_plan", "unresolved_questions"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
@@ -1198,7 +1148,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v2",
+        "domain": "coding-standards:navigation:v3",
         "include": ["handle.snapshot", "policy", "content", "requires", "specializes", "related"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
@@ -1238,7 +1188,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v2",
+        "domain": "coding-standards:navigation:v3",
         "include": ["handle.snapshot", "target", "policy_unit_mapping", "relationships"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
@@ -1367,10 +1317,10 @@
       "type": "object",
       "required": ["analysis_contract_version", "analysis_schema_version", "result_schema_version", "interface_schema_version", "applicability_version", "authorization_contract_version", "metadata_api_version", "graph_engine_contract_version", "graph_engine_implementation_version", "analyzer_implementation_version", "parser_versions", "evidence_provider_contract_versions"],
       "properties": {
-        "analysis_contract_version": { "const": 5 },
-        "analysis_schema_version": { "const": 2 },
-        "result_schema_version": { "const": 1 },
-        "interface_schema_version": { "const": 9 },
+        "analysis_contract_version": { "const": 6 },
+        "analysis_schema_version": { "const": 3 },
+        "result_schema_version": { "const": 2 },
+        "interface_schema_version": { "const": 10 },
         "applicability_version": { "const": 3 },
         "authorization_contract_version": { "const": "authorization-authority.v1" },
         "metadata_api_version": { "$ref": "#/$defs/NonEmptyString" },
@@ -1711,7 +1661,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-authority-view:v1",
+        "domain": "coding-standards:coverage-authority-view:v2",
         "include": ["subject", "owner", "semantic_revision", "representation_digest", "structural_digest", "relationship_kinds", "relationship_fingerprints", "relationship_kind_contract_version", "relationship_provider_contract_digest", "applicability_language_version", "applicability_program_digests", "fact_schema_digest", "horizon", "identity_resolution_contract_version", "coverage_contract_version", "attestation_contract_version", "authorization_contract_version", "evidence_provider_contract_version"],
         "exclude": ["handle"]
       }
@@ -1732,7 +1682,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-audit-requirement:v1",
+        "domain": "coding-standards:coverage-audit-requirement:v2",
         "include": ["coverage_view", "subject", "owner", "semantic_revision", "relationship_kinds", "horizon"],
         "exclude": ["handle", "derived_from_snapshot"]
       }
@@ -1749,11 +1699,11 @@
         "explicit_exclusions": { "type": "array", "items": { "$ref": "#/$defs/EvidenceReference" } },
         "rationale": { "$ref": "#/$defs/NonEmptyString" },
         "auditor_provenance": { "$ref": "#/$defs/NonEmptyString" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-attestation:v1",
+        "domain": "coding-standards:coverage-attestation:v2",
         "include": ["requirement", "conclusion", "evidence", "explicit_exclusions", "rationale", "auditor_provenance", "schema_version"],
         "exclude": ["handle"]
       }
@@ -1779,7 +1729,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:consumer-coverage-certificate:v1",
+        "domain": "coding-standards:consumer-coverage-certificate:v2",
         "include": ["coverage_view", "requirement", "attestation", "subject", "owner", "semantic_revision", "horizon_digest", "relationship_digest", "evidence_digests", "coverage_contract_version", "attestation_contract_version"],
         "exclude": ["handle", "provenance"]
       }
@@ -1916,7 +1866,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:analysis:v2",
+        "domain": "coding-standards:analysis:v3",
         "include": ["base_snapshot", "proposed_snapshot", "changes", "semantic_proposals", "authorization_view", "provider_view", "fact_observations", "dispositions", "coverage_decisions", "provenance.analysis_contract_version", "provenance.analysis_schema_version", "provenance.result_schema_version", "provenance.applicability_version", "provenance.authorization_contract_version", "provenance.metadata_api_version", "provenance.graph_engine_contract_version", "provenance.parser_versions", "provenance.evidence_provider_contract_versions"],
         "exclude": ["kind", "handle", "provenance.interface_schema_version", "provenance.graph_engine_implementation_version", "provenance.analyzer_implementation_version"]
       }
@@ -2096,7 +2046,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v2",
+        "domain": "coding-standards:snapshot:v3",
         "include": ["tree", "scope", "exclusions", "submodules", "versions.analysis_contract_version", "versions.analysis_schema_version", "versions.result_schema_version", "versions.interface_schema_version", "versions.applicability_version", "versions.authorization_contract_version", "versions.metadata_api_version", "versions.graph_engine_contract_version", "versions.parser_versions", "versions.evidence_provider_contract_versions"],
         "exclude": ["handle", "commit", "versions.graph_engine_implementation_version", "versions.analyzer_implementation_version"]
       }
@@ -2122,7 +2072,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v2",
+        "domain": "coding-standards:snapshot:v3",
         "include": ["source_kind", "scope", "entries", "versions.analysis_contract_version", "versions.analysis_schema_version", "versions.result_schema_version", "versions.interface_schema_version", "versions.applicability_version", "versions.authorization_contract_version", "versions.metadata_api_version", "versions.graph_engine_contract_version", "versions.parser_versions", "versions.evidence_provider_contract_versions"],
         "exclude": ["handle", "versions.graph_engine_implementation_version", "versions.analyzer_implementation_version"]
       }
@@ -2178,7 +2128,7 @@
         "relationship": { "$ref": "#/$defs/RelationshipSummary" },
         "policy_semantics": {
           "oneOf": [
-            { "$ref": "#/$defs/CompiledPolicyImpactSemantics" },
+            { "$ref": "#/$defs/PolicyRelationshipInspection" },
             { "type": "null" }
           ]
         },

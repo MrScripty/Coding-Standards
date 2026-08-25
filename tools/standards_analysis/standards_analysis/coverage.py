@@ -6,6 +6,7 @@ from pathlib import Path, PurePosixPath
 from types import MappingProxyType
 from typing import Any, Iterable, Mapping
 
+from tools.standards_applicability.standards_applicability import LANGUAGE_VERSION
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
     PolicyUnit,
@@ -14,7 +15,6 @@ from tools.standards_metadata.standards_metadata import (
     digest_bytes,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
-    RELATIONSHIP_KIND_CONTRACT_VERSION,
     CompiledPolicyImpactSet,
 )
 
@@ -22,8 +22,8 @@ from .errors import AnalysisError, AnalysisFailure
 from .serialization import identity
 
 
-COVERAGE_CONTRACT_VERSION = "1"
-ATTESTATION_CONTRACT_VERSION = "1"
+COVERAGE_CONTRACT_VERSION = "2"
+ATTESTATION_CONTRACT_VERSION = "2"
 AUTHORIZATION_CONTRACT_VERSION = "repository-reviewed-attestation:v1"
 EVIDENCE_PROVIDER_CONTRACT_VERSION = "repository-content:v1"
 IDENTITY_RESOLUTION_CONTRACT_VERSION = "standards-metadata:v1"
@@ -33,7 +33,7 @@ DEFAULT_ATTESTATION_REGISTRY = (
 )
 HORIZON_ID = "audit-horizon.policy-impact-consumers"
 HORIZON_PROVIDER = "standards-analysis:policy-impact-consumer-horizon"
-HORIZON_VERSION = 2
+HORIZON_VERSION = 3
 
 
 def _error(
@@ -254,7 +254,7 @@ class CoverageAuthorityView:
                 "handle": {
                     "kind": "coverage-authority-view-handle",
                     "id": self.handle,
-                    "schema_version": 1,
+                    "schema_version": 2,
                 },
             }
         )
@@ -278,12 +278,12 @@ class CoverageAuditRequirement:
             "handle": {
                 "kind": "coverage-requirement-handle",
                 "id": self.handle,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "coverage_view": {
                 "kind": "coverage-authority-view-handle",
                 "id": self.coverage_view,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "subject": self.subject,
             "owner": self.owner,
@@ -295,7 +295,7 @@ class CoverageAuditRequirement:
             value["derived_from_snapshot"] = {
                 "kind": "snapshot-handle",
                 "id": self.derived_from_snapshot,
-                "schema_version": 2,
+                "schema_version": 3,
             }
         return value
 
@@ -318,12 +318,12 @@ class CoverageAttestation:
             "handle": {
                 "kind": "coverage-attestation-handle",
                 "id": self.handle,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "requirement": {
                 "kind": "coverage-requirement-handle",
                 "id": self.requirement,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "conclusion": self.conclusion,
             "evidence": [item.as_projection() for item in self.evidence],
@@ -357,22 +357,22 @@ class ConsumerCoverageCertificate:
             "handle": {
                 "kind": "certificate-handle",
                 "id": self.handle,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "coverage_view": {
                 "kind": "coverage-authority-view-handle",
                 "id": self.coverage_view,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "requirement": {
                 "kind": "coverage-requirement-handle",
                 "id": self.requirement,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "attestation": {
                 "kind": "coverage-attestation-handle",
                 "id": self.attestation,
-                "schema_version": 1,
+                "schema_version": 2,
             },
             "subject": self.subject,
             "owner": self.owner,
@@ -383,7 +383,7 @@ class ConsumerCoverageCertificate:
             "coverage_contract_version": self.coverage_contract_version,
             "attestation_contract_version": self.attestation_contract_version,
             "provenance": {
-                "generator": "standards-analysis:consumer-coverage-certificate:v1",
+                "generator": "standards-analysis:consumer-coverage-certificate:v2",
                 "generated_at": "reproducible-build-provenance",
             },
         }
@@ -467,27 +467,10 @@ def _file_fingerprint(root: Path, path: str) -> str:
     return digest_bytes(_repository_file(root, path).read_bytes())
 
 
-def _node_catalog_coverage_fingerprint(raw: Mapping[str, object]) -> str:
-    projected = dict(raw)
-    nodes: list[object] = []
-    for item in raw.get("nodes", []):
-        if not isinstance(item, Mapping):
-            nodes.append(item)
-            continue
-        node = dict(item)
-        metadata = item.get("metadata")
-        if isinstance(metadata, Mapping):
-            selected_metadata = dict(metadata)
-            selected_metadata.pop("authority", None)
-            node["metadata"] = selected_metadata
-        nodes.append(node)
-    projected["nodes"] = nodes
-    return _digest(projected)
-
-
 def load_coverage_horizon(
     root: Path,
     corpus: CanonicalStandardsCorpus,
+    compiled: CompiledPolicyImpactSet,
     path: str = DEFAULT_HORIZON,
 ) -> CoverageHorizon:
     repo_root = root.resolve()
@@ -501,7 +484,6 @@ def load_coverage_horizon(
             "version",
             "suite_registry",
             "edge_source_registry",
-            "policy_impact_node_catalog",
         },
         allowed={
             "schema_version",
@@ -510,7 +492,6 @@ def load_coverage_horizon(
             "version",
             "suite_registry",
             "edge_source_registry",
-            "policy_impact_node_catalog",
         },
         path=path,
         field="horizon",
@@ -557,11 +538,6 @@ def load_coverage_horizon(
             ),
         )
 
-    node_catalog_path = _text(
-        raw["policy_impact_node_catalog"],
-        path=path,
-        field="policy_impact_node_catalog",
-    )
     edge_registry_path = _text(
         raw["edge_source_registry"], path=path, field="edge_source_registry"
     )
@@ -584,16 +560,11 @@ def load_coverage_horizon(
         source_path = source.get("path")
         if isinstance(source_path, str):
             input_sources.add(source_path)
-            fingerprint = (
-                _node_catalog_coverage_fingerprint(_toml(repo_root, source_path))
-                if source_path == node_catalog_path
-                else _file_fingerprint(repo_root, source_path)
-            )
             _merge_member(
                 members,
                 f"repository:{source_path}",
                 "edge-source-manifest",
-                fingerprint,
+                _file_fingerprint(repo_root, source_path),
             )
 
     suite_registry_path = _text(
@@ -645,30 +616,18 @@ def load_coverage_horizon(
                 _file_fingerprint(repo_root, input_path),
             )
 
-    input_sources.add(node_catalog_path)
-    node_catalog = _toml(repo_root, node_catalog_path)
-    for node in node_catalog.get("nodes", []):
-        if not isinstance(node, dict):
-            raise _error(
-                "COVERAGE.NODE",
-                "policy-impact node must be a table",
-                path=node_catalog_path,
-            )
-        node_id = _text(node.get("id"), path=node_catalog_path, field="id")
-        metadata = node.get("metadata", {})
-        repository_path = (
-            metadata.get("repository_path") if isinstance(metadata, dict) else None
-        )
-        fingerprint = (
-            _file_fingerprint(repo_root, repository_path)
-            if isinstance(repository_path, str)
-            else _digest(node)
-        )
+    input_sources.update(compiled.input_sources)
+    for artifact in compiled.artifacts.values():
         _merge_member(
             members,
-            f"policy-impact-node:{node_id}",
+            f"policy-impact-node:{artifact.id}",
             "supplemental-policy-impact-node",
-            fingerprint,
+            _digest(
+                {
+                    "artifact": artifact.coverage_fingerprint,
+                    "content": _file_fingerprint(repo_root, artifact.repository_path),
+                }
+            ),
         )
 
     resolved = tuple(
@@ -729,9 +688,11 @@ def derive_coverage_view(
             }
             for edge, fingerprint, relation, program in relationships
         ],
-        "relationship_kind_contract_version": RELATIONSHIP_KIND_CONTRACT_VERSION,
+        "relationship_kind_contract_version": (
+            compiled.relationship_kind_contract_version
+        ),
         "relationship_provider_contract_digest": compiled.provider_contract_digest,
-        "applicability_language_version": 1,
+        "applicability_language_version": LANGUAGE_VERSION,
         "fact_schema_digest": compiled.fact_schema.digest,
         "horizon": {
             "id": horizon.id,
@@ -747,7 +708,7 @@ def derive_coverage_view(
         "evidence_provider_contract_version": EVIDENCE_PROVIDER_CONTRACT_VERSION,
     }
     handle = identity(
-        "coding-standards:coverage-authority-view:v1",
+        "coding-standards:coverage-authority-view:v2",
         "coverage-view",
         projection,
     )
@@ -760,9 +721,9 @@ def derive_coverage_view(
         structural_digest or unit.structural_digest,
         tuple(sorted({relationship[2] for relationship in relationships})),
         tuple((relationship[0], relationship[1]) for relationship in relationships),
-        RELATIONSHIP_KIND_CONTRACT_VERSION,
+        compiled.relationship_kind_contract_version,
         compiled.provider_contract_digest,
-        1,
+        LANGUAGE_VERSION,
         tuple(sorted({relationship[3] for relationship in relationships})),
         compiled.fact_schema.digest,
         horizon.id,
@@ -792,7 +753,7 @@ def derive_coverage_requirement(
         "horizon": view.horizon_id,
     }
     handle = identity(
-        "coding-standards:coverage-audit-requirement:v1",
+        "coding-standards:coverage-audit-requirement:v2",
         "coverage-requirement",
         value,
     )
@@ -840,7 +801,7 @@ def _load_attestations(
             path=source_path,
             field="source",
         )
-        if raw["schema_version"] != 1 or not isinstance(raw["attestations"], list):
+        if raw["schema_version"] != 2 or not isinstance(raw["attestations"], list):
             raise _error(
                 "COVERAGE.ATTESTATION_VERSION",
                 "unsupported attestation source version",
@@ -920,7 +881,7 @@ def _load_attestations(
                 "schema_version": raw["schema_version"],
             }
             handle = identity(
-                "coding-standards:coverage-attestation:v1",
+                "coding-standards:coverage-attestation:v2",
                 "coverage-attestation",
                 content,
             )
@@ -975,7 +936,7 @@ def _certificate(
     }
     return ConsumerCoverageCertificate(
         identity(
-            "coding-standards:consumer-coverage-certificate:v1",
+            "coding-standards:consumer-coverage-certificate:v2",
             "certificate",
             value,
         ),
@@ -1101,7 +1062,7 @@ def compile_coverage(
     derived_from_snapshot: str | None = None,
 ) -> CoverageIndex:
     repo_root = root.resolve()
-    horizon = load_coverage_horizon(repo_root, corpus, horizon_path)
+    horizon = load_coverage_horizon(repo_root, corpus, compiled, horizon_path)
     views = {
         unit.id: derive_coverage_view(unit, compiled, horizon)
         for unit in corpus.policy_units
