@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 0 public-contract consumer replan admission
+**Current phase:** Milestone 0 exact-head start
 
-**Next slice:** obtain exact-tree admission for the omitted conformance-test consumer
+**Next slice:** start the corrected M0 implementation from the transition head
 
 **Acceptance status:** `pending`
 
@@ -34,6 +34,12 @@ fixture-scope authorization by the replan triggered at commit
 **Renewed implementation base:** fixture-scope admission-transition commit
 `ec0d7bc7abaf44e88ee99cb23c65962ba3c25a79`, tree
 `4b07fdb87c0e958eb321e114171d1ac68d8820dc`
+
+**Public-consumer admission boundary:** candidate commit
+`9dd2dd1c660de9efb75522ff21a44fe844398c4f`, tree
+`fcf91257f00b1d9aeb8fdb3e70a2fad06db460ce`; reviewer report commit
+`1bb79e125a1362e1b666122efc78ce9a5599fe67`, tree
+`2e3bc506c53f68467923b129068a163635d668bf`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -420,7 +426,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Blocked` pending public-contract consumer recovery admission
+**Status:** `Planned`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -488,8 +494,6 @@ accepts one exact clean candidate.
 
 ## Blockers
 
-- This plan and Milestone 0 are blocked pending independent exact-tree
-  admission of the omitted conformance-test consumer.
 - The standards-recovery plan remains blocked and provides no implementation
   fallback while this prerequisite is unresolved.
 
@@ -529,4 +533,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Blocked`
+- Final status: `Planned`

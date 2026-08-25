@@ -242,3 +242,20 @@
   implementation is preserved outside the governance candidate and cannot
   resume until a reviewer-owned exact-tree admission report, constrained
   transition, and exact-head start establish a renewed base.
+
+## 2026-08-25 - Public-Contract Consumer Exact-Tree Admission Transition
+
+- Independent review accepts candidate commit
+  `9dd2dd1c660de9efb75522ff21a44fe844398c4f`, tree
+  `fcf91257f00b1d9aeb8fdb3e70a2fad06db460ce`, with no Standards or
+  Specification findings.
+- Reviewer-owned report commit
+  `1bb79e125a1362e1b666122efc78ce9a5599fe67`, tree
+  `2e3bc506c53f68467923b129068a163635d668bf`, is the direct child of the
+  reviewed candidate and changes only the authorized admission report.
+- This mechanical transition moves the plan and M0 from `Blocked` to
+  `Planned`. PIA2-008 remains active; no implementation evidence is claimed.
+- No implementation is authorized by this transition. `start` must execute
+  while this transition is current `HEAD` with a clean worktree, bind its
+  exact commit/tree as the renewed implementation base, and move the plan and
+  M0 to `Active` before the preserved implementation is restored.
