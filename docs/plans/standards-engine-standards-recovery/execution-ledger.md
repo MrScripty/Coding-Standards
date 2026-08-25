@@ -426,3 +426,26 @@ superseded by the discovery-admission transition in the active plan.
 - Scope, implementation authority, and the `W/S/E/R` contract are unchanged.
   Milestone 0 remains `Implemented`; policy implementation remains unavailable
   pending renewed exact-tree admission.
+
+## 2026-08-24 - Policy-Implementation Admission Transition
+
+- Reviewed candidate: commit
+  `ce667c699f0b658949df628e60d1113c9695fdf3`, tree
+  `5d68ba1e58096520416d5711f391239074dd5714`.
+- Independent admission report: commit
+  `2adc885202cadd668b8d0ba66bbd9f1f0015d414`, tree
+  `1ecfa9f8be664576a1521b82bf7bfca78643f168`.
+- Authorized delta: this transition changes only `plan.md`,
+  `execution-ledger.md`, SESR-009, and SESR-024. The `W/S/E/R` contract, scope,
+  tasks, write set, objectives, evidence contracts, and every other issue
+  disposition remain unchanged.
+- Lifecycle transition: Milestone 0 moves from `Implemented` to `Accepted`; the
+  plan and Milestone 1 move from `Blocked` to `Planned`. Implementation has not
+  started.
+- Policy-implementation base: this mechanical transition commit. `start` must
+  run while it remains `HEAD` and record its exact commit/tree before changing
+  the plan or Milestone 1 to `Active`.
+- Excluded authority: policy mutation, runtime work, A1b, and A2 remain
+  unavailable until their respective lifecycle gates.
+- Sole next operation: `start` Milestone 1 coordinated standards authority
+  cutover.

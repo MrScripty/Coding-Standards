@@ -1,13 +1,13 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 0 implemented; policy-implementation admission
-rejected pending exact M1 consumer-closure repair
+**Current phase:** Milestone 1 coordinated standards authority cutover ready for
+`start`
 
-**Next slice:** obtain independent review of the exact blocked consumer-closure
-replan candidate; a policy-admission report and implementation remain
-unavailable until that review accepts the revised boundary
+**Next slice:** `start` Milestone 1 from the admitted policy-implementation
+transition base; policy mutation remains unavailable until `start` records that
+exact base
 
 **Acceptance status:** `partial`
 
@@ -43,9 +43,17 @@ unavailable until that review accepts the revised boundary
 `4788fd816d20ccbbea7004ad04bd3a099c78e68a`, tree
 `44b2b7fef3d8a489ba91ca40276b211979da3c00`
 
-**Admitted policy-implementation base:** `pending`; this is the mechanical
-transition commit authorized by the post-scope-audit admission report, and Milestone
-1 `start` must record its exact commit and tree before normative mutation
+**Reviewed policy-implementation candidate:** commit
+`ce667c699f0b658949df628e60d1113c9695fdf3`, tree
+`5d68ba1e58096520416d5711f391239074dd5714`
+
+**Policy-implementation admission:** report commit
+`2adc885202cadd668b8d0ba66bbd9f1f0015d414`, tree
+`1ecfa9f8be664576a1521b82bf7bfca78643f168`
+
+**Admitted policy-implementation base:** the current mechanical transition
+commit; Milestone 1 `start` must record its exact commit and tree before
+changing the plan to `Active`, and any intervening commit invalidates admission
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -456,7 +464,7 @@ inventory is fresh and satisfies the admitted field-level delta invariant; no
 final coverage, external corpus, policy, verifier behavior, or A1 runtime
 changed.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 1: Coordinated Standards Authority Cutover
 
@@ -590,8 +598,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Blocked` pending the pre-milestone policy-implementation admission
-transition, which marks implemented Milestone 0 `Accepted`
+**Status:** `Planned`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -658,10 +665,9 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 is implemented. The first policy-admission review rejected the
-  incomplete M1 mapped-consumer boundary; policy implementation remains
-  unavailable until an independent review accepts the exact repaired candidate
-  and the separate post-scope-audit admission transition is applied.
+- Milestone 0 is accepted and Milestone 1 admission is applied. `start` from
+  the current transition commit is the sole available operation; policy
+  mutation remains unavailable until that exact base is recorded.
 - The JSON Schema equality disagreement is independently reproduced and remains
   intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -747,4 +753,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`
