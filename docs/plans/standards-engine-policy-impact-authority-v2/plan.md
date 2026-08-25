@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Admitted; awaiting exact-head Milestone 0 start
+**Current phase:** Milestone 0 - Coordinated Authority And Public Contract Cutover
 
-**Next slice:** record the exact admission-transition commit/tree and start Milestone 0
+**Next slice:** implement the v2 policy-impact authority and atomic public v10 cutover
 
 **Acceptance status:** `pending`
 
@@ -17,6 +17,10 @@
 `dda284f6e82ea66ad11dbddc2d7584d6dfea1ece`; reviewer report commit
 `95e5a389b8328f57eadc11fe650c418049a87fd1`, tree
 `83f502a19463616105cc7c272d0bb904ba946ac1`
+
+**Implementation base:** admission-transition commit
+`fd9efe8198f787c9dd99255bf95e74d84b55baa2`, tree
+`9668c0b73c72e849311bddf6a83affcec9f82685`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -338,7 +342,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -406,8 +410,6 @@ accepts one exact clean candidate.
 
 ## Blockers
 
-- Milestone 0 is admitted but has not started from the exact current transition
-  boundary. No implementation file may change before that start.
 - The standards-recovery plan remains blocked and provides no implementation
   fallback while this prerequisite is unresolved.
 
@@ -447,4 +449,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Planned`
+- Final status: `Active`

@@ -135,3 +135,16 @@
 - No implementation is authorized by this transition. `start` must run while
   this transition is current `HEAD`, record its exact commit/tree, and move the
   plan and Milestone 0 to `Active` before any implementation path changes.
+
+## 2026-08-25 - Milestone 0 Exact-Head Start
+
+- Admission-transition commit
+  `fd9efe8198f787c9dd99255bf95e74d84b55baa2`, tree
+  `9668c0b73c72e849311bddf6a83affcec9f82685`, was current `HEAD` with a
+  clean worktree at start.
+- This entry moves the prerequisite plan and Milestone 0 from `Planned` to
+  `Active` and binds that exact transition as the implementation base.
+- Implementation is limited to the admitted Milestone 0 write set, atomic v2
+  authority/public-v10 replacement, and its focused evidence. Coverage
+  certification remains deferred to Milestone 1; broader A1b and A2 remain
+  unavailable.
