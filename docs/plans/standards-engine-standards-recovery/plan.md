@@ -1,12 +1,13 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 1 coordinated standards authority cutover
+**Current phase:** Milestone 1 protected Router-consumer re-plan
 
-**Next slice:** author the exact non-overlapping policy headings and Generated
-Contract profile/Router projection, then validate locator and routing closure
-before adding semantic relationships
+**Next slice:** independently review and admit the exact addition of the
+protected Router projection test to `W`; only after admission, update that test
+to replace incidental cardinality assertions with the new fact/rule semantics
+and resume locator/routing validation
 
 **Acceptance status:** `partial`
 
@@ -384,6 +385,41 @@ behavior. The reviewer must mechanically resolve the 36 suite IDs selected by
 the pre-policy scope audit through the canonical suite registry at the reviewed
 tree; copied suite-definition or input lists are not admission authority.
 
+### Milestone 1 Scope-Recovery Admission
+
+If an admitted M1 policy change proves that one protected mapped consumer must
+change, M1 returns to `Blocked` and uses this bounded scope-recovery protocol:
+
+1. Commit the exact blocked in-progress proposal and replan records before
+   modifying the protected consumer. The candidate must identify the failing
+   consumer, exact failure, proposed `R` to `W` transfer, and unchanged
+   remainder of the admitted closure.
+2. An independent reviewer authors only
+   `reports/standards-recovery-m1-scope-recovery-admission.md`. The report
+   binds that exact commit/tree and may authorize only the one-path transfer of
+   `tools/standards_analysis/tests/test_routing.py` from `R` to `W`.
+3. If accepted, the integration owner creates one mechanical transition commit
+   whose parent is the admission-report commit and whose only changed files are
+   `plan.md`, `execution-ledger.md`, and `issues.md`. It records the reviewed
+   snapshot and report commit/tree, sets the plan and Milestone 1 to `Planned`,
+   and names M1 scope-recovery `start` as the sole next operation. It may not
+   change policy, scope, tasks, evidence, or any other closure member.
+4. `start` is valid only while that transition is current `HEAD`. It records
+   the transition commit/tree, returns the plan and Milestone 1 to `Active`,
+   and authorizes modification of only the transferred test beyond paths in
+   the originally admitted `W`.
+5. The test must remove global fact/rule count assertions and instead verify
+   the stable `routing.boundaries` revision/domain and
+   `route.boundary.generated-contract` source expression, referenced fact, and
+   target. Existing loader closure and target-drift evidence remains unchanged;
+   public routing behavior belongs to the registered M1 route fixtures.
+
+The new canonical module changes coverage inputs, so Standards Engine
+navigation may remain unavailable against pre-change attestations until the
+planned Milestone 2 coverage renewal. That expected intermediate outcome does
+not authorize navigation-test mutation or another `R` to `W` transfer. Any
+different protected-consumer failure still triggers a separate re-plan.
+
 ## Milestones
 
 ### Milestone 0: Historical Reproduction And Pre-Policy Scope Audit
@@ -518,6 +554,7 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml` (new)
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `tools/standards_analysis/tests/test_routing.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -555,6 +592,11 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
 
 - [ ] Add exact, non-overlapping normative headings for all proposed policy
   units in the semantic-impact inventory.
+- [ ] Update the focused Router projection test to assert the admitted
+  `routing.boundaries` revision/domain and Generated Contract rule ID, target,
+  referenced fact, and `contains` expression; remove incidental global fact
+  and rule cardinality assertions and do not change Router runtime
+  implementation.
 - [ ] Add the Generated Contract profile and route it from observable schema,
   generator, and program-consumer facts; preserve conditional IPC and Language
   Binding selection.
@@ -597,7 +639,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Active`
+**Status:** `Blocked`
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -752,4 +794,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`

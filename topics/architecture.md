@@ -59,6 +59,27 @@ depend on selected contracts and receive dependencies explicitly. Do not create
 ambient global infrastructure, duplicate a long-lived owner, or hide runtime
 selection inside business policy.
 
+## Immutable Authority Closure
+
+An immutable, replayable, or inspectable handle binds the complete transitive
+authority closure required to reproduce every result advertised from that
+handle. The closure includes each authority, contract, provider input, and
+authorization view whose value can affect the result, referenced through an
+exact immutable identity.
+
+Resolution cannot depend on ambient mutable state, an instance-local cache,
+the originating process, undeclared providers, fresh authorization, or a live
+filesystem or service read that is not itself bound into the closure. Derived
+results may be cached, but cache availability and process history cannot change
+their meaning.
+
+Persistence owns reopening through real store adapters, and Contracts owns
+handle representation and version behavior. If any required authority cannot
+be resolved exactly, return `unavailable`; if resolved content contradicts its
+identity or closure, return `invalid`; and if the representation or contract
+version is well formed but unsupported, return `unsupported`. Do not replace a
+missing immutable input with current ambient state.
+
 ## Typed Outcomes
 
 Return typed `invalid` for contradictory ownership, dependency, lifecycle, or

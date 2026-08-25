@@ -6,6 +6,7 @@ members = [
   "profiles/applications/launcher.md",
   "profiles/applications/library.md",
   "profiles/boundaries/interop.md",
+  "profiles/boundaries/generated-contract.md",
   "profiles/boundaries/ipc.md",
   "profiles/boundaries/language-bindings.md",
   "profiles/boundaries/persistence.md",

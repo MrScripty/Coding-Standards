@@ -48,10 +48,10 @@ prompt = "Which application forms are affected?"
 
 [[facts]]
 id = "routing.boundaries"
-semantic_revision = 1
+semantic_revision = 2
 type = "enum-set"
 nullable = false
-values = ["interop", "language-bindings", "ipc", "persistence"]
+values = ["interop", "language-bindings", "generated-contract", "ipc", "persistence"]
 aliases = []
 meaning = "Authority or representation boundaries crossed by the requested work."
 context_kind = "task-route"
@@ -171,6 +171,11 @@ when = { operator = "contains", fact = "routing.boundaries", value = "interop" }
 id = "route.boundary.language-bindings"
 target = "profile.boundary.language-bindings"
 when = { operator = "contains", fact = "routing.boundaries", value = "language-bindings" }
+
+[[rules]]
+id = "route.boundary.generated-contract"
+target = "profile.boundary.generated-contract"
+when = { operator = "contains", fact = "routing.boundaries", value = "generated-contract" }
 
 [[rules]]
 id = "route.boundary.ipc"

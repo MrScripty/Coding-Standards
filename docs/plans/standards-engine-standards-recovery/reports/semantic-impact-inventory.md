@@ -206,6 +206,7 @@ No applicability may be inferred from explanatory prose or path names.
 | Router prose boundary table | canonical Router | Add `generated-contract` observable condition | `pending-required` |
 | `router.generated-contract-profile-applicability` | absent policy unit | Bind the new Router heading to stable semantic identity and audited outgoing relationships | `pending-required` |
 | `routing.boundaries` fact domain and rule set | executable Router projection | Add `generated-contract` while retaining typed unresolved behavior | `pending-required` |
+| `tools/standards_analysis/tests/test_routing.py` | focused Router projection consumer | Replace incidental global cardinality assertions with targeted revision/domain and Generated Contract rule semantics; retain target-drift closure evidence | `updated` |
 | `canonical-module-corpus.toml` | canonical membership manifest | Register the new Generated Contract profile exactly once so metadata and graph composition can resolve it; treat this as module-membership authority, not a Router policy-impact edge unless the semantic audit proves such a dependency | `pending-required` |
 | Generated Contract positive fixture | absent | Select Core, Router, Planning, Implementation, Verification, Documentation, Build, Tooling, Architecture, Contracts, Dependencies, Library, Generated Contract, Persistence, and fact-selected Diagnostics/Security | `pending-required` |
 | IPC non-applicability fixture | absent | Exclude IPC when no process or independent-deployment boundary exists | `pending-required` |

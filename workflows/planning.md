@@ -270,6 +270,33 @@ Re-planning must:
 Do not preserve rejected behavior as a fallback unless a real contract requires
 it and the routed contract guidance permits it.
 
+## Systemic-Finding Re-Planning
+
+Treat a finding as systemic when it reveals duplicated semantic authority,
+incomplete projection, ambient authority, a public/internal boundary leak, an
+invalid evidence oracle, or another defect that can recur across an owning
+semantic family. Do not admit another local example-by-example repair until
+the owning invariant and its consumers are bounded.
+
+Systemic re-planning must:
+
+1. identify the invariant family and canonical owner;
+2. inventory every implementation, representation, and consumer of that
+   invariant;
+3. inspect sibling operations and equivalent representations for the same
+   defect class;
+4. replace local acceptance examples with a class-level acceptance claim and
+   independent evidence appropriate to that claim; and
+5. give every selected consumer a non-blocked disposition before admitting
+   implementation.
+
+Record whether the original finding was isolated or systemic and the evidence
+supporting that classification. An empty impact result is not proof of no
+consumers unless current audited coverage establishes completeness. Missing
+ownership, inventory, or coverage is `unavailable`; contradictory authorities
+or incomplete dispositions are `invalid`. Stop implementation rather than
+continuing a narrow repair under either condition.
+
 ## Findings
 
 Record each discovered issue in `issues.md` with:

@@ -86,6 +86,71 @@ contradictory output, silently dropped selected meaning, or incomplete proof is
 ordering, guessed enum meaning, omitted constraints, or the original source
 representation when destination proof is absent.
 
+## Generated Contract Semantic Conformance
+
+A generated contract has one canonical declaration authority and one
+identified executable semantics owner for every supported keyword, extension,
+or construct. Inventory every public operation and traverse every definition
+reachable from those operations. A generator that copies visible field names
+but omits reachable variants or selected semantics is incomplete.
+
+The destination representation preserves every meaning selected by its
+contract, including applicable types, fields, requiredness, optionality,
+defaults, constraints, discriminants, variants, ordering, normalization,
+equality, and typed failures. Unsupported source behavior is rejected
+explicitly; it is not partially generated or interpreted through a convenient
+local subset.
+
+Generate deterministically from the canonical declaration and reject stale
+outputs. Prove generated freshness separately from shape agreement, semantic
+agreement, and behavior through the actual public producer and consumer entry
+points. A fresh artifact is not evidence that the generator implemented the
+complete selected semantics.
+
+When multiple executables interpret the same declaration, prove the supported
+dialect against an independent reference or official conformance corpus.
+Comparing the local executables remains useful consistency evidence but cannot
+be the only external-conformance oracle.
+
+## Schema Dialect And Vocabulary
+
+Before implementing or generating from a schema, declare the exact dialect,
+vocabularies, extensions, and supported keyword and annotation inventory.
+Identify the authority and executable semantics owner for each supported
+element, including traversal and reference behavior. A filename, media type,
+schema-like shape, or parser success does not identify a dialect or support
+set.
+
+Reject an unknown required dialect, vocabulary, keyword, extension, or
+reachable construct as `unsupported`. Return `unavailable` when the selected
+authority or required conformance evidence cannot be obtained, and `invalid`
+when an implementation claims support while omitting or contradicting selected
+semantics. Do not infer support from nearby keywords, local examples, another
+implementation, or the subset exercised by current fixtures.
+
+## Identity And Instance Equality
+
+Keep schema-instance equality, domain-value equality, and content-identity
+canonicalization as separate contracts. Each equality relation declares its
+owner, applicable types, normalization behavior, duplicate semantics, and
+consumer purpose. A normalization selected for stable identifiers does not
+change instance equality unless the schema or domain contract explicitly says
+so.
+
+Validators, generated decoders, identity serializers, applicability
+evaluators, and persisted-handle implementations use the equality relation
+owned by their selected contract. Agreement between two local implementations
+does not establish that either matches an external schema dialect. Test
+cross-type numeric and Boolean values, Unicode representations, collection
+uniqueness, constants, and enumerations only where those cases belong to the
+declared domain.
+
+Contradictory equality authorities are `invalid`; a required relation outside
+the supported dialect or domain is `unsupported`; and a missing equality
+authority is `unavailable`. Do not reuse canonical identity bytes as a general
+validation comparator or silently normalize values at a boundary whose
+contract requires codepoint-preserving comparison.
+
 ## Runtime Decoding At Boundaries
 
 When a value enters through a trust, process, persistence, plugin, queue, or

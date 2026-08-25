@@ -74,11 +74,31 @@ contract, or accessibility authority into the presentation layer.
 | --- | --- |
 | Foreign memory, handles, callbacks, FFI, or cross-language resource access | [Interop boundary profile](profiles/boundaries/interop.md) |
 | Generated host-language APIs, binding adapters, host wrappers, or cross-language value representation | [Language Binding boundary profile](profiles/boundaries/language-bindings.md) |
+| A schema or generator produces program-facing models, validators, tool definitions, bindings, configuration, or another consumed representation | [Generated Contract boundary profile](profiles/boundaries/generated-contract.md) |
 | Structured request, response, command, query, or event crosses a process, message, worker, plugin-host, or independently deployed component boundary | [IPC boundary profile](profiles/boundaries/ipc.md) |
 | Durable read, write, publication, transaction, migration application, version ledger, or store mutation | [Persistence boundary profile](profiles/boundaries/persistence.md) plus Contracts and any applicable Resilience, Concurrency, Security, Build, Diagnostics, or Verification owner |
 
 Select a boundary from a real crossing, not because the repository happens to
 contain infrastructure code.
+
+## Generated Contract Profile Applicability
+
+Select the Generated Contract profile when a schema or generator produces a
+representation consumed as program behavior, including models, validators,
+tool definitions, bindings, or executable configuration. A generated text or
+data file does not select the profile when no program consumer interprets it as
+a contract.
+
+Select Language Binding separately only when an actual native/host or
+cross-language representation exists. Select IPC separately only when the
+representation crosses a process, message, plugin-host, or independently
+deployed boundary. Select Persistence separately only when a supported
+consumer observes the representation or state after the producing process or
+operation ends.
+
+Route the observable task facts through the executable Router projection. Do
+not replace unresolved boundary, consumer, deployment, or persistence facts
+with a smaller static module list.
 
 ## Language Profiles
 
@@ -121,7 +141,7 @@ Select a canonical topic only when its observable condition is present:
 | Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown | [Concurrency](topics/concurrency.md) |
 | Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |
 | Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
-| Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required | [Dependencies](topics/dependencies.md) |
+| Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required, including a decision to implement difficult standardized semantics instead of adopting an established implementation | [Dependencies](topics/dependencies.md) |
 | Third-party material is selected, incorporated, adapted, generated from, redistributed, or published | [Licensing](topics/licensing.md) |
 | Performance budget, measurement, optimization, benchmark, resource use, or regression claim changes | [Performance](topics/performance.md) |
 | Module, layer, service, data/state authority, dependency direction, or runtime composition changes | [Architecture](topics/architecture.md) |

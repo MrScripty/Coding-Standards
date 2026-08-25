@@ -467,3 +467,48 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: author the exact policy headings and Generated Contract
   profile/Router projection, then validate locator and routing closure before
   semantic relationship registration.
+
+## 2026-08-24 - Protected Router Consumer Re-Plan
+
+- Trigger: the first admitted Router projection batch adds the Generated
+  Contract rule, and the focused protected consumer
+  `tools/standards_analysis/tests/test_routing.py` then fails because its
+  repository-closure assertion requires exactly 38 rules while the proposed
+  authority correctly contains 39.
+- Evidence: all 18 metadata and policy-unit tests pass; 81 of 82 Standards
+  Analysis tests pass; the Router target-drift test passes; the sole failure is
+  the Router repository-projection assertion `AssertionError: 39 != 38`;
+  generated freshness, plan structure/lifecycle, the `metadata-fixtures` and
+  `s1-routing` suites, and `git diff --check` pass.
+- Lifecycle: the plan and Milestone 1 move from `Active` to `Blocked` before
+  semantic relationship registration. The in-progress policy batch remains
+  uncommitted and no protected consumer has been modified.
+- Replacement decision: add only
+  `tools/standards_analysis/tests/test_routing.py` to `W`, remove it
+  mechanically from `R`, and update that test after renewed exact-tree
+  admission. Remove the incidental global fact/rule cardinality assertions and
+  assert the stable `routing.boundaries` revision/domain plus the Generated
+  Contract rule ID, target, referenced fact, and `contains` expression.
+  Runtime implementation remains protected.
+- Supersession: the admitted M1 `W/S/E/R` decision that classified this focused
+  test only in `R` is `Superseded` by the proposed one-path transfer from `R`
+  to `W`; every other `W`, `S`, `E`, `R`, generated-inventory, and scope rule
+  remains unchanged.
+- Rejected alternatives: do not remove an existing Router rule, hide the new
+  profile behind a second routing authority, leave a known focused test
+  failing, or alter the test before admission.
+- Contract correction: `routing.boundaries` advances from semantic revision 1
+  to 2 because `generated-contract` expands its recognized value domain.
+  Agent-facing route fixtures, not the focused loader test, own positive,
+  absent, unresolved, IPC, Language Binding, and required-module behavior.
+- Expected intermediate outcome: Standards Engine navigation may reject stale
+  coverage after canonical-corpus change until Milestone 2 renews attestations;
+  this does not authorize navigation-test mutation.
+- Admission protocol: commit this exact blocked candidate; an independent
+  reviewer authors only
+  `reports/standards-recovery-m1-scope-recovery-admission.md`; an accepted
+  report permits one mechanical plan/ledger/issues transition and exact-head
+  `start` before the focused test changes.
+- Next operation: verify and commit the blocked candidate, then obtain that
+  exact-tree admission. Policy implementation remains unavailable until the
+  constrained transition authorizes the one test path.

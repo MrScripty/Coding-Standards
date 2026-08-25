@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "topic.dependencies.implementation-versus-dependency"
+module = "topic.dependencies"
+heading_path = ["Implementation Versus Dependency"]
+semantic_revision = 1

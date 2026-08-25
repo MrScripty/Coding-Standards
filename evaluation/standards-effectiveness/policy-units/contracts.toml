@@ -1,0 +1,19 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "topic.contracts.generated-semantic-conformance"
+module = "topic.contracts"
+heading_path = ["Generated Contract Semantic Conformance"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.contracts.schema-dialect-and-vocabulary"
+module = "topic.contracts"
+heading_path = ["Schema Dialect And Vocabulary"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.contracts.identity-versus-instance-equality"
+module = "topic.contracts"
+heading_path = ["Identity And Instance Equality"]
+semantic_revision = 1

@@ -5,8 +5,8 @@
 - ID: `topic.dependencies`
 - Role: `topic`
 - Level: `MUST`
-- Applies when: A change adds, selects, resolves, installs, updates, removes, audits, or changes ownership of a software, toolchain, service, build, test, runtime, or system dependency.
-- Does not apply when: No dependency requirement, declaration, resolution, provisioning, or lifecycle behavior changes.
+- Applies when: A change adds, selects, resolves, installs, updates, removes, audits, or changes ownership of a software, toolchain, service, build, test, runtime, or system dependency, or decides to implement difficult standardized semantics instead of adopting an established implementation.
+- Does not apply when: No dependency requirement, implementation-versus-adoption decision, declaration, resolution, provisioning, or lifecycle behavior changes.
 - Requires: `core`, `workflow.verification`, `workflow.release`
 - Specializes: `none`
 - Verification: Dependency requirement, ownership, selection, resolution, authorization, satisfaction, and lifecycle decision fixtures plus affected real resolver and consumer evidence.
@@ -59,6 +59,33 @@ Inspection output is candidate evidence, not selection authority. A dependency
 graph, reverse-dependency path, transitive count, or standard-library
 alternative can inform applicable contract facts but cannot independently
 accept or reject a candidate.
+
+## Implementation Versus Dependency
+
+Treat a decision to implement difficult standardized semantics locally instead
+of adopting an established implementation as a dependency-selection decision.
+This applies to schemas, protocols, parsers, serializers, cryptography,
+scheduling, and comparable domains where correctness depends on a substantial
+external or standardized semantic surface.
+
+Compare the local implementation and candidate dependencies against the same
+complete requirement, including:
+
+- required semantic surface and extension behavior;
+- conformance, compatibility, and official or independent test support;
+- supported targets, provenance, and licenses;
+- update, vulnerability, and security-response ownership;
+- failure and unsupported-domain behavior;
+- implementation and long-term maintenance cost; and
+- the continuing cost of keeping a local subset correct.
+
+Record why the selected option satisfies the requirement and how its semantic
+claims will be maintained. A preference against dependencies, a small current
+input set, sunk implementation cost, or absence of an immediate failing test
+does not justify local implementation. If required candidate or maintenance
+facts are missing, return `unavailable`; if no supported option meets the
+requirement, return `unsupported`; and if the decision contradicts known
+contract facts, return `invalid`.
 
 ## Resolution And Reproducibility
 
