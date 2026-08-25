@@ -397,3 +397,15 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: verify this blocked replan, commit an exact candidate, and
   obtain independent policy-implementation admission review. Policy, runtime,
   A1b, and A2 work remain unavailable.
+- Replan content candidate: commit
+  `b822dfaebe366fe7a8fb691ee44463e75c7adf6a`, tree
+  `01cac071c1e9ee3c75f8310cffb681b1f1cea101`.
+- Candidate verification: the protected closure resolved 36 selected suite
+  definitions, 80 distinct registered inputs, a 116-path suite union, and 115
+  exact non-registry consumers with no missing path, duplicate, or wildcard.
+  Generated freshness, plan structure/lifecycle, and `git diff --check` passed;
+  the canonical complete checkpoint passed all 218 declarative suites and all
+  53 retained Bash checkers.
+- This ledger-only binding does not authorize implementation. Independent
+  review must bind the resulting exact commit and tree before the reviewer-owned
+  policy-admission report can be authored.
