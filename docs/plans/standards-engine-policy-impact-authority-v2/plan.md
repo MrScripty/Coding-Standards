@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 0 - Coordinated Authority And Public Contract Cutover
+**Current phase:** Milestone 0 fixture-scope replan admission
 
-**Next slice:** implement the v2 policy-impact authority and atomic public v10 cutover
+**Next slice:** obtain exact-tree admission for the corrected fixture closure
 
 **Acceptance status:** `pending`
 
@@ -18,9 +18,12 @@
 `95e5a389b8328f57eadc11fe650c418049a87fd1`, tree
 `83f502a19463616105cc7c272d0bb904ba946ac1`
 
-**Implementation base:** admission-transition commit
+**Prior implementation base:** admission-transition commit
 `fd9efe8198f787c9dd99255bf95e74d84b55baa2`, tree
-`9668c0b73c72e849311bddf6a83affcec9f82685`
+`9668c0b73c72e849311bddf6a83affcec9f82685`; `Superseded` for
+fixture-scope authorization by the replan triggered at commit
+`6e3f784353f44cf8566b493442ef2b722a622286`, tree
+`79951ad72664962cfebc6b4a2cb11210f23be7ba`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -163,6 +166,7 @@ or result-algebra redesign, and it does not activate A2.
 | Public v10 contains only operation-reachable definitions and an operation-shaped policy relationship inspection. | Proposed ADR | Four-operation public Interface audit | Public repository declarations and compiler semantics |
 | Version 9 values are unsupported under v10; no compatibility runtime or state converter is introduced. | Proposed ADR | [State/version inventory](reports/persisted-state-and-version-inventory.md) | Implicit interpretation or relabeling of old state |
 | Canonical metadata owns current coverage-subject membership, coverage compilation owns current requirements, and exact predecessor certificate presence is a generated non-authoritative transition projection. | Proposed ADR | [Coverage transition provenance](reports/coverage-transition-provenance.tsv) | Authored subject/lifecycle inventory and renewal-versus-initial behavior |
+| Source-owned declarations define the relationship set; the compiler validates each supplied relationship; the independent horizon and authorized coverage audit decide missing-consumer completeness. Suite ownership does not infer policy-impact consumers. | Proposed ADR and canonical Planning | Fixture-scope systemic review | Owner-wide enforcement-suite inference in the verifier and its missing-edge fixture |
 | Broader A1b work remains separately planned after standards recovery. | Standards-recovery sequence | A1b authoring brief | Pulling independent equality/storage/result redesign into this prerequisite |
 
 ## Evidence And Oracle Plan
@@ -244,6 +248,30 @@ ambient historical authority.
 5. Any semantic plan or ADR change after review requires a new candidate and
    admission. The report itself does not authorize implementation.
 
+## Milestone 0 Fixture-Scope Recovery Admission
+
+1. Preserve the interrupted implementation outside the governance candidate.
+   Commit only this plan, its ledger, and its issue record from clean replan
+   base commit `6e3f784353f44cf8566b493442ef2b722a622286`, tree
+   `79951ad72664962cfebc6b4a2cb11210f23be7ba`.
+2. An independent reviewer authors only
+   `reports/policy-impact-fixture-replan-admission.md`, binding the exact
+   governance candidate commit/tree and reviewing the corrected fixture
+   closure, supersession, exclusions, and preserved architecture.
+3. If accepted, one mechanical transition commit whose direct parent contains
+   that report may change only this `plan.md`, this `execution-ledger.md`,
+   and this `issues.md`. It records the candidate/report identities, resolves
+   PIA2-007, and moves this plan and Milestone 0 from `Blocked` to `Planned`.
+4. `start` is valid only while that transition is current `HEAD`. It records
+   the exact transition commit/tree, establishes the renewed implementation
+   base, and moves this plan and Milestone 0 to `Active` before the preserved
+   implementation is restored.
+5. The admission authorizes only the six nested declaration-fixture paths
+   added below, deletion of the obsolete fixture pair, and removal of current
+   owner-wide suite-inference claims and tests. It does not reopen the accepted
+   ADR, production relationship inventory, public-v10 scope, coverage design,
+   A1b, or A2.
+
 ## Milestones
 
 ### Milestone 0: Coordinated Authority And Public Contract Cutover
@@ -304,13 +332,19 @@ expected intermediate blocker.
 - `evaluation/standards-effectiveness/policy-impact/workflow.planning.toml`
 - `evaluation/standards-effectiveness/policy-impact/workflow.verification.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/duplicate-edge.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/declarations/duplicate-edge.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/malformed-relation.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/declarations/malformed-relation.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/missing-applicability.toml`
-- `evaluation/standards-effectiveness/fixtures/policy-impact/missing-enforcement-suite-edge.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/declarations/missing-applicability.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/missing-enforcement-suite-edge.toml` (delete)
+- `evaluation/standards-effectiveness/fixtures/policy-impact/declarations/missing-enforcement-suite-edge.toml` (delete)
 - `evaluation/standards-effectiveness/fixtures/policy-impact/missing-file.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/path-escape.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/unknown-consumer.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/declarations/unknown-consumer.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/unknown-owner.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/declarations/unknown-owner.toml`
 - `evaluation/standards-effectiveness/suites/policy-semantic-impact.toml`
 - `docs/plans/standards-engine-policy-impact-authority-v2/plan.md`
 - `docs/plans/standards-engine-policy-impact-authority-v2/execution-ledger.md`
@@ -327,6 +361,10 @@ expected intermediate blocker.
   cutover and provide no compatibility loader.
 - [ ] Require explicit artifact kinds and typed relation/target compatibility;
   add complete positive and negative contract matrices.
+- [ ] Migrate the seven retained declarative verifier cases through the
+  production registry/declaration Interface. Delete the obsolete owner-wide
+  suite-inference fixture pair and remove current documentation or tests that
+  infer policy-impact consumers from suite ownership.
 - [ ] Reclassify the admitted migration identities and prove exact old/new set
   equality without a global relationship count.
 - [ ] Remove the separate catalog graph source, verifier path dispatch, and
@@ -342,7 +380,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Active`
+**Status:** `Blocked` pending fixture-scope recovery admission
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -449,4 +487,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Active`
+- Final status: `Blocked`

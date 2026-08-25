@@ -148,3 +148,31 @@
   authority/public-v10 replacement, and its focused evidence. Coverage
   certification remains deferred to Milestone 1; broader A1b and A2 remain
   unavailable.
+
+## 2026-08-25 - Milestone 0 Fixture-Closure Replan
+
+- Trigger boundary: commit
+  `6e3f784353f44cf8566b493442ef2b722a622286`, tree
+  `79951ad72664962cfebc6b4a2cb11210f23be7ba`.
+- The interrupted v2 cutover exposed six schema-v1 declaration fixtures loaded
+  by admitted top-level manifests but omitted from the exact M0 write set.
+  Leaving them unchanged would produce unsupported-version failures instead of
+  the registered duplicate, relation, applicability, owner, and consumer
+  diagnostics.
+- Independent options review selected a bounded closure correction. Five
+  retained declaration fixtures migrate through the production v2 Interface;
+  the obsolete missing-enforcement manifest and declaration are deleted.
+  Declarative integration evidence remains separate from compiler unit tests;
+  no compatibility loader or test-only schema is introduced.
+- The former verifier rule inferred policy-impact consumers from every suite
+  sharing a module owner. That decision is `Superseded`: source-owned
+  declarations own the relationship set, the compiler validates supplied
+  relationships and evidence, and the independent coverage horizon plus
+  authorized audit decides missing-consumer completeness.
+- The prior M0 implementation-base authority is `Superseded` only for its
+  incomplete fixture write set. The accepted ADR, production relationship
+  inventory, public-v10 scope, and coverage design are unchanged.
+- Lifecycle: this plan and M0 return to `Blocked`. The interrupted
+  implementation is preserved outside the governance candidate. No
+  implementation resumes until a reviewer-owned fixture-scope admission report,
+  constrained transition, and exact-head start establish a renewed base.
