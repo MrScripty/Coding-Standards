@@ -1,12 +1,13 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 0 ready for `start`
+**Current phase:** Milestone 0 historical reproduction and pre-policy scope
+audit
 
-**Next slice:** `start` Milestone 0 historical reproduction and pre-policy
-scope audit from the admitted transition base; policy implementation remains
-unavailable until a second post-scope-audit admission
+**Next slice:** reproduce every accepted A1 repair family, record the known
+schema-equality disagreement, and complete the pre-policy scope audit; policy
+implementation remains unavailable until a second post-scope-audit admission
 
 **Acceptance status:** `pending`
 
@@ -26,9 +27,9 @@ unavailable until a second post-scope-audit admission
 `2deb5439c5493522a5fb390096994524cf0a556b`, tree
 `c1ef4a940c0f08bcd81d70f2d2517d09cb2b7d86`
 
-**Admitted discovery/audit base:** the current mechanical transition commit;
-Milestone 0 `start` must record its exact commit and tree before changing the
-plan to `Active`, and any intervening commit invalidates admission
+**Admitted discovery/audit base:** commit
+`3082cd9432371071d63d4d6084c9eb15731e6495`, tree
+`32e06eef2dddf3e3e235bda7e28c3916fc18c761`
 
 **Admitted policy-implementation base:** `pending`; this is the mechanical
 transition commit authorized by the post-scope-audit admission report, and Milestone
@@ -389,7 +390,7 @@ subject is `pre-policy-scope-audit-complete` with all known horizon members and
 missing consumer classes mapped to planned dispositions; no final coverage,
 external corpus, policy, verifier behavior, or A1 runtime changed.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 1: Coordinated Standards Authority Cutover
 
@@ -587,9 +588,8 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 is admitted but has not started. `start` from the current
-  transition commit is the sole available operation; policy implementation
-  still requires a separate post-scope-audit admission.
+- Milestone 0 is active. Policy implementation remains unavailable until its
+  gate passes and a separate post-scope-audit admission transition is applied.
 - The JSON Schema equality disagreement remains intentionally unresolved until
   Milestone 0 records an independent reproduction.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -670,4 +670,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `pending`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

@@ -220,3 +220,21 @@ superseded by the discovery-admission transition in the active plan.
   or other milestone work is admitted by this transition.
 - Sole next operation: `start` Milestone 0 historical reproduction and
   pre-policy scope audit.
+
+## 2026-08-24 - Milestone 0 Start
+
+- Operation: `start` the admitted standards-recovery plan.
+- Exact discovery/audit base: commit
+  `3082cd9432371071d63d4d6084c9eb15731e6495`, tree
+  `32e06eef2dddf3e3e235bda7e28c3916fc18c761`.
+- Parent-chain check: the base directly follows admission-report commit
+  `2deb5439c5493522a5fb390096994524cf0a556b`; no intervening commit or
+  unauthorized transition delta exists.
+- Lifecycle transition: the plan and Milestone 0 move from `Planned` to
+  `Active`.
+- Authorized work: historical A1 reproduction records, the bounded
+  schema-equality reproduction, pre-policy scope-audit evidence, and lifecycle
+  records within Milestone 0's exact write set.
+- Excluded work: normative policy, Router authority, fixtures, verifier or
+  runtime changes, A1b, A2, and policy-implementation admission.
+- Next slice: execute Milestone 0 to its gate or stop at a re-plan trigger.
