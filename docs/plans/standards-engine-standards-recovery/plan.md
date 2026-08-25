@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 1 live-authority cardinality test recovery
 
-**Next slice:** obtain independent admission for the bounded transfer of three
+**Next slice:** obtain independent admission for the bounded transfer of four
 protected live-authority tests from `R` to `W`; policy-impact relationship
 registration remains unavailable
 
@@ -137,10 +137,18 @@ controlled authoring Plan A2.
 - Any A1b runtime redesign, contract compiler, validator replacement,
   immutable authority repository, public result-algebra migration, handle
   migration, or compatibility implementation.
-- Any edit under `tools/standards_engine/`, `tools/standards_analysis/`,
+- Any production edit under `tools/standards_engine/`, `tools/standards_analysis/`,
   `tools/standards_applicability/`, `tools/standards_policy_impact/`,
   `tools/standards_metadata/`, `tools/standards_graph/`, or
   `tools/graph_engine/`.
+- Any test edit under those package trees except these exact test-only recovery
+  paths listed in the active Milestone 1 `W`:
+  `tools/standards_analysis/tests/test_routing.py`,
+  `tools/standards_policy_impact/tests/test_compiler.py`,
+  `tools/standards_verifier/tests/test_policy_impact.py`,
+  `tools/standards_engine/tests/test_navigation.py`, and
+  `tools/standards_engine/tests/test_analysis.py`. This narrow exception does
+  not authorize runtime, fixture, contract, or package-interface changes.
 - Correcting the JSON Schema equality defect during the reproduction slice or
   as an incidental standards-recovery change.
 - Vendoring an external JSON or JSON Schema corpus, adding a third-party
@@ -429,7 +437,7 @@ different protected-consumer failure still triggers a separate re-plan.
 
 ### Milestone 1 Live-Authority Cardinality Recovery Admission
 
-The source-owned relationship batch exposed a systemic oracle defect in three
+The source-owned relationship batch exposed a systemic oracle defect in four
 protected tests: they assert fixed cardinalities of the mutable repository
 authority. Milestone 1 returns to `Blocked` and uses this bounded recovery
 protocol before relationship registration continues:
@@ -445,6 +453,7 @@ protocol before relationship registration continues:
    - `tools/standards_policy_impact/tests/test_compiler.py`
    - `tools/standards_verifier/tests/test_policy_impact.py`
    - `tools/standards_engine/tests/test_navigation.py`
+   - `tools/standards_engine/tests/test_analysis.py`
 3. If accepted, the integration owner creates one mechanical transition commit
    whose parent is the admission-report commit and whose only changed files are
    `plan.md`, `execution-ledger.md`, and `issues.md`. It records the reviewed
@@ -454,14 +463,17 @@ protocol before relationship registration continues:
    member.
 4. `start` is valid only while that transition is current `HEAD`. It records
    the transition commit/tree, returns the plan and Milestone 1 to `Active`,
-   and authorizes modification of only the three transferred tests beyond the
+   and authorizes modification of only the four transferred tests beyond the
    originally admitted `W`.
 5. The compiler test must compare the complete edge-ID and semantics-ID sets
    and retain targeted relationship semantics without asserting their size.
    The verifier test must retain named consumer and suite-owner closure checks
-   without asserting Planning or Commit consumer totals. The navigation test
-   must prove direct and dependency causes are present and deduplicated without
-   asserting a repository-topology count or threshold.
+   for both Planning and Commit without asserting either consumer total. The
+   navigation test must prove direct and dependency causes are present and
+   deduplicated without asserting a repository-topology count or threshold.
+   The analysis test must compare dependent-program identities and flattened
+   policy-impact reason edge IDs with the compiler-derived relationship set for
+   the selected policy, without asserting fan-out or obligation totals.
 6. Fixed cardinalities remain permitted only where the test constructs and
    owns the complete bounded fixture and the cardinality is itself the claimed
    behavior. Generated inventory counts remain derived evidence, not copied
@@ -610,6 +622,7 @@ coherent candidate authority.
 - `tools/standards_policy_impact/tests/test_compiler.py`
 - `tools/standards_verifier/tests/test_policy_impact.py`
 - `tools/standards_engine/tests/test_navigation.py`
+- `tools/standards_engine/tests/test_analysis.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -653,8 +666,9 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
   and rule cardinality assertions and do not change Router runtime
   implementation.
 - [ ] Replace live-repository policy-impact and navigation cardinality oracles
-  with semantic identity, exact projection-set agreement, owner closure, and
-  cause-presence/deduplication assertions; preserve bounded synthetic-fixture
+  with semantic identity, exact projection-set agreement, Planning and Commit
+  owner closure, cause-presence/deduplication, and compiler-derived analysis
+  dependency/reason set assertions; preserve bounded synthetic-fixture
   cardinality tests.
 - [ ] Add the Generated Contract profile and route it from observable schema,
   generator, and program-consumer facts; preserve conditional IPC and Language

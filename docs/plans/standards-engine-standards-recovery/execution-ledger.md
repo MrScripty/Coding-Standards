@@ -666,3 +666,38 @@ superseded by the discovery-admission transition in the active plan.
   not renew coverage or treat that expected Milestone 2 work as a test defect.
 - Next operation: verify and commit the blocked replan candidate, then obtain
   exact-tree cardinality-recovery admission.
+
+## 2026-08-25 - Cardinality-Recovery Admission Rejection And Replan
+
+- Rejected candidate: commit
+  `6d5dfbf8df1c23728d851dbaedc5735bf8fd0864`, tree
+  `612e015d078a16d81898e7ad2d0ad0df3a289036`.
+- Independent-review result: admission was rejected because the systemic audit
+  omitted `tools/standards_engine/tests/test_analysis.py`, the proposed test
+  writes contradicted the blanket tool-package exclusion, and removing the
+  Commit consumer total did not specify a non-vacuous replacement oracle. No
+  admission report or implementation change was created.
+- Supersession: the rejected three-path inventory and its unchanged blanket
+  tool-package exclusion are `Superseded` by a four-path test-only recovery and
+  an explicit narrow exception for the exact Milestone 1 test paths. Production
+  package code, contracts, fixtures, and interfaces remain out of scope.
+- Added protected consumer: `tools/standards_engine/tests/test_analysis.py`
+  moves from `R` to proposed `W`. Its replacement oracle compares the current
+  requirement's dependent-program identities and flattened policy-impact
+  reason edge IDs with the compiler-derived relationship set for the selected
+  policy; no fan-out or obligation total remains.
+- Commit coverage correction: the verifier replacement must prove at least one
+  named Commit projection and mechanically prove that every Commit-owned suite
+  is in the consumer set. It may not rely on non-emptiness alone or copy an
+  exact repository consumer list.
+- Unchanged authority: all other `W`, `S`, `E`, `R`, generated-inventory,
+  policy, relationship, runtime, A1b, A2, and retained-Bash rules remain
+  unchanged.
+- Verification baseline remains generated freshness plus 217 of 218
+  declarative suites, with only the already recorded
+  `COVERAGE.STALE_ATTESTATION`; that Milestone 2 condition did not contribute
+  to rejection.
+- Next operation: verify and commit the corrected blocked candidate, then
+  obtain a new independent exact-tree admission. No transferred test may
+  change before the accepted report, mechanical transition, and exact-head
+  `start`.
