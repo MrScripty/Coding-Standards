@@ -1,8 +1,8 @@
 # Standards Engine Policy-Impact Authority V2
 
-**Status:** Proposed
+**Status:** Accepted
 
-When accepted, this decision supersedes only the policy-impact ownership,
+This decision supersedes only the policy-impact ownership,
 relationship-kind version 1, public repository-declaration exposure, compiled
 semantic inspection, and associated version clauses in
 [Standards Engine Navigation And Analysis](standards-engine-navigation-analysis.md).

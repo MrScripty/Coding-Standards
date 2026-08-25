@@ -2,6 +2,13 @@
 
 **Status:** Accepted
 
+The policy-impact ownership, relationship-kind version 1, public repository
+declaration exposure, compiled semantic inspection, and associated version
+clauses in this decision are superseded by
+[Standards Engine Policy-Impact Authority V2](standards-engine-policy-impact-authority-v2.md).
+All other A1 decisions and the historical version 9 acceptance remain in
+force.
+
 The repository will provide a read-only Standards Engine facade over neutral
 metadata, generic graph traversal, and standards-specific analysis. A1 uses one
 versioned JSON Schema document as its machine contract, binds every operation to

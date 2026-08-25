@@ -1,16 +1,22 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Independent plan and ADR admission
+**Current phase:** Admitted; awaiting exact-head Milestone 0 start
 
-**Next slice:** author only the independent admission report for this exact governance candidate
+**Next slice:** record the exact admission-transition commit/tree and start Milestone 0
 
 **Acceptance status:** `pending`
 
 **Planning base:** commit
 `cb6abdb89afaa4fca25706cd42f621a8c762480f`, tree
 `24328086a11f9370a615ff62254de9aa1d825931`
+
+**Admission boundary:** candidate commit
+`f18bef01cf109d8dc38241a1b88297c98095655d`, tree
+`dda284f6e82ea66ad11dbddc2d7584d6dfea1ece`; reviewer report commit
+`95e5a389b8328f57eadc11fe650c418049a87fd1`, tree
+`83f502a19463616105cc7c272d0bb904ba946ac1`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -332,7 +338,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Blocked` pending admission
+**Status:** `Planned`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -400,7 +406,8 @@ accepts one exact clean candidate.
 
 ## Blockers
 
-- PIA2-005: independent admission has not accepted this exact plan and ADR.
+- Milestone 0 is admitted but has not started from the exact current transition
+  boundary. No implementation file may change before that start.
 - The standards-recovery plan remains blocked and provides no implementation
   fallback while this prerequisite is unresolved.
 
@@ -440,4 +447,4 @@ admission or acceptance protocol.
 - Acceptance status: `pending`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Blocked`
+- Final status: `Planned`

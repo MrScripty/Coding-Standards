@@ -118,3 +118,20 @@
   blocked suite.
 - This replacement remains governance-only and `Blocked` pending independent
   exact-tree admission.
+
+## 2026-08-25 - Exact-Tree Admission And Mechanical Transition
+
+- Independent admission accepts candidate commit
+  `f18bef01cf109d8dc38241a1b88297c98095655d`, tree
+  `dda284f6e82ea66ad11dbddc2d7584d6dfea1ece`, with no Standards or
+  Specification findings.
+- Reviewer-owned report commit
+  `95e5a389b8328f57eadc11fe650c418049a87fd1`, tree
+  `83f502a19463616105cc7c272d0bb904ba946ac1`, is the direct child of the
+  reviewed candidate and changes only the authorized admission report.
+- This mechanical transition accepts the scoped policy-impact authority v2 ADR,
+  records the predecessor ADR's scoped supersession, resolves PIA2-005, and
+  moves this plan and Milestone 0 from `Blocked` to `Planned`.
+- No implementation is authorized by this transition. `start` must run while
+  this transition is current `HEAD`, record its exact commit/tree, and move the
+  plan and Milestone 0 to `Active` before any implementation path changes.
