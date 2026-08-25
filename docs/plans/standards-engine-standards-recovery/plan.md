@@ -1,11 +1,12 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 0 generated-evidence recovery ready for `start`
+**Current phase:** Milestone 0 generated-evidence recovery
 
-**Next slice:** `start` Milestone 0 recovery from the admitted transition base;
-policy admission and implementation remain unavailable
+**Next slice:** regenerate the admitted structure inventory, prove its exact
+field-level delta, and run the Milestone 0 gate; policy admission and
+implementation remain unavailable
 
 **Acceptance status:** `partial`
 
@@ -37,9 +38,9 @@ policy admission and implementation remain unavailable
 `048f6a75512ba89efbf042f07ef8b8dda3baa337`, tree
 `5747e25c8d176e90444aa7b69200cc576f58c2b4`
 
-**Admitted M0 recovery base:** the current mechanical transition commit; M0
-recovery `start` must record its exact commit and tree before changing the plan
-to `Active`, and any intervening commit invalidates admission
+**Admitted M0 recovery base:** commit
+`4788fd816d20ccbbea7004ad04bd3a099c78e68a`, tree
+`44b2b7fef3d8a489ba91ca40276b211979da3c00`
 
 **Admitted policy-implementation base:** `pending`; this is the mechanical
 transition commit authorized by the post-scope-audit admission report, and Milestone
@@ -429,7 +430,7 @@ pre-policy scope audit without changing policy, verifier behavior, or A1 runtime
   before policy admission.
 - [x] Record A1b planning and all A2 work as unavailable while recovery remains
   incomplete.
-- [ ] Obtain independent M0 recovery admission for the exact blocked replan
+- [x] Obtain independent M0 recovery admission for the exact blocked replan
   candidate and apply only its authorized mechanical lifecycle transition.
 - [ ] After all documentation inputs are final, regenerate the admitted
   structure inventory through its existing generator.
@@ -451,7 +452,7 @@ inventory is fresh and satisfies the admitted field-level delta invariant; no
 final coverage, external corpus, policy, verifier behavior, or A1 runtime
 changed.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 1: Coordinated Standards Authority Cutover
 
@@ -651,9 +652,10 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 recovery is admitted but has not started. `start` from the current
-  transition commit is the sole available operation; policy admission and
-  implementation remain unavailable until M0 subsequently passes its gate.
+- Milestone 0 recovery started from the exact admitted transition base. Only
+  the generated inventory refresh, structural proof, and M0 verification gate
+  are available; policy admission and implementation remain unavailable until
+  M0 passes that gate.
 - The JSON Schema equality disagreement is independently reproduced and remains
   intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
@@ -734,4 +736,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

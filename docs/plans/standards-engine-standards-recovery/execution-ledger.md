@@ -328,3 +328,20 @@ superseded by the discovery-admission transition in the active plan.
   Router mutation, runtime work, A1b, and A2 remain unavailable until their
   respective transitions and gates.
 - Sole next operation: `start` Milestone 0 generated-evidence recovery.
+
+## 2026-08-24 - Milestone 0 Recovery Start
+
+- Admitted transition base: commit
+  `4788fd816d20ccbbea7004ad04bd3a099c78e68a`, tree
+  `44b2b7fef3d8a489ba91ca40276b211979da3c00`.
+- Start precondition: the transition base was current `HEAD`, the worktree was
+  clean, and the reviewer-report parent chain resolved exactly.
+- Lifecycle transition: the plan and Milestone 0 move from `Planned` to
+  `Active`.
+- Authorized work: mechanically regenerate the one admitted structure
+  inventory, prove the exact field-level delta, and run the focused and complete
+  Milestone 0 gate after documentation inputs are final.
+- Excluded work: policy admission or mutation, Router authority, fixtures,
+  checker or verifier behavior, runtime code, A1b, and A2.
+- Next operation: regenerate the admitted artifact through the existing
+  generator and verify the structural invariant before any lifecycle closeout.
