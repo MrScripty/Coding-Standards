@@ -54,10 +54,13 @@ class of defect to recur.
 
 The internal serialized contract is
 `tools/standards_policy_impact/contracts/policy-impact-authoring-v2.toml`.
-Repository TOML files remain authored authority, but no caller parses them
-after compilation. Canonical module and policy-unit identity remains owned by
-`standards_metadata`; generic graph storage and traversal remains owned by
-`graph_engine`.
+Repository TOML files remain authored authority. Every registered relationship
+declaration source uses source schema version 2 after the atomic cutover; all
+eight current sources migrate together, including sources whose relationship
+content does not otherwise change. Source schema version 1 is rejected and no
+compatibility loader remains. No caller parses declarations after compilation.
+Canonical module and policy-unit identity remains owned by `standards_metadata`;
+generic graph storage and traversal remains owned by `graph_engine`.
 
 Every supplemental catalog node has one explicit `artifact_kind`. Version 2
 admits `documentation`, `enforcement-suite`, `fixture`,
@@ -111,10 +114,11 @@ Interface/schema version advances from 9 to 10, result projection from 1 to 2,
 snapshot/navigation/analysis handle schemas and identity domains from 2 to 3,
 and analysis contract/schema from 5/2 to 6/3. Coverage view, requirement,
 attestation, and certificate contracts and identity domains advance from 1 to
-2. The policy-impact authoring, catalog, relationship-kind, and provider
-contracts advance from 1 to 2; the independent coverage-horizon provider
-advances from 2 to 3. Graph-engine, applicability-language, metadata, evidence,
-and authorization contracts do not change.
+2. The policy-impact internal authoring contract, declaration source schema,
+catalog, relationship-kind, and provider contracts advance from 1 to 2; the
+independent coverage-horizon provider advances from 2 to 3. Graph-engine,
+applicability-language, metadata, evidence, and authorization contracts do not
+change.
 
 The policy-impact edge identity algorithm remains version 1. Reclassified
 relationships receive new IDs because relation is part of the natural key;
@@ -138,8 +142,11 @@ compatibility loader or offline converter is introduced.
 
 ## Consequences
 
-All coverage requirements and attestations renew once after the provider,
-catalog, declarations, public contract, suite registry, and horizon are frozen.
+All active policy units receive coverage once after the provider, catalog,
+declarations, public contract, suite registry, and horizon are frozen. Existing
+coverage is renewed; a previously uncovered active unit receives initial
+coverage. Exact active-unit, requirement, and certificate subject sets must be
+equal.
 Future internal relationship kinds do not require a public contract migration
 unless an operation-shaped public result itself changes. A2 remains inactive,
 and historical A1 version 9 acceptance remains unchanged as historical

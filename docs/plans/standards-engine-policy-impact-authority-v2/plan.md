@@ -58,7 +58,7 @@ or result-algebra redesign, and it does not activate A2.
 | PIA2-A5 | Verifier and coverage consume the compiled authority; no catalog TOML parsing or relation/path compatibility switch remains outside `standards_policy_impact`. | `integration` | `not-applicable` | `automated` | `pending` | Pending dependency and behavior evidence |
 | PIA2-A6 | A1 v10 public closure is reachable from the four operations, excludes `PolicyImpactDeclaration` and `CompiledPolicyImpactSemantics`, and returns typed operation-shaped relationship semantics. | `contract` | `not-applicable` | `automated` | `pending` | Pending generated/public contract evidence |
 | PIA2-A7 | Old v9 handles and states are explicitly unsupported; v10 query, prepare, resolve, inspect, persistence, and genuine cold-process reconstruction use the accepted version identities with no compatibility fallback. | `system` | `not-applicable` | `automated` | `pending` | Pending migration and cold-process evidence |
-| PIA2-A8 | Final coverage has exact required-subject/certificate equality after one post-freeze attestation renewal, with no stale, duplicate, missing, or blocked coverage subject. | `integration` | `not-applicable` | `automated` | `pending` | Pending coverage-freeze evidence |
+| PIA2-A8 | Final coverage has exact active-policy-unit/requirement/certificate equality after one post-freeze coverage pass that renews predecessor coverage and establishes coverage for every previously uncovered active unit, with no stale, duplicate, missing, or blocked subject. | `integration` | `not-applicable` | `automated` | `pending` | Pending coverage-freeze evidence |
 | PIA2-A9 | One clean candidate passes focused package tests, generated freshness, registered declarative suites, the complete Python checkpoint, retained migration checks, and diff validation. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
 | PIA2-A10 | An independent reviewer accepts the exact candidate against repository Standards and this specification with no unresolved consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent acceptance report |
 
@@ -77,8 +77,9 @@ or result-algebra redesign, and it does not activate A2.
 - Public A1 v10 operation closure, relationship inspection, version migration,
   generated outputs, examples, rendering, and public adapters.
 - Explicit unsupported outcomes for v9 handles and persisted state.
-- Post-freeze coverage horizon versioning, attestation renewal, certificates,
-  and exact-tree prerequisite acceptance.
+- Post-freeze coverage horizon versioning, attestation renewal, initial
+  attestation for uncovered active units, certificates, and exact-tree
+  prerequisite acceptance.
 - Required updates to the blocked standards-recovery plan and evidence.
 
 ### Out Of Scope
@@ -107,6 +108,10 @@ or result-algebra redesign, and it does not activate A2.
 - Runtime, catalog, declaration, public contract, and generated projections
   switch atomically. The predecessor and replacement loaders may coexist only
   inside equivalence or rejection tests, never as accepted runtime authority.
+- All eight registered relationship declaration sources migrate from source
+  schema version 1 to version 2 in that replacement. Five change only their
+  schema version; three also apply the admitted relation reclassification. No
+  version 1 declaration is accepted after cutover.
 - Coverage attestations are authored only after contract, catalog,
   declarations, suites, provider, and horizon inputs are frozen.
 - The migration inventory is finite historical evidence. Runtime and tests
@@ -137,7 +142,7 @@ or result-algebra redesign, and it does not activate A2.
 
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
-| `standards_policy_impact` compiles all policy-impact nodes, groups, edges, semantics, compatibility, provenance, and coverage fingerprints from one internal v2 contract and registered authoring inputs. | Proposed ADR | Systemic audit and independent options review | Split compiler/catalog/verifier/coverage authority |
+| `standards_policy_impact` compiles all policy-impact nodes, groups, edges, semantics, compatibility, provenance, and coverage fingerprints from one internal v2 contract and eight source-schema-v2 declaration inputs. | Proposed ADR | Systemic audit and independent options review | Split compiler/catalog/verifier/coverage authority and source-schema-v1 declarations |
 | Supplemental nodes author one explicit artifact kind; canonical modules retain metadata-owned roles; reading/evidence authority remains separate. | Proposed ADR | [Artifact-kind inventory](reports/artifact-kind-inventory.tsv) | Path-derived or authority-derived target classification |
 | `implementation-projection` identifies implementation consumers; `reference-projection` remains limited to canonical reference modules. | Proposed ADR | [Relationship migration](reports/relationship-migration.tsv) | Broad reference semantics |
 | The compiler emits one graph contribution containing catalog nodes/groups and relationship edges. | Proposed ADR | Current duplicate `ManifestSource` composition | Separate catalog graph provider |
@@ -169,7 +174,7 @@ or result-algebra redesign, and it does not activate A2.
 - Consumer dispositions: compiler `replace`; graph composition `replace`;
   verifier `consume`; coverage `consume`; Standards Engine `adapt`; declarations
   `migrate`; catalog `type`; generated projections `regenerate`; attestations
-  `renew`; historical A1 evidence `retain`.
+  `renew-or-establish`; historical A1 evidence `retain`.
 - Scope replacement: the Router-only repair and its one-file admission are
   superseded. No local repair resumes until this class-level plan is accepted.
 
@@ -218,7 +223,7 @@ or result-algebra redesign, and it does not activate A2.
 ### Milestone 0: Coordinated Authority And Public Contract Cutover
 
 **Goal:** Replace every split policy-impact validity/projection path and switch
-the public facade atomically to v10, leaving coverage renewal as the only
+the public facade atomically to v10, leaving coverage completion as the only
 expected intermediate blocker.
 
 **Allowed write set:**
@@ -265,8 +270,13 @@ expected intermediate blocker.
 - `evaluation/standards-effectiveness/edge-source-registry.toml`
 - `evaluation/standards-effectiveness/policy-coverage/horizons.toml`
 - `evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml`
+- `evaluation/standards-effectiveness/policy-impact/router.toml`
 - `evaluation/standards-effectiveness/policy-impact/topic.architecture.toml`
 - `evaluation/standards-effectiveness/policy-impact/topic.contracts.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml`
+- `evaluation/standards-effectiveness/policy-impact/workflow.commit.toml`
+- `evaluation/standards-effectiveness/policy-impact/workflow.planning.toml`
+- `evaluation/standards-effectiveness/policy-impact/workflow.verification.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/duplicate-edge.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/malformed-relation.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/missing-applicability.toml`
@@ -285,6 +295,10 @@ expected intermediate blocker.
 
 - [ ] Add the v2 internal contract and compile the typed catalog, groups,
   relationships, semantics, provenance, and coverage projection once.
+- [ ] Migrate all eight registered relationship declaration sources to source
+  schema version 2 in the same cutover. Apply relation changes only to the three
+  files named by the migration inventory; reject every version 1 source after
+  cutover and provide no compatibility loader.
 - [ ] Require explicit artifact kinds and typed relation/target compatibility;
   add complete positive and negative contract matrices.
 - [ ] Reclassify the admitted migration identities and prove exact old/new set
@@ -306,8 +320,9 @@ checkpoint blocker is post-cutover stale or missing coverage.
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
-**Goal:** Freeze the v2 authority, renew all affected coverage once, prove the
-full repository boundary, and independently accept the prerequisite.
+**Goal:** Freeze the v2 authority, renew predecessor coverage and establish
+coverage for previously uncovered active policy units once, prove the full
+repository boundary, and independently accept the prerequisite.
 
 **Allowed write set:**
 
@@ -326,7 +341,7 @@ full repository boundary, and independently accept the prerequisite.
 - `docs/plans/standards-engine-policy-impact-authority-v2/plan.md`
 - `docs/plans/standards-engine-policy-impact-authority-v2/execution-ledger.md`
 - `docs/plans/standards-engine-policy-impact-authority-v2/issues.md`
-- `docs/plans/standards-engine-policy-impact-authority-v2/reports/coverage-renewal.md` (new)
+- `docs/plans/standards-engine-policy-impact-authority-v2/reports/coverage-establishment-and-renewal.md` (new)
 - `docs/plans/standards-engine-policy-impact-authority-v2/reports/prerequisite-candidate.md` (new)
 - `docs/plans/standards-engine-policy-impact-authority-v2/reports/prerequisite-acceptance.md` (new, independent reviewer owned)
 - `docs/plans/standards-engine-standards-recovery/plan.md`
@@ -340,8 +355,11 @@ full repository boundary, and independently accept the prerequisite.
 - [ ] Freeze contract, catalog, declarations, suites, provider, and horizon
   before authoring any attestation.
 - [ ] Derive every v2 requirement mechanically and obtain authorized evidence
-  for every required subject, including retained Commit and Planning subjects.
-- [ ] Generate certificates and prove exact required/certified subject equality.
+  for every active policy unit. Renew subjects with predecessor certificates and
+  establish initial coverage for `workflow.verification.acceptance-claims`;
+  never describe the previously uncovered unit as renewed.
+- [ ] Generate certificates and prove exact active-policy-unit, required-subject,
+  and certified-subject equality.
 - [ ] Finish the already admitted mutable-total test replacements using semantic
   identity and cause-set assertions after coverage is valid.
 - [ ] Run all focused suites, generated checks, registered declarative suites,
@@ -351,9 +369,9 @@ full repository boundary, and independently accept the prerequisite.
 - [ ] On acceptance, mark this plan accepted and return standards recovery to a
   separately admitted final-acceptance slice. Do not activate A1b or A2.
 
-**Acceptance gate:** PIA2-A1 through PIA2-A10 are satisfied, every affected
-coverage subject has one valid certificate, no consumer is blocked, and an
-independent report accepts one exact clean candidate.
+**Acceptance gate:** PIA2-A1 through PIA2-A10 are satisfied, every active policy
+unit has one matching valid requirement and certificate, no consumer is
+blocked, and an independent report accepts one exact clean candidate.
 
 **Status:** `Blocked` by Milestone 0
 

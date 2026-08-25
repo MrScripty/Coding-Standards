@@ -36,6 +36,7 @@ workflow.planning	workflow.planning.replanning	renew-coverage	global-provider-ki
 workflow.planning	workflow.planning.repository-isolation	renew-coverage	global-provider-kind-and-horizon-contract-change
 workflow.planning	workflow.planning.systemic-finding-replan	renew-coverage	global-provider-kind-and-horizon-contract-change
 workflow.planning	workflow.planning.written-plan-applicability	renew-coverage	global-provider-kind-and-horizon-contract-change
+workflow.verification	workflow.verification.acceptance-claims	establish-initial-coverage	previously-uncovered-active-policy-unit
 workflow.verification	workflow.verification.differential-evidence	renew-coverage	global-provider-kind-and-horizon-contract-change
 workflow.verification	workflow.verification.evidence-oracle-boundary	renew-coverage	global-provider-kind-and-horizon-contract-change
 workflow.verification	workflow.verification.negative-fixture-isolation	renew-coverage	global-provider-kind-and-horizon-contract-change

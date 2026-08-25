@@ -1014,9 +1014,11 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 is accepted and Milestone 1 started from the exact admitted
-  transition base. Only the admitted M1 write set and protected-consumer
-  contract are active; runtime, A1b, and A2 work remain unavailable.
+- Milestone 0 remains accepted. The former Milestone 1 Router-only write set,
+  protected-consumer closure, and source authorization are `Superseded` and
+  provide no active implementation fallback. Milestone 1 is blocked by the
+  separately planned policy-impact authority v2 prerequisite; runtime, A1b,
+  and A2 work remain unavailable.
 - The JSON Schema equality disagreement is independently reproduced and remains
   intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
