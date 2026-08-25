@@ -1,0 +1,8 @@
+case	capture	closure	store	process	post_capture_mutation	authorization_view	provider_view	expected
+cold_process_reconstruction	exact	complete	persistent	fresh	isolated	immutable	immutable	allow
+in_process_cache_only	exact	complete	memory-only	same	isolated	immutable	immutable	typed-invalid
+live_read_after_capture	exact	complete	persistent	fresh	visible	immutable	immutable	typed-invalid
+missing_transitive_authority	exact	incomplete	persistent	fresh	isolated	immutable	immutable	typed-unavailable
+ambient_authorization	exact	complete	persistent	fresh	isolated	ambient	immutable	typed-invalid
+ambient_provider_input	exact	complete	persistent	fresh	isolated	immutable	ambient	typed-invalid
+unavailable_store	exact	complete	unavailable	fresh	isolated	immutable	immutable	typed-unavailable

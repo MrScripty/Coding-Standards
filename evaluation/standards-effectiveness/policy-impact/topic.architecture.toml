@@ -1,0 +1,58 @@
+schema_version = 1
+owner = "topic.architecture"
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "profile.boundary.persistence"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Persistence owns durable reopening of immutable authority and analysis state."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_engine/standards_engine/engine.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The engine resolves reads and inspection from the exact captured authority view."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/snapshots.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Snapshot identities bind every interpretation-affecting immutable input."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/resolution.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Analysis transitions consume only declared immutable authority and accepted decisions."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/results.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Result projection is reproducible from one immutable analysis state and authority resolver."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Fixture covers immutable reads, cold reconstruction, authority closure, and ambient-state rejection."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "immutable-authority-closure"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Suite enforces the immutable authority closure policy."

@@ -1,0 +1,58 @@
+schema_version = 1
+owner = "router"
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "evaluation/standards-effectiveness/router-projection.toml"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "The executable Router projection owns the generated-contract boundary fact and profile-selection rule."
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Router selects the Generated Contract profile for work crossing an authored-schema to generated-interface boundary."
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Planning obtains applicable standards through Router facts rather than a copied static module list."
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Implementation re-routes when generated-contract applicability changes."
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Decision fixture covers Generated Contract applicability and non-applicable neighboring profiles."
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Route fixture proves complete required-module selection from the generated-contract boundary fact."
+
+[[relationships]]
+source = "router.generated-contract-profile-applicability"
+consumer = "standards-recovery-routing"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Suite enforces the Router projection and agent-facing route behavior."

@@ -1,0 +1,8 @@
+case	semantics	candidate	conformance	maintenance	security	local_subset	decision	expected
+mature_supported_dependency	difficult	mature	supported	owned	owned	larger	adopt	adopt
+small_owned_local_subset	simple	none	not-applicable	owned	owned	small	local	implement
+dependency_lacks_required_semantics	difficult	mature	unsupported	owned	owned	larger	adopt	typed-unsupported
+unowned_dependency_maintenance	difficult	mature	supported	missing	owned	larger	adopt	typed-unavailable
+unowned_security_response	difficult	mature	supported	owned	missing	larger	adopt	typed-unavailable
+speculative_local_reimplementation	difficult	mature	supported	owned	owned	larger	local	typed-invalid
+missing_candidate_evidence	difficult	unknown	unknown	missing	missing	unknown	undecided	typed-unavailable

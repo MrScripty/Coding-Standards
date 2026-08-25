@@ -1,0 +1,94 @@
+schema_version = 1
+id = "immutable-authority-closure"
+owner = "topic.architecture"
+description = "Immutable result handles require complete transitive authority, durable storage, fresh-process reconstruction, and isolation from later source mutation."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+capture = ["exact"]
+closure = ["complete", "incomplete"]
+store = ["memory-only", "persistent", "unavailable"]
+process = ["fresh", "same"]
+post_capture_mutation = ["isolated", "visible"]
+authorization_view = ["ambient", "immutable"]
+provider_view = ["ambient", "immutable"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "closure", op = "eq", value = "incomplete" },
+  { field = "store", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "store", op = "eq", value = "memory-only" },
+  { field = "process", op = "eq", value = "same" },
+  { field = "post_capture_mutation", op = "eq", value = "visible" },
+  { field = "authorization_view", op = "eq", value = "ambient" },
+  { field = "provider_view", op = "eq", value = "ambient" },
+]
+
+[[checks]]
+id = "architecture-policy"
+type = "text"
+path = "topics/architecture.md"
+required = ["## Immutable Authority Closure", "originating process", "live", "missing immutable input with current ambient state"]
+prohibited = []
+
+[[checks]]
+id = "persistence-owner"
+type = "text"
+path = "profiles/boundaries/persistence.md"
+required = ["ID: `profile.boundary.persistence`"]
+prohibited = []
+
+[[checks]]
+id = "registered-consumers"
+type = "path_state"
+present = [
+  "tools/standards_engine/standards_engine/engine.py",
+  "tools/standards_analysis/standards_analysis/__init__.py",
+  "tools/standards_analysis/standards_analysis/changes.py",
+  "tools/standards_analysis/standards_analysis/coverage.py",
+  "tools/standards_analysis/standards_analysis/facts.py",
+  "tools/standards_analysis/standards_analysis/impact.py",
+  "tools/standards_analysis/standards_analysis/obligations.py",
+  "tools/standards_analysis/standards_analysis/reading.py",
+  "tools/standards_analysis/standards_analysis/resolution.py",
+  "tools/standards_analysis/standards_analysis/results.py",
+  "tools/standards_analysis/standards_analysis/serialization.py",
+  "tools/standards_analysis/standards_analysis/snapshots.py",
+  "tools/standards_metadata/standards_metadata/__init__.py",
+  "tools/standards_metadata/standards_metadata/corpus.py",
+  "tools/standards_metadata/standards_metadata/errors.py",
+  "tools/standards_metadata/standards_metadata/loader.py",
+  "tools/standards_metadata/standards_metadata/model.py",
+  "tools/standards_metadata/standards_metadata/paths.py",
+  "tools/standards_metadata/standards_metadata/policy_units.py",
+  "tools/standards_policy_impact/standards_policy_impact/__init__.py",
+  "tools/standards_policy_impact/standards_policy_impact/compiler.py",
+  "tools/standards_policy_impact/standards_policy_impact/errors.py",
+  "tools/standards_policy_impact/standards_policy_impact/model.py",
+  "tools/standards_engine/tests/test_analysis.py",
+  "tools/standards_engine/tests/test_navigation.py",
+  "tools/standards_analysis/tests/test_changes.py",
+  "tools/standards_analysis/tests/test_coverage.py",
+  "tools/standards_analysis/tests/test_facts.py",
+  "tools/standards_analysis/tests/test_impact.py",
+  "tools/standards_analysis/tests/test_obligations.py",
+  "tools/standards_analysis/tests/test_reading.py",
+  "tools/standards_analysis/tests/test_results.py",
+  "tools/standards_analysis/tests/test_snapshots.py",
+  "tools/standards_metadata/tests/test_metadata.py",
+  "tools/standards_metadata/tests/test_policy_units.py",
+  "tools/standards_policy_impact/tests/test_compiler.py",
+]

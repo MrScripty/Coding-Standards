@@ -1,11 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 1 policy and projection implementation
+**Current phase:** Milestone 1 checker-consumer and generated-evidence replan
 
-**Next slice:** audit the admitted Milestone 1 authority already present and
-resume at the first incomplete policy, relationship, projection, or evidence task
+**Next slice:** obtain exact-tree admission for the bounded checker-consumer
+registration and generated-evidence closure
 
 **Acceptance status:** `partial`
 
@@ -541,6 +541,73 @@ executable evidence. The corrected sequence is:
 Any inability to run the compiler suite during M1 or all three coverage-bound
 suites after M2 renewal is a new re-plan trigger.
 
+### Milestone 1 Checker-Consumer And Generated-Evidence Recovery Admission
+
+The new Verification and Planning suites must register the two retained plan
+checkers as exact provider-v2 inputs. The initial implementation used
+`path_state.present`, but provider v2 indexes only singular suite `path`
+fields. The checker paths therefore appeared in suite configuration without
+becoming coverage-horizon members. Mechanical inventory generation also
+proved that exact suite references necessarily produce temporary migration
+graph evidence, contradicting the former M1 requirement that those generated
+graph artifacts remain byte-identical.
+
+The former `path_state.present` registration and byte-identical generated-graph
+decision are `Superseded`. The replacement contract is:
+
+1. Each of the two suites registers each retained checker through an existing
+   singular-path `text` check over stable retained-script preconditions. The
+   checks do not execute the scripts, duplicate their rules, or extend Bash
+   behavior.
+2. Provider v2 must resolve both checker repository paths as
+   `registered-suite-input` members. Review prose or path-state presence alone
+   is not registration evidence.
+3. The three generated dependency-graph TSVs join the M1 write set. After all
+   suite inputs are final, the existing generator refreshes those files and
+   the checker structure inventory together.
+4. The permitted dependency-edge delta is exactly this set, all with kind
+   `contract_reference`:
+   - `evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml`
+     to its `retained-plan-structure-consumer` path;
+   - `evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml`
+     to its `retained-plan-fixture-consumer` path;
+   - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml`
+     to its `retained-plan-structure-consumer` path;
+   - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml`
+     to its `retained-plan-fixture-consumer` path.
+5. Only mechanically corresponding contract-inbound counts and file lists may
+   change in node, component, and structure-inventory rows for those two
+   retained scripts. Component membership, identity, size, cyclicity, wave,
+   dependency fields, executable-reference fields, checker sources,
+   generator sources, and unrelated rows remain byte-identical.
+6. The generated graph records temporary migration lifecycle references. It
+   does not make the suites callers of the scripts and does not establish
+   execution, semantic dependency, or permanent policy authority.
+
+Renewed admission uses the established exact candidate, independent report,
+mechanical transition, and exact-head `start` sequence:
+
+1. Commit the blocked candidate with the corrected suite registration and
+   replan records, but without the three newly admitted generated graph deltas.
+2. An independent reviewer authors only
+   `reports/standards-recovery-m1-generated-evidence-admission.md`, binding the
+   exact candidate commit/tree and authorizing only this replacement contract.
+3. An accepted report permits a mechanical transition changing only
+   `plan.md`, `execution-ledger.md`, and SESR-028 lifecycle fields. The plan and
+   Milestone 1 move to `Planned`; no implementation is admitted by the report
+   or transition alone.
+4. `start` is valid only while that transition is current `HEAD`. It records
+   the transition commit/tree, moves the plan and Milestone 1 to `Active`, and
+   authorizes mechanical regeneration of the four generated artifacts.
+5. Verification proves provider-v2 membership, exact generated field deltas,
+   byte-identical checker and generator sources, both affected suites,
+   generated freshness, focused plan checks, complete checkpoints, and
+   `git diff --check` before M1 resumes.
+
+Any additional generated row, edge, field, source, or provider change is a new
+re-plan trigger. No verifier implementation, coverage-provider implementation,
+checker source, A1b, or A2 change is admitted.
+
 ## Milestones
 
 ### Milestone 0: Historical Reproduction And Pre-Policy Scope Audit
@@ -675,6 +742,9 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml` (new)
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
 - `tools/standards_analysis/tests/test_routing.py`
 - `tools/standards_policy_impact/tests/test_compiler.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
@@ -746,11 +816,11 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
   generation freshness separate from semantic correctness; add or extend no
   Bash checker.
 - [ ] After M1 suite definitions, registered inputs, and documentation are
-  final, regenerate the existing checker structure inventory mechanically.
-  Permit changes only to inbound-reference count and file-list fields of the
-  checker rows explicitly selected by the pre-policy audit. Checker sources,
-  source/mechanism fields, executable and dependency fields, generated graph
-  artifacts, and every unrelated inventory row must remain unchanged.
+  final, regenerate the checker structure and dependency-graph artifacts
+  mechanically. Permit only the exact contract-reference and corresponding
+  field deltas in the checker-consumer generated-evidence recovery contract.
+  Checker sources, source/mechanism fields, executable and dependency fields,
+  component topology, and every unrelated row must remain unchanged.
 - [ ] Run prior/current graph comparison after each metadata batch and update
   the disposition report for every selected consumer.
 - [ ] Reject any missing consumer or unresolved final coverage subject rather
@@ -764,7 +834,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Active`; compiler-only cardinality recovery is authorized
+**Status:** `Blocked` pending checker-consumer generated-evidence admission
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -862,9 +932,8 @@ different claim:
   protected consumer requires modification, an `E` wildcard appears, or a
   selected suite no longer resolves to its admitted definition and inputs.
 - M1 suite or documentation changes stale generated checker evidence outside
-  the admitted inbound-reference fields, alter an unrelated inventory row,
-  change a checker source/dependency field, or modify a generated dependency
-  graph artifact.
+  the admitted checker-consumer exact edge/field set, alter an unrelated row,
+  change component topology, or change a checker or generator source.
 - An empty impact result lacks current independent coverage, or the horizon is
   unable to discover consumers omitted from both the graph and node catalog.
 - A new or changed permanent relationship, node registration, suite input,
@@ -926,4 +995,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`

@@ -19,6 +19,17 @@ Create or revise an implementation plan. Do not implement source changes.
     branch by itself. If cleanup is in scope, include Commit's head-reachability
     and commit-disposition evidence rather than assuming a stale registration
     is safe to prune.
+11. For each acceptance claim, identify the deciding oracle and distinguish
+    freshness, local agreement, semantic correctness, public-path behavior,
+    and external conformance. A generated artifact or second local
+    implementation is not an independent semantic oracle.
+12. When standardized or difficult semantics are material, evaluate an
+    established dependency against the maintained local subset, conformance,
+    security, maintenance, and unsupported-domain costs before choosing an
+    implementation owner.
+13. When one defect reveals a repeated invariant failure, stop the local
+    repair. Inventory the invariant family, sibling producers and consumers,
+    authority projections, and required dispositions before revising scope.
 
 Stop for clarification when authoritative facts cannot support a valid plan.
 Do not add fallback or compatibility behavior without an actual routed contract.

@@ -3,6 +3,12 @@ source_id = "standards.policy-impact"
 node_catalog = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
 fact_catalog = "evaluation/standards-effectiveness/policy-impact-facts.toml"
 declaration_sources = [
+  "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
+  "evaluation/standards-effectiveness/policy-impact/router.toml",
+  "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
+  "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml",
+  "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
+  "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
 ]

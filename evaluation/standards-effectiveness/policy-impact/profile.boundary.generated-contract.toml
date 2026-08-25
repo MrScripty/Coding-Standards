@@ -1,0 +1,138 @@
+schema_version = 1
+owner = "profile.boundary.generated-contract"
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Router prose defines Generated Contract applicability and conditional neighboring boundary profiles."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "evaluation/standards-effectiveness/router-projection.toml"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "The executable projection selects this profile from the generated-contract boundary fact."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Decision fixture distinguishes Generated Contract applicability from Language Binding and IPC applicability."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Route fixture proves the profile and its required module closure."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Planning records the Router facts that select this profile."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Implementation rechecks this profile's applicability when boundary facts change."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.applicability"
+consumer = "standards-recovery-routing"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:standards-recovery-routing"
+rationale = "Suite enforces applicability, non-applicability, unknown facts, and route closure."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "topic.contracts"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Contracts owns schema authority and generated semantic preservation."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:evidence-oracle-boundaries"
+rationale = "Verification owns independent oracles and exact negative evidence."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "workflow.build"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Build owns deterministic regeneration and freshness checks."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "topic.dependencies"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Dependencies owns the decision to implement unsupported semantics or adopt a mature validator."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The authored schema is the serialized contract authority."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "tools/standards_engine/contracts/generate_contract.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The generator compiles the supported schema profile into public models."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Generated models preserve the supported schema semantics."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "tools/standards_engine/standards_engine/tools.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The public tool boundary consumes only the generated result algebra."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Fixture covers semantic closure and unsupported behavior."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "generated-contract-semantic-conformance"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Suite enforces the profile's semantic closure."

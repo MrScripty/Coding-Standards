@@ -1,0 +1,210 @@
+schema_version = 1
+owner = "topic.contracts"
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Router selects the Generated Contract profile when authored schemas or generated interfaces are in scope."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The Generated Contract profile specializes the general contract-semantic requirements for generated interfaces."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "workflow.build"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Build workflows preserve generated-output freshness while semantic correctness remains separately evidenced."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "workflow.tooling"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Tooling workflows select generators and independent validators appropriate to the declared contract."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Planning distinguishes generated freshness, semantic correctness, and independent conformance evidence."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Implementation preserves the admitted generated-contract evidence domains."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/contracts/generate_contract.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The generator must project every supported schema semantic rather than only declaration freshness."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Generated public models are a semantic projection of the canonical schema."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/standards_engine/__init__.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The public package facade exposes the generated request and result algebra."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/standards_engine/tools.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The agent facade decodes requests and returns results through the generated contract boundary."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Fixture separates freshness, semantic preservation, public ownership, and independent conformance."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "generated-contract-semantic-conformance"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Suite enforces the generated-contract semantic boundary and its projections."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The profile requires an explicit schema dialect, vocabulary, and unsupported-keyword policy."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "topic.dependencies"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Unsupported schema semantics trigger an explicit implementation-versus-dependency decision."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The schema declares its dialect and vocabulary authority."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "tools/standards_engine/contracts/generate_contract.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The generator rejects unsupported schema semantics instead of silently omitting them."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "tools/standards_engine/contracts/validate_contracts.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Contract validation uses the declared dialect and an independent semantic oracle where required."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Fixture covers supported, unsupported, and undeclared schema semantics."
+
+[[relationships]]
+source = "topic.contracts.schema-dialect-and-vocabulary"
+consumer = "generated-contract-semantic-conformance"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Suite enforces dialect and vocabulary handling."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_metadata/standards_metadata/serialization.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Identity canonicalization remains distinct from schema instance equality."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_engine/contracts/validate_contracts.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Schema validation applies the declared schema equality domain rather than identity normalization."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Generated validators preserve the same schema equality semantics as the canonical contract."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_applicability/standards_applicability/core.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Applicability values use their declared domain equality without inheriting schema or identity rules accidentally."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_engine/standards_engine/model.py"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Persisted handles bind the explicit identity canonicalization domain."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
+relation = "documentation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The reproduction records the known A1 schema-instance equality disagreement without correcting A1 during recovery."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "generated-contract-semantic-conformance"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Suite keeps schema, domain, and identity equality claims separate."

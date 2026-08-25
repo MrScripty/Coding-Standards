@@ -25,3 +25,13 @@ Route the adopting repository through
 [`Planning Workflow`](../workflows/planning.md) admission decision. Preserve the
 requested objective and return the owning typed diagnostic when admission or
 canonical planning cannot authorize work.
+
+Use only the admitted acceptance oracle for each claim. Do not substitute
+generated freshness for semantic correctness, local agreement for external
+conformance, in-process reconstruction for cold-process reconstruction, or a
+generic fixture failure for the intended negative diagnostic.
+
+Stop and re-plan when implementation exposes a repeated invariant failure,
+another affected producer or consumer, an unreviewed generated-contract
+semantic, or an unreviewed implementation-versus-dependency decision. Do not
+repair only the first occurrence or infer authority for sibling consumers.

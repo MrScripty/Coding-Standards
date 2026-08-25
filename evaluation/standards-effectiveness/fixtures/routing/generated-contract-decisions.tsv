@@ -1,0 +1,8 @@
+case	program_consumer	generated_source	cross_language	process_boundary	durable_state	diagnostics	security	facts	expected_generated_contract	expected_language_binding	expected_ipc	expected_persistence	expected_diagnostics	expected_security	expected_route
+generated_program_contract	yes	yes	no	no	no	no	no	complete	select	exclude	exclude	exclude	exclude	exclude	route
+generated_cross_language_contract	yes	yes	yes	no	no	no	no	complete	select	select	exclude	exclude	exclude	exclude	route
+generated_process_contract	yes	yes	no	yes	no	no	no	complete	select	exclude	select	exclude	exclude	exclude	route
+generated_durable_contract	yes	yes	no	no	yes	no	no	complete	select	exclude	exclude	select	exclude	exclude	route
+generated_security_diagnostics	yes	yes	no	no	no	yes	yes	complete	select	exclude	exclude	exclude	select	select	route
+generated_text_only	no	yes	no	no	no	no	no	complete	exclude	exclude	exclude	exclude	exclude	exclude	route
+missing_boundary_facts	unknown	unknown	unknown	unknown	unknown	unknown	unknown	missing	unresolved	unresolved	unresolved	unresolved	unresolved	unresolved	unresolved

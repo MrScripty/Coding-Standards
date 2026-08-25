@@ -1,0 +1,83 @@
+schema_version = 1
+id = "implementation-versus-dependency"
+owner = "topic.dependencies"
+description = "Implementation-versus-dependency decisions bind semantic difficulty, conformance support, maintenance, security, and maintained local subset cost."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv"
+expected_column = "expected"
+default = "implement"
+[checks.domains]
+case = ["*"]
+semantics = ["difficult", "simple"]
+candidate = ["mature", "none", "unknown"]
+conformance = ["not-applicable", "supported", "unknown", "unsupported"]
+maintenance = ["missing", "owned"]
+security = ["missing", "owned"]
+local_subset = ["larger", "small", "unknown"]
+decision = ["adopt", "local", "undecided"]
+expected = ["adopt", "implement", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "candidate", op = "eq", value = "unknown" },
+  { field = "maintenance", op = "eq", value = "missing" },
+  { field = "security", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "conformance", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "semantics", op = "eq", value = "difficult" },
+  { field = "candidate", op = "eq", value = "mature" },
+  { field = "conformance", op = "eq", value = "supported" },
+  { field = "local_subset", op = "eq", value = "larger" },
+  { field = "decision", op = "eq", value = "local" },
+]
+[[checks.rules]]
+outcome = "adopt"
+[checks.rules.when]
+all = [
+  { field = "semantics", op = "eq", value = "difficult" },
+  { field = "candidate", op = "eq", value = "mature" },
+  { field = "conformance", op = "eq", value = "supported" },
+  { field = "decision", op = "eq", value = "adopt" },
+]
+
+[[checks]]
+id = "dependencies-policy"
+type = "text"
+path = "topics/dependencies.md"
+required = ["## Implementation Versus Dependency", "conformance", "maintenance", "security", "continuing cost of keeping a local subset correct"]
+prohibited = []
+
+[[checks]]
+id = "planning-projection"
+type = "text"
+path = "prompts/planning.md"
+required = ["evaluate an", "established dependency against the maintained local subset", "unsupported-domain costs"]
+prohibited = []
+
+[[checks]]
+id = "implementation-projection"
+type = "text"
+path = "prompts/implement-plan.md"
+required = ["implementation-versus-dependency decision"]
+prohibited = []
+
+[[checks]]
+id = "registered-consumers"
+type = "path_state"
+present = [
+  "STANDARDS-ROUTER.md",
+  "profiles/boundaries/generated-contract.md",
+  "prompts/planning.md",
+  "prompts/implement-plan.md",
+]

@@ -1,0 +1,180 @@
+schema_version = 1
+id = "standards-recovery-routing"
+owner = "router"
+description = "Generated Contract routing from observable boundaries with explicit Language Binding, IPC, Persistence, Diagnostics, Security, and unresolved outcomes."
+
+[[checks]]
+id = "boundary-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
+input_columns = ["program_consumer", "generated_source", "cross_language", "process_boundary", "durable_state", "diagnostics", "security", "facts"]
+[checks.domains]
+case = ["*"]
+program_consumer = ["no", "unknown", "yes"]
+generated_source = ["no", "unknown", "yes"]
+cross_language = ["no", "unknown", "yes"]
+process_boundary = ["no", "unknown", "yes"]
+durable_state = ["no", "unknown", "yes"]
+diagnostics = ["no", "unknown", "yes"]
+security = ["no", "unknown", "yes"]
+facts = ["complete", "missing"]
+expected_generated_contract = ["exclude", "select", "unresolved"]
+expected_language_binding = ["exclude", "select", "unresolved"]
+expected_ipc = ["exclude", "select", "unresolved"]
+expected_persistence = ["exclude", "select", "unresolved"]
+expected_diagnostics = ["exclude", "select", "unresolved"]
+expected_security = ["exclude", "select", "unresolved"]
+expected_route = ["route", "unresolved"]
+
+[[checks.outputs]]
+column = "expected_generated_contract"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [
+  { field = "program_consumer", op = "eq", value = "yes" },
+  { field = "generated_source", op = "eq", value = "yes" },
+]
+
+[[checks.outputs]]
+column = "expected_language_binding"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "cross_language", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_ipc"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "process_boundary", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_persistence"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "durable_state", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_diagnostics"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "diagnostics", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_security"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "security", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_route"
+default = "route"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+
+[[checks]]
+id = "requires-closure"
+type = "metadata_route"
+path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
+header = ["case", "program_consumer", "generated_source", "cross_language", "process_boundary", "durable_state", "diagnostics", "security", "facts", "expected_generated_contract", "expected_language_binding", "expected_ipc", "expected_persistence", "expected_diagnostics", "expected_security", "expected_route"]
+expectations_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv"
+route_column = "expected_route"
+resolved = "route"
+unresolved = "unresolved"
+base_modules = ["router", "workflow.planning", "workflow.implementation", "workflow.verification", "workflow.documentation", "workflow.build", "workflow.tooling", "topic.architecture", "topic.contracts", "topic.dependencies", "profile.application.library"]
+selections = [
+  { column = "expected_generated_contract", selected = "select", excluded = "exclude", module = "profile.boundary.generated-contract" },
+  { column = "expected_language_binding", selected = "select", excluded = "exclude", module = "profile.boundary.language-bindings" },
+  { column = "expected_ipc", selected = "select", excluded = "exclude", module = "profile.boundary.ipc" },
+  { column = "expected_persistence", selected = "select", excluded = "exclude", module = "profile.boundary.persistence" },
+  { column = "expected_diagnostics", selected = "select", excluded = "exclude", module = "topic.diagnostics" },
+  { column = "expected_security", selected = "select", excluded = "exclude", module = "topic.security" },
+]
+
+[[checks]]
+id = "router-policy"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["## Generated Contract Profile Applicability", "not replace unresolved boundary, consumer, deployment, or persistence facts", "with a smaller static module list"]
+prohibited = []
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/boundaries/generated-contract.md"
+required = ["ID: `profile.boundary.generated-contract`", "## Applicability", "## Semantic Closure", "Generated output, copied expectations, or agreement among local projections", "cannot be the sole semantic oracle"]
+prohibited = []
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "STANDARDS-ROUTER.md",
+  "profiles/boundaries/generated-contract.md",
+  "topics/architecture.md",
+  "topics/contracts.md",
+  "topics/dependencies.md",
+  "workflows/build.md",
+  "workflows/commit.md",
+  "workflows/documentation.md",
+  "workflows/implementation.md",
+  "workflows/planning.md",
+  "workflows/release.md",
+  "workflows/tooling.md",
+  "workflows/verification.md",
+]
+
+[[checks]]
+id = "registered-consumers"
+type = "path_state"
+present = [
+  "evaluation/standards-effectiveness/canonical-module-corpus.toml",
+  "evaluation/standards-effectiveness/router-projection.toml",
+  "evaluation/standards-effectiveness/policy-units/router.toml",
+  "evaluation/standards-effectiveness/policy-units/generated-contract.toml",
+  "tools/standards_analysis/standards_analysis/routing.py",
+  "tools/standards_analysis/tests/test_routing.py",
+  "tools/standards_graph/standards_graph/__init__.py",
+  "tools/standards_graph/standards_graph/metadata.py",
+  "tools/standards_graph/standards_graph/policy_units.py",
+  "tools/standards_graph/standards_graph/repository.py",
+  "tools/standards_graph/tests/test_metadata_graph.py",
+]

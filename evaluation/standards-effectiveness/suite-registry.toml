@@ -1089,3 +1089,33 @@ requires = []
 id = "rust-binding-executor-delegation"
 path = "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml"
 requires = []
+
+[[suites]]
+id = "standards-recovery-routing"
+path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"
+requires = []
+
+[[suites]]
+id = "evidence-oracle-boundaries"
+path = "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml"
+requires = []
+
+[[suites]]
+id = "generated-contract-semantic-conformance"
+path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml"
+requires = []
+
+[[suites]]
+id = "immutable-authority-closure"
+path = "evaluation/standards-effectiveness/suites/immutable-authority-closure.toml"
+requires = []
+
+[[suites]]
+id = "implementation-versus-dependency"
+path = "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml"
+requires = []
+
+[[suites]]
+id = "systemic-finding-replanning"
+path = "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml"
+requires = []

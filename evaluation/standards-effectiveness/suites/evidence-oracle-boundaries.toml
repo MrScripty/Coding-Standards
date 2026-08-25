@@ -1,0 +1,121 @@
+schema_version = 1
+id = "evidence-oracle-boundaries"
+owner = "workflow.verification"
+description = "Acceptance evidence distinguishes deciding oracles, freshness, local agreement, external conformance, mutation sensitivity, and isolated negative failures."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["missing", "named"]
+oracle = ["generated-output", "independent", "local-implementation", "missing"]
+authority_mutation = ["detected", "ignored", "not-applicable"]
+negative_preconditions = ["satisfied", "unrelated-failure"]
+local_agreement = ["no", "yes"]
+external_contract = ["none", "selected"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "claim", op = "eq", value = "missing" },
+  { field = "oracle", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "oracle", op = "eq", value = "generated-output" },
+  { field = "oracle", op = "eq", value = "local-implementation" },
+  { field = "authority_mutation", op = "eq", value = "ignored" },
+  { field = "negative_preconditions", op = "eq", value = "unrelated-failure" },
+]
+
+[[checks]]
+id = "verification-policy"
+type = "text"
+path = "workflows/verification.md"
+required = ["## Evidence Oracle Boundaries", "## Negative Fixture Isolation", "## Property And Differential Evidence", "observed result identifies the expected", "diagnostic or failure point"]
+prohibited = []
+
+[[checks]]
+id = "agent-projections"
+type = "text"
+path = "prompts/planning.md"
+required = ["identify the deciding oracle", "A generated artifact or second local", "implementation is not an independent semantic oracle"]
+prohibited = []
+
+[[checks]]
+id = "template-projection"
+type = "text"
+path = "templates/PLAN-TEMPLATE.md"
+required = ["## Evidence And Oracle Plan", "Intended negative failure", "agreement between local", "implementations as external conformance"]
+prohibited = []
+
+[[checks]]
+id = "retained-plan-structure-consumer"
+type = "text"
+path = "evaluation/standards-effectiveness/check-plan-structure.sh"
+required = ["#!/usr/bin/env bash", "set -euo pipefail"]
+prohibited = []
+
+[[checks]]
+id = "retained-plan-fixture-consumer"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-plan-fixtures.sh"
+required = ["#!/usr/bin/env bash", "set -euo pipefail"]
+prohibited = []
+
+[[checks]]
+id = "registered-consumers"
+type = "path_state"
+present = [
+  "prompts/implement-plan.md",
+  "prompts/full-codebase-standards-refactor.md",
+  "templates/PULL_REQUEST_TEMPLATE.md",
+  "workflows/documentation.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-acceptance.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-ii-candidate.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iii-candidate.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iv-candidate.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-v-candidate.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-vi-candidate.md",
+  "docs/plans/standards-engine-navigation-analysis/reports/a1-final-acceptance.md",
+  "docs/plans/standards-verification-engine/plan.md",
+  "tools/standards_verifier/standards_verifier/__init__.py",
+  "tools/standards_verifier/standards_verifier/checks/__init__.py",
+  "tools/standards_verifier/standards_verifier/checks/decision.py",
+  "tools/standards_verifier/standards_verifier/checks/exact_text.py",
+  "tools/standards_verifier/standards_verifier/checks/inclusion.py",
+  "tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py",
+  "tools/standards_verifier/standards_verifier/checks/metadata.py",
+  "tools/standards_verifier/standards_verifier/checks/metadata_route.py",
+  "tools/standards_verifier/standards_verifier/checks/path_state.py",
+  "tools/standards_verifier/standards_verifier/checks/policy_impact.py",
+  "tools/standards_verifier/standards_verifier/checks/predicates.py",
+  "tools/standards_verifier/standards_verifier/checks/relation.py",
+  "tools/standards_verifier/standards_verifier/checks/text.py",
+  "tools/standards_verifier/standards_verifier/complete_checkpoint.py",
+  "tools/standards_verifier/standards_verifier/config.py",
+  "tools/standards_verifier/standards_verifier/diagnostics.py",
+  "tools/standards_verifier/standards_verifier/engine.py",
+  "tools/standards_verifier/standards_verifier/generated_artifacts.py",
+  "tools/standards_verifier/standards_verifier/inventory.py",
+  "tools/standards_verifier/standards_verifier/model.py",
+  "tools/standards_verifier/standards_verifier/policy_impact.py",
+  "tools/standards_verifier/standards_verifier/repository_graph.py",
+  "tools/standards_verifier/tests/test_complete_checkpoint.py",
+  "tools/standards_verifier/tests/test_engine.py",
+  "tools/standards_verifier/tests/test_file_contracts.py",
+  "tools/standards_verifier/tests/test_generated_artifacts.py",
+  "tools/standards_verifier/tests/test_inventory.py",
+  "tools/standards_verifier/tests/test_metadata.py",
+  "tools/standards_verifier/tests/test_metadata_route.py",
+  "tools/standards_verifier/tests/test_policy_impact.py",
+  "tools/standards_verifier/tests/test_repository_graph.py",
+  "tools/standards_verifier/tests/test_routing_checks.py",
+]

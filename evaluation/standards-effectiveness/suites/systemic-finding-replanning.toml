@@ -1,0 +1,116 @@
+schema_version = 1
+id = "systemic-finding-replanning"
+owner = "workflow.planning"
+description = "Repeated invariant failures require family, sibling-consumer, authority-projection, and disposition audits before a replacement scope proceeds."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv"
+expected_column = "expected"
+default = "continue"
+[checks.domains]
+case = ["*"]
+finding = ["isolated", "repeated", "unknown"]
+invariant_family = ["inventoried", "missing", "not-applicable"]
+siblings = ["inventoried", "missing", "not-applicable"]
+consumer_audit = ["complete", "missing", "not-applicable"]
+authority_projection = ["complete", "incomplete"]
+scope_replaced = ["no", "yes"]
+expected = ["continue", "replan", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "finding", op = "eq", value = "unknown" },
+  { all = [
+    { field = "finding", op = "eq", value = "repeated" },
+    { field = "consumer_audit", op = "eq", value = "missing" },
+  ] },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { all = [
+    { field = "finding", op = "eq", value = "repeated" },
+    { field = "invariant_family", op = "eq", value = "missing" },
+  ] },
+  { all = [
+    { field = "finding", op = "eq", value = "repeated" },
+    { field = "siblings", op = "eq", value = "missing" },
+  ] },
+  { all = [
+    { field = "finding", op = "eq", value = "repeated" },
+    { field = "scope_replaced", op = "eq", value = "no" },
+  ] },
+  { field = "authority_projection", op = "eq", value = "incomplete" },
+]
+[[checks.rules]]
+outcome = "replan"
+[checks.rules.when]
+all = [
+  { field = "finding", op = "eq", value = "repeated" },
+  { field = "invariant_family", op = "eq", value = "inventoried" },
+  { field = "siblings", op = "eq", value = "inventoried" },
+  { field = "consumer_audit", op = "eq", value = "complete" },
+  { field = "authority_projection", op = "eq", value = "complete" },
+  { field = "scope_replaced", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "planning-policy"
+type = "text"
+path = "workflows/planning.md"
+required = ["## Systemic-Finding Re-Planning", "invariant family", "inventory every implementation", "give every selected consumer a non-blocked disposition"]
+prohibited = []
+
+[[checks]]
+id = "planning-prompt"
+type = "text"
+path = "prompts/planning.md"
+required = ["repeated invariant failure", "sibling producers and consumers"]
+prohibited = []
+
+[[checks]]
+id = "implementation-prompt"
+type = "text"
+path = "prompts/implement-plan.md"
+required = ["Stop and re-plan", "repeated invariant failure"]
+prohibited = []
+
+[[checks]]
+id = "template-projection"
+type = "text"
+path = "templates/PLAN-TEMPLATE.md"
+required = ["## Systemic Finding Audit", "Invariant family", "Sibling producers and consumers", "Consumer dispositions"]
+prohibited = []
+
+[[checks]]
+id = "negative-fixture-preconditions"
+type = "text"
+path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
+required = ["# Plan: Systemic Finding Without Audit", "**Plan status:** `Blocked`", "## Objective Acceptance", "## Milestones", "## Re-Plan Triggers", "## Final Acceptance", "Sibling consumers not yet inventoried"]
+prohibited = ["## Systemic Finding Audit"]
+
+[[checks]]
+id = "retained-plan-structure-consumer"
+type = "text"
+path = "evaluation/standards-effectiveness/check-plan-structure.sh"
+required = ["#!/usr/bin/env bash", "set -euo pipefail"]
+prohibited = []
+
+[[checks]]
+id = "retained-plan-fixture-consumer"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-plan-fixtures.sh"
+required = ["#!/usr/bin/env bash", "set -euo pipefail"]
+prohibited = []
+
+[[checks]]
+id = "registered-consumers"
+type = "path_state"
+present = [
+  "docs/plans/standards-engine-standards-recovery/issues.md",
+  "prompts/full-codebase-standards-refactor.md",
+]

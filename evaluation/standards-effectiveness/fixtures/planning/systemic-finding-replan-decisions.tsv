@@ -1,0 +1,7 @@
+case	finding	invariant_family	siblings	consumer_audit	authority_projection	scope_replaced	expected
+isolated_defect	isolated	not-applicable	not-applicable	not-applicable	complete	no	continue
+systemic_complete_replan	repeated	inventoried	inventoried	complete	complete	yes	replan
+systemic_local_patch_only	repeated	inventoried	inventoried	complete	complete	no	typed-invalid
+systemic_missing_consumer_audit	repeated	inventoried	inventoried	missing	complete	yes	typed-unavailable
+systemic_missing_projection	repeated	inventoried	inventoried	complete	incomplete	yes	typed-invalid
+unknown_finding_scope	unknown	missing	missing	missing	incomplete	no	typed-unavailable

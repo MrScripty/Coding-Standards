@@ -887,3 +887,33 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: inspect the admitted Milestone 1 authority already present,
   reconcile it with the task list, and resume at the first incomplete policy,
   relationship, projection, or evidence task.
+
+## 2026-08-25 - Checker-Consumer Generated-Evidence Replan
+
+- Trigger: the two new suites named retained plan checkers only inside
+  `path_state.present`. Provider v2 indexes singular suite `path` fields, so
+  neither checker became a `registered-suite-input` despite the apparent
+  registration.
+- Generated consequence: exact checker references in the suite TOMLs
+  mechanically add four `contract_reference` edges and corresponding inbound
+  fields to the temporary checker migration artifacts. The active plan instead
+  required those generated graph artifacts to remain byte-identical.
+- Independent options review: a `gpt-5.6-sol` subagent at `xhigh` reasoning
+  rejected list-only registration, node-catalog duplication, and prose-only
+  coverage. It recommended singular-path suite checks plus an exact generated
+  delta contract.
+- Supersession: the former `path_state.present` checker registration and M1
+  byte-identical generated-graph decision are `Superseded` by the
+  checker-consumer generated-evidence recovery contract in `plan.md`.
+- Replacement boundary: register each checker through a stable singular-path
+  text check in both owning suites; add only the three generated dependency
+  graph TSVs to `W`; permit only the four enumerated contract-reference edges
+  and their mechanically corresponding fields. Checker sources, generators,
+  provider runtime, verifier runtime, component topology, A1b, and A2 remain
+  unchanged.
+- Lifecycle: the plan and Milestone 1 return from `Active` to `Blocked`.
+  SESR-028 is active. The unadmitted generated graph output is excluded from
+  the blocked candidate.
+- Next operation: create the exact blocked candidate, obtain independent
+  reviewer-owned generated-evidence admission, apply only its mechanical
+  transition, and run exact-head `start` before regeneration.

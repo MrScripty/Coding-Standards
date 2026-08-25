@@ -1,0 +1,50 @@
+schema_version = 1
+owner = "topic.dependencies"
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Router selects dependency policy when unsupported semantics require an implementation-versus-dependency decision."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Generated Contract work records whether required schema semantics are implemented locally or delegated to a dependency."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Planning records the explicit implementation-versus-dependency decision and evidence."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Implementation follows the admitted dependency decision rather than adding an undeclared dependency or partial local implementation."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Fixture covers local implementation, dependency adoption, unsupported behavior, and licensing review."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "implementation-versus-dependency"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Suite enforces explicit dependency decisions and projections."

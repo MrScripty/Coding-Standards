@@ -1,0 +1,8 @@
+case	claim	oracle	authority_mutation	negative_preconditions	local_agreement	external_contract	expected
+independent_semantic_oracle	named	independent	detected	satisfied	yes	selected	allow
+freshness_only_semantics	named	generated-output	detected	satisfied	yes	selected	typed-invalid
+local_agreement_only	named	local-implementation	detected	satisfied	yes	selected	typed-invalid
+mutation_not_detected	named	independent	ignored	satisfied	yes	selected	typed-invalid
+negative_fixture_wrong_failure	named	independent	detected	unrelated-failure	yes	none	typed-invalid
+missing_claim	missing	independent	detected	satisfied	no	none	typed-unavailable
+missing_oracle	named	missing	detected	satisfied	no	none	typed-unavailable

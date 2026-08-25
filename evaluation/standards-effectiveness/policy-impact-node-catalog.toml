@@ -120,6 +120,132 @@ id = "release-maintenance-policy"
 aliases = ["evaluation/standards-effectiveness/suites/release-maintenance-policy.toml"]
 metadata = { repository_path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml", suite_id = "release-maintenance-policy", authority = "evidence" }
 
+[[nodes]]
+id = "evaluation/standards-effectiveness/router-projection.toml"
+metadata = { repository_path = "evaluation/standards-effectiveness/router-projection.toml", authority = "projection" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md", authority = "evidence" }
+
+[[nodes]]
+id = "standards-recovery-routing"
+aliases = ["evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml", suite_id = "standards-recovery-routing", authority = "evidence" }
+
+[[nodes]]
+id = "evidence-oracle-boundaries"
+aliases = ["evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml", suite_id = "evidence-oracle-boundaries", authority = "evidence" }
+
+[[nodes]]
+id = "generated-contract-semantic-conformance"
+aliases = ["evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml", suite_id = "generated-contract-semantic-conformance", authority = "evidence" }
+
+[[nodes]]
+id = "immutable-authority-closure"
+aliases = ["evaluation/standards-effectiveness/suites/immutable-authority-closure.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/immutable-authority-closure.toml", suite_id = "immutable-authority-closure", authority = "evidence" }
+
+[[nodes]]
+id = "implementation-versus-dependency"
+aliases = ["evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml", suite_id = "implementation-versus-dependency", authority = "evidence" }
+
+[[nodes]]
+id = "systemic-finding-replanning"
+aliases = ["evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml", suite_id = "systemic-finding-replanning", authority = "evidence" }
+
+[[nodes]]
+id = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
+metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md", authority = "evidence" }
+
+[[nodes]]
+id = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md"
+metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/a1-contract.schema.json"
+metadata = { repository_path = "tools/standards_engine/contracts/a1-contract.schema.json", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/generate_contract.py"
+metadata = { repository_path = "tools/standards_engine/contracts/generate_contract.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/validate_contracts.py"
+metadata = { repository_path = "tools/standards_engine/contracts/validate_contracts.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/standards_engine/_generated_contract.py"
+metadata = { repository_path = "tools/standards_engine/standards_engine/_generated_contract.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/standards_engine/__init__.py"
+metadata = { repository_path = "tools/standards_engine/standards_engine/__init__.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/standards_engine/tools.py"
+metadata = { repository_path = "tools/standards_engine/standards_engine/tools.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/standards_engine/engine.py"
+metadata = { repository_path = "tools/standards_engine/standards_engine/engine.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/standards_engine/model.py"
+metadata = { repository_path = "tools/standards_engine/standards_engine/model.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_metadata/standards_metadata/serialization.py"
+metadata = { repository_path = "tools/standards_metadata/standards_metadata/serialization.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_applicability/standards_applicability/core.py"
+metadata = { repository_path = "tools/standards_applicability/standards_applicability/core.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/snapshots.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/snapshots.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/resolution.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/resolution.py", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/results.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/results.py", authority = "evidence" }
+
 [[groups]]
 id = "policy-impact"
 purpose = "Reviewed policy owners and the semantic consumers requiring impact review."

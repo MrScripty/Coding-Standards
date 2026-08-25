@@ -528,3 +528,51 @@ relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-admission"
 rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions."
+
+[[relationships]]
+source = "workflow.planning.systemic-finding-replan"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:systemic-finding-replanning"
+rationale = "Planning audits the affected policy class and replans the complete consumer set when a finding is systemic."
+
+[[relationships]]
+source = "workflow.planning.systemic-finding-replan"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:systemic-finding-replanning"
+rationale = "Implementation stops and returns to planning when a defect applies beyond the admitted instance or write set."
+
+[[relationships]]
+source = "workflow.planning.systemic-finding-replan"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:systemic-finding-replanning"
+rationale = "The plan template records the systemic invariant, audited population, and complete disposition set."
+
+[[relationships]]
+source = "workflow.planning.systemic-finding-replan"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:systemic-finding-replanning"
+rationale = "Decision fixture covers local findings, systemic findings, complete audits, and replan boundaries."
+
+[[relationships]]
+source = "workflow.planning.systemic-finding-replan"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:systemic-finding-replanning"
+rationale = "Negative fixture isolates the missing systemic class audit and disposition failure."
+
+[[relationships]]
+source = "workflow.planning.systemic-finding-replan"
+consumer = "systemic-finding-replanning"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:systemic-finding-replanning"
+rationale = "Suite enforces systemic-finding classification, audit closure, and agent projections."

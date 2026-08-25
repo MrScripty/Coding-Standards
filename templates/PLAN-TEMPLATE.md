@@ -51,6 +51,32 @@ requires independent proof kinds.
 | --- | --- | --- | --- |
 | [Current decision] | [Owner] | [Reason/source] | [Prior decision or none] |
 
+## Evidence And Oracle Plan
+
+Use when acceptance depends on generated output, multiple implementations,
+external contracts, persisted authority, or negative fixtures. Remove this
+section when none applies.
+
+| Claim | Domain | Deciding oracle | Independent authority | Unsupported domain | Intended negative failure |
+| --- | --- | --- | --- | --- | --- |
+| [Claim] | [Freshness, shape, semantics, public path, external conformance, or other] | [Exact oracle] | [Authority or not applicable] | [Boundary] | [Exact diagnostic or not applicable] |
+
+Do not treat freshness as semantic correctness, agreement between local
+implementations as external conformance, in-process reconstruction as
+cold-process evidence, or any fixture failure as proof of its intended claim.
+
+## Systemic Finding Audit
+
+Use when a defect reveals a repeated invariant, duplicated authority, missing
+projection, ambient-state dependency, or public/internal boundary leak. Remove
+this section when the finding is demonstrably isolated.
+
+- Invariant family:
+- Sibling producers and consumers:
+- Authority and projection inventory:
+- Consumer dispositions:
+- Scope or sequencing replacement:
+
 ## Simplicity And Ownership Review
 
 Use for cross-layer, stateful, contract-heavy, concurrent, or refactor work.
