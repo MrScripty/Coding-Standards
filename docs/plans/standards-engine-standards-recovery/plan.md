@@ -1,11 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 1 live-authority cardinality test implementation
+**Current phase:** Milestone 1 coverage-gated cardinality sequencing replan
 
-**Next slice:** replace the four admitted live-authority cardinality oracles,
-run their focused suites, and commit the test-only prerequisite independently
+**Next slice:** obtain independent admission for the split M1/M2 cardinality
+recovery sequence; no test edit or relationship registration is authorized
 
 **Acceptance status:** `partial`
 
@@ -153,7 +153,7 @@ controlled authoring Plan A2.
   `tools/standards_metadata/`, `tools/standards_graph/`, or
   `tools/graph_engine/`.
 - Any test edit under those package trees except these exact test-only recovery
-  paths listed in the active Milestone 1 `W`:
+  paths listed in the active Milestone 1 or Milestone 2 `W`:
   `tools/standards_analysis/tests/test_routing.py`,
   `tools/standards_policy_impact/tests/test_compiler.py`,
   `tools/standards_verifier/tests/test_policy_impact.py`,
@@ -495,6 +495,40 @@ independently and resume relationship registration. Any additional
 live-authority cardinality oracle or protected consumer requiring mutation is a
 new re-plan trigger.
 
+The four-path inventory and semantic replacement contracts above remain
+accepted. Its requirement to implement and execute all four tests as one M1
+prerequisite is `Superseded` by the coverage-gated sequence below.
+
+### Milestone 1 Coverage-Gated Cardinality Sequencing Admission
+
+Three of the four admitted tests open coverage-bound repository authority and
+cannot reach their assertions until Milestone 2 renews attestations against the
+frozen relationship state. Renewing coverage before M1 finishes would create
+known-stale authority, while committing unreachable tests would provide no
+executable evidence. The corrected sequence is:
+
+1. Commit an exact blocked replan candidate with no test change.
+2. An independent reviewer authors only
+   `reports/standards-recovery-m1-cardinality-sequencing-admission.md` and may
+   authorize only this sequencing and write-set replacement.
+3. A mechanical transition and exact-head `start` admit the compiler test as
+   the sole immediate cardinality edit. It compares complete graph-edge and
+   semantics identity sets, retains targeted semantics, passes its focused
+   suite, and is committed independently before relationship registration.
+4. `test_policy_impact.py`, `test_navigation.py`, and `test_analysis.py` return
+   to M1 `R` and enter the explicit Milestone 2 write set. Their accepted
+   semantic replacement contracts remain unchanged.
+5. Milestone 2 first freezes relationship and horizon authority, renews
+   coverage, and proves certificate validity. It then applies those three
+   test-only replacements and runs their complete focused suites before any
+   exact-tree acceptance candidate is created.
+6. The same stale-attestation outcome may remain the documented intermediate
+   M1 baseline. No earlier attestation renewal, test bypass, private authority
+   injection, lower-level substitute, or unexecuted-test acceptance is valid.
+
+Any inability to run the compiler suite during M1 or all three coverage-bound
+suites after M2 renewal is a new re-plan trigger.
+
 ## Milestones
 
 ### Milestone 0: Historical Reproduction And Pre-Policy Scope Audit
@@ -631,9 +665,6 @@ coherent candidate authority.
 - `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 - `tools/standards_analysis/tests/test_routing.py`
 - `tools/standards_policy_impact/tests/test_compiler.py`
-- `tools/standards_verifier/tests/test_policy_impact.py`
-- `tools/standards_engine/tests/test_navigation.py`
-- `tools/standards_engine/tests/test_analysis.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -676,11 +707,9 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
   referenced fact, and `contains` expression; remove incidental global fact
   and rule cardinality assertions and do not change Router runtime
   implementation.
-- [ ] Replace live-repository policy-impact and navigation cardinality oracles
-  with semantic identity, exact projection-set agreement, Planning and Commit
-  owner closure, cause-presence/deduplication, and compiler-derived analysis
-  dependency/reason set assertions; preserve bounded synthetic-fixture
-  cardinality tests.
+- [ ] Replace the compiler's live-repository edge/semantics totals with exact
+  identity-set agreement and retain targeted relationship semantics; pass and
+  independently commit the focused compiler suite before relationship changes.
 - [ ] Add the Generated Contract profile and route it from observable schema,
   generator, and program-consumer facts; preserve conditional IPC and Language
   Binding selection.
@@ -723,7 +752,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Active`
+**Status:** `Blocked` by coverage-gated cardinality sequencing admission
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -740,6 +769,9 @@ and obtain independent acceptance of one clean standards-recovery tree.
 - `evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml` (new)
 - `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml` (new)
+- `tools/standards_verifier/tests/test_policy_impact.py`
+- `tools/standards_engine/tests/test_navigation.py`
+- `tools/standards_engine/tests/test_analysis.py`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -756,6 +788,10 @@ and obtain independent acceptance of one clean standards-recovery tree.
   and obtain authorized attestations for every changed policy unit.
 - [ ] Generate certificates, rerun impact analysis, and prove exact equality
   between required coverage subjects and valid certificate subjects.
+- [ ] After coverage is valid, replace the verifier, navigation, and analysis
+  live-authority totals/thresholds with the admitted Commit/Planning owner
+  closure, cause-presence/deduplication, and compiler-derived dependency/reason
+  set assertions; run all three complete focused suites.
 - [ ] Prove every selected consumer has exactly one current, non-blocked
   disposition and that no missing consumer remains in the independent horizon.
 - [ ] Run focused recovery checks, complete registered declarative suites,
@@ -878,4 +914,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`

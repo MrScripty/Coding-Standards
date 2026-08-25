@@ -739,3 +739,72 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: implement and independently commit the four test-only
   replacements, run the focused compiler/verifier/navigation/analysis suites,
   and stop on any additional live-authority oracle or protected consumer.
+
+## 2026-08-25 - Coverage-Gated Cardinality Sequencing Replan
+
+- Trigger: implementation proved that the compiler test is executable and
+  passes, but the verifier, navigation, and analysis suites all stop at the
+  already recorded `COVERAGE.STALE_ATTESTATION` before reaching their proposed
+  assertions. The admitted sequence required all four suites to pass before an
+  independent prerequisite commit, which is impossible before Milestone 2
+  renews coverage.
+- Evidence: the proposed semantic replacements passed Ruff apart from the
+  verifier test's pre-existing `E402` baseline; the compiler suite passed all
+  seven tests and `git diff --check` passed. No test proposal was retained or
+  committed after the sequencing contradiction was confirmed.
+- Rejected alternatives: do not renew attestations before relationship and
+  horizon authority freeze; do not commit three tests whose assertions cannot
+  execute; do not inject private coverage authority; and do not replace public
+  verifier/navigation/analysis evidence with lower-level substitutes.
+- Better sequence: M1 admits, executes, and independently commits only the
+  compiler identity-set correction, then resumes relationship registration.
+  The other three accepted replacements move to the explicit M2 write set and
+  execute immediately after final coverage renewal but before candidate
+  acceptance.
+- Supersession: the four-path inventory, semantic replacements, and test-only
+  scope exception remain current. Only the requirement to implement and pass
+  all four as one M1 prerequisite is `Superseded` by the split M1/M2 sequence.
+- Lifecycle: the plan and Milestone 1 return from `Active` to `Blocked`; no
+  policy-impact relationship or test change is present in the worktree.
+- Admission protocol: an independent reviewer must bind a new exact candidate
+  in `reports/standards-recovery-m1-cardinality-sequencing-admission.md`; an
+  accepted report permits only the mechanical transition and exact-head
+  `start` for the compiler-only M1 prerequisite.
+- Next operation: verify and commit the blocked sequencing candidate, then
+  obtain independent exact-tree admission. A1b and A2 remain unavailable.
+
+## 2026-08-25 - Cardinality-Recovery Commit-Message Rewrite
+
+- Authority and boundary: the user explicitly required the recent
+  noncompliant commits to be corrected. The rewritten unpushed linear range
+  begins after `2120c6d5ee9fb073f3b00f7b2e8a622ffe0319c6` and ends at former
+  tip `eefeede8841478633c81547551e10b96fa0affbe`.
+- Purpose: each rewritten commit retains its atomic change while adding the
+  required rationale, scope, contract effects, and lifecycle consequences to
+  its commit body. The rewrite does not admit implementation or alter the
+  accepted semantic replacement contracts.
+- Rewrite map:
+
+  | Former commit / tree | Current commit / tree |
+  | --- | --- |
+  | `4c7353207b53be21133222fd2e0e12a2e8e3636d` / `612e015d078a16d81898e7ad2d0ad0df3a289036` | `6d5dfbf8df1c23728d851dbaedc5735bf8fd0864` / `612e015d078a16d81898e7ad2d0ad0df3a289036` |
+  | `20d952a2f9614d29c41869123b5519e3032ce523` / `81b35e2a7457c4dfa7c5832628bf21c536d42487` | `882335b276a9e74024e60060b863c225f6299e91` / `83e7b7e1614e52b822d9182cbceca95ecc43bf8c` |
+  | `1b7f80fd8dfd9e693aaad2d1d052e4f43c77d269` / `be1af6004f7967c9f4d985d3c9fe178e112540af` | `5b1d3fb3677702c97837697570ba91975421ec94` / `189ae67bdd47672bd6637cab7ba14d992aa58471` |
+  | `fcb6cb7cd36f7a7800153ff3cb8967149feefa77` / `fcb0665d1b722335b8ddcd86edfd838fccf3fb14` | `0bc6343edc90b279733e6a956acefbc9d8b67fcd` / `acd0f113fad64d759b8b38c6799ed891165a5f2d` |
+  | `eefeede8841478633c81547551e10b96fa0affbe` / `502d309429a311dbb16242aab72a5ec7b5a7bf35` | `f575eb769410d5c3412c6e7f3ae8ea96e06a93f9` / `54bf53f1944a77edf7248efa6602006dec10487f` |
+
+- Dirty-state preservation: the uncommitted sequencing replan was saved as
+  `/tmp/cs-cardinality-sequencing-replan.pre-rewrite.patch` with SHA-256
+  `37c1ff83c71a80c8431b18aa2b73bf08491c6c781b1296fc66384b73a20333fb`.
+  Its mechanically rebased form has SHA-256
+  `43b8ff315a56ba7284fd84b7290f52423ec7899a7bd736fd30963add49551a8d`
+  and was restored only after the rewritten range passed integrity checks.
+- Recovery reference: temporary branch
+  `recovery/pre-cardinality-message-rewrite-20260825` preserves the former
+  tip until this mapping is committed. Its lifecycle disposition is
+  `Superseded`, its selected old commits are `discard-authorized`, and it must
+  be deleted before this operation is complete.
+- Verification: the rewritten range is linear, no remote or other local
+  branch contains the former tip, one worktree exists, the current tree does
+  not retain superseded identities except this historical mapping, and the
+  restored replan remains the only uncommitted work.
