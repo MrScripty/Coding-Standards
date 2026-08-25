@@ -142,11 +142,19 @@ compatibility loader or offline converter is introduced.
 
 ## Consequences
 
-All active policy units receive coverage once after the provider, catalog,
-declarations, public contract, suite registry, and horizon are frozen. Existing
-coverage is renewed; a previously uncovered active unit receives initial
-coverage. Exact active-unit, requirement, and certificate subject sets must be
-equal.
+All active policy units are certified once after the provider, catalog,
+declarations, public contract, suite registry, and horizon are frozen.
+Canonical metadata owns current subject membership; coverage compilation owns
+current requirements. Every current requirement uses the same attestation,
+evidence, authorization, identity, validation, and certificate path. Version 2
+introduces no renewal or initial-establishment semantic category.
+
+For migration audit only, a generated transition projection joins the current
+subject set to certificates compiled from exact predecessor commit
+`4baa63118a72fd0c185fc1d950dc149ab0c1808c`, tree
+`5a4d6d6786fa7a6ca8b373ca221a8eb1c90fa995`. Predecessor presence cannot
+change certification behavior or identity. Exact active-unit, requirement,
+attestation, and certificate subject sets must be equal at acceptance.
 Future internal relationship kinds do not require a public contract migration
 unless an operation-shaped public result itself changes. A2 remains inactive,
 and historical A1 version 9 acceptance remains unchanged as historical

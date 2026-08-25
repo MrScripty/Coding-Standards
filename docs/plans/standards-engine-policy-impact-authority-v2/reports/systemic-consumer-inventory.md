@@ -25,13 +25,15 @@
 | Standards Engine facade, inspection, and rendering | Serializes compiled semantic internals | Adapt compiled authority to the operation-shaped public result. |
 | Snapshot and analysis reconstruction | Accepts v2 handles/state and v9 interface versions | Replace with v3 handle/state identities and explicit predecessor unsupported outcomes. |
 | Policy-impact, graph, analysis, verifier, and engine tests | Test split loaders or public internal shapes | Replace with Interface-level compatibility, identity-set, closure, unsupported-version, and cold-process evidence. |
-| Coverage horizon and attestations | Bind provider/kind/catalog/horizon predecessor contracts; one active Verification unit has no predecessor certificate | Advance the horizon, renew predecessor coverage, establish initial coverage for the uncovered unit, and prove exact active-unit/requirement/certificate equality after freeze. |
+| Coverage horizon and attestations | Current subject membership is canonical metadata; predecessor attestations are stale under the changed authority and predecessor presence is historical only | Advance the horizon, certify every mechanically derived current requirement through one Interface, and prove exact active-unit/requirement/attestation/certificate equality after freeze. |
 | Package documentation | Describes predecessor composition or public shapes | Update to the accepted v2/v10 Interface and ownership. |
 | Historical A1 v9 plan and acceptance evidence | Records the accepted predecessor | Retain unchanged as historical evidence. |
 
 No normative standards document, policy-unit identity, locator, or semantic
 revision changes in this prerequisite. Three relationship declaration sources
 change target relation classification; all eight registered sources migrate to
-source schema version 2. Provider-wide identity changes require the renewal or
-initial-coverage disposition recorded for every active policy unit in
-[coverage-subject-inventory.tsv](coverage-subject-inventory.tsv).
+source schema version 2. Current coverage subjects and requirements are derived
+from canonical metadata and the compiled authority. Exact predecessor presence
+is retained only in
+[coverage-transition-provenance.tsv](coverage-transition-provenance.tsv) and
+does not affect certification.
