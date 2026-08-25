@@ -1,11 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 1 compiler-only cardinality recovery ready for start
+**Current phase:** Milestone 1 compiler-only cardinality recovery implementation
 
-**Next slice:** run exact-head cardinality-recovery `start`; no test edit or
-relationship registration is authorized before that transition
+**Next slice:** replace the compiler's mutable relationship counts with exact
+edge/semantics identity-set agreement and run its complete focused suite
 
 **Acceptance status:** `partial`
 
@@ -80,6 +80,10 @@ relationship registration is authorized before that transition
 **M1 cardinality-sequencing admission:** report commit
 `85e9ca2df94adc7b062f2fc31de397cee5c00ecf`, tree
 `548fb19aaa43cddf082d340db2f296020cd7eb4a`
+
+**Admitted M1 cardinality-sequencing base:** commit
+`65b80c05d7fce357eee9ddf9b8cbdd8a659880ee`, tree
+`8f2fe5eef487f4f0aab4bbfc8c42fe0acdde4b17`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -760,7 +764,7 @@ protected runtime paths remain unchanged; the generated checker inventory is
 fresh and satisfies its field-level M1 delta contract; all affected declarative
 and static verification passes.
 
-**Status:** `Planned`; exact-head cardinality-recovery `start` is next
+**Status:** `Active`; compiler-only cardinality recovery is authorized
 
 ### Milestone 2: Coverage Freeze And Exact-Tree Acceptance
 
@@ -922,4 +926,4 @@ migration, and independent exact-tree acceptance are complete.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

@@ -846,3 +846,24 @@ superseded by the discovery-admission transition in the active plan.
 - Sole next operation: cardinality-recovery `start`. It must run while this
   transition is current `HEAD`, record the exact transition commit/tree, and
   only then move the plan and Milestone 1 to `Active`.
+
+## 2026-08-25 - M1 Compiler-Only Cardinality-Recovery Start
+
+- Admitted transition base: commit
+  `65b80c05d7fce357eee9ddf9b8cbdd8a659880ee`, tree
+  `8f2fe5eef487f4f0aab4bbfc8c42fe0acdde4b17`.
+- Start precondition: the transition was current `HEAD`, its direct parent was
+  the independent admission-report commit, and the worktree was clean.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted`.
+- Authorized prerequisite: modify only
+  `tools/standards_policy_impact/tests/test_compiler.py` beyond the previously
+  admitted Milestone 1 paths. Replace mutable live-repository relationship
+  counts with complete graph-edge/semantics identity-set agreement while
+  retaining targeted relationship semantics.
+- Deferred boundary: verifier, navigation, and analysis cardinality
+  corrections remain unavailable until Milestone 2 renews coverage. Policy,
+  relationships, runtime, A1b, and A2 remain unchanged by this start.
+- Next operation: implement and independently commit the compiler-only test
+  correction, run its complete focused suite, and stop on any additional
+  live-authority oracle or protected consumer.
