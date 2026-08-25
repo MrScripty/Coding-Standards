@@ -551,3 +551,43 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: implement that focused test correction, rerun all Standards
   Analysis tests, and resume locator/routing validation if no other protected
   consumer fails.
+
+## 2026-08-24 - Commit-Message Rewrite Lineage And Cleanup Authority
+
+- User authority: rewrite every unpushed commit from
+  `0fb8f933ecbc531eaf98f3979f1523fc983e6385` onward to satisfy the
+  conventional-commit contract, then remove the temporary recovery branch.
+- Rewrite preconditions: `main` was ahead of `origin/main`; only `main`
+  contained the range; one worktree owned `main`; no other local branch,
+  worktree, or automation ref depended on the commits; and the original tip
+  was preserved temporarily as
+  `recovery/pre-message-rewrite-20260824` at
+  `b32df3e58d67f760fd2ec2f747abce7fab629cd9`.
+- Accepted source-to-replacement lineage:
+
+| Superseded commit | Accepted replacement |
+| --- | --- |
+| `0fb8f933ecbc531eaf98f3979f1523fc983e6385` | `b822dfaebe366fe7a8fb691ee44463e75c7adf6a` |
+| `ca760e83bc1861faf2d22a1ffd649d20d6a98c34` | `93235d3177e9ce02be46868e7d8f8bfa58fb90bb` |
+| `3ce42e0c1962b529d29df98f5de0d234aff801e8` | `ce667c699f0b658949df628e60d1113c9695fdf3` |
+| `113681b94049a161f7920e0da56d50e88c5dfaa0` | `2adc885202cadd668b8d0ba66bbd9f1f0015d414` |
+| `d3d307eefe808c235b5e22c8aa2ff6a27a45fd7e` | `59ecd309ae85db9d1f194ca3b49a23e79df51c62` |
+| `187d2f2b4972761a8ae28f4b65b0a95547e10512` | `e96da5eb3cccc22fb5c2293af65800cc69006ebf` |
+| `b8af2950d72d3825ea82bd6eb766c737e2569ceb` | `7a571ed26a132056368ef465d6041910c5a6ed48` |
+| `e358e2f3f68d51d1aafe3b3c336d4f08d2f2cd1d` | `d4376c3e410841676a0a8d3711254067f875d493` |
+| `b32df3e58d67f760fd2ec2f747abce7fab629cd9` | `c4e46d3b035531b6eb07dbf95ef143fbc0cd801b` |
+
+- Verification: all nine replacement subjects match conventional format;
+  parent count and linear topology are preserved; exact commit/tree bindings
+  in five planning/report files resolve to the replacement lineage; cumulative
+  content differs from the superseded tip only by those identity substitutions;
+  generated freshness, plan structure/lifecycle, `git diff --check`, and Git
+  object integrity pass.
+- Terminal classification: the temporary branch is `superseded`; every unique
+  source commit has an accepted replacement above; the user explicitly
+  authorizes permanent retirement of the superseded branch and commits after
+  this mapping is committed. Selected commit disposition:
+  `discard-authorized`.
+- Cleanup postcondition to prove after deletion: the branch ref is absent,
+  only accepted `main` owns the active lineage, the worktree remains on `main`,
+  and no task-created recovery ref remains.
