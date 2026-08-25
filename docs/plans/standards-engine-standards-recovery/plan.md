@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 compiler-only cardinality recovery implementation
+**Current phase:** Milestone 1 policy and projection implementation
 
-**Next slice:** replace the compiler's mutable relationship counts with exact
-edge/semantics identity-set agreement and run its complete focused suite
+**Next slice:** audit the admitted Milestone 1 authority already present and
+resume at the first incomplete policy, relationship, projection, or evidence task
 
 **Acceptance status:** `partial`
 
@@ -719,7 +719,7 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
   referenced fact, and `contains` expression; remove incidental global fact
   and rule cardinality assertions and do not change Router runtime
   implementation.
-- [ ] Replace the compiler's live-repository edge/semantics totals with exact
+- [x] Replace the compiler's live-repository edge/semantics totals with exact
   identity-set agreement and retain targeted relationship semantics; pass and
   independently commit the focused compiler suite before relationship changes.
 - [ ] Add the Generated Contract profile and route it from observable schema,

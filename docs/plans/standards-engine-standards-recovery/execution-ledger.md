@@ -867,3 +867,23 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: implement and independently commit the compiler-only test
   correction, run its complete focused suite, and stop on any additional
   live-authority oracle or protected consumer.
+
+## 2026-08-25 - M1 Compiler Cardinality Recovery Complete
+
+- Implementation: commit
+  `e2dac38750ba0cea7d90b2f5c086cb3e92de77a2`, tree
+  `45ba693bf7c15a8d89ed715f73cb481706330acc`.
+- Exact delta: only
+  `tools/standards_policy_impact/tests/test_compiler.py` changed. The two
+  mutable `126` assertions were replaced by equality between the complete
+  compiled graph-edge ID set and semantics ID set; the named Planning edge,
+  propagation, applicability, referenced-fact, and evidence-owner assertions
+  remain non-vacuous.
+- Verification: all seven policy-impact compiler tests and Ruff passed;
+  `git diff --check` passed before commit.
+- Lifecycle: SESR-027 is `resolved`. SESR-026 remains `active` because the
+  verifier, navigation, and analysis corrections remain in Milestone 2 after
+  coverage renewal.
+- Next operation: inspect the admitted Milestone 1 authority already present,
+  reconcile it with the task list, and resume at the first incomplete policy,
+  relationship, projection, or evidence task.
