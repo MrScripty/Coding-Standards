@@ -345,3 +345,28 @@ superseded by the discovery-admission transition in the active plan.
   checker or verifier behavior, runtime code, A1b, and A2.
 - Next operation: regenerate the admitted artifact through the existing
   generator and verify the structural invariant before any lifecycle closeout.
+
+## 2026-08-24 - Milestone 0 Generated-Evidence Closure
+
+- Start boundary: commit
+  `5fcc9543c85617d24570fee9e548485ab9d6cc24`.
+- Generated output: the existing generator refreshed the admitted structure
+  inventory. Git reports no other generated or source change.
+- Structural proof: exactly one record changed. Total inbound count changed
+  from 12 to 13 and documentation inbound count changed from 4 to 5; the
+  historical reproduction report is the sole added file. Source, mechanism,
+  executable-reference, contract-reference, helper-dependency,
+  verifier-dependency, and all other fields remained identical.
+- Byte-identity proof: hashes for all 53 retained checker sources and all three
+  generated dependency-graph artifacts matched their pre-regeneration values.
+  The graph remains 57 nodes, 375 edges, and 57 components.
+- Focused verification: generated freshness, plan structure, plan lifecycle
+  fixtures, and `git diff --check` passed.
+- Complete verification: all 218 registered declarative suites and all 53
+  retained Bash checkers passed through the canonical complete checkpoint.
+- Lifecycle result: all Milestone 0 tasks and its acceptance gate pass. The
+  milestone is `Implemented`; the plan returns to `Blocked` pending the
+  independent reviewer-owned policy-admission report against this exact
+  candidate commit/tree.
+- Excluded work: no policy, Router, fixture, checker/verifier behavior, runtime,
+  A1b, or A2 change was made.
