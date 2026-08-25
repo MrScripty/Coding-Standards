@@ -604,3 +604,23 @@ superseded by the discovery-admission transition in the active plan.
 - Active implementation state is unchanged: the admitted focused Router test
   correction remains the sole uncommitted work and Milestone 1 remains
   `Active`.
+
+## 2026-08-24 - Focused Router Test Recovery
+
+- Updated only the newly admitted protected consumer
+  `tools/standards_analysis/tests/test_routing.py` beyond the original M1 write
+  set.
+- Removed global fact/rule cardinality assertions. The focused test now proves
+  `routing.boundaries` semantic revision 2, the `generated-contract` enum
+  member, the exact Generated Contract rule ID and target, its sole referenced
+  fact, and its normalized `contains` expression.
+- Retained the existing target-drift mutation test as the direct global Router
+  target-closure oracle; public route behavior remains assigned to the planned
+  M1 fixtures.
+- Verification: all 82 Standards Analysis tests, all 18 metadata/policy-unit
+  tests, `metadata-fixtures`, `s1-routing`, and `git diff --check` pass.
+- Closure result: the one-path `R` to `W` transfer is complete; every other
+  closure member remains unchanged. SESR-025 is resolved.
+- Next operation: register source-owned relationships for the exact new policy
+  units and run prior/current graph comparison before changing prompts,
+  templates, fixtures, suites, or final coverage authority.

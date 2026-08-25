@@ -22,9 +22,34 @@ class RouterProjectionTest(unittest.TestCase):
 
         self.assertEqual(projection.owner, "router")
         self.assertEqual(projection.base_modules, ("router",))
-        self.assertEqual(len(projection.facts), 7)
-        self.assertEqual(len(projection.rules), 38)
-        self.assertTrue(all(rule.program.referenced_facts for rule in projection.rules))
+
+        boundaries = next(
+            fact for fact in projection.facts if fact.id == "routing.boundaries"
+        )
+        self.assertEqual(boundaries.semantic_revision, 2)
+        self.assertIn("generated-contract", boundaries.values)
+
+        generated_contract = next(
+            rule
+            for rule in projection.rules
+            if rule.id == "route.boundary.generated-contract"
+        )
+        self.assertEqual(
+            generated_contract.target,
+            "profile.boundary.generated-contract",
+        )
+        self.assertEqual(
+            generated_contract.program.referenced_facts,
+            ("routing.boundaries",),
+        )
+        self.assertEqual(
+            generated_contract.program.as_expression(),
+            {
+                "operator": "contains",
+                "fact": "routing.boundaries",
+                "value": "generated-contract",
+            },
+        )
 
     def test_projection_rejects_target_drift_from_router_tables(self) -> None:
         modules = load_canonical_module_corpus(REPO_ROOT)

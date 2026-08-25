@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 1 focused Router projection test recovery
 
-**Next slice:** replace the focused Router projection test's global
-cardinality assertions with targeted `routing.boundaries` and Generated
-Contract rule semantics, then resume locator/routing validation
+**Next slice:** register source-owned policy-impact relationships for the exact
+new policy units, run prior/current graph comparison, and stop on any unmapped
+or protected consumer
 
 **Acceptance status:** `partial`
 
@@ -597,9 +597,9 @@ and re-plan its exact write set. Runtime-package edits remain unavailable.
 
 **Tasks:**
 
-- [ ] Add exact, non-overlapping normative headings for all proposed policy
+- [x] Add exact, non-overlapping normative headings for all proposed policy
   units in the semantic-impact inventory.
-- [ ] Update the focused Router projection test to assert the admitted
+- [x] Update the focused Router projection test to assert the admitted
   `routing.boundaries` revision/domain and Generated Contract rule ID, target,
   referenced fact, and `contains` expression; remove incidental global fact
   and rule cardinality assertions and do not change Router runtime
