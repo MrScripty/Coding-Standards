@@ -1,15 +1,16 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 0 historical reproduction and pre-policy scope
-audit
+**Current phase:** Milestone 0 recovery replan; generated-evidence closure is
+blocked pending independent M0 recovery admission
 
-**Next slice:** reproduce every accepted A1 repair family, record the known
-schema-equality disagreement, and complete the pre-policy scope audit; policy
-implementation remains unavailable until a second post-scope-audit admission
+**Next slice:** an independent reviewer authors only
+`reports/standards-recovery-m0-recovery-admission.md` against the exact blocked
+replan candidate; generated inventory refresh and policy implementation remain
+unavailable
 
-**Acceptance status:** `pending`
+**Acceptance status:** `partial`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -73,9 +74,9 @@ controlled authoring Plan A2.
 | SR-A8 | Schema instance equality and content-identity canonicalization are exercised as separate contracts. | `contract` | `not-applicable` | `automated` | `pending` | Pending equality-domain fixtures |
 | SR-A9 | Immutable authority reconstruction succeeds through a genuinely fresh public process and remains unaffected by post-capture source mutation. | `system` | `not-applicable` | `automated` | `pending` | Pending cold-process reconstruction evidence |
 | SR-A10 | Every negative fixture satisfies unrelated preconditions and proves the exact intended diagnostic or failure point. | `focused` | `not-applicable` | `automated` | `pending` | Pending isolated negative-fixture evidence |
-| SR-A11 | The generated closure, public result, semantic-version identity, and JSON Schema equality repair families are reproduced and recorded without changing A1 runtime behavior. | `contract` | `not-applicable` | `automated` | `pending` | Pending historical contract-reproduction reports |
-| SR-A12 | Immutable reads and cold reconstruction are reproduced through their real public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `pending` | Pending historical authority-reproduction report |
-| SR-A13 | Every historical acceptance-oracle failure is reproduced at its intended failure point without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `pending` | Pending historical oracle-reproduction report |
+| SR-A11 | The generated closure, public result, semantic-version identity, and JSON Schema equality repair families are reproduced and recorded without changing A1 runtime behavior. | `contract` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) and [equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
+| SR-A12 | Immutable reads and cold reconstruction are reproduced through their real public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) records passing public boundaries and the exact unsupported child-handle domain |
+| SR-A13 | Every historical acceptance-oracle failure is reproduced at its intended failure point without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md#exact-negative-diagnostics) |
 | SR-A14 | One clean candidate commit and tree pass focused recovery checks and all current registered verification. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
 | SR-A15 | An independent reviewer accepts the exact standards candidate, its final consumer coverage and dispositions, and every objective claim with no blocked consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent standards-recovery acceptance report |
 
@@ -309,16 +310,54 @@ Any intervening commit, additional transition delta, or inability to resolve
 the reviewed/report parent chain invalidates admission and requires another
 review. No milestone operation occurs while the plan is `Blocked`.
 
+### Milestone 0 Recovery Admission
+
+If Milestone 0 discovers that required evidence changes a generated artifact
+outside its admitted write set, Milestone 0 returns to `Blocked` and uses a
+distinct recovery admission. This admission is narrower than policy admission:
+
+1. An independent reviewer evaluates one exact blocked M0 replan snapshot and
+   authors only
+   `reports/standards-recovery-m0-recovery-admission.md`. The report binds the
+   reviewed commit/tree and either rejects the replan or authorizes the exact
+   generated-evidence closure below. It must link to the authoritative issue
+   and reproduction evidence rather than duplicate retained-checker names.
+2. If accepted, the integration owner creates one mechanical transition commit
+   whose parent is the admission-report commit and whose only changed files are
+   `plan.md`, `execution-ledger.md`, and `issues.md`. It records the reviewed
+   snapshot and report commit/tree, sets the plan and Milestone 0 to `Planned`,
+   and names M0 recovery `start` as the sole next operation. It may not change
+   scope, evidence, write sets, objectives, or policy authority.
+3. `start` records that exact transition commit/tree and sets the plan and
+   Milestone 0 to `Active`. The only newly admitted repository output is the
+   mechanically regenerated structure inventory already named in the M0 write
+   set.
+4. After all documentation inputs are final, regeneration must change only the
+   single affected retained-harness inventory record. Only its total and
+   documentation inbound counts and corresponding file lists may change. Its
+   source, mechanism, executable-reference, contract-reference,
+   helper-dependency, and verifier-dependency fields must remain identical;
+   every other inventory record, every checker source, and every generated
+   dependency-graph artifact must remain byte-identical.
+5. The expected current count delta is total inbound `12` to `13` and
+   documentation inbound `4` to `5`, with the historical-reproduction report
+   as the sole added inbound file. These counts are supporting evidence; the
+   field-level structural invariant is authoritative.
+
+No inventory regeneration, policy-admission review, normative policy mutation,
+A1b runtime work, or A2 work is permitted before this transition completes.
+
 ### Policy-Implementation Admission
 
 After Milestone 0 satisfies its gate, the plan becomes `Blocked` on policy
 admission. The same protocol applies: an independent reviewer authors only
 `reports/standards-recovery-policy-admission.md` against the exact post-scope-audit
 snapshot; a separate mechanical transition commit may change only `plan.md`,
-`execution-ledger.md`, and `issues.md`, set the plan and Milestone 1 to
-`Planned`, and name Milestone 1 `start`. That transition commit is the admitted
-policy-implementation base, and `start` records its exact identity. It may not
-change the audited consumer map, policy write set, or acceptance contracts.
+`execution-ledger.md`, and `issues.md`, mark Milestone 0 `Accepted`, set the plan
+and Milestone 1 to `Planned`, and name Milestone 1 `start`. That transition
+commit is the admitted policy-implementation base, and `start` records its exact
+identity. It may not change the audited consumer map, policy write set, or
+acceptance contracts.
 The report may accept only when every planned policy subject is
 `pre-policy-scope-audit-complete`, no planned disposition is blocked, the exact
 Milestone 1 write/read sets cover all mapped consumers, and Python-only fixture
@@ -340,57 +379,70 @@ pre-policy scope audit without changing policy, verifier behavior, or A1 runtime
 - `docs/plans/standards-engine-standards-recovery/reports/pre-policy-scope-audit.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md` (new)
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 
 **Tasks:**
 
-- [ ] Bind every reproduction to accepted A1 commit
+- [x] Bind every reproduction to accepted A1 commit
   `2359a98740b6035a0414bfaf5427ceaa1301a1c8` and tree
   `97c850ab718287007c1e1daac538f40869f71a1d`.
-- [ ] Reproduce the known A1 schema-equality disagreement using only existing
+- [x] Reproduce the known A1 schema-equality disagreement using only existing
   accepted A1 inputs and a temporary invocation; cite the exact normative
   specification clauses and add no external corpus, dependency, or permanent
   JSON-specific fixture.
-- [ ] Reproduce the complete generated-contract closure family: field names,
+- [x] Reproduce the complete generated-contract closure family: field names,
   types, defaults, requiredness, constraints, nested variants, result shapes,
   and generated native result ownership.
-- [ ] Reproduce the public-result boundary family: analysis-domain result
+- [x] Reproduce the public-result boundary family: analysis-domain result
   leakage, exhaustive public conversion, documented public imports, internal
   package imports, and typed engine-error ownership.
-- [ ] Reproduce the immutable-read family: whole-module reads and inspection
+- [x] Reproduce the immutable-read family: whole-module reads and inspection
   after source mutation must remain bound to captured authority.
-- [ ] Reproduce the cold-reconstruction family for analysis state and every
+- [x] Reproduce the cold-reconstruction family for analysis state and every
   advertised child handle through a fresh public engine without private cache,
   provider, authorization, or in-memory-store injection.
-- [ ] Reproduce the semantic-version identity family: interpretation-affecting
+- [x] Reproduce the semantic-version identity family: interpretation-affecting
   contract versions change the correct snapshot or analysis identity while
   implementation-only releases do not.
-- [ ] Reproduce the acceptance-oracle family: otherwise-invalid negative
+- [x] Reproduce the acceptance-oracle family: otherwise-invalid negative
   fixtures, substring-only diagnostics, incomplete Boolean/integer and Unicode
   differential matrices, generated freshness standing in for semantics, and
   two local implementations serving as each other's only oracle.
-- [ ] Record commands, versions, exact inputs, expected and actual outcomes,
+- [x] Record commands, versions, exact inputs, expected and actual outcomes,
   claimed property, independent oracle, and unsupported domain for every
   historical family without changing runtime code.
-- [ ] Enumerate every independent-horizon member relevant to each proposed
+- [x] Enumerate every independent-horizon member relevant to each proposed
   policy unit, review every known missing consumer class, and record its planned
   `updated`, `reviewed-no-change`, `not-applicable`, or `blocked` disposition.
-- [ ] Record current policy-impact results and independently enumerate the
+- [x] Record current policy-impact results and independently enumerate the
   horizon for every proposed owner, complete the pre-policy scope-audit report,
   and mark every planned policy subject `pre-policy-scope-audit-complete`
   before policy admission.
-- [ ] Record A1b planning and all A2 work as unavailable while recovery remains
+- [x] Record A1b planning and all A2 work as unavailable while recovery remains
   incomplete.
+- [ ] Obtain independent M0 recovery admission for the exact blocked replan
+  candidate and apply only its authorized mechanical lifecycle transition.
+- [ ] After all documentation inputs are final, regenerate the admitted
+  structure inventory through its existing generator.
+- [ ] Prove the generated delta satisfies the field-level structural invariant
+  in the M0 recovery-admission contract; checker sources and generated
+  dependency-graph artifacts remain byte-identical.
+- [ ] Run focused freshness and plan checks, then one complete declarative and
+  retained-checker checkpoint from the final M0 tree.
 - [ ] After every Milestone 0 criterion passes, set the plan to `Blocked` on the
-  policy-implementation admission transition; do not mutate normative policy.
+  separate policy-implementation admission transition; do not mutate normative
+  policy.
 
 **Acceptance gate:** Every historical repair family has a reproducible result
 from the accepted A1 boundary; the bounded schema-equality disagreement is
 recorded against normative specification authority; every planned policy
 subject is `pre-policy-scope-audit-complete` with all known horizon members and
-missing consumer classes mapped to planned dispositions; no final coverage,
-external corpus, policy, verifier behavior, or A1 runtime changed.
+missing consumer classes mapped to planned dispositions; generated structure
+inventory is fresh and satisfies the admitted field-level delta invariant; no
+final coverage, external corpus, policy, verifier behavior, or A1 runtime
+changed.
 
-**Status:** `Active`
+**Status:** `Blocked`
 
 ### Milestone 1: Coordinated Standards Authority Cutover
 
@@ -456,6 +508,8 @@ coherent candidate authority.
 - `workflows/documentation.md`
 - `workflows/tooling.md`
 - `workflows/implementation.md`
+- `prompts/full-codebase-standards-refactor.md`
+- `templates/PULL_REQUEST_TEMPLATE.md`
 - `topics/licensing.md`
 - `profiles/applications/library.md`
 - `profiles/boundaries/language-bindings.md`
@@ -588,10 +642,12 @@ different claim:
 
 ## Blockers
 
-- Milestone 0 is active. Policy implementation remains unavailable until its
-  gate passes and a separate post-scope-audit admission transition is applied.
-- The JSON Schema equality disagreement remains intentionally unresolved until
-  Milestone 0 records an independent reproduction.
+- Milestone 0 reproduction and scope-audit evidence is complete, but its
+  generated-evidence closure is blocked pending the distinct M0 recovery
+  admission. Policy admission and implementation remain unavailable until M0
+  subsequently passes its gate.
+- The JSON Schema equality disagreement is independently reproduced and remains
+  intentionally unresolved for A1b.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
   of this standards recovery; A2 remains blocked further by independent A1b
   acceptance.
@@ -667,7 +723,7 @@ migration, and independent exact-tree acceptance are complete.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR are gated by this recovery; A2 is
   gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Blocked`

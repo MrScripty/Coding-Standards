@@ -238,3 +238,48 @@ superseded by the discovery-admission transition in the active plan.
 - Excluded work: normative policy, Router authority, fixtures, verifier or
   runtime changes, A1b, A2, and policy-implementation admission.
 - Next slice: execute Milestone 0 to its gate or stop at a re-plan trigger.
+
+## 2026-08-24 - Milestone 0 Reproduction And Scope Audit
+
+- Start boundary: commit
+  `6f3c52a05f86e76b5fd14d54e534c864e46f6ca3`, tree
+  `c98a2be6ef73632ae0ac5a411d8f32c34df8b7f6`.
+- Accepted A1 boundary: commit
+  `2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
+  `97c850ab718287007c1e1daac538f40869f71a1d`, exported to temporary storage.
+- Historical regressions: 45 Standards Engine, 82 analysis, and 18 metadata
+  tests passed. Canonical contract validation passed 33 examples, 8 identity
+  fixtures, 4 operation envelopes, and 143 definitions; generated freshness
+  passed.
+- External-oracle result: accepted A1 treats NFC-equivalent but
+  codepoint-distinct strings as equal for `const` and `enum`, and as duplicates
+  for `uniqueItems`. Draft 2020-12 requires the opposite decisions for those
+  selected Unicode cases. Boolean/integer selected cases conform.
+- A temporary repository-authored conditional fact made every advertised
+  analysis child-handle kind reachable. A separate process using only the
+  public engine and directory store inspected context, requirement,
+  observation, and certificate handles. Dispositions have no handle in the
+  accepted algebra. Exhaustive interpretation-version closure remains an
+  explicit unsupported domain. No runtime correction was made.
+- Horizon audit: provider v2 digest
+  `sha256:35ed5271ffb9573eb1ae4dd6949debd9f6aad011bb9d0b43dbbfba9eb5b077e9`
+  contains 856 members from 583 inputs. Every typed role was reconciled and
+  every relevant member was mapped to a planned disposition.
+- Scope correction: add `prompts/full-codebase-standards-refactor.md` and
+  `templates/PULL_REQUEST_TEMPLATE.md` to the Milestone 1 read-only set with
+  expected `reviewed-no-change` dispositions. Their canonical delegation means
+  no policy write-set expansion is required.
+- Current empty impact queries remain missing-authority evidence. The scope
+  audit does not claim an attestation, certificate, semantic acceptance, or
+  final consumer disposition.
+- Gate result: generated structure-inventory freshness failed because the exact
+  historical reproduction evidence adds one documentation-only inbound
+  reference to a retained harness. No checker source, executable reference,
+  contract reference, helper dependency, verifier dependency, or dependency
+  graph changed.
+- Re-plan result: the generated inventory is outside the admitted M0 write set.
+  Milestone 0 and the plan are `Blocked` pending a distinct reviewer-owned M0
+  recovery admission. The replan adds only that generated artifact, requires a
+  field-level structural delta check, and keeps the later policy admission
+  separate. Inventory regeneration, policy, A1b runtime, and A2 work remain
+  unavailable.
