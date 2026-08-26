@@ -258,14 +258,14 @@ prerequisite is evidence, not additional recovery write authority.
 
 **Remaining tasks:**
 
-- [ ] Re-resolve `S` and verify `E` at the exact resume candidate; derive
+- [x] Re-resolve `S` and verify `E` at the exact resume candidate; derive
   `R = (S union E) - W` and prove exact path resolution and disjointness.
-- [ ] Compare the planning baseline, pre-prerequisite recovery authority, and
+- [x] Compare the planning baseline, pre-prerequisite recovery authority, and
   current compiled graph. Explain every retained, added, removed, or corrected
   relationship without using mutable totals.
-- [ ] Revalidate every policy-unit locator, Router/profile projection, suite
+- [x] Revalidate every policy-unit locator, Router/profile projection, suite
   registration, generated artifact, and current consumer disposition.
-- [ ] Prove no consumer is blocked and no protected consumer requires mutation.
+- [x] Prove no consumer is blocked and no protected consumer requires mutation.
 - [ ] Run focused recovery verification and the complete repository checkpoint,
   then record the exact frozen M1 tree.
 
@@ -345,9 +345,8 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- The accepted prerequisite does not authorize recovery resume. This plan and
-  Milestone 1 remain blocked until the exact governance candidate receives an
-  independent resume-admission report and its authorized transition is current.
+- Milestone 1 is active from the exact recovery-resume start base. Milestone 2
+  remains blocked until Milestone 1 records a green frozen boundary.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this

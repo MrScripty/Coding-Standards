@@ -123,6 +123,53 @@ All declaration applicability is explicit `always`; no predicate was inferred
 from rationale or a repository path. Every evidence owner resolves to one
 registered suite. No selected consumer has a `blocked` disposition.
 
+## Milestone 1 Reconciliation Evidence
+
+Reconciliation is bound to recovery-resume start commit
+`3fa59052960a85c2b85930a156d2061f91a89cfc`, tree
+`d72c2a871bc94b08bdb4417c11c3fddb85eb5f57`.
+
+The protected closure was rederived from its owners rather than copied into a
+new manifest:
+
+| Set | Canonical set digest | Result |
+| --- | --- | --- |
+| Audit-selected suite IDs | `sha256:b7f518d73c6b53d619be94b232be1443cfbe9c37fb1d9ad9fed550110888a78f` | Every ID resolves to one registered suite definition. |
+| Suite definitions and registered inputs (`S`) | `sha256:28c89662509f3e39d7263c6a308b8846a613d2d23b5a6fd742370d6fd6942af3` | Every registered path resolves. |
+| Exact non-registry consumers (`E`) | `sha256:c3b06f4455c0c8a6eb76a29b3c32dbef4c100de4afccc8ff31c4fc551df84150` | Every exact path resolves; no wildcard is present. |
+| Milestone 1 write set (`W`) | `sha256:bb4cab1bc88b56afde7b275f1a56428b08fa1b70364ffa18a513dba60512ca21` | Exactly the four active-plan paths are writable. |
+| Protected closure (`R`) | `sha256:c793877e1605eca0b5ff21fed71b49d969615269a64cd6e41932ce2f006b66a9` | `R = (S union E) - W`; `W intersect R` is empty. |
+| Complete mapped closure (`W union R`) | `sha256:95b73a7db9efa6cdb0ed97817d7b29fd4b378035b36de585a397e1d5fd924e65` | Every mapped consumer has the disposition assigned by this report. |
+
+Compiled comparison across planning baseline `3439aae9540786d9734431e633ea5b62afb50592`,
+pre-prerequisite recovery boundary `cb6abdb89afaa4fca25706cd42f621a8c762480f`,
+and the current start tree produced canonical migration projection digest
+`sha256:c1673d49bdac3097228d4cf12f4ea4a4c2aad128d7a6674b2a396f75f0855ab9`.
+Every planning-baseline relationship is materially retained. Recovery adds
+only relationships originating from the policy subjects in Policy-Subject
+Reconciliation above. The accepted prerequisite migration table exactly
+matches its mapped old and new natural-key subsets; its only dispositions are
+`retain` and `reclassify`. Every relationship outside that table is identical
+across the pre-prerequisite and current sets. For every mapped row,
+applicability, scopes, propagation, evidence owner, rationale, groups, and
+traversal remain equal; `reclassify` changes only the admitted relation and
+derived edge identity.
+
+Every policy subject above resolves to one active canonical policy unit at the
+module and heading recorded by the semantic-impact inventory, has nonempty
+content and representation/structural digests, and compiles as a relationship
+source. Router and profile projections, the six registered recovery suites,
+generated contract freshness, canonical contract validation, and focused
+metadata, policy-impact, graph, analysis, engine, and verifier behavior all
+revalidated without requiring a protected-consumer mutation.
+
+The complete repository checkpoint passed on this exact content through
+`python3 tools/standards_verifier/verify.py --complete`. The selected recovery
+suites, focused package matrix, contract generation and validation, plan and
+lifecycle checks, generated checker inventory, retained migration checks, and
+`git diff --check` also passed. These executions verify the named semantic and
+set-equality claims above; diagnostic corpus totals are not acceptance oracles.
+
 ## Deferred Coverage Work
 
 Milestone 1 freezes the relationship and horizon authority. Milestone 2 must

@@ -1204,3 +1204,26 @@ superseded by the discovery-admission transition in the active plan.
   protected consumers remain outside mutation authority.
 - Next operation: re-resolve `S` and `E`, derive `R`, prove exact closure, and
   compare the implemented semantic graph against the admitted authorities.
+
+## 2026-08-25 - Milestone 1 Authority Reconciliation
+
+- The audit-selected suite IDs resolve through the canonical registry to exact
+  definitions and registered inputs; every exact non-registry path resolves,
+  no wildcard exists, and `W intersect R` is empty. Canonical set digests and
+  the complete derivation result are recorded in the consumer-dispositions
+  report without introducing another membership manifest.
+- Compiled comparison spans planning baseline `3439aae9540786d9734431e633ea5b62afb50592`,
+  pre-prerequisite recovery boundary `cb6abdb89afaa4fca25706cd42f621a8c762480f`,
+  and the current start tree. All baseline relationships are retained; recovery
+  additions originate only from the audited policy subjects; the prerequisite
+  migration table exactly matches its mapped retain/reclassify subsets; every
+  unlisted relationship and every non-relation semantic field remains equal.
+- Every audited policy-unit ID resolves once at its exact module/heading
+  locator and compiles as a relationship source. Router/profile projections,
+  registered recovery suites, generated contract artifacts, and focused
+  package behavior revalidated without changing a frozen or protected path.
+- Every mapped consumer retains one non-blocked disposition. Focused recovery
+  verification and `python3 tools/standards_verifier/verify.py --complete`
+  passed on the reconciled content. The only remaining Milestone 1 operation is
+  to commit this evidence and record that exact parent as the frozen boundary;
+  Milestone 2 remains blocked until that mechanical transition.
