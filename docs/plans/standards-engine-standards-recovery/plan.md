@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 start transition
+**Current phase:** Milestone 2 final coverage and exact-tree acceptance
 
-**Next slice:** start final coverage from the exact current lifecycle head
+**Next slice:** freeze the exact authority view and derive final coverage
 
 **Acceptance status:** `partial`
 
@@ -39,6 +39,10 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 **Milestone 1 frozen boundary:** commit
 `7f533f59ddd0120a08c36e85f1c631eedbbe0caa`, tree
 `70f2ec4f249ae6eb6774a17443b15943f57bdfec`
+
+**Milestone 2 start base:** commit
+`82881a2e3b811be199d16e5110a85dbd5432d4d7`, tree
+`af9eba1ba718e75a64ad475b406c365651e29aa9`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -332,7 +336,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Verification Strategy
 
@@ -349,8 +353,9 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 has a green frozen boundary. Milestone 2 is planned and awaits an
-  exact-head start before coverage compilation begins.
+- Milestone 1 has a green frozen boundary. Milestone 2 is active from its exact
+  start base; all horizon-affecting inputs are frozen before coverage
+  compilation.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this

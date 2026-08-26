@@ -1242,3 +1242,18 @@ superseded by the discovery-admission transition in the active plan.
   is required before final coverage compilation.
 - Authority effect: no policy, graph, suite, attestation, generated artifact,
   runtime, or package path changes in this transition.
+
+## 2026-08-25 - Milestone 2 Exact-Head Start
+
+- Start base: commit `82881a2e3b811be199d16e5110a85dbd5432d4d7`,
+  tree `af9eba1ba718e75a64ad475b406c365651e29aa9`.
+- Start precondition: the M1 frozen-boundary transition was current `HEAD`, the
+  worktree was clean, and plan structure and lifecycle verification passed.
+- Lifecycle transition: Milestone 2 moves from `Planned` to `Active`; Milestone
+  1 remains `Implemented` and Milestone 0 remains `Accepted`.
+- Frozen authority: policy, graph, horizon, suite, runtime, generated contract,
+  and package-test inputs may not change. Only the exact Milestone 2 write set
+  may be modified.
+- Next operation: derive current coverage subjects and requirements from this
+  exact authority, then reuse or renew attestations strictly by requirement
+  identity and accepted evidence/authorization contracts.
