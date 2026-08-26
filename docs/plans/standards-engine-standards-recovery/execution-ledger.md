@@ -1257,3 +1257,43 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: derive current coverage subjects and requirements from this
   exact authority, then reuse or renew attestations strictly by requirement
   identity and accepted evidence/authorization contracts.
+
+## 2026-08-25 - Milestone 2 Final Coverage Compilation
+
+- Frozen execution boundary: commit
+  `f037ab11c6bdcda8b61a64c5aa1932e86570096b`, tree
+  `212206c6aeb60830c3bed5df392358ff953590a2`.
+- Authority result: provider-v3 horizon, compiled declaration, authoring,
+  provider, catalog, fact-schema, and relationship-kind identities remain
+  unchanged from the accepted prerequisite authority.
+- Coverage result: canonical compilation proves exact equality of active
+  policy-unit, requirement, attestation, and generated-certificate subject
+  sets. Every current attestation was reused; no attestation file changed.
+- Consumer result: the exact protected closure retains one non-blocked
+  disposition per mapped consumer, and the independent horizon exposes no
+  missing consumer class.
+- Evidence: exact authority identities, canonical map digests, and every
+  subject binding are recorded in
+  `reports/standards-recovery-coverage.md`.
+- Next operation: run the complete final candidate verification matrix before
+  recording a clean candidate commit and tree.
+
+## 2026-08-25 - Standards-Recovery Candidate Verification
+
+- Focused module result: applicability, metadata, generic graph,
+  policy-impact, repository graph, analysis, engine, and verifier package suites
+  all passed.
+- Contract result: generated projection freshness and canonical contract
+  validation passed as separate checks.
+- Repository result: every registered declarative suite passed and
+  `python3 tools/standards_verifier/verify.py --complete` passed every retained
+  migration checker.
+- Governance result: plan structure, exact lifecycle diagnostics, generated
+  migration inventory, and diff hygiene passed.
+- Lint result: every Python path changed from planning comparison baseline
+  `3439aae9540786d9734431e633ea5b62afb50592` passed Ruff. Pre-existing broad
+  lint debt in protected files is not silently incorporated into this recovery.
+- Candidate record: `reports/standards-recovery-candidate.md` records the
+  source-complete result without a recursive commit/tree claim.
+- Next operation: commit the exact candidate, then obtain independent Standards
+  and specification review bound to that commit and tree.

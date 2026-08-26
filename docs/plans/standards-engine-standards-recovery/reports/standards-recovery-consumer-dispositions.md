@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Implemented authority reconciled; final recovery verification pending`
+**Status:** `Final coverage compiled; exact-tree acceptance pending`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -172,9 +172,9 @@ set-equality claims above; diagnostic corpus totals are not acceptance oracles.
 
 ## Deferred Coverage Work
 
-Milestone 1 freezes the relationship and horizon authority. Milestone 2 must
-rederive the resulting coverage requirements, revalidate exact reusable
-attestations, renew only requirements whose identity changed, generate valid
-certificates, and prove exact subject equality before final acceptance. The
-accepted prerequisite coverage is valid for its exact requirement identities;
-it does not accept this recovery or authorize runtime or protected-test edits.
+Milestone 2 rederived every requirement from the frozen authority and reused
+every dependency-valid attestation without modification. The exact active
+policy-unit, requirement, attestation, and generated-certificate subject sets
+are equal, as recorded in [final coverage evidence](standards-recovery-coverage.md).
+This result does not accept the recovery or authorize runtime or protected-test
+edits; candidate verification and independent review remain pending.

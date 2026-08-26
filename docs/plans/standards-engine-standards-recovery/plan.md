@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2 final coverage and exact-tree acceptance
 
-**Next slice:** freeze the exact authority view and derive final coverage
+**Next slice:** commit the exact candidate and obtain independent review
 
 **Acceptance status:** `partial`
 
@@ -80,16 +80,16 @@ acceptance. Broader A1b implementation and all A2 work remain excluded.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| SR-A1 | Each defect family has normative policy with stable policy-unit identity, exact locator, and non-overlapping ownership. | `contract` | `not-applicable` | `automated` | `pending` | Pending final locator and ownership verification |
-| SR-A2 | Router prose and executable projection select the Generated Contract profile and required owners, preserve conditional IPC and Language Binding selection, and expose unresolved facts. | `user-workflow` | `not-applicable` | `automated` | `pending` | Pending final Router fixture verification |
-| SR-A3 | Prior and current semantic graphs are compared, every changed policy unit has valid coverage, and no empty impact result is accepted without a certificate. | `integration` | `not-applicable` | `automated` | `pending` | Pending final graph and coverage reconciliation |
+| SR-A1 | Each defect family has normative policy with stable policy-unit identity, exact locator, and non-overlapping ownership. | `contract` | `not-applicable` | `automated` | `satisfied` | [Consumer reconciliation](reports/standards-recovery-consumer-dispositions.md#policy-subject-reconciliation) and [candidate verification](reports/standards-recovery-candidate.md#verification) |
+| SR-A2 | Router prose and executable projection select the Generated Contract profile and required owners, preserve conditional IPC and Language Binding selection, and expose unresolved facts. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | Registered recovery routing suite and [candidate verification](reports/standards-recovery-candidate.md#verification) |
+| SR-A3 | Prior and current semantic graphs are compared, every changed policy unit has valid coverage, and no empty impact result is accepted without a certificate. | `integration` | `not-applicable` | `automated` | `satisfied` | [Graph reconciliation](reports/standards-recovery-consumer-dispositions.md#milestone-1-reconciliation-evidence) and [final coverage](reports/standards-recovery-coverage.md) |
 | SR-A4 | Every selected consumer has exactly one current non-blocked disposition supported by reviewed evidence. | `integration` | `not-applicable` | `manual` | `pending` | Pending final independent disposition review |
-| SR-A5 | Normative policy, policy units, relationships, prompts, templates, fixtures, suites, and verifier support agree at one exact tree. | `integration` | `not-applicable` | `automated` | `pending` | Pending coordinated projection verification |
-| SR-A6 | Generated freshness and generated semantic correctness are proved separately. | `contract` | `not-applicable` | `automated` | `pending` | Pending final evidence-lane verification |
-| SR-A7 | Recovery distinguishes local agreement from external conformance, records the accepted A1 nonconformance, and assigns runtime correction to A1b. | `contract` | `not-applicable` | `automated` | `pending` | Pending final known-nonconformance classification evidence |
-| SR-A8 | Schema instance equality and content-identity canonicalization are exercised as separate contracts. | `contract` | `not-applicable` | `automated` | `pending` | Pending final equality-domain fixture verification |
-| SR-A9 | Immutable authority reconstruction uses a fresh public process and remains unaffected by post-capture source mutation. | `system` | `not-applicable` | `automated` | `pending` | Pending final cold-process evidence |
-| SR-A10 | Every negative fixture satisfies unrelated preconditions and proves its exact intended diagnostic. | `focused` | `not-applicable` | `automated` | `pending` | Pending final isolated-negative evidence |
+| SR-A5 | Normative policy, policy units, relationships, prompts, templates, fixtures, suites, and verifier support agree at one exact tree. | `integration` | `not-applicable` | `automated` | `satisfied` | [Candidate result and verification](reports/standards-recovery-candidate.md) |
+| SR-A6 | Generated freshness and generated semantic correctness are proved separately. | `contract` | `not-applicable` | `automated` | `satisfied` | Generated freshness plus registered semantic-conformance suite in [candidate verification](reports/standards-recovery-candidate.md#verification) |
+| SR-A7 | Recovery distinguishes local agreement from external conformance, records the accepted A1 nonconformance, and assigns runtime correction to A1b. | `contract` | `not-applicable` | `automated` | `satisfied` | [JSON Schema instance-equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
+| SR-A8 | Schema instance equality and content-identity canonicalization are exercised as separate contracts. | `contract` | `not-applicable` | `automated` | `satisfied` | [Equality reproduction](reports/json-schema-instance-equality-reproduction.md) and registered generated-contract semantic-conformance suite |
+| SR-A9 | Immutable authority reconstruction uses a fresh public process and remains unaffected by post-capture source mutation. | `system` | `not-applicable` | `automated` | `satisfied` | Registered immutable-authority-closure suite and public cold-process package tests in [candidate verification](reports/standards-recovery-candidate.md#verification) |
+| SR-A10 | Every negative fixture satisfies unrelated preconditions and proves its exact intended diagnostic. | `focused` | `not-applicable` | `automated` | `satisfied` | [Exact negative diagnostics](reports/historical-a1-repair-reproductions.md#exact-negative-diagnostics) and registered recovery suites |
 | SR-A11 | Generated closure, public result, semantic-version identity, and JSON Schema equality repair families are reproduced without changing A1 runtime behavior. | `contract` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) and [equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
 | SR-A12 | Immutable reads and cold reconstruction are reproduced through their public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) |
 | SR-A13 | Historical acceptance-oracle failures are reproduced at their intended failure points without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `satisfied` | [Exact negative diagnostics](reports/historical-a1-repair-reproductions.md#exact-negative-diagnostics) |
@@ -315,16 +315,16 @@ writable in this milestone.
 
 **Tasks:**
 
-- [ ] Freeze every horizon-affecting input before compiling final requirements.
-- [ ] Derive current subjects and requirements mechanically. Revalidate exact
+- [x] Freeze every horizon-affecting input before compiling final requirements.
+- [x] Derive current subjects and requirements mechanically. Revalidate exact
   reusable attestations and renew only requirements whose identity or accepted
   evidence/authorization contract changed.
-- [ ] Generate certificates and prove exact active-policy-unit, requirement,
+- [x] Generate certificates and prove exact active-policy-unit, requirement,
   attestation, and certificate subject equality with no stale, duplicate,
   extra, missing, or blocked subject.
-- [ ] Prove every selected consumer has exactly one current non-blocked
+- [x] Prove every selected consumer has exactly one current non-blocked
   disposition and no independent-horizon member is missing.
-- [ ] Run all focused package tests, contract generation/validation, registered
+- [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
 - [ ] Record one candidate commit/tree without claiming acceptance.
