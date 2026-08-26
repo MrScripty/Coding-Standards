@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Implemented`
 
-**Current phase:** Milestone 2 final coverage and exact-tree acceptance
+**Current phase:** Milestone 2 governance correction complete
 
-**Next slice:** commit the exact candidate and obtain independent review
+**Next slice:** start exact-tree verification from the clean implementation boundary
 
 **Acceptance status:** `partial`
 
@@ -70,11 +70,12 @@ Generated Contract routing explicit and mutually consistent across normative
 policy, semantic metadata, agent entry points, fixtures, and executable
 verification.
 
-The six policy families and their projections exist in the current tree. The
-remaining work is to reconcile that implemented authority against the accepted
-policy-impact v2 prerequisite, freeze the final recovery authority, prove exact
-coverage and consumer dispositions, and obtain independent exact-tree
-acceptance. Broader A1b implementation and all A2 work remain excluded.
+The six policy families, reconciled graph, protected consumer closure, and
+final coverage evidence are implemented. Candidate `3b2ffe39851ef6b5e8b51b4c5ead1e68292e40d0`
+was rejected because current governance documents retained superseded
+pre-start narration. The remaining work is the admitted governance-only
+correction, a new exact candidate, and independent acceptance. Broader A1b
+implementation and all A2 work remain excluded.
 
 ## Objective Acceptance
 
@@ -93,7 +94,7 @@ acceptance. Broader A1b implementation and all A2 work remain excluded.
 | SR-A11 | Generated closure, public result, semantic-version identity, and JSON Schema equality repair families are reproduced without changing A1 runtime behavior. | `contract` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) and [equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
 | SR-A12 | Immutable reads and cold reconstruction are reproduced through their public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) |
 | SR-A13 | Historical acceptance-oracle failures are reproduced at their intended failure points without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `satisfied` | [Exact negative diagnostics](reports/historical-a1-repair-reproductions.md#exact-negative-diagnostics) |
-| SR-A14 | One clean candidate commit and tree pass focused recovery checks and all registered repository verification. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
+| SR-A14 | One clean candidate commit and tree pass focused recovery checks and all registered repository verification. | `integration` | `not-applicable` | `automated` | `pending` | Pending replacement exact-tree candidate after governance correction |
 | SR-A15 | An independent reviewer accepts the exact candidate, final coverage, dispositions, and objective claims with no blocked consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent recovery acceptance |
 
 ## Scope
@@ -336,7 +337,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ## Verification Strategy
 
@@ -353,9 +354,9 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 has a green frozen boundary. Milestone 2 is active from its exact
-  start base; all horizon-affecting inputs are frozen before coverage
-  compilation.
+- Milestone 1 has a green frozen boundary. Milestone 2 implementation and its
+  governance correction are complete; exact-tree verification has not yet
+  started.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
@@ -411,4 +412,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Implemented`

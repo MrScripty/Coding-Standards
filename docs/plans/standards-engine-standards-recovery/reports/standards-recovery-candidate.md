@@ -10,7 +10,8 @@
 `7f533f59ddd0120a08c36e85f1c631eedbbe0caa`, tree
 `70f2ec4f249ae6eb6774a17443b15943f57bdfec`
 
-This report records the source-complete standards-recovery candidate. It does
+This report records the source-complete replacement standards-recovery
+candidate after the governance-only correction tracked by `SESR-031`. It does
 not claim its own commit identity recursively. The independent acceptance
 report must bind the exact clean candidate commit and tree that contain this
 report. It does not admit A1b planning, A1b runtime work, or A2.

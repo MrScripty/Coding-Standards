@@ -101,8 +101,10 @@ the shared compiler, graph, analysis, verifier, public-contract, and coverage
 projections used by this report. Its current certification proves exact
 policy-unit/requirement/attestation/certificate subject equality through one
 compiled Interface. This migration changes no six-policy consumer disposition
-below and does not accept standards recovery. The prerequisite is independently
-accepted; a separately admitted recovery-resume transition remains required.
+below and does not accept standards recovery. The prerequisite and the separate
+recovery-resume transition are independently accepted and complete; Milestone 1
+reconciliation and Milestone 2 coverage below derive from that admitted
+authority.
 
 | Policy-unit source | Consumer projection result |
 | --- | --- |

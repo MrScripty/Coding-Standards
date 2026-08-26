@@ -1297,3 +1297,45 @@ superseded by the discovery-admission transition in the active plan.
   source-complete result without a recursive commit/tree claim.
 - Next operation: commit the exact candidate, then obtain independent Standards
   and specification review bound to that commit and tree.
+
+## 2026-08-25 - Exact-Candidate Rejection And Governance Replan
+
+- Rejected candidate: commit
+  `3b2ffe39851ef6b5e8b51b4c5ead1e68292e40d0`, tree
+  `e227648595028591dc1fefa7f5ac3f40d5fbf5e4`.
+- Independent Standards finding: current plan objective/next-slice narration,
+  one disposition-report statement, and `SESR-030` retained superseded
+  pre-start lifecycle authority despite completed M1 reconciliation and M2
+  coverage.
+- Independent specification finding: the stale disposition authority prevents
+  final SR-A4 review even though exact consumer, coverage, and behavioral
+  evidence is green.
+- Lifecycle result: candidate `3b2ffe39851ef6b5e8b51b4c5ead1e68292e40d0`
+  is `Superseded` for acceptance by this governance-only replacement decision.
+  Milestone 2 remains `Active`; SR-A4, SR-A14, and SR-A15 remain pending.
+- Replacement scope: only current plan, issue, ledger, disposition, and
+  candidate-report narration may change. Policy, graph, horizon, attestation,
+  fixture, suite, generated artifact, runtime, package-test, A1b, and A2
+  authority remain frozen.
+- Preserved evidence: both reviewers confirmed exact protected closure, final
+  coverage subject equality, focused package behavior, declarative suites,
+  complete checkpoint, generated freshness, contract validation, scoped Ruff,
+  and diff hygiene. The correction changes no behavioral acceptance oracle.
+- Next operation: replace the stale statements, verify governance and frozen
+  coverage, commit a clean replacement candidate, and repeat exact-tree review.
+
+## 2026-08-25 - Governance Correction Implemented
+
+- Current-authority correction: the plan objective and next slice now describe
+  completed M1 reconciliation and M2 coverage; the disposition report records
+  the completed resume transition; and `SESR-030` records completed M1
+  execution rather than future eligibility.
+- Replan authority: `SESR-031` owns the rejected-candidate blocker, affected
+  objectives, bounded governance repair, and renewed-review closure rule.
+- Preserved boundary: coverage horizon and requirement, attestation, and
+  certificate map digests remain unchanged. Generated migration inventory,
+  plan structure/lifecycle, and diff hygiene are green.
+- Lifecycle transition: the plan and Milestone 2 move from `Active` to
+  `Implemented`. SR-A4, SR-A14, and SR-A15 remain pending.
+- Next operation: commit this implementation boundary, then perform a separate
+  exact-head `verify` transition before dispatching independent review.
