@@ -56,14 +56,6 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `8bd77f93655d53d83cee2135282c09f4cfba1e92`, tree
 `3e95e3c6daf3b9d8b687a84838974df152445eb7`
 
-**Superseded verification candidate:** commit
-`7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
-`35823701b4ea400371c0de196e3b18d7dcaa834d`
-
-**Superseded semantic-oracle replan candidate:** commit
-`6cebe51e354f9691aa5122aa01c7f7c2215161e4`, tree
-`96589746ce9e5138a3314dc2e81fc2d710963ed0`
-
 **Reviewed semantic-oracle recovery candidate:** commit
 `86b94811e4a2c5d30ab79e41a864b67b1fc7b96f`, tree
 `371ea74b60fef144d47d43cc38daaf3ad5f7faaa`
@@ -105,8 +97,8 @@ verification.
 The six policy families, reconciled graph, and coverage architecture remain
 implemented. The admitted two-test semantic-oracle correction is implemented,
 all current authority owners are reconciled, and every frozen coverage identity
-remains unchanged. The current transition tree is the exact replacement
-verification candidate. Only independent review and the authorized acceptance
+remains unchanged. The current clean verification tree is the exact replacement
+candidate. Only independent review and the authorized acceptance
 transition remain. Broader A1b implementation and all A2 work remain excluded.
 
 ## Objective Acceptance
@@ -423,8 +415,6 @@ accepting the exact clean candidate tree.
 - Milestone 1 remains the frozen authority boundary. Milestone 2 implementation
   and automated verification are complete; independent exact-tree review is in
   progress.
-- Candidate `7a54d5fe7778f481278e4f21a12863d2f261b280` is superseded by the
-  mutable-threshold and current-authority findings.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this

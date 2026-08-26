@@ -1598,3 +1598,25 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: run the exact-candidate verification gates, then obtain
   independent Standards and specification review of the resulting commit and
   tree.
+
+## 2026-08-25 - Replacement Candidate Current-State Rejection
+
+- Rejected candidate: commit
+  `2419316a8c2c9b8fe212fc62170dadf3898d31c4`, tree
+  `751e606733f28094ba15188c016fdd4774f55b80`.
+- Standards finding: the active plan retained two superseded candidate
+  identities and repeated one obsolete historical blocker even though current
+  policy assigns rejected and superseded protocol history to this ledger and
+  reports.
+- Supersession: candidate `2419316a8c2c9b8fe212fc62170dadf3898d31c4`
+  is `Superseded`. Its implementation, direct-child lifecycle chain, automated
+  evidence, dispositions, and frozen coverage identities remain valid.
+- Replacement decision: remove historical candidate identities and blockers
+  from current plan authority, retain their existing ledger/report records,
+  and describe the resulting non-recursive verification tree consistently.
+- Preserved boundary: Milestone 2 remains `Verifying`; no runtime, test,
+  coverage, disposition, policy, graph, suite, fixture, generated artifact,
+  A1b, or A2 authority changes.
+- Next operation: verify and commit the current-state correction as one new
+  clean replacement candidate, then repeat independent Standards and
+  specification review.
