@@ -30,6 +30,11 @@ Create or revise an implementation plan. Do not implement source changes.
 13. When one defect reveals a repeated invariant failure, stop the local
     repair. Inventory the invariant family, sibling producers and consumers,
     authority projections, and required dispositions before revising scope.
+14. Before one artifact becomes canonical for several concerns, record its
+    owned responsibility, referenced authorities, independent change axes, and
+    lifecycle owners. Scope each version and identity invalidation to a proven
+    compatibility promise; file, schema, generator, build, or release
+    co-location is not that proof.
 
 Stop for clarification when authoritative facts cannot support a valid plan.
 Do not add fallback or compatibility behavior without an actual routed contract.

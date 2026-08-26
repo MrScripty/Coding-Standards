@@ -131,6 +131,30 @@ rationale = "Fixture covers semantic closure and unsupported behavior."
 
 [[relationships]]
 source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture verifies that generated declaration semantics may reference but do not acquire independent authority."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture verifies generated versions against compatibility and material invalidation scopes."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
+consumer = "contract-authority-scope"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Suite enforces the added generated-boundary authority and version projections."
+
+[[relationships]]
+source = "profile.boundary.generated-contract.semantic-closure"
 consumer = "generated-contract-semantic-conformance"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }

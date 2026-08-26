@@ -33,6 +33,33 @@ deployment, trust, scaling, lifecycle, and change facts. Do not require a
 universal layer count, layer name, directory tree, source-root README threshold,
 or inward-dependency diagram.
 
+## Authority Scope Admission
+
+Before a module, schema, manifest, registry, model, interface, or other artifact
+becomes canonical for more than one concern, record the responsibility it
+owns, the concerns it only references, the owner and lifecycle of each concern,
+and the reasons those concerns change. Canonical placement is an ownership
+decision; the ability to contain, serialize, validate, generate, or distribute
+information does not transfer authority for that information.
+
+Admit one authority scope only when its concerns form one coherent
+responsibility with aligned owners, lifecycle, invariants, and change reasons.
+When concerns can change independently, keep their authorities independently
+replaceable even if one artifact references or packages them together. A
+shared file, data format, generator, deployment, release, or repository
+location is not evidence of a shared responsibility.
+
+The selected boundary should hide more implementation detail than it exposes
+through its interface and localize the complexity required to uphold its
+responsibility. If removing one concern would leave unrelated fields,
+versions, invalidation, consumers, or policy in place, treat that as evidence
+of separate authority unless an explicit shared invariant proves otherwise.
+
+Missing owner, lifecycle, or change facts are `unavailable`; contradictory
+authority is `invalid`. Do not fall back to an umbrella artifact, the current
+file boundary, or a single version merely because separation requires an
+adapter or explicit composition.
+
 ## Dependency Direction And Services
 
 Dependencies point toward the owner of the stable contract, not toward a

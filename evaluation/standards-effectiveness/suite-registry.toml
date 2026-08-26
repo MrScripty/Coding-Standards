@@ -481,6 +481,11 @@ path = "evaluation/standards-effectiveness/suites/contract-semantic-preservation
 requires = []
 
 [[suites]]
+id = "contract-authority-scope"
+path = "evaluation/standards-effectiveness/suites/contract-authority-scope.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-30-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-30-decomposition.toml"
 requires = ["contract-artifact-selection", "contract-semantic-preservation"]

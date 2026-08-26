@@ -1,6 +1,18 @@
 schema_version = 1
 
 [[policy_unit]]
+id = "topic.contracts.declaration-and-semantic-authority"
+module = "topic.contracts"
+heading_path = ["Declaration And Semantic Authority"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.contracts.version-scope-and-invalidation"
+module = "topic.contracts"
+heading_path = ["Version Scope And Invalidation"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "topic.contracts.generated-semantic-conformance"
 module = "topic.contracts"
 heading_path = ["Generated Contract Semantic Conformance"]

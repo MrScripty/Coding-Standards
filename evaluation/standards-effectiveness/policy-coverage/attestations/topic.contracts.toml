@@ -1,25 +1,56 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:a9867f79341e229bc600913bbec5a7e748638419cb1a7a340b9492e9f8146fa9"
+requirement = "coverage-requirement:sha256:65731a8dbc66f912849659d77c314ebd18fa36a4ab0a7740e580bf7e5a8ec12a"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.generated-semantic-conformance coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact topic.contracts.declaration-and-semantic-authority coverage view and direct consumer dispositions were reviewed against the frozen provider-v3 horizon."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:c8f6c0082c61f7d89c693d3937d9d306cdc2e58e46335eab73012fc9b8420722"
+requirement = "coverage-requirement:sha256:0e1690a636d801148dca0daa3ec86948c4449fd6cf3180f17e7253bb245328af"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.schema-dialect-and-vocabulary coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact topic.contracts.version-scope-and-invalidation coverage view and direct consumer dispositions were reviewed against the frozen provider-v3 horizon."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:ceb4a77c5a7ddbfc697ae2639d1ecd07eeadbb5c621aab0886c048e20ad46762"
+requirement = "coverage-requirement:sha256:901d7eacd8480f4451abfcfa91b8c705b5847915213fda3ceb45da865d653c60"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.identity-versus-instance-equality coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact topic.contracts.generated-semantic-conformance coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:6dff7047c607f9cc6a92b699520a78975ad296509ca3fba0f911e66fce8ddb80"
+conclusion = "complete"
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
+explicit_exclusions = []
+rationale = "The exact topic.contracts.schema-dialect-and-vocabulary coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:983de8da59245d3d3b29d5722321d28753d6491f2090e7dd77416e1a8c3af3dd"
+conclusion = "complete"
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
+explicit_exclusions = []
+rationale = "The exact topic.contracts.identity-versus-instance-equality coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"

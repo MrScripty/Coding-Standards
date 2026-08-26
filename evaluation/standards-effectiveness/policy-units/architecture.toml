@@ -1,6 +1,12 @@
 schema_version = 1
 
 [[policy_unit]]
+id = "topic.architecture.authority-scope-admission"
+module = "topic.architecture"
+heading_path = ["Authority Scope Admission"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "topic.architecture.immutable-authority-closure"
 module = "topic.architecture"
 heading_path = ["Immutable Authority Closure"]

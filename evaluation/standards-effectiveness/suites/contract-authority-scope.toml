@@ -1,0 +1,189 @@
+schema_version = 1
+id = "contract-authority-scope"
+owner = "topic.contracts"
+description = "Canonical authority and version scopes follow coherent responsibilities, semantic owners, compatibility promises, and material identity effects."
+
+[[checks]]
+id = "authority-scope-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/authority-scope-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+responsibilities = ["coherent", "independent", "unknown"]
+owners = ["aligned", "contradictory", "distinct", "missing"]
+lifecycles = ["independent", "shared", "unknown"]
+claimed_authority = ["missing", "referenced", "scoped", "umbrella"]
+expected = ["allow", "separate-authority", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "owners", op = "eq", value = "missing" },
+  { field = "responsibilities", op = "eq", value = "unknown" },
+  { field = "lifecycles", op = "eq", value = "unknown" },
+  { field = "claimed_authority", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+field = "owners"
+op = "eq"
+value = "contradictory"
+[[checks.rules]]
+outcome = "separate-authority"
+[checks.rules.when]
+all = [
+  { field = "claimed_authority", op = "eq", value = "umbrella" },
+  { any = [
+    { field = "responsibilities", op = "eq", value = "independent" },
+    { field = "owners", op = "eq", value = "distinct" },
+    { field = "lifecycles", op = "eq", value = "independent" },
+  ] },
+]
+
+[[checks]]
+id = "declaration-authority-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+declaration_scope = ["domain", "mixed", "representation", "unknown"]
+semantic_owner = ["contradictory", "distinct", "missing", "same"]
+extension_behavior = ["not-applicable", "reference", "transfer"]
+capability = ["supported", "unsupported"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "declaration_scope", op = "eq", value = "unknown" },
+  { field = "semantic_owner", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "semantic_owner", op = "eq", value = "contradictory" },
+  { field = "extension_behavior", op = "eq", value = "transfer" },
+]
+
+[[checks]]
+id = "version-scope-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+promises = ["coherent", "independent", "one", "unknown"]
+version_scope = ["missing", "separate", "shared", "umbrella"]
+coupling_basis = ["build", "compatibility", "file", "none", "release"]
+identity_effect = ["material", "not-applicable", "unknown", "unrelated"]
+expected = ["allow", "separate-versions", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "promises", op = "eq", value = "unknown" },
+  { field = "version_scope", op = "eq", value = "missing" },
+  { field = "identity_effect", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+field = "identity_effect"
+op = "eq"
+value = "unrelated"
+[[checks.rules]]
+outcome = "separate-versions"
+[checks.rules.when]
+all = [
+  { field = "version_scope", op = "eq", value = "umbrella" },
+  { any = [
+    { field = "promises", op = "eq", value = "independent" },
+    { field = "coupling_basis", op = "ne", value = "compatibility" },
+  ] },
+]
+
+[[checks]]
+id = "architecture-policy"
+type = "text"
+path = "topics/architecture.md"
+required = [
+  "## Authority Scope Admission",
+  "the concerns it only references",
+  "the ability to contain, serialize, validate, generate, or distribute",
+  "keep their authorities independently",
+  "replaceable even if one artifact references",
+  "If removing one concern",
+]
+prohibited = []
+
+[[checks]]
+id = "contracts-policy"
+type = "text"
+path = "topics/contracts.md"
+required = [
+  "## Declaration And Semantic Authority",
+  "without transferring that ownership",
+  "## Version Scope And Invalidation",
+  "one coherent compatibility or evolution promise",
+  "Representation-only",
+  "does not invalidate semantic identity",
+]
+prohibited = []
+
+[[checks]]
+id = "generated-contract-projection"
+type = "text"
+path = "profiles/boundaries/generated-contract.md"
+required = [
+  "declaration's authority scope",
+  "independently changing semantic",
+  "compatibility and material",
+  "invalidation scope",
+  "does not transfer those authorities",
+  "umbrella version",
+]
+prohibited = []
+
+[[checks]]
+id = "planning-projections"
+type = "text"
+path = "prompts/planning.md"
+required = [
+  "owned responsibility, referenced authorities, independent change axes",
+  "Scope each version and identity invalidation",
+]
+prohibited = []
+
+[[checks]]
+id = "implementation-projections"
+type = "text"
+path = "prompts/implement-plan.md"
+required = [
+  "Preserve every admitted authority and version scope",
+  "does not justify",
+  "an umbrella version or unrelated identity invalidation",
+]
+prohibited = []
+
+[[checks]]
+id = "plan-template-projection"
+type = "text"
+path = "templates/PLAN-TEMPLATE.md"
+required = [
+  "Canonical authority scope and referenced authorities",
+  "Version and identity-invalidation scopes",
+]
+prohibited = []

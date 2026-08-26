@@ -1,0 +1,10 @@
+case	responsibilities	owners	lifecycles	claimed_authority	expected
+coherent_deep_module	coherent	aligned	shared	umbrella	allow
+representation_references_domain	independent	distinct	independent	referenced	allow
+umbrella_independent_concerns	independent	distinct	independent	umbrella	separate-authority
+same_owner_independent_lifecycles	independent	aligned	independent	umbrella	separate-authority
+missing_owner	coherent	missing	shared	scoped	typed-unavailable
+unknown_lifecycle	coherent	aligned	unknown	scoped	typed-unavailable
+missing_scope	coherent	aligned	shared	missing	typed-unavailable
+unknown_responsibility	unknown	aligned	shared	scoped	typed-unavailable
+contradictory_authority	coherent	contradictory	shared	scoped	typed-invalid

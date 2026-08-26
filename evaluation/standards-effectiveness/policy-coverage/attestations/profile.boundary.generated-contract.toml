@@ -1,17 +1,23 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:3b80d635c1f83d054ee96101b4b41ec304a487b409d51f3d7ba141eb0ad02985"
+requirement = "coverage-requirement:sha256:a8fa38cb36253b46d53232154b75f1709d65b6ebdf3ed5a26a9d5e3701daf80c"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact profile.boundary.generated-contract.applicability coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact profile.boundary.generated-contract.applicability coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:aa0d7552c58cdfe8d4f122f57b35fde59397f7d2799c04eb92ccc40c408a0638"
+requirement = "coverage-requirement:sha256:4ea77dd072426bf304053fc509aa4c846fee721e1d9e7910b14529f75e927a68"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view and direct consumer dispositions were reviewed against the frozen provider-v3 horizon."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"

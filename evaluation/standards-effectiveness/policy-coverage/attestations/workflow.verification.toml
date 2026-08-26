@@ -1,33 +1,45 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:a1a8e579df5b91ab84750e9cc222de70a37fd3cbb11236cf89c858704e576aa7"
+requirement = "coverage-requirement:sha256:a78c5f73f0e92bb80d4d04887f7dfacce06b04230a2141d2b8340d9a25277d05"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.acceptance-claims coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact workflow.verification.acceptance-claims coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:05e1a248dba4a77381f8fc4a4c696b263f128e81ece5790c194e9513a3af6ea9"
+requirement = "coverage-requirement:sha256:5ae8af506032d84b3cc0721e1b25c8aca3cecae467d57e912f8bbf4844fc045d"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.evidence-oracle-boundary coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact workflow.verification.evidence-oracle-boundary coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:52fef9943d995829caba5b72d653a3dae9038a055d0e78356fced08714f77b78"
+requirement = "coverage-requirement:sha256:fb6160e5f47943c8d3a522218fd8ed31fc45368faaa5ca7b1abef3ba9dfb87ca"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.negative-fixture-isolation coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact workflow.verification.negative-fixture-isolation coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:5ca30a8aba98f4c31525f2df1b99467d93981ff1dca5251feca59d0b70e69eec"
+requirement = "coverage-requirement:sha256:e71641f3b02bd2d8b50d96c76aa580e1055951642dfbf9fbaf9355ed53fa0dbb"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.differential-evidence coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact workflow.verification.differential-evidence coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"

@@ -57,6 +57,56 @@ a distinct purpose is `invalid`; an unavailable required artifact mechanism is
 `unsupported`. Do not fall back to an inferred mirror, duplicated schema,
 unrelated implementation dependency, or speculative compatibility artifact.
 
+## Declaration And Semantic Authority
+
+A contract declaration owns only the representation and meanings selected by
+its declared responsibility. Before treating one declaration as canonical for
+several semantic families, identify the owner of each applicable family, such
+as representation, validation, identity, authorization, state transition,
+persistence, projection, and compatibility. The list is illustrative;
+observable meaning and actual ownership select the families.
+
+An annotation, extension, reference, generated model, or validator may project
+or invoke semantics owned elsewhere without transferring that ownership to the
+declaration. Record how each referenced owner is resolved and which executable
+enforces its semantics. Do not create a second interpreter, redefine domain
+policy as declaration metadata, or infer that declaration authority includes
+every concern the artifact can describe.
+
+One owner may legitimately hold declaration and executable or domain semantics
+when they form one coherent responsibility. Distinct owners are also valid
+when the dependency and projection are explicit. Missing semantic authority is
+`unavailable`; contradictory authorities or an attempted ownership transfer by
+annotation are `invalid`; a well-formed semantic family outside the supported
+contract is `unsupported`.
+
+## Version Scope And Invalidation
+
+A version identifies one coherent compatibility or evolution promise. Record
+the promise, authority, consumers, supported overlap, invalidation effect, and
+the representations or behaviors it governs. Several concerns may share a
+version only when they intentionally share that promise; independently
+changing promises require independently scoped versions or an explicit version
+record that preserves their separate identities.
+
+A common file, schema, model, package, generator, build, release, deployment,
+or cutover may coordinate changes without creating one version scope. Do not
+use an umbrella version to force unrelated consumers to migrate together or to
+make an independently compatible concern appear changed.
+
+Include a contract version in content identity, cache invalidation, persisted
+handles, replay closure, or regeneration inputs only when a change to that
+version can materially change the reproduced meaning. Representation-only
+change does not invalidate semantic identity unless the selected contract
+proves that effect. Record that proof rather than coupling every available
+version defensively.
+
+Missing promise, consumer, or invalidation facts are `unavailable`;
+contradictory scopes or identity coupling to an unrelated version are
+`invalid`; and a well-formed version outside the supported promise is
+`unsupported`. Do not fall back to lockstep increments, broad cache busting, or
+the version already present on a containing artifact.
+
 ## Producer-Consumer Semantic Preservation
 
 A structured contract governs every meaning selected by its canonical

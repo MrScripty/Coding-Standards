@@ -84,6 +84,8 @@ Use for cross-layer, stateful, contract-heavy, concurrent, or refactor work.
 - Independent concepts:
 - Intentional coupling:
 - Accidental coupling risk:
+- Canonical authority scope and referenced authorities:
+- Version and identity-invalidation scopes:
 - Policy/state/lifecycle owners:
 - Future changes that should remain independent:
 

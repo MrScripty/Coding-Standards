@@ -2,6 +2,254 @@ schema_version = 2
 owner = "topic.contracts"
 
 [[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The Generated Contract profile projects declaration scope while retaining independently owned executable and domain semantics."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "profile.boundary.language-bindings"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Language-binding schemas and generated wrappers project boundary representation while domain semantics remain in their owner."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "profile.boundary.ipc"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "IPC schemas, decoders, and dispatch handlers preserve distinct declaration and executable semantic authority."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "workflow.build"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Build explicitly owns derivation actions rather than the content contracts they consume."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Planning distinguishes owned responsibility from referenced semantic authorities."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Implementation preserves independently owned semantics across declaration and generated projections."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The plan template records owned and referenced canonical authorities for contract-heavy work."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The canonical declaration contains representation and referenced executable semantics that require distinct ownership review."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_engine/contracts/generate_contract.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The generator projects declaration semantics and must not become an implicit owner for unrelated domain policy."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_engine/contracts/validate_contracts.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The validator executes selected declaration semantics while preserving their declared authority."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The generated representation is a projection, not a transfer of canonical domain authority."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_engine/standards_engine/tools.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The public facade interprets the declaration at a consumer boundary and must retain explicit semantic ownership."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture distinguishes explicit semantic references from missing, contradictory, transferred, and unsupported authority."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "contract-authority-scope"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Suite enforces declaration and semantic authority ownership."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The Generated Contract profile records compatibility and material invalidation scopes for generated versions."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "profile.application.library"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Library compatibility distinguishes coordinated internal modules from independently versioned public and persisted contracts."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "profile.boundary.language-bindings"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Binding, native, and host artifacts use explicit compatibility cohorts rather than a shared version string as proof."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "profile.boundary.ipc"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "IPC version markers and extra-field behavior belong to the selected producer-consumer compatibility promise."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "profile.boundary.persistence"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Persistence consumes Contracts-owned supported-version, identity, migration, and invalidation decisions."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "workflow.release"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Release units and version choices follow the Contracts-owned compatibility promise rather than workspace or artifact co-location."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Planning records version and identity-invalidation scope before implementation."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Implementation rejects umbrella versions and unrelated identity invalidation."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The plan template records version and identity-invalidation scopes for applicable contract-heavy changes."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The interface schema declares interface, domain, handle, and provider versions whose scopes require review."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "tools/standards_engine/contracts/generate_contract.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The generator projects interface version information into multiple generated consumers."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The generated contract carries version constraints and identity selections derived from the declaration."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "tools/standards_engine/standards_engine/tools.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The public facade enforces declared handle versions at the generated boundary."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "tools/standards_analysis/standards_analysis/snapshots.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Snapshot identity records interface and component versions, so material invalidation scope directly affects its identity contract."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "tools/standards_analysis/standards_analysis/resolution.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Analysis reconstruction rejects and projects interface versions through persisted provenance and state identity."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture distinguishes coherent shared promises, separate versions, co-location coupling, and unrelated identity invalidation."
+
+[[relationships]]
+source = "topic.contracts.version-scope-and-invalidation"
+consumer = "contract-authority-scope"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Suite enforces compatibility-promise and material-invalidation version scope."
+
+[[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "router"
 relation = "router-projection"

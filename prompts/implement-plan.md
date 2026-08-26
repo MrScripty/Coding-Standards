@@ -31,6 +31,11 @@ generated freshness for semantic correctness, local agreement for external
 conformance, in-process reconstruction for cold-process reconstruction, or a
 generic fixture failure for the intended negative diagnostic.
 
+Preserve every admitted authority and version scope. A declaration or
+generated artifact may reference independently owned semantics but does not
+acquire them; a co-located schema, generator, build, or release does not justify
+an umbrella version or unrelated identity invalidation.
+
 Stop and re-plan when implementation exposes a repeated invariant failure,
 another affected producer or consumer, an unreviewed generated-contract
 semantic, or an unreviewed implementation-versus-dependency decision. Do not

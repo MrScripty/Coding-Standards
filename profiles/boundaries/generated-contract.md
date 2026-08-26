@@ -37,6 +37,11 @@ Apply the complete generated-contract semantics owned by Contracts. Record the
 canonical declaration, exact dialect and vocabulary, supported semantic
 surface, generator and executable semantics owners, reachable public
 operations, generated outputs, and actual producer and consumer entry points.
+Also record the declaration's authority scope, independently changing semantic
+owners it references, and each version's compatibility and material
+invalidation scope. A declaration may project or invoke independently owned
+semantics; generation does not transfer those authorities to the declaration
+or justify one umbrella version.
 
 Build owns deterministic derivation and stale-output rejection. Verification
 owns claim and oracle sufficiency. Dependencies owns the decision to adopt an

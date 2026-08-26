@@ -140,6 +140,18 @@ id = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-c
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/architecture/authority-scope-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/architecture/authority-scope-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
@@ -169,6 +181,11 @@ metadata = { repository_path = "evaluation/standards-effectiveness/suites/eviden
 id = "generated-contract-semantic-conformance"
 aliases = ["evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml"]
 metadata = { repository_path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml", suite_id = "generated-contract-semantic-conformance", artifact_kind = "enforcement-suite", authority = "evidence" }
+
+[[nodes]]
+id = "contract-authority-scope"
+aliases = ["evaluation/standards-effectiveness/suites/contract-authority-scope.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/contract-authority-scope.toml", suite_id = "contract-authority-scope", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "immutable-authority-closure"

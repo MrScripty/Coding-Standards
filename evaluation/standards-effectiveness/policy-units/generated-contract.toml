@@ -10,4 +10,4 @@ semantic_revision = 1
 id = "profile.boundary.generated-contract.semantic-closure"
 module = "profile.boundary.generated-contract"
 heading_path = ["Semantic Closure"]
-semantic_revision = 1
+semantic_revision = 2

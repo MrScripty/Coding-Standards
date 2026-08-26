@@ -1,0 +1,12 @@
+case	promises	version_scope	coupling_basis	identity_effect	expected
+one_compatibility_promise	one	shared	compatibility	material	allow
+coherent_shared_promises	coherent	shared	compatibility	material	allow
+independent_explicit_versions	independent	separate	none	not-applicable	allow
+file_based_umbrella	independent	umbrella	file	material	separate-versions
+build_based_umbrella	independent	umbrella	build	material	separate-versions
+release_based_umbrella	independent	umbrella	release	material	separate-versions
+coherent_file_based_umbrella	coherent	umbrella	file	material	separate-versions
+unrelated_identity_invalidation	one	shared	compatibility	unrelated	typed-invalid
+missing_version_scope	one	missing	compatibility	material	typed-unavailable
+unknown_compatibility_promise	unknown	shared	compatibility	material	typed-unavailable
+unknown_identity_effect	one	shared	compatibility	unknown	typed-unavailable

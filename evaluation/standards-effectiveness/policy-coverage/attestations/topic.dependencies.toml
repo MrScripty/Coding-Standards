@@ -1,9 +1,12 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:c01424cae2b9ea5db691db525398caf43cc1f48a518037c7eab119ec86f0097f"
+requirement = "coverage-requirement:sha256:10b96d1562b02306386ea6618d818d3806940c132692f5d467a9906e3843956b"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
+evidence = [
+  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+]
 explicit_exclusions = []
-rationale = "The exact topic.dependencies.implementation-versus-dependency coverage view was reviewed against the frozen provider-v3 independent horizon."
-auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
+rationale = "The exact topic.dependencies.implementation-versus-dependency coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
+auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
