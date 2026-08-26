@@ -96,7 +96,7 @@ repository-entrypoints = []
 | `standards-identity` | `tools.standards_identity.standards_identity` | none | none | none |
 | `standards-contracts` | `tools.standards_contracts.standards_contracts` | none | none | `jsonschema==4.26.0`, `referencing==0.37.0` |
 | `standards-metadata` | `tools.standards_metadata.standards_metadata` | none | `standards-identity` | none |
-| `standards-authority` | `tools.standards_authority.standards_authority` | none | `standards-identity` | none |
+| `standards-authority` | `tools.standards_authority.standards_authority` | none | `standards-contracts`, `standards-identity` | none |
 | `standards-policy-impact` | `tools.standards_policy_impact.standards_policy_impact` | none | `repository-graph-engine`, `standards-applicability`, `standards-metadata` | none |
 | `standards-graph` | `tools.standards_graph.standards_graph` | none | `repository-graph-engine`, `standards-metadata`, `standards-policy-impact` | none |
 | `standards-analysis` | `tools.standards_analysis.standards_analysis` | none | `repository-graph-engine`, `standards-applicability`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
@@ -111,7 +111,11 @@ and `from dependency_root.child import name` are invalid. For
 resolved `__all__`; this prevents Python from implicitly loading an unexported
 child module despite the syntactic root import. Cross-Module star imports and
 literal or nonliteral `importlib`/`__import__` bypasses are invalid. Relative and
-absolute imports within the owning Module remain valid.
+absolute imports within the owning Module remain valid only for files beneath
+that Module's package root. A repository entrypoint is an external adapter to
+its owning package and must import owner functionality through the manifest's
+canonical public root; an alternate top-level package spelling is invalid even
+when script-directory insertion would make it importable.
 
 Each public-root `__init__.py` owns exports through exactly one `__all__`
 assignment. The closed export-expression profile permits a tuple of unique
@@ -130,6 +134,34 @@ tracked Python files beneath each manifest root plus its exact
 `repository-entrypoints`. A Git-index completeness pass rejects any tracked
 non-test Python under `tools/` that belongs to neither set. Package test roots
 remain test inputs and do not contribute production requirements.
+
+Clean-environment execution covers every repository entrypoint as well as every
+root/export. Each exact script is invoked with safe-path mode from outside the
+checkout, with the reviewed checkout root as the sole `PYTHONPATH`; mutating
+commands operate only on an isolated repository fixture. This proves that an
+entrypoint does not depend on its script directory, ambient installation, or an
+alternate package spelling. A root/export-only smoke is insufficient.
+
+The Verifier root exports this exact repository-entrypoint Interface. Each
+script imports one named adapter from
+`tools.standards_verifier.standards_verifier` and does no package-path mutation,
+private import, argument parsing, diagnostic adaptation, or domain dispatch of
+its own:
+
+| Repository entrypoint | Canonical root export | Clean execution |
+| --- | --- | --- |
+| `tools/query_edges.py` | `repository_graph_main` | list registered groups from the reviewed checkout |
+| `tools/verify_git_reachability.py` | `git_reachability_main` | verify an explicit manifest in an isolated Git fixture |
+| `tools/standards_verifier/verify.py` | `verifier_main` | list registered suite IDs from the reviewed checkout |
+| `tools/standards_verifier/generate_inventory.py` | `generated_artifacts_main` | check generated artifacts in the reviewed checkout |
+| `tools/standards_verifier/generate_numeric_audit.py` | `numeric_audit_main` | write the snapshot in an isolated repository fixture |
+| `tools/standards_verifier/generate_numeric_retirements.py` | `numeric_retirements_main` | check retirements in the reviewed checkout |
+
+Each adapter owns its parser, typed diagnostics, default-root injection, and
+exit status. The script wrapper supplies only its derived default repository
+root and process arguments. Adapter names are resolved from the root's
+authoritative `__all__`; no entrypoint-name allowlist is copied into the
+verifier check.
 
 A transitive import does not satisfy a missing direct declaration, and an
 unused declaration is invalid. Test-only imports are suite inputs, not
@@ -182,8 +214,10 @@ from tools.standards_verifier import standards_verifier
 ```
 
 This proves the repository's actual local execution boundary without silently
-selecting a build backend. Importability does not prove boundary compliance;
-the AST verifier owns that distinct claim. An otherwise-valid generated-output
+selecting a build backend. The same clean environments execute every exact
+manifest entrypoint against isolated inputs. Importability and execution do not
+prove boundary compliance; the AST verifier owns that distinct claim. An
+otherwise-valid generated-output
 fixture and an otherwise-valid handwritten-facade fixture each cover both a
 below-root private import and a root-form unexported child import and must reach
 the exact typed package-boundary diagnostic. Additional fixtures cover a valid

@@ -29,13 +29,17 @@ All maps use closed typed keys. All sets are sorted and deduplicated by the
 owning typed key before storage. Every referenced handle must resolve and match
 its required object kind before an aggregate object is published.
 
-`standards_authority.get` proves only canonical bytes, handle identity, closed
-record shape, object-local invariants, and dependency existence/kind. It does
-not import Metadata, Analysis, Graph, Applicability, authorization, or provider
-semantics. The bound analysis kernel validates root-relative semantic coherence
-when it resolves or projects an aggregate root. Policy and relationship
-inspection adapters validate snapshot-relative semantics before returning a
-public inspection result.
+`standards_authority.get` proves canonical bytes, handle identity, closed record
+shape, object-local invariants, and dependency existence/kind. It delegates
+every embedded named v11 definition check to the canonical
+`standards_contracts` adapter and owns the envelope, closed stored-payload
+records, identity, dependency-kind, object-local, and authority-DAG checks. It
+does not duplicate schema
+interpretation or import Metadata, Analysis, Graph, Applicability,
+authorization, or provider semantics. The bound analysis kernel validates
+root-relative semantic coherence when it resolves or projects an aggregate
+root. Policy and relationship inspection adapters validate snapshot-relative
+semantics before returning a public inspection result.
 
 Every field shown in an exact record below is required. `T?` is the only
 optional-field notation. `tuple<T>` is an immutable JSON array whose order is
@@ -46,9 +50,10 @@ never an ordering oracle.
 
 Capitalized public types such as `CanonicalId`, `ChangeDescriptor`,
 `EvidenceReference`, and `ReviewScope` mean the exact reachable v11 schema
-definition named in the schema/domain audit. A complete handle value includes
-its kind, schema version, and ID. Digest is `sha256:` followed by 64 lowercase
-hexadecimal digits.
+definition named in the schema/domain audit and validated through
+`standards_contracts`; Authority does not redeclare those definitions. A
+complete handle value includes its kind, schema version, and ID. Digest is
+`sha256:` followed by 64 lowercase hexadecimal digits.
 
 The orders used below are exact: string-like IDs, paths, digests, and handle
 IDs compare Unicode scalar sequences; integers compare numerically; Boolean

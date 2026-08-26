@@ -30,7 +30,7 @@ cardinality.
 | Child artifact inspection | Context, requirement, observation, coverage, certificate, policy, and relationship inspection tests | Repository-controlled | Store every advertised child as a direct typed authority object; remove owner maps, scans, and cache authority |
 | Supplemental implementation node catalog | Standards graph composition, policy-impact compilation, analysis coverage horizon, and verifier | Repository-controlled semantic authority | Replace created/retired implementation artifacts atomically and preserve stable retained identities |
 | Source-owned policy-impact relationships | Contracts, Architecture, Dependencies, Generated Contract, Cross-Platform, and Security policy units plus the closed declaration-source registry | Repository-controlled semantic authority | Register every admitted source explicitly and remap implementation consumers to the new compiler, projection, identity, authority, schema, generated, and facade artifacts |
-| Python package and supported-target metadata | Every manifest and root `__init__.py` in the closed Engine Module dependency table plus exact repository entrypoints | Repository-controlled source-tree dependency, source-ownership, and public-export authority | Declare every production direct-import edge, one public root, and repository entrypoints exactly; resolve root `__all__` statically; reject private, root-form unexported, star, dynamic, or unowned cross-Module imports; and smoke every resolved export without an ambient package or build backend |
+| Python package and supported-target metadata | Every manifest and root `__init__.py` in the closed Engine Module dependency table plus exact repository entrypoints | Repository-controlled source-tree dependency, source-ownership, and public-export authority | Declare every production direct-import edge, one public root, and repository entrypoints exactly; resolve root `__all__` statically; reject private, root-form unexported, star, dynamic, or unowned cross-Module imports; and execute every root, export, and entrypoint without an ambient package, script-directory import, or build backend |
 
 Search at the inventory base found no non-test Python importer outside the
 repository packages, no deployed process or foreign-language binding, and no
@@ -149,6 +149,9 @@ closure. Other durable filesystem families are unsupported in A1b.
 9. Governed source ownership derives from manifest roots and exact repository
    entrypoints. Git-indexed non-test Python under `tools/` with no owner is
    invalid rather than silently outside package enforcement.
+10. Repository entrypoints import owner functionality only through the owner's
+    canonical manifest root and execute under safe-path isolation; own-package
+    private-import permission applies only beneath the package root.
 
 ## Required Evidence
 
@@ -158,7 +161,7 @@ closure. Other durable filesystem families are unsupported in A1b.
 - AST-derived source ownership, manifest/import equality, and root/export checks
   across every production Module and repository entrypoint, including separate
   below-root and root-form-private-child fixtures for generated output and
-  handwritten facade code.
+  handwritten facade code, plus safe-path execution of every exact entrypoint.
 - Mutation-after-capture and genuine cold-process reconstruction with no source
   path or injected private authority.
 - Direct cold inspection for every advertised handle variant.

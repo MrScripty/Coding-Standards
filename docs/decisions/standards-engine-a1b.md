@@ -44,6 +44,7 @@ standards_contracts
   `-- Python standard library
 
 standards_authority
+  |-- standards_contracts
   |-- standards_identity
   `-- Python standard library
 
@@ -69,7 +70,10 @@ the sole executable Draft 2020-12 validator.
 public inspectable object. It is not a general object database: the object-kind
 vocabulary is closed, objects are immutable and content addressed, and no
 enumeration, mutable index, graph traversal, garbage collection, remote store,
-or arbitrary blob API is exposed.
+or arbitrary blob API is exposed. It delegates every embedded v11
+named-definition check to `standards_contracts`; it owns the authority envelope,
+closed stored-payload records, identity, dependency-kind, object-local, and
+authority-DAG invariants. It does not copy or reinterpret the canonical schema.
 
 `standards_analysis` retains change classification, impact selection, fact and
 obligation semantics, coverage decisions, immutable analysis normalization,
@@ -180,8 +184,10 @@ Cross-Module star imports and literal or dynamic import bypasses reject.
 Tracked non-test Python under `tools/` must belong to a manifest root or exact
 repository entrypoint. The verifier consumes manifests and initializers
 directly; it does not copy `__all__` or maintain a package or symbol allowlist.
-Import smoke proves that every resolved export is bound; it does not decide
-boundary compliance.
+Every repository entrypoint imports its owner through the manifest's canonical
+root and is executed with safe-path mode from outside the checkout with only
+the checkout root on `PYTHONPATH`. Root/export and entrypoint smoke prove
+runtime binding; they do not decide boundary compliance.
 
 The lock owns selected transitive versions and wheel hashes. Security,
 provenance, supported-target, and licensing evidence are bound in the
@@ -232,11 +238,14 @@ This preserves the accepted source-race boundary while moving its owner out of
 
 The repository verifies canonical bytes, object ID, envelope, closed object
 kind, payload contract, object-local invariants, dependency existence/kind, and
-handle-kind match on every read. It deliberately does not own Metadata,
-Analysis, Graph, Applicability, authorization, or provider semantics. The bound
-analysis kernel validates root-relative semantic coherence while resolving or
-projecting an aggregate root; policy and relationship inspection adapters
-validate snapshot-relative meaning. Missing content is `unavailable`;
+handle-kind match on every read. Embedded named v11 definitions are validated
+through `standards_contracts`; Authority does not implement or copy their
+schema semantics. Authority's own envelope and stored payload records remain
+closed internal contracts. It deliberately does not own Metadata, Analysis,
+Graph, Applicability, authorization, or provider semantics. The bound analysis
+kernel validates root-relative semantic coherence while resolving or projecting
+an aggregate root; policy and relationship inspection adapters validate
+snapshot-relative meaning. Missing content is `unavailable`;
 contradictory content is `invalid`; and a well-formed unknown version is
 `unsupported`.
 
@@ -456,7 +465,7 @@ policy-unit membership imply a relationship source.
   resolution, target, security, provenance, and licensing evidence.
 - Package manifests and root `__all__` declarations provide one import-boundary
   authority consumed by dependency comparison, static boundary verification,
-  governed-source ownership, and isolated root/export smoke.
+  governed-source ownership, and isolated root/export/entrypoint execution.
 - Relationship declarations remain explicit closed inputs, so adding a
   policy-unit sidecar cannot silently add or omit relationship authority.
 - Materialized derived objects may be regenerated, but direct storage avoids

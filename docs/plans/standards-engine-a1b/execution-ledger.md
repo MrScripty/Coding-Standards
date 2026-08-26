@@ -316,3 +316,35 @@
 - The proposed v11 schema and interface remain byte-identical. No runtime,
   package manifest, policy unit, relationship, fixture, A1, or A2 implementation
   changed. Lifecycle remains `Blocked` pending independent review of C2.
+
+## 2026-08-26 - Candidate C2 Admission Rejection And Replan
+
+- Candidate C2 `c2aea75c85800aec6ac00fcc3b2690f8629845ab`, tree
+  `19074828c41ac1c2d8814578f08604106112ad1c`, passed independent
+  Specification review and failed independent Standards review on four
+  high-severity closure findings.
+- `Superseded`: C2's entrypoint rule treated files outside the package root as
+  own-Module importers and smoked only roots/exports. Verifier entrypoints must
+  call canonical-root adapters and execute from outside the checkout under
+  safe-path mode with only the checkout root on `PYTHONPATH`.
+- `Superseded`: C2's Authority dependency graph declared only Identity while
+  requiring canonical v11 record validation. Authority now declares Contracts
+  directly and delegates embedded named-definition validation to it; Authority
+  retains its closed internal envelope/payload, identity, dependency-kind,
+  object-local, and DAG invariants.
+- `Superseded`: C2's cutover write set admitted attestation files without the
+  closed attestation-source registry. The registry and exact owner-local
+  Dependencies, Cross-Platform, and Security sources now participate in the
+  atomic coverage renewal.
+- `Superseded`: the prior Router projections omitted Commit while prescribing
+  commit creation, exact parentage, history, and terminal lifecycle operations.
+  The current route selects Commit together with Planning, Implementation,
+  Verification, Documentation, Build, Tooling, Architecture, Contracts,
+  Dependencies, Licensing, Security, Diagnostics, Library, Persistence,
+  Generated Contract, Concurrency, Resilience, Release, and Cross-Platform.
+  IPC, Language Binding, and A2 remain unselected for the exact in-process A1b
+  boundary.
+- The proposed v11 schema and interface remain byte-identical. No runtime,
+  package manifest, policy unit, relationship, coverage source, fixture, A1, or
+  A2 implementation changed. Lifecycle remains `Blocked` pending independent
+  exact-tree review of C3.

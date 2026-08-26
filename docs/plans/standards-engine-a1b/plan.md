@@ -5,8 +5,8 @@
 **Current phase:** Replacement planning admission
 
 **Next slice:** Independent exact-tree Standards and Specification review of
-replacement planning candidate C2, including the complete public-import
-consumer migration and root-export contract
+replacement planning candidate C3, including canonical entrypoint execution,
+Authority contract validation, and coverage-source closure
 
 **Acceptance status:** `pending`
 
@@ -35,7 +35,7 @@ any A2 review or implementation begins.
 | A1B-A4 | Every advertised snapshot, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its typed object in a fresh process after source and process mutation; durable publication and cleanup pass on Linux ext4. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `pending` | Pending Milestone 0 |
-| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module imports resolve through those roots and exports; private, star, dynamic, or unowned imports reject; and every public export imports in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6P | Before implementation starts, an independent planning review accepts the selected package provenance, license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
 | A1B-A6L | Final independent review proves the implemented exact lock and provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
 | A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split state store, owner map, scan, compatibility path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
@@ -56,7 +56,8 @@ any A2 review or implementation begins.
 - `jsonschema==4.26.0` as the sole Draft validator and direct use of
   `referencing==0.37.0`.
 - A `standards_authority` Module directly storing the closed set of public
-  inspectable objects through in-memory and directory adapters.
+  inspectable objects through in-memory and directory adapters, using
+  `standards_contracts` as the sole validator for embedded v11 definitions.
 - Contract v11, request v3, result projection v3, analysis contract/schema 7/4,
   public handle v4, authority envelope v1, and identity encoding v2.
 - The exact proposed v11 public schema and interface contract in
@@ -140,13 +141,13 @@ any A2 review or implementation begins.
 | Use `jsonschema.Draft202012Validator` as the sole Draft validator behind one deep project adapter. | Contracts and Dependencies | [A1b ADR](../../decisions/standards-engine-a1b.md), [dependency decision](reports/dependency-and-dialect-decision.md) | Local validator and generated keyword interpreter |
 | Keep schema validation, applicability equality, identity encoding, and domain ordering separate. | Owning domain Modules | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Generic serializer as cross-domain semantics |
 | Use codepoint-preserving identity encoding v2; domain Modules own typed identity records and any semantic normalization. | Identity and domain owners | [Identity/version matrix](reports/identity-version-object-matrix.md) | Recursive NFC identity encoding v1 |
-| Directly store every inspectable object through one closed acyclic immutable authority Interface; readers are lock-free, writers serialize through non-authoritative publication coordination, same-ID publication is idempotent by content identity, and interruption has explicit outcomes. | Architecture, Persistence, Concurrency, and Resilience | [Authority-object contracts](reports/authority-object-contracts.md), [identity/version matrix](reports/identity-version-object-matrix.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage plus owner maps, scans, and caches |
+| Directly store every inspectable object through one closed acyclic immutable authority Interface; delegate embedded v11 definition validation to Contracts; keep readers lock-free; serialize writers through non-authoritative publication coordination; make same-ID publication idempotent by content identity; and expose explicit interruption outcomes. | Architecture, Persistence, Contracts, Concurrency, and Resilience | [Authority-object contracts](reports/authority-object-contracts.md), [identity/version matrix](reports/identity-version-object-matrix.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage plus owner maps, scans, caches, or duplicated schema interpretation |
 | Support one exact Linux ext4 durable-store contract with filesystem-aware identity, handle-relative mutation, explicit aliases, and typed unsupported outcomes. | Cross-Platform and Security | [A1b ADR](../../decisions/standards-engine-a1b.md), [authority-object contracts](reports/authority-object-contracts.md), [migration plan](reports/policy-impact-migration-plan.md) | Operating-system-name inference and path-based validation/use |
 | Remove all schema `x-standards-engine-*` annotations; use one closed interface contract and domain-owned executable contracts. | Contracts and domain owners | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Mixed machine prose in public schema |
 | Build isolated foundations, then perform one atomic production v11 cutover. | Planning and integration owner | This plan | Partial schema/generated production cutover |
 | Migrate implementation catalog and policy-impact relationships in the atomic cutover. | Policy Impact and coverage owners | [Migration plan](reports/policy-impact-migration-plan.md) | Treating implementation artifact changes as incidental paths |
 | Keep `policy-impact-registry.toml` as the sole closed declaration-source membership authority and register every admitted source explicitly. | Policy Impact | [Migration plan](reports/policy-impact-migration-plan.md) | Filesystem discovery or policy-unit-derived relationship registration |
-| Make each Engine Module manifest own one public import root and its repository entrypoints; make the root's closed `__all__` expression own exported names; and enforce both with one AST-backed Standards Verifier contract. | Dependencies and Verification | [Dependency decision](reports/dependency-and-dialect-decision.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Import smoke, generator-only checks, implicit Python child-module loading, and copied package or symbol allowlists |
+| Make each Engine Module manifest own one public import root and its repository entrypoints; make the root's closed `__all__` expression own exported names; require entrypoints to call canonical-root adapters; and enforce all three with one AST-backed Standards Verifier contract plus safe-path execution. | Dependencies and Verification | [Dependency decision](reports/dependency-and-dialect-decision.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Root-only smoke, script-directory imports, generator-only checks, implicit Python child-module loading, and copied package or symbol allowlists |
 | Keep A2 inactive through independent A1b acceptance. | Planning | Accepted standards recovery | Direct progression to authoring |
 
 ## Evidence And Oracle Plan
@@ -161,7 +162,7 @@ any A2 review or implementation begins.
 | Cold reconstruction is complete | Persisted authority | Fresh process with store path and handle only | Persisted object envelope and dependencies | In-process caches or unavailable durable filesystem | Missing is unavailable; contradiction is invalid |
 | Public algebra is exhaustive | Public path | Real facade/tool calls using exported generated types | Public operation closure | Internal domain values crossing the facade | Unhandled domain result is a programming error |
 | External dependency is reproducible | Release artifact | Hash-checked isolated install and dependency import smoke | Reviewed lock, artifact hashes, provenance, licenses | Unreviewed platform, Python, wheel, or source build | Missing or mismatched artifact blocks installation |
-| Internal Module closure is exact | Source-tree integration | AST-derived production-import/manifest equality, root-export resolution, governed-source ownership, and isolated root/export smoke | Manifest-owned requirements, roots, repository entrypoints, package `__all__`, and reviewed checkout | Independently published or installed local distributions | Missing, transitive-only, unused, ambient, undeclared, private-child, root-plus-private-child, star, dynamic, or unowned production import fails |
+| Internal Module closure is exact | Source-tree integration | AST-derived production-import/manifest equality, root-export resolution, governed-source ownership, and isolated root/export/entrypoint execution | Manifest-owned requirements, roots, repository entrypoints, package `__all__`, and reviewed checkout | Independently published or installed local distributions | Missing, transitive-only, unused, ambient, alternate-root, undeclared, private-child, root-plus-private-child, star, dynamic, or unowned production import fails |
 | Policy-impact migration is complete | Semantic consumers | Accepted/proposed compile, exact admitted-source registration, and exact disposition equality | Closed policy-impact registry, compiled relationship authority, and independent horizon | Empty impact without certified coverage | Unregistered source, unmapped node, edge, consumer, or coverage subject blocks |
 | Negative fixture reaches intended rule | Negative evidence | Otherwise-valid fixture and exact diagnostic assertion | Owning typed diagnostic | Failure at another precondition | Failure at another precondition rejects the test |
 
@@ -208,12 +209,20 @@ Its review found that module-path equality still permitted Python's implicit
 did not disposition every affected package artifact and existing private-import
 consumer.
 
+Candidate C2 `c2aea75c85800aec6ac00fcc3b2690f8629845ab`, tree
+`19074828c41ac1c2d8814578f08604106112ad1c`, is `Superseded` by C3.
+Its Specification review passed. Its Standards review found that Verifier-local
+entrypoints still depended on ambient alternate-root imports, Authority's v11
+shape-validation dependency was undeclared, the coverage attestation-source
+registry was absent from the cutover write set, and the active Router evidence
+omitted Commit.
+
 Admission and start require this direct-child chain:
 
-1. **C2:** clean replacement planning candidate containing no implementation
-   and superseding all three rejected candidates;
+1. **C3:** clean replacement planning candidate containing no implementation
+   and superseding every rejected candidate named above;
 2. **R:** reviewer-owned `reports/a1b-plan-admission.md` as the sole change,
-   binding C2, explicitly accepting the dependency provenance/licensing
+   binding C3, explicitly accepting the dependency provenance/licensing
    disposition in A1B-A6P, and reporting no blocking Standards or
    Specification finding;
 3. **T:** mechanical admission transition as the direct child of R, changing
@@ -376,6 +385,7 @@ in one replacement boundary; delete all superseded authority.
 - `evaluation/standards-effectiveness/policy-impact/topic.security.toml`
 - `evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml`
 - `evaluation/standards-effectiveness/policy-coverage/horizons.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/`
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml`
@@ -401,7 +411,10 @@ in one replacement boundary; delete all superseded authority.
 - [ ] Advance every identity and public contract in the identity/version matrix
   and use domain-owned typed keys for ordering and deduplication.
 - [ ] Route all public validation through `standards_contracts` and all public
-  object persistence/inspection through `standards_authority`.
+  object persistence/inspection through `standards_authority`. Authority must
+  use the Contracts named-definition adapter for every embedded v11 value and
+  own its envelope, closed stored-payload records, identity, dependency-kind,
+  object-local, and DAG validation.
 - [ ] Exhaustively adapt domain requests and outcomes at the facade.
 - [ ] Accept coverage claims as input, validate evidence and trusted execution
   authorization, and construct stored coverage attestations only inside the
@@ -417,11 +430,13 @@ in one replacement boundary; delete all superseded authority.
 - [ ] Derive all governed production Python from manifest roots and repository
   entrypoints, and reject tracked non-test Python under `tools/` that has no
   manifest owner. Assign the canonical graph query and Git-reachability scripts
-  to the Standards Verifier manifest and remove their ambient private-import
-  paths.
-- [ ] Smoke every manifest-owned public root and every resolved export in clean
-  CPython 3.11 and 3.12 environments after installing only the admitted
-  external lock.
+  to the Standards Verifier manifest. Replace ambient or alternate-root imports
+  in every exact Verifier entrypoint with canonical-root adapters.
+- [ ] Execute every manifest-owned public root, every resolved export, and every
+  exact repository entrypoint in clean CPython 3.11 and 3.12 environments after
+  installing only the admitted external lock. Use safe-path mode from outside
+  the checkout with the checkout root as the sole `PYTHONPATH`; mutating
+  entrypoints operate only on isolated repository fixtures.
 - [ ] Make generated imports a closed compiler prelude, verify their AST in
   focused compiler tests, and independently reject otherwise-valid generated
   and handwritten-facade fixtures for both `from public_root.private_child`
@@ -439,7 +454,9 @@ in one replacement boundary; delete all superseded authority.
   diagnostic; the relationship compiler remains responsible only for compiling
   its registered closed input.
 - [ ] Freeze all horizon inputs, derive requirements, renew stale attestations
-  through the existing authorization/evidence path, and compile certificates.
+  through the existing authorization/evidence path, register the new
+  owner-local Cross-Platform and Security attestation files in the closed
+  attestation-source registry, and compile certificates.
 - [ ] Prove exact selected-consumer/disposition and
   requirement/certificate equality.
 
@@ -515,6 +532,8 @@ declared lifecycle fields and must identify both exact trees.
 - A production cross-Module import cannot be expressed through one
   manifest-owned public root and statically resolved export, or requires runtime
   import discovery.
+- A repository entrypoint cannot execute from outside the checkout through its
+  manifest-owned canonical root without script-directory or ambient imports.
 - A foundation milestone changes accepted production A1 before Milestone 3.
 - A proposed correction changes normative policy meaning, relationship-kind or
   generic graph semantics, A2 behavior, or another owner outside scope.
