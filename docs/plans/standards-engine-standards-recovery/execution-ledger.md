@@ -1620,3 +1620,34 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: verify and commit the current-state correction as one new
   clean replacement candidate, then repeat independent Standards and
   specification review.
+
+## 2026-08-26 - Standards Recovery Acceptance Transition
+
+- Accepted candidate: commit
+  `a166e36f6f0c8d4d0620c98666027462e62a7b80`, tree
+  `8e2c3421105b22e54de12a73f7b6b6e48b18869d`.
+- Independent acceptance report: direct-child commit
+  `238ff4e3f8e086de8acd80a12435977dac8d79d8`, tree
+  `184f54acc8af98ed38be5c772c41f142b66c64b1`.
+- Review result: independent Standards and specification reviews found no
+  critical, high, medium, or low findings. The report is the sole change above
+  the accepted candidate.
+- Lifecycle transition: SR-A4 and SR-A15 are satisfied; SR-A1 through SR-A15
+  are all satisfied; Milestone 1 moves from `Implemented` to `Accepted`,
+  Milestone 2 and this plan move from `Verifying` to `Accepted`, and acceptance
+  moves from `partial` to `satisfied`.
+- Issue transition: recovery-owned controlled and pending-acceptance issues are
+  resolved, including `SESR-011`, `SESR-026`, and `SESR-031`. `SESR-001`
+  remains active as the exact A1b-owned external-conformance defect.
+- Preserved evidence: all 585 package tests, contract generation/validation,
+  generated migration freshness, 224 registered suites, the complete
+  53-checker checkpoint, plan/lifecycle checks, diff hygiene, non-blocked
+  dispositions, and all four frozen coverage digests remain green.
+- Scope effect: this mechanical transition changes only plan, issue, and
+  ledger lifecycle projections. It performs no runtime, policy, graph,
+  coverage, disposition, suite, fixture, generated-artifact, A1b, or A2
+  mutation.
+- Downstream authority: a separate A1b plan and superseding ADR may now be
+  created and independently reviewed. A1b implementation remains unavailable
+  until that planning authority is admitted; A2 remains inactive through A1b
+  implementation, migration, and independent acceptance.
