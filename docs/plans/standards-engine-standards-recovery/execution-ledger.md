@@ -1164,3 +1164,25 @@ superseded by the discovery-admission transition in the active plan.
 - Lifecycle: the recovery and Milestone 1 remain `Blocked`; Milestone 0 remains
   `Accepted`; SESR-030 remains active. The next operation is to commit the
   corrected candidate and obtain renewed independent exact-tree admission.
+
+## 2026-08-25 - Recovery Resume Admission Transition
+
+- Reviewed candidate: commit
+  `487847b0200cd3c2ea925665b60b2eab557225fe`, tree
+  `624e285ebdc4430b59511fb02b1ebb61d8c6cdd3`.
+- Independent admission report: commit
+  `b5dd44335e1ac506f1d9e2e298d3a63d4f35614c`, tree
+  `c2c03737e626499587dccebdf070c9238dafbb01`.
+- Authorized delta: this direct-child transition changes only the recovery
+  plan, execution ledger, SESR-009, and SESR-030. Semantic scope, objectives,
+  tasks, write sets, consumer membership, evidence contracts, gates, and every
+  other issue disposition remain unchanged.
+- Lifecycle transition: the plan and Milestone 1 move from `Blocked` to
+  `Planned`; Milestone 0 remains `Accepted`; SESR-030 is `resolved`.
+  Implementation has not started.
+- Recovery-resume base: this mechanical transition commit. `start` must run
+  while it remains current `HEAD` with a clean worktree and record its exact
+  commit/tree before changing the plan or Milestone 1 to `Active`.
+- Excluded authority: policy mutation remains unavailable until `start`; A1b
+  and A2 remain inactive through their independently accepted gates.
+- Sole next operation: `start` Milestone 1 reconciliation and freeze.
