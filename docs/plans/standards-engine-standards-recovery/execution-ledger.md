@@ -1339,3 +1339,21 @@ superseded by the discovery-admission transition in the active plan.
   `Implemented`. SR-A4, SR-A14, and SR-A15 remain pending.
 - Next operation: commit this implementation boundary, then perform a separate
   exact-head `verify` transition before dispatching independent review.
+
+## 2026-08-25 - Replacement Exact-Tree Verification Start
+
+- Implementation boundary: commit
+  `aef1843088b18761b9d1c97e7c05f45e622f6033`, tree
+  `044c0ef57475bd23bf6a4c7d5e9d03fb27832283`.
+- Start precondition: the corrected implementation boundary was current
+  `HEAD`, the worktree was clean, and plan structure, lifecycle fixtures,
+  generated migration freshness, frozen coverage identity, and diff hygiene
+  passed.
+- Lifecycle transition: the plan and Milestone 2 move from `Implemented` to
+  `Verifying`. No objective is accepted by this transition.
+- Candidate identity: this transition creates the clean replacement candidate;
+  the independent acceptance report must bind its exact commit and tree without
+  a recursive in-candidate claim.
+- Next operation: independent Standards and specification review of the exact
+  transition tree, focused on `SESR-031`, current lifecycle authority, final
+  dispositions, and preserved behavioral/coverage evidence.

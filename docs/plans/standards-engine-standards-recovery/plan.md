@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Implemented`
+**Plan status:** `Verifying`
 
-**Current phase:** Milestone 2 governance correction complete
+**Current phase:** Milestone 2 renewed exact-tree verification
 
-**Next slice:** start exact-tree verification from the clean implementation boundary
+**Next slice:** obtain independent Standards and specification review
 
 **Acceptance status:** `partial`
 
@@ -43,6 +43,10 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 **Milestone 2 start base:** commit
 `82881a2e3b811be199d16e5110a85dbd5432d4d7`, tree
 `af9eba1ba718e75a64ad475b406c365651e29aa9`
+
+**Replacement implementation boundary:** commit
+`aef1843088b18761b9d1c97e7c05f45e622f6033`, tree
+`044c0ef57475bd23bf6a4c7d5e9d03fb27832283`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -328,7 +332,7 @@ writable in this milestone.
 - [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
-- [ ] Record one candidate commit/tree without claiming acceptance.
+- [x] Record one candidate commit/tree without claiming acceptance.
 - [ ] Obtain independent Standards and specification review of that exact tree.
 - [ ] Mark this recovery `Accepted` only after SR-A1 through SR-A15 are
   satisfied. Only then may a separate A1b plan and superseding ADR be authored.
@@ -337,7 +341,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Implemented`
+**Status:** `Verifying`
 
 ## Verification Strategy
 
@@ -355,8 +359,8 @@ accepting the exact clean candidate tree.
 ## Blockers
 
 - Milestone 1 has a green frozen boundary. Milestone 2 implementation and its
-  governance correction are complete; exact-tree verification has not yet
-  started.
+  governance correction are complete; renewed exact-tree verification is in
+  progress.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
@@ -412,4 +416,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Implemented`
+- Final status: `Verifying`
