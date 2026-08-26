@@ -517,10 +517,10 @@ independently accept the prerequisite.
   identity and cause-set assertions after coverage is valid.
 - [x] Run all focused suites, generated checks, registered declarative suites,
   complete Python checkpoint, retained migration checks, and diff validation.
-- [ ] Commit one clean candidate and obtain independent Standards/specification
+- [x] Commit one clean candidate and obtain independent Standards/specification
   acceptance bound to its exact commit and tree.
-- [ ] On acceptance, mark this plan accepted and return standards recovery to a
-  separately admitted final-acceptance slice. Do not activate A1b or A2.
+- [x] On acceptance, mark this plan accepted and return standards recovery to a
+  separately admitted resume slice. Do not activate A1b or A2.
 
 **Acceptance gate:** PIA2-A1 through PIA2-A10 are satisfied; the active policy
 unit, requirement, attestation, and certificate subject sets are equal with one
@@ -604,8 +604,9 @@ report accepts one exact clean candidate.
 
 ## Blockers
 
-- The standards-recovery plan remains blocked and provides no implementation
-  fallback while this prerequisite is unresolved.
+- No prerequisite blocker remains. The standards-recovery plan retains its own
+  blocked lifecycle and requires a separately admitted resume boundary; this
+  accepted plan provides evidence, not recovery implementation authority.
 
 ## Re-Plan Triggers
 

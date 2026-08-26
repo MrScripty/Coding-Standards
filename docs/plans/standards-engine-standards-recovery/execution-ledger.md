@@ -1099,3 +1099,46 @@ superseded by the discovery-admission transition in the active plan.
 - Supersession: the prior next operation to obtain final prerequisite
   acceptance is `Superseded` by independent admission of the bounded recovery.
 - SESR-030 remains active. A1b and A2 remain inactive.
+
+## 2026-08-25 - Accepted Prerequisite And Current-Authority Compaction Replan
+
+- Accepted prerequisite boundary: candidate commit
+  `7bc8bd070f882eb9779dc678139777d05a6ce7c7`, tree
+  `35a22f824f7ed5f50347032b956b2108fc073f77`; independent acceptance-report
+  commit `bf9f3d86c8109532f7846ce2f6e547ab155bb200`, tree
+  `5a877289fbc388e9bacfc77746a42ef85d0fb363`; acceptance-transition commit
+  `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
+  `15e482de3334137f14a55bf2c22e2560188dd647`.
+- Trigger: prerequisite acceptance completed the shared policy-impact v2,
+  public v10, coverage, verifier-adaptation, and mutable-oracle work, while the
+  recovery plan still exposed rejected prerequisite work and several historical
+  admission protocols as current authority.
+- Systemic classification: this is a current-plan Interface defect. A narrow
+  status edit would leave contradictory milestones and issues; a continuation
+  plan would duplicate objective, closure, evidence, and acceptance authority.
+- Replacement: the existing recovery plan remains canonical and is compacted
+  in place. It now exposes only the objective, current decisions, exact
+  remaining M1/M2 work, one resume protocol, gates, and re-plan triggers.
+  Historical candidates, reports, transitions, rejections, and superseded
+  protocols remain in this ledger and their immutable reports.
+- Supersession: every prior discovery, scope, cardinality, generated-evidence,
+  Router-only, and prerequisite admission protocol is historical and provides
+  no current implementation authority. The accepted prerequisite replaces the
+  split relationship and mutable-total work; no old repair is a fallback.
+- Remaining closure: M1 preserves the audit-owned suite-ID set and exact
+  non-registry consumer list, mechanically re-resolves `S`, derives
+  `R = (S union E) - W`, and limits `W` to recovery governance and evidence
+  records that still require reconciliation. Implemented policy, metadata,
+  relationships, fixtures, suites, generated artifacts, runtime, and package
+  tests are frozen.
+- Issue lifecycle: SESR-026 and SESR-028 are resolved by accepted executable
+  evidence. SESR-009 now controls the new resume boundary. SESR-011 remains
+  active through final recovery coverage. SESR-030 remains active only for the
+  separately admitted recovery-resume transition.
+- Governance candidate scope: only the recovery `plan.md`,
+  `execution-ledger.md`, `issues.md`, and the accepted prerequisite `plan.md`
+  may change. No policy, generated artifact, checker, runtime, A1b, or A2 path
+  is authorized.
+- Lifecycle: the recovery plan and Milestone 1 remain `Blocked`; Milestone 0
+  remains `Accepted`. The sole next operation is to commit this exact blocked
+  governance candidate and obtain the reviewer-owned resume-admission report.
