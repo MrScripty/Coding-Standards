@@ -1227,3 +1227,18 @@ superseded by the discovery-admission transition in the active plan.
   passed on the reconciled content. The only remaining Milestone 1 operation is
   to commit this evidence and record that exact parent as the frozen boundary;
   Milestone 2 remains blocked until that mechanical transition.
+
+## 2026-08-25 - Milestone 1 Frozen-Boundary Transition
+
+- Frozen implementation boundary: commit
+  `7f533f59ddd0120a08c36e85f1c631eedbbe0caa`, tree
+  `70f2ec4f249ae6eb6774a17443b15943f57bdfec`.
+- Gate result: protected closure, graph reconciliation, policy locators,
+  projections, registrations, generated evidence, focused behavior, complete
+  repository checkpoint, and non-blocked dispositions all passed at that exact
+  boundary.
+- Lifecycle transition: Milestone 1 moves from `Active` to `Implemented` and
+  Milestone 2 moves from `Blocked` to `Planned`. A separate exact-head `start`
+  is required before final coverage compilation.
+- Authority effect: no policy, graph, suite, attestation, generated artifact,
+  runtime, or package path changes in this transition.

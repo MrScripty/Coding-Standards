@@ -2,10 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 reconciliation and freeze
+**Current phase:** Milestone 2 start transition
 
-**Next slice:** re-resolve the protected consumer closure and compare the
-implemented semantic graph against the admitted authorities
+**Next slice:** start final coverage from the exact current lifecycle head
 
 **Acceptance status:** `partial`
 
@@ -36,6 +35,10 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 **Recovery-resume start base:** commit
 `6c577800b3e6c56c666c95e9404914114e45be2b`, tree
 `88efd0c03423de9ccac318977e0d0dca529df6f2`
+
+**Milestone 1 frozen boundary:** commit
+`7f533f59ddd0120a08c36e85f1c631eedbbe0caa`, tree
+`70f2ec4f249ae6eb6774a17443b15943f57bdfec`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -201,9 +204,10 @@ coverage after any authority change.
 ## Recovery Resume Admission
 
 The exact candidate, independent report, transition, and start base recorded
-above complete recovery-resume admission. Milestone 1 is active and may modify
-only its `W` below. Any base mismatch, unauthorized path, protected-consumer
-mutation, or generated-artifact change requires replanning.
+above complete recovery-resume admission. Milestone 1 completed from that
+authority using only its `W`; its frozen boundary is recorded above. Any base
+mismatch, unauthorized path, protected-consumer mutation, or
+generated-artifact change requires replanning.
 
 ## Milestones
 
@@ -266,7 +270,7 @@ prerequisite is evidence, not additional recovery write authority.
 - [x] Revalidate every policy-unit locator, Router/profile projection, suite
   registration, generated artifact, and current consumer disposition.
 - [x] Prove no consumer is blocked and no protected consumer requires mutation.
-- [ ] Run focused recovery verification and the complete repository checkpoint,
+- [x] Run focused recovery verification and the complete repository checkpoint,
   then record the exact frozen M1 tree.
 
 **Acceptance gate:** The six policy families and projections agree; `W/S/E/R`
@@ -274,7 +278,7 @@ is exact; graph changes are fully dispositioned; generated evidence is fresh;
 all selected consumers have non-blocked dispositions; no frozen authority path
 requires modification; and the complete checkpoint passes.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ### Milestone 2: Final Coverage And Exact-Tree Acceptance
 
@@ -328,7 +332,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Blocked` by Milestone 1
+**Status:** `Planned`
 
 ## Verification Strategy
 
@@ -345,8 +349,8 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 is active from the exact recovery-resume start base. Milestone 2
-  remains blocked until Milestone 1 records a green frozen boundary.
+- Milestone 1 has a green frozen boundary. Milestone 2 is planned and awaits an
+  exact-head start before coverage compilation begins.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
