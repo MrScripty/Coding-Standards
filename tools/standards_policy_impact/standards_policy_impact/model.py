@@ -36,7 +36,6 @@ class RelationshipKind:
     groups: tuple[str, ...]
     propagation: str
     traversable: bool
-    evidence_required: bool
 
 
 @dataclass(frozen=True, slots=True)

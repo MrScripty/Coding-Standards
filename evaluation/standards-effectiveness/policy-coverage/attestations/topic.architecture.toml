@@ -1,9 +1,9 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:d634ac8028327f10438fa4b5c2f6a92045150c039fb61b269b3d99605df72f03"
+requirement = "coverage-requirement:sha256:e471201acb12403dd38da4b3a32cbd53298a282e8e6d4a8ab73685ea593900c5"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact topic.architecture.immutable-authority-closure coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"

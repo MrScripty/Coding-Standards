@@ -1,129 +1,129 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:4fddcc518ee71e37d5738928a15d9101b974093fe0722d3845a41d604e60189e"
+requirement = "coverage-requirement:sha256:9b589e307eca2f7e2bcaddd9931dbf872017fb16ac8bd04e1843be13bc7c6ba7"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.written-plan-applicability coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:7da1627b49430b379e7ae67e8c969fb4da8562453dc132984f4e6ebd9ea43231"
+requirement = "coverage-requirement:sha256:540fd5792d6784bf61185f926c79b266d40fc08229d3839c444af1fd50c64e20"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.artifact-model coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:e1876c45419f7dfca220b45a3679ae0c45ed6216cca9d45f79a8bb910753f6d1"
+requirement = "coverage-requirement:sha256:19b5034dcb60e95c86213102449c0e5df96fa5a03ca036cb9bd58a5bbe463c9c"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.active-plan-fields coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:79cad697ecd97e90a753891d0f731892f46b1ac5f13c297d2ba580de97c7e01a"
+requirement = "coverage-requirement:sha256:c5ed3424fc3db4ea9514666169e2fccbef2f3a5d55899be5c6eca9be18ee52b5"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.lifecycle coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:8948f4a27438ed0a832fd32d5b37e71effd84f12e9c920237318a449f2445194"
+requirement = "coverage-requirement:sha256:49a6fd0f98527aa492e96407bc35e951e2a0a09ec5c5aa4776392f00cb041b99"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.plan-admission coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:e5d9fd751411a0d5229c6873491532870112ea7f810a35795ae2187fe425809c"
+requirement = "coverage-requirement:sha256:e39cf684de6e6075e0792237e0edb0129eb91c674f16df394b2f6b3af6796716"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.concurrent-integration-routing coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:c449122550523473ed3221c3ec3e217088c49963bc16a073a74f78e59169b85a"
+requirement = "coverage-requirement:sha256:307b6ef26f70d9a985ba0363ad61d01c6786d989bcb1a404687af494a9ea3994"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.repository-isolation coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:266dd17c7d6c44e97db614551373c16dfa402fd824d2ebed71f21edd04b77fe2"
+requirement = "coverage-requirement:sha256:2bba3dbe129b609ca28f66f9a216bbefbe8cee55f82f7ff5f7247d32d10fa28b"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.projection-completeness coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:1ee3238778eee7f42235bb94500504a7110c97b31718f882a0ab6b8561043235"
+requirement = "coverage-requirement:sha256:7672a1578a80339960c163bdb6dce0b674e969b6d48b6a5b92db70781696af80"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.acceptance-claims coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:f90ab1c0e0d1907810dc6337d3faea76a2d64702e227ea16b451c55475eaa6fb"
+requirement = "coverage-requirement:sha256:e38e0a0e40066b56522d57b2878ead8c7c32b6cb80bd45dd1688b44da82dd400"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.milestones-and-slices coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:76e6b50435c8a07b47e05db1e1e1644554576b510f01dc022541553eb86df612"
+requirement = "coverage-requirement:sha256:4e4e415920e2bf43189424950107a8eb287c1921d4260bcdd627bbd0165f5f41"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.current-state coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:ead22f13cf92a87486960eb9c9ffed3ecbfb05aa8545e7756dc93813ec059331"
+requirement = "coverage-requirement:sha256:606f14b44dbf9df67a206350122208be532ef6cd603248c6a534a37891643b3a"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.replanning coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:969baefd3e0c515a542cede68ef1ee32137edf46569faa001d8e408faab17101"
+requirement = "coverage-requirement:sha256:0a0b4acd80d7fd84be94913d3fdb253fb8e93e6d227c1519906cd4d29faaf70b"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.systemic-finding-replan coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:93b7ef765beb46c88ab9e18c8a4c0db79d80820b43f1bdefa10536a714b68774"
+requirement = "coverage-requirement:sha256:52aa2d15d9e65d72ad357d099c88e5b798ee949178144d8db9ab1c81afeb456b"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.findings coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:2ef015ec3b99cd045e6f386dd21778447d6b6fff38d9d39cb9ce42c31d545ef6"
+requirement = "coverage-requirement:sha256:08fb9f62a563ea047812eb5a635f774c00ca593d4933e2a52b12a697989deccd"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.concurrent-work coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:7bc739acfe8539be80000ec9b3b7b3b8f827f68f47e1bf86f16d4f563d1dbabf"
+requirement = "coverage-requirement:sha256:736ed52f9862426f784b08f708c0f3c2878b017480a2bc1dc2434689832ce005"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-current-coverage.md"]
+evidence = ["docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md"]
 explicit_exclusions = []
 rationale = "The exact workflow.planning.completion coverage view was reviewed against the frozen provider-v3 independent horizon."
 auditor_provenance = "standards.review.audit:user-authorized:policy-impact-authority-v2"

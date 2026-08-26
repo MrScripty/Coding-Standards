@@ -3,6 +3,7 @@ provider_contract_version = 2
 catalog_contract_version = 2
 declaration_schema_version = 2
 relationship_kind_contract_version = 2
+evidence_owner_rule = "required-registered-suite"
 
 artifact_kinds = [
   "documentation",
@@ -33,7 +34,6 @@ target_class = "canonical-non-reference-module"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "router-projection"
@@ -41,7 +41,6 @@ target_class = "router"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "prompt-projection"
@@ -49,7 +48,6 @@ target_class = "prompt"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "template-projection"
@@ -57,7 +55,6 @@ target_class = "template"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "reference-projection"
@@ -65,7 +62,6 @@ target_class = "canonical-reference-module"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "documentation-projection"
@@ -73,7 +69,6 @@ target_class = "documentation"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "fixture-projection"
@@ -81,7 +76,6 @@ target_class = "fixture"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "enforcement-suite-projection"
@@ -89,7 +83,6 @@ target_class = "enforcement-suite"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true
 
 [[relationship_kinds]]
 id = "implementation-projection"
@@ -97,4 +90,3 @@ target_class = "implementation-artifact"
 groups = ["policy-impact", "semantic"]
 propagation = "source-to-consumer"
 traversable = true
-evidence_required = true

@@ -199,6 +199,103 @@ class PolicyImpactCompilerTest(unittest.TestCase):
                         compile_policy_impact(root, modules, "registry.toml")
                 self.assertEqual(caught.exception.failure.code, code)
 
+    def test_contract_owns_required_evidence_and_decodes_optionals_strictly(self) -> None:
+        mutations = (
+            (
+                "unsupported-evidence-rule",
+                lambda value: value.replace(
+                    'evidence_owner_rule = "required-registered-suite"',
+                    'evidence_owner_rule = "optional"',
+                ),
+                "POLICY_IMPACT.UNSUPPORTED_CONTRACT",
+                "evidence_owner_rule",
+            ),
+            (
+                "malformed-validator",
+                lambda value: value.replace(
+                    'validator = "standards-verifier:policy-impact"',
+                    "validator = 7",
+                ),
+                "POLICY_IMPACT.INVALID",
+                "validator",
+            ),
+            (
+                "retired-per-kind-evidence-field",
+                lambda value: value.replace(
+                    'id = "prompt-projection"',
+                    'id = "prompt-projection"\nevidence_required = true',
+                ),
+                "POLICY_IMPACT.INVALID",
+                "evidence_required",
+            ),
+        )
+        for name, mutate, code, field in mutations:
+            with self.subTest(name=name):
+                with self.fixture(self.relationships(self.relationship())) as (
+                    root,
+                    corpus,
+                ):
+                    contract = root / "contract.toml"
+                    contract.write_text(
+                        mutate(contract.read_text(encoding="utf-8")),
+                        encoding="utf-8",
+                    )
+                    with self.assertRaises(PolicyImpactError) as caught:
+                        compile_policy_impact(root, corpus, "registry.toml")
+                self.assertEqual(caught.exception.failure.code, code)
+                self.assertEqual(caught.exception.failure.field, field)
+
+        declaration = self.relationship().replace(
+            'evidence_owner = "suite:evidence"\n',
+            "",
+        )
+        with self.fixture(self.relationships(declaration)) as (root, corpus):
+            with self.assertRaises(PolicyImpactError) as caught:
+                compile_policy_impact(root, corpus, "registry.toml")
+        self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.INVALID")
+        self.assertEqual(caught.exception.failure.field, "evidence_owner")
+
+    def test_contract_derived_relation_target_matrix_is_complete(self) -> None:
+        candidates = {
+            "workflow.consumer": {"canonical-non-reference-module"},
+            "reference.consumer": {"canonical-reference-module"},
+            "router": {"canonical-non-reference-module", "router"},
+            "prompt": {"prompt"},
+            "template": {"template"},
+            "documentation": {"documentation"},
+            "fixture": {"fixture"},
+            "suite": {"enforcement-suite"},
+            "implementation": {"implementation-artifact"},
+            "routing": {"router"},
+        }
+        with self.fixture(self.relationships(self.relationship())) as (root, corpus):
+            baseline = compile_policy_impact(root, corpus, "registry.toml")
+        kinds = baseline.relationship_kinds
+        self.assertEqual(
+            {kind.target_class for kind in kinds.values()},
+            {target_class for classes in candidates.values() for target_class in classes},
+        )
+
+        for relation, kind in kinds.items():
+            for consumer, compatible_classes in candidates.items():
+                with self.subTest(relation=relation, consumer=consumer):
+                    declaration = self.relationships(
+                        self.relationship(consumer=consumer, relation=relation)
+                    )
+                    with self.fixture(declaration) as (root, corpus):
+                        if kind.target_class in compatible_classes:
+                            compiled = compile_policy_impact(root, corpus, "registry.toml")
+                            semantics = next(iter(compiled.semantics.values()))
+                            self.assertEqual(semantics.relation, relation)
+                            self.assertEqual(semantics.consumer, consumer)
+                        else:
+                            with self.assertRaises(PolicyImpactError) as caught:
+                                compile_policy_impact(root, corpus, "registry.toml")
+                            self.assertEqual(
+                                caught.exception.failure.code,
+                                "POLICY_IMPACT.INCOMPATIBLE_TARGET",
+                            )
+
     def test_relationship_sources_require_exact_active_owner_policy_units(self) -> None:
         source_cases = (
             ("workflow.planning", None, "POLICY_IMPACT.MODULE_SOURCE"),
@@ -431,6 +528,26 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             [[nodes]]
             id = "suite"
             metadata = { repository_path = "suite.toml", artifact_kind = "enforcement-suite", suite_id = "evidence", authority = "evidence" }
+
+            [[nodes]]
+            id = "template"
+            metadata = { repository_path = "template.md", artifact_kind = "template", authority = "projection" }
+
+            [[nodes]]
+            id = "documentation"
+            metadata = { repository_path = "documentation.md", artifact_kind = "documentation", authority = "projection" }
+
+            [[nodes]]
+            id = "fixture"
+            metadata = { repository_path = "fixture.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+            [[nodes]]
+            id = "implementation"
+            metadata = { repository_path = "implementation.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+
+            [[nodes]]
+            id = "routing"
+            metadata = { repository_path = "routing.toml", artifact_kind = "routing-projection", authority = "projection" }
             """,
         )
         self.write(
@@ -451,22 +568,30 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             'schema_version = 1\nid = "policy-impact.applicability"\nfacts = []\n',
         )
         self.write(root, "declarations.toml", declarations)
-        module = ModuleMetadata(
-            "workflows/planning.md",
-            "workflow.planning",
-            "workflow",
-            "MUST",
-            "planned",
-            "local",
-            (),
-            (),
-            "tests",
-            "workflows/planning.md",
+        def module(path: str, module_id: str, role: str) -> ModuleMetadata:
+            return ModuleMetadata(
+                path,
+                module_id,
+                role,
+                "MUST",
+                "planned",
+                "local",
+                (),
+                (),
+                "tests",
+                path,
+            )
+
+        modules = (
+            module("workflows/planning.md", "workflow.planning", "workflow"),
+            module("workflows/consumer.md", "workflow.consumer", "workflow"),
+            module("reference/consumer.md", "reference.consumer", "reference"),
+            module("STANDARDS-ROUTER.md", "router", "router"),
         )
         module_corpus = CanonicalModuleCorpus(
             "corpus.toml",
-            (module.path,),
-            (module,),
+            tuple(item.path for item in modules),
+            modules,
         )
         unit = PolicyUnit(
             "workflow.planning.policy",
@@ -476,7 +601,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             (),
             (),
             (),
-            module.path,
+            modules[0].path,
             "## Policy\n",
             "sha256:" + "a" * 64,
             "sha256:" + "b" * 64,

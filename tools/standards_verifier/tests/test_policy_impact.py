@@ -31,6 +31,7 @@ from standards_verifier.diagnostics import EngineError
 from standards_verifier.policy_impact import (
     DEFAULT_SOURCE_REGISTRY,
     load_policy_impact,
+    load_registered_policy_impact,
 )
 from standards_verifier.repository_graph import load_repository_registry
 
@@ -283,6 +284,49 @@ class PolicyImpactTest(unittest.TestCase):
         with self.assertRaises(EngineError) as raised:
             self.load(self.relationship(evidence="suite:missing"))
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.EVIDENCE_OWNER")
+
+    def test_registered_loader_translates_compiler_failure(self) -> None:
+        default_registry = (
+            "evaluation/standards-effectiveness/policy-impact-registry.toml"
+        )
+        self.write(
+            default_registry,
+            """
+            schema_version = 2
+            source_id = "standards.policy-impact"
+            authoring_contract = "contract.toml"
+            node_catalog = "catalog.toml"
+            fact_catalog = "facts.toml"
+            suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
+            declaration_sources = ["declarations.toml"]
+            """,
+        )
+        self.write(
+            "declarations.toml",
+            'schema_version = 2\nowner = "workflow.planning"\nrelationships = []\n',
+        )
+        contract = self.root / "contract.toml"
+        contract.write_text(
+            contract.read_text(encoding="utf-8").replace(
+                'evidence_owner_rule = "required-registered-suite"',
+                'evidence_owner_rule = "optional"',
+            ),
+            encoding="utf-8",
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            load_registered_policy_impact(
+                self.root,
+                "evaluation/standards-effectiveness/edge-source-registry.toml",
+                self.suite_paths,
+                suite="fixture-suite",
+                check="fixture-check",
+            )
+        diagnostic = raised.exception.diagnostic
+        self.assertEqual(diagnostic.code, "POLICY_IMPACT.UNSUPPORTED_CONTRACT")
+        self.assertEqual(diagnostic.suite, "fixture-suite")
+        self.assertEqual(diagnostic.check, "fixture-check")
+        self.assertEqual(diagnostic.field, "evidence_owner_rule")
 
     def test_compiler_owns_relation_target_compatibility(self) -> None:
         with self.assertRaises(EngineError) as raised:

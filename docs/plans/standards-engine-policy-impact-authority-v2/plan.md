@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Active`
+**Plan status:** `Implemented`
 
-**Current phase:** Milestone 2 acceptance-rejection recovery
+**Current phase:** independent exact-tree recovery acceptance
 
-**Next slice:** implement the admitted evidence, decoding, verifier, and matrix recovery
+**Next slice:** obtain the reviewer-owned prerequisite acceptance report
 
 **Acceptance status:** `partial`
 
@@ -88,15 +88,15 @@ or result-algebra redesign, and it does not activate A2.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| PIA2-A1 | One internal v2 contract owns every supplemental artifact kind, relationship kind, graph group, propagation rule, evidence rule, and exact allowed target class. | `contract` | `not-applicable` | `automated` | `pending` | PIA2-009 acceptance-rejection recovery |
-| PIA2-A2 | Every catalog node has one explicit admitted artifact kind, path changes do not change classification, and every relationship target is compatible by typed identity rather than path inference. | `integration` | `not-applicable` | `automated` | `pending` | PIA2-011 complete contract-derived compatibility matrix |
+| PIA2-A1 | One internal v2 contract owns every supplemental artifact kind, relationship kind, graph group, propagation rule, evidence rule, and exact allowed target class. | `contract` | `not-applicable` | `automated` | `satisfied` | [Recovered coverage evidence](reports/certify-recovered-coverage.md) and PIA2-009 focused mutations |
+| PIA2-A2 | Every catalog node has one explicit admitted artifact kind, path changes do not change classification, and every relationship target is compatible by typed identity rather than path inference. | `integration` | `not-applicable` | `automated` | `satisfied` | PIA2-011 contract-derived compatibility matrix |
 | PIA2-A3 | The migration inventory's exact old identity set is dispositioned to its exact replacement set; implementation consumers use `implementation-projection`, genuine references remain references, and no permanent mutable-total assertion is introduced. | `contract` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) exact inventory-derived set comparison |
 | PIA2-A4 | Graph edges and policy semantic records have equal identity sets, and graph composition uses the policy-impact provider for supplemental nodes, groups, and edges with no separate catalog source. | `integration` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) graph composition evidence |
-| PIA2-A5 | Verifier and coverage consume the compiled authority; no catalog TOML parsing or relation/path compatibility switch remains outside `standards_policy_impact`. | `integration` | `not-applicable` | `automated` | `pending` | PIA2-010 typed verifier Adapter recovery |
+| PIA2-A5 | Verifier and coverage consume the compiled authority; no catalog TOML parsing or relation/path compatibility switch remains outside `standards_policy_impact`. | `integration` | `not-applicable` | `automated` | `satisfied` | PIA2-010 direct/registered typed verifier Adapter evidence |
 | PIA2-A6 | A1 v10 public closure is reachable from the four operations, excludes `PolicyImpactDeclaration` and `CompiledPolicyImpactSemantics`, and returns typed operation-shaped relationship semantics. | `contract` | `not-applicable` | `automated` | `satisfied` | [M0 candidate](reports/authority-cutover-candidate.md) generated and operation-closure evidence |
 | PIA2-A7 | Old v9 handles and states are explicitly unsupported; v10 query, prepare, resolve, inspect, persistence, and genuine cold-process reconstruction use the accepted version identities with no compatibility fallback. | `system` | `not-applicable` | `automated` | `satisfied` | [Prerequisite candidate](reports/prerequisite-candidate.md) version and cold-process evidence |
-| PIA2-A8 | One post-freeze certification pass derives current subjects and requirements mechanically and proves exact active-policy-unit/requirement/attestation/certificate equality, with no stale, duplicate, extra, missing, or blocked subject. Predecessor presence remains generated migration provenance and cannot change certification behavior or identity. | `integration` | `not-applicable` | `automated` | `pending` | Re-certification required after the admitted contract correction |
-| PIA2-A9 | One clean candidate passes focused package tests, generated freshness, registered declarative suites, the complete Python checkpoint, retained migration checks, and diff validation. | `integration` | `not-applicable` | `automated` | `pending` | Pending exact-tree candidate report |
+| PIA2-A8 | One post-freeze certification pass derives current subjects and requirements mechanically and proves exact active-policy-unit/requirement/attestation/certificate equality, with no stale, duplicate, extra, missing, or blocked subject. Predecessor presence remains generated migration provenance and cannot change certification behavior or identity. | `integration` | `not-applicable` | `automated` | `satisfied` | [Recovered coverage certification](reports/certify-recovered-coverage.md) |
+| PIA2-A9 | One clean candidate passes focused package tests, generated freshness, registered declarative suites, the complete Python checkpoint, retained migration checks, and diff validation. | `integration` | `not-applicable` | `automated` | `satisfied` | [Recovery candidate](reports/prerequisite-recovery-candidate.md) |
 | PIA2-A10 | An independent reviewer accepts the exact candidate against repository Standards and this specification with no unresolved consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent acceptance report |
 
 ## Scope
@@ -567,30 +567,31 @@ produce a new exact candidate.
 
 **Tasks:**
 
-- [ ] Replace identical per-kind evidence booleans with one contract-level
+- [x] Replace identical per-kind evidence booleans with one contract-level
   `required-registered-suite` evidence-owner rule. Reject any other value and
   remove the field from `RelationshipKind`; do not add optional evidence or a
   compatibility interpretation.
-- [ ] Strictly decode every optional contract field. A present malformed value
+- [x] Strictly decode every optional contract field. A present malformed value
   is invalid and cannot be normalized to absence.
-- [ ] Make the registered verifier loader translate policy-impact, metadata,
+- [x] Make the registered verifier loader translate policy-impact, metadata,
   and graph failures through its typed diagnostic Adapter exactly as the direct
   loader does.
-- [ ] Derive representative target classes and relationship kinds from the
+- [x] Derive representative target classes and relationship kinds from the
   loaded contract and execute every positive and negative pairing. Store no
   relationship-kind, artifact-kind, edge, or standards total.
-- [ ] Add focused mutations for the global evidence rule, omitted evidence
+- [x] Add focused mutations for the global evidence rule, omitted evidence
   owner, malformed optional validator, and registered-loader compiler failure.
-- [ ] Freeze the corrected contract and prove that relationships, graph facts,
+- [x] Freeze the corrected contract and prove that relationships, graph facts,
   public operation shapes, and transition provenance retain their semantic
   identity sets. Any topology, relation, target, scope, applicability,
   evidence-owner, or public-shape change is a replan trigger.
-- [ ] Derive the new current requirements, author one exact attestation per
+- [x] Derive the new current requirements, author one exact attestation per
   requirement through the existing certification Interface, and prove exact
   active-unit/requirement/attestation/certificate equality.
-- [ ] Run all focused packages, generated checks, registered declarative suites,
-  complete checkpoint, Ruff, and diff validation. Commit one clean candidate
-  and obtain independent exact-tree acceptance.
+- [x] Run all focused packages, generated checks, registered declarative suites,
+  complete checkpoint, Ruff, and diff validation, and prepare one clean
+  exact-tree candidate.
+- [ ] Obtain independent exact-tree acceptance.
 
 **Acceptance gate:** The contract is the sole effective evidence-rule owner;
 all present values decode strictly; all contract-derived compatibility pairs
@@ -599,7 +600,7 @@ failure; current coverage subject sets are exactly equal after the corrected
 freeze; no semantic topology or public-shape drift occurs; and an independent
 report accepts one exact clean candidate.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ## Blockers
 
@@ -642,4 +643,4 @@ admission or acceptance protocol.
 - Acceptance status: `partial`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Active`
+- Final status: `Implemented`

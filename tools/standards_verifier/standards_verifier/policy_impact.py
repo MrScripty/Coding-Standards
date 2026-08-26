@@ -164,6 +164,25 @@ def _translate_analysis_error(
     )
 
 
+def _translate_metadata_error(
+    error: MetadataError,
+    *,
+    suite: str,
+    check: str,
+) -> EngineError:
+    failure = error.failure
+    return _diagnostic(
+        failure.code,
+        failure.message,
+        path=failure.path,
+        field=failure.field,
+        observed=failure.observed,
+        suite=suite,
+        check=check,
+        unavailable=failure.outcome == "unavailable",
+    )
+
+
 def _repository_path(registry: EdgeRegistry, node_id: str, source_path: str) -> str:
     node = registry.nodes[node_id]
     value = node.metadata.get("repository_path")
@@ -242,17 +261,7 @@ def load_policy_impact(
     except PolicyImpactError as error:
         raise _translate_policy_error(error, suite=suite, check=check) from error
     except MetadataError as error:
-        failure = error.failure
-        raise _diagnostic(
-            failure.code,
-            failure.message,
-            path=failure.path,
-            field=failure.field,
-            observed=failure.observed,
-            suite=suite,
-            check=check,
-            unavailable=failure.outcome == "unavailable",
-        ) from error
+        raise _translate_metadata_error(error, suite=suite, check=check) from error
     except GraphError as error:
         raise _diagnostic(
             error.failure.code,
@@ -296,6 +305,10 @@ def load_registered_policy_impact(
             corpus=corpus,
             compiled_policy_impact=compiled,
         )
+    except PolicyImpactError as error:
+        raise _translate_policy_error(error, suite=suite, check=check) from error
+    except MetadataError as error:
+        raise _translate_metadata_error(error, suite=suite, check=check) from error
     except GraphError as error:
         raise _diagnostic(
             error.failure.code,

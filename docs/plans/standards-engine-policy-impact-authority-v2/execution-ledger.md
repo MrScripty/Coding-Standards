@@ -434,3 +434,32 @@
   and post-correction coverage-renewal contracts.
 - Any semantic topology, relationship, public A1, horizon-membership, broader
   contract, standards-recovery, A1b, or A2 change is a replan trigger.
+
+## 2026-08-25 - Milestone 2 Recovered Candidate
+
+- The admitted recovery replaces nine ineffective per-kind evidence booleans
+  with one effective required-registered-suite rule, strictly decodes present
+  optionals, translates registered verifier failures through the typed
+  Adapter, and derives the complete compatibility matrix from contract kinds
+  and representative target classes.
+- Exact semantic comparison against rejected candidate `101001bd` is
+  byte-identical at SHA-256
+  `410a4d6fcaa3ef2fac61f1c09abafdc9f2e0089dd2147e204067c439375598f6`.
+  The corrected provider and declaration identities change, but topology,
+  relation, target, scope, applicability, evidence owner, rationale,
+  provenance, and public shape do not.
+- Post-freeze coverage compilation proves exact active-policy-unit,
+  requirement, attestation, and certificate subject equality. The horizon and
+  transition-provenance identities remain unchanged.
+- All 585 focused package tests, generated checks, contract validation, 224
+  registered suites, 53 retained migration checkers, scoped Ruff, plan checks,
+  and diff validation pass. No Bash checker or mutable count oracle was added.
+- PIA2-009 through PIA2-011 are resolved. PIA2-006 remains active through
+  independent acceptance. PIA2-A1, A2, A5, A8, and A9 are satisfied; A10
+  remains pending.
+- Lifecycle: the plan and Milestone 2 move from `Active` to `Implemented`.
+  Acceptance remains `partial`; standards recovery remains blocked, and A1b
+  and A2 remain inactive.
+- Next operation: commit one clean exact-tree candidate, then obtain the
+  reviewer-owned `prerequisite-acceptance.md`. No further implementation or
+  authority mutation is authorized before review.

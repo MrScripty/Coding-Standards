@@ -47,6 +47,7 @@ SEMANTIC_GROUP = "semantic"
 SOURCE_ID = "standards.policy-impact"
 CATALOG_SOURCE_ID = "standards.policy-impact-catalog"
 RELATIONSHIP_KIND_CONTRACT_VERSION = 2
+EVIDENCE_OWNER_RULE = "required-registered-suite"
 RELATION_FIELDS = {
     "source",
     "consumer",
@@ -227,6 +228,7 @@ class _AuthoringContract:
     catalog_version: int
     declaration_version: int
     relationship_kind_version: int
+    evidence_owner_rule: str
     artifact_kinds: frozenset[str]
     groups: tuple[EdgeGroup, ...]
     relationship_kinds: Mapping[str, RelationshipKind]
@@ -251,6 +253,7 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
             "catalog_contract_version",
             "declaration_schema_version",
             "relationship_kind_contract_version",
+            "evidence_owner_rule",
             "artifact_kinds",
             "groups",
             "relationship_kinds",
@@ -261,6 +264,7 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
             "catalog_contract_version",
             "declaration_schema_version",
             "relationship_kind_contract_version",
+            "evidence_owner_rule",
             "artifact_kinds",
             "groups",
             "relationship_kinds",
@@ -277,6 +281,15 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
             observed=str(raw["schema_version"]),
         )
     artifact_kinds = frozenset(_texts(raw, "artifact_kinds", path))
+    evidence_owner_rule = _text(raw, "evidence_owner_rule", path)
+    if evidence_owner_rule != EVIDENCE_OWNER_RULE:
+        raise _error(
+            "POLICY_IMPACT.UNSUPPORTED_CONTRACT",
+            "evidence-owner rule is unsupported",
+            path=path,
+            field="evidence_owner_rule",
+            observed=evidence_owner_rule,
+        )
     group_items = raw["groups"]
     if not isinstance(group_items, list) or not group_items:
         raise _error("POLICY_IMPACT.CONTRACT", "groups must be non-empty", path=path)
@@ -291,18 +304,23 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
             path=path,
             owner="group",
         )
+        group_id = _text(item, "id", path)
+        purpose = _text(item, "purpose", path)
+        directions = _texts(item, "directions", path)
+        transitive = _boolean(item, "transitive", path)
+        validator = _text(item, "validator", path) if "validator" in item else None
         try:
             traversal = TraversalPolicy(
-                frozenset(Direction.parse(value) for value in _texts(item, "directions", path)),
-                _boolean(item, "transitive", path),
+                frozenset(Direction.parse(value) for value in directions),
+                transitive,
             )
             groups.append(
                 EdgeGroup(
-                    _text(item, "id", path),
-                    _text(item, "purpose", path),
+                    group_id,
+                    purpose,
                     traversal,
                     Provenance(SOURCE_ID, "generator", path),
-                    item.get("validator") if isinstance(item.get("validator"), str) else None,
+                    validator,
                 )
             )
         except (GraphError, ValueError) as error:
@@ -339,7 +357,6 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
                 "groups",
                 "propagation",
                 "traversable",
-                "evidence_required",
             },
             required={
                 "id",
@@ -347,7 +364,6 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
                 "groups",
                 "propagation",
                 "traversable",
-                "evidence_required",
             },
             path=path,
             owner="relationship_kind",
@@ -383,7 +399,6 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
             groups_for_kind,
             propagation,
             _boolean(item, "traversable", path),
-            _boolean(item, "evidence_required", path),
         )
     relationship_version = _integer(raw, "relationship_kind_contract_version", path)
     if relationship_version != RELATIONSHIP_KIND_CONTRACT_VERSION:
@@ -398,6 +413,7 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
         _integer(raw, "catalog_contract_version", path),
         _integer(raw, "declaration_schema_version", path),
         relationship_version,
+        evidence_owner_rule,
         artifact_kinds,
         tuple(groups),
         dict(sorted(kinds.items())),
@@ -593,7 +609,7 @@ def _load_declarations(
     root: Path,
     paths: tuple[str, ...],
     fact_schema: FactSchema,
-    schema_version: int,
+    contract: _AuthoringContract,
 ) -> tuple[_Declaration, ...]:
     result = []
     for path in paths:
@@ -607,7 +623,10 @@ def _load_declarations(
         )
         owner = _text(raw, "owner", path)
         relationships = raw["relationships"]
-        if raw["schema_version"] != schema_version or not isinstance(relationships, list):
+        if (
+            raw["schema_version"] != contract.declaration_version
+            or not isinstance(relationships, list)
+        ):
             raise _error(
                 "POLICY_IMPACT.UNSUPPORTED_DECLARATION",
                 "relationship source schema is unsupported or invalid",
@@ -629,17 +648,19 @@ def _load_declarations(
                     path=path,
                     field="applicability",
                 )
+            required = {
+                "source",
+                "consumer",
+                "relation",
+                "applicability",
+                "rationale",
+            }
+            if contract.evidence_owner_rule == EVIDENCE_OWNER_RULE:
+                required.add("evidence_owner")
             _exact(
                 item,
                 allowed=RELATION_FIELDS,
-                required={
-                    "source",
-                    "consumer",
-                    "relation",
-                    "applicability",
-                    "evidence_owner",
-                    "rationale",
-                },
+                required=required,
                 path=path,
                 owner=owner,
             )
@@ -756,7 +777,7 @@ def compile_policy_impact(
         repo_root,
         declaration_sources,
         facts,
-        contract.declaration_version,
+        contract,
     )
 
     suite_nodes: dict[str, list[str]] = {}
@@ -894,6 +915,7 @@ def compile_policy_impact(
             "evidence_owner": evidence_owner,
             "rationale": declaration.rationale,
             "relationship_kind_contract_version": contract.relationship_kind_version,
+            "evidence_owner_rule": contract.evidence_owner_rule,
         }
         semantics[edge_id] = PolicyImpactSemantics(
             edge_id,
@@ -949,7 +971,6 @@ def compile_policy_impact(
                     "groups": list(kind.groups),
                     "propagation": kind.propagation,
                     "traversable": kind.traversable,
-                    "evidence_required": kind.evidence_required,
                 }
                 for kind in sorted(kinds.values(), key=lambda item: item.id)
             ],
