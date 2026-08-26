@@ -6,7 +6,7 @@
 
 **Next slice:** obtain independent admission of the bounded acceptance recovery
 
-**Acceptance status:** `pending`
+**Acceptance status:** `partial`
 
 **Planning base:** commit
 `cb6abdb89afaa4fca25706cd42f621a8c762480f`, tree
@@ -326,10 +326,12 @@ ambient historical authority.
 
 ## Acceptance-Rejection Recovery Admission
 
-1. Commit one governance-only replan candidate whose parent is rejected exact
-   candidate commit `101001bd2373631b0474d214871ba11ad1b6e4ab`, tree
-   `955e77e06c2477569da6a6f3f8263c602ca7533d`. It may change only this plan,
-   its ledger and issues, and the blocked standards-recovery plan, ledger, and
+1. Commit one governance-only replan candidate compared with rejected exact
+   implementation candidate `101001bd2373631b0474d214871ba11ad1b6e4ab`, tree
+   `955e77e06c2477569da6a6f3f8263c602ca7533d`. Its descendant lineage may
+   contain only rejected recovery-governance candidates and their documented
+   corrections. The cumulative recovery diff may change only this plan, its
+   ledger and issues, and the blocked standards-recovery plan, ledger, and
    SESR-030 issue. It contains no contract, compiler, verifier, test,
    attestation, relationship, A1b, or A2 mutation.
 2. An independent reviewer authors only
@@ -438,8 +440,9 @@ expected intermediate blocker.
   schema version 2 in the same cutover. Apply relation changes only to the three
   files named by the migration inventory; reject every version 1 source after
   cutover and provide no compatibility loader.
-- [x] Require explicit artifact kinds and typed relation/target compatibility;
-  add complete positive and negative contract matrices.
+- [x] Require explicit artifact kinds and typed relation/target compatibility.
+  The former claim of complete positive and negative matrix evidence is
+  `Superseded`; it was incomplete and is owned by Milestone 2.
 - [x] Migrate the seven retained declarative verifier cases through the
   production registry/declaration Interface. Delete the obsolete owner-wide
   suite-inference fixture pair and remove current documentation or tests that
@@ -636,7 +639,7 @@ admission or acceptance protocol.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `partial`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
 - Final status: `Blocked`

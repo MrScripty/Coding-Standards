@@ -382,3 +382,23 @@
 - Next operation: commit the governance-only recovery candidate, obtain the
   reviewer-owned recovery admission, then apply the exact mechanical
   transition and start before source changes.
+
+## 2026-08-25 - Acceptance-Recovery Admission Rejection
+
+- Rejected governance candidate: commit
+  `d87b6e736ffb0779181e49fd2ed303af1a82b367`, tree
+  `a50323f91cf2582c0bd1c1f091f81a51f90a7dfd`.
+- Standards finding: the plan reported acceptance `pending` while retaining
+  satisfied objectives; the correct aggregate state is `partial`.
+- Specification finding: Milestone 0 still claimed complete positive and
+  negative compatibility matrices although independent review proved that
+  evidence sampled only part of the contract.
+- Correction: acceptance is now `partial`. The false matrix-completion claim
+  is removed and explicitly `Superseded`; Milestone 2 is its sole current
+  owner. The recovery architecture, write set, coverage-renewal consequence,
+  exclusions, and lifecycle protocol otherwise remain unchanged.
+- Candidate lineage is clarified so rejected governance candidates and their
+  bounded corrections may remain as durable history after the rejected
+  implementation candidate. No implementation mutation is admitted.
+- Next operation: commit this corrected governance-only candidate and repeat
+  independent recovery admission.
