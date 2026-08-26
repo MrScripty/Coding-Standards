@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Verifying; independent acceptance pending`
+**Status:** `Superseded; replacement candidate pending`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree

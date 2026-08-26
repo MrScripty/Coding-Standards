@@ -1357,3 +1357,26 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: independent Standards and specification review of the exact
   transition tree, focused on `SESR-031`, current lifecycle authority, final
   dispositions, and preserved behavioral/coverage evidence.
+
+## 2026-08-25 - Replacement Candidate Rejection And Systemic Narration Replan
+
+- Rejected candidate: commit
+  `3ab8201a6dd925954e15b93583f1b227dad63987`, tree
+  `f5abaa1f90fcec41d72f084349f1b0be3226a46b`.
+- Independent finding: the plan objective and SR-A14 still described candidate
+  creation as future work while the plan was `Verifying`; the disposition
+  report labeled completed coverage as deferred.
+- Systemic audit: the same current-state invariant also selects future-tense M1
+  closure instructions and active-M1 write-set narration in current plan and
+  disposition authority. Historical ledger and admission-report narration is
+  excluded because it correctly records past states.
+- Lifecycle result: candidate `3ab8201a6dd925954e15b93583f1b227dad63987`
+  is `Superseded`; the plan and Milestone 2 return from `Verifying` to `Active`
+  for one governance-only correction. SR-A4, SR-A14, and SR-A15 remain pending.
+- Frozen evidence: both review axes confirmed coverage and behavioral evidence,
+  write-set compliance, generated freshness, exact-set oracles, and A1b/A2
+  exclusion. No policy, runtime, attestation, fixture, suite, generated, or
+  package-test path may change.
+- Next operation: replace every current-authority statement selected by the
+  systemic audit, verify the complete current projection, and create a new
+  implementation boundary before another exact-tree review.

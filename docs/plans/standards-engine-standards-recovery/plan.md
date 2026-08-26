@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Verifying`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 2 renewed exact-tree verification
+**Current phase:** Milestone 2 current-authority narration correction
 
-**Next slice:** obtain independent Standards and specification review
+**Next slice:** replace every stale future-state projection in current authority
 
 **Acceptance status:** `partial`
 
@@ -75,11 +75,13 @@ policy, semantic metadata, agent entry points, fixtures, and executable
 verification.
 
 The six policy families, reconciled graph, protected consumer closure, and
-final coverage evidence are implemented. Candidate `3b2ffe39851ef6b5e8b51b4c5ead1e68292e40d0`
-was rejected because current governance documents retained superseded
-pre-start narration. The remaining work is the admitted governance-only
-correction, a new exact candidate, and independent acceptance. Broader A1b
-implementation and all A2 work remain excluded.
+final coverage evidence are implemented. Candidates
+`3b2ffe39851ef6b5e8b51b4c5ead1e68292e40d0` and
+`3ab8201a6dd925954e15b93583f1b227dad63987` were rejected because current
+governance documents retained superseded pre-start or pre-candidate narration.
+The remaining work is one systemic current-authority correction, a new exact
+candidate, and independent acceptance. Broader A1b implementation and all A2
+work remain excluded.
 
 ## Objective Acceptance
 
@@ -332,7 +334,7 @@ writable in this milestone.
 - [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
-- [x] Record one candidate commit/tree without claiming acceptance.
+- [ ] Record one replacement candidate commit/tree without claiming acceptance.
 - [ ] Obtain independent Standards and specification review of that exact tree.
 - [ ] Mark this recovery `Accepted` only after SR-A1 through SR-A15 are
   satisfied. Only then may a separate A1b plan and superseding ADR be authored.
@@ -341,7 +343,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Verifying`
+**Status:** `Active`
 
 ## Verification Strategy
 
@@ -358,9 +360,9 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 has a green frozen boundary. Milestone 2 implementation and its
-  governance correction are complete; renewed exact-tree verification is in
-  progress.
+- Milestone 1 has a green frozen boundary. Milestone 2 behavioral and coverage
+  implementation is complete; its current-authority narration correction is
+  active before renewed exact-tree verification.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
@@ -416,4 +418,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Verifying`
+- Final status: `Active`
