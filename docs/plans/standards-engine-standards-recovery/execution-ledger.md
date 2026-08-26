@@ -1380,3 +1380,23 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: replace every current-authority statement selected by the
   systemic audit, verify the complete current projection, and create a new
   implementation boundary before another exact-tree review.
+
+## 2026-08-25 - Systemic Current-Authority Correction Implemented
+
+- Plan result: the objective describes completed implementation and names only
+  exact candidate creation, independent review, and acceptance as remaining;
+  M1 closure is recorded as a proved frozen result rather than future
+  admission work.
+- Disposition result: the admitted M1 write set is historical implementation
+  scope, conflicting assignments are absent from the reconciled closure, and
+  completed M2 coverage is labeled as a final result rather than deferred work.
+- Candidate result: the source-complete report distinguishes the implementation
+  boundary from the later non-recursive verification candidate.
+- Systemic audit result: no other current plan, candidate, coverage,
+  disposition, or issue authority describes completed M1/M2 work as future,
+  active, deferred, or unavailable. Dated ledger and admission-report history
+  retains its original lifecycle narration.
+- Lifecycle transition: the plan and Milestone 2 move from `Active` to
+  `Implemented`; SR-A4, SR-A14, and SR-A15 remain pending.
+- Next operation: commit the clean implementation boundary, then use a separate
+  `verify` transition to create the exact independent-review candidate.

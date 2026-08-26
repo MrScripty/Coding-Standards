@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Final coverage compiled; exact-tree acceptance pending`
+**Status:** `Final coverage and dispositions complete; acceptance pending`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -15,7 +15,7 @@ attestations, or final acceptance evidence.
 
 Consumer membership is the admitted `W/S/E/R` closure:
 
-- `W` is the exact Milestone 1 write set in the active plan.
+- `W` is the exact admitted Milestone 1 write set.
 - `S` is resolved from the audit-selected suite IDs through the canonical
   suite registry and each suite's registered inputs.
 - `E` is the audit's exact non-registry consumer list.
@@ -24,7 +24,7 @@ Consumer membership is the admitted `W/S/E/R` closure:
 Where a row below names an audit section or suite ID set, the disposition
 applies independently to every exact member resolved by that authority. A path
 present in more than one set is canonicalized before assignment. Conflicting
-assignments are invalid; none are present in this candidate.
+assignments are invalid; none are present in the reconciled closure.
 
 ## Updated Consumers
 
@@ -139,7 +139,7 @@ new manifest:
 | Audit-selected suite IDs | `sha256:b7f518d73c6b53d619be94b232be1443cfbe9c37fb1d9ad9fed550110888a78f` | Every ID resolves to one registered suite definition. |
 | Suite definitions and registered inputs (`S`) | `sha256:28c89662509f3e39d7263c6a308b8846a613d2d23b5a6fd742370d6fd6942af3` | Every registered path resolves. |
 | Exact non-registry consumers (`E`) | `sha256:c3b06f4455c0c8a6eb76a29b3c32dbef4c100de4afccc8ff31c4fc551df84150` | Every exact path resolves; no wildcard is present. |
-| Milestone 1 write set (`W`) | `sha256:bb4cab1bc88b56afde7b275f1a56428b08fa1b70364ffa18a513dba60512ca21` | Exactly the four active-plan paths are writable. |
+| Milestone 1 write set (`W`) | `sha256:bb4cab1bc88b56afde7b275f1a56428b08fa1b70364ffa18a513dba60512ca21` | Exactly the four admitted Milestone 1 paths were writable. |
 | Protected closure (`R`) | `sha256:c793877e1605eca0b5ff21fed71b49d969615269a64cd6e41932ce2f006b66a9` | `R = (S union E) - W`; `W intersect R` is empty. |
 | Complete mapped closure (`W union R`) | `sha256:95b73a7db9efa6cdb0ed97817d7b29fd4b378035b36de585a397e1d5fd924e65` | Every mapped consumer has the disposition assigned by this report. |
 
@@ -172,11 +172,11 @@ lifecycle checks, generated checker inventory, retained migration checks, and
 `git diff --check` also passed. These executions verify the named semantic and
 set-equality claims above; diagnostic corpus totals are not acceptance oracles.
 
-## Deferred Coverage Work
+## Final Coverage Result
 
 Milestone 2 rederived every requirement from the frozen authority and reused
 every dependency-valid attestation without modification. The exact active
 policy-unit, requirement, attestation, and generated-certificate subject sets
 are equal, as recorded in [final coverage evidence](standards-recovery-coverage.md).
 This result does not accept the recovery or authorize runtime or protected-test
-edits; candidate verification and independent review remain pending.
+edits; independent exact-tree acceptance remains pending.

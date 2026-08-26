@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Implemented`
 
-**Current phase:** Milestone 2 current-authority narration correction
+**Current phase:** Milestone 2 current-authority correction complete
 
-**Next slice:** replace every stale future-state projection in current authority
+**Next slice:** start exact-tree verification from the clean implementation boundary
 
 **Acceptance status:** `partial`
 
@@ -74,14 +74,12 @@ Generated Contract routing explicit and mutually consistent across normative
 policy, semantic metadata, agent entry points, fixtures, and executable
 verification.
 
-The six policy families, reconciled graph, protected consumer closure, and
-final coverage evidence are implemented. Candidates
-`3b2ffe39851ef6b5e8b51b4c5ead1e68292e40d0` and
-`3ab8201a6dd925954e15b93583f1b227dad63987` were rejected because current
-governance documents retained superseded pre-start or pre-candidate narration.
-The remaining work is one systemic current-authority correction, a new exact
-candidate, and independent acceptance. Broader A1b implementation and all A2
-work remain excluded.
+The six policy families, reconciled graph, protected consumer closure, final
+coverage, consumer dispositions, and systemic current-authority correction are
+implemented. All automated objective evidence is complete. Only creation and
+independent review of the exact verification candidate, followed by the
+authorized acceptance transition, remain. Broader A1b implementation and all
+A2 work remain excluded.
 
 ## Objective Acceptance
 
@@ -181,25 +179,22 @@ The pre-policy inventory and scope audit remain membership authority:
 - [standards-recovery-consumer-dispositions.md](reports/standards-recovery-consumer-dispositions.md)
   owns current consumer dispositions.
 
-At the resume candidate tree:
+At the frozen Milestone 1 boundary:
 
-- `W` is the exact remaining milestone write set.
+- `W` was the exact admitted Milestone 1 write set.
 - `S` is every suite definition and registered input mechanically resolved
   from the 36 audit-selected suite IDs through the canonical suite registry.
 - `E` is the audit's exact non-registry consumer list and contains no wildcard.
 - `R = (S union E) - W` is the protected mapped-consumer closure.
 
 The semantic inventory and pre-policy scope audit are immutable membership
-authority for the remainder of this recovery. Admission must prove every
-selected suite resolves, every path in `E` resolves, `W intersect R` is empty,
-and mapped consumers equal `W union R`. `R` protects mutation and requires
-disposition review; it does not restrict incidental reading. A semantic change
-required outside `W` is a re-plan trigger.
-
-For every policy unit, final verification must resolve the exact locator,
-compare prior and current relationships, retain every selected consumer, audit
-the independent horizon, assign one non-blocked disposition, and recompile
-coverage after any authority change.
+authority for the remainder of this recovery. Milestone 1 proved that every
+selected suite and path resolves, `W intersect R` is empty, and mapped
+consumers equal `W union R`. `R` protected mutation without restricting
+incidental reading. The final reconciliation resolved every policy-unit
+locator, compared prior and current relationships, retained every selected
+consumer, audited the independent horizon, assigned one non-blocked
+disposition, and recompiled coverage after authority freeze.
 
 ## Required Projection Matrix
 
@@ -343,7 +338,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ## Verification Strategy
 
@@ -360,9 +355,9 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 has a green frozen boundary. Milestone 2 behavioral and coverage
-  implementation is complete; its current-authority narration correction is
-  active before renewed exact-tree verification.
+- Milestone 1 has a green frozen boundary. Milestone 2 behavioral, coverage,
+  disposition, and current-authority implementation is complete; renewed
+  exact-tree verification has not yet started.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
@@ -418,4 +413,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Implemented`
