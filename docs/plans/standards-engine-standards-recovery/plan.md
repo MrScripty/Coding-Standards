@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Implemented`
+**Plan status:** `Verifying`
 
-**Current phase:** Milestone 2 current-authority correction complete
+**Current phase:** Milestone 2 exact-tree independent verification
 
-**Next slice:** start exact-tree verification from the clean implementation boundary
+**Next slice:** obtain independent Standards and specification review
 
 **Acceptance status:** `partial`
 
@@ -44,9 +44,13 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `82881a2e3b811be199d16e5110a85dbd5432d4d7`, tree
 `af9eba1ba718e75a64ad475b406c365651e29aa9`
 
-**Replacement implementation boundary:** commit
+**Prior governance-correction boundary:** commit
 `aef1843088b18761b9d1c97e7c05f45e622f6033`, tree
 `044c0ef57475bd23bf6a4c7d5e9d03fb27832283`
+
+**Current implementation boundary:** commit
+`be4c6579a525800721f9ba4e3cf727b30d0c05f1`, tree
+`c810ea9fb1b0d010d2fd91c5b9ee92a5a05658fa`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -76,10 +80,10 @@ verification.
 
 The six policy families, reconciled graph, protected consumer closure, final
 coverage, consumer dispositions, and systemic current-authority correction are
-implemented. All automated objective evidence is complete. Only creation and
-independent review of the exact verification candidate, followed by the
-authorized acceptance transition, remain. Broader A1b implementation and all
-A2 work remain excluded.
+implemented. All automated objective evidence is complete, and the current
+transition tree is the exact verification candidate. Only independent review
+and the authorized acceptance transition remain. Broader A1b implementation
+and all A2 work remain excluded.
 
 ## Objective Acceptance
 
@@ -98,7 +102,7 @@ A2 work remain excluded.
 | SR-A11 | Generated closure, public result, semantic-version identity, and JSON Schema equality repair families are reproduced without changing A1 runtime behavior. | `contract` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) and [equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
 | SR-A12 | Immutable reads and cold reconstruction are reproduced through their public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) |
 | SR-A13 | Historical acceptance-oracle failures are reproduced at their intended failure points without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `satisfied` | [Exact negative diagnostics](reports/historical-a1-repair-reproductions.md#exact-negative-diagnostics) |
-| SR-A14 | One clean candidate commit and tree pass focused recovery checks and all registered repository verification. | `integration` | `not-applicable` | `automated` | `pending` | Pending replacement exact-tree candidate after governance correction |
+| SR-A14 | One clean candidate commit and tree pass focused recovery checks and all registered repository verification. | `integration` | `not-applicable` | `automated` | `satisfied` | [Exact candidate result and verification](reports/standards-recovery-candidate.md) |
 | SR-A15 | An independent reviewer accepts the exact candidate, final coverage, dispositions, and objective claims with no blocked consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent recovery acceptance |
 
 ## Scope
@@ -329,7 +333,7 @@ writable in this milestone.
 - [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
-- [ ] Record one replacement candidate commit/tree without claiming acceptance.
+- [x] Record one replacement candidate commit/tree without claiming acceptance.
 - [ ] Obtain independent Standards and specification review of that exact tree.
 - [ ] Mark this recovery `Accepted` only after SR-A1 through SR-A15 are
   satisfied. Only then may a separate A1b plan and superseding ADR be authored.
@@ -338,7 +342,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Implemented`
+**Status:** `Verifying`
 
 ## Verification Strategy
 
@@ -356,8 +360,8 @@ accepting the exact clean candidate tree.
 ## Blockers
 
 - Milestone 1 has a green frozen boundary. Milestone 2 behavioral, coverage,
-  disposition, and current-authority implementation is complete; renewed
-  exact-tree verification has not yet started.
+  disposition, and current-authority implementation is complete; independent
+  exact-tree verification is in progress.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
@@ -413,4 +417,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Implemented`
+- Final status: `Verifying`

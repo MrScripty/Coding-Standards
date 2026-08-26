@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Implemented; verification candidate pending`
+**Status:** `Verifying; independent acceptance pending`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -11,11 +11,11 @@
 `70f2ec4f249ae6eb6774a17443b15943f57bdfec`
 
 This report records the source-complete standards-recovery implementation after
-the systemic current-authority correction tracked by `SESR-031`. It does not
-claim a recursive commit identity. A separate lifecycle transition creates the
-exact verification candidate, and the independent acceptance report must bind
-that clean commit and tree. This report does not admit A1b planning, A1b
-runtime work, or A2.
+the systemic current-authority correction tracked by `SESR-031`. The current
+lifecycle-transition tree is the exact verification candidate; this report
+does not claim its commit identity recursively. The independent acceptance
+report must bind that clean commit and tree. This report does not admit A1b
+planning, A1b runtime work, or A2.
 
 ## Implemented Result
 
@@ -88,5 +88,5 @@ lint acceptance is exact over the recovery's Python delta.
 
 No attestation, policy, graph, suite, generated artifact, runtime, package test,
 external corpus, dependency, A1b implementation, or A2 path changed in
-Milestone 2. The separate verification transition creates the exact candidate
-for independent review.
+Milestone 2. The current verification-transition tree is the exact candidate
+awaiting independent review.
