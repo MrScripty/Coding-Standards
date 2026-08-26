@@ -1142,3 +1142,25 @@ superseded by the discovery-admission transition in the active plan.
 - Lifecycle: the recovery plan and Milestone 1 remain `Blocked`; Milestone 0
   remains `Accepted`. The sole next operation is to commit this exact blocked
   governance candidate and obtain the reviewer-owned resume-admission report.
+
+## 2026-08-25 - Recovery Resume Candidate Admission Rejection
+
+- Independent review rejected candidate
+  `e3334667e45829394ae8099ae1d886b196f07c7b`, tree
+  `3ec9cd8d925d84feb64e515204a822601ea16679`, because current issue and
+  disposition records contradicted the accepted prerequisite, two issue links
+  targeted removed plan sections, and one Milestone 1 write path helped define
+  the protected consumer closure it was meant to constrain.
+- Supersession: that candidate and its four-file governance scope are
+  `Superseded` by one corrected cumulative candidate derived from transition
+  `dd571976068916f2f95d89c55c8824a20b92acb2`.
+- Replacement authority: the semantic-impact inventory and pre-policy scope
+  audit are frozen consumer-membership authorities. The consumer-dispositions
+  report remains writable because it owns status and evidence, not membership.
+- The corrected cumulative candidate may change exactly the recovery plan,
+  execution ledger, issues, consumer-dispositions report, and the accepted
+  prerequisite plan. No policy, graph, suite, generated artifact, runtime,
+  A1b, or A2 path is authorized.
+- Lifecycle: the recovery and Milestone 1 remain `Blocked`; Milestone 0 remains
+  `Accepted`; SESR-030 remains active. The next operation is to commit the
+  corrected candidate and obtain renewed independent exact-tree admission.

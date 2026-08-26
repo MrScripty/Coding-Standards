@@ -2,9 +2,9 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** standards-recovery resume admission
+**Current phase:** standards-recovery resume admission correction
 
-**Next slice:** admit the compacted recovery-resume boundary
+**Next slice:** obtain renewed exact-tree recovery-resume admission
 
 **Acceptance status:** `partial`
 
@@ -147,9 +147,10 @@ acceptance. Broader A1b implementation and all A2 work remain excluded.
 The pre-policy inventory and scope audit remain membership authority:
 
 - [semantic-impact-inventory.md](reports/semantic-impact-inventory.md) owns the
-  policy-family mapping and proposed consumer classes.
+  policy-family mapping, proposed consumer classes, and the two exact retained
+  checker paths adopted by reference from the scope audit.
 - [pre-policy-scope-audit.md](reports/pre-policy-scope-audit.md) owns the 36
-  selected suite IDs and exact non-registry consumer list.
+  selected suite IDs and all other exact non-registry consumers.
 - [standards-recovery-consumer-dispositions.md](reports/standards-recovery-consumer-dispositions.md)
   owns current consumer dispositions.
 
@@ -161,10 +162,12 @@ At the resume candidate tree:
 - `E` is the audit's exact non-registry consumer list and contains no wildcard.
 - `R = (S union E) - W` is the protected mapped-consumer closure.
 
-Admission must prove every selected suite resolves, every path in `E` resolves,
-`W intersect R` is empty, and mapped consumers equal `W union R`. `R` protects
-mutation and requires disposition review; it does not restrict incidental
-reading. A semantic change required outside `W` is a re-plan trigger.
+The semantic inventory and pre-policy scope audit are immutable membership
+authority for the remainder of this recovery. Admission must prove every
+selected suite resolves, every path in `E` resolves, `W intersect R` is empty,
+and mapped consumers equal `W union R`. `R` protects mutation and requires
+disposition review; it does not restrict incidental reading. A semantic change
+required outside `W` is a re-plan trigger.
 
 For every policy unit, final verification must resolve the exact locator,
 compare prior and current relationships, retain every selected consumer, audit
@@ -188,12 +191,16 @@ The accepted prerequisite does not itself resume this blocked plan. Resume uses
 one current protocol:
 
 1. Commit one blocked governance candidate derived from prerequisite transition
-   `dd571976068916f2f95d89c55c8824a20b92acb2`. The candidate may change only:
+   `dd571976068916f2f95d89c55c8824a20b92acb2`. Candidate
+   `e3334667e45829394ae8099ae1d886b196f07c7b` is `Superseded` by the
+   corrected candidate. The cumulative candidate may change only:
    - this `plan.md`;
    - `execution-ledger.md`;
    - `issues.md`; and
    - the accepted prerequisite `plan.md` to reconcile completed tasks and its
-     stale blocker narration.
+     stale blocker narration; and
+   - `reports/standards-recovery-consumer-dispositions.md` to reconcile
+     current dispositions with the accepted prerequisite.
 2. An independent reviewer authors only
    `reports/standards-recovery-resume-admission.md`, binding the exact candidate
    commit/tree and confirming the compact current authority, exact remaining
@@ -240,7 +247,6 @@ authority for final coverage.
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
-- `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-consumer-dispositions.md`
 
 All normative policy, Router/profile metadata, policy-unit and relationship
@@ -302,7 +308,6 @@ independent acceptance of one clean standards-recovery tree.
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
-- `docs/plans/standards-engine-standards-recovery/reports/semantic-impact-inventory.md`
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-consumer-dispositions.md`
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-coverage.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-candidate.md` (new)

@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Milestone 1 candidate evidence; prerequisite implemented`
+**Status:** `Implemented authority reconciled; final recovery verification pending`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -55,6 +55,9 @@ assignments are invalid; none are present in this candidate.
 | Six recovery suite definitions and their registry entries | Enforce each policy family through the Python verifier and register exact horizon inputs. |
 | `tools/standards_analysis/tests/test_routing.py` | Replaces mutable catalog totals with stable Generated Contract fact/rule semantics. |
 | `tools/standards_policy_impact/tests/test_compiler.py` | Replaces mutable relationship totals with complete graph/semantics identity-set equality. |
+| `tools/standards_verifier/tests/test_policy_impact.py` | Proves semantic policy-impact projection and owner closure without a mutable relationship total. |
+| `tools/standards_engine/tests/test_navigation.py` | Proves navigation cause presence and deduplication without a mutable relationship total. |
+| `tools/standards_engine/tests/test_analysis.py` | Proves compiler-derived consumer reasons without a mutable relationship total. |
 
 ## Registry-Derived Existing Suites
 
@@ -86,7 +89,7 @@ pre-policy scope audit remains the exact path authority.
 | Retained migration-owned plan checkers | `reviewed-no-change` | Existing behavior is unchanged. New negative and systemic scenarios run only through registered Python suites. |
 | A1 contract, runtime, and composition sources | `reviewed-no-change` | Recovery records A1 behavior and the known schema-equality nonconformance; runtime correction remains A1b scope. |
 | Existing Python-verifier adapters | `reviewed-no-change` | Existing generic decision, text, path, metadata, graph, and checkpoint adapters execute the new suites without source changes. |
-| Focused accepted-A1 and verifier tests other than the two Updated Consumers | `reviewed-no-change` | Existing assertions remain applicable. Three admitted live-authority cardinality replacements remain sequenced after Milestone 2 coverage renewal. |
+| Focused accepted-A1 and verifier tests not listed under Updated Consumers | `reviewed-no-change` | Existing assertions remain applicable. All admitted live-authority cardinality replacements are complete and independently accepted. |
 | `profiles/boundaries/language-bindings.md` | `reviewed-no-change` | Selected only when a genuine native/host or cross-language boundary exists. Generated output alone does not select it. |
 | `profiles/boundaries/ipc.md` | `reviewed-no-change` | Selected only when a process or independent-deployment boundary exists. Generated output alone does not select it. |
 | Dependency and toolchain manifests | `not-applicable` | Recovery adds no third-party implementation dependency and incorporates no external files. The reference-only specification decision remains separately recorded. |
@@ -98,9 +101,8 @@ the shared compiler, graph, analysis, verifier, public-contract, and coverage
 projections used by this report. Its current certification proves exact
 policy-unit/requirement/attestation/certificate subject equality through one
 compiled Interface. This migration changes no six-policy consumer disposition
-below and does not accept standards recovery. Independent prerequisite
-acceptance and a separately admitted recovery-resume transition remain
-required.
+below and does not accept standards recovery. The prerequisite is independently
+accepted; a separately admitted recovery-resume transition remains required.
 
 | Policy-unit source | Consumer projection result |
 | --- | --- |
@@ -124,7 +126,8 @@ registered suite. No selected consumer has a `blocked` disposition.
 ## Deferred Coverage Work
 
 Milestone 1 freezes the relationship and horizon authority. Milestone 2 must
-derive the resulting coverage requirements, renew attestations once, generate
-valid certificates, and prove exact subject equality before final acceptance.
-The expected stale-attestation result before that renewal is not a blocked
-consumer disposition and does not authorize runtime or protected-test edits.
+rederive the resulting coverage requirements, revalidate exact reusable
+attestations, renew only requirements whose identity changed, generate valid
+certificates, and prove exact subject equality before final acceptance. The
+accepted prerequisite coverage is valid for its exact requirement identities;
+it does not accept this recovery or authorize runtime or protected-test edits.
