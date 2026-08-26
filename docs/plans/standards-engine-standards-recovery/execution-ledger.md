@@ -1492,3 +1492,21 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: remove the two historical checklist entries, correct
   `SESR-006`, verify one clean replacement candidate, and repeat independent
   admission review.
+
+## 2026-08-25 - Semantic-Oracle Recovery Admission Transition
+
+- Reviewed candidate: commit
+  `86b94811e4a2c5d30ab79e41a864b67b1fc7b96f`, tree
+  `371ea74b60fef144d47d43cc38daaf3ad5f7faaa`.
+- Reviewer-only report: direct-child commit
+  `738a69952bd8682c07f723d7ec8d537ad5eadfe2`, tree
+  `8097be783e3bff5470640c433fa8def3e4749369`.
+- Independent result: both Standards and specification reviews report zero
+  findings and approve the exact two-test semantic-oracle recovery admission.
+- Mechanical transition: the plan and Milestone 2 move from `Blocked` to
+  `Planned`. No implementation, coverage, disposition, or objective status
+  changes in this transition.
+- Next operation: while the transition commit remains clean current `HEAD`,
+  invoke exact-head `start`; that direct-child commit must record this
+  transition and move the plan and Milestone 2 to `Active` before either test
+  may change.

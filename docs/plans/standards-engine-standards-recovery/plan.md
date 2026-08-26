@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Blocked`
+**Plan status:** `Planned`
 
-**Current phase:** Milestone 2 semantic-oracle recovery admission
+**Current phase:** Milestone 2 semantic-oracle recovery ready for exact-head start
 
-**Next slice:** obtain independent admission for the exact two-test write transfer
+**Next slice:** start the admitted semantic-oracle recovery from this exact transition
 
 **Acceptance status:** `partial`
 
@@ -59,6 +59,14 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 **Superseded semantic-oracle replan candidate:** commit
 `6cebe51e354f9691aa5122aa01c7f7c2215161e4`, tree
 `96589746ce9e5138a3314dc2e81fc2d710963ed0`
+
+**Reviewed semantic-oracle recovery candidate:** commit
+`86b94811e4a2c5d30ab79e41a864b67b1fc7b96f`, tree
+`371ea74b60fef144d47d43cc38daaf3ad5f7faaa`
+
+**Semantic-oracle recovery admission:** report commit
+`738a69952bd8682c07f723d7ec8d537ad5eadfe2`, tree
+`8097be783e3bff5470640c433fa8def3e4749369`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -389,7 +397,7 @@ milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Blocked`
+**Status:** `Planned`
 
 ## Verification Strategy
 
@@ -406,9 +414,9 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 remains the frozen authority boundary. Milestone 2 is blocked
-  pending independent admission of the exact `O` write transfer and semantic
-  assertion contract.
+- Milestone 1 remains the frozen authority boundary. Milestone 2 implementation
+  remains unavailable until exact-head `start` records this transition and
+  moves the milestone to `Active`.
 - Candidate `7a54d5fe7778f481278e4f21a12863d2f261b280` is superseded by the
   mutable-threshold and current-authority findings.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
@@ -466,4 +474,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Blocked`
+- Final status: `Planned`
