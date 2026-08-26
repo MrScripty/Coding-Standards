@@ -1472,3 +1472,23 @@ superseded by the discovery-admission transition in the active plan.
   `O union R2 = R` and `O intersect R2` remain the exact closure contract.
 - Next operation: verify and commit the corrected blocked candidate, then seek
   independent admission of that exact commit and tree.
+
+## 2026-08-25 - Corrected Semantic-Oracle Candidate Rejection
+
+- Rejected candidate: commit
+  `78a7f3f252040e7ccbf9c289a9a4c91ecdf8859b`, tree
+  `33518ebf9e74da72fde7758cb143e6b219a69467`.
+- Shared review finding: `SESR-006` still claimed SR-A5 evidence and
+  invariant-family dispositions were complete, contradicting the pending SR-A5
+  objective and the two `fix-now` consumers.
+- Standards finding: the active Milestone 1 checklist retained two checked
+  historical supersession claims. Superseded decision narration belongs in
+  this ledger rather than current plan authority.
+- Preserved result: both review axes accepted the exact `C -> R -> T -> S`
+  protocol, report exclusion, `O/R2` closure, actionable dispositions,
+  no-renewal coverage contract, exact assertion design, and A1b/A2 exclusion.
+- Supersession: candidate `78a7f3f252040e7ccbf9c289a9a4c91ecdf8859b`
+  is `Superseded`. The plan and Milestone 2 remain `Blocked`.
+- Next operation: remove the two historical checklist entries, correct
+  `SESR-006`, verify one clean replacement candidate, and repeat independent
+  admission review.

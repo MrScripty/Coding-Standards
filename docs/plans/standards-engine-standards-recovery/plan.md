@@ -306,9 +306,6 @@ prerequisite is evidence, not additional recovery write authority.
   cold-process fixtures and register six Python declarative suites.
 - [x] Replace live-authority Router, policy-impact compiler, and verifier
   cardinality oracles with semantic identity and cause-set assertions.
-- [x] Record the former claim that navigation and analysis thresholds were
-  replaced as `Superseded`; transfer their exact two-test correction to
-  Milestone 2.
 - [x] Regenerate admitted migration evidence without modifying checker or
   generator behavior.
 - [x] Replace split policy-impact validity/projection authority and obtain
@@ -323,9 +320,6 @@ prerequisite is evidence, not additional recovery write authority.
   relationship without using mutable totals.
 - [x] Revalidate every policy-unit locator, Router/profile projection, suite
   registration, generated artifact, and current consumer disposition.
-- [x] The M1 review found no blocked consumer at its frozen boundary. The later
-  exact-tree review superseded the claim that no protected consumer required
-  mutation by selecting the two `fix-now` consumers in `O`.
 - [x] Run focused recovery verification and the complete repository checkpoint,
   then record the exact frozen M1 tree.
 
