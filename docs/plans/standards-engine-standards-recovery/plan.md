@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 2 semantic-oracle recovery ready for exact-head start
+**Current phase:** Milestone 2 semantic-oracle correction
 
-**Next slice:** start the admitted semantic-oracle recovery from this exact transition
+**Next slice:** replace the two admitted mutable thresholds with exact derived sets
 
 **Acceptance status:** `partial`
 
@@ -67,6 +67,10 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 **Semantic-oracle recovery admission:** report commit
 `738a69952bd8682c07f723d7ec8d537ad5eadfe2`, tree
 `8097be783e3bff5470640c433fa8def3e4749369`
+
+**Semantic-oracle recovery transition:** commit
+`c73df46be07ee8656bcbcd27623d933661c1bf6e`, tree
+`567d93437f6916725d75681778f549dfe7945676`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -397,7 +401,7 @@ milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Verification Strategy
 
@@ -414,9 +418,9 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 remains the frozen authority boundary. Milestone 2 implementation
-  remains unavailable until exact-head `start` records this transition and
-  moves the milestone to `Active`.
+- Milestone 1 remains the frozen authority boundary. Milestone 2 authorizes
+  only the two test paths in `O` and their exact compiler/graph-derived
+  assertion contract.
 - Candidate `7a54d5fe7778f481278e4f21a12863d2f261b280` is superseded by the
   mutable-threshold and current-authority findings.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
@@ -474,4 +478,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`

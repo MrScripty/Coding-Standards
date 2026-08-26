@@ -1510,3 +1510,23 @@ superseded by the discovery-admission transition in the active plan.
   invoke exact-head `start`; that direct-child commit must record this
   transition and move the plan and Milestone 2 to `Active` before either test
   may change.
+
+## 2026-08-25 - Semantic-Oracle Recovery Exact-Head Start
+
+- Transition base: commit
+  `c73df46be07ee8656bcbcd27623d933661c1bf6e`, tree
+  `567d93437f6916725d75681778f549dfe7945676`.
+- Start precondition: the transition was clean current `HEAD`, directly
+  descended from the reviewer-only report, and plan lifecycle checks passed.
+- Lifecycle transition: the plan and Milestone 2 move from `Planned` to
+  `Active`. `SESR-018` is resolved by the complete `C -> R -> T -> S` chain.
+- Authorized implementation: modify only
+  `tools/standards_engine/tests/test_analysis.py` and
+  `tools/standards_engine/tests/test_navigation.py` to assert exact
+  compiler/graph-derived semantic cause sets and deduplication without mutable
+  totals.
+- Preserved boundary: runtime, coverage authority, attestations, policy,
+  relationships, suites, fixtures, generated artifacts, A1b, and A2 remain
+  unchanged.
+- Next operation: implement and run the two focused test modules, then prove
+  frozen coverage identities remain byte-identical.
