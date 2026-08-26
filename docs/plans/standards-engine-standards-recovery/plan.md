@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Implemented`
 
-**Current phase:** Milestone 2 replacement verification preparation
+**Current phase:** Milestone 2 exact verification candidate transition
 
-**Next slice:** rerun final verification and create one replacement candidate
+**Next slice:** create one non-recursive `Verifying` candidate from this boundary
 
 **Acceptance status:** `partial`
 
@@ -48,9 +48,13 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `aef1843088b18761b9d1c97e7c05f45e622f6033`, tree
 `044c0ef57475bd23bf6a4c7d5e9d03fb27832283`
 
-**Current implementation boundary:** commit
+**Semantic-oracle source boundary:** commit
 `c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`, tree
 `0123db9c299794cacd5a1cff52a20f2244d37b94`
+
+**Current implementation boundary:** commit
+`8bd77f93655d53d83cee2135282c09f4cfba1e92`, tree
+`3e95e3c6daf3b9d8b687a84838974df152445eb7`
 
 **Superseded verification candidate:** commit
 `7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
@@ -386,7 +390,7 @@ milestone.
   is admitted.
 - [x] Replace every stale current-state projection selected by the renewed
   systemic audit.
-- [ ] Rerun the two focused test modules, every focused package suite, contract
+- [x] Rerun the two focused test modules, every focused package suite, contract
   generation and validation, registered declarative verification, the complete
   checkpoint, scoped Ruff, generated freshness, and `git diff --check` from the
   frozen replacement tree.
@@ -399,7 +403,7 @@ milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ## Verification Strategy
 
@@ -476,4 +480,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Active`
+- Final status: `Implemented`

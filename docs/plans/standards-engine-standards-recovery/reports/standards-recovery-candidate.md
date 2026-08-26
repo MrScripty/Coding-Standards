@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Implementation complete; replacement verification pending`
+**Status:** `Implemented; exact verification transition pending`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -13,6 +13,10 @@
 **Semantic-oracle implementation boundary:** commit
 `c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`, tree
 `0123db9c299794cacd5a1cff52a20f2244d37b94`
+
+**Reconciled implementation boundary:** commit
+`8bd77f93655d53d83cee2135282c09f4cfba1e92`, tree
+`3e95e3c6daf3b9d8b687a84838974df152445eb7`
 
 This report records the source-complete implementation. Candidate
 `7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
