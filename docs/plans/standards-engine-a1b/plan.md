@@ -2,10 +2,11 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** Planning admission
+**Current phase:** Replacement planning admission
 
-**Next slice:** Independent exact-tree review of this plan, its proposed ADR,
-and its two planning reports
+**Next slice:** Independent exact-tree Standards and Specification review of
+this replacement plan, proposed ADR, issue registry, ledger, six planning
+reports, and the two machine-readable proposed v11 contract artifacts
 
 **Acceptance status:** `pending`
 
@@ -15,61 +16,76 @@ and its two planning reports
 
 ## Objective
 
-Replace A1's duplicated contract semantics and fragmented immutable-authority
-storage with one dependency-backed contract compiler, three explicit equality
-domains, one narrow immutable authority repository, and one generated public
+Replace A1's duplicated contract semantics, generic normalized identity
+serialization, and fragmented immutable-authority storage with one
+dependency-backed contract compiler, one codepoint-preserving identity encoder,
+one direct immutable authority-object repository, and one generated public
 request/result algebra. Preserve the four-operation read-only Standards Engine
-and immutable analysis kernel while making every issued handle reproducible in
-a cold process. Complete the coordinated replacement and independent exact-tree
-acceptance before any A2 review or implementation begins.
+and immutable analysis kernel while making every issued handle directly
+resolvable in a cold process. Complete independent exact-tree acceptance before
+any A2 review or implementation begins.
 
 ## Objective Acceptance
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1B-A1 | The exact selected Draft 2020-12 implementation passes every applicable case from the pinned official external suite through the production contract adapter. | `contract` | `required-real` | `automated` | `pending` | Pending Milestone 1 and final acceptance |
-| A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable semantics reject. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 and Milestone 3 |
-| A1B-A3 | Draft instance equality, applicability value equality, and NFC identity canonicalization pass independent domain-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 |
-| A1B-A4 | Snapshot, analysis, and navigation roots reconstruct every advertised operation and handle in a genuinely fresh process after source and provider mutation. | `system` | `representative` | `automated` | `pending` | Pending Milestone 2 and Milestone 3 |
+| A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; known A1 equality and pattern regressions pass through that production adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 and atomic cutover |
+| A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable projection semantics reject. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestones 1 and 3 |
+| A1B-A3 | JSON Schema validation, applicability equality, identity encoding, and domain ordering/deduplication pass owner-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `pending` | Pending Milestones 0, 1, and 3 |
+| A1B-A4 | Every advertised snapshot, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its typed object in a fresh process after source and process mutation; durable publication and cleanup pass on Linux ext4. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A6 | The selected dependency closure is exact, hash-checked, provenance- and license-reviewed, supported on the admitted Python environments, and free of unresolved blocking security findings. | `release-artifact` | `representative` | `automated` | `pending` | Pending Milestone 0 and final review |
-| A1B-A7 | No old validator, generated keyword interpreter, metadata-owned identity implementation, snapshot compiler, analysis-state store, compatibility reader/writer, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A8 | Existing routing, policy-impact, analysis, coverage, reading, rendering, and inspection behavior remains valid except for the declared version and external-conformance corrections. | `integration` | `not-applicable` | `automated` | `pending` | Pending broad checkpoint |
-| A1B-A9 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `pending` | Pending final checkpoint |
-| A1B-A10 | An independent reviewer accepts one clean implementation commit and tree and confirms every claim, migration deletion, consumer disposition, and exclusion. | `contract` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
+| A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `pending` | Pending Milestone 0 |
+| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, uses the admitted Python range, and every public source-tree entry point imports in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A6P | Before implementation starts, an independent planning review accepts the selected package provenance, license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
+| A1B-A6L | Final independent review proves the implemented exact lock and provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
+| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split state store, owner map, scan, compatibility path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `pending` | Pending broad checkpoint |
+| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `pending` | Pending final checkpoint |
+| A1B-A11 | One clean implementation commit and tree has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
 
 ## Scope
 
 ### In Scope
 
-- A stdlib-only `standards_identity` Module owning the existing identity format.
-- A `standards_contracts` Module owning the admitted schema profile, Draft
-  execution, reachable closure, diagnostics, model construction, and build-time
-  projections.
-- Adoption and exact resolution of `jsonschema` 4.26.0 and the directly used
-  `referencing` Interface.
-- A `standards_authority` Module owning typed immutable snapshot, analysis, and
-  navigation roots with in-memory and directory adapters.
-- Contract version 11 and handle version 4 coordinated replacement.
-- Owner-qualified child handles and complete cold-process inspection.
-- Migration of every repository-controlled public consumer and deletion of all
+- A stdlib-only `standards_identity` Module owning identity encoding v2 and
+  domain-separated hashing.
+- A `standards_contracts` Module owning contract loading, the projection
+  profile, local references, reachability, diagnostics, model construction, and
+  build-time projections.
+- `jsonschema==4.26.0` as the sole Draft validator and direct use of
+  `referencing==0.37.0`.
+- A `standards_authority` Module directly storing the closed set of public
+  inspectable objects through in-memory and directory adapters.
+- Contract v11, request v3, result projection v3, analysis contract/schema 7/4,
+  public handle v4, authority envelope v1, and identity encoding v2.
+- The exact proposed v11 public schema and interface contract in
+  `reports/a1-contract-v11.schema.json` and `reports/a1-interface-v11.toml`.
+- Domain-owned ordering, deduplication, normalization, and identity records.
+- Complete repository-controlled consumer migration and deletion of
   superseded implementations.
-- Registered Python verification, official external conformance, dependency
-  and licensing evidence, coverage reconciliation, and exact-tree acceptance.
+- Supplemental node-catalog and source-owned relationship migration for
+  created, retained, and retired implementation artifacts.
+- Registered Python verification, dependency and licensing evidence, coverage
+  reconciliation, and exact-tree acceptance.
 
 ### Out Of Scope
 
 - A2 authoring, mutation, proposal heads, canonical application, or recovery.
-- A compatibility layer, old-state converter, dual reader/writer, or version-10
-  fallback.
-- Changes to policy meaning, policy-unit declarations, policy-impact
-  relationships, relationship kinds, generic graph semantics, or routing
-  policy.
-- A general content-addressed DAG, garbage collection, remote storage, mutable
-  indexes, arbitrary object types, or streaming snapshots.
+- A compatibility layer, old-state converter, dual reader/writer, old-contract
+  fallback, or identity migration tool.
+- Implementing JSON or JSON Schema, overriding validator behavior, copying or
+  running the complete official JSON Schema corpus, or claiming independent
+  Draft certification.
+- Changes to normative policy meaning, relationship-kind semantics, generic
+  graph behavior, or routing policy. Adding policy-unit projections for exact
+  existing headings and updating implementation consumer nodes/relationships
+  are in scope.
+- A general content-addressed DAG, public enumeration, garbage collection,
+  remote storage, mutable indexes, arbitrary object types, or streaming
+  snapshots.
 - Runtime remote schema retrieval, custom vocabularies, format assertion, or
-  validator keyword overrides.
-- Copied third-party source, wheels, or official test corpus.
+  dynamic references.
 - New or extended Bash verification.
 - Plan C external-project baselines.
 
@@ -77,275 +93,318 @@ acceptance before any A2 review or implementation begins.
 
 ### Constraints
 
-- This plan is unavailable while `Blocked`. Planning admission must complete
-  before `start` or any implementation edit.
-- The accepted standards-recovery boundary is the comparison base, not the
-  eventual implementation base.
-- Public version replacement is atomic. Old and new implementations may coexist
-  only inside pre-cutover equivalence tests on an unaccepted implementation
-  branch; they are never parallel runtime authorities.
-- Every dependency is resolved through the accepted lock. No test, build, or
-  runtime path installs or selects an ambient alternate dependency.
+- This plan is unavailable while `Blocked`. The exact admission and start
+  chain must complete before any implementation edit.
+- The accepted standards-recovery boundary is the comparison base. The direct
+  start-transition child is the implementation base.
+- Foundation Modules may be implemented and tested only against private staging
+  fixtures. They may not modify or become dependencies of accepted production
+  A1 before the atomic Milestone 3 cutover.
+- Milestones 0 through 2 are ordered working-tree checkpoints inside one
+  implementation transaction. They are not committed or accepted separately.
+  Milestone 3 produces the first implementation commit and includes every
+  foundation, production consumer, catalog/relationship migration, and final
+  coverage update.
+- Public replacement is atomic. Old and new production authorities never
+  coexist in an accepted runtime.
+- Dependency installation and verification use the accepted hash-checked lock.
+  Ambient alternate packages are not evidence.
 - Generated freshness and semantic correctness are separate gates.
-- Coverage attestations are renewed only after schema, suites, registrations,
-  and all other horizon-affecting inputs are frozen.
-- Mutable repository totals are not acceptance oracles. Tests assert stable
-  identities, closure invariants, and selected semantics.
+- Coverage attestations are renewed only after every horizon-affecting input is
+  frozen.
+- Mutable repository totals are not acceptance oracles.
 
 ### Assumptions
 
 - [Consumer and state inventory](reports/consumer-and-state-inventory.md) found
-  no external consumer and no retained A1 persisted state. Discovery of either
-  invalidates the coordinated no-compatibility cutover.
-- The bounded repository snapshot remains small enough for atomic bundle
-  storage. The inventory-base tracked tree is under 10 MB; the authority tests
-  must measure the actual admitted capture before relying on this assumption.
-- The selected dependency closure supports Python 3.11 and 3.12 on the admitted
-  Linux verification environments. Milestone 0 owns proof.
-- Existing applicability NFC semantics and identity format version 1 are
-  intentional and remain unchanged.
+  no external consumer and no retained A1 persisted state.
+- The bounded repository snapshot remains small enough for atomic object
+  publication; Milestone 2 measures the admitted capture.
+- The reviewed dependency resolution supports Linux x86-64 with glibc 2.17 or
+  newer for CPython 3.11 and 3.12; Milestone 0 reproduces both exact native
+  wheel tags. Other targets are unsupported.
+- The durable authority adapter supports Linux ext4 only in A1b. The in-memory
+  adapter remains repository-neutral; another durable filesystem requires a
+  separate capability and durability decision.
+- Existing applicability NFC semantics are domain-owned and remain unchanged
+  after byte-level dependency proof.
 
 ## Binding Decisions
 
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
-| Preserve A1's four-operation read-only facade and immutable analysis kernel. | Accepted A1 architecture | [A1 ADR](../../decisions/standards-engine-navigation-analysis.md) | None |
-| Add one deep contract compiler over `jsonschema.Draft202012Validator`; generated models are representations, not validators. | Contracts and Dependencies | [Proposed A1b ADR](../../decisions/standards-engine-a1b.md), [dependency decision](reports/dependency-and-dialect-decision.md) | Local validator plus generated second interpreter |
-| Keep JSON Schema equality, applicability equality, and identity canonicalization separate. | Contracts, Applicability, Identity | [Proposed A1b ADR](../../decisions/standards-engine-a1b.md) | Identity bytes as schema equality |
-| Move unchanged NFC identity format version 1 into `standards_identity`; expose no generic equality helper. | Identity | Existing identity fixtures and design review | Metadata-owned cross-package serialization |
-| Store three typed immutable roots through one `standards_authority` Interface; use bounded snapshot bundles initially. | Architecture and Persistence | [Consumer and state inventory](reports/consumer-and-state-inventory.md), [Proposed A1b ADR](../../decisions/standards-engine-a1b.md) | Split snapshot/state/cache ownership |
-| Use one coordinated v11/handle-v4 cutover with typed unsupported old versions and no conversion. | Contracts and Planning | Consumer/state inventory | Incremental compatibility migration |
-| Run the exact official external conformance corpus from temporary storage; do not copy it into the repository. | Verification and Licensing | [Dependency decision](reports/dependency-and-dialect-decision.md) | Local implementations as each other's only oracle |
+| Preserve the four-operation read-only facade and immutable analysis kernel. | Accepted A1 architecture | [A1 ADR](../../decisions/standards-engine-navigation-analysis.md) | None |
+| Use `jsonschema.Draft202012Validator` as the sole Draft validator behind one deep project adapter. | Contracts and Dependencies | [A1b ADR](../../decisions/standards-engine-a1b.md), [dependency decision](reports/dependency-and-dialect-decision.md) | Local validator and generated keyword interpreter |
+| Keep schema validation, applicability equality, identity encoding, and domain ordering separate. | Owning domain Modules | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Generic serializer as cross-domain semantics |
+| Use codepoint-preserving identity encoding v2; domain Modules own typed identity records and any semantic normalization. | Identity and domain owners | [Identity/version matrix](reports/identity-version-object-matrix.md) | Recursive NFC identity encoding v1 |
+| Directly store every inspectable object through one closed acyclic immutable authority Interface; readers are lock-free, writers serialize through non-authoritative publication coordination, same-ID publication is idempotent by content identity, and interruption has explicit outcomes. | Architecture, Persistence, Concurrency, and Resilience | [Authority-object contracts](reports/authority-object-contracts.md), [identity/version matrix](reports/identity-version-object-matrix.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage plus owner maps, scans, and caches |
+| Support one exact Linux ext4 durable-store contract with filesystem-aware identity, handle-relative mutation, explicit aliases, and typed unsupported outcomes. | Cross-Platform and Security | [A1b ADR](../../decisions/standards-engine-a1b.md), [authority-object contracts](reports/authority-object-contracts.md), [migration plan](reports/policy-impact-migration-plan.md) | Operating-system-name inference and path-based validation/use |
+| Remove all schema `x-standards-engine-*` annotations; use one closed interface contract and domain-owned executable contracts. | Contracts and domain owners | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Mixed machine prose in public schema |
+| Build isolated foundations, then perform one atomic production v11 cutover. | Planning and integration owner | This plan | Partial schema/generated production cutover |
+| Migrate implementation catalog and policy-impact relationships in the atomic cutover. | Policy Impact and coverage owners | [Migration plan](reports/policy-impact-migration-plan.md) | Treating implementation artifact changes as incidental paths |
 | Keep A2 inactive through independent A1b acceptance. | Planning | Accepted standards recovery | Direct progression to authoring |
 
 ## Evidence And Oracle Plan
 
 | Claim | Domain | Deciding oracle | Independent authority | Unsupported domain | Intended negative failure |
 | --- | --- | --- | --- | --- | --- |
-| Generated files are current | Freshness | Deterministic projection `--check` | Canonical contract source and compiler | None within admitted profile | Stale generated output diagnostic |
-| Generated closure is complete | Shape and reachability | Reachability compiler plus public-operation fixtures | Canonical public-operation declarations | Unreachable public definitions and unsupported reachable keywords | Contract-compilation failure naming definition and keyword |
-| Draft semantics are correct | External conformance | Production adapter over applicable official-suite cases | Exact official JSON Schema Test Suite revision | Excluded vocabularies and formats recorded explicitly | Official negative case rejects at expected keyword/path |
-| Equality domains are separated | Semantics and identity | Domain-specific differential and identity fixtures | Draft rules, Applicability contract, and identity contract respectively | Cross-domain coercion | Composed/decomposed Unicode differs for schema but preserves existing identity fixture |
-| Cold reconstruction is complete | Persistence/system | Fresh process given only authority-store path and handle | Persisted root and exact bytes | Unavailable external authority | Missing closure returns unavailable; identity contradiction returns invalid |
-| Public algebra is exhaustive | Public integration | Real facade and tool operations using exported generated types | Canonical public operation closure | Internal-only domain types | Unhandled internal result remains programming error |
-| Dependency is reproducible | Dependency/release | Hash-checked isolated install and import/conformance smoke | Lock, package index artifacts, provenance and licenses | Unsupported target artifact | Missing or mismatched artifact blocks installation |
-| Negative fixtures reach their target | Diagnostic isolation | Otherwise-valid fixtures plus exact code/path assertion | Owning contract and typed diagnostic | Unrelated precondition failure | Harness rejects a failure at the wrong diagnostic |
+| Generated files are current | Freshness | Deterministic projection `--check` | Canonical schema, interface contract, and compiler | Semantic correctness | Stale generated output diagnostic |
+| Contract adapter is correct | External-contract adapter | Production adapter regressions and schema self-check | Selected validator API and canonical contract | Independent Draft re-certification | Exact keyword/path diagnostic |
+| Projection closure is complete | Public shape | Reachability compiler and public-operation fixtures | Canonical v11 schema and closed interface contract | Constructs outside the admitted projection profile | Unsupported reachable construct or unreachable public definition |
+| Identity is representation preserving | Content identity | Exact codepoint fixtures and domain identity records | Identity v2 contract | Domain semantic equality | NFC-equivalent inputs remain distinct unless owner normalizes |
+| Domain equality/order is local | Domain semantics | Applicability and analysis owner fixtures | Each domain contract | Generic identity-byte ordering or equality | Generic identity bytes cannot decide semantic equality or order |
+| Cold reconstruction is complete | Persisted authority | Fresh process with store path and handle only | Persisted object envelope and dependencies | In-process caches or unavailable durable filesystem | Missing is unavailable; contradiction is invalid |
+| Public algebra is exhaustive | Public path | Real facade/tool calls using exported generated types | Public operation closure | Internal domain values crossing the facade | Unhandled domain result is a programming error |
+| External dependency is reproducible | Release artifact | Hash-checked isolated install and dependency import smoke | Reviewed lock, artifact hashes, provenance, licenses | Unreviewed platform, Python, wheel, or source build | Missing or mismatched artifact blocks installation |
+| Internal Module closure is exact | Source-tree integration | Production-import/manifest equality plus isolated public-entry-point smoke | Closed Module dependency table and reviewed checkout | Independently published or installed local distributions | Missing, transitive-only, unused, ambient, or undeclared import fails |
+| Policy-impact migration is complete | Semantic consumers | Accepted/proposed compile and exact disposition equality | Compiled relationship authority and independent horizon | Empty impact without certified coverage | Unmapped node, edge, consumer, or coverage subject blocks |
+| Negative fixture reaches intended rule | Negative evidence | Otherwise-valid fixture and exact diagnostic assertion | Owning typed diagnostic | Failure at another precondition | Failure at another precondition rejects the test |
+
+A1b does not use agreement between local implementations as external Draft
+conformance and does not run the complete upstream corpus.
 
 ## Systemic Finding Audit
 
-- **Invariant family:** external contract semantics, public projection closure,
-  identity serialization, and immutable handle authority.
-- **Sibling producers and consumers:** canonical schema, local validator,
-  generator, generated models, tool definitions, facade adapters, metadata and
-  analysis serializers, snapshot providers, state stores, navigation caches,
-  inspection paths, package tests, registered suites, and verifier adapters.
-- **Authority and projection inventory:**
-  [consumer-and-state-inventory.md](reports/consumer-and-state-inventory.md).
-- **Consumer dispositions:** every repository-controlled consumer is `updated`
-  or `reviewed-no-change`; no blocked or omitted consumer is allowed at final
-  acceptance.
-- **Scope or sequencing replacement:** one coordinated public cutover follows
-  independently testable foundation Modules; local example repairs are
-  prohibited.
-
-## Simplicity And Ownership Review
-
-- **Independent concepts:** standardized schema semantics, A1 identity,
-  applicability values, immutable storage, domain analysis, and public facade.
-- **Intentional coupling:** the contract compiler uses identity only for
-  contract/program identity; the authority repository uses compiled root
-  contracts; the facade composes both with domain modules.
-- **Accidental coupling risk:** generated validation logic, metadata-owned
-  serialization, store enumeration, live repository reads, dependency exception
-  leakage, and duplicated public/internal models.
-- **Policy/state/lifecycle owners:** canonical schema declares wire shape;
-  `standards_contracts` executes it; `standards_identity` owns identity bytes;
-  `standards_authority` owns persistence; domain modules own meaning and state
-  transitions; A2 alone will own mutable authoring lifecycles.
-- **Future independence:** a dependency update should not change domain rules;
-  storage layout should not change handles; identity changes require an explicit
-  identity version; A2 should compose immutable A1b results without adding
-  mutable behavior below this seam.
+- **Invariant families:** contract validation and projection, identity encoding,
+  semantic ordering/deduplication, immutable object resolution, and
+  implementation-consumer coverage.
+- **Inventories:** [schema/domain audit](reports/schema-and-domain-contract-audit.md),
+  [identity/version matrix](reports/identity-version-object-matrix.md),
+  [authority-object contracts](reports/authority-object-contracts.md),
+  [consumer/state inventory](reports/consumer-and-state-inventory.md), and
+  [policy-impact migration](reports/policy-impact-migration-plan.md).
+- **Required disposition:** every repository-controlled implementation,
+  representation, relationship, and selected consumer is `updated`,
+  `reviewed-no-change`, or `not-applicable` with rationale. Any blocked,
+  missing, or unaudited item blocks cutover.
+- **Empty impact rule:** an empty result is not evidence of no impact without a
+  valid independent coverage certificate.
 
 ## Planning And Admission Boundary
 
-The planning comparison base is commit
+The comparison base is commit
 `c4408363752b10060f631247f3e2f1fa26eae003`, tree
 `84477150bd368a168dd04da3770de55c23bbb817`.
 
-Admission uses four distinct identities:
+The rejected candidate `f41037bf71deddba36056b27d418fe767a7cfb62`,
+tree `042f97101d50df79dcac0b029aa1b9324cf8b881`, is `Superseded`
+by the replacement candidate created from this plan revision.
 
-1. this planning candidate commit and tree;
-2. a reviewer-owned `reports/a1b-plan-admission.md` commit whose sole change is
-   the admission report binding that candidate;
-3. a mechanical transition commit whose only changes are lifecycle fields in
-   `plan.md`, `issues.md`, and `execution-ledger.md`; and
-4. that transition commit as the exact implementation base accepted by
-   `start`.
+Admission and start require this direct-child chain:
 
-The reviewer report does not self-authorize and is not part of the tree it
-reviews. The transition may set this plan to `Planned`, clear the admission
-blocker, and identify Milestone 0 as the next slice only when review reports no
-blocking Standards or Specification finding. No implementation file may change
-in the report or transition commits.
+1. **C:** clean replacement planning candidate containing no implementation;
+2. **R:** reviewer-owned `reports/a1b-plan-admission.md` as the sole change,
+   binding C, explicitly accepting the dependency provenance/licensing
+   disposition in A1B-A6P, and reporting no blocking Standards or
+   Specification finding;
+3. **T:** mechanical admission transition as the direct child of R, changing
+   only lifecycle fields in `plan.md` and `issues.md` plus one append-only
+   transition record in `execution-ledger.md`, setting A1B-A6P to `satisfied`
+   with R as evidence and setting the plan to `Planned`; and
+4. **S:** `start` transition as the direct child of T, changing only those
+   lifecycle fields plus one append-only ledger record, setting the plan and
+   Milestone 0 to `Active`.
+
+S is the exact clean implementation base. Any intervening commit, extra file,
+dirty worktree, identity mismatch, or review finding invalidates the chain.
+Neither R nor T starts implementation.
 
 ## Milestones
 
-### Milestone 0: Dependency And Identity Foundations
+### Milestone 0: Dependency And Identity Foundation
 
-**Goal:** Establish reproducible dependency, licensing, and identity foundations
-without changing accepted A1 runtime behavior.
+**Goal:** Reproduce the reviewed lock and implement identity encoding v2 in an
+isolated Module without changing accepted A1 production imports or behavior.
 
 **Allowed write set:**
 
-- `tools/standards_identity`
+- `tools/standards_identity/`
 - `tools/standards_contracts/pyproject.toml`
 - `tools/standards_contracts/requirements.lock`
 - `tools/standards_contracts/README.md`
 - `tools/standards_contracts/tests/test_dependency_resolution.py`
 - `docs/plans/standards-engine-a1b/reports/a1b-dependency-provenance.md`
-- `docs/plans/standards-engine-a1b/plan.md`
-- `docs/plans/standards-engine-a1b/issues.md`
-- `docs/plans/standards-engine-a1b/execution-ledger.md`
+- lifecycle fields in this plan and issues, plus append-only checkpoint,
+  verification, deviation, and transition records in the ledger
 
 **Tasks:**
 
-- [ ] Resolve and hash-lock the exact dependency closure for admitted Python
-  environments.
-- [ ] Record provenance, license authority, supported-target, and security
-  dispositions.
-- [ ] Implement `standards_identity` with existing identity format version 1 and
-  differential byte fixtures copied from authority, not regenerated
-  expectations.
-- [ ] Prove no existing A1 runtime import changes in this milestone.
+- [ ] Reproduce the exact dependency names, versions, target wheels, and hashes.
+- [ ] Record authoritative provenance, license files, supported targets,
+  security results, and install command.
+- [ ] Implement identity encoding v2, domain hashing, immutable typed inputs,
+  and exact codepoint/invalid-value fixtures.
+- [ ] Prove no accepted A1 production import or output changes.
 
-**Acceptance gate:** A1B-A3 identity half and A1B-A6 pass; package tests and
-broad baseline remain green.
+**Acceptance gate:** Identity foundation and A1B-A6 pass; isolated package
+tests and the accepted broad baseline remain green. A1B-A6L remains a distinct
+manual exact-lock final-acceptance claim; A1B-A6P must already be satisfied
+before start. Record the checkpoint in the ledger working tree, but do not
+commit it separately.
 
-**Status:** `Planned`
+**Status:** `Blocked`
 
-### Milestone 1: Contract Compiler And Projection
+### Milestone 1: Isolated Contract Compiler
 
-**Goal:** Implement one deep contract compiler and build-time projection path,
-including external conformance, without switching the public facade yet.
+**Goal:** Implement the contract adapter and projection compiler against the
+exact admitted machine-readable v11 schema and interface contract without
+changing the production schema, generated output, or facade.
 
 **Allowed write set:**
 
-- `tools/standards_contracts`
-- `tools/standards_engine/contracts/a1-contract.schema.json`
-- `tools/standards_engine/contracts/examples/a1-examples.json`
-- `tools/standards_engine/contracts/identity-fixtures.json`
-- `tools/standards_engine/contracts/generated/agent-tools.json`
-- `tools/standards_engine/standards_engine/_generated_contract.py`
-- `tools/standards_engine/tests/test_generated_contract.py`
+- `tools/standards_contracts/`
+- lifecycle fields in this plan and issues, plus append-only checkpoint,
+  verification, deviation, and transition records in the ledger
+
+**Tasks:**
+
+- [ ] Implement schema self-check, retrieval-free local registry, stable errors,
+  reachable closure, and projection-profile admission.
+- [ ] Compile the admitted `reports/a1-interface-v11.toml` and
+  `reports/a1-contract-v11.schema.json` without rewriting or extending their
+  public algebra. Any required shape change is a re-plan trigger.
+- [ ] Generate staging immutable Python and agent-tool projections without a
+  keyword interpreter or default injection.
+- [ ] Prove known A1 Boolean/integer, Unicode, `pattern`, and `uniqueItems`
+  behavior through the production-intended adapter.
+- [ ] Reject unsupported projection constructs and unreachable public roots.
+
+**Acceptance gate:** A1B-A1, the isolated half of A1B-A2, and contract portions
+of A1B-A3 pass while every accepted production A1 artifact remains byte
+identical. Record the checkpoint in the ledger working tree, but do not commit
+it separately.
+
+**Status:** `Planned`
+
+### Milestone 2: Isolated Authority Repository
+
+**Goal:** Implement the closed direct-object repository and prove atomic
+publication and cold reconstruction independently of the accepted facade.
+
+**Allowed write set:**
+
+- `tools/standards_authority/`
+- lifecycle fields in this plan and issues, plus append-only checkpoint,
+  verification, deviation, and transition records in the ledger
+
+**Tasks:**
+
+- [ ] Implement the envelope, closed object-kind registry, typed handles,
+  in-memory adapter, and directory adapter.
+- [ ] Implement authority-owned Git-tree and mutable-manifest capture adapters,
+  exact scope/path/symlink/nested-source handling, and two-pass source-change
+  rejection.
+- [ ] Store and resolve every root and child kind from the identity matrix
+  directly by handle.
+- [ ] Verify same-directory create-only hard-link publication, collision
+  detection, missing objects, binary and empty snapshot entries,
+  Base64/digest/length contradiction, kind mismatch, unsupported versions,
+  file/directory flush, store ownership/mode enforcement, symlink rejection,
+  and unsupported-filesystem rejection.
+- [ ] Prove the required-real ext4 contract with spaces, canonical root
+  descriptor equality, rejection of `.`, `..`, repeated-separator, final
+  symlink, and intermediate-symlink aliases, case-sensitive distinct names,
+  writable-mount detection, and typed unknown-filesystem outcomes. Walk every
+  configured absolute-path component from a trusted `/` descriptor using
+  directory-relative no-follow opens; exercise concurrent parent-component
+  replacement without redirecting authority and rewalk the complete path
+  before returning success.
+- [ ] Prove overlapping writers serialize without changing identity,
+  different-ID independence after publication, same-ID idempotence,
+  same-ID contradictory collision, interruption before publication,
+  interruption after publication before acknowledgement, retry
+  reconciliation, crash-released publication lock, next-writer abandoned
+  staging cleanup, normal-path terminal cleanup, and fresh-process reopening.
+- [ ] Prove fresh-process reconstruction using only persisted objects and
+  handles after source and process mutation.
+- [ ] Prove no enumeration, owner map, root scan, cache index, or ambient
+  provider authority is needed.
+
+**Acceptance gate:** The isolated half of A1B-A4 passes on both adapters.
+Record the checkpoint in the ledger working tree, but do not commit it
+separately.
+
+**Status:** `Planned`
+
+### Milestone 3: Atomic V11 Production Cutover
+
+**Goal:** Switch every production producer, semantic registration, and consumer
+in one replacement boundary; delete all superseded authority.
+
+**Allowed write set:**
+
+- `tools/standards_identity/`
+- `tools/standards_contracts/`
+- `tools/standards_authority/`
+- `tools/standards_applicability/`
+- `tools/standards_metadata/`
+- `tools/graph_engine/`
+- `tools/standards_policy_impact/`
+- `tools/standards_graph/`
+- `tools/standards_analysis/`
+- `tools/standards_engine/`
+- `tools/standards_verifier/`
+- `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.architecture.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.contracts.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml`
+- `evaluation/standards-effectiveness/policy-units/registry.toml`
+- `evaluation/standards-effectiveness/policy-units/cross-platform.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml`
+- `evaluation/standards-effectiveness/policy-units/security.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.security.toml`
+- `evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml`
+- `evaluation/standards-effectiveness/policy-coverage/horizons.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/`
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml`
-- `evaluation/standards-effectiveness/fixtures/contracts/a1b`
-- `docs/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md`
-- `docs/plans/standards-engine-a1b/plan.md`
-- `docs/plans/standards-engine-a1b/issues.md`
-- `docs/plans/standards-engine-a1b/execution-ledger.md`
-
-**Tasks:**
-
-- [ ] Compile the exact supported keyword, annotation, reference, and reachable
-  public-operation profile.
-- [ ] Adapt Draft validator errors to stable typed diagnostics.
-- [ ] Generate immutable public models and per-operation tool closures without
-  embedded keyword execution.
-- [ ] Reproduce the accepted A1 Unicode defect, then prove corrected Draft
-  behavior separately from preserved A1 identity behavior.
-- [ ] Run applicable official external-suite cases through the production
-  adapter and keep the corpus outside the repository.
-- [ ] Reject unsupported reachable semantics and unreachable public
-  definitions.
-
-**Acceptance gate:** A1B-A1, A1B-A2 compiler half, and A1B-A3 pass; freshness
-and semantic gates are reported separately.
-
-**Status:** `Planned`
-
-### Milestone 2: Immutable Authority Repository
-
-**Goal:** Implement three typed immutable roots and prove atomic capture and
-cold reconstruction independently of the accepted facade.
-
-**Allowed write set:**
-
-- `tools/standards_authority`
-- `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml`
-- `evaluation/standards-effectiveness/fixtures/architecture/a1b-authority`
-- `docs/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md`
-- `docs/plans/standards-engine-a1b/plan.md`
-- `docs/plans/standards-engine-a1b/issues.md`
-- `docs/plans/standards-engine-a1b/execution-ledger.md`
-
-**Tasks:**
-
-- [ ] Implement typed snapshot, analysis, and navigation roots plus in-memory
-  and directory adapters behind one Interface.
-- [ ] Capture bounded snapshot bundles atomically and issue no handle on partial
-  failure.
-- [ ] Verify collision detection, path/symlink/nested-source behavior, durable
-  publication, missing closure, identity contradiction, and unsupported root
-  versions.
-- [ ] Prove fresh-process reconstruction after source, provider, and process
-  mutation using only store path and handle.
-- [ ] Prove caches are disposable and enumeration is absent from the public or
-  internal repository Interface.
-
-**Acceptance gate:** A1B-A4 foundation evidence passes on in-memory and real
-directory adapters.
-
-**Status:** `Planned`
-
-### Milestone 3: Coordinated V11 Runtime Cutover
-
-**Goal:** Switch every repository-controlled producer and consumer atomically,
-delete superseded authorities, and preserve A1 behavior.
-
-**Allowed write set:**
-
-- `tools/standards_engine`
-- `tools/standards_analysis`
-- `tools/standards_metadata`
-- `tools/standards_policy_impact`
-- `tools/standards_graph`
-- `tools/standards_verifier`
-- `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/a1b-public-cutover.toml`
-- `evaluation/standards-effectiveness/fixtures/contracts/a1b`
-- `evaluation/standards-effectiveness/fixtures/architecture/a1b-authority`
-- `evaluation/standards-effectiveness/policy-coverage/attestations`
+- `evaluation/standards-effectiveness/fixtures/contracts/a1b/`
+- `evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/`
+- `docs/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md`
+- `docs/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md`
 - `docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md`
 - `docs/plans/standards-engine-a1b/reports/a1b-cutover-evidence.md`
-- `docs/plans/standards-engine-a1b/plan.md`
-- `docs/plans/standards-engine-a1b/issues.md`
-- `docs/plans/standards-engine-a1b/execution-ledger.md`
-- `docs/decisions/standards-engine-a1b.md`
+- lifecycle fields in this plan and issues, plus append-only checkpoint,
+  verification, deviation, and transition records in the ledger
 
 **Tasks:**
 
-- [ ] Advance interface, result, analysis, snapshot, navigation, and analysis
-  handle contracts exactly as defined by the ADR; retain unaffected identity
-  domains.
-- [ ] Move identity consumers to `standards_identity` and remove the old owner
-  without a compatibility re-export.
-- [ ] Make the facade use generated v11 inputs/results and exhaustive domain
-  adapters.
-- [ ] Move snapshot capture and all state/navigation persistence to
-  `standards_authority`; remove store scans and process-local artifact
-  authority.
-- [ ] Add owner-qualified child handles and cold inspection for every
-  advertised variant.
-- [ ] Delete old validators, generated keyword walkers, snapshot compiler,
-  analysis stores, aliases, and fallbacks in the same change.
-- [ ] Reconcile every consumer disposition and renew only mechanically stale
-  coverage attestations after the horizon is frozen.
+- [ ] Promote the exact admitted planning schema and interface contract
+  byte-for-byte to their canonical production paths; generate the complete
+  public Python and agent-tool algebra.
+- [ ] Advance every identity and public contract in the identity/version matrix
+  and use domain-owned typed keys for ordering and deduplication.
+- [ ] Route all public validation through `standards_contracts` and all public
+  object persistence/inspection through `standards_authority`.
+- [ ] Exhaustively adapt domain requests and outcomes at the facade.
+- [ ] Accept coverage claims as input, validate evidence and trusted execution
+  authorization, and construct stored coverage attestations only inside the
+  analysis kernel.
+- [ ] Update every manifest in the closed Module dependency table, prove exact equality between
+  production direct imports and declared internal requirements, and smoke every
+  public source-tree import in clean CPython 3.11 and 3.12 environments after
+  installing only the admitted external lock.
+- [ ] Delete old validators, generated keyword walkers, generic NFC serializer,
+  snapshot compiler, split stores, owner maps, scans, aliases, and fallbacks.
+- [ ] Compile accepted and proposed catalogs/relationships; record every node,
+  edge, and selected-consumer disposition without fixed cardinality assertions.
+- [ ] Freeze all horizon inputs, derive requirements, renew stale attestations
+  through the existing authorization/evidence path, and compile certificates.
+- [ ] Prove exact selected-consumer/disposition and
+  requirement/certificate equality.
 
-**Acceptance gate:** A1B-A2, A1B-A4, A1B-A5, A1B-A7, and A1B-A8 pass; all old
-versions reject as unsupported and no compatibility path remains.
+**Acceptance gate:** Every automated objective claim passes. Final manual
+A1B-A6L and A1B-A11 remain pending exact-tree acceptance.
+Any required path outside this write set, any substantive ADR change, blocked
+disposition, or horizon change after attestation is a re-plan trigger. The
+admitted ADR remains byte-identical and `Proposed` throughout Milestone 3;
+Milestone 4 alone may change its status after exact-tree acceptance.
+
+Milestone 3 creates the first implementation commit after start. Its parent is
+the clean start-transition commit S; no foundation-only implementation commit
+may intervene.
 
 **Status:** `Planned`
 
@@ -358,61 +417,59 @@ obtain independent acceptance.
 
 - `docs/plans/standards-engine-a1b/reports/a1b-implementation-candidate.md`
 - `docs/plans/standards-engine-a1b/reports/a1b-final-acceptance.md`
-- `docs/plans/standards-engine-a1b/plan.md`
-- `docs/plans/standards-engine-a1b/issues.md`
-- `docs/plans/standards-engine-a1b/execution-ledger.md`
-- `docs/decisions/standards-engine-a1b.md`
+- lifecycle fields in this plan and issues, plus append-only checkpoint,
+  verification, deviation, and transition records in the ledger
+- ADR status only in `docs/decisions/standards-engine-a1b.md`
 
-The reviewer-owned final acceptance report is a sole-change direct child of the
-candidate it reviews. The later mechanical lifecycle transition may update only
-the plan, issues, ledger, and ADR status and must identify both exact trees.
+The final reviewer report is a sole-change direct child of the implementation
+candidate. A later mechanical acceptance transition may update only the
+declared lifecycle fields and must identify both exact trees.
 
 **Tasks:**
 
-- [ ] Freeze and record the implementation commit/tree, dependency resolution,
-  conformance corpus revision, generated outputs, consumer dispositions,
-  coverage identities, and complete verification.
-- [ ] Obtain independent Standards and Specification review against the exact
+- [ ] Record the exact implementation commit/tree, dependency resolution,
+  generated outputs, identity versions, object kinds, node/edge/consumer
+  dispositions, coverage identities, and complete verification.
+- [ ] Obtain independent Standards and Specification review against that exact
   tree.
-- [ ] Accept only with no blocked consumer or claim and a clean worktree.
-- [ ] Mark the ADR Accepted and this plan Accepted through the constrained
-  transition.
+- [ ] Accept only with no blocked claim or consumer and a clean worktree.
+- [ ] Mark the ADR and plan Accepted through the constrained transition.
 
-**Acceptance gate:** A1B-A1 through A1B-A10 are satisfied.
+**Acceptance gate:** Every objective acceptance claim is satisfied.
 
 **Status:** `Planned`
 
 ## Blockers
 
-- `A1B-006`: independent planning admission has not yet accepted this exact
-  plan and ADR tree.
+- `A1B-006`: independent planning admission has not accepted this replacement
+  candidate and its direct-child transition chain.
 
 ## Re-Plan Triggers
 
-- Any external consumer, independently deployed tool contract, or retained A1
-  state invalidates the no-compatibility decision.
-- Any remote reference, custom vocabulary, format assertion, validator
-  override, unsupported recursive projection, or pattern incompatibility is
-  required by reachable public schema.
-- Any machine annotation lacks a closed representation and named executable
-  owner.
-- The locked dependency closure cannot satisfy a supported Python environment,
-  has an unresolved blocking security/license issue, or cannot be reproduced
-  without ambient state.
-- Snapshot capture is not bounded enough for atomic bundle publication or
-  requires streaming.
-- Cold reconstruction requires source paths, Git objects, provider capability,
-  store enumeration, process caches, or fresh authorization.
-- A systemic finding identifies an unreviewed sibling producer or consumer.
-- A proposed fix changes policy meaning, relationship authority, generic graph
-  behavior, A2 mutable state, or another path outside the active milestone
-  write set.
+- Any external consumer or retained A1 state invalidates the no-compatibility
+  decision.
+- Any reachable public contract requires excluded validator configuration or
+  unsupported projection semantics.
+- Implementation reveals that either admitted machine-readable v11 contract
+  artifact requires a field, variant, version, or operation-shape change.
+- The exact dependency resolution cannot satisfy an admitted environment or
+  has a blocking provenance, license, or security result.
+- An identity consumer cannot express its semantic normalization, ordering, or
+  deduplication through an owning typed contract.
+- An inspectable value cannot use the closed direct-object repository without
+  scans, mutable indexes, or ambient authority.
+- Bounded atomic snapshot publication is invalidated by measured size,
+  streaming requirements, or missing ext4 hard-link/flush/lock behavior.
+- A systemic sibling, semantic consumer, relationship, horizon input, or
+  required source path falls outside the admitted inventory or write set.
+- A foundation milestone changes accepted production A1 before Milestone 3.
+- A proposed correction changes normative policy meaning, relationship-kind or
+  generic graph semantics, A2 behavior, or another owner outside scope.
 - Focused or broad verification reveals a pre-existing invalid oracle whose
   repair has a different owner.
 
 ## Final Acceptance
 
 - Acceptance status: `pending`
-- Deferred follow-ups: `A2 remains inactive until this plan is independently accepted`
+- Deferred follow-ups: `A2 remains inactive until A1b is independently accepted`
 - Final status: `Blocked`
-

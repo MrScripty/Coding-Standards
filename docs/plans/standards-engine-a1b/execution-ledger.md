@@ -24,7 +24,7 @@
 - The route is planning evidence. Canonical standards and policy relationships
   remain authority.
 
-## 2026-08-26 - Design Review
+## 2026-08-26 - Design Review (Superseded)
 
 - Two independent high-reasoning design reviews evaluated the contract and
   authority seams.
@@ -37,8 +37,11 @@
 - Reconciliation: preserve NFC identity format version 1. Changing identity
   normalization was rejected as unrelated churn because the known defect is
   JSON Schema instance equality, not A1 identity.
+- Lifecycle: these design choices were later `Superseded` by the replacement
+  design after exact-tree admission review exposed broader identity and
+  authority-closure defects.
 
-## 2026-08-26 - Planning Candidate Prepared
+## 2026-08-26 - Planning Candidate Prepared (Rejected)
 
 - Added the blocked active plan, issue registry, execution ledger, dependency
   and dialect decision, consumer and persisted-state inventory, and proposed
@@ -47,3 +50,214 @@
   exact planning candidate.
 - Admission must follow the four-identity report/transition protocol in
   `plan.md`; implementation remains unavailable.
+
+## 2026-08-26 - Candidate Admission Rejected
+
+- Reviewed candidate: commit
+  `f41037bf71deddba36056b27d418fe767a7cfb62`, tree
+  `042f97101d50df79dcac0b029aa1b9324cf8b881`.
+- Standards and Specification review rejected admission because the candidate
+  did not mechanically close the admission/start ancestry, changed production
+  schema and generated output before facade cutover, omitted semantic
+  catalog/relationship migration, left schema annotations and identity
+  versions underspecified, and bound only aggregate roots while promising cold
+  child inspection.
+- The dependency record also lacked exact transitive artifacts and licenses.
+- No implementation was admitted. The candidate and its active design
+  decisions are `Superseded` by the replacement candidate prepared below.
+
+## 2026-08-26 - Replacement Design
+
+- Replaced recursive NFC identity format v1 with representation-preserving
+  identity encoding v2. Applicability retains deliberate domain-owned NFC
+  behavior; ordering, deduplication, and normalization move to owning typed
+  contracts.
+- Replaced three-root storage plus owner-qualified child lookup with direct
+  immutable storage for every public inspectable object under one closed
+  envelope and resolution rule.
+- Replaced schema `x-standards-engine-*` authority with one closed interface
+  contract and named domain-owned executable contracts.
+- Preserved `jsonschema.Draft202012Validator` as the sole Draft validator.
+  Removed the proposed complete official-corpus run because A1b adapts a
+  validator and does not implement or independently certify JSON Schema.
+- Replaced the partial schema/generated milestone with private staging
+  foundations followed by one atomic production v11 cutover.
+- Added exact identity/version, schema/owner, consumer/state, and
+  policy-impact migration inventories.
+
+## 2026-08-26 - Exact Dependency Resolution Recorded
+
+- Selected direct dependencies: `jsonschema==4.26.0` and
+  `referencing==0.37.0`.
+- Recorded the exact six-package transitive resolution, universal wheel hashes,
+  and CPython 3.11/3.12 Linux x86-64 glibc 2.17
+  `manylinux_2_17_x86_64.manylinux2014_x86_64` `rpds-py` artifacts, plus
+  license expressions and license-file hashes.
+- OSV queries on the recorded date returned no known vulnerability for the
+  exact versions. Milestone 0 must reproduce rather than silently update this
+  evidence.
+- No third-party corpus, package source, or wheel is selected for repository
+  incorporation.
+
+## 2026-08-26 - Replacement Planning Candidate Prepared
+
+- Current lifecycle remains `Blocked`.
+- Next slice is independent Standards and Specification review of the exact
+  replacement candidate.
+- Admission requires the direct candidate, reviewer-report, mechanical
+  admission-transition, and start-transition chain defined in `plan.md`.
+- A1b runtime and A2 implementation remain unavailable.
+
+## 2026-08-26 - Pre-Candidate Independent Review
+
+- Standards review found four planning gaps: licensing acceptance was too
+  late, checked-in generated/example/identity artifacts lacked explicit
+  migration dispositions, durable publication lacked interruption and
+  overlapping-writer rules, and the schema profile omitted exact vocabulary
+  URIs.
+- The dependency decision now records exact release/source authorities,
+  copyright owners, embedded license identities, compatibility, notice
+  obligations, and the non-bundling result. Planning admission must explicitly
+  accept A1B-A6P before start.
+- The policy-impact migration now includes the generated agent-tool artifact,
+  public examples, identity fixtures, and their missing relationship
+  corrections.
+- The authority contract now defines same-filesystem staged directory
+  publication, durable flushes, overlapping writers, collision behavior,
+  interruption states, idempotent retry, and reopening evidence.
+- The schema audit now binds the exact Draft 2020-12 meta-schema and vocabulary
+  URIs while retaining `jsonschema` as the sole validator.
+- A sequencing audit found that separately committed foundation Modules would
+  create unregistered semantic consumers. Milestones 0 through 2 are therefore
+  uncommitted working-tree checkpoints; Milestone 3 is the first implementation
+  commit and atomically includes their policy-impact and coverage migration.
+
+## 2026-08-26 - Pre-Candidate Specification Review
+
+- Specification review found that the direct-object design lacked an explicit
+  acyclic payload graph and self-handle rule, snapshot capture lacked a new
+  owner, identity v2 lacked byte-complete framing, dependency artifacts were
+  missing from the migration map, and public operation closure remained
+  deferred.
+- Added closed payload contracts for every inspectable object. Stored payloads
+  exclude their own handles; context and requirement identities precede
+  observations; no child points to an analysis root.
+- Assigned Git-tree and mutable-manifest capture, source-race validation, nested
+  snapshot publication, and root publication to `standards_authority`.
+- Defined exact scalar escaping, surrogate rejection, integer rendering,
+  Unicode ordering, hash framing, SHA-256, and ID grammar for identity v2.
+- Added package manifest, exact lock, dependency decision, and implementation
+  provenance artifacts to the semantic-consumer migration.
+- Froze the four operation records, capability map, and exact reachable v11
+  public definition-name set before implementation.
+- Split pre-start licensing admission A1B-A6P from final exact-lock review
+  A1B-A6L and prohibited schema-default injection without exception.
+- Router correction: Concurrency and Resilience apply to overlapping durable
+  publication and interruption/retry; Release applies to dependency and
+  distribution lifecycle. They join the previously selected Planning,
+  Implementation, Verification, Documentation, Build, Tooling, Architecture,
+  Contracts, Dependencies, Licensing, Security, Diagnostics, Library, and
+  Persistence policies. Cross-Platform is also selected because A1b defines
+  filesystem identity, aliases, ext4 support, and typed unsupported outcomes.
+  IPC, Language Binding, and A2 remain unselected for the exact in-process
+  Linux x86-64 boundary.
+
+## 2026-08-26 - Replacement Contract Closure Review
+
+- A second pre-candidate review found missing snapshot-to-analysis dependency
+  edges, underdefined authority payload records, three unlisted production
+  consumers, underdefined generated-versus-authored fixture ownership, and an
+  overwrite race in the former directory-rename publication design.
+- Added a closed authority record algebra, required-field and ordering rules,
+  direct snapshot dependencies, and cross-object coherence predicates.
+- Added the Metadata and Analysis package initializers and Standards Engine
+  renderer to the policy-impact migration, and classified examples and identity
+  fixtures as authored oracles while agent-tool declarations remain generated.
+- `Superseded`: staged directory rename and per-staging writer coordination.
+  The current durable design supports Linux ext4, serializes writers through
+  one non-authoritative repository publication lock, uses atomic create-only
+  hard-link publication, leaves readers lock-free, and assigns crash staging
+  cleanup to the next writer.
+- Narrowed dependency support to the exact CPython 3.11/3.12 Linux x86-64,
+  glibc 2.17-or-newer wheel tags. Other platforms and source builds are
+  unsupported until separately reviewed.
+- Added reviewed revision-1 policy-unit projections for the existing
+  Cross-Platform `Filesystem Paths` and Security `Filesystem Containment`
+  headings so the Authority Module, required-real fixture, and suite become
+  durable semantic consumers rather than Router-only selections.
+- Lifecycle remains `Blocked`; no implementation is admitted.
+
+## 2026-08-26 - Machine Contract And Review Closure
+
+- Replaced the duplicated prose definition-name inventory with two exact
+  machine-readable proposed v11 authorities: the public schema and the closed
+  operation/capability Interface. Their admitted bytes, not a mutable count or
+  prose transcription, govern Milestone 1 and the atomic production cutover.
+- Added the policy-unit registry to the cutover because new Cross-Platform and
+  Security sidecars do not enter the canonical corpus merely by existing on
+  disk.
+- Split authority-object validation deliberately: the repository proves local
+  object integrity and dependency kind/existence; the bound analysis kernel or
+  inspection adapter proves aggregate semantic coherence.
+- Required all durable store mutation to remain descriptor-relative after one
+  verified Linux ext4 root open, including directory initialization and
+  concurrent parent-component replacement evidence.
+- Closed package targets to CPython 3.11/3.12 on the exact reviewed Linux wheel
+  closure and retained domain-owned ordering rather than generic identity-byte
+  ordering.
+- A non-authoritative isolated `/tmp` review environment resolved the exact six
+  planned package versions, and `jsonschema==4.26.0`
+  `Draft202012Validator.check_schema` accepted the proposed v11 schema with a
+  closed local `referencing` registry. Milestone 0 still owns hash-checked
+  reproduction and acceptance of that closure.
+- The replacement planning lifecycle remains `Blocked`; no implementation or
+  A2 work is admitted.
+
+## 2026-08-26 - Final Pre-Candidate Contract Corrections
+
+- Specification review found four remaining planning defects: callers were
+  asked to supply a preconstructed coverage attestation, store-root validation
+  did not reject intermediate symlink components, direct package dependencies
+  were specified only for the new Modules and Engine, and several Analysis
+  collections still lacked frozen typed ordering keys.
+- Replaced `CoverageAttestationSubmission.attestation` with an input-only
+  `CoverageAttestationClaim`. The bound kernel now obtains trusted
+  authorization, validates evidence and current work, and alone constructs the
+  immutable attestation and handle.
+- `Superseded`: opening or reopening the complete configured store path once
+  with `O_NOFOLLOW`. The current design requires a canonical absolute path and
+  walks every component from a trusted `/` descriptor with no-follow directory
+  opens, then repeats that walk and compares device, inode, and mount identity
+  before success.
+- Expanded the package migration to every manifest in the closed Engine Module table and
+  froze their direct internal dependency graph. The canonical A1b local
+  execution boundary is a clean-venv, hash-checked external install followed
+  by safe-path imports from the reviewed source tree; A1b does not silently
+  select a local wheel-build backend.
+- Added the closed typed key table for changes, scopes, consumer aggregation,
+  reading reasons and entries, observations, dispositions, coverage decisions,
+  result work, and next operations. Generic identity bytes no longer decide
+  domain order, grouping, deduplication, or conflict.
+- The edited proposed v11 schema adds the input-only claim and remains a closed
+  operation-reachable Draft 2020-12 schema accepted by the selected validator.
+  Its current SHA-256 is
+  `349c06fce684accce477675a9048690100b999058fa25463b2f656028d666d50`.
+- Lifecycle remains `Blocked`; the next operation remains independent exact-tree
+  review of the replacement candidate. No A1b implementation or A2 work is
+  admitted.
+
+## 2026-08-26 - Final Specification Claim Repair
+
+- Independent specification re-review found that A1B-A6 incorrectly claimed
+  the future internal manifest/import closure at Milestone 0, and that the
+  typed-key table used encoded-byte identity as one same-key equality test.
+- Split the claims. A1B-A6 now governs only the exact external lock, target
+  artifacts, isolated dependency imports, and security result in Milestone 0.
+  A1B-A6I governs exact production-import/manifest equality and public
+  source-tree import smoke at the atomic Milestone 3 cutover.
+- Replaced byte equality in duplicate handling with owner-defined normalized
+  typed-record equality. Boolean/integer and codepoint-distinct strings remain
+  distinct; encoded identity bytes never decide equality or conflict.
+- The fixes change no machine schema or interface bytes and no runtime path.
+  Lifecycle remains `Blocked` pending renewed independent review of the final
+  candidate.
