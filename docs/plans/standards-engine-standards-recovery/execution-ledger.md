@@ -1186,3 +1186,21 @@ superseded by the discovery-admission transition in the active plan.
 - Excluded authority: policy mutation remains unavailable until `start`; A1b
   and A2 remain inactive through their independently accepted gates.
 - Sole next operation: `start` Milestone 1 reconciliation and freeze.
+
+## 2026-08-25 - Recovery Resume Start
+
+- Admitted transition base: commit
+  `6c577800b3e6c56c666c95e9404914114e45be2b`, tree
+  `88efd0c03423de9ccac318977e0d0dca529df6f2`.
+- Start precondition: the transition was current `HEAD`, the worktree was
+  clean, and the candidate, report, transition parent chain, and exact bindings
+  resolved.
+- Lifecycle transition: the plan and Milestone 1 move from `Planned` to
+  `Active`; Milestone 0 remains `Accepted` and Milestone 2 remains blocked by
+  Milestone 1.
+- Authorized work: reconcile the implemented authority, protected consumer
+  closure, graph, locators, projections, registrations, generated evidence,
+  and dispositions using only Milestone 1 `W`. All frozen authority and
+  protected consumers remain outside mutation authority.
+- Next operation: re-resolve `S` and `E`, derive `R`, prove exact closure, and
+  compare the implemented semantic graph against the admitted authorities.

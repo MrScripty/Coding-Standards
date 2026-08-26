@@ -1,11 +1,11 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 1 reconciliation and freeze ready for `start`
+**Current phase:** Milestone 1 reconciliation and freeze
 
-**Next slice:** `start` Milestone 1 from the admitted recovery-resume
-transition; mutation remains unavailable until `start` records that exact base
+**Next slice:** re-resolve the protected consumer closure and compare the
+implemented semantic graph against the admitted authorities
 
 **Acceptance status:** `partial`
 
@@ -33,9 +33,9 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `b5dd44335e1ac506f1d9e2e298d3a63d4f35614c`, tree
 `c2c03737e626499587dccebdf070c9238dafbb01`
 
-**Admitted recovery-resume base:** the current mechanical transition commit;
-Milestone 1 `start` must record its exact commit/tree before changing the plan
-to `Active`, and any intervening commit invalidates admission
+**Recovery-resume start base:** commit
+`6c577800b3e6c56c666c95e9404914114e45be2b`, tree
+`88efd0c03423de9ccac318977e0d0dca529df6f2`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -200,13 +200,10 @@ coverage after any authority change.
 
 ## Recovery Resume Admission
 
-The exact candidate and independent report recorded above complete
-recovery-resume admission. This direct-child transition authorizes no
-implementation by itself. `start` is valid only while the transition remains
-current `HEAD` with a clean worktree; it must record the transition commit/tree,
-move the plan and Milestone 1 to `Active`, and authorize only the Milestone 1
-`W` below. Any intervening commit, mismatched identity, additional transition
-delta, or generated-artifact change invalidates admission.
+The exact candidate, independent report, transition, and start base recorded
+above complete recovery-resume admission. Milestone 1 is active and may modify
+only its `W` below. Any base mismatch, unauthorized path, protected-consumer
+mutation, or generated-artifact change requires replanning.
 
 ## Milestones
 
@@ -277,7 +274,7 @@ is exact; graph changes are fully dispositioned; generated evidence is fresh;
 all selected consumers have non-blocked dispositions; no frozen authority path
 requires modification; and the complete checkpoint passes.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 2: Final Coverage And Exact-Tree Acceptance
 
@@ -406,4 +403,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Planned`
+- Final status: `Active`
