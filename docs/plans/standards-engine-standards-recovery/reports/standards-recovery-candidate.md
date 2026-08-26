@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Implemented; exact verification transition pending`
+**Status:** `Verifying; independent acceptance pending`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -23,8 +23,9 @@ This report records the source-complete implementation. Candidate
 `35823701b4ea400371c0de196e3b18d7dcaa834d`, is superseded because independent
 review found two mutable threshold oracles and contradictory lifecycle
 projections. The correction is complete at the semantic-oracle implementation
-boundary above, but this report is not yet an acceptance candidate. It does not
-admit A1b planning, A1b runtime work, or A2.
+boundary above. The current lifecycle-transition tree is the exact candidate;
+this report does not claim its commit identity recursively. It does not admit
+A1b planning, A1b runtime work, or A2.
 
 ## Implemented Result
 
@@ -98,5 +99,5 @@ lint acceptance is exact over the recovery's Python delta.
 The admitted semantic-oracle recovery changed exactly the two package tests in
 `O`. No attestation, policy, graph, suite, fixture, generated artifact, runtime,
 external corpus, dependency, A1b implementation, or A2 path changed. All frozen
-coverage identities remained byte-identical. A replacement candidate requires
-one final exact-tree verification and consistent current lifecycle authority.
+coverage identities remained byte-identical. The current verification-
+transition tree is the exact candidate awaiting independent review.

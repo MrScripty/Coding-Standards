@@ -1579,3 +1579,22 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: commit this implementation record, then create one separate
   mechanical `Implemented` to `Verifying` transition. That transition tree,
   not this implementation boundary, is the exact independent-review candidate.
+
+## 2026-08-25 - Replacement Exact Verification Candidate Transition
+
+- Implemented parent: commit
+  `34bb35aebc0ea330f6d24d27b59768efaca00499`, tree
+  `0826ae5e6a754e2f458d4edad0aa8972d21f01c2`.
+- Candidate construction: this mechanical transition changes only current
+  plan, issue, candidate-report, and ledger verification projections. The
+  resulting clean tree is the exact candidate; no recursive candidate identity
+  is authored into it.
+- Lifecycle transition: the plan and Milestone 2 move from `Implemented` to
+  `Verifying`. SR-A5 and SR-A14 are satisfied by exact automated evidence;
+  SR-A4 and SR-A15 remain pending independent review.
+- Preserved authority: policy, graph, horizon, attestations, coverage,
+  dispositions, fixtures, suites, generated artifacts, runtime, package tests,
+  A1b, and A2 are unchanged.
+- Next operation: run the exact-candidate verification gates, then obtain
+  independent Standards and specification review of the resulting commit and
+  tree.
