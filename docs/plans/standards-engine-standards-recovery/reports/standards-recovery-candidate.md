@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Superseded; semantic-oracle recovery pending`
+**Status:** `Superseded; corrected semantic-oracle replan pending admission`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -27,8 +27,8 @@ work, or A2.
   graph remains policy-neutral, and coverage uses an independent provider-v3
   horizon rather than treating graph presence or absence as completeness.
 - The protected mapped-consumer closure resolves mechanically from canonical
-  suite IDs plus audit-owned exact non-registry consumers. Every selected
-  consumer has one non-blocked disposition.
+  suite IDs plus audit-owned exact non-registry consumers. Later review selected
+  two actionable `fix-now` test dispositions; no consumer is blocked.
 - Final coverage reuses every dependency-valid attestation and proves exact
   active-policy-unit, requirement, attestation, and generated-certificate
   subject equality.
@@ -90,5 +90,5 @@ lint acceptance is exact over the recovery's Python delta.
 No attestation, policy, graph, suite, generated artifact, runtime, package test,
 external corpus, dependency, A1b implementation, or A2 path changed in
 Milestone 2 before semantic-oracle recovery. A replacement candidate requires
-the admitted two-test correction, renewed coverage, and consistent current
-lifecycle authority.
+the admitted two-test correction, proof that frozen coverage identities remain
+unchanged, and consistent current lifecycle authority.

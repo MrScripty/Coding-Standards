@@ -1446,3 +1446,29 @@ superseded by the discovery-admission transition in the active plan.
   candidate is created.
 - Next operation: commit the blocked replan candidate and obtain the
   reviewer-owned Milestone 2 semantic-oracle recovery admission.
+
+## 2026-08-25 - Semantic-Oracle Replan Admission Rejection
+
+- Rejected candidate: commit
+  `6cebe51e354f9691aa5122aa01c7f7c2215161e4`, tree
+  `96589746ce9e5138a3314dc2e81fc2d710963ed0`.
+- Standards findings: the candidate placed the reviewer report inside the
+  Blocked milestone write set, underspecified the report/transition/start
+  parent chain, retained checked superseded oracle and consumer claims, and
+  labeled the two actionable consumers as blocked.
+- Specification finding: direct provider-v3 inspection proved
+  `tools/standards_engine/tests/test_analysis.py` and
+  `tools/standards_engine/tests/test_navigation.py` are not coverage-horizon
+  members or input sources. Their correction must not renew attestations or
+  change any frozen coverage digest.
+- Supersession: candidate `6cebe51e354f9691aa5122aa01c7f7c2215161e4`
+  is `Superseded` by the corrected current replan. Milestone 2 and the plan
+  remain `Blocked`.
+- Replacement admission chain: one clean blocked candidate `C`; reviewer-only
+  report commit `R` directly descending from `C`; mechanical direct-child
+  `Blocked` to `Planned` transition `T`; then clean exact-head direct-child
+  `Planned` to `Active` start `S`. Only `S` authorizes the two test edits.
+- Current dispositions: the two selected tests are `fix-now`, not `blocked`.
+  `O union R2 = R` and `O intersect R2` remain the exact closure contract.
+- Next operation: verify and commit the corrected blocked candidate, then seek
+  independent admission of that exact commit and tree.

@@ -1,6 +1,6 @@
 # Standards Recovery Final Coverage Evidence
 
-**Status:** `Frozen prior evidence; renewal pending admitted test correction`
+**Status:** `Frozen current evidence; unchanged by the test-only correction`
 
 **Milestone 2 execution boundary:** commit
 `f037ab11c6bdcda8b61a64c5aa1932e86570096b`, tree
@@ -24,11 +24,11 @@ generated certificate authority, or acceptance report.
 | Horizon provider | `standards-analysis:policy-impact-consumer-horizon`, version 3 |
 | Coverage and attestation contracts | version 2 |
 
-Policy, graph, horizon, suite, runtime, generated-contract, and package-test
-inputs were frozen before compilation. The horizon digest is identical to the
-independently accepted policy-impact v2 horizon. The Milestone 1 comparison and
-protected-consumer audit found no unexplained semantic drift or omitted
-consumer requiring authority mutation.
+Policy, graph, horizon, suite, runtime, and generated-contract inputs were
+frozen before compilation. Package tests are outside the coverage projection.
+The horizon digest is identical to the independently accepted policy-impact v2
+horizon. The Milestone 1 comparison and protected-consumer audit found no
+unexplained semantic drift or omitted consumer requiring authority mutation.
 
 ## Mechanical Equality
 
@@ -104,8 +104,9 @@ binds the provider-v3 horizon and every member fingerprint; the unchanged
 horizon plus the accepted independent audit exposes no missing consumer class.
 No graph edge or empty impact result is used as proof of completeness.
 
-The equality above remains exact for candidate
-`7a54d5fe7778f481278e4f21a12863d2f261b280` but does not accept the standards
-recovery. The admitted semantic-oracle repair will change two registered
-horizon inputs, so final coverage must be recompiled after those inputs freeze
-and before replacement-candidate verification.
+The equality above remains exact but does not accept the standards recovery.
+Direct provider-v3 horizon inspection proves the two test paths in `O` are
+neither horizon members nor input sources. After their admitted correction,
+mechanical recompilation must reproduce the exact horizon, requirement,
+attestation, and certificate digests above. Any changed digest is a re-plan
+trigger; no attestation renewal is admitted.

@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Replan active; two consumer corrections pending`
+**Status:** `Replan blocked; two fix-now consumer corrections pending`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -58,8 +58,8 @@ assignments are invalid; none are present in the reconciled closure.
 | `tools/standards_analysis/tests/test_routing.py` | Replaces mutable catalog totals with stable Generated Contract fact/rule semantics. |
 | `tools/standards_policy_impact/tests/test_compiler.py` | Replaces mutable relationship totals with complete graph/semantics identity-set equality. |
 | `tools/standards_verifier/tests/test_policy_impact.py` | Proves semantic policy-impact projection and owner closure without a mutable relationship total. |
-| `tools/standards_engine/tests/test_navigation.py` | `correction-required`: replace its mutable dependency-cause threshold with exact graph-derived cause-set equality while preserving deduplication. |
-| `tools/standards_engine/tests/test_analysis.py` | `correction-required`: replace dependent-program and obligation thresholds with exact compiler-derived program and reason-edge sets. |
+| `tools/standards_engine/tests/test_navigation.py` | `fix-now`: replace its mutable dependency-cause threshold with exact graph-derived cause-set equality while preserving deduplication. |
+| `tools/standards_engine/tests/test_analysis.py` | `fix-now`: replace dependent-program and obligation thresholds with exact compiler-derived program and reason-edge sets. |
 
 ## Registry-Derived Existing Suites
 
@@ -91,7 +91,7 @@ pre-policy scope audit remains the exact path authority.
 | Retained migration-owned plan checkers | `reviewed-no-change` | Existing behavior is unchanged. New negative and systemic scenarios run only through registered Python suites. |
 | A1 contract, runtime, and composition sources | `reviewed-no-change` | Recovery records A1 behavior and the known schema-equality nonconformance; runtime correction remains A1b scope. |
 | Existing Python-verifier adapters | `reviewed-no-change` | Existing generic decision, text, path, metadata, graph, and checkpoint adapters execute the new suites without source changes. |
-| Focused accepted-A1 and verifier tests not listed under Updated Consumers | `reviewed-no-change` | Existing assertions remain applicable. All admitted live-authority cardinality replacements are complete and independently accepted. |
+| Focused accepted-A1 and verifier tests not listed under Updated Consumers | `reviewed-no-change` | Existing assertions remain applicable. The admitted Router, compiler, and verifier cardinality replacements are complete; the exact two-test set `O` is dispositioned separately above. |
 | `profiles/boundaries/language-bindings.md` | `reviewed-no-change` | Selected only when a genuine native/host or cross-language boundary exists. Generated output alone does not select it. |
 | `profiles/boundaries/ipc.md` | `reviewed-no-change` | Selected only when a process or independent-deployment boundary exists. Generated output alone does not select it. |
 | Dependency and toolchain manifests | `not-applicable` | Recovery adds no third-party implementation dependency and incorporates no external files. The reference-only specification decision remains separately recorded. |
@@ -125,9 +125,10 @@ authority.
 
 All declaration applicability is explicit `always`; no predicate was inferred
 from rationale or a repository path. Every evidence owner resolves to one
-registered suite. The two Standards Engine test consumers above are blocked
-pending the admitted semantic-oracle correction; every other selected consumer
-remains non-blocked.
+registered suite. No selected consumer has a `blocked` disposition. The two
+Standards Engine test consumers above have actionable `fix-now` dispositions
+pending admitted implementation; every other selected consumer remains
+non-blocked.
 
 ## Milestone 1 Reconciliation Evidence
 
@@ -167,7 +168,8 @@ content and representation/structural digests, and compiles as a relationship
 source. Router and profile projections, the six registered recovery suites,
 generated contract freshness, canonical contract validation, and focused
 metadata, policy-impact, graph, analysis, engine, and verifier behavior all
-revalidated without requiring a protected-consumer mutation.
+revalidated at the M1 boundary. Later exact-tree review superseded the M1 claim
+that no protected consumer required mutation by selecting exactly `O`.
 
 The complete repository checkpoint passed on this exact content through
 `python3 tools/standards_verifier/verify.py --complete`. The selected recovery

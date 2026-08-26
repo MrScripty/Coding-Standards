@@ -56,6 +56,10 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
 `35823701b4ea400371c0de196e3b18d7dcaa834d`
 
+**Superseded semantic-oracle replan candidate:** commit
+`6cebe51e354f9691aa5122aa01c7f7c2215161e4`, tree
+`96589746ce9e5138a3314dc2e81fc2d710963ed0`
+
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
 **Issues:** [issues.md](issues.md)
@@ -86,9 +90,10 @@ The six policy families, reconciled graph, and coverage architecture remain
 implemented. Exact-tree review found two protected Standards Engine tests that
 still use mutable threshold oracles and current lifecycle narration that does
 not agree across its owners. Milestone 2 is blocked pending admission of one
-two-test semantic-oracle correction, its coverage renewal, and the complete
-current-authority replacement. Broader A1b implementation and all A2 work
-remain excluded.
+two-test semantic-oracle correction and the complete current-authority
+replacement. The tests are outside the coverage horizon projection, so their
+correction must leave every frozen coverage identity unchanged. Broader A1b
+implementation and all A2 work remain excluded.
 
 ## Objective Acceptance
 
@@ -96,7 +101,7 @@ remain excluded.
 | --- | --- | --- | --- | --- | --- | --- |
 | SR-A1 | Each defect family has normative policy with stable policy-unit identity, exact locator, and non-overlapping ownership. | `contract` | `not-applicable` | `automated` | `satisfied` | [Consumer reconciliation](reports/standards-recovery-consumer-dispositions.md#policy-subject-reconciliation) and [candidate verification](reports/standards-recovery-candidate.md#verification) |
 | SR-A2 | Router prose and executable projection select the Generated Contract profile and required owners, preserve conditional IPC and Language Binding selection, and expose unresolved facts. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | Registered recovery routing suite and [candidate verification](reports/standards-recovery-candidate.md#verification) |
-| SR-A3 | Prior and current semantic graphs are compared, every changed policy unit has valid coverage, and no empty impact result is accepted without a certificate. | `integration` | `not-applicable` | `automated` | `pending` | Prior graph reconciliation remains valid; final coverage renewal follows the admitted horizon-input correction |
+| SR-A3 | Prior and current semantic graphs are compared, every changed policy unit has valid coverage, and no empty impact result is accepted without a certificate. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer reconciliation](reports/standards-recovery-consumer-dispositions.md#policy-subject-reconciliation) and unchanged [final coverage](reports/standards-recovery-coverage.md) |
 | SR-A4 | Every selected consumer has exactly one current non-blocked disposition supported by reviewed evidence. | `integration` | `not-applicable` | `manual` | `pending` | Pending exact correction and review of the two Standards Engine test consumers |
 | SR-A5 | Normative policy, policy units, relationships, prompts, templates, fixtures, suites, and verifier support agree at one exact tree. | `integration` | `not-applicable` | `automated` | `pending` | Pending semantic-oracle correction and replacement exact-tree verification |
 | SR-A6 | Generated freshness and generated semantic correctness are proved separately. | `contract` | `not-applicable` | `automated` | `satisfied` | Generated freshness plus registered semantic-conformance suite in [candidate verification](reports/standards-recovery-candidate.md#verification) |
@@ -135,7 +140,8 @@ remain excluded.
   `tools/standards_policy_impact/`, `tools/standards_metadata/`,
   `tools/standards_graph/`, or `tools/graph_engine/`.
 - Further edits to package tests already corrected and accepted by the
-  policy-impact prerequisite.
+  policy-impact prerequisite, except the exact two-test set `O` admitted by
+  this semantic-oracle recovery.
 - New dependencies, copied external corpora, JSON-specific recovery machinery,
   or correction of the recorded A1 JSON Schema nonconformance.
 - New or extended Bash verification. The retained plan-structure and
@@ -234,14 +240,25 @@ The protected mapped-consumer closure remains complete. This replan defines:
 - `O union R2 = R`, with `O intersect R2` empty.
 
 No suite-registry, audit, or copied path manifest replaces those existing
-owners. The two paths in `O` may change only after an independent report admits
-the exact blocked replan candidate, a mechanical transition moves the plan and
-Milestone 2 to `Planned`, and an exact-head `start` moves them to `Active`.
-The reviewer-owned report path is
-`reports/standards-recovery-m2-semantic-oracle-admission.md`. The transition and
-start may change only the plan, ledger, and issues. Any other path, parent-chain
-mismatch, broader assertion family, runtime change, A1b work, or A2 work
-invalidates admission.
+owners. Admission uses this exact chain:
+
+1. `C` is one clean blocked candidate containing the complete replan.
+2. An independent reviewer authors only
+   `reports/standards-recovery-m2-semantic-oracle-admission.md` in report commit
+   `R`, which must be a direct child of `C`.
+3. Mechanical transition commit `T` must be a direct child of `R`, record the
+   exact `C` and `R` commit/tree identities, change only plan, ledger, and issue
+   lifecycle fields, and move the plan and Milestone 2 from `Blocked` to
+   `Planned`.
+4. `T` must be the clean current `HEAD` when `start` is invoked. Exact-head
+   start commit `S` must be a direct child of `T`, record `T`, change only plan,
+   ledger, and issue lifecycle fields, and move the plan and Milestone 2 from
+   `Planned` to `Active`.
+5. Only `S` authorizes modification of the two paths in `O`.
+
+The reviewer-owned report is pre-milestone authority and is not part of the
+Blocked Milestone 2 write set. Any other path, parent-chain mismatch, broader
+assertion family, runtime change, A1b work, or A2 work invalidates admission.
 
 ## Milestones
 
@@ -287,8 +304,11 @@ prerequisite is evidence, not additional recovery write authority.
   template.
 - [x] Add positive, negative, non-applicable, unresolved, mutation, and
   cold-process fixtures and register six Python declarative suites.
-- [x] Replace live-authority fact, rule, edge, consumer, navigation, and
-  analysis cardinality oracles with semantic identity and cause-set assertions.
+- [x] Replace live-authority Router, policy-impact compiler, and verifier
+  cardinality oracles with semantic identity and cause-set assertions.
+- [x] Record the former claim that navigation and analysis thresholds were
+  replaced as `Superseded`; transfer their exact two-test correction to
+  Milestone 2.
 - [x] Regenerate admitted migration evidence without modifying checker or
   generator behavior.
 - [x] Replace split policy-impact validity/projection authority and obtain
@@ -303,7 +323,9 @@ prerequisite is evidence, not additional recovery write authority.
   relationship without using mutable totals.
 - [x] Revalidate every policy-unit locator, Router/profile projection, suite
   registration, generated artifact, and current consumer disposition.
-- [x] Prove no consumer is blocked and no protected consumer requires mutation.
+- [x] The M1 review found no blocked consumer at its frozen boundary. The later
+  exact-tree review superseded the claim that no protected consumer required
+  mutation by selecting the two `fix-now` consumers in `O`.
 - [x] Run focused recovery verification and the complete repository checkpoint,
   then record the exact frozen M1 tree.
 
@@ -321,14 +343,6 @@ independent acceptance of one clean standards-recovery tree.
 
 **Allowed write set:**
 
-- `evaluation/standards-effectiveness/policy-coverage/attestations/router.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml`
-- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml`
 - `docs/plans/standards-engine-standards-recovery/plan.md`
 - `docs/plans/standards-engine-standards-recovery/execution-ledger.md`
 - `docs/plans/standards-engine-standards-recovery/issues.md`
@@ -336,15 +350,13 @@ independent acceptance of one clean standards-recovery tree.
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-coverage.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-candidate.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-acceptance.md` (new, independent reviewer owned)
-- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-m2-semantic-oracle-admission.md` (new, independent reviewer owned)
 - `tools/standards_engine/tests/test_analysis.py`
 - `tools/standards_engine/tests/test_navigation.py`
 
-The eight attestation files are the current policy-impact v2 owner-local
-authority closure. They may change only when exact final requirements cannot
-reuse a dependency-valid current attestation. No attestation source, horizon
-declaration, policy, relationship, suite, runtime, generated contract, or
-package test outside `O` is writable in this milestone.
+The current policy-impact v2 attestations remain frozen and outside this write
+set. No attestation source, horizon declaration, policy, relationship, suite,
+runtime, generated contract, or package test outside `O` is writable in this
+milestone.
 
 **Tasks:**
 
@@ -355,16 +367,19 @@ package test outside `O` is writable in this milestone.
 - [x] Generate certificates and prove exact active-policy-unit, requirement,
   attestation, and certificate subject equality with no stale, duplicate,
   extra, missing, or blocked subject.
-- [x] Prove every selected consumer has exactly one current non-blocked
-  disposition and no independent-horizon member is missing.
+- [ ] Complete the two current `fix-now` dispositions in `O`, then prove every
+  selected consumer has exactly one current non-blocked disposition and no
+  independent-horizon member is missing.
 - [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
 - [ ] Replace the two mutable live-authority thresholds with exact
   compiler-derived dependent-program and reason-edge sets and exact graph-derived
   navigation cause sets; preserve deduplication assertions.
-- [ ] Freeze the resulting horizon, recompile requirements and certificates,
-  and renew only attestations whose exact requirement identity changes.
+- [ ] Recompile coverage after the test correction and prove the horizon,
+  requirement, attestation, and certificate digests are byte-identical to the
+  frozen values. Any changed digest is a re-plan trigger; no attestation renewal
+  is admitted.
 - [ ] Replace every stale current-state projection selected by the renewed
   systemic audit.
 - [ ] Rerun the two focused test modules, every focused package suite, contract
