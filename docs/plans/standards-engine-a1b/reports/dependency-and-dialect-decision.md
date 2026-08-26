@@ -79,28 +79,37 @@ another architecture, or another Python version is not part of this decision
 and requires a new supported-target review.
 
 Every Engine Module manifest changes `requires-python` from the former
-open-ended `>=3.11` to `>=3.11,<3.13`. The exact direct internal dependency
-graph is:
+open-ended `>=3.11` to `>=3.11,<3.13` and declares one source-tree public import
+root as `[tool.standards-package].public-import-root`. The exact internal
+dependency and public-root authority is:
 
-| Module | Direct internal requirements | Direct external requirements |
-| --- | --- | --- |
-| `repository-graph-engine` | none | none |
-| `standards-applicability` | none | none |
-| `standards-identity` | none | none |
-| `standards-contracts` | none | `jsonschema==4.26.0`, `referencing==0.37.0` |
-| `standards-metadata` | `standards-identity` | none |
-| `standards-authority` | `standards-identity` | none |
-| `standards-policy-impact` | `repository-graph-engine`, `standards-applicability`, `standards-metadata` | none |
-| `standards-graph` | `repository-graph-engine`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-analysis` | `repository-graph-engine`, `standards-applicability`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-engine` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-authority`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-verifier` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
+| Module | Public import root | Direct internal requirements | Direct external requirements |
+| --- | --- | --- | --- |
+| `repository-graph-engine` | `tools.graph_engine.graph_engine` | none | none |
+| `standards-applicability` | `tools.standards_applicability.standards_applicability` | none | none |
+| `standards-identity` | `tools.standards_identity.standards_identity` | none | none |
+| `standards-contracts` | `tools.standards_contracts.standards_contracts` | none | `jsonschema==4.26.0`, `referencing==0.37.0` |
+| `standards-metadata` | `tools.standards_metadata.standards_metadata` | `standards-identity` | none |
+| `standards-authority` | `tools.standards_authority.standards_authority` | `standards-identity` | none |
+| `standards-policy-impact` | `tools.standards_policy_impact.standards_policy_impact` | `repository-graph-engine`, `standards-applicability`, `standards-metadata` | none |
+| `standards-graph` | `tools.standards_graph.standards_graph` | `repository-graph-engine`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-analysis` | `tools.standards_analysis.standards_analysis` | `repository-graph-engine`, `standards-applicability`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-engine` | `tools.standards_engine.standards_engine` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-authority`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-verifier` | `tools.standards_verifier.standards_verifier` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
 
-The cutover gate derives production direct imports and requires exact equality
-with this manifest graph. A transitive import does not satisfy a missing direct
-declaration, and an unused declaration is invalid. Test-only imports are suite
-inputs, not production requirements. Discovering a required edge outside this
-closed table is a re-plan trigger.
+The cutover gate parses production Python with `ast`, derives direct imports,
+and requires exact equality with this manifest graph. For each cross-Module
+import, the imported module must equal the dependency manifest's public root;
+importing below that root is invalid even when Python can load it. Literal and
+dynamic `importlib` or `__import__` cross-Module bypasses are invalid. Relative
+imports within the owning Module remain valid. The verifier consumes manifest
+roots directly and does not duplicate package or symbol allowlists; each
+package `__init__.py` remains the symbol-surface authority.
+
+A transitive import does not satisfy a missing direct declaration, and an
+unused declaration is invalid. Test-only imports are suite inputs, not
+production requirements. Discovering a required edge or public root outside
+this closed table is a re-plan trigger.
 
 This internal source-tree closure is A1B-A6I and remains pending until the
 atomic cutover. It is deliberately separate from A1B-A6: Milestone 0 proves the
@@ -125,9 +134,10 @@ another wheel, another transitive version, or an unlisted dependency fails.
 
 The internal Modules execute from the repository source tree and are not
 published as separate distributions in A1b. After the external install, each
-admitted Python version performs the public import smoke from outside the
-checkout with safe-path mode and the exact checkout root as its sole
-`PYTHONPATH`:
+admitted Python version derives the roots above from package manifests and
+performs public import smoke from outside the checkout with safe-path mode and
+the exact checkout root as its sole `PYTHONPATH`. The following expansion is
+illustrative evidence, not a second root authority:
 
 ```sh
 cd "$isolated_directory"
@@ -147,9 +157,14 @@ from tools.standards_verifier import standards_verifier
 ```
 
 This proves the repository's actual local execution boundary without silently
-selecting a build backend. A future separately installed or published internal
-distribution requires its own build, dependency, release, and installation
-decision.
+selecting a build backend. Importability does not prove boundary compliance;
+the AST verifier owns that distinct claim. An otherwise-valid generated-output
+fixture and an otherwise-valid handwritten-facade fixture each replace one
+public-root import with a private-submodule import and must reach the exact
+typed package-boundary diagnostic. Focused projection tests also inspect the
+generated import prelude, but they are not the independent acceptance oracle.
+A future separately installed or published internal distribution requires its
+own build, dependency, release, and installation decision.
 
 ## Dialect And Projection Profile
 

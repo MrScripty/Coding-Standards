@@ -29,8 +29,8 @@ cardinality.
 | Navigation handle cache/inspection | Standards Engine navigation and inspection tests | Repository-controlled | Store navigation result directly; handle v4 |
 | Child artifact inspection | Context, requirement, observation, coverage, certificate, policy, and relationship inspection tests | Repository-controlled | Store every advertised child as a direct typed authority object; remove owner maps, scans, and cache authority |
 | Supplemental implementation node catalog | Standards graph composition, policy-impact compilation, analysis coverage horizon, and verifier | Repository-controlled semantic authority | Replace created/retired implementation artifacts atomically and preserve stable retained identities |
-| Source-owned policy-impact relationships | Contracts, Architecture, Dependencies, and Generated Contract policy units | Repository-controlled semantic authority | Remap implementation consumers to the new compiler, projection, identity, authority, schema, generated, and facade artifacts |
-| Python package and supported-target metadata | Every manifest in the closed Engine Module dependency table | Repository-controlled source-tree dependency authority | Declare every production direct-import edge exactly, restrict all Modules to CPython 3.11/3.12, install the external lock in clean environments, and smoke every public source-tree import without an ambient package or build backend |
+| Source-owned policy-impact relationships | Contracts, Architecture, Dependencies, Generated Contract, Cross-Platform, and Security policy units plus the closed declaration-source registry | Repository-controlled semantic authority | Register every admitted source explicitly and remap implementation consumers to the new compiler, projection, identity, authority, schema, generated, and facade artifacts |
+| Python package and supported-target metadata | Every manifest in the closed Engine Module dependency table | Repository-controlled source-tree dependency and public-root authority | Declare every production direct-import edge and one public root exactly, restrict all Modules to CPython 3.11/3.12, reject private or dynamic cross-Module imports through AST verification, and smoke every manifest-owned root without an ambient package or build backend |
 
 Search at the inventory base found no non-test Python importer outside the
 repository packages, no deployed process or foreign-language binding, and no
@@ -139,20 +139,29 @@ closure. Other durable filesystem families are unsupported in A1b.
    return typed `unsupported`.
 6. Consumer tests assert stable identities, relationships, and behavior rather
    than mutable repository counts.
+7. Every production cross-Module import names the dependency manifest's exact
+   public root. Package `__init__.py` files own exported symbols; verifier suites
+   do not maintain symbol or package allowlists.
+8. Relationship files enter compilation only through the closed policy-impact
+   registry. Policy-unit membership and filesystem paths do not imply
+   relationship-source membership.
 
 ## Required Evidence
 
 - Import and source inventory showing no external consumer or retained state.
 - Generated closure proving every public operation input and result is covered.
 - Public package tests proving only generated v11 values cross the facade.
+- AST-derived manifest/import equality and public-root checks across every
+  production Module, including separate exact negative fixtures for generated
+  output and handwritten facade code.
 - Mutation-after-capture and genuine cold-process reconstruction with no source
   path or injected private authority.
 - Direct cold inspection for every advertised handle variant.
 - Identity fixtures proving codepoint preservation and domain-owned semantic
   ordering, normalization, and deduplication.
-- Accepted/proposed policy-impact compilation, exact node and relationship
-  dispositions, consumer dispositions, final horizon freeze, and certificate
-  equality.
+- Accepted/proposed policy-impact compilation, exact admitted-source
+  registration, node and relationship dispositions, consumer dispositions,
+  final horizon freeze, and certificate equality.
 - Exact deletion evidence for former validators, stores, and compatibility
   paths.
 - Broad package, declarative-suite, retained-checker migration, generated

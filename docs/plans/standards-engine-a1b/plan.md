@@ -5,8 +5,8 @@
 **Current phase:** Replacement planning admission
 
 **Next slice:** Independent exact-tree Standards and Specification review of
-this replacement plan, proposed ADR, issue registry, ledger, six planning
-reports, and the two machine-readable proposed v11 contract artifacts
+replacement planning candidate C-prime, including the closed relationship-source
+registration and Python package-contract corrections
 
 **Acceptance status:** `pending`
 
@@ -35,7 +35,7 @@ any A2 review or implementation begins.
 | A1B-A4 | Every advertised snapshot, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its typed object in a fresh process after source and process mutation; durable publication and cleanup pass on Linux ext4. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `pending` | Pending Milestone 0 |
-| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, uses the admitted Python range, and every public source-tree entry point imports in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, and one public import root; all production cross-Module imports use only those roots; private or dynamic cross-Module imports reject; and every public root imports in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6P | Before implementation starts, an independent planning review accepts the selected package provenance, license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
 | A1B-A6L | Final independent review proves the implemented exact lock and provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
 | A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split state store, owner map, scan, compatibility path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
@@ -68,6 +68,8 @@ any A2 review or implementation begins.
   created, retained, and retired implementation artifacts.
 - Registered Python verification, dependency and licensing evidence, coverage
   reconciliation, and exact-tree acceptance.
+- Manifest-owned public import roots and one AST-backed verifier contract for
+  every production cross-Module import.
 
 ### Out Of Scope
 
@@ -142,6 +144,8 @@ any A2 review or implementation begins.
 | Remove all schema `x-standards-engine-*` annotations; use one closed interface contract and domain-owned executable contracts. | Contracts and domain owners | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Mixed machine prose in public schema |
 | Build isolated foundations, then perform one atomic production v11 cutover. | Planning and integration owner | This plan | Partial schema/generated production cutover |
 | Migrate implementation catalog and policy-impact relationships in the atomic cutover. | Policy Impact and coverage owners | [Migration plan](reports/policy-impact-migration-plan.md) | Treating implementation artifact changes as incidental paths |
+| Keep `policy-impact-registry.toml` as the sole closed declaration-source membership authority and register every admitted source explicitly. | Policy Impact | [Migration plan](reports/policy-impact-migration-plan.md) | Filesystem discovery or policy-unit-derived relationship registration |
+| Make each Engine Module manifest own one public import root and enforce cross-Module imports with one AST-backed Standards Verifier contract. | Dependencies and Verification | [Dependency decision](reports/dependency-and-dialect-decision.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Import smoke, generator-only checks, and copied package or symbol allowlists |
 | Keep A2 inactive through independent A1b acceptance. | Planning | Accepted standards recovery | Direct progression to authoring |
 
 ## Evidence And Oracle Plan
@@ -156,8 +160,8 @@ any A2 review or implementation begins.
 | Cold reconstruction is complete | Persisted authority | Fresh process with store path and handle only | Persisted object envelope and dependencies | In-process caches or unavailable durable filesystem | Missing is unavailable; contradiction is invalid |
 | Public algebra is exhaustive | Public path | Real facade/tool calls using exported generated types | Public operation closure | Internal domain values crossing the facade | Unhandled domain result is a programming error |
 | External dependency is reproducible | Release artifact | Hash-checked isolated install and dependency import smoke | Reviewed lock, artifact hashes, provenance, licenses | Unreviewed platform, Python, wheel, or source build | Missing or mismatched artifact blocks installation |
-| Internal Module closure is exact | Source-tree integration | Production-import/manifest equality plus isolated public-entry-point smoke | Closed Module dependency table and reviewed checkout | Independently published or installed local distributions | Missing, transitive-only, unused, ambient, or undeclared import fails |
-| Policy-impact migration is complete | Semantic consumers | Accepted/proposed compile and exact disposition equality | Compiled relationship authority and independent horizon | Empty impact without certified coverage | Unmapped node, edge, consumer, or coverage subject blocks |
+| Internal Module closure is exact | Source-tree integration | AST-derived production-import/manifest equality, exact public-root enforcement, and isolated public-root smoke | Manifest-owned requirements and public roots plus reviewed checkout | Independently published or installed local distributions | Missing, transitive-only, unused, ambient, undeclared, private-submodule, or dynamic cross-Module import fails |
+| Policy-impact migration is complete | Semantic consumers | Accepted/proposed compile, exact admitted-source registration, and exact disposition equality | Closed policy-impact registry, compiled relationship authority, and independent horizon | Empty impact without certified coverage | Unregistered source, unmapped node, edge, consumer, or coverage subject blocks |
 | Negative fixture reaches intended rule | Negative evidence | Otherwise-valid fixture and exact diagnostic assertion | Owning typed diagnostic | Failure at another precondition | Failure at another precondition rejects the test |
 
 A1b does not use agreement between local implementations as external Draft
@@ -190,11 +194,18 @@ The rejected candidate `f41037bf71deddba36056b27d418fe767a7cfb62`,
 tree `042f97101d50df79dcac0b029aa1b9324cf8b881`, is `Superseded`
 by the replacement candidate created from this plan revision.
 
+The later candidate `44de7dff9c83f08b24225c82ad1b6a974f6655a9`,
+tree `24925cfce1d87f69bfde78d9f060eddae6963308`, is also
+`Superseded`. Its review found that two admitted relationship files were absent
+from the closed relationship-source registry and that successful imports did
+not prove use of public package boundaries.
+
 Admission and start require this direct-child chain:
 
-1. **C:** clean replacement planning candidate containing no implementation;
+1. **C-prime:** clean replacement planning candidate containing no
+   implementation and superseding both rejected candidates;
 2. **R:** reviewer-owned `reports/a1b-plan-admission.md` as the sole change,
-   binding C, explicitly accepting the dependency provenance/licensing
+   binding C-prime, explicitly accepting the dependency provenance/licensing
    disposition in A1B-A6P, and reporting no blocking Standards or
    Specification finding;
 3. **T:** mechanical admission transition as the direct child of R, changing
@@ -345,6 +356,7 @@ in one replacement boundary; delete all superseded authority.
 - `tools/standards_engine/`
 - `tools/standards_verifier/`
 - `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
+- `evaluation/standards-effectiveness/policy-impact-registry.toml`
 - `evaluation/standards-effectiveness/policy-impact/topic.architecture.toml`
 - `evaluation/standards-effectiveness/policy-impact/topic.contracts.toml`
 - `evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml`
@@ -361,6 +373,7 @@ in one replacement boundary; delete all superseded authority.
 - `evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml`
 - `evaluation/standards-effectiveness/suites/a1b-public-cutover.toml`
 - `evaluation/standards-effectiveness/fixtures/contracts/a1b/`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/a1b/`
 - `evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/`
 - `docs/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md`
 - `docs/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md`
@@ -382,14 +395,27 @@ in one replacement boundary; delete all superseded authority.
 - [ ] Accept coverage claims as input, validate evidence and trusted execution
   authorization, and construct stored coverage attestations only inside the
   analysis kernel.
-- [ ] Update every manifest in the closed Module dependency table, prove exact equality between
-  production direct imports and declared internal requirements, and smoke every
-  public source-tree import in clean CPython 3.11 and 3.12 environments after
-  installing only the admitted external lock.
+- [ ] Update every manifest in the closed Module dependency table with exact
+  direct requirements, the admitted Python range, and one public source-tree
+  import root. Derive imports with Python AST, require exact manifest equality,
+  reject imports below another Module's public root and literal or dynamic
+  cross-Module import bypasses, and smoke every manifest-owned public root in
+  clean CPython 3.11 and 3.12 environments after installing only the admitted
+  external lock.
+- [ ] Make generated imports a closed compiler prelude, verify their AST in
+  focused compiler tests, and independently reject otherwise-valid generated
+  and handwritten-facade fixtures that import a private package submodule.
 - [ ] Delete old validators, generated keyword walkers, generic NFC serializer,
   snapshot compiler, split stores, owner maps, scans, aliases, and fallbacks.
-- [ ] Compile accepted and proposed catalogs/relationships; record every node,
-  edge, and selected-consumer disposition without fixed cardinality assertions.
+- [ ] Register the Cross-Platform and Security declaration files explicitly in
+  the closed policy-impact registry. Compile accepted and proposed
+  catalogs/relationships; require every admitted declaration source and natural
+  key to appear in migration evidence; and record every node, edge, and
+  selected-consumer disposition without fixed cardinality assertions.
+- [ ] Reject an otherwise-valid migration fixture whose admitted relationship
+  source is absent from the closed registry with the exact migration-completeness
+  diagnostic; the relationship compiler remains responsible only for compiling
+  its registered closed input.
 - [ ] Freeze all horizon inputs, derive requirements, renew stale attestations
   through the existing authorization/evidence path, and compile certificates.
 - [ ] Prove exact selected-consumer/disposition and
@@ -462,6 +488,10 @@ declared lifecycle fields and must identify both exact trees.
   streaming requirements, or missing ext4 hard-link/flush/lock behavior.
 - A systemic sibling, semantic consumer, relationship, horizon input, or
   required source path falls outside the admitted inventory or write set.
+- A required relationship declaration cannot be registered through the closed
+  policy-impact registry, or relationship membership requires path inference.
+- A production cross-Module import cannot be expressed through one
+  manifest-owned public root or requires runtime import discovery.
 - A foundation milestone changes accepted production A1 before Milestone 3.
 - A proposed correction changes normative policy meaning, relationship-kind or
   generic graph semantics, A2 behavior, or another owner outside scope.

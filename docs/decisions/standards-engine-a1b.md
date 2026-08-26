@@ -165,9 +165,16 @@ The selected native artifacts carry the exact
 and source builds are unsupported in A1b. Ambient installations are not
 satisfaction evidence.
 
-Package manifests own direct requirements. The lock owns selected transitive
-versions and wheel hashes. Security, provenance, supported-target, and
-licensing evidence are bound in the
+Package manifests own direct requirements, the supported Python range, and one
+canonical source-tree public import root. The corresponding package
+`__init__.py` owns exported symbols. One AST-backed Standards Verifier contract
+derives every production cross-Module import and rejects imports below another
+Module's root as well as literal or dynamic import bypasses. The verifier does
+not copy `__all__` or maintain a package or symbol allowlist. Import smoke proves
+that manifest-owned roots load; it does not decide boundary compliance.
+
+The lock owns selected transitive versions and wheel hashes. Security,
+provenance, supported-target, and licensing evidence are bound in the
 [dependency decision](../plans/standards-engine-a1b/reports/dependency-and-dialect-decision.md).
 No third-party source, wheel, or conformance corpus is copied into repository
 history.
@@ -419,6 +426,12 @@ implementation artifact. It analyzes accepted and proposed authority, assigns
 every selected consumer a disposition, freezes the final horizon, and renews
 only mechanically stale coverage attestations.
 
+`policy-impact-registry.toml` remains the sole closed authority for declaration
+source membership. New Cross-Platform and Security relationship declarations
+enter compilation only through explicit registry entries. Policy-unit corpus
+membership remains independent metadata authority; neither filenames nor
+policy-unit membership imply a relationship source.
+
 ## Consequences
 
 - One maintained dependency owns Draft semantics; project code owns only its
@@ -431,6 +444,10 @@ only mechanically stale coverage attestations.
   migration consumer.
 - A new runtime dependency and native transitive wheel require exact
   resolution, target, security, provenance, and licensing evidence.
+- Package manifests provide one import-boundary authority consumed by dependency
+  comparison, static boundary verification, and isolated import smoke.
+- Relationship declarations remain explicit closed inputs, so adding a
+  policy-unit sidecar cannot silently add or omit relationship authority.
 - Materialized derived objects may be regenerated, but direct storage avoids
   hidden owner maps and makes inspection independent of ambient execution.
 
@@ -470,6 +487,21 @@ all handles one resolution rule.
 Rejected because the closed A1b object vocabulary needs no public traversal,
 collection, arbitrary objects, mutable indexing, or remote storage.
 
+### Discover relationship declarations from the filesystem or policy units
+
+Rejected because file presence and policy-unit membership do not own
+relationship-source membership. Policy units may have no outgoing relationship,
+and deriving filenames would create path-based semantic authority beside the
+closed registry.
+
+### Enforce package boundaries only in the generator or import smoke
+
+Rejected because generator checks omit handwritten facade code and successful
+imports do not distinguish a public root from a private submodule. A single AST
+verifier consumes manifest-owned roots across all production Modules; focused
+generator tests remain implementation evidence rather than the acceptance
+oracle.
+
 ## Re-Plan Conditions
 
 Re-plan before implementation continues if:
@@ -489,6 +521,9 @@ Re-plan before implementation continues if:
 - snapshot size or streaming invalidates bounded atomic capture;
 - a changed artifact, policy-impact relationship, or coverage consumer falls
   outside the admitted atomic cutover; or
+- a required relationship source cannot use the closed policy-impact registry,
+  or a Module cannot express its production imports through one manifest-owned
+  public root; or
 - A2 mutable heads, application authority, or recovery behavior enters A1b.
 
 ## Acceptance

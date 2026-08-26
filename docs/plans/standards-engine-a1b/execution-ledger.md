@@ -261,3 +261,32 @@
 - The fixes change no machine schema or interface bytes and no runtime path.
   Lifecycle remains `Blocked` pending renewed independent review of the final
   candidate.
+
+## 2026-08-26 - Candidate C Admission Rejection And Replan
+
+- Independent exact-tree review rejected candidate
+  `44de7dff9c83f08b24225c82ad1b6a974f6655a9`, tree
+  `24925cfce1d87f69bfde78d9f060eddae6963308`, on two high-severity
+  closure defects.
+- `Superseded`: Candidate C's Milestone 3 relationship migration. It admitted
+  new Cross-Platform and Security declaration files without admitting the
+  closed `policy-impact-registry.toml` that alone makes them compiler inputs.
+- `Superseded`: Candidate C's import/manifest gate. Direct-dependency equality
+  and successful import smoke did not reject imports through another Module's
+  private submodules, repeating a historical A1 repair class.
+- Replacement decision: retain the policy-impact registry as sole explicit
+  declaration-source membership authority and require migration evidence for
+  every admitted source and natural key. Do not infer relationship authority
+  from paths or policy-unit membership.
+- Replacement decision: each Engine Module manifest owns one public import
+  root beside its requirements and Python range. One AST-backed Standards
+  Verifier contract enforces exact roots across every production cross-Module
+  import; package initializers remain symbol-surface authority, and import smoke
+  remains separate importability evidence.
+- The two corrections retain separate owners and negative fixtures but enter
+  one replacement planning candidate because either blocks the exact C-R-T-S
+  admission chain. No Bash checker or copied package/symbol allowlist is added.
+- The proposed v11 schema and interface contract remain byte-identical. No
+  runtime, package manifest, relationship registry, fixture, A1, or A2
+  implementation changed. Lifecycle remains `Blocked` pending independent
+  exact-tree review of candidate C-prime.

@@ -45,6 +45,7 @@ relationship, disposition, and coverage authority.
 | `evaluation/standards-effectiveness/policy-units/security.toml` | Add one reviewed revision-1 unit for the exact `Filesystem Containment` heading |
 | `evaluation/standards-effectiveness/policy-impact/topic.security.toml` | Add source-owned descriptor-relative containment implementation, fixture, and suite relationships |
 | `evaluation/standards-effectiveness/policy-units/registry.toml` | Retain and register the new Cross-Platform and Security sidecars in the canonical policy-unit corpus |
+| `evaluation/standards-effectiveness/policy-impact-registry.toml` | Retain and register the new Cross-Platform and Security declaration sources in the closed relationship corpus |
 | `tools/standards_engine/README.md` | Retain and update the public v11 facade and unsupported-version behavior |
 | `tools/standards_engine/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13` and declare every directly imported internal package, including Contracts and Authority |
 | `tools/standards_applicability/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; remain stdlib-only |
@@ -54,6 +55,8 @@ relationship, disposition, and coverage authority.
 | `tools/standards_graph/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Metadata, and Policy Impact directly |
 | `tools/standards_analysis/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, Identity, Metadata, and Policy Impact directly |
 | `tools/standards_verifier/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare every directly imported Engine Module, including Contracts |
+| `tools/standards_verifier/standards_verifier/python_packages.py` | Add as manifest-owned package/dependency projection and AST import analysis |
+| `tools/standards_verifier/standards_verifier/checks/python_package_contract.py` | Add as the typed direct-import and public-root conformance check |
 | `docs/plans/standards-engine-a1b/reports/dependency-and-dialect-decision.md` | Retain as the reviewed selection authority |
 | `docs/plans/standards-engine-a1b/reports/a1b-dependency-provenance.md` | Add as exact implementation resolution evidence |
 | `tools/standards_engine/contracts/generate_contract.py` | Retire; replace with `tools/standards_contracts/standards_contracts/projection.py` |
@@ -82,20 +85,25 @@ does not invent a wheel-build backend or claim a local distribution-install
 contract. `standards_identity`, `standards_applicability`, and Graph Engine are
 stdlib-only. `standards_contracts` declares exact direct external requirements
 for `jsonschema` and `referencing`; its lock closes transitives.
-`standards_authority` declares Identity. Every other manifest declares exactly
-the internal packages imported directly by its production source: no missing
-direct requirement, transitive satisfaction, or unused internal requirement is
-accepted. Every listed manifest uses `requires-python = ">=3.11,<3.13"`.
+`standards_authority` declares Identity. Every manifest also owns one canonical
+source-tree public import root. Every other manifest declares exactly the
+internal packages imported directly by its production source: no missing direct
+requirement, transitive satisfaction, unused internal requirement, or import
+below another Module's public root is accepted. Every listed manifest uses
+`requires-python = ">=3.11,<3.13"`.
 
 Milestone 3 derives the direct-import graph from production Python syntax and
-compares it with the manifest graph. It then creates a clean CPython 3.11 and
-3.12 environment, installs the exact external lock, changes to a directory
-outside the repository, supplies the reviewed checkout root as the sole
-`PYTHONPATH`, enables Python safe-path mode, and imports every public Module
-entry point in one fresh process. This is the reproducible execution contract
-the repository actually uses. A newly required local wheel, independently
-published distribution, build backend, or import outside this graph is a
-re-plan trigger.
+compares it with the manifest graph. One AST-backed verifier consumes the same
+manifest roots and rejects private-submodule and literal or dynamic
+cross-Module imports across all production Modules. It does not copy `__all__`
+or maintain another package or symbol allowlist. The cutover then creates clean
+CPython 3.11 and 3.12 environments, installs the exact external lock, changes to
+a directory outside the repository, supplies the reviewed checkout root as the
+sole `PYTHONPATH`, enables Python safe-path mode, and imports every
+manifest-owned public Module root in one fresh process. This is the reproducible
+execution contract the repository actually uses. A newly required local wheel,
+independently published distribution, build backend, public root, or import
+outside this graph is a re-plan trigger.
 
 The following current generic-serializer consumers become explicit semantic
 consumers. They are retained unless stated otherwise:
@@ -162,7 +170,11 @@ because their public exports must remove the retired serializer and snapshot
 authorities.
 
 Relationship declarations remain source-owned in their current module files.
-No generic graph manifest or path inference creates these replacements.
+`policy-impact-registry.toml` remains the sole closed membership authority for
+those files. The new Cross-Platform and Security files are added there
+explicitly; neither filesystem presence nor policy-unit registration implies a
+relationship source. No generic graph manifest or path inference creates these
+replacements.
 
 The two new policy units do not change normative prose. Their revision 1 is a
 reviewed bootstrap assertion that the exact canonical module, locator, resolved
@@ -203,6 +215,7 @@ new relationships:
 | `topic.cross-platform.filesystem-paths` | no current policy unit or implementation edge | add | Cross-Platform sidecar; Authority repository/capture, README/package contract, required-real fixture, and suite |
 | `topic.security.filesystem-containment` | no current policy unit or implementation edge | add | Security sidecar; descriptor-relative Authority repository/capture, containment/race fixture, and suite |
 | Policy-unit registry | no Cross-Platform or Security source | update | Register both reviewed sidecars; unregistered sidecars are invalid and do not enter metadata or graph composition |
+| Policy-impact registry | no Cross-Platform or Security declaration source | update | Register both source-owned relationship files; unregistered files do not enter relationship compilation or graph projection |
 
 Every relationship not listed as replaced, corrected, retired, or split is
 retained by the same natural key and must compile with identical semantics.
@@ -211,19 +224,24 @@ hardcode a mutable relationship count.
 
 ## Required Cutover Evidence
 
-1. Compile accepted-base and proposed catalogs and relationship sets.
-2. Record every removed, retained, added, or corrected node and edge by stable
+1. Compile accepted-base and proposed catalogs and relationship sets from their
+   exact closed registries.
+2. Require the admitted declaration-source additions and every expected natural
+   key to appear in migration evidence. An otherwise-valid fixture omitting one
+   admitted source must reach the exact migration-completeness diagnostic; the
+   relationship compiler continues to compile only its registered input.
+3. Record every removed, retained, added, or corrected node and edge by stable
    natural key; do not assert a fixed global count.
-3. Run analysis from every changed policy-unit source and retain all traces.
-4. Assign each selected consumer `updated`, `reviewed-no-change`,
+4. Run analysis from every changed policy-unit source and retain all traces.
+5. Assign each selected consumer `updated`, `reviewed-no-change`,
    `not-applicable` with rationale, or `blocked`.
-5. Require exact equality between selected consumers and disposition subjects.
-6. Freeze schema, interface contract, package manifests, lock, suites, catalog,
+6. Require exact equality between selected consumers and disposition subjects.
+7. Freeze schema, interface contract, package manifests, lock, suites, catalog,
    and relationships.
-7. Derive the final horizon and requirements from the frozen view.
-8. Renew every stale authored attestation through the existing authorization
+8. Derive the final horizon and requirements from the frozen view.
+9. Renew every stale authored attestation through the existing authorization
    and evidence path, then compile certificates.
-9. Require exact equality between required and certified coverage subjects.
+10. Require exact equality between required and certified coverage subjects.
 
 Any blocked or unmapped consumer blocks A1b acceptance. An empty result is not
 proof of no impact without valid independent coverage.
