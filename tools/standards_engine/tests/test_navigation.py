@@ -24,6 +24,7 @@ from tools.standards_engine.standards_engine import (
     RelationshipInspectionResult,
     StandardsEngine,
 )
+from tools.standards_graph.standards_graph import METADATA_REQUIRES
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -269,11 +270,20 @@ class NavigationTest(unittest.TestCase):
             any(reason["kind"] == "requires" for reason in implementation_reasons)
         )
         requires = [reason for reason in core_reasons if reason["kind"] == "requires"]
+        expected_requires = {
+            (view.edge.id, view.edge.source)
+            for view in self.engine._graph.incoming("core", (METADATA_REQUIRES,))
+            if view.edge.source in entries
+        }
+        actual_requires = {
+            (reason["edge"], reason["source"])
+            for reason in requires
+        }
+        self.assertEqual(actual_requires, expected_requires)
         self.assertEqual(
             len(requires),
-            len({(reason["edge"], reason["source"]) for reason in requires}),
+            len(actual_requires),
         )
-        self.assertGreaterEqual(len(requires), 3)
 
     def test_route_result_can_drive_same_snapshot_read(self) -> None:
         route = self.engine.query(

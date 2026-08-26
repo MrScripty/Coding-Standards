@@ -421,6 +421,11 @@ class AnalysisWorkflowTest(unittest.TestCase):
         policy = "workflow.planning.written-plan-applicability"
         authority = self.engine._analysis_authority()
         original = authority.policy_impact
+        selected_edges = {
+            edge_id
+            for edge_id, item in original.semantics.items()
+            if item.source == policy
+        }
         fact_schema = compile_fact_schema(
             {
                 "kind": "applicability-fact-schema",
@@ -487,7 +492,12 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(first.obligations, ())
         self.assertEqual(len(first.fact_requirements), 1)
         requirement = first.fact_requirements[0]
-        self.assertGreater(len(requirement.dependent_programs), 2)
+        expected_programs = {
+            f"{side}:{edge_id}"
+            for side in ("accepted", "proposed")
+            for edge_id in selected_edges
+        }
+        self.assertEqual(set(requirement.dependent_programs), expected_programs)
 
         initial_state = state
         kernel = bind_analysis_kernel(
@@ -516,7 +526,15 @@ class AnalysisWorkflowTest(unittest.TestCase):
 
         self.assertIsInstance(second, PendingResult)
         self.assertEqual(second.fact_requirements, ())
-        self.assertGreater(len(second.obligations), 1)
+        reason_edges = [
+            str(reason["edge"])
+            for obligation in second.obligations
+            if obligation.kind == "consumer-review"
+            for reason in obligation.reasons
+            if reason["kind"] == "policy-impact-edge"
+        ]
+        self.assertEqual(set(reason_edges), selected_edges)
+        self.assertEqual(len(reason_edges), len(set(reason_edges)))
         inspection_cases = (
             (
                 first.context.handle,
