@@ -1085,3 +1085,17 @@ superseded by the discovery-admission transition in the active plan.
   is complete historical authority. The current next operation is independent
   acceptance of the exact prerequisite implementation candidate.
 - A1b and A2 remain inactive.
+
+## 2026-08-25 - Policy-Impact Prerequisite Acceptance Rejection
+
+- Independent review rejected exact prerequisite candidate
+  `101001bd2373631b0474d214871ba11ad1b6e4ab` / tree
+  `955e77e06c2477569da6a6f3f8263c602ca7533d` for ineffective serialized
+  evidence authority, an unadapted registered-verifier failure path, strict
+  decoding loss, and incomplete compatibility-matrix evidence.
+- The linked prerequisite owns one bounded acceptance-recovery milestone and
+  must renew coverage after its contract correction. This recovery provides no
+  fallback implementation and remains `Blocked`.
+- Supersession: the prior next operation to obtain final prerequisite
+  acceptance is `Superseded` by independent admission of the bounded recovery.
+- SESR-030 remains active. A1b and A2 remain inactive.

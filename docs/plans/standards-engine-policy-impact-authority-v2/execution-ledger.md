@@ -350,3 +350,35 @@
 - Next operation: commit one clean exact-tree candidate, then obtain the
   reviewer-owned prerequisite acceptance report. No additional implementation
   or authority mutation is authorized before that review.
+
+## 2026-08-25 - Exact-Candidate Acceptance Rejection
+
+- Rejected candidate: commit
+  `101001bd2373631b0474d214871ba11ad1b6e4ab`, tree
+  `955e77e06c2477569da6a6f3f8263c602ca7533d`.
+- Independent verification confirmed the exact identity, clean worktree,
+  complete coverage subject equality, byte-identical transition provenance,
+  all focused package checks, all registered declarative suites, and every
+  retained migration checker.
+- Standards/specification rejection found three systemic acceptance gaps: the
+  serialized per-kind evidence boolean did not govern compiler behavior;
+  registered verifier loading leaked raw compiler failure; and malformed
+  optional contract data plus an incomplete sampled compatibility matrix left
+  the claimed contract closure unproved.
+- Replan classification: one bounded acceptance recovery, not a broader A1b
+  redesign. The nine identical evidence booleans are `Superseded` by one global
+  required-registered-suite declaration rule. The sampled compatibility tests
+  are `Superseded` by a contract-derived exhaustive matrix. Direct and
+  registered verifier loaders share one typed error-translation behavior.
+- Coverage consequence: changing the authoring contract digest invalidates the
+  rejected candidate's requirements and attestations. The recovery must freeze
+  the corrected contract and renew all current attestations once; it may not
+  reuse the rejected handles.
+- Lifecycle: this plan moves from `Implemented` to `Blocked`. Milestones 0 and
+  1 remain historical implemented boundaries; new Milestone 2 owns the
+  correction and coverage renewal. PIA2-009 through PIA2-011 are active.
+- No source file was changed by review. Standards recovery remains blocked;
+  A1b and A2 remain inactive.
+- Next operation: commit the governance-only recovery candidate, obtain the
+  reviewer-owned recovery admission, then apply the exact mechanical
+  transition and start before source changes.
