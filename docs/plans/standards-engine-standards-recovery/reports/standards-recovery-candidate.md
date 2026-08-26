@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Verifying; independent acceptance pending`
+**Status:** `Superseded; semantic-oracle recovery pending`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -10,12 +10,13 @@
 `7f533f59ddd0120a08c36e85f1c631eedbbe0caa`, tree
 `70f2ec4f249ae6eb6774a17443b15943f57bdfec`
 
-This report records the source-complete standards-recovery implementation after
-the systemic current-authority correction tracked by `SESR-031`. The current
-lifecycle-transition tree is the exact verification candidate; this report
-does not claim its commit identity recursively. The independent acceptance
-report must bind that clean commit and tree. This report does not admit A1b
-planning, A1b runtime work, or A2.
+This report records the source-complete implementation reviewed at candidate
+`7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
+`35823701b4ea400371c0de196e3b18d7dcaa834d`. That candidate is superseded:
+independent review found two mutable threshold oracles and contradictory
+current lifecycle projections. The report remains implementation evidence but
+is not an acceptance candidate. It does not admit A1b planning, A1b runtime
+work, or A2.
 
 ## Implemented Result
 
@@ -88,5 +89,6 @@ lint acceptance is exact over the recovery's Python delta.
 
 No attestation, policy, graph, suite, generated artifact, runtime, package test,
 external corpus, dependency, A1b implementation, or A2 path changed in
-Milestone 2. The current verification-transition tree is the exact candidate
-awaiting independent review.
+Milestone 2 before semantic-oracle recovery. A replacement candidate requires
+the admitted two-test correction, renewed coverage, and consistent current
+lifecycle authority.

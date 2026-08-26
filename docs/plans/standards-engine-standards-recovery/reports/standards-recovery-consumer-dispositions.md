@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Final coverage and dispositions complete; acceptance pending`
+**Status:** `Replan active; two consumer corrections pending`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -19,7 +19,9 @@ Consumer membership is the admitted `W/S/E/R` closure:
 - `S` is resolved from the audit-selected suite IDs through the canonical
   suite registry and each suite's registered inputs.
 - `E` is the audit's exact non-registry consumer list.
-- `R = (S union E) - W` is protected and was not modified.
+- `R = (S union E) - W` is the prior protected closure.
+- `O` is the exact two-test Milestone 2 correction set, and
+  `R2 = R - O` remains protected during that correction.
 
 Where a row below names an audit section or suite ID set, the disposition
 applies independently to every exact member resolved by that authority. A path
@@ -56,8 +58,8 @@ assignments are invalid; none are present in the reconciled closure.
 | `tools/standards_analysis/tests/test_routing.py` | Replaces mutable catalog totals with stable Generated Contract fact/rule semantics. |
 | `tools/standards_policy_impact/tests/test_compiler.py` | Replaces mutable relationship totals with complete graph/semantics identity-set equality. |
 | `tools/standards_verifier/tests/test_policy_impact.py` | Proves semantic policy-impact projection and owner closure without a mutable relationship total. |
-| `tools/standards_engine/tests/test_navigation.py` | Proves navigation cause presence and deduplication without a mutable relationship total. |
-| `tools/standards_engine/tests/test_analysis.py` | Proves compiler-derived consumer reasons without a mutable relationship total. |
+| `tools/standards_engine/tests/test_navigation.py` | `correction-required`: replace its mutable dependency-cause threshold with exact graph-derived cause-set equality while preserving deduplication. |
+| `tools/standards_engine/tests/test_analysis.py` | `correction-required`: replace dependent-program and obligation thresholds with exact compiler-derived program and reason-edge sets. |
 
 ## Registry-Derived Existing Suites
 
@@ -123,7 +125,9 @@ authority.
 
 All declaration applicability is explicit `always`; no predicate was inferred
 from rationale or a repository path. Every evidence owner resolves to one
-registered suite. No selected consumer has a `blocked` disposition.
+registered suite. The two Standards Engine test consumers above are blocked
+pending the admitted semantic-oracle correction; every other selected consumer
+remains non-blocked.
 
 ## Milestone 1 Reconciliation Evidence
 

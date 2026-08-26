@@ -1,10 +1,10 @@
 # Plan: Standards Engine Standards Recovery
 
-**Plan status:** `Verifying`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 2 exact-tree independent verification
+**Current phase:** Milestone 2 semantic-oracle recovery admission
 
-**Next slice:** obtain independent Standards and specification review
+**Next slice:** obtain independent admission for the exact two-test write transfer
 
 **Acceptance status:** `partial`
 
@@ -52,6 +52,10 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `be4c6579a525800721f9ba4e3cf727b30d0c05f1`, tree
 `c810ea9fb1b0d010d2fd91c5b9ee92a5a05658fa`
 
+**Superseded verification candidate:** commit
+`7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
+`35823701b4ea400371c0de196e3b18d7dcaa834d`
+
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
 **Issues:** [issues.md](issues.md)
@@ -78,12 +82,13 @@ Generated Contract routing explicit and mutually consistent across normative
 policy, semantic metadata, agent entry points, fixtures, and executable
 verification.
 
-The six policy families, reconciled graph, protected consumer closure, final
-coverage, consumer dispositions, and systemic current-authority correction are
-implemented. All automated objective evidence is complete, and the current
-transition tree is the exact verification candidate. Only independent review
-and the authorized acceptance transition remain. Broader A1b implementation
-and all A2 work remain excluded.
+The six policy families, reconciled graph, and coverage architecture remain
+implemented. Exact-tree review found two protected Standards Engine tests that
+still use mutable threshold oracles and current lifecycle narration that does
+not agree across its owners. Milestone 2 is blocked pending admission of one
+two-test semantic-oracle correction, its coverage renewal, and the complete
+current-authority replacement. Broader A1b implementation and all A2 work
+remain excluded.
 
 ## Objective Acceptance
 
@@ -91,9 +96,9 @@ and all A2 work remain excluded.
 | --- | --- | --- | --- | --- | --- | --- |
 | SR-A1 | Each defect family has normative policy with stable policy-unit identity, exact locator, and non-overlapping ownership. | `contract` | `not-applicable` | `automated` | `satisfied` | [Consumer reconciliation](reports/standards-recovery-consumer-dispositions.md#policy-subject-reconciliation) and [candidate verification](reports/standards-recovery-candidate.md#verification) |
 | SR-A2 | Router prose and executable projection select the Generated Contract profile and required owners, preserve conditional IPC and Language Binding selection, and expose unresolved facts. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | Registered recovery routing suite and [candidate verification](reports/standards-recovery-candidate.md#verification) |
-| SR-A3 | Prior and current semantic graphs are compared, every changed policy unit has valid coverage, and no empty impact result is accepted without a certificate. | `integration` | `not-applicable` | `automated` | `satisfied` | [Graph reconciliation](reports/standards-recovery-consumer-dispositions.md#milestone-1-reconciliation-evidence) and [final coverage](reports/standards-recovery-coverage.md) |
-| SR-A4 | Every selected consumer has exactly one current non-blocked disposition supported by reviewed evidence. | `integration` | `not-applicable` | `manual` | `pending` | Pending final independent disposition review |
-| SR-A5 | Normative policy, policy units, relationships, prompts, templates, fixtures, suites, and verifier support agree at one exact tree. | `integration` | `not-applicable` | `automated` | `satisfied` | [Candidate result and verification](reports/standards-recovery-candidate.md) |
+| SR-A3 | Prior and current semantic graphs are compared, every changed policy unit has valid coverage, and no empty impact result is accepted without a certificate. | `integration` | `not-applicable` | `automated` | `pending` | Prior graph reconciliation remains valid; final coverage renewal follows the admitted horizon-input correction |
+| SR-A4 | Every selected consumer has exactly one current non-blocked disposition supported by reviewed evidence. | `integration` | `not-applicable` | `manual` | `pending` | Pending exact correction and review of the two Standards Engine test consumers |
+| SR-A5 | Normative policy, policy units, relationships, prompts, templates, fixtures, suites, and verifier support agree at one exact tree. | `integration` | `not-applicable` | `automated` | `pending` | Pending semantic-oracle correction and replacement exact-tree verification |
 | SR-A6 | Generated freshness and generated semantic correctness are proved separately. | `contract` | `not-applicable` | `automated` | `satisfied` | Generated freshness plus registered semantic-conformance suite in [candidate verification](reports/standards-recovery-candidate.md#verification) |
 | SR-A7 | Recovery distinguishes local agreement from external conformance, records the accepted A1 nonconformance, and assigns runtime correction to A1b. | `contract` | `not-applicable` | `automated` | `satisfied` | [JSON Schema instance-equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
 | SR-A8 | Schema instance equality and content-identity canonicalization are exercised as separate contracts. | `contract` | `not-applicable` | `automated` | `satisfied` | [Equality reproduction](reports/json-schema-instance-equality-reproduction.md) and registered generated-contract semantic-conformance suite |
@@ -102,7 +107,7 @@ and all A2 work remain excluded.
 | SR-A11 | Generated closure, public result, semantic-version identity, and JSON Schema equality repair families are reproduced without changing A1 runtime behavior. | `contract` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) and [equality reproduction](reports/json-schema-instance-equality-reproduction.md) |
 | SR-A12 | Immutable reads and cold reconstruction are reproduced through their public process boundaries without changing A1 runtime behavior. | `system` | `not-applicable` | `automated` | `satisfied` | [Historical reproductions](reports/historical-a1-repair-reproductions.md) |
 | SR-A13 | Historical acceptance-oracle failures are reproduced at their intended failure points without changing A1 runtime behavior. | `focused` | `not-applicable` | `automated` | `satisfied` | [Exact negative diagnostics](reports/historical-a1-repair-reproductions.md#exact-negative-diagnostics) |
-| SR-A14 | One clean candidate commit and tree pass focused recovery checks and all registered repository verification. | `integration` | `not-applicable` | `automated` | `satisfied` | [Exact candidate result and verification](reports/standards-recovery-candidate.md) |
+| SR-A14 | One clean candidate commit and tree pass focused recovery checks and all registered repository verification. | `integration` | `not-applicable` | `automated` | `pending` | Candidate `7a54d5fe7778f481278e4f21a12863d2f261b280` is superseded; replacement pending |
 | SR-A15 | An independent reviewer accepts the exact candidate, final coverage, dispositions, and objective claims with no blocked consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent recovery acceptance |
 
 ## Scope
@@ -219,6 +224,25 @@ authority using only its `W`; its frozen boundary is recorded above. Any base
 mismatch, unauthorized path, protected-consumer mutation, or
 generated-artifact change requires replanning.
 
+## Milestone 2 Semantic-Oracle Recovery Admission
+
+The protected mapped-consumer closure remains complete. This replan defines:
+
+- `O` as exactly `tools/standards_engine/tests/test_analysis.py` and
+  `tools/standards_engine/tests/test_navigation.py`;
+- `R2 = R - O` as the still-protected consumer closure; and
+- `O union R2 = R`, with `O intersect R2` empty.
+
+No suite-registry, audit, or copied path manifest replaces those existing
+owners. The two paths in `O` may change only after an independent report admits
+the exact blocked replan candidate, a mechanical transition moves the plan and
+Milestone 2 to `Planned`, and an exact-head `start` moves them to `Active`.
+The reviewer-owned report path is
+`reports/standards-recovery-m2-semantic-oracle-admission.md`. The transition and
+start may change only the plan, ledger, and issues. Any other path, parent-chain
+mismatch, broader assertion family, runtime change, A1b work, or A2 work
+invalidates admission.
+
 ## Milestones
 
 ### Milestone 0: Historical Reproduction And Scope Audit
@@ -270,7 +294,7 @@ prerequisite is evidence, not additional recovery write authority.
 - [x] Replace split policy-impact validity/projection authority and obtain
   independent acceptance of policy-impact v2 and public A1 v10.
 
-**Remaining tasks:**
+**Completed reconciliation:**
 
 - [x] Re-resolve `S` and verify `E` at the exact resume candidate; derive
   `R = (S union E) - W` and prove exact path resolution and disjointness.
@@ -312,12 +336,15 @@ independent acceptance of one clean standards-recovery tree.
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-coverage.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-candidate.md` (new)
 - `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-acceptance.md` (new, independent reviewer owned)
+- `docs/plans/standards-engine-standards-recovery/reports/standards-recovery-m2-semantic-oracle-admission.md` (new, independent reviewer owned)
+- `tools/standards_engine/tests/test_analysis.py`
+- `tools/standards_engine/tests/test_navigation.py`
 
 The eight attestation files are the current policy-impact v2 owner-local
 authority closure. They may change only when exact final requirements cannot
-reuse a dependency-valid current attestation. No attestation source, horizon,
-policy, relationship, suite, runtime, generated contract, or package test is
-writable in this milestone.
+reuse a dependency-valid current attestation. No attestation source, horizon
+declaration, policy, relationship, suite, runtime, generated contract, or
+package test outside `O` is writable in this milestone.
 
 **Tasks:**
 
@@ -333,7 +360,18 @@ writable in this milestone.
 - [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
-- [x] Record one replacement candidate commit/tree without claiming acceptance.
+- [ ] Replace the two mutable live-authority thresholds with exact
+  compiler-derived dependent-program and reason-edge sets and exact graph-derived
+  navigation cause sets; preserve deduplication assertions.
+- [ ] Freeze the resulting horizon, recompile requirements and certificates,
+  and renew only attestations whose exact requirement identity changes.
+- [ ] Replace every stale current-state projection selected by the renewed
+  systemic audit.
+- [ ] Rerun the two focused test modules, every focused package suite, contract
+  generation and validation, registered declarative verification, the complete
+  checkpoint, scoped Ruff, generated freshness, and `git diff --check` from the
+  frozen replacement tree.
+- [ ] Record one replacement candidate commit/tree without claiming acceptance.
 - [ ] Obtain independent Standards and specification review of that exact tree.
 - [ ] Mark this recovery `Accepted` only after SR-A1 through SR-A15 are
   satisfied. Only then may a separate A1b plan and superseding ADR be authored.
@@ -342,7 +380,7 @@ writable in this milestone.
 consumer dispositions, a green complete checkpoint, and one independent report
 accepting the exact clean candidate tree.
 
-**Status:** `Verifying`
+**Status:** `Blocked`
 
 ## Verification Strategy
 
@@ -359,9 +397,11 @@ accepting the exact clean candidate tree.
 
 ## Blockers
 
-- Milestone 1 has a green frozen boundary. Milestone 2 behavioral, coverage,
-  disposition, and current-authority implementation is complete; independent
-  exact-tree verification is in progress.
+- Milestone 1 remains the frozen authority boundary. Milestone 2 is blocked
+  pending independent admission of the exact `O` write transfer and semantic
+  assertion contract.
+- Candidate `7a54d5fe7778f481278e4f21a12863d2f261b280` is superseded by the
+  mutable-threshold and current-authority findings.
 - The recorded A1 JSON Schema equality nonconformance remains intentionally
   unresolved for A1b.
 - A1b planning and all A2 work remain blocked by independent acceptance of this
@@ -417,4 +457,4 @@ independently accepted.
 - Acceptance status: `partial`
 - Deferred follow-ups: A1b planning and ADR remain gated by this recovery; A2
   remains gated by independently accepted A1b; Plan C remains inactive.
-- Final status: `Verifying`
+- Final status: `Blocked`

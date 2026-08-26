@@ -1,6 +1,6 @@
 # Standards Recovery Final Coverage Evidence
 
-**Status:** `Implemented; exact-tree acceptance pending`
+**Status:** `Frozen prior evidence; renewal pending admitted test correction`
 
 **Milestone 2 execution boundary:** commit
 `f037ab11c6bdcda8b61a64c5aa1932e86570096b`, tree
@@ -104,6 +104,8 @@ binds the provider-v3 horizon and every member fingerprint; the unchanged
 horizon plus the accepted independent audit exposes no missing consumer class.
 No graph edge or empty impact result is used as proof of completeness.
 
-The exact equality above closes final coverage work but does not accept the
-standards recovery. Candidate verification and independent Standards and
-specification review remain required.
+The equality above remains exact for candidate
+`7a54d5fe7778f481278e4f21a12863d2f261b280` but does not accept the standards
+recovery. The admitted semantic-oracle repair will change two registered
+horizon inputs, so final coverage must be recompiled after those inputs freeze
+and before replacement-candidate verification.

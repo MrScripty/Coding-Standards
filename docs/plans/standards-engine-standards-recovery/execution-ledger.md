@@ -1419,3 +1419,30 @@ superseded by the discovery-admission transition in the active plan.
 - Next operation: run the exact-candidate verification gates, then obtain
   independent Standards and specification review of the resulting commit and
   tree.
+
+## 2026-08-25 - Exact Candidate Rejection And Semantic-Oracle Replan
+
+- Rejected candidate: commit
+  `7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
+  `35823701b4ea400371c0de196e3b18d7dcaa834d`.
+- Specification finding: `test_analysis.py` retains mutable dependent-program
+  and obligation thresholds, and `test_navigation.py` retains a mutable
+  dependency-cause threshold. Green execution does not prove exact cause
+  preservation.
+- Standards and specification finding: current issues, coverage, plan, and
+  ledger projections disagree about whether SR-A14 and candidate verification
+  remain pending; the completed Milestone 1 checklist also retained a future-
+  work heading.
+- Supersession: candidate `7a54d5fe7778f481278e4f21a12863d2f261b280`
+  is `Superseded`. The plan and Milestone 2 return from `Verifying` to
+  `Blocked`; SR-A4, SR-A5, SR-A14, and SR-A15 are pending.
+- Replacement scope: `O` contains exactly the two affected Standards Engine
+  tests; `R2 = R - O` remains protected. The tests may assert only exact
+  compiler/graph-derived identity sets and deduplication; no runtime behavior,
+  fixture, suite, policy, graph, dependency, A1b, or A2 change is admitted.
+- Coverage consequence: both tests are registered horizon inputs. After their
+  admitted correction, coverage must be recompiled and exact changed
+  requirements must receive authorized attestations before a replacement
+  candidate is created.
+- Next operation: commit the blocked replan candidate and obtain the
+  reviewer-owned Milestone 2 semantic-oracle recovery admission.
