@@ -79,6 +79,35 @@ declarations move to their existing domain loaders and contracts. A public
 definition outside the operation closure is invalid rather than silently
 retained.
 
+## Contract Semantic Scenario Matrix
+
+This matrix verifies the A1b Adapter and compiler against the selected
+`jsonschema.Draft202012Validator`; it does not reimplement or independently
+certify Draft 2020-12. Each validation scenario runs through both the direct
+selected validator and the production-intended Adapter. Each projection
+scenario compiles the admitted schema, applies one feature-local schema
+mutation, recompiles, and proves the generated model and affected public
+operation change consistently with the validator result. Tests assert typed
+outcomes and project diagnostics, never dependency exception text.
+
+| Scenario family | Required cases | Independent oracle and required result |
+| --- | --- | --- |
+| JSON value equality | Boolean against integer `const` and `enum` in both directions; mathematically equal supported JSON numbers; composed/decomposed Unicode strings; object property-order differences; array order differences | Direct selected validator and production Adapter return the same result; identity fixtures separately prove that identity normalization does not decide schema equality |
+| `uniqueItems` | Duplicate and distinct pairs for null, Boolean, number, string, array, and object values; include Boolean/integer, Unicode, object-key-order, and array-order cases | Direct selected validator and Adapter agree for every type; generated construction accepts or rejects the same public value |
+| Core and references | `$schema`, `$id`, `$defs`, and same-resource `$ref`; missing, cyclic, remote, dynamic, and unreachable references | `check_schema`, retrieval-free registry behavior, reachable closure, and stable project diagnostics agree with the admitted profile |
+| Primitive validation | `type`, `const`, and `enum` across every JSON type represented by the public contract | Direct validator and Adapter agree; a feature-local mutation changes the compiled constraint and the affected generated constructor behavior |
+| Composition | Each `oneOf` branch, zero matches, and multiple matches | Direct validator and Adapter agree; branch mutation changes the reachable generated variant and public result acceptance |
+| Objects | `required`, `properties`, and `additionalProperties`, including missing required, optional present/absent, and extra-field cases | Direct validator and Adapter agree; a mutation of each keyword changes generated fields or acceptance as applicable |
+| Arrays | `items`, `minItems`, and `uniqueItems`, including empty, boundary-cardinality, nested, duplicate, and ordered cases | Direct validator and Adapter agree; a mutation of each keyword changes generated element/cardinality behavior |
+| Strings | `minLength` and `pattern`, including the boundary length and non-anchored search regression | Direct validator and Adapter agree; a mutation of each keyword changes generated validation while the compiler rejects patterns outside the admitted common profile |
+| Numbers | `minimum`, including boundary, below-boundary, integer, and supported non-integer cases | Direct validator and Adapter agree; a minimum mutation changes generated validation |
+| Annotations | `title`, `description`, and `default`, including a default on an absent optional property | Direct validator confirms annotations do not inject values; a mutation changes generated documentation/default metadata but not instance validation or constructor injection |
+| Closed profile | Unsupported dialect, required vocabulary, custom or unknown extension keyword, format assertion, remote retrieval, dynamic reference, and every excluded projection construct | Invalid schemas reject through `check_schema`; valid but unadmitted projection features reject through the compiler; no fallback or local keyword implementation runs |
+
+The matrix is feature-driven rather than catalog-count-driven. Adding a newly
+reachable keyword or projection feature requires adding its semantic mutation
+and public behavior fixture before the compiler accepts it.
+
 ## Extension Disposition
 
 Version 10 contains five `x-standards-engine-*` families. Version 11 removes all
@@ -96,7 +125,7 @@ of them from the JSON Schema.
 
 The complete proposed serialized algebra is owned by
 [`a1-contract-v11.schema.json`](a1-contract-v11.schema.json), SHA-256
-`349c06fce684accce477675a9048690100b999058fa25463b2f656028d666d50`.
+`d40332050e163bdbd5e60f505eab2f698ebdfb7d4248a636e44c7a0772248eba`.
 The complete proposed operation/capability Interface is owned by
 [`a1-interface-v11.toml`](a1-interface-v11.toml), SHA-256
 `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
@@ -190,8 +219,10 @@ Repository evidence covers only:
 - the exact dependency identity and validator class;
 - schema self-validation through `check_schema`;
 - same-resource reference configuration with no retrieval;
-- known A1 Boolean/integer, Unicode, `pattern`, and `uniqueItems` regressions
-  through the production adapter;
+- Adapter agreement with the direct selected validator for the complete
+  contract-semantic matrix above, including the known A1 regressions;
+- feature-local schema mutations proving every admitted projection semantic
+  reaches generated models and affected public behavior;
 - stable error adaptation;
 - complete public-operation reachability;
 - generated model and agent-tool projection; and

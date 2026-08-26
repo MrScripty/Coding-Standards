@@ -249,6 +249,14 @@ snapshot-relative meaning. Missing content is `unavailable`;
 contradictory content is `invalid`; and a well-formed unknown version is
 `unsupported`.
 
+Each aggregate root stores the exact public version record needed to interpret
+its own projection. Snapshot roots use `SnapshotVersions`, navigation roots use
+`NavigationVersions`, and analysis roots use `AnalysisVersions`; the canonical
+v11 schema owns all three serialized shapes. Resolution never fills a missing
+version from process configuration. The records are intentionally distinct so
+an analysis-only evidence-provider or authorization change cannot invalidate a
+snapshot or navigation handle whose meaning is unchanged.
+
 The closed A1b object kinds are snapshot root, navigation result, analysis
 root, policy inspection, relationship inspection, coverage certificate,
 coverage view, coverage requirement, coverage attestation, analysis context,

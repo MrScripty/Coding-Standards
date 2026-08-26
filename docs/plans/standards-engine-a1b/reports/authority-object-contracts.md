@@ -261,6 +261,22 @@ construction.
 The prose above explains purpose; the following closed records govern
 construction.
 
+`SnapshotVersionsV1`, `NavigationVersionsV1`, and
+`AnalysisRootVersionsV1` are the exact stored forms of the public v11
+`SnapshotVersions`, `NavigationVersions`, and `AnalysisVersions` definitions.
+Contracts validates each record through its named-definition Adapter before
+Authority constructs the containing object. Each root therefore carries the
+complete version authority required to reconstruct its own public projection;
+no version is supplied from process configuration during resolution.
+
+The records are deliberately object-specific. Snapshot identity does not bind
+evidence-provider or authorization contracts that cannot alter snapshot
+capture or inspection. Navigation identity does not bind analysis-only
+contracts. Analysis roots retain the complete provider and authorization view
+needed for pending and complete projections. Adding an interpretation input to
+one projection requires changing that projection's version record and payload
+contract rather than consulting ambient state.
+
 ```text
 ParserVersionsV1 = map<CanonicalId, NonEmptyString>
 ProviderVersionsV1 = map<CanonicalId, NonEmptyString>
@@ -273,7 +289,11 @@ SnapshotVersionsV1 {
   policy_impact_contract_version: NonEmptyString,
   applicability_language_version: 1,
   coverage_contract_version: NonEmptyString,
-  identity_resolution_contract_version: NonEmptyString
+  identity_resolution_contract_version: NonEmptyString,
+  interface_schema_version: 11,
+  result_projection_version: 3,
+  authority_object_contract_version: 1,
+  identity_encoding_version: 2
 }
 NavigationVersionsV1 {
   navigation_contract_version: "navigation-result.v1",
@@ -282,7 +302,9 @@ NavigationVersionsV1 {
   routing_contract_version: NonEmptyString,
   metadata_api_version: NonEmptyString,
   graph_engine_contract_version: NonEmptyString,
-  parser_versions: ParserVersionsV1
+  parser_versions: ParserVersionsV1,
+  authority_object_contract_version: 1,
+  identity_encoding_version: 2
 }
 AnalysisContextVersionsV1 {
   context_contract_version: "analysis-context.v1",

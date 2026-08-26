@@ -274,8 +274,11 @@ Repository acceptance instead proves:
 - `check_schema` accepts the canonical schema;
 - the registry contains only declared immutable local resources and has no
   retrieval path;
-- known A1 Boolean/integer, Unicode, `pattern`, and `uniqueItems` cases pass
-  through the production adapter;
+- every case in the feature-driven contract-semantic matrix agrees between the
+  direct selected validator and the production Adapter, including the known A1
+  regressions, without a repository keyword implementation;
+- one schema mutation per admitted projection semantic changes the compiled
+  model and affected public behavior;
 - dependency errors are converted to stable project diagnostics;
 - public operation closure and generated projections are complete; and
 - unsupported projection constructs reject at compilation.

@@ -5,8 +5,8 @@
 **Current phase:** Replacement planning admission
 
 **Next slice:** Independent exact-tree Standards and Specification review of
-replacement planning candidate C3, including canonical entrypoint execution,
-Authority contract validation, and coverage-source closure
+replacement planning candidate C4, including coverage sequencing,
+object-specific version closure, and complete contract-semantic evidence
 
 **Acceptance status:** `pending`
 
@@ -29,7 +29,7 @@ any A2 review or implementation begins.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; known A1 equality and pattern regressions pass through that production adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 and atomic cutover |
+| A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; the complete admitted feature matrix and known A1 regressions agree between the direct validator and production Adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 and atomic cutover |
 | A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable projection semantics reject. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestones 1 and 3 |
 | A1B-A3 | JSON Schema validation, applicability equality, identity encoding, and domain ordering/deduplication pass owner-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `pending` | Pending Milestones 0, 1, and 3 |
 | A1B-A4 | Every advertised snapshot, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its typed object in a fresh process after source and process mutation; durable publication and cleanup pass on Linux ext4. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
@@ -217,12 +217,20 @@ shape-validation dependency was undeclared, the coverage attestation-source
 registry was absent from the cutover write set, and the active Router evidence
 omitted Commit.
 
+Candidate C3 `ebc75340781bf032164d93817edca7c5a04ba892`, tree
+`389b6134b1971ea4b290c041b9508cdf22439e02`, is `Superseded` by C4.
+Its Specification review found that coverage sources were sequenced after the
+horizon freeze, snapshot and navigation records could not reconstruct their
+advertised public version projections without ambient authority, and the
+contract Adapter evidence covered historical regressions rather than every
+admitted semantic feature.
+
 Admission and start require this direct-child chain:
 
-1. **C3:** clean replacement planning candidate containing no implementation
+1. **C4:** clean replacement planning candidate containing no implementation
    and superseding every rejected candidate named above;
 2. **R:** reviewer-owned `reports/a1b-plan-admission.md` as the sole change,
-   binding C3, explicitly accepting the dependency provenance/licensing
+   binding C4, explicitly accepting the dependency provenance/licensing
    disposition in A1B-A6P, and reporting no blocking Standards or
    Specification finding;
 3. **T:** mechanical admission transition as the direct child of R, changing
@@ -293,8 +301,17 @@ changing the production schema, generated output, or facade.
   public algebra. Any required shape change is a re-plan trigger.
 - [ ] Generate staging immutable Python and agent-tool projections without a
   keyword interpreter or default injection.
-- [ ] Prove known A1 Boolean/integer, Unicode, `pattern`, and `uniqueItems`
-  behavior through the production-intended adapter.
+- [ ] Execute every case in the feature-driven contract-semantic matrix in
+  `reports/schema-and-domain-contract-audit.md` through both the direct selected
+  validator and the production-intended Adapter. Cover mathematical-number,
+  Unicode, object-key-order, array-order, and all-type `uniqueItems` equality;
+  every admitted core, reference, primitive, composition, object, array,
+  string, numeric, and annotation keyword; and every excluded dialect,
+  vocabulary, extension, retrieval, reference, pattern, and projection class.
+- [ ] Apply one feature-local schema mutation for every admitted projection
+  semantic and prove the compiled model plus affected public behavior change.
+  These are Adapter/compiler tests against `jsonschema`, not a repository
+  implementation or independent certification of Draft 2020-12.
 - [ ] Reject unsupported projection constructs and unreachable public roots.
 
 **Acceptance gate:** A1B-A1, the isolated half of A1B-A2, and contract portions
@@ -319,6 +336,11 @@ publication and cold reconstruction independently of the accepted facade.
 
 - [ ] Implement the envelope, closed object-kind registry, typed handles,
   in-memory adapter, and directory adapter.
+- [ ] Store and validate the exact object-specific public `SnapshotVersions`,
+  `NavigationVersions`, and `AnalysisVersions` records. Prove cold resolution
+  never supplies a version from process configuration and that changing an
+  analysis-only provider or authorization contract does not change snapshot or
+  navigation identity.
 - [ ] Implement authority-owned Git-tree and mutable-manifest capture adapters,
   exact scope/path/symlink/nested-source handling, and two-pass source-change
   rejection.
@@ -453,10 +475,15 @@ in one replacement boundary; delete all superseded authority.
   source is absent from the closed registry with the exact migration-completeness
   diagnostic; the relationship compiler remains responsible only for compiling
   its registered closed input.
-- [ ] Freeze all horizon inputs, derive requirements, renew stale attestations
-  through the existing authorization/evidence path, register the new
-  owner-local Cross-Platform and Security attestation files in the closed
-  attestation-source registry, and compile certificates.
+- [ ] Create the new owner-local Cross-Platform and Security attestation source
+  files and register them, together with the updated Dependencies source, in
+  the closed attestation-source registry.
+- [ ] After every declaration, suite input, horizon provider, canonical corpus,
+  and attestation-source registration is final, freeze the complete horizon;
+  then derive requirements, renew stale attestations through the existing
+  authorization/evidence path, and compile certificates. Any registration or
+  coverage-relevant authority change after this freeze invalidates the renewal
+  and triggers re-planning.
 - [ ] Prove exact selected-consumer/disposition and
   requirement/certificate equality.
 

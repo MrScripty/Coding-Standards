@@ -2187,6 +2187,106 @@
       },
       "additionalProperties": false
     },
+    "SnapshotVersions": {
+      "type": "object",
+      "required": [
+        "snapshot_contract_version",
+        "metadata_api_version",
+        "parser_versions",
+        "graph_engine_contract_version",
+        "policy_impact_contract_version",
+        "applicability_language_version",
+        "coverage_contract_version",
+        "identity_resolution_contract_version",
+        "interface_schema_version",
+        "result_projection_version",
+        "authority_object_contract_version",
+        "identity_encoding_version"
+      ],
+      "properties": {
+        "snapshot_contract_version": {
+          "const": "snapshot-root.v1"
+        },
+        "metadata_api_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "parser_versions": {
+          "$ref": "#/$defs/VersionMap"
+        },
+        "graph_engine_contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "policy_impact_contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "applicability_language_version": {
+          "const": 1
+        },
+        "coverage_contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "identity_resolution_contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "interface_schema_version": {
+          "const": 11
+        },
+        "result_projection_version": {
+          "const": 3
+        },
+        "authority_object_contract_version": {
+          "const": 1
+        },
+        "identity_encoding_version": {
+          "const": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    "NavigationVersions": {
+      "type": "object",
+      "required": [
+        "navigation_contract_version",
+        "interface_schema_version",
+        "result_projection_version",
+        "routing_contract_version",
+        "metadata_api_version",
+        "graph_engine_contract_version",
+        "parser_versions",
+        "authority_object_contract_version",
+        "identity_encoding_version"
+      ],
+      "properties": {
+        "navigation_contract_version": {
+          "const": "navigation-result.v1"
+        },
+        "interface_schema_version": {
+          "const": 11
+        },
+        "result_projection_version": {
+          "const": 3
+        },
+        "routing_contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "metadata_api_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "graph_engine_contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "parser_versions": {
+          "$ref": "#/$defs/VersionMap"
+        },
+        "authority_object_contract_version": {
+          "const": 1
+        },
+        "identity_encoding_version": {
+          "const": 2
+        }
+      },
+      "additionalProperties": false
+    },
     "AnalysisContext": {
       "type": "object",
       "required": [
@@ -3664,7 +3764,7 @@
           }
         },
         "versions": {
-          "$ref": "#/$defs/AnalysisVersions"
+          "$ref": "#/$defs/SnapshotVersions"
         }
       },
       "additionalProperties": false
@@ -3707,7 +3807,7 @@
           }
         },
         "versions": {
-          "$ref": "#/$defs/AnalysisVersions"
+          "$ref": "#/$defs/SnapshotVersions"
         }
       },
       "additionalProperties": false
@@ -3850,7 +3950,7 @@
           "$ref": "#/$defs/NavigationResult"
         },
         "provenance": {
-          "$ref": "#/$defs/AnalysisVersions"
+          "$ref": "#/$defs/NavigationVersions"
         }
       },
       "additionalProperties": false

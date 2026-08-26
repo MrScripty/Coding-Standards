@@ -348,3 +348,33 @@
   package manifest, policy unit, relationship, coverage source, fixture, A1, or
   A2 implementation changed. Lifecycle remains `Blocked` pending independent
   exact-tree review of C3.
+
+## 2026-08-26 - Candidate C3 Admission Rejection And Replan
+
+- Independent exact-tree Specification review rejected candidate C3
+  `ebc75340781bf032164d93817edca7c5a04ba892`, tree
+  `389b6134b1971ea4b290c041b9508cdf22439e02`, on three high-severity
+  closure findings. One blocking review is sufficient to reject admission; the
+  still-running Standards review was stopped without becoming evidence.
+- `Superseded`: C3's coverage sequence froze the horizon before registering the
+  new owner-local attestation sources. C4 creates and registers every source,
+  freezes the complete coverage authority, then derives requirements, renews
+  attestations, and compiles certificates.
+- `Superseded`: C3's public snapshot and navigation inspections referenced
+  `AnalysisVersions` while their immutable stored records omitted analysis-only
+  provider and authorization fields. Supplying those fields ambiently would
+  break cold reconstruction; copying them into snapshots would create unrelated
+  invalidation. C4 instead adds exact object-specific public `SnapshotVersions`
+  and `NavigationVersions` records matching stored authority.
+- `Superseded`: C3's Milestone 1 evidence named only historical equality and
+  pattern regressions. C4 adds the complete feature-driven semantic scenario
+  and mutation matrix required by the brief. The direct selected `jsonschema`
+  validator remains the oracle; the repository does not implement or claim to
+  re-certify Draft 2020-12.
+- The exact proposed v11 schema changes only to replace overbroad snapshot and
+  navigation provenance with the object-specific version records. The
+  resulting schema SHA-256 is
+  `d40332050e163bdbd5e60f505eab2f698ebdfb7d4248a636e44c7a0772248eba`;
+  the operation Interface is unchanged. No runtime, package manifest, policy unit,
+  relationship, coverage source, fixture, A1, or A2 implementation changed.
+  Lifecycle remains `Blocked` pending independent exact-tree review of C4.

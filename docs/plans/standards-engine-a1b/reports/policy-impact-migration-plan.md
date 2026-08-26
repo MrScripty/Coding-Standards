@@ -12,7 +12,8 @@ moves.
 The atomic cutover must update the supplemental node catalog and source-owned
 relationships in the same proposed authority view, analyze prior/current
 impact, assign every selected consumer a disposition, freeze the final horizon,
-and renew mechanically stale coverage.
+register every owner-local attestation source before that freeze, and renew
+mechanically stale coverage.
 
 Foundation Modules are working-tree checkpoints, not separately committed
 repository boundaries. The first implementation commit contains the
@@ -303,12 +304,20 @@ hardcode a mutable relationship count.
 5. Assign each selected consumer `updated`, `reviewed-no-change`,
    `not-applicable` with rationale, or `blocked`.
 6. Require exact equality between selected consumers and disposition subjects.
-7. Freeze schema, interface contract, package manifests, lock, suites, catalog,
-   and relationships.
-8. Derive the final horizon and requirements from the frozen view.
-9. Renew every stale authored attestation through the existing authorization
-   and evidence path, then compile certificates.
-10. Require exact equality between required and certified coverage subjects.
+7. Create the final owner-local Dependencies, Cross-Platform, and Security
+   attestation source files and register each exact source in the closed
+   attestation-source registry.
+8. Freeze schema, interface contract, package manifests, lock, suites, catalog,
+   relationships, horizon providers, canonical corpora, and attestation-source
+   registrations.
+9. Derive the final horizon and requirements from the frozen view.
+10. Renew every stale authored attestation through the existing authorization
+    and evidence path, then compile certificates.
+11. Require exact equality between required and certified coverage subjects.
+
+Any source registration or coverage-relevant authority change after step 8
+invalidates the renewal and requires re-planning before new attestations are
+authored.
 
 Any blocked or unmapped consumer blocks A1b acceptance. An empty result is not
 proof of no impact without valid independent coverage.
