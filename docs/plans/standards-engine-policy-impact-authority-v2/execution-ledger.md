@@ -419,3 +419,18 @@
 - Implementation remains unavailable until exact-head `start` records this
   transition commit/tree and moves the plan and Milestone 2 to `Active`.
 - Standards recovery remains blocked. A1b and A2 remain inactive.
+
+## 2026-08-25 - Milestone 2 Exact-Head Start
+
+- Admitted transition base: commit
+  `9eb25f15c22b3c0f6e424246f2ca5e891026d28d`, tree
+  `fcdc640a3f695052f5c020797eb08fc0ddc057db`.
+- Start precondition: the transition was current `HEAD`, its direct parent was
+  the independent admission-report commit, and the worktree was clean.
+- Lifecycle transition: the plan and Milestone 2 move from `Planned` to
+  `Active`. Acceptance remains `partial`.
+- Authorized implementation is limited to the Milestone 2 write set and exact
+  evidence-rule, strict-decoding, verifier-Adapter, contract-derived matrix,
+  and post-correction coverage-renewal contracts.
+- Any semantic topology, relationship, public A1, horizon-membership, broader
+  contract, standards-recovery, A1b, or A2 change is a replan trigger.

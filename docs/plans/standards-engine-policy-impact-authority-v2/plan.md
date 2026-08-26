@@ -1,10 +1,10 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
 **Current phase:** Milestone 2 acceptance-rejection recovery
 
-**Next slice:** start Milestone 2 from the exact admission transition
+**Next slice:** implement the admitted evidence, decoding, verifier, and matrix recovery
 
 **Acceptance status:** `partial`
 
@@ -599,7 +599,7 @@ failure; current coverage subject sets are exactly equal after the corrected
 freeze; no semantic topology or public-shape drift occurs; and an independent
 report accepts one exact clean candidate.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 
@@ -642,4 +642,4 @@ admission or acceptance protocol.
 - Acceptance status: `partial`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Planned`
+- Final status: `Active`
