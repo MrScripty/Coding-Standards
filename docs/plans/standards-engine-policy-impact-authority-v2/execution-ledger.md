@@ -402,3 +402,20 @@
   implementation candidate. No implementation mutation is admitted.
 - Next operation: commit this corrected governance-only candidate and repeat
   independent recovery admission.
+
+## 2026-08-25 - Acceptance-Recovery Admission Transition
+
+- Accepted governance candidate: commit
+  `8e11a7d86ac09f8e926c8db5cf3ecc7e85e9f0e5`, tree
+  `41e91f9ebf2cf571717f1b34eb29ea4eaa42e693`.
+- Independent admission report: commit
+  `9e2c641035a803dd04703798ff17df4f702d01ad`, tree
+  `1d86d580b7687d25157e7f40e65d2de754c175cb`.
+- The report is the direct parent of this transition and records no Standards
+  or specification findings.
+- Authorized delta: this transition changes only this plan and ledger. It
+  records reviewed identities and moves the plan and Milestone 2 from
+  `Blocked` to `Planned`; no implementation issue is resolved.
+- Implementation remains unavailable until exact-head `start` records this
+  transition commit/tree and moves the plan and Milestone 2 to `Active`.
+- Standards recovery remains blocked. A1b and A2 remain inactive.
