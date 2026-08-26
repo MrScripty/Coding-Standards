@@ -1,12 +1,12 @@
 # Plan: Standards Engine Policy-Impact Authority V2
 
-**Plan status:** `Implemented`
+**Plan status:** `Accepted`
 
-**Current phase:** independent exact-tree recovery acceptance
+**Current phase:** prerequisite accepted
 
-**Next slice:** obtain the reviewer-owned prerequisite acceptance report
+**Next slice:** none
 
-**Acceptance status:** `partial`
+**Acceptance status:** `satisfied`
 
 **Planning base:** commit
 `cb6abdb89afaa4fca25706cd42f621a8c762480f`, tree
@@ -97,7 +97,7 @@ or result-algebra redesign, and it does not activate A2.
 | PIA2-A7 | Old v9 handles and states are explicitly unsupported; v10 query, prepare, resolve, inspect, persistence, and genuine cold-process reconstruction use the accepted version identities with no compatibility fallback. | `system` | `not-applicable` | `automated` | `satisfied` | [Prerequisite candidate](reports/prerequisite-candidate.md) version and cold-process evidence |
 | PIA2-A8 | One post-freeze certification pass derives current subjects and requirements mechanically and proves exact active-policy-unit/requirement/attestation/certificate equality, with no stale, duplicate, extra, missing, or blocked subject. Predecessor presence remains generated migration provenance and cannot change certification behavior or identity. | `integration` | `not-applicable` | `automated` | `satisfied` | [Recovered coverage certification](reports/certify-recovered-coverage.md) |
 | PIA2-A9 | One clean candidate passes focused package tests, generated freshness, registered declarative suites, the complete Python checkpoint, retained migration checks, and diff validation. | `integration` | `not-applicable` | `automated` | `satisfied` | [Recovery candidate](reports/prerequisite-recovery-candidate.md) |
-| PIA2-A10 | An independent reviewer accepts the exact candidate against repository Standards and this specification with no unresolved consumer. | `integration` | `not-applicable` | `manual` | `pending` | Pending independent acceptance report |
+| PIA2-A10 | An independent reviewer accepts the exact candidate against repository Standards and this specification with no unresolved consumer. | `integration` | `not-applicable` | `manual` | `satisfied` | [Prerequisite acceptance](reports/prerequisite-acceptance.md) |
 
 ## Scope
 
@@ -464,7 +464,7 @@ migration and graph/semantic set comparisons pass; repository search finds no
 parallel catalog parser or path classifier; the only permitted complete
 checkpoint blocker is post-cutover stale or missing coverage.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 1: Coverage Freeze And Prerequisite Acceptance
 
@@ -528,7 +528,7 @@ record per subject; transition provenance reproduces exactly but does not
 influence certification; no consumer is blocked; and an independent report
 accepts one exact clean candidate.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 2: Acceptance-Rejection Recovery
 
@@ -591,7 +591,7 @@ produce a new exact candidate.
 - [x] Run all focused packages, generated checks, registered declarative suites,
   complete checkpoint, Ruff, and diff validation, and prepare one clean
   exact-tree candidate.
-- [ ] Obtain independent exact-tree acceptance.
+- [x] Obtain independent exact-tree acceptance.
 
 **Acceptance gate:** The contract is the sole effective evidence-rule owner;
 all present values decode strictly; all contract-derived compatibility pairs
@@ -600,7 +600,7 @@ failure; current coverage subject sets are exactly equal after the corrected
 freeze; no semantic topology or public-shape drift occurs; and an independent
 report accepts one exact clean candidate.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ## Blockers
 
@@ -640,7 +640,7 @@ admission or acceptance protocol.
 
 ## Final Acceptance
 
-- Acceptance status: `partial`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: broader A1b work remains blocked by standards recovery;
   A2 remains blocked by independently accepted A1b.
-- Final status: `Implemented`
+- Final status: `Accepted`

@@ -463,3 +463,23 @@
 - Next operation: commit one clean exact-tree candidate, then obtain the
   reviewer-owned `prerequisite-acceptance.md`. No further implementation or
   authority mutation is authorized before review.
+
+## 2026-08-25 - Prerequisite Acceptance Transition
+
+- Accepted candidate: commit
+  `7bc8bd070f882eb9779dc678139777d05a6ce7c7`, tree
+  `35a22f824f7ed5f50347032b956b2108fc073f77`.
+- Independent acceptance report: commit
+  `bf9f3d86c8109532f7846ce2f6e547ab155bb200`, tree
+  `5a877289fbc388e9bacfc77746a42ef85d0fb363`.
+- The report is the direct child of the candidate, changes only
+  `reports/prerequisite-acceptance.md`, and records zero Standards and zero
+  specification findings after independent focused and broad verification.
+- PIA2-A10 is satisfied and PIA2-006 is resolved. All objective acceptance
+  claims are satisfied, and Milestones 0 through 2 plus this plan move from
+  `Implemented` to `Accepted`.
+- This transition changes only the prerequisite plan, ledger, and issues. It
+  performs no standards-recovery resume, A1b work, A2 work, runtime mutation,
+  relationship mutation, or coverage mutation.
+- The prerequisite next slice is `none`. Standards recovery may proceed only
+  through its separately reviewed resume boundary; A1b and A2 remain inactive.
