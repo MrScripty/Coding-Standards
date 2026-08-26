@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 semantic-oracle correction
+**Current phase:** Milestone 2 replacement verification preparation
 
-**Next slice:** replace the two admitted mutable thresholds with exact derived sets
+**Next slice:** rerun final verification and create one replacement candidate
 
 **Acceptance status:** `partial`
 
@@ -49,8 +49,8 @@ commit `dd571976068916f2f95d89c55c8824a20b92acb2`, tree
 `044c0ef57475bd23bf6a4c7d5e9d03fb27832283`
 
 **Current implementation boundary:** commit
-`be4c6579a525800721f9ba4e3cf727b30d0c05f1`, tree
-`c810ea9fb1b0d010d2fd91c5b9ee92a5a05658fa`
+`c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`, tree
+`0123db9c299794cacd5a1cff52a20f2244d37b94`
 
 **Superseded verification candidate:** commit
 `7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
@@ -99,13 +99,11 @@ policy, semantic metadata, agent entry points, fixtures, and executable
 verification.
 
 The six policy families, reconciled graph, and coverage architecture remain
-implemented. Exact-tree review found two protected Standards Engine tests that
-still use mutable threshold oracles and current lifecycle narration that does
-not agree across its owners. Milestone 2 is blocked pending admission of one
-two-test semantic-oracle correction and the complete current-authority
-replacement. The tests are outside the coverage horizon projection, so their
-correction must leave every frozen coverage identity unchanged. Broader A1b
-implementation and all A2 work remain excluded.
+implemented. The admitted two-test semantic-oracle correction is implemented,
+all current authority owners are reconciled, and every frozen coverage identity
+remains unchanged. Milestone 2 is preparing one replacement exact-tree
+verification candidate. Broader A1b implementation and all A2 work remain
+excluded.
 
 ## Objective Acceptance
 
@@ -373,20 +371,20 @@ milestone.
 - [x] Generate certificates and prove exact active-policy-unit, requirement,
   attestation, and certificate subject equality with no stale, duplicate,
   extra, missing, or blocked subject.
-- [ ] Complete the two current `fix-now` dispositions in `O`, then prove every
+- [x] Complete the two current `fix-now` dispositions in `O`, then prove every
   selected consumer has exactly one current non-blocked disposition and no
   independent-horizon member is missing.
 - [x] Run all focused package tests, contract generation/validation, registered
   declarative suites, complete Python checkpoint, retained migration checks,
   plan/link/generated checks, Ruff, and `git diff --check` from one clean tree.
-- [ ] Replace the two mutable live-authority thresholds with exact
+- [x] Replace the two mutable live-authority thresholds with exact
   compiler-derived dependent-program and reason-edge sets and exact graph-derived
   navigation cause sets; preserve deduplication assertions.
-- [ ] Recompile coverage after the test correction and prove the horizon,
+- [x] Recompile coverage after the test correction and prove the horizon,
   requirement, attestation, and certificate digests are byte-identical to the
   frozen values. Any changed digest is a re-plan trigger; no attestation renewal
   is admitted.
-- [ ] Replace every stale current-state projection selected by the renewed
+- [x] Replace every stale current-state projection selected by the renewed
   systemic audit.
 - [ ] Rerun the two focused test modules, every focused package suite, contract
   generation and validation, registered declarative verification, the complete

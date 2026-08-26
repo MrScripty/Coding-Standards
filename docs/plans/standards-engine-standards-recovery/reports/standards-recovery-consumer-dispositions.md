@@ -1,6 +1,6 @@
 # Standards Recovery Consumer Dispositions
 
-**Status:** `Replan blocked; two fix-now consumer corrections pending`
+**Status:** `Implemented; final independent review pending`
 
 **Admitted policy-implementation base:** commit
 `59ecd309ae85db9d1f194ca3b49a23e79df51c62`, tree
@@ -58,8 +58,8 @@ assignments are invalid; none are present in the reconciled closure.
 | `tools/standards_analysis/tests/test_routing.py` | Replaces mutable catalog totals with stable Generated Contract fact/rule semantics. |
 | `tools/standards_policy_impact/tests/test_compiler.py` | Replaces mutable relationship totals with complete graph/semantics identity-set equality. |
 | `tools/standards_verifier/tests/test_policy_impact.py` | Proves semantic policy-impact projection and owner closure without a mutable relationship total. |
-| `tools/standards_engine/tests/test_navigation.py` | `fix-now`: replace its mutable dependency-cause threshold with exact graph-derived cause-set equality while preserving deduplication. |
-| `tools/standards_engine/tests/test_analysis.py` | `fix-now`: replace dependent-program and obligation thresholds with exact compiler-derived program and reason-edge sets. |
+| `tools/standards_engine/tests/test_navigation.py` | `updated`: exact graph-derived dependency-cause equality and explicit deduplication replace the mutable threshold at `c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`. |
+| `tools/standards_engine/tests/test_analysis.py` | `updated`: exact compiler-derived dependent-program and reason-edge equality plus explicit reason deduplication replace both mutable thresholds at `c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`. |
 
 ## Registry-Derived Existing Suites
 
@@ -126,9 +126,8 @@ authority.
 All declaration applicability is explicit `always`; no predicate was inferred
 from rationale or a repository path. Every evidence owner resolves to one
 registered suite. No selected consumer has a `blocked` disposition. The two
-Standards Engine test consumers above have actionable `fix-now` dispositions
-pending admitted implementation; every other selected consumer remains
-non-blocked.
+Standards Engine test consumers above are `updated`; every other selected
+consumer remains non-blocked.
 
 ## Milestone 1 Reconciliation Evidence
 
@@ -184,5 +183,6 @@ Milestone 2 rederived every requirement from the frozen authority and reused
 every dependency-valid attestation without modification. The exact active
 policy-unit, requirement, attestation, and generated-certificate subject sets
 are equal, as recorded in [final coverage evidence](standards-recovery-coverage.md).
-This result does not accept the recovery or authorize runtime or protected-test
-edits; independent exact-tree acceptance remains pending.
+This result does not accept the recovery. The exact two-test edits occurred
+under the admitted `O` boundary; no further runtime or protected-test edit is
+authorized. Independent exact-tree acceptance remains pending.

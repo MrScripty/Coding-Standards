@@ -6,6 +6,10 @@
 `f037ab11c6bdcda8b61a64c5aa1932e86570096b`, tree
 `212206c6aeb60830c3bed5df392358ff953590a2`
 
+**Semantic-oracle implementation boundary:** commit
+`c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`, tree
+`0123db9c299794cacd5a1cff52a20f2244d37b94`
+
 This report records deterministic coverage compilation for standards recovery.
 It is evidence for a later candidate review; it is not an authored attestation,
 generated certificate authority, or acceptance report.
@@ -106,7 +110,7 @@ No graph edge or empty impact result is used as proof of completeness.
 
 The equality above remains exact but does not accept the standards recovery.
 Direct provider-v3 horizon inspection proves the two test paths in `O` are
-neither horizon members nor input sources. After their admitted correction,
-mechanical recompilation must reproduce the exact horizon, requirement,
-attestation, and certificate digests above. Any changed digest is a re-plan
-trigger; no attestation renewal is admitted.
+neither horizon members nor input sources. Mechanical recompilation after the
+admitted correction reproduced the exact horizon, requirement, attestation,
+and certificate digests above. No attestation was renewed; any later changed
+digest is a re-plan trigger.

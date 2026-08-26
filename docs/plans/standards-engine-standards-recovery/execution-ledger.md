@@ -1530,3 +1530,36 @@ superseded by the discovery-admission transition in the active plan.
   unchanged.
 - Next operation: implement and run the two focused test modules, then prove
   frozen coverage identities remain byte-identical.
+
+## 2026-08-25 - Semantic-Oracle Correction Implemented
+
+- Implementation boundary: commit
+  `c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`, tree
+  `0123db9c299794cacd5a1cff52a20f2244d37b94`.
+- Exact source delta: only
+  `tools/standards_engine/tests/test_analysis.py` and
+  `tools/standards_engine/tests/test_navigation.py` changed.
+- Analysis result: compiler-derived accepted/proposed dependent-program sets
+  and flattened policy-impact reason-edge sets replace both thresholds; reason
+  deduplication remains explicit.
+- Navigation result: the graph registry's exact incoming Requires cause set
+  replaces the dependency-cause threshold; route-reason deduplication remains
+  explicit.
+- Focused evidence: all 585 package tests pass across Applicability, Metadata,
+  Graph Engine, Policy Impact, Standards Graph, Analysis, Standards Engine, and
+  Verifier; both changed files pass Ruff.
+- Coverage evidence: mechanical recompilation reproduced horizon
+  `sha256:538c9ef051b79129beb5d471394d9c399c7e3c2882567c6aad4c16c1b4d62f43`,
+  requirement map
+  `sha256:58338737be13849c8bd8753a1fc85f00e26b3d8a04fb137980f791fbc5ad9cd4`,
+  attestation map
+  `sha256:1a2217ae8b9d6d24fda38dbe705c9bed7d7d4cc722849ef77ab67c2c9039ecdb`,
+  and certificate map
+  `sha256:02b30dcaac84cbf16ebb377b9e8a9da5c827c2aa708c4c3edbd7e5857e746829`
+  unchanged. No attestation was renewed.
+- Broad evidence: contract generation/validation, generated inventory,
+  224/224 declarative suites, all 53 retained Bash migration checkers, plan
+  lifecycle checks, and diff hygiene pass.
+- Next operation: reconcile current governance projections, rerun exact-tree
+  verification, and create one replacement candidate without claiming
+  acceptance.

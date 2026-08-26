@@ -1,6 +1,6 @@
 # Standards Recovery Candidate
 
-**Status:** `Superseded; corrected semantic-oracle replan pending admission`
+**Status:** `Implementation complete; replacement verification pending`
 
 **Planning comparison baseline:** commit
 `3439aae9540786d9734431e633ea5b62afb50592`, tree
@@ -10,13 +10,17 @@
 `7f533f59ddd0120a08c36e85f1c631eedbbe0caa`, tree
 `70f2ec4f249ae6eb6774a17443b15943f57bdfec`
 
-This report records the source-complete implementation reviewed at candidate
+**Semantic-oracle implementation boundary:** commit
+`c6fc663bdd1b78acdc31ce082b02dae4a5c9d677`, tree
+`0123db9c299794cacd5a1cff52a20f2244d37b94`
+
+This report records the source-complete implementation. Candidate
 `7a54d5fe7778f481278e4f21a12863d2f261b280`, tree
-`35823701b4ea400371c0de196e3b18d7dcaa834d`. That candidate is superseded:
-independent review found two mutable threshold oracles and contradictory
-current lifecycle projections. The report remains implementation evidence but
-is not an acceptance candidate. It does not admit A1b planning, A1b runtime
-work, or A2.
+`35823701b4ea400371c0de196e3b18d7dcaa834d`, is superseded because independent
+review found two mutable threshold oracles and contradictory lifecycle
+projections. The correction is complete at the semantic-oracle implementation
+boundary above, but this report is not yet an acceptance candidate. It does not
+admit A1b planning, A1b runtime work, or A2.
 
 ## Implemented Result
 
@@ -27,8 +31,8 @@ work, or A2.
   graph remains policy-neutral, and coverage uses an independent provider-v3
   horizon rather than treating graph presence or absence as completeness.
 - The protected mapped-consumer closure resolves mechanically from canonical
-  suite IDs plus audit-owned exact non-registry consumers. Later review selected
-  two actionable `fix-now` test dispositions; no consumer is blocked.
+  suite IDs plus audit-owned exact non-registry consumers. The two selected
+  test dispositions are implemented as `updated`; no consumer is blocked.
 - Final coverage reuses every dependency-valid attestation and proves exact
   active-policy-unit, requirement, attestation, and generated-certificate
   subject equality.
@@ -87,8 +91,8 @@ lint acceptance is exact over the recovery's Python delta.
 
 ## Scope Result
 
-No attestation, policy, graph, suite, generated artifact, runtime, package test,
-external corpus, dependency, A1b implementation, or A2 path changed in
-Milestone 2 before semantic-oracle recovery. A replacement candidate requires
-the admitted two-test correction, proof that frozen coverage identities remain
-unchanged, and consistent current lifecycle authority.
+The admitted semantic-oracle recovery changed exactly the two package tests in
+`O`. No attestation, policy, graph, suite, fixture, generated artifact, runtime,
+external corpus, dependency, A1b implementation, or A2 path changed. All frozen
+coverage identities remained byte-identical. A replacement candidate requires
+one final exact-tree verification and consistent current lifecycle authority.
