@@ -80,36 +80,61 @@ and requires a new supported-target review.
 
 Every Engine Module manifest changes `requires-python` from the former
 open-ended `>=3.11` to `>=3.11,<3.13` and declares one source-tree public import
-root as `[tool.standards-package].public-import-root`. The exact internal
-dependency and public-root authority is:
+root and repository entrypoints in this exact table:
 
-| Module | Public import root | Direct internal requirements | Direct external requirements |
-| --- | --- | --- | --- |
-| `repository-graph-engine` | `tools.graph_engine.graph_engine` | none | none |
-| `standards-applicability` | `tools.standards_applicability.standards_applicability` | none | none |
-| `standards-identity` | `tools.standards_identity.standards_identity` | none | none |
-| `standards-contracts` | `tools.standards_contracts.standards_contracts` | none | `jsonschema==4.26.0`, `referencing==0.37.0` |
-| `standards-metadata` | `tools.standards_metadata.standards_metadata` | `standards-identity` | none |
-| `standards-authority` | `tools.standards_authority.standards_authority` | `standards-identity` | none |
-| `standards-policy-impact` | `tools.standards_policy_impact.standards_policy_impact` | `repository-graph-engine`, `standards-applicability`, `standards-metadata` | none |
-| `standards-graph` | `tools.standards_graph.standards_graph` | `repository-graph-engine`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-analysis` | `tools.standards_analysis.standards_analysis` | `repository-graph-engine`, `standards-applicability`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-engine` | `tools.standards_engine.standards_engine` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-authority`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-verifier` | `tools.standards_verifier.standards_verifier` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
+```toml
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.example.example"
+repository-entrypoints = []
+```
+
+| Module | Public import root | Repository entrypoints | Direct internal requirements | Direct external requirements |
+| --- | --- | --- | --- | --- |
+| `repository-graph-engine` | `tools.graph_engine.graph_engine` | none | none | none |
+| `standards-applicability` | `tools.standards_applicability.standards_applicability` | none | none | none |
+| `standards-identity` | `tools.standards_identity.standards_identity` | none | none | none |
+| `standards-contracts` | `tools.standards_contracts.standards_contracts` | none | none | `jsonschema==4.26.0`, `referencing==0.37.0` |
+| `standards-metadata` | `tools.standards_metadata.standards_metadata` | none | `standards-identity` | none |
+| `standards-authority` | `tools.standards_authority.standards_authority` | none | `standards-identity` | none |
+| `standards-policy-impact` | `tools.standards_policy_impact.standards_policy_impact` | none | `repository-graph-engine`, `standards-applicability`, `standards-metadata` | none |
+| `standards-graph` | `tools.standards_graph.standards_graph` | none | `repository-graph-engine`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-analysis` | `tools.standards_analysis.standards_analysis` | none | `repository-graph-engine`, `standards-applicability`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-engine` | `tools.standards_engine.standards_engine` | none | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-authority`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-verifier` | `tools.standards_verifier.standards_verifier` | `tools/query_edges.py`, `tools/verify_git_reachability.py`, `tools/standards_verifier/verify.py`, `tools/standards_verifier/generate_inventory.py`, `tools/standards_verifier/generate_numeric_audit.py`, `tools/standards_verifier/generate_numeric_retirements.py` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
 
 The cutover gate parses production Python with `ast`, derives direct imports,
 and requires exact equality with this manifest graph. For each cross-Module
-import, the imported module must equal the dependency manifest's public root;
-importing below that root is invalid even when Python can load it. Literal and
-dynamic `importlib` or `__import__` cross-Module bypasses are invalid. Relative
-imports within the owning Module remain valid. The verifier consumes manifest
-roots directly and does not duplicate package or symbol allowlists; each
-package `__init__.py` remains the symbol-surface authority.
+import, `import dependency_root` is valid, while `import dependency_root.child`
+and `from dependency_root.child import name` are invalid. For
+`from dependency_root import name`, `name` must occur in the root's statically
+resolved `__all__`; this prevents Python from implicitly loading an unexported
+child module despite the syntactic root import. Cross-Module star imports and
+literal or nonliteral `importlib`/`__import__` bypasses are invalid. Relative and
+absolute imports within the owning Module remain valid.
+
+Each public-root `__init__.py` owns exports through exactly one `__all__`
+assignment. The closed export-expression profile permits a tuple of unique
+string literals and starred `<local-module-alias>.__all__` references, where
+the alias comes from one relative import and the referenced local `__all__`
+resolves through the same profile. Cycles, duplicate names, missing exports,
+computed values, mutation after assignment, and imports outside the owning
+package reject. This supports the generated contract algebra without copying
+its evolving names into the facade initializer. The clean-environment smoke
+loads every resolved name with `getattr(root, name)` so static declaration and
+runtime binding are distinct, jointly required claims.
+
+The verifier consumes manifests and package initializers directly and does not
+duplicate package or symbol allowlists. Governed production sources are the
+tracked Python files beneath each manifest root plus its exact
+`repository-entrypoints`. A Git-index completeness pass rejects any tracked
+non-test Python under `tools/` that belongs to neither set. Package test roots
+remain test inputs and do not contribute production requirements.
 
 A transitive import does not satisfy a missing direct declaration, and an
 unused declaration is invalid. Test-only imports are suite inputs, not
-production requirements. Discovering a required edge or public root outside
-this closed table is a re-plan trigger.
+production requirements. Discovering a required edge, production source,
+entrypoint, or public root outside this closed table is a re-plan trigger.
 
 This internal source-tree closure is A1B-A6I and remains pending until the
 atomic cutover. It is deliberately separate from A1B-A6: Milestone 0 proves the
@@ -159,10 +184,13 @@ from tools.standards_verifier import standards_verifier
 This proves the repository's actual local execution boundary without silently
 selecting a build backend. Importability does not prove boundary compliance;
 the AST verifier owns that distinct claim. An otherwise-valid generated-output
-fixture and an otherwise-valid handwritten-facade fixture each replace one
-public-root import with a private-submodule import and must reach the exact
-typed package-boundary diagnostic. Focused projection tests also inspect the
-generated import prelude, but they are not the independent acceptance oracle.
+fixture and an otherwise-valid handwritten-facade fixture each cover both a
+below-root private import and a root-form unexported child import and must reach
+the exact typed package-boundary diagnostic. Additional fixtures cover a valid
+export, cross-Module star import, dynamic import, malformed or cyclic export
+closure, and an unowned production source. Focused projection tests also inspect
+the generated import prelude, but they are not the independent acceptance
+oracle.
 A future separately installed or published internal distribution requires its
 own build, dependency, release, and installation decision.
 

@@ -165,13 +165,23 @@ The selected native artifacts carry the exact
 and source builds are unsupported in A1b. Ambient installations are not
 satisfaction evidence.
 
-Package manifests own direct requirements, the supported Python range, and one
-canonical source-tree public import root. The corresponding package
-`__init__.py` owns exported symbols. One AST-backed Standards Verifier contract
-derives every production cross-Module import and rejects imports below another
-Module's root as well as literal or dynamic import bypasses. The verifier does
-not copy `__all__` or maintain a package or symbol allowlist. Import smoke proves
-that manifest-owned roots load; it does not decide boundary compliance.
+Package manifests own direct requirements, the supported Python range, one
+canonical source-tree public import root, and exact repository entrypoint
+scripts. The corresponding package `__init__.py` owns exported symbols through
+one statically resolvable `__all__`. Its closed expression profile permits
+unique string literals and starred references to recursively resolved
+own-package module `__all__` values; computed or mutated exports reject.
+
+One AST-backed Standards Verifier contract derives every governed production
+cross-Module import. Imports below another Module's root reject. A root-form
+`from` import is valid only when every imported name occurs in the resolved root
+exports, preventing Python's implicit loading of unexported child modules.
+Cross-Module star imports and literal or dynamic import bypasses reject.
+Tracked non-test Python under `tools/` must belong to a manifest root or exact
+repository entrypoint. The verifier consumes manifests and initializers
+directly; it does not copy `__all__` or maintain a package or symbol allowlist.
+Import smoke proves that every resolved export is bound; it does not decide
+boundary compliance.
 
 The lock owns selected transitive versions and wheel hashes. Security,
 provenance, supported-target, and licensing evidence are bound in the
@@ -444,8 +454,9 @@ policy-unit membership imply a relationship source.
   migration consumer.
 - A new runtime dependency and native transitive wheel require exact
   resolution, target, security, provenance, and licensing evidence.
-- Package manifests provide one import-boundary authority consumed by dependency
-  comparison, static boundary verification, and isolated import smoke.
+- Package manifests and root `__all__` declarations provide one import-boundary
+  authority consumed by dependency comparison, static boundary verification,
+  governed-source ownership, and isolated root/export smoke.
 - Relationship declarations remain explicit closed inputs, so adding a
   policy-unit sidecar cannot silently add or omit relationship authority.
 - Materialized derived objects may be regenerated, but direct storage avoids
@@ -496,11 +507,12 @@ closed registry.
 
 ### Enforce package boundaries only in the generator or import smoke
 
-Rejected because generator checks omit handwritten facade code and successful
-imports do not distinguish a public root from a private submodule. A single AST
-verifier consumes manifest-owned roots across all production Modules; focused
-generator tests remain implementation evidence rather than the acceptance
-oracle.
+Rejected because generator checks omit handwritten facade and repository
+entrypoint code, and successful imports do not distinguish a public root from a
+private submodule or Python's root-form implicit child loading. A single AST
+verifier consumes manifest-owned roots, entrypoints, and root exports across all
+governed production sources; focused generator tests remain implementation
+evidence rather than the acceptance oracle.
 
 ## Re-Plan Conditions
 
@@ -523,7 +535,7 @@ Re-plan before implementation continues if:
   outside the admitted atomic cutover; or
 - a required relationship source cannot use the closed policy-impact registry,
   or a Module cannot express its production imports through one manifest-owned
-  public root; or
+  public root and statically resolved export surface; or
 - A2 mutable heads, application authority, or recovery behavior enters A1b.
 
 ## Acceptance

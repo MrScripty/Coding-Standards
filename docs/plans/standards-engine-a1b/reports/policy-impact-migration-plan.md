@@ -40,6 +40,7 @@ relationship, disposition, and coverage authority.
 | `tools/standards_authority/pyproject.toml` | Add as the identity-backed authority package contract |
 | `tools/standards_authority/standards_authority/__init__.py` | Add as the narrow capture/storage public Interface |
 | `tools/standards_authority/README.md` | Add as the capture, storage, publication, and recovery Interface guide |
+| `evaluation/standards-effectiveness/policy-units/dependencies.toml` | Retain and add one reviewed revision-1 unit for the exact `Requirement And Ownership` heading |
 | `evaluation/standards-effectiveness/policy-units/cross-platform.toml` | Add one reviewed revision-1 unit for the exact `Filesystem Paths` heading |
 | `evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml` | Add source-owned Cross-Platform implementation, package, fixture, and suite relationships |
 | `evaluation/standards-effectiveness/policy-units/security.toml` | Add one reviewed revision-1 unit for the exact `Filesystem Containment` heading |
@@ -47,16 +48,24 @@ relationship, disposition, and coverage authority.
 | `evaluation/standards-effectiveness/policy-units/registry.toml` | Retain and register the new Cross-Platform and Security sidecars in the canonical policy-unit corpus |
 | `evaluation/standards-effectiveness/policy-impact-registry.toml` | Retain and register the new Cross-Platform and Security declaration sources in the closed relationship corpus |
 | `tools/standards_engine/README.md` | Retain and update the public v11 facade and unsupported-version behavior |
+| `tools/graph_engine/graph_engine/__init__.py` | Retain; expose every Graph Engine symbol required by another Module, including the contained-path contract |
 | `tools/standards_engine/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13` and declare every directly imported internal package, including Contracts and Authority |
 | `tools/standards_applicability/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; remain stdlib-only |
+| `tools/standards_applicability/standards_applicability/__init__.py` | Retain as the literal public export authority |
 | `tools/standards_metadata/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Identity directly |
 | `tools/graph_engine/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; remain stdlib-only |
 | `tools/standards_policy_impact/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, and Metadata directly |
+| `tools/standards_policy_impact/standards_policy_impact/__init__.py` | Retain as the literal public export authority |
 | `tools/standards_graph/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Metadata, and Policy Impact directly |
+| `tools/standards_graph/standards_graph/__init__.py` | Retain as the literal public export authority |
 | `tools/standards_analysis/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, Identity, Metadata, and Policy Impact directly |
 | `tools/standards_verifier/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare every directly imported Engine Module, including Contracts |
+| `tools/standards_verifier/standards_verifier/__init__.py` | Retain and replace the version-only root with a literal public export contract including repository entrypoint adapters |
 | `tools/standards_verifier/standards_verifier/python_packages.py` | Add as manifest-owned package/dependency projection and AST import analysis |
 | `tools/standards_verifier/standards_verifier/checks/python_package_contract.py` | Add as the typed direct-import and public-root conformance check |
+| `tools/standards_verifier/tests/test_python_package_contract.py` | Add focused parser, export-resolution, ownership, and diagnostic tests |
+| `tools/query_edges.py` | Retain as a Verifier-owned repository entrypoint; replace private Graph Engine and Verifier imports with one public Verifier adapter |
+| `tools/verify_git_reachability.py` | Retain as a Verifier-owned repository entrypoint; replace ambient private Verifier imports with the public root |
 | `docs/plans/standards-engine-a1b/reports/dependency-and-dialect-decision.md` | Retain as the reviewed selection authority |
 | `docs/plans/standards-engine-a1b/reports/a1b-dependency-provenance.md` | Add as exact implementation resolution evidence |
 | `tools/standards_engine/contracts/generate_contract.py` | Retire; replace with `tools/standards_contracts/standards_contracts/projection.py` |
@@ -86,17 +95,19 @@ contract. `standards_identity`, `standards_applicability`, and Graph Engine are
 stdlib-only. `standards_contracts` declares exact direct external requirements
 for `jsonschema` and `referencing`; its lock closes transitives.
 `standards_authority` declares Identity. Every manifest also owns one canonical
-source-tree public import root. Every other manifest declares exactly the
-internal packages imported directly by its production source: no missing direct
-requirement, transitive satisfaction, unused internal requirement, or import
-below another Module's public root is accepted. Every listed manifest uses
-`requires-python = ">=3.11,<3.13"`.
+source-tree public import root and exact repository entrypoint set. Every root
+owns exported symbols through the closed statically resolvable `__all__`
+profile. Every other manifest declares exactly the internal packages imported
+directly by its production source: no missing direct requirement, transitive
+satisfaction, unused internal requirement, unowned source, private child,
+root-form unexported child, star, or dynamic cross-Module import is accepted.
+Every listed manifest uses `requires-python = ">=3.11,<3.13"`.
 
-Milestone 3 derives the direct-import graph from production Python syntax and
-compares it with the manifest graph. One AST-backed verifier consumes the same
-manifest roots and rejects private-submodule and literal or dynamic
-cross-Module imports across all production Modules. It does not copy `__all__`
-or maintain another package or symbol allowlist. The cutover then creates clean
+Milestone 3 derives governed source ownership and the direct-import graph from
+the Git index, manifests, and production Python syntax. One AST-backed verifier
+resolves root `__all__` values and rejects below-root, root-form unexported,
+star, and literal or dynamic cross-Module imports. It does not copy `__all__` or
+maintain another package or symbol allowlist. The cutover then creates clean
 CPython 3.11 and 3.12 environments, installs the exact external lock, changes to
 a directory outside the repository, supplies the reviewed checkout root as the
 sole `PYTHONPATH`, enables Python safe-path mode, and imports every
@@ -104,6 +115,33 @@ manifest-owned public Module root in one fresh process. This is the reproducible
 execution contract the repository actually uses. A newly required local wheel,
 independently published distribution, build backend, public root, or import
 outside this graph is a re-plan trigger.
+
+## Public Import Systemic Dispositions
+
+The A1b cutover audits the complete current production family before mutation.
+These are stable path dispositions, not a mutable file-count assertion:
+
+| Current consumer | Current boundary | A1b disposition |
+| --- | --- | --- |
+| `tools/standards_policy_impact/standards_policy_impact/compiler.py` | Imports `graph_engine.errors` and `graph_engine.paths` below the public root | Update to Graph Engine root exports; add `contained_path` to the root contract |
+| `tools/standards_verifier/standards_verifier/repository_graph.py` | Imports `graph_engine.manifest` below the public root | Update to the existing public `load_registry` export |
+| `tools/standards_analysis/standards_analysis/serialization.py` | Imports Metadata serialization below the public root | Retire with the generic Analysis serializer |
+| `tools/standards_engine/contracts/validate_contracts.py` | Imports Metadata serialization and the old generator through private paths | Retire; public validation moves to `standards_contracts` |
+| `tools/standards_engine/contracts/generate_contract.py` | Old contract-tool implementation and private self-import target | Retire; projection moves to `standards_contracts` |
+| `tools/standards_engine/standards_engine/tools.py` | Imports the old private contract validator | Update to the `standards_contracts` public root |
+| `tools/query_edges.py` | Imports Graph Engine CLI and Verifier repository composition privately through ambient path mutation | Update to one Verifier public repository-graph CLI adapter and register the script in the Verifier manifest |
+| `tools/verify_git_reachability.py` | Imports Verifier reachability internals through ambient path mutation | Update to the Verifier public root and register the script in the Verifier manifest |
+| `tools/standards_engine/standards_engine/__init__.py` | Computes facade exports from the compatibility model | Replace with the closed local-star `__all__` profile over generated v11 exports plus literal facade exports |
+| Every other governed production Python source | Uses only current package roots or own-package imports at the inventory base | `reviewed-no-change`; the final Git-index-derived verifier proves the classification and any new sibling triggers re-planning |
+
+The dependency-owned relationship migration adds the new package-contract
+policy unit, every catalog-listed manifest, public root, and repository
+entrypoint, the AST projection/check, its focused test, the registered public
+cutover suite, and its positive/negative fixtures. Generated Contract
+relationships additionally select the generated output, facade root, compiler
+prelude, and their two private-import fixture families. The final relationship
+report records every exact natural key; no global relationship count is an
+oracle.
 
 The following current generic-serializer consumers become explicit semantic
 consumers. They are retained unless stated otherwise:
@@ -122,9 +160,11 @@ consumers. They are retained unless stated otherwise:
 | `tools/standards_engine/standards_engine/engine.py` | Retain; remove serializer-backed state storage and candidate deduplication |
 
 These paths are added to the supplemental catalog when a policy-impact
-relationship selects their semantics. Test files remain suite inputs rather
-than individually authored relationship authority unless the final horizon
-audit proves a missing semantic consumer.
+relationship selects their semantics. The package-contract verifier test is an
+explicit systemic consumer because it owns the parser/export-resolution oracle.
+Other package tests remain suite inputs rather than individually authored
+relationship authority unless the final horizon audit proves a missing
+semantic consumer.
 
 The catalog rows above are the stable semantic-consumer identities. Package
 tests remain registered suite inputs. A package-private support file may be
@@ -158,6 +198,7 @@ suite registration.
 | `topic.contracts.identity-versus-instance-equality` | Retain Applicability, reproduction report, and suite; retire metadata serializer, local validator, generated-validator meaning, and model intermediary | Add identity encoder, contract compiler, policy-unit structure owner, and all typed Analysis identity/order consumers listed above |
 | `topic.architecture.immutable-authority-closure` | Retain engine, analysis transition/result, fixture, suite, and Persistence; replace snapshot compiler | Add authority envelope/repository and direct-object cold-reconstruction suite |
 | `topic.dependencies.implementation-versus-dependency` | Retain Router, profile, prompts, fixture, and suite | Add contract package manifest, exact lock, compiler, and dependency provenance report |
+| `topic.dependencies.requirement-and-ownership` | New projection of the existing `Requirement And Ownership` heading at semantic revision 1 | Add every catalog-listed Engine Module manifest and public root, the Verifier-owned repository entrypoints, package-contract projection/check/test, and registered public-cutover fixtures and suite |
 | `profile.boundary.generated-contract.semantic-closure` | Retain Contracts, Verification, Build, Dependencies, schema, generated algebra, tool adapter, fixture, and suite; replace generator | Add interface contract, compiler, and projection; projection replaces the generator edge |
 | `topic.cross-platform.filesystem-paths` | New projection of existing `topics/cross-platform.md` `Filesystem Paths` heading at semantic revision 1 | Add Authority repository/capture, its required-real suite, and the Cross-Platform package/README projection |
 | `topic.security.filesystem-containment` | New projection of existing `topics/security.md` `Filesystem Containment` heading at semantic revision 1 | Add descriptor-relative Authority repository/capture and its containment/race suite |
@@ -176,13 +217,15 @@ explicitly; neither filesystem presence nor policy-unit registration implies a
 relationship source. No generic graph manifest or path inference creates these
 replacements.
 
-The two new policy units do not change normative prose. Their revision 1 is a
-reviewed bootstrap assertion that the exact canonical module, locator, resolved
-content/structure, and initial implementation relationships represent the
-already accepted meaning. Each locator must resolve exactly once and its module
-must own its declaration. Planning admission reviews the identity/locator;
-final A1b coverage independently audits the frozen relationship and horizon
-state before attestation.
+The new policy units for Dependencies Requirement And Ownership, Cross-Platform
+Filesystem Paths, and Security Filesystem Containment do not
+change normative prose. Their revision 1 is a reviewed bootstrap assertion that
+the exact canonical module, locator, resolved content/structure, and initial
+implementation relationships represent the already accepted meaning. Each
+locator must resolve exactly once and its module must own its declaration.
+Planning admission reviews the identity/locator; final A1b coverage
+independently audits the frozen relationship and horizon state before
+attestation.
 
 ## Natural-Key Replacement Map
 
@@ -206,6 +249,13 @@ new relationships:
 | `topic.contracts.identity-versus-instance-equality` | no current edge for `contracts/identity-fixtures.json` | add missing consumer | identity v2 and domain-version fixture authority |
 | `topic.dependencies.implementation-versus-dependency` | no current implementation edge | add/split | contract package manifest, exact lock, compiler, dependency decision, and implementation provenance report |
 | same | no current edge for the new Identity and Authority package manifests | add missing consumers | exact stdlib-only Identity and identity-backed Authority package contracts |
+| `topic.dependencies.requirement-and-ownership` | no current policy unit or implementation edge | add | exact existing-heading unit; every catalog-listed Engine Module manifest and public root; package-contract projection, check, focused test, fixtures, and suite |
+| same | no current edge for `tools/query_edges.py` or `tools/verify_git_reachability.py` | add missing consumers | Verifier-owned repository entrypoints using only public package roots |
+| same | no current edge for `tools/standards_policy_impact/standards_policy_impact/compiler.py` | add missing consumer | replace private Graph Engine imports with root exports |
+| same | no current edge for `tools/standards_verifier/standards_verifier/repository_graph.py` | add missing consumer | replace private Graph Engine manifest import with the root export |
+| same | no current edge for `tools/standards_engine/standards_engine/tools.py` | add missing consumer | replace private contract-tool import with the Contracts public root |
+| same | no current edge for the retiring Analysis serializer and old contract tools | retire/classify | record their retirement as closure of private cross-Module imports rather than silently excluding them from the final scan |
+| `topic.contracts.generated-semantic-conformance` | no current edge for root-plus-private-child verification | add missing consumers | generated output and handwritten facade positive export fixture plus below-root and root-form private-child fixture families |
 | `topic.contracts.generated-semantic-conformance` | no current edge for contract/public package documentation | add | contract package and Standards Engine public-facade documentation |
 | same | no current edge for `tools/standards_engine/standards_engine/rendering.py` | add missing consumer | exhaustive generated v11 result rendering |
 | `topic.contracts.identity-versus-instance-equality` | no current edge for identity package documentation | add | identity Interface documentation |

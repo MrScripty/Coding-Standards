@@ -290,3 +290,29 @@
   runtime, package manifest, relationship registry, fixture, A1, or A2
   implementation changed. Lifecycle remains `Blocked` pending independent
   exact-tree review of candidate C-prime.
+
+## 2026-08-26 - Candidate C-Prime Admission Rejection And Replan
+
+- Independent exact-tree review rejected candidate
+  `ecdf5a55588d18d068a513d910959ccbd9c65f71`, tree
+  `ec19cb2c02a67f96229176302d5dbcd3f4964022`, on two high-severity
+  public-package closure findings.
+- `Superseded`: C-prime's module-path-only import rule. Python may satisfy
+  `from public_root import private_child` by implicitly loading a child module
+  even though the AST `ImportFrom.module` equals the public root.
+- `Superseded`: C-prime's package migration inventory. It listed manifests and
+  verifier artifacts without dispositioning every affected public root,
+  repository entrypoint, and existing production private-import consumer.
+- Replacement decision: manifests own one public root and exact repository
+  entrypoints; root initializers own names through one closed, statically
+  resolvable `__all__` profile. The verifier checks both imported modules and
+  root-form names, rejects cross-Module star/dynamic imports, verifies runtime
+  binding separately, and rejects Git-indexed non-test Python without an owner.
+- Replacement decision: add a revision-1 projection of the existing
+  Dependencies `Requirement And Ownership` heading and map every package
+  contract artifact plus every current private-import update or retirement.
+  The canonical graph-query and Git-reachability scripts become Verifier-owned
+  repository entrypoints rather than ambient-path exceptions.
+- The proposed v11 schema and interface remain byte-identical. No runtime,
+  package manifest, policy unit, relationship, fixture, A1, or A2 implementation
+  changed. Lifecycle remains `Blocked` pending independent review of C2.
