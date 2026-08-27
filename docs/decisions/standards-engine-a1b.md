@@ -47,13 +47,13 @@ standards_contracts
   `-- Python standard library
 
 standards_authority
-  |-- standards_contracts
   |-- standards_identity
   `-- Python standard library
 
 standards_engine
   |-- standards_authority
   |-- standards_contracts
+  |-- standards_identity
   `-- existing domain Modules
 ```
 
@@ -69,24 +69,45 @@ diagnostic adaptation, generated public models, and agent-tool projections. It
 does not implement JSON Schema keywords. `jsonschema.Draft202012Validator` is
 the sole executable Draft 2020-12 validator.
 
-`standards_authority` owns content capture plus immutable storage and direct
-resolution. It is not a general object database: the object-kind vocabulary is
+`standards_contracts` and `standards_authority` have no dependency in either
+direction. Their responsibilities are independent: Contracts proves public
+wire representations, while Authority proves owner-local immutable objects and
+their storage envelopes. The Engine facade depends on both and performs the
+only public adaptation. Domain Modules depend on Authority only when they
+construct or consume authority-bound domain values, and depend on Identity when
+they own a stored semantic ID.
+
+`standards_authority` owns immutable authority references,
+`AuthorityBoundValue`, content capture, immutable storage, direct resolution,
+and dependency closure. It is not a general object database: the object-kind vocabulary is
 closed, objects are immutable and content addressed, and no enumeration,
 mutable index, graph traversal, garbage collection, remote store, or arbitrary
 blob Interface is exposed. It owns envelope integrity, create-only publication,
 direct dependency existence and kind, and authority-DAG invariants. Domain
-Modules own semantic identity, decoding, and coherence; generated kind dispatch
-delegates to those owners. The repository does not use the public JSON Schema
-as domain authority.
+Modules own semantic identity, decoding, and coherence; explicitly injected
+owner codec sets delegate those facts to their owners. The repository does not
+use the public JSON Schema as domain authority.
+
+The exact owner, object-kind, payload-contract, identity-domain, and allowed
+dependency inventory is closed in
+[authority-object contracts](../plans/standards-engine-a1b/reports/authority-object-contracts.md).
+The exact per-operation role-kind requirements, coherence-rule IDs, and their
+derived role inventory are closed in
+[authority composition and execution closure](../plans/standards-engine-a1b/reports/authority-composition-and-execution-closure.md).
+Changing either admitted inventory is architectural re-planning, not runtime
+registration.
 
 `standards_analysis` retains change classification, impact selection, fact and
 obligation semantics, coverage decisions, immutable analysis normalization,
 projection, and transitions. It loses content capture and state storage.
-`standards_engine` owns StandardsAuthorityView selection and cross-reference
-coherence, remains the composition root, and exhaustively adapts domain outcomes
-to generated public results. Each domain Module returns AuthorityBoundValues so
-the composing kernel derives operation-specific execution closure from the
-dependencies actually consumed.
+`standards_engine` owns StandardsAuthorityView role selection and
+cross-reference coherence, remains the composition root, and exhaustively
+adapts domain outcomes to generated public results. Each domain Module returns
+AuthorityBoundValues so the composing kernel derives operation-specific
+execution closure from the dependencies actually consumed. Separately stored
+route, read, related, and analysis authority-contract objects own each
+operation family's required roles and coherence rules; there is no aggregate
+operation-profile identity.
 
 ### Contract compiler
 
@@ -235,18 +256,20 @@ typed_object = authority.get(handle)
 `standards_authority` owns capture orchestration and the Git-tree and mutable
 manifest source adapters. `capture` validates scope, exclusions, paths,
 symlinks, nested repositories, entry metadata, content digests, source
-stability, capture semantics, nested-object publication, and root publication.
+stability, nested-object publication, and root publication.
 The source adapter supplies observations through one bounded capture view; it
 does not construct handles or stored envelopes.
 
-Clean Git capture resolves one exact commit/tree and reads bytes from Git
-objects, never the worktree. Dirty-Git and non-Git capture perform the admitted
+Clean Git capture resolves one exact commit/tree locator and reads bytes from
+Git objects, never the worktree. Dirty-Git and non-Git capture perform the admitted
 two-pass manifest protocol: discover typed entries and first digests, read and
 encode exact bytes, then re-read included bytes and relevant entry metadata.
 Any difference returns `CONTENT.SOURCE_CHANGED` as `unavailable` and
 publishes no ContentSnapshot. Unsupported filesystem representations reject
-explicitly. ContentSnapshot identity binds only exact bytes, manifest, scope,
-exclusions, nesting, and capture-contract meaning. Metadata, parser, routing,
+explicitly. The Adapter discards both Git locator identities after constructing
+the canonical captured record. ContentSnapshot identity, payload, and
+inspection bind only exact included entries and bytes, scope, exclusions,
+and nesting under the source-neutral payload contract. Metadata, parser, routing,
 graph, policy-impact, coverage, result-projection, and implementation-release
 versions do not enter it.
 
@@ -258,17 +281,20 @@ the design does not create one object merely for every semantic noun.
 
 A StandardsAuthorityView is a reference-only composition manifest selecting
 one ContentSnapshot and the exact owner-local authority objects available to
-standards operations. It owns required-role selection and cross-reference
-coherence but contains no copied semantic payload, version bag, provider,
+standards operations. It owns stable role selection and content coherence but
+contains no operation-required-role policy, copied semantic payload, version bag, provider,
 authorization decision, or executable logic.
 
 Each domain computation returns an internal AuthorityBoundValue containing its
 semantic value and direct authority dependencies. The composing Engine or
 Analysis kernel traverses those exact stored dependencies to generate a
 RouteExecutionClosure, ReadExecutionClosure, RelatedExecutionClosure, or
-AnalysisExecutionClosure. Results bind the narrow execution closure, not the
-complete StandardsAuthorityView. An unrelated authority change may change the
-view handle while leaving an unaffected operation closure and result identity
+AnalysisExecutionClosure. The selected operation-family authority contract is
+a root of only that closure and supplies required roles plus cross-role
+coherence. Closure roots retain exact side, role, kind, and semantic identity.
+Results bind the narrow execution closure, not the complete
+StandardsAuthorityView. An unrelated authority change may change the view
+handle while leaving an unaffected operation closure and result identity
 unchanged.
 
 There is no `SnapshotVersions`, `NavigationVersions`,
@@ -279,11 +305,16 @@ algorithm, deletion tests, and mutation matrix are binding in
 
 Coverage views and analysis contexts retain their proven narrow semantic
 identity. They reference exact owner-local authority objects instead of
-repeating contract versions. Analysis states retain base/proposed
-StandardsAuthorityViews, one exact AnalysisExecutionClosure, dependency-valid
-accepted decisions, and directly inspectable child objects. Dormant-valid
-decisions remain stored; current requirements, obligations, reading plans,
-certificates, completion, and next operations remain deterministic projections.
+repeating contract versions. Analysis states retain one exact
+transition-closed AnalysisExecutionClosure, narrow context, dependency-valid
+fact observations and dispositions, and authored coverage attestations.
+Requirements, coverage views and requirements, certificates, and other
+generated children remain directly inspectable projections but are not repeated
+as state authority. Complete
+base/proposed StandardsAuthorityViews are preparation inputs only and do not
+enter state or result identity. Dormant-valid decisions remain stored; current
+requirements, obligations, reading plans, certificates, completion, and next
+operations remain deterministic projections.
 
 Provider and authorization authority is supplied explicitly by trusted
 transition Adapters and enters only an analysis execution closure when
@@ -411,8 +442,9 @@ Trusted bootstrap captures content, constructs owner-local authority objects,
 checks their composition, and returns a StandardsAuthorityViewHandle. A
 ContentSnapshotHandle remains inspectable but is insufficient for query or
 analysis. AnalysisRequest carries its base/proposed views and optional prior
-analysis handle. Results expose their exact ExecutionClosureHandle. Callers do
-not coordinate subordinate authorities or closures.
+analysis handle. Pending and complete results expose their analysis handle,
+narrow context, and exact ExecutionClosureHandle; they omit the complete input
+views. Callers do not coordinate subordinate authorities or closures.
 
 Submissions contain caller claims, not preconstructed authority objects. In
 particular, a coverage-attestation submission names the current requirement
@@ -516,6 +548,27 @@ execution closures retain exact replay authority without broad invalidation.
 Rejected because the closed A1b object vocabulary needs no public traversal,
 collection, arbitrary objects, mutable indexing, or remote storage.
 
+### Validate stored domain objects through Contracts
+
+Rejected because public wire shapes and owner-local semantic objects have
+different authority and change reasons. A direct dependency in either
+direction would make schema lifecycle govern persistence or persistence govern
+wire validation. Authority owns its small envelope proof; exact injected owner
+codecs own closed payload semantics.
+
+### Use one aggregate operation profile
+
+Rejected because changing one operation family's required roles would
+invalidate unrelated operations. Separate stored route, read, related, and
+analysis contracts preserve local ownership and remove ambient role policy.
+
+### Retain Git lineage or complete views in derived state
+
+Rejected because capture locators and unused composition members do not change
+the represented selected content or material analysis. Capture discards Git
+and Adapter observations; analysis retains narrow context and transition-closed
+side-qualified authority instead of complete input views.
+
 ### Discover relationship declarations from the filesystem or policy units
 
 Rejected because file presence and policy-unit membership do not own
@@ -545,9 +598,16 @@ Re-plan before implementation continues if:
   closed representation and executable owner;
 - an inspectable handle cannot be represented by the closed authority-object
   vocabulary or requires scanning, ambient state, or a mutable index;
+- Authority and Contracts require a dependency in either direction;
+- an admitted codec kind, payload contract, identity domain, dependency kind,
+  stable role, role-to-kind binding, operation contract, or required role must
+  change;
 - a StandardsAuthorityView must copy semantic payload or execute domain logic;
 - an execution closure cannot be derived from the same dependencies consumed
   by execution;
+- an analysis closure cannot retain the authority needed by the current
+  projection and every advertised valid next transition without a complete
+  input view or handwritten dependency list;
 - a semantic authority object lacks one coherent owner, lifecycle, change
   reason, compatibility promise, or deletion-test benefit;
 - storage-envelope, public-handle, result-projection, generator, build, or

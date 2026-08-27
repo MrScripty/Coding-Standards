@@ -95,13 +95,21 @@ repository-entrypoints = []
 | `standards-applicability` | `tools.standards_applicability.standards_applicability` | none | none | none |
 | `standards-identity` | `tools.standards_identity.standards_identity` | none | none | none |
 | `standards-contracts` | `tools.standards_contracts.standards_contracts` | none | none | `jsonschema==4.26.0`, `referencing==0.37.0` |
-| `standards-metadata` | `tools.standards_metadata.standards_metadata` | none | `standards-identity` | none |
-| `standards-authority` | `tools.standards_authority.standards_authority` | none | `standards-contracts`, `standards-identity` | none |
-| `standards-policy-impact` | `tools.standards_policy_impact.standards_policy_impact` | none | `repository-graph-engine`, `standards-applicability`, `standards-metadata` | none |
-| `standards-graph` | `tools.standards_graph.standards_graph` | none | `repository-graph-engine`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-analysis` | `tools.standards_analysis.standards_analysis` | none | `repository-graph-engine`, `standards-applicability`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
-| `standards-engine` | `tools.standards_engine.standards_engine` | none | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-authority`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-authority` | `tools.standards_authority.standards_authority` | none | `standards-identity` | none |
+| `standards-metadata` | `tools.standards_metadata.standards_metadata` | none | `standards-authority`, `standards-identity` | none |
+| `standards-policy-impact` | `tools.standards_policy_impact.standards_policy_impact` | none | `repository-graph-engine`, `standards-applicability`, `standards-authority`, `standards-identity`, `standards-metadata` | none |
+| `standards-graph` | `tools.standards_graph.standards_graph` | none | `repository-graph-engine`, `standards-authority`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-analysis` | `tools.standards_analysis.standards_analysis` | none | `repository-graph-engine`, `standards-applicability`, `standards-authority`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
+| `standards-engine` | `tools.standards_engine.standards_engine` | none | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-authority`, `standards-contracts`, `standards-graph`, `standards-identity`, `standards-metadata`, `standards-policy-impact` | none |
 | `standards-verifier` | `tools.standards_verifier.standards_verifier` | `tools/query_edges.py`, `tools/verify_git_reachability.py`, `tools/standards_verifier/verify.py`, `tools/standards_verifier/generate_inventory.py`, `tools/standards_verifier/generate_numeric_audit.py`, `tools/standards_verifier/generate_numeric_retirements.py` | `repository-graph-engine`, `standards-applicability`, `standards-analysis`, `standards-contracts`, `standards-graph`, `standards-metadata`, `standards-policy-impact` | none |
+
+Authority and Contracts deliberately have no dependency in either direction.
+Authority owns its small internal envelope smart constructor and receives owner
+codec sets through Engine composition. Contracts owns only public wire
+validation and generation. The domain Modules above declare Authority and
+Identity directly when their production paths construct authority-bound values
+and owner-scoped semantic IDs. Applicability and the repository-neutral Graph
+Engine remain free of repository authority mechanics.
 
 The cutover gate parses production Python with `ast`, derives direct imports,
 and requires exact equality with this manifest graph. For each cross-Module

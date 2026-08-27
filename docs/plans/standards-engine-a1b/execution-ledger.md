@@ -414,3 +414,41 @@
   fixture, A1, or A2 implementation changed. Lifecycle remains `Blocked`
   pending independent exact-tree review of C5 through the direct C5-R-T-S
   chain.
+
+## 2026-08-26 - Candidate C5 Admission Rejection And C6 Replan
+
+- Candidate C5 `4f69f9940b806ca602f44dab7aa00c1df4db8abd`, tree
+  `88f963e33240415e891182a7e3891db4386e87f3`, is `Rejected` and
+  `Superseded`. Independent design review found that its ContentSnapshot still
+  retained source Git identity, its AnalysisRoot and results retained complete
+  base/proposed views, and its analysis closure covered current projection but
+  not every advertised valid transition.
+- `Superseded`: C5's direct Authority-to-Contracts dependency. Authority now
+  owns only its small closed envelope proof. Authority and Contracts have no
+  dependency in either direction; explicitly injected owner codec sets own
+  semantic payload construction, validation, dependency extraction, identity,
+  and decoding.
+- `Superseded`: C5's ambient codec and required-role membership. C6 freezes the
+  exact owner/kind/payload/identity/dependency inventory, the stable
+  role-kind requirements and coherence-rule IDs within one separately stored
+  Engine-owned operation contract for each of route, read, related, and
+  analysis. Their union is derived evidence only. No aggregate operation
+  profile, separate role catalog, or discovery mechanism is admitted.
+- `Superseded`: C5's Git/manifest-specific canonical snapshot fields. Capture
+  Adapters validate source consistency, construct one source-neutral selected
+  content record, and discard commit, tree, Adapter, tracking, inclusion,
+  revision, and worktree observations. Locator-only changes cannot invalidate
+  semantic results.
+- `Superseded`: C5's complete-view analysis identity. AnalysisState stores
+  narrow context, dependency-valid decisions, and a role- and side-qualified
+  transition-closed ExecutionClosure. Complete accepted/proposed views remain
+  prepare inputs and are omitted from state and result projections.
+- The proposed v11 schema is revised only where required by those source-neutral
+  snapshot and material-analysis contracts. Its proposed SHA-256 is
+  `71f59fe47aa857f2692c8ba5569fb2890816888742d4416cc2c1021d40fae843`;
+  the operation/capability Interface remains byte-identical at
+  `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
+  No runtime, package manifest, policy unit, relationship, coverage source,
+  fixture, A1, or A2 implementation changed. Lifecycle remains `Blocked`
+  pending independent exact-tree review of C6 through the direct C6-R-T-S
+  chain.

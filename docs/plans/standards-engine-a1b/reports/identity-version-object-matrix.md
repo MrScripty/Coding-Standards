@@ -87,8 +87,10 @@ AuthorityObjectEnvelope v1
 Every public handle has `schema_version = 4`, one exact handle kind, and an ID
 whose prefix matches the stored object kind. `standards_authority.resolve`
 loads by semantic ID, verifies bytes and envelope, dispatches to the registered
-domain owner, requires the owner to recompute the same semantic identity, and
-verifies direct dependency kinds before returning the typed object. Envelope
+owner codec, requires the codec to recompute the same semantic identity, and
+verifies direct dependency kinds before returning the typed object. Codec sets
+are injected explicitly and must equal the closed inventory in
+[authority-object contracts](authority-object-contracts.md). Envelope
 format is a storage-decoding promise and does not define domain identity.
 Missing storage is `unavailable`, contradictory content is `invalid`, and a
 well-formed unsupported contract is `unsupported`.
@@ -97,11 +99,11 @@ well-formed unsupported contract is `unsupported`.
 
 | Public handle | Stored object kind | Payload contract | Required dependencies |
 | --- | --- | --- | --- |
-| `ContentSnapshotHandle` | `content-snapshot` | `content-snapshot.v1` | Capture authority, padded standard-Base64 entry bytes with exact digest/length, and nested content handles |
-| `StandardsAuthorityViewHandle` | `standards-authority-view` | `standards-authority-view.v1` | ContentSnapshot and exact role-to-semantic-authority references |
-| `ExecutionClosureHandle` | `execution-closure` | `execution-closure.v1` | Exact roots and their transitive stored dependencies |
+| `ContentSnapshotHandle` | `content-snapshot` | `content-snapshot.v1` | Exact scope/exclusion paths, source-neutral selected entries, padded standard-Base64 file bytes with exact digest/length, and nested content handles; no Git or Adapter locator |
+| `StandardsAuthorityViewHandle` | `standards-authority-view` | `standards-authority-view.v1` | ContentSnapshot, exactly one selected contract per operation, and exact role-to-semantic-authority references |
+| `ExecutionClosureHandle` | `execution-closure` | `execution-closure.v1` | Exact side- and role-qualified roots, including the selected operation contract, and their transitive stored dependencies |
 | `NavigationHandle` | `navigation-result` | `navigation-result.v1` | Normalized query, semantic result, and operation-specific ExecutionClosure |
-| `AnalysisHandle` | `analysis-root` | `analysis-root.v1` | Base/proposed views, AnalysisExecutionClosure, context, exact decision and coverage children |
+| `AnalysisHandle` | `analysis-root` | `analysis-root.v1` | Transition-closed AnalysisExecutionClosure, narrow context, dependency-valid fact observations and dispositions, and authored coverage attestations; complete views and derived requirements/certificates are excluded |
 | `PolicyHandle` | `policy-inspection` | `policy-inspection.v1` | Canonical policy identity, semantic projection, and material ExecutionClosure |
 | `RelationshipHandle` | `relationship-inspection` | `relationship-inspection.v1` | Compiled edge identity, semantic projection, and material ExecutionClosure |
 | `CertificateHandle` | `coverage-certificate` | `coverage-certificate.v1` | Coverage view, requirement, and attestation object handles |
@@ -135,7 +137,8 @@ NFC serializer and advance atomically:
 | Snapshot lifecycle identity | `snapshot:v3` | Replaced by content-only `content-snapshot.v1` object and handle v4 |
 | Standards authority composition | absent | `standards-authority-view.v1` object and handle v4 |
 | Material operation authority | implicit or copied version records | `execution-closure.v1` object and handle v4 |
-| Navigation lifecycle identity | `navigation:v3` | Replaced by `navigation-result.v1` authority object and handle v4 |
+| Operation-family role/coherence promise | implicit shared configuration | One `operation-authority-contract.v1` semantic object for each route, read, related, and analysis family |
+| Navigation lifecycle identity | `navigation:v3` | Replaced by `coding-standards:navigation-result:v1`, whose typed record includes the route/read/related discriminant, and handle v4 |
 | Analysis lifecycle identity | `analysis:v3` | Replaced by `analysis-root.v1` authority object and handle v4 |
 | Obligation | `obligation:v2` | `obligation:v3` |
 | Analysis context | `analysis-context:v1` | Replaced by `analysis-context.v1` authority object and handle v4 |
@@ -191,16 +194,16 @@ places the already-normalized value in a typed identity record.
 | Reading entry presentation order | `(minimum order_class, minimum order_rank within that class, target, review_scope_key)`. The first two values are routing/analysis presentation inputs and must be nonnegative integers. |
 | Fact requirement work | Requirement handle `(kind, schema_version, id)`; dependent program IDs are scalar-sorted. |
 | Obligation work | Obligation ID. Different records under one ID are invalid. |
-| Accepted fact observations | Requirement handle key; different observations for one requirement form separate successor branches and cannot coexist in one state. Stored observation handles are ordered by `(kind, schema_version, id)`. |
+| Accepted fact observations | Requirement semantic-reference key `(object_kind, semantic_id)`; different observations for one requirement form separate successor branches and cannot coexist in one state. Stored observation references use the same key. |
 | Accepted dispositions | `(obligation ID, decision_kind_rank)`, with decision rank `consumer`, `impact`. Different records under one key form separate successor branches and cannot coexist in one state. |
-| Coverage decisions | Coverage-requirement handle key; stored attestation and certificate handles use `(kind, schema_version, id)`. |
+| Coverage decisions | Coverage-requirement semantic-reference key `(object_kind, semantic_id)`; stored attestation references use the same key. Certificates are derived and not repeated in AnalysisState. |
 | `NextOperation` | `(operation_rank, request_kind_rank, optional target, optional obligation_id, optional requirement_id, optional view_handle, optional analysis_handle)`. Operation rank is `query`, `resolve`, `inspect`; query request rank is `route`, `read`, `related`; resolve request rank is `provide-fact`, `consumer-disposition`, `impact-disposition`, `coverage-attestation`; inspect has one request rank. |
 | Result changes | The underlying `ChangeDescriptor` key. Requirements and obligations use the work keys above; reading entries use their presentation key; next operations use `NextOperation` key. |
-| ContentSnapshot scopes, exclusions, and entries | Scope path, exclusion path, and entry path respectively. Nested handles use `(kind, schema_version, id)`. |
-| StandardsAuthorityView selections | Canonical role; unequal authority references under one role are invalid. |
-| ExecutionClosure references | `(object_kind, semantic_id)`; roots and transitive dependencies are sorted independently. |
+| ContentSnapshot scopes, exclusions, and entries | Scope path, exclusion path, and entry path respectively. Nested content uses `(object_kind, semantic_id)`. |
+| StandardsAuthorityView selections | Operation-contract selections use operation rank `route`, `read`, `related`, `analysis`; semantic-authority selections use canonical role. Unequal authority references under one operation or role are invalid. |
+| ExecutionClosure references | Roots use `(side, role, object_kind, semantic_id)`; transitive dependencies use `(object_kind, semantic_id)`. Roots and dependencies are sorted independently. |
 | Policy-unit structure | Aliases, predecessors, and successors are scalar-sorted canonical IDs; heading-path component order is authored; corpus records use canonical policy-unit ID. |
-| Authority-object sets | The exact member keys declared in `authority-object-contracts.md`; handle sets always use `(kind, schema_version, id)`. |
+| Authority-object sets | The exact member keys declared in `authority-object-contracts.md`; stored references use `(object_kind, semantic_id)`, while public-only handle sets use `(kind, schema_version, id)`. |
 
 Generic string-keyed map encoding still sorts keys to produce deterministic
 identity bytes, but that representation rule never decides domain equality.

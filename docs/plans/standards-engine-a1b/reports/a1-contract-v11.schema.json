@@ -49,10 +49,6 @@
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
     },
-    "GitObjectId": {
-      "type": "string",
-      "pattern": "^[0-9a-f]{40,64}$"
-    },
     "ContentSnapshotId": {
       "type": "string",
       "pattern": "^content-snapshot:sha256:[0-9a-f]{64}$"
@@ -2227,12 +2223,34 @@
       },
       "additionalProperties": false
     },
+    "OperationAuthoritySelection": {
+      "type": "object",
+      "required": [
+        "operation",
+        "authority"
+      ],
+      "properties": {
+        "operation": {
+          "enum": [
+            "route",
+            "read",
+            "related",
+            "analysis"
+          ]
+        },
+        "authority": {
+          "$ref": "#/$defs/AuthorityObjectReference"
+        }
+      },
+      "additionalProperties": false
+    },
     "StandardsAuthorityView": {
       "type": "object",
       "required": [
         "kind",
         "handle",
         "content",
+        "operation_contracts",
         "authorities"
       ],
       "properties": {
@@ -2244,6 +2262,14 @@
         },
         "content": {
           "$ref": "#/$defs/ContentSnapshotHandle"
+        },
+        "operation_contracts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/OperationAuthoritySelection"
+          },
+          "minItems": 1
         },
         "authorities": {
           "type": "array",
@@ -2284,7 +2310,7 @@
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "$ref": "#/$defs/AuthorityObjectReference"
+            "$ref": "#/$defs/ExecutionAuthorityRoot"
           },
           "minItems": 1
         },
@@ -2295,6 +2321,31 @@
             "$ref": "#/$defs/AuthorityObjectReference"
           },
           "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExecutionAuthorityRoot": {
+      "type": "object",
+      "required": [
+        "side",
+        "role",
+        "authority"
+      ],
+      "properties": {
+        "side": {
+          "enum": [
+            "current",
+            "accepted",
+            "proposed",
+            "transition"
+          ]
+        },
+        "role": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "authority": {
+          "$ref": "#/$defs/AuthorityObjectReference"
         }
       },
       "additionalProperties": false
@@ -3182,17 +3233,11 @@
       "required": [
         "kind",
         "handle",
-        "base_view",
-        "proposed_view",
         "context",
         "authority",
-        "fact_requirements",
         "fact_observations",
         "dispositions",
-        "coverage_views",
-        "coverage_requirements",
-        "coverage_attestations",
-        "coverage_certificates"
+        "coverage_attestations"
       ],
       "properties": {
         "kind": {
@@ -3201,21 +3246,8 @@
         "handle": {
           "$ref": "#/$defs/AnalysisHandle"
         },
-        "base_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
-        },
-        "proposed_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
-        },
         "context": {
           "$ref": "#/$defs/AnalysisContext"
-        },
-        "fact_requirements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/FactRequirement"
-          },
-          "uniqueItems": true
         },
         "fact_observations": {
           "type": "array",
@@ -3231,31 +3263,10 @@
           },
           "uniqueItems": true
         },
-        "coverage_views": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/CoverageAuthorityView"
-          },
-          "uniqueItems": true
-        },
-        "coverage_requirements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/CoverageAuditRequirement"
-          },
-          "uniqueItems": true
-        },
         "coverage_attestations": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/CoverageAttestation"
-          },
-          "uniqueItems": true
-        },
-        "coverage_certificates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ConsumerCoverageCertificate"
           },
           "uniqueItems": true
         },
@@ -3342,8 +3353,6 @@
       "required": [
         "kind",
         "handle",
-        "base_view",
-        "proposed_view",
         "status",
         "context",
         "changes",
@@ -3361,12 +3370,6 @@
         },
         "handle": {
           "$ref": "#/$defs/AnalysisHandle"
-        },
-        "base_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
-        },
-        "proposed_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         },
         "status": {
           "const": "complete"
@@ -3473,124 +3476,145 @@
       "additionalProperties": false
     },
     "ContentSnapshotEntry": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ContentSnapshotFileEntry"
+        },
+        {
+          "$ref": "#/$defs/ContentSnapshotDirectoryEntry"
+        },
+        {
+          "$ref": "#/$defs/ContentSnapshotSymlinkEntry"
+        },
+        {
+          "$ref": "#/$defs/ContentSnapshotNestedContentEntry"
+        }
+      ]
+    },
+    "ContentSnapshotFileEntry": {
       "type": "object",
       "required": [
         "path",
         "entry_type",
         "mode",
-        "tracking",
-        "inclusion",
-        "reason"
+        "content_digest",
+        "content_base64",
+        "byte_length"
       ],
       "properties": {
         "path": {
           "$ref": "#/$defs/NonEmptyString"
         },
         "entry_type": {
-          "enum": [
-            "file",
-            "directory",
-            "symlink",
-            "gitlink",
-            "nested-repository"
-          ]
+          "const": "file"
         },
         "mode": {
           "type": "integer",
           "minimum": 0
         },
-        "tracking": {
-          "enum": [
-            "tracked",
-            "untracked",
-            "not-applicable"
-          ]
-        },
         "content_digest": {
           "$ref": "#/$defs/Digest"
         },
-        "symlink_target": {
+        "content_base64": {
           "type": "string"
         },
-        "symlink_resolution": {
-          "enum": [
-            "not-followed",
-            "followed-contained",
-            "inert-escape"
-          ]
-        },
-        "recorded_gitlink": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "checked_out_revision": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "nested_identity": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "nested_content": {
-          "$ref": "#/$defs/ContentSnapshotHandle"
-        },
-        "worktree_state": {
-          "enum": [
-            "clean",
-            "dirty",
-            "diverged",
-            "dirty-and-diverged"
-          ]
-        },
-        "inclusion": {
-          "enum": [
-            "included",
-            "excluded"
-          ]
-        },
-        "reason": {
-          "$ref": "#/$defs/NonEmptyString"
+        "byte_length": {
+          "type": "integer",
+          "minimum": 0
         }
       },
       "additionalProperties": false
     },
-    "ContentSnapshotExclusion": {
+    "ContentSnapshotDirectoryEntry": {
       "type": "object",
       "required": [
         "path",
-        "reason"
+        "entry_type",
+        "mode"
       ],
       "properties": {
         "path": {
           "$ref": "#/$defs/NonEmptyString"
         },
-        "reason": {
-          "$ref": "#/$defs/NonEmptyString"
+        "entry_type": {
+          "const": "directory"
+        },
+        "mode": {
+          "type": "integer",
+          "minimum": 0
         }
       },
       "additionalProperties": false
     },
-    "GitContentSnapshotInspection": {
+    "ContentSnapshotSymlinkEntry": {
+      "type": "object",
+      "required": [
+        "path",
+        "entry_type",
+        "mode",
+        "symlink_target"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "entry_type": {
+          "const": "symlink"
+        },
+        "mode": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "symlink_target": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ContentSnapshotNestedContentEntry": {
+      "type": "object",
+      "required": [
+        "path",
+        "entry_type",
+        "mode",
+        "nested_content"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "entry_type": {
+          "const": "nested-content"
+        },
+        "mode": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nested_content": {
+          "$ref": "#/$defs/ContentSnapshotHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ContentSnapshot": {
       "type": "object",
       "required": [
         "kind",
         "handle",
-        "tree",
-        "commit",
+        "payload_contract",
         "scope",
         "exclusions",
-        "submodules",
-        "capture_authority"
+        "entries"
       ],
       "properties": {
         "kind": {
-          "const": "git-content-snapshot-inspection"
+          "const": "content-snapshot"
         },
         "handle": {
           "$ref": "#/$defs/ContentSnapshotHandle"
         },
-        "tree": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "commit": {
-          "$ref": "#/$defs/GitObjectId"
+        "payload_contract": {
+          "const": "content-snapshot.v1"
         },
         "scope": {
           "type": "array",
@@ -3602,48 +3626,6 @@
         },
         "exclusions": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/ContentSnapshotExclusion"
-          }
-        },
-        "submodules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ContentSnapshotEntry"
-          }
-        },
-        "capture_authority": {
-          "$ref": "#/$defs/AuthorityObjectReference"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ManifestContentSnapshotInspection": {
-      "type": "object",
-      "required": [
-        "kind",
-        "handle",
-        "source_kind",
-        "scope",
-        "entries",
-        "capture_authority"
-      ],
-      "properties": {
-        "kind": {
-          "const": "manifest-content-snapshot-inspection"
-        },
-        "handle": {
-          "$ref": "#/$defs/ContentSnapshotHandle"
-        },
-        "source_kind": {
-          "enum": [
-            "dirty-git",
-            "non-git"
-          ]
-        },
-        "scope": {
-          "type": "array",
-          "minItems": 1,
           "uniqueItems": true,
           "items": {
             "$ref": "#/$defs/NonEmptyString"
@@ -3654,9 +3636,6 @@
           "items": {
             "$ref": "#/$defs/ContentSnapshotEntry"
           }
-        },
-        "capture_authority": {
-          "$ref": "#/$defs/AuthorityObjectReference"
         }
       },
       "additionalProperties": false
@@ -3702,14 +3681,7 @@
           "const": "content-snapshot-inspection-result"
         },
         "content_snapshot": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/GitContentSnapshotInspection"
-            },
-            {
-              "$ref": "#/$defs/ManifestContentSnapshotInspection"
-            }
-          ]
+          "$ref": "#/$defs/ContentSnapshot"
         }
       },
       "additionalProperties": false

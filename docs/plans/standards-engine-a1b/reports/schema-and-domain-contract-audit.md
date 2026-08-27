@@ -125,7 +125,7 @@ of them from the JSON Schema.
 
 The complete proposed serialized algebra is owned by
 [`a1-contract-v11.schema.json`](a1-contract-v11.schema.json), SHA-256
-`d5362c1c8d2a6ea2db469065b2c29cc293e61d2e637ec5b71045c8f54139c3c7`.
+`71f59fe47aa857f2692c8ba5569fb2890816888742d4416cc2c1021d40fae843`.
 The complete proposed operation/capability Interface is owned by
 [`a1-interface-v11.toml`](a1-interface-v11.toml), SHA-256
 `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
@@ -178,6 +178,26 @@ The schema contains no `VersionMap`, `SnapshotVersions`,
 accept StandardsAuthorityViews rather than content snapshots. Navigation and
 analysis results expose an ExecutionClosure handle; public projection and
 handle-wire versions do not enter semantic result identity.
+
+`ContentSnapshot` inspection exposes only exact scope/exclusion paths and
+source-neutral file, directory, symlink, or nested-content entries. Git commit
+and tree OIDs, Adapter kind, tracking/inclusion explanations, checked-out
+revision, and worktree state are capture observations and are absent from the
+public value. `ExecutionClosure` roots retain side and role. `PendingResult`
+and `CompleteResult` expose narrow analysis context plus closure and analysis
+handles, not complete base/proposed authority views. The JSON Schema owns these
+wire shapes; exact codec membership, role-to-kind bindings, operation
+requirements, stored-object semantics, and dependency extraction remain with
+their domain owners. `StandardsAuthorityView` serializes operation-contract
+selections separately from semantic-role selections; each operation contract,
+not another schema/profile, owns its required role-kind pairs.
+
+`AnalysisState` stores only narrow context, transition-closed authority,
+dependency-valid observations and dispositions, and authored coverage
+attestations. Current fact requirements, coverage views and requirements,
+certificates, work projections, and completion are derived. They may be stored
+as directly inspectable immutable projections but are not repeated as state
+authority.
 
 V11 changes `FactRequirement` to the semantic object: it excludes `prompt`
 and `dependent_programs`. New `FactRequirementWork` contains

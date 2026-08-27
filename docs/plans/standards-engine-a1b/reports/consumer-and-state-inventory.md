@@ -24,10 +24,11 @@ cardinality.
 | Checked-in public examples and identity fixtures | Contract validation, documentation, package tests, and identity-domain regressions | Repository-controlled | Replace all v10 examples and v1 identity expectations atomically; add the missing semantic-consumer relationships |
 | Generated Python request/result algebra | Standards Engine facade, renderer, tools adapter, and package tests | Repository-controlled | Regenerate complete v11 algebra; no internal domain type crosses facade |
 | Identity serialization public export | Metadata, Analysis, Policy Impact, Standards Graph, Standards Engine contract tooling, and Verifier tests | Repository-controlled | Replace recursive NFC encoding with codepoint-preserving identity encoding v2; move semantic ordering, deduplication, and normalization to owning domains |
-| Content capture and handles | Analysis snapshots, Standards Engine composition, navigation and cold-process tests | Repository-controlled | Move Git/manifest capture and storage to `standards_authority`; make ContentSnapshot content-only; handle v4 |
+| Content capture and handles | Analysis snapshots, Standards Engine composition, navigation and cold-process tests | Repository-controlled | Move Git/manifest capture and storage to `standards_authority`; make ContentSnapshot source-neutral and content-only; discard source locators and Adapter observations; handle v4 |
 | Standards authority composition | Standards Engine bootstrap, query, analysis preparation, navigation and cold-process tests | Repository-controlled composition authority | Add one reference-only StandardsAuthorityView; callers supply one view while results bind narrower execution closure |
-| Material execution closure | Routing, reading, related navigation, policy/relationship inspection, and analysis projection | Repository-controlled generated evidence | Derive exact transitive authority dependencies from AuthorityBoundValues; prohibit handwritten version/dependency bags |
-| Analysis-state stores and handles | Standards Engine facade/tool adapter and analysis/cold-process tests | Repository-controlled | Replace with directly stored analysis root; handle v4 |
+| Operation authority contracts | Standards Engine composition and route/read/related/analysis execution | Repository-controlled semantic authority | Store one independently invalidating required-role/coherence contract per operation family; prohibit one aggregate operation profile |
+| Material execution closure | Routing, reading, related navigation, policy/relationship inspection, and analysis projection | Repository-controlled generated evidence | Derive exact side- and role-qualified transitive authority dependencies from AuthorityBoundValues and the selected operation contract; prohibit handwritten version/dependency bags |
+| Analysis-state stores and handles | Standards Engine facade/tool adapter and analysis/cold-process tests | Repository-controlled | Replace with directly stored material analysis root; omit complete base/proposed views; handle v4 |
 | Navigation handle cache/inspection | Standards Engine navigation and inspection tests | Repository-controlled | Store navigation result directly; handle v4 |
 | Child artifact inspection | Context, requirement, observation, coverage, certificate, policy, and relationship inspection tests | Repository-controlled | Store every advertised child as a direct typed authority object; remove owner maps, scans, and cache authority |
 | Supplemental implementation node catalog | Standards graph composition, policy-impact compilation, analysis coverage horizon, and verifier | Repository-controlled semantic authority | Replace created/retired implementation artifacts atomically and preserve stable retained identities |
@@ -68,13 +69,12 @@ A child artifact never requires scanning another root to resolve its handle.
 
 ### Content snapshot
 
-The replacement closes only over captured repository content and capture
-semantics:
+The replacement closes only over source-neutral selected repository content:
 
 - declared scope and exclusions;
-- sorted entry paths, types, modes, tracking state, and inclusion reasons;
-- symlink targets and inert resolution state;
-- nested repository or gitlink identities and nested content handles; and
+- sorted entry paths, types, and modes;
+- symlink targets;
+- nested content handles; and
 - every included source byte required by later semantic compilation.
 
 Arbitrary file bytes use the canonical padded standard-Base64 representation
@@ -82,8 +82,11 @@ owned by `content-snapshot.v1`, with decoded SHA-256 and length bound beside the
 representation. No text decoding or separate blob-store identity is implied.
 Parser, graph, policy, applicability, provider, authorization, and operation
 contracts are excluded because they do not describe captured content.
-Repository paths, worktree bytes, Git object availability, and process caches
-are capture inputs only. They are not replay authority.
+Repository paths, Adapter kind, Git commit/tree OIDs, recorded gitlinks,
+tracking/inclusion explanations, checked-out revisions, worktree state, Git
+object availability, and process caches are capture inputs or observations
+only. Adapters validate and discard them after constructing the canonical
+record; they are not replay authority.
 
 ### Standards authority view
 
@@ -96,23 +99,33 @@ provider, authorization, or contract Modules.
 The view may include more authority than one operation uses. Its identity does
 not become the identity of every derived result.
 
+Each separately stored Engine-owned operation contract for route, read,
+related, or analysis owns that family's exact role-kind requirements and
+cross-role coherence-rule IDs. The union is derived evidence only; there is no
+aggregate operation or separate role profile.
+
 ### Execution closure
 
 Each domain Module returns an immutable `AuthorityBoundValue` containing its
 value and exact direct authority references. The composing kernel traverses
 those stored references, verifies acyclicity and referential integrity, and
-materializes one sorted `ExecutionClosure`. Callers and handwritten version
+materializes one sorted `ExecutionClosure` whose roots retain side and role.
+The selected operation contract is a root. Analysis closure includes authority
+needed by the current projection and every advertised valid next transition,
+including dormant conditional applicability. Callers and handwritten version
 maps do not declare closure membership.
 
 ### Analysis root
 
-The replacement stores exact base and proposed authority-view handles,
-normalized changes and semantic proposals, dependency-valid observations and
-dispositions, coverage attestations and decisions, evidence and authorization
-records, and the material analysis execution closure. It derives requirements,
-obligations, traces, reading plans, certificates, results, and next operations.
-Provider and authorization authorities participate in state transitions only;
-they are not ambient requirements for replaying an existing state.
+The replacement stores narrow context, normalized changes and semantic
+proposals, dependency-valid observations and dispositions, coverage
+attestations and decisions, evidence and authorization records, and the
+transition-closed material analysis execution closure. Complete base/proposed
+authority views are prepare inputs only and never state or result fields. The
+state derives requirements, obligations, traces, reading plans, certificates,
+results, and next operations. Provider and authorization authorities
+participate in state transitions only; they are not ambient requirements for
+replaying an existing state.
 
 ### Navigation root
 
@@ -157,9 +170,10 @@ closure. Other durable filesystem families are unsupported in A1b.
    facade models.
 3. Every handle resolves one direct typed object through
    `standards_authority`; the repository owns envelope integrity and direct
-   lookup while the registered domain Module owns semantic identity and
-   decoding. No owner lookup table, store enumeration, root scan, or cache
-   index is permitted.
+   lookup while explicitly injected owner codec sets own semantic construction,
+   identity, dependency extraction, and decoding. Authority and Contracts do
+   not depend on each other. No owner lookup table, discovery, store
+   enumeration, root scan, or cache index is permitted.
 4. Every old validator, decoder, serializer import, snapshot compiler,
    analysis store, version bag, and ambient authority-completion path is
    deleted in the same accepted cutover.
@@ -180,9 +194,9 @@ closure. Other durable filesystem families are unsupported in A1b.
 10. Repository entrypoints import owner functionality only through the owner's
     canonical manifest root and execute under safe-path isolation; own-package
     private-import permission applies only beneath the package root.
-11. Execution closures are generated by traversing the direct dependencies of
-    `AuthorityBoundValue` results. A caller-supplied or handwritten closure is
-    invalid.
+11. Execution closures are generated by traversing the selected operation
+    contract and direct dependencies of `AuthorityBoundValue` results. Roots
+    retain side and role. A caller-supplied or handwritten closure is invalid.
 
 ## Required Evidence
 
@@ -200,8 +214,9 @@ closure. Other durable filesystem families are unsupported in A1b.
   execution closure; excluded-authority mutation leaves unrelated operation
   identity unchanged.
 - Structural closure tests proving every consumed dependency is present, every
-  unused view member is absent, ordering is deterministic, cycles reject, and
-  no handwritten version/dependency list participates.
+  unused view member is absent, every advertised analysis transition remains
+  replayable, ordering is deterministic, cycles reject, and no handwritten
+  version/dependency list participates.
 - Direct cold inspection for every advertised handle variant.
 - Identity fixtures proving codepoint preservation and domain-owned semantic
   ordering, normalization, and deduplication.

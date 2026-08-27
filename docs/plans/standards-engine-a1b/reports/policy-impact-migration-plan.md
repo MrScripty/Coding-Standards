@@ -38,9 +38,9 @@ relationship, disposition, and coverage authority.
 | `tools/standards_identity/pyproject.toml` | Add as the stdlib-only identity package contract |
 | `tools/standards_identity/standards_identity/__init__.py` | Add as the narrow encoding/hashing public Interface |
 | `tools/standards_identity/README.md` | Add as the identity encoding and hashing Interface guide |
-| `tools/standards_authority/pyproject.toml` | Add as the Identity- and Contracts-backed authority package contract |
-| `tools/standards_authority/standards_authority/__init__.py` | Add as the narrow content-capture, envelope-integrity, and direct-lookup public Interface; domain Modules retain semantic identity and decoding |
-| `tools/standards_authority/README.md` | Add as the content capture, generic repository, publication, registration, and recovery Interface guide |
+| `tools/standards_authority/pyproject.toml` | Add as the Identity-backed authority package contract; Authority and Contracts have no dependency in either direction |
+| `tools/standards_authority/standards_authority/__init__.py` | Add as the narrow source-neutral content-capture, envelope-integrity, direct-lookup, explicit-codec-injection, and closure public Interface; domain codec sets retain semantic construction, identity, dependency extraction, and decoding |
+| `tools/standards_authority/README.md` | Add as the content capture, generic repository, publication, codec injection, and recovery Interface guide |
 | `evaluation/standards-effectiveness/policy-units/dependencies.toml` | Retain and add one reviewed revision-1 unit for the exact `Requirement And Ownership` heading |
 | `evaluation/standards-effectiveness/policy-units/cross-platform.toml` | Add one reviewed revision-1 unit for the exact `Filesystem Paths` heading |
 | `evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml` | Add source-owned Cross-Platform implementation, package, fixture, and suite relationships |
@@ -54,16 +54,16 @@ relationship, disposition, and coverage authority.
 | `evaluation/standards-effectiveness/policy-coverage/attestations/topic.security.toml` | Add reviewed attestations for the final frozen Security coverage requirements |
 | `tools/standards_engine/README.md` | Retain and update the public v11 facade and unsupported-version behavior |
 | `tools/graph_engine/graph_engine/__init__.py` | Retain; expose every Graph Engine symbol required by another Module, including the contained-path contract |
-| `tools/standards_engine/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13` and declare every directly imported internal package, including Contracts and Authority |
+| `tools/standards_engine/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13` and declare every directly imported internal package, including Contracts, Authority, and Identity |
 | `tools/standards_applicability/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; remain stdlib-only |
 | `tools/standards_applicability/standards_applicability/__init__.py` | Retain as the literal public export authority |
-| `tools/standards_metadata/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Identity directly |
+| `tools/standards_metadata/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Authority and Identity directly |
 | `tools/graph_engine/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; remain stdlib-only |
-| `tools/standards_policy_impact/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, and Metadata directly |
-| `tools/standards_policy_impact/standards_policy_impact/__init__.py` | Retain as the literal public export authority |
-| `tools/standards_graph/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Metadata, and Policy Impact directly |
-| `tools/standards_graph/standards_graph/__init__.py` | Retain as the literal public export authority |
-| `tools/standards_analysis/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, Identity, Metadata, and Policy Impact directly |
+| `tools/standards_policy_impact/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, Authority, Identity, and Metadata directly |
+| `tools/standards_policy_impact/standards_policy_impact/__init__.py` | Retain as the literal public export authority; add its exact immutable object codec set |
+| `tools/standards_graph/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Authority, Identity, Metadata, and Policy Impact directly |
+| `tools/standards_graph/standards_graph/__init__.py` | Retain as the literal public export authority; add its exact immutable object codec set |
+| `tools/standards_analysis/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare Graph Engine, Applicability, Authority, Identity, Metadata, and Policy Impact directly |
 | `tools/standards_verifier/pyproject.toml` | Retain; restrict A1b to `>=3.11,<3.13`; declare every directly imported Engine Module, including Contracts |
 | `tools/standards_verifier/standards_verifier/__init__.py` | Retain and replace the version-only root with a literal public export contract for `repository_graph_main`, `git_reachability_main`, `verifier_main`, `generated_artifacts_main`, `numeric_audit_main`, and `numeric_retirements_main` |
 | `tools/standards_verifier/standards_verifier/entrypoints.py` | Add as the sole owner of repository-entrypoint parsing, diagnostics, default-root injection, and domain dispatch |
@@ -81,22 +81,22 @@ relationship, disposition, and coverage authority.
 | `tools/standards_engine/contracts/generate_contract.py` | Retire; replace with `tools/standards_contracts/standards_contracts/projection.py` |
 | `tools/standards_engine/contracts/validate_contracts.py` | Retire; replace with `tools/standards_contracts/standards_contracts/compiler.py` |
 | `tools/standards_engine/standards_engine/_generated_contract.py` | Retain and regenerate |
-| `tools/standards_engine/standards_engine/__init__.py` | Retain and update |
+| `tools/standards_engine/standards_engine/__init__.py` | Retain and update; export the Engine codec set and generated public facade algebra |
 | `tools/standards_engine/standards_engine/tools.py` | Retain and update |
-| `tools/standards_engine/standards_engine/engine.py` | Retain; compose reference-only StandardsAuthorityViews and mechanically derive operation ExecutionClosures from owner-produced AuthorityBoundValues |
+| `tools/standards_engine/standards_engine/engine.py` | Retain; inject exact owner codec sets, compose reference-only StandardsAuthorityViews, store separate operation-authority contracts, and mechanically derive side- and role-qualified operation ExecutionClosures from owner-produced AuthorityBoundValues |
 | `tools/standards_engine/standards_engine/rendering.py` | Retain; render the exhaustive generated v11 result algebra, including `FactRequirementWork` |
 | `tools/standards_engine/standards_engine/model.py` | Retire; it is only a compatibility re-export over the generated algebra |
 | `tools/standards_metadata/standards_metadata/serialization.py` | Retire; replace with `tools/standards_identity/standards_identity/encoding.py` |
-| `tools/standards_metadata/standards_metadata/__init__.py` | Retain; remove retired serialization exports and export only Metadata-owned contracts |
+| `tools/standards_metadata/standards_metadata/__init__.py` | Retain; remove retired serialization exports and export only Metadata-owned contracts plus its exact immutable object codec set |
 | `tools/standards_analysis/standards_analysis/snapshots.py` | Retire; replace capture with `tools/standards_authority/standards_authority/capture.py` and storage with `repository.py` |
-| `tools/standards_analysis/standards_analysis/__init__.py` | Retain; remove retired serializer/snapshot exports and expose only Analysis-owned types and transitions |
+| `tools/standards_analysis/standards_analysis/__init__.py` | Retain; remove retired serializer/snapshot exports and expose only Analysis-owned types, transitions, and its exact immutable object codec set |
 | `tools/standards_analysis/standards_analysis/resolution.py` | Retain pure analysis transition behavior and update dependencies |
 | `tools/standards_analysis/standards_analysis/results.py` | Retain pure domain projection and update dependencies |
 | none | Add `tools/standards_contracts/standards_contracts/compiler.py` |
 | none | Add `tools/standards_contracts/standards_contracts/projection.py` |
 | none | Add `tools/standards_identity/standards_identity/encoding.py` |
-| none | Add `tools/standards_authority/standards_authority/repository.py` for generic envelope integrity, registered owner dispatch, and direct lookup |
-| none | Add `tools/standards_authority/standards_authority/capture.py` for content-only snapshots |
+| none | Add `tools/standards_authority/standards_authority/repository.py` for generic envelope integrity, explicit codec dispatch, and direct lookup |
+| none | Add `tools/standards_authority/standards_authority/capture.py` for source-neutral content-only snapshots |
 
 The listed Engine Module manifests form one exact source-tree dependency
 closure. They are not independently published artifacts in A1b, so the plan
@@ -104,8 +104,11 @@ does not invent a wheel-build backend or claim a local distribution-install
 contract. `standards_identity`, `standards_applicability`, and Graph Engine are
 stdlib-only. `standards_contracts` declares exact direct external requirements
 for `jsonschema` and `referencing`; its lock closes transitives.
-`standards_authority` declares Contracts and Identity and delegates embedded
-v11 definition validation to Contracts. Every manifest also owns one canonical
+`standards_authority` declares Identity only and owns its closed internal
+envelope proof. `standards_contracts` and `standards_authority` have no
+dependency in either direction. Domain Modules that persist objects declare
+Authority and export the exact codec sets admitted in
+`authority-object-contracts.md`. Every manifest also owns one canonical
 source-tree public import root and exact repository entrypoint set. Every root
 owns exported symbols through the closed statically resolvable `__all__`
 profile. Every other manifest declares exactly the internal packages imported
@@ -213,10 +216,10 @@ suite registration.
 | `topic.contracts.generated-semantic-conformance` | Replace `generate_contract.py`; retain Router, profile, Build, Tooling, prompts, generated algebra, facade, tool adapter, fixture, and suite | Add `a1-interface.toml`, compiler, and projection; projection replaces the old generator edge |
 | `topic.contracts.schema-dialect-and-vocabulary` | Retain profile, Dependencies, schema, fixture, and suite; replace generator and validator | Compiler replaces validator; compiler plus projection replace the old generator relationship |
 | `topic.contracts.identity-versus-instance-equality` | Retain Applicability, reproduction report, and suite; retire metadata serializer, local validator, generated-validator meaning, and model intermediary | Add identity encoder, contract compiler, policy-unit structure owner, and all typed Analysis identity/order consumers listed above |
-| `topic.architecture.authority-scope-admission` | Retain the accepted profile, planning, implementation, schema, generator, generated model, facade, fixture, and suite relationships | Add StandardsAuthorityView composition, owner registration/dispatch, AuthorityBoundValue production, and the execution-closure audit; the view references semantic authorities without acquiring them |
+| `topic.architecture.authority-scope-admission` | Retain the accepted profile, planning, implementation, schema, generator, generated model, facade, fixture, and suite relationships | Add StandardsAuthorityView composition, exact owner codec injection, stable roles, separate operation-authority contracts, AuthorityBoundValue production, and the execution-closure audit; the view references semantic authorities without acquiring them |
 | `topic.contracts.declaration-and-semantic-authority` | Retain the accepted declaration/executable/domain-owner relationships | Add domain-owned semantic object constructors and AuthorityBoundValue projections; the generic repository validates envelopes but does not own domain semantics |
-| `topic.contracts.version-scope-and-invalidation` | Retain the accepted version-scope consumers; replace A1 snapshot/resolution invalidation behavior | Add ContentSnapshot, StandardsAuthorityView, ExecutionClosure, navigation and analysis identities; remove copied version bags and bind only material semantic dependencies |
-| `topic.architecture.immutable-authority-closure` | Retain engine, analysis transition/result, fixture, suite, and Persistence; replace snapshot compiler | Add content capture, generic authority repository, registered domain dispatch, StandardsAuthorityView, structural ExecutionClosure derivation, and direct-object cold-reconstruction suite |
+| `topic.contracts.version-scope-and-invalidation` | Retain the accepted version-scope consumers; replace A1 snapshot/resolution invalidation behavior | Add source-neutral ContentSnapshot, StandardsAuthorityView, separate operation contracts, transition-closed ExecutionClosure, and material navigation/analysis identities; remove copied version bags, complete views, and locator invalidation |
+| `topic.architecture.immutable-authority-closure` | Retain engine, analysis transition/result, fixture, suite, and Persistence; replace snapshot compiler | Add source-neutral content capture, generic authority repository, explicit owner codec injection, StandardsAuthorityView, structural side/role closure derivation, and direct-object cold-reconstruction suite |
 | `topic.dependencies.implementation-versus-dependency` | Retain Router, profile, prompts, fixture, and suite | Add contract package manifest, exact lock, compiler, and dependency provenance report |
 | `topic.dependencies.requirement-and-ownership` | New projection of the existing `Requirement And Ownership` heading at semantic revision 1 | Add every catalog-listed Engine Module manifest and public root, the Verifier-owned repository entrypoints and adapter module, package-contract projection/check/test, and registered public-cutover fixtures and suite |
 | `profile.boundary.generated-contract.semantic-closure` | Retain Contracts, Verification, Build, Dependencies, schema, generated algebra, tool adapter, fixture, and suite; replace generator | Add interface contract, compiler, and projection; projection replaces the generator edge |
@@ -266,16 +269,16 @@ new relationships:
 | same | `tools/standards_engine/standards_engine/_generated_contract.py` | correct | generated models retain shape only; contract compiler owns validation |
 | same | `tools/standards_engine/standards_engine/model.py` | retire/split | generated handle shapes, authority repository, and domain identity constructors |
 | `topic.architecture.immutable-authority-closure` | `tools/standards_analysis/standards_analysis/snapshots.py` | replace/split | authority capture and repository |
-| `topic.architecture.authority-scope-admission` | no current edge for StandardsAuthorityView composition or execution-closure derivation | add missing consumers | Engine composition, domain owner registration, AuthorityBoundValue producers, and the closure audit |
-| `topic.contracts.declaration-and-semantic-authority` | no current edge for owner-local authority decoding | add missing consumers | registered domain constructors and projections; generic repository remains envelope-only |
-| `topic.contracts.version-scope-and-invalidation` | A1 schema, generator, generated model, facade, snapshot, and resolution use umbrella interface/component versions | correct/split | content capture identity, authority-view selection identity, structurally derived operation closure, and owner-local navigation/analysis identity |
-| `topic.architecture.immutable-authority-closure` | no current edge for reference-only view and structural dependency closure | add missing consumers | StandardsAuthorityView, ExecutionClosure, owner dispatch, and mutation/cold-process verification |
+| `topic.architecture.authority-scope-admission` | no current edge for StandardsAuthorityView composition or execution-closure derivation | add missing consumers | Engine composition, exact codec injection, stable roles, separate operation-authority contracts, AuthorityBoundValue producers, and the closure audit |
+| `topic.contracts.declaration-and-semantic-authority` | no current edge for owner-local authority decoding | add missing consumers | domain constructors, exact codec sets, and projections; generic repository remains envelope-only and independent of public Contracts |
+| `topic.contracts.version-scope-and-invalidation` | A1 schema, generator, generated model, facade, snapshot, and resolution use umbrella interface/component versions | correct/split | source-neutral content identity, authority-view selection identity, per-operation role/coherence identity, structurally derived transition closure, and owner-local material navigation/analysis identity |
+| `topic.architecture.immutable-authority-closure` | no current edge for reference-only view and structural dependency closure | add missing consumers | StandardsAuthorityView, transition-closed ExecutionClosure, explicit codec dispatch, and mutation/cold-process verification |
 | `profile.boundary.generated-contract.semantic-closure` | `tools/standards_engine/contracts/generate_contract.py` | replace/split | interface contract, contract compiler, and projection compiler |
 | same | no current edge for `contracts/generated/agent-tools.json` | add missing consumer | generated agent-tool projection |
 | same | no current edge for `contracts/examples/a1-examples.json` | add missing consumer | public serialized example corpus |
 | `topic.contracts.identity-versus-instance-equality` | no current edge for `contracts/identity-fixtures.json` | add missing consumer | identity v2 and domain-version fixture authority |
 | `topic.dependencies.implementation-versus-dependency` | no current implementation edge | add/split | contract package manifest, exact lock, compiler, dependency decision, and implementation provenance report |
-| same | no current edge for the new Identity and Authority package manifests | add missing consumers | exact stdlib-only Identity and Contracts-/Identity-backed Authority package contracts |
+| same | no current edge for the new Identity and Authority package manifests | add missing consumers | exact stdlib-only Identity and Identity-backed Authority package contracts; Contracts and Authority remain independent |
 | `topic.dependencies.requirement-and-ownership` | no current policy unit or implementation edge | add | exact existing-heading unit; every catalog-listed Engine Module manifest and public root; package-contract projection, check, focused test, fixtures, and suite |
 | same | no current edge for `tools/query_edges.py` or `tools/verify_git_reachability.py` | add missing consumers | Verifier-owned repository entrypoints using only public package roots |
 | same | no current edge for the Verifier-local repository entrypoints | add missing consumers | canonical-root updates through the new `entrypoints.py` owner and safe-path execution for `verify.py`, `generate_inventory.py`, `generate_numeric_audit.py`, and `generate_numeric_retirements.py` |
