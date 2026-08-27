@@ -1,23 +1,25 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:a8fa38cb36253b46d53232154b75f1709d65b6ebdf3ed5a26a9d5e3701daf80c"
+requirement = "coverage-requirement:sha256:8033b7fdab9ee146b2d634bdfb6a3ae4fe0933e2150f2ab7adb3d1147850c579"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
 ]
 explicit_exclusions = []
-rationale = "The exact profile.boundary.generated-contract.applicability coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
-auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+rationale = "The exact profile.boundary.generated-contract.applicability coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:4ea77dd072426bf304053fc509aa4c846fee721e1d9e7910b14529f75e927a68"
+requirement = "coverage-requirement:sha256:6142e73c1c1be99ce4ba2ce1257b92a16b469c93234deb0f8bb72327169f7c30"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
 ]
 explicit_exclusions = []
-rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view and direct consumer dispositions were reviewed against the frozen provider-v3 horizon."
-auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

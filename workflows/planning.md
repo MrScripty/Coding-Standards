@@ -226,6 +226,16 @@ vertical path before horizontal expansion. Do not substitute a headless path
 when the objective is user-facing. File count, layer count, line count, and
 commit cadence do not decide slice count.
 
+Plans define semantic work, dependencies, evidence, and lifecycle; they do not
+own Git commit topology. Do not prescribe commit count, parentage, direct-child
+chains, exact-HEAD admission, or standalone lifecycle commits. Bind review to
+the identified material content or candidate revision, and require re-review
+only when that reviewed meaning changes. Adding review evidence or recording an
+unchanged lifecycle result does not invalidate the reviewed subject. Collect a
+review round's findings before revising material plan semantics. Record
+lifecycle changes with the coherent implementation, re-plan, accepted boundary,
+or final evidence that caused them; Commit owns the resulting commit boundary.
+
 ## Current State, Not History
 
 Keep `plan.md` concise and current:

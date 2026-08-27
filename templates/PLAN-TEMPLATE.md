@@ -97,6 +97,11 @@ materially improves independent acceptance, risk containment, dependency
 ordering, conflict isolation, rollback, or feedback. File count, layer count,
 line count, and commit cadence do not decide milestone or slice count.
 
+Milestones do not prescribe Git commit count, parentage, direct-child chains,
+exact-HEAD admission, or standalone lifecycle commits. Bind review to material
+content and update lifecycle state with the coherent outcome or evidence that
+caused it. The Commit workflow owns commit boundaries.
+
 ### Milestone 0: [Name]
 
 **Goal:** [One useful result]

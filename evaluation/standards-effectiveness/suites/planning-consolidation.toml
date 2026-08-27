@@ -18,6 +18,10 @@ ownership = ["overlap", "owned"]
 acceptance = ["complete", "missing"]
 next_slice = ["multiple", "one"]
 fallback = ["append-only", "commit-cadence", "headless-fallback", "implementation-success", "none", "page-count", "question-count", "template-proof", "worker-count"]
+concurrency = ["applicable", "not-applicable", "unknown"]
+plan_git_topology = ["ancestry", "cadence", "count", "none", "parentage"]
+review_binding = ["ancestry", "content", "head"]
+lifecycle_commit = ["coherent-outcome", "state-only"]
 expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
 [[checks.rules]]
 outcome = "typed-invalid"
@@ -27,6 +31,9 @@ any = [
   { field = "objective", op = "eq", value = "contradictory" },
   { field = "ownership", op = "eq", value = "overlap" },
   { field = "next_slice", op = "eq", value = "multiple" },
+  { field = "plan_git_topology", op = "ne", value = "none" },
+  { field = "review_binding", op = "ne", value = "content" },
+  { field = "lifecycle_commit", op = "eq", value = "state-only" },
 ]
 [[checks.rules]]
 outcome = "typed-unsupported"
@@ -40,6 +47,7 @@ outcome = "typed-unavailable"
 any = [
   { field = "facts", op = "eq", value = "missing" },
   { field = "acceptance", op = "eq", value = "missing" },
+  { field = "concurrency", op = "eq", value = "unknown" },
 ]
 
 [[checks]]
@@ -58,6 +66,8 @@ required = [
   "Apply the bounded-local exclusion before the written-plan triggers",
   "A written plan may contain one milestone and one implementation slice",
   "Do not split work merely to minimize diff size or satisfy",
+  "they do not\nown Git commit topology",
+  "Bind review to\nthe identified material content",
   "`Implemented` is not complete",
 ]
 prohibited = []
@@ -73,7 +83,7 @@ prohibited = ["update active plan, issue, and ledger state when those artifacts 
 id = "planning-prompt-projection"
 type = "text"
 path = "prompts/planning.md"
-required = ["Select one coherent implementation unit", "a plan", "may contain one milestone and one slice"]
+required = ["Select one coherent implementation unit", "a plan", "may contain one milestone and one slice", "Keep Git topology out of the plan", "leave coherent commit boundaries to the Commit workflow"]
 prohibited = ["Use thin vertical milestones"]
 
 [[checks]]

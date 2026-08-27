@@ -1,23 +1,25 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:7be3cb15b7f97d38d86051b422c7fa587ce565b21adbe2afd0f5efe710b2846a"
+requirement = "coverage-requirement:sha256:52ea5c63bd9c10d1dace2b9f1844a14356948f017a9228e3a0b4e185ee1ff3be"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.architecture.authority-scope-admission coverage view and direct consumer dispositions were reviewed against the frozen provider-v3 horizon."
-auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+rationale = "The exact topic.architecture.authority-scope-admission coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:cb35a5c7694859b386463e40dbf9869f07bed7189c802ec8554f9aab2641388d"
+requirement = "coverage-requirement:sha256:5b08cbcd00acee1b3a9ff8320bd21a59ac04363211af8dda873bbd7eca4b484a"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.architecture.immutable-authority-closure coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
-auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+rationale = "The exact topic.architecture.immutable-authority-closure coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

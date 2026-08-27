@@ -484,3 +484,25 @@
 - No new verifier or Bash behavior is authorized. A1b remains `Blocked` pending
   the guardrail and consolidated review of the replacement design. No A1b
   runtime or A2 implementation is authorized by this correction.
+
+## 2026-08-27 - Serial Planning Guardrail And Coverage Renewal
+
+- Added the project-agnostic Planning rule that plans own semantic work and
+  lifecycle but do not prescribe Git count, cadence, parentage, topology,
+  exact-HEAD review, or standalone lifecycle commits. Commit retains ownership
+  of coherent commit boundaries.
+- Advanced `workflow.planning.milestones-and-slices` from semantic revision 1
+  to 2 and projected the rule through the existing Planning prompt, template,
+  consolidation suite, and typed decision fixture. No new suite, fixture
+  authority, verifier, or Bash behavior was introduced.
+- Added the two missing Commit relationships from
+  `workflow.commit.per-commit-boundary` to the existing Planning fixture and
+  suite. The compiled graph changes from 251 to 253 relationships without
+  removing an edge.
+- Froze the resulting provider-v3 horizon, reviewed every one of the 44 policy
+  subjects, and renewed all 44 exact attestations. The requirement mapping,
+  consumer dispositions, authorization, and acceptance gates are recorded in
+  [serial-plan-commit-boundary-guardrail.md](reports/serial-plan-commit-boundary-guardrail.md).
+- `A1B-020` is `controlled`. A1b remains `Blocked`; the next slice is one
+  consolidated review of the complete C7 replacement design. No A1b runtime or
+  A2 implementation is authorized by this outcome.

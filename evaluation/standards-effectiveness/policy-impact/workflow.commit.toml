@@ -480,3 +480,19 @@ relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
 rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+
+[[relationships]]
+source = "workflow.commit.per-commit-boundary"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The Planning fixture enforces Commit ownership of coherent commit boundaries and rejection of plan-owned Git topology."
+
+[[relationships]]
+source = "workflow.commit.per-commit-boundary"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The registered Planning suite enforces Commit ownership of coherent commit boundaries."

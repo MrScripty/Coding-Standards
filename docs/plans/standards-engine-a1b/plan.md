@@ -2,12 +2,11 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** Serial planning-process correction
+**Current phase:** Consolidated replacement-design review
 
-**Next slice:** Add the registered Python planning guardrail for plan-owned Git
-topology and state-only commit prescriptions, including the required coverage
-audit and renewal, then obtain one consolidated review of the replacement
-design's material semantics
+**Next slice:** Review the complete C7 replacement design as one material
+content set, including its historical-replan and SQLite storage audits, before
+changing A1b implementation authority
 
 **Acceptance status:** `pending`
 

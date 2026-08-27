@@ -1,12 +1,13 @@
 schema_version = 2
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:89b765bd8ab13035d65caef83aa1cceeb4bacb57536a133add515526746d41db"
+requirement = "coverage-requirement:sha256:35953b7add70968017b4778a179ae50af7315f3fc92de10f8e3ebd18de739173"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
 ]
 explicit_exclusions = []
-rationale = "The exact router.generated-contract-profile-applicability coverage view was re-reviewed against the frozen provider-v3 horizon; prior dispositions remain applicable and current topology adds no unreviewed direct consumer."
-auditor_provenance = "standards.review.audit:user-authorized:contract-authority-scope"
+rationale = "The exact router.generated-contract-profile-applicability coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

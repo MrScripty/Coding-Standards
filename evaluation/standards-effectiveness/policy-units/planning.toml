@@ -58,7 +58,7 @@ semantic_revision = 1
 id = "workflow.planning.milestones-and-slices"
 module = "workflow.planning"
 heading_path = ["Milestones And Slices"]
-semantic_revision = 1
+semantic_revision = 2
 
 [[policy_unit]]
 id = "workflow.planning.current-state"
