@@ -452,3 +452,35 @@
   fixture, A1, or A2 implementation changed. Lifecycle remains `Blocked`
   pending independent exact-tree review of C6 through the direct C6-R-T-S
   chain.
+
+## 2026-08-27 - Serial Planning Protocol Correction
+
+- Trigger: repository history from 2026-08-23 through 2026-08-26 showed a
+  self-reinforcing administrative commit loop. The active plan had taken
+  ownership of Git parentage and commit cadence through its C6-R-T-S protocol,
+  despite canonical Planning, Implementation, and Commit guidance assigning
+  commit boundaries to coherent outcomes.
+- `Superseded`: the complete C6-R-T-S direct-child chain, exact-HEAD admission,
+  intervening-commit invalidation, sole-change review-report rule, standalone
+  admit/start/verify/accept commits, and Milestone-3-parent requirement.
+- Replacement: review binds explicitly identified material content. A later
+  reviewer report, lifecycle record, or unrelated commit does not invalidate
+  unchanged reviewed semantics. A material semantic change does require a new
+  consolidated review.
+- Lifecycle changes are applied in the serial integration working tree and
+  recorded with the first substantive implementation slice, a material replan,
+  an accepted implementation boundary, or final acceptance evidence.
+- Review findings are collected for one review round before the integration
+  owner revises the plan. One blocking finding still rejects admission, but it
+  does not create a mandatory commit chain.
+- A1b work is serial. The Concurrent Plan Integration profile is not applicable;
+  no stale-proposal coordination or state-only Git mechanism is authorized.
+- Existing history remains unchanged. Any history rewrite requires separate
+  explicit authority under Commit.
+- A focused registered Python guardrail remains the next corrective slice. Its
+  attempted preflight correctly showed that changing a registered suite
+  invalidates affected coverage, so that slice must include the exact coverage
+  audit and renewal rather than silently updating an attestation.
+- No new verifier or Bash behavior is authorized. A1b remains `Blocked` pending
+  the guardrail and consolidated review of the replacement design. No A1b
+  runtime or A2 implementation is authorized by this correction.

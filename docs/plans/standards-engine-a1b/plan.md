@@ -2,13 +2,12 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** Replacement planning admission
+**Current phase:** Serial planning-process correction
 
-**Next slice:** Independent exact-tree Standards and Specification review of
-replacement planning candidate C6, including source-neutral content identity,
-material-only transition-closed analysis, exact owner codec/role contracts,
-dependency direction, coverage sequencing, and complete contract-semantic
-evidence
+**Next slice:** Add the registered Python planning guardrail for plan-owned Git
+topology and state-only commit prescriptions, including the required coverage
+audit and renewal, then obtain one consolidated review of the replacement
+design's material semantics
 
 **Acceptance status:** `pending`
 
@@ -26,7 +25,7 @@ decoding, one reference-only StandardsAuthorityView, mechanically derived
 operation ExecutionClosures, and one generated public request/result algebra.
 Preserve the four-operation read-only Standards Engine and immutable analysis
 kernel while making every issued handle directly resolvable in a cold process.
-Complete independent exact-tree acceptance before any A2 review or
+Complete independent content-bound acceptance before any A2 review or
 implementation begins.
 
 ## Objective Acceptance
@@ -47,7 +46,7 @@ implementation begins.
 | A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `pending` | Pending broad checkpoint |
 | A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `pending` | Pending final checkpoint |
-| A1B-A11 | One clean implementation commit and tree has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
+| A1B-A11 | One clean implementation boundary has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. The review binds the identified content; later evidence or lifecycle recording does not invalidate unchanged reviewed semantics. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
 
 ## Scope
 
@@ -82,7 +81,7 @@ implementation begins.
 - Supplemental node-catalog and source-owned relationship migration for
   created, retained, and retired implementation artifacts.
 - Registered Python verification, dependency and licensing evidence, coverage
-  reconciliation, and exact-tree acceptance.
+  reconciliation, and content-bound acceptance.
 - Manifest-owned public import roots and repository entrypoints,
   initializer-owned static export closure, and one AST-backed verifier contract
   for every governed production cross-Module import.
@@ -111,18 +110,20 @@ implementation begins.
 
 ### Constraints
 
-- This plan is unavailable while `Blocked`. The exact admission and start
-  chain must complete before any implementation edit.
-- The accepted standards-recovery boundary is the comparison base. The direct
-  start-transition child is the implementation base.
+- This plan is unavailable while `Blocked`. Independent review must accept the
+  current material planning semantics before any implementation edit.
+- The accepted standards-recovery boundary is the comparison base. After
+  admission, lifecycle transitions are applied in the serial integration
+  working tree before implementation and committed with the first substantive
+  implementation outcome; they do not require independent commits.
 - Foundation Modules may be implemented and tested only against private staging
   fixtures. They may not modify or become dependencies of accepted production
   A1 before the atomic Milestone 3 cutover.
-- Milestones 0 through 2 are ordered working-tree checkpoints inside one
-  implementation transaction. They are not committed or accepted separately.
-  Milestone 3 produces the first implementation commit and includes every
-  foundation, production consumer, catalog/relationship migration, and final
-  coverage update.
+- Milestones 0 through 2 are ordered evidence checkpoints. They do not prescribe
+  commit count, parentage, or cadence. Commit boundaries follow Commit and each
+  commit must remain a coherent green outcome. Milestone 3 includes every
+  production consumer, catalog/relationship migration, and final coverage
+  update in one coordinated replacement boundary.
 - Public replacement is atomic. Old and new production authorities never
   coexist in an accepted runtime.
 - Dependency installation and verification use the accepted hash-checked lock.
@@ -166,6 +167,7 @@ implementation begins.
 | Keep `policy-impact-registry.toml` as the sole closed declaration-source membership authority and register every admitted source explicitly. | Policy Impact | [Migration plan](reports/policy-impact-migration-plan.md) | Filesystem discovery or policy-unit-derived relationship registration |
 | Make each Engine Module manifest own one public import root and its repository entrypoints; make the root's closed `__all__` expression own exported names; require entrypoints to call canonical-root adapters; and enforce all three with one AST-backed Standards Verifier contract plus safe-path execution. | Dependencies and Verification | [Dependency decision](reports/dependency-and-dialect-decision.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Root-only smoke, script-directory imports, generator-only checks, implicit Python child-module loading, and copied package or symbol allowlists |
 | Keep A2 inactive through independent A1b acceptance. | Planning | Accepted standards recovery | Direct progression to authoring |
+| Execute A1b serially; the Concurrent Plan Integration profile is not applicable. Review binds identified semantic content, not later Git ancestry. Collect a review round's findings before revising, and record lifecycle changes with substantive implementation, material replanning, accepted implementation boundaries, or final acceptance evidence rather than state-only commits. | Planning, Implementation, and Commit | [Planning](../../../workflows/planning.md), [Implementation](../../../workflows/implementation.md), [Commit](../../../workflows/commit.md), and this corrective replan | C6-R-T-S direct-child protocol, exact-HEAD admission, intervening-commit invalidation, and standalone lifecycle commits |
 
 ## Evidence And Oracle Plan
 
@@ -270,25 +272,34 @@ C6 is planned from the rejected C5 tree and the accepted standards commit
 `396144ad9a75c948484d1e564fab73c857bd6f4d`. It retains the original
 standards-recovery comparison base above while replacing C5 planning authority.
 
-Admission and start require this direct-child chain:
+The C6-R-T-S direct-child protocol, exact-HEAD admission rule, standalone
+admit/start transitions, and intervening-commit invalidation rule are
+`Superseded`. They were plan-owned Git coordination for serial work and
+conflicted with Commit's ownership of coherent commit boundaries.
 
-1. **C6:** clean replacement planning candidate containing no implementation
-   and superseding every rejected candidate named above;
-2. **R:** reviewer-owned `reports/a1b-plan-admission.md` as the sole change,
-   binding C6, explicitly accepting the dependency provenance/licensing
-   disposition in A1B-A6P, and reporting no blocking Standards or
-   Specification finding;
-3. **T:** mechanical admission transition as the direct child of R, changing
-   only lifecycle fields in `plan.md` and `issues.md` plus one append-only
-   transition record in `execution-ledger.md`, setting A1B-A6P to `satisfied`
-   with R as evidence and setting the plan to `Planned`; and
-4. **S:** `start` transition as the direct child of T, changing only those
-   lifecycle fields plus one append-only ledger record, setting the plan and
-   Milestone 0 to `Active`.
+Admission now uses this content-bound contract:
 
-S is the exact clean implementation base. Any intervening commit, extra file,
-dirty worktree, identity mismatch, or review finding invalidates the chain.
-Neither R nor T starts implementation.
+1. Review identifies the exact plan, ADR, reports, and dependency decision it
+   evaluated, using a candidate commit/tree or artifact digests as evidence.
+2. The reviewer reports all Standards and Specification findings from that
+   review round before the integration owner revises material planning
+   semantics. One blocking finding rejects admission; findings from the same
+   round are corrected together.
+3. Adding the reviewer-owned report, recording lifecycle state, or making an
+   unrelated commit does not alter the reviewed subject. Only a material change
+   to reviewed semantics requires another review.
+4. After a review with no blocking finding, the integration owner applies the
+   `Blocked` to `Planned` admission and `Planned` to `Active` start operations in
+   the serial working tree before implementation. Their final lifecycle fields,
+   report, and ledger evidence are committed with the first substantive
+   implementation slice.
+5. Verification and acceptance lifecycle changes are recorded with an accepted
+   implementation boundary or final acceptance evidence, not in standalone
+   state-only commits.
+
+Commit count, parentage, branch topology, and the placement of review evidence
+are governed by Commit. Existing published history is retained; changing that
+history would require separate explicit rewrite authority.
 
 ## Milestones
 
@@ -320,8 +331,8 @@ isolated Module without changing accepted A1 production imports or behavior.
 **Acceptance gate:** Identity foundation and A1B-A6 pass; isolated package
 tests and the accepted broad baseline remain green. A1B-A6L remains a distinct
 manual exact-lock final-acceptance claim; A1B-A6P must already be satisfied
-before start. Record the checkpoint in the ledger working tree, but do not
-commit it separately.
+before start. Record the checkpoint when it materially changes current plan or
+verification authority; Commit decides its coherent commit boundary.
 
 **Status:** `Blocked`
 
@@ -361,8 +372,8 @@ changing the production schema, generated output, or facade.
 
 **Acceptance gate:** A1B-A1, the isolated half of A1B-A2, and contract portions
 of A1B-A3 pass while every accepted production A1 artifact remains byte
-identical. Record the checkpoint in the ledger working tree, but do not commit
-it separately.
+identical. Record the checkpoint when it materially changes current plan or
+verification authority; Commit decides its coherent commit boundary.
 
 **Status:** `Planned`
 
@@ -426,8 +437,8 @@ traversal, and cold reconstruction independently of the accepted facade.
 
 **Acceptance gate:** The isolated halves of A1B-A4 and A1B-A4C pass on both
 adapters.
-Record the checkpoint in the ledger working tree, but do not commit it
-separately.
+Record the checkpoint when it materially changes current plan or verification
+authority; Commit decides its coherent commit boundary.
 
 **Status:** `Planned`
 
@@ -565,22 +576,18 @@ in one replacement boundary; delete all superseded authority.
   requirement/certificate equality.
 
 **Acceptance gate:** Every automated objective claim passes. Final manual
-A1B-A6L and A1B-A11 remain pending exact-tree acceptance.
+A1B-A6L and A1B-A11 remain pending content-bound acceptance.
 Any required path outside this write set, any substantive ADR change, blocked
 disposition, or horizon change after attestation is a re-plan trigger. The
 admitted ADR remains byte-identical and `Proposed` throughout Milestone 3;
-Milestone 4 alone may change its status after exact-tree acceptance.
-
-Milestone 3 creates the first implementation commit after start. Its parent is
-the clean start-transition commit S; no foundation-only implementation commit
-may intervene.
+Milestone 4 alone may change its status after content-bound acceptance.
 
 **Status:** `Planned`
 
-### Milestone 4: Exact-Tree Acceptance
+### Milestone 4: Content-Bound Acceptance
 
-**Goal:** Freeze one clean implementation tree, run complete evidence, and
-obtain independent acceptance.
+**Goal:** Identify one clean implementation boundary, run complete evidence,
+and obtain independent acceptance of its material content.
 
 **Allowed write set:**
 
@@ -590,20 +597,21 @@ obtain independent acceptance.
   verification, deviation, and transition records in the ledger
 - ADR status only in `docs/decisions/standards-engine-a1b.md`
 
-The final reviewer report is a sole-change direct child of the implementation
-candidate. A later mechanical acceptance transition may update only the
-declared lifecycle fields and must identify both exact trees.
+The final review identifies the implementation content it evaluated. Adding its
+report or final lifecycle evidence afterward does not invalidate unchanged
+reviewed semantics and does not require a prescribed parent/child sequence.
 
 **Tasks:**
 
-- [ ] Record the exact implementation commit/tree, dependency resolution,
+- [ ] Record the identified implementation commit/tree or equivalent artifact
+  digests, dependency resolution,
   generated outputs, owner-local identity contracts, object kinds, authority
   views, execution closures, node/edge/consumer dispositions, coverage
   identities, and complete verification.
-- [ ] Obtain independent Standards and Specification review against that exact
-  tree.
+- [ ] Obtain independent Standards and Specification review against that
+  identified content.
 - [ ] Accept only with no blocked claim or consumer and a clean worktree.
-- [ ] Mark the ADR and plan Accepted through the constrained transition.
+- [ ] Mark the ADR and plan Accepted with the final acceptance evidence.
 
 **Acceptance gate:** Every objective acceptance claim is satisfied.
 
@@ -611,8 +619,8 @@ declared lifecycle fields and must identify both exact trees.
 
 ## Blockers
 
-- `A1B-006`: independent planning admission has not accepted C6 and its
-  direct-child transition chain.
+- `A1B-006`: independent planning admission has not accepted the current
+  material replacement design through the content-bound review contract.
 
 ## Re-Plan Triggers
 
