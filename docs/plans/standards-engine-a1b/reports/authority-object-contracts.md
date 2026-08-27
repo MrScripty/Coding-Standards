@@ -2,657 +2,412 @@
 
 **Status:** Proposed planning authority
 
-## Rules
+This report owns the immutable object envelope, stored-record algebra,
+dependency DAG, publication protocol, and cold-resolution contract. Authority
+scope and execution dependency derivation are owned by
+[authority composition and execution closure](authority-composition-and-execution-closure.md).
+The public JSON Schema owns only serialized request, result, inspection, and
+handle shapes.
 
-Every stored value is:
+## Repository Rules
+
+Every stored value uses:
 
 ```text
 AuthorityObjectEnvelope v1
-  object_kind
-  payload_contract
-  payload
+  object_kind: CanonicalId
+  semantic_id: AuthorityObjectId
+  storage_format: "authority-envelope.v1"
+  direct_dependencies: set<AuthorityObjectReference>
+  payload_contract: CanonicalId
+  payload: owner-defined closed record
 ```
 
-The envelope is encoded and addressed by identity encoding v2. Every stored
-payload field is identity-bearing; no second stored payload may resolve under
-the same handle. A payload never contains its own handle. Resolution recomputes
-the handle and injects it only into the generated public projection.
+The owning domain Module constructs and validates `payload`, declares its
+direct dependencies, and computes `semantic_id` from one typed material
+identity record through `standards_identity`. The repository:
 
-Non-authoritative presentation fields are deterministic projections from an
-enclosing root and its exact result/presentation contract version. Display
-summaries, next operations, fact prompts, dependent-program displays,
-generation timestamps, storage paths, parent analysis lineage, transition
-order, requirements, obligations, reading plans, and completion state are not
-stored unless an exact field below says otherwise.
+- verifies the envelope and canonical storage bytes;
+- dispatches `object_kind` to exactly one registered owner;
+- asks that owner to decode, validate, and recompute semantic identity;
+- verifies direct dependency existence and kind;
+- rejects cycles, self-reference, and descendant-to-ancestor references; and
+- publishes create-only or returns a typed failure.
 
-All maps use closed typed keys. All sets are sorted and deduplicated by the
-owning typed key before storage. Every referenced handle must resolve and match
-its required object kind before an aggregate object is published.
+`storage_format`, public handle schema, public result projection, storage path,
+timestamps, and implementation release are not semantic-ID inputs. A payload
+never contains its own public handle. Resolution verifies the object and injects
+the handle into its public projection.
 
-`standards_authority.get` proves canonical bytes, handle identity, closed record
-shape, object-local invariants, and dependency existence/kind. It delegates
-every embedded named v11 definition check to the canonical
-`standards_contracts` adapter and owns the envelope, closed stored-payload
-records, identity, dependency-kind, object-local, and authority-DAG checks. It
-does not duplicate schema
-interpretation or import Metadata, Analysis, Graph, Applicability,
-authorization, or provider semantics. The bound analysis kernel validates
-root-relative semantic coherence when it resolves or projects an aggregate
-root. Policy and relationship inspection adapters validate snapshot-relative
-semantics before returning a public inspection result.
+There is no generic semantic payload, object enumeration, owner map, scan,
+mutable index, compatibility reader, or fallback. Missing content is
+`unavailable`, contradictory content is `invalid`, and a well-formed
+unsupported contract is `unsupported`.
 
-Every field shown in an exact record below is required. `T?` is the only
-optional-field notation. `tuple<T>` is an immutable JSON array whose order is
-semantic. `set<T> by K` is encoded as an array, contains no duplicate canonical
-K, and is sorted by the owning domain's total order for K. `map<K,V>` is a JSON
-object whose keys are K. Records reject unlisted fields. Identity encoding is
-never an ordering oracle.
+All set-like records are normalized by their owning typed key before
+construction. Two unequal values with one key are `invalid`. Identity bytes
+never decide semantic equality, grouping, deduplication, or order.
 
-Capitalized public types such as `CanonicalId`, `ChangeDescriptor`,
-`EvidenceReference`, and `ReviewScope` mean the exact reachable v11 schema
-definition named in the schema/domain audit and validated through
-`standards_contracts`; Authority does not redeclare those definitions. A
-complete handle value includes its kind, schema version, and ID. Digest is
-`sha256:` followed by 64 lowercase hexadecimal digits.
+## Object Ownership
 
-The orders used below are exact: string-like IDs, paths, digests, and handle
-IDs compare Unicode scalar sequences; integers compare numerically; Boolean
-compares `false` before `true`; enum values compare in their v11 declaration
-order; and tuples compare lexicographically by those component orders. Evidence
-uses `evidence.id`; handles use `(kind, schema_version, id)`; relationship fingerprints use
-`edge`; horizon members use `member.id`; policy subjects and proposals use
-their canonical policy ID; dispositions use `(obligation, decision kind)`.
-Each owning constructor rejects two distinct values with the same ordering key.
+| Object family | Owner | Semantic identity input | Excluded from semantic identity |
+| --- | --- | --- | --- |
+| `content-snapshot` | `standards_authority` capture | Exact capture payload plus capture-contract authority | Metadata, parser, routing, graph, policy, coverage, wire and storage versions |
+| Owner-local semantic authority | Registered domain Module | One coherent compatibility promise and exact authored/compiled semantic payload | Other Module promises and shared release facts |
+| Owner-local compiled view | Registered domain Module | Exact content/authority dependencies and compiled semantic result | Callers, caches, rendering and unrelated views |
+| `standards-authority-view` | `standards_engine` | ContentSnapshot plus sorted role-to-authority selections | Copied payloads, providers, authorization and operation results |
+| `execution-closure` | Engine or Analysis composing kernel | Operation family plus exact root and transitive dependency references | Semantic result, complete standards view and presentation contract |
+| `navigation-result` | `standards_engine` | Normalized query, semantic result and exact ExecutionClosure | Summary, rendering, next operations and wire version |
+| `analysis-root` | `standards_analysis` | Requested change, views, exact ExecutionClosure and dependency-valid accepted decisions | Derived current work, rendering, lineage and transition order |
+| Analysis and coverage child objects | `standards_analysis` | Exact narrow semantic payload and upstream handles listed below | Analysis root and unrelated repository authority |
+| Policy and relationship inspection objects | Metadata, Graph, and Policy Impact adapters | Exact inspected semantic value and material ExecutionClosure | Complete standards view and presentation-only fields |
+
+Semantic authority and compiled-view object kinds are registered by their
+manifest-owning domain Module. The generated object-kind dispatch is the sole
+repository membership projection. A file, import, schema definition, or
+StandardsAuthorityView selection does not register an object kind.
 
 ## Dependency DAG
 
-`A -> B` means B stores a handle to A or a payload mechanically derived from A
-that must be revalidated before B is published.
+`A -> B` means B stores a direct reference to upstream A.
 
 ```text
-nested snapshot ---------> snapshot root
-snapshot roots ----------> analysis root
-analysis semantic inputs -> analysis context
-coverage semantic inputs -> coverage view
-snapshot root -----------> policy / relationship inspection
-snapshot root -----------> navigation result
-analysis context --------> fact requirement
-fact requirement --------> fact observation
-coverage view -----------> coverage requirement
-coverage requirement ----> coverage attestation
-coverage view +
-requirement +
-attestation -------------> coverage certificate
-context + observations +
-attestations +
-requirements + coverage
-children + dispositions -> analysis root
+nested ContentSnapshot ----------> ContentSnapshot
+ContentSnapshot + semantic refs --> owner-local compiled views
+ContentSnapshot + selected refs --> StandardsAuthorityView
+compiled views + operation refs --> ExecutionClosure
+ExecutionClosure + query value --> NavigationResult
+ExecutionClosure ------------+---> policy / relationship inspection
+                              |
+analysis semantic inputs ----> AnalysisContext
+AnalysisContext -------------> FactRequirement
+FactRequirement -------------> FactObservation
+coverage semantic inputs ----> CoverageAuthorityView
+CoverageAuthorityView -------> CoverageRequirement
+CoverageRequirement ---------> CoverageAttestation
+view + requirement +
+attestation -----------------> CoverageCertificate
+base/proposed views +
+ExecutionClosure + context +
+decisions + child handles ---> AnalysisRoot
 ```
 
-No payload contains a descendant handle, a handle to itself, or a reference
-back from a child to an analysis root. Cycles are invalid.
-
-## Payloads
-
-### `snapshot-root.v1`
-
-- snapshot kind: `git-tree` or `manifest`;
-- capture contract version;
-- sorted scope and typed exclusions;
-- source semantic identity: Git tree/commit for an immutable Git source, or
-  `dirty-git`/`non-git` for a validated manifest source;
-- sorted entries containing path, entry kind, mode, tracking state, inclusion
-  reason, and kind-specific symlink, gitlink, or nested-repository fields;
-- included file content as padded standard Base64, decoded byte length, and
-  SHA-256 digest;
-- nested snapshot handles; and
-- interpretation-affecting metadata, parser, graph, policy-impact,
-  applicability, and snapshot contract versions.
-
-Repository root paths, staging paths, capture time, and worktree location are
-excluded.
-
-### `navigation-result.v1`
-
-- snapshot handle;
-- normalized query call;
-- identity-bearing route, read, or related semantic selection; and
-- routing, graph, metadata, interface, and result-projection contract versions.
-
-Its own handle, next operations, summaries, rendered text, and cache state are
-excluded and projected deterministically.
-
-### `analysis-context.v1`
-
-- changed policy-unit canonical IDs and owning modules;
-- accepted and proposed semantic revisions, content digests, and structural
-  digests for those units;
-- normalized change descriptors;
-- normalized semantic proposals; and
-- context, metadata, parser, and proposal contract versions.
-
-Full snapshot handles, unrelated authority bytes, relationship topology,
-attestations, observations, dispositions, and any analysis handle are
-excluded. Derivation snapshots remain analysis-root authority and provenance,
-not context identity. This identity remains narrow enough for fact-observation
-reuse.
-
-### `fact-requirement.v1`
-
-- analysis-context handle;
-- canonical fact ID;
-- exact fact-contract identity and semantic revision;
-- value type, domain, nullability, and context kind;
-- answer, evidence, provider, and authorization contract versions; and
-- dependency digest over the exact fact definition.
-
-Prompt wording, dependent-program lists, and presentation order are excluded.
-`PendingResult` exposes a derived `FactRequirementWork` containing the
-semantic requirement, current prompt, and current dependent programs.
-`inspect(FactRequirementHandle)` returns only the semantic requirement.
-
-### `fact-observation.v1`
-
-- fact-requirement handle;
-- exact typed fact value and state;
-- complete evidence records;
-- authorization reference and authority decision;
-- provider claim and provider contract when provider-backed; and
-- observation contract version.
-
-Timestamps and display summaries are provenance-only and excluded.
-
-### `coverage-view.v1`
-
-- policy-unit canonical ID and owning module;
-- target semantic revision, content digest, and structural digest;
-- exact originating relationship set and relationship-kind contract;
-- applicability language and referenced program/fact-definition digests;
-- audit-horizon provider and contract versions;
-- sorted horizon members with relevant content/structural fingerprints;
-- identity-resolution contract; and
-- coverage, attestation, authorization, and evidence-provider contract
-  versions.
-
-Accepted/proposed labels, attestation instances, certificates, reports,
-packets, timestamps, storage paths, and dispositions are excluded.
-The complete analysis snapshot handle is also excluded because it contains
-attestation-source bytes. The view embeds the exact coverage-relevant semantic
-payload and fingerprints listed above; its derivation snapshot is
-non-identity provenance. This preserves requirement identity when a matching
-attestation is committed.
-
-### `coverage-requirement.v1`
-
-- coverage-view handle;
-- canonical covered policy-unit subject;
-- covered scope;
-- relationship kinds and audit horizon identity; and
-- exact required evidence contract.
-
-Derivation snapshot may be provenance but is excluded from identity.
-
-### `coverage-attestation.v1`
-
-- coverage-requirement handle;
-- complete conclusion;
-- evidence records;
-- explicit exclusions;
-- rationale;
-- auditor provenance and authorization decision; and
-- attestation contract version.
-
-It does not repeat relationships, horizon members, obligations, dispositions,
-or reports.
-
-### `coverage-certificate.v1`
-
-- coverage-view, coverage-requirement, and coverage-attestation handles;
-- evidence digests;
-- applicability, fact-schema, horizon, relationship, coverage, authorization,
-  and tool contract versions.
-
-It contains no change-specific disposition or report reference.
-Deterministic certificate provenance is projected from the three dependencies;
-generation timestamps are absent.
-
-### `policy-inspection.v1`
-
-- snapshot handle;
-- canonical module or policy-unit identity;
-- exact metadata, locator, lifecycle, content, and structural facts selected
-  for public inspection; and
-- metadata/parser/inspection contract versions.
-
-### `relationship-inspection.v1`
-
-- snapshot handle;
-- edge ID;
-- generic endpoints, kind, groups, traversal, and compiler provenance;
-- compiled policy-impact semantics when applicable, including applicability
-  program identity, scopes, propagation, evidence owner, and rationale; and
-- graph, policy-impact, applicability, and inspection contract versions.
-
-### `analysis-root.v1`
-
-- analysis-context handle;
-- base and proposed snapshot handles;
-- authorization-authority view;
-- evidence-provider contract/input view;
-- sorted dependency-valid fact-observation handles;
-- sorted materialized fact-requirement, coverage-view, coverage-requirement,
-  and coverage-certificate handles needed to reproduce the current projection;
-- sorted handle-free consumer and impact disposition records, each containing
-  its exact obligation/dependency fingerprint, decision, evidence, and
-  authorization;
-- sorted coverage-attestation handles;
-- normalized dormant-valid decisions as well as material decisions; and
-- analysis, applicability, metadata, graph, parser, evidence-provider,
-  authorization, interface, and result-projection contract versions.
-
-Obligation and impact-trace values, reading plans, certificate content,
-completion proofs, pending/complete results, and next operations are derived.
-The root stores the direct handles of materialized inspectable dependencies but
-not duplicate child payloads. Invalid decisions are removed before
-construction.
+No object references itself or a descendant. Child analysis and coverage
+objects never reference AnalysisRoot. Equal semantic values reached through
+different construction order produce equal IDs.
 
 ## Exact Record Algebra
 
-The prose above explains purpose; the following closed records govern
-construction.
+Every listed field is required unless marked `?`. `tuple<T>` preserves
+semantic order. `set<T> by K` is stored in owner-normalized K order and rejects
+duplicate K. `AuthorityObjectReference` is exactly `(object_kind,
+semantic_id)`.
 
-`SnapshotVersionsV1`, `NavigationVersionsV1`, and
-`AnalysisRootVersionsV1` are the exact stored forms of the public v11
-`SnapshotVersions`, `NavigationVersions`, and `AnalysisVersions` definitions.
-Contracts validates each record through its named-definition Adapter before
-Authority constructs the containing object. Each root therefore carries the
-complete version authority required to reconstruct its own public projection;
-no version is supplied from process configuration during resolution.
-
-The records are deliberately object-specific. Snapshot identity does not bind
-evidence-provider or authorization contracts that cannot alter snapshot
-capture or inspection. Navigation identity does not bind analysis-only
-contracts. Analysis roots retain the complete provider and authorization view
-needed for pending and complete projections. Adding an interpretation input to
-one projection requires changing that projection's version record and payload
-contract rather than consulting ambient state.
+### ContentSnapshotV1
 
 ```text
-ParserVersionsV1 = map<CanonicalId, NonEmptyString>
-ProviderVersionsV1 = map<CanonicalId, NonEmptyString>
-
-SnapshotVersionsV1 {
-  snapshot_contract_version: "snapshot-root.v1",
-  metadata_api_version: NonEmptyString,
-  parser_versions: ParserVersionsV1,
-  graph_engine_contract_version: NonEmptyString,
-  policy_impact_contract_version: NonEmptyString,
-  applicability_language_version: 1,
-  coverage_contract_version: NonEmptyString,
-  identity_resolution_contract_version: NonEmptyString,
-  interface_schema_version: 11,
-  result_projection_version: 3,
-  authority_object_contract_version: 1,
-  identity_encoding_version: 2
-}
-NavigationVersionsV1 {
-  navigation_contract_version: "navigation-result.v1",
-  interface_schema_version: 11,
-  result_projection_version: 3,
-  routing_contract_version: NonEmptyString,
-  metadata_api_version: NonEmptyString,
-  graph_engine_contract_version: NonEmptyString,
-  parser_versions: ParserVersionsV1,
-  authority_object_contract_version: 1,
-  identity_encoding_version: 2
-}
-AnalysisContextVersionsV1 {
-  context_contract_version: "analysis-context.v1",
-  metadata_api_version: NonEmptyString,
-  parser_versions: ParserVersionsV1,
-  proposal_contract_version: NonEmptyString
-}
-PolicyInspectionVersionsV1 {
-  inspection_contract_version: "policy-inspection.v1",
-  metadata_api_version: NonEmptyString,
-  parser_versions: ParserVersionsV1
-}
-RelationshipInspectionVersionsV1 {
-  inspection_contract_version: "relationship-inspection.v1",
-  graph_engine_contract_version: NonEmptyString,
-  policy_impact_contract_version: NonEmptyString,
-  applicability_language_version: 1
-}
-AnalysisRootVersionsV1 {
-  analysis_contract_version: 7,
-  analysis_schema_version: 4,
-  applicability_language_version: 1,
-  metadata_api_version: NonEmptyString,
-  graph_engine_contract_version: NonEmptyString,
-  parser_versions: ParserVersionsV1,
-  evidence_provider_contract_versions: ProviderVersionsV1,
-  authorization_contract_version: NonEmptyString,
-  interface_schema_version: 11,
-  result_projection_version: 3,
-  authority_object_contract_version: 1,
-  identity_encoding_version: 2
+ContentSnapshotV1 {
+  capture_kind: "git-tree" | "manifest",
+  capture_authority: AuthorityObjectReference,
+  scope: set<path> by path,
+  exclusions: set<ContentExclusionV1> by path,
+  source_identity:
+    GitSourceV1 { tree, commit }
+    | ManifestSourceV1 { source_kind: "dirty-git" | "non-git" },
+  entries: set<ContentEntryV1> by path
 }
 
-StoredBytesV1 {
-  base64: string,
-  byte_length: integer >= 0,
-  digest: Digest
-}
-
-SnapshotCommonV1 {
-  path: NonEmptyString,
-  mode: integer >= 0,
-  tracking: "tracked" | "untracked" | "not-applicable",
-  inclusion: "included" | "excluded",
-  reason: NonEmptyString
-}
-
-StoredFileEntryV1 = SnapshotCommonV1 + {
-  entry_type: "file", content: StoredBytesV1?
-}
-StoredDirectoryEntryV1 = SnapshotCommonV1 + {
-  entry_type: "directory"
-}
-StoredSymlinkEntryV1 = SnapshotCommonV1 + {
-  entry_type: "symlink",
-  symlink_target: string,
-  symlink_resolution: "not-followed" | "followed-contained" | "inert-escape",
-  content: StoredBytesV1?
-}
-StoredGitlinkEntryV1 = SnapshotCommonV1 + {
-  entry_type: "gitlink",
-  recorded_gitlink: GitObjectId,
-  checked_out_revision: GitObjectId,
-  worktree_state: "clean" | "dirty" | "diverged" | "dirty-and-diverged",
-  nested_snapshot: SnapshotHandle?
-}
-StoredNestedRepositoryEntryV1 = SnapshotCommonV1 + {
-  entry_type: "nested-repository",
-  nested_identity: NonEmptyString,
-  checked_out_revision: GitObjectId,
-  worktree_state: "clean" | "dirty" | "diverged" | "dirty-and-diverged",
-  nested_snapshot: SnapshotHandle
-}
-StoredSnapshotEntryV1 = StoredFileEntryV1 | StoredDirectoryEntryV1 |
-  StoredSymlinkEntryV1 | StoredGitlinkEntryV1 |
-  StoredNestedRepositoryEntryV1
-
-GitSnapshotSourceV1 {
-  kind: "git-tree", commit: GitObjectId, tree: GitObjectId
-}
-ManifestSnapshotSourceV1 {
-  kind: "manifest", source_state: "dirty-git" | "non-git"
-}
-
-SnapshotRootV1 {
-  capture_contract: "snapshot-capture.v1",
-  source: GitSnapshotSourceV1 | ManifestSnapshotSourceV1,
-  scope: set<NonEmptyString> by path,
-  exclusions: set<SnapshotExclusion> by exclusion.path,
-  entries: set<StoredSnapshotEntryV1> by entry.path,
-  versions: SnapshotVersionsV1
-}
-
-NavigationResultObjectV1 {
-  snapshot: SnapshotHandle,
-  request: QueryRequest,
-  selection: RouteResultSemanticV1 | ReadResultSemanticV1 |
-    RelatedResultSemanticV1,
-  versions: NavigationVersionsV1
-}
-
-AnalysisContextObjectV1 {
-  context_kind: "standards-change",
-  subjects: set<ChangedPolicyUnit> by subject.policy,
-  changes: set<ChangeDescriptor> by typed-change-key,
-  semantic_proposals: set<SemanticProposal> by proposal.policy,
-  versions: AnalysisContextVersionsV1
-}
-
-FactRequirementObjectV1 {
-  context: AnalysisContextHandle,
-  fact: CanonicalId,
-  fact_semantic_revision: integer >= 1,
-  fact_contract_digest: Digest,
-  value_contract: FactValueContract,
-  answer_contract: CanonicalId,
-  evidence_contract: CanonicalId,
-  authorization_capability: CanonicalId,
-  provider_contract_versions: ProviderVersionsV1,
-  contract_version: "fact-requirement.v1"
-}
-
-ProviderClaimV1 {
-  provider: CanonicalId,
-  provider_contract_version: NonEmptyString,
-  immutable_input_view: Digest,
-  claim_digest: Digest
-}
-
-FactObservationObjectV1 {
-  requirement: FactRequirementHandle,
-  value: FactValue,
-  evidence: set<EvidenceReference> by evidence.id,
-  authorization: AuthorizationReference,
-  provider_claim: ProviderClaimV1?,
-  contract_version: "fact-observation.v1"
-}
-
-RelationshipFingerprintV1 { edge: EdgeId, fingerprint: Digest }
-CoverageHorizonV1 {
-  id: CanonicalId,
-  provider: CanonicalId,
-  version: integer >= 1,
-  digest: Digest,
-  members: set<CoverageHorizonMember> by member.id
-}
-
-CoverageViewObjectV1 {
-  subject: CanonicalId,
-  owner: CanonicalId,
-  semantic_revision: integer >= 1,
-  representation_digest: Digest,
-  structural_digest: Digest,
-  relationship_kinds: set<CanonicalId> by value,
-  relationship_fingerprints: set<RelationshipFingerprintV1> by edge,
-  relationship_kind_contract_version: integer >= 1,
-  relationship_provider_contract_digest: Digest,
-  applicability_language_version: 1,
-  applicability_program_digests: set<Digest> by value,
-  fact_schema_digest: Digest,
-  horizon: CoverageHorizonV1,
-  identity_resolution_contract_version: NonEmptyString,
-  coverage_contract_version: NonEmptyString,
-  attestation_contract_version: NonEmptyString,
-  authorization_contract_version: NonEmptyString,
-  evidence_provider_contract_version: NonEmptyString
-}
-
-CoverageRequirementObjectV1 {
-  coverage_view: CoverageAuthorityViewHandle,
-  subject: CanonicalId,
-  owner: CanonicalId,
-  semantic_revision: integer >= 1,
-  relationship_kinds: set<CanonicalId> by value,
-  horizon: CanonicalId,
-  required_evidence_contract: CanonicalId,
-  contract_version: "coverage-requirement.v1"
-}
-
-CoverageAttestationClaimV1 {
-  requirement: CoverageRequirementHandle,
-  conclusion: "complete",
-  evidence: set<EvidenceReference> by evidence.id,
-  explicit_exclusions: set<EvidenceReference> by evidence.id,
-  rationale: NonEmptyString,
-  auditor_provenance: NonEmptyString
-}
-
-CoverageAttestationObjectV1 {
-  requirement: CoverageRequirementHandle,
-  conclusion: "complete",
-  evidence: set<EvidenceReference> by evidence.id,
-  explicit_exclusions: set<EvidenceReference> by evidence.id,
-  rationale: NonEmptyString,
-  auditor_provenance: NonEmptyString,
-  authorization: AuthorizationReference,
-  contract_version: "coverage-attestation.v1"
-}
-
-CoverageCertificateObjectV1 {
-  coverage_view: CoverageAuthorityViewHandle,
-  requirement: CoverageRequirementHandle,
-  attestation: CoverageAttestationHandle,
-  subject: CanonicalId,
-  owner: CanonicalId,
-  semantic_revision: integer >= 1,
-  horizon_digest: Digest,
-  relationship_digest: Digest,
-  evidence_digests: set<Digest> by value,
-  applicability_contract_version: NonEmptyString,
-  fact_schema_digest: Digest,
-  coverage_contract_version: NonEmptyString,
-  attestation_contract_version: NonEmptyString,
-  authorization_contract_version: NonEmptyString,
-  evidence_provider_contract_version: NonEmptyString
-}
-
-PolicyInspectionObjectV1 {
-  snapshot: SnapshotHandle,
-  policy: CanonicalId,
-  declaration: CanonicalModuleDeclaration | PolicyUnitDeclaration,
-  representation_digest: Digest,
-  structural_digest: Digest,
-  provenance: ProvenanceRecord,
-  versions: PolicyInspectionVersionsV1
-}
-
-RelationshipInspectionObjectV1 {
-  snapshot: SnapshotHandle,
-  relationship: RelationshipSummary,
-  policy_semantics: PolicyRelationshipInspection | null,
-  compiler_provenance: ProvenanceRecord,
-  versions: RelationshipInspectionVersionsV1
-}
-
-ConsumerDispositionV1 {
-  obligation: ObligationId,
-  obligation_fingerprint: DecisionFingerprint,
-  result: NonEmptyString,
-  rationale: NonEmptyString,
-  evidence: set<EvidenceReference> by evidence.id,
-  authorization: AuthorizationReference
-}
-ImpactDispositionV1 {
-  obligation: ObligationId,
-  obligation_fingerprint: DecisionFingerprint,
-  result: NonEmptyString,
-  rationale: NonEmptyString,
-  evidence: set<EvidenceReference> by evidence.id,
-  authorization: AuthorizationReference
-}
-
-AnalysisRootObjectV1 {
-  base_snapshot: SnapshotHandle,
-  proposed_snapshot: SnapshotHandle,
-  context: AnalysisContextHandle,
-  authorization_view: AuthorizationAuthorityView,
-  provider_view: ProviderAuthorityView,
-  fact_requirements: set<FactRequirementHandle> by (kind, schema_version, id),
-  fact_observations: set<FactObservationHandle> by (kind, schema_version, id),
-  coverage_views: set<CoverageAuthorityViewHandle> by (kind, schema_version, id),
-  coverage_requirements: set<CoverageRequirementHandle> by (kind, schema_version, id),
-  consumer_dispositions: set<ConsumerDispositionV1> by obligation,
-  impact_dispositions: set<ImpactDispositionV1> by obligation,
-  coverage_attestations: set<CoverageAttestationHandle> by (kind, schema_version, id),
-  coverage_certificates: set<CertificateHandle> by (kind, schema_version, id),
-  versions: AnalysisRootVersionsV1
+ContentEntryV1 {
+  path,
+  entry_type,
+  mode,
+  tracking,
+  inclusion,
+  reason,
+  content_base64?,
+  content_digest?,
+  byte_length?,
+  symlink_target?,
+  symlink_resolution?,
+  recorded_gitlink?,
+  checked_out_revision?,
+  nested_identity?,
+  nested_content: ContentSnapshotHandle?,
+  worktree_state?
 }
 ```
 
-The navigation semantic variants are the corresponding v11 result records with
-`kind`, `handle`, `next`, summaries, rendered text, and cache state removed.
-Their discriminant, targets, scopes, authority classifications, reasons,
-states, and exact read bytes remain. Change, scope, reason, operation, work,
-decision, and handle-set keys use the exact typed contracts in the
-[identity/version matrix](identity-version-object-matrix.md); identity bytes are
-never substituted as an ordering key.
+Included file bytes use padded standard Base64 plus exact SHA-256 and decoded
+length. Reads verify all three. Repository root, worktree path, capture time,
+staging path, parser versions, and semantic interpretations are excluded.
 
-An included file requires `content`; an excluded file forbids it. A symlink
-with `followed-contained` and `inclusion = "included"` requires `content`; all
-other symlinks forbid it. A clean gitlink may omit `nested_snapshot`; every
-dirty or diverged gitlink requires it. Provider-backed observations require
-`provider_claim`; human-authorized observations forbid it.
+### SemanticAuthorityObject
 
-## Coherence Predicates
+Each registered owner defines one closed payload contract and material identity
+record. Its envelope direct dependencies must equal the dependencies accepted by
+that owner's constructor. An object cannot contain a free-form version map.
+Compatibility identity is either:
 
-Object construction and aggregate resolution enforce these predicates at the
-named boundary:
+- a content-addressed semantic payload whose meaning is fully represented by
+  the owner-defined identity record; or
+- a stable contract ID plus semantic revision and exact structural/content
+  digest when the domain already owns reviewed revision lifecycle.
 
-1. Every `get` verifies canonical bytes and handle identity. Object construction
-   verifies that every dependency resolves under the same repository contract
-   and has the required object kind and payload contract.
-2. Snapshot construction verifies entries are closed, unique by path, and
-   byte/digest/length exact;
-   every nested handle resolves before its parent is published.
-3. Analysis-root validation proves its context equals fresh classification of
-   the exact base and proposed snapshots under the context's recorded changes,
-   proposals, and versions.
-4. Analysis-root validation proves every observation's requirement is in the
-   root dependency set, names the root context, matches current
-   fact/answer/evidence/provider contracts, and is accepted by the root
-   authorization and provider views. At most one observation exists per
-   requirement.
-5. Analysis-root validation proves each disposition names one freshly derived obligation, carries that
-   obligation's exact current fingerprint, satisfies its review contract, and
-   is authorized. At most one disposition exists per obligation and kind.
-6. Coverage-chain construction proves requirement fields equal the resolved view. An attestation names
-   that requirement and satisfies its evidence and authorization contracts. A
-   certificate's three dependencies form that exact object-local chain, and
-   every repeated digest, subject, and version equals the resolved dependency
-   value. Analysis-root validation additionally checks current authorization.
-7. Analysis-root validation proves every coverage view equals the coverage projection rederived for its subject
-   from the applicable root snapshot semantic payload and independent horizon.
-   Full snapshot identity and attestation artifacts do not enter view identity.
-8. Policy and relationship inspection adapters prove their objects equal fresh compilation from their
-   exact snapshot. Navigation selection equals fresh query execution against
-   its exact snapshot and normalized request.
-9. Analysis-root validation requires the exact materialized child handles used
-   by its current projection and rejects extra, missing, or unrelated children.
-   Current material work, derived certificates, reading plan, result status,
-   completion proof, and next operations equal a fresh deterministic projection
-   of the normalized root. Dormant-valid decisions remain stored but do not
-   block completion.
-10. No aggregate publishes until every referenced dependency has been
-    published and re-resolved. Cycles and self-reference reject.
+The repository never interprets either form generically.
+
+### StandardsAuthorityViewV1
+
+```text
+StandardsAuthorityViewV1 {
+  content: ContentSnapshotHandle,
+  authorities: set<SemanticAuthoritySelectionV1> by role
+}
+
+SemanticAuthoritySelectionV1 {
+  role: CanonicalId,
+  authority: AuthorityObjectReference
+}
+```
+
+The Engine constructor owns the closed required-role rules and verifies that
+each selected authority belongs to its role and content. The record contains no
+copied semantic payload, contract version, provider, authorization decision, or
+operation result.
+
+### ExecutionClosureV1
+
+```text
+ExecutionClosureV1 {
+  operation: "route" | "read" | "related" | "analysis",
+  roots: set<AuthorityObjectReference> by (object_kind, semantic_id),
+  dependencies: set<AuthorityObjectReference> by (object_kind, semantic_id)
+}
+```
+
+`dependencies` is the exact transitive closure obtained by walking `roots`.
+It includes each root once. The constructor rejects an omitted, extra,
+unpublished, contradictory, cyclic, or differently typed dependency.
+ExecutionClosure owns no executable semantics; it is generated evidence.
+
+### NavigationResultV1
+
+```text
+NavigationResultV1 {
+  operation: "route" | "read" | "related",
+  request: normalized operation request,
+  authority: ExecutionClosureHandle,
+  semantic_result: exact owner-normalized route/read/related value
+}
+```
+
+The complete StandardsAuthorityView, summaries, rendered text, next operations,
+and result wire version are excluded.
+
+### AnalysisContextV1
+
+- changed policy-unit IDs and owning modules;
+- accepted/proposed semantic revisions plus content and structural digests;
+- normalized change descriptors and semantic proposals; and
+- exact authority references material to interpreting those records.
+
+Full standards views, unrelated relationship topology, attestations,
+observations, dispositions, and AnalysisRoot are excluded.
+
+### FactRequirementV1
+
+- AnalysisContext handle;
+- canonical fact ID, semantic revision, fact-contract digest, value contract,
+  answer contract, evidence contract, and authorization capability; and
+- exact authority dependencies for those contracts.
+
+Prompt wording, dependent programs, selecting relationships, and presentation
+order are excluded. Pending projection joins the requirement with current
+display work.
+
+### FactObservationV1
+
+- FactRequirement handle;
+- exact typed fact value and state;
+- complete evidence;
+- authorization reference and decision;
+- provider claim when provider-backed; and
+- exact provider/authorization authority references that validated it.
+
+Timestamps and summaries are excluded.
+
+### CoverageAuthorityViewV1
+
+- policy-unit ID, owner, target semantic revision, representation digest, and
+  structural digest;
+- exact relationship kinds and relationship fingerprints;
+- applicability program and fact-schema digests;
+- independent horizon identity, members, and member fingerprints; and
+- exact owner-local authority dependencies used to derive the view.
+
+Accepted/proposed labels, complete StandardsAuthorityView, attestation source
+records, attestations, certificates, analysis reports, timestamps, storage
+paths, and dispositions are excluded.
+
+### CoverageRequirementV1
+
+- CoverageAuthorityView handle;
+- covered subject, owner, semantic revision, relationship kinds, and horizon;
+  and
+- required evidence contract.
+
+The derivation StandardsAuthorityView may appear as non-identity provenance but
+does not enter requirement semantic identity.
+
+### CoverageAttestationV1
+
+- CoverageRequirement handle;
+- complete conclusion, evidence, exclusions, rationale, and auditor provenance;
+- authorization reference and exact validating authority dependency; and
+- attestation semantic contract.
+
+It does not repeat relationships, horizon members, obligations, dispositions,
+reports, or complete views.
+
+### CoverageCertificateV1
+
+- CoverageAuthorityView, CoverageRequirement, and CoverageAttestation handles;
+- evidence, fact-schema, horizon, and relationship digests needed for public
+  inspection; and
+- exact authority dependencies of deterministic certificate construction.
+
+The three upstream handles are the certificate authority. It contains no
+change-specific disposition, report reference, repeated version bag, or
+generation timestamp.
+
+### PolicyInspectionV1 And RelationshipInspectionV1
+
+Each stores the exact inspected semantic projection, its canonical target, and
+the material Read or Related ExecutionClosure. They do not bind the complete
+StandardsAuthorityView.
+
+Policy inspection contains canonical module or policy-unit metadata, locator,
+lifecycle, representation, and structural facts. Relationship inspection
+contains generic topology and compiler provenance plus compiled policy-impact
+semantics when applicable.
+
+### AnalysisRootV1
+
+```text
+AnalysisRootV1 {
+  base_view: StandardsAuthorityViewHandle,
+  proposed_view: StandardsAuthorityViewHandle,
+  authority: ExecutionClosureHandle,
+  context: AnalysisContextHandle,
+  fact_requirements: set<FactRequirementHandle>,
+  fact_observations: set<FactObservationHandle>,
+  dispositions: set<DispositionRecord>,
+  coverage_views: set<CoverageAuthorityViewHandle>,
+  coverage_requirements: set<CoverageRequirementHandle>,
+  coverage_attestations: set<CoverageAttestationHandle>,
+  coverage_certificates: set<CoverageCertificateHandle>
+}
+```
+
+The state retains every dependency-valid accepted decision, including
+dormant-valid decisions. Normalization removes dependency-invalid decisions and
+rejects conflicting decisions under one decision key. Current requirements,
+obligations, reading plans, certificate projections, completion, results, and
+next operations are derived.
+
+## Semantic And Repository Validation
+
+Repository validation:
+
+1. decode canonical envelope bytes;
+2. verify storage format and closed registered object kind;
+3. dispatch to exactly one owner;
+4. verify the owner-decoded closed payload;
+5. recompute owner-defined semantic identity;
+6. resolve every direct dependency and verify kind;
+7. reject self-reference and cycles; and
+8. return the typed object.
+
+Domain validation:
+
+1. ContentSnapshot entries satisfy kind-specific field rules and exact
+   byte/digest/length agreement.
+2. StandardsAuthorityView has exactly one authority per required role and every
+   authority is coherent with its selected content.
+3. Owner-local compiled views equal fresh owner compilation from their exact
+   content and semantic-authority dependencies.
+4. ExecutionClosure equals the transitive closure of roots; no manually supplied
+   version or ambient process value completes it.
+5. Navigation result equals fresh operation execution from its normalized
+   request and material closure.
+6. Narrow AnalysisContext, FactRequirement, and CoverageAuthorityView identities
+   exclude unrelated authority exactly as declared.
+7. Observations, dispositions, and attestations validate evidence and
+   authorization through the exact authority references retained by Analysis
+   execution.
+8. AnalysisRoot contains exactly the dependency-valid decisions and materialized
+   child handles needed for deterministic projection. Extra or missing current
+   children reject.
+9. Existing AnalysisRoot projection never invokes live providers or seeks fresh
+   authorization. A new transition may do so before publishing a successor.
+
+## Durable Publication
+
+The durable Adapter is Linux-ext4-only and retains C4's reviewed containment
+and durability design:
+
+- one canonical absolute store path walked from a trusted `/` descriptor with
+  descriptor-relative no-follow directory opens;
+- owner/mode checks, exact device/inode/mount identity, ext4 and writable-mount
+  proof, and hard-link/`fsync`/advisory-lock capability probes;
+- all later operations relative to retained descriptors;
+- lock-free reads and one non-authoritative repository publication lock;
+- one same-directory `O_CREAT|O_EXCL|O_NOFOLLOW` staging file;
+- file `fsync`, atomic create-only hard-link publication, directory `fsync`,
+  final-object verification, and terminal staging cleanup; and
+- a complete root rewalk before success to reject path-component replacement.
+
+The final path is
+`objects/<object-kind>/<semantic-id-digest>`. Existing byte-identical content
+is idempotent success; different content under one semantic ID is
+`IDENTITY.COLLISION` and `invalid`. Existing content is never overwritten.
+Interruption before publication leaves no resolvable object. Interruption after
+publication is reconciled by retrying the same immutable put. Dependencies
+publish before dependents.
+
+Storage-format changes may require repository migration but do not alter domain
+semantic IDs merely because envelope bytes change.
 
 ## Construction Order
 
-Preparation constructs or resolves snapshots, then context, reusable
-requirements/observations and coverage objects, and finally the normalized
-analysis root. Resolution projects the supplied analysis root, validates one
-submission, constructs any new requirement-dependent object, normalizes the
-decision set, then constructs a new analysis root. A coverage submission
-contains only `CoverageAttestationClaimV1`. The bound analysis kernel verifies
-that the claim names the current coverage requirement, validates its evidence
-against that requirement, obtains and validates the caller's authorization
-from the trusted execution context, and only then constructs and publishes
-`CoverageAttestationObjectV1`. A caller never supplies an attestation handle,
-stored-object contract version, or authorization record.
-
-Policy and relationship inspection objects materialize from one exact
-snapshot. Navigation objects materialize from one exact snapshot and query.
-Certificates materialize from their three upstream coverage objects. Equal
-payloads reached through different operation order produce the same handle.
+1. Capture and publish ContentSnapshots.
+2. Construct owner-local SemanticAuthorityObjects and compiled views.
+3. Construct and publish StandardsAuthorityViews after role/coherence checks.
+4. Execute a query through AuthorityBoundValues, derive and publish its
+   ExecutionClosure, then publish NavigationResult.
+5. For analysis, resolve base/proposed views, construct narrow context and
+   reusable child objects, run eligible providers over declared immutable
+   inputs, and derive AnalysisExecutionClosure.
+6. Construct normalized AnalysisRoot only after every dependency has published
+   and re-resolved.
+7. Resolution projects the supplied root, validates one submission and trusted
+   execution context, constructs new decision objects, removes invalid
+   decisions, retains dormant-valid decisions, derives a successor closure, and
+   publishes one independent successor AnalysisRoot.
 
 ## Re-Plan Triggers
 
-Re-plan if a payload needs its own handle, a dependency would point to a
-descendant or itself, a new public inspectable kind is required, a stored
-derived-work projection becomes authority, or exact evidence/authorization
-cannot be represented without ambient state.
+Re-plan if:
+
+- a semantic identity requires storage-envelope or public-wire fields;
+- the repository must interpret a domain payload generically;
+- a StandardsAuthorityView contains copied semantics or transition-only trust;
+- an ExecutionClosure cannot be derived from the direct dependencies returned
+  by execution;
+- a public handle requires an owner map, scan, mutable index, ambient
+  configuration, or companion handle;
+- an existing analysis projection requires live provider or authorization
+  execution;
+- a dependency would point to a descendant or itself;
+- a new public inspectable family, compatibility reader, remote store, garbage
+  collector, streaming snapshot, or A2 mutable head is required; or
+- the exact Linux ext4 durability/containment capability cannot be proved.

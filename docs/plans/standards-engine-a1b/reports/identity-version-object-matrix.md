@@ -60,61 +60,56 @@ Domain is nonempty ASCII `[a-z0-9][a-z0-9.:-]*`. ID prefix is nonempty ASCII
 `[a-z][a-z0-9.-]*`. The digest is SHA-256 over the complete frame and output
 is exactly `<prefix>:sha256:<64 lowercase hexadecimal digits>`.
 
-Authority objects use domain
-`coding-standards:authority-object:v1` and their exact `object_kind` as the
-ID prefix. Domain-specific identities use the domain and prefix declared in the
-migration table. Exact framing, control characters, non-ASCII scalars,
-codepoint-equivalent strings, very large integers, Boolean/integer separation,
-invalid surrogates, key ordering, and length boundaries require fixtures.
+Each domain owner declares one identity domain, prefix, and typed material
+record. Storage-envelope, public-handle, result-projection, generator, build,
+and release fields are excluded unless the domain owner proves they materially
+change the represented semantic value. Exact framing, control characters,
+non-ASCII scalars, codepoint-equivalent strings, very large integers,
+Boolean/integer separation, invalid surrogates, key ordering, and length
+boundaries require fixtures.
 
 ## Direct Authority Objects
 
 Every public inspectable handle directly identifies one immutable stored
-object. There is no child-owner lookup table, store scan, or cache index.
+semantic object. There is no child-owner lookup table, store scan, cache index,
+or separately supplied version record.
 
 ```text
 AuthorityObjectEnvelope v1
   object_kind
+  semantic_id
+  storage_format
+  direct_dependencies
   payload_contract
   payload
-
-object id = identity(
-  domain="coding-standards:authority-object:v1",
-  id_prefix=envelope.object_kind,
-  value=envelope,
-)
 ```
 
 Every public handle has `schema_version = 4`, one exact handle kind, and an ID
 whose prefix matches the stored object kind. `standards_authority.resolve`
-loads by ID, verifies bytes, envelope, object kind, payload contract, and direct
-dependency kinds, then returns the typed object. Root-relative policy,
-authorization, provider, and analysis coherence is validated by the bound
-kernel when resolving or projecting an aggregate root, not by the repository.
+loads by semantic ID, verifies bytes and envelope, dispatches to the registered
+domain owner, requires the owner to recompute the same semantic identity, and
+verifies direct dependency kinds before returning the typed object. Envelope
+format is a storage-decoding promise and does not define domain identity.
 Missing storage is `unavailable`, contradictory content is `invalid`, and a
-well-formed unsupported version is `unsupported`.
-
-Snapshot, analysis, and navigation remain aggregate semantic roots. Other
-inspectables are stored materialized projections with explicit dependency
-handles. They are generated, not authored, and can be reproduced from their
-dependencies; direct storage makes cold inspection use the same resolution
-rule as every root.
+well-formed unsupported contract is `unsupported`.
 
 ## Public Object Matrix
 
 | Public handle | Stored object kind | Payload contract | Required dependencies |
 | --- | --- | --- | --- |
-| `SnapshotHandle` | `snapshot-root` | `snapshot-root.v1` | Padded standard-Base64 entry bytes with exact digest/length and nested snapshot object handles |
-| `NavigationHandle` | `navigation-result` | `navigation-result.v1` | Snapshot object handle |
-| `AnalysisHandle` | `analysis-root` | `analysis-root.v1` | Context, base/proposed snapshots, exact materialized requirement/observation/coverage child handles, handle-free dispositions, and attestation handles |
-| `PolicyHandle` | `policy-inspection` | `policy-inspection.v1` | Snapshot object handle and canonical policy identity |
-| `RelationshipHandle` | `relationship-inspection` | `relationship-inspection.v1` | Snapshot object handle and compiled edge identity |
+| `ContentSnapshotHandle` | `content-snapshot` | `content-snapshot.v1` | Capture authority, padded standard-Base64 entry bytes with exact digest/length, and nested content handles |
+| `StandardsAuthorityViewHandle` | `standards-authority-view` | `standards-authority-view.v1` | ContentSnapshot and exact role-to-semantic-authority references |
+| `ExecutionClosureHandle` | `execution-closure` | `execution-closure.v1` | Exact roots and their transitive stored dependencies |
+| `NavigationHandle` | `navigation-result` | `navigation-result.v1` | Normalized query, semantic result, and operation-specific ExecutionClosure |
+| `AnalysisHandle` | `analysis-root` | `analysis-root.v1` | Base/proposed views, AnalysisExecutionClosure, context, exact decision and coverage children |
+| `PolicyHandle` | `policy-inspection` | `policy-inspection.v1` | Canonical policy identity, semantic projection, and material ExecutionClosure |
+| `RelationshipHandle` | `relationship-inspection` | `relationship-inspection.v1` | Compiled edge identity, semantic projection, and material ExecutionClosure |
 | `CertificateHandle` | `coverage-certificate` | `coverage-certificate.v1` | Coverage view, requirement, and attestation object handles |
-| `CoverageAuthorityViewHandle` | `coverage-view` | `coverage-view.v1` | Exact coverage-relevant semantic payload; derivation snapshot is excluded provenance |
+| `CoverageAuthorityViewHandle` | `coverage-view` | `coverage-view.v1` | Exact coverage-relevant semantic payload and owner-local authority references; derivation view is excluded provenance |
 | `CoverageRequirementHandle` | `coverage-requirement` | `coverage-requirement.v1` | Coverage-view object handle |
 | `CoverageAttestationHandle` | `coverage-attestation` | `coverage-attestation.v1` | Requirement object handle, evidence, and authorization |
-| `AnalysisContextHandle` | `analysis-context` | `analysis-context.v1` | Narrow changed-policy semantic payload and normalized proposals; full snapshot handles and relationship topology excluded |
-| `FactRequirementHandle` | `fact-requirement` | `fact-requirement.v1` | Analysis-context object handle and fact/answer/evidence contracts |
+| `AnalysisContextHandle` | `analysis-context` | `analysis-context.v1` | Narrow changed-policy semantic payload and normalized proposals; full view handles and relationship topology excluded |
+| `FactRequirementHandle` | `fact-requirement` | `fact-requirement.v1` | Analysis-context object handle plus fact/answer/evidence authority |
 | `FactObservationHandle` | `fact-observation` | `fact-observation.v1` | Requirement object handle, value, evidence, and authorization |
 
 The object-kind vocabulary is closed in A1b. Adding a kind changes the authority
@@ -123,11 +118,11 @@ expose arbitrary blobs, object enumeration, graph traversal, collection,
 remote storage, or mutable indexes.
 
 Stored payloads never include their own handle. After resolution verifies the
-envelope and recomputes its handle, the public projection injects that handle.
-Dependencies always point upstream: snapshots; then contexts and coverage
-views; then requirements; then observations or attestations; then
-certificates; and finally analysis/navigation roots. No child object references
-an analysis root. The exact payload fields and dependency DAG are defined in
+envelope and owner-recomputed semantic ID, the public projection injects that
+handle. Dependencies always point upstream from content and owner-local
+semantic authorities through views and execution closures to results. No child
+object references an analysis root. The exact payload fields and dependency DAG
+are defined in
 [authority-object contracts](authority-object-contracts.md).
 
 ## Semantic Identity Migration
@@ -137,7 +132,9 @@ NFC serializer and advance atomically:
 
 | Concern | Current domain | A1b domain/result |
 | --- | --- | --- |
-| Snapshot lifecycle identity | `snapshot:v3` | Replaced by `snapshot-root.v1` authority object and handle v4 |
+| Snapshot lifecycle identity | `snapshot:v3` | Replaced by content-only `content-snapshot.v1` object and handle v4 |
+| Standards authority composition | absent | `standards-authority-view.v1` object and handle v4 |
+| Material operation authority | implicit or copied version records | `execution-closure.v1` object and handle v4 |
 | Navigation lifecycle identity | `navigation:v3` | Replaced by `navigation-result.v1` authority object and handle v4 |
 | Analysis lifecycle identity | `analysis:v3` | Replaced by `analysis-root.v1` authority object and handle v4 |
 | Obligation | `obligation:v2` | `obligation:v3` |
@@ -149,8 +146,8 @@ NFC serializer and advance atomically:
 | Coverage audit requirement | `coverage-audit-requirement:v2` | Replaced by `coverage-requirement.v1` authority object and handle v4 |
 | Coverage attestation | `coverage-attestation:v2` | Replaced by `coverage-attestation.v1` authority object and handle v4 |
 | Consumer coverage certificate | `consumer-coverage-certificate:v2` | Replaced by `coverage-certificate.v1` authority object and handle v4 |
-| Authorization authority view | `authorization-authority-view:v1` | `authorization-authority-view:v2` |
-| Provider authority view | `provider-authority-view:v1` | `provider-authority-view:v2` |
+| Authorization authority | `authorization-authority-view:v1` | Owner-local transition authority object; referenced only by material analysis decisions |
+| Provider authority | `provider-authority-view:v1` | Owner-local transition authority object; referenced only by material analysis execution |
 | Policy-unit structural digest | implicit normalized structural encoding | `policy-unit-structure.v2` identity encoding |
 | Analysis ordering and dedup keys | generic canonical bytes | Typed domain keys; not identities |
 
@@ -159,10 +156,10 @@ digests, and applicability digest domains remain unchanged only after focused
 tests prove they do not consume the retired encoder and their semantic inputs
 are unchanged.
 
-Directly stored inspectables have no second semantic ID. Their authority-object
-handle is their sole identity, and the versioned payload contract supplies the
-domain semantics. Domain-specific IDs remain only for semantic records that are
-not directly stored objects, including obligations and impact traces.
+Directly stored inspectables have one owner-defined semantic ID. Their public
+handle represents that ID; envelope and handle wire formats are separate
+compatibility promises. Domain-specific IDs remain for semantic records that
+are not directly stored objects, including obligations and impact traces.
 
 ## Domain Ordering And Deduplication
 
@@ -185,7 +182,7 @@ places the already-normalized value in a typed identity record.
 | Analysis `ChangeDescriptor` | `(change_kind_rank, accepted_ids, proposed_ids, review_scope_key, optional accepted_module, optional proposed_module)`, where IDs are scalar-sorted sets and kind rank is `modification`, `addition`, `removal`, `move`, `split`, `merge`. |
 | Analysis changed-policy subjects | Canonical policy ID. One policy cannot have two distinct subject records. |
 | Analysis semantic proposals | Canonical policy ID. One policy cannot have two distinct proposals. |
-| Provider immutable snapshot inputs | Complete snapshot-handle key `(kind, schema_version, id)`. The base and proposed role positions remain authored fields; additional provider inputs are key-sorted. |
+| Provider immutable content/view inputs | Complete handle key `(kind, schema_version, id)`. Base and proposed roles remain authored fields; additional inputs are key-sorted. |
 | Consumer review group | `(canonical consumer ID, review_scope_key, review-contract ID)`. Overlapping scopes do not merge. |
 | Policy-impact selection reason | `(source policy-unit ID, edge ID, relation, evidence owner, trace_keys)`, with trace key `(graph_side_rank, trace ID, applicability_rank)`, graph-side rank `accepted`, `proposed`, and applicability rank `true`, `false`, `unknown`. |
 | Consumer evidence-owner set | Canonical evidence-owner ID. |
@@ -197,9 +194,11 @@ places the already-normalized value in a typed identity record.
 | Accepted fact observations | Requirement handle key; different observations for one requirement form separate successor branches and cannot coexist in one state. Stored observation handles are ordered by `(kind, schema_version, id)`. |
 | Accepted dispositions | `(obligation ID, decision_kind_rank)`, with decision rank `consumer`, `impact`. Different records under one key form separate successor branches and cannot coexist in one state. |
 | Coverage decisions | Coverage-requirement handle key; stored attestation and certificate handles use `(kind, schema_version, id)`. |
-| `NextOperation` | `(operation_rank, request_kind_rank, optional target, optional obligation_id, optional requirement_id, optional snapshot_handle, optional analysis_handle)`. Operation rank is `query`, `resolve`, `inspect`; query request rank is `route`, `read`, `related`; resolve request rank is `provide-fact`, `consumer-disposition`, `impact-disposition`, `coverage-attestation`; inspect has one request rank. |
+| `NextOperation` | `(operation_rank, request_kind_rank, optional target, optional obligation_id, optional requirement_id, optional view_handle, optional analysis_handle)`. Operation rank is `query`, `resolve`, `inspect`; query request rank is `route`, `read`, `related`; resolve request rank is `provide-fact`, `consumer-disposition`, `impact-disposition`, `coverage-attestation`; inspect has one request rank. |
 | Result changes | The underlying `ChangeDescriptor` key. Requirements and obligations use the work keys above; reading entries use their presentation key; next operations use `NextOperation` key. |
-| Snapshot scopes, exclusions, and entries | Scope path, exclusion path, and entry path respectively. Nested handles use `(kind, schema_version, id)`. |
+| ContentSnapshot scopes, exclusions, and entries | Scope path, exclusion path, and entry path respectively. Nested handles use `(kind, schema_version, id)`. |
+| StandardsAuthorityView selections | Canonical role; unequal authority references under one role are invalid. |
+| ExecutionClosure references | `(object_kind, semantic_id)`; roots and transitive dependencies are sorted independently. |
 | Policy-unit structure | Aliases, predecessors, and successors are scalar-sorted canonical IDs; heading-path component order is authored; corpus records use canonical policy-unit ID. |
 | Authority-object sets | The exact member keys declared in `authority-object-contracts.md`; handle sets always use `(kind, schema_version, id)`. |
 
@@ -227,7 +226,7 @@ deduplication, and deterministic ordering without encoded-byte comparison.
 | Public handle schema | mixed/current 3 | universal 4 |
 | Identity encoding | implicit NFC v1 | codepoint-preserving v2 |
 | Authority object envelope | absent | 1 |
-| Snapshot/analysis/navigation payload | split implementations | root payload 1 each |
+| Content/view/closure/navigation/analysis payloads | split implementations and version bags | owner-scoped payload 1 each |
 
 Version 10, every former handle representation, and every former persisted
 state are `unsupported`. No compatibility parser, converter, alias, or fallback

@@ -378,3 +378,39 @@
   the operation Interface is unchanged. No runtime, package manifest, policy unit,
   relationship, coverage source, fixture, A1, or A2 implementation changed.
   Lifecycle remains `Blocked` pending independent exact-tree review of C4.
+
+## 2026-08-26 - Candidate C4 Admission Rejection And C5 Replan
+
+- Candidate C4 `b92ed7828982723d0118294ea1a09f30001ad25e`, tree
+  `125b53038737628af82271a2eee6ec29aa8b6bf6`, is `Rejected` and
+  `Superseded`. Historical replan review found that its object-specific version
+  records remained copied umbrella authority, ContentSnapshot still mixed
+  capture with semantic interpretation, the generic repository acquired domain
+  identity/decoding responsibility, and provider/authorization authority was
+  broader than existing-result replay required.
+- The accepted project-agnostic authority-scope, declaration-authority, and
+  material-invalidation standards at commit
+  `396144ad9a75c948484d1e564fab73c857bd6f4d` confirm that this is a systemic
+  design defect rather than a missing version field.
+- Replacement decision: ContentSnapshot contains only captured content and
+  capture semantics. One StandardsAuthorityView references exact
+  owner-produced semantic authority without acquiring its lifecycle. Domain
+  Modules return AuthorityBoundValues, and the composing kernel derives each
+  operation's exact ExecutionClosure by traversing stored direct references.
+- Replacement decision: the immutable repository owns envelope integrity and
+  direct lookup. Registered domain Modules own semantic identity, decoding, and
+  object-local invariants. Provider and authorization authorities participate
+  only in transitions that create new decisions; replay of an existing result
+  requires only its persisted closure.
+- `Superseded`: all C4 `SnapshotVersions`, `NavigationVersions`,
+  `AnalysisVersions`, generic VersionMap, snapshot-as-query authority, copied
+  dependency lists, and ambient authority-completion decisions.
+- The proposed machine schema is replaced atomically at v11; no v12 or
+  compatibility path is introduced. Its proposed SHA-256 is
+  `d5362c1c8d2a6ea2db469065b2c29cc293e61d2e637ec5b71045c8f54139c3c7`.
+  The operation/capability Interface remains byte-identical at
+  `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
+- No production runtime, package, manifest, policy, relationship, coverage,
+  fixture, A1, or A2 implementation changed. Lifecycle remains `Blocked`
+  pending independent exact-tree review of C5 through the direct C5-R-T-S
+  chain.

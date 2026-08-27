@@ -39,8 +39,8 @@ relationship, disposition, and coverage authority.
 | `tools/standards_identity/standards_identity/__init__.py` | Add as the narrow encoding/hashing public Interface |
 | `tools/standards_identity/README.md` | Add as the identity encoding and hashing Interface guide |
 | `tools/standards_authority/pyproject.toml` | Add as the Identity- and Contracts-backed authority package contract |
-| `tools/standards_authority/standards_authority/__init__.py` | Add as the narrow capture/storage public Interface |
-| `tools/standards_authority/README.md` | Add as the capture, storage, publication, and recovery Interface guide |
+| `tools/standards_authority/standards_authority/__init__.py` | Add as the narrow content-capture, envelope-integrity, and direct-lookup public Interface; domain Modules retain semantic identity and decoding |
+| `tools/standards_authority/README.md` | Add as the content capture, generic repository, publication, registration, and recovery Interface guide |
 | `evaluation/standards-effectiveness/policy-units/dependencies.toml` | Retain and add one reviewed revision-1 unit for the exact `Requirement And Ownership` heading |
 | `evaluation/standards-effectiveness/policy-units/cross-platform.toml` | Add one reviewed revision-1 unit for the exact `Filesystem Paths` heading |
 | `evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml` | Add source-owned Cross-Platform implementation, package, fixture, and suite relationships |
@@ -83,7 +83,7 @@ relationship, disposition, and coverage authority.
 | `tools/standards_engine/standards_engine/_generated_contract.py` | Retain and regenerate |
 | `tools/standards_engine/standards_engine/__init__.py` | Retain and update |
 | `tools/standards_engine/standards_engine/tools.py` | Retain and update |
-| `tools/standards_engine/standards_engine/engine.py` | Retain and update |
+| `tools/standards_engine/standards_engine/engine.py` | Retain; compose reference-only StandardsAuthorityViews and mechanically derive operation ExecutionClosures from owner-produced AuthorityBoundValues |
 | `tools/standards_engine/standards_engine/rendering.py` | Retain; render the exhaustive generated v11 result algebra, including `FactRequirementWork` |
 | `tools/standards_engine/standards_engine/model.py` | Retire; it is only a compatibility re-export over the generated algebra |
 | `tools/standards_metadata/standards_metadata/serialization.py` | Retire; replace with `tools/standards_identity/standards_identity/encoding.py` |
@@ -95,8 +95,8 @@ relationship, disposition, and coverage authority.
 | none | Add `tools/standards_contracts/standards_contracts/compiler.py` |
 | none | Add `tools/standards_contracts/standards_contracts/projection.py` |
 | none | Add `tools/standards_identity/standards_identity/encoding.py` |
-| none | Add `tools/standards_authority/standards_authority/repository.py` |
-| none | Add `tools/standards_authority/standards_authority/capture.py` |
+| none | Add `tools/standards_authority/standards_authority/repository.py` for generic envelope integrity, registered owner dispatch, and direct lookup |
+| none | Add `tools/standards_authority/standards_authority/capture.py` for content-only snapshots |
 
 The listed Engine Module manifests form one exact source-tree dependency
 closure. They are not independently published artifacts in A1b, so the plan
@@ -213,7 +213,10 @@ suite registration.
 | `topic.contracts.generated-semantic-conformance` | Replace `generate_contract.py`; retain Router, profile, Build, Tooling, prompts, generated algebra, facade, tool adapter, fixture, and suite | Add `a1-interface.toml`, compiler, and projection; projection replaces the old generator edge |
 | `topic.contracts.schema-dialect-and-vocabulary` | Retain profile, Dependencies, schema, fixture, and suite; replace generator and validator | Compiler replaces validator; compiler plus projection replace the old generator relationship |
 | `topic.contracts.identity-versus-instance-equality` | Retain Applicability, reproduction report, and suite; retire metadata serializer, local validator, generated-validator meaning, and model intermediary | Add identity encoder, contract compiler, policy-unit structure owner, and all typed Analysis identity/order consumers listed above |
-| `topic.architecture.immutable-authority-closure` | Retain engine, analysis transition/result, fixture, suite, and Persistence; replace snapshot compiler | Add authority envelope/repository and direct-object cold-reconstruction suite |
+| `topic.architecture.authority-scope-admission` | Retain the accepted profile, planning, implementation, schema, generator, generated model, facade, fixture, and suite relationships | Add StandardsAuthorityView composition, owner registration/dispatch, AuthorityBoundValue production, and the execution-closure audit; the view references semantic authorities without acquiring them |
+| `topic.contracts.declaration-and-semantic-authority` | Retain the accepted declaration/executable/domain-owner relationships | Add domain-owned semantic object constructors and AuthorityBoundValue projections; the generic repository validates envelopes but does not own domain semantics |
+| `topic.contracts.version-scope-and-invalidation` | Retain the accepted version-scope consumers; replace A1 snapshot/resolution invalidation behavior | Add ContentSnapshot, StandardsAuthorityView, ExecutionClosure, navigation and analysis identities; remove copied version bags and bind only material semantic dependencies |
+| `topic.architecture.immutable-authority-closure` | Retain engine, analysis transition/result, fixture, suite, and Persistence; replace snapshot compiler | Add content capture, generic authority repository, registered domain dispatch, StandardsAuthorityView, structural ExecutionClosure derivation, and direct-object cold-reconstruction suite |
 | `topic.dependencies.implementation-versus-dependency` | Retain Router, profile, prompts, fixture, and suite | Add contract package manifest, exact lock, compiler, and dependency provenance report |
 | `topic.dependencies.requirement-and-ownership` | New projection of the existing `Requirement And Ownership` heading at semantic revision 1 | Add every catalog-listed Engine Module manifest and public root, the Verifier-owned repository entrypoints and adapter module, package-contract projection/check/test, and registered public-cutover fixtures and suite |
 | `profile.boundary.generated-contract.semantic-closure` | Retain Contracts, Verification, Build, Dependencies, schema, generated algebra, tool adapter, fixture, and suite; replace generator | Add interface contract, compiler, and projection; projection replaces the generator edge |
@@ -225,7 +228,10 @@ Generated Contract profile because it must exhaustively project the public
 result algebra. The Metadata and Analysis package initializers follow
 identity-versus-instance-equality and immutable-authority-closure respectively
 because their public exports must remove the retired serializer and snapshot
-authorities.
+authorities. Engine composition and the Authority public root additionally
+follow authority-scope admission, declaration/semantic authority, and version
+scope because they select references, dispatch semantic owners, and derive
+material invalidation without becoming umbrella semantic authority.
 
 Relationship declarations remain source-owned in their current module files.
 `policy-impact-registry.toml` remains the sole closed membership authority for
@@ -235,8 +241,8 @@ relationship source. No generic graph manifest or path inference creates these
 replacements.
 
 The new policy units for Dependencies Requirement And Ownership, Cross-Platform
-Filesystem Paths, and Security Filesystem Containment do not
-change normative prose. Their revision 1 is a reviewed bootstrap assertion that
+Filesystem Paths, and Security Filesystem Containment do not change normative
+prose. Their revision 1 is a reviewed bootstrap assertion that
 the exact canonical module, locator, resolved content/structure, and initial
 implementation relationships represent the already accepted meaning. Each
 locator must resolve exactly once and its module must own its declaration.
@@ -260,6 +266,10 @@ new relationships:
 | same | `tools/standards_engine/standards_engine/_generated_contract.py` | correct | generated models retain shape only; contract compiler owns validation |
 | same | `tools/standards_engine/standards_engine/model.py` | retire/split | generated handle shapes, authority repository, and domain identity constructors |
 | `topic.architecture.immutable-authority-closure` | `tools/standards_analysis/standards_analysis/snapshots.py` | replace/split | authority capture and repository |
+| `topic.architecture.authority-scope-admission` | no current edge for StandardsAuthorityView composition or execution-closure derivation | add missing consumers | Engine composition, domain owner registration, AuthorityBoundValue producers, and the closure audit |
+| `topic.contracts.declaration-and-semantic-authority` | no current edge for owner-local authority decoding | add missing consumers | registered domain constructors and projections; generic repository remains envelope-only |
+| `topic.contracts.version-scope-and-invalidation` | A1 schema, generator, generated model, facade, snapshot, and resolution use umbrella interface/component versions | correct/split | content capture identity, authority-view selection identity, structurally derived operation closure, and owner-local navigation/analysis identity |
+| `topic.architecture.immutable-authority-closure` | no current edge for reference-only view and structural dependency closure | add missing consumers | StandardsAuthorityView, ExecutionClosure, owner dispatch, and mutation/cold-process verification |
 | `profile.boundary.generated-contract.semantic-closure` | `tools/standards_engine/contracts/generate_contract.py` | replace/split | interface contract, contract compiler, and projection compiler |
 | same | no current edge for `contracts/generated/agent-tools.json` | add missing consumer | generated agent-tool projection |
 | same | no current edge for `contracts/examples/a1-examples.json` | add missing consumer | public serialized example corpus |

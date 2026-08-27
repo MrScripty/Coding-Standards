@@ -5,8 +5,9 @@
 **Current phase:** Replacement planning admission
 
 **Next slice:** Independent exact-tree Standards and Specification review of
-replacement planning candidate C4, including coverage sequencing,
-object-specific version closure, and complete contract-semantic evidence
+replacement planning candidate C5, including authority-scope ownership,
+structural execution closure, coverage sequencing, and complete
+contract-semantic evidence
 
 **Acceptance status:** `pending`
 
@@ -17,13 +18,15 @@ object-specific version closure, and complete contract-semantic evidence
 ## Objective
 
 Replace A1's duplicated contract semantics, generic normalized identity
-serialization, and fragmented immutable-authority storage with one
-dependency-backed contract compiler, one codepoint-preserving identity encoder,
-one direct immutable authority-object repository, and one generated public
-request/result algebra. Preserve the four-operation read-only Standards Engine
-and immutable analysis kernel while making every issued handle directly
-resolvable in a cold process. Complete independent exact-tree acceptance before
-any A2 review or implementation begins.
+serialization, fragmented immutable-authority storage, and copied version bags
+with one dependency-backed contract compiler, one codepoint-preserving identity
+encoder, one generic immutable object repository with domain-owned semantic
+decoding, one reference-only StandardsAuthorityView, mechanically derived
+operation ExecutionClosures, and one generated public request/result algebra.
+Preserve the four-operation read-only Standards Engine and immutable analysis
+kernel while making every issued handle directly resolvable in a cold process.
+Complete independent exact-tree acceptance before any A2 review or
+implementation begins.
 
 ## Objective Acceptance
 
@@ -32,13 +35,14 @@ any A2 review or implementation begins.
 | A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; the complete admitted feature matrix and known A1 regressions agree between the direct validator and production Adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 and atomic cutover |
 | A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable projection semantics reject. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestones 1 and 3 |
 | A1B-A3 | JSON Schema validation, applicability equality, identity encoding, and domain ordering/deduplication pass owner-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `pending` | Pending Milestones 0, 1, and 3 |
-| A1B-A4 | Every advertised snapshot, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its typed object in a fresh process after source and process mutation; durable publication and cleanup pass on Linux ext4. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
+| A1B-A4 | Every advertised content snapshot, authority view, execution closure, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its owner-typed object in a fresh process after source and process mutation; existing results require no live provider or authorization service; durable publication and cleanup pass on Linux ext4. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
+| A1B-A4C | Every operation closure is derived by traversing owner-declared direct dependencies: all consumed authority is included, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestones 2 and 3 |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `pending` | Pending Milestone 0 |
 | A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6P | Before implementation starts, an independent planning review accepts the selected package provenance, license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
 | A1B-A6L | Final independent review proves the implemented exact lock and provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
-| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split state store, owner map, scan, compatibility path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split state store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `pending` | Pending broad checkpoint |
 | A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `pending` | Pending final checkpoint |
@@ -57,7 +61,11 @@ any A2 review or implementation begins.
   `referencing==0.37.0`.
 - A `standards_authority` Module directly storing the closed set of public
   inspectable objects through in-memory and directory adapters, using
-  `standards_contracts` as the sole validator for embedded v11 definitions.
+  `standards_contracts` as the sole validator for embedded v11 definitions,
+  and delegating semantic identity and decoding to registered domain owners.
+- Content-only ContentSnapshots, reference-only StandardsAuthorityViews, and
+  structurally derived operation ExecutionClosures composed from
+  owner-produced AuthorityBoundValues.
 - Contract v11, request v3, result projection v3, analysis contract/schema 7/4,
   public handle v4, authority envelope v1, and identity encoding v2.
 - The exact proposed v11 public schema and interface contract in
@@ -141,7 +149,8 @@ any A2 review or implementation begins.
 | Use `jsonschema.Draft202012Validator` as the sole Draft validator behind one deep project adapter. | Contracts and Dependencies | [A1b ADR](../../decisions/standards-engine-a1b.md), [dependency decision](reports/dependency-and-dialect-decision.md) | Local validator and generated keyword interpreter |
 | Keep schema validation, applicability equality, identity encoding, and domain ordering separate. | Owning domain Modules | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Generic serializer as cross-domain semantics |
 | Use codepoint-preserving identity encoding v2; domain Modules own typed identity records and any semantic normalization. | Identity and domain owners | [Identity/version matrix](reports/identity-version-object-matrix.md) | Recursive NFC identity encoding v1 |
-| Directly store every inspectable object through one closed acyclic immutable authority Interface; delegate embedded v11 definition validation to Contracts; keep readers lock-free; serialize writers through non-authoritative publication coordination; make same-ID publication idempotent by content identity; and expose explicit interruption outcomes. | Architecture, Persistence, Contracts, Concurrency, and Resilience | [Authority-object contracts](reports/authority-object-contracts.md), [identity/version matrix](reports/identity-version-object-matrix.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage plus owner maps, scans, caches, or duplicated schema interpretation |
+| Capture repository bytes in content-only ContentSnapshots; compose one reference-only StandardsAuthorityView; require domain Modules to return AuthorityBoundValues; derive exact operation ExecutionClosures structurally; and invalidate identities only for material semantic dependencies. | Architecture, Contracts, and domain owners | [Authority composition and execution closure](reports/authority-composition-and-execution-closure.md), [identity/version matrix](reports/identity-version-object-matrix.md), [consumer inventory](reports/consumer-and-state-inventory.md) | C4 object-specific version bags, snapshot-as-query authority, copied dependency lists, and umbrella invalidation |
+| Directly store every inspectable object through one closed acyclic immutable authority Interface; make the repository own envelope integrity and direct lookup while registered domain Modules own semantic identity and decoding; delegate embedded v11 definition validation to Contracts; keep readers lock-free; serialize writers through non-authoritative publication coordination; make same-ID publication idempotent by owner-produced semantic identity; and expose explicit interruption outcomes. | Architecture, Persistence, Contracts, Concurrency, Resilience, and domain owners | [Authority-object contracts](reports/authority-object-contracts.md), [authority composition and execution closure](reports/authority-composition-and-execution-closure.md), [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage, generic semantic ownership, owner maps, scans, caches, or duplicated schema interpretation |
 | Support one exact Linux ext4 durable-store contract with filesystem-aware identity, handle-relative mutation, explicit aliases, and typed unsupported outcomes. | Cross-Platform and Security | [A1b ADR](../../decisions/standards-engine-a1b.md), [authority-object contracts](reports/authority-object-contracts.md), [migration plan](reports/policy-impact-migration-plan.md) | Operating-system-name inference and path-based validation/use |
 | Remove all schema `x-standards-engine-*` annotations; use one closed interface contract and domain-owned executable contracts. | Contracts and domain owners | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Mixed machine prose in public schema |
 | Build isolated foundations, then perform one atomic production v11 cutover. | Planning and integration owner | This plan | Partial schema/generated production cutover |
@@ -160,6 +169,7 @@ any A2 review or implementation begins.
 | Identity is representation preserving | Content identity | Exact codepoint fixtures and domain identity records | Identity v2 contract | Domain semantic equality | NFC-equivalent inputs remain distinct unless owner normalizes |
 | Domain equality/order is local | Domain semantics | Applicability and analysis owner fixtures | Each domain contract | Generic identity-byte ordering or equality | Generic identity bytes cannot decide semantic equality or order |
 | Cold reconstruction is complete | Persisted authority | Fresh process with store path and handle only | Persisted object envelope and dependencies | In-process caches or unavailable durable filesystem | Missing is unavailable; contradiction is invalid |
+| Operation authority is exact | Material semantic dependency | Structural traversal of AuthorityBoundValue direct references | Registered owner contracts and reference-only StandardsAuthorityView | Handwritten closure, version bag, or full-view invalidation | Missing consumed dependency, included unused dependency, cycle, or owner mismatch rejects |
 | Public algebra is exhaustive | Public path | Real facade/tool calls using exported generated types | Public operation closure | Internal domain values crossing the facade | Unhandled domain result is a programming error |
 | External dependency is reproducible | Release artifact | Hash-checked isolated install and dependency import smoke | Reviewed lock, artifact hashes, provenance, licenses | Unreviewed platform, Python, wheel, or source build | Missing or mismatched artifact blocks installation |
 | Internal Module closure is exact | Source-tree integration | AST-derived production-import/manifest equality, root-export resolution, governed-source ownership, and isolated root/export/entrypoint execution | Manifest-owned requirements, roots, repository entrypoints, package `__all__`, and reviewed checkout | Independently published or installed local distributions | Missing, transitive-only, unused, ambient, alternate-root, undeclared, private-child, root-plus-private-child, star, dynamic, or unowned production import fails |
@@ -172,11 +182,13 @@ conformance and does not run the complete upstream corpus.
 ## Systemic Finding Audit
 
 - **Invariant families:** contract validation and projection, identity encoding,
-  semantic ordering/deduplication, immutable object resolution, package
+  semantic ordering/deduplication, content capture, authority composition,
+  structural execution closure, immutable object resolution, package
   dependency/public-export closure, and implementation-consumer coverage.
 - **Inventories:** [schema/domain audit](reports/schema-and-domain-contract-audit.md),
   [identity/version matrix](reports/identity-version-object-matrix.md),
   [authority-object contracts](reports/authority-object-contracts.md),
+  [authority composition and execution closure](reports/authority-composition-and-execution-closure.md),
   [consumer/state inventory](reports/consumer-and-state-inventory.md), and
   [policy-impact migration](reports/policy-impact-migration-plan.md).
 - **Required disposition:** every repository-controlled implementation,
@@ -225,12 +237,28 @@ advertised public version projections without ambient authority, and the
 contract Adapter evidence covered historical regressions rather than every
 admitted semantic feature.
 
+Candidate C4 `b92ed7828982723d0118294ea1a09f30001ad25e`, tree
+`125b53038737628af82271a2eee6ec29aa8b6bf6`, is `Rejected` and
+`Superseded` by C5. Historical replan review found that its object-specific
+version records remained copied umbrella authority, its snapshot still mixed
+content capture with semantic interpretation, its generic repository acquired
+domain identity/decoding responsibility, and provider/authorization authority
+remained broader than existing-result replay required. The accepted
+authority-scope and version-scope standards at commit `396144ad` require the
+systemic replacement recorded in
+[authority composition and execution closure](reports/authority-composition-and-execution-closure.md).
+
+C5 is planned from commit
+`396144ad9a75c948484d1e564fab73c857bd6f4d`, which includes the accepted
+general authority-scope standards. It retains the original standards-recovery
+comparison base above while replacing C4 planning authority.
+
 Admission and start require this direct-child chain:
 
-1. **C4:** clean replacement planning candidate containing no implementation
+1. **C5:** clean replacement planning candidate containing no implementation
    and superseding every rejected candidate named above;
 2. **R:** reviewer-owned `reports/a1b-plan-admission.md` as the sole change,
-   binding C4, explicitly accepting the dependency provenance/licensing
+   binding C5, explicitly accepting the dependency provenance/licensing
    disposition in A1B-A6P, and reporting no blocking Standards or
    Specification finding;
 3. **T:** mechanical admission transition as the direct child of R, changing
@@ -323,8 +351,9 @@ it separately.
 
 ### Milestone 2: Isolated Authority Repository
 
-**Goal:** Implement the closed direct-object repository and prove atomic
-publication and cold reconstruction independently of the accepted facade.
+**Goal:** Implement content capture and the generic direct-object repository,
+then prove atomic publication, registered owner dispatch, dependency traversal,
+and cold reconstruction independently of the accepted facade.
 
 **Allowed write set:**
 
@@ -334,18 +363,21 @@ publication and cold reconstruction independently of the accepted facade.
 
 **Tasks:**
 
-- [ ] Implement the envelope, closed object-kind registry, typed handles,
-  in-memory adapter, and directory adapter.
-- [ ] Store and validate the exact object-specific public `SnapshotVersions`,
-  `NavigationVersions`, and `AnalysisVersions` records. Prove cold resolution
-  never supplies a version from process configuration and that changing an
-  analysis-only provider or authorization contract does not change snapshot or
-  navigation identity.
+- [ ] Implement the generic envelope, registered owner Interface, typed handles,
+  in-memory adapter, and directory adapter. The repository validates envelope
+  integrity and direct references; a registered owner computes semantic
+  identity and decodes its payload.
+- [ ] Implement immutable `AuthorityBoundValue` and deterministic dependency
+  traversal over stored direct references. Prove missing dependencies, owner
+  mismatch, contradictory content, and cycles reject while input ordering does
+  not alter the resulting closure.
 - [ ] Implement authority-owned Git-tree and mutable-manifest capture adapters,
   exact scope/path/symlink/nested-source handling, and two-pass source-change
-  rejection.
-- [ ] Store and resolve every root and child kind from the identity matrix
-  directly by handle.
+  rejection. ContentSnapshot identity contains capture semantics and captured
+  content only.
+- [ ] Store and resolve ContentSnapshot plus private fixture-owned root and child
+  kinds directly by handle. Domain production kinds enter only in the atomic
+  cutover.
 - [ ] Verify same-directory create-only hard-link publication, collision
   detection, missing objects, binary and empty snapshot entries,
   Base64/digest/length contradiction, kind mismatch, unsupported versions,
@@ -365,12 +397,13 @@ publication and cold reconstruction independently of the accepted facade.
   interruption after publication before acknowledgement, retry
   reconciliation, crash-released publication lock, next-writer abandoned
   staging cleanup, normal-path terminal cleanup, and fresh-process reopening.
-- [ ] Prove fresh-process reconstruction using only persisted objects and
-  handles after source and process mutation.
+- [ ] Prove fresh-process reconstruction using only persisted objects, owner
+  registrations, and handles after source and process mutation.
 - [ ] Prove no enumeration, owner map, root scan, cache index, or ambient
   provider authority is needed.
 
-**Acceptance gate:** The isolated half of A1B-A4 passes on both adapters.
+**Acceptance gate:** The isolated halves of A1B-A4 and A1B-A4C pass on both
+adapters.
 Record the checkpoint in the ledger working tree, but do not commit it
 separately.
 
@@ -433,10 +466,21 @@ in one replacement boundary; delete all superseded authority.
 - [ ] Advance every identity and public contract in the identity/version matrix
   and use domain-owned typed keys for ordering and deduplication.
 - [ ] Route all public validation through `standards_contracts` and all public
-  object persistence/inspection through `standards_authority`. Authority must
-  use the Contracts named-definition adapter for every embedded v11 value and
-  own its envelope, closed stored-payload records, identity, dependency-kind,
-  object-local, and DAG validation.
+  object persistence/inspection through `standards_authority`. Authority uses
+  the Contracts named-definition adapter for every embedded v11 value and owns
+  envelope, direct-reference, and DAG integrity. Each registered domain Module
+  owns its semantic record, identity, decoding, and object-local invariants.
+- [ ] Make Standards Engine composition create one reference-only
+  StandardsAuthorityView from owner-produced semantic objects. Query and
+  analysis preparation accept views, not content snapshots.
+- [ ] Make every domain execution path return an AuthorityBoundValue. Derive and
+  persist each result's exact ExecutionClosure by traversing direct references;
+  never accept a caller-supplied closure or handwritten version/dependency bag.
+- [ ] Prove included authority mutation changes every dependent closure and
+  identity, excluded view-member mutation leaves unrelated identities stable,
+  and existing cold inspection requires no live provider or authorization
+  authority. Provider and authorization checks occur only while producing a
+  successor analysis state.
 - [ ] Exhaustively adapt domain requests and outcomes at the facade.
 - [ ] Accept coverage claims as input, validate evidence and trusted execution
   authorization, and construct stored coverage attestations only inside the
@@ -465,7 +509,8 @@ in one replacement boundary; delete all superseded authority.
   and `from public_root import private_child`. Require the intended rule's exact
   diagnostic and prove that exported root names remain accepted.
 - [ ] Delete old validators, generated keyword walkers, generic NFC serializer,
-  snapshot compiler, split stores, owner maps, scans, aliases, and fallbacks.
+  snapshot compiler, split stores, owner maps, scans, aliases, copied version
+  bags, ambient authority-completion paths, and fallbacks.
 - [ ] Register the Cross-Platform and Security declaration files explicitly in
   the closed policy-impact registry. Compile accepted and proposed
   catalogs/relationships; require every admitted declaration source and natural
@@ -520,8 +565,9 @@ declared lifecycle fields and must identify both exact trees.
 **Tasks:**
 
 - [ ] Record the exact implementation commit/tree, dependency resolution,
-  generated outputs, identity versions, object kinds, node/edge/consumer
-  dispositions, coverage identities, and complete verification.
+  generated outputs, owner-local identity contracts, object kinds, authority
+  views, execution closures, node/edge/consumer dispositions, coverage
+  identities, and complete verification.
 - [ ] Obtain independent Standards and Specification review against that exact
   tree.
 - [ ] Accept only with no blocked claim or consumer and a clean worktree.
@@ -533,8 +579,8 @@ declared lifecycle fields and must identify both exact trees.
 
 ## Blockers
 
-- `A1B-006`: independent planning admission has not accepted this replacement
-  candidate and its direct-child transition chain.
+- `A1B-006`: independent planning admission has not accepted C5 and its
+  direct-child transition chain.
 
 ## Re-Plan Triggers
 
@@ -550,6 +596,13 @@ declared lifecycle fields and must identify both exact trees.
   deduplication through an owning typed contract.
 - An inspectable value cannot use the closed direct-object repository without
   scans, mutable indexes, or ambient authority.
+- A domain cannot declare the direct semantic authorities it actually consumes,
+  or the composing kernel cannot derive exact material closure without a
+  handwritten version/dependency list.
+- StandardsAuthorityView would need to own a domain's semantic lifecycle rather
+  than reference the domain-owned authority.
+- Replaying an existing result requires live provider or authorization
+  authority not stored in that result's dependency closure.
 - Bounded atomic snapshot publication is invalidated by measured size,
   streaming requirements, or missing ext4 hard-link/flush/lock behavior.
 - A systemic sibling, semantic consumer, relationship, horizon input, or

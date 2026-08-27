@@ -115,7 +115,7 @@ of them from the JSON Schema.
 
 | Former family | Former concern | V11 owner and representation |
 | --- | --- | --- |
-| `contract` | Versions, operations, capabilities, bootstrap, projection targets, state machine, impact groups | Closed `a1-interface.toml` owns operation names, input/result roots, interface versions, and capability selection. `standards_engine` owns bootstrap. `standards_analysis` owns state transitions and impact-group selection. Build invocation owns selected projection targets. |
+| `contract` | Versions, operations, capabilities, bootstrap, projection targets, state machine, impact groups | Closed `a1-interface.toml` owns operation names, input/result roots, wire versions, and capability selection. Owner-local semantic authorities own compatibility promises. `standards_engine` owns bootstrap and composition; `standards_analysis` owns state transitions and impact-group selection. Build invocation owns selected projection targets. |
 | `identity` | Domain, included fields, excluded fields | Each domain Module constructs one typed identity record and invokes `standards_identity`. Identity rules are executable code plus domain fixtures, not schema annotations. |
 | `invariants` | Cross-field and semantic rules | Applicability, Metadata, Analysis, Policy Impact, Graph, and Authority own typed constructors and failures. The public schema owns only representable shape constraints. |
 | `projection` | Pending/complete result derivation | `standards_analysis.project` owns deterministic domain projection; `standards_engine` exhaustively adapts it to generated public results. |
@@ -125,7 +125,7 @@ of them from the JSON Schema.
 
 The complete proposed serialized algebra is owned by
 [`a1-contract-v11.schema.json`](a1-contract-v11.schema.json), SHA-256
-`d40332050e163bdbd5e60f505eab2f698ebdfb7d4248a636e44c7a0772248eba`.
+`d5362c1c8d2a6ea2db469065b2c29cc293e61d2e637ec5b71045c8f54139c3c7`.
 The complete proposed operation/capability Interface is owned by
 [`a1-interface-v11.toml`](a1-interface-v11.toml), SHA-256
 `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
@@ -163,11 +163,21 @@ operation closure are absent. Added, removed, or renamed definitions require a
 new admitted schema artifact.
 
 Every public handle is the exact closed record `kind`, `id`, and
-`schema_version = 4`; the schema owns each kind and content-addressed ID prefix.
-There is no generic immutable-authority handle. `ProviderInputReference` is the
-exact closed reference allowed in provider authority. Stored authority-object
-records and their local/aggregate semantic invariants are defined separately
-in [authority-object contracts](authority-object-contracts.md).
+`schema_version = 4`; the schema owns each public kind and ID grammar.
+`ContentSnapshotHandle` identifies captured content,
+`StandardsAuthorityViewHandle` identifies caller-visible composition, and
+`ExecutionClosureHandle` identifies the material dependencies of one semantic
+operation. `AuthorityObjectReference` is a serialized dependency reference,
+not a generic public handle or semantic registration authority. Stored records,
+owner validation, and semantic identity are defined separately in
+[authority-object contracts](authority-object-contracts.md) and
+[authority composition](authority-composition-and-execution-closure.md).
+
+The schema contains no `VersionMap`, `SnapshotVersions`,
+`NavigationVersions`, or `AnalysisVersions`. Query and analysis preparation
+accept StandardsAuthorityViews rather than content snapshots. Navigation and
+analysis results expose an ExecutionClosure handle; public projection and
+handle-wire versions do not enter semantic result identity.
 
 V11 changes `FactRequirement` to the semantic object: it excludes `prompt`
 and `dependent_programs`. New `FactRequirementWork` contains
@@ -176,10 +186,13 @@ and `dependent_programs`. New `FactRequirementWork` contains
 `FactRequirementInspectionResult` continues to expose the semantic
 `FactRequirement`. Certificate provenance has no generation timestamp.
 
-Snapshot bootstrap is composition configuration, not a public operation.
+Trusted bootstrap is composition configuration, not a public operation. It
+captures content, constructs owner-local semantic authorities, verifies their
+coherence, and returns a StandardsAuthorityView. Provider and authorization
+objects remain trusted transition inputs outside caller-authored schema values.
 Projection target selection is a build command input, not contract semantics.
-Analysis state transitions and graph-group selection remain typed constants and
-behavior in `standards_analysis`.
+Analysis state transitions and graph-group selection remain typed behavior in
+`standards_analysis`.
 
 ## Validation And Construction Flow
 

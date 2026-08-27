@@ -12,7 +12,7 @@ authoring.
 ## Context
 
 A1 established one read-only Standards Engine facade and one content-addressed
-analysis lifecycle. Its supporting implementation nevertheless has three
+analysis lifecycle. Its supporting implementation nevertheless has four
 coupled defects:
 
 1. the canonical schema, local validator, generator, and generated decoder each
@@ -21,6 +21,9 @@ coupled defects:
    and content identity even though those domains have different rules; and
 3. inspectable handles do not share one direct immutable storage and resolution
    contract, so some values depend on owner maps, scans, or process-local state.
+4. snapshot, navigation, and analysis version records copy independently owned
+   compatibility promises, causing omissions and invalidating identities for
+   unrelated semantic or representation changes.
 
 The accepted standards recovery requires A1b to replace these foundations
 before A2 may be reviewed. Repository inventory found no independently deployed
@@ -66,20 +69,24 @@ diagnostic adaptation, generated public models, and agent-tool projections. It
 does not implement JSON Schema keywords. `jsonschema.Draft202012Validator` is
 the sole executable Draft 2020-12 validator.
 
-`standards_authority` owns immutable storage and direct resolution for every
-public inspectable object. It is not a general object database: the object-kind
-vocabulary is closed, objects are immutable and content addressed, and no
-enumeration, mutable index, graph traversal, garbage collection, remote store,
-or arbitrary blob API is exposed. It delegates every embedded v11
-named-definition check to `standards_contracts`; it owns the authority envelope,
-closed stored-payload records, identity, dependency-kind, object-local, and
-authority-DAG invariants. It does not copy or reinterpret the canonical schema.
+`standards_authority` owns content capture plus immutable storage and direct
+resolution. It is not a general object database: the object-kind vocabulary is
+closed, objects are immutable and content addressed, and no enumeration,
+mutable index, graph traversal, garbage collection, remote store, or arbitrary
+blob Interface is exposed. It owns envelope integrity, create-only publication,
+direct dependency existence and kind, and authority-DAG invariants. Domain
+Modules own semantic identity, decoding, and coherence; generated kind dispatch
+delegates to those owners. The repository does not use the public JSON Schema
+as domain authority.
 
 `standards_analysis` retains change classification, impact selection, fact and
 obligation semantics, coverage decisions, immutable analysis normalization,
-projection, and transitions. It loses snapshot capture and state storage.
-`standards_engine` remains the composition root and exhaustively adapts domain
-outcomes to generated public results.
+projection, and transitions. It loses content capture and state storage.
+`standards_engine` owns StandardsAuthorityView selection and cross-reference
+coherence, remains the composition root, and exhaustively adapts domain outcomes
+to generated public results. Each domain Module returns AuthorityBoundValues so
+the composing kernel derives operation-specific execution closure from the
+dependencies actually consumed.
 
 ### Contract compiler
 
@@ -137,7 +144,7 @@ The domains are independent:
 | --- | --- | --- |
 | JSON Schema instance validity and equality | `jsonschema.Draft202012Validator` | Dependency-defined Draft 2020-12 behavior |
 | Applicability value equality | `standards_applicability` | Its explicit versioned domain semantics, including deliberate NFC handling where already specified |
-| Content identity | `standards_identity` plus each domain owner | Codepoint-preserving identity encoding v2 over a typed domain record |
+| Semantic object identity | `standards_identity` plus each domain owner | Codepoint-preserving identity encoding v2 over an owner-defined material identity record |
 | Ordering and deduplication | Owning domain Module | Typed semantic keys, not generic identity bytes |
 | Raw content digest | Owning content producer | SHA-256 over exact bytes |
 
@@ -151,12 +158,13 @@ binding in the
 [identity/version matrix](../plans/standards-engine-a1b/reports/identity-version-object-matrix.md).
 The encoder performs no semantic work.
 
-Every directly stored inspectable replaces its former domain ID with the one
-authority-object handle. Non-stored identities formerly using the recursive NFC
-serializer advance their domain. Existing applicability digests, policy-impact
-edge IDs, graph IDs, and raw byte digests remain unchanged only after focused
-evidence proves they do not consume the retired encoder and their semantic
-input is unchanged.
+Every directly stored inspectable has one owner-defined semantic ID exposed
+through its public handle. Storage-envelope and public-handle representations
+do not define that semantic identity. Non-stored identities formerly using the
+recursive NFC serializer advance their domain. Existing applicability digests,
+policy-impact edge IDs, graph IDs, and raw byte digests remain unchanged only
+after focused evidence proves they do not consume the retired encoder and their
+semantic input is unchanged.
 
 ### Dependency selection
 
@@ -197,25 +205,29 @@ history.
 
 ### Immutable authority repository
 
-Every public handle directly addresses one immutable object:
+Every stored object has one owner-defined semantic identity and one immutable
+envelope:
 
 ```text
 AuthorityObjectEnvelope v1
   object_kind
+  semantic_id
+  storage_format
+  direct_dependencies
   payload_contract
   payload
-
-object id = identity(
-  domain="coding-standards:authority-object:v1",
-  id_prefix=envelope.object_kind,
-  value=envelope,
-)
 ```
 
-The internal Interface is:
+The semantic ID is derived from the owning Module's material identity record,
+not by hashing the complete envelope. Storage format, public handle schema, and
+result projection are excluded from semantic identity. The repository verifies
+that the owner recomputes the advertised semantic ID and that all direct
+dependencies exist with the expected kinds.
+
+The internal repository Interface is:
 
 ```python
-snapshot_handle = authority.capture(source_adapter, capture_request)
+content_handle = authority.capture(source_adapter, capture_request)
 handle = authority.put(typed_object)
 typed_object = authority.get(handle)
 ```
@@ -223,7 +235,7 @@ typed_object = authority.get(handle)
 `standards_authority` owns capture orchestration and the Git-tree and mutable
 manifest source adapters. `capture` validates scope, exclusions, paths,
 symlinks, nested repositories, entry metadata, content digests, source
-stability, contract versions, nested-object publication, and root publication.
+stability, capture semantics, nested-object publication, and root publication.
 The source adapter supplies observations through one bounded capture view; it
 does not construct handles or stored envelopes.
 
@@ -231,100 +243,68 @@ Clean Git capture resolves one exact commit/tree and reads bytes from Git
 objects, never the worktree. Dirty-Git and non-Git capture perform the admitted
 two-pass manifest protocol: discover typed entries and first digests, read and
 encode exact bytes, then re-read included bytes and relevant entry metadata.
-Any difference returns `SNAPSHOT.SOURCE_CHANGED` as `unavailable` and
-publishes no root. Unsupported filesystem representations reject explicitly.
-This preserves the accepted source-race boundary while moving its owner out of
-`standards_analysis`.
+Any difference returns `CONTENT.SOURCE_CHANGED` as `unavailable` and
+publishes no ContentSnapshot. Unsupported filesystem representations reject
+explicitly. ContentSnapshot identity binds only exact bytes, manifest, scope,
+exclusions, nesting, and capture-contract meaning. Metadata, parser, routing,
+graph, policy-impact, coverage, result-projection, and implementation-release
+versions do not enter it.
 
-The repository verifies canonical bytes, object ID, envelope, closed object
-kind, payload contract, object-local invariants, dependency existence/kind, and
-handle-kind match on every read. Embedded named v11 definitions are validated
-through `standards_contracts`; Authority does not implement or copy their
-schema semantics. Authority's own envelope and stored payload records remain
-closed internal contracts. It deliberately does not own Metadata, Analysis,
-Graph, Applicability, authorization, or provider semantics. The bound analysis
-kernel validates root-relative semantic coherence while resolving or projecting
-an aggregate root; policy and relationship inspection adapters validate
-snapshot-relative meaning. Missing content is `unavailable`;
-contradictory content is `invalid`; and a well-formed unknown version is
-`unsupported`.
+Owner-local SemanticAuthorityObjects preserve the coherent Metadata,
+Applicability, Routing, Graph, Standards Graph, Policy Impact, Coverage,
+Identity, Analysis, and operation-contract responsibilities. Creating another
+authority object requires an independent lifecycle and a deletion-test benefit;
+the design does not create one object merely for every semantic noun.
 
-Each aggregate root stores the exact public version record needed to interpret
-its own projection. Snapshot roots use `SnapshotVersions`, navigation roots use
-`NavigationVersions`, and analysis roots use `AnalysisVersions`; the canonical
-v11 schema owns all three serialized shapes. Resolution never fills a missing
-version from process configuration. The records are intentionally distinct so
-an analysis-only evidence-provider or authorization change cannot invalidate a
-snapshot or navigation handle whose meaning is unchanged.
+A StandardsAuthorityView is a reference-only composition manifest selecting
+one ContentSnapshot and the exact owner-local authority objects available to
+standards operations. It owns required-role selection and cross-reference
+coherence but contains no copied semantic payload, version bag, provider,
+authorization decision, or executable logic.
 
-The closed A1b object kinds are snapshot root, navigation result, analysis
-root, policy inspection, relationship inspection, coverage certificate,
-coverage view, coverage requirement, coverage attestation, analysis context,
-fact requirement, and fact observation. Snapshot, navigation, and analysis
-remain aggregate semantic roots. Child objects are deterministic generated
-projections with explicit dependency handles, but they use the same direct
-storage and resolution rule as roots.
+Each domain computation returns an internal AuthorityBoundValue containing its
+semantic value and direct authority dependencies. The composing Engine or
+Analysis kernel traverses those exact stored dependencies to generate a
+RouteExecutionClosure, ReadExecutionClosure, RelatedExecutionClosure, or
+AnalysisExecutionClosure. Results bind the narrow execution closure, not the
+complete StandardsAuthorityView. An unrelated authority change may change the
+view handle while leaving an unaffected operation closure and result identity
+unchanged.
 
-Every payload field, exclusion, construction order, and dependency edge is
-binding in the
-[authority-object contracts](../plans/standards-engine-a1b/reports/authority-object-contracts.md).
-Stored payloads exclude their own handle; resolution injects the verified
-handle into the public projection. The dependency graph is acyclic, and no
-context, requirement, observation, coverage object, policy inspection, or
-relationship inspection points back to an analysis root.
+There is no `SnapshotVersions`, `NavigationVersions`,
+`AnalysisVersions`, generic `VersionMap`, or ambient completion path.
+Compatibility promises remain with their owner. The exact scope, dependency
+algorithm, deletion tests, and mutation matrix are binding in
+[authority composition and execution closure](../plans/standards-engine-a1b/reports/authority-composition-and-execution-closure.md).
 
-Every stored payload field participates in its object ID. Presentation-only
-fields therefore remain outside stored objects and are derived through the
-exact result/presentation contract bound by the enclosing root.
-`FactRequirementHandle` addresses only semantic requirement fields;
-`PendingResult` joins them with a derived `FactRequirementWork` carrying the
-current prompt and dependent-program display. Prompt rewording or another
-relationship beginning to use the fact does not change requirement identity.
+Coverage views and analysis contexts retain their proven narrow semantic
+identity. They reference exact owner-local authority objects instead of
+repeating contract versions. Analysis states retain base/proposed
+StandardsAuthorityViews, one exact AnalysisExecutionClosure, dependency-valid
+accepted decisions, and directly inspectable child objects. Dormant-valid
+decisions remain stored; current requirements, obligations, reading plans,
+certificates, completion, and next operations remain deterministic projections.
 
-Coverage views preserve A1's narrower coverage identity: they embed exact
-coverage-relevant semantic inputs but exclude the complete snapshot handle and
-attestation-source records. Requirements therefore remain stable when their
-matching repository-local attestation is committed; certificates bind the
-view, requirement, and attestation without referring back to a report or full
-snapshot.
+Provider and authorization authority is supplied explicitly by trusted
+transition Adapters and enters only an analysis execution closure when
+material. Existing state inspection and projection use stored decisions and
+closure without live providers or fresh authorization. A new transition
+requiring unavailable execution authority publishes nothing.
 
-Analysis contexts follow the same narrow-identity rule. They embed the changed
-policy identities, accepted/proposed semantic revisions and digests, normalized
-changes, and proposals, but exclude full snapshot handles, relationship
-topology, attestations, and unrelated authority. Analysis roots retain the
-complete snapshots for reproducibility. Fact requirements therefore remain
-reusable when unrelated repository authority changes.
-
-An analysis root binds the handles of every materialized inspectable child
-needed to reproduce its current projection: context, snapshots, fact
-requirements and observations, coverage views, coverage requirements,
-attestations, and certificates. Dispositions remain handle-free decision
-records. This gives cold inspection direct object resolution without asking the
-repository to reconstruct domain meaning or letting a root omit a projected
-child.
-
-Snapshot capture stores the exact bounded manifest and included bytes needed
-to reconstruct metadata, routing, graphs, policy impact, applicability,
-coverage, reads, and inspections. Repository paths, worktree bytes, Git object
-availability, and process caches are capture inputs only. Analysis roots store
-exact authority references and dependency-valid accepted decisions; derived
-requirements, obligations, reading plans, certificates, results, and next
-operations remain deterministic projections. Navigation roots store the
-identity-bearing navigation result and snapshot dependency.
-
-Snapshot payloads represent arbitrary file bytes with padded standard Base64
-under the versioned `snapshot-root.v1` payload contract. Base64 is a wire
-representation, not text decoding or semantic normalization. The payload also
-binds the SHA-256 digest and byte length of each decoded entry; reads verify all
-three before returning bytes. This keeps bounded snapshots inside the closed
-JSON-valued envelope without adding a second blob store or an arbitrary binary
-object API.
+Content payloads represent arbitrary file bytes with padded standard Base64.
+Base64 is a storage representation, not text decoding or semantic
+normalization. Each entry also binds exact SHA-256 and byte length; reads verify
+all three without adding a second blob store.
 
 File publication is create-only, collision checked, durably synchronized, and
-atomic at the object boundary. A failed capture issues no root handle. A
+atomic at the object boundary. A failed capture issues no handle. A
 cold process reconstructs every advertised operation and inspection from the
 repository and handles alone, without source paths, Git objects, provider
 capabilities, process caches, scans, or fresh authorization authority.
+
+The exact object algebra, dependency DAG, storage checks, and construction
+order are binding in
+[authority-object contracts](../plans/standards-engine-a1b/reports/authority-object-contracts.md).
 
 The A1b durable adapter is admitted only on Linux ext4. It requires regular-file
 hard links within one directory, file and directory `fsync`, and advisory
@@ -421,11 +401,18 @@ collection, a public Interface, or semantic authority.
 Preserve:
 
 ```python
-query(snapshot, request) -> NavigationResult | RejectedResult
+query(view, request) -> NavigationResult | RejectedResult
 prepare(request) -> AnalysisResult | RejectedResult
 resolve(analysis_handle, submission) -> AnalysisResult | RejectedResult
 inspect(handle) -> InspectionResult | RejectedResult
 ```
+
+Trusted bootstrap captures content, constructs owner-local authority objects,
+checks their composition, and returns a StandardsAuthorityViewHandle. A
+ContentSnapshotHandle remains inspectable but is insufficient for query or
+analysis. AnalysisRequest carries its base/proposed views and optional prior
+analysis handle. Results expose their exact ExecutionClosureHandle. Callers do
+not coordinate subordinate authorities or closures.
 
 Submissions contain caller claims, not preconstructed authority objects. In
 particular, a coverage-attestation submission names the current requirement
@@ -510,6 +497,20 @@ Rejected because child-handle inspection would still require owner maps,
 state scans, reconstruction context, or cache authority. Direct objects give
 all handles one resolution rule.
 
+### Repair C4 by adding another version field
+
+Rejected because the missing routing dependency was one instance of a systemic
+shadow-authority defect. Adding a field leaves independently maintained version
+bags, permits the next omission, and still invalidates semantic identities for
+representation-only changes.
+
+### Bind every result to the complete standards view
+
+Rejected because the composition view intentionally contains authorities for
+several operation families. Binding it directly would make an analysis-only
+provider or coverage change invalidate unrelated navigation. Generated
+execution closures retain exact replay authority without broad invalidation.
+
 ### Build a generic content-addressed graph
 
 Rejected because the closed A1b object vocabulary needs no public traversal,
@@ -544,6 +545,15 @@ Re-plan before implementation continues if:
   closed representation and executable owner;
 - an inspectable handle cannot be represented by the closed authority-object
   vocabulary or requires scanning, ambient state, or a mutable index;
+- a StandardsAuthorityView must copy semantic payload or execute domain logic;
+- an execution closure cannot be derived from the same dependencies consumed
+  by execution;
+- a semantic authority object lacks one coherent owner, lifecycle, change
+  reason, compatibility promise, or deletion-test benefit;
+- storage-envelope, public-handle, result-projection, generator, build, or
+  release versions must enter an unrelated semantic identity;
+- existing result inspection or projection requires live providers,
+  authorization, source content, caches, or process configuration;
 - the admitted Linux ext4 filesystem cannot provide same-directory atomic
   create-only hard linking, file/directory durable flush, or advisory-lock
   behavior required by the durable adapter;
