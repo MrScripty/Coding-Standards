@@ -295,6 +295,23 @@ Generated freshness, adapter behavior, projection completeness, domain
 invariants, and facade integration are separate claims. Agreement between two
 project entry points is not presented as independent Draft conformance.
 
+### SQLite interruption oracle
+
+Milestone 2 selects the host `strace` executable only as a required-real Linux
+test oracle. The production Authority package continues to depend only on the
+standard library and `standards_identity`. The harness must capability-probe
+`--inject`, signal delivery, and interception of `fsync` and `fdatasync`, then
+prove from the trace that `SIGKILL` was injected at the selected synchronization
+syscall after the child's pre-commit barrier. It does not accept a timeout,
+sleep, repeated probabilistic kill, or ordinary process failure.
+
+Support is capability-based rather than tied to one patch release; each
+acceptance environment records its exact `strace` release and package source.
+The planning host currently reports Ubuntu package `strace 6.8-0ubuntu2` on
+`amd64` and the required injection surface. Missing capability makes the
+required-real environment `unsupported` and blocks A1b acceptance rather than
+changing production behavior or selecting a custom SQLite VFS.
+
 ## Licensing And Provenance
 
 No third-party source, wheel, or test corpus is copied into this repository.
@@ -341,6 +358,14 @@ Licensing and Release review.
 
 A missing license file, changed copyright authority, incompatible term, changed
 artifact hash, or new redistribution behavior blocks dependency acceptance.
+
+The test-only `strace` oracle is likewise invoked from the host and is neither
+copied nor bundled. The observed Ubuntu package identifies upstream
+[`strace`](https://strace.io/) and LGPL-2.1-or-later for the executable; its own
+test suite is not copied or run. Invocation for internal verification creates
+no repository-distribution notice obligation. Vendoring, bundling, modifying,
+or redistributing the executable requires a new Licensing and Release
+disposition.
 
 ## Security And Updates
 

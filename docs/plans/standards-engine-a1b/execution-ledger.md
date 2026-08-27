@@ -550,3 +550,47 @@
 - No production runtime, package manifest, normative policy, relationship,
   coverage attestation, A1, or A2 implementation changed. A1b remains
   `Blocked` pending one content-bound review of this complete planning set.
+
+## 2026-08-27 - C7 Admission Rejection And Contract Closure Replan
+
+- Independent review rejected commit
+  `748d30f778ba04ddbf33e3b82fb8031cf947c815`, tree
+  `e581dc5b17079f230ebf9df8aa0dc94e003aa95b`. The plan remains `Blocked` and
+  no A1b implementation is admitted.
+- The review retained SQLite schema v1, exact logical-path/raw-byte snapshots,
+  roots-only closure, owner-local codec sets, and direct consumed trust as the
+  simpler maintainable architecture. No return to C6 or new architecture
+  variant is authorized.
+- Removed the migration report's residual working-tree/first-commit topology
+  rule. The semantic cutover remains atomic while Commit continues to own
+  coherent repository boundaries.
+- Closed `authority-envelope.v1` as exact identity-v2 canonical typed bytes over
+  six fields, exact two-field dependency references, closed grammars, sorted
+  unique dependencies, unknown-field rejection, and a 67,108,864-byte bound.
+- Closed SQLite recovery around the default repository-local store, verified
+  backup, offline non-overwriting restore to an absent store, new-Engine
+  selection, unchanged-former-store rollback, failed-restore isolation, and
+  operator-owned retention/deletion.
+- Selected a capability-checked Linux `strace` syscall-injection harness as the
+  test-only during-commit oracle. Production keeps standard-library `sqlite3`;
+  the harness must prove injection at real `fsync` or `fdatasync` and cannot use
+  sleeps, retries, or probabilistic repetition.
+- Closed every operation role-to-kind/cardinality pair, removed the phantom
+  decision kind and every analysis-to-routing dependency, and enumerated the
+  exact dynamic analysis roles and structural dependencies.
+- Replaced opaque authorization/revocation digests with exact issuer,
+  principal, action, typed subject, capability, contract, evidence, immutable
+  not-revoked, and allow fields plus explicit typed outcomes.
+- Removed `stale` and `incomplete` from the proposed A1b rejection algebra.
+  Pending work remains a `PendingResult`; immutable A1b analysis has no temporal
+  stale result.
+- Removed the unowned analysis contract/schema `7/4` umbrella. Analysis payload,
+  identity, handle, result, and operation compatibility remain independently
+  versioned by their actual owners.
+- The revised proposed schema SHA-256 is
+  `bd618af35fc7280805cabe8adaeebfba5e1def0cbf6b3e334e91563f2435bca8`;
+  the interface SHA-256 remains
+  `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
+- No production runtime, package manifest, normative policy, relationship,
+  coverage attestation, A1, or A2 implementation changed. The next operation is
+  one content-bound review of the corrected complete C7 planning content.

@@ -125,7 +125,7 @@ of them from the JSON Schema.
 
 The complete proposed serialized algebra is owned by
 [`a1-contract-v11.schema.json`](a1-contract-v11.schema.json), SHA-256
-`518cc75e915e25b579f6ec4c08255a8277a8cc46854e4848575bbb7ae0b306b6`.
+`bd618af35fc7280805cabe8adaeebfba5e1def0cbf6b3e334e91563f2435bca8`.
 The complete proposed operation/capability Interface is owned by
 [`a1-interface-v11.toml`](a1-interface-v11.toml), SHA-256
 `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.

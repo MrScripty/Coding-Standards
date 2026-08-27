@@ -56,11 +56,18 @@ class DurableObjectStore:
         handle: AuthorityObjectId,
         envelope: bytes,
     ) -> PutResult: ...
+
+class StoreRecovery:
+    def backup(self, source: StoreLocation, absent_destination: StoreLocation) -> BackupReceipt: ...
+    def restore(self, backup: StoreLocation, absent_destination: StoreLocation) -> RestoreReceipt: ...
 ```
 
 `PutResult` is `inserted` or `existing-identical`. A conflicting existing row
 is `IDENTITY.COLLISION`, not a third success result. SQL, cursors, connections,
 transactions, paths, retries, and SQLite errors do not cross the Interface.
+Recovery locations are trusted operator/composition inputs, not public A1
+request values. Backup and restore receipts report verified source and
+destination fingerprints but are operational results, not authority objects.
 
 The Module does not initially expose enumeration, update, delete, garbage
 collection, mutable aliases, latest heads, arbitrary queries, or cache APIs.
@@ -96,6 +103,18 @@ schema. They are the sole database-kind and schema-version authorities; no
 metadata row repeats them. Authority validates the typed handle and envelope
 kind before SQL and after every read. The BLOB contains the complete canonical
 envelope.
+
+The BLOB contract is `authority-envelope.v1`. Its bytes are exactly the
+identity-v2 canonical typed encoding, without the identity hash frame, of a
+closed six-field object: `object_kind`, `semantic_id`, constant
+`storage_format`, sorted unique `direct_dependencies`, `payload_contract`, and
+`payload`. Dependency references contain exactly `object_kind` and
+`semantic_id`. The payload is an identity-v2 JSON-compatible typed value;
+owners project raw bytes through closed padded-Base64 fields and verify the
+decoded value. Unknown fields, floats, noncanonical strings or numbers,
+duplicate or unsorted dependencies, and encoded envelopes above 67,108,864
+bytes reject before SQL. The bound is verified before allocation and again
+from SQLite BLOB length before decoding.
 
 No separate SQL dependency table is admitted initially. Traversal decodes the
 stored envelope through the owner codec. Adding a dependency index later
@@ -170,12 +189,24 @@ Required interruption evidence kills a child process:
 - before `BEGIN IMMEDIATE`;
 - after beginning but before insert;
 - after insert but before commit;
-- during commit through an injected test VFS or supported fault seam;
+- during commit by running the otherwise-real Adapter under a capability-checked
+  Linux `strace` syscall-injection harness that delivers `SIGKILL` at the first
+  selected `fsync` or `fdatasync` reached after the child signals its exact
+  pre-commit barrier;
 - immediately after commit before the caller receives success; and
 - while another process reads or inserts the same handle.
 
 Cold reopen must yield either no row or one complete valid row. Retry of the
 same immutable put must converge to the same handle.
+
+The harness is test-only and changes no production Adapter or SQLite library.
+It must prove from the trace that the selected synchronization syscall was
+reached and injected; a timeout, repeated probabilistic kill, kill before the
+barrier, or ordinary child failure is not evidence. Required-real admission
+probes `strace` support for `--inject`, signal delivery, `fsync`, and
+`fdatasync`, records the exact tool release, and returns `unsupported` for an
+environment without that oracle. This avoids a custom VFS and keeps SQLite's
+transaction implementation owned by SQLite.
 
 ## Read And Corruption Behavior
 
@@ -235,9 +266,12 @@ The database is local machine state and is excluded with all journal forms:
 /.standards-engine/*.sqlite3-*
 ```
 
-The exact final location follows the repository's existing ignore and state
-directory conventions and must be decided before implementation. Generated
-database files, dumps, journals, backups, and copied fixtures do not enter Git.
+The default live store is exactly
+`<repository-root>/.standards-engine/authority.sqlite3`. Engine composition may
+instead inject one explicit absolute `StoreLocation` for an operationally
+restored store; the path remains trusted configuration and does not enter
+semantic identity. Generated database files, dumps, journals, backups, and
+copied fixtures do not enter Git.
 
 Git continues to own:
 
@@ -251,15 +285,37 @@ A clean checkout can recreate compiled objects. Analysis decisions that are
 not derivable from Git remain durable immutable database objects and require
 operational backup for disaster recovery.
 
-## Backup
+## Backup And Restore
 
-SQLite's backup API may support operator backup while the database is open.
-It is operational storage backup, not a semantic interchange format and not a
-Git artifact.
+Backup uses SQLite's backup API against the configured live store and an
+explicit absent destination on the admitted private ext4 profile. It creates no
+overwrite, rotation, or deletion authority. After backup completion, Authority
+opens the destination independently, verifies the exact schema/profile,
+`integrity_check`, every envelope bound and canonical encoding, every
+owner-recomputed identity, every dependency, and every root closure, then
+returns a receipt. Verification failure removes only the unpublished
+destination or retains it under an explicitly selected diagnostic location;
+the live source is unchanged.
 
-The A1b public facade exposes no export/import because no cross-machine
-consumer is inventoried. Cold-process reconstruction on the same store remains
-required. A future semantic-transfer consumer is a re-plan trigger.
+Restore is offline and non-overwriting. Authority opens an explicit backup
+read-only, performs the same complete verification, and uses SQLite backup to
+materialize a distinct absent destination store. It then cold-reopens and
+reverifies that destination before returning a receipt. A new Engine instance
+may select the verified destination through its trusted `StoreLocation`; the
+former configured store is never changed and remains the rollback selection.
+An existing destination, in-use destination, source/destination alias, or
+cross-mount destination rejects before mutation. A failed restore removes or
+quarantines only its unpublished destination and cannot alter either source or
+configured live store.
+
+Authority never expires, rotates, overwrites, or deletes backups or former live
+stores. The operator owns backup media, retention count, retention duration,
+and the later explicit deletion of operational files. A1b's responsibility is
+verified creation and non-destructive restoration. The A1 public facade exposes
+no semantic export/import because no cross-machine consumer is inventoried.
+Cold-process reconstruction from the selected restored store remains required.
+A semantic-transfer consumer or in-place destructive restore is a re-plan
+trigger.
 
 ## Store Root And Threat Model
 
@@ -321,8 +377,9 @@ release into compatibility authority. An implementation-preserving runtime
 update remains supported only when it satisfies the same capability profile and
 reproduces identical stored objects and handles.
 
-The private store root is explicit composition configuration, not an
-environment-derived default or identity input. The Linux Adapter opens the
+The repository-local default or explicitly restored store root is resolved by
+trusted composition, not environment lookup or public request input, and never
+enters identity. The Linux Adapter opens the
 absolute root component-by-component from a retained `/` descriptor with
 no-follow semantics, requires ownership by the effective user and mode
 `0700`, and creates or verifies a regular `0600` database on the same mount.
@@ -338,7 +395,7 @@ overlay, unknown, or contradictory facts are typed `unsupported` or
 | --- | --- |
 | Exact row identity | insert, same-handle same-bytes, same-handle different bytes |
 | Immutability | public Interface has no mutation; SQL update/delete triggers reject |
-| Atomicity | deterministic child-process termination around transaction stages |
+| Atomicity | deterministic child-process termination around application stages plus capability-checked `strace` injection at the real SQLite synchronization syscall reached during commit |
 | Concurrency | two readers, reader/writer, same-object writers, conflicting writers, busy expiry |
 | Cold reconstruction | new process with only database path, codec sets, and handle |
 | Corruption ownership | row BLOB/kind mutation, truncated database copy, malformed schema |
@@ -346,7 +403,8 @@ overlay, unknown, or contradictory facts are typed `unsupported` or
 | No semantic leakage | DB path, row insertion order, page size, VACUUM, backup, and SQLite release do not change handles |
 | Local-filesystem requirement | real case-sensitive ext4 check; network/unknown negative |
 | Direct lookup | every public handle resolves by primary key without scans or owner maps |
-| Rebuild versus retention | generated objects rebuild; non-derivable decisions survive reopen and backup |
+| Rebuild versus retention | generated objects rebuild; non-derivable decisions survive reopen, verified backup, offline restore to an absent destination, and cold selection of that destination |
+| Recovery lifecycle | existing/aliased/in-use destination rejection, failed-restore isolation, source preservation, explicit restored-store selection, rollback to unchanged former store, and operator-owned retention |
 
 No in-memory database can satisfy durable publication evidence. Mocked platform
 facts cannot satisfy real filesystem claims. Repeated success is not a crash
@@ -419,8 +477,16 @@ smaller and more cohesive than the native publication protocol it replaces.
    records exact tested releases rather than making patch releases semantic.
 4. Local ext4 and private-root detection use the descriptor, mountinfo,
    ownership, permission, mount, and casefold checks above.
-5. Deterministic crash evidence for DELETE/EXTRA is an implementation gate.
-6. Dependency, licensing, persistence, security, cross-platform,
+5. Deterministic crash evidence uses the admitted Linux `strace` syscall
+   injection capability against the real SQLite Adapter; a custom VFS,
+   probabilistic kill, or application retry is not admitted.
+6. Default live storage is
+   `<repository-root>/.standards-engine/authority.sqlite3`; restore is offline,
+   verified, non-overwriting, and publishes only by selecting a distinct store
+   in a new Engine instance. Authority owns no backup retention or deletion.
+7. Encoded authority envelopes are canonical identity-v2 typed bytes and are
+   bounded at 67,108,864 bytes.
+8. Dependency, licensing, persistence, security, cross-platform,
    policy-impact, and coverage projections are cutover obligations.
 
 ## Re-Plan Triggers
@@ -435,6 +501,10 @@ Re-plan if:
 - database schema migration must reinterpret canonical envelope meaning;
 - database bytes or SQLite versions must enter semantic identity;
 - a schema migration or semantic export/import consumer becomes necessary;
+- in-place destructive restore, Engine-owned retention, or automatic backup
+  deletion becomes necessary;
+- the admitted Linux test environment cannot provide the exact syscall fault
+  injection needed for deterministic during-commit evidence;
 - macOS, Windows, another architecture/filesystem, or casefolded/cross-mount
   ext4 becomes required;
 - a required object exceeds bounded BLOB storage assumptions;

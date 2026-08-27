@@ -55,10 +55,14 @@ analysis head, packet/report store, global supersession, or temporal
 `PACKET.STALE`. A2 separately owns mutable authoring coordination.
 
 Public replacement is atomic at interface schema version 11, request contract
-version 3, result projection version 3, analysis contract/schema versions 7/4,
-public handle version 4, authority envelope version 1, and identity encoding
-version 2. These proposed versions may change only by re-planning before
-cutover. No compatibility reader, writer, or converter is admitted.
+version 3, result projection version 3, public handle version 4, authority
+envelope version 1, and identity encoding version 2. Analysis compatibility is
+scoped independently by `analysis-root.v1`, identity domain
+`coding-standards:analysis:v4`, handle schema 4, result projection 3, and
+`operation-authority-contract.v2`; the former umbrella analysis contract/schema
+pair has no A1b successor. These proposed versions may change only by
+re-planning before cutover. No compatibility reader, writer, or converter is
+admitted.
 
 ### Module graph
 
@@ -134,13 +138,20 @@ Every persisted inspectable value uses:
 
 ```text
 AuthorityObjectEnvelopeV1
-  object_kind
-  semantic_id
+  object_kind: ASCII lower-kebab object-kind ID
+  semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits
   storage_format = authority-envelope.v1
-  direct_dependencies: sorted unique AuthorityObjectReference[]
-  payload_contract
-  payload
+  direct_dependencies: sorted unique AuthorityObjectReferenceV1[]
+  payload_contract: ASCII contract ID ending in ".vN"
+  payload: identity-v2 JSON-compatible typed value
 ```
+
+Envelope bytes are exactly identity-v2 canonical typed encoding of this closed
+six-field object without the identity hash frame. References contain exactly
+`object_kind` and `semantic_id`. Unknown fields, floats, noncanonical bytes,
+duplicate or unsorted dependencies, and encoded envelopes larger than
+67,108,864 bytes reject. Raw content is represented through owner-validated
+padded Base64 inside the payload.
 
 The envelope's `object_kind` must agree with the typed handle. The repository
 validates envelope shape, dependency references, acyclicity, stored bytes, and
@@ -173,9 +184,18 @@ The envelope already owns kind, so SQL does not duplicate `object_kind`.
 4. reject different bytes for the same handle as a contradiction.
 
 Readers resolve exact handles and verify the returned envelope. The adapter
-supports integrity checking, deterministic SQLite backup, crash recovery, and
-cold-process reopen. It does not expose scans or mutable indexes as semantic
-authority.
+supports integrity checking, deterministic SQLite backup, offline restore to a
+distinct absent store, crash recovery, and cold-process reopen. The default
+store is `<repository-root>/.standards-engine/authority.sqlite3`; an explicitly
+restored store is selected only through trusted Engine composition. Backup and
+restore never overwrite or mutate the configured live store. The former store
+remains rollback authority, and retention/deletion remains operator-owned. The
+adapter does not expose scans or mutable indexes as semantic authority.
+
+Required-real interruption evidence uses a capability-checked Linux `strace`
+syscall-injection harness to deliver `SIGKILL` at the real SQLite `fsync` or
+`fdatasync` reached during commit. It is test-only; production retains the
+standard-library `sqlite3` Adapter and no custom VFS.
 
 A1b admits SQLite schema v1 only. It has no schema migration framework,
 semantic export/import, dual reader, checked-in database, or legacy-state
@@ -248,12 +268,17 @@ decision, or executable domain logic.
 
 Standards Engine owns four executable `OperationAuthorityContractV2` values:
 
-| Operation | Required roles | Allowed dynamic roles |
+| Operation | Required role-to-kind pairs | Allowed dynamic role-to-kind pairs |
 | --- | --- | --- |
-| route | metadata, routing, graph | none |
-| read | metadata, graph | none |
-| related | metadata, graph | none |
-| analysis | metadata, graph, policy-impact, coverage | context, requirement, observation, coverage requirement, attestation, decision, provider authority, authorization grant |
+| route | metadata -> canonical-standards-corpus; routing -> routing-projection; graph -> standards-graph | none |
+| read | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
+| related | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
+| analysis | metadata -> canonical-standards-corpus; graph -> standards-graph; policy-impact -> compiled-policy-impact; coverage -> coverage-horizon | context -> analysis-context; requirement -> fact-requirement; observation -> fact-observation; coverage-view -> coverage-view; coverage-requirement -> coverage-requirement; coverage-attestation -> coverage-attestation; coverage-certificate -> coverage-certificate; provider-authority -> provider-authority; authorization-grant -> authorization-grant |
+
+Every required role has cardinality `1..1`. Analysis context has cardinality
+`1..1`; every other allowed dynamic role has cardinality `0..*`. No `decision`
+object kind exists: dispositions are fields of `analysis-root.v1`. Analysis has
+no routing role or routing dependency.
 
 Structural role dependencies are:
 
@@ -263,6 +288,16 @@ routing -> content, metadata
 policy-impact -> content, metadata
 graph -> metadata, policy-impact
 coverage -> content, metadata, policy-impact, graph
+context -> metadata
+requirement -> context, policy-impact
+observation -> requirement, optional provider-authority, authorization-grant
+coverage-view -> metadata, policy-impact, graph, coverage
+coverage-requirement -> coverage-view
+coverage-attestation -> coverage-requirement, authorization-grant
+coverage-certificate -> coverage-view, coverage-requirement, coverage-attestation
+provider-authority -> exact declared subset of content, metadata,
+                      policy-impact, graph, coverage, context, requirement
+authorization-grant -> none
 ```
 
 The Engine validates operation coherence. Authority provides generic reference
@@ -310,14 +345,30 @@ ProviderAuthorityV1
   inputs: sorted qualified authority references
 
 AuthorizationGrantV1
-  issuer
+  issuer_id
   issuer_semantic_revision
   grant_id
+  principal_id
   capability
+  action
+  subject
+  authorization_contract = authorization-grant.v1
+  authorization_evidence: nonempty sorted EvidenceReferenceV1[]
+  revocation_authority_id
+  revocation_authority_semantic_revision
+  revocation_contract = authorization-revocation.v1
+  revocation_evidence: nonempty sorted EvidenceReferenceV1[]
+  revocation_state = not-revoked
   decision = allow
-  authorization_digest
-  revocation_digest
 ```
+
+Action and subject must identify the exact current fact requirement, consumer
+obligation, impact obligation, or coverage requirement being resolved. The
+injected issuer Adapter, principal, capability, contracts, evidence, and
+immutable revocation proof must all match. Denial or revocation is
+`unauthorized`; missing trust is `unavailable`; contradiction is `invalid`; and
+an unknown well-formed contract is `unsupported`. A1b admits no temporal or
+expiring grant.
 
 A successful child state includes the exact provider and authorization objects
 it consumed. A deterministic provider result of no observation stores no trust
@@ -478,6 +529,8 @@ Re-plan if:
 - owner-local codecs cannot close without a central semantic authority;
 - SQLite schema migration, semantic export/import, another database, or
   checked-in database authority becomes necessary;
+- in-place destructive restore, Engine-owned backup retention, or automatic
+  backup deletion becomes necessary;
 - exact file-list capture needs recursion, exclusions, nonregular files,
   non-UTF-8 names, streaming, or identity beyond logical paths and raw bytes;
 - macOS, Windows, another architecture/filesystem, casefolding, or stronger

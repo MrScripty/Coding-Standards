@@ -76,13 +76,19 @@ or separately supplied version record.
 
 ```text
 AuthorityObjectEnvelope v1
-  object_kind
-  semantic_id
-  storage_format
-  direct_dependencies
-  payload_contract
-  payload
+  object_kind: ASCII lower-kebab object-kind ID
+  semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits
+  storage_format: "authority-envelope.v1"
+  direct_dependencies: sorted unique AuthorityObjectReferenceV1[]
+  payload_contract: ASCII lower-kebab/dot contract ID ending in ".vN"
+  payload: identity-v2 JSON-compatible typed value
 ```
+
+Envelope bytes are exactly the identity-v2 canonical typed encoding of that
+six-field object, without the identity hash frame. References contain exactly
+`object_kind` and `semantic_id`; unknown fields, floats, noncanonical bytes,
+duplicate or unsorted references, and envelopes larger than 67,108,864 bytes
+reject. The size limit is an A1b storage-support bound, not semantic identity.
 
 Every public handle has `schema_version = 4`, one exact handle kind, and an ID
 whose prefix matches the stored object kind. `standards_authority.resolve`
@@ -226,7 +232,6 @@ deduplication, and deterministic ordering without encoded-byte comparison.
 | Interface/schema | 10 | 11 |
 | Request contract | 2 | 3 |
 | Result projection | 2 | 3 |
-| Analysis contract/schema | 6/3 | 7/4 |
 | Public handle schema | mixed/current 3 | universal 4 |
 | Identity encoding | implicit NFC v1 | codepoint-preserving v2 |
 | Authority object envelope | absent | 1 |
@@ -235,3 +240,11 @@ deduplication, and deterministic ordering without encoded-byte comparison.
 Version 10, every former handle representation, and every former persisted
 state are `unsupported`. No compatibility parser, converter, alias, or fallback
 is admitted.
+
+The former analysis contract/schema umbrella versions `6/3` have no A1b
+successors. Analysis payload compatibility is owned by `analysis-root.v1`,
+analysis semantic identity by `coding-standards:analysis:v4`, public handle
+representation by handle schema 4, result representation by result projection
+3, and executable operation coherence by `operation-authority-contract.v2`.
+These independently changing promises are not coupled through another analysis
+version pair.

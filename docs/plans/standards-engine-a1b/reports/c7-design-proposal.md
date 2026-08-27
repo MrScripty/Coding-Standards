@@ -31,7 +31,7 @@ The design keeps:
 - atomic public cutover; and
 - cold-process reconstruction without ambient state.
 
-C7 changes C6 in four material ways:
+C7 changes C6 in six material ways:
 
 1. an ExecutionClosure stores only qualified roots while its identity binds the
    canonical derived transitive set;
@@ -40,7 +40,12 @@ C7 changes C6 in four material ways:
 3. ContentSnapshot becomes a leaf mapping of logical repository paths to exact
    bytes, with capture facts separated from semantic identity; and
 4. one gitignored SQLite database replaces the Linux-ext4 object-file
-   publication protocol.
+   publication protocol;
+5. four executable operation contracts own exact role-to-kind/cardinality and
+   structural-dependency rules without routing-to-analysis leakage; and
+6. successful analysis successors store exact consumed provider and
+   authorization objects rather than aggregate trust views or opaque trust
+   digests.
 
 ## Design Principles
 
@@ -158,14 +163,32 @@ Every object retains one closed envelope:
 
 ```text
 AuthorityObjectEnvelopeV1 {
+  object_kind: ASCII lower-kebab object-kind ID,
+  semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits,
+  storage_format: "authority-envelope.v1",
+  direct_dependencies: sorted unique AuthorityObjectReferenceV1[],
+  payload_contract: ASCII lower-kebab/dot contract ID ending in ".vN",
+  payload: identity-v2 JSON-compatible typed value
+}
+
+AuthorityObjectReferenceV1 {
   object_kind,
-  semantic_id,
-  storage_format,
-  direct_dependencies,
-  payload_contract,
-  payload
+  semantic_id
 }
 ```
+
+The persisted BLOB is exactly the codepoint-preserving canonical typed encoding
+defined by identity encoding v2 for that six-field object, without the identity
+hash frame. It admits only null, Boolean, integer, Unicode-scalar string, array,
+and string-keyed object values; floats and byte values are absent. An owner
+projects exact bytes such as snapshot content through its closed padded-Base64
+payload representation and verifies the decoded bytes. Envelope and reference
+objects reject unknown fields. Dependencies are ordered by
+`(object_kind, semantic_id)`, must already be unique, and are not normalized by
+Authority. An encoded envelope must contain at most 67,108,864 bytes. A larger
+otherwise well-formed owner value is `unsupported`; malformed, noncanonical,
+duplicate, or unsorted input is `invalid`. This storage bound does not enter
+semantic identity.
 
 The owning codec:
 
@@ -194,9 +217,9 @@ compares it with the executable owner exports.
 | Standards Graph | `standards-graph` | `standards-graph.v1` | `coding-standards:standards-graph:v1` | `canonical-standards-corpus`, `compiled-policy-impact` |
 | Analysis | `routing-projection` | `routing-projection.v1` | `coding-standards:routing-projection:v1` | `content-snapshot`, `canonical-standards-corpus` |
 | Analysis | `coverage-horizon` | `coverage-horizon.v1` | `coding-standards:coverage-horizon:v1` | `content-snapshot`, `canonical-standards-corpus`, `compiled-policy-impact`, `standards-graph` |
-| Analysis | `analysis-context` | `analysis-context.v1` | `coding-standards:analysis-context:v2` | `canonical-standards-corpus`, `routing-projection`, `standards-graph`, `compiled-policy-impact`, `coverage-horizon` |
-| Analysis | `fact-requirement` | `fact-requirement.v1` | `coding-standards:fact-requirement:v2` | `analysis-context`, `routing-projection`, `compiled-policy-impact` |
-| Analysis | `provider-authority` | `provider-authority.v1` | `coding-standards:provider-authority:v1` | `content-snapshot`, `canonical-standards-corpus`, `routing-projection`, `compiled-policy-impact`, `standards-graph`, `coverage-horizon`, `analysis-context`, `fact-requirement` |
+| Analysis | `analysis-context` | `analysis-context.v1` | `coding-standards:analysis-context:v2` | `canonical-standards-corpus` |
+| Analysis | `fact-requirement` | `fact-requirement.v1` | `coding-standards:fact-requirement:v2` | `analysis-context`, `compiled-policy-impact` |
+| Analysis | `provider-authority` | `provider-authority.v1` | `coding-standards:provider-authority:v1` | `content-snapshot`, `canonical-standards-corpus`, `compiled-policy-impact`, `standards-graph`, `coverage-horizon`, `analysis-context`, `fact-requirement` |
 | Analysis | `authorization-grant` | `authorization-grant.v1` | `coding-standards:authorization-grant:v1` | none |
 | Analysis | `fact-observation` | `fact-observation.v1` | `coding-standards:fact-observation:v2` | `fact-requirement`, `provider-authority`, `authorization-grant` |
 | Analysis | `coverage-view` | `coverage-view.v1` | `coding-standards:coverage-authority-view:v3` | `canonical-standards-corpus`, `compiled-policy-impact`, `standards-graph`, `coverage-horizon` |
@@ -322,22 +345,46 @@ and four immutable records:
 OperationAuthorityContractV2 {
   contract_id,
   operation: route | read | related | analysis,
-  required_view_roles: set<RoleKindRequirement> by role,
-  allowed_dynamic_roles: set<RoleKindRequirement> by role
+  required_view_roles: set<RoleKindRequirementV1> by role,
+  allowed_dynamic_roles: set<RoleKindRequirementV1> by role
+}
+
+RoleKindRequirementV1 {
+  role,
+  object_kind,
+  minimum_cardinality,
+  maximum_cardinality: integer | null
 }
 ```
 
-| Contract | Exact required view roles |
-| --- | --- |
-| `operation-contract.route.v2` | metadata -> canonical-standards-corpus; routing -> routing-projection; graph -> standards-graph |
-| `operation-contract.read.v2` | metadata -> canonical-standards-corpus; graph -> standards-graph |
-| `operation-contract.related.v2` | metadata -> canonical-standards-corpus; graph -> standards-graph |
-| `operation-contract.analysis.v2` | metadata -> canonical-standards-corpus; graph -> standards-graph; policy-impact -> compiled-policy-impact; coverage -> coverage-horizon |
+Every required view role has cardinality `1..1`. Route requires
+`metadata -> canonical-standards-corpus`, `routing -> routing-projection`, and
+`graph -> standards-graph`. Read and related each require
+`metadata -> canonical-standards-corpus` and `graph -> standards-graph`.
+Analysis requires `metadata -> canonical-standards-corpus`,
+`graph -> standards-graph`, `policy-impact -> compiled-policy-impact`, and
+`coverage -> coverage-horizon`.
 
-The analysis contract alone permits dynamic roles for analysis context, fact
-requirements, observations, coverage objects, decisions, and actually
-consumed provider or authorization objects. Its exact role-kind set is part of
-the record. No ambient catalog can add a role.
+Route, read, and related allow no dynamic role. Analysis permits exactly these
+dynamic role-kind/cardinality pairs:
+
+| Role | Object kind | Cardinality |
+| --- | --- | --- |
+| `context` | `analysis-context` | `1..1` |
+| `requirement` | `fact-requirement` | `0..*` |
+| `observation` | `fact-observation` | `0..*` |
+| `coverage-view` | `coverage-view` | `0..*` |
+| `coverage-requirement` | `coverage-requirement` | `0..*` |
+| `coverage-attestation` | `coverage-attestation` | `0..*` |
+| `coverage-certificate` | `coverage-certificate` | `0..*` |
+| `provider-authority` | `provider-authority` | `0..*` |
+| `authorization-grant` | `authorization-grant` | `0..*` |
+
+There is no dynamic `decision` kind: observations and coverage attestations
+are direct objects, while consumer and impact dispositions remain fields of
+`analysis-root.v1`. There is no analysis `routing` role or routing dependency;
+Router navigation facts never become standards-change authority. No ambient
+catalog can add a role or kind.
 
 The Engine-owned coherence algorithm requires each view to select exactly one
 contract for each family and exactly the union of their required semantic
@@ -350,9 +397,20 @@ routing       -> content, metadata
 policy-impact -> content, metadata
 graph         -> metadata, policy-impact
 coverage      -> content, metadata, policy-impact, graph
+context       -> metadata
+requirement   -> context, policy-impact
+observation   -> requirement, optional provider-authority, authorization-grant
+coverage-view -> metadata, policy-impact, graph, coverage
+coverage-requirement -> coverage-view
+coverage-attestation -> coverage-requirement, authorization-grant
+coverage-certificate -> coverage-view, coverage-requirement, coverage-attestation
+provider-authority -> its exact declared subset of content, metadata,
+                      policy-impact, graph, coverage, context, requirement
+authorization-grant -> none
 ```
 
-Analysis views select the same analysis-contract semantic ID. Static roots
+Accepted and proposed analysis inputs select the same
+`operation-contract.analysis.v2` semantic ID. Static roots
 come from the selected contract. Dynamic roots exactly equal qualified
 dependencies returned by Analysis `AuthorityBoundValue`s. Missing referenced
 content is `unavailable`; absent or extra roles, wrong kinds, conflicting
@@ -545,20 +603,47 @@ ProviderAuthorityV1 {
 }
 
 AuthorizationGrantV1 {
-  issuer,
+  issuer_id,
   issuer_semantic_revision,
   grant_id,
+  principal_id,
   capability,
+  action: provide-fact | consumer-disposition | impact-disposition |
+          coverage-attestation,
+  subject: AuthorizationSubjectV1,
+  authorization_contract: "authorization-grant.v1",
+  authorization_evidence: nonempty set<EvidenceReferenceV1>,
+  revocation_authority_id,
+  revocation_authority_semantic_revision,
+  revocation_contract: "authorization-revocation.v1",
+  revocation_evidence: nonempty set<EvidenceReferenceV1>,
+  revocation_state: "not-revoked",
   decision: "allow",
-  authorization_digest,
-  revocation_digest
 }
 ```
 
 Provider direct dependencies exactly equal its unqualified inputs; its identity
 includes the complete payload and those references. An authorization grant has
-no authority-object dependency. Its two digests bind the exact adapter-validated
-assertion and validity/revocation state without storing a live credential.
+no authority-object dependency. `AuthorizationSubjectV1` is one exact typed
+target: a fact-requirement object ID for `provide-fact`, a consumer obligation
+ID for `consumer-disposition`, an impact obligation ID for
+`impact-disposition`, or a coverage-requirement object ID for
+`coverage-attestation`. `EvidenceReferenceV1` contains the evidence ID, exact
+SHA-256 digest, provider-contract ID, and provider-contract version. Evidence
+sets are sorted by `(provider_contract, provider_contract_version, id, digest)`
+and duplicate keys with unequal records are invalid.
+
+The Analysis authorization codec constructs identity from the complete payload
+above. It accepts only an explicitly injected issuer Adapter whose ID and
+semantic revision match, requires principal, action, subject, capability, and
+authorization contract to match the current work exactly, validates both
+evidence sets through their declared contracts, and requires the exact
+revocation authority to attest `not-revoked` over an immutable input. A1b has
+no time-relative or expiring grant. Adding expiration or live temporal validity
+is a re-plan trigger. A malformed or mismatched claim is `invalid`; an explicit
+denial or revoked grant is `unauthorized`; unavailable issuer, evidence, or
+revocation authority is `unavailable`; and a well-formed unknown contract is
+`unsupported`.
 
 Observations, dispositions, attestations, and evidence bindings reference these
 stored objects directly rather than repeating provider or issuer versions. The
@@ -586,11 +671,16 @@ SQLite. It does not:
 - invoke providers or authorization services; or
 - require a cache.
 
-The database is not committed to Git. SQLite's backup operation may support
-operator recovery while the database is open, but backup files are operational
-copies of the store and are not semantic interchange or Git artifacts. A1b has
-no export/import Interface because no external consumer or retained source
-state requires one.
+The database is not committed to Git. SQLite backup and offline restore are
+operational Authority interfaces, not semantic interchange or facade
+operations. Backup writes one verified copy to an explicit absent destination
+and never rotates or overwrites operator data. Restore verifies a backup into a
+distinct absent store path; a new Engine instance adopts that path only after
+complete verification. The former live store remains unchanged and is the
+rollback selection. Failed restore cannot modify the configured store. Exact
+lifecycle and retention ownership are in the SQLite audit. A1b has no domain
+export/import Interface because no external consumer or retained source state
+requires one.
 
 ## Failure Semantics
 
@@ -599,6 +689,11 @@ state requires one.
 | malformed handle, contradictory object, cycle, wrong kind, hash mismatch, collision, corrupt database structure | `invalid` |
 | well-formed unsupported contract, platform, path class, filesystem, SQLite runtime, dependency artifact, or object version | `unsupported` |
 | missing object, missing nested content, source changed during capture, store busy past admitted bound, I/O failure, unavailable provider or authorization input | `unavailable` |
+| valid current work for which the trusted authorization Adapter returns denial or revocation | `unauthorized` |
+
+`stale` and `incomplete` are not A1b rejection outcomes. Immutable analysis has
+no temporal stale state, and unresolved material work projects a
+`PendingResult` rather than a rejected incomplete result.
 
 No outcome falls back to live source, current code reconstruction, another
 store, another platform mechanism, or an old contract.

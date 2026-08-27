@@ -15,11 +15,11 @@ impact, assign every selected consumer a disposition, freeze the final horizon,
 register every owner-local attestation source before that freeze, and renew
 mechanically stale coverage.
 
-Foundation Modules are working-tree checkpoints, not separately committed
-repository boundaries. The first implementation commit contains the
-foundations and this complete semantic-consumer migration together, so no
-committed tree contains new implementation consumers without their catalog,
-relationship, disposition, and coverage authority.
+Foundation Modules remain private staging implementation until the coordinated
+production cutover updates their catalog, relationship, disposition, and
+coverage authority. This semantic replacement constraint does not prescribe
+commit count, parentage, cadence, or whether a coherent green staging outcome
+is committed before cutover; Commit owns those boundaries.
 
 ## Catalog Dispositions
 

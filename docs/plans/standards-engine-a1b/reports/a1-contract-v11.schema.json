@@ -3456,9 +3456,7 @@
             "invalid",
             "unavailable",
             "unsupported",
-            "stale",
-            "unauthorized",
-            "incomplete"
+            "unauthorized"
           ]
         },
         "target": {
