@@ -1,6 +1,10 @@
 # A1b Authority Composition And Execution Closure
 
-**Status:** Proposed planning authority
+**Status:** Superseded C6 planning evidence
+
+The current replacement design is
+[C7 Design Proposal](c7-design-proposal.md). This report remains historical
+evidence for the C6 decisions that C7 replaces.
 
 **Replacement base:** commit
 `396144ad9a75c948484d1e564fab73c857bd6f4d`

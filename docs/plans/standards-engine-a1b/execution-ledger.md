@@ -506,3 +506,47 @@
 - `A1B-020` is `controlled`. A1b remains `Blocked`; the next slice is one
   consolidated review of the complete C7 replacement design. No A1b runtime or
   A2 implementation is authorized by this outcome.
+
+## 2026-08-27 - Candidate C6 Rejection And C7 Consolidated Replan
+
+- C6 is `Rejected` and `Superseded`. Consolidated design review found
+  unresolved operation/trust contracts, structural snapshot identity beyond
+  material file content, speculative platform and storage-migration scope,
+  duplicated SQL/object-kind authority, and closure over hypothetical future
+  transitions.
+- Historical review confirmed that direct cold inspection, owner-local codecs,
+  structural dependency derivation, closed package/import membership, atomic
+  public cutover, and one immutable analysis state remain valid. C7 retains
+  those decisions and replaces only the defective repository, capture,
+  operation, closure, and consumed-trust contracts.
+- C7 selects one in-memory Adapter and one SQLite schema-v1 Adapter. SQLite
+  stores only `(handle, envelope)`; the envelope owns object kind. Application
+  ID is `1397047601`, user version is `1`, busy timeout is 5000 milliseconds
+  without retry, and runtime support is capability-based rather than bound to
+  an implementation-preserving SQLite patch release.
+- C7 replaces structural snapshots with exact-list `ContentSnapshotV2` values
+  whose identity is only sorted logical Unicode-scalar paths and exact bytes.
+  Git and Linux/ext4 Adapters validate source endpoints and discard locator,
+  filesystem, mode, directory, symlink, and capture observations.
+- C7 replaces repeated dependency payloads with roots-only
+  `ExecutionClosureV2`. Four Engine-owned executable
+  `OperationAuthorityContractV2` values own exact roles and structural edges.
+  Owner-local exported codec sets remain semantic authority; Verification
+  derives aggregate evidence instead of introducing a central codec manifest.
+- C7 removes aggregate provider/authorization views and stores exact consumed
+  `ProviderAuthorityV1` and `AuthorizationGrantV1` objects only in successful
+  child states. Existing states replay without live trust services, and current
+  state does not pre-authorize hypothetical successors.
+- The proposed public interface versions remain v11/request-v3/result-v3 and
+  handle v4 because no C6 public cutover occurred. The revised proposed schema
+  SHA-256 is
+  `518cc75e915e25b579f6ec4c08255a8277a8cc46854e4848575bbb7ae0b306b6`;
+  the interface SHA-256 remains
+  `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
+- The A1b ADR, active plan, identity/version matrix, schema/domain audit,
+  consumer inventory, policy-impact migration, SQLite audit, issue records,
+  write sets, evidence gates, and re-plan triggers now agree with C7. The C6
+  authority reports are explicitly historical.
+- No production runtime, package manifest, normative policy, relationship,
+  coverage attestation, A1, or A2 implementation changed. A1b remains
+  `Blocked` pending one content-bound review of this complete planning set.

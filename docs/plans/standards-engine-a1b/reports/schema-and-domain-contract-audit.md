@@ -125,7 +125,7 @@ of them from the JSON Schema.
 
 The complete proposed serialized algebra is owned by
 [`a1-contract-v11.schema.json`](a1-contract-v11.schema.json), SHA-256
-`71f59fe47aa857f2692c8ba5569fb2890816888742d4416cc2c1021d40fae843`.
+`518cc75e915e25b579f6ec4c08255a8277a8cc46854e4848575bbb7ae0b306b6`.
 The complete proposed operation/capability Interface is owned by
 [`a1-interface-v11.toml`](a1-interface-v11.toml), SHA-256
 `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
@@ -169,9 +169,9 @@ Every public handle is the exact closed record `kind`, `id`, and
 `ExecutionClosureHandle` identifies the material dependencies of one semantic
 operation. `AuthorityObjectReference` is a serialized dependency reference,
 not a generic public handle or semantic registration authority. Stored records,
-owner validation, and semantic identity are defined separately in
-[authority-object contracts](authority-object-contracts.md) and
-[authority composition](authority-composition-and-execution-closure.md).
+owner validation, and semantic identity are defined separately in the
+[C7 design](c7-design-proposal.md) and
+[SQLite audit](c7-sqlite-storage-audit.md).
 
 The schema contains no `VersionMap`, `SnapshotVersions`,
 `NavigationVersions`, or `AnalysisVersions`. Query and analysis preparation
@@ -179,11 +179,14 @@ accept StandardsAuthorityViews rather than content snapshots. Navigation and
 analysis results expose an ExecutionClosure handle; public projection and
 handle-wire versions do not enter semantic result identity.
 
-`ContentSnapshot` inspection exposes only exact scope/exclusion paths and
-source-neutral file, directory, symlink, or nested-content entries. Git commit
-and tree OIDs, Adapter kind, tracking/inclusion explanations, checked-out
-revision, and worktree state are capture observations and are absent from the
-public value. `ExecutionClosure` roots retain side and role. `PendingResult`
+`ContentSnapshot` inspection exposes only exact logical Unicode-scalar paths
+and file bytes, with Base64/digest/length as verified projections. Scope,
+exclusions, directories, modes, symlinks, nested snapshots, Git commit/tree
+OIDs, Adapter kind, tracking/inclusion explanations, checked-out revision,
+filesystem metadata, and worktree state are capture observations and are
+absent from the public value. `ExecutionClosureV2` persists roots retaining
+side and role; transitive dependencies are derived from immutable owner
+references. `PendingResult`
 and `CompleteResult` expose narrow analysis context plus closure and analysis
 handles, not complete base/proposed authority views. The JSON Schema owns these
 wire shapes; exact codec membership, role-to-kind bindings, operation
@@ -192,9 +195,11 @@ their domain owners. `StandardsAuthorityView` serializes operation-contract
 selections separately from semantic-role selections; each operation contract,
 not another schema/profile, owns its required role-kind pairs.
 
-`AnalysisState` stores only narrow context, transition-closed authority,
+`AnalysisState` stores only narrow context, roots-only material authority,
 dependency-valid observations and dispositions, and authored coverage
-attestations. Current fact requirements, coverage views and requirements,
+attestations. Successful transitions reference exact consumed provider and
+authorization objects; current state does not bind hypothetical future trust.
+Current fact requirements, coverage views and requirements,
 certificates, work projections, and completion are derived. They may be stored
 as directly inspectable immutable projections but are not repeated as state
 authority.

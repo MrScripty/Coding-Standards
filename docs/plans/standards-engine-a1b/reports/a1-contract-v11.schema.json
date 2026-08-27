@@ -2287,9 +2287,9 @@
       "required": [
         "kind",
         "handle",
+        "closure_contract",
         "operation",
-        "roots",
-        "dependencies"
+        "roots"
       ],
       "properties": {
         "kind": {
@@ -2297,6 +2297,9 @@
         },
         "handle": {
           "$ref": "#/$defs/ExecutionClosureHandle"
+        },
+        "closure_contract": {
+          "const": "execution-closure.v2"
         },
         "operation": {
           "enum": [
@@ -2311,14 +2314,6 @@
           "uniqueItems": true,
           "items": {
             "$ref": "#/$defs/ExecutionAuthorityRoot"
-          },
-          "minItems": 1
-        },
-        "dependencies": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "$ref": "#/$defs/AuthorityObjectReference"
           },
           "minItems": 1
         }
@@ -2585,22 +2580,34 @@
       },
       "additionalProperties": false
     },
-    "AuthorizationReference": {
+    "AuthorizationGrantReference": {
       "type": "object",
       "required": [
-        "id",
-        "capability",
-        "digest"
+        "object_kind",
+        "id"
       ],
       "properties": {
+        "object_kind": {
+          "const": "authorization-grant"
+        },
         "id": {
-          "$ref": "#/$defs/CanonicalId"
+          "$ref": "#/$defs/AuthorityObjectId"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProviderAuthorityReference": {
+      "type": "object",
+      "required": [
+        "object_kind",
+        "id"
+      ],
+      "properties": {
+        "object_kind": {
+          "const": "provider-authority"
         },
-        "capability": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "digest": {
-          "$ref": "#/$defs/Digest"
+        "id": {
+          "$ref": "#/$defs/AuthorityObjectId"
         }
       },
       "additionalProperties": false
@@ -2637,10 +2644,10 @@
           }
         },
         "authorization": {
-          "$ref": "#/$defs/AuthorizationReference"
+          "$ref": "#/$defs/AuthorizationGrantReference"
         },
-        "provider_claim": {
-          "$ref": "#/$defs/ProviderClaim"
+        "provider_authority": {
+          "$ref": "#/$defs/ProviderAuthorityReference"
         }
       },
       "additionalProperties": false
@@ -3096,7 +3103,7 @@
           "const": 3
         },
         "authorization": {
-          "$ref": "#/$defs/AuthorizationReference"
+          "$ref": "#/$defs/AuthorizationGrantReference"
         }
       },
       "additionalProperties": false
@@ -3220,7 +3227,7 @@
           }
         },
         "authorization": {
-          "$ref": "#/$defs/AuthorizationReference"
+          "$ref": "#/$defs/AuthorizationGrantReference"
         },
         "fingerprint": {
           "$ref": "#/$defs/DecisionFingerprint"
@@ -3475,42 +3482,34 @@
       },
       "additionalProperties": false
     },
-    "ContentSnapshotEntry": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/ContentSnapshotFileEntry"
-        },
-        {
-          "$ref": "#/$defs/ContentSnapshotDirectoryEntry"
-        },
-        {
-          "$ref": "#/$defs/ContentSnapshotSymlinkEntry"
-        },
-        {
-          "$ref": "#/$defs/ContentSnapshotNestedContentEntry"
+    "RepositoryPath": {
+      "type": "object",
+      "required": [
+        "components"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "ContentSnapshotFileEntry": {
       "type": "object",
       "required": [
         "path",
-        "entry_type",
-        "mode",
         "content_digest",
         "content_base64",
         "byte_length"
       ],
       "properties": {
         "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "entry_type": {
-          "const": "file"
-        },
-        "mode": {
-          "type": "integer",
-          "minimum": 0
+          "$ref": "#/$defs/RepositoryPath"
         },
         "content_digest": {
           "$ref": "#/$defs/Digest"
@@ -3525,86 +3524,13 @@
       },
       "additionalProperties": false
     },
-    "ContentSnapshotDirectoryEntry": {
-      "type": "object",
-      "required": [
-        "path",
-        "entry_type",
-        "mode"
-      ],
-      "properties": {
-        "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "entry_type": {
-          "const": "directory"
-        },
-        "mode": {
-          "type": "integer",
-          "minimum": 0
-        }
-      },
-      "additionalProperties": false
-    },
-    "ContentSnapshotSymlinkEntry": {
-      "type": "object",
-      "required": [
-        "path",
-        "entry_type",
-        "mode",
-        "symlink_target"
-      ],
-      "properties": {
-        "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "entry_type": {
-          "const": "symlink"
-        },
-        "mode": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "symlink_target": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ContentSnapshotNestedContentEntry": {
-      "type": "object",
-      "required": [
-        "path",
-        "entry_type",
-        "mode",
-        "nested_content"
-      ],
-      "properties": {
-        "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "entry_type": {
-          "const": "nested-content"
-        },
-        "mode": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "nested_content": {
-          "$ref": "#/$defs/ContentSnapshotHandle"
-        }
-      },
-      "additionalProperties": false
-    },
     "ContentSnapshot": {
       "type": "object",
       "required": [
         "kind",
         "handle",
         "payload_contract",
-        "scope",
-        "exclusions",
-        "entries"
+        "files"
       ],
       "properties": {
         "kind": {
@@ -3614,27 +3540,14 @@
           "$ref": "#/$defs/ContentSnapshotHandle"
         },
         "payload_contract": {
-          "const": "content-snapshot.v1"
+          "const": "content-snapshot.v2"
         },
-        "scope": {
+        "files": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
           "items": {
-            "$ref": "#/$defs/NonEmptyString"
-          }
-        },
-        "exclusions": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "$ref": "#/$defs/NonEmptyString"
-          }
-        },
-        "entries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ContentSnapshotEntry"
+            "$ref": "#/$defs/ContentSnapshotFileEntry"
           }
         }
       },
@@ -3971,30 +3884,6 @@
           },
           "minItems": 1,
           "uniqueItems": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "ProviderClaim": {
-      "type": "object",
-      "required": [
-        "provider",
-        "provider_contract_version",
-        "immutable_input_view",
-        "claim_digest"
-      ],
-      "properties": {
-        "provider": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "provider_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "immutable_input_view": {
-          "$ref": "#/$defs/Digest"
-        },
-        "claim_digest": {
-          "$ref": "#/$defs/Digest"
         }
       },
       "additionalProperties": false

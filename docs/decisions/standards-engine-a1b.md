@@ -2,631 +2,498 @@
 
 **Status:** Proposed
 
-This decision supersedes the contract-compilation, identity encoding, snapshot
-capture, persisted-state storage, and public result-projection clauses of
-[Standards Engine Navigation And Analysis](standards-engine-navigation-analysis.md).
-It preserves A1's four-operation read-only facade, immutable analysis kernel,
-policy-impact authority, graph boundaries, and separation from A2 controlled
-authoring.
+This decision supersedes the A1 contract-compilation, identity, snapshot,
+storage, execution-closure, and public-projection architecture. It also
+supersedes the C1 through C6 A1b planning designs. The active implementation
+authority is the
+[A1b plan](../plans/standards-engine-a1b/plan.md); implementation remains
+blocked until content-bound planning review accepts this decision and its
+machine contracts.
 
 ## Context
 
-A1 established one read-only Standards Engine facade and one content-addressed
-analysis lifecycle. Its supporting implementation nevertheless has four
-coupled defects:
+A1 proved the four-operation read-only Engine and immutable analysis state, but
+its repair history exposed recurring boundary failures:
 
-1. the canonical schema, local validator, generator, and generated decoder each
-   implement part of the same contract semantics;
-2. one recursive NFC serializer is used for schema equality, semantic ordering,
-   and content identity even though those domains have different rules; and
-3. inspectable handles do not share one direct immutable storage and resolution
-   contract, so some values depend on owner maps, scans, or process-local state.
-4. snapshot, navigation, and analysis version records copy independently owned
-   compatibility promises, causing omissions and invalidating identities for
-   unrelated semantic or representation changes.
+1. schema validation and generated Python models duplicated semantics;
+2. identity canonicalization acquired JSON Schema equality behavior;
+3. snapshots mixed source observations with immutable content;
+4. inspectable values were split across stores and hidden process state;
+5. copied version bags and complete authority views invalidated unrelated work;
+6. provider and authorization authority was either ambient or over-aggregated;
+7. cold reconstruction depended on loaders not identified by the handle; and
+8. planning protocols acquired Git topology and lifecycle authority.
 
-The accepted standards recovery requires A1b to replace these foundations
-before A2 may be reviewed. Repository inventory found no independently deployed
-A1 consumer and no retained persisted A1 state. A coordinated breaking
-replacement is therefore simpler than compatibility readers, writers, or state
-conversion.
+The accepted standards now require coherent ownership, lifecycle, deletion and
+interface tests, exact authority scope, material version invalidation, and
+commit boundaries owned by the Commit workflow. A1b must correct the system,
+not preserve the repair machinery.
+
+The historical analysis is recorded in:
+
+- [A1b redesign brief](../plans/standards-verification-engine/reports/standards-engine-a1b-redesign-authoring-brief.md);
+- [C6/C7 design history](../plans/standards-engine-a1b/reports/c6-c7-design-history-research.md);
+- [C7 design proposal](../plans/standards-engine-a1b/reports/c7-design-proposal.md); and
+- [C7 SQLite audit](../plans/standards-engine-a1b/reports/c7-sqlite-storage-audit.md).
 
 ## Decision
 
-### Module graph
+### Public lifecycle
 
-Add three narrow Modules:
+A1b preserves:
+
+```text
+query(request) -> NavigationResult | RejectedResult
+prepare(request) -> PendingResult | CompleteResult | RejectedResult
+resolve(analysis_handle, submission) -> PendingResult | CompleteResult | RejectedResult
+inspect(handle) -> InspectionResult | RejectedResult
+```
+
+Analysis remains one immutable state machine. Pending and complete results are
+projections of an AnalysisState and use its AnalysisHandle. A1b has no mutable
+analysis head, packet/report store, global supersession, or temporal
+`PACKET.STALE`. A2 separately owns mutable authoring coordination.
+
+Public replacement is atomic at interface schema version 11, request contract
+version 3, result projection version 3, analysis contract/schema versions 7/4,
+public handle version 4, authority envelope version 1, and identity encoding
+version 2. These proposed versions may change only by re-planning before
+cutover. No compatibility reader, writer, or converter is admitted.
+
+### Module graph
 
 ```text
 standards_identity
-  `-- Python standard library
+    standard library only
 
 standards_contracts
-  |-- jsonschema
-  |-- referencing
-  `-- Python standard library
+    jsonschema
+    referencing
 
 standards_authority
-  |-- standards_identity
-  `-- Python standard library
+    standards_identity
+    sqlite3 from the standard library
+
+domain Modules
+    their existing dependencies
+    standards_identity where identity is owned
+    standards_authority where inspectable values are persisted
 
 standards_engine
-  |-- standards_authority
-  |-- standards_contracts
-  |-- standards_identity
-  `-- existing domain Modules
+    composes all accepted lower Modules
+
+standards_verifier
+    validates package, export, entrypoint, contract, and repository closure
 ```
 
-`standards_identity` owns deterministic identity encoding version 2 and
-domain-separated hashing. It preserves strings and object keys
-codepoint-for-codepoint and exposes no generic equality, normalization,
-semantic sorting, deduplication, defaulting, or field-selection operation.
-Domain Modules construct their own typed identity records before hashing.
-
-`standards_contracts` owns contract loading, the admitted projection profile,
-same-resource reference configuration, public-definition reachability, stable
-diagnostic adaptation, generated public models, and agent-tool projections. It
-does not implement JSON Schema keywords. `jsonschema.Draft202012Validator` is
-the sole executable Draft 2020-12 validator.
-
-`standards_contracts` and `standards_authority` have no dependency in either
-direction. Their responsibilities are independent: Contracts proves public
-wire representations, while Authority proves owner-local immutable objects and
-their storage envelopes. The Engine facade depends on both and performs the
-only public adaptation. Domain Modules depend on Authority only when they
-construct or consume authority-bound domain values, and depend on Identity when
-they own a stored semantic ID.
-
-`standards_authority` owns immutable authority references,
-`AuthorityBoundValue`, content capture, immutable storage, direct resolution,
-and dependency closure. It is not a general object database: the object-kind vocabulary is
-closed, objects are immutable and content addressed, and no enumeration,
-mutable index, graph traversal, garbage collection, remote store, or arbitrary
-blob Interface is exposed. It owns envelope integrity, create-only publication,
-direct dependency existence and kind, and authority-DAG invariants. Domain
-Modules own semantic identity, decoding, and coherence; explicitly injected
-owner codec sets delegate those facts to their owners. The repository does not
-use the public JSON Schema as domain authority.
-
-The exact owner, object-kind, payload-contract, identity-domain, and allowed
-dependency inventory is closed in
-[authority-object contracts](../plans/standards-engine-a1b/reports/authority-object-contracts.md).
-The exact per-operation role-kind requirements, coherence-rule IDs, and their
-derived role inventory are closed in
-[authority composition and execution closure](../plans/standards-engine-a1b/reports/authority-composition-and-execution-closure.md).
-Changing either admitted inventory is architectural re-planning, not runtime
-registration.
-
-`standards_analysis` retains change classification, impact selection, fact and
-obligation semantics, coverage decisions, immutable analysis normalization,
-projection, and transitions. It loses content capture and state storage.
-`standards_engine` owns StandardsAuthorityView role selection and
-cross-reference coherence, remains the composition root, and exhaustively
-adapts domain outcomes to generated public results. Each domain Module returns
-AuthorityBoundValues so the composing kernel derives operation-specific
-execution closure from the dependencies actually consumed. Separately stored
-route, read, related, and analysis authority-contract objects own each
-operation family's required roles and coherence rules; there is no aggregate
-operation-profile identity.
+`standards_contracts` and `standards_authority` do not depend on each other.
+The public JSON Schema owns serialized request/result shapes. Domain Modules
+own semantic records and behavior. Authority owns storage integrity, not public
+schema or domain meaning.
 
 ### Contract compiler
 
-The internal Interface is:
+`jsonschema.Draft202012Validator` is the sole Draft 2020-12 validator. A1b
+does not implement JSON Schema keywords or claim independent Draft
+certification. The Contracts Module:
 
-```python
-contract = compile_contract(schema_source, interface_source)
-decoded = contract.decode(definition_id, unknown_value)
-json_value = contract.to_json_value(decoded)
+- loads and self-checks the canonical schema;
+- resolves the closed local-reference graph through `referencing`;
+- validates instances through the selected validator;
+- compiles the admitted public projection profile;
+- generates native request/result models and agent tools; and
+- rejects unsupported reachable constructs before generation.
 
-artifacts = compile_projections(contract, targets)  # build time only
-```
+Generated freshness and semantic correctness are independent checks. Direct
+validator and Adapter behavior are different entrypoints to the same external
+validator, not independent conformance oracles.
 
-`compile_contract` verifies the schema with
-`Draft202012Validator.check_schema`, installs an immutable
-`referencing.Registry` containing only the root resource, computes the exact
-closure reachable from the four public operations, and rejects projection
-constructs that generated Python or agent-tool targets cannot preserve.
-Runtime retrieval, remote references, custom vocabularies, format assertion,
-keyword overrides, and dynamic references are prohibited.
+Schema validation equality, applicability equality, identity encoding, and
+domain ordering are separate contracts. JSON Schema strings compare according
+to the selected Draft implementation. Identity encoding preserves codepoints.
+Only a domain owner may normalize its semantic identity record.
 
-The canonical JSON Schema owns only serialized request, result, submission,
-inspection, and public-handle shapes. A closed `a1-interface.toml` owns public
-operation names, input and result roots, interface versions, and capability
-selection. Domain Modules own identities, cross-field invariants,
-authorization, state transitions, policy meaning, and projection lifecycle.
-Version 11 removes all `x-standards-engine-*` annotations from the schema.
-The exact proposed machine-readable authorities are the planning
-[`a1-contract-v11.schema.json`](../plans/standards-engine-a1b/reports/a1-contract-v11.schema.json)
-and
-[`a1-interface-v11.toml`](../plans/standards-engine-a1b/reports/a1-interface-v11.toml).
-Implementation compiles those admitted bytes in isolation and promotes them
-unchanged at the atomic cutover; it does not discover or invent public shapes.
+### Identity
 
-Generated models own immutable representation and field mapping. Construction
-first invokes the same compiled validator used by every other contract entry
-point; generated code contains no schema fragment or keyword interpreter.
-Schema defaults remain annotations and are not injected into instances.
-
-Contract failures expose stable project fields: outcome, code, definition,
-instance JSON Pointer, schema JSON Pointer, keyword, and nested causes.
-Dependency exceptions and message text do not cross the Module boundary.
-
-A1b relies on the maintained dependency for Draft semantics. It does not copy,
-run, or reproduce the complete official JSON Schema test corpus and does not
-claim to re-certify Draft 2020-12. Repository tests prove only the selected
-adapter, admitted projection profile, known A1 regressions, diagnostics,
-generation, and public integration.
-
-### Equality and identity domains
-
-The domains are independent:
-
-| Domain | Owner | Rule |
-| --- | --- | --- |
-| JSON Schema instance validity and equality | `jsonschema.Draft202012Validator` | Dependency-defined Draft 2020-12 behavior |
-| Applicability value equality | `standards_applicability` | Its explicit versioned domain semantics, including deliberate NFC handling where already specified |
-| Semantic object identity | `standards_identity` plus each domain owner | Codepoint-preserving identity encoding v2 over an owner-defined material identity record |
-| Ordering and deduplication | Owning domain Module | Typed semantic keys, not generic identity bytes |
-| Raw content digest | Owning content producer | SHA-256 over exact bytes |
-
-Identity encoding v2 accepts JSON `null`, Boolean, integer, string, array, and
-string-keyed object values and rejects floating point and lone surrogates. Its
-byte grammar fixes scalar escaping, minimal integer rendering, key order,
-separators, and UTF-8 output. Domain hashing uses SHA-256 over a framed magic,
-domain, ID prefix, and encoded payload with fixed big-endian lengths; output is
-`<prefix>:sha256:<lowercase-hex>`. The complete byte grammar and fixtures are
-binding in the
-[identity/version matrix](../plans/standards-engine-a1b/reports/identity-version-object-matrix.md).
-The encoder performs no semantic work.
-
-Every directly stored inspectable has one owner-defined semantic ID exposed
-through its public handle. Storage-envelope and public-handle representations
-do not define that semantic identity. Non-stored identities formerly using the
-recursive NFC serializer advance their domain. Existing applicability digests,
-policy-impact edge IDs, graph IDs, and raw byte digests remain unchanged only
-after focused evidence proves they do not consume the retired encoder and their
-semantic input is unchanged.
-
-### Dependency selection
-
-Adopt `jsonschema` 4.26.0 as the sole Draft 2020-12 implementation. Declare
-`referencing` directly because `standards_contracts` uses its public immutable
-registry Interface. An A1b-owned hash-checked lock records the complete exact
-resolution for CPython 3.11 and 3.12 on Linux x86-64 with glibc 2.17 or newer.
-The selected native artifacts carry the exact
-`manylinux_2_17_x86_64.manylinux2014_x86_64` tags. Other architectures, musl,
-and source builds are unsupported in A1b. Ambient installations are not
-satisfaction evidence.
-
-Package manifests own direct requirements, the supported Python range, one
-canonical source-tree public import root, and exact repository entrypoint
-scripts. The corresponding package `__init__.py` owns exported symbols through
-one statically resolvable `__all__`. Its closed expression profile permits
-unique string literals and starred references to recursively resolved
-own-package module `__all__` values; computed or mutated exports reject.
-
-One AST-backed Standards Verifier contract derives every governed production
-cross-Module import. Imports below another Module's root reject. A root-form
-`from` import is valid only when every imported name occurs in the resolved root
-exports, preventing Python's implicit loading of unexported child modules.
-Cross-Module star imports and literal or dynamic import bypasses reject.
-Tracked non-test Python under `tools/` must belong to a manifest root or exact
-repository entrypoint. The verifier consumes manifests and initializers
-directly; it does not copy `__all__` or maintain a package or symbol allowlist.
-Every repository entrypoint imports its owner through the manifest's canonical
-root and is executed with safe-path mode from outside the checkout with only
-the checkout root on `PYTHONPATH`. Root/export and entrypoint smoke prove
-runtime binding; they do not decide boundary compliance.
-
-The lock owns selected transitive versions and wheel hashes. Security,
-provenance, supported-target, and licensing evidence are bound in the
-[dependency decision](../plans/standards-engine-a1b/reports/dependency-and-dialect-decision.md).
-No third-party source, wheel, or conformance corpus is copied into repository
-history.
-
-### Immutable authority repository
-
-Every stored object has one owner-defined semantic identity and one immutable
-envelope:
+`standards_identity` owns domain-separated identity encoding v2. It encodes a
+typed closed record without recursive Unicode normalization and hashes:
 
 ```text
-AuthorityObjectEnvelope v1
+domain separator
+contract version
+canonical typed record
+```
+
+Object keys, ordering, deduplication, aliases, and semantic equivalence remain
+owned by the domain that defines them. The identity Module supplies encoding
+and hashing, not cross-domain meaning.
+
+### Immutable object envelope
+
+Every persisted inspectable value uses:
+
+```text
+AuthorityObjectEnvelopeV1
   object_kind
   semantic_id
-  storage_format
-  direct_dependencies
+  storage_format = authority-envelope.v1
+  direct_dependencies: sorted unique AuthorityObjectReference[]
   payload_contract
   payload
 ```
 
-The semantic ID is derived from the owning Module's material identity record,
-not by hashing the complete envelope. Storage format, public handle schema, and
-result projection are excluded from semantic identity. The repository verifies
-that the owner recomputes the advertised semantic ID and that all direct
-dependencies exist with the expected kinds.
+The envelope's `object_kind` must agree with the typed handle. The repository
+validates envelope shape, dependency references, acyclicity, stored bytes, and
+handle agreement. It does not interpret domain payloads.
 
-The internal repository Interface is:
+Each owning Module exports one closed `AuthorityObjectCodecSet`. Its codecs
+construct and validate payloads, compute semantic IDs, extract allowed direct
+dependencies, and decode owner-typed values. Codec membership remains local to
+the owner. Standards Engine composition injects an explicit closed tuple of
+codec sets. Verification derives the aggregate kind/facade/dependency evidence
+from those executable owners; there is no handwritten central codec manifest.
 
-```python
-content_handle = authority.capture(source_adapter, capture_request)
-handle = authority.put(typed_object)
-typed_object = authority.get(handle)
+### SQLite repository
+
+The durable adapter uses SQLite and stores only:
+
+```sql
+CREATE TABLE authority_objects (
+    handle TEXT COLLATE BINARY PRIMARY KEY,
+    envelope BLOB NOT NULL
+) WITHOUT ROWID;
 ```
 
-`standards_authority` owns capture orchestration and the Git-tree and mutable
-manifest source adapters. `capture` validates scope, exclusions, paths,
-symlinks, nested repositories, entry metadata, content digests, source
-stability, nested-object publication, and root publication.
-The source adapter supplies observations through one bounded capture view; it
-does not construct handles or stored envelopes.
+The envelope already owns kind, so SQL does not duplicate `object_kind`.
+`put_if_absent(handle, envelope)` executes in one transaction:
 
-Clean Git capture resolves one exact commit/tree locator and reads bytes from
-Git objects, never the worktree. Dirty-Git and non-Git capture perform the admitted
-two-pass manifest protocol: discover typed entries and first digests, read and
-encode exact bytes, then re-read included bytes and relevant entry metadata.
-Any difference returns `CONTENT.SOURCE_CHANGED` as `unavailable` and
-publishes no ContentSnapshot. Unsupported filesystem representations reject
-explicitly. The Adapter discards both Git locator identities after constructing
-the canonical captured record. ContentSnapshot identity, payload, and
-inspection bind only exact included entries and bytes, scope, exclusions,
-and nesting under the source-neutral payload contract. Metadata, parser, routing,
-graph, policy-impact, coverage, result-projection, and implementation-release
-versions do not enter it.
+1. verify typed handle, canonical envelope, codec identity, and dependencies;
+2. insert when absent;
+3. treat identical existing bytes as idempotent success; and
+4. reject different bytes for the same handle as a contradiction.
 
-Owner-local SemanticAuthorityObjects preserve the coherent Metadata,
-Applicability, Routing, Graph, Standards Graph, Policy Impact, Coverage,
-Identity, Analysis, and operation-contract responsibilities. Creating another
-authority object requires an independent lifecycle and a deletion-test benefit;
-the design does not create one object merely for every semantic noun.
+Readers resolve exact handles and verify the returned envelope. The adapter
+supports integrity checking, deterministic SQLite backup, crash recovery, and
+cold-process reopen. It does not expose scans or mutable indexes as semantic
+authority.
 
-A StandardsAuthorityView is a reference-only composition manifest selecting
-one ContentSnapshot and the exact owner-local authority objects available to
-standards operations. It owns stable role selection and content coherence but
-contains no operation-required-role policy, copied semantic payload, version bag, provider,
-authorization decision, or executable logic.
+A1b admits SQLite schema v1 only. It has no schema migration framework,
+semantic export/import, dual reader, checked-in database, or legacy-state
+converter. Database files are local generated runtime state and are ignored by
+Git. Backup preserves the database; it is not a domain transfer format.
 
-Each domain computation returns an internal AuthorityBoundValue containing its
-semantic value and direct authority dependencies. The composing Engine or
-Analysis kernel traverses those exact stored dependencies to generate a
-RouteExecutionClosure, ReadExecutionClosure, RelatedExecutionClosure, or
-AnalysisExecutionClosure. The selected operation-family authority contract is
-a root of only that closure and supplies required roles plus cross-role
-coherence. Closure roots retain exact side, role, kind, and semantic identity.
-Results bind the narrow execution closure, not the complete
-StandardsAuthorityView. An unrelated authority change may change the view
-handle while leaving an unaffected operation closure and result identity
-unchanged.
+### Content snapshots
 
-There is no `SnapshotVersions`, `NavigationVersions`,
-`AnalysisVersions`, generic `VersionMap`, or ambient completion path.
-Compatibility promises remain with their owner. The exact scope, dependency
-algorithm, deletion tests, and mutation matrix are binding in
-[authority composition and execution closure](../plans/standards-engine-a1b/reports/authority-composition-and-execution-closure.md).
-
-Coverage views and analysis contexts retain their proven narrow semantic
-identity. They reference exact owner-local authority objects instead of
-repeating contract versions. Analysis states retain one exact
-transition-closed AnalysisExecutionClosure, narrow context, dependency-valid
-fact observations and dispositions, and authored coverage attestations.
-Requirements, coverage views and requirements, certificates, and other
-generated children remain directly inspectable projections but are not repeated
-as state authority. Complete
-base/proposed StandardsAuthorityViews are preparation inputs only and do not
-enter state or result identity. Dormant-valid decisions remain stored; current
-requirements, obligations, reading plans, certificates, completion, and next
-operations remain deterministic projections.
-
-Provider and authorization authority is supplied explicitly by trusted
-transition Adapters and enters only an analysis execution closure when
-material. Existing state inspection and projection use stored decisions and
-closure without live providers or fresh authorization. A new transition
-requiring unavailable execution authority publishes nothing.
-
-Content payloads represent arbitrary file bytes with padded standard Base64.
-Base64 is a storage representation, not text decoding or semantic
-normalization. Each entry also binds exact SHA-256 and byte length; reads verify
-all three without adding a second blob store.
-
-File publication is create-only, collision checked, durably synchronized, and
-atomic at the object boundary. A failed capture issues no handle. A
-cold process reconstructs every advertised operation and inspection from the
-repository and handles alone, without source paths, Git objects, provider
-capabilities, process caches, scans, or fresh authorization authority.
-
-The exact object algebra, dependency DAG, storage checks, and construction
-order are binding in
-[authority-object contracts](../plans/standards-engine-a1b/reports/authority-object-contracts.md).
-
-The A1b durable adapter is admitted only on Linux ext4. It requires regular-file
-hard links within one directory, file and directory `fsync`, and advisory
-`flock`. Unsupported filesystems reject before accepting writes. The adapter
-stores each complete canonical envelope as one regular file. Reads are
-lock-free. Writes use one repository-scoped publication lock that is
-coordination state only, never semantic authority or a mutable head:
+The public content contracts are:
 
 ```text
-<store>/.publication.lock
-<store>/objects/<object-kind>/<digest-hex>
-<store>/objects/<object-kind>/.stage-<unguessable-nonce>
+RepositoryPathV1
+  components: nonempty tuple<Unicode scalar string>
+
+CaptureRequestV1
+  files: nonempty set<RepositoryPathV1>
+
+ContentSnapshotV2
+  files: nonempty set<(RepositoryPathV1, exact bytes)>
 ```
 
-Object kinds and digest hex values are validated against the closed envelope
-and handle grammars before any filesystem operation. The configured store root
-must already exist and be configured by one canonical absolute path. Empty
-components, repeated separators, `.`, `..`, and NUL are invalid. The adapter
-opens a trusted `/` directory descriptor, then walks every configured component
-with descriptor-relative `openat` using
-`O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC`. It verifies each result with
-`fstat`, closes superseded descriptors, and retains the final store-root
-descriptor. This rejects symlinks in intermediate as well as final components;
-one `open` of the complete pathname is prohibited.
+A component's UTF-8 encoding must contain 1 through 255 bytes. Empty, `.`,
+`..`, slash, NUL, lone surrogates, and repository-control `.git` paths
+reject. Duplicate logical paths reject. Codepoints and case are preserved.
+Ordering uses Unicode scalar sequence with a prefix before its extension.
+Backslash is an ordinary scalar on the admitted Linux platform.
 
-The adapter verifies the retained root's owner and mode through `fstat` and
-performs all later opens, directory creation, links, unlinks, and status checks
-relative to retained directory descriptors. It never returns to a concatenated
-absolute path. Symlinks, non-regular final objects, and staging names outside
-the reserved grammar reject. The store root is owned by the effective user and
-is not group/world writable. Directories are `0700` and lock, staging, and
-final files are `0600` independent of ambient umask.
+Snapshot identity binds only sorted logical paths and exact bytes. Base64,
+digest, and byte length are verified serialized projections. Scope,
+exclusions, directories, modes, symlinks, source roots, Git identities,
+tracking state, inclusion decisions, worktree observations, and capture
+receipts are not snapshot authority.
 
-Before its first write, the adapter reads the opened root descriptor's mount ID
-from `/proc/self/fdinfo`, resolves that exact ID in Linux
-`/proc/self/mountinfo`, and requires filesystem type `ext4` and a writable
-mount. It then runs a private descriptor-relative capability probe in the store
-root for same-directory hard linking, file/directory `fsync`, and advisory
-locking. Probe artifacts are removed and the root directory is flushed before
-acceptance. Missing or contradictory mount/capability evidence is `unsupported`,
-not a weaker fallback.
+Bootstrap derives an exact file set and requires equality with the capture
+request. Capture does not recursively discover files or interpret exclusions.
 
-The threat model excludes a malicious process with the same effective user,
-which could alter any owner-writable local store regardless of this API.
-Untrusted callers and other users may race path components; retained directory
-descriptors prevent those changes from redirecting operations. Before success,
-the adapter repeats the complete component-by-component walk from the trusted
-`/` descriptor and requires the resulting `(device, inode, mount ID)` to equal
-the retained descriptor. Any changed, missing, or newly symlinked component is
-`unavailable` and never returns a handle. Lexical aliases using `.`, `..`, or
-repeated separators are invalid rather than normalized; a symlink alias is
-invalid; and two accepted canonical absolute paths denote the same root only
-when their final device, inode, and mount ID are equal. The path string itself
-never enters authority-object identity.
+### Capture adapters
 
-1. derive the final handle before I/O;
-2. acquire the descriptor-relative repository publication file with exclusive
-   advisory `flock`;
-3. create the `objects` and closed object-kind directories when absent; after
-   each creation, open the child descriptor, `fsync` it, and `fsync` its parent
-   before proceeding;
-4. while holding the lock, remove every regular file in the reserved staging
-   namespace, then create one uniquely named staging file with
-   `O_CREAT|O_EXCL|O_NOFOLLOW` relative to the object-kind directory;
-5. write the exact canonical envelope bytes and `fsync` the staging file;
-6. create the absent final filename with a directory-relative same-directory
-   hard link from the staging file; this atomic create-only step never replaces
-   existing content;
-7. when the final name already exists, read and verify it before deciding
-   idempotent success or identity collision;
-8. `fsync` the object-kind directory, unlink the staging name in `finally`,
-   `fsync` that directory again, revalidate the configured root identity,
-   release the lock, and return only after final-object verification.
+The Git adapter resolves one commit object ID, validates every traversed Git
+object against its object ID, accepts regular file modes `100644` and
+`100755`, and returns only requested bytes. A gitlink is traversed only
+through an explicit prefix-to-object-database mapping; nested requested files
+are flattened into their logical repository paths. The adapter reads no
+worktree, index, or status.
 
-Publication ordering does not affect the identity or result for different IDs.
-If another writer publishes the same ID first, the later writer reads and
-verifies the final object:
-byte-identical content is idempotent success; different content is an identity
-collision and `invalid`; existing content is never overwritten.
+The native adapter is admitted only for Linux x86-64 on a case-sensitive,
+non-casefold ext4 mount. It:
 
-An interruption before the hard link leaves only a non-resolvable staging
-file. An interruption after the hard link may leave the caller with an unknown
-outcome, but retrying the same immutable `put` deterministically
-returns the same verified handle. Dependencies publish before an aggregate
-root, so interruption may leave unreachable immutable objects but never a
-published root with missing dependencies. A process crash releases the
-publication lock; the next writer cleans abandoned staging files before
-starting. Normal and failure paths clean their own staging file in `finally`.
-This bounded internal staging cleanup is not object enumeration, garbage
-collection, a public Interface, or semantic authority.
+1. starts from a retained descriptor for `/`;
+2. uses descriptor-relative no-follow opens;
+3. retains directory and file descriptors on one mount;
+4. rejects symlinks, casefold mounts, cross-mount traversal, and nonregular
+   files;
+5. reads each file twice;
+6. independently rewalks the complete request; and
+7. requires endpoint metadata, descriptor identity, and bytes to agree.
 
-### Public cutover
+Endpoint agreement prevents returned mixed endpoints but does not claim to
+detect every transient same-user mutation that leaves identical final state.
+Such a stronger guarantee is a re-plan trigger.
 
-Preserve:
+Both adapters produce identical ContentSnapshotV2 identity for identical path
+and byte sets. Adapter identity and source locator do not enter the result.
 
-```python
-query(view, request) -> NavigationResult | RejectedResult
-prepare(request) -> AnalysisResult | RejectedResult
-resolve(analysis_handle, submission) -> AnalysisResult | RejectedResult
-inspect(handle) -> InspectionResult | RejectedResult
+### Authority views and operation contracts
+
+A `StandardsAuthorityView` references owner-produced semantic authorities. It
+contains no copied payload, version bag, provider decision, authorization
+decision, or executable domain logic.
+
+Standards Engine owns four executable `OperationAuthorityContractV2` values:
+
+| Operation | Required roles | Allowed dynamic roles |
+| --- | --- | --- |
+| route | metadata, routing, graph | none |
+| read | metadata, graph | none |
+| related | metadata, graph | none |
+| analysis | metadata, graph, policy-impact, coverage | context, requirement, observation, coverage requirement, attestation, decision, provider authority, authorization grant |
+
+Structural role dependencies are:
+
+```text
+metadata -> content
+routing -> content, metadata
+policy-impact -> content, metadata
+graph -> metadata, policy-impact
+coverage -> content, metadata, policy-impact, graph
 ```
 
-Trusted bootstrap captures content, constructs owner-local authority objects,
-checks their composition, and returns a StandardsAuthorityViewHandle. A
-ContentSnapshotHandle remains inspectable but is insufficient for query or
-analysis. AnalysisRequest carries its base/proposed views and optional prior
-analysis handle. Pending and complete results expose their analysis handle,
-narrow context, and exact ExecutionClosureHandle; they omit the complete input
-views. Callers do not coordinate subordinate authorities or closures.
+The Engine validates operation coherence. Authority provides generic reference
+traversal and does not own operation policy. `inspect` directly resolves the
+identified object and therefore has no operation-authority contract.
 
-Submissions contain caller claims, not preconstructed authority objects. In
-particular, a coverage-attestation submission names the current requirement
-and supplies conclusion, evidence, exclusions, rationale, and auditor
-provenance. The bound kernel obtains authorization from the trusted execution
-context, validates the claim against current work and evidence contracts, and
-constructs the stored attestation and handle. Callers cannot mint a handle or
-author their own authorization record.
+Navigation uses side `current`. Analysis roots use `accepted` and
+`proposed`; contract-transition authority common to both sides remains
+explicitly qualified.
 
-Use one atomic production replacement. Isolated foundation Modules may be
-built and tested before cutover, but the canonical schema, generated algebra,
-facade, domain consumers, catalog, relationships, suites, and coverage
-authority change in one accepted v11 boundary.
+### Roots-only execution closure
 
-Advance interface/schema 10 to 11, request contract 2 to 3, result projection
-2 to 3, analysis contract/schema 6/3 to 7/4, every public handle to schema 4,
-and every identity domain listed in the identity migration matrix. Version 10,
-old handles, and old persisted states are typed `unsupported`. There is no
-dual validator, decoder, serializer, store, compatibility re-export,
-converter, alias, or fallback.
+`ExecutionClosureV2` persists only a sorted unique set of qualified roots:
 
-The cutover also updates the supplemental node catalog and source-owned
-policy-impact relationships for every created, retained, or retired
-implementation artifact. It analyzes accepted and proposed authority, assigns
-every selected consumer a disposition, freezes the final horizon, and renews
-only mechanically stale coverage attestations.
+```text
+(side, role, object_kind, semantic_id)
+```
 
-`policy-impact-registry.toml` remains the sole closed authority for declaration
-source membership. New Cross-Platform and Security relationship declarations
-enter compilation only through explicit registry entries. Policy-unit corpus
-membership remains independent metadata authority; neither filenames nor
-policy-unit membership imply a relationship source.
+The selected operation contract is a root. Domain operations return
+`AuthorityBoundValue` with their direct semantic dependencies. The kernel
+derives transitive dependency set `D` by deterministic traversal through
+owner-declared envelope references and validates all role, kind, side, cycle,
+and coherence invariants.
+
+Closure identity binds the root set and derived `D` under the closure contract
+version. `D` need not be redundantly persisted as caller-authored authority;
+it is reproducible from immutable objects. Missing objects, kind mismatch,
+cycles, or a changed derived set reject.
+
+The closure covers the current result or analysis state. It does not speculate
+about every possible future submission. A successor transition identifies and
+stores any newly consumed authority in the child state.
+
+### Consumed trust authority
+
+Providers return claims over declared immutable inputs. Analysis alone
+validates a claim and constructs canonical observations.
+
+```text
+ProviderAuthorityV1
+  provider_id
+  semantic_revision
+  input_contract
+  evidence_contract
+  inputs: sorted qualified authority references
+
+AuthorizationGrantV1
+  issuer
+  issuer_semantic_revision
+  grant_id
+  capability
+  decision = allow
+  authorization_digest
+  revocation_digest
+```
+
+A successful child state includes the exact provider and authorization objects
+it consumed. A deterministic provider result of no observation stores no trust
+object. Provider unavailability, unresolved immutable input, and undeclared
+ambient input are distinct failures and never silently mean no observation.
+Existing states and results replay without a live provider or authorization
+service.
+
+Analysis state retains all dependency-valid observations, dispositions, and
+coverage attestations, including dormant-valid decisions. Materiality is
+derived during projection. Invalid decisions are removed when constructing a
+successor; unresolved material requirements alone block completion.
+
+### Cold reconstruction and inspection
+
+Every advertised handle directly resolves one persisted owner-typed object.
+Cold reconstruction requires:
+
+- the SQLite database path;
+- the requested handle;
+- the exact owner codec sets exported by public Module roots; and
+- implementation supporting the identity and envelope contracts.
+
+It requires no worktree, Git repository, source manifest, owner map, scan,
+process cache, live provider, or fresh authorization call. Inspection returns
+generated public result types and never leaks a domain model or dependency
+exception across the facade.
+
+### Package and import closure
+
+Every Engine Module manifest owns its exact production direct requirements,
+Python range, one public import root, and repository entrypoints. The root owns
+one statically resolvable `__all__`. An AST-backed verifier derives governed
+source ownership and imports and requires exact manifest equality.
+
+Cross-Module production imports use public roots and exported names. Private
+child imports, alternate roots, star imports, dynamic imports, unowned files,
+and ambient script-directory imports reject. Every root, export, and entrypoint
+executes from outside the checkout in safe-path mode with only the admitted
+lock and checkout root.
+
+### Platform scope
+
+A1b implementation and required-real evidence cover Linux x86-64, CPython 3.11
+and 3.12, glibc 2.17 or newer, case-sensitive ext4, and the selected SQLite
+runtime. macOS, Windows, another architecture or filesystem, casefolding,
+non-UTF-8 names, and platform-specific durability semantics require separate
+design and evidence. This limitation is explicit; POSIX behavior is not
+presented as portable behavior.
+
+### Planning and acceptance
+
+Work is serial. The Concurrent Plan Integration profile is not applicable.
+Review binds identified semantic content. Adding review evidence or recording
+lifecycle state does not invalidate unchanged reviewed semantics.
+
+Plans do not prescribe commit count, parentage, direct-child chains,
+exact-HEAD-only review, or standalone admit/start/verify/accept commits.
+Lifecycle changes travel with substantive implementation, material replanning,
+an accepted implementation boundary, or final acceptance evidence.
+
+The v11 public cutover replaces schema, generator, runtime, persistence,
+facade, tests, examples, policy-impact registrations, relationships, and
+coverage atomically. Empty impact is not evidence of no impact without valid
+independent coverage. A2 remains inactive until independent A1b acceptance.
 
 ## Consequences
 
-- One maintained dependency owns Draft semantics; project code owns only its
-  adapter, profile, projections, and diagnostics.
-- Identity encoding is simple and representation preserving; domain Modules
-  own meaning instead of inheriting normalization from a utility.
-- Every public handle has one storage and resolution rule, including cold
-  inspection of child artifacts.
-- The public replacement is intentionally breaking but has no known external
-  migration consumer.
-- A new runtime dependency and native transitive wheel require exact
-  resolution, target, security, provenance, and licensing evidence.
-- Package manifests and root `__all__` declarations provide one import-boundary
-  authority consumed by dependency comparison, static boundary verification,
-  governed-source ownership, and isolated root/export/entrypoint execution.
-- Relationship declarations remain explicit closed inputs, so adding a
-  policy-unit sidecar cannot silently add or omit relationship authority.
-- Materialized derived objects may be regenerated, but direct storage avoids
-  hidden owner maps and makes inspection independent of ambient execution.
+- One external validator owns Draft semantics.
+- One identity Module owns representation-preserving encoding, not domain
+  equality.
+- One immutable repository resolves every inspectable handle.
+- SQLite replaces Git-hostile checked-in binary state with local generated
+  storage while authored authority remains text in Git.
+- Exact file-list snapshots remove recursive scope and filesystem metadata from
+  identity.
+- Roots-only closure removes copied dependency bags and hypothetical future
+  authority.
+- Owner-local codecs avoid both generic domain ownership and a central manifest.
+- Direct consumed-trust objects make replay self-contained without broad trust
+  views.
+- The admitted platform is narrow and testable; portability is deferred rather
+  than inferred.
 
 ## Rejected Alternatives
 
 ### Continue the local Draft subset
 
-Rejected because it preserves local ownership of standardized validation and
-duplicates semantics already provided by the selected dependency.
+Rejected because it duplicates a mature validator and already diverged from
+the declared Draft.
 
-### Run the complete official Draft corpus in A1b
+### Make generated classes or annotations semantic authority
 
-Rejected because A1b is not a JSON Schema implementation. Re-certifying the
-dependency would expand scope and maintenance without improving the project
-adapter. Upstream owns Draft conformance; this repository owns only its use.
-
-### Make Python classes the contract authority
-
-Rejected because agent tools and structured consumers still require JSON
-Schema. Generating schema from code would move rather than eliminate the
-projection problem and reverse the accepted declaration authority.
+Rejected because serialized shape and domain behavior have different owners.
 
 ### Preserve recursive NFC identity encoding
 
-Rejected because a generic serializer should not silently choose semantic
-equivalence for every domain. Version 2 preserves typed input exactly and
-forces deliberate normalization into the domain that owns it.
+Rejected because representation identity and domain semantic equality are
+different contracts.
 
-### Store only aggregate roots
+### Retain C6 directory and hard-link storage
 
-Rejected because child-handle inspection would still require owner maps,
-state scans, reconstruction context, or cache authority. Direct objects give
-all handles one resolution rule.
+Rejected because it creates substantial publication, cleanup, locking, alias,
+and filesystem machinery that SQLite already owns.
 
-### Repair C4 by adding another version field
+### Store object kind in both SQL and envelope
 
-Rejected because the missing routing dependency was one instance of a systemic
-shadow-authority defect. Adding a field leaves independently maintained version
-bags, permits the next omission, and still invalidates semantic identities for
-representation-only changes.
+Rejected because two authorities can disagree. The typed handle and envelope
+are validated on every operation.
 
-### Bind every result to the complete standards view
+### Store aggregate roots or complete authority views
 
-Rejected because the composition view intentionally contains authorities for
-several operation families. Binding it directly would make an analysis-only
-provider or coverage change invalidate unrelated navigation. Generated
-execution closures retain exact replay authority without broad invalidation.
+Rejected because aggregate identity invalidates unrelated operations and
+conceals exact material dependencies.
 
-### Build a generic content-addressed graph
+### Store transitive closure as caller-authored authority
 
-Rejected because the closed A1b object vocabulary needs no public traversal,
-collection, arbitrary objects, mutable indexing, or remote storage.
+Rejected because it duplicates direct references. Roots and immutable objects
+derive the closure deterministically.
 
-### Validate stored domain objects through Contracts
+### Make closure transition-future-complete
 
-Rejected because public wire shapes and owner-local semantic objects have
-different authority and change reasons. A direct dependency in either
-direction would make schema lifecycle govern persistence or persistence govern
-wire validation. Authority owns its small envelope proof; exact injected owner
-codecs own closed payload semantics.
+Rejected because the set of future submissions is not current state authority.
+A child stores authority actually consumed by its transition.
 
-### Use one aggregate operation profile
+### Aggregate provider or authorization views
 
-Rejected because changing one operation family's required roles would
-invalidate unrelated operations. Separate stored route, read, related, and
-analysis contracts preserve local ownership and remove ambient role policy.
+Rejected because they invalidate decisions for unrelated trust changes and
+recreate ambient authority. Store exact consumed objects.
 
-### Retain Git lineage or complete views in derived state
+### Centralize codec membership
 
-Rejected because capture locators and unused composition members do not change
-the represented selected content or material analysis. Capture discards Git
-and Adapter observations; analysis retains narrow context and transition-closed
-side-qualified authority instead of complete input views.
+Rejected because a central manifest duplicates owner-local executable
+authority. Composition injects owner exports and verification derives closure.
 
-### Discover relationship declarations from the filesystem or policy units
+### Put SQLite databases or semantic exports in Git
 
-Rejected because file presence and policy-unit membership do not own
-relationship-source membership. Policy units may have no outgoing relationship,
-and deriving filenames would create path-based semantic authority beside the
-closed registry.
+Rejected because authored authority remains reviewable text and Git is not an
+effective mutable binary database manager. SQLite is local generated storage.
 
-### Enforce package boundaries only in the generator or import smoke
+### Implement migrations before a migration consumer exists
 
-Rejected because generator checks omit handwritten facade and repository
-entrypoint code, and successful imports do not distinguish a public root from a
-private submodule or Python's root-form implicit child loading. A single AST
-verifier consumes manifest-owned roots, entrypoints, and root exports across all
-governed production sources; focused generator tests remain implementation
-evidence rather than the acceptance oracle.
+Rejected because A1b has no retained state. Schema migration or semantic
+transfer requires a new consumer and re-plan.
+
+### Claim macOS or Windows portability
+
+Rejected because capture and durability contracts are not yet proven there.
+Platform support requires explicit adapters and required-real evidence.
 
 ## Re-Plan Conditions
 
-Re-plan before implementation continues if:
+Re-plan if:
 
-- an external public consumer or retained persisted A1 state is found;
-- a reachable public contract requires remote references, custom vocabularies,
-  format assertion, validator overrides, dynamic references, unsupported
-  projection semantics, or an incompatible pattern;
-- a supported target cannot resolve the exact locked dependency closure;
-- any `x-standards-engine-*` annotation remains or its replacement lacks a
-  closed representation and executable owner;
-- an inspectable handle cannot be represented by the closed authority-object
-  vocabulary or requires scanning, ambient state, or a mutable index;
-- Authority and Contracts require a dependency in either direction;
-- an admitted codec kind, payload contract, identity domain, dependency kind,
-  stable role, role-to-kind binding, operation contract, or required role must
-  change;
-- a StandardsAuthorityView must copy semantic payload or execute domain logic;
-- an execution closure cannot be derived from the same dependencies consumed
-  by execution;
-- an analysis closure cannot retain the authority needed by the current
-  projection and every advertised valid next transition without a complete
-  input view or handwritten dependency list;
-- a semantic authority object lacks one coherent owner, lifecycle, change
-  reason, compatibility promise, or deletion-test benefit;
-- storage-envelope, public-handle, result-projection, generator, build, or
-  release versions must enter an unrelated semantic identity;
-- existing result inspection or projection requires live providers,
-  authorization, source content, caches, or process configuration;
-- the admitted Linux ext4 filesystem cannot provide same-directory atomic
-  create-only hard linking, file/directory durable flush, or advisory-lock
-  behavior required by the durable adapter;
-- snapshot size or streaming invalidates bounded atomic capture;
-- a changed artifact, policy-impact relationship, or coverage consumer falls
-  outside the admitted atomic cutover; or
-- a required relationship source cannot use the closed policy-impact registry,
-  or a Module cannot express its production imports through one manifest-owned
-  public root and statically resolved export surface; or
-- A2 mutable heads, application authority, or recovery behavior enters A1b.
+- the admitted v11 schema or interface shape changes;
+- a reachable public construct exceeds the projection profile;
+- an inspectable object cannot use direct immutable lookup;
+- owner-local codecs cannot close without a central semantic authority;
+- SQLite schema migration, semantic export/import, another database, or
+  checked-in database authority becomes necessary;
+- exact file-list capture needs recursion, exclusions, nonregular files,
+  non-UTF-8 names, streaming, or identity beyond logical paths and raw bytes;
+- macOS, Windows, another architecture/filesystem, casefolding, or stronger
+  transient-mutation detection becomes required;
+- operation roles, role dependencies, dynamic roles, codec kinds, or trust
+  objects differ from the admitted executable contracts;
+- replay requires ambient or live provider/authorization authority;
+- a relationship, semantic consumer, horizon input, source path, or package
+  import falls outside the admitted inventory or write set;
+- old and new public authorities must coexist; or
+- implementation would change normative policy, generic graph semantics, or A2.
 
 ## Acceptance
 
-This ADR remains Proposed until the A1b plan is independently admitted. It
-becomes Accepted only with A1b implementation and exact-tree acceptance. A2
-remains inactive throughout.
+This ADR remains `Proposed` through the atomic cutover. It becomes `Accepted`
+only when one clean implementation boundary has independent content-bound
+acceptance proving the contract, identity, storage, capture, operation,
+consumed-trust, package, migration-deletion, consumer-disposition, and coverage
+claims. Any blocked consumer keeps A1b incomplete.

@@ -1,6 +1,10 @@
 # A1b Authority Object Contracts
 
-**Status:** Proposed planning authority
+**Status:** Superseded C6 planning evidence
+
+The current replacement design is
+[C7 Design Proposal](c7-design-proposal.md). This report remains historical
+evidence for the C6 decisions that C7 replaces.
 
 This report owns the immutable object envelope, owner codec inventory,
 stored-record algebra, dependency DAG, publication protocol, and
