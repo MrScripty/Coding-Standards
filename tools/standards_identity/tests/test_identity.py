@@ -57,8 +57,28 @@ class IdentityEncodingTest(unittest.TestCase):
         self.assertEqual(encode_identity_value(True), b"true")
         self.assertEqual(encode_identity_value(1), b"1")
         self.assertNotEqual(encode_identity_value(True), encode_identity_value(1))
-        huge = 10**1000
-        self.assertEqual(encode_identity_value(huge), str(huge).encode("ascii"))
+        huge = 10**5000
+        expected = b"1" + b"0" * 5000
+        self.assertEqual(encode_identity_value(huge), expected)
+        self.assertEqual(encode_identity_value(-huge), b"-" + expected)
+
+        formerly_supported = (
+            -(10**4299),
+            -(10**18 + 1),
+            -(10**9),
+            -1,
+            0,
+            1,
+            10**9 - 1,
+            10**9,
+            10**18 + 1,
+            10**4299,
+        )
+        for value in formerly_supported:
+            with self.subTest(value=value):
+                self.assertEqual(
+                    encode_identity_value(value), str(value).encode("ascii")
+                )
 
     def test_rejects_mutable_floating_subclass_and_invalid_unicode_values(self) -> None:
         class IntegerSubclass(int):

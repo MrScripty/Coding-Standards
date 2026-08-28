@@ -435,12 +435,19 @@ independently of the accepted facade.
 **Allowed write set:**
 
 - `tools/standards_authority/`
+- `tools/standards_identity/standards_identity/encoding.py` and
+  `tools/standards_identity/tests/test_identity.py`, solely to correct the
+  reproduced CPython decimal-digit limit in identity-v2 integer encoding
 - `.gitignore`
 - lifecycle fields in this plan and issues, plus append-only checkpoint,
   verification, deviation, and transition records in the ledger
 
 **Tasks:**
 
+- [x] Replace implementation-limited integer rendering with local arbitrary-
+  length decimal encoding while preserving every previously issued identity
+  byte. Prove positive and negative values beyond CPython's ambient decimal-
+  digit limit on both supported runtimes; do not mutate the process-wide limit.
 - [ ] Implement the generic envelope, explicit owner-codec-set Interface, typed
   handles, in-memory adapter, and SQLite schema-v1 adapter. The repository
   validates its closed envelope proof and direct references; the injected codec

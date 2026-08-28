@@ -11,6 +11,8 @@ from .errors import invalid
 _FRAME_PREFIX = b"coding-standards:identity:v2\0"
 _DOMAIN = re.compile(r"[a-z0-9][a-z0-9.:-]*\Z", re.ASCII)
 _ID_PREFIX = re.compile(r"[a-z][a-z0-9.-]*\Z", re.ASCII)
+_DECIMAL_CHUNK_BASE = 1_000_000_000
+_DECIMAL_CHUNK_WIDTH = 9
 
 
 @dataclass(frozen=True, slots=True, init=False)
@@ -140,7 +142,7 @@ def _encode(value: IdentityValue) -> bytes:
     if value_type is bool:
         return b"true" if value else b"false"
     if value_type is int:
-        return str(value).encode("ascii")
+        return _encode_integer(value)
     if value_type is str:
         return _encode_string(value)
     if value_type is IdentityArray:
@@ -152,6 +154,23 @@ def _encode(value: IdentityValue) -> bytes:
         )
         return b"{" + b",".join(encoded_members) + b"}"
     raise AssertionError("validated identity value has an unknown type")
+
+
+def _encode_integer(value: int) -> bytes:
+    if value == 0:
+        return b"0"
+    negative = value < 0
+    remaining = -value if negative else value
+    chunks: list[int] = []
+    while remaining:
+        remaining, chunk = divmod(remaining, _DECIMAL_CHUNK_BASE)
+        chunks.append(chunk)
+    encoded = str(chunks.pop()).encode("ascii")
+    suffix = b"".join(
+        f"{chunk:0{_DECIMAL_CHUNK_WIDTH}d}".encode("ascii")
+        for chunk in reversed(chunks)
+    )
+    return (b"-" if negative else b"") + encoded + suffix
 
 
 def _encode_string(value: str) -> bytes:

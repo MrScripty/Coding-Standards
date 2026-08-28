@@ -738,3 +738,22 @@
   changed.
 - Milestone 1 is `Implemented`. The next substantive work is the isolated
   Milestone 2 authority repository and capture adapters.
+
+## 2026-08-28 - Identity Integer Boundary Replan
+
+- Milestone 2 envelope testing reproduced a latent Milestone 0 defect:
+  identity-v2 integer encoding used `str(int)` and therefore failed above
+  CPython's ambient 4300-decimal-digit limit despite the admitted contract's
+  implementation-size-independent integer grammar.
+- The active Milestone 2 write set now admits only the identity encoder and its
+  focused test for this prerequisite correction. The selected correction uses
+  module-local fixed-width decimal chunks, preserves all formerly valid bytes,
+  and does not disable or mutate CPython's process-wide safety limit.
+- A contract limit, global interpreter mutation, Authority-local workaround,
+  or alternate identity version is rejected because each would weaken or
+  duplicate the existing owner contract. Authority implementation remains
+  isolated until this correction passes on CPython 3.11 and 3.12.
+- The local chunked encoder passed focused tests on CPython 3.11.14 and 3.12.3
+  for positive and negative 5001-digit values. Boundary samples through the
+  largest ambiently convertible values reproduce the former bytes exactly;
+  Ruff, plan validation, and diff hygiene pass.
