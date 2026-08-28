@@ -66,7 +66,7 @@ temporal packet staleness.
 From the repository root, run:
 
 ```text
-PYTHONPATH=. python3 -P tools/standards_engine/contracts/generate_contract.py --check
+PYTHONPATH=. python3 -P -m tools.standards_contracts.standards_contracts.projection --check
 ```
 
 The check compiles the canonical schema and interface through

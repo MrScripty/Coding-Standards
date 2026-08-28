@@ -1,18 +1,44 @@
 from __future__ import annotations
 
 import hashlib
+import tempfile
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
-from typing import Iterable, Mapping
+from typing import Callable, Iterable, Mapping
 
 from tools.standards_authority.standards_authority import (
+    CONTENT_SNAPSHOT_CODEC,
+    AuthorityCodec,
     AuthorityReference,
     AuthorityRepository,
+    CaptureRequest,
+    CodecSet,
+    ContentSnapshot,
+    MemoryObjectStore,
+    NativeCaptureSource,
+    RepositoryPath,
 )
 from tools.standards_identity.standards_identity import IdentityArray, IdentityObject
-from tools.standards_metadata.standards_metadata import PolicyUnitCorpus
+from tools.standards_metadata.standards_metadata import (
+    CANONICAL_MODULE_CORPUS,
+    CANONICAL_STANDARDS_CORPUS_CODEC,
+    METADATA_CODECS,
+    POLICY_UNIT_REGISTRY,
+    CanonicalCorpusAuthority,
+    CanonicalStandardsCorpus,
+    PolicyUnitCorpus,
+    load_canonical_standards_corpus,
+)
+from tools.standards_policy_impact.standards_policy_impact import (
+    COMPILED_POLICY_IMPACT_CODEC,
+    DEFAULT_REGISTRY,
+    POLICY_IMPACT_CODECS,
+    CompiledPolicyImpactAuthority,
+    CompiledPolicyImpactSet,
+    compile_policy_impact,
+)
 
 from .authority import (
     AUTHORIZATION_GRANT_CODEC,
@@ -31,6 +57,7 @@ from .coverage import (
     CoverageDefinitionIndex,
     CoverageRequirementDefinition,
     CoverageViewDefinition,
+    compile_coverage_definitions,
 )
 from .errors import AnalysisError, AnalysisFailure
 from .keys import analysis_identity, analysis_key, analysis_key_bytes, raw_digest
@@ -113,6 +140,136 @@ class RepositoryAuthorizationAuthority:
     revocation_evidence: tuple[AuthorityEvidence, ...]
     revoked_grants: frozenset[str]
     input_sources: tuple[str, ...]
+
+
+def covered_repository_policy_units(
+    root: Path,
+    *,
+    graph_codecs: CodecSet,
+    graph_codec: AuthorityCodec[object],
+    build_graph: Callable[
+        [
+            AuthorityReference,
+            AuthorityReference,
+            CanonicalStandardsCorpus,
+            CompiledPolicyImpactSet,
+        ],
+        object,
+    ],
+) -> frozenset[str]:
+    from .authority import (
+        ANALYSIS_CODECS,
+        COVERAGE_HORIZON_CODEC,
+        CoverageHorizonAuthority,
+    )
+    from .coverage import load_coverage_horizon
+
+    repository_root = root.resolve()
+    initial_corpus = load_canonical_standards_corpus(repository_root)
+    initial_impact = compile_policy_impact(
+        repository_root, initial_corpus, DEFAULT_REGISTRY
+    )
+    initial_horizon = load_coverage_horizon(
+        repository_root, initial_corpus, initial_impact
+    )
+    scope = _repository_coverage_scope(
+        repository_root,
+        initial_corpus,
+        initial_impact.input_sources,
+        initial_horizon.input_sources,
+    )
+    snapshot = NativeCaptureSource(repository_root).capture(
+        CaptureRequest(RepositoryPath(path.split("/")) for path in scope)
+    )
+    with tempfile.TemporaryDirectory(prefix="standards-coverage-") as directory:
+        workspace = Path(directory)
+        for item in snapshot.files:
+            target = workspace.joinpath(*item.path.components)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(item.content)
+        corpus = load_canonical_standards_corpus(workspace)
+        impact = compile_policy_impact(workspace, corpus, DEFAULT_REGISTRY)
+        horizon = load_coverage_horizon(workspace, corpus, impact)
+        if (
+            corpus.module_corpus.members != initial_corpus.module_corpus.members
+            or corpus.policy_unit_corpus.sources
+            != initial_corpus.policy_unit_corpus.sources
+            or impact.input_sources != initial_impact.input_sources
+            or horizon.input_sources != initial_horizon.input_sources
+        ):
+            raise _error(
+                "COVERAGE.CAPTURE_CONTRADICTION",
+                "captured coverage authority differs from discovery",
+            )
+        repository = AuthorityRepository(
+            MemoryObjectStore(),
+            (
+                CodecSet("standards-authority", (CONTENT_SNAPSHOT_CODEC,)),
+                METADATA_CODECS,
+                POLICY_IMPACT_CODECS,
+                graph_codecs,
+                ANALYSIS_CODECS,
+            ),
+        )
+        metadata_snapshot = repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(
+                snapshot,
+                {
+                    CANONICAL_MODULE_CORPUS,
+                    POLICY_UNIT_REGISTRY,
+                    *corpus.module_corpus.members,
+                    *corpus.policy_unit_corpus.sources,
+                },
+            ),
+        )
+        policy_snapshot = repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(snapshot, impact.input_sources),
+        )
+        horizon_snapshot = repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(snapshot, horizon.input_sources),
+        )
+        metadata = repository.publish(
+            CANONICAL_STANDARDS_CORPUS_CODEC,
+            CanonicalCorpusAuthority(metadata_snapshot.reference, corpus),
+        )
+        policy = repository.publish(
+            COMPILED_POLICY_IMPACT_CODEC,
+            CompiledPolicyImpactAuthority(
+                policy_snapshot.reference, metadata.reference, impact
+            ),
+        )
+        graph = repository.publish(
+            graph_codec,
+            build_graph(metadata.reference, policy.reference, corpus, impact),
+        )
+        horizon_handle = repository.publish(
+            COVERAGE_HORIZON_CODEC,
+            CoverageHorizonAuthority(
+                horizon_snapshot.reference,
+                metadata.reference,
+                policy.reference,
+                graph.reference,
+                horizon,
+            ),
+        )
+        definitions = compile_coverage_definitions(corpus, impact, horizon)
+        coverage = publish_coverage_definitions(
+            repository,
+            definitions,
+            metadata=metadata.reference,
+            policy_impact=policy.reference,
+            graph=graph.reference,
+            horizon=horizon_handle.reference,
+        )
+        coverage = load_repository_coverage_authority(workspace, repository, coverage)
+        return frozenset(
+            subject
+            for subject in coverage.subjects
+            if coverage.certificate_for(subject) is not None
+        )
 
 
 def publish_coverage_definitions(
@@ -651,6 +808,70 @@ def _strings(value: object, path: str, field: str, *, allow_empty: bool = False)
     return tuple(value)
 
 
+def _repository_coverage_scope(
+    root: Path,
+    corpus: CanonicalStandardsCorpus,
+    policy_inputs: Iterable[str],
+    horizon_inputs: Iterable[str],
+) -> tuple[str, ...]:
+    registry = _toml(root, DEFAULT_ATTESTATION_REGISTRY)
+    attestation_sources = tuple(registry.get("sources", ()))
+    attestation_inputs = set(attestation_sources)
+    for source_path in attestation_sources:
+        if type(source_path) is not str:
+            continue
+        declaration = _toml(root, source_path)
+        for attestation in declaration.get("attestations", ()):
+            if not isinstance(attestation, Mapping):
+                continue
+            for field in ("evidence", "explicit_exclusions"):
+                values = attestation.get(field, ())
+                if isinstance(values, list):
+                    attestation_inputs.update(
+                        item for item in values if type(item) is str
+                    )
+    authorization = _toml(root, DEFAULT_AUTHORIZATION_AUTHORITY)
+    authorization_inputs = {
+        DEFAULT_AUTHORIZATION_AUTHORITY,
+        str(authorization.get("revocations", DEFAULT_REVOCATIONS)),
+        *(
+            item
+            for item in authorization.get("authorization_evidence", ())
+            if type(item) is str
+        ),
+    }
+    return tuple(
+        sorted(
+            {
+                CANONICAL_MODULE_CORPUS,
+                POLICY_UNIT_REGISTRY,
+                DEFAULT_ATTESTATION_REGISTRY,
+                *authorization_inputs,
+                *corpus.module_corpus.members,
+                *corpus.policy_unit_corpus.sources,
+                *policy_inputs,
+                *horizon_inputs,
+                *attestation_inputs,
+            }
+        )
+    )
+
+
+def _snapshot_subset(
+    snapshot: ContentSnapshot, paths: Iterable[str]
+) -> ContentSnapshot:
+    indexed = {str(item.path): item for item in snapshot.files}
+    selected = tuple(sorted(set(paths)))
+    missing = tuple(path for path in selected if path not in indexed)
+    if missing:
+        raise _error(
+            "COVERAGE.CAPTURE_INCOMPLETE",
+            "captured coverage snapshot omits an owner input",
+            path=missing[0],
+        )
+    return ContentSnapshot(indexed[path] for path in selected)
+
+
 def _error(
     code: str,
     message: str,
@@ -672,6 +893,7 @@ __all__ = (
     "DEFAULT_AUTHORIZATION_AUTHORITY",
     "DEFAULT_REVOCATIONS",
     "StoredCoverageAttestation",
+    "covered_repository_policy_units",
     "load_repository_coverage_authority",
     "publish_coverage_attestation",
     "publish_coverage_certificate",

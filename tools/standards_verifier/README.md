@@ -1,19 +1,31 @@
 # Standards Verifier
 
 This repository-local Python 3.11+ engine evaluates strict declarative suites.
-It uses only the Python standard library and does not install, download, or
-resolve runtime packages.
+It uses the hash-locked A1b dependency environment; it does not download or
+resolve packages while verification is running.
+
+Create an isolated environment with the admitted lock before invoking the
+Verifier:
+
+```bash
+python3 -m venv /tmp/coding-standards-verifier
+/tmp/coding-standards-verifier/bin/python -m pip install \
+  --require-hashes --only-binary=:all: \
+  -r tools/standards_contracts/requirements.lock
+```
 
 Run every registered suite:
 
 ```bash
-python3 tools/standards_verifier/verify.py --all
+PYTHONPATH="$PWD" /tmp/coding-standards-verifier/bin/python -P \
+  tools/standards_verifier/verify.py --all
 ```
 
 Run the canonical complete repository checkpoint:
 
 ```bash
-python3 tools/standards_verifier/verify.py --complete
+PYTHONPATH="$PWD" /tmp/coding-standards-verifier/bin/python -P \
+  tools/standards_verifier/verify.py --complete
 ```
 
 Complete mode first verifies the generated Bash migration inventory and graph,
@@ -29,13 +41,15 @@ native output.
 Run one suite and its dependencies:
 
 ```bash
-python3 tools/standards_verifier/verify.py --suite rust-test-style
+PYTHONPATH="$PWD" /tmp/coding-standards-verifier/bin/python -P \
+  tools/standards_verifier/verify.py --suite rust-test-style
 ```
 
 Run engine self-tests:
 
 ```bash
-python3 -m unittest discover -s tools/standards_verifier/tests -v
+PYTHONPATH="$PWD" /tmp/coding-standards-verifier/bin/python -P \
+  -m unittest discover -s tools/standards_verifier/tests -v
 ```
 
 Report every reviewed semantic consumer and projection for one covered policy

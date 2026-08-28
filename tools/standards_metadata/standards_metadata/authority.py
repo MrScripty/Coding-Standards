@@ -3,9 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from tools.standards_authority.standards_authority import (
+    AuthorityBoundValue,
     AuthorityReference,
     CodecContext,
     CodecSet,
+    ExecutionAuthorityRoot,
     invalid,
 )
 from tools.standards_identity.standards_identity import (
@@ -30,6 +32,18 @@ class CanonicalCorpusAuthority:
                 "METADATA.INVALID_CONTENT_AUTHORITY",
                 "canonical metadata must reference a content snapshot",
             )
+
+    def authority_bound(
+        self, reference: AuthorityReference, side: str
+    ) -> AuthorityBoundValue[object]:
+        if reference.object_kind != "canonical-standards-corpus":
+            raise invalid(
+                "METADATA.INVALID_AUTHORITY_BINDING",
+                "metadata binding requires its canonical corpus authority",
+            )
+        return AuthorityBoundValue(
+            self, (ExecutionAuthorityRoot(side, "metadata", reference),)
+        )
 
 
 class CanonicalStandardsCorpusCodec:

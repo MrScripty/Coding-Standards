@@ -90,6 +90,7 @@ present = [
   "tools/standards_contracts/requirements.lock",
   "tools/standards_contracts/standards_contracts/__init__.py",
   "tools/standards_contracts/standards_contracts/compiler.py",
+  "tools/standards_contracts/standards_contracts/projection.py",
   "tools/standards_contracts/standards_contracts/runtime.py",
   "tools/standards_contracts/tests/test_compiler.py",
   "tools/standards_contracts/tests/test_projection.py",
@@ -103,6 +104,7 @@ present = [
   "tools/standards_engine/tests/test_rendering.py",
 ]
 absent = [
+  "tools/standards_engine/contracts/generate_contract.py",
   "tools/standards_engine/contracts/validate_contracts.py",
   "tools/standards_engine/standards_engine/model.py",
 ]

@@ -220,8 +220,8 @@ id = "tools/standards_engine/contracts/a1-contract.schema.json"
 metadata = { repository_path = "tools/standards_engine/contracts/a1-contract.schema.json", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_engine/contracts/generate_contract.py"
-metadata = { repository_path = "tools/standards_engine/contracts/generate_contract.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_contracts/standards_contracts/projection.py"
+metadata = { repository_path = "tools/standards_contracts/standards_contracts/projection.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_contracts/standards_contracts/compiler.py"

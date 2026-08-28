@@ -31,6 +31,7 @@ from tools.standards_authority.standards_authority import (
     AuthorityRepository,
     CodecContext,
     CodecSet,
+    ExecutionAuthorityRoot,
     MemoryObjectStore,
 )
 from tools.standards_authority.standards_authority.errors import AuthorityError
@@ -160,7 +161,23 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
                 1,
                 "authority-inputs.v1",
                 "evidence.test",
-                tuple(sorted((metadata, impact, context.reference, requirement.reference))),
+                tuple(
+                    sorted(
+                        (
+                            ExecutionAuthorityRoot("accepted", "metadata", metadata),
+                            ExecutionAuthorityRoot("proposed", "metadata", metadata),
+                            ExecutionAuthorityRoot(
+                                "accepted", "policy-impact", impact
+                            ),
+                            ExecutionAuthorityRoot(
+                                "current", "context", context.reference
+                            ),
+                            ExecutionAuthorityRoot(
+                                "current", "requirement", requirement.reference
+                            ),
+                        )
+                    )
+                ),
             ),
         )
         evidence = AuthorityEvidence(
@@ -309,6 +326,13 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
             root,
         ):
             self.assertEqual(cold.resolve(handle).handle, handle)
+        resolved_provider = cold.resolve(provider).value
+        self.assertIsInstance(resolved_provider, ProviderAuthority)
+        self.assertEqual(len(resolved_provider.inputs), 5)
+        self.assertEqual(
+            {item.side for item in resolved_provider.inputs if item.role == "metadata"},
+            {"accepted", "proposed"},
+        )
 
     def test_authorization_rejects_action_subject_mismatch(self) -> None:
         evidence = AuthorityEvidence(

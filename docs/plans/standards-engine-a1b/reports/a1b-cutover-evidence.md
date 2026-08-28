@@ -25,6 +25,17 @@ does not create a separate candidate or lifecycle boundary.
   selectors under source schema v4. They contain no generated handle or
   digest. Analysis derives every current v3 requirement, authorization grant,
   attestation, and certificate; the v2 path is absent.
+- Authority no longer names downstream codecs. Engine composes the execution-
+  closure codec from injected owner sets, and domain-owned bound values supply
+  exact qualified dependencies with cardinality checked before projection.
+- Contracts owns deterministic projection generation. The retired Engine
+  generator and two superseded unregistered suites are absent.
+- Verifier consumes Analysis-owned repository coverage composition without an
+  Engine dependency and rejects aliased dynamic-import capabilities.
+- Separate fresh interpreters reconstruct every public handle family through
+  public composition and persisted SQLite authority without live trust
+  injection. This evidence exposed and removed the final lazy import of the
+  retired handwritten Engine model.
 
 ## Coverage Closure
 
@@ -57,8 +68,10 @@ are rejected in authored claim sources.
 - Policy Impact: 9 focused tests passed.
 - Standards Graph: 2 focused tests passed.
 - Analysis: 66 focused tests passed.
-- Standards Engine: 30 focused tests passed.
-- Standards Verifier: 385 focused tests passed.
+- Standards Engine: 33 focused tests passed.
+- Standards Verifier: 386 focused tests passed.
+- Every manifest-owned public root, export, and repository entrypoint executed
+  under safe-path CPython 3.11 and 3.12 with only the admitted lock.
 - All 226 registered declarative suites passed.
 - All 53 retained migration checkers passed without extension.
 - Generated freshness, plan structure, changed-file Ruff, and diff hygiene

@@ -9,9 +9,11 @@ from tools.standards_applicability.standards_applicability import (
     compile_fact_schema,
 )
 from tools.standards_authority.standards_authority import (
+    AuthorityBoundValue,
     AuthorityReference,
     CodecContext,
     CodecSet,
+    ExecutionAuthorityRoot,
     invalid,
 )
 from tools.standards_identity.standards_identity import (
@@ -37,6 +39,14 @@ class RoutingProjectionAuthority:
     def __post_init__(self) -> None:
         _require_kind(self.content, "content-snapshot")
         _require_kind(self.metadata, "canonical-standards-corpus")
+
+    def authority_bound(
+        self, reference: AuthorityReference, side: str
+    ) -> AuthorityBoundValue[object]:
+        _require_kind(reference, "routing-projection")
+        return AuthorityBoundValue(
+            self, (ExecutionAuthorityRoot(side, "routing", reference),)
+        )
 
 
 class RoutingProjectionCodec:
@@ -121,6 +131,14 @@ class CoverageHorizonAuthority:
         _require_kind(self.metadata, "canonical-standards-corpus")
         _require_kind(self.policy_impact, "compiled-policy-impact")
         _require_kind(self.graph, "standards-graph")
+
+    def authority_bound(
+        self, reference: AuthorityReference, side: str
+    ) -> AuthorityBoundValue[object]:
+        _require_kind(reference, "coverage-horizon")
+        return AuthorityBoundValue(
+            self, (ExecutionAuthorityRoot(side, "coverage", reference),)
+        )
 
 
 class CoverageHorizonCodec:
@@ -310,6 +328,25 @@ def _decode_reference(value: IdentityValue) -> AuthorityReference:
     )
 
 
+def _qualified_reference_value(value: ExecutionAuthorityRoot) -> IdentityObject:
+    return IdentityObject(
+        (
+            ("side", value.side),
+            ("role", value.role),
+            ("reference", _reference_value(value.reference)),
+        )
+    )
+
+
+def _decode_qualified_reference(value: IdentityValue) -> ExecutionAuthorityRoot:
+    members = _members(value, {"side", "role", "reference"}, "qualified reference")
+    return ExecutionAuthorityRoot(
+        _string(members["side"], "side"),
+        _string(members["role"], "role"),
+        _decode_reference(members["reference"]),
+    )
+
+
 def _identity(value: object) -> IdentityValue:
     value_type = type(value)
     if value is None or value_type in {bool, int, str}:
@@ -437,7 +474,7 @@ class ProviderAuthority:
     semantic_revision: int
     input_contract: str
     evidence_contract: str
-    inputs: tuple[AuthorityReference, ...]
+    inputs: tuple[ExecutionAuthorityRoot, ...]
 
     ALLOWED_INPUT_KINDS: ClassVar = frozenset(
         {
@@ -461,7 +498,10 @@ class ProviderAuthority:
                 "ANALYSIS.INVALID_PROVIDER_INPUTS",
                 "provider inputs must be sorted and unique",
             )
-        if any(item.object_kind not in self.ALLOWED_INPUT_KINDS for item in self.inputs):
+        if any(
+            item.reference.object_kind not in self.ALLOWED_INPUT_KINDS
+            for item in self.inputs
+        ):
             raise invalid(
                 "ANALYSIS.INVALID_PROVIDER_INPUT_KIND",
                 "provider input kind is not admitted",
@@ -791,7 +831,12 @@ class ProviderAuthorityCodec(_RecordCodec):
                 ("semantic_revision", value.semantic_revision),
                 ("input_contract", value.input_contract),
                 ("evidence_contract", value.evidence_contract),
-                ("inputs", IdentityArray(_reference_value(item) for item in value.inputs)),
+                (
+                    "inputs",
+                    IdentityArray(
+                        _qualified_reference_value(item) for item in value.inputs
+                    ),
+                ),
             )
         )
 
@@ -806,12 +851,15 @@ class ProviderAuthorityCodec(_RecordCodec):
             _positive_integer(members["semantic_revision"], "semantic_revision"),
             _string(members["input_contract"], "input_contract"),
             _string(members["evidence_contract"], "evidence_contract"),
-            tuple(_decode_reference(item) for item in _array(members["inputs"], "inputs")),
+            tuple(
+                _decode_qualified_reference(item)
+                for item in _array(members["inputs"], "inputs")
+            ),
         )
 
     def _dependencies(self, value: object) -> tuple[AuthorityReference, ...]:
         assert isinstance(value, ProviderAuthority)
-        return value.inputs
+        return tuple(sorted({item.reference for item in value.inputs}))
 
 
 class AuthorizationGrantCodec(_RecordCodec):

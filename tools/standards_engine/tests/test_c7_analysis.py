@@ -1,36 +1,42 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from tools.standards_analysis.standards_analysis import (
-    ANALYSIS_CODECS,
     AnalysisExecutionContext,
     AuthorityEvidence,
     AuthorizationClaim,
     ResolvedEvidence,
 )
 from tools.standards_authority.standards_authority import (
-    AUTHORITY_CODECS,
     AuthorityHandle,
+    AuthorityReference,
     AuthorityRepository,
+    ExecutionAuthorityRoot,
+    ExecutionClosure,
     MemoryObjectStore,
     SQLiteObjectStore,
 )
+from tools.standards_engine.standards_engine.engine import _codec_sets
 from tools.standards_engine.standards_engine import (
-    ENGINE_CODECS,
     AnalysisRequest,
     ConsumerDispositionSubmission,
     CoverageAttestationSubmission,
     InspectCall,
     StandardsEngine,
 )
-from tools.standards_graph.standards_graph import STANDARDS_GRAPH_CODECS
-from tools.standards_metadata.standards_metadata import METADATA_CODECS
-from tools.standards_policy_impact.standards_policy_impact import (
-    POLICY_IMPACT_CODECS,
+from tools.standards_engine.standards_engine.authority import (
+    OperationAuthorityContract,
+    RoleRequirement,
+    validate_execution_authority,
 )
 
 
@@ -71,6 +77,43 @@ class ExactAuthorizer:
 
 
 class C7AnalysisLifecycleTests(unittest.TestCase):
+    def test_required_execution_role_rejects_multiple_roots(self) -> None:
+        operation = AuthorityReference(
+            "operation-authority-contract",
+            "operation-authority-contract:sha256:" + "0" * 64,
+        )
+        contract = OperationAuthorityContract(
+            "read",
+            2,
+            (RoleRequirement("metadata", "canonical-standards-corpus", 1, 1),),
+            (),
+        )
+        closure = ExecutionClosure(
+            "read",
+            (
+                ExecutionAuthorityRoot("current", "operation-contract", operation),
+                ExecutionAuthorityRoot(
+                    "current",
+                    "metadata",
+                    AuthorityReference(
+                        "canonical-standards-corpus",
+                        "canonical-standards-corpus:sha256:" + "1" * 64,
+                    ),
+                ),
+                ExecutionAuthorityRoot(
+                    "current",
+                    "metadata",
+                    AuthorityReference(
+                        "canonical-standards-corpus",
+                        "canonical-standards-corpus:sha256:" + "2" * 64,
+                    ),
+                ),
+            ),
+        )
+
+        with self.assertRaisesRegex(Exception, "cardinality"):
+            validate_execution_authority(closure, operation, contract, ("current",))
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.repository = _repository(MemoryObjectStore())
@@ -163,19 +206,136 @@ class C7AnalysisLifecycleTests(unittest.TestCase):
             self.assertEqual(replay.handle, child.handle)
             self.assertEqual(replay.as_contract(), child.as_contract())
 
+    def test_fresh_process_inspects_public_authority_families(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repository"
+            shutil.copytree(
+                REPO_ROOT,
+                root,
+                ignore=shutil.ignore_patterns(
+                    ".git", ".standards-engine", "__pycache__", "*.pyc"
+                ),
+            )
+            created = _run_fresh_python(
+                root,
+                """
+import json
+import sys
+from pathlib import Path
 
-def _repository(store) -> AuthorityRepository:
-    return AuthorityRepository(
-        store,
-        (
-            AUTHORITY_CODECS,
-            METADATA_CODECS,
-            POLICY_IMPACT_CODECS,
-            STANDARDS_GRAPH_CODECS,
-            ANALYSIS_CODECS,
-            ENGINE_CODECS,
+from tools.standards_analysis.standards_analysis import AnalysisExecutionContext
+from tools.standards_engine.standards_engine import (
+    InspectCall,
+    QueryCall,
+    ReadRequest,
+    RelatedRequest,
+    StandardsEngine,
+)
+from tools.standards_engine.tests.test_c7_analysis import (
+    ExactAuthorizer,
+    _complete,
+    _request,
+)
+
+root = Path(sys.argv[1])
+engine = StandardsEngine.open_analysis(
+    root,
+    root,
+    execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+)
+parent = engine.prepare(_request(engine))
+complete = _complete(engine, parent, "fresh-process")
+state = engine.inspect(InspectCall(complete.handle))
+certificate_handle = complete.coverage_certificates[0]
+certificate = engine.inspect(InspectCall(certificate_handle)).certificate
+read = engine.query(
+    QueryCall(engine.view, ReadRequest("read", "workflow.verification"))
+)
+related = engine.query(
+    QueryCall(
+        engine.view,
+        RelatedRequest(
+            "related",
+            "workflow.verification",
+            ("standards-requires",),
+            "outgoing",
+            False,
         ),
     )
+)
+handles = (
+    (engine.snapshot, "content-snapshot-inspection-result"),
+    (engine.view, "standards-authority-view"),
+    (read.authority, "execution-closure"),
+    (read.handle, "navigation-inspection-result"),
+    (read.policy.handle, "policy-inspection-result"),
+    (related.relationships[0].handle, "relationship-inspection-result"),
+    (complete.context.handle, "analysis-context-inspection-result"),
+    (certificate.coverage_view, "coverage-authority-view-inspection-result"),
+    (certificate.requirement, "coverage-requirement-inspection-result"),
+    (certificate.attestation, "coverage-attestation-inspection-result"),
+    (certificate_handle, "certificate-inspection-result"),
+    (complete.handle, "analysis-state"),
+)
+print(json.dumps([
+    {"handle": handle.as_contract(), "expected": expected}
+    for handle, expected in handles
+]))
+""",
+            )
+            inspected = _run_fresh_python(
+                root,
+                """
+import json
+import sys
+from pathlib import Path
+
+from tools.standards_engine.standards_engine import InspectCall, StandardsEngine
+
+root = Path(sys.argv[1])
+requested = json.loads(sys.stdin.read())
+engine = StandardsEngine.open_analysis(root, root)
+print(json.dumps([
+    engine.inspect(InspectCall.from_value({"handle": item["handle"]})).kind
+    for item in requested
+]))
+""",
+                input_value=created,
+            )
+
+            expected = [item["expected"] for item in json.loads(created)]
+            self.assertEqual(json.loads(inspected), expected)
+
+
+def _repository(store) -> AuthorityRepository:
+    return AuthorityRepository(store, _codec_sets())
+
+
+def _run_fresh_python(
+    root: Path, script: str, *, input_value: str | None = None
+) -> str:
+    environment = dict(os.environ)
+    environment.update(
+        {
+            "PYTHONPATH": str(REPO_ROOT),
+            "PYTHONDONTWRITEBYTECODE": "1",
+        }
+    )
+    completed = subprocess.run(
+        (sys.executable, "-P", "-c", script, str(root)),
+        cwd=REPO_ROOT,
+        env=environment,
+        input=input_value,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode:
+        raise AssertionError(
+            f"fresh Python process failed ({completed.returncode}):\n"
+            f"{completed.stderr}"
+        )
+    return completed.stdout.strip()
 
 
 def _view_handle(value) -> AuthorityHandle:

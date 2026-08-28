@@ -5,6 +5,7 @@ import hashlib
 import tempfile
 import tomllib
 from contextlib import ExitStack, contextmanager
+from functools import cache
 from pathlib import Path
 from typing import Iterable, Iterator, Mapping
 
@@ -74,17 +75,18 @@ from tools.standards_applicability.standards_applicability import (
     Truth,
 )
 from tools.standards_authority.standards_authority import (
-    AUTHORITY_CODECS,
     CONTENT_SNAPSHOT_CODEC,
-    EXECUTION_CLOSURE_CODEC,
     AuthorityError,
+    AuthorityBoundValue,
     AuthorityHandle,
     AuthorityReference,
     AuthorityRepository,
     CaptureRequest,
     ContentSnapshot,
+    CodecSet,
     ExecutionAuthorityRoot,
     ExecutionClosure,
+    ExecutionClosureCodec,
     MemoryObjectStore,
     NativeCaptureSource,
     RepositoryPath,
@@ -160,6 +162,7 @@ from ._generated_contract import (
     CoverageAuthorityView,
     CoverageAuthorityViewInspectionResult,
     CoverageRequirementInspectionResult,
+    ExecutionClosure as ContractExecutionClosure,
     FactObservation as ContractFactObservation,
     FactObservationInspectionResult,
     FactRequirement as ContractFactRequirement,
@@ -490,9 +493,8 @@ class StandardsEngine:
                     dispositions,
                     attestations,
                 )
-            return self._persist_analysis_roots(
-                self._analysis_static_roots(base, proposed), evaluation
-            )
+                static = self._analysis_static_roots(proposed, accepted, candidate)
+            return self._persist_analysis_roots(static, evaluation)
         except AnalysisError as error:
             failure = error.failure
             return self._reject(failure.code, failure.outcome, failure.message)
@@ -810,8 +812,8 @@ class StandardsEngine:
             AnalysisMaterial,
             tuple[
                 AuthorityReference,
-                Mapping[str, AuthorityReference],
-                Mapping[str, AuthorityReference],
+                AuthorityBoundValue[object],
+                AuthorityBoundValue[object],
             ],
         ]
     ]:
@@ -845,7 +847,6 @@ class StandardsEngine:
         expected = {"metadata", "graph", "policy-impact", "coverage"}
         if any(set(roles) != expected for roles in selected.values()):
             raise RuntimeError("analysis closure static role set is incomplete")
-        static = operation[0], selected["accepted"], selected["proposed"]
         with ExitStack() as stack:
             workspaces = {}
             for side, roles in selected.items():
@@ -854,14 +855,20 @@ class StandardsEngine:
                 snapshot = self._repository.resolve_reference(metadata.content).value
                 assert isinstance(snapshot, ContentSnapshot)
                 workspaces[side] = stack.enter_context(_snapshot_workspace(snapshot))
+            accepted = self._analysis_material_from_roles(
+                selected["accepted"], workspaces["accepted"]
+            )
+            proposed = self._analysis_material_from_roles(
+                selected["proposed"], workspaces["proposed"]
+            )
             yield (
-                self._analysis_material_from_roles(
-                    selected["accepted"], workspaces["accepted"]
+                accepted,
+                proposed,
+                (
+                    operation[0],
+                    accepted.authority_bound("accepted"),
+                    proposed.authority_bound("proposed"),
                 ),
-                self._analysis_material_from_roles(
-                    selected["proposed"], workspaces["proposed"]
-                ),
-                static,
             )
 
     def _prior_decisions(
@@ -944,22 +951,39 @@ class StandardsEngine:
             return None
         static_inputs = tuple(
             sorted(
-                {
-                    accepted.metadata,
-                    accepted.graph_authority,
-                    accepted.policy_impact_authority,
-                    accepted.coverage_authority,
-                    proposed.metadata,
-                    proposed.graph_authority,
-                    proposed.policy_impact_authority,
-                    proposed.coverage_authority,
-                    evaluation.context,
-                }
+                (
+                    ExecutionAuthorityRoot("accepted", "metadata", accepted.metadata),
+                    ExecutionAuthorityRoot("accepted", "graph", accepted.graph_authority),
+                    ExecutionAuthorityRoot(
+                        "accepted", "policy-impact", accepted.policy_impact_authority
+                    ),
+                    ExecutionAuthorityRoot(
+                        "accepted", "coverage", accepted.coverage_authority
+                    ),
+                    ExecutionAuthorityRoot("proposed", "metadata", proposed.metadata),
+                    ExecutionAuthorityRoot("proposed", "graph", proposed.graph_authority),
+                    ExecutionAuthorityRoot(
+                        "proposed", "policy-impact", proposed.policy_impact_authority
+                    ),
+                    ExecutionAuthorityRoot(
+                        "proposed", "coverage", proposed.coverage_authority
+                    ),
+                    ExecutionAuthorityRoot("current", "context", evaluation.context),
+                )
             )
         )
         for requirement in evaluation.pending_requirements:
             claims = []
-            inputs = tuple(sorted({*static_inputs, requirement.reference}))
+            inputs = tuple(
+                sorted(
+                    (
+                        *static_inputs,
+                        ExecutionAuthorityRoot(
+                            "current", "requirement", requirement.reference
+                        ),
+                    )
+                )
+            )
             request = ProviderRequest(
                 requirement.reference, requirement.fact.id, inputs
             )
@@ -1225,78 +1249,46 @@ class StandardsEngine:
 
     @staticmethod
     def _analysis_static_roots(
-        base: StandardsAuthorityView, proposed: StandardsAuthorityView
+        proposed_view: StandardsAuthorityView,
+        accepted: AnalysisMaterial,
+        proposed: AnalysisMaterial,
     ) -> tuple[
         AuthorityReference,
-        Mapping[str, AuthorityReference],
-        Mapping[str, AuthorityReference],
+        AuthorityBoundValue[object],
+        AuthorityBoundValue[object],
     ]:
         operation = next(
             item.authority
-            for item in proposed.operation_contracts
+            for item in proposed_view.operation_contracts
             if item.operation == "analysis"
         )
         return (
             operation,
-            {item.role: item.authority for item in base.authorities},
-            {item.role: item.authority for item in proposed.authorities},
+            accepted.authority_bound("accepted"),
+            proposed.authority_bound("proposed"),
         )
 
     def _persist_analysis_roots(
         self,
         static: tuple[
             AuthorityReference,
-            Mapping[str, AuthorityReference],
-            Mapping[str, AuthorityReference],
+            AuthorityBoundValue[object],
+            AuthorityBoundValue[object],
         ],
         evaluation: AnalysisEvaluation,
     ) -> PendingResult | CompleteResult:
-        operation, base_roles, proposed_roles = static
+        operation, accepted, proposed = static
         roots = [ExecutionAuthorityRoot("current", "operation-contract", operation)]
-        for side, roles in (("accepted", base_roles), ("proposed", proposed_roles)):
-            roots.extend(
-                ExecutionAuthorityRoot(side, role, roles[role])
-                for role in ("metadata", "graph", "policy-impact", "coverage")
-            )
-        roots.append(
-            ExecutionAuthorityRoot("current", "context", evaluation.context)
-        )
-        roots.extend(
-            ExecutionAuthorityRoot("current", "requirement", item.reference)
-            for item in evaluation.requirements
-        )
-        roots.extend(
-            ExecutionAuthorityRoot("current", "observation", item.reference)
-            for item in evaluation.observations
-        )
-        roots.extend(
-            ExecutionAuthorityRoot("current", "coverage-view", item.view)
-            for item in evaluation.coverage
-        )
-        roots.extend(
-            ExecutionAuthorityRoot("current", "coverage-requirement", item.requirement)
-            for item in evaluation.coverage
-        )
-        roots.extend(
-            ExecutionAuthorityRoot(
-                "current", "coverage-certificate", item.certificate
-            )
-            for item in evaluation.coverage
-            if item.certificate is not None
-        )
-        roots.extend(
-            ExecutionAuthorityRoot("current", "coverage-attestation", item.reference)
-            for item in evaluation.attestations
-        )
-        trust = self._analysis_trust_roots(evaluation)
-        roots.extend(trust)
+        roots.extend(accepted.direct_dependencies)
+        roots.extend(proposed.direct_dependencies)
+        roots.extend(evaluation.authority_bound().direct_dependencies)
         closure_value = ExecutionClosure("analysis", roots)
         contract = self._repository.resolve_reference(operation).value
         assert isinstance(contract, OperationAuthorityContract)
         validate_execution_authority(
             closure_value, operation, contract, ("accepted", "proposed")
         )
-        closure = self._repository.publish(EXECUTION_CLOSURE_CODEC, closure_value)
+        closure = self._repository.publish(_execution_closure_codec(), closure_value)
         state = AnalysisRootAuthority(
             closure.reference,
             evaluation.context,
@@ -1310,40 +1302,6 @@ class StandardsEngine:
         )
         handle = self._repository.publish(ANALYSIS_ROOT_CODEC, state)
         return self._analysis_result(handle, closure, evaluation)
-
-    def _analysis_trust_roots(
-        self, evaluation: AnalysisEvaluation
-    ) -> tuple[ExecutionAuthorityRoot, ...]:
-        roots: set[ExecutionAuthorityRoot] = set()
-        for item in evaluation.observations:
-            roots.add(
-                ExecutionAuthorityRoot(
-                    "current", "authorization-grant", item.value.authorization
-                )
-            )
-            if item.value.provider is not None:
-                roots.add(
-                    ExecutionAuthorityRoot(
-                        "current", "provider-authority", item.value.provider
-                    )
-                )
-        for item in evaluation.attestations:
-            roots.add(
-                ExecutionAuthorityRoot(
-                    "current", "authorization-grant", item.value.authorization
-                )
-            )
-        for disposition in evaluation.dispositions:
-            raw = disposition.get("authorization")
-            if isinstance(raw, Mapping):
-                roots.add(
-                    ExecutionAuthorityRoot(
-                        "current",
-                        "authorization-grant",
-                        AuthorityReference(str(raw["object_kind"]), str(raw["id"])),
-                    )
-                )
-        return tuple(sorted(roots))
 
     def _analysis_result(
         self,
@@ -1710,15 +1668,17 @@ class StandardsEngine:
         roots = [
             ExecutionAuthorityRoot("current", "operation-contract", operation_reference)
         ]
-        roots.extend(
-            ExecutionAuthorityRoot("current", requirement.role, roles[requirement.role])
-            for requirement in contract.required_view_roles
-        )
+        for requirement in contract.required_view_roles:
+            reference = roles[requirement.role]
+            value = self._repository.resolve_reference(reference).value
+            roots.extend(
+                _authority_bound(value, reference, "current").direct_dependencies
+            )
         closure = ExecutionClosure(operation, roots)
         validate_execution_authority(
             closure, operation_reference, contract, ("current",)
         )
-        return self._repository.publish(EXECUTION_CLOSURE_CODEC, closure)
+        return self._repository.publish(_execution_closure_codec(), closure)
 
     def _view_values(self, view: StandardsAuthorityView) -> dict[str, object]:
         return {
@@ -2242,17 +2202,48 @@ def _analysis_next_operations(
     return result
 
 
-def _codec_sets() -> tuple[object, ...]:
+@cache
+def _codec_composition() -> tuple[tuple[CodecSet, ...], ExecutionClosureCodec]:
     from tools.standards_analysis.standards_analysis import ANALYSIS_CODECS
 
-    return (
-        AUTHORITY_CODECS,
+    owner_sets = (
         METADATA_CODECS,
         POLICY_IMPACT_CODECS,
         STANDARDS_GRAPH_CODECS,
         ANALYSIS_CODECS,
         ENGINE_CODECS,
     )
+    dependency_kinds = {
+        CONTENT_SNAPSHOT_CODEC.object_kind,
+        *(codec.object_kind for owner in owner_sets for codec in owner.codecs),
+    }
+    closure_codec = ExecutionClosureCodec(dependency_kinds)
+    authority_codecs = CodecSet(
+        "standards-authority", (CONTENT_SNAPSHOT_CODEC, closure_codec)
+    )
+    return (authority_codecs, *owner_sets), closure_codec
+
+
+def _codec_sets() -> tuple[CodecSet, ...]:
+    return _codec_composition()[0]
+
+
+def _execution_closure_codec() -> ExecutionClosureCodec:
+    return _codec_composition()[1]
+
+
+def _authority_bound(
+    value: object, reference: AuthorityReference, side: str
+) -> AuthorityBoundValue[object]:
+    binder = getattr(value, "authority_bound", None)
+    if not callable(binder):
+        raise RuntimeError(
+            f"owner value {type(value).__name__} does not expose authority binding"
+        )
+    bound = binder(reference, side)
+    if not isinstance(bound, AuthorityBoundValue):
+        raise RuntimeError("owner authority binding returned the wrong value type")
+    return bound
 
 
 def _authority_scope(
@@ -2451,8 +2442,6 @@ def _view_projection(handle: AuthorityHandle, value: StandardsAuthorityView) -> 
 
 
 def _execution_closure_projection(handle: AuthorityHandle, value: ExecutionClosure) -> object:
-    from .model import ExecutionClosure as ContractExecutionClosure
-
     return ContractExecutionClosure.from_value(
         {
             "kind": "execution-closure",

@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import os
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from tools.standards_analysis.standards_analysis import (
-    ANALYSIS_CODECS,
     AnalysisExecutionContext,
     AuthorityEvidence,
     AuthorizationClaim,
@@ -17,13 +20,12 @@ from tools.standards_analysis.standards_analysis import (
     ResolvedEvidence,
 )
 from tools.standards_authority.standards_authority import (
-    AUTHORITY_CODECS,
     AuthorityHandle,
     AuthorityRepository,
     MemoryObjectStore,
 )
+from tools.standards_engine.standards_engine.engine import _codec_sets
 from tools.standards_engine.standards_engine import (
-    ENGINE_CODECS,
     AnalysisRequest,
     ConsumerDispositionSubmission,
     CoverageAttestationSubmission,
@@ -32,13 +34,8 @@ from tools.standards_engine.standards_engine import (
     RejectedResult,
     StandardsEngine,
 )
-from tools.standards_graph.standards_graph import STANDARDS_GRAPH_CODECS
 from tools.standards_metadata.standards_metadata import (
-    METADATA_CODECS,
     load_canonical_standards_corpus,
-)
-from tools.standards_policy_impact.standards_policy_impact import (
-    POLICY_IMPACT_CODECS,
 )
 
 
@@ -146,6 +143,70 @@ class AnalysisWorkflowTest(unittest.TestCase):
         )
         self.assertIsInstance(stale, RejectedResult)
         self.assertEqual(stale.code, "SUBMISSION.NOT_APPLICABLE")
+
+    def test_fact_authority_is_inspectable_from_a_fresh_process(self) -> None:
+        created = _run_fresh_python(
+            self.fixture_root,
+            """
+import json
+import sys
+from pathlib import Path
+
+from tools.standards_analysis.standards_analysis import AnalysisExecutionContext
+from tools.standards_engine.standards_engine import InspectCall, StandardsEngine
+from tools.standards_engine.tests.test_analysis import (
+    FACT_A,
+    ExactAuthorizer,
+    _fact_submission,
+    _request,
+    _requirement,
+)
+
+root = Path(sys.argv[1])
+engine = StandardsEngine.open_analysis(
+    root,
+    root,
+    execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+)
+parent = engine.prepare(_request(engine))
+requirement = _requirement(parent, FACT_A)
+child = engine.resolve(
+    parent.handle,
+    _fact_submission(requirement, True, "fresh-process-fact"),
+)
+state = engine.inspect(InspectCall(child.handle))
+handles = (
+    (requirement.handle, "fact-requirement-inspection-result"),
+    (state.fact_observations[0].handle, "fact-observation-inspection-result"),
+)
+print(json.dumps([
+    {"handle": handle.as_contract(), "expected": expected}
+    for handle, expected in handles
+]))
+""",
+        )
+        inspected = _run_fresh_python(
+            self.fixture_root,
+            """
+import json
+import sys
+from pathlib import Path
+
+from tools.standards_engine.standards_engine import InspectCall, StandardsEngine
+
+root = Path(sys.argv[1])
+requested = json.loads(sys.stdin.read())
+engine = StandardsEngine.open_analysis(root, root)
+print(json.dumps([
+    engine.inspect(InspectCall.from_value({"handle": item["handle"]})).kind
+    for item in requested
+]))
+""",
+            input_value=created,
+        )
+
+        expected = [item["expected"] for item in json.loads(created)]
+        self.assertEqual(json.loads(inspected), expected)
 
     def test_decision_order_normalizes_and_dormant_observations_survive(self) -> None:
         def transition(order: tuple[str, str], values: dict[str, bool]):
@@ -326,17 +387,34 @@ def _install_semantic_change(root: Path) -> None:
 
 
 def _repository() -> AuthorityRepository:
-    return AuthorityRepository(
-        MemoryObjectStore(),
-        (
-            AUTHORITY_CODECS,
-            METADATA_CODECS,
-            POLICY_IMPACT_CODECS,
-            STANDARDS_GRAPH_CODECS,
-            ANALYSIS_CODECS,
-            ENGINE_CODECS,
-        ),
+    return AuthorityRepository(MemoryObjectStore(), _codec_sets())
+
+
+def _run_fresh_python(
+    root: Path, script: str, *, input_value: str | None = None
+) -> str:
+    environment = dict(os.environ)
+    environment.update(
+        {
+            "PYTHONPATH": str(REPO_ROOT),
+            "PYTHONDONTWRITEBYTECODE": "1",
+        }
     )
+    completed = subprocess.run(
+        (sys.executable, "-P", "-c", script, str(root)),
+        cwd=REPO_ROOT,
+        env=environment,
+        input=input_value,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode:
+        raise AssertionError(
+            f"fresh Python process failed ({completed.returncode}):\n"
+            f"{completed.stderr}"
+        )
+    return completed.stdout.strip()
 
 
 def _view_handle(value) -> AuthorityHandle:

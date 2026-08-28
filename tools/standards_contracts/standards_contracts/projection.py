@@ -2,21 +2,25 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 import tomllib
 from pathlib import Path
 
-from tools.standards_contracts.standards_contracts import compile_contracts
+from .compiler import compile_contracts
 
 
-ROOT = Path(__file__).resolve().parents[3]
-SCHEMA_PATH = ROOT / "tools/standards_engine/contracts/a1-contract.schema.json"
-INTERFACE_PATH = ROOT / "tools/standards_engine/contracts/a1-interface.toml"
-PYTHON_PATH = ROOT / "tools/standards_engine/standards_engine/_generated_contract.py"
-TOOLS_PATH = ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+SCHEMA_PATH = REPOSITORY_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json"
+INTERFACE_PATH = REPOSITORY_ROOT / "tools/standards_engine/contracts/a1-interface.toml"
+PYTHON_PATH = (
+    REPOSITORY_ROOT
+    / "tools/standards_engine/standards_engine/_generated_contract.py"
+)
+TOOLS_PATH = (
+    REPOSITORY_ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
+)
 
 
-def render_projections() -> dict[Path, str]:
+def render_repository_projections() -> dict[Path, str]:
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     with INTERFACE_PATH.open("rb") as source:
         interface = tomllib.load(source)
@@ -27,7 +31,7 @@ def render_projections() -> dict[Path, str]:
     }
 
 
-def main(argv: list[str] | None = None) -> int:
+def projection_main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Compile the canonical A1b schema and interface projections."
     )
@@ -37,7 +41,7 @@ def main(argv: list[str] | None = None) -> int:
         help="fail when a committed projection differs from compiler output",
     )
     arguments = parser.parse_args(argv)
-    projections = render_projections()
+    projections = render_repository_projections()
     if arguments.check:
         stale = [
             path
@@ -46,7 +50,10 @@ def main(argv: list[str] | None = None) -> int:
         ]
         if stale:
             for path in stale:
-                print(f"stale generated contract projection: {path.relative_to(ROOT)}")
+                print(
+                    "stale generated contract projection: "
+                    f"{path.relative_to(REPOSITORY_ROOT)}"
+                )
             return 1
         return 0
     for path, content in projections.items():
@@ -56,4 +63,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(projection_main())

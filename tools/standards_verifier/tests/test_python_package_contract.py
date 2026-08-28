@@ -8,6 +8,7 @@ from pathlib import Path
 
 from tools.standards_verifier.standards_verifier.python_packages import (
     audit_python_packages,
+    execute_python_package_contract,
 )
 
 
@@ -78,6 +79,18 @@ class PythonPackageContractTest(unittest.TestCase):
 
     def test_exact_public_import_and_dependency_closure_pass(self) -> None:
         self.assertEqual(self.codes(), ())
+        self.assertEqual(execute_python_package_contract(self.root), ())
+
+    def test_public_execution_failure_is_distinct(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            "raise RuntimeError('public import failed')\nrun = 1\n__all__ = ('run',)\n",
+        )
+        self.stage()
+        self.assertEqual(
+            tuple(item.code for item in execute_python_package_contract(self.root)),
+            ("PYTHON_PACKAGE.PUBLIC_EXECUTION",),
+        )
 
     def test_private_child_and_unexported_root_name_are_distinct(self) -> None:
         self.write(
@@ -116,6 +129,37 @@ class PythonPackageContractTest(unittest.TestCase):
             """,
         )
         self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+        variants = (
+            """
+            from importlib import import_module as load
+            loaded = load("tools.b.b")
+            __all__ = ("loaded",)
+            """,
+            """
+            import importlib as machinery
+            loaded = machinery.import_module("tools.b.b")
+            __all__ = ("loaded",)
+            """,
+            """
+            from builtins import __import__ as load
+            loaded = load("tools.b.b")
+            __all__ = ("loaded",)
+            """,
+            """
+            load = __import__
+            loaded = load("tools.b.b")
+            __all__ = ("loaded",)
+            """,
+            """
+            loaded = eval("__import__('tools.b.b')")
+            __all__ = ("loaded",)
+            """,
+        )
+        for source in variants:
+            with self.subTest(source=source.strip().splitlines()[0]):
+                self.write("tools/a/a/__init__.py", source)
+                self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
 
     def test_dependency_and_source_ownership_are_exact(self) -> None:
         self.write_package(

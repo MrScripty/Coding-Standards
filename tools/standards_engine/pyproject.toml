@@ -19,7 +19,6 @@ dependencies = [
 schema-version = 1
 public-import-root = "tools.standards_engine.standards_engine"
 repository-entrypoints = [
-    "tools/standards_engine/contracts/generate_contract.py",
 ]
 
 [tool.unittest]

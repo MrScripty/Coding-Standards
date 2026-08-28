@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import ast
+import json
 import re
 import subprocess
 import sys
+import tempfile
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
@@ -289,22 +291,14 @@ def _imported_dependencies(
     for path in source_paths:
         tree = ast.parse((root / path).read_text(encoding="utf-8"), filename=path)
         for node in ast.walk(tree):
-            if isinstance(node, ast.Call):
-                function = node.func
-                dynamic = (
-                    isinstance(function, ast.Name) and function.id == "__import__"
-                ) or (
-                    isinstance(function, ast.Attribute)
-                    and function.attr == "import_module"
-                )
-                if dynamic:
-                    findings.append(
-                        PythonPackageFinding(
-                            "PYTHON_PACKAGE.DYNAMIC_IMPORT",
-                            "production sources cannot bypass static import ownership",
-                            path,
-                        )
+            if _uses_dynamic_import_capability(node):
+                findings.append(
+                    PythonPackageFinding(
+                        "PYTHON_PACKAGE.DYNAMIC_IMPORT",
+                        "production sources cannot bypass static import ownership",
+                        path,
                     )
+                )
             modules: list[tuple[str, tuple[ast.alias, ...], bool]] = []
             if isinstance(node, ast.Import):
                 modules.extend((item.name, (), False) for item in node.names)
@@ -363,6 +357,21 @@ def _imported_dependencies(
                 elif top_level not in sys.stdlib_module_names and top_level != "__future__":
                     dependencies.add(top_level.lower().replace("_", "-"))
     return dependencies, findings
+
+
+def _uses_dynamic_import_capability(node: ast.AST) -> bool:
+    if isinstance(node, ast.Import):
+        return any(
+            item.name.split(".", 1)[0] in {"builtins", "importlib"}
+            for item in node.names
+        )
+    if isinstance(node, ast.ImportFrom) and node.module:
+        return node.module.split(".", 1)[0] in {"builtins", "importlib"}
+    if isinstance(node, ast.Name):
+        return node.id in {"__builtins__", "__import__", "eval", "exec"}
+    if isinstance(node, ast.Attribute):
+        return node.attr in {"__import__", "import_module"}
+    return False
 
 
 def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
@@ -493,6 +502,84 @@ def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
                     observed=",".join(sorted(declared)) or "-",
                 )
             )
+    return tuple(findings)
+
+
+def execute_python_package_contract(
+    root: Path, *, python_executable: Path | None = None
+) -> tuple[PythonPackageFinding, ...]:
+    repository = root.resolve()
+    executable = (python_executable or Path(sys.executable)).absolute()
+    indexed = _indexed_paths(repository)
+    manifests = tuple(
+        path
+        for path in indexed
+        if path.startswith("tools/") and path.endswith("/pyproject.toml")
+    )
+    contracts: list[PythonPackageContract] = []
+    findings: list[PythonPackageFinding] = []
+    for manifest in manifests:
+        contract, contract_findings = _load_contract(repository, manifest)
+        findings.extend(contract_findings)
+        if contract is not None:
+            contracts.append(contract)
+    if findings:
+        return tuple(findings)
+
+    environment = {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": str(repository),
+    }
+    for contract in sorted(contracts, key=lambda item: item.project_name):
+        try:
+            exports = resolve_public_exports(repository, contract)
+        except (OSError, SyntaxError, UnicodeError, ValueError) as error:
+            findings.append(
+                PythonPackageFinding(
+                    "PYTHON_PACKAGE.EXPORT_CONTRACT",
+                    str(error),
+                    contract.manifest,
+                )
+            )
+            continue
+        script = (
+            "import importlib; "
+            f"module=importlib.import_module({json.dumps(contract.public_root)}); "
+            f"[getattr(module, name) for name in {exports!r}]"
+        )
+        completed = subprocess.run(
+            (str(executable), "-P", "-c", script),
+            cwd=tempfile.gettempdir(),
+            env=environment,
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode != 0:
+            findings.append(
+                PythonPackageFinding(
+                    "PYTHON_PACKAGE.PUBLIC_EXECUTION",
+                    "public root or export failed in safe-path isolation",
+                    contract.manifest,
+                    observed=(completed.stderr or completed.stdout).strip(),
+                )
+            )
+        for entrypoint in contract.entrypoints:
+            completed = subprocess.run(
+                (str(executable), "-P", str(repository / entrypoint), "--help"),
+                cwd=tempfile.gettempdir(),
+                env=environment,
+                capture_output=True,
+                text=True,
+            )
+            if completed.returncode != 0:
+                findings.append(
+                    PythonPackageFinding(
+                        "PYTHON_PACKAGE.ENTRYPOINT_EXECUTION",
+                        "repository entrypoint failed in safe-path isolation",
+                        entrypoint,
+                        observed=(completed.stderr or completed.stdout).strip(),
+                    )
+                )
     return tuple(findings)
 
 

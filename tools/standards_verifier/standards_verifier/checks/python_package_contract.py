@@ -11,7 +11,7 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
 from ..paths import contained_file
-from ..python_packages import audit_python_packages
+from ..python_packages import audit_python_packages, execute_python_package_contract
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,6 +34,20 @@ class PythonPackageContractCheck:
             )
             for finding in audit_python_packages(context.repo_root)
         ]
+        diagnostics.extend(
+            Diagnostic(
+                finding.code,
+                "invalid",
+                finding.message,
+                suite=context.suite_id,
+                check=self.id,
+                path=finding.path,
+                field=finding.field,
+                expected=finding.expected,
+                observed=finding.observed,
+            )
+            for finding in execute_python_package_contract(context.repo_root)
+        )
         diagnostics.extend(self._fixture_diagnostics(context))
         return diagnostics
 

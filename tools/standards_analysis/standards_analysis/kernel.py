@@ -8,8 +8,10 @@ from typing import Iterable, Mapping
 from tools.graph_engine.graph_engine import EdgeRegistry
 from tools.standards_applicability.standards_applicability import FactContract
 from tools.standards_authority.standards_authority import (
+    AuthorityBoundValue,
     AuthorityReference,
     AuthorityRepository,
+    ExecutionAuthorityRoot,
 )
 from tools.standards_identity.standards_identity import (
     IdentityArray,
@@ -71,6 +73,19 @@ class AnalysisMaterial:
     policy_impact: CompiledPolicyImpactSet
     coverage: CoverageAuthorityIndex
 
+    def authority_bound(self, side: str) -> AuthorityBoundValue[object]:
+        return AuthorityBoundValue(
+            self,
+            (
+                ExecutionAuthorityRoot(side, "metadata", self.metadata),
+                ExecutionAuthorityRoot(side, "graph", self.graph_authority),
+                ExecutionAuthorityRoot(
+                    side, "policy-impact", self.policy_impact_authority
+                ),
+                ExecutionAuthorityRoot(side, "coverage", self.coverage_authority),
+            ),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class StoredObservation:
@@ -115,6 +130,74 @@ class AnalysisEvaluation:
         return not self.pending_requirements and all(
             item.state == "resolved" for item in self.obligations
         )
+
+    def authority_bound(self) -> AuthorityBoundValue[object]:
+        roots = {
+            ExecutionAuthorityRoot("current", "context", self.context),
+            *(
+                ExecutionAuthorityRoot("current", "requirement", item.reference)
+                for item in self.requirements
+            ),
+            *(
+                ExecutionAuthorityRoot("current", "observation", item.reference)
+                for item in self.observations
+            ),
+            *(
+                ExecutionAuthorityRoot("current", "coverage-view", item.view)
+                for item in self.coverage
+            ),
+            *(
+                ExecutionAuthorityRoot(
+                    "current", "coverage-requirement", item.requirement
+                )
+                for item in self.coverage
+            ),
+            *(
+                ExecutionAuthorityRoot(
+                    "current", "coverage-certificate", item.certificate
+                )
+                for item in self.coverage
+                if item.certificate is not None
+            ),
+            *(
+                ExecutionAuthorityRoot(
+                    "current", "coverage-attestation", item.reference
+                )
+                for item in self.attestations
+            ),
+        }
+        for item in self.observations:
+            roots.add(
+                ExecutionAuthorityRoot(
+                    "current", "authorization-grant", item.value.authorization
+                )
+            )
+            if item.value.provider is not None:
+                roots.add(
+                    ExecutionAuthorityRoot(
+                        "current", "provider-authority", item.value.provider
+                    )
+                )
+        for item in self.attestations:
+            roots.add(
+                ExecutionAuthorityRoot(
+                    "current", "authorization-grant", item.value.authorization
+                )
+            )
+        for disposition in self.dispositions:
+            authorization = disposition.get("authorization")
+            if isinstance(authorization, Mapping):
+                roots.add(
+                    ExecutionAuthorityRoot(
+                        "current",
+                        "authorization-grant",
+                        AuthorityReference(
+                            str(authorization["object_kind"]),
+                            str(authorization["id"]),
+                        ),
+                    )
+                )
+        return AuthorityBoundValue(self, tuple(sorted(roots)))
 
 
 def evaluate_analysis(

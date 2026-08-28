@@ -4,7 +4,10 @@ import hashlib
 from dataclasses import dataclass
 from typing import Protocol
 
-from tools.standards_authority.standards_authority import AuthorityReference
+from tools.standards_authority.standards_authority import (
+    AuthorityReference,
+    ExecutionAuthorityRoot,
+)
 
 from .authority import AuthorityEvidence, AuthorizationGrant
 from .errors import AnalysisError, AnalysisFailure
@@ -81,7 +84,7 @@ class AuthorizationAdapter(Protocol):
 class ProviderRequest:
     requirement: AuthorityReference
     fact: str
-    immutable_inputs: tuple[AuthorityReference, ...]
+    immutable_inputs: tuple[ExecutionAuthorityRoot, ...]
 
 
 @dataclass(frozen=True, slots=True)

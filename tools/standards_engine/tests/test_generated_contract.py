@@ -8,8 +8,10 @@ import tomllib
 import unittest
 from pathlib import Path
 
-from tools.standards_contracts.standards_contracts import compile_contracts
-from tools.standards_engine.contracts import generate_contract
+from tools.standards_contracts.standards_contracts import (
+    compile_contracts,
+    render_repository_projections,
+)
 from tools.standards_engine.standards_engine import _generated_contract as generated
 
 
@@ -31,7 +33,8 @@ class GeneratedContractTest(unittest.TestCase):
             (
                 sys.executable,
                 "-P",
-                str(REPO_ROOT / "tools/standards_engine/contracts/generate_contract.py"),
+                "-m",
+                "tools.standards_contracts.standards_contracts.projection",
                 "--check",
             ),
             cwd=Path("/tmp"),
@@ -54,7 +57,7 @@ class GeneratedContractTest(unittest.TestCase):
             set(generated.DEFINITION_METADATA),
             set(compiled.reachable_definitions),
         )
-        projections = generate_contract.render_projections()
+        projections = render_repository_projections()
         for path, projection in projections.items():
             with self.subTest(path=path.relative_to(REPO_ROOT)):
                 self.assertEqual(path.read_text(encoding="utf-8"), projection)
@@ -85,7 +88,7 @@ class GeneratedContractTest(unittest.TestCase):
             REPO_ROOT
             / "tools/standards_engine/contracts/generated/agent-tools.json"
         )
-        projected = generate_contract.render_projections()[tools_path]
+        projected = render_repository_projections()[tools_path]
         self.assertEqual(tools_path.read_text(encoding="utf-8"), projected)
 
     def test_authored_v11_examples_satisfy_the_public_contract(self) -> None:

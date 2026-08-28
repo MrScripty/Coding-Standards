@@ -869,3 +869,52 @@
 - Milestone 3 is `Implemented`. Automated objectives are satisfied. A1B-A6L
   licensing confirmation and A1B-A11 independent content acceptance remain the
   only pending objective claims; A2 remains inactive.
+
+## 2026-08-28 - Milestone 3 Content Review Rejection And Replan
+
+- Independent Licensing, Standards, and Specification review rejected commit
+  `d61172168101744a83f708e1da73bd3eb956ce1d`, tree
+  `8fd3b6fd9370a38952c115190069b6a288f77f2f`.
+- External package, artifact, license, notice, non-bundling, security, and
+  required-real `strace` selections matched admission. A1B-A6L remains pending
+  because the implemented internal dependency boundary did not.
+- Confirmed systemic defects: Authority named downstream codec kinds; no
+  production owner returned `AuthorityBoundValue`; required `1..1` closure
+  roots could collapse duplicates; provider inputs lost side/role
+  qualification; Verifier depended directly on Engine; the retired Engine
+  generator remained; dynamic-import aliases bypassed verification; documented
+  entrypoints failed; clean-environment execution and genuine public-object
+  cold reconstruction were not proved; and two retired suites remained.
+- `Superseded`: the Milestone 3 `Implemented` claim and candidate `d6117216`.
+  The immutable commit remains historical evidence but is not an accepted A1b
+  boundary.
+- Replacement: reopen Milestone 3 as one coordinated correction slice owned by
+  Authority, domain Modules, Engine composition, Analysis coverage, Contracts
+  projection, package verification, suite migration, and cold-process evidence.
+  No compatibility layer, fixed catalog count, new Bash checker, A2 work, or
+  change to the admitted third-party selection is authorized.
+
+## 2026-08-28 - Milestone 3 Corrected Implementation
+
+- Removed Authority's downstream codec catalog and composed execution-closure
+  support from injected owner codec sets. Domain owners now return bound
+  authority values; exact role cardinality is checked before projection, and
+  provider inputs retain side and role qualification.
+- Moved deterministic public-contract projection generation to Contracts,
+  removed the retired Engine generator, and corrected every affected semantic
+  relationship disposition. The two unregistered superseded suites were
+  deleted.
+- Removed Verifier's direct Engine dependency. Static coverage now uses the
+  Analysis-owned repository composition path, while package verification
+  rejects dynamic-import aliases and executes every public root, export, and
+  repository entrypoint in both admitted clean Python environments.
+- Added genuine fresh-interpreter reconstruction for every public handle
+  family using persisted SQLite authority and public composition. The evidence
+  found and removed one lazy import of the retired handwritten Engine model.
+- Focused package suites passed, including 33 Engine and 386 Verifier tests.
+  The capability-selected required-real SQLite interruption test passed. All
+  226 registered suites, all 53 retained migration checkers, generated
+  freshness, plan validation, changed-file Ruff, and diff hygiene passed.
+- A1B-023, A1B-024, and A1B-025 are resolved. Milestone 3 is `Implemented`.
+  The next operation is to commit this coherent content and record that exact
+  commit and tree for Milestone 4 review; A2 remains inactive.

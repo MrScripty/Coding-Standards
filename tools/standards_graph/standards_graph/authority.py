@@ -11,9 +11,11 @@ from tools.graph_engine.graph_engine import (
     project_graph_contribution,
 )
 from tools.standards_authority.standards_authority import (
+    AuthorityBoundValue,
     AuthorityReference,
     CodecContext,
     CodecSet,
+    ExecutionAuthorityRoot,
     invalid,
 )
 from tools.standards_identity.standards_identity import (
@@ -79,6 +81,18 @@ class StandardsGraphAuthority:
             Path("/"),
             tuple(_StoredSource(item) for item in self.sources),
             logical_artifacts=artifacts,
+        )
+
+    def authority_bound(
+        self, reference: AuthorityReference, side: str
+    ) -> AuthorityBoundValue[object]:
+        if reference.object_kind != "standards-graph":
+            raise invalid(
+                "STANDARDS_GRAPH.INVALID_AUTHORITY_BINDING",
+                "graph binding requires its standards graph authority",
+            )
+        return AuthorityBoundValue(
+            self, (ExecutionAuthorityRoot(side, "graph", reference),)
         )
 
 

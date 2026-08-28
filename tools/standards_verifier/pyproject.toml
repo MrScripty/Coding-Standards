@@ -8,7 +8,6 @@ dependencies = [
     "standards-analysis",
     "standards-applicability",
     "standards-contracts",
-    "standards-engine",
     "standards-graph",
     "standards-metadata",
     "standards-policy-impact",

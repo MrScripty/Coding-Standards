@@ -519,16 +519,28 @@ def validate_execution_authority(
     required = {item.role: item for item in contract.required_view_roles}
     dynamic = {item.role: item for item in contract.allowed_dynamic_roles}
     for side in sides:
-        actual = {
-            item.role: item.reference
+        selected = tuple(
+            item
             for item in closure.roots
             if item.side == side and item.role in required
+        )
+        counts = {
+            role: sum(item.role == role for item in selected) for role in required
         }
-        if set(actual) != set(required):
-            raise invalid(
-                "ENGINE.EXECUTION_VIEW_ROLE_CLOSURE",
-                f"execution side {side!r} has an incomplete view role set",
+        if any(
+            count < requirement.minimum_cardinality
+            or (
+                requirement.maximum_cardinality is not None
+                and count > requirement.maximum_cardinality
             )
+            for role, requirement in required.items()
+            for count in (counts[role],)
+        ):
+            raise invalid(
+                "ENGINE.EXECUTION_VIEW_CARDINALITY",
+                f"execution side {side!r} violates required role cardinality",
+            )
+        actual = {item.role: item.reference for item in selected}
         if any(
             actual[role].object_kind != requirement.object_kind
             for role, requirement in required.items()

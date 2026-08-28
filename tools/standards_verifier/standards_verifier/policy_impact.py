@@ -8,9 +8,14 @@ from tools.graph_engine.graph_engine import EdgeRegistry, GraphError
 from tools.standards_applicability.standards_applicability import ApplicabilityProgram
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
+    covered_repository_policy_units,
 )
-from tools.standards_engine.standards_engine import StandardsEngine
-from tools.standards_graph.standards_graph import metadata_dependency_source
+from tools.standards_graph.standards_graph import (
+    STANDARDS_GRAPH_CODEC,
+    STANDARDS_GRAPH_CODECS,
+    compile_standards_graph_authority,
+    metadata_dependency_source,
+)
 from tools.standards_metadata.standards_metadata import (
     MetadataError,
     PolicyUnitCorpus,
@@ -330,9 +335,12 @@ def load_registered_policy_impact(
         check=check,
     )
     try:
-        covered = StandardsEngine.open_repository(
-            root.resolve(), durable=False
-        ).covered_policy_units()
+        covered = covered_repository_policy_units(
+            root.resolve(),
+            graph_codecs=STANDARDS_GRAPH_CODECS,
+            graph_codec=STANDARDS_GRAPH_CODEC,
+            build_graph=compile_standards_graph_authority,
+        )
     except AnalysisError as error:
         raise _translate_analysis_error(error, suite=suite, check=check) from error
     return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, covered)

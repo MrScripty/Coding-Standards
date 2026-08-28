@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 4 content-bound acceptance
 
-**Next slice:** Identify the coherent Milestone 3 implementation boundary and
-obtain content-bound licensing, Standards, and Specification acceptance
+**Next slice:** Record and review the corrected Milestone 3 implementation
+content
 
 **Acceptance status:** `pending`
 
@@ -34,17 +34,17 @@ implementation begins.
 | A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; the complete admitted feature matrix and known A1 regressions agree between the direct validator and production Adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable projection semantics reject. | `contract` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A3 | JSON Schema validation, applicability equality, identity encoding, and domain ordering/deduplication pass owner-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A4 | Every advertised content snapshot, authority view, execution closure, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its owner-typed object in a fresh process after source and process mutation; snapshot identity contains only exact logical paths and bytes; analysis roots exclude complete views; existing results require no live provider or authorization service; and SQLite durability, deterministic during-commit interruption, verified backup, non-overwriting offline restore, rollback selection, and cold reopen pass on the admitted Linux ext4 profile. | `system` | `required-real` | `automated` | `satisfied` | [Authority closure audit](reports/a1b-authority-closure-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A4C | Every operation closure stores only unique role- and side-qualified roots and derives its transitive dependency set through owner-declared references: the exact selected operation contract is included, consumed provider and authorization objects enter only successful successor states, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `satisfied` | [Authority closure audit](reports/a1b-authority-closure-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A4 | Every advertised content snapshot, authority view, execution closure, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its owner-typed object in a fresh process after source and process mutation; snapshot identity contains only exact logical paths and bytes; analysis roots exclude complete views; existing results require no live provider or authorization service; and SQLite durability, deterministic during-commit interruption, verified backup, non-overwriting offline restore, rollback selection, and cold reopen pass on the admitted Linux ext4 profile. | `system` | `required-real` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A4C | Every operation closure stores only unique role- and side-qualified roots and derives its transitive dependency set through owner-declared references: the exact selected operation contract is included, consumed provider and authorization objects enter only successful successor states, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `satisfied` | [Milestone 0 dependency provenance](reports/a1b-dependency-provenance.md) and isolated lock tests on CPython 3.11/3.12 |
-| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `satisfied` | [Consumer dispositions](reports/a1b-consumer-dispositions.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle artifact/source identity, exact hashes, copyright/notice and license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `satisfied` | [Corrected-C7 plan admission](reports/a1b-plan-admission.md) |
 | A1B-A6L | Final independent review proves the implemented exact lock and required-real test-oracle provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
-| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `satisfied` | [Authority closure audit](reports/a1b-authority-closure-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer dispositions](reports/a1b-consumer-dispositions.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `satisfied` | [Cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `satisfied` | [Cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A11 | One clean implementation boundary has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. The review binds the identified content; later evidence or lifecycle recording does not invalidate unchanged reviewed semantics. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
 
 ## Scope
@@ -580,6 +580,8 @@ in one replacement boundary; delete all superseded authority.
 - `evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml`
 - `evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml`
 - `evaluation/standards-effectiveness/suites/a1b-public-cutover.toml`
+- `evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml`
+- `evaluation/standards-effectiveness/suites/immutable-authority-closure.toml`
 - `evaluation/standards-effectiveness/fixtures/contracts/a1b/`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/a1b/`
 - `evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/`
@@ -728,6 +730,36 @@ in one replacement boundary; delete all superseded authority.
   freeze invalidates compatibility and triggers re-planning.
 - [x] Prove exact selected-consumer/disposition and
   requirement/certificate equality.
+- [x] Move execution-closure codec composition out of Authority: Authority
+  exports only the generic codec constructor, owner codec sets remain local,
+  and Engine derives the admitted dependency-kind union from the injected
+  executable sets without a copied kind catalog.
+- [x] Make domain execution paths construct `AuthorityBoundValue` results and
+  have Engine derive closure roots only from those values plus the selected
+  operation contract. Enforce exact cardinality per `(side, role)` before any
+  map projection.
+- [x] Preserve side- and role-qualified provider inputs and prove equal
+  accepted/proposed references do not collapse their qualifications.
+- [x] Move repository coverage composition behind one Analysis-owned public
+  function consumed by Engine and Verifier; remove the unadmitted
+  Verifier-to-Engine dependency.
+- [x] Retire the Engine-owned generator path and disposition. Put deterministic
+  projection generation in `standards_contracts`, update every caller and
+  migration record, and retain no compatibility wrapper.
+- [x] Make every documented repository entrypoint executable through its
+  manifest-owned public root under the admitted isolated environment. Replace
+  the stale standard-library-only Verifier documentation.
+- [x] Reject every dynamic-import capability admitted by Python aliasing, not
+  only calls retaining the names `__import__` or `import_module`; add intended-
+  diagnostic negative fixtures.
+- [x] Delete the two unregistered superseded suite files and prove no retired
+  A1 input path remains in tracked suite authority.
+- [x] Add genuine fresh-interpreter reconstruction covering every advertised
+  public object family from persisted SQLite state and exact codec composition,
+  without private in-process authority injection.
+- [x] Re-run policy-impact migration and coverage after every corrected
+  implementation path and declaration is final, then replace the rejected
+  candidate with one new coherent implementation boundary.
 
 **Acceptance gate:** Every automated objective claim passes. Final manual
 A1B-A6L and A1B-A11 remain pending content-bound acceptance.

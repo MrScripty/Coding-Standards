@@ -67,7 +67,7 @@ rationale = "The canonical declaration contains representation and referenced ex
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
-consumer = "tools/standards_engine/contracts/generate_contract.py"
+consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
@@ -195,7 +195,7 @@ rationale = "The interface schema declares interface, domain, handle, and provid
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
-consumer = "tools/standards_engine/contracts/generate_contract.py"
+consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
@@ -299,7 +299,7 @@ rationale = "Implementation preserves the admitted generated-contract evidence d
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
-consumer = "tools/standards_engine/contracts/generate_contract.py"
+consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
@@ -371,7 +371,7 @@ rationale = "The schema declares its dialect and vocabulary authority."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
-consumer = "tools/standards_engine/contracts/generate_contract.py"
+consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"

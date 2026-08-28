@@ -99,7 +99,7 @@ rationale = "The authored schema is the serialized contract authority."
 
 [[relationships]]
 source = "profile.boundary.generated-contract.semantic-closure"
-consumer = "tools/standards_engine/contracts/generate_contract.py"
+consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
