@@ -104,17 +104,22 @@ metadata row repeats them. Authority validates the typed handle and envelope
 kind before SQL and after every read. The BLOB contains the complete canonical
 envelope.
 
-The BLOB contract is `authority-envelope.v1`. Its bytes are exactly the
-identity-v2 canonical typed encoding, without the identity hash frame, of a
-closed six-field object: `object_kind`, `semantic_id`, constant
-`storage_format`, sorted unique `direct_dependencies`, `payload_contract`, and
-`payload`. Dependency references contain exactly `object_kind` and
-`semantic_id`. The payload is an identity-v2 JSON-compatible typed value;
-owners project raw bytes through closed padded-Base64 fields and verify the
-decoded value. Unknown fields, floats, noncanonical strings or numbers,
-duplicate or unsorted dependencies, and encoded envelopes above 67,108,864
-bytes reject before SQL. The bound is verified before allocation and again
-from SQLite BLOB length before decoding.
+The BLOB contract is authority envelope kind `authority-envelope`, version `1`.
+Its bytes are exactly the identity-v2 canonical typed encoding, without the
+identity hash frame, of a closed seven-field object: constant
+`envelope_kind`, integer `envelope_version`, `object_kind`, `semantic_id`,
+sorted unique `direct_dependencies`, `payload_contract`, and `payload`.
+Dependency references contain exactly `object_kind` and `semantic_id`.
+`object_kind` and `payload_contract` are nonempty opaque Unicode-scalar strings
+owned by the injected codec sets; Authority compares them exactly and does not
+parse semantic meaning from them. The payload is an identity-v2
+JSON-compatible typed value; owners project raw bytes through closed
+padded-Base64 fields and verify the decoded value. Unknown fields, floats,
+noncanonical strings or numbers, duplicate or unsorted dependencies, and
+encoded envelopes above 67,108,864 bytes reject before SQL. The bound is
+verified before allocation and again from SQLite BLOB length before decoding.
+A well-typed unknown envelope kind or positive version is `unsupported`;
+malformed structure is `invalid`.
 
 No separate SQL dependency table is admitted initially. Traversal decodes the
 stored envelope through the owner codec. Adding a dependency index later

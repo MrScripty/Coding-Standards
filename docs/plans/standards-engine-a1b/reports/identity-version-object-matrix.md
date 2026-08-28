@@ -76,19 +76,23 @@ or separately supplied version record.
 
 ```text
 AuthorityObjectEnvelope v1
-  object_kind: ASCII lower-kebab object-kind ID
+  envelope_kind: "authority-envelope"
+  envelope_version: 1
+  object_kind: nonempty opaque Unicode-scalar string
   semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits
-  storage_format: "authority-envelope.v1"
   direct_dependencies: sorted unique AuthorityObjectReferenceV1[]
-  payload_contract: ASCII lower-kebab/dot contract ID ending in ".vN"
+  payload_contract: nonempty opaque Unicode-scalar string
   payload: identity-v2 JSON-compatible typed value
 ```
 
 Envelope bytes are exactly the identity-v2 canonical typed encoding of that
-six-field object, without the identity hash frame. References contain exactly
+seven-field object, without the identity hash frame. References contain exactly
 `object_kind` and `semantic_id`; unknown fields, floats, noncanonical bytes,
 duplicate or unsorted references, and envelopes larger than 67,108,864 bytes
 reject. The size limit is an A1b storage-support bound, not semantic identity.
+Envelope kind and version provide structural dispatch only. Object kinds and
+payload contracts remain exact opaque values owned by injected domain codecs;
+Authority neither normalizes them nor infers domain meaning.
 
 Every public handle has `schema_version = 4`, one exact handle kind, and an ID
 whose prefix matches the stored object kind. `standards_authority.resolve`
@@ -101,6 +105,16 @@ Envelope
 format is a storage-decoding promise and does not define domain identity.
 Missing storage is `unavailable`, contradictory content is `invalid`, and a
 well-formed unsupported contract is `unsupported`.
+
+Operation-contract payload selectors and stored semantic identities are
+distinct. The exact selectors are `operation-contract.route.v2`,
+`operation-contract.read.v2`, `operation-contract.related.v2`, and
+`operation-contract.analysis.v2`. Each stored record independently has a
+content-addressed semantic ID under
+`coding-standards:operation-authority-contract:v2`, rendered as
+`operation-authority-contract:sha256:<64 lowercase hexadecimal digits>`.
+Selectors express compatibility promises; semantic IDs identify exact record
+content. Neither substitutes for the other.
 
 ## Public Object Matrix
 

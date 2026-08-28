@@ -594,3 +594,40 @@
 - No production runtime, package manifest, normative policy, relationship,
   coverage attestation, A1, or A2 implementation changed. The next operation is
   one content-bound review of the corrected complete C7 planning content.
+
+## 2026-08-27 - Corrected-C7 Admission Rejection And Typed Contract Replan
+
+- Independent review rejected commit
+  `ac362dc5f6ca2ac51c9b593cecde3639f4a883fb`, tree
+  `88d6f49805fbe0f9e328b1dc9e9981afe11efbdf`. The plan remains `Blocked`; no
+  A1b implementation is admitted.
+- The review accepted the C7 architecture, SQLite recovery lifecycle,
+  operation role/cardinality closure, result algebra, version ownership, and
+  demonstrated `strace` interruption mechanism. It found four remaining
+  contract-closure defects rather than a reason to return to C6 or redesign
+  storage.
+- Superseded the generic lower-kebab/version-suffix envelope grammar and the
+  prior six-field representation. The envelope now has seven exact fields,
+  including structural `envelope_kind` and integer `envelope_version`.
+  Object-kind and payload-contract values are opaque domain-owned strings;
+  Authority performs structural dispatch and exact comparison without
+  semantic inference or Unicode normalization.
+- Froze exact closed `AuthorizationGrantV1`, tagged
+  `AuthorizationSubjectV1`, and `EvidenceReferenceV1` shapes. Evidence
+  uniqueness is keyed only by provider contract, provider-contract version,
+  and evidence ID, so a repeated logical key rejects regardless of digest.
+- Froze the four operation compatibility selectors at route/read/related/
+  analysis v2 and separated them from each stored record's
+  `operation-authority-contract:sha256:` semantic identity.
+- Expanded the test-only `strace` decision to bind Ubuntu Noble source version
+  `6.8-0ubuntu2`, exact binary/source/executable hashes, authoritative package
+  copyright and LGPL-2.1 text hashes, intended host-only use, and the current
+  no-bundling/no-redistribution obligation decision.
+- The proposed public schema and interface did not change. Their SHA-256
+  values remain
+  `bd618af35fc7280805cabe8adaeebfba5e1def0cbf6b3e334e91563f2435bca8` and
+  `8d4adb47f90f0c8168873d89578b292c728badad7334d5f15c15125279ec6b00`.
+- No production runtime, package manifest, normative policy, relationship,
+  coverage attestation, A1, or A2 implementation changed. The next operation
+  remains one content-bound review of the complete corrected C7 planning
+  content.

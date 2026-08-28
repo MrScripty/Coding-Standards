@@ -5,8 +5,8 @@
 **Current phase:** Consolidated replacement-design review
 
 **Next slice:** Review the corrected complete C7 material content after its
-envelope, recovery, operation, authorization, failure, version, and
-interruption-oracle contracts are reconciled
+structured envelope dispatch, operation identities, authorization algebra,
+and exact interruption-oracle provenance are reconciled
 
 **Acceptance status:** `pending`
 
@@ -40,7 +40,7 @@ implementation begins.
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `pending` | Pending Milestone 0 |
 | A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle provenance, license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
+| A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle artifact/source identity, exact hashes, copyright/notice and license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
 | A1B-A6L | Final independent review proves the implemented exact lock and required-real test-oracle provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
 | A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
@@ -179,7 +179,7 @@ implementation begins.
 | Keep schema validation, applicability equality, identity encoding, and domain ordering separate. | Owning domain Modules | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Generic serializer as cross-domain semantics |
 | Use codepoint-preserving identity encoding v2; domain Modules own typed identity records and any semantic normalization. | Identity and domain owners | [Identity/version matrix](reports/identity-version-object-matrix.md) | Recursive NFC identity encoding v1 |
 | Capture an exact requested file list into `ContentSnapshotV2` using only logical Unicode-scalar paths and raw bytes; discard Git, filesystem, and Adapter observations after validation; compose one reference-only StandardsAuthorityView; require domain Modules to return AuthorityBoundValues; store only role- and side-qualified execution roots; and derive the transitive dependency set structurally. | Architecture, Authority, Engine composition, and domain owners | [C7 design](reports/c7-design-proposal.md), [C6/C7 history](reports/c6-c7-design-history-research.md), [identity/version matrix](reports/identity-version-object-matrix.md), and [consumer inventory](reports/consumer-and-state-inventory.md) | C4 object-specific version bags, C5 Git lineage, C6 structural snapshot entries and transition-future closure, snapshot-as-query authority, copied dependency lists, and umbrella invalidation |
-| Directly store every inspectable object through one closed immutable authority Interface backed by in-memory and SQLite adapters; encode the exact bounded `authority-envelope.v1` contract; persist only `(handle, envelope)` because the envelope owns kind; let the repository own envelope/dependency integrity while explicitly injected owner codec sets own semantic construction, identity, dependency extraction, and decoding; keep Authority and Contracts independent; and admit SQLite schema v1 with verified non-overwriting backup/restore but without migration or semantic export. | Architecture, Persistence, Authority, Resilience, and domain owners | [C7 design](reports/c7-design-proposal.md), [SQLite audit](reports/c7-sqlite-storage-audit.md), and [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage, C6 directory/hard-link publication, duplicate SQL kind authority, generic semantic ownership, owner maps, scans, caches, schema-mediated domain dispatch, duplicated schema interpretation, destructive restore, or Engine-owned retention |
+| Directly store every inspectable object through one closed immutable authority Interface backed by in-memory and SQLite adapters; encode the exact bounded authority envelope with structural kind `authority-envelope` and integer version `1`; persist only `(handle, envelope)` because the envelope owns kind; let the repository own envelope/dependency integrity while explicitly injected owner codec sets own opaque identifier dispatch, semantic construction, identity, dependency extraction, and decoding; keep Authority and Contracts independent; and admit SQLite schema v1 with verified non-overwriting backup/restore but without migration or semantic export. | Architecture, Persistence, Authority, Resilience, and domain owners | [C7 design](reports/c7-design-proposal.md), [SQLite audit](reports/c7-sqlite-storage-audit.md), and [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage, C6 directory/hard-link publication, duplicate SQL kind authority, generic semantic ownership or identifier grammar, owner maps, scans, caches, schema-mediated domain dispatch, duplicated schema interpretation, destructive restore, or Engine-owned retention |
 | Store four executable Engine-owned `OperationAuthorityContractV2` values with exact role-to-kind pairs, cardinalities, and structural cross-role dependencies; analysis has no routing role and dispositions remain fields of `analysis-root.v1`; keep owner codec sets local to their Modules and inject their closed tuple at composition; verify the aggregate inventory mechanically rather than creating a central codec authority. | Engine composition and domain owners | [C7 design](reports/c7-design-proposal.md) | Aggregate operation profiles, ambient required-role policy, central codec manifests, separate role catalogs, phantom decision kinds, routing-to-analysis leakage, and cross-operation invalidation |
 | Persist analysis state as narrow context plus dependency-valid decisions and roots-only material closure. Provider and authorization Adapters produce direct `ProviderAuthorityV1` and exact subject/action/evidence/revocation-bound `AuthorizationGrantV1` objects only for successful child states; deterministic no-observation stores nothing. Existing states replay without live trust services. | Analysis and Engine composition | [C7 design](reports/c7-design-proposal.md) | C5 complete-view state identity, C6 hypothetical-future transition closure, aggregate trust views, opaque authorization digests, and ambient trust replay |
 | Support one exact Linux ext4 durable-store and native-capture contract with descriptor-relative no-follow access, exact endpoint revalidation, and typed unsupported outcomes. | Cross-Platform and Security | [A1b ADR](../../decisions/standards-engine-a1b.md), [C7 design](reports/c7-design-proposal.md), [SQLite audit](reports/c7-sqlite-storage-audit.md), and [migration plan](reports/policy-impact-migration-plan.md) | Operating-system-name inference, path-based validation/use, and unproved macOS or Windows portability |
@@ -200,7 +200,7 @@ implementation begins.
 | Projection closure is complete | Public shape | Reachability compiler and public-operation fixtures | Canonical v11 schema and closed interface contract | Constructs outside the admitted projection profile | Unsupported reachable construct or unreachable public definition |
 | Identity is representation preserving | Content identity | Exact codepoint fixtures and domain identity records | Identity v2 contract | Domain semantic equality | NFC-equivalent inputs remain distinct unless owner normalizes |
 | Domain equality/order is local | Domain semantics | Applicability and analysis owner fixtures | Each domain contract | Generic identity-byte ordering or equality | Generic identity bytes cannot decide semantic equality or order |
-| Persisted envelope is exact | Storage representation | Canonical decode/re-encode, grammar, ordering, unknown-field, bound, and byte-collision fixtures | `authority-envelope.v1` plus identity-v2 encoding | Domain payload meaning | Noncanonical, oversized, duplicate, unsorted, or same-handle/different-byte envelope rejects |
+| Persisted envelope is exact | Storage representation | Canonical decode/re-encode, exact structural kind/version dispatch, opaque owner identifier, ordering, unknown-field, bound, and byte-collision fixtures | Authority envelope kind `authority-envelope`, version `1`, plus identity-v2 encoding | Domain payload meaning or generic identifier grammar | Noncanonical, oversized, duplicate, unsorted, malformed, unknown-version, or same-handle/different-byte cases reach their exact typed outcomes |
 | Cold reconstruction is complete | Persisted authority | Fresh process with SQLite store path and handle only | Persisted object envelope and dependencies | In-process caches, authored database files, or unavailable durable filesystem | Missing is unavailable; contradiction is invalid |
 | SQLite publication and recovery are durable | Required-real persistence | Real Adapter stages, capability-checked `strace` sync-syscall injection, cold reopen, verified backup, and offline restore to an absent destination | SQLite atomic-commit contract, exact runtime capability profile, and operator-selected store lifecycle | Custom VFS, probabilistic kill, destructive overwrite, semantic transfer, or Engine-owned retention | Unsupported oracle blocks acceptance; failed restore leaves live source unchanged |
 | Operation authority is exact | Material semantic dependency | Roots-only traversal of AuthorityBoundValue direct references | Executable owner codec sets, Engine operation contracts, and reference-only StandardsAuthorityView | Handwritten closure, central codec manifest, version bag, hypothetical future authority, or full-view invalidation | Missing consumed dependency, included unused dependency, cycle, or owner mismatch rejects |
@@ -447,11 +447,14 @@ independently of the accepted facade.
   validates its closed envelope proof and direct references; the injected codec
   computes semantic identity, extracts dependencies, and decodes its payload.
   Authority does not import Contracts, and Contracts does not import Authority.
-- [ ] Encode `authority-envelope.v1` through the identity-v2 canonical typed
-  encoder with its exact six fields, two-field references, grammar, ordering,
-  unknown-field rejection, and 67,108,864-byte pre-decode bound. Prove raw-byte
-  owner payload projection, noncanonical encodings, boundary sizes, and
-  same-handle byte contradiction.
+- [ ] Encode authority envelope kind `authority-envelope`, version `1`, through
+  the identity-v2 canonical typed encoder with its exact seven fields,
+  two-field references, structural kind/version dispatch, exact opaque
+  owner-defined object-kind/payload-contract values, ordering, unknown-field
+  rejection, and 67,108,864-byte pre-decode bound. Prove that Authority does
+  not normalize or infer domain meaning, plus raw-byte owner payload
+  projection, noncanonical encodings, boundary sizes, and same-handle byte
+  contradiction.
 - [ ] Store only `(handle, envelope)` in SQLite; verify the envelope's kind
   agrees with the typed handle. Implement one-transaction `put_if_absent`,
   same-ID idempotence, contradictory collision, integrity verification,
@@ -467,7 +470,9 @@ independently of the accepted facade.
   the real SQLite `fsync` or `fdatasync` reached after the pre-commit barrier.
   Require trace proof of the selected syscall and reject sleeps, retries,
   probabilistic repetition, ordinary process failure, or a custom VFS as
-  substitutes. Record exact tool versions in required-real evidence.
+  substitutes. Record and verify the exact executable digest, binary package,
+  source descriptor and artifacts, license/notice bytes, and capability in
+  required-real evidence against the admitted provenance.
 - [ ] Default live storage to
   `<repository-root>/.standards-engine/authority.sqlite3`. Verify backup source
   and absent destination completely; restore offline into another absent store,
@@ -586,9 +591,13 @@ in one replacement boundary; delete all superseded authority.
   decoding, and object-local invariants.
 - [ ] Make Standards Engine composition create one reference-only
   StandardsAuthorityView from owner-produced semantic objects. Store one
-  executable `OperationAuthorityContractV2` for route, read, related, and
-  analysis. Route requires metadata/routing/graph; read and related require
-  metadata/graph; analysis requires metadata/graph/policy-impact/coverage.
+  executable `OperationAuthorityContractV2` for each exact compatibility
+  selector `operation-contract.route.v2`, `operation-contract.read.v2`,
+  `operation-contract.related.v2`, and `operation-contract.analysis.v2`.
+  Store each record under its separately derived
+  `operation-authority-contract:sha256:` semantic ID. Route requires
+  metadata/routing/graph; read and related require metadata/graph; analysis
+  requires metadata/graph/policy-impact/coverage.
   Each role carries its exact object kind and cardinality. Analysis allows only
   context, requirement, observation, coverage-view, coverage-requirement,
   coverage-attestation, coverage-certificate, provider-authority, and
@@ -611,9 +620,12 @@ in one replacement boundary; delete all superseded authority.
 - [ ] Require every authorization grant to bind exact issuer and revocation
   authority revisions, principal, capability, action, typed work subject,
   authorization/revocation contracts, evidence, `not-revoked` state, and allow
-  decision. Prove mismatch, denial, revocation, missing trust, and unsupported
-  contracts reach their distinct typed outcomes; do not store opaque substitute
-  digests or admit temporal grants.
+  decision through the exact closed `AuthorizationGrantV1`, tagged
+  `AuthorizationSubjectV1`, and `EvidenceReferenceV1` shapes. Sort evidence by
+  `(provider_contract, provider_contract_version, id)` and reject repeated
+  logical keys regardless of digest. Prove mismatch, denial, revocation,
+  missing trust, and unsupported contracts reach their distinct typed
+  outcomes; do not store opaque substitute digests or admit temporal grants.
 - [ ] Prove included authority mutation changes every dependent closure and
   identity, excluded view-member mutation leaves unrelated identities stable,
   and existing cold inspection requires no live provider or authorization

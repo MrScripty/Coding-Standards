@@ -163,11 +163,12 @@ Every object retains one closed envelope:
 
 ```text
 AuthorityObjectEnvelopeV1 {
-  object_kind: ASCII lower-kebab object-kind ID,
+  envelope_kind: "authority-envelope",
+  envelope_version: 1,
+  object_kind: nonempty Unicode-scalar string,
   semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits,
-  storage_format: "authority-envelope.v1",
   direct_dependencies: sorted unique AuthorityObjectReferenceV1[],
-  payload_contract: ASCII lower-kebab/dot contract ID ending in ".vN",
+  payload_contract: nonempty Unicode-scalar string,
   payload: identity-v2 JSON-compatible typed value
 }
 
@@ -178,17 +179,28 @@ AuthorityObjectReferenceV1 {
 ```
 
 The persisted BLOB is exactly the codepoint-preserving canonical typed encoding
-defined by identity encoding v2 for that six-field object, without the identity
-hash frame. It admits only null, Boolean, integer, Unicode-scalar string, array,
-and string-keyed object values; floats and byte values are absent. An owner
-projects exact bytes such as snapshot content through its closed padded-Base64
-payload representation and verifies the decoded bytes. Envelope and reference
-objects reject unknown fields. Dependencies are ordered by
-`(object_kind, semantic_id)`, must already be unique, and are not normalized by
-Authority. An encoded envelope must contain at most 67,108,864 bytes. A larger
-otherwise well-formed owner value is `unsupported`; malformed, noncanonical,
-duplicate, or unsorted input is `invalid`. This storage bound does not enter
-semantic identity.
+defined by identity encoding v2 for that seven-field object, without the
+identity hash frame. It admits only null, Boolean, integer, Unicode-scalar
+string, array, and string-keyed object values; floats and byte values are
+absent. `envelope_kind` and `envelope_version` are structural dispatch fields,
+not semantic identifiers. A well-typed unknown envelope kind or positive
+version is `unsupported`; a missing field, unknown field, wrong type, empty
+`object_kind` or `payload_contract`, nonpositive version, or malformed
+`semantic_id` is `invalid`.
+
+`object_kind` and `payload_contract` are exact opaque values owned by the
+injected domain codec sets. Authority compares them codepoint-for-codepoint and
+does not parse, normalize, or infer policy meaning from either value. A
+well-formed value with no injected owner is `unsupported`; a known owner
+decides whether the payload contract is supported. An owner projects exact
+bytes such as snapshot content through its closed padded-Base64 payload
+representation and verifies the decoded bytes. Reference objects contain
+exactly `object_kind` and `semantic_id` and reject unknown fields. Dependencies
+are ordered codepoint-for-codepoint by `(object_kind, semantic_id)`, must
+already be unique, and are not normalized by Authority. An encoded envelope
+must contain at most 67,108,864 bytes. A larger otherwise well-formed owner
+value is `unsupported`; malformed, noncanonical, duplicate, or unsorted input
+is `invalid`. This storage bound does not enter semantic identity.
 
 The owning codec:
 
@@ -343,7 +355,10 @@ and four immutable records:
 
 ```text
 OperationAuthorityContractV2 {
-  contract_id,
+  contract_id: operation-contract.route.v2 |
+               operation-contract.read.v2 |
+               operation-contract.related.v2 |
+               operation-contract.analysis.v2,
   operation: route | read | related | analysis,
   required_view_roles: set<RoleKindRequirementV1> by role,
   allowed_dynamic_roles: set<RoleKindRequirementV1> by role
@@ -356,6 +371,16 @@ RoleKindRequirementV1 {
   maximum_cardinality: integer | null
 }
 ```
+
+`contract_id` is the stable versioned compatibility selector in the payload;
+the mapping above is exact and one-to-one. It is not the stored object's
+semantic identity. The envelope `semantic_id` is independently computed from
+the complete operation-contract payload under
+`coding-standards:operation-authority-contract:v2` and has the form
+`operation-authority-contract:sha256:<64 lowercase hexadecimal digits>`.
+Changing payload bytes changes that semantic ID. Changing a compatibility
+promise requires advancing the affected `contract_id`; unrelated operation
+contracts do not advance.
 
 Every required view role has cardinality `1..1`. Route requires
 `metadata -> canonical-standards-corpus`, `routing -> routing-projection`, and
@@ -409,13 +434,15 @@ provider-authority -> its exact declared subset of content, metadata,
 authorization-grant -> none
 ```
 
-Accepted and proposed analysis inputs select the same
-`operation-contract.analysis.v2` semantic ID. Static roots
-come from the selected contract. Dynamic roots exactly equal qualified
-dependencies returned by Analysis `AuthorityBoundValue`s. Missing referenced
-content is `unavailable`; absent or extra roles, wrong kinds, conflicting
-selections, cycles, or edge contradictions are `invalid`; an unknown
-well-formed contract is `unsupported`.
+Accepted and proposed analysis inputs reference the same stored operation
+contract object, whose payload has `contract_id =
+"operation-contract.analysis.v2"`; both references therefore contain the same
+content-addressed envelope `semantic_id`. Static roots come from that selected
+object. Dynamic roots exactly equal qualified dependencies returned by
+Analysis `AuthorityBoundValue`s. Missing referenced content is `unavailable`;
+absent or extra roles, wrong kinds, conflicting selections, cycles, or edge
+contradictions are `invalid`; a structurally valid unknown `contract_id` is
+`unsupported`.
 
 Owner-local codec sets remain executable authority exported by each owner.
 The composition root injects their exact closed tuple explicitly. Verification
@@ -603,35 +630,56 @@ ProviderAuthorityV1 {
 }
 
 AuthorizationGrantV1 {
-  issuer_id,
-  issuer_semantic_revision,
-  grant_id,
-  principal_id,
-  capability,
+  issuer_id: CanonicalId,
+  issuer_semantic_revision: integer >= 1,
+  grant_id: CanonicalId,
+  principal_id: CanonicalId,
+  capability: CanonicalId,
   action: provide-fact | consumer-disposition | impact-disposition |
           coverage-attestation,
   subject: AuthorizationSubjectV1,
   authorization_contract: "authorization-grant.v1",
   authorization_evidence: nonempty set<EvidenceReferenceV1>,
-  revocation_authority_id,
-  revocation_authority_semantic_revision,
+  revocation_authority_id: CanonicalId,
+  revocation_authority_semantic_revision: integer >= 1,
   revocation_contract: "authorization-revocation.v1",
   revocation_evidence: nonempty set<EvidenceReferenceV1>,
   revocation_state: "not-revoked",
   decision: "allow",
 }
+
+AuthorizationSubjectV1 =
+  { kind: "fact-requirement", id: FactRequirementId } |
+  { kind: "consumer-obligation", id: ObligationId } |
+  { kind: "impact-obligation", id: ObligationId } |
+  { kind: "coverage-requirement", id: CoverageRequirementId }
+
+EvidenceReferenceV1 {
+  id: CanonicalId,
+  digest: Digest,
+  provider_contract: CanonicalId,
+  provider_contract_version: NonEmptyString
+}
 ```
 
 Provider direct dependencies exactly equal its unqualified inputs; its identity
 includes the complete payload and those references. An authorization grant has
-no authority-object dependency. `AuthorizationSubjectV1` is one exact typed
-target: a fact-requirement object ID for `provide-fact`, a consumer obligation
-ID for `consumer-disposition`, an impact obligation ID for
-`impact-disposition`, or a coverage-requirement object ID for
-`coverage-attestation`. `EvidenceReferenceV1` contains the evidence ID, exact
-SHA-256 digest, provider-contract ID, and provider-contract version. Evidence
-sets are sorted by `(provider_contract, provider_contract_version, id, digest)`
-and duplicate keys with unequal records are invalid.
+no authority-object dependency. Every grant, subject, and evidence record is a
+closed object and rejects unknown fields. Subject kind and action must use this
+exact mapping: `provide-fact` -> `fact-requirement`,
+`consumer-disposition` -> `consumer-obligation`, `impact-disposition` ->
+`impact-obligation`, and `coverage-attestation` -> `coverage-requirement`.
+
+Evidence arrays are nonempty and sorted by the logical key
+`(provider_contract, provider_contract_version, id)`. That key excludes
+`digest`: two records with one logical key are duplicates and reject whether
+their digests are equal or contradictory. Each digest must use the public
+`Digest` representation and must match the exact resolved evidence bytes.
+Values are compared without Unicode normalization. The public v11
+`CanonicalId`, `Digest`, `NonEmptyString`, `FactRequirementId`, `ObligationId`,
+and `CoverageRequirementId` definitions own the referenced serialized scalar
+shapes; Analysis owns grant construction, action/subject compatibility,
+evidence resolution, authorization meaning, and identity.
 
 The Analysis authorization codec constructs identity from the complete payload
 above. It accepts only an explicitly injected issuer Adapter whose ID and

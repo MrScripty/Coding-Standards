@@ -138,20 +138,27 @@ Every persisted inspectable value uses:
 
 ```text
 AuthorityObjectEnvelopeV1
-  object_kind: ASCII lower-kebab object-kind ID
+  envelope_kind = authority-envelope
+  envelope_version = 1
+  object_kind: nonempty opaque Unicode-scalar string
   semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits
-  storage_format = authority-envelope.v1
   direct_dependencies: sorted unique AuthorityObjectReferenceV1[]
-  payload_contract: ASCII contract ID ending in ".vN"
+  payload_contract: nonempty opaque Unicode-scalar string
   payload: identity-v2 JSON-compatible typed value
 ```
 
 Envelope bytes are exactly identity-v2 canonical typed encoding of this closed
-six-field object without the identity hash frame. References contain exactly
+seven-field object without the identity hash frame. References contain exactly
 `object_kind` and `semantic_id`. Unknown fields, floats, noncanonical bytes,
 duplicate or unsorted dependencies, and encoded envelopes larger than
 67,108,864 bytes reject. Raw content is represented through owner-validated
 padded Base64 inside the payload.
+
+Envelope kind and version provide structural dispatch only. A well-typed
+unknown kind or positive version is `unsupported`; malformed structure is
+`invalid`. Object-kind and payload-contract values remain codepoint-exact
+opaque identifiers owned by the injected codec sets. Authority compares and
+dispatches them without normalizing them or inferring domain meaning.
 
 The envelope's `object_kind` must agree with the typed handle. The repository
 validates envelope shape, dependency references, acyclicity, stored bytes, and
@@ -268,12 +275,20 @@ decision, or executable domain logic.
 
 Standards Engine owns four executable `OperationAuthorityContractV2` values:
 
-| Operation | Required role-to-kind pairs | Allowed dynamic role-to-kind pairs |
-| --- | --- | --- |
-| route | metadata -> canonical-standards-corpus; routing -> routing-projection; graph -> standards-graph | none |
-| read | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
-| related | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
-| analysis | metadata -> canonical-standards-corpus; graph -> standards-graph; policy-impact -> compiled-policy-impact; coverage -> coverage-horizon | context -> analysis-context; requirement -> fact-requirement; observation -> fact-observation; coverage-view -> coverage-view; coverage-requirement -> coverage-requirement; coverage-attestation -> coverage-attestation; coverage-certificate -> coverage-certificate; provider-authority -> provider-authority; authorization-grant -> authorization-grant |
+| Contract ID | Operation | Required role-to-kind pairs | Allowed dynamic role-to-kind pairs |
+| --- | --- | --- | --- |
+| `operation-contract.route.v2` | route | metadata -> canonical-standards-corpus; routing -> routing-projection; graph -> standards-graph | none |
+| `operation-contract.read.v2` | read | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
+| `operation-contract.related.v2` | related | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
+| `operation-contract.analysis.v2` | analysis | metadata -> canonical-standards-corpus; graph -> standards-graph; policy-impact -> compiled-policy-impact; coverage -> coverage-horizon | context -> analysis-context; requirement -> fact-requirement; observation -> fact-observation; coverage-view -> coverage-view; coverage-requirement -> coverage-requirement; coverage-attestation -> coverage-attestation; coverage-certificate -> coverage-certificate; provider-authority -> provider-authority; authorization-grant -> authorization-grant |
+
+These exact `contract_id` values are stable versioned compatibility selectors,
+not semantic object identities. Each complete record independently receives an
+envelope `semantic_id` under
+`coding-standards:operation-authority-contract:v2`, with prefix
+`operation-authority-contract:sha256:`. A view references that exact stored
+object. A material compatibility change advances only the affected selector;
+any record-content change changes its content-addressed semantic ID.
 
 Every required role has cardinality `1..1`. Analysis context has cardinality
 `1..1`; every other allowed dynamic role has cardinality `0..*`. No `decision`
@@ -345,30 +360,46 @@ ProviderAuthorityV1
   inputs: sorted qualified authority references
 
 AuthorizationGrantV1
-  issuer_id
-  issuer_semantic_revision
-  grant_id
-  principal_id
-  capability
-  action
-  subject
+  issuer_id: CanonicalId
+  issuer_semantic_revision: integer >= 1
+  grant_id: CanonicalId
+  principal_id: CanonicalId
+  capability: CanonicalId
+  action: provide-fact | consumer-disposition | impact-disposition |
+          coverage-attestation
+  subject: AuthorizationSubjectV1
   authorization_contract = authorization-grant.v1
   authorization_evidence: nonempty sorted EvidenceReferenceV1[]
-  revocation_authority_id
-  revocation_authority_semantic_revision
+  revocation_authority_id: CanonicalId
+  revocation_authority_semantic_revision: integer >= 1
   revocation_contract = authorization-revocation.v1
   revocation_evidence: nonempty sorted EvidenceReferenceV1[]
   revocation_state = not-revoked
   decision = allow
+
+AuthorizationSubjectV1 =
+  { kind: fact-requirement, id: FactRequirementId } |
+  { kind: consumer-obligation, id: ObligationId } |
+  { kind: impact-obligation, id: ObligationId } |
+  { kind: coverage-requirement, id: CoverageRequirementId }
+
+EvidenceReferenceV1
+  id: CanonicalId
+  digest: Digest
+  provider_contract: CanonicalId
+  provider_contract_version: NonEmptyString
 ```
 
-Action and subject must identify the exact current fact requirement, consumer
-obligation, impact obligation, or coverage requirement being resolved. The
-injected issuer Adapter, principal, capability, contracts, evidence, and
-immutable revocation proof must all match. Denial or revocation is
-`unauthorized`; missing trust is `unavailable`; contradiction is `invalid`; and
-an unknown well-formed contract is `unsupported`. A1b admits no temporal or
-expiring grant.
+Every grant, subject, and evidence value is a closed object. Subject kind must
+match action exactly. Evidence is ordered and made unique by
+`(provider_contract, provider_contract_version, id)`; digest is deliberately
+excluded from that logical key, so repeated keys reject whether their records
+agree or conflict. Values compare codepoint-for-codepoint without Unicode
+normalization. The injected issuer Adapter, principal, capability, contracts,
+evidence, exact evidence-byte digest, and immutable revocation proof must all
+match. Denial or revocation is `unauthorized`; missing trust is `unavailable`;
+contradiction is `invalid`; and an unknown well-formed contract is
+`unsupported`. A1b admits no temporal or expiring grant.
 
 A successful child state includes the exact provider and authorization objects
 it consumed. A deterministic provider result of no observation stores no trust

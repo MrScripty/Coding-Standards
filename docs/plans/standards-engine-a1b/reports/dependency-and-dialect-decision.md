@@ -306,11 +306,12 @@ syscall after the child's pre-commit barrier. It does not accept a timeout,
 sleep, repeated probabilistic kill, or ordinary process failure.
 
 Support is capability-based rather than tied to one patch release; each
-acceptance environment records its exact `strace` release and package source.
-The planning host currently reports Ubuntu package `strace 6.8-0ubuntu2` on
-`amd64` and the required injection surface. Missing capability makes the
-required-real environment `unsupported` and blocks A1b acceptance rather than
-changing production behavior or selecting a custom SQLite VFS.
+acceptance environment records its exact `strace` release, executable digest,
+package artifact, source revision, and package source. The admitted planning
+selection is Ubuntu Noble package `strace 6.8-0ubuntu2` on `amd64`. Missing
+capability or different unresolved provenance makes the required-real
+environment `unsupported` and blocks A1b acceptance rather than changing
+production behavior or selecting a custom SQLite VFS.
 
 ## Licensing And Provenance
 
@@ -360,12 +361,31 @@ A missing license file, changed copyright authority, incompatible term, changed
 artifact hash, or new redistribution behavior blocks dependency acceptance.
 
 The test-only `strace` oracle is likewise invoked from the host and is neither
-copied nor bundled. The observed Ubuntu package identifies upstream
-[`strace`](https://strace.io/) and LGPL-2.1-or-later for the executable; its own
-test suite is not copied or run. Invocation for internal verification creates
-no repository-distribution notice obligation. Vendoring, bundling, modifying,
-or redistributing the executable requires a new Licensing and Release
-disposition.
+copied nor bundled. Its exact admitted provenance is:
+
+| Item | Exact authority and identity |
+| --- | --- |
+| Ubuntu binary package | Noble `amd64` package `strace_6.8-0ubuntu2_amd64.deb`; SHA-256 `d588810ae26b06fee6678dc81e5b54f6efcde8e718e4589adb4d11d254b9820b`; the [Ubuntu package page](https://packages.ubuntu.com/noble/strace) identifies source package `strace (6.8-0ubuntu2)`, Ubuntu Developers, and upstream `strace.io` |
+| Source descriptor | [`strace_6.8-0ubuntu2.dsc`](https://archive.ubuntu.com/ubuntu/pool/main/s/strace/strace_6.8-0ubuntu2.dsc); SHA-256 `330679ec872f5d097809a28fe0bcd4fe3a0ba2a57e639feec53ffc3745aa831b`; signature key `92D618F668F22F8ED80BEEF5BA3E29338280B242`, identified by [Launchpad](https://launchpad.net/~paelzer) as Christian Ehrhardt; descriptor identifies source version `6.8-0ubuntu2`, Ubuntu Developers, and Debian VCS `https://salsa.debian.org/debian/strace.git` |
+| Upstream source artifact | [`strace_6.8.orig.tar.xz`](https://archive.ubuntu.com/ubuntu/pool/main/s/strace/strace_6.8.orig.tar.xz); descriptor SHA-256 `ba6950a96824cdf93a584fa04f0a733896d2a6bc5f0ad9ffe505d9b41e970149` |
+| Ubuntu/Debian packaging delta | [`strace_6.8-0ubuntu2.debian.tar.xz`](https://archive.ubuntu.com/ubuntu/pool/main/s/strace/strace_6.8-0ubuntu2.debian.tar.xz); descriptor SHA-256 `6efc6fde478f3beb37dbd246f1e9fe4f13e74eef794b5b66d7589f0933bc351b` |
+| Tested executable | `/usr/bin/strace`; SHA-256 `28f957c227012de0b18d1bd7fff2d396cb693ea60ed8013be68de071e84b5001`; package version output `strace 6.8` and package-manager identity `6.8-0ubuntu2` |
+| Copyright and notice authorities | [Ubuntu package copyright file](https://changelogs.ubuntu.com/changelogs/pool/main/s/strace/strace_6.8-0ubuntu2/copyright), installed as `/usr/share/doc/strace/copyright`; SHA-256 `40e4ca01654c733c06fabee65168da4c177117b1bd084f3a752bc8a989736e04`; identifies the named 1991-2001 contributors and The strace developers, 2001-2022. The exact tested executable additionally reports `Copyright (c) 1991-2024 The strace developers` in `strace --version`; both notices are retained as provenance rather than treating the older packaging summary as exhaustive. |
+| License authority | The package copyright authority selects LGPL-2.1-or-later for the executable and points to the installed LGPL-2.1 text at `/usr/share/common-licenses/LGPL-2.1`; SHA-256 `dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551` |
+
+The package's separately licensed test suite is not copied or run. Invoking the
+installed executable for internal verification creates no repository-
+distribution notice obligation. The hashes above are evidence for this exact
+selection, not a checked-in dependency lock or a promise that another host
+package is equivalent. Vendoring, bundling, modifying, redistributing, or
+selecting a differently sourced executable requires a new Licensing and
+Release disposition.
+
+The 2026-08-27 planning preflight downloaded the exact binary package, source
+descriptor, upstream archive, and packaging delta from the authorities above
+and reproduced every recorded artifact SHA-256. It also reproduced the
+installed executable, copyright-file, and LGPL-2.1 hashes locally. Final
+required-real acceptance repeats those checks and the capability probe.
 
 ## Security And Updates
 
