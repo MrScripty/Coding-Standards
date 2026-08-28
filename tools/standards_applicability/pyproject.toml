@@ -2,8 +2,13 @@
 name = "standards-applicability"
 version = "0.1.0"
 description = "Neutral typed applicability compilation and evaluation"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.13"
 dependencies = []
+
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.standards_applicability.standards_applicability"
+repository-entrypoints = []
 
 [tool.unittest]
 start-directory = "tests"

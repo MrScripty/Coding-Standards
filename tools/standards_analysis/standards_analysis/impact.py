@@ -8,7 +8,6 @@ from tools.standards_applicability.standards_applicability import (
     FactSet,
     Truth,
 )
-from tools.standards_metadata.standards_metadata import PolicyUnitCorpus
 from tools.standards_policy_impact.standards_policy_impact import (
     SOURCE_ID as POLICY_IMPACT_SOURCE_ID,
     CompiledPolicyImpactSet,
@@ -17,10 +16,10 @@ from tools.standards_policy_impact.standards_policy_impact import (
 
 from .changes import ClassifiedChange, GraphSeedSelection, ReviewScope
 from .errors import AnalysisError, AnalysisFailure
-from .serialization import canonical_json_bytes, digest_bytes, identity
+from .keys import analysis_identity, analysis_key_bytes, raw_digest
 
 
-IMPACT_TRACE_DOMAIN = "coding-standards:impact-trace:v1"
+IMPACT_TRACE_DOMAIN = "coding-standards:impact-trace:v2"
 
 
 @dataclass(frozen=True, slots=True)
@@ -286,7 +285,7 @@ def _traverse(
                         applicability,
                         unresolved_facts,
                         applicability_facts,
-                        identity(
+                        analysis_identity(
                             IMPACT_TRACE_DOMAIN,
                             "impact-trace",
                             trace_projection,
@@ -356,4 +355,4 @@ def _fact_value_digest(facts: FactSet, fact: str) -> str:
         projection = {"type": value.type, "state": value.state}
         if value.state == "known":
             projection["value"] = value.value
-    return digest_bytes(canonical_json_bytes(projection))
+    return raw_digest(analysis_key_bytes(projection))

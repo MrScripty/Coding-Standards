@@ -1,0 +1,47 @@
+schema_version = 1
+
+[[cases]]
+id = "exported-root-name"
+consumer_dependencies = ["b-package"]
+consumer_source = '''
+from tools.b.b import value
+run = value
+__all__ = ("run",)
+'''
+expected_codes = []
+
+[[cases]]
+id = "below-root-private-child"
+consumer_dependencies = ["b-package"]
+consumer_source = '''
+from tools.b.b.private import value
+__all__ = ("value",)
+'''
+expected_codes = ["PYTHON_PACKAGE.PRIVATE_IMPORT"]
+
+[[cases]]
+id = "root-form-private-child"
+consumer_dependencies = ["b-package"]
+consumer_source = '''
+from tools.b.b import private
+__all__ = ("private",)
+'''
+expected_codes = ["PYTHON_PACKAGE.UNEXPORTED_IMPORT"]
+
+[[cases]]
+id = "cross-module-star"
+consumer_dependencies = ["b-package"]
+consumer_source = '''
+from tools.b.b import *
+__all__ = ("value",)
+'''
+expected_codes = ["PYTHON_PACKAGE.STAR_IMPORT"]
+
+[[cases]]
+id = "dynamic-import"
+consumer_dependencies = []
+consumer_source = '''
+loaded = __import__("tools.b.b")
+__all__ = ("loaded",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]

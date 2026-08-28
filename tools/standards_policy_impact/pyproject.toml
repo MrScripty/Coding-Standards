@@ -2,8 +2,19 @@
 name = "standards-policy-impact"
 version = "0.1.0"
 description = "Typed policy-impact declaration compiler"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "repository-graph-engine",
+    "standards-applicability",
+    "standards-authority",
+    "standards-identity",
+    "standards-metadata",
+]
+
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.standards_policy_impact.standards_policy_impact"
+repository-entrypoints = []
 
 [tool.unittest]
 start-directory = "tests"

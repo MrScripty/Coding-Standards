@@ -2,8 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tools.graph_engine.graph_engine import EdgeRegistry, InvalidSourceError
-from tools.graph_engine.graph_engine.manifest import load_registry as load_graph_registry
+from tools.graph_engine.graph_engine import (
+    EdgeRegistry,
+    InvalidSourceError,
+    load_registry as load_graph_registry,
+)
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
     MetadataError,

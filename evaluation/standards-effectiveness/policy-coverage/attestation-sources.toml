@@ -1,10 +1,12 @@
-schema_version = 1
+schema_version = 2
 sources = [
   "evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/router.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+  "evaluation/standards-effectiveness/policy-coverage/attestations/topic.cross-platform.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml",
+  "evaluation/standards-effectiveness/policy-coverage/attestations/topic.security.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",

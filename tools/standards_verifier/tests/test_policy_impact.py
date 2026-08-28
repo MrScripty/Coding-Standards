@@ -6,7 +6,6 @@ import tempfile
 import sys
 import textwrap
 import unittest
-from dataclasses import replace
 from pathlib import Path
 
 
@@ -17,13 +16,11 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(ENGINE_ROOT))
 
 from tools.graph_engine.graph_engine import EdgeRegistry
-from tools.standards_analysis.standards_analysis import compile_coverage
 from tools.standards_metadata.standards_metadata import (
     load_canonical_standards_corpus,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     DEFAULT_AUTHORING_CONTRACT,
-    PolicyImpactError,
     compile_policy_impact,
 )
 
@@ -228,32 +225,6 @@ class PolicyImpactTest(unittest.TestCase):
             declaration_sources = ["declarations.toml"]
             """,
         )
-        try:
-            corpus = load_canonical_standards_corpus(self.root)
-            compiled = compile_policy_impact(self.root, corpus, "registry.toml")
-            coverage = compile_coverage(self.root, corpus, compiled)
-        except PolicyImpactError:
-            pass
-        else:
-            requirement = coverage.requirements["workflow.planning.fixture-policy"]
-            self.write(
-                "coverage-attestations.toml",
-                f"""
-                schema_version = 2
-
-                [[attestations]]
-                requirement = "{requirement.handle}"
-                conclusion = "complete"
-                evidence = ["coverage-evidence.md"]
-                explicit_exclusions = []
-                rationale = "Every registered fixture horizon member was reviewed."
-                auditor_provenance = "test:policy-impact"
-                """,
-            )
-            self.write(
-                "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
-                'schema_version = 1\nsources = ["coverage-attestations.toml"]\n',
-            )
         return load_policy_impact(self.root, "registry.toml", self.suite_paths)
 
     def test_adapter_queries_compiled_registry_in_deterministic_consumer_order(self) -> None:
@@ -264,11 +235,14 @@ class PolicyImpactTest(unittest.TestCase):
 
         self.assertIsInstance(impact.registry, EdgeRegistry)
         self.assertEqual(
-            [edge.consumer for edge in impact.consumers_for("workflow.planning")],
+            [
+                edge.consumer
+                for edge in impact.declared_consumers_for("workflow.planning")
+            ],
             ["prompts/a.md", "prompts/b.md"],
         )
         self.assertEqual(
-            impact.consumers_for("workflow.planning")[0]
+            impact.declared_consumers_for("workflow.planning")[0]
             .applicability_program.as_expression(),
             {"operator": "always"},
         )
@@ -339,7 +313,10 @@ class PolicyImpactTest(unittest.TestCase):
         documentation = self.load(
             self.relationship("documentation", "documentation-projection")
         )
-        self.assertEqual(documentation.consumers_for("workflow.planning")[0].consumer, "evaluation/README.md")
+        self.assertEqual(
+            documentation.declared_consumers_for("workflow.planning")[0].consumer,
+            "evaluation/README.md",
+        )
 
         with self.assertRaises(EngineError) as raised:
             self.load(self.relationship("not-documentation", "documentation-projection"))
@@ -355,20 +332,23 @@ class PolicyImpactTest(unittest.TestCase):
         self.assertEqual(raised.exception.exit_code, 3)
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.OWNER_NOT_AUDITED")
 
-    def test_successful_empty_impact_requires_current_coverage_certificate(self) -> None:
-        covered = self.load()
-        self.assertEqual(covered.consumers_for("workflow.planning"), ())
-
-        uncovered = replace(
-            covered,
-            coverage=replace(covered.coverage, certificates={}),
-        )
+    def test_custom_manifest_has_no_implicit_coverage_authority(self) -> None:
+        uncovered = self.load()
+        self.assertEqual(uncovered.declared_consumers_for("workflow.planning"), ())
         with self.assertRaises(EngineError) as raised:
             uncovered.consumers_for("workflow.planning")
         self.assertEqual(
             raised.exception.diagnostic.code,
             "POLICY_IMPACT.OWNER_NOT_AUDITED",
         )
+
+    def test_registered_loader_consumes_engine_coverage_authority(self) -> None:
+        covered = load_registered_policy_impact(
+            REPO_ROOT,
+            DEFAULT_SOURCE_REGISTRY,
+            {},
+        )
+        self.assertIn("workflow.planning", covered.covered_owners)
 
     def test_current_planning_graph_has_explicit_consumer_and_alias_closure(self) -> None:
         corpus = load_canonical_standards_corpus(REPO_ROOT)

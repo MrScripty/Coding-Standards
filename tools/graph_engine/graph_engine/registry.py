@@ -13,6 +13,7 @@ from .errors import (
     InvalidEdgeError,
     InvalidGroupError,
     InvalidSourceError,
+    PathEscapeError,
     UnknownEdgeError,
     UnknownGroupError,
     UnknownNodeError,
@@ -49,8 +50,21 @@ class TraversalResult:
 class EdgeRegistry:
     """Immutable index assembled only from explicitly registered sources."""
 
-    def __init__(self, repo_root: Path, sources: Iterable[EdgeSource]) -> None:
+    def __init__(
+        self,
+        repo_root: Path,
+        sources: Iterable[EdgeSource],
+        *,
+        logical_artifacts: Iterable[str] | None = None,
+    ) -> None:
         self.repo_root = repo_root.resolve()
+        self._logical_artifacts = (
+            None
+            if logical_artifacts is None
+            else frozenset(
+                self._logical_artifact(value) for value in logical_artifacts
+            )
+        )
         selected_sources = tuple(sources)
         source_ids = [source.id for source in selected_sources]
         if any(not isinstance(source_id, str) or not source_id for source_id in source_ids):
@@ -62,7 +76,7 @@ class EdgeRegistry:
         groups: dict[str, EdgeGroup] = {}
         edges: dict[str, Edge] = {}
         aliases: dict[str, str] = {}
-        physical_aliases: dict[Path, str] = {}
+        physical_aliases: dict[Path | PurePosixPath, str] = {}
         for source in selected_sources:
             contribution = source.load()
             if not hasattr(contribution, "nodes") or not hasattr(contribution, "groups") or not hasattr(contribution, "edges"):
@@ -210,7 +224,10 @@ class EdgeRegistry:
             )
         aliases[alias] = canonical
 
-    def _artifact_identity(self, alias: str) -> Path | None:
+    def _artifact_identity(self, alias: str) -> Path | PurePosixPath | None:
+        if self._logical_artifacts is not None:
+            logical = self._logical_artifact(alias)
+            return logical if logical in self._logical_artifacts else None
         logical = PurePosixPath(alias)
         if logical.is_absolute() or ".." in logical.parts:
             contained_path(self.repo_root, alias, must_exist=False)
@@ -222,6 +239,21 @@ class EdgeRegistry:
             return candidate.resolve()
         return None
 
+    @staticmethod
+    def _logical_artifact(value: str) -> PurePosixPath:
+        logical = PurePosixPath(value)
+        if (
+            not value
+            or logical.is_absolute()
+            or ".." in logical.parts
+            or value.startswith("./")
+            or str(logical) != value
+        ):
+            raise PathEscapeError(
+                "logical artifact must be a normalized repository path", path=value
+            )
+        return logical
+
     def resolve(self, requested: str) -> str:
         canonical = self.aliases.get(requested)
         if canonical is not None:
@@ -229,6 +261,11 @@ class EdgeRegistry:
         logical = PurePosixPath(requested)
         looks_like_path = "/" in requested or logical.is_absolute() or ".." in logical.parts
         if looks_like_path:
+            if self._logical_artifacts is not None:
+                self._logical_artifact(requested)
+                raise UnknownNodeError(
+                    "logical node is not registered", node=requested
+                )
             candidate = contained_path(self.repo_root, requested, must_exist=True)
             relative = candidate.relative_to(self.repo_root).as_posix()
             return self.aliases.get(relative, relative)

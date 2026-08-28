@@ -1,1586 +1,470 @@
 from __future__ import annotations
 
-import json
+import hashlib
 import shutil
-import subprocess
-import sys
 import tempfile
-import tomllib
 import unittest
-from dataclasses import replace
 from pathlib import Path
 
-from tools.standards_applicability.standards_applicability import compile_fact_schema
-
 from tools.standards_analysis.standards_analysis import (
-    AnalysisError,
-    AuthorizationReference,
-    AnalysisInput,
-    ChangeDescriptor,
-    ChangeKind,
-    CompleteResult,
-    ConsumerDispositionSubmission,
-    EvidenceReference,
-    ObservationClaim,
-    ProvideFactSubmission,
-    PendingResult,
-    ProviderUnavailable,
-    ReviewScope,
-    bind_analysis_kernel,
-    prepare_analysis,
-    advance_analysis,
-    analysis_state_from_contract,
+    ANALYSIS_CODECS,
+    AnalysisExecutionContext,
+    AuthorityEvidence,
+    AuthorizationClaim,
+    C7ProviderUnavailable,
+    ProviderNoObservation,
+    ProviderObservationClaim,
+    ResolvedEvidence,
 )
-from tools.standards_engine.contracts.validate_contracts import (
-    identity as contract_identity,
-    validate,
+from tools.standards_authority.standards_authority import (
+    AUTHORITY_CODECS,
+    AuthorityHandle,
+    AuthorityRepository,
+    MemoryObjectStore,
 )
 from tools.standards_engine.standards_engine import (
-    AgentToolFacade,
+    ENGINE_CODECS,
     AnalysisRequest,
-    AnalysisState as ContractAnalysisState,
-    CompleteResult as ContractCompleteResult,
-    DirectoryAnalysisStateStore,
-    InMemoryAnalysisStateStore,
+    ConsumerDispositionSubmission,
+    CoverageAttestationSubmission,
     InspectCall,
-    PendingResult as ContractPendingResult,
+    ProvideFactSubmission,
+    RejectedResult,
     StandardsEngine,
 )
-REPO_ROOT = Path(__file__).resolve().parents[3]
-SCHEMA = json.loads(
-    (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text(
-        encoding="utf-8"
-    )
+from tools.standards_graph.standards_graph import STANDARDS_GRAPH_CODECS
+from tools.standards_metadata.standards_metadata import (
+    METADATA_CODECS,
+    load_canonical_standards_corpus,
+)
+from tools.standards_policy_impact.standards_policy_impact import (
+    POLICY_IMPACT_CODECS,
 )
 
 
-def authorization(capability: str) -> AuthorizationReference:
-    return AuthorizationReference(
-        f"authorization.{capability}",
-        capability,
-        "sha256:" + "a" * 64,
+REPO_ROOT = Path(__file__).resolve().parents[3]
+POLICY = "workflow.planning.written-plan-applicability"
+FACT_A = "change.fixture-a"
+FACT_B = "change.fixture-b"
+
+
+def _evidence(identifier: str, provider: str = "repository-content") -> AuthorityEvidence:
+    content = identifier.encode("utf-8")
+    return AuthorityEvidence(
+        provider,
+        "1",
+        identifier,
+        "sha256:" + hashlib.sha256(content).hexdigest(),
     )
 
 
-class StaticFactProvider:
-    id = "fixture.fact-provider"
-    contract_version = "1"
-    input_contract = "standards-snapshots"
-    immutable_inputs = ()
-
-    def __init__(self, value: bool) -> None:
-        self.value = value
-
-    def observe(self, requirement, _accepted_snapshot, _proposed_snapshot):
-        return ObservationClaim(
-            {
-                "type": "boolean",
-                "state": "known",
-                "value": self.value,
-            },
-            (
-                EvidenceReference(
-                    f"evidence.provider.{requirement.fact}",
-                    "sha256:" + "6" * 64,
-                    self.id,
-                    self.contract_version,
-                ),
+class ExactAuthorizer:
+    def authorize(self, request):
+        return AuthorizationClaim(
+            "issuer.fixture",
+            1,
+            "grant.fixture",
+            "principal.fixture",
+            request.action,
+            request.subject_kind,
+            request.subject_id,
+            request.capability,
+            tuple(
+                ResolvedEvidence(item, item.id.encode("utf-8"))
+                for item in request.evidence
             ),
+            (ResolvedEvidence(_evidence("authorization"), b"authorization"),),
+            "revocation.fixture",
+            1,
+            (ResolvedEvidence(_evidence("revocation"), b"revocation"),),
         )
 
 
-class UnavailableFactProvider(StaticFactProvider):
-    def observe(self, requirement, _accepted_snapshot, _proposed_snapshot):
-        return ProviderUnavailable(f"Evidence for {requirement.fact} is unavailable.")
+class FixtureProvider:
+    provider_id = "provider.fixture"
+    semantic_revision = 1
+    input_contract = "analysis-authority-roots.v1"
+    evidence_contract = "provider.fixture"
 
+    def __init__(self, *, unavailable: bool = False) -> None:
+        self.unavailable = unavailable
 
-def conditional_authority(engine, fact_declarations, expression):
-    policy = "workflow.planning.written-plan-applicability"
-    authority = engine._analysis_authority()
-    original = authority.policy_impact
-    fact_schema = compile_fact_schema(
-        {
-            "kind": "applicability-fact-schema",
-            "id": "fixture.analysis.conditional-facts",
-            "version": 1,
-            "facts": list(fact_declarations),
-        }
-    )
-    semantics = {
-        edge_id: replace(
-            item,
-            applicability_program=fact_schema.compile(
-                expression if item.source == policy else {"operator": "always"}
-            ),
+    def observe(self, request):
+        if request.fact != FACT_A:
+            return ProviderNoObservation()
+        if self.unavailable:
+            return C7ProviderUnavailable("Fixture evidence is unavailable.")
+        evidence = _evidence("provider-observation", self.evidence_contract)
+        return ProviderObservationClaim(
+            {"type": "boolean", "state": "known", "value": True},
+            (ResolvedEvidence(evidence, b"provider-observation"),),
         )
-        for edge_id, item in original.semantics.items()
-    }
-    return replace(
-        authority,
-        policy_impact=replace(
-            original,
-            semantics=semantics,
-            fact_schema=fact_schema,
-        ),
-    )
-
-
-def boolean_fact(identifier: str) -> dict[str, object]:
-    return {
-        "id": identifier,
-        "semantic_revision": 1,
-        "type": "boolean",
-        "nullable": False,
-        "aliases": [],
-        "meaning": f"Whether {identifier} applies to this change.",
-        "context_kind": "standards-change",
-        "answer_contract": "fact-value.v1",
-        "evidence_contract": "evidence-reference.v1",
-        "authorization_capability": "standards.analyze",
-        "prompt": f"Does {identifier} apply?",
-    }
-
-
-def replace_once(root: Path, relative: str, old: str, new: str) -> None:
-    path = root / relative
-    content = path.read_text(encoding="utf-8")
-    if content.count(old) != 1:
-        raise AssertionError(f"fixture source {relative!r} did not match exactly once")
-    path.write_text(content.replace(old, new), encoding="utf-8")
-
-
-def clear_coverage_attestations(root: Path) -> None:
-    registry_path = (
-        root
-        / "evaluation/standards-effectiveness/policy-coverage/"
-        "attestation-sources.toml"
-    )
-    with registry_path.open("rb") as handle:
-        registry = tomllib.load(handle)
-    for source in registry["sources"]:
-        (root / source).write_text(
-            "schema_version = 2\nattestations = []\n",
-            encoding="utf-8",
-        )
-
-
-def add_fixture_policy(root: Path) -> None:
-    declaration = """
-
-[[policy_unit]]
-id = "workflow.planning.fixture-addition"
-module = "workflow.planning"
-heading_path = ["Fixture Addition"]
-semantic_revision = 1
-"""
-    policy = """
-
-## Fixture Addition
-
-    This policy exists only in the typed analysis integration fixture.
-"""
-    sidecar = root / "evaluation/standards-effectiveness/policy-units/planning.toml"
-    sidecar.write_text(
-        sidecar.read_text(encoding="utf-8") + declaration,
-        encoding="utf-8",
-    )
-    replace_once(
-        root,
-        "workflows/planning.md",
-        "## Completion\n",
-        policy.lstrip("\n") + "\n## Completion\n",
-    )
-    clear_coverage_attestations(root)
-
-
-def remove_fixture_policy(root: Path) -> None:
-    declaration = """[[policy_unit]]
-id = "workflow.planning.projection-completeness"
-module = "workflow.planning"
-heading_path = ["Policy Projection Completeness"]
-semantic_revision = 1
-
-"""
-    tombstone = """[[tombstone]]
-id = "workflow.planning.projection-completeness"
-retired_semantic_revision = 1
-successors = []
-evidence = "review.typed-agent-removal"
-
-"""
-    relationship = """[[relationships]]
-source = "workflow.planning.projection-completeness"
-consumer = "policy-semantic-impact"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Suite enforces the reviewed Planning semantic-impact structure and negative contracts."
-
-"""
-    policy = """## Policy Projection Completeness
-
-A normative change updates every affected distribution and enforcement surface.
-Before changing an audited policy owner, query the neutral repository graph's
-`policy-impact` edge group from the owner's logical ID or repository-path alias
-and review every returned consumer. Audit and add explicit edges for a
-previously uncovered owner before its next normative change. One registered
-source declares each edge; the neutral graph engine derives bidirectional
-indexes and exposes the same declaration from either endpoint without owning
-policy semantics. Group membership does not copy an edge, domain validation
-remains group-specific, and traversal requires explicit permission. The graph
-manifest owns current semantic relations; a change report owns change-specific
-dispositions. Do not infer missing semantic consumers from hyperlinks, lexical
-similarity, routing prerequisites, suite ownership, or another graph; correct
-the authoritative declaration explicitly.
-
-When a rule prescribes a machine protocol, concrete representation, or
-automated gate, its applicable prompts, templates, fixtures, and executable
-support agree before the rule becomes mandatory. Do not require a template,
-prompt, fixture, or executable mechanism for a semantic policy that does not
-use that surface.
-
-Diagnostic outcomes must remain semantically distinguishable. A manual process
-may record classifications in prose or a table; a tool may use typed values.
-Planning does not require one serialized diagnostic representation.
-
-"""
-    sidecar = "evaluation/standards-effectiveness/policy-units/planning.toml"
-    replace_once(root, sidecar, declaration, tombstone)
-    replace_once(
-        root,
-        "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
-        relationship,
-        "",
-    )
-    replace_once(root, "workflows/planning.md", policy, "")
-    clear_coverage_attestations(root)
-
-
-def fixture_repository(root: Path, change: str) -> Path:
-    selected = root / "proposed"
-    shutil.copytree(
-        REPO_ROOT,
-        selected,
-        ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
-    )
-    {"addition": add_fixture_policy, "removal": remove_fixture_policy}[change](selected)
-    return selected
-
-
-def coverage_attestation(obligation: dict[str, object]) -> dict[str, object]:
-    fingerprint = obligation["fingerprint"]
-    requirement_id = next(
-        item["identity"]
-        for item in fingerprint["dependencies"]
-        if item["class"] == "audit"
-    )
-    evidence = {
-        "id": "review.typed-agent-coverage",
-        "digest": "sha256:" + "7" * 64,
-        "provider_contract": "repository-content",
-        "provider_contract_version": "1",
-    }
-    value = {
-        "kind": "coverage-attestation",
-        "handle": {
-            "kind": "coverage-attestation-handle",
-            "id": "coverage-attestation:sha256:" + "0" * 64,
-            "schema_version": 2,
-        },
-        "requirement": {
-            "kind": "coverage-requirement-handle",
-            "id": requirement_id,
-            "schema_version": 2,
-        },
-        "conclusion": "complete",
-        "evidence": [evidence],
-        "explicit_exclusions": [],
-        "rationale": "The bounded fixture horizon was reviewed completely.",
-        "auditor_provenance": "standards.review.audit:typed-agent-fixture",
-        "schema_version": 2,
-    }
-    value["handle"]["id"] = contract_identity(SCHEMA, "CoverageAttestation", value)
-    return value
 
 
 class AnalysisWorkflowTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        cls.temporary = tempfile.TemporaryDirectory()
+        cls.fixture_root = Path(cls.temporary.name) / "conditional"
+        _copy_repository(cls.fixture_root)
+        _install_conditional_policy(cls.fixture_root)
+        cls.repository = _repository()
         cls.engine = StandardsEngine.open_analysis(
-            REPO_ROOT,
-            REPO_ROOT,
-            authorizations=(
-                authorization("standards.analyze"),
-                authorization("standards.review.consumer"),
-                authorization("standards.review.impact"),
-                authorization("standards.review.audit"),
-            ),
+            cls.fixture_root,
+            cls.fixture_root,
+            repository=cls.repository,
+            durable=False,
+            execution_context=AnalysisExecutionContext(ExactAuthorizer()),
         )
+        cls.request = _request(cls.engine)
 
-    def test_prepare_and_resolve_complete_by_exact_obligation_handles(self) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        snapshot = self.engine.snapshot
-        result = self.engine.prepare(
-            AnalysisRequest(
-                snapshot,
-                snapshot,
-                (
-                    ChangeDescriptor(
-                        ChangeKind.MODIFICATION,
-                        (policy,),
-                        (policy,),
-                        ReviewScope("whole-artifact"),
-                    ),
-                ),
-                (),
-            )
-        )
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.temporary.cleanup()
 
-        self.assertIsInstance(result, ContractPendingResult)
-        packet = result
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["PendingResult"],
-            packet.as_contract(),
-            "$packet",
-        )
-        while isinstance(packet, ContractPendingResult):
-            obligation = next(
-                item for item in packet.obligations if item.state == "required"
-            )
-            self.assertEqual(
-                obligation.permitted_submissions,
-                ("consumer-disposition",),
-            )
-            packet = self.engine.resolve(
-                packet.handle,
-                ConsumerDispositionSubmission(
-                    obligation.id,
-                    "reviewed-no-change",
-                    "The unchanged fixture authority needs no consumer edit.",
-                    (
-                        EvidenceReference(
-                            "review.analysis-fixture",
-                            "sha256:" + "b" * 64,
-                            "repository-content",
-                            "1",
-                        ),
-                    ),
-                    obligation.fingerprint,
-                ),
-            )
+    def test_fact_requirements_and_observations_are_publicly_inspectable(self) -> None:
+        parent = self.engine.prepare(self.request)
+        requirement = _requirement(parent, FACT_A)
+        requirement_inspection = self.engine.inspect(InspectCall(requirement.handle))
+        self.assertEqual(requirement_inspection.kind, "fact-requirement-inspection-result")
 
-        self.assertIsInstance(packet, ContractCompleteResult)
-        value = packet.as_contract()
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["CompleteResult"],
-            value,
-            "$report",
+        child = self.engine.resolve(
+            parent.handle, _fact_submission(requirement, True, "fact-a-evidence")
         )
+        state = self.engine.inspect(InspectCall(child.handle))
+        self.assertEqual(state.kind, "analysis-state")
+        self.assertEqual(len(state.fact_observations), 1)
+        observation = state.fact_observations[0]
+        self.assertEqual(observation.requirement, requirement.handle)
         self.assertEqual(
-            set(value["completion"]["reached_consumer_obligations"]),
-            set(value["completion"]["disposition_obligations"]),
-        )
-        state = self.engine.inspect(InspectCall(packet.handle))
-        self.assertIsInstance(state, ContractAnalysisState)
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["AnalysisState"],
-            state.as_contract(),
-            "$state",
-        )
-        self.assertEqual(
-            state.handle.id,
-            contract_identity(SCHEMA, "AnalysisState", state.as_contract()),
+            self.engine.inspect(InspectCall(observation.handle)).kind,
+            "fact-observation-inspection-result",
         )
 
-        reused = self.engine.prepare(
-            AnalysisRequest(
-                snapshot,
-                snapshot,
-                (
-                    ChangeDescriptor(
-                        ChangeKind.MODIFICATION,
-                        (policy,),
-                        (policy,),
-                        ReviewScope("whole-artifact"),
-                    ),
-                ),
-                (),
-                packet.handle,
-            )
+        stale = self.engine.resolve(
+            child.handle, _fact_submission(requirement, False, "stale-evidence")
         )
-        self.assertIsInstance(reused, ContractCompleteResult)
-        self.assertEqual(reused.handle.id, packet.handle.id)
-        self.assertEqual(value["fact_observations"], [])
-
-    def test_one_fact_requirement_re_evaluates_every_dependent_relationship(
-        self,
-    ) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        authority = self.engine._analysis_authority()
-        original = authority.policy_impact
-        selected_edges = {
-            edge_id
-            for edge_id, item in original.semantics.items()
-            if item.source == policy
-        }
-        fact_schema = compile_fact_schema(
-            {
-                "kind": "applicability-fact-schema",
-                "id": "fixture.analysis.facts",
-                "version": 1,
-                "facts": [
-                    {
-                        "id": "change.requires_review",
-                        "semantic_revision": 1,
-                        "type": "boolean",
-                        "nullable": False,
-                        "aliases": [],
-                        "meaning": "Whether this standards change requires consumer review.",
-                        "context_kind": "standards-change",
-                        "answer_contract": "fact-value.v1",
-                        "evidence_contract": "evidence-reference.v1",
-                        "authorization_capability": "standards.analyze",
-                        "prompt": "Does this standards change require consumer review?",
-                    }
-                ],
-            }
-        )
-        semantics = {
-            edge_id: replace(
-                item,
-                applicability_program=fact_schema.compile(
-                    {
-                        "operator": "equals",
-                        "fact": "change.requires_review",
-                        "value": True,
-                    }
-                    if item.source == policy
-                    else {"operator": "always"}
-                ),
-            )
-            for edge_id, item in original.semantics.items()
-        }
-        conditional = replace(
-            original,
-            semantics=semantics,
-            fact_schema=fact_schema,
-        )
-        authority = replace(authority, policy_impact=conditional)
-        request = AnalysisInput(
-            (
-                ChangeDescriptor(
-                    ChangeKind.MODIFICATION,
-                    (policy,),
-                    (policy,),
-                    ReviewScope("whole-artifact"),
-                ),
-            ),
-            (),
-        )
-        analyze_authorization = authorization("standards.analyze")
-        state, first = prepare_analysis(
-            authority,
-            authority,
-            request,
-            authorizations=(analyze_authorization,),
-        )
-
-        self.assertIsInstance(first, PendingResult)
-        self.assertEqual(first.obligations, ())
-        self.assertEqual(len(first.fact_requirements), 1)
-        requirement = first.fact_requirements[0]
-        expected_programs = {
-            f"{side}:{edge_id}"
-            for side in ("accepted", "proposed")
-            for edge_id in selected_edges
-        }
-        self.assertEqual(set(requirement.dependent_programs), expected_programs)
-
-        initial_state = state
-        kernel = bind_analysis_kernel(
-            authority,
-            authority,
-            state,
-            authorizations=(analyze_authorization,),
-        )
-        state, second = advance_analysis(
-            kernel,
-            state,
-            ProvideFactSubmission(
-                requirement.handle,
-                {"type": "boolean", "state": "known", "value": True},
-                (
-                    EvidenceReference(
-                        "evidence.analysis-fixture",
-                        "sha256:" + "c" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-            ),
-            analyze_authorization,
-        )
-
-        self.assertIsInstance(second, PendingResult)
-        self.assertEqual(second.fact_requirements, ())
-        reason_edges = [
-            str(reason["edge"])
-            for obligation in second.obligations
-            if obligation.kind == "consumer-review"
-            for reason in obligation.reasons
-            if reason["kind"] == "policy-impact-edge"
-        ]
-        self.assertEqual(set(reason_edges), selected_edges)
-        self.assertEqual(len(reason_edges), len(set(reason_edges)))
-        inspection_cases = (
-            (
-                first.context.handle,
-                "AnalysisContextInspectionResult",
-                "context",
-                first.context.as_contract(),
-            ),
-            (
-                requirement.handle,
-                "FactRequirementInspectionResult",
-                "requirement",
-                requirement.as_contract(),
-            ),
-            (
-                state.observations[0].handle,
-                "FactObservationInspectionResult",
-                "observation",
-                state.observations[0].as_contract(),
-            ),
-        )
-        with tempfile.TemporaryDirectory() as temporary:
-            store = DirectoryAnalysisStateStore(Path(temporary))
-            store.put(initial_state)
-            store.put(state)
-            cold_engine = StandardsEngine.open_repository(
-                REPO_ROOT,
-                analysis_store=store,
-            )
-            cold_engine._policy_impact = conditional
-            for handle, definition, field, expected in inspection_cases:
-                with self.subTest(definition=definition):
-                    inspected = cold_engine.inspect(InspectCall(handle)).as_contract()
-                    validate(SCHEMA, SCHEMA["$defs"][definition], inspected, "$inspect")
-                    self.assertEqual(inspected[field], expected)
-        repeated_state, repeated = advance_analysis(
-            kernel,
-            initial_state,
-            ProvideFactSubmission(
-                requirement.handle,
-                {"type": "boolean", "state": "known", "value": True},
-                (
-                    EvidenceReference(
-                        "evidence.analysis-fixture",
-                        "sha256:" + "c" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-            ),
-            analyze_authorization,
-        )
-        self.assertEqual(repeated_state.id, state.id)
-        self.assertEqual(repeated.as_contract(), second.as_contract())
-
-        false_state, false_result = prepare_analysis(
-            authority,
-            authority,
-            request,
-            authorizations=(analyze_authorization,),
-        )
-        false_requirement = false_result.fact_requirements[0]
-        false_kernel = bind_analysis_kernel(
-            authority,
-            authority,
-            false_state,
-            authorizations=(analyze_authorization,),
-        )
-        false_state, false_result = advance_analysis(
-            false_kernel,
-            false_state,
-            ProvideFactSubmission(
-                false_requirement.handle,
-                {"type": "boolean", "state": "known", "value": False},
-                (
-                    EvidenceReference(
-                        "evidence.analysis-no-review",
-                        "sha256:" + "e" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-            ),
-            analyze_authorization,
-        )
-        self.assertIsInstance(false_result, CompleteResult)
-        reused_state, reused_result = prepare_analysis(
-            authority,
-            authority,
-            request,
-            false_state,
-            authorizations=(analyze_authorization,),
-        )
-        self.assertIsInstance(reused_result, CompleteResult)
-        self.assertEqual(reused_result.id, false_result.id)
-        self.assertEqual(
-            reused_state.observations,
-            false_state.observations,
-        )
-        changed_authority_state, changed_authority_result = prepare_analysis(
-            authority,
-            authority,
-            request,
-            false_state,
-            authorizations=(
-                AuthorizationReference(
-                    analyze_authorization.id,
-                    analyze_authorization.capability,
-                    "sha256:" + "9" * 64,
-                ),
-            ),
-        )
-        self.assertIsInstance(changed_authority_result, PendingResult)
-        self.assertEqual(len(changed_authority_result.fact_requirements), 1)
-        self.assertEqual(changed_authority_state.observations, ())
-
-    def test_state_identity_distinguishes_equal_work_with_different_evidence(
-        self,
-    ) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        authority = self.engine._analysis_authority()
-        original = authority.policy_impact
-        fact_schema = compile_fact_schema(
-            {
-                "kind": "applicability-fact-schema",
-                "id": "fixture.analysis.identity-facts",
-                "version": 1,
-                "facts": [
-                    {
-                        "id": "change.requires_review",
-                        "semantic_revision": 1,
-                        "type": "boolean",
-                        "nullable": False,
-                        "aliases": [],
-                        "meaning": "Whether consumer review is required.",
-                        "context_kind": "standards-change",
-                        "answer_contract": "fact-value.v1",
-                        "evidence_contract": "evidence-reference.v1",
-                        "authorization_capability": "standards.analyze",
-                        "prompt": "Is consumer review required?",
-                    }
-                ],
-            }
-        )
-        conditional = replace(
-            original,
-            semantics={
-                edge_id: replace(
-                    item,
-                    applicability_program=fact_schema.compile(
-                        {
-                            "operator": "equals",
-                            "fact": "change.requires_review",
-                            "value": True,
-                        }
-                        if item.source == policy
-                        else {"operator": "always"}
-                    ),
-                )
-                for edge_id, item in original.semantics.items()
-            },
-            fact_schema=fact_schema,
-        )
-        authority = replace(authority, policy_impact=conditional)
-        request = AnalysisInput(
-            (
-                ChangeDescriptor(
-                    ChangeKind.MODIFICATION,
-                    (policy,),
-                    (policy,),
-                    ReviewScope("whole-artifact"),
-                ),
-            ),
-            (),
-        )
-        analyze = authorization("standards.analyze")
-        first_state, first = prepare_analysis(
-            authority, authority, request, authorizations=(analyze,)
-        )
-        second_state, second = prepare_analysis(
-            authority, authority, request, authorizations=(analyze,)
-        )
-        first_requirement = first.fact_requirements[0]
-        second_requirement = second.fact_requirements[0]
-        first_kernel = bind_analysis_kernel(
-            authority,
-            authority,
-            first_state,
-            authorizations=(analyze,),
-        )
-        second_kernel = bind_analysis_kernel(
-            authority,
-            authority,
-            second_state,
-            authorizations=(analyze,),
-        )
-        first_state, first_result = advance_analysis(
-            first_kernel,
-            first_state,
-            ProvideFactSubmission(
-                first_requirement.handle,
-                {"type": "boolean", "state": "known", "value": True},
-                (
-                    EvidenceReference(
-                        "evidence.first",
-                        "sha256:" + "1" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-            ),
-            analyze,
-        )
-        second_state, second_result = advance_analysis(
-            second_kernel,
-            second_state,
-            ProvideFactSubmission(
-                second_requirement.handle,
-                {"type": "boolean", "state": "known", "value": True},
-                (
-                    EvidenceReference(
-                        "evidence.second",
-                        "sha256:" + "2" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-            ),
-            analyze,
-        )
-        self.assertEqual(
-            tuple(item.id for item in first_result.obligations),
-            tuple(item.id for item in second_result.obligations),
-        )
-        self.assertNotEqual(first_state.id, second_state.id)
-        self.assertNotEqual(first_result.id, second_result.id)
-
-    def test_prior_analysis_reuse_resolves_through_shared_store(self) -> None:
-        store = InMemoryAnalysisStateStore()
-        capabilities = (
-            authorization("standards.analyze"),
-            authorization("standards.review.consumer"),
-            authorization("standards.review.impact"),
-            authorization("standards.review.audit"),
-        )
-        first_engine = StandardsEngine.open_analysis(
-            REPO_ROOT,
-            REPO_ROOT,
-            authorizations=capabilities,
-            analysis_store=store,
-        )
-        policy = "workflow.planning.written-plan-applicability"
-        request = AnalysisRequest(
-            first_engine.snapshot,
-            first_engine.snapshot,
-            (
-                ChangeDescriptor(
-                    ChangeKind.MODIFICATION,
-                    (policy,),
-                    (policy,),
-                    ReviewScope("whole-artifact"),
-                ),
-            ),
-            (),
-        )
-        result = first_engine.prepare(request)
-        initial_packet = result
-        while isinstance(result, ContractPendingResult):
-            obligation = next(
-                item for item in result.obligations if item.state == "required"
-            )
-            result = first_engine.resolve(
-                result.handle,
-                ConsumerDispositionSubmission(
-                    obligation.id,
-                    "reviewed-no-change",
-                    "The consumer remains correct.",
-                    (
-                        EvidenceReference(
-                            "review.shared-store",
-                            "sha256:" + "7" * 64,
-                            "repository-content",
-                            "1",
-                        ),
-                    ),
-                    obligation.fingerprint,
-                ),
-            )
-        second_engine = StandardsEngine.open_analysis(
-            REPO_ROOT,
-            REPO_ROOT,
-            authorizations=capabilities,
-            analysis_store=store,
-        )
-        seeded = second_engine.prepare(
-            replace(request, prior_analysis=initial_packet.handle)
-        )
-        self.assertIsInstance(seeded, ContractPendingResult)
-        self.assertEqual(seeded.handle.id, initial_packet.handle.id)
-        reused = second_engine.prepare(replace(request, prior_analysis=result.handle))
-        self.assertIsInstance(reused, ContractCompleteResult)
-        self.assertEqual(reused.handle.id, result.handle.id)
-        self.assertEqual(reused.as_contract(), result.as_contract())
-        inspected = second_engine.inspect(InspectCall(reused.handle))
-        self.assertEqual(inspected.handle.id, reused.handle["id"])
-
-    def test_context_inspection_reopens_without_execution_authority(self) -> None:
-        capabilities = (
-            authorization("standards.analyze"),
-            authorization("standards.review.consumer"),
-            authorization("standards.review.impact"),
-            authorization("standards.review.audit"),
-        )
-        policy = "workflow.planning.written-plan-applicability"
-        with tempfile.TemporaryDirectory() as temporary:
-            store = DirectoryAnalysisStateStore(Path(temporary))
-            first_engine = StandardsEngine.open_analysis(
-                REPO_ROOT,
-                REPO_ROOT,
-                authorizations=capabilities,
-                analysis_store=store,
-            )
-            result = first_engine.prepare(
-                AnalysisRequest(
-                    first_engine.snapshot,
-                    first_engine.snapshot,
-                    (
-                        ChangeDescriptor(
-                            ChangeKind.MODIFICATION,
-                            (policy,),
-                            (policy,),
-                            ReviewScope("whole-artifact"),
-                        ),
-                    ),
-                    (),
-                )
-            )
-            cold_engine = StandardsEngine.open_repository(
-                REPO_ROOT,
-                analysis_store=store,
-            )
-
-            inspected = cold_engine.inspect(InspectCall(result.context.handle))
-
-            self.assertEqual(inspected.context.as_contract(), result.context.as_contract())
-
-    def test_analysis_resolves_in_a_new_engine_without_supersession(self) -> None:
-        store = InMemoryAnalysisStateStore()
-        capabilities = (
-            authorization("standards.analyze"),
-            authorization("standards.review.consumer"),
-            authorization("standards.review.impact"),
-            authorization("standards.review.audit"),
-        )
-        first_engine = StandardsEngine.open_analysis(
-            REPO_ROOT,
-            REPO_ROOT,
-            authorizations=capabilities,
-            analysis_store=store,
-        )
-        policy = "workflow.planning.written-plan-applicability"
-        packet = first_engine.prepare(
-            AnalysisRequest(
-                first_engine.snapshot,
-                first_engine.snapshot,
-                (
-                    ChangeDescriptor(
-                        ChangeKind.MODIFICATION,
-                        (policy,),
-                        (policy,),
-                        ReviewScope("whole-artifact"),
-                    ),
-                ),
-                (),
-            )
-        )
-        second_engine = StandardsEngine.open_analysis(
-            REPO_ROOT,
-            REPO_ROOT,
-            authorizations=capabilities,
-            analysis_store=store,
-        )
-        obligation = next(
-            item for item in packet.obligations if item.state == "required"
-        )
-        result = second_engine.resolve(
-            packet.handle,
-            ConsumerDispositionSubmission(
-                obligation.id,
-                "reviewed-no-change",
-                "The consumer remains correct.",
-                (
-                    EvidenceReference(
-                        "review.cold-process",
-                        "sha256:" + "4" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-                obligation.fingerprint,
-            ),
-        )
-        self.assertIn(
-            result.as_contract()["kind"],
-            {"pending-result", "complete-result"},
-        )
-        repeated = first_engine.resolve(
-            packet.handle,
-            ConsumerDispositionSubmission(
-                obligation.id,
-                "reviewed-no-change",
-                "The consumer remains correct.",
-                (
-                    EvidenceReference(
-                        "review.cold-process",
-                        "sha256:" + "4" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-                obligation.fingerprint,
-            ),
-        )
-        self.assertEqual(repeated.as_contract(), result.as_contract())
-
-    def test_analysis_reconstructs_and_advances_in_a_cold_process(self) -> None:
-        capabilities = (
-            authorization("standards.analyze"),
-            authorization("standards.review.consumer"),
-            authorization("standards.review.impact"),
-            authorization("standards.review.audit"),
-        )
-        with tempfile.TemporaryDirectory() as temporary:
-            store_root = Path(temporary) / "states"
-            tool = AgentToolFacade.open_analysis(
-                REPO_ROOT,
-                REPO_ROOT,
-                authorizations=capabilities,
-                analysis_store=DirectoryAnalysisStateStore(store_root),
-            )
-            policy = "workflow.planning.written-plan-applicability"
-            pending = tool.prepare(
-                {
-                    "request": {
-                        "kind": "analysis-request",
-                        "base_snapshot": dict(tool.snapshot),
-                        "proposed_snapshot": dict(tool.snapshot),
-                        "changes": [
-                            {
-                                "kind": "modification",
-                                "accepted_ids": [policy],
-                                "proposed_ids": [policy],
-                                "scope": {"kind": "whole-artifact"},
-                            }
-                        ],
-                        "semantic_proposals": [],
-                        "contract_version": 2,
-                    }
-                }
-            )
-            obligation = next(
-                item for item in pending["obligations"] if item["state"] == "required"
-            )
-            resolve_call = {
-                "analysis": pending["handle"],
-                "submission": {
-                    "kind": "consumer-disposition",
-                    "obligation_id": obligation["id"],
-                    "result": "reviewed-no-change",
-                    "rationale": "The exact consumer was reviewed.",
-                    "evidence": [
-                        {
-                            "id": "review.cold-process-persistent",
-                            "digest": "sha256:" + "5" * 64,
-                            "provider_contract": "repository-content",
-                            "provider_contract_version": "1",
-                        }
-                    ],
-                    "fingerprint": obligation["fingerprint"],
-                },
-            }
-            call_path = Path(temporary) / "resolve.json"
-            call_path.write_text(json.dumps(resolve_call), encoding="utf-8")
-            script = """
-import json
-import sys
-from pathlib import Path
-from tools.standards_analysis.standards_analysis import AuthorizationReference
-from tools.standards_engine.standards_engine import AgentToolFacade, DirectoryAnalysisStateStore
-
-repo = Path(sys.argv[1])
-store = DirectoryAnalysisStateStore(Path(sys.argv[2]))
-authorizations = tuple(
-    AuthorizationReference(
-        f"authorization.{capability}",
-        capability,
-        "sha256:" + "a" * 64,
-    )
-    for capability in (
-        "standards.analyze",
-        "standards.review.consumer",
-        "standards.review.impact",
-        "standards.review.audit",
-    )
-)
-tool = AgentToolFacade.open_analysis(
-    repo,
-    repo,
-    authorizations=authorizations,
-    analysis_store=store,
-)
-arguments = json.loads(Path(sys.argv[3]).read_text(encoding="utf-8"))
-print(json.dumps(tool.resolve(arguments), sort_keys=True, separators=(",", ":")))
-"""
-            completed = subprocess.run(
-                (
-                    sys.executable,
-                    "-c",
-                    script,
-                    str(REPO_ROOT),
-                    str(store_root),
-                    str(call_path),
-                ),
-                cwd=REPO_ROOT,
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-            cold_result = json.loads(completed.stdout)
-            local_result = tool.resolve(resolve_call)
-
-            self.assertEqual(cold_result, local_result)
-            self.assertNotEqual(
-                cold_result["handle"]["id"],
-                pending["handle"]["id"],
-            )
-
-    def test_provider_claim_is_canonically_recorded_by_analysis(self) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        authority = conditional_authority(
-            self.engine,
-            (boolean_fact("change.provider-answer"),),
-            {
-                "operator": "equals",
-                "fact": "change.provider-answer",
-                "value": True,
-            },
-        )
-        state, result = prepare_analysis(
-            authority,
-            authority,
-            AnalysisInput(
-                (
-                    ChangeDescriptor(
-                        ChangeKind.MODIFICATION,
-                        (policy,),
-                        (policy,),
-                        ReviewScope("whole-artifact"),
-                    ),
-                ),
-                (),
-            ),
-            authorizations=(authorization("standards.analyze"),),
-            providers=(StaticFactProvider(False),),
-        )
-        self.assertIsInstance(result, CompleteResult)
-        self.assertEqual(len(state.observations), 1)
-        self.assertEqual(
-            state.observations[0].value["value"],
-            False,
-        )
-
-    def test_provider_unavailability_is_not_treated_as_no_observation(self) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        authority = conditional_authority(
-            self.engine,
-            (boolean_fact("change.provider-answer"),),
-            {
-                "operator": "equals",
-                "fact": "change.provider-answer",
-                "value": True,
-            },
-        )
-        with self.assertRaisesRegex(Exception, "unavailable"):
-            prepare_analysis(
-                authority,
-                authority,
-                AnalysisInput(
-                    (
-                        ChangeDescriptor(
-                            ChangeKind.MODIFICATION,
-                            (policy,),
-                            (policy,),
-                            ReviewScope("whole-artifact"),
-                        ),
-                    ),
-                    (),
-                ),
-                authorizations=(authorization("standards.analyze"),),
-                providers=(UnavailableFactProvider(False),),
-            )
+        self.assertIsInstance(stale, RejectedResult)
+        self.assertEqual(stale.code, "SUBMISSION.NOT_APPLICABLE")
 
     def test_decision_order_normalizes_and_dormant_observations_survive(self) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        authority = conditional_authority(
-            self.engine,
-            (
-                boolean_fact("change.a-review"),
-                boolean_fact("change.b-review"),
-            ),
-            {
-                "operator": "any",
-                "expressions": [
-                    {
-                        "operator": "equals",
-                        "fact": "change.a-review",
-                        "value": True,
-                    },
-                    {
-                        "operator": "equals",
-                        "fact": "change.b-review",
-                        "value": True,
-                    },
-                ],
-            },
-        )
-        analyze = authorization("standards.analyze")
-        request = AnalysisInput(
-            (
-                ChangeDescriptor(
-                    ChangeKind.MODIFICATION,
-                    (policy,),
-                    (policy,),
-                    ReviewScope("whole-artifact"),
-                ),
-            ),
-            (),
-        )
-
-        def transition(order, values):
-            state, result = prepare_analysis(
-                authority,
-                authority,
-                request,
-                authorizations=(analyze,),
-            )
-            kernel = bind_analysis_kernel(
-                authority,
-                authority,
-                state,
-                authorizations=(analyze,),
-            )
+        def transition(order: tuple[str, str], values: dict[str, bool]):
+            result = self.engine.prepare(self.request)
             for fact in order:
-                requirement = next(
-                    item for item in result.fact_requirements if item.fact == fact
+                requirement = _requirement(result, fact)
+                result = self.engine.resolve(
+                    result.handle,
+                    _fact_submission(
+                        requirement,
+                        values[fact],
+                        f"evidence.{fact}",
+                    ),
                 )
-                state, result = advance_analysis(
-                    kernel,
-                    state,
-                    ProvideFactSubmission(
-                        requirement.handle,
-                        {
-                            "type": "boolean",
-                            "state": "known",
-                            "value": values[fact],
-                        },
-                        (
-                            EvidenceReference(
-                                f"evidence.{fact}",
-                                "sha256:"
-                                + ("1" if fact.endswith("a-review") else "2") * 64,
-                                "repository-content",
-                                "1",
-                            ),
-                        ),
-                    ),
-                    analyze,
+            return result, self.engine.inspect(InspectCall(result.handle))
+
+        false_values = {FACT_A: False, FACT_B: False}
+        left, left_state = transition((FACT_B, FACT_A), false_values)
+        right, right_state = transition((FACT_A, FACT_B), false_values)
+
+        self.assertEqual(left.handle, right.handle)
+        self.assertEqual(left.as_contract(), right.as_contract())
+        self.assertEqual(len(left_state.fact_observations), 2)
+        self.assertEqual(left_state.as_contract(), right_state.as_contract())
+        self.assertEqual(left.fact_requirements, ())
+
+        dormant, dormant_state = transition(
+            (FACT_B, FACT_A), {FACT_A: True, FACT_B: False}
+        )
+        self.assertEqual(dormant.fact_requirements, ())
+        self.assertEqual(len(dormant_state.fact_observations), 2)
+
+    def test_provider_claim_is_canonical_and_unavailability_is_typed(self) -> None:
+        views = tuple(_view_handle(item) for item in self.engine.analysis_views)
+        provider_engine = StandardsEngine(
+            self.repository,
+            _view_handle(self.engine.view),
+            views,
+            AnalysisExecutionContext(ExactAuthorizer(), (FixtureProvider(),)),
+        )
+        result = provider_engine.prepare(self.request)
+        state = provider_engine.inspect(InspectCall(result.handle))
+        self.assertEqual(len(state.fact_observations), 1)
+        self.assertIn(
+            "provider_authority",
+            state.fact_observations[0].as_contract(),
+        )
+
+        unavailable_engine = StandardsEngine(
+            self.repository,
+            _view_handle(self.engine.view),
+            views,
+            AnalysisExecutionContext(
+                ExactAuthorizer(), (FixtureProvider(unavailable=True),)
+            ),
+        )
+        unavailable = unavailable_engine.prepare(self.request)
+        self.assertIsInstance(unavailable, RejectedResult)
+        self.assertEqual(unavailable.code, "FACT.PROVIDER_UNAVAILABLE")
+        self.assertEqual(unavailable.outcome, "unavailable")
+
+    def test_consumer_disposition_is_fingerprint_bound_and_persisted(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            proposed = Path(temporary) / "proposed"
+            _copy_repository(proposed)
+            _install_semantic_change(proposed)
+            engine = StandardsEngine.open_analysis(
+                REPO_ROOT,
+                proposed,
+                durable=False,
+                execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+            )
+            request = _semantic_request(engine, proposed)
+            result = engine.prepare(request)
+            while not any(
+                item.kind == "consumer-review" and item.state == "required"
+                for item in result.obligations
+            ):
+                coverage = next(
+                    item
+                    for item in result.obligations
+                    if item.kind == "coverage-audit" and item.state == "required"
                 )
-            return state, result
+                result = engine.resolve(
+                    result.handle,
+                    _coverage_submission(coverage, f"coverage.{coverage.target}"),
+                )
 
-        left, left_result = transition(
-            ("change.a-review", "change.b-review"),
-            {"change.a-review": False, "change.b-review": False},
-        )
-        right, right_result = transition(
-            ("change.b-review", "change.a-review"),
-            {"change.a-review": False, "change.b-review": False},
-        )
-        self.assertEqual(left.id, right.id)
-        self.assertEqual(left_result.as_contract(), right_result.as_contract())
-
-        dormant, dormant_result = transition(
-            ("change.b-review", "change.a-review"),
-            {"change.a-review": True, "change.b-review": False},
-        )
-        self.assertIsInstance(dormant_result, PendingResult)
-        self.assertEqual(dormant_result.fact_requirements, ())
-        self.assertEqual(len(dormant.observations), 2)
-
-    def test_short_circuited_fact_is_not_stored_as_derived_state(self) -> None:
-        policy = "workflow.planning.written-plan-applicability"
-        authority = conditional_authority(
-            self.engine,
-            (
-                boolean_fact("change.a-review"),
-                boolean_fact("change.b-review"),
-            ),
-            {
-                "operator": "any",
-                "expressions": [
-                    {
-                        "operator": "equals",
-                        "fact": "change.a-review",
-                        "value": True,
-                    },
-                    {
-                        "operator": "equals",
-                        "fact": "change.b-review",
-                        "value": True,
-                    },
-                ],
-            },
-        )
-        analyze = authorization("standards.analyze")
-        state, pending = prepare_analysis(
-            authority,
-            authority,
-            AnalysisInput(
-                (
-                    ChangeDescriptor(
-                        ChangeKind.MODIFICATION,
-                        (policy,),
-                        (policy,),
-                        ReviewScope("whole-artifact"),
-                    ),
-                ),
-                (),
-            ),
-            authorizations=(analyze,),
-        )
-        self.assertEqual(
-            tuple(sorted(item.fact for item in pending.fact_requirements)),
-            ("change.a-review", "change.b-review"),
-        )
-        selected = next(
-            item for item in pending.fact_requirements if item.fact == "change.a-review"
-        )
-        kernel = bind_analysis_kernel(
-            authority,
-            authority,
-            state,
-            authorizations=(analyze,),
-        )
-        state, result = advance_analysis(
-            kernel,
-            state,
-            ProvideFactSubmission(
-                selected.handle,
-                {"type": "boolean", "state": "known", "value": True},
-                (
-                    EvidenceReference(
-                        "evidence.short-circuit",
-                        "sha256:" + "5" * 64,
-                        "repository-content",
-                        "1",
-                    ),
-                ),
-            ),
-            analyze,
-        )
-        self.assertIsInstance(result, PendingResult)
-        self.assertEqual(result.fact_requirements, ())
-        self.assertEqual(
-            tuple(str(item.requirement["id"]) for item in state.observations),
-            (selected.id,),
-        )
-        self.assertNotIn("current_requirements", state.as_contract())
-        self.assertNotIn("requirement_history", state.as_contract())
-
-    def test_agent_adapter_uses_structured_prepare_and_resolve(self) -> None:
-        capabilities = (
-            authorization("standards.analyze"),
-            authorization("standards.review.consumer"),
-            authorization("standards.review.impact"),
-            authorization("standards.review.audit"),
-        )
-        tool = AgentToolFacade.open_analysis(
-            REPO_ROOT,
-            REPO_ROOT,
-            authorizations=capabilities,
-        )
-        policy = "workflow.planning.written-plan-applicability"
-        result = tool.prepare(
-            {
-                "request": {
-                    "kind": "analysis-request",
-                    "base_snapshot": dict(tool.snapshot),
-                    "proposed_snapshot": dict(tool.snapshot),
-                    "changes": [
-                        {
-                            "kind": "modification",
-                            "accepted_ids": [policy],
-                            "proposed_ids": [policy],
-                            "scope": {"kind": "whole-artifact"},
-                        }
-                    ],
-                    "semantic_proposals": [],
-                    "contract_version": 2,
-                }
-            }
-        )
-
-        while result["kind"] == "pending-result":
-            obligation = next(
-                item for item in result["obligations"] if item["state"] == "required"
-            )
-            result = tool.resolve(
-                {
-                    "analysis": result["handle"],
-                    "submission": {
-                        "kind": "consumer-disposition",
-                        "obligation_id": obligation["id"],
-                        "result": "reviewed-no-change",
-                        "rationale": "The fixture authority is unchanged.",
-                        "evidence": [
-                            {
-                                "id": "review.agent-analysis-fixture",
-                                "digest": "sha256:" + "d" * 64,
-                                "provider_contract": "repository-content",
-                                "provider_contract_version": "1",
-                            }
-                        ],
-                        "fingerprint": obligation["fingerprint"],
-                    },
-                }
-            )
-
-        self.assertEqual(result["kind"], "complete-result")
-        self.assertTrue(result["completion"]["authorization_valid"])
-
-    def test_agent_adapter_completes_real_addition_and_removal_snapshots(self) -> None:
-        capabilities = (
-            authorization("standards.analyze"),
-            authorization("standards.review.consumer"),
-            authorization("standards.review.impact"),
-            authorization("standards.review.audit"),
-        )
-        with tempfile.TemporaryDirectory() as temporary:
-            proposed_root = fixture_repository(Path(temporary), "addition")
-            tool = AgentToolFacade.open_analysis(
-                REPO_ROOT,
-                proposed_root,
-                authorizations=capabilities,
-            )
-            proposed_snapshot = next(
-                item for item in tool.snapshots if item != tool.snapshot
-            )
-            policy = "workflow.planning.fixture-addition"
-            read = tool.query(
-                {
-                    "snapshot": proposed_snapshot,
-                    "request": {"kind": "read", "target": policy},
-                }
-            )
-            inspected = tool.inspect({"handle": read["policy"]["handle"]})
-            result = tool.prepare(
-                {
-                    "request": {
-                        "kind": "analysis-request",
-                        "base_snapshot": dict(tool.snapshot),
-                        "proposed_snapshot": dict(proposed_snapshot),
-                        "changes": [
-                            {
-                                "kind": "addition",
-                                "accepted_ids": [],
-                                "proposed_ids": [policy],
-                                "proposed_module": "workflow.planning",
-                                "scope": {"kind": "whole-artifact"},
-                            }
-                        ],
-                        "semantic_proposals": [
-                            {
-                                "policy": policy,
-                                "accepted_semantic_revision": None,
-                                "proposed_semantic_revision": 1,
-                                "intent": "Exercise a complete typed addition.",
-                                "structural_digest": inspected["structural_digest"],
-                            }
-                        ],
-                        "contract_version": 2,
-                    }
-                }
-            )
-
-            self.assertEqual(result["kind"], "pending-result")
-            self.assertEqual(
-                [item["change_kind"] for item in result["changed_units"]],
-                ["addition"],
-            )
-            obligation = result["obligations"][0]
-            self.assertEqual(obligation["kind"], "audit-coverage")
-            result = tool.resolve(
-                {
-                    "analysis": result["handle"],
-                    "submission": {
-                        "kind": "coverage-attestation",
-                        "obligation_id": obligation["id"],
-                        "attestation": coverage_attestation(obligation),
-                    },
-                }
-            )
-            self.assertEqual(result["kind"], "complete-result")
-
-        with tempfile.TemporaryDirectory() as temporary:
-            proposed_root = fixture_repository(Path(temporary), "removal")
-            tool = AgentToolFacade.open_analysis(
-                REPO_ROOT,
-                proposed_root,
-                authorizations=capabilities,
-            )
-            proposed_snapshot = next(
-                item for item in tool.snapshots if item != tool.snapshot
-            )
-            policy = "workflow.planning.projection-completeness"
-            result = tool.prepare(
-                {
-                    "request": {
-                        "kind": "analysis-request",
-                        "base_snapshot": dict(tool.snapshot),
-                        "proposed_snapshot": dict(proposed_snapshot),
-                        "changes": [
-                            {
-                                "kind": "removal",
-                                "accepted_ids": [policy],
-                                "proposed_ids": [],
-                                "accepted_module": "workflow.planning",
-                                "scope": {"kind": "whole-artifact"},
-                            }
-                        ],
-                        "semantic_proposals": [],
-                        "contract_version": 2,
-                    }
-                }
-            )
-
-            self.assertEqual(result["kind"], "pending-result")
-            self.assertEqual(
-                [item["change_kind"] for item in result["changed_units"]],
-                ["removal"],
-            )
             obligation = next(
                 item
-                for item in result["obligations"]
-                if item["kind"] == "consumer-review"
+                for item in result.obligations
+                if item.kind == "consumer-review" and item.state == "required"
             )
-            stale_fingerprint = json.loads(json.dumps(obligation["fingerprint"]))
-            stale_fingerprint["dependencies"][0]["digest"] = "sha256:" + "8" * 64
-            rejected = tool.resolve(
+            wrong = obligation.fingerprint.as_contract()
+            wrong["dependencies"][0]["identity"] = "wrong.dependency"
+            rejected = engine.resolve(
+                result.handle,
+                _consumer_submission(obligation, wrong, "wrong-fingerprint"),
+            )
+            self.assertIsInstance(rejected, RejectedResult)
+            self.assertEqual(rejected.code, "SUBMISSION.CONTEXT_MISMATCH")
+
+            successor = engine.resolve(
+                result.handle,
+                _consumer_submission(
+                    obligation,
+                    obligation.fingerprint.as_contract(),
+                    "consumer-evidence",
+                ),
+            )
+            state = engine.inspect(InspectCall(successor.handle))
+            self.assertEqual(
+                {item.obligation_id for item in state.dispositions},
+                {obligation.id},
+            )
+
+
+def _copy_repository(target: Path) -> None:
+    shutil.copytree(
+        REPO_ROOT,
+        target,
+        ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
+    )
+
+
+def _replace_once(path: Path, old: str, new: str) -> None:
+    content = path.read_text(encoding="utf-8")
+    if content.count(old) != 1:
+        raise AssertionError(f"fixture edit did not match exactly once: {path}")
+    path.write_text(content.replace(old, new), encoding="utf-8")
+
+
+def _fact(identifier: str) -> str:
+    return f'''\n[[facts]]
+id = "{identifier}"
+semantic_revision = 1
+type = "boolean"
+nullable = false
+aliases = []
+meaning = "Whether {identifier} applies to this standards change."
+context_kind = "standards-change"
+answer_contract = "fact-value.v1"
+evidence_contract = "evidence-reference.v1"
+authorization_capability = "standards.analyze"
+prompt = "Does {identifier} apply?"
+'''
+
+
+def _install_conditional_policy(root: Path) -> None:
+    facts = root / "evaluation/standards-effectiveness/policy-impact-facts.toml"
+    facts.write_text(
+        'schema_version = 1\nid = "policy-impact.applicability"\n'
+        + _fact(FACT_A)
+        + _fact(FACT_B),
+        encoding="utf-8",
+    )
+    declaration = (
+        root
+        / "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml"
+    )
+    old = f'''source = "{POLICY}"
+consumer = "router"
+relation = "router-projection"
+applicability = {{ operator = "always" }}'''
+    new = f'''source = "{POLICY}"
+consumer = "router"
+relation = "router-projection"
+applicability = {{ operator = "any", expressions = [{{ operator = "equals", fact = "{FACT_A}", value = true }}, {{ operator = "equals", fact = "{FACT_B}", value = true }}] }}'''
+    _replace_once(declaration, old, new)
+
+
+def _install_semantic_change(root: Path) -> None:
+    _replace_once(
+        root / "workflows/planning.md",
+        "A boundary\nor file category alone does not satisfy this condition.",
+        "A boundary\nor file category alone does not satisfy this condition. The reviewed fixture adds one semantic sentence.",
+    )
+
+
+def _repository() -> AuthorityRepository:
+    return AuthorityRepository(
+        MemoryObjectStore(),
+        (
+            AUTHORITY_CODECS,
+            METADATA_CODECS,
+            POLICY_IMPACT_CODECS,
+            STANDARDS_GRAPH_CODECS,
+            ANALYSIS_CODECS,
+            ENGINE_CODECS,
+        ),
+    )
+
+
+def _view_handle(value) -> AuthorityHandle:
+    return AuthorityHandle("standards-authority-view", value.id)
+
+
+def _request(engine: StandardsEngine) -> AnalysisRequest:
+    base, proposed = engine.analysis_views
+    return AnalysisRequest.from_value(
+        {
+            "kind": "analysis-request",
+            "base_view": base.as_contract(),
+            "proposed_view": proposed.as_contract(),
+            "changes": [
                 {
-                    "analysis": result["handle"],
-                    "submission": {
-                        "kind": "consumer-disposition",
-                        "obligation_id": obligation["id"],
-                        "result": "reviewed-no-change",
-                        "rationale": "This submission has stale dependencies.",
-                        "evidence": [
-                            {
-                                "id": "review.typed-removal-stale",
-                                "digest": "sha256:" + "9" * 64,
-                                "provider_contract": "repository-content",
-                                "provider_contract_version": "1",
-                            }
-                        ],
-                        "fingerprint": stale_fingerprint,
-                    },
+                    "kind": "modification",
+                    "accepted_ids": [POLICY],
+                    "proposed_ids": [POLICY],
+                    "scope": {"kind": "whole-artifact"},
                 }
-            )
-            self.assertEqual(rejected["code"], "SUBMISSION.CONTEXT_MISMATCH")
-
-            result = tool.resolve(
-                {
-                    "analysis": result["handle"],
-                    "submission": {
-                        "kind": "consumer-disposition",
-                        "obligation_id": obligation["id"],
-                        "result": "reviewed-no-change",
-                        "rationale": "The accepted consumer was reviewed.",
-                        "evidence": [
-                            {
-                                "id": "review.typed-removal-complete",
-                                "digest": "sha256:" + "b" * 64,
-                                "provider_contract": "repository-content",
-                                "provider_contract_version": "1",
-                            }
-                        ],
-                        "fingerprint": obligation["fingerprint"],
-                    },
-                }
-            )
-            self.assertEqual(result["kind"], "complete-result")
-
-
-class VersionCutoverTest(unittest.TestCase):
-    def test_v9_handles_and_persisted_state_are_unsupported(self) -> None:
-        old_handle = {
-            "kind": "analysis-handle",
-            "id": "analysis:sha256:" + "a" * 64,
-            "schema_version": 2,
+            ],
+            "semantic_proposals": [],
+            "contract_version": 3,
         }
-        with tempfile.TemporaryDirectory() as temporary:
-            store = DirectoryAnalysisStateStore(Path(temporary))
-            with self.assertRaises(AnalysisError) as caught:
-                store.get(old_handle)
-        self.assertEqual(caught.exception.failure.code, "ANALYSIS.UNSUPPORTED_VERSION")
-        self.assertEqual(caught.exception.failure.outcome, "unsupported")
+    )
 
-        with self.assertRaises(AnalysisError) as caught:
-            analysis_state_from_contract(
+
+def _semantic_request(engine: StandardsEngine, proposed_root: Path) -> AnalysisRequest:
+    base, proposed = engine.analysis_views
+    unit = load_canonical_standards_corpus(
+        proposed_root
+    ).policy_unit_corpus.active_by_id(POLICY)
+    assert unit is not None
+    return AnalysisRequest.from_value(
+        {
+            "kind": "analysis-request",
+            "base_view": base.as_contract(),
+            "proposed_view": proposed.as_contract(),
+            "changes": [
                 {
-                    "kind": "analysis-state",
-                    "handle": old_handle,
-                    "provenance": {
-                        "analysis_schema_version": 2,
-                        "interface_schema_version": 9,
-                    },
+                    "kind": "modification",
+                    "accepted_ids": [POLICY],
+                    "proposed_ids": [POLICY],
+                    "scope": {"kind": "whole-artifact"},
                 }
-            )
-        self.assertEqual(caught.exception.failure.code, "ANALYSIS.UNSUPPORTED_VERSION")
-        self.assertEqual(caught.exception.failure.outcome, "unsupported")
-
-        facade = AgentToolFacade(object(), SCHEMA)  # type: ignore[arg-type]
-        old_snapshot = {
-            "kind": "snapshot-handle",
-            "id": "snapshot:sha256:" + "b" * 64,
-            "schema_version": 2,
+            ],
+            "semantic_proposals": [
+                {
+                    "policy": POLICY,
+                    "accepted_semantic_revision": 1,
+                    "proposed_semantic_revision": 2,
+                    "intent": "Exercise one reviewed semantic change.",
+                    "structural_digest": unit.structural_digest,
+                }
+            ],
+            "contract_version": 3,
         }
-        calls = (
-            ("query", facade.query, {"snapshot": old_snapshot}),
-            ("prepare", facade.prepare, {"request": {"base_snapshot": old_snapshot}}),
-            ("resolve", facade.resolve, {"analysis": old_handle}),
-            ("inspect", facade.inspect, {"handle": old_handle}),
-        )
-        for operation, call, arguments in calls:
-            with self.subTest(operation=operation):
-                result = call(arguments)
-                self.assertEqual(result["code"], "INTERFACE.UNSUPPORTED_VERSION")
-                self.assertEqual(result["outcome"], "unsupported")
+    )
+
+
+def _requirement(result, fact: str):
+    return next(
+        item.requirement
+        for item in result.fact_requirements
+        if item.requirement.fact == fact
+    )
+
+
+def _fact_submission(requirement, value: bool, evidence_id: str):
+    evidence = _evidence(evidence_id)
+    return ProvideFactSubmission.from_value(
+        {
+            "kind": "provide-fact",
+            "requirement": requirement.handle.as_contract(),
+            "value": {"type": "boolean", "state": "known", "value": value},
+            "evidence": [_evidence_contract(evidence)],
+        }
+    )
+
+
+def _coverage_submission(obligation, evidence_id: str):
+    requirement = next(
+        item.identity
+        for item in obligation.fingerprint.dependencies
+        if item.class_ == "audit"
+    )
+    evidence = _evidence(evidence_id)
+    return CoverageAttestationSubmission.from_value(
+        {
+            "kind": "coverage-attestation",
+            "obligation_id": obligation.id,
+            "claim": {
+                "requirement": {
+                    "kind": "coverage-requirement-handle",
+                    "id": requirement,
+                    "schema_version": 4,
+                },
+                "conclusion": "complete",
+                "evidence": [_evidence_contract(evidence)],
+                "explicit_exclusions": [],
+                "rationale": "The exact bounded consumer horizon was reviewed.",
+                "auditor_provenance": "principal.fixture",
+            },
+        }
+    )
+
+
+def _consumer_submission(obligation, fingerprint, evidence_id: str):
+    evidence = _evidence(evidence_id)
+    return ConsumerDispositionSubmission.from_value(
+        {
+            "kind": "consumer-disposition",
+            "obligation_id": obligation.id,
+            "result": "reviewed-no-change",
+            "rationale": "The selected consumer was reviewed against the change.",
+            "evidence": [_evidence_contract(evidence)],
+            "fingerprint": fingerprint,
+        }
+    )
+
+
+def _evidence_contract(value: AuthorityEvidence) -> dict[str, object]:
+    return {
+        "id": value.id,
+        "digest": value.digest,
+        "provider_contract": value.provider_contract,
+        "provider_contract_version": value.provider_contract_version,
+    }
 
 
 if __name__ == "__main__":

@@ -99,27 +99,27 @@ rationale = "The engine resolves reads and inspection from the exact captured au
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_analysis/standards_analysis/snapshots.py"
+consumer = "tools/standards_authority/standards_authority/snapshot.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
-rationale = "Snapshot identities bind every interpretation-affecting immutable input."
+rationale = "Content snapshot identities bind exact logical paths and raw bytes."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_analysis/standards_analysis/resolution.py"
+consumer = "tools/standards_analysis/standards_analysis/kernel.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
-rationale = "Analysis transitions consume only declared immutable authority and accepted decisions."
+rationale = "The analysis kernel evaluates only declared immutable authority and dependency-valid accepted decisions."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_analysis/standards_analysis/results.py"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
-rationale = "Result projection is reproducible from one immutable analysis state and authority resolver."
+rationale = "Generated result projections expose the reproducible value derived from one immutable analysis state."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
@@ -136,3 +136,35 @@ relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "Suite enforces the immutable authority closure policy."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/coverage_authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Analysis owns the sole v3 coverage publication, claim validation, authorization, and certificate boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Static verification consumes Engine-composed coverage instead of reconstructing certificate identity."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_engine/tests/test_c7_analysis.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The fixture proves deterministic branching and cold replay through stored authority without live trust replay."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_verifier/tests/test_policy_impact.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The fixture proves custom manifests acquire no implicit coverage and registered verification consumes Engine-composed authority."

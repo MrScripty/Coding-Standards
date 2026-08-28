@@ -75,11 +75,11 @@ rationale = "The generator projects declaration semantics and must not become an
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
-consumer = "tools/standards_engine/contracts/validate_contracts.py"
+consumer = "tools/standards_contracts/standards_contracts/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
-rationale = "The validator executes selected declaration semantics while preserving their declared authority."
+rationale = "The contract compiler delegates schema semantics while preserving their declared authority."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
@@ -219,19 +219,19 @@ rationale = "The public facade enforces declared handle versions at the generate
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
-consumer = "tools/standards_analysis/standards_analysis/snapshots.py"
+consumer = "tools/standards_authority/standards_authority/snapshot.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
-rationale = "Snapshot identity records interface and component versions, so material invalidation scope directly affects its identity contract."
+rationale = "Content snapshot identity binds exact logical paths and raw bytes; interpretation contracts remain separately owned authority."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
-consumer = "tools/standards_analysis/standards_analysis/resolution.py"
+consumer = "tools/standards_analysis/standards_analysis/kernel.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
-rationale = "Analysis reconstruction rejects and projects interface versions through persisted provenance and state identity."
+rationale = "Analysis state identity binds exact material authority and dependency-valid decisions without an umbrella version bag."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
@@ -379,11 +379,11 @@ rationale = "The generator rejects unsupported schema semantics instead of silen
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
-consumer = "tools/standards_engine/contracts/validate_contracts.py"
+consumer = "tools/standards_contracts/standards_contracts/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Contract validation uses the declared dialect and an independent semantic oracle where required."
+rationale = "The compiler validates through the selected Draft 2020-12 implementation and rejects unsupported projection semantics."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
@@ -403,19 +403,19 @@ rationale = "Suite enforces dialect and vocabulary handling."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
-consumer = "tools/standards_metadata/standards_metadata/serialization.py"
+consumer = "tools/standards_identity/standards_identity/encoding.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Identity canonicalization remains distinct from schema instance equality."
+rationale = "Identity v2 preserves exact Unicode scalar values and remains distinct from schema instance equality."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
-consumer = "tools/standards_engine/contracts/validate_contracts.py"
+consumer = "tools/standards_contracts/standards_contracts/runtime.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Schema validation applies the declared schema equality domain rather than identity normalization."
+rationale = "Contract runtime validation preserves JSON Schema instance equality without identity normalization."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -435,11 +435,11 @@ rationale = "Applicability values use their declared domain equality without inh
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
-consumer = "tools/standards_engine/standards_engine/model.py"
+consumer = "tools/standards_authority/standards_authority/repository.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Persisted handles bind the explicit identity canonicalization domain."
+rationale = "Persisted authority verifies opaque semantic handles without substituting schema-instance equality."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -456,3 +456,147 @@ relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "Suite keeps schema, domain, and identity equality claims separate."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/contracts/a1-interface.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The interface contract owns operation roots, capabilities, and independent compatibility versions."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_contracts/standards_contracts/compiler.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The contract compiler closes the reachable schema and interface algebra."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/contracts/generated/agent-tools.json"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Agent tools are a disposable exact projection of the compiled public operations."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/contracts/examples/a1-examples.json"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Authored v11 examples exercise public operation, result, and inspection shapes."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/contracts/README.md"
+relation = "documentation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Contract documentation projects the same authority and validation boundaries."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_engine/standards_engine/rendering.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Rendering exhaustively consumes the generated v11 result algebra."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Private import fixtures prove generated and handwritten consumers use only public roots."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_engine/contracts/identity-fixtures.json"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Identity fixtures own reviewed v2 framing and domain-separated expected values."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_identity/README.md"
+relation = "documentation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Identity documentation projects exact codepoint-preserving framing without domain semantics."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_analysis/standards_analysis/keys.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Analysis constructs typed local ordering, digest, and identity inputs."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_analysis/standards_analysis/coverage.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Coverage constructs domain-owned coverage and fingerprint records."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_analysis/standards_analysis/impact.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Impact constructs versioned trace identity records."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_analysis/standards_analysis/obligations.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Obligations construct versioned decision identity records."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_analysis/standards_analysis/reading.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Reading plans use typed selection keys for ordering and deduplication."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_metadata/standards_metadata/policy_units.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Metadata owns policy-unit structural encoding and raw representation digests."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_metadata/standards_metadata/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The Metadata root no longer exports generic serialization authority."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_analysis/standards_analysis/coverage_authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Authored coverage claims remain separate from Analysis-owned v3 grants, attestations, and certificates."
+
+[[relationships]]
+source = "topic.contracts.declaration-and-semantic-authority"
+consumer = "tools/standards_analysis/tests/test_coverage.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The fixture proves stale claims cannot become current certificates and exact authorization, revocation, and evidence authority is enforced."

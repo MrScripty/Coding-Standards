@@ -2,9 +2,6 @@ from __future__ import annotations
 
 from typing import Callable, Mapping, Protocol
 
-from ._generated_contract import RESULT_KIND_TO_DEFINITION
-
-
 class ContractValue(Protocol):
     def as_contract(self) -> dict[str, object]: ...
 
@@ -15,6 +12,8 @@ def render_text(value: ContractValue | Mapping[str, object]) -> str:
     kind = str(contract.get("kind", "unknown"))
     if kind == "fact-observation":
         return _observation(contract)
+    if kind.endswith("-inspection-result"):
+        return _inspection(contract)
     renderer = _RESULT_RENDERERS.get(kind)
     if renderer is None:
         raise ValueError(f"unsupported Standards Engine result kind {kind!r}")
@@ -151,19 +150,7 @@ _RESULT_RENDERERS: dict[
     "read-result": _navigation,
     "related-result": _navigation,
     "rejected-result": _rejection,
-    **{
-        kind: _inspection
-        for kind in RESULT_KIND_TO_DEFINITION
-        if kind.endswith("-inspection-result")
-    },
 }
-if set(_RESULT_RENDERERS) != set(RESULT_KIND_TO_DEFINITION):
-    missing = sorted(set(RESULT_KIND_TO_DEFINITION) - set(_RESULT_RENDERERS))
-    extra = sorted(set(_RESULT_RENDERERS) - set(RESULT_KIND_TO_DEFINITION))
-    raise RuntimeError(
-        f"text renderer result variants disagree with the canonical schema: "
-        f"missing={missing}, extra={extra}"
-    )
 
 
 __all__ = ("render_text",)

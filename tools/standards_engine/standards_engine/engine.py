@@ -1,399 +1,352 @@
 from __future__ import annotations
 
-import json
-import os
+import base64
+import hashlib
 import tempfile
+import tomllib
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
-from typing import Iterable, Mapping, Protocol
+from typing import Iterable, Iterator, Mapping
 
-from tools.graph_engine.graph_engine import (
-    Direction,
-    Edge,
-    EdgeRegistry,
-    GraphError,
+from tools.graph_engine.graph_engine import Direction, Edge, GraphError
+from tools.standards_analysis.standards_analysis import (
+    ANALYSIS_ROOT_CODEC,
+    AUTHORIZATION_GRANT_CODEC,
+    FACT_OBSERVATION_CODEC,
+    PROVIDER_AUTHORITY_CODEC,
+    AnalysisExecutionContext,
+    AnalysisError,
+    AnalysisFailure,
+    AnalysisContextAuthority,
+    AnalysisEvaluation,
+    AnalysisMaterial,
+    AnalysisRootAuthority,
+    AuthorityEvidence,
+    COVERAGE_HORIZON_CODEC,
+    ROUTER_PROJECTION,
+    ROUTING_PROJECTION_CODEC,
+    CoverageHorizonAuthority,
+    CoverageAttestationAuthority,
+    CoverageCertificateAuthority,
+    CoverageRequirementAuthority,
+    CoverageViewAuthority,
+    DependencyCause,
+    FactObservationAuthority,
+    FactRequirementAuthority,
+    ProviderAuthority,
+    ProviderNoObservation,
+    ProviderObservationClaim,
+    ProviderRequest,
+    C7ProviderUnavailable,
+    ReadingSelection,
+    StoredCoverageAttestation,
+    StoredObservation,
+    AuthorizationRequest,
+    ReviewScope,
+    RoutingBaseCause,
+    RoutingProjectionAuthority,
+    RoutingRuleCause,
+    canonical_target_authority,
+    compile_reading_plan,
+    compile_coverage_definitions,
+    evaluate_analysis,
+    construct_authorization_grant,
+    load_coverage_horizon,
+    load_repository_coverage_authority,
+    load_router_projection,
+    publish_coverage_attestation,
+    publish_coverage_definitions,
+)
+from tools.standards_analysis.standards_analysis import (
+    ChangeDescriptor as DomainChangeDescriptor,
+)
+from tools.standards_analysis.standards_analysis import (
+    ChangeKind as DomainChangeKind,
+)
+from tools.standards_analysis.standards_analysis import (
+    ReviewScope as DomainReviewScope,
+)
+from tools.standards_analysis.standards_analysis import (
+    SemanticProposal as DomainSemanticProposal,
 )
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
     Truth,
 )
-from tools.standards_analysis.standards_analysis import (
-    AnalysisAuthority,
-    AnalysisError,
-    AnalysisFailure,
-    AnalysisInput,
-    AnalysisResult,
-    AnalysisState,
-    AuthorizationReference,
-    ChangeDescriptor as DomainChangeDescriptor,
-    ChangeKind,
-    ConsumerDispositionSubmission as DomainConsumerDispositionSubmission,
-    CoverageAttestation as DomainCoverageAttestation,
-    CoverageAttestationSubmission as DomainCoverageAttestationSubmission,
-    CoverageEvidence,
-    DecisionDependency,
-    DecisionFingerprint,
-    FactObservationProvider,
-    EvidenceReference,
-    ImpactDispositionSubmission as DomainImpactDispositionSubmission,
-    ProvideFactSubmission as DomainProvideFactSubmission,
-    CoverageIndex,
-    DependencyCause,
-    ROUTER_PROJECTION,
-    ReadingSelection,
-    ReviewScope,
-    SemanticProposal as DomainSemanticProposal,
-    RoutingBaseCause,
-    RoutingRuleCause,
-    RouteRule,
-    RouterProjection,
-    advance_analysis,
-    analysis_state_from_contract,
-    bind_analysis_kernel,
-    bind_projection_kernel,
-    canonical_json_bytes,
-    canonical_target_authority,
-    compile_reading_plan,
-    compile_snapshot,
-    compile_coverage,
-    identity,
-    load_router_projection,
-    prepare_analysis,
-    project_analysis,
+from tools.standards_authority.standards_authority import (
+    AUTHORITY_CODECS,
+    CONTENT_SNAPSHOT_CODEC,
+    EXECUTION_CLOSURE_CODEC,
+    AuthorityError,
+    AuthorityHandle,
+    AuthorityReference,
+    AuthorityRepository,
+    CaptureRequest,
+    ContentSnapshot,
+    ExecutionAuthorityRoot,
+    ExecutionClosure,
+    MemoryObjectStore,
+    NativeCaptureSource,
+    RepositoryPath,
+    open_default_store,
 )
-from tools.standards_graph.standards_graph import (
-    POLICY_IMPACT_REGISTRY,
-    METADATA_REQUIRES,
-    standards_navigation_registry,
+from tools.standards_contracts.standards_contracts import MissingValue
+from tools.standards_identity.standards_identity import (
+    IdentityArray,
+    IdentityObject,
+    IdentityValue,
 )
 from tools.standards_metadata.standards_metadata import (
     CANONICAL_MODULE_CORPUS,
+    CANONICAL_STANDARDS_CORPUS_CODEC,
+    METADATA_CODECS,
     POLICY_UNIT_REGISTRY,
-    CanonicalStandardsCorpus,
+    CanonicalCorpusAuthority,
     ModuleMetadata,
     PolicyUnit,
     PolicyUnitTombstone,
-    digest_bytes,
     load_canonical_standards_corpus,
     markdown_structural_digest,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
-    CompiledPolicyImpactSet,
+    COMPILED_POLICY_IMPACT_CODEC,
+    DEFAULT_REGISTRY,
+    POLICY_IMPACT_CODECS,
+    CompiledPolicyImpactAuthority,
     compile_policy_impact,
     thaw,
 )
+from tools.standards_graph.standards_graph import (
+    METADATA_REQUIRES,
+    STANDARDS_GRAPH_CODEC,
+    STANDARDS_GRAPH_CODECS,
+    StandardsGraphAuthority,
+    compile_standards_graph_authority,
+)
 
-from .model import (
-    AnalysisState as AnalysisStateResult,
+from .authority import (
+    ENGINE_CODECS,
+    NAVIGATION_AUTHORITY_CODEC,
+    OPERATION_AUTHORITY_CODEC,
+    POLICY_INSPECTION_AUTHORITY_CODEC,
+    RELATIONSHIP_INSPECTION_AUTHORITY_CODEC,
+    STANDARDS_AUTHORITY_VIEW_CODEC,
+    NavigationAuthority,
+    OperationAuthorityContract,
+    OperationAuthoritySelection,
+    PolicyInspectionAuthority,
+    RelationshipInspectionAuthority,
+    SemanticAuthoritySelection,
+    StandardsAuthorityView,
+    operation_contracts,
+    validate_execution_authority,
+    validate_standards_authority_view,
+)
+from ._generated_contract import (
+    AnalysisContext as ContractAnalysisContext,
     AnalysisContextInspectionResult,
     AnalysisRequest,
+    AnalysisState,
     CertificateInspectionResult,
     CompleteResult,
+    ConsumerDispositionSubmission,
+    ConsumerCoverageCertificate,
+    ContentSnapshotHandle,
+    ContentSnapshotInspectionResult,
+    CoverageAttestation as ContractCoverageAttestation,
     CoverageAttestationInspectionResult,
+    CoverageAttestationSubmission,
+    CoverageAuditRequirement,
+    CoverageAuthorityView,
     CoverageAuthorityViewInspectionResult,
     CoverageRequirementInspectionResult,
+    FactObservation as ContractFactObservation,
     FactObservationInspectionResult,
+    FactRequirement as ContractFactRequirement,
     FactRequirementInspectionResult,
     InspectCall,
     InspectionResult,
     NavigationInspectionResult,
+    NavigationResult,
     PendingResult,
+    ImpactDispositionSubmission,
     PolicyInspectionResult,
     QueryCall,
-    QueryResult,
     ReadRequest,
     ReadResult,
     RejectedResult,
     RelatedRequest,
     RelatedResult,
+    RelationshipInspectionResult,
     RouteRequest,
     RouteResult,
-    RelationshipInspectionResult,
-    SnapshotInspectionResult,
+    ProvideFactSubmission,
+    StandardsAuthorityView as ContractStandardsAuthorityView,
+    StandardsAuthorityViewHandle,
 )
 
 
-NAVIGATION_DOMAIN = "coding-standards:navigation:v3"
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
-
-
-class AnalysisStateStore(Protocol):
-    def put(self, state: AnalysisState) -> Mapping[str, object]: ...
-
-    def get(
-        self,
-        handle: Mapping[str, object],
-    ) -> AnalysisState | None: ...
-
-    def values(self) -> tuple[AnalysisState, ...]: ...
-
-
-class InMemoryAnalysisStateStore:
-    def __init__(self) -> None:
-        self._states: dict[str, AnalysisState] = {}
-
-    def put(self, state: AnalysisState) -> Mapping[str, object]:
-        existing_state = self._states.get(state.id)
-        if existing_state is not None and existing_state != state:
-            raise AnalysisError(
-                AnalysisFailure(
-                    "ANALYSIS.STATE_IDENTITY_COLLISION",
-                    "invalid",
-                    "one analysis-state handle resolved to different content",
-                )
-            )
-        self._states[state.id] = state
-        return state.handle
-
-    def get(
-        self,
-        handle: Mapping[str, object],
-    ) -> AnalysisState | None:
-        state = self._states.get(str(handle.get("id", "")))
-        if state is None or state.handle != dict(handle):
-            return None
-        return state
-
-    def values(self) -> tuple[AnalysisState, ...]:
-        return tuple(self._states[key] for key in sorted(self._states))
-
-
-class DirectoryAnalysisStateStore:
-    """Filesystem Adapter for immutable content-addressed analysis states."""
-
-    def __init__(self, root: Path) -> None:
-        self._root = root.resolve()
-        self._root.mkdir(parents=True, exist_ok=True)
-
-    def put(self, state: AnalysisState) -> Mapping[str, object]:
-        destination = self._path(state.handle)
-        payload = canonical_json_bytes(state.as_contract())
-        if destination.exists():
-            existing = self.get(state.handle)
-            if existing != state:
-                raise AnalysisError(
-                    AnalysisFailure(
-                        "ANALYSIS.STATE_IDENTITY_COLLISION",
-                        "invalid",
-                        "one analysis handle resolved to different content",
-                    )
-                )
-            return state.handle
-        descriptor, temporary_name = tempfile.mkstemp(
-            dir=self._root,
-            prefix=".analysis-",
-            suffix=".tmp",
-        )
-        temporary = Path(temporary_name)
-        try:
-            with os.fdopen(descriptor, "wb") as stream:
-                stream.write(payload)
-                stream.flush()
-                os.fsync(stream.fileno())
-            try:
-                os.link(temporary, destination)
-            except FileExistsError:
-                existing = self.get(state.handle)
-                if existing != state:
-                    raise AnalysisError(
-                        AnalysisFailure(
-                            "ANALYSIS.STATE_IDENTITY_COLLISION",
-                            "invalid",
-                            "one analysis handle resolved to different content",
-                        )
-                    )
-            return state.handle
-        finally:
-            temporary.unlink(missing_ok=True)
-
-    def get(
-        self,
-        handle: Mapping[str, object],
-    ) -> AnalysisState | None:
-        try:
-            source = self._path(handle)
-        except AnalysisError as error:
-            if error.failure.outcome == "unsupported":
-                raise
-            return None
-        if not source.is_file():
-            return None
-        try:
-            value = json.loads(source.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
-            raise AnalysisError(
-                AnalysisFailure(
-                    "ANALYSIS.STATE_CORRUPT",
-                    "unavailable",
-                    "persisted analysis state cannot be decoded",
-                    observed=str(handle.get("id", "")),
-                )
-            ) from error
-        if not isinstance(value, Mapping):
-            raise AnalysisError(
-                AnalysisFailure(
-                    "ANALYSIS.STATE_CORRUPT",
-                    "unavailable",
-                    "persisted analysis state is not an object",
-                    observed=str(handle.get("id", "")),
-                )
-            )
-        return analysis_state_from_contract(value)
-
-    def values(self) -> tuple[AnalysisState, ...]:
-        states = []
-        for source in sorted(self._root.glob("[0-9a-f]" * 64 + ".json")):
-            handle = {
-                "kind": "analysis-handle",
-                "id": f"analysis:sha256:{source.stem}",
-                "schema_version": 3,
-            }
-            state = self.get(handle)
-            if state is not None:
-                states.append(state)
-        return tuple(states)
-
-    def _path(self, handle: Mapping[str, object]) -> Path:
-        identifier = str(handle.get("id", ""))
-        if (
-            handle.get("kind") != "analysis-handle"
-            or not identifier.startswith("analysis:sha256:")
-            or len(identifier) != len("analysis:sha256:") + 64
-            or any(
-                character not in "0123456789abcdef" for character in identifier[-64:]
-            )
-        ):
-            raise AnalysisError(
-                AnalysisFailure(
-                    "ANALYSIS.HANDLE_INVALID",
-                    "invalid",
-                    "analysis handle is malformed",
-                    observed=identifier,
-                )
-            )
-        if handle.get("schema_version") != 3:
-            raise AnalysisError(
-                AnalysisFailure(
-                    "ANALYSIS.UNSUPPORTED_VERSION",
-                    "unsupported",
-                    "analysis handle schema version is unsupported",
-                    observed=str(handle.get("schema_version")),
-                )
-            )
-        return self._root / f"{identifier[-64:]}.json"
+INTERFACE_CONTRACT = "tools/standards_engine/contracts/a1-interface.toml"
+ATTESTATION_REGISTRY = (
+    "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
+)
+AUTHORIZATION_AUTHORITY = (
+    "evaluation/standards-effectiveness/policy-coverage/authorization-authority.toml"
+)
+REVOCATION_AUTHORITY = (
+    "evaluation/standards-effectiveness/policy-coverage/revocations.toml"
+)
+SUPPORTED_OPERATION_KEYS = frozenset(
+    {("route", 2), ("read", 2), ("related", 2), ("analysis", 2)}
+)
 
 
 class StandardsEngine:
-    """Snapshot-bound facade over canonical metadata and declared relationships."""
-
     def __init__(
         self,
-        root: Path,
-        snapshot,
-        corpus: CanonicalStandardsCorpus,
-        graph: EdgeRegistry,
-        router: RouterProjection,
-        policy_impact: CompiledPolicyImpactSet,
-        coverage: CoverageIndex,
-        analysis_store: AnalysisStateStore | None = None,
-        fact_providers: Iterable[FactObservationProvider] = (),
+        repository: AuthorityRepository,
+        view: AuthorityHandle,
+        analysis_views: tuple[AuthorityHandle, AuthorityHandle] | None = None,
+        execution_context: AnalysisExecutionContext | None = None,
     ) -> None:
-        self._root = root.resolve()
-        self._snapshot = snapshot
-        self._corpus = corpus
-        self._modules = corpus.module_corpus
-        self._policies = corpus.policy_unit_corpus
-        self._graph = graph
-        self._router = router
-        self._policy_impact = policy_impact
-        self._coverage = coverage
-        self._analysis_store = analysis_store or InMemoryAnalysisStateStore()
-        self._fact_providers = tuple(sorted(fact_providers, key=lambda item: item.id))
-        self._navigation: dict[str, dict[str, object]] = {}
-        self._sources: dict[str, StandardsEngine] = {str(snapshot.handle["id"]): self}
-        self._authorizations: dict[str, AuthorizationReference] = {}
+        self._repository = repository
+        self._view = view
+        self._analysis_views = analysis_views
+        self._execution_context = execution_context or AnalysisExecutionContext()
 
     @classmethod
     def open_repository(
         cls,
         root: Path,
         *,
-        analysis_store: AnalysisStateStore | None = None,
-        fact_providers: Iterable[FactObservationProvider] = (),
+        repository: AuthorityRepository | None = None,
+        durable: bool = True,
+        execution_context: AnalysisExecutionContext | None = None,
     ) -> StandardsEngine:
         repo_root = root.resolve()
         initial_corpus = load_canonical_standards_corpus(repo_root)
-        initial_policy_impact = compile_policy_impact(
-            repo_root,
-            initial_corpus,
-            POLICY_IMPACT_REGISTRY,
+        initial_impact = compile_policy_impact(repo_root, initial_corpus, DEFAULT_REGISTRY)
+        initial_horizon = load_coverage_horizon(
+            repo_root, initial_corpus, initial_impact
         )
-        initial_coverage = compile_coverage(
-            repo_root,
-            initial_corpus,
-            initial_policy_impact,
+        scope = _authority_scope(
+            repo_root, initial_corpus, initial_impact.input_sources, initial_horizon.input_sources
         )
-        scope = tuple(
-            sorted(
+        snapshot = NativeCaptureSource(repo_root).capture(
+            CaptureRequest(RepositoryPath(path.split("/")) for path in scope)
+        )
+        with _snapshot_workspace(snapshot) as workspace:
+            corpus = load_canonical_standards_corpus(workspace)
+            policy_impact = compile_policy_impact(workspace, corpus, DEFAULT_REGISTRY)
+            router = load_router_projection(workspace, corpus.module_corpus)
+            horizon = load_coverage_horizon(workspace, corpus, policy_impact)
+        if (
+            corpus.module_corpus.members != initial_corpus.module_corpus.members
+            or corpus.policy_unit_corpus.sources
+            != initial_corpus.policy_unit_corpus.sources
+            or policy_impact.input_sources != initial_impact.input_sources
+            or horizon.input_sources != initial_horizon.input_sources
+        ):
+            raise RuntimeError("captured authority closure differs from discovery")
+
+        selected_repository = repository
+        if selected_repository is None:
+            store = open_default_store(repo_root) if durable else MemoryObjectStore()
+            selected_repository = AuthorityRepository(store, _codec_sets())
+
+        snapshot_handle = selected_repository.publish(CONTENT_SNAPSHOT_CODEC, snapshot)
+        metadata_snapshot = selected_repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(
+                snapshot,
                 {
                     CANONICAL_MODULE_CORPUS,
                     POLICY_UNIT_REGISTRY,
-                    ROUTER_PROJECTION,
-                    INTERFACE_SCHEMA,
-                    *initial_policy_impact.input_sources,
-                    *initial_coverage.input_sources,
-                    *initial_corpus.module_corpus.members,
-                    *initial_corpus.policy_unit_corpus.sources,
-                }
+                    *corpus.module_corpus.members,
+                    *corpus.policy_unit_corpus.sources,
+                },
+            ),
+        )
+        policy_snapshot = selected_repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(snapshot, policy_impact.input_sources),
+        )
+        routing_snapshot = selected_repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(snapshot, {ROUTER_PROJECTION, router.source}),
+        )
+        horizon_snapshot = selected_repository.publish(
+            CONTENT_SNAPSHOT_CODEC,
+            _snapshot_subset(snapshot, horizon.input_sources),
+        )
+        metadata_handle = selected_repository.publish(
+            CANONICAL_STANDARDS_CORPUS_CODEC,
+            CanonicalCorpusAuthority(metadata_snapshot.reference, corpus),
+        )
+        policy_handle = selected_repository.publish(
+            COMPILED_POLICY_IMPACT_CODEC,
+            CompiledPolicyImpactAuthority(
+                policy_snapshot.reference,
+                metadata_handle.reference,
+                policy_impact,
+            ),
+        )
+        graph_handle = selected_repository.publish(
+            STANDARDS_GRAPH_CODEC,
+            compile_standards_graph_authority(
+                metadata_handle.reference,
+                policy_handle.reference,
+                corpus,
+                policy_impact,
+            ),
+        )
+        routing_handle = selected_repository.publish(
+            ROUTING_PROJECTION_CODEC,
+            RoutingProjectionAuthority(
+                routing_snapshot.reference, metadata_handle.reference, router
+            ),
+        )
+        horizon_handle = selected_repository.publish(
+            COVERAGE_HORIZON_CODEC,
+            CoverageHorizonAuthority(
+                horizon_snapshot.reference,
+                metadata_handle.reference,
+                policy_handle.reference,
+                graph_handle.reference,
+                horizon,
+            ),
+        )
+        operation_handles = {
+            contract.operation: selected_repository.publish(
+                OPERATION_AUTHORITY_CODEC, contract
             )
+            for contract in operation_contracts()
+        }
+        view_value = StandardsAuthorityView(
+            snapshot_handle.reference,
+            (
+                OperationAuthoritySelection(operation, handle.reference)
+                for operation, handle in operation_handles.items()
+            ),
+            (
+                SemanticAuthoritySelection("metadata", metadata_handle.reference),
+                SemanticAuthoritySelection("routing", routing_handle.reference),
+                SemanticAuthoritySelection("graph", graph_handle.reference),
+                SemanticAuthoritySelection("policy-impact", policy_handle.reference),
+                SemanticAuthoritySelection("coverage", horizon_handle.reference),
+            ),
         )
-        before = compile_snapshot(repo_root, scope)
-        corpus = load_canonical_standards_corpus(repo_root)
-        policy_impact = compile_policy_impact(
-            repo_root,
-            corpus,
-            POLICY_IMPACT_REGISTRY,
+        validate_standards_authority_view(
+            view_value, selected_repository.codec_context(), SUPPORTED_OPERATION_KEYS
         )
-        coverage = compile_coverage(
-            repo_root,
-            corpus,
-            policy_impact,
-            derived_from_snapshot=str(before.handle["id"]),
+        view_handle = selected_repository.publish(
+            STANDARDS_AUTHORITY_VIEW_CODEC, view_value
         )
-        graph = standards_navigation_registry(
-            repo_root,
-            corpus,
-            compiled_policy_impact=policy_impact,
-        )
-        router = load_router_projection(repo_root, corpus.module_corpus)
-        after = compile_snapshot(repo_root, scope)
-        if (
-            before.handle != after.handle
-            or initial_corpus.module_corpus.members != corpus.module_corpus.members
-            or initial_corpus.policy_unit_corpus.sources
-            != corpus.policy_unit_corpus.sources
-            or initial_policy_impact.declaration_digest
-            != policy_impact.declaration_digest
-            or initial_coverage.horizon.digest != coverage.horizon.digest
-            or {
-                subject: certificate.handle
-                for subject, certificate in initial_coverage.certificates.items()
-            }
-            != {
-                subject: certificate.handle
-                for subject, certificate in coverage.certificates.items()
-            }
-        ):
-            raise AnalysisError(before_source_changed_failure())
         return cls(
-            repo_root,
-            after,
-            corpus,
-            graph,
-            router,
-            policy_impact,
-            coverage,
-            analysis_store,
-            fact_providers,
+            selected_repository,
+            view_handle,
+            execution_context=execution_context,
         )
 
     @classmethod
@@ -402,609 +355,1127 @@ class StandardsEngine:
         base_root: Path,
         proposed_root: Path,
         *,
-        authorizations: Iterable[AuthorizationReference] = (),
-        analysis_store: AnalysisStateStore | None = None,
-        fact_providers: Iterable[FactObservationProvider] = (),
+        repository: AuthorityRepository | None = None,
+        durable: bool = True,
+        execution_context: AnalysisExecutionContext | None = None,
     ) -> StandardsEngine:
-        store = analysis_store or InMemoryAnalysisStateStore()
-        providers = tuple(fact_providers)
-        if len({item.id for item in providers}) != len(providers):
-            raise AnalysisError(
-                AnalysisFailure(
-                    "FACT.PROVIDER_DUPLICATE",
-                    "invalid",
-                    "trusted fact providers must be unique by identity",
-                )
+        selected = repository
+        if selected is None:
+            store = (
+                open_default_store(proposed_root.resolve())
+                if durable
+                else MemoryObjectStore()
             )
+            selected = AuthorityRepository(store, _codec_sets())
         base = cls.open_repository(
             base_root,
-            analysis_store=store,
-            fact_providers=providers,
+            repository=selected,
+            durable=durable,
+            execution_context=execution_context,
         )
         proposed = cls.open_repository(
             proposed_root,
-            analysis_store=store,
-            fact_providers=providers,
+            repository=selected,
+            durable=durable,
+            execution_context=execution_context,
         )
-        base._sources = {
-            str(base.snapshot["id"]): base,
-            str(proposed.snapshot["id"]): proposed,
-        }
-        supplied_authorizations = tuple(authorizations)
-        selected = {item.capability: item for item in supplied_authorizations}
-        if len(selected) != len(supplied_authorizations):
-            raise AnalysisError(
-                AnalysisFailure(
-                    "AUTHORIZATION.DUPLICATE_CAPABILITY",
-                    "invalid",
-                    "trusted analysis authorizations must be unique by capability",
-                )
-            )
-        base._authorizations = selected
-        return base
+        return cls(
+            selected,
+            proposed._view,
+            (base._view, proposed._view),
+            execution_context,
+        )
 
     @property
-    def snapshot(self) -> Mapping[str, object]:
-        return self._snapshot.handle
+    def view(self) -> StandardsAuthorityViewHandle:
+        return StandardsAuthorityViewHandle.from_value(_handle(self._view))
 
     @property
-    def snapshots(self) -> tuple[Mapping[str, object], ...]:
+    def snapshot(self) -> ContentSnapshotHandle:
+        view = self._resolved_view()
+        return ContentSnapshotHandle.from_value(_handle_ref(view.content))
+
+    @property
+    def analysis_views(
+        self,
+    ) -> tuple[StandardsAuthorityViewHandle, StandardsAuthorityViewHandle]:
+        if self._analysis_views is None:
+            raise RuntimeError("engine was not composed for analysis")
         return tuple(
-            source.snapshot for _snapshot_id, source in sorted(self._sources.items())
+            StandardsAuthorityViewHandle.from_value(_handle(item))
+            for item in self._analysis_views
+        )  # type: ignore[return-value]
+
+    def covered_policy_units(self) -> frozenset[str]:
+        """Return policy units backed by current repository coverage authority."""
+        view = self._resolved_view()
+        snapshot = self._repository.resolve_reference(view.content).value
+        assert isinstance(snapshot, ContentSnapshot)
+        with _snapshot_workspace(snapshot) as workspace:
+            material = self._analysis_material(view, workspace)
+        return frozenset(
+            subject
+            for subject in material.coverage.subjects
+            if material.coverage.certificate_for(subject) is not None
         )
+
+    def query(self, call: QueryCall) -> NavigationResult | RejectedResult:
+        try:
+            view_handle = _authority_handle(call.view)
+            resolved = self._repository.resolve(view_handle)
+            if not isinstance(resolved.value, StandardsAuthorityView):
+                return self._reject(
+                    "NAVIGATION.INVALID_VIEW",
+                    "invalid",
+                    "The supplied handle does not resolve to a standards authority view.",
+                )
+            validate_standards_authority_view(
+                resolved.value,
+                self._repository.codec_context(),
+                SUPPORTED_OPERATION_KEYS,
+            )
+            request = call.request
+            if isinstance(request, RouteRequest):
+                return self._route(resolved.value, request)
+            if isinstance(request, ReadRequest):
+                return self._read(resolved.value, request)
+            if isinstance(request, RelatedRequest):
+                return self._related(resolved.value, request)
+            return self._reject(
+                "NAVIGATION.UNSUPPORTED_REQUEST",
+                "unsupported",
+                "The query request kind is unsupported.",
+            )
+        except AuthorityError as error:
+            return self._authority_rejection(error)
+        except ApplicabilityError as error:
+            failure = error.failure
+            return self._reject(failure.code, failure.outcome, failure.message)
+        except GraphError as error:
+            return self._reject(
+                error.failure.code,
+                "invalid",
+                error.failure.message,
+            )
 
     def prepare(
-        self,
-        request: AnalysisRequest,
+        self, request: AnalysisRequest
     ) -> PendingResult | CompleteResult | RejectedResult:
-        if request.contract_version != 2:
-            return self._reject(
-                "ANALYSIS.UNSUPPORTED_CONTRACT",
-                "unsupported",
-                "The analysis request contract version is unsupported.",
-            )
-        accepted = self._source_for(request.base_snapshot)
-        proposed = self._source_for(request.proposed_snapshot)
-        if accepted is None or proposed is None:
-            return self._reject(
-                "ANALYSIS.STALE_SNAPSHOT",
-                "stale",
-                "The analysis request references an unavailable snapshot.",
-            )
-        prior_state = None
-        if request.prior_analysis is not None:
-            try:
-                prior_state = self._analysis_store.get(request.prior_analysis)
-            except AnalysisError as error:
-                return self._analysis_rejection(error)
-            if prior_state is None:
-                return self._reject(
-                    "ANALYSIS.PRIOR_ANALYSIS_UNAVAILABLE",
-                    "unavailable",
-                    "The prior immutable analysis is unavailable.",
-                    target=str(request.prior_analysis.get("id", "")),
-                )
-        accepted_authority = accepted._analysis_authority()
-        proposed_authority = proposed._analysis_authority()
         try:
-            state, result = prepare_analysis(
-                accepted_authority,
-                proposed_authority,
-                AnalysisInput(
-                    tuple(self._domain_change(item) for item in request.changes),
-                    tuple(
-                        self._domain_semantic_proposal(item)
-                        for item in request.semantic_proposals
-                    ),
-                ),
-                prior_state,
-                authorizations=self._authorizations.values(),
-                providers=self._fact_providers,
+            base, proposed = self._analysis_view_pair(request)
+            prior = None
+            if not isinstance(request.prior_analysis, MissingValue):
+                resolved = self._repository.resolve(
+                    _authority_handle(request.prior_analysis)
+                )
+                if not isinstance(resolved.value, AnalysisRootAuthority):
+                    return self._reject(
+                        "ANALYSIS.INVALID_PRIOR",
+                        "invalid",
+                        "The prior analysis handle does not resolve to analysis state.",
+                    )
+                prior = resolved.value
+            observations, dispositions, attestations = self._prior_decisions(prior)
+            with self._analysis_materials(base, proposed) as (accepted, candidate):
+                descriptors = tuple(_domain_change(item) for item in request.changes)
+                proposals = tuple(
+                    _domain_proposal(item) for item in request.semantic_proposals
+                )
+                evaluation = self._evaluate_with_providers(
+                    accepted,
+                    candidate,
+                    descriptors,
+                    proposals,
+                    observations,
+                    dispositions,
+                    attestations,
+                )
+            return self._persist_analysis_roots(
+                self._analysis_static_roots(base, proposed), evaluation
             )
         except AnalysisError as error:
-            return self._analysis_rejection(error)
-        self._analysis_store.put(state)
-        return self._contract_analysis_result(result)
+            failure = error.failure
+            return self._reject(failure.code, failure.outcome, failure.message)
+        except AuthorityError as error:
+            return self._authority_rejection(error)
 
     def resolve(
-        self,
-        analysis: Mapping[str, object],
-        submission,
+        self, analysis: object, submission: object
     ) -> PendingResult | CompleteResult | RejectedResult:
-        analysis_id = str(analysis.get("id", ""))
         try:
-            state = self._analysis_store.get(analysis)
+            resolved = self._repository.resolve(_authority_handle(analysis))
+            if not isinstance(resolved.value, AnalysisRootAuthority):
+                return self._reject(
+                    "ANALYSIS.INVALID_HANDLE",
+                    "invalid",
+                    "The supplied handle does not identify analysis state.",
+                )
+            state = resolved.value
+            observations, dispositions, attestations = self._prior_decisions(state)
+            with self._analysis_materials_from_state(state) as (
+                accepted,
+                proposed,
+                static,
+            ):
+                context_projection = _wire(
+                    self._repository.resolve_reference(state.context).value.projection
+                )
+                assert isinstance(context_projection, dict)
+                descriptors = tuple(
+                    _domain_change_from_mapping(item)
+                    for item in context_projection["changes"]
+                )
+                proposals = tuple(
+                    _domain_proposal_from_mapping(item)
+                    for item in context_projection["semantic_proposals"]
+                )
+                current = evaluate_analysis(
+                    self._repository,
+                    accepted,
+                    proposed,
+                    descriptors,
+                    proposals,
+                    observations,
+                    dispositions,
+                    attestations,
+                )
+                observations, dispositions, attestations = self._apply_submission(
+                    submission,
+                    current,
+                    observations,
+                    dispositions,
+                    attestations,
+                    proposed,
+                )
+                successor = self._evaluate_with_providers(
+                    accepted,
+                    proposed,
+                    descriptors,
+                    proposals,
+                    observations,
+                    dispositions,
+                    attestations,
+                )
+            return self._persist_analysis_roots(static, successor)
         except AnalysisError as error:
-            return self._analysis_rejection(error)
-        if state is None:
-            return self._reject(
-                "ANALYSIS.UNAVAILABLE",
-                "unavailable",
-                "The immutable analysis is unavailable from the state store.",
-                target=analysis_id,
-            )
-        accepted = self._source_for(state.base_snapshot)
-        proposed = self._source_for(state.proposed_snapshot)
-        if accepted is None or proposed is None:
-            return self._reject(
-                "ANALYSIS.STALE_SNAPSHOT",
-                "stale",
-                "The analysis references unavailable authority snapshots.",
-            )
+            failure = error.failure
+            return self._reject(failure.code, failure.outcome, failure.message)
+        except AuthorityError as error:
+            return self._authority_rejection(error)
+
+    def inspect(self, call: InspectCall) -> InspectionResult | RejectedResult:
         try:
-            kernel = bind_analysis_kernel(
-                accepted._analysis_authority(),
-                proposed._analysis_authority(),
-                state,
-                authorizations=self._authorizations.values(),
-                providers=self._fact_providers,
-            )
-        except AnalysisError as error:
-            return self._analysis_rejection(error)
-        submission = self._domain_submission(submission)
-        capability = {
-            "provide-fact": "standards.analyze",
-            "consumer-disposition": "standards.review.consumer",
-            "impact-disposition": "standards.review.impact",
-            "coverage-attestation": "standards.review.audit",
-        }.get(submission.kind)
-        authorization = self._authorizations.get(str(capability))
-        if authorization is None:
+            handle = call.handle
+            authority = _authority_handle(handle)
+            resolved = self._repository.resolve(authority)
+            value = resolved.value
+            if isinstance(value, ContentSnapshot):
+                return ContentSnapshotInspectionResult.from_value(
+                    {
+                        "kind": "content-snapshot-inspection-result",
+                        "content_snapshot": _snapshot_projection(authority, value),
+                    }
+                )
+            if isinstance(value, StandardsAuthorityView):
+                return ContractStandardsAuthorityView.from_value(
+                    _view_projection(authority, value)
+                )
+            if isinstance(value, ExecutionClosure):
+                return _execution_closure_projection(authority, value)
+            if isinstance(value, NavigationAuthority):
+                result = self._navigation_projection(authority, value)
+                return NavigationInspectionResult.from_value(
+                    {"kind": "navigation-inspection-result", "navigation": result}
+                )
+            if isinstance(value, PolicyInspectionAuthority):
+                projection = _wire(value.projection)
+                assert isinstance(projection, dict)
+                return PolicyInspectionResult.from_value(
+                    {
+                        "kind": "policy-inspection-result",
+                        "policy": _handle(authority),
+                        **projection,
+                    }
+                )
+            if isinstance(value, RelationshipInspectionAuthority):
+                projection = _wire(value.projection)
+                assert isinstance(projection, dict)
+                relationship = dict(projection["relationship"])
+                relationship["handle"] = _handle(authority)
+                return RelationshipInspectionResult.from_value(
+                    {
+                        "kind": "relationship-inspection-result",
+                        **projection,
+                        "relationship": relationship,
+                    }
+                )
+            if isinstance(value, AnalysisContextAuthority):
+                return AnalysisContextInspectionResult.from_value(
+                    {
+                        "kind": "analysis-context-inspection-result",
+                        "context": self._analysis_context_projection(authority, value),
+                    }
+                )
+            if isinstance(value, FactRequirementAuthority):
+                return FactRequirementInspectionResult.from_value(
+                    {
+                        "kind": "fact-requirement-inspection-result",
+                        "requirement": self._fact_requirement_projection(
+                            authority, value
+                        ),
+                    }
+                )
+            if isinstance(value, FactObservationAuthority):
+                return FactObservationInspectionResult.from_value(
+                    {
+                        "kind": "fact-observation-inspection-result",
+                        "observation": self._fact_observation_projection(
+                            authority, value
+                        ),
+                    }
+                )
+            if isinstance(value, CoverageViewAuthority):
+                return CoverageAuthorityViewInspectionResult.from_value(
+                    {
+                        "kind": "coverage-authority-view-inspection-result",
+                        "coverage_view": self._coverage_view_projection(
+                            authority, value
+                        ),
+                    }
+                )
+            if isinstance(value, CoverageRequirementAuthority):
+                return CoverageRequirementInspectionResult.from_value(
+                    {
+                        "kind": "coverage-requirement-inspection-result",
+                        "requirement": self._coverage_requirement_projection(
+                            authority, value
+                        ),
+                    }
+                )
+            if isinstance(value, CoverageAttestationAuthority):
+                return CoverageAttestationInspectionResult.from_value(
+                    {
+                        "kind": "coverage-attestation-inspection-result",
+                        "attestation": self._coverage_attestation_projection(
+                            authority, value
+                        ),
+                    }
+                )
+            if isinstance(value, CoverageCertificateAuthority):
+                return CertificateInspectionResult.from_value(
+                    {
+                        "kind": "certificate-inspection-result",
+                        "certificate": self._coverage_certificate_projection(
+                            authority, value
+                        ),
+                    }
+                )
+            if isinstance(value, AnalysisRootAuthority):
+                return AnalysisState.from_value(
+                    self._analysis_state_projection(authority, value)
+                )
             return self._reject(
-                "ANALYSIS.UNAUTHORIZED",
-                "unauthorized",
-                "The trusted engine context lacks the required capability.",
-                details={"capability": str(capability)},
+                "NAVIGATION.UNSUPPORTED_HANDLE",
+                "unsupported",
+                "The authority object has no public inspection projection.",
             )
-        try:
-            updated, result = advance_analysis(
-                kernel,
-                state,
-                submission,
-                authorization,
-            )
-        except AnalysisError as error:
-            return self._analysis_rejection(error)
-        self._analysis_store.put(updated)
-        return self._contract_analysis_result(result)
+        except AuthorityError as error:
+            return self._authority_rejection(error)
 
-    @staticmethod
-    def _contract_analysis_result(
-        result: AnalysisResult,
-    ) -> PendingResult | CompleteResult:
-        value = result.as_contract()
-        if value.get("kind") == "pending-result":
-            return PendingResult.from_value(value)
-        if value.get("kind") == "complete-result":
-            return CompleteResult.from_value(value)
-        raise RuntimeError(
-            f"analysis produced unsupported result kind {value.get('kind')!r}"
-        )
-
-    def query(self, call: QueryCall) -> QueryResult:
-        source = self._source_for(call.snapshot)
-        if source is None:
-            return self._reject(
-                "NAVIGATION.STALE_SNAPSHOT",
-                "stale",
-                "The request is not bound to an issued engine snapshot.",
-            )
-        if source is not self:
-            return source.query(call)
-        stale = self._require_snapshot(call.snapshot)
-        if stale is not None:
-            return stale
-        if isinstance(call.request, RouteRequest):
-            if not isinstance(call.request.facts, Mapping):
-                return self._invalid_request("route facts must be an object")
-            return self._route(call.request)
-        if isinstance(call.request, ReadRequest):
-            if not isinstance(call.request.target, str) or not call.request.target:
-                return self._invalid_request("read target must be a non-empty string")
-            return self._read(call.request)
-        if isinstance(call.request, RelatedRequest):
-            invalid = self._validate_related_request(call.request)
-            if invalid is not None:
-                return invalid
-            return self._related(call.request)
-        return self._reject(
-            "NAVIGATION.UNSUPPORTED_REQUEST",
-            "unsupported",
-            "The query request kind is not implemented.",
-        )
-
-    def inspect(self, call: InspectCall) -> InspectionResult:
-        handle = dict(call.handle)
-        kind = handle.get("kind")
-        if kind == "analysis-handle":
-            try:
-                state = self._analysis_store.get(handle)
-            except AnalysisError as error:
-                return self._analysis_rejection(error)
-            if state is None:
-                return self._reject(
-                    "ANALYSIS.UNKNOWN_HANDLE",
-                    "unavailable",
-                    "The immutable analysis is unavailable from the state store.",
+    def _analysis_view_pair(
+        self, request: AnalysisRequest
+    ) -> tuple[StandardsAuthorityView, StandardsAuthorityView]:
+        if request.contract_version != 3:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.UNSUPPORTED_CONTRACT",
+                    "unsupported",
+                    "The analysis request contract revision is unsupported.",
                 )
-            return AnalysisStateResult.from_value(state.as_contract())
-        embedded = handle.get("snapshot")
-        if isinstance(embedded, Mapping):
-            source = self._source_for(embedded)
-            if source is None:
-                return self._reject(
-                    "NAVIGATION.STALE_SNAPSHOT",
-                    "stale",
-                    "The handle references an unavailable snapshot.",
-                )
-            if source is not self:
-                return source.inspect(call)
-        if kind == "snapshot-handle":
-            source = self._source_for(handle)
-            if source is None:
-                return self._reject(
-                    "NAVIGATION.STALE_SNAPSHOT",
-                    "stale",
-                    "The handle references an unavailable snapshot.",
-                )
-            if source is not self:
-                return source.inspect(call)
-            stale = self._require_snapshot(handle)
-            if stale is not None:
-                return stale
-            return SnapshotInspectionResult.from_value(
-                {
-                    "kind": "snapshot-inspection-result",
-                    "snapshot": self._snapshot.inspection,
-                }
             )
-        if kind == "policy-handle":
-            stale = self._require_snapshot_value(handle.get("snapshot"))
-            if stale is not None:
-                return stale
-            return self._inspect_policy(str(handle.get("id", "")))
-        if kind == "relationship-handle":
-            stale = self._require_snapshot_value(handle.get("snapshot"))
-            if stale is not None:
-                return stale
-            return self._inspect_relationship(str(handle.get("id", "")))
-        if kind == "navigation-handle":
-            stale = self._require_snapshot_value(handle.get("snapshot"))
-            if stale is not None:
-                return stale
-            navigation_id = str(handle.get("id", ""))
-            value = self._navigation.get(navigation_id)
-            if value is None:
-                return self._reject(
-                    "NAVIGATION.UNKNOWN_HANDLE",
-                    "unavailable",
-                    "The navigation result is not available from this engine instance.",
-                    target=navigation_id,
-                )
-            return NavigationInspectionResult.from_value(
-                {
-                    "kind": "navigation-inspection-result",
-                    "navigation": value,
-                    "provenance": self._snapshot.inspection["versions"],
-                }
-            )
-        if kind == "certificate-handle":
-            certificate_id = str(handle.get("id", ""))
-            certificates = {
-                certificate.handle: certificate
-                for source in self._sources.values()
-                for certificate in source._coverage.certificates.values()
-            }
-            certificate = certificates.get(certificate_id)
-            if certificate is None:
-                return self._reject(
-                    "COVERAGE.UNKNOWN_CERTIFICATE",
-                    "unavailable",
-                    "The coverage certificate is unavailable from the bound snapshots.",
-                    target=certificate_id,
-                )
-            return CertificateInspectionResult.from_value(
-                {
-                    "kind": "certificate-inspection-result",
-                    "certificate": certificate.as_projection(),
-                }
-            )
-        coverage_inspection = self._inspect_coverage_artifact(kind, handle)
-        if coverage_inspection is not None:
-            return coverage_inspection
-        analysis_inspection = self._inspect_analysis_artifact(kind, handle)
-        if analysis_inspection is not None:
-            return analysis_inspection
-        return self._reject(
-            "NAVIGATION.UNSUPPORTED_HANDLE",
-            "unsupported",
-            "The handle kind is not inspectable by the navigation slice.",
-        )
-
-    def _inspect_coverage_artifact(
-        self,
-        kind: object,
-        handle: Mapping[str, object],
-    ) -> InspectionResult | None:
-        identifier = str(handle.get("id", ""))
-        definitions = {
-            "coverage-authority-view-handle": (
-                "views",
-                "coverage_view",
-                "coverage-authority-view-inspection-result",
-                CoverageAuthorityViewInspectionResult,
-            ),
-            "coverage-requirement-handle": (
-                "requirements",
-                "requirement",
-                "coverage-requirement-inspection-result",
-                CoverageRequirementInspectionResult,
-            ),
-            "coverage-attestation-handle": (
-                "attestations",
-                "attestation",
-                "coverage-attestation-inspection-result",
-                CoverageAttestationInspectionResult,
-            ),
-        }
-        definition = definitions.get(str(kind))
-        if definition is None:
-            return None
-        collection_name, field, result_kind, result_type = definition
-        artifacts = {
-            artifact.handle: artifact
-            for source in self._sources.values()
-            for artifact in getattr(source._coverage, collection_name).values()
-        }
-        artifact = artifacts.get(identifier)
-        if artifact is None:
-            return self._reject(
-                "COVERAGE.UNKNOWN_ARTIFACT",
-                "unavailable",
-                "The coverage artifact is unavailable from the bound snapshots.",
-                target=identifier,
-            )
-        return result_type.from_value(
-            {"kind": result_kind, field: artifact.as_projection()}
-        )
-
-    def _inspect_analysis_artifact(
-        self,
-        kind: object,
-        handle: Mapping[str, object],
-    ) -> InspectionResult | None:
-        definitions = {
-            "analysis-context-handle": (
-                "context",
-                "analysis-context-inspection-result",
-                AnalysisContextInspectionResult,
-            ),
-            "fact-requirement-handle": (
-                "requirement",
-                "fact-requirement-inspection-result",
-                FactRequirementInspectionResult,
-            ),
-            "fact-observation-handle": (
-                "observation",
-                "fact-observation-inspection-result",
-                FactObservationInspectionResult,
-            ),
-        }
-        definition = definitions.get(str(kind))
-        if definition is None:
-            return None
-        identifier = str(handle.get("id", ""))
-        candidates: list[dict[str, object]] = []
-        for state in self._analysis_store.values():
-            if kind == "fact-observation-handle":
-                candidates.extend(
-                    observation.as_contract()
-                    for observation in state.observations
-                    if observation.handle["id"] == identifier
-                )
-                continue
-            result = self._project_stored_analysis(state)
-            if result is None:
-                continue
-            if kind == "analysis-context-handle":
-                context = result.context.as_contract()
-                if context["handle"]["id"] == identifier:
-                    candidates.append(context)
-                continue
-            candidates.extend(
-                requirement.as_contract()
-                for requirement in getattr(result, "fact_requirements", ())
-                if requirement.handle["id"] == identifier
-            )
-        unique = {
-            canonical_json_bytes(candidate): candidate for candidate in candidates
-        }
-        if not unique:
-            return self._reject(
-                "ANALYSIS.UNKNOWN_ARTIFACT",
-                "unavailable",
-                "The analysis artifact is unavailable from persisted immutable states.",
-                target=identifier,
-            )
-        if len(unique) != 1:
-            raise RuntimeError(
-                "one analysis artifact handle resolved to different canonical content"
-            )
-        field, result_kind, result_type = definition
-        return result_type.from_value(
-            {"kind": result_kind, field: next(iter(unique.values()))}
-        )
-
-    def _project_stored_analysis(
-        self,
-        state: AnalysisState,
-    ) -> AnalysisResult | None:
-        accepted = self._source_for(state.base_snapshot)
-        proposed = self._source_for(state.proposed_snapshot)
-        if accepted is None or proposed is None:
-            return None
-        kernel = bind_projection_kernel(
-            accepted._analysis_authority(),
-            proposed._analysis_authority(),
-            state,
-        )
-        return project_analysis(kernel, state)
-
-    def _analysis_authority(self) -> AnalysisAuthority:
-        return AnalysisAuthority(
-            self._root,
-            self._snapshot.handle,
-            self._corpus,
-            self._graph,
-            self._policy_impact,
-            self._coverage,
-        )
-
-    @staticmethod
-    def _domain_change(value) -> DomainChangeDescriptor:
-        if isinstance(value, DomainChangeDescriptor):
-            return value
-        scope = value.scope
-        return DomainChangeDescriptor(
-            ChangeKind(value.kind),
-            tuple(value.accepted_ids),
-            tuple(value.proposed_ids),
-            ReviewScope(scope.kind, tuple(getattr(scope, "heading_path", ()))),
-            value.accepted_module,
-            value.proposed_module,
-        )
-
-    @staticmethod
-    def _domain_semantic_proposal(value) -> DomainSemanticProposal:
-        if isinstance(value, DomainSemanticProposal):
-            return value
-        return DomainSemanticProposal(
-            value.policy,
-            value.accepted_semantic_revision,
-            value.proposed_semantic_revision,
-            value.intent,
-            value.structural_digest,
-        )
-
-    @classmethod
-    def _domain_submission(cls, value):
-        if isinstance(
-            value,
-            (
-                DomainProvideFactSubmission,
-                DomainConsumerDispositionSubmission,
-                DomainImpactDispositionSubmission,
-                DomainCoverageAttestationSubmission,
-            ),
+        base_handle = _authority_handle(request.base_view)
+        proposed_handle = _authority_handle(request.proposed_view)
+        base = self._repository.resolve(base_handle).value
+        proposed = self._repository.resolve(proposed_handle).value
+        if not isinstance(base, StandardsAuthorityView) or not isinstance(
+            proposed, StandardsAuthorityView
         ):
-            return value
-        if value.kind == "provide-fact":
-            return DomainProvideFactSubmission(
-                dict(value.requirement),
-                dict(value.value),
-                cls._domain_evidence(value.evidence),
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.INVALID_VIEW",
+                    "invalid",
+                    "Analysis requires two standards authority views.",
+                )
             )
-        if value.kind in {"consumer-disposition", "impact-disposition"}:
-            selected = (
-                DomainConsumerDispositionSubmission
-                if value.kind == "consumer-disposition"
-                else DomainImpactDispositionSubmission
+        for view in (base, proposed):
+            validate_standards_authority_view(
+                view, self._repository.codec_context(), SUPPORTED_OPERATION_KEYS
             )
-            return selected(
-                value.obligation_id,
-                value.result,
-                value.rationale,
-                cls._domain_evidence(value.evidence),
-                DecisionFingerprint(
-                    value.fingerprint.decision_kind,
-                    value.fingerprint.decision_contract,
-                    tuple(
-                        DecisionDependency(
-                            item.class_,
-                            item.identity,
-                            item.digest,
+        base_contract = next(
+            item.authority
+            for item in base.operation_contracts
+            if item.operation == "analysis"
+        )
+        proposed_contract = next(
+            item.authority
+            for item in proposed.operation_contracts
+            if item.operation == "analysis"
+        )
+        if base_contract != proposed_contract:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.OPERATION_CONTRACT_MISMATCH",
+                    "unsupported",
+                    "Accepted and proposed views select different analysis contracts.",
+                )
+            )
+        return base, proposed
+
+    @contextmanager
+    def _analysis_materials(
+        self,
+        base: StandardsAuthorityView,
+        proposed: StandardsAuthorityView,
+    ) -> Iterator[tuple[AnalysisMaterial, AnalysisMaterial]]:
+        with ExitStack() as stack:
+            base_snapshot = self._repository.resolve_reference(base.content).value
+            proposed_snapshot = self._repository.resolve_reference(proposed.content).value
+            assert isinstance(base_snapshot, ContentSnapshot)
+            assert isinstance(proposed_snapshot, ContentSnapshot)
+            base_root = stack.enter_context(_snapshot_workspace(base_snapshot))
+            proposed_root = stack.enter_context(_snapshot_workspace(proposed_snapshot))
+            yield (
+                self._analysis_material(base, base_root),
+                self._analysis_material(proposed, proposed_root),
+            )
+
+    def _analysis_material(
+        self, view: StandardsAuthorityView, root: Path
+    ) -> AnalysisMaterial:
+        references = {item.role: item.authority for item in view.authorities}
+        return self._analysis_material_from_roles(
+            references, root, include_repository_claims=True
+        )
+
+    def _analysis_material_from_roles(
+        self,
+        references: Mapping[str, AuthorityReference],
+        root: Path,
+        *,
+        include_repository_claims: bool = False,
+    ) -> AnalysisMaterial:
+        metadata = self._repository.resolve_reference(references["metadata"]).value
+        impact = self._repository.resolve_reference(references["policy-impact"]).value
+        graph = self._repository.resolve_reference(references["graph"]).value
+        horizon = self._repository.resolve_reference(references["coverage"]).value
+        assert isinstance(metadata, CanonicalCorpusAuthority)
+        assert isinstance(impact, CompiledPolicyImpactAuthority)
+        assert isinstance(graph, StandardsGraphAuthority)
+        assert isinstance(horizon, CoverageHorizonAuthority)
+        definitions = compile_coverage_definitions(
+            metadata.corpus, impact.compiled, horizon.horizon
+        )
+        coverage = publish_coverage_definitions(
+            self._repository,
+            definitions,
+            metadata=references["metadata"],
+            policy_impact=references["policy-impact"],
+            graph=references["graph"],
+            horizon=references["coverage"],
+        )
+        if include_repository_claims:
+            coverage = load_repository_coverage_authority(
+                root,
+                self._repository,
+                coverage,
+            )
+        return AnalysisMaterial(
+            root,
+            references["metadata"],
+            references["graph"],
+            references["policy-impact"],
+            references["coverage"],
+            metadata.corpus,
+            graph.registry(),
+            impact.compiled,
+            coverage,
+        )
+
+    @contextmanager
+    def _analysis_materials_from_state(
+        self, state: AnalysisRootAuthority
+    ) -> Iterator[
+        tuple[
+            AnalysisMaterial,
+            AnalysisMaterial,
+            tuple[
+                AuthorityReference,
+                Mapping[str, AuthorityReference],
+                Mapping[str, AuthorityReference],
+            ],
+        ]
+    ]:
+        closure = self._repository.resolve_reference(state.closure).value
+        if not isinstance(closure, ExecutionClosure) or closure.operation != "analysis":
+            raise RuntimeError("analysis state closure is unavailable or contradictory")
+        operation = tuple(
+            item.reference
+            for item in closure.roots
+            if item.role == "operation-contract"
+        )
+        if len(operation) != 1:
+            raise RuntimeError("analysis closure must select one operation contract")
+        contract = self._repository.resolve_reference(operation[0]).value
+        assert isinstance(contract, OperationAuthorityContract)
+        validate_execution_authority(
+            closure, operation[0], contract, ("accepted", "proposed")
+        )
+        selected: dict[str, dict[str, AuthorityReference]] = {
+            "accepted": {},
+            "proposed": {},
+        }
+        for root in closure.roots:
+            if root.side in selected and root.role in {
+                "metadata",
+                "graph",
+                "policy-impact",
+                "coverage",
+            }:
+                selected[root.side][root.role] = root.reference
+        expected = {"metadata", "graph", "policy-impact", "coverage"}
+        if any(set(roles) != expected for roles in selected.values()):
+            raise RuntimeError("analysis closure static role set is incomplete")
+        static = operation[0], selected["accepted"], selected["proposed"]
+        with ExitStack() as stack:
+            workspaces = {}
+            for side, roles in selected.items():
+                metadata = self._repository.resolve_reference(roles["metadata"]).value
+                assert isinstance(metadata, CanonicalCorpusAuthority)
+                snapshot = self._repository.resolve_reference(metadata.content).value
+                assert isinstance(snapshot, ContentSnapshot)
+                workspaces[side] = stack.enter_context(_snapshot_workspace(snapshot))
+            yield (
+                self._analysis_material_from_roles(
+                    selected["accepted"], workspaces["accepted"]
+                ),
+                self._analysis_material_from_roles(
+                    selected["proposed"], workspaces["proposed"]
+                ),
+                static,
+            )
+
+    def _prior_decisions(
+        self, prior: AnalysisRootAuthority | None
+    ) -> tuple[
+        tuple[StoredObservation, ...],
+        tuple[Mapping[str, object], ...],
+        tuple[StoredCoverageAttestation, ...],
+    ]:
+        if prior is None:
+            return (), (), ()
+        observations = []
+        for reference in prior.observations:
+            value = self._repository.resolve_reference(reference).value
+            if not isinstance(value, FactObservationAuthority):
+                raise RuntimeError("analysis observation resolved to the wrong owner type")
+            observations.append(StoredObservation(reference, value))
+        attestations = []
+        for reference in prior.attestations:
+            value = self._repository.resolve_reference(reference).value
+            if not isinstance(value, CoverageAttestationAuthority):
+                raise RuntimeError("analysis attestation resolved to the wrong owner type")
+            attestations.append(StoredCoverageAttestation(reference, value))
+        projection = _wire(prior.projection)
+        assert isinstance(projection, dict)
+        dispositions = tuple(
+            item
+            for raw in projection["dispositions"]
+            for item in (dict(raw),)
+        )
+        return tuple(observations), dispositions, tuple(attestations)
+
+    def _evaluate_with_providers(
+        self,
+        accepted: AnalysisMaterial,
+        proposed: AnalysisMaterial,
+        descriptors: tuple[DomainChangeDescriptor, ...],
+        proposals: tuple[DomainSemanticProposal, ...],
+        observations: tuple[StoredObservation, ...],
+        dispositions: tuple[Mapping[str, object], ...],
+        attestations: tuple[StoredCoverageAttestation, ...],
+    ) -> AnalysisEvaluation:
+        while True:
+            evaluation = evaluate_analysis(
+                self._repository,
+                accepted,
+                proposed,
+                descriptors,
+                proposals,
+                observations,
+                dispositions,
+                attestations,
+            )
+            selected = self._provider_observation(
+                evaluation, accepted, proposed
+            )
+            if selected is None:
+                return evaluation
+            by_requirement = {item.value.requirement: item for item in observations}
+            if selected.value.requirement in by_requirement:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "FACT.PROVIDER_CONFLICT",
+                        "invalid",
+                        "A provider attempted to replace an existing observation.",
+                    )
+                )
+            by_requirement[selected.value.requirement] = selected
+            observations = tuple(
+                sorted(by_requirement.values(), key=lambda item: item.reference)
+            )
+
+    def _provider_observation(
+        self,
+        evaluation: AnalysisEvaluation,
+        accepted: AnalysisMaterial,
+        proposed: AnalysisMaterial,
+    ) -> StoredObservation | None:
+        if not self._execution_context.providers:
+            return None
+        static_inputs = tuple(
+            sorted(
+                {
+                    accepted.metadata,
+                    accepted.graph_authority,
+                    accepted.policy_impact_authority,
+                    accepted.coverage_authority,
+                    proposed.metadata,
+                    proposed.graph_authority,
+                    proposed.policy_impact_authority,
+                    proposed.coverage_authority,
+                    evaluation.context,
+                }
+            )
+        )
+        for requirement in evaluation.pending_requirements:
+            claims = []
+            inputs = tuple(sorted({*static_inputs, requirement.reference}))
+            request = ProviderRequest(
+                requirement.reference, requirement.fact.id, inputs
+            )
+            for provider in self._execution_context.providers:
+                outcome = provider.observe(request)
+                if isinstance(outcome, C7ProviderUnavailable):
+                    raise AnalysisError(
+                        AnalysisFailure(
+                            "FACT.PROVIDER_UNAVAILABLE",
+                            "unavailable",
+                            outcome.reason,
                         )
-                        for item in value.fingerprint.dependencies
-                    ),
-                    value.fingerprint.schema_version,
+                    )
+                if isinstance(outcome, ProviderNoObservation):
+                    continue
+                if not isinstance(outcome, ProviderObservationClaim):
+                    raise AnalysisError(
+                        AnalysisFailure(
+                            "FACT.PROVIDER_RESULT_INVALID",
+                            "invalid",
+                            "Provider returned an unrecognized typed outcome.",
+                        )
+                    )
+                evidence = tuple(sorted(item.reference for item in outcome.evidence))
+                if any(
+                    item.provider_contract != provider.evidence_contract
+                    or item.provider_contract_version
+                    != str(provider.semantic_revision)
+                    for item in evidence
+                ):
+                    raise AnalysisError(
+                        AnalysisFailure(
+                            "FACT.PROVIDER_EVIDENCE_CONTRACT",
+                            "invalid",
+                            "Provider evidence does not match its declared contract.",
+                        )
+                    )
+                claims.append((provider, outcome, evidence, inputs))
+            if len(claims) > 1:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "FACT.PROVIDER_CONFLICT",
+                        "invalid",
+                        "Several providers claimed one fact requirement.",
+                    )
+                )
+            if not claims:
+                continue
+            provider, claim, evidence, inputs = claims[0]
+            value = _contract_value(claim.value)
+            proposed.policy_impact.fact_schema.bind(
+                {requirement.fact.id: value}
+            )
+            provider_value = ProviderAuthority(
+                provider.provider_id,
+                provider.semantic_revision,
+                provider.input_contract,
+                provider.evidence_contract,
+                inputs,
+            )
+            grant = self._authorization(
+                "provide-fact",
+                "fact-requirement",
+                requirement.reference.semantic_id,
+                requirement.fact.authorization_capability,
+                evidence,
+            )
+            provider_handle = self._repository.publish(
+                PROVIDER_AUTHORITY_CODEC, provider_value
+            )
+            observation = FactObservationAuthority(
+                requirement.reference,
+                grant.reference,
+                provider_handle.reference,
+                _identity(
+                    {
+                        "value": value,
+                        "evidence": [
+                            _evidence_projection(item) for item in evidence
+                        ],
+                    }
                 ),
             )
-        if value.kind == "coverage-attestation":
-            attestation = value.attestation
-            return DomainCoverageAttestationSubmission(
-                value.obligation_id,
-                DomainCoverageAttestation(
-                    attestation.handle.id,
-                    attestation.requirement.id,
-                    attestation.conclusion,
-                    tuple(
-                        CoverageEvidence(
-                            item.id,
-                            item.digest,
-                            item.provider_contract,
-                            item.provider_contract_version,
-                        )
-                        for item in attestation.evidence
-                    ),
-                    tuple(
-                        CoverageEvidence(
-                            item.id,
-                            item.digest,
-                            item.provider_contract,
-                            item.provider_contract_version,
-                        )
-                        for item in attestation.explicit_exclusions
-                    ),
-                    attestation.rationale,
-                    attestation.auditor_provenance,
-                    attestation.schema_version,
-                    "agent-submission",
+            handle = self._repository.publish(FACT_OBSERVATION_CODEC, observation)
+            return StoredObservation(handle.reference, observation)
+        return None
+
+    def _apply_submission(
+        self,
+        submission: object,
+        current: AnalysisEvaluation,
+        observations: tuple[StoredObservation, ...],
+        dispositions: tuple[Mapping[str, object], ...],
+        attestations: tuple[StoredCoverageAttestation, ...],
+        proposed: AnalysisMaterial,
+    ) -> tuple[
+        tuple[StoredObservation, ...],
+        tuple[Mapping[str, object], ...],
+        tuple[StoredCoverageAttestation, ...],
+    ]:
+        if current.complete:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "SUBMISSION.NOT_APPLICABLE",
+                    "invalid",
+                    "A complete analysis has no current work.",
+                )
+            )
+        if isinstance(submission, ProvideFactSubmission):
+            reference = AuthorityReference(
+                "fact-requirement", submission.requirement.id
+            )
+            matches = tuple(
+                item
+                for item in current.pending_requirements
+                if item.reference == reference
+            )
+            if len(matches) != 1:
+                raise _submission_not_applicable("fact requirement")
+            requirement = matches[0]
+            evidence = _authority_evidence(submission.evidence)
+            grant = self._authorization(
+                "provide-fact",
+                "fact-requirement",
+                reference.semantic_id,
+                requirement.fact.authorization_capability,
+                evidence,
+            )
+            value = _contract_value(submission.value)
+            proposed.policy_impact.fact_schema.bind({requirement.fact.id: value})
+            observation = FactObservationAuthority(
+                reference,
+                grant.reference,
+                None,
+                _identity(
+                    {
+                        "value": value,
+                        "evidence": [_evidence_projection(item) for item in evidence],
+                    }
                 ),
             )
-        raise RuntimeError(f"generated submission kind {value.kind!r} is unhandled")
+            handle = self._repository.publish(FACT_OBSERVATION_CODEC, observation)
+            selected = {item.value.requirement: item for item in observations}
+            selected[reference] = StoredObservation(handle.reference, observation)
+            return (
+                tuple(sorted(selected.values(), key=lambda item: item.reference)),
+                dispositions,
+                attestations,
+            )
+
+        obligation_id = getattr(submission, "obligation_id", "")
+        matches = tuple(
+            item
+            for item in current.obligations
+            if item.id == obligation_id and item.state != "resolved"
+        )
+        if len(matches) != 1:
+            raise _submission_not_applicable("obligation")
+        obligation = matches[0]
+        if submission.kind not in obligation.permitted_submissions:
+            raise _submission_not_applicable("submission kind")
+
+        if isinstance(submission, CoverageAttestationSubmission):
+            coverage = next(
+                item for item in current.coverage if item.subject == obligation.target
+            )
+            if submission.claim.requirement.id != coverage.requirement.semantic_id:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "SUBMISSION.CONTEXT_MISMATCH",
+                        "invalid",
+                        "Coverage claim does not bind the current requirement.",
+                    )
+                )
+            evidence = _authority_evidence(
+                (*submission.claim.evidence, *submission.claim.explicit_exclusions)
+            )
+            grant = self._authorization(
+                "coverage-attestation",
+                "coverage-requirement",
+                coverage.requirement.semantic_id,
+                "standards.review.audit",
+                evidence,
+            )
+            attestation = publish_coverage_attestation(
+                self._repository,
+                requirement=coverage.requirement,
+                authorization=grant.reference,
+                conclusion=submission.claim.conclusion,
+                evidence=_authority_evidence(submission.claim.evidence),
+                explicit_exclusions=_authority_evidence(
+                    submission.claim.explicit_exclusions
+                ),
+                rationale=submission.claim.rationale,
+                auditor_provenance=submission.claim.auditor_provenance,
+            )
+            selected = {item.value.requirement: item for item in attestations}
+            selected[coverage.requirement] = attestation
+            return (
+                observations,
+                dispositions,
+                tuple(sorted(selected.values(), key=lambda item: item.reference)),
+            )
+
+        if not isinstance(
+            submission, (ConsumerDispositionSubmission, ImpactDispositionSubmission)
+        ):
+            raise _submission_not_applicable("submission")
+        if submission.fingerprint.as_contract() != obligation.fingerprint.as_contract():
+            raise AnalysisError(
+                AnalysisFailure(
+                    "SUBMISSION.CONTEXT_MISMATCH",
+                    "invalid",
+                    "Disposition dependencies do not match current work.",
+                )
+            )
+        evidence = _authority_evidence(submission.evidence)
+        subject_kind = (
+            "consumer-obligation"
+            if isinstance(submission, ConsumerDispositionSubmission)
+            else "impact-obligation"
+        )
+        capability = (
+            str(obligation.review_contract["authorization_capability"])
+            if obligation.review_contract is not None
+            else "standards.review.impact"
+        )
+        grant = self._authorization(
+            submission.kind,
+            subject_kind,
+            obligation.id,
+            capability,
+            evidence,
+        )
+        record = {
+            "obligation_id": obligation.id,
+            "kind": submission.kind,
+            "result": submission.result,
+            "rationale": submission.rationale,
+            "evidence": [_evidence_projection(item) for item in evidence],
+            "authorization": _authority_reference(grant.reference),
+            "fingerprint": submission.fingerprint.as_contract(),
+        }
+        selected = {str(item["obligation_id"]): item for item in dispositions}
+        selected[obligation.id] = record
+        return observations, tuple(selected[key] for key in sorted(selected)), attestations
+
+    def _authorization(
+        self,
+        action: str,
+        subject_kind: str,
+        subject_id: str,
+        capability: str,
+        evidence: tuple[AuthorityEvidence, ...],
+    ) -> AuthorityHandle:
+        grant = construct_authorization_grant(
+            self._execution_context,
+            AuthorizationRequest(
+                action, subject_kind, subject_id, capability, evidence
+            ),
+        )
+        return self._repository.publish(AUTHORIZATION_GRANT_CODEC, grant)
 
     @staticmethod
-    def _domain_evidence(values) -> tuple[EvidenceReference, ...]:
-        return tuple(
-            EvidenceReference(
-                item.id,
-                item.digest,
-                item.provider_contract,
-                item.provider_contract_version,
-            )
-            for item in values
+    def _analysis_static_roots(
+        base: StandardsAuthorityView, proposed: StandardsAuthorityView
+    ) -> tuple[
+        AuthorityReference,
+        Mapping[str, AuthorityReference],
+        Mapping[str, AuthorityReference],
+    ]:
+        operation = next(
+            item.authority
+            for item in proposed.operation_contracts
+            if item.operation == "analysis"
+        )
+        return (
+            operation,
+            {item.role: item.authority for item in base.authorities},
+            {item.role: item.authority for item in proposed.authorities},
         )
 
-    def _source_for(
+    def _persist_analysis_roots(
         self,
-        handle: Mapping[str, object],
-    ) -> StandardsEngine | None:
-        return self._sources.get(str(handle.get("id", "")))
+        static: tuple[
+            AuthorityReference,
+            Mapping[str, AuthorityReference],
+            Mapping[str, AuthorityReference],
+        ],
+        evaluation: AnalysisEvaluation,
+    ) -> PendingResult | CompleteResult:
+        operation, base_roles, proposed_roles = static
+        roots = [ExecutionAuthorityRoot("current", "operation-contract", operation)]
+        for side, roles in (("accepted", base_roles), ("proposed", proposed_roles)):
+            roots.extend(
+                ExecutionAuthorityRoot(side, role, roles[role])
+                for role in ("metadata", "graph", "policy-impact", "coverage")
+            )
+        roots.append(
+            ExecutionAuthorityRoot("current", "context", evaluation.context)
+        )
+        roots.extend(
+            ExecutionAuthorityRoot("current", "requirement", item.reference)
+            for item in evaluation.requirements
+        )
+        roots.extend(
+            ExecutionAuthorityRoot("current", "observation", item.reference)
+            for item in evaluation.observations
+        )
+        roots.extend(
+            ExecutionAuthorityRoot("current", "coverage-view", item.view)
+            for item in evaluation.coverage
+        )
+        roots.extend(
+            ExecutionAuthorityRoot("current", "coverage-requirement", item.requirement)
+            for item in evaluation.coverage
+        )
+        roots.extend(
+            ExecutionAuthorityRoot(
+                "current", "coverage-certificate", item.certificate
+            )
+            for item in evaluation.coverage
+            if item.certificate is not None
+        )
+        roots.extend(
+            ExecutionAuthorityRoot("current", "coverage-attestation", item.reference)
+            for item in evaluation.attestations
+        )
+        trust = self._analysis_trust_roots(evaluation)
+        roots.extend(trust)
+        closure_value = ExecutionClosure("analysis", roots)
+        contract = self._repository.resolve_reference(operation).value
+        assert isinstance(contract, OperationAuthorityContract)
+        validate_execution_authority(
+            closure_value, operation, contract, ("accepted", "proposed")
+        )
+        closure = self._repository.publish(EXECUTION_CLOSURE_CODEC, closure_value)
+        state = AnalysisRootAuthority(
+            closure.reference,
+            evaluation.context,
+            tuple(item.reference for item in evaluation.observations),
+            tuple(item.reference for item in evaluation.attestations),
+            _identity(
+                {
+                    "dispositions": [dict(item) for item in evaluation.dispositions]
+                }
+            ),
+        )
+        handle = self._repository.publish(ANALYSIS_ROOT_CODEC, state)
+        return self._analysis_result(handle, closure, evaluation)
 
-    def _analysis_rejection(self, error: AnalysisError) -> RejectedResult:
-        failure = error.failure
-        return self._reject(
-            failure.code,
-            failure.outcome,
-            failure.message,
-            details={
-                key: value
-                for key, value in {
-                    "field": failure.field,
-                    "observed": failure.observed,
-                    "path": failure.path,
-                }.items()
-                if value is not None
-            },
+    def _analysis_trust_roots(
+        self, evaluation: AnalysisEvaluation
+    ) -> tuple[ExecutionAuthorityRoot, ...]:
+        roots: set[ExecutionAuthorityRoot] = set()
+        for item in evaluation.observations:
+            roots.add(
+                ExecutionAuthorityRoot(
+                    "current", "authorization-grant", item.value.authorization
+                )
+            )
+            if item.value.provider is not None:
+                roots.add(
+                    ExecutionAuthorityRoot(
+                        "current", "provider-authority", item.value.provider
+                    )
+                )
+        for item in evaluation.attestations:
+            roots.add(
+                ExecutionAuthorityRoot(
+                    "current", "authorization-grant", item.value.authorization
+                )
+            )
+        for disposition in evaluation.dispositions:
+            raw = disposition.get("authorization")
+            if isinstance(raw, Mapping):
+                roots.add(
+                    ExecutionAuthorityRoot(
+                        "current",
+                        "authorization-grant",
+                        AuthorityReference(str(raw["object_kind"]), str(raw["id"])),
+                    )
+                )
+        return tuple(sorted(roots))
+
+    def _analysis_result(
+        self,
+        handle: AuthorityHandle,
+        closure: AuthorityHandle,
+        evaluation: AnalysisEvaluation,
+    ) -> PendingResult | CompleteResult:
+        context = self._analysis_context_projection(
+            AuthorityHandle(
+                evaluation.context.object_kind, evaluation.context.semantic_id
+            ),
+            evaluation.context_value,
+        )
+        changes = [item.descriptor.as_contract() for item in evaluation.changes]
+        changed_units = [
+            unit.as_contract()
+            for change in evaluation.changes
+            for unit in change.changed_units
+        ]
+        reading_plan = [item.as_contract() for item in evaluation.reading_plan]
+        if not evaluation.complete:
+            requirements = [
+                {
+                    "requirement": self._fact_requirement_projection(
+                        AuthorityHandle(
+                            item.reference.object_kind,
+                            item.reference.semantic_id,
+                        ),
+                        item.value,
+                    ),
+                    "prompt": item.prompt,
+                    "dependent_programs": list(item.dependent_programs),
+                }
+                for item in evaluation.pending_requirements
+            ]
+            obligations = [
+                item.as_contract()
+                for item in evaluation.obligations
+                if item.state != "resolved"
+            ]
+            return PendingResult.from_value(
+                {
+                    "kind": "pending-result",
+                    "handle": _handle(handle),
+                    "status": "needs-action",
+                    "context": context,
+                    "changes": changes,
+                    "changed_units": changed_units,
+                    "obligations": obligations,
+                    "fact_requirements": requirements,
+                    "reading_plan": reading_plan,
+                    "next_operations": _analysis_next_operations(
+                        handle, evaluation.pending_requirements, evaluation.obligations
+                    ),
+                    "authority": _handle(closure),
+                    "summary": "The bounded analysis requires additional decisions.",
+                }
+            )
+        consumer_ids = sorted(
+            item.id
+            for item in evaluation.reached_obligations
+            if item.kind == "consumer-review"
+        )
+        disposition_ids = sorted(
+            str(item["obligation_id"])
+            for item in evaluation.dispositions
+            if item["kind"] == "consumer-disposition"
+        )
+        required_facts = sorted(item.reference.semantic_id for item in evaluation.requirements)
+        observed = {
+            item.value.requirement.semantic_id for item in evaluation.observations
+        }
+        observed_facts = sorted(set(required_facts) & observed)
+        certificates = [
+            _handle_ref(item.certificate)
+            for item in evaluation.coverage
+            if item.certificate is not None
+        ]
+        subjects = sorted(item.subject for item in evaluation.coverage)
+        certificate_subjects = sorted(
+            item.subject for item in evaluation.coverage if item.certificate is not None
+        )
+        return CompleteResult.from_value(
+            {
+                "kind": "complete-result",
+                "handle": _handle(handle),
+                "status": "complete",
+                "context": context,
+                "changes": changes,
+                "changed_units": changed_units,
+                "coverage_certificates": certificates,
+                "fact_observations": [
+                    self._fact_observation_projection(
+                        AuthorityHandle(
+                            item.reference.object_kind, item.reference.semantic_id
+                        ),
+                        item.value,
+                    )
+                    for item in evaluation.observations
+                ],
+                "dispositions": [dict(item) for item in evaluation.dispositions],
+                "reading_plan": reading_plan,
+                "completion": {
+                    "required_coverage_subjects": subjects,
+                    "certificate_subjects": certificate_subjects,
+                    "reached_consumer_obligations": consumer_ids,
+                    "disposition_obligations": disposition_ids,
+                    "required_fact_requirements": required_facts,
+                    "observed_fact_requirements": observed_facts,
+                    "non_consumer_obligations_resolved": True,
+                    "applicability_resolved": True,
+                    "authorization_valid": True,
+                    "evidence_valid": True,
+                },
+                "authority": _handle(closure),
+                "summary": "The bounded read-only impact analysis is complete.",
+            }
         )
 
-    def _route(self, request: RouteRequest) -> QueryResult:
+    def _route(
+        self, view: StandardsAuthorityView, request: RouteRequest
+    ) -> RouteResult | RejectedResult:
         try:
-            facts = self._router.fact_schema.bind(request.facts)
-            selected = set(self._router.base_modules)
+            values = self._view_values(view)
+            corpus = values["metadata"].corpus
+            router = values["routing"].projection
+            graph = values["graph"].registry()
+            facts = router.fact_schema.bind(dict(request.facts))
+            selected = set(router.base_modules)
             unresolved: dict[str, set[str]] = {}
-            rule_results: list[tuple[RouteRule, str]] = []
-            for rule in self._router.rules:
+            rule_results = []
+            for rule in router.rules:
                 result = rule.program.evaluate(facts)
                 if result.truth is Truth.TRUE:
                     selected.add(rule.target)
@@ -1013,588 +1484,1014 @@ class StandardsEngine:
                     rule_results.append((rule, "unresolved"))
                     for fact in result.unresolved_facts:
                         unresolved.setdefault(fact, set()).add(rule.target)
-            ordered = self._graph.dependency_order(
-                METADATA_REQUIRES,
-                selected=selected,
-            )
-            closure = set(ordered)
+            ordered = graph.dependency_order(METADATA_REQUIRES, selected=selected)
+            closure_nodes = set(ordered)
             preferred = (
-                *(item for item in ("core", "router") if item in closure),
-                *sorted(closure - selected - {"core", "router"}),
+                *(item for item in ("core", "router") if item in closure_nodes),
+                *sorted(closure_nodes - selected - {"core", "router"}),
                 *sorted(selected - {"core", "router"}),
             )
-            ordered = self._graph.dependency_order(
-                METADATA_REQUIRES,
-                selected=selected,
-                preferred_order=preferred,
+            ordered = graph.dependency_order(
+                METADATA_REQUIRES, selected=selected, preferred_order=preferred
             )
-        except (AnalysisError, ApplicabilityError) as error:
-            failure = error.failure
-            return self._reject(
-                failure.code,
-                failure.outcome,
-                failure.message,
-                details={
-                    key: value
-                    for key, value in {
-                        "field": failure.field,
-                        "observed": failure.observed,
-                    }.items()
-                    if value is not None
-                },
-            )
-        except GraphError as error:
-            return self._graph_rejection(error)
-
-        closure = set(ordered)
-        rank = {target: index for index, target in enumerate(ordered)}
-        scope = ReviewScope("whole-artifact")
-        selections = [
-            ReadingSelection(
-                target,
-                scope,
-                RoutingBaseCause(self._router.id),
-                "selected",
-                0 if target in {"core", "router"} else 2,
-                rank[target],
-            )
-            for target in self._router.base_modules
-        ]
-        selections.extend(
-            ReadingSelection(
-                rule.target,
-                scope,
-                RoutingRuleCause(rule.id, rule.program.referenced_facts),
-                state,
-                2,
-                rank.get(rule.target, len(rank)),
-            )
-            for rule, state in rule_results
-        )
-        selections.extend(
-            ReadingSelection(
-                target,
-                scope,
-                DependencyCause("requires", edge.id, edge.source),
-                "selected",
-                0 if target in {"core", "router"} else 1,
-                rank[target],
-            )
-            for target in ordered
-            for edge in (
-                view.edge
-                for view in self._graph.incoming(
+            closure_nodes = set(ordered)
+            rank = {target: index for index, target in enumerate(ordered)}
+            scope = ReviewScope("whole-artifact")
+            selections = [
+                ReadingSelection(
                     target,
-                    (METADATA_REQUIRES,),
+                    scope,
+                    RoutingBaseCause(router.id),
+                    "selected",
+                    0 if target in {"core", "router"} else 2,
+                    rank[target],
                 )
+                for target in router.base_modules
+            ]
+            selections.extend(
+                ReadingSelection(
+                    rule.target,
+                    scope,
+                    RoutingRuleCause(rule.id, rule.program.referenced_facts),
+                    state,
+                    2,
+                    rank.get(rule.target, len(rank)),
+                )
+                for rule, state in rule_results
             )
-            if edge.source in closure
-        )
-        try:
+            selections.extend(
+                ReadingSelection(
+                    target,
+                    scope,
+                    DependencyCause("requires", edge.id, edge.source),
+                    "selected",
+                    0 if target in {"core", "router"} else 1,
+                    rank[target],
+                )
+                for target in ordered
+                for edge in (
+                    item.edge
+                    for item in graph.incoming(target, (METADATA_REQUIRES,))
+                )
+                if edge.source in closure_nodes
+            )
             entries = compile_reading_plan(
                 selections,
-                lambda target: canonical_target_authority(
-                    target,
-                    self._corpus,
-                    self._graph,
-                ),
+                lambda target: canonical_target_authority(target, corpus, graph),
             )
-        except AnalysisError as error:
-            failure = error.failure
-            return self._reject(
-                failure.code,
-                failure.outcome,
-                failure.message,
-                details={"observed": failure.observed}
-                if failure.observed is not None
-                else {},
-            )
-        reading_plan = [entry.as_contract() for entry in entries]
-        questions = [self._route_question(fact) for fact in sorted(unresolved)]
-        identity_value = {
-            "handle": {"snapshot": self._snapshot.handle},
+        except (GraphError, ValueError) as error:
+            return self._reject("NAVIGATION.INVALID_ROUTE", "invalid", str(error))
+
+        reading_plan = [item.as_contract() for item in entries]
+        questions = [
+            self._route_question(router, fact) for fact in sorted(unresolved)
+        ]
+        closure = self._operation_closure(view, "route")
+        semantic = {
             "reading_plan": reading_plan,
             "unresolved_questions": questions,
         }
-        handle = self._navigation_handle(identity_value)
-        next_operations = [
-            {
-                "operation": "query",
-                "request_kind": "read",
-                "target": item["target"],
-                "snapshot": self._snapshot.handle,
-            }
-            for item in reading_plan
-            if item["state"] == "selected"
-        ]
-        if questions:
-            next_operations.append(
-                {
-                    "operation": "query",
-                    "request_kind": "route",
-                    "snapshot": self._snapshot.handle,
-                }
-            )
+        navigation = self._repository.publish(
+            NAVIGATION_AUTHORITY_CODEC,
+            NavigationAuthority(
+                "route", _identity(request.as_contract()), _identity(semantic), closure.reference
+            ),
+        )
         value = {
             "kind": "route-result",
-            "handle": handle,
-            "reading_plan": reading_plan,
-            "unresolved_questions": questions,
-            "next_operations": next_operations,
-            "summary": (
-                f"Selected {len(ordered)} standards with {len(questions)} "
-                "unresolved routing fact categories."
-            ),
-        }
-        self._navigation[str(handle["id"])] = value
-        return RouteResult.from_value(value)
-
-    def _route_question(self, fact_id: str) -> dict[str, object]:
-        route_fact = next(item for item in self._router.facts if item.id == fact_id)
-        return {
-            "id": f"question.{fact_id}",
-            "kind": "applicability-fact",
-            "prompt": route_fact.prompt,
-            "state": "required",
-            "permitted_answers": [*route_fact.values, "none"],
-        }
-
-    def _read(self, request: ReadRequest) -> QueryResult:
-        target = self._resolve_policy(request.target)
-        if isinstance(target, RejectedResult):
-            return target
-        selected, module = target
-        if isinstance(selected, PolicyUnit):
-            canonical_id = selected.id
-            content = selected.content
-            scope = {"kind": "structured", "heading_path": list(selected.heading_path)}
-        else:
-            canonical_id = module.module_id
-            try:
-                content = self._snapshot.contents[module.path].decode("utf-8")
-            except KeyError as error:
-                raise RuntimeError(
-                    f"snapshot content is missing canonical module {module.path!r}"
-                ) from error
-            scope = {"kind": "whole-artifact"}
-        policy = self._policy_summary(canonical_id, module, scope)
-        related = self._relationships_for_policy(
-            selected,
-            module,
-            None,
-            Direction.BOTH,
-            transitive=False,
-        )
-        identity_value = {
-            "handle": {"snapshot": self._snapshot.handle},
-            "policy": policy,
-            "content": content,
-            "requires": list(module.requires),
-            "specializes": list(module.specializes),
-            "related": related,
-        }
-        handle = self._navigation_handle(identity_value)
-        value = {
-            "kind": "read-result",
-            "handle": handle,
-            "policy": policy,
-            "content": content,
-            "requires": list(module.requires),
-            "specializes": list(module.specializes),
-            "related": related,
+            "handle": _handle(navigation),
+            "authority": _handle(closure),
+            **semantic,
             "next_operations": [
                 {
                     "operation": "query",
-                    "request_kind": "related",
-                    "target": canonical_id,
-                    "snapshot": self._snapshot.handle,
-                },
-                {
-                    "operation": "inspect",
-                    "request_kind": "inspect",
-                    "target": canonical_id,
-                    "snapshot": self._snapshot.handle,
-                },
-            ],
-            "summary": f"Read canonical standard {canonical_id}.",
-        }
-        self._navigation[str(handle["id"])] = value
-        return ReadResult.from_value(value)
-
-    def _related(self, request: RelatedRequest) -> QueryResult:
-        try:
-            direction = Direction.parse(request.direction)
-            selected = self._resolve_policy(request.target)
-            if isinstance(selected, RejectedResult):
-                return selected
-            policy, module = selected
-            graph_target = (
-                policy.id if isinstance(policy, PolicyUnit) else module.module_id
-            )
-            relationships = self._relationships_for_policy(
-                policy,
-                module,
-                request.groups,
-                direction,
-                transitive=request.transitive,
-            )
-        except GraphError as error:
-            return self._graph_rejection(error)
-        policy_unit_mapping = self._policy_unit_mapping(policy, module)
-        identity_value = {
-            "handle": {"snapshot": self._snapshot.handle},
-            "target": graph_target,
-            "policy_unit_mapping": policy_unit_mapping,
-            "relationships": relationships,
-        }
-        handle = self._navigation_handle(identity_value)
-        value = {
-            "kind": "related-result",
-            "handle": handle,
-            "target": graph_target,
-            "policy_unit_mapping": policy_unit_mapping,
-            "relationships": relationships,
-            "next_operations": [
-                {
-                    "operation": "inspect",
-                    "request_kind": "inspect",
-                    "target": request.target,
-                    "snapshot": self._snapshot.handle,
+                    "request_kind": "read",
+                    "target": item["target"],
+                    "view": _handle(self._view),
                 }
+                for item in reading_plan
+                if item["state"] == "selected"
             ],
-            "summary": f"Found {len(relationships)} declared relationships.",
+            "summary": f"Selected {len(ordered)} standards with {len(questions)} unresolved fact categories.",
         }
-        self._navigation[str(handle["id"])] = value
-        return RelatedResult.from_value(value)
+        return RouteResult.from_value(value)
 
-    def _policy_unit_mapping(
-        self,
-        selected: PolicyUnit | ModuleMetadata,
-        module: ModuleMetadata,
-    ) -> dict[str, object]:
-        if isinstance(selected, PolicyUnit):
-            return {"state": "exact-policy-unit", "policy_units": [selected.id]}
-        units = self._policies.for_module(module.module_id)
-        if not units:
-            return {
-                "state": "incomplete",
-                "reason": "no-policy-units",
-                "policy_units": [],
+    def _read(
+        self, view: StandardsAuthorityView, request: ReadRequest
+    ) -> ReadResult | RejectedResult:
+        values = self._view_values(view)
+        corpus = values["metadata"].corpus
+        selected = _resolve_policy(corpus, request.target)
+        if selected is None:
+            return self._reject(
+                "NAVIGATION.UNKNOWN_POLICY", "unavailable", "The policy is unavailable."
+            )
+        policy, module = selected
+        closure = self._operation_closure(view, "read")
+        policy_projection, policy_handle = self._policy_inspection(
+            view, closure, policy, module
+        )
+        relationships = self._relationships(
+            view, closure, policy, module, None, Direction.BOTH, False
+        )
+        if isinstance(policy, PolicyUnit):
+            content = policy.content
+            scope = {"kind": "structured", "heading_path": list(policy.heading_path)}
+        else:
+            snapshot = self._repository.resolve_reference(view.content).value
+            content = _snapshot_files(snapshot)[module.path].decode("utf-8")
+            scope = {"kind": "whole-artifact"}
+        summary = {
+            "handle": _handle(policy_handle),
+            "authority": "contextual" if module.role == "reference" else "normative",
+            "scope": scope,
+        }
+        semantic = {
+            "policy": summary,
+            "content": content,
+            "requires": list(module.requires),
+            "specializes": list(module.specializes),
+            "related": relationships,
+        }
+        navigation = self._repository.publish(
+            NAVIGATION_AUTHORITY_CODEC,
+            NavigationAuthority(
+                "read", _identity(request.as_contract()), _identity(semantic), closure.reference
+            ),
+        )
+        target = policy.id if isinstance(policy, PolicyUnit) else module.module_id
+        return ReadResult.from_value(
+            {
+                "kind": "read-result",
+                "handle": _handle(navigation),
+                "authority": _handle(closure),
+                **semantic,
+                "next_operations": [
+                    {
+                        "operation": "query",
+                        "request_kind": "related",
+                        "target": target,
+                        "view": _handle(self._view),
+                    },
+                    {
+                        "operation": "inspect",
+                        "request_kind": "inspect",
+                        "target": policy_projection["policy"]["id"],
+                        "view": _handle(self._view),
+                    },
+                ],
+                "summary": f"Read canonical standard {target}.",
             }
-        return {
-            "state": "policy-units-present",
-            "policy_units": [unit.id for unit in units],
-        }
-
-    def _validate_related_request(
-        self,
-        request: RelatedRequest,
-    ) -> RejectedResult | None:
-        if not isinstance(request.target, str) or not request.target:
-            return self._invalid_request("related target must be a non-empty string")
-        if (
-            not isinstance(request.groups, tuple)
-            or not request.groups
-            or any(not isinstance(group, str) or not group for group in request.groups)
-            or len(set(request.groups)) != len(request.groups)
-        ):
-            return self._reject(
-                "NAVIGATION.INVALID_GROUP_SELECTION",
-                "invalid",
-                "Related queries require unique non-empty named groups.",
-            )
-        if request.direction not in {"incoming", "outgoing", "both"}:
-            return self._invalid_request(
-                "related direction must be incoming, outgoing, or both"
-            )
-        if not isinstance(request.transitive, bool):
-            return self._invalid_request("related transitive must be a boolean")
-        return None
-
-    def _resolve_policy(
-        self,
-        requested: str,
-    ) -> tuple[PolicyUnit | ModuleMetadata, ModuleMetadata] | RejectedResult:
-        selected = self._policies.resolve(requested)
-        if isinstance(selected, PolicyUnitTombstone):
-            return self._reject(
-                "NAVIGATION.RETIRED_POLICY",
-                "unavailable",
-                "The policy identity is retired.",
-                target=requested,
-            )
-        if isinstance(selected, PolicyUnit):
-            module = self._modules.resolve(selected.module)
-            assert module is not None
-            return selected, module
-        module = self._modules.resolve(requested)
-        if module is not None and requested == module.module_id:
-            return module, module
-        return self._reject(
-            "NAVIGATION.UNKNOWN_POLICY",
-            "unavailable",
-            "The canonical policy or module identity is not registered.",
-            target=requested,
         )
 
-    def _relationships_for_policy(
+    def _related(
+        self, view: StandardsAuthorityView, request: RelatedRequest
+    ) -> RelatedResult | RejectedResult:
+        values = self._view_values(view)
+        corpus = values["metadata"].corpus
+        selected = _resolve_policy(corpus, request.target)
+        if selected is None:
+            return self._reject(
+                "NAVIGATION.UNKNOWN_POLICY", "unavailable", "The policy is unavailable."
+            )
+        policy, module = selected
+        closure = self._operation_closure(view, "related")
+        relationships = self._relationships(
+            view,
+            closure,
+            policy,
+            module,
+            tuple(request.groups),
+            Direction.parse(request.direction),
+            request.transitive,
+        )
+        target = policy.id if isinstance(policy, PolicyUnit) else module.module_id
+        units = corpus.policy_unit_corpus.for_module(module.module_id)
+        mapping = (
+            {"state": "exact-policy-unit", "policy_units": [policy.id]}
+            if isinstance(policy, PolicyUnit)
+            else {
+                "state": "policy-units-present" if units else "incomplete",
+                **({} if units else {"reason": "no-policy-units"}),
+                "policy_units": [item.id for item in units],
+            }
+        )
+        semantic = {
+            "target": target,
+            "policy_unit_mapping": mapping,
+            "relationships": relationships,
+        }
+        navigation = self._repository.publish(
+            NAVIGATION_AUTHORITY_CODEC,
+            NavigationAuthority(
+                "related", _identity(request.as_contract()), _identity(semantic), closure.reference
+            ),
+        )
+        return RelatedResult.from_value(
+            {
+                "kind": "related-result",
+                "handle": _handle(navigation),
+                "authority": _handle(closure),
+                **semantic,
+                "next_operations": [],
+                "summary": f"Found {len(relationships)} declared relationships.",
+            }
+        )
+
+    def _operation_closure(
+        self, view: StandardsAuthorityView, operation: str
+    ) -> AuthorityHandle:
+        operation_reference = next(
+            item.authority for item in view.operation_contracts if item.operation == operation
+        )
+        contract = self._repository.resolve_reference(operation_reference).value
+        assert isinstance(contract, OperationAuthorityContract)
+        roles = {item.role: item.authority for item in view.authorities}
+        roots = [
+            ExecutionAuthorityRoot("current", "operation-contract", operation_reference)
+        ]
+        roots.extend(
+            ExecutionAuthorityRoot("current", requirement.role, roles[requirement.role])
+            for requirement in contract.required_view_roles
+        )
+        closure = ExecutionClosure(operation, roots)
+        validate_execution_authority(
+            closure, operation_reference, contract, ("current",)
+        )
+        return self._repository.publish(EXECUTION_CLOSURE_CODEC, closure)
+
+    def _view_values(self, view: StandardsAuthorityView) -> dict[str, object]:
+        return {
+            item.role: self._repository.resolve_reference(item.authority).value
+            for item in view.authorities
+        }
+
+    def _relationships(
         self,
+        view: StandardsAuthorityView,
+        closure: AuthorityHandle,
         selected: PolicyUnit | ModuleMetadata,
         module: ModuleMetadata,
-        groups: Iterable[str] | None,
+        groups: tuple[str, ...] | None,
         direction: Direction,
-        *,
         transitive: bool,
     ) -> list[dict[str, object]]:
+        values = self._view_values(view)
+        graph = values["graph"].registry()
         targets = (
             (selected.id,)
             if isinstance(selected, PolicyUnit)
             else (
                 module.module_id,
-                *(unit.id for unit in self._policies.for_module(module.module_id)),
+                *(item.id for item in values["metadata"].corpus.policy_unit_corpus.for_module(module.module_id)),
             )
         )
-        relationships: dict[tuple[str, str], dict[str, object]] = {}
+        chosen: dict[tuple[str, str], dict[str, object]] = {}
         for target in targets:
-            selected_relationships = (
-                self._transitive_relationships(target, groups or (), direction)
-                if transitive
-                else self._direct_relationships(target, groups, direction)
-            )
-            for relationship in selected_relationships:
-                handle = relationship["handle"]
-                assert isinstance(handle, dict)
-                key = (str(handle["id"]), str(relationship["direction"]))
-                relationships[key] = relationship
-        return [relationships[key] for key in sorted(relationships)]
+            if transitive:
+                steps = [
+                    step
+                    for group in groups or ()
+                    for step in graph.traverse_group(
+                        target, group, direction, transitive=True
+                    ).steps
+                ]
+                pairs = ((item.edge, item.direction) for item in steps)
+            else:
+                views = (
+                    graph.incoming(target, groups)
+                    if direction is Direction.INCOMING
+                    else graph.outgoing(target, groups)
+                    if direction is Direction.OUTGOING
+                    else graph.incident(target, groups)
+                )
+                pairs = ((item.edge, item.direction) for item in views)
+            for edge, selected_direction in pairs:
+                projection, handle = self._relationship_inspection(
+                    view, closure, edge, selected_direction
+                )
+                summary = dict(projection["relationship"])
+                summary["handle"] = _handle(handle)
+                chosen[(edge.id, selected_direction.value)] = summary
+        return [chosen[key] for key in sorted(chosen)]
 
-    def _direct_relationships(
+    def _policy_inspection(
         self,
-        target: str,
-        groups: Iterable[str] | None,
-        direction: Direction,
-    ) -> list[dict[str, object]]:
-        if direction is Direction.INCOMING:
-            views = self._graph.incoming(target, groups)
-        elif direction is Direction.OUTGOING:
-            views = self._graph.outgoing(target, groups)
+        view: StandardsAuthorityView,
+        closure: AuthorityHandle,
+        selected: PolicyUnit | ModuleMetadata,
+        module: ModuleMetadata,
+    ) -> tuple[dict[str, object], AuthorityHandle]:
+        metadata_reference = next(
+            item.authority for item in view.authorities if item.role == "metadata"
+        )
+        snapshot = self._repository.resolve_reference(view.content).value
+        if isinstance(selected, PolicyUnit):
+            declaration = selected.as_declaration()
+            representation = selected.representation_digest
+            structural = selected.structural_digest
+            source_id, source_kind, locator = selected.id, "sidecar", selected.source
         else:
-            views = self._graph.incident(target, groups)
-        return [self._relationship(view.edge, view.direction) for view in views]
-
-    def _transitive_relationships(
-        self,
-        target: str,
-        groups: Iterable[str],
-        direction: Direction,
-    ) -> list[dict[str, object]]:
-        selected: dict[tuple[str, str], dict[str, object]] = {}
-        for group in groups:
-            traversal = self._graph.traverse_group(
-                target,
-                group,
-                direction,
-                transitive=True,
-            )
-            for step in traversal.steps:
-                key = (step.edge.id, step.direction.value)
-                selected[key] = self._relationship(step.edge, step.direction)
-        return [selected[key] for key in sorted(selected)]
-
-    def _relationship(self, edge: Edge, direction: Direction) -> dict[str, object]:
-        return {
-            "handle": {
-                "kind": "relationship-handle",
-                "id": edge.id,
-                "snapshot": self._snapshot.handle,
+            raw = _snapshot_files(snapshot)[module.path]
+            declaration = _module_declaration(module)
+            representation = f"sha256:{hashlib.sha256(raw).hexdigest()}"
+            structural = markdown_structural_digest(raw)
+            source_id, source_kind, locator = module.module_id, "canonical-document", module.path
+        projection = {
+            "declaration": declaration,
+            "representation_digest": representation,
+            "structural_digest": structural,
+            "provenance": {
+                "source_id": source_id,
+                "source_kind": source_kind,
+                "locator": locator,
+                "content_snapshot": _handle_ref(view.content),
             },
+        }
+        authority = self._repository.publish(
+            POLICY_INSPECTION_AUTHORITY_CODEC,
+            PolicyInspectionAuthority(
+                source_id,
+                _identity(projection),
+                closure.reference,
+                metadata_reference,
+            ),
+        )
+        return {
+            "kind": "policy-inspection-result",
+            "policy": _handle(authority),
+            **projection,
+        }, authority
+
+    def _relationship_inspection(
+        self,
+        view: StandardsAuthorityView,
+        closure: AuthorityHandle,
+        edge: Edge,
+        direction: Direction,
+    ) -> tuple[dict[str, object], AuthorityHandle]:
+        values = self._view_values(view)
+        graph_reference = next(item.authority for item in view.authorities if item.role == "graph")
+        impact_reference = next(item.authority for item in view.authorities if item.role == "policy-impact")
+        impact = values["policy-impact"].compiled
+        semantics = impact.semantics.get(edge.id)
+        summary = {
             "source": edge.source,
             "target": edge.target,
             "relation": edge.relation,
             "groups": list(edge.groups),
             "direction": direction.value,
             "traversal_eligible": edge.traversable,
-            "applicability": "unknown"
-            if "applicability" in edge.metadata
-            else "not-declared",
+            "applicability": "unknown" if semantics is not None else "not-declared",
         }
-
-    def _policy_summary(
-        self,
-        policy_id: str,
-        module: ModuleMetadata,
-        scope: dict[str, object],
-    ) -> dict[str, object]:
-        return {
-            "handle": {
-                "kind": "policy-handle",
-                "id": policy_id,
-                "snapshot": self._snapshot.handle,
+        projection = {
+            "kind": "relationship-inspection-result",
+            "relationship": summary,
+            "policy_semantics": None
+            if semantics is None
+            else {
+                "relationship_kind": semantics.relation,
+                "applicability": semantics.applicability_program.as_expression(),
+                "source_scope": thaw(semantics.source_scope),
+                "consumer_scope": thaw(semantics.consumer_scope),
+                "propagation": semantics.propagation,
+                "evidence_owner": semantics.evidence_owner,
+                "rationale": semantics.rationale,
             },
-            "authority": "contextual" if module.role == "reference" else "normative",
-            "scope": scope,
+            "provenance": {
+                "source_id": edge.provenance.source_id,
+                "source_kind": edge.provenance.kind,
+                "locator": edge.provenance.locator,
+                "content_snapshot": _handle_ref(view.content),
+            },
         }
+        authority = self._repository.publish(
+            RELATIONSHIP_INSPECTION_AUTHORITY_CODEC,
+            RelationshipInspectionAuthority(
+                edge.id,
+                _identity(projection),
+                closure.reference,
+                graph_reference,
+                impact_reference,
+            ),
+        )
+        return {
+            **projection,
+            "relationship": {"handle": _handle(authority), **summary},
+        }, authority
 
-    def _navigation_handle(
-        self, identity_value: dict[str, object]
+    def _navigation_projection(
+        self, handle: AuthorityHandle, value: NavigationAuthority
     ) -> dict[str, object]:
-        return {
-            "kind": "navigation-handle",
-            "id": identity(NAVIGATION_DOMAIN, "navigation", identity_value),
-            "snapshot": self._snapshot.handle,
-            "schema_version": 3,
-        }
-
-    def _inspect_policy(self, requested: str) -> InspectionResult:
-        target = self._resolve_policy(requested)
-        if isinstance(target, RejectedResult):
-            return target
-        selected, module = target
-        handle = {
-            "kind": "policy-handle",
-            "id": selected.id if isinstance(selected, PolicyUnit) else module.module_id,
-            "snapshot": self._snapshot.handle,
-        }
-        if isinstance(selected, PolicyUnit):
-            declaration = selected.as_declaration()
-            representation = selected.representation_digest
-            structural = selected.structural_digest
-            provenance = self._provenance(selected.id, "sidecar", selected.source)
-        else:
-            declaration = self._module_declaration(module)
-            raw = self._snapshot.contents[module.path]
-            representation = digest_bytes(raw)
-            structural = markdown_structural_digest(raw)
-            provenance = self._provenance(
-                module.module_id,
-                "canonical-document",
-                module.path,
-            )
-        return PolicyInspectionResult.from_value(
-            {
-                "kind": "policy-inspection-result",
-                "policy": handle,
-                "declaration": declaration,
-                "representation_digest": representation,
-                "structural_digest": structural,
-                "provenance": provenance,
-            }
-        )
-
-    def _inspect_relationship(self, edge_id: str) -> InspectionResult:
-        try:
-            edge = self._graph.edge(edge_id)
-        except GraphError as error:
-            return self._graph_rejection(error)
-        provenance = edge.provenance
-        semantics = self._policy_impact.semantics.get(edge_id)
-        return RelationshipInspectionResult.from_value(
-            {
-                "kind": "relationship-inspection-result",
-                "relationship": self._relationship(edge, Direction.OUTGOING),
-                "policy_semantics": (
-                    None
-                    if semantics is None
-                    else {
-                        "relationship_kind": semantics.relation,
-                        "applicability": (
-                            semantics.applicability_program.as_expression()
-                        ),
-                        "source_scope": thaw(semantics.source_scope),
-                        "consumer_scope": thaw(semantics.consumer_scope),
-                        "propagation": semantics.propagation,
-                        "evidence_owner": semantics.evidence_owner,
-                        "rationale": semantics.rationale,
-                    }
-                ),
-                "provenance": self._provenance(
-                    provenance.source_id,
-                    provenance.kind,
-                    provenance.locator,
-                ),
-            }
-        )
-
-    def _module_declaration(self, module: ModuleMetadata) -> dict[str, object]:
-        return {
-            "kind": "canonical-module",
-            "id": module.module_id,
-            "role": module.role,
-            "level": module.level,
-            "applies_when": module.applies_when,
-            "does_not_apply_when": module.excludes,
-            "requires": list(module.requires),
-            "specializes": list(module.specializes),
-            "verification": module.verification,
-        }
-
-    def _provenance(
-        self,
-        source_id: str,
-        source_kind: str,
-        locator: str,
-    ) -> dict[str, object]:
-        return {
-            "source_id": source_id,
-            "source_kind": source_kind,
-            "locator": locator,
-            "snapshot": self._snapshot.handle,
-        }
-
-    def _require_snapshot(
-        self, observed: Mapping[str, object]
-    ) -> RejectedResult | None:
-        return self._require_snapshot_value(observed)
-
-    def _require_snapshot_value(self, observed: object) -> RejectedResult | None:
-        if not isinstance(observed, Mapping) or dict(observed) != self._snapshot.handle:
-            return self._reject(
-                "NAVIGATION.STALE_SNAPSHOT",
-                "stale",
-                "The request is not bound to this engine snapshot.",
-            )
-        return None
-
-    def _graph_rejection(self, error: GraphError) -> RejectedResult:
-        failure = error.failure
-        outcome = (
-            "unavailable" if failure.code.startswith("GRAPH.UNKNOWN") else "invalid"
-        )
-        return self._reject(
-            failure.code,
-            outcome,
-            failure.message,
-            details=dict(failure.details),
-        )
-
-    def _reject(
-        self,
-        code: str,
-        outcome: str,
-        message: str,
-        *,
-        target: str | None = None,
-        details: Mapping[str, object] | None = None,
-    ) -> RejectedResult:
-        value: dict[str, object] = {
-            "kind": "rejected-result",
-            "code": code,
-            "outcome": outcome,
-            "message": message,
-            "details": dict(details or {}),
+        semantic = _wire(value.semantic_result)
+        assert isinstance(semantic, dict)
+        base = {
+            "kind": f"{value.operation}-result",
+            "handle": _handle(handle),
+            "authority": _handle_ref(value.authority),
+            **semantic,
             "next_operations": [],
         }
-        if target:
-            value["target"] = target
-        return RejectedResult.from_value(value)
+        if value.operation == "route":
+            return RouteResult.from_value(base).as_contract()
+        if value.operation == "read":
+            return ReadResult.from_value(base).as_contract()
+        return RelatedResult.from_value(base).as_contract()
 
-    def _invalid_request(self, message: str) -> RejectedResult:
-        return self._reject("NAVIGATION.INVALID_REQUEST", "invalid", message)
+    @staticmethod
+    def _analysis_context_projection(
+        handle: AuthorityHandle, value: AnalysisContextAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        return ContractAnalysisContext.from_value(
+            {
+                "kind": "analysis-context",
+                "handle": _handle(handle),
+                **projection,
+            }
+        ).as_contract()
+
+    @staticmethod
+    def _fact_requirement_projection(
+        handle: AuthorityHandle, value: FactRequirementAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        return ContractFactRequirement.from_value(
+            {
+                "kind": "fact-requirement",
+                "handle": _handle(handle),
+                "context": _handle_ref(value.context),
+                **projection,
+                "authority_dependencies": [
+                    _authority_reference(item)
+                    for item in sorted((value.context, value.policy_impact))
+                ],
+            }
+        ).as_contract()
+
+    @staticmethod
+    def _fact_observation_projection(
+        handle: AuthorityHandle, value: FactObservationAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        public = {
+            "kind": "fact-observation",
+            "handle": _handle(handle),
+            "requirement": _handle_ref(value.requirement),
+            **projection,
+            "authorization": _authority_reference(value.authorization),
+        }
+        if value.provider is not None:
+            public["provider_authority"] = _authority_reference(value.provider)
+        return ContractFactObservation.from_value(public).as_contract()
+
+    @staticmethod
+    def _coverage_view_projection(
+        handle: AuthorityHandle, value: CoverageViewAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        dependencies = sorted(
+            (value.metadata, value.policy_impact, value.graph, value.horizon)
+        )
+        return CoverageAuthorityView.from_value(
+            {
+                "kind": "coverage-authority-view",
+                "handle": _handle(handle),
+                **projection,
+                "authority_dependencies": [
+                    _authority_reference(item) for item in dependencies
+                ],
+            }
+        ).as_contract()
+
+    @staticmethod
+    def _coverage_requirement_projection(
+        handle: AuthorityHandle, value: CoverageRequirementAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        return CoverageAuditRequirement.from_value(
+            {
+                "kind": "coverage-audit-requirement",
+                "handle": _handle(handle),
+                "coverage_view": _handle_ref(value.coverage_view),
+                **projection,
+            }
+        ).as_contract()
+
+    @staticmethod
+    def _coverage_attestation_projection(
+        handle: AuthorityHandle, value: CoverageAttestationAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        return ContractCoverageAttestation.from_value(
+            {
+                "kind": "coverage-attestation",
+                "handle": _handle(handle),
+                "requirement": _handle_ref(value.requirement),
+                **projection,
+                "authorization": _authority_reference(value.authorization),
+            }
+        ).as_contract()
+
+    @staticmethod
+    def _coverage_certificate_projection(
+        handle: AuthorityHandle, value: CoverageCertificateAuthority
+    ) -> dict[str, object]:
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        dependencies = sorted(
+            (value.coverage_view, value.requirement, value.attestation)
+        )
+        return ConsumerCoverageCertificate.from_value(
+            {
+                "kind": "consumer-coverage-certificate",
+                "handle": _handle(handle),
+                "coverage_view": _handle_ref(value.coverage_view),
+                "requirement": _handle_ref(value.requirement),
+                "attestation": _handle_ref(value.attestation),
+                **projection,
+                "authority_dependencies": [
+                    _authority_reference(item) for item in dependencies
+                ],
+            }
+        ).as_contract()
+
+    def _analysis_state_projection(
+        self, handle: AuthorityHandle, value: AnalysisRootAuthority
+    ) -> dict[str, object]:
+        context = self._repository.resolve_reference(value.context).value
+        assert isinstance(context, AnalysisContextAuthority)
+        observations = []
+        for reference in value.observations:
+            observation = self._repository.resolve_reference(reference).value
+            assert isinstance(observation, FactObservationAuthority)
+            observations.append(
+                self._fact_observation_projection(
+                    AuthorityHandle(reference.object_kind, reference.semantic_id),
+                    observation,
+                )
+            )
+        attestations = []
+        for reference in value.attestations:
+            attestation = self._repository.resolve_reference(reference).value
+            assert isinstance(attestation, CoverageAttestationAuthority)
+            attestations.append(
+                self._coverage_attestation_projection(
+                    AuthorityHandle(reference.object_kind, reference.semantic_id),
+                    attestation,
+                )
+            )
+        projection = _wire(value.projection)
+        assert isinstance(projection, dict)
+        return {
+            "kind": "analysis-state",
+            "handle": _handle(handle),
+            "context": self._analysis_context_projection(
+                AuthorityHandle(
+                    value.context.object_kind, value.context.semantic_id
+                ),
+                context,
+            ),
+            "fact_observations": observations,
+            "dispositions": projection["dispositions"],
+            "coverage_attestations": attestations,
+            "authority": _handle_ref(value.closure),
+        }
+
+    def _resolved_view(self) -> StandardsAuthorityView:
+        value = self._repository.resolve(self._view).value
+        assert isinstance(value, StandardsAuthorityView)
+        return value
+
+    @staticmethod
+    def _route_question(router: object, fact_id: str) -> dict[str, object]:
+        fact = next(item for item in router.facts if item.id == fact_id)
+        answers = [*fact.values, "none"]
+        return {
+            "id": f"question.{fact_id}",
+            "kind": "applicability-fact",
+            "prompt": fact.prompt,
+            "state": "required",
+            "permitted_answers": answers,
+        }
+
+    @staticmethod
+    def _reject(code: str, outcome: str, message: str) -> RejectedResult:
+        return RejectedResult.from_value(
+            {
+                "kind": "rejected-result",
+                "code": code,
+                "outcome": outcome,
+                "message": message,
+                "details": {},
+                "next_operations": [],
+            }
+        )
+
+    def _authority_rejection(self, error: AuthorityError) -> RejectedResult:
+        failure = error.failure
+        return self._reject(failure.code, failure.kind, failure.message)
 
 
-def before_source_changed_failure() -> AnalysisFailure:
-    return AnalysisFailure(
-        "SNAPSHOT.SOURCE_CHANGED",
-        "stale",
-        "Repository inputs changed while the Standards Engine was opening.",
+def _domain_change(value: object) -> DomainChangeDescriptor:
+    accepted_module = getattr(value, "accepted_module")
+    proposed_module = getattr(value, "proposed_module")
+    scope = getattr(value, "scope")
+    return DomainChangeDescriptor(
+        DomainChangeKind(getattr(value, "kind")),
+        tuple(getattr(value, "accepted_ids")),
+        tuple(getattr(value, "proposed_ids")),
+        DomainReviewScope(
+            getattr(scope, "kind"), tuple(getattr(scope, "heading_path", ()))
+        ),
+        None if isinstance(accepted_module, MissingValue) else accepted_module,
+        None if isinstance(proposed_module, MissingValue) else proposed_module,
     )
+
+
+def _domain_proposal(value: object) -> DomainSemanticProposal:
+    return DomainSemanticProposal(
+        getattr(value, "policy"),
+        getattr(value, "accepted_semantic_revision"),
+        int(getattr(value, "proposed_semantic_revision")),
+        getattr(value, "intent"),
+        getattr(value, "structural_digest"),
+    )
+
+
+def _domain_change_from_mapping(value: object) -> DomainChangeDescriptor:
+    if not isinstance(value, Mapping):
+        raise TypeError("stored change must be an object")
+    scope = value["scope"]
+    if not isinstance(scope, Mapping):
+        raise TypeError("stored review scope must be an object")
+    return DomainChangeDescriptor(
+        DomainChangeKind(str(value["kind"])),
+        tuple(str(item) for item in value["accepted_ids"]),
+        tuple(str(item) for item in value["proposed_ids"]),
+        DomainReviewScope(
+            str(scope["kind"]),
+            tuple(str(item) for item in scope.get("heading_path", ())),
+        ),
+        str(value["accepted_module"]) if "accepted_module" in value else None,
+        str(value["proposed_module"]) if "proposed_module" in value else None,
+    )
+
+
+def _domain_proposal_from_mapping(value: object) -> DomainSemanticProposal:
+    if not isinstance(value, Mapping):
+        raise TypeError("stored semantic proposal must be an object")
+    accepted = value["accepted_semantic_revision"]
+    return DomainSemanticProposal(
+        str(value["policy"]),
+        None if accepted is None else int(accepted),
+        int(value["proposed_semantic_revision"]),
+        str(value["intent"]),
+        str(value["structural_digest"]),
+    )
+
+
+def _authority_evidence(values: Iterable[object]) -> tuple[AuthorityEvidence, ...]:
+    selected = tuple(
+        sorted(
+            AuthorityEvidence(
+                str(getattr(item, "provider_contract")),
+                str(getattr(item, "provider_contract_version")),
+                str(getattr(item, "id")),
+                str(getattr(item, "digest")),
+            )
+            for item in values
+        )
+    )
+    keys = tuple(
+        (item.provider_contract, item.provider_contract_version, item.id)
+        for item in selected
+    )
+    if len(set(keys)) != len(keys):
+        raise AnalysisError(
+            AnalysisFailure(
+                "ANALYSIS.DUPLICATE_EVIDENCE",
+                "invalid",
+                "Evidence logical keys must be unique.",
+            )
+        )
+    return selected
+
+
+def _evidence_projection(value: AuthorityEvidence) -> dict[str, str]:
+    return {
+        "id": value.id,
+        "digest": value.digest,
+        "provider_contract": value.provider_contract,
+        "provider_contract_version": value.provider_contract_version,
+    }
+
+
+def _contract_value(value: object) -> object:
+    as_contract = getattr(value, "as_contract", None)
+    if callable(as_contract):
+        return as_contract()
+    if isinstance(value, Mapping):
+        return dict(value)
+    raise TypeError("generated contract value has no wire projection")
+
+
+def _submission_not_applicable(target: str) -> AnalysisError:
+    return AnalysisError(
+        AnalysisFailure(
+            "SUBMISSION.NOT_APPLICABLE",
+            "invalid",
+            f"Submission does not identify current {target} work.",
+        )
+    )
+
+
+def _analysis_next_operations(
+    analysis: AuthorityHandle,
+    requirements: Iterable[object],
+    obligations: Iterable[object],
+) -> list[dict[str, object]]:
+    handle = _handle(analysis)
+    result = [
+        {
+            "operation": "resolve",
+            "request_kind": "provide-fact",
+            "requirement_id": item.reference.semantic_id,
+            "analysis": handle,
+        }
+        for item in requirements
+    ]
+    for obligation in obligations:
+        if obligation.state == "resolved":
+            continue
+        for request_kind in obligation.permitted_submissions:
+            result.append(
+                {
+                    "operation": "resolve",
+                    "request_kind": request_kind,
+                    "obligation_id": obligation.id,
+                    "analysis": handle,
+                }
+            )
+    return result
+
+
+def _codec_sets() -> tuple[object, ...]:
+    from tools.standards_analysis.standards_analysis import ANALYSIS_CODECS
+
+    return (
+        AUTHORITY_CODECS,
+        METADATA_CODECS,
+        POLICY_IMPACT_CODECS,
+        STANDARDS_GRAPH_CODECS,
+        ANALYSIS_CODECS,
+        ENGINE_CODECS,
+    )
+
+
+def _authority_scope(
+    root: Path,
+    corpus: object,
+    policy_inputs: Iterable[str],
+    horizon_inputs: Iterable[str],
+) -> tuple[str, ...]:
+    with (root / ATTESTATION_REGISTRY).open("rb") as source:
+        registry = tomllib.load(source)
+    attestation_sources = tuple(registry.get("sources", ()))
+    attestation_inputs = set(attestation_sources)
+    for source_path in attestation_sources:
+        with (root / source_path).open("rb") as source:
+            declaration = tomllib.load(source)
+        for attestation in declaration.get("attestations", ()):
+            if not isinstance(attestation, Mapping):
+                continue
+            for field in ("evidence", "explicit_exclusions"):
+                values = attestation.get(field, ())
+                if isinstance(values, list):
+                    attestation_inputs.update(
+                        item for item in values if isinstance(item, str)
+                    )
+    with (root / AUTHORIZATION_AUTHORITY).open("rb") as source:
+        authorization = tomllib.load(source)
+    authorization_inputs = {
+        AUTHORIZATION_AUTHORITY,
+        REVOCATION_AUTHORITY,
+        *(
+            item
+            for item in authorization.get("authorization_evidence", ())
+            if isinstance(item, str)
+        ),
+    }
+    return tuple(
+        sorted(
+            {
+                CANONICAL_MODULE_CORPUS,
+                POLICY_UNIT_REGISTRY,
+                ROUTER_PROJECTION,
+                "STANDARDS-ROUTER.md",
+                INTERFACE_SCHEMA,
+                INTERFACE_CONTRACT,
+                ATTESTATION_REGISTRY,
+                *authorization_inputs,
+                *corpus.module_corpus.members,
+                *corpus.policy_unit_corpus.sources,
+                *policy_inputs,
+                *horizon_inputs,
+                *attestation_inputs,
+            }
+        )
+    )
+
+
+def _snapshot_subset(
+    snapshot: ContentSnapshot,
+    paths: Iterable[str],
+) -> ContentSnapshot:
+    indexed = {str(item.path): item for item in snapshot.files}
+    selected = tuple(sorted(set(paths)))
+    missing = tuple(path for path in selected if path not in indexed)
+    if missing:
+        raise RuntimeError(
+            f"captured authority snapshot is missing owner input {missing[0]!r}"
+        )
+    return ContentSnapshot(indexed[path] for path in selected)
+
+
+@contextmanager
+def _snapshot_workspace(snapshot: ContentSnapshot) -> Iterator[Path]:
+    with tempfile.TemporaryDirectory(prefix="standards-authority-") as directory:
+        root = Path(directory)
+        for item in snapshot.files:
+            target = root.joinpath(*item.path.components)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(item.content)
+        yield root
+
+
+def _resolve_policy(corpus: object, requested: str) -> tuple[object, ModuleMetadata] | None:
+    selected = corpus.policy_unit_corpus.resolve(requested)
+    if isinstance(selected, PolicyUnitTombstone):
+        return None
+    if isinstance(selected, PolicyUnit):
+        module = corpus.module_corpus.resolve(selected.module)
+        assert module is not None
+        return selected, module
+    module = corpus.module_corpus.resolve(requested)
+    return (module, module) if module is not None and module.module_id == requested else None
+
+
+def _module_declaration(module: ModuleMetadata) -> dict[str, object]:
+    return {
+        "kind": "canonical-module",
+        "id": module.module_id,
+        "role": module.role,
+        "level": module.level,
+        "applies_when": module.applies_when,
+        "does_not_apply_when": module.excludes,
+        "requires": list(module.requires),
+        "specializes": list(module.specializes),
+        "verification": module.verification,
+    }
+
+
+def _authority_handle(value: object) -> AuthorityHandle:
+    return AuthorityHandle(_object_kind(value.kind), value.id)
+
+
+def _object_kind(handle_kind: str) -> str:
+    mapping = {
+        "content-snapshot-handle": "content-snapshot",
+        "standards-authority-view-handle": "standards-authority-view",
+        "execution-closure-handle": "execution-closure",
+        "navigation-handle": "navigation-result",
+        "analysis-handle": "analysis-root",
+        "policy-handle": "policy-inspection",
+        "relationship-handle": "relationship-inspection",
+        "certificate-handle": "coverage-certificate",
+        "coverage-authority-view-handle": "coverage-view",
+        "coverage-requirement-handle": "coverage-requirement",
+        "coverage-attestation-handle": "coverage-attestation",
+        "analysis-context-handle": "analysis-context",
+        "fact-requirement-handle": "fact-requirement",
+        "fact-observation-handle": "fact-observation",
+    }
+    return mapping[handle_kind]
+
+
+def _handle(value: AuthorityHandle) -> dict[str, object]:
+    kinds = {
+        "content-snapshot": "content-snapshot-handle",
+        "standards-authority-view": "standards-authority-view-handle",
+        "execution-closure": "execution-closure-handle",
+        "navigation-result": "navigation-handle",
+        "analysis-root": "analysis-handle",
+        "policy-inspection": "policy-handle",
+        "relationship-inspection": "relationship-handle",
+        "coverage-certificate": "certificate-handle",
+        "coverage-view": "coverage-authority-view-handle",
+        "coverage-requirement": "coverage-requirement-handle",
+        "coverage-attestation": "coverage-attestation-handle",
+        "analysis-context": "analysis-context-handle",
+        "fact-requirement": "fact-requirement-handle",
+        "fact-observation": "fact-observation-handle",
+    }
+    return {"kind": kinds[value.object_kind], "id": value.semantic_id, "schema_version": 4}
+
+
+def _handle_ref(value: AuthorityReference) -> dict[str, object]:
+    return _handle(AuthorityHandle(value.object_kind, value.semantic_id))
+
+
+def _reference_projection(value: AuthorityReference) -> dict[str, str]:
+    return {"object_kind": value.object_kind, "id": value.semantic_id}
+
+
+def _authority_reference(value: AuthorityReference) -> dict[str, str]:
+    return _reference_projection(value)
+
+
+def _snapshot_projection(handle: AuthorityHandle, value: ContentSnapshot) -> dict[str, object]:
+    return {
+        "kind": "content-snapshot",
+        "handle": _handle(handle),
+        "payload_contract": "content-snapshot.v2",
+        "files": [
+            {
+                "path": {"components": list(item.path.components)},
+                "content_base64": base64.b64encode(item.content).decode("ascii"),
+                "content_digest": "sha256:"
+                + hashlib.sha256(item.content).hexdigest(),
+                "byte_length": len(item.content),
+            }
+            for item in value.files
+        ],
+    }
+
+
+def _view_projection(handle: AuthorityHandle, value: StandardsAuthorityView) -> dict[str, object]:
+    return {
+        "kind": "standards-authority-view",
+        "handle": _handle(handle),
+        "content": _handle_ref(value.content),
+        "operation_contracts": [
+            {"operation": item.operation, "authority": _reference_projection(item.authority)}
+            for item in value.operation_contracts
+        ],
+        "authorities": [
+            {"role": item.role, "authority": _reference_projection(item.authority)}
+            for item in value.authorities
+        ],
+    }
+
+
+def _execution_closure_projection(handle: AuthorityHandle, value: ExecutionClosure) -> object:
+    from .model import ExecutionClosure as ContractExecutionClosure
+
+    return ContractExecutionClosure.from_value(
+        {
+            "kind": "execution-closure",
+            "handle": _handle(handle),
+            "closure_contract": "execution-closure.v2",
+            "operation": value.operation,
+            "roots": [
+                {
+                    "side": item.side,
+                    "role": item.role,
+                    "authority": _reference_projection(item.reference),
+                }
+                for item in value.roots
+            ],
+        }
+    )
+
+
+def _snapshot_files(value: ContentSnapshot) -> dict[str, bytes]:
+    return {str(item.path): item.content for item in value.files}
+
+
+def _identity(value: object) -> IdentityValue:
+    value_type = type(value)
+    if value is None or value_type in {bool, int, str}:
+        return value  # type: ignore[return-value]
+    if value_type is list or value_type is tuple:
+        return IdentityArray(_identity(item) for item in value)
+    if isinstance(value, Mapping):
+        return IdentityObject((key, _identity(value[key])) for key in sorted(value))
+    raise TypeError(f"value is not an identity record: {value_type!r}")
+
+
+def _wire(value: IdentityValue) -> object:
+    if type(value) is IdentityArray:
+        return [_wire(item) for item in value.values]
+    if type(value) is IdentityObject:
+        return {key: _wire(item) for key, item in value.members}
+    return value
+
+
+__all__ = ("StandardsEngine",)

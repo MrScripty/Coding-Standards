@@ -7,7 +7,14 @@ from .closure import (
     Operation,
 )
 from .envelope import decode_envelope, encode_envelope
-from .errors import AuthorityError, AuthorityFailure, FailureKind
+from .errors import (
+    AuthorityError,
+    AuthorityFailure,
+    FailureKind,
+    invalid,
+    unavailable,
+    unsupported,
+)
 from .model import (
     AuthorityCodec,
     AuthorityEnvelope,
@@ -22,7 +29,7 @@ from .platform import open_default_store
 from .recovery import SQLiteRecovery, default_store_path, verify_sqlite_capabilities
 from .repository import AuthorityRepository, ResolvedAuthority
 from .snapshot import (
-    AUTHORITY_CODECS,
+    CONTENT_SNAPSHOT_CODEC,
     CaptureRequest,
     ContentSnapshot,
     ContentSnapshotCodec,
@@ -31,8 +38,38 @@ from .snapshot import (
 )
 from .store import MemoryObjectStore, ObjectStore, SQLiteObjectStore
 
+EXECUTION_CLOSURE_CODEC = ExecutionClosureCodec(
+    {
+        "content-snapshot",
+        "canonical-standards-corpus",
+        "compiled-policy-impact",
+        "standards-graph",
+        "routing-projection",
+        "coverage-horizon",
+        "analysis-context",
+        "fact-requirement",
+        "provider-authority",
+        "authorization-grant",
+        "fact-observation",
+        "coverage-view",
+        "coverage-requirement",
+        "coverage-attestation",
+        "coverage-certificate",
+        "analysis-root",
+        "operation-authority-contract",
+        "standards-authority-view",
+        "navigation-result",
+        "policy-inspection",
+        "relationship-inspection",
+    }
+)
+AUTHORITY_CODECS = CodecSet(
+    "standards-authority", (CONTENT_SNAPSHOT_CODEC, EXECUTION_CLOSURE_CODEC)
+)
+
 __all__ = (
     "AUTHORITY_CODECS",
+    "CONTENT_SNAPSHOT_CODEC",
     "AuthorityBoundValue",
     "AuthorityCodec",
     "AuthorityEnvelope",
@@ -50,6 +87,7 @@ __all__ = (
     "ExecutionAuthorityRoot",
     "ExecutionClosure",
     "ExecutionClosureCodec",
+    "EXECUTION_CLOSURE_CODEC",
     "FailureKind",
     "GitCaptureSource",
     "GitlinkSource",
@@ -67,6 +105,9 @@ __all__ = (
     "decode_envelope",
     "default_store_path",
     "encode_envelope",
+    "invalid",
     "open_default_store",
+    "unavailable",
+    "unsupported",
     "verify_sqlite_capabilities",
 )

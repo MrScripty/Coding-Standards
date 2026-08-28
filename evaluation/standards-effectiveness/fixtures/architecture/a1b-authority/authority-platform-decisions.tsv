@@ -1,0 +1,7 @@
+case	platform	filesystem	path_state	containment	capability	expected
+supported-linux-ext4	linux	ext4	exact	contained	available	allow
+unsupported-windows	windows	ntfs	exact	contained	available	typed-unsupported
+unsupported-macos	macos	apfs	exact	contained	available	typed-unsupported
+symlink-escape	linux	ext4	alias	escaped	available	typed-invalid
+component-replacement	linux	ext4	replaced	contradictory	available	typed-invalid
+missing-required-capability	linux	ext4	exact	contained	unavailable	typed-unavailable

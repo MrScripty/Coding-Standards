@@ -3,34 +3,22 @@ from __future__ import annotations
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from types import MappingProxyType
 from typing import Any, Iterable, Mapping
 
 from tools.standards_applicability.standards_applicability import LANGUAGE_VERSION
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
     PolicyUnit,
-    PolicyUnitCorpus,
-    canonical_json_bytes,
-    digest_bytes,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     CompiledPolicyImpactSet,
 )
 
 from .errors import AnalysisError, AnalysisFailure
-from .serialization import identity
+from .keys import analysis_key_bytes, raw_digest
 
 
-COVERAGE_CONTRACT_VERSION = "2"
-ATTESTATION_CONTRACT_VERSION = "2"
-AUTHORIZATION_CONTRACT_VERSION = "repository-reviewed-attestation:v1"
-EVIDENCE_PROVIDER_CONTRACT_VERSION = "repository-content:v1"
-IDENTITY_RESOLUTION_CONTRACT_VERSION = "standards-metadata:v1"
 DEFAULT_HORIZON = "evaluation/standards-effectiveness/policy-coverage/horizons.toml"
-DEFAULT_ATTESTATION_REGISTRY = (
-    "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
-)
 HORIZON_ID = "audit-horizon.policy-impact-consumers"
 HORIZON_PROVIDER = "standards-analysis:policy-impact-consumer-horizon"
 HORIZON_VERSION = 3
@@ -146,7 +134,7 @@ def _texts(
 
 
 def _digest(value: object) -> str:
-    return digest_bytes(canonical_json_bytes(value))
+    return raw_digest(analysis_key_bytes(value))
 
 
 @dataclass(frozen=True, slots=True)
@@ -174,24 +162,7 @@ class CoverageHorizon:
 
 
 @dataclass(frozen=True, slots=True)
-class CoverageEvidence:
-    id: str
-    digest: str
-    provider_contract: str = "repository-content"
-    provider_contract_version: str = "1"
-
-    def as_projection(self) -> dict[str, str]:
-        return {
-            "id": self.id,
-            "digest": self.digest,
-            "provider_contract": self.provider_contract,
-            "provider_contract_version": self.provider_contract_version,
-        }
-
-
-@dataclass(frozen=True, slots=True)
-class CoverageAuthorityView:
-    handle: str
+class CoverageViewDefinition:
     subject: str
     owner: str
     semantic_revision: int
@@ -209,13 +180,7 @@ class CoverageAuthorityView:
     horizon_version: int
     horizon_digest: str
     horizon_members: tuple[CoverageHorizonMember, ...]
-    identity_resolution_contract_version: str
-    coverage_contract_version: str
-    attestation_contract_version: str
-    authorization_contract_version: str
-    evidence_provider_contract_version: str
-
-    def as_identity_projection(self) -> dict[str, object]:
+    def as_projection(self) -> dict[str, object]:
         return {
             "subject": self.subject,
             "owner": self.owner,
@@ -239,197 +204,33 @@ class CoverageAuthorityView:
                 "digest": self.horizon_digest,
                 "members": [member.as_projection() for member in self.horizon_members],
             },
-            "identity_resolution_contract_version": self.identity_resolution_contract_version,
-            "coverage_contract_version": self.coverage_contract_version,
-            "attestation_contract_version": self.attestation_contract_version,
-            "authorization_contract_version": self.authorization_contract_version,
-            "evidence_provider_contract_version": self.evidence_provider_contract_version,
         }
-
-    def as_projection(self) -> dict[str, object]:
-        value = self.as_identity_projection()
-        value.update(
-            {
-                "kind": "coverage-authority-view",
-                "handle": {
-                    "kind": "coverage-authority-view-handle",
-                    "id": self.handle,
-                    "schema_version": 2,
-                },
-            }
-        )
-        return value
 
 
 @dataclass(frozen=True, slots=True)
-class CoverageAuditRequirement:
-    handle: str
-    coverage_view: str
+class CoverageRequirementDefinition:
     subject: str
     owner: str
     semantic_revision: int
     relationship_kinds: tuple[str, ...]
     horizon: str
-    derived_from_snapshot: str | None = None
 
     def as_projection(self) -> dict[str, object]:
-        value: dict[str, object] = {
-            "kind": "coverage-audit-requirement",
-            "handle": {
-                "kind": "coverage-requirement-handle",
-                "id": self.handle,
-                "schema_version": 2,
-            },
-            "coverage_view": {
-                "kind": "coverage-authority-view-handle",
-                "id": self.coverage_view,
-                "schema_version": 2,
-            },
+        return {
             "subject": self.subject,
             "owner": self.owner,
             "semantic_revision": self.semantic_revision,
             "relationship_kinds": list(self.relationship_kinds),
             "horizon": self.horizon,
         }
-        if self.derived_from_snapshot is not None:
-            value["derived_from_snapshot"] = {
-                "kind": "snapshot-handle",
-                "id": self.derived_from_snapshot,
-                "schema_version": 3,
-            }
-        return value
 
 
 @dataclass(frozen=True, slots=True)
-class CoverageAttestation:
-    handle: str
-    requirement: str
-    conclusion: str
-    evidence: tuple[CoverageEvidence, ...]
-    explicit_exclusions: tuple[CoverageEvidence, ...]
-    rationale: str
-    auditor_provenance: str
-    schema_version: int
-    source: str
-
-    def as_projection(self) -> dict[str, object]:
-        return {
-            "kind": "coverage-attestation",
-            "handle": {
-                "kind": "coverage-attestation-handle",
-                "id": self.handle,
-                "schema_version": 2,
-            },
-            "requirement": {
-                "kind": "coverage-requirement-handle",
-                "id": self.requirement,
-                "schema_version": 2,
-            },
-            "conclusion": self.conclusion,
-            "evidence": [item.as_projection() for item in self.evidence],
-            "explicit_exclusions": [
-                item.as_projection() for item in self.explicit_exclusions
-            ],
-            "rationale": self.rationale,
-            "auditor_provenance": self.auditor_provenance,
-            "schema_version": self.schema_version,
-        }
-
-
-@dataclass(frozen=True, slots=True)
-class ConsumerCoverageCertificate:
-    handle: str
-    coverage_view: str
-    requirement: str
-    attestation: str
-    subject: str
-    owner: str
-    semantic_revision: int
-    horizon_digest: str
-    relationship_digest: str
-    evidence_digests: tuple[str, ...]
-    coverage_contract_version: str
-    attestation_contract_version: str
-
-    def as_projection(self) -> dict[str, object]:
-        return {
-            "kind": "consumer-coverage-certificate",
-            "handle": {
-                "kind": "certificate-handle",
-                "id": self.handle,
-                "schema_version": 2,
-            },
-            "coverage_view": {
-                "kind": "coverage-authority-view-handle",
-                "id": self.coverage_view,
-                "schema_version": 2,
-            },
-            "requirement": {
-                "kind": "coverage-requirement-handle",
-                "id": self.requirement,
-                "schema_version": 2,
-            },
-            "attestation": {
-                "kind": "coverage-attestation-handle",
-                "id": self.attestation,
-                "schema_version": 2,
-            },
-            "subject": self.subject,
-            "owner": self.owner,
-            "semantic_revision": self.semantic_revision,
-            "horizon_digest": self.horizon_digest,
-            "relationship_digest": self.relationship_digest,
-            "evidence_digests": list(self.evidence_digests),
-            "coverage_contract_version": self.coverage_contract_version,
-            "attestation_contract_version": self.attestation_contract_version,
-            "provenance": {
-                "generator": "standards-analysis:consumer-coverage-certificate:v2",
-                "generated_at": "reproducible-build-provenance",
-            },
-        }
-
-
-@dataclass(frozen=True, slots=True)
-class CoverageIndex:
+class CoverageDefinitionIndex:
     horizon: CoverageHorizon
-    views: Mapping[str, CoverageAuthorityView]
-    requirements: Mapping[str, CoverageAuditRequirement]
-    attestations: Mapping[str, CoverageAttestation]
-    certificates: Mapping[str, ConsumerCoverageCertificate]
+    views: Mapping[str, CoverageViewDefinition]
+    requirements: Mapping[str, CoverageRequirementDefinition]
     input_sources: tuple[str, ...]
-
-    def __post_init__(self) -> None:
-        for field in ("views", "requirements", "attestations", "certificates"):
-            object.__setattr__(
-                self,
-                field,
-                MappingProxyType(dict(sorted(getattr(self, field).items()))),
-            )
-
-    def certificate_for(self, policy_unit: str) -> ConsumerCoverageCertificate | None:
-        return self.certificates.get(policy_unit)
-
-    def uncovered_for_module(
-        self,
-        corpus: CanonicalStandardsCorpus,
-        module_id: str,
-    ) -> tuple[str, ...]:
-        return tuple(
-            unit.id
-            for unit in corpus.policy_unit_corpus.for_module(module_id)
-            if unit.id not in self.certificates
-        )
-
-    def uncovered_for_module_corpus(
-        self,
-        corpus: PolicyUnitCorpus,
-        module_id: str,
-    ) -> tuple[str, ...]:
-        return tuple(
-            unit.id
-            for unit in corpus.for_module(module_id)
-            if unit.id not in self.certificates
-        )
 
 
 def _merge_member(
@@ -464,7 +265,7 @@ def _path_values(value: object) -> Iterable[str]:
 
 
 def _file_fingerprint(root: Path, path: str) -> str:
-    return digest_bytes(_repository_file(root, path).read_bytes())
+    return raw_digest(_repository_file(root, path).read_bytes())
 
 
 def load_coverage_horizon(
@@ -618,6 +419,7 @@ def load_coverage_horizon(
 
     input_sources.update(compiled.input_sources)
     for artifact in compiled.artifacts.values():
+        input_sources.add(artifact.repository_path)
         _merge_member(
             members,
             f"policy-impact-node:{artifact.id}",
@@ -660,7 +462,7 @@ def derive_coverage_view(
     semantic_revision: int | None = None,
     representation_digest: str | None = None,
     structural_digest: str | None = None,
-) -> CoverageAuthorityView:
+) -> CoverageViewDefinition:
     relationships = tuple(
         sorted(
             (
@@ -673,47 +475,7 @@ def derive_coverage_view(
             if semantics.source == unit.id
         )
     )
-    projection = {
-        "subject": unit.id,
-        "owner": unit.module,
-        "semantic_revision": semantic_revision or unit.semantic_revision,
-        "representation_digest": representation_digest or unit.representation_digest,
-        "structural_digest": structural_digest or unit.structural_digest,
-        "relationships": [
-            {
-                "edge": edge,
-                "fingerprint": fingerprint,
-                "kind": relation,
-                "program": program,
-            }
-            for edge, fingerprint, relation, program in relationships
-        ],
-        "relationship_kind_contract_version": (
-            compiled.relationship_kind_contract_version
-        ),
-        "relationship_provider_contract_digest": compiled.provider_contract_digest,
-        "applicability_language_version": LANGUAGE_VERSION,
-        "fact_schema_digest": compiled.fact_schema.digest,
-        "horizon": {
-            "id": horizon.id,
-            "provider": horizon.provider,
-            "version": horizon.version,
-            "digest": horizon.digest,
-            "members": [member.as_projection() for member in horizon.members],
-        },
-        "identity_resolution_contract_version": IDENTITY_RESOLUTION_CONTRACT_VERSION,
-        "coverage_contract_version": COVERAGE_CONTRACT_VERSION,
-        "attestation_contract_version": ATTESTATION_CONTRACT_VERSION,
-        "authorization_contract_version": AUTHORIZATION_CONTRACT_VERSION,
-        "evidence_provider_contract_version": EVIDENCE_PROVIDER_CONTRACT_VERSION,
-    }
-    handle = identity(
-        "coding-standards:coverage-authority-view:v2",
-        "coverage-view",
-        projection,
-    )
-    return CoverageAuthorityView(
-        handle,
+    return CoverageViewDefinition(
         unit.id,
         unit.module,
         semantic_revision or unit.semantic_revision,
@@ -731,386 +493,54 @@ def derive_coverage_view(
         horizon.version,
         horizon.digest,
         horizon.members,
-        IDENTITY_RESOLUTION_CONTRACT_VERSION,
-        COVERAGE_CONTRACT_VERSION,
-        ATTESTATION_CONTRACT_VERSION,
-        AUTHORIZATION_CONTRACT_VERSION,
-        EVIDENCE_PROVIDER_CONTRACT_VERSION,
     )
 
 
 def derive_coverage_requirement(
-    view: CoverageAuthorityView,
-    *,
-    derived_from_snapshot: str | None = None,
-) -> CoverageAuditRequirement:
-    value = {
-        "coverage_view": view.handle,
-        "subject": view.subject,
-        "owner": view.owner,
-        "semantic_revision": view.semantic_revision,
-        "relationship_kinds": list(view.relationship_kinds),
-        "horizon": view.horizon_id,
-    }
-    handle = identity(
-        "coding-standards:coverage-audit-requirement:v2",
-        "coverage-requirement",
-        value,
-    )
-    return CoverageAuditRequirement(
-        handle,
-        view.handle,
+    view: CoverageViewDefinition,
+) -> CoverageRequirementDefinition:
+    return CoverageRequirementDefinition(
         view.subject,
         view.owner,
         view.semantic_revision,
         view.relationship_kinds,
         view.horizon_id,
-        derived_from_snapshot,
     )
 
 
-def _load_attestations(
-    root: Path,
-    path: str,
-) -> tuple[tuple[CoverageAttestation, ...], tuple[str, ...]]:
-    registry = _toml(root, path)
-    _exact(
-        registry,
-        required={"schema_version", "sources"},
-        allowed={"schema_version", "sources"},
-        path=path,
-        field="registry",
-    )
-    if registry["schema_version"] != 1:
-        raise _error(
-            "COVERAGE.ATTESTATION_VERSION",
-            "unsupported attestation registry version",
-            path=path,
-        )
-    sources = _texts(registry["sources"], path=path, field="sources", allow_empty=True)
-    result: list[CoverageAttestation] = []
-    input_sources = {path}
-    seen: set[str] = set()
-    for source_path in sources:
-        input_sources.add(source_path)
-        raw = _toml(root, source_path)
-        _exact(
-            raw,
-            required={"schema_version", "attestations"},
-            allowed={"schema_version", "attestations"},
-            path=source_path,
-            field="source",
-        )
-        if raw["schema_version"] != 2 or not isinstance(raw["attestations"], list):
-            raise _error(
-                "COVERAGE.ATTESTATION_VERSION",
-                "unsupported attestation source version",
-                path=source_path,
-            )
-        for item in raw["attestations"]:
-            if not isinstance(item, dict):
-                raise _error(
-                    "COVERAGE.ATTESTATION",
-                    "attestation must be a table",
-                    path=source_path,
-                )
-            _exact(
-                item,
-                required={
-                    "requirement",
-                    "conclusion",
-                    "evidence",
-                    "explicit_exclusions",
-                    "rationale",
-                    "auditor_provenance",
-                },
-                allowed={
-                    "requirement",
-                    "conclusion",
-                    "evidence",
-                    "explicit_exclusions",
-                    "rationale",
-                    "auditor_provenance",
-                },
-                path=source_path,
-                field="attestation",
-            )
-            conclusion = _text(item["conclusion"], path=source_path, field="conclusion")
-            if conclusion != "complete":
-                raise _error(
-                    "COVERAGE.ATTESTATION_CONCLUSION",
-                    "only complete attestations can certify coverage",
-                    path=source_path,
-                )
-            evidence_paths = _texts(
-                item["evidence"], path=source_path, field="evidence"
-            )
-            exclusion_paths = _texts(
-                item["explicit_exclusions"],
-                path=source_path,
-                field="explicit_exclusions",
-                allow_empty=True,
-            )
-            input_sources.update(evidence_paths)
-            input_sources.update(exclusion_paths)
-            evidence = tuple(
-                CoverageEvidence(path, _file_fingerprint(root, path))
-                for path in evidence_paths
-            )
-            exclusions = tuple(
-                CoverageEvidence(path, _file_fingerprint(root, path))
-                for path in exclusion_paths
-            )
-            content = {
-                "requirement": _text(
-                    item["requirement"], path=source_path, field="requirement"
-                ),
-                "conclusion": conclusion,
-                "evidence": [reference.as_projection() for reference in evidence],
-                "explicit_exclusions": [
-                    reference.as_projection() for reference in exclusions
-                ],
-                "rationale": _text(
-                    item["rationale"], path=source_path, field="rationale"
-                ),
-                "auditor_provenance": _text(
-                    item["auditor_provenance"],
-                    path=source_path,
-                    field="auditor_provenance",
-                ),
-                "schema_version": raw["schema_version"],
-            }
-            handle = identity(
-                "coding-standards:coverage-attestation:v2",
-                "coverage-attestation",
-                content,
-            )
-            if handle in seen:
-                raise _error(
-                    "COVERAGE.DUPLICATE_ATTESTATION",
-                    "attestation content is duplicated",
-                    path=source_path,
-                    observed=handle,
-                )
-            seen.add(handle)
-            result.append(
-                CoverageAttestation(
-                    handle,
-                    content["requirement"],
-                    conclusion,
-                    evidence,
-                    exclusions,
-                    content["rationale"],
-                    content["auditor_provenance"],
-                    raw["schema_version"],
-                    source_path,
-                )
-            )
-    return tuple(result), tuple(sorted(input_sources))
 
-
-def _certificate(
-    view: CoverageAuthorityView,
-    requirement: CoverageAuditRequirement,
-    attestation: CoverageAttestation,
-) -> ConsumerCoverageCertificate:
-    evidence_digests = tuple(sorted(item.digest for item in attestation.evidence))
-    relationship_digest = _digest(
-        [
-            {"edge": edge, "fingerprint": fingerprint}
-            for edge, fingerprint in view.relationship_fingerprints
-        ]
-    )
-    value = {
-        "coverage_view": view.handle,
-        "requirement": requirement.handle,
-        "attestation": attestation.handle,
-        "subject": view.subject,
-        "owner": view.owner,
-        "semantic_revision": view.semantic_revision,
-        "horizon_digest": view.horizon_digest,
-        "relationship_digest": relationship_digest,
-        "evidence_digests": list(evidence_digests),
-        "coverage_contract_version": COVERAGE_CONTRACT_VERSION,
-        "attestation_contract_version": ATTESTATION_CONTRACT_VERSION,
-    }
-    return ConsumerCoverageCertificate(
-        identity(
-            "coding-standards:consumer-coverage-certificate:v2",
-            "certificate",
-            value,
-        ),
-        view.handle,
-        requirement.handle,
-        attestation.handle,
-        view.subject,
-        view.owner,
-        view.semantic_revision,
-        view.horizon_digest,
-        relationship_digest,
-        evidence_digests,
-        COVERAGE_CONTRACT_VERSION,
-        ATTESTATION_CONTRACT_VERSION,
-    )
-
-
-def certify_coverage(
-    index: CoverageIndex,
-    attestation: CoverageAttestation,
-) -> tuple[CoverageIndex, ConsumerCoverageCertificate]:
-    subject = next(
-        (
-            policy_id
-            for policy_id, requirement in index.requirements.items()
-            if requirement.handle == attestation.requirement
-        ),
-        None,
-    )
-    if subject is None:
-        raise _error(
-            "COVERAGE.STALE_ATTESTATION",
-            "attestation does not match a current coverage requirement",
-            path=attestation.source,
-            observed=attestation.requirement,
-            unavailable=True,
-        )
-    existing = index.certificate_for(subject)
-    if existing is not None:
-        if existing.attestation == attestation.handle:
-            return index, existing
-        raise _error(
-            "COVERAGE.DUPLICATE_SUBJECT",
-            "coverage subject already has a different current attestation",
-            path=attestation.source,
-            observed=subject,
-        )
-    if attestation.conclusion != "complete" or not attestation.evidence:
-        raise _error(
-            "COVERAGE.ATTESTATION_INVALID",
-            "coverage attestation must be complete and carry evidence",
-            path=attestation.source,
-            observed=attestation.handle,
-        )
-    certificate = _certificate(
-        index.views[subject],
-        index.requirements[subject],
-        attestation,
-    )
-    attestations = dict(index.attestations)
-    attestations[attestation.handle] = attestation
-    certificates = dict(index.certificates)
-    certificates[subject] = certificate
-    return (
-        CoverageIndex(
-            index.horizon,
-            index.views,
-            index.requirements,
-            attestations,
-            certificates,
-            index.input_sources,
-        ),
-        certificate,
-    )
-
-
-def reuse_coverage_certificate(
-    index: CoverageIndex,
-    certificate: ConsumerCoverageCertificate,
-) -> CoverageIndex:
-    view = index.views.get(certificate.subject)
-    requirement = index.requirements.get(certificate.subject)
-    if (
-        view is None
-        or requirement is None
-        or certificate.coverage_view != view.handle
-        or certificate.requirement != requirement.handle
-    ):
-        raise _error(
-            "COVERAGE.STALE_CERTIFICATE",
-            "certificate does not match the current coverage authority",
-            observed=certificate.handle,
-            unavailable=True,
-        )
-    existing = index.certificate_for(certificate.subject)
-    if existing is not None:
-        if existing.handle == certificate.handle:
-            return index
-        raise _error(
-            "COVERAGE.DUPLICATE_SUBJECT",
-            "coverage subject already has a different current certificate",
-            observed=certificate.subject,
-        )
-    certificates = dict(index.certificates)
-    certificates[certificate.subject] = certificate
-    return CoverageIndex(
-        index.horizon,
-        index.views,
-        index.requirements,
-        index.attestations,
-        certificates,
-        index.input_sources,
-    )
-
-
-def compile_coverage(
-    root: Path,
+def compile_coverage_definitions(
     corpus: CanonicalStandardsCorpus,
     compiled: CompiledPolicyImpactSet,
-    *,
-    horizon_path: str = DEFAULT_HORIZON,
-    attestation_registry_path: str = DEFAULT_ATTESTATION_REGISTRY,
-    derived_from_snapshot: str | None = None,
-) -> CoverageIndex:
-    repo_root = root.resolve()
-    horizon = load_coverage_horizon(repo_root, corpus, compiled, horizon_path)
+    horizon: CoverageHorizon,
+) -> CoverageDefinitionIndex:
     views = {
         unit.id: derive_coverage_view(unit, compiled, horizon)
         for unit in corpus.policy_units
     }
     requirements = {
-        unit_id: derive_coverage_requirement(
-            view,
-            derived_from_snapshot=derived_from_snapshot,
-        )
-        for unit_id, view in views.items()
+        subject: derive_coverage_requirement(view)
+        for subject, view in views.items()
     }
-    attestations, attestation_inputs = _load_attestations(
-        repo_root,
-        attestation_registry_path,
-    )
-    by_requirement = {
-        requirement.handle: unit_id for unit_id, requirement in requirements.items()
-    }
-    certificates: dict[str, ConsumerCoverageCertificate] = {}
-    attestation_index: dict[str, CoverageAttestation] = {}
-    for attestation in attestations:
-        unit_id = by_requirement.get(attestation.requirement)
-        if unit_id is None:
-            raise _error(
-                "COVERAGE.STALE_ATTESTATION",
-                "attestation does not match a current coverage requirement",
-                path=attestation.source,
-                observed=attestation.requirement,
-                unavailable=True,
-            )
-        if unit_id in certificates:
-            raise _error(
-                "COVERAGE.DUPLICATE_SUBJECT",
-                "coverage subject has more than one current attestation",
-                path=attestation.source,
-                observed=unit_id,
-            )
-        attestation_index[attestation.handle] = attestation
-        certificates[unit_id] = _certificate(
-            views[unit_id],
-            requirements[unit_id],
-            attestation,
-        )
-    return CoverageIndex(
+    return CoverageDefinitionIndex(
         horizon,
         views,
         requirements,
-        attestation_index,
-        certificates,
-        tuple(sorted({*horizon.input_sources, *attestation_inputs})),
+        horizon.input_sources,
     )
+
+
+__all__ = (
+    "CoverageDefinitionIndex",
+    "CoverageHorizon",
+    "CoverageHorizonMember",
+    "CoverageRequirementDefinition",
+    "CoverageViewDefinition",
+    "DEFAULT_HORIZON",
+    "HORIZON_ID",
+    "HORIZON_PROVIDER",
+    "compile_coverage_definitions",
+    "derive_coverage_requirement",
+    "derive_coverage_view",
+    "load_coverage_horizon",
+)

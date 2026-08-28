@@ -208,10 +208,10 @@ def _string(value: IdentityValue, field: str) -> str:
     return value
 
 
-AUTHORITY_CODECS = (ContentSnapshotCodec(),)
+CONTENT_SNAPSHOT_CODEC = ContentSnapshotCodec()
 
 __all__ = (
-    "AUTHORITY_CODECS",
+    "CONTENT_SNAPSHOT_CODEC",
     "CaptureRequest",
     "ContentSnapshot",
     "ContentSnapshotCodec",

@@ -2,8 +2,25 @@
 name = "standards-engine"
 version = "0.1.0"
 description = "Typed standards navigation and analysis facade"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "repository-graph-engine",
+    "standards-analysis",
+    "standards-applicability",
+    "standards-authority",
+    "standards-contracts",
+    "standards-graph",
+    "standards-identity",
+    "standards-metadata",
+    "standards-policy-impact",
+]
+
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.standards_engine.standards_engine"
+repository-entrypoints = [
+    "tools/standards_engine/contracts/generate_contract.py",
+]
 
 [tool.unittest]
 start-directory = "tests"

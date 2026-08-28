@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-import json
 import unittest
-from pathlib import Path
 
 from tools.standards_analysis.standards_analysis import (
-    CHANGE_GRAPH_GROUPS,
     POLICY_IMPACT,
     STANDARDS_REQUIRES,
     STANDARDS_SPECIALIZES,
@@ -19,7 +16,7 @@ from tools.standards_analysis.standards_analysis import (
     SemanticState,
     classify_changes,
 )
-from tools.standards_engine.contracts.validate_contracts import validate
+from contract_support import validate_contract
 from tools.standards_metadata.standards_metadata import (
     PolicyUnit,
     PolicyUnitCorpus,
@@ -27,12 +24,6 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-SCHEMA = json.loads(
-    (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text(
-        encoding="utf-8"
-    )
-)
 STRUCTURED = ReviewScope("structured", ("Policy",))
 WHOLE = ReviewScope("whole-artifact")
 DIGEST_A = "sha256:" + "a" * 64
@@ -93,12 +84,6 @@ def descriptor(
 
 
 class ChangeClassificationTest(unittest.TestCase):
-    def test_implemented_graph_group_projection_matches_canonical_schema(self) -> None:
-        projected = SCHEMA["x-standards-engine-contract"]["impact_graph_groups"]
-        for kind, (accepted, proposed) in CHANGE_GRAPH_GROUPS.items():
-            self.assertEqual(list(accepted), projected[kind]["accepted"])
-            self.assertEqual(list(proposed), projected[kind]["proposed"])
-
     def test_semantic_modification_binds_overlay_and_exact_graph_groups(self) -> None:
         before = unit()
         after = unit(representation=DIGEST_B, structural=DIGEST_C)
@@ -133,12 +118,7 @@ class ChangeClassificationTest(unittest.TestCase):
         self.assertEqual(result.graph.accepted_groups, (POLICY_IMPACT,))
         self.assertEqual(result.graph.proposed_seeds, (before.id,))
         self.assertEqual(result.graph.proposed_groups, (POLICY_IMPACT,))
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["ChangedPolicyUnit"],
-            changed.as_contract(),
-            "$changed_unit",
-        )
+        validate_contract("ChangedPolicyUnit", changed.as_contract())
 
     def test_representation_only_change_does_not_claim_semantic_equivalence(self) -> None:
         before = unit()
@@ -394,12 +374,7 @@ class ChangeClassificationTest(unittest.TestCase):
             cross.graph.accepted_groups,
             (POLICY_IMPACT, STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
         )
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["ChangedPolicyUnit"],
-            cross.changed_units[0].as_contract(),
-            "$moved_unit",
-        )
+        validate_contract("ChangedPolicyUnit", cross.changed_units[0].as_contract())
 
     def test_split_retires_predecessor_and_proposes_exact_successors(self) -> None:
         before = unit("workflow.test.combined")
@@ -457,12 +432,7 @@ class ChangeClassificationTest(unittest.TestCase):
             )
         )
         for item in result.changed_units:
-            validate(
-                SCHEMA,
-                SCHEMA["$defs"]["ChangedPolicyUnit"],
-                item.as_contract(),
-                "$split_unit",
-            )
+            validate_contract("ChangedPolicyUnit", item.as_contract())
 
     def test_merge_retires_predecessors_and_proposes_exact_successor(self) -> None:
         first = unit("workflow.test.first")

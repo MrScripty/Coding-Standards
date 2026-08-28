@@ -1,0 +1,18 @@
+schema_version = 4
+
+[[attestations]]
+subject = "topic.security.filesystem-containment"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
+conclusion = "complete"
+evidence = [
+  "docs/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+]
+explicit_exclusions = []
+rationale = "The exact topic.security.filesystem-containment coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

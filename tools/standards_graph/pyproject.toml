@@ -2,8 +2,19 @@
 name = "standards-graph"
 version = "0.1.0"
 description = "Canonical standards graph adapters"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "repository-graph-engine",
+    "standards-authority",
+    "standards-identity",
+    "standards-metadata",
+    "standards-policy-impact",
+]
+
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.standards_graph.standards_graph"
+repository-entrypoints = []
 
 [tool.unittest]
 start-directory = "tests"

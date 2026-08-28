@@ -103,9 +103,15 @@ class AuthorityCodec(Protocol, Generic[T]):
 
 @dataclass(frozen=True, slots=True, init=False)
 class CodecSet:
+    owner_id: str
     codecs: tuple[AuthorityCodec[object], ...]
 
-    def __init__(self, codecs: Iterable[AuthorityCodec[object]]) -> None:
+    def __init__(
+        self,
+        owner_id: str,
+        codecs: Iterable[AuthorityCodec[object]],
+    ) -> None:
+        validate_scalar(owner_id, "codec owner_id", nonempty=True)
         exact = tuple(codecs)
         kinds: set[str] = set()
         contracts: set[tuple[str, str]] = set()
@@ -127,6 +133,7 @@ class CodecSet:
                 )
             kinds.add(codec.object_kind)
             contracts.add(key)
+        object.__setattr__(self, "owner_id", owner_id)
         object.__setattr__(self, "codecs", exact)
 
 

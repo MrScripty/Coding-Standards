@@ -4,7 +4,6 @@ import tomllib
 import re
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Mapping
 
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,

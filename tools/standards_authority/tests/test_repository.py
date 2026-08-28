@@ -25,22 +25,22 @@ class AuthorityRepositoryTests(unittest.TestCase):
         self.root_codec = FixtureCodec("fixture-root", frozenset({"fixture-child"}))
         self.store = MemoryObjectStore()
         self.repository = AuthorityRepository(
-            self.store, (CodecSet((self.child_codec, self.root_codec)),)
+            self.store, (CodecSet("test", (self.child_codec, self.root_codec)),)
         )
 
     def test_publish_resolve_and_idempotence(self) -> None:
         child = FixtureValue("child")
-        self.assertEqual(self.repository.publish(self.child_codec, child), "inserted")
+        child_handle = self.repository.publish(self.child_codec, child)
+        self.assertEqual(child_handle.object_kind, "fixture-child")
         child_id = self.child_codec.semantic_id(child, self.repository)  # type: ignore[arg-type]
         child_ref = AuthorityReference("fixture-child", child_id)
         root = FixtureValue("root", (child_ref,))
-        self.assertEqual(self.repository.publish(self.root_codec, root), "inserted")
-        self.assertEqual(
-            self.repository.publish(self.root_codec, root), "existing-identical"
-        )
+        root_handle = self.repository.publish(self.root_codec, root)
+        self.assertEqual(self.repository.publish(self.root_codec, root), root_handle)
         root_id = self.root_codec.semantic_id(root, self.repository)  # type: ignore[arg-type]
         resolved = self.repository.resolve(AuthorityHandle("fixture-root", root_id))
         self.assertEqual(resolved.value, root)
+        self.assertEqual(self.repository.codec_context().resolve(child_ref), child)
         self.assertEqual(
             self.repository.transitive_dependencies((resolved.handle.reference,)),
             (child_ref, resolved.handle.reference),
@@ -53,6 +53,36 @@ class AuthorityRepositoryTests(unittest.TestCase):
         with self.assertRaises(AuthorityError) as raised:
             self.repository.publish(self.root_codec, FixtureValue("root", (missing,)))
         self.assertEqual(raised.exception.failure.kind, "unavailable")
+
+    def test_verified_objects_are_decoded_once_per_repository(self) -> None:
+        class CountingCodec(FixtureCodec):
+            def __init__(self, object_kind, allowed):  # type: ignore[no-untyped-def]
+                super().__init__(object_kind, allowed)
+                self.decode_count = 0
+
+            def decode(self, payload, context):  # type: ignore[no-untyped-def]
+                self.decode_count += 1
+                return super().decode(payload, context)
+
+        child_codec = CountingCodec("cached-child", frozenset())
+        root_codec = CountingCodec("cached-root", frozenset({"cached-child"}))
+        repository = AuthorityRepository(
+            MemoryObjectStore(), (CodecSet("cached", (child_codec, root_codec)),)
+        )
+        child = repository.publish(child_codec, FixtureValue("child"))
+        root = repository.publish(
+            root_codec, FixtureValue("root", (child.reference,))
+        )
+        baseline = child_codec.decode_count, root_codec.decode_count
+
+        repository.resolve(root)
+        repository.resolve_reference(child.reference)
+        repository.transitive_dependencies((root.reference,))
+
+        self.assertEqual(baseline, (1, 1))
+        self.assertEqual(
+            (child_codec.decode_count, root_codec.decode_count), baseline
+        )
 
     def test_disallowed_dependency_kind_is_invalid(self) -> None:
         child = FixtureValue("child")
@@ -77,7 +107,7 @@ class AuthorityRepositoryTests(unittest.TestCase):
         store = MemoryObjectStore()
         envelope = AuthorityEnvelope("unknown-owner", "opaque", (), "unknown.v1", None)
         store.put_if_absent(envelope.handle, encode_envelope(envelope))
-        repository = AuthorityRepository(store, (CodecSet(()),))
+        repository = AuthorityRepository(store, (CodecSet("test", ()),))
         with self.assertRaises(AuthorityError) as raised:
             repository.resolve(envelope.handle)
         self.assertEqual(raised.exception.failure.kind, "unsupported")
@@ -85,7 +115,7 @@ class AuthorityRepositoryTests(unittest.TestCase):
     def test_known_owner_rejects_invalid_payload(self) -> None:
         codec = ContentSnapshotCodec()
         store = MemoryObjectStore()
-        repository = AuthorityRepository(store, (CodecSet((codec,)),))
+        repository = AuthorityRepository(store, (CodecSet("test", (codec,)),))
         envelope = AuthorityEnvelope(
             codec.object_kind,
             "opaque-invalid",
@@ -106,7 +136,7 @@ class AuthorityRepositoryTests(unittest.TestCase):
 
         codec = NameIdentityCodec("cycle", frozenset({"cycle"}))
         store = MemoryObjectStore()
-        repository = AuthorityRepository(store, (CodecSet((codec,)),))
+        repository = AuthorityRepository(store, (CodecSet("test", (codec,)),))
         one_ref = AuthorityReference("cycle", "cycle:one")
         two_ref = AuthorityReference("cycle", "cycle:two")
         one = FixtureValue("one", (two_ref,))
@@ -140,7 +170,7 @@ class AuthorityRepositoryTests(unittest.TestCase):
 
         codec = NameIdentityCodec("deep", frozenset({"deep"}))
         store = MemoryObjectStore()
-        repository = AuthorityRepository(store, (CodecSet((codec,)),))
+        repository = AuthorityRepository(store, (CodecSet("test", (codec,)),))
         dependency: tuple[AuthorityReference, ...] = ()
         final_value: FixtureValue | None = None
         for index in range(1_500):

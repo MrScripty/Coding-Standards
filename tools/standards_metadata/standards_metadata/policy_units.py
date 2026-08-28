@@ -1,19 +1,28 @@
 from __future__ import annotations
 
+import hashlib
 import re
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Any, Iterable
+from typing import Any
 
 from .errors import MetadataError, MetadataFailure
 from .model import CanonicalModuleCorpus, CanonicalStandardsCorpus
-from .serialization import canonical_json_bytes, digest_bytes
+from tools.standards_identity.standards_identity import (
+    IdentityArray,
+    IdentityObject,
+    encode_identity_value,
+)
 
 
 POLICY_UNIT_REGISTRY = "evaluation/standards-effectiveness/policy-units/registry.toml"
 ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]*$")
 HEADING_PATTERN = re.compile(r"^(#{1,6})[ \t]+(.+?)[ \t]*#*[ \t]*$")
+
+
+def _digest_bytes(value: bytes) -> str:
+    return f"sha256:{hashlib.sha256(value).hexdigest()}"
 
 
 @dataclass(frozen=True, slots=True)
@@ -264,10 +273,15 @@ def markdown_structural_digest(section: bytes) -> str:
         else:
             paragraph.append(stripped)
     flush()
-    structure = canonical_json_bytes(
-        {"parser": "markdown-heading-v1", "blocks": blocks}
+    structure = encode_identity_value(
+        IdentityObject(
+            (
+                ("parser", "markdown-heading-v2"),
+                ("blocks", IdentityArray(blocks)),
+            )
+        )
     )
-    return digest_bytes(structure)
+    return _digest_bytes(structure)
 
 
 def _resolve_scope(
@@ -293,7 +307,7 @@ def _resolve_scope(
     _, start, end = matches[0]
     section = raw[start:end]
     return (
-        digest_bytes(section),
+        _digest_bytes(section),
         markdown_structural_digest(section),
         section.decode("utf-8"),
     )
@@ -540,6 +554,6 @@ def project_unmapped_module(
         module_id,
         module.path,
         tuple(unit_id for _start, _end, unit_id in ranges),
-        digest_bytes(raw),
-        digest_bytes(bytes(unmapped)),
+        _digest_bytes(raw),
+        _digest_bytes(bytes(unmapped)),
     )

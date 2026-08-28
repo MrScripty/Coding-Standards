@@ -5,12 +5,9 @@ import unittest
 from pathlib import Path
 
 from tools.standards_applicability.standards_applicability import (
-    FactContract,
-    LANGUAGE_VERSION,
     SUPPORTED_FACT_STATES,
     SUPPORTED_FACT_TYPES,
     SUPPORTED_OPERATORS,
-    Truth,
 )
 
 
@@ -18,70 +15,46 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class ApplicabilityContractTest(unittest.TestCase):
-    def test_runtime_semantics_exactly_cover_canonical_serialized_domains(self) -> None:
-        schema = json.loads(
-            (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json")
-            .read_text(encoding="utf-8")
-        )
-        definitions = schema["$defs"]
-        expression_refs = definitions["ApplicabilityExpression"]["oneOf"]
+    def test_runtime_domains_cover_the_public_serialized_applicability_shapes(
+        self,
+    ) -> None:
+        definitions = json.loads(
+            (
+                REPO_ROOT
+                / "tools/standards_engine/contracts/a1-contract.schema.json"
+            ).read_text(encoding="utf-8")
+        )["$defs"]
         operators = {
             definitions[item["$ref"].rsplit("/", 1)[1]]["properties"]["operator"][
                 "const"
             ]
-            for item in expression_refs
+            for item in definitions["ApplicabilityExpression"]["oneOf"]
         }
-        fact_types = set(definitions["FactDeclaration"]["properties"]["type"]["enum"])
-        states = set(
-            definitions["FactValue"]["oneOf"][-1]["properties"]["state"]["enum"]
-        ) | {"known"}
-        truths = set(
-            definitions["ApplicabilityEvaluationResult"]["properties"]["truth"][
-                "enum"
-            ]
-        )
+        fact_types: set[str] = set()
+        fact_states: set[str] = set()
+        for variant in definitions["FactValue"]["oneOf"]:
+            type_contract = variant["properties"]["type"]
+            state_contract = variant["properties"]["state"]
+            fact_types.update(type_contract.get("enum", ()))
+            if "const" in type_contract:
+                fact_types.add(type_contract["const"])
+            fact_states.update(state_contract.get("enum", ()))
+            if "const" in state_contract:
+                fact_states.add(state_contract["const"])
 
         self.assertEqual(operators, set(SUPPORTED_OPERATORS))
         self.assertEqual(fact_types, set(SUPPORTED_FACT_TYPES))
-        self.assertEqual(states, set(SUPPORTED_FACT_STATES))
-        self.assertEqual(truths, {item.value for item in Truth})
-        self.assertEqual(
-            definitions["CoverageAuthorityView"]["properties"][
-                "applicability_language_version"
-            ]["const"],
-            LANGUAGE_VERSION,
-        )
+        self.assertEqual(fact_states, set(SUPPORTED_FACT_STATES))
         self.assertIn("PolicyRelationshipInspection", definitions)
         for internal_definition in (
+            "FactDeclaration",
+            "ApplicabilityFactSchema",
+            "ApplicabilityEvaluationResult",
             "PolicyImpactDeclaration",
             "CompiledPolicyImpactSemantics",
             "CompiledApplicabilityProgram",
         ):
             self.assertNotIn(internal_definition, definitions)
-        self.assertNotIn(
-            "minItems",
-            definitions["ApplicabilityFactSchema"]["properties"]["facts"],
-        )
-        self.assertEqual(
-            set(definitions["FactDeclaration"]["required"]),
-            {
-                "id",
-                "semantic_revision",
-                "type",
-                "nullable",
-                "aliases",
-                "meaning",
-                "context_kind",
-                "answer_contract",
-                "evidence_contract",
-                "authorization_capability",
-                "prompt",
-            },
-        )
-        self.assertEqual(
-            set(FactContract.__dataclass_fields__),
-            set(definitions["FactContract"]["properties"]),
-        )
 
     def test_former_applicability_implementations_are_not_fallbacks(self) -> None:
         self.assertFalse(

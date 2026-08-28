@@ -13,7 +13,7 @@ from tools.standards_metadata.standards_metadata import (
 from .changes import ReviewScope
 from .errors import AnalysisError, AnalysisFailure
 from .obligations import Obligation
-from .serialization import canonical_json_bytes
+from .keys import analysis_key_bytes
 
 
 READING_STATES = frozenset({"selected", "unresolved", "conditional"})
@@ -129,7 +129,7 @@ class ReadingPlanEntry:
 
     def __post_init__(self) -> None:
         projected = tuple(reason for reason in self.reasons)
-        keys = tuple(canonical_json_bytes(reason) for reason in projected)
+        keys = tuple(analysis_key_bytes(reason) for reason in projected)
         if not keys or keys != tuple(sorted(set(keys))):
             raise _error(
                 "READING_PLAN.REASONS",
@@ -181,7 +181,7 @@ def compile_reading_plan(
     for selection in selections:
         key = (
             selection.target,
-            canonical_json_bytes(selection.scope.as_contract()),
+            analysis_key_bytes(selection.scope.as_contract()),
         )
         grouped.setdefault(key, []).append(selection)
 
@@ -197,7 +197,7 @@ def compile_reading_plan(
                 observed=target,
             )
         reasons_by_content = {
-            canonical_json_bytes(item.cause.as_contract()): item.cause.as_contract()
+            analysis_key_bytes(item.cause.as_contract()): item.cause.as_contract()
             for item in selected
         }
         reasons = tuple(
@@ -234,7 +234,7 @@ def compile_reading_plan(
                 item[0],
                 item[1],
                 item[2].target,
-                canonical_json_bytes(item[2].scope.as_contract()),
+                analysis_key_bytes(item[2].scope.as_contract()),
             ),
         )
     )

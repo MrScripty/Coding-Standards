@@ -179,8 +179,13 @@ metadata = { repository_path = "evaluation/standards-effectiveness/suites/eviden
 
 [[nodes]]
 id = "generated-contract-semantic-conformance"
-aliases = ["evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml", suite_id = "generated-contract-semantic-conformance", artifact_kind = "enforcement-suite", authority = "evidence" }
+aliases = ["evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml", suite_id = "generated-contract-semantic-conformance", artifact_kind = "enforcement-suite", authority = "evidence" }
+
+[[nodes]]
+id = "a1b-public-cutover"
+aliases = ["evaluation/standards-effectiveness/suites/a1b-public-cutover.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/a1b-public-cutover.toml", suite_id = "a1b-public-cutover", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "contract-authority-scope"
@@ -189,8 +194,8 @@ metadata = { repository_path = "evaluation/standards-effectiveness/suites/contra
 
 [[nodes]]
 id = "immutable-authority-closure"
-aliases = ["evaluation/standards-effectiveness/suites/immutable-authority-closure.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/immutable-authority-closure.toml", suite_id = "immutable-authority-closure", artifact_kind = "enforcement-suite", authority = "evidence" }
+aliases = ["evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml", suite_id = "immutable-authority-closure", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
 id = "implementation-versus-dependency"
@@ -219,8 +224,16 @@ id = "tools/standards_engine/contracts/generate_contract.py"
 metadata = { repository_path = "tools/standards_engine/contracts/generate_contract.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_engine/contracts/validate_contracts.py"
-metadata = { repository_path = "tools/standards_engine/contracts/validate_contracts.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_contracts/standards_contracts/compiler.py"
+metadata = { repository_path = "tools/standards_contracts/standards_contracts/compiler.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_contracts/standards_contracts/runtime.py"
+metadata = { repository_path = "tools/standards_contracts/standards_contracts/runtime.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_identity/standards_identity/encoding.py"
+metadata = { repository_path = "tools/standards_identity/standards_identity/encoding.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/standards_engine/_generated_contract.py"
@@ -239,25 +252,265 @@ id = "tools/standards_engine/standards_engine/engine.py"
 metadata = { repository_path = "tools/standards_engine/standards_engine/engine.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_engine/standards_engine/model.py"
-metadata = { repository_path = "tools/standards_engine/standards_engine/model.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_authority/standards_authority/repository.py"
+metadata = { repository_path = "tools/standards_authority/standards_authority/repository.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_metadata/standards_metadata/serialization.py"
-metadata = { repository_path = "tools/standards_metadata/standards_metadata/serialization.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_authority/standards_authority/snapshot.py"
+metadata = { repository_path = "tools/standards_authority/standards_authority/snapshot.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_authority/standards_authority/closure.py"
+metadata = { repository_path = "tools/standards_authority/standards_authority/closure.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_applicability/standards_applicability/core.py"
 metadata = { repository_path = "tools/standards_applicability/standards_applicability/core.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_analysis/standards_analysis/snapshots.py"
-metadata = { repository_path = "tools/standards_analysis/standards_analysis/snapshots.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_analysis/standards_analysis/kernel.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/kernel.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_analysis/standards_analysis/resolution.py"
-metadata = { repository_path = "tools/standards_analysis/standards_analysis/resolution.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_analysis/standards_analysis/authority.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/authority.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_analysis/standards_analysis/results.py"
-metadata = { repository_path = "tools/standards_analysis/standards_analysis/results.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+id = "tools/standards_analysis/standards_analysis/trust.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/trust.py", artifact_kind = "implementation-artifact", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/authority-platform-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/authority-platform-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/graph_engine/graph_engine/__init__.py"
+metadata = { repository_path = "tools/graph_engine/graph_engine/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/graph_engine/pyproject.toml"
+metadata = { repository_path = "tools/graph_engine/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/query_edges.py"
+metadata = { repository_path = "tools/query_edges.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/pyproject.toml"
+metadata = { repository_path = "tools/standards_analysis/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/__init__.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_applicability/pyproject.toml"
+metadata = { repository_path = "tools/standards_applicability/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_applicability/standards_applicability/__init__.py"
+metadata = { repository_path = "tools/standards_applicability/standards_applicability/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_authority/README.md"
+metadata = { repository_path = "tools/standards_authority/README.md", artifact_kind = "documentation", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_authority/pyproject.toml"
+metadata = { repository_path = "tools/standards_authority/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_authority/standards_authority/__init__.py"
+metadata = { repository_path = "tools/standards_authority/standards_authority/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_authority/standards_authority/capture.py"
+metadata = { repository_path = "tools/standards_authority/standards_authority/capture.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_authority/tests/test_capture.py"
+metadata = { repository_path = "tools/standards_authority/tests/test_capture.py", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_authority/tests/test_platform.py"
+metadata = { repository_path = "tools/standards_authority/tests/test_platform.py", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_authority/tests/test_repository.py"
+metadata = { repository_path = "tools/standards_authority/tests/test_repository.py", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_contracts/pyproject.toml"
+metadata = { repository_path = "tools/standards_contracts/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_contracts/standards_contracts/__init__.py"
+metadata = { repository_path = "tools/standards_contracts/standards_contracts/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/README.md"
+metadata = { repository_path = "tools/standards_engine/contracts/README.md", artifact_kind = "documentation", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/a1-interface.toml"
+metadata = { repository_path = "tools/standards_engine/contracts/a1-interface.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/examples/a1-examples.json"
+metadata = { repository_path = "tools/standards_engine/contracts/examples/a1-examples.json", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/generated/agent-tools.json"
+metadata = { repository_path = "tools/standards_engine/contracts/generated/agent-tools.json", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_engine/contracts/identity-fixtures.json"
+metadata = { repository_path = "tools/standards_engine/contracts/identity-fixtures.json", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/pyproject.toml"
+metadata = { repository_path = "tools/standards_engine/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_engine/standards_engine/rendering.py"
+metadata = { repository_path = "tools/standards_engine/standards_engine/rendering.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_graph/pyproject.toml"
+metadata = { repository_path = "tools/standards_graph/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_graph/standards_graph/__init__.py"
+metadata = { repository_path = "tools/standards_graph/standards_graph/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_identity/README.md"
+metadata = { repository_path = "tools/standards_identity/README.md", artifact_kind = "documentation", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_identity/pyproject.toml"
+metadata = { repository_path = "tools/standards_identity/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_identity/standards_identity/__init__.py"
+metadata = { repository_path = "tools/standards_identity/standards_identity/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_metadata/pyproject.toml"
+metadata = { repository_path = "tools/standards_metadata/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_metadata/standards_metadata/__init__.py"
+metadata = { repository_path = "tools/standards_metadata/standards_metadata/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_policy_impact/pyproject.toml"
+metadata = { repository_path = "tools/standards_policy_impact/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_policy_impact/standards_policy_impact/__init__.py"
+metadata = { repository_path = "tools/standards_policy_impact/standards_policy_impact/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/generate_inventory.py"
+metadata = { repository_path = "tools/standards_verifier/generate_inventory.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/generate_numeric_audit.py"
+metadata = { repository_path = "tools/standards_verifier/generate_numeric_audit.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/generate_numeric_retirements.py"
+metadata = { repository_path = "tools/standards_verifier/generate_numeric_retirements.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/pyproject.toml"
+metadata = { repository_path = "tools/standards_verifier/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/standards_verifier/__init__.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/standards_verifier/checks/python_package_contract.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/python_package_contract.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/standards_verifier/entrypoints.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/entrypoints.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/standards_verifier/python_packages.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/python_packages.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/tests/test_python_package_contract.py"
+metadata = { repository_path = "tools/standards_verifier/tests/test_python_package_contract.py", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/missing-admitted-source.toml"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/missing-admitted-source.toml", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_verifier/verify.py"
+metadata = { repository_path = "tools/standards_verifier/verify.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/verify_git_reachability.py"
+metadata = { repository_path = "tools/verify_git_reachability.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/keys.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/keys.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/coverage.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/coverage.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/impact.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/impact.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/obligations.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/obligations.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/reading.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/reading.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_metadata/standards_metadata/policy_units.py"
+metadata = { repository_path = "tools/standards_metadata/standards_metadata/policy_units.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/standards_analysis/coverage_authority.py"
+metadata = { repository_path = "tools/standards_analysis/standards_analysis/coverage_authority.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_analysis/tests/test_coverage.py"
+metadata = { repository_path = "tools/standards_analysis/tests/test_coverage.py", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_engine/tests/test_c7_analysis.py"
+metadata = { repository_path = "tools/standards_engine/tests/test_c7_analysis.py", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "tools/standards_verifier/standards_verifier/policy_impact.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/policy_impact.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
+id = "tools/standards_verifier/tests/test_policy_impact.py"
+metadata = { repository_path = "tools/standards_verifier/tests/test_policy_impact.py", artifact_kind = "fixture", authority = "evidence" }

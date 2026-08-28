@@ -5,3 +5,9 @@ id = "topic.dependencies.implementation-versus-dependency"
 module = "topic.dependencies"
 heading_path = ["Implementation Versus Dependency"]
 semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.dependencies.requirement-and-ownership"
+module = "topic.dependencies"
+heading_path = ["Requirement And Ownership"]
+semantic_revision = 1

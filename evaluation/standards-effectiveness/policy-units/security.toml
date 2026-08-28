@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "topic.security.filesystem-containment"
+module = "topic.security"
+heading_path = ["Filesystem Containment"]
+semantic_revision = 1

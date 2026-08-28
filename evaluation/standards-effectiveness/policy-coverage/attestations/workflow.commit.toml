@@ -1,157 +1,248 @@
-schema_version = 2
+schema_version = 4
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:67e3bc334d98f418dcd1380e2916be9c73a00ae320a4782e1f8e1e96960c0898"
+subject = "workflow.commit.branch-context"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.per-commit-boundary coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.branch-context coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:c587b1584a9a851c7459babe068190125f26092e455b1ca3ad71982abb00ecf2"
+subject = "workflow.commit.branch-history-review"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.isolation-applicability coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.branch-history-review coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:fbc7dc8e088d62787c770c4c3c19bc64e161166f52038e85514a252cb444588b"
+subject = "workflow.commit.cherry-pick-lineage"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-context coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.cherry-pick-lineage coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:679435d80a0f14f4c262e02761ee02667709d2aef33c8261eed69b7f87cad006"
+subject = "workflow.commit.commit-message"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.integration-mechanisms coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.commit-message coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:6d7641353d4a9abb72f0181318a2fb8a492abba3e5f2c3fcce89b9c3b73024de"
+subject = "workflow.commit.hook-bypass-authority"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.cherry-pick-lineage coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.hook-bypass-authority coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:d7e066fb28ad01f2a96bdef7088aeff9e29b91a86de39bd50e5dbf7aac03dede"
+subject = "workflow.commit.integration-mechanisms"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.terminal-branch-lifecycle coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.integration-mechanisms coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:5ce5ac3a2a146276fbadeaa119da12a29aeb9c8011e8dfb0a7c453f9125899d3"
+subject = "workflow.commit.invalid-outcomes"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.worktree-lifecycle coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.invalid-outcomes coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:8f397604ded4148852ef82c5aa8be02793f052c427bf928e72efae4e275d5db9"
+subject = "workflow.commit.isolation-applicability"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-history-review coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.isolation-applicability coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:70943e3277e7f28f9279bd0a64c8e8c765e5b2982837764a457491626ca9772f"
+subject = "workflow.commit.per-commit-boundary"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.hook-bypass-authority coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.per-commit-boundary coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:cf9eb53d6b416077316fc5c4a964470816a9c6bcde2639b5324dcca145b1124b"
+subject = "workflow.commit.rewrite-authority"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.rewrite-authority coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.rewrite-authority coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:c9f3f184a582d7d11f56387687cd94feacd235befbed4d593599e94de9fc5c83"
+subject = "workflow.commit.terminal-branch-lifecycle"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.topology coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.terminal-branch-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:e19abb21c8cacee47d2d6043d14d828009632f7b92c011473318a29ca8775663"
+subject = "workflow.commit.topology"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.commit-message coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.topology coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:35b7fa69ab91ed3a0c71f107d6f8735224d03ad3a334fa64c4db6c4c70969d2d"
+subject = "workflow.commit.worktree-lifecycle"
+semantic_revision = 1
+horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
+horizon_version = 3
+relationship_kind_contract_version = 2
+applicability_language_version = 1
+coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.invalid-outcomes coverage view was re-reviewed against the frozen provider-v3 horizon. Prior dispositions remain applicable except for the Planning and Commit guardrail consumers explicitly updated in the renewal report; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.worktree-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

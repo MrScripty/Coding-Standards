@@ -796,3 +796,76 @@
   changed.
 - Milestone 2 is `Implemented`. The next substantive work is the atomic
   Milestone 3 v11 production cutover.
+
+## 2026-08-28 - Milestone 3 Coverage Authority Replan
+
+- Policy-impact migration verification exposed two reachable coverage identity
+  generations: the accepted C7 v3 owner codecs and the old v2 static compiler
+  still used by the Standards Verifier.
+- The v2 path also treated repository provenance text as sufficient authority,
+  bypassing C7's exact authorization evidence and revocation contracts.
+- `Superseded`: retaining the v2 static coverage compiler beside C7 and renewing
+  its requirement handles. Repository attestation files are now claim inputs,
+  not self-validating certificates or a second identity authority.
+- Replacement: one closed repository authorization/revocation authority feeds
+  one Analysis-owned v3 constructor used by Engine composition and Verifier.
+  Every old v2 coverage identity, export, and fallback is removed in the same
+  Milestone 3 cutover.
+- Added only the authorization and revocation authority files to the Milestone
+  3 write set. The ADR, public v11 contract, A2 scope, and horizon-freeze order
+  are unchanged. No separate lifecycle or commit-topology operation applies.
+
+## 2026-08-28 - Milestone 3 Generated-Handle Claim Replan
+
+- Final diff hygiene found one representation-only trailing line in a
+  registered Analysis source after repository claims had been mechanically
+  rewritten to current coverage-requirement hashes. The byte change altered the
+  global horizon digest and would have required replacing every authored claim
+  again despite no consumer-coverage change.
+- `Superseded`: repository claim schema v3, where each authored TOML record
+  copied a generated `coverage-requirement:sha256` handle and every generated
+  handle change required source mutation.
+- Replacement: repository claim schema v4 names the stable policy-unit subject
+  and exact semantic compatibility versions. Analysis resolves the current
+  requirement and remains the sole constructor of grants, attestations, and
+  certificates. Exact hashes remain in immutable snapshots and generated proof
+  objects only.
+- Interactive v11 submissions continue to reference their current generated
+  requirement handles. No public schema, ADR, policy meaning, relationship
+  contract, A2 behavior, or new authority registry changes.
+- Representation-only bytes may regenerate exact proof identities without
+  claim edits. A material subject or coverage-contract incompatibility still
+  rejects and requires explicit review.
+
+## 2026-08-28 - Milestone 3 Implemented
+
+- Replaced the accepted A1 production boundary atomically with the admitted
+  v11 generated algebra, codepoint-preserving identity encoding, dependency-
+  backed Draft validator, exact immutable authority repository, reference-only
+  standards views, roots-only execution closures, and immutable branchable
+  analysis state.
+- Every domain now exports its owner codec set. Public package roots,
+  manifests, direct imports, generated prelude, and repository entrypoints form
+  one statically verified dependency closure. Retired validators, generic
+  serializers, snapshot/session implementations, compatibility models, and old
+  coverage identities are absent.
+- Policy-impact migration compiles the closed accepted and proposed sources and
+  dispositions every natural key without a mutable count oracle. Cross-
+  Platform, Security, and Requirement And Ownership projections are registered
+  with their exact implementation and evidence consumers.
+- Repository coverage claims use schema v4 stable subjects and semantic
+  contract selectors. They contain no generated requirement or proof hash.
+  Analysis derives the current v3 grant, attestation, and certificate objects;
+  Engine and Verifier consume the same result. Exact required subjects equal
+  certificate subjects.
+- Focused package evidence passed: Identity 8, Contracts 18, Authority 38,
+  Applicability 12, Metadata 17, Graph Engine 37, Policy Impact 9, Standards
+  Graph 2, Analysis 66, Standards Engine 30, and Standards Verifier 385 tests.
+  The required-real SQLite interruption case passed through the admitted host
+  oracle.
+- All 226 registered declarative suites and all 53 retained migration checkers
+  passed. Generated freshness, plan validation, changed-file Ruff, and diff
+  hygiene passed.
+- Milestone 3 is `Implemented`. Automated objectives are satisfied. A1B-A6L
+  licensing confirmation and A1B-A11 independent content acceptance remain the
+  only pending objective claims; A2 remains inactive.

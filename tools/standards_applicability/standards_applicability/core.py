@@ -198,6 +198,21 @@ class FactSchema:
             root,
         )
 
+    def as_declaration(self) -> dict[str, object]:
+        return {
+            "kind": "applicability-fact-schema",
+            "id": self.id,
+            "version": self.version,
+            "facts": [
+                {
+                    **item.semantic_projection(),
+                    "aliases": list(item.aliases),
+                    "prompt": item.prompt,
+                }
+                for item in self.definitions
+            ],
+        }
+
     def resolve(self, fact_id: str) -> FactContract | None:
         return self._index.get(fact_id)
 

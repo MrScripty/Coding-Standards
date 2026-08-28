@@ -143,7 +143,7 @@ class SQLiteStoreTests(unittest.TestCase):
                 (SnapshotFile(RepositoryPath(("file.txt",)), b"durable"),)
             )
             with SQLiteObjectStore(source) as store:
-                repository = AuthorityRepository(store, (CodecSet((codec,)),))
+                repository = AuthorityRepository(store, (CodecSet("test", (codec,)),))
                 repository.publish(codec, snapshot)
                 handle = repository.resolve_reference(
                     AuthorityReference(
@@ -151,14 +151,14 @@ class SQLiteStoreTests(unittest.TestCase):
                         codec.semantic_id(snapshot, repository),  # type: ignore[arg-type]
                     )
                 ).handle
-            recovery = SQLiteRecovery((CodecSet((codec,)),))
+            recovery = SQLiteRecovery((CodecSet("test", (codec,)),))
             recovery.backup(source, backup)
             recovery.restore(backup, restored)
             script = (
                 "from pathlib import Path; "
                 "from tools.standards_authority.standards_authority import *; "
                 f"s=SQLiteObjectStore(Path({str(restored)!r})); "
-                "r=AuthorityRepository(s,(CodecSet((ContentSnapshotCodec(),)),)); "
+                "r=AuthorityRepository(s,(CodecSet('test', (ContentSnapshotCodec(),)),)); "
                 f"print(r.resolve(AuthorityHandle({handle.object_kind!r}, {handle.semantic_id!r})).handle.semantic_id); "
                 "s.close()"
             )
@@ -184,10 +184,10 @@ class SQLiteStoreTests(unittest.TestCase):
                 (SnapshotFile(RepositoryPath(("file.txt",)), b"retained"),)
             )
             with SQLiteObjectStore(source) as store:
-                AuthorityRepository(store, (CodecSet((codec,)),)).publish(
+                AuthorityRepository(store, (CodecSet("test", (codec,)),)).publish(
                     codec, snapshot
                 )
-            recovery = SQLiteRecovery((CodecSet((codec,)),))
+            recovery = SQLiteRecovery((CodecSet("test", (codec,)),))
             recovery.backup(source, backup)
             bytes_before = source.read_bytes()
             corrupted = bytearray(backup.read_bytes())
@@ -199,7 +199,7 @@ class SQLiteStoreTests(unittest.TestCase):
             self.assertEqual(source.read_bytes(), bytes_before)
             with SQLiteObjectStore(source) as reopened:
                 AuthorityRepository(
-                    reopened, (CodecSet((codec,)),)
+                    reopened, (CodecSet("test", (codec,)),)
                 )._verify_all_stored()
 
     def test_cross_mount_recovery_rejects_before_destination_creation(self) -> None:
@@ -214,7 +214,7 @@ class SQLiteStoreTests(unittest.TestCase):
             with SQLiteObjectStore(source):
                 pass
             destination = shared_memory / f"a1b-{uuid.uuid4().hex}.sqlite3"
-            recovery = SQLiteRecovery((CodecSet(()),))
+            recovery = SQLiteRecovery((CodecSet("test", ()),))
             with self.assertRaises(AuthorityError) as raised:
                 recovery.backup(source, destination)
             self.assertEqual(raised.exception.failure.kind, "unsupported")

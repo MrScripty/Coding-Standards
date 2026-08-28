@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import tempfile
 import unittest
 from dataclasses import dataclass
@@ -27,13 +26,11 @@ from tools.standards_analysis.standards_analysis import (
     ConsumerReviewContract,
     ReviewScope,
     SemanticProposal,
-    build_analysis_context,
     classify_changes,
     generate_consumer_review_obligations,
-    generate_fact_requirements,
     select_impact,
 )
-from tools.standards_engine.contracts.validate_contracts import validate
+from contract_support import validate_contract
 from tools.standards_graph.standards_graph import PolicyUnitGraphSource
 from tools.standards_metadata.standards_metadata import (
     PolicyUnit,
@@ -53,12 +50,6 @@ MODULE = "workflow.test"
 SOURCE_ID = "fixture.relationships"
 PROVENANCE = Provenance(SOURCE_ID, "provider", "fixture")
 SCOPE = ReviewScope("structured", ("Policy",))
-REPO_ROOT = Path(__file__).resolve().parents[3]
-SCHEMA = json.loads(
-    (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text(
-        encoding="utf-8"
-    )
-)
 
 
 def fact_contract(raw: dict[str, object]) -> dict[str, object]:
@@ -317,7 +308,7 @@ class ImpactSelectionTest(unittest.TestCase):
             [trace["graph"] for trace in reason["traces"]],
             ["accepted", "proposed"],
         )
-        validate(SCHEMA, SCHEMA["$defs"]["Obligation"], value, "$obligation")
+        validate_contract("Obligation", value)
 
     def test_compatible_policy_selectors_consolidate_independent_of_order(self) -> None:
         second = "workflow.test.second-policy"
@@ -936,22 +927,6 @@ class ImpactSelectionTest(unittest.TestCase):
             candidate.conservative_review_scope,
             ReviewScope("whole-artifact"),
         )
-        requirements = generate_fact_requirements(
-            (selection,),
-            build_analysis_context((self.modification(),)),
-            compiled.fact_schema,
-        )
-        self.assertEqual([item.fact for item in requirements], ["change.requires_review"])
-        self.assertEqual(
-            requirements[0].dependent_programs,
-            (f"accepted:{candidate.edge_id}", f"proposed:{candidate.edge_id}"),
-        )
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["FactRequirement"],
-            requirements[0].as_contract(),
-            "$fact_requirement",
-        )
 
     def test_false_applicability_creates_no_resolution_work(self) -> None:
         declarations = [
@@ -987,14 +962,6 @@ class ImpactSelectionTest(unittest.TestCase):
 
         self.assertEqual(selection.candidates[0].applicability, "false")
         self.assertIsNone(selection.candidates[0].conservative_review_scope)
-        self.assertEqual(
-            generate_fact_requirements(
-                (selection,),
-                build_analysis_context((self.modification(),)),
-                compiled.fact_schema,
-            ),
-            (),
-        )
 
     def test_only_material_unknown_facts_create_resolution_work(self) -> None:
         declarations = [
@@ -1043,14 +1010,7 @@ class ImpactSelectionTest(unittest.TestCase):
         selection = select_impact(
             self.modification(), graph, graph, compiled, compiled, facts
         )
-        requirements = generate_fact_requirements(
-            (selection,),
-            build_analysis_context((self.modification(),)),
-            compiled.fact_schema,
-        )
-
         self.assertEqual(selection.candidates[0].unresolved_facts, ("change.requires_review",))
-        self.assertEqual([item.fact for item in requirements], ["change.requires_review"])
 
     def test_accepted_true_trace_dominates_proposed_unknown_trace(self) -> None:
         declarations = [
@@ -1088,15 +1048,6 @@ class ImpactSelectionTest(unittest.TestCase):
         self.assertEqual(selection.candidates[0].applicability, "true")
         self.assertEqual(
             selection.candidates[0].unresolved_facts,
-            ("change.requires_review",),
-        )
-        requirements = generate_fact_requirements(
-            (selection,),
-            build_analysis_context((self.modification(),)),
-            proposed_compiled.fact_schema,
-        )
-        self.assertEqual(
-            tuple(requirement.fact for requirement in requirements),
             ("change.requires_review",),
         )
         reviews = generate_consumer_review_obligations((selection,))

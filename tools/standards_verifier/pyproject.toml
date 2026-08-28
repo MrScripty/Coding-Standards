@@ -2,8 +2,29 @@
 name = "standards-verifier"
 version = "0.1.0"
 description = "Repository-local declarative verification engine"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "repository-graph-engine",
+    "standards-analysis",
+    "standards-applicability",
+    "standards-contracts",
+    "standards-engine",
+    "standards-graph",
+    "standards-metadata",
+    "standards-policy-impact",
+]
+
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.standards_verifier.standards_verifier"
+repository-entrypoints = [
+    "tools/query_edges.py",
+    "tools/verify_git_reachability.py",
+    "tools/standards_verifier/verify.py",
+    "tools/standards_verifier/generate_inventory.py",
+    "tools/standards_verifier/generate_numeric_audit.py",
+    "tools/standards_verifier/generate_numeric_retirements.py",
+]
 
 [tool.unittest]
 start-directory = "tests"

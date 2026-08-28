@@ -4,6 +4,11 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+from tools.standards_verifier.standards_verifier import generated_artifacts_main
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
 
 if sys.version_info < (3, 11):
     print(
@@ -12,8 +17,6 @@ if sys.version_info < (3, 11):
     )
     raise SystemExit(3)
 
-from standards_verifier.generated_artifacts import main
-
 
 if __name__ == "__main__":
-    raise SystemExit(main(default_repo_root=Path(__file__).resolve().parents[2]))
+    raise SystemExit(generated_artifacts_main(default_repo_root=REPO_ROOT))

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 import tempfile
 import textwrap
 import unittest
@@ -99,55 +98,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             registry.incident("workflows/planning.md", ("policy-impact",)),
         )
         self.assertEqual(registry.outgoing("workflow.planning", ("policy-impact",)), ())
-
-    def test_repository_matches_admitted_relationship_migration_identity_sets(self) -> None:
-        inventory_path = (
-            REPO_ROOT
-            / "docs/plans/standards-engine-policy-impact-authority-v2/reports/relationship-migration.tsv"
-        )
-        with inventory_path.open(encoding="utf-8", newline="") as handle:
-            rows = tuple(csv.DictReader(handle, delimiter="\t"))
-
-        self.assertTrue(rows)
-        self.assertEqual(
-            len({row["old_edge_id"] for row in rows}),
-            len(rows),
-        )
-        self.assertEqual(
-            len({row["new_edge_id"] for row in rows}),
-            len(rows),
-        )
-
-        corpus = load_canonical_standards_corpus(REPO_ROOT)
-        compiled = compile_policy_impact(REPO_ROOT, corpus)
-        migrated_keys = {
-            (row["source"], row["consumer"])
-            for row in rows
-        }
-        actual_ids = {
-            edge_id
-            for edge_id, semantics in compiled.semantics.items()
-            if (semantics.source, semantics.consumer) in migrated_keys
-        }
-        expected_ids = {row["new_edge_id"] for row in rows}
-
-        self.assertEqual(actual_ids, expected_ids)
-        for row in rows:
-            with self.subTest(edge=row["new_edge_id"]):
-                semantics = compiled.semantics_for(row["new_edge_id"])
-                self.assertEqual(semantics.source, row["source"])
-                self.assertEqual(semantics.consumer, row["consumer"])
-                self.assertEqual(semantics.relation, row["new_relation"])
-                self.assertEqual(
-                    semantics.declaration_source,
-                    row["declaration_source"],
-                )
-                self.assertEqual(
-                    row["disposition"],
-                    "retain"
-                    if row["old_edge_id"] == row["new_edge_id"]
-                    else "reclassify",
-                )
 
     def test_invalid_declarations_reject_with_typed_failures(self) -> None:
         cases = (

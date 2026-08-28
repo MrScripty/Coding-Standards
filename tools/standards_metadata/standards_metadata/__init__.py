@@ -24,13 +24,22 @@ from .policy_units import (
     markdown_structural_digest,
     project_unmapped_module,
 )
-from .serialization import canonical_json_bytes, digest_bytes
+from .authority import (
+    CANONICAL_STANDARDS_CORPUS_CODEC,
+    METADATA_CODECS,
+    CanonicalCorpusAuthority,
+    CanonicalStandardsCorpusCodec,
+)
 
 __all__ = (
     "CANONICAL_MODULE_CORPUS",
+    "CANONICAL_STANDARDS_CORPUS_CODEC",
+    "METADATA_CODECS",
     "POLICY_UNIT_REGISTRY",
     "CanonicalModuleCorpus",
     "CanonicalStandardsCorpus",
+    "CanonicalCorpusAuthority",
+    "CanonicalStandardsCorpusCodec",
     "MetadataError",
     "MetadataFailure",
     "MetadataValidation",
@@ -39,8 +48,6 @@ __all__ = (
     "PolicyUnitCorpus",
     "PolicyUnitTombstone",
     "UnmappedModuleProjection",
-    "canonical_json_bytes",
-    "digest_bytes",
     "load_canonical_standards_corpus",
     "load_canonical_module_corpus",
     "load_policy_unit_corpus",

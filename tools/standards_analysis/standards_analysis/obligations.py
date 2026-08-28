@@ -9,20 +9,17 @@ from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
     PolicyUnit,
     PolicyUnitTombstone,
-    canonical_json_bytes,
-    digest_bytes,
     project_unmapped_module,
 )
 
 from .changes import ChangedPolicyUnit, ClassifiedChange, ReviewScope
-from .coverage import CoverageIndex
 from .errors import AnalysisError, AnalysisFailure
 from .impact import ImpactSelection, ImpactTrace
-from .serialization import identity
+from .keys import analysis_identity, analysis_key_bytes, raw_digest
 
 
-OBLIGATION_DOMAIN = "coding-standards:obligation:v2"
-ABSENT_DIGEST = digest_bytes(canonical_json_bytes({"state": "absent"}))
+OBLIGATION_DOMAIN = "coding-standards:obligation:v3"
+ABSENT_DIGEST = raw_digest(analysis_key_bytes({"state": "absent"}))
 
 
 @dataclass(frozen=True, slots=True)
@@ -125,11 +122,11 @@ COVERAGE_DECISION_CONTRACT = DecisionContract(
         "provider-contract",
     ),
 )
-UNMAPPED_CONTRACT_DIGEST = digest_bytes(
-    canonical_json_bytes(UNMAPPED_DECISION_CONTRACT.as_contract())
+UNMAPPED_CONTRACT_DIGEST = raw_digest(
+    analysis_key_bytes(UNMAPPED_DECISION_CONTRACT.as_contract())
 )
-COVERAGE_CONTRACT_DIGEST = digest_bytes(
-    canonical_json_bytes(COVERAGE_DECISION_CONTRACT.as_contract())
+COVERAGE_CONTRACT_DIGEST = raw_digest(
+    analysis_key_bytes(COVERAGE_DECISION_CONTRACT.as_contract())
 )
 @dataclass(frozen=True, slots=True)
 class DecisionFingerprint:
@@ -275,7 +272,7 @@ def generate_consumer_review_obligations(
                 scope = _consumer_scope(semantics.consumer_scope)
                 key = (
                     semantics.consumer,
-                    canonical_json_bytes(scope.as_contract()),
+                    analysis_key_bytes(scope.as_contract()),
                     review_contract.id,
                 )
                 reason_key = (
@@ -355,7 +352,7 @@ def generate_consumer_review_obligations(
         }
         obligations.append(
             Obligation(
-                identity(OBLIGATION_DOMAIN, "obligation", identity_value),
+                analysis_identity(OBLIGATION_DOMAIN, "obligation", identity_value),
                 "consumer-review",
                 aggregate.target,
                 aggregate.scope,
@@ -429,8 +426,8 @@ def _consumer_fingerprint(
         DecisionDependency(
             "analysis-contract",
             f"consumer-review-key:{target}",
-            digest_bytes(
-                canonical_json_bytes(
+            raw_digest(
+                analysis_key_bytes(
                     {
                         "target": target,
                         "scope": scope.as_contract(),
@@ -442,7 +439,7 @@ def _consumer_fingerprint(
         DecisionDependency(
             "provider-contract",
             contract.id,
-            digest_bytes(canonical_json_bytes(contract.as_contract())),
+            raw_digest(analysis_key_bytes(contract.as_contract())),
         ),
     ]
     for source in sorted({reason.source for reason in reasons}):
@@ -461,7 +458,7 @@ def _consumer_fingerprint(
             DecisionDependency(
                 "policy-unit",
                 source,
-                digest_bytes(canonical_json_bytes(changed.as_contract())),
+                raw_digest(analysis_key_bytes(changed.as_contract())),
             )
         )
     for reason in reasons:
@@ -470,8 +467,8 @@ def _consumer_fingerprint(
             DecisionDependency(
                 "relationship",
                 reason.edge,
-                digest_bytes(
-                    canonical_json_bytes(
+                raw_digest(
+                    analysis_key_bytes(
                         {
                             "reason": reason.as_contract(),
                             "semantic_dependencies": sorted(
@@ -495,7 +492,7 @@ def _consumer_fingerprint(
         DecisionDependency(
             "applicability-fact",
             fact,
-            digest_bytes(canonical_json_bytes(sorted(fact_values[fact]))),
+            raw_digest(analysis_key_bytes(sorted(fact_values[fact]))),
         )
         for fact in sorted(fact_values)
     )
@@ -503,7 +500,7 @@ def _consumer_fingerprint(
         DecisionDependency(
             "evidence",
             owner,
-            digest_bytes(canonical_json_bytes({"evidence_owner": owner})),
+            raw_digest(analysis_key_bytes({"evidence_owner": owner})),
         )
         for owner in evidence_owners
     )
@@ -537,90 +534,6 @@ def _thaw_reason(value: object) -> object:
     return value
 
 
-def generate_coverage_obligations(
-    changes: Iterable[ClassifiedChange],
-    accepted: CoverageIndex,
-    proposed: CoverageIndex,
-) -> tuple[Obligation, ...]:
-    selected: dict[str, tuple[CoverageIndex, ReviewScope]] = {}
-    for change in changes:
-        descriptor = change.descriptor
-        index = proposed if descriptor.proposed_ids else accepted
-        subjects = descriptor.proposed_ids or descriptor.accepted_ids
-        for subject in subjects:
-            selected[subject] = (index, descriptor.scope)
-
-    obligations: list[Obligation] = []
-    for subject in sorted(selected):
-        index, scope = selected[subject]
-        requirement = index.requirements.get(subject)
-        view = index.views.get(subject)
-        if requirement is None or view is None:
-            raise AnalysisError(
-                AnalysisFailure(
-                    "COVERAGE.SUBJECT_UNAVAILABLE",
-                    "unavailable",
-                    "changed policy has no current coverage requirement",
-                    field="subject",
-                    observed=subject,
-                )
-            )
-        if index.certificate_for(subject) is not None:
-            continue
-        dependencies = (
-            DecisionDependency(
-                "audit",
-                requirement.handle,
-                digest_bytes(canonical_json_bytes(requirement.as_projection())),
-            ),
-            DecisionDependency(
-                "policy-unit",
-                subject,
-                digest_bytes(
-                    canonical_json_bytes(
-                        {
-                            "coverage_view": view.handle,
-                            "semantic_revision": view.semantic_revision,
-                            "representation_digest": view.representation_digest,
-                            "structural_digest": view.structural_digest,
-                        }
-                    )
-                ),
-            ),
-            DecisionDependency(
-                "provider-contract",
-                COVERAGE_DECISION_CONTRACT.id,
-                COVERAGE_CONTRACT_DIGEST,
-            ),
-        )
-        fingerprint = DecisionFingerprint(
-            "audit-coverage",
-            COVERAGE_DECISION_CONTRACT.id,
-            dependencies,
-        )
-        reason = {"kind": "audit-coverage", "source": subject}
-        identity_value = {
-            "kind": "audit-coverage",
-            "target": subject,
-            "scope": scope.as_contract(),
-            "reasons": [reason],
-            "fingerprint": fingerprint.as_contract(),
-        }
-        obligations.append(
-            Obligation(
-                identity(OBLIGATION_DOMAIN, "obligation", identity_value),
-                "audit-coverage",
-                subject,
-                scope,
-                (reason,),
-                "required",
-                ("coverage-attestation",),
-                fingerprint,
-            )
-        )
-    return tuple(obligations)
-
-
 def _authority_digest(value: PolicyUnit | PolicyUnitTombstone | None) -> str:
     if value is None:
         return ABSENT_DIGEST
@@ -645,7 +558,7 @@ def _authority_digest(value: PolicyUnit | PolicyUnitTombstone | None) -> str:
             "representation_digest": value.representation_digest,
             "structural_digest": value.structural_digest,
         }
-    return digest_bytes(canonical_json_bytes(projection))
+    return raw_digest(analysis_key_bytes(projection))
 
 
 def _module_policy_ids(
@@ -719,14 +632,14 @@ def generate_unmapped_normative_obligations(
                 f"{module_id}:accepted-module",
                 ABSENT_DIGEST
                 if before_module is None
-                else digest_bytes(canonical_json_bytes({"path": before_module.path})),
+                else raw_digest(analysis_key_bytes({"path": before_module.path})),
             ),
             DecisionDependency(
                 "module-locator",
                 f"{module_id}:proposed-module",
                 ABSENT_DIGEST
                 if after_module is None
-                else digest_bytes(canonical_json_bytes({"path": after_module.path})),
+                else raw_digest(analysis_key_bytes({"path": after_module.path})),
             ),
         ]
         changed_outside_units = (
@@ -788,7 +701,7 @@ def generate_unmapped_normative_obligations(
         }
         obligations.append(
             Obligation(
-                identity(OBLIGATION_DOMAIN, "obligation", identity_value),
+                analysis_identity(OBLIGATION_DOMAIN, "obligation", identity_value),
                 "unmapped-normative-change",
                 module_id,
                 ReviewScope("whole-artifact"),

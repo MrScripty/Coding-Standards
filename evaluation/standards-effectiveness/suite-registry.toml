@@ -1107,13 +1107,18 @@ requires = []
 
 [[suites]]
 id = "generated-contract-semantic-conformance"
-path = "evaluation/standards-effectiveness/suites/generated-contract-semantic-conformance.toml"
+path = "evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml"
 requires = []
 
 [[suites]]
 id = "immutable-authority-closure"
-path = "evaluation/standards-effectiveness/suites/immutable-authority-closure.toml"
+path = "evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml"
 requires = []
+
+[[suites]]
+id = "a1b-public-cutover"
+path = "evaluation/standards-effectiveness/suites/a1b-public-cutover.toml"
+requires = ["generated-contract-semantic-conformance", "immutable-authority-closure"]
 
 [[suites]]
 id = "implementation-versus-dependency"

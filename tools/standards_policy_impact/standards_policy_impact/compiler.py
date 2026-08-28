@@ -12,13 +12,13 @@ from tools.graph_engine.graph_engine import (
     Direction,
     Edge,
     EdgeGroup,
+    GraphError,
     GraphContribution,
     Node,
     Provenance,
     TraversalPolicy,
+    contained_path,
 )
-from tools.graph_engine.graph_engine.errors import GraphError
-from tools.graph_engine.graph_engine.paths import contained_path
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
     ApplicabilityProgram,

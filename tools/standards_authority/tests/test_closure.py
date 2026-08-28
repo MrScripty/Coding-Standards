@@ -22,7 +22,7 @@ class ExecutionClosureTests(unittest.TestCase):
         closure_codec = ExecutionClosureCodec({"fixture-root", "fixture-leaf"})
         repository = AuthorityRepository(
             MemoryObjectStore(),
-            (CodecSet((leaf_codec, root_codec, closure_codec)),),
+            (CodecSet("test", (leaf_codec, root_codec, closure_codec)),),
         )
         leaf = FixtureValue("leaf")
         repository.publish(leaf_codec, leaf)

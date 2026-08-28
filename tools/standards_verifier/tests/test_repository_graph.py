@@ -1,22 +1,22 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 import unittest
 from pathlib import Path
-
-
-REPO_ROOT = Path(__file__).resolve().parents[3]
-ENGINE_ROOT = REPO_ROOT / "tools/standards_verifier"
-sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(ENGINE_ROOT))
 
 from tools.standards_metadata.standards_metadata import load_canonical_module_corpus
 from tools.standards_graph.standards_graph import (
     METADATA_REQUIRES,
     METADATA_SPECIALIZES,
 )
-from standards_verifier.repository_graph import load_repository_registry
+from tools.standards_verifier.standards_verifier.repository_graph import (
+    load_repository_registry,
+)
+
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 SOURCE_REGISTRY = "evaluation/standards-effectiveness/edge-source-registry.toml"
@@ -123,11 +123,17 @@ class RepositoryGraphTest(unittest.TestCase):
         completed = subprocess.run(
             [
                 sys.executable,
+                "-P",
                 str(REPO_ROOT / "tools/query_edges.py"),
                 "--node",
                 "concurrent-plan-integration",
             ],
-            cwd=REPO_ROOT,
+            cwd=Path("/tmp"),
+            env={
+                **os.environ,
+                "PYTHONDONTWRITEBYTECODE": "1",
+                "PYTHONPATH": str(REPO_ROOT),
+            },
             check=False,
             capture_output=True,
             text=True,

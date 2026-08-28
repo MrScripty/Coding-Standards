@@ -48,3 +48,315 @@ relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:implementation-versus-dependency"
 rationale = "Suite enforces explicit dependency decisions and projections."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/graph_engine/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs the Verifier-to-Engine composition dependency and its public-root import."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/graph_engine/graph_engine/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_analysis/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_analysis/standards_analysis/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_applicability/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_applicability/standards_applicability/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_authority/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_authority/standards_authority/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_contracts/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_contracts/standards_contracts/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_engine/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_engine/standards_engine/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_graph/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_graph/standards_graph/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_identity/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_identity/standards_identity/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_metadata/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_metadata/standards_metadata/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_policy_impact/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_policy_impact/standards_policy_impact/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_engine/contracts/generate_contract.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/query_edges.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/verify_git_reachability.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/verify.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/generate_inventory.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/generate_numeric_audit.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/generate_numeric_retirements.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/entrypoints.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/python_packages.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/python_package_contract.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs the verifier implementation that proves exact policy-impact migration closure."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/tests/test_python_package_contract.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/missing-admitted-source.toml"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The fixture proves that an admitted declaration source cannot be omitted from the closed migration registry."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The evidence table closes accepted and proposed policy-impact natural keys without a mutable catalog count."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "a1b-public-cutover"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."

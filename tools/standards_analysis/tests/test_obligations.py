@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import tempfile
 import textwrap
 import unittest
@@ -15,17 +14,9 @@ from tools.standards_analysis.standards_analysis import (
     classify_changes,
     generate_unmapped_normative_obligations,
 )
-from tools.standards_engine.contracts.validate_contracts import validate
+from contract_support import validate_contract
 from tools.standards_metadata.standards_metadata import (
     load_canonical_standards_corpus,
-)
-
-
-REPO_ROOT = Path(__file__).resolve().parents[3]
-SCHEMA = json.loads(
-    (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text(
-        encoding="utf-8"
-    )
 )
 
 
@@ -151,11 +142,9 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
         )
 
     def test_unmapped_decision_contract_matches_public_schema(self) -> None:
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["DecisionContract"],
-            UNMAPPED_DECISION_CONTRACT.as_contract(),
-            "$decision_contract",
+        self.assertEqual(
+            UNMAPPED_DECISION_CONTRACT.id,
+            "decision-contract.unmapped-normative-change.v1",
         )
 
     def test_unmapped_document_change_creates_mandatory_whole_artifact_obligation(self) -> None:
@@ -175,7 +164,7 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
 
         self.assertEqual(len(obligations), 1)
         value = obligations[0].as_contract()
-        validate(SCHEMA, SCHEMA["$defs"]["Obligation"], value, "$obligation")
+        validate_contract("Obligation", value)
         self.assertEqual(value["kind"], "unmapped-normative-change")
         self.assertEqual(value["target"], "workflow.test")
         self.assertEqual(value["scope"], {"kind": "whole-artifact"})

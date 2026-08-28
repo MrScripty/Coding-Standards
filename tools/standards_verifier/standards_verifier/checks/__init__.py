@@ -5,6 +5,7 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
 from .decision import parse_decision_check
+from .contract_projection import parse_contract_projection_check
 from .derived_evidence import (
     parse_key_coverage_check,
     parse_repository_paths_check,
@@ -29,6 +30,8 @@ from .migration_python_dispositions import parse_migration_python_dispositions_c
 from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .path_state import parse_path_state_check
 from .policy_impact import parse_policy_impact_check
+from .policy_impact_migration import parse_policy_impact_migration_check
+from .python_package_contract import parse_python_package_contract_check
 from .reference_inventory import parse_reference_inventory_check
 from .relation import parse_relation_check
 from .table import parse_table_check
@@ -50,6 +53,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_text_check(raw, suite_id)
     if kind == "decision":
         return parse_decision_check(raw, suite_id)
+    if kind == "contract_projection":
+        return parse_contract_projection_check(raw, suite_id)
     if kind == "repository_subjects":
         return parse_repository_subjects_check(raw, suite_id)
     if kind == "repository_paths":
@@ -86,6 +91,10 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_path_state_check(raw, suite_id)
     if kind == "policy_impact":
         return parse_policy_impact_check(raw, suite_id)
+    if kind == "policy_impact_migration":
+        return parse_policy_impact_migration_check(raw, suite_id)
+    if kind == "python_package_contract":
+        return parse_python_package_contract_check(raw, suite_id)
     if kind == "metadata_graph":
         return parse_metadata_graph_check(raw, suite_id)
     if kind == "metadata_route":

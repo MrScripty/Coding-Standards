@@ -1,25 +1,16 @@
-"""Typed snapshot-bound Standards Engine facade."""
+"""Generated A1b contract and immutable authority composition."""
 
-from . import model as _model
-from .engine import (
-    AnalysisStateStore,
-    DirectoryAnalysisStateStore,
-    InMemoryAnalysisStateStore,
-    StandardsEngine,
-)
+from ._generated_contract import *  # noqa: F403
+from ._generated_contract import __all__ as _contract_all
+from .authority import ENGINE_CODECS
+from .engine import StandardsEngine
 from .rendering import render_text
 from .tools import AgentToolFacade
 
-
-for _name in _model.__all__:
-    globals()[_name] = getattr(_model, _name)
-
 __all__ = (
-    *_model.__all__,
+    *_contract_all,
     "AgentToolFacade",
-    "AnalysisStateStore",
-    "DirectoryAnalysisStateStore",
-    "InMemoryAnalysisStateStore",
+    "ENGINE_CODECS",
     "StandardsEngine",
     "render_text",
 )

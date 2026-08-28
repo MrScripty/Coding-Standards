@@ -1,0 +1,28 @@
+schema_version = 1
+interface_schema_version = 11
+request_contract_version = 3
+result_projection_version = 3
+
+[[operations]]
+id = "query"
+input_definition = "QueryCall"
+result_definitions = ["NavigationResult", "RejectedResult"]
+capability = "standards.read"
+
+[[operations]]
+id = "prepare"
+input_definition = "PrepareCall"
+result_definitions = ["PendingResult", "CompleteResult", "RejectedResult"]
+capability = "standards.analyze"
+
+[[operations]]
+id = "resolve"
+input_definition = "ResolveCall"
+result_definitions = ["PendingResult", "CompleteResult", "RejectedResult"]
+capability_by_submission = { provide-fact = "standards.analyze", consumer-disposition = "standards.review.consumer", impact-disposition = "standards.review.impact", coverage-attestation = "standards.review.audit" }
+
+[[operations]]
+id = "inspect"
+input_definition = "InspectCall"
+result_definitions = ["InspectionResult", "RejectedResult"]
+capability = "standards.read"

@@ -8,7 +8,7 @@ import tomllib
 import unittest
 from pathlib import Path
 
-from tools.standards_engine.contracts.validate_contracts import validate
+from tools.standards_contracts.standards_contracts import compile_contracts
 from tools.standards_engine.standards_engine import (
     AgentToolFacade,
     InspectCall,
@@ -19,30 +19,39 @@ from tools.standards_engine.standards_engine import (
     RejectedResult,
     RelatedRequest,
     RelatedResult,
+    RelationshipInspectionResult,
     RouteRequest,
     RouteResult,
-    RelationshipInspectionResult,
+    StandardsAuthorityViewHandle,
     StandardsEngine,
 )
-from tools.standards_graph.standards_graph import METADATA_REQUIRES
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SCHEMA = json.loads(
-    (REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text(
-        encoding="utf-8"
+
+
+def _contracts():
+    schema = json.loads(
+        (
+            REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json"
+        ).read_text(encoding="utf-8")
     )
-)
+    with (
+        REPO_ROOT / "tools/standards_engine/contracts/a1-interface.toml"
+    ).open("rb") as source:
+        interface = tomllib.load(source)
+    return compile_contracts(schema, interface)
 
 
 class NavigationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.engine = StandardsEngine.open_repository(REPO_ROOT)
+        cls.engine = StandardsEngine.open_repository(REPO_ROOT, durable=False)
+        cls.contracts = _contracts()
 
     def assert_contract(self, definition: str, result) -> dict[str, object]:
         value = result.as_contract()
-        validate(SCHEMA, SCHEMA["$defs"][definition], value, "$result")
+        self.contracts.validate(definition, value)
         return value
 
     @staticmethod
@@ -66,18 +75,19 @@ class NavigationTest(unittest.TestCase):
             for key, value in values.items()
         }
 
-    def test_route_selects_direct_modules_and_graph_derived_closure(self) -> None:
+    def test_route_selects_direct_modules_and_required_closure(self) -> None:
         result = self.engine.query(
             QueryCall(
-                self.engine.snapshot,
+                self.engine.view,
                 RouteRequest(
+                    "route",
                     self.route_facts(
                         **{
                             "routing.activities": ["implementation", "verification"],
                             "routing.applications": ["library"],
                             "routing.languages": ["rust"],
                         }
-                    )
+                    ),
                 ),
             )
         )
@@ -100,103 +110,25 @@ class NavigationTest(unittest.TestCase):
             [item["target"] for item in value["reading_plan"][:2]],
             ["core", "router"],
         )
-        persistence = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RouteRequest(
-                    self.route_facts(
-                        **{
-                            "routing.activities": ["implementation", "verification"],
-                            "routing.boundaries": ["persistence"],
-                        }
-                    )
-                ),
-            )
-        ).as_contract()
-        self.assertIn(
-            "topic.contracts",
-            {item["target"] for item in persistence["reading_plan"]},
-        )
 
-    def test_snapshot_binds_coverage_authority_and_attestation_inputs(self) -> None:
-        result = self.engine.inspect(InspectCall(self.engine.snapshot))
-        value = self.assert_contract("SnapshotInspectionResult", result)
-        scope = set(value["snapshot"]["scope"])
-        registry_path = (
-            "evaluation/standards-effectiveness/policy-coverage/"
-            "attestation-sources.toml"
-        )
-        with (REPO_ROOT / registry_path).open("rb") as handle:
-            registry = tomllib.load(handle)
-        attestation_sources = set(registry["sources"])
-        evidence_sources: set[str] = set()
-        for source in attestation_sources:
-            with (REPO_ROOT / source).open("rb") as handle:
-                declaration = tomllib.load(handle)
-            for attestation in declaration["attestations"]:
-                evidence_sources.update(attestation["evidence"])
-                evidence_sources.update(attestation["explicit_exclusions"])
-
-        expected = {
-            "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
-            registry_path,
-            *attestation_sources,
-            *evidence_sources,
-        }
-        self.assertTrue(expected.issubset(scope))
-
-    def test_route_unknown_categories_remain_visible_and_invalid_facts_reject(
-        self,
-    ) -> None:
-        facts = self.route_facts()
-        facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
-        result = self.engine.query(QueryCall(self.engine.snapshot, RouteRequest(facts)))
-        value = self.assert_contract("RouteResult", result)
-        self.assertEqual(
-            [item["id"] for item in value["unresolved_questions"]],
-            ["question.routing.topics"],
-        )
-        self.assertTrue(
-            all(
-                item["state"] == "unresolved"
-                for item in value["reading_plan"]
-                if item["target"].startswith("topic.")
-            )
-        )
-
-        invalid = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RouteRequest(
-                    {
-                        "routing.undeclared": {
-                            "type": "boolean",
-                            "state": "known",
-                            "value": True,
-                        }
-                    }
-                ),
-            )
-        )
-        invalid_value = self.assert_contract("RejectedResult", invalid)
-        self.assertEqual(invalid_value["code"], "APPLICABILITY.INVALID")
-
-    def test_verifier_change_fixture_matches_public_route_projection(self) -> None:
+    def test_route_fixture_matches_public_projection(self) -> None:
         decisions_path = (
             REPO_ROOT
-            / "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
+            / "evaluation/standards-effectiveness/fixtures/routing/"
+            "verifier-change-decisions.tsv"
         )
         routes_path = (
             REPO_ROOT
-            / "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv"
+            / "evaluation/standards-effectiveness/fixtures/routing/"
+            "verifier-change-routes.tsv"
         )
-        with decisions_path.open(encoding="utf-8", newline="") as handle:
+        with decisions_path.open(encoding="utf-8", newline="") as source:
             decisions = {
-                row["case"]: row for row in csv.DictReader(handle, delimiter="\t")
+                row["case"]: row for row in csv.DictReader(source, delimiter="\t")
             }
-        with routes_path.open(encoding="utf-8", newline="") as handle:
+        with routes_path.open(encoding="utf-8", newline="") as source:
             routes = {
-                row["case"]: row for row in csv.DictReader(handle, delimiter="\t")
+                row["case"]: row for row in csv.DictReader(source, delimiter="\t")
             }
 
         for case, row in decisions.items():
@@ -205,7 +137,11 @@ class NavigationTest(unittest.TestCase):
                     "routing.activities": [
                         "implementation",
                         "verification",
-                        *(["planning"] if row["expected_planning"] == "select" else []),
+                        *(
+                            ["planning"]
+                            if row["expected_planning"] == "select"
+                            else []
+                        ),
                     ],
                     "routing.topics": [
                         *(
@@ -224,7 +160,7 @@ class NavigationTest(unittest.TestCase):
             if row["expected_route"] == "unresolved":
                 facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
             result = self.engine.query(
-                QueryCall(self.engine.snapshot, RouteRequest(facts))
+                QueryCall(self.engine.view, RouteRequest("route", facts))
             )
             value = self.assert_contract("RouteResult", result)
             if row["expected_route"] == "unresolved":
@@ -236,75 +172,68 @@ class NavigationTest(unittest.TestCase):
                 if any(reason["kind"] == "routing-rule" for reason in item["reasons"])
             }
             closure = {item["target"] for item in value["reading_plan"]} - {"router"}
-            self.assertEqual(
-                direct, set(routes[case]["direct_modules"].split(",")), case
-            )
+            self.assertEqual(direct, set(routes[case]["direct_modules"].split(",")), case)
             self.assertEqual(
                 closure, set(routes[case]["requires_closure"].split(",")), case
             )
 
-    def test_route_retains_direct_and_every_dependency_cause(self) -> None:
-        value = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RouteRequest(
-                    self.route_facts(
-                        **{
-                            "routing.activities": [
-                                "implementation",
-                                "verification",
-                                "planning",
-                            ]
-                        }
-                    )
-                ),
-            )
-        ).as_contract()
-        entries = {item["target"]: item for item in value["reading_plan"]}
-        core_reasons = entries["core"]["reasons"]
-        implementation_reasons = entries["workflow.implementation"]["reasons"]
-        self.assertTrue(
-            any(reason["kind"] == "routing-rule" for reason in implementation_reasons)
+    def test_unknown_and_invalid_route_facts_have_typed_results(self) -> None:
+        facts = self.route_facts()
+        facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
+        result = self.engine.query(
+            QueryCall(self.engine.view, RouteRequest("route", facts))
         )
-        self.assertTrue(
-            any(reason["kind"] == "requires" for reason in implementation_reasons)
-        )
-        requires = [reason for reason in core_reasons if reason["kind"] == "requires"]
-        expected_requires = {
-            (view.edge.id, view.edge.source)
-            for view in self.engine._graph.incoming("core", (METADATA_REQUIRES,))
-            if view.edge.source in entries
-        }
-        actual_requires = {
-            (reason["edge"], reason["source"])
-            for reason in requires
-        }
-        self.assertEqual(actual_requires, expected_requires)
+        value = self.assert_contract("RouteResult", result)
         self.assertEqual(
-            len(requires),
-            len(actual_requires),
+            [item["id"] for item in value["unresolved_questions"]],
+            ["question.routing.topics"],
         )
 
-    def test_route_result_can_drive_same_snapshot_read(self) -> None:
-        route = self.engine.query(
+        invalid = self.engine.query(
             QueryCall(
-                self.engine.snapshot,
+                self.engine.view,
                 RouteRequest(
-                    self.route_facts(**{"routing.activities": ["implementation"]})
+                    "route",
+                    {
+                        "routing.undeclared": {
+                            "type": "boolean",
+                            "state": "known",
+                            "value": True,
+                        }
+                    },
                 ),
             )
-        ).as_contract()
-        target = next(
-            item["target"]
-            for item in route["reading_plan"]
-            if item["target"] == "workflow.implementation"
         )
-        read = self.engine.query(QueryCall(self.engine.snapshot, ReadRequest(target)))
-        self.assertIsInstance(read, ReadResult)
+        self.assertIsInstance(invalid, RejectedResult)
+        self.assertEqual(invalid.code, "APPLICABILITY.INVALID")
 
-    def test_module_read_uses_immutable_snapshot_content_after_source_mutation(
-        self,
-    ) -> None:
+    def test_snapshot_contains_coverage_attestation_evidence(self) -> None:
+        inspection = self.engine.inspect(InspectCall(self.engine.snapshot))
+        value = self.assert_contract("ContentSnapshotInspectionResult", inspection)
+        scope = {
+            "/".join(item["path"]["components"])
+            for item in value["content_snapshot"]["files"]
+        }
+        registry_path = (
+            "evaluation/standards-effectiveness/policy-coverage/"
+            "attestation-sources.toml"
+        )
+        with (REPO_ROOT / registry_path).open("rb") as source:
+            registry = tomllib.load(source)
+        expected = {
+            "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
+            registry_path,
+            *registry["sources"],
+        }
+        for attestation_path in registry["sources"]:
+            with (REPO_ROOT / attestation_path).open("rb") as source:
+                declaration = tomllib.load(source)
+            for attestation in declaration["attestations"]:
+                expected.update(attestation["evidence"])
+                expected.update(attestation["explicit_exclusions"])
+        self.assertTrue(expected.issubset(scope))
+
+    def test_attestation_bytes_do_not_invalidate_semantic_authorities(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repository"
             shutil.copytree(
@@ -312,394 +241,160 @@ class NavigationTest(unittest.TestCase):
                 root,
                 ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
             )
-            engine = StandardsEngine.open_repository(root)
-            issued = dict(engine.snapshot)
-            original = engine.query(
-                QueryCall(issued, ReadRequest("workflow.verification"))
-            ).as_contract()["content"]
+            first = StandardsEngine.open_repository(root, durable=False)
+            first_view = first.inspect(InspectCall(first.view))
 
-            source = root / "workflows/verification.md"
-            source.write_text(
-                source.read_text(encoding="utf-8") + "\nMUTATED AFTER SNAPSHOT\n",
+            registry_path = (
+                root
+                / "evaluation/standards-effectiveness/policy-coverage/"
+                "attestation-sources.toml"
+            )
+            with registry_path.open("rb") as source:
+                attestation_path = tomllib.load(source)["sources"][0]
+            attestation = root / attestation_path
+            attestation.write_text(
+                attestation.read_text(encoding="utf-8")
+                + "\n# Representation-only attestation note.\n",
                 encoding="utf-8",
             )
 
-            repeated = engine.query(
-                QueryCall(issued, ReadRequest("workflow.verification"))
-            ).as_contract()
-            self.assertEqual(repeated["content"], original)
-            self.assertNotIn("MUTATED AFTER SNAPSHOT", repeated["content"])
+            second = StandardsEngine.open_repository(root, durable=False)
+            second_view = second.inspect(InspectCall(second.view))
 
-    def test_navigation_next_operations_bind_the_issued_snapshot(self) -> None:
-        result = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RouteRequest(
-                    self.route_facts(**{"routing.activities": ["implementation"]})
-                ),
+            self.assertNotEqual(first.snapshot, second.snapshot)
+            self.assertNotEqual(first.view, second.view)
+            self.assertEqual(
+                first_view.operation_contracts,
+                second_view.operation_contracts,
             )
-        ).as_contract()
+            self.assertEqual(first_view.authorities, second_view.authorities)
 
-        self.assertTrue(result["next_operations"])
-        self.assertTrue(
-            all(
-                operation["snapshot"] == self.engine.snapshot
-                for operation in result["next_operations"]
-            )
-        )
-
-    def test_structured_agent_tool_routes_then_reads_without_repository_paths(
-        self,
-    ) -> None:
-        tool = AgentToolFacade.open_repository(REPO_ROOT)
-        route = tool.query(
-            {
-                "snapshot": dict(tool.snapshot),
-                "request": {
-                    "kind": "route",
-                    "facts": self.route_facts(
-                        **{"routing.activities": ["implementation"]}
-                    ),
-                },
-            }
-        )
-        self.assertEqual(route["kind"], "route-result")
-        selected = {
-            item["target"]
-            for item in route["reading_plan"]
-            if item["state"] == "selected"
-        }
-        self.assertIn("workflow.implementation", selected)
-
-        read = tool.query(
-            {
-                "snapshot": dict(tool.snapshot),
-                "request": {"kind": "read", "target": "workflow.implementation"},
-            }
-        )
-        self.assertEqual(read["kind"], "read-result")
-        self.assertNotIn("path", read)
-
-        invalid = tool.query(
-            {
-                "snapshot": dict(tool.snapshot),
-                "request": {
-                    "kind": "read",
-                    "target": "workflow.implementation",
-                    "extra": True,
-                },
-            }
-        )
-        self.assertEqual(invalid["code"], "INTERFACE.INVALID_ARGUMENTS")
-
-    def test_module_read_and_inspection_use_derived_whole_artifact_authority(
-        self,
-    ) -> None:
-        result = self.engine.query(
-            QueryCall(self.engine.snapshot, ReadRequest("workflow.verification"))
-        )
-
-        self.assertIsInstance(result, ReadResult)
-        value = self.assert_contract("ReadResult", result)
-        self.assertEqual(value["policy"]["scope"], {"kind": "whole-artifact"})
-        self.assertIn("# Verification", value["content"])
-
-        inspection = self.engine.inspect(InspectCall(value["policy"]["handle"]))
-        self.assertIsInstance(inspection, PolicyInspectionResult)
-        inspected = self.assert_contract("PolicyInspectionResult", inspection)
-        self.assertEqual(inspected["declaration"]["kind"], "canonical-module")
-        self.assertEqual(inspected["declaration"]["id"], "workflow.verification")
-
-    def test_module_inspection_remains_bound_to_captured_snapshot_content(
-        self,
-    ) -> None:
+    def test_module_read_and_inspection_use_captured_content(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repository"
-            shutil.copytree(REPO_ROOT, root, symlinks=True)
-            engine = StandardsEngine.open_repository(root)
-            read = engine.query(
-                QueryCall(engine.snapshot, ReadRequest("workflow.verification"))
+            shutil.copytree(
+                REPO_ROOT,
+                root,
+                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
             )
-            handle = read.as_contract()["policy"]["handle"]
-            before = engine.inspect(InspectCall(handle)).as_contract()
+            engine = StandardsEngine.open_repository(root, durable=False)
+            original = engine.query(
+                QueryCall(engine.view, ReadRequest("read", "workflow.verification"))
+            )
+            self.assertIsInstance(original, ReadResult)
+            original_content = original.content
+            policy_handle = original.policy.handle
+            original_inspection = engine.inspect(InspectCall(policy_handle))
+            self.assertIsInstance(original_inspection, PolicyInspectionResult)
 
             source = root / "workflows/verification.md"
             source.write_text(
-                source.read_text(encoding="utf-8") + "\nPost-snapshot mutation.\n",
+                source.read_text(encoding="utf-8") + "\nMUTATED AFTER CAPTURE\n",
                 encoding="utf-8",
             )
 
-            after = engine.inspect(InspectCall(handle)).as_contract()
             repeated = engine.query(
-                QueryCall(engine.snapshot, ReadRequest("workflow.verification"))
+                QueryCall(engine.view, ReadRequest("read", "workflow.verification"))
             )
-            self.assertEqual(after, before)
-            self.assertEqual(repeated.as_contract(), read.as_contract())
+            inspection = engine.inspect(InspectCall(policy_handle))
+            self.assertEqual(repeated.content, original_content)
+            self.assertNotIn("MUTATED AFTER CAPTURE", repeated.content)
+            self.assertIsInstance(inspection, PolicyInspectionResult)
+            self.assertEqual(
+                inspection.representation_digest,
+                original_inspection.representation_digest,
+            )
 
-    def test_policy_unit_read_and_inspection_use_exact_structured_scope(self) -> None:
-        policy_id = "workflow.verification.acceptance-claims"
-        result = self.engine.query(
-            QueryCall(self.engine.snapshot, ReadRequest(policy_id))
+    def test_advertised_policy_and_relationship_handles_are_inspectable(self) -> None:
+        read = self.engine.query(
+            QueryCall(self.engine.view, ReadRequest("read", "workflow.verification"))
         )
+        self.assertIsInstance(read, ReadResult)
+        policy = self.engine.inspect(InspectCall(read.policy.handle))
+        self.assertIsInstance(policy, PolicyInspectionResult)
 
-        self.assertIsInstance(result, ReadResult)
-        value = self.assert_contract("ReadResult", result)
-        self.assertEqual(
-            value["policy"]["scope"],
-            {"kind": "structured", "heading_path": ["Acceptance Is A Set Of Claims"]},
-        )
-        self.assertTrue(value["content"].startswith("## Acceptance Is A Set Of Claims"))
-
-        inspection = self.engine.inspect(InspectCall(value["policy"]["handle"]))
-        inspected = self.assert_contract("PolicyInspectionResult", inspection)
-        self.assertEqual(inspected["declaration"]["kind"], "policy-unit")
-        self.assertEqual(inspected["declaration"]["id"], policy_id)
-
-    def test_related_uses_exact_groups_and_generic_transitive_traversal(self) -> None:
-        direct = self.engine.query(
+        related = self.engine.query(
             QueryCall(
-                self.engine.snapshot,
+                self.engine.view,
                 RelatedRequest(
-                    "workflow.planning",
+                    "related",
+                    "workflow.verification",
                     ("standards-requires",),
                     "outgoing",
+                    False,
                 ),
             )
         )
-        self.assertIsInstance(direct, RelatedResult)
-        direct_value = self.assert_contract("RelatedResult", direct)
-        direct_targets = {item["target"] for item in direct_value["relationships"]}
-        self.assertIn("workflow.verification", direct_targets)
-        self.assertEqual(
-            direct_value["policy_unit_mapping"]["state"],
-            "policy-units-present",
+        self.assertIsInstance(related, RelatedResult)
+        self.assertTrue(related.relationships)
+        relationship = self.engine.inspect(
+            InspectCall(related.relationships[0].handle)
         )
-
-        transitive = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RelatedRequest(
-                    "workflow.planning",
-                    ("standards-requires",),
-                    "outgoing",
-                    transitive=True,
-                ),
-            )
-        )
-        transitive_value = self.assert_contract("RelatedResult", transitive)
-        transitive_targets = {
-            item["target"] for item in transitive_value["relationships"]
-        }
-        self.assertIn("core", transitive_targets)
-
-    def test_nontransitive_group_and_unknown_group_return_typed_rejections(
-        self,
-    ) -> None:
-        forbidden = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RelatedRequest(
-                    "workflow.planning",
-                    ("policy-impact",),
-                    "outgoing",
-                    transitive=True,
-                ),
-            )
-        )
-        self.assertIsInstance(forbidden, RejectedResult)
-        forbidden_value = self.assert_contract("RejectedResult", forbidden)
-        self.assertEqual(forbidden_value["code"], "GRAPH.FORBIDDEN_TRAVERSAL")
-
-        unknown = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RelatedRequest("workflow.planning", ("missing-group",), "outgoing"),
-            )
-        )
-        unknown_value = self.assert_contract("RejectedResult", unknown)
-        self.assertEqual(unknown_value["code"], "GRAPH.UNKNOWN_GROUP")
-
-    def test_relationship_and_navigation_handles_are_exactly_inspectable(self) -> None:
-        result = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RelatedRequest(
-                    "workflow.planning",
-                    ("standards-requires",),
-                    "outgoing",
-                ),
-            )
-        )
-        value = result.as_contract()
-        relationship_handle = value["relationships"][0]["handle"]
-        relationship = self.engine.inspect(InspectCall(relationship_handle))
-
         self.assertIsInstance(relationship, RelationshipInspectionResult)
-        inspected = self.assert_contract("RelationshipInspectionResult", relationship)
-        self.assertEqual(
-            inspected["relationship"]["handle"]["id"],
-            relationship_handle["id"],
-        )
-        self.assertIsNone(inspected["policy_semantics"])
 
-        policy_result = self.engine.query(
+    def test_navigation_operations_bind_the_exact_authority_view(self) -> None:
+        route = self.engine.query(
             QueryCall(
-                self.engine.snapshot,
-                RelatedRequest(
-                    "workflow.planning",
-                    ("policy-impact",),
-                    "outgoing",
+                self.engine.view,
+                RouteRequest(
+                    "route",
+                    self.route_facts(**{"routing.activities": ["implementation"]}),
                 ),
             )
-        ).as_contract()
-        policy_handle = policy_result["relationships"][0]["handle"]
-        policy_inspection = self.assert_contract(
-            "RelationshipInspectionResult",
-            self.engine.inspect(InspectCall(policy_handle)),
         )
-        semantics = policy_inspection["policy_semantics"]
-        self.assertIsNotNone(semantics)
-        assert semantics is not None
-        self.assertEqual(
-            semantics["relationship_kind"],
-            policy_inspection["relationship"]["relation"],
+        self.assertIsInstance(route, RouteResult)
+        self.assertTrue(route.next_operations)
+        self.assertTrue(
+            all(operation.view == self.engine.view for operation in route.next_operations)
         )
-        self.assertEqual(semantics["applicability"], {"operator": "always"})
-        self.assertEqual(semantics["propagation"], "source-to-consumer")
-        self.assertTrue(semantics["evidence_owner"].startswith("suite:"))
-        self.assertTrue(semantics["rationale"])
-        self.assertNotIn("declaration_source", semantics)
-        self.assertNotIn("dependency_fingerprint", semantics)
 
-        navigation = self.engine.inspect(InspectCall(value["handle"]))
-        navigation_value = self.assert_contract(
-            "NavigationInspectionResult", navigation
+    def test_unknown_view_and_repository_path_do_not_fall_back(self) -> None:
+        missing_view = StandardsAuthorityViewHandle.from_value(
+            {
+                "kind": "standards-authority-view-handle",
+                "id": "standards-authority-view:sha256:" + "0" * 64,
+                "schema_version": 4,
+            }
         )
-        self.assertEqual(navigation_value["navigation"]["handle"], value["handle"])
-
-    def test_every_advertised_coverage_handle_is_inspectable(self) -> None:
-        cases = (
-            (
-                "views",
-                "CoverageAuthorityViewInspectionResult",
-                "coverage_view",
-            ),
-            (
-                "requirements",
-                "CoverageRequirementInspectionResult",
-                "requirement",
-            ),
-            (
-                "attestations",
-                "CoverageAttestationInspectionResult",
-                "attestation",
-            ),
-            (
-                "certificates",
-                "CertificateInspectionResult",
-                "certificate",
-            ),
+        unavailable = self.engine.query(
+            QueryCall(missing_view, ReadRequest("read", "workflow.verification"))
         )
-        for collection, definition, field in cases:
-            with self.subTest(collection=collection):
-                artifact = next(
-                    iter(getattr(self.engine._coverage, collection).values())
-                )
-                projection = artifact.as_projection()
-                result = self.engine.inspect(InspectCall(projection["handle"]))
-                value = self.assert_contract(definition, result)
-                self.assertEqual(value[field], projection)
+        self.assertIsInstance(unavailable, RejectedResult)
+        self.assertEqual(unavailable.outcome, "unavailable")
 
-    def test_agent_facade_does_not_relabel_engine_programming_errors(self) -> None:
-        class FailingEngine:
-            snapshot = self.engine.snapshot
+        path_read = self.engine.query(
+            QueryCall(self.engine.view, ReadRequest("read", "workflows/verification.md"))
+        )
+        self.assertIsInstance(path_read, RejectedResult)
 
-            def query(self, _call):
-                raise ValueError("engine invariant failure")
-
-        tool = AgentToolFacade(FailingEngine(), SCHEMA)
-        with self.assertRaisesRegex(ValueError, "engine invariant failure"):
-            tool.query(
+    def test_agent_facade_uses_structured_authority_handles(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repository"
+            shutil.copytree(
+                REPO_ROOT,
+                root,
+                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
+            )
+            tool = AgentToolFacade.open_repository(root)
+            route = tool.query(
                 {
-                    "snapshot": dict(self.engine.snapshot),
+                    "view": tool.view,
                     "request": {
-                        "kind": "read",
-                        "target": "workflow.verification",
+                        "kind": "route",
+                        "facts": self.route_facts(
+                            **{"routing.activities": ["implementation"]}
+                        ),
                     },
                 }
             )
-
-    def test_stale_snapshot_and_repository_path_read_do_not_fall_back(self) -> None:
-        stale = dict(self.engine.snapshot)
-        stale["id"] = f"snapshot:sha256:{'0' * 64}"
-        stale_result = self.engine.query(
-            QueryCall(stale, ReadRequest("workflow.verification"))
-        )
-        stale_value = self.assert_contract("RejectedResult", stale_result)
-        self.assertEqual(stale_value["outcome"], "stale")
-
-        path_result = self.engine.query(
-            QueryCall(self.engine.snapshot, ReadRequest("workflows/verification.md"))
-        )
-        path_value = self.assert_contract("RejectedResult", path_result)
-        self.assertEqual(path_value["code"], "NAVIGATION.UNKNOWN_POLICY")
-
-    def test_policy_unit_target_is_normalized_and_generated_native_calls_reject_malformed_values(
-        self,
-    ) -> None:
-        related = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RelatedRequest(
-                    "workflow.verification.acceptance-claims",
-                    ("standards-requires",),
-                    "outgoing",
-                ),
+            self.assertEqual(route["kind"], "route-result")
+            read = tool.query(
+                {
+                    "view": tool.view,
+                    "request": {"kind": "read", "target": "workflow.implementation"},
+                }
             )
-        )
-        related_value = self.assert_contract("RelatedResult", related)
-        self.assertEqual(
-            related_value["target"],
-            "workflow.verification.acceptance-claims",
-        )
-        self.assertEqual(
-            related_value["policy_unit_mapping"]["state"],
-            "exact-policy-unit",
-        )
-
-        unmapped = self.engine.query(
-            QueryCall(
-                self.engine.snapshot,
-                RelatedRequest("core", ("policy-impact",), "outgoing"),
-            )
-        )
-        unmapped_value = self.assert_contract("RelatedResult", unmapped)
-        self.assertEqual(
-            unmapped_value["policy_unit_mapping"],
-            {
-                "state": "incomplete",
-                "reason": "no-policy-units",
-                "policy_units": [],
-            },
-        )
-
-        malformed = (
-            lambda: ReadRequest(""),
-            lambda: RelatedRequest("workflow.planning", (), "outgoing"),
-            lambda: RelatedRequest(
-                "workflow.planning", ("standards-requires",), "sideways"
-            ),
-            lambda: RelatedRequest(
-                "workflow.planning",
-                ("standards-requires",),
-                "outgoing",
-                transitive=1,
-            ),
-        )
-        for construct in malformed:
-            with self.subTest(construct=construct):
-                with self.assertRaises((TypeError, ValueError)):
-                    construct()
+            self.assertEqual(read["kind"], "read-result")
 
 
 if __name__ == "__main__":

@@ -35,6 +35,14 @@
     "AnalysisContext": {
       "additionalProperties": false,
       "properties": {
+        "changes": {
+          "items": {
+            "$ref": "#/$defs/ChangeDescriptor"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
         "handle": {
           "$ref": "#/$defs/AnalysisContextHandle"
         },
@@ -61,29 +69,14 @@
         "kind",
         "handle",
         "subjects",
+        "changes",
         "semantic_proposals"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:analysis-context:v1",
-        "exclude": [
-          "handle.id",
-          "handle.kind",
-          "handle.schema_version"
-        ],
-        "include": [
-          "handle.context_kind",
-          "subjects",
-          "semantic_proposals"
-        ]
-      }
+      "type": "object"
     },
     "AnalysisContextHandle": {
       "additionalProperties": false,
       "properties": {
-        "context_kind": {
-          "const": "standards-change"
-        },
         "id": {
           "$ref": "#/$defs/AnalysisContextId"
         },
@@ -91,19 +84,18 @@
           "const": "analysis-context-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 4
         }
       },
       "required": [
         "kind",
         "id",
-        "context_kind",
         "schema_version"
       ],
       "type": "object"
     },
     "AnalysisContextId": {
-      "pattern": "^standards-change:sha256:[0-9a-f]{64}$",
+      "pattern": "^analysis-context:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
     "AnalysisContextInspectionResult": {
@@ -132,7 +124,7 @@
           "const": "analysis-handle"
         },
         "schema_version": {
-          "const": 3
+          "const": 4
         }
       },
       "required": [
@@ -143,14 +135,14 @@
       "type": "object"
     },
     "AnalysisId": {
-      "pattern": "^analysis:sha256:[0-9a-f]{64}$",
+      "pattern": "^analysis-root:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
     "AnalysisRequest": {
       "additionalProperties": false,
       "properties": {
-        "base_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "base_view": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         },
         "changes": {
           "items": {
@@ -160,7 +152,7 @@
           "type": "array"
         },
         "contract_version": {
-          "const": 2
+          "const": 3
         },
         "kind": {
           "const": "analysis-request"
@@ -168,8 +160,8 @@
         "prior_analysis": {
           "$ref": "#/$defs/AnalysisHandle"
         },
-        "proposed_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "proposed_view": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         },
         "semantic_proposals": {
           "items": {
@@ -181,8 +173,8 @@
       },
       "required": [
         "kind",
-        "base_snapshot",
-        "proposed_snapshot",
+        "base_view",
+        "proposed_view",
         "changes",
         "semantic_proposals",
         "contract_version"
@@ -192,21 +184,15 @@
     "AnalysisState": {
       "additionalProperties": false,
       "properties": {
-        "authorization_view": {
-          "$ref": "#/$defs/AuthorizationAuthorityView"
+        "authority": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
         },
-        "base_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "context": {
+          "$ref": "#/$defs/AnalysisContext"
         },
-        "changes": {
+        "coverage_attestations": {
           "items": {
-            "$ref": "#/$defs/ChangeDescriptor"
-          },
-          "type": "array"
-        },
-        "coverage_decisions": {
-          "items": {
-            "$ref": "#/$defs/CoverageDecision"
+            "$ref": "#/$defs/CoverageAttestation"
           },
           "type": "array",
           "uniqueItems": true
@@ -230,123 +216,16 @@
         },
         "kind": {
           "const": "analysis-state"
-        },
-        "proposed_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
-        "provenance": {
-          "$ref": "#/$defs/AnalysisVersions"
-        },
-        "provider_view": {
-          "$ref": "#/$defs/ProviderAuthorityView"
-        },
-        "semantic_proposals": {
-          "items": {
-            "$ref": "#/$defs/SemanticProposal"
-          },
-          "type": "array",
-          "uniqueItems": true
         }
       },
       "required": [
         "kind",
         "handle",
-        "base_snapshot",
-        "proposed_snapshot",
-        "changes",
-        "semantic_proposals",
-        "authorization_view",
-        "provider_view",
+        "context",
+        "authority",
         "fact_observations",
         "dispositions",
-        "coverage_decisions",
-        "provenance"
-      ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:analysis:v3",
-        "exclude": [
-          "kind",
-          "handle",
-          "provenance.interface_schema_version",
-          "provenance.graph_engine_implementation_version",
-          "provenance.analyzer_implementation_version"
-        ],
-        "include": [
-          "base_snapshot",
-          "proposed_snapshot",
-          "changes",
-          "semantic_proposals",
-          "authorization_view",
-          "provider_view",
-          "fact_observations",
-          "dispositions",
-          "coverage_decisions",
-          "provenance.analysis_contract_version",
-          "provenance.analysis_schema_version",
-          "provenance.result_schema_version",
-          "provenance.applicability_version",
-          "provenance.authorization_contract_version",
-          "provenance.metadata_api_version",
-          "provenance.graph_engine_contract_version",
-          "provenance.parser_versions",
-          "provenance.evidence_provider_contract_versions"
-        ]
-      }
-    },
-    "AnalysisVersions": {
-      "additionalProperties": false,
-      "properties": {
-        "analysis_contract_version": {
-          "const": 6
-        },
-        "analysis_schema_version": {
-          "const": 3
-        },
-        "analyzer_implementation_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "applicability_version": {
-          "const": 3
-        },
-        "authorization_contract_version": {
-          "const": "authorization-authority.v1"
-        },
-        "evidence_provider_contract_versions": {
-          "$ref": "#/$defs/VersionMap"
-        },
-        "graph_engine_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "graph_engine_implementation_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "interface_schema_version": {
-          "const": 10
-        },
-        "metadata_api_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "parser_versions": {
-          "$ref": "#/$defs/VersionMap"
-        },
-        "result_schema_version": {
-          "const": 2
-        }
-      },
-      "required": [
-        "analysis_contract_version",
-        "analysis_schema_version",
-        "result_schema_version",
-        "interface_schema_version",
-        "applicability_version",
-        "authorization_contract_version",
-        "metadata_api_version",
-        "graph_engine_contract_version",
-        "graph_engine_implementation_version",
-        "analyzer_implementation_version",
-        "parser_versions",
-        "evidence_provider_contract_versions"
+        "coverage_attestations"
       ],
       "type": "object"
     },
@@ -369,34 +248,6 @@
         "expressions"
       ],
       "type": "object"
-    },
-    "ApplicabilityEvaluationResult": {
-      "additionalProperties": false,
-      "properties": {
-        "truth": {
-          "enum": [
-            "true",
-            "false",
-            "unknown"
-          ]
-        },
-        "unresolved_facts": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "truth",
-        "unresolved_facts"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "resolved": "unresolved_facts is empty when truth is true or false",
-        "unknown": "unresolved_facts contains exactly the canonical material facts when truth is unknown"
-      }
     },
     "ApplicabilityExpression": {
       "oneOf": [
@@ -426,154 +277,39 @@
         }
       ]
     },
-    "ApplicabilityFactSchema": {
+    "AuthorityObjectId": {
+      "pattern": "^[a-z][a-z0-9.-]*:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "AuthorityObjectReference": {
       "additionalProperties": false,
       "properties": {
-        "facts": {
-          "items": {
-            "$ref": "#/$defs/FactDeclaration"
-          },
-          "type": "array"
-        },
         "id": {
+          "$ref": "#/$defs/AuthorityObjectId"
+        },
+        "object_kind": {
           "$ref": "#/$defs/CanonicalId"
-        },
-        "kind": {
-          "const": "applicability-fact-schema"
-        },
-        "version": {
-          "minimum": 1,
-          "type": "integer"
         }
       },
       "required": [
-        "kind",
-        "id",
-        "version",
-        "facts"
+        "object_kind",
+        "id"
       ],
       "type": "object"
     },
-    "AuditHorizonDeclaration": {
+    "AuthorizationGrantReference": {
       "additionalProperties": false,
       "properties": {
         "id": {
-          "$ref": "#/$defs/CanonicalId"
+          "$ref": "#/$defs/AuthorityObjectId"
         },
-        "kind": {
-          "const": "audit-horizon-declaration"
-        },
-        "member_classes": {
-          "items": {
-            "enum": [
-              "modules",
-              "policy-units",
-              "edge-sources",
-              "prompts",
-              "templates",
-              "fixtures",
-              "suites",
-              "documentation",
-              "other-registered-artifacts"
-            ]
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "provider": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "rationale": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "scope": {
-          "$ref": "#/$defs/ReviewScope"
-        },
-        "version": {
-          "minimum": 1,
-          "type": "integer"
+        "object_kind": {
+          "const": "authorization-grant"
         }
       },
       "required": [
-        "kind",
-        "id",
-        "provider",
-        "version",
-        "member_classes",
-        "scope",
-        "rationale"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "provider-registration": "membership is resolved by this registered deterministic provider and never from an arbitrary caller list"
-      }
-    },
-    "AuthorizationAuthorityView": {
-      "additionalProperties": false,
-      "properties": {
-        "authorizations": {
-          "items": {
-            "$ref": "#/$defs/AuthorizationReference"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "capabilities": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "contract_version": {
-          "const": "authorization-authority.v1"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "issuers": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "kind": {
-          "const": "authorization-authority-view"
-        },
-        "revocation_digest": {
-          "$ref": "#/$defs/Digest"
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "contract_version",
-        "issuers",
-        "capabilities",
-        "revocation_digest",
-        "authorizations"
-      ],
-      "type": "object"
-    },
-    "AuthorizationReference": {
-      "additionalProperties": false,
-      "properties": {
-        "capability": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        }
-      },
-      "required": [
-        "id",
-        "capability",
-        "digest"
+        "object_kind",
+        "id"
       ],
       "type": "object"
     },
@@ -655,7 +391,7 @@
           "const": "certificate-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 4
         }
       },
       "required": [
@@ -666,7 +402,7 @@
       "type": "object"
     },
     "CertificateId": {
-      "pattern": "^certificate:sha256:[0-9a-f]{64}$",
+      "pattern": "^coverage-certificate:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
     "CertificateInspectionResult": {
@@ -688,16 +424,12 @@
     "CertificateProvenance": {
       "additionalProperties": false,
       "properties": {
-        "generated_at": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
         "generator": {
           "$ref": "#/$defs/NonEmptyString"
         }
       },
       "required": [
-        "generator",
-        "generated_at"
+        "generator"
       ],
       "type": "object"
     },
@@ -744,15 +476,7 @@
         "proposed_ids",
         "scope"
       ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "addition": "no accepted ID and exactly one proposed ID",
-        "merge": "at least two distinct accepted IDs and exactly one proposed ID",
-        "modification": "exactly one equal accepted and proposed ID",
-        "move": "exactly one equal accepted and proposed ID; module identity determines same-module or cross-module graph selection",
-        "removal": "exactly one accepted ID and no proposed ID",
-        "split": "exactly one accepted ID and at least two distinct proposed IDs"
-      }
+      "type": "object"
     },
     "ChangedPolicyUnit": {
       "additionalProperties": false,
@@ -868,19 +592,13 @@
         "semantic_state",
         "scope"
       ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "addition": "accepted digests and revision are null; proposed digests exist; proposed semantic revision is 1",
-        "existing-policy": "accepted and proposed accepted-authority sidecars retain the accepted semantic revision; a proposed increment exists only in the AnalysisRequest semantic overlay",
-        "removal": "proposed digests and revision are null; accepted digests and revision exist",
-        "structural-equality": "may support representation-only-candidate but never proves semantic equivalence"
-      }
+      "type": "object"
     },
     "CompleteResult": {
       "additionalProperties": false,
       "properties": {
-        "base_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "authority": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
         },
         "changed_units": {
           "items": {
@@ -926,12 +644,6 @@
         "kind": {
           "const": "complete-result"
         },
-        "proposed_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
-        "provenance": {
-          "$ref": "#/$defs/AnalysisVersions"
-        },
         "reading_plan": {
           "items": {
             "$ref": "#/$defs/ReadingPlanEntry"
@@ -948,8 +660,6 @@
       "required": [
         "kind",
         "handle",
-        "base_snapshot",
-        "proposed_snapshot",
         "status",
         "context",
         "changes",
@@ -959,13 +669,9 @@
         "dispositions",
         "reading_plan",
         "completion",
-        "provenance"
+        "authority"
       ],
-      "type": "object",
-      "x-standards-engine-projection": {
-        "authority": "non-authoritative deterministic projection of AnalysisState",
-        "identity": "handle is the projected state's AnalysisHandle"
-      }
+      "type": "object"
     },
     "CompletionProof": {
       "additionalProperties": false,
@@ -1037,13 +743,7 @@
         "authorization_valid",
         "evidence_valid"
       ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "consumer_set_equality": "reached_consumer_obligations equals disposition_obligations as sets",
-        "coverage_set_equality": "required_coverage_subjects equals certificate_subjects as sets and every certificate is current for the report authority view",
-        "derived_truth": "every Boolean is generated from current resolved state and cannot be caller-authored",
-        "fact_set_equality": "required_fact_requirements equals observed_fact_requirements as sets and every observation is exact for the derived requirement"
-      }
+      "type": "object"
     },
     "ConsumerCoverageCertificate": {
       "additionalProperties": false,
@@ -1051,11 +751,13 @@
         "attestation": {
           "$ref": "#/$defs/CoverageAttestationHandle"
         },
-        "attestation_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "coverage_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
+        "authority_dependencies": {
+          "items": {
+            "$ref": "#/$defs/AuthorityObjectReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
         },
         "coverage_view": {
           "$ref": "#/$defs/CoverageAuthorityViewHandle"
@@ -1065,6 +767,9 @@
             "$ref": "#/$defs/Digest"
           },
           "type": "array"
+        },
+        "fact_schema_digest": {
+          "$ref": "#/$defs/Digest"
         },
         "handle": {
           "$ref": "#/$defs/CertificateHandle"
@@ -1107,31 +812,11 @@
         "horizon_digest",
         "relationship_digest",
         "evidence_digests",
-        "coverage_contract_version",
-        "attestation_contract_version",
-        "provenance"
+        "fact_schema_digest",
+        "provenance",
+        "authority_dependencies"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:consumer-coverage-certificate:v2",
-        "exclude": [
-          "handle",
-          "provenance"
-        ],
-        "include": [
-          "coverage_view",
-          "requirement",
-          "attestation",
-          "subject",
-          "owner",
-          "semantic_revision",
-          "horizon_digest",
-          "relationship_digest",
-          "evidence_digests",
-          "coverage_contract_version",
-          "attestation_contract_version"
-        ]
-      }
+      "type": "object"
     },
     "ConsumerDispositionSubmission": {
       "additionalProperties": false,
@@ -1257,11 +942,108 @@
       ],
       "type": "object"
     },
+    "ContentSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "items": {
+            "$ref": "#/$defs/ContentSnapshotFileEntry"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "handle": {
+          "$ref": "#/$defs/ContentSnapshotHandle"
+        },
+        "kind": {
+          "const": "content-snapshot"
+        },
+        "payload_contract": {
+          "const": "content-snapshot.v2"
+        }
+      },
+      "required": [
+        "kind",
+        "handle",
+        "payload_contract",
+        "files"
+      ],
+      "type": "object"
+    },
+    "ContentSnapshotFileEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_length": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "content_base64": {
+          "type": "string"
+        },
+        "content_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "path": {
+          "$ref": "#/$defs/RepositoryPath"
+        }
+      },
+      "required": [
+        "path",
+        "content_digest",
+        "content_base64",
+        "byte_length"
+      ],
+      "type": "object"
+    },
+    "ContentSnapshotHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ContentSnapshotId"
+        },
+        "kind": {
+          "const": "content-snapshot-handle"
+        },
+        "schema_version": {
+          "const": 4
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "ContentSnapshotId": {
+      "pattern": "^content-snapshot:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "ContentSnapshotInspectionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "content_snapshot": {
+          "$ref": "#/$defs/ContentSnapshot"
+        },
+        "kind": {
+          "const": "content-snapshot-inspection-result"
+        }
+      },
+      "required": [
+        "kind",
+        "content_snapshot"
+      ],
+      "type": "object"
+    },
     "CoverageAttestation": {
       "additionalProperties": false,
       "properties": {
         "auditor_provenance": {
           "$ref": "#/$defs/NonEmptyString"
+        },
+        "authorization": {
+          "$ref": "#/$defs/AuthorizationGrantReference"
         },
         "conclusion": {
           "const": "complete"
@@ -1292,7 +1074,7 @@
           "$ref": "#/$defs/CoverageRequirementHandle"
         },
         "schema_version": {
-          "const": 2
+          "const": 3
         }
       },
       "required": [
@@ -1304,24 +1086,51 @@
         "explicit_exclusions",
         "rationale",
         "auditor_provenance",
-        "schema_version"
+        "schema_version",
+        "authorization"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-attestation:v2",
-        "exclude": [
-          "handle"
-        ],
-        "include": [
-          "requirement",
-          "conclusion",
-          "evidence",
-          "explicit_exclusions",
-          "rationale",
-          "auditor_provenance",
-          "schema_version"
-        ]
-      }
+      "type": "object"
+    },
+    "CoverageAttestationClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "auditor_provenance": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "conclusion": {
+          "const": "complete"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "explicit_exclusions": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "requirement": {
+          "$ref": "#/$defs/CoverageRequirementHandle"
+        }
+      },
+      "required": [
+        "requirement",
+        "conclusion",
+        "evidence",
+        "explicit_exclusions",
+        "rationale",
+        "auditor_provenance"
+      ],
+      "type": "object"
     },
     "CoverageAttestationHandle": {
       "additionalProperties": false,
@@ -1333,7 +1142,7 @@
           "const": "coverage-attestation-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 4
         }
       },
       "required": [
@@ -1366,8 +1175,8 @@
     "CoverageAttestationSubmission": {
       "additionalProperties": false,
       "properties": {
-        "attestation": {
-          "$ref": "#/$defs/CoverageAttestation"
+        "claim": {
+          "$ref": "#/$defs/CoverageAttestationClaim"
         },
         "kind": {
           "const": "coverage-attestation"
@@ -1379,7 +1188,7 @@
       "required": [
         "kind",
         "obligation_id",
-        "attestation"
+        "claim"
       ],
       "type": "object"
     },
@@ -1389,8 +1198,8 @@
         "coverage_view": {
           "$ref": "#/$defs/CoverageAuthorityViewHandle"
         },
-        "derived_from_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "derived_from_view": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         },
         "handle": {
           "$ref": "#/$defs/CoverageRequirementHandle"
@@ -1411,6 +1220,9 @@
           "type": "array",
           "uniqueItems": true
         },
+        "required_evidence_contract": {
+          "$ref": "#/$defs/CanonicalId"
+        },
         "semantic_revision": {
           "minimum": 1,
           "type": "integer"
@@ -1427,31 +1239,14 @@
         "owner",
         "semantic_revision",
         "relationship_kinds",
-        "horizon"
+        "horizon",
+        "required_evidence_contract"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-audit-requirement:v2",
-        "exclude": [
-          "handle",
-          "derived_from_snapshot"
-        ],
-        "include": [
-          "coverage_view",
-          "subject",
-          "owner",
-          "semantic_revision",
-          "relationship_kinds",
-          "horizon"
-        ]
-      }
+      "type": "object"
     },
     "CoverageAuthorityView": {
       "additionalProperties": false,
       "properties": {
-        "applicability_language_version": {
-          "const": 1
-        },
         "applicability_program_digests": {
           "items": {
             "$ref": "#/$defs/Digest"
@@ -1459,17 +1254,13 @@
           "type": "array",
           "uniqueItems": true
         },
-        "attestation_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "authorization_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "coverage_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "evidence_provider_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
+        "authority_dependencies": {
+          "items": {
+            "$ref": "#/$defs/AuthorityObjectReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
         },
         "fact_schema_digest": {
           "$ref": "#/$defs/Digest"
@@ -1509,9 +1300,6 @@
           ],
           "type": "object"
         },
-        "identity_resolution_contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
         "kind": {
           "const": "coverage-authority-view"
         },
@@ -1538,19 +1326,12 @@
           "type": "array",
           "uniqueItems": true
         },
-        "relationship_kind_contract_version": {
-          "minimum": 1,
-          "type": "integer"
-        },
         "relationship_kinds": {
           "items": {
             "$ref": "#/$defs/CanonicalId"
           },
           "type": "array",
           "uniqueItems": true
-        },
-        "relationship_provider_contract_digest": {
-          "$ref": "#/$defs/Digest"
         },
         "representation_digest": {
           "$ref": "#/$defs/Digest"
@@ -1576,45 +1357,12 @@
         "structural_digest",
         "relationship_kinds",
         "relationship_fingerprints",
-        "relationship_kind_contract_version",
-        "relationship_provider_contract_digest",
-        "applicability_language_version",
         "applicability_program_digests",
         "fact_schema_digest",
         "horizon",
-        "identity_resolution_contract_version",
-        "coverage_contract_version",
-        "attestation_contract_version",
-        "authorization_contract_version",
-        "evidence_provider_contract_version"
+        "authority_dependencies"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:coverage-authority-view:v2",
-        "exclude": [
-          "handle"
-        ],
-        "include": [
-          "subject",
-          "owner",
-          "semantic_revision",
-          "representation_digest",
-          "structural_digest",
-          "relationship_kinds",
-          "relationship_fingerprints",
-          "relationship_kind_contract_version",
-          "relationship_provider_contract_digest",
-          "applicability_language_version",
-          "applicability_program_digests",
-          "fact_schema_digest",
-          "horizon",
-          "identity_resolution_contract_version",
-          "coverage_contract_version",
-          "attestation_contract_version",
-          "authorization_contract_version",
-          "evidence_provider_contract_version"
-        ]
-      }
+      "type": "object"
     },
     "CoverageAuthorityViewHandle": {
       "additionalProperties": false,
@@ -1626,7 +1374,7 @@
           "const": "coverage-authority-view-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 4
         }
       },
       "required": [
@@ -1653,22 +1401,6 @@
       "required": [
         "kind",
         "coverage_view"
-      ],
-      "type": "object"
-    },
-    "CoverageDecision": {
-      "additionalProperties": false,
-      "properties": {
-        "attestation": {
-          "$ref": "#/$defs/CoverageAttestation"
-        },
-        "authorization": {
-          "$ref": "#/$defs/AuthorizationReference"
-        }
-      },
-      "required": [
-        "attestation",
-        "authorization"
       ],
       "type": "object"
     },
@@ -1707,7 +1439,7 @@
           "const": "coverage-requirement-handle"
         },
         "schema_version": {
-          "const": 2
+          "const": 4
         }
       },
       "required": [
@@ -1734,50 +1466,6 @@
       "required": [
         "kind",
         "requirement"
-      ],
-      "type": "object"
-    },
-    "DecisionContract": {
-      "additionalProperties": false,
-      "properties": {
-        "dependency_classes": {
-          "items": {
-            "enum": [
-              "policy-unit",
-              "semantic-revision",
-              "structure",
-              "representation",
-              "module-locator",
-              "applicability-fact",
-              "relationship",
-              "audit",
-              "exception",
-              "evidence",
-              "provider-contract",
-              "applicability-contract",
-              "analysis-contract"
-            ]
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "kind": {
-          "const": "decision-contract"
-        },
-        "version": {
-          "minimum": 1,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "version",
-        "dependency_classes"
       ],
       "type": "object"
     },
@@ -1851,7 +1539,7 @@
       "additionalProperties": false,
       "properties": {
         "authorization": {
-          "$ref": "#/$defs/AuthorizationReference"
+          "$ref": "#/$defs/AuthorizationGrantReference"
         },
         "evidence": {
           "items": {
@@ -1891,10 +1579,7 @@
     },
     "EdgeId": {
       "minLength": 1,
-      "type": "string",
-      "x-standards-engine-invariants": {
-        "authority": "value must resolve exactly through the registered generic graph; each registered provider owns its identity contract and no lookup inference or fallback is permitted"
-      }
+      "type": "string"
     },
     "EqualsExpression": {
       "additionalProperties": false,
@@ -1940,6 +1625,93 @@
       ],
       "type": "object"
     },
+    "ExecutionAuthorityRoot": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "$ref": "#/$defs/AuthorityObjectReference"
+        },
+        "role": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "side": {
+          "enum": [
+            "current",
+            "accepted",
+            "proposed",
+            "transition"
+          ]
+        }
+      },
+      "required": [
+        "side",
+        "role",
+        "authority"
+      ],
+      "type": "object"
+    },
+    "ExecutionClosure": {
+      "additionalProperties": false,
+      "properties": {
+        "closure_contract": {
+          "const": "execution-closure.v2"
+        },
+        "handle": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
+        },
+        "kind": {
+          "const": "execution-closure"
+        },
+        "operation": {
+          "enum": [
+            "route",
+            "read",
+            "related",
+            "analysis"
+          ]
+        },
+        "roots": {
+          "items": {
+            "$ref": "#/$defs/ExecutionAuthorityRoot"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "kind",
+        "handle",
+        "closure_contract",
+        "operation",
+        "roots"
+      ],
+      "type": "object"
+    },
+    "ExecutionClosureHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ExecutionClosureId"
+        },
+        "kind": {
+          "const": "execution-closure-handle"
+        },
+        "schema_version": {
+          "const": 4
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "ExecutionClosureId": {
+      "pattern": "^execution-closure:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
     "ExistsExpression": {
       "additionalProperties": false,
       "properties": {
@@ -1956,164 +1728,11 @@
       ],
       "type": "object"
     },
-    "FactContract": {
-      "additionalProperties": false,
-      "properties": {
-        "aliases": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "answer_contract": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "authorization_capability": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "context_kind": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "evidence_contract": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "meaning": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "nullable": {
-          "type": "boolean"
-        },
-        "prompt": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "semantic_revision": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "type": {
-          "enum": [
-            "boolean",
-            "enum",
-            "string",
-            "string-set",
-            "enum-set",
-            "canonical-id"
-          ]
-        },
-        "values": {
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "id",
-        "semantic_revision",
-        "type",
-        "nullable",
-        "aliases",
-        "meaning",
-        "context_kind",
-        "answer_contract",
-        "evidence_contract",
-        "authorization_capability",
-        "prompt",
-        "digest"
-      ],
-      "type": "object"
-    },
-    "FactDeclaration": {
-      "additionalProperties": false,
-      "properties": {
-        "aliases": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "answer_contract": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "authorization_capability": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "context_kind": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "evidence_contract": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "meaning": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "nullable": {
-          "type": "boolean"
-        },
-        "prompt": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "semantic_revision": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "type": {
-          "enum": [
-            "boolean",
-            "enum",
-            "string",
-            "string-set",
-            "enum-set",
-            "canonical-id"
-          ]
-        },
-        "values": {
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "id",
-        "semantic_revision",
-        "type",
-        "nullable",
-        "aliases",
-        "meaning",
-        "context_kind",
-        "answer_contract",
-        "evidence_contract",
-        "authorization_capability",
-        "prompt"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "alias-resolution": "aliases resolve before evaluation and conflicts are invalid",
-        "enum-values": "values are required only for enum and enum-set facts",
-        "semantic-identity": "semantic revision, value domain, meaning, context, answer, evidence and authorization contracts determine decision identity; aliases and prompt are lookup and display projections"
-      }
-    },
     "FactObservation": {
       "additionalProperties": false,
       "properties": {
         "authorization": {
-          "$ref": "#/$defs/AuthorizationReference"
+          "$ref": "#/$defs/AuthorizationGrantReference"
         },
         "evidence": {
           "items": {
@@ -2128,6 +1747,9 @@
         },
         "kind": {
           "const": "fact-observation"
+        },
+        "provider_authority": {
+          "$ref": "#/$defs/ProviderAuthorityReference"
         },
         "requirement": {
           "$ref": "#/$defs/FactRequirementHandle"
@@ -2144,20 +1766,7 @@
         "evidence",
         "authorization"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:fact-observation:v1",
-        "exclude": [
-          "kind",
-          "handle"
-        ],
-        "include": [
-          "requirement",
-          "value",
-          "evidence",
-          "authorization"
-        ]
-      }
+      "type": "object"
     },
     "FactObservationHandle": {
       "additionalProperties": false,
@@ -2169,7 +1778,7 @@
           "const": "fact-observation-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 4
         }
       },
       "required": [
@@ -2205,19 +1814,19 @@
         "answer_contract": {
           "$ref": "#/$defs/CanonicalId"
         },
+        "authority_dependencies": {
+          "items": {
+            "$ref": "#/$defs/AuthorityObjectReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
         "authorization_capability": {
           "$ref": "#/$defs/CanonicalId"
         },
         "context": {
           "$ref": "#/$defs/AnalysisContextHandle"
-        },
-        "dependent_programs": {
-          "items": {
-            "$ref": "#/$defs/NonEmptyString"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
         },
         "evidence_contract": {
           "$ref": "#/$defs/CanonicalId"
@@ -2238,9 +1847,6 @@
         "kind": {
           "const": "fact-requirement"
         },
-        "prompt": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
         "value_contract": {
           "$ref": "#/$defs/FactValueContract"
         }
@@ -2255,30 +1861,10 @@
         "value_contract",
         "answer_contract",
         "evidence_contract",
-        "authorization_capability",
-        "prompt",
-        "dependent_programs"
+        "authority_dependencies",
+        "authorization_capability"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:fact-requirement:v1",
-        "exclude": [
-          "handle",
-          "kind",
-          "prompt",
-          "dependent_programs"
-        ],
-        "include": [
-          "fact",
-          "fact_semantic_revision",
-          "fact_contract_digest",
-          "context",
-          "value_contract",
-          "answer_contract",
-          "evidence_contract",
-          "authorization_capability"
-        ]
-      }
+      "type": "object"
     },
     "FactRequirementHandle": {
       "additionalProperties": false,
@@ -2290,7 +1876,7 @@
           "const": "fact-requirement-handle"
         },
         "schema_version": {
-          "const": 1
+          "const": 4
         }
       },
       "required": [
@@ -2317,6 +1903,31 @@
       "required": [
         "kind",
         "requirement"
+      ],
+      "type": "object"
+    },
+    "FactRequirementWork": {
+      "additionalProperties": false,
+      "properties": {
+        "dependent_programs": {
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "prompt": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "requirement": {
+          "$ref": "#/$defs/FactRequirement"
+        }
+      },
+      "required": [
+        "requirement",
+        "prompt",
+        "dependent_programs"
       ],
       "type": "object"
     },
@@ -2525,107 +2136,6 @@
       ],
       "type": "object"
     },
-    "GitObjectId": {
-      "pattern": "^[0-9a-f]{40,64}$",
-      "type": "string"
-    },
-    "GitSnapshotInspection": {
-      "additionalProperties": false,
-      "properties": {
-        "commit": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "exclusions": {
-          "items": {
-            "$ref": "#/$defs/SnapshotExclusion"
-          },
-          "type": "array"
-        },
-        "handle": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
-        "kind": {
-          "const": "git-snapshot-inspection"
-        },
-        "scope": {
-          "items": {
-            "$ref": "#/$defs/NonEmptyString"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "submodules": {
-          "items": {
-            "$ref": "#/$defs/SnapshotEntry"
-          },
-          "type": "array"
-        },
-        "tree": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "versions": {
-          "$ref": "#/$defs/AnalysisVersions"
-        }
-      },
-      "required": [
-        "kind",
-        "handle",
-        "tree",
-        "commit",
-        "scope",
-        "exclusions",
-        "submodules",
-        "versions"
-      ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v3",
-        "exclude": [
-          "handle",
-          "commit",
-          "versions.graph_engine_implementation_version",
-          "versions.analyzer_implementation_version"
-        ],
-        "include": [
-          "tree",
-          "scope",
-          "exclusions",
-          "submodules",
-          "versions.analysis_contract_version",
-          "versions.analysis_schema_version",
-          "versions.result_schema_version",
-          "versions.interface_schema_version",
-          "versions.applicability_version",
-          "versions.authorization_contract_version",
-          "versions.metadata_api_version",
-          "versions.graph_engine_contract_version",
-          "versions.parser_versions",
-          "versions.evidence_provider_contract_versions"
-        ]
-      }
-    },
-    "ImmutableAuthorityHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "kind": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "schema_version": {
-          "minimum": 1,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
     "ImpactDispositionSubmission": {
       "additionalProperties": false,
       "properties": {
@@ -2744,25 +2254,31 @@
         "request_kind": {
           "const": "inspect"
         },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
         "target": {
           "$ref": "#/$defs/CanonicalId"
+        },
+        "view": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         }
       },
       "required": [
         "operation",
         "request_kind",
         "target",
-        "snapshot"
+        "view"
       ],
       "type": "object"
     },
     "InspectableHandle": {
       "oneOf": [
         {
-          "$ref": "#/$defs/SnapshotHandle"
+          "$ref": "#/$defs/ContentSnapshotHandle"
+        },
+        {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
+        },
+        {
+          "$ref": "#/$defs/ExecutionClosureHandle"
         },
         {
           "$ref": "#/$defs/NavigationHandle"
@@ -2802,7 +2318,7 @@
     "InspectionResult": {
       "oneOf": [
         {
-          "$ref": "#/$defs/SnapshotInspectionResult"
+          "$ref": "#/$defs/ContentSnapshotInspectionResult"
         },
         {
           "$ref": "#/$defs/PolicyInspectionResult"
@@ -2836,74 +2352,14 @@
         },
         {
           "$ref": "#/$defs/AnalysisState"
+        },
+        {
+          "$ref": "#/$defs/StandardsAuthorityView"
+        },
+        {
+          "$ref": "#/$defs/ExecutionClosure"
         }
       ]
-    },
-    "ManifestSnapshotInspection": {
-      "additionalProperties": false,
-      "properties": {
-        "entries": {
-          "items": {
-            "$ref": "#/$defs/SnapshotEntry"
-          },
-          "type": "array"
-        },
-        "handle": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
-        "kind": {
-          "const": "manifest-snapshot-inspection"
-        },
-        "scope": {
-          "items": {
-            "$ref": "#/$defs/NonEmptyString"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "source_kind": {
-          "enum": [
-            "dirty-git",
-            "non-git"
-          ]
-        },
-        "versions": {
-          "$ref": "#/$defs/AnalysisVersions"
-        }
-      },
-      "required": [
-        "kind",
-        "handle",
-        "source_kind",
-        "scope",
-        "entries",
-        "versions"
-      ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v3",
-        "exclude": [
-          "handle",
-          "versions.graph_engine_implementation_version",
-          "versions.analyzer_implementation_version"
-        ],
-        "include": [
-          "source_kind",
-          "scope",
-          "entries",
-          "versions.analysis_contract_version",
-          "versions.analysis_schema_version",
-          "versions.result_schema_version",
-          "versions.interface_schema_version",
-          "versions.applicability_version",
-          "versions.authorization_contract_version",
-          "versions.metadata_api_version",
-          "versions.graph_engine_contract_version",
-          "versions.parser_versions",
-          "versions.evidence_provider_contract_versions"
-        ]
-      }
     },
     "NavigationHandle": {
       "additionalProperties": false,
@@ -2915,22 +2371,18 @@
           "const": "navigation-handle"
         },
         "schema_version": {
-          "const": 3
-        },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+          "const": 4
         }
       },
       "required": [
         "kind",
         "id",
-        "snapshot",
         "schema_version"
       ],
       "type": "object"
     },
     "NavigationId": {
-      "pattern": "^navigation:sha256:[0-9a-f]{64}$",
+      "pattern": "^navigation-result:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
     "NavigationInspectionResult": {
@@ -2941,15 +2393,11 @@
         },
         "navigation": {
           "$ref": "#/$defs/NavigationResult"
-        },
-        "provenance": {
-          "$ref": "#/$defs/AnalysisVersions"
         }
       },
       "required": [
         "kind",
-        "navigation",
-        "provenance"
+        "navigation"
       ],
       "type": "object"
     },
@@ -3072,30 +2520,39 @@
         "permitted_submissions",
         "fingerprint"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:obligation:v2",
-        "exclude": [
-          "state",
-          "permitted_submissions",
-          "applicability"
-        ],
-        "include": [
-          "kind",
-          "target",
-          "scope",
-          "reasons",
-          "fingerprint"
-        ]
-      }
+      "type": "object"
     },
     "ObligationId": {
       "pattern": "^obligation:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
+    "OperationAuthoritySelection": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "$ref": "#/$defs/AuthorityObjectReference"
+        },
+        "operation": {
+          "enum": [
+            "route",
+            "read",
+            "related",
+            "analysis"
+          ]
+        }
+      },
+      "required": [
+        "operation",
+        "authority"
+      ],
+      "type": "object"
+    },
     "PendingResult": {
       "additionalProperties": false,
       "properties": {
+        "authority": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
+        },
         "changed_units": {
           "items": {
             "$ref": "#/$defs/ChangedPolicyUnit"
@@ -3113,7 +2570,7 @@
         },
         "fact_requirements": {
           "items": {
-            "$ref": "#/$defs/FactRequirement"
+            "$ref": "#/$defs/FactRequirementWork"
           },
           "type": "array"
         },
@@ -3134,9 +2591,6 @@
             "$ref": "#/$defs/Obligation"
           },
           "type": "array"
-        },
-        "provenance": {
-          "$ref": "#/$defs/AnalysisVersions"
         },
         "reading_plan": {
           "items": {
@@ -3162,33 +2616,33 @@
         "fact_requirements",
         "reading_plan",
         "next_operations",
-        "provenance"
+        "authority"
       ],
-      "type": "object",
-      "x-standards-engine-projection": {
-        "authority": "non-authoritative deterministic projection of AnalysisState",
-        "identity": "handle is the projected state's AnalysisHandle"
-      }
+      "type": "object"
     },
     "PolicyHandle": {
       "additionalProperties": false,
       "properties": {
         "id": {
-          "$ref": "#/$defs/CanonicalId"
+          "$ref": "#/$defs/PolicyId"
         },
         "kind": {
           "const": "policy-handle"
         },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "schema_version": {
+          "const": 4
         }
       },
       "required": [
         "kind",
         "id",
-        "snapshot"
+        "schema_version"
       ],
       "type": "object"
+    },
+    "PolicyId": {
+      "pattern": "^policy-inspection:sha256:[0-9a-f]{64}$",
+      "type": "string"
     },
     "PolicyImpactSelectionReason": {
       "additionalProperties": false,
@@ -3324,11 +2778,7 @@
         "evidence_owner",
         "rationale"
       ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "internal-boundary": "repository declaration paths, compiled program internals, and dependency fingerprints are not public",
-        "projection": "the value is an operation-shaped inspection of compiled relationship authority and is never an editable declaration"
-      }
+      "type": "object"
     },
     "PolicySummary": {
       "additionalProperties": false,
@@ -3413,39 +2863,6 @@
       ],
       "type": "object"
     },
-    "PolicyUnitTombstone": {
-      "additionalProperties": false,
-      "properties": {
-        "evidence": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "kind": {
-          "const": "policy-unit-tombstone"
-        },
-        "retired_semantic_revision": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "successors": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "retired_semantic_revision",
-        "successors",
-        "evidence"
-      ],
-      "type": "object"
-    },
     "PrepareCall": {
       "additionalProperties": false,
       "properties": {
@@ -3461,11 +2878,11 @@
     "ProvenanceRecord": {
       "additionalProperties": false,
       "properties": {
+        "content_snapshot": {
+          "$ref": "#/$defs/ContentSnapshotHandle"
+        },
         "locator": {
           "$ref": "#/$defs/NonEmptyString"
-        },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
         },
         "source_id": {
           "$ref": "#/$defs/CanonicalId"
@@ -3484,7 +2901,7 @@
         "source_id",
         "source_kind",
         "locator",
-        "snapshot"
+        "content_snapshot"
       ],
       "type": "object"
     },
@@ -3517,80 +2934,19 @@
       ],
       "type": "object"
     },
-    "ProviderAuthorityView": {
+    "ProviderAuthorityReference": {
       "additionalProperties": false,
       "properties": {
-        "contract_version": {
-          "const": "provider-authority.v1"
-        },
-        "evidence_contracts": {
-          "items": {
-            "additionalProperties": false,
-            "properties": {
-              "id": {
-                "$ref": "#/$defs/CanonicalId"
-              },
-              "version": {
-                "$ref": "#/$defs/NonEmptyString"
-              }
-            },
-            "required": [
-              "id",
-              "version"
-            ],
-            "type": "object"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
         "id": {
-          "$ref": "#/$defs/CanonicalId"
+          "$ref": "#/$defs/AuthorityObjectId"
         },
-        "kind": {
-          "const": "provider-authority-view"
-        },
-        "providers": {
-          "items": {
-            "$ref": "#/$defs/ProviderContractView"
-          },
-          "type": "array",
-          "uniqueItems": true
+        "object_kind": {
+          "const": "provider-authority"
         }
       },
       "required": [
-        "kind",
-        "id",
-        "contract_version",
-        "evidence_contracts",
-        "providers"
-      ],
-      "type": "object"
-    },
-    "ProviderContractView": {
-      "additionalProperties": false,
-      "properties": {
-        "contract_version": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "immutable_inputs": {
-          "items": {
-            "$ref": "#/$defs/ImmutableAuthorityHandle"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "input_contract": {
-          "$ref": "#/$defs/CanonicalId"
-        }
-      },
-      "required": [
-        "id",
-        "contract_version",
-        "input_contract",
-        "immutable_inputs"
+        "object_kind",
+        "id"
       ],
       "type": "object"
     },
@@ -3600,12 +2956,12 @@
         "request": {
           "$ref": "#/$defs/QueryRequest"
         },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "view": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         }
       },
       "required": [
-        "snapshot",
+        "view",
         "request"
       ],
       "type": "object"
@@ -3623,17 +2979,17 @@
             "related"
           ]
         },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
         "target": {
           "$ref": "#/$defs/CanonicalId"
+        },
+        "view": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         }
       },
       "required": [
         "operation",
         "request_kind",
-        "snapshot"
+        "view"
       ],
       "type": "object"
     },
@@ -3711,6 +3067,9 @@
     "ReadResult": {
       "additionalProperties": false,
       "properties": {
+        "authority": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
+        },
         "content": {
           "type": "string"
         },
@@ -3756,6 +3115,7 @@
       "required": [
         "kind",
         "handle",
+        "authority",
         "policy",
         "content",
         "requires",
@@ -3763,23 +3123,7 @@
         "related",
         "next_operations"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v3",
-        "exclude": [
-          "handle.id",
-          "next_operations",
-          "summary"
-        ],
-        "include": [
-          "handle.snapshot",
-          "policy",
-          "content",
-          "requires",
-          "specializes",
-          "related"
-        ]
-      }
+      "type": "object"
     },
     "ReadingPlanEntry": {
       "additionalProperties": false,
@@ -3871,9 +3215,7 @@
             "invalid",
             "unavailable",
             "unsupported",
-            "stale",
-            "unauthorized",
-            "incomplete"
+            "unauthorized"
           ]
         },
         "target": {
@@ -3931,6 +3273,9 @@
     "RelatedResult": {
       "additionalProperties": false,
       "properties": {
+        "authority": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
+        },
         "handle": {
           "$ref": "#/$defs/NavigationHandle"
         },
@@ -3986,46 +3331,37 @@
       "required": [
         "kind",
         "handle",
+        "authority",
         "target",
         "policy_unit_mapping",
         "relationships",
         "next_operations"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v3",
-        "exclude": [
-          "handle.id",
-          "next_operations",
-          "summary"
-        ],
-        "include": [
-          "handle.snapshot",
-          "target",
-          "policy_unit_mapping",
-          "relationships"
-        ]
-      }
+      "type": "object"
     },
     "RelationshipHandle": {
       "additionalProperties": false,
       "properties": {
         "id": {
-          "$ref": "#/$defs/EdgeId"
+          "$ref": "#/$defs/RelationshipInspectionId"
         },
         "kind": {
           "const": "relationship-handle"
         },
-        "snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "schema_version": {
+          "const": 4
         }
       },
       "required": [
         "kind",
         "id",
-        "snapshot"
+        "schema_version"
       ],
       "type": "object"
+    },
+    "RelationshipInspectionId": {
+      "pattern": "^relationship-inspection:sha256:[0-9a-f]{64}$",
+      "type": "string"
     },
     "RelationshipInspectionResult": {
       "additionalProperties": false,
@@ -4108,6 +3444,23 @@
         "direction",
         "traversal_eligible",
         "applicability"
+      ],
+      "type": "object"
+    },
+    "RepositoryPath": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "components"
       ],
       "type": "object"
     },
@@ -4210,6 +3563,9 @@
     "RouteResult": {
       "additionalProperties": false,
       "properties": {
+        "authority": {
+          "$ref": "#/$defs/ExecutionClosureHandle"
+        },
         "handle": {
           "$ref": "#/$defs/NavigationHandle"
         },
@@ -4241,24 +3597,12 @@
       "required": [
         "kind",
         "handle",
+        "authority",
         "reading_plan",
         "unresolved_questions",
         "next_operations"
       ],
-      "type": "object",
-      "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v3",
-        "exclude": [
-          "handle.id",
-          "next_operations",
-          "summary"
-        ],
-        "include": [
-          "handle.snapshot",
-          "reading_plan",
-          "unresolved_questions"
-        ]
-      }
+      "type": "object"
     },
     "RoutingBaseReadingReason": {
       "additionalProperties": false,
@@ -4326,6 +3670,22 @@
         }
       ]
     },
+    "SemanticAuthoritySelection": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "$ref": "#/$defs/AuthorityObjectReference"
+        },
+        "role": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "role",
+        "authority"
+      ],
+      "type": "object"
+    },
     "SemanticProposal": {
       "additionalProperties": false,
       "properties": {
@@ -4363,154 +3723,6 @@
       ],
       "type": "object"
     },
-    "SnapshotEntry": {
-      "additionalProperties": false,
-      "properties": {
-        "checked_out_revision": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "content_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "entry_type": {
-          "enum": [
-            "file",
-            "directory",
-            "symlink",
-            "gitlink",
-            "nested-repository"
-          ]
-        },
-        "inclusion": {
-          "enum": [
-            "included",
-            "excluded"
-          ]
-        },
-        "mode": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "nested_identity": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "nested_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
-        },
-        "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "reason": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "recorded_gitlink": {
-          "$ref": "#/$defs/GitObjectId"
-        },
-        "symlink_resolution": {
-          "enum": [
-            "not-followed",
-            "followed-contained",
-            "inert-escape"
-          ]
-        },
-        "symlink_target": {
-          "type": "string"
-        },
-        "tracking": {
-          "enum": [
-            "tracked",
-            "untracked",
-            "not-applicable"
-          ]
-        },
-        "worktree_state": {
-          "enum": [
-            "clean",
-            "dirty",
-            "diverged",
-            "dirty-and-diverged"
-          ]
-        }
-      },
-      "required": [
-        "path",
-        "entry_type",
-        "mode",
-        "tracking",
-        "inclusion",
-        "reason"
-      ],
-      "type": "object",
-      "x-standards-engine-invariants": {
-        "file": "included files bind content_digest",
-        "gitlink": "recorded gitlink and checked-out state are explicit; dirty nested content binds nested_snapshot",
-        "path": "normalized repository-relative path; absolute paths, parent traversal, and normalization collisions are invalid",
-        "symlink": "target and resolution are required; escaped resolution is valid only as inert content"
-      }
-    },
-    "SnapshotExclusion": {
-      "additionalProperties": false,
-      "properties": {
-        "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "reason": {
-          "$ref": "#/$defs/NonEmptyString"
-        }
-      },
-      "required": [
-        "path",
-        "reason"
-      ],
-      "type": "object"
-    },
-    "SnapshotHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/SnapshotId"
-        },
-        "kind": {
-          "const": "snapshot-handle"
-        },
-        "schema_version": {
-          "const": 3
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "SnapshotId": {
-      "pattern": "^snapshot:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "SnapshotInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "kind": {
-          "const": "snapshot-inspection-result"
-        },
-        "snapshot": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/GitSnapshotInspection"
-            },
-            {
-              "$ref": "#/$defs/ManifestSnapshotInspection"
-            }
-          ]
-        }
-      },
-      "required": [
-        "kind",
-        "snapshot"
-      ],
-      "type": "object"
-    },
     "SpecializesReadingReason": {
       "additionalProperties": false,
       "properties": {
@@ -4530,6 +3742,68 @@
         "source"
       ],
       "type": "object"
+    },
+    "StandardsAuthorityView": {
+      "additionalProperties": false,
+      "properties": {
+        "authorities": {
+          "items": {
+            "$ref": "#/$defs/SemanticAuthoritySelection"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "content": {
+          "$ref": "#/$defs/ContentSnapshotHandle"
+        },
+        "handle": {
+          "$ref": "#/$defs/StandardsAuthorityViewHandle"
+        },
+        "kind": {
+          "const": "standards-authority-view"
+        },
+        "operation_contracts": {
+          "items": {
+            "$ref": "#/$defs/OperationAuthoritySelection"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "kind",
+        "handle",
+        "content",
+        "operation_contracts",
+        "authorities"
+      ],
+      "type": "object"
+    },
+    "StandardsAuthorityViewHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/StandardsAuthorityViewId"
+        },
+        "kind": {
+          "const": "standards-authority-view-handle"
+        },
+        "schema_version": {
+          "const": 4
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "StandardsAuthorityViewId": {
+      "pattern": "^standards-authority-view:sha256:[0-9a-f]{64}$",
+      "type": "string"
     },
     "StructuredScope": {
       "additionalProperties": false,
@@ -4567,50 +3841,6 @@
         }
       ]
     },
-    "TrustedCapabilityContext": {
-      "additionalProperties": false,
-      "properties": {
-        "authority_provider": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "capabilities": {
-          "items": {
-            "enum": [
-              "standards.read",
-              "standards.analyze",
-              "standards.review.consumer",
-              "standards.review.impact",
-              "standards.review.audit"
-            ]
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "evidence": {
-          "$ref": "#/$defs/EvidenceReference"
-        },
-        "principal": {
-          "$ref": "#/$defs/CanonicalId"
-        }
-      },
-      "required": [
-        "principal",
-        "capabilities",
-        "authority_provider"
-      ],
-      "type": "object",
-      "x-standards-engine-authority": {
-        "caller_authored": false,
-        "injected_by": "trusted-adapter-or-execution-environment"
-      }
-    },
-    "VersionMap": {
-      "additionalProperties": {
-        "$ref": "#/$defs/NonEmptyString"
-      },
-      "type": "object"
-    },
     "WholeArtifactScope": {
       "additionalProperties": false,
       "properties": {
@@ -4624,28 +3854,27 @@
       "type": "object"
     }
   },
-  "canonical_schema": "../a1-contract.schema.json",
-  "schema_version": 10,
-  "tools": [
+  "interface_schema_version": 11,
+  "operations": [
     {
-      "description": "Route, read, or navigate relationships in one exact standards snapshot.",
+      "capability": "standards.read",
+      "id": "query",
       "input_definition": "QueryCall",
       "input_schema": {
         "$ref": "#/$defs/QueryCall"
       },
-      "name": "standards_query",
       "result_definitions": [
         "NavigationResult",
         "RejectedResult"
       ]
     },
     {
-      "description": "Prepare immutable read-only analysis for exact base and proposed snapshots.",
+      "capability": "standards.analyze",
+      "id": "prepare",
       "input_definition": "PrepareCall",
       "input_schema": {
         "$ref": "#/$defs/PrepareCall"
       },
-      "name": "standards_prepare",
       "result_definitions": [
         "PendingResult",
         "CompleteResult",
@@ -4653,12 +3882,17 @@
       ]
     },
     {
-      "description": "Advance one immutable analysis with an authorized typed submission.",
+      "capability_by_submission": {
+        "consumer-disposition": "standards.review.consumer",
+        "coverage-attestation": "standards.review.audit",
+        "impact-disposition": "standards.review.impact",
+        "provide-fact": "standards.analyze"
+      },
+      "id": "resolve",
       "input_definition": "ResolveCall",
       "input_schema": {
         "$ref": "#/$defs/ResolveCall"
       },
-      "name": "standards_resolve",
       "result_definitions": [
         "PendingResult",
         "CompleteResult",
@@ -4666,16 +3900,19 @@
       ]
     },
     {
-      "description": "Inspect an exact Standards Engine handle and its provenance.",
+      "capability": "standards.read",
+      "id": "inspect",
       "input_definition": "InspectCall",
       "input_schema": {
         "$ref": "#/$defs/InspectCall"
       },
-      "name": "standards_inspect",
       "result_definitions": [
         "InspectionResult",
         "RejectedResult"
       ]
     }
-  ]
+  ],
+  "request_contract_version": 3,
+  "result_projection_version": 3,
+  "schema_version": 1
 }

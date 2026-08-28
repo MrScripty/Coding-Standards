@@ -1,18 +1,19 @@
 from __future__ import annotations
 
 import json
+import tomllib
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Iterable, Mapping
 
-from tools.standards_analysis.standards_analysis import (
-    AuthorizationReference,
-    FactObservationProvider,
+from tools.standards_contracts.standards_contracts import (
+    CompiledContracts,
+    ContractError,
+    compile_contracts,
 )
-from tools.standards_engine.contracts.validate_contracts import ContractError, validate
 
-from ._generated_contract import RESULT_KIND_TO_DEFINITION, decode_contract
-from .engine import AnalysisStateStore, StandardsEngine
-from .model import (
+from ._generated_contract import decode_contract
+from .engine import StandardsEngine
+from ._generated_contract import (
     InspectCall,
     PrepareCall,
     QueryCall,
@@ -21,6 +22,7 @@ from .model import (
 
 
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
+INTERFACE_CONTRACT = "tools/standards_engine/contracts/a1-interface.toml"
 
 
 class InterfaceVersionError(ValueError):
@@ -30,47 +32,36 @@ class InterfaceVersionError(ValueError):
 class AgentToolFacade:
     """Validated structured transport over the native Standards Engine API."""
 
-    def __init__(self, engine: StandardsEngine, schema: Mapping[str, object]) -> None:
+    def __init__(self, engine: StandardsEngine, contracts: CompiledContracts) -> None:
         self._engine = engine
-        self._schema = schema
-        self._handle_versions = self._derive_handle_versions(schema)
+        self._contracts = contracts
+        self._handle_versions = self._derive_handle_versions(contracts.schema)
 
     @classmethod
     def open_repository(cls, root: Path) -> AgentToolFacade:
         repo_root = root.resolve()
-        schema = json.loads((repo_root / INTERFACE_SCHEMA).read_text(encoding="utf-8"))
-        return cls(StandardsEngine.open_repository(repo_root), schema)
+        return cls(StandardsEngine.open_repository(repo_root), _contracts(repo_root))
 
     @classmethod
     def open_analysis(
         cls,
         base_root: Path,
         proposed_root: Path,
-        *,
-        authorizations: tuple[AuthorizationReference, ...] = (),
-        analysis_store: AnalysisStateStore | None = None,
-        fact_providers: Iterable[FactObservationProvider] = (),
     ) -> AgentToolFacade:
         repo_root = proposed_root.resolve()
-        schema = json.loads((repo_root / INTERFACE_SCHEMA).read_text(encoding="utf-8"))
         return cls(
-            StandardsEngine.open_analysis(
-                base_root,
-                proposed_root,
-                authorizations=authorizations,
-                analysis_store=analysis_store,
-                fact_providers=fact_providers,
-            ),
-            schema,
+            StandardsEngine.open_analysis(base_root, proposed_root),
+            _contracts(repo_root),
         )
 
     @property
-    def snapshot(self) -> Mapping[str, object]:
-        return self._engine.snapshot
+    def view(self) -> dict[str, object]:
+        return self._engine.view.as_contract()
 
     @property
-    def snapshots(self) -> tuple[Mapping[str, object], ...]:
-        return self._engine.snapshots
+    def analysis_views(self) -> tuple[dict[str, object], dict[str, object]]:
+        base, proposed = self._engine.analysis_views
+        return base.as_contract(), proposed.as_contract()
 
     def query(self, arguments: object) -> dict[str, object]:
         try:
@@ -85,7 +76,7 @@ class AgentToolFacade:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.query(call)
         output = result.as_contract()
-        self._validate_result(output)
+        self._validate_result(type(result).__definition__, output)
         return output
 
     def prepare(self, arguments: object) -> dict[str, object]:
@@ -101,7 +92,7 @@ class AgentToolFacade:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.prepare(call.request)
         output = result.as_contract()
-        self._validate_result(output)
+        self._validate_result(type(result).__definition__, output)
         return output
 
     def resolve(self, arguments: object) -> dict[str, object]:
@@ -117,7 +108,7 @@ class AgentToolFacade:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.resolve(call.analysis, call.submission)
         output = result.as_contract()
-        self._validate_result(output)
+        self._validate_result(type(result).__definition__, output)
         return output
 
     def inspect(self, arguments: object) -> dict[str, object]:
@@ -133,20 +124,17 @@ class AgentToolFacade:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.inspect(call)
         output = result.as_contract()
-        self._validate_result(output)
+        self._validate_result(type(result).__definition__, output)
         return output
 
     def _validate(self, definition: str, value: object) -> None:
         self._require_supported_handle_versions(value)
-        validate(
-            self._schema,
-            self._schema["$defs"][definition],
-            value,
-            "$arguments",
-        )
+        self._contracts.validate(definition, value)
 
     @staticmethod
-    def _derive_handle_versions(schema: Mapping[str, object]) -> dict[str, int]:
+    def _derive_handle_versions(schema: object) -> dict[str, int]:
+        if not isinstance(schema, dict):
+            raise TypeError("canonical schema must be an object")
         definitions = schema.get("$defs")
         if not isinstance(definitions, Mapping):
             raise TypeError("canonical schema definitions must be an object")
@@ -187,8 +175,7 @@ class AgentToolFacade:
             for item in value:
                 self._require_supported_handle_versions(item)
 
-    def _validate_result(self, value: dict[str, object]) -> None:
-        definition = RESULT_KIND_TO_DEFINITION[str(value["kind"])]
+    def _validate_result(self, definition: str, value: dict[str, object]) -> None:
         self._validate(definition, value)
 
     @staticmethod
@@ -211,3 +198,10 @@ class AgentToolFacade:
             "details": {},
             "next_operations": [],
         }
+
+
+def _contracts(root: Path) -> CompiledContracts:
+    schema = json.loads((root / INTERFACE_SCHEMA).read_text(encoding="utf-8"))
+    with (root / INTERFACE_CONTRACT).open("rb") as source:
+        interface = tomllib.load(source)
+    return compile_contracts(schema, interface)

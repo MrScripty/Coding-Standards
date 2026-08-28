@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3 atomic v11 production cutover
+**Current phase:** Milestone 4 content-bound acceptance
 
-**Next slice:** Replace the accepted A1 production boundary atomically with the
-v11 generated algebra, direct authority objects, and material execution closures
+**Next slice:** Identify the coherent Milestone 3 implementation boundary and
+obtain content-bound licensing, Standards, and Specification acceptance
 
 **Acceptance status:** `pending`
 
@@ -31,20 +31,20 @@ implementation begins.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; the complete admitted feature matrix and known A1 regressions agree between the direct validator and production Adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestone 1 and atomic cutover |
-| A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable projection semantics reject. | `contract` | `not-applicable` | `automated` | `pending` | Pending Milestones 1 and 3 |
-| A1B-A3 | JSON Schema validation, applicability equality, identity encoding, and domain ordering/deduplication pass owner-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `pending` | Pending Milestones 0, 1, and 3 |
-| A1B-A4 | Every advertised content snapshot, authority view, execution closure, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its owner-typed object in a fresh process after source and process mutation; snapshot identity contains only exact logical paths and bytes; analysis roots exclude complete views; existing results require no live provider or authorization service; and SQLite durability, deterministic during-commit interruption, verified backup, non-overwriting offline restore, rollback selection, and cold reopen pass on the admitted Linux ext4 profile. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
-| A1B-A4C | Every operation closure stores only unique role- and side-qualified roots and derives its transitive dependency set through owner-declared references: the exact selected operation contract is included, consumed provider and authorization objects enter only successful successor states, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestones 2 and 3 |
-| A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A1 | The canonical schema is checked and every accepted instance is validated through the exact selected `jsonschema.Draft202012Validator`; the complete admitted feature matrix and known A1 regressions agree between the direct validator and production Adapter without a repository keyword interpreter. | `contract` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A2 | Every public operation request and result has one complete reachable schema closure, generated models preserve it, stale projections fail, and unsupported reachable projection semantics reject. | `contract` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A3 | JSON Schema validation, applicability equality, identity encoding, and domain ordering/deduplication pass owner-specific fixtures without one domain deciding another. | `focused` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A4 | Every advertised content snapshot, authority view, execution closure, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its owner-typed object in a fresh process after source and process mutation; snapshot identity contains only exact logical paths and bytes; analysis roots exclude complete views; existing results require no live provider or authorization service; and SQLite durability, deterministic during-commit interruption, verified backup, non-overwriting offline restore, rollback selection, and cold reopen pass on the admitted Linux ext4 profile. | `system` | `required-real` | `automated` | `satisfied` | [Authority closure audit](reports/a1b-authority-closure-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A4C | Every operation closure stores only unique role- and side-qualified roots and derives its transitive dependency set through owner-declared references: the exact selected operation contract is included, consumed provider and authorization objects enter only successful successor states, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `satisfied` | [Authority closure audit](reports/a1b-authority-closure-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `satisfied` | [Milestone 0 dependency provenance](reports/a1b-dependency-provenance.md) and isolated lock tests on CPython 3.11/3.12 |
-| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
+| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `satisfied` | [Consumer dispositions](reports/a1b-consumer-dispositions.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle artifact/source identity, exact hashes, copyright/notice and license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `satisfied` | [Corrected-C7 plan admission](reports/a1b-plan-admission.md) |
 | A1B-A6L | Final independent review proves the implemented exact lock and required-real test-oracle provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
-| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `pending` | Pending broad checkpoint |
-| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `pending` | Pending final checkpoint |
+| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `satisfied` | [Authority closure audit](reports/a1b-authority-closure-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer dispositions](reports/a1b-consumer-dispositions.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `satisfied` | [Cutover evidence](reports/a1b-cutover-evidence.md) |
+| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `satisfied` | [Cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A11 | One clean implementation boundary has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. The review binds the identified content; later evidence or lifecycle recording does not invalidate unchanged reviewed semantics. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
 
 ## Scope
@@ -140,8 +140,11 @@ implementation begins.
 - Dependency installation and verification use the accepted hash-checked lock.
   Ambient alternate packages are not evidence.
 - Generated freshness and semantic correctness are separate gates.
-- Coverage attestations are renewed only after every horizon-affecting input is
-  frozen.
+- Repository coverage claims bind stable subjects and semantic contract
+  versions, never generated requirement, view, attestation, or certificate
+  hashes. Exact handles are derived after every horizon-affecting input is
+  frozen. A representation-only byte change may regenerate those handles but
+  does not require an authored claim change.
 - Mutable repository totals are not acceptance oracles.
 
 ### Assumptions
@@ -570,6 +573,8 @@ in one replacement boundary; delete all superseded authority.
 - `evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml`
 - `evaluation/standards-effectiveness/policy-coverage/horizons.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml`
+- `evaluation/standards-effectiveness/policy-coverage/authorization-authority.toml`
+- `evaluation/standards-effectiveness/policy-coverage/revocations.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/`
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/a1b-contract-conformance.toml`
@@ -589,18 +594,18 @@ in one replacement boundary; delete all superseded authority.
 
 **Tasks:**
 
-- [ ] Promote the exact admitted planning schema and interface contract
+- [x] Promote the exact admitted planning schema and interface contract
   byte-for-byte to their canonical production paths; generate the complete
   public Python and agent-tool algebra.
-- [ ] Advance every identity and public contract in the identity/version matrix
+- [x] Advance every identity and public contract in the identity/version matrix
   and use domain-owned typed keys for ordering and deduplication.
-- [ ] Route all public wire validation through `standards_contracts` and all
+- [x] Route all public wire validation through `standards_contracts` and all
   public object persistence/inspection through `standards_authority` without a
   dependency between those Modules. Authority owns envelope,
   direct-reference, and DAG integrity. Each explicitly injected domain codec
   set owns its semantic record, construction, identity, dependency extraction,
   decoding, and object-local invariants.
-- [ ] Make Standards Engine composition create one reference-only
+- [x] Make Standards Engine composition create one reference-only
   StandardsAuthorityView from owner-produced semantic objects. Store one
   executable `OperationAuthorityContractV2` for each initial exact
   compatibility key `(route, 2)`, `(read, 2)`, `(related, 2)`, and
@@ -619,7 +624,7 @@ in one replacement boundary; delete all superseded authority.
   dependency kinds and extract exact direct references, while Engine applies
   one generic coherence algorithm. Query and analysis preparation accept views,
   not content snapshots.
-- [ ] Prove operation compatibility and identity independently: accept explicit
+- [x] Prove operation compatibility and identity independently: accept explicit
   sparse and overlapping supported key sets, reject numeric-range inference and
   Boolean/nonpositive revisions, prevent reuse of one key for unequal promises,
   keep unrelated operation identities stable, require accepted and proposed
@@ -628,20 +633,20 @@ in one replacement boundary; delete all superseded authority.
   semantic identity constructor receives only the normalized material record,
   not payload/envelope/SQLite representation, and that no encoded selector
   parser, alias, or fallback exists.
-- [ ] Make every domain execution path return an AuthorityBoundValue. Derive and
+- [x] Make every domain execution path return an AuthorityBoundValue. Derive and
   persist each result's exact role- and side-qualified roots, then derive its
   transitive dependency set by traversing owner-declared references. Never
   accept a caller-supplied closure or handwritten version/dependency bag.
-- [ ] Keep executable codec membership owner-local: each public Module root
+- [x] Keep executable codec membership owner-local: each public Module root
   exports its closed codec set, composition injects the exact tuple, and the
   verifier derives facade, inventory, and dependency evidence from those
   executable owners. Do not introduce a central codec manifest.
-- [ ] Persist analysis as narrow context plus dependency-valid decisions and
+- [x] Persist analysis as narrow context plus dependency-valid decisions and
   roots needed by the current state. Store direct `ProviderAuthorityV1` and
   `AuthorizationGrantV1` objects only when a successful transition consumes
   them; deterministic no-observation stores nothing. Pending and complete
   results omit complete views and hypothetical future-transition authority.
-- [ ] Require every authorization grant to bind exact issuer and revocation
+- [x] Require every authorization grant to bind exact issuer and revocation
   authority revisions, principal, capability, action, typed work subject,
   authorization/revocation contracts, evidence, `not-revoked` state, and allow
   decision through the exact closed `AuthorizationGrantV1`, tagged
@@ -650,16 +655,16 @@ in one replacement boundary; delete all superseded authority.
   logical keys regardless of digest. Prove mismatch, denial, revocation,
   missing trust, and unsupported contracts reach their distinct typed
   outcomes; do not store opaque substitute digests or admit temporal grants.
-- [ ] Prove included authority mutation changes every dependent closure and
+- [x] Prove included authority mutation changes every dependent closure and
   identity, excluded view-member mutation leaves unrelated identities stable,
   and existing cold inspection requires no live provider or authorization
   authority. Provider claims and authorization grants are validated against
   exact immutable inputs only while producing a successor analysis state.
-- [ ] Exhaustively adapt domain requests and outcomes at the facade.
-- [ ] Accept coverage claims as input, validate evidence and trusted execution
+- [x] Exhaustively adapt domain requests and outcomes at the facade.
+- [x] Accept coverage claims as input, validate evidence and trusted execution
   authorization, and construct stored coverage attestations only inside the
   analysis kernel.
-- [ ] Update every manifest in the closed Module dependency table with exact
+- [x] Update every manifest in the closed Module dependency table with exact
   direct requirements, the admitted Python range, one public source-tree import
   root, and its repository entrypoint scripts. Require each public-root
   `__init__.py` to define exactly one statically resolvable `__all__` through the
@@ -667,56 +672,72 @@ in one replacement boundary; delete all superseded authority.
   require exact manifest equality and source ownership, and reject imports
   below another Module's root, root-form names absent from resolved `__all__`,
   cross-Module star imports, or literal/dynamic import bypasses.
-- [ ] Derive all governed production Python from manifest roots and repository
+- [x] Derive all governed production Python from manifest roots and repository
   entrypoints, and reject tracked non-test Python under `tools/` that has no
   manifest owner. Assign the canonical graph query and Git-reachability scripts
   to the Standards Verifier manifest. Replace ambient or alternate-root imports
   in every exact Verifier entrypoint with canonical-root adapters.
-- [ ] Execute every manifest-owned public root, every resolved export, and every
+- [x] Execute every manifest-owned public root, every resolved export, and every
   exact repository entrypoint in clean CPython 3.11 and 3.12 environments after
   installing only the admitted external lock. Use safe-path mode from outside
   the checkout with the checkout root as the sole `PYTHONPATH`; mutating
   entrypoints operate only on isolated repository fixtures.
-- [ ] Make generated imports a closed compiler prelude, verify their AST in
+- [x] Make generated imports a closed compiler prelude, verify their AST in
   focused compiler tests, and independently reject otherwise-valid generated
   and handwritten-facade fixtures for both `from public_root.private_child`
   and `from public_root import private_child`. Require the intended rule's exact
   diagnostic and prove that exported root names remain accepted.
-- [ ] Delete old validators, generated keyword walkers, generic NFC serializer,
+- [x] Delete old validators, generated keyword walkers, generic NFC serializer,
   snapshot compiler, split and directory stores, owner maps, scans, aliases,
   copied version bags, aggregate operation profiles, complete-view analysis
   fields, structural/directory/symlink/mode/Git locator snapshot fields,
   aggregate provider/authorization views, ambient authority-completion paths,
   migration/export scaffolding, and fallbacks.
-- [ ] Register the Cross-Platform and Security declaration files explicitly in
+- [x] Register the Cross-Platform and Security declaration files explicitly in
   the closed policy-impact registry. Compile accepted and proposed
   catalogs/relationships; require every admitted declaration source and natural
   key to appear in migration evidence; and record every node, edge, and
   selected-consumer disposition without fixed cardinality assertions.
-- [ ] Reject an otherwise-valid migration fixture whose admitted relationship
+- [x] Reject an otherwise-valid migration fixture whose admitted relationship
   source is absent from the closed registry with the exact migration-completeness
   diagnostic; the relationship compiler remains responsible only for compiling
   its registered closed input.
-- [ ] Create the new owner-local Cross-Platform and Security attestation source
+- [x] Create the new owner-local Cross-Platform and Security attestation source
   files and register them, together with the updated Dependencies source, in
   the closed attestation-source registry.
-- [ ] After every declaration, suite input, horizon provider, canonical corpus,
-  and attestation-source registration is final, freeze the complete horizon;
-  then derive requirements, renew stale attestations through the existing
-  authorization/evidence path, and compile certificates. Any registration or
-  coverage-relevant authority change after this freeze invalidates the renewal
-  and triggers re-planning.
-- [ ] Prove exact selected-consumer/disposition and
+- [x] Remove the v2 static coverage identity and certificate path. Treat
+  repository attestation TOML as authored claims only; validate each claim
+  by stable policy-unit subject, target semantic revision, horizon provider and
+  version, relationship-kind contract version, applicability language version,
+  and coverage-evidence contract version. Reject generated handles in authored
+  claim sources. Resolve the current requirement, validate one closed
+  repository authorization authority, exact evidence bytes, and exact
+  revocation state, then construct the same v3 authorization grant, coverage
+  attestation, and generated certificate objects used by interactive Analysis
+  resolution. Engine composition and the static verifier must consume this one
+  Analysis-owned result without reconstructing identities or accepting
+  provenance text as authorization.
+- [x] After every declaration, suite input, horizon provider, canonical corpus,
+  and attestation-source registration is final, freeze the complete semantic
+  horizon; then derive requirements and compile grants, attestations, and
+  certificates from the stable claims. Prove a representation-only raw-byte
+  change alters exact snapshot and generated proof identities without requiring
+  an authored claim edit. A material subject revision, horizon
+  provider/version, relationship-kind contract, applicability language,
+  evidence contract, registration, or consumer-coverage change after this
+  freeze invalidates compatibility and triggers re-planning.
+- [x] Prove exact selected-consumer/disposition and
   requirement/certificate equality.
 
 **Acceptance gate:** Every automated objective claim passes. Final manual
 A1B-A6L and A1B-A11 remain pending content-bound acceptance.
 Any required path outside this write set, any substantive ADR change, blocked
-disposition, or horizon change after attestation is a re-plan trigger. The
+disposition, or material semantic horizon change after claim finalization is a
+re-plan trigger. A generated digest or handle change alone is not. The
 admitted ADR remains byte-identical and `Proposed` throughout Milestone 3;
 Milestone 4 alone may change its status after content-bound acceptance.
 
-**Status:** `Planned`
+**Status:** `Implemented`
 
 ### Milestone 4: Content-Bound Acceptance
 

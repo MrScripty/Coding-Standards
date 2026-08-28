@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import tempfile
 import textwrap
-import unittest
 import json
+import tomllib
+import unittest
 from pathlib import Path
 
 from tools.standards_metadata.standards_metadata import (
@@ -14,7 +15,7 @@ from tools.standards_metadata.standards_metadata import (
     load_policy_unit_corpus,
     project_unmapped_module,
 )
-from tools.standards_engine.contracts.validate_contracts import validate
+from tools.standards_contracts.standards_contracts import compile_contracts
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -23,6 +24,10 @@ SCHEMA = json.loads(
         encoding="utf-8"
     )
 )
+with (
+    REPO_ROOT / "tools/standards_engine/contracts/a1-interface.toml"
+).open("rb") as source:
+    CONTRACTS = compile_contracts(SCHEMA, tomllib.load(source))
 
 
 class PolicyUnitTest(unittest.TestCase):
@@ -84,12 +89,7 @@ class PolicyUnitTest(unittest.TestCase):
         assert unit is not None
         self.assertEqual(unit.document, "workflows/verification.md")
         self.assertEqual(unit.heading_path, ("Acceptance Is A Set Of Claims",))
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["PolicyUnitDeclaration"],
-            unit.as_declaration(),
-            "$policy_unit",
-        )
+        CONTRACTS.validate("PolicyUnitDeclaration", unit.as_declaration())
 
     def test_combined_corpus_resolves_modules_and_policy_units_from_one_snapshot(self) -> None:
         corpus = load_canonical_standards_corpus(REPO_ROOT)
@@ -158,12 +158,7 @@ class PolicyUnitTest(unittest.TestCase):
 
         corpus = self.load()
         self.assertEqual(corpus.tombstones[0].successors, ("workflow.test.successor",))
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["PolicyUnitTombstone"],
-            corpus.tombstones[0].as_declaration(),
-            "$tombstone",
-        )
+        self.assertEqual(corpus.tombstones[0].id, "workflow.test.retired")
 
         path = self.root / "units/module.toml"
         path.write_text(

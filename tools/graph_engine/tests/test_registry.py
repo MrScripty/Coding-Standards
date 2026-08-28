@@ -43,6 +43,28 @@ class Source:
 
 
 class EdgeRegistryTest(unittest.TestCase):
+    def test_explicit_logical_artifacts_remove_filesystem_dependency(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            provenance = Provenance("logical", "provider", "fixture")
+            source = Source(
+                "logical",
+                GraphContribution(
+                    (Node("policy", ("standards/policy.md",), provenance),),
+                    (),
+                    (),
+                ),
+            )
+            registry = EdgeRegistry(
+                root,
+                (source,),
+                logical_artifacts=("standards/policy.md",),
+            )
+            self.assertFalse((root / "standards/policy.md").exists())
+            self.assertEqual(registry.resolve("standards/policy.md"), "policy")
+            with self.assertRaises(UnknownNodeError):
+                registry.resolve("standards/missing.md")
+
     def setUp(self) -> None:
         self.temp_dir = tempfile.TemporaryDirectory()
         self.root = Path(self.temp_dir.name)

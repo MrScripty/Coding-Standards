@@ -1,0 +1,58 @@
+schema_version = 2
+owner = "topic.cross-platform"
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "tools/standards_authority/pyproject.toml"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "tools/standards_authority/README.md"
+relation = "documentation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "tools/standards_authority/standards_authority/repository.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "tools/standards_authority/standards_authority/snapshot.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "tools/standards_authority/tests/test_platform.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/authority-platform-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+
+[[relationships]]
+source = "topic.cross-platform.filesystem-paths"
+consumer = "immutable-authority-closure"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."

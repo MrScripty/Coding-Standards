@@ -8,9 +8,8 @@ from tools.graph_engine.graph_engine import EdgeRegistry, GraphError
 from tools.standards_applicability.standards_applicability import ApplicabilityProgram
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
-    CoverageIndex,
-    compile_coverage,
 )
+from tools.standards_engine.standards_engine import StandardsEngine
 from tools.standards_graph.standards_graph import metadata_dependency_source
 from tools.standards_metadata.standards_metadata import (
     MetadataError,
@@ -49,22 +48,21 @@ class PolicyImpactAdapter:
     registry: EdgeRegistry
     compiled: CompiledPolicyImpactSet
     policy_units: PolicyUnitCorpus
-    coverage: CoverageIndex
+    covered_subjects: frozenset[str] | None
 
     @property
     def covered_owners(self) -> frozenset[str]:
+        if self.covered_subjects is None:
+            return frozenset()
         owners = {unit.module for unit in self.policy_units.units}
         return frozenset(
             owner
             for owner in owners
-            if not self.coverage.uncovered_for_module_corpus(self.policy_units, owner)
+            if not self._uncovered(owner)
         )
 
     def consumers_for(self, owner: str) -> tuple[ImpactEdge, ...]:
-        uncovered = self.coverage.uncovered_for_module_corpus(
-            self.policy_units,
-            owner,
-        )
+        uncovered = self._uncovered(owner)
         if uncovered or not self.policy_units.for_module(owner):
             raise EngineError(
                 Diagnostic(
@@ -75,6 +73,15 @@ class PolicyImpactAdapter:
                 )
             )
         return self.declared_consumers_for(owner)
+
+    def _uncovered(self, owner: str) -> tuple[str, ...]:
+        if self.covered_subjects is None:
+            return tuple(unit.id for unit in self.policy_units.for_module(owner))
+        return tuple(
+            unit.id
+            for unit in self.policy_units.for_module(owner)
+            if unit.id not in self.covered_subjects
+        )
 
     def declared_consumers_for(self, owner: str) -> tuple[ImpactEdge, ...]:
         return _declared_consumers(
@@ -279,11 +286,7 @@ def load_policy_impact(
         suite=suite,
         check=check,
     )
-    try:
-        coverage = compile_coverage(repo_root, corpus, compiled)
-    except AnalysisError as error:
-        raise _translate_analysis_error(error, suite=suite, check=check) from error
-    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, coverage)
+    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, None)
 
 
 def load_registered_policy_impact(
@@ -327,7 +330,9 @@ def load_registered_policy_impact(
         check=check,
     )
     try:
-        coverage = compile_coverage(root.resolve(), corpus, compiled)
+        covered = StandardsEngine.open_repository(
+            root.resolve(), durable=False
+        ).covered_policy_units()
     except AnalysisError as error:
         raise _translate_analysis_error(error, suite=suite, check=check) from error
-    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, coverage)
+    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, covered)

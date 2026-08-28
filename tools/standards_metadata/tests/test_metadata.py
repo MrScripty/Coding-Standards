@@ -12,9 +12,6 @@ from tools.standards_metadata.standards_metadata import (
     load_module_metadata,
     validate_module_metadata,
 )
-from tools.standards_metadata.standards_metadata.serialization import (
-    canonical_json_bytes,
-)
 
 
 class StandardsMetadataTest(unittest.TestCase):
@@ -181,17 +178,6 @@ class StandardsMetadataTest(unittest.TestCase):
         with self.assertRaises(MetadataError) as caught:
             load_module_metadata(self.root, "missing.md")
         self.assertEqual(caught.exception.failure.outcome, "unavailable")
-
-    def test_canonical_serialization_normalizes_keys_and_rejects_collisions(
-        self,
-    ) -> None:
-        self.assertEqual(
-            canonical_json_bytes({"e\u0301": "value"}),
-            canonical_json_bytes({"é": "value"}),
-        )
-        with self.assertRaisesRegex(TypeError, "duplicate key"):
-            canonical_json_bytes({"é": 1, "e\u0301": 2})
-
 
 if __name__ == "__main__":
     unittest.main()

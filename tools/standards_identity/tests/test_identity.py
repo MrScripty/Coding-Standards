@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import struct
 import unittest
+from pathlib import Path
 
 from tools.standards_identity.standards_identity import (
     IdentityArray,
@@ -13,7 +15,48 @@ from tools.standards_identity.standards_identity import (
 )
 
 
+REPO_ROOT = Path(__file__).resolve().parents[3]
+FIXTURE_PATH = REPO_ROOT / "tools/standards_engine/contracts/identity-fixtures.json"
+
+
+def _identity_value(value: object):
+    if type(value) is list:
+        return IdentityArray(_identity_value(item) for item in value)
+    if type(value) is dict:
+        return IdentityObject((key, _identity_value(item)) for key, item in value.items())
+    return value
+
+
 class IdentityEncodingTest(unittest.TestCase):
+    def test_authored_identity_v2_fixture_matrix(self) -> None:
+        corpus = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(corpus["schema_version"], 2)
+        self.assertEqual(corpus["identity_encoding_version"], 2)
+
+        encoding_names = [item["name"] for item in corpus["encoding_cases"]]
+        domain_names = [item["name"] for item in corpus["domains"]]
+        self.assertEqual(len(encoding_names), len(set(encoding_names)))
+        self.assertEqual(len(domain_names), len(set(domain_names)))
+        self.assertTrue(encoding_names)
+        self.assertTrue(domain_names)
+        for fixture in corpus["encoding_cases"]:
+            with self.subTest(encoding=fixture["name"]):
+                self.assertEqual(
+                    encode_identity_value(_identity_value(fixture["value"])),
+                    bytes.fromhex(fixture["encoded_hex"]),
+                )
+        for fixture in corpus["domains"]:
+            with self.subTest(domain=fixture["name"]):
+                value = _identity_value(fixture["value"])
+                self.assertEqual(
+                    encode_identity_value(value),
+                    bytes.fromhex(fixture["encoded_hex"]),
+                )
+                self.assertEqual(
+                    hash_identity(fixture["domain"], fixture["prefix"], value),
+                    fixture["expected"],
+                )
+
     def test_encodes_every_supported_value_with_exact_bytes(self) -> None:
         value = IdentityObject(
             (

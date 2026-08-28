@@ -13,7 +13,6 @@ from .model import (
     AuthorityReference,
     CodecContext,
     CodecSet,
-    PutResult,
 )
 from .store import ObjectStore
 
@@ -29,7 +28,14 @@ class AuthorityRepository:
     def __init__(self, store: ObjectStore, codec_sets: Iterable[CodecSet]) -> None:
         self._store = store
         codecs: dict[str, AuthorityCodec[object]] = {}
+        owners: set[str] = set()
         for codec_set in tuple(codec_sets):
+            if codec_set.owner_id in owners:
+                raise invalid(
+                    "AUTHORITY.DUPLICATE_CODEC_OWNER",
+                    f"duplicate codec owner {codec_set.owner_id!r}",
+                )
+            owners.add(codec_set.owner_id)
             for codec in codec_set.codecs:
                 if codec.object_kind in codecs:
                     raise invalid(
@@ -37,9 +43,13 @@ class AuthorityRepository:
                         f"duplicate injected codec for {codec.object_kind!r}",
                     )
                 codecs[codec.object_kind] = codec
+        self._owners = frozenset(owners)
         self._codecs = codecs
+        self._resolved: dict[AuthorityReference, ResolvedAuthority] = {}
 
-    def publish(self, codec: AuthorityCodec[object], value: object) -> PutResult:
+    def publish(
+        self, codec: AuthorityCodec[object], value: object
+    ) -> AuthorityHandle:
         selected = self._codecs.get(codec.object_kind)
         if selected is not codec:
             raise unsupported(
@@ -66,20 +76,24 @@ class AuthorityRepository:
                 )
             self._resolve_graph((dependency,))
         encoded = encode_envelope(envelope)
-        result = self._store.put_if_absent(handle, encoded)
+        self._store.put_if_absent(handle, encoded)
         resolved = self.resolve(handle)
         if resolved.envelope != envelope:
             raise invalid(
                 "AUTHORITY.PUBLICATION_CONTRADICTION",
                 "published object does not reproduce the submitted envelope",
             )
-        return result
+        return handle
 
     def resolve(self, handle: AuthorityHandle) -> ResolvedAuthority:
         return self._resolve_graph((handle.reference,))[handle.reference]
 
     def resolve_reference(self, reference: AuthorityReference) -> ResolvedAuthority:
         return self._resolve_graph((reference,))[reference]
+
+    def codec_context(self) -> CodecContext:
+        """Return the read-only authority resolver exposed to owner codecs."""
+        return _RepositoryContext(self, {})
 
     def transitive_dependencies(
         self, roots: Iterable[AuthorityReference]
@@ -122,6 +136,7 @@ class AuthorityRepository:
                 resolved[reference] = ResolvedAuthority(
                     envelope.handle, value, envelope
                 )
+                self._resolved[reference] = resolved[reference]
                 active.remove(reference)
                 continue
             if reference in resolved:
@@ -131,6 +146,14 @@ class AuthorityRepository:
                     "AUTHORITY.DEPENDENCY_CYCLE",
                     f"dependency cycle includes {reference!r}",
                 )
+            cached = self._resolved.get(reference)
+            if cached is not None:
+                resolved[reference] = cached
+                stack.extend(
+                    (dependency, False)
+                    for dependency in reversed(cached.envelope.direct_dependencies)
+                )
+                continue
             envelope, codec = self._load_node(reference)
             pending[reference] = (envelope, codec)
             active.add(reference)

@@ -19,7 +19,7 @@ class ContentSnapshotTests(unittest.TestCase):
     def setUp(self) -> None:
         self.codec = ContentSnapshotCodec()
         self.repository = AuthorityRepository(
-            MemoryObjectStore(), (CodecSet((self.codec,)),)
+            MemoryObjectStore(), (CodecSet("test", (self.codec,)),)
         )
 
     def test_path_and_input_order_do_not_change_identity(self) -> None:

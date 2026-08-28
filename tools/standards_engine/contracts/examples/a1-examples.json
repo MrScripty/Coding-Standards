@@ -1,49 +1,172 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "interface_schema_version": 11,
   "examples": [
     {
-      "name": "route-request",
-      "definition": "RouteRequest",
+      "name": "query-route",
+      "definition": "QueryCall",
       "value": {
-        "kind": "route",
-        "facts": {
-          "routing.activities": {
-            "type": "enum-set",
-            "state": "known",
-            "value": [
-              "implementation"
-            ]
-          },
-          "routing.workflow-profiles": {
-            "type": "enum-set",
-            "state": "known",
-            "value": []
-          },
-          "routing.applications": {
-            "type": "enum-set",
-            "state": "known",
-            "value": []
-          },
-          "routing.boundaries": {
-            "type": "enum-set",
-            "state": "known",
-            "value": []
-          },
-          "routing.languages": {
-            "type": "enum-set",
-            "state": "known",
-            "value": []
-          },
-          "routing.frameworks": {
-            "type": "enum-set",
-            "state": "known",
-            "value": []
-          },
-          "routing.topics": {
-            "type": "enum-set",
-            "state": "known",
-            "value": []
+        "view": {
+          "kind": "standards-authority-view-handle",
+          "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+          "schema_version": 4
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "type": "enum-set",
+              "state": "known",
+              "value": [
+                "implementation"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "type": "enum-set",
+              "state": "known",
+              "value": []
+            },
+            "routing.applications": {
+              "type": "enum-set",
+              "state": "known",
+              "value": []
+            },
+            "routing.boundaries": {
+              "type": "enum-set",
+              "state": "known",
+              "value": []
+            },
+            "routing.languages": {
+              "type": "enum-set",
+              "state": "known",
+              "value": []
+            },
+            "routing.frameworks": {
+              "type": "enum-set",
+              "state": "known",
+              "value": []
+            },
+            "routing.topics": {
+              "type": "enum-set",
+              "state": "known",
+              "value": []
+            }
           }
+        }
+      }
+    },
+    {
+      "name": "query-read",
+      "definition": "QueryCall",
+      "value": {
+        "view": {
+          "kind": "standards-authority-view-handle",
+          "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+          "schema_version": 4
+        },
+        "request": {
+          "kind": "read",
+          "target": "workflow.planning"
+        }
+      }
+    },
+    {
+      "name": "query-related",
+      "definition": "QueryCall",
+      "value": {
+        "view": {
+          "kind": "standards-authority-view-handle",
+          "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+          "schema_version": 4
+        },
+        "request": {
+          "kind": "related",
+          "target": "workflow.planning",
+          "groups": [
+            "standards-requires"
+          ],
+          "direction": "outgoing",
+          "transitive": false
+        }
+      }
+    },
+    {
+      "name": "prepare-analysis",
+      "definition": "PrepareCall",
+      "value": {
+        "request": {
+          "kind": "analysis-request",
+          "base_view": {
+            "kind": "standards-authority-view-handle",
+            "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+            "schema_version": 4
+          },
+          "proposed_view": {
+            "kind": "standards-authority-view-handle",
+            "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+            "schema_version": 4
+          },
+          "changes": [
+            {
+              "kind": "modification",
+              "accepted_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "proposed_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "scope": {
+                "kind": "whole-artifact"
+              }
+            }
+          ],
+          "semantic_proposals": [],
+          "contract_version": 3
+        }
+      }
+    },
+    {
+      "name": "resolve-coverage",
+      "definition": "ResolveCall",
+      "value": {
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis-root:sha256:8851a0059f79d0eeb78de7a8a82ce7e9e00b1ec0b3485a3a7d0488f0d163b98e",
+          "schema_version": 4
+        },
+        "submission": {
+          "kind": "coverage-attestation",
+          "obligation_id": "obligation:sha256:df0c8247420ccb955f4119db01f4d07e94065b6c2435e4eb15042e731b087f6d",
+          "claim": {
+            "requirement": {
+              "kind": "coverage-requirement-handle",
+              "id": "coverage-requirement:sha256:360cb4aea2be0c7b0020faabb6ac7ae506eae5fb5dbc314519941d6f3f0ac8df",
+              "schema_version": 4
+            },
+            "conclusion": "complete",
+            "evidence": [
+              {
+                "id": "example-evidence",
+                "digest": "sha256:80d70e44d0ae1e829fd5f37c3ee4a60dfbea8d3aa18407ea3f34cf7ec91da34d",
+                "provider_contract": "fixture.evidence",
+                "provider_contract_version": "1"
+              }
+            ],
+            "explicit_exclusions": [],
+            "rationale": "Exact consumer coverage was reviewed.",
+            "auditor_provenance": "principal.fixture"
+          }
+        }
+      }
+    },
+    {
+      "name": "inspect-analysis",
+      "definition": "InspectCall",
+      "value": {
+        "handle": {
+          "kind": "analysis-handle",
+          "id": "analysis-root:sha256:824cf5236fc86af353cbdfc494a23aa0a71784926d43ec420ee76edf621d0843",
+          "schema_version": 4
         }
       }
     },
@@ -54,13 +177,13 @@
         "kind": "route-result",
         "handle": {
           "kind": "navigation-handle",
-          "id": "navigation:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-          "snapshot": {
-            "kind": "snapshot-handle",
-            "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "schema_version": 3
-          },
-          "schema_version": 3
+          "id": "navigation-result:sha256:4eee34fa8c061c2fe6cfcf4cc6cc27c3070f70573fd9fce1ac7191c43f0adccc",
+          "schema_version": 4
+        },
+        "authority": {
+          "kind": "execution-closure-handle",
+          "id": "execution-closure:sha256:3fccdfd2271ce555e701553418bd11b83861fa7079220f3bcb0519ce39b49d11",
+          "schema_version": 4
         },
         "reading_plan": [
           {
@@ -74,6 +197,11 @@
                 "kind": "requires",
                 "edge": "metadata-requires:router->core",
                 "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
               }
             ],
             "state": "selected"
@@ -115,219 +243,157 @@
           {
             "operation": "query",
             "request_kind": "read",
-            "target": "core",
-            "snapshot": {
-              "kind": "snapshot-handle",
-              "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "schema_version": 3
-            }
-          },
-          {
-            "operation": "query",
-            "request_kind": "read",
-            "target": "router",
-            "snapshot": {
-              "kind": "snapshot-handle",
-              "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "schema_version": 3
-            }
-          },
-          {
-            "operation": "query",
-            "request_kind": "read",
-            "target": "workflow.implementation",
-            "snapshot": {
-              "kind": "snapshot-handle",
-              "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "schema_version": 3
-            }
-          }
-        ],
-        "summary": "Three standards are relevant to the implementation activity."
-      }
-    },
-    {
-      "name": "read-request",
-      "definition": "ReadRequest",
-      "value": {
-        "kind": "read",
-        "target": "workflow.implementation"
-      }
-    },
-    {
-      "name": "related-request",
-      "definition": "RelatedRequest",
-      "value": {
-        "kind": "related",
-        "target": "workflow.implementation",
-        "groups": [
-          "standards-requires"
-        ],
-        "direction": "outgoing",
-        "transitive": false
-      }
-    },
-    {
-      "name": "analysis-request",
-      "definition": "AnalysisRequest",
-      "value": {
-        "kind": "analysis-request",
-        "base_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 3
-        },
-        "proposed_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 3
-        },
-        "changes": [
-          {
-            "kind": "modification",
-            "accepted_ids": [
-              "workflow.verification.evidence-oracle-boundary"
-            ],
-            "proposed_ids": [
-              "workflow.verification.evidence-oracle-boundary"
-            ],
-            "scope": {
-              "kind": "structured",
-              "heading_path": [
-                "Evidence",
-                "Oracle boundaries"
-              ]
+            "view": {
+              "kind": "standards-authority-view-handle",
+              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+              "schema_version": 4
             },
-            "accepted_module": "workflow.verification",
-            "proposed_module": "workflow.verification"
-          }
-        ],
-        "semantic_proposals": [
+            "target": "core"
+          },
           {
-            "policy": "workflow.verification.evidence-oracle-boundary",
-            "accepted_semantic_revision": 3,
-            "proposed_semantic_revision": 4,
-            "intent": "Distinguish representation checks from semantic review.",
-            "structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            "operation": "query",
+            "request_kind": "read",
+            "view": {
+              "kind": "standards-authority-view-handle",
+              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+              "schema_version": 4
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "view": {
+              "kind": "standards-authority-view-handle",
+              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+              "schema_version": 4
+            },
+            "target": "workflow.implementation"
           }
         ],
-        "contract_version": 2
+        "summary": "Selected 3 standards with 0 unresolved fact categories."
       }
     },
     {
-      "name": "change-modification",
-      "definition": "ChangeDescriptor",
+      "name": "read-result",
+      "definition": "ReadResult",
       "value": {
-        "kind": "modification",
-        "accepted_ids": [
-          "workflow.verification.evidence-oracle-boundary"
+        "kind": "read-result",
+        "handle": {
+          "kind": "navigation-handle",
+          "id": "navigation-result:sha256:8a0abd0b65144a00e527b0668a3661ee3980545966e20988f79c7ded76e69700",
+          "schema_version": 4
+        },
+        "authority": {
+          "kind": "execution-closure-handle",
+          "id": "execution-closure:sha256:0bd117fb8fc674709e7435154b33db903431bbff366133ca3af0de4b8b006f51",
+          "schema_version": 4
+        },
+        "policy": {
+          "handle": {
+            "kind": "policy-handle",
+            "id": "policy-inspection:sha256:afc3e2909167122133254321eecf43f11219b82776fc78c17b97f0b0f524ce7e",
+            "schema_version": 4
+          },
+          "authority": "normative",
+          "scope": {
+            "kind": "whole-artifact"
+          }
+        },
+        "content": "Example policy content.\n",
+        "requires": [
+          "core",
+          "workflow.implementation",
+          "workflow.verification"
         ],
-        "proposed_ids": [
-          "workflow.verification.evidence-oracle-boundary"
+        "specializes": [],
+        "related": [
+          {
+            "handle": {
+              "kind": "relationship-handle",
+              "id": "relationship-inspection:sha256:c129669533deebe0301c306e8805051a3705d8a84357854a60da01f40fe895b7",
+              "schema_version": 4
+            },
+            "source": "profile.workflow.concurrent-plan-integration",
+            "target": "workflow.planning",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "incoming",
+            "traversal_eligible": true,
+            "applicability": "not-declared"
+          }
         ],
-        "scope": {
-          "kind": "structured",
-          "heading_path": [
-            "Evidence",
-            "Oracle boundaries"
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "related",
+            "view": {
+              "kind": "standards-authority-view-handle",
+              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+              "schema_version": 4
+            },
+            "target": "workflow.planning"
+          },
+          {
+            "operation": "inspect",
+            "request_kind": "inspect",
+            "target": "policy-inspection:sha256:afc3e2909167122133254321eecf43f11219b82776fc78c17b97f0b0f524ce7e",
+            "view": {
+              "kind": "standards-authority-view-handle",
+              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
+              "schema_version": 4
+            }
+          }
+        ],
+        "summary": "Read canonical standard workflow.planning."
+      }
+    },
+    {
+      "name": "related-result",
+      "definition": "RelatedResult",
+      "value": {
+        "kind": "related-result",
+        "handle": {
+          "kind": "navigation-handle",
+          "id": "navigation-result:sha256:e7d6f80408e14663fa2e542da258aa8ca82b2edd23e81ec65278862027ca080b",
+          "schema_version": 4
+        },
+        "authority": {
+          "kind": "execution-closure-handle",
+          "id": "execution-closure:sha256:4bb4bbaf3aa0211e5675b16822d25dde1dfc660fc9ad9ba953e1ef1b04c962bb",
+          "schema_version": 4
+        },
+        "target": "workflow.planning",
+        "policy_unit_mapping": {
+          "state": "policy-units-present",
+          "policy_units": [
+            "workflow.planning.written-plan-applicability"
           ]
         },
-        "accepted_module": "workflow.verification",
-        "proposed_module": "workflow.verification"
-      }
-    },
-    {
-      "name": "change-addition",
-      "definition": "ChangeDescriptor",
-      "value": {
-        "kind": "addition",
-        "accepted_ids": [],
-        "proposed_ids": [
-          "workflow.verification.evidence-oracle-boundary"
+        "relationships": [
+          {
+            "handle": {
+              "kind": "relationship-handle",
+              "id": "relationship-inspection:sha256:73a6ed5b733168505dd8eb6c87defc64bb7ea537dd9e066a8756f290245fd40b",
+              "schema_version": 4
+            },
+            "source": "workflow.planning",
+            "target": "core",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "outgoing",
+            "traversal_eligible": true,
+            "applicability": "not-declared"
+          }
         ],
-        "scope": {
-          "kind": "structured",
-          "heading_path": [
-            "Evidence",
-            "Oracle boundaries"
-          ]
-        },
-        "proposed_module": "workflow.verification"
-      }
-    },
-    {
-      "name": "change-removal",
-      "definition": "ChangeDescriptor",
-      "value": {
-        "kind": "removal",
-        "accepted_ids": [
-          "workflow.verification.legacy-oracle"
-        ],
-        "proposed_ids": [],
-        "scope": {
-          "kind": "whole-artifact"
-        },
-        "accepted_module": "workflow.verification"
-      }
-    },
-    {
-      "name": "change-move",
-      "definition": "ChangeDescriptor",
-      "value": {
-        "kind": "move",
-        "accepted_ids": [
-          "workflow.verification.evidence-oracle-boundary"
-        ],
-        "proposed_ids": [
-          "workflow.verification.evidence-oracle-boundary"
-        ],
-        "scope": {
-          "kind": "structured",
-          "heading_path": [
-            "Evidence",
-            "Oracle boundaries"
-          ]
-        },
-        "accepted_module": "workflow.verification",
-        "proposed_module": "workflow.documentation"
-      }
-    },
-    {
-      "name": "change-split",
-      "definition": "ChangeDescriptor",
-      "value": {
-        "kind": "split",
-        "accepted_ids": [
-          "workflow.verification.evidence-boundary"
-        ],
-        "proposed_ids": [
-          "workflow.verification.structural-evidence",
-          "workflow.verification.semantic-evidence"
-        ],
-        "scope": {
-          "kind": "whole-artifact"
-        },
-        "accepted_module": "workflow.verification",
-        "proposed_module": "workflow.verification"
-      }
-    },
-    {
-      "name": "change-merge",
-      "definition": "ChangeDescriptor",
-      "value": {
-        "kind": "merge",
-        "accepted_ids": [
-          "workflow.verification.structural-evidence",
-          "workflow.verification.semantic-evidence"
-        ],
-        "proposed_ids": [
-          "workflow.verification.evidence-boundary"
-        ],
-        "scope": {
-          "kind": "whole-artifact"
-        },
-        "accepted_module": "workflow.verification",
-        "proposed_module": "workflow.verification"
+        "next_operations": [],
+        "summary": "Found 3 declared relationships."
       }
     },
     {
@@ -337,403 +403,144 @@
         "kind": "pending-result",
         "handle": {
           "kind": "analysis-handle",
-          "id": "analysis:sha256:7777777777777777777777777777777777777777777777777777777777777777",
-          "schema_version": 3
+          "id": "analysis-root:sha256:8851a0059f79d0eeb78de7a8a82ce7e9e00b1ec0b3485a3a7d0488f0d163b98e",
+          "schema_version": 4
         },
+        "status": "needs-action",
         "context": {
           "kind": "analysis-context",
           "handle": {
             "kind": "analysis-context-handle",
-            "id": "standards-change:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-            "context_kind": "standards-change",
-            "schema_version": 1
+            "id": "analysis-context:sha256:c4ed822657810fc62286664c2cdd607049931e8cbbfb2e8afb752ea717ae1be8",
+            "schema_version": 4
           },
           "subjects": [
             {
-              "policy": "workflow.verification.evidence-oracle-boundary",
+              "policy": "workflow.verification.acceptance-claims",
               "change_kind": "modification",
-              "classification": "possibly-semantically-changed",
-              "accepted_representation_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
-              "proposed_representation_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-              "accepted_structural_digest": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
-              "proposed_structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-              "accepted_semantic_revision": 3,
-              "proposed_semantic_revision": 4,
-              "semantic_state": "proposed",
+              "classification": "unchanged",
+              "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+              "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+              "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+              "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+              "accepted_semantic_revision": 1,
+              "proposed_semantic_revision": 1,
+              "semantic_state": "accepted-unchanged",
               "scope": {
-                "kind": "structured",
-                "heading_path": [
-                  "Evidence",
-                  "Oracle boundaries"
-                ]
+                "kind": "whole-artifact"
               }
             }
           ],
-          "semantic_proposals": []
+          "semantic_proposals": [],
+          "changes": [
+            {
+              "kind": "modification",
+              "accepted_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "proposed_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "scope": {
+                "kind": "whole-artifact"
+              }
+            }
+          ]
         },
         "changes": [
           {
             "kind": "modification",
             "accepted_ids": [
-              "workflow.verification.evidence-oracle-boundary"
+              "workflow.verification.acceptance-claims"
             ],
             "proposed_ids": [
-              "workflow.verification.evidence-oracle-boundary"
+              "workflow.verification.acceptance-claims"
             ],
             "scope": {
-              "kind": "structured",
-              "heading_path": [
-                "Evidence",
-                "Oracle boundaries"
-              ]
-            },
-            "accepted_module": "workflow.verification",
-            "proposed_module": "workflow.verification"
+              "kind": "whole-artifact"
+            }
           }
         ],
         "changed_units": [
           {
-            "policy": "workflow.verification.evidence-oracle-boundary",
+            "policy": "workflow.verification.acceptance-claims",
             "change_kind": "modification",
-            "classification": "possibly-semantically-changed",
-            "accepted_representation_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
-            "proposed_representation_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-            "accepted_structural_digest": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
-            "proposed_structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-            "accepted_semantic_revision": 3,
-            "proposed_semantic_revision": 4,
-            "semantic_state": "proposed",
+            "classification": "unchanged",
+            "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+            "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+            "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+            "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+            "accepted_semantic_revision": 1,
+            "proposed_semantic_revision": 1,
+            "semantic_state": "accepted-unchanged",
             "scope": {
-              "kind": "structured",
-              "heading_path": [
-                "Evidence",
-                "Oracle boundaries"
-              ]
+              "kind": "whole-artifact"
             }
           }
         ],
         "obligations": [
           {
-            "id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-            "kind": "consumer-review",
-            "target": "workflow.documentation.machine-verifiable-claims",
+            "id": "obligation:sha256:df0c8247420ccb955f4119db01f4d07e94065b6c2435e4eb15042e731b087f6d",
+            "kind": "audit-coverage",
+            "target": "workflow.verification.acceptance-claims",
             "scope": {
               "kind": "whole-artifact"
             },
             "reasons": [
               {
-                "kind": "policy-impact-edge",
-                "source": "workflow.verification.evidence-oracle-boundary",
-                "edge": "edge.verification.documentation",
-                "relation": "documentation-projection",
-                "evidence_owner": "suite.documentation",
-                "traces": [
-                  {
-                    "id": "impact-trace:sha256:abababababababababababababababababababababababababababababababab",
-                    "graph": "proposed",
-                    "applicability": "true"
-                  }
-                ]
+                "kind": "audit-coverage",
+                "source": "workflow.verification.acceptance-claims"
               }
             ],
             "state": "required",
-            "applicability": "true",
             "permitted_submissions": [
-              "consumer-disposition"
+              "coverage-attestation"
             ],
-            "review_contract": {
-              "kind": "consumer-review-contract",
-              "id": "decision-contract.consumer-review.v1",
-              "version": 1,
-              "permitted_dispositions": [
-                "updated",
-                "reviewed-no-change",
-                "not-applicable",
-                "blocked"
-              ],
-              "evidence_contract": "evidence-reference.v1",
-              "authorization_capability": "standards.review.consumer",
-              "semantics": "Review the exact consumer scope for every definitely applicable selector."
-            },
             "fingerprint": {
-              "decision_kind": "consumer-review",
-              "decision_contract": "decision-contract.consumer-review.v1",
+              "decision_kind": "audit-coverage",
+              "decision_contract": "decision-contract.audit-coverage.v1",
               "schema_version": 1,
               "dependencies": [
                 {
+                  "class": "audit",
+                  "identity": "coverage-requirement:sha256:360cb4aea2be0c7b0020faabb6ac7ae506eae5fb5dbc314519941d6f3f0ac8df",
+                  "digest": "sha256:43c9586c7810bfac70223c72836551f1cdc4ffa09e1c863a0a570c76200b16c7"
+                },
+                {
                   "class": "policy-unit",
-                  "identity": "workflow.verification.evidence-oracle-boundary",
-                  "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+                  "identity": "workflow.verification.acceptance-claims",
+                  "digest": "sha256:6a20ab2c226d511ba47142181f3bc61e80f1f11ce1d573c55905e3e37d039b92"
+                },
+                {
+                  "class": "provider-contract",
+                  "identity": "decision-contract.audit-coverage.v1",
+                  "digest": "sha256:a597e086b78c0b000e7c65d36951ae827c068940f706f192b5f4298c98e7119d"
                 }
               ]
-            }
+            },
+            "applicability": "not-declared"
           }
         ],
         "fact_requirements": [],
-        "reading_plan": [
-          {
-            "target": "workflow.documentation.machine-verifiable-claims",
-            "scope": {
-              "kind": "whole-artifact"
-            },
-            "authority": "normative",
-            "reasons": [
-              {
-                "kind": "consumer-review-obligation",
-                "obligation": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-              }
-            ],
-            "state": "selected"
-          }
-        ],
+        "reading_plan": [],
         "next_operations": [
           {
             "operation": "resolve",
-            "request_kind": "consumer-disposition",
-            "target": "workflow.documentation.machine-verifiable-claims",
-            "obligation_id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "request_kind": "coverage-attestation",
             "analysis": {
               "kind": "analysis-handle",
-              "id": "analysis:sha256:7777777777777777777777777777777777777777777777777777777777777777",
-              "schema_version": 3
-            }
-          }
-        ],
-        "provenance": {
-          "analysis_contract_version": 6,
-          "interface_schema_version": 10,
-          "applicability_version": 3,
-          "metadata_api_version": "1",
-          "graph_engine_contract_version": "1",
-          "graph_engine_implementation_version": "0.1.0",
-          "analyzer_implementation_version": "0.1.0",
-          "parser_versions": {
-            "markdown": "1",
-            "toml": "python-3.11"
-          },
-          "evidence_provider_contract_versions": {
-            "policy-impact": "1"
-          },
-          "analysis_schema_version": 3,
-          "result_schema_version": 2,
-          "authorization_contract_version": "authorization-authority.v1"
-        },
-        "summary": "One consumer review is required.",
-        "status": "needs-action"
-      }
-    },
-    {
-      "name": "fact-requirement",
-      "definition": "FactRequirement",
-      "value": {
-        "kind": "fact-requirement",
-        "handle": {
-          "kind": "fact-requirement-handle",
-          "id": "fact-requirement:sha256:0a4be69fffedfbeb1975f14e89cc9f8195eebac96b4281ab8bb0e39fe16bb4af",
-          "schema_version": 1
-        },
-        "fact": "change.requires_review",
-        "fact_semantic_revision": 1,
-        "fact_contract_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
-        "context": {
-          "kind": "analysis-context-handle",
-          "id": "standards-change:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-          "context_kind": "standards-change",
-          "schema_version": 1
-        },
-        "value_contract": {
-          "type": "boolean",
-          "states": [
-            "known",
-            "known-absent"
-          ],
-          "nullable": false
-        },
-        "answer_contract": "fact-value.v1",
-        "evidence_contract": "evidence-reference.v1",
-        "authorization_capability": "standards.analyze",
-        "prompt": "Does this standards change require consumer review?",
-        "dependent_programs": [
-          "proposed:edge.verification.documentation"
-        ]
-      }
-    },
-    {
-      "name": "provide-fact",
-      "definition": "ProvideFactSubmission",
-      "value": {
-        "kind": "provide-fact",
-        "requirement": {
-          "kind": "fact-requirement-handle",
-          "id": "fact-requirement:sha256:0a4be69fffedfbeb1975f14e89cc9f8195eebac96b4281ab8bb0e39fe16bb4af",
-          "schema_version": 1
-        },
-        "value": {
-          "type": "boolean",
-          "state": "known",
-          "value": true
-        },
-        "evidence": [
-          {
-            "id": "evidence.change.requires-review",
-            "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
-            "provider_contract": "repository-content",
-            "provider_contract_version": "1"
-          }
-        ]
-      }
-    },
-    {
-      "name": "fact-observation",
-      "definition": "FactObservation",
-      "value": {
-        "kind": "fact-observation",
-        "handle": {
-          "kind": "fact-observation-handle",
-          "id": "fact-observation:sha256:886ee8e69188d38d7d124fd2cbaa5a133e6f6a69881ca157700909958992ab08",
-          "schema_version": 1
-        },
-        "requirement": {
-          "kind": "fact-requirement-handle",
-          "id": "fact-requirement:sha256:0a4be69fffedfbeb1975f14e89cc9f8195eebac96b4281ab8bb0e39fe16bb4af",
-          "schema_version": 1
-        },
-        "value": {
-          "type": "boolean",
-          "state": "known",
-          "value": true
-        },
-        "evidence": [
-          {
-            "id": "evidence.change.requires-review",
-            "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
-            "provider_contract": "repository-content",
-            "provider_contract_version": "1"
-          }
-        ],
-        "authorization": {
-          "id": "authorization.standards.analyze",
-          "capability": "standards.analyze",
-          "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        }
-      }
-    },
-    {
-      "name": "consumer-disposition",
-      "definition": "ConsumerDispositionSubmission",
-      "value": {
-        "kind": "consumer-disposition",
-        "obligation_id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-        "result": "reviewed-no-change",
-        "rationale": "The consumer already distinguishes source representation from semantic evidence.",
-        "evidence": [
-          {
-            "id": "review.documentation.oracle-boundary",
-            "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-            "provider_contract": "repository-content",
-            "provider_contract_version": "1"
-          }
-        ],
-        "fingerprint": {
-          "decision_kind": "consumer-review",
-          "decision_contract": "decision-contract.consumer-review.v1",
-          "schema_version": 1,
-          "dependencies": [
-            {
-              "class": "policy-unit",
-              "identity": "workflow.verification.evidence-oracle-boundary",
-              "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "analysis-state",
-      "definition": "AnalysisState",
-      "value": {
-        "kind": "analysis-state",
-        "handle": {
-          "kind": "analysis-handle",
-          "id": "analysis:sha256:8888888888888888888888888888888888888888888888888888888888888888",
-          "schema_version": 3
-        },
-        "base_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 3
-        },
-        "proposed_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 3
-        },
-        "changes": [
-          {
-            "kind": "modification",
-            "accepted_ids": [
-              "workflow.verification.evidence-oracle-boundary"
-            ],
-            "proposed_ids": [
-              "workflow.verification.evidence-oracle-boundary"
-            ],
-            "scope": {
-              "kind": "structured",
-              "heading_path": [
-                "Evidence",
-                "Oracle boundaries"
-              ]
+              "id": "analysis-root:sha256:8851a0059f79d0eeb78de7a8a82ce7e9e00b1ec0b3485a3a7d0488f0d163b98e",
+              "schema_version": 4
             },
-            "accepted_module": "workflow.verification",
-            "proposed_module": "workflow.verification"
+            "obligation_id": "obligation:sha256:df0c8247420ccb955f4119db01f4d07e94065b6c2435e4eb15042e731b087f6d"
           }
         ],
-        "fact_observations": [],
-        "dispositions": [],
-        "provenance": {
-          "analysis_contract_version": 6,
-          "interface_schema_version": 10,
-          "applicability_version": 3,
-          "metadata_api_version": "1",
-          "graph_engine_contract_version": "1",
-          "graph_engine_implementation_version": "0.1.0",
-          "analyzer_implementation_version": "0.1.0",
-          "parser_versions": {
-            "markdown": "1",
-            "toml": "python-3.11"
-          },
-          "evidence_provider_contract_versions": {
-            "policy-impact": "1"
-          },
-          "analysis_schema_version": 3,
-          "result_schema_version": 2,
-          "authorization_contract_version": "authorization-authority.v1"
+        "authority": {
+          "kind": "execution-closure-handle",
+          "id": "execution-closure:sha256:ad6ae7e671c717737308c545f59b4fb80ba5fcfb6f4800df7240588275ece78b",
+          "schema_version": 4
         },
-        "semantic_proposals": [],
-        "authorization_view": {
-          "kind": "authorization-authority-view",
-          "id": "authorization-authority-view:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "contract_version": "authorization-authority.v1",
-          "issuers": [
-            "trusted-engine-context"
-          ],
-          "capabilities": [],
-          "revocation_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-          "authorizations": []
-        },
-        "provider_view": {
-          "kind": "provider-authority-view",
-          "id": "provider-authority-view:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "contract_version": "provider-authority.v1",
-          "evidence_contracts": [
-            {
-              "id": "policy-impact",
-              "version": "1"
-            }
-          ],
-          "providers": []
-        },
-        "coverage_decisions": []
+        "summary": "The bounded analysis requires additional decisions."
       }
     },
     {
@@ -743,161 +550,100 @@
         "kind": "complete-result",
         "handle": {
           "kind": "analysis-handle",
-          "id": "analysis:sha256:9999999999999999999999999999999999999999999999999999999999999999",
-          "schema_version": 3
+          "id": "analysis-root:sha256:824cf5236fc86af353cbdfc494a23aa0a71784926d43ec420ee76edf621d0843",
+          "schema_version": 4
         },
-        "base_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 3
-        },
-        "proposed_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 3
-        },
+        "status": "complete",
         "context": {
           "kind": "analysis-context",
           "handle": {
             "kind": "analysis-context-handle",
-            "id": "standards-change:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-            "context_kind": "standards-change",
-            "schema_version": 1
+            "id": "analysis-context:sha256:c4ed822657810fc62286664c2cdd607049931e8cbbfb2e8afb752ea717ae1be8",
+            "schema_version": 4
           },
           "subjects": [
             {
-              "policy": "workflow.verification.evidence-oracle-boundary",
+              "policy": "workflow.verification.acceptance-claims",
               "change_kind": "modification",
-              "classification": "possibly-semantically-changed",
-              "accepted_representation_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
-              "proposed_representation_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-              "accepted_structural_digest": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
-              "proposed_structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-              "accepted_semantic_revision": 3,
-              "proposed_semantic_revision": 4,
-              "semantic_state": "proposed",
+              "classification": "unchanged",
+              "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+              "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+              "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+              "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+              "accepted_semantic_revision": 1,
+              "proposed_semantic_revision": 1,
+              "semantic_state": "accepted-unchanged",
               "scope": {
-                "kind": "structured",
-                "heading_path": [
-                  "Evidence",
-                  "Oracle boundaries"
-                ]
+                "kind": "whole-artifact"
               }
             }
           ],
-          "semantic_proposals": []
+          "semantic_proposals": [],
+          "changes": [
+            {
+              "kind": "modification",
+              "accepted_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "proposed_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "scope": {
+                "kind": "whole-artifact"
+              }
+            }
+          ]
         },
         "changes": [
           {
             "kind": "modification",
             "accepted_ids": [
-              "workflow.verification.evidence-oracle-boundary"
+              "workflow.verification.acceptance-claims"
             ],
             "proposed_ids": [
-              "workflow.verification.evidence-oracle-boundary"
+              "workflow.verification.acceptance-claims"
             ],
             "scope": {
-              "kind": "structured",
-              "heading_path": [
-                "Evidence",
-                "Oracle boundaries"
-              ]
-            },
-            "accepted_module": "workflow.verification",
-            "proposed_module": "workflow.verification"
+              "kind": "whole-artifact"
+            }
           }
         ],
         "changed_units": [
           {
-            "policy": "workflow.verification.evidence-oracle-boundary",
+            "policy": "workflow.verification.acceptance-claims",
             "change_kind": "modification",
-            "classification": "possibly-semantically-changed",
-            "accepted_representation_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
-            "proposed_representation_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-            "accepted_structural_digest": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
-            "proposed_structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-            "accepted_semantic_revision": 3,
-            "proposed_semantic_revision": 4,
-            "semantic_state": "proposed",
+            "classification": "unchanged",
+            "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+            "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+            "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+            "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+            "accepted_semantic_revision": 1,
+            "proposed_semantic_revision": 1,
+            "semantic_state": "accepted-unchanged",
             "scope": {
-              "kind": "structured",
-              "heading_path": [
-                "Evidence",
-                "Oracle boundaries"
-              ]
+              "kind": "whole-artifact"
             }
           }
         ],
         "coverage_certificates": [
           {
             "kind": "certificate-handle",
-            "id": "certificate:sha256:3333333333333333333333333333333333333333333333333333333333333333",
-            "schema_version": 2
+            "id": "coverage-certificate:sha256:b5b84a8ff6f4b5969030b5f82433ea39b213f06ca1907e72243cbb630ee8eaac",
+            "schema_version": 4
           }
         ],
         "fact_observations": [],
-        "dispositions": [
-          {
-            "obligation_id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-            "kind": "consumer-disposition",
-            "result": "reviewed-no-change",
-            "rationale": "The consumer already distinguishes source representation from semantic evidence.",
-            "evidence": [
-              {
-                "id": "review.documentation.oracle-boundary",
-                "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-                "provider_contract": "repository-content",
-                "provider_contract_version": "1"
-              }
-            ],
-            "authorization": {
-              "id": "authorization.standards.review.consumer",
-              "capability": "standards.review.consumer",
-              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            },
-            "fingerprint": {
-              "decision_kind": "consumer-review",
-              "decision_contract": "decision-contract.consumer-review.v1",
-              "schema_version": 1,
-              "dependencies": [
-                {
-                  "class": "policy-unit",
-                  "identity": "workflow.verification.evidence-oracle-boundary",
-                  "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-                }
-              ]
-            }
-          }
-        ],
-        "reading_plan": [
-          {
-            "target": "workflow.documentation.machine-verifiable-claims",
-            "scope": {
-              "kind": "whole-artifact"
-            },
-            "authority": "normative",
-            "reasons": [
-              {
-                "kind": "consumer-review-obligation",
-                "obligation": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-              }
-            ],
-            "state": "selected"
-          }
-        ],
+        "dispositions": [],
+        "reading_plan": [],
         "completion": {
           "required_coverage_subjects": [
-            "workflow.verification.evidence-oracle-boundary"
+            "workflow.verification.acceptance-claims"
           ],
           "certificate_subjects": [
-            "workflow.verification.evidence-oracle-boundary"
+            "workflow.verification.acceptance-claims"
           ],
-          "reached_consumer_obligations": [
-            "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-          ],
-          "disposition_obligations": [
-            "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-          ],
+          "reached_consumer_obligations": [],
+          "disposition_obligations": [],
           "required_fact_requirements": [],
           "observed_fact_requirements": [],
           "non_consumer_obligations_resolved": true,
@@ -905,27 +651,103 @@
           "authorization_valid": true,
           "evidence_valid": true
         },
-        "provenance": {
-          "analysis_contract_version": 6,
-          "interface_schema_version": 10,
-          "applicability_version": 3,
-          "metadata_api_version": "1",
-          "graph_engine_contract_version": "1",
-          "graph_engine_implementation_version": "0.1.0",
-          "analyzer_implementation_version": "0.1.0",
-          "parser_versions": {
-            "markdown": "1",
-            "toml": "python-3.11"
-          },
-          "evidence_provider_contract_versions": {
-            "policy-impact": "1"
-          },
-          "analysis_schema_version": 3,
-          "result_schema_version": 2,
-          "authorization_contract_version": "authorization-authority.v1"
+        "authority": {
+          "kind": "execution-closure-handle",
+          "id": "execution-closure:sha256:63273920027e3cac4b699d2b8e24b92b39445716bdb3fe4634fb54ec0d22f940",
+          "schema_version": 4
         },
-        "summary": "The bounded read-only impact analysis is complete.",
-        "status": "complete"
+        "summary": "The bounded read-only impact analysis is complete."
+      }
+    },
+    {
+      "name": "analysis-inspection",
+      "definition": "InspectionResult",
+      "value": {
+        "kind": "analysis-state",
+        "handle": {
+          "kind": "analysis-handle",
+          "id": "analysis-root:sha256:824cf5236fc86af353cbdfc494a23aa0a71784926d43ec420ee76edf621d0843",
+          "schema_version": 4
+        },
+        "context": {
+          "kind": "analysis-context",
+          "handle": {
+            "kind": "analysis-context-handle",
+            "id": "analysis-context:sha256:c4ed822657810fc62286664c2cdd607049931e8cbbfb2e8afb752ea717ae1be8",
+            "schema_version": 4
+          },
+          "subjects": [
+            {
+              "policy": "workflow.verification.acceptance-claims",
+              "change_kind": "modification",
+              "classification": "unchanged",
+              "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+              "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
+              "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+              "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
+              "accepted_semantic_revision": 1,
+              "proposed_semantic_revision": 1,
+              "semantic_state": "accepted-unchanged",
+              "scope": {
+                "kind": "whole-artifact"
+              }
+            }
+          ],
+          "semantic_proposals": [],
+          "changes": [
+            {
+              "kind": "modification",
+              "accepted_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "proposed_ids": [
+                "workflow.verification.acceptance-claims"
+              ],
+              "scope": {
+                "kind": "whole-artifact"
+              }
+            }
+          ]
+        },
+        "fact_observations": [],
+        "dispositions": [],
+        "coverage_attestations": [
+          {
+            "kind": "coverage-attestation",
+            "handle": {
+              "kind": "coverage-attestation-handle",
+              "id": "coverage-attestation:sha256:14ec8d8c5933d5123d9980ecb9a59a6dedda5d63a5c9910c6c82ebb85b75c118",
+              "schema_version": 4
+            },
+            "requirement": {
+              "kind": "coverage-requirement-handle",
+              "id": "coverage-requirement:sha256:360cb4aea2be0c7b0020faabb6ac7ae506eae5fb5dbc314519941d6f3f0ac8df",
+              "schema_version": 4
+            },
+            "conclusion": "complete",
+            "evidence": [
+              {
+                "id": "example-evidence",
+                "digest": "sha256:80d70e44d0ae1e829fd5f37c3ee4a60dfbea8d3aa18407ea3f34cf7ec91da34d",
+                "provider_contract": "fixture.evidence",
+                "provider_contract_version": "1"
+              }
+            ],
+            "explicit_exclusions": [],
+            "rationale": "Exact consumer coverage was reviewed.",
+            "auditor_provenance": "principal.fixture",
+            "schema_version": 3,
+            "authorization": {
+              "object_kind": "authorization-grant",
+              "id": "authorization-grant:sha256:0220e94551c80e203e405552a898707595adeaf44c902e74fe05393f1f0df08f"
+            }
+          }
+        ],
+        "authority": {
+          "kind": "execution-closure-handle",
+          "id": "execution-closure:sha256:63273920027e3cac4b699d2b8e24b92b39445716bdb3fe4634fb54ec0d22f940",
+          "schema_version": 4
+        }
       }
     },
     {
@@ -933,360 +755,11 @@
       "definition": "RejectedResult",
       "value": {
         "kind": "rejected-result",
-        "code": "ANALYSIS.UNAVAILABLE",
+        "code": "AUTHORITY.UNAVAILABLE",
         "outcome": "unavailable",
-        "target": "analysis:sha256:9999999999999999999999999999999999999999999999999999999999999999",
-        "message": "The immutable analysis is unavailable from the state store.",
-        "details": {
-          "analysis": "analysis:sha256:9999999999999999999999999999999999999999999999999999999999999999"
-        },
+        "message": "The requested immutable authority is unavailable.",
+        "details": {},
         "next_operations": []
-      }
-    },
-    {
-      "name": "policy-unit-declaration",
-      "definition": "PolicyUnitDeclaration",
-      "value": {
-        "kind": "policy-unit",
-        "id": "workflow.verification.evidence-oracle-boundary",
-        "module": "workflow.verification",
-        "heading_path": [
-          "Evidence",
-          "Oracle boundaries"
-        ],
-        "semantic_revision": 3,
-        "lifecycle": "active",
-        "aliases": [],
-        "predecessors": [],
-        "successors": []
-      }
-    },
-    {
-      "name": "canonical-module-declaration",
-      "definition": "CanonicalModuleDeclaration",
-      "value": {
-        "kind": "canonical-module",
-        "id": "workflow.verification",
-        "role": "workflow",
-        "level": "MUST",
-        "applies_when": "The task defines or evaluates verification evidence.",
-        "does_not_apply_when": "The task does not affect verification behavior or evidence.",
-        "requires": [
-          "core"
-        ],
-        "specializes": [],
-        "verification": "Verification policy fixtures and registered suites."
-      }
-    },
-    {
-      "name": "empty-applicability-fact-schema",
-      "definition": "ApplicabilityFactSchema",
-      "value": {
-        "kind": "applicability-fact-schema",
-        "id": "policy-impact.applicability",
-        "version": 1,
-        "facts": []
-      }
-    },
-    {
-      "name": "unknown-applicability-result",
-      "definition": "ApplicabilityEvaluationResult",
-      "value": {
-        "truth": "unknown",
-        "unresolved_facts": [
-          "changes_explanatory_projection"
-        ]
-      }
-    },
-    {
-      "name": "applicability-expression",
-      "definition": "ApplicabilityExpression",
-      "value": {
-        "operator": "all",
-        "expressions": [
-          {
-            "operator": "equals",
-            "fact": "changes_explanatory_projection",
-            "value": true
-          },
-          {
-            "operator": "exists",
-            "fact": "evidence_owner"
-          }
-        ]
-      }
-    },
-    {
-      "name": "policy-relationship-inspection",
-      "definition": "PolicyRelationshipInspection",
-      "value": {
-        "relationship_kind": "prompt-projection",
-        "applicability": {
-          "operator": "always"
-        },
-        "source_scope": null,
-        "consumer_scope": null,
-        "propagation": "source-to-consumer",
-        "evidence_owner": "suite:plan-implementation-entrypoint",
-        "rationale": "The implementation prompt projects written-plan decisions."
-      }
-    },
-    {
-      "name": "coverage-authority-view",
-      "definition": "CoverageAuthorityView",
-      "value": {
-        "kind": "coverage-authority-view",
-        "handle": {
-          "kind": "coverage-authority-view-handle",
-          "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 2
-        },
-        "subject": "workflow.verification.evidence-oracle-boundary",
-        "owner": "workflow.verification",
-        "semantic_revision": 4,
-        "representation_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
-        "structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-        "relationship_kinds": [
-          "documentation-projection"
-        ],
-        "relationship_fingerprints": [
-          {
-            "edge": "edge.verification.documentation",
-            "fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
-          }
-        ],
-        "relationship_kind_contract_version": 2,
-        "relationship_provider_contract_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
-        "applicability_language_version": 1,
-        "applicability_program_digests": [
-          "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-        ],
-        "fact_schema_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "horizon": {
-          "id": "audit-horizon.policy-impact-consumers",
-          "provider": "standards-analysis:policy-impact-consumer-horizon",
-          "version": 3,
-          "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
-          "members": [
-            {
-              "id": "repository:workflows/documentation.md",
-              "roles": [
-                "canonical-module"
-              ],
-              "fingerprint": "sha256:abababababababababababababababababababababababababababababababab"
-            }
-          ]
-        },
-        "identity_resolution_contract_version": "standards-metadata:v1",
-        "coverage_contract_version": "2",
-        "attestation_contract_version": "2",
-        "authorization_contract_version": "repository-reviewed-attestation:v1",
-        "evidence_provider_contract_version": "repository-content:v1"
-      }
-    },
-    {
-      "name": "coverage-audit-requirement",
-      "definition": "CoverageAuditRequirement",
-      "value": {
-        "kind": "coverage-audit-requirement",
-        "handle": {
-          "kind": "coverage-requirement-handle",
-          "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
-          "schema_version": 2
-        },
-        "coverage_view": {
-          "kind": "coverage-authority-view-handle",
-          "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 2
-        },
-        "subject": "workflow.verification.evidence-oracle-boundary",
-        "owner": "workflow.verification",
-        "semantic_revision": 4,
-        "relationship_kinds": [
-          "documentation-projection"
-        ],
-        "horizon": "audit-horizon.policy-impact-consumers",
-        "derived_from_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 3
-        }
-      }
-    },
-    {
-      "name": "coverage-attestation",
-      "definition": "CoverageAttestation",
-      "value": {
-        "kind": "coverage-attestation",
-        "handle": {
-          "kind": "coverage-attestation-handle",
-          "id": "coverage-attestation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
-          "schema_version": 2
-        },
-        "requirement": {
-          "kind": "coverage-requirement-handle",
-          "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
-          "schema_version": 2
-        },
-        "conclusion": "complete",
-        "evidence": [
-          {
-            "id": "review.documentation.oracle-boundary",
-            "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-            "provider_contract": "repository-content",
-            "provider_contract_version": "1"
-          }
-        ],
-        "explicit_exclusions": [],
-        "rationale": "The registered horizon and every reached consumer were reviewed.",
-        "auditor_provenance": "reviewer:standards-owner",
-        "schema_version": 2
-      }
-    },
-    {
-      "name": "git-snapshot-inspection",
-      "definition": "GitSnapshotInspection",
-      "value": {
-        "kind": "git-snapshot-inspection",
-        "handle": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 3
-        },
-        "tree": "c27a1e2bbf52244c5b30eb1d21381be6e5c86d68",
-        "commit": "13a9f48b95ed7532f480e4604d9dfa23443e8f43",
-        "scope": [
-          "canonical-standards-integrity-closure"
-        ],
-        "submodules": [],
-        "exclusions": [],
-        "versions": {
-          "analysis_contract_version": 6,
-          "interface_schema_version": 10,
-          "applicability_version": 3,
-          "metadata_api_version": "1",
-          "graph_engine_contract_version": "1",
-          "graph_engine_implementation_version": "0.1.0",
-          "analyzer_implementation_version": "0.1.0",
-          "parser_versions": {
-            "markdown": "1",
-            "toml": "python-3.11"
-          },
-          "evidence_provider_contract_versions": {
-            "policy-impact": "1"
-          },
-          "analysis_schema_version": 3,
-          "result_schema_version": 2,
-          "authorization_contract_version": "authorization-authority.v1"
-        }
-      }
-    },
-    {
-      "name": "manifest-snapshot-inspection",
-      "definition": "ManifestSnapshotInspection",
-      "value": {
-        "kind": "manifest-snapshot-inspection",
-        "handle": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 3
-        },
-        "source_kind": "dirty-git",
-        "scope": [
-          "canonical-standards-integrity-closure"
-        ],
-        "entries": [
-          {
-            "path": "workflows/verification.md",
-            "entry_type": "file",
-            "mode": 33188,
-            "tracking": "tracked",
-            "content_digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
-            "inclusion": "included",
-            "reason": "Canonical corpus member."
-          },
-          {
-            "path": ".cache/local-note",
-            "entry_type": "file",
-            "mode": 33188,
-            "tracking": "untracked",
-            "content_digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
-            "inclusion": "excluded",
-            "reason": "Caller-declared non-authoritative local cache."
-          }
-        ],
-        "versions": {
-          "analysis_contract_version": 6,
-          "interface_schema_version": 10,
-          "applicability_version": 3,
-          "metadata_api_version": "1",
-          "graph_engine_contract_version": "1",
-          "graph_engine_implementation_version": "0.1.0",
-          "analyzer_implementation_version": "0.1.0",
-          "parser_versions": {
-            "markdown": "1",
-            "toml": "python-3.11"
-          },
-          "evidence_provider_contract_versions": {
-            "policy-impact": "1"
-          },
-          "analysis_schema_version": 3,
-          "result_schema_version": 2,
-          "authorization_contract_version": "authorization-authority.v1"
-        }
-      }
-    },
-    {
-      "name": "consumer-coverage-certificate",
-      "definition": "ConsumerCoverageCertificate",
-      "value": {
-        "kind": "consumer-coverage-certificate",
-        "handle": {
-          "kind": "certificate-handle",
-          "id": "certificate:sha256:3333333333333333333333333333333333333333333333333333333333333333",
-          "schema_version": 2
-        },
-        "coverage_view": {
-          "kind": "coverage-authority-view-handle",
-          "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 2
-        },
-        "requirement": {
-          "kind": "coverage-requirement-handle",
-          "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
-          "schema_version": 2
-        },
-        "attestation": {
-          "kind": "coverage-attestation-handle",
-          "id": "coverage-attestation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
-          "schema_version": 2
-        },
-        "subject": "workflow.verification.evidence-oracle-boundary",
-        "owner": "workflow.verification",
-        "semantic_revision": 4,
-        "horizon_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
-        "relationship_digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
-        "evidence_digests": [
-          "sha256:1111111111111111111111111111111111111111111111111111111111111111"
-        ],
-        "coverage_contract_version": "2",
-        "attestation_contract_version": "2",
-        "provenance": {
-          "generator": "standards-analysis:consumer-coverage-certificate:v1",
-          "generated_at": "2026-08-22T12:00:00Z"
-        }
-      }
-    },
-    {
-      "name": "trusted-capability-context",
-      "definition": "TrustedCapabilityContext",
-      "value": {
-        "principal": "agent.integration-owner",
-        "capabilities": [
-          "standards.read",
-          "standards.analyze"
-        ],
-        "authority_provider": "adapter.local-trusted-process"
       }
     }
   ]

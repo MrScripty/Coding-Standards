@@ -1,0 +1,11 @@
+schema_version = 1
+issuer_id = "standards.repository.coverage"
+issuer_semantic_revision = 1
+principal_id = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
+capability = "standards.review.audit"
+authorization_evidence = [
+  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+]
+revocation_authority_id = "standards.repository.coverage.revocations"
+revocation_authority_semantic_revision = 1
+revocations = "evaluation/standards-effectiveness/policy-coverage/revocations.toml"
