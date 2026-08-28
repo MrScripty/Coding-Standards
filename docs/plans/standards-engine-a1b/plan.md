@@ -790,7 +790,7 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 **Tasks:**
 
-- [ ] Record the identified implementation commit/tree or equivalent artifact
+- [x] Record the identified implementation commit/tree or equivalent artifact
   digests, dependency resolution,
   generated outputs, owner-local identity contracts, object kinds, authority
   views, execution closures, node/edge/consumer dispositions, coverage
@@ -802,7 +802,7 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 **Acceptance gate:** Every objective acceptance claim is satisfied.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 

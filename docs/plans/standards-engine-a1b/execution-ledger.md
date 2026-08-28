@@ -918,3 +918,17 @@
 - A1B-023, A1B-024, and A1B-025 are resolved. Milestone 3 is `Implemented`.
   The next operation is to commit this coherent content and record that exact
   commit and tree for Milestone 4 review; A2 remains inactive.
+
+## 2026-08-28 - Milestone 4 Implementation Candidate
+
+- Recorded corrected A1b implementation commit
+  `3da674c1227a8ff6544e846a252a21a255854f49`, tree
+  `63d55780f77c7f1af64762b6363b8ba776e7fd51`, as the exact content subject for
+  independent acceptance.
+- The candidate report consolidates the implemented contract, identity,
+  authority, operation, trust, migration, coverage, and verification evidence
+  without introducing a second machine authority or a mutable catalog-count
+  oracle.
+- Milestone 4 is `Active`. A1B-A6L and A1B-A11 remain pending independent
+  review; the ADR remains `Proposed`, the plan remains `Active`, and A2 remains
+  inactive.
