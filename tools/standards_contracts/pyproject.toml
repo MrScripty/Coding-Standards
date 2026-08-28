@@ -1,0 +1,17 @@
+[project]
+name = "standards-contracts"
+version = "0.1.0"
+description = "Standards Engine contract validation and projection compiler"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "jsonschema==4.26.0",
+    "referencing==0.37.0",
+]
+
+[tool.standards-package]
+schema-version = 1
+public-import-root = "tools.standards_contracts.standards_contracts"
+repository-entrypoints = []
+
+[tool.unittest]
+start-directory = "tests"

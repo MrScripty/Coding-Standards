@@ -1,13 +1,11 @@
 # Plan: Standards Engine A1b Contract And Authority Foundations
 
-**Plan status:** `Blocked`
+**Plan status:** `Active`
 
-**Current phase:** Consolidated replacement-design review
+**Current phase:** Milestone 1 isolated contract compiler
 
-**Next slice:** Review the corrected complete C7 material content after opaque
-semantic-ID ownership, typed operation compatibility, direct-dependency
-ownership, authorization algebra, and exact interruption-oracle provenance are
-reconciled
+**Next slice:** Compile the admitted v11 schema and interface through one
+dependency-backed validation and projection boundary
 
 **Acceptance status:** `pending`
 
@@ -39,9 +37,9 @@ implementation begins.
 | A1B-A4 | Every advertised content snapshot, authority view, execution closure, analysis, navigation, policy, relationship, coverage, context, requirement, and observation handle directly reconstructs its owner-typed object in a fresh process after source and process mutation; snapshot identity contains only exact logical paths and bytes; analysis roots exclude complete views; existing results require no live provider or authorization service; and SQLite durability, deterministic during-commit interruption, verified backup, non-overwriting offline restore, rollback selection, and cold reopen pass on the admitted Linux ext4 profile. | `system` | `required-real` | `automated` | `pending` | Pending Milestones 2 and 3 |
 | A1B-A4C | Every operation closure stores only unique role- and side-qualified roots and derives its transitive dependency set through owner-declared references: the exact selected operation contract is included, consumed provider and authorization objects enter only successful successor states, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestones 2 and 3 |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `pending` | Pending Milestone 0 |
+| A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `satisfied` | [Milestone 0 dependency provenance](reports/a1b-dependency-provenance.md) and isolated lock tests on CPython 3.11/3.12 |
 | A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Pending Milestone 3 |
-| A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle artifact/source identity, exact hashes, copyright/notice and license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending plan-admission report |
+| A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle artifact/source identity, exact hashes, copyright/notice and license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `satisfied` | [Corrected-C7 plan admission](reports/a1b-plan-admission.md) |
 | A1B-A6L | Final independent review proves the implemented exact lock and required-real test-oracle provenance match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance review |
 | A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
 | A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `pending` | Pending Milestone 3 |
@@ -371,12 +369,12 @@ isolated Module without changing accepted A1 production imports or behavior.
 
 **Tasks:**
 
-- [ ] Reproduce the exact dependency names, versions, target wheels, and hashes.
-- [ ] Record authoritative provenance, license files, supported targets,
+- [x] Reproduce the exact dependency names, versions, target wheels, and hashes.
+- [x] Record authoritative provenance, license files, supported targets,
   security results, and install command.
-- [ ] Implement identity encoding v2, domain hashing, immutable typed inputs,
+- [x] Implement identity encoding v2, domain hashing, immutable typed inputs,
   and exact codepoint/invalid-value fixtures.
-- [ ] Prove no accepted A1 production import or output changes.
+- [x] Prove no accepted A1 production import or output changes.
 
 **Acceptance gate:** Identity foundation and A1B-A6 pass; isolated package
 tests and the accepted broad baseline remain green. A1B-A6L remains a distinct
@@ -384,7 +382,7 @@ manual exact-lock final-acceptance claim; A1B-A6P must already be satisfied
 before start. Record the checkpoint when it materially changes current plan or
 verification authority; Commit decides its coherent commit boundary.
 
-**Status:** `Blocked`
+**Status:** `Implemented`
 
 ### Milestone 1: Isolated Contract Compiler
 
@@ -748,8 +746,8 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 ## Blockers
 
-- `A1B-006`: independent planning admission has not accepted the current
-  material replacement design through the content-bound review contract.
+- No current plan-level blocker. Milestone-specific acceptance claims remain
+  pending until their implementation and verification gates are reached.
 
 ## Re-Plan Triggers
 
@@ -822,4 +820,4 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 - Acceptance status: `pending`
 - Deferred follow-ups: `A2 remains inactive until A1b is independently accepted`
-- Final status: `Blocked`
+- Final status: `Active`

@@ -670,3 +670,44 @@
   runtime, package manifest, normative policy, relationship, coverage
   attestation, A1, or A2 implementation changed. The next operation is one
   content-bound review of this corrected complete C7 planning content.
+## 2026-08-27 - Corrected-C7 Admission And Milestone 0 Start
+
+- Independent review accepted commit
+  `36dd75790b2f08a6e66624ccae4f8530bc111a92`, tree
+  `19e1b0f329c3d83988a703775309ebcc0fe8d4b0`, with no Standards or
+  Specification findings after the operation-authority summary correction.
+- The reviewer-owned decision is recorded in
+  `reports/a1b-plan-admission.md`. It satisfies A1B-A6P for the exact selected
+  dependency and required-real test-oracle provenance while leaving A1B-A6L
+  pending final acceptance.
+- Applied the admitted `Blocked` to `Planned` operation, then started the
+  serial plan with `Planned` to `Active`. No concurrent-integration profile,
+  mutable plan head, or Git-topology protocol applies.
+- Began Milestone 0 in the same coherent implementation outcome by adding the
+  isolated stdlib-only identity Module and exact dependency lock boundary.
+- Accepted A1 production imports and behavior remain outside the Milestone 0
+  write set.
+
+## 2026-08-27 - Milestone 0 Implemented
+
+- Added the stdlib-only `standards_identity` package with immutable array and
+  object inputs, exact codepoint-preserving encoding, typed invalid outcomes,
+  the reviewed identity-v2 hash frame, and seven focused fixtures.
+- Added the `standards_contracts` dependency manifest, complete hash lock,
+  install instructions, and three dependency-resolution tests without adding
+  contract-compiler behavior or changing accepted A1 imports.
+- Fresh CPython 3.11.14 and 3.12.3 environments installed the lock with
+  `--require-hashes --only-binary=:all:`. Both selected the reviewed `rpds-py`
+  wheel, passed import/version checks, and reported no broken requirements.
+- Reproduced every installed license-file hash. The exact six-package OSV
+  batch returned no known vulnerability on 2026-08-27. No third-party artifact
+  was copied or bundled.
+- Both runtimes passed all 10 isolated foundation tests. The accepted A1
+  baseline passed 82 Analysis, 46 Engine, and 18 Metadata tests; contract
+  validation and generated freshness passed unchanged.
+- The canonical complete checkpoint passed 225 of 225 declarative suites and
+  all 53 retained Bash checkers. Ruff, plan validation, lifecycle fixtures,
+  and diff checks passed.
+- Milestone 0 is `Implemented`; A1B-A6 is satisfied. A1B-A6L remains pending
+  final independent exact-lock acceptance. The next substantive work is the
+  isolated Milestone 1 contract compiler.
