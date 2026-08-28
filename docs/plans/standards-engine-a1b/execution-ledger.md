@@ -711,3 +711,30 @@
 - Milestone 0 is `Implemented`; A1B-A6 is satisfied. A1B-A6L remains pending
   final independent exact-lock acceptance. The next substantive work is the
   isolated Milestone 1 contract compiler.
+
+## 2026-08-27 - Milestone 1 Implemented
+
+- Added the isolated `standards_contracts` compiler around the selected
+  `jsonschema.Draft202012Validator` and a retrieval-free local `referencing`
+  registry. The Module owns stable diagnostics, public-root reachability, the
+  closed projection profile, and immutable staging projections without
+  implementing JSON Schema validation semantics.
+- The admitted v11 schema and interface compile to an exact 140-definition
+  reachable closure. Unreachable definitions, unsupported reachable keywords,
+  remote references, incomplete operation roots, and capability-map drift
+  reject before projection.
+- Eighteen focused tests passed on both CPython 3.11.14 and 3.12.3. They cover
+  the complete admitted feature matrix, all JSON value families, Draft
+  mathematical-number and codepoint string equality, stable diagnostics,
+  direct-validator agreement, and one local mutation for every admitted
+  projection semantic.
+- Generated staging models are immutable, preserve omission separately from
+  explicit values, validate through the compiled runtime, and contain no
+  validation-keyword interpreter or default injection. Agent-tool projections
+  are deterministic and complete for all four public operations.
+- Accepted A1 contract generation and validation remained unchanged and green.
+  The canonical checkpoint passed 225 of 225 declarative suites. Ruff and diff
+  hygiene passed; no policy, facade, production contract, or A2 artifact
+  changed.
+- Milestone 1 is `Implemented`. The next substantive work is the isolated
+  Milestone 2 authority repository and capture adapters.

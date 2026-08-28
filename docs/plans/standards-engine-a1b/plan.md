@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 isolated contract compiler
+**Current phase:** Milestone 2 isolated authority repository
 
-**Next slice:** Compile the admitted v11 schema and interface through one
-dependency-backed validation and projection boundary
+**Next slice:** Implement exact leaf capture and the generic immutable authority
+repository with explicit owner codecs and roots-only execution closures
 
 **Acceptance status:** `pending`
 
@@ -398,32 +398,32 @@ changing the production schema, generated output, or facade.
 
 **Tasks:**
 
-- [ ] Implement schema self-check, retrieval-free local registry, stable errors,
+- [x] Implement schema self-check, retrieval-free local registry, stable errors,
   reachable closure, and projection-profile admission.
-- [ ] Compile the admitted `reports/a1-interface-v11.toml` and
+- [x] Compile the admitted `reports/a1-interface-v11.toml` and
   `reports/a1-contract-v11.schema.json` without rewriting or extending their
   public algebra. Any required shape change is a re-plan trigger.
-- [ ] Generate staging immutable Python and agent-tool projections without a
+- [x] Generate staging immutable Python and agent-tool projections without a
   keyword interpreter or default injection.
-- [ ] Execute every case in the feature-driven contract-semantic matrix in
+- [x] Execute every case in the feature-driven contract-semantic matrix in
   `reports/schema-and-domain-contract-audit.md` through both the direct selected
   validator and the production-intended Adapter. Cover mathematical-number,
   Unicode, object-key-order, array-order, and all-type `uniqueItems` equality;
   every admitted core, reference, primitive, composition, object, array,
   string, numeric, and annotation keyword; and every excluded dialect,
   vocabulary, extension, retrieval, reference, pattern, and projection class.
-- [ ] Apply one feature-local schema mutation for every admitted projection
+- [x] Apply one feature-local schema mutation for every admitted projection
   semantic and prove the compiled model plus affected public behavior change.
   These are Adapter/compiler tests against `jsonschema`, not a repository
   implementation or independent certification of Draft 2020-12.
-- [ ] Reject unsupported projection constructs and unreachable public roots.
+- [x] Reject unsupported projection constructs and unreachable public roots.
 
 **Acceptance gate:** A1B-A1, the isolated half of A1B-A2, and contract portions
 of A1B-A3 pass while every accepted production A1 artifact remains byte
 identical. Record the checkpoint when it materially changes current plan or
 verification authority; Commit decides its coherent commit boundary.
 
-**Status:** `Planned`
+**Status:** `Implemented`
 
 ### Milestone 2: Isolated Authority Repository
 
