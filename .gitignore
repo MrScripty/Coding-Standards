@@ -3,3 +3,7 @@
 # Python runtime artifacts are local execution state.
 __pycache__/
 *.py[cod]
+
+# Generated Standards Engine authority state and recovery artifacts.
+/.standards-engine/*.sqlite3
+/.standards-engine/*.sqlite3-*

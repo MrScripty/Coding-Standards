@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 isolated authority repository
+**Current phase:** Milestone 3 atomic v11 production cutover
 
-**Next slice:** Implement exact leaf capture and the generic immutable authority
-repository with explicit owner codecs and roots-only execution closures
+**Next slice:** Replace the accepted A1 production boundary atomically with the
+v11 generated algebra, direct authority objects, and material execution closures
 
 **Acceptance status:** `pending`
 
@@ -448,17 +448,17 @@ independently of the accepted facade.
   length decimal encoding while preserving every previously issued identity
   byte. Prove positive and negative values beyond CPython's ambient decimal-
   digit limit on both supported runtimes; do not mutate the process-wide limit.
-- [ ] Implement the generic envelope, explicit owner-codec-set Interface, typed
+- [x] Implement the generic envelope, explicit owner-codec-set Interface, typed
   handles, in-memory adapter, and SQLite schema-v1 adapter. The repository
   validates its closed envelope proof and direct references; the injected codec
   computes semantic identity, extracts dependencies, and decodes its payload.
   Authority does not import Contracts, and Contracts does not import Authority.
-- [ ] Treat envelope and reference semantic IDs as opaque nonempty Unicode-scalar
+- [x] Treat envelope and reference semantic IDs as opaque nonempty Unicode-scalar
   strings inside Authority. Prove exact handle/envelope/reference comparison,
   owner-codec grammar validation and identity recomputation, empty-ID rejection,
   unknown-owner `unsupported`, owner-invalid `invalid`, and no generic ID parser
   or object-kind/prefix inference in the repository.
-- [ ] Encode authority envelope kind `authority-envelope`, version `1`, through
+- [x] Encode authority envelope kind `authority-envelope`, version `1`, through
   the identity-v2 canonical typed encoder with its exact seven fields,
   two-field references, structural kind/version dispatch, exact opaque
   owner-defined object-kind/payload-contract values, ordering, unknown-field
@@ -466,69 +466,69 @@ independently of the accepted facade.
   not normalize or infer domain meaning, plus raw-byte owner payload
   projection, noncanonical encodings, boundary sizes, and same-handle byte
   contradiction.
-- [ ] Store only `(handle, envelope)` in SQLite; verify the envelope's kind
+- [x] Store only `(handle, envelope)` in SQLite; verify the envelope's kind
   agrees with the typed handle. Implement one-transaction `put_if_absent`,
   same-ID idempotence, contradictory collision, integrity verification,
   deterministic backup, non-overwriting offline restore to an absent store,
   rollback selection, crash recovery, and cold reopen. Do not add migration,
   semantic export/import, enumeration, garbage collection, checked-in
   databases, destructive restore, or Engine-owned retention/deletion.
-- [ ] Freeze and verify application ID `1397047601`, user version `1`,
+- [x] Freeze and verify application ID `1397047601`, user version `1`,
   DELETE journal mode, EXTRA synchronization, NORMAL locking,
   `trusted_schema=OFF`, disabled extension loading, explicit
   `BEGIN IMMEDIATE`, and a 5000-millisecond busy timeout with no retry.
-- [ ] Use the capability-checked Linux `strace` oracle to inject `SIGKILL` at
+- [x] Use the capability-checked Linux `strace` oracle to inject `SIGKILL` at
   the real SQLite `fsync` or `fdatasync` reached after the pre-commit barrier.
   Require trace proof of the selected syscall and reject sleeps, retries,
   probabilistic repetition, ordinary process failure, or a custom VFS as
   substitutes. Record and verify the exact executable digest, binary package,
   source descriptor and artifacts, license/notice bytes, and capability in
   required-real evidence against the admitted provenance.
-- [ ] Default live storage to
+- [x] Default live storage to
   `<repository-root>/.standards-engine/authority.sqlite3`. Verify backup source
   and absent destination completely; restore offline into another absent store,
   cold-verify it, and select it only through a new Engine composition. Prove
   existing/aliased/in-use destinations reject, failed restore leaves the live
   store unchanged, the former store remains selectable for rollback, and
   retention/deletion remains operator-owned.
-- [ ] Implement immutable `AuthorityBoundValue` and roots-only
+- [x] Implement immutable `AuthorityBoundValue` and roots-only
   `ExecutionClosureV2`. Persist unique qualified roots and derive the exact
   transitive dependency set from owner-declared references. Prove missing
   dependencies, owner mismatch, contradictory content, and cycles reject while
   input ordering does not alter closure or result identity.
-- [ ] Implement exact-list Git and Linux-native capture adapters over
+- [x] Implement exact-list Git and Linux-native capture adapters over
   `CaptureRequestV1`. Both construct the same `ContentSnapshotV2` containing
   only sorted `(RepositoryPathV1, exact bytes)` entries and discard commit,
   tree, Adapter, mode, tracking, inclusion, source-root, and worktree
   observations after validation.
-- [ ] Store and resolve ContentSnapshot plus private fixture-owned root and child
+- [x] Store and resolve ContentSnapshot plus private fixture-owned root and child
   kinds directly by handle. Domain production kinds enter only in the atomic
   cutover.
-- [ ] Enforce `RepositoryPathV1` as a nonempty tuple of Unicode-scalar
+- [x] Enforce `RepositoryPathV1` as a nonempty tuple of Unicode-scalar
   components whose UTF-8 encoding is 1 through 255 bytes; reject empty, `.`,
   `..`, `/`, NUL, lone surrogate, `.git` control paths, and duplicate logical
   paths. Preserve codepoints and case; order by scalar sequence with prefixes
   first. Backslash is an ordinary Linux scalar.
-- [ ] For Git capture, resolve one commit OID and hash-verify every traversed
+- [x] For Git capture, resolve one commit OID and hash-verify every traversed
   commit, tree, and blob object; accept regular file modes only. Resolve an
   explicitly mapped gitlink through its object database and flatten only the
   requested nested file bytes. Read neither worktree nor index.
-- [ ] For Linux-native capture, walk from a retained `/` descriptor using
+- [x] For Linux-native capture, walk from a retained `/` descriptor using
   descriptor-relative no-follow opens, retain directory/file descriptors on one
   ext4 mount, reject casefold and cross-mount traversal, read every file twice,
   then independently rewalk and require endpoint metadata and binding equality.
   Record that endpoint agreement does not prove absence of every transient
   same-user mutation.
-- [ ] Prove the exact requested path set equals the bootstrap-derived source
+- [x] Prove the exact requested path set equals the bootstrap-derived source
   closure. No recursive discovery, exclusions, directory entries, symlink
   entries, nested snapshot records, mode bits, `CaptureReceipt`, or locator
   fields enter snapshot identity.
-- [ ] Prove fresh-process reconstruction using only persisted objects, exact
+- [x] Prove fresh-process reconstruction using only persisted objects, exact
   injected codec sets, and handles after source and process mutation.
-- [ ] Prove equal selected content captured through Git and native Adapters
+- [x] Prove equal selected content captured through Git and native Adapters
   produces one ContentSnapshot identity, and locator-only or filesystem-metadata
   mutation does not change any snapshot, closure, or result identity.
-- [ ] Prove no enumeration, owner map, root scan, cache index, or ambient
+- [x] Prove no enumeration, owner map, root scan, cache index, or ambient
   provider authority is needed.
 
 **Acceptance gate:** The isolated halves of A1B-A4 and A1B-A4C pass on both
@@ -536,7 +536,7 @@ adapters.
 Record the checkpoint when it materially changes current plan or verification
 authority; Commit decides its coherent commit boundary.
 
-**Status:** `Planned`
+**Status:** `Implemented`
 
 ### Milestone 3: Atomic V11 Production Cutover
 

@@ -757,3 +757,42 @@
   for positive and negative 5001-digit values. Boundary samples through the
   largest ambiently convertible values reproduce the former bytes exactly;
   Ruff, plan validation, and diff hygiene pass.
+
+## 2026-08-28 - Milestone 2 Implemented
+
+- Added `standards_authority` with one canonical seven-field envelope, opaque
+  semantic references, explicit immutable owner-codec sets, direct resolution,
+  owner identity/dependency verification, and iterative cycle-safe transitive
+  closure. A 1500-object fixture proves closure does not depend on Python
+  recursion depth.
+- Added in-memory and SQLite schema-v1 stores. SQLite persists only canonical
+  envelope BLOBs under typed-handle keys, rejects update/delete and parallel
+  schema authority, uses explicit `BEGIN IMMEDIATE`, and enforces application
+  ID 1397047601, user version 1, DELETE/EXTRA/NORMAL, trusted-schema off, and a
+  5000-millisecond busy bound without application retry.
+- Added verified backup and non-overwriting offline restore, source-preserving
+  failure behavior, rollback-store retention, private descriptor-validated
+  default composition, cold-process reconstruction, and direct corruption,
+  contention, idempotence, and collision evidence.
+- Added exact-list Git and native ext4 capture. Git hash-verifies selected
+  commit/tree/blob objects and explicitly mapped gitlinks; native capture uses
+  retained no-follow descriptors, double reads, mount/casefold checks, and an
+  independent complete binding rewalk. Both produce the same path/raw-byte
+  ContentSnapshot identity and exclude locator, mode, and metadata changes.
+- Added roots-only ExecutionClosure and immutable AuthorityBoundValue. Closure
+  payloads retain only role/side-qualified roots while their identities bind
+  the exact dependency set derived from owner references.
+- Thirty-seven focused tests passed on CPython 3.11.14 with SQLite 3.50.4 and
+  CPython 3.12.3 with SQLite 3.45.1. Both report serialized THREADSAFE=1. The
+  capability-selected required-real oracle injected SIGKILL at `fsync` on 3.11
+  and `fdatasync` on 3.12 after an exact pre-commit barrier; each cold reopen
+  recovered to an absent row and converged on retry.
+- Required-real evidence reproduced Ubuntu `strace` 6.8-0ubuntu2 amd64, the
+  admitted executable, copyright, and LGPL-2.1 hashes, and the admitted source
+  artifact provenance. The tool remains host-only and unbundled.
+- The complete 225-suite declarative checkpoint, Ruff, and diff hygiene pass.
+  Generated SQLite databases and journal forms are Gitignored. No accepted A1
+  production import, public contract, domain codec, facade, or A2 behavior
+  changed.
+- Milestone 2 is `Implemented`. The next substantive work is the atomic
+  Milestone 3 v11 production cutover.
