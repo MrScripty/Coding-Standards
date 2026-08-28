@@ -4,9 +4,10 @@
 
 **Current phase:** Consolidated replacement-design review
 
-**Next slice:** Review the corrected complete C7 material content after its
-structured envelope dispatch, operation identities, authorization algebra,
-and exact interruption-oracle provenance are reconciled
+**Next slice:** Review the corrected complete C7 material content after opaque
+semantic-ID ownership, typed operation compatibility, direct-dependency
+ownership, authorization algebra, and exact interruption-oracle provenance are
+reconciled
 
 **Acceptance status:** `pending`
 
@@ -180,7 +181,7 @@ implementation begins.
 | Use codepoint-preserving identity encoding v2; domain Modules own typed identity records and any semantic normalization. | Identity and domain owners | [Identity/version matrix](reports/identity-version-object-matrix.md) | Recursive NFC identity encoding v1 |
 | Capture an exact requested file list into `ContentSnapshotV2` using only logical Unicode-scalar paths and raw bytes; discard Git, filesystem, and Adapter observations after validation; compose one reference-only StandardsAuthorityView; require domain Modules to return AuthorityBoundValues; store only role- and side-qualified execution roots; and derive the transitive dependency set structurally. | Architecture, Authority, Engine composition, and domain owners | [C7 design](reports/c7-design-proposal.md), [C6/C7 history](reports/c6-c7-design-history-research.md), [identity/version matrix](reports/identity-version-object-matrix.md), and [consumer inventory](reports/consumer-and-state-inventory.md) | C4 object-specific version bags, C5 Git lineage, C6 structural snapshot entries and transition-future closure, snapshot-as-query authority, copied dependency lists, and umbrella invalidation |
 | Directly store every inspectable object through one closed immutable authority Interface backed by in-memory and SQLite adapters; encode the exact bounded authority envelope with structural kind `authority-envelope` and integer version `1`; persist only `(handle, envelope)` because the envelope owns kind; let the repository own envelope/dependency integrity while explicitly injected owner codec sets own opaque identifier dispatch, semantic construction, identity, dependency extraction, and decoding; keep Authority and Contracts independent; and admit SQLite schema v1 with verified non-overwriting backup/restore but without migration or semantic export. | Architecture, Persistence, Authority, Resilience, and domain owners | [C7 design](reports/c7-design-proposal.md), [SQLite audit](reports/c7-sqlite-storage-audit.md), and [consumer inventory](reports/consumer-and-state-inventory.md) | Three-root storage, C6 directory/hard-link publication, duplicate SQL kind authority, generic semantic ownership or identifier grammar, owner maps, scans, caches, schema-mediated domain dispatch, duplicated schema interpretation, destructive restore, or Engine-owned retention |
-| Store four executable Engine-owned `OperationAuthorityContractV2` values with exact role-to-kind pairs, cardinalities, and structural cross-role dependencies; analysis has no routing role and dispositions remain fields of `analysis-root.v1`; keep owner codec sets local to their Modules and inject their closed tuple at composition; verify the aggregate inventory mechanically rather than creating a central codec authority. | Engine composition and domain owners | [C7 design](reports/c7-design-proposal.md) | Aggregate operation profiles, ambient required-role policy, central codec manifests, separate role catalogs, phantom decision kinds, routing-to-analysis leakage, and cross-operation invalidation |
+| Store four executable Engine-owned `OperationAuthorityContractV2` values with typed per-operation compatibility revisions and exact role-to-kind/cardinality requirements; analysis has no routing role and dispositions remain fields of `analysis-root.v1`; keep direct-dependency semantics and codec sets with their domain owners, inject the closed codec tuple at composition, and let Engine apply one generic coherence algorithm; verify the aggregate inventory mechanically rather than creating encoded selectors, a central codec authority, or a second edge catalog. | Engine composition and domain owners | [C7 design](reports/c7-design-proposal.md) | Aggregate operation profiles, encoded selector strings, ambient required-role policy, central codec manifests, separate role or edge catalogs, phantom decision kinds, routing-to-analysis leakage, and cross-operation invalidation |
 | Persist analysis state as narrow context plus dependency-valid decisions and roots-only material closure. Provider and authorization Adapters produce direct `ProviderAuthorityV1` and exact subject/action/evidence/revocation-bound `AuthorizationGrantV1` objects only for successful child states; deterministic no-observation stores nothing. Existing states replay without live trust services. | Analysis and Engine composition | [C7 design](reports/c7-design-proposal.md) | C5 complete-view state identity, C6 hypothetical-future transition closure, aggregate trust views, opaque authorization digests, and ambient trust replay |
 | Support one exact Linux ext4 durable-store and native-capture contract with descriptor-relative no-follow access, exact endpoint revalidation, and typed unsupported outcomes. | Cross-Platform and Security | [A1b ADR](../../decisions/standards-engine-a1b.md), [C7 design](reports/c7-design-proposal.md), [SQLite audit](reports/c7-sqlite-storage-audit.md), and [migration plan](reports/policy-impact-migration-plan.md) | Operating-system-name inference, path-based validation/use, and unproved macOS or Windows portability |
 | Remove all schema `x-standards-engine-*` annotations; use one closed interface contract and domain-owned executable contracts. | Contracts and domain owners | [Schema/domain audit](reports/schema-and-domain-contract-audit.md) | Mixed machine prose in public schema |
@@ -447,6 +448,11 @@ independently of the accepted facade.
   validates its closed envelope proof and direct references; the injected codec
   computes semantic identity, extracts dependencies, and decodes its payload.
   Authority does not import Contracts, and Contracts does not import Authority.
+- [ ] Treat envelope and reference semantic IDs as opaque nonempty Unicode-scalar
+  strings inside Authority. Prove exact handle/envelope/reference comparison,
+  owner-codec grammar validation and identity recomputation, empty-ID rejection,
+  unknown-owner `unsupported`, owner-invalid `invalid`, and no generic ID parser
+  or object-kind/prefix inference in the repository.
 - [ ] Encode authority envelope kind `authority-envelope`, version `1`, through
   the identity-v2 canonical typed encoder with its exact seven fields,
   two-field references, structural kind/version dispatch, exact opaque
@@ -591,19 +597,32 @@ in one replacement boundary; delete all superseded authority.
   decoding, and object-local invariants.
 - [ ] Make Standards Engine composition create one reference-only
   StandardsAuthorityView from owner-produced semantic objects. Store one
-  executable `OperationAuthorityContractV2` for each exact compatibility
-  selector `operation-contract.route.v2`, `operation-contract.read.v2`,
-  `operation-contract.related.v2`, and `operation-contract.analysis.v2`.
-  Store each record under its separately derived
-  `operation-authority-contract:sha256:` semantic ID. Route requires
+  executable `OperationAuthorityContractV2` for each initial exact
+  compatibility key `(route, 2)`, `(read, 2)`, `(related, 2)`, and
+  `(analysis, 2)`. Revisions are immutable and per-operation, may contain gaps,
+  and are matched only through an explicit supported-key set. Store each record
+  under its independently derived semantic ID using
+  `coding-standards:operation-authority-contract-identity:v1`; Authority treats
+  that ID as opaque. Route requires
   metadata/routing/graph; read and related require metadata/graph; analysis
   requires metadata/graph/policy-impact/coverage.
   Each role carries its exact object kind and cardinality. Analysis allows only
   context, requirement, observation, coverage-view, coverage-requirement,
   coverage-attestation, coverage-certificate, provider-authority, and
   authorization-grant dynamic roles; it has no routing or decision role.
-  Contracts carry exact structural cross-role dependencies. Query and analysis
-  preparation accept views, not content snapshots.
+  Operation records do not duplicate structural edges: owner codecs own allowed
+  dependency kinds and extract exact direct references, while Engine applies
+  one generic coherence algorithm. Query and analysis preparation accept views,
+  not content snapshots.
+- [ ] Prove operation compatibility and identity independently: accept explicit
+  sparse and overlapping supported key sets, reject numeric-range inference and
+  Boolean/nonpositive revisions, prevent reuse of one key for unequal promises,
+  keep unrelated operation identities stable, require accepted and proposed
+  analysis views to select the same exact semantic ID, and return `unsupported`
+  for a well-formed unknown payload format or compatibility key. Prove the
+  semantic identity constructor receives only the normalized material record,
+  not payload/envelope/SQLite representation, and that no encoded selector
+  parser, alias, or fallback exists.
 - [ ] Make every domain execution path return an AuthorityBoundValue. Derive and
   persist each result's exact role- and side-qualified roots, then derive its
   transitive dependency set by traversing owner-declared references. Never
@@ -749,13 +768,18 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 - An authority envelope requires another value family, an encoded size above
   67,108,864 bytes, unknown-field preservation, or non-JSON-compatible payload
   storage.
+- One semantic object must be republished under another payload or envelope
+  representation in the same repository, requiring representation coexistence
+  or storage migration beyond the admitted single-format schema v1 boundary.
 - Authority and Contracts require a dependency in either direction, or an owner
   codec cannot validate its closed semantic payload without public-wire schema
   authority.
 - A codec kind, payload contract, identity domain, allowed dependency, stable
-  role, role-to-kind binding, operation contract, required role, allowed
-  dynamic role, or structural cross-role edge differs from the exact admitted
-  executable contracts.
+  role, role-to-kind binding, operation compatibility key, required role, or
+  allowed dynamic role differs from the exact admitted executable contracts;
+  compatibility aliases, branches, or decentralized revision allocation become
+  necessary; or operation-specific edge policy cannot be expressed by the
+  generic coherence algorithm and owner-declared direct dependencies.
 - A domain cannot declare the direct semantic authorities it actually consumes,
   or the composing kernel cannot derive exact material closure without a
   handwritten version/dependency list.

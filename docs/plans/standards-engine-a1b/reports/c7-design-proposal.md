@@ -41,8 +41,10 @@ C7 changes C6 in six material ways:
    bytes, with capture facts separated from semantic identity; and
 4. one gitignored SQLite database replaces the Linux-ext4 object-file
    publication protocol;
-5. four executable operation contracts own exact role-to-kind/cardinality and
-   structural-dependency rules without routing-to-analysis leakage; and
+5. four executable operation contracts own operation compatibility and exact
+   role-to-kind/cardinality requirements, owner codecs own direct-dependency
+   semantics, and Engine owns one generic coherence algorithm, without
+   routing-to-analysis leakage; and
 6. successful analysis successors store exact consumed provider and
    authorization objects rather than aggregate trust views or opaque trust
    digests.
@@ -166,7 +168,7 @@ AuthorityObjectEnvelopeV1 {
   envelope_kind: "authority-envelope",
   envelope_version: 1,
   object_kind: nonempty Unicode-scalar string,
-  semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits,
+  semantic_id: nonempty opaque Unicode-scalar string,
   direct_dependencies: sorted unique AuthorityObjectReferenceV1[],
   payload_contract: nonempty Unicode-scalar string,
   payload: identity-v2 JSON-compatible typed value
@@ -185,14 +187,16 @@ string, array, and string-keyed object values; floats and byte values are
 absent. `envelope_kind` and `envelope_version` are structural dispatch fields,
 not semantic identifiers. A well-typed unknown envelope kind or positive
 version is `unsupported`; a missing field, unknown field, wrong type, empty
-`object_kind` or `payload_contract`, nonpositive version, or malformed
-`semantic_id` is `invalid`.
+`object_kind`, `semantic_id`, or `payload_contract`, or a nonpositive version is
+`invalid`.
 
-`object_kind` and `payload_contract` are exact opaque values owned by the
+`object_kind`, `semantic_id`, and `payload_contract` are exact opaque values owned by the
 injected domain codec sets. Authority compares them codepoint-for-codepoint and
-does not parse, normalize, or infer policy meaning from either value. A
-well-formed value with no injected owner is `unsupported`; a known owner
-decides whether the payload contract is supported. An owner projects exact
+does not parse, normalize, or infer policy meaning from them. Authority requires
+exact handle/envelope/reference equality; the owner codec validates and
+recomputes its semantic ID. A well-formed object kind with no injected owner is
+`unsupported`; a known owner decides whether the payload contract is supported.
+An owner projects exact
 bytes such as snapshot content through its closed padded-Base64 payload
 representation and verifies the decoded bytes. Reference objects contain
 exactly `object_kind` and `semantic_id` and reject unknown fields. Dependencies
@@ -239,7 +243,7 @@ compares it with the executable owner exports.
 | Analysis | `coverage-attestation` | `coverage-attestation.v1` | `coding-standards:coverage-attestation:v3` | `coverage-requirement`, `authorization-grant` |
 | Analysis | `coverage-certificate` | `coverage-certificate.v1` | `coding-standards:consumer-coverage-certificate:v3` | `coverage-view`, `coverage-requirement`, `coverage-attestation` |
 | Analysis | `analysis-root` | `analysis-root.v1` | `coding-standards:analysis:v4` | `execution-closure`, `analysis-context`, `fact-observation`, `coverage-attestation` |
-| Engine | `operation-authority-contract` | `operation-authority-contract.v2` | `coding-standards:operation-authority-contract:v2` | none |
+| Engine | `operation-authority-contract` | `operation-authority-contract.v2` | `coding-standards:operation-authority-contract-identity:v1` | none |
 | Engine | `standards-authority-view` | `standards-authority-view.v1` | `coding-standards:standards-authority-view:v1` | `content-snapshot`, `operation-authority-contract`, `canonical-standards-corpus`, `routing-projection`, `standards-graph`, `compiled-policy-impact`, `coverage-horizon` |
 | Engine | `navigation-result` | `navigation-result.v1` | `coding-standards:navigation-result:v1` | `execution-closure` |
 | Engine | `policy-inspection` | `policy-inspection.v1` | `coding-standards:policy-inspection:v2` | `execution-closure`, `canonical-standards-corpus` |
@@ -350,16 +354,14 @@ mutations, dormant-transition scenarios, and cold-process reconstruction.
 
 ## Operation Authority
 
-Engine owns one executable `operation-authority-contract.v2` implementation
-and four immutable records:
+Engine owns the `operation-authority-contract.v2` payload codec, the
+operation-contract material-identity constructor, one generic coherence
+algorithm, and four immutable records:
 
 ```text
 OperationAuthorityContractV2 {
-  contract_id: operation-contract.route.v2 |
-               operation-contract.read.v2 |
-               operation-contract.related.v2 |
-               operation-contract.analysis.v2,
   operation: route | read | related | analysis,
+  compatibility_revision: integer >= 1,
   required_view_roles: set<RoleKindRequirementV1> by role,
   allowed_dynamic_roles: set<RoleKindRequirementV1> by role
 }
@@ -372,15 +374,25 @@ RoleKindRequirementV1 {
 }
 ```
 
-`contract_id` is the stable versioned compatibility selector in the payload;
-the mapping above is exact and one-to-one. It is not the stored object's
-semantic identity. The envelope `semantic_id` is independently computed from
-the complete operation-contract payload under
-`coding-standards:operation-authority-contract:v2` and has the form
-`operation-authority-contract:sha256:<64 lowercase hexadecimal digits>`.
-Changing payload bytes changes that semantic ID. Changing a compatibility
-promise requires advancing the affected `contract_id`; unrelated operation
-contracts do not advance.
+The typed `(operation, compatibility_revision)` pair is the compatibility key.
+The initial exact keys are `(route, 2)`, `(read, 2)`, `(related, 2)`, and
+`(analysis, 2)`; the shared revision number is incidental. There is no encoded
+selector string to parse or reconcile. Revisions are immutable, monotonically
+allocated per operation, may contain gaps, and never imply compatibility by
+numeric ordering. The Engine accepts an explicit supported-key set, may support
+overlapping revisions explicitly, never reuses a retired key for different
+semantics, and rejects unequal normalized promises under one key.
+
+The envelope `semantic_id` is independently computed from the complete
+operation-contract material identity record under
+`coding-standards:operation-authority-contract-identity:v1`. The owner codec
+defines its rendered grammar; Authority treats it as opaque. That identity
+record contains exactly the operation, compatibility revision, and normalized
+required and allowed role requirements. Changing material record content
+changes that semantic ID. Changing a compatibility promise requires advancing
+only the affected operation's revision. The payload format
+`operation-authority-contract.v2`, envelope version, SQLite schema, and stored
+bytes are representation concerns and do not enter semantic identity.
 
 Every required view role has cardinality `1..1`. Route requires
 `metadata -> canonical-standards-corpus`, `routing -> routing-projection`, and
@@ -413,8 +425,11 @@ catalog can add a role or kind.
 
 The Engine-owned coherence algorithm requires each view to select exactly one
 contract for each family and exactly the union of their required semantic
-roles. Contract operation, role, kind, and cardinality must match exactly.
-Owner-extracted edges must be:
+roles. Contract operation, compatibility revision, role, kind, and cardinality
+must match exactly. Owner codecs own allowed direct dependency kinds and
+extract the exact references used by each value. The following matrix is
+mechanically derived review evidence from those codec contracts and references;
+it is not stored in the operation payload or implemented as a second catalog:
 
 ```text
 metadata      -> content
@@ -434,21 +449,23 @@ provider-authority -> its exact declared subset of content, metadata,
 authorization-grant -> none
 ```
 
-Accepted and proposed analysis inputs reference the same stored operation
-contract object, whose payload has `contract_id =
-"operation-contract.analysis.v2"`; both references therefore contain the same
-content-addressed envelope `semantic_id`. Static roots come from that selected
-object. Dynamic roots exactly equal qualified dependencies returned by
-Analysis `AuthorityBoundValue`s. Missing referenced content is `unavailable`;
-absent or extra roles, wrong kinds, conflicting selections, cycles, or edge
-contradictions are `invalid`; a structurally valid unknown `contract_id` is
+Accepted and proposed analysis inputs reference the same exact stored operation
+contract object, not merely matching `(analysis, 2)` compatibility keys. Both
+references therefore contain the same content-addressed envelope `semantic_id`.
+Static roots come from that selected object. Dynamic roots exactly equal
+qualified dependencies returned by Analysis `AuthorityBoundValue`s. Missing
+referenced content is `unavailable`; malformed shape, a Boolean or nonpositive
+revision, absent or extra roles, wrong kinds, conflicting selections, cycles,
+owner dependency contradictions, or semantic-ID mismatch are `invalid`; a
+structurally valid unknown payload format or compatibility key is
 `unsupported`.
 
 Owner-local codec sets remain executable authority exported by each owner.
 The composition root injects their exact closed tuple explicitly. Verification
-derives the codec inventory, four operation records, facade mapping, and
-structural-edge matrix from those executable owners; no central handwritten
-codec manifest or runtime discovery becomes a second authority.
+derives the codec inventory, four operation records, facade mapping, and direct
+dependency matrix from the operation records and executable owner codecs; no
+central handwritten codec manifest or runtime discovery becomes a second
+authority.
 
 Facade mapping is fixed: query variants use route, read, or related;
 `prepare` and `resolve` use analysis; `inspect` directly resolves the addressed
@@ -894,9 +911,10 @@ The material design decisions are closed. The admission content set now:
 3. fixes the SQLite application ID, schema, pragma profile, capability floor,
    5000-millisecond busy bound, private-root contract, ext4 detection, and
    required-real crash evidence;
-4. assigns executable codec sets to owner roots and executable operation,
-   facade, role, and structural-edge contracts to Engine, with aggregate
-   evidence mechanically derived by Verification; and
+4. assigns executable codec sets and direct-dependency semantics to owner
+   roots, assigns operation compatibility, facade, role, kind, and cardinality
+   contracts plus one generic coherence algorithm to Engine, and derives
+   aggregate evidence mechanically through Verification; and
 5. updates the A1b write sets, policy-impact migration, and final coverage
    sequence for SQLite, roots-only closure, consumed trust, and snapshot v2.
 

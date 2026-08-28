@@ -631,3 +631,42 @@
   coverage attestation, A1, or A2 implementation changed. The next operation
   remains one content-bound review of the complete corrected C7 planning
   content.
+
+## 2026-08-27 - Typed Operation Compatibility And Opaque Identity Replan
+
+- Independent review rejected commit
+  `ee7f2a47b5497112f3c8ce81c1ed45de3921bab9`, tree
+  `6277f388e92e5b9fcc729745e73b6fbda5c9a6d8`. The plan remains `Blocked`; no
+  A1b implementation is admitted.
+- The review accepted the exact `strace` provenance and typed authorization
+  algebra. It found that Authority still parsed a generic semantic-ID grammar
+  and that active version summaries confused operation compatibility with the
+  shared operation-record payload contract.
+- Historical review confirmed that encoded operation selectors first appeared
+  in unimplemented C6 planning. They have no retained runtime or persisted-state
+  consumer. Their operation and revision components duplicate a typed pair and
+  introduce avoidable parsing and mismatch states.
+- `Superseded`: the four encoded `operation-contract.<operation>.v2` selector
+  strings. `OperationAuthorityContractV2` now carries one typed `operation` and
+  positive `compatibility_revision`; the initial exact keys are `(route, 2)`,
+  `(read, 2)`, `(related, 2)`, and `(analysis, 2)`. Revisions are immutable,
+  monotonically allocated per operation, may have gaps, and are supported only
+  through explicit key membership rather than numeric ranges.
+- `Superseded`: generic Authority ownership of semantic-ID grammar and
+  object-kind/prefix agreement. Authority treats semantic IDs as opaque
+  nonempty Unicode-scalar strings and requires exact handle/envelope/reference
+  equality. Owner codecs validate and recompute their IDs.
+- Separated the shared `operation-authority-contract.v2` payload format from
+  exact semantic identity under
+  `coding-standards:operation-authority-contract-identity:v1` and from each
+  operation's typed compatibility key. Representation-only changes cannot
+  invalidate semantic identity without an owner-proved material effect.
+- Resolved the operation-edge ownership contradiction. Operation records own
+  operation, compatibility, role, kind, and cardinality. Owner codecs own
+  allowed direct-dependency kinds and exact extracted references. Engine owns
+  one generic coherence algorithm. The structural dependency matrix is derived
+  verification evidence, not payload authority or a second catalog.
+- The proposed public schema and interface remain byte-identical. No production
+  runtime, package manifest, normative policy, relationship, coverage
+  attestation, A1, or A2 implementation changed. The next operation is one
+  content-bound review of this corrected complete C7 planning content.

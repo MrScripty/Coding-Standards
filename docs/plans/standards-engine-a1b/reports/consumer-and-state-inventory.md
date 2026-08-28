@@ -26,7 +26,7 @@ cardinality.
 | Identity serialization public export | Metadata, Analysis, Policy Impact, Standards Graph, Standards Engine contract tooling, and Verifier tests | Repository-controlled | Replace recursive NFC encoding with codepoint-preserving identity encoding v2; move semantic ordering, deduplication, and normalization to owning domains |
 | Content capture and handles | Analysis snapshots, Standards Engine composition, navigation and cold-process tests | Repository-controlled | Move exact-list Git/native capture and storage to `standards_authority`; make ContentSnapshot contain only logical Unicode-scalar paths and exact bytes; discard source locators, filesystem metadata, and Adapter observations; handle v4 |
 | Standards authority composition | Standards Engine bootstrap, query, analysis preparation, navigation and cold-process tests | Repository-controlled composition authority | Add one reference-only StandardsAuthorityView; callers supply one view while results bind narrower execution closure |
-| Operation authority contracts | Standards Engine composition and route/read/related/analysis execution | Repository-controlled semantic authority | Store four executable `OperationAuthorityContractV2` values with exact required/allowed dynamic roles and structural cross-role dependencies; prohibit aggregate profiles and a central codec manifest |
+| Operation authority contracts | Standards Engine composition and route/read/related/analysis execution | Repository-controlled semantic authority | Store four executable `OperationAuthorityContractV2` values with typed per-operation compatibility revisions and exact required/allowed dynamic role-kind/cardinality contracts; keep direct-dependency semantics owner-local and prohibit encoded selectors, aggregate profiles, central codec manifests, and parallel edge catalogs |
 | Material execution closure | Routing, reading, related navigation, policy/relationship inspection, and analysis projection | Repository-controlled generated evidence | Persist exact side- and role-qualified roots and derive transitive authority dependencies from AuthorityBoundValues and the selected operation contract; prohibit handwritten version/dependency bags and hypothetical-future closure |
 | Consumed trust authority | Analysis providers, authorization validation, observations, dispositions, coverage attestations, and cold replay | Repository-controlled semantic authority | Store exact `ProviderAuthorityV1` and `AuthorizationGrantV1` objects only when a successful transition consumes them; remove aggregate trust views and ambient replay |
 | Analysis-state stores and handles | Standards Engine facade/tool adapter and analysis/cold-process tests | Repository-controlled | Replace with directly stored material analysis root; omit complete base/proposed views; handle v4 |
@@ -99,10 +99,13 @@ not become the identity of every derived result.
 
 Each separately stored Engine-owned `OperationAuthorityContractV2` for route,
 read, related, or analysis owns that family's exact required and allowed
-dynamic roles. Structural role dependencies are executable Engine authority.
-Owner-local codec sets remain authority in their Modules and are injected as
-one explicit tuple. The union is mechanically derived evidence only; there is
-no aggregate operation, separate role profile, or central codec manifest.
+dynamic roles, kinds, cardinalities, and per-operation compatibility revision.
+Owner-local codec sets own allowed direct-dependency kinds and extract exact
+references; Engine owns one generic operation/role/kind/cardinality coherence
+algorithm. The codec sets are injected as one explicit tuple. Their union and
+the structural dependency matrix are mechanically derived evidence only; there
+is no encoded selector, aggregate operation, separate role or edge profile, or
+central codec manifest.
 
 ### Execution closure
 

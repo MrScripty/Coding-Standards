@@ -79,7 +79,7 @@ AuthorityObjectEnvelope v1
   envelope_kind: "authority-envelope"
   envelope_version: 1
   object_kind: nonempty opaque Unicode-scalar string
-  semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits
+  semantic_id: nonempty opaque Unicode-scalar string
   direct_dependencies: sorted unique AuthorityObjectReferenceV1[]
   payload_contract: nonempty opaque Unicode-scalar string
   payload: identity-v2 JSON-compatible typed value
@@ -94,11 +94,14 @@ Envelope kind and version provide structural dispatch only. Object kinds and
 payload contracts remain exact opaque values owned by injected domain codecs;
 Authority neither normalizes them nor infers domain meaning.
 
-Every public handle has `schema_version = 4`, one exact handle kind, and an ID
-whose prefix matches the stored object kind. `standards_authority.resolve`
-loads by semantic ID, verifies bytes and envelope, dispatches to the registered
-owner codec, requires the codec to recompute the same semantic identity, and
-verifies direct dependency kinds before returning the typed object. Owner-local
+Every public handle has `schema_version = 4`, one exact handle kind, and its
+schema-owned wire ID representation. `standards_authority.resolve` treats the
+supplied semantic ID as an opaque exact storage key, requires
+handle/envelope equality, verifies bytes and envelope, dispatches by the
+structural object kind to the injected owner codec, requires the codec to
+validate and recompute the same semantic identity, and verifies direct
+dependency kinds before returning the typed object. Authority does not infer a
+generic relationship between ID spelling and object kind. Owner-local
 codec sets are injected explicitly and their aggregate closure is derived from
 the executable owners specified by the [C7 design](c7-design-proposal.md).
 Envelope
@@ -106,15 +109,15 @@ format is a storage-decoding promise and does not define domain identity.
 Missing storage is `unavailable`, contradictory content is `invalid`, and a
 well-formed unsupported contract is `unsupported`.
 
-Operation-contract payload selectors and stored semantic identities are
-distinct. The exact selectors are `operation-contract.route.v2`,
-`operation-contract.read.v2`, `operation-contract.related.v2`, and
-`operation-contract.analysis.v2`. Each stored record independently has a
-content-addressed semantic ID under
-`coding-standards:operation-authority-contract:v2`, rendered as
-`operation-authority-contract:sha256:<64 lowercase hexadecimal digits>`.
-Selectors express compatibility promises; semantic IDs identify exact record
-content. Neither substitutes for the other.
+Operation compatibility keys and stored semantic identities are distinct. The
+initial exact keys are `(route, 2)`, `(read, 2)`, `(related, 2)`, and
+`(analysis, 2)`. Revisions are scoped and allocated monotonically per
+operation, may contain gaps, and have no range-compatibility meaning. Each
+stored record independently has a content-addressed semantic ID under
+`coding-standards:operation-authority-contract-identity:v1`; its owner codec
+owns the rendered grammar. Compatibility keys express supported promises;
+semantic IDs identify exact record content. The
+`operation-authority-contract.v2` payload contract governs representation only.
 
 ## Public Object Matrix
 
@@ -158,7 +161,7 @@ NFC serializer and advance atomically:
 | Snapshot lifecycle identity | `snapshot:v3` | Replaced by exact logical-path/raw-byte `content-snapshot.v2` object and handle v4 |
 | Standards authority composition | absent | `standards-authority-view.v1` object and handle v4 |
 | Material operation authority | implicit or copied version records | roots-only `execution-closure.v2` object and handle v4 |
-| Operation-family role/coherence promise | implicit shared configuration | One executable `operation-authority-contract.v2` semantic object for each route, read, related, and analysis family |
+| Operation-family role/coherence promise | implicit shared configuration | One exact `(operation, compatibility_revision)` promise and independently content-addressed semantic object for each route, read, related, and analysis family; `operation-authority-contract.v2` owns payload representation only |
 | Navigation lifecycle identity | `navigation:v3` | Replaced by `coding-standards:navigation-result:v1`, whose typed record includes the route/read/related discriminant, and handle v4 |
 | Analysis lifecycle identity | `analysis:v3` | Replaced by `analysis-root.v1` authority object and handle v4 |
 | Obligation | `obligation:v2` | `obligation:v3` |
@@ -259,6 +262,8 @@ The former analysis contract/schema umbrella versions `6/3` have no A1b
 successors. Analysis payload compatibility is owned by `analysis-root.v1`,
 analysis semantic identity by `coding-standards:analysis:v4`, public handle
 representation by handle schema 4, result representation by result projection
-3, and executable operation coherence by `operation-authority-contract.v2`.
+3, and executable analysis-operation compatibility by `(analysis, 2)`. The
+shared `operation-authority-contract.v2` payload contract governs only the
+stored operation-record shape.
 These independently changing promises are not coupled through another analysis
 version pair.

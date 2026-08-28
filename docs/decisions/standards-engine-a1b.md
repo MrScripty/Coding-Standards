@@ -59,10 +59,11 @@ version 3, result projection version 3, public handle version 4, authority
 envelope version 1, and identity encoding version 2. Analysis compatibility is
 scoped independently by `analysis-root.v1`, identity domain
 `coding-standards:analysis:v4`, handle schema 4, result projection 3, and
-`operation-authority-contract.v2`; the former umbrella analysis contract/schema
-pair has no A1b successor. These proposed versions may change only by
-re-planning before cutover. No compatibility reader, writer, or converter is
-admitted.
+operation compatibility key `(analysis, 2)`. The shared
+`operation-authority-contract.v2` payload contract owns only the stored record
+shape; the former umbrella analysis contract/schema pair has no A1b successor.
+These proposed versions may change only by re-planning before cutover. No
+compatibility reader, writer, or converter is admitted.
 
 ### Module graph
 
@@ -141,7 +142,7 @@ AuthorityObjectEnvelopeV1
   envelope_kind = authority-envelope
   envelope_version = 1
   object_kind: nonempty opaque Unicode-scalar string
-  semantic_id: owner prefix + ":sha256:" + 64 lowercase hex digits
+  semantic_id: nonempty opaque Unicode-scalar string
   direct_dependencies: sorted unique AuthorityObjectReferenceV1[]
   payload_contract: nonempty opaque Unicode-scalar string
   payload: identity-v2 JSON-compatible typed value
@@ -159,6 +160,9 @@ unknown kind or positive version is `unsupported`; malformed structure is
 `invalid`. Object-kind and payload-contract values remain codepoint-exact
 opaque identifiers owned by the injected codec sets. Authority compares and
 dispatches them without normalizing them or inferring domain meaning.
+`semantic_id` is likewise opaque to Authority: the repository requires exact
+handle/envelope/reference equality, while the owning codec validates its
+grammar and recomputes it from the owner-defined material identity record.
 
 The envelope's `object_kind` must agree with the typed handle. The repository
 validates envelope shape, dependency references, acyclicity, stored bytes, and
@@ -275,27 +279,35 @@ decision, or executable domain logic.
 
 Standards Engine owns four executable `OperationAuthorityContractV2` values:
 
-| Contract ID | Operation | Required role-to-kind pairs | Allowed dynamic role-to-kind pairs |
+| Operation | Compatibility revision | Required role-to-kind pairs | Allowed dynamic role-to-kind pairs |
 | --- | --- | --- | --- |
-| `operation-contract.route.v2` | route | metadata -> canonical-standards-corpus; routing -> routing-projection; graph -> standards-graph | none |
-| `operation-contract.read.v2` | read | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
-| `operation-contract.related.v2` | related | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
-| `operation-contract.analysis.v2` | analysis | metadata -> canonical-standards-corpus; graph -> standards-graph; policy-impact -> compiled-policy-impact; coverage -> coverage-horizon | context -> analysis-context; requirement -> fact-requirement; observation -> fact-observation; coverage-view -> coverage-view; coverage-requirement -> coverage-requirement; coverage-attestation -> coverage-attestation; coverage-certificate -> coverage-certificate; provider-authority -> provider-authority; authorization-grant -> authorization-grant |
+| route | 2 | metadata -> canonical-standards-corpus; routing -> routing-projection; graph -> standards-graph | none |
+| read | 2 | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
+| related | 2 | metadata -> canonical-standards-corpus; graph -> standards-graph | none |
+| analysis | 2 | metadata -> canonical-standards-corpus; graph -> standards-graph; policy-impact -> compiled-policy-impact; coverage -> coverage-horizon | context -> analysis-context; requirement -> fact-requirement; observation -> fact-observation; coverage-view -> coverage-view; coverage-requirement -> coverage-requirement; coverage-attestation -> coverage-attestation; coverage-certificate -> coverage-certificate; provider-authority -> provider-authority; authorization-grant -> authorization-grant |
 
-These exact `contract_id` values are stable versioned compatibility selectors,
-not semantic object identities. Each complete record independently receives an
-envelope `semantic_id` under
-`coding-standards:operation-authority-contract:v2`, with prefix
-`operation-authority-contract:sha256:`. A view references that exact stored
-object. A material compatibility change advances only the affected selector;
-any record-content change changes its content-addressed semantic ID.
+The typed `(operation, compatibility_revision)` pair is the compatibility key;
+there is no encoded selector string. Revisions are immutable, monotonically
+allocated per operation, may contain gaps, and never imply compatibility by
+numeric range. The Engine supports an explicit set of keys and never reuses a
+retired key for different semantics or accepts unequal normalized promises
+under one key. Each complete record independently receives an envelope
+`semantic_id` under
+`coding-standards:operation-authority-contract-identity:v1`. A view references
+that exact stored object. A material compatibility change advances only the
+affected operation's revision; any material record-content change changes its
+content-addressed semantic ID. The payload contract
+`operation-authority-contract.v2`, envelope version, SQLite representation, and
+storage bytes do not enter that semantic identity.
 
 Every required role has cardinality `1..1`. Analysis context has cardinality
 `1..1`; every other allowed dynamic role has cardinality `0..*`. No `decision`
 object kind exists: dispositions are fields of `analysis-root.v1`. Analysis has
 no routing role or routing dependency.
 
-Structural role dependencies are:
+The following structural role dependencies are derived review evidence from
+the exact owner codec dependency contracts and owner-extracted references; they
+are not fields of an operation-contract payload or a second runtime catalog:
 
 ```text
 metadata -> content
@@ -315,9 +327,12 @@ provider-authority -> exact declared subset of content, metadata,
 authorization-grant -> none
 ```
 
-The Engine validates operation coherence. Authority provides generic reference
-traversal and does not own operation policy. `inspect` directly resolves the
-identified object and therefore has no operation-authority contract.
+The Engine validates operation, supported compatibility key, role, kind, and
+cardinality through one generic coherence algorithm. Owner codecs own allowed
+direct dependency kinds and extract each exact reference. Authority provides
+generic reference traversal and does not own operation or dependency policy.
+`inspect` directly resolves the identified object and therefore has no
+operation-authority contract.
 
 Navigation uses side `current`. Analysis roots use `accepted` and
 `proposed`; contract-transition authority common to both sides remains
