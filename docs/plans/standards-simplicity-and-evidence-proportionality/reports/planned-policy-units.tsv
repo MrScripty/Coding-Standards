@@ -10,4 +10,4 @@ N5-D	revise	topic.dependencies.implementation-versus-dependency	topic.dependenci
 N1-P	revise	workflow.planning.active-plan-fields	workflow.planning	Required Active-Plan Fields	1	2	N1	Require composed-design applicability and applicable review content in written plans.
 N1-R	revise	workflow.planning.replanning	workflow.planning	Re-Planning	1	2	N1	Re-run composed-design admission when replacement or accumulation changes the artifact.
 N5-P	revise	workflow.planning.systemic-finding-replan	workflow.planning	Systemic-Finding Re-Planning	1	2	N5	Add authority/reachability stopping, deletion, proof substitution, and composition comparison.
-P1-P	conditional-revise	workflow.planning.projection-completeness	workflow.planning	Policy Projection Completeness	1	2	P1	Revise only if the prototype proves the exact dependency-local invalidation algebra.
+P1-P	retain	workflow.planning.projection-completeness	workflow.planning	Policy Projection Completeness	1	1	P1	Retain the project-agnostic rule; the prototype supports a separate Coding Standards Python implementation review, not a normative revision with an excluded known consumer.

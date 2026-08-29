@@ -5,5 +5,5 @@ topic.dependencies.implementation-versus-dependency	1	6	revise	evaluation/standa
 workflow.planning.active-plan-fields	1	5	revise	evaluation/standards-effectiveness/policy-impact/workflow.planning.toml	complete	All current projections update; missing planning-prompt and structural-checker edges are added.
 workflow.planning.replanning	1	3	revise	evaluation/standards-effectiveness/policy-impact/workflow.planning.toml	complete	All current projections update and the plan-template projection is added.
 workflow.planning.systemic-finding-replan	1	6	revise	evaluation/standards-effectiveness/policy-impact/workflow.planning.toml	complete	Every current prompt, template, fixture, and suite projection updates.
-workflow.planning.projection-completeness	1	1	conditional-revise	evaluation/standards-effectiveness/policy-impact/workflow.planning.toml	conditional	The existing suite edge updates only if the Milestone 0 invalidation prototype is accepted.
-TOTAL	-	65	-	-	complete	Counts were queried from the schema-v2 declaration sources at commit 351e7852.
+workflow.planning.projection-completeness	1	1	retain	evaluation/standards-effectiveness/policy-impact/workflow.planning.toml	complete	The existing suite edge remains unchanged; the prototype is evidence for a separately owned Coding Standards Python implementation review.
+TOTAL	-	65	-	-	complete	Counts were revalidated at commit ac418826; schema-v2 declaration topology is unchanged from evidence baseline 351e7852.

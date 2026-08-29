@@ -193,8 +193,6 @@ def validate(
                 f"{row['policy_unit']}: live module/heading disagrees with the planning manifest"
             )
         if state == "planning":
-            if action == "retain":
-                raise ValueError(f"{row['policy_unit']}: planning state cannot contain retain")
             if action == "add" and current is not None:
                 raise ValueError(f"{row['policy_unit']}: add already exists")
             if action != "add" and current is None:
@@ -588,7 +586,7 @@ table {{ width:100%; border-collapse:collapse; font-size:12px; }} th {{ position
     <h2>Filtered relationship dispositions</h2>
     <div class="table-wrap"><table><thead><tr><th>Family</th><th>Owner</th><th>Consumer</th><th>Relation</th><th>Disposition</th><th>Reason</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
-  <p class="footer">Conditional P1 edges are shown dashed. “Reviewed—no change” means the existing relationship remains applicable but its A1b/current consumer is not modified by this project-agnostic standards plan. Re-run the generator after accepted graph changes; use <code>--check</code> to detect stale HTML.</p>
+  <p class="footer">Any unresolved conditional edges are shown dashed. “Reviewed—no change” means the existing relationship remains applicable but its A1b/current consumer is not modified by this project-agnostic standards plan. P1 is resolved as reviewed—no change; its prototype remains separate implementation-design evidence. Re-run the generator after accepted graph changes; use <code>--check</code> to detect stale HTML.</p>
 </main>
 <script>
 const DATA={data_json};

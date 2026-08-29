@@ -1,14 +1,14 @@
 # Plan: Standards Simplicity And Evidence Proportionality
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Normative implementation has not started
+**Current phase:** Milestone 0 accepted; normative implementation has not started
 
-**Next slice:** Re-query the current policy-impact and verifier-migration graphs,
-confirm the shared-authority write set is free, and admit Milestone 0 against
-that fresh baseline.
+**Next slice:** Re-query shared suite, graph, generated-input, and migration
+authority; regenerate the stale suite-input repository index in the admitted
+shared slice; and implement Milestone 1 atomically if no owner conflict exists.
 
-**Acceptance status:** `pending`
+**Acceptance status:** `partial`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -39,7 +39,7 @@ It does not design A1c or modify the Standards Engine implementation.
 | SEP-A5 | Immutable authority closure and version scopes are proportional to stated consumer, lifetime, reconstruction, overlap, deployment, persistence, and migration promises while preserving non-ambient reconstruction and independent scopes where those promises require them. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A6 | Systemic replanning has authority- and reachability-based stopping rules, accepts deletion and smaller Interfaces as repairs, compares the revised composition with the original objective, and established dependencies or proof tools are preferred unless a local semantic product is justified and owned. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A7 | Every existing relationship of every revised policy unit has an explicit disposition; every new unit and applicable consumer is registered; current repository-specific implementation projections are reviewed without changing A1b or treating it as general policy authority. | `integration` | `not-applicable` | `automated` | `pending` | [Planned graph dispositions](reports/policy-impact-dispositions.tsv) |
-| SEP-A8 | Dependency-local policy/evidence invalidation is either accepted from a bounded prototype with completeness and stale-authority counterexamples, or rejected with a documented no-change decision; it is not made normative from the audit hypothesis alone. | `focused` | `not-applicable` | `automated` | `pending` | pending |
+| SEP-A8 | Dependency-local policy/evidence invalidation is either accepted from a bounded prototype with completeness and stale-authority counterexamples, or rejected with a documented no-change decision; it is not made normative from the audit hypothesis alone. | `focused` | `not-applicable` | `automated` | `satisfied` | [No-change decision and implementation prototype](reports/dependency-local-invalidation-prototype.md) |
 | SEP-A9 | The complete standards, prompt, template, fixture, suite, graph, generated-input, and documentation checks pass, and the generated standalone HTML matches the accepted policy-unit and relationship manifests. | `integration` | repository-supported verification environments | `automated` | `pending` | [Planned graph visualization](reports/standards-graph-change-visualization.html) |
 
 ## Scope
@@ -117,7 +117,7 @@ It does not design A1c or modify the Standards Engine implementation.
 | Expand `core-simplicity` to evaluate post-boundary composition and update existing Planning projection enforcement. Add only one new evidence-necessity suite and extend `contract-invariants` for proof lifetime/failure classification. | Verification | Evidence-lifecycle and enforcement-cost findings | One new suite for every recommendation |
 | Locate scoped correctness-risk and evidence necessity together in Verification; Security continues to own adversarial threat semantics and Contracts owns proof construction and failure behavior. | Verification, Security, Contracts | S3-S5 and C5 consolidation | A universal security threat model for internal code |
 | Preserve non-ambient closure and independent version promises, but derive their machinery from stated lifetimes and actual consumer compatibility rather than from the mere presence of a handle, artifact, or version field. | Architecture and Contracts | S6-S7 | Unconditional maximal closure or umbrella versioning |
-| Keep dependency-local invalidation conditional until a prototype proves completeness, stale-edge detection, and stable unaffected evidence. | Planning | S9 is medium-high confidence and explicitly calls for a prototype | Immediate normative adoption of a proposed invalidation algebra |
+| Retain Projection Completeness at revision 1. The bounded prototype is evidence for a separately owned Coding Standards coverage-implementation review, not authority for a project-agnostic normative revision whose known concrete consumer is excluded from this plan. | Planning | [Milestone 0 no-change decision and prototype](reports/dependency-local-invalidation-prototype.md) | The unresolved P1 hypothesis and any attempt to encode repository-specific coverage machinery as general policy |
 | The policy-impact manifest, not the visualization or this plan, is final relationship authority. The generator must fail if a revised owner's current edges lack dispositions. | Planning | Policy Projection Completeness | Hand-maintained diagram as graph authority |
 | Generate in `planning` state against the pre-change graph, `transition` state after each accepted owner-coherent milestone, and `accepted` state after resolving every conditional row. Transition and accepted modes reconstruct the fixed before-topology from the reviewed delta rather than treating a partially or fully changed graph as a new baseline. | Planning | Inspectable-history objective and generator lifecycle review | A live-only visualization that becomes unverifiable after the first implementation slice |
 
@@ -145,13 +145,13 @@ It does not design A1c or modify the Standards Engine implementation.
   [planned unit changes](reports/planned-policy-units.tsv), and
   [planned catalog nodes](reports/planned-node-catalog-additions.tsv), and
   [edge dispositions](reports/policy-impact-dispositions.tsv).
-- Consumer dispositions: every current edge of a revised owner is `update`,
-  `reviewed-no-change`, or `conditional-update`; every new edge is `add` or
-  `conditional-add`.
+- Consumer dispositions: every current edge of a revised owner is `update` or
+  `reviewed-no-change`; every new edge is `add`.
 - Scope or sequencing replacement: if the live graph differs, stop and
-  regenerate the inventory before normative edits. If the local-invalidation
-  prototype fails, retain Projection Completeness revision 1 and record the
-  rejected hypothesis rather than expanding the implementation.
+  regenerate the inventory before normative edits. Projection Completeness and
+  its current declarative relationship are retained. The local-invalidation
+  prototype is separately owned implementation-design evidence and does not
+  authorize a normative or verifier change in this plan.
 
 ## Simplicity And Ownership Review
 
@@ -175,9 +175,10 @@ It does not design A1c or modify the Standards Engine implementation.
   Interface to the visualization; the generator reads authoritative current
   TOML directly and does not duplicate graph semantics.
 - Necessary versus incidental complexity: five normative families and one
-  conditional prototype replace twelve parallel proposals. Existing suites are
-  expanded where they already own the decision family; one new suite is added
-  only because no current owner decides evidence necessity.
+  bounded prototype disposition replace twelve parallel proposals. The
+  prototype rejected a sixth normative family in this plan. Existing suites
+  are expanded where they already own the decision family; one new suite is
+  added only because no current owner decides evidence necessity.
 - Deletion result: removing the HTML leaves normative meaning intact; removing
   edge dispositions makes complete impact review unprovable; removing the new
   evidence unit leaves S3/S5/S11 without an owner; removing separate Contracts
@@ -204,6 +205,7 @@ dependency-local invalidation hypothesis before it can change normative text.
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-policy-units.tsv`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-node-catalog-additions.tsv`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv`
+- `docs/plans/standards-simplicity-and-evidence-proportionality/reports/recommendation-consolidation.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/dependency-local-invalidation-prototype.py`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/dependency-local-invalidation-prototype.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/generate-standards-graph-visualization.py`
@@ -214,18 +216,27 @@ verifier source is writable in Milestone 0.
 
 **Tasks:**
 
-- [ ] Query all current relationships for every proposed revised owner.
-- [ ] Reconcile additions, removals, concurrent changes, and shared write sets.
-- [ ] Prototype changed-edge, removed-consumer, provider-revision, missing-edge,
-  and unrelated-subject cases using current graph semantics.
-- [ ] Record an accept-with-exact-algebra or reject-with-no-change decision.
+- [x] Query all current relationships for every proposed revised owner.
+- [x] Reconcile additions, removals, concurrent changes, and shared write sets.
+- [x] Prototype changed-edge, removed-consumer, provider-revision, missing-edge,
+  and unrelated-consumer cases using current graph semantics.
+- [x] Record an accept-with-exact-algebra or reject-with-no-change decision.
 
 **Acceptance gate:** The live inventory is complete, shared-authority ownership
-is clear, SEP-A8 has a reproducible decision, and any accepted P1 implementation
-has replaced Milestone 4's initial no-normative-write set with exact paths
-before that milestone can be admitted.
+is clear, SEP-A8 has a reproducible decision, and P1 is either admitted with a
+complete owner-coherent write set or closed with an explicit no-change
+disposition before later milestones can be admitted.
 
-**Status:** `Planned`
+**Acceptance:** The live graph remains 47 policy units and 387 relationships;
+all planned owner inventories reconcile; no post-`M6-I72` migration package is
+admitted; and the executable prototype demonstrates a bounded implementation
+candidate across all required mutations. P1 is rejected as a normative change
+in this plan because its known concrete coverage consumer is excluded;
+Projection Completeness remains at revision 1. The stale generated suite-input
+repository-index digest is recorded for the first later shared-authority slice
+rather than changed outside Milestone 0's write set.
+
+**Status:** `Accepted`
 
 ### Milestone 1: Composed Simplicity Admission
 
@@ -426,40 +437,30 @@ projections have explicit evidence-backed dispositions;
 
 **Status:** `Planned`
 
-### Milestone 4: Conditional Projection-Local Invalidation
+### Milestone 4: Projection-Local Invalidation Disposition
 
-**Goal:** Implement only the Milestone 0 invalidation result that was proved.
+**Goal:** Close P1 without conflating project-agnostic standards with the
+repository-specific coverage implementation that motivated the hypothesis.
 
-**Allowed write set:**
-
-- `docs/plans/standards-simplicity-and-evidence-proportionality/plan.md`
-- `docs/plans/standards-simplicity-and-evidence-proportionality/execution-ledger.md`
-- `docs/plans/standards-simplicity-and-evidence-proportionality/issues.md`
-- `docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-policy-units.tsv`
-- `docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv`
-- `docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-4-projection-invalidation-acceptance.md`
-- `docs/plans/standards-simplicity-and-evidence-proportionality/reports/standards-graph-change-visualization.html`
-
-This initial set authorizes the rejected-prototype/no-normative-change path. If
-Milestone 0 accepts the prototype, it must re-plan this milestone with exact
-normative, fixture, suite, graph, and generated-input paths before any such
-file is writable. Generic verifier Python is not an admissible expansion here.
+**Allowed write set:** None after Milestone 0 acceptance. The decision artifacts
+and executable prototype are owned by Milestone 0.
 
 **Tasks:**
 
-- [ ] If accepted, revise Projection Completeness and its declarative evidence
-  to the exact dependency-local algebra.
-- [ ] If rejected, retain semantic revision 1 and record `reviewed-no-change`
-  for its current relationship; resolve the planning manifests from
-  `conditional-revise`/`conditional-update` to `retain`/`reviewed-no-change`.
-- [ ] Prove changed/missing consumers invalidate while unrelated subjects stay
-  stable only when their deciding authority did not change.
+- [x] Retain `workflow.planning.projection-completeness` at semantic revision 1.
+- [x] Retain its current `policy-semantic-impact` relationship as
+  reviewed-no-change.
+- [x] Preserve the bounded prototype as evidence for a separately scoped Coding
+  Standards coverage-implementation audit.
+- [x] Demonstrate local dependency mutations, a shared-protocol mutation,
+  missing-disposition blocking, and the global-horizon over-invalidation
+  counterexample without changing normative or verifier authority.
 
-**Acceptance gate:** SEP-A8 is satisfied without a stale-edge or global-renewal
-fallback and without crossing verifier ownership; the resolved manifests pass
-`--state transition --check` after regeneration.
+**Acceptance gate:** SEP-A8 is satisfied by a documented no-normative-change
+decision; no Planning rule, declarative suite, graph declaration, coverage
+attestation, generated input, or generic verifier source changes for P1.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 5: Integrated Graph And Standards Acceptance
 
@@ -486,7 +487,7 @@ owning milestone and exact write set.
 **Tasks:**
 
 - [ ] Re-query every revised unit and prove one final disposition per consumer.
-- [ ] Resolve every conditional unit/edge row, verify registered suite-input
+- [ ] Verify no conditional unit/edge row remains, verify registered suite-input
   freshness, and regenerate the standalone HTML with `--state accepted` from
   the accepted manifests and reviewed before/after delta.
 - [ ] Run focused suites, graph/compiler checks, plan checks, all-suites
@@ -501,8 +502,9 @@ unconnected graph change remains, and all applicable repository checks pass.
 
 ## Blockers
 
-- `none` for planning. Normative implementation must wait until the active
-  verifier migration exposes a non-overlapping serial shared-authority slice.
+- `none` for Milestone 1 admission. No verifier-migration package is currently
+  admitted. Re-query immediately before the shared write and include suite-
+  input regeneration in that one serial slice.
 
 ## Re-Plan Triggers
 
@@ -510,8 +512,8 @@ unconnected graph change remains, and all applicable repository checks pass.
   consumer of a proposed revised owner.
 - The verifier migration has an admitted slice touching the suite registry,
   policy graph, generated suite inputs, or another shared write in this plan.
-- The local-invalidation prototype cannot preserve both complete affected-edge
-  detection and stable unrelated evidence.
+- Fresh project-agnostic evidence establishes a Projection Completeness gap
+  independent of this repository's coverage implementation.
 - A proposed rule can only be expressed through A1/A1b-specific nouns,
   guarantees, or implementation artifacts.
 - The enforcement design adds another suite, checker, registry, or serialized
@@ -538,8 +540,8 @@ before creating a worktree. No isolation is currently required.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
-- Final status: `Planned`
+- Acceptance status: `partial`
+- Final status: `Active`
 - Required final evidence: accepted objective rows, milestone gates, exact
   final policy-impact query, complete suite/checker results, generated-input
   freshness, HTML `--state accepted --check`, link validation, and clean diff

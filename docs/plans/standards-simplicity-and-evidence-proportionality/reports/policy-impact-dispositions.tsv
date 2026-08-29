@@ -66,7 +66,7 @@ N5-P	N5	workflow.planning.systemic-finding-replan	prompts/implement-plan.md	prom
 N5-P	N5	workflow.planning.systemic-finding-replan	prompts/planning.md	prompt-projection	update	yes	Planning bounds the family by authority and reachability and considers deletion.
 N5-P	N5	workflow.planning.systemic-finding-replan	systemic-finding-replanning	enforcement-suite-projection	update	yes	Enforce complete dispositions plus proportional stopping and proof substitution.
 N5-P	N5	workflow.planning.systemic-finding-replan	templates/PLAN-TEMPLATE.md	template-projection	update	yes	The systemic audit records its reachable population, stop condition, and simplification result.
-P1-P	P1	workflow.planning.projection-completeness	policy-semantic-impact	enforcement-suite-projection	conditional-update	conditional	Update only if the prototype accepts dependency-local invalidation; otherwise retain this edge and suite unchanged.
+P1-P	P1	workflow.planning.projection-completeness	policy-semantic-impact	enforcement-suite-projection	reviewed-no-change	no	The current suite remains applicable because Projection Completeness stays at revision 1; dependency-local coverage implementation is a separately owned code-design follow-up.
 N1-C	N1	core.simplicity-and-complection	topic.architecture	normative-consumer	add	yes	Architecture specializes artifact-level simplicity and post-boundary composition.
 N1-C	N1	core.simplicity-and-complection	workflow.planning	normative-consumer	add	yes	Planning records applicability, artifact probes, and cumulative admission.
 N1-C	N1	core.simplicity-and-complection	workflow.implementation	normative-consumer	add	yes	Implementation preserves the admitted composition and reports wider propagation.

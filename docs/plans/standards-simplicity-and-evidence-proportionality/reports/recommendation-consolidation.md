@@ -21,8 +21,10 @@ different observations of five related failures:
 5. systemic repair and custom proof tooling lacked proportional stopping and
    substitution rules.
 
-Dependency-local invalidation is a sixth, conditional hypothesis. It remains a
-prototype until its completeness properties are demonstrated.
+Dependency-local invalidation is an implementation-design finding, not a sixth
+normative family in this plan. Milestone 0 demonstrated a bounded candidate for
+named deciding dependencies, but retained the current standard because the
+known concrete consumer—repository-specific Python tooling—is excluded.
 
 ## Consolidated Change Families
 
@@ -33,7 +35,7 @@ prototype until its completeness properties are demonstrated.
 | N3 Validation proof and failure behavior | S4, S10 | Register and revise Contracts' existing Validation Proof Lifetime and Invariant Contracts sections; extend their existing suite family. | Contracts owns construction, validity, proof lifetime, and failure semantics; Verification owns evidence of those rules. | Repeated A1b decode paths coexist with an existing rule against revalidating intact proof-bearing values. Current invariant wording does not distinguish contained programming defects from corruption or external emission. Reproduced JSON Schema and durable-boundary defects remain protected. |
 | N4 Promise proportionality | S6, S7, S10 | Revise Immutable Authority Closure and Version Scope so closure and compatibility follow stated lifetime, reconstruction, overlap, deployment, persistence, and actual-consumer promises. | Architecture owns authority closure; Contracts owns compatibility and invalidation promises. | Closure fanout grew from 7 to 27 relationships; fourteen stored kinds acquired local obligations; v10/v11 were atomic cutovers with no retained A1 reader. Genuine cold replay and independently deployed/persisted contracts remain counterexamples to simplification. |
 | N5 Bounded correction and established tooling | S8, S12, C4-C5 | Revise replanning/systemic rules with reachability stops, deletion/smaller-Interface remedies, proof substitution, composition recheck, and dependency preference when mature tooling owns the required semantics. | Planning owns repair scope; Dependencies owns implementation-versus-dependency; Verification supplies evidence adequacy. | Systemic reviews found real defects but also expanded inventories, AST logic, identities, and matrices. `jsonschema` and SQLite removed local semantic products; a custom analyzer created its own Interface, tests, and late repair loop. |
-| P1 Dependency-local invalidation prototype | S9 | Prototype first; revise Projection Completeness only if the exact algebra detects changed/missing consumers and stale authority while leaving truly unrelated subjects stable. | Planning owns change-specific disposition; graph/verifier implementation remains separately owned. | The graph grew from 41/207 to 47/387 units/relationships and one guardrail renewed all 44 subjects. The audit explicitly rated the change below unconditional confidence. |
+| P1 Dependency-local invalidation | S9 | No normative change in this plan. Retain Projection Completeness; preserve the bounded prototype for a separately scoped Coding Standards Python coverage-design audit. | Planning already owns change-specific dispositions. The current global-horizon behavior belongs to repository-specific coverage implementation and its complete owner/consumer boundary. | The graph grew from 41/207 to 47/387 units/relationships and one guardrail renewed all 44 subjects. The [prototype](dependency-local-invalidation-prototype.md) demonstrates exact local, global-protocol, missing-disposition, and unrelated-consumer behavior, but implementation feasibility does not prove a generally applicable normative deficiency. |
 
 ## What Is Retained
 
@@ -93,7 +95,11 @@ Every normative sentence must pass all of these tests:
   they do not prove every A1b Module or check unnecessary.
 - Commit history supports a missing admission/enforcement path; it cannot
   recover every human reason for a design choice.
-- The local-invalidation concern is well supported, but the replacement
-  algorithm is not. That is why P1 remains conditional.
-- The planned relationship set is based on the graph at commit `351e7852` and
-  must be re-queried before implementation.
+- The local-invalidation prototype proves completeness only relative to named
+  deciding dependencies. It cannot discover a real semantic consumer never
+  declared by humans, and it does not prove that a repository-specific coverage
+  algorithm belongs in general standards. Explicit review and reviewed-empty
+  authority remain; any implementation change requires its own complete audit.
+- The planned relationship set was based on the graph at commit `351e7852` and
+  was revalidated unchanged at Milestone 0 base `ac418826`. It must still be
+  queried before each shared implementation slice.

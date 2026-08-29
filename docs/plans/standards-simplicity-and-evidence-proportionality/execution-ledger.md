@@ -33,3 +33,50 @@
 - Headless Firefox renders at 1440×1200 and 1440×2600 were visually inspected;
   the summary, unit cards, filters, graph, and disposition table rendered.
 - Final staged diff hygiene passed; these artifacts form the planning commit.
+
+## 2026-08-29 — Milestone 0 acceptance
+
+- Started from clean revision `ac418826`; the policy graph remained at 47
+  policy units and 387 direct relationships, and the planning visualization
+  remained current.
+- Re-queried checker migration authority. Packages through `M6-I72` remain
+  accepted and no later package is admitted, so the Milestone 0 plan-only write
+  set had no integration-owner collision.
+- Added a read-only executable prototype over the live canonical corpus,
+  policy-impact compiler, supplemental consumer catalog, suite registry, and
+  captured suite-input closure.
+- Proved exact invalidation for changed relationship semantics, removed
+  consumer membership, registered consumer content, and an evidence-suite
+  closure. Each representative local mutation invalidated one dependent
+  subject and left 46 stable. Omitting one current authoritative edge from the
+  reviewed-disposition set blocked its owner without inventing a graph change
+  or renewing any subject.
+- Proved that a shared interpretation-protocol revision invalidates all 47
+  subjects, while the current global-horizon model also invalidates all 47 for
+  one suite member with zero local subject dependencies.
+- Demonstrated `dependency-local-policy-coverage:v1` as a bounded candidate
+  implementation algebra. It does not claim to discover a real semantic
+  consumer never declared by humans; explicit review and reviewed-empty
+  authority remain.
+- Resolved P1 from `conditional-revise`/`conditional-update` to
+  `retain`/`reviewed-no-change`. The known concrete consumer is repository-
+  specific coverage Python and related authority excluded from this plan, so a
+  normative-only revision would violate the standards/tooling boundary and
+  leave a known projection incomplete. Milestone 4 is accepted as no-change.
+- Recorded the global-horizon machinery concern as SEP-006 for a separately
+  scoped Coding Standards Python coverage-design audit.
+- Live suite-input loading exposed a stale repository-index digest after the
+  planning commit added tracked files. Milestone 0 used the content-valid
+  captured manifest and recorded regeneration for the first admitted shared
+  slice; it did not cross its write set to repair shared generated authority.
+
+### Milestone 0 verification
+
+- `dependency-local-invalidation-prototype.py` passed all seven mutation cases,
+  including an unrelated registered-consumer mutation that kept the
+  representative source current.
+- The current global-horizon counterexample invalidated 47 of 47 subjects.
+- The graph visualization generator passed in `planning` state after P1
+  resolution and contains no conditional unit or edge disposition.
+- Plan structure, policy-impact tests, graph-engine tests, Python compilation,
+  inline JavaScript syntax, and diff hygiene passed.
