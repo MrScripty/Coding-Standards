@@ -2,9 +2,9 @@
 
 **Status:** `Rejected by final content-bound review`
 
-**Implementation commit:** `23706513c65185f5a8204ffa1c4e8be2c74f1729`
+**Implementation commit:** `88f93a33e490373fd32106d163795d21d0bd3eb7`
 
-**Implementation tree:** `1de23986a1f4e577d650e0f103c59da1265054c7`
+**Implementation tree:** `69b7cc8f2222cc766b1885ac70187cc0e77fea73`
 
 **Recorded:** `2026-08-29`
 
@@ -14,11 +14,12 @@ evidence about that content and do not invalidate the reviewed subject. Only a
 material change to the identified implementation content requires a new review.
 
 This candidate supersedes rejected implementation commit
-`8b8a4b481d4e330e118f879a862d2a3630c85f84`, tree
-`3435dd4e7cd5784913389f53fb90d6fbb06b73d7`. The replacement preserves the C7
-architecture while correcting the governed-source binding-lifetime and
-Verifier Git-authority defects found by that review. The rejected boundary
-remains historical evidence and is not used for A1B-A11.
+`23706513c65185f5a8204ffa1c4e8be2c74f1729`, tree
+`1de23986a1f4e577d650e0f103c59da1265054c7`. The replacement preserves the C7
+architecture while correcting the public Git-reachability, bounded
+control-flow, simple capability-provenance, and assignment-target-order defects
+found by that review. The rejected boundary remains historical evidence and is
+not used for A1B-A11.
 
 ## Candidate Scope
 
@@ -51,25 +52,23 @@ candidate evidence rather than copied into another authority catalog.
 
 The completed boundary incorporates every prior correction and additionally:
 
-1. centralizes Git-index access and sanitizes inherited `GIT_*` state;
-2. places suite-input manifests and coverage-horizon composition under
-   Standards Analysis ownership;
-3. binds checks to typed authority inputs instead of package-wide ambient
-   repository state;
-4. binds Numeric Lifecycle evidence to the canonical inventory and exact
-   checker source bytes;
-5. materializes and compares the staged index through the shared authority
-   adapter;
-6. rejects dynamic-import capability through a lexical package AST analysis
-   that preserves Python module, function, class, and comprehension scope;
-7. derives codec-closure evidence from production composition rather than a
-   parallel catalog; and
-8. renews coverage only after the provider-v5 and horizon-v5 authority inputs
-   are frozen.
-9. models assignment, deletion, exception-alias, and assignment-target binding
-   events in Python execution order; and
-10. routes every Verifier-owned Git operation through the exported sanitized
-    Standards Authority Adapter with typed caller diagnostics.
+1. exposes one typed, sanitized `git_command` result through the public
+   Standards Authority root;
+2. maps Git process unavailability and nonzero status into public
+   Git-reachability diagnostics without a second subprocess owner;
+3. records scope-local logical execution order and branch context for governed
+   binding events;
+4. merges complete conditional branches when both establish the same definite
+   binding;
+5. preserves possible `sys` capability provenance through simple direct and
+   conditional aliases;
+6. evaluates assignment right-hand sides before binding targets and binds
+   chained targets from left to right;
+7. verifies hostile inherited Git state and unavailable Git through the direct
+   public reachability entrypoint; and
+8. registers the retained Git-reachability implementation as an exact node and
+   source-owned dependency-policy consumer with a mechanically derived
+   migration disposition.
 
 The package scanner treats class namespaces according to Python name-resolution
 semantics: direct class-body statements observe ordered class bindings, while
@@ -106,9 +105,10 @@ The clean implementation tree passed:
 | Standards Authority | 39 tests passed; one capability-selected skip |
 | Standards Analysis | 66 tests passed |
 | Standards Engine | 36 tests passed |
-| Standards Verifier | 421 tests passed |
-| CPython 3.11 and 3.12 correction matrix | 24 binding-lifetime and Git-authority tests passed in each exact locked environment |
-| A1b public cutover | Generated-contract semantic conformance, immutable-authority closure, and public-cutover suites passed under hostile inherited `GIT_DIR` and `GIT_INDEX_FILE` on both supported Python versions; review proved this harness did not cover the separate public Git-reachability entrypoint |
+| Standards Contracts | 18 tests passed |
+| Standards Verifier | 429 tests passed |
+| CPython 3.11 and 3.12 correction matrix | 41 governed-source and Git-reachability tests passed in each exact locked environment |
+| A1b public cutover | Generated-contract semantic conformance, immutable-authority closure, and public-cutover suites passed under hostile inherited `GIT_DIR` and `GIT_INDEX_FILE` on both supported Python versions; direct public reachability regressions also passed |
 | Generated projections | Fresh against their authoritative inputs |
 | Declarative verification | 226 of 226 registered suites passed |
 | Migration verification | All 53 retained Bash migration checkers passed without extension |
@@ -118,9 +118,19 @@ The worktree was clean when the implementation commit and tree were recorded.
 
 ## Review Disposition
 
-Independent review rejected the exact commit and tree above. It found that the
-public Git-reachability entrypoint bypasses the sanitized Authority Adapter and
-that the governed-source scanner remains path-insensitive, loses simple
-capability aliases, and does not preserve target-by-target assignment order.
-`A1B-028` is reopened; Milestone 3 is `Active`; Milestone 4 and A1B-A11 are
-blocked; the ADR remains `Proposed`; and A2 remains unavailable.
+Independent Standards and Specification review rejected the exact commit and
+tree above. Public Git reachability, unavailable-Git diagnostics, the named
+flat-branch and alias regressions, migration coverage, and the broad checkpoint
+passed. The review nevertheless reproduced three governed-source defects:
+
+- conditional deletion can expose a builtin capability while an earlier
+  binding remains trusted;
+- conditional `sys` provenance is lost when the use occurs in a nested scope;
+  and
+- augmented assignment can report a benign bound name as a builtin
+  capability.
+
+These constructs are already inside the admitted bounded syntax profile, so
+they cannot be dismissed as unsupported syntax. `A1B-028` is reopened;
+Milestone 3 is `Active`; Milestone 4 and A1B-A11 are blocked; the ADR remains
+`Proposed`; and A2 remains unavailable.

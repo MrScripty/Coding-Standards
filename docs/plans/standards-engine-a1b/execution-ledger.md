@@ -1204,3 +1204,26 @@
   Milestone 3 is `Implemented`; Milestone 4 is `Active` for A1B-A11. The ADR
   remains `Proposed`, final A1b acceptance remains pending, and A2 remains
   unavailable.
+
+## 2026-08-29 - Final Review Rejection And Branch-State Replan
+
+- Independent Standards and Specification review rejected implementation
+  `88f93a33e490373fd32106d163795d21d0bd3eb7`, tree
+  `69b7cc8f2222cc766b1885ac70187cc0e77fea73`.
+- The public Git-reachability correction, unavailable-Git diagnostic, exact
+  migration coverage, named branch/alias regressions, and complete checkpoint
+  passed. Those decisions remain implemented.
+- The bounded governed-source scanner still loses a possible conditional
+  deletion, loses conditional `sys` provenance across a nested scope, and
+  orders augmented assignment so a benign binding can be reported as a
+  builtin capability.
+- `Superseded`: the claim that flat branch context, same-scope provenance, and
+  ordinary assignment-target ordering complete the admitted syntax profile.
+- Replacement direction: represent branch-exit binding state conservatively,
+  carry possible capability provenance through enclosing-scope lookup, model
+  augmented assignment as target load then value load then target store, and
+  verify each defect family directly and declaratively on CPython 3.11 and
+  3.12 without creating a general Python interpreter.
+- A1B-028, A1B-A6I, A1B-A7, and A1B-A10 return to active or pending state;
+  Milestone 3 is `Active`; Milestone 4 and A1B-A11 are blocked. The ADR remains
+  `Proposed`, and A2 remains unavailable.
