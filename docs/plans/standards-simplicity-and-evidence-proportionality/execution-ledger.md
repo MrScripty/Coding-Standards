@@ -80,3 +80,26 @@
   resolution and contains no conditional unit or edge disposition.
 - Plan structure, policy-impact tests, graph-engine tests, Python compilation,
   inline JavaScript syntax, and diff hygiene passed.
+
+## 2026-08-29 — Milestone 1 re-admission
+
+- Re-queried the migration ledger after `ae839958`. M6-I72 remains the latest
+  accepted package, no later package is admitted, and the shared M1 integration
+  write is available.
+- Found that the initial M1 write set named the structural plan checker but not
+  its fixture runner or valid and negative plan fixtures. Re-admitted the two
+  valid nonterminal lifecycle fixtures, three existing active-state negatives,
+  three focused new negatives, and the runner's exact-diagnostic assertions.
+  Also admitted both current active plans and their ledgers. Historical
+  terminal plans remain unchanged under SEP-004.
+- Found that the initial set named changed policy and global-horizon inputs but
+  not their coverage closure. Re-admitted the attestation registry, repository
+  authorization authority, all ten current attestation-owner files, one new
+  Core attestation source, and generated suite inputs. The current provider-v5
+  implementation renews every subject when the horizon changes, so limiting
+  renewal to the three changed owners would be incomplete evidence.
+- Narrowed the new Core unit to the exact nested `Simplicity And Ownership /
+  Simple, Easy, And Complection` heading path. The existing broader section
+  predates this change; treating it as new authority would create unreviewed
+  pre-existing consumers.
+- Normative implementation had not started when these omissions were found.

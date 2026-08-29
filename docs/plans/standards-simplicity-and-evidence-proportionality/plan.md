@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 accepted; normative implementation has not started
+**Current phase:** Milestone 1 re-admitted; normative implementation has not started
 
-**Next slice:** Re-query shared suite, graph, generated-input, and migration
-authority; regenerate the stale suite-input repository index in the admitted
-shared slice; and implement Milestone 1 atomically if no owner conflict exists.
+**Next slice:** Implement Milestone 1 atomically against the re-admitted owner,
+plan-fixture, graph, coverage-attestation, authorization, and generated-input
+closure.
 
 **Acceptance status:** `partial`
 
@@ -33,7 +33,7 @@ It does not design A1c or modify the Standards Engine implementation.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | SEP-A1 | Core and Architecture distinguish simple from easy, test the resulting composition after introducing a boundary, and require an artifact-level review of caller knowledge, composition-root knowledge, representative change Locality, necessary complexity, cumulative machinery, and deletion results. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| SEP-A2 | Every written plan records whether composed-design review applies; applicable material plans contain the required probes, replacement plans cannot silently lose them, and one expanded simplicity suite rejects nominal decomposition whose parts remain interleaved. | `integration` | `not-applicable` | `automated` | `pending` | pending |
+| SEP-A2 | Every nonterminal written plan governed by the revised standard records whether composed-design review applies; applicable material plans contain the required probes, replacement plans cannot silently lose them, and one expanded simplicity suite rejects nominal decomposition whose parts remain interleaved. Historical terminal plans are not rewritten. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A3 | Verification admits permanent evidence, validation, integrity, and hash mechanisms from a reachable failure, material consequence, adequate oracle, proof boundary, marginal value, cost, and retention trigger rather than from possibility or existing machinery alone. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A4 | Contracts distinguishes external, adversarial, operational, contained-programming, and escaping/corrupting failures; intact proof-bearing values are not revalidated and contained internal defects may use immediate failure and diagnostics when the scoped risk does not require recovery machinery. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A5 | Immutable authority closure and version scopes are proportional to stated consumer, lifetime, reconstruction, overlap, deployment, persistence, and migration promises while preserving non-ambient reconstruction and independent scopes where those promises require them. | `integration` | `not-applicable` | `automated` | `pending` | pending |
@@ -113,7 +113,7 @@ It does not design A1c or modify the Standards Engine implementation.
 | --- | --- | --- | --- |
 | Keep standards changes and A1c design as separate efforts. No A1c choice can become a normative example or implementation projection in this plan. | Planning | User direction and accepted audit scope | Any combined standards/A1c implementation proposal |
 | Add one Core simplicity/complection unit and one Architecture composed-design admission unit; do not create one policy unit per audit recommendation. | Core and Architecture | [Recommendation consolidation](reports/recommendation-consolidation.md) | Parallel S1/S2/C1-C4 rules |
-| Require every written plan to state `applicable` or `not-applicable` for composed-design review. Require the full artifact probe only when applicable and a reason when not applicable. | Planning | A1b replacement commit `44de7dff` removed the applicable review without detection | Optional template-only simplicity review |
+| Require every nonterminal written plan governed by the revised standard to state `applicable` or `not-applicable` for composed-design review. Require the full artifact probe only when applicable and a reason when not applicable; do not rewrite historical terminal plans. | Planning | A1b replacement commit `44de7dff` removed the applicable review without detection | Optional template-only simplicity review |
 | Expand `core-simplicity` to evaluate post-boundary composition and update existing Planning projection enforcement. Add only one new evidence-necessity suite and extend `contract-invariants` for proof lifetime/failure classification. | Verification | Evidence-lifecycle and enforcement-cost findings | One new suite for every recommendation |
 | Locate scoped correctness-risk and evidence necessity together in Verification; Security continues to own adversarial threat semantics and Contracts owns proof construction and failure behavior. | Verification, Security, Contracts | S3-S5 and C5 consolidation | A universal security threat model for internal code |
 | Preserve non-ambient closure and independent version promises, but derive their machinery from stated lifetimes and actual consumer compatibility rather than from the mere presence of a handle, artifact, or version field. | Architecture and Contracts | S6-S7 | Unconditional maximal closure or umbrella versioning |
@@ -257,9 +257,18 @@ through Core, Architecture, and Planning.
 - `prompts/full-codebase-standards-refactor.md`
 - `templates/PLAN-TEMPLATE.md`
 - `evaluation/standards-effectiveness/check-plan-structure.sh`
+- `evaluation/standards-effectiveness/verify-plan-fixtures.sh`
 - `evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv`
 - `evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv`
 - `evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv`
+- `evaluation/standards-effectiveness/fixtures/plans/valid-active.md`
+- `evaluation/standards-effectiveness/fixtures/plans/valid-blocked.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-execution-history.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-missing-next.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-objective-partial.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-missing-composed-design-applicability.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-incomplete-composed-design-review.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-unreasoned-composed-design-exclusion.md`
 - `evaluation/standards-effectiveness/suites/core-simplicity.toml`
 - `evaluation/standards-effectiveness/suites/planning-consolidation.toml`
 - `evaluation/standards-effectiveness/suites/plan-template-projection.toml`
@@ -272,6 +281,19 @@ through Core, Architecture, and Planning.
 - `evaluation/standards-effectiveness/policy-impact/topic.architecture.toml`
 - `evaluation/standards-effectiveness/policy-impact/workflow.planning.toml`
 - `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml`
+- `evaluation/standards-effectiveness/policy-coverage/authorization-authority.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/core.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/router.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.cross-platform.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.security.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/plan.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/execution-ledger.md`
@@ -281,6 +303,22 @@ through Core, Architecture, and Planning.
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/standards-graph-change-visualization.html`
+- `docs/plans/standards-verification-engine/plan.md`
+- `docs/plans/standards-verification-engine/execution-ledger.md`
+- `docs/plans/python-verification-engine-recovery/plan.md`
+- `docs/plans/python-verification-engine-recovery/execution-ledger.md`
+
+The plan-fixture paths are part of the structural checker's actual contract:
+valid nonterminal lifecycle fixtures must project the new required field,
+existing negative fixtures must still reach their intended diagnostics, and
+dedicated negative fixtures must prove missing, incomplete, and unreasoned
+decisions are rejected with exact diagnostics. The two current active plans
+also adopt the field with owner-coordinated ledger records; historical terminal
+plans are not rewritten. The coverage paths are also mandatory. Milestone 1 changes the
+global provider-v5 horizon, so every current attestation must bind the current
+review evidence; changed/new owners also need matching semantic revisions, and
+the repository authorization authority must bind this user-authorized review.
+These are current infrastructure obligations, not new general standards.
 
 **Tasks:**
 
@@ -288,9 +326,10 @@ through Core, Architecture, and Planning.
   mandates or cardinality rules.
 - [ ] Add the post-boundary composition, artifact, representative-change,
   cumulative machinery, and deletion probes.
-- [ ] Treat one hypothetical Adapter as a Seam-shape probe and normally require
-  two current real variants before permanent generality, while permitting an
-  independently justified public contract or invariant to supply the reason.
+- [ ] Treat a hypothetical Adapter only as a Seam-shape probe. Permanent
+  generality requires a current independent reason: materially distinct real
+  implementations are evidence, while a separately owned public contract,
+  trust/deployment/lifecycle boundary, or enforceable invariant may suffice.
 - [ ] Require composed-design applicability and applicable answers in written
   plans and replacement designs.
 - [ ] Replace `core-simplicity`'s separation bias with composition outcomes and
