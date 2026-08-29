@@ -135,9 +135,40 @@ fallback.
 order 187.
 
 **Current derived state:** 218 registered declarative suites, 53 retained Bash
-checkers, 57 executable nodes, 375 conservative reference edges, and 57
+checkers, 57 executable nodes, 387 conservative reference edges, and 57
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
+
+## Simplicity And Ownership Review
+
+**Applicability:** `applicable`
+
+- Independent concepts and dimensions: declarative assertion mechanics,
+  policy fixtures, suite registration, retained-checker migration, dependency
+  evidence, and terminal lifecycle remain distinct concerns.
+- State, identity, value, time, policy, and mechanism: immutable suite-catalog
+  identity and invocation state belong to the verifier; policy values belong
+  to standards-owned fixtures; migration timing belongs to this plan.
+- Caller and composition-root knowledge: the command entry point composes one
+  validated catalog and execution context, while checks receive only the
+  bounded Interfaces needed for their assertion family.
+- Representative change paths and forced owners: migrating one checker changes
+  its owner-coherent suite, fixtures, registry entry, dependency record, and
+  lifecycle evidence without forcing unrelated checks or generic mechanics to
+  change.
+- Stable Interfaces versus hidden knowledge: generic checks expose typed
+  assertion inputs and outcomes without knowing policy-specific literals,
+  suite TOML reparsing, or Bash-retirement sequencing.
+- Independent evolution, testing, failure, and replacement: generic mechanics,
+  suites, policy adapters, and migration records have separate focused
+  evidence and can fail or be replaced without inheriting each other's owners.
+- Necessary complexity and containment: catalog validation, typed outcomes,
+  dependency ordering, and the temporary mixed runner are admitted by current
+  execution and migration contracts and contained behind verifier Interfaces.
+- Deletion and cumulative machinery result: every replaced checker is deleted
+  in its accepting slice, migration-only paths have terminal dispositions, and
+  retained framework code must continue to provide Leverage rather than
+  preserve pass-through machinery.
 
 ## Milestones
 

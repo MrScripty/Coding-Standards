@@ -1,29 +1,34 @@
-case	objective	scope	facts	ownership	acceptance	next_slice	fallback	concurrency	plan_git_topology	review_binding	lifecycle_commit	expected
-small_local_change	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	allow
-multislice_plan	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	allow
-replan_trigger	changed	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	allow
-blocked_fact	clear	bounded	missing	owned	complete	one	none	not-applicable	none	content	coherent-outcome	typed-unavailable
-missing_acceptance	clear	bounded	complete	owned	missing	one	none	not-applicable	none	content	coherent-outcome	typed-unavailable
-contradictory_objective	contradictory	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	typed-invalid
-overlapping_ownership	clear	bounded	complete	overlap	complete	one	none	not-applicable	none	content	coherent-outcome	typed-invalid
-multiple_next_slices	clear	bounded	complete	owned	complete	multiple	none	not-applicable	none	content	coherent-outcome	typed-invalid
-unsupported_environment	clear	bounded	unsupported	owned	complete	one	none	not-applicable	none	content	coherent-outcome	typed-unsupported
-fixed_plan_size	clear	bounded	complete	owned	complete	one	page-count	not-applicable	none	content	coherent-outcome	typed-invalid
-fixed_question_count	clear	bounded	complete	owned	complete	one	question-count	not-applicable	none	content	coherent-outcome	typed-invalid
-commit_per_step	clear	bounded	complete	owned	complete	one	commit-cadence	not-applicable	none	content	coherent-outcome	typed-invalid
-fixed_worker_count	clear	bounded	complete	owned	complete	one	worker-count	not-applicable	none	content	coherent-outcome	typed-invalid
-headless_substitute	clear	bounded	complete	owned	complete	one	headless-fallback	not-applicable	none	content	coherent-outcome	typed-invalid
-history_as_current	clear	bounded	complete	owned	complete	one	append-only	not-applicable	none	content	coherent-outcome	typed-invalid
-implemented_as_accepted	clear	bounded	complete	owned	complete	one	implementation-success	not-applicable	none	content	coherent-outcome	typed-invalid
-template_completion	clear	bounded	complete	owned	complete	one	template-proof	not-applicable	none	content	coherent-outcome	typed-invalid
-serial_parentage	clear	bounded	complete	owned	complete	one	none	not-applicable	parentage	content	coherent-outcome	typed-invalid
-serial_commit_count	clear	bounded	complete	owned	complete	one	none	not-applicable	count	content	coherent-outcome	typed-invalid
-serial_commit_cadence	clear	bounded	complete	owned	complete	one	none	not-applicable	cadence	content	coherent-outcome	typed-invalid
-serial_ancestry_topology	clear	bounded	complete	owned	complete	one	none	not-applicable	ancestry	content	coherent-outcome	typed-invalid
-serial_exact_head_review	clear	bounded	complete	owned	complete	one	none	not-applicable	none	head	coherent-outcome	typed-invalid
-serial_ancestry_review	clear	bounded	complete	owned	complete	one	none	not-applicable	none	ancestry	coherent-outcome	typed-invalid
-serial_state_only_lifecycle	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	state-only	typed-invalid
-concurrent_content_bound	clear	bounded	complete	owned	complete	one	none	applicable	none	content	coherent-outcome	allow
-concurrent_parentage	clear	bounded	complete	owned	complete	one	none	applicable	parentage	content	coherent-outcome	typed-invalid
-concurrent_state_only_lifecycle	clear	bounded	complete	owned	complete	one	none	applicable	none	content	state-only	typed-invalid
-unknown_concurrency	clear	bounded	complete	owned	complete	one	none	unknown	none	content	coherent-outcome	typed-unavailable
+case	objective	scope	facts	ownership	acceptance	next_slice	fallback	concurrency	plan_git_topology	review_binding	lifecycle_commit	composed_review	replacement_review	expected
+small_local_change	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	not-applicable-reasoned	none	allow
+multislice_plan	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	allow
+replan_trigger	changed	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	rerun	allow
+blocked_fact	clear	bounded	missing	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-unavailable
+missing_acceptance	clear	bounded	complete	owned	missing	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-unavailable
+contradictory_objective	contradictory	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+overlapping_ownership	clear	bounded	complete	overlap	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+multiple_next_slices	clear	bounded	complete	owned	complete	multiple	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+unsupported_environment	clear	bounded	unsupported	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-unsupported
+fixed_plan_size	clear	bounded	complete	owned	complete	one	page-count	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+fixed_question_count	clear	bounded	complete	owned	complete	one	question-count	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+commit_per_step	clear	bounded	complete	owned	complete	one	commit-cadence	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+fixed_worker_count	clear	bounded	complete	owned	complete	one	worker-count	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+headless_substitute	clear	bounded	complete	owned	complete	one	headless-fallback	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+history_as_current	clear	bounded	complete	owned	complete	one	append-only	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+implemented_as_accepted	clear	bounded	complete	owned	complete	one	implementation-success	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+template_completion	clear	bounded	complete	owned	complete	one	template-proof	not-applicable	none	content	coherent-outcome	applicable-answered	none	typed-invalid
+serial_parentage	clear	bounded	complete	owned	complete	one	none	not-applicable	parentage	content	coherent-outcome	applicable-answered	none	typed-invalid
+serial_commit_count	clear	bounded	complete	owned	complete	one	none	not-applicable	count	content	coherent-outcome	applicable-answered	none	typed-invalid
+serial_commit_cadence	clear	bounded	complete	owned	complete	one	none	not-applicable	cadence	content	coherent-outcome	applicable-answered	none	typed-invalid
+serial_ancestry_topology	clear	bounded	complete	owned	complete	one	none	not-applicable	ancestry	content	coherent-outcome	applicable-answered	none	typed-invalid
+serial_exact_head_review	clear	bounded	complete	owned	complete	one	none	not-applicable	none	head	coherent-outcome	applicable-answered	none	typed-invalid
+serial_ancestry_review	clear	bounded	complete	owned	complete	one	none	not-applicable	none	ancestry	coherent-outcome	applicable-answered	none	typed-invalid
+serial_state_only_lifecycle	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	state-only	applicable-answered	none	typed-invalid
+concurrent_content_bound	clear	bounded	complete	owned	complete	one	none	applicable	none	content	coherent-outcome	applicable-answered	none	allow
+concurrent_parentage	clear	bounded	complete	owned	complete	one	none	applicable	parentage	content	coherent-outcome	applicable-answered	none	typed-invalid
+concurrent_state_only_lifecycle	clear	bounded	complete	owned	complete	one	none	applicable	none	content	state-only	applicable-answered	none	typed-invalid
+unknown_concurrency	clear	bounded	complete	owned	complete	one	none	unknown	none	content	coherent-outcome	applicable-answered	none	typed-unavailable
+missing_composed_applicability	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	missing	none	typed-unavailable
+unanswered_composed_review	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-unanswered	none	typed-unavailable
+unreasoned_composed_exclusion	clear	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	not-applicable-unreasoned	none	typed-unavailable
+replacement_inherits_review	changed	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	inherited	typed-invalid
+replacement_reruns_review	changed	bounded	complete	owned	complete	one	none	not-applicable	none	content	coherent-outcome	applicable-answered	rerun	allow

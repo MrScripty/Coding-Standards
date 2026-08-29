@@ -62,3 +62,13 @@ well-formed source construct outside the declared support set; and
 `unavailable` when required declaration, generator, consumer, oracle, or
 dependency-decision authority cannot be obtained. Do not partially generate,
 silently omit semantics, or fall back to inferred consumer shape.
+
+## Composed-Design Projection
+
+Generation may make authoring easy without making the produced artifact simple.
+Apply the composed-design admission to the generated Interface, its consumers,
+the generator, runtime interpretation, compatibility and invalidation promises,
+and every owner a representative semantic change must touch. The generated Seam
+reduces complection only when callers and peer Modules can ignore unrelated
+representation, ordering, lifecycle, policy, and version knowledge; automating
+their coordinated propagation is not the same result.

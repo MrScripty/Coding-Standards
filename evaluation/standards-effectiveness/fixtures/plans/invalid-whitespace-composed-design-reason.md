@@ -1,8 +1,10 @@
-# Plan: Invalid Missing Next Slice
+# Plan: Whitespace Composed-Design Reason
 
 **Plan status:** `Active`
 
 **Current phase:** Milestone 0
+
+**Next slice:** Implement the admitted change.
 
 **Acceptance status:** `pending`
 
@@ -12,25 +14,27 @@
 
 ## Objective
 
-Demonstrate missing next slice.
+Deliver one valid change.
 
 ## Objective Acceptance
 
-Focused evidence passes.
+| ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| A1 | Focused evidence passes. | `contract` | `not-applicable` | `automated` | `pending` | `pending` |
 
 ## Binding Decisions
 
-- Fixture intentionally omits a next slice.
+- One Module owns the change.
 
 ## Simplicity And Ownership Review
 
 **Applicability:** `not-applicable`
 
-**Reason:** This fixture isolates next-slice validation and admits no composed software design.
+**Reason:** `   `
 
 ## Milestones
 
-### Milestone 0: Invalid
+### Milestone 0: Change
 
 **Status:** `Active`
 
@@ -40,7 +44,7 @@ Focused evidence passes.
 
 ## Re-Plan Triggers
 
-- `none`
+- Ownership changes.
 
 ## Final Acceptance
 

@@ -6249,3 +6249,11 @@
   all 218 suites, numeric lifecycle, and generated freshness pass. Final graph:
   53 Bash checkers, 57 nodes, 375 edges, 57 components. No wrapper,
   compatibility representation, dual authority, or fallback remains.
+## 2026-08-29 — Composed-design field migration
+
+- Adopted the current Planning requirement for nonterminal plans and recorded
+  an applicable artifact-level composed-design review against the accepted
+  generic-engine and Bash-retirement design.
+- This documentation migration changes neither verifier lifecycle authority
+  nor package admission; M6-I72 remains the latest accepted package and a fresh
+  graph audit remains next.

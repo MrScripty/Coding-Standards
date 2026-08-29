@@ -25,6 +25,24 @@ for fixture in "$FIXTURES"/invalid-*.md; do
     invalid-objective-partial.md)
       expected="$fixture: objective A1 has invalid status partial"
       ;;
+    invalid-missing-composed-design-applicability.md)
+      expected="$fixture: expected one ## Simplicity And Ownership Review heading"
+      ;;
+    invalid-incomplete-composed-design-review.md)
+      expected="$fixture: applicable composed-design review requires Deletion and cumulative machinery result"
+      ;;
+    invalid-unreasoned-composed-design-exclusion.md)
+      expected="$fixture: not-applicable composed-design review requires a concrete Reason"
+      ;;
+    invalid-whitespace-composed-design-reason.md)
+      expected="$fixture: not-applicable composed-design review requires a concrete Reason"
+      ;;
+    invalid-whitespace-composed-design-probe.md)
+      expected="$fixture: applicable composed-design review requires Deletion and cumulative machinery result"
+      ;;
+    invalid-duplicate-composed-design-probe.md)
+      expected="$fixture: applicable composed-design review requires Independent concepts and dimensions"
+      ;;
   esac
   if [[ -n "$expected" && "$output" != "$expected" ]]; then
     printf 'Invalid plan fixture produced the wrong diagnostic: %s\n' \

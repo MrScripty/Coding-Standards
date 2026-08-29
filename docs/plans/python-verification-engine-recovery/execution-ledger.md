@@ -317,3 +317,11 @@
   justify caching, parallel execution, partial validation, or another owner.
 - Result: Milestone 9 and the audit follow-up recovery are accepted. Milestone 5
   Bash retirement resumes only after a fresh graph audit.
+## 2026-08-29 — Composed-design field migration
+
+- Adopted the current Planning requirement for nonterminal plans and recorded
+  an applicable artifact-level composed-design review against the existing
+  recovery design.
+- This documentation migration changes neither recovery lifecycle authority
+  nor checker-package admission; the fresh post-recovery graph audit remains
+  the next slice.

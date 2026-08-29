@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 re-admitted; normative implementation has not started
+**Current phase:** Milestone 1 accepted; Milestone 2 has not started
 
-**Next slice:** Implement Milestone 1 atomically against the re-admitted owner,
-plan-fixture, graph, coverage-attestation, authorization, and generated-input
-closure.
+**Next slice:** Re-query migration and shared-authority ownership, reconcile the
+live graph against N2 dispositions, and admit Milestone 2 before normative
+edits.
 
 **Acceptance status:** `partial`
 
@@ -32,8 +32,8 @@ It does not design A1c or modify the Standards Engine implementation.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| SEP-A1 | Core and Architecture distinguish simple from easy, test the resulting composition after introducing a boundary, and require an artifact-level review of caller knowledge, composition-root knowledge, representative change Locality, necessary complexity, cumulative machinery, and deletion results. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| SEP-A2 | Every nonterminal written plan governed by the revised standard records whether composed-design review applies; applicable material plans contain the required probes, replacement plans cannot silently lose them, and one expanded simplicity suite rejects nominal decomposition whose parts remain interleaved. Historical terminal plans are not rewritten. | `integration` | `not-applicable` | `automated` | `pending` | pending |
+| SEP-A1 | Core and Architecture distinguish simple from easy, test the resulting composition after introducing a boundary, and require an artifact-level review of caller knowledge, composition-root knowledge, representative change Locality, necessary complexity, cumulative machinery, and deletion results. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](reports/milestone-1-composed-simplicity-acceptance.md) |
+| SEP-A2 | Every nonterminal written plan governed by the revised standard records whether composed-design review applies; applicable material plans contain the required probes, replacement plans cannot silently lose them, and one expanded simplicity suite rejects nominal decomposition whose parts remain interleaved. Historical terminal plans are not rewritten. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](reports/milestone-1-composed-simplicity-acceptance.md) |
 | SEP-A3 | Verification admits permanent evidence, validation, integrity, and hash mechanisms from a reachable failure, material consequence, adequate oracle, proof boundary, marginal value, cost, and retention trigger rather than from possibility or existing machinery alone. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A4 | Contracts distinguishes external, adversarial, operational, contained-programming, and escaping/corrupting failures; intact proof-bearing values are not revalidated and contained internal defects may use immediate failure and diagnostics when the scoped risk does not require recovery machinery. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A5 | Immutable authority closure and version scopes are proportional to stated consumer, lifetime, reconstruction, overlap, deployment, persistence, and migration promises while preserving non-ambient reconstruction and independent scopes where those promises require them. | `integration` | `not-applicable` | `automated` | `pending` | pending |
@@ -157,37 +157,38 @@ It does not design A1c or modify the Standards Engine implementation.
 
 **Applicability:** `applicable`
 
-- Independent concepts: composed-design admission; evidence/risk admission;
+- Independent concepts and dimensions: composed-design admission; evidence/risk admission;
   proof lifetime and failure classification; promise proportionality;
   bounded replanning; graph projection and visualization.
-- What/who/how/when/where/why interleavings: normative meaning stays in its
+- State, identity, value, time, policy, and mechanism: normative meaning stays in its
   owner; Planning records admission; Verification decides evidence; Contracts
   owns proof/failure; the graph records consumption; the HTML only presents
   graph data.
 - Caller and composition-root knowledge: adopters need only routed normative
   Modules. The plan integration owner must coordinate shared graph, suite, and
   generated-input writes serially.
-- Representative change path: adding the contained-internal-failure rule
+- Representative change paths and forced owners: adding the contained-internal-failure rule
   changes Contracts, its consuming profiles/prompts/template, one existing
   fixture family and suite, policy units/catalog/relationships, and generated
   suite inputs; it does not change A1b runtime code.
 - Stable Interfaces versus hidden knowledge: TSV manifests are the planning
   Interface to the visualization; the generator reads authoritative current
   TOML directly and does not duplicate graph semantics.
-- Necessary versus incidental complexity: five normative families and one
+- Independent evolution, testing, failure, and replacement: A1c design,
+  verifier migration, and any later evidence-portfolio retirement remain
+  separate plans and can evolve, fail, or be replaced independently.
+- Necessary complexity and containment: five normative families and one
   bounded prototype disposition replace twelve parallel proposals. The
   prototype rejected a sixth normative family in this plan. Existing suites
   are expanded where they already own the decision family; one new suite is
   added only because no current owner decides evidence necessity.
-- Deletion result: removing the HTML leaves normative meaning intact; removing
+- Deletion and cumulative machinery result: removing the HTML leaves normative meaning intact; removing
   edge dispositions makes complete impact review unprovable; removing the new
   evidence unit leaves S3/S5/S11 without an owner; removing separate Contracts
-  proof ownership would mix evidence selection with value validity.
-- Cumulative machinery: one Core unit, one Architecture unit, two existing
+  proof ownership would mix evidence selection with value validity. The
+  cumulative addition is one Core unit, one Architecture unit, two existing
   Contracts headings promoted to units, one Verification unit, one new suite,
   no new verifier framework, and no new A1/A1b runtime mechanism.
-- Future independent changes: A1c design, verifier migration, and any later
-  evidence-portfolio retirement remain separate plans.
 
 ## Milestones
 
@@ -269,6 +270,10 @@ through Core, Architecture, and Planning.
 - `evaluation/standards-effectiveness/fixtures/plans/invalid-missing-composed-design-applicability.md`
 - `evaluation/standards-effectiveness/fixtures/plans/invalid-incomplete-composed-design-review.md`
 - `evaluation/standards-effectiveness/fixtures/plans/invalid-unreasoned-composed-design-exclusion.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-reason.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-probe.md`
+- `evaluation/standards-effectiveness/fixtures/plans/invalid-duplicate-composed-design-probe.md`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv`
 - `evaluation/standards-effectiveness/suites/core-simplicity.toml`
 - `evaluation/standards-effectiveness/suites/planning-consolidation.toml`
 - `evaluation/standards-effectiveness/suites/plan-template-projection.toml`
@@ -295,6 +300,10 @@ through Core, Architecture, and Planning.
 - `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/plan.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/execution-ledger.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/issues.md`
@@ -311,8 +320,8 @@ through Core, Architecture, and Planning.
 The plan-fixture paths are part of the structural checker's actual contract:
 valid nonterminal lifecycle fixtures must project the new required field,
 existing negative fixtures must still reach their intended diagnostics, and
-dedicated negative fixtures must prove missing, incomplete, and unreasoned
-decisions are rejected with exact diagnostics. The two current active plans
+dedicated negative fixtures must prove missing, incomplete, whitespace-only,
+duplicated, and unreasoned decisions are rejected with exact diagnostics. The two current active plans
 also adopt the field with owner-coordinated ledger records; historical terminal
 plans are not rewritten. The coverage paths are also mandatory. Milestone 1 changes the
 global provider-v5 horizon, so every current attestation must bind the current
@@ -322,25 +331,32 @@ These are current infrastructure obligations, not new general standards.
 
 **Tasks:**
 
-- [ ] Define simple, easy, complex/complected, and compose without technology
+- [x] Define simple, easy, complex/complected, and compose without technology
   mandates or cardinality rules.
-- [ ] Add the post-boundary composition, artifact, representative-change,
+- [x] Add the post-boundary composition, artifact, representative-change,
   cumulative machinery, and deletion probes.
-- [ ] Treat a hypothetical Adapter only as a Seam-shape probe. Permanent
+- [x] Treat a hypothetical Adapter only as a Seam-shape probe. Permanent
   generality requires a current independent reason: materially distinct real
   implementations are evidence, while a separately owned public contract,
   trust/deployment/lifecycle boundary, or enforceable invariant may suffice.
-- [ ] Require composed-design applicability and applicable answers in written
+- [x] Require composed-design applicability and applicable answers in written
   plans and replacement designs.
-- [ ] Replace `core-simplicity`'s separation bias with composition outcomes and
+- [x] Replace `core-simplicity`'s separation bias with composition outcomes and
   verify plan projection with the existing Planning suites.
-- [ ] Register units, artifacts, and every applicable relationship atomically.
+- [x] Register units, artifacts, and every applicable relationship atomically.
 
 **Acceptance gate:** SEP-A1 and SEP-A2 pass, every Milestone 1 edge has its
 planned final disposition, `--state transition --check` passes after
 regeneration, and the general standards make no A1c choice.
 
-**Status:** `Planned`
+**Acceptance:** [Milestone 1 evidence](reports/milestone-1-composed-simplicity-acceptance.md)
+records the accepted normative meaning, fixtures, 49-unit/413-relationship
+closure, full current provider-v5 coverage renewal, current-plan migration,
+generated-input and checker-evidence refreshes, closed migration renewal, and
+transition visualization. The change introduces no A1c decision or A1/A1b
+runtime mechanism.
+
+**Status:** `Accepted`
 
 ### Milestone 2: Evidence, Risk, And Proof Lifetime
 

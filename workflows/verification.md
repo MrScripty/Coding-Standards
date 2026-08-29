@@ -112,6 +112,16 @@ supporting checks for affected risks and contracts.
 Do not require an unrelated high-cost claim. Do not omit a direct claim because
 a cheaper supporting gate passed.
 
+## Simplicity Evidence Boundary
+
+Verification can establish the selected behavior, contract, failure, and risk
+claims of a design. Passing tests, type checks, schemas, generated freshness,
+coverage, mutation checks, or formal review does not establish that the composed
+artifact is simple. A comparison fixture may supply simplicity evidence only
+when it actually examines Interface knowledge, interleaving, representative
+change Locality, independent evolution, or deletion results. Keep that design
+evidence distinct from reliability evidence.
+
 ## Acceptance Paths And Boundaries
 
 For each non-local claim, name the observable start, externally meaningful

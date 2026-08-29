@@ -26,6 +26,12 @@ Deliver a hardware-backed user capability.
 
 - Simulation cannot accept the hardware objective.
 
+## Simplicity And Ownership Review
+
+**Applicability:** `not-applicable`
+
+**Reason:** This fixture records lifecycle behavior for an unavailable external device and admits no composed software design.
+
 ## Milestones
 
 ### Milestone 0: Headless path

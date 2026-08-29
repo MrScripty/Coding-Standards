@@ -149,4 +149,78 @@ for file in "$@"; do
     printf '%s: final plan status does not match header\n' "$file" >&2
     exit 1
   fi
+
+  if [[ "$status" =~ ^(Planned|Active|Blocked|Implemented|Verifying)$ ]]; then
+    simplicity_heading="## Simplicity And Ownership Review"
+    if [[ "$(grep -cFx "$simplicity_heading" "$file" || true)" -ne 1 ]]; then
+      printf '%s: expected one %s heading\n' \
+        "$file" "$simplicity_heading" >&2
+      exit 1
+    fi
+
+    simplicity_section="$(
+      awk '
+        /^## Simplicity And Ownership Review$/ { in_section = 1; next }
+        in_section && /^## / { exit }
+        in_section { print }
+      ' "$file"
+    )"
+    if [[ "$(grep -c '^\*\*Applicability:\*\* ' <<<"$simplicity_section" || true)" -ne 1 ]]; then
+      printf '%s: composed-design review requires one Applicability field\n' \
+        "$file" >&2
+      exit 1
+    fi
+    applicability="$(
+      sed -n 's/^\*\*Applicability:\*\* //p' <<<"$simplicity_section" |
+        tr -d '`'
+    )"
+    if [[ ! "$applicability" =~ ^(applicable|not-applicable)$ ]]; then
+      printf '%s: invalid composed-design Applicability %s\n' \
+        "$file" "$applicability" >&2
+      exit 1
+    fi
+
+    if [[ "$applicability" == "not-applicable" ]]; then
+      reason_count="$(
+        grep -c '^\*\*Reason:\*\*[[:space:]]' <<<"$simplicity_section" || true
+      )"
+      reason="$(
+        sed -n 's/^\*\*Reason:\*\*[[:space:]]*//p' <<<"$simplicity_section" |
+          tr -d '`' |
+          sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
+      )"
+      if [[ "$reason_count" -ne 1 || -z "$reason" || "$reason" =~ ^\[.*\]$ || "$reason" =~ ^(TBD|pending)$ ]]; then
+        printf '%s: not-applicable composed-design review requires a concrete Reason\n' \
+          "$file" >&2
+        exit 1
+      fi
+    else
+      for probe in \
+        "Independent concepts and dimensions" \
+        "State, identity, value, time, policy, and mechanism" \
+        "Caller and composition-root knowledge" \
+        "Representative change paths and forced owners" \
+        "Stable Interfaces versus hidden knowledge" \
+        "Independent evolution, testing, failure, and replacement" \
+        "Necessary complexity and containment" \
+        "Deletion and cumulative machinery result"; do
+        probe_count="$(
+          awk -v prefix="- ${probe}:" '
+            index($0, prefix) == 1 { count++ }
+            END { print count + 0 }
+          ' <<<"$simplicity_section"
+        )"
+        answer="$(
+          sed -n "s/^- ${probe}:[[:space:]]*//p" <<<"$simplicity_section" |
+            tr -d '`' |
+            sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
+        )"
+        if [[ "$probe_count" -ne 1 || -z "$answer" || "$answer" =~ ^\[.*\]$ || "$answer" =~ ^(TBD|pending)$ ]]; then
+          printf '%s: applicable composed-design review requires %s\n' \
+            "$file" "$probe" >&2
+          exit 1
+        fi
+      done
+    fi
+  fi
 done

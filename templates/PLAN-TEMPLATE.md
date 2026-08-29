@@ -79,15 +79,22 @@ this section when the finding is demonstrably isolated.
 
 ## Simplicity And Ownership Review
 
-Use for cross-layer, stateful, contract-heavy, concurrent, or refactor work.
+**Applicability:** `applicable` or `not-applicable`
 
-- Independent concepts:
-- Intentional coupling:
-- Accidental coupling risk:
-- Canonical authority scope and referenced authorities:
-- Version and identity-invalidation scopes:
-- Policy/state/lifecycle owners:
-- Future changes that should remain independent:
+Every nonterminal written plan keeps this field. If `not-applicable`, replace
+the probe below with `**Reason:** [Concrete reason]`. If `applicable`, answer
+every probe with current artifact evidence.
+
+- Independent concepts and dimensions:
+- State, identity, value, time, policy, and mechanism:
+  - Canonical authority scope and referenced authorities:
+  - Version and identity-invalidation scopes:
+- Caller and composition-root knowledge:
+- Representative change paths and forced owners:
+- Stable Interfaces versus hidden knowledge:
+- Independent evolution, testing, failure, and replacement:
+- Necessary complexity and containment:
+- Deletion and cumulative machinery result:
 
 ## Milestones
 
@@ -127,6 +134,8 @@ caused it. The Commit workflow owns commit boundaries.
 ## Re-Plan Triggers
 
 - [Fact or failure that invalidates a decision, scope, sequence, or gate]
+- [Material replacement, cumulative machinery, or observed propagation that
+  requires a new composed-design decision]
 
 ## Concurrent Work
 

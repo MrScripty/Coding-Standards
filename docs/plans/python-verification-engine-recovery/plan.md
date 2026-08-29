@@ -115,22 +115,36 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 
 ## Simplicity And Ownership Review
 
-- Independent concepts: neutral graph mechanics, canonical corpus membership,
+**Applicability:** `applicable`
+
+- Independent concepts and dimensions: neutral graph mechanics, canonical corpus membership,
   metadata parsing, suite catalog loading, check execution, policy adapters,
   performance evidence, and migration lifecycle.
-- Intentional coupling: the repository composition root injects explicit
+- State, identity, value, time, policy, and mechanism: canonical documents own
+  policy identity and metadata values; the catalog owns invocation state;
+  migration lifecycle remains in this plan rather than generic mechanics.
+- Caller and composition-root knowledge: the repository composition root injects explicit
   metadata and suite providers into the neutral graph; verifier checks consume
   one catalog through their execution context.
-- Accidental coupling risk: copying metadata into the corpus manifest, exposing
+- Representative change paths and forced owners: adding a canonical Module
+  changes corpus membership and metadata loading without changing neutral
+  graph mechanics; adding a suite changes catalog data without check-local
+  parsing.
+- Stable Interfaces versus hidden knowledge: copying metadata into the corpus manifest, exposing
   policy schemas through generic checks, or retaining migration modules because
-  tests or incumbent imports exist.
-- Policy/state/lifecycle owners: canonical documents own standards metadata;
+  tests or incumbent imports exist would leak hidden knowledge across an
+  otherwise stable provider Interface.
+- Independent evolution, testing, failure, and replacement: canonical documents own standards metadata;
   Router owns applicability; suites and fixtures own policy; the verifier owns
-  mechanics; the migration plan owns temporary lifecycle.
-- Future changes that should remain independent: adding a standards module
-  changes membership and metadata but not graph mechanics; adding a suite
-  changes catalog data but not check-local parsers; changing policy changes
-  suites or adapters but not generic checks.
+  mechanics; the migration plan owns temporary lifecycle, so those concerns can
+  be tested, fail, and be replaced independently.
+- Necessary complexity and containment: strict providers, typed outcomes, and
+  migration adapters exist only for accepted corpus, execution, and retirement
+  contracts and remain behind the verifier Module's Interfaces.
+- Deletion and cumulative machinery result: migration-only paths require a
+  current consumer and terminal disposition; pass-through or incumbent-only
+  machinery is deleted, while retained generic mechanics must still provide
+  Leverage over their exposed Interface.
 
 ## Milestones
 

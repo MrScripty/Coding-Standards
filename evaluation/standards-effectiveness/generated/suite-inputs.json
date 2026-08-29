@@ -422,7 +422,7 @@
       ]
     },
     {
-      "digest": "sha256:f6bdb0caf5e29587c56ca30b0b26d5848ee56ad37f4fa96eeb3264350945c7e4",
+      "digest": "sha256:df936dc1db6ba93d36678d0555fd7e1f14e3373418077d8cc0a3d714a6e3fb95",
       "path": "CORE-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -1702,7 +1702,7 @@
       ]
     },
     {
-      "digest": "sha256:5776e102860e6b432dd7cffa7b7e9a3b6d7940c43cc34620ea59bb9cd12c01c2",
+      "digest": "sha256:e39c6302e8ae2b6082dfdd23b3a49974b328920b55e26e26ec13a8085a76253e",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1908,14 +1908,29 @@
       ]
     },
     {
-      "digest": "sha256:ac25b794c35a6017aa60fbd016b35496279c171f768827c93a5b32b1da9ea526",
+      "digest": "sha256:2e19823694bcb75b34d7daa0451f34359b0f9a6c73fa255bcdbcfe9c88753e57",
       "path": "evaluation/standards-effectiveness/check-plan-structure.sh",
       "state": "present",
       "uses": [
         {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1b-public-cutover"
+        },
+        {
           "check": "retained-plan-structure-consumer",
           "role": "content",
           "suite": "evidence-oracle-boundaries"
+        },
+        {
+          "check": "plan-structure-enforcement",
+          "role": "content",
+          "suite": "planning-consolidation"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
         },
         {
           "check": "retained-plan-structure-consumer",
@@ -3739,14 +3754,24 @@
       ]
     },
     {
-      "digest": "sha256:bdb5bd15da926ae1a0d63a3f6a033f1ceeae5214f8c6b188cb42727269e82eea",
+      "digest": "sha256:8f44d5bce70c39cc06239e6bf3337dd9ca1875e94ceb2dc3df270b7ac8c981c3",
       "path": "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv",
       "state": "present",
       "uses": [
         {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1b-public-cutover"
+        },
+        {
           "check": "decisions",
           "role": "decision-table",
           "suite": "core-simplicity"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
         }
       ]
     },
@@ -4608,7 +4633,7 @@
       ]
     },
     {
-      "digest": "sha256:1dabbd27457c5c24ddbbdb55092be53f7ed48d92d7be8668a0be96a838a85d85",
+      "digest": "sha256:798ea90e7689e69da70cec395b2d325c864b4ba4a463e445e3a9b454d8bcb2c4",
       "path": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
       "state": "present",
       "uses": [
@@ -4696,7 +4721,7 @@
       ]
     },
     {
-      "digest": "sha256:730b3838340d5bea31cf021a2589992fba27caded75df7a8945355c18740b0f1",
+      "digest": "sha256:d26a1ff73765ac9b7200ccce6671f54f83f4ccfeecb9dffbcea006aed0cc6d0e",
       "path": "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv",
       "state": "present",
       "uses": [
@@ -4762,7 +4787,7 @@
       ]
     },
     {
-      "digest": "sha256:0e6344602140cbc1c51d82ea44575f3ce6019ee9dcff9e0d7839ddd2c02b5ade",
+      "digest": "sha256:9be16ae34dbf47026e0bf3f7f8c0a3d34dcc40664d66c8366f7825801a72d629",
       "path": "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv",
       "state": "present",
       "uses": [
@@ -6247,7 +6272,7 @@
       ]
     },
     {
-      "digest": "sha256:1f9a377067541425d3191688bf14e093df62d0a6d001bf057a416a4d2ae53b9d",
+      "digest": "sha256:5dbdb2e8acbfab3bb7183a17f233f38e8fb4e85fb02a139cdde6bef9f593ff8c",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6259,7 +6284,7 @@
       ]
     },
     {
-      "digest": "sha256:c57b1515c2aff52c8148542f5a4d2c4cf0f71a309ebf764a1463d522bb3b33de",
+      "digest": "sha256:428757964214810a8e9ddfcbc0170234e12f85310c6cd48abc21e252959ae1c2",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -8318,7 +8343,7 @@
       ]
     },
     {
-      "digest": "sha256:e8ab695c8569d04c00f3d116d362d7e148831f7dd4602052ed990dfea6bff6a4",
+      "digest": "sha256:54a9c1d3f6a4917f502c8ddb90c4e5f564f33b31f2c3de251ca93905792e2741",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -8335,8 +8360,25 @@
       ]
     },
     {
-      "digest": "sha256:dfe9a671b4f6e4b80c41ff651a54635183f903a19d48d60eca3364cbf86100c2",
+      "digest": "sha256:eb6fa6f3544fabc6108bf8c64a9f53460962f8860825ad90f9c250998a77aa6b",
       "path": "evaluation/standards-effectiveness/policy-impact-registry.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1b-public-cutover"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a95f268ad0f3979da9ea9fc20c5150d311eae141828b0070caceb5297dcd00a0",
+      "path": "evaluation/standards-effectiveness/policy-impact/core.toml",
       "state": "present",
       "uses": [
         {
@@ -8386,7 +8428,7 @@
       ]
     },
     {
-      "digest": "sha256:31378631b7a10160bc137afbfb2303c599559a4dd0f01573d5f4ca5572735474",
+      "digest": "sha256:e9bdd6f11160724fdb36241a5724f3300e91aff1596300f7dbba50d12d078fc2",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
       "state": "present",
       "uses": [
@@ -8488,7 +8530,7 @@
       ]
     },
     {
-      "digest": "sha256:9f102bdbfdc3c1891840106a69c6a59f1a9f31f9fe78e38b44b2619df5b12649",
+      "digest": "sha256:68c64f79ece9f67d515fba56746b5fe6cb258b405b681216023b090c5a77a12f",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
       "state": "present",
       "uses": [
@@ -8522,7 +8564,7 @@
       ]
     },
     {
-      "digest": "sha256:9c8cf53e03b996f61a700f01b337a742b3977109b47bfa0ecc5b84e00895003d",
+      "digest": "sha256:441d51dde2adc89e5514e4842eb90ddea1f98725886a799d3c2c4aecccbcd5a8",
       "path": "evaluation/standards-effectiveness/policy-units/architecture.toml",
       "state": "present",
       "uses": [
@@ -8578,6 +8620,33 @@
     {
       "digest": "sha256:ac676e29d0c2bb26ead78bc032be8f7d8d6dfaa7ec80d2c3aff9de08633c68b0",
       "path": "evaluation/standards-effectiveness/policy-units/contracts.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "policy-impact-migration",
+          "role": "fixture-policy-impact",
+          "suite": "a1b-public-cutover"
+        },
+        {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1b-public-cutover"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:94729127724bda8217739315a35fbe46f918fcd5986f3820a9aafdf258ec10db",
+      "path": "evaluation/standards-effectiveness/policy-units/core.toml",
       "state": "present",
       "uses": [
         {
@@ -8689,7 +8758,7 @@
       ]
     },
     {
-      "digest": "sha256:be4ae0e99d959d26d6791aa885565d348f6e295b9d5ac12fdb2aa21bc3aeb5fa",
+      "digest": "sha256:041f16df38f2c5398f8866eff325513d0ad3398598d385032f8b9f546a294d6a",
       "path": "evaluation/standards-effectiveness/policy-units/planning.toml",
       "state": "present",
       "uses": [
@@ -8716,7 +8785,7 @@
       ]
     },
     {
-      "digest": "sha256:17e215e40e9379c761aa161b28d35ddeab9dec3722fd37bdf12e58a83fb963e9",
+      "digest": "sha256:9a45a63f086be502086060cb2c8958ddf83fff655414bf534a66f23c8dcf844e",
       "path": "evaluation/standards-effectiveness/policy-units/registry.toml",
       "state": "present",
       "uses": [
@@ -9531,7 +9600,7 @@
       ]
     },
     {
-      "digest": "sha256:2150ee102276f9a5feeb8427848f0c06c228fb3fedd3c045e6d35e6be0825c3c",
+      "digest": "sha256:a3721e760976390879a21ba37496b69d247849226f8f552b6b791a1c848ea2c1",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml",
       "state": "present",
       "uses": [
@@ -10891,7 +10960,7 @@
       ]
     },
     {
-      "digest": "sha256:52545316046a420b379f2ffcaed80519c348ef8ebce08a61b02f0daf7e64afa4",
+      "digest": "sha256:9c9c0d03c617897e77371a966af41731d62662e21dac7dfa7473e53e056d74d7",
       "path": "evaluation/standards-effectiveness/suites/plan-template-projection.toml",
       "state": "present",
       "uses": [
@@ -10925,7 +10994,7 @@
       ]
     },
     {
-      "digest": "sha256:4d83256354a3415f4b0da4d1dfac913c886551161c2151778f78597903797e24",
+      "digest": "sha256:ed60c312b58e2429104c9888161963c7d96f4091fca35714f610fc1a866dc2d0",
       "path": "evaluation/standards-effectiveness/suites/planning-consolidation.toml",
       "state": "present",
       "uses": [
@@ -13558,7 +13627,7 @@
       ]
     },
     {
-      "digest": "sha256:a2f57622793e1d854dd632a50fedeba4b1b057f9f9160bc50273ffa3ab9ae5c5",
+      "digest": "sha256:962bee0a4f0f3e75e04245c81196601561e30111e739ab37a1d8b8e1e2e426c7",
       "path": "evaluation/standards-effectiveness/verify-plan-fixtures.sh",
       "state": "present",
       "uses": [
@@ -14663,7 +14732,7 @@
       ]
     },
     {
-      "digest": "sha256:62596d6e2ce72386c99579a611f8070f2ef3c232ee4d0ea5fe4b4883c0ff1903",
+      "digest": "sha256:1ad11180b53b1e0c46f33c24d9cc6475aa5613066713a82640ea4a7c9ad8a9cd",
       "path": "profiles/applications/library.md",
       "state": "present",
       "uses": [
@@ -14676,6 +14745,11 @@
           "check": "policy-impact-migration",
           "role": "proposed-policy-impact",
           "suite": "a1b-public-cutover"
+        },
+        {
+          "check": "library-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "current-structure",
@@ -14740,7 +14814,7 @@
       ]
     },
     {
-      "digest": "sha256:1706a35e1fb368f2a3ce464390c4926330fa2f751a1bf5022f53b2e15eb73f8a",
+      "digest": "sha256:270482e78e7414f3e01afa1c9f8ec9d101e4224f73e4add2b6bd28de2b95e1b8",
       "path": "profiles/boundaries/generated-contract.md",
       "state": "present",
       "uses": [
@@ -14758,6 +14832,11 @@
           "check": "generated-contract-projection",
           "role": "content",
           "suite": "contract-authority-scope"
+        },
+        {
+          "check": "generated-contract-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "profile-projection",
@@ -16807,7 +16886,7 @@
       ]
     },
     {
-      "digest": "sha256:199b376c200cfe08ec2cfbf8566a634cce7c6cf538aaa96577f9ac5b077dcec5",
+      "digest": "sha256:5d1868321a674d081fae9e3ba68ce54e467eb4918bd1127629f28dc637af28c1",
       "path": "prompts/full-codebase-standards-refactor.md",
       "state": "present",
       "uses": [
@@ -16815,6 +16894,11 @@
           "check": "policy-impact-migration",
           "role": "proposed-policy-impact",
           "suite": "a1b-public-cutover"
+        },
+        {
+          "check": "full-review-prompt-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "registered-consumers",
@@ -16844,7 +16928,7 @@
       ]
     },
     {
-      "digest": "sha256:497a068d6bd027844dedcf084c38d729e67e1a66d5ca11e34b2ded24b0eee230",
+      "digest": "sha256:bcd4cf46be381477d84adc2a8ca0cfaee58cce209a61fbe39274145a97e362b5",
       "path": "prompts/implement-plan.md",
       "state": "present",
       "uses": [
@@ -16867,6 +16951,11 @@
           "check": "implementation-projections",
           "role": "content",
           "suite": "contract-authority-scope"
+        },
+        {
+          "check": "implementation-prompt-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "registered-consumers",
@@ -16906,7 +16995,7 @@
       ]
     },
     {
-      "digest": "sha256:81b3901c7b6d82a76c4be6fbc7685e6ccd405e935ee3c7a52e8dfd5602672f4c",
+      "digest": "sha256:cb4ce31ee5394b552d014581360901096e6432f32c89d6542e5704e9f550cf1a",
       "path": "prompts/planning.md",
       "state": "present",
       "uses": [
@@ -16924,6 +17013,11 @@
           "check": "planning-projections",
           "role": "content",
           "suite": "contract-authority-scope"
+        },
+        {
+          "check": "prompt-projections",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "agent-projections",
@@ -17968,7 +18062,7 @@
       ]
     },
     {
-      "digest": "sha256:ec8def87cc81e4b22c860c3f9bd9909d94e124a6404ae35a26ecfec982180577",
+      "digest": "sha256:83c4284cc8a0daf7eca6703e2445b73ce5c22647abeb9759e5c87d5da21513b7",
       "path": "templates/PLAN-TEMPLATE.md",
       "state": "present",
       "uses": [
@@ -17991,6 +18085,11 @@
           "check": "plan-template-projection",
           "role": "content",
           "suite": "contract-authority-scope"
+        },
+        {
+          "check": "template-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "template-projection",
@@ -22332,7 +22431,7 @@
       ]
     },
     {
-      "digest": "sha256:a3db31aca89cbbc319e5f634214313e2ba6ac96c2215db8688b77242d0c90439",
+      "digest": "sha256:f29e8735858bcc33bb7fef4dad7bc14601b807b316b26690ca5696001409bdbb",
       "path": "topics/architecture.md",
       "state": "present",
       "uses": [
@@ -22365,6 +22464,11 @@
           "check": "architecture-policy",
           "role": "content",
           "suite": "contract-authority-scope"
+        },
+        {
+          "check": "architecture-owner",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "architecture-policy",
@@ -23843,7 +23947,7 @@
       ]
     },
     {
-      "digest": "sha256:2bb678260486cf7554ffe3e836deeebb3e9ec7182ad3fdfee9374f88d5970d13",
+      "digest": "sha256:c0a6b27116a72790286e76138b80ea18625ad78db33570b96aeb4a154251b20f",
       "path": "workflows/implementation.md",
       "state": "present",
       "uses": [
@@ -23861,6 +23965,11 @@
           "check": "implementation-commit-route",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "workflow-projections",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "workflow",
@@ -23960,7 +24069,7 @@
       ]
     },
     {
-      "digest": "sha256:db43943e7ad42c324ee8d7a3ca771f7434083f878837c4b7dc495c646a1d0fc5",
+      "digest": "sha256:64fe02a58189705f522e7f1b22b05f6995ea36dcb8653242d082f23c26ac6949",
       "path": "workflows/planning.md",
       "state": "present",
       "uses": [
@@ -23978,6 +24087,11 @@
           "check": "planning-isolation-projection",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "planning-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "planning-workflow",
@@ -24421,7 +24535,7 @@
       ]
     },
     {
-      "digest": "sha256:3ae6997a4385a35c1a5e7d09dafa025e0c2956a53c557fb6e23bc41fb6b9969a",
+      "digest": "sha256:1f5d44d1fbcb443e9dc30aba2f27f952248e24be21a1f3c44c748fee50b74e93",
       "path": "workflows/verification.md",
       "state": "present",
       "uses": [
@@ -24449,6 +24563,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "verification-projection",
+          "role": "content",
+          "suite": "core-simplicity"
         },
         {
           "check": "owner",
@@ -24773,7 +24892,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:47b60509fc8e59bd3a59155133a61d84368dd3b4ebbf9aec5de6dff6a212a443",
+    "digest": "sha256:0c46cdc48960131df2de743e9f4563a21192d95a97789fa57d820576a8a053b1",
     "uses": [
       {
         "check": "policy-impact-migration",
@@ -25180,7 +25299,7 @@
       "path": "evaluation/standards-effectiveness/suites/core-code-discipline.toml"
     },
     {
-      "digest": "sha256:2150ee102276f9a5feeb8427848f0c06c228fb3fedd3c045e6d35e6be0825c3c",
+      "digest": "sha256:a3721e760976390879a21ba37496b69d247849226f8f552b6b791a1c848ea2c1",
       "id": "core-simplicity",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml"
     },
@@ -25585,7 +25704,7 @@
       "path": "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml"
     },
     {
-      "digest": "sha256:52545316046a420b379f2ffcaed80519c348ef8ebce08a61b02f0daf7e64afa4",
+      "digest": "sha256:9c9c0d03c617897e77371a966af41731d62662e21dac7dfa7473e53e056d74d7",
       "id": "plan-template-projection",
       "path": "evaluation/standards-effectiveness/suites/plan-template-projection.toml"
     },
@@ -25625,7 +25744,7 @@
       "path": "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml"
     },
     {
-      "digest": "sha256:4d83256354a3415f4b0da4d1dfac913c886551161c2151778f78597903797e24",
+      "digest": "sha256:ed60c312b58e2429104c9888161963c7d96f4091fca35714f610fc1a866dc2d0",
       "id": "planning-consolidation",
       "path": "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
     },

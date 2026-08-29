@@ -33,6 +33,54 @@ deployment, trust, scaling, lifecycle, and change facts. Do not require a
 universal layer count, layer name, directory tree, source-root README threshold,
 or inward-dependency diagram.
 
+## Composed Design Admission
+
+Apply this admission when a material design introduces or changes Modules,
+Interfaces, Seams, Adapters, composition roots, or several permanent mechanisms
+that together create a new operational or maintenance obligation. Re-run it
+when a replacement design changes that composition or observed change
+propagation is materially broader than predicted.
+
+Record the produced artifact, not only its proposed parts:
+
+1. independent concerns and their what, who, how, when, where, and why
+   dimensions;
+2. required and accidental interleavings of state, identity, value, time,
+   policy, and mechanism;
+3. everything callers, peer Modules, and the composition root must know;
+4. representative changes and every owner each change is semantically forced
+   to touch;
+5. which dependencies carry stable values or Interfaces and which expose
+   hidden representation, ordering, lifecycle, policy, or version knowledge;
+6. whether the parts can evolve, be verified, fail, and be replaced
+   independently;
+7. the deletion result for each new permanent Module, Seam, Adapter, registry,
+   validator, generator, version, or other mechanism; and
+8. necessary inherent complexity, where it is contained, and the cumulative
+   machinery retained by the complete design.
+
+A useful Module has Depth: its Interface gives callers Leverage while hiding
+more knowledge than it requires them to learn. Evaluate Locality through the
+representative changes; a nominal split is still complected when the same
+knowledge and verification must propagate through its callers or peer Modules.
+Use the deletion test: if deleting a Module makes its complexity disappear, it
+was incidental; if the necessary complexity reappears across callers, the
+Module was containing it.
+
+A hypothetical Adapter may probe the shape of a possible Seam, but does not
+justify permanent generality. Generality requires a current independent reason.
+Materially distinct real implementations are evidence; a separately owned
+public contract, trust, deployment or lifecycle boundary, or enforceable
+invariant may also justify a Seam without multiple current implementations.
+Keep test-only or internal Seams inside the Module unless callers need the
+variation as part of its Interface.
+
+The admission must be able to keep one deep coherent Module, introduce a Seam,
+aggregate adjacent machinery, or delete or decline a guarantee. File, type,
+Module, dependency, or test counts are diagnostic inputs, never the verdict.
+Missing material artifact or change-path facts are `unavailable`; contradictory
+ownership, Interface, or coupling claims are `invalid`.
+
 ## Authority Scope Admission
 
 Before a module, schema, manifest, registry, model, interface, or other artifact

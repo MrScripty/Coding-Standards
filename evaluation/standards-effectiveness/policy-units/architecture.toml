@@ -1,6 +1,12 @@
 schema_version = 1
 
 [[policy_unit]]
+id = "topic.architecture.composed-design-admission"
+module = "topic.architecture"
+heading_path = ["Composed Design Admission"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "topic.architecture.authority-scope-admission"
 module = "topic.architecture"
 heading_path = ["Authority Scope Admission"]

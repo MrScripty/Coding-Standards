@@ -24,6 +24,12 @@ Focused evidence passes.
 
 - Plan should remain current.
 
+## Simplicity And Ownership Review
+
+**Applicability:** `not-applicable`
+
+**Reason:** This fixture isolates embedded execution-history rejection and admits no composed software design.
+
 ## Milestones
 
 ### Milestone 0: Invalid

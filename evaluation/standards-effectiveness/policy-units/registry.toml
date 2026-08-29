@@ -1,6 +1,7 @@
 schema_version = 1
 sources = [
   "evaluation/standards-effectiveness/policy-units/architecture.toml",
+  "evaluation/standards-effectiveness/policy-units/core.toml",
   "evaluation/standards-effectiveness/policy-units/commit.toml",
   "evaluation/standards-effectiveness/policy-units/contracts.toml",
   "evaluation/standards-effectiveness/policy-units/cross-platform.toml",

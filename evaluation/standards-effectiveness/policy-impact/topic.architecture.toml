@@ -2,6 +2,110 @@ schema_version = 2
 owner = "topic.architecture"
 
 [[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "profile.application.library"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Library Interfaces are admitted from Depth, Leverage, caller knowledge, Locality, and current independent reasons for generality."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Generated boundaries must reduce composed knowledge rather than merely automate coordinated propagation."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Planning owns the recorded applicability decision and complete artifact probe for material composed designs."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Implementation reports hidden knowledge and representative changes that reach wider than the admitted owners."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The planning prompt asks the Architecture-owned artifact questions and limits hypothetical Adapters to Seam-shape probes."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The implementation prompt preserves and challenges the admitted composition against observed changes."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "prompts/full-codebase-standards-refactor.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Full review tests representative change paths, Interface knowledge, and deletion results."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The template projects the Architecture-specific probe when composed-design review applies."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "evaluation/standards-effectiveness/check-plan-structure.sh"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The checker rejects a missing applicability record, an unreasoned exclusion, and an unanswered applicable review."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The joint fixture tests composition, Depth, caller knowledge, change Locality, independent evolution, and deletion."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "core-simplicity"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The existing suite owns the coherent Core and Architecture decision family."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The Planning fixture distinguishes mandatory applicability from conditional composed-design detail."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "plan-template-projection"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The template suite enforces the Architecture projection without adding another suite."
+
+[[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"

@@ -14,9 +14,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-context coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.branch-context provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -33,9 +34,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-history-review coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.branch-history-review provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -52,9 +54,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.cherry-pick-lineage coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.cherry-pick-lineage provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -71,9 +74,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.commit-message coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.commit-message provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -90,9 +94,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.hook-bypass-authority coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.hook-bypass-authority provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -109,9 +114,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.integration-mechanisms coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.integration-mechanisms provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -128,9 +134,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.invalid-outcomes coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.invalid-outcomes provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -147,9 +154,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.isolation-applicability coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.isolation-applicability provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -166,9 +174,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.per-commit-boundary coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.per-commit-boundary provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -185,9 +194,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.rewrite-authority coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.rewrite-authority provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -204,9 +214,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.terminal-branch-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.terminal-branch-lifecycle provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -223,9 +234,10 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.topology coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.topology provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -242,7 +254,8 @@ evidence = [
   "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.worktree-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.worktree-lifecycle provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

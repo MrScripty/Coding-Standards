@@ -1,9 +1,12 @@
-case	identity	objective	acceptance	scope	decisions	milestones	replan	concurrency	final	optional_mandate	fixed_count	copied_policy	fallback	expected
-complete-projection	yes	yes	yes	yes	yes	yes	yes	yes	yes	no	no	no	none	allow
-bounded-local-projection	yes	yes	yes	yes	yes	yes	yes	conditional	yes	no	no	no	none	allow
-missing-identity	no	yes	yes	yes	yes	yes	yes	yes	yes	no	no	no	none	typed-unavailable
-missing-acceptance	yes	yes	no	yes	yes	yes	yes	yes	yes	no	no	no	none	typed-unavailable
-mandatory-optional-section	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	no	no	none	typed-invalid
-fixed-two-milestones	yes	yes	yes	yes	yes	yes	yes	yes	yes	no	yes	no	none	typed-invalid
-copied-owner-procedure	yes	yes	yes	yes	yes	yes	yes	yes	yes	no	no	yes	none	typed-invalid
-legacy-structure-fallback	yes	yes	yes	yes	yes	yes	yes	yes	yes	no	no	no	restore-frozen	typed-invalid
+case	identity	objective	acceptance	scope	decisions	milestones	replan	concurrency	final	composed_applicability	composed_detail	composition_replan	optional_mandate	fixed_count	copied_policy	fallback	expected
+complete-projection	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	yes	no	no	no	none	allow
+bounded-local-projection	yes	yes	yes	yes	yes	yes	yes	conditional	yes	no	not-applicable	yes	no	no	no	none	allow
+missing-identity	no	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	yes	no	no	no	none	typed-unavailable
+missing-acceptance	yes	yes	no	yes	yes	yes	yes	yes	yes	yes	answered	yes	no	no	no	none	typed-unavailable
+mandatory-optional-section	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	yes	yes	no	no	none	typed-invalid
+fixed-two-milestones	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	yes	no	yes	no	none	typed-invalid
+copied-owner-procedure	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	yes	no	no	yes	none	typed-invalid
+legacy-structure-fallback	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	yes	no	no	no	restore-frozen	typed-invalid
+missing-composed-applicability	yes	yes	yes	yes	yes	yes	yes	yes	yes	missing	answered	yes	no	no	no	none	typed-unavailable
+mandatory-composed-detail	yes	yes	yes	yes	yes	yes	yes	yes	yes	no	mandatory	yes	no	no	no	none	typed-invalid
+missing-composition-replan	yes	yes	yes	yes	yes	yes	yes	yes	yes	yes	answered	no	no	no	no	none	typed-unavailable

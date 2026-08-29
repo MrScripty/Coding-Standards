@@ -1,5 +1,6 @@
 schema_version = 2
 sources = [
+  "evaluation/standards-effectiveness/policy-coverage/attestations/core.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/router.toml",
   "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",

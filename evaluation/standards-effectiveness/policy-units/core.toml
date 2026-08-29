@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "core.simplicity-and-complection"
+module = "core"
+heading_path = ["Simplicity And Ownership", "Simple, Easy, And Complection"]
+semantic_revision = 1

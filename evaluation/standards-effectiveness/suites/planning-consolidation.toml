@@ -22,6 +22,8 @@ concurrency = ["applicable", "not-applicable", "unknown"]
 plan_git_topology = ["ancestry", "cadence", "count", "none", "parentage"]
 review_binding = ["ancestry", "content", "head"]
 lifecycle_commit = ["coherent-outcome", "state-only"]
+composed_review = ["applicable-answered", "applicable-unanswered", "missing", "not-applicable-reasoned", "not-applicable-unreasoned"]
+replacement_review = ["inherited", "none", "rerun", "unknown"]
 expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
 [[checks.rules]]
 outcome = "typed-invalid"
@@ -34,6 +36,7 @@ any = [
   { field = "plan_git_topology", op = "ne", value = "none" },
   { field = "review_binding", op = "ne", value = "content" },
   { field = "lifecycle_commit", op = "eq", value = "state-only" },
+  { field = "replacement_review", op = "eq", value = "inherited" },
 ]
 [[checks.rules]]
 outcome = "typed-unsupported"
@@ -48,6 +51,10 @@ any = [
   { field = "facts", op = "eq", value = "missing" },
   { field = "acceptance", op = "eq", value = "missing" },
   { field = "concurrency", op = "eq", value = "unknown" },
+  { field = "composed_review", op = "eq", value = "missing" },
+  { field = "composed_review", op = "eq", value = "applicable-unanswered" },
+  { field = "composed_review", op = "eq", value = "not-applicable-unreasoned" },
+  { field = "replacement_review", op = "eq", value = "unknown" },
 ]
 
 [[checks]]
@@ -69,6 +76,9 @@ required = [
   "they do not\nown Git commit topology",
   "Bind review to\nthe identified material content",
   "`Implemented` is not complete",
+  "Every nonterminal written plan governed by this revision records the\ncomposed-design review as `applicable` or `not-applicable`",
+  "When applicable,\nanswer every artifact probe",
+  "Do not inherit a prior design's composed-design review after a material\nreplacement",
 ]
 prohibited = []
 
@@ -78,6 +88,13 @@ type = "text"
 path = "workflows/commit.md"
 required = ["do not mirror commit cadence into planning artifacts"]
 prohibited = ["update active plan, issue, and ledger state when those artifacts exist"]
+
+[[checks]]
+id = "plan-structure-enforcement"
+type = "text"
+path = "evaluation/standards-effectiveness/check-plan-structure.sh"
+required = ["## Simplicity And Ownership Review", "composed-design review requires one Applicability field", "not-applicable composed-design review requires a concrete Reason", "applicable composed-design review requires %s"]
+prohibited = []
 
 [[checks]]
 id = "planning-prompt-projection"

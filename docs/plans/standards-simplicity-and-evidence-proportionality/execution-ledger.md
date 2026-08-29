@@ -103,3 +103,68 @@
   predates this change; treating it as new authority would create unreviewed
   pre-existing consumers.
 - Normative implementation had not started when these omissions were found.
+
+## 2026-08-29 — Milestone 1 generated-evidence re-admission
+
+- Final generated-artifact verification rejected the candidate because the
+  retained Bash plan checker's structure inventory was stale after its admitted
+  implementation change.
+- The same checker also participates in conservative dependency nodes, edges,
+  and components. Returned M1 to `Verifying` and admitted those four exact
+  generated evidence paths before regeneration; no acceptance commit had been
+  created.
+- This refresh does not retire a checker, change package authority, or admit a
+  new verifier framework. It keeps the active migration's generated evidence
+  coherent with the already admitted checker change.
+
+## 2026-08-29 — Milestone 1 compatibility-closure re-admission
+
+- The first complete checkpoint passed 224 of 226 suites and exposed two
+  compatibility omissions before acceptance.
+- Restored the existing canonical-authority and version/invalidation prompts as
+  nested evidence within the new state/identity artifact probe; this preserves
+  the registered Contract Authority Scope projection without weakening the new
+  eight-part review.
+- Admitted renewal of the A1b closed relationship-migration fixture. The new
+  Core declaration source and all N1 edge additions/revisions are proposed
+  graph semantics that the current closed-registry check must disposition even
+  though the A1b runtime implementation remains unchanged.
+
+## 2026-08-29 — Milestone 1 acceptance
+
+- Accepted Core's simple/easy/complection distinction, Architecture's complete
+  artifact probe, conditional Planning admission, implementation and
+  verification projections, Library and Generated Contract projections, and
+  all prompt/template projections.
+- Registered two new policy units and revised two Planning units. The accepted
+  graph contains 49 units and 413 direct relationships: 26 N1 additions and
+  eight in-place semantic updates against the fixed 47/387 baseline.
+- Renewed all 49 current provider-v5 subject views, including new Core and
+  Architecture attestations and Planning revision 2 attestations. This global
+  renewal is current infrastructure behavior, not a new general standard.
+- The complete checkpoint passed all 226 declarative suites and all 53 retained
+  Bash checkers. Focused plan fixtures, policy-impact tests, graph tests,
+  analysis tests, coverage loading, generated freshness, and transition
+  visualization also passed.
+- Generated checker evidence is current at 53 retained checkers, 57 nodes, 387
+  conservative reference edges, and 57 components. The closed A1b migration
+  evidence dispositions all current proposed graph semantics without changing
+  A1b runtime or package authority.
+- SEP-A1 and SEP-A2 are satisfied. Milestone 2 is not admitted; its first step
+  remains a fresh migration/shared-authority and graph-disposition query.
+
+## 2026-08-29 — Milestone 1 independent-review repair
+
+- Independent pre-commit review rejected whitespace-only answers and duplicate
+  probe occurrences that the first structural checker could accept. The
+  checker now trims values, requires exactly one concrete Reason for an
+  exclusion and exactly one concrete answer for each applicable probe, and has
+  focused whitespace and duplication negatives.
+- The review also found that the first decision Interface conflated diagnostic
+  counts and hypothetical Seam probes with invalid verdict authority. The
+  revised Interface distinguishes count-as-verdict from diagnostic-count and a
+  hypothetical permanent-generality basis from a probe that creates no
+  permanent Seam; both permitted roles now have positive cases.
+- Corrected the two active-owner migration-ledger heading levels. These repairs
+  change neither the 49-unit/413-relationship policy graph nor A1/A1b runtime,
+  A1c, or verifier Python source.

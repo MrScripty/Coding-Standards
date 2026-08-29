@@ -5,6 +5,7 @@ principal_id = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail
 capability = "standards.review.audit"
 authorization_evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 revocation_authority_id = "standards.repository.coverage.revocations"
 revocation_authority_semantic_revision = 1

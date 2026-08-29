@@ -59,6 +59,8 @@ An active plan states:
 - current acceptance status;
 - constraints and assumptions that affect decisions;
 - binding decisions and owners;
+- composed-design review applicability and, when applicable, the complete
+  Architecture-owned artifact probe;
 - current phase;
 - exactly one next slice or `none` for terminal status;
 - milestones with goals, write sets, gates, and lifecycle states;
@@ -67,6 +69,13 @@ An active plan states:
 - links to ledger, issues, reports, and ADRs.
 
 Use [the plan template](../templates/PLAN-TEMPLATE.md).
+
+Every nonterminal written plan governed by this revision records the
+composed-design review as `applicable` or `not-applicable`. When applicable,
+answer every artifact probe in
+[Architecture](../topics/architecture.md#composed-design-admission). When not
+applicable, record the concrete reason. Historical terminal plans are not
+rewritten solely to add this field.
 
 ## Lifecycle
 
@@ -267,7 +276,10 @@ Stop and re-plan when:
 - a directly affected file outside the stated write set changes objective,
   ownership, contract, risk, or acceptance scope;
 - a lower-fidelity check was being used for a higher-fidelity objective; or
-- a new dependency changes sequencing.
+- a new dependency changes sequencing;
+- a replacement design changes the admitted composition; or
+- cumulative machinery or observed change propagation materially exceeds the
+  composed-design admission.
 
 Re-planning must:
 
@@ -275,7 +287,12 @@ Re-planning must:
 2. replace the binding decision in the active plan;
 3. mark the prior decision or milestone `Superseded`;
 4. update downstream milestones, gates, and next slice; and
-5. obtain clarification when no standards-compliant decision is supported.
+5. re-run the composed-design artifact probe when its composition changed; and
+6. obtain clarification when no standards-compliant decision is supported.
+
+Do not inherit a prior design's composed-design review after a material
+replacement. The replacement owns a current applicability decision and, when
+applicable, current answers.
 
 Do not preserve rejected behavior as a fallback unless a real contract requires
 it and the routed contract guidance permits it.

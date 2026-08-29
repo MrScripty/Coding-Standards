@@ -1,0 +1,82 @@
+schema_version = 2
+owner = "core"
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "topic.architecture"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Architecture specializes artifact-level simplicity and tests the composition after introducing a Seam."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Planning records composed-design applicability, artifact probes, and cumulative machinery."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Implementation preserves the admitted composition and reports wider-than-admitted propagation."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Verification keeps correctness evidence distinct from simplicity evidence."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The planning prompt projects the composed-artifact review and Seam-shape boundary."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The implementation prompt rechecks predicted and observed representative-change Locality."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "prompts/full-codebase-standards-refactor.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Full review evaluates the composed artifact instead of using construct counts as a verdict."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The plan template records applicability and the general artifact probe."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The fixture models post-Seam composition, caller knowledge, change Locality, independent evolution, and deletion."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "core-simplicity"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The suite enforces the first-class Core simplicity and complection unit."

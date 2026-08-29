@@ -20,6 +20,9 @@ milestones = ["no", "yes"]
 replan = ["no", "yes"]
 concurrency = ["conditional", "yes"]
 final = ["no", "yes"]
+composed_applicability = ["missing", "no", "yes"]
+composed_detail = ["answered", "mandatory", "not-applicable"]
+composition_replan = ["no", "yes"]
 optional_mandate = ["no", "yes"]
 fixed_count = ["no", "yes"]
 copied_policy = ["no", "yes"]
@@ -28,17 +31,25 @@ expected = ["allow", "typed-invalid", "typed-unavailable"]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
-any = [{ field = "fallback", op = "ne", value = "none" }, { field = "optional_mandate", op = "ne", value = "no" }, { field = "fixed_count", op = "ne", value = "no" }, { field = "copied_policy", op = "ne", value = "no" }]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "optional_mandate", op = "ne", value = "no" }, { field = "fixed_count", op = "ne", value = "no" }, { field = "copied_policy", op = "ne", value = "no" }, { field = "composed_detail", op = "eq", value = "mandatory" }]
 [[checks.rules]]
 outcome = "typed-unavailable"
 [checks.rules.when]
-any = [{ field = "identity", op = "ne", value = "yes" }, { field = "objective", op = "ne", value = "yes" }, { field = "acceptance", op = "ne", value = "yes" }, { field = "scope", op = "ne", value = "yes" }, { field = "decisions", op = "ne", value = "yes" }, { field = "milestones", op = "ne", value = "yes" }, { field = "replan", op = "ne", value = "yes" }, { field = "final", op = "ne", value = "yes" }]
+any = [{ field = "identity", op = "ne", value = "yes" }, { field = "objective", op = "ne", value = "yes" }, { field = "acceptance", op = "ne", value = "yes" }, { field = "scope", op = "ne", value = "yes" }, { field = "decisions", op = "ne", value = "yes" }, { field = "milestones", op = "ne", value = "yes" }, { field = "replan", op = "ne", value = "yes" }, { field = "final", op = "ne", value = "yes" }, { field = "composed_applicability", op = "eq", value = "missing" }, { field = "composition_replan", op = "ne", value = "yes" }]
+
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "composed_applicability", op = "eq", value = "no" },
+  { field = "composed_detail", op = "ne", value = "not-applicable" },
+]
 
 [[checks]]
 id = "template-content"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "## Milestones", "A plan may contain one milestone and one implementation slice", "File count, layer count,", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "## Concurrent Work", "## Repository Isolation", "## Final Acceptance"]
+required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "**Applicability:** `applicable` or `not-applicable`", "Caller and composition-root knowledge", "Deletion and cumulative machinery result", "## Milestones", "A plan may contain one milestone and one implementation slice", "File count, layer count,", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "Material replacement, cumulative machinery, or observed propagation", "## Concurrent Work", "## Repository Isolation", "## Final Acceptance"]
 prohibited = ["## Inputs", "## Clarifying Questions", "## Definition of Done", "## Execution Notes", "## Commit Cadence Notes", "## Optional Subagent Assignment", "## Recommendations", "## Completion Summary", "### Milestone 2:", "/media/", "/home/"]
 
 [[checks]]

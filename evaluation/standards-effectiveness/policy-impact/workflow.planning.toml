@@ -79,7 +79,7 @@ consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-d
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-consolidation"
-rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+rationale = "Fixture records required composed-design applicability, answered review, reasoned exclusion, and missing-review outcomes."
 
 [[relationships]]
 source = "workflow.planning.current-state"
@@ -95,7 +95,7 @@ consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-d
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-consolidation"
-rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+rationale = "Fixture records replacement-review renewal and rejects inherited composed-design admission."
 
 [[relationships]]
 source = "workflow.planning.findings"
@@ -143,7 +143,7 @@ consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projec
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:plan-template-projection"
-rationale = "Fixture records required and conditional plan-template projections."
+rationale = "Fixture distinguishes mandatory composed-design applicability from conditional detail and missing projection."
 
 [[relationships]]
 source = "workflow.planning.repository-isolation"
@@ -239,7 +239,7 @@ consumer = "plan-template-projection"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:plan-template-projection"
-rationale = "Suite enforces the Planning-derived template projection."
+rationale = "Suite enforces the revised required composed-design applicability and conditional probe projection."
 
 [[relationships]]
 source = "workflow.planning.repository-isolation"
@@ -295,7 +295,7 @@ consumer = "planning-consolidation"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-consolidation"
-rationale = "Suite enforces canonical Planning ownership and process decisions."
+rationale = "Suite enforces durable plan ownership of the composed-design applicability decision and review content."
 
 [[relationships]]
 source = "workflow.planning.acceptance-claims"
@@ -327,7 +327,7 @@ consumer = "planning-consolidation"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-consolidation"
-rationale = "Suite enforces canonical Planning ownership and process decisions."
+rationale = "Suite enforces renewed composed-design admission after material replacement."
 
 [[relationships]]
 source = "workflow.planning.findings"
@@ -447,7 +447,7 @@ consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
+rationale = "The planning entrypoint re-runs the artifact probe after material replacement instead of inheriting a prior review."
 
 [[relationships]]
 source = "workflow.planning.concurrent-work"
@@ -471,7 +471,31 @@ consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:plan-template-projection"
-rationale = "The plan template projects current Planning artifact fields and conditional concurrency records."
+rationale = "The plan template makes composed-design applicability mandatory and the complete artifact probe conditional."
+
+[[relationships]]
+source = "workflow.planning.active-plan-fields"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The planning entrypoint creates and preserves the required composed-design applicability record."
+
+[[relationships]]
+source = "workflow.planning.active-plan-fields"
+consumer = "evaluation/standards-effectiveness/check-plan-structure.sh"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Structural validation rejects a missing applicability record, an unreasoned exclusion, and an unanswered applicable review."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The plan template records material replacement, cumulative machinery, and observed propagation as composed-design re-plan triggers."
 
 [[relationships]]
 source = "workflow.planning.repository-isolation"

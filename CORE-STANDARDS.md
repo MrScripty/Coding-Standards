@@ -91,6 +91,33 @@ meaning requires a typed diagnostic or a recorded decision before structural
 change. Do not fall back to fixed call counts, blanket DRY, universal brevity,
 speculative extension points, existing terminology, or copied examples.
 
+### Simple, Easy, And Complection
+
+For these standards, **simple** describes an artifact whose distinct concerns
+are not interleaved. **Easy** describes an approach that is familiar, nearby,
+available, or convenient to a particular person or environment. Easy and simple
+may coincide, but neither proves the other.
+
+An artifact is **complex** or **complected** when otherwise independent concerns
+must be understood or changed together because their knowledge, state, identity,
+value, time, location, representation, mechanism, or policy is interleaved. To
+**compose** is only to place Modules together. Composition, decomposition, a
+named owner, or a new Seam is not by itself evidence of simplicity.
+
+Judge the produced artifact and its evolution, not the ease of authoring,
+generation, installation, familiarity, or conformance to an incumbent pattern.
+After introducing a Seam, inspect the composed result: callers and peer Modules
+should no longer need unrelated representation, state, lifecycle, ordering,
+location, policy, or version knowledge. A design that moves those facts into a
+composition root or forces them through every change remains complected.
+
+Use representative change paths, Interface knowledge, independent evolution,
+and deletion results as evidence. Counts may locate accumulated cost but cannot
+decide simplicity. Tests, types, schemas, generated freshness, coverage, and
+formal review can establish selected correctness claims; their success does not
+establish that the design is simple, and the mechanisms themselves remain part
+of the artifact under review.
+
 ## Authority And Boundaries
 
 - Validate untrusted input at every trust boundary before constructing a

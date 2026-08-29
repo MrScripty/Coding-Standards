@@ -1,10 +1,10 @@
-# Plan: Partial Objective
+# Plan: Missing Composed-Design Applicability
 
 **Plan status:** `Active`
 
 **Current phase:** Milestone 0
 
-**Next slice:** Finish the objective.
+**Next slice:** Implement the admitted change.
 
 **Acceptance status:** `pending`
 
@@ -14,27 +14,21 @@
 
 ## Objective
 
-Deliver one complete contract.
+Deliver one valid change.
 
 ## Objective Acceptance
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | The contract is complete. | `contract` | `not-applicable` | `automated` | `partial` | `reports/partial.md` |
+| A1 | Focused evidence passes. | `contract` | `not-applicable` | `automated` | `pending` | `pending` |
 
 ## Binding Decisions
 
-- The parser owns objective status validation.
-
-## Simplicity And Ownership Review
-
-**Applicability:** `not-applicable`
-
-**Reason:** This fixture isolates objective-state validation and admits no composed software design.
+- One Module owns the change.
 
 ## Milestones
 
-### Milestone 0: Contract
+### Milestone 0: Change
 
 **Status:** `Active`
 
@@ -44,7 +38,7 @@ Deliver one complete contract.
 
 ## Re-Plan Triggers
 
-- `none`
+- Ownership changes.
 
 ## Final Acceptance
 

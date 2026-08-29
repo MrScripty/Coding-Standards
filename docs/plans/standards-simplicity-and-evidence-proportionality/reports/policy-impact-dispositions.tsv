@@ -55,7 +55,7 @@ N1-P	N1	workflow.planning.active-plan-fields	plan-template-projection	enforcemen
 N1-P	N1	workflow.planning.active-plan-fields	planning-consolidation	enforcement-suite-projection	update	yes	Enforce durable plan ownership of the composed-design decision.
 N1-P	N1	workflow.planning.active-plan-fields	templates/PLAN-TEMPLATE.md	template-projection	update	yes	Make the applicability field mandatory and the full probe conditional.
 N1-P	N1	workflow.planning.active-plan-fields	prompts/planning.md	prompt-projection	add	yes	The planning entrypoint must create and preserve the required applicability record.
-N1-P	N1	workflow.planning.active-plan-fields	evaluation/standards-effectiveness/check-plan-structure.sh	implementation-projection	add	yes	Structural validation rejects a missing applicability record and an unanswered applicable review.
+N1-P	N1	workflow.planning.active-plan-fields	evaluation/standards-effectiveness/check-plan-structure.sh	implementation-projection	add	yes	Structural validation rejects a missing applicability record, an unanswered applicable review, and an unreasoned exclusion.
 N1-R	N1	workflow.planning.replanning	evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv	fixture-projection	update	yes	Add replacement-plan and cumulative-machinery review triggers.
 N1-R	N1	workflow.planning.replanning	planning-consolidation	enforcement-suite-projection	update	yes	Enforce renewed composed-design admission after material replacement.
 N1-R	N1	workflow.planning.replanning	prompts/planning.md	prompt-projection	update	yes	Planning re-runs the artifact probe instead of inheriting the prior review.
@@ -85,7 +85,7 @@ N1-A	N1	topic.architecture.composed-design-admission	prompts/planning.md	prompt-
 N1-A	N1	topic.architecture.composed-design-admission	prompts/implement-plan.md	prompt-projection	add	yes	Implementation prompt preserves and challenges the admitted composition.
 N1-A	N1	topic.architecture.composed-design-admission	prompts/full-codebase-standards-refactor.md	prompt-projection	add	yes	Full review tests representative change paths and deletion results.
 N1-A	N1	topic.architecture.composed-design-admission	templates/PLAN-TEMPLATE.md	template-projection	add	yes	Template projects the Architecture-specific fields when applicable.
-N1-A	N1	topic.architecture.composed-design-admission	evaluation/standards-effectiveness/check-plan-structure.sh	implementation-projection	add	yes	Checker enforces presence and answered applicability for the recorded admission.
+N1-A	N1	topic.architecture.composed-design-admission	evaluation/standards-effectiveness/check-plan-structure.sh	implementation-projection	add	yes	Checker enforces presence, complete applicable answers, and a concrete reason for an exclusion.
 N1-A	N1	topic.architecture.composed-design-admission	evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv	fixture-projection	add	yes	The joint fixture tests composition, Depth, Locality, and deletion facts.
 N1-A	N1	topic.architecture.composed-design-admission	core-simplicity	enforcement-suite-projection	add	yes	One existing suite owns the coherent Core/Architecture decision family.
 N1-A	N1	topic.architecture.composed-design-admission	evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv	fixture-projection	add	yes	Planning fixture distinguishes mandatory applicability from conditional detail.
