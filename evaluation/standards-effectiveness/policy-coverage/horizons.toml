@@ -1,7 +1,7 @@
 schema_version = 1
 id = "audit-horizon.policy-impact-consumers"
 provider = "standards-analysis:policy-impact-consumer-horizon"
-version = 4
+version = 5
 suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
 suite_inputs = "evaluation/standards-effectiveness/generated/suite-inputs.json"
 edge_source_registry = "evaluation/standards-effectiveness/edge-source-registry.toml"

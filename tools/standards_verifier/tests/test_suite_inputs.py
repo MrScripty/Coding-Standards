@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import tempfile
 import textwrap
 import unittest
@@ -51,9 +52,16 @@ class SuiteInputProjectionTest(unittest.TestCase):
             type = "path_state"
             present = ["present.md"]
             absent = ["absent.md"]
+
+            [[checks]]
+            id = "tracked"
+            type = "git_index_paths"
+            tracked = ["present.md"]
             """,
         )
         self.write("present.md", "present\n")
+        subprocess.run(("git", "init", "-q"), cwd=self.root, check=True)
+        subprocess.run(("git", "add", "-A"), cwd=self.root, check=True)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -67,7 +75,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
         projection = compile_suite_input_projection(self.root)
 
         self.assertEqual(projection["contract"], CONTRACT)
-        inputs = {item["path"]: item for item in projection["inputs"]}
+        inputs = {item["path"]: item for item in projection["files"]}
         self.assertEqual(inputs["present.md"]["state"], "present")
         self.assertTrue(inputs["present.md"]["digest"].startswith("sha256:"))
         self.assertEqual(inputs["absent.md"]["state"], "absent")
@@ -76,6 +84,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
             [use["check"] for use in inputs["present.md"]["uses"]],
             ["content", "state"],
         )
+        self.assertIsNotNone(projection["repository_index"])
 
     def test_missing_required_present_input_is_rejected(self) -> None:
         (self.root / "present.md").unlink()
@@ -111,13 +120,129 @@ class SuiteInputProjectionTest(unittest.TestCase):
             "evaluation/standards-effectiveness/suite-registry.toml",
         )
         self.assertGreater(len(projection["suites"]), 0)
-        self.assertGreater(len(projection["inputs"]), 0)
+        self.assertGreater(len(projection["files"]), 0)
+        files = {item["path"]: item for item in projection["files"]}
+        self.assertIn(
+            "evaluation/standards-effectiveness/verify-contract-ownership.sh",
+            files,
+        )
+        lifecycle_uses = {
+            (use["suite"], use["check"], use["role"])
+            for use in files[
+                "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv"
+            ]["uses"]
+        }
+        self.assertIn(
+            (
+                "numeric-comparison-classification",
+                "candidate-lifecycle",
+                "numeric-lifecycle",
+            ),
+            lifecycle_uses,
+        )
+        checker_uses = {
+            (use["suite"], use["check"], use["role"])
+            for use in files[
+                "evaluation/standards-effectiveness/verify-contract-ownership.sh"
+            ]["uses"]
+        }
+        self.assertIn(
+            (
+                "numeric-comparison-classification",
+                "candidate-lifecycle",
+                "numeric-lifecycle",
+            ),
+            checker_uses,
+        )
+
+    def test_repository_index_membership_changes_projection_identity(self) -> None:
+        first = compile_suite_input_projection(self.root)["repository_index"]
+        self.write("tracked-later.md", "new tracked input\n")
+        subprocess.run(("git", "add", "tracked-later.md"), cwd=self.root, check=True)
+
+        second = compile_suite_input_projection(self.root)["repository_index"]
+
+        self.assertNotEqual(first, second)
+
+    def test_written_projection_rejects_stale_repository_index(self) -> None:
+        self.assertEqual(write_suite_input_projection(self.root), 0)
+        self.write("tracked-later.md", "new tracked input\n")
+        subprocess.run(("git", "add", "tracked-later.md"), cwd=self.root, check=True)
+
+        self.assertEqual(check_suite_input_projection(self.root), 2)
+
+    def test_written_projection_rejects_tracked_membership_removal(self) -> None:
+        self.assertEqual(write_suite_input_projection(self.root), 0)
+        subprocess.run(
+            ("git", "rm", "--cached", "present.md"),
+            cwd=self.root,
+            check=True,
+            capture_output=True,
+        )
+
+        self.assertEqual(check_suite_input_projection(self.root), 2)
+
+    def test_written_projection_rejects_stale_suite_definition(self) -> None:
+        self.assertEqual(write_suite_input_projection(self.root), 0)
+        suite = "evaluation/standards-effectiveness/suites/fixture.toml"
+        content = (self.root / suite).read_text(encoding="utf-8")
+        self.write(suite, content + "\n")
+
+        self.assertEqual(check_suite_input_projection(self.root), 2)
+
+    def test_written_projection_rejects_stale_registry(self) -> None:
+        self.assertEqual(write_suite_input_projection(self.root), 0)
+        registry = "evaluation/standards-effectiveness/suite-registry.toml"
+        content = (self.root / registry).read_text(encoding="utf-8")
+        self.write(registry, content + "\n")
+
+        self.assertEqual(check_suite_input_projection(self.root), 2)
+
+    def test_written_projection_rejects_transitive_input_mutation(self) -> None:
+        self.write(
+            "evaluation/standards-effectiveness/suites/fixture.toml",
+            """
+            schema_version = 1
+            id = "fixture"
+            owner = "test"
+            description = "Transitive suite input fixture."
+
+            [[checks]]
+            id = "references"
+            type = "reference_inventory"
+            candidates_path = "candidates.tsv"
+            candidates_header = ["path"]
+            candidate_path_column = "path"
+            manifest_path = "manifest.tsv"
+            manifest_header = ["path"]
+            manifest_path_column = "path"
+            literal = "selected-marker"
+            """,
+        )
+        self.write("candidates.tsv", "path\nconsumer.md\n")
+        self.write("manifest.tsv", "path\nconsumer.md\n")
+        self.write("consumer.md", "selected-marker\n")
+        subprocess.run(("git", "add", "-A"), cwd=self.root, check=True)
+        self.assertEqual(write_suite_input_projection(self.root), 0)
+
+        self.write("consumer.md", "selected-marker changed\n")
+
+        self.assertEqual(check_suite_input_projection(self.root), 2)
+
+    def test_projection_compiler_does_not_dispatch_on_check_classes(self) -> None:
+        source = (
+            Path(__file__).resolve().parents[1]
+            / "standards_verifier"
+            / "suite_inputs.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertNotIn("isinstance(check", source)
+        self.assertNotIn(".checks.", source)
 
     def test_written_projection_is_canonical_json(self) -> None:
         write_suite_input_projection(self.root)
         path = (
-            self.root
-            / "evaluation/standards-effectiveness/generated/suite-inputs.json"
+            self.root / "evaluation/standards-effectiveness/generated/suite-inputs.json"
         )
         content = path.read_text(encoding="utf-8")
 

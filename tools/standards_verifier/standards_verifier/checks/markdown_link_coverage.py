@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .markdown_links import local_markdown_targets
 from .table import (
@@ -20,6 +20,21 @@ class MarkdownLinkCoverageCheck:
     path: str
     identity: str
     members: ProjectedTableSource
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        projected = read_projected_table_rows(context, self.id, self.members)
+        members = tuple(value.partition("#")[0] for (value,) in projected if value)
+        targets = local_markdown_targets(context, self.id, self.path)
+        return (
+            *present_inputs("markdown", self.path),
+            *present_inputs("members", self.members.path),
+            *present_inputs("member-content", *members),
+            *present_inputs(
+                "link-target", *(target.repository_path for target in targets)
+            ),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         projected = read_projected_table_rows(context, self.id, self.members)

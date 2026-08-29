@@ -162,7 +162,7 @@ def covered_repository_policy_units(
         COVERAGE_HORIZON_CODEC,
         CoverageHorizonAuthority,
     )
-    from .coverage import load_coverage_horizon
+    from .coverage import load_captured_coverage_horizon, load_coverage_horizon
 
     repository_root = root.resolve()
     initial_corpus = load_canonical_standards_corpus(repository_root)
@@ -189,13 +189,13 @@ def covered_repository_policy_units(
             target.write_bytes(item.content)
         corpus = load_canonical_standards_corpus(workspace)
         impact = compile_policy_impact(workspace, corpus, DEFAULT_REGISTRY)
-        horizon = load_coverage_horizon(workspace, corpus, impact)
+        horizon = load_captured_coverage_horizon(workspace, corpus, impact)
         if (
             corpus.module_corpus.members != initial_corpus.module_corpus.members
             or corpus.policy_unit_corpus.sources
             != initial_corpus.policy_unit_corpus.sources
             or impact.input_sources != initial_impact.input_sources
-            or horizon.input_sources != initial_horizon.input_sources
+            or horizon != initial_horizon
         ):
             raise _error(
                 "COVERAGE.CAPTURE_CONTRADICTION",

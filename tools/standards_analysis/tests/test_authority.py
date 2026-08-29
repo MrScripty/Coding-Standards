@@ -4,28 +4,39 @@ import unittest
 from dataclasses import dataclass
 
 from tools.standards_analysis.standards_analysis.authority import (
+    ANALYSIS_CODECS,
     ANALYSIS_CONTEXT_CODEC,
     ANALYSIS_ROOT_CODEC,
     AUTHORIZATION_GRANT_CODEC,
     COVERAGE_ATTESTATION_CODEC,
     COVERAGE_CERTIFICATE_CODEC,
+    COVERAGE_HORIZON_CODEC,
     COVERAGE_REQUIREMENT_CODEC,
     COVERAGE_VIEW_CODEC,
     FACT_OBSERVATION_CODEC,
     FACT_REQUIREMENT_CODEC,
     PROVIDER_AUTHORITY_CODEC,
+    ROUTING_PROJECTION_CODEC,
     AnalysisContextAuthority,
     AnalysisRootAuthority,
     AuthorityEvidence,
     AuthorizationGrant,
     CoverageAttestationAuthority,
     CoverageCertificateAuthority,
+    CoverageHorizonAuthority,
     CoverageRequirementAuthority,
     CoverageViewAuthority,
     FactObservationAuthority,
     FactRequirementAuthority,
     ProviderAuthority,
+    RoutingProjectionAuthority,
 )
+from tools.standards_analysis.standards_analysis.coverage import (
+    CoverageHorizon,
+    CoverageHorizonMember,
+)
+from tools.standards_analysis.standards_analysis.routing import RouterProjection
+from tools.standards_applicability.standards_applicability import compile_fact_schema
 from tools.standards_authority.standards_authority import (
     AuthorityReference,
     AuthorityRepository,
@@ -94,29 +105,18 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
             for kind in (
                 "canonical-standards-corpus",
                 "compiled-policy-impact",
+                "content-snapshot",
                 "standards-graph",
-                "coverage-horizon",
                 "execution-closure",
             )
         )
-        self.analysis_codecs = (
-            ANALYSIS_CONTEXT_CODEC,
-            FACT_REQUIREMENT_CODEC,
-            PROVIDER_AUTHORITY_CODEC,
-            AUTHORIZATION_GRANT_CODEC,
-            FACT_OBSERVATION_CODEC,
-            COVERAGE_VIEW_CODEC,
-            COVERAGE_REQUIREMENT_CODEC,
-            COVERAGE_ATTESTATION_CODEC,
-            COVERAGE_CERTIFICATE_CODEC,
-            ANALYSIS_ROOT_CODEC,
-        )
+        self.analysis_codecs = ANALYSIS_CODECS.codecs
         self.store = MemoryObjectStore()
         self.repository = AuthorityRepository(
             self.store,
             (
                 CodecSet("test-leaves", self.leaf_codecs),
-                CodecSet("analysis-authority-test", self.analysis_codecs),
+                ANALYSIS_CODECS,
             ),
         )
         self.leaves = {
@@ -127,9 +127,57 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
     def test_complete_analysis_authority_chain_round_trips_cold(self) -> None:
         metadata = self.leaves["canonical-standards-corpus"].reference
         impact = self.leaves["compiled-policy-impact"].reference
+        content = self.leaves["content-snapshot"].reference
         graph = self.leaves["standards-graph"].reference
-        horizon = self.leaves["coverage-horizon"].reference
         closure = self.leaves["execution-closure"].reference
+
+        fact_schema = compile_fact_schema(
+            {
+                "kind": "applicability-fact-schema",
+                "id": "routing.test",
+                "version": 1,
+                "facts": [],
+            }
+        )
+        routing = self.repository.publish(
+            ROUTING_PROJECTION_CODEC,
+            RoutingProjectionAuthority(
+                content,
+                metadata,
+                RouterProjection(
+                    "routing.test",
+                    "test.owner",
+                    "router.test",
+                    ("topic.test",),
+                    (),
+                    (),
+                    fact_schema,
+                ),
+            ),
+        )
+        horizon = self.repository.publish(
+            COVERAGE_HORIZON_CODEC,
+            CoverageHorizonAuthority(
+                content,
+                metadata,
+                impact,
+                graph,
+                CoverageHorizon(
+                    "horizon.test",
+                    "provider.test",
+                    1,
+                    (
+                        CoverageHorizonMember(
+                            "consumer.test",
+                            ("consumer",),
+                            "sha256:" + "8" * 64,
+                        ),
+                    ),
+                    "sha256:" + "9" * 64,
+                    ("consumer.test",),
+                ),
+            ),
+        )
 
         context = self.repository.publish(
             ANALYSIS_CONTEXT_CODEC,
@@ -215,7 +263,7 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
                 metadata,
                 impact,
                 graph,
-                horizon,
+                horizon.reference,
                 _projection(
                     subject="policy.one",
                     owner="topic.test",
@@ -309,10 +357,12 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
             self.store,
             (
                 CodecSet("test-leaves", self.leaf_codecs),
-                CodecSet("analysis-authority-test", self.analysis_codecs),
+                ANALYSIS_CODECS,
             ),
         )
         for handle in (
+            routing,
+            horizon,
             context,
             requirement,
             provider,
@@ -326,6 +376,28 @@ class AnalysisAuthorityCodecTests(unittest.TestCase):
             root,
         ):
             self.assertEqual(cold.resolve(handle).handle, handle)
+        self.assertEqual(
+            {codec.object_kind for codec in self.analysis_codecs},
+            {
+                handle.object_kind
+                for handle in (
+                    routing,
+                    horizon,
+                    context,
+                    requirement,
+                    provider,
+                    authorization,
+                    observation,
+                    coverage_view,
+                    coverage_requirement,
+                    audit_grant,
+                    attestation,
+                    certificate,
+                    root,
+                )
+            },
+        )
+        cold._verify_all_stored()
         resolved_provider = cold.resolve(provider).value
         self.assertIsInstance(resolved_provider, ProviderAuthority)
         self.assertEqual(len(resolved_provider.inputs), 5)

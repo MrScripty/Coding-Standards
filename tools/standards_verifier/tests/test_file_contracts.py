@@ -692,7 +692,7 @@ class FileContractsTest(unittest.TestCase):
         self.assertEqual(result.exit_code, 1)
         self.assertEqual(result.diagnostics[0].observed, "absent-untracked")
 
-    @patch("standards_verifier.checks.git_index_paths.subprocess.run")
+    @patch("tools.standards_authority.standards_authority.git_index.subprocess.run")
     def test_git_index_paths_uses_one_fixed_index_read(self, run) -> None:
         run.return_value = subprocess.CompletedProcess(
             [],
@@ -747,7 +747,7 @@ class FileContractsTest(unittest.TestCase):
         for effect, code, exit_code in cases:
             with self.subTest(code=code):
                 with patch(
-                    "standards_verifier.checks.git_index_paths.subprocess.run",
+                    "tools.standards_authority.standards_authority.git_index.subprocess.run",
                     side_effect=effect if isinstance(effect, Exception) else None,
                     return_value=None if isinstance(effect, Exception) else effect,
                 ):

@@ -13,7 +13,8 @@ sys.path.insert(0, str(ENGINE_ROOT))
 from standards_verifier.checks.numeric_lifecycle import PACKAGES_HEADER
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
-from standards_verifier.numeric_audit import HEADER, collect_candidates, render_candidates
+from standards_verifier.inventory import CheckerRecord, OUTPUT_PATH, render_inventory
+from standards_verifier.numeric_audit import collect_candidates, render_candidates
 from standards_verifier.numeric_retirements import (
     PACKAGES_HEADER as RETIREMENT_PACKAGES_HEADER,
 )
@@ -31,6 +32,7 @@ class NumericLifecycleTest(unittest.TestCase):
         self.retirement_packages = "numeric-candidate-retirement-packages.tsv"
         self.retirements = "generated/numeric-candidate-retirements.tsv"
         self.write(self.checker, '[[ "$count" -eq 0 ]]\n')
+        self.write_inventory((self.checker,))
         self.freeze_baseline()
         self.write_packages([])
         self.write_retirement_packages([])
@@ -45,6 +47,27 @@ class NumericLifecycleTest(unittest.TestCase):
         target = self.root / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
+
+    def write_inventory(self, checkers: tuple[str, ...]) -> None:
+        records = tuple(
+            CheckerRecord(
+                checker=checker,
+                lines=1,
+                inbound_count=0,
+                inbound_files=(),
+                executable_inbound_files=(),
+                contract_inbound_files=(),
+                documentation_inbound_files=(),
+                verifier_dependencies=(),
+                helper_dependencies=(),
+                uses_sed=False,
+                uses_awk=False,
+                uses_rg=False,
+                uses_decision_table=False,
+            )
+            for checker in checkers
+        )
+        self.write(OUTPUT_PATH.as_posix(), render_inventory(records))
 
     def freeze_baseline(self) -> None:
         candidates = collect_candidates(self.root, (self.checker,))
@@ -135,6 +158,7 @@ class NumericLifecycleTest(unittest.TestCase):
 
     def retire_checker(self) -> None:
         (self.root / self.checker).unlink()
+        self.write_inventory(())
 
     def test_unchanged_current_candidates_pass_without_package(self) -> None:
         self.assertEqual(self.result().status, "passed")

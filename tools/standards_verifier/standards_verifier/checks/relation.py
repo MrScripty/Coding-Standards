@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
@@ -19,6 +19,14 @@ class RelationCheck:
     mode: str
     left: ProjectedTableSource
     right: ProjectedTableSource
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("left", self.left.path),
+            *present_inputs("right", self.right.path),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root

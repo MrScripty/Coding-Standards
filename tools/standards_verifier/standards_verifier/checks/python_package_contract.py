@@ -9,15 +9,36 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import (
+    CheckAuthorityInput,
+    CheckContext,
+    CheckRepositoryIndexInput,
+    present_inputs,
+)
 from ..paths import contained_file
-from ..python_packages import audit_python_packages, execute_python_package_contract
+from ..python_packages import (
+    audit_python_packages,
+    execute_python_package_contract,
+    python_package_authority_paths,
+)
 
 
 @dataclass(frozen=True, slots=True)
 class PythonPackageContractCheck:
     id: str
     fixtures: str
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("package-fixtures", self.fixtures),
+            *present_inputs(
+                "package-contract-input",
+                *python_package_authority_paths(context.repo_root),
+            ),
+            CheckRepositoryIndexInput("package-source-membership"),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         diagnostics = [
@@ -172,9 +193,7 @@ def _fixture_cases(raw: object) -> tuple[dict[str, object], ...]:
 def _audit_fixture(case: dict[str, object]) -> tuple[str, ...]:
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
-        subprocess.run(
-            ("git", "init", "-q"), cwd=root, check=True, capture_output=True
-        )
+        subprocess.run(("git", "init", "-q"), cwd=root, check=True, capture_output=True)
         _write_package(
             root,
             "b",
@@ -189,9 +208,7 @@ def _audit_fixture(case: dict[str, object]) -> tuple[str, ...]:
             tuple(case["consumer_dependencies"]),
             str(case["consumer_source"]),
         )
-        subprocess.run(
-            ("git", "add", "-A"), cwd=root, check=True, capture_output=True
-        )
+        subprocess.run(("git", "add", "-A"), cwd=root, check=True, capture_output=True)
         return tuple(sorted(item.code for item in audit_python_packages(root)))
 
 

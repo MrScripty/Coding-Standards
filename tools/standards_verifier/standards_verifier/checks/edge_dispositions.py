@@ -5,7 +5,12 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext, CompleteSuiteCatalogCheck
+from ..model import (
+    CheckAuthorityInput,
+    CheckContext,
+    CompleteSuiteCatalogCheck,
+    present_inputs,
+)
 from ..paths import contained_file
 from .table import read_table_rows
 
@@ -63,9 +68,7 @@ REPLACEMENT_KINDS = {
 STATES = frozenset({"admitted", "accepted"})
 
 
-def _required_string(
-    raw: dict[str, Any], field: str, suite: str, check: str
-) -> str:
+def _required_string(raw: dict[str, Any], field: str, suite: str, check: str) -> str:
     value = raw.get(field)
     if not isinstance(value, str) or not value:
         raise EngineError(
@@ -81,9 +84,7 @@ def _required_string(
     return value
 
 
-def _contained_path(
-    root: Path, value: str, *, suite: str, check: str
-) -> None:
+def _contained_path(root: Path, value: str, *, suite: str, check: str) -> None:
     path = PurePosixPath(value)
     resolved_root = root.resolve()
     candidate = (resolved_root / Path(*path.parts)).resolve(strict=False)
@@ -139,6 +140,15 @@ class EdgeDispositionsCheck(CompleteSuiteCatalogCheck):
     edges_path: str
     participation_token: str
     edge_free_token: str
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("dispositions", self.path),
+            *present_inputs("packages", self.packages_path),
+            *present_inputs("edges", self.edges_path),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
@@ -382,12 +392,8 @@ class EdgeDispositionsCheck(CompleteSuiteCatalogCheck):
                     diagnostics,
                 )
 
-            _contained_path(
-                root, row["source"], suite=context.suite_id, check=self.id
-            )
-            _contained_path(
-                root, row["target"], suite=context.suite_id, check=self.id
-            )
+            _contained_path(root, row["source"], suite=context.suite_id, check=self.id)
+            _contained_path(root, row["target"], suite=context.suite_id, check=self.id)
             contained_file(
                 root,
                 row["evidence"],
@@ -567,8 +573,7 @@ class EdgeDispositionsCheck(CompleteSuiteCatalogCheck):
                     row=line_number,
                     field="replacement",
                     expected=" or ".join(
-                        f"{expected_kind}:<value>"
-                        for expected_kind in expected_kinds
+                        f"{expected_kind}:<value>" for expected_kind in expected_kinds
                     ),
                     observed=row["replacement"],
                 )
@@ -711,7 +716,9 @@ class EdgeDispositionsCheck(CompleteSuiteCatalogCheck):
                 )
                 return
             suite = context.catalog.suite_for_path(suite_path)
-            if suite is None or assertion_id not in {check.id for check in suite.checks}:
+            if suite is None or assertion_id not in {
+                check.id for check in suite.checks
+            }:
                 diagnostics.append(
                     _diagnostic(
                         context,
@@ -763,6 +770,7 @@ class EdgeDispositionsCheck(CompleteSuiteCatalogCheck):
                     observed=row["replacement"],
                 )
             )
+
 
 def parse_edge_dispositions_check(
     raw: dict[str, Any], suite_id: str

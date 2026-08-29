@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .literal_matching import (
     MatchCase,
@@ -16,7 +16,9 @@ from .literal_matching import (
 
 
 def _string_list(value: Any, field: str, suite: str, check: str) -> tuple[str, ...]:
-    if not isinstance(value, list) or any(not isinstance(item, str) or not item for item in value):
+    if not isinstance(value, list) or any(
+        not isinstance(item, str) or not item for item in value
+    ):
         raise EngineError(
             Diagnostic(
                 code="CONFIG.STRING_LIST",
@@ -48,6 +50,11 @@ class TextCheck:
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
     match_case: MatchCase
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return present_inputs("content", self.path)
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
@@ -117,11 +124,28 @@ def parse_text_check(raw: dict[str, Any], suite_id: str) -> TextCheck:
     check_id = raw.get("id")
     path = raw.get("path")
     if not isinstance(check_id, str) or not check_id:
-        raise EngineError(Diagnostic("CONFIG.CHECK_ID", "invalid", "check id must be a non-empty string", suite=suite_id))
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.CHECK_ID",
+                "invalid",
+                "check id must be a non-empty string",
+                suite=suite_id,
+            )
+        )
     if not isinstance(path, str) or not path:
-        raise EngineError(Diagnostic("CONFIG.PATH", "invalid", "path must be a non-empty string", suite=suite_id, check=check_id))
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.PATH",
+                "invalid",
+                "path must be a non-empty string",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
     required = _string_list(raw.get("required", []), "required", suite_id, check_id)
-    prohibited = _string_list(raw.get("prohibited", []), "prohibited", suite_id, check_id)
+    prohibited = _string_list(
+        raw.get("prohibited", []), "prohibited", suite_id, check_id
+    )
     match_case = parse_match_case(
         raw.get("match_case", "sensitive"),
         suite=suite_id,
@@ -135,5 +159,13 @@ def parse_text_check(raw: dict[str, Any], suite_id: str) -> TextCheck:
         check=check_id,
     )
     if not required and not prohibited:
-        raise EngineError(Diagnostic("CONFIG.EMPTY_CHECK", "invalid", "text check has no assertions", suite=suite_id, check=check_id))
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.EMPTY_CHECK",
+                "invalid",
+                "text check has no assertions",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
     return TextCheck(check_id, path, required, prohibited, match_case)

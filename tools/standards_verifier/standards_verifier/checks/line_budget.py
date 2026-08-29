@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .table import read_table_rows
 
@@ -52,6 +52,14 @@ class LineBudgetCheck:
     baseline_key: str
     maximum_numerator: int
     maximum_denominator: int
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("measured-content", *self.paths),
+            *present_inputs("baseline", self.baseline_path),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         observed = 0
@@ -118,10 +126,7 @@ class LineBudgetCheck:
                 )
             )
         baseline = int(raw_baseline)
-        if (
-            observed * self.maximum_denominator
-            < baseline * self.maximum_numerator
-        ):
+        if observed * self.maximum_denominator < baseline * self.maximum_numerator:
             return []
         return [
             Diagnostic(

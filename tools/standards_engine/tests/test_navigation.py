@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import json
 import shutil
+import subprocess
 import tempfile
 import tomllib
 import unittest
@@ -28,6 +29,16 @@ from tools.standards_engine.standards_engine import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+
+
+def _copy_repository(target: Path) -> None:
+    shutil.copytree(
+        REPO_ROOT,
+        target,
+        ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
+    )
+    subprocess.run(("git", "init", "-q"), cwd=target, check=True)
+    subprocess.run(("git", "add", "-A"), cwd=target, check=True)
 
 
 def _contracts():
@@ -236,11 +247,7 @@ class NavigationTest(unittest.TestCase):
     def test_attestation_bytes_do_not_invalidate_semantic_authorities(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repository"
-            shutil.copytree(
-                REPO_ROOT,
-                root,
-                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
-            )
+            _copy_repository(root)
             first = StandardsEngine.open_repository(root, durable=False)
             first_view = first.inspect(InspectCall(first.view))
 
@@ -272,11 +279,7 @@ class NavigationTest(unittest.TestCase):
     def test_module_read_and_inspection_use_captured_content(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repository"
-            shutil.copytree(
-                REPO_ROOT,
-                root,
-                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
-            )
+            _copy_repository(root)
             engine = StandardsEngine.open_repository(root, durable=False)
             original = engine.query(
                 QueryCall(engine.view, ReadRequest("read", "workflow.verification"))
@@ -370,11 +373,7 @@ class NavigationTest(unittest.TestCase):
     def test_agent_facade_uses_structured_authority_handles(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repository"
-            shutil.copytree(
-                REPO_ROOT,
-                root,
-                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
-            )
+            _copy_repository(root)
             tool = AgentToolFacade.open_repository(root)
             route = tool.query(
                 {

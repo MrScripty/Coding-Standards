@@ -7,6 +7,7 @@ dependencies = [
     "repository-graph-engine",
     "standards-analysis",
     "standards-applicability",
+    "standards-authority",
     "standards-contracts",
     "standards-graph",
     "standards-metadata",

@@ -102,7 +102,7 @@ class CoverageTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 4
+            version = 5
             suite_registry = "suite-registry.toml"
             suite_inputs = "suite-inputs.json"
             edge_source_registry = "edge-sources.toml"
@@ -181,12 +181,13 @@ class CoverageTest(unittest.TestCase):
 
     def write_suite_projection(self) -> None:
         def digest(path: str) -> str:
-            return "sha256:" + hashlib.sha256(
-                (self.root / path).read_bytes()
-            ).hexdigest()
+            return (
+                "sha256:" + hashlib.sha256((self.root / path).read_bytes()).hexdigest()
+            )
+
         projection = {
-            "schema_version": 1,
-            "contract": "standards-verifier:suite-input-projection:v1",
+            "schema_version": 2,
+            "contract": "standards-analysis:suite-input-manifest:v2",
             "registry": {
                 "path": "suite-registry.toml",
                 "digest": digest("suite-registry.toml"),
@@ -198,7 +199,7 @@ class CoverageTest(unittest.TestCase):
                     "digest": digest("suites/coverage.toml"),
                 }
             ],
-            "inputs": [
+            "files": [
                 {
                     "path": "inputs/consumer.md",
                     "state": "present",
@@ -212,6 +213,7 @@ class CoverageTest(unittest.TestCase):
                     ],
                 }
             ],
+            "repository_index": None,
         }
         target = self.root / "suite-inputs.json"
         target.write_text(
@@ -291,8 +293,7 @@ class CoverageTest(unittest.TestCase):
             ),
             horizon=AuthorityReference(
                 "coverage-horizon",
-                "coverage-horizon:sha256:"
-                + horizon.digest.removeprefix("sha256:"),
+                "coverage-horizon:sha256:" + horizon.digest.removeprefix("sha256:"),
             ),
         )
         return repository, index
@@ -302,7 +303,7 @@ class CoverageTest(unittest.TestCase):
         *,
         principal: str = "reviewer.test",
         semantic_revision: int = 1,
-        horizon_version: int = 4,
+        horizon_version: int = 5,
     ) -> None:
         self.write(
             "attestations.toml",
@@ -341,7 +342,9 @@ class CoverageTest(unittest.TestCase):
             revocations="revocations.toml",
         )
 
-    def test_horizon_uses_registered_suite_inputs_and_fingerprints_content(self) -> None:
+    def test_horizon_uses_registered_suite_inputs_and_fingerprints_content(
+        self,
+    ) -> None:
         first = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
         )
@@ -354,7 +357,7 @@ class CoverageTest(unittest.TestCase):
             load_coverage_horizon(
                 self.root, self.corpus, self.compiled(), "horizon.toml"
             )
-        self.assertEqual(caught.exception.failure.code, "COVERAGE.SUITE_INPUT_STALE")
+        self.assertEqual(caught.exception.failure.code, "SUITE_INPUT.STALE")
         self.write_suite_projection()
         second = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
@@ -363,9 +366,7 @@ class CoverageTest(unittest.TestCase):
 
     def test_reading_authority_label_does_not_change_coverage(self) -> None:
         compiled = self.compiled()
-        first = load_coverage_horizon(
-            self.root, self.corpus, compiled, "horizon.toml"
-        )
+        first = load_coverage_horizon(self.root, self.corpus, compiled, "horizon.toml")
         artifact = compiled.artifact_for("consumer")
         reading_only = load_coverage_horizon(
             self.root,
@@ -405,7 +406,9 @@ class CoverageTest(unittest.TestCase):
             derive_coverage_view(unit, changed, horizon),
         )
 
-    def test_repository_claim_constructs_v3_grant_attestation_and_certificate(self) -> None:
+    def test_repository_claim_constructs_v3_grant_attestation_and_certificate(
+        self,
+    ) -> None:
         repository, index = self.authority_index()
         subject = index.subjects["workflow.policy.rule"]
         self.write_claim()
@@ -463,7 +466,9 @@ class CoverageTest(unittest.TestCase):
         )
         with self.assertRaises(AnalysisError) as caught:
             self.load_claims(RecordingRepository(), index)
-        self.assertEqual(caught.exception.failure.code, "COVERAGE.AUTHORIZATION_REVOKED")
+        self.assertEqual(
+            caught.exception.failure.code, "COVERAGE.AUTHORIZATION_REVOKED"
+        )
 
     def test_evidence_byte_change_changes_attestation_and_certificate(self) -> None:
         repository, index = self.authority_index()
@@ -496,9 +501,7 @@ class CoverageTest(unittest.TestCase):
         self.assertNotEqual(first_subject.requirement, second_subject.requirement)
         self.assertNotEqual(first_subject.attestation, second_subject.attestation)
         self.assertNotEqual(first_subject.certificate, second_subject.certificate)
-        self.assertEqual(
-            (self.root / "attestations.toml").read_bytes(), claim_source
-        )
+        self.assertEqual((self.root / "attestations.toml").read_bytes(), claim_source)
 
     def test_repository_claim_rejects_generated_requirement_handle(self) -> None:
         repository, index = self.authority_index()
@@ -519,8 +522,7 @@ class CoverageTest(unittest.TestCase):
     def test_v2_coverage_identity_fallback_is_absent(self) -> None:
         package = Path(__file__).resolve().parents[1] / "standards_analysis"
         source = "\n".join(
-            path.read_text(encoding="utf-8")
-            for path in sorted(package.glob("*.py"))
+            path.read_text(encoding="utf-8") for path in sorted(package.glob("*.py"))
         )
         self.assertNotIn("coverage-authority-view:v2", source)
         self.assertNotIn("coverage-audit-requirement:v2", source)

@@ -11,7 +11,10 @@ from unittest.mock import patch
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ENGINE_ROOT))
 
-from standards_verifier.generated_artifacts import check_generated_artifacts
+from standards_verifier.generated_artifacts import (
+    check_generated_artifacts,
+    write_generated_artifacts,
+)
 
 
 class GeneratedArtifactsTest(unittest.TestCase):
@@ -62,6 +65,21 @@ class GeneratedArtifactsTest(unittest.TestCase):
 
         suite_inputs.assert_called_once_with(Path("repo"))
         inventory.assert_not_called()
+
+    @patch("standards_verifier.generated_artifacts.write_suite_input_projection")
+    @patch("standards_verifier.generated_artifacts.write_inventory")
+    @patch("standards_verifier.generated_artifacts.write_graph")
+    def test_writes_bound_inputs_before_suite_projection(
+        self, graph, inventory, suite_inputs
+    ) -> None:
+        order: list[str] = []
+        graph.side_effect = lambda root: order.append("graph") or 0
+        inventory.side_effect = lambda root: order.append("inventory") or 0
+        suite_inputs.side_effect = lambda root: order.append("suite-inputs") or 0
+
+        self.assertEqual(write_generated_artifacts(Path("repo")), 0)
+
+        self.assertEqual(order, ["graph", "inventory", "suite-inputs"])
 
 
 if __name__ == "__main__":

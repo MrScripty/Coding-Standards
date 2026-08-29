@@ -6,7 +6,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .table import (
     ProjectedTableSource,
@@ -125,14 +125,32 @@ class MarkdownLinksCheck:
     paths: tuple[str, ...] | None
     members: ProjectedTableSource | None
 
-    def run(self, context: CheckContext) -> list[Diagnostic]:
+    def _selected_paths(self, context: CheckContext) -> tuple[str, ...]:
         if self.members is None:
             if self.paths is None:
                 raise TypeError("Markdown link paths or members are required")
-            paths = self.paths
-        else:
-            projected = read_projected_table_rows(context, self.id, self.members)
-            paths = tuple(value for (value,) in projected)
+            return self.paths
+        projected = read_projected_table_rows(context, self.id, self.members)
+        return tuple(value for (value,) in projected)
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        paths = self._selected_paths(context)
+        target_paths = tuple(
+            target.repository_path
+            for path in paths
+            for target in local_markdown_targets(context, self.id, path)
+        )
+        declarations = list(present_inputs("markdown", *paths))
+        if self.members is not None:
+            declarations.extend(present_inputs("members", self.members.path))
+        declarations.extend(present_inputs("link-target", *target_paths))
+        return tuple(declarations)
+
+    def run(self, context: CheckContext) -> list[Diagnostic]:
+        paths = self._selected_paths(context)
+        if self.members is not None:
             if (
                 not paths
                 or any(not value for value in paths)

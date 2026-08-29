@@ -18,6 +18,24 @@ DEPENDENCY_PATTERN = re.compile(
 OUTPUT_PATH = Path("evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv")
 GENERATED_ROOT = Path("evaluation/standards-effectiveness/generated")
 MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+INVENTORY_HEADER = (
+    "checker",
+    "lines",
+    "inbound_count",
+    "inbound_files",
+    "executable_inbound_count",
+    "executable_inbound_files",
+    "contract_inbound_count",
+    "contract_inbound_files",
+    "documentation_inbound_count",
+    "documentation_inbound_files",
+    "verifier_dependencies",
+    "helper_dependencies",
+    "uses_sed",
+    "uses_awk",
+    "uses_rg",
+    "uses_decision_table",
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -115,26 +133,7 @@ def collect_inventory(root: Path) -> tuple[CheckerRecord, ...]:
 def render_inventory(records: Iterable[CheckerRecord]) -> str:
     output = io.StringIO(newline="")
     writer = csv.writer(output, delimiter="\t", lineterminator="\n")
-    writer.writerow(
-        (
-            "checker",
-            "lines",
-            "inbound_count",
-            "inbound_files",
-            "executable_inbound_count",
-            "executable_inbound_files",
-            "contract_inbound_count",
-            "contract_inbound_files",
-            "documentation_inbound_count",
-            "documentation_inbound_files",
-            "verifier_dependencies",
-            "helper_dependencies",
-            "uses_sed",
-            "uses_awk",
-            "uses_rg",
-            "uses_decision_table",
-        )
-    )
+    writer.writerow(INVENTORY_HEADER)
     for record in records:
         writer.writerow(
             (

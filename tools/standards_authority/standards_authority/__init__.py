@@ -15,6 +15,13 @@ from .errors import (
     unavailable,
     unsupported,
 )
+from .git_index import (
+    GitIndexError,
+    indexed_paths,
+    materialize_index,
+    sanitized_git_environment,
+    staged_name_status,
+)
 from .model import (
     AuthorityCodec,
     AuthorityEnvelope,
@@ -59,6 +66,7 @@ __all__ = (
     "ExecutionClosureCodec",
     "FailureKind",
     "GitCaptureSource",
+    "GitIndexError",
     "GitlinkSource",
     "MemoryObjectStore",
     "NativeCaptureSource",
@@ -69,6 +77,10 @@ __all__ = (
     "RepositoryPath",
     "ResolvedAuthority",
     "SQLiteObjectStore",
+    "indexed_paths",
+    "materialize_index",
+    "sanitized_git_environment",
+    "staged_name_status",
     "SQLiteRecovery",
     "SnapshotFile",
     "decode_envelope",

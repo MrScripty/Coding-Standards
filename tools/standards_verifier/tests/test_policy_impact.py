@@ -2,11 +2,14 @@ from __future__ import annotations
 
 # ruff: noqa: E402 - repository package roots must be installed before imports.
 
+import os
+import subprocess
 import tempfile
 import sys
 import textwrap
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -25,6 +28,10 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from standards_verifier.diagnostics import EngineError
+from standards_verifier.checks.policy_impact_migration import (
+    _changed_production_paths,
+)
+from standards_verifier.model import CheckContext, SuiteCatalog
 from standards_verifier.policy_impact import (
     DEFAULT_SOURCE_REGISTRY,
     load_policy_impact,
@@ -227,7 +234,9 @@ class PolicyImpactTest(unittest.TestCase):
         )
         return load_policy_impact(self.root, "registry.toml", self.suite_paths)
 
-    def test_adapter_queries_compiled_registry_in_deterministic_consumer_order(self) -> None:
+    def test_adapter_queries_compiled_registry_in_deterministic_consumer_order(
+        self,
+    ) -> None:
         impact = self.load(
             self.relationship("prompt-b"),
             self.relationship("prompt-a"),
@@ -242,8 +251,9 @@ class PolicyImpactTest(unittest.TestCase):
             ["prompts/a.md", "prompts/b.md"],
         )
         self.assertEqual(
-            impact.declared_consumers_for("workflow.planning")[0]
-            .applicability_program.as_expression(),
+            impact.declared_consumers_for("workflow.planning")[
+                0
+            ].applicability_program.as_expression(),
             {"operator": "always"},
         )
 
@@ -253,11 +263,15 @@ class PolicyImpactTest(unittest.TestCase):
                 self.relationship(source="workflow.unknown"),
                 owner="workflow.unknown",
             )
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_OWNER")
+        self.assertEqual(
+            raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_OWNER"
+        )
 
         with self.assertRaises(EngineError) as raised:
             self.load(self.relationship(evidence="suite:missing"))
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.EVIDENCE_OWNER")
+        self.assertEqual(
+            raised.exception.diagnostic.code, "POLICY_IMPACT.EVIDENCE_OWNER"
+        )
 
     def test_registered_loader_translates_compiler_failure(self) -> None:
         default_registry = (
@@ -319,7 +333,9 @@ class PolicyImpactTest(unittest.TestCase):
         )
 
         with self.assertRaises(EngineError) as raised:
-            self.load(self.relationship("not-documentation", "documentation-projection"))
+            self.load(
+                self.relationship("not-documentation", "documentation-projection")
+            )
         self.assertEqual(
             raised.exception.diagnostic.code,
             "POLICY_IMPACT.INCOMPATIBLE_TARGET",
@@ -330,7 +346,9 @@ class PolicyImpactTest(unittest.TestCase):
         with self.assertRaises(EngineError) as raised:
             impact.consumers_for("workflow.unknown")
         self.assertEqual(raised.exception.exit_code, 3)
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.OWNER_NOT_AUDITED")
+        self.assertEqual(
+            raised.exception.diagnostic.code, "POLICY_IMPACT.OWNER_NOT_AUDITED"
+        )
 
     def test_custom_manifest_has_no_implicit_coverage_authority(self) -> None:
         uncovered = self.load()
@@ -350,7 +368,9 @@ class PolicyImpactTest(unittest.TestCase):
         )
         self.assertIn("workflow.planning", covered.covered_owners)
 
-    def test_current_planning_graph_has_explicit_consumer_and_alias_closure(self) -> None:
+    def test_current_planning_graph_has_explicit_consumer_and_alias_closure(
+        self,
+    ) -> None:
         corpus = load_canonical_standards_corpus(REPO_ROOT)
         compiled = compile_policy_impact(REPO_ROOT, corpus)
         graph = load_repository_registry(REPO_ROOT, DEFAULT_SOURCE_REGISTRY)
@@ -400,8 +420,48 @@ class PolicyImpactTest(unittest.TestCase):
         )
 
     def test_old_policy_query_and_bespoke_graph_files_are_absent(self) -> None:
-        self.assertFalse((REPO_ROOT / "tools/standards_verifier/query_policy_impact.py").exists())
-        self.assertFalse((REPO_ROOT / "tools/standards_verifier/standards_verifier/policy_impact_cli.py").exists())
+        self.assertFalse(
+            (REPO_ROOT / "tools/standards_verifier/query_policy_impact.py").exists()
+        )
+        self.assertFalse(
+            (
+                REPO_ROOT
+                / "tools/standards_verifier/standards_verifier/policy_impact_cli.py"
+            ).exists()
+        )
+
+    @patch("tools.standards_authority.standards_authority.git_index.subprocess.run")
+    def test_copied_production_source_does_not_retire_its_source(
+        self, run: Mock
+    ) -> None:
+        run.return_value = subprocess.CompletedProcess(
+            [],
+            returncode=0,
+            stdout=(
+                b"C100\0tools/source.py\0tools/copied.py\0"
+                b"R100\0tools/old.py\0tools/renamed.py\0"
+            ),
+            stderr=b"",
+        )
+        context = CheckContext(Path("."), "fixture", SuiteCatalog.empty())
+
+        with patch.dict(
+            os.environ,
+            {"GIT_DIR": "/outside", "GIT_INDEX_FILE": "/outside/index"},
+        ):
+            current, retired = _changed_production_paths(
+                context, "migration", "a" * 40
+            )
+
+        self.assertEqual(
+            current,
+            frozenset({"tools/copied.py", "tools/renamed.py"}),
+        )
+        self.assertEqual(retired, frozenset({"tools/old.py"}))
+        arguments, options = run.call_args
+        self.assertIn("--cached", arguments[0])
+        self.assertNotIn("GIT_DIR", options["env"])
+        self.assertNotIn("GIT_INDEX_FILE", options["env"])
 
 
 if __name__ == "__main__":

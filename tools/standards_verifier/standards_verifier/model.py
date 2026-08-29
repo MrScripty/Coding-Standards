@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Protocol
+from typing import Literal, Protocol, TypeAlias
 
 from .diagnostics import Diagnostic
 
@@ -11,6 +11,33 @@ class Check(Protocol):
     id: str
 
     def run(self, context: "CheckContext") -> list[Diagnostic]: ...
+
+    def authority_inputs(
+        self, context: "CheckContext"
+    ) -> tuple["CheckAuthorityInput", ...]: ...
+
+
+@dataclass(frozen=True, slots=True, order=True)
+class CheckFileInput:
+    path: str
+    state: Literal["present", "absent"]
+    role: str
+
+
+@dataclass(frozen=True, slots=True, order=True)
+class CheckRepositoryIndexInput:
+    role: str
+
+
+CheckAuthorityInput: TypeAlias = CheckFileInput | CheckRepositoryIndexInput
+
+
+def present_inputs(role: str, *paths: str) -> tuple[CheckFileInput, ...]:
+    return tuple(CheckFileInput(path, "present", role) for path in paths)
+
+
+def absent_inputs(role: str, *paths: str) -> tuple[CheckFileInput, ...]:
+    return tuple(CheckFileInput(path, "absent", role) for path in paths)
 
 
 class CompleteSuiteCatalogCheck:

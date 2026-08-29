@@ -323,6 +323,14 @@ rationale = "The package ownership contract governs this manifest-owned public b
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_authority/standards_authority/git_index.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/python_packages.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
@@ -400,3 +408,219 @@ relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1b-public-cutover"
 rationale = "The verifier owns the typed projection from parsed suite checks to coverage input state."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_analysis/standards_analysis/suite_inputs.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "Standards Analysis owns the serialized suite-input manifest contract and exact live-authority validation."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/decision.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/derived_evidence.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/edge_dispositions.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/exact_text.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/git_index_paths.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/inclusion.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/keyed_relation.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/line_budget.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/markdown_headings.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/markdown_link_coverage.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/markdown_links.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/markdown_section_text.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/markdown_structure.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/metadata.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/metadata_route.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/migration_python_dispositions.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/numeric_lifecycle.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/inventory.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs the canonical checker-inventory projection consumed as check authority."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/path_state.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/policy_impact.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/reference_inventory.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/relation.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/table.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/text.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/model.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model."

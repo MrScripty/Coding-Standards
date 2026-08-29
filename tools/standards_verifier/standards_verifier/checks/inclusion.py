@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
@@ -18,6 +18,14 @@ class InclusionCheck:
     id: str
     members: ProjectedTableSource
     container: ProjectedTableSource
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("members", self.members.path),
+            *present_inputs("container", self.container.path),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root

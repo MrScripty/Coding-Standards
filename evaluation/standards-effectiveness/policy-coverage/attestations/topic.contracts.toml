@@ -4,7 +4,7 @@ schema_version = 4
 subject = "topic.contracts.declaration-and-semantic-authority"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -16,14 +16,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.declaration-and-semantic-authority coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.declaration-and-semantic-authority coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "topic.contracts.generated-semantic-conformance"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -35,14 +35,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.generated-semantic-conformance coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.generated-semantic-conformance coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "topic.contracts.identity-versus-instance-equality"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -54,14 +54,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.identity-versus-instance-equality coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.identity-versus-instance-equality coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "topic.contracts.schema-dialect-and-vocabulary"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -73,14 +73,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.schema-dialect-and-vocabulary coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.schema-dialect-and-vocabulary coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "topic.contracts.version-scope-and-invalidation"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -92,5 +92,5 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.version-scope-and-invalidation coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.version-scope-and-invalidation coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

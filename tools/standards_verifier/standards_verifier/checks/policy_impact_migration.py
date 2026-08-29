@@ -19,8 +19,22 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from tools.standards_authority.standards_authority import (
+    GitIndexError,
+    staged_name_status,
+)
+from ..model import (
+    CheckAuthorityInput,
+    CheckContext,
+    CheckRepositoryIndexInput,
+    absent_inputs,
+    present_inputs,
+)
 from ..paths import contained_file
+from ..policy_impact import (
+    canonical_policy_impact_inputs,
+    load_policy_impact,
+)
 
 
 EVIDENCE_HEADER = (
@@ -88,6 +102,33 @@ class PolicyImpactMigrationCheck:
     retired_implementation: tuple[RetiredImplementationDisposition, ...]
     cases: tuple[MigrationCase, ...]
 
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        proposed = load_policy_impact(
+            context.repo_root,
+            self.proposed_registry,
+            dict(context.catalog.suite_paths),
+            suite=context.suite_id,
+            check=self.id,
+        )
+        return (
+            *present_inputs("migration-evidence", self.evidence),
+            *present_inputs("proposed-policy-impact", *proposed.input_sources),
+            *present_inputs(
+                "fixture-policy-impact",
+                *canonical_policy_impact_inputs(context.repo_root),
+            ),
+            *present_inputs(
+                "fixture-registry", *(case.registry for case in self.cases)
+            ),
+            *absent_inputs(
+                "retired-implementation",
+                *(item.path for item in self.retired_implementation),
+            ),
+            CheckRepositoryIndexInput("changed-production-paths"),
+        )
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         rows = _load_evidence(context, self.id, self.evidence)
         with _materialized_tree(context, self.id, self.accepted_tree) as accepted_name:
@@ -103,14 +144,14 @@ class PolicyImpactMigrationCheck:
             context,
             self.id,
         )
-        diagnostics = _compare(rows, accepted, proposed, context, self.id, self.evidence)
+        diagnostics = _compare(
+            rows, accepted, proposed, context, self.id, self.evidence
+        )
         diagnostics.extend(
             _compare_implementation_closure(
                 rows,
                 proposed,
-                _changed_production_paths(
-                    context, self.id, self.implementation_base
-                ),
+                _changed_production_paths(context, self.id, self.implementation_base),
                 context,
                 self.id,
                 self.evidence,
@@ -195,7 +236,9 @@ def _materialized_tree(
     check: str,
     tree: str,
 ) -> tempfile.TemporaryDirectory:
-    if len(tree) != 40 or any(character not in "0123456789abcdef" for character in tree):
+    if len(tree) != 40 or any(
+        character not in "0123456789abcdef" for character in tree
+    ):
         raise EngineError(
             Diagnostic(
                 "CONFIG.POLICY_IMPACT_MIGRATION_TREE",
@@ -352,7 +395,13 @@ def _record(
 ) -> MigrationRecord | None:
     values = tuple(
         raw[f"{prefix}_{field}"]
-        for field in ("source", "relation", "consumer", "declaration_source", "fingerprint")
+        for field in (
+            "source",
+            "relation",
+            "consumer",
+            "declaration_source",
+            "fingerprint",
+        )
     )
     if not any(values):
         return None
@@ -398,7 +447,9 @@ def _compare(
     actual_accepted = {record.key: record for record in accepted.records}
     actual_proposed = {record.key: record for record in proposed.records}
 
-    expected_sources = {record.declaration_source for record in expected_proposed.values()}
+    expected_sources = {
+        record.declaration_source for record in expected_proposed.values()
+    }
     actual_sources = {record.declaration_source for record in actual_proposed.values()}
     missing_sources = sorted(expected_sources - actual_sources)
     unexpected_sources = sorted(actual_sources - expected_sources)
@@ -445,11 +496,7 @@ def _compare(
                 )
             )
             continue
-        changed = sorted(
-            key
-            for key in expected
-            if expected[key] != actual[key]
-        )
+        changed = sorted(key for key in expected if expected[key] != actual[key])
         if changed:
             diagnostics.append(
                 _diagnostic(
@@ -469,7 +516,9 @@ def _changed_production_paths(
     check: str,
     base: str,
 ) -> tuple[frozenset[str], frozenset[str]]:
-    if len(base) != 40 or any(character not in "0123456789abcdef" for character in base):
+    if len(base) != 40 or any(
+        character not in "0123456789abcdef" for character in base
+    ):
         raise EngineError(
             Diagnostic(
                 "CONFIG.POLICY_IMPACT_IMPLEMENTATION_BASE",
@@ -480,13 +529,9 @@ def _changed_production_paths(
                 observed=base,
             )
         )
-    completed = subprocess.run(
-        ("git", "diff", "--name-status", "-z", base, "--", "tools"),
-        cwd=context.repo_root,
-        check=False,
-        capture_output=True,
-    )
-    if completed.returncode != 0:
+    try:
+        fields = list(staged_name_status(context.repo_root, base, ("tools",)))
+    except GitIndexError as error:
         raise EngineError(
             Diagnostic(
                 "POLICY_IMPACT_MIGRATION.IMPLEMENTATION_BASE_UNAVAILABLE",
@@ -494,12 +539,9 @@ def _changed_production_paths(
                 "cannot derive the changed production-source closure",
                 suite=context.suite_id,
                 check=check,
-                observed=base,
+                observed=f"{base}: {error}",
             )
-        )
-    fields = completed.stdout.decode("utf-8").split("\0")
-    if fields and fields[-1] == "":
-        fields.pop()
+        ) from error
     current: set[str] = set()
     retired: set[str] = set()
     index = 0
@@ -515,7 +557,7 @@ def _changed_production_paths(
                 raise AssertionError("Git rename output ended before its destination")
             second = fields[index]
             index += 1
-            if _is_production_source(first):
+            if status.startswith("R") and _is_production_source(first):
                 retired.add(first)
             if _is_production_source(second):
                 current.add(second)

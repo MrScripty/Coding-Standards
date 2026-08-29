@@ -27,13 +27,13 @@ def check_generated_artifacts(root: Path) -> int:
 
 
 def write_generated_artifacts(root: Path) -> int:
-    suite_inputs_result = write_suite_input_projection(root)
-    if suite_inputs_result != 0:
-        return suite_inputs_result
     graph_result = write_graph(root)
     if graph_result != 0:
         return graph_result
-    return write_inventory(root)
+    inventory_result = write_inventory(root)
+    if inventory_result != 0:
+        return inventory_result
+    return write_suite_input_projection(root)
 
 
 def main(argv: Sequence[str] | None = None, *, default_repo_root: Path) -> int:

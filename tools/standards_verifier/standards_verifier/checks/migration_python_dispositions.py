@@ -6,8 +6,14 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import (
+    CheckAuthorityInput,
+    CheckContext,
+    CheckRepositoryIndexInput,
+    present_inputs,
+)
 from ..paths import contained_file, contained_path
+from .git_index_paths import read_git_index
 from .table import read_table_rows
 
 
@@ -40,6 +46,25 @@ class MigrationPythonDispositionsCheck:
     package_path: str
     terminal_trigger: str
 
+    def _package_sources(self, context: CheckContext) -> tuple[str, ...]:
+        prefix = self.package_path.rstrip("/") + "/"
+        return tuple(
+            path
+            for path in sorted(
+                read_git_index(context.repo_root, context.suite_id, self.id)
+            )
+            if path.startswith(prefix) and path.endswith(".py")
+        )
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("dispositions", self.path),
+            *present_inputs("package-python", *self._package_sources(context)),
+            CheckRepositoryIndexInput("package-source-membership"),
+        )
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         candidates = self._candidates(context)
         rows = read_table_rows(
@@ -55,7 +80,9 @@ class MigrationPythonDispositionsCheck:
             if row["subject_kind"] in {"module", "check-kind"}
             and row["terminal_trigger"] == self.terminal_trigger
         }
-        expected = {(candidate.kind, candidate.subject): candidate for candidate in candidates}
+        expected = {
+            (candidate.kind, candidate.subject): candidate for candidate in candidates
+        }
         diagnostics: list[Diagnostic] = []
         for key in sorted(expected.keys() - dispositions.keys()):
             candidate = expected[key]
@@ -116,8 +143,7 @@ class MigrationPythonDispositionsCheck:
             )
         candidates: list[MigrationCandidate] = []
         check_kinds: set[str] = set()
-        for source in sorted(package.rglob("*.py")):
-            relative = source.relative_to(context.repo_root).as_posix()
+        for relative in self._package_sources(context):
             resolved = contained_file(
                 context.repo_root,
                 relative,
@@ -125,7 +151,9 @@ class MigrationPythonDispositionsCheck:
                 check=self.id,
             )
             try:
-                tree = ast.parse(resolved.read_text(encoding="utf-8"), filename=relative)
+                tree = ast.parse(
+                    resolved.read_text(encoding="utf-8"), filename=relative
+                )
             except (SyntaxError, UnicodeDecodeError) as error:
                 raise EngineError(
                     Diagnostic(
@@ -137,7 +165,9 @@ class MigrationPythonDispositionsCheck:
                         path=relative,
                     )
                 ) from error
-            trigger = self._constant(tree, "MIGRATION_TERMINAL_TRIGGER", relative, context)
+            trigger = self._constant(
+                tree, "MIGRATION_TERMINAL_TRIGGER", relative, context
+            )
             kinds = self._constant(tree, "MIGRATION_CHECK_KINDS", relative, context)
             if trigger is None and kinds is None:
                 continue
@@ -153,7 +183,7 @@ class MigrationPythonDispositionsCheck:
                         observed=str(trigger),
                     )
                 )
-            module = self._module_id(source.relative_to(package))
+            module = self._module_id(resolved.relative_to(package))
             candidates.append(MigrationCandidate("module", module, relative))
             if kinds is None:
                 continue
@@ -208,8 +238,7 @@ class MigrationPythonDispositionsCheck:
                 value = statement.value
                 targets = [statement.target]
             if value is None or not any(
-                isinstance(target, ast.Name) and target.id == name
-                for target in targets
+                isinstance(target, ast.Name) and target.id == name for target in targets
             ):
                 continue
             try:

@@ -17,6 +17,7 @@ from tools.standards_graph.standards_graph import (
     metadata_dependency_source,
 )
 from tools.standards_metadata.standards_metadata import (
+    CanonicalStandardsCorpus,
     MetadataError,
     PolicyUnitCorpus,
     load_canonical_standards_corpus,
@@ -35,7 +36,9 @@ from .paths import contained_file
 
 POLICY_GROUP = "policy-impact"
 DEFAULT_SOURCE_REGISTRY = "evaluation/standards-effectiveness/edge-source-registry.toml"
-DEFAULT_POLICY_REGISTRY = "evaluation/standards-effectiveness/policy-impact-registry.toml"
+DEFAULT_POLICY_REGISTRY = (
+    "evaluation/standards-effectiveness/policy-impact-registry.toml"
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -54,17 +57,14 @@ class PolicyImpactAdapter:
     compiled: CompiledPolicyImpactSet
     policy_units: PolicyUnitCorpus
     covered_subjects: frozenset[str] | None
+    input_sources: tuple[str, ...]
 
     @property
     def covered_owners(self) -> frozenset[str]:
         if self.covered_subjects is None:
             return frozenset()
         owners = {unit.module for unit in self.policy_units.units}
-        return frozenset(
-            owner
-            for owner in owners
-            if not self._uncovered(owner)
-        )
+        return frozenset(owner for owner in owners if not self._uncovered(owner))
 
     def consumers_for(self, owner: str) -> tuple[ImpactEdge, ...]:
         uncovered = self._uncovered(owner)
@@ -241,9 +241,7 @@ def _validate_adapter(
         semantics.source for semantics in compiled.semantics.values()
     }
     relationship_owners = {
-        unit.module
-        for unit in policy_units.units
-        if unit.id in relationship_sources
+        unit.module for unit in policy_units.units if unit.id in relationship_sources
     }
     for owner in sorted(relationship_owners):
         for edge in _declared_consumers(registry, compiled, policy_units, owner):
@@ -291,7 +289,13 @@ def load_policy_impact(
         suite=suite,
         check=check,
     )
-    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, None)
+    return PolicyImpactAdapter(
+        registry,
+        compiled,
+        corpus.policy_unit_corpus,
+        None,
+        _adapter_input_sources(corpus, compiled, suite_paths, registry_path),
+    )
 
 
 def load_registered_policy_impact(
@@ -306,7 +310,9 @@ def load_registered_policy_impact(
 
     try:
         corpus = load_canonical_standards_corpus(root.resolve())
-        compiled = compile_policy_impact(root.resolve(), corpus, DEFAULT_POLICY_REGISTRY)
+        compiled = compile_policy_impact(
+            root.resolve(), corpus, DEFAULT_POLICY_REGISTRY
+        )
         registry = load_repository_registry(
             root,
             source_registry_path,
@@ -343,4 +349,69 @@ def load_registered_policy_impact(
         )
     except AnalysisError as error:
         raise _translate_analysis_error(error, suite=suite, check=check) from error
-    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, covered)
+    return PolicyImpactAdapter(
+        registry,
+        compiled,
+        corpus.policy_unit_corpus,
+        covered,
+        _adapter_input_sources(
+            corpus,
+            compiled,
+            suite_paths,
+            source_registry_path,
+            "evaluation/standards-effectiveness/suite-registry.toml",
+        ),
+    )
+
+
+def _adapter_input_sources(
+    corpus: CanonicalStandardsCorpus,
+    compiled: CompiledPolicyImpactSet,
+    suite_paths: Mapping[str, str],
+    *registries: str,
+) -> tuple[str, ...]:
+    return tuple(
+        sorted(
+            {
+                *registries,
+                corpus.module_corpus.path,
+                *corpus.module_corpus.members,
+                corpus.policy_unit_corpus.registry,
+                *corpus.policy_unit_corpus.sources,
+                *compiled.input_sources,
+                *(artifact.repository_path for artifact in compiled.artifacts.values()),
+                *suite_paths.values(),
+            }
+        )
+    )
+
+
+def canonical_policy_impact_inputs(root: Path) -> tuple[str, ...]:
+    corpus = load_canonical_standards_corpus(root.resolve())
+    return tuple(
+        sorted(
+            {
+                corpus.module_corpus.path,
+                *corpus.module_corpus.members,
+                corpus.policy_unit_corpus.registry,
+                *corpus.policy_unit_corpus.sources,
+            }
+        )
+    )
+
+
+def registered_policy_impact_inputs(
+    root: Path,
+    source_registry_path: str,
+    suite_paths: Mapping[str, str],
+) -> tuple[str, ...]:
+    repository = root.resolve()
+    corpus = load_canonical_standards_corpus(repository)
+    compiled = compile_policy_impact(repository, corpus, DEFAULT_POLICY_REGISTRY)
+    return _adapter_input_sources(
+        corpus,
+        compiled,
+        suite_paths,
+        source_registry_path,
+        "evaluation/standards-effectiveness/suite-registry.toml",
+    )

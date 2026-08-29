@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .predicates import Predicate, parse_predicate
 
@@ -374,6 +374,14 @@ class TableCheck:
     members: MemberScope | None
     row_constraints: tuple[RowConstraint, ...]
 
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        declarations = list(present_inputs("table", self.path))
+        if self.members is not None:
+            declarations.extend(present_inputs("members", self.members.source.path))
+        return tuple(declarations)
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
         if not isinstance(root, Path):
@@ -394,9 +402,7 @@ class TableCheck:
                 if self.where is None or self.where.evaluate(row)
             ]
         else:
-            scoped_rows, scope_diagnostics = self._resolve_members(
-                root, rows, context
-            )
+            scoped_rows, scope_diagnostics = self._resolve_members(root, rows, context)
             diagnostics.extend(scope_diagnostics)
 
         for line_number, row in scoped_rows:
@@ -475,9 +481,7 @@ class TableCheck:
                 )
 
         for projection in self.projections:
-            actual = project_table_rows(
-                [row for _, row in scoped_rows], projection
-            )
+            actual = project_table_rows([row for _, row in scoped_rows], projection)
             if actual != projection.expected:
                 diagnostics.append(
                     Diagnostic(
@@ -508,9 +512,7 @@ class TableCheck:
             suite=context.suite_id,
             check=self.id,
         )
-        projected = project_table_rows(
-            member_rows, self.members.source.projection
-        )
+        projected = project_table_rows(member_rows, self.members.source.projection)
         diagnostics: list[Diagnostic] = []
         if not projected:
             diagnostics.append(
@@ -564,9 +566,7 @@ class TableCheck:
 
         canonical: dict[str, list[tuple[int, dict[str, str]]]] = {}
         for line_number, row in enumerate(rows, start=2):
-            canonical.setdefault(row[self.members.key], []).append(
-                (line_number, row)
-            )
+            canonical.setdefault(row[self.members.key], []).append((line_number, row))
 
         scoped_rows: list[tuple[int, dict[str, str]]] = []
         for member in members:
@@ -736,10 +736,7 @@ def _member_scope(
         projection_name="table member projection",
         predicate_name="table member predicate",
     )
-    if (
-        len(source.projection.columns) != 1
-        or source.projection.split_field is not None
-    ):
+    if len(source.projection.columns) != 1 or source.projection.split_field is not None:
         raise EngineError(
             Diagnostic(
                 "CONFIG.TABLE_MEMBER_PROJECTION",
@@ -839,9 +836,7 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
                 check=check_id,
             )
         )
-    unique = tuple(
-        _strings(key, "unique", suite_id, check_id) for key in raw_unique
-    )
+    unique = tuple(_strings(key, "unique", suite_id, check_id) for key in raw_unique)
     referenced = set(non_empty) | set(domains)
     referenced.update(field for key in unique for field in key)
     unknown_columns = referenced - set(header)
@@ -897,9 +892,7 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
             )
     members = None
     if "members" in raw:
-        members = _member_scope(
-            raw["members"], header, suite_id, check_id
-        )
+        members = _member_scope(raw["members"], header, suite_id, check_id)
     if where is not None and members is not None:
         raise EngineError(
             Diagnostic(

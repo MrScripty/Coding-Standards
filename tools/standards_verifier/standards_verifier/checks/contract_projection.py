@@ -11,7 +11,7 @@ from tools.standards_contracts.standards_contracts import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 
 
@@ -23,6 +23,17 @@ class ContractProjectionCheck:
     python: str
     agent_tools: str
     examples: str
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("schema", self.schema),
+            *present_inputs("interface", self.interface),
+            *present_inputs("generated-python", self.python),
+            *present_inputs("generated-agent-tools", self.agent_tools),
+            *present_inputs("examples", self.examples),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         try:
@@ -82,7 +93,13 @@ class ContractProjectionCheck:
             _validate_examples(
                 json.loads(examples_path.read_text(encoding="utf-8")), contracts
             )
-        except (ContractError, json.JSONDecodeError, OSError, UnicodeError, ValueError) as error:
+        except (
+            ContractError,
+            json.JSONDecodeError,
+            OSError,
+            UnicodeError,
+            ValueError,
+        ) as error:
             return [
                 Diagnostic(
                     "CONTRACT_EXAMPLES.INVALID",
@@ -201,7 +218,9 @@ def _validate_examples(raw: object, contracts: object) -> None:
     names: set[str] = set()
     for example in examples:
         if type(example) is not dict or set(example) != {"name", "definition", "value"}:
-            raise ValueError("each example must contain only name, definition, and value")
+            raise ValueError(
+                "each example must contain only name, definition, and value"
+            )
         name = example["name"]
         definition = example["definition"]
         if type(name) is not str or not name or name in names:

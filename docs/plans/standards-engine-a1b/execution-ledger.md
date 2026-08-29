@@ -994,3 +994,126 @@
 - A1B-027 is `Resolved` and Milestone 3 is `Implemented`. A1B-026 remains
   `Active` only until a new content-bound implementation review. Milestone 4
   remains `Planned`; the ADR remains `Proposed`; A2 remains inactive.
+
+## 2026-08-28 - Corrected Implementation Content Review Rejection
+
+- Independent Standards and Specification review rejected implementation
+  `ead04bc55c6cb43b0be66d31371d9fc909c3355c`, tree
+  `3a5f623c0891a1dd744f4a9280f9f31f6d2ae811`.
+- The suite-input projection duplicated check semantics and omitted transitive
+  inventory, repository-index, package-source, and entrypoint authority. The
+  accepted replacement gives each check one input-closure Interface and makes
+  Analysis the sole serialized-manifest contract owner.
+- Package verification still admitted reflective import acquisition through
+  `sys.modules`, built isolated fixtures from ambient working-directory files,
+  and classified Git copies as retired sources. Operation/codec evidence proved
+  membership but not declared cardinalities and dependency contracts.
+- The replacement import contract is a closed governed-source AST profile. It
+  rejects explicit and reflective runtime-import constructs while avoiding the
+  false claim that static analysis can decide adversarial arbitrary Python
+  computation.
+- `Superseded`: the Milestone 3 `Implemented` claim for `ead04bc5`. Milestone 3
+  returns to `Active`; A1B-027 is reopened and A1B-028 records the consolidated
+  correction. A1B-A6L remains satisfied. Milestone 4 and A2 remain unavailable.
+
+## 2026-08-28 - Milestone 3 Derived Checker Inventory Replan
+
+- The corrected check-owned authority test names one exact transitive retained
+  checker input. The temporary checker inventory therefore gains one executable
+  inbound reference while every checker source and dependency remains
+  unchanged.
+- `Superseded`: excluding the checker inventory from the Milestone 3 write set
+  after changing a source scanned by its existing generator.
+- Replacement: admit only the generated inventory and permit only the one
+  mechanically affected row's inbound-reference fields to change. Checker
+  source, dependency fields, graph artifacts, and unrelated rows remain
+  byte-identical.
+- This replan changes no checker behavior, migration architecture, C7 design,
+  semantic horizon, A2 scope, or commit topology. Milestone 3 remains `Active`.
+
+## 2026-08-28 - Milestone 3 Derived Checker Graph Replan
+
+- Generated freshness proved that the newly recorded executable inbound
+  reference also belongs in the temporary checker dependency graph. It adds no
+  checker dependency and changes no strongly connected component or wave.
+- `Superseded`: requiring every checker graph artifact to remain byte-identical
+  while admitting a new executable reference already owned by that graph.
+- Replacement: admit the three generated graph projections. Permit exactly one
+  executable-reference edge, its target node's inbound count, and its
+  component's inbound-file list to change. Dependency topology, checker source,
+  and all unrelated graph records remain byte-identical.
+- This is generated-evidence closure only. C7 architecture, semantic horizon,
+  A2 scope, and Milestone 3 lifecycle remain unchanged.
+
+## 2026-08-28 - Milestone 3 Exact-Index And Evidence Replan
+
+- Consolidated content review retained the corrected C7 architecture but
+  rejected the staged correction because indexed fixtures copied working-tree
+  bytes, migration comparison did not select the staged index or sanitize Git
+  repository overrides, and the governed-source AST profile rejected benign
+  shadowed capability names.
+- The same review found incomplete executable evidence: operation roles lacked
+  wrong-kind regressions, not every owner codec extractor was exercised, and
+  the suite-input matrix omitted tracked removal, stale suite-definition,
+  stale registry, and transitive-byte cases.
+- `Superseded`: independent Git calls in package and migration verification,
+  name-only capability matching, and the incomplete evidence matrix.
+- Replacement: one internal sanitized Git-index adapter owns exact membership,
+  staged comparison, and staged-blob materialization; the AST profile resolves
+  lexical shadowing and limits reflective rejection to known capability
+  provenance; owner and integration tests derive complete role, codec, and
+  manifest evidence from executable contracts without copied catalogs.
+- Coverage claims remain unrenewed. Milestone 3 and A1B-028 remain `Active`;
+  Milestone 4 and A2 remain unavailable.
+
+## 2026-08-28 - Milestone 3 Content Review Rejection And Authority Replan
+
+- Independent content review retained staged comparison, exact indexed-blob
+  materialization, Git copy/rename semantics, operation-role wrong-kind proof,
+  the suite-input mutation matrix, and complete changed-source migration.
+- It rejected coverage renewal because Analysis still owned a second Git-index
+  reader, Numeric Lifecycle omitted its inventory and checker-source inputs,
+  Analysis codec evidence copied the production tuple, and the AST scope model
+  admitted a class-body bypass while rejecting a benign comprehension binding.
+- `Superseded`: Verifier-local Git-index ownership, accidental cross-check input
+  coverage, the copied Analysis codec tuple, and unordered class/comprehension
+  scope approximation.
+- Replacement: Standards Authority owns one sanitized Git-index adapter used by
+  Analysis and Verifier; Numeric Lifecycle reads and declares the canonical
+  generated inventory plus its selected checker sources; owner tests derive
+  directly from `ANALYSIS_CODECS`; and the AST profile uses ordered binding
+  provenance with explicit comprehension scope.
+- Provider-v5 coverage claims remain unrenewed. Milestone 3 and A1B-028 remain
+  `Active`; Milestone 4 and A2 remain unavailable.
+
+## 2026-08-28 - Milestone 3 Corrected Content Review
+
+- Focused independent review accepted the shared Standards Authority Git-index
+  owner, Numeric Lifecycle authority closure, production-derived Analysis codec
+  evidence, policy-impact migration, and generated evidence.
+- The first review found one remaining Python lookup defect: methods and class
+  comprehensions incorrectly treated the containing class namespace as a
+  lexical parent. The scanner now skips non-current class scopes while retaining
+  ordered lookup in a directly executing class body.
+- Regressions prove nested methods and class comprehensions cannot hide a
+  module-level `sys.modules` capability, direct class-body ordering remains
+  correct, and benign comprehension bindings remain accepted.
+- The focused re-review found no blocker and authorized provider-v5 coverage
+  renewal. Milestone 3 remains `Active` until renewed certificate equality and
+  the complete verification checkpoint pass.
+
+## 2026-08-28 - Milestone 3 Implemented
+
+- All current attestations were explicitly renewed against the frozen
+  provider-v5 horizon. Required coverage subjects equal valid certificate
+  subjects, and the Verifier no longer reports uncovered owners.
+- Focused verification passed: Authority 39 with one capability-selected skip,
+  Analysis 66, Engine 36, Verifier 414, and the complete A1b public-cutover
+  dependency closure.
+- Generated freshness passed. The complete checkpoint passed all 226 registered
+  declarative suites and all 53 retained Bash migration checkers. Diff hygiene
+  passed.
+- A1B-026, A1B-027, and A1B-028 are `Resolved`; Milestone 3 is `Implemented`.
+  Milestone 4 is `Active` for one content-bound acceptance review. The ADR
+  remains `Proposed`, final A1b acceptance remains pending, and A2 remains
+  unavailable.

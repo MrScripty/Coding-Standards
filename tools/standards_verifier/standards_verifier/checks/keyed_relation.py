@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from .predicates import Predicate, parse_predicate
 from .table import (
     ProjectedTableSource,
@@ -148,6 +148,15 @@ class KeyedRelationCheck:
     keys: ProjectedTableSource
     expected: KeyedRecordSource
     observed: KeyedRecordSource
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("keys", self.keys.path),
+            *present_inputs("expected", self.expected.path),
+            *present_inputs("observed", self.observed.path),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
@@ -294,12 +303,8 @@ def parse_keyed_relation_check(
                 observed=str(len(keys.projection.columns)),
             )
         )
-    expected = _parse_record_source(
-        raw.get("expected"), suite_id, check_id, "expected"
-    )
-    observed = _parse_record_source(
-        raw.get("observed"), suite_id, check_id, "observed"
-    )
+    expected = _parse_record_source(raw.get("expected"), suite_id, check_id, "expected")
+    observed = _parse_record_source(raw.get("observed"), suite_id, check_id, "observed")
     if len(expected.values) != len(observed.values):
         raise EngineError(
             Diagnostic(

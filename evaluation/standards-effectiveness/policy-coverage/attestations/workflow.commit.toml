@@ -4,7 +4,7 @@ schema_version = 4
 subject = "workflow.commit.branch-context"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -16,14 +16,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-context coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.branch-context coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.branch-history-review"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -35,14 +35,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-history-review coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.branch-history-review coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.cherry-pick-lineage"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -54,14 +54,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.cherry-pick-lineage coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.cherry-pick-lineage coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.commit-message"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -73,14 +73,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.commit-message coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.commit-message coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.hook-bypass-authority"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -92,14 +92,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.hook-bypass-authority coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.hook-bypass-authority coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.integration-mechanisms"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -111,14 +111,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.integration-mechanisms coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.integration-mechanisms coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.invalid-outcomes"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -130,14 +130,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.invalid-outcomes coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.invalid-outcomes coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.isolation-applicability"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -149,14 +149,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.isolation-applicability coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.isolation-applicability coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.per-commit-boundary"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -168,14 +168,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.per-commit-boundary coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.per-commit-boundary coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.rewrite-authority"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -187,14 +187,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.rewrite-authority coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.rewrite-authority coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.terminal-branch-lifecycle"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -206,14 +206,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.terminal-branch-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.terminal-branch-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.topology"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -225,14 +225,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.topology coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.topology coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "workflow.commit.worktree-lifecycle"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 4
+horizon_version = 5
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -244,5 +244,5 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.worktree-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.commit.worktree-lifecycle coverage view was reviewed against the final A1b Milestone 3 provider-v5 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

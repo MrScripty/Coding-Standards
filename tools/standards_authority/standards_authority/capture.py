@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Protocol
 
 from .errors import AuthorityError, invalid, unavailable, unsupported
+from .git_index import sanitized_git_environment
 from .snapshot import CaptureRequest, ContentSnapshot, RepositoryPath, SnapshotFile
 
 _FS_IOC_GETFLAGS = 0x80086601
@@ -129,6 +130,7 @@ class GitCaptureSource:
                 check=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                env=sanitized_git_environment(),
             )
         except FileNotFoundError as error:
             raise unavailable(
@@ -183,6 +185,7 @@ class GitCaptureSource:
                 check=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                env=sanitized_git_environment(),
             ).stdout
         except FileNotFoundError as error:
             raise unavailable(

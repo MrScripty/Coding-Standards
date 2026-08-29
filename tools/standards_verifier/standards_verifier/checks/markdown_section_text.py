@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .literal_matching import (
     MatchCase,
@@ -43,6 +43,11 @@ class MarkdownSectionTextCheck:
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
     match_case: MatchCase
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return present_inputs("content", self.path)
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         source = contained_file(
@@ -85,7 +90,10 @@ class MarkdownSectionTextCheck:
         start = starts[0]
         end_line = None
         for item in headings:
-            if item.line_number > start.line_number and item.level <= self.heading_level:
+            if (
+                item.line_number > start.line_number
+                and item.level <= self.heading_level
+            ):
                 end_line = item.line_number
                 break
         lines = content.splitlines(keepends=True)

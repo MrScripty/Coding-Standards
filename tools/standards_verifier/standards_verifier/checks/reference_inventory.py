@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .table import read_table_rows
 
@@ -97,7 +97,9 @@ class ReferenceInventoryCheck:
     manifest_path_column: str
     literal: str
 
-    def run(self, context: CheckContext) -> list[Diagnostic]:
+    def _inventory_paths(
+        self, context: CheckContext
+    ) -> tuple[tuple[str, ...], tuple[str, ...]]:
         candidate_rows = read_table_rows(
             context.repo_root,
             self.candidates_path,
@@ -112,20 +114,39 @@ class ReferenceInventoryCheck:
             suite=context.suite_id,
             check=self.id,
         )
-        candidates = _paths(
-            candidate_rows,
-            self.candidate_path_column,
-            path=self.candidates_path,
-            suite=context.suite_id,
-            check=self.id,
+        return (
+            _paths(
+                candidate_rows,
+                self.candidate_path_column,
+                path=self.candidates_path,
+                suite=context.suite_id,
+                check=self.id,
+            ),
+            _paths(
+                manifest_rows,
+                self.manifest_path_column,
+                path=self.manifest_path,
+                suite=context.suite_id,
+                check=self.id,
+            ),
         )
-        manifested = _paths(
-            manifest_rows,
-            self.manifest_path_column,
-            path=self.manifest_path,
-            suite=context.suite_id,
-            check=self.id,
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        candidates, manifested = self._inventory_paths(context)
+        return (
+            *present_inputs(
+                "reference-inventory",
+                self.candidates_path,
+                self.manifest_path,
+            ),
+            *present_inputs("candidate-content", *candidates),
+            *present_inputs("manifested-content", *manifested),
         )
+
+    def run(self, context: CheckContext) -> list[Diagnostic]:
+        candidates, manifested = self._inventory_paths(context)
 
         selected: set[str] = set()
         for display_path in candidates:

@@ -52,6 +52,7 @@ from tools.standards_analysis.standards_analysis import (
     compile_coverage_definitions,
     evaluate_analysis,
     construct_authorization_grant,
+    load_captured_coverage_horizon,
     load_coverage_horizon,
     load_repository_coverage_authority,
     load_router_projection,
@@ -244,13 +245,15 @@ class StandardsEngine:
             corpus = load_canonical_standards_corpus(workspace)
             policy_impact = compile_policy_impact(workspace, corpus, DEFAULT_REGISTRY)
             router = load_router_projection(workspace, corpus.module_corpus)
-            horizon = load_coverage_horizon(workspace, corpus, policy_impact)
+            horizon = load_captured_coverage_horizon(
+                workspace, corpus, policy_impact
+            )
         if (
             corpus.module_corpus.members != initial_corpus.module_corpus.members
             or corpus.policy_unit_corpus.sources
             != initial_corpus.policy_unit_corpus.sources
             or policy_impact.input_sources != initial_impact.input_sources
-            or horizon.input_sources != initial_horizon.input_sources
+            or horizon != initial_horizon
         ):
             raise RuntimeError("captured authority closure differs from discovery")
 

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 - repository package roots must be installed before imports.
+
 import csv
+import subprocess
 import sys
 import tempfile
 import textwrap
@@ -72,6 +75,8 @@ class MigrationPythonDispositionsTest(unittest.TestCase):
             'path = "suite.toml"\n'
             "requires = []\n",
         )
+        subprocess.run(("git", "init", "-q"), cwd=self.root, check=True)
+        subprocess.run(("git", "add", "-A"), cwd=self.root, check=True)
 
     def tearDown(self) -> None:
         self.temp_dir.cleanup()

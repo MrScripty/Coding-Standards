@@ -4,8 +4,13 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
-from ..policy_impact import load_policy_impact, load_registered_policy_impact
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..policy_impact import (
+    canonical_policy_impact_inputs,
+    load_policy_impact,
+    load_registered_policy_impact,
+    registered_policy_impact_inputs,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -20,6 +25,28 @@ class PolicyImpactCheck:
     id: str
     source_registry: str | None
     cases: tuple[PolicyImpactCase, ...] | None
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        if self.source_registry is not None:
+            return present_inputs(
+                "registered-policy-impact",
+                *registered_policy_impact_inputs(
+                    context.repo_root,
+                    self.source_registry,
+                    dict(context.catalog.suite_paths),
+                ),
+            )
+        return (
+            *present_inputs(
+                "canonical-policy-impact",
+                *canonical_policy_impact_inputs(context.repo_root),
+            ),
+            *present_inputs(
+                "fixture-manifest", *(case.manifest for case in self.cases or ())
+            ),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         suite_paths = dict(context.catalog.suite_paths)
@@ -145,7 +172,11 @@ def parse_policy_impact_check(raw: dict[str, Any], suite_id: str) -> PolicyImpac
     cases: list[PolicyImpactCase] = []
     seen: set[str] = set()
     for raw_case in raw_cases:
-        if not isinstance(raw_case, dict) or set(raw_case) != {"id", "manifest", "expected"}:
+        if not isinstance(raw_case, dict) or set(raw_case) != {
+            "id",
+            "manifest",
+            "expected",
+        }:
             raise EngineError(
                 Diagnostic(
                     "CONFIG.POLICY_IMPACT_CASE",

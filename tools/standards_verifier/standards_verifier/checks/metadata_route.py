@@ -13,7 +13,7 @@ from tools.standards_graph.standards_graph import (
     METADATA_REQUIRES,
     metadata_dependency_registry,
 )
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from .table import read_table_rows
 
 
@@ -39,6 +39,17 @@ class MetadataRouteCheck:
     unresolved: str
     base_modules: tuple[str, ...]
     selections: tuple[RouteSelection, ...]
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        corpus = load_canonical_module_corpus(context.repo_root)
+        return (
+            *present_inputs("routing-cases", self.path),
+            *present_inputs("routing-expectations", self.expectations_path),
+            *present_inputs("canonical-module-corpus", corpus.path),
+            *present_inputs("canonical-module", *corpus.members),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         rows = read_table_rows(
@@ -243,7 +254,11 @@ class MetadataRouteCheck:
         row: int,
     ) -> tuple[str, ...]:
         values = tuple(value.split(","))
-        if not value or any(not item for item in values) or len(set(values)) != len(values):
+        if (
+            not value
+            or any(not item for item in values)
+            or len(set(values)) != len(values)
+        ):
             raise EngineError(
                 Diagnostic(
                     "ROUTING.MODULE_LIST",
@@ -337,7 +352,13 @@ def parse_metadata_route_check(raw: dict[str, Any], suite: str) -> MetadataRoute
             )
         )
     strings = {}
-    for field in ("path", "expectations_path", "route_column", "resolved", "unresolved"):
+    for field in (
+        "path",
+        "expectations_path",
+        "route_column",
+        "resolved",
+        "unresolved",
+    ):
         value = raw.get(field)
         if not isinstance(value, str) or not value:
             raise EngineError(
@@ -376,7 +397,12 @@ def parse_metadata_route_check(raw: dict[str, Any], suite: str) -> MetadataRoute
         )
     selections = []
     for item in raw_selections:
-        if not isinstance(item, dict) or set(item) != {"column", "selected", "excluded", "module"}:
+        if not isinstance(item, dict) or set(item) != {
+            "column",
+            "selected",
+            "excluded",
+            "module",
+        }:
             raise EngineError(
                 Diagnostic(
                     "CONFIG.ROUTING_SELECTION",

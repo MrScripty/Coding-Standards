@@ -22,6 +22,7 @@ from tools.standards_authority.standards_authority import (
     AuthorityHandle,
     AuthorityReference,
     AuthorityRepository,
+    decode_envelope,
     ExecutionAuthorityRoot,
     ExecutionClosure,
     MemoryObjectStore,
@@ -38,6 +39,7 @@ from tools.standards_engine.standards_engine import (
     StandardsEngine,
 )
 from tools.standards_engine.standards_engine.authority import (
+    OPERATION_AUTHORITY_CODEC,
     OperationAuthorityContract,
     RoleRequirement,
     operation_contracts,
@@ -92,13 +94,25 @@ class ExactAuthorizer:
 
 class C7AnalysisLifecycleTests(unittest.TestCase):
     def test_operation_contracts_use_owned_codecs_and_exact_root_sides(self) -> None:
-        codec_kinds = {
-            codec.object_kind for owner in _codec_sets() for codec in owner.codecs
-        }
-        contracts = {contract.operation: contract for contract in operation_contracts()}
-        self.assertEqual(set(contracts), {"route", "read", "related", "analysis"})
-        for contract in contracts.values():
+        codecs = tuple(codec for owner in _codec_sets() for codec in owner.codecs)
+        codec_kinds = {codec.object_kind for codec in codecs}
+        contracts = operation_contracts()
+        self.assertTrue(contracts)
+        self.assertEqual(
+            len({contract.operation for contract in contracts}), len(contracts)
+        )
+        for codec in codecs:
+            with self.subTest(codec=codec.object_kind):
+                self.assertLessEqual(codec.allowed_dependency_kinds, codec_kinds)
+        for contract in contracts:
             with self.subTest(operation=contract.operation):
+                self.assertEqual(
+                    OPERATION_AUTHORITY_CODEC.decode(
+                        OPERATION_AUTHORITY_CODEC.encode(contract),
+                        self.repository.codec_context(),
+                    ),
+                    contract,
+                )
                 for requirement in (
                     *contract.required_view_roles,
                     *contract.allowed_dynamic_roles,
@@ -109,6 +123,7 @@ class C7AnalysisLifecycleTests(unittest.TestCase):
         navigation = self.engine.query(
             QueryCall(self.engine.view, ReadRequest("read", POLICY))
         )
+        _complete(self.engine, analysis, "codec-closure")
         for result, expected_side in (
             (analysis, "transition"),
             (navigation, "current"),
@@ -122,6 +137,258 @@ class C7AnalysisLifecycleTests(unittest.TestCase):
             )
             self.assertEqual(len(operation_roots), 1)
             self.assertEqual(operation_roots[0].side, expected_side)
+
+        stored_kinds = {
+            decode_envelope(encoded).object_kind
+            for _, encoded in self.repository._store._all_rows()
+        }
+        non_analysis_kinds = {
+            codec.object_kind
+            for owner in _codec_sets()
+            if owner.owner_id != "standards-analysis"
+            for codec in owner.codecs
+        }
+        self.assertLessEqual(non_analysis_kinds, stored_kinds)
+        self.repository._verify_all_stored()
+
+    def test_operation_cardinality_evidence_is_derived_from_contracts(self) -> None:
+        codec_kinds = {
+            codec.object_kind for owner in _codec_sets() for codec in owner.codecs
+        }
+        for contract in operation_contracts():
+            operation = AuthorityReference(
+                "operation-authority-contract",
+                "operation-authority-contract:sha256:" + "0" * 64,
+            )
+            operation_side = (
+                "transition" if contract.operation == "analysis" else "current"
+            )
+            required_roots = tuple(
+                ExecutionAuthorityRoot(
+                    "current",
+                    requirement.role,
+                    AuthorityReference(
+                        requirement.object_kind,
+                        f"{requirement.object_kind}:sha256:" + "1" * 64,
+                    ),
+                )
+                for requirement in contract.required_view_roles
+            )
+            operation_root = ExecutionAuthorityRoot(
+                operation_side, "operation-contract", operation
+            )
+            dynamic_roots = {
+                requirement.role: tuple(
+                    ExecutionAuthorityRoot(
+                        "current",
+                        requirement.role,
+                        AuthorityReference(
+                            requirement.object_kind,
+                            f"{requirement.object_kind}:sha256:"
+                            + f"{offset + 3:064x}",
+                        ),
+                    )
+                    for offset in range(requirement.minimum_cardinality)
+                )
+                for requirement in contract.allowed_dynamic_roles
+            }
+            minimum_dynamic_roots = tuple(
+                root
+                for requirement in contract.allowed_dynamic_roles
+                for root in dynamic_roots[requirement.role]
+            )
+            closure = ExecutionClosure(
+                contract.operation,
+                (operation_root, *required_roots, *minimum_dynamic_roots),
+            )
+            validate_execution_authority(closure, operation, contract, ("current",))
+
+            for index, requirement in enumerate(contract.required_view_roles):
+                with self.subTest(
+                    operation=contract.operation,
+                    role=requirement.role,
+                    case="below-minimum",
+                ):
+                    missing = ExecutionClosure(
+                        contract.operation,
+                        (
+                            operation_root,
+                            *(
+                                root
+                                for offset, root in enumerate(required_roots)
+                                if offset != index
+                            ),
+                            *minimum_dynamic_roots,
+                        ),
+                    )
+                    with self.assertRaisesRegex(Exception, "cardinality"):
+                        validate_execution_authority(
+                            missing, operation, contract, ("current",)
+                        )
+                if requirement.maximum_cardinality is not None:
+                    with self.subTest(
+                        operation=contract.operation,
+                        role=requirement.role,
+                        case="above-maximum",
+                    ):
+                        duplicate = ExecutionAuthorityRoot(
+                            "current",
+                            requirement.role,
+                            AuthorityReference(
+                                requirement.object_kind,
+                                f"{requirement.object_kind}:sha256:" + "2" * 64,
+                            ),
+                        )
+                        excessive = ExecutionClosure(
+                            contract.operation,
+                            (
+                                operation_root,
+                                *required_roots,
+                                duplicate,
+                                *minimum_dynamic_roots,
+                            ),
+                        )
+                        with self.assertRaisesRegex(Exception, "cardinality"):
+                            validate_execution_authority(
+                                excessive, operation, contract, ("current",)
+                            )
+                wrong_kind = next(
+                    kind for kind in sorted(codec_kinds) if kind != requirement.object_kind
+                )
+                wrong_root = ExecutionAuthorityRoot(
+                    "current",
+                    requirement.role,
+                    AuthorityReference(
+                        wrong_kind, f"{wrong_kind}:sha256:" + "3" * 64
+                    ),
+                )
+                wrong_required = tuple(
+                    wrong_root if offset == index else root
+                    for offset, root in enumerate(required_roots)
+                )
+                with self.subTest(
+                    operation=contract.operation,
+                    role=requirement.role,
+                    case="wrong-kind",
+                ):
+                    with self.assertRaisesRegex(Exception, "wrong authority kind"):
+                        validate_execution_authority(
+                            ExecutionClosure(
+                                contract.operation,
+                                (
+                                    operation_root,
+                                    *wrong_required,
+                                    *minimum_dynamic_roots,
+                                ),
+                            ),
+                            operation,
+                            contract,
+                            ("current",),
+                        )
+            for requirement in contract.allowed_dynamic_roles:
+                other_dynamic_roots = tuple(
+                    root
+                    for role, roots in dynamic_roots.items()
+                    if role != requirement.role
+                    for root in roots
+                )
+                validate_execution_authority(
+                    ExecutionClosure(
+                        contract.operation,
+                        (
+                            operation_root,
+                            *required_roots,
+                            *other_dynamic_roots,
+                            *dynamic_roots[requirement.role],
+                        ),
+                    ),
+                    operation,
+                    contract,
+                    ("current",),
+                )
+                if requirement.minimum_cardinality:
+                    with self.subTest(
+                        operation=contract.operation,
+                        role=requirement.role,
+                        case="dynamic-below-minimum",
+                    ):
+                        with self.assertRaisesRegex(Exception, "cardinality"):
+                            validate_execution_authority(
+                                ExecutionClosure(
+                                    contract.operation,
+                                    (
+                                        operation_root,
+                                        *required_roots,
+                                        *other_dynamic_roots,
+                                    ),
+                                ),
+                                operation,
+                                contract,
+                                ("current",),
+                            )
+                if requirement.maximum_cardinality is not None:
+                    excessive = tuple(
+                        ExecutionAuthorityRoot(
+                            "current",
+                            requirement.role,
+                            AuthorityReference(
+                                requirement.object_kind,
+                                f"{requirement.object_kind}:sha256:"
+                                + f"{offset + 20:064x}",
+                            ),
+                        )
+                        for offset in range(requirement.maximum_cardinality + 1)
+                    )
+                    with self.subTest(
+                        operation=contract.operation,
+                        role=requirement.role,
+                        case="dynamic-above-maximum",
+                    ):
+                        with self.assertRaisesRegex(Exception, "cardinality"):
+                            validate_execution_authority(
+                                ExecutionClosure(
+                                    contract.operation,
+                                    (
+                                        operation_root,
+                                        *required_roots,
+                                        *other_dynamic_roots,
+                                        *excessive,
+                                    ),
+                                ),
+                                operation,
+                                contract,
+                                ("current",),
+                            )
+                wrong_kind = next(
+                    kind for kind in sorted(codec_kinds) if kind != requirement.object_kind
+                )
+                with self.subTest(
+                    operation=contract.operation,
+                    role=requirement.role,
+                    case="dynamic-wrong-kind",
+                ):
+                    with self.assertRaisesRegex(Exception, "wrong authority kind"):
+                        validate_execution_authority(
+                            ExecutionClosure(
+                                contract.operation,
+                                (
+                                    operation_root,
+                                    *required_roots,
+                                    *other_dynamic_roots,
+                                    ExecutionAuthorityRoot(
+                                        "current",
+                                        requirement.role,
+                                        AuthorityReference(
+                                            wrong_kind,
+                                            f"{wrong_kind}:sha256:" + "4" * 64,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            operation,
+                            contract,
+                            ("current",),
+                        )
 
     def test_required_execution_role_rejects_multiple_roots(self) -> None:
         operation = AuthorityReference(
@@ -230,15 +497,11 @@ class C7AnalysisLifecycleTests(unittest.TestCase):
                 request = _request(engine)
                 parent = engine.prepare(request)
                 child = _complete(engine, parent, "cold-replay")
-                base, proposed = (
-                    _view_handle(item) for item in engine.analysis_views
-                )
+                base, proposed = (_view_handle(item) for item in engine.analysis_views)
                 current = _view_handle(engine.view)
 
             with SQLiteObjectStore(path) as reopened:
-                cold = StandardsEngine(
-                    _repository(reopened), current, (base, proposed)
-                )
+                cold = StandardsEngine(_repository(reopened), current, (base, proposed))
                 replay = cold.prepare(
                     AnalysisRequest.from_value(
                         {
@@ -262,6 +525,8 @@ class C7AnalysisLifecycleTests(unittest.TestCase):
                     ".git", ".standards-engine", "__pycache__", "*.pyc"
                 ),
             )
+            subprocess.run(("git", "init", "-q"), cwd=root, check=True)
+            subprocess.run(("git", "add", "-A"), cwd=root, check=True)
             created = _run_fresh_python(
                 root,
                 """
@@ -367,9 +632,7 @@ print(json.dumps([
                 input_value=created,
             )
 
-            expected = [
-                item["expected"] for item in json.loads(created)["handles"]
-            ]
+            expected = [item["expected"] for item in json.loads(created)["handles"]]
             self.assertEqual(json.loads(inspected), expected)
 
 
@@ -398,8 +661,7 @@ def _run_fresh_python(
     )
     if completed.returncode:
         raise AssertionError(
-            f"fresh Python process failed ({completed.returncode}):\n"
-            f"{completed.stderr}"
+            f"fresh Python process failed ({completed.returncode}):\n{completed.stderr}"
         )
     return completed.stdout.strip()
 

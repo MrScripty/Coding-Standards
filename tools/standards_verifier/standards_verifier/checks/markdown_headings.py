@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file
 from .markdown import scan_headings
 
@@ -51,6 +51,11 @@ class MarkdownHeadingsCheck:
     level: int
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return present_inputs("content", self.path)
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         source = contained_file(

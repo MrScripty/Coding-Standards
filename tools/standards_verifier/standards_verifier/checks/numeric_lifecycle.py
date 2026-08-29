@@ -5,8 +5,8 @@ from pathlib import PurePosixPath
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..inventory import collect_inventory
-from ..model import CheckContext
+from ..inventory import INVENTORY_HEADER, OUTPUT_PATH
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..numeric_audit import HEADER, NumericAuditDiagnostic, collect_candidates
 from ..numeric_retirements import PACKAGES_HEADER as RETIREMENT_PACKAGES_HEADER
 from ..numeric_retirements import RETIREMENTS_HEADER
@@ -147,6 +147,51 @@ class NumericLifecycleCheck:
     retirement_packages_path: str
     retirements_path: str
 
+    def _live_checkers(self, context: CheckContext) -> tuple[str, ...]:
+        inventory_path = OUTPUT_PATH.as_posix()
+        rows = read_table_rows(
+            context.repo_root,
+            inventory_path,
+            INVENTORY_HEADER,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        checkers = tuple(row["checker"] for row in rows)
+        for row, checker in enumerate(checkers, start=2):
+            _validate_historical_checker(
+                checker,
+                path=inventory_path,
+                row=row,
+                suite=context.suite_id,
+                check=self.id,
+            )
+        if len(set(checkers)) != len(checkers):
+            raise EngineError(
+                Diagnostic(
+                    "NUMERIC_LIFECYCLE.DUPLICATE_CHECKER",
+                    "invalid",
+                    "canonical checker inventory contains a repeated checker",
+                    suite=context.suite_id,
+                    check=self.id,
+                    path=inventory_path,
+                )
+            )
+        return checkers
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return present_inputs(
+            "numeric-lifecycle",
+            self.baseline_path,
+            self.decisions_path,
+            self.packages_path,
+            self.retirement_packages_path,
+            self.retirements_path,
+            OUTPUT_PATH.as_posix(),
+            *self._live_checkers(context),
+        )
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         baseline_rows = read_table_rows(
             context.repo_root,
@@ -278,19 +323,7 @@ class NumericLifecycleCheck:
                 )
             ]
 
-        try:
-            inventory = collect_inventory(context.repo_root)
-        except UnicodeDecodeError as error:
-            raise EngineError(
-                Diagnostic(
-                    "NUMERIC_LIFECYCLE.INVENTORY_INVALID_UTF8",
-                    "invalid",
-                    "canonical checker inventory contains invalid UTF-8",
-                    suite=context.suite_id,
-                    check=self.id,
-                )
-            ) from error
-        live_checkers = {record.checker for record in inventory}
+        live_checkers = set(self._live_checkers(context))
         try:
             current_candidates = collect_candidates(
                 context.repo_root,
@@ -300,7 +333,9 @@ class NumericLifecycleCheck:
             raise _translate_audit_error(
                 error, suite=context.suite_id, check=self.id
             ) from error
-        current = {candidate.candidate_id: candidate for candidate in current_candidates}
+        current = {
+            candidate.candidate_id: candidate for candidate in current_candidates
+        }
         current_ids = set(current)
 
         new_ids = sorted(current_ids - baseline_ids)
@@ -516,7 +551,5 @@ def parse_numeric_lifecycle_check(
             suite_id,
             check_id,
         ),
-        _string(
-            raw.get("retirements_path"), "retirements_path", suite_id, check_id
-        ),
+        _string(raw.get("retirements_path"), "retirements_path", suite_id, check_id),
     )

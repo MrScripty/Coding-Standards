@@ -9,7 +9,7 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 
 
 @dataclass(frozen=True, slots=True)
@@ -24,6 +24,14 @@ class MetadataGraphCheck:
     id: str
     paths: tuple[str, ...] | None
     cases: tuple[MetadataCase, ...] | None
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        paths = self.paths or tuple(
+            path for case in self.cases or () for path in case.paths
+        )
+        return present_inputs("metadata", *paths)
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         if self.paths is not None:

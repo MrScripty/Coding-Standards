@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckAuthorityInput, CheckContext, present_inputs
 from ..paths import contained_file, contained_path
 from .table import (
     ProjectedTableSource,
@@ -107,6 +106,21 @@ class RepositorySubjectsCheck:
     id: str
     subjects: ProjectedTableSource
 
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        subjects = read_projected_table_rows(context, self.id, self.subjects)
+        checker_paths = tuple(
+            identity
+            for (subject,) in subjects
+            for kind, separator, identity in (subject.partition(":"),)
+            if separator and kind == "checker"
+        )
+        return (
+            *present_inputs("subjects", self.subjects.path),
+            *present_inputs("checker-subject", *checker_paths),
+        )
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         subjects, diagnostics = _values(
             context,
@@ -181,6 +195,16 @@ class RepositoryPathsCheck:
     id: str
     paths: ProjectedTableSource
 
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        rows = read_projected_table_rows(context, self.id, self.paths)
+        paths = tuple(value for row in rows for value in row if value)
+        return (
+            *present_inputs("paths", self.paths.path),
+            *present_inputs("projected-repository-path", *paths),
+        )
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         paths, diagnostics = _values(
             context,
@@ -239,6 +263,14 @@ class KeyCoverageCheck:
     keys: ProjectedTableSource
     records: ProjectedTableSource
 
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("keys", self.keys.path),
+            *present_inputs("records", self.records.path),
+        )
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
         keys, key_diagnostics = _values(
             context,
@@ -293,6 +325,14 @@ class TableTextAbsenceCheck:
     id: str
     path: str
     literals: ProjectedTableSource
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("content", self.path),
+            *present_inputs("literals", self.literals.path),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         literals, diagnostics = _values(
@@ -357,22 +397,16 @@ def parse_repository_paths_check(
     allowed = {"id", "type", "paths"}
     _reject_unknown(raw, allowed, suite_id, "repository paths")
     check_id = _check_id(raw, suite_id)
-    paths = _source(
-        raw.get("paths"), suite_id, check_id, "paths", "REPOSITORY_PATHS"
-    )
+    paths = _source(raw.get("paths"), suite_id, check_id, "paths", "REPOSITORY_PATHS")
     return RepositoryPathsCheck(check_id, paths)
 
 
-def parse_key_coverage_check(
-    raw: dict[str, Any], suite_id: str
-) -> KeyCoverageCheck:
+def parse_key_coverage_check(raw: dict[str, Any], suite_id: str) -> KeyCoverageCheck:
     allowed = {"id", "type", "keys", "records"}
     _reject_unknown(raw, allowed, suite_id, "key coverage")
     check_id = _check_id(raw, suite_id)
     keys = _source(raw.get("keys"), suite_id, check_id, "keys", "KEY_COVERAGE")
-    records = _source(
-        raw.get("records"), suite_id, check_id, "records", "KEY_COVERAGE"
-    )
+    records = _source(raw.get("records"), suite_id, check_id, "records", "KEY_COVERAGE")
     return KeyCoverageCheck(check_id, keys, records)
 
 

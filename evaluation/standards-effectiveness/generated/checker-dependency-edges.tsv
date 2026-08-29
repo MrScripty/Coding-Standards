@@ -241,6 +241,7 @@ executable_reference	evaluation/standards-effectiveness/verify-validation-proof-
 executable_reference	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 executable_reference	tools/standards_verifier/standards_verifier/inventory.py	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	tools/standards_verifier/tests/test_inventory.py	evaluation/standards-effectiveness/check-decision-table.sh
+executable_reference	tools/standards_verifier/tests/test_suite_inputs.py	evaluation/standards-effectiveness/verify-contract-ownership.sh
 helper_dependency	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-binding-generation-authority.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/check-metadata.sh

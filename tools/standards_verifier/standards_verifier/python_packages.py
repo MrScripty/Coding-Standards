@@ -3,7 +3,6 @@ from __future__ import annotations
 import ast
 import json
 import re
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -11,6 +10,12 @@ import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Iterable
+
+from tools.standards_authority.standards_authority import (
+    GitIndexError,
+    indexed_paths,
+    materialize_index,
+)
 
 
 _PYTHON_RANGE = ">=3.11,<3.13"
@@ -27,9 +32,7 @@ _IMPORT_MACHINERY_ROOTS = frozenset(
         "zipimport",
     }
 )
-_IMPORT_CAPABILITY_NAMES = frozenset(
-    {"__builtins__", "__import__", "compile", "eval", "exec"}
-)
+_IMPORT_CAPABILITY_NAMES = frozenset({"__import__", "eval", "exec"})
 _IMPORT_CAPABILITY_ATTRIBUTES = frozenset(
     {
         "__import__",
@@ -83,25 +86,6 @@ def _dependency_name(requirement: str) -> str:
     if match is None:
         return ""
     return match.group(0).lower().replace("_", "-")
-
-
-def _indexed_paths(root: Path) -> tuple[str, ...]:
-    completed = subprocess.run(
-        ("git", "ls-files", "-z", "--cached"),
-        cwd=root,
-        check=False,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-    if completed.returncode != 0:
-        raise RuntimeError(completed.stderr.decode("utf-8", errors="replace"))
-    return tuple(
-        sorted(
-            path.decode("utf-8")
-            for path in completed.stdout.split(b"\0")
-            if path
-        )
-    )
 
 
 def _load_contract(
@@ -280,8 +264,10 @@ def _entrypoint_contracts(value: object) -> tuple[EntrypointContract, ...] | Non
 
 def _is_repository_path(value: str) -> bool:
     path = PurePosixPath(value)
-    return not path.is_absolute() and bool(path.parts) and not any(
-        part in {"", ".", ".."} for part in path.parts
+    return (
+        not path.is_absolute()
+        and bool(path.parts)
+        and not any(part in {"", ".", ".."} for part in path.parts)
     )
 
 
@@ -295,7 +281,9 @@ def _local_module_path(package_file: Path, module: str | None) -> Path:
     return base / "__init__.py"
 
 
-def resolve_public_exports(root: Path, contract: PythonPackageContract) -> tuple[str, ...]:
+def resolve_public_exports(
+    root: Path, contract: PythonPackageContract
+) -> tuple[str, ...]:
     cache: dict[Path, tuple[str, ...]] = {}
 
     def resolve(path: Path) -> tuple[str, ...]:
@@ -311,17 +299,13 @@ def resolve_public_exports(root: Path, contract: PythonPackageContract) -> tuple
                 for name in node.names:
                     if name.name == "__all__" and name.asname:
                         aliases[name.asname] = resolve(child)
-            if (
-                isinstance(node, (ast.Assign, ast.AnnAssign))
-                and (
-                    any(
-                        isinstance(target, ast.Name) and target.id == "__all__"
-                        for target in node.targets
-                    )
-                    if isinstance(node, ast.Assign)
-                    else isinstance(node.target, ast.Name)
-                    and node.target.id == "__all__"
+            if isinstance(node, (ast.Assign, ast.AnnAssign)) and (
+                any(
+                    isinstance(target, ast.Name) and target.id == "__all__"
+                    for target in node.targets
                 )
+                if isinstance(node, ast.Assign)
+                else isinstance(node.target, ast.Name) and node.target.id == "__all__"
             ):
                 value = node.value
                 if value is not None:
@@ -376,15 +360,15 @@ def _imported_dependencies(
     findings: list[PythonPackageFinding] = []
     for path in source_paths:
         tree = ast.parse((root / path).read_text(encoding="utf-8"), filename=path)
-        for node in ast.walk(tree):
-            if _uses_dynamic_import_capability(node):
-                findings.append(
-                    PythonPackageFinding(
-                        "PYTHON_PACKAGE.DYNAMIC_IMPORT",
-                        "production sources cannot bypass static import ownership",
-                        path,
-                    )
+        if _uses_dynamic_import_capability(tree):
+            findings.append(
+                PythonPackageFinding(
+                    "PYTHON_PACKAGE.DYNAMIC_IMPORT",
+                    "production sources cannot bypass static import ownership",
+                    path,
                 )
+            )
+        for node in ast.walk(tree):
             modules: list[tuple[str, tuple[ast.alias, ...], bool]] = []
             if isinstance(node, ast.Import):
                 modules.extend((item.name, (), False) for item in node.names)
@@ -440,31 +424,332 @@ def _imported_dependencies(
                             observed=module,
                         )
                     )
-                elif top_level not in sys.stdlib_module_names and top_level != "__future__":
+                elif (
+                    top_level not in sys.stdlib_module_names
+                    and top_level != "__future__"
+                ):
                     dependencies.add(top_level.lower().replace("_", "-"))
     return dependencies, findings
 
 
-def _uses_dynamic_import_capability(node: ast.AST) -> bool:
-    if isinstance(node, ast.Import):
-        return any(
+def _constant_text(node: ast.AST) -> str | None:
+    if isinstance(node, ast.Constant) and type(node.value) is str:
+        return node.value
+    return None
+
+
+@dataclass(frozen=True, slots=True, order=True)
+class _BindingEvent:
+    position: tuple[int, int]
+    provenance: str
+
+
+class _ScopeFacts(ast.NodeVisitor):
+    def __init__(self) -> None:
+        self.bindings: set[str] = set()
+        self.events: dict[str, list[_BindingEvent]] = {}
+        self.nonlocal_names: set[str] = set()
+
+    def _bind(self, name: str, node: ast.AST, provenance: str = "other") -> None:
+        self.bindings.add(name)
+        self.events.setdefault(name, []).append(
+            _BindingEvent(
+                (getattr(node, "lineno", 0), getattr(node, "col_offset", 0)),
+                provenance,
+            )
+        )
+
+    def visit_Name(self, node: ast.Name) -> None:
+        if isinstance(node.ctx, (ast.Store, ast.Del)):
+            self._bind(node.id, node)
+
+    def visit_arg(self, node: ast.arg) -> None:
+        self._bind(node.arg, node)
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        self._bind(node.name, node)
+
+    visit_AsyncFunctionDef = visit_FunctionDef
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        self._bind(node.name, node)
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        del node
+
+    def visit_ListComp(self, node: ast.ListComp) -> None:
+        del node
+
+    visit_SetComp = visit_ListComp
+    visit_DictComp = visit_ListComp
+    visit_GeneratorExp = visit_ListComp
+
+    def visit_Import(self, node: ast.Import) -> None:
+        for item in node.names:
+            name = item.asname or item.name.split(".", 1)[0]
+            self._bind(name, item, "sys" if item.name == "sys" else "other")
+
+    def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        for item in node.names:
+            self._bind(item.asname or item.name, item)
+
+    def visit_Global(self, node: ast.Global) -> None:
+        self.nonlocal_names.update(node.names)
+
+    def visit_Nonlocal(self, node: ast.Nonlocal) -> None:
+        self.nonlocal_names.update(node.names)
+
+
+def _scope_facts(node: ast.AST) -> tuple[frozenset[str], dict[str, tuple[_BindingEvent, ...]]]:
+    collector = _ScopeFacts()
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+        collector.visit(node.args)
+        body = node.body if not isinstance(node, ast.Lambda) else (node.body,)
+    else:
+        body = getattr(node, "body", ())
+    for child in body:
+        collector.visit(child)
+    bindings = frozenset(collector.bindings - collector.nonlocal_names)
+    return bindings, {
+        name: tuple(sorted(events))
+        for name, events in collector.events.items()
+        if name in bindings
+    }
+
+
+class _DynamicImportProfile(ast.NodeVisitor):
+    def __init__(self, tree: ast.Module) -> None:
+        self.detected = False
+        bindings, events = _scope_facts(tree)
+        self._scopes = [bindings]
+        self._events = [events]
+        self._scope_kinds = ["module"]
+
+    @staticmethod
+    def _position(node: ast.AST) -> tuple[int, int]:
+        return getattr(node, "lineno", 0), getattr(node, "col_offset", 0)
+
+    @staticmethod
+    def _latest_event(
+        events: dict[str, tuple[_BindingEvent, ...]], name: str, node: ast.AST
+    ) -> _BindingEvent | None:
+        position = _DynamicImportProfile._position(node)
+        selected = tuple(
+            event for event in events.get(name, ()) if event.position < position
+        )
+        return selected[-1] if selected else None
+
+    def _shadowed(self, name: str, node: ast.AST) -> bool:
+        current = len(self._scopes) - 1
+        for index in range(current, -1, -1):
+            kind = self._scope_kinds[index]
+            if kind == "class" and index != current:
+                continue
+            bindings = self._scopes[index]
+            events = self._events[index]
+            if name not in bindings:
+                continue
+            if kind in {"function", "comprehension"}:
+                return True
+            if self._latest_event(events, name, node) is not None:
+                return True
+        return False
+
+    def _is_sys_alias(self, name: str, node: ast.AST) -> bool:
+        current = len(self._scopes) - 1
+        for index in range(current, -1, -1):
+            kind = self._scope_kinds[index]
+            if kind == "class" and index != current:
+                continue
+            bindings = self._scopes[index]
+            events = self._events[index]
+            if name not in bindings:
+                continue
+            if kind == "function" and index != current:
+                return any(
+                    event.provenance == "sys" for event in events.get(name, ())
+                )
+            selected = self._latest_event(events, name, node)
+            if selected is not None:
+                return selected.provenance == "sys"
+            if kind != "class":
+                return False
+        return False
+
+    def _known_source(self, node: ast.AST) -> bool:
+        if isinstance(node, ast.Name):
+            return node.id == "__builtins__" and not self._shadowed(node.id, node)
+        if isinstance(node, ast.Attribute):
+            return (
+                node.attr == "modules"
+                and isinstance(node.value, ast.Name)
+                and self._is_sys_alias(node.value.id, node.value)
+            )
+        if isinstance(node, ast.Subscript):
+            return self._known_source(node.value)
+        return False
+
+    def _visit_scope(self, node: ast.AST, children: Iterable[ast.AST]) -> None:
+        bindings, events = _scope_facts(node)
+        self._scopes.append(bindings)
+        self._events.append(events)
+        self._scope_kinds.append(
+            "function"
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda))
+            else "class"
+        )
+        for child in children:
+            self.visit(child)
+        self._scope_kinds.pop()
+        self._events.pop()
+        self._scopes.pop()
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        for child in (
+            *node.decorator_list,
+            *node.args.defaults,
+            *(item for item in node.args.kw_defaults if item is not None),
+        ):
+            self.visit(child)
+        if node.returns is not None:
+            self.visit(node.returns)
+        self._visit_scope(node, node.body)
+
+    visit_AsyncFunctionDef = visit_FunctionDef
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        for child in (*node.decorator_list, *node.bases, *node.keywords):
+            self.visit(child)
+        self._visit_scope(node, node.body)
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        for child in (
+            *node.args.defaults,
+            *(item for item in node.args.kw_defaults if item is not None),
+        ):
+            self.visit(child)
+        self._visit_scope(node, (node.body,))
+
+    def _visit_comprehension(
+        self,
+        node: ast.ListComp | ast.SetComp | ast.DictComp | ast.GeneratorExp,
+        result_nodes: Iterable[ast.AST],
+    ) -> None:
+        first, *remaining = node.generators
+        self.visit(first.iter)
+        bindings = {
+            name.id
+            for name in ast.walk(first.target)
+            if isinstance(name, ast.Name) and isinstance(name.ctx, ast.Store)
+        }
+        events = {
+            name: (_BindingEvent(self._position(first.target), "other"),)
+            for name in bindings
+        }
+        self._scopes.append(frozenset(bindings))
+        self._events.append(events)
+        self._scope_kinds.append("comprehension")
+        for condition in first.ifs:
+            self.visit(condition)
+        for generator in remaining:
+            self.visit(generator.iter)
+            added = {
+                name.id
+                for name in ast.walk(generator.target)
+                if isinstance(name, ast.Name) and isinstance(name.ctx, ast.Store)
+            }
+            bindings.update(added)
+            self._scopes[-1] = frozenset(bindings)
+            self._events[-1].update(
+                {
+                    name: (_BindingEvent(self._position(generator.target), "other"),)
+                    for name in added
+                }
+            )
+            for condition in generator.ifs:
+                self.visit(condition)
+        for result in result_nodes:
+            self.visit(result)
+        self._scope_kinds.pop()
+        self._events.pop()
+        self._scopes.pop()
+
+    def visit_ListComp(self, node: ast.ListComp) -> None:
+        self._visit_comprehension(node, (node.elt,))
+
+    visit_SetComp = visit_ListComp
+    visit_GeneratorExp = visit_ListComp
+
+    def visit_DictComp(self, node: ast.DictComp) -> None:
+        self._visit_comprehension(node, (node.key, node.value))
+
+    def visit_Import(self, node: ast.Import) -> None:
+        if any(
             item.name.split(".", 1)[0] in _IMPORT_MACHINERY_ROOTS
             for item in node.names
-        )
-    if isinstance(node, ast.ImportFrom) and node.module:
-        return node.module.split(".", 1)[0] in _IMPORT_MACHINERY_ROOTS
-    if isinstance(node, ast.Name):
-        return node.id in _IMPORT_CAPABILITY_NAMES
-    if isinstance(node, ast.Attribute):
-        return node.attr in _IMPORT_CAPABILITY_ATTRIBUTES
-    return False
+        ):
+            self.detected = True
+
+    def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        if node.module and node.module.split(".", 1)[0] in _IMPORT_MACHINERY_ROOTS:
+            self.detected = True
+        if node.module == "sys" and any(item.name == "modules" for item in node.names):
+            self.detected = True
+
+    def visit_Name(self, node: ast.Name) -> None:
+        if (
+            isinstance(node.ctx, ast.Load)
+            and node.id in _IMPORT_CAPABILITY_NAMES
+            and not self._shadowed(node.id, node)
+        ):
+            self.detected = True
+
+    def visit_Call(self, node: ast.Call) -> None:
+        if (
+            isinstance(node.func, ast.Name)
+            and node.func.id == "getattr"
+            and not self._shadowed("getattr", node.func)
+            and len(node.args) >= 2
+            and self._known_source(node.args[0])
+            and _constant_text(node.args[1])
+            in _IMPORT_CAPABILITY_ATTRIBUTES | {"__builtins__"}
+        ):
+            self.detected = True
+        self.generic_visit(node)
+
+    def visit_Attribute(self, node: ast.Attribute) -> None:
+        if node.attr == "modules" and self._known_source(node):
+            self.detected = True
+        elif (
+            node.attr in _IMPORT_CAPABILITY_ATTRIBUTES
+            and self._known_source(node.value)
+        ):
+            self.detected = True
+        self.generic_visit(node)
+
+    def visit_Subscript(self, node: ast.Subscript) -> None:
+        if (
+            _constant_text(node.slice)
+            in _IMPORT_CAPABILITY_ATTRIBUTES | {"__builtins__"}
+            and self._known_source(node.value)
+        ):
+            self.detected = True
+        self.generic_visit(node)
+
+
+def _uses_dynamic_import_capability(tree: ast.AST) -> bool:
+    if not isinstance(tree, ast.Module):
+        raise TypeError("dynamic import profile requires a Python module")
+    profile = _DynamicImportProfile(tree)
+    profile.visit(tree)
+    return profile.detected
 
 
 def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
     root = root.resolve()
     try:
-        indexed = _indexed_paths(root)
-    except RuntimeError as error:
+        indexed = indexed_paths(root)
+    except GitIndexError as error:
         return (
             PythonPackageFinding(
                 "PYTHON_PACKAGE.GIT_INDEX",
@@ -593,12 +878,42 @@ def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
     return tuple(findings)
 
 
+def python_package_authority_paths(root: Path) -> tuple[str, ...]:
+    repository = root.resolve()
+    indexed = indexed_paths(repository)
+    selected = {
+        path
+        for path in indexed
+        if path.startswith("tools/")
+        and "tests" not in PurePosixPath(path).parts
+        and (path.endswith(".py") or path.endswith("/pyproject.toml"))
+    }
+    for manifest in tuple(
+        path for path in selected if path.endswith("/pyproject.toml")
+    ):
+        contract, findings = _load_contract(repository, manifest)
+        if findings or contract is None:
+            continue
+        selected.update(item.path for item in contract.entrypoints)
+        selected.update(path for item in contract.entrypoints for path in item.remove)
+    return tuple(sorted(selected))
+
+
 def execute_python_package_contract(
     root: Path, *, python_executable: Path | None = None
 ) -> tuple[PythonPackageFinding, ...]:
     repository = root.resolve()
     executable = (python_executable or Path(sys.executable)).absolute()
-    indexed = _indexed_paths(repository)
+    try:
+        indexed = indexed_paths(repository)
+    except RuntimeError as error:
+        return (
+            PythonPackageFinding(
+                "PYTHON_PACKAGE.GIT_INDEX",
+                f"cannot read Git index: {error}",
+                ".git/index",
+            ),
+        )
     manifests = tuple(
         path
         for path in indexed
@@ -652,9 +967,24 @@ def execute_python_package_contract(
                 )
             )
         for entrypoint in contract.entrypoints:
-            completed = _execute_entrypoint(
-                repository, executable, environment, entrypoint
-            )
+            try:
+                completed = _execute_entrypoint(
+                    repository, executable, environment, entrypoint
+                )
+            except (
+                OSError,
+                RuntimeError,
+                ValueError,
+                subprocess.SubprocessError,
+            ) as error:
+                findings.append(
+                    PythonPackageFinding(
+                        "PYTHON_PACKAGE.ENTRYPOINT_FIXTURE",
+                        f"repository entrypoint fixture cannot be constructed: {error}",
+                        entrypoint.path,
+                    )
+                )
+                continue
             if completed.returncode != 0:
                 findings.append(
                     PythonPackageFinding(
@@ -685,13 +1015,8 @@ def _execute_entrypoint(
         fixture = Path(temporary) / "fixture"
         replacements = {"{repository}": str(repository)}
         if contract.fixture == "isolated-indexed-copy":
-            shutil.copytree(
-                repository,
-                fixture,
-                ignore=shutil.ignore_patterns(
-                    ".git", ".standards-engine", "__pycache__", "*.pyc"
-                ),
-            )
+            fixture.mkdir()
+            materialize_index(repository, fixture)
             subprocess.run(("git", "init", "-q"), cwd=fixture, check=True)
             subprocess.run(("git", "add", "-A"), cwd=fixture, check=True)
             for selected in contract.remove:
@@ -743,7 +1068,10 @@ def _execute_entrypoint(
         arguments = tuple(
             replacements.get(argument, argument) for argument in contract.arguments
         )
-        if any(argument.startswith("{") and argument.endswith("}") for argument in arguments):
+        if any(
+            argument.startswith("{") and argument.endswith("}")
+            for argument in arguments
+        ):
             raise ValueError("entrypoint contract contains an unknown placeholder")
         return subprocess.run(
             (str(executable), "-P", str(repository / contract.path), *arguments),
@@ -759,5 +1087,6 @@ __all__ = (
     "EntrypointContract",
     "PythonPackageFinding",
     "audit_python_packages",
+    "python_package_authority_paths",
     "resolve_public_exports",
 )

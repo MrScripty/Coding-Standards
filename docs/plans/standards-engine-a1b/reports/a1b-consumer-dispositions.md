@@ -37,7 +37,8 @@ one disposition. Mutable relationship totals are not acceptance oracles.
   owner-codec composition, analysis closure, coverage authority, cold replay,
   and their focused evidence.
 - Requirement And Ownership selects every package manifest, public root,
-  repository entrypoint, the package-contract verifier, and its fixtures.
+  repository entrypoint, the package-contract verifier, its fixtures, the
+  shared Git-index adapter, and the canonical checker-inventory projection.
 - Cross-Platform Filesystem Paths and Security Filesystem Containment select
   the exact descriptor-relative implementation and platform/containment
   evidence.
@@ -61,3 +62,11 @@ horizon is frozen and all current owner-local attestations are renewed.
 
 No selected consumer is blocked. This report explains the grouped semantic
 decisions; the TSV remains the complete row-level evidence.
+
+The final content correction also proves that Analysis and Verifier share one
+sanitized Git-index owner, every Numeric Lifecycle execution closure binds the
+canonical inventory and selected checker bytes, the Analysis codec test derives
+its expected closure from the production registry, and governed-source scanning
+respects module, function, class, and comprehension lookup semantics. The
+focused independent re-review found no remaining blocker and authorized renewal
+against the provider-v5 horizon.

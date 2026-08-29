@@ -138,6 +138,101 @@ class PythonPackageContractTest(unittest.TestCase):
             ("PYTHON_PACKAGE.ENTRYPOINT_EXECUTION",),
         )
 
+    def test_indexed_copy_excludes_untracked_ambient_files(self) -> None:
+        self.write(
+            "tools/a/pyproject.toml",
+            """
+            [project]
+            name = "a-package"
+            version = "0.1.0"
+            requires-python = ">=3.11,<3.13"
+            dependencies = ["b-package"]
+
+            [tool.standards-package]
+            schema-version = 2
+            public-import-root = "tools.a.a"
+            repository-entrypoints = [
+              { path = "tools/indexed_copy.py", arguments = ["{fixture}"], fixture = "isolated-indexed-copy", remove = [] },
+            ]
+            """,
+        )
+        self.write(
+            "tools/indexed_copy.py",
+            """
+            import pathlib
+            import sys
+            fixture = pathlib.Path(sys.argv[1])
+            if (fixture / "ambient.txt").exists():
+                raise SystemExit(4)
+            print("indexed copy is isolated")
+            """,
+        )
+        self.stage()
+        self.write("ambient.txt", "untracked\n")
+
+        self.assertEqual(execute_python_package_contract(self.root), ())
+
+    def test_indexed_copy_uses_staged_bytes_not_worktree_bytes(self) -> None:
+        self.write(
+            "tools/a/pyproject.toml",
+            """
+            [project]
+            name = "a-package"
+            version = "0.1.0"
+            requires-python = ">=3.11,<3.13"
+            dependencies = ["b-package"]
+
+            [tool.standards-package]
+            schema-version = 2
+            public-import-root = "tools.a.a"
+            repository-entrypoints = [
+              { path = "tools/indexed_copy.py", arguments = ["{fixture}"], fixture = "isolated-indexed-copy", remove = [] },
+            ]
+            """,
+        )
+        self.write(
+            "tools/indexed_copy.py",
+            """
+            import pathlib
+            import sys
+            observed = (pathlib.Path(sys.argv[1]) / "indexed.txt").read_text()
+            if observed != "staged\\n":
+                raise SystemExit(4)
+            print("indexed bytes are exact")
+            """,
+        )
+        self.write("indexed.txt", "staged\n")
+        self.stage()
+        self.write("indexed.txt", "working tree\n")
+
+        self.assertEqual(execute_python_package_contract(self.root), ())
+
+    def test_fixture_construction_failure_is_a_typed_finding(self) -> None:
+        self.write(
+            "tools/a/pyproject.toml",
+            """
+            [project]
+            name = "a-package"
+            version = "0.1.0"
+            requires-python = ">=3.11,<3.13"
+            dependencies = ["b-package"]
+
+            [tool.standards-package]
+            schema-version = 2
+            public-import-root = "tools.a.a"
+            repository-entrypoints = [
+              { path = "tools/indexed_copy.py", arguments = ["{fixture}"], fixture = "isolated-indexed-copy", remove = ["missing.txt"] },
+            ]
+            """,
+        )
+        self.write("tools/indexed_copy.py", "print('unreachable')\n")
+        self.stage()
+
+        self.assertEqual(
+            tuple(item.code for item in execute_python_package_contract(self.root)),
+            ("PYTHON_PACKAGE.ENTRYPOINT_FIXTURE",),
+        )
+
     def test_private_child_and_unexported_root_name_are_distinct(self) -> None:
         self.write(
             "tools/a/a/__init__.py",
@@ -216,6 +311,114 @@ class PythonPackageContractTest(unittest.TestCase):
             with self.subTest(source=source.strip().splitlines()[0]):
                 self.write("tools/a/a/__init__.py", source)
                 self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_sys_modules_import_capability_bypass_is_rejected(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            load = getattr(sys.modules["builtins"], "__import__")
+            loaded = load("tools.b.b")
+            __all__ = ("loaded",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_later_class_binding_does_not_hide_sys_modules_bypass(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            class Fixture:
+                load = getattr(sys.modules["builtins"], "__import__")
+                sys = object()
+            __all__ = ("Fixture",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_method_does_not_close_over_class_sys_binding(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            class Fixture:
+                sys = object()
+                def load(self):
+                    return sys.modules["builtins"]
+            __all__ = ("Fixture",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_class_comprehension_does_not_close_over_class_sys_binding(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            class Fixture:
+                sys = object()
+                modules = [sys.modules[name] for name in ("builtins",)]
+            __all__ = ("Fixture",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_shadowed_capability_names_are_not_treated_as_import_machinery(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            def use(eval, exec, __import__):
+                return eval(1), exec(2), __import__(3)
+            run = use(lambda value: value, lambda value: value, lambda value: value)
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_later_module_binding_does_not_hide_builtin_capability_access(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            run = eval("1")
+            eval = lambda value: value
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_arbitrary_attributes_do_not_imply_import_machinery(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            class Fixture:
+                def import_module(self, value):
+                    return value
+            run = Fixture().import_module(7)
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_comprehension_targets_are_benign_lexical_bindings(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            values = (lambda value: value,)
+            run = [eval(1) for eval in values]
+            modules = [sys.modules for sys in ()]
+            __all__ = ("modules", "run")
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
 
     def test_dependency_and_source_ownership_are_exact(self) -> None:
         self.write_package(

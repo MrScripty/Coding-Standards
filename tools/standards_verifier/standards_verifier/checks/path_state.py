@@ -5,7 +5,12 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import (
+    CheckAuthorityInput,
+    CheckContext,
+    absent_inputs,
+    present_inputs,
+)
 from ..paths import contained_path
 
 
@@ -36,6 +41,14 @@ class PathStateCheck:
     id: str
     present: tuple[str, ...]
     absent: tuple[str, ...]
+
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (
+            *present_inputs("required-present", *self.present),
+            *absent_inputs("required-absent", *self.absent),
+        )
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         diagnostics = []
@@ -83,9 +96,7 @@ class PathStateCheck:
         return diagnostics
 
 
-def parse_path_state_check(
-    raw: dict[str, Any], suite_id: str
-) -> PathStateCheck:
+def parse_path_state_check(raw: dict[str, Any], suite_id: str) -> PathStateCheck:
     allowed = {"id", "type", "present", "absent"}
     unknown = set(raw) - allowed
     if unknown:

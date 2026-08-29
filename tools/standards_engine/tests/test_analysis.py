@@ -127,6 +127,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
         cls.fixture_root = Path(cls.temporary.name) / "conditional"
         _copy_repository(cls.fixture_root)
         _install_conditional_policy(cls.fixture_root)
+        write_suite_input_projection(cls.fixture_root)
         cls.repository = _repository()
         cls.engine = StandardsEngine.open_analysis(
             cls.fixture_root,
@@ -171,6 +172,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             root = Path(temporary) / "repository"
             _copy_repository(root)
             _install_conditional_policy(root)
+            write_suite_input_projection(root)
             created = _run_fresh_python(
                 root,
                 """
@@ -386,6 +388,8 @@ def _copy_repository(target: Path) -> None:
         target,
         ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
     )
+    subprocess.run(("git", "init", "-q"), cwd=target, check=True)
+    subprocess.run(("git", "add", "-A"), cwd=target, check=True)
 
 
 def _replace_once(path: Path, old: str, new: str) -> None:

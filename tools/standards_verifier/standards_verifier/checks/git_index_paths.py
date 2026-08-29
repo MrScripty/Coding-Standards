@@ -1,34 +1,14 @@
 from __future__ import annotations
 
 import os
-import subprocess
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from tools.standards_authority.standards_authority import GitIndexError, indexed_paths
+from ..model import CheckAuthorityInput, CheckContext, CheckRepositoryIndexInput
 from ..paths import contained_path, repository_path
-
-
-GIT_REPOSITORY_OVERRIDES = frozenset(
-    {
-        "GIT_ALTERNATE_OBJECT_DIRECTORIES",
-        "GIT_COMMON_DIR",
-        "GIT_DIR",
-        "GIT_INDEX_FILE",
-        "GIT_OBJECT_DIRECTORY",
-        "GIT_PREFIX",
-        "GIT_WORK_TREE",
-    }
-)
-
-
-def _git_environment() -> dict[str, str]:
-    environment = os.environ.copy()
-    for field in GIT_REPOSITORY_OVERRIDES:
-        environment.pop(field, None)
-    return environment
 
 
 def _tracked_paths(value: Any, suite: str, check: str) -> tuple[str, ...]:
@@ -68,69 +48,21 @@ def _tracked_paths(value: Any, suite: str, check: str) -> tuple[str, ...]:
     return tuple(paths)
 
 
-def _read_git_index(root: Path, suite: str, check: str) -> frozenset[str]:
+def read_git_index(root: Path, suite: str, check: str) -> frozenset[str]:
     try:
-        result = subprocess.run(
-            ["git", "-C", str(root), "ls-files", "-z", "--full-name"],
-            check=False,
-            capture_output=True,
-            env=_git_environment(),
-        )
-    except FileNotFoundError as error:
+        entries = indexed_paths(root)
+    except GitIndexError as error:
         raise EngineError(
             Diagnostic(
-                "GIT.UNAVAILABLE",
-                "unavailable",
-                "Git executable is unavailable",
-                suite=suite,
-                check=check,
-            )
-        ) from error
-    if result.returncode != 0:
-        raise EngineError(
-            Diagnostic(
-                "GIT.INDEX_UNAVAILABLE",
-                "unavailable",
+                error.code,
+                error.outcome,
                 "Git index membership cannot be read",
                 suite=suite,
                 check=check,
-                observed=str(result.returncode),
-            )
-        )
-    if result.stdout and not result.stdout.endswith(b"\0"):
-        raise EngineError(
-            Diagnostic(
-                "GIT.INDEX_OUTPUT",
-                "invalid",
-                "Git index output is not NUL terminated",
-                suite=suite,
-                check=check,
-            )
-        )
-    try:
-        entries = result.stdout.decode("utf-8").split("\0")
-    except UnicodeDecodeError as error:
-        raise EngineError(
-            Diagnostic(
-                "GIT.INDEX_UTF8",
-                "invalid",
-                "Git index output is not UTF-8",
-                suite=suite,
-                check=check,
+                observed=str(error),
             )
         ) from error
-    selected = entries[:-1] if result.stdout else []
-    if any(not item for item in selected) or len(set(selected)) != len(selected):
-        raise EngineError(
-            Diagnostic(
-                "GIT.INDEX_OUTPUT",
-                "invalid",
-                "Git index output contains empty or duplicate entries",
-                suite=suite,
-                check=check,
-            )
-        )
-    return frozenset(selected)
+    return frozenset(entries)
 
 
 @dataclass(frozen=True, slots=True)
@@ -138,8 +70,13 @@ class GitIndexPathsCheck:
     id: str
     tracked: tuple[str, ...]
 
+    def authority_inputs(
+        self, context: CheckContext
+    ) -> tuple[CheckAuthorityInput, ...]:
+        return (CheckRepositoryIndexInput("tracked-path-membership"),)
+
     def run(self, context: CheckContext) -> list[Diagnostic]:
-        entries = _read_git_index(context.repo_root, context.suite_id, self.id)
+        entries = read_git_index(context.repo_root, context.suite_id, self.id)
         diagnostics = []
         for display_path in self.tracked:
             if display_path in entries:
