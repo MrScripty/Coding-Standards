@@ -1,0 +1,13 @@
+change_id	action	policy_unit	module	heading	current_revision	planned_revision	family	rationale
+N1-C	add	core.simplicity-and-complection	core	Simplicity And Ownership	-	1	N1	Make the Core concept a first-class graph owner and add simple/easy/composition semantics.
+N1-A	add	topic.architecture.composed-design-admission	topic.architecture	Composed Design Admission	-	1	N1	Own artifact, post-boundary composition, representative-change, Depth, Locality, cumulative machinery, and deletion admission.
+N2-V	add	workflow.verification.evidence-necessity-and-risk	workflow.verification	Evidence Necessity And Scoped Risk	-	1	N2	Own necessity, risk, marginal value, exact-byte purpose, overlap, cost, and evidence lifecycle.
+N3-P	add	topic.contracts.validation-proof-lifetime	topic.contracts	Validation Proof Lifetime	-	1	N3	Register and refine the existing proof-lifetime owner.
+N3-I	add	topic.contracts.invariant-contracts	topic.contracts	Invariant Contracts	-	1	N3	Register and refine failure classification and enforcement choice.
+N4-A	revise	topic.architecture.immutable-authority-closure	topic.architecture	Immutable Authority Closure	1	2	N4	Scale closure to the actual supported lifetime and reconstruction promise.
+N4-C	revise	topic.contracts.version-scope-and-invalidation	topic.contracts	Version Scope And Invalidation	1	2	N4	Add actual-consumer and cumulative compatibility/migration admission.
+N5-D	revise	topic.dependencies.implementation-versus-dependency	topic.dependencies	Implementation Versus Dependency	1	2	N5	Require justification and lifecycle for a local semantic/proof product when established tooling could own it.
+N1-P	revise	workflow.planning.active-plan-fields	workflow.planning	Required Active-Plan Fields	1	2	N1	Require composed-design applicability and applicable review content in written plans.
+N1-R	revise	workflow.planning.replanning	workflow.planning	Re-Planning	1	2	N1	Re-run composed-design admission when replacement or accumulation changes the artifact.
+N5-P	revise	workflow.planning.systemic-finding-replan	workflow.planning	Systemic-Finding Re-Planning	1	2	N5	Add authority/reachability stopping, deletion, proof substitution, and composition comparison.
+P1-P	conditional-revise	workflow.planning.projection-completeness	workflow.planning	Policy Projection Completeness	1	2	P1	Revise only if the prototype proves the exact dependency-local invalidation algebra.
