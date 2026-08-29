@@ -104,6 +104,18 @@ __all__ = ("run",)
 expected_codes = []
 
 [[cases]]
+id = "conditional-deletion"
+consumer_dependencies = []
+consumer_source = '''
+eval = lambda value: value
+if condition:
+    del eval
+run = eval("40 + 2")
+__all__ = ("run",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
 id = "simple-sys-alias"
 consumer_dependencies = []
 consumer_source = '''
@@ -130,6 +142,19 @@ __all__ = ("run",)
 expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
 
 [[cases]]
+id = "nested-conditional-sys-alias"
+consumer_dependencies = []
+consumer_source = '''
+import sys
+if condition:
+    registry = sys
+def load():
+    return registry.modules["builtins"].__import__
+__all__ = ("load",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
 id = "left-to-right-assignment-targets"
 consumer_dependencies = []
 consumer_source = '''
@@ -137,6 +162,19 @@ values = {}
 eval = values[eval] = lambda value: value
 run = eval(1)
 __all__ = ("run",)
+'''
+expected_codes = []
+
+[[cases]]
+id = "augmented-assignment-bound-target"
+consumer_dependencies = []
+consumer_source = '''
+class Value:
+    def __add__(self, other):
+        return other
+eval = Value()
+eval += eval
+__all__ = ("eval",)
 '''
 expected_codes = []
 

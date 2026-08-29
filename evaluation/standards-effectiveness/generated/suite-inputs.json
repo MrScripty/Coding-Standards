@@ -3531,7 +3531,7 @@
       ]
     },
     {
-      "digest": "sha256:624209b239ec97b7a98cd1739e71d938f4b86f92e9c6c3d3c2c8b714e5d17c93",
+      "digest": "sha256:93a020fb4c66eebdcd362cc01b358a75e2c01f4b2fe70f28292868e69d3c4162",
       "path": "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml",
       "state": "present",
       "uses": [
@@ -21943,7 +21943,7 @@
       ]
     },
     {
-      "digest": "sha256:1c289d98db29573bf2cf05adae4a54110601d5c14eebe0830c47004fe3a6a74f",
+      "digest": "sha256:4ddfe593a3e463e554717e38dc0b42d1652cd100d3e7d952ad0c350bc880a084",
       "path": "tools/standards_verifier/standards_verifier/python_packages.py",
       "state": "present",
       "uses": [
@@ -22135,7 +22135,7 @@
       ]
     },
     {
-      "digest": "sha256:a53b4e3a463c0b329645de8832035186983c7923cf409f02280b62e4ebc3f7fd",
+      "digest": "sha256:7f64e6b43152dfd51230daf2773ff7cba8113c27e708c7d6ca829a041ba6d7c3",
       "path": "tools/standards_verifier/tests/test_python_package_contract.py",
       "state": "present",
       "uses": [

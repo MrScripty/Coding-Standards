@@ -1227,3 +1227,29 @@
 - A1B-028, A1B-A6I, A1B-A7, and A1B-A10 return to active or pending state;
   Milestone 3 is `Active`; Milestone 4 and A1B-A11 are blocked. The ADR remains
   `Proposed`, and A2 remains unavailable.
+
+## 2026-08-29 - Milestone 3 Branch-State Correction Implemented
+
+- The governed-source collector now joins branch exits through one abstract
+  state operation. A joined name is definitely bound only when every modeled
+  path is bound, while possible `sys` provenance is retained if any path
+  carries it.
+- The same join covers the already-supported `if`, loop, and `try` visitors.
+  It does not evaluate conditions, execute code, or add a general control-flow
+  graph.
+- Augmented assignment now records the target load and value load before the
+  target store, matching Python evaluation order without introducing a false
+  unbinding event.
+- Direct and declarative regressions cover one- and two-armed conditional
+  deletion, loop and `try` unbinding, nested-scope conditional `sys`
+  provenance, and benign augmented assignment.
+- The 45 package-import and Git-reachability regressions passed under the exact
+  locked CPython 3.11 and 3.12 environments. Analysis 66, Engine 36, and
+  Verifier 433 tests passed.
+- Generated freshness passed. The complete checkpoint passed all 226
+  registered declarative suites and all 53 retained Bash migration checkers;
+  Ruff and diff hygiene passed.
+- A1B-028 is `Resolved`; A1B-A6I, A1B-A7, and A1B-A10 are `satisfied`;
+  Milestone 3 is `Implemented`; Milestone 4 is `Active` for A1B-A11. The ADR
+  remains `Proposed`, final A1b acceptance remains pending, and A2 remains
+  unavailable.

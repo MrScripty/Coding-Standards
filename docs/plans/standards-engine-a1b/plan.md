@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3 governed-source correction
+**Current phase:** Milestone 4 content-bound acceptance
 
-**Next slice:** Re-plan bounded branch-exit, cross-scope provenance, and
-augmented-assignment semantics before implementation resumes
+**Next slice:** Identify the corrected implementation boundary and obtain one
+independent content-bound Standards and Specification review
 
 **Acceptance status:** `pending`
 
@@ -38,13 +38,13 @@ implementation begins.
 | A1B-A4C | Every operation closure stores only unique role- and side-qualified roots and derives its transitive dependency set through owner-declared references: the exact selected operation contract is included, consumed provider and authorization objects enter only successful successor states, unused view authority is excluded, ordering is deterministic, cycles reject, and material authority mutation changes only dependent identities. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A5 | Public `query`, `prepare`, `resolve`, and `inspect` accept and return only generated v11 contract values; internal domain models and dependency exceptions cannot cross the facade. | `integration` | `not-applicable` | `automated` | `satisfied` | [Contract profile audit](reports/a1b-contract-profile-audit.md) and [cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A6 | The selected external dependency closure is exact, hash-checked, reproducible on Linux x86-64 with glibc 2.17 or newer for CPython 3.11 and 3.12, imports from an isolated install, and is free of unresolved blocking security findings. | `release-artifact` | `required-real` | `automated` | `satisfied` | [Milestone 0 dependency provenance](reports/a1b-dependency-provenance.md) and isolated lock tests on CPython 3.11/3.12 |
-| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject under the closed governed-source syntax profile; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `pending` | Reopened by the rejected `88f93a33` content review: conditional deletion and cross-scope conditional capability provenance remain unsound |
+| A1B-A6I | Every Engine Module manifest exactly declares its production direct imports, Python range, public import root, and repository entrypoints; package roots expose one statically resolvable `__all__`; all production cross-Module and entrypoint imports resolve through those roots and exports; private, alternate-root, star, dynamic, or unowned imports reject under the closed governed-source syntax profile; and every public export and exact entrypoint executes in both clean environments with only the admitted external lock. | `integration` | `required-real` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md), including conservative branch-exit joins, nested-scope capability provenance, and augmented-assignment ordering on CPython 3.11/3.12 |
 | A1B-A6P | Before implementation starts, an independent planning review accepts the selected package and test-oracle artifact/source identity, exact hashes, copyright/notice and license authorities, intended use, compatibility, and current non-bundling disposition. | `release-artifact` | `not-applicable` | `manual` | `satisfied` | [Corrected-C7 plan admission](reports/a1b-plan-admission.md) |
 | A1B-A6L | Independent dependency-provenance review proves the implemented exact lock and required-real test oracle match the admitted selection and introduce no changed license or notice obligation. | `release-artifact` | `not-applicable` | `manual` | `satisfied` | Independent dependency-provenance review at implementation `3da674c1` confirmed the admitted lock, artifact hashes, license and notice authorities, non-bundling disposition, and required-real oracle; later corrections did not change that closure |
-| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `pending` | Reopened by the rejected `88f93a33` content review because reachable dynamic-import capability can escape the governed-source check |
+| A1B-A7 | No old validator, generated keyword interpreter, generic NFC identity encoder, snapshot compiler, split or directory object store, owner map, scan, compatibility path, copied version bag, ambient authority-completion path, aggregate operation-profile identity, complete-view analysis identity, Git-lineage or filesystem-metadata snapshot field, speculative migration/export path, or old-version fallback remains reachable. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `satisfied` | Provider-v5 coverage revalidation in the complete checkpoint recorded by [corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `pending` | Reopened by the rejected `88f93a33` content review because the defect-family regression matrix omitted conditional deletion, nested-scope provenance, and augmented assignment |
+| A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A11 | One clean implementation boundary has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. The review binds the identified content; later evidence or lifecycle recording does not invalidate unchanged reviewed semantics. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
 
 ## Scope
@@ -858,7 +858,7 @@ re-plan trigger. A generated digest or handle change alone is not. The
 admitted ADR remains byte-identical and `Proposed` throughout Milestone 3;
 Milestone 4 alone may change its status after content-bound acceptance.
 
-**Status:** `Active`
+**Status:** `Implemented`
 
 ### Milestone 4: Content-Bound Acceptance
 
@@ -891,13 +891,12 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 **Acceptance gate:** Every objective acceptance claim is satisfied.
 
-**Status:** `Blocked`
+**Status:** `Active`
 
 ## Blockers
 
-- A1B-028 remains active for bounded branch-exit, cross-scope provenance, and
-  augmented-assignment correction. Milestone 4 and A1B-A11 remain blocked.
-  A2 remains unavailable until A1b is independently accepted.
+- Final manual A1B-A11 content-bound acceptance remains pending. A2 remains
+  unavailable until A1b is independently accepted.
 
 ## Re-Plan Triggers
 

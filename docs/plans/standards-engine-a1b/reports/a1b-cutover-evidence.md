@@ -69,8 +69,8 @@ are rejected in authored claim sources.
 - Standards Graph: 2 focused tests passed.
 - Analysis: 66 focused tests passed.
 - Standards Engine: 36 focused tests passed.
-- Standards Verifier: 429 focused tests passed.
-- The 41 package-import and Git-reachability regressions passed under the exact
+- Standards Verifier: 433 focused tests passed.
+- The 45 package-import and Git-reachability regressions passed under the exact
   locked environments on CPython 3.11 and 3.12.
 - Under hostile inherited `GIT_DIR` and `GIT_INDEX_FILE` values, both supported
   Python versions passed generated-contract semantic conformance,
@@ -82,9 +82,10 @@ are rejected in authored claim sources.
   environment sanitization while reachability retains domain interpretation of
   nonzero statuses.
 - Assignment-RHS evaluation, module/class deletion, exception-alias lifetime,
-  conditional dominance, complete-branch merging, simple `sys` provenance,
-  left-to-right targets, and names loaded within targets have direct unit and
-  declarative regressions; no catalog cardinality is asserted.
+  conditional dominance, conservative `if`/loop/`try` branch-exit joining,
+  same- and nested-scope `sys` provenance, augmented-assignment load/store
+  order, left-to-right targets, and names loaded within targets have direct
+  unit and declarative regressions; no catalog cardinality is asserted.
 - The Git-reachability implementation node and its dependency-policy
   relationship are registered with mechanically derived migration evidence.
 - Every manifest-owned public root, export, and repository entrypoint executed

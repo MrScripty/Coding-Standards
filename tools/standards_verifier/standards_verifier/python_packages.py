@@ -494,6 +494,49 @@ class _ScopeFacts(ast.NodeVisitor):
             )
         }
 
+    def _visible_state(self) -> dict[str, _BindingEvent]:
+        return {
+            name: matching[-1]
+            for name, events in self.events.items()
+            if (
+                matching := tuple(
+                    event
+                    for event in events
+                    if self._context[: len(event.context)] == event.context
+                )
+            )
+        }
+
+    def _join_branch_states(
+        self,
+        node: ast.AST,
+        before: dict[str, _BindingEvent],
+        contexts: Iterable[tuple[int, ...]],
+        *,
+        include_unchanged_path: bool = False,
+    ) -> None:
+        branch_states = [self._branch_state(context) for context in contexts]
+        if include_unchanged_path:
+            branch_states.append({})
+        changed_names = set().union(*(state.keys() for state in branch_states))
+        for name in sorted(changed_names):
+            candidates = tuple(
+                state.get(name, before.get(name)) for state in branch_states
+            )
+            definitely_bound = all(
+                candidate is not None and candidate.bound for candidate in candidates
+            )
+            may_be_sys = any(
+                candidate is not None and candidate.provenance == "sys"
+                for candidate in candidates
+            )
+            self._event(
+                name,
+                node,
+                bound=definitely_bound,
+                provenance="sys" if may_be_sys else "other",
+            )
+
     def _event(
         self,
         name: str,
@@ -625,7 +668,7 @@ class _ScopeFacts(ast.NodeVisitor):
         self._target(node.target, bound=True, provenance=provenance)
 
     def visit_AugAssign(self, node: ast.AugAssign) -> None:
-        self._target(node.target, bound=False)
+        self.visit(node.target)
         self.visit(node.value)
         self._target(node.target, bound=True)
 
@@ -643,44 +686,41 @@ class _ScopeFacts(ast.NodeVisitor):
 
     def visit_If(self, node: ast.If) -> None:
         self.visit(node.test)
+        before = self._visible_state()
         body_context = self._visit_branch(node.body)
         else_context = self._visit_branch(node.orelse)
-        if not node.orelse:
-            return
-        body_state = self._branch_state(body_context)
-        else_state = self._branch_state(else_context)
-        for name in sorted(body_state.keys() & else_state.keys()):
-            body = body_state[name]
-            alternative = else_state[name]
-            if body.bound != alternative.bound:
-                continue
-            provenance = (
-                "sys"
-                if "sys" in {body.provenance, alternative.provenance}
-                else "other"
-            )
-            self._event(
-                name,
-                node,
-                bound=body.bound,
-                provenance=provenance,
-            )
+        self._join_branch_states(node, before, (body_context, else_context))
 
     def visit_While(self, node: ast.While) -> None:
         self.visit(node.test)
-        self._visit_branch(node.body)
-        self._visit_branch(node.orelse)
+        before = self._visible_state()
+        body_context = self._visit_branch(node.body)
+        else_context = self._visit_branch(node.orelse)
+        self._join_branch_states(
+            node,
+            before,
+            (body_context, else_context),
+            include_unchanged_path=True,
+        )
 
     def visit_For(self, node: ast.For) -> None:
         self.visit(node.iter)
+        before = self._visible_state()
         self._next_context += 1
         previous = self._context
         self._context = (*previous, self._next_context)
+        body_context = self._context
         self._target(node.target, bound=True)
         for child in node.body:
             self.visit(child)
         self._context = previous
-        self._visit_branch(node.orelse)
+        else_context = self._visit_branch(node.orelse)
+        self._join_branch_states(
+            node,
+            before,
+            (body_context, else_context),
+            include_unchanged_path=True,
+        )
 
     visit_AsyncFor = visit_For
 
@@ -698,10 +738,16 @@ class _ScopeFacts(ast.NodeVisitor):
     visit_AsyncWith = visit_With
 
     def visit_Try(self, node: ast.Try) -> None:
-        self._visit_branch(node.body)
-        for handler in node.handlers:
-            self._visit_branch((handler,))
-        self._visit_branch(node.orelse)
+        before = self._visible_state()
+        contexts = [self._visit_branch(node.body)]
+        contexts.extend(self._visit_branch((handler,)) for handler in node.handlers)
+        contexts.append(self._visit_branch(node.orelse))
+        self._join_branch_states(
+            node,
+            before,
+            contexts,
+            include_unchanged_path=True,
+        )
         for child in node.finalbody:
             self.visit(child)
 
@@ -844,9 +890,9 @@ class _DynamicImportProfile(ast.NodeVisitor):
                 )
             selected = self._latest_event(index, name, node)
             if selected is not None:
+                if selected.provenance == "sys":
+                    return True
                 if selected.bound:
-                    if selected.provenance == "sys":
-                        return True
                     cutoff = selected.order
                 else:
                     cutoff = selected.order

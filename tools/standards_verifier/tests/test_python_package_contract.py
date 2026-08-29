@@ -444,6 +444,61 @@ class PythonPackageContractTest(unittest.TestCase):
 
         self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
 
+    def test_conditional_deletion_may_restore_builtin_capability(self) -> None:
+        variants = (
+            """
+            eval = lambda value: value
+            if condition:
+                del eval
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+            """
+            eval = lambda value: value
+            if condition:
+                del eval
+            else:
+                eval = lambda value: value + 1
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+        )
+        for source in variants:
+            with self.subTest(has_else="else:" in source):
+                self.write("tools/a/a/__init__.py", source)
+                self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_supported_branch_exits_preserve_possible_unbinding(self) -> None:
+        variants = (
+            """
+            eval = lambda value: value
+            while condition:
+                del eval
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+            """
+            eval = lambda value: value
+            for value in values:
+                del eval
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+            """
+            eval = lambda value: value
+            try:
+                del eval
+            except RuntimeError:
+                pass
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+        )
+        for source in variants:
+            with self.subTest(statement=source.splitlines()[2].strip()):
+                self.write("tools/a/a/__init__.py", source)
+                self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
     def test_simple_sys_alias_retains_capability_provenance(self) -> None:
         self.write(
             "tools/a/a/__init__.py",
@@ -474,6 +529,21 @@ class PythonPackageContractTest(unittest.TestCase):
 
         self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
 
+    def test_conditional_sys_alias_retains_provenance_in_nested_scope(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            if condition:
+                registry = sys
+            def load():
+                return registry.modules["builtins"].__import__
+            __all__ = ("load",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
     def test_assignment_targets_bind_from_left_to_right(self) -> None:
         self.write(
             "tools/a/a/__init__.py",
@@ -482,6 +552,21 @@ class PythonPackageContractTest(unittest.TestCase):
             eval = values[eval] = lambda value: value
             run = eval(1)
             __all__ = ("run",)
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_augmented_assignment_loads_bound_target_before_store(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            class Value:
+                def __add__(self, other):
+                    return other
+            eval = Value()
+            eval += eval
+            __all__ = ("eval",)
             """,
         )
 
