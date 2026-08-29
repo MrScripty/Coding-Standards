@@ -4,7 +4,7 @@ schema_version = 4
 subject = "profile.boundary.generated-contract.applicability"
 semantic_revision = 1
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 3
+horizon_version = 4
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -16,14 +16,14 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact profile.boundary.generated-contract.applicability coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact profile.boundary.generated-contract.applicability coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
 subject = "profile.boundary.generated-contract.semantic-closure"
 semantic_revision = 2
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 3
+horizon_version = 4
 relationship_kind_contract_version = 2
 applicability_language_version = 1
 coverage_evidence_contract = "coverage-evidence.v1"
@@ -35,5 +35,5 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
 ]
 explicit_exclusions = []
-rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view was reviewed against the final A1b Milestone 3 provider-v3 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact profile.boundary.generated-contract.semantic-closure coverage view was reviewed against the final A1b Milestone 3 provider-v4 horizon. The relationship migration and consumer-disposition evidence identifies every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

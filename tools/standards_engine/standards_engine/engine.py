@@ -90,6 +90,7 @@ from tools.standards_authority.standards_authority import (
     MemoryObjectStore,
     NativeCaptureSource,
     RepositoryPath,
+    SQLiteObjectStore,
     open_default_store,
 )
 from tools.standards_contracts.standards_contracts import MissingValue
@@ -388,6 +389,36 @@ class StandardsEngine:
             (base._view, proposed._view),
             execution_context,
         )
+
+    @classmethod
+    def open_persisted(
+        cls,
+        store_path: Path,
+        view: StandardsAuthorityViewHandle,
+        *,
+        analysis_views: tuple[
+            StandardsAuthorityViewHandle, StandardsAuthorityViewHandle
+        ]
+        | None = None,
+    ) -> StandardsEngine:
+        path = store_path.resolve()
+        repository = AuthorityRepository(SQLiteObjectStore(path), _codec_sets())
+        selected_view = _authority_handle(view)
+        resolved = repository.resolve(selected_view).value
+        if not isinstance(resolved, StandardsAuthorityView):
+            raise RuntimeError("persisted view handle has the wrong owner type")
+        selected_analysis_views = None
+        if analysis_views is not None:
+            selected_analysis_views = tuple(
+                _authority_handle(item) for item in analysis_views
+            )
+            for handle in selected_analysis_views:
+                value = repository.resolve(handle).value
+                if not isinstance(value, StandardsAuthorityView):
+                    raise RuntimeError(
+                        "persisted analysis view handle has the wrong owner type"
+                    )
+        return cls(repository, selected_view, selected_analysis_views)
 
     @property
     def view(self) -> StandardsAuthorityViewHandle:
@@ -949,7 +980,7 @@ class StandardsEngine:
     ) -> StoredObservation | None:
         if not self._execution_context.providers:
             return None
-        static_inputs = tuple(
+        available_inputs = tuple(
             sorted(
                 (
                     ExecutionAuthorityRoot("accepted", "metadata", accepted.metadata),
@@ -974,20 +1005,36 @@ class StandardsEngine:
         )
         for requirement in evaluation.pending_requirements:
             claims = []
-            inputs = tuple(
+            available = tuple(
                 sorted(
                     (
-                        *static_inputs,
+                        *available_inputs,
                         ExecutionAuthorityRoot(
                             "current", "requirement", requirement.reference
                         ),
                     )
                 )
             )
-            request = ProviderRequest(
-                requirement.reference, requirement.fact.id, inputs
-            )
+            by_role = {(item.side, item.role): item for item in available}
             for provider in self._execution_context.providers:
+                contract = provider.contract
+                try:
+                    inputs = tuple(
+                        by_role[(selection.side, selection.role)]
+                        for selection in contract.input_roles
+                    )
+                except KeyError as error:
+                    selection = error.args[0]
+                    raise AnalysisError(
+                        AnalysisFailure(
+                            "FACT.PROVIDER_INPUT_UNAVAILABLE",
+                            "invalid",
+                            f"Provider selected unavailable input role {selection!r}.",
+                        )
+                    ) from error
+                request = ProviderRequest(
+                    requirement.reference, requirement.fact.id, inputs
+                )
                 outcome = provider.observe(request)
                 if isinstance(outcome, C7ProviderUnavailable):
                     raise AnalysisError(
@@ -1009,9 +1056,9 @@ class StandardsEngine:
                     )
                 evidence = tuple(sorted(item.reference for item in outcome.evidence))
                 if any(
-                    item.provider_contract != provider.evidence_contract
+                    item.provider_contract != contract.evidence_contract
                     or item.provider_contract_version
-                    != str(provider.semantic_revision)
+                    != str(contract.semantic_revision)
                     for item in evidence
                 ):
                     raise AnalysisError(
@@ -1033,15 +1080,16 @@ class StandardsEngine:
             if not claims:
                 continue
             provider, claim, evidence, inputs = claims[0]
+            contract = provider.contract
             value = _contract_value(claim.value)
             proposed.policy_impact.fact_schema.bind(
                 {requirement.fact.id: value}
             )
             provider_value = ProviderAuthority(
-                provider.provider_id,
-                provider.semantic_revision,
-                provider.input_contract,
-                provider.evidence_contract,
+                contract.provider_id,
+                contract.semantic_revision,
+                contract.input_contract,
+                contract.evidence_contract,
                 inputs,
             )
             grant = self._authorization(
@@ -1278,7 +1326,9 @@ class StandardsEngine:
         evaluation: AnalysisEvaluation,
     ) -> PendingResult | CompleteResult:
         operation, accepted, proposed = static
-        roots = [ExecutionAuthorityRoot("current", "operation-contract", operation)]
+        roots = [
+            ExecutionAuthorityRoot("transition", "operation-contract", operation)
+        ]
         roots.extend(accepted.direct_dependencies)
         roots.extend(proposed.direct_dependencies)
         roots.extend(evaluation.authority_bound().direct_dependencies)

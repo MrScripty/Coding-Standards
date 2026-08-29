@@ -168,3 +168,131 @@ relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "The fixture proves custom manifests acquire no implicit coverage and registered verification consumes Engine-composed authority."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/graph_engine/graph_engine/projection.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Graph projections preserve owner-declared immutable authority identities."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/graph_engine/graph_engine/registry.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The graph registry validates immutable provider and relationship-kind contracts."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Analysis authority models declare role-qualified roots and transitive closure records."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/trust.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Trust adapters bind provider and authorization claims to exact immutable contracts and inputs."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/closure.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Closure compilation resolves owner-declared roots and transitive object references."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/envelope.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Authority envelopes bind typed payload bytes to their content-addressed identity."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/errors.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Authority failures preserve typed ownership at the persistence boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/model.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Authority models define the immutable content and reference records stored by the repository."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/platform.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Platform checks bound the admitted durability profile without changing authority identity."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/recovery.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Recovery verifies an immutable backup before atomic non-overwriting publication."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_authority/standards_authority/store.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The SQLite store owns durable content-addressed object persistence and reconstruction."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_engine/standards_engine/authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Engine composition admits the exact operation, provider, and authorization authority roots."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_graph/standards_graph/authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Repository graph authority records reconstruct graph nodes and relationships from immutable objects."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_metadata/standards_metadata/authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Metadata authority records preserve snapshot-bound module and policy-unit corpus identities."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_policy_impact/standards_policy_impact/authority.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "Policy-impact authority records persist exact compiled relationship semantics."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_policy_impact/standards_policy_impact/compiler.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:immutable-authority-closure"
+rationale = "The policy-impact compiler constructs immutable source-owned relationship authority."

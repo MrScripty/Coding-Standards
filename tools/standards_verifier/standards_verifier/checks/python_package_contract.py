@@ -217,7 +217,7 @@ def _write_package(
             dependencies = [{dependency_values}]
 
             [tool.standards-package]
-            schema-version = 1
+            schema-version = 2
             public-import-root = "tools.{directory}.{directory}"
             repository-entrypoints = []
             '''

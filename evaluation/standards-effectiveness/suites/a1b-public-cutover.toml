@@ -13,8 +13,20 @@ id = "policy-impact-migration"
 type = "policy_impact_migration"
 evidence = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv"
 accepted_tree = "2ddb667e3f25779e61d26954a98a3fc607a1fbc3"
+implementation_base = "1d18b70d99db48317de2cc9243fc06b133d7329a"
 accepted_registry = "evaluation/standards-effectiveness/policy-impact-registry.toml"
 proposed_registry = "evaluation/standards-effectiveness/policy-impact-registry.toml"
+retired_implementation = [
+  { path = "tools/standards_analysis/standards_analysis/facts.py", rationale = "Replaced by owner-local fact and authority construction." },
+  { path = "tools/standards_analysis/standards_analysis/resolution.py", rationale = "Replaced by the immutable Analysis kernel transition." },
+  { path = "tools/standards_analysis/standards_analysis/results.py", rationale = "Replaced by generated public result projections." },
+  { path = "tools/standards_analysis/standards_analysis/serialization.py", rationale = "Replaced by identity-v2 and owner-local typed identity records." },
+  { path = "tools/standards_analysis/standards_analysis/snapshots.py", rationale = "Replaced by the Standards Authority snapshot owner." },
+  { path = "tools/standards_engine/contracts/generate_contract.py", rationale = "Replaced by the Standards Contracts projection compiler." },
+  { path = "tools/standards_engine/contracts/validate_contracts.py", rationale = "Replaced by the Standards Contracts runtime and compiler." },
+  { path = "tools/standards_engine/standards_engine/model.py", rationale = "Replaced by the generated public request and result algebra." },
+  { path = "tools/standards_metadata/standards_metadata/serialization.py", rationale = "Replaced by the Standards Identity encoding owner." },
+]
 cases = [
   { id = "missing-admitted-source", registry = "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/missing-admitted-source.toml", expected = ["POLICY_IMPACT_MIGRATION.MISSING_SOURCE"] },
 ]

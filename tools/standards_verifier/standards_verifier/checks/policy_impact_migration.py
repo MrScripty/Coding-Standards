@@ -59,6 +59,12 @@ class MigrationRecord:
 
 
 @dataclass(frozen=True, slots=True)
+class MigrationProjection:
+    records: tuple[MigrationRecord, ...]
+    implementation_paths: frozenset[str]
+
+
+@dataclass(frozen=True, slots=True)
 class EvidenceRow:
     accepted: MigrationRecord | None
     proposed: MigrationRecord | None
@@ -66,12 +72,20 @@ class EvidenceRow:
 
 
 @dataclass(frozen=True, slots=True)
+class RetiredImplementationDisposition:
+    path: str
+    rationale: str
+
+
+@dataclass(frozen=True, slots=True)
 class PolicyImpactMigrationCheck:
     id: str
     evidence: str
     accepted_tree: str
+    implementation_base: str
     accepted_registry: str
     proposed_registry: str
+    retired_implementation: tuple[RetiredImplementationDisposition, ...]
     cases: tuple[MigrationCase, ...]
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
@@ -90,6 +104,19 @@ class PolicyImpactMigrationCheck:
             self.id,
         )
         diagnostics = _compare(rows, accepted, proposed, context, self.id, self.evidence)
+        diagnostics.extend(
+            _compare_implementation_closure(
+                rows,
+                proposed,
+                _changed_production_paths(
+                    context, self.id, self.implementation_base
+                ),
+                context,
+                self.id,
+                self.evidence,
+                self.retired_implementation,
+            )
+        )
         for case in self.cases:
             observed = tuple(
                 item.code
@@ -123,7 +150,7 @@ def _compile(
     registry: str,
     context: CheckContext,
     check: str,
-) -> tuple[MigrationRecord, ...]:
+) -> MigrationProjection:
     try:
         corpus = load_canonical_standards_corpus(root)
         compiled = compile_policy_impact(root, corpus, registry)
@@ -141,18 +168,25 @@ def _compile(
                 observed=failure.observed,
             )
         ) from error
-    return tuple(
-        MigrationRecord(
-            semantics.source,
-            semantics.relation,
-            semantics.consumer,
-            semantics.declaration_source,
-            semantics.dependency_fingerprint,
-        )
-        for semantics in sorted(
-            compiled.semantics.values(),
-            key=lambda item: (item.source, item.relation, item.consumer),
-        )
+    return MigrationProjection(
+        tuple(
+            MigrationRecord(
+                semantics.source,
+                semantics.relation,
+                semantics.consumer,
+                semantics.declaration_source,
+                semantics.dependency_fingerprint,
+            )
+            for semantics in sorted(
+                compiled.semantics.values(),
+                key=lambda item: (item.source, item.relation, item.consumer),
+            )
+        ),
+        frozenset(
+            artifact.repository_path
+            for artifact in compiled.artifacts.values()
+            if artifact.artifact_kind == "implementation-artifact"
+        ),
     )
 
 
@@ -353,16 +387,16 @@ def _expected_disposition(
 
 def _compare(
     rows: tuple[EvidenceRow, ...],
-    accepted: tuple[MigrationRecord, ...],
-    proposed: tuple[MigrationRecord, ...],
+    accepted: MigrationProjection,
+    proposed: MigrationProjection,
     context: CheckContext,
     check: str,
     path: str,
 ) -> list[Diagnostic]:
     expected_accepted = _indexed(rows, "accepted", context, check, path)
     expected_proposed = _indexed(rows, "proposed", context, check, path)
-    actual_accepted = {record.key: record for record in accepted}
-    actual_proposed = {record.key: record for record in proposed}
+    actual_accepted = {record.key: record for record in accepted.records}
+    actual_proposed = {record.key: record for record in proposed.records}
 
     expected_sources = {record.declaration_source for record in expected_proposed.values()}
     actual_sources = {record.declaration_source for record in actual_proposed.values()}
@@ -427,6 +461,127 @@ def _compare(
                     observed=repr(changed),
                 )
             )
+    return diagnostics
+
+
+def _changed_production_paths(
+    context: CheckContext,
+    check: str,
+    base: str,
+) -> tuple[frozenset[str], frozenset[str]]:
+    if len(base) != 40 or any(character not in "0123456789abcdef" for character in base):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.POLICY_IMPACT_IMPLEMENTATION_BASE",
+                "invalid",
+                "implementation_base must be a lowercase full Git commit identity",
+                suite=context.suite_id,
+                check=check,
+                observed=base,
+            )
+        )
+    completed = subprocess.run(
+        ("git", "diff", "--name-status", "-z", base, "--", "tools"),
+        cwd=context.repo_root,
+        check=False,
+        capture_output=True,
+    )
+    if completed.returncode != 0:
+        raise EngineError(
+            Diagnostic(
+                "POLICY_IMPACT_MIGRATION.IMPLEMENTATION_BASE_UNAVAILABLE",
+                "unavailable",
+                "cannot derive the changed production-source closure",
+                suite=context.suite_id,
+                check=check,
+                observed=base,
+            )
+        )
+    fields = completed.stdout.decode("utf-8").split("\0")
+    if fields and fields[-1] == "":
+        fields.pop()
+    current: set[str] = set()
+    retired: set[str] = set()
+    index = 0
+    while index < len(fields):
+        status = fields[index]
+        index += 1
+        if index >= len(fields):
+            raise AssertionError("Git name-status output ended before its path")
+        first = fields[index]
+        index += 1
+        if status.startswith(("R", "C")):
+            if index >= len(fields):
+                raise AssertionError("Git rename output ended before its destination")
+            second = fields[index]
+            index += 1
+            if _is_production_source(first):
+                retired.add(first)
+            if _is_production_source(second):
+                current.add(second)
+        elif status == "D":
+            if _is_production_source(first):
+                retired.add(first)
+        elif status in {"A", "M", "T"} and _is_production_source(first):
+            current.add(first)
+    return frozenset(current), frozenset(retired)
+
+
+def _is_production_source(path: str) -> bool:
+    value = PurePosixPath(path)
+    if not value.parts or value.parts[0] != "tools" or "tests" in value.parts:
+        return False
+    return value.name == "pyproject.toml" or value.suffix == ".py"
+
+
+def _compare_implementation_closure(
+    rows: tuple[EvidenceRow, ...],
+    proposed: MigrationProjection,
+    changed: tuple[frozenset[str], frozenset[str]],
+    context: CheckContext,
+    check: str,
+    evidence: str,
+    retired_dispositions: tuple[RetiredImplementationDisposition, ...],
+) -> list[Diagnostic]:
+    current, retired = changed
+    relationship_consumers = {record.consumer for record in proposed.records}
+    diagnostics: list[Diagnostic] = []
+    for code, message, missing in (
+        (
+            "POLICY_IMPACT_MIGRATION.MISSING_IMPLEMENTATION_NODE",
+            "changed production paths are absent from the implementation catalog",
+            current - proposed.implementation_paths,
+        ),
+        (
+            "POLICY_IMPACT_MIGRATION.MISSING_IMPLEMENTATION_RELATIONSHIP",
+            "changed production paths have no source-owned relationship",
+            current - relationship_consumers,
+        ),
+    ):
+        if missing:
+            diagnostics.append(
+                _diagnostic(
+                    context,
+                    check,
+                    code,
+                    message,
+                    path=evidence,
+                    observed="|".join(sorted(missing)),
+                )
+            )
+    recorded_retired = {item.path for item in retired_dispositions}
+    if recorded_retired != retired:
+        diagnostics.append(
+            _diagnostic(
+                context,
+                check,
+                "POLICY_IMPACT_MIGRATION.IMPLEMENTATION_RETIREMENT_SET",
+                "retired production paths differ from exact retirement evidence",
+                path=evidence,
+                expected="|".join(sorted(retired)),
+                observed="|".join(sorted(recorded_retired)),
+            )
+        )
     return diagnostics
 
 
@@ -508,8 +663,10 @@ def parse_policy_impact_migration_check(
         "type",
         "evidence",
         "accepted_tree",
+        "implementation_base",
         "accepted_registry",
         "proposed_registry",
+        "retired_implementation",
         "cases",
     }
     unknown = set(raw) - allowed
@@ -590,11 +747,58 @@ def parse_policy_impact_migration_check(
             )
         seen.add(case_id)
         cases.append(MigrationCase(case_id, registry, tuple(expected)))
+    raw_retired = raw.get("retired_implementation")
+    if not isinstance(raw_retired, list):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.POLICY_IMPACT_RETIRED_IMPLEMENTATION",
+                "invalid",
+                "retired_implementation must be a list",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
+    retired: list[RetiredImplementationDisposition] = []
+    retired_paths: set[str] = set()
+    for item in raw_retired:
+        if not isinstance(item, dict) or set(item) != {"path", "rationale"}:
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.POLICY_IMPACT_RETIRED_IMPLEMENTATION",
+                    "invalid",
+                    "retired implementation evidence has the wrong fields",
+                    suite=suite_id,
+                    check=check_id,
+                )
+            )
+        path = item["path"]
+        rationale = item["rationale"]
+        if (
+            not isinstance(path, str)
+            or not path
+            or path in retired_paths
+            or not isinstance(rationale, str)
+            or not rationale
+        ):
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.POLICY_IMPACT_RETIRED_IMPLEMENTATION",
+                    "invalid",
+                    "retired implementation evidence is invalid or duplicated",
+                    suite=suite_id,
+                    check=check_id,
+                    observed=str(path),
+                )
+            )
+        retired_paths.add(path)
+        retired.append(RetiredImplementationDisposition(path, rationale))
     return PolicyImpactMigrationCheck(
         check_id,
         _required_string(raw, "evidence", suite_id, check_id),
         _required_string(raw, "accepted_tree", suite_id, check_id),
+        _required_string(raw, "implementation_base", suite_id, check_id),
         _required_string(raw, "accepted_registry", suite_id, check_id),
         _required_string(raw, "proposed_registry", suite_id, check_id),
+        tuple(sorted(retired, key=lambda item: item.path)),
         tuple(cases),
     )

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
+import os
 import subprocess
 import sys
 import tempfile
@@ -9,6 +10,7 @@ import unittest
 import multiprocessing
 import uuid
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.standards_authority.standards_authority import (
     AuthorityEnvelope,
@@ -201,6 +203,31 @@ class SQLiteStoreTests(unittest.TestCase):
                 AuthorityRepository(
                     reopened, (CodecSet("test", (codec,)),)
                 )._verify_all_stored()
+
+    def test_raced_destination_is_not_overwritten_or_removed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "source.sqlite3"
+            destination = root / "destination.sqlite3"
+            with SQLiteObjectStore(source):
+                pass
+            recovery = SQLiteRecovery((CodecSet("test", ()),))
+            raced_content = b"another owner created this destination"
+            real_link = os.link
+
+            def create_destination_then_link(source_path, destination_path):
+                Path(destination_path).write_bytes(raced_content)
+                return real_link(source_path, destination_path)
+
+            with patch(
+                "tools.standards_authority.standards_authority.recovery.os.link",
+                side_effect=create_destination_then_link,
+            ):
+                with self.assertRaises(AuthorityError) as raised:
+                    recovery.backup(source, destination)
+
+            self.assertEqual(raised.exception.failure.code, "STORE.DESTINATION_EXISTS")
+            self.assertEqual(destination.read_bytes(), raced_content)
 
     def test_cross_mount_recovery_rejects_before_destination_creation(self) -> None:
         shared_memory = Path("/dev/shm")

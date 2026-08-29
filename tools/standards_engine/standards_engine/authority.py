@@ -503,10 +503,11 @@ def validate_execution_authority(
             "ENGINE.EXECUTION_OPERATION_MISMATCH",
             "execution closure and operation contract differ",
         )
+    operation_side = "transition" if contract.operation == "analysis" else "current"
     selected_operation = tuple(
         item
         for item in closure.roots
-        if item.side == "current" and item.role == "operation-contract"
+        if item.side == operation_side and item.role == "operation-contract"
     )
     if (
         len(selected_operation) != 1
@@ -570,11 +571,9 @@ def validate_execution_authority(
                 f"dynamic role {role!r} selects the wrong authority kind",
             )
     admitted = {
-        (side, role)
-        for side in sides
-        for role in required
+        (side, role) for side in sides for role in required
     } | {("current", role) for role in dynamic} | {
-        ("current", "operation-contract")
+        (operation_side, "operation-contract")
     }
     unknown = tuple(
         item for item in closure.roots if (item.side, item.role) not in admitted

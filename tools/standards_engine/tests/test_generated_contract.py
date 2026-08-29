@@ -12,6 +12,7 @@ from tools.standards_contracts.standards_contracts import (
     compile_contracts,
     render_repository_projections,
 )
+from tools.standards_engine.standards_engine import AgentToolFacade
 from tools.standards_engine.standards_engine import _generated_contract as generated
 
 
@@ -28,6 +29,38 @@ def _canonical_contracts() -> tuple[dict[str, object], dict[str, object]]:
 
 
 class GeneratedContractTest(unittest.TestCase):
+    def test_interface_operations_bind_generated_calls_results_and_facade(self) -> None:
+        schema, interface = _canonical_contracts()
+        contracts = compile_contracts(schema, interface)
+        facade = AgentToolFacade(object(), contracts)
+        expected_inputs = {
+            "query": generated.QueryCall,
+            "prepare": generated.PrepareCall,
+            "resolve": generated.ResolveCall,
+            "inspect": generated.InspectCall,
+        }
+
+        for operation in contracts.interface.operations:
+            with self.subTest(operation=operation.id):
+                self.assertIs(
+                    getattr(generated, operation.input_definition),
+                    expected_inputs[operation.id],
+                )
+                self.assertTrue(callable(getattr(facade, operation.id)))
+                self.assertEqual(facade._operation(operation.id), operation)
+                for definition in operation.result_definitions:
+                    self.assertIn(definition, generated.DEFINITION_METADATA)
+
+        class WrongQueryResult:
+            __definition__ = "CompleteResult"
+
+            @staticmethod
+            def as_contract() -> dict[str, object]:
+                return {"kind": "complete-result"}
+
+        with self.assertRaisesRegex(RuntimeError, "outside the query result algebra"):
+            facade._result("query", WrongQueryResult())
+
     def test_generated_contract_projections_are_current(self) -> None:
         completed = subprocess.run(
             (

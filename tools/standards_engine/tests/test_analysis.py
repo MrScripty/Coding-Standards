@@ -13,8 +13,13 @@ from pathlib import Path
 from tools.standards_analysis.standards_analysis import (
     AnalysisExecutionContext,
     AuthorityEvidence,
+    AuthorizationAuthorityContract,
     AuthorizationClaim,
     C7ProviderUnavailable,
+    EvidenceContractKey,
+    FactProviderContract,
+    ProviderInputRole,
+    ProviderAuthority,
     ProviderNoObservation,
     ProviderObservationClaim,
     ResolvedEvidence,
@@ -37,6 +42,9 @@ from tools.standards_engine.standards_engine import (
 from tools.standards_metadata.standards_metadata import (
     load_canonical_standards_corpus,
 )
+from tools.standards_verifier.standards_verifier.suite_inputs import (
+    write_suite_input_projection,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -56,12 +64,21 @@ def _evidence(identifier: str, provider: str = "repository-content") -> Authorit
 
 
 class ExactAuthorizer:
+    contract = AuthorizationAuthorityContract(
+        "issuer.fixture",
+        1,
+        "principal.fixture",
+        "authorization-grant.v1",
+        (EvidenceContractKey("repository-content", "1"),),
+        "revocation.fixture",
+        1,
+        "authorization-revocation.v1",
+        (EvidenceContractKey("repository-content", "1"),),
+    )
+
     def authorize(self, request):
         return AuthorizationClaim(
-            "issuer.fixture",
-            1,
             "grant.fixture",
-            "principal.fixture",
             request.action,
             request.subject_kind,
             request.subject_id,
@@ -71,17 +88,20 @@ class ExactAuthorizer:
                 for item in request.evidence
             ),
             (ResolvedEvidence(_evidence("authorization"), b"authorization"),),
-            "revocation.fixture",
-            1,
             (ResolvedEvidence(_evidence("revocation"), b"revocation"),),
+            "not-revoked",
+            "allow",
         )
 
 
 class FixtureProvider:
-    provider_id = "provider.fixture"
-    semantic_revision = 1
-    input_contract = "analysis-authority-roots.v1"
-    evidence_contract = "provider.fixture"
+    contract = FactProviderContract(
+        "provider.fixture",
+        1,
+        "analysis-authority-roots.v1",
+        "provider.fixture",
+        (ProviderInputRole("current", "requirement"),),
+    )
 
     def __init__(self, *, unavailable: bool = False) -> None:
         self.unavailable = unavailable
@@ -91,7 +111,9 @@ class FixtureProvider:
             return ProviderNoObservation()
         if self.unavailable:
             return C7ProviderUnavailable("Fixture evidence is unavailable.")
-        evidence = _evidence("provider-observation", self.evidence_contract)
+        evidence = _evidence(
+            "provider-observation", self.contract.evidence_contract
+        )
         return ProviderObservationClaim(
             {"type": "boolean", "state": "known", "value": True},
             (ResolvedEvidence(evidence, b"provider-observation"),),
@@ -145,9 +167,13 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(stale.code, "SUBMISSION.NOT_APPLICABLE")
 
     def test_fact_authority_is_inspectable_from_a_fresh_process(self) -> None:
-        created = _run_fresh_python(
-            self.fixture_root,
-            """
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repository"
+            _copy_repository(root)
+            _install_conditional_policy(root)
+            created = _run_fresh_python(
+                root,
+                """
 import json
 import sys
 from pathlib import Path
@@ -179,34 +205,54 @@ handles = (
     (requirement.handle, "fact-requirement-inspection-result"),
     (state.fact_observations[0].handle, "fact-observation-inspection-result"),
 )
-print(json.dumps([
-    {"handle": handle.as_contract(), "expected": expected}
-    for handle, expected in handles
-]))
+print(json.dumps({
+    "view": engine.view.as_contract(),
+    "analysis_views": [item.as_contract() for item in engine.analysis_views],
+    "handles": [
+        {"handle": handle.as_contract(), "expected": expected}
+        for handle, expected in handles
+    ],
+}))
 """,
-        )
-        inspected = _run_fresh_python(
-            self.fixture_root,
-            """
+            )
+            store_path = Path(temporary) / "authority.sqlite3"
+            shutil.move(root / ".standards-engine" / "authority.sqlite3", store_path)
+            shutil.rmtree(root)
+            inspected = _run_fresh_python(
+                store_path,
+                """
 import json
 import sys
 from pathlib import Path
 
-from tools.standards_engine.standards_engine import InspectCall, StandardsEngine
+from tools.standards_engine.standards_engine import (
+    InspectCall,
+    StandardsAuthorityViewHandle,
+    StandardsEngine,
+)
 
-root = Path(sys.argv[1])
+store_path = Path(sys.argv[1])
 requested = json.loads(sys.stdin.read())
-engine = StandardsEngine.open_analysis(root, root)
+engine = StandardsEngine.open_persisted(
+    store_path,
+    StandardsAuthorityViewHandle.from_value(requested["view"]),
+    analysis_views=tuple(
+        StandardsAuthorityViewHandle.from_value(item)
+        for item in requested["analysis_views"]
+    ),
+)
 print(json.dumps([
     engine.inspect(InspectCall.from_value({"handle": item["handle"]})).kind
-    for item in requested
+    for item in requested["handles"]
 ]))
 """,
-            input_value=created,
-        )
+                input_value=created,
+            )
 
-        expected = [item["expected"] for item in json.loads(created)]
-        self.assertEqual(json.loads(inspected), expected)
+            expected = [
+                item["expected"] for item in json.loads(created)["handles"]
+            ]
+            self.assertEqual(json.loads(inspected), expected)
 
     def test_decision_order_normalizes_and_dormant_observations_survive(self) -> None:
         def transition(order: tuple[str, str], values: dict[str, bool]):
@@ -254,6 +300,15 @@ print(json.dumps([
             "provider_authority",
             state.fact_observations[0].as_contract(),
         )
+        provider_reference = state.fact_observations[0].provider_authority
+        provider_authority = self.repository.resolve(
+            AuthorityHandle(provider_reference.object_kind, provider_reference.id)
+        ).value
+        self.assertIsInstance(provider_authority, ProviderAuthority)
+        self.assertEqual(
+            tuple((item.side, item.role) for item in provider_authority.inputs),
+            (("current", "requirement"),),
+        )
 
         unavailable_engine = StandardsEngine(
             self.repository,
@@ -273,6 +328,7 @@ print(json.dumps([
             proposed = Path(temporary) / "proposed"
             _copy_repository(proposed)
             _install_semantic_change(proposed)
+            write_suite_input_projection(proposed)
             engine = StandardsEngine.open_analysis(
                 REPO_ROOT,
                 proposed,

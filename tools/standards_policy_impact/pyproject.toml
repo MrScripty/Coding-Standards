@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [tool.standards-package]
-schema-version = 1
+schema-version = 2
 public-import-root = "tools.standards_policy_impact.standards_policy_impact"
 repository-entrypoints = []
 

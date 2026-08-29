@@ -8,6 +8,7 @@ from pathlib import Path
 from tools.standards_contracts.standards_contracts import (
     CompiledContracts,
     ContractError,
+    OperationContract,
     compile_contracts,
 )
 
@@ -35,6 +36,9 @@ class AgentToolFacade:
     def __init__(self, engine: StandardsEngine, contracts: CompiledContracts) -> None:
         self._engine = engine
         self._contracts = contracts
+        self._operations = {
+            operation.id: operation for operation in contracts.interface.operations
+        }
         self._handle_versions = self._derive_handle_versions(contracts.schema)
 
     @classmethod
@@ -65,67 +69,76 @@ class AgentToolFacade:
 
     def query(self, arguments: object) -> dict[str, object]:
         try:
-            value = self._mapping(arguments)
-            self._validate("QueryCall", value)
-            call = decode_contract("QueryCall", value)
-            if not isinstance(call, QueryCall):
-                raise RuntimeError("generated QueryCall decoder returned the wrong type")
+            call = self._decode_call("query", arguments, QueryCall)
         except InterfaceVersionError as error:
             return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.query(call)
-        output = result.as_contract()
-        self._validate_result(type(result).__definition__, output)
-        return output
+        return self._result("query", result)
 
     def prepare(self, arguments: object) -> dict[str, object]:
         try:
-            value = self._mapping(arguments)
-            self._validate("PrepareCall", value)
-            call = decode_contract("PrepareCall", value)
-            if not isinstance(call, PrepareCall):
-                raise RuntimeError("generated PrepareCall decoder returned the wrong type")
+            call = self._decode_call("prepare", arguments, PrepareCall)
         except InterfaceVersionError as error:
             return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.prepare(call.request)
-        output = result.as_contract()
-        self._validate_result(type(result).__definition__, output)
-        return output
+        return self._result("prepare", result)
 
     def resolve(self, arguments: object) -> dict[str, object]:
         try:
-            value = self._mapping(arguments)
-            self._validate("ResolveCall", value)
-            call = decode_contract("ResolveCall", value)
-            if not isinstance(call, ResolveCall):
-                raise RuntimeError("generated ResolveCall decoder returned the wrong type")
+            call = self._decode_call("resolve", arguments, ResolveCall)
         except InterfaceVersionError as error:
             return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.resolve(call.analysis, call.submission)
-        output = result.as_contract()
-        self._validate_result(type(result).__definition__, output)
-        return output
+        return self._result("resolve", result)
 
     def inspect(self, arguments: object) -> dict[str, object]:
         try:
-            value = self._mapping(arguments)
-            self._validate("InspectCall", value)
-            call = decode_contract("InspectCall", value)
-            if not isinstance(call, InspectCall):
-                raise RuntimeError("generated InspectCall decoder returned the wrong type")
+            call = self._decode_call("inspect", arguments, InspectCall)
         except InterfaceVersionError as error:
             return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.inspect(call)
+        return self._result("inspect", result)
+
+    def _decode_call(self, operation: str, arguments: object, expected_type):
+        contract = self._operation(operation)
+        value = self._mapping(arguments)
+        self._validate(contract.input_definition, value)
+        call = decode_contract(contract.input_definition, value)
+        if not isinstance(call, expected_type):
+            raise RuntimeError(
+                f"generated {contract.input_definition} decoder returned the wrong type"
+            )
+        return call
+
+    def _result(self, operation: str, result) -> dict[str, object]:
+        contract = self._operation(operation)
+        definition = type(result).__definition__
         output = result.as_contract()
-        self._validate_result(type(result).__definition__, output)
-        return output
+        for result_definition in contract.result_definitions:
+            try:
+                self._validate_result(result_definition, output)
+            except ContractError:
+                continue
+            return output
+        raise RuntimeError(
+            f"engine returned {definition} outside the {operation} result algebra"
+        )
+
+    def _operation(self, operation: str) -> OperationContract:
+        try:
+            return self._operations[operation]
+        except KeyError:
+            raise RuntimeError(
+                f"compiled interface does not declare operation {operation!r}"
+            ) from None
 
     def _validate(self, definition: str, value: object) -> None:
         self._require_supported_handle_versions(value)

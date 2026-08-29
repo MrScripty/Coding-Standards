@@ -600,3 +600,35 @@ relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:immutable-authority-closure"
 rationale = "The fixture proves stale claims cannot become current certificates and exact authorization, revocation, and evidence authority is enforced."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_contracts/standards_contracts/errors.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Contract compilation and validation failures retain typed semantic ownership."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_contracts/standards_contracts/model.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Contract models represent the canonical compiled schema and public operation algebra."
+
+[[relationships]]
+source = "topic.contracts.identity-versus-instance-equality"
+consumer = "tools/standards_identity/standards_identity/errors.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "Identity errors reject malformed or mismatched content identities without substituting schema equality."
+
+[[relationships]]
+source = "topic.contracts.generated-semantic-conformance"
+consumer = "tools/standards_verifier/standards_verifier/checks/contract_projection.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:generated-contract-semantic-conformance"
+rationale = "The verifier proves generated projection freshness and declared contract semantics through the public compiler."

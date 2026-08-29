@@ -6,7 +6,7 @@ requires-python = ">=3.11,<3.13"
 dependencies = []
 
 [tool.standards-package]
-schema-version = 1
+schema-version = 2
 public-import-root = "tools.standards_applicability.standards_applicability"
 repository-entrypoints = []
 

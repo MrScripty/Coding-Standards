@@ -8,7 +8,7 @@ dependencies = [
 ]
 
 [tool.standards-package]
-schema-version = 1
+schema-version = 2
 public-import-root = "tools.standards_authority.standards_authority"
 repository-entrypoints = []
 

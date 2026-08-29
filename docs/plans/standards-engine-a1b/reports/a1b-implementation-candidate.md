@@ -1,6 +1,6 @@
 # Standards Engine A1b Implementation Candidate
 
-**Status:** `Ready for independent content review`
+**Status:** `Rejected and superseded by the Milestone 3 content-review correction`
 
 **Implementation commit:** `3da674c1227a8ff6544e846a252a21a255854f49`
 
@@ -10,6 +10,15 @@
 commit and tree above. This report, review records, and lifecycle projections
 are evidence about that content; adding them does not change the reviewed
 subject.
+
+Independent Standards and Specification review rejected this candidate. The
+review confirmed A1B-A6L licensing and provenance, but found incomplete trust
+binding, over-broad provider inputs, the wrong analysis operation-contract
+side, source-dependent cold reconstruction, incomplete implementation-consumer
+migration, a destination publication race, an alternate dynamic-import bypass,
+help-only entrypoint evidence, and incomplete operation/codec composition
+evidence. This report remains historical candidate evidence and must not be
+used as A1B-A11 acceptance.
 
 ## Candidate Scope
 

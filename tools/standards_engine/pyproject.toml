@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [tool.standards-package]
-schema-version = 1
+schema-version = 2
 public-import-root = "tools.standards_engine.standards_engine"
 repository-entrypoints = [
 ]

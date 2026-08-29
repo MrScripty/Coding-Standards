@@ -59,6 +59,30 @@ rationale = "The package ownership contract governs this manifest-owned public b
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_analysis/standards_analysis/routing.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "Routing consumes repository-owned package boundaries through their declared public roots."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/checks/__init__.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The verifier check facade statically composes every registered check parser through owned package imports."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/repository_graph.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "Repository graph composition imports graph and policy-impact behavior through their public package roots."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
@@ -360,3 +384,19 @@ relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1b-public-cutover"
 rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/generated_artifacts.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The verifier composes owner-produced generated projections through one Python checkpoint."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/suite_inputs.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The verifier owns the typed projection from parsed suite checks to coverage input state."

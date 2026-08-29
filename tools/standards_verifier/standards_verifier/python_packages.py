@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -14,6 +15,36 @@ from typing import Iterable
 
 _PYTHON_RANGE = ">=3.11,<3.13"
 _DEPENDENCY_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+_IMPORT_MACHINERY_ROOTS = frozenset(
+    {
+        "_frozen_importlib",
+        "_frozen_importlib_external",
+        "_imp",
+        "builtins",
+        "importlib",
+        "pkgutil",
+        "runpy",
+        "zipimport",
+    }
+)
+_IMPORT_CAPABILITY_NAMES = frozenset(
+    {"__builtins__", "__import__", "compile", "eval", "exec"}
+)
+_IMPORT_CAPABILITY_ATTRIBUTES = frozenset(
+    {
+        "__import__",
+        "exec_module",
+        "find_spec",
+        "import_module",
+        "load_module",
+        "module_from_spec",
+        "resolve_name",
+        "run_module",
+        "run_path",
+        "spec_from_file_location",
+        "spec_from_loader",
+    }
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,12 +58,20 @@ class PythonPackageFinding:
 
 
 @dataclass(frozen=True, slots=True)
+class EntrypointContract:
+    path: str
+    arguments: tuple[str, ...]
+    fixture: str
+    remove: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
 class PythonPackageContract:
     manifest: str
     project_name: str
     dependencies: tuple[str, ...]
     public_root: str
-    entrypoints: tuple[str, ...]
+    entrypoints: tuple[EntrypointContract, ...]
 
     @property
     def root_path(self) -> PurePosixPath:
@@ -105,14 +144,14 @@ def _load_contract(
                 field=sorted(unknown)[0],
             )
         )
-    if package.get("schema-version") != 1:
+    if package.get("schema-version") != 2:
         findings.append(
             PythonPackageFinding(
                 "PYTHON_PACKAGE.SCHEMA_VERSION",
-                "standards-package schema-version must equal integer 1",
+                "standards-package schema-version must equal integer 2",
                 manifest,
                 field="schema-version",
-                expected="1",
+                expected="2",
                 observed=repr(package.get("schema-version")),
             )
         )
@@ -169,20 +208,17 @@ def _load_contract(
                 field="public-import-root",
             )
         )
-    if (
-        not isinstance(entrypoints, list)
-        or any(type(item) is not str or not item for item in entrypoints)
-        or len(set(entrypoints)) != len(entrypoints)
-    ):
+    parsed_entrypoints = _entrypoint_contracts(entrypoints)
+    if parsed_entrypoints is None:
         findings.append(
             PythonPackageFinding(
                 "PYTHON_PACKAGE.ENTRYPOINTS",
-                "repository-entrypoints must be a unique string list",
+                "repository-entrypoints must be unique typed smoke operations",
                 manifest,
                 field="repository-entrypoints",
             )
         )
-        entrypoints = []
+        parsed_entrypoints = ()
     if findings:
         return None, findings
     assert isinstance(name, str)
@@ -193,9 +229,59 @@ def _load_contract(
             name.lower().replace("_", "-"),
             tuple(sorted(_dependency_name(item) for item in dependencies)),
             public_root,
-            tuple(entrypoints),
+            parsed_entrypoints,
         ),
         [],
+    )
+
+
+def _entrypoint_contracts(value: object) -> tuple[EntrypointContract, ...] | None:
+    if not isinstance(value, list):
+        return None
+    result: list[EntrypointContract] = []
+    for item in value:
+        if not isinstance(item, dict) or set(item) != {
+            "path",
+            "arguments",
+            "fixture",
+            "remove",
+        }:
+            return None
+        path = item["path"]
+        arguments = item["arguments"]
+        fixture = item["fixture"]
+        remove = item["remove"]
+        if (
+            type(path) is not str
+            or not path
+            or not _is_repository_path(path)
+            or not isinstance(arguments, list)
+            or any(type(argument) is not str or not argument for argument in arguments)
+            or fixture
+            not in {
+                "reviewed-repository",
+                "isolated-indexed-copy",
+                "isolated-git-repository",
+            }
+            or not isinstance(remove, list)
+            or any(type(selected) is not str or not selected for selected in remove)
+            or any(not _is_repository_path(selected) for selected in remove)
+            or len(set(remove)) != len(remove)
+        ):
+            return None
+        result.append(
+            EntrypointContract(path, tuple(arguments), fixture, tuple(sorted(remove)))
+        )
+    paths = tuple(item.path for item in result)
+    if len(set(paths)) != len(paths):
+        return None
+    return tuple(result)
+
+
+def _is_repository_path(value: str) -> bool:
+    path = PurePosixPath(value)
+    return not path.is_absolute() and bool(path.parts) and not any(
+        part in {"", ".", ".."} for part in path.parts
     )
 
 
@@ -362,15 +448,15 @@ def _imported_dependencies(
 def _uses_dynamic_import_capability(node: ast.AST) -> bool:
     if isinstance(node, ast.Import):
         return any(
-            item.name.split(".", 1)[0] in {"builtins", "importlib"}
+            item.name.split(".", 1)[0] in _IMPORT_MACHINERY_ROOTS
             for item in node.names
         )
     if isinstance(node, ast.ImportFrom) and node.module:
-        return node.module.split(".", 1)[0] in {"builtins", "importlib"}
+        return node.module.split(".", 1)[0] in _IMPORT_MACHINERY_ROOTS
     if isinstance(node, ast.Name):
-        return node.id in {"__builtins__", "__import__", "eval", "exec"}
+        return node.id in _IMPORT_CAPABILITY_NAMES
     if isinstance(node, ast.Attribute):
-        return node.attr in {"__import__", "import_module"}
+        return node.attr in _IMPORT_CAPABILITY_ATTRIBUTES
     return False
 
 
@@ -403,7 +489,9 @@ def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
             contracts.append(contract)
     names = [item.project_name for item in contracts]
     roots_list = [item.public_root for item in contracts]
-    entrypoints = [path for item in contracts for path in item.entrypoints]
+    entrypoints = [
+        entrypoint.path for item in contracts for entrypoint in item.entrypoints
+    ]
     for values, field in (
         (names, "project.name"),
         (roots_list, "public-import-root"),
@@ -447,9 +535,9 @@ def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
             )
     owned_sources: dict[str, list[str]] = {item.project_name: [] for item in contracts}
     entrypoint_owners = {
-        path: contract.project_name
+        entrypoint.path: contract.project_name
         for contract in contracts
-        for path in contract.entrypoints
+        for entrypoint in contract.entrypoints
     }
     for path in indexed:
         pure = PurePosixPath(path)
@@ -564,27 +652,111 @@ def execute_python_package_contract(
                 )
             )
         for entrypoint in contract.entrypoints:
-            completed = subprocess.run(
-                (str(executable), "-P", str(repository / entrypoint), "--help"),
-                cwd=tempfile.gettempdir(),
-                env=environment,
-                capture_output=True,
-                text=True,
+            completed = _execute_entrypoint(
+                repository, executable, environment, entrypoint
             )
             if completed.returncode != 0:
                 findings.append(
                     PythonPackageFinding(
                         "PYTHON_PACKAGE.ENTRYPOINT_EXECUTION",
                         "repository entrypoint failed in safe-path isolation",
-                        entrypoint,
+                        entrypoint.path,
                         observed=(completed.stderr or completed.stdout).strip(),
+                    )
+                )
+            elif not completed.stdout.strip():
+                findings.append(
+                    PythonPackageFinding(
+                        "PYTHON_PACKAGE.ENTRYPOINT_OUTPUT",
+                        "repository entrypoint smoke operation produced no evidence",
+                        entrypoint.path,
                     )
                 )
     return tuple(findings)
 
 
+def _execute_entrypoint(
+    repository: Path,
+    executable: Path,
+    environment: dict[str, str],
+    contract: EntrypointContract,
+) -> subprocess.CompletedProcess[str]:
+    with tempfile.TemporaryDirectory() as temporary:
+        fixture = Path(temporary) / "fixture"
+        replacements = {"{repository}": str(repository)}
+        if contract.fixture == "isolated-indexed-copy":
+            shutil.copytree(
+                repository,
+                fixture,
+                ignore=shutil.ignore_patterns(
+                    ".git", ".standards-engine", "__pycache__", "*.pyc"
+                ),
+            )
+            subprocess.run(("git", "init", "-q"), cwd=fixture, check=True)
+            subprocess.run(("git", "add", "-A"), cwd=fixture, check=True)
+            for selected in contract.remove:
+                target = fixture.joinpath(*PurePosixPath(selected).parts)
+                if not target.is_file():
+                    raise ValueError(
+                        f"entrypoint fixture removal is unavailable: {selected}"
+                    )
+                target.unlink()
+            replacements["{fixture}"] = str(fixture)
+        elif contract.fixture == "isolated-git-repository":
+            if contract.remove:
+                raise ValueError("Git entrypoint fixtures cannot remove files")
+            fixture.mkdir()
+            subprocess.run(("git", "init", "-q", "-b", "main"), cwd=fixture, check=True)
+            subprocess.run(
+                ("git", "config", "user.email", "fixture@example.invalid"),
+                cwd=fixture,
+                check=True,
+            )
+            subprocess.run(
+                ("git", "config", "user.name", "Fixture"),
+                cwd=fixture,
+                check=True,
+            )
+            (fixture / "content.txt").write_text("fixture\n", encoding="utf-8")
+            subprocess.run(("git", "add", "content.txt"), cwd=fixture, check=True)
+            subprocess.run(
+                ("git", "commit", "-q", "-m", "fixture"), cwd=fixture, check=True
+            )
+            oid = subprocess.run(
+                ("git", "rev-parse", "HEAD"),
+                cwd=fixture,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            manifest = fixture / "manifest.tsv"
+            manifest.write_text(
+                "oid\tcommit_disposition\treference\tauthority\n"
+                f"{oid}\tretained\trefs/heads/main\tnone\n",
+                encoding="utf-8",
+            )
+            replacements.update(
+                {"{fixture}": str(fixture), "{manifest}": manifest.name}
+            )
+        elif contract.remove:
+            raise ValueError("reviewed entrypoint fixtures cannot remove files")
+        arguments = tuple(
+            replacements.get(argument, argument) for argument in contract.arguments
+        )
+        if any(argument.startswith("{") and argument.endswith("}") for argument in arguments):
+            raise ValueError("entrypoint contract contains an unknown placeholder")
+        return subprocess.run(
+            (str(executable), "-P", str(repository / contract.path), *arguments),
+            cwd=tempfile.gettempdir(),
+            env=environment,
+            capture_output=True,
+            text=True,
+        )
+
+
 __all__ = (
     "PythonPackageContract",
+    "EntrypointContract",
     "PythonPackageFinding",
     "audit_python_packages",
     "resolve_public_exports",

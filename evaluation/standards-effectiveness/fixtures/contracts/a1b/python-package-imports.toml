@@ -45,3 +45,13 @@ loaded = __import__("tools.b.b")
 __all__ = ("loaded",)
 '''
 expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
+id = "frozen-dynamic-import-alias"
+consumer_dependencies = []
+consumer_source = '''
+from _frozen_importlib import __import__ as load
+loaded = load("tools.b.b")
+__all__ = ("loaded",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]

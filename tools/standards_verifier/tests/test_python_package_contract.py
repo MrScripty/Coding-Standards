@@ -63,7 +63,7 @@ class PythonPackageContractTest(unittest.TestCase):
             dependencies = [{dependency_values}]
 
             [tool.standards-package]
-            schema-version = 1
+            schema-version = 2
             public-import-root = "tools.{directory}.{directory}"
             repository-entrypoints = []
             """,
@@ -90,6 +90,52 @@ class PythonPackageContractTest(unittest.TestCase):
         self.assertEqual(
             tuple(item.code for item in execute_python_package_contract(self.root)),
             ("PYTHON_PACKAGE.PUBLIC_EXECUTION",),
+        )
+
+    def test_entrypoint_executes_declared_operation_instead_of_help(self) -> None:
+        self.write(
+            "tools/a/pyproject.toml",
+            """
+            [project]
+            name = "a-package"
+            version = "0.1.0"
+            requires-python = ">=3.11,<3.13"
+            dependencies = ["b-package"]
+
+            [tool.standards-package]
+            schema-version = 2
+            public-import-root = "tools.a.a"
+            repository-entrypoints = [
+              { path = "tools/a_entrypoint.py", arguments = ["--run"], fixture = "reviewed-repository", remove = [] },
+            ]
+            """,
+        )
+        self.write(
+            "tools/a_entrypoint.py",
+            """
+            import sys
+            if sys.argv[1:] != ["--run"]:
+                raise SystemExit(2)
+            print("operation completed")
+            """,
+        )
+        self.stage()
+        self.assertEqual(execute_python_package_contract(self.root), ())
+
+        self.write(
+            "tools/a_entrypoint.py",
+            """
+            import sys
+            if sys.argv[1:] == ["--help"]:
+                print("help")
+                raise SystemExit(0)
+            raise SystemExit(3)
+            """,
+        )
+        self.stage()
+        self.assertEqual(
+            tuple(item.code for item in execute_python_package_contract(self.root)),
+            ("PYTHON_PACKAGE.ENTRYPOINT_EXECUTION",),
         )
 
     def test_private_child_and_unexported_root_name_are_distinct(self) -> None:
@@ -153,6 +199,16 @@ class PythonPackageContractTest(unittest.TestCase):
             """,
             """
             loaded = eval("__import__('tools.b.b')")
+            __all__ = ("loaded",)
+            """,
+            """
+            from _frozen_importlib import __import__ as load
+            loaded = load("tools.b.b")
+            __all__ = ("loaded",)
+            """,
+            """
+            import _imp as machinery
+            loaded = machinery.load_dynamic("tools.b.b", "fixture")
             __all__ = ("loaded",)
             """,
         )

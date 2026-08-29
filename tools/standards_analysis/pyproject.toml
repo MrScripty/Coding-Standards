@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.standards-package]
-schema-version = 1
+schema-version = 2
 public-import-root = "tools.standards_analysis.standards_analysis"
 repository-entrypoints = []
 

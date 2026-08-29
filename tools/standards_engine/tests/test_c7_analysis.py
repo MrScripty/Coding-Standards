@@ -13,7 +13,9 @@ from pathlib import Path
 from tools.standards_analysis.standards_analysis import (
     AnalysisExecutionContext,
     AuthorityEvidence,
+    AuthorizationAuthorityContract,
     AuthorizationClaim,
+    EvidenceContractKey,
     ResolvedEvidence,
 )
 from tools.standards_authority.standards_authority import (
@@ -31,11 +33,14 @@ from tools.standards_engine.standards_engine import (
     ConsumerDispositionSubmission,
     CoverageAttestationSubmission,
     InspectCall,
+    QueryCall,
+    ReadRequest,
     StandardsEngine,
 )
 from tools.standards_engine.standards_engine.authority import (
     OperationAuthorityContract,
     RoleRequirement,
+    operation_contracts,
     validate_execution_authority,
 )
 
@@ -55,12 +60,21 @@ def _evidence(identifier: str) -> AuthorityEvidence:
 
 
 class ExactAuthorizer:
+    contract = AuthorizationAuthorityContract(
+        "issuer.fixture",
+        1,
+        "principal.fixture",
+        "authorization-grant.v1",
+        (EvidenceContractKey("fixture.evidence", "1"),),
+        "revocation.fixture",
+        1,
+        "authorization-revocation.v1",
+        (EvidenceContractKey("fixture.evidence", "1"),),
+    )
+
     def authorize(self, request):
         return AuthorizationClaim(
-            "issuer.fixture",
-            1,
             "grant.fixture",
-            "principal.fixture",
             request.action,
             request.subject_kind,
             request.subject_id,
@@ -70,13 +84,45 @@ class ExactAuthorizer:
                 for item in request.evidence
             ),
             (ResolvedEvidence(_evidence("authorization"), b"authorization"),),
-            "revocation.fixture",
-            1,
             (ResolvedEvidence(_evidence("revocation"), b"revocation"),),
+            "not-revoked",
+            "allow",
         )
 
 
 class C7AnalysisLifecycleTests(unittest.TestCase):
+    def test_operation_contracts_use_owned_codecs_and_exact_root_sides(self) -> None:
+        codec_kinds = {
+            codec.object_kind for owner in _codec_sets() for codec in owner.codecs
+        }
+        contracts = {contract.operation: contract for contract in operation_contracts()}
+        self.assertEqual(set(contracts), {"route", "read", "related", "analysis"})
+        for contract in contracts.values():
+            with self.subTest(operation=contract.operation):
+                for requirement in (
+                    *contract.required_view_roles,
+                    *contract.allowed_dynamic_roles,
+                ):
+                    self.assertIn(requirement.object_kind, codec_kinds)
+
+        analysis = self.engine.prepare(self.request)
+        navigation = self.engine.query(
+            QueryCall(self.engine.view, ReadRequest("read", POLICY))
+        )
+        for result, expected_side in (
+            (analysis, "transition"),
+            (navigation, "current"),
+        ):
+            closure = self.repository.resolve_reference(
+                AuthorityReference("execution-closure", result.authority.id)
+            ).value
+            self.assertIsInstance(closure, ExecutionClosure)
+            operation_roots = tuple(
+                root for root in closure.roots if root.role == "operation-contract"
+            )
+            self.assertEqual(len(operation_roots), 1)
+            self.assertEqual(operation_roots[0].side, expected_side)
+
     def test_required_execution_role_rejects_multiple_roots(self) -> None:
         operation = AuthorityReference(
             "operation-authority-contract",
@@ -277,33 +323,53 @@ handles = (
     (certificate_handle, "certificate-inspection-result"),
     (complete.handle, "analysis-state"),
 )
-print(json.dumps([
-    {"handle": handle.as_contract(), "expected": expected}
-    for handle, expected in handles
-]))
+print(json.dumps({
+    "view": engine.view.as_contract(),
+    "analysis_views": [item.as_contract() for item in engine.analysis_views],
+    "handles": [
+        {"handle": handle.as_contract(), "expected": expected}
+        for handle, expected in handles
+    ],
+}))
 """,
             )
+            store_path = Path(temporary) / "authority.sqlite3"
+            shutil.move(root / ".standards-engine" / "authority.sqlite3", store_path)
+            shutil.rmtree(root)
             inspected = _run_fresh_python(
-                root,
+                store_path,
                 """
 import json
 import sys
 from pathlib import Path
 
-from tools.standards_engine.standards_engine import InspectCall, StandardsEngine
+from tools.standards_engine.standards_engine import (
+    InspectCall,
+    StandardsAuthorityViewHandle,
+    StandardsEngine,
+)
 
-root = Path(sys.argv[1])
+store_path = Path(sys.argv[1])
 requested = json.loads(sys.stdin.read())
-engine = StandardsEngine.open_analysis(root, root)
+engine = StandardsEngine.open_persisted(
+    store_path,
+    StandardsAuthorityViewHandle.from_value(requested["view"]),
+    analysis_views=tuple(
+        StandardsAuthorityViewHandle.from_value(item)
+        for item in requested["analysis_views"]
+    ),
+)
 print(json.dumps([
     engine.inspect(InspectCall.from_value({"handle": item["handle"]})).kind
-    for item in requested
+    for item in requested["handles"]
 ]))
 """,
                 input_value=created,
             )
 
-            expected = [item["expected"] for item in json.loads(created)]
+            expected = [
+                item["expected"] for item in json.loads(created)["handles"]
+            ]
             self.assertEqual(json.loads(inspected), expected)
 
 

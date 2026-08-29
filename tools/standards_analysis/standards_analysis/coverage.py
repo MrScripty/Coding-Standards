@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import json
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Any, Iterable, Mapping
+from typing import Any, Mapping
 
 from tools.standards_applicability.standards_applicability import LANGUAGE_VERSION
 from tools.standards_metadata.standards_metadata import (
@@ -21,7 +22,8 @@ from .keys import analysis_key_bytes, raw_digest
 DEFAULT_HORIZON = "evaluation/standards-effectiveness/policy-coverage/horizons.toml"
 HORIZON_ID = "audit-horizon.policy-impact-consumers"
 HORIZON_PROVIDER = "standards-analysis:policy-impact-consumer-horizon"
-HORIZON_VERSION = 3
+HORIZON_VERSION = 4
+SUITE_INPUT_CONTRACT = "standards-verifier:suite-input-projection:v1"
 
 
 def _error(
@@ -45,7 +47,7 @@ def _error(
     )
 
 
-def _repository_file(root: Path, value: str) -> Path:
+def _repository_path(root: Path, value: str) -> Path:
     logical = PurePosixPath(value)
     candidate = (root / Path(*logical.parts)).resolve(strict=False)
     if (
@@ -61,6 +63,11 @@ def _repository_file(root: Path, value: str) -> Path:
             "coverage inputs must be normalized contained repository paths",
             path=value,
         )
+    return candidate
+
+
+def _repository_file(root: Path, value: str) -> Path:
+    candidate = _repository_path(root, value)
     if not candidate.is_file():
         raise _error(
             "COVERAGE.INPUT_UNAVAILABLE",
@@ -78,6 +85,21 @@ def _toml(root: Path, path: str) -> dict[str, Any]:
             return tomllib.load(handle)
     except tomllib.TOMLDecodeError as error:
         raise _error("COVERAGE.INVALID_TOML", str(error), path=path) from error
+
+
+def _json(root: Path, path: str) -> dict[str, Any]:
+    source = _repository_file(root, path)
+    try:
+        value = json.loads(source.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeError) as error:
+        raise _error("COVERAGE.INVALID_JSON", str(error), path=path) from error
+    if not isinstance(value, dict):
+        raise _error(
+            "COVERAGE.JSON_ROOT",
+            "coverage JSON root must be an object",
+            path=path,
+        )
+    return value
 
 
 def _exact(
@@ -253,19 +275,216 @@ def _merge_member(
     roles.add(role)
 
 
-def _path_values(value: object) -> Iterable[str]:
-    if isinstance(value, Mapping):
-        for key, item in value.items():
-            if key == "path" and isinstance(item, str):
-                yield item
-            yield from _path_values(item)
-    elif isinstance(value, list):
-        for item in value:
-            yield from _path_values(item)
-
-
 def _file_fingerprint(root: Path, path: str) -> str:
     return raw_digest(_repository_file(root, path).read_bytes())
+
+
+def _suite_inputs(
+    root: Path,
+    projection_path: str,
+    registry_path: str,
+    registry_entries: list[object],
+) -> tuple[tuple[str, str, str, object], ...]:
+    projection = _json(root, projection_path)
+    _exact(
+        projection,
+        required={"schema_version", "contract", "registry", "suites", "inputs"},
+        allowed={"schema_version", "contract", "registry", "suites", "inputs"},
+        path=projection_path,
+        field="suite-input-projection",
+    )
+    if (
+        type(projection["schema_version"]) is not int
+        or projection["schema_version"] != 1
+        or projection["contract"] != SUITE_INPUT_CONTRACT
+    ):
+        raise _error(
+            "COVERAGE.SUITE_INPUT_VERSION",
+            "suite-input projection contract is unsupported",
+            path=projection_path,
+        )
+
+    registry = projection["registry"]
+    if not isinstance(registry, dict):
+        raise _error(
+            "COVERAGE.SUITE_INPUT_REGISTRY",
+            "suite-input registry binding must be an object",
+            path=projection_path,
+        )
+    _exact(
+        registry,
+        required={"path", "digest"},
+        allowed={"path", "digest"},
+        path=projection_path,
+        field="registry",
+    )
+    if (
+        registry.get("path") != registry_path
+        or registry.get("digest") != _file_fingerprint(root, registry_path)
+    ):
+        raise _error(
+            "COVERAGE.SUITE_INPUT_STALE",
+            "suite-input projection does not bind the current suite registry",
+            path=projection_path,
+            field="registry",
+        )
+
+    suites = projection["suites"]
+    if not isinstance(suites, list) or len(suites) != len(registry_entries):
+        raise _error(
+            "COVERAGE.SUITE_INPUT_SUITES",
+            "suite-input projection must bind every registered suite exactly once",
+            path=projection_path,
+        )
+    expected_suites = []
+    for entry in registry_entries:
+        if not isinstance(entry, dict):
+            raise _error(
+                "COVERAGE.SUITE",
+                "suite registration must be a table",
+                path=registry_path,
+            )
+        suite_id = _text(entry.get("id"), path=registry_path, field="id")
+        suite_path = _text(entry.get("path"), path=registry_path, field="path")
+        expected_suites.append(
+            {
+                "id": suite_id,
+                "path": suite_path,
+                "digest": _file_fingerprint(root, suite_path),
+            }
+        )
+    if suites != expected_suites:
+        raise _error(
+            "COVERAGE.SUITE_INPUT_STALE",
+            "suite-input projection does not bind the current suite definitions",
+            path=projection_path,
+            field="suites",
+        )
+
+    inputs = projection["inputs"]
+    if not isinstance(inputs, list):
+        raise _error(
+            "COVERAGE.SUITE_INPUTS",
+            "suite-input projection inputs must be an array",
+            path=projection_path,
+        )
+    resolved = []
+    previous_path: str | None = None
+    suite_ids = {item["id"] for item in expected_suites}
+    for index, item in enumerate(inputs):
+        field = f"inputs[{index}]"
+        if not isinstance(item, dict):
+            raise _error(
+                "COVERAGE.SUITE_INPUT",
+                "suite input must be an object",
+                path=projection_path,
+                field=field,
+            )
+        state = item.get("state")
+        required = {"path", "state", "uses", "digest"}
+        if state == "absent":
+            required.remove("digest")
+        _exact(
+            item,
+            required=required,
+            allowed={"path", "state", "uses", "digest"},
+            path=projection_path,
+            field=field,
+        )
+        input_path = _text(item.get("path"), path=projection_path, field=field)
+        if previous_path is not None and input_path <= previous_path:
+            raise _error(
+                "COVERAGE.SUITE_INPUT_ORDER",
+                "suite inputs must be sorted and unique by path",
+                path=projection_path,
+                field=field,
+            )
+        previous_path = input_path
+        if state not in {"present", "absent"}:
+            raise _error(
+                "COVERAGE.SUITE_INPUT_STATE",
+                "suite input state must be present or absent",
+                path=projection_path,
+                field=field,
+            )
+        uses = item.get("uses")
+        if not isinstance(uses, list) or not uses:
+            raise _error(
+                "COVERAGE.SUITE_INPUT_USE",
+                "suite input must identify at least one owning check",
+                path=projection_path,
+                field=field,
+            )
+        normalized_uses = []
+        for use in uses:
+            if not isinstance(use, dict):
+                raise _error(
+                    "COVERAGE.SUITE_INPUT_USE",
+                    "suite input use must be an object",
+                    path=projection_path,
+                    field=field,
+                )
+            _exact(
+                use,
+                required={"suite", "check", "role"},
+                allowed={"suite", "check", "role"},
+                path=projection_path,
+                field=field,
+            )
+            suite = _text(use.get("suite"), path=projection_path, field=field)
+            check = _text(use.get("check"), path=projection_path, field=field)
+            role = _text(use.get("role"), path=projection_path, field=field)
+            if suite not in suite_ids:
+                raise _error(
+                    "COVERAGE.SUITE_INPUT_USE",
+                    "suite input use names an unregistered suite",
+                    path=projection_path,
+                    field=field,
+                    observed=suite,
+                )
+            normalized_uses.append((suite, check, role))
+        if normalized_uses != sorted(set(normalized_uses)):
+            raise _error(
+                "COVERAGE.SUITE_INPUT_USE_ORDER",
+                "suite input uses must be sorted and unique",
+                path=projection_path,
+                field=field,
+            )
+
+        candidate = _repository_path(root, input_path)
+        if state == "present":
+            if not candidate.is_file():
+                raise _error(
+                    "COVERAGE.INPUT_UNAVAILABLE",
+                    "required suite input is unavailable",
+                    path=input_path,
+                    unavailable=True,
+                )
+            digest = raw_digest(candidate.read_bytes())
+            if item.get("digest") != digest:
+                raise _error(
+                    "COVERAGE.SUITE_INPUT_STALE",
+                    "suite-input projection has a stale content digest",
+                    path=projection_path,
+                    field=field,
+                    observed=input_path,
+                )
+        else:
+            if candidate.exists() or candidate.is_symlink():
+                raise _error(
+                    "COVERAGE.SUITE_INPUT_ABSENCE",
+                    "suite input asserted absent is present",
+                    path=input_path,
+                )
+            digest = _digest(
+                {
+                    "path": input_path,
+                    "state": "absent",
+                    "uses": normalized_uses,
+                }
+            )
+        resolved.append((input_path, state, digest, normalized_uses))
+    return tuple(resolved)
 
 
 def load_coverage_horizon(
@@ -284,6 +503,7 @@ def load_coverage_horizon(
             "provider",
             "version",
             "suite_registry",
+            "suite_inputs",
             "edge_source_registry",
         },
         allowed={
@@ -292,6 +512,7 @@ def load_coverage_horizon(
             "provider",
             "version",
             "suite_registry",
+            "suite_inputs",
             "edge_source_registry",
         },
         path=path,
@@ -373,7 +594,14 @@ def load_coverage_horizon(
     )
     input_sources.add(suite_registry_path)
     suite_registry = _toml(repo_root, suite_registry_path)
-    for entry in suite_registry.get("suites", []):
+    registry_entries = suite_registry.get("suites", [])
+    if not isinstance(registry_entries, list):
+        raise _error(
+            "COVERAGE.SUITE",
+            "suite registry suites must be an array",
+            path=suite_registry_path,
+        )
+    for entry in registry_entries:
         if not isinstance(entry, dict):
             raise _error(
                 "COVERAGE.SUITE",
@@ -408,13 +636,36 @@ def load_coverage_horizon(
             "suite-definition",
             _file_fingerprint(repo_root, suite_path),
         )
-        for input_path in sorted(set(_path_values(suite_raw))):
+    suite_inputs_path = _text(
+        raw["suite_inputs"], path=path, field="suite_inputs"
+    )
+    input_sources.add(suite_inputs_path)
+    _merge_member(
+        members,
+        f"repository:{suite_inputs_path}",
+        "suite-input-projection",
+        _file_fingerprint(repo_root, suite_inputs_path),
+    )
+    for input_path, state, fingerprint, _uses in _suite_inputs(
+        repo_root,
+        suite_inputs_path,
+        suite_registry_path,
+        registry_entries,
+    ):
+        if state == "present":
             input_sources.add(input_path)
             _merge_member(
                 members,
                 f"repository:{input_path}",
                 "registered-suite-input",
-                _file_fingerprint(repo_root, input_path),
+                fingerprint,
+            )
+        else:
+            _merge_member(
+                members,
+                f"repository-state:{input_path}",
+                "registered-suite-input-absence",
+                fingerprint,
             )
 
     input_sources.update(compiled.input_sources)

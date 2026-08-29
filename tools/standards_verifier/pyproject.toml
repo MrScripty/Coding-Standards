@@ -14,15 +14,15 @@ dependencies = [
 ]
 
 [tool.standards-package]
-schema-version = 1
+schema-version = 2
 public-import-root = "tools.standards_verifier.standards_verifier"
 repository-entrypoints = [
-    "tools/query_edges.py",
-    "tools/verify_git_reachability.py",
-    "tools/standards_verifier/verify.py",
-    "tools/standards_verifier/generate_inventory.py",
-    "tools/standards_verifier/generate_numeric_audit.py",
-    "tools/standards_verifier/generate_numeric_retirements.py",
+    { path = "tools/query_edges.py", arguments = ["--repo-root", "{repository}", "--list-groups"], fixture = "reviewed-repository", remove = [] },
+    { path = "tools/verify_git_reachability.py", arguments = ["--repository", "{fixture}", "--manifest", "{manifest}"], fixture = "isolated-git-repository", remove = [] },
+    { path = "tools/standards_verifier/verify.py", arguments = ["--repo-root", "{repository}", "--list"], fixture = "reviewed-repository", remove = [] },
+    { path = "tools/standards_verifier/generate_inventory.py", arguments = ["--repo-root", "{repository}", "--check"], fixture = "reviewed-repository", remove = [] },
+    { path = "tools/standards_verifier/generate_numeric_audit.py", arguments = ["--repo-root", "{fixture}", "--write"], fixture = "isolated-indexed-copy", remove = ["evaluation/standards-effectiveness/generated/numeric-comparison-candidates.tsv"] },
+    { path = "tools/standards_verifier/generate_numeric_retirements.py", arguments = ["--repo-root", "{repository}", "--check"], fixture = "reviewed-repository", remove = [] },
 ]
 
 [tool.unittest]

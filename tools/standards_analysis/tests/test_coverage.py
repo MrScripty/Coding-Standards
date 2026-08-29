@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import tempfile
 import textwrap
 import unittest
@@ -84,6 +85,7 @@ class CoverageTest(unittest.TestCase):
             requires = []
             """,
         )
+        self.write_suite_projection()
         self.write(
             "edge-sources.toml",
             """
@@ -100,8 +102,9 @@ class CoverageTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 3
+            version = 4
             suite_registry = "suite-registry.toml"
+            suite_inputs = "suite-inputs.json"
             edge_source_registry = "edge-sources.toml"
             """,
         )
@@ -175,6 +178,46 @@ class CoverageTest(unittest.TestCase):
         target = self.root / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
+
+    def write_suite_projection(self) -> None:
+        def digest(path: str) -> str:
+            return "sha256:" + hashlib.sha256(
+                (self.root / path).read_bytes()
+            ).hexdigest()
+        projection = {
+            "schema_version": 1,
+            "contract": "standards-verifier:suite-input-projection:v1",
+            "registry": {
+                "path": "suite-registry.toml",
+                "digest": digest("suite-registry.toml"),
+            },
+            "suites": [
+                {
+                    "id": "coverage",
+                    "path": "suites/coverage.toml",
+                    "digest": digest("suites/coverage.toml"),
+                }
+            ],
+            "inputs": [
+                {
+                    "path": "inputs/consumer.md",
+                    "state": "present",
+                    "digest": digest("inputs/consumer.md"),
+                    "uses": [
+                        {
+                            "suite": "coverage",
+                            "check": "input",
+                            "role": "content",
+                        }
+                    ],
+                }
+            ],
+        }
+        target = self.root / "suite-inputs.json"
+        target.write_text(
+            json.dumps(projection, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
 
     def compiled(
         self,
@@ -259,7 +302,7 @@ class CoverageTest(unittest.TestCase):
         *,
         principal: str = "reviewer.test",
         semantic_revision: int = 1,
-        horizon_version: int = 3,
+        horizon_version: int = 4,
     ) -> None:
         self.write(
             "attestations.toml",
@@ -307,6 +350,12 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("repository:inputs/consumer.md", ids)
 
         self.write("inputs/consumer.md", "# Consumer\n\nNow consumes policy.\n")
+        with self.assertRaises(AnalysisError) as caught:
+            load_coverage_horizon(
+                self.root, self.corpus, self.compiled(), "horizon.toml"
+            )
+        self.assertEqual(caught.exception.failure.code, "COVERAGE.SUITE_INPUT_STALE")
+        self.write_suite_projection()
         second = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
         )
@@ -438,6 +487,7 @@ class CoverageTest(unittest.TestCase):
         first = self.load_claims(first_repository, first_index)
 
         self.write("inputs/consumer.md", "# Consumer\n\n")
+        self.write_suite_projection()
         second_repository, second_index = self.authority_index()
         second = self.load_claims(second_repository, second_index)
 

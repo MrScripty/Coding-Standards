@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import sqlite3
+import tempfile
 from collections.abc import Iterable
 from pathlib import Path
 
@@ -23,26 +25,42 @@ class SQLiteRecovery:
 
     def _copy_verified(self, source: Path, destination: Path) -> RecoveryReceipt:
         _validate_locations(source, destination)
-        source_digest: str
+        descriptor, temporary_name = tempfile.mkstemp(
+            prefix=f".{destination.name}.",
+            suffix=".unpublished",
+            dir=destination.parent,
+        )
+        os.close(descriptor)
+        unpublished = Path(temporary_name)
         try:
             with SQLiteObjectStore(source, read_only=True) as source_store:
                 AuthorityRepository(source_store, self._codec_sets)._verify_all_stored()
                 destination_connection = sqlite3.connect(
-                    destination, isolation_level=None, timeout=5.0
+                    unpublished, isolation_level=None, timeout=5.0
                 )
                 try:
                     source_store._connection.backup(destination_connection)
                 finally:
                     destination_connection.close()
             source_digest = _file_digest(source)
-            with SQLiteObjectStore(destination) as destination_store:
+            with SQLiteObjectStore(unpublished) as destination_store:
                 AuthorityRepository(
                     destination_store, self._codec_sets
                 )._verify_all_stored()
-            destination_digest = _file_digest(destination)
+            destination_digest = _file_digest(unpublished)
+            try:
+                os.link(unpublished, destination)
+            except FileExistsError as error:
+                raise invalid(
+                    "STORE.DESTINATION_EXISTS",
+                    "recovery destination must remain absent until publication",
+                ) from error
+            except OSError as error:
+                raise unavailable("STORE.PUBLICATION_UNAVAILABLE", str(error)) from error
         except Exception:
-            _remove_unpublished(destination)
             raise
+        finally:
+            _remove_unpublished(unpublished)
         return RecoveryReceipt(
             str(source), str(destination), source_digest, destination_digest
         )

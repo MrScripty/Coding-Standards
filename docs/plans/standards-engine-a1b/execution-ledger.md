@@ -932,3 +932,65 @@
 - Milestone 4 is `Active`. A1B-A6L and A1B-A11 remain pending independent
   review; the ADR remains `Proposed`, the plan remains `Active`, and A2 remains
   inactive.
+
+## 2026-08-28 - Milestone 4 Content Review Rejection
+
+- Independent Standards and Specification review rejected implementation
+  `3da674c1227a8ff6544e846a252a21a255854f49`, tree
+  `63d55780f77c7f1af64762b6363b8ba776e7fd51`.
+- A1B-A6L passed: the implemented lock, package and source hashes, license and
+  notice authorities, non-bundling disposition, and required-real Linux oracle
+  match the admitted selection.
+- A1B-A11 failed. The consolidated findings cover exact authorization and
+  provider input selection, analysis root qualification, source-independent
+  persisted reconstruction, atomic no-overwrite recovery publication,
+  alternate import machinery, real entrypoint operations, implementation-
+  consumer migration closure, and executable operation/codec evidence.
+- `Superseded`: the candidate's Milestone 3 `Implemented` claim and Milestone 4
+  `Active` state. Milestone 3 is reopened as one correction slice; Milestone 4
+  returns to `Planned`. The admitted C7 architecture, v11 public algebra,
+  dependency selection, and A2 exclusion are unchanged.
+
+## 2026-08-28 - Typed Suite-Input Horizon Replan Trigger
+
+- The strict implementation migration now derives every current and retired
+  production path and passes exact node, relationship, and disposition closure
+  without a mutable count oracle.
+- Engine reconstruction then failed on the intentionally retired
+  `standards_analysis` fact source. The registered authority-reconstruction
+  suite asserts that path is absent, but Coverage recursively treats every
+  path-like suite value as a required readable input.
+- Treating every missing path as a valid absence would hide misspelled or
+  unavailable required evidence. Teaching Analysis the meaning of each
+  Verifier check would duplicate authority in the opposite direction.
+- A1B-027 records the replacement requirement: one typed, owner-produced suite
+  input projection must identify required-present content and intentional
+  absence. Coverage consumes that projection and fingerprints the declared
+  state. Milestone 3 remains active; Milestone 4 and A2 remain unavailable.
+
+## 2026-08-28 - Milestone 3 Consolidated Correction Verification
+
+- Implemented every A1B-026 correction as one coordinated boundary: injected
+  typed authorization contracts, exact provider input-role selection,
+  transition-qualified analysis authority, source-independent persisted Engine
+  composition, atomic no-overwrite restore, typed executable entrypoint
+  operations, closed alternate import-machinery detection, complete changed-
+  source migration, and executable operation/codec evidence.
+- Resolved A1B-027 through a Verifier-owned, versioned suite-input projection.
+  Present registered inputs bind exact bytes; intentional-absence assertions
+  bind explicit repository state; missing required inputs still reject.
+  Analysis verifies projection closure and freshness without interpreting
+  check-specific suite contracts.
+- Advanced the coverage horizon provider to version 4, renewed every exact
+  current repository coverage claim, and added the new implementation paths to
+  catalog, relationship, and migration authority without a fixed cardinality
+  oracle.
+- Focused package verification passed: Graph Engine 37, Applicability 12,
+  Authority 39 with one capability-selected skip, Contracts 18, Graph 2,
+  Identity 8, Metadata 17, Policy Impact 9, Analysis 66, Engine 35, and
+  Verifier 394.
+- Generated freshness passed. All 226 registered declarative suites and all 53
+  retained Bash migration checkers passed. `git diff --check` passed.
+- A1B-027 is `Resolved` and Milestone 3 is `Implemented`. A1B-026 remains
+  `Active` only until a new content-bound implementation review. Milestone 4
+  remains `Planned`; the ADR remains `Proposed`; A2 remains inactive.
