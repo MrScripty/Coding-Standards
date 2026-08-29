@@ -3531,7 +3531,7 @@
       ]
     },
     {
-      "digest": "sha256:323c71a05b460fd9ce065cf660123a433178d1fe69670092b834ca3c86a87a20",
+      "digest": "sha256:624209b239ec97b7a98cd1739e71d938f4b86f92e9c6c3d3c2c8b714e5d17c93",
       "path": "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml",
       "state": "present",
       "uses": [
@@ -4762,7 +4762,7 @@
       ]
     },
     {
-      "digest": "sha256:e257786aafa0156c0e296130cc9b7bd1a949e2add03edde045ffcf3daadc7622",
+      "digest": "sha256:0e6344602140cbc1c51d82ea44575f3ce6019ee9dcff9e0d7839ddd2c02b5ade",
       "path": "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv",
       "state": "present",
       "uses": [
@@ -8318,7 +8318,7 @@
       ]
     },
     {
-      "digest": "sha256:5bbe444429c4ccf239cff1b970302f3dec1a54f6493ce97f17344fadaff1f2b9",
+      "digest": "sha256:e8ab695c8569d04c00f3d116d362d7e148831f7dd4602052ed990dfea6bff6a4",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -8437,7 +8437,7 @@
       ]
     },
     {
-      "digest": "sha256:e0e7755c62fffb0f1e928df4c2eae2b17298686f45f5b78fe1087c49b4822630",
+      "digest": "sha256:636d41120b025c0f4f5d741ef69caf0b7fe32f10e38eb4e18476f4bc44327b0d",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml",
       "state": "present",
       "uses": [
@@ -18925,7 +18925,7 @@
       ]
     },
     {
-      "digest": "sha256:b29bb2c8a86348bf9260f9003cddf19971e7cba251caecd7f867ade3d47b764a",
+      "digest": "sha256:b5eb9e664e6544694fa370e5591f68fbff48e27248b7879feb68f5b5967f08c2",
       "path": "tools/standards_authority/standards_authority/__init__.py",
       "state": "present",
       "uses": [
@@ -19055,7 +19055,7 @@
       ]
     },
     {
-      "digest": "sha256:c3eab267b3d3bc5ec0b9664e52fd65236e9d9cdfef40a0ed56aad61a995ee79c",
+      "digest": "sha256:04a912aab5ea0b7f462c1df47e99a3884616af869121110751079018ff469a07",
       "path": "tools/standards_authority/standards_authority/git_index.py",
       "state": "present",
       "uses": [
@@ -21735,10 +21735,15 @@
       ]
     },
     {
-      "digest": "sha256:7a6528f6ca2bfc08ccc1a544c1478038d6c0c9eaf48f8ab6ee8f42093020a310",
+      "digest": "sha256:fa98bac0c914ed3371b01e9f03c92e1a3141fbe0eb71437079aff4e86438ae58",
       "path": "tools/standards_verifier/standards_verifier/git_reachability.py",
       "state": "present",
       "uses": [
+        {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1b-public-cutover"
+        },
         {
           "check": "python-package-contract",
           "role": "package-contract-input",
@@ -21748,6 +21753,11 @@
           "check": "migration-python-candidate-completeness",
           "role": "package-python",
           "suite": "checker-migration-packages"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
         }
       ]
     },
@@ -21933,7 +21943,7 @@
       ]
     },
     {
-      "digest": "sha256:38112079123c20708fd1cc067721f71f2cce58e5d3bea0fb9d71a80fc917b356",
+      "digest": "sha256:1c289d98db29573bf2cf05adae4a54110601d5c14eebe0830c47004fe3a6a74f",
       "path": "tools/standards_verifier/standards_verifier/python_packages.py",
       "state": "present",
       "uses": [
@@ -22125,7 +22135,7 @@
       ]
     },
     {
-      "digest": "sha256:7869c72e3ba83dbf4b7f63c2925c92e523b20edeed7fac29a6d1be8b16ea65e6",
+      "digest": "sha256:a53b4e3a463c0b329645de8832035186983c7923cf409f02280b62e4ebc3f7fd",
       "path": "tools/standards_verifier/tests/test_python_package_contract.py",
       "state": "present",
       "uses": [

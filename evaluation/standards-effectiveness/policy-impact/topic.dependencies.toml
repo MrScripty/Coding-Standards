@@ -323,6 +323,14 @@ rationale = "The package ownership contract governs this manifest-owned public b
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_verifier/standards_verifier/git_reachability.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1b-public-cutover"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
+
+[[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_authority/standards_authority/git_index.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }

@@ -415,6 +415,78 @@ class PythonPackageContractTest(unittest.TestCase):
                 self.write("tools/a/a/__init__.py", source)
                 self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
 
+    def test_conditional_binding_does_not_hide_builtin_capability(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            if False:
+                eval = lambda value: value
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_complete_conditional_benign_binding_is_preserved(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            condition = True
+            if condition:
+                eval = lambda value: value
+            else:
+                eval = lambda value: value + 1
+            run = eval(1)
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_simple_sys_alias_retains_capability_provenance(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            registry = sys
+            run = registry.modules["builtins"].__import__
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_conditional_sys_alias_retains_possible_capability(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            import sys
+            condition = True
+            if condition:
+                registry = sys
+            else:
+                registry = object()
+            run = registry.modules["builtins"].__import__
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_assignment_targets_bind_from_left_to_right(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            values = {}
+            eval = values[eval] = lambda value: value
+            run = eval(1)
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
     def test_deleted_module_binding_restores_builtin_capability(self) -> None:
         self.write(
             "tools/a/a/__init__.py",

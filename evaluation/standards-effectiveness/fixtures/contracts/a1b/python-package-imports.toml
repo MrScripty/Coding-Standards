@@ -79,6 +79,68 @@ __all__ = ("run",)
 expected_codes = []
 
 [[cases]]
+id = "conditional-binding"
+consumer_dependencies = []
+consumer_source = '''
+if False:
+    eval = lambda value: value
+run = eval("40 + 2")
+__all__ = ("run",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
+id = "complete-conditional-benign-binding"
+consumer_dependencies = []
+consumer_source = '''
+condition = True
+if condition:
+    eval = lambda value: value
+else:
+    eval = lambda value: value + 1
+run = eval(1)
+__all__ = ("run",)
+'''
+expected_codes = []
+
+[[cases]]
+id = "simple-sys-alias"
+consumer_dependencies = []
+consumer_source = '''
+import sys
+registry = sys
+run = registry.modules["builtins"].__import__
+__all__ = ("run",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
+id = "conditional-sys-alias"
+consumer_dependencies = []
+consumer_source = '''
+import sys
+condition = True
+if condition:
+    registry = sys
+else:
+    registry = object()
+run = registry.modules["builtins"].__import__
+__all__ = ("run",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
+id = "left-to-right-assignment-targets"
+consumer_dependencies = []
+consumer_source = '''
+values = {}
+eval = values[eval] = lambda value: value
+run = eval(1)
+__all__ = ("run",)
+'''
+expected_codes = []
+
+[[cases]]
 id = "frozen-dynamic-import-alias"
 consumer_dependencies = []
 consumer_source = '''

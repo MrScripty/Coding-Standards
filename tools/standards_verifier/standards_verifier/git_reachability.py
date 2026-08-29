@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import csv
 import re
-import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
+
+from tools.standards_authority.standards_authority import (
+    GitCommandResult,
+    GitIndexError,
+    git_command,
+)
 
 
 _OID = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
@@ -119,15 +124,14 @@ def load_manifest(repository: Path, manifest: Path) -> tuple[ReachabilityRecord,
     return tuple(records)
 
 
-def _git(repository: Path, arguments: Sequence[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
-        ["git", *arguments],
-        cwd=repository,
-        check=False,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+def _git(repository: Path, arguments: Sequence[str]) -> GitCommandResult:
+    try:
+        return git_command(repository, arguments)
+    except GitIndexError as error:
+        raise ReachabilityError(
+            "GIT_REACHABILITY.GIT_UNAVAILABLE",
+            f"cannot execute Git for {repository}: {error}",
+        ) from error
 
 
 def verify_manifest(repository: Path, manifest: Path) -> tuple[ReachabilityRecord, ...]:
@@ -161,7 +165,7 @@ def verify_manifest(repository: Path, manifest: Path) -> tuple[ReachabilityRecor
                 "GIT_REACHABILITY.UNKNOWN_REFERENCE",
                 f"reference is unavailable: {record.reference}",
             )
-        reference_oid = resolved.stdout.strip()
+        reference_oid = resolved.stdout.decode("ascii").strip()
         if record.commit_disposition == "archived":
             if reference_oid != record.oid:
                 raise ReachabilityError(

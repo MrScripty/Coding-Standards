@@ -1157,3 +1157,50 @@
   Milestone 3 is `Implemented`; Milestone 4 is `Active` for A1B-A11. The ADR
   remains `Proposed`, final A1b acceptance remains pending, and A2 remains
   unavailable.
+
+## 2026-08-29 - Final Review Rejection And Governed-Source Replan
+
+- Independent review rejected implementation
+  `23706513c65185f5a8204ffa1c4e8be2c74f1729`, tree
+  `1de23986a1f4e577d650e0f103c59da1265054c7`.
+- The manifest-owned public Git-reachability entrypoint still invoked Git
+  directly. Hostile `GIT_DIR` and `GIT_INDEX_FILE` values changed repository
+  identity, and an unavailable executable escaped as an untyped traceback.
+- The governed-source scanner still treated source order as unconditional
+  execution. A never-executed conditional binding hid `eval`, a simple alias of
+  `sys` bypassed reflective-import detection, and multiple assignment targets
+  lost their left-to-right binding order.
+- `Superseded`: the claim that every Verifier Git operation used the shared
+  Adapter and that execution-ordered events alone closed the admitted syntax
+  profile.
+- Replacement direction: route Git reachability through the typed sanitized
+  Adapter and re-plan a bounded control-flow-context, target-order, and simple
+  capability-provenance model. It must remain a closed non-adversarial syntax
+  profile, not become a Python interpreter.
+- A1B-028, A1B-A6I, A1B-A7, and A1B-A10 return to pending/active states;
+  Milestone 3 is `Active`; Milestone 4 and A2 are unavailable.
+
+## 2026-08-29 - Milestone 3 Control-Flow And Git-Reachability Correction Implemented
+
+- Standards Authority now exposes one sanitized typed Git command-result
+  primitive. The success-only output helper delegates to it, and the public
+  Git-reachability domain maps process unavailability and Git status to its own
+  diagnostics without another subprocess owner.
+- Governed-source binding events now carry scope-local execution order and
+  explicit branch context. Complete `if` branches merge definite bindings,
+  simple direct and conditional `sys` aliases preserve possible capability
+  provenance, and assignment targets bind from left to right.
+- The existing Git-reachability implementation file is now an exact
+  implementation node with one source-owned dependency-policy relationship and
+  a mechanically derived migration disposition. No policy unit, relationship
+  kind, or catalog-count assertion was added.
+- The 41 direct regressions and hostile public-cutover suites passed under the
+  exact locked CPython 3.11 and 3.12 environments. Authority 39, Analysis 66,
+  Contracts 18, Engine 36, and Verifier 429 tests passed.
+- Generated freshness, all 226 registered declarative suites, all 53 retained
+  Bash migration checkers, plan structure, changed-file Ruff, and diff hygiene
+  passed.
+- A1B-028 is `Resolved`; the reopened automated objectives are `satisfied`;
+  Milestone 3 is `Implemented`; Milestone 4 is `Active` for A1B-A11. The ADR
+  remains `Proposed`, final A1b acceptance remains pending, and A2 remains
+  unavailable.

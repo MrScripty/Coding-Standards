@@ -69,16 +69,24 @@ are rejected in authored claim sources.
 - Standards Graph: 2 focused tests passed.
 - Analysis: 66 focused tests passed.
 - Standards Engine: 36 focused tests passed.
-- Standards Verifier: 421 focused tests passed.
-- The 24 binding-lifetime and Git-authority regressions passed under the exact
+- Standards Verifier: 429 focused tests passed.
+- The 41 package-import and Git-reachability regressions passed under the exact
   locked environments on CPython 3.11 and 3.12.
 - Under hostile inherited `GIT_DIR` and `GIT_INDEX_FILE` values, both supported
   Python versions passed generated-contract semantic conformance,
-  immutable-authority closure, and the A1b public cutover. Verifier fixture and
-  accepted-tree Git operations therefore use the same sanitized typed Adapter.
+  immutable-authority closure, and the A1b public cutover. Direct public
+  Git-reachability tests separately prove that hostile overrides cannot select
+  another repository and unavailable Git renders a typed domain diagnostic.
+- A production-source scan finds no direct Git subprocess in Standards
+  Verifier. The public command-result primitive in Standards Authority owns
+  environment sanitization while reachability retains domain interpretation of
+  nonzero statuses.
 - Assignment-RHS evaluation, module/class deletion, exception-alias lifetime,
-  and names loaded within assignment targets have direct governed-source
-  regressions; no catalog cardinality is asserted.
+  conditional dominance, complete-branch merging, simple `sys` provenance,
+  left-to-right targets, and names loaded within targets have direct unit and
+  declarative regressions; no catalog cardinality is asserted.
+- The Git-reachability implementation node and its dependency-policy
+  relationship are registered with mechanically derived migration evidence.
 - Every manifest-owned public root, export, and repository entrypoint executed
   under safe-path CPython 3.11 and 3.12 with only the admitted lock.
 - All 226 registered declarative suites passed.

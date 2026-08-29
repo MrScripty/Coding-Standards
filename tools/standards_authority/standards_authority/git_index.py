@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
 
@@ -11,6 +12,13 @@ class GitIndexError(RuntimeError):
         super().__init__(message)
         self.code = code
         self.outcome = outcome
+
+
+@dataclass(frozen=True, slots=True)
+class GitCommandResult:
+    returncode: int
+    stdout: bytes
+    stderr: bytes
 
 
 def sanitized_git_environment() -> dict[str, str]:
@@ -47,7 +55,7 @@ def materialize_index(root: Path, destination: Path) -> None:
     git_output(root, ("checkout-index", "--all", "--force", f"--prefix={prefix}"))
 
 
-def git_output(root: Path, arguments: Sequence[str]) -> bytes:
+def git_command(root: Path, arguments: Sequence[str]) -> GitCommandResult:
     try:
         completed = subprocess.run(
             ["git", "-C", str(root), *arguments],
@@ -59,14 +67,19 @@ def git_output(root: Path, arguments: Sequence[str]) -> bytes:
         raise GitIndexError(
             "GIT.UNAVAILABLE", "unavailable", f"Git execution failed: {error}"
         ) from error
-    if completed.returncode != 0:
-        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+    return GitCommandResult(completed.returncode, completed.stdout, completed.stderr)
+
+
+def git_output(root: Path, arguments: Sequence[str]) -> bytes:
+    result = git_command(root, arguments)
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
         raise GitIndexError(
             "GIT.INDEX_UNAVAILABLE",
             "unavailable",
-            f"Git command failed with exit {completed.returncode}: {detail}",
+            f"Git command failed with exit {result.returncode}: {detail}",
         )
-    return completed.stdout
+    return result.stdout
 
 
 def _nul_fields(output: bytes, description: str) -> tuple[str, ...]:
@@ -90,7 +103,9 @@ def _nul_fields(output: bytes, description: str) -> tuple[str, ...]:
 
 
 __all__ = (
+    "GitCommandResult",
     "GitIndexError",
+    "git_command",
     "git_output",
     "indexed_paths",
     "materialize_index",

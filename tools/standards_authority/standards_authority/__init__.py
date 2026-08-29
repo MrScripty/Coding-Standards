@@ -16,7 +16,9 @@ from .errors import (
     unsupported,
 )
 from .git_index import (
+    GitCommandResult,
     GitIndexError,
+    git_command,
     git_output,
     indexed_paths,
     materialize_index,
@@ -67,6 +69,7 @@ __all__ = (
     "ExecutionClosureCodec",
     "FailureKind",
     "GitCaptureSource",
+    "GitCommandResult",
     "GitIndexError",
     "GitlinkSource",
     "MemoryObjectStore",
@@ -87,6 +90,7 @@ __all__ = (
     "decode_envelope",
     "default_store_path",
     "encode_envelope",
+    "git_command",
     "git_output",
     "invalid",
     "open_default_store",

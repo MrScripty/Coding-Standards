@@ -448,6 +448,10 @@ id = "tools/standards_verifier/standards_verifier/entrypoints.py"
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/entrypoints.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
+id = "tools/standards_verifier/standards_verifier/git_reachability.py"
+metadata = { repository_path = "tools/standards_verifier/standards_verifier/git_reachability.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
 id = "tools/standards_authority/standards_authority/git_index.py"
 metadata = { repository_path = "tools/standards_authority/standards_authority/git_index.py", artifact_kind = "implementation-artifact", authority = "projection" }
 

@@ -1,17 +1,21 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import tempfile
 import unittest
+from contextlib import redirect_stderr
+from io import StringIO
 from pathlib import Path
+from unittest.mock import patch
 
-
-import sys
-
-ENGINE_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ENGINE_ROOT))
-
-from standards_verifier.git_reachability import ReachabilityError, verify_manifest
+from tools.standards_verifier.standards_verifier.entrypoints import (
+    git_reachability_main,
+)
+from tools.standards_verifier.standards_verifier.git_reachability import (
+    ReachabilityError,
+    verify_manifest,
+)
 
 
 class GitReachabilityTest(unittest.TestCase):
@@ -132,3 +136,59 @@ class GitReachabilityTest(unittest.TestCase):
         with self.assertRaises(ReachabilityError) as raised:
             verify_manifest(self.root, Path("../outside.tsv"))
         self.assertEqual(raised.exception.code, "GIT_REACHABILITY.PATH_ESCAPE")
+
+    def test_repository_identity_ignores_ambient_git_overrides(self) -> None:
+        with tempfile.TemporaryDirectory() as outside_directory:
+            outside = Path(outside_directory)
+            manifest = outside / "protected.tsv"
+            manifest.write_text(
+                "oid\tcommit_disposition\treference\tauthority\n"
+                f"{self.first}\tretained\trefs/heads/master\tnone\n",
+                encoding="utf-8",
+            )
+            with patch.dict(
+                os.environ,
+                {
+                    "GIT_DIR": str(self.root / ".git"),
+                    "GIT_INDEX_FILE": str(self.root / ".git" / "index"),
+                },
+            ):
+                with self.assertRaises(ReachabilityError) as raised:
+                    verify_manifest(outside, Path("protected.tsv"))
+        self.assertEqual(raised.exception.code, "GIT_REACHABILITY.NOT_REPOSITORY")
+
+    def test_unavailable_git_is_a_typed_reachability_failure(self) -> None:
+        rows = [(self.first, "retained", "refs/heads/master", "none")]
+        with patch(
+            "tools.standards_authority.standards_authority.git_index.subprocess.run",
+            side_effect=FileNotFoundError("git unavailable"),
+        ):
+            with self.assertRaises(ReachabilityError) as raised:
+                verify_manifest(self.root, self.manifest(rows))
+        self.assertEqual(raised.exception.code, "GIT_REACHABILITY.GIT_UNAVAILABLE")
+
+    def test_public_entrypoint_renders_unavailable_git_failure(self) -> None:
+        manifest = self.manifest(
+            [(self.first, "retained", "refs/heads/master", "none")]
+        )
+        stderr = StringIO()
+        with (
+            patch(
+                "tools.standards_authority.standards_authority.git_index.subprocess.run",
+                side_effect=FileNotFoundError("git unavailable"),
+            ),
+            redirect_stderr(stderr),
+        ):
+            result = git_reachability_main(
+                (
+                    "--repository",
+                    str(self.root),
+                    "--manifest",
+                    str(manifest),
+                ),
+                default_repo_root=self.root,
+            )
+        self.assertEqual(result, 2)
+        self.assertTrue(
+            stderr.getvalue().startswith("GIT_REACHABILITY.GIT_UNAVAILABLE:")
+        )

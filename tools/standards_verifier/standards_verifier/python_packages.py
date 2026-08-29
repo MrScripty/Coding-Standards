@@ -441,7 +441,9 @@ def _constant_text(node: ast.AST) -> str | None:
 
 @dataclass(frozen=True, slots=True, order=True)
 class _BindingEvent:
-    position: tuple[int, int, int]
+    order: int
+    source_position: tuple[int, int]
+    context: tuple[int, ...]
     bound: bool
     provenance: str
 
@@ -451,34 +453,65 @@ class _ScopeFacts(ast.NodeVisitor):
         self.bindings: set[str] = set()
         self.events: dict[str, list[_BindingEvent]] = {}
         self.nonlocal_names: set[str] = set()
+        self.positions: dict[int, int] = {}
+        self.contexts: dict[int, tuple[int, ...]] = {}
+        self._order = 0
+        self._context: tuple[int, ...] = ()
+        self._next_context = 0
 
     @staticmethod
-    def _start(node: ast.AST, phase: int = 1) -> tuple[int, int, int]:
-        return (
-            getattr(node, "lineno", 0),
-            getattr(node, "col_offset", 0),
-            phase,
-        )
-
-    @staticmethod
-    def _end(node: ast.AST) -> tuple[int, int, int]:
+    def _source_position(node: ast.AST) -> tuple[int, int]:
         return (
             getattr(node, "end_lineno", getattr(node, "lineno", 0)),
             getattr(node, "end_col_offset", getattr(node, "col_offset", 0)),
-            2,
         )
+
+    def _mark(self, node: ast.AST) -> None:
+        self._order += 1
+        self.positions[id(node)] = self._order
+        self.contexts[id(node)] = self._context
+
+    def visit(self, node: ast.AST) -> object:
+        self._mark(node)
+        return super().visit(node)
+
+    def _visit_branch(self, children: Iterable[ast.AST]) -> tuple[int, ...]:
+        self._next_context += 1
+        previous = self._context
+        self._context = (*previous, self._next_context)
+        branch = self._context
+        for child in children:
+            self.visit(child)
+        self._context = previous
+        return branch
+
+    def _branch_state(self, context: tuple[int, ...]) -> dict[str, _BindingEvent]:
+        return {
+            name: matching[-1]
+            for name, events in self.events.items()
+            if (
+                matching := tuple(event for event in events if event.context == context)
+            )
+        }
 
     def _event(
         self,
         name: str,
-        position: tuple[int, int, int],
+        node: ast.AST,
         *,
         bound: bool,
         provenance: str = "other",
     ) -> None:
+        self._order += 1
         self.bindings.add(name)
         self.events.setdefault(name, []).append(
-            _BindingEvent(position, bound, provenance)
+            _BindingEvent(
+                self._order,
+                self._source_position(node),
+                self._context,
+                bound,
+                provenance,
+            )
         )
 
     def _bind(
@@ -486,33 +519,58 @@ class _ScopeFacts(ast.NodeVisitor):
         name: str,
         node: ast.AST,
         provenance: str = "other",
-        *,
-        position: tuple[int, int, int] | None = None,
     ) -> None:
         self._event(
             name,
-            position or self._end(node),
+            node,
             bound=True,
             provenance=provenance,
         )
 
+    def _value_provenance(self, node: ast.AST) -> str:
+        if not isinstance(node, ast.Name):
+            return "other"
+        use_order = self.positions.get(id(node), self._order + 1)
+        use_context = self.contexts.get(id(node), self._context)
+        selected = tuple(
+            event
+            for event in self.events.get(node.id, ())
+            if event.order < use_order
+            and use_context[: len(event.context)] == event.context
+        )
+        if selected:
+            latest = selected[-1]
+            return latest.provenance if latest.bound else "other"
+        return "sys" if node.id == "sys" else "other"
+
     def _target(
         self,
         node: ast.AST,
-        position: tuple[int, int, int],
         *,
         bound: bool,
+        provenance: str = "other",
     ) -> None:
-        context = ast.Store if bound else ast.Del
-        for name in ast.walk(node):
-            if isinstance(name, ast.Name) and isinstance(name.ctx, context):
-                self._event(name.id, position, bound=bound)
+        self._mark(node)
+        if isinstance(node, ast.Name):
+            self._event(
+                node.id,
+                node,
+                bound=bound,
+                provenance=provenance,
+            )
+        elif isinstance(node, ast.Starred):
+            self._target(node.value, bound=bound, provenance=provenance)
+        elif isinstance(node, (ast.Tuple, ast.List)):
+            for item in node.elts:
+                self._target(item, bound=bound, provenance=provenance)
+        elif isinstance(node, ast.Attribute):
+            self.visit(node.value)
+        elif isinstance(node, ast.Subscript):
+            self.visit(node.value)
+            self.visit(node.slice)
 
     def visit_Name(self, node: ast.Name) -> None:
-        if isinstance(node.ctx, ast.Store):
-            self._bind(node.id, node)
-        elif isinstance(node.ctx, ast.Del):
-            self._event(node.id, self._end(node), bound=False)
+        del node
 
     def visit_arg(self, node: ast.arg) -> None:
         self._bind(node.arg, node)
@@ -526,14 +584,14 @@ class _ScopeFacts(ast.NodeVisitor):
             self.visit(child)
         if node.returns is not None:
             self.visit(node.returns)
-        self._bind(node.name, node, position=self._end(node))
+        self._bind(node.name, node)
 
     visit_AsyncFunctionDef = visit_FunctionDef
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
         for child in (*node.decorator_list, *node.bases, *node.keywords):
             self.visit(child)
-        self._bind(node.name, node, position=self._end(node))
+        self._bind(node.name, node)
 
     def visit_Lambda(self, node: ast.Lambda) -> None:
         for child in (
@@ -551,32 +609,78 @@ class _ScopeFacts(ast.NodeVisitor):
 
     def visit_Assign(self, node: ast.Assign) -> None:
         self.visit(node.value)
+        provenance = self._value_provenance(node.value)
         for target in node.targets:
-            self._target(target, self._end(node), bound=True)
+            self._target(target, bound=True, provenance=provenance)
 
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
         self.visit(node.annotation)
         if node.value is not None:
             self.visit(node.value)
-        self._target(node.target, self._end(node), bound=True)
+        provenance = (
+            self._value_provenance(node.value)
+            if node.value is not None
+            else "other"
+        )
+        self._target(node.target, bound=True, provenance=provenance)
 
     def visit_AugAssign(self, node: ast.AugAssign) -> None:
+        self._target(node.target, bound=False)
         self.visit(node.value)
-        self._target(node.target, self._end(node), bound=True)
+        self._target(node.target, bound=True)
 
     def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
         self.visit(node.value)
-        self._target(node.target, self._end(node), bound=True)
+        self._target(
+            node.target,
+            bound=True,
+            provenance=self._value_provenance(node.value),
+        )
 
     def visit_Delete(self, node: ast.Delete) -> None:
         for target in node.targets:
-            self._target(target, self._end(node), bound=False)
+            self._target(target, bound=False)
+
+    def visit_If(self, node: ast.If) -> None:
+        self.visit(node.test)
+        body_context = self._visit_branch(node.body)
+        else_context = self._visit_branch(node.orelse)
+        if not node.orelse:
+            return
+        body_state = self._branch_state(body_context)
+        else_state = self._branch_state(else_context)
+        for name in sorted(body_state.keys() & else_state.keys()):
+            body = body_state[name]
+            alternative = else_state[name]
+            if body.bound != alternative.bound:
+                continue
+            provenance = (
+                "sys"
+                if "sys" in {body.provenance, alternative.provenance}
+                else "other"
+            )
+            self._event(
+                name,
+                node,
+                bound=body.bound,
+                provenance=provenance,
+            )
+
+    def visit_While(self, node: ast.While) -> None:
+        self.visit(node.test)
+        self._visit_branch(node.body)
+        self._visit_branch(node.orelse)
 
     def visit_For(self, node: ast.For) -> None:
         self.visit(node.iter)
-        self._target(node.target, self._end(node.iter), bound=True)
-        for child in (*node.body, *node.orelse):
+        self._next_context += 1
+        previous = self._context
+        self._context = (*previous, self._next_context)
+        self._target(node.target, bound=True)
+        for child in node.body:
             self.visit(child)
+        self._context = previous
+        self._visit_branch(node.orelse)
 
     visit_AsyncFor = visit_For
 
@@ -586,7 +690,6 @@ class _ScopeFacts(ast.NodeVisitor):
             if item.optional_vars is not None:
                 self._target(
                     item.optional_vars,
-                    self._end(item.context_expr),
                     bound=True,
                 )
         for child in node.body:
@@ -594,20 +697,29 @@ class _ScopeFacts(ast.NodeVisitor):
 
     visit_AsyncWith = visit_With
 
+    def visit_Try(self, node: ast.Try) -> None:
+        self._visit_branch(node.body)
+        for handler in node.handlers:
+            self._visit_branch((handler,))
+        self._visit_branch(node.orelse)
+        for child in node.finalbody:
+            self.visit(child)
+
+    visit_TryStar = visit_Try
+
     def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
         if node.type is not None:
             self.visit(node.type)
         if node.name is not None:
-            first = node.body[0] if node.body else node
             self._event(
                 node.name,
-                self._start(first, 0),
+                node,
                 bound=True,
             )
         for child in node.body:
             self.visit(child)
         if node.name is not None:
-            self._event(node.name, self._end(node), bound=False)
+            self._event(node.name, node, bound=False)
 
     def visit_Import(self, node: ast.Import) -> None:
         for item in node.names:
@@ -616,12 +728,11 @@ class _ScopeFacts(ast.NodeVisitor):
                 name,
                 node,
                 "sys" if item.name == "sys" else "other",
-                position=self._end(node),
             )
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
         for item in node.names:
-            self._bind(item.asname or item.name, node, position=self._end(node))
+            self._bind(item.asname or item.name, node)
 
     def visit_Global(self, node: ast.Global) -> None:
         self.nonlocal_names.update(node.names)
@@ -630,7 +741,14 @@ class _ScopeFacts(ast.NodeVisitor):
         self.nonlocal_names.update(node.names)
 
 
-def _scope_facts(node: ast.AST) -> tuple[frozenset[str], dict[str, tuple[_BindingEvent, ...]]]:
+def _scope_facts(
+    node: ast.AST,
+) -> tuple[
+    frozenset[str],
+    dict[str, tuple[_BindingEvent, ...]],
+    dict[int, int],
+    dict[int, tuple[int, ...]],
+]:
     collector = _ScopeFacts()
     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
         collector.visit(node.args)
@@ -640,33 +758,58 @@ def _scope_facts(node: ast.AST) -> tuple[frozenset[str], dict[str, tuple[_Bindin
     for child in body:
         collector.visit(child)
     bindings = frozenset(collector.bindings - collector.nonlocal_names)
-    return bindings, {
-        name: tuple(sorted(events))
-        for name, events in collector.events.items()
-        if name in bindings
-    }
+    return (
+        bindings,
+        {
+            name: tuple(sorted(events))
+            for name, events in collector.events.items()
+            if name in bindings
+        },
+        collector.positions,
+        collector.contexts,
+    )
 
 
 class _DynamicImportProfile(ast.NodeVisitor):
     def __init__(self, tree: ast.Module) -> None:
         self.detected = False
-        bindings, events = _scope_facts(tree)
+        bindings, events, positions, contexts = _scope_facts(tree)
         self._scopes = [bindings]
         self._events = [events]
+        self._positions = [positions]
+        self._contexts = [contexts]
         self._scope_kinds = ["module"]
 
     @staticmethod
-    def _position(node: ast.AST) -> tuple[int, int, int]:
-        return getattr(node, "lineno", 0), getattr(node, "col_offset", 0), 1
+    def _source_position(node: ast.AST) -> tuple[int, int]:
+        return getattr(node, "lineno", 0), getattr(node, "col_offset", 0)
 
-    @staticmethod
     def _latest_event(
-        events: dict[str, tuple[_BindingEvent, ...]], name: str, node: ast.AST
+        self,
+        index: int,
+        name: str,
+        node: ast.AST,
     ) -> _BindingEvent | None:
-        position = _DynamicImportProfile._position(node)
-        selected = tuple(
-            event for event in events.get(name, ()) if event.position < position
-        )
+        events = self._events[index].get(name, ())
+        current = len(self._scopes) - 1
+        if index == current:
+            position = self._positions[index].get(id(node))
+            if position is None:
+                return None
+            context = self._contexts[index].get(id(node), ())
+            selected = tuple(
+                event
+                for event in events
+                if event.order < position
+                and context[: len(event.context)] == event.context
+            )
+        else:
+            source_position = self._source_position(node)
+            selected = tuple(
+                event
+                for event in events
+                if not event.context and event.source_position < source_position
+            )
         return selected[-1] if selected else None
 
     def _shadowed(self, name: str, node: ast.AST) -> bool:
@@ -676,12 +819,11 @@ class _DynamicImportProfile(ast.NodeVisitor):
             if kind == "class" and index != current:
                 continue
             bindings = self._scopes[index]
-            events = self._events[index]
             if name not in bindings:
                 continue
             if kind in {"function", "comprehension"}:
                 return True
-            selected = self._latest_event(events, name, node)
+            selected = self._latest_event(index, name, node)
             if selected is not None and selected.bound:
                 return True
         return False
@@ -693,20 +835,39 @@ class _DynamicImportProfile(ast.NodeVisitor):
             if kind == "class" and index != current:
                 continue
             bindings = self._scopes[index]
-            events = self._events[index]
             if name not in bindings:
                 continue
             if kind == "function" and index != current:
                 return any(
-                    event.provenance == "sys" for event in events.get(name, ())
+                    event.provenance == "sys"
+                    for event in self._events[index].get(name, ())
                 )
-            selected = self._latest_event(events, name, node)
+            selected = self._latest_event(index, name, node)
             if selected is not None:
                 if selected.bound:
-                    return selected.provenance == "sys"
+                    if selected.provenance == "sys":
+                        return True
+                    cutoff = selected.order
+                else:
+                    cutoff = selected.order
                 if kind == "class":
                     continue
-                return False
+            else:
+                cutoff = 0
+            if index == current:
+                position = self._positions[index].get(id(node))
+                context = self._contexts[index].get(id(node), ())
+                if position is not None and any(
+                    event.bound
+                    and event.provenance == "sys"
+                    and cutoff < event.order < position
+                    and (
+                        context[: len(event.context)] == event.context
+                        or event.context[: len(context)] == context
+                    )
+                    for event in self._events[index].get(name, ())
+                ):
+                    return True
             if kind != "class":
                 return False
         return False
@@ -725,9 +886,11 @@ class _DynamicImportProfile(ast.NodeVisitor):
         return False
 
     def _visit_scope(self, node: ast.AST, children: Iterable[ast.AST]) -> None:
-        bindings, events = _scope_facts(node)
+        bindings, events, positions, contexts = _scope_facts(node)
         self._scopes.append(bindings)
         self._events.append(events)
+        self._positions.append(positions)
+        self._contexts.append(contexts)
         self._scope_kinds.append(
             "function"
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda))
@@ -736,6 +899,8 @@ class _DynamicImportProfile(ast.NodeVisitor):
         for child in children:
             self.visit(child)
         self._scope_kinds.pop()
+        self._contexts.pop()
+        self._positions.pop()
         self._events.pop()
         self._scopes.pop()
 
@@ -777,12 +942,11 @@ class _DynamicImportProfile(ast.NodeVisitor):
             for name in ast.walk(first.target)
             if isinstance(name, ast.Name) and isinstance(name.ctx, ast.Store)
         }
-        events = {
-            name: (_BindingEvent(self._position(first.target), True, "other"),)
-            for name in bindings
-        }
+        events: dict[str, tuple[_BindingEvent, ...]] = {}
         self._scopes.append(frozenset(bindings))
         self._events.append(events)
+        self._positions.append({})
+        self._contexts.append({})
         self._scope_kinds.append("comprehension")
         for condition in first.ifs:
             self.visit(condition)
@@ -795,21 +959,13 @@ class _DynamicImportProfile(ast.NodeVisitor):
             }
             bindings.update(added)
             self._scopes[-1] = frozenset(bindings)
-            self._events[-1].update(
-                {
-                    name: (
-                        _BindingEvent(
-                            self._position(generator.target), True, "other"
-                        ),
-                    )
-                    for name in added
-                }
-            )
             for condition in generator.ifs:
                 self.visit(condition)
         for result in result_nodes:
             self.visit(result)
         self._scope_kinds.pop()
+        self._contexts.pop()
+        self._positions.pop()
         self._events.pop()
         self._scopes.pop()
 
