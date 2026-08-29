@@ -17,6 +17,7 @@ from .errors import (
 )
 from .git_index import (
     GitIndexError,
+    git_output,
     indexed_paths,
     materialize_index,
     sanitized_git_environment,
@@ -86,6 +87,7 @@ __all__ = (
     "decode_envelope",
     "default_store_path",
     "encode_envelope",
+    "git_output",
     "invalid",
     "open_default_store",
     "unavailable",

@@ -30,6 +30,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.checks.policy_impact_migration import (
     _changed_production_paths,
+    _materialized_tree,
 )
 from standards_verifier.model import CheckContext, SuiteCatalog
 from standards_verifier.policy_impact import (
@@ -462,6 +463,33 @@ class PolicyImpactTest(unittest.TestCase):
         self.assertIn("--cached", arguments[0])
         self.assertNotIn("GIT_DIR", options["env"])
         self.assertNotIn("GIT_INDEX_FILE", options["env"])
+
+    def test_accepted_tree_materialization_ignores_ambient_git_overrides(
+        self,
+    ) -> None:
+        subprocess.run(("git", "init", "-q"), cwd=self.root, check=True)
+        self.write("tools/current.py", "value = 1\n")
+        subprocess.run(("git", "add", "-A"), cwd=self.root, check=True)
+        tree = subprocess.run(
+            ("git", "write-tree"),
+            cwd=self.root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        context = CheckContext(self.root, "fixture", SuiteCatalog.empty())
+
+        with patch.dict(
+            os.environ,
+            {"GIT_DIR": "/unavailable", "GIT_INDEX_FILE": "/unavailable/index"},
+        ):
+            with _materialized_tree(context, "migration", tree) as materialized:
+                self.assertEqual(
+                    (Path(materialized) / "tools/current.py").read_text(
+                        encoding="utf-8"
+                    ),
+                    "value = 1\n",
+                )
 
 
 if __name__ == "__main__":

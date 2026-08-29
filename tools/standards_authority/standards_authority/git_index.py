@@ -18,14 +18,14 @@ def sanitized_git_environment() -> dict[str, str]:
 
 
 def indexed_paths(root: Path) -> tuple[str, ...]:
-    output = _git(root, ("ls-files", "-z", "--full-name"))
+    output = git_output(root, ("ls-files", "-z", "--full-name"))
     return tuple(sorted(_nul_fields(output, "Git index path output")))
 
 
 def staged_name_status(
     root: Path, base: str, pathspecs: Sequence[str]
 ) -> tuple[str, ...]:
-    output = _git(
+    output = git_output(
         root,
         (
             "diff",
@@ -44,10 +44,10 @@ def staged_name_status(
 
 def materialize_index(root: Path, destination: Path) -> None:
     prefix = str(destination.resolve()) + os.sep
-    _git(root, ("checkout-index", "--all", "--force", f"--prefix={prefix}"))
+    git_output(root, ("checkout-index", "--all", "--force", f"--prefix={prefix}"))
 
 
-def _git(root: Path, arguments: Sequence[str]) -> bytes:
+def git_output(root: Path, arguments: Sequence[str]) -> bytes:
     try:
         completed = subprocess.run(
             ["git", "-C", str(root), *arguments],
@@ -91,6 +91,7 @@ def _nul_fields(output: bytes, description: str) -> tuple[str, ...]:
 
 __all__ = (
     "GitIndexError",
+    "git_output",
     "indexed_paths",
     "materialize_index",
     "sanitized_git_environment",

@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from tools.standards_verifier.standards_verifier.checks.python_package_contract import (
+    _audit_fixture,
+)
 from tools.standards_verifier.standards_verifier.python_packages import (
     audit_python_packages,
     execute_python_package_contract,
@@ -393,6 +398,78 @@ class PythonPackageContractTest(unittest.TestCase):
 
         self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
 
+    def test_assignment_rhs_precedes_module_and_class_target_binding(self) -> None:
+        variants = (
+            """
+            eval = eval("40 + 2")
+            __all__ = ("eval",)
+            """,
+            """
+            class Fixture:
+                eval = eval("40 + 2")
+            __all__ = ("Fixture",)
+            """,
+        )
+        for source in variants:
+            with self.subTest(source=source.strip().splitlines()[0]):
+                self.write("tools/a/a/__init__.py", source)
+                self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_deleted_module_binding_restores_builtin_capability(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            eval = lambda value: value
+            del eval
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_loaded_name_inside_assignment_target_is_not_a_binding(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            values = {}
+            values[getattr] = 1
+            run = getattr(__builtins__, "__import__")
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_exception_alias_is_a_benign_binding_inside_its_handler(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            try:
+                raise ValueError("fixture")
+            except ValueError as eval:
+                run = str(eval)
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_exception_alias_is_unbound_after_its_handler(self) -> None:
+        self.write(
+            "tools/a/a/__init__.py",
+            """
+            try:
+                raise ValueError("fixture")
+            except ValueError as eval:
+                pass
+            run = eval("40 + 2")
+            __all__ = ("run",)
+            """,
+        )
+
+        self.assertIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
     def test_arbitrary_attributes_do_not_imply_import_machinery(self) -> None:
         self.write(
             "tools/a/a/__init__.py",
@@ -419,6 +496,44 @@ class PythonPackageContractTest(unittest.TestCase):
         )
 
         self.assertNotIn("PYTHON_PACKAGE.DYNAMIC_IMPORT", self.codes())
+
+    def test_verifier_git_fixtures_ignore_ambient_repository_overrides(self) -> None:
+        case = {
+            "id": "ambient-git",
+            "consumer_dependencies": ["b-package"],
+            "consumer_source": (
+                "from tools.b.b import value\n"
+                "run = value\n"
+                '__all__ = ("run",)\n'
+            ),
+            "expected_codes": [],
+        }
+        self.write(
+            "tools/a/pyproject.toml",
+            """
+            [project]
+            name = "a-package"
+            version = "0.1.0"
+            requires-python = ">=3.11,<3.13"
+            dependencies = ["b-package"]
+
+            [tool.standards-package]
+            schema-version = 2
+            public-import-root = "tools.a.a"
+            repository-entrypoints = [
+              { path = "tools/fixture_entrypoint.py", arguments = ["{fixture}"], fixture = "isolated-git-repository", remove = [] },
+            ]
+            """,
+        )
+        self.write("tools/fixture_entrypoint.py", "print('fixture completed')\n")
+        self.stage()
+
+        with patch.dict(
+            os.environ,
+            {"GIT_DIR": "/unavailable", "GIT_INDEX_FILE": "/unavailable/index"},
+        ):
+            self.assertEqual(_audit_fixture(case), ())
+            self.assertEqual(execute_python_package_contract(self.root), ())
 
     def test_dependency_and_source_ownership_are_exact(self) -> None:
         self.write_package(

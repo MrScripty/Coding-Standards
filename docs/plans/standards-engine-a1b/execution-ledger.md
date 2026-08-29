@@ -1117,3 +1117,43 @@
   Milestone 4 is `Active` for one content-bound acceptance review. The ADR
   remains `Proposed`, final A1b acceptance remains pending, and A2 remains
   unavailable.
+
+## 2026-08-28 - Final Content Review Rejection And Binding-Lifetime Replan
+
+- Independent Standards and Specification review rejected implementation
+  `8b8a4b481d4e330e118f879a862d2a3630c85f84`, tree
+  `3435dd4e7cd5784913389f53fb90d6fbb06b73d7`.
+- The governed-source scanner treated textual Store and Del positions as
+  bindings. It therefore hid a capability used on an assignment RHS, retained
+  a deleted binding, and rejected a benign exception alias.
+- Three Verifier fixture and migration paths executed Git outside the shared
+  sanitized Standards Authority Adapter; an ambient `GIT_DIR` override changed
+  a passing suite into an untyped subprocess failure.
+- `Superseded`: the Milestone 3 `Implemented` decision and the provider-v5
+  coverage claim as final acceptance evidence. The authored attestations remain
+  current inputs but must be revalidated after the corrected horizon is frozen.
+- Replacement: typed execution-ordered bind/unbind events, one exported typed
+  Git command Adapter used by every Verifier Git call, exact focused and public
+  suite regressions, then regenerated migration, generated evidence, and
+  coverage. A1B-028 and Milestone 3 return to `Active`; Milestone 4 and A2 are
+  unavailable.
+
+## 2026-08-29 - Milestone 3 Binding And Git-Authority Correction Implemented
+
+- The governed-source scanner now models execution-ordered bind and unbind
+  events. Assignment right-hand sides execute before target binding, deletion
+  removes a binding, exception aliases expire after their handler, and loaded
+  names inside assignment targets are not misclassified as bindings.
+- Standards Authority exports the one sanitized typed Git command Adapter.
+  Every Verifier fixture, entrypoint, and accepted-tree Git operation uses it;
+  inherited `GIT_*` overrides no longer change authority or escape typed
+  diagnostics.
+- The 24 focused regressions and the hostile-ambient-Git public-cutover suites
+  passed under the exact locked CPython 3.11 and 3.12 environments.
+- Authority 39, Analysis 66, Engine 36, and Verifier 421 tests passed.
+  Generated freshness passed, followed by all 226 registered declarative
+  suites and all 53 retained Bash migration checkers. Diff hygiene passed.
+- A1B-028 is `Resolved`; the reopened automated objectives are `satisfied`;
+  Milestone 3 is `Implemented`; Milestone 4 is `Active` for A1B-A11. The ADR
+  remains `Proposed`, final A1b acceptance remains pending, and A2 remains
+  unavailable.

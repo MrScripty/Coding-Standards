@@ -3531,7 +3531,7 @@
       ]
     },
     {
-      "digest": "sha256:a8c5b5c316dba21580f42908838b620f7d48bedd87b53feebea2cde692175ad2",
+      "digest": "sha256:323c71a05b460fd9ce065cf660123a433178d1fe69670092b834ca3c86a87a20",
       "path": "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml",
       "state": "present",
       "uses": [
@@ -18925,7 +18925,7 @@
       ]
     },
     {
-      "digest": "sha256:9804bb5a638247c92da525e419b97b448d0406b90ac9a1e2687a2eaa2230c4a2",
+      "digest": "sha256:b29bb2c8a86348bf9260f9003cddf19971e7cba251caecd7f867ade3d47b764a",
       "path": "tools/standards_authority/standards_authority/__init__.py",
       "state": "present",
       "uses": [
@@ -19055,7 +19055,7 @@
       ]
     },
     {
-      "digest": "sha256:0fc37cead522ba83915b488e9b372f18e41b2777ef7a72009ddec3b00ba23620",
+      "digest": "sha256:c3eab267b3d3bc5ec0b9664e52fd65236e9d9cdfef40a0ed56aad61a995ee79c",
       "path": "tools/standards_authority/standards_authority/git_index.py",
       "state": "present",
       "uses": [
@@ -21377,7 +21377,7 @@
       ]
     },
     {
-      "digest": "sha256:273e602215d80fb393684cdaf89d30e775dd8be17b7314c9b9360fa7ff2bd9af",
+      "digest": "sha256:a51a4dcefc1e68789286568baf18c4602a87178b1f146036a67014fadd399623",
       "path": "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py",
       "state": "present",
       "uses": [
@@ -21426,7 +21426,7 @@
       ]
     },
     {
-      "digest": "sha256:40490788c328221dede0e7303b2d21c136e151b434eedef38eeb6cb1985a3633",
+      "digest": "sha256:1e73f75ecf7bc6dd056f7b90dd480a3b2a03ae721d01abe34a465ed85d0949d7",
       "path": "tools/standards_verifier/standards_verifier/checks/python_package_contract.py",
       "state": "present",
       "uses": [
@@ -21933,7 +21933,7 @@
       ]
     },
     {
-      "digest": "sha256:8677bbe640d40711ab798a33ab8608d69d0f5b5761850954de68b98f52b81f32",
+      "digest": "sha256:38112079123c20708fd1cc067721f71f2cce58e5d3bea0fb9d71a80fc917b356",
       "path": "tools/standards_verifier/standards_verifier/python_packages.py",
       "state": "present",
       "uses": [
@@ -22103,7 +22103,7 @@
       ]
     },
     {
-      "digest": "sha256:ed60d9b15733fb03609d3e96f892c64301b2e4ac607f4e0376c46601c514a8a0",
+      "digest": "sha256:17e6cd98dcaa423034845894432f277250a71813907918104c35473f639b000e",
       "path": "tools/standards_verifier/tests/test_policy_impact.py",
       "state": "present",
       "uses": [
@@ -22125,7 +22125,7 @@
       ]
     },
     {
-      "digest": "sha256:b32ee1d429a24362f81f10128dd79686d7350bb61b2e471835bc43c69f6f5fa1",
+      "digest": "sha256:7869c72e3ba83dbf4b7f63c2925c92e523b20edeed7fac29a6d1be8b16ea65e6",
       "path": "tools/standards_verifier/tests/test_python_package_contract.py",
       "state": "present",
       "uses": [

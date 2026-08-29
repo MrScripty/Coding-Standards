@@ -60,7 +60,7 @@ are rejected in authored claim sources.
 
 - Identity: 8 focused tests passed.
 - Contracts: 18 focused tests passed.
-- Authority: 38 package tests passed with one explicitly selected required-real
+- Authority: 39 package tests passed with one explicitly selected required-real
   case; the required-real `strace` interruption case also passed independently.
 - Applicability: 12 focused tests passed.
 - Metadata: 17 focused tests passed.
@@ -68,8 +68,17 @@ are rejected in authored claim sources.
 - Policy Impact: 9 focused tests passed.
 - Standards Graph: 2 focused tests passed.
 - Analysis: 66 focused tests passed.
-- Standards Engine: 33 focused tests passed.
-- Standards Verifier: 386 focused tests passed.
+- Standards Engine: 36 focused tests passed.
+- Standards Verifier: 421 focused tests passed.
+- The 24 binding-lifetime and Git-authority regressions passed under the exact
+  locked environments on CPython 3.11 and 3.12.
+- Under hostile inherited `GIT_DIR` and `GIT_INDEX_FILE` values, both supported
+  Python versions passed generated-contract semantic conformance,
+  immutable-authority closure, and the A1b public cutover. Verifier fixture and
+  accepted-tree Git operations therefore use the same sanitized typed Adapter.
+- Assignment-RHS evaluation, module/class deletion, exception-alias lifetime,
+  and names loaded within assignment targets have direct governed-source
+  regressions; no catalog cardinality is asserted.
 - Every manifest-owned public root, export, and repository entrypoint executed
   under safe-path CPython 3.11 and 3.12 with only the admitted lock.
 - All 226 registered declarative suites passed.

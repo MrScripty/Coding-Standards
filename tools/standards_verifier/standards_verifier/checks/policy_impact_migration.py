@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import csv
 import io
-import subprocess
 import tarfile
 import tempfile
 from dataclasses import dataclass
@@ -21,6 +20,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 from ..diagnostics import Diagnostic, EngineError
 from tools.standards_authority.standards_authority import (
     GitIndexError,
+    git_output,
     staged_name_status,
 )
 from ..model import (
@@ -249,13 +249,11 @@ def _materialized_tree(
                 observed=tree,
             )
         )
-    completed = subprocess.run(
-        ("git", "archive", "--format=tar", tree),
-        cwd=context.repo_root,
-        check=False,
-        capture_output=True,
-    )
-    if completed.returncode != 0:
+    try:
+        archive_bytes = git_output(
+            context.repo_root, ("archive", "--format=tar", tree)
+        )
+    except GitIndexError as error:
         raise EngineError(
             Diagnostic(
                 "POLICY_IMPACT_MIGRATION.ACCEPTED_TREE_UNAVAILABLE",
@@ -265,11 +263,11 @@ def _materialized_tree(
                 check=check,
                 observed=tree,
             )
-        )
+        ) from error
     temporary = tempfile.TemporaryDirectory()
     destination = Path(temporary.name)
     try:
-        with tarfile.open(fileobj=io.BytesIO(completed.stdout), mode="r:") as archive:
+        with tarfile.open(fileobj=io.BytesIO(archive_bytes), mode="r:") as archive:
             for member in archive.getmembers():
                 relative = PurePosixPath(member.name)
                 if (

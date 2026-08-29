@@ -13,6 +13,7 @@ from typing import Iterable
 
 from tools.standards_authority.standards_authority import (
     GitIndexError,
+    git_output,
     indexed_paths,
     materialize_index,
 )
@@ -440,7 +441,8 @@ def _constant_text(node: ast.AST) -> str | None:
 
 @dataclass(frozen=True, slots=True, order=True)
 class _BindingEvent:
-    position: tuple[int, int]
+    position: tuple[int, int, int]
+    bound: bool
     provenance: str
 
 
@@ -450,32 +452,95 @@ class _ScopeFacts(ast.NodeVisitor):
         self.events: dict[str, list[_BindingEvent]] = {}
         self.nonlocal_names: set[str] = set()
 
-    def _bind(self, name: str, node: ast.AST, provenance: str = "other") -> None:
-        self.bindings.add(name)
-        self.events.setdefault(name, []).append(
-            _BindingEvent(
-                (getattr(node, "lineno", 0), getattr(node, "col_offset", 0)),
-                provenance,
-            )
+    @staticmethod
+    def _start(node: ast.AST, phase: int = 1) -> tuple[int, int, int]:
+        return (
+            getattr(node, "lineno", 0),
+            getattr(node, "col_offset", 0),
+            phase,
         )
 
+    @staticmethod
+    def _end(node: ast.AST) -> tuple[int, int, int]:
+        return (
+            getattr(node, "end_lineno", getattr(node, "lineno", 0)),
+            getattr(node, "end_col_offset", getattr(node, "col_offset", 0)),
+            2,
+        )
+
+    def _event(
+        self,
+        name: str,
+        position: tuple[int, int, int],
+        *,
+        bound: bool,
+        provenance: str = "other",
+    ) -> None:
+        self.bindings.add(name)
+        self.events.setdefault(name, []).append(
+            _BindingEvent(position, bound, provenance)
+        )
+
+    def _bind(
+        self,
+        name: str,
+        node: ast.AST,
+        provenance: str = "other",
+        *,
+        position: tuple[int, int, int] | None = None,
+    ) -> None:
+        self._event(
+            name,
+            position or self._end(node),
+            bound=True,
+            provenance=provenance,
+        )
+
+    def _target(
+        self,
+        node: ast.AST,
+        position: tuple[int, int, int],
+        *,
+        bound: bool,
+    ) -> None:
+        context = ast.Store if bound else ast.Del
+        for name in ast.walk(node):
+            if isinstance(name, ast.Name) and isinstance(name.ctx, context):
+                self._event(name.id, position, bound=bound)
+
     def visit_Name(self, node: ast.Name) -> None:
-        if isinstance(node.ctx, (ast.Store, ast.Del)):
+        if isinstance(node.ctx, ast.Store):
             self._bind(node.id, node)
+        elif isinstance(node.ctx, ast.Del):
+            self._event(node.id, self._end(node), bound=False)
 
     def visit_arg(self, node: ast.arg) -> None:
         self._bind(node.arg, node)
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
-        self._bind(node.name, node)
+        for child in (
+            *node.decorator_list,
+            *node.args.defaults,
+            *(item for item in node.args.kw_defaults if item is not None),
+        ):
+            self.visit(child)
+        if node.returns is not None:
+            self.visit(node.returns)
+        self._bind(node.name, node, position=self._end(node))
 
     visit_AsyncFunctionDef = visit_FunctionDef
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
-        self._bind(node.name, node)
+        for child in (*node.decorator_list, *node.bases, *node.keywords):
+            self.visit(child)
+        self._bind(node.name, node, position=self._end(node))
 
     def visit_Lambda(self, node: ast.Lambda) -> None:
-        del node
+        for child in (
+            *node.args.defaults,
+            *(item for item in node.args.kw_defaults if item is not None),
+        ):
+            self.visit(child)
 
     def visit_ListComp(self, node: ast.ListComp) -> None:
         del node
@@ -484,14 +549,79 @@ class _ScopeFacts(ast.NodeVisitor):
     visit_DictComp = visit_ListComp
     visit_GeneratorExp = visit_ListComp
 
+    def visit_Assign(self, node: ast.Assign) -> None:
+        self.visit(node.value)
+        for target in node.targets:
+            self._target(target, self._end(node), bound=True)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        self.visit(node.annotation)
+        if node.value is not None:
+            self.visit(node.value)
+        self._target(node.target, self._end(node), bound=True)
+
+    def visit_AugAssign(self, node: ast.AugAssign) -> None:
+        self.visit(node.value)
+        self._target(node.target, self._end(node), bound=True)
+
+    def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
+        self.visit(node.value)
+        self._target(node.target, self._end(node), bound=True)
+
+    def visit_Delete(self, node: ast.Delete) -> None:
+        for target in node.targets:
+            self._target(target, self._end(node), bound=False)
+
+    def visit_For(self, node: ast.For) -> None:
+        self.visit(node.iter)
+        self._target(node.target, self._end(node.iter), bound=True)
+        for child in (*node.body, *node.orelse):
+            self.visit(child)
+
+    visit_AsyncFor = visit_For
+
+    def visit_With(self, node: ast.With) -> None:
+        for item in node.items:
+            self.visit(item.context_expr)
+            if item.optional_vars is not None:
+                self._target(
+                    item.optional_vars,
+                    self._end(item.context_expr),
+                    bound=True,
+                )
+        for child in node.body:
+            self.visit(child)
+
+    visit_AsyncWith = visit_With
+
+    def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
+        if node.type is not None:
+            self.visit(node.type)
+        if node.name is not None:
+            first = node.body[0] if node.body else node
+            self._event(
+                node.name,
+                self._start(first, 0),
+                bound=True,
+            )
+        for child in node.body:
+            self.visit(child)
+        if node.name is not None:
+            self._event(node.name, self._end(node), bound=False)
+
     def visit_Import(self, node: ast.Import) -> None:
         for item in node.names:
             name = item.asname or item.name.split(".", 1)[0]
-            self._bind(name, item, "sys" if item.name == "sys" else "other")
+            self._bind(
+                name,
+                node,
+                "sys" if item.name == "sys" else "other",
+                position=self._end(node),
+            )
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
         for item in node.names:
-            self._bind(item.asname or item.name, item)
+            self._bind(item.asname or item.name, node, position=self._end(node))
 
     def visit_Global(self, node: ast.Global) -> None:
         self.nonlocal_names.update(node.names)
@@ -526,8 +656,8 @@ class _DynamicImportProfile(ast.NodeVisitor):
         self._scope_kinds = ["module"]
 
     @staticmethod
-    def _position(node: ast.AST) -> tuple[int, int]:
-        return getattr(node, "lineno", 0), getattr(node, "col_offset", 0)
+    def _position(node: ast.AST) -> tuple[int, int, int]:
+        return getattr(node, "lineno", 0), getattr(node, "col_offset", 0), 1
 
     @staticmethod
     def _latest_event(
@@ -551,7 +681,8 @@ class _DynamicImportProfile(ast.NodeVisitor):
                 continue
             if kind in {"function", "comprehension"}:
                 return True
-            if self._latest_event(events, name, node) is not None:
+            selected = self._latest_event(events, name, node)
+            if selected is not None and selected.bound:
                 return True
         return False
 
@@ -571,7 +702,11 @@ class _DynamicImportProfile(ast.NodeVisitor):
                 )
             selected = self._latest_event(events, name, node)
             if selected is not None:
-                return selected.provenance == "sys"
+                if selected.bound:
+                    return selected.provenance == "sys"
+                if kind == "class":
+                    continue
+                return False
             if kind != "class":
                 return False
         return False
@@ -643,7 +778,7 @@ class _DynamicImportProfile(ast.NodeVisitor):
             if isinstance(name, ast.Name) and isinstance(name.ctx, ast.Store)
         }
         events = {
-            name: (_BindingEvent(self._position(first.target), "other"),)
+            name: (_BindingEvent(self._position(first.target), True, "other"),)
             for name in bindings
         }
         self._scopes.append(frozenset(bindings))
@@ -662,7 +797,11 @@ class _DynamicImportProfile(ast.NodeVisitor):
             self._scopes[-1] = frozenset(bindings)
             self._events[-1].update(
                 {
-                    name: (_BindingEvent(self._position(generator.target), "other"),)
+                    name: (
+                        _BindingEvent(
+                            self._position(generator.target), True, "other"
+                        ),
+                    )
                     for name in added
                 }
             )
@@ -1017,8 +1156,8 @@ def _execute_entrypoint(
         if contract.fixture == "isolated-indexed-copy":
             fixture.mkdir()
             materialize_index(repository, fixture)
-            subprocess.run(("git", "init", "-q"), cwd=fixture, check=True)
-            subprocess.run(("git", "add", "-A"), cwd=fixture, check=True)
+            git_output(fixture, ("init", "-q"))
+            git_output(fixture, ("add", "-A"))
             for selected in contract.remove:
                 target = fixture.joinpath(*PurePosixPath(selected).parts)
                 if not target.is_file():
@@ -1031,29 +1170,15 @@ def _execute_entrypoint(
             if contract.remove:
                 raise ValueError("Git entrypoint fixtures cannot remove files")
             fixture.mkdir()
-            subprocess.run(("git", "init", "-q", "-b", "main"), cwd=fixture, check=True)
-            subprocess.run(
-                ("git", "config", "user.email", "fixture@example.invalid"),
-                cwd=fixture,
-                check=True,
+            git_output(fixture, ("init", "-q", "-b", "main"))
+            git_output(
+                fixture, ("config", "user.email", "fixture@example.invalid")
             )
-            subprocess.run(
-                ("git", "config", "user.name", "Fixture"),
-                cwd=fixture,
-                check=True,
-            )
+            git_output(fixture, ("config", "user.name", "Fixture"))
             (fixture / "content.txt").write_text("fixture\n", encoding="utf-8")
-            subprocess.run(("git", "add", "content.txt"), cwd=fixture, check=True)
-            subprocess.run(
-                ("git", "commit", "-q", "-m", "fixture"), cwd=fixture, check=True
-            )
-            oid = subprocess.run(
-                ("git", "rev-parse", "HEAD"),
-                cwd=fixture,
-                check=True,
-                capture_output=True,
-                text=True,
-            ).stdout.strip()
+            git_output(fixture, ("add", "content.txt"))
+            git_output(fixture, ("commit", "-q", "-m", "fixture"))
+            oid = git_output(fixture, ("rev-parse", "HEAD")).decode("ascii").strip()
             manifest = fixture / "manifest.tsv"
             manifest.write_text(
                 "oid\tcommit_disposition\treference\tauthority\n"

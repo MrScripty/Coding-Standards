@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import subprocess
 import tempfile
 import textwrap
 import tomllib
@@ -21,6 +20,7 @@ from ..python_packages import (
     execute_python_package_contract,
     python_package_authority_paths,
 )
+from tools.standards_authority.standards_authority import GitIndexError, git_output
 
 
 @dataclass(frozen=True, slots=True)
@@ -96,7 +96,22 @@ class PythonPackageContractCheck:
             ]
         diagnostics = []
         for case in cases:
-            observed = _audit_fixture(case)
+            try:
+                observed = _audit_fixture(case)
+            except GitIndexError as error:
+                diagnostics.append(
+                    Diagnostic(
+                        "PYTHON_PACKAGE.FIXTURE_UNAVAILABLE",
+                        "unavailable",
+                        "package fixture Git authority is unavailable",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.fixtures,
+                        field=case["id"],
+                        observed=str(error),
+                    )
+                )
+                continue
             expected = tuple(case["expected_codes"])
             if observed != expected:
                 diagnostics.append(
@@ -193,7 +208,7 @@ def _fixture_cases(raw: object) -> tuple[dict[str, object], ...]:
 def _audit_fixture(case: dict[str, object]) -> tuple[str, ...]:
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
-        subprocess.run(("git", "init", "-q"), cwd=root, check=True, capture_output=True)
+        git_output(root, ("init", "-q"))
         _write_package(
             root,
             "b",
@@ -208,7 +223,7 @@ def _audit_fixture(case: dict[str, object]) -> tuple[str, ...]:
             tuple(case["consumer_dependencies"]),
             str(case["consumer_source"]),
         )
-        subprocess.run(("git", "add", "-A"), cwd=root, check=True, capture_output=True)
+        git_output(root, ("add", "-A"))
         return tuple(sorted(item.code for item in audit_python_packages(root)))
 
 

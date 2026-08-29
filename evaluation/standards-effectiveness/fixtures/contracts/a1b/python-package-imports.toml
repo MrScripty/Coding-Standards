@@ -47,6 +47,38 @@ __all__ = ("loaded",)
 expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
 
 [[cases]]
+id = "assignment-rhs-before-binding"
+consumer_dependencies = []
+consumer_source = '''
+eval = eval("40 + 2")
+__all__ = ("eval",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
+id = "deleted-binding"
+consumer_dependencies = []
+consumer_source = '''
+eval = lambda value: value
+del eval
+run = eval("40 + 2")
+__all__ = ("run",)
+'''
+expected_codes = ["PYTHON_PACKAGE.DYNAMIC_IMPORT"]
+
+[[cases]]
+id = "exception-alias"
+consumer_dependencies = []
+consumer_source = '''
+try:
+    raise ValueError("fixture")
+except ValueError as eval:
+    run = str(eval)
+__all__ = ("run",)
+'''
+expected_codes = []
+
+[[cases]]
 id = "frozen-dynamic-import-alias"
 consumer_dependencies = []
 consumer_source = '''
