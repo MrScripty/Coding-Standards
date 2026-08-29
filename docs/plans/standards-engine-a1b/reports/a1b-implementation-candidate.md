@@ -1,10 +1,10 @@
 # Standards Engine A1b Implementation Candidate
 
-**Status:** `Rejected by final content-bound review`
+**Status:** `Accepted by final content-bound review`
 
-**Implementation commit:** `88f93a33e490373fd32106d163795d21d0bd3eb7`
+**Implementation commit:** `84412f22fa9fe082f089eaa347c30c23f185ffee`
 
-**Implementation tree:** `69b7cc8f2222cc766b1885ac70187cc0e77fea73`
+**Implementation tree:** `8e0f96a61fcea2398418b17d16a061c20f7463f5`
 
 **Recorded:** `2026-08-29`
 
@@ -14,12 +14,12 @@ evidence about that content and do not invalidate the reviewed subject. Only a
 material change to the identified implementation content requires a new review.
 
 This candidate supersedes rejected implementation commit
-`23706513c65185f5a8204ffa1c4e8be2c74f1729`, tree
-`1de23986a1f4e577d650e0f103c59da1265054c7`. The replacement preserves the C7
-architecture while correcting the public Git-reachability, bounded
-control-flow, simple capability-provenance, and assignment-target-order defects
-found by that review. The rejected boundary remains historical evidence and is
-not used for A1B-A11.
+`88f93a33e490373fd32106d163795d21d0bd3eb7`, tree
+`69b7cc8f2222cc766b1885ac70187cc0e77fea73`. The replacement preserves the C7
+architecture while correcting the conditional branch-exit, nested-scope
+capability-provenance, and augmented-assignment-order defects found by that
+review. The rejected boundary remains historical evidence and is not used for
+A1B-A11.
 
 ## Candidate Scope
 
@@ -56,14 +56,14 @@ The completed boundary incorporates every prior correction and additionally:
    Standards Authority root;
 2. maps Git process unavailability and nonzero status into public
    Git-reachability diagnostics without a second subprocess owner;
-3. records scope-local logical execution order and branch context for governed
-   binding events;
-4. merges complete conditional branches when both establish the same definite
-   binding;
-5. preserves possible `sys` capability provenance through simple direct and
-   conditional aliases;
-6. evaluates assignment right-hand sides before binding targets and binds
-   chained targets from left to right;
+3. joins every already-supported branching visitor through one abstract state
+   operation that distinguishes definite binding from possible `sys`
+   provenance;
+4. preserves possible unbinding across one- and two-armed conditionals, loops,
+   and `try` paths;
+5. carries possible `sys` capability provenance into nested-scope lookup;
+6. evaluates ordinary and augmented assignment in target/value load then store
+   order while preserving left-to-right chained targets;
 7. verifies hostile inherited Git state and unavailable Git through the direct
    public reachability entrypoint; and
 8. registers the retained Git-reachability implementation as an exact node and
@@ -106,8 +106,8 @@ The clean implementation tree passed:
 | Standards Analysis | 66 tests passed |
 | Standards Engine | 36 tests passed |
 | Standards Contracts | 18 tests passed |
-| Standards Verifier | 429 tests passed |
-| CPython 3.11 and 3.12 correction matrix | 41 governed-source and Git-reachability tests passed in each exact locked environment |
+| Standards Verifier | 433 tests passed |
+| CPython 3.11 and 3.12 correction matrix | 45 governed-source and Git-reachability tests passed in each exact locked environment |
 | A1b public cutover | Generated-contract semantic conformance, immutable-authority closure, and public-cutover suites passed under hostile inherited `GIT_DIR` and `GIT_INDEX_FILE` on both supported Python versions; direct public reachability regressions also passed |
 | Generated projections | Fresh against their authoritative inputs |
 | Declarative verification | 226 of 226 registered suites passed |
@@ -118,19 +118,9 @@ The worktree was clean when the implementation commit and tree were recorded.
 
 ## Review Disposition
 
-Independent Standards and Specification review rejected the exact commit and
-tree above. Public Git reachability, unavailable-Git diagnostics, the named
-flat-branch and alias regressions, migration coverage, and the broad checkpoint
-passed. The review nevertheless reproduced three governed-source defects:
-
-- conditional deletion can expose a builtin capability while an earlier
-  binding remains trusted;
-- conditional `sys` provenance is lost when the use occurs in a nested scope;
-  and
-- augmented assignment can report a benign bound name as a builtin
-  capability.
-
-These constructs are already inside the admitted bounded syntax profile, so
-they cannot be dismissed as unsupported syntax. `A1B-028` is reopened;
-Milestone 3 is `Active`; Milestone 4 and A1B-A11 are blocked; the ADR remains
-`Proposed`; and A2 remains unavailable.
+Independent content-bound review found no Standards or Specification defect in
+the exact commit and tree above. The boundary is accepted by the
+[final acceptance record](a1b-final-acceptance.md). `A1B-028` and the stale
+`A1B-004` lifecycle projection are `resolved`; Milestones 0 through 4,
+A1B-A11, the plan, and the ADR are `Accepted`. A2 remains inactive pending its
+own review and admission.

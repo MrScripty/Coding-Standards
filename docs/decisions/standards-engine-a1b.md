@@ -1,14 +1,15 @@
 # Standards Engine A1b Contract And Authority Foundations
 
-**Status:** Proposed
+**Status:** Accepted
 
 This decision supersedes the A1 contract-compilation, identity, snapshot,
 storage, execution-closure, and public-projection architecture. It also
 supersedes the C1 through C6 A1b planning designs. The active implementation
 authority is the
-[A1b plan](../plans/standards-engine-a1b/plan.md); implementation remains
-blocked until content-bound planning review accepts this decision and its
-machine contracts.
+[A1b plan](../plans/standards-engine-a1b/plan.md). The implementation is
+accepted at commit `84412f22fa9fe082f089eaa347c30c23f185ffee`, tree
+`8e0f96a61fcea2398418b17d16a061c20f7463f5`, by the
+[final content-bound acceptance](../plans/standards-engine-a1b/reports/a1b-final-acceptance.md).
 
 ## Context
 
@@ -591,8 +592,8 @@ Re-plan if:
 
 ## Acceptance
 
-This ADR remains `Proposed` through the atomic cutover. It becomes `Accepted`
-only when one clean implementation boundary has independent content-bound
-acceptance proving the contract, identity, storage, capture, operation,
+This ADR is `Accepted` for the exact implementation boundary identified by the
+[final content-bound acceptance](../plans/standards-engine-a1b/reports/a1b-final-acceptance.md).
+That review proves the contract, identity, storage, capture, operation,
 consumed-trust, package, migration-deletion, consumer-disposition, and coverage
-claims. Any blocked consumer keeps A1b incomplete.
+claims with no blocked consumer. A2 remains outside this decision.

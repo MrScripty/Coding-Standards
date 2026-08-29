@@ -1253,3 +1253,25 @@
   Milestone 3 is `Implemented`; Milestone 4 is `Active` for A1B-A11. The ADR
   remains `Proposed`, final A1b acceptance remains pending, and A2 remains
   unavailable.
+
+## 2026-08-29 - A1b Final Content-Bound Acceptance
+
+- Independent Standards and Specification review accepted implementation
+  `84412f22fa9fe082f089eaa347c30c23f185ffee`, tree
+  `8e0f96a61fcea2398418b17d16a061c20f7463f5`, with zero findings.
+- The review independently reproduced one- and two-armed conditional deletion,
+  loop and `try` branch exits, nested conditional `sys` provenance, benign and
+  capability-bearing augmented assignment, and class, function, and
+  comprehension sibling-scope behavior.
+- The correction remains one bounded abstract branch-state join. It introduces
+  no interpreter, parallel semantic authority, mutable relationship-count
+  oracle, or hardcoded generated identity.
+- The 45-test correction matrix passed on both exact locked Python versions.
+  Broad verification passed 679 package tests plus separate required-real
+  evidence, 226 of 226 declarative suites, all 53 retained Bash migration
+  checkers, generated freshness, Ruff, plan validation, and diff hygiene.
+- A1B-A1 through A1B-A11 and Milestones 0 through 4 are `satisfied` or
+  `Accepted`; the plan and ADR are `Accepted`. The stale A1B-004 projection is
+  `resolved` by the already accepted dependency-provenance and required-real
+  oracle evidence.
+- A2 remains inactive and requires separate review and admission.

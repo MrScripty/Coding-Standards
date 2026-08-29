@@ -1,13 +1,12 @@
 # Plan: Standards Engine A1b Contract And Authority Foundations
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 4 content-bound acceptance
+**Current phase:** A1b accepted
 
-**Next slice:** Identify the corrected implementation boundary and obtain one
-independent content-bound Standards and Specification review
+**Next slice:** None within A1b; A2 requires separate review and admission
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -45,7 +44,7 @@ implementation begins.
 | A1B-A8 | Accepted and proposed policy-impact catalogs compile; every changed implementation node and relationship has a disposition; selected consumers equal disposition subjects; required coverage subjects equal valid certificate subjects. | `integration` | `not-applicable` | `automated` | `satisfied` | Provider-v5 coverage revalidation in the complete checkpoint recorded by [corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A9 | Existing routing, analysis, coverage, reading, rendering, and inspection behavior remains valid except for declared contract, handle, identity, and storage replacements. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
 | A1B-A10 | All focused package tests, registered declarative suites, retained migration checkers, generated freshness, plan checks, and diff hygiene pass without mutable catalog-count assertions. | `integration` | `not-applicable` | `automated` | `satisfied` | [Corrected cutover evidence](reports/a1b-cutover-evidence.md) |
-| A1B-A11 | One clean implementation boundary has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. The review binds the identified content; later evidence or lifecycle recording does not invalidate unchanged reviewed semantics. | `release-artifact` | `not-applicable` | `manual` | `pending` | Pending final acceptance report |
+| A1B-A11 | One clean implementation boundary has a reviewer-owned acceptance record confirming every claim, migration deletion, consumer disposition, and exclusion. The review binds the identified content; later evidence or lifecycle recording does not invalidate unchanged reviewed semantics. | `release-artifact` | `not-applicable` | `manual` | `satisfied` | [Final content-bound acceptance](reports/a1b-final-acceptance.md) |
 
 ## Scope
 
@@ -385,7 +384,7 @@ manual exact-lock final-acceptance claim; A1B-A6P must already be satisfied
 before start. Record the checkpoint when it materially changes current plan or
 verification authority; Commit decides its coherent commit boundary.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 1: Isolated Contract Compiler
 
@@ -426,7 +425,7 @@ of A1B-A3 pass while every accepted production A1 artifact remains byte
 identical. Record the checkpoint when it materially changes current plan or
 verification authority; Commit decides its coherent commit boundary.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 2: Isolated Authority Repository
 
@@ -539,7 +538,7 @@ adapters.
 Record the checkpoint when it materially changes current plan or verification
 authority; Commit decides its coherent commit boundary.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 3: Atomic V11 Production Cutover
 
@@ -849,16 +848,16 @@ in one replacement boundary; delete all superseded authority.
   entry. Checker source, dependency topology and fields, and every unrelated
   inventory or graph record must remain byte-identical.
 
-**Acceptance gate:** Every automated objective claim passes. A1B-A6L remains
+**Acceptance gate:** Every automated objective claim passes. A1B-A6L remained
 satisfied from the prior independent provenance review; final manual A1B-A11
-remains pending content-bound acceptance.
+was deferred to Milestone 4 and is now satisfied by the final acceptance.
 Any required path outside this write set, any substantive ADR change, blocked
 disposition, or material semantic horizon change after claim finalization is a
 re-plan trigger. A generated digest or handle change alone is not. The
-admitted ADR remains byte-identical and `Proposed` throughout Milestone 3;
-Milestone 4 alone may change its status after content-bound acceptance.
+admitted ADR remained byte-identical and `Proposed` throughout Milestone 3;
+Milestone 4 changed its status only after content-bound acceptance.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 4: Content-Bound Acceptance
 
@@ -879,24 +878,24 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 **Tasks:**
 
-- [ ] Record the identified implementation commit/tree or equivalent artifact
+- [x] Record the identified implementation commit/tree or equivalent artifact
   digests, dependency resolution,
   generated outputs, owner-local identity contracts, object kinds, authority
   views, execution closures, node/edge/consumer dispositions, coverage
   identities, and complete verification.
-- [ ] Obtain independent Standards and Specification review against that
+- [x] Obtain independent Standards and Specification review against that
   identified content.
-- [ ] Accept only with no blocked claim or consumer and a clean worktree.
-- [ ] Mark the ADR and plan Accepted with the final acceptance evidence.
+- [x] Accept only with no blocked claim or consumer and a clean worktree.
+- [x] Mark the ADR and plan Accepted with the final acceptance evidence.
 
 **Acceptance gate:** Every objective acceptance claim is satisfied.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ## Blockers
 
-- Final manual A1B-A11 content-bound acceptance remains pending. A2 remains
-  unavailable until A1b is independently accepted.
+- No blocker remains within A1b. A2 remains inactive pending its own review and
+  admission.
 
 ## Re-Plan Triggers
 
@@ -967,6 +966,7 @@ reviewed semantics and does not require a prescribed parent/child sequence.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
-- Deferred follow-ups: `A2 remains inactive until A1b is independently accepted`
-- Final status: `Active`
+- Acceptance status: `satisfied`
+- Evidence: [Final content-bound acceptance](reports/a1b-final-acceptance.md)
+- Deferred follow-ups: `A2 requires separate review and admission`
+- Final status: `Accepted`
