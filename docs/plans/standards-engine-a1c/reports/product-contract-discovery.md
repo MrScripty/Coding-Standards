@@ -220,6 +220,11 @@ source-machine paths, and Git object identity do not become semantic content
 identity. The store may use a generated opaque instance identifier, but the
 exact generation mechanism remains an experiment detail.
 
+Agents address snapshots only through that unique opaque root ID. The content
+hash remains an internal deduplication and integrity key; exposing or retaining
+it cannot substitute for the root ID because equal content may have several
+independent lifecycle owners.
+
 Physical deduplication is internal. Purging a snapshot removes that root and
 all solely owned aggregate values. Shared canonical content remains while
 another active or quarantined snapshot owns it. The store must decide this
@@ -251,9 +256,9 @@ experiment variables unless already fixed by the four inherited behaviors.
 1. A later engine invocation starts without a remembered snapshot handle.
 2. An authorized discovery request returns active snapshot-root summaries from
    the configured store. It does not expose child storage objects.
-3. Each summary supplies the opaque handle, active lifecycle state, and enough
-   provenance to distinguish retained roots. Whether caller-authored display
-   labels are needed remains an Interface experiment question.
+3. Each summary supplies the unique opaque handle, active lifecycle state, and
+   contextual provenance. The handle, not content hash, path, project label,
+   commit, or timestamp, addresses the root and allocates dependent work.
 4. The agent selects a root and starts a fresh `query` or `prepare`. Coding
    Standards does not infer that this is a rerun and does not require a prior
    analysis handle.
@@ -301,7 +306,7 @@ runtime implementation.
 | A1C-E1 | What is the smallest clear snapshot-management Interface for agents? | One tagged snapshot-management operation versus explicit create/find/delete/undelete methods over one internal Snapshot Module | Execute every representative workflow; compare caller knowledge, authorization dispatch, generated algebra, failure ownership, and the change path for adding one lifecycle result field |
 | A1C-E2 | Can content identity and lifecycle identity remain separate without duplicating authority? | Content-addressed canonical content plus opaque snapshot roots versus content-only snapshot identity | Create two roots over equal content, attach different children, quarantine one, undelete it, purge it, and prove the other root and shared content remain valid |
 | A1C-E3 | What aggregate persistence shape supplies required replay with less machinery than A1b? | Snapshot-owned aggregate records with derived projections versus independently durable storage for every inspectable child | Cold process query/analysis/inspection, child-handle resolution, aggregate deletion, deletion test, and representative change Locality |
-| A1C-E4 | Which snapshot summary fields are genuinely required? | Minimal handle/lifecycle/provenance summary versus optional caller-authored display metadata | Fresh-agent selection across several same-content and different-content roots without exposing paths, storage objects, or semantic claims |
+| A1C-E4 | Which snapshot summary fields are genuinely required? | Unique handle/lifecycle/provenance summary versus content hashes or optional caller-authored display metadata | Address several same-content and different-content roots by unique ID without exposing paths, storage objects, project inference, or semantic claims |
 | A1C-E5 | Which operation/version authority remains necessary? | A1b's per-operation stored authority objects versus domain-owned compatibility constants projected through one facade contract | Change one navigation behavior, one snapshot lifecycle result, and one analysis decision; record every Module and identity that must change |
 | A1C-E6 | Which accepted verification machinery remains necessary after aggregation? | Current direct-object, package-governance, closure, and coverage evidence versus claim-matched substitutes at the deeper aggregate Interface | Claim-level failure injection, external-schema oracle preservation, cold reconstruction, deletion results, and evidence-substitution analysis |
 
@@ -310,9 +315,9 @@ paths. They cannot modify A1b production packages, canonical contracts, policy
 authority, or A2 code under the discovery milestone. Exact prototype paths and
 commands belong to the next plan revision.
 
-## A1b Guarantee Classification
+## Post-Experiment A1b Guarantee Classification
 
-| A1b guarantee or mechanism | A1c disposition before experiments | Reason |
+| A1b guarantee or mechanism | A1c disposition | Reason |
 | --- | --- | --- |
 | `query`, `prepare`, `resolve`, and `inspect` behavior | required | Representative navigation and multi-turn analysis workflows require them |
 | Typed results, explicit uncertainty, and no valid-looking fallback | required | Agents must distinguish unavailable, invalid, unsupported, unauthorized, and unresolved outcomes |
@@ -320,13 +325,13 @@ commands belong to the next plan revision.
 | Separate schema equality, domain equality, and identity | required | They answer different contracts and A1 conflation caused a demonstrated defect |
 | Immutable snapshot content and analysis branching | required | Cross-invocation workflows and coordinator/subagent handoff cannot depend on mutable ambient authority |
 | Coding Standards-owned durable state | required | Normal tool deployment terminates after each request and retains non-derivable decisions |
-| One independently stored object per inspectable child | experimental | No independent child lifecycle exists; A1c requires only correct inspection through the owning aggregate |
-| SQLite | experimental | Durable transactional storage is required; the physical schema and Adapter remain to be compared |
+| One independently stored object per inspectable child | replace | No independent child lifecycle exists; store the owning input/decision aggregate once and derive child inspection indexes and projections |
+| SQLite | selected candidate | The disposable probe demonstrated the required current-version transactions, cold reopen, closed-copy portability, shared-content ownership, and interruption rollback; the exact production schema remains implementation-plan work |
 | Engine backup/restore Interface | unnecessary | File administration owns backup; quarantine owns accidental deletion |
 | Cross-engine state migration | deferred | No release or overlap contract exists before feature completeness |
 | Linux-only native capture and publication | insufficient | A1c targets Linux, Windows, and macOS; design cannot embed POSIX identity |
-| Exact coverage replay and byte-complete global invalidation | experimental | Coverage must prevent false empty impact, but historical replay and global invalidation are not yet product requirements |
-| Custom governed-source interpreter | experimental | Repository architecture discipline matters, but the incumbent mechanism has no independent product caller |
+| Exact coverage replay and byte-complete global invalidation | split | Preserve exact current-engine replay from immutable snapshots and retained decisions; use typed dependency-local coverage identity and keep repository-global freshness outside product identity |
+| Custom governed-source interpreter | unnecessary as product authority | Repository architecture discipline remains Verification-owned, but the incumbent mechanism has no independent Standards Engine caller and must justify its own continued evidence cost |
 
 ## Current-Tree Consumer And State Revalidation
 

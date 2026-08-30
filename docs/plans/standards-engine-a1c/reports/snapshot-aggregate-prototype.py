@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import inspect
 import json
+import shutil
 import sqlite3
 import tempfile
 from dataclasses import dataclass
@@ -64,7 +65,6 @@ class SnapshotSummary:
     handle: str
     lifecycle: Literal["active", "quarantined"]
     source_commit: str
-    content_id: str
     created_at: int
     purge_deadline: int | None
 
@@ -86,6 +86,7 @@ class SnapshotModule:
         snapshot_ids: Callable[[], str],
         *,
         quarantine_seconds: int = DEFAULT_QUARANTINE_SECONDS,
+        purge_probe: Callable[[str], None] | None = None,
     ) -> None:
         if type(quarantine_seconds) is not int or quarantine_seconds <= 0:
             raise SnapshotFailure("CONFIG.INVALID_QUARANTINE_DURATION")
@@ -93,6 +94,7 @@ class SnapshotModule:
         self._now = now
         self._snapshot_ids = snapshot_ids
         self._quarantine_seconds = quarantine_seconds
+        self._purge_probe = purge_probe
         self._connection = sqlite3.connect(database)
         self._connection.execute("PRAGMA foreign_keys = ON")
         self._create_schema()
@@ -274,6 +276,8 @@ class SnapshotModule:
                     "DELETE FROM snapshot_roots WHERE snapshot_id = ?",
                     (snapshot_id,),
                 )
+                if self._purge_probe is not None:
+                    self._purge_probe(str(snapshot_id))
                 self._connection.execute(
                     """
                     DELETE FROM canonical_content
@@ -290,7 +294,6 @@ class SnapshotModule:
             self._raise_missing(snapshot_id)
         return SnapshotSummary(
             handle=str(row[0]),
-            content_id=str(row[1]),
             source_commit=str(row[2]),
             created_at=int(row[3]),
             lifecycle=str(row[4]),  # type: ignore[arg-type]
@@ -417,6 +420,34 @@ def expect_failure(code: str, action: Callable[[], object]) -> None:
     raise AssertionError(f"expected {code}")
 
 
+def coverage_probe_id(
+    *,
+    subject: str,
+    subject_digest: str,
+    relationship_digest: str,
+    fact_contract_digest: str,
+    horizon: tuple[str, ...],
+    repository_members: dict[str, str],
+) -> str:
+    """Model coverage identity from only authored, coverage-relevant inputs."""
+
+    selected_members = [
+        [member, repository_members[member]] for member in sorted(horizon)
+    ]
+    payload = json.dumps(
+        {
+            "subject": subject,
+            "subject_digest": subject_digest,
+            "relationship_digest": relationship_digest,
+            "fact_contract_digest": fact_contract_digest,
+            "horizon_members": selected_members,
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return "coverage-probe:sha256:" + hashlib.sha256(payload).hexdigest()
+
+
 def run() -> dict[str, object]:
     now = [2_000_000_000]
 
@@ -436,10 +467,27 @@ def run() -> dict[str, object]:
         first = explicit.create_snapshot()
         second = explicit.create_snapshot()
         assert first.handle != second.handle
-        assert first.content_id == second.content_id
         assert source.calls == 2
-        assert module.state()["content_count"] == 1
-        cases["same-content-isolation"] = module.state()
+        initial_state = module.state()
+        assert initial_state["content_count"] == 1
+        roots = initial_state["roots"]
+        assert isinstance(roots, list)
+        assert roots[0]["content_id"] == roots[1]["content_id"]
+        cases["same-content-isolation"] = initial_state
+
+        active = explicit.find_snapshots()
+        assert tuple(item.handle for item in active) == (first.handle, second.handle)
+        public_fields = tuple(SnapshotSummary.__dataclass_fields__)
+        assert "content_id" not in public_fields
+        cases["active-discovery"] = {
+            "handles": [item.handle for item in active],
+            "public_fields": public_fields,
+        }
+        cases["unique-id-addressing"] = {
+            "first": first.handle,
+            "second": second.handle,
+            "same_content_is_internal": True,
+        }
 
         first_children = module.add_analysis(
             first.handle,
@@ -475,12 +523,53 @@ def run() -> dict[str, object]:
         explicit.delete_snapshot(first.handle)
         module.close()
         source.available = False
-        reopened = SnapshotModule(database, source, clock, ids)
+        interrupt_purge = [False]
+
+        def purge_probe(snapshot_id: str) -> None:
+            if interrupt_purge[0]:
+                raise RuntimeError(f"PROTOTYPE.INTERRUPT:{snapshot_id}")
+
+        reopened = SnapshotModule(
+            database,
+            source,
+            clock,
+            ids,
+            purge_probe=purge_probe,
+        )
         assert reopened.inspect_child(second_children[0])["fact"] == "change.affects_docs"
         assert source.calls == 2
-        cases["cold-reopen"] = reopened.state()
+        cold_state = reopened.state()
+        cases["cold-reopen"] = cold_state
+
+        reopened.close()
+        copied_database = Path(temporary) / "copied-snapshot-store.sqlite3"
+        shutil.copy2(database, copied_database)
+        copied = SnapshotModule(copied_database, source, clock, SequenceIds("copied"))
+        assert copied.state() == cold_state
+        assert copied.inspect_child(second_children[0])["fact"] == "change.affects_docs"
+        cases["closed-store-copy"] = copied.state()
+        copied.close()
+        reopened = SnapshotModule(
+            database,
+            source,
+            clock,
+            ids,
+            purge_probe=purge_probe,
+        )
 
         now[0] += DEFAULT_QUARANTINE_SECONDS + 1
+        interrupt_purge[0] = True
+        try:
+            reopened.find_snapshots()
+        except RuntimeError as error:
+            assert str(error) == f"PROTOTYPE.INTERRUPT:{first.handle}"
+        else:
+            raise AssertionError("expected interrupted purge")
+        interrupted_state = reopened.state()
+        assert interrupted_state == cold_state
+        cases["interrupted-purge-rollback"] = interrupted_state
+
+        interrupt_purge[0] = False
         assert tuple(item.handle for item in reopened.find_snapshots()) == (second.handle,)
         expect_failure(
             "SNAPSHOT.EXPIRED", lambda: reopened.undelete_snapshot(first.handle)
@@ -522,7 +611,7 @@ def run() -> dict[str, object]:
         explicit_result = ExplicitSnapshotInterface(explicit_module).create_snapshot()
         tagged_result = TaggedSnapshotInterface(tagged_module).snapshots({"kind": "create"})
         assert isinstance(tagged_result, SnapshotSummary)
-        assert explicit_result.content_id == tagged_result.content_id
+        assert explicit_result.source_commit == tagged_result.source_commit
         cases["interface-parity"] = {
             "explicit_public_methods": [
                 "create_snapshot",
@@ -548,6 +637,46 @@ def run() -> dict[str, object]:
             ),
         )
         cases["invalid-config-rejected"] = True
+
+        repository_members = {
+            "consumer:documentation": "digest:docs-v1",
+            "consumer:prompt": "digest:prompt-v1",
+            "unrelated:report": "digest:report-v1",
+        }
+        coverage_inputs = {
+            "subject": "policy:example",
+            "subject_digest": "digest:policy-v1",
+            "relationship_digest": "digest:relationships-v1",
+            "fact_contract_digest": "digest:facts-v1",
+            "horizon": ("consumer:documentation", "consumer:prompt"),
+        }
+        base_coverage = coverage_probe_id(
+            **coverage_inputs,
+            repository_members=repository_members,
+        )
+        unrelated_change = dict(repository_members)
+        unrelated_change["unrelated:report"] = "digest:report-v2"
+        assert coverage_probe_id(
+            **coverage_inputs,
+            repository_members=unrelated_change,
+        ) == base_coverage
+        relevant_change = dict(repository_members)
+        relevant_change["consumer:prompt"] = "digest:prompt-v2"
+        changed_member = coverage_probe_id(
+            **coverage_inputs,
+            repository_members=relevant_change,
+        )
+        changed_relationship = coverage_probe_id(
+            **(coverage_inputs | {"relationship_digest": "digest:relationships-v2"}),
+            repository_members=repository_members,
+        )
+        assert changed_member != base_coverage
+        assert changed_relationship != base_coverage
+        cases["coverage-local-invalidation"] = {
+            "unrelated_repository_change_stable": True,
+            "horizon_member_change_invalidates": True,
+            "relationship_change_invalidates": True,
+        }
 
     return {
         "prototype": "a1c-snapshot-aggregate",

@@ -447,3 +447,30 @@
 - A1C-011 records the blocker. Milestone 1 and the plan are Blocked pending the
   product decision; no additional prototype, production, contract, or A2 work
   is available.
+
+## 2026-08-30 - Unique Snapshot Identity Correction And Experiment Completion
+
+- The product owner clarified that agents identify snapshots through unique
+  store-assigned root IDs, not content hashes. Diffs, analyses, and every other
+  dependent value attach to the exact root ID even when several roots share
+  deduplicated immutable content.
+- This decision `Supersedes` the 2026-08-29 snapshot discovery scope blocker
+  and its deployment-scoped/shared-catalog alternatives. Coding Standards does
+  not infer project meaning, and no project label, path, caller context, or
+  one-store-per-project rule is required.
+- The prototype removed content identity from the public summary and passed
+  named unique-ID addressing, active discovery, closed-store copying,
+  interrupted-purge rollback, and dependency-local coverage invalidation in
+  addition to the previously passing lifecycle cases.
+- The composed-design probe selects explicit snapshot methods over one internal
+  Snapshot Module, one SQLite-backed aggregate store, aggregate-derived child
+  inspection, domain-owned compatibility, and claim-matched evidence. It
+  declines independent child storage authority, persisted operation contracts,
+  speculative repository generality, Engine backup/restore, project inference,
+  and repository-global product invalidation.
+- A1C-003 through A1C-005, A1C-007, and A1C-011 are resolved as design issues.
+  Milestone 1 is Implemented and A1C-P3 is satisfied.
+- The current discovery write set does not admit a superseding ADR or exact
+  implementation plan. The plan remains Blocked pending that scope replacement;
+  no production source, public contract, canonical policy, or A2 work is
+  authorized.
