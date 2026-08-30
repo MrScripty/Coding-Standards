@@ -492,3 +492,27 @@
 - The design gate must make every retained owner and future production write
   set exact, disposition every selected A1b consumer, and keep later milestones
   inactive until A1C-P4 and A1C-P5 are satisfied.
+
+## 2026-08-30 - Binding A1c Architecture And Implementation Plan
+
+- The A1c ADR selects eight explicit generated operations, unique opaque
+  snapshot roots, one aggregate SQLite Snapshot Module, one immutable Analysis
+  aggregate, dependency-local coverage, and no A1b compatibility layer.
+- The composed-design reconciliation assigns sanitized Git execution and exact
+  object observation to a small neutral `repository_git` Adapter. Snapshot
+  storage accepts captured content and does not depend on Git; this prevents
+  duplicated security behavior without coupling the Verifier to lifecycle
+  persistence.
+- The A1b-to-A1c migration inventory gives every current component and consumer
+  one retain, replace, or delete disposition and owns exact named path sets for
+  the lower-module foundation, atomic public cutover, verification, authority
+  renewal, and deletion closure.
+- Milestones 3 through 5 separate an independently testable lower foundation,
+  one atomic semantic/public/coverage replacement, and required-real platform
+  acceptance. Listing those sets grants no production authority.
+- A1C-P4 and A1C-P5 are satisfied. Milestone 2 is Implemented and the plan is
+  Planned; Milestone 3 requires an explicit start. A2 and cross-engine state
+  compatibility remain outside the admitted product.
+- Focused plan structure, the executable architecture prototype, generated
+  freshness, the complete declarative and retained-checker checkpoint, and
+  diff hygiene are the selected completion evidence for this design boundary.
