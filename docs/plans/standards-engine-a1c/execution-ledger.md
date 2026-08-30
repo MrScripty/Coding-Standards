@@ -717,3 +717,34 @@
 - A1C-A1 through A1C-A6 are satisfied. Milestone 5 is Implemented and the
   previously planned required-platform and final-acceptance Milestone 6 is now
   Active. A2 remains unavailable.
+
+## 2026-08-30 - Required-Platform Harness Re-Plan Accepted
+
+- Milestone 6 selected real Linux, Windows, and macOS runtime and closed-store
+  transfer evidence, but its registered platform suite contains only a
+  declarative decision table and path-presence check.
+- The former decision that this declarative suite could supply required-real
+  runtime evidence is `Superseded`. The suite remains useful for static policy
+  projection and is not extended into a command runner.
+- The product owner accepted one provider-neutral executable harness and one
+  focused regression under the Standards Engine test owner. Production code,
+  public contracts, suite authority, provider configuration, standards, and A2
+  remain outside the write set.
+- A1C-021 records the implementation and evidence gate. Linux development
+  evidence is supporting evidence only; A1C-A7 remains unsatisfied until the
+  same harness passes on every required real operating-system and Python
+  combination.
+
+## 2026-08-30 - Linux Platform Evidence And Required-Real Blocker
+
+- The provider-neutral harness passed as an executable CLI on real Linux
+  x86_64 with CPython 3.11.14 and 3.12.3. Each run produced a closed store,
+  verified a copied store before opening it, reconstructed against an
+  unrelated Git repository, completed concurrent cold access, exercised all
+  eight public operations, and completed aggregate quarantine and undelete.
+- The focused regression also passed. These results satisfy representative
+  agent-workflow claim A1C-A8 and provide the Linux portion of A1C-A7.
+- No real Windows or macOS execution environment is available in the current
+  development environment, and the repository has no selected runner-provider
+  integration. Milestone 6 and the plan are `Blocked`; Linux success is not a
+  substitute for the remaining required-real evidence.

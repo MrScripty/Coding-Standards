@@ -1,11 +1,11 @@
 # Plan: Standards Engine A1c Product Contract And Architecture
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 6 required-platform and final acceptance
+**Current phase:** Milestone 6 required-platform evidence
 
-**Next slice:** Run the registered A1c platform and closed-store portability
-workflows on real Linux, Windows, and macOS environments
+**Next slice:** Run the provider-neutral A1c harness on real Windows and macOS
+CPython 3.11 and 3.12 environments, including transferred-store consumption
 
 **Acceptance status:** `partial`
 
@@ -43,7 +43,7 @@ implementation scope are admitted.
 | A1C-A5 | Coverage requirements and certificates bind only their typed semantic, relationship, fact-contract, horizon, evidence, and authorization dependencies; unrelated repository or suite-input changes preserve identity while a selected dependency changes it. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
 | A1C-A6 | The complete A1b Authority runtime, wrappers, public v11 forms, historical runtime fixtures, and stale package relationships are absent, with every migration consumer replaced or explicitly retired and no compatibility path. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
 | A1C-A7 | Snapshot creation, closed-store movement, locking, path handling, transaction behavior, cold replay, and quarantine work on real Linux, Windows, and macOS with supported CPython 3.11 and 3.12 combinations. | `system` | `required-real` | `automated` | `pending` | Milestone 6 platform evidence |
-| A1C-A8 | The eight agent-facing workflows produce typed results or exact typed rejections through the real Python facade; agents need no content hashes, Git revisions, database paths, child catalogs, or project labels. | `user-workflow` | `representative` | `automated` | `pending` | Milestones 5 and 6 |
+| A1C-A8 | The eight agent-facing workflows produce typed results or exact typed rejections through the real Python facade; agents need no content hashes, Git revisions, database paths, child catalogs, or project labels. | `user-workflow` | `representative` | `automated` | `satisfied` | [Milestone 6 platform evidence](reports/a1c-platform-evidence.md) |
 
 ## Acceptance Procedures
 
@@ -61,7 +61,7 @@ implementation scope are admitted.
 | A1C-A4 | Close process one, remove access to its repository and runtime collaborators, then use process two to project and advance every advertised handle solely from the copied closed store and declared current contracts. | Analysis and Engine owners | Deferred cross-engine compatibility remains intentionally unproved. |
 | A1C-A5 | Vary one dependency class at a time and compare coverage identities; separately run false-empty horizon fixtures that omit a real consumer. | Analysis and Verification owners | A typed projection can still omit a dependency if no negative fixture selects it. |
 | A1C-A6 | Run package, import, path-state, policy-impact migration, and repository-index checks over the final tree; reject every retired path and old public version. | Migration and Verification owners | An unregistered external consumer cannot be discovered from repository evidence alone. |
-| A1C-A7 | Run the same registered platform suite on real Linux, Windows, and macOS runners across the supported Python matrix and retain environment-qualified results. | Platform owner | Local Linux simulation cannot prove the required platforms. |
+| A1C-A7 | Run `tools/standards_engine/tests/platform_harness.py` on real Linux, Windows, and macOS runners across the supported Python matrix, transfer the closed store and manifest without modification, and retain environment-qualified results. | Platform owner | Local Linux success cannot prove Windows or macOS. |
 | A1C-A8 | Drive the eight public operations through the generated Python facade in a fresh-process harness, including coordinator/subagent handle transfer and typed lifecycle failures. | Engine Interface owner | Direct package tests could bypass the agent-facing Adapter. |
 
 ## Scope
@@ -648,23 +648,30 @@ record content-bound final acceptance without changing product semantics.
 - `docs/plans/standards-engine-a1c/reports/a1c-platform-evidence.md`
 - `docs/plans/standards-engine-a1c/reports/a1c-final-acceptance.md`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
+- `tools/standards_engine/tests/platform_harness.py`
+- `tools/standards_engine/tests/test_platform_harness.py`
 
 Production source, contracts, fixtures, suites, graph authority, attestations,
-standards, and A2 are read-only. A product correction discovered by acceptance
-returns to Milestone 5 through re-planning; it is not repaired inside the
-acceptance write set.
+standards, and A2 are read-only. The two admitted test paths provide one
+provider-neutral executable acceptance harness and its focused regression;
+they do not add product behavior or declarative-suite execution. A product
+correction discovered by acceptance returns to Milestone 5 through
+re-planning; it is not repaired inside the acceptance write set.
 
 **Tasks:**
 
-- [ ] Run the registered A1c platform suite on real Linux, Windows, and macOS
-  with the supported Python matrix and record exact environment-qualified
-  results without treating simulation as substitution.
-- [ ] Move a closed store between supported machines and prove root discovery,
-  query, cold analysis projection, child inspection, quarantine, and undelete
-  without filesystem or path identity leakage.
-- [ ] Run the eight agent-facing workflows through the generated facade and
+- [ ] Run one provider-neutral executable harness on real Linux, Windows, and
+  macOS with CPython 3.11 and 3.12, and record exact environment-qualified
+  results without treating the declarative decision table or simulation as
+  runtime evidence.
+- [ ] Produce a closed store and portable manifest, move both between supported
+  machines, verify the exact closed-store bytes before opening them, and prove
+  root discovery, query, concurrent cold access, analysis projection, child
+  inspection, quarantine, and undelete without source-repository, filesystem,
+  or path identity leakage.
+- [x] Run the eight agent-facing workflows through the generated facade and
   prove opaque handle transfer between coordinator and subagent invocations.
-- [ ] Re-run the complete repository checkpoint, generated freshness, final
+- [x] Re-run the complete repository checkpoint, generated freshness, final
   migration absence checks, coverage/certificate equality, and diff hygiene.
 - [ ] Bind final acceptance to the reviewed implementation content and record
   any deferred compatibility work without prescribing Git topology.
@@ -680,12 +687,13 @@ closed store is not portable; acceptance needs production or authority
 mutation; a final consumer or retained state is discovered; or content-bound
 review finds a material contract or architecture change.
 
-**Status:** `Active`
+**Status:** `Blocked`
 
 ## Blockers
 
-- `none`; Milestone 5 is implemented and Milestone 6 is active across its
-  exact platform-evidence and final-acceptance write set.
+- A1C-021: real Windows and macOS CPython 3.11/3.12 execution environments are
+  unavailable in the current development environment. Linux evidence cannot
+  substitute for the remaining `required-real` claim.
 - Unknown external consumers remain a standing re-plan trigger.
 - A2 work remains unavailable until its own exact milestone and lifecycle
   authority exist.
@@ -712,4 +720,4 @@ review finds a material contract or architecture change.
 
 - Acceptance status: `partial`
 - Deferred follow-ups: `A2 remains unauthorized; cross-engine migration remains deferred until feature completeness`
-- Final status: `Active`
+- Final status: `Blocked`
