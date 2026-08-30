@@ -11,7 +11,8 @@ coverage_evidence_contract = "coverage-evidence.v1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
 ]
 explicit_exclusions = []
-rationale = "The exact core.simplicity-and-complection provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. Its four reviewed relationships are complete, and six redundant bypass relationships were retracted in favor of the actual Architecture and lifecycle owners; no unreviewed or blocked consumer remains."
+rationale = "The exact core.simplicity-and-complection provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its four added A1c consumer relationships and retained relationships are complete; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

@@ -15,9 +15,10 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.declaration-and-semantic-authority provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.declaration-and-semantic-authority provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, corrected, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -35,9 +36,10 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.generated-semantic-conformance provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.generated-semantic-conformance provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, corrected, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -55,9 +57,10 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.identity-versus-instance-equality provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.identity-versus-instance-equality provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -95,7 +98,8 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.version-scope-and-invalidation provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.contracts.version-scope-and-invalidation provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

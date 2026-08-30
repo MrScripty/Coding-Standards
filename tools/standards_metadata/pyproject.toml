@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Neutral canonical standards metadata loader"
 requires-python = ">=3.11,<3.13"
 dependencies = [
-    "standards-authority",
     "standards-identity",
 ]
 

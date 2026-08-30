@@ -13,7 +13,8 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.cross-platform.filesystem-paths provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact topic.cross-platform.filesystem-paths provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its seven added, seven retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

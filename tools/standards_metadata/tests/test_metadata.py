@@ -7,7 +7,11 @@ from pathlib import Path
 
 
 from tools.standards_metadata.standards_metadata import (
+    DirectoryContentSource,
+    FrozenContentSource,
     MetadataError,
+    RecordingContentSource,
+    load_canonical_standards_corpus,
     load_canonical_module_corpus,
     load_module_metadata,
     validate_module_metadata,
@@ -178,6 +182,60 @@ class StandardsMetadataTest(unittest.TestCase):
         with self.assertRaises(MetadataError) as caught:
             load_module_metadata(self.root, "missing.md")
         self.assertEqual(caught.exception.failure.outcome, "unavailable")
+
+    def test_directory_and_frozen_sources_produce_equal_corpora(self) -> None:
+        self.write_module("core.md", "core", role="core")
+        self.write_manifest(("core.md",))
+        self.write(
+            "units/registry.toml",
+            'schema_version = 1\nsources = ["units/core.toml"]\n',
+        )
+        self.write("units/core.toml", "schema_version = 1\n")
+        recording = RecordingContentSource(DirectoryContentSource(self.root))
+
+        first = load_canonical_standards_corpus(
+            recording,
+            "corpus.toml",
+            "units/registry.toml",
+        )
+        frozen = recording.freeze()
+        second = load_canonical_standards_corpus(
+            frozen,
+            "corpus.toml",
+            "units/registry.toml",
+        )
+
+        self.assertEqual(first, second)
+        self.assertEqual(
+            recording.requested_paths,
+            ("core.md", "corpus.toml", "units/core.toml", "units/registry.toml"),
+        )
+
+    def test_frozen_source_rejects_missing_and_contradictory_paths(self) -> None:
+        with self.assertRaises(MetadataError) as caught:
+            FrozenContentSource(
+                (("same.txt", b"first"), ("same.txt", b"second"))
+            )
+        self.assertEqual(caught.exception.failure.code, "CONTENT.CONTRADICTORY_PATH")
+
+        with self.assertRaises(MetadataError) as caught:
+            FrozenContentSource({}).read_bytes("missing.txt")
+        self.assertEqual(caught.exception.failure.code, "INPUT.UNAVAILABLE")
+
+    def test_recording_source_rejects_content_that_changes_during_one_load(self) -> None:
+        class ChangingSource:
+            def __init__(self) -> None:
+                self.calls = 0
+
+            def read_bytes(self, path: str) -> bytes:
+                self.calls += 1
+                return f"version-{self.calls}".encode()
+
+        source = RecordingContentSource(ChangingSource())
+        self.assertEqual(source.read_bytes("input.txt"), b"version-1")
+        with self.assertRaises(MetadataError) as caught:
+            source.read_bytes("input.txt")
+        self.assertEqual(caught.exception.failure.code, "CONTENT.CONTRADICTORY_READ")
 
 if __name__ == "__main__":
     unittest.main()

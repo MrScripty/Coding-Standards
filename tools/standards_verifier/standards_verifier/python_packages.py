@@ -11,8 +11,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Iterable
 
-from tools.standards_authority.standards_authority import (
-    GitIndexError,
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
     git_output,
     indexed_paths,
     materialize_index,
@@ -1090,7 +1090,7 @@ def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
     root = root.resolve()
     try:
         indexed = indexed_paths(root)
-    except GitIndexError as error:
+    except GitRepositoryError as error:
         return (
             PythonPackageFinding(
                 "PYTHON_PACKAGE.GIT_INDEX",

@@ -10,11 +10,16 @@ from pathlib import Path
 
 from tools.graph_engine.graph_engine import GraphContribution
 from tools.standards_applicability.standards_applicability import compile_fact_schema
-from tools.standards_authority.standards_authority import (
-    AuthorityHandle,
-    AuthorityReference,
+from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
+    compile_coverage_definitions,
+    coverage_requirement_id,
+    derive_coverage_requirement,
+    derive_coverage_view,
+    load_coverage_horizon,
+    load_repository_coverage_decisions,
 )
-from tools.standards_identity.standards_identity import encode_identity_value
+from tools.standards_analysis.standards_analysis.keys import analysis_identity
 from tools.standards_metadata.standards_metadata import (
     CanonicalModuleCorpus,
     CanonicalStandardsCorpus,
@@ -27,31 +32,6 @@ from tools.standards_policy_impact.standards_policy_impact import (
     PolicyImpactArtifact,
     PolicyImpactSemantics,
 )
-
-from tools.standards_analysis.standards_analysis import (
-    AUTHORIZATION_GRANT_CODEC,
-    AnalysisError,
-    AuthorizationGrant,
-    CoverageAuthorityIndex,
-    compile_coverage_definitions,
-    derive_coverage_view,
-    load_coverage_horizon,
-    load_repository_coverage_authority,
-    publish_coverage_definitions,
-)
-
-
-class RecordingRepository:
-    def __init__(self) -> None:
-        self.values: list[tuple[object, object]] = []
-
-    def publish(self, codec, value) -> AuthorityHandle:
-        payload = encode_identity_value(codec.encode(value))
-        semantic_id = (
-            f"{codec.object_kind}:sha256:" + hashlib.sha256(payload).hexdigest()
-        )
-        self.values.append((codec, value))
-        return AuthorityHandle(codec.object_kind, semantic_id)
 
 
 class CoverageTest(unittest.TestCase):
@@ -73,8 +53,6 @@ class CoverageTest(unittest.TestCase):
             """,
         )
         self.write("inputs/consumer.md", "# Consumer\n")
-        self.write("evidence.md", "# Reviewed coverage\n")
-        self.write("authorization.md", "# Authorized reviewer\n")
         self.write(
             "suite-registry.toml",
             """
@@ -108,16 +86,18 @@ class CoverageTest(unittest.TestCase):
             edge_source_registry = "edge-sources.toml"
             """,
         )
+        self.write("evidence/review.md", "Reviewed coverage.\n")
+        self.write("evidence/authorization.md", "Authorized reviewer.\n")
         self.write(
-            "authorization-authority.toml",
+            "authorization.toml",
             """
             schema_version = 1
-            issuer_id = "issuer.test"
+            issuer_id = "issuer.coverage"
             issuer_semantic_revision = 1
-            principal_id = "reviewer.test"
+            principal_id = "principal.coverage"
             capability = "standards.review.audit"
-            authorization_evidence = ["authorization.md"]
-            revocation_authority_id = "revocations.test"
+            authorization_evidence = ["evidence/authorization.md"]
+            revocation_authority_id = "authority.revocations"
             revocation_authority_semantic_revision = 1
             revocations = "revocations.toml"
             """,
@@ -126,9 +106,16 @@ class CoverageTest(unittest.TestCase):
             "revocations.toml",
             """
             schema_version = 1
-            authority_id = "revocations.test"
+            authority_id = "authority.revocations"
             semantic_revision = 1
             revoked_grants = []
+            """,
+        )
+        self.write(
+            "attestation-sources.toml",
+            """
+            schema_version = 2
+            sources = ["attestations.toml"]
             """,
         )
 
@@ -181,9 +168,9 @@ class CoverageTest(unittest.TestCase):
 
     def write_suite_projection(self) -> None:
         def digest(path: str) -> str:
-            return (
-                "sha256:" + hashlib.sha256((self.root / path).read_bytes()).hexdigest()
-            )
+            return "sha256:" + hashlib.sha256(
+                (self.root / path).read_bytes()
+            ).hexdigest()
 
         projection = {
             "schema_version": 2,
@@ -205,18 +192,13 @@ class CoverageTest(unittest.TestCase):
                     "state": "present",
                     "digest": digest("inputs/consumer.md"),
                     "uses": [
-                        {
-                            "suite": "coverage",
-                            "check": "input",
-                            "role": "content",
-                        }
+                        {"suite": "coverage", "check": "input", "role": "content"}
                     ],
                 }
             ],
             "repository_index": None,
         }
-        target = self.root / "suite-inputs.json"
-        target.write_text(
+        (self.root / "suite-inputs.json").write_text(
             json.dumps(projection, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
@@ -229,13 +211,12 @@ class CoverageTest(unittest.TestCase):
     ) -> CompiledPolicyImpactSet:
         semantics = {}
         if relationship:
-            program = self.schema.compile({"operator": "always"})
             semantics["edge.policy.consumer"] = PolicyImpactSemantics(
                 "edge.policy.consumer",
                 "workflow.policy.rule",
                 "consumer",
                 "documentation-projection",
-                program,
+                self.schema.compile({"operator": "always"}),
                 None,
                 None,
                 "source-to-consumer",
@@ -270,99 +251,67 @@ class CoverageTest(unittest.TestCase):
             relationship_kind_contract_version=2,
         )
 
-    def authority_index(self) -> tuple[RecordingRepository, CoverageAuthorityIndex]:
+    def definitions(self):
+        compiled = self.compiled(relationship=True)
         horizon = load_coverage_horizon(
-            self.root, self.corpus, self.compiled(), "horizon.toml"
+            self.root, self.corpus, compiled, "horizon.toml"
         )
-        definitions = compile_coverage_definitions(
-            self.corpus, self.compiled(), horizon
-        )
-        repository = RecordingRepository()
-        index = publish_coverage_definitions(
-            repository,  # type: ignore[arg-type]
-            definitions,
-            metadata=AuthorityReference(
-                "canonical-standards-corpus",
-                "canonical-standards-corpus:sha256:" + "1" * 64,
-            ),
-            policy_impact=AuthorityReference(
-                "compiled-policy-impact", "compiled-policy-impact:sha256:" + "2" * 64
-            ),
-            graph=AuthorityReference(
-                "standards-graph", "standards-graph:sha256:" + "3" * 64
-            ),
-            horizon=AuthorityReference(
-                "coverage-horizon",
-                "coverage-horizon:sha256:" + horizon.digest.removeprefix("sha256:"),
-            ),
-        )
-        return repository, index
+        return compile_coverage_definitions(self.corpus, compiled, horizon)
 
-    def write_claim(
+    def write_attestations(
         self,
         *,
-        principal: str = "reviewer.test",
         semantic_revision: int = 1,
-        horizon_version: int = 5,
+        principal: str = "principal.coverage",
+        duplicate: bool = False,
     ) -> None:
-        self.write(
-            "attestations.toml",
-            f"""
-            schema_version = 4
-
+        claim = f"""
             [[attestations]]
             subject = "workflow.policy.rule"
             semantic_revision = {semantic_revision}
             horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-            horizon_version = {horizon_version}
+            horizon_version = 5
             relationship_kind_contract_version = 2
             applicability_language_version = 1
             coverage_evidence_contract = "coverage-evidence.v1"
             conclusion = "complete"
-            evidence = ["evidence.md"]
+            evidence = ["evidence/review.md"]
             explicit_exclusions = []
-            rationale = "The exact registered horizon was reviewed."
+            rationale = "The bounded horizon was reviewed."
             auditor_provenance = "{principal}"
-            """,
-        )
+        """
         self.write(
-            "attestation-sources.toml",
-            'schema_version = 2\nsources = ["attestations.toml"]\n',
+            "attestations.toml",
+            "schema_version = 4\n" + claim + (claim if duplicate else ""),
         )
 
-    def load_claims(
-        self, repository: RecordingRepository, index: CoverageAuthorityIndex
-    ) -> CoverageAuthorityIndex:
-        return load_repository_coverage_authority(
+    def load_decisions(self):
+        return load_repository_coverage_decisions(
             self.root,
-            repository,  # type: ignore[arg-type]
-            index,
+            self.definitions(),
             attestation_registry="attestation-sources.toml",
-            authorization_authority="authorization-authority.toml",
+            authorization_authority="authorization.toml",
             revocations="revocations.toml",
         )
 
-    def test_horizon_uses_registered_suite_inputs_and_fingerprints_content(
+    def test_horizon_fingerprints_registered_content_not_generated_projection(
         self,
     ) -> None:
         first = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
         )
-        ids = {member.id for member in first.members}
-        self.assertIn("suite:coverage", ids)
-        self.assertIn("repository:inputs/consumer.md", ids)
 
-        self.write("inputs/consumer.md", "# Consumer\n\nNow consumes policy.\n")
-        with self.assertRaises(AnalysisError) as caught:
-            load_coverage_horizon(
-                self.root, self.corpus, self.compiled(), "horizon.toml"
-            )
-        self.assertEqual(caught.exception.failure.code, "SUITE_INPUT.STALE")
-        self.write_suite_projection()
-        second = load_coverage_horizon(
+        self.write("suite-inputs.json", "{}\n")
+        projection_changed = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
         )
-        self.assertNotEqual(first.digest, second.digest)
+        self.assertEqual(first.digest, projection_changed.digest)
+
+        self.write("inputs/consumer.md", "# Consumer\n\nNow consumes policy.\n")
+        content_changed = load_coverage_horizon(
+            self.root, self.corpus, self.compiled(), "horizon.toml"
+        )
+        self.assertNotEqual(first.digest, content_changed.digest)
 
     def test_reading_authority_label_does_not_change_coverage(self) -> None:
         compiled = self.compiled()
@@ -371,23 +320,19 @@ class CoverageTest(unittest.TestCase):
         reading_only = load_coverage_horizon(
             self.root,
             self.corpus,
-            replace(
-                compiled,
-                artifacts={"consumer": replace(artifact, authority="evidence")},
-            ),
+            replace(compiled, artifacts={"consumer": replace(artifact, authority="evidence")}),
             "horizon.toml",
         )
         self.assertEqual(first.digest, reading_only.digest)
 
     def test_unrelated_relationship_does_not_change_subject_definition(self) -> None:
         compiled = self.compiled()
-        program = self.schema.compile({"operator": "always"})
         unrelated = PolicyImpactSemantics(
             "edge.other.consumer",
             "workflow.other.rule",
             "consumer",
             "documentation-projection",
-            program,
+            self.schema.compile({"operator": "always"}),
             None,
             None,
             "source-to-consumer",
@@ -406,128 +351,113 @@ class CoverageTest(unittest.TestCase):
             derive_coverage_view(unit, changed, horizon),
         )
 
-    def test_repository_claim_constructs_v3_grant_attestation_and_certificate(
-        self,
-    ) -> None:
-        repository, index = self.authority_index()
-        subject = index.subjects["workflow.policy.rule"]
-        self.write_claim()
-
-        resolved = self.load_claims(repository, index)
-
-        published = resolved.subjects["workflow.policy.rule"]
-        self.assertIsNotNone(published.attestation)
-        self.assertIsNotNone(published.certificate)
-        grants = [
-            value
-            for codec, value in repository.values
-            if codec is AUTHORIZATION_GRANT_CODEC
-        ]
-        self.assertEqual(len(grants), 1)
-        self.assertIsInstance(grants[0], AuthorizationGrant)
-        self.assertEqual(grants[0].subject_id, subject.requirement.semantic_id)
-
-    def test_incompatible_semantic_contract_is_not_current_coverage(self) -> None:
-        repository, index = self.authority_index()
-        self.write_claim(semantic_revision=2)
-
-        resolved = self.load_claims(repository, index)
-
-        subject = resolved.subjects["workflow.policy.rule"]
-        self.assertIsNone(subject.attestation)
-        self.assertIsNone(subject.certificate)
-
-    def test_wrong_principal_is_rejected(self) -> None:
-        repository, index = self.authority_index()
-        self.write_claim(principal="reviewer.other")
-        with self.assertRaises(AnalysisError) as caught:
-            self.load_claims(repository, index)
-        self.assertEqual(
-            caught.exception.failure.code, "COVERAGE.UNAUTHORIZED_PRINCIPAL"
+    def test_selected_relationship_changes_only_its_subject_requirement(self) -> None:
+        without_relationship = self.compiled()
+        with_relationship = self.compiled(relationship=True)
+        first_horizon = load_coverage_horizon(
+            self.root, self.corpus, without_relationship, "horizon.toml"
+        )
+        second_horizon = load_coverage_horizon(
+            self.root, self.corpus, with_relationship, "horizon.toml"
+        )
+        unit = self.corpus.policy_units[0]
+        first = derive_coverage_requirement(
+            derive_coverage_view(unit, without_relationship, first_horizon)
+        )
+        second = derive_coverage_requirement(
+            derive_coverage_view(unit, with_relationship, second_horizon)
         )
 
-    def test_revoked_grant_is_rejected(self) -> None:
-        repository, index = self.authority_index()
-        self.write_claim()
-        self.load_claims(repository, index)
-        grant = next(
-            value
-            for codec, value in repository.values
-            if codec is AUTHORIZATION_GRANT_CODEC
+        self.assertNotEqual(first, second)
+        definitions = compile_coverage_definitions(
+            self.corpus, with_relationship, second_horizon
+        )
+        self.assertEqual(tuple(definitions.requirements), (unit.id,))
+
+    def test_current_repository_attestation_is_validated_and_loaded(self) -> None:
+        self.write_attestations()
+
+        decisions = self.load_decisions()
+
+        self.assertEqual(decisions.covered_subjects, {"workflow.policy.rule"})
+        attestation = decisions.attestations["workflow.policy.rule"]
+        authorization_id = attestation["authorization_id"]
+        self.assertIn(authorization_id, decisions.authorization_records)
+        self.assertEqual(
+            decisions.input_sources,
+            tuple(sorted(decisions.input_sources)),
+        )
+        self.assertTrue(
+            {
+                "attestation-sources.toml",
+                "attestations.toml",
+                "authorization.toml",
+                "revocations.toml",
+                "evidence/review.md",
+                "evidence/authorization.md",
+            }.issubset(decisions.input_sources)
+        )
+
+    def test_stale_repository_attestation_is_not_current_coverage(self) -> None:
+        self.write_attestations(semantic_revision=2)
+
+        decisions = self.load_decisions()
+
+        self.assertFalse(decisions.covered_subjects)
+
+    def test_duplicate_current_repository_attestations_are_rejected(self) -> None:
+        self.write_attestations(duplicate=True)
+
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+
+        self.assertEqual(caught.exception.failure.code, "COVERAGE.DUPLICATE_SUBJECT")
+
+    def test_repository_attestation_requires_authorized_principal(self) -> None:
+        self.write_attestations(principal="principal.other")
+
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+
+        self.assertEqual(
+            caught.exception.failure.code,
+            "COVERAGE.UNAUTHORIZED_PRINCIPAL",
+        )
+
+    def test_repository_coverage_grant_can_be_revoked_without_identity_cycle(self) -> None:
+        self.write_attestations()
+        definitions = self.definitions()
+        requirement_id = coverage_requirement_id(
+            definitions.requirements["workflow.policy.rule"],
+            definitions.views["workflow.policy.rule"],
+        )
+        grant = analysis_identity(
+            "coding-standards:repository-coverage-grant-key:v1",
+            "coverage-grant",
+            {
+                "issuer": "issuer.coverage",
+                "principal": "principal.coverage",
+                "requirement": requirement_id,
+                "capability": "standards.review.audit",
+            },
         )
         self.write(
             "revocations.toml",
             f"""
             schema_version = 1
-            authority_id = "revocations.test"
+            authority_id = "authority.revocations"
             semantic_revision = 1
-            revoked_grants = ["{grant.grant_id}"]
+            revoked_grants = ["{grant}"]
             """,
         )
+
         with self.assertRaises(AnalysisError) as caught:
-            self.load_claims(RecordingRepository(), index)
+            self.load_decisions()
+
         self.assertEqual(
-            caught.exception.failure.code, "COVERAGE.AUTHORIZATION_REVOKED"
+            caught.exception.failure.code,
+            "COVERAGE.AUTHORIZATION_REVOKED",
         )
-
-    def test_evidence_byte_change_changes_attestation_and_certificate(self) -> None:
-        repository, index = self.authority_index()
-        self.write_claim()
-        first = self.load_claims(repository, index)
-        self.write("evidence.md", "# Reviewed changed coverage\n")
-        second = self.load_claims(RecordingRepository(), index)
-        self.assertNotEqual(
-            first.subjects["workflow.policy.rule"].attestation.reference,
-            second.subjects["workflow.policy.rule"].attestation.reference,
-        )
-        self.assertNotEqual(
-            first.subjects["workflow.policy.rule"].certificate,
-            second.subjects["workflow.policy.rule"].certificate,
-        )
-
-    def test_representation_change_regenerates_proofs_without_claim_edit(self) -> None:
-        self.write_claim()
-        claim_source = (self.root / "attestations.toml").read_bytes()
-        first_repository, first_index = self.authority_index()
-        first = self.load_claims(first_repository, first_index)
-
-        self.write("inputs/consumer.md", "# Consumer\n\n")
-        self.write_suite_projection()
-        second_repository, second_index = self.authority_index()
-        second = self.load_claims(second_repository, second_index)
-
-        first_subject = first.subjects["workflow.policy.rule"]
-        second_subject = second.subjects["workflow.policy.rule"]
-        self.assertNotEqual(first_subject.requirement, second_subject.requirement)
-        self.assertNotEqual(first_subject.attestation, second_subject.attestation)
-        self.assertNotEqual(first_subject.certificate, second_subject.certificate)
-        self.assertEqual((self.root / "attestations.toml").read_bytes(), claim_source)
-
-    def test_repository_claim_rejects_generated_requirement_handle(self) -> None:
-        repository, index = self.authority_index()
-        self.write_claim()
-        source = self.root / "attestations.toml"
-        source.write_text(
-            source.read_text(encoding="utf-8").replace(
-                'subject = "workflow.policy.rule"',
-                'subject = "workflow.policy.rule"\n'
-                'requirement = "coverage-requirement:sha256:' + "9" * 64 + '"',
-            ),
-            encoding="utf-8",
-        )
-        with self.assertRaises(AnalysisError) as caught:
-            self.load_claims(repository, index)
-        self.assertEqual(caught.exception.failure.code, "COVERAGE.FIELDS")
-
-    def test_v2_coverage_identity_fallback_is_absent(self) -> None:
-        package = Path(__file__).resolve().parents[1] / "standards_analysis"
-        source = "\n".join(
-            path.read_text(encoding="utf-8") for path in sorted(package.glob("*.py"))
-        )
-        self.assertNotIn("coverage-authority-view:v2", source)
-        self.assertNotIn("coverage-audit-requirement:v2", source)
-        self.assertNotIn("coverage-attestation:v2", source)
-        self.assertNotIn("consumer-coverage-certificate:v2", source)
 
 
 if __name__ == "__main__":

@@ -110,6 +110,48 @@ def hash_identity(domain: str, id_prefix: str, value: IdentityValue) -> str:
     return f"{id_prefix}:sha256:{hashlib.sha256(frame).hexdigest()}"
 
 
+def frame_path_bytes(path: Iterable[str], content: bytes) -> IdentityObject:
+    """Frame one caller-validated logical path and exact byte string."""
+    if type(path) is str:
+        raise invalid(
+            "IDENTITY.INVALID_PATH_FRAME",
+            "path components cannot be supplied as one string",
+        )
+    components = tuple(path)
+    if not components or any(type(component) is not str for component in components):
+        raise invalid(
+            "IDENTITY.INVALID_PATH_FRAME",
+            "path frame requires nonempty exact string components",
+        )
+    if type(content) is not bytes:
+        raise invalid("IDENTITY.INVALID_BYTES_FRAME", "byte frame requires exact bytes")
+    return IdentityObject(
+        (
+            ("path", IdentityArray(components)),
+            ("bytes", IdentityArray(content)),
+        )
+    )
+
+
+def frame_path_byte_set(
+    entries: Iterable[tuple[Iterable[str], bytes]],
+) -> IdentityArray:
+    """Frame a path-keyed byte set in codepoint path order."""
+    selected: list[tuple[tuple[str, ...], bytes]] = []
+    for path, content in entries:
+        components = tuple(path)
+        frame_path_bytes(components, content)
+        selected.append((components, content))
+    selected.sort(key=lambda item: tuple(tuple(map(ord, part)) for part in item[0]))
+    paths = tuple(path for path, _content in selected)
+    if not selected or len(set(paths)) != len(paths):
+        raise invalid(
+            "IDENTITY.INVALID_PATH_SET",
+            "path-byte set must be nonempty with unique paths",
+        )
+    return IdentityArray(frame_path_bytes(path, content) for path, content in selected)
+
+
 def _validate_value(value: object) -> None:
     value_type = type(value)
     if value is None or value_type is bool or value_type is int:
@@ -194,5 +236,7 @@ __all__ = (
     "IdentityObject",
     "IdentityValue",
     "encode_identity_value",
+    "frame_path_byte_set",
+    "frame_path_bytes",
     "hash_identity",
 )

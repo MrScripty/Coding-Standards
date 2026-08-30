@@ -3,7 +3,7 @@ from __future__ import annotations
 import tomllib
 import re
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
+from pathlib import PurePosixPath
 
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
@@ -12,7 +12,13 @@ from tools.standards_applicability.standards_applicability import (
     FactSchema,
     compile_fact_schema,
 )
-from tools.standards_metadata.standards_metadata import CanonicalModuleCorpus
+from tools.standards_metadata.standards_metadata import (
+    CanonicalModuleCorpus,
+    ContentSource,
+    ContentSourceInput,
+    MetadataError,
+    content_source,
+)
 
 from .errors import AnalysisError, AnalysisFailure
 
@@ -70,25 +76,17 @@ def _strings(value: object, *, path: str, field: str, non_empty: bool = False) -
 
 
 def load_router_projection(
-    root: Path,
+    source: ContentSourceInput,
     modules: CanonicalModuleCorpus,
     path: str = ROUTER_PROJECTION,
 ) -> RouterProjection:
-    logical = PurePosixPath(path)
-    repo_root = root.resolve()
-    source = (repo_root / Path(*logical.parts)).resolve(strict=False)
-    if (
-        not path
-        or logical.is_absolute()
-        or ".." in logical.parts
-        or str(logical) != path
-        or not source.is_relative_to(repo_root)
-        or not source.is_file()
-    ):
-        raise _error("projection path must name a contained file", path=path)
+    selected_source = content_source(source)
     try:
-        with source.open("rb") as handle:
-            raw = tomllib.load(handle)
+        raw = tomllib.loads(selected_source.read_bytes(path).decode("utf-8"))
+    except MetadataError as error:
+        raise _error(error.failure.message, path=error.failure.path or path) from error
+    except UnicodeDecodeError as error:
+        raise _error(str(error), path=path) from error
     except tomllib.TOMLDecodeError as error:
         raise _error(str(error), path=path) from error
     if set(raw) != {"schema_version", "id", "owner", "source", "base_modules", "facts", "rules"}:
@@ -165,7 +163,11 @@ def load_router_projection(
         targets.add(target)
         rules.append(RouteRule(rule_id, target, program))
     projected_targets = {rule.target for rule in rules}
-    router_targets = _router_table_targets(repo_root, modules, str(raw["source"]))
+    router_targets = _router_table_targets(
+        selected_source,
+        modules,
+        str(raw["source"]),
+    )
     if projected_targets != router_targets:
         raise _error(
             "projection targets do not exactly match Router selection tables",
@@ -184,11 +186,19 @@ def load_router_projection(
 
 
 def _router_table_targets(
-    root: Path,
+    source: ContentSource,
     modules: CanonicalModuleCorpus,
     source_path: str,
 ) -> set[str]:
-    text = (root / source_path).read_text(encoding="utf-8")
+    try:
+        text = source.read_bytes(source_path).decode("utf-8")
+    except MetadataError as error:
+        raise _error(
+            error.failure.message,
+            path=error.failure.path or source_path,
+        ) from error
+    except UnicodeDecodeError as error:
+        raise _error(str(error), path=source_path) from error
     start_marker = "## Workflow Selection"
     end_marker = "## S1 Rust Library Bug-Fix Route"
     if text.count(start_marker) != 1 or text.count(end_marker) != 1:
@@ -197,11 +207,16 @@ def _router_table_targets(
     by_path = {module.path: module.module_id for module in modules.modules}
     targets: set[str] = set()
     for destination in re.findall(r"\[[^]]+\]\(([^)#]+)(?:#[^)]*)?\)", selection):
-        resolved = (root / destination).resolve(strict=False)
-        if not resolved.is_relative_to(root):
+        logical = PurePosixPath(destination)
+        if (
+            not destination
+            or logical.is_absolute()
+            or ".." in logical.parts
+            or destination.startswith("./")
+            or str(logical) != destination
+        ):
             raise _error("Router selection link escapes the repository", path=source_path)
-        logical = resolved.relative_to(root).as_posix()
-        module_id = by_path.get(logical)
+        module_id = by_path.get(str(logical))
         if module_id is None:
             raise _error(
                 "Router selection link does not resolve to a canonical module",

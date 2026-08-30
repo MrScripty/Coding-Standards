@@ -1,4 +1,4 @@
-# Standards Engine A1b Contracts
+# Standards Engine A1c Contracts
 
 This directory owns the serialized public shape of the read-only Standards
 Engine interface. Runtime policy meaning, identity construction, persistence,
@@ -29,13 +29,17 @@ not define fields, defaults, variants, identity, or runtime semantics.
 
 | Operation | Input | Success result | Expected rejection |
 | --- | --- | --- | --- |
-| `query` | `QueryCall` | `NavigationResult` | `RejectedResult` |
+| `create_snapshot` | `CreateSnapshotCall` | `CreateSnapshotResult` | `RejectedResult` |
+| `find_snapshots` | `FindSnapshotsCall` | `FindSnapshotsResult` | `RejectedResult` |
+| `delete_snapshot` | `DeleteSnapshotCall` | `DeleteSnapshotResult` | `RejectedResult` |
+| `undelete_snapshot` | `UndeleteSnapshotCall` | `UndeleteSnapshotResult` | `RejectedResult` |
+| `query` | `QueryCall` | `QueryResult` | `RejectedResult` |
 | `prepare` | `PrepareCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
 | `resolve` | `ResolveCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
 | `inspect` | `InspectCall` | `InspectionResult` | `RejectedResult` |
 
-Interface schema version 11 uses request contract version 3 and result
-projection version 3. Public authority handles use schema version 4. Unsupported
+Interface schema version 12 uses request contract version 4 and result
+projection version 4. Public handles use schema version 5. Unsupported
 well-formed compatibility keys return `unsupported`; there is no old-version
 parser or fallback.
 
@@ -51,10 +55,12 @@ its material record, ordering, deduplication, semantic identity, and direct
 authority references. Schema annotations, generated classes, builds, and
 release versions do not acquire domain authority.
 
-`standards_authority` stores immutable owner-encoded objects and resolves exact
-handles. Queries bind an explicit `StandardsAuthorityViewHandle`; analyses bind
-base and proposed views. Reads, inspections, and cold reconstruction resolve
-captured immutable content and never substitute the live worktree.
+`standards_snapshots` stores immutable captured content and opaque snapshot and
+analysis aggregates. `repository_git` captures exact object bytes from the
+current canonical `HEAD`; subsequent reads, inspections, and cold
+reconstruction resolve the retained snapshot and never substitute the live
+worktree. Equal captured bytes may share internal storage, but each public
+snapshot has an independent opaque identity and lifecycle.
 
 An `AnalysisHandle` is the sole A1 analysis identity. Pending and complete
 results are deterministic projections of immutable state. Resolution creates

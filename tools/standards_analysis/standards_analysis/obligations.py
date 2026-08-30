@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
 from types import MappingProxyType
 from typing import Iterable, Mapping
 
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
+    ContentSource,
     PolicyUnit,
     PolicyUnitTombstone,
     project_unmapped_module,
@@ -578,9 +578,9 @@ def _module_policy_ids(
 
 
 def generate_unmapped_normative_obligations(
-    accepted_root: Path,
+    accepted_source: ContentSource,
     accepted: CanonicalStandardsCorpus,
-    proposed_root: Path,
+    proposed_source: ContentSource,
     proposed: CanonicalStandardsCorpus,
     changes: Iterable[ClassifiedChange],
 ) -> tuple[Obligation, ...]:
@@ -609,12 +609,12 @@ def generate_unmapped_normative_obligations(
         before_projection = (
             None
             if before_module is None
-            else project_unmapped_module(accepted_root, accepted, module_id)
+            else project_unmapped_module(accepted_source, accepted, module_id)
         )
         after_projection = (
             None
             if after_module is None
-            else project_unmapped_module(proposed_root, proposed, module_id)
+            else project_unmapped_module(proposed_source, proposed, module_id)
         )
         dependencies = [
             DecisionDependency(

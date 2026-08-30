@@ -33,7 +33,7 @@ def render_repository_projections() -> dict[Path, str]:
 
 def projection_main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Compile the canonical A1b schema and interface projections."
+        description="Compile the canonical A1c schema and interface projections."
     )
     parser.add_argument(
         "--check",

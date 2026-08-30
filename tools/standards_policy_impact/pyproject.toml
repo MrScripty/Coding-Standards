@@ -6,8 +6,6 @@ requires-python = ">=3.11,<3.13"
 dependencies = [
     "repository-graph-engine",
     "standards-applicability",
-    "standards-authority",
-    "standards-identity",
     "standards-metadata",
 ]
 

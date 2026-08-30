@@ -4,13 +4,15 @@ import hashlib
 from dataclasses import dataclass
 from typing import Protocol
 
-from tools.standards_authority.standards_authority import (
-    AuthorityReference,
-    ExecutionAuthorityRoot,
-)
-
-from .authority import AuthorityEvidence, AuthorizationGrant
 from .errors import AnalysisError, AnalysisFailure
+from .keys import analysis_identity, analysis_value_digest
+
+
+AUTHORIZATION_DOMAIN = "coding-standards:authorization-record:v1"
+
+
+def _error(code: str, message: str, *, outcome: str = "invalid") -> AnalysisError:
+    return AnalysisError(AnalysisFailure(code, outcome, message))
 
 
 def _nonempty(value: str, field: str) -> None:
@@ -29,6 +31,57 @@ class EvidenceContractKey:
     def __post_init__(self) -> None:
         _nonempty(self.provider_contract, "provider_contract")
         _nonempty(self.provider_contract_version, "provider_contract_version")
+
+
+@dataclass(frozen=True, slots=True, order=True)
+class EvidenceReference:
+    id: str
+    digest: str
+    provider_contract: str
+    provider_contract_version: str
+
+    def __post_init__(self) -> None:
+        for field, value in (
+            ("id", self.id),
+            ("provider_contract", self.provider_contract),
+            ("provider_contract_version", self.provider_contract_version),
+        ):
+            _nonempty(value, field)
+        if (
+            not self.digest.startswith("sha256:")
+            or len(self.digest) != len("sha256:") + 64
+        ):
+            raise _error(
+                "ANALYSIS.INVALID_EVIDENCE",
+                "Evidence digest must be a SHA-256 digest.",
+            )
+
+    def as_contract(self) -> dict[str, str]:
+        return {
+            "id": self.id,
+            "digest": self.digest,
+            "provider_contract": self.provider_contract,
+            "provider_contract_version": self.provider_contract_version,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class ResolvedEvidence:
+    reference: EvidenceReference
+    content: bytes
+
+    def __post_init__(self) -> None:
+        if type(self.content) is not bytes:
+            raise _error(
+                "ANALYSIS.INVALID_EVIDENCE",
+                "Resolved evidence content must be exact bytes.",
+            )
+        digest = "sha256:" + hashlib.sha256(self.content).hexdigest()
+        if digest != self.reference.digest:
+            raise _error(
+                "ANALYSIS.EVIDENCE_DIGEST_MISMATCH",
+                "Resolved evidence bytes do not match the declared digest.",
+            )
 
 
 @dataclass(frozen=True, slots=True)
@@ -86,6 +139,33 @@ class AuthorizationAuthorityContract:
                     f"{field} must be nonempty, sorted, and unique.",
                 )
 
+    def as_contract(self) -> dict[str, object]:
+        return {
+            "issuer_id": self.issuer_id,
+            "issuer_semantic_revision": self.issuer_semantic_revision,
+            "principal_id": self.principal_id,
+            "authorization_contract": self.authorization_contract,
+            "authorization_evidence_contracts": [
+                {
+                    "provider_contract": item.provider_contract,
+                    "provider_contract_version": item.provider_contract_version,
+                }
+                for item in self.authorization_evidence_contracts
+            ],
+            "revocation_authority_id": self.revocation_authority_id,
+            "revocation_authority_semantic_revision": (
+                self.revocation_authority_semantic_revision
+            ),
+            "revocation_contract": self.revocation_contract,
+            "revocation_evidence_contracts": [
+                {
+                    "provider_contract": item.provider_contract,
+                    "provider_contract_version": item.provider_contract_version,
+                }
+                for item in self.revocation_evidence_contracts
+            ],
+        }
+
 
 @dataclass(frozen=True, slots=True, order=True)
 class ProviderInputRole:
@@ -128,19 +208,24 @@ class FactProviderContract:
                 "provider input roles must include the current requirement.",
             )
 
+    def as_contract(self) -> dict[str, object]:
+        return {
+            "provider_id": self.provider_id,
+            "semantic_revision": self.semantic_revision,
+            "input_contract": self.input_contract,
+            "evidence_contract": self.evidence_contract,
+            "input_roles": [
+                {"side": item.side, "role": item.role} for item in self.input_roles
+            ],
+        }
 
-@dataclass(frozen=True, slots=True)
-class ResolvedEvidence:
-    reference: AuthorityEvidence
-    content: bytes
-
-    def __post_init__(self) -> None:
-        digest = "sha256:" + hashlib.sha256(self.content).hexdigest()
-        if digest != self.reference.digest:
-            raise _error(
-                "ANALYSIS.EVIDENCE_DIGEST_MISMATCH",
-                "resolved evidence bytes do not match the declared digest",
-            )
+    def reference(self) -> dict[str, object]:
+        return {
+            "id": self.provider_id,
+            "contract": self.input_contract,
+            "contract_version": str(self.semantic_revision),
+            "input_digest": analysis_value_digest(self.as_contract()),
+        }
 
 
 @dataclass(frozen=True, slots=True)
@@ -149,12 +234,11 @@ class AuthorizationRequest:
     subject_kind: str
     subject_id: str
     capability: str
-    evidence: tuple[AuthorityEvidence, ...]
+    evidence: tuple[EvidenceReference, ...]
 
 
 @dataclass(frozen=True, slots=True)
 class AuthorizationClaim:
-    grant_id: str
     action: str
     subject_kind: str
     subject_id: str
@@ -195,11 +279,19 @@ class AuthorizationAdapter(Protocol):
     def authorize(self, request: AuthorizationRequest) -> AuthorizationOutcome: ...
 
 
+@dataclass(frozen=True, slots=True, order=True)
+class ImmutableProviderInput:
+    side: str
+    role: str
+    identity: str
+    digest: str
+
+
 @dataclass(frozen=True, slots=True)
 class ProviderRequest:
-    requirement: AuthorityReference
+    requirement_id: str
     fact: str
-    immutable_inputs: tuple[ExecutionAuthorityRoot, ...]
+    immutable_inputs: tuple[ImmutableProviderInput, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -245,11 +337,57 @@ class AnalysisExecutionContext:
             )
         object.__setattr__(self, "providers", selected)
 
+    def contract_view(self) -> dict[str, object]:
+        return {
+            "authorization_authority_digest": (
+                None
+                if self.authorization is None
+                else analysis_value_digest(self.authorization.contract.as_contract())
+            ),
+            "providers": [
+                provider.contract.reference() for provider in self.providers
+            ],
+        }
 
-def construct_authorization_grant(
+
+@dataclass(frozen=True, slots=True)
+class AuthorizationRecord:
+    reference: dict[str, object]
+    issuer_semantic_revision: int
+    principal: str
+    action: str
+    subject_kind: str
+    subject_id: str
+    authorization_evidence: tuple[EvidenceReference, ...]
+    revocation_authority: str
+    revocation_authority_semantic_revision: int
+    revocation_evidence: tuple[EvidenceReference, ...]
+
+    def as_contract(self) -> dict[str, object]:
+        return {
+            "reference": self.reference,
+            "issuer_semantic_revision": self.issuer_semantic_revision,
+            "principal": self.principal,
+            "action": self.action,
+            "subject_kind": self.subject_kind,
+            "subject_id": self.subject_id,
+            "authorization_evidence": [
+                item.as_contract() for item in self.authorization_evidence
+            ],
+            "revocation_authority": self.revocation_authority,
+            "revocation_authority_semantic_revision": (
+                self.revocation_authority_semantic_revision
+            ),
+            "revocation_evidence": [
+                item.as_contract() for item in self.revocation_evidence
+            ],
+        }
+
+
+def construct_authorization_record(
     context: AnalysisExecutionContext,
     request: AuthorizationRequest,
-) -> AuthorizationGrant:
+) -> AuthorizationRecord:
     adapter = context.authorization
     if adapter is None:
         raise _error(
@@ -260,9 +398,7 @@ def construct_authorization_grant(
     authority = adapter.contract
     outcome = adapter.authorize(request)
     if isinstance(outcome, AuthorizationDenied):
-        raise _error(
-            "ANALYSIS.UNAUTHORIZED", outcome.reason, outcome="unauthorized"
-        )
+        raise _error("ANALYSIS.UNAUTHORIZED", outcome.reason, outcome="unauthorized")
     if isinstance(outcome, AuthorizationUnavailable):
         raise _error(
             "ANALYSIS.AUTHORIZATION_UNAVAILABLE",
@@ -280,16 +416,10 @@ def construct_authorization_grant(
             "ANALYSIS.AUTHORIZATION_INVALID",
             "Authorization adapter returned an unrecognized outcome.",
         )
-    if outcome.decision != "allow":
+    if outcome.decision != "allow" or outcome.revocation_state != "not-revoked":
         raise _error(
             "ANALYSIS.UNAUTHORIZED",
-            "Authorization claim does not allow the requested work.",
-            outcome="unauthorized",
-        )
-    if outcome.revocation_state != "not-revoked":
-        raise _error(
-            "ANALYSIS.UNAUTHORIZED",
-            "Authorization grant is revoked.",
+            "Authorization does not permit the requested work.",
             outcome="unauthorized",
         )
     expected = (
@@ -327,15 +457,44 @@ def construct_authorization_grant(
         authority.revocation_evidence_contracts,
         "revocation",
     )
-    return AuthorizationGrant(
-        authority.issuer_id,
+    authority_digest = analysis_value_digest(authority.as_contract())
+    identity_material = {
+        "issuer": authority.issuer_id,
+        "issuer_semantic_revision": authority.issuer_semantic_revision,
+        "principal": authority.principal_id,
+        "capability": request.capability,
+        "action": request.action,
+        "subject_kind": request.subject_kind,
+        "subject_id": request.subject_id,
+        "authority_digest": authority_digest,
+        "authorization_evidence": [
+            item.as_contract() for item in authorization_evidence
+        ],
+        "revocation_authority": authority.revocation_authority_id,
+        "revocation_authority_semantic_revision": (
+            authority.revocation_authority_semantic_revision
+        ),
+        "revocation_evidence": [
+            item.as_contract() for item in revocation_evidence
+        ],
+    }
+    reference = {
+        "id": analysis_identity(
+            AUTHORIZATION_DOMAIN,
+            "authorization",
+            identity_material,
+        ),
+        "issuer": authority.issuer_id,
+        "capability": request.capability,
+        "authority_digest": authority_digest,
+    }
+    return AuthorizationRecord(
+        reference,
         authority.issuer_semantic_revision,
-        outcome.grant_id,
         authority.principal_id,
-        outcome.capability,
-        outcome.action,
-        outcome.subject_kind,
-        outcome.subject_id,
+        request.action,
+        request.subject_kind,
+        request.subject_id,
         authorization_evidence,
         authority.revocation_authority_id,
         authority.revocation_authority_semantic_revision,
@@ -344,7 +503,7 @@ def construct_authorization_grant(
 
 
 def _require_evidence_contracts(
-    evidence: tuple[AuthorityEvidence, ...],
+    evidence: tuple[EvidenceReference, ...],
     expected: tuple[EvidenceContractKey, ...],
     label: str,
 ) -> None:
@@ -352,7 +511,8 @@ def _require_evidence_contracts(
         sorted(
             {
                 EvidenceContractKey(
-                    item.provider_contract, item.provider_contract_version
+                    item.provider_contract,
+                    item.provider_contract_version,
                 )
                 for item in evidence
             }
@@ -365,18 +525,14 @@ def _require_evidence_contracts(
         )
 
 
-def _evidence(values: tuple[ResolvedEvidence, ...]) -> tuple[AuthorityEvidence, ...]:
-    selected = tuple(sorted((item.reference for item in values)))
+def _evidence(values: tuple[ResolvedEvidence, ...]) -> tuple[EvidenceReference, ...]:
+    selected = tuple(sorted(item.reference for item in values))
     if not selected:
         raise _error(
             "ANALYSIS.EVIDENCE_REQUIRED",
             "Authorization and revocation evidence must be nonempty.",
         )
     return selected
-
-
-def _error(code: str, message: str, *, outcome: str = "invalid") -> AnalysisError:
-    return AnalysisError(AnalysisFailure(code, outcome, message))
 
 
 __all__ = (
@@ -386,18 +542,21 @@ __all__ = (
     "AuthorizationClaim",
     "AuthorizationDenied",
     "AuthorizationOutcome",
+    "AuthorizationRecord",
     "AuthorizationRequest",
     "AuthorizationUnavailable",
     "AuthorizationUnsupported",
+    "EvidenceContractKey",
+    "EvidenceReference",
     "FactProviderAdapter",
     "FactProviderContract",
-    "ProviderNoObservation",
+    "ImmutableProviderInput",
     "ProviderInputRole",
+    "ProviderNoObservation",
     "ProviderObservationClaim",
     "ProviderOutcome",
     "ProviderRequest",
     "ProviderUnavailable",
     "ResolvedEvidence",
-    "EvidenceContractKey",
-    "construct_authorization_grant",
+    "construct_authorization_record",
 )

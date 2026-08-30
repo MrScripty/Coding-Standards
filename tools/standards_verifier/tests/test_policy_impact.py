@@ -431,38 +431,34 @@ class PolicyImpactTest(unittest.TestCase):
             ).exists()
         )
 
-    @patch("tools.standards_authority.standards_authority.git_index.subprocess.run")
+    @patch(
+        "standards_verifier.checks.policy_impact_migration.staged_name_status"
+    )
     def test_copied_production_source_does_not_retire_its_source(
-        self, run: Mock
+        self, staged_name_status: Mock
     ) -> None:
-        run.return_value = subprocess.CompletedProcess(
-            [],
-            returncode=0,
-            stdout=(
-                b"C100\0tools/source.py\0tools/copied.py\0"
-                b"R100\0tools/old.py\0tools/renamed.py\0"
-            ),
-            stderr=b"",
+        staged_name_status.return_value = (
+            "C100",
+            "tools/source.py",
+            "tools/copied.py",
+            "R100",
+            "tools/old.py",
+            "tools/renamed.py",
         )
         context = CheckContext(Path("."), "fixture", SuiteCatalog.empty())
 
-        with patch.dict(
-            os.environ,
-            {"GIT_DIR": "/outside", "GIT_INDEX_FILE": "/outside/index"},
-        ):
-            current, retired = _changed_production_paths(
-                context, "migration", "a" * 40
-            )
+        current, retired = _changed_production_paths(
+            context, "migration", "a" * 40
+        )
 
         self.assertEqual(
             current,
             frozenset({"tools/copied.py", "tools/renamed.py"}),
         )
         self.assertEqual(retired, frozenset({"tools/old.py"}))
-        arguments, options = run.call_args
-        self.assertIn("--cached", arguments[0])
-        self.assertNotIn("GIT_DIR", options["env"])
-        self.assertNotIn("GIT_INDEX_FILE", options["env"])
+        staged_name_status.assert_called_once_with(
+            Path("."), "a" * 40, ("tools",)
+        )
 
     def test_accepted_tree_materialization_ignores_ambient_git_overrides(
         self,

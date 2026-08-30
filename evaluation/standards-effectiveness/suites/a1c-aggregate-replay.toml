@@ -1,0 +1,33 @@
+schema_version = 1
+id = "a1c-aggregate-replay"
+owner = "topic.architecture"
+description = "One immutable AnalysisState root reproduces parent-bound derived work and deterministic branch transitions without independent child storage."
+
+[[checks]]
+id = "analysis-aggregate"
+type = "path_state"
+present = [
+  "tools/standards_analysis/standards_analysis/state.py",
+  "tools/standards_analysis/standards_analysis/kernel.py",
+  "tools/standards_analysis/tests/test_state.py",
+  "tools/standards_engine/standards_engine/engine.py",
+  "tools/standards_engine/tests/test_analysis.py",
+]
+absent = [
+  "tools/standards_analysis/standards_analysis/authority.py",
+  "tools/standards_analysis/standards_analysis/coverage_authority.py",
+  "tools/standards_engine/tests/test_c7_analysis.py",
+]
+
+[[checks]]
+id = "state-contract"
+type = "text"
+path = "tools/standards_analysis/standards_analysis/state.py"
+required = [
+  "class AnalysisState",
+  "base_snapshot",
+  "proposed_snapshot",
+  "coverage_attestations",
+  "authorization_records",
+]
+prohibited = ["standards_authority"]

@@ -1,5 +1,29 @@
 {
   "$defs": {
+    "ActiveSnapshotSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "lifecycle": {
+          "const": "active"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "source_revision": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "snapshot",
+        "lifecycle",
+        "source_revision",
+        "created_at"
+      ],
+      "type": "object"
+    },
     "AllExpression": {
       "additionalProperties": false,
       "properties": {
@@ -32,6 +56,83 @@
       ],
       "type": "object"
     },
+    "AnalysisChildArtifact": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AnalysisContext"
+        },
+        {
+          "$ref": "#/$defs/FactRequirement"
+        },
+        {
+          "$ref": "#/$defs/FactObservation"
+        },
+        {
+          "$ref": "#/$defs/Obligation"
+        },
+        {
+          "$ref": "#/$defs/CoverageRequirement"
+        },
+        {
+          "$ref": "#/$defs/CoverageCertificate"
+        }
+      ]
+    },
+    "AnalysisChildHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "child_id": {
+          "$ref": "#/$defs/ChildId"
+        },
+        "child_kind": {
+          "enum": [
+            "context",
+            "fact-requirement",
+            "fact-observation",
+            "obligation",
+            "coverage-requirement",
+            "coverage-certificate"
+          ]
+        },
+        "kind": {
+          "const": "analysis-child-handle"
+        },
+        "schema_version": {
+          "const": 5
+        }
+      },
+      "required": [
+        "kind",
+        "analysis",
+        "child_kind",
+        "child_id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "AnalysisChildInspectionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/AnalysisChildArtifact"
+        },
+        "handle": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "kind": {
+          "const": "analysis-child-inspection-result"
+        }
+      },
+      "required": [
+        "kind",
+        "handle",
+        "artifact"
+      ],
+      "type": "object"
+    },
     "AnalysisContext": {
       "additionalProperties": false,
       "properties": {
@@ -44,7 +145,7 @@
           "uniqueItems": true
         },
         "handle": {
-          "$ref": "#/$defs/AnalysisContextHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "kind": {
           "const": "analysis-context"
@@ -74,43 +175,30 @@
       ],
       "type": "object"
     },
-    "AnalysisContextHandle": {
+    "AnalysisExecutionContractView": {
       "additionalProperties": false,
       "properties": {
-        "id": {
-          "$ref": "#/$defs/AnalysisContextId"
+        "authorization_authority_digest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
-        "kind": {
-          "const": "analysis-context-handle"
-        },
-        "schema_version": {
-          "const": 4
+        "providers": {
+          "items": {
+            "$ref": "#/$defs/ProviderReference"
+          },
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "AnalysisContextId": {
-      "pattern": "^analysis-context:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "AnalysisContextInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "context": {
-          "$ref": "#/$defs/AnalysisContext"
-        },
-        "kind": {
-          "const": "analysis-context-inspection-result"
-        }
-      },
-      "required": [
-        "kind",
-        "context"
+        "authorization_authority_digest",
+        "providers"
       ],
       "type": "object"
     },
@@ -124,7 +212,7 @@
           "const": "analysis-handle"
         },
         "schema_version": {
-          "const": 4
+          "const": 5
         }
       },
       "required": [
@@ -135,14 +223,30 @@
       "type": "object"
     },
     "AnalysisId": {
-      "pattern": "^analysis-root:sha256:[0-9a-f]{64}$",
+      "pattern": "^analysis:sha256:[0-9a-f]{64}$",
       "type": "string"
+    },
+    "AnalysisInspectionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "analysis-inspection-result"
+        },
+        "state": {
+          "$ref": "#/$defs/AnalysisState"
+        }
+      },
+      "required": [
+        "kind",
+        "state"
+      ],
+      "type": "object"
     },
     "AnalysisRequest": {
       "additionalProperties": false,
       "properties": {
-        "base_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
+        "base_snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
         },
         "changes": {
           "items": {
@@ -152,7 +256,7 @@
           "type": "array"
         },
         "contract_version": {
-          "const": 3
+          "const": 4
         },
         "kind": {
           "const": "analysis-request"
@@ -160,8 +264,8 @@
         "prior_analysis": {
           "$ref": "#/$defs/AnalysisHandle"
         },
-        "proposed_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
+        "proposed_snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
         },
         "semantic_proposals": {
           "items": {
@@ -173,8 +277,8 @@
       },
       "required": [
         "kind",
-        "base_view",
-        "proposed_view",
+        "base_snapshot",
+        "proposed_snapshot",
         "changes",
         "semantic_proposals",
         "contract_version"
@@ -184,11 +288,26 @@
     "AnalysisState": {
       "additionalProperties": false,
       "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
+        "authorization_records": {
+          "items": {
+            "$ref": "#/$defs/AuthorizationRecord"
+          },
+          "type": "array",
+          "uniqueItems": true
         },
-        "context": {
-          "$ref": "#/$defs/AnalysisContext"
+        "base_snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "changes": {
+          "items": {
+            "$ref": "#/$defs/ChangeDescriptor"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "contract_version": {
+          "const": 4
         },
         "coverage_attestations": {
           "items": {
@@ -204,6 +323,17 @@
           "type": "array",
           "uniqueItems": true
         },
+        "domain_contracts": {
+          "items": {
+            "$ref": "#/$defs/DomainContractReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "execution_contracts": {
+          "$ref": "#/$defs/AnalysisExecutionContractView"
+        },
         "fact_observations": {
           "items": {
             "$ref": "#/$defs/FactObservation"
@@ -216,16 +346,32 @@
         },
         "kind": {
           "const": "analysis-state"
+        },
+        "proposed_snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "semantic_proposals": {
+          "items": {
+            "$ref": "#/$defs/SemanticProposal"
+          },
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "required": [
         "kind",
         "handle",
-        "context",
-        "authority",
+        "base_snapshot",
+        "proposed_snapshot",
+        "changes",
+        "semantic_proposals",
         "fact_observations",
         "dispositions",
-        "coverage_attestations"
+        "coverage_attestations",
+        "authorization_records",
+        "domain_contracts",
+        "execution_contracts",
+        "contract_version"
       ],
       "type": "object"
     },
@@ -277,39 +423,91 @@
         }
       ]
     },
-    "AuthorityObjectId": {
-      "pattern": "^[a-z][a-z0-9.-]*:sha256:[0-9a-f]{64}$",
+    "AuthorizationId": {
+      "pattern": "^authorization:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
-    "AuthorityObjectReference": {
+    "AuthorizationRecord": {
       "additionalProperties": false,
       "properties": {
-        "id": {
-          "$ref": "#/$defs/AuthorityObjectId"
+        "action": {
+          "$ref": "#/$defs/CanonicalId"
         },
-        "object_kind": {
+        "authorization_evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "issuer_semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "principal": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "reference": {
+          "$ref": "#/$defs/AuthorizationReference"
+        },
+        "revocation_authority": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "revocation_authority_semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "revocation_evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "subject_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "subject_kind": {
           "$ref": "#/$defs/CanonicalId"
         }
       },
       "required": [
-        "object_kind",
-        "id"
+        "reference",
+        "issuer_semantic_revision",
+        "principal",
+        "action",
+        "subject_kind",
+        "subject_id",
+        "authorization_evidence",
+        "revocation_authority",
+        "revocation_authority_semantic_revision",
+        "revocation_evidence"
       ],
       "type": "object"
     },
-    "AuthorizationGrantReference": {
+    "AuthorizationReference": {
       "additionalProperties": false,
       "properties": {
-        "id": {
-          "$ref": "#/$defs/AuthorityObjectId"
+        "authority_digest": {
+          "$ref": "#/$defs/Digest"
         },
-        "object_kind": {
-          "const": "authorization-grant"
+        "capability": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "id": {
+          "$ref": "#/$defs/AuthorizationId"
+        },
+        "issuer": {
+          "$ref": "#/$defs/CanonicalId"
         }
       },
       "required": [
-        "object_kind",
-        "id"
+        "id",
+        "issuer",
+        "capability",
+        "authority_digest"
       ],
       "type": "object"
     },
@@ -378,58 +576,6 @@
         "requires",
         "specializes",
         "verification"
-      ],
-      "type": "object"
-    },
-    "CertificateHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/CertificateId"
-        },
-        "kind": {
-          "const": "certificate-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "CertificateId": {
-      "pattern": "^coverage-certificate:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "CertificateInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "certificate": {
-          "$ref": "#/$defs/ConsumerCoverageCertificate"
-        },
-        "kind": {
-          "const": "certificate-inspection-result"
-        }
-      },
-      "required": [
-        "kind",
-        "certificate"
-      ],
-      "type": "object"
-    },
-    "CertificateProvenance": {
-      "additionalProperties": false,
-      "properties": {
-        "generator": {
-          "$ref": "#/$defs/NonEmptyString"
-        }
-      },
-      "required": [
-        "generator"
       ],
       "type": "object"
     },
@@ -594,12 +740,13 @@
       ],
       "type": "object"
     },
+    "ChildId": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
     "CompleteResult": {
       "additionalProperties": false,
       "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
         "changed_units": {
           "items": {
             "$ref": "#/$defs/ChangedPolicyUnit"
@@ -620,7 +767,7 @@
         },
         "coverage_certificates": {
           "items": {
-            "$ref": "#/$defs/CertificateHandle"
+            "$ref": "#/$defs/CoverageCertificate"
           },
           "type": "array",
           "uniqueItems": true
@@ -668,8 +815,7 @@
         "fact_observations",
         "dispositions",
         "reading_plan",
-        "completion",
-        "authority"
+        "completion"
       ],
       "type": "object"
     },
@@ -745,79 +891,6 @@
       ],
       "type": "object"
     },
-    "ConsumerCoverageCertificate": {
-      "additionalProperties": false,
-      "properties": {
-        "attestation": {
-          "$ref": "#/$defs/CoverageAttestationHandle"
-        },
-        "authority_dependencies": {
-          "items": {
-            "$ref": "#/$defs/AuthorityObjectReference"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "coverage_view": {
-          "$ref": "#/$defs/CoverageAuthorityViewHandle"
-        },
-        "evidence_digests": {
-          "items": {
-            "$ref": "#/$defs/Digest"
-          },
-          "type": "array"
-        },
-        "fact_schema_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "handle": {
-          "$ref": "#/$defs/CertificateHandle"
-        },
-        "horizon_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "kind": {
-          "const": "consumer-coverage-certificate"
-        },
-        "owner": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "provenance": {
-          "$ref": "#/$defs/CertificateProvenance"
-        },
-        "relationship_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "requirement": {
-          "$ref": "#/$defs/CoverageRequirementHandle"
-        },
-        "semantic_revision": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "subject": {
-          "$ref": "#/$defs/CanonicalId"
-        }
-      },
-      "required": [
-        "kind",
-        "handle",
-        "coverage_view",
-        "requirement",
-        "attestation",
-        "subject",
-        "owner",
-        "semantic_revision",
-        "horizon_digest",
-        "relationship_digest",
-        "evidence_digests",
-        "fact_schema_digest",
-        "provenance",
-        "authority_dependencies"
-      ],
-      "type": "object"
-    },
     "ConsumerDispositionSubmission": {
       "additionalProperties": false,
       "properties": {
@@ -834,8 +907,8 @@
         "kind": {
           "const": "consumer-disposition"
         },
-        "obligation_id": {
-          "$ref": "#/$defs/ObligationId"
+        "obligation": {
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "rationale": {
           "$ref": "#/$defs/NonEmptyString"
@@ -851,7 +924,7 @@
       },
       "required": [
         "kind",
-        "obligation_id",
+        "obligation",
         "result",
         "rationale",
         "evidence",
@@ -942,100 +1015,6 @@
       ],
       "type": "object"
     },
-    "ContentSnapshot": {
-      "additionalProperties": false,
-      "properties": {
-        "files": {
-          "items": {
-            "$ref": "#/$defs/ContentSnapshotFileEntry"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "handle": {
-          "$ref": "#/$defs/ContentSnapshotHandle"
-        },
-        "kind": {
-          "const": "content-snapshot"
-        },
-        "payload_contract": {
-          "const": "content-snapshot.v2"
-        }
-      },
-      "required": [
-        "kind",
-        "handle",
-        "payload_contract",
-        "files"
-      ],
-      "type": "object"
-    },
-    "ContentSnapshotFileEntry": {
-      "additionalProperties": false,
-      "properties": {
-        "byte_length": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "content_base64": {
-          "type": "string"
-        },
-        "content_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "path": {
-          "$ref": "#/$defs/RepositoryPath"
-        }
-      },
-      "required": [
-        "path",
-        "content_digest",
-        "content_base64",
-        "byte_length"
-      ],
-      "type": "object"
-    },
-    "ContentSnapshotHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/ContentSnapshotId"
-        },
-        "kind": {
-          "const": "content-snapshot-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "ContentSnapshotId": {
-      "pattern": "^content-snapshot:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "ContentSnapshotInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "content_snapshot": {
-          "$ref": "#/$defs/ContentSnapshot"
-        },
-        "kind": {
-          "const": "content-snapshot-inspection-result"
-        }
-      },
-      "required": [
-        "kind",
-        "content_snapshot"
-      ],
-      "type": "object"
-    },
     "CoverageAttestation": {
       "additionalProperties": false,
       "properties": {
@@ -1043,7 +1022,7 @@
           "$ref": "#/$defs/NonEmptyString"
         },
         "authorization": {
-          "$ref": "#/$defs/AuthorizationGrantReference"
+          "$ref": "#/$defs/AuthorizationReference"
         },
         "conclusion": {
           "const": "complete"
@@ -1061,9 +1040,6 @@
           },
           "type": "array"
         },
-        "handle": {
-          "$ref": "#/$defs/CoverageAttestationHandle"
-        },
         "kind": {
           "const": "coverage-attestation"
         },
@@ -1071,15 +1047,14 @@
           "$ref": "#/$defs/NonEmptyString"
         },
         "requirement": {
-          "$ref": "#/$defs/CoverageRequirementHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "schema_version": {
-          "const": 3
+          "const": 4
         }
       },
       "required": [
         "kind",
-        "handle",
         "requirement",
         "conclusion",
         "evidence",
@@ -1119,7 +1094,7 @@
           "$ref": "#/$defs/NonEmptyString"
         },
         "requirement": {
-          "$ref": "#/$defs/CoverageRequirementHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         }
       },
       "required": [
@@ -1132,46 +1107,6 @@
       ],
       "type": "object"
     },
-    "CoverageAttestationHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/CoverageAttestationId"
-        },
-        "kind": {
-          "const": "coverage-attestation-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "CoverageAttestationId": {
-      "pattern": "^coverage-attestation:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "CoverageAttestationInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "attestation": {
-          "$ref": "#/$defs/CoverageAttestation"
-        },
-        "kind": {
-          "const": "coverage-attestation-inspection-result"
-        }
-      },
-      "required": [
-        "kind",
-        "attestation"
-      ],
-      "type": "object"
-    },
     "CoverageAttestationSubmission": {
       "additionalProperties": false,
       "properties": {
@@ -1180,35 +1115,78 @@
         },
         "kind": {
           "const": "coverage-attestation"
-        },
-        "obligation_id": {
-          "$ref": "#/$defs/ObligationId"
         }
       },
       "required": [
         "kind",
-        "obligation_id",
         "claim"
       ],
       "type": "object"
     },
-    "CoverageAuditRequirement": {
+    "CoverageCertificate": {
       "additionalProperties": false,
       "properties": {
-        "coverage_view": {
-          "$ref": "#/$defs/CoverageAuthorityViewHandle"
+        "evidence_digests": {
+          "items": {
+            "$ref": "#/$defs/Digest"
+          },
+          "type": "array",
+          "uniqueItems": true
         },
-        "derived_from_view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
+        "fact_schema_digest": {
+          "$ref": "#/$defs/Digest"
         },
         "handle": {
-          "$ref": "#/$defs/CoverageRequirementHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "horizon_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "kind": {
+          "const": "coverage-certificate"
+        },
+        "owner": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "relationship_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "requirement": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "handle",
+        "requirement",
+        "subject",
+        "owner",
+        "semantic_revision",
+        "horizon_digest",
+        "relationship_digest",
+        "evidence_digests",
+        "fact_schema_digest"
+      ],
+      "type": "object"
+    },
+    "CoverageRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "handle": {
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "horizon": {
           "$ref": "#/$defs/CanonicalId"
         },
         "kind": {
-          "const": "coverage-audit-requirement"
+          "const": "coverage-requirement"
         },
         "owner": {
           "$ref": "#/$defs/CanonicalId"
@@ -1234,7 +1212,6 @@
       "required": [
         "kind",
         "handle",
-        "coverage_view",
         "subject",
         "owner",
         "semantic_revision",
@@ -1244,228 +1221,31 @@
       ],
       "type": "object"
     },
-    "CoverageAuthorityView": {
+    "CreateSnapshotCall": {
       "additionalProperties": false,
       "properties": {
-        "applicability_program_digests": {
-          "items": {
-            "$ref": "#/$defs/Digest"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "authority_dependencies": {
-          "items": {
-            "$ref": "#/$defs/AuthorityObjectReference"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "fact_schema_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "handle": {
-          "$ref": "#/$defs/CoverageAuthorityViewHandle"
-        },
-        "horizon": {
-          "additionalProperties": false,
-          "properties": {
-            "digest": {
-              "$ref": "#/$defs/Digest"
-            },
-            "id": {
-              "$ref": "#/$defs/CanonicalId"
-            },
-            "members": {
-              "items": {
-                "$ref": "#/$defs/CoverageHorizonMember"
-              },
-              "type": "array"
-            },
-            "provider": {
-              "$ref": "#/$defs/CanonicalId"
-            },
-            "version": {
-              "minimum": 1,
-              "type": "integer"
-            }
-          },
-          "required": [
-            "id",
-            "provider",
-            "version",
-            "digest",
-            "members"
-          ],
-          "type": "object"
-        },
         "kind": {
-          "const": "coverage-authority-view"
+          "const": "create-snapshot"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "CreateSnapshotResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "create-snapshot-result"
         },
-        "owner": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "relationship_fingerprints": {
-          "items": {
-            "additionalProperties": false,
-            "properties": {
-              "edge": {
-                "$ref": "#/$defs/EdgeId"
-              },
-              "fingerprint": {
-                "$ref": "#/$defs/Digest"
-              }
-            },
-            "required": [
-              "edge",
-              "fingerprint"
-            ],
-            "type": "object"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "relationship_kinds": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "representation_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "semantic_revision": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "structural_digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "subject": {
-          "$ref": "#/$defs/CanonicalId"
+        "snapshot": {
+          "$ref": "#/$defs/ActiveSnapshotSummary"
         }
       },
       "required": [
         "kind",
-        "handle",
-        "subject",
-        "owner",
-        "semantic_revision",
-        "representation_digest",
-        "structural_digest",
-        "relationship_kinds",
-        "relationship_fingerprints",
-        "applicability_program_digests",
-        "fact_schema_digest",
-        "horizon",
-        "authority_dependencies"
-      ],
-      "type": "object"
-    },
-    "CoverageAuthorityViewHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/CoverageAuthorityViewId"
-        },
-        "kind": {
-          "const": "coverage-authority-view-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "CoverageAuthorityViewId": {
-      "pattern": "^coverage-view:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "CoverageAuthorityViewInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "coverage_view": {
-          "$ref": "#/$defs/CoverageAuthorityView"
-        },
-        "kind": {
-          "const": "coverage-authority-view-inspection-result"
-        }
-      },
-      "required": [
-        "kind",
-        "coverage_view"
-      ],
-      "type": "object"
-    },
-    "CoverageHorizonMember": {
-      "additionalProperties": false,
-      "properties": {
-        "fingerprint": {
-          "$ref": "#/$defs/Digest"
-        },
-        "id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "roles": {
-          "items": {
-            "$ref": "#/$defs/CanonicalId"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "id",
-        "roles",
-        "fingerprint"
-      ],
-      "type": "object"
-    },
-    "CoverageRequirementHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/CoverageRequirementId"
-        },
-        "kind": {
-          "const": "coverage-requirement-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "CoverageRequirementId": {
-      "pattern": "^coverage-requirement:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "CoverageRequirementInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "kind": {
-          "const": "coverage-requirement-inspection-result"
-        },
-        "requirement": {
-          "$ref": "#/$defs/CoverageAuditRequirement"
-        }
-      },
-      "required": [
-        "kind",
-        "requirement"
+        "snapshot"
       ],
       "type": "object"
     },
@@ -1531,6 +1311,42 @@
       ],
       "type": "object"
     },
+    "DeleteSnapshotCall": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "delete-snapshot"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot"
+      ],
+      "type": "object"
+    },
+    "DeleteSnapshotResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "delete-snapshot-result"
+        },
+        "purge_deadline": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "purge_deadline"
+      ],
+      "type": "object"
+    },
     "Digest": {
       "pattern": "^sha256:[0-9a-f]{64}$",
       "type": "string"
@@ -1539,7 +1355,7 @@
       "additionalProperties": false,
       "properties": {
         "authorization": {
-          "$ref": "#/$defs/AuthorizationGrantReference"
+          "$ref": "#/$defs/AuthorizationReference"
         },
         "evidence": {
           "items": {
@@ -1556,8 +1372,8 @@
             "impact-disposition"
           ]
         },
-        "obligation_id": {
-          "$ref": "#/$defs/ObligationId"
+        "obligation": {
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "rationale": {
           "$ref": "#/$defs/NonEmptyString"
@@ -1567,13 +1383,29 @@
         }
       },
       "required": [
-        "obligation_id",
+        "obligation",
         "kind",
         "result",
         "rationale",
         "evidence",
         "authorization",
         "fingerprint"
+      ],
+      "type": "object"
+    },
+    "DomainContractReference": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "version": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "id",
+        "version"
       ],
       "type": "object"
     },
@@ -1625,93 +1457,6 @@
       ],
       "type": "object"
     },
-    "ExecutionAuthorityRoot": {
-      "additionalProperties": false,
-      "properties": {
-        "authority": {
-          "$ref": "#/$defs/AuthorityObjectReference"
-        },
-        "role": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "side": {
-          "enum": [
-            "current",
-            "accepted",
-            "proposed",
-            "transition"
-          ]
-        }
-      },
-      "required": [
-        "side",
-        "role",
-        "authority"
-      ],
-      "type": "object"
-    },
-    "ExecutionClosure": {
-      "additionalProperties": false,
-      "properties": {
-        "closure_contract": {
-          "const": "execution-closure.v2"
-        },
-        "handle": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
-        "kind": {
-          "const": "execution-closure"
-        },
-        "operation": {
-          "enum": [
-            "route",
-            "read",
-            "related",
-            "analysis"
-          ]
-        },
-        "roots": {
-          "items": {
-            "$ref": "#/$defs/ExecutionAuthorityRoot"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "kind",
-        "handle",
-        "closure_contract",
-        "operation",
-        "roots"
-      ],
-      "type": "object"
-    },
-    "ExecutionClosureHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/ExecutionClosureId"
-        },
-        "kind": {
-          "const": "execution-closure-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "ExecutionClosureId": {
-      "pattern": "^execution-closure:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
     "ExistsExpression": {
       "additionalProperties": false,
       "properties": {
@@ -1732,7 +1477,7 @@
       "additionalProperties": false,
       "properties": {
         "authorization": {
-          "$ref": "#/$defs/AuthorizationGrantReference"
+          "$ref": "#/$defs/AuthorizationReference"
         },
         "evidence": {
           "items": {
@@ -1743,16 +1488,16 @@
           "uniqueItems": true
         },
         "handle": {
-          "$ref": "#/$defs/FactObservationHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "kind": {
           "const": "fact-observation"
         },
-        "provider_authority": {
-          "$ref": "#/$defs/ProviderAuthorityReference"
+        "provider": {
+          "$ref": "#/$defs/ProviderReference"
         },
         "requirement": {
-          "$ref": "#/$defs/FactRequirementHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "value": {
           "$ref": "#/$defs/FactValue"
@@ -1768,65 +1513,17 @@
       ],
       "type": "object"
     },
-    "FactObservationHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/FactObservationId"
-        },
-        "kind": {
-          "const": "fact-observation-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "FactObservationId": {
-      "pattern": "^fact-observation:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "FactObservationInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "kind": {
-          "const": "fact-observation-inspection-result"
-        },
-        "observation": {
-          "$ref": "#/$defs/FactObservation"
-        }
-      },
-      "required": [
-        "kind",
-        "observation"
-      ],
-      "type": "object"
-    },
     "FactRequirement": {
       "additionalProperties": false,
       "properties": {
         "answer_contract": {
           "$ref": "#/$defs/CanonicalId"
         },
-        "authority_dependencies": {
-          "items": {
-            "$ref": "#/$defs/AuthorityObjectReference"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
         "authorization_capability": {
           "$ref": "#/$defs/CanonicalId"
         },
         "context": {
-          "$ref": "#/$defs/AnalysisContextHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "evidence_contract": {
           "$ref": "#/$defs/CanonicalId"
@@ -1842,7 +1539,7 @@
           "type": "integer"
         },
         "handle": {
-          "$ref": "#/$defs/FactRequirementHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "kind": {
           "const": "fact-requirement"
@@ -1861,50 +1558,13 @@
         "value_contract",
         "answer_contract",
         "evidence_contract",
-        "authority_dependencies",
         "authorization_capability"
-      ],
-      "type": "object"
-    },
-    "FactRequirementHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/FactRequirementId"
-        },
-        "kind": {
-          "const": "fact-requirement-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
       ],
       "type": "object"
     },
     "FactRequirementId": {
       "pattern": "^fact-requirement:sha256:[0-9a-f]{64}$",
       "type": "string"
-    },
-    "FactRequirementInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "kind": {
-          "const": "fact-requirement-inspection-result"
-        },
-        "requirement": {
-          "$ref": "#/$defs/FactRequirement"
-        }
-      },
-      "required": [
-        "kind",
-        "requirement"
-      ],
-      "type": "object"
     },
     "FactRequirementWork": {
       "additionalProperties": false,
@@ -2103,6 +1763,55 @@
       ],
       "type": "object"
     },
+    "FindSnapshotsCall": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "kind": {
+          "const": "find-snapshots"
+        },
+        "lifecycle": {
+          "default": "active",
+          "enum": [
+            "active",
+            "quarantined"
+          ]
+        },
+        "limit": {
+          "default": 50,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "FindSnapshotsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "continuation": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "kind": {
+          "const": "find-snapshots-result"
+        },
+        "snapshots": {
+          "items": {
+            "$ref": "#/$defs/SnapshotSummary"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshots"
+      ],
+      "type": "object"
+    },
     "GeneralSelectionReason": {
       "additionalProperties": false,
       "properties": {
@@ -2152,8 +1861,8 @@
         "kind": {
           "const": "impact-disposition"
         },
-        "obligation_id": {
-          "$ref": "#/$defs/ObligationId"
+        "obligation": {
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "rationale": {
           "$ref": "#/$defs/NonEmptyString"
@@ -2169,7 +1878,7 @@
       },
       "required": [
         "kind",
-        "obligation_id",
+        "obligation",
         "result",
         "rationale",
         "evidence",
@@ -2248,77 +1957,43 @@
     "InspectNextOperation": {
       "additionalProperties": false,
       "properties": {
+        "handle": {
+          "$ref": "#/$defs/InspectableHandle"
+        },
         "operation": {
           "const": "inspect"
         },
         "request_kind": {
           "const": "inspect"
-        },
-        "target": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         }
       },
       "required": [
         "operation",
         "request_kind",
-        "target",
-        "view"
+        "handle"
       ],
       "type": "object"
     },
     "InspectableHandle": {
       "oneOf": [
         {
-          "$ref": "#/$defs/ContentSnapshotHandle"
-        },
-        {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
-        },
-        {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
-        {
-          "$ref": "#/$defs/NavigationHandle"
+          "$ref": "#/$defs/SnapshotHandle"
         },
         {
           "$ref": "#/$defs/AnalysisHandle"
         },
         {
-          "$ref": "#/$defs/PolicyHandle"
+          "$ref": "#/$defs/SnapshotChildHandle"
         },
         {
-          "$ref": "#/$defs/RelationshipHandle"
-        },
-        {
-          "$ref": "#/$defs/CertificateHandle"
-        },
-        {
-          "$ref": "#/$defs/CoverageAuthorityViewHandle"
-        },
-        {
-          "$ref": "#/$defs/CoverageRequirementHandle"
-        },
-        {
-          "$ref": "#/$defs/CoverageAttestationHandle"
-        },
-        {
-          "$ref": "#/$defs/AnalysisContextHandle"
-        },
-        {
-          "$ref": "#/$defs/FactRequirementHandle"
-        },
-        {
-          "$ref": "#/$defs/FactObservationHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         }
       ]
     },
     "InspectionResult": {
       "oneOf": [
         {
-          "$ref": "#/$defs/ContentSnapshotInspectionResult"
+          "$ref": "#/$defs/SnapshotInspectionResult"
         },
         {
           "$ref": "#/$defs/PolicyInspectionResult"
@@ -2327,90 +2002,10 @@
           "$ref": "#/$defs/RelationshipInspectionResult"
         },
         {
-          "$ref": "#/$defs/NavigationInspectionResult"
+          "$ref": "#/$defs/AnalysisInspectionResult"
         },
         {
-          "$ref": "#/$defs/CertificateInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/CoverageAuthorityViewInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/CoverageRequirementInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/CoverageAttestationInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/AnalysisContextInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/FactRequirementInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/FactObservationInspectionResult"
-        },
-        {
-          "$ref": "#/$defs/AnalysisState"
-        },
-        {
-          "$ref": "#/$defs/StandardsAuthorityView"
-        },
-        {
-          "$ref": "#/$defs/ExecutionClosure"
-        }
-      ]
-    },
-    "NavigationHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/NavigationId"
-        },
-        "kind": {
-          "const": "navigation-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "NavigationId": {
-      "pattern": "^navigation-result:sha256:[0-9a-f]{64}$",
-      "type": "string"
-    },
-    "NavigationInspectionResult": {
-      "additionalProperties": false,
-      "properties": {
-        "kind": {
-          "const": "navigation-inspection-result"
-        },
-        "navigation": {
-          "$ref": "#/$defs/NavigationResult"
-        }
-      },
-      "required": [
-        "kind",
-        "navigation"
-      ],
-      "type": "object"
-    },
-    "NavigationResult": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/RouteResult"
-        },
-        {
-          "$ref": "#/$defs/ReadResult"
-        },
-        {
-          "$ref": "#/$defs/RelatedResult"
+          "$ref": "#/$defs/AnalysisChildInspectionResult"
         }
       ]
     },
@@ -2461,8 +2056,8 @@
         "fingerprint": {
           "$ref": "#/$defs/DecisionFingerprint"
         },
-        "id": {
-          "$ref": "#/$defs/ObligationId"
+        "handle": {
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "kind": {
           "enum": [
@@ -2511,7 +2106,7 @@
         }
       },
       "required": [
-        "id",
+        "handle",
         "kind",
         "target",
         "scope",
@@ -2526,33 +2121,9 @@
       "pattern": "^obligation:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
-    "OperationAuthoritySelection": {
-      "additionalProperties": false,
-      "properties": {
-        "authority": {
-          "$ref": "#/$defs/AuthorityObjectReference"
-        },
-        "operation": {
-          "enum": [
-            "route",
-            "read",
-            "related",
-            "analysis"
-          ]
-        }
-      },
-      "required": [
-        "operation",
-        "authority"
-      ],
-      "type": "object"
-    },
     "PendingResult": {
       "additionalProperties": false,
       "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
         "changed_units": {
           "items": {
             "$ref": "#/$defs/ChangedPolicyUnit"
@@ -2615,34 +2186,9 @@
         "obligations",
         "fact_requirements",
         "reading_plan",
-        "next_operations",
-        "authority"
+        "next_operations"
       ],
       "type": "object"
-    },
-    "PolicyHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/PolicyId"
-        },
-        "kind": {
-          "const": "policy-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "PolicyId": {
-      "pattern": "^policy-inspection:sha256:[0-9a-f]{64}$",
-      "type": "string"
     },
     "PolicyImpactSelectionReason": {
       "additionalProperties": false,
@@ -2698,7 +2244,7 @@
           "const": "policy-inspection-result"
         },
         "policy": {
-          "$ref": "#/$defs/PolicyHandle"
+          "$ref": "#/$defs/SnapshotChildHandle"
         },
         "provenance": {
           "$ref": "#/$defs/ProvenanceRecord"
@@ -2792,7 +2338,7 @@
           ]
         },
         "handle": {
-          "$ref": "#/$defs/PolicyHandle"
+          "$ref": "#/$defs/SnapshotChildHandle"
         },
         "scope": {
           "$ref": "#/$defs/ReviewScope"
@@ -2863,6 +2409,33 @@
       ],
       "type": "object"
     },
+    "PolicyUnitMapping": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_units": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "reason": {
+          "const": "no-policy-units"
+        },
+        "state": {
+          "enum": [
+            "exact-policy-unit",
+            "policy-units-present",
+            "incomplete"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "policy_units"
+      ],
+      "type": "object"
+    },
     "PrepareCall": {
       "additionalProperties": false,
       "properties": {
@@ -2878,30 +2451,16 @@
     "ProvenanceRecord": {
       "additionalProperties": false,
       "properties": {
-        "content_snapshot": {
-          "$ref": "#/$defs/ContentSnapshotHandle"
+        "path": {
+          "$ref": "#/$defs/RepositoryPath"
         },
-        "locator": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "source_id": {
-          "$ref": "#/$defs/CanonicalId"
-        },
-        "source_kind": {
-          "enum": [
-            "manifest",
-            "generator",
-            "provider",
-            "canonical-document",
-            "sidecar"
-          ]
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
         }
       },
       "required": [
-        "source_id",
-        "source_kind",
-        "locator",
-        "content_snapshot"
+        "snapshot",
+        "path"
       ],
       "type": "object"
     },
@@ -2920,7 +2479,7 @@
           "const": "provide-fact"
         },
         "requirement": {
-          "$ref": "#/$defs/FactRequirementHandle"
+          "$ref": "#/$defs/AnalysisChildHandle"
         },
         "value": {
           "$ref": "#/$defs/FactValue"
@@ -2934,19 +2493,55 @@
       ],
       "type": "object"
     },
-    "ProviderAuthorityReference": {
+    "ProviderReference": {
       "additionalProperties": false,
       "properties": {
-        "id": {
-          "$ref": "#/$defs/AuthorityObjectId"
+        "contract": {
+          "$ref": "#/$defs/CanonicalId"
         },
-        "object_kind": {
-          "const": "provider-authority"
+        "contract_version": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "input_digest": {
+          "$ref": "#/$defs/Digest"
         }
       },
       "required": [
-        "object_kind",
-        "id"
+        "id",
+        "contract",
+        "contract_version",
+        "input_digest"
+      ],
+      "type": "object"
+    },
+    "QuarantinedSnapshotSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "lifecycle": {
+          "const": "quarantined"
+        },
+        "purge_deadline": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "source_revision": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "snapshot",
+        "lifecycle",
+        "source_revision",
+        "created_at",
+        "purge_deadline"
       ],
       "type": "object"
     },
@@ -2956,12 +2551,12 @@
         "request": {
           "$ref": "#/$defs/QueryRequest"
         },
-        "view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
         }
       },
       "required": [
-        "view",
+        "snapshot",
         "request"
       ],
       "type": "object"
@@ -2979,17 +2574,17 @@
             "related"
           ]
         },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
         "target": {
           "$ref": "#/$defs/CanonicalId"
-        },
-        "view": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
         }
       },
       "required": [
         "operation",
         "request_kind",
-        "view"
+        "snapshot"
       ],
       "type": "object"
     },
@@ -3003,6 +2598,19 @@
         },
         {
           "$ref": "#/$defs/RelatedRequest"
+        }
+      ]
+    },
+    "QueryResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/RouteResult"
+        },
+        {
+          "$ref": "#/$defs/ReadResult"
+        },
+        {
+          "$ref": "#/$defs/RelatedResult"
         }
       ]
     },
@@ -3067,14 +2675,8 @@
     "ReadResult": {
       "additionalProperties": false,
       "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
         "content": {
           "type": "string"
-        },
-        "handle": {
-          "$ref": "#/$defs/NavigationHandle"
         },
         "kind": {
           "const": "read-result"
@@ -3101,6 +2703,9 @@
           "type": "array",
           "uniqueItems": true
         },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
         "specializes": {
           "items": {
             "$ref": "#/$defs/CanonicalId"
@@ -3114,8 +2719,7 @@
       },
       "required": [
         "kind",
-        "handle",
-        "authority",
+        "snapshot",
         "policy",
         "content",
         "requires",
@@ -3219,7 +2823,7 @@
           ]
         },
         "target": {
-          "$ref": "#/$defs/CanonicalId"
+          "$ref": "#/$defs/NonEmptyString"
         }
       },
       "required": [
@@ -3273,12 +2877,6 @@
     "RelatedResult": {
       "additionalProperties": false,
       "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
-        "handle": {
-          "$ref": "#/$defs/NavigationHandle"
-        },
         "kind": {
           "const": "related-result"
         },
@@ -3289,37 +2887,16 @@
           "type": "array"
         },
         "policy_unit_mapping": {
-          "additionalProperties": false,
-          "properties": {
-            "policy_units": {
-              "items": {
-                "$ref": "#/$defs/CanonicalId"
-              },
-              "type": "array",
-              "uniqueItems": true
-            },
-            "reason": {
-              "const": "no-policy-units"
-            },
-            "state": {
-              "enum": [
-                "exact-policy-unit",
-                "policy-units-present",
-                "incomplete"
-              ]
-            }
-          },
-          "required": [
-            "state",
-            "policy_units"
-          ],
-          "type": "object"
+          "$ref": "#/$defs/PolicyUnitMapping"
         },
         "relationships": {
           "items": {
             "$ref": "#/$defs/RelationshipSummary"
           },
           "type": "array"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
         },
         "summary": {
           "type": "string"
@@ -3330,38 +2907,13 @@
       },
       "required": [
         "kind",
-        "handle",
-        "authority",
+        "snapshot",
         "target",
         "policy_unit_mapping",
         "relationships",
         "next_operations"
       ],
       "type": "object"
-    },
-    "RelationshipHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/RelationshipInspectionId"
-        },
-        "kind": {
-          "const": "relationship-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "RelationshipInspectionId": {
-      "pattern": "^relationship-inspection:sha256:[0-9a-f]{64}$",
-      "type": "string"
     },
     "RelationshipInspectionResult": {
       "additionalProperties": false,
@@ -3420,7 +2972,7 @@
           "uniqueItems": true
         },
         "handle": {
-          "$ref": "#/$defs/RelationshipHandle"
+          "$ref": "#/$defs/SnapshotChildHandle"
         },
         "relation": {
           "$ref": "#/$defs/CanonicalId"
@@ -3448,21 +3000,11 @@
       "type": "object"
     },
     "RepositoryPath": {
-      "additionalProperties": false,
-      "properties": {
-        "components": {
-          "items": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array"
-        }
+      "items": {
+        "$ref": "#/$defs/NonEmptyString"
       },
-      "required": [
-        "components"
-      ],
-      "type": "object"
+      "minItems": 1,
+      "type": "array"
     },
     "RequiresReadingReason": {
       "additionalProperties": false,
@@ -3506,9 +3048,6 @@
         "analysis": {
           "$ref": "#/$defs/AnalysisHandle"
         },
-        "obligation_id": {
-          "$ref": "#/$defs/ObligationId"
-        },
         "operation": {
           "const": "resolve"
         },
@@ -3520,11 +3059,11 @@
             "coverage-attestation"
           ]
         },
-        "requirement_id": {
-          "$ref": "#/$defs/FactRequirementId"
-        },
         "target": {
           "$ref": "#/$defs/CanonicalId"
+        },
+        "work": {
+          "$ref": "#/$defs/AnalysisChildHandle"
         }
       },
       "required": [
@@ -3563,12 +3102,6 @@
     "RouteResult": {
       "additionalProperties": false,
       "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExecutionClosureHandle"
-        },
-        "handle": {
-          "$ref": "#/$defs/NavigationHandle"
-        },
         "kind": {
           "const": "route-result"
         },
@@ -3584,6 +3117,9 @@
           },
           "type": "array"
         },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
         "summary": {
           "type": "string"
         },
@@ -3596,8 +3132,7 @@
       },
       "required": [
         "kind",
-        "handle",
-        "authority",
+        "snapshot",
         "reading_plan",
         "unresolved_questions",
         "next_operations"
@@ -3670,22 +3205,6 @@
         }
       ]
     },
-    "SemanticAuthoritySelection": {
-      "additionalProperties": false,
-      "properties": {
-        "authority": {
-          "$ref": "#/$defs/AuthorityObjectReference"
-        },
-        "role": {
-          "$ref": "#/$defs/CanonicalId"
-        }
-      },
-      "required": [
-        "role",
-        "authority"
-      ],
-      "type": "object"
-    },
     "SemanticProposal": {
       "additionalProperties": false,
       "properties": {
@@ -3723,6 +3242,87 @@
       ],
       "type": "object"
     },
+    "SnapshotChildHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "child_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "child_kind": {
+          "enum": [
+            "policy",
+            "relationship"
+          ]
+        },
+        "kind": {
+          "const": "snapshot-child-handle"
+        },
+        "schema_version": {
+          "const": 5
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "child_kind",
+        "child_id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "SnapshotHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/SnapshotId"
+        },
+        "kind": {
+          "const": "snapshot-handle"
+        },
+        "schema_version": {
+          "const": 5
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "SnapshotId": {
+      "pattern": "^snapshot:v1:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "SnapshotInspectionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "snapshot-inspection-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotSummary"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot"
+      ],
+      "type": "object"
+    },
+    "SnapshotSummary": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ActiveSnapshotSummary"
+        },
+        {
+          "$ref": "#/$defs/QuarantinedSnapshotSummary"
+        }
+      ]
+    },
     "SpecializesReadingReason": {
       "additionalProperties": false,
       "properties": {
@@ -3742,68 +3342,6 @@
         "source"
       ],
       "type": "object"
-    },
-    "StandardsAuthorityView": {
-      "additionalProperties": false,
-      "properties": {
-        "authorities": {
-          "items": {
-            "$ref": "#/$defs/SemanticAuthoritySelection"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "content": {
-          "$ref": "#/$defs/ContentSnapshotHandle"
-        },
-        "handle": {
-          "$ref": "#/$defs/StandardsAuthorityViewHandle"
-        },
-        "kind": {
-          "const": "standards-authority-view"
-        },
-        "operation_contracts": {
-          "items": {
-            "$ref": "#/$defs/OperationAuthoritySelection"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "kind",
-        "handle",
-        "content",
-        "operation_contracts",
-        "authorities"
-      ],
-      "type": "object"
-    },
-    "StandardsAuthorityViewHandle": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/StandardsAuthorityViewId"
-        },
-        "kind": {
-          "const": "standards-authority-view-handle"
-        },
-        "schema_version": {
-          "const": 4
-        }
-      },
-      "required": [
-        "kind",
-        "id",
-        "schema_version"
-      ],
-      "type": "object"
-    },
-    "StandardsAuthorityViewId": {
-      "pattern": "^standards-authority-view:sha256:[0-9a-f]{64}$",
-      "type": "string"
     },
     "StructuredScope": {
       "additionalProperties": false,
@@ -3841,6 +3379,42 @@
         }
       ]
     },
+    "Timestamp": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "UndeleteSnapshotCall": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "undelete-snapshot"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot"
+      ],
+      "type": "object"
+    },
+    "UndeleteSnapshotResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "undelete-snapshot-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/ActiveSnapshotSummary"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot"
+      ],
+      "type": "object"
+    },
     "WholeArtifactScope": {
       "additionalProperties": false,
       "properties": {
@@ -3854,8 +3428,56 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 11,
+  "interface_schema_version": 12,
   "operations": [
+    {
+      "capability": "standards.snapshot.create",
+      "id": "create_snapshot",
+      "input_definition": "CreateSnapshotCall",
+      "input_schema": {
+        "$ref": "#/$defs/CreateSnapshotCall"
+      },
+      "result_definitions": [
+        "CreateSnapshotResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.snapshot.read",
+      "id": "find_snapshots",
+      "input_definition": "FindSnapshotsCall",
+      "input_schema": {
+        "$ref": "#/$defs/FindSnapshotsCall"
+      },
+      "result_definitions": [
+        "FindSnapshotsResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.snapshot.delete",
+      "id": "delete_snapshot",
+      "input_definition": "DeleteSnapshotCall",
+      "input_schema": {
+        "$ref": "#/$defs/DeleteSnapshotCall"
+      },
+      "result_definitions": [
+        "DeleteSnapshotResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.snapshot.undelete",
+      "id": "undelete_snapshot",
+      "input_definition": "UndeleteSnapshotCall",
+      "input_schema": {
+        "$ref": "#/$defs/UndeleteSnapshotCall"
+      },
+      "result_definitions": [
+        "UndeleteSnapshotResult",
+        "RejectedResult"
+      ]
+    },
     {
       "capability": "standards.read",
       "id": "query",
@@ -3864,7 +3486,7 @@
         "$ref": "#/$defs/QueryCall"
       },
       "result_definitions": [
-        "NavigationResult",
+        "QueryResult",
         "RejectedResult"
       ]
     },
@@ -3912,7 +3534,7 @@
       ]
     }
   ],
-  "request_contract_version": 3,
-  "result_projection_version": 3,
+  "request_contract_version": 4,
+  "result_projection_version": 4,
   "schema_version": 1
 }

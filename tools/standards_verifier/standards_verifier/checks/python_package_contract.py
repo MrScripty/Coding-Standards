@@ -20,7 +20,7 @@ from ..python_packages import (
     execute_python_package_contract,
     python_package_authority_paths,
 )
-from tools.standards_authority.standards_authority import GitIndexError, git_output
+from tools.repository_git.repository_git import GitRepositoryError, git_output
 
 
 @dataclass(frozen=True, slots=True)
@@ -98,7 +98,7 @@ class PythonPackageContractCheck:
         for case in cases:
             try:
                 observed = _audit_fixture(case)
-            except GitIndexError as error:
+            except GitRepositoryError as error:
                 diagnostics.append(
                     Diagnostic(
                         "PYTHON_PACKAGE.FIXTURE_UNAVAILABLE",

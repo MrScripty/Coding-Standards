@@ -11,6 +11,8 @@ from tools.standards_identity.standards_identity import (
     IdentityError,
     IdentityObject,
     encode_identity_value,
+    frame_path_byte_set,
+    frame_path_bytes,
     hash_identity,
 )
 
@@ -23,7 +25,9 @@ def _identity_value(value: object):
     if type(value) is list:
         return IdentityArray(_identity_value(item) for item in value)
     if type(value) is dict:
-        return IdentityObject((key, _identity_value(item)) for key, item in value.items())
+        return IdentityObject(
+            (key, _identity_value(item)) for key, item in value.items()
+        )
     return value
 
 
@@ -175,6 +179,22 @@ class IdentityEncodingTest(unittest.TestCase):
         for prefix in ("", "A", "1a", "a:b", "\u00e9"):
             with self.subTest(prefix=prefix), self.assertRaises(IdentityError):
                 hash_identity("valid", prefix, value)
+
+    def test_path_byte_frames_preserve_exact_paths_and_bytes(self) -> None:
+        framed = frame_path_bytes(("nested", "é.txt"), b"\x00\xff")
+        self.assertEqual(
+            encode_identity_value(framed),
+            b'{"bytes":[0,255],"path":["nested","\xc3\xa9.txt"]}',
+        )
+        selected = frame_path_byte_set(((("z",), b"last"), (("a",), b"first")))
+        self.assertEqual(
+            tuple(dict(item.members)["path"].values for item in selected.values),
+            (("a",), ("z",)),
+        )
+        with self.assertRaises(IdentityError):
+            frame_path_byte_set(((("same",), b"one"), (("same",), b"two")))
+        with self.assertRaises(IdentityError):
+            frame_path_bytes("ambiguous", b"bytes")
 
 
 if __name__ == "__main__":

@@ -1,25 +1,35 @@
 from __future__ import annotations
 
+import hashlib
 import tomllib
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
+from types import MappingProxyType
 from typing import Any, Mapping
 
 from tools.standards_applicability.standards_applicability import LANGUAGE_VERSION
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
+    ContentSource,
+    ContentSourceInput,
+    MetadataError,
     PolicyUnit,
+    content_source,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     CompiledPolicyImpactSet,
 )
 
 from .errors import AnalysisError, AnalysisFailure
-from .keys import analysis_key_bytes, raw_digest
-from .suite_inputs import (
-    absent_input_fingerprint,
-    load_captured_suite_input_manifest,
-    load_suite_input_manifest,
+from .keys import analysis_identity, analysis_key_bytes, analysis_value_digest, raw_digest
+from .trust import (
+    AnalysisExecutionContext,
+    AuthorizationAuthorityContract,
+    AuthorizationClaim,
+    AuthorizationRequest,
+    EvidenceContractKey,
+    EvidenceReference,
+    ResolvedEvidence,
+    construct_authorization_record,
 )
 
 
@@ -27,6 +37,16 @@ DEFAULT_HORIZON = "evaluation/standards-effectiveness/policy-coverage/horizons.t
 HORIZON_ID = "audit-horizon.policy-impact-consumers"
 HORIZON_PROVIDER = "standards-analysis:policy-impact-consumer-horizon"
 HORIZON_VERSION = 5
+DEFAULT_ATTESTATION_REGISTRY = (
+    "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
+)
+DEFAULT_AUTHORIZATION_AUTHORITY = (
+    "evaluation/standards-effectiveness/policy-coverage/authorization-authority.toml"
+)
+DEFAULT_REVOCATIONS = (
+    "evaluation/standards-effectiveness/policy-coverage/revocations.toml"
+)
+COVERAGE_EVIDENCE_CONTRACT = "coverage-evidence.v1"
 
 
 def _error(
@@ -50,42 +70,26 @@ def _error(
     )
 
 
-def _repository_path(root: Path, value: str) -> Path:
-    logical = PurePosixPath(value)
-    candidate = (root / Path(*logical.parts)).resolve(strict=False)
-    if (
-        not value
-        or logical.is_absolute()
-        or ".." in logical.parts
-        or value.startswith("./")
-        or str(logical) != value
-        or not candidate.is_relative_to(root)
-    ):
-        raise _error(
-            "COVERAGE.PATH",
-            "coverage inputs must be normalized contained repository paths",
-            path=value,
-        )
-    return candidate
-
-
-def _repository_file(root: Path, value: str) -> Path:
-    candidate = _repository_path(root, value)
-    if not candidate.is_file():
-        raise _error(
-            "COVERAGE.INPUT_UNAVAILABLE",
-            "coverage input is unavailable",
-            path=value,
-            unavailable=True,
-        )
-    return candidate
-
-
-def _toml(root: Path, path: str) -> dict[str, Any]:
-    source = _repository_file(root, path)
+def _read(source: ContentSource, path: str) -> bytes:
     try:
-        with source.open("rb") as handle:
-            return tomllib.load(handle)
+        return source.read_bytes(path)
+    except MetadataError as error:
+        failure = error.failure
+        raise _error(
+            "COVERAGE.INPUT_UNAVAILABLE"
+            if failure.outcome == "unavailable"
+            else "COVERAGE.PATH",
+            failure.message,
+            path=failure.path or path,
+            unavailable=failure.outcome == "unavailable",
+        ) from error
+
+
+def _toml(source: ContentSource, path: str) -> dict[str, Any]:
+    try:
+        return tomllib.loads(_read(source, path).decode("utf-8"))
+    except UnicodeDecodeError as error:
+        raise _error("COVERAGE.INVALID_UTF8", str(error), path=path) from error
     except tomllib.TOMLDecodeError as error:
         raise _error("COVERAGE.INVALID_TOML", str(error), path=path) from error
 
@@ -244,6 +248,63 @@ class CoverageDefinitionIndex:
     input_sources: tuple[str, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class RepositoryCoverageDecisions:
+    attestations: Mapping[str, Mapping[str, object]]
+    authorization_records: Mapping[str, Mapping[str, object]]
+    input_sources: tuple[str, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "attestations",
+            MappingProxyType(dict(sorted(self.attestations.items()))),
+        )
+        object.__setattr__(
+            self,
+            "authorization_records",
+            MappingProxyType(dict(sorted(self.authorization_records.items()))),
+        )
+        object.__setattr__(self, "input_sources", tuple(sorted(self.input_sources)))
+
+    @property
+    def covered_subjects(self) -> frozenset[str]:
+        return frozenset(self.attestations)
+
+
+@dataclass(frozen=True, slots=True)
+class _RepositoryAuthorization:
+    source: ContentSource
+    contract: AuthorizationAuthorityContract
+    capability: str
+    evidence: tuple[ResolvedEvidence, ...]
+    revocation_evidence: tuple[ResolvedEvidence, ...]
+    revoked: frozenset[str]
+    inputs: tuple[str, ...]
+
+    def authorize(self, request: AuthorizationRequest) -> AuthorizationClaim:
+        if request.capability != self.capability:
+            raise _error(
+                "COVERAGE.AUTHORIZATION_CAPABILITY",
+                "repository authority does not grant the requested capability",
+            )
+        return AuthorizationClaim(
+            request.action,
+            request.subject_kind,
+            request.subject_id,
+            request.capability,
+            tuple(
+                ResolvedEvidence(item, _read(self.source, item.id))
+                for item in request.evidence
+            ),
+            self.evidence,
+            self.revocation_evidence,
+            "not-revoked",
+            "allow",
+        )
+
+
+
 def _merge_member(
     members: dict[str, tuple[set[str], str]],
     member_id: str,
@@ -264,20 +325,18 @@ def _merge_member(
     roles.add(role)
 
 
-def _file_fingerprint(root: Path, path: str) -> str:
-    return raw_digest(_repository_file(root, path).read_bytes())
+def _file_fingerprint(source: ContentSource, path: str) -> str:
+    return raw_digest(_read(source, path))
 
 
 def _load_coverage_horizon(
-    root: Path,
+    source: ContentSourceInput,
     corpus: CanonicalStandardsCorpus,
     compiled: CompiledPolicyImpactSet,
     path: str = DEFAULT_HORIZON,
-    *,
-    captured: bool,
 ) -> CoverageHorizon:
-    repo_root = root.resolve()
-    raw = _toml(repo_root, path)
+    selected_source = content_source(source)
+    raw = _toml(selected_source, path)
     _exact(
         raw,
         required={
@@ -325,7 +384,7 @@ def _load_coverage_horizon(
             members,
             f"repository:{module.path}",
             "canonical-module",
-            _file_fingerprint(repo_root, module.path),
+            _file_fingerprint(selected_source, module.path),
         )
     for unit in corpus.policy_units:
         _merge_member(
@@ -347,7 +406,7 @@ def _load_coverage_horizon(
         raw["edge_source_registry"], path=path, field="edge_source_registry"
     )
     input_sources.add(edge_registry_path)
-    edge_registry = _toml(repo_root, edge_registry_path)
+    edge_registry = _toml(selected_source, edge_registry_path)
     for source in edge_registry.get("sources", []):
         if not isinstance(source, dict):
             raise _error(
@@ -369,14 +428,14 @@ def _load_coverage_horizon(
                 members,
                 f"repository:{source_path}",
                 "edge-source-manifest",
-                _file_fingerprint(repo_root, source_path),
+                _file_fingerprint(selected_source, source_path),
             )
 
     suite_registry_path = _text(
         raw["suite_registry"], path=path, field="suite_registry"
     )
     input_sources.add(suite_registry_path)
-    suite_registry = _toml(repo_root, suite_registry_path)
+    suite_registry = _toml(selected_source, suite_registry_path)
     registry_entries = suite_registry.get("suites", [])
     if not isinstance(registry_entries, list):
         raise _error(
@@ -394,7 +453,7 @@ def _load_coverage_horizon(
         suite_id = _text(entry.get("id"), path=suite_registry_path, field="id")
         suite_path = _text(entry.get("path"), path=suite_registry_path, field="path")
         input_sources.add(suite_path)
-        suite_raw = _toml(repo_root, suite_path)
+        suite_raw = _toml(selected_source, suite_path)
         if suite_raw.get("id") != suite_id:
             raise _error(
                 "COVERAGE.SUITE_ID",
@@ -409,7 +468,7 @@ def _load_coverage_horizon(
             _digest(
                 {
                     "registration": entry,
-                    "content": _file_fingerprint(repo_root, suite_path),
+                    "content": _file_fingerprint(selected_source, suite_path),
                 }
             ),
         )
@@ -417,48 +476,7 @@ def _load_coverage_horizon(
             members,
             f"repository:{suite_path}",
             "suite-definition",
-            _file_fingerprint(repo_root, suite_path),
-        )
-    suite_inputs_path = _text(raw["suite_inputs"], path=path, field="suite_inputs")
-    input_sources.add(suite_inputs_path)
-    _merge_member(
-        members,
-        f"repository:{suite_inputs_path}",
-        "suite-input-projection",
-        _file_fingerprint(repo_root, suite_inputs_path),
-    )
-    manifest_loader = (
-        load_captured_suite_input_manifest if captured else load_suite_input_manifest
-    )
-    suite_input_manifest = manifest_loader(
-        repo_root,
-        suite_inputs_path,
-        suite_registry_path,
-        registry_entries,
-    )
-    for item in suite_input_manifest.files:
-        if item.state == "present":
-            assert item.digest is not None
-            input_sources.add(item.path)
-            _merge_member(
-                members,
-                f"repository:{item.path}",
-                "registered-suite-input",
-                item.digest,
-            )
-        else:
-            _merge_member(
-                members,
-                f"repository-state:{item.path}",
-                "registered-suite-input-absence",
-                absent_input_fingerprint(item),
-            )
-    if suite_input_manifest.repository_index is not None:
-        _merge_member(
-            members,
-            "repository-index:git",
-            "registered-suite-index",
-            suite_input_manifest.repository_index.digest,
+            _file_fingerprint(selected_source, suite_path),
         )
 
     input_sources.update(compiled.input_sources)
@@ -471,7 +489,10 @@ def _load_coverage_horizon(
             _digest(
                 {
                     "artifact": artifact.coverage_fingerprint,
-                    "content": _file_fingerprint(repo_root, artifact.repository_path),
+                    "content": _file_fingerprint(
+                        selected_source,
+                        artifact.repository_path,
+                    ),
                 }
             ),
         )
@@ -499,21 +520,12 @@ def _load_coverage_horizon(
 
 
 def load_coverage_horizon(
-    root: Path,
+    source: ContentSourceInput,
     corpus: CanonicalStandardsCorpus,
     compiled: CompiledPolicyImpactSet,
     path: str = DEFAULT_HORIZON,
 ) -> CoverageHorizon:
-    return _load_coverage_horizon(root, corpus, compiled, path, captured=False)
-
-
-def load_captured_coverage_horizon(
-    root: Path,
-    corpus: CanonicalStandardsCorpus,
-    compiled: CompiledPolicyImpactSet,
-    path: str = DEFAULT_HORIZON,
-) -> CoverageHorizon:
-    return _load_coverage_horizon(root, corpus, compiled, path, captured=True)
+    return _load_coverage_horizon(source, corpus, compiled, path)
 
 
 def derive_coverage_view(
@@ -590,17 +602,419 @@ def compile_coverage_definitions(
     )
 
 
+def coverage_requirement_projection(
+    requirement: CoverageRequirementDefinition,
+    view: CoverageViewDefinition,
+) -> dict[str, object]:
+    return {
+        **requirement.as_projection(),
+        "required_evidence_contract": COVERAGE_EVIDENCE_CONTRACT,
+        "view_digest": analysis_value_digest(view.as_projection()),
+    }
+
+
+def coverage_requirement_id(
+    requirement: CoverageRequirementDefinition,
+    view: CoverageViewDefinition,
+) -> str:
+    return raw_digest(
+        analysis_key_bytes(coverage_requirement_projection(requirement, view))
+    )
+
+
+def load_repository_coverage_decisions(
+    source_input: ContentSourceInput,
+    definitions: CoverageDefinitionIndex,
+    *,
+    attestation_registry: str = DEFAULT_ATTESTATION_REGISTRY,
+    authorization_authority: str = DEFAULT_AUTHORIZATION_AUTHORITY,
+    revocations: str = DEFAULT_REVOCATIONS,
+) -> RepositoryCoverageDecisions:
+    source = content_source(source_input)
+    authority = _load_repository_authorization(
+        source, authorization_authority, revocations
+    )
+    registry = _toml(source, attestation_registry)
+    _exact(
+        registry,
+        required={"schema_version", "sources"},
+        allowed={"schema_version", "sources"},
+        path=attestation_registry,
+        field="attestation registry",
+    )
+    if registry["schema_version"] != 2:
+        raise _error(
+            "COVERAGE.ATTESTATION_VERSION",
+            "unsupported repository attestation registry version",
+            path=attestation_registry,
+        )
+    claim_sources = _texts(
+        registry["sources"],
+        path=attestation_registry,
+        field="sources",
+        allow_empty=True,
+    )
+    attestations: dict[str, Mapping[str, object]] = {}
+    authorizations: dict[str, Mapping[str, object]] = {}
+    inputs = {attestation_registry, *claim_sources, *authority.inputs}
+    for claim_source in claim_sources:
+        declaration = _toml(source, claim_source)
+        _exact(
+            declaration,
+            required={"schema_version", "attestations"},
+            allowed={"schema_version", "attestations"},
+            path=claim_source,
+            field="attestation source",
+        )
+        claims = declaration["attestations"]
+        if declaration["schema_version"] != 4 or not isinstance(claims, list):
+            raise _error(
+                "COVERAGE.ATTESTATION_VERSION",
+                "unsupported repository attestation source version",
+                path=claim_source,
+            )
+        for raw_claim in claims:
+            if not isinstance(raw_claim, dict):
+                raise _error(
+                    "COVERAGE.ATTESTATION",
+                    "attestation must be a table",
+                    path=claim_source,
+                )
+            claim = _coverage_claim(raw_claim, claim_source)
+            inputs.update(claim["evidence"])
+            inputs.update(claim["explicit_exclusions"])
+            subject = str(claim["subject"])
+            view = definitions.views.get(subject)
+            requirement = definitions.requirements.get(subject)
+            if view is None or requirement is None:
+                raise _error(
+                    "COVERAGE.UNKNOWN_SUBJECT",
+                    "coverage claim subject is not one active policy unit",
+                    path=claim_source,
+                    observed=subject,
+                )
+            if not _claim_matches_view(claim, view):
+                continue
+            if subject in attestations:
+                raise _error(
+                    "COVERAGE.DUPLICATE_SUBJECT",
+                    "coverage subject has more than one current attestation",
+                    path=claim_source,
+                    observed=subject,
+                )
+            if claim["auditor_provenance"] != authority.contract.principal_id:
+                raise _error(
+                    "COVERAGE.UNAUTHORIZED_PRINCIPAL",
+                    "attestation provenance is not authorized",
+                    path=claim_source,
+                    observed=str(claim["auditor_provenance"]),
+                )
+            requirement_id = coverage_requirement_id(requirement, view)
+            evidence = tuple(
+                _repository_evidence(source, path)
+                for path in claim["evidence"]
+            )
+            exclusions = tuple(
+                _repository_evidence(source, path)
+                for path in claim["explicit_exclusions"]
+            )
+            authorization = construct_authorization_record(
+                AnalysisExecutionContext(authority),
+                AuthorizationRequest(
+                    "coverage-attestation",
+                    "coverage-requirement",
+                    requirement_id,
+                    authority.capability,
+                    evidence,
+                ),
+            )
+            legacy_grant = analysis_identity(
+                "coding-standards:repository-coverage-grant-key:v1",
+                "coverage-grant",
+                {
+                    "issuer": authority.contract.issuer_id,
+                    "principal": authority.contract.principal_id,
+                    "requirement": requirement_id,
+                    "capability": authority.capability,
+                },
+            )
+            authorization_id = str(authorization.reference["id"])
+            if legacy_grant in authority.revoked or authorization_id in authority.revoked:
+                raise _error(
+                    "COVERAGE.AUTHORIZATION_REVOKED",
+                    "repository coverage authorization is revoked",
+                    path=revocations,
+                    observed=authorization_id,
+                )
+            attestations[subject] = MappingProxyType(
+                {
+                    "requirement_id": requirement_id,
+                    "conclusion": claim["conclusion"],
+                    "evidence": [item.as_contract() for item in evidence],
+                    "explicit_exclusions": [
+                        item.as_contract() for item in exclusions
+                    ],
+                    "rationale": claim["rationale"],
+                    "auditor_provenance": claim["auditor_provenance"],
+                    "schema_version": 4,
+                    "authorization_id": authorization_id,
+                }
+            )
+            authorizations[authorization_id] = MappingProxyType(
+                authorization.as_contract()
+            )
+    return RepositoryCoverageDecisions(
+        attestations,
+        authorizations,
+        tuple(sorted(inputs)),
+    )
+
+
+def _load_repository_authorization(
+    source: ContentSource,
+    path: str,
+    revocations_path: str,
+) -> _RepositoryAuthorization:
+    raw = _toml(source, path)
+    fields = {
+        "schema_version",
+        "issuer_id",
+        "issuer_semantic_revision",
+        "principal_id",
+        "capability",
+        "authorization_evidence",
+        "revocation_authority_id",
+        "revocation_authority_semantic_revision",
+        "revocations",
+    }
+    _exact(raw, required=fields, allowed=fields, path=path, field="authorization")
+    if raw["schema_version"] != 1 or raw["revocations"] != revocations_path:
+        raise _error(
+            "COVERAGE.AUTHORIZATION_VERSION",
+            "unsupported or contradictory repository authorization authority",
+            path=path,
+        )
+    revoked = _toml(source, revocations_path)
+    revoked_fields = {
+        "schema_version",
+        "authority_id",
+        "semantic_revision",
+        "revoked_grants",
+    }
+    _exact(
+        revoked,
+        required=revoked_fields,
+        allowed=revoked_fields,
+        path=revocations_path,
+        field="revocations",
+    )
+    if (
+        revoked["schema_version"] != 1
+        or revoked["authority_id"] != raw["revocation_authority_id"]
+        or revoked["semantic_revision"]
+        != raw["revocation_authority_semantic_revision"]
+    ):
+        raise _error(
+            "COVERAGE.REVOCATION_AUTHORITY_MISMATCH",
+            "revocation authority does not match authorization authority",
+            path=revocations_path,
+        )
+    evidence_paths = _texts(
+        raw["authorization_evidence"],
+        path=path,
+        field="authorization_evidence",
+    )
+    evidence = tuple(
+        _resolved_repository_evidence(source, item) for item in evidence_paths
+    )
+    revocation_evidence = (
+        _resolved_repository_evidence(source, revocations_path),
+    )
+    evidence_contracts = tuple(
+        sorted(
+            {
+                EvidenceContractKey(
+                    item.reference.provider_contract,
+                    item.reference.provider_contract_version,
+                )
+                for item in evidence
+            }
+        )
+    )
+    revocation_contracts = tuple(
+        EvidenceContractKey(
+            item.reference.provider_contract,
+            item.reference.provider_contract_version,
+        )
+        for item in revocation_evidence
+    )
+    contract = AuthorizationAuthorityContract(
+        _text(raw["issuer_id"], path=path, field="issuer_id"),
+        _positive_integer(
+            raw["issuer_semantic_revision"],
+            path=path,
+            field="issuer_semantic_revision",
+        ),
+        _text(raw["principal_id"], path=path, field="principal_id"),
+        "authorization-grant.v1",
+        evidence_contracts,
+        _text(
+            raw["revocation_authority_id"],
+            path=path,
+            field="revocation_authority_id",
+        ),
+        _positive_integer(
+            raw["revocation_authority_semantic_revision"],
+            path=path,
+            field="revocation_authority_semantic_revision",
+        ),
+        "authorization-revocation.v1",
+        revocation_contracts,
+    )
+    return _RepositoryAuthorization(
+        source,
+        contract,
+        _text(raw["capability"], path=path, field="capability"),
+        evidence,
+        revocation_evidence,
+        frozenset(
+            _texts(
+                revoked["revoked_grants"],
+                path=revocations_path,
+                field="revoked_grants",
+                allow_empty=True,
+            )
+        ),
+        tuple(sorted({path, revocations_path, *evidence_paths})),
+    )
+
+
+def _coverage_claim(raw: Mapping[str, object], path: str) -> dict[str, object]:
+    fields = {
+        "subject",
+        "semantic_revision",
+        "horizon_provider",
+        "horizon_version",
+        "relationship_kind_contract_version",
+        "applicability_language_version",
+        "coverage_evidence_contract",
+        "conclusion",
+        "evidence",
+        "explicit_exclusions",
+        "rationale",
+        "auditor_provenance",
+    }
+    _exact(raw, required=fields, allowed=fields, path=path, field="attestation")
+    conclusion = _text(raw["conclusion"], path=path, field="conclusion")
+    if conclusion != "complete":
+        raise _error(
+            "COVERAGE.ATTESTATION_INVALID",
+            "coverage attestation conclusion must be complete",
+            path=path,
+        )
+    return {
+        "subject": _text(raw["subject"], path=path, field="subject"),
+        "semantic_revision": _positive_integer(
+            raw["semantic_revision"], path=path, field="semantic_revision"
+        ),
+        "horizon_provider": _text(
+            raw["horizon_provider"], path=path, field="horizon_provider"
+        ),
+        "horizon_version": _positive_integer(
+            raw["horizon_version"], path=path, field="horizon_version"
+        ),
+        "relationship_kind_contract_version": _positive_integer(
+            raw["relationship_kind_contract_version"],
+            path=path,
+            field="relationship_kind_contract_version",
+        ),
+        "applicability_language_version": _positive_integer(
+            raw["applicability_language_version"],
+            path=path,
+            field="applicability_language_version",
+        ),
+        "coverage_evidence_contract": _text(
+            raw["coverage_evidence_contract"],
+            path=path,
+            field="coverage_evidence_contract",
+        ),
+        "conclusion": conclusion,
+        "evidence": _texts(raw["evidence"], path=path, field="evidence"),
+        "explicit_exclusions": _texts(
+            raw["explicit_exclusions"],
+            path=path,
+            field="explicit_exclusions",
+            allow_empty=True,
+        ),
+        "rationale": _text(raw["rationale"], path=path, field="rationale"),
+        "auditor_provenance": _text(
+            raw["auditor_provenance"], path=path, field="auditor_provenance"
+        ),
+    }
+
+
+def _claim_matches_view(
+    claim: Mapping[str, object],
+    view: CoverageViewDefinition,
+) -> bool:
+    return (
+        claim["semantic_revision"] == view.semantic_revision
+        and claim["horizon_provider"] == view.horizon_provider
+        and claim["horizon_version"] == view.horizon_version
+        and claim["relationship_kind_contract_version"]
+        == view.relationship_kind_contract_version
+        and claim["applicability_language_version"]
+        == view.applicability_language_version
+        and claim["coverage_evidence_contract"] == COVERAGE_EVIDENCE_CONTRACT
+    )
+
+
+def _positive_integer(value: object, *, path: str, field: str) -> int:
+    if type(value) is not int or value < 1:
+        raise _error(
+            "COVERAGE.VALUE",
+            "coverage field must be a positive integer",
+            path=path,
+            field=field,
+        )
+    return value
+
+
+def _repository_evidence(source: ContentSource, path: str) -> EvidenceReference:
+    return EvidenceReference(
+        path,
+        "sha256:" + hashlib.sha256(_read(source, path)).hexdigest(),
+        "repository-content",
+        "1",
+    )
+
+
+def _resolved_repository_evidence(
+    source: ContentSource,
+    path: str,
+) -> ResolvedEvidence:
+    return ResolvedEvidence(_repository_evidence(source, path), _read(source, path))
+
+
 __all__ = (
     "CoverageDefinitionIndex",
     "CoverageHorizon",
     "CoverageHorizonMember",
     "CoverageRequirementDefinition",
     "CoverageViewDefinition",
+    "RepositoryCoverageDecisions",
+    "COVERAGE_EVIDENCE_CONTRACT",
+    "DEFAULT_ATTESTATION_REGISTRY",
+    "DEFAULT_AUTHORIZATION_AUTHORITY",
+    "DEFAULT_REVOCATIONS",
     "DEFAULT_HORIZON",
     "HORIZON_ID",
     "HORIZON_PROVIDER",
     "compile_coverage_definitions",
+    "coverage_requirement_id",
+    "coverage_requirement_projection",
     "derive_coverage_requirement",
     "derive_coverage_view",
     "load_coverage_horizon",
+    "load_repository_coverage_decisions",
 )

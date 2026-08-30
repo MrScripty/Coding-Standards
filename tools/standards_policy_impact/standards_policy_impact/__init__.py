@@ -20,13 +20,6 @@ from .model import (
     RelationshipKind,
     thaw,
 )
-from .authority import (
-    COMPILED_POLICY_IMPACT_CODEC,
-    POLICY_IMPACT_CODECS,
-    CompiledPolicyImpactAuthority,
-    CompiledPolicyImpactCodec,
-)
-
 __all__ = (
     "DEFAULT_AUTHORING_CONTRACT",
     "CATALOG_SOURCE_ID",
@@ -36,10 +29,6 @@ __all__ = (
     "SEMANTIC_GROUP",
     "SOURCE_ID",
     "CompiledPolicyImpactSet",
-    "CompiledPolicyImpactAuthority",
-    "CompiledPolicyImpactCodec",
-    "COMPILED_POLICY_IMPACT_CODEC",
-    "POLICY_IMPACT_CODECS",
     "PolicyImpactArtifact",
     "PolicyImpactError",
     "PolicyImpactFailure",

@@ -171,10 +171,10 @@ class ContractSemanticsTest(unittest.TestCase):
             compiled.validate(
                 "QueryCall",
                 {
-                    "view": {
-                        "kind": "standards-authority-view-handle",
+                    "snapshot": {
+                        "kind": "snapshot-handle",
                         "id": "invalid",
-                        "schema_version": 4,
+                        "schema_version": 5,
                     },
                     "request": {"kind": "route", "facts": {}},
                 },
@@ -182,7 +182,7 @@ class ContractSemanticsTest(unittest.TestCase):
         selected = caught.exception.failure
         self.assertEqual(selected.code, "CONTRACT.INVALID_INSTANCE")
         self.assertEqual(selected.definition, "QueryCall")
-        self.assertTrue(selected.instance_pointer.startswith("/view"))
+        self.assertTrue(selected.instance_pointer.startswith("/snapshot"))
         self.assertIsNotNone(selected.keyword)
 
 

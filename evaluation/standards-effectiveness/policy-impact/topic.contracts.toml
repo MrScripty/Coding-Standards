@@ -219,7 +219,7 @@ rationale = "The public facade enforces declared handle versions at the generate
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
-consumer = "tools/standards_authority/standards_authority/snapshot.py"
+consumer = "tools/standards_snapshots/standards_snapshots/model.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
@@ -435,7 +435,7 @@ rationale = "Applicability values use their declared domain equality without inh
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
-consumer = "tools/standards_authority/standards_authority/repository.py"
+consumer = "tools/standards_snapshots/standards_snapshots/store.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
@@ -503,11 +503,11 @@ consumer = "tools/standards_engine/standards_engine/rendering.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Rendering exhaustively consumes the generated v11 result algebra."
+rationale = "Rendering exhaustively consumes the generated v12 result algebra."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
-consumer = "evaluation/standards-effectiveness/fixtures/contracts/a1b/python-package-imports.toml"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml"
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
@@ -587,18 +587,18 @@ rationale = "The Metadata root no longer exports generic serialization authority
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
-consumer = "tools/standards_analysis/standards_analysis/coverage_authority.py"
+consumer = "tools/standards_analysis/standards_analysis/coverage.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
-rationale = "Authored coverage claims remain separate from Analysis-owned v3 grants, attestations, and certificates."
+evidence_owner = "suite:a1c-aggregate-replay"
+rationale = "Authored coverage claims remain separate from Analysis-owned validation and derived certificates."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_analysis/tests/test_coverage.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-aggregate-replay"
 rationale = "The fixture proves stale claims cannot become current certificates and exact authorization, revocation, and evidence authority is enforced."
 
 [[relationships]]

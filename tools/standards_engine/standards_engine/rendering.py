@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Callable, Mapping, Protocol
 
+
 class ContractValue(Protocol):
     def as_contract(self) -> dict[str, object]: ...
 
@@ -26,14 +27,17 @@ def _pending(value: Mapping[str, object]) -> str:
     obligations = _items(value, "obligations")
     if requirements:
         lines.append("FACT REQUIREMENTS")
-        lines.extend(
-            f"  {item['handle']['id']} {item['fact']}" for item in requirements
-        )
+        for item in requirements:
+            requirement = _mapping(item.get("requirement"))
+            handle = _mapping(requirement.get("handle"))
+            lines.append(f"  {handle.get('child_id', '')} {requirement.get('fact', '')}")
     if obligations:
         lines.append("REVIEWS")
-        lines.extend(
-            f"  {item['id']} {item['target']} [{item['state']}]" for item in obligations
-        )
+        for item in obligations:
+            handle = _mapping(item.get("handle"))
+            lines.append(
+                f"  {handle.get('child_id', '')} {item['target']} [{item['state']}]"
+            )
     operations = _items(value, "next_operations")
     if operations:
         lines.append("NEXT")
@@ -68,7 +72,7 @@ def _state(value: Mapping[str, object]) -> str:
                 f"ANALYSIS STATE {_handle_id(value)}",
                 f"OBSERVATIONS {len(_items(value, 'fact_observations'))}",
                 f"DISPOSITIONS {len(_items(value, 'dispositions'))}",
-                f"COVERAGE DECISIONS {len(_items(value, 'coverage_decisions'))}",
+                f"COVERAGE ATTESTATIONS {len(_items(value, 'coverage_attestations'))}",
             )
         )
         + "\n"
@@ -91,10 +95,27 @@ def _observation(value: Mapping[str, object]) -> str:
 
 
 def _navigation(value: Mapping[str, object]) -> str:
-    lines = [f"NAVIGATION {_handle_id(value)}"]
+    lines = [f"NAVIGATION {_snapshot_id(value)}"]
     for item in _items(value, "reading_plan"):
         lines.append(f"  READ {item['target']} [{item['state']}]")
+    policy = _mapping(value.get("policy"))
+    if policy:
+        lines.append(f"  POLICY {_mapping(policy.get('handle')).get('child_id', '')}")
+    relationships = _items(value, "relationships")
+    if relationships:
+        lines.append(f"  RELATIONSHIPS {len(relationships)}")
     return "\n".join(lines) + "\n"
+
+
+def _snapshot_lifecycle(value: Mapping[str, object]) -> str:
+    kind = str(value["kind"])
+    summaries = _items(value, "snapshots")
+    if summaries:
+        lines = [f"SNAPSHOTS {len(summaries)}"]
+        lines.extend(f"  {_snapshot_id(item)}" for item in summaries)
+        return "\n".join(lines) + "\n"
+    snapshot = _mapping(value.get("snapshot"))
+    return f"{kind.upper()} {_snapshot_id(snapshot or value)}\n"
 
 
 def _rejection(value: Mapping[str, object]) -> str:
@@ -118,6 +139,14 @@ def _inspection(value: Mapping[str, object]) -> str:
 
 def _handle_id(value: Mapping[str, object]) -> str:
     return str(_mapping(value.get("handle")).get("id", ""))
+
+
+def _snapshot_id(value: Mapping[str, object]) -> str:
+    snapshot = _mapping(value.get("snapshot"))
+    if snapshot.get("kind") == "snapshot-handle":
+        return str(snapshot.get("id", ""))
+    nested = _mapping(snapshot.get("snapshot"))
+    return str(nested.get("id", ""))
 
 
 def _items(
@@ -146,6 +175,10 @@ _RESULT_RENDERERS: dict[
     "pending-result": _pending,
     "complete-result": _complete,
     "analysis-state": _state,
+    "create-snapshot-result": _snapshot_lifecycle,
+    "find-snapshots-result": _snapshot_lifecycle,
+    "delete-snapshot-result": _snapshot_lifecycle,
+    "undelete-snapshot-result": _snapshot_lifecycle,
     "route-result": _navigation,
     "read-result": _navigation,
     "related-result": _navigation,

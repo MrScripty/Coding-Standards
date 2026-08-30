@@ -3,64 +3,64 @@ owner = "topic.security"
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_authority/standards_authority/capture.py"
+consumer = "tools/repository_git/repository_git/repository.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_authority/standards_authority/repository.py"
+consumer = "tools/standards_snapshots/standards_snapshots/store.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_authority/standards_authority/snapshot.py"
+consumer = "tools/standards_snapshots/standards_snapshots/module.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_authority/tests/test_capture.py"
+consumer = "tools/repository_git/tests/test_repository.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_authority/tests/test_platform.py"
+consumer = "tools/standards_snapshots/tests/test_store.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_authority/tests/test_repository.py"
+consumer = "tools/standards_snapshots/tests/test_module.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "evaluation/standards-effectiveness/fixtures/architecture/a1b-authority/authority-platform-decisions.tsv"
+consumer = "evaluation/standards-effectiveness/fixtures/architecture/a1c-snapshots/snapshot-lifecycle-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "immutable-authority-closure"
+consumer = "a1c-snapshot-lifecycle"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:immutable-authority-closure"
+evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."

@@ -8,14 +8,11 @@ from tools.graph_engine.graph_engine import EdgeRegistry, GraphError
 from tools.standards_applicability.standards_applicability import ApplicabilityProgram
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
-    covered_repository_policy_units,
+    compile_coverage_definitions,
+    load_coverage_horizon,
+    load_repository_coverage_decisions,
 )
-from tools.standards_graph.standards_graph import (
-    STANDARDS_GRAPH_CODEC,
-    STANDARDS_GRAPH_CODECS,
-    compile_standards_graph_authority,
-    metadata_dependency_source,
-)
+from tools.standards_graph.standards_graph import metadata_dependency_source
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
     MetadataError,
@@ -341,11 +338,10 @@ def load_registered_policy_impact(
         check=check,
     )
     try:
-        covered = covered_repository_policy_units(
+        horizon = load_coverage_horizon(root.resolve(), corpus, compiled)
+        coverage = load_repository_coverage_decisions(
             root.resolve(),
-            graph_codecs=STANDARDS_GRAPH_CODECS,
-            graph_codec=STANDARDS_GRAPH_CODEC,
-            build_graph=compile_standards_graph_authority,
+            compile_coverage_definitions(corpus, compiled, horizon),
         )
     except AnalysisError as error:
         raise _translate_analysis_error(error, suite=suite, check=check) from error
@@ -353,13 +349,14 @@ def load_registered_policy_impact(
         registry,
         compiled,
         corpus.policy_unit_corpus,
-        covered,
+        coverage.covered_subjects,
         _adapter_input_sources(
             corpus,
             compiled,
             suite_paths,
             source_registry_path,
             "evaluation/standards-effectiveness/suite-registry.toml",
+            *coverage.input_sources,
         ),
     )
 

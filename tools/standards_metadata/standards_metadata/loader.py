@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import re
 import tomllib
-from pathlib import Path, PurePosixPath
+from pathlib import PurePosixPath
 from typing import Any, Iterable
 
 from .errors import MetadataError, MetadataFailure
 from .model import CanonicalModuleCorpus, MetadataValidation, ModuleMetadata
-from .paths import contained_file, normalized_repository_path
+from .paths import normalized_repository_path
+from .source import ContentSource, ContentSourceInput, content_source
 
 
 CANONICAL_MODULE_CORPUS = (
@@ -140,13 +141,16 @@ def _relation(
     return tuple(items)
 
 
-def _parse_module(root: Path, path: str) -> tuple[ModuleMetadata | None, list[MetadataFailure]]:
+def _parse_module(
+    source: ContentSource,
+    path: str,
+) -> tuple[ModuleMetadata | None, list[MetadataFailure]]:
     try:
-        source = contained_file(root, path)
+        raw = source.read_bytes(path)
     except MetadataError as error:
         return None, [error.failure]
     try:
-        text = source.read_text(encoding="utf-8")
+        text = raw.decode("utf-8")
     except UnicodeDecodeError as error:
         return None, [
             _failure(
@@ -428,13 +432,14 @@ def _validate_graph(modules: tuple[ModuleMetadata, ...]) -> tuple[MetadataFailur
 
 
 def validate_module_metadata(
-    root: Path,
+    source: ContentSourceInput,
     paths: Iterable[str],
 ) -> MetadataValidation:
+    selected_source = content_source(source)
     modules: list[ModuleMetadata] = []
     failures: list[MetadataFailure] = []
     for path in paths:
-        module, module_failures = _parse_module(root, path)
+        module, module_failures = _parse_module(selected_source, path)
         failures.extend(module_failures)
         if module is not None:
             modules.append(module)
@@ -445,18 +450,21 @@ def validate_module_metadata(
     return MetadataValidation(() if graph_failures else selected, graph_failures)
 
 
-def load_module_metadata(root: Path, path: str) -> ModuleMetadata:
-    module, failures = _parse_module(root, path)
+def load_module_metadata(source: ContentSourceInput, path: str) -> ModuleMetadata:
+    module, failures = _parse_module(content_source(source), path)
     if failures:
         raise MetadataError(failures[0])
     assert module is not None
     return module
 
 
-def _load_toml(path: Path, display_path: str) -> dict[str, Any]:
+def _load_toml(source: ContentSource, display_path: str) -> dict[str, Any]:
     try:
-        with path.open("rb") as handle:
-            raw = tomllib.load(handle)
+        raw = tomllib.loads(source.read_bytes(display_path).decode("utf-8"))
+    except UnicodeDecodeError as error:
+        raise MetadataError(
+            _failure("INPUT.INVALID_UTF8", str(error), path=display_path)
+        ) from error
     except tomllib.TOMLDecodeError as error:
         raise MetadataError(
             _failure("CONFIG.INVALID_TOML", str(error), path=display_path)
@@ -511,11 +519,11 @@ def _members(raw: Any, manifest_path: str) -> tuple[str, ...]:
 
 
 def load_canonical_module_corpus(
-    root: Path,
+    source: ContentSourceInput,
     manifest_path: str = CANONICAL_MODULE_CORPUS,
 ) -> CanonicalModuleCorpus:
-    manifest = contained_file(root, manifest_path)
-    raw = _load_toml(manifest, manifest_path)
+    selected_source = content_source(source)
+    raw = _load_toml(selected_source, manifest_path)
     required = {"schema_version", "members"}
     if set(raw) != required:
         unexpected = sorted(set(raw) - required)
@@ -539,7 +547,7 @@ def load_canonical_module_corpus(
             )
         )
     members = _members(raw["members"], manifest_path)
-    validation = validate_module_metadata(root, members)
+    validation = validate_module_metadata(selected_source, members)
     if validation.failures:
         raise MetadataError(validation.failures[0])
     return CanonicalModuleCorpus(manifest_path, members, validation.modules)

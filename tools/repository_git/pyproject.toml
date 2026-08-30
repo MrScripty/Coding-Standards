@@ -1,0 +1,14 @@
+[project]
+name = "repository-git"
+version = "0.1.0"
+description = "Bounded exact Git observations for Coding Standards tools"
+requires-python = ">=3.11,<3.13"
+dependencies = []
+
+[tool.standards-package]
+schema-version = 2
+public-import-root = "tools.repository_git.repository_git"
+repository-entrypoints = []
+
+[tool.unittest]
+start-directory = "tests"

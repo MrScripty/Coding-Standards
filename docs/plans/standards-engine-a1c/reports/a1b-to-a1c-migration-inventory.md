@@ -125,11 +125,15 @@ paths are:
 - `tools/standards_analysis/standards_analysis/coverage_authority.py`
 - `tools/standards_analysis/standards_analysis/kernel.py`
 - `tools/standards_analysis/standards_analysis/keys.py`
+- `tools/standards_analysis/standards_analysis/obligations.py`
+- `tools/standards_analysis/standards_analysis/routing.py`
 - `tools/standards_analysis/standards_analysis/state.py`
 - `tools/standards_analysis/standards_analysis/suite_inputs.py`
 - `tools/standards_analysis/standards_analysis/trust.py`
 - `tools/standards_analysis/tests/contract_support.py`
 - `tools/standards_analysis/tests/test_authority.py`
+- `tools/standards_analysis/tests/test_impact.py`
+- `tools/standards_analysis/tests/test_obligations.py`
 - `tools/standards_analysis/tests/test_coverage.py`
 - `tools/standards_analysis/tests/test_routing.py`
 - `tools/standards_analysis/tests/test_state.py`
@@ -149,13 +153,17 @@ paths are:
 - `tools/standards_verifier/pyproject.toml`
 - `tools/standards_verifier/standards_verifier/__init__.py`
 - `tools/standards_verifier/standards_verifier/checks/git_index_paths.py`
+- `tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py`
 - `tools/standards_verifier/standards_verifier/checks/python_package_contract.py`
 - `tools/standards_verifier/standards_verifier/entrypoints.py`
 - `tools/standards_verifier/standards_verifier/git_reachability.py`
 - `tools/standards_verifier/standards_verifier/python_packages.py`
+- `tools/standards_verifier/standards_verifier/policy_impact.py`
 - `tools/standards_verifier/standards_verifier/suite_inputs.py`
 - `tools/standards_verifier/tests/test_git_reachability.py`
+- `tools/standards_verifier/tests/test_file_contracts.py`
 - `tools/standards_verifier/tests/test_package_manifest_contract.py`
+- `tools/standards_verifier/tests/test_policy_impact.py`
 - `tools/standards_verifier/tests/test_python_package_contract.py`
 - `tools/standards_verifier/tests/test_suite_inputs.py`
 
@@ -166,6 +174,9 @@ write-set re-plan.
 ### Cutover-contract
 
 - `tools/standards_contracts/README.md`
+- `tools/standards_contracts/standards_contracts/compiler.py`
+- `tools/standards_contracts/standards_contracts/projection.py`
+- `tools/standards_contracts/tests/support.py`
 - `tools/standards_contracts/tests/test_compiler.py`
 - `tools/standards_contracts/tests/test_projection.py`
 - `tools/standards_contracts/tests/test_semantics.py`
@@ -197,10 +208,17 @@ write-set re-plan.
 - `evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/a1c/missing-admitted-source.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 
 The new suite files replace the three A1b suites; they do not extend retained
 Bash checkers. Registered negative cases assert exact intended diagnostics.
+The two checker-dependency projections may change only by replacing the retired
+A1b relationship-migration fixture with the A1c fixture as one contract
+reference and its derived component inbound-file entry. Checker nodes, counts,
+dependency edges, source files, and all unrelated generated rows must remain
+byte-identical.
 
 ### Cutover-authority
 

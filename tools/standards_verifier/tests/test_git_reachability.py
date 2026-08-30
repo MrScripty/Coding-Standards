@@ -9,6 +9,10 @@ from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
 
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
+    GitRepositoryFailure,
+)
 from tools.standards_verifier.standards_verifier.entrypoints import (
     git_reachability_main,
 )
@@ -160,8 +164,14 @@ class GitReachabilityTest(unittest.TestCase):
     def test_unavailable_git_is_a_typed_reachability_failure(self) -> None:
         rows = [(self.first, "retained", "refs/heads/master", "none")]
         with patch(
-            "tools.standards_authority.standards_authority.git_index.subprocess.run",
-            side_effect=FileNotFoundError("git unavailable"),
+            "tools.standards_verifier.standards_verifier.git_reachability.git_command",
+            side_effect=GitRepositoryError(
+                GitRepositoryFailure(
+                    "unavailable",
+                    "REPOSITORY_GIT.EXECUTABLE_UNAVAILABLE",
+                    "Git is unavailable.",
+                )
+            ),
         ):
             with self.assertRaises(ReachabilityError) as raised:
                 verify_manifest(self.root, self.manifest(rows))
@@ -174,8 +184,14 @@ class GitReachabilityTest(unittest.TestCase):
         stderr = StringIO()
         with (
             patch(
-                "tools.standards_authority.standards_authority.git_index.subprocess.run",
-                side_effect=FileNotFoundError("git unavailable"),
+                "tools.standards_verifier.standards_verifier.git_reachability.git_command",
+                side_effect=GitRepositoryError(
+                    GitRepositoryFailure(
+                        "unavailable",
+                        "REPOSITORY_GIT.EXECUTABLE_UNAVAILABLE",
+                        "Git is unavailable.",
+                    )
+                ),
             ),
             redirect_stderr(stderr),
         ):

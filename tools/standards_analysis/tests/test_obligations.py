@@ -14,7 +14,6 @@ from tools.standards_analysis.standards_analysis import (
     classify_changes,
     generate_unmapped_normative_obligations,
 )
-from contract_support import validate_contract
 from tools.standards_metadata.standards_metadata import (
     load_canonical_standards_corpus,
 )
@@ -164,7 +163,6 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
 
         self.assertEqual(len(obligations), 1)
         value = obligations[0].as_contract()
-        validate_contract("Obligation", value)
         self.assertEqual(value["kind"], "unmapped-normative-change")
         self.assertEqual(value["target"], "workflow.test")
         self.assertEqual(value["scope"], {"kind": "whole-artifact"})

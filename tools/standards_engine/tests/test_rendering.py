@@ -17,13 +17,15 @@ class TextRenderingTest(unittest.TestCase):
             "handle": {"id": "analysis-root:sha256:" + "1" * 64},
             "fact_requirements": [
                 {
-                    "handle": {"id": "fact-requirement:sha256:" + "2" * 64},
-                    "fact": "change.requires-review",
+                    "requirement": {
+                        "handle": {"child_id": "sha256:" + "2" * 64},
+                        "fact": "change.requires-review",
+                    },
                 }
             ],
             "obligations": [
                 {
-                    "id": "obligation:sha256:" + "3" * 64,
+                    "handle": {"child_id": "sha256:" + "3" * 64},
                     "target": "workflow.documentation",
                     "state": "required",
                 }
@@ -90,6 +92,10 @@ class TextRenderingTest(unittest.TestCase):
             "read-result",
             "related-result",
             "rejected-result",
+            "create-snapshot-result",
+            "find-snapshots-result",
+            "delete-snapshot-result",
+            "undelete-snapshot-result",
         }
         unsupported = {
             kind

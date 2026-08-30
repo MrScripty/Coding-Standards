@@ -37,32 +37,34 @@ class ContractProjectionTest(unittest.TestCase):
         artifacts = compile_contracts(schema, interface).project()
         generated = load_generated(artifacts.python_source)
         value = {
-            "view": {
-                "kind": "standards-authority-view-handle",
-                "id": "standards-authority-view:sha256:" + "0" * 64,
-                "schema_version": 4,
+            "snapshot": {
+                "kind": "snapshot-handle",
+                "id": "snapshot:v1:00000000-0000-4000-8000-000000000000",
+                "schema_version": 5,
             },
             "request": {"kind": "route", "facts": {}},
         }
 
         selected = generated.QueryCall.from_value(value)
         self.assertEqual(selected.as_contract(), value)
-        self.assertIsInstance(selected.view, generated.StandardsAuthorityViewHandle)
+        self.assertIsInstance(selected.snapshot, generated.SnapshotHandle)
         self.assertIsInstance(selected.request, generated.RouteRequest)
         with self.assertRaises(dataclasses.FrozenInstanceError):
-            selected.view = None
+            selected.snapshot = None
         with self.assertRaises(ContractError):
             generated.QueryCall.from_value({"request": value["request"]})
         with self.assertRaises(ContractError):
-            generated.QueryCall(view=selected.view, request={"kind": "route"})
+            generated.QueryCall(
+                snapshot=selected.snapshot, request={"kind": "route"}
+            )
 
         mutable_value = copy.deepcopy(value)
         direct = generated.QueryCall(
-            view=mutable_value["view"], request=mutable_value["request"]
+            snapshot=mutable_value["snapshot"], request=mutable_value["request"]
         )
         mutable_value["request"]["facts"]["late"] = {"state": "unknown"}
         self.assertEqual(direct.as_contract(), value)
-        self.assertIsInstance(direct.view, generated.StandardsAuthorityViewHandle)
+        self.assertIsInstance(direct.snapshot, generated.SnapshotHandle)
         self.assertIsInstance(direct.request, generated.RouteRequest)
 
         self.assertEqual(
@@ -102,7 +104,7 @@ class ContractProjectionTest(unittest.TestCase):
         baseline = compile_contracts(schema, interface).project()
         query = next(item for item in baseline.definitions if item.name == "QueryCall")
         self.assertEqual(
-            tuple(item.contract_name for item in query.fields), ("view", "request")
+            tuple(item.contract_name for item in query.fields), ("snapshot", "request")
         )
 
         schema["$defs"]["QueryCall"]["properties"]["label"] = {
@@ -115,10 +117,10 @@ class ContractProjectionTest(unittest.TestCase):
         self.assertEqual(query.fields[-1].default_annotation, "display only")
         generated = load_generated(changed.python_source)
         value = {
-            "view": {
-                "kind": "standards-authority-view-handle",
-                "id": "standards-authority-view:sha256:" + "0" * 64,
-                "schema_version": 4,
+            "snapshot": {
+                "kind": "snapshot-handle",
+                "id": "snapshot:v1:00000000-0000-4000-8000-000000000000",
+                "schema_version": 5,
             },
             "request": {"kind": "route", "facts": {}},
         }
@@ -151,8 +153,8 @@ class ContractProjectionTest(unittest.TestCase):
         self.assertEqual(query.description, "Compiled documentation.")
 
         schema = copy.deepcopy(canonical_schema)
-        schema["$defs"]["QueryCall"]["properties"]["view"] = {
-            "$ref": "#/$defs/ExecutionClosureHandle"
+        schema["$defs"]["QueryCall"]["properties"]["snapshot"] = {
+            "$ref": "#/$defs/AnalysisHandle"
         }
         changed_compiled = compile_contracts(schema, interface)
         query = next(
@@ -160,7 +162,7 @@ class ContractProjectionTest(unittest.TestCase):
             for item in changed_compiled.project().definitions
             if item.name == "QueryCall"
         )
-        self.assertEqual(query.fields[0].annotation, "ExecutionClosureHandle")
+        self.assertEqual(query.fields[0].annotation, "AnalysisHandle")
 
         schema = copy.deepcopy(canonical_schema)
         schema["$defs"]["CanonicalId"]["type"] = "number"
@@ -208,7 +210,7 @@ class ContractProjectionTest(unittest.TestCase):
         self.assertFalse(self.accepts(changed_compiled, "ScalarValue", "text"))
 
         schema = copy.deepcopy(canonical_schema)
-        schema["$defs"]["QueryCall"]["required"].remove("view")
+        schema["$defs"]["QueryCall"]["required"].remove("snapshot")
         changed_compiled = compile_contracts(schema, interface)
         query = next(
             item
@@ -295,12 +297,21 @@ class ContractProjectionTest(unittest.TestCase):
         tools = dict(compile_contracts(schema, interface).project().agent_tools)
         self.assertEqual(
             tuple(operation["id"] for operation in tools["operations"]),
-            ("query", "prepare", "resolve", "inspect"),
+            (
+                "create_snapshot",
+                "find_snapshots",
+                "delete_snapshot",
+                "undelete_snapshot",
+                "query",
+                "prepare",
+                "resolve",
+                "inspect",
+            ),
         )
         self.assertEqual(set(tools["$defs"]), set(schema["$defs"]))
-        self.assertEqual(tools["interface_schema_version"], 11)
-        self.assertEqual(tools["request_contract_version"], 3)
-        self.assertEqual(tools["result_projection_version"], 3)
+        self.assertEqual(tools["interface_schema_version"], 12)
+        self.assertEqual(tools["request_contract_version"], 4)
+        self.assertEqual(tools["result_projection_version"], 4)
         json.dumps(tools)
 
 

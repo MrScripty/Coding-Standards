@@ -24,22 +24,23 @@ from .policy_units import (
     markdown_structural_digest,
     project_unmapped_module,
 )
-from .authority import (
-    CANONICAL_STANDARDS_CORPUS_CODEC,
-    METADATA_CODECS,
-    CanonicalCorpusAuthority,
-    CanonicalStandardsCorpusCodec,
+from .source import (
+    ContentSource,
+    ContentSourceInput,
+    DirectoryContentSource,
+    FrozenContentSource,
+    RecordingContentSource,
+    content_source,
 )
-
 __all__ = (
     "CANONICAL_MODULE_CORPUS",
-    "CANONICAL_STANDARDS_CORPUS_CODEC",
-    "METADATA_CODECS",
     "POLICY_UNIT_REGISTRY",
     "CanonicalModuleCorpus",
     "CanonicalStandardsCorpus",
-    "CanonicalCorpusAuthority",
-    "CanonicalStandardsCorpusCodec",
+    "ContentSource",
+    "ContentSourceInput",
+    "DirectoryContentSource",
+    "FrozenContentSource",
     "MetadataError",
     "MetadataFailure",
     "MetadataValidation",
@@ -47,6 +48,7 @@ __all__ = (
     "PolicyUnit",
     "PolicyUnitCorpus",
     "PolicyUnitTombstone",
+    "RecordingContentSource",
     "UnmappedModuleProjection",
     "load_canonical_standards_corpus",
     "load_canonical_module_corpus",
@@ -55,4 +57,5 @@ __all__ = (
     "markdown_structural_digest",
     "project_unmapped_module",
     "validate_module_metadata",
+    "content_source",
 )

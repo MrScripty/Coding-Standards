@@ -1,11 +1,11 @@
 # Plan: Standards Engine A1c Product Contract And Architecture
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Binding assumptions validated; production implementation inactive
+**Current phase:** Milestone 6 required-platform and final acceptance
 
-**Next slice:** Explicitly start Milestone 4 Repository Git and Snapshot
-foundation implementation
+**Next slice:** Run the registered A1c platform and closed-store portability
+workflows on real Linux, Windows, and macOS environments
 
 **Acceptance status:** `partial`
 
@@ -36,12 +36,12 @@ implementation scope are admitted.
 | A1C-P4 | The selected composition passes the complete Architecture-owned composed-design probe and identifies every retained concern, authority, lifecycle, Interface, dependency direction, and removal condition. | `integration` | `not-applicable` | `manual` | `satisfied` | [A1c ADR](../../decisions/standards-engine-a1c.md) reconciled with [architecture experiment results](reports/architecture-experiment-results.md) |
 | A1C-P5 | A revised implementation plan defines exact runtime write sets, coherent milestones, migration and deletion ownership, claim-matched verification, re-plan triggers, and a separate content-bound acceptance step. | `focused` | `not-applicable` | `manual` | `satisfied` | Production Milestones 4 through 6 and [A1b-to-A1c migration inventory](reports/a1b-to-a1c-migration-inventory.md) |
 | A1C-P6 | Traced loader closure, multi-root SQLite aggregate lifecycle, and all eight agent-facing operations are exercised before production, with explicit separation between representative design evidence and production parity, contract, and platform gates. | `integration` | `representative` | `automated` | `satisfied` | [Binding assumptions validation](reports/a1c-binding-assumptions-validation.md) and its executable prototype |
-| A1C-A1 | The generated v12 Python Interface exposes exactly create/find/delete/undelete snapshot plus query/prepare/resolve/inspect; every request and result is Draft 2020-12 valid and no v11 reader or fallback remains. | `contract` | `not-applicable` | `automated` | `pending` | Milestone 5 |
-| A1C-A2 | Snapshot creation captures the complete loader-requested canonical authority closure from one exact current HEAD, persists immutable raw bytes under a unique opaque root, and never rereads mutable repository content for that root. | `integration` | `not-applicable` | `automated` | `pending` | Milestones 4 and 5 |
-| A1C-A3 | Equal-content roots retain independent lifecycle and dependent analysis; quarantine, undelete, expiry, purge, and shared-content cleanup are transactional and preserve the complete aggregate. | `integration` | `representative` | `automated` | `pending` | Milestone 4 and public workflow evidence in Milestone 5 |
-| A1C-A4 | Query, prepare, resolve, inspect, and every advertised child inspection reconstruct deterministically from the closed store in a fresh process without live repository, provider, authorization, or session substitution. | `system` | `representative` | `automated` | `pending` | Milestone 5 |
-| A1C-A5 | Coverage requirements and certificates bind only their typed semantic, relationship, fact-contract, horizon, evidence, and authorization dependencies; unrelated repository or suite-input changes preserve identity while a selected dependency changes it. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 5 |
-| A1C-A6 | The complete A1b Authority runtime, wrappers, public v11 forms, historical runtime fixtures, and stale package relationships are absent, with every migration consumer replaced or explicitly retired and no compatibility path. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 5 migration and absence evidence |
+| A1C-A1 | The generated v12 Python Interface exposes exactly create/find/delete/undelete snapshot plus query/prepare/resolve/inspect; every request and result is Draft 2020-12 valid and no v11 reader or fallback remains. | `contract` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
+| A1C-A2 | Snapshot creation captures the complete loader-requested canonical authority closure from one exact current HEAD, persists immutable raw bytes under a unique opaque root, and never rereads mutable repository content for that root. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
+| A1C-A3 | Equal-content roots retain independent lifecycle and dependent analysis; quarantine, undelete, expiry, purge, and shared-content cleanup are transactional and preserve the complete aggregate. | `integration` | `representative` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
+| A1C-A4 | Query, prepare, resolve, inspect, and every advertised child inspection reconstruct deterministically from the closed store in a fresh process without live repository, provider, authorization, or session substitution. | `system` | `representative` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
+| A1C-A5 | Coverage requirements and certificates bind only their typed semantic, relationship, fact-contract, horizon, evidence, and authorization dependencies; unrelated repository or suite-input changes preserve identity while a selected dependency changes it. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
+| A1C-A6 | The complete A1b Authority runtime, wrappers, public v11 forms, historical runtime fixtures, and stale package relationships are absent, with every migration consumer replaced or explicitly retired and no compatibility path. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
 | A1C-A7 | Snapshot creation, closed-store movement, locking, path handling, transaction behavior, cold replay, and quarantine work on real Linux, Windows, and macOS with supported CPython 3.11 and 3.12 combinations. | `system` | `required-real` | `automated` | `pending` | Milestone 6 platform evidence |
 | A1C-A8 | The eight agent-facing workflows produce typed results or exact typed rejections through the real Python facade; agents need no content hashes, Git revisions, database paths, child catalogs, or project labels. | `user-workflow` | `representative` | `automated` | `pending` | Milestones 5 and 6 |
 
@@ -491,6 +491,11 @@ child artifact; or a production write is needed to answer the design question.
 identity framing without exposing A1c publicly or creating a second semantic
 authority.
 
+The independent acceptance boundary is superseded. Focused foundation behavior
+remains valid and is carried into Milestone 5, where the implementation catalog,
+source-owned relationships, migration evidence, and final coverage authority
+can change once rather than creating temporary semantic authority here.
+
 **Allowed write set:** exact set `Foundation` in the
 [migration inventory](reports/a1b-to-a1c-migration-inventory.md#exact-production-path-sets),
 plus this plan, ledger, issues, and the generated suite-input projection.
@@ -546,7 +551,7 @@ Verifier must depend on snapshot lifecycle; roots require caller-provided
 meaning; aggregate storage cannot preserve atomic lifecycle; or a path outside
 `Foundation` is required to make the foundation independently valid.
 
-**Status:** `Planned`
+**Status:** `Superseded`
 
 ### Milestone 5: Atomic A1c Runtime And Authority Cutover
 
@@ -580,29 +585,29 @@ consumer outside them is a re-plan trigger.
 
 **Tasks:**
 
-- [ ] Refactor Metadata and downstream compilers to consume one immutable
+- [x] Refactor Metadata and downstream compilers to consume one immutable
   content-source Interface and prove repository/snapshot parity before deleting
   repository-path authority loading.
-- [ ] Implement traced roots-only capture at the Engine composition root,
+- [x] Implement traced roots-only capture at the Engine composition root,
   rerun compilers against captured bytes, and reject incomplete or
   contradictory closure before transactional publication.
-- [ ] Normalize AnalysisState around exact snapshot roots and accepted
+- [x] Normalize AnalysisState around exact snapshot roots and accepted
   decisions; derive requirements, obligations, reading plans, certificates,
   completion, and child inspection without independent authority rows.
-- [ ] Compile the complete v12 request/result algebra and agent-tool
+- [x] Compile the complete v12 request/result algebra and agent-tool
   projection, implement all eight public operations, and map domain failures
   to exact public typed rejections without catching programming errors.
-- [ ] Replace package dependencies and Verifier Git imports according to the
+- [x] Replace package dependencies and Verifier Git imports according to the
   ADR Module graph, then delete A1b Authority and every wrapper or stale public
   export in `Cutover-deletions`.
-- [ ] Replace A1b suites and fixtures with A1c contract, snapshot lifecycle,
+- [x] Replace A1b suites and fixtures with A1c contract, snapshot lifecycle,
   aggregate replay, public workflow, package-closure, and migration evidence.
   Negative fixtures must assert their intended typed diagnostic.
-- [ ] Freeze final package, contract, suite, node-catalog, relationship, and
+- [x] Freeze final package, contract, suite, node-catalog, relationship, and
   horizon paths; regenerate derived evidence; renew only the exact registered
   attestations in `Cutover-authority`; and prove required coverage subjects equal
   valid certificates.
-- [ ] Record one disposition for every migration-inventory row and every
+- [x] Record one disposition for every migration-inventory row and every
   graph-selected consumer. No blocked or implicit disposition may remain.
 
 **Focused evidence:** direct package suites for every changed Module; canonical
@@ -628,7 +633,7 @@ requires independent retention; a coverage dependency cannot be represented
 locally; a selected consumer lies outside the exact sets; or verification
 requires extending retained Bash checkers.
 
-**Status:** `Planned`
+**Status:** `Implemented`
 
 ### Milestone 6: Required-Platform And Final Acceptance
 
@@ -675,14 +680,15 @@ closed store is not portable; acceptance needs production or authority
 mutation; a final consumer or retained state is discovered; or content-bound
 review finds a material contract or architecture change.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 
-- `none`; Milestone 4 is planned and has not been started.
+- `none`; Milestone 5 is implemented and Milestone 6 is active across its
+  exact platform-evidence and final-acceptance write set.
 - Unknown external consumers remain a standing re-plan trigger.
-- A1c production mutation and all A2 work remain unavailable until their own
-  exact milestone and lifecycle authority exist.
+- A2 work remains unavailable until its own exact milestone and lifecycle
+  authority exist.
 
 ## Re-Plan Triggers
 
@@ -706,4 +712,4 @@ review finds a material contract or architecture change.
 
 - Acceptance status: `partial`
 - Deferred follow-ups: `A2 remains unauthorized; cross-engine migration remains deferred until feature completeness`
-- Final status: `Planned`
+- Final status: `Active`

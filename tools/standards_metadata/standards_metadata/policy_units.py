@@ -4,11 +4,11 @@ import hashlib
 import re
 import tomllib
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .errors import MetadataError, MetadataFailure
 from .model import CanonicalModuleCorpus, CanonicalStandardsCorpus
+from .source import ContentSource, ContentSourceInput, content_source
 from tools.standards_identity.standards_identity import (
     IdentityArray,
     IdentityObject,
@@ -128,40 +128,11 @@ def _error(
     )
 
 
-def _path(root: Path, value: str) -> Path:
-    logical = PurePosixPath(value)
-    resolved_root = root.resolve()
-    candidate = (resolved_root / Path(*logical.parts)).resolve(strict=False)
-    if (
-        not value
-        or logical.is_absolute()
-        or ".." in logical.parts
-        or value.startswith("./")
-        or str(logical) != value
-        or not candidate.is_relative_to(resolved_root)
-    ):
-        raise _error(
-            "POLICY_UNIT.PATH",
-            "policy-unit source must be a contained normalized repository path",
-            path=value,
-        )
-    if not candidate.is_file():
-        raise MetadataError(
-            MetadataFailure(
-                "POLICY_UNIT.INPUT_UNAVAILABLE",
-                "unavailable",
-                "policy-unit source is unavailable",
-                path=value,
-            )
-        )
-    return candidate
-
-
-def _toml(root: Path, path: str) -> dict[str, Any]:
-    source = _path(root, path)
+def _toml(source: ContentSource, path: str) -> dict[str, Any]:
     try:
-        with source.open("rb") as handle:
-            return tomllib.load(handle)
+        return tomllib.loads(source.read_bytes(path).decode("utf-8"))
+    except UnicodeDecodeError as error:
+        raise _error("POLICY_UNIT.INVALID_UTF8", str(error), path=path) from error
     except tomllib.TOMLDecodeError as error:
         raise _error("POLICY_UNIT.INVALID_TOML", str(error), path=path) from error
 
@@ -285,12 +256,11 @@ def markdown_structural_digest(section: bytes) -> str:
 
 
 def _resolve_scope(
-    root: Path,
+    source: ContentSource,
     document: str,
     heading_path: tuple[str, ...],
 ) -> tuple[str, str, str]:
-    source = _path(root, document)
-    raw = source.read_bytes()
+    raw = source.read_bytes(document)
     try:
         text = raw.decode("utf-8")
     except UnicodeDecodeError as error:
@@ -314,7 +284,7 @@ def _resolve_scope(
 
 
 def _unit(
-    root: Path,
+    content_source: ContentSource,
     corpus: CanonicalModuleCorpus,
     source: str,
     raw: Any,
@@ -362,7 +332,11 @@ def _unit(
             path=source,
             observed=unit_id,
         )
-    representation, structural, content = _resolve_scope(root, module.path, headings)
+    representation, structural, content = _resolve_scope(
+        content_source,
+        module.path,
+        headings,
+    )
     return PolicyUnit(
         unit_id,
         module_id,
@@ -467,11 +441,12 @@ def _validate_lifecycle(
 
 
 def load_policy_unit_corpus(
-    root: Path,
+    source: ContentSourceInput,
     modules: CanonicalModuleCorpus,
     registry_path: str = POLICY_UNIT_REGISTRY,
 ) -> PolicyUnitCorpus:
-    registry = _toml(root, registry_path)
+    selected_source = content_source(source)
+    registry = _toml(selected_source, registry_path)
     if set(registry) != {"schema_version", "sources"} or registry["schema_version"] != 1:
         raise _error(
             "POLICY_UNIT.REGISTRY",
@@ -482,7 +457,7 @@ def load_policy_unit_corpus(
     units: list[PolicyUnit] = []
     tombstones: list[PolicyUnitTombstone] = []
     for source in sources:
-        content = _toml(root, source)
+        content = _toml(selected_source, source)
         allowed = {"schema_version", "policy_unit", "tombstone"}
         if set(content) - allowed or content.get("schema_version") != 1:
             raise _error(
@@ -491,7 +466,7 @@ def load_policy_unit_corpus(
                 path=source,
             )
         for raw in content.get("policy_unit", []):
-            units.append(_unit(root, modules, source, raw))
+            units.append(_unit(selected_source, modules, source, raw))
         for raw in content.get("tombstone", []):
             tombstones.append(_tombstone(source, raw))
     selected_units = tuple(units)
@@ -501,10 +476,11 @@ def load_policy_unit_corpus(
 
 
 def project_unmapped_module(
-    root: Path,
+    source: ContentSourceInput,
     corpus: CanonicalStandardsCorpus,
     module_id: str,
 ) -> UnmappedModuleProjection:
+    selected_source = content_source(source)
     module = corpus.resolve_module(module_id)
     if module is None or module.module_id != module_id:
         raise _error(
@@ -513,8 +489,7 @@ def project_unmapped_module(
             path=module_id,
             observed=module_id,
         )
-    source = _path(root.resolve(), module.path)
-    raw = source.read_bytes()
+    raw = selected_source.read_bytes(module.path)
     try:
         headings = _headings(raw.decode("utf-8"))
     except UnicodeDecodeError as error:

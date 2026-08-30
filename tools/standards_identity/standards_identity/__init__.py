@@ -3,6 +3,8 @@ from .encoding import (
     IdentityObject,
     IdentityValue,
     encode_identity_value,
+    frame_path_byte_set,
+    frame_path_bytes,
     hash_identity,
 )
 from .errors import IdentityError, IdentityFailure
@@ -14,5 +16,7 @@ __all__ = (
     "IdentityObject",
     "IdentityValue",
     "encode_identity_value",
+    "frame_path_byte_set",
+    "frame_path_bytes",
     "hash_identity",
 )

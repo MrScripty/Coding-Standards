@@ -34,302 +34,26 @@
   ],
   "domains": [
     {
-      "name": "content-snapshot",
-      "domain": "coding-standards:content-snapshot:v2",
-      "prefix": "content-snapshot",
+      "name": "snapshot-content",
+      "domain": "coding-standards:snapshot-content:v1",
+      "prefix": "snapshot-content",
       "value": {
-        "kind": "content-snapshot",
+        "kind": "snapshot-content",
         "revision": 1
       },
-      "encoded_hex": "7b226b696e64223a22636f6e74656e742d736e617073686f74222c227265766973696f6e223a317d",
-      "expected": "content-snapshot:sha256:1b999113610080d8b4a123ded8e3dfa6231d43571b05f7d3cd6616cffc0f7123",
-      "public_handle": {
-        "definition": "ContentSnapshotHandle",
-        "kind": "content-snapshot-handle"
-      }
+      "encoded_hex": "7b226b696e64223a22736e617073686f742d636f6e74656e74222c227265766973696f6e223a317d",
+      "expected": "snapshot-content:sha256:cbe1704d90b34fe4066e40656d6f1cff9b4592ffac7ce2493c950de2bb6bd14c"
     },
     {
-      "name": "execution-closure",
-      "domain": "coding-standards:execution-closure:v2",
-      "prefix": "execution-closure",
+      "name": "analysis",
+      "domain": "coding-standards:analysis:v5",
+      "prefix": "analysis",
       "value": {
-        "kind": "execution-closure",
+        "kind": "analysis-state",
         "revision": 1
       },
-      "encoded_hex": "7b226b696e64223a22657865637574696f6e2d636c6f73757265222c227265766973696f6e223a317d",
-      "expected": "execution-closure:sha256:f0b097ac575239e98f4ba686035f6aa8529a5db82eb5776f1230886ef56112b7",
-      "public_handle": {
-        "definition": "ExecutionClosureHandle",
-        "kind": "execution-closure-handle"
-      }
-    },
-    {
-      "name": "canonical-standards-corpus",
-      "domain": "coding-standards:canonical-standards-corpus:v1",
-      "prefix": "canonical-standards-corpus",
-      "value": {
-        "kind": "canonical-standards-corpus",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a2263616e6f6e6963616c2d7374616e64617264732d636f72707573222c227265766973696f6e223a317d",
-      "expected": "canonical-standards-corpus:sha256:0509c28ab27a5cbdd2dfcb8167a4197606bc92091518c7770d3273f967a47193"
-    },
-    {
-      "name": "compiled-policy-impact",
-      "domain": "coding-standards:compiled-policy-impact:v1",
-      "prefix": "compiled-policy-impact",
-      "value": {
-        "kind": "compiled-policy-impact",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22636f6d70696c65642d706f6c6963792d696d70616374222c227265766973696f6e223a317d",
-      "expected": "compiled-policy-impact:sha256:9b982741a4ab1da395799d4dd9909257fe053836d9039bd11accf10cafdb0c4f"
-    },
-    {
-      "name": "standards-graph",
-      "domain": "coding-standards:standards-graph:v1",
-      "prefix": "standards-graph",
-      "value": {
-        "kind": "standards-graph",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a227374616e64617264732d6772617068222c227265766973696f6e223a317d",
-      "expected": "standards-graph:sha256:2919df236bea604575edfad250a01e741786631ea2bad2bff6bf2877464caded"
-    },
-    {
-      "name": "routing-projection",
-      "domain": "coding-standards:routing-projection:v1",
-      "prefix": "routing-projection",
-      "value": {
-        "kind": "routing-projection",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22726f7574696e672d70726f6a656374696f6e222c227265766973696f6e223a317d",
-      "expected": "routing-projection:sha256:d91c19f95f1dfbc687edcdf583a4d04c98a65e8f86d436501272372db7fdc945"
-    },
-    {
-      "name": "coverage-horizon",
-      "domain": "coding-standards:coverage-horizon:v1",
-      "prefix": "coverage-horizon",
-      "value": {
-        "kind": "coverage-horizon",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22636f7665726167652d686f72697a6f6e222c227265766973696f6e223a317d",
-      "expected": "coverage-horizon:sha256:89f8c249374b2c0b115cab0f4510e6f0c29d96c88bc15eca1029b0bc4e56c758"
-    },
-    {
-      "name": "analysis-context",
-      "domain": "coding-standards:analysis-context:v2",
-      "prefix": "analysis-context",
-      "value": {
-        "kind": "analysis-context",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22616e616c797369732d636f6e74657874222c227265766973696f6e223a317d",
-      "expected": "analysis-context:sha256:965cc1b9c9a3d56a2ebe9ff737da717631ecaa0daf0f904a4cca05925c63cc8d",
-      "public_handle": {
-        "definition": "AnalysisContextHandle",
-        "kind": "analysis-context-handle"
-      }
-    },
-    {
-      "name": "fact-requirement",
-      "domain": "coding-standards:fact-requirement:v2",
-      "prefix": "fact-requirement",
-      "value": {
-        "kind": "fact-requirement",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22666163742d726571756972656d656e74222c227265766973696f6e223a317d",
-      "expected": "fact-requirement:sha256:240f6e1b99bb5c13806b72ce61b3377404bee0c76c74c4e01a04eba3e84ab3fd",
-      "public_handle": {
-        "definition": "FactRequirementHandle",
-        "kind": "fact-requirement-handle"
-      }
-    },
-    {
-      "name": "provider-authority",
-      "domain": "coding-standards:provider-authority:v1",
-      "prefix": "provider-authority",
-      "value": {
-        "kind": "provider-authority",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a2270726f76696465722d617574686f72697479222c227265766973696f6e223a317d",
-      "expected": "provider-authority:sha256:e094eda00013c81b75f007f8c9f08a7a54c2d926be0c643cc9ee1b11904b87f3"
-    },
-    {
-      "name": "authorization-grant",
-      "domain": "coding-standards:authorization-grant:v1",
-      "prefix": "authorization-grant",
-      "value": {
-        "kind": "authorization-grant",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22617574686f72697a6174696f6e2d6772616e74222c227265766973696f6e223a317d",
-      "expected": "authorization-grant:sha256:efde6804b8050ac08c1b035f5f061c264eecfb9b2df7582b193a74675ade6249"
-    },
-    {
-      "name": "fact-observation",
-      "domain": "coding-standards:fact-observation:v2",
-      "prefix": "fact-observation",
-      "value": {
-        "kind": "fact-observation",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22666163742d6f62736572766174696f6e222c227265766973696f6e223a317d",
-      "expected": "fact-observation:sha256:8a54a6ad97f899486e34f0062ff96bbe936b253a400b23d5ea229e917c54db0e",
-      "public_handle": {
-        "definition": "FactObservationHandle",
-        "kind": "fact-observation-handle"
-      }
-    },
-    {
-      "name": "coverage-view",
-      "domain": "coding-standards:coverage-authority-view:v3",
-      "prefix": "coverage-view",
-      "value": {
-        "kind": "coverage-view",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22636f7665726167652d76696577222c227265766973696f6e223a317d",
-      "expected": "coverage-view:sha256:ad326322953a9bd987303170b6a3a3f104738198c9c6995c484a25f730bb8b9f",
-      "public_handle": {
-        "definition": "CoverageAuthorityViewHandle",
-        "kind": "coverage-authority-view-handle"
-      }
-    },
-    {
-      "name": "coverage-requirement",
-      "domain": "coding-standards:coverage-audit-requirement:v3",
-      "prefix": "coverage-requirement",
-      "value": {
-        "kind": "coverage-requirement",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22636f7665726167652d726571756972656d656e74222c227265766973696f6e223a317d",
-      "expected": "coverage-requirement:sha256:dd4a66112b75176027cd04b1b1fbd74c163fd30176f2fed8f7fb7f0b0862c2ab",
-      "public_handle": {
-        "definition": "CoverageRequirementHandle",
-        "kind": "coverage-requirement-handle"
-      }
-    },
-    {
-      "name": "coverage-attestation",
-      "domain": "coding-standards:coverage-attestation:v3",
-      "prefix": "coverage-attestation",
-      "value": {
-        "kind": "coverage-attestation",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22636f7665726167652d6174746573746174696f6e222c227265766973696f6e223a317d",
-      "expected": "coverage-attestation:sha256:aa9bb1d14cc8eb80815c149c2030518da41ab01e9e93c48e5712545ddb399427",
-      "public_handle": {
-        "definition": "CoverageAttestationHandle",
-        "kind": "coverage-attestation-handle"
-      }
-    },
-    {
-      "name": "coverage-certificate",
-      "domain": "coding-standards:consumer-coverage-certificate:v3",
-      "prefix": "coverage-certificate",
-      "value": {
-        "kind": "coverage-certificate",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22636f7665726167652d6365727469666963617465222c227265766973696f6e223a317d",
-      "expected": "coverage-certificate:sha256:a767b964675827bf8a86cd552f2a0ba57fdb442b6596e776d4a3530c22363d1e",
-      "public_handle": {
-        "definition": "CertificateHandle",
-        "kind": "certificate-handle"
-      }
-    },
-    {
-      "name": "analysis-root",
-      "domain": "coding-standards:analysis:v4",
-      "prefix": "analysis-root",
-      "value": {
-        "kind": "analysis-root",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22616e616c797369732d726f6f74222c227265766973696f6e223a317d",
-      "expected": "analysis-root:sha256:feca0e5a0800547e568c6d81a32b579ae87c2d3682a41a004a38dbf31ba219cd",
-      "public_handle": {
-        "definition": "AnalysisHandle",
-        "kind": "analysis-handle"
-      }
-    },
-    {
-      "name": "operation-authority-contract",
-      "domain": "coding-standards:operation-authority-contract-identity:v1",
-      "prefix": "operation-authority-contract",
-      "value": {
-        "kind": "operation-authority-contract",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a226f7065726174696f6e2d617574686f726974792d636f6e7472616374222c227265766973696f6e223a317d",
-      "expected": "operation-authority-contract:sha256:6d106fd4f381c270a1844e74b4ff0cce1e1eacbdf627633e148a873615ab0263"
-    },
-    {
-      "name": "standards-authority-view",
-      "domain": "coding-standards:standards-authority-view:v1",
-      "prefix": "standards-authority-view",
-      "value": {
-        "kind": "standards-authority-view",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a227374616e64617264732d617574686f726974792d76696577222c227265766973696f6e223a317d",
-      "expected": "standards-authority-view:sha256:ded1a2c84ded9ada288075ccd55c4dac564ce42c9e87dce3248cbe84654b9ad1",
-      "public_handle": {
-        "definition": "StandardsAuthorityViewHandle",
-        "kind": "standards-authority-view-handle"
-      }
-    },
-    {
-      "name": "navigation-result",
-      "domain": "coding-standards:navigation-result:v1",
-      "prefix": "navigation-result",
-      "value": {
-        "kind": "navigation-result",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a226e617669676174696f6e2d726573756c74222c227265766973696f6e223a317d",
-      "expected": "navigation-result:sha256:4cc1060d363d173f9d97057d12d9e401c8ffe63e1bd79a78d101d4e156784ede",
-      "public_handle": {
-        "definition": "NavigationHandle",
-        "kind": "navigation-handle"
-      }
-    },
-    {
-      "name": "policy-inspection",
-      "domain": "coding-standards:policy-inspection:v2",
-      "prefix": "policy-inspection",
-      "value": {
-        "kind": "policy-inspection",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a22706f6c6963792d696e7370656374696f6e222c227265766973696f6e223a317d",
-      "expected": "policy-inspection:sha256:8b31affdf44f6fd6e936d65d313647ffe488de16f63a54110f3c202279e4b434",
-      "public_handle": {
-        "definition": "PolicyHandle",
-        "kind": "policy-handle"
-      }
-    },
-    {
-      "name": "relationship-inspection",
-      "domain": "coding-standards:relationship-inspection:v2",
-      "prefix": "relationship-inspection",
-      "value": {
-        "kind": "relationship-inspection",
-        "revision": 1
-      },
-      "encoded_hex": "7b226b696e64223a2272656c6174696f6e736869702d696e7370656374696f6e222c227265766973696f6e223a317d",
-      "expected": "relationship-inspection:sha256:18dfbacabcf6a8a6241168e9a4ac9967fd7940414fbc809a181c4cdee89c1823",
-      "public_handle": {
-        "definition": "RelationshipHandle",
-        "kind": "relationship-handle"
-      }
+      "encoded_hex": "7b226b696e64223a22616e616c797369732d7374617465222c227265766973696f6e223a317d",
+      "expected": "analysis:sha256:641b70b70a13fc47516deea8204fe88e36eb1a6fee2c94b1726d836a945d8af3"
     },
     {
       "name": "obligation",
@@ -352,6 +76,56 @@
       },
       "encoded_hex": "7b226b696e64223a22696d706163742d7472616365222c227265766973696f6e223a317d",
       "expected": "impact-trace:sha256:8fdc155684d261426d7208ff3539482b1df6f5b47c09f4ff1781eba73aafdfc3"
+    }
+  ],
+  "public_handles": [
+    {
+      "name": "snapshot",
+      "definition": "SnapshotHandle",
+      "value": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+        "schema_version": 5
+      }
+    },
+    {
+      "name": "analysis",
+      "definition": "AnalysisHandle",
+      "value": {
+        "kind": "analysis-handle",
+        "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "schema_version": 5
+      }
+    },
+    {
+      "name": "snapshot-policy",
+      "definition": "SnapshotChildHandle",
+      "value": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "workflow.planning",
+        "schema_version": 5
+      }
+    },
+    {
+      "name": "analysis-context",
+      "definition": "AnalysisChildHandle",
+      "value": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 5
+        },
+        "child_kind": "context",
+        "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "schema_version": 5
+      }
     }
   ]
 }

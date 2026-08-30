@@ -1,0 +1,55 @@
+schema_version = 1
+id = "a1c-snapshot-lifecycle"
+owner = "topic.architecture"
+description = "A1c snapshots preserve opaque roots, exact captured bytes, aggregate quarantine, and platform-neutral lifecycle semantics."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/a1c-snapshots/snapshot-lifecycle-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+platform = ["linux", "windows", "macos"]
+operation = ["create", "find", "delete", "undelete"]
+snapshot_state = ["active", "quarantined", "expired", "missing"]
+aggregate = ["complete", "incomplete"]
+deadline = ["future", "expired", "not-applicable"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { all = [
+      { field = "snapshot_state", op = "eq", value = "missing" },
+      { field = "operation", op = "ne", value = "create" },
+  ] },
+  { field = "snapshot_state", op = "eq", value = "expired" },
+  { field = "deadline", op = "eq", value = "expired" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "aggregate", op = "eq", value = "incomplete" }]
+
+[[checks]]
+id = "a1c-snapshot-module"
+type = "path_state"
+present = [
+  "tools/repository_git/pyproject.toml",
+  "tools/repository_git/repository_git/__init__.py",
+  "tools/repository_git/repository_git/repository.py",
+  "tools/repository_git/tests/test_repository.py",
+  "tools/standards_snapshots/pyproject.toml",
+  "tools/standards_snapshots/standards_snapshots/__init__.py",
+  "tools/standards_snapshots/standards_snapshots/module.py",
+  "tools/standards_snapshots/standards_snapshots/store.py",
+  "tools/standards_snapshots/tests/test_module.py",
+  "tools/standards_snapshots/tests/test_store.py",
+]
+absent = [
+  "tools/standards_authority/pyproject.toml",
+  "tools/standards_authority/standards_authority/__init__.py",
+  "tools/standards_engine/standards_engine/authority.py",
+]

@@ -539,3 +539,181 @@
   production acceptance.
 - A1C-P6 is satisfied and A1C-012 is resolved. Milestone 3 is Implemented;
   production remains inactive until Milestone 4 is explicitly started.
+
+## 2026-08-30 - Repository Git And Snapshot Foundation Start
+
+- The product owner authorized Milestone 4 after the binding assumptions were
+  validated. The plan and Milestone 4 are Active as part of the first
+  substantive implementation boundary, not through a standalone state commit.
+- Mutation is limited to the exact `Foundation` path set, this plan, ledger,
+  issues, and mechanical suite-input freshness. The current Engine, Analysis,
+  semantic loaders, public contract, A1b Authority, suites, policy authority,
+  standards, and A2 remain read-only.
+- The accepted seams are the public roots of `repository_git` and
+  `standards_snapshots`. Tests exercise those Interfaces rather than private
+  subprocess, SQL, or helper implementation details.
+
+## 2026-08-30 - Foundation Acceptance Boundary Superseded
+
+- Focused Identity, Repository Git, Snapshot, package-contract, generated,
+  plan, and diff checks passed for the staged foundation implementation.
+- The complete checkpoint passed 225 of 226 suites. `a1b-public-cutover`
+  rejected the 11 new production package paths because they were absent from
+  the implementation node catalog and source-owned policy-impact
+  relationships.
+- Those final semantic-authority paths belong to `Cutover-authority`, not
+  `Foundation`. Making Milestone 4 independently acceptable would require a
+  temporary catalog, relationship, migration, horizon, and attestation update
+  that Milestone 5 would immediately replace.
+- The product owner accepted superseding Milestone 4's independent acceptance
+  boundary and carrying its implementation into the atomic Milestone 5
+  cutover. The implementation itself is retained; no verifier is weakened and
+  no temporary semantic authority is introduced.
+- Milestone 5 is Active across `Foundation` and the exact `Cutover-*` path
+  sets. Final catalog, relationship, migration, and coverage authority will be
+  published only after the complete cutover paths and semantics are frozen.
+
+## 2026-08-30 - Immutable Content-Source Write-Set Trigger
+
+- The Metadata and Policy Impact loaders were moved behind one logical
+  path-to-bytes Interface and passed their focused tests.
+- Production closure tracing then identified two omitted Analysis consumers:
+  Router projection loading still reads its projection and Router document
+  through `routing.py`, and unmapped normative-change evaluation still passes
+  repository roots through `obligations.py`.
+- Neither production path belongs to the admitted `Cutover-runtime` set.
+  Materializing frozen bytes into temporary workspaces was rejected because it
+  would preserve the repository-path semantic-loading contract that A1c is
+  required to remove.
+- Milestone 5 and the plan are Blocked. The proposed replacement adds exactly
+  those two source paths to `Cutover-runtime`, migrates them to the existing
+  Metadata-owned `ContentSource` Interface, and leaves all other write-set and
+  architecture decisions unchanged.
+
+## 2026-08-30 - Immutable Content-Source Re-Plan Accepted
+
+- The product owner accepted the narrow correction.
+- `Cutover-runtime` now admits only the two omitted production consumers:
+  `routing.py` and `obligations.py` in Standards Analysis.
+- A1C-014 is resolved and Milestone 5 is Active. The implementation must use
+  the existing Metadata-owned `ContentSource` Interface; materialized
+  workspaces, duplicate loaders, and ambient repository fallback remain
+  prohibited.
+
+## 2026-08-30 - Generated Contract Operation-Closure Trigger
+
+- The immutable-source migration now passes focused Metadata, Policy Impact,
+  Router, unmapped-obligation, and dependency-local Coverage checks.
+- Preparing the canonical v12 declaration exposed a production constraint in
+  Standards Contracts: `compiler.py` accepts exactly the four A1b operations,
+  while A1c requires create, find, delete, undelete, query, prepare, resolve,
+  and inspect. The projection entrypoint also still describes A1b output.
+- Both production paths are outside `Cutover-contract`. Bypassing the compiler
+  with handwritten models or a second operation registry was rejected because
+  it would violate the accepted generated-contract authority.
+- Milestone 5 and the plan are Blocked pending a narrow two-path Contracts
+  write-set correction. No v12 schema or generated projection has been
+  authored under an invalid operation closure.
+
+## 2026-08-30 - Generated Contract Re-Plan Accepted
+
+- The product owner accepted the narrow correction.
+- `Cutover-contract` now admits the Standards Contracts compiler and repository
+  projection entrypoint.
+- A1C-015 is resolved and Milestone 5 is Active. The compiler must enforce one
+  exact eight-operation sequence and continue generating every public Python
+  and agent-tool projection from the canonical schema and interface.
+
+## 2026-08-30 - Shared Contract-Test Input Re-Plan Trigger
+
+- Compiling the v12 operation algebra exposed that all three Standards
+  Contracts suites load their inputs through
+  `tools/standards_contracts/tests/support.py`.
+- That helper remains bound to the historical A1b v11 planning schema and
+  interface, and it is outside the exact `Cutover-contract` write set.
+- Leaving it unchanged would verify the superseded four-operation contract.
+  Replacing it with separate loaders inside the three admitted tests would
+  duplicate test authority and is rejected as less maintainable.
+- A1C-016 records the proposed one-path correction. The plan and Milestone 5
+  are Blocked pending product-owner acceptance of that write-set amendment.
+
+## 2026-08-30 - Shared Contract-Test Input Re-Plan Accepted
+
+- The product owner accepted the narrow correction.
+- `Cutover-contract` now admits the existing shared Standards Contracts test
+  support helper.
+- A1C-016 is resolved and Milestone 5 is Active. All compiler suites must load
+  the canonical production v12 schema and interface through that one helper.
+
+## 2026-08-30 - Obligation Projection Test Re-Plan Accepted
+
+- Focused Analysis verification exposed two tests that treated internal domain
+  obligations as though they directly implemented the public contract.
+- A1c intentionally parents public obligation handles to one AnalysisState at
+  the Engine projection. Adding those handles to Analysis would reverse the
+  accepted dependency direction; weakening the public schema would lose cold
+  child identity.
+- The product owner accepted adding only `test_impact.py` and
+  `test_obligations.py` to `Cutover-runtime`. Their former direct public-schema
+  validation decision is `Superseded` by domain-semantic assertions in
+  Analysis and generated-result validation in Engine.
+- A1C-017 is resolved and Milestone 5 remains Active. No production Interface,
+  lifecycle, authority, or contract decision changed.
+
+## 2026-08-30 - Verifier Git Consumer Re-Plan Accepted
+
+- Authority deletion closure found one policy-impact migration checker and two
+  Verifier tests that still consumed or patched the retired package outside the
+  exact cutover set.
+- Retaining an Authority shim or testing through its subprocess internals was
+  rejected. Repository Git owns bounded Git execution; Verifier owns adapting
+  its typed failures into verifier diagnostics.
+- The product owner accepted adding exactly those three paths to
+  `Cutover-runtime`. A1C-018 is resolved and Milestone 5 remains Active.
+
+## 2026-08-30 - Shared Repository Coverage Re-Plan Accepted
+
+- Verifier policy-impact loading still depended on the deleted coverage
+  Authority implementation, while Engine captured repository attestations but
+  did not import valid claims into immutable AnalysisState.
+- Re-exporting codecs or implementing another Verifier parser was rejected.
+  Analysis owns one content-source loader for current requirements, claims,
+  evidence, authorization, and revocation; Engine and Verifier consume it.
+- The product owner accepted adding only Verifier `policy_impact.py` to the
+  runtime set. A1C-019 is resolved and Milestone 5 remains Active; generated
+  certificates remain projections rather than stored authored authority.
+
+## 2026-08-30 - A1c Migration Graph Projection Re-Plan Accepted
+
+- Replacing the retired A1b relationship-migration fixture with the complete
+  A1c migration evidence changed one generated contract-reference edge and the
+  matching component inbound-file entry.
+- The checker node projection is byte-identical. No retained Bash source,
+  checker count, dependency edge, component topology, or behavior changed.
+- The product owner accepted adding only the generated dependency-edge and
+  component projections to `Cutover-verification`, constrained to the exact
+  A1b-to-A1c fixture-reference substitution.
+- A1C-020 is resolved and Milestone 5 remains Active. The temporary scanner,
+  retained checker surface, and all unrelated generated rows remain frozen.
+
+## 2026-08-30 - Milestone 5 Atomic A1c Cutover Implemented
+
+- Replaced A1b with the eight-operation v12 A1c facade and handle
+  representation v5. No v11 reader, generic Authority package, domain
+  authority wrapper, independent child store, or A1b declarative suite remains.
+- Added the neutral Repository Git and Snapshot Modules. Semantic loaders now
+  consume one Metadata-owned immutable content-source Interface and remain
+  independent of Git, SQLite, and snapshot lifecycle.
+- Published one immutable AnalysisState aggregate with deterministic derived
+  work, certificates, results, and parent-bound cold-inspectable child handles.
+- Froze the 407-relationship A1c graph and recorded 258 retained, 86 corrected,
+  63 added, and 43 retired migration dispositions. Twelve materially affected
+  coverage subjects cite the Milestone 5 cutover evidence; the other 37 retain
+  unchanged typed coverage dependencies.
+- All package suites passed, including 433 Verifier tests and 22 Engine tests.
+  Contract and generated projections were fresh, changed Python passed Ruff,
+  all 227 declarative suites passed, all 53 retained checkers passed, and diff
+  hygiene was clean.
+- A1C-A1 through A1C-A6 are satisfied. Milestone 5 is Implemented and the
+  previously planned required-platform and final-acceptance Milestone 6 is now
+  Active. A2 remains unavailable.

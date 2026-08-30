@@ -62,7 +62,16 @@ _OPERATION_KEYS = frozenset(
         "capability_by_submission",
     }
 )
-_OPERATIONS = ("query", "prepare", "resolve", "inspect")
+_OPERATIONS = (
+    "create_snapshot",
+    "find_snapshots",
+    "delete_snapshot",
+    "undelete_snapshot",
+    "query",
+    "prepare",
+    "resolve",
+    "inspect",
+)
 _ASCII_PATTERN = re.compile(r"\A[\x20-\x7e]*\Z")
 
 
@@ -256,9 +265,10 @@ def _parse_interface(
     if tuple(item.id for item in operations) != _OPERATIONS:
         raise failure(
             "CONTRACT.INVALID_INTERFACE",
-            "operations must be exactly query, prepare, resolve, inspect",
+            "operations must be exactly create_snapshot, find_snapshots, "
+            "delete_snapshot, undelete_snapshot, query, prepare, resolve, inspect",
         )
-    resolve = operations[2]
+    resolve = next(operation for operation in operations if operation.id == "resolve")
     submission_definition = definitions[resolve.input_definition]["properties"][
         "submission"
     ]["$ref"].rsplit("/", 1)[1]

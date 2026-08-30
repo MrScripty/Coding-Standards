@@ -4,7 +4,6 @@ import hashlib
 import json
 import tomllib
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Mapping
 from urllib.parse import quote
 
@@ -17,7 +16,6 @@ from tools.graph_engine.graph_engine import (
     Node,
     Provenance,
     TraversalPolicy,
-    contained_path,
 )
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
@@ -25,7 +23,13 @@ from tools.standards_applicability.standards_applicability import (
     FactSchema,
     compile_fact_schema,
 )
-from tools.standards_metadata.standards_metadata import CanonicalStandardsCorpus
+from tools.standards_metadata.standards_metadata import (
+    CanonicalStandardsCorpus,
+    ContentSource,
+    ContentSourceInput,
+    MetadataError,
+    content_source,
+)
 
 from .errors import PolicyImpactError, PolicyImpactFailure
 from .model import (
@@ -81,25 +85,19 @@ def _error(
     )
 
 
-def _load_toml(root: Path, path: str) -> dict[str, Any]:
+def _load_toml(source: ContentSource, path: str) -> dict[str, Any]:
     try:
-        source = contained_path(root, path, must_exist=True)
-    except GraphError as error:
-        details = error.failure.details
-        code = (
-            "PATH.OUTSIDE_REPOSITORY"
-            if error.failure.code == "GRAPH.PATH_ESCAPE"
-            else "INPUT.UNAVAILABLE"
-        )
+        raw = tomllib.loads(source.read_bytes(path).decode("utf-8"))
+    except MetadataError as error:
+        failure = error.failure
         raise _error(
-            code,
-            error.failure.message,
-            path=str(details.get("path", path)),
-            unavailable=code == "INPUT.UNAVAILABLE",
+            failure.code,
+            failure.message,
+            path=failure.path or path,
+            unavailable=failure.outcome == "unavailable",
         ) from error
-    try:
-        with source.open("rb") as handle:
-            raw = tomllib.load(handle)
+    except UnicodeDecodeError as error:
+        raise _error("POLICY_IMPACT.INVALID_UTF8", str(error), path=path) from error
     except tomllib.TOMLDecodeError as error:
         raise _error("POLICY_IMPACT.INVALID_TOML", str(error), path=path) from error
     if not isinstance(raw, dict):
@@ -243,8 +241,8 @@ class _ArtifactCatalog:
     digest: str
 
 
-def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
-    raw = _load_toml(root, path)
+def _load_authoring_contract(source: ContentSource, path: str) -> _AuthoringContract:
+    raw = _load_toml(source, path)
     _exact(
         raw,
         allowed={
@@ -423,11 +421,11 @@ def _load_authoring_contract(root: Path, path: str) -> _AuthoringContract:
 
 
 def _load_catalog(
-    root: Path,
+    source: ContentSource,
     path: str,
     contract: _AuthoringContract,
 ) -> _ArtifactCatalog:
-    raw = _load_toml(root, path)
+    raw = _load_toml(source, path)
     _exact(
         raw,
         allowed={"schema_version", "source_id", "nodes"},
@@ -542,8 +540,8 @@ def _load_catalog(
     )
 
 
-def _load_suite_registry(root: Path, path: str) -> Mapping[str, str]:
-    raw = _load_toml(root, path)
+def _load_suite_registry(source: ContentSource, path: str) -> Mapping[str, str]:
+    raw = _load_toml(source, path)
     if raw.get("schema_version") != 1 or not isinstance(raw.get("suites"), list):
         raise _error("POLICY_IMPACT.SUITE_REGISTRY", "suite registry is invalid", path=path)
     suites: dict[str, str] = {}
@@ -558,8 +556,8 @@ def _load_suite_registry(root: Path, path: str) -> Mapping[str, str]:
     return dict(sorted(suites.items()))
 
 
-def _load_facts(root: Path, path: str) -> FactSchema:
-    raw = _load_toml(root, path)
+def _load_facts(source: ContentSource, path: str) -> FactSchema:
+    raw = _load_toml(source, path)
     _exact(
         raw,
         allowed={"schema_version", "id", "facts"},
@@ -606,14 +604,14 @@ class _Declaration:
 
 
 def _load_declarations(
-    root: Path,
+    source: ContentSource,
     paths: tuple[str, ...],
     fact_schema: FactSchema,
     contract: _AuthoringContract,
 ) -> tuple[_Declaration, ...]:
     result = []
     for path in paths:
-        raw = _load_toml(root, path)
+        raw = _load_toml(source, path)
         _exact(
             raw,
             allowed={"schema_version", "owner", "relationships"},
@@ -664,7 +662,7 @@ def _load_declarations(
                 path=path,
                 owner=owner,
             )
-            source = _text(item, "source", path)
+            relationship_source = _text(item, "source", path)
             evidence = _text(item, "evidence_owner", path)
             try:
                 applicability_program = fact_schema.compile(item["applicability"])
@@ -680,7 +678,7 @@ def _load_declarations(
             result.append(
                 _Declaration(
                     owner,
-                    source,
+                    relationship_source,
                     _text(item, "consumer", path),
                     _text(item, "relation", path),
                     applicability_program,
@@ -722,12 +720,12 @@ def _target_matches(
 
 
 def compile_policy_impact(
-    root: Path,
+    source: ContentSourceInput,
     corpus: CanonicalStandardsCorpus,
     registry_path: str = DEFAULT_REGISTRY,
 ) -> CompiledPolicyImpactSet:
-    repo_root = root.resolve()
-    raw = _load_toml(repo_root, registry_path)
+    selected_source = content_source(source)
+    raw = _load_toml(selected_source, registry_path)
     _exact(
         raw,
         allowed={
@@ -758,13 +756,13 @@ def compile_policy_impact(
             path=registry_path,
         )
     authoring_contract = _text(raw, "authoring_contract", registry_path)
-    contract = _load_authoring_contract(repo_root, authoring_contract)
+    contract = _load_authoring_contract(selected_source, authoring_contract)
     node_catalog = _text(raw, "node_catalog", registry_path)
     fact_catalog = _text(raw, "fact_catalog", registry_path)
     suite_registry = _text(raw, "suite_registry", registry_path)
     declaration_sources = _texts(raw, "declaration_sources", registry_path)
-    catalog = _load_catalog(repo_root, node_catalog, contract)
-    suites = _load_suite_registry(repo_root, suite_registry)
+    catalog = _load_catalog(selected_source, node_catalog, contract)
+    suites = _load_suite_registry(selected_source, suite_registry)
 
     modules = {module.module_id: module.role for module in corpus.modules}
     module_ids = set(modules)
@@ -772,9 +770,9 @@ def compile_policy_impact(
     node_ids = module_ids | {unit.id for unit in policy_units.units} | set(catalog.artifacts)
     groups = {group.id for group in contract.groups}
     kinds = contract.relationship_kinds
-    facts = _load_facts(repo_root, fact_catalog)
+    facts = _load_facts(selected_source, fact_catalog)
     declarations = _load_declarations(
-        repo_root,
+        selected_source,
         declaration_sources,
         facts,
         contract,

@@ -6,9 +6,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
 
-from tools.standards_authority.standards_authority import (
+from tools.repository_git.repository_git import (
     GitCommandResult,
-    GitIndexError,
+    GitRepositoryError,
     git_command,
 )
 
@@ -127,7 +127,7 @@ def load_manifest(repository: Path, manifest: Path) -> tuple[ReachabilityRecord,
 def _git(repository: Path, arguments: Sequence[str]) -> GitCommandResult:
     try:
         return git_command(repository, arguments)
-    except GitIndexError as error:
+    except GitRepositoryError as error:
         raise ReachabilityError(
             "GIT_REACHABILITY.GIT_UNAVAILABLE",
             f"cannot execute Git for {repository}: {error}",

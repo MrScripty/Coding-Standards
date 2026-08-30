@@ -1,0 +1,11 @@
+case	platform	operation	snapshot_state	aggregate	deadline	expected
+create-linux	linux	create	missing	complete	not-applicable	allow
+create-windows	windows	create	missing	complete	not-applicable	allow
+create-macos	macos	create	missing	complete	not-applicable	allow
+find-active	linux	find	active	complete	not-applicable	allow
+delete-active	linux	delete	active	complete	future	allow
+delete-idempotent	linux	delete	quarantined	complete	future	allow
+undelete-quarantined	linux	undelete	quarantined	complete	future	allow
+undelete-expired	linux	undelete	expired	complete	expired	typed-unavailable
+missing-snapshot	linux	find	missing	complete	not-applicable	typed-unavailable
+incomplete-aggregate	linux	delete	active	incomplete	future	typed-invalid

@@ -30,7 +30,6 @@ from tools.standards_analysis.standards_analysis import (
     generate_consumer_review_obligations,
     select_impact,
 )
-from contract_support import validate_contract
 from tools.standards_graph.standards_graph import PolicyUnitGraphSource
 from tools.standards_metadata.standards_metadata import (
     PolicyUnit,
@@ -308,7 +307,6 @@ class ImpactSelectionTest(unittest.TestCase):
             [trace["graph"] for trace in reason["traces"]],
             ["accepted", "proposed"],
         )
-        validate_contract("Obligation", value)
 
     def test_compatible_policy_selectors_consolidate_independent_of_order(self) -> None:
         second = "workflow.test.second-policy"

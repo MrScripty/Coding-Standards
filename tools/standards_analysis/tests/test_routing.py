@@ -9,7 +9,11 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     load_router_projection,
 )
-from tools.standards_metadata.standards_metadata import load_canonical_module_corpus
+from tools.standards_metadata.standards_metadata import (
+    DirectoryContentSource,
+    RecordingContentSource,
+    load_canonical_module_corpus,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -69,6 +73,22 @@ class RouterProjectionTest(unittest.TestCase):
             with self.assertRaises(AnalysisError) as caught:
                 load_router_projection(root, modules)
             self.assertEqual(caught.exception.failure.code, "ROUTER_PROJECTION.INVALID")
+
+    def test_repository_and_frozen_sources_produce_equal_projection(self) -> None:
+        recording = RecordingContentSource(DirectoryContentSource(REPO_ROOT))
+        modules = load_canonical_module_corpus(recording)
+        repository_projection = load_router_projection(recording, modules)
+
+        frozen = recording.freeze()
+        frozen_modules = load_canonical_module_corpus(frozen)
+        frozen_projection = load_router_projection(frozen, frozen_modules)
+
+        self.assertEqual(repository_projection, frozen_projection)
+        self.assertIn("STANDARDS-ROUTER.md", recording.requested_paths)
+        self.assertIn(
+            "evaluation/standards-effectiveness/router-projection.toml",
+            recording.requested_paths,
+        )
 
 
 if __name__ == "__main__":

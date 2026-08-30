@@ -65,7 +65,7 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
-contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
+contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh

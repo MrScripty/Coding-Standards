@@ -9,7 +9,10 @@ from tools.standards_policy_impact.standards_policy_impact import (
     PolicyImpactSource,
     compile_policy_impact,
 )
-from tools.standards_metadata.standards_metadata import CanonicalStandardsCorpus
+from tools.standards_metadata.standards_metadata import (
+    CanonicalStandardsCorpus,
+    ContentSourceInput,
+)
 
 from .metadata import metadata_dependency_source
 from .policy_units import PolicyUnitGraphSource
@@ -19,7 +22,7 @@ POLICY_IMPACT_REGISTRY = DEFAULT_REGISTRY
 
 
 def standards_navigation_registry(
-    root: Path,
+    source: ContentSourceInput,
     corpus: CanonicalStandardsCorpus,
     policy_impact_registry: str = POLICY_IMPACT_REGISTRY,
     *,
@@ -27,11 +30,10 @@ def standards_navigation_registry(
 ) -> EdgeRegistry:
     """Build the explicit graph view used for canonical standards navigation."""
 
-    repo_root = root.resolve()
     compiled = (
         compiled_policy_impact
         or compile_policy_impact(
-            repo_root,
+            source,
             corpus,
             policy_impact_registry,
         )
@@ -41,4 +43,8 @@ def standards_navigation_registry(
         PolicyUnitGraphSource(corpus.policy_unit_corpus),
         PolicyImpactSource(compiled),
     )
-    return EdgeRegistry(repo_root, sources)
+    return EdgeRegistry(
+        Path("/"),
+        sources,
+        logical_artifacts=(module.path for module in corpus.modules),
+    )

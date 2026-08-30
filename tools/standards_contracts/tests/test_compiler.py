@@ -19,10 +19,19 @@ class ContractCompilerTest(unittest.TestCase):
         self.assertEqual(set(compiled.reachable_definitions), set(schema["$defs"]))
         self.assertEqual(
             tuple(operation.id for operation in compiled.interface.operations),
-            ("query", "prepare", "resolve", "inspect"),
+            (
+                "create_snapshot",
+                "find_snapshots",
+                "delete_snapshot",
+                "undelete_snapshot",
+                "query",
+                "prepare",
+                "resolve",
+                "inspect",
+            ),
         )
         self.assertEqual(
-            set(compiled.interface.operations[2].capability_by_submission),
+            set(compiled.interface.operations[6].capability_by_submission),
             {
                 "provide-fact",
                 "consumer-disposition",
@@ -43,7 +52,7 @@ class ContractCompilerTest(unittest.TestCase):
         )
 
         schema, interface = canonical_inputs()
-        schema["$defs"]["QueryCall"]["properties"]["view"] = {"$ref": "#/$defs/Missing"}
+        schema["$defs"]["QueryCall"]["properties"]["snapshot"] = {"$ref": "#/$defs/Missing"}
         with self.assertRaises(ContractError) as caught:
             compile_contracts(schema, interface)
         self.assertEqual(
@@ -51,7 +60,7 @@ class ContractCompilerTest(unittest.TestCase):
         )
 
         schema, interface = canonical_inputs()
-        schema["$defs"]["QueryCall"]["properties"]["view"] = {
+        schema["$defs"]["QueryCall"]["properties"]["snapshot"] = {
             "$ref": "https://example.invalid/remote-schema"
         }
         with self.assertRaises(ContractError) as caught:
@@ -140,7 +149,7 @@ class ContractCompilerTest(unittest.TestCase):
         self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
 
         schema, interface = canonical_inputs()
-        del interface["operations"][2]["capability_by_submission"]["provide-fact"]
+        del interface["operations"][6]["capability_by_submission"]["provide-fact"]
         with self.assertRaises(ContractError) as caught:
             compile_contracts(schema, interface)
         self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
@@ -153,6 +162,40 @@ class ContractCompilerTest(unittest.TestCase):
             caught.exception.failure.code, "CONTRACT.ROOT_CLOSURE_MISMATCH"
         )
 
+    def test_operation_sequence_is_exact_and_resolve_is_selected_by_identity(
+        self,
+    ) -> None:
+        for mutation in ("missing", "duplicate", "reordered", "unknown"):
+            schema, interface = canonical_inputs()
+            operations = interface["operations"]
+            if mutation == "missing":
+                operations.pop(0)
+            elif mutation == "duplicate":
+                operations.insert(1, copy.deepcopy(operations[0]))
+            elif mutation == "reordered":
+                operations[0], operations[1] = operations[1], operations[0]
+            else:
+                operations[0]["id"] = "unknown"
+            with (
+                self.subTest(mutation=mutation),
+                self.assertRaises(ContractError) as caught,
+            ):
+                compile_contracts(schema, interface)
+            self.assertEqual(
+                caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE"
+            )
+
+        schema, interface = canonical_inputs()
+        resolve = next(
+            operation
+            for operation in interface["operations"]
+            if operation["id"] == "resolve"
+        )
+        del resolve["capability_by_submission"]["provide-fact"]
+        with self.assertRaises(ContractError) as caught:
+            compile_contracts(schema, interface)
+        self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
+
     def test_inputs_are_copied_before_compilation(self) -> None:
         schema, interface = canonical_inputs()
         expected_schema = copy.deepcopy(schema)
@@ -161,7 +204,7 @@ class ContractCompilerTest(unittest.TestCase):
         interface["operations"].clear()
 
         self.assertEqual(compiled.schema["title"], expected_schema["title"])
-        self.assertEqual(len(compiled.interface.operations), 4)
+        self.assertEqual(len(compiled.interface.operations), 8)
 
 
 if __name__ == "__main__":

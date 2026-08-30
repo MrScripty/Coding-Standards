@@ -15,10 +15,14 @@ from tools.standards_contracts.standards_contracts import (
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from ._generated_contract import (
+    CreateSnapshotCall,
+    DeleteSnapshotCall,
+    FindSnapshotsCall,
     InspectCall,
     PrepareCall,
     QueryCall,
     ResolveCall,
+    UndeleteSnapshotCall,
 )
 
 
@@ -46,66 +50,75 @@ class AgentToolFacade:
         repo_root = root.resolve()
         return cls(StandardsEngine.open_repository(repo_root), _contracts(repo_root))
 
-    @classmethod
-    def open_analysis(
-        cls,
-        base_root: Path,
-        proposed_root: Path,
-    ) -> AgentToolFacade:
-        repo_root = proposed_root.resolve()
-        return cls(
-            StandardsEngine.open_analysis(base_root, proposed_root),
-            _contracts(repo_root),
+    def create_snapshot(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "create_snapshot", arguments, CreateSnapshotCall
         )
+        if isinstance(call, dict):
+            return call
+        return self._result("create_snapshot", self._engine.create_snapshot(call))
 
-    @property
-    def view(self) -> dict[str, object]:
-        return self._engine.view.as_contract()
+    def find_snapshots(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("find_snapshots", arguments, FindSnapshotsCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("find_snapshots", self._engine.find_snapshots(call))
 
-    @property
-    def analysis_views(self) -> tuple[dict[str, object], dict[str, object]]:
-        base, proposed = self._engine.analysis_views
-        return base.as_contract(), proposed.as_contract()
+    def delete_snapshot(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "delete_snapshot", arguments, DeleteSnapshotCall
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result("delete_snapshot", self._engine.delete_snapshot(call))
+
+    def undelete_snapshot(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "undelete_snapshot", arguments, UndeleteSnapshotCall
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result("undelete_snapshot", self._engine.undelete_snapshot(call))
 
     def query(self, arguments: object) -> dict[str, object]:
-        try:
-            call = self._decode_call("query", arguments, QueryCall)
-        except InterfaceVersionError as error:
-            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
-        except (ContractError, KeyError, TypeError, ValueError) as error:
-            return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        call = self._call_or_rejection("query", arguments, QueryCall)
+        if isinstance(call, dict):
+            return call
         result = self._engine.query(call)
         return self._result("query", result)
 
     def prepare(self, arguments: object) -> dict[str, object]:
-        try:
-            call = self._decode_call("prepare", arguments, PrepareCall)
-        except InterfaceVersionError as error:
-            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
-        except (ContractError, KeyError, TypeError, ValueError) as error:
-            return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        call = self._call_or_rejection("prepare", arguments, PrepareCall)
+        if isinstance(call, dict):
+            return call
         result = self._engine.prepare(call.request)
         return self._result("prepare", result)
 
     def resolve(self, arguments: object) -> dict[str, object]:
-        try:
-            call = self._decode_call("resolve", arguments, ResolveCall)
-        except InterfaceVersionError as error:
-            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
-        except (ContractError, KeyError, TypeError, ValueError) as error:
-            return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
-        result = self._engine.resolve(call.analysis, call.submission)
+        call = self._call_or_rejection("resolve", arguments, ResolveCall)
+        if isinstance(call, dict):
+            return call
+        result = self._engine.resolve(call)
         return self._result("resolve", result)
 
     def inspect(self, arguments: object) -> dict[str, object]:
-        try:
-            call = self._decode_call("inspect", arguments, InspectCall)
-        except InterfaceVersionError as error:
-            return self._rejected("INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error))
-        except (ContractError, KeyError, TypeError, ValueError) as error:
-            return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        call = self._call_or_rejection("inspect", arguments, InspectCall)
+        if isinstance(call, dict):
+            return call
         result = self._engine.inspect(call)
         return self._result("inspect", result)
+
+    def _call_or_rejection(
+        self, operation: str, arguments: object, expected_type: type
+    ) -> object:
+        try:
+            return self._decode_call(operation, arguments, expected_type)
+        except InterfaceVersionError as error:
+            return self._rejected(
+                "INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error)
+            )
+        except (ContractError, KeyError, TypeError, ValueError) as error:
+            return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
 
     def _decode_call(self, operation: str, arguments: object, expected_type):
         contract = self._operation(operation)

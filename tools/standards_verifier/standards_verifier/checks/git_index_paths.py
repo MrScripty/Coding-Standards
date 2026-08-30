@@ -5,8 +5,9 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from tools.repository_git.repository_git import GitRepositoryError, indexed_paths
+
 from ..diagnostics import Diagnostic, EngineError
-from tools.standards_authority.standards_authority import GitIndexError, indexed_paths
 from ..model import CheckAuthorityInput, CheckContext, CheckRepositoryIndexInput
 from ..paths import contained_path, repository_path
 
@@ -51,15 +52,15 @@ def _tracked_paths(value: Any, suite: str, check: str) -> tuple[str, ...]:
 def read_git_index(root: Path, suite: str, check: str) -> frozenset[str]:
     try:
         entries = indexed_paths(root)
-    except GitIndexError as error:
+    except GitRepositoryError as error:
         raise EngineError(
             Diagnostic(
-                error.code,
-                error.outcome,
+                error.failure.code,
+                error.failure.kind,
                 "Git index membership cannot be read",
                 suite=suite,
                 check=check,
-                observed=str(error),
+                observed=error.failure.message,
             )
         ) from error
     return frozenset(entries)

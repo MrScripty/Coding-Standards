@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 - the standalone verifier package root precedes local imports.
+
 import json
-import os
 import subprocess
 import sys
 import tempfile
@@ -16,6 +17,10 @@ sys.path.insert(0, str(ENGINE_ROOT))
 
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
+    GitRepositoryFailure,
+)
 
 
 class FileContractsTest(unittest.TestCase):
@@ -692,74 +697,52 @@ class FileContractsTest(unittest.TestCase):
         self.assertEqual(result.exit_code, 1)
         self.assertEqual(result.diagnostics[0].observed, "absent-untracked")
 
-    @patch("tools.standards_authority.standards_authority.git_index.subprocess.run")
-    def test_git_index_paths_uses_one_fixed_index_read(self, run) -> None:
-        run.return_value = subprocess.CompletedProcess(
-            [],
-            0,
-            stdout=b"docs/a.md\0docs/b.md\0",
-            stderr=b"",
+    @patch("standards_verifier.checks.git_index_paths.indexed_paths")
+    def test_git_index_paths_uses_one_adapter_read(self, indexed_paths) -> None:
+        indexed_paths.return_value = ("docs/a.md", "docs/b.md")
+        result = self.result(
+            self.write_git_index_suite(tracked=("docs/a.md", "docs/b.md"))
         )
-        with patch.dict(
-            os.environ,
-            {"GIT_DIR": "/outside", "GIT_INDEX_FILE": "/outside/index"},
-        ):
-            result = self.result(
-                self.write_git_index_suite(tracked=("docs/a.md", "docs/b.md"))
-            )
 
         self.assertEqual(result.status, "passed")
-        run.assert_called_once()
-        arguments, options = run.call_args
-        self.assertEqual(
-            arguments[0],
-            ["git", "-C", str(self.root), "ls-files", "-z", "--full-name"],
-        )
-        self.assertFalse(options["check"])
-        self.assertTrue(options["capture_output"])
-        self.assertNotIn("GIT_DIR", options["env"])
-        self.assertNotIn("GIT_INDEX_FILE", options["env"])
+        indexed_paths.assert_called_once_with(self.root)
 
-    def test_git_index_paths_types_git_and_output_failures(self) -> None:
+    def test_git_index_paths_translates_typed_adapter_failures(self) -> None:
         cases = (
-            (FileNotFoundError("missing"), "GIT.UNAVAILABLE", 3),
             (
-                subprocess.CompletedProcess([], 128, stdout=b"", stderr=b"fatal"),
-                "GIT.INDEX_UNAVAILABLE",
+                GitRepositoryFailure(
+                    "unavailable",
+                    "REPOSITORY_GIT.EXECUTABLE_UNAVAILABLE",
+                    "Git is unavailable.",
+                ),
                 3,
             ),
             (
-                subprocess.CompletedProcess([], 0, stdout=b"docs/a.md", stderr=b""),
-                "GIT.INDEX_OUTPUT",
-                2,
-            ),
-            (
-                subprocess.CompletedProcess([], 0, stdout=b"docs/\xff.md\0", stderr=b""),
-                "GIT.INDEX_UTF8",
-                2,
-            ),
-            (
-                subprocess.CompletedProcess([], 0, stdout=b"docs/a.md\0\0", stderr=b""),
-                "GIT.INDEX_OUTPUT",
+                GitRepositoryFailure(
+                    "invalid",
+                    "REPOSITORY_GIT.INVALID_OUTPUT",
+                    "Git index output is invalid.",
+                ),
                 2,
             ),
         )
-        for effect, code, exit_code in cases:
-            with self.subTest(code=code):
+        for failure, exit_code in cases:
+            with self.subTest(code=failure.code):
                 with patch(
-                    "tools.standards_authority.standards_authority.git_index.subprocess.run",
-                    side_effect=effect if isinstance(effect, Exception) else None,
-                    return_value=None if isinstance(effect, Exception) else effect,
+                    "standards_verifier.checks.git_index_paths.indexed_paths",
+                    side_effect=GitRepositoryError(failure),
                 ):
                     result = self.result(self.write_git_index_suite())
                 self.assertEqual(result.exit_code, exit_code)
-                self.assertEqual(result.diagnostics[0].code, code)
+                self.assertEqual(result.diagnostics[0].code, failure.code)
 
     def test_git_index_paths_types_non_repository_root(self) -> None:
         result = self.result(self.write_git_index_suite())
 
         self.assertEqual(result.exit_code, 3)
-        self.assertEqual(result.diagnostics[0].code, "GIT.INDEX_UNAVAILABLE")
+        self.assertEqual(
+            result.diagnostics[0].code, "REPOSITORY_GIT.COMMAND_UNAVAILABLE"
+        )
 
     def test_git_index_paths_rejects_configuration_errors(self) -> None:
         cases = (

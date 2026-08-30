@@ -8,6 +8,11 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
+    git_output,
+    staged_name_status,
+)
 from tools.standards_metadata.standards_metadata import (
     MetadataError,
     load_canonical_standards_corpus,
@@ -18,11 +23,6 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from tools.standards_authority.standards_authority import (
-    GitIndexError,
-    git_output,
-    staged_name_status,
-)
 from ..model import (
     CheckAuthorityInput,
     CheckContext,
@@ -253,7 +253,7 @@ def _materialized_tree(
         archive_bytes = git_output(
             context.repo_root, ("archive", "--format=tar", tree)
         )
-    except GitIndexError as error:
+    except GitRepositoryError as error:
         raise EngineError(
             Diagnostic(
                 "POLICY_IMPACT_MIGRATION.ACCEPTED_TREE_UNAVAILABLE",
@@ -529,7 +529,7 @@ def _changed_production_paths(
         )
     try:
         fields = list(staged_name_status(context.repo_root, base, ("tools",)))
-    except GitIndexError as error:
+    except GitRepositoryError as error:
         raise EngineError(
             Diagnostic(
                 "POLICY_IMPACT_MIGRATION.IMPLEMENTATION_BASE_UNAVAILABLE",

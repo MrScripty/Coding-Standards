@@ -1,57 +1,59 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 11,
+  "interface_schema_version": 12,
   "examples": [
+    {
+      "name": "create-snapshot",
+      "definition": "CreateSnapshotCall",
+      "value": {
+        "kind": "create-snapshot"
+      }
+    },
+    {
+      "name": "find-active-snapshots",
+      "definition": "FindSnapshotsCall",
+      "value": {
+        "kind": "find-snapshots",
+        "lifecycle": "active",
+        "limit": 25
+      }
+    },
+    {
+      "name": "delete-snapshot",
+      "definition": "DeleteSnapshotCall",
+      "value": {
+        "kind": "delete-snapshot",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        }
+      }
+    },
+    {
+      "name": "undelete-snapshot",
+      "definition": "UndeleteSnapshotCall",
+      "value": {
+        "kind": "undelete-snapshot",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        }
+      }
+    },
     {
       "name": "query-route",
       "definition": "QueryCall",
       "value": {
-        "view": {
-          "kind": "standards-authority-view-handle",
-          "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-          "schema_version": 4
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
         },
         "request": {
           "kind": "route",
-          "facts": {
-            "routing.activities": {
-              "type": "enum-set",
-              "state": "known",
-              "value": [
-                "implementation"
-              ]
-            },
-            "routing.workflow-profiles": {
-              "type": "enum-set",
-              "state": "known",
-              "value": []
-            },
-            "routing.applications": {
-              "type": "enum-set",
-              "state": "known",
-              "value": []
-            },
-            "routing.boundaries": {
-              "type": "enum-set",
-              "state": "known",
-              "value": []
-            },
-            "routing.languages": {
-              "type": "enum-set",
-              "state": "known",
-              "value": []
-            },
-            "routing.frameworks": {
-              "type": "enum-set",
-              "state": "known",
-              "value": []
-            },
-            "routing.topics": {
-              "type": "enum-set",
-              "state": "known",
-              "value": []
-            }
-          }
+          "facts": {}
         }
       }
     },
@@ -59,10 +61,10 @@
       "name": "query-read",
       "definition": "QueryCall",
       "value": {
-        "view": {
-          "kind": "standards-authority-view-handle",
-          "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-          "schema_version": 4
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
         },
         "request": {
           "kind": "read",
@@ -74,10 +76,10 @@
       "name": "query-related",
       "definition": "QueryCall",
       "value": {
-        "view": {
-          "kind": "standards-authority-view-handle",
-          "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-          "schema_version": 4
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
         },
         "request": {
           "kind": "related",
@@ -96,24 +98,24 @@
       "value": {
         "request": {
           "kind": "analysis-request",
-          "base_view": {
-            "kind": "standards-authority-view-handle",
-            "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-            "schema_version": 4
+          "base_snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+            "schema_version": 5
           },
-          "proposed_view": {
-            "kind": "standards-authority-view-handle",
-            "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-            "schema_version": 4
+          "proposed_snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:00000000-0000-4000-8000-000000000002",
+            "schema_version": 5
           },
           "changes": [
             {
               "kind": "modification",
               "accepted_ids": [
-                "workflow.verification.acceptance-claims"
+                "workflow.planning.written-plan-applicability"
               ],
               "proposed_ids": [
-                "workflow.verification.acceptance-claims"
+                "workflow.planning.written-plan-applicability"
               ],
               "scope": {
                 "kind": "whole-artifact"
@@ -121,41 +123,7 @@
             }
           ],
           "semantic_proposals": [],
-          "contract_version": 3
-        }
-      }
-    },
-    {
-      "name": "resolve-coverage",
-      "definition": "ResolveCall",
-      "value": {
-        "analysis": {
-          "kind": "analysis-handle",
-          "id": "analysis-root:sha256:8851a0059f79d0eeb78de7a8a82ce7e9e00b1ec0b3485a3a7d0488f0d163b98e",
-          "schema_version": 4
-        },
-        "submission": {
-          "kind": "coverage-attestation",
-          "obligation_id": "obligation:sha256:df0c8247420ccb955f4119db01f4d07e94065b6c2435e4eb15042e731b087f6d",
-          "claim": {
-            "requirement": {
-              "kind": "coverage-requirement-handle",
-              "id": "coverage-requirement:sha256:360cb4aea2be0c7b0020faabb6ac7ae506eae5fb5dbc314519941d6f3f0ac8df",
-              "schema_version": 4
-            },
-            "conclusion": "complete",
-            "evidence": [
-              {
-                "id": "example-evidence",
-                "digest": "sha256:80d70e44d0ae1e829fd5f37c3ee4a60dfbea8d3aa18407ea3f34cf7ec91da34d",
-                "provider_contract": "fixture.evidence",
-                "provider_contract_version": "1"
-              }
-            ],
-            "explicit_exclusions": [],
-            "rationale": "Exact consumer coverage was reviewed.",
-            "auditor_provenance": "principal.fixture"
-          }
+          "contract_version": 4
         }
       }
     },
@@ -165,588 +133,8 @@
       "value": {
         "handle": {
           "kind": "analysis-handle",
-          "id": "analysis-root:sha256:824cf5236fc86af353cbdfc494a23aa0a71784926d43ec420ee76edf621d0843",
-          "schema_version": 4
-        }
-      }
-    },
-    {
-      "name": "route-result",
-      "definition": "RouteResult",
-      "value": {
-        "kind": "route-result",
-        "handle": {
-          "kind": "navigation-handle",
-          "id": "navigation-result:sha256:4eee34fa8c061c2fe6cfcf4cc6cc27c3070f70573fd9fce1ac7191c43f0adccc",
-          "schema_version": 4
-        },
-        "authority": {
-          "kind": "execution-closure-handle",
-          "id": "execution-closure:sha256:3fccdfd2271ce555e701553418bd11b83861fa7079220f3bcb0519ce39b49d11",
-          "schema_version": 4
-        },
-        "reading_plan": [
-          {
-            "target": "core",
-            "scope": {
-              "kind": "whole-artifact"
-            },
-            "authority": "normative",
-            "reasons": [
-              {
-                "kind": "requires",
-                "edge": "metadata-requires:router->core",
-                "source": "router"
-              },
-              {
-                "kind": "requires",
-                "edge": "metadata-requires:workflow.implementation->core",
-                "source": "workflow.implementation"
-              }
-            ],
-            "state": "selected"
-          },
-          {
-            "target": "router",
-            "scope": {
-              "kind": "whole-artifact"
-            },
-            "authority": "normative",
-            "reasons": [
-              {
-                "kind": "routing-base",
-                "projection": "router.executable-projection"
-              }
-            ],
-            "state": "selected"
-          },
-          {
-            "target": "workflow.implementation",
-            "scope": {
-              "kind": "whole-artifact"
-            },
-            "authority": "normative",
-            "reasons": [
-              {
-                "kind": "routing-rule",
-                "rule": "route.workflow.implementation",
-                "facts": [
-                  "routing.activities"
-                ]
-              }
-            ],
-            "state": "selected"
-          }
-        ],
-        "unresolved_questions": [],
-        "next_operations": [
-          {
-            "operation": "query",
-            "request_kind": "read",
-            "view": {
-              "kind": "standards-authority-view-handle",
-              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-              "schema_version": 4
-            },
-            "target": "core"
-          },
-          {
-            "operation": "query",
-            "request_kind": "read",
-            "view": {
-              "kind": "standards-authority-view-handle",
-              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-              "schema_version": 4
-            },
-            "target": "router"
-          },
-          {
-            "operation": "query",
-            "request_kind": "read",
-            "view": {
-              "kind": "standards-authority-view-handle",
-              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-              "schema_version": 4
-            },
-            "target": "workflow.implementation"
-          }
-        ],
-        "summary": "Selected 3 standards with 0 unresolved fact categories."
-      }
-    },
-    {
-      "name": "read-result",
-      "definition": "ReadResult",
-      "value": {
-        "kind": "read-result",
-        "handle": {
-          "kind": "navigation-handle",
-          "id": "navigation-result:sha256:8a0abd0b65144a00e527b0668a3661ee3980545966e20988f79c7ded76e69700",
-          "schema_version": 4
-        },
-        "authority": {
-          "kind": "execution-closure-handle",
-          "id": "execution-closure:sha256:0bd117fb8fc674709e7435154b33db903431bbff366133ca3af0de4b8b006f51",
-          "schema_version": 4
-        },
-        "policy": {
-          "handle": {
-            "kind": "policy-handle",
-            "id": "policy-inspection:sha256:afc3e2909167122133254321eecf43f11219b82776fc78c17b97f0b0f524ce7e",
-            "schema_version": 4
-          },
-          "authority": "normative",
-          "scope": {
-            "kind": "whole-artifact"
-          }
-        },
-        "content": "Example policy content.\n",
-        "requires": [
-          "core",
-          "workflow.implementation",
-          "workflow.verification"
-        ],
-        "specializes": [],
-        "related": [
-          {
-            "handle": {
-              "kind": "relationship-handle",
-              "id": "relationship-inspection:sha256:c129669533deebe0301c306e8805051a3705d8a84357854a60da01f40fe895b7",
-              "schema_version": 4
-            },
-            "source": "profile.workflow.concurrent-plan-integration",
-            "target": "workflow.planning",
-            "relation": "requires",
-            "groups": [
-              "standards-requires",
-              "standards-dependencies"
-            ],
-            "direction": "incoming",
-            "traversal_eligible": true,
-            "applicability": "not-declared"
-          }
-        ],
-        "next_operations": [
-          {
-            "operation": "query",
-            "request_kind": "related",
-            "view": {
-              "kind": "standards-authority-view-handle",
-              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-              "schema_version": 4
-            },
-            "target": "workflow.planning"
-          },
-          {
-            "operation": "inspect",
-            "request_kind": "inspect",
-            "target": "policy-inspection:sha256:afc3e2909167122133254321eecf43f11219b82776fc78c17b97f0b0f524ce7e",
-            "view": {
-              "kind": "standards-authority-view-handle",
-              "id": "standards-authority-view:sha256:5cb1f7b981bb4a0517d92392779e19300906e9bc9509ae99d49f932c968f5ce2",
-              "schema_version": 4
-            }
-          }
-        ],
-        "summary": "Read canonical standard workflow.planning."
-      }
-    },
-    {
-      "name": "related-result",
-      "definition": "RelatedResult",
-      "value": {
-        "kind": "related-result",
-        "handle": {
-          "kind": "navigation-handle",
-          "id": "navigation-result:sha256:e7d6f80408e14663fa2e542da258aa8ca82b2edd23e81ec65278862027ca080b",
-          "schema_version": 4
-        },
-        "authority": {
-          "kind": "execution-closure-handle",
-          "id": "execution-closure:sha256:4bb4bbaf3aa0211e5675b16822d25dde1dfc660fc9ad9ba953e1ef1b04c962bb",
-          "schema_version": 4
-        },
-        "target": "workflow.planning",
-        "policy_unit_mapping": {
-          "state": "policy-units-present",
-          "policy_units": [
-            "workflow.planning.written-plan-applicability"
-          ]
-        },
-        "relationships": [
-          {
-            "handle": {
-              "kind": "relationship-handle",
-              "id": "relationship-inspection:sha256:73a6ed5b733168505dd8eb6c87defc64bb7ea537dd9e066a8756f290245fd40b",
-              "schema_version": 4
-            },
-            "source": "workflow.planning",
-            "target": "core",
-            "relation": "requires",
-            "groups": [
-              "standards-requires",
-              "standards-dependencies"
-            ],
-            "direction": "outgoing",
-            "traversal_eligible": true,
-            "applicability": "not-declared"
-          }
-        ],
-        "next_operations": [],
-        "summary": "Found 3 declared relationships."
-      }
-    },
-    {
-      "name": "pending-result",
-      "definition": "PendingResult",
-      "value": {
-        "kind": "pending-result",
-        "handle": {
-          "kind": "analysis-handle",
-          "id": "analysis-root:sha256:8851a0059f79d0eeb78de7a8a82ce7e9e00b1ec0b3485a3a7d0488f0d163b98e",
-          "schema_version": 4
-        },
-        "status": "needs-action",
-        "context": {
-          "kind": "analysis-context",
-          "handle": {
-            "kind": "analysis-context-handle",
-            "id": "analysis-context:sha256:c4ed822657810fc62286664c2cdd607049931e8cbbfb2e8afb752ea717ae1be8",
-            "schema_version": 4
-          },
-          "subjects": [
-            {
-              "policy": "workflow.verification.acceptance-claims",
-              "change_kind": "modification",
-              "classification": "unchanged",
-              "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-              "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-              "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-              "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-              "accepted_semantic_revision": 1,
-              "proposed_semantic_revision": 1,
-              "semantic_state": "accepted-unchanged",
-              "scope": {
-                "kind": "whole-artifact"
-              }
-            }
-          ],
-          "semantic_proposals": [],
-          "changes": [
-            {
-              "kind": "modification",
-              "accepted_ids": [
-                "workflow.verification.acceptance-claims"
-              ],
-              "proposed_ids": [
-                "workflow.verification.acceptance-claims"
-              ],
-              "scope": {
-                "kind": "whole-artifact"
-              }
-            }
-          ]
-        },
-        "changes": [
-          {
-            "kind": "modification",
-            "accepted_ids": [
-              "workflow.verification.acceptance-claims"
-            ],
-            "proposed_ids": [
-              "workflow.verification.acceptance-claims"
-            ],
-            "scope": {
-              "kind": "whole-artifact"
-            }
-          }
-        ],
-        "changed_units": [
-          {
-            "policy": "workflow.verification.acceptance-claims",
-            "change_kind": "modification",
-            "classification": "unchanged",
-            "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-            "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-            "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-            "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-            "accepted_semantic_revision": 1,
-            "proposed_semantic_revision": 1,
-            "semantic_state": "accepted-unchanged",
-            "scope": {
-              "kind": "whole-artifact"
-            }
-          }
-        ],
-        "obligations": [
-          {
-            "id": "obligation:sha256:df0c8247420ccb955f4119db01f4d07e94065b6c2435e4eb15042e731b087f6d",
-            "kind": "audit-coverage",
-            "target": "workflow.verification.acceptance-claims",
-            "scope": {
-              "kind": "whole-artifact"
-            },
-            "reasons": [
-              {
-                "kind": "audit-coverage",
-                "source": "workflow.verification.acceptance-claims"
-              }
-            ],
-            "state": "required",
-            "permitted_submissions": [
-              "coverage-attestation"
-            ],
-            "fingerprint": {
-              "decision_kind": "audit-coverage",
-              "decision_contract": "decision-contract.audit-coverage.v1",
-              "schema_version": 1,
-              "dependencies": [
-                {
-                  "class": "audit",
-                  "identity": "coverage-requirement:sha256:360cb4aea2be0c7b0020faabb6ac7ae506eae5fb5dbc314519941d6f3f0ac8df",
-                  "digest": "sha256:43c9586c7810bfac70223c72836551f1cdc4ffa09e1c863a0a570c76200b16c7"
-                },
-                {
-                  "class": "policy-unit",
-                  "identity": "workflow.verification.acceptance-claims",
-                  "digest": "sha256:6a20ab2c226d511ba47142181f3bc61e80f1f11ce1d573c55905e3e37d039b92"
-                },
-                {
-                  "class": "provider-contract",
-                  "identity": "decision-contract.audit-coverage.v1",
-                  "digest": "sha256:a597e086b78c0b000e7c65d36951ae827c068940f706f192b5f4298c98e7119d"
-                }
-              ]
-            },
-            "applicability": "not-declared"
-          }
-        ],
-        "fact_requirements": [],
-        "reading_plan": [],
-        "next_operations": [
-          {
-            "operation": "resolve",
-            "request_kind": "coverage-attestation",
-            "analysis": {
-              "kind": "analysis-handle",
-              "id": "analysis-root:sha256:8851a0059f79d0eeb78de7a8a82ce7e9e00b1ec0b3485a3a7d0488f0d163b98e",
-              "schema_version": 4
-            },
-            "obligation_id": "obligation:sha256:df0c8247420ccb955f4119db01f4d07e94065b6c2435e4eb15042e731b087f6d"
-          }
-        ],
-        "authority": {
-          "kind": "execution-closure-handle",
-          "id": "execution-closure:sha256:ad6ae7e671c717737308c545f59b4fb80ba5fcfb6f4800df7240588275ece78b",
-          "schema_version": 4
-        },
-        "summary": "The bounded analysis requires additional decisions."
-      }
-    },
-    {
-      "name": "complete-result",
-      "definition": "CompleteResult",
-      "value": {
-        "kind": "complete-result",
-        "handle": {
-          "kind": "analysis-handle",
-          "id": "analysis-root:sha256:824cf5236fc86af353cbdfc494a23aa0a71784926d43ec420ee76edf621d0843",
-          "schema_version": 4
-        },
-        "status": "complete",
-        "context": {
-          "kind": "analysis-context",
-          "handle": {
-            "kind": "analysis-context-handle",
-            "id": "analysis-context:sha256:c4ed822657810fc62286664c2cdd607049931e8cbbfb2e8afb752ea717ae1be8",
-            "schema_version": 4
-          },
-          "subjects": [
-            {
-              "policy": "workflow.verification.acceptance-claims",
-              "change_kind": "modification",
-              "classification": "unchanged",
-              "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-              "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-              "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-              "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-              "accepted_semantic_revision": 1,
-              "proposed_semantic_revision": 1,
-              "semantic_state": "accepted-unchanged",
-              "scope": {
-                "kind": "whole-artifact"
-              }
-            }
-          ],
-          "semantic_proposals": [],
-          "changes": [
-            {
-              "kind": "modification",
-              "accepted_ids": [
-                "workflow.verification.acceptance-claims"
-              ],
-              "proposed_ids": [
-                "workflow.verification.acceptance-claims"
-              ],
-              "scope": {
-                "kind": "whole-artifact"
-              }
-            }
-          ]
-        },
-        "changes": [
-          {
-            "kind": "modification",
-            "accepted_ids": [
-              "workflow.verification.acceptance-claims"
-            ],
-            "proposed_ids": [
-              "workflow.verification.acceptance-claims"
-            ],
-            "scope": {
-              "kind": "whole-artifact"
-            }
-          }
-        ],
-        "changed_units": [
-          {
-            "policy": "workflow.verification.acceptance-claims",
-            "change_kind": "modification",
-            "classification": "unchanged",
-            "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-            "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-            "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-            "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-            "accepted_semantic_revision": 1,
-            "proposed_semantic_revision": 1,
-            "semantic_state": "accepted-unchanged",
-            "scope": {
-              "kind": "whole-artifact"
-            }
-          }
-        ],
-        "coverage_certificates": [
-          {
-            "kind": "certificate-handle",
-            "id": "coverage-certificate:sha256:b5b84a8ff6f4b5969030b5f82433ea39b213f06ca1907e72243cbb630ee8eaac",
-            "schema_version": 4
-          }
-        ],
-        "fact_observations": [],
-        "dispositions": [],
-        "reading_plan": [],
-        "completion": {
-          "required_coverage_subjects": [
-            "workflow.verification.acceptance-claims"
-          ],
-          "certificate_subjects": [
-            "workflow.verification.acceptance-claims"
-          ],
-          "reached_consumer_obligations": [],
-          "disposition_obligations": [],
-          "required_fact_requirements": [],
-          "observed_fact_requirements": [],
-          "non_consumer_obligations_resolved": true,
-          "applicability_resolved": true,
-          "authorization_valid": true,
-          "evidence_valid": true
-        },
-        "authority": {
-          "kind": "execution-closure-handle",
-          "id": "execution-closure:sha256:63273920027e3cac4b699d2b8e24b92b39445716bdb3fe4634fb54ec0d22f940",
-          "schema_version": 4
-        },
-        "summary": "The bounded read-only impact analysis is complete."
-      }
-    },
-    {
-      "name": "analysis-inspection",
-      "definition": "InspectionResult",
-      "value": {
-        "kind": "analysis-state",
-        "handle": {
-          "kind": "analysis-handle",
-          "id": "analysis-root:sha256:824cf5236fc86af353cbdfc494a23aa0a71784926d43ec420ee76edf621d0843",
-          "schema_version": 4
-        },
-        "context": {
-          "kind": "analysis-context",
-          "handle": {
-            "kind": "analysis-context-handle",
-            "id": "analysis-context:sha256:c4ed822657810fc62286664c2cdd607049931e8cbbfb2e8afb752ea717ae1be8",
-            "schema_version": 4
-          },
-          "subjects": [
-            {
-              "policy": "workflow.verification.acceptance-claims",
-              "change_kind": "modification",
-              "classification": "unchanged",
-              "accepted_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-              "proposed_representation_digest": "sha256:15a1a6c3870ffb93865f181cb260611828573249aada37d6e11da0e486eb5cae",
-              "accepted_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-              "proposed_structural_digest": "sha256:1c0aed290936dcf70be154299d63c387d85696de162d3221e1a27ec60e9a7e4f",
-              "accepted_semantic_revision": 1,
-              "proposed_semantic_revision": 1,
-              "semantic_state": "accepted-unchanged",
-              "scope": {
-                "kind": "whole-artifact"
-              }
-            }
-          ],
-          "semantic_proposals": [],
-          "changes": [
-            {
-              "kind": "modification",
-              "accepted_ids": [
-                "workflow.verification.acceptance-claims"
-              ],
-              "proposed_ids": [
-                "workflow.verification.acceptance-claims"
-              ],
-              "scope": {
-                "kind": "whole-artifact"
-              }
-            }
-          ]
-        },
-        "fact_observations": [],
-        "dispositions": [],
-        "coverage_attestations": [
-          {
-            "kind": "coverage-attestation",
-            "handle": {
-              "kind": "coverage-attestation-handle",
-              "id": "coverage-attestation:sha256:14ec8d8c5933d5123d9980ecb9a59a6dedda5d63a5c9910c6c82ebb85b75c118",
-              "schema_version": 4
-            },
-            "requirement": {
-              "kind": "coverage-requirement-handle",
-              "id": "coverage-requirement:sha256:360cb4aea2be0c7b0020faabb6ac7ae506eae5fb5dbc314519941d6f3f0ac8df",
-              "schema_version": 4
-            },
-            "conclusion": "complete",
-            "evidence": [
-              {
-                "id": "example-evidence",
-                "digest": "sha256:80d70e44d0ae1e829fd5f37c3ee4a60dfbea8d3aa18407ea3f34cf7ec91da34d",
-                "provider_contract": "fixture.evidence",
-                "provider_contract_version": "1"
-              }
-            ],
-            "explicit_exclusions": [],
-            "rationale": "Exact consumer coverage was reviewed.",
-            "auditor_provenance": "principal.fixture",
-            "schema_version": 3,
-            "authorization": {
-              "object_kind": "authorization-grant",
-              "id": "authorization-grant:sha256:0220e94551c80e203e405552a898707595adeaf44c902e74fe05393f1f0df08f"
-            }
-          }
-        ],
-        "authority": {
-          "kind": "execution-closure-handle",
-          "id": "execution-closure:sha256:63273920027e3cac4b699d2b8e24b92b39445716bdb3fe4634fb54ec0d22f940",
-          "schema_version": 4
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 5
         }
       }
     },
@@ -755,9 +143,9 @@
       "definition": "RejectedResult",
       "value": {
         "kind": "rejected-result",
-        "code": "AUTHORITY.UNAVAILABLE",
+        "code": "SNAPSHOT.UNAVAILABLE",
         "outcome": "unavailable",
-        "message": "The requested immutable authority is unavailable.",
+        "message": "The requested immutable snapshot is unavailable.",
         "details": {},
         "next_operations": []
       }
