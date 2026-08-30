@@ -174,3 +174,27 @@
 - Updated the final verification scope from eleven to thirteen Markdown
   artifacts. Normative standards, policy graph, evaluator/runtime source,
   fixtures, and suites remain unchanged.
+
+## 2026-08-29 — Commit-message history repair
+
+- Refreshed `origin/main` and proved that all 136 local descendants were
+  unpushed, with one branch, one worktree, no tags, no merge commits, and no
+  dependent ref.
+- Audited every local message and found 83 empty bodies. Wrote each body from
+  its contemporaneous diff and governed plan, ledger, issue, report, or
+  acceptance evidence.
+- Prototyped the exact rewrite in a temporary clone. Narrowed the live range to
+  the first deficient commit's parent so the earlier 45 local commits remained
+  untouched.
+- Replaced the required 91-commit descendant chain, repairing 83 bodies and
+  preserving eight existing messages. All trees, subjects, authors, author
+  dates, committers, committer dates, order, and zero-merge topology match the
+  former lineage.
+- Preserved the former tip at
+  `refs/recovery/pre-message-body-rewrite-20260829` and recorded every
+  old-to-new identity and tree in
+  [the repair report](reports/git-message-history-repair.md) and
+  [lineage map](reports/git-message-history-repair.tsv).
+- Passed the complete post-rewrite standards checkpoint: all 226 declarative
+  suites and all 53 retained Bash checkers. The 91-row lineage map, object
+  graph, generated inventories, and whitespace checks also passed.
