@@ -1,16 +1,28 @@
-case	owner	contract	caller_fact	outcomes	enforcement	evidence	capability	fallback	expected
-owned_invariant	clear	complete	not-required	complete	selected	selected	available	none	allow
-valid_precondition	clear	complete	establishable	complete	selected	selected	available	none	allow
-outcome_postconditions	clear	complete	not-required	complete	selected	selected	available	none	allow
-typed_documentation	clear	complete	not-required	complete	selected	selected	available	none	allow
-invalid_state	clear	violated	not-required	complete	selected	selected	available	none	typed-invalid
-unknown_owner	unknown	complete	not-required	complete	selected	selected	available	none	typed-unavailable
-missing_enforcement	clear	complete	not-required	complete	missing	selected	unavailable	none	typed-unavailable
-missing_evidence	clear	complete	not-required	complete	selected	missing	unavailable	none	typed-unavailable
-unsupported_variant	clear	unsupported	not-required	complete	selected	selected	available	none	typed-unsupported
-caller_cannot_establish	clear	complete	hidden	complete	selected	selected	available	none	typed-invalid
-incomplete_outcomes	clear	complete	not-required	partial	selected	selected	available	none	typed-invalid
-debug_only	clear	complete	not-required	complete	selected	selected	available	debug-only	typed-invalid
-release_logging	clear	complete	not-required	complete	selected	selected	available	logging	typed-invalid
-panic_default	clear	complete	not-required	complete	selected	selected	available	panic	typed-invalid
-test_name_proof	clear	complete	not-required	complete	selected	selected	available	test-name	typed-invalid
+case	owner	contract	caller_fact	outcomes	enforcement	evidence	capability	failure_source	consequence	outcome_contract	selected_outcome	fallback	expected
+owned_invariant	clear	complete	not-required	complete	selected	selected	available	not-applicable	none	none	none	none	allow
+valid_precondition	clear	complete	establishable	complete	selected	selected	available	not-applicable	none	none	none	none	allow
+outcome_postconditions	clear	complete	not-required	complete	selected	selected	available	not-applicable	none	none	none	none	allow
+typed_documentation	clear	complete	not-required	complete	selected	selected	available	not-applicable	none	none	none	none	allow
+invalid_state	clear	violated	not-required	complete	selected	selected	available	programming-defect	contained	immediate-permitted	immediate-failure	none	typed-invalid
+unknown_owner	unknown	complete	not-required	complete	selected	selected	available	not-applicable	none	none	none	none	typed-unavailable
+missing_enforcement	clear	complete	not-required	complete	missing	selected	unavailable	programming-defect	contained	immediate-permitted	immediate-failure	none	typed-unavailable
+missing_evidence	clear	complete	not-required	complete	selected	missing	unavailable	programming-defect	contained	immediate-permitted	immediate-failure	none	typed-unavailable
+unsupported_variant	clear	unsupported	not-required	complete	selected	selected	available	not-applicable	none	none	none	none	typed-unsupported
+caller_cannot_establish	clear	complete	hidden	complete	selected	selected	available	not-applicable	none	none	none	none	typed-invalid
+incomplete_outcomes	clear	complete	not-required	partial	selected	selected	available	not-applicable	none	none	none	none	typed-invalid
+contained_immediate_failure	clear	complete	not-required	complete	selected	selected	available	programming-defect	contained	immediate-permitted	immediate-failure	none	allow
+contained_trace_and_fail	clear	complete	not-required	complete	selected	selected	available	programming-defect	contained	immediate-permitted	trace-and-fail	none	allow
+contained_diagnostic_only	clear	complete	not-required	complete	selected	selected	available	programming-defect	contained	immediate-permitted	diagnostic-only	none	typed-invalid
+arbitrary_input_rejection	clear	complete	not-required	complete	selected	selected	available	arbitrary-input	public-escape	typed-required	typed-failure	none	allow
+adversarial_input_rejection	clear	complete	not-required	complete	selected	selected	available	adversarial-input	external-effect	typed-required	typed-failure	none	allow
+operational_failure_outcome	clear	complete	not-required	complete	selected	selected	available	operational	public-escape	typed-required	typed-failure	none	allow
+escaping_internal_error	clear	complete	not-required	complete	selected	selected	available	programming-defect	public-escape	typed-required	typed-failure	none	allow
+authoritative_corruption_recovery	clear	complete	not-required	complete	selected	selected	available	programming-defect	authoritative-corruption	recovery-required	recovery	none	allow
+escaping_diagnostic_only	clear	complete	not-required	complete	selected	selected	available	programming-defect	public-escape	typed-required	diagnostic-only	none	typed-invalid
+corruption_immediate_only	clear	complete	not-required	complete	selected	selected	available	programming-defect	authoritative-corruption	recovery-required	immediate-failure	none	typed-invalid
+missing_failure_classification	clear	complete	not-required	complete	selected	selected	available	unknown	unknown	unknown	unknown	none	typed-unavailable
+debug_only_enforcement	clear	complete	not-required	complete	selected	selected	available	programming-defect	contained	immediate-permitted	immediate-failure	debug-only	typed-invalid
+logging_without_outcome	clear	complete	not-required	complete	selected	selected	available	operational	public-escape	typed-required	logging-only	none	typed-invalid
+silent_corruption	clear	complete	not-required	complete	selected	selected	available	programming-defect	authoritative-corruption	recovery-required	recovery	silent-corruption	typed-invalid
+unchecked_state	clear	complete	not-required	complete	selected	selected	available	programming-defect	public-escape	typed-required	typed-failure	unchecked-state	typed-invalid
+weaker_invariant	clear	complete	not-required	complete	selected	selected	available	programming-defect	contained	immediate-permitted	immediate-failure	weaker-invariant	typed-invalid

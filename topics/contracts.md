@@ -419,11 +419,29 @@ contract fixture, integration path, static proof, or other objective-aligned
 method. Do not require one test per sentence or infer adequate evidence from a
 test name.
 
-An invariant violation is `invalid`. Missing authority, enforcement
-capability, or required evidence is `unavailable`; a well-formed contract
-variant outside the supported set is `unsupported`. Do not fall back to
-debug-only enforcement, release logging, panic, recovery, graceful abort,
-silent corruption, an unchecked state, or a weaker invariant.
+Before selecting a violation outcome, classify its source and reachable
+consequence. Distinguish arbitrary or adversarial input, operational failure,
+a contained programming defect, invalid state that can escape through a public
+or trust boundary, and corruption of authoritative state. Select rejection,
+immediate failure, a typed public outcome, recovery, or another mechanism from
+that classification and the owned operation contract; no mechanism is
+universally correct for every invariant.
+
+Immediate failure with trace-led diagnosis is valid for a contained
+programming defect when it prevents invalid state from escaping or corrupting
+authority and no public, availability, or recovery contract requires another
+outcome. Arbitrary or adversarial input must follow its boundary and Security
+contract. Operational failure, escaping invalid state, and authoritative-state
+corruption preserve their selected typed outcome or recovery obligation; a
+diagnostic alone cannot satisfy those contracts.
+
+An invariant violation is `invalid`. Missing authority, classification,
+enforcement capability, selected outcome, or required evidence is
+`unavailable`; a well-formed contract variant outside the supported set is
+`unsupported`. Do not substitute debug-only enforcement, logging without the
+selected outcome, silent corruption, an unchecked state, or a weaker
+invariant. Panic, recovery, rejection, or graceful termination is valid only
+when it is the selected outcome rather than a fallback.
 
 ## Contract Classes
 

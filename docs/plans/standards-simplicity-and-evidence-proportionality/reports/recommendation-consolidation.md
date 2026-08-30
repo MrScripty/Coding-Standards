@@ -39,6 +39,13 @@ Validation Proof Lifetime, claim-directed diagnosis, dependency comparison,
 and actual-consumer versioning. The refined design deepens those existing
 owners, retains sufficient prose, and removes broad downstream rewrites.
 
+The standards impact graph has a narrower role than effectiveness evaluation
+or repository conformance. It points from a changed standard to other standards
+that may need inspection, including targets that ultimately require no edit.
+A1c implementation files, fixtures, suites, prompts, templates, and generated
+artifacts are not standards-impact consumers. A1c remains audit evidence only;
+repository evidence artifacts are coordinated through their own authorities.
+
 ## Consolidated Change Families
 
 | Family | Recommendations | Normative result | Why this owner | Supporting evidence |
@@ -62,7 +69,8 @@ The change is a refinement, not a rejection of the standards recovery:
 - claim-directed Verification and negative-fixture isolation;
 - non-ambient reconstruction when a durable replay contract promises it;
 - independently scoped versions when actual consumers or lifetimes differ;
-- fine-grained policy units and explicit consumer dispositions.
+- fine-grained policy units and explicit potentially-affected-standard
+  dispositions.
 
 These controls have reproduced defects or clear consumer consequences. Their
 applicability is narrowed; their semantic outcomes are not weakened.
@@ -131,14 +139,15 @@ Every normative sentence must pass all of these tests:
   declared by humans, and it does not prove that a repository-specific coverage
   algorithm belongs in general standards. Explicit review and reviewed-empty
   authority remain; any implementation change requires its own complete audit.
-- The planned relationship set began from commit `351e7852`, was revalidated at
-  Milestone 0 base `ac418826`, and is now stale relative to the accepted A1c
-  49-unit/407-relationship graph. Every unimplemented owner and evidence-owner
-  rationale must be freshly queried and dispositioned before a normative edit.
-- A current graph declaration is not proof that its evidence owner actually
-  decides the cited claim. In particular, the generic immutable-authority
-  fixture is presently attributed to the A1c-specific snapshot suite even
-  though that suite does not consume it. `contract-authority-scope` is the
-  planned generic owner because it already decides Architecture authority and
-  Contracts version scope; Milestone 3 must verify and implement that ownership
-  before acceptance.
+- The standards-impact relationship set began from commit `351e7852` and was
+  reconstructed as 47 policy units and 62 standard-to-standard relationships
+  before Milestone 1. The current accepted Milestone 1 state is 49 units and 68
+  such relationships. Every unimplemented owner must query that normative
+  neighborhood before editing; broader policy-projection counts do not measure
+  standards impact.
+- Conformance ownership is a separate question. In particular, the generic
+  immutable-authority fixture is presently attributed to an A1c-specific suite
+  that does not consume it. `contract-authority-scope` is the planned generic
+  evidence owner because it already decides Architecture authority and
+  Contracts version scope; Milestone 3 must verify that ownership without
+  creating an A1c impact-graph relationship.

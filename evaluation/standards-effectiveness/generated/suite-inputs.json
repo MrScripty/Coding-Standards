@@ -3650,14 +3650,24 @@
       ]
     },
     {
-      "digest": "sha256:692cf7747117fbc4c968db3392b04bed16a143d0d6116b1a979c99e8d8c93c91",
+      "digest": "sha256:1b6b436a1da8428b7d95f094a8db8ad981d00e51feaf6869ed269194b58517c5",
       "path": "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv",
       "state": "present",
       "uses": [
         {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1c-public-cutover"
+        },
+        {
           "check": "decisions",
           "role": "decision-table",
           "suite": "contract-invariants"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
         }
       ]
     },
@@ -3694,6 +3704,23 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "contract-semantic-preservation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5b6d26cdb326d2e2215917c5beeb396c0f00f231d586f538628689d8c8f99358",
+      "path": "evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
         }
       ]
     },
@@ -3814,7 +3841,7 @@
       ]
     },
     {
-      "digest": "sha256:9bfbd76e9a9bdf50acea88c3dbc2d1538633a76cbb746c5f36c69fd3de853ac7",
+      "digest": "sha256:652d0b3e631a08d14792313b71c21461722b587d4add969e9b853edeea370b01",
       "path": "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv",
       "state": "present",
       "uses": [
@@ -4777,7 +4804,7 @@
       ]
     },
     {
-      "digest": "sha256:7dc8d31190e5a12da7ae5a616106c0fda1e48d2d3260215cc8d625ecd6ecd2c6",
+      "digest": "sha256:db014e38765392247ac9164db242fab2fe2b63fcaa7713444564c94bae012bcc",
       "path": "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv",
       "state": "present",
       "uses": [
@@ -6135,6 +6162,28 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "disabled-behavior-claims"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:bbba35c0f0082dd966de32d65132303c6b26666d1cbf6b36e4d0a7d3a8c93871",
+      "path": "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "policy-impact-migration",
+          "role": "proposed-policy-impact",
+          "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "permanent-evidence-admission",
+          "role": "decision-table",
+          "suite": "acceptance-claims"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
         }
       ]
     },
@@ -8333,7 +8382,7 @@
       ]
     },
     {
-      "digest": "sha256:a331d224111f8b3e65af4a677d582a2941fe8c184c90fb192304e71a1f6da6da",
+      "digest": "sha256:f9f19b17e2d23b9e1fa6f5d2fc157190a21fa29d674f937d0da9a6ea137ef38d",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -8435,7 +8484,7 @@
       ]
     },
     {
-      "digest": "sha256:445d0f8bd88fafceb89629fd6eb7ac6e9a961b30923a2ca2a860246e6481ecc3",
+      "digest": "sha256:33804e5b60d8bc547838b4335fb1d66259d054e2c482d21e6e20bab2e36cdcc1",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml",
       "state": "present",
       "uses": [
@@ -8469,7 +8518,7 @@
       ]
     },
     {
-      "digest": "sha256:65ec6b125fac534bc6e174b472d4d4886d8c7019689ec881adf55b96653c12d3",
+      "digest": "sha256:51f89d07b605d180b7224fb62dede9d269b8c3b7ec3e61672370bd60b76dd282",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml",
       "state": "present",
       "uses": [
@@ -8537,7 +8586,7 @@
       ]
     },
     {
-      "digest": "sha256:74306decbb8bd2eca0dba474a17b35b84009189c4ae32453184d5f1846ce5643",
+      "digest": "sha256:dfc7d28c1a71780a9f552d50ab0e7546825a69896229d5448c7ed163a3faa88a",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
       "state": "present",
       "uses": [
@@ -8608,7 +8657,7 @@
       ]
     },
     {
-      "digest": "sha256:ac676e29d0c2bb26ead78bc032be8f7d8d6dfaa7ec80d2c3aff9de08633c68b0",
+      "digest": "sha256:c076b6a619a2db6a6d11a5e500038448ca104d84bccac5508384a2c85e4024b9",
       "path": "evaluation/standards-effectiveness/policy-units/contracts.toml",
       "state": "present",
       "uses": [
@@ -8689,7 +8738,7 @@
       ]
     },
     {
-      "digest": "sha256:ca5939a74b1cbbe46695941825980bcdbac75fafc696948b21a6724ad941fa51",
+      "digest": "sha256:258f5b9560807e6e26f549ef21cc60fb1c181ac24f1a92572062606603ce446e",
       "path": "evaluation/standards-effectiveness/policy-units/dependencies.toml",
       "state": "present",
       "uses": [
@@ -8861,7 +8910,7 @@
       ]
     },
     {
-      "digest": "sha256:510cc4a9cdc0ba954bd41ddbac0a7672c15822340ad053302b929daf22e6538d",
+      "digest": "sha256:56983757fa7734e5172c75412f0abf2da51b883fcec8627cc1934f26484b6635",
       "path": "evaluation/standards-effectiveness/policy-units/verification.toml",
       "state": "present",
       "uses": [
@@ -8995,7 +9044,7 @@
       ]
     },
     {
-      "digest": "sha256:f88ffd6f6462b6fc7cb306c6eb1bba413e7c51620c6be71d44ae80d83d07d8bc",
+      "digest": "sha256:7daf8b06c547c3e6842e3897d8be8e822bca2f177f9f823d42d846c0b53c003d",
       "path": "evaluation/standards-effectiveness/suites/acceptance-claims.toml",
       "state": "present",
       "uses": [
@@ -9522,7 +9571,7 @@
       ]
     },
     {
-      "digest": "sha256:597782924d11ac2d1a332db1f35b7ed847b868093f7b7f89f32e64b3e1113bfc",
+      "digest": "sha256:6fbeff50ad920fa07a8a04231fc6a1ef9d2389ccc7a3af50247c4a8286e7a857",
       "path": "evaluation/standards-effectiveness/suites/contract-invariants.toml",
       "state": "present",
       "uses": [
@@ -10151,7 +10200,7 @@
       ]
     },
     {
-      "digest": "sha256:5dd435e0d443bfa7f8ec1907f4843fcc5b68dc69509bfa346e8896f5311679df",
+      "digest": "sha256:001ab1ee89db59fec429838e86f6047ec7feb12d8c1fea1e0f2d5dabdc637264",
       "path": "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml",
       "state": "present",
       "uses": [
@@ -22582,7 +22631,7 @@
       ]
     },
     {
-      "digest": "sha256:69c4affb328cb652ff4a976e0de481723564df32593357f9d5d92572ea54031f",
+      "digest": "sha256:5a409375914deddf5d24abc3c0ab6b0344178c5d2430bedf283230e8188f0a09",
       "path": "topics/contracts.md",
       "state": "present",
       "uses": [
@@ -22936,7 +22985,7 @@
       ]
     },
     {
-      "digest": "sha256:2a23ff49c465963d6dbfe129aa25f55115e1c36d2226ae338bd78716bf9f3d43",
+      "digest": "sha256:530cc8b314a186b7046396fc7b3e7728b32f1af89fa8cac8d18a0b58dedfb6c1",
       "path": "topics/dependencies.md",
       "state": "present",
       "uses": [
@@ -24442,7 +24491,7 @@
       ]
     },
     {
-      "digest": "sha256:1f5d44d1fbcb443e9dc30aba2f27f952248e24be21a1f3c44c748fee50b74e93",
+      "digest": "sha256:fcb1448fda020793189408d53d784587cd488c5ef7cc264ee71a2dceb5a52a5c",
       "path": "workflows/verification.md",
       "state": "present",
       "uses": [
@@ -24799,7 +24848,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:0e7aacf7fb2fbf5b6c88fe27d3470a9702eb2bbd23945593cb671dfbb42b4f1c",
+    "digest": "sha256:3eaf6affa7e1ff3adb772c27b3e936a706a8254d8a1fd883d2c74bd2f5c62760",
     "uses": [
       {
         "check": "policy-impact-migration",
@@ -24956,7 +25005,7 @@
       "path": "evaluation/standards-effectiveness/suites/verification-quality-gates.toml"
     },
     {
-      "digest": "sha256:f88ffd6f6462b6fc7cb306c6eb1bba413e7c51620c6be71d44ae80d83d07d8bc",
+      "digest": "sha256:7daf8b06c547c3e6842e3897d8be8e822bca2f177f9f823d42d846c0b53c003d",
       "id": "acceptance-claims",
       "path": "evaluation/standards-effectiveness/suites/acceptance-claims.toml"
     },
@@ -25196,7 +25245,7 @@
       "path": "evaluation/standards-effectiveness/suites/testing-source-closure.toml"
     },
     {
-      "digest": "sha256:597782924d11ac2d1a332db1f35b7ed847b868093f7b7f89f32e64b3e1113bfc",
+      "digest": "sha256:6fbeff50ad920fa07a8a04231fc6a1ef9d2389ccc7a3af50247c4a8286e7a857",
       "id": "contract-invariants",
       "path": "evaluation/standards-effectiveness/suites/contract-invariants.toml"
     },
@@ -25956,7 +26005,7 @@
       "path": "evaluation/standards-effectiveness/suites/a1c-public-cutover.toml"
     },
     {
-      "digest": "sha256:5dd435e0d443bfa7f8ec1907f4843fcc5b68dc69509bfa346e8896f5311679df",
+      "digest": "sha256:001ab1ee89db59fec429838e86f6047ec7feb12d8c1fea1e0f2d5dabdc637264",
       "id": "implementation-versus-dependency",
       "path": "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml"
     },

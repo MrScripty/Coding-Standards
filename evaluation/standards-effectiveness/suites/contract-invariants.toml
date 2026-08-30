@@ -1,7 +1,7 @@
 schema_version = 1
 id = "contract-invariants"
 owner = "topic.contracts"
-description = "Owned invariant contracts, enforcement, and evidence without hidden caller, partial outcome, build-mode, logging, panic, or test-name fallback."
+description = "Owned invariant contracts, classified failure consequences, selected outcomes, and evidence without hidden caller, partial outcome, build-mode, diagnostic-only, or weaker-invariant fallback."
 
 [[checks]]
 id = "decisions"
@@ -18,7 +18,11 @@ outcomes = ["complete", "partial"]
 enforcement = ["missing", "selected"]
 evidence = ["missing", "selected"]
 capability = ["available", "unavailable"]
-fallback = ["debug-only", "logging", "none", "panic", "test-name"]
+failure_source = ["adversarial-input", "arbitrary-input", "not-applicable", "operational", "programming-defect", "unknown"]
+consequence = ["authoritative-corruption", "contained", "external-effect", "none", "public-escape", "unknown"]
+outcome_contract = ["immediate-permitted", "none", "recovery-required", "typed-required", "unknown"]
+selected_outcome = ["diagnostic-only", "immediate-failure", "logging-only", "none", "recovery", "trace-and-fail", "typed-failure", "unknown"]
+fallback = ["debug-only", "none", "silent-corruption", "unchecked-state", "weaker-invariant"]
 expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
 [[checks.rules]]
 outcome = "typed-invalid"
@@ -27,6 +31,18 @@ any = [
   { field = "fallback", op = "ne", value = "none" },
   { field = "caller_fact", op = "eq", value = "hidden" },
   { field = "outcomes", op = "eq", value = "partial" },
+  { all = [
+    { field = "outcome_contract", op = "eq", value = "typed-required" },
+    { field = "selected_outcome", op = "ne", value = "typed-failure" },
+  ] },
+  { all = [
+    { field = "outcome_contract", op = "eq", value = "recovery-required" },
+    { field = "selected_outcome", op = "ne", value = "recovery" },
+  ] },
+  { all = [
+    { field = "outcome_contract", op = "eq", value = "immediate-permitted" },
+    { field = "selected_outcome", op = "in", values = ["diagnostic-only", "logging-only", "none"] },
+  ] },
 ]
 [[checks.rules]]
 outcome = "typed-invalid"
@@ -44,13 +60,17 @@ any = [
   { field = "capability", op = "eq", value = "unavailable" },
   { field = "enforcement", op = "eq", value = "missing" },
   { field = "evidence", op = "eq", value = "missing" },
+  { field = "failure_source", op = "eq", value = "unknown" },
+  { field = "consequence", op = "eq", value = "unknown" },
+  { field = "outcome_contract", op = "eq", value = "unknown" },
+  { field = "selected_outcome", op = "eq", value = "unknown" },
 ]
 
 [[checks]]
 id = "owner"
 type = "text"
 path = "topics/contracts.md"
-required = ["## Invariant Contracts", "Preconditions describe facts", "mode alone does not decide", "Verification selects evidence", "Do not require one test per sentence", "debug-only enforcement"]
+required = ["## Invariant Contracts", "Preconditions describe facts", "mode alone does not decide", "Verification selects evidence", "Do not require one test per sentence", "Distinguish arbitrary or adversarial input", "Immediate failure with trace-led diagnosis is valid", "Panic, recovery, rejection, or graceful termination is valid only"]
 prohibited = []
 
 [[checks]]

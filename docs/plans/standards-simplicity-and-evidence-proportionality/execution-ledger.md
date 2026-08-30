@@ -256,3 +256,66 @@
 - Reduced planned N2/N3 relationship additions from 40 to 17 and removed three
   planned catalog nodes. No normative standard, suite, fixture, registry,
   generated input, or A1c implementation changed during this refinement.
+
+## 2026-08-30 — Standards-impact graph scope correction
+
+- The repository owner clarified that the standards impact graph is a
+  standards-to-standards change-propagation aid. Its purpose is to ensure an
+  agent checks potentially affected standards when one standard changes; it is
+  not a way to test the effect of standards on software written under them.
+- Corrected the remaining plan before any Milestone 2 normative edit. Removed
+  all planned A1c implementation consumers and conditional application-code
+  audits from the impact dispositions. A1c remains historical effectiveness
+  evidence only.
+- Separated potentially affected standards from repository conformance and
+  delivery surfaces. Fixtures, suites, prompts, templates, checkers, generated
+  inputs, and application code may require separately owned coordination, but
+  they do not count as standards-impact neighbors.
+- Restored reviewed-no-change as a meaningful graph outcome: the target
+  standard remains connected even when inspection finds no text edit, because
+  the edge exists to route a future standards change back to that target.
+- Reconstructed the pre-Milestone-1 normative topology as 47 policy units and
+  62 standards-to-standards relationships; the accepted Milestone 1 state has
+  49 units and 68 such relationships. The eight revised existing owners have
+  nine current standards-impact neighbors.
+- Expanded pending standard-only inspection routes where needed. This increases
+  the planned standard-impact edge count while reducing conceptual machinery:
+  graph breadth records review reachability, not implementation coupling or a
+  requirement to copy policy wording.
+- Updated the visualization generator to select only relationships whose
+  consumer is a canonical normative Module. No standard, A1c source, suite,
+  fixture, registry, or generated verification input changed in this correction.
+
+## 2026-08-30 — Milestone 2 compatibility-bookkeeping re-admission
+
+- The first complete declarative checkpoint passed 226 of 227 suites. The sole
+  semantic failure was the retained `a1c-public-cutover` suite's frozen
+  full-projection relationship set, which necessarily becomes stale after any
+  policy-impact relationship addition.
+- Admitted a mechanical renewal containing the 38 newly declared proposed
+  relationships. This is repository conformance compatibility bookkeeping,
+  not standards-impact traversal: no A1c code is inspected or changed, and no
+  application or conformance artifact becomes a standards-impact consumer.
+- Also admitted the already planned generated suite-input refresh reported by
+  the same checkpoint. No normative scope or adopter enforcement changed.
+
+## 2026-08-30 — Milestone 2 acceptance
+
+- Accepted the deepened Verification Acceptance Claims rule, the refined
+  Contracts invariant outcome classification, the unchanged but newly
+  registered Validation Proof Lifetime owner, and the lifecycle-bounded
+  Dependencies implementation-versus-dependency decision.
+- Inspected all 33 Milestone 2 standards-impact routes: one existing route was
+  retained and 32 were added. None of the routed standards required duplicated
+  normative prose. The accepted graph now contains 51 policy units and 100
+  standards-to-standards relationships; the separate complete repository
+  projection contains 445 relationships.
+- Reused the three existing owner suites. Added one 20-case Verification
+  fixture, expanded the invariant and dependency fixtures to 27 and 14 cases,
+  and retained the existing 16-case proof-lifetime fixture unchanged.
+- All 227 declarative suites and all 53 retained Bash checkers passed. Generated
+  checker evidence remains current at 57 nodes, 387 conservative reference
+  edges, and 57 components. The transition visualization, plan structure,
+  policy semantic impact, generated-input freshness, and diff hygiene passed.
+- SEP-A3 and SEP-A4 are satisfied. The established-tooling portion of SEP-A6
+  is accepted; its systemic-replanning portion remains assigned to Milestone 3.

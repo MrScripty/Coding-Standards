@@ -632,3 +632,187 @@ relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
 rationale = "The verifier proves generated projection freshness and declared contract semantics through the public compiler."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Generated Contract may need review when proof-bearing generated representations or their invalidation conditions change."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "profile.boundary.ipc"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "IPC may need review when process-crossing input creates or invalidates proof."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "profile.boundary.language-bindings"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Language Bindings may need review when representation conversion preserves or loses proof."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "profile.boundary.persistence"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Persistence may need review when reopening or independent mutation creates a new proof boundary."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "topic.security"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Security may need review when proof is retained or re-established at a trust boundary."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "topic.resilience"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Resilience may need review when persisted or reconstructed state requires new proof."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Verification may need review when proof construction, preservation, or invalidation changes."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Planning may need review when a material proof boundary or invalidation condition changes."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Implementation may need review when code must preserve and directly consume a proof-bearing representation."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "The existing fixture distinguishes intact proof from representation loss, mutation, contract change, and a new boundary."
+
+[[relationships]]
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "contract-invariants"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "The existing Contracts suite supplies repository conformance evidence for proof lifetime."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Generated Contract may need review when invariant failure classification changes external proof or typed outcomes."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "profile.boundary.ipc"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "IPC may need review when independently authored input or dispatch can expose an invariant violation."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "profile.boundary.language-bindings"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Language Bindings may need review when invariant failure crosses a public language seam."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "profile.boundary.persistence"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Persistence may need review when an invariant violation can corrupt authoritative state or require recovery."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Verification may need review when invariant source or consequence changes the required evidence."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "topic.security"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Security may need review when arbitrary or adversarial input is the invariant-failure source."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "topic.resilience"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Resilience may need review when an invariant violation requires recovery or authoritative-state handling."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "topic.diagnostics"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Diagnostics may need review when a contained defect uses immediate failure and trace-led diagnosis."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Planning may need review when failure consequence changes required machinery or evidence."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "Implementation may need review when the selected invariant outcome or enforcement point changes."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "The fixture distinguishes contained defects from arbitrary input, public escape, and authoritative corruption."
+
+[[relationships]]
+source = "topic.contracts.invariant-contracts"
+consumer = "contract-invariants"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-invariants"
+rationale = "The existing Contracts suite supplies repository conformance evidence for invariant ownership and failure outcomes."

@@ -502,6 +502,28 @@ id = "tools/standards_analysis/standards_analysis/keys.py"
 metadata = { repository_path = "tools/standards_analysis/standards_analysis/keys.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
+id = "acceptance-claims"
+aliases = ["evaluation/standards-effectiveness/suites/acceptance-claims.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/acceptance-claims.toml", suite_id = "acceptance-claims", artifact_kind = "enforcement-suite", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "contract-invariants"
+aliases = ["evaluation/standards-effectiveness/suites/contract-invariants.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/contract-invariants.toml", suite_id = "contract-invariants", artifact_kind = "enforcement-suite", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
+
+[[nodes]]
 id = "tools/standards_analysis/standards_analysis/coverage.py"
 metadata = { repository_path = "tools/standards_analysis/standards_analysis/coverage.py", artifact_kind = "implementation-artifact", authority = "projection" }
 

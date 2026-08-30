@@ -156,6 +156,11 @@ def edge_key(row: dict[str, str]) -> tuple[str, str, str]:
     return row["source"], row["consumer"], row["relation"]
 
 
+def is_standards_impact(row: dict[str, str], canonical_modules: set[str]) -> bool:
+    """Return whether a relationship routes one standard to another standard."""
+    return row["consumer"] in canonical_modules
+
+
 def validate(
     current_units: list[dict[str, object]],
     current_edges: list[dict[str, str]],
@@ -171,6 +176,9 @@ def validate(
     notes: list[str] = []
     current_unit_map = {str(row["id"]): row for row in current_units}
     current_edge_map = {edge_key(row): row for row in current_edges}
+    current_impact_edges = [
+        row for row in current_edges if is_standards_impact(row, canonical_modules)
+    ]
     if len(current_edge_map) != len(current_edges):
         raise ValueError("current policy graph contains duplicate edge keys")
 
@@ -368,23 +376,35 @@ def validate(
     }
     impact_sources = revised if state == "planning" else {row["policy_unit"] for row in planned_units}
     if state == "planning":
-        expected_revised_edges = {key for key in current_edge_map if key[0] in impact_sources}
+        expected_revised_edges = {
+            edge_key(row) for row in current_impact_edges if row["source"] in impact_sources
+        }
         disposed_revised_edges = {
             edge_key(row)
             for row in dispositions
             if row["disposition"] not in {"add", "conditional-add"}
+            and is_standards_impact(row, canonical_modules)
         }
     elif state == "accepted":
-        expected_revised_edges = {key for key in current_edge_map if key[0] in impact_sources}
-        disposed_revised_edges = {
-            edge_key(row) for row in dispositions if row["source"] in impact_sources
+        expected_revised_edges = {
+            edge_key(row) for row in current_impact_edges if row["source"] in impact_sources
         }
-    else:
-        expected_revised_edges = {key for key in current_edge_map if key[0] in impact_sources}
         disposed_revised_edges = {
             edge_key(row)
             for row in dispositions
-            if row["source"] in impact_sources and edge_key(row) in current_edge_map
+            if row["source"] in impact_sources
+            and is_standards_impact(row, canonical_modules)
+        }
+    else:
+        expected_revised_edges = {
+            edge_key(row) for row in current_impact_edges if row["source"] in impact_sources
+        }
+        disposed_revised_edges = {
+            edge_key(row)
+            for row in dispositions
+            if row["source"] in impact_sources
+            and edge_key(row) in current_edge_map
+            and is_standards_impact(row, canonical_modules)
         }
     missing = expected_revised_edges - disposed_revised_edges
     extra = disposed_revised_edges - expected_revised_edges
@@ -397,7 +417,11 @@ def validate(
     inventory_rows = {row["policy_unit"]: row for row in inventory if row["policy_unit"] != "TOTAL"}
     if set(inventory_rows) != revised:
         raise ValueError("current inventory owners do not match revised planned owners")
-    baseline_edges = reconstruct_baseline_edges(current_edges, dispositions, state)
+    baseline_edges = [
+        row
+        for row in reconstruct_baseline_edges(current_edges, dispositions, state)
+        if is_standards_impact(row, canonical_modules)
+    ]
     current_counts = Counter(row["source"] for row in baseline_edges)
     for policy_unit, row in inventory_rows.items():
         if int(row["current_edge_count"]) != current_counts[policy_unit]:
@@ -407,13 +431,18 @@ def validate(
     if len(total_rows) != 1 or int(total_rows[0]["current_edge_count"]) != len(baseline_revised_edges):
         raise ValueError("inventory TOTAL does not match revised-owner current edges")
 
-    counts = Counter(row["disposition"] for row in dispositions)
+    impact_dispositions = [
+        row for row in dispositions if is_standards_impact(row, canonical_modules)
+    ]
+    counts = Counter(row["disposition"] for row in impact_dispositions)
     baseline_units = reconstruct_baseline_units(current_units, planned_units, state)
     notes.append(f"{len(baseline_units)} baseline policy units")
     notes.append(f"{len(baseline_edges)} baseline relationships")
     notes.append(f"{len(planned_units)} planned policy-unit dispositions")
     notes.append(f"{len(baseline_revised_edges)} existing relationships dispositioned")
-    notes.append(f"{counts['add'] + counts['conditional-add']} planned added relationships")
+    notes.append(
+        f"{counts['add'] + counts['conditional-add']} planned standards-impact relationships"
+    )
     notes.append(f"{len(planned_nodes)} planned catalog-node additions")
     return notes
 
@@ -560,7 +589,7 @@ table {{ width:100%; border-collapse:collapse; font-size:12px; }} th {{ position
 <main>
   <div class="eyebrow"><span id="render-state"></span> · baseline <span id="baseline"></span></div>
   <h1>Where the standards graph changes—and where it deliberately does not.</h1>
-  <p class="lede">A before/after view of the project-agnostic simplicity and evidence-proportionality plan. The graph manifests remain authoritative; this standalone file is regenerated from their current state plus reviewed and explicitly conditional planning dispositions. Repository suites shown here are conformance evidence, not enforcement imposed on adopters.</p>
+  <p class="lede">A before/after view of standards pointing to other standards that may need inspection when their meaning changes. Application code is not an impact-graph consumer. Catalog nodes shown separately are repository conformance evidence, not graph edges or enforcement imposed on adopters.</p>
   <section class="cards" id="cards"></section>
   <section class="panel">
     <h2>Policy-unit change</h2>
@@ -586,7 +615,7 @@ table {{ width:100%; border-collapse:collapse; font-size:12px; }} th {{ position
     <h2>Filtered relationship dispositions</h2>
     <div class="table-wrap"><table><thead><tr><th>Family</th><th>Owner</th><th>Consumer</th><th>Relation</th><th>Disposition</th><th>Reason</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
-  <p class="footer">Any unresolved conditional edges are shown dashed. “Reviewed—no change” means the existing relationship remains applicable but its current consumer is not modified by this project-agnostic standards plan. A1c consumers provide repository-specific evidence and graph projections, never normative examples. P1 is resolved as reviewed—no change; its prototype remains separate implementation-design evidence. Relation names containing “enforcement suite” classify existing repository artifacts and do not require adopters to run them. Re-run the generator after accepted graph changes; use <code>--check</code> to detect stale HTML.</p>
+  <p class="footer">“Reviewed—no change” means the target standard was inspected and needs no text edit; the relationship remains so a future source change routes an agent back to it. Fixtures, suites, prompts, templates, generated artifacts, and application implementations are excluded from the relationship map. Re-run the generator after accepted graph changes; use <code>--check</code> to detect stale HTML.</p>
 </main>
 <script>
 const DATA={data_json};
@@ -599,9 +628,9 @@ $('render-state').textContent=DATA.renderState==='accepted'?'Accepted change rec
 const s=DATA.summary;
 $('cards').innerHTML=[
   [`${{s.currentUnitCount}} → ${{s.proposedUnitCount}}`,`policy units`,`+${{s.addedUnits}} new · ${{s.revisedUnits}} revised · ${{s.conditionalUnits}} conditional · ${{s.retainedUnits}} retained`],
-  [`${{s.currentEdgeCount}} → ${{s.proposedEdgeCount}}`,`relationships`,`+${{s.addEdges}} edges · +${{s.catalogNodeAdditions}} catalog nodes`],
-  [s.updateEdges,`consumer updates`,`existing edges retained and revised`],
-  [s.reviewedEdges,`reviewed, unchanged`,`current projections requiring no planned consumer edit`]
+  [`${{s.currentEdgeCount}} → ${{s.proposedEdgeCount}}`,`standards-impact relationships`,`+${{s.addEdges}} edges · +${{s.catalogNodeAdditions}} separate evidence nodes`],
+  [s.updateEdges,`standards updates`,`affected standards revised`],
+  [s.reviewedEdges,`reviewed, unchanged`,`affected standards requiring no text edit`]
 ].map(([n,l,d])=>`<div class="card"><b>${{n}}</b><span>${{l}}</span><div class="delta">${{d}}</div></div>`).join('');
 $('units').innerHTML=DATA.plannedUnits.map(u=>`<article class="unit"><span class="tag">${{esc(u.family)}}</span><span class="tag">${{esc(u.action)}}</span><code>${{esc(u.policy_unit)}}</code><p><b>${{esc(u.heading)}}</b> · revision ${{esc(u.current_revision)}} → ${{esc(u.planned_revision)}}</p><p>${{esc(u.rationale)}}</p></article>`).join('');
 $('nodes').innerHTML=DATA.plannedNodes.map(n=>`<span class="tag" title="${{esc(n.rationale)}}">${{esc(n.family)}} · ${{esc(n.lifecycle)}} · ${{esc(n.node_id)}}</span>`).join('');
@@ -672,12 +701,19 @@ def main() -> int:
         args.state,
     )
     baseline_units = reconstruct_baseline_units(current_units, planned_units, args.state)
-    baseline_edges = reconstruct_baseline_edges(current_edges, dispositions, args.state)
+    baseline_edges = [
+        row
+        for row in reconstruct_baseline_edges(current_edges, dispositions, args.state)
+        if is_standards_impact(row, canonical_modules)
+    ]
+    impact_dispositions = [
+        row for row in dispositions if is_standards_impact(row, canonical_modules)
+    ]
     rendered = render(
         baseline_units,
         baseline_edges,
         planned_units,
-        dispositions,
+        impact_dispositions,
         planned_nodes,
         notes,
         args.state,

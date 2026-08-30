@@ -43,6 +43,22 @@ rationale = "Generated Contract work records whether required schema semantics a
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Planning may need review when dependency-selection facts, lifecycle triggers, or ownership obligations change."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:implementation-versus-dependency"
+rationale = "Implementation may need review when local standardized semantics require a dependency decision or renewal."
+
+[[relationships]]
+source = "topic.dependencies.implementation-versus-dependency"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }

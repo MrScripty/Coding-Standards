@@ -4,7 +4,7 @@ schema_version = 1
 id = "workflow.verification.acceptance-claims"
 module = "workflow.verification"
 heading_path = ["Acceptance Is A Set Of Claims"]
-semantic_revision = 1
+semantic_revision = 2
 
 [[policy_unit]]
 id = "workflow.verification.evidence-oracle-boundary"

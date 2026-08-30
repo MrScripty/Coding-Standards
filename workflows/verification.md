@@ -24,6 +24,35 @@ has three independent dimensions:
 An objective may require several claims. Evidence satisfies only the claim it
 actually proves. Do not compare unrelated kinds as one scalar hierarchy.
 
+Before adding a permanent test, validator, verifier, integrity check, hash,
+snapshot, contract, or other evidence mechanism, establish:
+
+- the reachable failure and its material consequence;
+- the claim, proof boundary, and adequate independent or authoritative oracle;
+- what types, construction, static analysis, a deeper Interface, existing
+  evidence, normal failure, or trace-led diagnosis already establish;
+- the mechanism's marginal deciding value after that overlap;
+- its implementation, execution, review, and maintenance cost;
+- why exact byte identity is required when the mechanism compares or hashes
+  bytes; and
+- the condition for retaining, reviewing, replacing, or removing it.
+
+Admit permanent machinery only when it supplies material deciding value that
+the less costly alternatives do not. Impossibility by construction may close a
+claim without dynamic validation. A contained internal defect with an adequate
+ordinary failure and diagnostic path may remain an engineering diagnosis
+responsibility when no accepted claim or risk requires earlier detection or
+recovery. The possibility that a value or artifact could be wrong is not by
+itself evidence that a permanent mechanism is necessary.
+
+Overlapping evidence is valid defense in depth only when it addresses an
+independent reachable failure or supplies distinct deciding value worth its
+lifecycle cost. Remove or replace a mechanism when its claim is no longer
+required, the failure is no longer reachable, another proof subsumes it, its
+oracle is no longer adequate, or its retained cost is no longer proportionate.
+Do not preserve it from sunk cost, convention, existing registration, or the
+absence of a recent observed failure.
+
 ## Evidence Kinds
 
 | Kind | Claim proved |

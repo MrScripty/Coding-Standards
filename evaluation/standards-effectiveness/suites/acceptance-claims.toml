@@ -4,6 +4,55 @@ owner = "workflow.verification"
 description = "Canonical acceptance-claim identity, execution-mode, and complete evidence-set decisions without a serialized claim grammar."
 
 [[checks]]
+id = "permanent-evidence-admission"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv"
+expected_column = "expected"
+default = "admit"
+[checks.domains]
+case = ["*"]
+mechanism = ["contract-test", "hash", "runtime-validation", "test", "trace"]
+reachability = ["none", "reachable", "unknown"]
+consequence = ["immaterial", "material", "unknown"]
+oracle = ["adequate", "missing"]
+proof_boundary = ["existing", "new", "unknown"]
+existing_evidence = ["absent", "overlaps", "subsumes"]
+alternative = ["adequate-construction", "adequate-interface", "adequate-normal-failure", "adequate-static", "adequate-trace", "adequate-type", "insufficient", "unknown"]
+marginal_value = ["independent", "none", "unknown"]
+lifecycle_cost = ["disproportionate", "proportionate", "unknown"]
+identity_purpose = ["exact-contract", "incidental", "not-applicable", "semantic"]
+retention = ["missing", "trigger"]
+expected = ["admit", "no-permanent-evidence", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "reachability", op = "eq", value = "unknown" },
+  { field = "consequence", op = "eq", value = "unknown" },
+  { field = "oracle", op = "eq", value = "missing" },
+  { field = "proof_boundary", op = "eq", value = "unknown" },
+  { field = "alternative", op = "eq", value = "unknown" },
+  { field = "marginal_value", op = "eq", value = "unknown" },
+  { field = "lifecycle_cost", op = "eq", value = "unknown" },
+  { field = "retention", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "no-permanent-evidence"
+[checks.rules.when]
+any = [
+  { field = "reachability", op = "eq", value = "none" },
+  { field = "consequence", op = "eq", value = "immaterial" },
+  { field = "existing_evidence", op = "eq", value = "subsumes" },
+  { field = "alternative", op = "in", values = ["adequate-construction", "adequate-interface", "adequate-normal-failure", "adequate-static", "adequate-trace", "adequate-type"] },
+  { field = "marginal_value", op = "eq", value = "none" },
+  { field = "lifecycle_cost", op = "eq", value = "disproportionate" },
+  { all = [
+    { field = "mechanism", op = "eq", value = "hash" },
+    { field = "identity_purpose", op = "in", values = ["incidental", "semantic"] },
+  ] },
+]
+
+[[checks]]
 id = "claim-satisfaction"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/verification/acceptance-claim-decisions.tsv"
@@ -42,6 +91,11 @@ required = [
   "## Execution Mode",
   "Either mode is acceptable for this claim.",
   "Derive each blocking or advisory gate from a named acceptance claim",
+  "Before adding a permanent test, validator, verifier, integrity check, hash",
+  "the mechanism's marginal deciding value after that overlap",
+  "why exact byte identity is required",
+  "could be wrong is not by",
+  "independent reachable failure or supplies distinct deciding value",
   "Select the smallest complete claim set",
   "Simulation proves only its modeled contract.",
   "Manual execution is not stronger than automation.",

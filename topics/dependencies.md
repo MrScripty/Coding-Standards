@@ -87,6 +87,21 @@ facts are missing, return `unavailable`; if no supported option meets the
 requirement, return `unsupported`; and if the decision contradicts known
 contract facts, return `invalid`.
 
+Apply this comparison when creating a local standardized implementation,
+materially extending its semantic surface, or renewing its dependency and
+maintenance decision. The later existence of a candidate dependency does not
+by itself require automatic deletion of an unchanged accepted local
+implementation; re-evaluate it at one of those lifecycle triggers against the
+current requirement and ownership facts.
+
+A thin Adapter that delegates the standardized semantics to an established
+dependency is not a second implementation of those semantics. A
+domain-specific product may own distinct local semantics even when it uses an
+established dependency internally. Judge both by their real Interface,
+delegation, added behavior, failure contract, and maintenance ownership. Do not
+describe a pass-through reimplementation as an Adapter or invent nominally
+distinct domain behavior merely to avoid the dependency comparison.
+
 ## Resolution And Reproducibility
 
 Select manifest constraints, lock or snapshot material, feature sets, target

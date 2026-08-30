@@ -29,3 +29,15 @@ id = "topic.contracts.identity-versus-instance-equality"
 module = "topic.contracts"
 heading_path = ["Identity And Instance Equality"]
 semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.contracts.validation-proof-lifetime"
+module = "topic.contracts"
+heading_path = ["Validation Proof Lifetime"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.contracts.invariant-contracts"
+module = "topic.contracts"
+heading_path = ["Invariant Contracts"]
+semantic_revision = 1
