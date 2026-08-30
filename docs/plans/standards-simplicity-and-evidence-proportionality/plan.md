@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 1 accepted; Milestone 2 has not started
 
-**Next slice:** Re-query migration and shared-authority ownership, reconcile the
-live graph against N2 dispositions, and admit Milestone 2 before normative
-edits.
+**Next slice:** Re-query the narrowed existing-owner graph, resolve conditional
+A1c implementation projections, and admit Milestone 2 before any normative
+edit.
 
 **Acceptance status:** `partial`
 
@@ -21,12 +21,18 @@ complection principle to the composed artifact, admit permanent validation and
 evidence from explicit risk and necessity, scale authority and version
 machinery to actual consumer promises, and bound systemic replanning. Project
 the revised rules through every applicable policy-graph consumer with the
-smallest sufficient enforcement portfolio.
+smallest sufficient repository conformance-evidence portfolio. The standards
+library does not enforce itself on adopters: each adopter chooses whether and
+how to use review, existing tools, custom tooling, or no automation for a given
+claim.
 
 This plan implements standards recommendations derived from the accepted
 [A1/A1b audit](../standards-engine-a1-a1b-audit/plan.md) and the source-backed
 [*Simple Made Easy* conformance audit](../standards-engine-a1-a1b-audit/reports/simple-made-easy-complection-conformance.md).
-It does not design A1c or modify the Standards Engine implementation.
+The remaining-milestone replan also uses the accepted
+[A1c final evidence](../standards-engine-a1c/reports/a1c-final-acceptance.md)
+to challenge earlier assumptions. It does not design A1c or modify the
+Standards Engine implementation.
 
 ## Objective Acceptance
 
@@ -38,23 +44,33 @@ It does not design A1c or modify the Standards Engine implementation.
 | SEP-A4 | Contracts distinguishes external, adversarial, operational, contained-programming, and escaping/corrupting failures; intact proof-bearing values are not revalidated and contained internal defects may use immediate failure and diagnostics when the scoped risk does not require recovery machinery. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A5 | Immutable authority closure and version scopes are proportional to stated consumer, lifetime, reconstruction, overlap, deployment, persistence, and migration promises while preserving non-ambient reconstruction and independent scopes where those promises require them. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | SEP-A6 | Systemic replanning has authority- and reachability-based stopping rules, accepts deletion and smaller Interfaces as repairs, compares the revised composition with the original objective, and established dependencies or proof tools are preferred unless a local semantic product is justified and owned. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| SEP-A7 | Every existing relationship of every revised policy unit has an explicit disposition; every new unit and applicable consumer is registered; current repository-specific implementation projections are reviewed without changing A1b or treating it as general policy authority. | `integration` | `not-applicable` | `automated` | `pending` | [Planned graph dispositions](reports/policy-impact-dispositions.tsv) |
+| SEP-A7 | Every existing relationship of every revised policy unit has an explicit disposition; every new unit and applicable consumer is registered; current repository-specific implementation projections are reviewed without changing A1c or treating it as general policy authority. | `integration` | `not-applicable` | `automated` | `pending` | [Planned graph dispositions](reports/policy-impact-dispositions.tsv) |
 | SEP-A8 | Dependency-local policy/evidence invalidation is either accepted from a bounded prototype with completeness and stale-authority counterexamples, or rejected with a documented no-change decision; it is not made normative from the audit hypothesis alone. | `focused` | `not-applicable` | `automated` | `satisfied` | [No-change decision and implementation prototype](reports/dependency-local-invalidation-prototype.md) |
 | SEP-A9 | The complete standards, prompt, template, fixture, suite, graph, generated-input, and documentation checks pass, and the generated standalone HTML matches the accepted policy-unit and relationship manifests. | `integration` | repository-supported verification environments | `automated` | `pending` | [Planned graph visualization](reports/standards-graph-change-visualization.html) |
+
+The `automated` modes above describe how this repository may demonstrate that
+its own standards text, projections, and evidence remain coherent. They are
+not a requirement that an adopting repository install this repository's
+checks, and they do not make the written standards an enforcement harness.
 
 ## Scope
 
 ### In Scope
 
 - Project-agnostic normative changes to Core, Architecture, Contracts,
-  Dependencies, Planning, and Verification, plus Security, Resilience,
-  Diagnostics, Documentation, and Release only where they consume the scoped
-  risk, detection, recovery, evidence-lifecycle, or exact-identity decision.
+  Dependencies, Planning, and Verification. Security, Resilience, Diagnostics,
+  Documentation, Release, boundary profiles, prompts, and the plan template are
+  reviewed as consumers but change only if their existing owner-local wording
+  conflicts with a revised rule.
 - Fine-grained policy units and source-owned policy-impact relationships for
   every added or revised rule.
 - Planning and implementation prompts, the plan template, structural plan
   validation, decision fixtures, declarative suites, suite registration, and
-  generated verification inputs needed to make the rules operational.
+  generated verification inputs selected as proportionate conformance evidence
+  for this repository's own standards changes.
+- Project-agnostic wording that leaves adopters free to use manual review,
+  established tools, locally justified tools, or no automation according to
+  the claim and risk they have actually admitted.
 - A bounded prototype of dependency-local policy/evidence invalidation before
   deciding whether to revise Projection Completeness.
 - A deterministic, standalone HTML visualization of the current graph and the
@@ -75,6 +91,9 @@ It does not design A1c or modify the Standards Engine implementation.
 - Reproducing Hickey's transcript or turning his language and technology
   examples into project-specific mandates.
 - Rewriting historical accepted plans solely to satisfy a new planning field.
+- A universal enforcement harness, a requirement to run Coding Standards'
+  repository-local suites, or a guarantee that a written rule will be
+  remembered or re-read at a particular time.
 
 ## Constraints And Assumptions
 
@@ -95,14 +114,19 @@ It does not design A1c or modify the Standards Engine implementation.
 - Each normative owner and every affected consumer change atomically in one
   accepted slice. Do not leave mandatory prose ahead of its applicable prompt,
   template, fixture, suite, or graph projection.
+- Normative requirements state expected decisions and outcomes; they cannot
+  guarantee recollection, invocation, or enforcement. An adopter owns any
+  mechanism that it chooses to use to obtain those properties.
 
 ### Assumptions
 
-- Commit `351e7852` is the accepted evidence baseline for this plan.
-- Existing A1b implementation projections under Immutable Authority Closure
-  and Version Scope remain applicable to A1b's accepted durable promises; the
-  plan records them as reviewed-no-change unless fresh evidence contradicts
-  that fact.
+- Commit `351e7852` remains the fixed historical A1/A1b audit baseline. The
+  accepted A1c Linux implementation and the current 49-unit/407-relationship
+  graph are fresh evidence for replanning the unimplemented milestones, not a
+  replacement for that historical comparison.
+- Current A1c implementation projections under revised policy owners must be
+  queried and given evidence-backed graph dispositions. This plan may inspect
+  those consumers but does not edit A1c or make its choices general policy.
 - The active verification migration may change suite and graph baselines before
   this plan starts; therefore the committed inventory is planning evidence, not
   admission authority for a later write.
@@ -111,10 +135,12 @@ It does not design A1c or modify the Standards Engine implementation.
 
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
-| Keep standards changes and A1c design as separate efforts. No A1c choice can become a normative example or implementation projection in this plan. | Planning | User direction and accepted audit scope | Any combined standards/A1c implementation proposal |
+| Keep standards changes and A1c implementation as separate efforts. A1c choices cannot become normative examples or general rules, and no A1c source is writable here. Current A1c files that actually consume a revised policy must nevertheless receive graph dispositions. | Planning | User direction, accepted audit scope, and A1c evidence review | Any combined standards/A1c implementation proposal or omission of live consumers merely because they are repository-specific |
 | Add one Core simplicity/complection unit and one Architecture composed-design admission unit; do not create one policy unit per audit recommendation. | Core and Architecture | [Recommendation consolidation](reports/recommendation-consolidation.md) | Parallel S1/S2/C1-C4 rules |
 | Require every nonterminal written plan governed by the revised standard to state `applicable` or `not-applicable` for composed-design review. Require the full artifact probe only when applicable and a reason when not applicable; do not rewrite historical terminal plans. | Planning | A1b replacement commit `44de7dff` removed the applicable review without detection | Optional template-only simplicity review |
-| Expand `core-simplicity` to evaluate post-boundary composition and update existing Planning projection enforcement. Add only one new evidence-necessity suite and extend `contract-invariants` for proof lifetime/failure classification. | Verification | Evidence-lifecycle and enforcement-cost findings | One new suite for every recommendation |
+| Deepen the existing `workflow.verification.acceptance-claims` owner and `acceptance-claims` suite for evidence admission and retention; do not add a parallel Verification policy unit or suite. A dedicated decision fixture may be added inside that existing suite. Extend `contract-invariants` only for the Contracts-owned failure decision. | Verification | Existing claim-selection, gate, cost, oracle, coverage, and diagnosis rules already own most of N2/N3; the missing semantics are marginal value, retention, and contained-failure classification | The parallel `evidence-necessity-and-risk` policy/suite proposal and automatic new-suite creation |
+| Retain Validation Proof Lifetime prose as sufficient. Register the existing heading as a graph owner and inspect A1c's repeated validation as an application question; do not repeat the rule to compensate for failure to apply it. | Contracts | Existing text already requires direct use of an intact proof-bearing representation and new proof only after representation loss, mutation, contract change, or a new authority boundary | A redundant normative rewrite of Validation Proof Lifetime |
+| The standards specify decisions and outcomes, not adoption-time enforcement. Repository suites, fixtures, checkers, and graph checks are internal conformance evidence; adopters choose their own manual or automated mechanism, if any. | Standards-library scope | User direction and standard-isolation principle | Any wording that requires adopters to install this repository's tooling or claims that prose can enforce its own use |
 | Locate scoped correctness-risk and evidence necessity together in Verification; Security continues to own adversarial threat semantics and Contracts owns proof construction and failure behavior. | Verification, Security, Contracts | S3-S5 and C5 consolidation | A universal security threat model for internal code |
 | Preserve non-ambient closure and independent version promises, but derive their machinery from stated lifetimes and actual consumer compatibility rather than from the mere presence of a handle, artifact, or version field. | Architecture and Contracts | S6-S7 | Unconditional maximal closure or umbrella versioning |
 | Retain Projection Completeness at revision 1. The bounded prototype is evidence for a separately owned Coding Standards coverage-implementation review, not authority for a project-agnostic normative revision whose known concrete consumer is excluded from this plan. | Planning | [Milestone 0 no-change decision and prototype](reports/dependency-local-invalidation-prototype.md) | The unresolved P1 hypothesis and any attempt to encode repository-specific coverage machinery as general policy |
@@ -131,6 +157,7 @@ It does not design A1c or modify the Standards Engine implementation.
 | Closure/version machinery is proportionate | Architecture/Contracts | Stated consumer lifetime and compatibility promise | Public, persisted, deployment, and reconstruction contracts | Hypothetical consumers | Existing handle/version field treated as maximal promise |
 | Local invalidation is complete | Policy graph | Prototype mutations of changed edge, removed consumer, provider revision, and unrelated subject | Current graph compiler and accepted coverage semantics | Unmodeled external evidence stores | Unrelated evidence remains stable only because a stale edge was missed |
 | Projection set is complete | Policy impact | Source-owned graph query plus one disposition per current and planned edge | Registered unit and node catalogs | Unregistered semantic consumers | Link search substituted for graph declaration |
+| Repository conformance evidence is proportionate | Verification | Unique deciding claim, marginal value over an existing suite or review, and lifecycle cost | Accepted normative owner and existing conformance portfolio | An adopter's chosen enforcement arrangement | A new checker or suite admitted merely because automation is possible |
 
 ## Systemic Finding Audit
 
@@ -145,8 +172,15 @@ It does not design A1c or modify the Standards Engine implementation.
   [planned unit changes](reports/planned-policy-units.tsv), and
   [planned catalog nodes](reports/planned-node-catalog-additions.tsv), and
   [edge dispositions](reports/policy-impact-dispositions.tsv).
-- Consumer dispositions: every current edge of a revised owner is `update` or
-  `reviewed-no-change`; every new edge is `add`.
+- Consumer dispositions: every current edge of a revised owner is `update`,
+  `reviewed-no-change`, or explicitly `conditional-update`; every new edge is
+  `add` or explicitly `conditional-add`. Milestone 5 rejects all remaining
+  conditional rows.
+- A1c evidence rebase: inspect current consumers for repeated validation,
+  authority closure, version roles, tooling selection, and systemic repair.
+  Record only relationships where the file actually consumes the revised
+  semantic decision; do not treat catalog presence, a matching noun, or an A1c
+  design choice as graph authority.
 - Scope or sequencing replacement: if the live graph differs, stop and
   regenerate the inventory before normative edits. Projection Completeness and
   its current declarative relationship are retained. The local-invalidation
@@ -168,27 +202,31 @@ It does not design A1c or modify the Standards Engine implementation.
   Modules. The plan integration owner must coordinate shared graph, suite, and
   generated-input writes serially.
 - Representative change paths and forced owners: adding the contained-internal-failure rule
-  changes Contracts, its consuming profiles/prompts/template, one existing
-  fixture family and suite, policy units/catalog/relationships, and generated
-  suite inputs; it does not change A1b runtime code.
+  changes Contracts, its invariant fixture and existing suite, policy-unit and
+  graph declarations, and generated suite inputs. Existing profiles, prompts,
+  and the template receive graph dispositions but no prose edit unless fresh
+  comparison finds a conflict; A1c runtime code does not change.
 - Stable Interfaces versus hidden knowledge: TSV manifests are the planning
   Interface to the visualization; the generator reads authoritative current
   TOML directly and does not duplicate graph semantics.
-- Independent evolution, testing, failure, and replacement: A1c design,
-  verifier migration, and any later evidence-portfolio retirement remain
+- Independent evolution, testing, failure, and replacement: A1c implementation,
+  verifier migration, adopter enforcement choices, and any later
+  evidence-portfolio retirement remain
   separate plans and can evolve, fail, or be replaced independently.
 - Necessary complexity and containment: five normative families and one
   bounded prototype disposition replace twelve parallel proposals. The
-  prototype rejected a sixth normative family in this plan. Existing suites
-  are expanded where they already own the decision family; one new suite is
-  added only because no current owner decides evidence necessity.
+  prototype rejected a sixth normative family in this plan. Existing policy
+  owners and suites are deepened rather than layered; no new suite or parallel
+  Verification policy owner is planned.
 - Deletion and cumulative machinery result: removing the HTML leaves normative meaning intact; removing
-  edge dispositions makes complete impact review unprovable; removing the new
-  evidence unit leaves S3/S5/S11 without an owner; removing separate Contracts
-  proof ownership would mix evidence selection with value validity. The
-  cumulative addition is one Core unit, one Architecture unit, two existing
-  Contracts headings promoted to units, one Verification unit, one new suite,
-  no new verifier framework, and no new A1/A1b runtime mechanism.
+  edge dispositions makes complete impact review unprovable; removing the
+  Acceptance Claims refinement leaves S3/S5/S11 without an owner; removing
+  separate Contracts proof ownership would mix evidence selection with value
+  validity. The cumulative normative addition remains the accepted Core and
+  Architecture units plus registration of two existing Contracts headings;
+  pending work revises existing Verification, Architecture, Contracts,
+  Dependencies, and Planning owners. There is no new suite, verifier framework,
+  adopter enforcement requirement, or A1/A1b/A1c runtime mechanism.
 
 ## Milestones
 
@@ -241,8 +279,9 @@ rather than changed outside Milestone 0's write set.
 
 ### Milestone 1: Composed Simplicity Admission
 
-**Goal:** Make simple/easy/complection and post-boundary composition enforceable
-through Core, Architecture, and Planning.
+**Goal:** Make simple/easy/complection and post-boundary composition explicit
+through Core, Architecture, and Planning, with proportionate conformance
+evidence for this repository.
 
 **Allowed write set:**
 
@@ -369,28 +408,14 @@ facts while preserving real trust, persistence, and external boundaries.
 
 - `topics/contracts.md`
 - `topics/dependencies.md`
-- `topics/diagnostics.md`
-- `topics/resilience.md`
-- `topics/security.md`
-- `workflows/planning.md`
-- `workflows/implementation.md`
 - `workflows/verification.md`
-- `workflows/documentation.md`
-- `workflows/release.md`
-- `profiles/boundaries/generated-contract.md`
-- `profiles/boundaries/ipc.md`
-- `profiles/boundaries/language-bindings.md`
-- `profiles/boundaries/persistence.md`
-- `prompts/planning.md`
-- `prompts/implement-plan.md`
-- `templates/PLAN-TEMPLATE.md`
 - `evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv`
+- `evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv`
 - `evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv`
 - `evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv`
+- `evaluation/standards-effectiveness/suites/acceptance-claims.toml`
 - `evaluation/standards-effectiveness/suites/contract-invariants.toml`
 - `evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml`
-- `evaluation/standards-effectiveness/suites/evidence-necessity-and-risk.toml`
-- `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/policy-units/contracts.toml`
 - `evaluation/standards-effectiveness/policy-units/dependencies.toml`
 - `evaluation/standards-effectiveness/policy-units/verification.toml`
@@ -408,31 +433,61 @@ facts while preserving real trust, persistence, and external boundaries.
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-2-evidence-and-proof-acceptance.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/standards-graph-change-visualization.html`
 
+The existing `acceptance-claims` suite gains one decision check over the new
+evidence-necessity fixture. This deepens its claim-selection ownership without
+changing the suite registry or creating a parallel suite. Repository
+conformance evidence remains optional to adopters.
+
 **Tasks:**
 
-- [ ] Add the unified evidence-necessity, correctness-risk, marginal-value,
-  exact-byte purpose, and retirement decision.
+- [ ] Re-query every current N2, N3, and N5-D consumer against the accepted A1c
+  graph before admission. Treat A1c as evidence only: do not copy its nouns,
+  edit its implementation, or infer a relationship from catalog presence.
+- [ ] Revise the existing Acceptance Claims owner with the smallest permanent-
+  evidence admission rule: reachable failure, material consequence, adequate
+  oracle, proof boundary, marginal value over existing evidence, lifecycle
+  cost, exact-byte purpose when applicable, and a retention/removal trigger.
+  Do not create a second Verification owner or repeat the procedure in
+  Security, Resilience, Diagnostics, Documentation, or Release.
 - [ ] Require the admission to compare types, construction, static analysis, a
   deeper Interface check, existing evidence, normal failure, and trace-led
   debugging before adding permanent machinery.
-- [ ] Classify failure sources and consequences before selecting validation or
-  recovery machinery.
-- [ ] Make proof lifetime explicit and preserve direct use of intact validated
-  representations.
+- [ ] Refine Invariant Contracts only where current wording over-prescribes one
+  failure mechanism. Classify contained programming defects separately from
+  arbitrary or adversarial input, operational failure, escaping invalid state,
+  and authoritative-state corruption; permit immediate failure and diagnosis
+  when no public or recovery contract requires more machinery.
+- [ ] Retain Validation Proof Lifetime prose unchanged and register the existing
+  heading as a first-class policy owner. It already requires direct use of the
+  same intact proof-bearing representation, rejects type annotations as proof,
+  and requires new proof after representation loss, mutation, contract change,
+  or a new authority boundary.
+- [ ] Use the accepted A1c facade/decode path as a repeated-validation
+  counterexample: `standards_engine/tools.py` validates before decode and
+  `standards_contracts/runtime.py` validates again during decode/normalization.
+  Decide graph projections for those consumers without changing either file.
 - [ ] Register the existing Validation Proof Lifetime fixture unchanged under
   `contract-invariants`; its retained Bash consumer owns the current schema and
   16-row shape until the verifier migration retires that checker.
-- [ ] Require custom semantic tooling to justify why an established dependency
-  or proof tool cannot cover the reachable material failure.
+- [ ] Require a standardized semantic reimplementation to justify why an
+  established dependency cannot cover the reachable material failure. Permit
+  thin adapters and domain-specific products when they own distinct local
+  semantics. Apply this decision when a tool is created, materially extended,
+  or renewed; do not make it a retroactive automatic-deletion rule.
+- [ ] Extend `acceptance-claims` with the dedicated evidence-necessity decision
+  fixture. Do not add a new suite, registry row, plan-template section, or
+  copied downstream decision procedure.
 - [ ] Exercise arbitrary input, durable corruption, contained internal error,
   escaping internal error, subsumed regression, justified defense in depth,
   and incidental-byte cases.
 - [ ] Register units, artifacts, and every applicable relationship atomically.
 
 **Acceptance gate:** SEP-A3 and SEP-A4 plus the established-tooling portion of
-SEP-A6 pass with one coherent evidence suite and the extended Contracts suite;
-`--state transition --check` passes after regeneration, and no individual
-existing checker is removed by inference.
+SEP-A6 pass through the existing Acceptance Claims, Contracts, and Dependencies
+owners and suites; Validation Proof Lifetime has no redundant normative edit;
+`--state transition --check` passes after regeneration; no individual existing
+checker is removed by inference; and no wording requires an adopter to use any
+Coding Standards checker or suite.
 
 **Status:** `Planned`
 
@@ -446,20 +501,10 @@ and reachable consequences.
 - `topics/architecture.md`
 - `topics/contracts.md`
 - `workflows/planning.md`
-- `workflows/release.md`
-- `profiles/applications/library.md`
-- `profiles/boundaries/generated-contract.md`
-- `profiles/boundaries/ipc.md`
-- `profiles/boundaries/language-bindings.md`
-- `profiles/boundaries/persistence.md`
-- `prompts/planning.md`
-- `prompts/implement-plan.md`
-- `templates/PLAN-TEMPLATE.md`
 - `evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv`
 - `evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv`
 - `evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md`
 - `evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv`
-- `evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml`
 - `evaluation/standards-effectiveness/suites/contract-authority-scope.toml`
 - `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml`
 - `evaluation/standards-effectiveness/policy-units/architecture.toml`
@@ -477,20 +522,56 @@ and reachable consequences.
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-3-promise-and-replanning-acceptance.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/reports/standards-graph-change-visualization.html`
 
+The existing `contract-authority-scope` suite already owns Architecture
+authority-scope and Contracts version-scope decisions. It gains the generic
+immutable-closure fixture instead of introducing an Architecture suite seam.
+
 **Tasks:**
 
+- [ ] Restore project-agnostic executable ownership for
+  `immutable-authority-decisions.tsv`. Its current `a1c-snapshot-lifecycle`
+  evidence owner does not consume that fixture and decides A1c-specific
+  snapshot behavior. Extend `contract-authority-scope`, which already decides
+  generic Architecture authority and Contracts version scope; do not add a new
+  suite or catalog node.
 - [ ] Revise closure admission from the promised handle and reconstruction
-  lifetime without weakening genuine cold replay.
-- [ ] Add actual-consumer and cumulative migration/test cost to version-scope
-  admission without restoring an umbrella version.
+  lifetime without weakening genuine cold replay. Distinguish semantic closure
+  completeness from a requirement for separately persisted identity, codec,
+  handle, version, allocation ordinal, and lifecycle objects: a complete
+  aggregate may carry the whole admitted closure.
+- [ ] Separate version roles before adding machinery: a fail-closed current-
+  format discriminator, identity-domain revision, overlapping compatibility
+  version, migration version, and allocation ordinal are not interchangeable.
+  Require a compatibility matrix only for combinations actually promised to
+  supported consumers. Do not infer historical readers or cross-engine
+  migration from A1c's interface/request-result/handle/identity/analysis/SQLite
+  version fields.
 - [ ] Add authority/reachability stopping rules, deletion/smaller-Interface
-  remedies, and composition comparison to systemic replanning.
-- [ ] Reconfirm every A1b implementation projection as reviewed-no-change or
-  change the graph disposition from fresh evidence; do not edit A1b.
+  remedies, and composition comparison to systemic replanning. A newly
+  discovered semantic consumer, owner, risk, or public promise expands the
+  audit; a newly discovered implementation file within an already admitted
+  owner does not by itself expand the design. Stop when the owner and reachable
+  consumer population are dispositioned.
+- [ ] Retain existing Release, profile, prompt, and template prose unless direct
+  comparison proves a conflict. Their existing actual-consumer, overlap,
+  dependency, and systemic-family wording already consumes the revised owners;
+  graph them as reviewed-no-change rather than copying the new procedures.
+- [ ] Re-query every current implementation projection in the accepted A1c
+  graph and record `update`, `reviewed-no-change`, `remove`, or a new semantic
+  consumer from inspected behavior. Correct rationales that merely name a
+  nearby concept or assign behavior to a file that does not implement it; do
+  not edit A1c.
+- [ ] Use A1c's aggregate snapshot/replay design as evidence that semantic
+  closure can be complete without reconstructing A1b's object machinery, and
+  as evidence that deletion, a smaller Interface, or a stronger direct proof
+  can be a valid systemic repair. Do not turn that implementation into the
+  normative example.
 
 **Acceptance gate:** SEP-A5 and SEP-A6 pass and all current implementation
-projections have explicit evidence-backed dispositions;
-`--state transition --check` passes after regeneration.
+projections have explicit evidence-backed dispositions; the generic authority
+fixture has an evidence owner that actually decides it; version-role examples
+do not imply unsupported compatibility; and `--state transition --check`
+passes after regeneration.
 
 **Status:** `Planned`
 
@@ -543,7 +624,15 @@ owning milestone and exact write set.
 
 **Tasks:**
 
-- [ ] Re-query every revised unit and prove one final disposition per consumer.
+- [ ] Re-query every revised unit from the accepted A1c cutover graph (49 units
+  and 407 direct relationships at this replan) and prove one final disposition
+  per consumer. Reconstruct the fixed 47/387 pre-Milestone-1 topology from the
+  accepted delta rather than treating the current graph as the original audit
+  baseline.
+- [ ] Verify that each relationship's evidence owner actually decides the cited
+  artifact or semantic claim, rather than merely being registered, nonempty,
+  or fingerprinted. Inspect each revised rationale against the consumer's real
+  behavior; a matching noun is not sufficient.
 - [ ] Verify no conditional unit/edge row remains, verify registered suite-input
   freshness, and regenerate the standalone HTML with `--state accepted` from
   the accepted manifests and reviewed before/after delta.
@@ -553,15 +642,23 @@ owning milestone and exact write set.
   same accepted state.
 
 **Acceptance gate:** SEP-A1 through SEP-A9 are satisfied, no unresolved or
-unconnected graph change remains, and all applicable repository checks pass.
+unconnected graph change remains, every generic rule has project-agnostic
+deciding evidence, and all applicable repository checks pass. Any discovered
+normative or relationship defect returns to Milestone 2 or 3 instead of being
+patched inside final verification.
 
 **Status:** `Planned`
 
 ## Blockers
 
-- `none` for Milestone 1 admission. No verifier-migration package is currently
-  admitted. Re-query immediately before the shared write and include suite-
-  input regeneration in that one serial slice.
+- Milestone 2 is not admitted until the narrowed existing-owner dispositions
+  and fresh A1c graph query are complete.
+- Milestone 3 is not admitted until fresh suite inspection confirms that
+  `contract-authority-scope` can consume and decide the generic immutable-
+  closure fixture without acquiring A1c lifecycle semantics.
+- No verifier-migration package is currently admitted. Re-query immediately
+  before a shared write and include suite-input regeneration in that one serial
+  slice.
 
 ## Re-Plan Triggers
 
@@ -571,10 +668,13 @@ unconnected graph change remains, and all applicable repository checks pass.
   policy graph, generated suite inputs, or another shared write in this plan.
 - Fresh project-agnostic evidence establishes a Projection Completeness gap
   independent of this repository's coverage implementation.
-- A proposed rule can only be expressed through A1/A1b-specific nouns,
+- A proposed rule can only be expressed through A1/A1b/A1c-specific nouns,
   guarantees, or implementation artifacts.
-- The enforcement design adds another suite, checker, registry, or serialized
+- The repository conformance design adds another suite, checker, registry, or serialized
   contract without a unique claim not owned by the planned portfolio.
+- A proposal assigns enforcement to the written standards, requires adopters to
+  run this repository's tooling, or spreads another owner's decision procedure
+  through otherwise isolated standards.
 - A current implementation projection no longer consumes the revised promise,
   or a missing consumer is discovered.
 - Final change propagation materially exceeds the composed-design review.

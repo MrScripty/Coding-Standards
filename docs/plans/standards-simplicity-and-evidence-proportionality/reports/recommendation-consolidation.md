@@ -26,15 +26,28 @@ normative family in this plan. Milestone 0 demonstrated a bounded candidate for
 named deciding dependencies, but retained the current standard because the
 known concrete consumer—repository-specific Python tooling—is excluded.
 
+The accepted A1c Linux implementation supplies fresh evidence for the three
+unimplemented families. It can confirm, refine, or falsify the audit's
+assumptions, but it cannot become the project-agnostic wording or be edited by
+this standards plan. Only Milestone 1 was normative while A1c was developed, so
+A1c can test the usefulness of that accepted change; it cannot establish a
+causal success or failure for the still-unimplemented Milestones 2 and 3.
+
+A final depth-and-Locality review found that the first remaining-milestone
+design still layered policy over rules already present in Acceptance Claims,
+Validation Proof Lifetime, claim-directed diagnosis, dependency comparison,
+and actual-consumer versioning. The refined design deepens those existing
+owners, retains sufficient prose, and removes broad downstream rewrites.
+
 ## Consolidated Change Families
 
 | Family | Recommendations | Normative result | Why this owner | Supporting evidence |
 | --- | --- | --- | --- | --- |
 | N1 Composed simplicity | S1, S2, C1-C4, C6-C8 | Revise Core; add Architecture composed-design admission; require a Planning applicability record and an artifact/change probe. | Core owns the universal meaning; Architecture owns material design admission; Planning owns the durable decision record. | A1b's locally coherent Modules composed into 22-to-36 dependency directions, a 2,539-line composition root, and a nine-surface kind-addition path. Commit `44de7dff` removed the applicable review without structural failure. Hickey H1-H6/H8-H9 distinguish simple from easy and decomposition from decomplection. |
-| N2 Evidence necessity and scoped risk | S3, S5, S11, C5 | Add one Verification unit covering reachable failure, consequence, actor/failure source, proof boundary, oracle, marginal value, overlap, cost, retirement, and exact-byte purpose. Security retains adversarial semantics; Resilience and Diagnostics consume consequence, recovery, detection, and diagnosis facts. | Verification decides whether evidence proves and is needed for a claim; Security should not become a blanket model for ordinary internal errors, while Resilience and Diagnostics retain their established owners. | 218-226 suites, 53 retained Bash checkers, repeated proof families, 917 hashed suite-input files, and no current evidence-lifecycle owner. Counts locate cost; the claim audit supplies the removal criteria. |
-| N3 Validation proof and failure behavior | S4, S10 | Register and revise Contracts' existing Validation Proof Lifetime and Invariant Contracts sections; extend their existing suite family. | Contracts owns construction, validity, proof lifetime, and failure semantics; Verification owns evidence of those rules. | Repeated A1b decode paths coexist with an existing rule against revalidating intact proof-bearing values. Current invariant wording does not distinguish contained programming defects from corruption or external emission. Reproduced JSON Schema and durable-boundary defects remain protected. |
-| N4 Promise proportionality | S6, S7, S10 | Revise Immutable Authority Closure and Version Scope so closure and compatibility follow stated lifetime, reconstruction, overlap, deployment, persistence, and actual-consumer promises. | Architecture owns authority closure; Contracts owns compatibility and invalidation promises. | Closure fanout grew from 7 to 27 relationships; fourteen stored kinds acquired local obligations; v10/v11 were atomic cutovers with no retained A1 reader. Genuine cold replay and independently deployed/persisted contracts remain counterexamples to simplification. |
-| N5 Bounded correction and established tooling | S8, S12, C4-C5 | Revise replanning/systemic rules with reachability stops, deletion/smaller-Interface remedies, proof substitution, composition recheck, and dependency preference when mature tooling owns the required semantics. | Planning owns repair scope; Dependencies owns implementation-versus-dependency; Verification supplies evidence adequacy. | Systemic reviews found real defects but also expanded inventories, AST logic, identities, and matrices. `jsonschema` and SQLite removed local semantic products; a custom analyzer created its own Interface, tests, and late repair loop. |
+| N2 Evidence necessity and scoped risk | S3, S5, S11, C5 | Revise the existing Acceptance Claims owner with permanent-evidence marginal value, overlap, lifecycle cost, retention/removal, and exact-byte-purpose admission. Do not add a parallel Verification owner or repeat the procedure downstream. | Acceptance Claims already owns the smallest complete claim set; Quality Gates, Oracle Boundaries, Coverage, and Claim-Directed Diagnosis already own risk, cost, adequate oracles, and trace-led investigation. The missing semantics deepen that Interface. | A1/A1b accumulated 218-226 suites, 53 retained Bash checkers, repeated proof families, and 917 hashed suite-input files. A1c is smaller but still contains layered checks whose marginal independence must be demonstrated. Counts locate cost; the claim audit supplies removal criteria. |
+| N3 Validation proof and failure behavior | S4, S10 | Register Validation Proof Lifetime unchanged; revise only Invariant Contracts' over-broad failure-mechanism prohibition to distinguish contained defects from arbitrary input, escaping invalid state, and authoritative-state corruption. | Contracts already owns complete proof lifetime. Repeating it would not make agents apply it; the remaining normative gap is failure consequence. Verification owns evidence admission, not validity procedure. | Existing prose already requires direct consumption of the same intact proof-bearing representation and new proof after representation loss, mutation, contract change, or a new authority boundary. A1c's facade/decode repetition is therefore an application question. Current invariant wording still fails to distinguish contained programming defects from corruption or external emission. |
+| N4 Promise proportionality | S6, S7, S10 | Revise Immutable Authority Closure and Version Scope so semantic closure and compatibility follow stated lifetime, reconstruction, overlap, deployment, persistence, and actual-consumer promises, without prescribing separate identity/codec/handle/version/lifecycle objects. | Architecture owns authority closure; Contracts owns compatibility and invalidation promises. | A1/A1b closure fanout grew from 7 to 27 relationships and v10/v11 were atomic cutovers with no retained A1 reader. A1c shows that a complete closure may be an aggregate and that format discriminators, identity revisions, compatibility versions, migration versions, and allocation ordinals have different roles. Its several version fields do not prove historical readers or cross-engine migration promises. |
+| N5 Bounded correction and established tooling | S8, S12, C4-C5 | Revise replanning/systemic rules with owner-and-reachability stops, deletion/smaller-Interface remedies, proof substitution, composition recheck, and an established-dependency comparison when standardized semantics would otherwise be reimplemented. Thin adapters and domain-specific products remain valid when they own distinct local semantics. | Planning owns repair scope; Dependencies owns implementation-versus-dependency; Verification supplies evidence adequacy. | A1c removed much A1b machinery through aggregate ownership and a smaller Interface, showing that deletion can be a systemic repair. A1/A1b systemic reviews found real defects but also expanded inventories, AST logic, identities, and matrices; `jsonschema` and SQLite removed local semantic products while a custom analyzer created its own Interface, tests, and repair loop. |
 | P1 Dependency-local invalidation | S9 | No normative change in this plan. Retain Projection Completeness; preserve the bounded prototype for a separately scoped Coding Standards Python coverage-design audit. | Planning already owns change-specific dispositions. The current global-horizon behavior belongs to repository-specific coverage implementation and its complete owner/consumer boundary. | The graph grew from 41/207 to 47/387 units/relationships and one guardrail renewed all 44 subjects. The [prototype](dependency-local-invalidation-prototype.md) demonstrates exact local, global-protocol, missing-disposition, and unrelated-consumer behavior, but implementation feasibility does not prove a generally applicable normative deficiency. |
 
 ## What Is Retained
@@ -54,22 +67,35 @@ The change is a refinement, not a rejection of the standards recovery:
 These controls have reproduced defects or clear consumer consequences. Their
 applicability is narrowed; their semantic outcomes are not weakened.
 
-## Enforcement Portfolio
+## Repository Conformance Evidence Portfolio
 
-The smallest planned portfolio is:
+These artifacts let this repository demonstrate that its own standards change
+is coherent. They are not an enforcement system imposed on adopters. An
+adopter may choose manual review, an established tool, custom tooling, or no
+automation according to its accepted claims and risks.
+
+The smallest planned repository portfolio is:
 
 - expand `core-simplicity` rather than add separate simple/easy, composition,
   deletion, and cumulative-admission suites;
 - update the existing Planning consolidation/template suites and structural
   checker to make applicability durable;
-- add one `evidence-necessity-and-risk` suite because no existing suite decides
-  marginal necessity or retirement;
+- extend `acceptance-claims` with one focused evidence-necessity fixture; do not
+  create `evidence-necessity-and-risk` as a parallel policy or suite;
 - extend `contract-invariants` with the existing Validation Proof Lifetime
   fixture rather than add a second Contracts suite;
-- extend the existing authority, version, dependency, and systemic suites for
-  their revised decisions;
+- extend `contract-authority-scope` with immutable closure as well as its
+  existing authority/version decisions; do not register
+  `architecture-owner-contract` as another closure suite;
+- extend the existing dependency and systemic suites for their revised
+  decisions;
 - do not create or change generic verifier Python for normative wording that
   declarative checks can express.
+
+The graph relation name `enforcement-suite-projection` is an existing
+repository artifact classification. It means that the named suite is evidence
+for the source policy unit inside this repository; it does not mean the written
+standard enforces itself or that users must run that suite.
 
 ## Project-Agnostic Drafting Tests
 
@@ -88,18 +114,31 @@ Every normative sentence must pass all of these tests:
    admitted mechanism more exhaustive.
 6. It states when the rule is not applicable and never converts Hickey's
    technology examples into mandates.
+7. It states the required decision or outcome without requiring this
+   repository's checker, suite, prompt, or graph machinery as the adopter's
+   enforcement mechanism.
 
 ## Evidence Limits
 
-- A1/A1b show that the present rules admitted a globally complected result;
-  they do not prove every A1b Module or check unnecessary.
-- Commit history supports a missing admission/enforcement path; it cannot
+- A1/A1b show that the earlier rules admitted a globally complected result;
+  they do not prove every A1b Module or check unnecessary. A1c supplies current
+  counterexamples and consumers, but only Milestone 1 can be evaluated as a
+  standard that was actually in force during A1c development.
+- Commit history supports a missing admission/application path; it cannot
   recover every human reason for a design choice.
 - The local-invalidation prototype proves completeness only relative to named
   deciding dependencies. It cannot discover a real semantic consumer never
   declared by humans, and it does not prove that a repository-specific coverage
   algorithm belongs in general standards. Explicit review and reviewed-empty
   authority remain; any implementation change requires its own complete audit.
-- The planned relationship set was based on the graph at commit `351e7852` and
-  was revalidated unchanged at Milestone 0 base `ac418826`. It must still be
-  queried before each shared implementation slice.
+- The planned relationship set began from commit `351e7852`, was revalidated at
+  Milestone 0 base `ac418826`, and is now stale relative to the accepted A1c
+  49-unit/407-relationship graph. Every unimplemented owner and evidence-owner
+  rationale must be freshly queried and dispositioned before a normative edit.
+- A current graph declaration is not proof that its evidence owner actually
+  decides the cited claim. In particular, the generic immutable-authority
+  fixture is presently attributed to the A1c-specific snapshot suite even
+  though that suite does not consume it. `contract-authority-scope` is the
+  planned generic owner because it already decides Architecture authority and
+  Contracts version scope; Milestone 3 must verify and implement that ownership
+  before acceptance.

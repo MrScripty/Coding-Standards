@@ -560,7 +560,7 @@ table {{ width:100%; border-collapse:collapse; font-size:12px; }} th {{ position
 <main>
   <div class="eyebrow"><span id="render-state"></span> · baseline <span id="baseline"></span></div>
   <h1>Where the standards graph changes—and where it deliberately does not.</h1>
-  <p class="lede">A before/after view of the project-agnostic simplicity and evidence-proportionality plan. The graph manifests remain authoritative; this standalone file is regenerated from their current state plus reviewed planning dispositions.</p>
+  <p class="lede">A before/after view of the project-agnostic simplicity and evidence-proportionality plan. The graph manifests remain authoritative; this standalone file is regenerated from their current state plus reviewed and explicitly conditional planning dispositions. Repository suites shown here are conformance evidence, not enforcement imposed on adopters.</p>
   <section class="cards" id="cards"></section>
   <section class="panel">
     <h2>Policy-unit change</h2>
@@ -586,7 +586,7 @@ table {{ width:100%; border-collapse:collapse; font-size:12px; }} th {{ position
     <h2>Filtered relationship dispositions</h2>
     <div class="table-wrap"><table><thead><tr><th>Family</th><th>Owner</th><th>Consumer</th><th>Relation</th><th>Disposition</th><th>Reason</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
-  <p class="footer">Any unresolved conditional edges are shown dashed. “Reviewed—no change” means the existing relationship remains applicable but its A1b/current consumer is not modified by this project-agnostic standards plan. P1 is resolved as reviewed—no change; its prototype remains separate implementation-design evidence. Re-run the generator after accepted graph changes; use <code>--check</code> to detect stale HTML.</p>
+  <p class="footer">Any unresolved conditional edges are shown dashed. “Reviewed—no change” means the existing relationship remains applicable but its current consumer is not modified by this project-agnostic standards plan. A1c consumers provide repository-specific evidence and graph projections, never normative examples. P1 is resolved as reviewed—no change; its prototype remains separate implementation-design evidence. Relation names containing “enforcement suite” classify existing repository artifacts and do not require adopters to run them. Re-run the generator after accepted graph changes; use <code>--check</code> to detect stale HTML.</p>
 </main>
 <script>
 const DATA={data_json};
@@ -601,7 +601,7 @@ $('cards').innerHTML=[
   [`${{s.currentUnitCount}} → ${{s.proposedUnitCount}}`,`policy units`,`+${{s.addedUnits}} new · ${{s.revisedUnits}} revised · ${{s.conditionalUnits}} conditional · ${{s.retainedUnits}} retained`],
   [`${{s.currentEdgeCount}} → ${{s.proposedEdgeCount}}`,`relationships`,`+${{s.addEdges}} edges · +${{s.catalogNodeAdditions}} catalog nodes`],
   [s.updateEdges,`consumer updates`,`existing edges retained and revised`],
-  [s.reviewedEdges,`reviewed, unchanged`,`mainly accepted A1b projections`]
+  [s.reviewedEdges,`reviewed, unchanged`,`current projections requiring no planned consumer edit`]
 ].map(([n,l,d])=>`<div class="card"><b>${{n}}</b><span>${{l}}</span><div class="delta">${{d}}</div></div>`).join('');
 $('units').innerHTML=DATA.plannedUnits.map(u=>`<article class="unit"><span class="tag">${{esc(u.family)}}</span><span class="tag">${{esc(u.action)}}</span><code>${{esc(u.policy_unit)}}</code><p><b>${{esc(u.heading)}}</b> · revision ${{esc(u.current_revision)}} → ${{esc(u.planned_revision)}}</p><p>${{esc(u.rationale)}}</p></article>`).join('');
 $('nodes').innerHTML=DATA.plannedNodes.map(n=>`<span class="tag" title="${{esc(n.rationale)}}">${{esc(n.family)}} · ${{esc(n.lifecycle)}} · ${{esc(n.node_id)}}</span>`).join('');
@@ -630,7 +630,7 @@ function drawGraph(rows){{
   $('graph').innerHTML=`<svg viewBox="0 0 ${{width}} ${{height}}" width="${{width}}" height="${{height}}" role="img" aria-label="Policy owners connected to affected consumers">${{edgeSvg}}${{sourceSvg}}${{consumerSvg}}</svg>`;
 }}
 function renderRows(rows){{
-  $('status').innerHTML=`<div class="${{rows.some(r=>r.disposition.startsWith('conditional'))?'warning':'warning ok'}}">Showing ${{rows.length}} relationships across ${{new Set(rows.map(r=>r.source)).size}} owners and ${{new Set(rows.map(r=>r.consumer)).size}} consumers.${{rows.some(r=>r.disposition.startsWith('conditional'))?' Conditional edges depend on the Milestone 0 prototype.':' Every shown planned edge has a non-conditional disposition.'}}</div>`;
+  $('status').innerHTML=`<div class="${{rows.some(r=>r.disposition.startsWith('conditional'))?'warning':'warning ok'}}">Showing ${{rows.length}} relationships across ${{new Set(rows.map(r=>r.source)).size}} owners and ${{new Set(rows.map(r=>r.consumer)).size}} consumers.${{rows.some(r=>r.disposition.startsWith('conditional'))?' Conditional edges remain unresolved until their named milestone audit selects a final disposition.':' Every shown planned edge has a non-conditional disposition.'}}</div>`;
   $('rows').innerHTML=rows.map(r=>`<tr><td>${{esc(r.family)}}</td><td><code>${{esc(r.source)}}</code></td><td><code>${{esc(r.consumer)}}</code></td><td>${{esc(r.relation)}}</td><td><span class="pill" style="color:${{colors[r.disposition]}};background:${{colors[r.disposition]}}18">${{esc(labels[r.disposition]||r.disposition)}}</span></td><td>${{esc(r.rationale||'Current relationship outside the planned delta.')}}</td></tr>`).join('');
   drawGraph(rows);
 }}

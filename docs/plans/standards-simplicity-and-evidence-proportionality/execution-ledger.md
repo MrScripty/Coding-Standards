@@ -195,3 +195,64 @@
   Bash checkers. Generated checker evidence remains 53 checkers, 57 nodes, 387
   conservative reference edges, and 57 components; the transition
   visualization and plan fixtures are current.
+
+## 2026-08-30 — Accepted-A1c evidence replan
+
+- Replanned only the unimplemented standards milestones and their planning
+  graph records. No normative standard, A1c source, verifier source, suite,
+  fixture, registry, or generated verification input changed.
+- Made the standards-library boundary explicit: written standards specify
+  expected decisions and outcomes but cannot guarantee recollection,
+  invocation, or enforcement. The suites, fixtures, checkers, and graph in this
+  repository are its own conformance evidence; adopters choose any manual or
+  automated mechanism they use.
+- Rebased the remaining inventory from retired A1b implementation projections
+  to the accepted A1c and Milestone 1 graph: 49 live policy units, 407 live
+  relationships, and 64 current relationships across the seven revised
+  existing owners. The fixed pre-Milestone-1 topology remains 47/387.
+- Refined Milestone 2 with same-representation versus new-proof-boundary
+  distinctions, the observed A1c facade/decode repeated-validation path,
+  isolated standard ownership, and an established-tooling decision that
+  distinguishes standardized reimplementation, thin adapters, and
+  domain-specific products.
+- Removed automatic admission of a new evidence suite. A dedicated
+  `evidence-necessity-and-risk` suite and an extension of `acceptance-claims`
+  are conditional candidates until a marginal-value review selects one and
+  removes the other from the planned graph.
+- Refined Milestone 3 to separate semantic closure completeness from separate
+  persisted machinery, distinguish format/identity/compatibility/migration/
+  ordinal version roles, and stop systemic expansion at the dispositioned
+  authority and reachable consumer population.
+- Recorded two blockers before normative work: the generic immutable-authority
+  fixture currently points to an A1c-specific suite that does not consume it,
+  and current implementation-edge rationales require semantic inspection rather
+  than acceptance from registration or fingerprint presence.
+
+## 2026-08-30 — Remaining-milestone depth refinement
+
+- Re-ran the proposed normative design against the current standards rather
+  than the older audit recommendation labels. Acceptance Claims, Quality Gates,
+  Oracle Boundaries, Coverage, Claim-Directed Diagnosis, Validation Proof
+  Lifetime, dependency comparison, and actual-consumer versioning already own
+  much of the proposed meaning.
+- Replaced the parallel N2 Verification owner and suite candidates with a
+  revision of `workflow.verification.acceptance-claims`, its existing
+  `acceptance-claims` suite, and one focused evidence-necessity fixture.
+- Retained Validation Proof Lifetime wording unchanged. The existing heading is
+  registered as a policy owner, while A1c's facade/decode validation path
+  remains a conditional implementation projection to inspect; repeating the
+  rule cannot compensate for failure to apply it.
+- Narrowed the Contracts normative edit to the real gap: current Invariant
+  Contracts wording does not distinguish contained programming defects from
+  arbitrary input, escaping invalid state, or authoritative-state corruption.
+- Selected `contract-authority-scope` as the planned generic immutable-closure
+  evidence owner because it already decides Architecture authority and
+  Contracts version scope. Removed the proposed `architecture-owner-contract`
+  catalog addition for this purpose.
+- Removed Security, Resilience, Diagnostics, Documentation, Release, profiles,
+  prompts, and the plan template from normative write sets where their existing
+  owner-local text already consumes the decision. Their graph relationships are
+  reviewed-no-change unless fresh comparison identifies an actual conflict.
+- Reduced planned N2/N3 relationship additions from 40 to 17 and removed three
+  planned catalog nodes. No normative standard, suite, fixture, registry,
+  generated input, or A1c implementation changed during this refinement.
