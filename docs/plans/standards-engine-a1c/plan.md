@@ -4,9 +4,9 @@
 
 **Current phase:** Product-contract discovery before architecture admission
 
-**Next slice:** Revalidate current consumers and retained state for A1C-002 and
-trace the representative agent workflows needed to close A1C-001, then define
-the bounded architecture experiments
+**Next slice:** Re-plan an exact architecture-experiment write set, prototype
+paths, deciding commands, and acceptance gates without admitting production
+runtime or A2 changes
 
 **Acceptance status:** `pending`
 
@@ -30,8 +30,8 @@ implementation scope are admitted.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1C-P1 | The first real caller, deployment form, handle lifetime, retained non-derivable state, loss consequence, and operational owner are explicit and supported by inspectable evidence. | `user-workflow` | `not-applicable` | `manual` | `pending` | Pending product-owner procedure in [product-contract discovery](reports/product-contract-discovery.md) |
-| A1C-P2 | Current A1b public consumers, persisted-state consumers, operational callers, and compatibility obligations are revalidated without inferring demand from tests or incumbent machinery. | `contract` | `not-applicable` | `automated` | `pending` | Pending current-tree consumer and state inventory |
+| A1C-P1 | The first real caller, deployment form, handle lifetime, retained non-derivable state, loss consequence, and operational owner are explicit and supported by inspectable evidence. | `user-workflow` | `not-applicable` | `manual` | `satisfied` | Product-owner decisions and representative workflows in [product-contract discovery](reports/product-contract-discovery.md) |
+| A1C-P2 | Current A1b public consumers, persisted-state consumers, operational callers, and compatibility obligations are revalidated without inferring demand from tests or incumbent machinery. | `contract` | `not-applicable` | `automated` | `satisfied` | Bounded current-tree inventory in [product-contract discovery](reports/product-contract-discovery.md) |
 | A1C-P3 | Competing A1c designs are exercised through representative caller workflows, deletion tests, and locality probes before one composition is selected. | `integration` | `not-applicable` | `automated` | `pending` | Pending design experiments |
 | A1C-P4 | The selected composition passes the complete Architecture-owned composed-design probe and identifies every retained concern, authority, lifecycle, Interface, dependency direction, and removal condition. | `integration` | `not-applicable` | `manual` | `pending` | Pending architecture decision and ADR |
 | A1C-P5 | A revised implementation plan defines exact runtime write sets, coherent milestones, migration and deletion ownership, claim-matched verification, re-plan triggers, and a separate content-bound acceptance step. | `focused` | `not-applicable` | `manual` | `pending` | Pending binding A1c implementation plan |
@@ -109,10 +109,13 @@ implementation scope are admitted.
   discovery must still identify concrete current integrations, retained A1
   state, non-test `open_persisted` callers, and operational backup/restore
   callers rather than inferring them from that intended use.
-- The four read-only operations with typed request/result/rejection behavior
-  and explicit uncertainty without valid-looking fallback are inherited A1c
-  behavioral constraints. Discovery may simplify their internal composition,
-  but does not reopen whether callers receive those behaviors.
+- The four read-only and analysis operations with typed
+  request/result/rejection behavior and explicit uncertainty without
+  valid-looking fallback are inherited A1c behavioral constraints. They are
+  not an exhaustive operation list: snapshot creation, discovery, deletion,
+  and undelete require a separate bounded Interface experiment. Discovery may
+  simplify internal composition but does not remove the four inherited
+  behaviors.
 - Identity and Contracts remain strong candidate deep Modules because deleting
   them while retaining their behavior would redistribute semantic complexity
   to callers.
@@ -149,14 +152,16 @@ implementation scope are admitted.
 | Select software-development agents acting for developers across projects as the first caller and the Python Interface as the access seam. A1c supplies read, navigation, inspection, and analysis behavior; canonical standards mutation remains outside A1c and requires separate A2 authority. | A1c product owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Treating tests, repository packages, or a human CLI as the first product caller |
 | Treat a harness-managed tool call as the primary deployment. Directly embedding the Python package in an agent process is a custom integration whose additional lifecycle and composition choices are owned by that harness. Preserve one public behavior contract rather than creating separate tool-call and embedded product semantics. | A1c product owner and harness integrator | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Two equally authoritative deployment contracts or implementation-specific guarantees leaking into the public Interface |
 | Distinguish one engine invocation/process from one multi-turn agent workflow and from one agent instance; do not use the ambiguous term session as lifecycle authority. The normal tool deployment may terminate the engine process after every request, so handles and accepted decisions remain resolvable across invocations, turns, and authorized coordinator/subagent handoffs during the workflow. A replacement agent instance may instead start an independent run without inferred lineage. | A1c product owner, Coding Standards store, and harness integrator | User clarification recorded in [product discovery](reports/product-contract-discovery.md) | Process-local handles, forced replay between turns, or global supersession between independent runs |
-| Coding Standards owns a complete immutable snapshot of canonical standards at one selected Git commit and resolves its opaque handle without requiring callers to manage raw content. The commit is source provenance rather than the internal storage mechanism or snapshot handle. | A1c product owner and Coding Standards snapshot owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Caller-managed snapshot bytes, mutable snapshots, embedded Git storage, or Git identity as the storage mechanism |
+| Coding Standards creates a complete immutable snapshot from the configured canonical standards repository's current commit and resolves its opaque handle without requiring callers to manage raw content. The agent cannot select a commit, repository path, tree object, or raw bytes through the Interface. The internally resolved commit is source provenance rather than the storage mechanism or snapshot handle. | A1c product owner, Coding Standards snapshot owner, and canonical-source Adapter | User clarification recorded in [product discovery](reports/product-contract-discovery.md) | Caller-selected history, caller-managed snapshot bytes, mutable snapshots, embedded Git storage, or Git identity as the storage mechanism |
 | Retain every snapshot until an authorized caller explicitly deletes it. Do not infer permission to delete from age, inactivity, process exit, agent replacement, apparent lack of internal references, or storage pressure. | A1c product owner and Coding Standards snapshot owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Automatic expiration, implicit garbage collection, or caller-managed raw snapshot storage |
 | Store proposed edits as a non-Git change set linked to one complete immutable snapshot. Project the resulting working view through the same navigation, read, inspection, analysis, and verification contracts as canonical content. Deleting the snapshot deletes every linked change set. | A1c product owner, Coding Standards snapshot owner, and Verification owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Copying the full corpus per edit, mutating snapshots, embedded Git repositories, weaker proposal validation, separate change-set read semantics, or orphaned change sets |
 | Treat each snapshot, every linked change set, and all analyses and artifacts whose validity depends on them as one lifecycle aggregate. Delete that aggregate atomically, and move it as one closure if movement is supported. Child handles may remain inspectable but do not own independent retention or transfer lifecycles. | A1c product owner and Persistence owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Caller-enumerated cleanup, orphaned artifacts, independently moved invalid children, or storage reachability guesses |
 | Implement snapshot deletion as aggregate quarantine followed by policy-governed expiry; permit authorized undelete of the complete aggregate before expiry. Keep backup and restore outside the Standards Engine Interface while requiring transactionally consistent publication and a documented administrative file closure. | A1c product owner and Persistence owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Immediate accidental data loss, partial undelete, conflating quarantine with disaster recovery, or an engine-owned backup subsystem without a product caller |
 | Default snapshot quarantine to seven days. Allow a deployment owner to change the duration only through configuration, not through the agent-facing Python Interface or an individual deletion. Bind each deletion to the exact purge deadline calculated from the effective policy so later configuration changes do not rewrite existing lifecycle decisions. | A1c product owner and deployment configuration owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Agent-selected retention, mutable existing deadlines, ambient policy lookup during undelete, or an unexplained hard-coded expiry |
 | Do not expose immediate purge. Every snapshot deletion follows the same quarantine and undelete contract until policy-governed irreversible expiry. | A1c product owner and Persistence owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Accidental bypass of quarantine, separate destructive authorization paths, or caller-selected irreversible deletion |
-| Expose only `delete_snapshot` and `undelete_snapshot` for snapshot lifecycle. Deletion atomically quarantines the aggregate with a fixed deadline; repeat deletion does not extend it; normal operations return `SNAPSHOT.QUARANTINED`; undelete restores every identity before the deadline; expiry returns `SNAPSHOT.EXPIRED` and physical purge occurs transactionally on a later invocation without a background service. Missing duration uses seven days and invalid explicit configuration rejects rather than falling back. | A1c product owner, Interface owner, Persistence owner, and configuration owner | User agreement recorded in [product discovery](reports/product-contract-discovery.md) | Child-level lifecycle operations, deadline extension through retries, hidden use of quarantined authority, partial undelete, ambient expiry, or invalid-config fallback |
+| Expose only `delete_snapshot` and `undelete_snapshot` as destructive snapshot-lifecycle behaviors. Deletion atomically quarantines the aggregate with a fixed deadline; repeat deletion does not extend it; normal operations return `SNAPSHOT.QUARANTINED`; undelete restores every identity before the deadline; expiry returns `SNAPSHOT.EXPIRED` and physical purge occurs transactionally on a later invocation without a background service. Missing duration uses seven days and invalid explicit configuration rejects rather than falling back. | A1c product owner, Interface owner, Persistence owner, and configuration owner | User agreement recorded in [product discovery](reports/product-contract-discovery.md) | Child-level lifecycle operations, deadline extension through retries, hidden use of quarantined authority, partial undelete, ambient expiry, or invalid-config fallback |
+| Add snapshot creation and discovery as required product behaviors. Creation captures the configured canonical repository's current commit without accepting a caller-selected revision. Discovery finds retained snapshot roots after process or agent-instance loss. Compare one typed snapshot-management operation family with explicit methods before selecting the public shape; do not overload read-only `query`/`inspect` or constructor state as hidden lifecycle authority. | A1c product owner, Interface owner, and snapshot owner | Current-tree workflow gap and user clarification recorded in [product discovery](reports/product-contract-discovery.md) | Treating the inherited four operations as exhaustive, caller-maintained handle catalogs, selectable Git history, hidden mutation, or premature method-count selection |
+| Separate immutable canonical-content identity from snapshot-root lifecycle identity. Equal canonical bytes may be deduplicated internally, but each creation produces an independently retained opaque snapshot root that owns its dependent aggregate. Deleting one equal-content root cannot affect another. | A1c product owner, Identity owner, Snapshot owner, and Persistence owner | Same-content multi-project workflow in [product discovery](reports/product-contract-discovery.md) | Content equality conflated with lifecycle identity, shared deletion authority, duplicated canonical bytes required by the Interface, or caller-managed ownership links |
 | Defer cross-engine stored-state compatibility and migration until Coding Standards is feature complete. Do not claim a current overlap window or silently reinterpret incompatible state; require stable-release planning to revisit the decision. | A1c product owner and Contracts owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Premature compatibility machinery, accidental indefinite promises, or silent fallback across incompatible engine contracts |
 | Support machine-portable closed stores and target Linux, Windows, and macOS while retaining CPython 3.11 and 3.12. Linux is the current development environment, but final platform claims require real execution on every named operating system. | A1c product owner, Persistence owner, and Platform owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | POSIX-only storage identity, caller-enumerated transfer, or Linux-only evidence presented as cross-platform acceptance |
 | Keep semantic understanding with the agent. Limit Coding Standards authority to declared mechanical contracts and projections over authored standards, supplied facts, evidence, and decisions. | A1c product owner and Architecture owner | User clarification recorded in [product discovery](reports/product-contract-discovery.md) | Engine-inferred prose meaning, generated semantic judgments, or compatibility framed around nonexistent engine understanding |
@@ -226,17 +231,19 @@ compatibility facts required to select an A1c architecture.
 
 **Tasks:**
 
-- [ ] Name the first real caller and its end-to-end workflows.
-- [ ] Define deployment form and supported process, repository, machine, and
+- [x] Name the first real caller and its end-to-end workflows.
+- [x] Define deployment form and supported process, repository, machine, and
   upgrade boundaries.
-- [ ] Define handle lifetime and portability requirements.
-- [ ] Inventory non-derivable state, retention, loss consequences, and
+- [x] Define handle lifetime and portability requirements.
+- [x] Inventory non-derivable state, retention, loss consequences, and
   operational ownership.
-- [ ] Revalidate external consumers, persisted state, and compatibility
+- [x] Revalidate external consumers, persisted state, and compatibility
   obligations against the current repository and intended deployment.
-- [ ] Classify each major A1b guarantee as required, conditional, unsupported,
+- [x] Trace creation and discovery after process or agent-instance loss without
+  caller-selected Git history or caller-maintained snapshot catalogs.
+- [x] Classify each major A1b guarantee as required, conditional, unsupported,
   or unnecessary for A1c, with evidence.
-- [ ] Define bounded design experiments and their deciding oracles without
+- [x] Define bounded design experiments and their deciding oracles without
   selecting an implementation from incumbent structure.
 - [x] Regenerate the suite-input projection after the tracked A1c planning paths
   are final. Only its repository-index observation may change; registry,
@@ -248,20 +255,19 @@ the suite-input projection is fresh with only the admitted repository-index
 delta; and the plan is re-planned with an admitted architecture-discovery write
 set before any prototype or runtime mutation.
 
-**Status:** `Planned`
+**Status:** `Implemented`
 
 ## Blockers
 
 These blockers constrain architecture and implementation; they do not make the
 bounded Milestone 0 discovery work unavailable.
 
-- A1C-001 prevents architecture selection and implementation admission until
-  the first caller, deployment form, handle lifetime, non-derivable state, loss
-  consequence, and operational owner are selected. It does not prevent the
-  Milestone 0 discovery work needed to obtain those facts.
-- A1C-002 prevents compatibility, migration, deletion, and persistence design
-  until current consumer and retained-state facts are revalidated. It does not
-  prevent the bounded inventory that resolves it.
+- A1C-001 is resolved by the product-owner decisions and representative
+  workflows. The selected architecture remains unavailable until the bounded
+  experiments produce their evidence.
+- A1C-002's current-tree consumer and retained-state inventory is complete.
+  Unknown external consumers remain a standing re-plan trigger rather than a
+  blocker to the bounded design experiments.
 - A1c runtime mutation and all A2 work remain unavailable throughout Milestone
   0 regardless of discovery progress.
 

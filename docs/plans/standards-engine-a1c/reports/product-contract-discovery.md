@@ -38,8 +38,9 @@ process model, persistence mechanism, or handle lifetime is required.
 - Public operation sequence: `query` selects or reads applicable authority;
   `prepare` begins standards-change analysis; `resolve` supplies an authorized
   decision to an existing analysis; and `inspect` retrieves an addressed
-  authority or analysis value. Representative end-to-end sequences remain to
-  be recorded.
+  authority or analysis value. These four behaviors remain the read and
+  analysis Interface; they are not the complete snapshot-management Interface.
+  Representative end-to-end sequences remain to be recorded.
 - Inputs controlled by the caller: project/task routing facts and query
   requests; selected accepted and proposed authority for analysis; declared
   changes; and authorized submissions with required evidence.
@@ -154,10 +155,13 @@ head between the two analyses.
 ### Snapshot Authority
 
 Coding Standards captures and owns a complete immutable copy of canonical
-standards content at a selected Git commit. The source commit is provenance,
-while the opaque snapshot handle identifies the Coding Standards-owned copy.
-Callers do not retain or resubmit raw snapshot content, and a changed worktree
-or later canonical commit cannot alter an existing snapshot.
+standards content at the canonical repository's current commit when snapshot
+creation occurs. The engine resolves that commit internally from its configured
+canonical source. The agent cannot select a historical commit, repository path,
+tree object, or raw content through the Coding Standards Interface. The source
+commit is recorded provenance, while the opaque snapshot handle identifies the
+Coding Standards-owned copy. A changed worktree or later canonical commit
+cannot alter an existing snapshot.
 
 A snapshot-linked change set stores proposed edits without copying or mutating
 the complete snapshot. Operations resolve the complete projected view before
@@ -166,6 +170,214 @@ contracts used for canonical content. Snapshot and change-set representations
 are portable across supported machines under the same engine storage contract.
 Cross-engine compatibility and migration remain deferred until feature
 completeness.
+
+### Snapshot Creation And Discovery
+
+The agent-facing product must support four snapshot-management behaviors in
+addition to the existing read and analysis behaviors:
+
+- create a snapshot from the canonical standards repository's current commit;
+- find retained active snapshots without remembering every handle outside
+  Coding Standards;
+- delete one active snapshot aggregate into quarantine; and
+- undelete one quarantined aggregate before its fixed deadline.
+
+Creation accepts no caller-selected Git revision. Canonical-source selection,
+exact commit resolution, and immutable byte capture belong to the deployment
+and Git Adapter. A creation result returns the new snapshot handle and enough
+provenance for an agent to distinguish retained snapshots. Discovery returns
+stored snapshot roots and lifecycle metadata, not independent child-object
+inventory. The exact Python method or tagged-operation shape remains a bounded
+Interface experiment; overloading `query`, `inspect`, or repository constructors
+is not an accepted substitute because those paths cannot own creation or
+recover a forgotten handle after process termination.
+
+This does not create a cross-engine compatibility promise. The current engine
+contract may create, find, delete, and undelete its own stored snapshots;
+opening the same store through a later incompatible engine remains deferred
+until feature completeness.
+
+### Snapshot And Content Identity
+
+The product uses two identities because content equality and lifecycle
+ownership answer different questions:
+
+| Term | Meaning | Identity and ownership |
+| --- | --- | --- |
+| Canonical content | One exact immutable standards corpus captured from the configured canonical repository | Content-addressed by exact logical paths and bytes; may be physically shared by several snapshots |
+| Snapshot root | One caller-visible retained copy of that corpus and the root of its dependent work | Receives an opaque store-assigned identity; owns its change sets, analyses, decisions, evidence, lifecycle state, and quarantine deadline |
+| Snapshot aggregate | The snapshot root plus every value whose validity or retention depends on it | Identified mechanically from stored ownership links; moved, quarantined, undeleted, and purged as one unit |
+
+Two snapshot creations while canonical standards remain at the same commit
+produce two snapshot roots that may reference one deduplicated canonical-content
+object. Their handles, change sets, analyses, and lifecycle decisions remain
+independent. Quarantining one root cannot make the other unavailable.
+
+This separation is not an exception to content identity. Canonical content is
+still identified by content. A snapshot root represents a retained lifecycle
+instance, so content equality is insufficient for its identity. Creation time,
+source-machine paths, and Git object identity do not become semantic content
+identity. The store may use a generated opaque instance identifier, but the
+exact generation mechanism remains an experiment detail.
+
+Physical deduplication is internal. Purging a snapshot removes that root and
+all solely owned aggregate values. Shared canonical content remains while
+another active or quarantined snapshot owns it. The store must decide this
+from exact transactional ownership records, not a caller-supplied object list
+or a filesystem reachability guess.
+
+## Representative Agent Workflows
+
+These workflows define required behavior. Method names and result layouts are
+experiment variables unless already fixed by the four inherited behaviors.
+
+### Create And Navigate
+
+1. An authorized agent requests snapshot creation without a Git revision,
+   repository path, or raw standards content.
+2. Coding Standards resolves the configured canonical repository's current
+   commit, captures its exact canonical authority, validates the complete
+   corpus, and creates one active snapshot root.
+3. The result returns the snapshot handle and display provenance. A second
+   creation at unchanged canonical content returns a distinct snapshot root;
+   internal content bytes may be shared.
+4. The agent supplies that snapshot handle to `query` with routing facts.
+5. The returned reading plan, later `query` reads, and `inspect` calls remain
+   bound to the same snapshot root. No operation falls back to a newer
+   canonical commit.
+
+### Find And Resume After Process Or Agent Loss
+
+1. A later engine invocation starts without a remembered snapshot handle.
+2. An authorized discovery request returns active snapshot-root summaries from
+   the configured store. It does not expose child storage objects.
+3. Each summary supplies the opaque handle, active lifecycle state, and enough
+   provenance to distinguish retained roots. Whether caller-authored display
+   labels are needed remains an Interface experiment question.
+4. The agent selects a root and starts a fresh `query` or `prepare`. Coding
+   Standards does not infer that this is a rerun and does not require a prior
+   analysis handle.
+
+### Multi-Turn Analysis And Handoff
+
+1. The agent selects accepted and proposed snapshot or projected-view handles
+   and calls `prepare` with declared changes and semantic proposals.
+2. A pending result returns one analysis handle plus only current material
+   requirements, obligations, reading guidance, and next operations.
+3. A coordinator may pass the analysis handle to an authorized subagent. The
+   subagent calls `inspect` for needed detail and `resolve` with evidence-backed
+   decisions; possession of the handle does not grant authority.
+4. Every successful decision produces an immutable successor analysis. A
+   different valid decision can branch from the same parent without global
+   supersession.
+5. A complete result remains bound to its snapshot aggregate. Losing the agent
+   process does not lose accepted non-derivable decisions.
+
+### Delete And Undelete One Of Two Equal-Content Snapshots
+
+1. Two active snapshot roots reference identical canonical content and own
+   different dependent analyses.
+2. An authorized caller deletes one root. Coding Standards atomically marks
+   only that aggregate quarantined and returns its fixed purge deadline.
+3. Normal discovery excludes the quarantined root; ordinary operations against
+   it or its children return `SNAPSHOT.QUARANTINED`. The other equal-content
+   root remains active and usable.
+4. A narrowly authorized lifecycle discovery can find quarantined roots so an
+   agent that lost the deletion result can still request undelete.
+5. Undelete before the deadline restores the complete aggregate with identical
+   handles. Repeated delete or undelete is deterministic and does not extend
+   the deadline.
+6. At the deadline the aggregate is logically expired. A later invocation
+   purges it transactionally without deleting canonical content still owned by
+   another root.
+
+## Bounded Architecture Experiments
+
+The experiments compare behavior and ownership; they do not authorize final
+runtime implementation.
+
+| ID | Question | Compared designs | Deciding evidence |
+| --- | --- | --- | --- |
+| A1C-E1 | What is the smallest clear snapshot-management Interface for agents? | One tagged snapshot-management operation versus explicit create/find/delete/undelete methods over one internal Snapshot Module | Execute every representative workflow; compare caller knowledge, authorization dispatch, generated algebra, failure ownership, and the change path for adding one lifecycle result field |
+| A1C-E2 | Can content identity and lifecycle identity remain separate without duplicating authority? | Content-addressed canonical content plus opaque snapshot roots versus content-only snapshot identity | Create two roots over equal content, attach different children, quarantine one, undelete it, purge it, and prove the other root and shared content remain valid |
+| A1C-E3 | What aggregate persistence shape supplies required replay with less machinery than A1b? | Snapshot-owned aggregate records with derived projections versus independently durable storage for every inspectable child | Cold process query/analysis/inspection, child-handle resolution, aggregate deletion, deletion test, and representative change Locality |
+| A1C-E4 | Which snapshot summary fields are genuinely required? | Minimal handle/lifecycle/provenance summary versus optional caller-authored display metadata | Fresh-agent selection across several same-content and different-content roots without exposing paths, storage objects, or semantic claims |
+| A1C-E5 | Which operation/version authority remains necessary? | A1b's per-operation stored authority objects versus domain-owned compatibility constants projected through one facade contract | Change one navigation behavior, one snapshot lifecycle result, and one analysis decision; record every Module and identity that must change |
+| A1C-E6 | Which accepted verification machinery remains necessary after aggregation? | Current direct-object, package-governance, closure, and coverage evidence versus claim-matched substitutes at the deeper aggregate Interface | Claim-level failure injection, external-schema oracle preservation, cold reconstruction, deletion results, and evidence-substitution analysis |
+
+Experiment implementations must use temporary or separately admitted prototype
+paths. They cannot modify A1b production packages, canonical contracts, policy
+authority, or A2 code under the discovery milestone. Exact prototype paths and
+commands belong to the next plan revision.
+
+## A1b Guarantee Classification
+
+| A1b guarantee or mechanism | A1c disposition before experiments | Reason |
+| --- | --- | --- |
+| `query`, `prepare`, `resolve`, and `inspect` behavior | required | Representative navigation and multi-turn analysis workflows require them |
+| Typed results, explicit uncertainty, and no valid-looking fallback | required | Agents must distinguish unavailable, invalid, unsupported, unauthorized, and unresolved outcomes |
+| Maintained Draft 2020-12 validator | required | A1 reproduced that local agreement is not external conformance |
+| Separate schema equality, domain equality, and identity | required | They answer different contracts and A1 conflation caused a demonstrated defect |
+| Immutable snapshot content and analysis branching | required | Cross-invocation workflows and coordinator/subagent handoff cannot depend on mutable ambient authority |
+| Coding Standards-owned durable state | required | Normal tool deployment terminates after each request and retains non-derivable decisions |
+| One independently stored object per inspectable child | experimental | No independent child lifecycle exists; A1c requires only correct inspection through the owning aggregate |
+| SQLite | experimental | Durable transactional storage is required; the physical schema and Adapter remain to be compared |
+| Engine backup/restore Interface | unnecessary | File administration owns backup; quarantine owns accidental deletion |
+| Cross-engine state migration | deferred | No release or overlap contract exists before feature completeness |
+| Linux-only native capture and publication | insufficient | A1c targets Linux, Windows, and macOS; design cannot embed POSIX identity |
+| Exact coverage replay and byte-complete global invalidation | experimental | Coverage must prevent false empty impact, but historical replay and global invalidation are not yet product requirements |
+| Custom governed-source interpreter | experimental | Repository architecture discipline matters, but the incumbent mechanism has no independent product caller |
+
+## Current-Tree Consumer And State Revalidation
+
+**Observation boundary:** commit
+`2dbf7cf5313ce7d15292e8caf0a51ab20f5c9e0f`, tree
+`5dfd117dea873ba5dcdc955ec12abf22d6f3d68d`.
+
+The current tree preserves the accepted audit's bounded-empty consumer result:
+
+- no non-test Python source outside `tools/standards_engine/standards_engine/`
+  imports or constructs `StandardsEngine`;
+- `AgentToolFacade` remains the only production caller of `query`, `prepare`,
+  `resolve`, and `inspect`;
+- the Standards Engine and Standards Authority package manifests declare no
+  repository entrypoint, CLI, service, or foreign-language binding;
+- `open_persisted` has no non-test caller;
+- SQLite backup and restore have no operational caller; and
+- no Git-tracked or worktree `.db`, `.sqlite`, or `.sqlite3` state was found.
+
+The search covered non-test Python imports and call sites, package manifests,
+README operational claims, tracked and present database filenames, default
+store references, and recovery call sites. Tests, fixtures, plans, reports, and
+generated declarations remain evidence or repository-process consumers rather
+than independent product consumers.
+
+The exact current-tree commands were run from the repository root:
+
+```bash
+rg -l --glob '!**/tests/**' --glob '!**/fixtures/**' \
+  --glob '!docs/plans/**' \
+  'from tools\.standards_engine|import tools\.standards_engine|from standards_engine|import standards_engine|StandardsEngine\(' .
+rg -n --glob '!**/tests/**' --glob '!**/fixtures/**' \
+  'open_persisted|SQLiteAnalysisStateStore|AnalysisStateStore|backup|restore' tools
+rg -n 'standards_engine|standards-engine|StandardsEngine' \
+  tools/*/pyproject.toml tools/*/README.md \
+  evaluation/standards-effectiveness/*.toml
+git ls-files '*.db' '*.sqlite' '*.sqlite3' '.standards-engine/**'
+find . -type f \( -name '*.db' -o -name '*.sqlite' -o -name '*.sqlite3' \) -print
+```
+
+Empty output from the first, fourth, and fifth commands established only the
+bounded absence described above. It does not prove that an unregistered
+external harness or privately retained store does not exist.
+
+The current implementation creates a durable store at
+`.standards-engine/authority.sqlite3` through `open_repository`, exposes the
+selected view as a process object's property, and can reopen a store only when
+the caller already supplies the store path and view handle. Its object store
+has direct get and put behavior but no snapshot enumeration, aggregate
+quarantine, deletion, or undelete contract. This is current implementation
+evidence, not authority for A1c's design.
 
 ### Semantic-Understanding Boundary
 

@@ -364,3 +364,46 @@
 - A1C-006 and A1C-008 are resolved as product decisions. A1C-001 remains open
   only for representative workflow evidence and the current consumer/state
   inventory; A1C-003 owns portable-storage experiments.
+
+## 2026-08-29 - Snapshot Bootstrap And Discovery Replan
+
+- Current-tree revalidation at commit
+  `2dbf7cf5313ce7d15292e8caf0a51ab20f5c9e0f`, tree
+  `5dfd117dea873ba5dcdc955ec12abf22d6f3d68d`, found no independent non-test
+  Engine consumer, persisted-state caller, operational backup/restore caller,
+  package entrypoint, or retained database. A1C-002 is resolved with the
+  bounded-empty search recorded in product discovery.
+- Representative workflow tracing exposed a product-Interface gap: the four
+  inherited read and analysis behaviors require an already-known authority
+  handle, while the selected product must create and find retained snapshot
+  roots across process and agent-instance loss.
+- The agent does not select a Git commit. Snapshot creation captures the
+  configured canonical standards repository's current commit through an
+  internal Adapter and records that commit as provenance.
+- The former treatment of the four inherited operations as the complete
+  Interface is superseded. Their behavior remains required, while a bounded
+  experiment will compare public shapes for snapshot creation, discovery,
+  deletion, and undelete.
+- This replan does not select final operation count, storage schema, or runtime
+  implementation. It does not reopen deferred cross-engine compatibility or
+  admit A2 authoring.
+
+## 2026-08-29 - Snapshot Content And Lifecycle Identity Separation
+
+- The product owner accepted separate canonical-content and snapshot-root
+  identities. Exact canonical paths and bytes retain content-addressed
+  identity; each snapshot creation receives an independently retained opaque
+  lifecycle root.
+- Two projects may therefore create snapshots from the same current canonical
+  commit without sharing deletion, change-set, analysis, or quarantine
+  authority. Internal storage may deduplicate their canonical bytes.
+- The representative workflows now cover create and navigation, fresh-process
+  discovery, multi-turn coordinator/subagent analysis, and deleting or
+  undeleting one of two equal-content snapshot roots.
+- Six bounded experiments are defined for snapshot Interface shape,
+  content-versus-lifecycle identity, aggregate persistence, discovery summary,
+  operation/version authority, and verification substitution. No final schema,
+  storage layout, or production implementation is selected.
+- A1C-001 and A1C-002 are resolved. Milestone 0 is Implemented; architecture
+  selection remains unavailable until the experiment milestone is separately
+  admitted with exact prototype paths and deciding evidence.
