@@ -1,12 +1,11 @@
-# Plan: Standards Engine A1c Product Contract And Architecture Discovery
+# Plan: Standards Engine A1c Product Contract And Architecture
 
-**Plan status:** `Blocked`
+**Plan status:** `Active`
 
-**Current phase:** Bounded experiments complete; ADR and implementation-plan
-scope unavailable under the discovery write set
+**Current phase:** Binding architecture and implementation planning
 
-**Next slice:** Re-plan exact ADR, implementation-plan, migration, and evidence
-write sets without admitting production implementation or A2
+**Next slice:** Author the superseding A1c ADR, A1b-to-A1c migration inventory,
+and exact production milestones without mutating production or A2
 
 **Acceptance status:** `pending`
 
@@ -19,8 +18,9 @@ write sets without admitting production implementation or A2
 Develop an admissible A1c product and architecture plan that preserves A1b's
 demonstrated semantic corrections while retaining only guarantees and
 machinery justified by concrete caller, deployment, state-lifetime, and risk
-facts. This initial plan owns discovery and design admission only. It grants no
-A1c implementation authority.
+facts. This plan owns discovery, binding architecture, and implementation-plan
+admission. It grants no A1c production implementation authority until the
+design-definition gate is satisfied and a production milestone is active.
 
 ## Objective Acceptance
 
@@ -64,8 +64,8 @@ implementation scope are admitted.
 ### Out Of Scope
 
 - A1c production source, schema, generated artifact other than the exact suite-
-  input freshness projection listed in Milestone 0, fixture, suite, policy
-  graph, or runtime-state mutation under the current plan state.
+  input freshness projection listed by the active milestone, fixture, suite,
+  policy graph, or runtime-state mutation during design definition.
 - Deleting or weakening accepted A1b behavior or evidence before an admitted
   replacement owns the same required claim or explicitly removes its product
   requirement.
@@ -94,9 +94,8 @@ implementation scope are admitted.
   deduplication remain separately owned concepts.
 - Counts, file size, test totals, dependency totals, and incumbent structure
   may locate cost but cannot select the design.
-- No implementation write set exists until A1C-P1 through A1C-P4 support a
-  binding architecture and this plan is re-planned with exact implementation
-  authority.
+- No production mutation is authorized until A1C-P1 through A1C-P5 are
+  satisfied and the first exact production milestone is active.
 - Work is serial. The Concurrent Plan Integration profile is not applicable
   unless multiple proposals can actually become stale before integration.
 
@@ -339,30 +338,74 @@ pass.
 
 **Status:** `Implemented`
 
+### Milestone 2: Binding Architecture And Implementation Plan
+
+**Goal:** Convert the selected candidate into one durable A1c ADR and one exact
+implementation and migration plan without changing production behavior.
+
+**Allowed write set:**
+
+- `docs/decisions/standards-engine-a1c.md`
+- `docs/plans/standards-engine-a1c/plan.md`
+- `docs/plans/standards-engine-a1c/execution-ledger.md`
+- `docs/plans/standards-engine-a1c/issues.md`
+- `docs/plans/standards-engine-a1c/reports/a1b-to-a1c-migration-inventory.md`
+- `evaluation/standards-effectiveness/generated/suite-inputs.json`
+
+The accepted A1b ADR and implementation remain historical and behavioral
+baselines. Production packages, canonical contracts, generated public models,
+runtime fixtures, suite definitions, policy authority, and every A2 artifact
+are read-only in this milestone.
+
+**Tasks:**
+
+- [ ] Author a superseding A1c ADR that fixes concern ownership, dependency
+  direction, public Interface shape, lifecycle, failure ownership, and removal
+  conditions without duplicating the experiment report.
+- [ ] Define opaque snapshot-root ID generation and collision behavior without
+  exposing content identity, Git identity, project meaning, or store mechanics.
+- [ ] Define complete canonical-corpus capture, immutable authority resolution,
+  SQLite transaction and file boundaries, aggregate encoding, derived child
+  inspection, quarantine, undelete, expiry, and minimal tombstones.
+- [ ] Define the generated public request/result algebra, authorization and
+  provider boundaries, exact dependency closure, local coverage identity, and
+  current-engine replay contract.
+- [ ] Inventory every A1b Module, contract, handle, stored representation,
+  generated projection, test family, and consumer selected for retain,
+  replace, migrate, or delete; record one owner and disposition for each.
+- [ ] Replace this plan's design-only milestone structure with exact coherent
+  production milestones, write sets, dependency order, migration/deletion
+  ownership, focused evidence, objective acceptance claims, and re-plan
+  triggers. Listing a later write set does not activate it.
+- [ ] Reconcile the ADR against the complete composed-design probe. Re-run the
+  probe if the ADR changes the selected composition rather than merely making
+  an experiment decision exact.
+- [ ] Regenerate the suite-input projection after the new tracked design paths
+  are final. Only the repository-index observation may change.
+
+**Acceptance gate:** A1C-P4 and A1C-P5 are satisfied; the ADR and plan have one
+authority for every retained decision; every selected A1b consumer has a
+non-blocked migration disposition; every future production path belongs to
+one coherent milestone; no production, policy, suite, or A2 artifact changed;
+the composed-design review remains valid or is replaced; generated freshness,
+focused planning and architecture suites, the complete checkpoint, and diff
+hygiene pass.
+
+**Status:** `Active`
+
 ## Blockers
 
-These blockers constrain architecture and implementation; they do not make the
-bounded Milestone 0 discovery work unavailable.
-
-- A1C-001 is resolved by the product-owner decisions and representative
-  workflows.
-- A1C-002's current-tree consumer and retained-state inventory is complete.
-  Unknown external consumers remain a standing re-plan trigger rather than a
-  blocker to the bounded design experiments.
-- A1C-003 through A1C-005, A1C-007, and A1C-011 are resolved by the bounded
-  executable and composed-design evidence. The selected candidate is not yet
-  a binding ADR or production implementation.
-- The superseding ADR and exact implementation plan require paths outside this
-  discovery write set. That scope replacement is the current blocker.
-- A1c runtime mutation and all A2 work remain unavailable.
+- `none` for Milestone 2 design definition.
+- Unknown external consumers remain a standing re-plan trigger.
+- A1c production mutation and all A2 work remain unavailable until their own
+  exact milestone and lifecycle authority exist.
 
 ## Re-Plan Triggers
 
 - Product facts select a concrete handle lifetime, persistence boundary,
   compatibility promise, platform, or deployment model.
 - A real external consumer or retained state is discovered.
-- A design experiment requires source changes or another path outside the
-  discovery write set.
+- Binding design work requires a path outside Milestone 2's write set.
 - Suite-input regeneration changes any field other than the repository-index
   digest or stales another generated artifact.
 - A candidate removes an accepted A1b behavior without explicitly removing or
@@ -378,5 +421,5 @@ bounded Milestone 0 discovery work unavailable.
 ## Final Acceptance
 
 - Acceptance status: `pending`
-- Deferred follow-ups: `A1c implementation and A2 remain unauthorized`
-- Final status: `Blocked`
+- Deferred follow-ups: `A2 remains unauthorized; cross-engine migration remains deferred until feature completeness`
+- Final status: `Active`

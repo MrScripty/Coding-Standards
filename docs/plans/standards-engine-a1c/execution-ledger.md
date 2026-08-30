@@ -474,3 +474,21 @@
   implementation plan. The plan remains Blocked pending that scope replacement;
   no production source, public contract, canonical policy, or A2 work is
   authorized.
+
+## 2026-08-30 - Binding Design Scope Replan
+
+- The product owner accepted extending the existing A1c plan rather than
+  creating a duplicate implementation plan or admitting production before the
+  architecture and migration contracts are exact.
+- The discovery-only scope that made the ADR and implementation plan
+  unavailable is `Superseded` by Milestone 2's exact design-definition write
+  set. Milestones 0 and 1 remain Implemented evidence and are not reopened.
+- Milestone 2 admits one new A1c ADR, one A1b-to-A1c migration inventory, the
+  active plan, ledger and issues, and mechanical suite-input freshness. It does
+  not admit production packages, public schema, generated models, fixtures,
+  suite definitions, policy authority, or A2.
+- The work remains serial. No concurrent-plan profile, exact-history protocol,
+  review commit topology, or standalone lifecycle commit is introduced.
+- The design gate must make every retained owner and future production write
+  set exact, disposition every selected A1b consumer, and keep later milestones
+  inactive until A1C-P4 and A1C-P5 are satisfied.
