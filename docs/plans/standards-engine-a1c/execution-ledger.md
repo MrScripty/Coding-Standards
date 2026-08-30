@@ -414,9 +414,11 @@
   and one results report under the A1c plan's `reports/` directory. The
   prototype is disposable design evidence and cannot become production or
   compatibility authority by location or reuse.
-- The prototype may use standard-library SQLite in memory to exercise
-  transactional ownership, but SQLite remains an experiment candidate rather
-  than a selected production schema or storage contract.
+- The prototype may use a disposable standard-library SQLite file to exercise
+  real close/reopen and transactional ownership. This corrects the earlier
+  in-memory wording, which could not prove the admitted cold-reopen case.
+  SQLite remains an experiment candidate rather than a selected production
+  schema or storage contract.
 - The admitted cases cover equal-content independent roots, discovery,
   quarantine, undelete, expiry, purge, cold reopen, aggregate child inspection,
   public Interface alternatives, representative change Locality, and evidence
@@ -427,3 +429,21 @@
   repository-index observation. Milestone 1 owns the corresponding mechanical
   suite-input regeneration after those paths are final; no suite semantics may
   change.
+
+## 2026-08-29 - Snapshot Discovery Scope Blocker
+
+- The disposable prototype passed equal-content isolation, aggregate child
+  inspection, quarantine discovery, undelete, cold reopen, expiry, purge,
+  shared-content preservation, Interface parity, and invalid-configuration
+  cases.
+- It also reproduced a missing product fact. Two independently retained roots
+  created over the same current commit at one logical time have equal
+  provenance and differ only by opaque handle. A replacement agent cannot know
+  which root belongs to its project or workflow.
+- A deployment-scoped store keeps project identity outside Coding Standards
+  and is provisionally simplest. A shared store requires explicit non-semantic
+  caller context plus authorization, naming, movement, and mutation decisions.
+  Inferring purpose from handles or timestamps is rejected.
+- A1C-011 records the blocker. Milestone 1 and the plan are Blocked pending the
+  product decision; no additional prototype, production, contract, or A2 work
+  is available.

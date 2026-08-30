@@ -1,11 +1,12 @@
 # Plan: Standards Engine A1c Product Contract And Architecture Discovery
 
-**Plan status:** `Planned`
+**Plan status:** `Blocked`
 
-**Current phase:** Bounded architecture experiments before composition selection
+**Current phase:** Bounded architecture experiments blocked on snapshot catalog scope
 
-**Next slice:** Implement the admitted snapshot-aggregate prototype and record
-the experiment results without modifying production runtime or A2 authority
+**Next slice:** Decide whether one snapshot store is deployment-scoped or shared
+across projects; no additional prototype or production work is available until
+that product boundary is explicit
 
 **Acceptance status:** `pending`
 
@@ -279,18 +280,18 @@ validator, migration utility, or compatibility reader.
 
 **Tasks:**
 
-- [ ] Model content-addressed canonical content and opaque independently
-  retained snapshot roots over one in-memory SQLite database.
-- [ ] Exercise two equal-content roots with independent children, quarantine,
+- [x] Model content-addressed canonical content and opaque independently
+  retained snapshot roots over a disposable temporary SQLite database.
+- [x] Exercise two equal-content roots with independent children, quarantine,
   undelete, expiry, transactional purge, and shared-content retention.
-- [ ] Exercise active and lifecycle discovery, cold reopen, current-canonical
+- [x] Exercise active and lifecycle discovery, cold reopen, current-canonical
   capture with no caller revision, and ordinary-operation quarantine refusal.
-- [ ] Compare one tagged snapshot-management operation with explicit
+- [x] Compare one tagged snapshot-management operation with explicit
   create/find/delete/undelete methods over the same internal Snapshot Module.
-- [ ] Compare aggregate-derived child inspection with A1b's independently
+- [x] Compare aggregate-derived child inspection with A1b's independently
   durable child-object mechanism through deletion and representative Locality
   probes.
-- [ ] Record the required summary fields, unresolved tombstone/expired-handle
+- [x] Record the required summary fields, unresolved tombstone/expired-handle
   behavior, authorization seam, platform limits, and every omitted production
   concern instead of silently treating the prototype as complete.
 - [ ] Complete the composed-design probe for every candidate retained after
@@ -316,7 +317,7 @@ failure ownership for each retained concern; generated freshness, focused
 planning suites, the complete declarative/checker checkpoint, and diff hygiene
 pass.
 
-**Status:** `Planned`
+**Status:** `Blocked`
 
 ## Blockers
 
@@ -331,6 +332,8 @@ bounded Milestone 0 discovery work unavailable.
   blocker to the bounded design experiments.
 - A1C-003 through A1C-005 and A1C-007 block composition selection, not the
   Milestone 1 experiments that are intended to resolve them.
+- A1C-011 blocks completion of A1C-E1, A1C-E4, the composed-design probe, and
+  public Interface selection until snapshot catalog scope is explicit.
 - A1c runtime mutation and all A2 work remain unavailable throughout Milestone
   1 regardless of experiment results.
 
@@ -357,4 +360,4 @@ bounded Milestone 0 discovery work unavailable.
 
 - Acceptance status: `pending`
 - Deferred follow-ups: `A1c implementation and A2 remain unauthorized`
-- Final status: `Planned`
+- Final status: `Blocked`

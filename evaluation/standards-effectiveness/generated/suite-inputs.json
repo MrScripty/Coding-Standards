@@ -24892,7 +24892,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:87ce6b28b1d88202e9c3991de7a233960701759eddad6b11a5e94e8d88bb6b7a",
+    "digest": "sha256:c83f58e65e30ec98991196644d975e9c860555e45bb5db0565154cfa3b406c90",
     "uses": [
       {
         "check": "policy-impact-migration",
