@@ -21,18 +21,13 @@
 - Keep internal modules internal. Do not create a public compatibility burden
   solely to ease tests or wiring.
 
-## Interface Depth And Seams
+## Composed-Design Projection
 
-A library Module should provide Leverage through a coherent Interface while
-hiding representation, dependency, lifecycle, ordering, and policy knowledge
-that callers do not own. Evaluate Depth and Locality from real caller knowledge
-and representative changes, not from public-symbol, file, or method counts.
-
-A hypothetical Adapter may probe a Seam's shape but does not justify exporting
-it. Keep internal and test Seams private unless permanent generality has a
-current independent reason, such as materially distinct real implementations,
-a separately owned public contract, a trust, deployment, or lifecycle boundary,
-or an enforceable invariant.
+For a library, caller knowledge includes every exported contract, ordering
+constraint, error mode, configuration fact, and compatibility promise. Evaluate
+public Interface Depth against real call sites and representative library
+changes. Keep internal and test Seams private unless callers need the variation
+as part of the library's supported Interface.
 
 ## Consumer And Compatibility Conditions
 

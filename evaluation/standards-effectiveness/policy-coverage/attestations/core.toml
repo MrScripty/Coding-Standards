@@ -2,7 +2,7 @@ schema_version = 4
 
 [[attestations]]
 subject = "core.simplicity-and-complection"
-semantic_revision = 1
+semantic_revision = 2
 horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
 horizon_version = 5
 relationship_kind_contract_version = 2
@@ -13,5 +13,5 @@ evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact core.simplicity-and-complection provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. Its ten reviewed consumers and enforcement owner are complete; no unreviewed or blocked consumer remains."
+rationale = "The exact core.simplicity-and-complection provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. Its four reviewed relationships are complete, and six redundant bypass relationships were retracted in favor of the actual Architecture and lifecycle owners; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

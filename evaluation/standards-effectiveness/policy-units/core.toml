@@ -4,4 +4,4 @@ schema_version = 1
 id = "core.simplicity-and-complection"
 module = "core"
 heading_path = ["Simplicity And Ownership", "Simple, Easy, And Complection"]
-semantic_revision = 1
+semantic_revision = 2

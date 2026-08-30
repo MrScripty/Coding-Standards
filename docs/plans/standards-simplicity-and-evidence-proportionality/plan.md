@@ -350,10 +350,12 @@ planned final disposition, `--state transition --check` passes after
 regeneration, and the general standards make no A1c choice.
 
 **Acceptance:** [Milestone 1 evidence](reports/milestone-1-composed-simplicity-acceptance.md)
-records the accepted normative meaning, fixtures, 49-unit/413-relationship
+records the accepted normative meaning, fixtures, 49-unit/407-relationship
 closure, full current provider-v5 coverage renewal, current-plan migration,
 generated-input and checker-evidence refreshes, closed migration renewal, and
-transition visualization. The change introduces no A1c decision or A1/A1b
+transition visualization. The ownership-locality refinement keeps Core to
+definitions, Architecture to admission, and downstream standards and prompts
+to their local consequences. The change introduces no A1c decision or A1/A1b
 runtime mechanism.
 
 **Status:** `Accepted`

@@ -17,7 +17,7 @@ evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.acceptance-claims provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.verification.acceptance-claims provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -37,7 +37,7 @@ evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.differential-evidence provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.verification.differential-evidence provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -57,7 +57,7 @@ evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.evidence-oracle-boundary provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.verification.evidence-oracle-boundary provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
 [[attestations]]
@@ -77,5 +77,5 @@ evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.verification.negative-fixture-isolation provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 413-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact workflow.verification.negative-fixture-isolation provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

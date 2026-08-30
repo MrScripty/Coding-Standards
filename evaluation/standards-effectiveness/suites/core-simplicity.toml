@@ -1,7 +1,7 @@
 schema_version = 1
 id = "core-simplicity"
 owner = "core.simplicity-and-complection"
-description = "Artifact-level simplicity from independent concerns, Interface knowledge, composition, representative-change Locality, independent evolution, and deletion without ease, reliability, or cardinality proxies."
+description = "Core simplicity definitions and Architecture-owned composed-design admission without ease, reliability, or cardinality proxies."
 
 [[checks]]
 id = "decisions"
@@ -64,11 +64,11 @@ required = [
   "### Simple, Easy, And Complection",
   "**simple** describes an artifact whose distinct concerns\nare not interleaved",
   "**Easy** describes an approach that is familiar",
-  "Composition, decomposition, a\nnamed owner, or a new Seam is not by itself evidence of simplicity",
-  "composition root or forces them through every change remains complected",
-  "their success does not\nestablish that the design is simple",
+  "To **compose** is only to place concerns together",
+  "Simplicity evidence asks whether independent concerns can be understood and\nchanged independently",
+  "Counts may locate accumulated cost but cannot decide simplicity",
 ]
-prohibited = []
+prohibited = ["composition root", "Tests, types, schemas"]
 
 [[checks]]
 id = "architecture-owner"
@@ -89,8 +89,8 @@ prohibited = []
 id = "workflow-projections"
 type = "text"
 path = "workflows/implementation.md"
-required = ["## Composed-Design Fidelity", "representative change that reaches materially more\nowners", "Stop and re-plan"]
-prohibited = []
+required = ["## Composed-Design Fidelity", "contradicts the recorded admission", "Stop and re-plan"]
+prohibited = ["another Adapter, registry, validator"]
 
 [[checks]]
 id = "planning-projection"
@@ -110,36 +110,36 @@ prohibited = []
 id = "library-projection"
 type = "text"
 path = "profiles/applications/library.md"
-required = ["## Interface Depth And Seams", "A library Module should provide Leverage", "A hypothetical Adapter may probe a Seam's shape"]
-prohibited = []
+required = ["## Composed-Design Projection", "caller knowledge includes every exported contract", "Keep internal and test Seams private"]
+prohibited = ["A hypothetical Adapter", "materially distinct real implementations"]
 
 [[checks]]
 id = "generated-contract-projection"
 type = "text"
 path = "profiles/boundaries/generated-contract.md"
-required = ["## Composed-Design Projection", "Generation may make authoring easy without making the produced artifact simple", "automating\ntheir coordinated propagation is not the same result"]
+required = ["## Composed-Design Projection", "Generation may make authoring easy without making the produced artifact simple", "Automating their coordinated propagation does not prove\nthat they can change independently"]
 prohibited = []
 
 [[checks]]
 id = "prompt-projections"
 type = "text"
 path = "prompts/planning.md"
-required = ["Record composed-design review as `applicable` or `not-applicable`", "A hypothetical Adapter may probe a Seam"]
-prohibited = []
+required = ["Record composed-design review as `applicable` or `not-applicable`", "use the\n    Architecture admission", "Re-run the applicable admission"]
+prohibited = ["caller and composition-root knowledge", "A hypothetical Adapter"]
 
 [[checks]]
 id = "implementation-prompt-projection"
 type = "text"
 path = "prompts/implement-plan.md"
-required = ["Preserve the admitted composed design", "Do not treat passing\ncorrectness evidence as a simplicity verdict"]
-prohibited = []
+required = ["Preserve the plan's admitted composed design", "Follow Implementation's re-plan\nrule"]
+prohibited = ["representative change Locality", "Do not treat passing"]
 
 [[checks]]
 id = "full-review-prompt-projection"
 type = "text"
 path = "prompts/full-codebase-standards-refactor.md"
-required = ["review the\nproduced artifact after its Modules are composed", "Treat a hypothetical Adapter only as a Seam-shape probe"]
-prohibited = []
+required = ["evaluate the\nproduced artifact through the Architecture admission", "record the result\nthrough Planning"]
+prohibited = ["caller and composition-root", "Treat a hypothetical Adapter"]
 
 [[checks]]
 id = "template-projection"

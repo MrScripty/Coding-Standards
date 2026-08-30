@@ -40,13 +40,11 @@ Create or revise an implementation plan. Do not implement source changes.
     compatibility promise; file, schema, generator, build, or release
     co-location is not that proof.
 16. Record composed-design review as `applicable` or `not-applicable` for every
-    nonterminal written plan. When applicable, inspect the produced artifact,
-    caller and composition-root knowledge, representative change Locality,
-    Interface Depth, independent evolution, necessary complexity, cumulative
-    machinery, and deletion results. When not applicable, record why.
-17. A hypothetical Adapter may probe a Seam but cannot justify permanent
-    generality. Require a current independent reason, and re-run the artifact
-    probe after a material replacement rather than inheriting the prior result.
+    nonterminal written plan. Follow Planning's record requirements and use the
+    Architecture admission when the review applies; otherwise record the
+    concrete reason it does not apply.
+17. Re-run the applicable admission after a material replacement rather than
+    inheriting the prior result.
 
 Stop for clarification when authoritative facts cannot support a valid plan.
 Do not add fallback or compatibility behavior without an actual routed contract.

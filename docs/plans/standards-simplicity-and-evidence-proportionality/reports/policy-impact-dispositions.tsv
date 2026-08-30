@@ -68,13 +68,7 @@ N5-P	N5	workflow.planning.systemic-finding-replan	systemic-finding-replanning	en
 N5-P	N5	workflow.planning.systemic-finding-replan	templates/PLAN-TEMPLATE.md	template-projection	update	yes	The systemic audit records its reachable population, stop condition, and simplification result.
 P1-P	P1	workflow.planning.projection-completeness	policy-semantic-impact	enforcement-suite-projection	reviewed-no-change	no	The current suite remains applicable because Projection Completeness stays at revision 1; dependency-local coverage implementation is a separately owned code-design follow-up.
 N1-C	N1	core.simplicity-and-complection	topic.architecture	normative-consumer	add	yes	Architecture specializes artifact-level simplicity and post-boundary composition.
-N1-C	N1	core.simplicity-and-complection	workflow.planning	normative-consumer	add	yes	Planning records applicability, artifact probes, and cumulative admission.
-N1-C	N1	core.simplicity-and-complection	workflow.implementation	normative-consumer	add	yes	Implementation preserves the admitted composition and reports wider propagation.
 N1-C	N1	core.simplicity-and-complection	workflow.verification	normative-consumer	add	yes	Verification distinguishes correctness evidence from simplicity evidence.
-N1-C	N1	core.simplicity-and-complection	prompts/planning.md	prompt-projection	add	yes	Planning prompt projects the composed-artifact review.
-N1-C	N1	core.simplicity-and-complection	prompts/implement-plan.md	prompt-projection	add	yes	Implementation prompt rechecks predicted versus observed change Locality.
-N1-C	N1	core.simplicity-and-complection	prompts/full-codebase-standards-refactor.md	prompt-projection	add	yes	Full review must evaluate composition rather than construct counts.
-N1-C	N1	core.simplicity-and-complection	templates/PLAN-TEMPLATE.md	template-projection	add	yes	Template records applicability and the general artifact probe.
 N1-C	N1	core.simplicity-and-complection	evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv	fixture-projection	add	yes	Fixture becomes the executable post-boundary composition model.
 N1-C	N1	core.simplicity-and-complection	core-simplicity	enforcement-suite-projection	add	yes	Existing suite enforces the first-class Core unit.
 N1-A	N1	topic.architecture.composed-design-admission	profile.application.library	normative-consumer	add	yes	Library Interfaces are admitted from Depth, caller knowledge, and demonstrated variants.

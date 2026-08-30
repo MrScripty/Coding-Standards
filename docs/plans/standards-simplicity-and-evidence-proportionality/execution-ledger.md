@@ -168,3 +168,30 @@
 - Corrected the two active-owner migration-ledger heading levels. These repairs
   change neither the 49-unit/413-relationship policy graph nor A1/A1b runtime,
   A1c, or verifier Python source.
+
+## 2026-08-29 — Milestone 1 ownership-locality refinement
+
+- A post-acceptance standards-isolation review found that Core owned both the
+  project-agnostic simplicity definition and part of Architecture's operational
+  admission, while six Core graph edges bypassed the actual Architecture or
+  lifecycle owner.
+- Revised `core.simplicity-and-complection` to revision 2. Core now defines
+  simple, easy, complected, compose, and deciding evidence; Architecture alone
+  owns the eight-part composed-design admission.
+- Narrowed Planning and Implementation prompts, the full-review prompt,
+  Implementation workflow, and Library and Generated Contract profiles to
+  their owner-local record, lifecycle, or context consequences.
+- Retracted the redundant Core relationships to Planning, Implementation,
+  three prompts, and the plan template. Their Architecture and lifecycle edges
+  remain authoritative. The graph is now 49 units and 407 relationships: 20
+  additions and eight in-place semantic updates against the fixed 47/387
+  baseline.
+- Added no written enforcement requirement, new harness, suite, fixture,
+  verifier framework, A1/A1b runtime behavior, or A1c design decision.
+- `core-simplicity`, `planning-consolidation`, `plan-template-projection`, and
+  the closed `a1b-public-cutover` compatibility suite passed. Policy-impact,
+  neutral graph, and analysis tests passed 9, 37, and 66 cases respectively.
+- The complete checkpoint passed all 226 declarative suites and all 53 retained
+  Bash checkers. Generated checker evidence remains 53 checkers, 57 nodes, 387
+  conservative reference edges, and 57 components; the transition
+  visualization and plan fixtures are current.

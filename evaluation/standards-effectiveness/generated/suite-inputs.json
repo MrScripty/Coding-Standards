@@ -422,7 +422,7 @@
       ]
     },
     {
-      "digest": "sha256:df936dc1db6ba93d36678d0555fd7e1f14e3373418077d8cc0a3d714a6e3fb95",
+      "digest": "sha256:c88411444199e5f2e174c981d5019fcd83afec170d58261204ddb2d32eb2c779",
       "path": "CORE-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -4787,7 +4787,7 @@
       ]
     },
     {
-      "digest": "sha256:9be16ae34dbf47026e0bf3f7f8c0a3d34dcc40664d66c8366f7825801a72d629",
+      "digest": "sha256:b58784c26c84efca23f8b13e6f3c102e9673d705f3b8dde9c1453a7ccb7466d3",
       "path": "evaluation/standards-effectiveness/fixtures/policy-impact/a1b/relationship-migration.tsv",
       "state": "present",
       "uses": [
@@ -8377,7 +8377,7 @@
       ]
     },
     {
-      "digest": "sha256:a95f268ad0f3979da9ea9fc20c5150d311eae141828b0070caceb5297dcd00a0",
+      "digest": "sha256:614f52bdb8c83ff9021fdf7c5574bf80c1b7ab86a0781bcd17bcca6558f80b5d",
       "path": "evaluation/standards-effectiveness/policy-impact/core.toml",
       "state": "present",
       "uses": [
@@ -8645,7 +8645,7 @@
       ]
     },
     {
-      "digest": "sha256:94729127724bda8217739315a35fbe46f918fcd5986f3820a9aafdf258ec10db",
+      "digest": "sha256:c694c4547838d679e4577892f776a8ee18277ea91b989059451f5fbc3af569b5",
       "path": "evaluation/standards-effectiveness/policy-units/core.toml",
       "state": "present",
       "uses": [
@@ -9600,7 +9600,7 @@
       ]
     },
     {
-      "digest": "sha256:a3721e760976390879a21ba37496b69d247849226f8f552b6b791a1c848ea2c1",
+      "digest": "sha256:39d4198a226e1cd3ee2d70eea4113860f48388b130776048ff9d56f722d54dfa",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml",
       "state": "present",
       "uses": [
@@ -14732,7 +14732,7 @@
       ]
     },
     {
-      "digest": "sha256:1ad11180b53b1e0c46f33c24d9cc6475aa5613066713a82640ea4a7c9ad8a9cd",
+      "digest": "sha256:ae605d474a922b213257916824344dadadf505aee9c585e055198208f7b8e834",
       "path": "profiles/applications/library.md",
       "state": "present",
       "uses": [
@@ -14814,7 +14814,7 @@
       ]
     },
     {
-      "digest": "sha256:270482e78e7414f3e01afa1c9f8ec9d101e4224f73e4add2b6bd28de2b95e1b8",
+      "digest": "sha256:33b87946765bdf7e232d8351349a449298d39013635c1dd2ab7af7f129b1265b",
       "path": "profiles/boundaries/generated-contract.md",
       "state": "present",
       "uses": [
@@ -16886,7 +16886,7 @@
       ]
     },
     {
-      "digest": "sha256:5d1868321a674d081fae9e3ba68ce54e467eb4918bd1127629f28dc637af28c1",
+      "digest": "sha256:df535110fd7979b20ecb0aaa2ce0b09a40fbaec93d1c14bbdfc36c39cf02218a",
       "path": "prompts/full-codebase-standards-refactor.md",
       "state": "present",
       "uses": [
@@ -16928,7 +16928,7 @@
       ]
     },
     {
-      "digest": "sha256:bcd4cf46be381477d84adc2a8ca0cfaee58cce209a61fbe39274145a97e362b5",
+      "digest": "sha256:1dcef5c030c859c6e4ac237822a516ce6b8f85e787667aa75eb431e6c6f73d06",
       "path": "prompts/implement-plan.md",
       "state": "present",
       "uses": [
@@ -16995,7 +16995,7 @@
       ]
     },
     {
-      "digest": "sha256:cb4ce31ee5394b552d014581360901096e6432f32c89d6542e5704e9f550cf1a",
+      "digest": "sha256:1cac2355257d534f99213ca37c08448ad7483066d0752653e14477fdc3d11af8",
       "path": "prompts/planning.md",
       "state": "present",
       "uses": [
@@ -23947,7 +23947,7 @@
       ]
     },
     {
-      "digest": "sha256:c0a6b27116a72790286e76138b80ea18625ad78db33570b96aeb4a154251b20f",
+      "digest": "sha256:df92415045cb0a7b038ab2f19bf27f18735dbc53b73591f5cceea102b659a6fb",
       "path": "workflows/implementation.md",
       "state": "present",
       "uses": [
@@ -25299,7 +25299,7 @@
       "path": "evaluation/standards-effectiveness/suites/core-code-discipline.toml"
     },
     {
-      "digest": "sha256:a3721e760976390879a21ba37496b69d247849226f8f552b6b791a1c848ea2c1",
+      "digest": "sha256:39d4198a226e1cd3ee2d70eea4113860f48388b130776048ff9d56f722d54dfa",
       "id": "core-simplicity",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml"
     },

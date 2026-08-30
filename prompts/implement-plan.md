@@ -36,12 +36,9 @@ generated artifact may reference independently owned semantics but does not
 acquire them; a co-located schema, generator, build, or release does not justify
 an umbrella version or unrelated identity invalidation.
 
-Preserve the admitted composed design when its review is applicable. Compare
-observed caller knowledge and representative change Locality with the plan; stop
-and re-plan when implementation exposes hidden coupling, a shallower Interface,
-wider forced propagation, lost independent evolution, or machinery whose
-deletion would remove rather than relocate complexity. Do not treat passing
-correctness evidence as a simplicity verdict.
+Preserve the plan's admitted composed design. Follow Implementation's re-plan
+rule when observed composition contradicts that admission; do not layer another
+mechanism merely to preserve the prior acceptance result.
 
 Stop and re-plan when implementation exposes a repeated invariant failure,
 another affected producer or consumer, an unreviewed generated-contract

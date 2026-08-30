@@ -1,5 +1,5 @@
 change_id	action	policy_unit	module	heading	current_revision	planned_revision	family	rationale
-N1-C	add	core.simplicity-and-complection	core	Simplicity And Ownership / Simple, Easy, And Complection	-	1	N1	Make the new nested Core definitions and composition test a first-class graph owner without absorbing pre-existing Simplicity And Ownership prose.
+N1-C	add	core.simplicity-and-complection	core	Simplicity And Ownership / Simple, Easy, And Complection	-	2	N1	Make the new nested Core definitions a first-class graph owner without absorbing Architecture's composed-design admission or pre-existing Simplicity And Ownership prose.
 N1-A	add	topic.architecture.composed-design-admission	topic.architecture	Composed Design Admission	-	1	N1	Own artifact, post-boundary composition, representative-change, Depth, Locality, cumulative machinery, and deletion admission.
 N2-V	add	workflow.verification.evidence-necessity-and-risk	workflow.verification	Evidence Necessity And Scoped Risk	-	1	N2	Own necessity, risk, marginal value, exact-byte purpose, overlap, cost, and evidence lifecycle.
 N3-P	add	topic.contracts.validation-proof-lifetime	topic.contracts	Validation Proof Lifetime	-	1	N3	Register and refine the existing proof-lifetime owner.

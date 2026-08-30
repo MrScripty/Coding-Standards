@@ -62,12 +62,10 @@ relevant findings with severity, evidence, owner, and disposition.
 ## Composed-Design Fidelity
 
 When the plan's composed-design review is applicable, preserve its admitted
-Interface knowledge, Locality, independent change axes, and deletion results.
-Report hidden coupling or a representative change that reaches materially more
-owners, versions, mechanisms, or verification surfaces than the plan predicted.
-Stop and re-plan when that evidence changes the admitted composition; do not
-normalize the wider path by adding another Adapter, registry, validator, or
-check without a current independent reason.
+composition. Report observed caller knowledge, change propagation, or retained
+machinery that contradicts the recorded admission. Stop and re-plan when that
+evidence changes the admitted composition; do not change the composition merely
+to preserve the prior acceptance result.
 
 ## Editing
 

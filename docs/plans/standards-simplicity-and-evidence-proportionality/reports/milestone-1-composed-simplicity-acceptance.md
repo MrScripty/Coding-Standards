@@ -24,11 +24,12 @@ shape. Permanent generality still requires a current independent reason.
 
 ## Normative And Projection Closure
 
-The accepted policy graph contains 49 policy units and 413 direct
+The accepted policy graph contains 49 policy units and 407 direct
 relationships, compared with the fixed 47-unit, 387-relationship baseline.
 The reviewed N1 manifest is the relationship authority:
 
-- `core.simplicity-and-complection` revision 1 adds 10 relationships;
+- `core.simplicity-and-complection` revision 2 adds four relationships: its
+  Architecture and Verification consumers plus its fixture and suite;
 - `topic.architecture.composed-design-admission` revision 1 adds 13
   relationships, including the separately reviewed plan-template fixture and
   suite projections;
@@ -41,6 +42,16 @@ The reviewed N1 manifest is the relationship authority:
 The Core and Architecture decision family reuses `core-simplicity`; the plan
 projection reuses `planning-consolidation` and `plan-template-projection`.
 There is no new verifier framework or A1/A1b runtime mechanism.
+
+The revision-2 ownership refinement removes six redundant Core bypasses to
+Planning, Implementation, three prompts, and the plan template. Those
+consumers remain connected to Architecture or their lifecycle owner, which
+owns the semantics they actually project. Core defines simple, easy,
+complected, compose, and the kind of evidence that can decide simplicity;
+Architecture owns the operational admission. Downstream standards state only
+their local record, lifecycle, or context consequence. This keeps relationship
+knowledge in the graph instead of spreading another standard's procedure
+through unrelated prose.
 
 The plan probe retains the previously registered canonical-authority and
 version/invalidation prompts beneath its state/identity dimension. The closed
@@ -101,7 +112,7 @@ loading passed. Generated evidence is current at 53 retained Bash checkers, 57
 nodes, 387 conservative reference edges, and 57 components. The transition
 visualization reconstructs the fixed 47-unit/387-relationship baseline and
 matches the reviewed full plan while displaying the current M1 graph at 49
-units and 413 relationships.
+units and 407 relationships.
 
 Post-acceptance freshness, plan structure, local Markdown targets, inline
 JavaScript syntax, Python lint/compilation, and diff hygiene close the recorded
