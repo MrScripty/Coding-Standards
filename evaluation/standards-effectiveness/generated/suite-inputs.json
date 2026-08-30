@@ -3335,7 +3335,7 @@
       ]
     },
     {
-      "digest": "sha256:763c9bd43a87bd3f2781dfe9515fac79fda996d54750e26a64936b085227b1c2",
+      "digest": "sha256:ff012eeb5eb60601f453d6c1c03e7223b4eb09d73df976ea755d288d5a244b47",
       "path": "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv",
       "state": "present",
       "uses": [
@@ -3343,6 +3343,11 @@
           "check": "policy-impact-migration",
           "role": "proposed-policy-impact",
           "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "immutable-authority-closure-decisions",
+          "role": "decision-table",
+          "suite": "contract-authority-scope"
         },
         {
           "check": "current-structure",
@@ -3725,7 +3730,7 @@
       ]
     },
     {
-      "digest": "sha256:becbe1d001a986837360f69bb1ac920c71fa7643e10c6e9989d359974da8a495",
+      "digest": "sha256:05064be2749f8e78a10645d3491997c5eb60c45d6f57efee330909431c9c9a68",
       "path": "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv",
       "state": "present",
       "uses": [
@@ -4694,7 +4699,7 @@
       ]
     },
     {
-      "digest": "sha256:51c83d7494cbb655578f55808109d53cbce5f47119c0c858425591cc3f1634c7",
+      "digest": "sha256:8d8405dae5d9486a6eace2083aeb1894a1d227633c8064294dc8e7ea02d79784",
       "path": "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md",
       "state": "present",
       "uses": [
@@ -4716,7 +4721,7 @@
       ]
     },
     {
-      "digest": "sha256:d9306194939934501b3ce050f6685b55db3b1a7eb02128e2fbc52b4cf4034172",
+      "digest": "sha256:3a4a3cabd8a99cac345cff8b7be82925887875f508e13a9ea55f848b20a79362",
       "path": "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv",
       "state": "present",
       "uses": [
@@ -4804,7 +4809,7 @@
       ]
     },
     {
-      "digest": "sha256:db014e38765392247ac9164db242fab2fe2b63fcaa7713444564c94bae012bcc",
+      "digest": "sha256:5a54a910d4fe8849c881eee3487db90aa9d8b58ac54ce1427cefe169354304b2",
       "path": "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv",
       "state": "present",
       "uses": [
@@ -8467,7 +8472,7 @@
       ]
     },
     {
-      "digest": "sha256:d30adbe853aca1333a74d0c5b5b69cb18704a072bce2d0cb293fd07d5a3909a6",
+      "digest": "sha256:97831108ef884c8a12660ba4a655fdbfa974b5e7fc3f8c67b902dcbdec4117f7",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
       "state": "present",
       "uses": [
@@ -8569,7 +8574,7 @@
       ]
     },
     {
-      "digest": "sha256:68c64f79ece9f67d515fba56746b5fe6cb258b405b681216023b090c5a77a12f",
+      "digest": "sha256:a396d1bfaabea81ebd193f4238530f8c7c313533ea5b4d9e7078724d7f3b90e5",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
       "state": "present",
       "uses": [
@@ -8603,7 +8608,7 @@
       ]
     },
     {
-      "digest": "sha256:441d51dde2adc89e5514e4842eb90ddea1f98725886a799d3c2c4aecccbcd5a8",
+      "digest": "sha256:1d15577e271682cc750eb08582a7b19721af3030fabb8d913fc540e0b5c174d2",
       "path": "evaluation/standards-effectiveness/policy-units/architecture.toml",
       "state": "present",
       "uses": [
@@ -8657,7 +8662,7 @@
       ]
     },
     {
-      "digest": "sha256:c076b6a619a2db6a6d11a5e500038448ca104d84bccac5508384a2c85e4024b9",
+      "digest": "sha256:0c059e57a2fd62d76bee6a3d68bf892be95617e369f6d3ac70544818317dcc79",
       "path": "evaluation/standards-effectiveness/policy-units/contracts.toml",
       "state": "present",
       "uses": [
@@ -8797,7 +8802,7 @@
       ]
     },
     {
-      "digest": "sha256:041f16df38f2c5398f8866eff325513d0ad3398598d385032f8b9f546a294d6a",
+      "digest": "sha256:ccf956038bb9f2b71907181ded228391757b22ebafc2768334e851790c5bb693",
       "path": "evaluation/standards-effectiveness/policy-units/planning.toml",
       "state": "present",
       "uses": [
@@ -9503,7 +9508,7 @@
       ]
     },
     {
-      "digest": "sha256:981a7c1af14af70ce35046386bf5b86b2ef7e48b1412fa0069088c8a87e1c318",
+      "digest": "sha256:23a18000ce0b1b5311ea5ec20ac3eeb5b98957fa1ff6b0ad0eca101dce88d807",
       "path": "evaluation/standards-effectiveness/suites/contract-authority-scope.toml",
       "state": "present",
       "uses": [
@@ -12342,7 +12347,7 @@
       ]
     },
     {
-      "digest": "sha256:7a8a23892113a15a8ef09ef88e29439c7429ef4950c59cbc47634e56e608a8e7",
+      "digest": "sha256:02f8b70517a052f7766110f96e6825081f4465e339ed6fadb46459d43b0b8163",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml",
       "state": "present",
       "uses": [
@@ -22392,7 +22397,7 @@
       ]
     },
     {
-      "digest": "sha256:f29e8735858bcc33bb7fef4dad7bc14601b807b316b26690ca5696001409bdbb",
+      "digest": "sha256:fb5b416758e9a325e6557f332c83a71a684731e1f3dc510609b9210d62b9f94f",
       "path": "topics/architecture.md",
       "state": "present",
       "uses": [
@@ -22631,7 +22636,7 @@
       ]
     },
     {
-      "digest": "sha256:5a409375914deddf5d24abc3c0ab6b0344178c5d2430bedf283230e8188f0a09",
+      "digest": "sha256:a2553b9194802c19c5478b35c31d4a83165105235c088231e345e01ca90fbd3f",
       "path": "topics/contracts.md",
       "state": "present",
       "uses": [
@@ -24025,7 +24030,7 @@
       ]
     },
     {
-      "digest": "sha256:64fe02a58189705f522e7f1b22b05f6995ea36dcb8653242d082f23c26ac6949",
+      "digest": "sha256:dc03e458da467b32718f01257185b824b1d86ed7ff3dd637d8e77c7259d44b5c",
       "path": "workflows/planning.md",
       "state": "present",
       "uses": [
@@ -24848,7 +24853,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:3eaf6affa7e1ff3adb772c27b3e936a706a8254d8a1fd883d2c74bd2f5c62760",
+    "digest": "sha256:3062dcf597f4d905590f72cd83e8d613416c4e58c7aa42093309e8c1230f595d",
     "uses": [
       {
         "check": "policy-impact-migration",
@@ -25360,7 +25365,7 @@
       "path": "evaluation/standards-effectiveness/suites/contract-semantic-preservation.toml"
     },
     {
-      "digest": "sha256:981a7c1af14af70ce35046386bf5b86b2ef7e48b1412fa0069088c8a87e1c318",
+      "digest": "sha256:23a18000ce0b1b5311ea5ec20ac3eeb5b98957fa1ff6b0ad0eca101dce88d807",
       "id": "contract-authority-scope",
       "path": "evaluation/standards-effectiveness/suites/contract-authority-scope.toml"
     },
@@ -26010,7 +26015,7 @@
       "path": "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml"
     },
     {
-      "digest": "sha256:7a8a23892113a15a8ef09ef88e29439c7429ef4950c59cbc47634e56e608a8e7",
+      "digest": "sha256:02f8b70517a052f7766110f96e6825081f4465e339ed6fadb46459d43b0b8163",
       "id": "systemic-finding-replanning",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml"
     }

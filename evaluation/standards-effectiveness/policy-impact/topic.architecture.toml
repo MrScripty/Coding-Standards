@@ -190,8 +190,48 @@ source = "topic.architecture.immutable-authority-closure"
 consumer = "profile.boundary.persistence"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
+evidence_owner = "suite:contract-authority-scope"
 rationale = "Persistence owns durable reopening of immutable authority and analysis state."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "topic.contracts"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Contracts owns handle representation, version roles, identity effects, and proof lifetime for the admitted closure."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "topic.security"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Security owns the trust consequences of captured authorization and rejects ambient authority at a new boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "topic.resilience"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Resilience owns selected cold reconstruction and recovery behavior when the advertised lifetime crosses a failure boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Verification owns evidence that the advertised lifetime and reconstruction path reproduce the selected result semantics."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Generated Contract consumes reachable semantic closure and reconstruction promises without requiring one artifact per concern."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
@@ -230,8 +270,16 @@ source = "topic.architecture.immutable-authority-closure"
 consumer = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Fixture covers immutable reads, cold reconstruction, authority closure, and ambient-state rejection."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture covers promise-bounded in-process use, cold reconstruction, aggregate closure, justified separation, and ambient-state rejection."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "contract-authority-scope"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The existing authority and version-scope suite supplies project-agnostic closure admission evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"

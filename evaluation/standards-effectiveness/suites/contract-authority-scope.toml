@@ -44,6 +44,59 @@ all = [
 ]
 
 [[checks]]
+id = "immutable-authority-closure-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+capture = ["exact"]
+closure = ["complete", "incomplete"]
+store = ["memory-only", "persistent", "unavailable"]
+process = ["fresh", "same"]
+post_capture_mutation = ["isolated", "visible"]
+authorization_view = ["ambient", "immutable"]
+provider_view = ["ambient", "immutable"]
+promise = ["cold-replay", "in-process", "unknown"]
+separate_artifacts = ["optional", "required", "unknown"]
+separation_basis = ["independent-promise", "none", "unknown"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "closure", op = "eq", value = "incomplete" },
+  { field = "promise", op = "eq", value = "unknown" },
+  { field = "separate_artifacts", op = "eq", value = "unknown" },
+  { field = "separation_basis", op = "eq", value = "unknown" },
+  { all = [
+    { field = "promise", op = "eq", value = "cold-replay" },
+    { field = "store", op = "eq", value = "unavailable" },
+  ] },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "post_capture_mutation", op = "eq", value = "visible" },
+  { field = "authorization_view", op = "eq", value = "ambient" },
+  { field = "provider_view", op = "eq", value = "ambient" },
+  { all = [
+    { field = "promise", op = "eq", value = "cold-replay" },
+    { field = "store", op = "ne", value = "persistent" },
+  ] },
+  { all = [
+    { field = "promise", op = "eq", value = "cold-replay" },
+    { field = "process", op = "ne", value = "fresh" },
+  ] },
+  { all = [
+    { field = "separate_artifacts", op = "eq", value = "required" },
+    { field = "separation_basis", op = "eq", value = "none" },
+  ] },
+]
+
+[[checks]]
 id = "declaration-authority-decisions"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv"
@@ -89,6 +142,10 @@ promises = ["coherent", "independent", "one", "unknown"]
 version_scope = ["missing", "separate", "shared", "umbrella"]
 coupling_basis = ["build", "compatibility", "file", "none", "release"]
 identity_effect = ["material", "not-applicable", "unknown", "unrelated"]
+version_role = ["allocation-ordinal", "combined", "compatibility", "current-format", "identity-domain", "migration", "unknown"]
+overlap = ["none", "promised", "unknown"]
+consumer_set = ["actual", "hypothetical", "unknown"]
+matrix = ["absent", "actual-only", "hypothetical", "not-applicable"]
 expected = ["allow", "separate-versions", "typed-invalid", "typed-unavailable"]
 [[checks.rules]]
 outcome = "typed-unavailable"
@@ -97,21 +154,44 @@ any = [
   { field = "promises", op = "eq", value = "unknown" },
   { field = "version_scope", op = "eq", value = "missing" },
   { field = "identity_effect", op = "eq", value = "unknown" },
+  { field = "version_role", op = "eq", value = "unknown" },
+  { field = "overlap", op = "eq", value = "unknown" },
+  { field = "consumer_set", op = "eq", value = "unknown" },
+  { all = [
+    { field = "version_role", op = "eq", value = "compatibility" },
+    { field = "overlap", op = "eq", value = "promised" },
+    { field = "matrix", op = "eq", value = "absent" },
+  ] },
 ]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
-field = "identity_effect"
-op = "eq"
-value = "unrelated"
+any = [
+  { field = "identity_effect", op = "eq", value = "unrelated" },
+  { field = "matrix", op = "eq", value = "hypothetical" },
+  { all = [
+    { field = "version_role", op = "eq", value = "allocation-ordinal" },
+    { field = "coupling_basis", op = "eq", value = "compatibility" },
+  ] },
+  { all = [
+    { field = "consumer_set", op = "eq", value = "hypothetical" },
+    { field = "overlap", op = "eq", value = "promised" },
+  ] },
+]
 [[checks.rules]]
 outcome = "separate-versions"
 [checks.rules.when]
-all = [
-  { field = "version_scope", op = "eq", value = "umbrella" },
-  { any = [
+any = [
+  { all = [
+    { field = "version_scope", op = "eq", value = "umbrella" },
+    { any = [
+      { field = "promises", op = "eq", value = "independent" },
+      { field = "coupling_basis", op = "ne", value = "compatibility" },
+    ] },
+  ] },
+  { all = [
+    { field = "version_role", op = "eq", value = "combined" },
     { field = "promises", op = "eq", value = "independent" },
-    { field = "coupling_basis", op = "ne", value = "compatibility" },
   ] },
 ]
 
@@ -126,6 +206,10 @@ required = [
   "keep their authorities independently",
   "replaceable even if one artifact references",
   "If removing one concern",
+  "supported lifetime, and reconstruction promise",
+  "contract ends with the owning process",
+  "One immutable aggregate may carry the complete admitted closure",
+  "Require independently replaceable records only when",
 ]
 prohibited = []
 
@@ -140,6 +224,13 @@ required = [
   "one coherent compatibility or evolution promise",
   "Representation-only",
   "does not invalidate semantic identity",
+  "a current-format discriminator",
+  "an identity-domain revision",
+  "a compatibility version",
+  "a migration version",
+  "an allocation ordinal",
+  "combinations the selected contract actually promises concurrently",
+  "cross-engine migration, or every pairwise version combination",
 ]
 prohibited = []
 

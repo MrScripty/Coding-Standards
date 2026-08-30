@@ -16,4 +16,4 @@ semantic_revision = 1
 id = "topic.architecture.immutable-authority-closure"
 module = "topic.architecture"
 heading_path = ["Immutable Authority Closure"]
-semantic_revision = 1
+semantic_revision = 2

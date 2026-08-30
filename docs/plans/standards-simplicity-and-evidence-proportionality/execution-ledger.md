@@ -319,3 +319,41 @@
   policy semantic impact, generated-input freshness, and diff hygiene passed.
 - SEP-A3 and SEP-A4 are satisfied. The established-tooling portion of SEP-A6
   is accepted; its systemic-replanning portion remains assigned to Milestone 3.
+
+## 2026-08-30 — Milestone 3 promise and replanning acceptance
+
+- Deepened Immutable Authority Closure, Version Scope And Invalidation, and
+  Systemic-Finding Re-Planning in their existing owners. Added no policy unit,
+  suite, catalog node, prompt procedure, template field, or adopter enforcement
+  mechanism.
+- Assigned generic closure decisions to the existing
+  `contract-authority-scope` suite and removed A1c-specific evidence ownership
+  from the closure fixture and Persistence standards route.
+- Fresh graph inspection found five N4-A routes omitted by the original plan.
+  Added Contracts, Security, Resilience, Verification, and Generated Contract;
+  retained Persistence and all six N4-C routes; added the three N5-P routes.
+  All 15 target standards were reviewed without copied procedure text.
+- Accepted 13 closure cases, 22 version-scope cases, and 19 bounded-replanning
+  cases. The live graph is 51 policy units, 108 standards relationships, and
+  454 complete repository projections.
+- Renewed the frozen A1c-named migration fixture with nine mechanical additions
+  and two corrected fingerprints. This did not inspect or change A1c and did
+  not make application or conformance artifacts standards-impact consumers.
+- Focused owner, policy-impact, and migration suites pass; all 227 declarative
+  suites pass. SEP-A5, the remaining part of SEP-A6, and SEP-A7 are satisfied.
+
+## 2026-08-30 — Integrated graph and standards acceptance
+
+- Re-queried all 12 revised or added policy owners and accepted every
+  standards-to-standards route with a semantic inspection reason. All planned
+  unit and relationship dispositions are final.
+- Regenerated the standalone visualization in accepted state. It reconstructs
+  the fixed 47-unit/62-relationship baseline and validates the live
+  51-unit/108-relationship graph without treating A1c or repository conformance
+  artifacts as standards nodes.
+- All 227 declarative suites and all 53 retained Bash checkers pass. Generated
+  evidence is current at 57 nodes, 387 conservative dependency edges, and 57
+  components; focused graph, plan, link, freshness, and diff checks pass.
+- SEP-A1 through SEP-A9 are satisfied. Repository-specific dependency-local
+  coverage redesign and implementation-projection rationale repairs remain
+  deferred to separately scoped owners.

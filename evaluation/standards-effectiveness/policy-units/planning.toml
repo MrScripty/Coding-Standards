@@ -76,7 +76,7 @@ semantic_revision = 2
 id = "workflow.planning.systemic-finding-replan"
 module = "workflow.planning"
 heading_path = ["Systemic-Finding Re-Planning"]
-semantic_revision = 1
+semantic_revision = 2
 
 [[policy_unit]]
 id = "workflow.planning.findings"

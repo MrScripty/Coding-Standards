@@ -308,14 +308,26 @@ the owning invariant and its consumers are bounded.
 Systemic re-planning must:
 
 1. identify the invariant family and canonical owner;
-2. inventory every implementation, representation, and consumer of that
-   invariant;
-3. inspect sibling operations and equivalent representations for the same
-   defect class;
+2. bound every authority, representation, and reachable consumer whose behavior
+   can violate the class-level claim;
+3. inspect sibling operations and equivalent representations only where they
+   share that authority, reachable failure, or consumer promise;
 4. replace local acceptance examples with a class-level acceptance claim and
    independent evidence appropriate to that claim; and
-5. give every selected consumer a non-blocked disposition before admitting
-   implementation.
+5. give every selected consumer a non-blocked disposition;
+6. consider deletion, consolidation, a smaller Interface, stronger
+   construction or type proof, and replacement of overlapping evidence before
+   adding machinery; and
+7. compare the repaired composition with the original objective and any
+   applicable composed-design admission before implementation resumes.
+
+Expand the bounded population when evidence reveals a new semantic owner,
+reachable consumer, material risk, or public or persistence promise. Finding
+another implementation file inside an already bounded owner does not by itself
+expand the design or restart the search. Stop when the canonical owner and the
+reachable consumer population have evidence-backed dispositions; do not search
+every file, type, test, or historical representation merely because it can be
+enumerated.
 
 Record whether the original finding was isolated or systemic and the evidence
 supporting that classification. An empty impact result is not proof of no

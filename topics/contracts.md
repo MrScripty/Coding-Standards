@@ -89,6 +89,24 @@ version only when they intentionally share that promise; independently
 changing promises require independently scoped versions or an explicit version
 record that preserves their separate identities.
 
+Classify the role before adding or reusing a version-like value:
+
+- a current-format discriminator rejects representations the current decoder
+  does not support, without promising overlap with an older reader;
+- an identity-domain revision changes the semantic identity or invalidation
+  domain selected by its authority;
+- a compatibility version governs producer-consumer combinations supported at
+  the same time;
+- a migration version identifies an admitted source-to-destination transition;
+  and
+- an allocation ordinal supplies uniqueness or ordering inside one authority
+  and is not a compatibility promise.
+
+One value may serve more than one role only when those roles have the same
+authority, consumers, change reasons, and consequences. Similar names,
+monotonic integers, shared storage, or simultaneous updates do not establish
+that equivalence.
+
 A common file, schema, model, package, generator, build, release, deployment,
 or cutover may coordinate changes without creating one version scope. Do not
 use an umbrella version to force unrelated consumers to migrate together or to
@@ -100,6 +118,15 @@ version can materially change the reproduced meaning. Representation-only
 change does not invalidate semantic identity unless the selected contract
 proves that effect. Record that proof rather than coupling every available
 version defensively.
+
+Require a compatibility matrix only for producer, consumer, and persisted-state
+combinations the selected contract actually promises concurrently. An atomic
+coordinated replacement needs a fail-closed current-format decision, not a
+historical compatibility matrix by default. Do not infer retained readers,
+cross-engine migration, or every pairwise version combination from hypothetical
+consumers or from the presence of several version-like fields. Each admitted
+overlap names its owner, evidence, retirement condition, and cumulative support
+cost.
 
 Missing promise, consumer, or invalidation facts are `unavailable`;
 contradictory scopes or identity coupling to an unrelated version are

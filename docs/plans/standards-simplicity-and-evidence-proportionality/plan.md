@@ -1,14 +1,12 @@
 # Plan: Standards Simplicity And Evidence Proportionality
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestones 1 and 2 accepted; Milestone 3 has not started
+**Current phase:** Milestone 5 accepted
 
-**Next slice:** Re-query the standards-to-standards impact graph for the
-Milestone 3 owners and confirm the generic immutable-closure evidence owner
-before any normative edit.
+**Next slice:** `none`
 
-**Acceptance status:** `partial`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -42,11 +40,11 @@ Standards Engine implementation.
 | SEP-A2 | Every nonterminal written plan governed by the revised standard records whether composed-design review applies; applicable material plans contain the required probes, replacement plans cannot silently lose them, and one expanded simplicity suite rejects nominal decomposition whose parts remain interleaved. Historical terminal plans are not rewritten. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](reports/milestone-1-composed-simplicity-acceptance.md) |
 | SEP-A3 | Verification admits permanent evidence, validation, integrity, and hash mechanisms from a reachable failure, material consequence, adequate oracle, proof boundary, marginal value, cost, and retention trigger rather than from possibility or existing machinery alone. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](reports/milestone-2-evidence-and-proof-acceptance.md) |
 | SEP-A4 | Contracts distinguishes external, adversarial, operational, contained-programming, and escaping/corrupting failures; intact proof-bearing values are not revalidated and contained internal defects may use immediate failure and diagnostics when the scoped risk does not require recovery machinery. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](reports/milestone-2-evidence-and-proof-acceptance.md) |
-| SEP-A5 | Immutable authority closure and version scopes are proportional to stated consumer, lifetime, reconstruction, overlap, deployment, persistence, and migration promises while preserving non-ambient reconstruction and independent scopes where those promises require them. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| SEP-A6 | Systemic replanning has authority- and reachability-based stopping rules, accepts deletion and smaller Interfaces as repairs, compares the revised composition with the original objective, and established dependencies or proof tools are preferred unless a local semantic product is justified and owned. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| SEP-A7 | Every revised policy unit has an explicit disposition for each potentially affected standard reachable through the standards impact graph; every new standard-to-standard relationship is registered, and no application implementation is treated as an impact-graph consumer. | `integration` | `not-applicable` | `automated` | `pending` | [Planned graph dispositions](reports/policy-impact-dispositions.tsv) |
+| SEP-A5 | Immutable authority closure and version scopes are proportional to stated consumer, lifetime, reconstruction, overlap, deployment, persistence, and migration promises while preserving non-ambient reconstruction and independent scopes where those promises require them. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 3 acceptance](reports/milestone-3-promise-and-replanning-acceptance.md) |
+| SEP-A6 | Systemic replanning has authority- and reachability-based stopping rules, accepts deletion and smaller Interfaces as repairs, compares the revised composition with the original objective, and established dependencies or proof tools are preferred unless a local semantic product is justified and owned. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2](reports/milestone-2-evidence-and-proof-acceptance.md) and [Milestone 3](reports/milestone-3-promise-and-replanning-acceptance.md) |
+| SEP-A7 | Every revised policy unit has an explicit disposition for each potentially affected standard reachable through the standards impact graph; every new standard-to-standard relationship is registered, and no application implementation is treated as an impact-graph consumer. | `integration` | `not-applicable` | `automated` | `satisfied` | [Accepted graph dispositions](reports/policy-impact-dispositions.tsv) and [final acceptance](reports/final-acceptance.md) |
 | SEP-A8 | Dependency-local policy/evidence invalidation is either accepted from a bounded prototype with completeness and stale-authority counterexamples, or rejected with a documented no-change decision; it is not made normative from the audit hypothesis alone. | `focused` | `not-applicable` | `automated` | `satisfied` | [No-change decision and implementation prototype](reports/dependency-local-invalidation-prototype.md) |
-| SEP-A9 | The complete standards, prompt, template, fixture, suite, graph, generated-input, and documentation checks pass, and the generated standalone HTML matches the accepted policy-unit and relationship manifests. | `integration` | repository-supported verification environments | `automated` | `pending` | [Planned graph visualization](reports/standards-graph-change-visualization.html) |
+| SEP-A9 | The complete standards, prompt, template, fixture, suite, graph, generated-input, and documentation checks pass, and the generated standalone HTML matches the accepted policy-unit and relationship manifests. | `integration` | repository-supported verification environments | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) and [accepted graph visualization](reports/standards-graph-change-visualization.html) |
 
 The `automated` modes above describe how this repository may demonstrate that
 its own standards text, projections, and evidence remain coherent. They are
@@ -528,6 +526,7 @@ and reachable consequences.
 - `evaluation/standards-effectiveness/policy-impact/topic.architecture.toml`
 - `evaluation/standards-effectiveness/policy-impact/topic.contracts.toml`
 - `evaluation/standards-effectiveness/policy-impact/workflow.planning.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/plan.md`
 - `docs/plans/standards-simplicity-and-evidence-proportionality/execution-ledger.md`
@@ -541,37 +540,42 @@ The existing `contract-authority-scope` suite already owns Architecture
 authority-scope and Contracts version-scope decisions. It gains the generic
 immutable-closure fixture instead of introducing an Architecture suite seam.
 
+The A1c-named relationship-migration fixture is writable only for the
+mechanical closed-set renewal described by SEP-019. That repository
+compatibility artifact does not make A1c or any application implementation a
+standards-impact consumer.
+
 **Tasks:**
 
-- [ ] Restore project-agnostic executable ownership for
+- [x] Restore project-agnostic executable ownership for
   `immutable-authority-decisions.tsv`. Its current `a1c-snapshot-lifecycle`
   evidence owner does not consume that fixture and decides A1c-specific
   snapshot behavior. Extend `contract-authority-scope`, which already decides
   generic Architecture authority and Contracts version scope; do not add a new
   suite or catalog node.
-- [ ] Revise closure admission from the promised handle and reconstruction
+- [x] Revise closure admission from the promised handle and reconstruction
   lifetime without weakening genuine cold replay. Distinguish semantic closure
   completeness from a requirement for separately persisted identity, codec,
   handle, version, allocation ordinal, and lifecycle objects: a complete
   aggregate may carry the whole admitted closure.
-- [ ] Separate version roles before adding machinery: a fail-closed current-
+- [x] Separate version roles before adding machinery: a fail-closed current-
   format discriminator, identity-domain revision, overlapping compatibility
   version, migration version, and allocation ordinal are not interchangeable.
   Require a compatibility matrix only for combinations actually promised to
   supported consumers. Do not infer historical readers or cross-engine
   migration merely from the presence of several version fields; the A1c
   observation remains effectiveness evidence outside the standards graph.
-- [ ] Add authority/reachability stopping rules, deletion/smaller-Interface
+- [x] Add authority/reachability stopping rules, deletion/smaller-Interface
   remedies, and composition comparison to systemic replanning. A newly
   discovered semantic consumer, owner, risk, or public promise expands the
   audit; a newly discovered implementation file within an already admitted
   owner does not by itself expand the design. Stop when the owner and reachable
   consumer population are dispositioned.
-- [ ] Retain existing Release, profile, prompt, and template prose unless direct
+- [x] Retain existing Release, profile, prompt, and template prose unless direct
   comparison proves a conflict. Their existing actual-consumer, overlap,
   dependency, and systemic-family wording already consumes the revised owners;
   graph them as reviewed-no-change rather than copying the new procedures.
-- [ ] Re-query every potentially affected standard in the Architecture,
+- [x] Re-query every potentially affected standard in the Architecture,
   Contracts, and Planning impact neighborhoods and record `update` or
   `reviewed-no-change`. Preserve the relationship when no text edit is needed
   so the graph continues to route future standards changes; do not add
@@ -583,7 +587,12 @@ fixture has an evidence owner that actually decides it; version-role examples
 do not imply unsupported compatibility; and `--state transition --check`
 passes after regeneration.
 
-**Status:** `Planned`
+**Acceptance:** [Milestone 3 evidence](reports/milestone-3-promise-and-replanning-acceptance.md)
+records the proportional closure, separated version roles, bounded replanning,
+15 inspected standards routes, 51-unit/108-relationship standards graph, and
+project-agnostic evidence ownership.
+
+**Status:** `Accepted`
 
 ### Milestone 4: Projection-Local Invalidation Disposition
 
@@ -634,21 +643,21 @@ owning milestone and exact write set.
 
 **Tasks:**
 
-- [ ] Re-query every revised policy unit's standards-to-standards neighborhood
+- [x] Re-query every revised policy unit's standards-to-standards neighborhood
   and prove one final `update` or `reviewed-no-change` disposition per
   potentially affected standard. Do not count application implementation,
   fixture, suite, prompt, template, or generated-artifact projections as
   standards-impact coverage.
-- [ ] Verify that each standards-impact relationship identifies a real reason
+- [x] Verify that each standards-impact relationship identifies a real reason
   the target standard could require inspection when the source changes. A
   matching noun, application behavior, or conformance dependency is not
   sufficient.
-- [ ] Verify no conditional unit/edge row remains, verify registered suite-input
+- [x] Verify no conditional unit/edge row remains, verify registered suite-input
   freshness, and regenerate the standalone HTML with `--state accepted` from
   the accepted manifests and reviewed before/after delta.
-- [ ] Run focused suites, graph/compiler checks, plan checks, all-suites
+- [x] Run focused suites, graph/compiler checks, plan checks, all-suites
   verification, link checks, and diff hygiene.
-- [ ] Reconcile this plan, ledger, issues, graph data, and visualization to the
+- [x] Reconcile this plan, ledger, issues, graph data, and visualization to the
   same accepted state.
 
 **Acceptance gate:** SEP-A1 through SEP-A9 are satisfied, no unresolved or
@@ -657,16 +666,15 @@ deciding evidence, and all applicable repository checks pass. Any discovered
 normative or relationship defect returns to Milestone 2 or 3 instead of being
 patched inside final verification.
 
-**Status:** `Planned`
+**Acceptance:** [Final acceptance](reports/final-acceptance.md) records the
+accepted graph, milestone evidence, repository checks, and deferred out-of-
+scope implementation work.
+
+**Status:** `Accepted`
 
 ## Blockers
 
-- Milestone 3 is not admitted until fresh suite inspection confirms that
-  `contract-authority-scope` can consume and decide the generic immutable-
-  closure fixture without acquiring A1c lifecycle semantics.
-- No verifier-migration package is currently admitted. Re-query immediately
-  before a shared write and include suite-input regeneration in that one serial
-  slice.
+- `none`
 
 ## Re-Plan Triggers
 
@@ -705,9 +713,7 @@ before creating a worktree. No isolation is currently required.
 
 ## Final Acceptance
 
-- Acceptance status: `partial`
-- Final status: `Active`
-- Required final evidence: accepted objective rows, milestone gates, exact
-  final policy-impact query, complete suite/checker results, generated-input
-  freshness, HTML `--state accepted --check`, link validation, and clean diff
-  hygiene.
+- Acceptance status: `satisfied`
+- Deferred follow-ups: repository-specific dependency-local coverage redesign
+  and implementation-projection rationale repair remain separately owned.
+- Final status: `Accepted`

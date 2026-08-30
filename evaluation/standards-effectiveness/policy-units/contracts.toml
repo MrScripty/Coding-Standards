@@ -10,7 +10,7 @@ semantic_revision = 1
 id = "topic.contracts.version-scope-and-invalidation"
 module = "topic.contracts"
 heading_path = ["Version Scope And Invalidation"]
-semantic_revision = 1
+semantic_revision = 2
 
 [[policy_unit]]
 id = "topic.contracts.generated-semantic-conformance"

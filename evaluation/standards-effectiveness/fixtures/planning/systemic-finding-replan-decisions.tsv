@@ -1,7 +1,20 @@
-case	finding	invariant_family	siblings	consumer_audit	authority_projection	scope_replaced	expected
-isolated_defect	isolated	not-applicable	not-applicable	not-applicable	complete	no	continue
-systemic_complete_replan	repeated	inventoried	inventoried	complete	complete	yes	replan
-systemic_local_patch_only	repeated	inventoried	inventoried	complete	complete	no	typed-invalid
-systemic_missing_consumer_audit	repeated	inventoried	inventoried	missing	complete	yes	typed-unavailable
-systemic_missing_projection	repeated	inventoried	inventoried	complete	incomplete	yes	typed-invalid
-unknown_finding_scope	unknown	missing	missing	missing	incomplete	no	typed-unavailable
+case	finding	invariant_family	canonical_owner	reachable_population	new_fact	population_action	authority_projection	repair	composition	expected
+isolated_defect	isolated	not-applicable	not-applicable	not-applicable	none	not-applicable	complete	local-patch	not-applicable	continue
+systemic_complete_replan	repeated	inventoried	identified	complete	none	retain	complete	class-fix	compared	replan
+new_semantic_owner_expands	repeated	inventoried	identified	complete	semantic-owner	expand	complete	class-fix	compared	replan
+new_consumer_expands	repeated	inventoried	identified	complete	consumer	expand	complete	class-fix	compared	replan
+new_material_risk_expands	repeated	inventoried	identified	complete	risk	expand	complete	class-fix	compared	replan
+new_public_promise_expands	repeated	inventoried	identified	complete	promise	expand	complete	class-fix	compared	replan
+implementation_file_does_not_expand	repeated	inventoried	identified	complete	implementation-file	retain	complete	class-fix	compared	replan
+implementation_file_expands	repeated	inventoried	identified	complete	implementation-file	expand	complete	class-fix	compared	typed-invalid
+semantic_fact_not_expanded	repeated	inventoried	identified	complete	semantic-owner	retain	complete	class-fix	compared	typed-invalid
+systemic_missing_owner	repeated	inventoried	unknown	complete	none	retain	complete	class-fix	compared	typed-unavailable
+systemic_missing_population	repeated	inventoried	identified	unknown	none	retain	complete	class-fix	compared	typed-unavailable
+systemic_missing_invariant_family	repeated	missing	identified	complete	none	retain	complete	class-fix	compared	typed-invalid
+systemic_missing_projection	repeated	inventoried	identified	complete	none	retain	incomplete	class-fix	compared	typed-invalid
+systemic_local_patch_only	repeated	inventoried	identified	complete	none	retain	complete	local-patch	compared	typed-invalid
+systemic_missing_composition_comparison	repeated	inventoried	identified	complete	none	retain	complete	class-fix	missing	typed-invalid
+systemic_delete_repair	repeated	inventoried	identified	complete	none	retain	complete	delete	compared	replan
+systemic_smaller_interface	repeated	inventoried	identified	complete	none	retain	complete	smaller-interface	compared	replan
+systemic_substitute_proof	repeated	inventoried	identified	complete	none	retain	complete	substitute-proof	compared	replan
+unknown_finding_scope	unknown	unknown	unknown	unknown	unknown	unknown	incomplete	unknown	unknown	typed-unavailable

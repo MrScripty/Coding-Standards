@@ -31,6 +31,9 @@ Repair a repeated generated-contract validation failure.
 ### Out Of Scope
 
 - Sibling consumers not yet inventoried.
+- Canonical owner and reachable consumer population not yet bounded.
+- Deletion, smaller-Interface, proof-substitution, and composition alternatives
+  not yet compared.
 
 ## Milestones
 

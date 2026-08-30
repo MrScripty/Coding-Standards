@@ -12,11 +12,14 @@ default = "continue"
 [checks.domains]
 case = ["*"]
 finding = ["isolated", "repeated", "unknown"]
-invariant_family = ["inventoried", "missing", "not-applicable"]
-siblings = ["inventoried", "missing", "not-applicable"]
-consumer_audit = ["complete", "missing", "not-applicable"]
+invariant_family = ["inventoried", "missing", "not-applicable", "unknown"]
+canonical_owner = ["identified", "not-applicable", "unknown"]
+reachable_population = ["complete", "not-applicable", "unknown"]
+new_fact = ["consumer", "implementation-file", "none", "promise", "risk", "semantic-owner", "unknown"]
+population_action = ["expand", "not-applicable", "retain", "unknown"]
 authority_projection = ["complete", "incomplete"]
-scope_replaced = ["no", "yes"]
+repair = ["class-fix", "delete", "local-patch", "smaller-interface", "substitute-proof", "unknown"]
+composition = ["compared", "missing", "not-applicable", "unknown"]
 expected = ["continue", "replan", "typed-invalid", "typed-unavailable"]
 [[checks.rules]]
 outcome = "typed-unavailable"
@@ -25,7 +28,14 @@ any = [
   { field = "finding", op = "eq", value = "unknown" },
   { all = [
     { field = "finding", op = "eq", value = "repeated" },
-    { field = "consumer_audit", op = "eq", value = "missing" },
+    { any = [
+      { field = "canonical_owner", op = "eq", value = "unknown" },
+      { field = "reachable_population", op = "eq", value = "unknown" },
+      { field = "new_fact", op = "eq", value = "unknown" },
+      { field = "population_action", op = "eq", value = "unknown" },
+      { field = "repair", op = "eq", value = "unknown" },
+      { field = "composition", op = "eq", value = "unknown" },
+    ] },
   ] },
 ]
 [[checks.rules]]
@@ -38,13 +48,27 @@ any = [
   ] },
   { all = [
     { field = "finding", op = "eq", value = "repeated" },
-    { field = "siblings", op = "eq", value = "missing" },
+    { field = "repair", op = "eq", value = "local-patch" },
   ] },
   { all = [
     { field = "finding", op = "eq", value = "repeated" },
-    { field = "scope_replaced", op = "eq", value = "no" },
+    { field = "composition", op = "eq", value = "missing" },
   ] },
   { field = "authority_projection", op = "eq", value = "incomplete" },
+  { all = [
+    { field = "finding", op = "eq", value = "repeated" },
+    { all = [
+      { field = "new_fact", op = "in", values = ["semantic-owner", "consumer", "risk", "promise"] },
+      { field = "population_action", op = "ne", value = "expand" },
+    ] },
+  ] },
+  { all = [
+    { field = "finding", op = "eq", value = "repeated" },
+    { all = [
+      { field = "new_fact", op = "in", values = ["none", "implementation-file"] },
+      { field = "population_action", op = "ne", value = "retain" },
+    ] },
+  ] },
 ]
 [[checks.rules]]
 outcome = "replan"
@@ -52,17 +76,18 @@ outcome = "replan"
 all = [
   { field = "finding", op = "eq", value = "repeated" },
   { field = "invariant_family", op = "eq", value = "inventoried" },
-  { field = "siblings", op = "eq", value = "inventoried" },
-  { field = "consumer_audit", op = "eq", value = "complete" },
+  { field = "canonical_owner", op = "eq", value = "identified" },
+  { field = "reachable_population", op = "eq", value = "complete" },
   { field = "authority_projection", op = "eq", value = "complete" },
-  { field = "scope_replaced", op = "eq", value = "yes" },
+  { field = "repair", op = "in", values = ["class-fix", "delete", "smaller-interface", "substitute-proof"] },
+  { field = "composition", op = "eq", value = "compared" },
 ]
 
 [[checks]]
 id = "planning-policy"
 type = "text"
 path = "workflows/planning.md"
-required = ["## Systemic-Finding Re-Planning", "invariant family", "inventory every implementation", "give every selected consumer a non-blocked disposition"]
+required = ["## Systemic-Finding Re-Planning", "invariant family and canonical owner", "reachable consumer", "consider deletion, consolidation, a smaller Interface", "compare the repaired composition with the original objective", "implementation file inside an already bounded owner", "Stop when the canonical owner"]
 prohibited = []
 
 [[checks]]
@@ -90,7 +115,7 @@ prohibited = []
 id = "negative-fixture-preconditions"
 type = "text"
 path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
-required = ["# Plan: Systemic Finding Without Audit", "**Plan status:** `Blocked`", "## Objective Acceptance", "## Milestones", "## Re-Plan Triggers", "## Final Acceptance", "Sibling consumers not yet inventoried"]
+required = ["# Plan: Systemic Finding Without Audit", "**Plan status:** `Blocked`", "## Objective Acceptance", "## Milestones", "## Re-Plan Triggers", "## Final Acceptance", "Sibling consumers not yet inventoried", "Canonical owner and reachable consumer population not yet bounded", "smaller-Interface, proof-substitution, and composition alternatives"]
 prohibited = ["## Systemic Finding Audit"]
 
 [[checks]]
