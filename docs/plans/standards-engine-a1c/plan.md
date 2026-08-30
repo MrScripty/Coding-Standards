@@ -4,9 +4,9 @@
 
 **Current phase:** Product-contract discovery before architecture admission
 
-**Next slice:** Resolve A1C-001 by naming the first real caller, deployment
-form, handle lifetime, non-derivable state, loss consequence, and operational
-owner in the product-contract discovery report
+**Next slice:** Revalidate current consumers and retained state for A1C-002 and
+trace the representative agent workflows needed to close A1C-001, then define
+the bounded architecture experiments
 
 **Acceptance status:** `pending`
 
@@ -76,6 +76,8 @@ implementation scope are admitted.
 - A2 authoring, mutation, proposal-state, or recovery work.
 - Compatibility, migration, persistence, platform, or threat-model promises
   inferred from incumbent A1b machinery rather than real consumers.
+- A Standards Engine backup/restore Interface. File-level protection and
+  archival remain administrative responsibilities outside the product API.
 
 ## Constraints And Assumptions
 
@@ -100,9 +102,13 @@ implementation scope are admitted.
 
 ### Assumptions
 
-- The accepted audit found no independent external Engine consumer, retained
-  A1 state, non-test `open_persisted` caller, or operational backup/restore
-  caller. The A1c product owner must revalidate that observation.
+- The product owner has selected software-development agents acting for
+  developers across projects as A1c's first caller and the Python Interface as
+  their access seam. The primary deployment is a harness-managed tool call;
+  direct in-process package embedding is a custom integration. Repository
+  discovery must still identify concrete current integrations, retained A1
+  state, non-test `open_persisted` callers, and operational backup/restore
+  callers rather than inferring them from that intended use.
 - The four read-only operations with typed request/result/rejection behavior
   and explicit uncertainty without valid-looking fallback are inherited A1c
   behavioral constraints. Discovery may simplify their internal composition,
@@ -110,15 +116,50 @@ implementation scope are admitted.
 - Identity and Contracts remain strong candidate deep Modules because deleting
   them while retaining their behavior would redistribute semantic complexity
   to callers.
-- SQLite, universal child-object durability, exact historical coverage replay,
-  and the custom governed-source interpreter remain hypotheses rather than
-  presumed A1c requirements.
+- Durable internal snapshot ownership and active multi-turn analysis continuity
+  are product requirements. A snapshot is a complete immutable copy of
+  canonical standards at one Git commit. Proposed edits are non-Git change sets
+  linked to that snapshot and are projected through the same behavior and
+  verification authority without copying or mutating the snapshot. Snapshots
+  remain until authorized explicit caller deletion, which also deletes linked
+  change sets. Coding Standards cannot infer disuse from age, inactivity, or
+  apparent reachability. Each snapshot, its change sets, and every dependent
+  analysis or artifact form one lifecycle aggregate for atomic deletion and
+  movement; callers do not coordinate child cleanup. Cross-engine stored-state
+  compatibility is deliberately deferred until feature completeness. Closed
+  stores are machine-portable, and Linux, Windows, and macOS are product targets
+  while current development remains Linux-based. Deletion quarantines the
+  aggregate for bounded undelete before expiry. The default period is seven
+  days and may be changed only through deployment configuration, not the Python
+  Interface or a deletion request. Coding Standards does not own backup/restore;
+  administrators copy a closed consistent store or use storage-aware tools.
+  SQLite, physical aggregate layout, exact historical coverage replay, and the
+  custom governed-source interpreter remain mechanism or product hypotheses
+  rather than presumed requirements.
+- The agent owns semantic understanding and judgment. Coding Standards owns
+  declared mechanical parsing, validation, routing, identity, graph,
+  applicability, storage, and projection behavior; it must not infer prose
+  meaning or claim semantic correctness for the agent.
 
 ## Binding Decisions
 
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
 | Keep A1c architecture unselected until concrete product facts resolve A1C-001. | A1c product owner | [Accepted audit](../standards-engine-a1-a1b-audit/reports/final-synthesis.md) and [product discovery](reports/product-contract-discovery.md) | Architecture selection from incumbent A1b mechanisms |
+| Select software-development agents acting for developers across projects as the first caller and the Python Interface as the access seam. A1c supplies read, navigation, inspection, and analysis behavior; canonical standards mutation remains outside A1c and requires separate A2 authority. | A1c product owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Treating tests, repository packages, or a human CLI as the first product caller |
+| Treat a harness-managed tool call as the primary deployment. Directly embedding the Python package in an agent process is a custom integration whose additional lifecycle and composition choices are owned by that harness. Preserve one public behavior contract rather than creating separate tool-call and embedded product semantics. | A1c product owner and harness integrator | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Two equally authoritative deployment contracts or implementation-specific guarantees leaking into the public Interface |
+| Distinguish one engine invocation/process from one multi-turn agent workflow and from one agent instance; do not use the ambiguous term session as lifecycle authority. The normal tool deployment may terminate the engine process after every request, so handles and accepted decisions remain resolvable across invocations, turns, and authorized coordinator/subagent handoffs during the workflow. A replacement agent instance may instead start an independent run without inferred lineage. | A1c product owner, Coding Standards store, and harness integrator | User clarification recorded in [product discovery](reports/product-contract-discovery.md) | Process-local handles, forced replay between turns, or global supersession between independent runs |
+| Coding Standards owns a complete immutable snapshot of canonical standards at one selected Git commit and resolves its opaque handle without requiring callers to manage raw content. The commit is source provenance rather than the internal storage mechanism or snapshot handle. | A1c product owner and Coding Standards snapshot owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Caller-managed snapshot bytes, mutable snapshots, embedded Git storage, or Git identity as the storage mechanism |
+| Retain every snapshot until an authorized caller explicitly deletes it. Do not infer permission to delete from age, inactivity, process exit, agent replacement, apparent lack of internal references, or storage pressure. | A1c product owner and Coding Standards snapshot owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Automatic expiration, implicit garbage collection, or caller-managed raw snapshot storage |
+| Store proposed edits as a non-Git change set linked to one complete immutable snapshot. Project the resulting working view through the same navigation, read, inspection, analysis, and verification contracts as canonical content. Deleting the snapshot deletes every linked change set. | A1c product owner, Coding Standards snapshot owner, and Verification owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Copying the full corpus per edit, mutating snapshots, embedded Git repositories, weaker proposal validation, separate change-set read semantics, or orphaned change sets |
+| Treat each snapshot, every linked change set, and all analyses and artifacts whose validity depends on them as one lifecycle aggregate. Delete that aggregate atomically, and move it as one closure if movement is supported. Child handles may remain inspectable but do not own independent retention or transfer lifecycles. | A1c product owner and Persistence owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Caller-enumerated cleanup, orphaned artifacts, independently moved invalid children, or storage reachability guesses |
+| Implement snapshot deletion as aggregate quarantine followed by policy-governed expiry; permit authorized undelete of the complete aggregate before expiry. Keep backup and restore outside the Standards Engine Interface while requiring transactionally consistent publication and a documented administrative file closure. | A1c product owner and Persistence owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Immediate accidental data loss, partial undelete, conflating quarantine with disaster recovery, or an engine-owned backup subsystem without a product caller |
+| Default snapshot quarantine to seven days. Allow a deployment owner to change the duration only through configuration, not through the agent-facing Python Interface or an individual deletion. Bind each deletion to the exact purge deadline calculated from the effective policy so later configuration changes do not rewrite existing lifecycle decisions. | A1c product owner and deployment configuration owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Agent-selected retention, mutable existing deadlines, ambient policy lookup during undelete, or an unexplained hard-coded expiry |
+| Do not expose immediate purge. Every snapshot deletion follows the same quarantine and undelete contract until policy-governed irreversible expiry. | A1c product owner and Persistence owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Accidental bypass of quarantine, separate destructive authorization paths, or caller-selected irreversible deletion |
+| Expose only `delete_snapshot` and `undelete_snapshot` for snapshot lifecycle. Deletion atomically quarantines the aggregate with a fixed deadline; repeat deletion does not extend it; normal operations return `SNAPSHOT.QUARANTINED`; undelete restores every identity before the deadline; expiry returns `SNAPSHOT.EXPIRED` and physical purge occurs transactionally on a later invocation without a background service. Missing duration uses seven days and invalid explicit configuration rejects rather than falling back. | A1c product owner, Interface owner, Persistence owner, and configuration owner | User agreement recorded in [product discovery](reports/product-contract-discovery.md) | Child-level lifecycle operations, deadline extension through retries, hidden use of quarantined authority, partial undelete, ambient expiry, or invalid-config fallback |
+| Defer cross-engine stored-state compatibility and migration until Coding Standards is feature complete. Do not claim a current overlap window or silently reinterpret incompatible state; require stable-release planning to revisit the decision. | A1c product owner and Contracts owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Premature compatibility machinery, accidental indefinite promises, or silent fallback across incompatible engine contracts |
+| Support machine-portable closed stores and target Linux, Windows, and macOS while retaining CPython 3.11 and 3.12. Linux is the current development environment, but final platform claims require real execution on every named operating system. | A1c product owner, Persistence owner, and Platform owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | POSIX-only storage identity, caller-enumerated transfer, or Linux-only evidence presented as cross-platform acceptance |
+| Keep semantic understanding with the agent. Limit Coding Standards authority to declared mechanical contracts and projections over authored standards, supplied facts, evidence, and decisions. | A1c product owner and Architecture owner | User clarification recorded in [product discovery](reports/product-contract-discovery.md) | Engine-inferred prose meaning, generated semantic judgments, or compatibility framed around nonexistent engine understanding |
 | Preserve A1b's demonstrated external-schema correction, equality/identity separation, typed uncertainty, and non-ambient behavior for the eventually selected lifetime. | A1c contract and architecture owners | Accepted A1b evidence and A1/A1b audit | Returning wholesale to A1 |
 | Select persistence, object granularity, recovery, compatibility, platform, and version promises from real consumers and loss consequences. | A1c product and domain owners | AUD-008 and routed Contracts/Persistence guidance | Treating A1b guarantees as automatic A1c requirements |
 | Compare designs through caller workflows, deletion tests, representative locality probes, and cumulative machinery review rather than structural counts. | Architecture owner | Core, Architecture, and accepted audit synthesis | Smallest-diff, smallest-count, or incumbent-design selection |
@@ -132,6 +173,7 @@ implementation scope are admitted.
 | A handle needs a lifetime | Contract and compatibility | Named continuation/replay scenario across the selected boundary | Consumer retention and deployment facts | Unnamed archival or portability promise | Process restart assumed to require indefinite replay |
 | State requires persistence | Durable authority | Non-derivable state, retention period, loss consequence, and recovery owner | Persistence owner and real reopening workflow | Reconstructible cache state | Existing SQLite tables treated as product authority |
 | A design is simpler and sufficiently deep | Architecture | Caller-workflow prototype, deletion test, complete composed-design probe, and representative locality changes | Architecture review against accepted standards | Count-only comparison | Complexity moves into callers or another owner |
+| Recoverable deletion works | Product behavior and persistence | Accidental-deletion workflow proving aggregate quarantine, ordinary-use exclusion, complete undelete, and expiry purge | Product owner and snapshot-aggregate loss consequences | Treating backup/restore as an undelete Interface | Undelete omits dependent state or quarantine leaks into ordinary standards operations |
 | A contract remains conformant | External semantics | Selected Draft validator through the actual public Adapter | Official Draft contract and dependency-owned implementation | Repository-local Draft interpretation | Local implementations agree on the same wrong behavior |
 | Evidence can be removed or consolidated | Verification | Claim-level reachable failure, consequence, oracle, overlap, and substitution analysis | Consumer contract or demonstrated prior defect | Test-count reduction | A test is deleted because machinery was renamed or moved |
 
