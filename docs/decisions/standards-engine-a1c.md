@@ -1,11 +1,11 @@
 # Standards Engine A1c Snapshot And Analysis Architecture
 
-**Status:** Accepted for A1c implementation planning; production inactive
+**Status:** Accepted
 
 This decision supersedes the A1b runtime architecture for A1c. The accepted
-A1b implementation and [A1b ADR](standards-engine-a1b.md) remain the historical
-behavioral baseline until A1c is implemented and accepted. This decision does
-not authorize A2 authoring or cross-engine state migration.
+A1b implementation and [A1b ADR](standards-engine-a1b.md) remain historical
+evidence rather than current runtime authority. This decision does not
+authorize A2 authoring or cross-engine state migration.
 
 ## Context
 
@@ -29,7 +29,9 @@ established the actual A1c contract:
 - equal-content snapshots require independent lifecycle identities;
 - deletion quarantines a complete dependent aggregate for seven days by
   default and permits complete undelete before expiry;
-- closed stores are machine-portable across Linux, Windows, and macOS;
+- closed stores avoid platform-specific identity and path assumptions;
+- Linux is the verified A1c runtime platform, while Windows and macOS support
+  remain deferred until real execution environments are available;
 - cross-engine compatibility remains deferred until feature completeness; and
 - semantic understanding remains with the agent.
 
@@ -39,7 +41,7 @@ The remaining capture, aggregate-lifecycle, and complete-Interface assumptions
 are exercised in the
 [binding assumptions validation](../plans/standards-engine-a1c/reports/a1c-binding-assumptions-validation.md).
 That evidence confirms the selected mechanisms while retaining production
-parity, generated-contract, authorization, and required-real platform gates.
+parity, generated-contract, authorization, and verified-platform gates.
 
 ## Decision
 
@@ -326,12 +328,17 @@ undeclared provider inputs cannot affect deterministic state creation.
 
 ### Platform Contract
 
-Linux, Windows, and macOS are supported product targets on CPython 3.11 and
-3.12. Logical repository paths use slash-independent component tuples and
-preserve Unicode codepoints and case. SQLite paths, locking, close behavior,
-atomic transactions, Git invocation, and closed-store copying require real
-evidence on each named platform. Linux evidence does not establish Windows or
-macOS support.
+Linux is the verified A1c product platform on CPython 3.11 and 3.12. Logical
+repository paths use slash-independent component tuples and preserve Unicode
+codepoints and case. SQLite paths, locking, close behavior, atomic
+transactions, Git invocation, and closed-store copying have real Linux
+evidence.
+
+The implementation retains platform-neutral identity, path, and closed-store
+boundaries, but A1c does not claim Windows or macOS support. Those platforms
+remain future targets and require the same real harness evidence before a
+later release or plan may advertise them as supported. Linux evidence is not
+treated as proof of either deferred target.
 
 The former Linux/ext4-only native filesystem capture Adapter is deleted. Git
 object capture is the sole canonical snapshot source for A1c.
@@ -405,7 +412,8 @@ Costs:
 - current-engine replay recomputes derived domain projections;
 - one SQLite store remains operational state requiring administrative file
   protection; and
-- real cross-platform evidence is required before A1c acceptance.
+- Windows and macOS support remain unavailable until real platform evidence is
+  obtained.
 
 ## Re-Plan Triggers
 
@@ -416,7 +424,8 @@ Re-plan if:
 - traced compilation cannot prove complete canonical authority closure;
 - analysis cannot be reproduced from stored aggregate inputs and snapshot
   bytes without independently stored derived authority;
-- a selected dependency lacks Linux, Windows, macOS, or Python support;
+- a selected dependency lacks Linux or supported Python compatibility;
+- Windows or macOS support is proposed without real platform evidence;
 - a retained external consumer or A1b store requires compatibility overlap;
 - a domain dependency cannot be expressed once in its owning state/codec;
 - measured replay or catalog behavior requires a new cache or pagination

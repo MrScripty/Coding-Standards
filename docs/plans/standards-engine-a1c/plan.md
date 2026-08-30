@@ -1,13 +1,12 @@
 # Plan: Standards Engine A1c Product Contract And Architecture
 
-**Plan status:** `Blocked`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 6 required-platform evidence
+**Current phase:** Milestone 6 accepted
 
-**Next slice:** Run the provider-neutral A1c harness on real Windows and macOS
-CPython 3.11 and 3.12 environments, including transferred-store consumption
+**Next slice:** `none`
 
-**Acceptance status:** `partial`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -42,7 +41,7 @@ implementation scope are admitted.
 | A1C-A4 | Query, prepare, resolve, inspect, and every advertised child inspection reconstruct deterministically from the closed store in a fresh process without live repository, provider, authorization, or session substitution. | `system` | `representative` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
 | A1C-A5 | Coverage requirements and certificates bind only their typed semantic, relationship, fact-contract, horizon, evidence, and authorization dependencies; unrelated repository or suite-input changes preserve identity while a selected dependency changes it. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
 | A1C-A6 | The complete A1b Authority runtime, wrappers, public v11 forms, historical runtime fixtures, and stale package relationships are absent, with every migration consumer replaced or explicitly retired and no compatibility path. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 5 cutover evidence](reports/a1c-cutover-evidence.md) |
-| A1C-A7 | Snapshot creation, closed-store movement, locking, path handling, transaction behavior, cold replay, and quarantine work on real Linux, Windows, and macOS with supported CPython 3.11 and 3.12 combinations. | `system` | `required-real` | `automated` | `pending` | Milestone 6 platform evidence |
+| A1C-A7 | Snapshot creation, closed-store copying, locking, path handling, transaction behavior, cold replay, and quarantine work on real Linux with supported CPython 3.11 and 3.12. Windows and macOS support are not claimed by A1c. | `system` | `required-real` | `automated` | `satisfied` | [Milestone 6 platform evidence](reports/a1c-platform-evidence.md) |
 | A1C-A8 | The eight agent-facing workflows produce typed results or exact typed rejections through the real Python facade; agents need no content hashes, Git revisions, database paths, child catalogs, or project labels. | `user-workflow` | `representative` | `automated` | `satisfied` | [Milestone 6 platform evidence](reports/a1c-platform-evidence.md) |
 
 ## Acceptance Procedures
@@ -61,7 +60,7 @@ implementation scope are admitted.
 | A1C-A4 | Close process one, remove access to its repository and runtime collaborators, then use process two to project and advance every advertised handle solely from the copied closed store and declared current contracts. | Analysis and Engine owners | Deferred cross-engine compatibility remains intentionally unproved. |
 | A1C-A5 | Vary one dependency class at a time and compare coverage identities; separately run false-empty horizon fixtures that omit a real consumer. | Analysis and Verification owners | A typed projection can still omit a dependency if no negative fixture selects it. |
 | A1C-A6 | Run package, import, path-state, policy-impact migration, and repository-index checks over the final tree; reject every retired path and old public version. | Migration and Verification owners | An unregistered external consumer cannot be discovered from repository evidence alone. |
-| A1C-A7 | Run `tools/standards_engine/tests/platform_harness.py` on real Linux, Windows, and macOS runners across the supported Python matrix, transfer the closed store and manifest without modification, and retain environment-qualified results. | Platform owner | Local Linux success cannot prove Windows or macOS. |
+| A1C-A7 | Run `tools/standards_engine/tests/platform_harness.py` on real Linux across CPython 3.11 and 3.12, copy the closed store and manifest without modification, and retain environment-qualified results. | Platform owner | This evidence does not establish deferred Windows or macOS support. |
 | A1C-A8 | Drive the eight public operations through the generated Python facade in a fresh-process harness, including coordinator/subagent handle transfer and typed lifecycle failures. | Engine Interface owner | Direct package tests could bypass the agent-facing Adapter. |
 
 ## Scope
@@ -147,8 +146,9 @@ implementation scope are admitted.
   analysis or artifact form one lifecycle aggregate for atomic deletion and
   movement; callers do not coordinate child cleanup. Cross-engine stored-state
   compatibility is deliberately deferred until feature completeness. Closed
-  stores are machine-portable, and Linux, Windows, and macOS are product targets
-  while current development remains Linux-based. Deletion quarantines the
+  stores avoid platform-specific identity and path assumptions. Linux is the
+  verified A1c platform; Windows and macOS support remain deferred until real
+  execution environments are available. Deletion quarantines the
   aggregate for bounded undelete before expiry. The default period is seven
   days and may be changed only through deployment configuration, not the Python
   Interface or a deletion request. Coding Standards does not own backup/restore;
@@ -185,7 +185,7 @@ implementation scope are admitted.
 | Keep one compiled public facade contract and domain-owned material identity or compatibility constants. Domain-owned immutable state contains exact typed dependency references whose constructors enforce cardinality and whose generic closure traversal rejects missing or contradictory authority. Do not persist per-operation authority objects or broad version bags when no independent consumer or cross-engine overlap exists. | Contracts, domain, and Standards Engine owners | A1C-E5 locality and deletion analysis in [architecture experiment results](reports/architecture-experiment-results.md) | Umbrella invalidation, duplicated role/cardinality authority, ambient dependencies, or removal of exact dependency binding |
 | Bind coverage identity only to typed coverage-relevant subject, relationship, fact-contract, and independent-horizon inputs. Preserve exact current-engine replay from immutable snapshots and retained decisions, but keep repository-global suite-input freshness outside product analysis identity. | Analysis and Verification owners | A1C-E6 coverage-local-invalidation case and evidence portfolio in [architecture experiment results](reports/architecture-experiment-results.md) | False empty impact, graph/catalog self-certification, unrelated repository invalidation, or loss of exact snapshot-local authority |
 | Defer cross-engine stored-state compatibility and migration until Coding Standards is feature complete. Do not claim a current overlap window or silently reinterpret incompatible state; require stable-release planning to revisit the decision. | A1c product owner and Contracts owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | Premature compatibility machinery, accidental indefinite promises, or silent fallback across incompatible engine contracts |
-| Support machine-portable closed stores and target Linux, Windows, and macOS while retaining CPython 3.11 and 3.12. Linux is the current development environment, but final platform claims require real execution on every named operating system. | A1c product owner, Persistence owner, and Platform owner | User product direction recorded in [product discovery](reports/product-contract-discovery.md) | POSIX-only storage identity, caller-enumerated transfer, or Linux-only evidence presented as cross-platform acceptance |
+| Accept Linux on CPython 3.11 and 3.12 from real execution evidence. Preserve platform-neutral closed-store, path, and identity design, but defer Windows and macOS support until real environments can run the same harness. | A1c product owner, Persistence owner, and Platform owner | Product-owner scope correction and [platform evidence](reports/a1c-platform-evidence.md) | POSIX-specific product identity, claiming deferred platforms from Linux evidence, or adding platform-specific product semantics |
 | Keep semantic understanding with the agent. Limit Coding Standards authority to declared mechanical contracts and projections over authored standards, supplied facts, evidence, and decisions. | A1c product owner and Architecture owner | User clarification recorded in [product discovery](reports/product-contract-discovery.md) | Engine-inferred prose meaning, generated semantic judgments, or compatibility framed around nonexistent engine understanding |
 | Preserve A1b's demonstrated external-schema correction, equality/identity separation, typed uncertainty, and non-ambient behavior for the eventually selected lifetime. | A1c contract and architecture owners | Accepted A1b evidence and A1/A1b audit | Returning wholesale to A1 |
 | Select persistence, object granularity, recovery, compatibility, platform, and version promises from real consumers and loss consequences. | A1c product and domain owners | AUD-008 and routed Contracts/Persistence guidance | Treating A1b guarantees as automatic A1c requirements |
@@ -270,6 +270,7 @@ compatibility facts required to select an A1c architecture.
 
 **Allowed write set:**
 
+- `docs/decisions/standards-engine-a1c.md`
 - `docs/plans/standards-engine-a1c/plan.md`
 - `docs/plans/standards-engine-a1c/execution-ledger.md`
 - `docs/plans/standards-engine-a1c/issues.md`
@@ -302,7 +303,7 @@ the suite-input projection is fresh with only the admitted repository-index
 delta; and the plan is re-planned with an admitted architecture-discovery write
 set before any prototype or runtime mutation.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 1: Snapshot Aggregate And Interface Experiments
 
@@ -366,7 +367,7 @@ failure ownership for each retained concern; generated freshness, focused
 planning suites, the complete declarative/checker checkpoint, and diff hygiene
 pass.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 2: Binding Architecture And Implementation Plan
 
@@ -421,7 +422,7 @@ the composed-design review remains valid or is replaced; generated freshness,
 focused planning and architecture suites, the complete checkpoint, and diff
 hygiene pass.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 3: Binding Assumption Validation
 
@@ -483,7 +484,7 @@ transactionally by several roots; aggregate lifecycle leaves orphaned state;
 an agent workflow requires another public operation or independently managed
 child artifact; or a production write is needed to answer the design question.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 4: Repository Git And Snapshot Foundation
 
@@ -633,15 +634,17 @@ requires independent retention; a coverage dependency cannot be represented
 locally; a selected consumer lies outside the exact sets; or verification
 requires extending retained Bash checkers.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ### Milestone 6: Required-Platform And Final Acceptance
 
-**Goal:** Prove the completed A1c product on every supported real platform and
-record content-bound final acceptance without changing product semantics.
+**Goal:** Prove the completed A1c product on its verified Linux platform and
+record content-bound final acceptance while deferring unverified platform
+support without changing product semantics.
 
 **Allowed write set:**
 
+- `docs/decisions/standards-engine-a1c.md`
 - `docs/plans/standards-engine-a1c/plan.md`
 - `docs/plans/standards-engine-a1c/execution-ledger.md`
 - `docs/plans/standards-engine-a1c/issues.md`
@@ -660,12 +663,11 @@ re-planning; it is not repaired inside the acceptance write set.
 
 **Tasks:**
 
-- [ ] Run one provider-neutral executable harness on real Linux, Windows, and
-  macOS with CPython 3.11 and 3.12, and record exact environment-qualified
-  results without treating the declarative decision table or simulation as
-  runtime evidence.
-- [ ] Produce a closed store and portable manifest, move both between supported
-  machines, verify the exact closed-store bytes before opening them, and prove
+- [x] Run one provider-neutral executable harness on real Linux with CPython
+  3.11 and 3.12, and record exact environment-qualified results without
+  treating the declarative decision table or simulation as runtime evidence.
+- [x] Produce a closed store and portable manifest, copy both while closed,
+  verify the exact closed-store bytes before opening them, and prove
   root discovery, query, concurrent cold access, analysis projection, child
   inspection, quarantine, and undelete without source-repository, filesystem,
   or path identity leakage.
@@ -673,7 +675,7 @@ re-planning; it is not repaired inside the acceptance write set.
   prove opaque handle transfer between coordinator and subagent invocations.
 - [x] Re-run the complete repository checkpoint, generated freshness, final
   migration absence checks, coverage/certificate equality, and diff hygiene.
-- [ ] Bind final acceptance to the reviewed implementation content and record
+- [x] Bind final acceptance to the reviewed implementation content and record
   any deferred compatibility work without prescribing Git topology.
 
 **Acceptance gate:** A1C-A1 through A1C-A8 are satisfied; all focused,
@@ -682,18 +684,18 @@ retained-checker, and migration gates selected by those claims pass; every
 issue is resolved or explicitly deferred outside the accepted product; the
 worktree is clean; and A2 remains inactive.
 
-**Re-plan conditions:** any required-real platform is unavailable or fails; a
-closed store is not portable; acceptance needs production or authority
+**Re-plan conditions:** verified Linux behavior fails; Windows or macOS support
+is proposed without equivalent real evidence; a closed store is not portable;
+acceptance needs production or authority
 mutation; a final consumer or retained state is discovered; or content-bound
 review finds a material contract or architecture change.
 
-**Status:** `Blocked`
+**Status:** `Accepted`
 
 ## Blockers
 
-- A1C-021: real Windows and macOS CPython 3.11/3.12 execution environments are
-  unavailable in the current development environment. Linux evidence cannot
-  substitute for the remaining `required-real` claim.
+- `none`; Windows and macOS support are deferred rather than accepted A1c
+  claims. Their future promotion requires real environment-qualified evidence.
 - Unknown external consumers remain a standing re-plan trigger.
 - A2 work remains unavailable until its own exact milestone and lifecycle
   authority exist.
@@ -718,6 +720,6 @@ review finds a material contract or architecture change.
 
 ## Final Acceptance
 
-- Acceptance status: `partial`
-- Deferred follow-ups: `A2 remains unauthorized; cross-engine migration remains deferred until feature completeness`
-- Final status: `Blocked`
+- Acceptance status: `satisfied`
+- Deferred follow-ups: `A2 remains unauthorized; cross-engine migration remains deferred until feature completeness; Windows and macOS support require real platform evidence`
+- Final status: `Accepted`

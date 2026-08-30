@@ -1,6 +1,6 @@
 # A1c Required-Platform Evidence
 
-**Evidence status:** `partial`
+**Evidence status:** `satisfied for the A1c Linux platform contract`
 
 **Implementation baseline:** `0911c079054185abca8ffe6973d26cdee34dedf7`
 
@@ -68,17 +68,18 @@ Result: two tests passed. The complete round trip took 50.002 seconds.
 | Quarantine discovery and aggregate undelete restored reads and analysis inspection | pass |
 | A changed store was rejected before engine open | pass |
 
-This satisfies representative claim A1C-A8 and the Linux portion of A1C-A7.
+This satisfies A1C-A8 and the complete Linux-scoped A1C-A7 claim.
 
 ## Unavailable Required Evidence
 
 | Target | CPython 3.11 | CPython 3.12 | Status |
 | --- | --- | --- | --- |
-| Windows | unavailable | unavailable | blocking |
-| macOS | unavailable | unavailable | blocking |
+| Windows | unavailable | unavailable | deferred, support not claimed |
+| macOS | unavailable | unavailable | deferred, support not claimed |
 
 The current development environment supplies neither real target. The
 repository also contains no selected provider integration from which those
 facts can be obtained. Simulation, cross-compilation, and the Linux runs do not
-satisfy a `required-real` platform claim. A1C-A7, Milestone 6, and final A1c
-acceptance therefore remain blocked.
+establish either platform. A1c therefore claims Linux support only; Windows and
+macOS require equivalent real evidence before a future plan or release may
+promote them to supported status.

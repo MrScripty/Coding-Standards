@@ -748,3 +748,17 @@
   development environment, and the repository has no selected runner-provider
   integration. Milestone 6 and the plan are `Blocked`; Linux success is not a
   substitute for the remaining required-real evidence.
+
+## 2026-08-30 - Platform Scope Re-Plan And A1c Acceptance
+
+- The product owner chose not to block A1c on unavailable Windows and macOS
+  environments. The former three-platform acceptance decision is
+  `Superseded`; A1c now claims Linux support on CPython 3.11 and 3.12 only.
+- Windows and macOS remain unverified future targets. The platform-neutral
+  storage, path, identity, and harness design is retained, but no support claim
+  may be made until equivalent real evidence passes.
+- All remaining A1c claims are satisfied by the Milestone 5 cutover evidence,
+  Linux platform evidence, generated freshness, 24 Engine tests, 433 Verifier
+  tests, 227 declarative suites, and all 53 retained checkers.
+- A1C-008 and A1C-021 record the replacement platform decision. Milestone 6
+  and the A1c plan are Accepted. A2 remains separately unauthorized.
