@@ -1,6 +1,6 @@
 # Standards Engine A1c Snapshot And Analysis Architecture
 
-**Status:** Accepted for A1c implementation planning
+**Status:** Accepted for A1c implementation planning; production inactive
 
 This decision supersedes the A1b runtime architecture for A1c. The accepted
 A1b implementation and [A1b ADR](standards-engine-a1b.md) remain the historical
@@ -35,6 +35,11 @@ established the actual A1c contract:
 
 The bounded A1c prototype and composed-design review are recorded in
 [architecture experiment results](../plans/standards-engine-a1c/reports/architecture-experiment-results.md).
+The remaining capture, aggregate-lifecycle, and complete-Interface assumptions
+are exercised in the
+[binding assumptions validation](../plans/standards-engine-a1c/reports/a1c-binding-assumptions-validation.md).
+That evidence confirms the selected mechanisms while retaining production
+parity, generated-contract, authorization, and required-real platform gates.
 
 ## Decision
 

@@ -55,7 +55,7 @@ mutation.
 | Package READMEs and Engine contract README | Agents and maintainers | Update to the accepted A1c Interface and ownership | Owning package | Documentation traceability and no superseded behavior |
 | `.standards-engine/authority.sqlite3` and A1b schema v1 | No retained non-test state | Unsupported and not migrated; A1c uses a distinct store identity/path | Snapshot and deployment owners | Cold start, explicit unsupported old-store outcome, no converter or fallback |
 
-## Exact Milestone Path Sets
+## Exact Production Path Sets
 
 These sets are the binding production write identities used by the active
 plan. They do not authorize implementation until their milestone is active.
@@ -63,7 +63,7 @@ Paths are listed by identity rather than by mutable file, relationship, or test
 counts. A needed path outside these sets changes migration scope and triggers
 re-planning.
 
-### M3
+### Foundation
 
 - `tools/standards_identity/README.md`
 - `tools/standards_identity/standards_identity/__init__.py`
@@ -86,9 +86,10 @@ re-planning.
 - `tools/standards_snapshots/tests/test_module.py`
 - `tools/standards_snapshots/tests/test_store.py`
 
-### M4-runtime
+### Cutover-runtime
 
-Milestone 4 may continue modifying every `M3` path. Its additional runtime
+The atomic cutover may continue modifying every `Foundation` path. Its
+additional runtime
 paths are:
 
 - `tools/standards_metadata/README.md`
@@ -162,7 +163,7 @@ Files not listed in changed semantic packages remain read-only. Discovery that
 their behavior must change, rather than merely continue passing, triggers a
 write-set re-plan.
 
-### M4-contract
+### Cutover-contract
 
 - `tools/standards_contracts/README.md`
 - `tools/standards_contracts/tests/test_compiler.py`
@@ -178,7 +179,7 @@ write-set re-plan.
 - `tools/standards_engine/tests/test_applicability_contract.py`
 - `tools/standards_engine/tests/test_generated_contract.py`
 
-### M4-verification
+### Cutover-verification
 
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/a1b-authority-reconstruction.toml`
@@ -201,7 +202,7 @@ write-set re-plan.
 The new suite files replace the three A1b suites; they do not extend retained
 Bash checkers. Registered negative cases assert exact intended diagnostics.
 
-### M4-authority
+### Cutover-authority
 
 - `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
 - `evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml`
@@ -225,10 +226,11 @@ Bash checkers. Registered negative cases assert exact intended diagnostics.
 Attestation paths are the complete current source list owned by
 `attestation-sources.toml`; that registry remains read-only unless final
 consumer discovery proves membership itself must change. Each file may change
-only when its mechanically derived requirement changes after the complete M4
+only when its mechanically derived requirement changes after the complete
+cutover
 horizon is frozen.
 
-### M4-deletions
+### Cutover-deletions
 
 Every currently tracked path under `tools/standards_authority/` at the accepted
 A1b baseline is an exact deletion member. The baseline-bound list is obtained
@@ -248,7 +250,7 @@ The deletion set also contains:
 - `tools/standards_analysis/standards_analysis/suite_inputs.py`
 - `tools/standards_engine/standards_engine/authority.py`
 - `tools/standards_engine/tests/test_c7_analysis.py`
-- every A1b suite and fixture path named in `M4-verification`.
+- every A1b suite and fixture path named in `Cutover-verification`.
 
 Files that appear in both a replacement set and this set are deleted, not
 rewritten. Historical plans, reports, ADRs, and accepted evidence are not

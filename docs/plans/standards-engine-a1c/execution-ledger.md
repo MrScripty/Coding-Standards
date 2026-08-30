@@ -516,3 +516,26 @@
 - Focused plan structure, the executable architecture prototype, generated
   freshness, the complete declarative and retained-checker checkpoint, and
   diff hygiene are the selected completion evidence for this design boundary.
+
+## 2026-08-30 - Binding Assumption Validation
+
+- The product owner withheld production start until traced loader closure,
+  SQLite aggregate ownership, and the complete eight-operation workflow had
+  stronger executable design evidence. This supersedes the prior next-step
+  decision to start the foundation immediately after Milestone 2.
+- Milestone 3 was inserted as a design-only validation boundary. The former
+  numbered production milestones move to Milestones 4 through 6 without
+  changing their scope or path membership.
+- Numbered migration path-set names are superseded by `Foundation` and
+  `Cutover-*` names. This removes incidental coupling between migration
+  authority and plan sequencing; no path disposition changed.
+- The disposable probe confirms loader-owned traced capture and frozen replay,
+  equal-content and multi-root aggregate lifecycle, transactional purge and
+  rollback, cold reconstruction, and all eight operations across fresh agent
+  invocations.
+- The evidence explicitly retains production gates for actual loader parity,
+  generated v12 conformance, authorization, failure ownership, and real Linux,
+  Windows, and macOS behavior. It does not treat representative models as
+  production acceptance.
+- A1C-P6 is satisfied and A1C-012 is resolved. Milestone 3 is Implemented;
+  production remains inactive until Milestone 4 is explicitly started.

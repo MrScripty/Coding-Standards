@@ -2,9 +2,9 @@
 
 **Plan status:** `Planned`
 
-**Current phase:** Binding design complete; production implementation inactive
+**Current phase:** Binding assumptions validated; production implementation inactive
 
-**Next slice:** Explicitly start Milestone 3 Repository Git and Snapshot
+**Next slice:** Explicitly start Milestone 4 Repository Git and Snapshot
 foundation implementation
 
 **Acceptance status:** `partial`
@@ -34,15 +34,16 @@ implementation scope are admitted.
 | A1C-P2 | Current A1b public consumers, persisted-state consumers, operational callers, and compatibility obligations are revalidated without inferring demand from tests or incumbent machinery. | `contract` | `not-applicable` | `automated` | `satisfied` | Bounded current-tree inventory in [product-contract discovery](reports/product-contract-discovery.md) |
 | A1C-P3 | Competing A1c designs are exercised through representative caller workflows, deletion tests, and locality probes before one composition is selected. | `integration` | `not-applicable` | `automated` | `satisfied` | Executable prototype and composed-design review in [architecture experiment results](reports/architecture-experiment-results.md) |
 | A1C-P4 | The selected composition passes the complete Architecture-owned composed-design probe and identifies every retained concern, authority, lifecycle, Interface, dependency direction, and removal condition. | `integration` | `not-applicable` | `manual` | `satisfied` | [A1c ADR](../../decisions/standards-engine-a1c.md) reconciled with [architecture experiment results](reports/architecture-experiment-results.md) |
-| A1C-P5 | A revised implementation plan defines exact runtime write sets, coherent milestones, migration and deletion ownership, claim-matched verification, re-plan triggers, and a separate content-bound acceptance step. | `focused` | `not-applicable` | `manual` | `satisfied` | Milestones 3 through 5 and [A1b-to-A1c migration inventory](reports/a1b-to-a1c-migration-inventory.md) |
-| A1C-A1 | The generated v12 Python Interface exposes exactly create/find/delete/undelete snapshot plus query/prepare/resolve/inspect; every request and result is Draft 2020-12 valid and no v11 reader or fallback remains. | `contract` | `not-applicable` | `automated` | `pending` | Milestone 4 |
-| A1C-A2 | Snapshot creation captures the complete loader-requested canonical authority closure from one exact current HEAD, persists immutable raw bytes under a unique opaque root, and never rereads mutable repository content for that root. | `integration` | `not-applicable` | `automated` | `pending` | Milestones 3 and 4 |
-| A1C-A3 | Equal-content roots retain independent lifecycle and dependent analysis; quarantine, undelete, expiry, purge, and shared-content cleanup are transactional and preserve the complete aggregate. | `integration` | `representative` | `automated` | `pending` | Milestone 3 and public workflow evidence in Milestone 4 |
-| A1C-A4 | Query, prepare, resolve, inspect, and every advertised child inspection reconstruct deterministically from the closed store in a fresh process without live repository, provider, authorization, or session substitution. | `system` | `representative` | `automated` | `pending` | Milestone 4 |
-| A1C-A5 | Coverage requirements and certificates bind only their typed semantic, relationship, fact-contract, horizon, evidence, and authorization dependencies; unrelated repository or suite-input changes preserve identity while a selected dependency changes it. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 4 |
-| A1C-A6 | The complete A1b Authority runtime, wrappers, public v11 forms, historical runtime fixtures, and stale package relationships are absent, with every migration consumer replaced or explicitly retired and no compatibility path. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 4 migration and absence evidence |
-| A1C-A7 | Snapshot creation, closed-store movement, locking, path handling, transaction behavior, cold replay, and quarantine work on real Linux, Windows, and macOS with supported CPython 3.11 and 3.12 combinations. | `system` | `required-real` | `automated` | `pending` | Milestone 5 platform evidence |
-| A1C-A8 | The eight agent-facing workflows produce typed results or exact typed rejections through the real Python facade; agents need no content hashes, Git revisions, database paths, child catalogs, or project labels. | `user-workflow` | `representative` | `automated` | `pending` | Milestones 4 and 5 |
+| A1C-P5 | A revised implementation plan defines exact runtime write sets, coherent milestones, migration and deletion ownership, claim-matched verification, re-plan triggers, and a separate content-bound acceptance step. | `focused` | `not-applicable` | `manual` | `satisfied` | Production Milestones 4 through 6 and [A1b-to-A1c migration inventory](reports/a1b-to-a1c-migration-inventory.md) |
+| A1C-P6 | Traced loader closure, multi-root SQLite aggregate lifecycle, and all eight agent-facing operations are exercised before production, with explicit separation between representative design evidence and production parity, contract, and platform gates. | `integration` | `representative` | `automated` | `satisfied` | [Binding assumptions validation](reports/a1c-binding-assumptions-validation.md) and its executable prototype |
+| A1C-A1 | The generated v12 Python Interface exposes exactly create/find/delete/undelete snapshot plus query/prepare/resolve/inspect; every request and result is Draft 2020-12 valid and no v11 reader or fallback remains. | `contract` | `not-applicable` | `automated` | `pending` | Milestone 5 |
+| A1C-A2 | Snapshot creation captures the complete loader-requested canonical authority closure from one exact current HEAD, persists immutable raw bytes under a unique opaque root, and never rereads mutable repository content for that root. | `integration` | `not-applicable` | `automated` | `pending` | Milestones 4 and 5 |
+| A1C-A3 | Equal-content roots retain independent lifecycle and dependent analysis; quarantine, undelete, expiry, purge, and shared-content cleanup are transactional and preserve the complete aggregate. | `integration` | `representative` | `automated` | `pending` | Milestone 4 and public workflow evidence in Milestone 5 |
+| A1C-A4 | Query, prepare, resolve, inspect, and every advertised child inspection reconstruct deterministically from the closed store in a fresh process without live repository, provider, authorization, or session substitution. | `system` | `representative` | `automated` | `pending` | Milestone 5 |
+| A1C-A5 | Coverage requirements and certificates bind only their typed semantic, relationship, fact-contract, horizon, evidence, and authorization dependencies; unrelated repository or suite-input changes preserve identity while a selected dependency changes it. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 5 |
+| A1C-A6 | The complete A1b Authority runtime, wrappers, public v11 forms, historical runtime fixtures, and stale package relationships are absent, with every migration consumer replaced or explicitly retired and no compatibility path. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 5 migration and absence evidence |
+| A1C-A7 | Snapshot creation, closed-store movement, locking, path handling, transaction behavior, cold replay, and quarantine work on real Linux, Windows, and macOS with supported CPython 3.11 and 3.12 combinations. | `system` | `required-real` | `automated` | `pending` | Milestone 6 platform evidence |
+| A1C-A8 | The eight agent-facing workflows produce typed results or exact typed rejections through the real Python facade; agents need no content hashes, Git revisions, database paths, child catalogs, or project labels. | `user-workflow` | `representative` | `automated` | `pending` | Milestones 5 and 6 |
 
 ## Acceptance Procedures
 
@@ -53,6 +54,7 @@ implementation scope are admitted.
 | A1C-P3 | Run `python3 docs/plans/standards-engine-a1c/reports/snapshot-aggregate-prototype.py` from the repository root, then compare both public Interface candidates, the A1b direct-object baseline, representative change paths, and evidence substitutions in the experiment report. | Architecture owner | A self-contained prototype may omit a material deployment, platform, authorization, or lifetime boundary. |
 | A1C-P4 | Complete the Architecture-owned composed-design probe against the produced candidate composition and record all unavailable or invalid outcomes before ADR selection. | Architecture owner | Review prose could assert simplicity without an inspectable produced artifact. |
 | A1C-P5 | Run the plan structure and routed planning suites, then manually trace every architecture decision to one exact write set, milestone, migration/deletion owner, gate, and re-plan trigger. Exact commands belong to the binding implementation plan. | Planning owner | A correct plan structure could still omit a semantic consumer or migration owner. |
+| A1C-P6 | Run `python3 docs/plans/standards-engine-a1c/reports/a1c-binding-assumptions-prototype.py`; inspect its named capture, aggregate, and workflow cases; and compare its explicit limits with the retained production gates. | Architecture and Persistence owners | Representative loaders and local SQLite cannot prove production parity or required-real platforms. |
 | A1C-A1 | Run the Contracts compiler freshness and reachable-definition checks, validate every example and public producer result through `jsonschema.Draft202012Validator`, and prove v11 inputs reject. | Contracts owner | Local producer agreement could still disagree with the selected Draft semantics. |
 | A1C-A2 | Create from a controlled Git repository, mutate the repository immediately afterward, reopen the store in a fresh process, and compare requested path closure, raw bytes, semantic projections, and provenance. | Repository Git, Snapshot, and Metadata owners | A traced loader could omit an undeclared authority input. |
 | A1C-A3 | Exercise two equal-content roots and dependent analyses through injected transaction failures, quarantine, undelete, expiry, purge, and content reference release. | Snapshot owner | Filesystem and SQLite failure modes may vary by platform. |
@@ -110,7 +112,7 @@ implementation scope are admitted.
   deduplication remain separately owned concepts.
 - Counts, file size, test totals, dependency totals, and incumbent structure
   may locate cost but cannot select the design.
-- No production mutation is authorized until A1C-P1 through A1C-P5 are
+- No production mutation is authorized until A1C-P1 through A1C-P6 are
   satisfied and the first exact production milestone is active.
 - Work is serial. The Concurrent Plan Integration profile is not applicable
   unless multiple proposals can actually become stale before integration.
@@ -421,17 +423,79 @@ hygiene pass.
 
 **Status:** `Implemented`
 
-### Milestone 3: Repository Git And Snapshot Foundation
+### Milestone 3: Binding Assumption Validation
+
+**Goal:** Validate the three remaining architecture assumptions through a
+bounded executable model and current-loader inventory before any production
+package, schema, fixture, suite, or authority changes.
+
+**Allowed write set:**
+
+- `docs/decisions/standards-engine-a1c.md`
+- `docs/plans/standards-engine-a1c/plan.md`
+- `docs/plans/standards-engine-a1c/execution-ledger.md`
+- `docs/plans/standards-engine-a1c/issues.md`
+- `docs/plans/standards-engine-a1c/reports/a1b-to-a1c-migration-inventory.md`
+- `docs/plans/standards-engine-a1c/reports/a1c-binding-assumptions-prototype.py`
+- `docs/plans/standards-engine-a1c/reports/a1c-binding-assumptions-validation.md`
+- `evaluation/standards-effectiveness/generated/suite-inputs.json`
+
+Production packages, canonical contracts, generated public models, fixtures,
+suite definitions, policy authority, standards, prompts, templates, accepted
+A1b evidence, and every A2 artifact remain read-only. The migration inventory
+may change only to replace milestone-number path-set names with stable semantic
+names; its path membership and dispositions must remain unchanged.
+
+**Tasks:**
+
+- [x] Exercise traced roots-only capture with typed loader-owned references,
+  frozen-byte replay, automatic closure expansion, and exact rejection of
+  escaped, missing, contradictory, or newly requested inputs.
+- [x] Inventory the current production roots and dynamic reference owners that
+  must migrate to one immutable content-source Interface.
+- [x] Exercise equal-content roots, multi-root analyses, quarantine, undelete,
+  expiry, transactional cascade, shared-content release, ID collision,
+  interrupted purge, and cold reopen in one disposable SQLite model.
+- [x] Exercise all eight operations across fresh-process, fresh-agent, and
+  coordinator-to-subagent workflows without caller-managed internal identity.
+- [x] Separate representative design conclusions from retained production
+  parity, generated-contract, authorization, and required-platform gates.
+- [x] Rename numbered migration path sets to semantic path-set names so future
+  sequencing changes do not churn migration authority.
+- [x] Regenerate the suite-input projection after the two new tracked evidence
+  paths are final; only the repository-index observation may change.
+
+**Deciding command:**
+
+```bash
+python3 docs/plans/standards-engine-a1c/reports/a1c-binding-assumptions-prototype.py
+```
+
+**Acceptance gate:** A1C-P6 is satisfied; each assumption is confirmed,
+replaced, or blocks production with a concrete contradiction; the report names
+what representative evidence cannot prove; migration path membership is
+unchanged; no production or canonical authority changed; generated freshness,
+plan structure, the complete checkpoint, and diff hygiene pass.
+
+**Re-plan conditions:** capture requires semantic inference in Snapshot,
+whole-repository scanning, or ambient fallback; one analysis cannot be owned
+transactionally by several roots; aggregate lifecycle leaves orphaned state;
+an agent workflow requires another public operation or independently managed
+child artifact; or a production write is needed to answer the design question.
+
+**Status:** `Implemented`
+
+### Milestone 4: Repository Git And Snapshot Foundation
 
 **Goal:** Implement the two upstream infrastructure Modules and their owned
 identity framing without exposing A1c publicly or creating a second semantic
 authority.
 
-**Allowed write set:** exact set `M3` in the
-[migration inventory](reports/a1b-to-a1c-migration-inventory.md#exact-milestone-path-sets),
+**Allowed write set:** exact set `Foundation` in the
+[migration inventory](reports/a1b-to-a1c-migration-inventory.md#exact-production-path-sets),
 plus this plan, ledger, issues, and the generated suite-input projection.
 
-`M3` contains only `standards_identity`, new `repository_git`, new
+`Foundation` contains only `standards_identity`, new `repository_git`, new
 `standards_snapshots`, and their direct tests and package documentation. The
 current Engine, Analysis, semantic loaders, public contract, A1b Authority,
 suite registry, policy graph, coverage authority, standards, and A2 are
@@ -480,20 +544,20 @@ A2 artifact changes; and focused verification plus diff hygiene passes.
 **Re-plan conditions:** a semantic loader must depend on Snapshot or SQLite; the
 Verifier must depend on snapshot lifecycle; roots require caller-provided
 meaning; aggregate storage cannot preserve atomic lifecycle; or a path outside
-`M3` is required to make the foundation independently valid.
+`Foundation` is required to make the foundation independently valid.
 
 **Status:** `Planned`
 
-### Milestone 4: Atomic A1c Runtime And Authority Cutover
+### Milestone 5: Atomic A1c Runtime And Authority Cutover
 
 **Goal:** Replace A1b with the complete eight-operation A1c product across the
 semantic loaders, Analysis aggregate, Engine facade, generated contract,
 packages, registered suites, graph authority, and coverage evidence in one
 coherent repository boundary.
 
-**Allowed write set:** exact sets `M4-runtime`, `M4-contract`,
-`M4-verification`, `M4-authority`, and `M4-deletions` in the
-[migration inventory](reports/a1b-to-a1c-migration-inventory.md#exact-milestone-path-sets),
+**Allowed write set:** exact sets `Cutover-runtime`, `Cutover-contract`,
+`Cutover-verification`, `Cutover-authority`, and `Cutover-deletions` in the
+[migration inventory](reports/a1b-to-a1c-migration-inventory.md#exact-production-path-sets),
 plus this plan, ledger, issues, and the A1c cutover evidence report. The named
 sets are path identities, not mutable counts or globs. A newly discovered
 consumer outside them is a re-plan trigger.
@@ -530,13 +594,13 @@ consumer outside them is a re-plan trigger.
   to exact public typed rejections without catching programming errors.
 - [ ] Replace package dependencies and Verifier Git imports according to the
   ADR Module graph, then delete A1b Authority and every wrapper or stale public
-  export in `M4-deletions`.
+  export in `Cutover-deletions`.
 - [ ] Replace A1b suites and fixtures with A1c contract, snapshot lifecycle,
   aggregate replay, public workflow, package-closure, and migration evidence.
   Negative fixtures must assert their intended typed diagnostic.
 - [ ] Freeze final package, contract, suite, node-catalog, relationship, and
   horizon paths; regenerate derived evidence; renew only the exact registered
-  attestations in `M4-authority`; and prove required coverage subjects equal
+  attestations in `Cutover-authority`; and prove required coverage subjects equal
   valid certificates.
 - [ ] Record one disposition for every migration-inventory row and every
   graph-selected consumer. No blocked or implicit disposition may remain.
@@ -566,7 +630,7 @@ requires extending retained Bash checkers.
 
 **Status:** `Planned`
 
-### Milestone 5: Required-Platform And Final Acceptance
+### Milestone 6: Required-Platform And Final Acceptance
 
 **Goal:** Prove the completed A1c product on every supported real platform and
 record content-bound final acceptance without changing product semantics.
@@ -582,7 +646,7 @@ record content-bound final acceptance without changing product semantics.
 
 Production source, contracts, fixtures, suites, graph authority, attestations,
 standards, and A2 are read-only. A product correction discovered by acceptance
-returns to Milestone 4 through re-planning; it is not repaired inside the
+returns to Milestone 5 through re-planning; it is not repaired inside the
 acceptance write set.
 
 **Tasks:**
@@ -615,7 +679,7 @@ review finds a material contract or architecture change.
 
 ## Blockers
 
-- `none`; Milestone 3 is planned and has not been started.
+- `none`; Milestone 4 is planned and has not been started.
 - Unknown external consumers remain a standing re-plan trigger.
 - A1c production mutation and all A2 work remain unavailable until their own
   exact milestone and lifecycle authority exist.
