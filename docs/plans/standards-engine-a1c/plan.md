@@ -2,11 +2,10 @@
 
 **Plan status:** `Planned`
 
-**Current phase:** Product-contract discovery before architecture admission
+**Current phase:** Bounded architecture experiments before composition selection
 
-**Next slice:** Re-plan an exact architecture-experiment write set, prototype
-paths, deciding commands, and acceptance gates without admitting production
-runtime or A2 changes
+**Next slice:** Implement the admitted snapshot-aggregate prototype and record
+the experiment results without modifying production runtime or A2 authority
 
 **Acceptance status:** `pending`
 
@@ -42,7 +41,7 @@ implementation scope are admitted.
 | --- | --- | --- | --- |
 | A1C-P1 | The product owner executes each named caller workflow against the current public Interface, records the deployment and retained handles, and signs the completed discovery fields. | A1c product owner | A test-only or hypothetical caller could be mistaken for product demand. |
 | A1C-P2 | Search current package imports, tool registrations, persisted stores, fixtures, and operational documentation; record every match and an explicit bounded-empty result for every searched class. | A1c consumer-inventory owner | An unregistered external consumer cannot be discovered from repository evidence alone. |
-| A1C-P3 | Run each admitted experiment through the same representative workflows and compare Interface knowledge, representative change Locality, deletion results, and failure ownership. Exact commands belong to the later experiment admission. | Architecture owner | A prototype may omit a material deployment or lifetime boundary. |
+| A1C-P3 | Run `python3 docs/plans/standards-engine-a1c/reports/snapshot-aggregate-prototype.py` from the repository root, then compare both public Interface candidates, the A1b direct-object baseline, representative change paths, and evidence substitutions in the experiment report. | Architecture owner | A self-contained prototype may omit a material deployment, platform, authorization, or lifetime boundary. |
 | A1C-P4 | Complete the Architecture-owned composed-design probe against the produced candidate composition and record all unavailable or invalid outcomes before ADR selection. | Architecture owner | Review prose could assert simplicity without an inspectable produced artifact. |
 | A1C-P5 | Run the plan structure and routed planning suites, then manually trace every architecture decision to one exact write set, milestone, migration/deletion owner, gate, and re-plan trigger. Exact commands belong to the binding implementation plan. | Planning owner | A correct plan structure could still omit a semantic consumer or migration owner. |
 
@@ -257,6 +256,68 @@ set before any prototype or runtime mutation.
 
 **Status:** `Implemented`
 
+### Milestone 1: Snapshot Aggregate And Interface Experiments
+
+**Goal:** Exercise the required caller workflows against disposable candidate
+models and select or reject the snapshot, persistence, inspection, and public
+Interface hypotheses without changing A1b production behavior.
+
+**Allowed write set:**
+
+- `docs/plans/standards-engine-a1c/plan.md`
+- `docs/plans/standards-engine-a1c/execution-ledger.md`
+- `docs/plans/standards-engine-a1c/issues.md`
+- `docs/plans/standards-engine-a1c/reports/product-contract-discovery.md`
+- `docs/plans/standards-engine-a1c/reports/snapshot-aggregate-prototype.py`
+- `docs/plans/standards-engine-a1c/reports/architecture-experiment-results.md`
+- `evaluation/standards-effectiveness/generated/suite-inputs.json`
+
+No file under a production package, canonical contract, policy graph,
+standards Module, prompt, template, fixture registry, or A2 plan is writable in
+this milestone. The executable report is design evidence, not a shipped Module,
+validator, migration utility, or compatibility reader.
+
+**Tasks:**
+
+- [ ] Model content-addressed canonical content and opaque independently
+  retained snapshot roots over one in-memory SQLite database.
+- [ ] Exercise two equal-content roots with independent children, quarantine,
+  undelete, expiry, transactional purge, and shared-content retention.
+- [ ] Exercise active and lifecycle discovery, cold reopen, current-canonical
+  capture with no caller revision, and ordinary-operation quarantine refusal.
+- [ ] Compare one tagged snapshot-management operation with explicit
+  create/find/delete/undelete methods over the same internal Snapshot Module.
+- [ ] Compare aggregate-derived child inspection with A1b's independently
+  durable child-object mechanism through deletion and representative Locality
+  probes.
+- [ ] Record the required summary fields, unresolved tombstone/expired-handle
+  behavior, authorization seam, platform limits, and every omitted production
+  concern instead of silently treating the prototype as complete.
+- [ ] Complete the composed-design probe for every candidate retained after
+  the executable cases.
+- [ ] Regenerate the suite-input projection after the two tracked experiment
+  paths are final; only the repository-index observation may change.
+
+**Deciding command:**
+
+```bash
+python3 docs/plans/standards-engine-a1c/reports/snapshot-aggregate-prototype.py
+```
+
+The command must exit nonzero on any failed case and report named outcomes for
+same-content isolation, active discovery, quarantined discovery, cold reopen,
+undelete, expiry, purge, shared-content preservation, and child inspection.
+
+**Acceptance gate:** A1C-P3 is satisfied; every A1C-E1 through A1C-E6 question
+has an evidence-backed disposition or remains an explicit blocker; no
+production source or contract changed; the composed-design probe identifies
+Interface knowledge, owner, lifecycle, change reason, deletion result, and
+failure ownership for each retained concern; generated freshness, focused
+planning suites, the complete declarative/checker checkpoint, and diff hygiene
+pass.
+
+**Status:** `Planned`
+
 ## Blockers
 
 These blockers constrain architecture and implementation; they do not make the
@@ -268,8 +329,10 @@ bounded Milestone 0 discovery work unavailable.
 - A1C-002's current-tree consumer and retained-state inventory is complete.
   Unknown external consumers remain a standing re-plan trigger rather than a
   blocker to the bounded design experiments.
+- A1C-003 through A1C-005 and A1C-007 block composition selection, not the
+  Milestone 1 experiments that are intended to resolve them.
 - A1c runtime mutation and all A2 work remain unavailable throughout Milestone
-  0 regardless of discovery progress.
+  1 regardless of experiment results.
 
 ## Re-Plan Triggers
 

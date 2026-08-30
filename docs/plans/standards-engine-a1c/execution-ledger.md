@@ -407,3 +407,23 @@
 - A1C-001 and A1C-002 are resolved. Milestone 0 is Implemented; architecture
   selection remains unavailable until the experiment milestone is separately
   admitted with exact prototype paths and deciding evidence.
+
+## 2026-08-29 - Architecture Experiment Scope Admitted
+
+- Milestone 1 admits one self-contained Python snapshot-aggregate prototype
+  and one results report under the A1c plan's `reports/` directory. The
+  prototype is disposable design evidence and cannot become production or
+  compatibility authority by location or reuse.
+- The prototype may use standard-library SQLite in memory to exercise
+  transactional ownership, but SQLite remains an experiment candidate rather
+  than a selected production schema or storage contract.
+- The admitted cases cover equal-content independent roots, discovery,
+  quarantine, undelete, expiry, purge, cold reopen, aggregate child inspection,
+  public Interface alternatives, representative change Locality, and evidence
+  substitution.
+- Production packages, canonical contracts, policy authority, standards,
+  prompts, templates, registered fixtures, and A2 remain read-only.
+- Adding the two tracked experiment paths will change the generated
+  repository-index observation. Milestone 1 owns the corresponding mechanical
+  suite-input regeneration after those paths are final; no suite semantics may
+  change.
