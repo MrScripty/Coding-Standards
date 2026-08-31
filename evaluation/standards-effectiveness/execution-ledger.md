@@ -14952,3 +14952,25 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 43-entrypoint checkpoint pass. Final graph: 43 Bash
   checkers, 46 nodes, 300 edges, and 46 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I83 Input-Validation Authority Acceptance
+
+- Fresh post-M6-I82 evidence reports 43 Bash verifiers, 46 nodes, 300 edges,
+  and 46 components. Eight verifiers have no executable inbound edge; two are
+  at the highest dependency wave 6. The 119-line input-validation authority
+  verifier is the smallest coherent wave-6 candidate. M6-I83 is
+  `serial-coherent` at train order 198.
+- One eight-check owner-local suite preserves all 17 typed decisions, exact
+  `STD-0588` through `STD-0591` source identities and dispositions, metadata
+  closure, canonical Security policy, the bounded legacy route, finding
+  closure, and the README projection.
+- Native metadata authority replaces helper execution. Six outgoing records
+  retain runtime decoding, filesystem containment, and the independent trust
+  re-plan as separate gates; four prior M6-I78 and M6-I79 records move to
+  registered suite evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 42-entrypoint checkpoint pass. Final graph: 42 Bash
+  checkers, 45 nodes, 289 edges, and 45 components; fresh graph evidence is
+  required next.

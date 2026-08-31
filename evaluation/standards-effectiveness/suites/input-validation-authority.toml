@@ -1,0 +1,151 @@
+schema_version = 1
+id = "input-validation-authority"
+owner = "topic.security"
+description = "Operation-contract-selected validation authority for untrusted input with complete coverage, conformance evidence, and typed outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/security/input-validation-authority-decisions.tsv"
+expected_column = "expected"
+default = "typed-invalid"
+[checks.domains]
+case = ["*"]
+applicability = ["untrusted", "trusted"]
+contract = ["selected", "missing", "unsupported", "not-required"]
+authority = ["selected", "generated", "conformant", "global", "multiple", "missing", "not-required"]
+coverage = ["complete", "partial", "not-required"]
+capability = ["available", "unavailable"]
+fallback = ["none", "global-validator", "fixed-regex", "fixed-length", "cast", "inline-duplicate", "original-input", "permissive-default", "weaker-validator"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "authority", op = "in", values = ["global", "multiple"] },
+  { field = "coverage", op = "eq", value = "partial" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "contract"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "allow"
+[checks.rules.when]
+all = [
+  { field = "applicability", op = "eq", value = "trusted" },
+  { field = "contract", op = "eq", value = "not-required" },
+  { field = "authority", op = "eq", value = "not-required" },
+  { field = "coverage", op = "eq", value = "not-required" },
+]
+[[checks.rules]]
+outcome = "allow"
+[checks.rules.when]
+all = [
+  { field = "applicability", op = "eq", value = "untrusted" },
+  { field = "contract", op = "eq", value = "selected" },
+  { field = "authority", op = "in", values = ["selected", "generated", "conformant"] },
+  { field = "coverage", op = "eq", value = "complete" },
+]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0588", "SECURITY-STANDARDS.md"],
+  ["STD-0589", "SECURITY-STANDARDS.md"],
+  ["STD-0590", "SECURITY-STANDARDS.md"],
+  ["STD-0591", "SECURITY-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0588", "STD-0589", "STD-0590", "STD-0591"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0588", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "require operation-specific validation authority before untrusted input authorizes security-relevant work"],
+  ["STD-0589", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "replace one global validator utility with a contract-selected canonical validation authority"],
+  ["STD-0590", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "derive validation invariants and specialized mechanisms from the complete operation contract"],
+  ["STD-0591", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "require canonical authority and conformance evidence while permitting distinct contracts and new-boundary proof"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0588", "STD-0589", "STD-0590", "STD-0591"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/security.md",
+]
+
+[[checks]]
+id = "security-policy"
+type = "markdown_section_text"
+path = "topics/security.md"
+heading = "## Input Validation Authority"
+required = [
+  "complete operation contract",
+  "one canonical validation authority",
+  "does not mandate",
+  "consume the same",
+  "conformance evidence",
+  "Different operation",
+  "proof-bearing representation",
+  "typed `invalid`",
+  "`unsupported`",
+  "`unavailable`",
+  "Do not fall back to a global catch-all validator",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-route"
+type = "text"
+path = "SECURITY-STANDARDS.md"
+required = ["topics/security.md#input-validation-authority"]
+prohibited = ["InputValidator", "SafeNamePattern", "Regex", "minLength", "maxLength", "Runtime type check before cast", "Bounds check before use", "single implementation", "```csharp"]
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F056 | Resolved in Milestone 7.4b8a |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `input-validation-authority` suite checks operation-specific"]
+prohibited = ["`verify-input-validation-authority.sh` check operation-specific"]

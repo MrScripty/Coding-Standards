@@ -6057,3 +6057,31 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 43 Bash checkers, 46 nodes, 300 edges, and 46 components. The old checker
 is absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I83 Input-Validation Authority Acceptance
+
+Fresh post-M6-I82 evidence reports 43 Bash verifiers, 46 nodes, 300 edges,
+and 46 components. Eight verifiers have no executable inbound edge; two are at
+the highest dependency wave 6. The 119-line
+`verify-input-validation-authority.sh` is the smallest coherent wave-6
+candidate. Its three inbound references are historical contract evidence, and
+it invokes one metadata helper plus three separately owned gates. The package
+is `serial-coherent` because no shared engine, schema, policy, or unresolved
+owner contract changes.
+
+One eight-check `topic.security` suite preserves all 17 typed decisions,
+exact `STD-0588` through `STD-0591` source identities and dispositions,
+metadata closure, canonical Security policy, the bounded legacy route, finding
+closure, and the README projection. Native metadata authority replaces helper
+execution. Six outgoing records retain runtime decoding, filesystem
+containment, and the independent trust re-plan as separate gates. Four prior
+M6-I78 and M6-I79 records transition to registered suite evidence.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing canonical validation authority, and restoration of a prohibited
+legacy validator. Exact final compilation renews 22 dependency-local
+requirements and leaves 29 stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 42 Bash checkers, 45 nodes, 289 edges, and 45 components. The old checker
+is absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

@@ -872,14 +872,14 @@ may retain one canonical owner while separating independently testable
 contracts, as in Rust binding error mapping, event delivery, and callback task
 adaptation.
 
-`fixtures/security/input-validation-authority-decisions.tsv` and
-`verify-input-validation-authority.sh` check operation-specific validation
-authority, complete-contract coverage, generated or conformance-proven
-implementation equivalence,
-typed invalid/unsupported/unavailable outcomes, exact dispositions, bounded
-legacy replacement, and rejection of global-validator, fixed-rule, cast,
-duplicate-inline, original-input, permissive-default, and weaker-validator
-fallbacks.
+The registered `input-validation-authority` suite checks operation-specific
+validation authority, complete-contract coverage, generated or
+conformance-proven implementation equivalence, typed
+invalid/unsupported/unavailable outcomes,
+exact dispositions, bounded legacy replacement, and rejection of
+global-validator, fixed-rule, cast, duplicate-inline, original-input,
+permissive-default, and weaker-validator fallbacks using
+`fixtures/security/input-validation-authority-decisions.tsv`.
 
 `fixtures/contracts/cross-language-contract-decisions.tsv` and
 `verify-cross-language-contract.sh` check contract-class selection, canonical

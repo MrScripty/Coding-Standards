@@ -1121,6 +1121,11 @@ path = "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml
 requires = []
 
 [[suites]]
+id = "input-validation-authority"
+path = "evaluation/standards-effectiveness/suites/input-validation-authority.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []

@@ -479,6 +479,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -1053,6 +1058,11 @@
       "path": "SECURITY-STANDARDS.md",
       "state": "present",
       "uses": [
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "input-validation-authority"
+        },
         {
           "check": "security-boundary",
           "role": "content",
@@ -1702,7 +1712,7 @@
       ]
     },
     {
-      "digest": "sha256:ebb47759eac440720e2ab1feb19ba7eda734cff8ef15fafa545b4e4419b3171d",
+      "digest": "sha256:6dc969886ad3e4ab732e3ded4085fb1328cfdd7b6ea19d7f775611a4ee9d9148",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1714,7 +1724,7 @@
       ]
     },
     {
-      "digest": "sha256:d762d520dc340ec15adf0d24f519d52adf933aa9c99aef6667bf5c62533ffa6f",
+      "digest": "sha256:b2ffa2b2f07fcb80c1e03f7b917d15c6869ce6d3fce5cedb50ac37d11a272df1",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1757,6 +1767,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "godot-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "input-validation-authority"
         },
         {
           "check": "documentation-projection",
@@ -1940,7 +1955,7 @@
       ]
     },
     {
-      "digest": "sha256:6154633591ad7afe94ff43a138c6d3bbe651d18604dbee77e5758eec0ef62a90",
+      "digest": "sha256:14ec8de4ea16843032bf3c653c0283ff4045ea6eed2f8ca4698e599809d076a1",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2340,6 +2355,11 @@
           "check": "dispositions",
           "role": "content",
           "suite": "implementation-disabled-lifecycle"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "input-validation-authority"
         },
         {
           "check": "exact-disposition",
@@ -3123,7 +3143,7 @@
       ]
     },
     {
-      "digest": "sha256:7b4e5b6bf63f6feeb46a4be8532e7eb5becab8b841ff1bfb4483c64136f593f4",
+      "digest": "sha256:f9d3ff727e73bd8228a4341a6f6a5a58c10a3e7adcbba643a2af0595e547ddc0",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3139,6 +3159,11 @@
       "path": "evaluation/standards-effectiveness/findings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "input-validation-authority"
+        },
         {
           "check": "resolved-finding",
           "role": "content",
@@ -5821,6 +5846,18 @@
       ]
     },
     {
+      "digest": "sha256:cd3ac06efe918c3ede5bdb476054d72c1e3a32093342941cde5ed157f37ede3c",
+      "path": "evaluation/standards-effectiveness/fixtures/security/input-validation-authority-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "input-validation-authority"
+        }
+      ]
+    },
+    {
       "digest": "sha256:32aca511c7bfaa7ab4954d50eb80873b9e15def83633a6a6dc98a27dcb7d7f48",
       "path": "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv",
       "state": "present",
@@ -6240,7 +6277,7 @@
       ]
     },
     {
-      "digest": "sha256:c5ff38a86ce20e4beacacb490a1c2975cb24a44fcf4b171ad634fbe2fddf0036",
+      "digest": "sha256:0ea999910dc105309f77b1e637e09717df980df0ec3cf059ca3643c470c9b6ac",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6252,7 +6289,7 @@
       ]
     },
     {
-      "digest": "sha256:7eba0cc5c469309234b843ded572d965aa1f4ff03ca917bd1230a63264379ff7",
+      "digest": "sha256:dee043db233cdd00aaa88616196c199133a0abbb35d296f4d64a37a637b52138",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6390,6 +6427,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "documentation-reference"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "input-validation-authority"
         },
         {
           "check": "section-inventory",
@@ -8801,7 +8843,7 @@
       ]
     },
     {
-      "digest": "sha256:6901272d9745cc811ee241ead6c4b6c8a725d249d712a4c0fde4e784849e9856",
+      "digest": "sha256:d1c83529fa32463347617e0fdf9dc6847f2ab57de7d49662a16ad240f048a7b9",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -9679,6 +9721,18 @@
     {
       "digest": "sha256:001ab1ee89db59fec429838e86f6047ec7feb12d8c1fea1e0f2d5dabdc637264",
       "path": "evaluation/standards-effectiveness/suites/implementation-versus-dependency.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:888922c368125f3fa96264a240d8355044caab41140286485912d49d42db1fbb",
+      "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
       "state": "present",
       "uses": [
         {
@@ -11886,28 +11940,6 @@
     {
       "digest": "sha256:2717e32caa7a88c96fbabfc32b1a4f6cbe3dafdfea64bb64beb4ea23c25db357",
       "path": "evaluation/standards-effectiveness/verify-historical-row-checker-ownership.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:7f708a570b40b53626eb1f73f8a1054f5499b55e26a4dc419f2fb41e0a6f28c6",
-      "path": "evaluation/standards-effectiveness/verify-input-validation-authority.sh",
       "state": "present",
       "uses": [
         {
@@ -20255,6 +20287,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -20960,6 +20997,16 @@
           "check": "canonical-owner",
           "role": "content",
           "suite": "generated-command-security"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "security-policy",
+          "role": "content",
+          "suite": "input-validation-authority"
         },
         {
           "check": "metadata-closure",
@@ -21985,6 +22032,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -22306,11 +22358,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:6901272d9745cc811ee241ead6c4b6c8a725d249d712a4c0fde4e784849e9856",
+    "digest": "sha256:d1c83529fa32463347617e0fdf9dc6847f2ab57de7d49662a16ad240f048a7b9",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:ae367e253747cd0ebc0c3c9b0de035f40c8cdc5a728401ef6d156b903a3cab72",
+    "digest": "sha256:0401bd168b617c59fb08199dbeb8baea8fcb25d2cfe4bd2a49f16b586d4dfa20",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23715,6 +23767,12 @@
       "digest": "sha256:180bb1aa4de47baf0938fd5bddf7be232406b9f33dd22aaf235b67425bf71411",
       "id": "validation-proof-lifetime",
       "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:888922c368125f3fa96264a240d8355044caab41140286485912d49d42db1fbb",
+      "id": "input-validation-authority",
+      "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
       "requires": []
     },
     {
