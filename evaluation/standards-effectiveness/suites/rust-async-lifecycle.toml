@@ -1,0 +1,156 @@
+schema_version = 1
+id = "rust-async-lifecycle"
+owner = "profile.language.rust.async"
+description = "Composition-owned Rust runtime capability, task lifecycle, failure observation, shutdown, and abort authority."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/async-lifecycle-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+runtime_owner = ["composition", "library-global", "missing"]
+task_tracking = ["none", "tracked", "detached"]
+failure = ["observed", "discarded", "leaf-logged", "not-required"]
+admission = ["closed", "open", "not-required"]
+drain = ["complete", "incomplete", "not-required"]
+abort = ["none", "authorized-safe", "authorized-unsafe", "unauthorized"]
+capability = ["available", "unavailable"]
+fallback = ["none", "alternate-runtime", "leaf-logging", "force-abort"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "runtime_owner", op = "eq", value = "library-global" },
+  { field = "task_tracking", op = "eq", value = "detached" },
+  { field = "failure", op = "in", values = ["discarded", "leaf-logged"] },
+  { field = "admission", op = "eq", value = "open" },
+  { field = "abort", op = "in", values = ["authorized-unsafe", "unauthorized"] },
+  { field = "fallback", op = "ne", value = "none" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "runtime_owner", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { all = [
+    { field = "drain", op = "eq", value = "incomplete" },
+    { field = "abort", op = "ne", value = "authorized-safe" },
+  ] },
+]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0719", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+  ["STD-0720", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+  ["STD-0721", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0719", "STD-0720", "STD-0721"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0719", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "assign runtime construction to composition ownership without a library-global default"],
+  ["STD-0720", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "require tracked task completion failure and shutdown ownership"],
+  ["STD-0721", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "coordinate admission cancellation draining and abort authority"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0719", "STD-0720", "STD-0721"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/concurrency.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/async.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/async.md"
+required = [
+  "## Runtime Composition",
+  "composition root owns runtime construction",
+  "process-global or alternate runtime to make an operation execute.",
+  "## Own Spawned Work",
+  "observes success, failure, panic, and cancellation",
+  "## Coordinate Shutdown",
+  "closes admission for new owned work",
+  "A time limit does not itself authorize abort.",
+  "## No Fallback",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-runtime-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+heading = "## Runtime Boundaries"
+required = ["async.md#runtime-composition"]
+prohibited = ["tokio::spawn", "JoinHandle", "JoinSet", "TaskTracker", "CancellationToken", "tokio::sync::watch", "force-aborting"]
+
+[[checks]]
+id = "legacy-task-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+heading = "## Task Lifecycle"
+required = ["async.md#own-spawned-work"]
+prohibited = ["tokio::spawn", "JoinHandle", "JoinSet", "TaskTracker", "CancellationToken", "tokio::sync::watch", "force-aborting"]
+
+[[checks]]
+id = "legacy-shutdown-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+heading = "## Graceful Shutdown"
+required = ["async.md#coordinate-shutdown"]
+prohibited = ["tokio::spawn", "JoinHandle", "JoinSet", "TaskTracker", "CancellationToken", "tokio::sync::watch", "force-aborting"]
+
+[[checks]]
+id = "legacy-siblings"
+type = "text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+required = [
+  "## Runtime Boundaries",
+  "## Task Lifecycle",
+  "## Graceful Shutdown",
+  "## Blocking Work",
+  "## Mutex Selection",
+  "## Cancellation Safety",
+  "## Observability",
+]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-async-lifecycle` suite checks composition-owned runtime capability,"]
+prohibited = ["`verify-rust-async-lifecycle.sh` checks composition-owned runtime capability,"]

@@ -6169,3 +6169,31 @@ numeric, plan, and complete mixed evidence pass. Final graph: 39 Bash checkers,
 42 nodes, 262 edges, and 42 components. The old checker is absent without a
 source-policy rewrite, nested execution, wrapper, compatibility representation,
 or fallback.
+
+### M6-I87 Rust Async-Lifecycle Acceptance
+
+Fresh post-M6-I86 evidence reports 39 Bash verifiers, 42 nodes, 262 edges,
+and 42 components. Six verifiers have no executable inbound edge; the
+101-line `verify-rust-async-lifecycle.sh` is the sole candidate at the highest
+dependency wave 4. Its three inbound references are historical contract
+evidence, and it invokes one metadata helper plus two separately owned gates.
+The package is `serial-coherent` because no shared engine, schema, policy, or
+unresolved owner contract changes.
+
+One ten-check `profile.language.rust.async` suite preserves all 16 typed
+decisions, exact `STD-0719` through `STD-0721` source identities and
+dispositions, metadata closure, canonical Rust Async policy, bounded legacy
+routes and sibling headings, and the README projection. Native metadata
+authority replaces helper execution. Four outgoing records retain Rust Async
+decomposition and trust-lifecycle replanning as separate gates. Four prior
+M6-I71 and M6-I86 records transition to registered suite evidence. Row-35
+README-consumer evidence removes the retired checker.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing runtime-composition authority, and restoration of a prohibited legacy
+mechanism. Exact final compilation renews 22 dependency-local requirements and
+leaves 29 stable, closing 51/51 coverage. All focused, graph, declarative,
+generated, numeric, plan, and complete mixed evidence pass. Final graph: 38
+Bash checkers, 41 nodes, 253 edges, and 41 components. The old checker is
+absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

@@ -589,6 +589,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-callback-task"
         },
         {
@@ -1732,7 +1737,7 @@
       ]
     },
     {
-      "digest": "sha256:09224fce89ddf58f8d1d648e480f4e0c2402420e8f82dface96823fdde0ddffa",
+      "digest": "sha256:f096cdff87d08019f93ceda31938a602f067e24fdd2764e59b1d3af15c8878af",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1744,7 +1749,7 @@
       ]
     },
     {
-      "digest": "sha256:1574acafd6cf37c70ba500f4050e5e2537d452cc8ad2222127ec4a6fc922d0c4",
+      "digest": "sha256:d4a09a2a6904c51ed8abf96e984cc6a8d1dacceda2235d6a0b9129d3202e1af0",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1847,6 +1852,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "rust-async-boundary"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
         },
         {
           "check": "documentation-projection",
@@ -1990,7 +2000,7 @@
       ]
     },
     {
-      "digest": "sha256:411d16727330abcd87528611014ef93f4870655621216cd8729bac746ef38c67",
+      "digest": "sha256:0bc1ad09bcd985295e18295abc7976d62498b363e31a7e3991dcd96692b8b171",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2737,6 +2747,11 @@
           "suite": "rust-async-cancellation-observability"
         },
         {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "rust-async-lifecycle"
+        },
+        {
           "check": "exact-disposition",
           "role": "table",
           "suite": "rust-binding-annotation-placement"
@@ -3193,7 +3208,7 @@
       ]
     },
     {
-      "digest": "sha256:75fe1722d77c71d38634ab534881bba6f1866d337642704b68c3dc85dd328784",
+      "digest": "sha256:da68a32144cd315c8d8c2e7c54b7bab1629c42a67bc951efd4e87b676ed4386d",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -5305,6 +5320,18 @@
       ]
     },
     {
+      "digest": "sha256:6021a3193187e0595fb20f4d63d26bffbaba3dcbbc3db68ba8930b2e89d94d06",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/async-lifecycle-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "rust-async-lifecycle"
+        }
+      ]
+    },
+    {
       "digest": "sha256:b29c762f31c98846ca19ef77bc21d83eb8e1bd8514467867501cb454547ff25c",
       "path": "evaluation/standards-effectiveness/fixtures/rust/binding-annotation-placement-decisions.tsv",
       "state": "present",
@@ -6373,7 +6400,7 @@
       ]
     },
     {
-      "digest": "sha256:877c979ecbc0ba1b93ab86f4fc8bd2b0713066f098363a6d791daba9b94ca8fb",
+      "digest": "sha256:bd7ee0ac74688e47dff6d0cf249c8ad619ab7ef1903a16fee5af2fc2d8637922",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6385,7 +6412,7 @@
       ]
     },
     {
-      "digest": "sha256:55990ed1dd3d7b3fc959e1c4e656475b5b392023eaf5b74cb799a9ae2623fa3b",
+      "digest": "sha256:f5f229e4e57ab8c688d07370cca23bb1d3cfeab3d4ebac982ea461c1e1afb3a5",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6623,6 +6650,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "rust-async-lifecycle"
         },
         {
           "check": "source-membership",
@@ -8019,7 +8051,7 @@
       ]
     },
     {
-      "digest": "sha256:6670341f0fecf84ae9320b1e530e7bed0f1516a9a32fb798b12704f958e5d99f",
+      "digest": "sha256:27d7ce2c6c5992c2f70cee2bed7d736bdf5d5c605f9ba8920e644771da7a865d",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
       "state": "present",
       "uses": [
@@ -8954,7 +8986,7 @@
       ]
     },
     {
-      "digest": "sha256:4f040b1bca0c7d35b7f5bbe64e3efdad352c04c8787f72ae1fc7c7ea5da6a2fb",
+      "digest": "sha256:6757fcd5ff7bab78eb20e3e316ee8c9ea1524108417a70af0c22e2709dcac93b",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10850,6 +10882,18 @@
       ]
     },
     {
+      "digest": "sha256:a980080fc72122a766b03e5592003fceff572c42e76ceed3e43790966eb0c482",
+      "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:91a5c611af482b811c65ef053f9e7805a31a90ba176d2655f4d66f1ce2cd22a9",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-annotation-placement.toml",
       "state": "present",
@@ -12619,33 +12663,6 @@
       ]
     },
     {
-      "digest": "sha256:a4182097c8250473a37feb9a86cbb200eef8f0e7eade482e2498e829c8e1ad21",
-      "path": "evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:84f8ef28ce0525e196fbe892cac902feaeddbe2608d948dd6b504122dae412f4",
       "path": "evaluation/standards-effectiveness/verify-rust-binding-architecture.sh",
       "state": "present",
@@ -12922,6 +12939,26 @@
           "check": "legacy-index",
           "role": "content",
           "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "legacy-runtime-route",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "legacy-shutdown-route",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "legacy-siblings",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "legacy-task-route",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
         }
       ]
     },
@@ -14182,6 +14219,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-callback-task"
         },
         {
@@ -14482,6 +14524,16 @@
           "check": "profile-policy",
           "role": "content",
           "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "profile-policy",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
         },
         {
           "check": "metadata-closure",
@@ -20286,6 +20338,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-callback-task"
         },
         {
@@ -22343,6 +22400,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-callback-task"
         },
         {
@@ -22559,11 +22621,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:4f040b1bca0c7d35b7f5bbe64e3efdad352c04c8787f72ae1fc7c7ea5da6a2fb",
+    "digest": "sha256:6757fcd5ff7bab78eb20e3e316ee8c9ea1524108417a70af0c22e2709dcac93b",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:5f96cc44b37303259136d956030175d9ceacd5d6e4a28561c0b4052eb98840a0",
+    "digest": "sha256:f20629f5c899b995a604f6e83c2eb3aa8fefe8446ece767369dbb4beb489946e",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23992,6 +24054,12 @@
       "digest": "sha256:41cfb5fd7e40562bc7dc18a597ba4757e6667d84cd817314bb6f7f98b025cd07",
       "id": "rust-listener-lifecycle",
       "path": "evaluation/standards-effectiveness/suites/rust-listener-lifecycle.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:a980080fc72122a766b03e5592003fceff572c42e76ceed3e43790966eb0c482",
+      "id": "rust-async-lifecycle",
+      "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
       "requires": []
     },
     {

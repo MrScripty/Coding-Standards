@@ -929,7 +929,7 @@ metadata and routing, bounded legacy replacement, later-section preservation,
 and rejection of caller-convenience, blanket-sync, runtime-creation, blocking,
 and detached-work fallback.
 
-`verify-rust-async-lifecycle.sh` checks composition-owned runtime capability,
+The registered `rust-async-lifecycle` suite checks composition-owned runtime capability,
 tracked task/failure ownership, admission closure, drain completion, abort
 authority, and idempotent shutdown. It proves exact disposition of `STD-0719`
 through `STD-0721` and rejects global/alternate runtimes, detached tasks,
