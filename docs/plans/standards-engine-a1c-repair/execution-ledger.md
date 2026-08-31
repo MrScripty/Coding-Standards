@@ -201,3 +201,46 @@
   cold child-kind reconstruction and real SQLite store round trips.
 - Milestone 1 is Accepted. Milestone 2 is Active and owns retirement of the
   one-time whole-graph migration checker plus final evidence revalidation.
+
+## 2026-08-30 - Milestone 2 Retirement-Closure Replan And Admission
+
+- Modeling the admitted migration-check retirement exposed directly affected
+  authority outside the original Milestone 2 write set: the shared Policy
+  Impact test, three graph consumers, one obsolete negative fixture, and every
+  repository attestation whose requirement binds the A1c evidence-suite
+  closure.
+- The prior Milestone 2 assumption that deleting only the dedicated checker
+  files and suite entry closed the behavior is `Superseded`. The plan now owns
+  the complete active retirement closure.
+- The user admitted the exact expansion. The permanent checker, its parser
+  registration, obsolete focused tests and fixture, graph nodes, and three
+  source-owned relationships may be removed together. The accepted migration
+  TSV remains historical evidence but is no longer an active suite input or
+  graph consumer.
+- The modeled final graph has 454 relationships. All eleven attestation
+  sources are writable only to bind the mechanically derived final 51
+  requirements after graph and suite inputs freeze. No policy unit, normative
+  standard, relationship kind, package, public operation, or product behavior
+  is added.
+
+## 2026-08-30 - Milestone 2 Corrective Revalidation Acceptance
+
+- The one-time whole-graph migration verifier, parser registration, obsolete
+  negative fixture, shared migration-only tests, graph nodes, and three
+  relationships are removed. Its completed TSV remains historical evidence
+  without active suite or graph authority.
+- The final graph compiles 51 subjects and 454 relationships. Exact coverage
+  closes at 51 requirements, 51 attestations, and 51 authorization records.
+- The real Linux harness now validates the concurrent child result and proves
+  only real copy, process, SQLite open/close, and public-workflow behavior.
+  Thirteen focused Snapshot tests separately prove deterministic transaction
+  and lifecycle rules.
+- The closed-file hash is retained only as raw-copy corruption evidence, with
+  an explicit removal trigger. It is not product identity, logical SQLite
+  equality, or compatibility authority.
+- The focused package tests, 431 Verifier tests, three platform-harness tests,
+  13 Snapshot tests, Standards Engine committed-candidate tests, Ruff,
+  generated freshness, all 227 declarative suites, all 53 retained checkers,
+  plan validation, and diff hygiene pass.
+- All corrective issues and A1CR-A1 through A1CR-A8 are satisfied. Milestone 2
+  and this corrective plan are Accepted; A2 remains outside this plan.

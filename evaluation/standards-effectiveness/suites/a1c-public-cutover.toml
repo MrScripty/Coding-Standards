@@ -9,40 +9,6 @@ type = "python_package_contract"
 fixtures = "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml"
 
 [[checks]]
-id = "policy-impact-migration"
-type = "policy_impact_migration"
-evidence = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv"
-accepted_tree = "8e0f96a61fcea2398418b17d16a061c20f7463f5"
-implementation_base = "59b2107a13d165986c64654217121ee9d18db6f4"
-accepted_registry = "evaluation/standards-effectiveness/policy-impact-registry.toml"
-proposed_registry = "evaluation/standards-effectiveness/policy-impact-registry.toml"
-retired_implementation = [
-  { path = "tools/standards_analysis/standards_analysis/authority.py", rationale = "Replaced by the AnalysisState aggregate and owner-local analysis semantics." },
-  { path = "tools/standards_analysis/standards_analysis/coverage_authority.py", rationale = "Replaced by repository coverage decisions loaded through the Analysis coverage interface." },
-  { path = "tools/standards_analysis/standards_analysis/suite_inputs.py", rationale = "Moved to the Verifier that owns generated suite-input evidence." },
-  { path = "tools/standards_authority/pyproject.toml", rationale = "The mixed authority package was deleted after its responsibilities moved to deeper owner Modules." },
-  { path = "tools/standards_authority/standards_authority/__init__.py", rationale = "The mixed authority package public root was deleted without a compatibility facade." },
-  { path = "tools/standards_authority/standards_authority/capture.py", rationale = "Repository capture moved to repository_git and snapshot construction moved to standards_snapshots." },
-  { path = "tools/standards_authority/standards_authority/closure.py", rationale = "Closure is derived by semantic loaders over ContentSource and captured by the Engine composition root." },
-  { path = "tools/standards_authority/standards_authority/envelope.py", rationale = "Owner-encoded envelopes were replaced by opaque snapshot and analysis aggregates." },
-  { path = "tools/standards_authority/standards_authority/errors.py", rationale = "Failures are owned by repository_git and standards_snapshots." },
-  { path = "tools/standards_authority/standards_authority/git_index.py", rationale = "Git observations moved to repository_git." },
-  { path = "tools/standards_authority/standards_authority/model.py", rationale = "Authority models were split between repository_git, standards_snapshots, and AnalysisState." },
-  { path = "tools/standards_authority/standards_authority/platform.py", rationale = "Snapshot storage now uses platform-neutral SQLite and path-byte contracts." },
-  { path = "tools/standards_authority/standards_authority/recovery.py", rationale = "Aggregate transaction recovery is internal to standards_snapshots." },
-  { path = "tools/standards_authority/standards_authority/repository.py", rationale = "Immutable aggregate persistence moved to standards_snapshots." },
-  { path = "tools/standards_authority/standards_authority/snapshot.py", rationale = "Opaque snapshot roots and lifecycle moved to standards_snapshots." },
-  { path = "tools/standards_authority/standards_authority/store.py", rationale = "SQLite ownership moved to standards_snapshots." },
-  { path = "tools/standards_engine/standards_engine/authority.py", rationale = "Engine authority wrappers were replaced by direct composition of public owner interfaces." },
-  { path = "tools/standards_graph/standards_graph/authority.py", rationale = "Graph projection now consumes public metadata and policy-impact values directly." },
-  { path = "tools/standards_metadata/standards_metadata/authority.py", rationale = "Metadata now consumes the repository-neutral ContentSource interface." },
-  { path = "tools/standards_policy_impact/standards_policy_impact/authority.py", rationale = "Policy Impact now consumes the repository-neutral ContentSource interface." },
-]
-cases = [
-  { id = "missing-admitted-source", registry = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/missing-admitted-source.toml", expected = ["POLICY_IMPACT_MIGRATION.MISSING_SOURCE"] },
-]
-
-[[checks]]
 id = "module-public-roots"
 type = "path_state"
 present = [

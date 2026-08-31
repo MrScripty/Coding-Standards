@@ -2,7 +2,7 @@ schema_version = 5
 
 # core.simplicity-and-complection
 [[attestations]]
-requirement_id = "sha256:811449ddff76ef375348fb990b489f156555919f934816a7f0b0e9b8d4beed00"
+requirement_id = "sha256:66d079b77bc435cff666aa56b396dbd746c25972d9c35a10688d460a23e48849"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",

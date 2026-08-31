@@ -1,12 +1,12 @@
 # Plan: Standards Engine A1c Corrective Revalidation
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 2 evidence portfolio and revalidation
+**Current phase:** Milestone 2 accepted
 
-**Next slice:** Retire the one-time whole-graph migration checker while preserving its accepted evidence and smaller current invariants.
+**Next slice:** `none`
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -33,10 +33,10 @@ boundary.
 | A1CR-A2 | Persisted analysis distinguishes malformed state from a well-formed unsupported version, checks current domain compatibility, and cold-projects every advertised child without ambient authority. | `integration` | `representative` | `automated` | `satisfied` | [Committed-candidate Engine evidence](execution-ledger.md#2026-08-30---milestone-1-dependency-local-coverage-acceptance) |
 | A1CR-A3 | Snapshot creation requires identical first-pass and frozen-replay path closure as well as identical semantic output. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 0 ledger evidence](execution-ledger.md#2026-08-30---milestone-0-boundary-correction) |
 | A1CR-A4 | A subject's coverage identity changes for its policy, relationships, consumers, evidence-suite closure, or shared interpretation protocol and remains stable for an unrelated suite input; completeness review still blocks missing or undispositioned consumers. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 ledger evidence](execution-ledger.md#2026-08-30---milestone-1-dependency-local-coverage-acceptance) |
-| A1CR-A5 | Historical A1c migration evidence is content-bound and no permanent check compares that accepted boundary with unrelated future graph evolution. | `focused` | `not-applicable` | `automated` | `pending` | Milestone 2 evidence pending |
-| A1CR-A6 | Linux required-real evidence is limited to behavior that crosses the real platform boundary; deterministic transaction and lifecycle semantics retain focused evidence without being misrepresented as repeated platform proof. | `system` | `required-real` | `automated` | `pending` | Milestone 2 evidence pending |
-| A1CR-A7 | Version roles, local Git interpretation ownership, permanent byte-integrity evidence, and contract proof lifetime have explicit current decisions consistent with Architecture, Contracts, Dependencies, and Verification. | `contract` | `not-applicable` | `automated` | `pending` | Milestone 2 evidence pending |
-| A1CR-A8 | Focused package suites, generated freshness, complete declarative suites, retained checkers, formatting/linting, and diff hygiene pass on one coherent implementation. | `integration` | repository-supported verification environments | `automated` | `pending` | Final evidence pending |
+| A1CR-A5 | Historical A1c migration evidence is content-bound and no permanent check compares that accepted boundary with unrelated future graph evolution. | `focused` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](reports/milestone-2-corrective-acceptance.md) |
+| A1CR-A6 | Linux required-real evidence is limited to behavior that crosses the real platform boundary; deterministic transaction and lifecycle semantics retain focused evidence without being misrepresented as repeated platform proof. | `system` | `required-real` | `automated` | `satisfied` | [Milestone 2 acceptance](reports/milestone-2-corrective-acceptance.md) |
+| A1CR-A7 | Version roles, local Git interpretation ownership, permanent byte-integrity evidence, and contract proof lifetime have explicit current decisions consistent with Architecture, Contracts, Dependencies, and Verification. | `contract` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](reports/milestone-2-corrective-acceptance.md) |
+| A1CR-A8 | Focused package suites, generated freshness, complete declarative suites, retained checkers, formatting/linting, and diff hygiene pass on one coherent implementation. | `integration` | repository-supported verification environments | `automated` | `satisfied` | [Milestone 2 acceptance](reports/milestone-2-corrective-acceptance.md) |
 
 ## Scope
 
@@ -299,9 +299,13 @@ actual proof boundaries, and accept the repaired A1c result.
 - `docs/decisions/standards-engine-a1c.md`
 - `evaluation/standards-effectiveness/suites/a1c-public-cutover.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/a1c/missing-admitted-source.toml`
+- `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
+- `evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml`
+- The eleven registered files under `evaluation/standards-effectiveness/policy-coverage/attestations/`.
 - `tools/standards_verifier/standards_verifier/checks/__init__.py`
 - `tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py`
-- `tools/standards_verifier/tests/test_policy_impact_migration.py`
+- `tools/standards_verifier/tests/test_policy_impact.py`
 - `tools/standards_engine/tests/platform_harness.py`
 - `tools/standards_engine/tests/test_platform_harness.py`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
@@ -310,20 +314,23 @@ actual proof boundaries, and accept the repaired A1c result.
 
 **Tasks:**
 
-- [ ] Remove the permanent whole-graph migration check and preserve the accepted
+- [x] Remove the permanent whole-graph migration check and preserve the accepted
   fixture only as historical report evidence.
-- [ ] Retain smaller current package/removal invariants.
-- [ ] Run real-facade Linux transfer/concurrency evidence and focused
+- [x] Retain smaller current package/removal invariants.
+- [x] Remove the retired check's implementation and fixture graph nodes,
+  source-owned relationships, parser registration, and shared focused tests;
+  rederive the exact 51-subject coverage closure after those inputs are final.
+- [x] Run real-facade Linux transfer/concurrency evidence and focused
   transaction/lifecycle tests under their correct claim kinds.
-- [ ] Decide whether exact closed-store byte hashing has distinct transport
+- [x] Decide whether exact closed-store byte hashing has distinct transport
   value; retain it with a lifecycle statement or remove it.
-- [ ] Run complete verification and publish corrective acceptance evidence.
+- [x] Run complete verification and publish corrective acceptance evidence.
 
 **Acceptance gate:** A1CR-A1 through A1CR-A8 are satisfied, every issue is
 resolved or explicitly deferred outside the product claim, and the complete
 repository checkpoint and diff hygiene pass.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ## Blockers
 
@@ -359,8 +366,8 @@ boundaries follow coherent outcomes rather than plan lifecycle transitions.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: Windows and macOS remain unsupported until real evidence;
   cross-engine migration remains deferred until a published compatibility
   promise exists.
-- Final status: `Active`
+- Final status: `Accepted`

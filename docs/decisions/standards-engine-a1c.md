@@ -345,9 +345,19 @@ undeclared provider inputs cannot affect deterministic state creation.
 
 Linux is the verified A1c product platform on CPython 3.11 and 3.12. Logical
 repository paths use slash-independent component tuples and preserve Unicode
-codepoints and case. SQLite paths, locking, close behavior, atomic
-transactions, Git invocation, and closed-store copying have real Linux
-evidence.
+codepoints and case. The real Linux harness proves Git-backed capture, SQLite
+open and close behavior, unchanged closed-store copying, concurrent cold
+process reads, and the public snapshot and analysis workflow. Focused Snapshot
+tests separately prove deterministic transaction rollback, aggregate
+quarantine, expiry, and lifecycle rules; those tests are not represented as
+additional real-platform observations.
+
+The harness hashes a closed SQLite file only to detect corruption between its
+administrative copy and consumer open. That digest is test-local transport
+evidence, not snapshot identity, logical database identity, a compatibility
+promise, or a public import/export contract. Remove the hash when the tested
+transport supplies equivalent integrity verification or when the harness no
+longer copies raw closed-store bytes.
 
 The implementation retains platform-neutral identity, path, and closed-store
 boundaries, but A1c does not claim Windows or macOS support. Those platforms
@@ -407,6 +417,9 @@ authority.
 
 The exact component and consumer dispositions are owned by the
 [migration inventory](../plans/standards-engine-a1c/reports/a1b-to-a1c-migration-inventory.md).
+The completed relationship-migration table is retained as historical evidence
+only. It is not an active suite input, graph consumer, or permanent comparison
+between historical and current policy authority.
 
 ## Consequences
 

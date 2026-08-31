@@ -2,7 +2,7 @@ schema_version = 5
 
 # topic.contracts.declaration-and-semantic-authority
 [[attestations]]
-requirement_id = "sha256:b0c617fba44c2d6222da5127e5baa5bd3c69bddaa7dc342a96a316b98607bc86"
+requirement_id = "sha256:fabad417ac83a13d19108177622c8f0e290fb15e83b123634c0d361029be3adf"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -19,7 +19,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.contracts.generated-semantic-conformance
 [[attestations]]
-requirement_id = "sha256:e5d10c9b6d7a55c41590f5c88c2e8930f405c90649db8d5b942f0f3a74337427"
+requirement_id = "sha256:5158027436d300a1c0a17ab09bc04930449a880723981991e7e7229fc8a82df1"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -36,7 +36,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.contracts.identity-versus-instance-equality
 [[attestations]]
-requirement_id = "sha256:a712411c6bef20dddda42637dfe4a154fe3300ca7e51e6f84241d02e64933d96"
+requirement_id = "sha256:c153c12fd68b6fb9b6b65cc22fec06dad27bddc107f76f0b5929ebd0d5c15890"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -53,7 +53,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.contracts.invariant-contracts
 [[attestations]]
-requirement_id = "sha256:33c144184c6409655bbe8729edd6594928b3de4fc2bc71e11107ce59c9348bb8"
+requirement_id = "sha256:b3dcbccaf571cf9806f3aa6204a4d709788377847165e9168bba331c95c306fc"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
@@ -64,7 +64,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.contracts.schema-dialect-and-vocabulary
 [[attestations]]
-requirement_id = "sha256:3212d6f2a9dc2ea19ff9e6e535cd0f11c5c0376dd5eb81b96eaaabcd0df5120a"
+requirement_id = "sha256:cd35cbfbbb9f40baaf2e87c9bac24db72c43cb2a907f2ad1149098d10fb5bc27"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -80,7 +80,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.contracts.validation-proof-lifetime
 [[attestations]]
-requirement_id = "sha256:349d67357a25ec2f6d997dde3d767281dba544fe8b7c5381463919044ce934e0"
+requirement_id = "sha256:4e32255bc07395a560c2651ed83a4f310b07616476dc8f2d762482a1072f18b0"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
@@ -91,7 +91,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.contracts.version-scope-and-invalidation
 [[attestations]]
-requirement_id = "sha256:7730eeec272a80532da45afe90ee559f43eea09734ffa61a61d98a1ede5c16cc"
+requirement_id = "sha256:849a7826fa5d323f7ce8a0dec37519bdc8f42814bbf48b6f8c4b736264d1ca66"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

@@ -2,7 +2,7 @@ schema_version = 5
 
 # topic.dependencies.implementation-versus-dependency
 [[attestations]]
-requirement_id = "sha256:676357014b6a2ff51076974e72773d531b80f9e56ae0a3060e0723abc8642740"
+requirement_id = "sha256:e796e930bfc482aae24e243b26d9b939e8a621faafd06dfb04032bdd6d298b03"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -18,7 +18,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.dependencies.requirement-and-ownership
 [[attestations]]
-requirement_id = "sha256:eed83ffba82017966a0421c8f3a0036bad460ee5f9410bd3f66aeae131ad6c72"
+requirement_id = "sha256:c130cdb3b4c954bb47a4d647e0ff628e374ff54e3fa3193330278d1527a7d21d"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md",

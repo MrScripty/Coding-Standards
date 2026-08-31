@@ -419,14 +419,6 @@ rationale = "The package ownership contract governs this manifest-owned public b
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs the verifier implementation that proves exact policy-impact migration closure."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/tests/test_python_package_contract.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -440,22 +432,6 @@ relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1c-public-cutover"
 rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/missing-admitted-source.toml"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The fixture proves that an admitted declaration source cannot be omitted from the closed migration registry."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The evidence table closes accepted and proposed policy-impact natural keys without a mutable catalog count."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"

@@ -37,7 +37,6 @@ from tools.standards_engine.standards_engine import (
 )
 from tools.standards_engine.standards_engine.tools import _contracts
 
-
 SCHEMA_VERSION = 1
 POLICY_ID = "workflow.planning"
 POLICY_UNIT_ID = "workflow.planning.written-plan-applicability"
@@ -298,6 +297,7 @@ def produce(repository: Path, store: Path, manifest_path: Path) -> dict[str, obj
         "environment": manifest["producer"],
         "manifest": str(manifest_path),
         "store": str(store),
+        "content_sha256": manifest["read"]["content_sha256"],
         "store_sha256": manifest["store"]["sha256"],
     }
 
@@ -355,7 +355,10 @@ def _temporary_repository(root: Path) -> Path:
 
 
 def _concurrent_probe(
-    repository: Path, store: Path, manifest_path: Path
+    repository: Path,
+    store: Path,
+    manifest_path: Path,
+    expected_content_sha256: object,
 ) -> dict[str, object]:
     environment = dict(os.environ)
     environment.update(
@@ -392,6 +395,13 @@ def _concurrent_probe(
         result = json.loads(completed.stdout)
     except json.JSONDecodeError as error:
         raise HarnessError("concurrent cold probe returned invalid evidence") from error
+    if (
+        type(result) is not dict
+        or set(result) != {"kind", "content_sha256"}
+        or result["kind"] != "a1c-platform-concurrent-probe-result"
+        or result["content_sha256"] != expected_content_sha256
+    ):
+        raise HarnessError("concurrent cold probe returned mismatched evidence")
     return result
 
 
@@ -484,7 +494,12 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
                 AnalysisInspectionResult,
                 "inspect/resolved-analysis",
             )
-            concurrent = _concurrent_probe(repository, store, manifest_path)
+            concurrent = _concurrent_probe(
+                repository,
+                store,
+                manifest_path,
+                manifest["read"]["content_sha256"],
+            )
             _expect(
                 facade.call(
                     "delete_snapshot",

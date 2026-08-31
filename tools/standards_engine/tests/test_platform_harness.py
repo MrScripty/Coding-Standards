@@ -2,13 +2,16 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.standards_engine.tests.platform_harness import (
-    HarnessError,
     REPOSITORY_ROOT,
+    HarnessError,
+    _concurrent_probe,
     consume,
     produce,
 )
@@ -29,6 +32,13 @@ class PlatformHarnessTest(unittest.TestCase):
         self.assertEqual(produced["kind"], "a1c-platform-produce-result")
         self.assertEqual(consumed["kind"], "a1c-platform-consume-result")
         self.assertEqual(consumed["store_sha256"], produced["store_sha256"])
+        self.assertEqual(
+            consumed["concurrent_probe"],
+            {
+                "kind": "a1c-platform-concurrent-probe-result",
+                "content_sha256": produced["content_sha256"],
+            },
+        )
         self.assertFalse(consumed["canonical_source_repository_used"])
         self.assertEqual(
             consumed["operations"],
@@ -70,6 +80,33 @@ class PlatformHarnessTest(unittest.TestCase):
 
             with self.assertRaisesRegex(HarnessError, "bytes do not match"):
                 consume(store, manifest)
+
+    def test_concurrent_probe_rejects_mismatched_content(self) -> None:
+        completed = subprocess.CompletedProcess(
+            args=(),
+            returncode=0,
+            stdout=json.dumps(
+                {
+                    "kind": "a1c-platform-concurrent-probe-result",
+                    "content_sha256": "sha256:other",
+                }
+            ),
+            stderr="",
+        )
+
+        with (
+            patch(
+                "tools.standards_engine.tests.platform_harness.subprocess.run",
+                return_value=completed,
+            ),
+            self.assertRaisesRegex(HarnessError, "mismatched evidence"),
+        ):
+            _concurrent_probe(
+                Path("/repository"),
+                Path("/store"),
+                Path("/manifest"),
+                "sha256:expected",
+            )
 
 
 if __name__ == "__main__":

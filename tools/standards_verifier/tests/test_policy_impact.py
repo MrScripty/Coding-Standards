@@ -1,22 +1,24 @@
 from __future__ import annotations
 
-# ruff: noqa: E402 - repository package roots must be installed before imports.
-
-import os
-import subprocess
-import tempfile
 import sys
+import tempfile
 import textwrap
 import unittest
 from pathlib import Path
-from unittest.mock import Mock, patch
-
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(ENGINE_ROOT))
+
+from standards_verifier.diagnostics import EngineError
+from standards_verifier.policy_impact import (
+    DEFAULT_SOURCE_REGISTRY,
+    load_policy_impact,
+    load_registered_policy_impact,
+)
+from standards_verifier.repository_graph import load_repository_registry
 
 from tools.graph_engine.graph_engine import EdgeRegistry
 from tools.standards_metadata.standards_metadata import (
@@ -26,19 +28,6 @@ from tools.standards_policy_impact.standards_policy_impact import (
     DEFAULT_AUTHORING_CONTRACT,
     compile_policy_impact,
 )
-
-from standards_verifier.diagnostics import EngineError
-from standards_verifier.checks.policy_impact_migration import (
-    _changed_production_paths,
-    _materialized_tree,
-)
-from standards_verifier.model import CheckContext, SuiteCatalog
-from standards_verifier.policy_impact import (
-    DEFAULT_SOURCE_REGISTRY,
-    load_policy_impact,
-    load_registered_policy_impact,
-)
-from standards_verifier.repository_graph import load_repository_registry
 
 
 class PolicyImpactTest(unittest.TestCase):
@@ -430,63 +419,6 @@ class PolicyImpactTest(unittest.TestCase):
                 / "tools/standards_verifier/standards_verifier/policy_impact_cli.py"
             ).exists()
         )
-
-    @patch(
-        "standards_verifier.checks.policy_impact_migration.staged_name_status"
-    )
-    def test_copied_production_source_does_not_retire_its_source(
-        self, staged_name_status: Mock
-    ) -> None:
-        staged_name_status.return_value = (
-            "C100",
-            "tools/source.py",
-            "tools/copied.py",
-            "R100",
-            "tools/old.py",
-            "tools/renamed.py",
-        )
-        context = CheckContext(Path("."), "fixture", SuiteCatalog.empty())
-
-        current, retired = _changed_production_paths(
-            context, "migration", "a" * 40
-        )
-
-        self.assertEqual(
-            current,
-            frozenset({"tools/copied.py", "tools/renamed.py"}),
-        )
-        self.assertEqual(retired, frozenset({"tools/old.py"}))
-        staged_name_status.assert_called_once_with(
-            Path("."), "a" * 40, ("tools",)
-        )
-
-    def test_accepted_tree_materialization_ignores_ambient_git_overrides(
-        self,
-    ) -> None:
-        subprocess.run(("git", "init", "-q"), cwd=self.root, check=True)
-        self.write("tools/current.py", "value = 1\n")
-        subprocess.run(("git", "add", "-A"), cwd=self.root, check=True)
-        tree = subprocess.run(
-            ("git", "write-tree"),
-            cwd=self.root,
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
-        context = CheckContext(self.root, "fixture", SuiteCatalog.empty())
-
-        with patch.dict(
-            os.environ,
-            {"GIT_DIR": "/unavailable", "GIT_INDEX_FILE": "/unavailable/index"},
-        ):
-            with _materialized_tree(context, "migration", tree) as materialized:
-                self.assertEqual(
-                    (Path(materialized) / "tools/current.py").read_text(
-                        encoding="utf-8"
-                    ),
-                    "value = 1\n",
-                )
-
 
 if __name__ == "__main__":
     unittest.main()

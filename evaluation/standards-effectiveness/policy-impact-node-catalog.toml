@@ -462,10 +462,6 @@ id = "tools/standards_verifier/standards_verifier/checks/python_package_contract
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/python_package_contract.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
-id = "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py"
-metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/policy_impact_migration.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
 id = "tools/standards_verifier/standards_verifier/entrypoints.py"
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/entrypoints.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
@@ -480,14 +476,6 @@ metadata = { repository_path = "tools/standards_verifier/standards_verifier/pyth
 [[nodes]]
 id = "tools/standards_verifier/tests/test_python_package_contract.py"
 metadata = { repository_path = "tools/standards_verifier/tests/test_python_package_contract.py", artifact_kind = "fixture", authority = "evidence" }
-
-[[nodes]]
-id = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/missing-admitted-source.toml"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/missing-admitted-source.toml", artifact_kind = "fixture", authority = "evidence" }
-
-[[nodes]]
-id = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_verifier/verify.py"

@@ -2,7 +2,7 @@ schema_version = 5
 
 # profile.boundary.generated-contract.applicability
 [[attestations]]
-requirement_id = "sha256:959809482f90fd09fc061ef98b04fc4a7a1ed8a37dbcd2cc6420c8496856c403"
+requirement_id = "sha256:af9fb008a877b273ef475dbe38bae698cf041c2ecbb65c2cce6313e3ee83a98d"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -18,7 +18,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # profile.boundary.generated-contract.semantic-closure
 [[attestations]]
-requirement_id = "sha256:761c078b5400179d06d7692f64fc897cfcfcdd770c5d9b950f94ae05934d97dc"
+requirement_id = "sha256:15e1f1ecd9019df8a32564691f5161d274026b89b296c570be88b74a669c5f54"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
