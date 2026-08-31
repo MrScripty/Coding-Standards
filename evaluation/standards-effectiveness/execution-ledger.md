@@ -15081,3 +15081,24 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   plan checks, and the complete 37-entrypoint checkpoint pass. Final graph: 37
   Bash checkers, 40 nodes, 246 edges, and 40 components; fresh graph evidence
   is required next.
+
+## 2026-08-31 - M6-I89 Filesystem-Containment Acceptance
+
+- Fresh post-M6-I88 evidence reports 37 Bash verifiers, 40 nodes, 246 edges,
+  and 40 components. Four verifiers have no executable inbound edge; two are
+  at the highest dependency wave 1. The 156-line filesystem-containment
+  verifier is the smaller coherent wave-1 candidate. M6-I89 is
+  `serial-coherent` at train order 204.
+- One ten-check owner-local suite preserves all 11 typed decisions, nine exact
+  source identities and dispositions, metadata closure, Router and legacy
+  routes, canonical Security and Cross-Platform policy, unsafe-pattern
+  removal, and the README projection.
+- Native metadata authority replaces helper execution. Eight prior M6-I78,
+  M6-I79, M6-I83, and M6-I85 records move to registered suite evidence.
+  Row-35 README-dependency evidence removes the retired checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 36-entrypoint checkpoint pass. Final graph: 36
+  Bash checkers, 39 nodes, 242 edges, and 39 components; fresh graph evidence
+  is required next.

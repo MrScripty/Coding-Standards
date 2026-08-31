@@ -725,8 +725,8 @@ replacement; and rejection of weaker-path fallback.
 
 ## Filesystem Containment Fixtures
 
-`fixtures/security/path-containment-decisions.tsv` and
-`verify-filesystem-containment-policy.sh` check component-aware containment,
+The registered `filesystem-containment-policy` suite checks component-aware
+containment using `fixtures/security/path-containment-decisions.tsv`. It covers
 canonical filesystem identity, symlink escape, anchored creation, race control,
 typed unresolved outcomes, exact frozen-ID dispositions, metadata, routing,
 legacy links, and removal of lexical string-prefix containment examples.

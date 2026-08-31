@@ -1151,6 +1151,11 @@ path = "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml"
 requires = []
 
 [[suites]]
+id = "filesystem-containment-policy"
+path = "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []

@@ -6226,3 +6226,30 @@ generated, numeric, plan, and complete mixed evidence pass. Final graph: 37
 Bash checkers, 40 nodes, 246 edges, and 40 components. The old checker is
 absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I89 Filesystem-Containment Acceptance
+
+Fresh post-M6-I88 evidence reports 37 Bash verifiers, 40 nodes, 246 edges,
+and 40 components. Four verifiers have no executable inbound edge; two are at
+the highest dependency wave 1. The 156-line
+`verify-filesystem-containment-policy.sh` is the smaller coherent wave-1
+candidate. Its two contract inbound references are historical evidence, and it
+invokes one metadata helper. The package is `serial-coherent` because no shared
+engine, schema, policy, or unresolved owner contract changes.
+
+One ten-check `topic.security` suite preserves all 11 typed decisions, nine
+exact source identities and dispositions, metadata closure, Router and legacy
+routes, canonical Security and Cross-Platform policy, unsafe-pattern removal,
+and the README projection. Native metadata authority replaces helper
+execution. Eight prior M6-I78, M6-I79, M6-I83, and M6-I85 records transition to
+registered suite evidence. Row-35 README-dependency evidence removes the
+retired checker.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing component-containment authority, and restoration of a prohibited
+lexical mechanism. Exact final compilation renews 22 dependency-local
+requirements and leaves 29 stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 36 Bash checkers, 39 nodes, 242 edges, and 39 components. The old checker
+is absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

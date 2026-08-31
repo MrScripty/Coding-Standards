@@ -474,6 +474,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "frontend-rendering-synchronization"
         },
         {
@@ -753,6 +758,11 @@
       "path": "CROSS-PLATFORM-STANDARDS.md",
       "state": "present",
       "uses": [
+        {
+          "check": "legacy-cross-platform-route",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
+        },
         {
           "check": "cross-platform-boundary",
           "role": "content",
@@ -1084,6 +1094,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "legacy-security-route",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
+        },
+        {
           "check": "legacy-route",
           "role": "content",
           "suite": "input-validation-authority"
@@ -1169,6 +1184,11 @@
           "check": "router-projection",
           "role": "content",
           "suite": "documentation-decisions"
+        },
+        {
+          "check": "router-routes",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
         },
         {
           "check": "router-projection",
@@ -1742,7 +1762,7 @@
       ]
     },
     {
-      "digest": "sha256:d834571ed145435757a827573be70e15a390454fda19eff2bbf3d21f75a0d813",
+      "digest": "sha256:aa7ccbf686ad9fc165947d16d4d20c42ddec81dac8e3e87eed544b39ae73d4cb",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1754,7 +1774,7 @@
       ]
     },
     {
-      "digest": "sha256:b84c1db4cbc1db13365bfb7b1081a57b3831a03c0dde304d8604e4a6d9ec158b",
+      "digest": "sha256:01e5ff19d6a7097d56a9a8737845a2a702f8c219eb943008531d960c22384127",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1792,6 +1812,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "documentation-policy-consolidation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
         },
         {
           "check": "documentation-projection",
@@ -2010,7 +2035,7 @@
       ]
     },
     {
-      "digest": "sha256:de999d51c4a08aece1f6324754021a5d29e220f8cd01d138781263b91f5a21ed",
+      "digest": "sha256:9bffad3a1cb8929e6a651984be3208053a748b71d38c26746ba552297b087d17",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2330,6 +2355,11 @@
           "check": "dispositions",
           "role": "content",
           "suite": "documentation-traceability-policy"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "filesystem-containment-policy"
         },
         {
           "check": "disposition-coverage",
@@ -3223,7 +3253,7 @@
       ]
     },
     {
-      "digest": "sha256:c855dd75bd07e645eda789c5ae191aa9445f33f07fa0c92e573f778dba05709f",
+      "digest": "sha256:1d37e8273493efc37d547acd3bd9ef8cc784be18baf4fe218ced4877526e07bd",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -6008,6 +6038,18 @@
       ]
     },
     {
+      "digest": "sha256:9ea9f6e476ac13f27ad67cbd0bb6fd5c598f9b29b44746b71aec996e7b83e630",
+      "path": "evaluation/standards-effectiveness/fixtures/security/path-containment-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "filesystem-containment-policy"
+        }
+      ]
+    },
+    {
       "digest": "sha256:32aca511c7bfaa7ab4954d50eb80873b9e15def83633a6a6dc98a27dcb7d7f48",
       "path": "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv",
       "state": "present",
@@ -6427,7 +6469,7 @@
       ]
     },
     {
-      "digest": "sha256:d83f3b06a574f2a04bb5cbd2f56dc59195710d8a919fb828334c3fbb8a97b2ad",
+      "digest": "sha256:b9b3d0ddac83ae06e6d6e2f3929941179b091abcee25dc45e21cb28a0a8df955",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6439,7 +6481,7 @@
       ]
     },
     {
-      "digest": "sha256:aeabfa2624bb82eae76b9b8e0576fafa191fe3750b5ef74c54ac0af7712b36d9",
+      "digest": "sha256:652fb3aa18c484815b5d2c3989dc0ce719a53deeb8a042956f2dcb5e9dab1e9d",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6577,6 +6619,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "documentation-reference"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "filesystem-containment-policy"
         },
         {
           "check": "source-identities",
@@ -8100,7 +8147,7 @@
       ]
     },
     {
-      "digest": "sha256:7e88a43c72375824fc6741a03b7696a6f4d4595ef4fba01c8f3ac3c25150fc66",
+      "digest": "sha256:183ae342d07288628d528d261f613dc6b313bcd2626a05cc702c65ec4ce44fd0",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -9018,7 +9065,7 @@
       ]
     },
     {
-      "digest": "sha256:f85c7ffe41dd60d7844ced9b21550971e90a78afed03c8f65bef49d0c420545b",
+      "digest": "sha256:148a3ae9e112087f446c47b9e20d5bed464b7c35fb8afe29c60d304430b63c5d",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -9716,6 +9763,18 @@
     {
       "digest": "sha256:abf4534ce2fad6f96a20b949e6c990248118f90199088bc26a80bdc53f97d10d",
       "path": "evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:b08f8638c35992f6c8e86bb0946b5b56e131da275c7b0862808ce1ed99b892a3",
+      "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
       "state": "present",
       "uses": [
         {
@@ -12131,38 +12190,6 @@
         {
           "check": "derived-transitive-callers",
           "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:a514d50e144659bccee82a94c9a27b37ec7d6c2872aaaac4044d5a37c5b67749",
-      "path": "evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
           "suite": "milestone-7-row-35-decomposition"
         },
         {
@@ -20757,6 +20784,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "cross-platform-policy",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
           "check": "cross-platform-owner",
           "role": "content",
           "suite": "native-artifact-loading"
@@ -21257,6 +21294,16 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "security-policy",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
         },
         {
           "check": "canonical-owner",
@@ -22317,6 +22364,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "frontend-rendering-synchronization"
         },
         {
@@ -22678,11 +22730,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:f85c7ffe41dd60d7844ced9b21550971e90a78afed03c8f65bef49d0c420545b",
+    "digest": "sha256:148a3ae9e112087f446c47b9e20d5bed464b7c35fb8afe29c60d304430b63c5d",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:0d79503c06f5c04cfebf203fb229dcd16e8375101ab67204b07cb6ddb79dac14",
+    "digest": "sha256:30d153d4d39b90b61e1db09aef50d9af0c1f570da87f87d5aeeaf33ef9cb01e2",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24123,6 +24175,12 @@
       "digest": "sha256:f973fa37c8771253bf9707bcb61eacec693f49ff91fc14d179607ffa2c560add",
       "id": "rust-boundary-arithmetic",
       "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:b08f8638c35992f6c8e86bb0946b5b56e131da275c7b0862808ce1ed99b892a3",
+      "id": "filesystem-containment-policy",
+      "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
       "requires": []
     },
     {

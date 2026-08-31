@@ -1,0 +1,168 @@
+schema_version = 1
+id = "filesystem-containment-policy"
+owner = "topic.security"
+description = "Component-aware filesystem containment, canonical identity, anchored creation, race control, typed outcomes, and no lexical fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/security/path-containment-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+path_state = ["existing", "non-existing"]
+relation = ["descendant", "root", "sibling", "traversal", "unknown"]
+root_policy = ["allow", "deny", "not-applicable"]
+symlink = ["inside", "outside", "none", "unknown"]
+parent_anchor = ["validated", "unvalidated", "not-applicable"]
+race_control = ["capability", "none"]
+filesystem_facts = ["known", "unknown"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "filesystem_facts", op = "eq", value = "unknown" },
+  { field = "relation", op = "eq", value = "unknown" },
+  { field = "symlink", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "relation", op = "in", values = ["sibling", "traversal"] },
+  { field = "symlink", op = "eq", value = "outside" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "relation", op = "eq", value = "root" },
+  { field = "root_policy", op = "eq", value = "deny" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "path_state", op = "eq", value = "non-existing" },
+  { field = "parent_anchor", op = "ne", value = "validated" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "race_control"
+op = "eq"
+value = "none"
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0289", "CROSS-PLATFORM-STANDARDS.md"],
+  ["STD-0290", "CROSS-PLATFORM-STANDARDS.md"],
+  ["STD-0291", "CROSS-PLATFORM-STANDARDS.md"],
+  ["STD-0292", "CROSS-PLATFORM-STANDARDS.md"],
+  ["STD-0293", "CROSS-PLATFORM-STANDARDS.md"],
+  ["STD-0584", "SECURITY-STANDARDS.md"],
+  ["STD-0585", "SECURITY-STANDARDS.md"],
+  ["STD-0586", "SECURITY-STANDARDS.md"],
+  ["STD-0587", "SECURITY-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0289", "STD-0290", "STD-0291", "STD-0292", "STD-0293", "STD-0584", "STD-0585", "STD-0586", "STD-0587"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0289", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "move", "filesystem convention boundary"],
+  ["STD-0290", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "move", "platform path construction"],
+  ["STD-0291", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "refine", "remove string-prefix containment and link security owner"],
+  ["STD-0292", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "refine", "separate display normalization from canonical identity"],
+  ["STD-0293", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "move", "space-safe path mechanisms"],
+  ["STD-0584", "SECURITY-STANDARDS.md", "topics/security.md", "move", "untrusted path validation concern"],
+  ["STD-0585", "SECURITY-STANDARDS.md", "topics/security.md", "merge", "path escape threat model"],
+  ["STD-0586", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "replace unsafe language recipes with containment contract"],
+  ["STD-0587", "SECURITY-STANDARDS.md", "topics/security.md", "merge", "validate before filesystem authority"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0289", "STD-0290", "STD-0291", "STD-0292", "STD-0293", "STD-0584", "STD-0585", "STD-0586", "STD-0587"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/security.md",
+  "topics/cross-platform.md",
+]
+
+[[checks]]
+id = "router-routes"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["topics/security.md", "topics/cross-platform.md"]
+prohibited = []
+
+[[checks]]
+id = "legacy-security-route"
+type = "text"
+path = "SECURITY-STANDARDS.md"
+required = ["topics/security.md"]
+prohibited = ["StartsWith(", ".startsWith(", "Normalize before comparing.", "StringComparison.OrdinalIgnoreCase"]
+
+[[checks]]
+id = "legacy-cross-platform-route"
+type = "text"
+path = "CROSS-PLATFORM-STANDARDS.md"
+required = ["topics/cross-platform.md"]
+prohibited = ["StartsWith(", ".startsWith(", "Normalize before comparing.", "StringComparison.OrdinalIgnoreCase"]
+
+[[checks]]
+id = "security-policy"
+type = "text"
+path = "topics/security.md"
+required = [
+  "A string-prefix test is not containment.",
+  "nearest existing ancestor",
+  "handle-relative, capability-based",
+  "typed `unsupported` or",
+]
+prohibited = ["StartsWith(", ".startsWith(", "Normalize before comparing.", "StringComparison.OrdinalIgnoreCase"]
+
+[[checks]]
+id = "cross-platform-policy"
+type = "text"
+path = "topics/cross-platform.md"
+required = [
+  "display form is presentation",
+  "lexical normalization",
+  "canonical identity",
+  "Do not use raw string prefix",
+]
+prohibited = ["StartsWith(", ".startsWith(", "Normalize before comparing.", "StringComparison.OrdinalIgnoreCase"]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `filesystem-containment-policy` suite checks"]
+prohibited = ["`verify-filesystem-containment-policy.sh` check component-aware containment,"]
