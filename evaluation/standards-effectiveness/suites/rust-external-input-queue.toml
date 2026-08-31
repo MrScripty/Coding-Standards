@@ -1,0 +1,149 @@
+schema_version = 1
+id = "rust-external-input-queue"
+owner = "profile.language.rust.security"
+description = "Operation-contract-derived Rust external-input queues with selected capacity, overload, ownership, telemetry, evidence, and typed outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/external-input-queue-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["selected", "missing", "contradictory"]
+capacity = ["available", "missing", "fixed", "unbounded"]
+overload = ["reject", "retain", "evict", "unsupported", "default-reject", "default-evict", "missing"]
+ownership = ["declared", "missing"]
+telemetry = ["emitted", "not-required", "missing", "silent"]
+input_state = ["current", "prior"]
+capability = ["available", "unavailable"]
+evidence = ["rust-operation", "missing", "producer-only"]
+fallback = ["none", "fixed-capacity", "default-overflow", "drop-oldest", "unbounded", "silent-discard", "alternate-queue", "alternate-runtime", "prior-input", "weaker-evidence"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable", "typed-overload"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+  { field = "capacity", op = "in", values = ["fixed", "unbounded"] },
+  { field = "overload", op = "in", values = ["default-reject", "default-evict"] },
+  { field = "telemetry", op = "eq", value = "silent" },
+  { field = "input_state", op = "eq", value = "prior" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "overload"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "capacity", op = "eq", value = "missing" },
+  { field = "ownership", op = "eq", value = "missing" },
+  { field = "telemetry", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { field = "evidence", op = "ne", value = "rust-operation" },
+]
+[[checks.rules]]
+outcome = "typed-overload"
+[checks.rules.when]
+field = "overload"
+op = "eq"
+value = "reject"
+
+[[checks]]
+id = "source-identity"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [["STD-0824", "languages/rust/RUST-SECURITY-STANDARDS.md"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0824"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0824", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "derive external-input queue resource limits overload behavior telemetry ownership and typed outcomes from the selected operation contract"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0824"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/security.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/security.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "markdown_section_text"
+path = "profiles/languages/rust/security.md"
+heading = "## External-Input Queues"
+required = [
+  "operation and resource contract",
+  "Capacity is not a universal numeric constant",
+  "current input",
+  "typed `invalid`",
+]
+prohibited = []
+
+[[checks]]
+id = "profile-no-fallback"
+type = "markdown_section_text"
+path = "profiles/languages/rust/security.md"
+heading = "## No Fallback"
+required = ["External-input queues cannot fall back to a fixed capacity"]
+prohibited = []
+
+[[checks]]
+id = "profile-verification"
+type = "markdown_section_text"
+path = "profiles/languages/rust/security.md"
+heading = "## Verification"
+required = ["contract-selected capacity, overload, retention, rejection, eviction, and"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+heading = "## Bounded Queues"
+required = ["security.md#external-input-queues"]
+prohibited = ["MAX_QUEUE", "drop_oldest", "msgs.drain", "tracing::warn"]
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F052 | Resolved in Milestone 7.4b7k |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-external-input-queue` suite checks selected capacity,"]
+prohibited = ["`verify-rust-external-input-queue.sh` check selected capacity, overload,"]

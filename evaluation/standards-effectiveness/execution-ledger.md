@@ -14909,3 +14909,25 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 45-entrypoint checkpoint pass. Final graph: 45 Bash
   checkers, 48 nodes, 317 edges, and 48 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I81 Rust External-Input Queue Acceptance
+
+- Fresh post-M6-I80 evidence reports 45 Bash verifiers, 48 nodes, 317 edges,
+  and 48 components. Nine verifiers have no executable inbound edge; four are
+  at the highest dependency wave 6. The 82-line Rust external-input queue
+  verifier is the smallest coherent wave-6 candidate. M6-I81 is
+  `serial-coherent` at train order 196.
+- One ten-check owner-local suite preserves all 18 typed decisions, exact
+  `STD-0824` source and disposition, metadata closure, canonical queue,
+  no-fallback, and verification sections, the bounded legacy index, finding
+  closure, and the README projection.
+- Native metadata authority replaces helper execution. Four outgoing records
+  retain boundary arithmetic and the independent trust re-plan as separate
+  gates; four prior M6-I76 and M6-I77 records move to registered suite evidence.
+  Row-35 README-consumer evidence removes the retired checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 44-entrypoint checkpoint pass. Final graph: 44
+  Bash checkers, 47 nodes, 308 edges, and 47 components; fresh graph evidence
+  is required next.

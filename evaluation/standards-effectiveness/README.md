@@ -889,10 +889,10 @@ outcomes, four exact dispositions, and bounded legacy replacement. They reject
 schema guessing, old-shape and dual-shape compatibility shims, permissive
 defaults, ambiguous authority, incomplete updates, and missing evidence.
 
-`fixtures/rust/external-input-queue-decisions.tsv` and
-`verify-rust-external-input-queue.sh` check selected capacity, overload,
-retention/eviction, telemetry, ownership, typed outcomes, exact disposition,
-bounded legacy replacement, and Rust operation evidence. They reject fixed or
+The registered `rust-external-input-queue` suite checks selected capacity,
+overload, retention/eviction, telemetry, ownership, typed outcomes, exact
+disposition, bounded legacy replacement, and Rust operation evidence using
+`fixtures/rust/external-input-queue-decisions.tsv`. It rejects fixed or
 unbounded capacity, default overflow, silent discard, alternate runtime,
 prior-input carry-forward, and weaker evidence.
 

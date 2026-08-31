@@ -6000,3 +6000,32 @@ numeric, plan, and complete mixed evidence pass. Final graph: 45 Bash checkers,
 48 nodes, 317 edges, and 48 components. The old checker is absent without a
 source-policy rewrite, nested execution, wrapper, compatibility
 representation, or fallback.
+
+### M6-I81 Rust External-Input Queue Acceptance
+
+Fresh post-M6-I80 evidence reports 45 Bash verifiers, 48 nodes, 317 edges,
+and 48 components. Nine verifiers have no executable inbound edge; four are at
+the highest dependency wave 6. The 82-line
+`verify-rust-external-input-queue.sh` is the smallest coherent wave-6
+candidate. Its three inbound references are historical contract evidence, and
+it invokes one metadata helper plus two separately owned gates. The package is
+`serial-coherent` because no shared engine, schema, policy, or unresolved owner
+contract changes.
+
+One ten-check `profile.language.rust.security` suite preserves all 18 typed
+decisions, exact `STD-0824` source identity and disposition, metadata closure,
+canonical queue, no-fallback, and verification sections, the bounded legacy
+index, finding closure, and the README projection. Native metadata authority
+replaces helper execution. Four outgoing records retain boundary arithmetic
+and the independent trust re-plan as separate gates. Four prior M6-I76 and
+M6-I77 records transition to registered suite evidence, and row-35 README-
+consumer evidence removes the retired checker.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing canonical capacity authority, and restoration of a fixed legacy
+capacity. Exact final compilation renews 22 dependency-local requirements and
+leaves 29 stable, closing 51/51 coverage. All focused, graph, declarative,
+generated, numeric, plan, and complete mixed evidence pass. Final graph: 44
+Bash checkers, 47 nodes, 308 edges, and 47 components. The old checker is
+absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

@@ -614,6 +614,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-interop-memory"
         },
         {
@@ -1687,7 +1692,7 @@
       ]
     },
     {
-      "digest": "sha256:4eeb7112a9ecf04dd8906e843110cf39b3cf9f692d3c0e0313485160f6a22e1c",
+      "digest": "sha256:862eeba3f4e012856f39d7eef2aad642d9520f3978319d1ba8a62ae004692d50",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1699,7 +1704,7 @@
       ]
     },
     {
-      "digest": "sha256:1acbcc9e12d156284a5d442ac4146288b89402063479f56a4c9c319c389ef72f",
+      "digest": "sha256:58b0105411945204b013a8d77945896a3b9d2016aa26dad29b97fb2367b4cb36",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1831,6 +1836,11 @@
         {
           "check": "documentation-projection",
           "role": "content",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
           "suite": "rust-security-panic-boundary"
         },
         {
@@ -1915,7 +1925,7 @@
       ]
     },
     {
-      "digest": "sha256:66d3ebb2104d4b976c43b3776f776af6d503ca515069f9be0c3a91f8104105bf",
+      "digest": "sha256:7874ada0daea6f7e8b0badf5157b0135e3ebe6422286dd36b04c86ca35ed4786",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2737,6 +2747,11 @@
           "suite": "rust-dependency-workspace-inheritance"
         },
         {
+          "check": "exact-disposition",
+          "role": "table",
+          "suite": "rust-external-input-queue"
+        },
+        {
           "check": "rust-index-dispositions",
           "role": "table",
           "suite": "rust-index-closure"
@@ -3088,7 +3103,7 @@
       ]
     },
     {
-      "digest": "sha256:b36d1e8b9eed2dbde2ef73c49c96a773d98ab922225a827ee3775618d2a9b284",
+      "digest": "sha256:975bed3f2a882860fe8417c13bbaa574d10ee6797c5817b828ad67ca2e5c5030",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3133,6 +3148,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "rust-external-input-queue"
         },
         {
           "check": "accepted-finding",
@@ -5442,6 +5462,18 @@
       ]
     },
     {
+      "digest": "sha256:0bee503c8b3a4242762b07e07f016e5b0b1d2c71ccecdb0d471a0eff0c193597",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/external-input-queue-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "rust-external-input-queue"
+        }
+      ]
+    },
+    {
       "digest": "sha256:c8f6ea2e3402c1fbb07dd5f61ff6bea66f05da140578742681a7a871b4b04b90",
       "path": "evaluation/standards-effectiveness/fixtures/rust/foreign-memory-decisions.tsv",
       "state": "present",
@@ -6178,7 +6210,7 @@
       ]
     },
     {
-      "digest": "sha256:0c3333934c5ef16bebabaffee2581142a9242a242dd1b796381cccd95a7e1132",
+      "digest": "sha256:d8d52735326aa8dab2ff13c86287573dc59dd28e186a9686eb0d7aad8fb38388",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6190,7 +6222,7 @@
       ]
     },
     {
-      "digest": "sha256:52a9a0cfad252d51aeaa1faa7624c8e4461264519ada16470cdcc6a2b91dc0f8",
+      "digest": "sha256:1ce71d0ae77f23c688b8728ff3cd1d920f7f5ca95989e0df48c6bd7a2fd35600",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6443,6 +6475,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "source-identity",
+          "role": "table",
+          "suite": "rust-external-input-queue"
         },
         {
           "check": "section-inventory",
@@ -7794,7 +7831,7 @@
       ]
     },
     {
-      "digest": "sha256:d85bf66bae5530bd1aa6aeac469381616411d1e653c78a3d99ae3eca782ad2f7",
+      "digest": "sha256:8ac94ed73169a53cceb82fd41747cc82a23cae9931ca66d974fa9ce445969a89",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
       "state": "present",
       "uses": [
@@ -8729,7 +8766,7 @@
       ]
     },
     {
-      "digest": "sha256:0bab406ff9a111e239d91db427f64fc853f27d00005806711d17171beba3edfe",
+      "digest": "sha256:9b97eb6e86d563cd39c6df79676e5ac565a6fdc7c786dae8d9ab78314856c7d8",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10805,6 +10842,18 @@
       ]
     },
     {
+      "digest": "sha256:7fb6788209091be0f4d4c2eba056c448912906915b67f68a3811a6b6eb0b7f28",
+      "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:6b8633fe566fe1d0f2a0936a2fe9d607322d00ca58bc253992925d7208e97b62",
       "path": "evaluation/standards-effectiveness/suites/rust-index-closure.toml",
       "state": "present",
@@ -12565,33 +12614,6 @@
       ]
     },
     {
-      "digest": "sha256:b335607059e520edf907d947416794021e336a83043ce1f8ea768060cc4b632f",
-      "path": "evaluation/standards-effectiveness/verify-rust-external-input-queue.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:b61b34cb7ea39651ca60f8a3525c46a22811f559b0aa79391ebfa5ecfc65cb78",
       "path": "evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh",
       "state": "present",
@@ -12994,6 +13016,11 @@
           "check": "legacy-index-routes",
           "role": "content",
           "suite": "milestone-7-row-44-decomposition"
+        },
+        {
+          "check": "legacy-index",
+          "role": "content",
+          "suite": "rust-external-input-queue"
         },
         {
           "check": "legacy-index",
@@ -14037,6 +14064,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-interop-memory"
         },
         {
@@ -14819,6 +14851,26 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "profile-no-fallback",
+          "role": "content",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "profile-policy",
+          "role": "content",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "profile-verification",
+          "role": "content",
+          "suite": "rust-external-input-queue"
         },
         {
           "check": "rust-profile-links",
@@ -20947,6 +20999,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-interop-memory"
         },
         {
@@ -22043,6 +22100,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-interop-memory"
         },
         {
@@ -22204,11 +22266,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:0bab406ff9a111e239d91db427f64fc853f27d00005806711d17171beba3edfe",
+    "digest": "sha256:9b97eb6e86d563cd39c6df79676e5ac565a6fdc7c786dae8d9ab78314856c7d8",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:61807f6d5688f0884b6fdef7cbd99e358c280bcde41fb1e242567d7cd7134763",
+    "digest": "sha256:35bb1a2d9dff95bcc08a6b8cfebc705f652380f9b3fae6b2584281ed3473015e",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23601,6 +23663,12 @@
       "digest": "sha256:4c44d56ccc59707bde788bf6a4f0ae18f44c98c3f4ad711f82fd277362d911ed",
       "id": "rust-security-panic-boundary",
       "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:7fb6788209091be0f4d4c2eba056c448912906915b67f68a3811a6b6eb0b7f28",
+      "id": "rust-external-input-queue",
+      "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
       "requires": []
     },
     {
