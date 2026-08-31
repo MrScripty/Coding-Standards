@@ -14813,3 +14813,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   all-suite, generated, plan, and complete mixed evidence passes. Final graph:
   50 Bash checkers, 53 nodes, 373 edges, 53 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I76 Rust Security Title Index Admission
+
+- Fresh graph evidence reports no zero-inbound verifier after M6-I75. The Rust
+  Security title-index checker is the highest dependency-wave caller, with one
+  non-executing row-44 reference and eight retained checker dependencies.
+- Its direct negative policy applies to the title body before the first child
+  heading. Admitted explicit generic heading `body` scope while retaining the
+  current descendant-inclusive `subtree` default.
+- One owner-local suite will preserve exact source IDs, dispositions, intro
+  route, default rejection, and generic Security separation. Row 44 moves to
+  suite identity; all eight callees remain independent gates through sixteen
+  exact edge dispositions.
+- M6-I76 is `shared-contract` at train order 191. Implementation and full
+  acceptance evidence are next.

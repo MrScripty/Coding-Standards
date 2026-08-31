@@ -6363,3 +6363,18 @@
   and the 50-entrypoint mixed checkpoint pass. Final graph: 50 Bash checkers,
   53 nodes, 373 edges, 53 components. Both Bash paths are absent without a
   bridge or fallback.
+
+## 2026-08-31 - M6-I76 Rust Security Title Index Admission
+
+- Fresh post-M6-I75 evidence reports no zero-inbound verifier. The 51-line Rust
+  Security title-index checker is the highest dependency-wave caller; its one
+  inbound reference is a historical row-44 string rather than an invocation.
+- The direct contract requires title-body scope before the first child heading.
+  Current Markdown section scope includes descendants, where one legitimate
+  negative fallback statement would make a whole-subtree prohibition invalid.
+- Admitted explicit generic `subtree` or `body` scope with unchanged subtree
+  default, plus one owner-local suite, row-44 consumer transition, and exact
+  transfer of sixteen outgoing edges to eight independent retained gates.
+- M6-I76 is `shared-contract` at train order 191. Assertion tests, suite
+  mutations, final coverage, broad tests, mixed acceptance, and exact write-set
+  evidence remain required before the checker is accepted as removed.

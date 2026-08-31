@@ -5852,3 +5852,24 @@ isolated-Git negative scenarios prove regression sensitivity. Final generated
 evidence reports 50 Bash verifiers, 53 nodes, 373 edges, and 53 components.
 Both Bash files are absent, and fresh graph evidence is required before the
 next package is selected.
+
+### M6-I76 Rust Security Title Index Admission
+
+Fresh post-M6-I75 evidence has no zero-inbound verifier. The 51-line
+`verify-rust-security-title-index-closure.sh` is the highest dependency-wave
+caller. Its one incoming executable reference is a historical row-44 string,
+not a command; its eight outgoing checker dependencies remain separately owned.
+
+The direct title-index behavior is owner-coherent under
+`profile.language.rust.security`: exact six-row owner/disposition closure,
+introductory route content, intro-only default rejection, and separation from
+the generic Security index. Existing `markdown_section_text` can select a
+heading subtree but cannot stop at the first child heading. A whole-file or
+whole-subtree approximation would either weaken the intro-only contract or
+reject a legitimate negative fallback statement in a child section.
+
+M6-I76 therefore admits explicit generic `subtree` and `body` scope, retaining
+`subtree` as the default. One owner-local suite consumes `body`; the row-44
+historical projection moves to suite identity, and sixteen outgoing edges move
+to independent-gate authority. No copied legacy file, regex selector, wrapper,
+alternate parser, weaker approximation, or fallback is admitted.

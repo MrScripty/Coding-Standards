@@ -5,8 +5,8 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I75 graph audit; do not preselect the next
-package from evidence captured before this accepted shared contract
+**Next slice:** implement and accept admitted M6-I76 Rust Security title-index
+closure at train order 191
 
 **Acceptance status:** `pending`
 
@@ -14,8 +14,8 @@ package from evidence captured before this accepted shared contract
 and its distributed Bash helper with one owned Python package at train order
 190.
 
-**Latest admitted slice:** `none`; the next package requires fresh graph and
-ownership evidence.
+**Latest admitted slice:** M6-I76 adds explicit Markdown heading-body scope and
+replaces the Rust Security title-index verifier.
 
 **Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
@@ -180,7 +180,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I75 Python traceability closure accepted at train order 190 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I76 Rust Security title-index closure admitted at train order 191 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
