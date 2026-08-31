@@ -25,7 +25,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-node-catalog-additions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-decision-table.sh
@@ -56,13 +55,11 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
@@ -168,8 +165,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-binding-titl
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 executable_reference	tools/standards_verifier/standards_verifier/inventory.py	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	tools/standards_verifier/tests/test_inventory.py	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	tools/standards_verifier/tests/test_suite_inputs.py	evaluation/standards-effectiveness/verify-contract-ownership.sh
@@ -190,7 +185,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-runtime-decoding-pol
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/check-metadata.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-decisions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -251,4 +245,3 @@ verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-title
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh

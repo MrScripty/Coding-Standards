@@ -661,11 +661,11 @@ weaker-store fallback.
 
 ## Rust Boundary-Arithmetic Decision Fixtures
 
-`fixtures/rust/checked-boundary-arithmetic-decisions.tsv` and
-`verify-rust-boundary-arithmetic.sh` check conversion before arithmetic,
-operation-wide checked arithmetic, separate resource limits, zero contracts,
-typed rejection, no-fallback behavior, exact disposition, metadata, routing,
-and legacy unchecked-example removal.
+The registered `rust-boundary-arithmetic` suite checks conversion before
+arithmetic using `fixtures/rust/checked-boundary-arithmetic-decisions.tsv`.
+It covers operation-wide checked arithmetic, separate resource limits, zero
+contracts, typed rejection, no-fallback behavior, exact disposition, metadata,
+routing, and legacy unchecked-example removal.
 
 ## Rust Unsafe-Contract Decision Fixtures
 

@@ -15059,3 +15059,25 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   plan checks, and the complete 38-entrypoint checkpoint pass. Final graph: 38
   Bash checkers, 41 nodes, 253 edges, and 41 components; fresh graph evidence
   is required next.
+
+## 2026-08-31 - M6-I88 Rust Boundary-Arithmetic Acceptance
+
+- Fresh post-M6-I87 evidence reports 38 Bash verifiers, 41 nodes, 253 edges,
+  and 41 components. Five verifiers have no executable inbound edge; three are
+  at the highest dependency wave 1. The 106-line Rust boundary-arithmetic
+  verifier is the smallest coherent wave-1 candidate. M6-I88 is
+  `serial-coherent` at train order 203.
+- One nine-check owner-local suite preserves all 17 typed decisions, exact
+  `STD-0823` source identity and disposition, metadata closure, canonical Rust
+  Security policy, Rust index routing, the bounded legacy route and sibling,
+  and the README projection.
+- Native metadata authority replaces helper execution. Two outgoing records
+  retain F022/F023 decomposition as a separate gate; six prior M6-I76, M6-I77,
+  and M6-I81 records move to registered suite evidence. Row-35 README-consumer
+  evidence removes the retired checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 37-entrypoint checkpoint pass. Final graph: 37
+  Bash checkers, 40 nodes, 246 edges, and 40 components; fresh graph evidence
+  is required next.

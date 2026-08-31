@@ -619,6 +619,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-dependency-candidate-inspection"
         },
         {
@@ -1737,7 +1742,7 @@
       ]
     },
     {
-      "digest": "sha256:f096cdff87d08019f93ceda31938a602f067e24fdd2764e59b1d3af15c8878af",
+      "digest": "sha256:d834571ed145435757a827573be70e15a390454fda19eff2bbf3d21f75a0d813",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1749,7 +1754,7 @@
       ]
     },
     {
-      "digest": "sha256:d4a09a2a6904c51ed8abf96e984cc6a8d1dacceda2235d6a0b9129d3202e1af0",
+      "digest": "sha256:b84c1db4cbc1db13365bfb7b1081a57b3831a03c0dde304d8604e4a6d9ec158b",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1896,6 +1901,11 @@
         {
           "check": "documentation-projection",
           "role": "content",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
           "suite": "rust-external-input-queue"
         },
         {
@@ -2000,7 +2010,7 @@
       ]
     },
     {
-      "digest": "sha256:0bc1ad09bcd985295e18295abc7976d62498b363e31a7e3991dcd96692b8b171",
+      "digest": "sha256:de999d51c4a08aece1f6324754021a5d29e220f8cd01d138781263b91f5a21ed",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2802,6 +2812,11 @@
           "suite": "rust-binding-workspace-evidence"
         },
         {
+          "check": "exact-disposition",
+          "role": "table",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
           "check": "disposition",
           "role": "content",
           "suite": "rust-dependency-audit-adapters"
@@ -3208,7 +3223,7 @@
       ]
     },
     {
-      "digest": "sha256:da68a32144cd315c8d8c2e7c54b7bab1629c42a67bc951efd4e87b676ed4386d",
+      "digest": "sha256:c855dd75bd07e645eda789c5ae191aa9445f33f07fa0c92e573f778dba05709f",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -5520,6 +5535,18 @@
       ]
     },
     {
+      "digest": "sha256:07cad9e0db510cdd1e641c692c6ddb2abd6b15ab273ad251d04b653c1d50b6eb",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/checked-boundary-arithmetic-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "rust-boundary-arithmetic"
+        }
+      ]
+    },
+    {
       "digest": "sha256:650942036bad619657e9725614b965654c10201ecb78a851b040897e32ad5688",
       "path": "evaluation/standards-effectiveness/fixtures/rust/dependency-audit-adapter-decisions.tsv",
       "state": "present",
@@ -6400,7 +6427,7 @@
       ]
     },
     {
-      "digest": "sha256:bd7ee0ac74688e47dff6d0cf249c8ad619ab7ef1903a16fee5af2fc2d8637922",
+      "digest": "sha256:d83f3b06a574f2a04bb5cbd2f56dc59195710d8a919fb828334c3fbb8a97b2ad",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6412,7 +6439,7 @@
       ]
     },
     {
-      "digest": "sha256:f5f229e4e57ab8c688d07370cca23bb1d3cfeab3d4ebac982ea461c1e1afb3a5",
+      "digest": "sha256:aeabfa2624bb82eae76b9b8e0576fafa191fe3750b5ef74c54ac0af7712b36d9",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6680,6 +6707,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "source-identity",
+          "role": "table",
+          "suite": "rust-boundary-arithmetic"
         },
         {
           "check": "source-identity",
@@ -8051,7 +8083,7 @@
       ]
     },
     {
-      "digest": "sha256:27d7ce2c6c5992c2f70cee2bed7d736bdf5d5c605f9ba8920e644771da7a865d",
+      "digest": "sha256:2159ac5f216b5bbe08506187fea6d5fb47cb3172cbc1392586192b60fcf5ec1b",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
       "state": "present",
       "uses": [
@@ -8986,7 +9018,7 @@
       ]
     },
     {
-      "digest": "sha256:6757fcd5ff7bab78eb20e3e316ee8c9ea1524108417a70af0c22e2709dcac93b",
+      "digest": "sha256:f85c7ffe41dd60d7844ced9b21550971e90a78afed03c8f65bef49d0c420545b",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11014,6 +11046,18 @@
       ]
     },
     {
+      "digest": "sha256:f973fa37c8771253bf9707bcb61eacec693f49ff91fc14d179607ffa2c560add",
+      "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:0a44d40efbe65127a73ce69257430ccfd664b9f0df47975cc38fdf76ae189b27",
       "path": "evaluation/standards-effectiveness/suites/rust-dependency-audit-adapters.toml",
       "state": "present",
@@ -12808,33 +12852,6 @@
       ]
     },
     {
-      "digest": "sha256:3e47300fdffbbf121a65a3360c521e0e5f03ff602c4a9c2eaccbbfd2620af996",
-      "path": "evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:f086d321bac68995751cfbf2033dfb26fede93a653fead00756f770a4312a671",
       "path": "evaluation/standards-effectiveness/verify-verification-gate-model.sh",
       "state": "present",
@@ -13181,6 +13198,16 @@
           "check": "legacy-index-routes",
           "role": "content",
           "suite": "milestone-7-row-44-decomposition"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "legacy-sibling",
+          "role": "content",
+          "suite": "rust-boundary-arithmetic"
         },
         {
           "check": "legacy-index",
@@ -14249,6 +14276,16 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "rust-index-route",
+          "role": "content",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-dependency-candidate-inspection"
         },
         {
@@ -15076,6 +15113,16 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "profile-policy",
+          "role": "content",
+          "suite": "rust-boundary-arithmetic"
         },
         {
           "check": "metadata-closure",
@@ -21309,6 +21356,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-external-input-queue"
         },
         {
@@ -22430,6 +22482,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-dependency-candidate-inspection"
         },
         {
@@ -22621,11 +22678,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:6757fcd5ff7bab78eb20e3e316ee8c9ea1524108417a70af0c22e2709dcac93b",
+    "digest": "sha256:f85c7ffe41dd60d7844ced9b21550971e90a78afed03c8f65bef49d0c420545b",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:f20629f5c899b995a604f6e83c2eb3aa8fefe8446ece767369dbb4beb489946e",
+    "digest": "sha256:0d79503c06f5c04cfebf203fb229dcd16e8375101ab67204b07cb6ddb79dac14",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24060,6 +24117,12 @@
       "digest": "sha256:a980080fc72122a766b03e5592003fceff572c42e76ceed3e43790966eb0c482",
       "id": "rust-async-lifecycle",
       "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:f973fa37c8771253bf9707bcb61eacec693f49ff91fc14d179607ffa2c560add",
+      "id": "rust-boundary-arithmetic",
+      "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
       "requires": []
     },
     {

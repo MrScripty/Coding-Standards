@@ -6197,3 +6197,32 @@ generated, numeric, plan, and complete mixed evidence pass. Final graph: 38
 Bash checkers, 41 nodes, 253 edges, and 41 components. The old checker is
 absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I88 Rust Boundary-Arithmetic Acceptance
+
+Fresh post-M6-I87 evidence reports 38 Bash verifiers, 41 nodes, 253 edges,
+and 41 components. Five verifiers have no executable inbound edge; three are
+at the highest dependency wave 1. The 106-line
+`verify-rust-boundary-arithmetic.sh` is the smallest coherent wave-1 candidate.
+Its three inbound references are historical contract evidence, and it invokes
+one metadata helper plus one separately owned gate. The package is
+`serial-coherent` because no shared engine, schema, policy, or unresolved owner
+contract changes.
+
+One nine-check `profile.language.rust.security` suite preserves all 17 typed
+decisions, exact `STD-0823` source identity and disposition, metadata closure,
+canonical Rust Security policy, Rust index routing, the bounded legacy route
+and sibling, and the README projection. Native metadata authority replaces
+helper execution. Two outgoing records retain F022/F023 decomposition as a
+separate gate. Six prior M6-I76, M6-I77, and M6-I81 records transition to
+registered suite evidence. Row-35 README-consumer evidence removes the retired
+checker.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing checked-arithmetic authority, and restoration of a prohibited legacy
+mechanism. Exact final compilation renews 22 dependency-local requirements and
+leaves 29 stable, closing 51/51 coverage. All focused, graph, declarative,
+generated, numeric, plan, and complete mixed evidence pass. Final graph: 37
+Bash checkers, 40 nodes, 246 edges, and 40 components. The old checker is
+absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.
