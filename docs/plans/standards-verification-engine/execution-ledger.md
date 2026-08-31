@@ -6393,3 +6393,20 @@
   numeric and generated freshness, plan checks, and the 49-entrypoint mixed
   checkpoint pass. Final graph: 49 Bash checkers, 52 nodes, 366 edges, and 52
   components. No wrapper, compatibility representation, or fallback remains.
+
+## 2026-08-31 - M6-I77 Row-44 Decomposition Acceptance
+
+- Fresh post-M6-I76 evidence selects the caller-free 57-line row-44 lifecycle
+  verifier as a `serial-coherent` package at train order 192.
+- One seven-check suite preserves exact execution-train, accelerated-package,
+  owner-validation, decomposition, legacy-route, profile, and prerequisite
+  evidence without duplicating the separately owned Rust Security title policy.
+- Sixteen outgoing records retain eight independent gates. Two prior M6-I76
+  records now name registered row-44 suite evidence; the temporary retained-
+  checker assertion is removed from the Rust Security title-index suite.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 48-entrypoint mixed checkpoint pass. Final graph: 48 Bash checkers,
+  51 nodes, 346 edges, and 51 components. No nested suite dependency, wrapper,
+  compatibility representation, or fallback remains.

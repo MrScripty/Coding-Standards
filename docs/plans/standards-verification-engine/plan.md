@@ -5,14 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I76 graph audit; do not preselect the next
-package from evidence captured before this accepted shared contract
+**Next slice:** run a fresh post-M6-I77 graph audit; do not preselect the next
+package from evidence captured before this accepted serial package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I76 replaced the Rust Security title-index
-verifier with one owner-local suite and added generic Markdown heading-body
-scope at train order 191.
+**Latest accepted slice:** M6-I77 replaced the row-44 lifecycle verifier with
+one owner-local declarative suite at train order 192.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -131,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I76 at train
-order 191.
+**Accepted boundary:** package records are accepted through M6-I77 at train
+order 192.
 
-**Current derived state:** 229 registered declarative suites, 49 retained Bash
-checkers, 52 executable nodes, 366 conservative reference edges, and 52
+**Current derived state:** 230 registered declarative suites, 48 retained Bash
+checkers, 51 executable nodes, 346 conservative reference edges, and 51
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -180,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I76 Rust Security title-index closure accepted at train order 191 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I77 row-44 lifecycle closure accepted at train order 192 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

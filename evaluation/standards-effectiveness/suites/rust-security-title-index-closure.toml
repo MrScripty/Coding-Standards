@@ -68,10 +68,3 @@ type = "text"
 path = "evaluation/standards-effectiveness/milestone-7-row-44-decomposition.md"
 required = ["registered `rust-security-title-index-closure` suite"]
 prohibited = ["verify-rust-security-title-index-closure.sh"]
-
-[[checks]]
-id = "retained-row-44-gate"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh"
-required = ["rust-security-title-index-closure"]
-prohibited = ["verify-rust-security-title-index-closure.sh"]

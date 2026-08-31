@@ -5889,3 +5889,31 @@ coverage. All verifier, repository-Git, graph, suite, numeric, generated, plan,
 and complete mixed evidence passes. Final graph: 49 Bash checkers, 52 nodes,
 366 edges, and 52 components. The obsolete checker and every bridge,
 compatibility representation, dual authority, or fallback are absent.
+
+### M6-I77 Row-44 Decomposition Acceptance
+
+Fresh post-M6-I76 evidence reports 49 Bash verifiers, 52 nodes, 366 edges,
+and 52 components. The 57-line
+`verify-milestone-7-row-44-decomposition.sh` has no executable inbound edge;
+its remaining inbound references are lifecycle evidence. It directly owns the
+row-44/P36 decomposition contract and executes eight separately owned gates.
+The package is therefore `serial-coherent`: no shared engine, schema, policy,
+or unresolved owner contract changes.
+
+One seven-check `migration.parent-plan` suite preserves the exact execution-
+train row, accelerated P36 package, owner-validation row, decomposition
+record, legacy Rust Security routes, canonical profile metadata, and required
+canonical paths. The Rust Security title-index suite relinquishes its
+temporary retained-row-44 projection because the new registered suite now
+owns lifecycle evidence. Sixteen outgoing edge records retain the eight
+former callees as independent gates, and two prior M6-I76 records transition
+their replacement evidence to the registered row-44 suite.
+
+Four mutations reject execution-train owner drift, owner-validation
+disposition drift, canonical profile-owner drift, and reintroduction of the
+retired Bash authority. Exact final compilation renews nine dependency-local
+requirements and leaves 42 stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 48 Bash checkers, 51 nodes, 346 edges, and 51 components. The old
+checker is absent without nested declarative execution, a wrapper,
+compatibility representation, dual authority, or fallback.

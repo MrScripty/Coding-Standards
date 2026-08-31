@@ -1106,6 +1106,11 @@ path = "evaluation/standards-effectiveness/suites/rust-security-title-index-clos
 requires = []
 
 [[suites]]
+id = "milestone-7-row-44-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "standards-recovery-routing"
 path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"
 requires = []

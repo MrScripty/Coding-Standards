@@ -14841,3 +14841,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   numeric, generated, plan, and complete mixed evidence passes. Final graph:
   49 Bash checkers, 52 nodes, 366 edges, 52 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I77 Row-44 Decomposition Acceptance
+
+- Fresh post-M6-I76 graph evidence selects the caller-free 57-line row-44
+  lifecycle verifier as a `serial-coherent` package at train order 192.
+- One seven-check suite preserves the exact execution-train, P36 package,
+  owner-validation, decomposition, Rust Security route, profile, and canonical
+  prerequisite contract without absorbing the separately owned title policy.
+- Sixteen outgoing records retain eight independent gates, while two earlier
+  M6-I76 records transfer their evidence to the registered row-44 suite.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 48-entrypoint checkpoint pass. Final graph: 48 Bash checkers, 51
+  nodes, 346 edges, and 51 components; fresh graph evidence is required next.

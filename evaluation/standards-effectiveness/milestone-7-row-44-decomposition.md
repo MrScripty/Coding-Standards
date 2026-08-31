@@ -18,10 +18,12 @@ required.
 ## Verifier Ownership
 
 The accepted `verify-security-index-closure.sh` remains the focused owner for
-`STD-0582`, the generic Security migration index. Row 44 uses the distinct
-registered `rust-security-title-index-closure` suite for `STD-0821`. The
-immutable P36 semantic outcome `rust-security-index-closure` remains package
-evidence, and neither authority owns the other disposition.
+`STD-0582`, the generic Security migration index. The
+registered `rust-security-title-index-closure` suite owns the direct `STD-0821` index
+contract. The registered `milestone-7-row-44-decomposition` suite owns this
+row's lifecycle evidence. The immutable P36 semantic outcome
+`rust-security-index-closure` remains package evidence, and none of these
+authorities owns another's disposition or lifecycle.
 
 ## Exact Outcome
 
