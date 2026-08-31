@@ -15102,3 +15102,23 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   plan checks, and the complete 36-entrypoint checkpoint pass. Final graph: 36
   Bash checkers, 39 nodes, 242 edges, and 39 components; fresh graph evidence
   is required next.
+
+## 2026-08-31 - M6-I90 IPC Payload-Validation Acceptance
+
+- Fresh post-M6-I89 evidence reports 36 Bash verifiers, 39 nodes, 242 edges,
+  and 39 components. Three verifiers have no executable inbound edge; the
+  179-line IPC payload-validation verifier is the sole candidate at the
+  highest dependency wave 1. M6-I90 is `serial-coherent` at train order 205.
+- One twelve-check owner-local suite preserves all 17 typed decisions, 11 exact
+  source identities and dispositions, metadata closure, canonical IPC and
+  Security policy, Router and legacy routes, unsafe-cast removal, finding
+  closure, and the README projection.
+- Native metadata authority replaces helper execution. Five prior M6-I2,
+  M6-I33, and M6-I78 records move to registered suite evidence. Row-35
+  README-dependency evidence removes the retired checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 35-entrypoint checkpoint pass. Final graph: 35
+  Bash checkers, 38 nodes, 236 edges, and 38 components; fresh graph evidence
+  is required next.

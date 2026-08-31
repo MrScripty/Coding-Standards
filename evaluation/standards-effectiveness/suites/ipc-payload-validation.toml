@@ -1,0 +1,188 @@
+schema_version = 1
+id = "ipc-payload-validation"
+owner = "profile.boundary.ipc"
+description = "Complete IPC envelope and category/action selection, action-specific proof, closed validated dispatch, typed outcomes, and no permissive fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/ipc/action-payload-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+envelope = ["valid", "invalid"]
+pair = ["supported", "unknown-category", "unknown-action", "mismatch", "not-selected"]
+schema = ["available", "unavailable", "not-selected"]
+payload = ["valid", "missing-field", "wrong-type", "not-checked"]
+metadata = ["valid", "invalid", "not-required"]
+producer_proof = ["none", "static-only"]
+extra_fields = ["absent", "accepted", "rejected", "unspecified"]
+dispatch = ["validated-variant", "raw", "default", "none"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+field = "envelope"
+op = "eq"
+value = "invalid"
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "pair"
+op = "in"
+values = ["unknown-category", "unknown-action", "mismatch"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+field = "schema"
+op = "eq"
+value = "unavailable"
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "pair", op = "ne", value = "supported" },
+  { field = "schema", op = "ne", value = "available" },
+  { field = "payload", op = "ne", value = "valid" },
+  { field = "metadata", op = "eq", value = "invalid" },
+  { field = "extra_fields", op = "in", values = ["rejected", "unspecified"] },
+  { field = "dispatch", op = "ne", value = "validated-variant" },
+]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0063", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0064", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0065", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0066", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0067", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0068", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0476", "INTEROP-STANDARDS.md"],
+  ["STD-0592", "SECURITY-STANDARDS.md"],
+  ["STD-0593", "SECURITY-STANDARDS.md"],
+  ["STD-0594", "SECURITY-STANDARDS.md"],
+  ["STD-0595", "SECURITY-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0063", "STD-0064", "STD-0065", "STD-0066", "STD-0067", "STD-0068", "STD-0476", "STD-0592", "STD-0593", "STD-0594", "STD-0595"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0063", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "move", "IPC boundary contract concern"],
+  ["STD-0064", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "refine", "replace typed-message assertion with decoded variants"],
+  ["STD-0065", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "refine", "bind category action payload and metadata"],
+  ["STD-0066", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "move", "preserve message category semantics without defaults"],
+  ["STD-0067", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "refine", "remove payload assertion and require validated dispatch"],
+  ["STD-0068", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "merge", "merge benefits into canonical contract outcomes"],
+  ["STD-0592", "SECURITY-STANDARDS.md", "topics/security.md", "merge", "link untrusted payload authority to complete decoding"],
+  ["STD-0593", "SECURITY-STANDARDS.md", "profiles/boundaries/ipc.md", "refine", "remove envelope-only validated message assertion"],
+  ["STD-0594", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "deserialization does not prove domain invariants"],
+  ["STD-0595", "SECURITY-STANDARDS.md", "profiles/boundaries/ipc.md", "refine", "specialize process-boundary validation without Electron policy"],
+  ["STD-0476", "INTEROP-STANDARDS.md", "profiles/boundaries/ipc.md", "refine", "require complete consumer-side variant decoding before validated dispatch"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0063", "STD-0064", "STD-0065", "STD-0066", "STD-0067", "STD-0068", "STD-0476", "STD-0592", "STD-0593", "STD-0594", "STD-0595"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/security.md",
+  "profiles/boundaries/ipc.md",
+]
+
+[[checks]]
+id = "ipc-policy"
+type = "text"
+path = "profiles/boundaries/ipc.md"
+required = [
+  "## Decode Before Dispatch",
+  "decode the complete category/action discriminant",
+  "select the schema for that exact supported pair",
+  "construct a closed validated variant",
+  "`unsupported` for a well-formed category/action pair",
+  "`unavailable` when the required schema or decoder",
+  "When no extra-field policy is defined",
+  "Dispatch accepts only closed validated variants.",
+  "use a default action or fall-through branch",
+  "retry through an alternate permissive decoder",
+]
+prohibited = ["msg.payload as SelectItemCommand['payload']", "msg as ValidatedMessage", "parsed as Record<string, unknown>", "JsonSerializer.Deserialize<OpenProjectRequest>"]
+
+[[checks]]
+id = "security-policy"
+type = "text"
+path = "topics/security.md"
+required = [
+  "## Untrusted Structured Input",
+  "before it can authorize work, resource access, or side effects",
+  "profiles/boundaries/ipc.md",
+  "Do not continue with",
+]
+prohibited = ["msg.payload as SelectItemCommand['payload']", "msg as ValidatedMessage", "parsed as Record<string, unknown>", "JsonSerializer.Deserialize<OpenProjectRequest>"]
+
+[[checks]]
+id = "router-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["profiles/boundaries/ipc.md"]
+prohibited = []
+
+[[checks]]
+id = "legacy-architecture-route"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = ["profiles/boundaries/ipc.md"]
+prohibited = ["msg.payload as SelectItemCommand['payload']", "msg as ValidatedMessage", "parsed as Record<string, unknown>", "JsonSerializer.Deserialize<OpenProjectRequest>"]
+
+[[checks]]
+id = "legacy-interop-route"
+type = "text"
+path = "INTEROP-STANDARDS.md"
+required = ["profiles/boundaries/ipc.md#decode-before-dispatch"]
+prohibited = ["msg.payload as SelectItemCommand['payload']", "msg as ValidatedMessage", "parsed as Record<string, unknown>", "JsonSerializer.Deserialize<OpenProjectRequest>"]
+
+[[checks]]
+id = "legacy-security-routes"
+type = "text"
+path = "SECURITY-STANDARDS.md"
+required = ["profiles/boundaries/ipc.md", "topics/security.md#untrusted-structured-input"]
+prohibited = ["msg.payload as SelectItemCommand['payload']", "msg as ValidatedMessage", "parsed as Record<string, unknown>", "JsonSerializer.Deserialize<OpenProjectRequest>"]
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F018 | Resolved in Milestone 7.4b2c |", "| F059 | Resolved in Milestone 7.4b8d |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `ipc-payload-validation` suite checks"]
+prohibited = ["`verify-ipc-payload-validation.sh` check complete envelope and category/action"]

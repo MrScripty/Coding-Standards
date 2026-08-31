@@ -2,7 +2,6 @@ file	current_dependency	replacement
 evaluation/standards-effectiveness/verify-concurrency-policy.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-contract-ownership.sh	transitive-root-readme-route-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-ipc-payload-validation.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-language-binding-boundary.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

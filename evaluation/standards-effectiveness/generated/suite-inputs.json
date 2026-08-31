@@ -194,6 +194,11 @@
           "suite": "frontend-view-model-lineage"
         },
         {
+          "check": "legacy-architecture-route",
+          "role": "content",
+          "suite": "ipc-payload-validation"
+        },
+        {
           "check": "legacy-section",
           "role": "content",
           "suite": "persistence-durable-mutation"
@@ -485,6 +490,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "metadata-closure",
@@ -917,6 +927,11 @@
           "suite": "interop-applicability-index"
         },
         {
+          "check": "legacy-interop-route",
+          "role": "content",
+          "suite": "ipc-payload-validation"
+        },
+        {
           "check": "enum-variant-index",
           "role": "content",
           "suite": "language-binding-wire-representation"
@@ -1104,6 +1119,11 @@
           "suite": "input-validation-authority"
         },
         {
+          "check": "legacy-security-routes",
+          "role": "content",
+          "suite": "ipc-payload-validation"
+        },
+        {
           "check": "legacy-routes",
           "role": "content",
           "suite": "network-transport-policy"
@@ -1204,6 +1224,11 @@
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "implementation-versus-dependency"
+        },
+        {
+          "check": "router-route",
+          "role": "content",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "language-index-links",
@@ -1762,7 +1787,7 @@
       ]
     },
     {
-      "digest": "sha256:aa7ccbf686ad9fc165947d16d4d20c42ddec81dac8e3e87eed544b39ae73d4cb",
+      "digest": "sha256:6e6aa3f66498fcd60bb393fc79d6f374e752673e00bd9c5ecce07ae6cdbb816d",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1774,7 +1799,7 @@
       ]
     },
     {
-      "digest": "sha256:01e5ff19d6a7097d56a9a8737845a2a702f8c219eb943008531d960c22384127",
+      "digest": "sha256:85a87d5c09bc7fc27237eb5bf3806dd738797f67bdb6db02f56fd68c45a90e80",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1827,6 +1852,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "documentation-projection",
@@ -2035,7 +2065,7 @@
       ]
     },
     {
-      "digest": "sha256:9bffad3a1cb8929e6a651984be3208053a748b71d38c26746ba552297b087d17",
+      "digest": "sha256:dccdddea910e3660f828f26b55b2b7bdc024121ea52387712f16980762b53876",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2450,6 +2480,11 @@
           "check": "exact-disposition",
           "role": "table",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "dispositions",
@@ -3253,7 +3288,7 @@
       ]
     },
     {
-      "digest": "sha256:1d37e8273493efc37d547acd3bd9ef8cc784be18baf4fe218ced4877526e07bd",
+      "digest": "sha256:2b54b2c0d7595719a22621a4e617c766c2ddf7cf555808a86670ed5e3f8a4eb1",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3273,6 +3308,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "resolved-finding",
@@ -4251,6 +4291,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "review-template-projection"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:d414ab9de4f393b70a95a6de360c8749be9f0cadbd447e9e69ddd9e0da005322",
+      "path": "evaluation/standards-effectiveness/fixtures/ipc/action-payload-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "ipc-payload-validation"
         }
       ]
     },
@@ -6469,7 +6521,7 @@
       ]
     },
     {
-      "digest": "sha256:b9b3d0ddac83ae06e6d6e2f3929941179b091abcee25dc45e21cb28a0a8df955",
+      "digest": "sha256:021571041a67ebbba4bb1697f5dcce2772cc6c15109072b970b05b043dbdb901",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6481,7 +6533,7 @@
       ]
     },
     {
-      "digest": "sha256:652fb3aa18c484815b5d2c3989dc0ce719a53deeb8a042956f2dcb5e9dab1e9d",
+      "digest": "sha256:4db1741ef8c1d7b10be250b7fbb17987863eac596b7816cd95811767f783604a",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6634,6 +6686,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "section-inventory",
@@ -8147,7 +8204,7 @@
       ]
     },
     {
-      "digest": "sha256:183ae342d07288628d528d261f613dc6b313bcd2626a05cc702c65ec4ce44fd0",
+      "digest": "sha256:c538840dcf5404fbdfd0bf526d9d8571db24d2231b9acfa46273a5f54e83a221",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -9065,7 +9122,7 @@
       ]
     },
     {
-      "digest": "sha256:148a3ae9e112087f446c47b9e20d5bed464b7c35fb8afe29c60d304430b63c5d",
+      "digest": "sha256:1af8d806b524c997bd2a76a0e73aaba243e8cb0e023a362497110efbb71b4b69",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -9979,6 +10036,18 @@
     {
       "digest": "sha256:2798cb67138bcaefc27984efcef9ed494c4e80cf075e673d5d3d05c447aad2a1",
       "path": "evaluation/standards-effectiveness/suites/interop-applicability-index.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
+      "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
       "state": "present",
       "uses": [
         {
@@ -12276,38 +12345,6 @@
       ]
     },
     {
-      "digest": "sha256:beb34fb96180166ae0a2f87e9c32e645a554766897a02b47aadf68e39f05a2e8",
-      "path": "evaluation/standards-effectiveness/verify-ipc-payload-validation.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:a5d878ba9d215cfc74c3ce736978a7da67c29609c2955c269c90eb4285791293",
       "path": "evaluation/standards-effectiveness/verify-language-binding-boundary.sh",
       "state": "present",
@@ -13820,6 +13857,16 @@
       "path": "profiles/boundaries/ipc.md",
       "state": "present",
       "uses": [
+        {
+          "check": "ipc-policy",
+          "role": "content",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
         {
           "check": "metadata-closure",
           "role": "metadata",
@@ -20574,6 +20621,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -21319,6 +21371,16 @@
           "check": "security-policy",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "security-policy",
+          "role": "content",
+          "suite": "ipc-payload-validation"
         },
         {
           "check": "metadata-closure",
@@ -22384,6 +22446,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -22730,11 +22797,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:148a3ae9e112087f446c47b9e20d5bed464b7c35fb8afe29c60d304430b63c5d",
+    "digest": "sha256:1af8d806b524c997bd2a76a0e73aaba243e8cb0e023a362497110efbb71b4b69",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:30d153d4d39b90b61e1db09aef50d9af0c1f570da87f87d5aeeaf33ef9cb01e2",
+    "digest": "sha256:b18d6d1d123270a22c3d367cd2a6640fa8c6fa7baa6c889f3a17c8e6f7c9729c",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24181,6 +24248,12 @@
       "digest": "sha256:b08f8638c35992f6c8e86bb0946b5b56e131da275c7b0862808ce1ed99b892a3",
       "id": "filesystem-containment-policy",
       "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
+      "id": "ipc-payload-validation",
+      "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
       "requires": []
     },
     {

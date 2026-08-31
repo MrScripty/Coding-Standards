@@ -463,11 +463,11 @@ default success with typed outcomes.
 
 ## IPC Payload Decision Fixtures
 
-`fixtures/ipc/action-payload-decisions.tsv` and
-`verify-ipc-payload-validation.sh` check complete envelope and category/action
-selection, action-specific payload and metadata proof, extra-field policy,
-validated-variant dispatch, typed invalid/unsupported/unavailable outcomes,
-11 exact frozen-ID dispositions, metadata and routing, legacy links, and removal
+The registered `ipc-payload-validation` suite checks complete envelope and
+category/action selection using `fixtures/ipc/action-payload-decisions.tsv`.
+It covers action-specific payload and metadata proof, extra-field policy,
+validated-variant dispatch, typed invalid/unsupported/unavailable outcomes, 11
+exact frozen-ID dispositions, metadata and routing, legacy links, and removal
 of unchecked message and payload assertions.
 
 The registered `language-binding-wire-representation` suite checks canonical schema and
