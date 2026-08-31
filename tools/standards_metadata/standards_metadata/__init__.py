@@ -32,6 +32,19 @@ from .source import (
     RecordingContentSource,
     content_source,
 )
+from .suite_inputs import (
+    SUITE_INPUT_CONTRACT,
+    SUITE_INPUT_SCHEMA_VERSION,
+    RepositoryIndexObservation,
+    SuiteDefinitionInput,
+    SuiteDependencyProjection,
+    SuiteFileInput,
+    SuiteInputManifest,
+    SuiteInputUse,
+    file_digest,
+    load_suite_input_manifest,
+    suite_input_manifest_bytes,
+)
 __all__ = (
     "CANONICAL_MODULE_CORPUS",
     "POLICY_UNIT_REGISTRY",
@@ -49,6 +62,14 @@ __all__ = (
     "PolicyUnitCorpus",
     "PolicyUnitTombstone",
     "RecordingContentSource",
+    "RepositoryIndexObservation",
+    "SUITE_INPUT_CONTRACT",
+    "SUITE_INPUT_SCHEMA_VERSION",
+    "SuiteDefinitionInput",
+    "SuiteDependencyProjection",
+    "SuiteFileInput",
+    "SuiteInputManifest",
+    "SuiteInputUse",
     "UnmappedModuleProjection",
     "load_canonical_standards_corpus",
     "load_canonical_module_corpus",
@@ -58,4 +79,7 @@ __all__ = (
     "project_unmapped_module",
     "validate_module_metadata",
     "content_source",
+    "file_digest",
+    "load_suite_input_manifest",
+    "suite_input_manifest_bytes",
 )

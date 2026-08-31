@@ -1,7 +1,7 @@
 schema_version = 1
 id = "systemic-finding-replanning"
 owner = "workflow.planning"
-description = "Repeated invariant failures require family, sibling-consumer, authority-projection, and disposition audits before a replacement scope proceeds."
+description = "Repeated invariant failures require a bounded canonical owner and reachable consumer population, class-level alternatives, evidence-backed dispositions, and a stopping condition."
 
 [[checks]]
 id = "decisions"
@@ -94,21 +94,39 @@ prohibited = []
 id = "planning-prompt"
 type = "text"
 path = "prompts/planning.md"
-required = ["repeated invariant failure", "sibling producers and consumers"]
+required = [
+  "repeated invariant failure",
+  "Identify the canonical owner and bound the authorities",
+  "Inspect sibling operations only when they share that authority",
+  "Expand only for a new semantic owner",
+  "bounded population has evidence-backed dispositions",
+]
 prohibited = []
 
 [[checks]]
 id = "implementation-prompt"
 type = "text"
 path = "prompts/implement-plan.md"
-required = ["Stop and re-plan", "repeated invariant failure"]
+required = [
+  "Stop and re-plan",
+  "repeated invariant failure",
+  "Bound the canonical owner",
+  "another file inside an already bounded owner",
+]
 prohibited = []
 
 [[checks]]
 id = "template-projection"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["## Systemic Finding Audit", "Invariant family", "Sibling producers and consumers", "Consumer dispositions"]
+required = [
+  "## Systemic Finding Audit",
+  "Invariant family and canonical owner",
+  "Bounded authority, representation, and reachable consumer population",
+  "Consumer dispositions",
+  "Evidence-backed stopping condition",
+  "Repaired-composition comparison",
+]
 prohibited = []
 
 [[checks]]

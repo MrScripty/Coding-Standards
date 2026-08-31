@@ -64,6 +64,7 @@ from tools.standards_metadata.standards_metadata import (
     ContentSource,
     FrozenContentSource,
     MetadataError,
+    MetadataFailure,
     ModuleMetadata,
     PolicyUnit,
     RecordingContentSource,
@@ -160,7 +161,21 @@ class _GitRevisionSource:
         self._revision = revision
 
     def read_bytes(self, path: str) -> bytes:
-        return self._repository.read_file(self._revision, RepositoryPath.parse(path))
+        try:
+            return self._repository.read_file(
+                self._revision, RepositoryPath.parse(path)
+            )
+        except GitRepositoryError as error:
+            if error.failure.kind != "unavailable":
+                raise
+            raise MetadataError(
+                MetadataFailure(
+                    "INPUT.UNAVAILABLE",
+                    "unavailable",
+                    error.failure.message,
+                    path=path,
+                )
+            ) from error
 
 
 class StandardsEngine:

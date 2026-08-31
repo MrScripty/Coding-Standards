@@ -254,7 +254,9 @@ type = "text"
 path = "prompts/planning.md"
 required = [
   "owned responsibility, referenced authorities, independent change axes",
-  "Scope each version and identity invalidation",
+  "Classify each version-like value as current-format",
+  "its promise, consumers, supported overlap, and consequences",
+  "material meaning change",
 ]
 prohibited = []
 
@@ -275,6 +277,8 @@ type = "text"
 path = "templates/PLAN-TEMPLATE.md"
 required = [
   "Canonical authority scope and referenced authorities",
-  "Version and identity-invalidation scopes",
+  "Version roles and owned promises",
+  "Supported compatibility overlaps and consumer matrix",
+  "Material identity-invalidation effects",
 ]
 prohibited = []

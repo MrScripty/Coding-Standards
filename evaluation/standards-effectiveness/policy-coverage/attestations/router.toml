@@ -1,13 +1,8 @@
-schema_version = 4
+schema_version = 5
 
+# router.generated-contract-profile-applicability
 [[attestations]]
-subject = "router.generated-contract-profile-applicability"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:7ca778939dade0da7e911d2e823c45aaaff16ca8947cb5d4148313782d520dce"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -15,7 +10,8 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact router.generated-contract-profile-applicability provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for router.generated-contract-profile-applicability is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

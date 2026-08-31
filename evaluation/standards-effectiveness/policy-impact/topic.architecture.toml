@@ -411,6 +411,14 @@ rationale = "Metadata authority records preserve snapshot-bound module and polic
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_metadata/standards_metadata/suite_inputs.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Suite dependency fingerprints bind the exact transitive suite definitions, registered inputs, and applicable repository-index observation."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_policy_impact/standards_policy_impact/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }

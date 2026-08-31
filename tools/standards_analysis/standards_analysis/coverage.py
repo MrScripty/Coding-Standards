@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import tomllib
 from dataclasses import dataclass
 from types import MappingProxyType
@@ -13,7 +14,9 @@ from tools.standards_metadata.standards_metadata import (
     ContentSourceInput,
     MetadataError,
     PolicyUnit,
+    SuiteInputManifest,
     content_source,
+    load_suite_input_manifest,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     CompiledPolicyImpactSet,
@@ -36,7 +39,7 @@ from .trust import (
 DEFAULT_HORIZON = "evaluation/standards-effectiveness/policy-coverage/horizons.toml"
 HORIZON_ID = "audit-horizon.policy-impact-consumers"
 HORIZON_PROVIDER = "standards-analysis:policy-impact-consumer-horizon"
-HORIZON_VERSION = 5
+HORIZON_VERSION = 6
 DEFAULT_ATTESTATION_REGISTRY = (
     "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
 )
@@ -173,6 +176,8 @@ class CoverageHorizon:
     members: tuple[CoverageHorizonMember, ...]
     digest: str
     input_sources: tuple[str, ...]
+    suite_inputs: SuiteInputManifest
+    consumer_members: Mapping[str, CoverageHorizonMember]
 
 
 @dataclass(frozen=True, slots=True)
@@ -431,52 +436,42 @@ def _load_coverage_horizon(
                 _file_fingerprint(selected_source, source_path),
             )
 
-    suite_registry_path = _text(
-        raw["suite_registry"], path=path, field="suite_registry"
-    )
-    input_sources.add(suite_registry_path)
-    suite_registry = _toml(selected_source, suite_registry_path)
-    registry_entries = suite_registry.get("suites", [])
-    if not isinstance(registry_entries, list):
+    suite_registry_path = _text(raw["suite_registry"], path=path, field="suite_registry")
+    suite_inputs_path = _text(raw["suite_inputs"], path=path, field="suite_inputs")
+    try:
+        suite_inputs = load_suite_input_manifest(selected_source, suite_inputs_path)
+    except MetadataError as error:
+        failure = error.failure
         raise _error(
-            "COVERAGE.SUITE",
-            "suite registry suites must be an array",
-            path=suite_registry_path,
+            failure.code,
+            failure.message,
+            path=failure.path,
+            field=failure.field,
+            observed=failure.observed,
+            unavailable=failure.outcome == "unavailable",
+        ) from error
+    if suite_inputs.registry_path != suite_registry_path:
+        raise _error(
+            "COVERAGE.SUITE_REGISTRY",
+            "horizon and suite-input manifest select different registries",
+            path=path,
+            observed=f"{suite_inputs.registry_path} (expected {suite_registry_path})",
         )
-    for entry in registry_entries:
-        if not isinstance(entry, dict):
-            raise _error(
-                "COVERAGE.SUITE",
-                "suite registration must be a table",
-                path=suite_registry_path,
-            )
-        suite_id = _text(entry.get("id"), path=suite_registry_path, field="id")
-        suite_path = _text(entry.get("path"), path=suite_registry_path, field="path")
-        input_sources.add(suite_path)
-        suite_raw = _toml(selected_source, suite_path)
-        if suite_raw.get("id") != suite_id:
-            raise _error(
-                "COVERAGE.SUITE_ID",
-                "registered suite identity does not match its source",
-                path=suite_path,
-                observed=str(suite_raw.get("id")),
-            )
+    input_sources.update(
+        {
+            suite_inputs_path,
+            suite_inputs.registry_path,
+            *(suite.path for suite in suite_inputs.suites),
+            *(item.path for item in suite_inputs.files if item.state == "present"),
+        }
+    )
+    for suite in suite_inputs.suites:
+        dependency = suite_inputs.dependency(suite.id)
         _merge_member(
             members,
-            f"suite:{suite_id}",
+            f"suite:{suite.id}",
             "registered-suite",
-            _digest(
-                {
-                    "registration": entry,
-                    "content": _file_fingerprint(selected_source, suite_path),
-                }
-            ),
-        )
-        _merge_member(
-            members,
-            f"repository:{suite_path}",
-            "suite-definition",
-            _file_fingerprint(selected_source, suite_path),
+            dependency.fingerprint,
         )
 
     input_sources.update(compiled.input_sources)
@@ -509,6 +504,23 @@ def _load_coverage_horizon(
             "members": [member.as_projection() for member in resolved],
         }
     )
+    members_by_id = {member.id: member for member in resolved}
+    consumer_members = {
+        module.module_id: members_by_id[f"repository:{module.path}"]
+        for module in corpus.modules
+    }
+    consumer_members.update(
+        {
+            unit.id: members_by_id[f"policy-unit:{unit.id}"]
+            for unit in corpus.policy_units
+        }
+    )
+    consumer_members.update(
+        {
+            artifact.id: members_by_id[f"policy-impact-node:{artifact.id}"]
+            for artifact in compiled.artifacts.values()
+        }
+    )
     return CoverageHorizon(
         horizon_id,
         provider,
@@ -516,6 +528,8 @@ def _load_coverage_horizon(
         resolved,
         horizon_digest,
         tuple(sorted(input_sources)),
+        suite_inputs,
+        MappingProxyType(dict(sorted(consumer_members.items()))),
     )
 
 
@@ -549,6 +563,48 @@ def derive_coverage_view(
             if semantics.source == unit.id
         )
     )
+    local_members: dict[str, CoverageHorizonMember] = {}
+    for edge_id, _fingerprint, _relation, _program in relationships:
+        semantics = compiled.semantics[edge_id]
+        try:
+            consumer = horizon.consumer_members[semantics.consumer]
+        except KeyError as error:
+            raise _error(
+                "COVERAGE.CONSUMER_MISSING",
+                "relationship consumer is absent from the coverage horizon",
+                observed=semantics.consumer,
+            ) from error
+        local_members[consumer.id] = consumer
+        suite_id = semantics.evidence_owner.removeprefix("suite:")
+        if not semantics.evidence_owner.startswith("suite:"):
+            raise _error(
+                "COVERAGE.EVIDENCE_OWNER",
+                "relationship evidence owner must be a registered suite",
+                observed=semantics.evidence_owner,
+            )
+        try:
+            dependency = horizon.suite_inputs.dependency(suite_id)
+        except KeyError as error:
+            raise _error(
+                "COVERAGE.EVIDENCE_SUITE_MISSING",
+                "relationship evidence suite is absent from the suite manifest",
+                observed=suite_id,
+            ) from error
+        member_id = f"suite-dependency:{suite_id}"
+        local_members[member_id] = CoverageHorizonMember(
+            member_id,
+            ("evidence-suite-dependency",),
+            dependency.fingerprint,
+        )
+    selected_members = tuple(local_members[key] for key in sorted(local_members))
+    local_horizon_digest = _digest(
+        {
+            "id": horizon.id,
+            "provider": horizon.provider,
+            "version": horizon.version,
+            "members": [member.as_projection() for member in selected_members],
+        }
+    )
     return CoverageViewDefinition(
         unit.id,
         unit.module,
@@ -565,8 +621,8 @@ def derive_coverage_view(
         horizon.id,
         horizon.provider,
         horizon.version,
-        horizon.digest,
-        horizon.members,
+        local_horizon_digest,
+        selected_members,
     )
 
 
@@ -634,6 +690,15 @@ def load_repository_coverage_decisions(
     authority = _load_repository_authorization(
         source, authorization_authority, revocations
     )
+    requirement_subjects = {
+        coverage_requirement_id(definitions.requirements[subject], view): subject
+        for subject, view in definitions.views.items()
+    }
+    if len(requirement_subjects) != len(definitions.requirements):
+        raise _error(
+            "COVERAGE.REQUIREMENT_IDENTITY_COLLISION",
+            "coverage requirements do not have unique identities",
+        )
     registry = _toml(source, attestation_registry)
     _exact(
         registry,
@@ -667,7 +732,7 @@ def load_repository_coverage_decisions(
             field="attestation source",
         )
         claims = declaration["attestations"]
-        if declaration["schema_version"] != 4 or not isinstance(claims, list):
+        if declaration["schema_version"] != 5 or not isinstance(claims, list):
             raise _error(
                 "COVERAGE.ATTESTATION_VERSION",
                 "unsupported repository attestation source version",
@@ -683,17 +748,9 @@ def load_repository_coverage_decisions(
             claim = _coverage_claim(raw_claim, claim_source)
             inputs.update(claim["evidence"])
             inputs.update(claim["explicit_exclusions"])
-            subject = str(claim["subject"])
-            view = definitions.views.get(subject)
-            requirement = definitions.requirements.get(subject)
-            if view is None or requirement is None:
-                raise _error(
-                    "COVERAGE.UNKNOWN_SUBJECT",
-                    "coverage claim subject is not one active policy unit",
-                    path=claim_source,
-                    observed=subject,
-                )
-            if not _claim_matches_view(claim, view):
+            requirement_id = str(claim["requirement_id"])
+            subject = requirement_subjects.get(requirement_id)
+            if subject is None:
                 continue
             if subject in attestations:
                 raise _error(
@@ -709,7 +766,6 @@ def load_repository_coverage_decisions(
                     path=claim_source,
                     observed=str(claim["auditor_provenance"]),
                 )
-            requirement_id = coverage_requirement_id(requirement, view)
             evidence = tuple(
                 _repository_evidence(source, path)
                 for path in claim["evidence"]
@@ -891,13 +947,7 @@ def _load_repository_authorization(
 
 def _coverage_claim(raw: Mapping[str, object], path: str) -> dict[str, object]:
     fields = {
-        "subject",
-        "semantic_revision",
-        "horizon_provider",
-        "horizon_version",
-        "relationship_kind_contract_version",
-        "applicability_language_version",
-        "coverage_evidence_contract",
+        "requirement_id",
         "conclusion",
         "evidence",
         "explicit_exclusions",
@@ -913,30 +963,8 @@ def _coverage_claim(raw: Mapping[str, object], path: str) -> dict[str, object]:
             path=path,
         )
     return {
-        "subject": _text(raw["subject"], path=path, field="subject"),
-        "semantic_revision": _positive_integer(
-            raw["semantic_revision"], path=path, field="semantic_revision"
-        ),
-        "horizon_provider": _text(
-            raw["horizon_provider"], path=path, field="horizon_provider"
-        ),
-        "horizon_version": _positive_integer(
-            raw["horizon_version"], path=path, field="horizon_version"
-        ),
-        "relationship_kind_contract_version": _positive_integer(
-            raw["relationship_kind_contract_version"],
-            path=path,
-            field="relationship_kind_contract_version",
-        ),
-        "applicability_language_version": _positive_integer(
-            raw["applicability_language_version"],
-            path=path,
-            field="applicability_language_version",
-        ),
-        "coverage_evidence_contract": _text(
-            raw["coverage_evidence_contract"],
-            path=path,
-            field="coverage_evidence_contract",
+        "requirement_id": _coverage_requirement_digest(
+            raw["requirement_id"], path=path
         ),
         "conclusion": conclusion,
         "evidence": _texts(raw["evidence"], path=path, field="evidence"),
@@ -953,20 +981,17 @@ def _coverage_claim(raw: Mapping[str, object], path: str) -> dict[str, object]:
     }
 
 
-def _claim_matches_view(
-    claim: Mapping[str, object],
-    view: CoverageViewDefinition,
-) -> bool:
-    return (
-        claim["semantic_revision"] == view.semantic_revision
-        and claim["horizon_provider"] == view.horizon_provider
-        and claim["horizon_version"] == view.horizon_version
-        and claim["relationship_kind_contract_version"]
-        == view.relationship_kind_contract_version
-        and claim["applicability_language_version"]
-        == view.applicability_language_version
-        and claim["coverage_evidence_contract"] == COVERAGE_EVIDENCE_CONTRACT
-    )
+def _coverage_requirement_digest(value: object, *, path: str) -> str:
+    requirement_id = _text(value, path=path, field="requirement_id")
+    if re.fullmatch(r"sha256:[0-9a-f]{64}", requirement_id) is None:
+        raise _error(
+            "COVERAGE.REQUIREMENT_ID",
+            "coverage requirement identity must be one SHA-256 digest",
+            path=path,
+            field="requirement_id",
+            observed=requirement_id,
+        )
+    return requirement_id
 
 
 def _positive_integer(value: object, *, path: str, field: str) -> int:

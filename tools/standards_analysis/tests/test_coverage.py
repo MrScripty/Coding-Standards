@@ -54,12 +54,28 @@ class CoverageTest(unittest.TestCase):
         )
         self.write("inputs/consumer.md", "# Consumer\n")
         self.write(
+            "suites/unrelated.toml",
+            """
+            schema_version = 1
+            id = "unrelated"
+            owner = "test"
+            description = "Unrelated coverage input."
+            checks = [{ id = "input", type = "text" }]
+            """,
+        )
+        self.write("inputs/unrelated.md", "# Unrelated\n")
+        self.write(
             "suite-registry.toml",
             """
             schema_version = 1
             [[suites]]
             id = "coverage"
             path = "suites/coverage.toml"
+            requires = []
+
+            [[suites]]
+            id = "unrelated"
+            path = "suites/unrelated.toml"
             requires = []
             """,
         )
@@ -80,7 +96,7 @@ class CoverageTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 5
+            version = 6
             suite_registry = "suite-registry.toml"
             suite_inputs = "suite-inputs.json"
             edge_source_registry = "edge-sources.toml"
@@ -173,8 +189,8 @@ class CoverageTest(unittest.TestCase):
             ).hexdigest()
 
         projection = {
-            "schema_version": 2,
-            "contract": "standards-analysis:suite-input-manifest:v2",
+            "schema_version": 1,
+            "contract": "standards-metadata:suite-input-manifest:v1",
             "registry": {
                 "path": "suite-registry.toml",
                 "digest": digest("suite-registry.toml"),
@@ -184,7 +200,14 @@ class CoverageTest(unittest.TestCase):
                     "id": "coverage",
                     "path": "suites/coverage.toml",
                     "digest": digest("suites/coverage.toml"),
-                }
+                    "requires": [],
+                },
+                {
+                    "id": "unrelated",
+                    "path": "suites/unrelated.toml",
+                    "digest": digest("suites/unrelated.toml"),
+                    "requires": [],
+                },
             ],
             "files": [
                 {
@@ -193,6 +216,14 @@ class CoverageTest(unittest.TestCase):
                     "digest": digest("inputs/consumer.md"),
                     "uses": [
                         {"suite": "coverage", "check": "input", "role": "content"}
+                    ],
+                },
+                {
+                    "path": "inputs/unrelated.md",
+                    "state": "present",
+                    "digest": digest("inputs/unrelated.md"),
+                    "uses": [
+                        {"suite": "unrelated", "check": "input", "role": "content"}
                     ],
                 }
             ],
@@ -261,19 +292,18 @@ class CoverageTest(unittest.TestCase):
     def write_attestations(
         self,
         *,
-        semantic_revision: int = 1,
+        requirement_id: str | None = None,
         principal: str = "principal.coverage",
         duplicate: bool = False,
     ) -> None:
+        definitions = self.definitions()
+        current_requirement = coverage_requirement_id(
+            definitions.requirements["workflow.policy.rule"],
+            definitions.views["workflow.policy.rule"],
+        )
         claim = f"""
             [[attestations]]
-            subject = "workflow.policy.rule"
-            semantic_revision = {semantic_revision}
-            horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-            horizon_version = 5
-            relationship_kind_contract_version = 2
-            applicability_language_version = 1
-            coverage_evidence_contract = "coverage-evidence.v1"
+            requirement_id = "{requirement_id or current_requirement}"
             conclusion = "complete"
             evidence = ["evidence/review.md"]
             explicit_exclusions = []
@@ -282,7 +312,7 @@ class CoverageTest(unittest.TestCase):
         """
         self.write(
             "attestations.toml",
-            "schema_version = 4\n" + claim + (claim if duplicate else ""),
+            "schema_version = 5\n" + claim + (claim if duplicate else ""),
         )
 
     def load_decisions(self):
@@ -294,24 +324,64 @@ class CoverageTest(unittest.TestCase):
             revocations="revocations.toml",
         )
 
-    def test_horizon_fingerprints_registered_content_not_generated_projection(
-        self,
-    ) -> None:
+    def test_horizon_fingerprints_registered_content(self) -> None:
         first = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
         )
 
-        self.write("suite-inputs.json", "{}\n")
-        projection_changed = load_coverage_horizon(
-            self.root, self.corpus, self.compiled(), "horizon.toml"
-        )
-        self.assertEqual(first.digest, projection_changed.digest)
-
         self.write("inputs/consumer.md", "# Consumer\n\nNow consumes policy.\n")
+        self.write_suite_projection()
         content_changed = load_coverage_horizon(
             self.root, self.corpus, self.compiled(), "horizon.toml"
         )
         self.assertNotEqual(first.digest, content_changed.digest)
+
+    def test_unrelated_suite_input_preserves_subject_requirement(self) -> None:
+        compiled = self.compiled(relationship=True)
+        first_horizon = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
+        unit = self.corpus.policy_units[0]
+        first_view = derive_coverage_view(unit, compiled, first_horizon)
+        first_requirement = coverage_requirement_id(
+            derive_coverage_requirement(first_view), first_view
+        )
+
+        self.write("inputs/unrelated.md", "# Unrelated changed\n")
+        self.write_suite_projection()
+        second_horizon = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
+        second_view = derive_coverage_view(unit, compiled, second_horizon)
+        second_requirement = coverage_requirement_id(
+            derive_coverage_requirement(second_view), second_view
+        )
+
+        self.assertNotEqual(first_horizon.digest, second_horizon.digest)
+        self.assertEqual(first_requirement, second_requirement)
+
+    def test_selected_suite_input_changes_subject_requirement(self) -> None:
+        compiled = self.compiled(relationship=True)
+        first_horizon = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
+        unit = self.corpus.policy_units[0]
+        first_view = derive_coverage_view(unit, compiled, first_horizon)
+        first_requirement = coverage_requirement_id(
+            derive_coverage_requirement(first_view), first_view
+        )
+
+        self.write("inputs/consumer.md", "# Consumer changed\n")
+        self.write_suite_projection()
+        second_horizon = load_coverage_horizon(
+            self.root, self.corpus, compiled, "horizon.toml"
+        )
+        second_view = derive_coverage_view(unit, compiled, second_horizon)
+        second_requirement = coverage_requirement_id(
+            derive_coverage_requirement(second_view), second_view
+        )
+
+        self.assertNotEqual(first_requirement, second_requirement)
 
     def test_reading_authority_label_does_not_change_coverage(self) -> None:
         compiled = self.compiled()
@@ -399,11 +469,38 @@ class CoverageTest(unittest.TestCase):
         )
 
     def test_stale_repository_attestation_is_not_current_coverage(self) -> None:
-        self.write_attestations(semantic_revision=2)
+        self.write_attestations(requirement_id="sha256:" + "0" * 64)
 
         decisions = self.load_decisions()
 
         self.assertFalse(decisions.covered_subjects)
+
+    def test_selected_input_change_stales_exact_repository_attestation(self) -> None:
+        self.write_attestations()
+
+        self.write("inputs/consumer.md", "# Consumer changed\n")
+        self.write_suite_projection()
+
+        self.assertFalse(self.load_decisions().covered_subjects)
+
+    def test_unrelated_input_change_preserves_exact_repository_attestation(self) -> None:
+        self.write_attestations()
+
+        self.write("inputs/unrelated.md", "# Unrelated changed\n")
+        self.write_suite_projection()
+
+        self.assertEqual(
+            self.load_decisions().covered_subjects,
+            {"workflow.policy.rule"},
+        )
+
+    def test_repository_attestation_rejects_malformed_requirement_id(self) -> None:
+        self.write_attestations(requirement_id="not-a-requirement")
+
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+
+        self.assertEqual(caught.exception.failure.code, "COVERAGE.REQUIREMENT_ID")
 
     def test_duplicate_current_repository_attestations_are_rejected(self) -> None:
         self.write_attestations(duplicate=True)

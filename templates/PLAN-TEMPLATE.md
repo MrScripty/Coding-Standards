@@ -71,11 +71,13 @@ Use when a defect reveals a repeated invariant, duplicated authority, missing
 projection, ambient-state dependency, or public/internal boundary leak. Remove
 this section when the finding is demonstrably isolated.
 
-- Invariant family:
-- Sibling producers and consumers:
-- Authority and projection inventory:
+- Invariant family and canonical owner:
+- Bounded authority, representation, and reachable consumer population:
+- Expansion facts: new semantic owner, reachable consumer, material risk, or public or persistence promise
 - Consumer dispositions:
-- Scope or sequencing replacement:
+- Deletion, consolidation, smaller-Interface, stronger-proof, and evidence-replacement alternatives:
+- Evidence-backed stopping condition:
+- Repaired-composition comparison:
 
 ## Simplicity And Ownership Review
 
@@ -88,7 +90,9 @@ every probe with current artifact evidence.
 - Independent concepts and dimensions:
 - State, identity, value, time, policy, and mechanism:
   - Canonical authority scope and referenced authorities:
-  - Version and identity-invalidation scopes:
+  - Version roles and owned promises:
+  - Supported compatibility overlaps and consumer matrix:
+  - Material identity-invalidation effects:
 - Caller and composition-root knowledge:
 - Representative change paths and forced owners:
 - Stable Interfaces versus hidden knowledge:

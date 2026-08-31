@@ -1,13 +1,8 @@
-schema_version = 4
+schema_version = 5
 
+# workflow.commit.branch-context
 [[attestations]]
-subject = "workflow.commit.branch-context"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:ef69497e89a5920358c5eb82021d1752468fbf1f9a4b5432f786bf768ccb3379"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -15,19 +10,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-context provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.branch-context is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.branch-history-review
 [[attestations]]
-subject = "workflow.commit.branch-history-review"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:a12769cc49591b92918c30dd1de4537f0f2789d3746a9d6c0833958b880e07de"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -35,19 +26,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.branch-history-review provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.branch-history-review is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.cherry-pick-lineage
 [[attestations]]
-subject = "workflow.commit.cherry-pick-lineage"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:eef0235a8fdbf6f6f659b69c816cabd320d26b6c5ec4b170a3e22452f285e6b3"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -55,19 +42,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.cherry-pick-lineage provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.cherry-pick-lineage is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.commit-message
 [[attestations]]
-subject = "workflow.commit.commit-message"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:e0bc439dd0702ed31b766f064eeea1bd26d15b1759bc6ba2fc30482b9eb6d91d"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -75,19 +58,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.commit-message provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.commit-message is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.hook-bypass-authority
 [[attestations]]
-subject = "workflow.commit.hook-bypass-authority"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:99c9857bd8e944a62736ebe38be747e852106b2e75efc4f12f10304a2b9a80fa"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -95,19 +74,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.hook-bypass-authority provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.hook-bypass-authority is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.integration-mechanisms
 [[attestations]]
-subject = "workflow.commit.integration-mechanisms"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:2487a550ee000ffb16915d4f99c049ac18228f61addff74361894e7a27e167df"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -115,19 +90,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.integration-mechanisms provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.integration-mechanisms is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.invalid-outcomes
 [[attestations]]
-subject = "workflow.commit.invalid-outcomes"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:b4754cf562a7cecb5e76e0213d1c0e5142978e28e4eaffde6275611f1c5ba06e"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -135,19 +106,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.invalid-outcomes provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.invalid-outcomes is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.isolation-applicability
 [[attestations]]
-subject = "workflow.commit.isolation-applicability"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:c780eca371b1825d93d531a2a91a365dddaf486b0e3e610162472e30f457d2da"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -155,19 +122,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.isolation-applicability provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.isolation-applicability is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.per-commit-boundary
 [[attestations]]
-subject = "workflow.commit.per-commit-boundary"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:cd80fe36adba7ab70fe824681b9a27f37ffb835a083acbc9441603e2977b7b43"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -175,19 +138,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.per-commit-boundary provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.per-commit-boundary is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.rewrite-authority
 [[attestations]]
-subject = "workflow.commit.rewrite-authority"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:79e4d3bac3161681bce410a8f3fddb245ce136957c110ad1bd50ab157b4f5f67"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -195,19 +154,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.rewrite-authority provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.rewrite-authority is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.terminal-branch-lifecycle
 [[attestations]]
-subject = "workflow.commit.terminal-branch-lifecycle"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:9996b5353a8f49049b84d55752357763e6c560439be1ef330579557695e2711c"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -215,19 +170,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.terminal-branch-lifecycle provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.terminal-branch-lifecycle is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.topology
 [[attestations]]
-subject = "workflow.commit.topology"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:86e8a94bd8964785aed7394d9d928d36c6e6bba542a18b07d7c569e147442029"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -235,19 +186,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.topology provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.topology is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# workflow.commit.worktree-lifecycle
 [[attestations]]
-subject = "workflow.commit.worktree-lifecycle"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:46c571dfa884dc532a9b1d44ec9860d819b9d0c98c1ef5532b8b74f01e665596"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -255,7 +202,8 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact workflow.commit.worktree-lifecycle provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for workflow.commit.worktree-lifecycle is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

@@ -26,6 +26,14 @@ evidence_owner = "suite:a1c-public-cutover"
 rationale = "The package ownership contract governs canonical module loading behind the Metadata public root."
 
 [[relationships]]
+source = "topic.dependencies.requirement-and-ownership"
+consumer = "tools/standards_metadata/standards_metadata/suite_inputs.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-public-cutover"
+rationale = "Metadata owns neutral suite-input manifest validation and dependency projection while Verifier retains checker discovery and generation."
+
+[[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "router"
 relation = "router-projection"

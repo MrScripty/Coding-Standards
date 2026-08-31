@@ -1,13 +1,8 @@
-schema_version = 4
+schema_version = 5
 
+# topic.contracts.declaration-and-semantic-authority
 [[attestations]]
-subject = "topic.contracts.declaration-and-semantic-authority"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:b0c617fba44c2d6222da5127e5baa5bd3c69bddaa7dc342a96a316b98607bc86"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -16,19 +11,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.declaration-and-semantic-authority provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, corrected, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for topic.contracts.declaration-and-semantic-authority is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# topic.contracts.generated-semantic-conformance
 [[attestations]]
-subject = "topic.contracts.generated-semantic-conformance"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:e5d10c9b6d7a55c41590f5c88c2e8930f405c90649db8d5b942f0f3a74337427"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -37,19 +28,15 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.generated-semantic-conformance provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, corrected, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for topic.contracts.generated-semantic-conformance is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# topic.contracts.identity-versus-instance-equality
 [[attestations]]
-subject = "topic.contracts.identity-versus-instance-equality"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:a712411c6bef20dddda42637dfe4a154fe3300ca7e51e6f84241d02e64933d96"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -58,19 +45,26 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.identity-versus-instance-equality provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for topic.contracts.identity-versus-instance-equality is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# topic.contracts.invariant-contracts
 [[attestations]]
-subject = "topic.contracts.schema-dialect-and-vocabulary"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:33c144184c6409655bbe8729edd6594928b3de4fc2bc71e11107ce59c9348bb8"
+conclusion = "complete"
+evidence = [
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+]
+explicit_exclusions = []
+rationale = "The exact dependency-local requirement for topic.contracts.invariant-contracts is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
+
+# topic.contracts.schema-dialect-and-vocabulary
+[[attestations]]
+requirement_id = "sha256:3212d6f2a9dc2ea19ff9e6e535cd0f11c5c0376dd5eb81b96eaaabcd0df5120a"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -78,19 +72,26 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.schema-dialect-and-vocabulary provider-v5 subject view was reviewed at Milestone 1 against the current 49-unit, 407-relationship graph. The current relationship closure and prior evidence identify every retained, added, and retired consumer; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for topic.contracts.schema-dialect-and-vocabulary is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
 
+# topic.contracts.validation-proof-lifetime
 [[attestations]]
-subject = "topic.contracts.version-scope-and-invalidation"
-semantic_revision = 1
-horizon_provider = "standards-analysis:policy-impact-consumer-horizon"
-horizon_version = 5
-relationship_kind_contract_version = 2
-applicability_language_version = 1
-coverage_evidence_contract = "coverage-evidence.v1"
+requirement_id = "sha256:349d67357a25ec2f6d997dde3d767281dba544fe8b7c5381463919044ce934e0"
+conclusion = "complete"
+evidence = [
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+]
+explicit_exclusions = []
+rationale = "The exact dependency-local requirement for topic.contracts.validation-proof-lifetime is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
+
+# topic.contracts.version-scope-and-invalidation
+[[attestations]]
+requirement_id = "sha256:7730eeec272a80532da45afe90ee559f43eea09734ffa61a61d98a1ede5c16cc"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -99,7 +100,8 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
 ]
 explicit_exclusions = []
-rationale = "The exact topic.contracts.version-scope-and-invalidation provider-v5 subject view was reviewed against the current 49-unit, 407-relationship A1c graph. Its added, retired, and retained consumers are fully dispositioned; no unreviewed or blocked consumer remains."
+rationale = "The exact dependency-local requirement for topic.contracts.version-scope-and-invalidation is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
 auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"

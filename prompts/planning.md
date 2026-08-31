@@ -32,13 +32,22 @@ Create or revise an implementation plan. Do not implement source changes.
     security, maintenance, and unsupported-domain costs before choosing an
     implementation owner.
 14. When one defect reveals a repeated invariant failure, stop the local
-    repair. Inventory the invariant family, sibling producers and consumers,
-    authority projections, and required dispositions before revising scope.
+    repair. Identify the canonical owner and bound the authorities,
+    representations, and reachable consumers that can violate the class-level
+    claim. Inspect sibling operations only when they share that authority,
+    reachable failure, or consumer promise. Consider deletion, consolidation,
+    a smaller Interface, stronger construction or type proof, and replacement
+    of overlapping evidence. Expand only for a new semantic owner, reachable
+    consumer, material risk, or public or persistence promise; stop when the
+    bounded population has evidence-backed dispositions.
 15. Before one artifact becomes canonical for several concerns, record its
     owned responsibility, referenced authorities, independent change axes, and
-    lifecycle owners. Scope each version and identity invalidation to a proven
-    compatibility promise; file, schema, generator, build, or release
-    co-location is not that proof.
+    lifecycle owners. Classify each version-like value as current-format,
+    identity-domain, compatibility, migration, or allocation authority. Record
+    its promise, consumers, supported overlap, and consequences; share a value
+    only when those facts coincide. Invalidate semantic identity only for a
+    material meaning change. File, schema, generator, build, or release
+    co-location proves none of these relationships.
 16. Record composed-design review as `applicable` or `not-applicable` for every
     nonterminal written plan. Follow Planning's record requirements and use the
     Architecture admission when the review applies; otherwise record the

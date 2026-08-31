@@ -544,6 +544,10 @@ id = "tools/standards_metadata/standards_metadata/policy_units.py"
 metadata = { repository_path = "tools/standards_metadata/standards_metadata/policy_units.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
+id = "tools/standards_metadata/standards_metadata/suite_inputs.py"
+metadata = { repository_path = "tools/standards_metadata/standards_metadata/suite_inputs.py", artifact_kind = "implementation-artifact", authority = "projection" }
+
+[[nodes]]
 id = "tools/standards_analysis/tests/test_coverage.py"
 metadata = { repository_path = "tools/standards_analysis/tests/test_coverage.py", artifact_kind = "fixture", authority = "evidence" }
 

@@ -43,4 +43,11 @@ mechanism merely to preserve the prior acceptance result.
 Stop and re-plan when implementation exposes a repeated invariant failure,
 another affected producer or consumer, an unreviewed generated-contract
 semantic, or an unreviewed implementation-versus-dependency decision. Do not
-repair only the first occurrence or infer authority for sibling consumers.
+repair only the first occurrence. Bound the canonical owner and reachable
+consumer population, inspect sibling operations only when they share the
+authority, reachable failure, or consumer promise, and consider deletion,
+consolidation, a smaller Interface, stronger construction or type proof, and
+replacement of overlapping evidence. Expand that population only for a new
+semantic owner, reachable consumer, material risk, or public or persistence
+promise; another file inside an already bounded owner is not a new design
+scope.

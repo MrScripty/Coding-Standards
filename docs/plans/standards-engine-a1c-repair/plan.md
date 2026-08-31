@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 dependency-local coverage
+**Current phase:** Milestone 2 evidence portfolio and revalidation
 
-**Next slice:** Move the neutral suite-input manifest value to Metadata and derive subject-local coverage dependencies.
+**Next slice:** Retire the one-time whole-graph migration checker while preserving its accepted evidence and smaller current invariants.
 
 **Acceptance status:** `pending`
 
@@ -30,9 +30,9 @@ boundary.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | A1CR-A1 | All eight agent operations execute through `AgentToolFacade`; valid `prepare` reaches Analysis and every malformed or unsupported request produces its owned typed result. | `user-workflow` | `representative` | `automated` | `satisfied` | [Milestone 0 ledger evidence](execution-ledger.md#2026-08-30---milestone-0-boundary-correction) |
-| A1CR-A2 | Persisted analysis distinguishes malformed state from a well-formed unsupported version, checks current domain compatibility, and cold-projects every advertised child without ambient authority. | `integration` | `representative` | `automated` | `pending` | Milestone 0 evidence pending |
+| A1CR-A2 | Persisted analysis distinguishes malformed state from a well-formed unsupported version, checks current domain compatibility, and cold-projects every advertised child without ambient authority. | `integration` | `representative` | `automated` | `satisfied` | [Committed-candidate Engine evidence](execution-ledger.md#2026-08-30---milestone-1-dependency-local-coverage-acceptance) |
 | A1CR-A3 | Snapshot creation requires identical first-pass and frozen-replay path closure as well as identical semantic output. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 0 ledger evidence](execution-ledger.md#2026-08-30---milestone-0-boundary-correction) |
-| A1CR-A4 | A subject's coverage identity changes for its policy, relationships, consumers, evidence-suite closure, or shared interpretation protocol and remains stable for an unrelated suite input; completeness review still blocks missing or undispositioned consumers. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 1 evidence pending |
+| A1CR-A4 | A subject's coverage identity changes for its policy, relationships, consumers, evidence-suite closure, or shared interpretation protocol and remains stable for an unrelated suite input; completeness review still blocks missing or undispositioned consumers. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 ledger evidence](execution-ledger.md#2026-08-30---milestone-1-dependency-local-coverage-acceptance) |
 | A1CR-A5 | Historical A1c migration evidence is content-bound and no permanent check compares that accepted boundary with unrelated future graph evolution. | `focused` | `not-applicable` | `automated` | `pending` | Milestone 2 evidence pending |
 | A1CR-A6 | Linux required-real evidence is limited to behavior that crosses the real platform boundary; deterministic transaction and lifecycle semantics retain focused evidence without being misrepresented as repeated platform proof. | `system` | `required-real` | `automated` | `pending` | Milestone 2 evidence pending |
 | A1CR-A7 | Version roles, local Git interpretation ownership, permanent byte-integrity evidence, and contract proof lifetime have explicit current decisions consistent with Architecture, Contracts, Dependencies, and Verification. | `contract` | `not-applicable` | `automated` | `pending` | Milestone 2 evidence pending |
@@ -127,19 +127,27 @@ boundary.
 
 ## Systemic Finding Audit
 
-- Invariant family: public/internal boundary proof, immutable reconstruction,
-  dependency-local identity, and permanent evidence lifecycle.
-- Sibling producers and consumers: all eight facade methods, AnalysisState
-  decoding and cold loading, both snapshot compilation passes, every coverage
-  subject, suite-input producer/consumer, A1c migration checker, and platform
-  harness.
-- Authority and projection inventory: generated v12 contracts, AnalysisState,
-  Metadata content source, policy-impact relationships, suite registry and
-  manifest, repository attestations, verifier suite, and A1c evidence reports.
+- Invariant family and canonical owner: public/internal boundary proof,
+  immutable reconstruction, dependency-local identity, and permanent evidence
+  lifecycle remain with their declared Engine, Snapshot, Analysis, and
+  Verification owners.
+- Bounded authority, representation, and reachable consumer population: all
+  eight facade methods, AnalysisState decoding and cold loading, both snapshot
+  compilation passes, every coverage subject, suite-input producer/consumer,
+  A1c migration checker, and platform harness.
+- Expansion facts: the population expands only for a newly discovered semantic
+  owner, reachable consumer, material risk, or public or persistence promise.
 - Consumer dispositions: exact findings are tracked in [issues.md](issues.md);
   each is fix-now or evidence-retirement in Milestones 0 through 2.
-- Scope replacement: subject-local invalidation replaces global per-subject
-  hashing; it does not replace authored semantic completeness review.
+- Deletion, consolidation, smaller-Interface, stronger-proof, and
+  evidence-replacement alternatives: subject-local invalidation replaces
+  global per-subject hashing; one exact requirement reference replaces repeated
+  attestation coordinates; neither replaces authored semantic completeness.
+- Evidence-backed stopping condition: every selected consumer has a disposition,
+  every current subject has one exact attestation and certificate, and focused
+  mutation tests prove selected-change invalidation and unrelated stability.
+- Repaired-composition comparison: the repair removes global and duplicated
+  authority while preserving the original completeness and audit objective.
 
 ## Simplicity And Ownership Review
 
@@ -154,9 +162,15 @@ boundary.
   - Canonical authority scope and referenced authorities: snapshot bytes own
     persisted inputs; Analysis owns coverage identity; authored attestations
     own semantic completeness; Verifier owns checker execution.
-  - Version and identity-invalidation scopes: suite-manifest format,
-    coverage-algebra revision, AnalysisState format, identity-domain revision,
-    and public handle format change only for their own promises.
+  - Version roles and owned promises: suite-manifest and repository-attestation
+    current-format versions remain independent from AnalysisState and public
+    Interface versions.
+  - Supported compatibility overlaps and consumer matrix: no compatibility
+    overlap is promised for the uncommitted repository-attestation format;
+    Analysis and the eleven authored source files move atomically to v5.
+  - Material identity-invalidation effects: selected relationship, consumer,
+    or evidence-suite changes alter only dependent requirement identities;
+    unrelated inputs do not.
 - Caller and composition-root knowledge: callers pass opaque handles and raw
   operation values; Engine composes Metadata, Analysis, Snapshot, and Contracts.
 - Representative change paths and forced owners: a suite input changes only
@@ -236,26 +250,43 @@ only on its typed deciding closure.
 - The eleven registered files under `evaluation/standards-effectiveness/policy-coverage/attestations/`.
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 - `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv`
+- `prompts/planning.md`
+- `prompts/implement-plan.md`
+- `templates/PLAN-TEMPLATE.md`
+- `evaluation/standards-effectiveness/suites/contract-authority-scope.toml`
+- `evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml`
 - Exact policy-impact declaration files selected for the new Metadata source and changed consumers after compiling the current graph.
 
 **Tasks:**
 
-- [ ] Move the immutable suite-input manifest value and decoder upstream without
+- [x] Move the immutable suite-input manifest value and decoder upstream without
   moving checker discovery or execution.
-- [ ] Derive sorted per-suite transitive dependency fingerprints.
-- [ ] Replace global horizon bytes in each subject view with shared protocol,
+- [x] Derive sorted per-suite transitive dependency fingerprints.
+- [x] Replace global horizon bytes in each subject view with shared protocol,
   subject, relationship, consumer, and evidence-suite dependencies.
-- [ ] Preserve a separate completeness projection and exact missing-disposition
+- [x] Preserve a separate completeness projection and exact missing-disposition
   failure.
-- [ ] Migrate current complete attestations from the reviewed global superset,
+- [x] Migrate current complete attestations from the reviewed global superset,
   recording the exact identity transformation without claiming a new audit.
+- [x] Apply the admitted current-standards corrections from the seven-subject
+  audit before renewing its stale semantic revisions.
+- [x] Review all 53 incident semantic relationships, execute the 14 selected
+  suites and declared requirements, derive the exact 44-subject invalidation
+  set, and require 51/51 final attestation and certificate equality.
+- [x] Replace duplicated repository-attestation dependency coordinates with one
+  exact requirement identity under source schema v5; stale requirement
+  identities must not authorize current coverage.
+- [x] Project the new Metadata suite-input implementation into the existing
+  policy graph and record each added relationship in the still-active A1c
+  migration evidence.
 
 **Acceptance gate:** every dependency-class mutation has the exact invalidation
 set; unrelated suite changes preserve all unrelated subjects; false-empty and
 missing-disposition fixtures still block; all current subjects have one valid
 attestation and generated certificate.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Evidence Portfolio And Revalidation
 
@@ -292,7 +323,7 @@ actual proof boundaries, and accept the repaired A1c result.
 resolved or explicitly deferred outside the product claim, and the complete
 repository checkpoint and diff hygiene pass.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 
