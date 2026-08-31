@@ -38,6 +38,7 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-node-catalog-additions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
+contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-decision-table.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
@@ -55,6 +56,7 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
@@ -63,6 +65,12 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-security-index-closure.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
@@ -100,6 +108,8 @@ contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/suites/planning-consolidation.toml	evaluation/standards-effectiveness/check-plan-structure.sh
+contract_reference	evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh
+contract_reference	evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml	evaluation/standards-effectiveness/verify-security-index-closure.sh
 contract_reference	evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 executable_reference	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/check-decision-table.sh
@@ -173,7 +183,6 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-4
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-security-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -220,14 +229,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-listener-lif
 executable_reference	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-language-profile-routing.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-security-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-input-validation-authority.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
@@ -356,14 +357,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-rust-listener-life
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-language-profile-routing.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	evaluation/standards-effectiveness/verify-security-index-closure.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-input-validation-authority.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh

@@ -5873,3 +5873,19 @@ M6-I76 therefore admits explicit generic `subtree` and `body` scope, retaining
 historical projection moves to suite identity, and sixteen outgoing edges move
 to independent-gate authority. No copied legacy file, regex selector, wrapper,
 alternate parser, weaker approximation, or fallback is admitted.
+
+### M6-I76 Rust Security Title Index Acceptance
+
+The accepted generic assertion adds explicit fence-aware heading-body cutoff
+without changing subtree defaults. One six-check Rust Security suite preserves
+the exact six owner and disposition rows, introductory route, intro-only
+default rejection, generic Security separation, and row-44 suite identity.
+Sixteen edge dispositions keep all eight former callees independently owned.
+
+Four mutations prove the suite rejects intro fallback, disposition drift,
+generic-index leakage, and stale checker identity. Exact final compilation
+renews nine dependency-local requirements and leaves 42 stable, closing 51/51
+coverage. All verifier, repository-Git, graph, suite, numeric, generated, plan,
+and complete mixed evidence passes. Final graph: 49 Bash checkers, 52 nodes,
+366 edges, and 52 components. The obsolete checker and every bridge,
+compatibility representation, dual authority, or fallback are absent.

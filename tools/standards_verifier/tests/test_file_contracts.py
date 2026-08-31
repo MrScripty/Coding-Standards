@@ -148,12 +148,14 @@ class FileContractsTest(unittest.TestCase):
         required: object = ("required text",),
         prohibited: object = (),
         match_case: object | None = None,
+        scope: object | None = None,
         extra: str = "",
     ) -> str:
         suite_path = "suites/files.toml"
         case_config = (
             "" if match_case is None else f"match_case = {json.dumps(match_case)}"
         )
+        scope_config = "" if scope is None else f"scope = {json.dumps(scope)}"
         self.write(
             suite_path,
             f"""
@@ -170,6 +172,7 @@ class FileContractsTest(unittest.TestCase):
             required = {json.dumps(required)}
             prohibited = {json.dumps(prohibited)}
             {case_config}
+            {scope_config}
             {extra}
             """,
         )
@@ -849,6 +852,56 @@ class FileContractsTest(unittest.TestCase):
 
         self.assertEqual(result.status, "passed")
 
+    def test_markdown_section_text_supports_explicit_subtree_scope(self) -> None:
+        self.write(
+            "docs/index.md",
+            "## Selected\nrequired text\n### Nested\nnested text\n## Next\n",
+        )
+
+        result = self.result(
+            self.write_section_text_suite(
+                required=["required text", "nested text"],
+                scope="subtree",
+            )
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_section_text_body_stops_at_first_child_heading(self) -> None:
+        self.write(
+            "docs/index.md",
+            "# Selected\nrequired text\n## Child\nprohibited\n",
+        )
+
+        result = self.result(
+            self.write_section_text_suite(
+                heading="# Selected",
+                prohibited=["prohibited"],
+                scope="body",
+            )
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_section_text_body_ignores_fenced_child_headings(self) -> None:
+        self.write(
+            "docs/index.md",
+            (
+                "# Selected\n```markdown\n## Not a boundary\n```\n"
+                "still selected\n## Child\n"
+            ),
+        )
+
+        result = self.result(
+            self.write_section_text_suite(
+                heading="# Selected",
+                required=["still selected"],
+                scope="body",
+            )
+        )
+
+        self.assertEqual(result.status, "passed")
+
     def test_markdown_section_text_supports_explicit_case_insensitive_matching(
         self,
     ) -> None:
@@ -981,6 +1034,8 @@ class FileContractsTest(unittest.TestCase):
             ),
             ({"match_case": "folded"}, "CONFIG.MATCH_CASE"),
             ({"match_case": False}, "CONFIG.MATCH_CASE"),
+            ({"scope": "children"}, "CONFIG.MARKDOWN_SECTION_SCOPE"),
+            ({"scope": False}, "CONFIG.MARKDOWN_SECTION_SCOPE"),
             (
                 {
                     "required": ["Required", "required"],

@@ -275,11 +275,13 @@ normalization.
 
 The `markdown_section_text` check reads one contained UTF-8 Markdown file and
 selects exactly one configured ATX heading outside fenced code blocks. Its
-section extends through nested headings and ends before the next heading of
-equal or higher level, or at end of file. Configured required and prohibited
-literals apply only to that bounded section. Missing or duplicate start
-headings fail explicitly. Section-heading selection remains exact and
-case-sensitive regardless of literal `match_case`. The check has no
+optional `scope` is `subtree` or `body`; omitted scope retains the `subtree`
+default. A subtree extends through nested headings and ends before the next
+heading of equal or higher level. A body ends before the next heading of any
+level. Either scope ends at end of file when no boundary exists. Configured
+required and prohibited literals apply only to that bounded section. Missing
+or duplicate start headings fail explicitly. Section-heading selection remains
+exact and case-sensitive regardless of literal `match_case`. The check has no
 regular-expression configuration, inferred boundary, whole-file snapshot,
 callback, command execution, copied inventory, count, compatibility
 representation, or fallback.

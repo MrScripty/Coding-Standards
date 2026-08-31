@@ -15,7 +15,7 @@ EXISTING="$S/verify-security-index-closure.sh"
 [[ "$(awk -F '\t' 'NR > 1 && NF != 5 { n++ } END { print n+0 }' "$V")" -eq 0 ]]
 
 for text in '## Owner Review' 'six frozen identifiers' '## Verifier Ownership' \
-  'verify-rust-security-title-index-closure.sh' 'does not dispose `STD-0821`' \
+  'rust-security-title-index-closure' 'does not dispose `STD-0821`' \
   '## Exact Outcome' '`index` disposition' '## Ordered Child' '`44.1`' \
   '## Bounded Write Set' '## Verification Gates' 'focused package P36' \
   '## Typed Outcomes And No Fallback' '## Re-plan Triggers'; do

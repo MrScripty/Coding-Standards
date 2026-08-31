@@ -14828,3 +14828,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   exact edge dispositions.
 - M6-I76 is `shared-contract` at train order 191. Implementation and full
   acceptance evidence are next.
+
+## 2026-08-31 - M6-I76 Rust Security Title Index Acceptance
+
+- Accepted train order 191 with explicit generic heading-body scope and one
+  six-check Rust Security suite, removing the title-index Bash checker.
+- Exact source and disposition rows, intro-only route/default policy, generic
+  Security separation, row-44 suite identity, and sixteen independent-gate
+  edge dispositions pass. Four mutations prove regression sensitivity.
+- Exact 9/9 coverage renewal leaves 42 requirements stable and closes 51/51.
+  All 447 verifier tests, 13 repository-Git tests, 37 graph tests, 229 suites,
+  numeric, generated, plan, and complete mixed evidence passes. Final graph:
+  49 Bash checkers, 52 nodes, 366 edges, 52 components; fresh graph evidence is
+  required next.

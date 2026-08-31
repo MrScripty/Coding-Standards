@@ -6378,3 +6378,18 @@
 - M6-I76 is `shared-contract` at train order 191. Assertion tests, suite
   mutations, final coverage, broad tests, mixed acceptance, and exact write-set
   evidence remain required before the checker is accepted as removed.
+
+## 2026-08-31 - M6-I76 Rust Security Title Index Acceptance
+
+- Added explicit `body` scope to the generic Markdown section assertion while
+  preserving `subtree` as the default and retaining fence-aware boundaries.
+- One six-check owner-local suite preserves exact Rust Security owner rows,
+  dispositions, intro route and prohibitions, generic-index separation, and
+  row-44 suite identity. Sixteen edge records retain eight independent gates.
+- Four mutations reject intro fallback, disposition drift, generic-index
+  leakage, and stale checker identity. Exact renewal changes nine of 51
+  dependency-local requirements; 42 remain stable and coverage closes 51/51.
+- All 447 verifier tests, 13 repository-Git tests, 37 graph tests, 229 suites,
+  numeric and generated freshness, plan checks, and the 49-entrypoint mixed
+  checkpoint pass. Final graph: 49 Bash checkers, 52 nodes, 366 edges, and 52
+  components. No wrapper, compatibility representation, or fallback remains.

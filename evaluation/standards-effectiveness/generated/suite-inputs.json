@@ -1677,7 +1677,7 @@
       ]
     },
     {
-      "digest": "sha256:837b92a10798599767d87a50cacfe2d6157cb989e8952de4cbddec7595b34558",
+      "digest": "sha256:ebba84d593a25e37023ad365e2fc99464f0ea2b5e87edbafc41e169ca25543fc",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1900,7 +1900,7 @@
       ]
     },
     {
-      "digest": "sha256:80c10157637de19003398023c6444141912c3a1b28eb17b3813d9834cdbd0430",
+      "digest": "sha256:6493463b3d59061fdc4b12e2b13bb7ce92ae496be526fd3a4c19658a96774a9e",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2772,6 +2772,11 @@
           "suite": "rust-release-workspace-package-metadata"
         },
         {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "rust-security-title-index-closure"
+        },
+        {
           "check": "dispositions",
           "role": "table",
           "suite": "rust-target-configuration"
@@ -3058,7 +3063,7 @@
       ]
     },
     {
-      "digest": "sha256:1a519abdf7ff52049c24d735406fac05978e4f091a386140637bc2baf2551a95",
+      "digest": "sha256:dfa29540c6ae12a03b818c0a36c1d9f1b3a4b266c464e94a350bd823e38585d4",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -6136,7 +6141,7 @@
       ]
     },
     {
-      "digest": "sha256:c554c3de3fac68a2f0816aaa9484c778b3b748c53b36b4ab72057b37de9282a2",
+      "digest": "sha256:a3b2605c2f68cd29966a21a80ec12fbb37bbc0716877dde8e570f7509c806d10",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6148,7 +6153,7 @@
       ]
     },
     {
-      "digest": "sha256:25999f0b2572caaf4b9effd641d26a8ceff83809a57318a7fafdcb2fc0d70de4",
+      "digest": "sha256:e72bf7f9313a15f8594dfa392f8fd7dbfc389c80c565a149e12431a90620a8c7",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6239,6 +6244,11 @@
           "check": "rust-index-owner-map",
           "role": "table",
           "suite": "rust-index-closure"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "rust-security-title-index-closure"
         },
         {
           "check": "identifier-membership",
@@ -7977,6 +7987,18 @@
       ]
     },
     {
+      "digest": "sha256:44a50d1a373f30a251b83f490880f3fe96a154bb643d45735510292b503f4d1b",
+      "path": "evaluation/standards-effectiveness/milestone-7-row-44-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "row-44-projection",
+          "role": "content",
+          "suite": "rust-security-title-index-closure"
+        }
+      ]
+    },
+    {
       "digest": "sha256:7f30a0956e6dd75babfc07cba4adb7b47f2ad57de6718f37d739bc4bef90598a",
       "path": "evaluation/standards-effectiveness/milestone-7-row-45-decomposition.md",
       "state": "present",
@@ -8604,7 +8626,7 @@
       ]
     },
     {
-      "digest": "sha256:b09556ab431fb3fa42a06d78a7c0a2dc9f460bb3174da59dde787201d7008d35",
+      "digest": "sha256:15a587ead01abd22084148ecc2dd5661413799cf2ea9a3d54c66521aa50aaa84",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10788,6 +10810,18 @@
       ]
     },
     {
+      "digest": "sha256:5d2b560f6b01f5b66ac9e1e0ea855d3f74aed39d23f557f1de001247c67c3522",
+      "path": "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:27e8ce3b94ac3cd11b2d7236c7275353b4046f5dfc0370dfcad7ff426fc126d9",
       "path": "evaluation/standards-effectiveness/suites/rust-target-configuration.toml",
       "state": "present",
@@ -12019,7 +12053,7 @@
       ]
     },
     {
-      "digest": "sha256:f0cb67ed9d861b81b8f9d38f4b7f11adcb4fbb75af12ed5fd97f4cd8639a55de",
+      "digest": "sha256:9f1a2cd7e53fe70f0d708e618a71a8ade8894f27e0cde40039ecde0335038d5f",
       "path": "evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh",
       "state": "present",
       "uses": [
@@ -12037,6 +12071,11 @@
           "check": "candidate-lifecycle",
           "role": "numeric-lifecycle",
           "suite": "numeric-comparison-classification"
+        },
+        {
+          "check": "retained-row-44-gate",
+          "role": "content",
+          "suite": "rust-security-title-index-closure"
         }
       ]
     },
@@ -12529,28 +12568,6 @@
       ]
     },
     {
-      "digest": "sha256:f81276c9de3a2b570da574f3e038d5e363f0fa4947e123140eada5ac2aae5ed3",
-      "path": "evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:bac9620ebbacffe844aa0e2ce85e97767b4dcbc20ad8b210df47527194f80b01",
       "path": "evaluation/standards-effectiveness/verify-security-index-closure.sh",
       "state": "present",
@@ -12569,6 +12586,11 @@
           "check": "candidate-lifecycle",
           "role": "numeric-lifecycle",
           "suite": "numeric-comparison-classification"
+        },
+        {
+          "check": "generic-security-separation",
+          "role": "content",
+          "suite": "rust-security-title-index-closure"
         }
       ]
     },
@@ -12909,6 +12931,18 @@
           "check": "former-source",
           "role": "content",
           "suite": "rust-release-workspace-package-metadata"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:21ec7107a1bc8035eb24ecfe8fb187909c30fe173ce38089bfbe462711e0ebfb",
+      "path": "languages/rust/RUST-SECURITY-STANDARDS.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "title-body",
+          "role": "content",
+          "suite": "rust-security-title-index-closure"
         }
       ]
     },
@@ -18743,7 +18777,7 @@
       ]
     },
     {
-      "digest": "sha256:0fc4f8a9ddba2eccc5155d0543bca4cdfb0455c0e9c47ac790f4b5310e2e4871",
+      "digest": "sha256:ef0ba7c0e17e909396f06601e94042c646b40a9341581d99817e5ccb5f8c0f66",
       "path": "tools/standards_verifier/standards_verifier/checks/markdown_section_text.py",
       "state": "present",
       "uses": [
@@ -19518,7 +19552,7 @@
       ]
     },
     {
-      "digest": "sha256:acd042f6d0e4aa68955fa3e6e33cf753995bda05e4fab24457081febdec56933",
+      "digest": "sha256:7432123e0efd61f24a11b2688770f2dd73efe0cfb577398fde714229450e1032",
       "path": "tools/standards_verifier/tests/test_file_contracts.py",
       "state": "present",
       "uses": [
@@ -22059,11 +22093,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:b09556ab431fb3fa42a06d78a7c0a2dc9f460bb3174da59dde787201d7008d35",
+    "digest": "sha256:15a587ead01abd22084148ecc2dd5661413799cf2ea9a3d54c66521aa50aaa84",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:4193ed6555e499812eb59b36b4e8a663aa324ae9aac3f3bfeb7000a120c4dca2",
+    "digest": "sha256:3627ba508db92fa2a3a9238c4f2bf91034d1180060956c1d6e98cb408bac10a2",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23444,6 +23478,12 @@
       "digest": "sha256:a1c19ebbfe8a49bc7ff2401dcd53d20adf686c3bed0203172e11a78fe6faa0d6",
       "id": "rust-binding-event-delivery",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:5d2b560f6b01f5b66ac9e1e0ea855d3f74aed39d23f557f1de001247c67c3522",
+      "id": "rust-security-title-index-closure",
+      "path": "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml",
       "requires": []
     },
     {

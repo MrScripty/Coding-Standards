@@ -19,7 +19,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # profile.boundary.generated-contract.semantic-closure
 [[attestations]]
-requirement_id = "sha256:149da434f866cd8b7ecc419e93ace9d4959d1cb67b558f6dbfd2565a6f4feebe"
+requirement_id = "sha256:17071a4a50c6530d205a79b12d95ccb17b653945b63ace1b2fcdb879da5a6dc3"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -31,6 +31,7 @@ evidence = [
   "docs/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
   "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
   "docs/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+  "docs/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for profile.boundary.generated-contract.semantic-closure is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."

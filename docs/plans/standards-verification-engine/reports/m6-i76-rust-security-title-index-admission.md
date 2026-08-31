@@ -62,3 +62,20 @@ No Bash wrapper, duplicated source snapshot, weaker whole-file approximation,
 retained nested execution, compatibility alias, waiver, or fallback is
 admitted. The final write set and coverage renewal are frozen only after the
 shared assertion, suite, and consumer transition compile together.
+
+## Acceptance
+
+Accepted at train order 191. The generic assertion retains `subtree` as its
+default and adds only explicit fence-aware `body` cutoff. The six-check
+owner-local suite preserves all direct Rust Security title/index behavior, and
+the row-44 projection now names the registered suite. Sixteen historical edges
+retain the eight callees as independent gates.
+
+Four disposable mutations reject fallback language in the title body,
+disposition drift, generic-Security ownership leakage, and the retired row-44
+checker name. Exact final compilation renews nine dependency-local requirements
+and leaves 42 stable, closing 51/51 coverage. All 447 verifier tests, 13 focused
+repository-Git tests, 37 graph-engine tests, 229 suites, generated and numeric
+lifecycle checks, plan checks, and the 49-entrypoint mixed checkpoint pass.
+Final graph evidence records 49 Bash verifiers, 52 nodes, 366 edges, and 52
+components. The checker, wrapper, compatibility form, and fallback are absent.

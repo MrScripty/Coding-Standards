@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Literal
 
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckAuthorityInput, CheckContext, present_inputs
@@ -13,6 +13,9 @@ from .literal_matching import (
     validate_literal_sets,
 )
 from .markdown import heading_level, scan_headings
+
+
+SectionScope = Literal["subtree", "body"]
 
 
 def _literal_list(value: Any, field: str, suite: str, check: str) -> tuple[str, ...]:
@@ -43,6 +46,7 @@ class MarkdownSectionTextCheck:
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
     match_case: MatchCase
+    scope: SectionScope
 
     def authority_inputs(
         self, context: CheckContext
@@ -92,7 +96,7 @@ class MarkdownSectionTextCheck:
         for item in headings:
             if (
                 item.line_number > start.line_number
-                and item.level <= self.heading_level
+                and (self.scope == "body" or item.level <= self.heading_level)
             ):
                 end_line = item.line_number
                 break
@@ -147,6 +151,7 @@ def parse_markdown_section_text_check(
         "required",
         "prohibited",
         "match_case",
+        "scope",
     }
     unknown = set(raw) - allowed
     if unknown:
@@ -208,6 +213,18 @@ def parse_markdown_section_text_check(
         suite=suite_id,
         check=check_id,
     )
+    scope = raw.get("scope", "subtree")
+    if not isinstance(scope, str) or scope not in {"subtree", "body"}:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.MARKDOWN_SECTION_SCOPE",
+                "invalid",
+                "markdown section scope must be subtree or body",
+                suite=suite_id,
+                check=check_id,
+                field="scope",
+            )
+        )
     if not required and not prohibited:
         raise EngineError(
             Diagnostic(
@@ -233,4 +250,5 @@ def parse_markdown_section_text_check(
         required,
         prohibited,
         match_case,
+        scope,
     )

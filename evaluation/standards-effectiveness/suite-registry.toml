@@ -1101,6 +1101,11 @@ path = "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.to
 requires = []
 
 [[suites]]
+id = "rust-security-title-index-closure"
+path = "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml"
+requires = []
+
+[[suites]]
 id = "standards-recovery-routing"
 path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"
 requires = []
