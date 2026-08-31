@@ -1,0 +1,141 @@
+schema_version = 1
+id = "rust-filesystem-authority"
+owner = "profile.language.rust.security"
+description = "Rust filesystem authority preservation through existing-object use and creation under explicit mutation assumptions."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/filesystem-authority-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+target = ["existing", "create"]
+containment = ["proven", "escaped", "unproven", "unknown"]
+mutation = ["excluded", "concurrent", "unknown"]
+use_authority = ["held-file", "handle-relative", "revalidated-path", "plain-path", "unavailable"]
+fallback = ["none", "plain-path", "revalidate", "lexical", "alternate-root", "unanchored-create"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "containment", op = "in", values = ["escaped", "unproven"] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "containment", op = "eq", value = "unknown" },
+  { field = "mutation", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [
+  { field = "mutation", op = "eq", value = "concurrent" },
+  { field = "use_authority", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "mutation", op = "eq", value = "concurrent" },
+  { field = "use_authority", op = "not_in", values = ["held-file", "handle-relative"] },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "mutation", op = "eq", value = "excluded" },
+  { field = "use_authority", op = "not_in", values = ["held-file", "handle-relative", "revalidated-path"] },
+]
+
+[[checks]]
+id = "source-identity"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [["STD-0822", "languages/rust/RUST-SECURITY-STANDARDS.md"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0822"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0822", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "preserve validated filesystem authority through the Rust operation"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0822"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/security.md",
+  "topics/cross-platform.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/security.md",
+]
+
+[[checks]]
+id = "rust-policy"
+type = "text"
+path = "profiles/languages/rust/security.md"
+required = [
+  "## Filesystem Authority Through Use",
+  "A canonicalized `PathBuf` records",
+  "directory capability and use a handle-relative operation",
+  "handle-relative operation",
+  "Immediate revalidation is sufficient only",
+  "typed `invalid`, `unsupported`, or `unavailable`",
+  "## No Fallback",
+  "## Verification",
+]
+prohibited = []
+
+[[checks]]
+id = "security-owner"
+type = "text"
+path = "topics/security.md"
+required = ["## Validation And Use", "handle-relative, capability-based"]
+prohibited = []
+
+[[checks]]
+id = "legacy-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+heading = "## Path Validation"
+required = ["security.md#filesystem-authority-through-use"]
+prohibited = ["validate_within_root", ".canonicalize()", "starts_with(&root)", "Option<PathBuf>", "Parse once into a validated type"]
+
+[[checks]]
+id = "legacy-siblings"
+type = "text"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+required = ["## Checked Arithmetic At Boundaries", "## Bounded Queues", "## Panic Policy"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-filesystem-authority` suite checks"]
+prohibited = ["`verify-rust-filesystem-authority.sh` check that Rust operations preserve"]

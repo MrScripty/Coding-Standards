@@ -715,13 +715,13 @@ generation claims, and producer-only or weaker evidence.
 
 ## Rust Filesystem-Authority Decision Fixtures
 
-`fixtures/rust/filesystem-authority-decisions.tsv` and
-`verify-rust-filesystem-authority.sh` check that Rust operations preserve
-validated filesystem authority through existing-object use and creation. They
-distinguish excluded, concurrent, and unknown mutation; held, handle-relative,
-revalidated, plain, and unavailable authority; typed outcomes; exact
-disposition; bounded legacy replacement; and rejection of weaker-path
-fallback.
+The registered `rust-filesystem-authority` suite checks
+that Rust operations preserve validated filesystem authority through
+existing-object use and creation using
+`fixtures/rust/filesystem-authority-decisions.tsv`. It distinguishes excluded,
+concurrent, and unknown mutation; held, handle-relative, revalidated, plain,
+and unavailable authority; typed outcomes; exact disposition; bounded legacy
+replacement; and rejection of weaker-path fallback.
 
 ## Filesystem Containment Fixtures
 

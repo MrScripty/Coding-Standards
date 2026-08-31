@@ -6112,3 +6112,32 @@ generated, numeric, plan, and complete mixed evidence pass. Final graph: 41
 Bash checkers, 44 nodes, 280 edges, and 44 components. The old checker is
 absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I85 Rust Filesystem-Authority Acceptance
+
+Fresh post-M6-I84 evidence reports 41 Bash verifiers, 44 nodes, 280 edges,
+and 44 components. Six verifiers have no executable inbound edge; two are at
+the highest dependency wave 5. The 110-line
+`verify-rust-filesystem-authority.sh` is the smaller coherent wave-5 candidate.
+Its three inbound references are historical contract evidence, and it invokes
+one metadata helper plus two separately owned gates. The package is
+`serial-coherent` because no shared engine, schema, policy, or unresolved owner
+contract changes.
+
+One nine-check `profile.language.rust.security` suite preserves all 19 typed
+decisions, exact `STD-0822` source identity and disposition, metadata closure,
+canonical Rust and generic Security policy, the bounded legacy route and
+sibling headings, and the README projection. Native metadata authority
+replaces helper execution. Four outgoing records retain filesystem containment
+and F025/F026 decomposition as separate gates. Six prior M6-I76, M6-I77, and
+M6-I80 records transition to registered suite evidence. Row-35 README-consumer
+evidence removes the retired checker.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing filesystem authority, and restoration of a prohibited legacy
+mechanism. Exact final compilation renews 22 dependency-local requirements and
+leaves 29 stable, closing 51/51 coverage. All focused, graph, declarative,
+generated, numeric, plan, and complete mixed evidence pass. Final graph: 40
+Bash checkers, 43 nodes, 271 edges, and 43 components. The old checker is
+absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

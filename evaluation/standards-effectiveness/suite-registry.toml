@@ -1131,6 +1131,11 @@ path = "evaluation/standards-effectiveness/suites/network-transport-policy.toml"
 requires = []
 
 [[suites]]
+id = "rust-filesystem-authority"
+path = "evaluation/standards-effectiveness/suites/rust-filesystem-authority.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []

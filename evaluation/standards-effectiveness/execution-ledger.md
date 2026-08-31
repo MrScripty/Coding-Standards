@@ -14995,3 +14995,25 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 41-entrypoint checkpoint pass. Final graph: 41 Bash
   checkers, 44 nodes, 280 edges, and 44 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I85 Rust Filesystem-Authority Acceptance
+
+- Fresh post-M6-I84 evidence reports 41 Bash verifiers, 44 nodes, 280 edges,
+  and 44 components. Six verifiers have no executable inbound edge; two are at
+  the highest dependency wave 5. The 110-line Rust filesystem-authority
+  verifier is the smaller coherent wave-5 candidate. M6-I85 is
+  `serial-coherent` at train order 200.
+- One nine-check owner-local suite preserves all 19 typed decisions, exact
+  `STD-0822` source identity and disposition, metadata closure, canonical Rust
+  and generic Security policy, the bounded legacy route and sibling headings,
+  and the README projection.
+- Native metadata authority replaces helper execution. Four outgoing records
+  retain filesystem containment and F025/F026 decomposition as separate gates;
+  six prior M6-I76, M6-I77, and M6-I80 records move to registered suite
+  evidence. Row-35 README-consumer evidence removes the retired checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 40-entrypoint checkpoint pass. Final graph: 40
+  Bash checkers, 43 nodes, 271 edges, and 43 components; fresh graph evidence
+  is required next.
