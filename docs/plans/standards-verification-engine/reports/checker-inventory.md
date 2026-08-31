@@ -6085,3 +6085,30 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 42 Bash checkers, 45 nodes, 289 edges, and 45 components. The old checker
 is absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I84 Network-Transport Policy Acceptance
+
+Fresh post-M6-I83 evidence reports 42 Bash verifiers, 45 nodes, 289 edges,
+and 45 components. Seven verifiers have no executable inbound edge; the
+140-line `verify-network-transport-policy.sh` is the sole candidate at the
+highest dependency wave 6. Its three inbound references are historical
+contract evidence, and it invokes one metadata helper plus two separately
+owned gates. The package is `serial-coherent` because no shared engine,
+schema, policy, or unresolved owner contract changes.
+
+One nine-check `topic.security` suite preserves all 32 typed decisions,
+exact `STD-0596` through `STD-0600` source identities and dispositions,
+metadata closure, canonical Security and Concurrency policy, bounded legacy
+routes, finding closure, and the README projection. Native metadata authority
+replaces helper execution. Four outgoing records retain concurrency policy and
+the independent trust re-plan as separate gates. Four prior M6-I78 and M6-I79
+records transition to registered suite evidence.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing network-transport authority, and restoration of a prohibited legacy
+default. Exact final compilation renews 22 dependency-local requirements and
+leaves 29 stable, closing 51/51 coverage. All focused, graph, declarative,
+generated, numeric, plan, and complete mixed evidence pass. Final graph: 41
+Bash checkers, 44 nodes, 280 edges, and 44 components. The old checker is
+absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

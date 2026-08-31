@@ -1126,6 +1126,11 @@ path = "evaluation/standards-effectiveness/suites/input-validation-authority.tom
 requires = []
 
 [[suites]]
+id = "network-transport-policy"
+path = "evaluation/standards-effectiveness/suites/network-transport-policy.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []

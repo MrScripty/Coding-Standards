@@ -412,14 +412,14 @@ linkage, and removal of assertion/original-input fallback.
 
 ## Network Transport Decision Fixtures
 
-`fixtures/security/network-transport-decisions.tsv` and
-`verify-network-transport-policy.sh` check service/deployment-selected
-exposure, listener-owned admission before acceptance, tracked connection
-outcomes, ordered shutdown, termination authority, and protocol-selected
-liveness. They prove exact disposition of `STD-0596` through `STD-0600`,
-resolve `F016`, and reject universal address, capacity, timeout, liveness,
-accept-first, detached-work, unsafe-termination, and alternate-mechanism
-fallback.
+The registered `network-transport-policy` suite checks
+service/deployment-selected exposure, listener-owned admission before
+acceptance, tracked connection outcomes, ordered shutdown, termination
+authority, and protocol-selected liveness using
+`fixtures/security/network-transport-decisions.tsv`. It proves
+exact disposition of `STD-0596` through `STD-0600`, resolves `F016`, and rejects
+universal address, capacity, timeout, liveness, accept-first, detached-work,
+unsafe-termination, and alternate-mechanism fallback.
 
 ## Platform Target Decision Fixtures
 

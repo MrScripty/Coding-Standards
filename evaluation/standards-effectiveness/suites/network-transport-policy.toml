@@ -1,0 +1,180 @@
+schema_version = 1
+id = "network-transport-policy"
+owner = "topic.security"
+description = "Contract-selected network exposure, admission, lifecycle, shutdown, termination, liveness, and typed transport outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/security/network-transport-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+exposure = ["local", "remote", "broad", "unknown"]
+exposure_contract = ["declared", "missing"]
+capacity = ["available", "full", "missing", "default"]
+admission = ["before-accept", "after-accept", "closed", "open"]
+tracking = ["registered", "detached", "discarded", "missing", "not-required"]
+outcome = ["observed-success", "observed-failure", "observed-cancel", "discarded", "leaf-logged", "not-required"]
+shutdown = ["active", "ordered", "open-admission"]
+cancellation = ["signalled", "missing", "not-required"]
+drain = ["complete", "incomplete", "missing", "not-required"]
+termination = ["none", "authorized-safe", "authorized-unsafe", "unauthorized", "default-force"]
+liveness = ["protocol-close", "keepalive", "heartbeat", "idle-deadline", "none", "default"]
+liveness_contract = ["selected", "missing", "not-required"]
+capability = ["available", "unsupported", "unavailable"]
+fallback = ["none", "broad-bind", "default-address", "default-capacity", "accept-first", "detached-work", "discard-outcome", "leaf-logging", "open-admission", "force-close", "fixed-timeout", "default-liveness", "alternate-runtime", "alternate-listener"]
+expected = ["allow", "typed-overload", "typed-invalid", "typed-unsupported", "typed-unavailable", "typed-incomplete"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "exposure", op = "eq", value = "broad" },
+  { field = "capacity", op = "eq", value = "default" },
+  { field = "admission", op = "in", values = ["after-accept", "open"] },
+  { field = "tracking", op = "in", values = ["detached", "discarded"] },
+  { field = "outcome", op = "in", values = ["discarded", "leaf-logged"] },
+  { field = "shutdown", op = "eq", value = "open-admission" },
+  { field = "termination", op = "in", values = ["authorized-unsafe", "unauthorized", "default-force"] },
+  { field = "liveness", op = "eq", value = "default" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "exposure", op = "eq", value = "unknown" },
+  { field = "exposure_contract", op = "eq", value = "missing" },
+  { field = "capacity", op = "eq", value = "missing" },
+  { field = "tracking", op = "eq", value = "missing" },
+  { field = "cancellation", op = "eq", value = "missing" },
+  { field = "drain", op = "eq", value = "missing" },
+  { field = "liveness_contract", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-overload"
+[checks.rules.when]
+field = "capacity"
+op = "eq"
+value = "full"
+[[checks.rules]]
+outcome = "typed-incomplete"
+[checks.rules.when]
+field = "drain"
+op = "eq"
+value = "incomplete"
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0596", "SECURITY-STANDARDS.md"],
+  ["STD-0597", "SECURITY-STANDARDS.md"],
+  ["STD-0598", "SECURITY-STANDARDS.md"],
+  ["STD-0599", "SECURITY-STANDARDS.md"],
+  ["STD-0600", "SECURITY-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0596", "STD-0597", "STD-0598", "STD-0599", "STD-0600"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0596", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "establish the generic network transport boundary"],
+  ["STD-0597", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "derive listener exposure from service and deployment contracts"],
+  ["STD-0598", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "require owned admission capacity before accepting work"],
+  ["STD-0599", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "consume lifecycle-owned ordered shutdown with typed incomplete outcomes"],
+  ["STD-0600", "SECURITY-STANDARDS.md", "topics/security.md", "refine", "select transport liveness from protocol semantics and resource risk"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0596", "STD-0597", "STD-0598", "STD-0599", "STD-0600"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/concurrency.md",
+  "profiles/boundaries/ipc.md",
+  "topics/security.md",
+]
+
+[[checks]]
+id = "security-policy"
+type = "text"
+path = "topics/security.md"
+required = [
+  "## Network Transport Boundary",
+  "service and deployment contract",
+  "Acquire admission before accepting work",
+  "register the connection work with the selected lifecycle",
+  "observes success, failure, and cancellation",
+  "Close admission before signalling cancellation",
+  "explicit authority",
+  "proven interruption-safe",
+  "Select connection-liveness behavior from protocol semantics",
+  "typed `invalid`",
+  "`unsupported`, `unavailable`, overload",
+  "### No Fallback",
+]
+prohibited = []
+
+[[checks]]
+id = "concurrency-owner"
+type = "text"
+path = "topics/concurrency.md"
+required = ["## Own Work, Failure, And Cancellation"]
+prohibited = []
+
+[[checks]]
+id = "legacy-routes"
+type = "text"
+path = "SECURITY-STANDARDS.md"
+required = [
+  "topics/security.md#network-transport-boundary",
+  "topics/concurrency.md#own-work-failure-and-cancellation",
+  "topics/contracts.md#runtime-decoding-at-boundaries",
+  "profiles/boundaries/ipc.md",
+]
+prohibited = ["127.0.0.1", "0.0.0.0", "::1", "platform's loopback address", "Every listener must define", "semaphore", "bounded worker pool", "force-close remaining", "30–60 seconds", "Graceful Shutdown of Spawned Services"]
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F016 | Resolved in Milestone 7.4b7a |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `network-transport-policy` suite checks"]
+prohibited = ["`verify-network-transport-policy.sh` check service/deployment-selected"]

@@ -14974,3 +14974,24 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 42-entrypoint checkpoint pass. Final graph: 42 Bash
   checkers, 45 nodes, 289 edges, and 45 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I84 Network-Transport Policy Acceptance
+
+- Fresh post-M6-I83 evidence reports 42 Bash verifiers, 45 nodes, 289 edges,
+  and 45 components. Seven verifiers have no executable inbound edge; the
+  140-line network-transport policy verifier is the sole candidate at the
+  highest dependency wave 6. M6-I84 is `serial-coherent` at train order 199.
+- One nine-check owner-local suite preserves all 32 typed decisions, exact
+  `STD-0596` through `STD-0600` source identities and dispositions, metadata
+  closure, canonical Security and Concurrency policy, bounded legacy routes,
+  finding closure, and the README projection.
+- Native metadata authority replaces helper execution. Four outgoing records
+  retain concurrency policy and the independent trust re-plan as separate
+  gates; four prior M6-I78 and M6-I79 records move to registered suite
+  evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 41-entrypoint checkpoint pass. Final graph: 41 Bash
+  checkers, 44 nodes, 280 edges, and 44 components; fresh graph evidence is
+  required next.

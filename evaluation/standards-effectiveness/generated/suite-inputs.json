@@ -494,6 +494,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "persistence-owner-contract"
         },
         {
@@ -1062,6 +1067,11 @@
           "check": "legacy-route",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "legacy-routes",
+          "role": "content",
+          "suite": "network-transport-policy"
         },
         {
           "check": "security-boundary",
@@ -1712,7 +1722,7 @@
       ]
     },
     {
-      "digest": "sha256:6dc969886ad3e4ab732e3ded4085fb1328cfdd7b6ea19d7f775611a4ee9d9148",
+      "digest": "sha256:96d3cd714bfabbb8cf63c392a0c8875e9abe7dd1e7977ce2b403f6e3e0a4ab28",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1724,7 +1734,7 @@
       ]
     },
     {
-      "digest": "sha256:b2ffa2b2f07fcb80c1e03f7b917d15c6869ce6d3fce5cedb50ac37d11a272df1",
+      "digest": "sha256:e442c84c2befcb53919b3ebbd7a94ebd851bdf3c058b4e5e484afb2945f8cf53",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1797,6 +1807,11 @@
           "check": "removed-authority",
           "role": "content",
           "suite": "native-artifact-release"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "network-transport-policy"
         },
         {
           "check": "removed-authority",
@@ -1955,7 +1970,7 @@
       ]
     },
     {
-      "digest": "sha256:14ec8de4ea16843032bf3c653c0283ff4045ea6eed2f8ca4698e599809d076a1",
+      "digest": "sha256:b8ee65d190df231dcc97ee9270125035488ae05c18f8505a70aa5dbb79a4a5ae",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2530,6 +2545,11 @@
           "check": "dispositions",
           "role": "table",
           "suite": "native-artifact-release"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "network-transport-policy"
         },
         {
           "check": "dispositions",
@@ -3143,7 +3163,7 @@
       ]
     },
     {
-      "digest": "sha256:f9d3ff727e73bd8228a4341a6f6a5a58c10a3e7adcbba643a2af0595e547ddc0",
+      "digest": "sha256:44b9589e595a73d266b54acef36c621b53524504be324ea2869290959ecd1bd1",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3168,6 +3188,11 @@
           "check": "resolved-finding",
           "role": "content",
           "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "network-transport-policy"
         },
         {
           "check": "accepted-finding",
@@ -5858,6 +5883,18 @@
       ]
     },
     {
+      "digest": "sha256:e6874db9f690a04e3e4f18c298ac8b6fc1394945dfe97f3cfe09bcd73fbe00c1",
+      "path": "evaluation/standards-effectiveness/fixtures/security/network-transport-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "network-transport-policy"
+        }
+      ]
+    },
+    {
       "digest": "sha256:32aca511c7bfaa7ab4954d50eb80873b9e15def83633a6a6dc98a27dcb7d7f48",
       "path": "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv",
       "state": "present",
@@ -6277,7 +6314,7 @@
       ]
     },
     {
-      "digest": "sha256:0ea999910dc105309f77b1e637e09717df980df0ec3cf059ca3643c470c9b6ac",
+      "digest": "sha256:f261c78f20d6015b0361b7ffc10de140237ca70a0ce2dedd116364c0c7391ca9",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6289,7 +6326,7 @@
       ]
     },
     {
-      "digest": "sha256:dee043db233cdd00aaa88616196c199133a0abbb35d296f4d64a37a637b52138",
+      "digest": "sha256:9c0252395b0814fd948d117871400a511400e8225562f93032f5b3d1c50f9658",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6457,6 +6494,11 @@
           "check": "inventory-identities",
           "role": "right",
           "suite": "milestone-7-row-47-decomposition"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "network-transport-policy"
         },
         {
           "check": "section-inventory",
@@ -8843,7 +8885,7 @@
       ]
     },
     {
-      "digest": "sha256:d1c83529fa32463347617e0fdf9dc6847f2ab57de7d49662a16ad240f048a7b9",
+      "digest": "sha256:c2f0d71663cba459cc5c1ec0e669dedc49e527533bcbce3482effe7804014b81",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10249,6 +10291,18 @@
     {
       "digest": "sha256:e7d63a31b5a795b0cfb3b8c9f1013df64b71ee01b5134b003b042826c485c176",
       "path": "evaluation/standards-effectiveness/suites/native-artifact-release.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:0b573ba1173073612859872cfde46d36e3e7a93ce1909b8f043408acdab6970a",
+      "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
       "state": "present",
       "uses": [
         {
@@ -12396,28 +12450,6 @@
       ]
     },
     {
-      "digest": "sha256:d36c382af74f9e299897f6279ea01f8bbb271a1453665c9ba76a46ed82319d3c",
-      "path": "evaluation/standards-effectiveness/verify-network-transport-policy.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:a57473b512e0a927e3ed267fb0b32cb4c7a7fffce3641f5bdc720a096d5350c9",
       "path": "evaluation/standards-effectiveness/verify-owner-state-transitions.sh",
       "state": "present",
@@ -13638,6 +13670,11 @@
       "path": "profiles/boundaries/ipc.md",
       "state": "present",
       "uses": [
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -20098,6 +20135,16 @@
           "suite": "milestone-7-row-18-decomposition"
         },
         {
+          "check": "concurrency-owner",
+          "role": "content",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -20303,6 +20350,11 @@
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
           "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
         },
         {
           "check": "metadata-closure",
@@ -21027,6 +21079,16 @@
           "check": "canonical-prerequisites",
           "role": "required-present",
           "suite": "milestone-7-row-44-decomposition"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "security-policy",
+          "role": "content",
+          "suite": "network-transport-policy"
         },
         {
           "check": "current-structure",
@@ -22062,6 +22124,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "persistence-owner-contract"
         },
         {
@@ -22358,11 +22425,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:d1c83529fa32463347617e0fdf9dc6847f2ab57de7d49662a16ad240f048a7b9",
+    "digest": "sha256:c2f0d71663cba459cc5c1ec0e669dedc49e527533bcbce3482effe7804014b81",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:0401bd168b617c59fb08199dbeb8baea8fcb25d2cfe4bd2a49f16b586d4dfa20",
+    "digest": "sha256:eec4b9b2d6a87c89d56b01932346fb7866012e0dfa7d8260773aa32ec62bb087",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23773,6 +23840,12 @@
       "digest": "sha256:888922c368125f3fa96264a240d8355044caab41140286485912d49d42db1fbb",
       "id": "input-validation-authority",
       "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:0b573ba1173073612859872cfde46d36e3e7a93ce1909b8f043408acdab6970a",
+      "id": "network-transport-policy",
+      "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
       "requires": []
     },
     {
