@@ -6325,3 +6325,29 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 33 Bash checkers, 36 nodes, 239 edges, and 36 components. The old checker
 is absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I93 Rust Binding Title-Index Acceptance
+
+Fresh post-M6-I92 evidence reports 33 Bash verifiers, 36 nodes, 239 edges,
+and 36 components. No verifier is free of conservative executable inbound
+references. The 51-line `verify-rust-binding-title-index-closure.sh` is the
+highest dependency-wave root at wave 7; its sole incoming reference is a
+row-43 documentation assertion, not a command. Its eight outgoing checker
+dependencies remain separately owned.
+
+One six-check `profile.language.rust.language-bindings` suite preserves the
+exact 52-row source identity set, set-equal disposition closure, the exact
+`STD-0758` index outcome, heading-body routes and default rejection, and
+separation from the nested `STD-0789` index. Row-43 documentation and its
+retained verifier transition from checker-name evidence to registered suite
+ownership. Sixteen edge dispositions preserve all eight former callees as
+independent gates.
+
+Four mutations reject source-identity drift, title-disposition drift,
+introductory fallback, and stale row-43 checker identity. Exact final
+compilation renews nine dependency-local requirements and leaves 42 stable,
+closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
+plan, and complete mixed evidence pass. Final graph: 32 Bash checkers, 35
+nodes, 229 edges, and 35 components. The old checker is absent without a
+source-policy rewrite, nested execution, wrapper, compatibility
+representation, or fallback.

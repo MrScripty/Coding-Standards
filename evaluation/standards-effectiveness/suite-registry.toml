@@ -1171,6 +1171,11 @@ path = "evaluation/standards-effectiveness/suites/historical-row-checker-ownersh
 requires = []
 
 [[suites]]
+id = "rust-binding-title-index-closure"
+path = "evaluation/standards-effectiveness/suites/rust-binding-title-index-closure.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []

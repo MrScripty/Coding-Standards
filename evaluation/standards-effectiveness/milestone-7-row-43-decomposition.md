@@ -20,10 +20,10 @@ reference extraction, or policy copy is required.
 
 The accepted `verify-rust-binding-index-closure.sh` remains the focused owner
 for `STD-0789`, the nested Build System Organization migration index. Row 43
-uses a distinct `verify-rust-binding-title-index-closure.sh` for the
-`STD-0758` document-title closure. The immutable P35 semantic outcome
+uses the registered `rust-binding-title-index-closure` suite for the `STD-0758`
+document-title closure. The immutable P35 semantic outcome
 `rust-binding-index-closure` names the package result, not a required checker
-filename. Neither checker owns the other disposition.
+filename. Neither verification owner owns the other disposition.
 
 ## Exact Outcome
 
@@ -35,7 +35,7 @@ its 51 child identifiers remain authoritative and are not reopened.
 ## Ordered Child
 
 Child `43.1` records the exact disposition, adds the title-specific focused
-verifier, proves the legacy document remains non-authoritative for disposed
+suite, proves the legacy document remains non-authoritative for disposed
 rules, closes row 43 and focused package P35, and advances to immutable row 44.
 Planning acceptance does not dispose `STD-0758`.
 
@@ -43,8 +43,8 @@ Planning acceptance does not dispose `STD-0758`.
 
 Planning may touch only this decomposition, its owner-validation fixture and
 checker, the active plan, and the execution ledger. Implementation may touch
-only the exact disposition table, the new title-specific focused verifier, the
-row-43 checker, plan, and ledger.
+only the exact disposition table, the title-specific focused suite, the row-43
+checker, plan, and ledger.
 
 The accepted `STD-0789` verifier,
 `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`, canonical profiles and

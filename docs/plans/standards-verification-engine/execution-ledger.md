@@ -6725,3 +6725,23 @@
   graph and generated freshness, numeric lifecycle, plan checks, and the
   complete 33-entrypoint checkpoint pass. Final graph: 33 Bash checkers, 36
   nodes, 239 edges, and 36 components.
+
+## 2026-08-31 - M6-I93 Rust Binding Title-Index Acceptance
+
+- Fresh post-M6-I92 evidence reports 33 Bash verifiers, 36 nodes, 239 edges,
+  and 36 components, with no verifier free of conservative executable inbound
+  references. The 51-line Rust binding title-index verifier is the highest
+  dependency-wave root at wave 7. Its sole incoming reference is a row-43
+  documentation assertion rather than a command.
+- One six-check owner-local suite preserves all 52 source identities, exact
+  disposition closure, the `STD-0758` index outcome, introductory routes and
+  default rejection, and separation from the nested `STD-0789` index.
+- Row-43 documentation and its retained verifier move from the stale checker
+  name to registered suite ownership. Sixteen edge records keep all eight
+  former nested gates independently owned and executed. M6-I93 is a bounded
+  `shared-contract` package at train order 208.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package, edge, suite, and row-43
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 32-entrypoint checkpoint pass. Final graph: 32 Bash
+  checkers, 35 nodes, 229 edges, and 35 components.
