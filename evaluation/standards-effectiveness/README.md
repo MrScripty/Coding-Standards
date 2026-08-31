@@ -290,7 +290,7 @@ system heading is only a non-normative routing index and that its separately
 owned child references remain explicit.
 
 `fixtures/rust/security-panic-boundary-decisions.tsv` and
-`verify-rust-security-panic-boundary.sh` specialize recoverable-error and
+the registered `rust-security-panic-boundary` suite specialize recoverable-error and
 panic handling for Rust security-sensitive production boundaries. They reject
 recoverable panics, missing invariant proof, and fallback recovery.
 

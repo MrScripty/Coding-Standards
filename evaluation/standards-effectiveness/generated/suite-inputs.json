@@ -629,6 +629,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-tooling-owner-contract"
         },
         {
@@ -1682,7 +1687,7 @@
       ]
     },
     {
-      "digest": "sha256:1f69930886549813152ef2c937bcf2337592600cba9e124cf8005b6588b4f917",
+      "digest": "sha256:4eeb7112a9ecf04dd8906e843110cf39b3cf9f692d3c0e0313485160f6a22e1c",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1694,7 +1699,7 @@
       ]
     },
     {
-      "digest": "sha256:d70aa5d533021014d498526afd7386158c677de8038f816964f68b63b7c6c11d",
+      "digest": "sha256:1acbcc9e12d156284a5d442ac4146288b89402063479f56a4c9c319c389ef72f",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1824,6 +1829,11 @@
           "suite": "rust-binding-workspace-evidence"
         },
         {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
           "check": "removed-authority",
           "role": "content",
           "suite": "rust-target-configuration"
@@ -1905,7 +1915,7 @@
       ]
     },
     {
-      "digest": "sha256:e90a284fd9206f7cf3009a94d205c724272bd9b311bdb8a64066394d4e550d4c",
+      "digest": "sha256:66d3ebb2104d4b976c43b3776f776af6d503ca515069f9be0c3a91f8104105bf",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2777,6 +2787,11 @@
           "suite": "rust-release-workspace-package-metadata"
         },
         {
+          "check": "exact-disposition",
+          "role": "table",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
           "check": "exact-dispositions",
           "role": "table",
           "suite": "rust-security-title-index-closure"
@@ -3073,7 +3088,7 @@
       ]
     },
     {
-      "digest": "sha256:001326f6e8d1f16e97a6835b7c81cf647428a8ac591960431e6cd7ac4a7a773c",
+      "digest": "sha256:b36d1e8b9eed2dbde2ef73c49c96a773d98ab922225a827ee3775618d2a9b284",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -5535,6 +5550,18 @@
       ]
     },
     {
+      "digest": "sha256:04ee78e370074b6c101d031e9faf873e81ad0582afd6f0191a9542b726bfc60a",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/security-panic-boundary-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "rust-security-panic-boundary"
+        }
+      ]
+    },
+    {
       "digest": "sha256:49ade225cd74b8d054a136ff6d74e6cdd028e9d185cc9c6ba0ae40c5423ace82",
       "path": "evaluation/standards-effectiveness/fixtures/rust/target-configuration-decisions.tsv",
       "state": "present",
@@ -6151,7 +6178,7 @@
       ]
     },
     {
-      "digest": "sha256:d28f4c169296dbfd34513ad814238e1111f6448998f6453c3d05d9ee0b3ac1cd",
+      "digest": "sha256:0c3333934c5ef16bebabaffee2581142a9242a242dd1b796381cccd95a7e1132",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6163,7 +6190,7 @@
       ]
     },
     {
-      "digest": "sha256:3aa2efded67885b6475907a74b0fef3dbab5296fc495f0460b22bddb8c621500",
+      "digest": "sha256:52a9a0cfad252d51aeaa1faa7624c8e4461264519ada16470cdcc6a2b91dc0f8",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6421,6 +6448,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "rust-interop-memory"
+        },
+        {
+          "check": "source-identity",
+          "role": "table",
+          "suite": "rust-security-panic-boundary"
         },
         {
           "check": "exact-source-inventory",
@@ -8697,7 +8729,7 @@
       ]
     },
     {
-      "digest": "sha256:b5fc8c47259613c1a52262990f2df9e0973c084acf19e4d7a57b2568d674f507",
+      "digest": "sha256:0bab406ff9a111e239d91db427f64fc853f27d00005806711d17171beba3edfe",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10905,6 +10937,18 @@
       ]
     },
     {
+      "digest": "sha256:4c44d56ccc59707bde788bf6a4f0ae18f44c98c3f4ad711f82fd277362d911ed",
+      "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:75a916f22d3ade15863f147f64afe6c38663068b1cbe06f351772fbd15e9649f",
       "path": "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml",
       "state": "present",
@@ -12602,28 +12646,6 @@
       ]
     },
     {
-      "digest": "sha256:444a759c2f0cd932d89e7f7292c6c9680216517d41b6ff1652c038cb8fe372ce",
-      "path": "evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:b30ec878c8bfa984188e58e2c50323111e2c129644a21651d2383ca66240816e",
       "path": "evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh",
       "state": "present",
@@ -12972,6 +12994,11 @@
           "check": "legacy-index-routes",
           "role": "content",
           "suite": "milestone-7-row-44-decomposition"
+        },
+        {
+          "check": "legacy-index",
+          "role": "content",
+          "suite": "rust-security-panic-boundary"
         },
         {
           "check": "title-body",
@@ -14038,6 +14065,11 @@
           "suite": "rust-release-owner-contract"
         },
         {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
           "check": "rust-profile-index",
           "role": "content",
           "suite": "rust-target-configuration"
@@ -14792,6 +14824,16 @@
           "check": "rust-profile-links",
           "role": "link-target",
           "suite": "rust-profile-authority-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "profile-policy",
+          "role": "content",
+          "suite": "rust-security-panic-boundary"
         },
         {
           "check": "local-links",
@@ -20910,6 +20952,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-wire-representation"
         },
         {
@@ -22004,6 +22051,11 @@
           "suite": "rust-release-owner-contract"
         },
         {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
           "check": "verification-owner",
           "role": "content",
           "suite": "rust-test-style"
@@ -22152,11 +22204,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:b5fc8c47259613c1a52262990f2df9e0973c084acf19e4d7a57b2568d674f507",
+    "digest": "sha256:0bab406ff9a111e239d91db427f64fc853f27d00005806711d17171beba3edfe",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:607d1521816de5c1e803ec2a44c1d397adec6f25e001085408dc0b7ebeb84fd1",
+    "digest": "sha256:61807f6d5688f0884b6fdef7cbd99e358c280bcde41fb1e242567d7cd7134763",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23543,6 +23595,12 @@
       "digest": "sha256:75a916f22d3ade15863f147f64afe6c38663068b1cbe06f351772fbd15e9649f",
       "id": "rust-security-title-index-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:4c44d56ccc59707bde788bf6a4f0ae18f44c98c3f4ad711f82fd277362d911ed",
+      "id": "rust-security-panic-boundary",
+      "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
       "requires": []
     },
     {

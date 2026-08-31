@@ -5974,3 +5974,29 @@ generated, numeric, plan, and complete mixed evidence pass. Final graph: 46
 Bash checkers, 49 nodes, 325 edges, and 49 components. The old checker is
 absent without duplicated source policy, nested execution, a wrapper,
 compatibility representation, or fallback.
+
+### M6-I80 Rust Security Panic-Boundary Acceptance
+
+Fresh post-M6-I79 evidence reports 46 Bash verifiers, 49 nodes, 325 edges,
+and 49 components. Eight verifiers have no executable inbound edge; five are
+at the highest dependency wave 6. The 40-line
+`verify-rust-security-panic-boundary.sh` is the smallest coherent wave-6
+candidate. Its two inbound references are historical contract evidence, and
+it invokes three separately owned gates. The package is `serial-coherent`
+because no shared engine, schema, policy, or unresolved owner contract changes.
+
+One seven-check `profile.language.rust.security` suite preserves all 11 typed
+decisions, exact `STD-0826` source identity and disposition, metadata closure,
+canonical profile text, the bounded legacy index, and the README projection.
+Six outgoing records retain Rust listener lifecycle, Rust filesystem
+authority, and the execution train as independent gates. Four prior M6-I76
+and M6-I77 records transition from checker evidence to the registered suite.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing canonical profile text, and restoration of prohibited legacy policy.
+Exact final compilation renews 22 dependency-local requirements and leaves 29
+stable, closing 51/51 coverage. All focused, graph, declarative, generated,
+numeric, plan, and complete mixed evidence pass. Final graph: 45 Bash checkers,
+48 nodes, 317 edges, and 48 components. The old checker is absent without a
+source-policy rewrite, nested execution, wrapper, compatibility
+representation, or fallback.

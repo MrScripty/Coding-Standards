@@ -6445,3 +6445,24 @@
   complete 46-entrypoint checkpoint pass. Final graph: 46 Bash checkers, 49
   nodes, 325 edges, and 49 components. No duplicated source policy, wrapper,
   compatibility representation, or fallback remains.
+
+## 2026-08-31 - M6-I80 Rust Security Panic-Boundary Acceptance
+
+- Fresh post-M6-I79 evidence reports 46 Bash verifiers, 49 nodes, 325 edges,
+  and 49 components. Eight verifiers have no executable inbound edge; five are
+  at the highest dependency wave 6. The 40-line Rust Security panic-boundary
+  verifier is the smallest coherent wave-6 candidate. M6-I80 is
+  `serial-coherent` at train order 195.
+- One seven-check owner-local suite preserves all 11 typed decisions, exact
+  `STD-0826` source and disposition, metadata closure, canonical profile text,
+  the bounded legacy index, and the README projection.
+- Six outgoing records retain listener lifecycle, filesystem authority, and
+  the execution train as independent gates. Four prior M6-I76 and M6-I77
+  records move from checker evidence to registered suite evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 45-entrypoint checkpoint pass. Final graph: 45 Bash
+  checkers, 48 nodes, 317 edges, and 48 components. No source-policy rewrite,
+  nested execution, wrapper, compatibility representation, or fallback
+  remains.

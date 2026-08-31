@@ -21,7 +21,7 @@ evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.s
 evaluation/standards-effectiveness/verify-language-profile-routing.sh	verifier	yes	component-c0459149ff60600dae7bb9bed5c67fb4e0da9259ef4cacda2d8d93282126c54d	1	no	4	1	2	1	1
 evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	verifier	yes	component-f1660bb55a383e0a9eb4397543b8ee8ac6f2d7101d8f939c4d3beb685dd0e7e6	1	no	3	2	2	2	4
 evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh	verifier	yes	component-9efbb73ab0af6005e09605ca605c1b80b50a73ad8aab34f36733a79b94a9c8ed	1	no	0	3	1	3	0
-evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh	verifier	yes	component-7e14e2de6c5a319348ca02661400a550fdc2d379352ffb3c7f909a24d7ab1167	1	no	2	10	2	10	4
+evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh	verifier	yes	component-7e14e2de6c5a319348ca02661400a550fdc2d379352ffb3c7f909a24d7ab1167	1	no	2	9	2	9	4
 evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh	verifier	yes	component-572e52e35399637057c19ce2396fe5791f1e3339d8c1db61cfb66be8f5abafd8	1	no	0	4	2	4	0
 evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh	verifier	yes	component-07ce6877f103bc57a9f71e7884007823ac917967a9324f9aaf13c2f7713006b3	1	no	4	4	2	4	2
 evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	verifier	yes	component-4940104761051e00bc2df0352d77702d7e95858d1a1fe20f7c52f5c6fbb01841	1	no	5	5	5	5	6
@@ -43,8 +43,7 @@ evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	verifier	yes	c
 evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	verifier	yes	component-08a69acf3fffd4d96c3b77d021a97b9ae24dbf8b83428d4b2d17e9e3ff0d6178	1	no	7	1	0	0	8
 evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	verifier	yes	component-d8ea8a1175975e29763efd153437187aae89c54e63fe8f7bc184e8646071ffa4	1	no	1	1	3	1	2
 evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	verifier	yes	component-5e1cf8e9c5200202ab4ae5c26353960caa4dbe106c70473d4712072f82368a92	1	no	6	0	3	0	3
-evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	verifier	yes	component-d288e00b6179ec6f05844d4d49c43b4b9ae8e5246cd769b8ac5f59fbd11b1ef6	1	no	5	1	3	1	3
-evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	verifier	yes	component-c3bbb4ce7558ec7ff0cd189517f9bd354e89cc922fbb30dad60ca08546af8422	1	no	5	1	3	1	3
-evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	verifier	yes	component-e9b0fc054c73518eb39cbc2ee6ae89618f24478151a9767cd056d3c75c3d2d96	1	no	6	0	2	0	3
+evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	verifier	yes	component-d288e00b6179ec6f05844d4d49c43b4b9ae8e5246cd769b8ac5f59fbd11b1ef6	1	no	5	0	3	0	3
+evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	verifier	yes	component-c3bbb4ce7558ec7ff0cd189517f9bd354e89cc922fbb30dad60ca08546af8422	1	no	5	0	3	0	3
 evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	verifier	yes	component-074d0df8d4f07b3126cc4661a570aed14eb3cfb68147109dc8cdc99d702bf189	1	no	6	0	3	0	3
 evaluation/standards-effectiveness/verify-verification-gate-model.sh	verifier	yes	component-b249848fe54669c6b885ac972c487fc835de7d49e23115056ab7db0fd940225d	1	no	0	1	0	1	0

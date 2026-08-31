@@ -1,0 +1,110 @@
+schema_version = 1
+id = "rust-security-panic-boundary"
+owner = "profile.language.rust.security"
+description = "Rust production panic and recoverable-error boundaries with typed missing-proof and invalid-fallback outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/security-panic-boundary-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+context = ["request", "lifecycle", "background", "network", "library-invariant", "compile-time", "test"]
+failure = ["recoverable", "invariant", "impossible", "assertion"]
+proof = ["missing", "proven", "not-required"]
+panic_form = ["result", "panic", "unreachable", "unwrap"]
+documentation = ["not-required", "required"]
+fallback = ["none", "default-success", "alternate-operation"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "proof", op = "eq", value = "missing" },
+  { field = "failure", op = "eq", value = "invariant" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { all = [
+    { field = "failure", op = "eq", value = "recoverable" },
+    { field = "panic_form", op = "ne", value = "result" },
+  ] },
+]
+
+[[checks]]
+id = "source-identity"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [["STD-0826", "languages/rust/RUST-SECURITY-STANDARDS.md"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0826"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0826", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "apply typed recoverable-error and panic-boundary policy to Rust production request lifecycle background-service and network-handler paths"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0826"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/security.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/security.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "markdown_section_text"
+path = "profiles/languages/rust/security.md"
+heading = "## Panic And Recoverable Error Boundary"
+required = [
+  "Rust API error policy",
+  "production request paths",
+  "typed `unavailable`",
+  "typed `invalid`",
+  "broad catch-all recovery",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+heading = "## Panic Policy"
+required = ["security.md#panic-and-recoverable-error-boundary"]
+prohibited = [
+  "Production request paths, lifecycle code",
+  "must not use `unwrap()` or `expect()`",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["the registered `rust-security-panic-boundary` suite specialize recoverable-error and"]
+prohibited = ["`verify-rust-security-panic-boundary.sh` specialize recoverable-error and"]
