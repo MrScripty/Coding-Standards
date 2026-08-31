@@ -67,7 +67,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.concurrent-integration-routing
 [[attestations]]
-requirement_id = "sha256:1a7fbd3d47ba8264712cfbc392a2e9f2f92b2893e1084e65c3f64af6c8d03aba"
+requirement_id = "sha256:ca2a36536ca161f6887ea96f31712218fb6519f8b1b71cd0e925a88232393624"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -76,6 +76,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.planning.concurrent-integration-routing is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
@@ -131,7 +132,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.lifecycle
 [[attestations]]
-requirement_id = "sha256:8b077319d62f24afc6a69701db3d4e4bf44b98246ce165dbe59e03389a45c7f0"
+requirement_id = "sha256:20f74169a9fcd6f10e3f8e3a351e10b142c267fad46b490c6668065639a1fa9a"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -140,6 +141,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.planning.lifecycle is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
@@ -163,7 +165,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.plan-admission
 [[attestations]]
-requirement_id = "sha256:f7d2967caa04154183c4beb7941d34bce9a987e6fef875aa63e4dce9d693b87a"
+requirement_id = "sha256:cecf074c55671ad125b16cdfd15374cec51ebccacf9fcb317351a1e606cb2250"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -172,6 +174,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.planning.plan-admission is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
@@ -179,7 +182,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.projection-completeness
 [[attestations]]
-requirement_id = "sha256:1cc766d5cf6b478b41d1f9af0280314596bfbed76dff7dfda7bb5d41ef96e240"
+requirement_id = "sha256:ec29ee258304a02550df886749a314a5e9ec07d58c8db8a2d58bc831e25e19d5"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -188,6 +191,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.planning.projection-completeness is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
@@ -244,7 +248,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.written-plan-applicability
 [[attestations]]
-requirement_id = "sha256:8e6cc76a3a6bdda6754c7ac7a8fb70f3e56c8510b35a11799be0539de6007ee9"
+requirement_id = "sha256:f7a0477bfa6996d80d576417c7273d9a6c7a93293a6658030bc4c62422ef7904"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -253,6 +257,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.planning.written-plan-applicability is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."

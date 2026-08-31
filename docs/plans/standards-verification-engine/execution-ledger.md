@@ -6285,3 +6285,16 @@
 - Acceptance authority is corrected before renewal. Five exact attestation
   files replace the earlier two-file estimate; package behavior, checker scope,
   owner, retained gates, engine surface, and source policy remain frozen.
+
+## 2026-08-31 - M6-I73 Rust Binding Event Delivery Acceptance
+
+- Replaced the caller-free checker with one nine-check declarative suite and
+  explicit two-member provider at train order 188.
+- Preserved 21 typed decisions, exact source/disposition membership, metadata,
+  profile, bounded legacy, finding, documentation, and three independent gates.
+- Five mutations, 431 verifier tests, 37 graph tests, all 228 suites, numeric
+  lifecycle, generated freshness, and the complete mixed checkpoint pass.
+- Renewed exactly 22 dependency-local requirements across five attestation
+  files; 29 requirements remain stable and final coverage closes 51/51.
+  Final graph: 52 Bash checkers, 56 nodes, 378 edges, 56 components. No wrapper,
+  compatibility representation, dual authority, or fallback remains.

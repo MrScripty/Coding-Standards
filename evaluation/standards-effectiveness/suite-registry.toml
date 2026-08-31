@@ -1096,6 +1096,11 @@ path = "evaluation/standards-effectiveness/suites/rust-binding-executor-delegati
 requires = []
 
 [[suites]]
+id = "rust-binding-event-delivery"
+path = "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml"
+requires = []
+
+[[suites]]
 id = "standards-recovery-routing"
 path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"
 requires = []

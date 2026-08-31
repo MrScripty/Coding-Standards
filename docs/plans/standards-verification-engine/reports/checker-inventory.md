@@ -5757,3 +5757,21 @@ Planning, and two Verification requirements. All 22 differ only in exact
 horizon-member fingerprints; 29 requirements and every non-horizon view field
 remain stable. The corrected five-attestation-file closure is frozen before
 acceptance.
+
+### M6-I73 Rust Binding Event Delivery Acceptance
+
+The registered nine-check suite preserves all 21 typed decisions, exact
+`STD-0778`/`STD-0779` membership and dispositions, metadata closure, profile
+policy, bounded legacy replacement, finding closure, and documentation
+projection. Eight accepted edge records replace metadata-helper execution and
+retain Concurrency, Interop event registration, and the execution train as
+independent gates.
+
+Five disposable mutations reject changed outcome precedence, unknown
+membership, weakened profile policy, restored legacy preference, and stale
+documentation. Exact final compilation renews only the 22 admitted
+dependency-local requirements and closes all 51 coverage subjects. Verifier,
+graph, all-suite, numeric, generated, mixed-checkpoint, plan, source, and
+removed-path evidence passes. Final graph: 52 Bash checkers, 56 nodes, 378
+edges, and 56 components. No wrapper, compatibility representation, dual
+authority, or fallback remains.

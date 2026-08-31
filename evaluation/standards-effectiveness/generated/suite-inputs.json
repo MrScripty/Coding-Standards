@@ -589,6 +589,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-executor-delegation"
         },
         {
@@ -1672,7 +1677,7 @@
       ]
     },
     {
-      "digest": "sha256:e39c6302e8ae2b6082dfdd23b3a49974b328920b55e26e26ec13a8085a76253e",
+      "digest": "sha256:2017cd8048f33077827f89a812067e963dc143da16234783e54872b63f795815",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1684,7 +1689,7 @@
       ]
     },
     {
-      "digest": "sha256:7626e2d83f75246815b2084874e8afa157b249458f3a0b721e528bb78e2bc609",
+      "digest": "sha256:ef4abe39a775883d490e7c00a95053eef8d54279daf94d80e2c0f0f517038e11",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1801,6 +1806,11 @@
         {
           "check": "documentation-projection",
           "role": "content",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
           "suite": "rust-binding-executor-delegation"
         },
         {
@@ -1890,7 +1900,7 @@
       ]
     },
     {
-      "digest": "sha256:07699a27b782d89d16ec4729617389448ab85f0df363b4392a63da4be03648ae",
+      "digest": "sha256:29f05fceb9551b25d781726e1791673a35c838664faeeec721e83d537ea0ab63",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2664,6 +2674,11 @@
         {
           "check": "exact-disposition",
           "role": "table",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "exact-disposition",
+          "role": "table",
           "suite": "rust-binding-executor-delegation"
         },
         {
@@ -3038,7 +3053,7 @@
       ]
     },
     {
-      "digest": "sha256:f3f1b323c1a0bbc2aff43e54c8689ef264c7c14f8ce9ea64108ad522da62181f",
+      "digest": "sha256:79aa4bcce092569868e6aeb476764714a55b8f37f9ab8b945c9f7939dfb0189e",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3073,6 +3088,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "finding-closure",
@@ -5228,6 +5248,35 @@
       ]
     },
     {
+      "digest": "sha256:63bb81227ce05affe8d1ffce6e5f707e30c10b2eb46ebdd38290563325699747",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/binding-event-delivery-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "rust-binding-event-delivery"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:6d02a73e451da3a0d4973c009e1f302a78107f48a0c808956ca7ad897fb1db03",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/binding-event-delivery-members.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "exact-disposition",
+          "role": "members",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "source-membership",
+          "role": "members",
+          "suite": "rust-binding-event-delivery"
+        }
+      ]
+    },
+    {
       "digest": "sha256:f470e67ed55e14da1087bf21768cde1ac19dc69cd7b3fdbe618fafb3ea76b808",
       "path": "evaluation/standards-effectiveness/fixtures/rust/binding-executor-delegation-decisions.tsv",
       "state": "present",
@@ -6077,7 +6126,7 @@
       ]
     },
     {
-      "digest": "sha256:962b89156a66be701852cd14e991269dac272559374c0656f24082f5c71f13a6",
+      "digest": "sha256:0dea163ad8ef89eabcdbae6e59f9bb4ea445e18f0fc6180b2196bb6b7e2ec310",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6089,7 +6138,7 @@
       ]
     },
     {
-      "digest": "sha256:428757964214810a8e9ddfcbc0170234e12f85310c6cd48abc21e252959ae1c2",
+      "digest": "sha256:e33ba40cce2116df29f36960c12fdfd116870279dfdbe1656051b7df6667c4a5",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6327,6 +6376,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "source-membership",
+          "role": "table",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "source-membership",
@@ -7648,7 +7702,7 @@
       ]
     },
     {
-      "digest": "sha256:84900534c1d25f7f329694e7f1891a08f7ca392a771994b80f6ebb02e85695eb",
+      "digest": "sha256:23edb096c9fcdcb0673096f0c1f2744aee7caecb6b28b7d3e4743fdc0b456fd5",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
       "state": "present",
       "uses": [
@@ -8530,7 +8584,7 @@
       ]
     },
     {
-      "digest": "sha256:862e5223a1843ade07275453149a1e371c7ce9594b579c6c8676736e134dedcd",
+      "digest": "sha256:b09556ab431fb3fa42a06d78a7c0a2dc9f460bb3174da59dde787201d7008d35",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10462,6 +10516,18 @@
       ]
     },
     {
+      "digest": "sha256:a1c19ebbfe8a49bc7ff2401dcd53d20adf686c3bed0203172e11a78fe6faa0d6",
+      "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:ff96c8ebc05c646f422bf3e46408c89d2c5cb6409c2e8cce4d9f21b33a02bdae",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml",
       "state": "present",
@@ -12269,33 +12335,6 @@
       ]
     },
     {
-      "digest": "sha256:1726fc884fd719748fcb7cda5d31d2b1638a950dfbcbe401ef0ba5be881fb352",
-      "path": "evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:cfc47e9aafff37357de23e193929b26c67e2cd99105268dab4bf3580890e8d6e",
       "path": "evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh",
       "state": "present",
@@ -12832,6 +12871,16 @@
           "check": "legacy-next-section",
           "role": "content",
           "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "legacy-index",
+          "role": "content",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "legacy-structure",
+          "role": "content",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "legacy-index",
@@ -13395,6 +13444,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-executor-delegation"
         },
         {
@@ -13560,6 +13614,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "metadata-closure",
@@ -13888,6 +13947,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "metadata-closure",
@@ -14500,6 +14564,16 @@
           "check": "profile-policy",
           "role": "content",
           "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "profile-policy",
+          "role": "content",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "metadata-closure",
@@ -19801,6 +19875,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-executor-delegation"
         },
         {
@@ -20039,6 +20118,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "metadata-closure",
@@ -20678,6 +20762,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
         },
         {
           "check": "metadata-closure",
@@ -21748,6 +21837,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-executor-delegation"
         },
         {
@@ -21919,11 +22013,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:862e5223a1843ade07275453149a1e371c7ce9594b579c6c8676736e134dedcd",
+    "digest": "sha256:b09556ab431fb3fa42a06d78a7c0a2dc9f460bb3174da59dde787201d7008d35",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:6cb3c6e54dd54c2eb16bd58abf76cf5a9b328b3c3ab9786b5974f71bdcdd90c5",
+    "digest": "sha256:dc47e007104b787667f07c4df6f449daba9cd95e0bd6cbae3505dcfdae55be86",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23293,6 +23387,12 @@
       "digest": "sha256:ff96c8ebc05c646f422bf3e46408c89d2c5cb6409c2e8cce4d9f21b33a02bdae",
       "id": "rust-binding-executor-delegation",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:a1c19ebbfe8a49bc7ff2401dcd53d20adf686c3bed0203172e11a78fe6faa0d6",
+      "id": "rust-binding-event-delivery",
+      "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
       "requires": []
     },
     {

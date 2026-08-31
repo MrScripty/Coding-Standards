@@ -14750,3 +14750,13 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   across five attestation files. Only horizon-member fingerprints change; 29
   requirements and every relationship/applicability/structure field remain
   stable. Corrected authority is frozen before acceptance.
+
+## 2026-08-31 - M6-I73 Rust Binding Event Delivery Acceptance
+
+- Accepted train order 188 with one nine-check suite, two exact members, and
+  three retained gates, removing the Rust event-delivery Bash checker without
+  fallback.
+- Five mutations, 431 verifier tests, 37 graph tests, all 228 suites, exact
+  22/22 renewal and 51/51 coverage, numeric lifecycle, generated freshness,
+  and the complete mixed checkpoint pass. Final graph: 52 Bash checkers, 56
+  nodes, 378 edges, 56 components; fresh graph evidence is required next.

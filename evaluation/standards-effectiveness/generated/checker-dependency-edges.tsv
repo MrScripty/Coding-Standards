@@ -28,7 +28,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
@@ -46,6 +45,7 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
+contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
@@ -70,7 +70,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh
@@ -200,10 +199,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-binding-arch
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-interop-event-registration.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
@@ -269,7 +264,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-runtime-decoding-pol
 helper_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -347,9 +341,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecyc
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-interop-event-registration.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	evaluation/standards-effectiveness/verify-binding-generation-authority.sh

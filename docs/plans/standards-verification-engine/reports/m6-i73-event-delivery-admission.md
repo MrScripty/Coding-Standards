@@ -98,3 +98,16 @@ gates; package, edge, numeric-lifecycle, and generated-freshness checks; exact
 22/22 renewal with 29 unchanged requirements; all Verifier and graph-engine
 tests; all declarative suites; the complete mixed checkpoint; plan checks;
 source preservation; removed-path proof; and staged write-set review.
+
+## Acceptance
+
+M6-I73 is accepted. The nine-check suite preserves the complete checker
+contract, five disposable mutations reject representative semantic and
+evidence drift, and all three retained gates pass independently. Exact
+final-state compilation renews only the 22 admitted dependency-local
+requirements across five attestation files and preserves the other 29.
+
+All 51 current requirements have one exact attestation, authorization, and
+certificate. Verifier tests, graph-engine tests, all 228 declarative suites,
+numeric lifecycle, generated freshness, and the complete mixed checkpoint
+pass. Final graph: 52 Bash checkers, 56 nodes, 378 edges, and 56 components.

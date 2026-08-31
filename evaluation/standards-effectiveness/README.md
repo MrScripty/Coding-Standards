@@ -492,8 +492,7 @@ and bounded legacy replacement. They reject universal string flattening,
 infallible conversion claims, generic catch-all errors, named-framework
 defaults, dropped semantics, sensitive context, and default success.
 
-`fixtures/rust/binding-event-delivery-decisions.tsv` and
-`verify-rust-binding-event-delivery.sh` check contract-selected push, pull, and
+The registered `rust-binding-event-delivery` suite checks contract-selected push, pull, and
 stream delivery, provider authority, governed capacity and overflow, ordering,
 callback thread and current-input lifetime, cancellation, shutdown, real
 native/host evidence, two exact dispositions, and bounded legacy replacement.

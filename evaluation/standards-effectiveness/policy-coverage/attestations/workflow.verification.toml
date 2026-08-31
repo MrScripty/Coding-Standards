@@ -34,7 +34,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.verification.evidence-oracle-boundary
 [[attestations]]
-requirement_id = "sha256:fcef031c768dc15309b17435dffd43edbf37cf0ccb38fc95aa2a14400e2749dd"
+requirement_id = "sha256:64b2de12a5382c25253c8e420ddd693c55fea860a905098fdb10b4d35a950a1d"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -43,6 +43,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.verification.evidence-oracle-boundary is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
@@ -50,7 +51,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.verification.negative-fixture-isolation
 [[attestations]]
-requirement_id = "sha256:588dc4245dcca8504c871c6acbc0345cc73296f7a805f8d4ed4402f461e4798a"
+requirement_id = "sha256:17136727a5a7fc3abe8cc2cf2cc79f45135795b4bde6a92491f6086613e91791"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -59,6 +60,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for workflow.verification.negative-fixture-isolation is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
