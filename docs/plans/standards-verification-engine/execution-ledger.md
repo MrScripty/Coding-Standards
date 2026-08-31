@@ -6298,3 +6298,20 @@
   files; 29 requirements remain stable and final coverage closes 51/51.
   Final graph: 52 Bash checkers, 56 nodes, 378 edges, 56 components. No wrapper,
   compatibility representation, dual authority, or fallback remains.
+
+## 2026-08-31 - M6-I74 Baseline Markdown Heading Admission
+
+- Fresh post-M6-I73 evidence leaves only the source-gap and decision-
+  traceability exceptional paths caller-free. The 114-line source-gap checker
+  is the smaller candidate and has no executable dependency.
+- The empty expected-gap table alone cannot preserve dynamic detection of a
+  newly removed, undisposed baseline heading. VE087 therefore admits one
+  bounded native `baseline_markdown_headings` assertion under the accepted
+  migration-source-closure owner.
+- The shared contract fixes Git invocation, the summary baseline key, Markdown
+  scope, diff semantics, ATX syntax, evidence schemas, and identity resolution
+  in engine code. Configuration supplies only four contained authority paths
+  and explicit classification-to-state mappings.
+- M6-I74 is admitted at train order 189. Final-state dependency-local coverage,
+  exact write set, negative parity, and all mixed acceptance evidence must be
+  frozen before the checker is accepted as removed.

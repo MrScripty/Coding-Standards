@@ -14760,3 +14760,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   22/22 renewal and 51/51 coverage, numeric lifecycle, generated freshness,
   and the complete mixed checkpoint pass. Final graph: 52 Bash checkers, 56
   nodes, 378 edges, 56 components; fresh graph evidence is required next.
+
+## 2026-08-31 - M6-I74 Baseline Markdown Heading Admission
+
+- Fresh graph evidence reports 52 Bash checkers and only two caller-free
+  verifiers, both previously exceptional. The 114-line source-gap audit is the
+  smaller candidate and has no executable dependency.
+- Admitted one bounded `baseline_markdown_headings` assertion in the existing
+  source-index suite. It preserves the summary-owned Git baseline, removed ATX
+  heading locations, disposition exclusion, exact expected-gap equality, and
+  classification-specific current-state checks.
+- M6-I74 is a `shared-contract` package at train order 189. Implementation,
+  final coverage compilation, historical-edge transfer, numeric lifecycle,
+  and complete mixed verification remain required before acceptance.

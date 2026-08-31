@@ -5775,3 +5775,26 @@ graph, all-suite, numeric, generated, mixed-checkpoint, plan, source, and
 removed-path evidence passes. Final graph: 52 Bash checkers, 56 nodes, 378
 edges, and 56 components. No wrapper, compatibility representation, dual
 authority, or fallback remains.
+
+### M6-I74 Baseline Markdown Heading Admission
+
+Fresh post-M6-I73 evidence reports 52 Bash checkers, 56 nodes, 378 edges, and
+56 components. Only `verify-undisposed-source-gaps.sh` and
+`verify-decision-traceability.sh` are caller-free. Decision traceability remains
+an external-template integration boundary; the 114-line source-gap checker is
+the smaller path and has no executable dependency.
+
+The source-gap invariant dynamically compares removed Markdown headings from
+the summary-owned baseline with exact section locations and canonical
+dispositions. Its empty expected table is only an expected result, not a
+replacement mechanic: a static table check would miss the next undisposed
+heading deletion. M6-I74 therefore admits one bounded
+`baseline_markdown_headings` assertion in the existing
+`verification-engine.migration-source-closure` suite at train order 189.
+
+The new contract fixes Git execution, Markdown scope, diff behavior, heading
+syntax, table headers, baseline key, and identifier shape. Configuration owns
+only contained evidence paths and explicit classification states. Eight
+historical source-gap records will transfer to the suite at acceptance. No
+configurable command, revision, pathspec, shell bridge, copied source list,
+compatibility representation, waiver, or fallback is admitted.
