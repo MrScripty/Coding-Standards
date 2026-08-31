@@ -5749,3 +5749,11 @@ suite-evidence fingerprints; Planning projection completeness advances only
 through its suite-evidence fingerprint. The other 37 requirements remain
 stable. M6-I73 is therefore admitted at train order 188 as a
 `shared-contract` package with exact renewal and write-set authority.
+
+The governed admission artifacts themselves are current suite inputs. Fresh
+post-admission comparison therefore expands the final renewal to 22
+requirements: one Generated Contract, one Dependencies, all 13 Commit, five
+Planning, and two Verification requirements. All 22 differ only in exact
+horizon-member fingerprints; 29 requirements and every non-horizon view field
+remain stable. The corrected five-attestation-file closure is frozen before
+acceptance.

@@ -14743,3 +14743,10 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - Dependency-local preflight changes 14 of 51 coverage requirements while all
   relationship, applicability, structural, and representation semantics stay
   fixed. M6-I73 is admitted as `shared-contract`; implementation is next.
+
+## 2026-08-31 - M6-I73 Coverage-Renewal Re-plan
+
+- Governed admission inputs expand final renewal to 22 exact requirements
+  across five attestation files. Only horizon-member fingerprints change; 29
+  requirements and every relationship/applicability/structure field remain
+  stable. Corrected authority is frozen before acceptance.

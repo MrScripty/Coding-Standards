@@ -6273,3 +6273,15 @@
 - Admitted M6-I73 at train order 188 as `shared-contract`, with exact write set
   and renewal evidence frozen in the admission report. Implementation and
   attestation renewal remain uncommitted until the atomic acceptance slice.
+
+## 2026-08-31 - M6-I73 Coverage-Renewal Re-plan
+
+- Recompiling after the governed admission artifacts expands the final
+  dependency-local renewal from 14 to 22 requirements across Generated
+  Contract, Dependencies, Commit, Planning, and Verification owners.
+- Every changed view differs only in its selected horizon member fingerprints;
+  relationships, applicability, structural digests, and representation digests
+  remain identical. The other 29 requirements remain stable.
+- Acceptance authority is corrected before renewal. Five exact attestation
+  files replace the earlier two-file estimate; package behavior, checker scope,
+  owner, retained gates, engine surface, and source policy remain frozen.

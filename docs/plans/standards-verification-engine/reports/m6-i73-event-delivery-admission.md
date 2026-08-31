@@ -31,20 +31,32 @@ compatibility representation, wrapper, Bash bridge, or fallback is admitted.
 
 ## Shared-Contract Trigger
 
-Disposable final-state preflight regenerated the dependency-local suite-input
-projection and compared all 51 current coverage requirements with the accepted
-M6-I72 boundary. Exactly 14 requirements change:
+Disposable implementation-only preflight regenerated the dependency-local
+suite-input projection and compared all 51 current coverage requirements with
+the accepted M6-I72 boundary. It initially changed 14 requirements. Repeating
+the comparison after recording this governed admission correctly expands the
+final acceptance set to exactly 22 requirements:
 
 - all 13 `workflow.commit` requirements, whose selected relationship sets,
   relationship fingerprints, applicability, structural digest, and
   representation digest remain unchanged while the reviewed README and
   `commit-consolidation-dispositions` suite-evidence fingerprints advance; and
-- `workflow.planning.projection-completeness`, whose selected relationship,
-  applicability, structural digest, and representation digest remain unchanged
-  while the `policy-semantic-impact` suite-evidence fingerprint advances.
+- `profile.boundary.generated-contract.semantic-closure` and
+  `topic.dependencies.requirement-and-ownership` through their exact
+  suite-evidence fingerprints;
+- `workflow.planning.concurrent-integration-routing`, `lifecycle`,
+  `plan-admission`, `projection-completeness`, and
+  `written-plan-applicability` through their exact suite-evidence
+  fingerprints; and
+- `workflow.verification.evidence-oracle-boundary` and
+  `negative-fixture-isolation` through their exact suite-evidence
+  fingerprints.
 
-The other 37 requirement identities remain byte-for-byte stable. Acceptance
-must renew only these 14 exact attestations, add this report to their evidence,
+Only the dependency-local `horizon` field changes for all 22 views. Selected
+relationships, relationship fingerprints, applicability, structural digests,
+and representation digests remain byte-for-byte stable. The other 29
+requirement identities remain unchanged. Acceptance must renew only these 22
+exact attestations, add this report to their evidence,
 and prove 51/51 current requirement, attestation, authorization, and
 certificate equality. Because that renewal crosses the Rust profile, Commit,
 and Planning owners, this package is escalated from the routine
@@ -68,8 +80,11 @@ and Planning owners, this package is escalated from the routine
 - `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 - `evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml`
 - `evaluation/standards-effectiveness/suite-registry.toml`
 - `evaluation/standards-effectiveness/suites/checker-migration-packages.toml`
 - `evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml`
@@ -80,6 +95,6 @@ and Planning owners, this package is escalated from the routine
 
 Acceptance requires focused suite and five-mutation parity; all three retained
 gates; package, edge, numeric-lifecycle, and generated-freshness checks; exact
-14/14 renewal with 37 unchanged requirements; all Verifier and graph-engine
+22/22 renewal with 29 unchanged requirements; all Verifier and graph-engine
 tests; all declarative suites; the complete mixed checkpoint; plan checks;
 source preservation; removed-path proof; and staged write-set review.
