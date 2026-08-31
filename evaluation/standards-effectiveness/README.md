@@ -845,11 +845,11 @@ selects only `STD-0583` plus `STD-0601` for a Contracts-owned validation
 proof-lifetime slice. Accepted `7.4b7m` establishes that contract with 16
 focused decisions; `7.4b7n` next replans the 56-ID trust remainder.
 
-`fixtures/contracts/validation-proof-lifetime-decisions.tsv` and
-`verify-validation-proof-lifetime.sh` check retained validated
+The registered `validation-proof-lifetime` suite checks retained validated
 representations, smart constructors, proof invalidation, new applicable
-boundaries, typed outcomes, exact dispositions, and bounded legacy
-replacement. They reject original-input reuse, history flags, stale proof,
+boundaries, typed outcomes, exact dispositions, and bounded legacy replacement
+using `fixtures/contracts/validation-proof-lifetime-decisions.tsv`. It rejects
+original-input reuse, history flags, stale proof,
 mutable aliases, implicit cross-boundary trust, permissive defaults, weaker
 decoders, and redundant-decoding mandates.
 

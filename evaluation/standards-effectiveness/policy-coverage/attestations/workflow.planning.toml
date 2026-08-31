@@ -67,7 +67,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.concurrent-integration-routing
 [[attestations]]
-requirement_id = "sha256:31b432e0b35ef130266d2dcd9905113dce05d6a64ffe2b300b059f35d2593146"
+requirement_id = "sha256:3861f2c48da27de2267ed1a440987207197c787c72b9d17e74b8beca542d51c4"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -135,7 +135,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.lifecycle
 [[attestations]]
-requirement_id = "sha256:84b8d49622e2a0f736d3efa2e600ac30d1198dbc0f1ccc9c8264017f4d939b5e"
+requirement_id = "sha256:ff23ad00eb3668385b9080031cb08f71ecb6ce476ad62aacb03ac7ce596fb77c"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -171,7 +171,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.plan-admission
 [[attestations]]
-requirement_id = "sha256:b5fb7d6c6497cf6e13337d27113f451f9ee50973c713977df79d543af09be336"
+requirement_id = "sha256:c918024eec23dea9193d1e114ad6021eeddca82e0e4c03fa32e67aadf4971253"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -191,7 +191,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.projection-completeness
 [[attestations]]
-requirement_id = "sha256:e74ef749ffda37f8dad6349b929705a95c83ef2c5b5e940e3a08bd93b500155f"
+requirement_id = "sha256:f1575b9f672b5697b206caf4ee2cb7b46cbf3e3675f25a9fce71ac2196194fca"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -260,7 +260,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.written-plan-applicability
 [[attestations]]
-requirement_id = "sha256:3a6e63b7f18cecea012820a7bc23da37424be83ed4bf456bfb1844dbcc90e03f"
+requirement_id = "sha256:5b0cb1f8e51304b2665949f447d4b6666251c724d2b74fd9a134ac3cc95eea36"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

@@ -6489,3 +6489,25 @@
   Bash checkers, 47 nodes, 308 edges, and 47 components. No source-policy
   rewrite, nested execution, wrapper, compatibility representation, or
   fallback remains.
+
+## 2026-08-31 - M6-I82 Validation Proof-Lifetime Acceptance
+
+- Fresh post-M6-I81 evidence reports 44 Bash verifiers, 47 nodes, 308 edges,
+  and 47 components. Nine verifiers have no executable inbound edge; three are
+  at the highest dependency wave 6. The 98-line validation proof-lifetime
+  verifier is the smallest coherent wave-6 candidate. M6-I82 is
+  `serial-coherent` at train order 197.
+- One eight-check owner-local suite preserves all 16 typed decisions, exact
+  `STD-0583` and `STD-0601` source identities and dispositions, metadata
+  closure, canonical proof-lifetime policy, the bounded legacy route, finding
+  closure, and the README projection.
+- Native metadata authority replaces helper execution. Four outgoing records
+  retain runtime decoding and the independent trust re-plan as separate gates;
+  two prior M6-I78 records move to registered suite evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 43-entrypoint checkpoint pass. Final graph: 43 Bash
+  checkers, 46 nodes, 300 edges, and 46 components. No source-policy rewrite,
+  nested execution, wrapper, compatibility representation, or fallback
+  remains.

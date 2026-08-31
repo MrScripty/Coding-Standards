@@ -34,7 +34,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.verification.evidence-oracle-boundary
 [[attestations]]
-requirement_id = "sha256:f6b33d0723fef1b6fc7700ae86fb241fcbc9d934dfa609116373b31c5137ebdd"
+requirement_id = "sha256:7572cda17aafa8ab8ae67690a71ff67442d53a6ab2a5c12d640c5eb95f0fe515"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -54,7 +54,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.verification.negative-fixture-isolation
 [[attestations]]
-requirement_id = "sha256:900211ec25187111d99b2bd7eed0f7fd53a24b1df49f5cf1d223d37b9f40b47f"
+requirement_id = "sha256:0d684ddba06670f1347953bb80a1c0f4a40aa6bf3e26142c1890d38f712264b5"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

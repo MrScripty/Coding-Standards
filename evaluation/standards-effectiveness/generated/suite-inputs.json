@@ -710,6 +710,11 @@
           "check": "requires-closure",
           "role": "canonical-module",
           "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -1072,6 +1077,11 @@
           "check": "source-links",
           "role": "markdown",
           "suite": "source-index-closures"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -1692,7 +1702,7 @@
       ]
     },
     {
-      "digest": "sha256:862eeba3f4e012856f39d7eef2aad642d9520f3978319d1ba8a62ae004692d50",
+      "digest": "sha256:ebb47759eac440720e2ab1feb19ba7eda734cff8ef15fafa545b4e4419b3171d",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1704,7 +1714,7 @@
       ]
     },
     {
-      "digest": "sha256:58b0105411945204b013a8d77945896a3b9d2016aa26dad29b97fb2367b4cb36",
+      "digest": "sha256:d762d520dc340ec15adf0d24f519d52adf933aa9c99aef6667bf5c62533ffa6f",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1862,6 +1872,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "typescript-async-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -1925,7 +1940,7 @@
       ]
     },
     {
-      "digest": "sha256:7874ada0daea6f7e8b0badf5157b0135e3ebe6422286dd36b04c86ca35ed4786",
+      "digest": "sha256:6154633591ad7afe94ff43a138c6d3bbe651d18604dbee77e5758eec0ef62a90",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3037,6 +3052,11 @@
           "suite": "typescript-static-analysis"
         },
         {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "validation-proof-lifetime"
+        },
+        {
           "check": "disposition",
           "role": "content",
           "suite": "verification-quality-gates"
@@ -3103,7 +3123,7 @@
       ]
     },
     {
-      "digest": "sha256:975bed3f2a882860fe8417c13bbaa574d10ee6797c5817b828ad67ca2e5c5030",
+      "digest": "sha256:7b4e5b6bf63f6feeb46a4be8532e7eb5becab8b841ff1bfb4483c64136f593f4",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3168,6 +3188,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "rust-wire-representation"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -3691,6 +3716,11 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -6210,7 +6240,7 @@
       ]
     },
     {
-      "digest": "sha256:d8d52735326aa8dab2ff13c86287573dc59dd28e186a9686eb0d7aad8fb38388",
+      "digest": "sha256:c5ff38a86ce20e4beacacb490a1c2975cb24a44fcf4b171ad634fbe2fddf0036",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6222,7 +6252,7 @@
       ]
     },
     {
-      "digest": "sha256:1ce71d0ae77f23c688b8728ff3cd1d920f7f5ca95989e0df48c6bd7a2fd35600",
+      "digest": "sha256:7eba0cc5c469309234b843ded572d965aa1f4ff03ca917bd1230a63264379ff7",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6505,6 +6535,11 @@
           "check": "undisposed-baseline-headings",
           "role": "heading-inventory",
           "suite": "source-index-closures"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -8766,7 +8801,7 @@
       ]
     },
     {
-      "digest": "sha256:9b97eb6e86d563cd39c6df79676e5ac565a6fdc7c786dae8d9ab78314856c7d8",
+      "digest": "sha256:6901272d9745cc811ee241ead6c4b6c8a725d249d712a4c0fde4e784849e9856",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11560,6 +11595,18 @@
       ]
     },
     {
+      "digest": "sha256:180bb1aa4de47baf0938fd5bddf7be232406b9f33dd22aaf235b67425bf71411",
+      "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:d24f928b8590558ee5ad0abce7e2c5da0cff3133bc641a5f293ff70245256bc7",
       "path": "evaluation/standards-effectiveness/suites/verification-ownership.toml",
       "state": "present",
@@ -12653,28 +12700,6 @@
         {
           "check": "derived-readme-consumers",
           "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:b30ec878c8bfa984188e58e2c50323111e2c129644a21651d2383ca66240816e",
-      "path": "evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
           "suite": "milestone-7-row-35-decomposition"
         },
         {
@@ -20416,6 +20441,16 @@
           "check": "canonical-policy",
           "role": "content",
           "suite": "testing-persisted-contract-artifacts"
+        },
+        {
+          "check": "contract-policy",
+          "role": "content",
+          "suite": "validation-proof-lifetime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -22253,6 +22288,11 @@
           "suite": "testing-organization"
         },
         {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        },
+        {
           "check": "canonical-workflow-sections",
           "role": "content",
           "suite": "verification-ownership"
@@ -22266,11 +22306,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:9b97eb6e86d563cd39c6df79676e5ac565a6fdc7c786dae8d9ab78314856c7d8",
+    "digest": "sha256:6901272d9745cc811ee241ead6c4b6c8a725d249d712a4c0fde4e784849e9856",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:35bb1a2d9dff95bcc08a6b8cfebc705f652380f9b3fae6b2584281ed3473015e",
+    "digest": "sha256:ae367e253747cd0ebc0c3c9b0de035f40c8cdc5a728401ef6d156b903a3cab72",
     "uses": [
       {
         "check": "python-package-contract",
@@ -23669,6 +23709,12 @@
       "digest": "sha256:7fb6788209091be0f4d4c2eba056c448912906915b67f68a3811a6b6eb0b7f28",
       "id": "rust-external-input-queue",
       "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:180bb1aa4de47baf0938fd5bddf7be232406b9f33dd22aaf235b67425bf71411",
+      "id": "validation-proof-lifetime",
+      "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
       "requires": []
     },
     {

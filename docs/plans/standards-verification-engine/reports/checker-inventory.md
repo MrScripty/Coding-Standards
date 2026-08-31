@@ -6029,3 +6029,31 @@ generated, numeric, plan, and complete mixed evidence pass. Final graph: 44
 Bash checkers, 47 nodes, 308 edges, and 47 components. The old checker is
 absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I82 Validation Proof-Lifetime Acceptance
+
+Fresh post-M6-I81 evidence reports 44 Bash verifiers, 47 nodes, 308 edges,
+and 47 components. Nine verifiers have no executable inbound edge; three are
+at the highest dependency wave 6. The 98-line
+`verify-validation-proof-lifetime.sh` is the smallest coherent wave-6
+candidate. Its three inbound references are historical contract evidence, and
+it invokes one metadata helper plus two separately owned gates. The package is
+`serial-coherent` because no shared engine, schema, policy, or unresolved owner
+contract changes.
+
+One eight-check `topic.contracts` suite preserves all 16 typed decisions,
+exact `STD-0583` and `STD-0601` source identities and dispositions, metadata
+closure, canonical proof-lifetime policy, the bounded legacy route, finding
+closure, and the README projection. Native metadata authority replaces helper
+execution. Four outgoing records retain runtime decoding and the independent
+trust re-plan as separate gates. Two prior M6-I78 records transition to
+registered suite evidence.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+missing canonical proof-lifetime authority, and restoration of a prohibited
+legacy mechanism. Exact final compilation renews 22 dependency-local
+requirements and leaves 29 stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 43 Bash checkers, 46 nodes, 300 edges, and 46 components. The old checker
+is absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.
