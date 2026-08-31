@@ -4,4 +4,3 @@ evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	none	rust
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	none	rust-profile-index

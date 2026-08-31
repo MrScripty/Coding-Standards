@@ -1,0 +1,177 @@
+schema_version = 1
+id = "rust-listener-lifecycle"
+owner = "profile.language.rust.security"
+description = "Contract-selected Rust listener exposure, admission, tracked work, terminal outcomes, and ordered shutdown."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/listener-lifecycle-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+exposure = ["local", "remote", "broad", "unknown"]
+exposure_contract = ["declared", "missing"]
+capacity = ["available", "full", "missing", "default"]
+admission = ["before-accept", "after-accept", "open", "closed", "not-required"]
+tracking = ["registered", "detached", "discarded", "missing", "not-required"]
+outcome = ["observed-success", "observed-failure", "observed-panic", "observed-cancel", "discarded", "leaf-logged", "not-required"]
+shutdown = ["active", "ordered", "open-admission", "not-required"]
+cancellation = ["signalled", "missing", "not-required"]
+drain = ["complete", "incomplete", "missing", "not-required"]
+abort = ["none", "authorized-safe", "authorized-unsafe", "unauthorized"]
+capability = ["available", "unsupported", "unavailable"]
+fallback = ["none", "broad-bind", "default-capacity", "accept-first", "detached-work", "discard-outcome", "leaf-logging", "open-admission", "force-abort", "alternate-runtime"]
+expected = ["allow", "typed-overload", "typed-invalid", "typed-unsupported", "typed-unavailable", "typed-incomplete"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "exposure", op = "eq", value = "broad" },
+  { field = "capacity", op = "eq", value = "default" },
+  { field = "admission", op = "in", values = ["after-accept", "open"] },
+  { field = "tracking", op = "in", values = ["detached", "discarded"] },
+  { field = "outcome", op = "in", values = ["discarded", "leaf-logged"] },
+  { field = "shutdown", op = "eq", value = "open-admission" },
+  { field = "abort", op = "in", values = ["authorized-unsafe", "unauthorized"] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "exposure", op = "eq", value = "unknown" },
+  { field = "exposure_contract", op = "eq", value = "missing" },
+  { field = "capacity", op = "eq", value = "missing" },
+  { field = "tracking", op = "eq", value = "missing" },
+  { field = "cancellation", op = "eq", value = "missing" },
+  { field = "drain", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-overload"
+[checks.rules.when]
+field = "capacity"
+op = "eq"
+value = "full"
+[[checks.rules]]
+outcome = "typed-incomplete"
+[checks.rules.when]
+field = "drain"
+op = "eq"
+value = "incomplete"
+
+[[checks]]
+id = "source-identity"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [["STD-0825", "languages/rust/RUST-SECURITY-STANDARDS.md"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0825"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0825", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "bind listener exposure admission connection work outcomes and shutdown to explicit owners"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0825"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/security.md",
+  "topics/concurrency.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/async.md",
+  "profiles/languages/rust/security.md",
+]
+
+[[checks]]
+id = "rust-listener-policy"
+type = "text"
+path = "profiles/languages/rust/security.md"
+required = [
+  "## Listener Admission And Lifecycle",
+  "service exposure contract",
+  "before accepting work that would exceed the owned limit",
+  "register connection work",
+  "selected lifecycle owner before",
+  "observe success, failure, panic, and",
+  "cancellation; logging inside detached work is not ownership.",
+  "close admission, signal cancellation, drain tracked work",
+  "typed incomplete-shutdown outcome",
+  "typed overload outcome before acceptance.",
+  "## No Fallback",
+  "## Verification",
+]
+prohibited = []
+
+[[checks]]
+id = "rust-async-owner"
+type = "text"
+path = "profiles/languages/rust/async.md"
+required = [
+  "## Own Spawned Work",
+  "observes success, failure, panic, and cancellation",
+  "## Coordinate Shutdown",
+  "closes admission for new owned work",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+heading = "## Network Listener Limits"
+required = [
+  "security.md#listener-admission-and-lifecycle",
+  "async.md#own-spawned-work",
+  "async.md#coordinate-shutdown",
+]
+prohibited = ["0.0.0.0:9500", "127.0.0.1:9500", "MAX_CONNECTIONS", "Semaphore", "acquire_owned", "listener.accept()", "tokio::spawn"]
+
+[[checks]]
+id = "legacy-sibling"
+type = "text"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+required = ["## Panic Policy"]
+prohibited = []
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F026 | Resolved in Milestone 7.4b5f |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-listener-lifecycle` suite checks service-contract exposure,"]
+prohibited = ["`verify-rust-listener-lifecycle.sh` checks service-contract exposure,"]

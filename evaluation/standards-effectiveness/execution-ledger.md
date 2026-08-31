@@ -15017,3 +15017,24 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   plan checks, and the complete 40-entrypoint checkpoint pass. Final graph: 40
   Bash checkers, 43 nodes, 271 edges, and 43 components; fresh graph evidence
   is required next.
+
+## 2026-08-31 - M6-I86 Rust Listener-Lifecycle Acceptance
+
+- Fresh post-M6-I85 evidence reports 40 Bash verifiers, 43 nodes, 271 edges,
+  and 43 components. Six verifiers have no executable inbound edge; the
+  144-line Rust listener-lifecycle verifier is the sole candidate at the
+  highest dependency wave 5. M6-I86 is `serial-coherent` at train order 201.
+- One ten-check owner-local suite preserves all 26 typed decisions, exact
+  `STD-0825` source identity and disposition, metadata closure, canonical Rust
+  Security and Rust Async ownership, the bounded legacy route and sibling,
+  finding closure, and the README projection.
+- Native metadata authority replaces helper execution. Four outgoing records
+  retain Rust async lifecycle and F025/F026 decomposition as separate gates;
+  six prior M6-I76, M6-I77, and M6-I80 records move to registered suite
+  evidence. Row-35 README-consumer evidence removes the retired checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 39-entrypoint checkpoint pass. Final graph: 39
+  Bash checkers, 42 nodes, 262 edges, and 42 components; fresh graph evidence
+  is required next.

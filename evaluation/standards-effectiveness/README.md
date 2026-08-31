@@ -936,7 +936,7 @@ through `STD-0721` and rejects global/alternate runtimes, detached tasks,
 leaf-only logging, open admission, silent incomplete drains, and unauthorized
 or interruption-unsafe force-abort fallback.
 
-`verify-rust-listener-lifecycle.sh` checks service-contract exposure,
+The registered `rust-listener-lifecycle` suite checks service-contract exposure,
 listener-owned admission capacity before acceptance, Rust Async lifecycle
 registration, terminal outcome observation, and ordered shutdown. It proves
 the exact disposition of `STD-0825`, preserves the canonical Rust Async owner,
