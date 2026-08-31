@@ -5814,3 +5814,25 @@ Verifier, graph, all 228 suites, numeric, generated, plan, and complete mixed
 evidence passes. Final graph: 51 Bash checkers, 55 nodes, 377 edges, and 55
 components. The obsolete checker, shell bridge, compatibility representation,
 dual authority, waiver, and fallback are absent.
+
+### M6-I75 Decision Traceability Admission
+
+Fresh post-M6-I74 evidence reports 51 Bash checkers, 55 nodes, 377 edges, and
+55 components. `verify-decision-traceability.sh` is the sole caller-free
+verifier and depends only on `templates/check-decision-traceability.sh`. The
+helper is also a distributed adopting-repository capability, so removing only
+one side would retain Bash or remove functionality.
+
+M6-I75 admits both paths as one `shared-contract` closure at train order 190.
+One standard-library Python package will own a standalone-copyable checker, a
+public import surface, a fixed Python contract-verification entrypoint, and
+safe-path smoke contracts for both commands. The verification entrypoint keeps
+the isolated-Git fixture semantics in the registered package-contract path;
+the existing documentation suite keeps policy and projection authority.
+
+The replacement preserves staged index isolation, explicit three-dot ranges,
+prior/current map union, exact and prefix triggers, strict map identities and
+profiles, artifact headings, ADR boundary identity, and unrelated-artifact
+rejection. No general command check, configured action, embedded shell, Bash
+wrapper, duplicated implementation, compatibility alias, inferred mode or map,
+waiver, or fallback is admitted.

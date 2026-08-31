@@ -5,16 +5,16 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I74 graph audit; do not preselect the next
-package from evidence captured before this accepted shared contract
+**Next slice:** implement and accept admitted M6-I75 decision-traceability
+Python closure at train order 190
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I74 replaced the source-gap checker with one
 bounded native baseline Markdown heading assertion at train order 189.
 
-**Latest admitted slice:** `none`; the next package requires fresh graph and
-ownership evidence.
+**Latest admitted slice:** M6-I75 replaces the decision-traceability verifier
+and its distributed Bash helper with one owned Python package.
 
 **Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
@@ -131,7 +131,7 @@ At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
 **Accepted boundary:** package records are accepted through M6-I74 at train
-order 189.
+order 189; M6-I75 is admitted at train order 190.
 
 **Current derived state:** 228 registered declarative suites, 51 retained Bash
 checkers, 55 executable nodes, 377 conservative reference edges, and 55
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I74 accepted at train order 189; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I75 Python traceability closure admitted at train order 190 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

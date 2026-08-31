@@ -14786,3 +14786,15 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   Verifier, graph, all-suite, numeric, generated, plan, and complete mixed
   evidence passes. Final graph: 51 Bash checkers, 55 nodes, 377 edges, 55
   components; fresh graph evidence is required next.
+
+## 2026-08-31 - M6-I75 Decision Traceability Admission
+
+- Fresh graph evidence reports decision traceability as the sole caller-free
+  verifier. Its only executable dependency is the distributed Bash helper;
+  both paths are one migration closure.
+- Admitted one standard-library Python package with a standalone checker and a
+  fixed Python verification entrypoint preserving all current isolated-Git
+  staged, range, map-union, artifact, and unrelated-ADR scenarios.
+- Existing Python package-contract and documentation-traceability suites remain
+  the registered authorities. M6-I75 is `shared-contract` at train order 190;
+  implementation and complete acceptance evidence are next.

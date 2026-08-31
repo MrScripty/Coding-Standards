@@ -6331,3 +6331,18 @@
   generated, plan, and complete mixed evidence pass. Final graph: 51 Bash
   checkers, 55 nodes, 377 edges, 55 components. No shell bridge, compatibility
   representation, dual authority, waiver, or fallback remains.
+
+## 2026-08-31 - M6-I75 Decision Traceability Admission
+
+- Fresh post-M6-I74 evidence leaves one caller-free verifier. Decision
+  traceability depends only on its distributed Bash template, so the verifier
+  and helper form one semantic and executable closure.
+- Admitted one standard-library `tools/decision_traceability` package owning a
+  standalone-copyable Python checker, public API, fixed Python contract
+  verifier, and safe-path entrypoint contracts.
+- Existing package-contract authority will execute both Python entrypoints;
+  existing documentation-traceability authority retains policy and projection
+  closure while examples and the template hook move atomically to `.py`.
+- M6-I75 is admitted as `shared-contract` at train order 190. Exact package,
+  edge, documentation, coverage, mutation, and mixed acceptance evidence must
+  be frozen before either Bash path is accepted as removed.
