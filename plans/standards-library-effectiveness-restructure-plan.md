@@ -5,8 +5,8 @@
 **Current phase:** Milestone 7 verifier migration after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** implement and accept admitted M6-I75 decision-traceability
-Python closure at train order 190
+**Next slice:** run a fresh post-M6-I75 graph audit; do not preselect the next
+package from evidence captured before this accepted shared contract
 
 **Acceptance status:** `partial`
 
@@ -43,7 +43,7 @@ universal architecture policy.
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
 | A1 | Fixed scenarios improve or preserve every critical rubric dimension. | `satisfied` | [Baseline scores](../evaluation/standards-effectiveness/baseline-scores.md) and [current rescore](../docs/plans/planning-proportionality-recovery/reports/scenario-rescore.md) |
-| A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `partial` | [Generated owner map](../evaluation/standards-effectiveness/generated/rule-owner-map.tsv); [consolidation dispositions](../evaluation/standards-effectiveness/consolidation-dispositions.tsv) |
+| A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `pending` | [Generated owner map](../evaluation/standards-effectiveness/generated/rule-owner-map.tsv); [consolidation dispositions](../evaluation/standards-effectiveness/consolidation-dispositions.tsv) |
 | A3 | Two independent downstream pilots complete without loading the full library. | `pending` | Milestone 8 |
 | A4 | Migration and standards-version guidance is published. | `pending` | Milestone 8 |
 | A5 | Final manual review confirms the library is stack-agnostic, routed, concise, and free of competing normative owners. | `pending` | Milestone 8 |
@@ -139,7 +139,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | M6-I75 Python traceability closure admitted at train order 190 |
+| 7 | Role-based consolidation and verification migration | `Active` | M6-I75 Python traceability closure accepted at train order 190 |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -148,10 +148,9 @@ complete; `Accepted` requires the named evidence.
 without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-I74
-at train order 189, and M6-I75 is admitted at train order 190. The canonical
-package manifest contains the exact package state; the execution ledger
-contains detailed slice evidence.
+recorded `7.4c3` packages. Verification migration is accepted through M6-I75
+at train order 190. The canonical package manifest contains the exact package
+state; the execution ledger contains detailed slice evidence.
 
 **Accepted recovery boundary:** M6-I16 is accepted after one-owner final-state
 proof. The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
@@ -178,6 +177,35 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 **Acceptance gate:** every rule identifier has a final disposition; structural,
 routing, ownership, source-closure, and no-legacy checks pass; the final Python
 engine is the sole verification authority.
+
+## Simplicity And Ownership Review
+
+**Applicability:** `applicable`
+
+- Independent concepts and dimensions: routing, normative ownership,
+  verification migration, downstream pilots, and publication remain separate
+  milestones with distinct acceptance evidence.
+- State, identity, value, time, policy, and mechanism: canonical rule identity
+  and policy values stay in standards-owned records; package timing and
+  mechanism migration stay in lifecycle manifests and the engine plan.
+- Caller and composition-root knowledge: the Router composes the smallest
+  applicable standards set, while the verification engine composes registered
+  suites without moving policy into orchestration.
+- Representative change paths and forced owners: a checker migration changes
+  its owner-coherent suite, exact lifecycle records, and generated evidence
+  without forcing unrelated normative modules to change.
+- Stable Interfaces versus hidden knowledge: metadata, routing, dispositions,
+  and suite contracts expose typed authority rather than relying on headings,
+  filenames, or scattered plan narration.
+- Independent evolution, testing, failure, and replacement: standards owners,
+  reference material, migration packages, declarative checks, and pilots carry
+  separate evidence and can fail without inheriting each other's authority.
+- Necessary complexity and containment: temporary Bash graph evidence and
+  mixed execution are contained to Milestone 7 and have an explicit zero-Bash
+  deletion boundary.
+- Deletion and cumulative machinery result: each accepted slice deletes its
+  replaced Bash authority, and remaining migration machinery must disappear at
+  zero-Bash closure rather than becoming permanent infrastructure.
 
 ## Evidence Index
 

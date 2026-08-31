@@ -14798,3 +14798,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - Existing Python package-contract and documentation-traceability suites remain
   the registered authorities. M6-I75 is `shared-contract` at train order 190;
   implementation and complete acceptance evidence are next.
+
+## 2026-08-31 - M6-I75 Decision Traceability Acceptance
+
+- Accepted train order 190 with one standard-library Python package replacing
+  both the decision-traceability verifier and distributed Bash helper.
+- The fixed isolated-Git contract preserves staged/range isolation, map union,
+  artifact identity, strict profile/header handling, and positive and negative
+  fixture outcomes. The existing package contract executes both entrypoints.
+- Seven documentation assertions and three mutations preserve Python hook and
+  recipe projections while excluding Bash and legacy branch defaults. Two edge
+  records transfer helper execution to package-owned Python authority.
+- Numeric, exact 24/24 coverage renewal, 51/51 final coverage, verifier, graph,
+  all-suite, generated, plan, and complete mixed evidence passes. Final graph:
+  50 Bash checkers, 53 nodes, 373 edges, 53 components; fresh graph evidence is
+  required next.

@@ -70,3 +70,25 @@ staged write-set review.
 
 The final exact write set and coverage renewal are frozen after the Python
 package and governed documentation projections compile together.
+
+## Acceptance
+
+Accepted at train order 190. The package exposes one public standard-library
+implementation and two fixed repository entrypoints: CLI help and the complete
+isolated-Git contract. The former fixture verifier and distributed Bash helper
+are deleted; the template hook and recipe invoke the standalone Python copy.
+
+The contract verifier preserves missing-mode rejection, staged map and artifact
+isolation, successful staged enforcement, explicit range revisions independent
+of unstaged state, unrelated ADR rejection, removed-row coverage, and invalid
+header/profile outcomes. The seven-check documentation suite additionally
+owns the hook, recipe, former-source, and legacy-default projections. Three
+disposable mutations prove those new projections reject regression.
+
+Two exact native-engine edge dispositions transfer helper execution to the
+existing package-contract assertion. Fresh generated evidence reports 50 Bash
+checkers, 53 nodes, 373 edges, and 53 components. Package smoke, focused tests,
+numeric lifecycle, exact 24/24 coverage renewal, 51/51 final coverage, all
+verifier and graph tests, all 228 suites, plan validation, and the complete
+50-entrypoint mixed checkpoint pass. No Bash bridge, compatibility alias,
+copied implementation, inferred input, waiver, or fallback remains.

@@ -1677,7 +1677,7 @@
       ]
     },
     {
-      "digest": "sha256:b6586079c08889f2cf98b4a21d1be80711a527e216605550a4202ffac46a4cbd",
+      "digest": "sha256:837b92a10798599767d87a50cacfe2d6157cb989e8952de4cbddec7595b34558",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1689,7 +1689,7 @@
       ]
     },
     {
-      "digest": "sha256:ef4abe39a775883d490e7c00a95053eef8d54279daf94d80e2c0f0f517038e11",
+      "digest": "sha256:d70aa5d533021014d498526afd7386158c677de8038f816964f68b63b7c6c11d",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1900,7 +1900,7 @@
       ]
     },
     {
-      "digest": "sha256:58d2907708663bb2404fb43ff9bb02a5be8981eebfb413ff5a3dc45fe6edb9ad",
+      "digest": "sha256:80c10157637de19003398023c6444141912c3a1b28eb17b3813d9834cdbd0430",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3058,7 +3058,7 @@
       ]
     },
     {
-      "digest": "sha256:6b5bfbfc8f8478eb17aad7b123e85b9001a029334ea043808dd64ce52462cfd1",
+      "digest": "sha256:1a519abdf7ff52049c24d735406fac05978e4f091a386140637bc2baf2551a95",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -6136,7 +6136,7 @@
       ]
     },
     {
-      "digest": "sha256:457da92fcae23d9501a4e257ca3249b6f84028d5220a1e7a7927b1bb64a1b859",
+      "digest": "sha256:c554c3de3fac68a2f0816aaa9484c778b3b748c53b36b4ab72057b37de9282a2",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6148,7 +6148,7 @@
       ]
     },
     {
-      "digest": "sha256:e96eec1fbf64bb2fb83673bbd2aa03f5abae6742ba707b1dac7d35ab600bb1be",
+      "digest": "sha256:25999f0b2572caaf4b9effd641d26a8ceff83809a57318a7fafdcb2fc0d70de4",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7722,7 +7722,7 @@
       ]
     },
     {
-      "digest": "sha256:23edb096c9fcdcb0673096f0c1f2744aee7caecb6b28b7d3e4743fdc0b456fd5",
+      "digest": "sha256:d85bf66bae5530bd1aa6aeac469381616411d1e653c78a3d99ae3eca782ad2f7",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
       "state": "present",
       "uses": [
@@ -9276,7 +9276,7 @@
       ]
     },
     {
-      "digest": "sha256:e31e7d53c0714d16863f32408870bdced302567f2bddf04d706b1a4730017b8e",
+      "digest": "sha256:c0503ebdaf2be2d0e995d516895adae859e1e5941d18a63dedc49f7e953f7ddd",
       "path": "evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml",
       "state": "present",
       "uses": [
@@ -11536,33 +11536,6 @@
         {
           "check": "derived-readme-consumers",
           "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:de3d325874d9e6fbf0a21c9094980e7b3c490ba9902a47bbc6a3d73c4d4053ad",
-      "path": "evaluation/standards-effectiveness/verify-decision-traceability.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "manifested-content",
           "suite": "milestone-7-row-35-decomposition"
         },
         {
@@ -15626,7 +15599,7 @@
       ]
     },
     {
-      "digest": "sha256:81c51437a98f649b3d92f41058666e38f31d9398e73b6499a4911b93c0377ca3",
+      "digest": "sha256:7b2ff2130844f727d9bf58247e0d02534e445ceadcd1679fb32303a8c96785de",
       "path": "reference/recipes/documentation.md",
       "state": "present",
       "uses": [
@@ -16357,7 +16330,7 @@
       ]
     },
     {
-      "digest": "sha256:749e726277ca74ebf73dabcf1f14a13198d2e9f26831d2d9b07c3648567227b5",
+      "digest": "sha256:54eafd955e6658888b7c7f17a8374ba5d38427af0311a8883345bf3a2e74768a",
       "path": "templates/lefthook.yml",
       "state": "present",
       "uses": [
@@ -16365,6 +16338,64 @@
           "check": "lefthook-legacy-closure",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "hook",
+          "role": "content",
+          "suite": "documentation-traceability-policy"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:4a367fa39ae9c8ecbc92caedde00c6c107b9edf00a022cfd864d081a46e36ef2",
+      "path": "tools/decision_traceability/decision_traceability/__init__.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5228ba55c16e54a8a367b2104d860b74829a464235fa2b6dd02be21c0d5bd7c7",
+      "path": "tools/decision_traceability/decision_traceability/check.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "checker-contract",
+          "role": "content",
+          "suite": "documentation-traceability-policy"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:aa7f8222a952ea4a90e6a6a8e9834b64cc9c2b0ba68c3c5ce3dbc5f838601f79",
+      "path": "tools/decision_traceability/pyproject.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:76b3c632590acfc922c47a6915442e1797c10b3b8608b8496f50fff8986fec85",
+      "path": "tools/decision_traceability/verify_contract.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
         }
       ]
     },
@@ -18351,6 +18382,23 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ca800c8b1eda572af60c33ccd877c5005aa000c9c123546c21795d20c79b04a3",
+      "path": "tools/standards_verifier/standards_verifier/checks/baseline_markdown_headings.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "migration-python-candidate-completeness",
+          "role": "package-python",
+          "suite": "checker-migration-packages"
         }
       ]
     },
@@ -22015,7 +22063,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:d5e64a430239e7bbba133055dd9b04b4d72a4dd96a861f2370ec64e74e1748e2",
+    "digest": "sha256:4193ed6555e499812eb59b36b4e8a663aa324ae9aac3f3bfeb7000a120c4dca2",
     "uses": [
       {
         "check": "python-package-contract",
@@ -22367,7 +22415,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:e31e7d53c0714d16863f32408870bdced302567f2bddf04d706b1a4730017b8e",
+      "digest": "sha256:c0503ebdaf2be2d0e995d516895adae859e1e5941d18a63dedc49f7e953f7ddd",
       "id": "documentation-traceability-policy",
       "path": "evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml",
       "requires": []

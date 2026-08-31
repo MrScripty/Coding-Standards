@@ -18,7 +18,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.dependencies.requirement-and-ownership
 [[attestations]]
-requirement_id = "sha256:1ecdd1dfc58e5204718651f74818ce388aa0b89cb6f3718cde788dd037bcfda4"
+requirement_id = "sha256:4c42769d986de472aee6bc64c0fd03471cb1d956e64132302e0c2b64b82bbd68"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md",
@@ -28,6 +28,7 @@ evidence = [
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
   "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
   "docs/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+  "docs/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for topic.dependencies.requirement-and-ownership is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."

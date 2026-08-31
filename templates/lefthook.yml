@@ -114,7 +114,7 @@ pre-commit:
     # Decision traceability check (required when adopting documentation standards)
     # Copy the checker and project-owned map into scripts/ and .standards/.
     decision-traceability:
-      run: ./scripts/check-decision-traceability.sh --mode staged --map .standards/decision-traceability.tsv
+      run: python3 ./scripts/check-decision-traceability.py --mode staged --map .standards/decision-traceability.tsv
 
 # ─────────────────────────────────────────────────────────────────
 # Pre-push hooks (run before pushing)

@@ -2,7 +2,7 @@ schema_version = 5
 
 # router.generated-contract-profile-applicability
 [[attestations]]
-requirement_id = "sha256:98b3aa2984782ab7e848223b5557ebb27c6c4a21f4fb970b58d3534d2ba63523"
+requirement_id = "sha256:e22066a69fbeb95066ce2847b87ec05fc3fd1168326094666d391870d5e8a62b"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -11,6 +11,7 @@ evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
   "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
 ]
 explicit_exclusions = []
 rationale = "The exact dependency-local requirement for router.generated-contract-profile-applicability is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."

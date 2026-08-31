@@ -6346,3 +6346,20 @@
 - M6-I75 is admitted as `shared-contract` at train order 190. Exact package,
   edge, documentation, coverage, mutation, and mixed acceptance evidence must
   be frozen before either Bash path is accepted as removed.
+
+## 2026-08-31 - M6-I75 Decision Traceability Acceptance
+
+- Added one standard-library Python package with a standalone-copyable checker,
+  public API, and package-owned isolated-Git contract verifier. The registered
+  package contract executes both fixed entrypoints.
+- Staged/range isolation, prior/current map union, trigger and artifact
+  identity, required headings, ADR boundary association, malformed map/profile
+  rejection, and successful paths pass without an inferred mode or map.
+- Seven documentation assertions and three disposable mutations preserve the
+  Python hook/recipe and reject both Bash projection and legacy branch defaults.
+- Two exact edge records transfer the former helper dependency to Python
+  package authority. Numeric lifecycle, exact 24/24 renewal and 51/51 final
+  coverage, verifier and graph tests, all 228 suites, generated and plan checks,
+  and the 50-entrypoint mixed checkpoint pass. Final graph: 50 Bash checkers,
+  53 nodes, 373 edges, 53 components. Both Bash paths are absent without a
+  bridge or fallback.

@@ -175,15 +175,17 @@ boundary. A mapped artifact is not interchangeable with another artifact type.
 
 ```bash
 mkdir -p scripts .standards
-cp templates/check-decision-traceability.sh scripts/check-decision-traceability.sh
+cp tools/decision_traceability/decision_traceability/check.py \
+  scripts/check-decision-traceability.py
 cp templates/decision-traceability-map.tsv \
   .standards/decision-traceability.tsv
-chmod +x scripts/check-decision-traceability.sh
 ```
 
-Copy [templates/check-decision-traceability.sh](templates/check-decision-traceability.sh)
-into your repo as `scripts/check-decision-traceability.sh` and replace every
-example map row with project-owned facts.
+Copy the standalone
+[Python decision-traceability checker](../../tools/decision_traceability/decision_traceability/check.py)
+into your repo as `scripts/check-decision-traceability.py` and replace every
+example map row with project-owned facts. It uses only Python's standard
+library and Git.
 
 ### Explicit Diff Modes
 
@@ -205,7 +207,7 @@ pre-commit:
   commands:
     decision-traceability:
       run: >-
-        ./scripts/check-decision-traceability.sh --mode staged
+        python3 ./scripts/check-decision-traceability.py --mode staged
         --map .standards/decision-traceability.tsv
 ```
 
@@ -217,7 +219,7 @@ jobs:
     steps:
       - name: Decision traceability
         run: |
-          ./scripts/check-decision-traceability.sh \
+          python3 ./scripts/check-decision-traceability.py \
             --mode range \
             --map .standards/decision-traceability.tsv \
             --base-ref "${{ github.event.pull_request.base.sha }}" \

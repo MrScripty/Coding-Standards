@@ -1,0 +1,14 @@
+[project]
+name = "decision-traceability"
+version = "0.1.0"
+description = "Standalone staged and range decision-traceability enforcement"
+requires-python = ">=3.11,<3.13"
+dependencies = []
+
+[tool.standards-package]
+schema-version = 2
+public-import-root = "tools.decision_traceability.decision_traceability"
+repository-entrypoints = [
+    { path = "tools/decision_traceability/decision_traceability/check.py", arguments = ["--help"], fixture = "reviewed-repository", remove = [] },
+    { path = "tools/decision_traceability/verify_contract.py", arguments = [], fixture = "reviewed-repository", remove = [] },
+]

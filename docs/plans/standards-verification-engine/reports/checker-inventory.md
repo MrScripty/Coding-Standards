@@ -5836,3 +5836,19 @@ profiles, artifact headings, ADR boundary identity, and unrelated-artifact
 rejection. No general command check, configured action, embedded shell, Bash
 wrapper, duplicated implementation, compatibility alias, inferred mode or map,
 waiver, or fallback is admitted.
+
+### M6-I75 Decision Traceability Acceptance
+
+The accepted Python package replaces both Bash paths as one executable closure.
+Its public module is the sole implementation; a fixed package-owned verifier
+recreates the staged and range Git repositories and is registered as a safe
+package-contract entrypoint. The existing documentation suite expands to seven
+checks covering explicit policy, hook and recipe projections, the Python CLI
+contract, and former-default exclusion.
+
+Two exact edge dispositions transfer the former verifier/helper execution to
+the registered package-contract assertion. Three projection mutations and the
+isolated-Git negative scenarios prove regression sensitivity. Final generated
+evidence reports 50 Bash verifiers, 53 nodes, 373 edges, and 53 components.
+Both Bash files are absent, and fresh graph evidence is required before the
+next package is selected.

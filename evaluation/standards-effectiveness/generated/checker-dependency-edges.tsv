@@ -65,7 +65,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
@@ -94,7 +93,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-source-package
 contract_reference	evaluation/standards-effectiveness/policy-impact-node-catalog.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/policy-impact/topic.architecture.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/policy-impact/workflow.planning.toml	evaluation/standards-effectiveness/check-plan-structure.sh
-contract_reference	evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml	templates/check-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
@@ -120,7 +118,6 @@ executable_reference	evaluation/standards-effectiveness/verify-cross-language-co
 executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-decision-table-engine.sh	evaluation/standards-effectiveness/check-decision-table.sh
-executable_reference	evaluation/standards-effectiveness/verify-decision-traceability.sh	templates/check-decision-traceability.sh
 executable_reference	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
@@ -248,7 +245,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-binding-generation-a
 helper_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-decision-table-engine.sh	evaluation/standards-effectiveness/check-decision-table.sh
-helper_dependency	evaluation/standards-effectiveness/verify-decision-traceability.sh	templates/check-decision-traceability.sh
 helper_dependency	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/check-metadata.sh

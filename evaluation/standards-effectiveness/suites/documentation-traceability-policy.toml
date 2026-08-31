@@ -48,12 +48,26 @@ prohibited = []
 id = "reference"
 type = "text"
 path = "reference/recipes/documentation.md"
-required = ["## Decision Traceability Examples", "trigger_path", "check-decision-traceability.sh --mode staged", "--base-ref"]
-prohibited = []
+required = ["## Decision Traceability Examples", "trigger_path", "check-decision-traceability.py --mode staged", "--base-ref"]
+prohibited = ["check-decision-traceability.sh"]
+
+[[checks]]
+id = "hook"
+type = "text"
+path = "templates/lefthook.yml"
+required = ["python3 ./scripts/check-decision-traceability.py --mode staged --map"]
+prohibited = ["check-decision-traceability.sh", "TRACEABILITY_BASE_REF", "TRACEABILITY_HOST_FACING_DIRS", "TRACEABILITY_STRUCTURED_PRODUCER_DIRS", "origin/master", "HEAD~1"]
+
+[[checks]]
+id = "checker-contract"
+type = "text"
+path = "tools/decision_traceability/decision_traceability/check.py"
+required = ["mode=options.mode", "map_path=options.map_path", "base_ref=options.base_ref", "head_ref=options.head_ref"]
+prohibited = ["TRACEABILITY_BASE_REF", "TRACEABILITY_HOST_FACING_DIRS", "TRACEABILITY_STRUCTURED_PRODUCER_DIRS", "origin/master", "HEAD~1"]
 
 [[checks]]
 id = "former-source"
 type = "text"
 path = "TOOLING-STANDARDS.md"
 required = []
-prohibited = ["trigger_path", "check-decision-traceability.sh --mode staged", "--base-ref"]
+prohibited = ["trigger_path", "check-decision-traceability.py --mode staged", "check-decision-traceability.sh --mode staged", "--base-ref", "TRACEABILITY_BASE_REF", "TRACEABILITY_HOST_FACING_DIRS", "TRACEABILITY_STRUCTURED_PRODUCER_DIRS", "origin/master", "HEAD~1"]

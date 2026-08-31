@@ -739,8 +739,9 @@ operational procedures rather than directory or file changes. It distinguishes
 no-documentation, boundary README, contract README, ADR, and runbook profiles
 and rejects the removed universal per-directory rule.
 
-`verify-decision-traceability.sh` runs the distributed checker in isolated Git
-repositories. It proves staged mode reads the index, range mode reads the
+The package-owned Python decision-traceability contract runs the standalone
+checker in isolated Git repositories. It proves staged mode reads the index,
+range mode reads the
 explicit base/head commits, mapped decision-bearing changes require their exact
 artifact, unstaged work is excluded from staged mode, and an unrelated ADR
 cannot satisfy another boundary. Prior/current map union cases ensure removing
