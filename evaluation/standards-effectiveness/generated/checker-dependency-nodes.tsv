@@ -9,7 +9,6 @@ evaluation/standards-effectiveness/verify-contract-decisions.sh	verifier	yes	com
 evaluation/standards-effectiveness/verify-contract-ownership.sh	verifier	yes	component-f164a80b7fcd9626ecdf1baea8eb7b6d59f71988c2161366670321e00d1383d3	1	no	0	4	4	3	0
 evaluation/standards-effectiveness/verify-cross-language-contract.sh	verifier	yes	component-9444f35220b1ea0a550576b912f1a32b42e57f4fda3b7092f366fa239fec0b65	1	no	3	1	4	1	4
 evaluation/standards-effectiveness/verify-decision-table-engine.sh	verifier	yes	component-bca18e32e5e45df9724ff0381026161e041085bcb3184d73291597d26ab2fe9b	1	no	1	1	0	1	1
-evaluation/standards-effectiveness/verify-errexit-zero-accumulation.sh	verifier	yes	component-82330fcd23472300543d28ddc93cb8b12457f9cc854c13427c90ec734946e389	1	no	0	0	1	0	0
 evaluation/standards-effectiveness/verify-historical-row-checker-ownership.sh	verifier	yes	component-23e5e52a2dfe695955c56d022462756dfeec0841de4c73c60f50f9cb742492cd	1	no	0	0	1	0	0
 evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	verifier	yes	component-ddde987c43bc18855aecc437804a618bf252fcaf558fc1c91a278caa9a3a7b41	1	no	1	2	3	2	2
 evaluation/standards-effectiveness/verify-interop-event-registration.sh	verifier	yes	component-919b5d2fe8b3b70c7ee0caa438a8cffd1c469f1d3e50c10d2de039158a6c3dcc	1	no	6	1	2	0	4
@@ -21,7 +20,7 @@ evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh	verifier	
 evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh	verifier	yes	component-7e14e2de6c5a319348ca02661400a550fdc2d379352ffb3c7f909a24d7ab1167	1	no	2	9	2	9	4
 evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh	verifier	yes	component-572e52e35399637057c19ce2396fe5791f1e3339d8c1db61cfb66be8f5abafd8	1	no	0	3	2	3	0
 evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh	verifier	yes	component-07ce6877f103bc57a9f71e7884007823ac917967a9324f9aaf13c2f7713006b3	1	no	4	2	2	2	2
-evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	verifier	yes	component-4940104761051e00bc2df0352d77702d7e95858d1a1fe20f7c52f5c6fbb01841	1	no	5	1	5	1	6
+evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	verifier	yes	component-4940104761051e00bc2df0352d77702d7e95858d1a1fe20f7c52f5c6fbb01841	1	no	5	1	6	1	6
 evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	verifier	yes	component-d047788b75a5f608467aafa63a1927cca98d61d77b26757df901e57d34358c90	1	no	3	1	2	1	1
 evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh	verifier	yes	component-b387100c78f8eac53cb170aab98689d945efe020e13a43137b0d5b771e38c525	1	no	6	1	1	1	4
 evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	verifier	yes	component-cc2c80ba2e3c3d16b63c85c1c516e07abd1394f36cd832dceafa58cb99ae1149	1	no	4	2	2	2	2

@@ -6689,3 +6689,21 @@
   Bash checkers, 38 nodes, 236 edges, and 38 components. No source-policy
   rewrite, nested execution, wrapper, compatibility representation, or
   fallback remains.
+
+## 2026-08-31 - M6-I91 Errexit Zero-Accumulation Acceptance
+
+- Fresh post-M6-I90 evidence reports 35 Bash verifiers, 38 nodes, 236 edges,
+  and 38 components. Two verifiers have no executable inbound edge, both at
+  dependency wave 0. The 37-line errexit zero-accumulation verifier is the
+  smaller coherent candidate. M6-I91 is `serial-coherent` at train order 206.
+- One two-check owner-local suite preserves the exact protected-target fixture
+  and requires the errexit-safe zero-accumulation assignment while prohibiting
+  the unsafe arithmetic-command form.
+- Two prior M6-I79 records move to registered suite evidence. No helper,
+  independent Bash gate, source-policy rewrite, compatibility representation,
+  or fallback is retained.
+- Two mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 34-entrypoint checkpoint pass. Final graph: 34 Bash checkers, 37
+  nodes, 236 edges, and 37 components.

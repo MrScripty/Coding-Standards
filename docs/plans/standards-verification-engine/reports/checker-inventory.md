@@ -6279,3 +6279,25 @@ generated, numeric, plan, and complete mixed evidence pass. Final graph: 35
 Bash checkers, 38 nodes, 236 edges, and 38 components. The old checker is
 absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I91 Errexit Zero-Accumulation Acceptance
+
+Fresh post-M6-I90 evidence reports 35 Bash verifiers, 38 nodes, 236 edges,
+and 38 components. Two verifiers have no executable inbound edge, both at
+dependency wave 0. The 37-line `verify-errexit-zero-accumulation.sh` is the
+smaller coherent candidate. Its sole inbound reference is historical contract
+evidence and it invokes no executable. The package is `serial-coherent`
+because no shared engine, schema, policy, or unresolved owner contract changes.
+
+One two-check `migration.parent-plan` suite preserves the exact protected-
+target fixture and requires the errexit-safe zero-accumulation assignment while
+prohibiting the unsafe arithmetic-command form. Two prior M6-I79 records
+transition to registered suite evidence.
+
+Two mutations reject protected-target drift and restoration of the unsafe
+arithmetic mechanism. Exact final compilation renews nine dependency-local
+requirements and leaves 42 stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 34 Bash checkers, 37 nodes, 236 edges, and 37 components. The old checker
+is absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

@@ -1161,6 +1161,11 @@ path = "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml"
 requires = []
 
 [[suites]]
+id = "errexit-zero-accumulation"
+path = "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []

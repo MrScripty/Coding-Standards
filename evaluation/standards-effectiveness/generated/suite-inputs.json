@@ -1787,7 +1787,7 @@
       ]
     },
     {
-      "digest": "sha256:6e6aa3f66498fcd60bb393fc79d6f374e752673e00bd9c5ecce07ae6cdbb816d",
+      "digest": "sha256:98e73b87e9b2191d4196fd35d00106c3fd1cfd8d653f4ecc0fbd7ea1cdfda533",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2065,7 +2065,7 @@
       ]
     },
     {
-      "digest": "sha256:dccdddea910e3660f828f26b55b2b7bdc024121ea52387712f16980762b53876",
+      "digest": "sha256:b893b51bf51c872d2c203c846aa00913cc531c5d12ea7a3734d5a52a1acdcad3",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3288,7 +3288,7 @@
       ]
     },
     {
-      "digest": "sha256:2b54b2c0d7595719a22621a4e617c766c2ddf7cf555808a86670ed5e3f8a4eb1",
+      "digest": "sha256:84a90a3e038cc7d53b2e800803cac7c8a55113f0ea0398bd99897c2e60cb4d5c",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4830,6 +4830,18 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:360cfa979165506c883e36947772ec1cc4bbfef4e48a8ba955a8bcf6160621c8",
+      "path": "evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "protected-target",
+          "role": "table",
+          "suite": "errexit-zero-accumulation"
         }
       ]
     },
@@ -6521,7 +6533,7 @@
       ]
     },
     {
-      "digest": "sha256:021571041a67ebbba4bb1697f5dcce2772cc6c15109072b970b05b043dbdb901",
+      "digest": "sha256:19ca6350dadc303282e82544a31efffa043b8949413a8b890ddf900fc964b984",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6533,7 +6545,7 @@
       ]
     },
     {
-      "digest": "sha256:4db1741ef8c1d7b10be250b7fbb17987863eac596b7816cd95811767f783604a",
+      "digest": "sha256:9ea0a05cbe7da015a23894df7a8a6a27dc2c6323ba155a138ad75e7002fde571",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -9122,7 +9134,7 @@
       ]
     },
     {
-      "digest": "sha256:1af8d806b524c997bd2a76a0e73aaba243e8cb0e023a362497110efbb71b4b69",
+      "digest": "sha256:e64b3b9da24b569b1e98eee514e1cc346d56c3eef2ccd7b303df6ea5ad136e7d",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -9796,6 +9808,18 @@
     {
       "digest": "sha256:c0503ebdaf2be2d0e995d516895adae859e1e5941d18a63dedc49f7e953f7ddd",
       "path": "evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:229d7475de1ba85bbef3126c340dd237591448994428921a4f15f4df705b38ac",
+      "path": "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml",
       "state": "present",
       "uses": [
         {
@@ -12247,28 +12271,6 @@
       ]
     },
     {
-      "digest": "sha256:20c2f9f39f5dc1f206fc3ee5d10bca315faab78dff883e77e300c87cb7a38619",
-      "path": "evaluation/standards-effectiveness/verify-errexit-zero-accumulation.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:2717e32caa7a88c96fbabfc32b1a4f6cbe3dafdfea64bb64beb4ea23c25db357",
       "path": "evaluation/standards-effectiveness/verify-historical-row-checker-ownership.sh",
       "state": "present",
@@ -12535,6 +12537,11 @@
       "path": "evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh",
       "state": "present",
       "uses": [
+        {
+          "check": "safe-mechanism",
+          "role": "content",
+          "suite": "errexit-zero-accumulation"
+        },
         {
           "check": "derived-readme-consumers",
           "role": "candidate-content",
@@ -22797,11 +22804,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:1af8d806b524c997bd2a76a0e73aaba243e8cb0e023a362497110efbb71b4b69",
+    "digest": "sha256:e64b3b9da24b569b1e98eee514e1cc346d56c3eef2ccd7b303df6ea5ad136e7d",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:b18d6d1d123270a22c3d367cd2a6640fa8c6fa7baa6c889f3a17c8e6f7c9729c",
+    "digest": "sha256:65f491dcaaf37371175311920b212a9ae28e499007b1404cb5ab60c3b49406d6",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24254,6 +24261,12 @@
       "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
       "id": "ipc-payload-validation",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:229d7475de1ba85bbef3126c340dd237591448994428921a4f15f4df705b38ac",
+      "id": "errexit-zero-accumulation",
+      "path": "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml",
       "requires": []
     },
     {
