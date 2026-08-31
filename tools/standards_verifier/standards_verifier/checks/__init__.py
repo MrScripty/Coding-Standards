@@ -4,6 +4,7 @@ from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
+from .baseline_markdown_headings import parse_baseline_markdown_headings_check
 from .contract_projection import parse_contract_projection_check
 from .decision import parse_decision_check
 from .derived_evidence import (
@@ -50,6 +51,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
     kind = raw.get("type")
     if kind == "text":
         return parse_text_check(raw, suite_id)
+    if kind == "baseline_markdown_headings":
+        return parse_baseline_markdown_headings_check(raw, suite_id)
     if kind == "decision":
         return parse_decision_check(raw, suite_id)
     if kind == "contract_projection":

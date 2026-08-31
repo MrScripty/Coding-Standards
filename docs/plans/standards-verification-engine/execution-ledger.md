@@ -6315,3 +6315,19 @@
 - M6-I74 is admitted at train order 189. Final-state dependency-local coverage,
   exact write set, negative parity, and all mixed acceptance evidence must be
   frozen before the checker is accepted as removed.
+
+## 2026-08-31 - M6-I74 Baseline Markdown Heading Acceptance
+
+- Added one strict `baseline_markdown_headings` check kind and activated it in
+  the existing source-index suite. Four evidence paths and explicit present or
+  absent classifications are the complete configuration surface.
+- Ten direct tests and five repository mutations preserve dynamic baseline
+  deletion detection, exact expected membership, current-state semantics,
+  malformed-input diagnostics, and typed Git unavailability.
+- Eight historical records transfer to suite authority; whole-checker numeric
+  lifecycle derives the two retired comparisons without a manual mapping.
+- Exact final compilation renews nine dependency-local requirements and keeps
+  42 stable. All 51 coverage subjects close. Verifier, graph, all 228 suites,
+  generated, plan, and complete mixed evidence pass. Final graph: 51 Bash
+  checkers, 55 nodes, 377 edges, 55 components. No shell bridge, compatibility
+  representation, dual authority, waiver, or fallback remains.

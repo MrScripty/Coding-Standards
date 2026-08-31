@@ -56,6 +56,49 @@ all Verifier and graph-engine tests; all registered suites; the complete mixed
 checkpoint; plan validation; source preservation; removed-path proof; and
 staged write-set review.
 
-The final exact write set and dependency-local attestation renewal are frozen
-after governed admission inputs are included in the final-state compilation
-and before acceptance.
+## Exact Acceptance Write Set
+
+- `docs/plans/standards-verification-engine/execution-ledger.md`
+- `docs/plans/standards-verification-engine/issues.md`
+- `docs/plans/standards-verification-engine/plan.md`
+- `docs/plans/standards-verification-engine/reports/checker-inventory.md`
+- `docs/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md`
+- `evaluation/standards-effectiveness/checker-migration-packages.tsv`
+- `evaluation/standards-effectiveness/executable-edge-dispositions.tsv`
+- `evaluation/standards-effectiveness/execution-ledger.md`
+- `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv`
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `evaluation/standards-effectiveness/generated/suite-inputs.json`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml`
+- `evaluation/standards-effectiveness/suites/checker-migration-packages.toml`
+- `evaluation/standards-effectiveness/suites/source-index-closures.toml`
+- `evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh`
+- `plans/standards-library-effectiveness-restructure-plan.md`
+- `tools/standards_verifier/README.md`
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`
+- `tools/standards_verifier/standards_verifier/checks/baseline_markdown_headings.py`
+- `tools/standards_verifier/tests/test_baseline_markdown_headings.py`
+
+Final-state compilation renews exactly nine dependency-local requirements: one
+Generated Contract, one Dependencies, five Planning, and two Verification
+requirements. Every changed view differs only in its `horizon` members; the
+other 42 requirements and all relationships, applicability programs,
+structural digests, and representation digests remain unchanged.
+
+## Acceptance
+
+M6-I74 is accepted. Ten direct tests and five disposable repository mutations
+cover exact pass behavior, unrecorded gaps, missing observations, contradictory
+current state, malformed evidence, and unavailable baseline authority. All
+eight historical edge records resolve to `source-index-closures`, the obsolete
+checker is absent, and whole-checker numeric lifecycle passes.
+
+All 51 current coverage requirements have exact certificates after the nine
+admitted renewals. Verifier tests, graph-engine tests, all 228 registered
+suites, generated freshness, plan validation, and the complete mixed checkpoint
+pass. Final graph: 51 Bash checkers, 55 nodes, 377 edges, and 55 components.

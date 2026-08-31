@@ -314,6 +314,18 @@ pathspec, directory expansion, ignore query, staged-content or history
 operation, configurable command, flag, root, or environment, package-specific
 branch, Bash execution, compatibility representation, or fallback.
 
+The `baseline_markdown_headings` check reads one exact section inventory,
+disposition table, expected-gap table, and summary-owned baseline commit. It
+uses the fixed repository Git adapter to derive removed ATX Markdown headings
+between that baseline and the current tree, then requires every removed
+undisposed section identity to equal the expected-gap membership. Each explicit
+classification maps to `present` or `absent` and validates the corresponding
+current heading state. Headers, identifiers, locations, classifications,
+reasons, baseline identity, and Git output are strict and typed. The check has
+no configurable command, revision, pathspec, diff flag, heading syntax,
+fallback baseline, copied source list, shell bridge, compatibility parser, or
+arbitrary action.
+
 The `reference_inventory` check reads one exact candidate TSV and one exact
 manifest TSV, using explicitly configured headers and path columns. It resolves
 every listed path as a contained regular file, selects candidate UTF-8 files

@@ -4,6 +4,18 @@ owner = "verification-engine.migration-source-closure"
 description = "Declarative closure proof for registered former normative source indexes without a policy-specific engine interface."
 
 [[checks]]
+id = "undisposed-baseline-headings"
+type = "baseline_markdown_headings"
+inventory = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+dispositions = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+expected = "evaluation/standards-effectiveness/fixtures/migration/undisposed-source-gaps.tsv"
+summary = "evaluation/standards-effectiveness/generated/summary.tsv"
+[checks.classifications]
+retained-diff = "present"
+deferred-row38 = "absent"
+deferred-row47 = "absent"
+
+[[checks]]
 id = "closure-manifest"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"

@@ -5798,3 +5798,19 @@ only contained evidence paths and explicit classification states. Eight
 historical source-gap records will transfer to the suite at acceptance. No
 configurable command, revision, pathspec, shell bridge, copied source list,
 compatibility representation, waiver, or fallback is admitted.
+
+### M6-I74 Baseline Markdown Heading Acceptance
+
+The bounded native assertion preserves the complete dynamic contract: one
+summary-owned baseline, fixed Markdown diff semantics, removed ATX locations,
+exact section identity resolution, disposition exclusion, expected-gap set
+equality, and classification-specific current-state checks. Ten direct tests
+and five disposable mutations cover the positive and negative boundary.
+
+All eight prior independent-gate records now resolve to the existing
+`source-index-closures` suite. Exact final compilation renews nine
+dependency-local requirements and leaves 42 stable, closing 51/51 coverage.
+Verifier, graph, all 228 suites, numeric, generated, plan, and complete mixed
+evidence passes. Final graph: 51 Bash checkers, 55 nodes, 377 edges, and 55
+components. The obsolete checker, shell bridge, compatibility representation,
+dual authority, waiver, and fallback are absent.

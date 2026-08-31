@@ -14773,3 +14773,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - M6-I74 is a `shared-contract` package at train order 189. Implementation,
   final coverage compilation, historical-edge transfer, numeric lifecycle,
   and complete mixed verification remain required before acceptance.
+
+## 2026-08-31 - M6-I74 Baseline Markdown Heading Acceptance
+
+- Accepted train order 189 with one bounded native assertion in the existing
+  source-index suite, removing the source-gap Bash checker without fallback.
+- Ten direct tests and five mutations preserve the summary baseline, removed
+  ATX locations, disposition exclusion, exact gap membership, current-state
+  classifications, strict inputs, and typed Git failure.
+- Eight historical records transfer to suite authority. Nine exact coverage
+  requirements renew while 42 remain stable and coverage closes 51/51.
+  Verifier, graph, all-suite, numeric, generated, plan, and complete mixed
+  evidence passes. Final graph: 51 Bash checkers, 55 nodes, 377 edges, 55
+  components; fresh graph evidence is required next.

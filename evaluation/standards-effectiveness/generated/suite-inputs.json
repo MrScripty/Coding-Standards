@@ -1677,7 +1677,7 @@
       ]
     },
     {
-      "digest": "sha256:2017cd8048f33077827f89a812067e963dc143da16234783e54872b63f795815",
+      "digest": "sha256:b6586079c08889f2cf98b4a21d1be80711a527e216605550a4202ffac46a4cbd",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1900,7 +1900,7 @@
       ]
     },
     {
-      "digest": "sha256:29f05fceb9551b25d781726e1791673a35c838664faeeec721e83d537ea0ab63",
+      "digest": "sha256:58d2907708663bb2404fb43ff9bb02a5be8981eebfb413ff5a3dc45fe6edb9ad",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2857,6 +2857,11 @@
           "suite": "source-index-closures"
         },
         {
+          "check": "undisposed-baseline-headings",
+          "role": "disposition-authority",
+          "suite": "source-index-closures"
+        },
+        {
           "check": "dispositions",
           "role": "content",
           "suite": "testing-acceptance-paths"
@@ -3053,7 +3058,7 @@
       ]
     },
     {
-      "digest": "sha256:79aa4bcce092569868e6aeb476764714a55b8f37f9ab8b945c9f7939dfb0189e",
+      "digest": "sha256:6b5bfbfc8f8478eb17aad7b123e85b9001a029334ea043808dd64ce52462cfd1",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4415,6 +4420,11 @@
           "check": "source-gaps",
           "role": "table",
           "suite": "readme-template-derivation-closure"
+        },
+        {
+          "check": "undisposed-baseline-headings",
+          "role": "expected-gap-authority",
+          "suite": "source-index-closures"
         }
       ]
     },
@@ -6126,7 +6136,7 @@
       ]
     },
     {
-      "digest": "sha256:0dea163ad8ef89eabcdbae6e59f9bb4ea445e18f0fc6180b2196bb6b7e2ec310",
+      "digest": "sha256:457da92fcae23d9501a4e257ca3249b6f84028d5220a1e7a7927b1bb64a1b859",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6138,7 +6148,7 @@
       ]
     },
     {
-      "digest": "sha256:e33ba40cce2116df29f36960c12fdfd116870279dfdbe1656051b7df6667c4a5",
+      "digest": "sha256:e96eec1fbf64bb2fb83673bbd2aa03f5abae6742ba707b1dac7d35ab600bb1be",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6401,6 +6411,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "rust-wire-representation"
+        },
+        {
+          "check": "undisposed-baseline-headings",
+          "role": "heading-inventory",
+          "suite": "source-index-closures"
         }
       ]
     },
@@ -6413,6 +6428,11 @@
           "check": "context-budget",
           "role": "baseline",
           "suite": "s1-routing"
+        },
+        {
+          "check": "undisposed-baseline-headings",
+          "role": "baseline-authority",
+          "suite": "source-index-closures"
         }
       ]
     },
@@ -10948,7 +10968,7 @@
       ]
     },
     {
-      "digest": "sha256:b4a929fb5f3a653c5e70ea466c1e52f687b0f1c09f67ede981141411fe12a0e9",
+      "digest": "sha256:663dd81fa5e18b8939ea92e1e24a05acc48a6e6b52b9fced8d1aa67bc092be7f",
       "path": "evaluation/standards-effectiveness/suites/source-index-closures.toml",
       "state": "present",
       "uses": [
@@ -12560,28 +12580,6 @@
     {
       "digest": "sha256:bac9620ebbacffe844aa0e2ce85e97767b4dcbc20ad8b210df47527194f80b01",
       "path": "evaluation/standards-effectiveness/verify-security-index-closure.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:55ef3540db8bb00249cc67132526cd447aefb3141638e5c9d6c9440651d5ec82",
-      "path": "evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh",
       "state": "present",
       "uses": [
         {
@@ -18330,7 +18328,7 @@
       ]
     },
     {
-      "digest": "sha256:ec9c4c9ec5c3149a133c5c3c5fd702b5295740de3a9ae9738994110e64d9a6a9",
+      "digest": "sha256:323d821c9afb6c4b1ff424e87ac8c4e3ffb65028eca9b29b9f1e032f3330c287",
       "path": "tools/standards_verifier/standards_verifier/checks/__init__.py",
       "state": "present",
       "uses": [
@@ -22017,7 +22015,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:dc47e007104b787667f07c4df6f449daba9cd95e0bd6cbae3505dcfdae55be86",
+    "digest": "sha256:d5e64a430239e7bbba133055dd9b04b4d72a4dd96a861f2370ec64e74e1748e2",
     "uses": [
       {
         "check": "python-package-contract",
@@ -22038,6 +22036,11 @@
         "check": "tracked-prompt",
         "role": "tracked-path-membership",
         "suite": "plan-implementation-entrypoint"
+      },
+      {
+        "check": "undisposed-baseline-headings",
+        "role": "markdown-source-membership",
+        "suite": "source-index-closures"
       }
     ]
   },
@@ -23082,7 +23085,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:b4a929fb5f3a653c5e70ea466c1e52f687b0f1c09f67ede981141411fe12a0e9",
+      "digest": "sha256:663dd81fa5e18b8939ea92e1e24a05acc48a6e6b52b9fced8d1aa67bc092be7f",
       "id": "source-index-closures",
       "path": "evaluation/standards-effectiveness/suites/source-index-closures.toml",
       "requires": []
