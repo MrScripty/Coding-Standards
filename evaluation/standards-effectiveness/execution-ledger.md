@@ -14734,3 +14734,12 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   Final graph: 53 Bash checkers, 57 nodes, 375 edges, 57 components. The
   inherited M6-I71 documentation projection is preserved and narrowly repaired;
   fresh graph evidence is required before another package is selected.
+
+## 2026-08-31 - M6-I73 Rust Binding Event Delivery Admission
+
+- Fresh graph evidence selects the only routine caller-free candidate and
+  freezes its 21 decisions, two exact members, three retained gates, and exact
+  final-state write set at train order 188.
+- Dependency-local preflight changes 14 of 51 coverage requirements while all
+  relationship, applicability, structural, and representation semantics stay
+  fixed. M6-I73 is admitted as `shared-contract`; implementation is next.

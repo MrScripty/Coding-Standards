@@ -5730,3 +5730,22 @@ inherited M6-I71 representation defect is preserved separately in
 repaired without changing rendered meaning. Final graph: 53 Bash checkers, 57
 nodes, 375 edges, and 57 components. No wrapper, copied policy, compatibility
 representation, dual authority, or fallback remains.
+
+### M6-I73 Rust Binding Event Delivery Admission
+
+Fresh post-M6-I72 evidence contains three caller-free verifiers. The source-gap
+and decision-traceability checkers retain their documented non-routine
+dispositions, leaving the 142-line Rust event-delivery checker as the only
+routine candidate. Its 21 typed decisions, two exact source/disposition
+members, metadata, profile, bounded legacy, finding, and documentation closure
+map to existing generic checks. Concurrency, Interop event registration, and
+the execution train remain independent gates.
+
+Disposable final-state compilation changes 14 of 51 dependency-local coverage
+requirements without changing any selected relationship, relationship
+fingerprint, applicability program, structural digest, or representation
+digest. The 13 Commit requirements advance only through reviewed README and
+suite-evidence fingerprints; Planning projection completeness advances only
+through its suite-evidence fingerprint. The other 37 requirements remain
+stable. M6-I73 is therefore admitted at train order 188 as a
+`shared-contract` package with exact renewal and write-set authority.

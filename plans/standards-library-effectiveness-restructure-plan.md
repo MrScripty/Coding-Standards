@@ -5,8 +5,8 @@
 **Current phase:** Milestone 7 verifier migration after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I72 graph audit; do not preselect the next
-package from evidence captured before this accepted package
+**Next slice:** implement and accept the admitted M6-I73 Rust binding event
+delivery shared-contract package within its frozen write set
 
 **Acceptance status:** `partial`
 
@@ -139,7 +139,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | M6-I72 accepted; fresh graph audit is next |
+| 7 | Role-based consolidation and verification migration | `Active` | M6-I73 shared-contract package admitted; atomic acceptance is next |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -149,8 +149,8 @@ without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
 recorded `7.4c3` packages. Verification migration is accepted through M6-I72
-at train order 187, and no later package is admitted. The canonical package
-manifest contains the exact package state; the execution ledger contains
+at train order 187. M6-I73 is admitted at train order 188 with an exact
+shared-contract coverage-renewal boundary; the execution ledger contains
 detailed slice evidence.
 
 **Accepted recovery boundary:** M6-I16 is accepted after one-owner final-state

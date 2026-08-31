@@ -6257,3 +6257,19 @@
 - This documentation migration changes neither verifier lifecycle authority
   nor package admission; M6-I72 remains the latest accepted package and a fresh
   graph audit remains next.
+
+## 2026-08-31 - M6-I73 Rust Binding Event Delivery Admission
+
+- Fresh post-M6-I72 evidence leaves three caller-free verifiers. The two
+  documented exceptional paths remain deferred, selecting the 142-line Rust
+  event-delivery checker as the only routine candidate.
+- Existing generic checks preserve all 21 typed decisions, two exact source
+  and disposition members, metadata, profile, bounded legacy, finding, and
+  documentation evidence while retaining three independent gates.
+- Disposable final-state comparison changes exactly 14 of 51 dependency-local
+  coverage requirements: all 13 Commit requirements and Planning projection
+  completeness. Relationship sets, applicability, structural and
+  representation digests remain stable; 37 requirements are unchanged.
+- Admitted M6-I73 at train order 188 as `shared-contract`, with exact write set
+  and renewal evidence frozen in the admission report. Implementation and
+  attestation renewal remain uncommitted until the atomic acceptance slice.
