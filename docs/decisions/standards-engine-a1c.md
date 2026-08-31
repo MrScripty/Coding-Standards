@@ -117,8 +117,9 @@ Capture uses a traced roots-only authority compilation:
    loaders;
 4. reject missing, escaped, contradictory, duplicate, or unsupported inputs;
 5. construct the immutable content set from the recorded closure;
-6. rerun the same compilers against the in-memory content set and require the
-   same path closure and semantic outputs; and
+6. rerun the same compilers through a second recording source over the in-memory
+   content set and require the same requested-path closure and semantic outputs;
+   an uncaptured replay request is a closure mismatch; and
 7. publish the content and new snapshot root in one SQLite transaction.
 
 The traversal is linear in the requested files and declared references. It
@@ -284,6 +285,14 @@ content deduplication remain separate contracts. Generated freshness, schema
 conformance, public producer behavior, and domain identity evidence remain
 separate claims.
 
+The public decoder validates one incoming value and retains that proof in the
+frozen generated representation. Nested construction during that decode does
+not repeat validation. Direct generated-model construction remains a complete
+smart-constructor boundary. Engine-produced generated results retain their
+proof through the facade, which checks exact membership in the schema-derived
+operation result algebra before serialization rather than validating the same
+unchanged value again.
+
 The A1c public replacement advances the facade schema to version 12 and the
 public handle representation to version 5. These numbers identify incompatible
 serialized contracts, not implementation releases. Domain owners retain only
@@ -296,6 +305,12 @@ schema migration is provided. The repository has no retained A1b store or
 external client requiring overlap. Cross-engine snapshot compatibility remains
 deferred; a later stable-release plan must define it before making such a
 promise.
+
+The current role and bump rules are recorded in the
+[A1c corrective version matrix](../plans/standards-engine-a1c-repair/reports/dependency-and-version-decisions.md).
+Interface, request, result, handle, AnalysisState format, Analysis identity, and
+SQLite store values advance only for their named promise; none is an umbrella
+implementation or release version.
 
 ### Coverage
 

@@ -8,8 +8,10 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from tools.standards_analysis.standards_analysis import (
+    AnalysisState as DomainAnalysisState,
     AnalysisExecutionContext,
     AuthorizationAuthorityContract,
     AuthorizationClaim,
@@ -19,6 +21,7 @@ from tools.standards_analysis.standards_analysis import (
 )
 from tools.standards_engine.standards_engine import (
     AnalysisChildInspectionResult,
+    AnalysisHandle,
     AnalysisInspectionResult,
     CreateSnapshotCall,
     InspectCall,
@@ -28,6 +31,7 @@ from tools.standards_engine.standards_engine import (
     ResolveCall,
     StandardsEngine,
 )
+from tools.standards_snapshots.standards_snapshots import SnapshotId
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -210,6 +214,75 @@ finally:
         inspected = json.loads(completed.stdout)
         self.assertEqual(inspected[0]["kind"], "analysis-inspection-result")
         self.assertEqual(inspected[1]["kind"], "analysis-child-inspection-result")
+
+    def test_snapshot_creation_rejects_changed_replay_path_closure(self) -> None:
+        class Compiled:
+            @staticmethod
+            def semantic_signature() -> tuple[str]:
+                return ("same",)
+
+        calls = 0
+
+        def compile_with_extra_replay_read(source):
+            nonlocal calls
+            calls += 1
+            source.read_bytes("CORE-STANDARDS.md")
+            if calls == 2:
+                source.read_bytes("STANDARDS-ROUTER.md")
+            return Compiled()
+
+        with tempfile.TemporaryDirectory() as temporary:
+            engine = StandardsEngine.open_repository(
+                REPO_ROOT,
+                store_path=Path(temporary) / "standards.sqlite3",
+            )
+            try:
+                with mock.patch.object(
+                    StandardsEngine,
+                    "_compile",
+                    side_effect=compile_with_extra_replay_read,
+                ):
+                    result = engine.create_snapshot(
+                        CreateSnapshotCall.from_value({"kind": "create-snapshot"})
+                    )
+            finally:
+                engine.close()
+
+        self.assertIsInstance(result, RejectedResult)
+        self.assertEqual(result.code, "SNAPSHOT.CLOSURE_MISMATCH")
+
+    def test_cold_load_rejects_obsolete_domain_contracts(self) -> None:
+        snapshot_id = SnapshotId(self.snapshot.id)
+        state = DomainAnalysisState(
+            snapshot_id,
+            snapshot_id,
+            (
+                {
+                    "kind": "modification",
+                    "accepted_ids": [POLICY],
+                    "proposed_ids": [POLICY],
+                    "scope": {"kind": "whole-artifact"},
+                },
+            ),
+            domain_contracts=(
+                *self.engine._domain_contracts(),
+                {"id": "obsolete-contract", "version": "1"},
+            ),
+        )
+        self.engine._snapshots.publish_aggregate(state.aggregate(()))
+        handle = AnalysisHandle.from_value(
+            {
+                "kind": "analysis-handle",
+                "id": state.analysis_id,
+                "schema_version": 5,
+            }
+        )
+
+        result = self.engine.inspect(InspectCall(handle))
+
+        self.assertIsInstance(result, RejectedResult)
+        self.assertEqual(result.code, "ANALYSIS.DOMAIN_CONTRACT_UNSUPPORTED")
+        self.assertEqual(result.outcome, "unsupported")
 
     def prepare(self, *, prior: dict[str, object] | None = None):
         request: dict[str, object] = {

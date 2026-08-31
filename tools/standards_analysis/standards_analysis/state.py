@@ -18,6 +18,19 @@ from .keys import analysis_identity, analysis_key, analysis_key_bytes, raw_diges
 ANALYSIS_CONTRACT_VERSION = 4
 ANALYSIS_IDENTITY_DOMAIN = "coding-standards:analysis:v5"
 ANALYSIS_AGGREGATE_KIND = "analysis-state"
+ANALYSIS_STATE_FIELDS = {
+    "base_snapshot",
+    "proposed_snapshot",
+    "changes",
+    "semantic_proposals",
+    "fact_observations",
+    "dispositions",
+    "coverage_attestations",
+    "authorization_records",
+    "domain_contracts",
+    "execution_contracts",
+    "contract_version",
+}
 
 
 def _error(code: str, message: str) -> AnalysisError:
@@ -262,40 +275,42 @@ class AnalysisState:
             raw = json.loads(payload)
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             raise _error("ANALYSIS.INVALID_STATE", "Analysis state payload is invalid.") from error
-        if (
-            type(raw) is not dict
-            or set(raw)
-            != {
-                "base_snapshot",
-                "proposed_snapshot",
-                "changes",
-                "semantic_proposals",
-                "fact_observations",
-                "dispositions",
-                "coverage_attestations",
-                "authorization_records",
-                "domain_contracts",
-                "execution_contracts",
-                "contract_version",
-            }
-            or raw["contract_version"] != ANALYSIS_CONTRACT_VERSION
-        ):
+        if type(raw) is not dict or type(raw.get("contract_version")) is not int:
             raise _error(
-                "ANALYSIS.STATE_CONTRACT_UNSUPPORTED",
-                "Analysis state contract is unsupported.",
+                "ANALYSIS.INVALID_STATE",
+                "Analysis state requires an integer contract version.",
             )
-        state = cls(
-            SnapshotId(raw["base_snapshot"]),
-            SnapshotId(raw["proposed_snapshot"]),
-            raw["changes"],
-            raw["semantic_proposals"],
-            raw["fact_observations"],
-            raw["dispositions"],
-            raw["coverage_attestations"],
-            raw["authorization_records"],
-            raw["domain_contracts"],
-            raw["execution_contracts"],
-        )
+        if raw["contract_version"] != ANALYSIS_CONTRACT_VERSION:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.STATE_CONTRACT_UNSUPPORTED",
+                    "unsupported",
+                    "Analysis state contract is unsupported.",
+                )
+            )
+        if set(raw) != ANALYSIS_STATE_FIELDS:
+            raise _error(
+                "ANALYSIS.INVALID_STATE",
+                "Analysis state fields are invalid.",
+            )
+        try:
+            state = cls(
+                SnapshotId(raw["base_snapshot"]),
+                SnapshotId(raw["proposed_snapshot"]),
+                raw["changes"],
+                raw["semantic_proposals"],
+                raw["fact_observations"],
+                raw["dispositions"],
+                raw["coverage_attestations"],
+                raw["authorization_records"],
+                raw["domain_contracts"],
+                raw["execution_contracts"],
+            )
+        except (AnalysisError, KeyError, TypeError, ValueError) as error:
+            raise _error(
+                "ANALYSIS.INVALID_STATE",
+                "Analysis state fields do not satisfy the current contract.",
+            ) from error
         if state.encode() != payload:
             raise _error(
                 "ANALYSIS.NONCANONICAL_STATE",
@@ -387,6 +402,7 @@ __all__ = (
     "ANALYSIS_AGGREGATE_KIND",
     "ANALYSIS_CONTRACT_VERSION",
     "ANALYSIS_IDENTITY_DOMAIN",
+    "ANALYSIS_STATE_FIELDS",
     "AnalysisState",
     "analysis_handle",
     "child_handle",

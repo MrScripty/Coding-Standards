@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import unittest
+from dataclasses import dataclass
+from types import MappingProxyType
+from typing import ClassVar
 
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from tools.standards_contracts.standards_contracts import (
     ContractError,
+    ContractRuntime,
     compile_contracts,
 )
 
@@ -184,6 +188,38 @@ class ContractSemanticsTest(unittest.TestCase):
         self.assertEqual(selected.definition, "QueryCall")
         self.assertTrue(selected.instance_pointer.startswith("/snapshot"))
         self.assertIsNotNone(selected.keyword)
+
+    def test_decode_constructs_from_one_root_validation_proof(self) -> None:
+        @dataclass(frozen=True, slots=True)
+        class ValidatedRecord:
+            __definition__: ClassVar[str] = "ValidatedRecord"
+            __contract_fields__: ClassVar = MappingProxyType({"value": "value"})
+
+            value: int
+
+            def __post_init__(self) -> None:
+                raise AssertionError(
+                    "validated decoding must not invoke model validation"
+                )
+
+        schema = {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://coding-standards.local/tests/runtime",
+            "$defs": {
+                "ValidatedRecord": {
+                    "type": "object",
+                    "required": ["value"],
+                    "properties": {"value": {"type": "integer"}},
+                    "additionalProperties": False,
+                }
+            },
+        }
+        runtime = ContractRuntime(schema, {"ValidatedRecord": ValidatedRecord})
+
+        decoded = runtime.decode("ValidatedRecord", {"value": 7})
+
+        self.assertIsInstance(decoded, ValidatedRecord)
+        self.assertEqual(decoded.value, 7)
 
 
 if __name__ == "__main__":

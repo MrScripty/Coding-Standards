@@ -226,12 +226,25 @@ class StandardsEngine:
             )
             first = self._compile(recording)
             frozen = recording.freeze()
-            second = self._compile(frozen)
-            if first.semantic_signature() != second.semantic_signature():
+            replay = RecordingContentSource(frozen)
+            try:
+                second = self._compile(replay)
+            except MetadataError as error:
+                if error.failure.code != "INPUT.UNAVAILABLE":
+                    raise
                 return self._reject(
                     "SNAPSHOT.CLOSURE_MISMATCH",
                     "invalid",
-                    "Frozen snapshot replay changed canonical semantic output.",
+                    "Frozen snapshot replay requested uncaptured authority.",
+                )
+            if (
+                recording.requested_paths != replay.requested_paths
+                or first.semantic_signature() != second.semantic_signature()
+            ):
+                return self._reject(
+                    "SNAPSHOT.CLOSURE_MISMATCH",
+                    "invalid",
+                    "Frozen snapshot replay changed requested authority or canonical output.",
                 )
             summary = self._snapshots.create_snapshot(
                 CapturedContent(
@@ -625,6 +638,24 @@ class StandardsEngine:
                     "ANALYSIS.IDENTITY_MISMATCH",
                     "invalid",
                     "Stored analysis bytes do not match the handle.",
+                )
+            )
+        stored_contracts = tuple(
+            sorted(
+                (str(value["id"]), str(value["version"]))
+                for item in state.domain_contracts
+                for value in (self._plain(item),)
+            )
+        )
+        current_contracts = tuple(
+            sorted((value["id"], value["version"]) for value in self._domain_contracts())
+        )
+        if stored_contracts != current_contracts:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.DOMAIN_CONTRACT_UNSUPPORTED",
+                    "unsupported",
+                    "Stored analysis domain contracts are unsupported.",
                 )
             )
         return state

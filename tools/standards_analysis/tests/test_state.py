@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import unittest
 
 from tools.standards_analysis.standards_analysis import AnalysisError
@@ -93,6 +94,33 @@ class AnalysisStateTest(unittest.TestCase):
         self.assertEqual(aggregate.kind, "analysis-state")
         self.assertEqual(aggregate.snapshots, (BASE, PROPOSED))
         self.assertEqual(aggregate.payload, state.encode())
+
+    def test_malformed_current_state_is_invalid(self) -> None:
+        value = json.loads(_state().encode())
+        del value["changes"]
+
+        with self.assertRaises(AnalysisError) as caught:
+            AnalysisState.decode(
+                json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+            )
+
+        self.assertEqual(caught.exception.failure.code, "ANALYSIS.INVALID_STATE")
+        self.assertEqual(caught.exception.failure.outcome, "invalid")
+
+    def test_well_formed_future_state_is_unsupported(self) -> None:
+        value = json.loads(_state().encode())
+        value["contract_version"] = 5
+
+        with self.assertRaises(AnalysisError) as caught:
+            AnalysisState.decode(
+                json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+            )
+
+        self.assertEqual(
+            caught.exception.failure.code,
+            "ANALYSIS.STATE_CONTRACT_UNSUPPORTED",
+        )
+        self.assertEqual(caught.exception.failure.outcome, "unsupported")
 
 
 if __name__ == "__main__":

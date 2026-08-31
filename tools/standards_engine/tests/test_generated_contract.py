@@ -7,6 +7,7 @@ import sys
 import tomllib
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 from tools.standards_contracts.standards_contracts import (
     compile_contracts,
@@ -64,6 +65,36 @@ class GeneratedContractTest(unittest.TestCase):
 
         with self.assertRaisesRegex(RuntimeError, "outside the query result algebra"):
             facade._result("query", WrongQueryResult())
+
+    def test_prepare_facade_passes_the_complete_generated_call(self) -> None:
+        schema, interface = _canonical_contracts()
+        contracts = compile_contracts(schema, interface)
+        observed: list[object] = []
+        rejected = generated.RejectedResult(
+            "rejected-result",
+            "ANALYSIS.TEST",
+            "unavailable",
+            "test result",
+            {},
+            (),
+        )
+        engine = SimpleNamespace(
+            prepare=lambda call: observed.append(call) or rejected,
+        )
+        facade = AgentToolFacade(engine, contracts)
+        examples = json.loads(
+            (REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json")
+            .read_text(encoding="utf-8")
+        )["examples"]
+        arguments = next(
+            item["value"] for item in examples if item["definition"] == "PrepareCall"
+        )
+
+        result = facade.prepare(arguments)
+
+        self.assertEqual(result["code"], "ANALYSIS.TEST")
+        self.assertEqual(len(observed), 1)
+        self.assertIsInstance(observed[0], generated.PrepareCall)
 
     def test_generated_contract_projections_are_current(self) -> None:
         completed = subprocess.run(

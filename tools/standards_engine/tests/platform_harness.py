@@ -21,34 +21,37 @@ from tools.standards_analysis.standards_analysis import (
     ResolvedEvidence,
 )
 from tools.standards_engine.standards_engine import (
+    AgentToolFacade,
     AnalysisChildInspectionResult,
     AnalysisInspectionResult,
-    CreateSnapshotCall,
     CreateSnapshotResult,
-    DeleteSnapshotCall,
     DeleteSnapshotResult,
-    FindSnapshotsCall,
     FindSnapshotsResult,
-    InspectCall,
     PendingResult,
     PolicyInspectionResult,
-    PrepareCall,
-    QueryCall,
-    ReadRequest,
     ReadResult,
-    RejectedResult,
     ResolveCall,
     SnapshotInspectionResult,
     StandardsEngine,
-    UndeleteSnapshotCall,
     UndeleteSnapshotResult,
 )
+from tools.standards_engine.standards_engine.tools import _contracts
 
 
 SCHEMA_VERSION = 1
 POLICY_ID = "workflow.planning"
 POLICY_UNIT_ID = "workflow.planning.written-plan-applicability"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+PUBLIC_OPERATIONS = (
+    "create_snapshot",
+    "find_snapshots",
+    "delete_snapshot",
+    "undelete_snapshot",
+    "query",
+    "prepare",
+    "resolve",
+    "inspect",
+)
 
 
 class HarnessError(RuntimeError):
@@ -124,17 +127,36 @@ def _sha256(path: Path) -> str:
     return f"sha256:{digest.hexdigest()}"
 
 
-def _expect(value: object, expected: type, operation: str) -> Any:
-    if isinstance(value, RejectedResult):
+class _FacadeSession:
+    def __init__(self, engine: StandardsEngine) -> None:
+        self._facade = AgentToolFacade(engine, _contracts(REPOSITORY_ROOT))
+        self._operations: set[str] = set()
+
+    @property
+    def operations(self) -> list[str]:
+        return [
+            operation.replace("_", "-")
+            for operation in PUBLIC_OPERATIONS
+            if operation in self._operations
+        ]
+
+    def call(self, operation: str, arguments: object) -> dict[str, object]:
+        self._operations.add(operation)
+        return getattr(self._facade, operation)(arguments)
+
+
+def _expect(value: dict[str, object], expected: type, operation: str) -> Any:
+    if value.get("kind") == "rejected-result":
         raise HarnessError(
-            f"{operation} rejected with {value.code} ({value.outcome}): "
-            f"{value.message}"
+            f"{operation} rejected with {value.get('code')} "
+            f"({value.get('outcome')}): {value.get('message')}"
         )
-    if isinstance(value, expected):
-        return value
-    raise HarnessError(
-        f"{operation} returned {type(value).__name__}, expected {expected.__name__}"
-    )
+    try:
+        return expected.from_value(value)
+    except (TypeError, ValueError) as error:
+        raise HarnessError(
+            f"{operation} did not return a valid {expected.__name__}: {error}"
+        ) from error
 
 
 def _analysis_request(snapshot: dict[str, object]) -> dict[str, object]:
@@ -198,51 +220,53 @@ def produce(repository: Path, store: Path, manifest_path: Path) -> dict[str, obj
         store_path=store,
         execution_context=AnalysisExecutionContext(HarnessAuthorizer()),
     )
+    facade = _FacadeSession(engine)
     try:
         created = _expect(
-            engine.create_snapshot(
-                CreateSnapshotCall.from_value({"kind": "create-snapshot"})
-            ),
+            facade.call("create_snapshot", {"kind": "create-snapshot"}),
             CreateSnapshotResult,
             "create-snapshot",
         )
         snapshot = created.snapshot.snapshot
         found = _expect(
-            engine.find_snapshots(
-                FindSnapshotsCall.from_value({"kind": "find-snapshots"})
-            ),
+            facade.call("find_snapshots", {"kind": "find-snapshots"}),
             FindSnapshotsResult,
             "find-snapshots",
         )
         if not any(item.snapshot == snapshot for item in found.snapshots):
             raise HarnessError("created snapshot is absent from active discovery")
         read = _expect(
-            engine.query(QueryCall(snapshot, ReadRequest("read", POLICY_ID))),
+            facade.call(
+                "query",
+                {
+                    "snapshot": snapshot.as_contract(),
+                    "request": {"kind": "read", "target": POLICY_ID},
+                },
+            ),
             ReadResult,
             "query/read",
         )
         _expect(
-            engine.inspect(InspectCall(read.policy.handle)),
+            facade.call("inspect", {"handle": read.policy.handle.as_contract()}),
             PolicyInspectionResult,
             "inspect/policy",
         )
         prepared = _expect(
-            engine.prepare(
-                PrepareCall.from_value(
-                    {"request": _analysis_request(snapshot.as_contract())}
-                )
+            facade.call(
+                "prepare",
+                {"request": _analysis_request(snapshot.as_contract())},
             ),
             PendingResult,
             "prepare",
         )
         child = prepared.obligations[0].handle
-        resolved = engine.resolve(_disposition(prepared))
-        if isinstance(resolved, RejectedResult):
-            raise HarnessError(
-                f"resolve rejected with {resolved.code}: {resolved.message}"
-            )
+        resolved = _expect(
+            facade.call("resolve", _disposition(prepared).as_contract()),
+            PendingResult,
+            "resolve",
+        )
         _expect(
-            engine.inspect(InspectCall(resolved.handle)),
+            facade.call("inspect", {"handle": resolved.handle.as_contract()}),
             AnalysisInspectionResult,
             "inspect/resolved-analysis",
         )
@@ -264,16 +288,7 @@ def produce(repository: Path, store: Path, manifest_path: Path) -> dict[str, obj
                 f"sha256:{hashlib.sha256(read.content.encode('utf-8')).hexdigest()}"
             ),
         },
-        "operations": [
-            "create-snapshot",
-            "find-snapshots",
-            "delete-snapshot",
-            "undelete-snapshot",
-            "query",
-            "prepare",
-            "resolve",
-            "inspect",
-        ],
+        "operations": facade.operations,
     }
     manifest_path.write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -383,22 +398,22 @@ def _concurrent_probe(
 def probe(repository: Path, store: Path, manifest_path: Path) -> dict[str, object]:
     manifest = _load_manifest(manifest_path)
     engine = StandardsEngine.open_repository(repository, store_path=store)
+    facade = _FacadeSession(engine)
     try:
         snapshot = manifest["snapshot"]
         read = _expect(
-            engine.query(
-                QueryCall.from_value(
-                    {
-                        "snapshot": snapshot,
-                        "request": {"kind": "read", "target": POLICY_ID},
-                    }
-                )
+            facade.call(
+                "query",
+                {
+                    "snapshot": snapshot,
+                    "request": {"kind": "read", "target": POLICY_ID},
+                },
             ),
             ReadResult,
             "concurrent query/read",
         )
         _expect(
-            engine.inspect(InspectCall.from_value({"handle": manifest["analysis"]})),
+            facade.call("inspect", {"handle": manifest["analysis"]}),
             AnalysisInspectionResult,
             "concurrent inspect/analysis",
         )
@@ -418,25 +433,23 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
     with tempfile.TemporaryDirectory() as temporary:
         repository = _temporary_repository(Path(temporary))
         engine = StandardsEngine.open_repository(repository, store_path=store)
+        facade = _FacadeSession(engine)
         try:
             snapshot = manifest["snapshot"]
             found = _expect(
-                engine.find_snapshots(
-                    FindSnapshotsCall.from_value({"kind": "find-snapshots"})
-                ),
+                facade.call("find_snapshots", {"kind": "find-snapshots"}),
                 FindSnapshotsResult,
                 "find-snapshots",
             )
             if snapshot not in [item.snapshot.as_contract() for item in found.snapshots]:
                 raise HarnessError("transferred snapshot is absent from active discovery")
             read = _expect(
-                engine.query(
-                    QueryCall.from_value(
-                        {
-                            "snapshot": snapshot,
-                            "request": {"kind": "read", "target": POLICY_ID},
-                        }
-                    )
+                facade.call(
+                    "query",
+                    {
+                        "snapshot": snapshot,
+                        "request": {"kind": "read", "target": POLICY_ID},
+                    },
                 ),
                 ReadResult,
                 "query/read",
@@ -447,59 +460,55 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
             if observed_digest != manifest["read"]["content_sha256"]:
                 raise HarnessError("transferred read content changed")
             _expect(
-                engine.inspect(InspectCall.from_value({"handle": snapshot})),
+                facade.call("inspect", {"handle": snapshot}),
                 SnapshotInspectionResult,
                 "inspect/snapshot",
             )
             _expect(
-                engine.inspect(InspectCall.from_value({"handle": manifest["policy"]})),
+                facade.call("inspect", {"handle": manifest["policy"]}),
                 PolicyInspectionResult,
                 "inspect/policy",
             )
             _expect(
-                engine.inspect(InspectCall.from_value({"handle": manifest["analysis"]})),
+                facade.call("inspect", {"handle": manifest["analysis"]}),
                 AnalysisInspectionResult,
                 "inspect/analysis",
             )
             _expect(
-                engine.inspect(
-                    InspectCall.from_value({"handle": manifest["analysis_child"]})
-                ),
+                facade.call("inspect", {"handle": manifest["analysis_child"]}),
                 AnalysisChildInspectionResult,
                 "inspect/analysis-child",
             )
             _expect(
-                engine.inspect(
-                    InspectCall.from_value({"handle": manifest["resolved_analysis"]})
-                ),
+                facade.call("inspect", {"handle": manifest["resolved_analysis"]}),
                 AnalysisInspectionResult,
                 "inspect/resolved-analysis",
             )
             concurrent = _concurrent_probe(repository, store, manifest_path)
             _expect(
-                engine.delete_snapshot(
-                    DeleteSnapshotCall.from_value(
-                        {"kind": "delete-snapshot", "snapshot": snapshot}
-                    )
+                facade.call(
+                    "delete_snapshot",
+                    {"kind": "delete-snapshot", "snapshot": snapshot},
                 ),
                 DeleteSnapshotResult,
                 "delete-snapshot",
             )
-            unavailable = engine.query(
-                QueryCall.from_value(
-                    {
-                        "snapshot": snapshot,
-                        "request": {"kind": "read", "target": POLICY_ID},
-                    }
-                )
+            unavailable = facade.call(
+                "query",
+                {
+                    "snapshot": snapshot,
+                    "request": {"kind": "read", "target": POLICY_ID},
+                },
             )
-            if not isinstance(unavailable, RejectedResult) or unavailable.outcome != "unavailable":
+            if (
+                unavailable.get("kind") != "rejected-result"
+                or unavailable.get("outcome") != "unavailable"
+            ):
                 raise HarnessError("quarantined snapshot did not become typed unavailable")
             quarantined = _expect(
-                engine.find_snapshots(
-                    FindSnapshotsCall.from_value(
-                        {"kind": "find-snapshots", "lifecycle": "quarantined"}
-                    )
+                facade.call(
+                    "find_snapshots",
+                    {"kind": "find-snapshots", "lifecycle": "quarantined"},
                 ),
                 FindSnapshotsResult,
                 "find-snapshots/quarantined",
@@ -507,28 +516,26 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
             if snapshot not in [item.snapshot.as_contract() for item in quarantined.snapshots]:
                 raise HarnessError("deleted snapshot is absent from quarantine discovery")
             _expect(
-                engine.undelete_snapshot(
-                    UndeleteSnapshotCall.from_value(
-                        {"kind": "undelete-snapshot", "snapshot": snapshot}
-                    )
+                facade.call(
+                    "undelete_snapshot",
+                    {"kind": "undelete-snapshot", "snapshot": snapshot},
                 ),
                 UndeleteSnapshotResult,
                 "undelete-snapshot",
             )
             _expect(
-                engine.query(
-                    QueryCall.from_value(
-                        {
-                            "snapshot": snapshot,
-                            "request": {"kind": "read", "target": POLICY_ID},
-                        }
-                    )
+                facade.call(
+                    "query",
+                    {
+                        "snapshot": snapshot,
+                        "request": {"kind": "read", "target": POLICY_ID},
+                    },
                 ),
                 ReadResult,
                 "query/read-after-undelete",
             )
             _expect(
-                engine.inspect(InspectCall.from_value({"handle": manifest["analysis"]})),
+                facade.call("inspect", {"handle": manifest["analysis"]}),
                 AnalysisInspectionResult,
                 "inspect/analysis-after-undelete",
             )
@@ -540,7 +547,12 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
         "producer": manifest["producer"],
         "store_sha256": manifest["store"]["sha256"],
         "concurrent_probe": concurrent,
-        "operations": manifest["operations"],
+        "operations": [
+            operation.replace("_", "-")
+            for operation in PUBLIC_OPERATIONS
+            if operation.replace("_", "-")
+            in set(manifest["operations"]) | set(facade.operations)
+        ],
         "canonical_source_repository_used": False,
     }
 

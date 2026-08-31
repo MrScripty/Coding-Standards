@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import math
 from collections.abc import Iterator, Mapping
+from dataclasses import MISSING as DATACLASS_MISSING
 from dataclasses import fields
 from typing import Protocol
 
@@ -131,7 +132,7 @@ class ContractRuntime:
                     field_names[name]: self._decode_node(properties[name], item)
                     for name, item in value.items()
                 }
-                return model_type(**arguments)
+                return self._construct_validated_model(model_type, arguments)
             additional = node.get("additionalProperties")
             item_schema = additional if isinstance(additional, dict) else {}
             return FrozenMap(
@@ -139,6 +140,27 @@ class ContractRuntime:
                 for key, item in value.items()
             )
         return value
+
+    @staticmethod
+    def _construct_validated_model(
+        model_type: type[GeneratedModel], arguments: Mapping[str, object]
+    ) -> GeneratedModel:
+        """Retain the root schema proof without revalidating nested models."""
+        model = object.__new__(model_type)
+        for field in fields(model_type):
+            if field.name in arguments:
+                selected = arguments[field.name]
+            elif field.default is not DATACLASS_MISSING:
+                selected = field.default
+            elif field.default_factory is not DATACLASS_MISSING:
+                selected = field.default_factory()
+            else:
+                raise AssertionError(
+                    f"validated {model_type.__name__} omitted required field "
+                    f"{field.name}"
+                )
+            object.__setattr__(model, field.name, selected)
+        return model
 
 
 def model_as_contract(model: GeneratedModel) -> dict[str, object]:

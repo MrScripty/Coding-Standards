@@ -12,6 +12,7 @@ from tools.standards_contracts.standards_contracts import (
     compile_contracts,
 )
 
+from . import _generated_contract as generated_contract
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from ._generated_contract import (
@@ -43,7 +44,14 @@ class AgentToolFacade:
         self._operations = {
             operation.id: operation for operation in contracts.interface.operations
         }
-        self._handle_versions = self._derive_handle_versions(contracts.schema)
+        schema = contracts.schema
+        self._handle_versions = self._derive_handle_versions(schema)
+        self._result_types = {
+            operation.id: self._concrete_model_types(
+                schema, operation.result_definitions
+            )
+            for operation in contracts.interface.operations
+        }
 
     @classmethod
     def open_repository(cls, root: Path) -> AgentToolFacade:
@@ -91,7 +99,7 @@ class AgentToolFacade:
         call = self._call_or_rejection("prepare", arguments, PrepareCall)
         if isinstance(call, dict):
             return call
-        result = self._engine.prepare(call.request)
+        result = self._engine.prepare(call)
         return self._result("prepare", result)
 
     def resolve(self, arguments: object) -> dict[str, object]:
@@ -123,7 +131,7 @@ class AgentToolFacade:
     def _decode_call(self, operation: str, arguments: object, expected_type):
         contract = self._operation(operation)
         value = self._mapping(arguments)
-        self._validate(contract.input_definition, value)
+        self._require_supported_handle_versions(value)
         call = decode_contract(contract.input_definition, value)
         if not isinstance(call, expected_type):
             raise RuntimeError(
@@ -134,13 +142,12 @@ class AgentToolFacade:
     def _result(self, operation: str, result) -> dict[str, object]:
         contract = self._operation(operation)
         definition = type(result).__definition__
-        output = result.as_contract()
-        for result_definition in contract.result_definitions:
-            try:
-                self._validate_result(result_definition, output)
-            except ContractError:
-                continue
-            return output
+        expected_type = generated_contract.MODEL_TYPES.get(definition)
+        if (
+            type(result) is expected_type
+            and type(result) in self._result_types[contract.id]
+        ):
+            return result.as_contract()
         raise RuntimeError(
             f"engine returned {definition} outside the {operation} result algebra"
         )
@@ -152,10 +159,6 @@ class AgentToolFacade:
             raise RuntimeError(
                 f"compiled interface does not declare operation {operation!r}"
             ) from None
-
-    def _validate(self, definition: str, value: object) -> None:
-        self._require_supported_handle_versions(value)
-        self._contracts.validate(definition, value)
 
     @staticmethod
     def _derive_handle_versions(schema: object) -> dict[str, int]:
@@ -185,6 +188,38 @@ class AgentToolFacade:
                 versions[kind] = version
         return versions
 
+    @staticmethod
+    def _concrete_model_types(
+        schema: object, definitions: tuple[str, ...]
+    ) -> frozenset[type]:
+        if not isinstance(schema, Mapping):
+            raise TypeError("canonical schema must be an object")
+        nodes = schema.get("$defs")
+        if not isinstance(nodes, Mapping):
+            raise TypeError("canonical schema definitions must be an object")
+        selected: set[type] = set()
+
+        def collect(name: str) -> None:
+            model_type = generated_contract.MODEL_TYPES.get(name)
+            if model_type is not None:
+                selected.add(model_type)
+                return
+            node = nodes.get(name)
+            variants = node.get("oneOf") if isinstance(node, Mapping) else None
+            if not isinstance(variants, list):
+                raise RuntimeError(f"result definition {name!r} has no model algebra")
+            for variant in variants:
+                reference = variant.get("$ref") if isinstance(variant, Mapping) else None
+                if not isinstance(reference, str):
+                    raise RuntimeError(
+                        f"result definition {name!r} contains a non-reference variant"
+                    )
+                collect(reference.rsplit("/", 1)[-1])
+
+        for definition in definitions:
+            collect(definition)
+        return frozenset(selected)
+
     def _require_supported_handle_versions(self, value: object) -> None:
         if isinstance(value, Mapping):
             kind = value.get("kind")
@@ -200,9 +235,6 @@ class AgentToolFacade:
         elif isinstance(value, (list, tuple)):
             for item in value:
                 self._require_supported_handle_versions(item)
-
-    def _validate_result(self, definition: str, value: dict[str, object]) -> None:
-        self._validate(definition, value)
 
     @staticmethod
     def _mapping(value: object) -> dict[str, object]:
