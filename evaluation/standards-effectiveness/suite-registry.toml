@@ -1111,6 +1111,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decompositi
 requires = []
 
 [[suites]]
+id = "milestone-7-row-42-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-42-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "standards-recovery-routing"
 path = "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml"
 requires = []

@@ -11,6 +11,13 @@ The immutable train assigns the identifier to existing owner
 `topics/security.md`, which requires `core` and `workflow.verification`. No new
 owner, source rewrite, reference extraction, or policy copy is required.
 
+## Verifier Ownership
+
+The registered `source-index-closures` suite owns the direct `STD-0582`
+disposition, Security route, heading, and no-legacy-mechanism contract. The
+registered `milestone-7-row-42-decomposition` suite owns this row's lifecycle
+evidence. Neither authority duplicates or owns the other's contract.
+
 ## Exact Outcome
 
 `STD-0582` receives one `index` disposition to `topics/security.md`. The current

@@ -6428,3 +6428,20 @@
   complete 47-entrypoint checkpoint pass. Final graph: 47 Bash checkers, 50
   nodes, 337 edges, and 50 components. No duplicate suite, wrapper,
   compatibility representation, or fallback remains.
+
+## 2026-08-31 - M6-I79 Row-42 Decomposition Acceptance
+
+- Fresh post-M6-I78 evidence selects the 39-line, wave-7 row-42 lifecycle
+  verifier from five executable-inbound-free candidates. M6-I79 is
+  `serial-coherent` at train order 194.
+- One six-check suite preserves exact train, P34, owner-validation,
+  decomposition, source-index authority, and canonical prerequisite evidence
+  without duplicating the separately owned direct Security index contract.
+- Twelve outgoing records retain six independent gates. Two prior M6-I78
+  records move from checker evidence to registered row-42 suite evidence.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 46-entrypoint checkpoint pass. Final graph: 46 Bash checkers, 49
+  nodes, 325 edges, and 49 components. No duplicated source policy, wrapper,
+  compatibility representation, or fallback remains.

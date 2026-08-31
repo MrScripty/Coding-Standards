@@ -5945,3 +5945,32 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 47 Bash checkers, 50 nodes, 337 edges, and 50
 components. The old checker is absent without duplicated suite authority,
 nested execution, a wrapper, compatibility representation, or fallback.
+
+### M6-I79 Row-42 Decomposition Acceptance
+
+Fresh post-M6-I78 evidence reports 47 Bash verifiers, 50 nodes, 337 edges,
+and 50 components. Five verifiers have no executable inbound edge. The
+39-line `verify-milestone-7-row-42-decomposition.sh` is the highest dependency-
+wave candidate at wave 7; its two contract references are lifecycle evidence,
+and it invokes six separately owned gates. The package is `serial-coherent`
+because no shared engine, schema, policy, or unresolved owner contract changes.
+
+One six-check `migration.parent-plan` suite preserves the exact execution-
+train row, accelerated P34 package, owner-validation row, decomposition
+record, registered source-index authority, and canonical prerequisite paths.
+The direct `STD-0582` disposition, Security routes, heading, and negative
+mechanism contract remain exclusively in `source-index-closures`; the
+lifecycle suite records that ownership without duplicating it.
+
+Twelve outgoing edge records retain historical row-checker ownership,
+errexit accumulation, input validation, filesystem containment, network
+transport, and the execution train as independent gates. Two prior M6-I78
+records transition from checker evidence to the registered row-42 suite.
+Four mutations reject execution-train owner drift, P34 outcome drift,
+owner-validation disposition drift, and reintroduction of the retired Bash
+authority. Exact final compilation renews nine dependency-local requirements
+and leaves 42 stable, closing 51/51 coverage. All focused, graph, declarative,
+generated, numeric, plan, and complete mixed evidence pass. Final graph: 46
+Bash checkers, 49 nodes, 325 edges, and 49 components. The old checker is
+absent without duplicated source policy, nested execution, a wrapper,
+compatibility representation, or fallback.

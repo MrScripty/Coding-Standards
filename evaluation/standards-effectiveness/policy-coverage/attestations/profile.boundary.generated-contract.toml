@@ -19,7 +19,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # profile.boundary.generated-contract.semantic-closure
 [[attestations]]
-requirement_id = "sha256:e770c53ef4a423dc3ff63f7b535b7690f9a909646ce08ad9b7c8246cbc9c1d57"
+requirement_id = "sha256:8937dca949ee6b63b46f97524db2da2b81742962ce376e1cb8225623d49f242b"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
