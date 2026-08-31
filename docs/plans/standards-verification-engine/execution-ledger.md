@@ -6410,3 +6410,21 @@
   complete 48-entrypoint mixed checkpoint pass. Final graph: 48 Bash checkers,
   51 nodes, 346 edges, and 51 components. No nested suite dependency, wrapper,
   compatibility representation, or fallback remains.
+
+## 2026-08-31 - M6-I78 Security Index Closure Acceptance
+
+- Fresh post-M6-I77 evidence selects the 38-line, wave-8 Security index
+  verifier from three executable-inbound-free candidates. M6-I78 is
+  `serial-coherent` at train order 193.
+- The existing source-index suite gains exact `STD-0582` disposition and four
+  checker-only negative literals. Existing heading, route, boundary, and
+  prohibited-literal authority remains single-owned and becomes strictly
+  stronger; the Rust Security suite now references that registered authority.
+- Twelve outgoing records retain six independent gates. Four prior M6-I76 and
+  M6-I77 records move from checker evidence to source-index suite evidence.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 47-entrypoint checkpoint pass. Final graph: 47 Bash checkers, 50
+  nodes, 337 edges, and 50 components. No duplicate suite, wrapper,
+  compatibility representation, or fallback remains.

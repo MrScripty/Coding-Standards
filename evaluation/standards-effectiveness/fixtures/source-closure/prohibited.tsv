@@ -90,3 +90,7 @@ SECURITY-STANDARDS.md	InputValidator
 SECURITY-STANDARDS.md	SafeNamePattern
 SECURITY-STANDARDS.md	global-validator
 SECURITY-STANDARDS.md	duplicate-inline
+SECURITY-STANDARDS.md	127.0.0.1
+SECURITY-STANDARDS.md	0.0.0.0
+SECURITY-STANDARDS.md	Runtime type check before cast
+SECURITY-STANDARDS.md	single implementation

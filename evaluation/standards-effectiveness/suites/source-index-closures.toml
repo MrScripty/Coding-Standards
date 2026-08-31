@@ -442,6 +442,21 @@ required = ["non-normative navigation", "owns no", "fallback authority", "Router
 prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
 
 [[checks]]
+id = "security-title-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0582", "SECURITY-STANDARDS.md", "topics/security.md", "index"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0582"
+
+[[checks]]
 id = "frontend-accessibility-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

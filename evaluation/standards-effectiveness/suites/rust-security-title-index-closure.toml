@@ -58,7 +58,7 @@ prohibited = [" must ", " always ", " fallback", " default validator", " default
 [[checks]]
 id = "generic-security-separation"
 type = "text"
-path = "evaluation/standards-effectiveness/verify-security-index-closure.sh"
+path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
 required = ["STD-0582"]
 prohibited = ["STD-0821"]
 

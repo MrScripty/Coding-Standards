@@ -5917,3 +5917,31 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 48 Bash checkers, 51 nodes, 346 edges, and 51 components. The old
 checker is absent without nested declarative execution, a wrapper,
 compatibility representation, dual authority, or fallback.
+
+### M6-I78 Security Index Closure Acceptance
+
+Fresh post-M6-I77 evidence reports 48 Bash verifiers, 51 nodes, 346 edges,
+and 51 components. Three verifiers have no executable inbound edge. The
+38-line `verify-security-index-closure.sh` is the highest dependency-wave
+candidate at wave 8; it has two contract references and invokes six separately
+owned gates. No shared engine, schema, policy, or unresolved owner contract
+changes, so the package is `serial-coherent`.
+
+The registered `source-index-closures` suite already owns exact Security
+heading structure, canonical link coverage, migration-boundary text, and a
+table-derived prohibited-literal set. M6-I78 adds only the exact `STD-0582`
+index disposition and four checker-only negative literals to that existing
+authority. The Rust Security title-index suite now proves generic separation
+against the registered source-index suite instead of the deleted Bash file.
+
+Twelve outgoing edge records retain validation proof lifetime, filesystem
+containment, input validation, IPC payload validation, network transport, and
+row-42 lifecycle as independent gates. Four earlier M6-I76 and M6-I77 records
+transition from checker evidence to registered source-index suite evidence.
+Four mutations reject disposition drift, route removal, a legacy listener
+default, and title-heading drift. Exact final compilation renews nine
+dependency-local requirements and leaves 42 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 47 Bash checkers, 50 nodes, 337 edges, and 50
+components. The old checker is absent without duplicated suite authority,
+nested execution, a wrapper, compatibility representation, or fallback.

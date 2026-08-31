@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I77 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I78 graph audit; do not preselect the next
 package from evidence captured before this accepted serial package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I77 replaced the row-44 lifecycle verifier with
-one owner-local declarative suite at train order 192.
+**Latest accepted slice:** M6-I78 retired the generic Security index verifier
+into the existing source-index suite at train order 193.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I77 at train
-order 192.
+**Accepted boundary:** package records are accepted through M6-I78 at train
+order 193.
 
-**Current derived state:** 230 registered declarative suites, 48 retained Bash
-checkers, 51 executable nodes, 346 conservative reference edges, and 51
+**Current derived state:** 230 registered declarative suites, 47 retained Bash
+checkers, 50 executable nodes, 337 conservative reference edges, and 50
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I77 row-44 lifecycle closure accepted at train order 192 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I78 Security index closure accepted at train order 193 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

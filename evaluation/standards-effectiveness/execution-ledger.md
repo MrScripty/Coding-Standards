@@ -14856,3 +14856,20 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   graph and generated freshness, numeric lifecycle, plan checks, and the
   complete 48-entrypoint checkpoint pass. Final graph: 48 Bash checkers, 51
   nodes, 346 edges, and 51 components; fresh graph evidence is required next.
+
+## 2026-08-31 - M6-I78 Security Index Closure Acceptance
+
+- Fresh post-M6-I77 evidence selects the 38-line, wave-8 Security index
+  verifier from three executable-inbound-free candidates. M6-I78 is
+  `serial-coherent` at train order 193.
+- The existing source-index suite gains exact `STD-0582` disposition and four
+  checker-only negative literals while retaining its stronger heading, route,
+  boundary, and prohibited-literal authority. The Rust Security title suite
+  now proves generic separation against that registered suite.
+- Twelve outgoing records retain six independent gates, and four earlier edge
+  records move from checker evidence to registered source-index suite evidence.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 47-entrypoint checkpoint pass. Final graph: 47 Bash checkers, 50
+  nodes, 337 edges, and 50 components; fresh graph evidence is required next.
