@@ -32,7 +32,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-cross-language-contract.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-historical-row-checker-ownership.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
@@ -73,6 +72,10 @@ contract_reference	evaluation/standards-effectiveness/policy-impact/workflow.pla
 contract_reference	evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/verify-plan-fixtures.sh
+contract_reference	evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
+contract_reference	evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml	evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh
+contract_reference	evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
+contract_reference	evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-cross-language-contract.sh

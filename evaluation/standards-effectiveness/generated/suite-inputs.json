@@ -1787,7 +1787,7 @@
       ]
     },
     {
-      "digest": "sha256:98e73b87e9b2191d4196fd35d00106c3fd1cfd8d653f4ecc0fbd7ea1cdfda533",
+      "digest": "sha256:ea3bc748dd87ea8f7b0ea52eb91f3babb46d1e3d87be80b051e7bfdd77f28b8e",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2065,7 +2065,7 @@
       ]
     },
     {
-      "digest": "sha256:b893b51bf51c872d2c203c846aa00913cc531c5d12ea7a3734d5a52a1acdcad3",
+      "digest": "sha256:923beacd82a6aba4dece1cdbc5524b77b214d10ff91074ef33b097ec8d95e801",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3288,7 +3288,7 @@
       ]
     },
     {
-      "digest": "sha256:84a90a3e038cc7d53b2e800803cac7c8a55113f0ea0398bd99897c2e60cb4d5c",
+      "digest": "sha256:0367154084dd62ce4362890391145957e73e7dd3857d6d23e71f58835e8e7676",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4859,6 +4859,18 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:8473d8608897505beef809a574736f31cf3d03f38d425b4a4a795e0fd75ec162",
+      "path": "evaluation/standards-effectiveness/fixtures/planning/historical-row-checker-ownership.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "forbidden-lifecycle",
+          "role": "table",
+          "suite": "historical-row-checker-ownership"
         }
       ]
     },
@@ -6533,7 +6545,7 @@
       ]
     },
     {
-      "digest": "sha256:19ca6350dadc303282e82544a31efffa043b8949413a8b890ddf900fc964b984",
+      "digest": "sha256:2dc6e6301333aab65b0f269bdd7cf79ba71386979e4518170bb0af8d64c19068",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6545,7 +6557,7 @@
       ]
     },
     {
-      "digest": "sha256:9ea0a05cbe7da015a23894df7a8a6a27dc2c6323ba155a138ad75e7002fde571",
+      "digest": "sha256:1e2cb15ac9cbea0f2416f4941eee68812219285dfbe1a7b00c2efb1eceb4593e",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7358,6 +7370,11 @@
           "check": "execution-train",
           "role": "table",
           "suite": "dependencies-owner-contract"
+        },
+        {
+          "check": "historical-train-rows",
+          "role": "table",
+          "suite": "historical-row-checker-ownership"
         },
         {
           "check": "execution-train",
@@ -9134,7 +9151,7 @@
       ]
     },
     {
-      "digest": "sha256:e64b3b9da24b569b1e98eee514e1cc346d56c3eef2ccd7b303df6ea5ad136e7d",
+      "digest": "sha256:87baaf79a12f084c598f31c52275cc0fbbb5b8176ebf16f7f5d14f3fe3f3ba00",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10000,6 +10017,18 @@
     {
       "digest": "sha256:a72aad4f8bab50a49c65d335daa3d1e53829a0bade493b543bf08fb5e2259434",
       "path": "evaluation/standards-effectiveness/suites/gui-smoke-evidence.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:d333ee9550889c78c8bace43054baacd328909a177709d13124fab8ff9b7907d",
+      "path": "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml",
       "state": "present",
       "uses": [
         {
@@ -12271,28 +12300,6 @@
       ]
     },
     {
-      "digest": "sha256:2717e32caa7a88c96fbabfc32b1a4f6cbe3dafdfea64bb64beb4ea23c25db357",
-      "path": "evaluation/standards-effectiveness/verify-historical-row-checker-ownership.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:e6e15daea1f368448657030c2e7bfea3917cb1615bf07a72bd21b28772208fa9",
       "path": "evaluation/standards-effectiveness/verify-interop-boundary-policy.sh",
       "state": "present",
@@ -12575,6 +12582,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "row-15-lifecycle",
+          "role": "content",
+          "suite": "historical-row-checker-ownership"
+        },
+        {
           "check": "derived-readme-consumers",
           "role": "candidate-content",
           "suite": "milestone-7-row-35-decomposition"
@@ -12596,6 +12608,11 @@
       "path": "evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh",
       "state": "present",
       "uses": [
+        {
+          "check": "row-43-lifecycle",
+          "role": "content",
+          "suite": "historical-row-checker-ownership"
+        },
         {
           "check": "derived-readme-consumers",
           "role": "candidate-content",
@@ -12619,6 +12636,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "row-5-lifecycle",
+          "role": "content",
+          "suite": "historical-row-checker-ownership"
+        },
+        {
           "check": "derived-readme-consumers",
           "role": "candidate-content",
           "suite": "milestone-7-row-35-decomposition"
@@ -12640,6 +12662,11 @@
       "path": "evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh",
       "state": "present",
       "uses": [
+        {
+          "check": "row-8-lifecycle",
+          "role": "content",
+          "suite": "historical-row-checker-ownership"
+        },
         {
           "check": "derived-readme-consumers",
           "role": "candidate-content",
@@ -22804,11 +22831,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:e64b3b9da24b569b1e98eee514e1cc346d56c3eef2ccd7b303df6ea5ad136e7d",
+    "digest": "sha256:87baaf79a12f084c598f31c52275cc0fbbb5b8176ebf16f7f5d14f3fe3f3ba00",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:65f491dcaaf37371175311920b212a9ae28e499007b1404cb5ab60c3b49406d6",
+    "digest": "sha256:7b08f65957a6a7e86acac8b26fac24d43368fd63ef65b37c188bd1f0f1cccd0a",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24267,6 +24294,12 @@
       "digest": "sha256:229d7475de1ba85bbef3126c340dd237591448994428921a4f15f4df705b38ac",
       "id": "errexit-zero-accumulation",
       "path": "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:d333ee9550889c78c8bace43054baacd328909a177709d13124fab8ff9b7907d",
+      "id": "historical-row-checker-ownership",
+      "path": "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml",
       "requires": []
     },
     {

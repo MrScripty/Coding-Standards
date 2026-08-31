@@ -6301,3 +6301,27 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 34 Bash checkers, 37 nodes, 236 edges, and 37 components. The old checker
 is absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I92 Historical Row-Checker Ownership Acceptance
+
+Fresh post-M6-I91 evidence reports 34 Bash verifiers, 37 nodes, 236 edges,
+and 37 components. The 64-line
+`verify-historical-row-checker-ownership.sh` is the sole verifier without an
+executable inbound edge and remains at dependency wave 0. Its only inbound
+reference is historical contract evidence, and it invokes no executable. The
+package is `serial-coherent` because no shared engine, schema, policy, or
+unresolved owner contract changes.
+
+One six-check `migration.parent-plan` suite preserves the exact forbidden
+lifecycle fixture and execution-train identities for rows 5, 8, 15, and 43.
+Four direct checks exclude the live ``(`Planned`)`` lifecycle marker from every
+retained historical row checker. Two prior M6-I79 records transition to
+registered suite evidence.
+
+Three mutations reject fixture drift, train-row drift, and a restored live
+lifecycle assertion. Exact final compilation renews nine dependency-local
+requirements and leaves 42 stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 33 Bash checkers, 36 nodes, 239 edges, and 36 components. The old checker
+is absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

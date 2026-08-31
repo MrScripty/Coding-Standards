@@ -15140,3 +15140,21 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   graph and generated freshness, numeric lifecycle, plan checks, and the
   complete 34-entrypoint checkpoint pass. Final graph: 34 Bash checkers, 37
   nodes, 236 edges, and 37 components; fresh graph evidence is required next.
+
+## 2026-08-31 - M6-I92 Historical Row-Checker Ownership Acceptance
+
+- Fresh post-M6-I91 evidence reports 34 Bash verifiers, 37 nodes, 236 edges,
+  and 37 components. The 64-line historical row-checker ownership verifier is
+  the sole verifier without an executable inbound edge and remains at
+  dependency wave 0. M6-I92 is `serial-coherent` at train order 207.
+- One six-check owner-local suite preserves the exact forbidden lifecycle
+  fixture, the execution-train identities of the four retained historical row
+  checkers, and the absence of live `Planned` assertions from each checker.
+- Two prior M6-I79 records move to registered suite evidence. No helper,
+  independent Bash gate, source-policy rewrite, compatibility representation,
+  or fallback is retained.
+- Three mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 33-entrypoint checkpoint pass. Final graph: 33 Bash checkers, 36
+  nodes, 239 edges, and 36 components; fresh graph evidence is required next.

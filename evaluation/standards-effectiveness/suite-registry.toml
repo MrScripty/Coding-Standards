@@ -1166,6 +1166,11 @@ path = "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml
 requires = []
 
 [[suites]]
+id = "historical-row-checker-ownership"
+path = "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []
