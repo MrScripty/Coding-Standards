@@ -4,8 +4,11 @@
 
 **Current phase:** Milestone 0 combined-design efficiency validation
 
-**Next slice:** Execute the isolated A2-P5 combined-efficiency prototype from
-exact base `b503dcb76fd27aca41df154f37e20f6635de44bf`
+**Next slice:** Correct and independently re-audit the isolated A2-P5
+combined-efficiency prototype against its clarified execution admission before
+any complete dual-runtime measurement; both supported runtimes must first pass
+the focused contract, oracle, lifecycle, and report-integrity probes on the
+same frozen source hash
 
 **Acceptance status:** `pending`
 
@@ -460,11 +463,17 @@ canonical `main`.
 
 ## Blockers
 
-- No design blocker affects the admitted P5 execution. The committed
-  [P5 admission](reports/p5-combined-efficiency-admission.md) freezes the
-  accepted combined design, correctness-equivalent baselines, five workloads,
-  external metrics, variability rule, exact failures, current 23-standard
-  route, base, isolated write set, and terminal disposition.
+- The first uncommitted P5 source revision failed independent specification and
+  standards audits before measurement. The clarified committed
+  [P5 admission](reports/p5-combined-efficiency-admission.md) keeps the accepted
+  combined design, baselines, five workloads, thresholds, 23-standard route,
+  exact base, isolated write set, and terminal disposition, while freezing the
+  invalid-workflow applicability matrix, raw-report recalculation, one-store
+  evidence boundary, and external-gate bundle. Source correction, frozen-source
+  audits, and focused probes are admitted. Complete P5 measurement remains
+  blocked until the corrected frozen source passes both independent audits and
+  the focused contract, oracle, lifecycle, and report-integrity probes on
+  CPython 3.11 and 3.12.
 - An A1c ADR amendment, public or persisted contract selection, and production
   planning remain unavailable until P5 passes and its canonical verdict is
   recorded.

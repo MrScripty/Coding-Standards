@@ -1,6 +1,6 @@
 # A2-P5 Combined-Design Efficiency Execution Admission
 
-**Status:** `execution admitted; no production performance promise`
+**Status:** `correction and re-audit admitted; complete measurement blocked`
 
 ## Question And Authority Boundary
 
@@ -70,7 +70,7 @@ closed variants:
 
 | Action | Exact payload and cross-field rules |
 | --- | --- |
-| `clone-local` | `{source, destination}`; both are normalized absolute paths without NUL or newline, `source` equals the configured exact base repository, and `destination` is an absent, nonsymlinked descendant contained by the Adapter-owned scratch root |
+| `clone-local` | `{source, destination}`; both are normalized absolute paths without NUL or newline, `source` equals the Adapter-configured local repository, and `destination` is an absent, nonsymlinked descendant contained by the Adapter-owned scratch root; source-object presence is not trusted pre-spawn |
 | `add-all` | `{}`; operates only in the configured isolated candidate worktree |
 | `write-tree` | `{}`; operates only in the configured isolated candidate worktree |
 | `commit-tree` | `{tree_oid, parent_oid, message}`; OIDs are 40- or 64-character lowercase hexadecimal values, `parent_oid` equals the captured expected base, and the UTF-8 message is 1 through 160 bytes with no NUL, CR, or LF |
@@ -102,16 +102,78 @@ envelope types and bounds; every recognized action with a missing, extra,
 wrong-type, out-of-bound, or cross-field-invalid payload; unknown category;
 unknown action; mismatched category/action; a declared action with no decoder;
 an unavailable executable; a producer-only typed value; an attempted raw-
-mapping handler bypass; timeout; and stdout or stderr over the bound. Every
-valid variant also executes against real scratch Git on both runtimes.
+mapping handler bypass; timeout; stdout or stderr over the bound; strict output
+decode failure; and the registered clone-local first-child spawn, pre-child
+containment-proof, child-two spawn, post-child containment-proof, and
+missing-admitted-object variants. Each clone fixture records its two child
+slots, actual started count, destination cleanup, configured-source identity,
+and absence of unrelated state. Every valid variant also executes against real
+scratch Git on both runtimes.
 
-Missing decoder or executable is a pre-spawn capability failure: no child,
-domain, durable, or Git mutation occurs. Timeout or oversized output is a
-post-spawn result failure: success is never inferred. Setup and read-only
-actions create no application attempt; staging and publication actions retain
-the attempt at the exact phase registered below. Exact scratch object,
-candidate identity, and target observation decide recovery. The command is
-never blindly retried.
+Missing decoder/executable, first-child spawn capability, or pre-child
+containment proof is a pre-spawn capability failure: no child, domain, durable,
+or Git mutation occurs. Once a child starts, timeout, oversized or undecodable
+output, later-child spawn failure, containment-proof loss, or unavailable
+required action completion is a post-spawn result failure: success is never
+inferred. Setup and read-only actions create no application attempt; staging
+and publication actions retain the attempt at the exact phase registered
+below. Exact scratch object, candidate identity, and target observation decide
+recovery. The command is never blindly retried.
+
+Every decoded `clone-local` action owns exactly two Git children in this order:
+
+1. `git clone --no-checkout --local --no-hardlinks --quiet -- SOURCE DEST`; and
+2. `git -C DEST checkout --quiet -B main ADMITTED_BASE`.
+
+`SOURCE`, `DEST`, the Git executable, and `ADMITTED_BASE` are Adapter-owned
+decoded/configured values, never producer command fragments. This fixed
+sequence materializes scratch `refs/heads/main` directly at the admitted OID,
+independent of the source worktree's current branch, default branch, later
+prototype commit, or archive ref. It remains one `clone-local` action with the
+same two-field payload, not an eighth process action.
+
+Pre-spawn decoding proves only the exact configured source identity and path
+contract; it does not claim that an object exists. Successful completion of
+child two, followed by independent `resolve-target`, is the only admitted-base
+object/ref proof. A missing admitted object therefore produces child two's
+well-formed nonzero Git result, cleanup, and the caller's registered
+`A2P5.PROCESS_RESULT_UNAVAILABLE` classification.
+
+The action has one cumulative 30-second deadline. Each child starts in a new
+owned process group. Stdout bytes and stderr bytes are accumulated separately
+in child order with no inserted bytes and each accumulated stream retains the
+262,144-byte bound; only the aggregate is strictly UTF-8 decoded into the
+existing five-field outbound value. The action return code is the first
+nonzero child code, or zero only when both children return zero. If child one
+fails, child two does not start. On either nonzero result, timeout, output-bound
+failure, spawn failure, or decode failure, the Adapter terminates and reaps the
+active group and all descendants and removes any destination. A successful
+second child retains the destination.
+
+Failure to find the decoder/executable or to start child one before any child
+exists is `A2P5.PROCESS_CAPABILITY_UNAVAILABLE`. Once any child has started, a
+child-two spawn failure, timeout, output-bound failure, or strict outbound
+decode failure is `A2P5.PROCESS_RESULT_UNAVAILABLE`. A well-formed nonzero
+child result remains the existing process-result domain input; `clone-local`'s
+caller classifies it as `A2P5.PROCESS_RESULT_UNAVAILABLE`. These are instances
+of the existing two process triples, not new conditions. The outer process
+trace, not the closed outbound value, records two ordered child slots and an
+actual started-child count of 0, 1, or 2; both-started is exactly two, and a
+valid successful action requires both. No Git child runs beside or outside
+this ownership. An independent `resolve-target` then proves the new clone's
+`refs/heads/main` equals the admitted base.
+
+The scratch-root threat model is one serial Adapter owner and no concurrent
+process with that owner's filesystem identity or access to its mode-0700
+temporary root. At construction, decode, immediately before each child,
+between children, and before cleanup or acceptance, the Adapter uses `lstat`
+to revalidate the root and every existing destination ancestor against its
+captured device/inode/owner identity and requires nonsymlinked directories;
+the destination is absent before child one and a contained nonsymlinked
+directory before child two. A changed ancestor, unexpected entry, or missing
+exclusive-owner fact is pre-spawn capability-unavailable when no child has
+started and result-unavailable after a child starts. This bounded proof
+lifetime does not claim containment against a concurrent same-owner attacker.
 
 ## Candidate Portfolio
 
@@ -349,6 +411,36 @@ a weighted score:
    analysis/resolve, review, stage/materialize, verify, publish, recovery, and
    end-to-end `create_proposal` through terminal cold recovery.
 
+Every metric is encoded as an exact applicability record. An applicable true
+zero is distinct from missing evidence; a nonapplicable value has no numeric
+value and one registered reason. Missing, extra, defaulted, or contradictory
+dimensions are unavailable and cannot be converted to zero. Every applicable
+structural and timing dimension reports the three selected values, three
+baseline values, their separate minimum/median/maximum summaries, and the
+three paired baseline-minus-selected differences. The raw pairs, not their
+summaries, decide dominance.
+
+The valid `no-op`, `small-edit`, `multi-file`, and `repeated-revision`
+workloads execute all five scratch checkpoints and all nine timing phases. The
+`invalid-edit` workload executes only the `post-authoring` scratch checkpoint,
+the `authoring` timing, and an `end-to-end` timing that starts immediately
+before `create_proposal` and stops immediately after the typed unavailable
+`revise_proposal` result. Its query, analysis/resolve, review,
+stage/materialize, verify, publish, and recovery timings and its four later
+scratch checkpoints are exactly nonapplicable with reason
+`workflow-terminated-before-phase`. All other declared structural dimensions
+remain applicable for `invalid-edit`; an established absence such as zero
+application-attempt bytes or zero staging calls is an explicit measured zero.
+The post-failure ref, store, and process nonmutation oracles run outside the
+end-to-end interval.
+
+Dominance compares a case/dimension only when it is applicable for both paired
+candidates. Matching registered nonapplicability removes that dimension only
+for that case. An applicability mismatch, an unregistered reason, or an
+applicable missing observation makes the comparison unavailable and returns
+`revise`. This is the complete applicability matrix; execution may not choose
+another treatment after observing results.
+
 For correctness-equivalent candidates, fewer calls, defined fields, supplied
 facts, ambiguities, logical durable bytes, allocated bytes, scratch bytes,
 material accesses, process calls, and consistently ordered time are better.
@@ -387,6 +479,52 @@ If dominance would depend on an overlapping timing dimension after structural
 metrics are considered, the timing oracle is `unavailable` and the prototype
 returns `revise`; it does not add samples or change the variability rule after
 observing results.
+
+### Raw Evidence And Outer Recalculation
+
+Each runtime emits one closed raw-evidence document. Its provenance binds the
+actual prototype-source SHA-256, this admission's content SHA-256, admitted
+commit and tree, current A1c Interface/manifest digest, exact configuration
+digest, runtime executable, and complete ordered corpus manifest. The
+configuration material covers candidate roles, case mutations, field and leaf
+inventories, process contract and bounds, failure and interruption scenario
+IDs, metric IDs and applicability, repetition/rotation rules, and the
+dominance rule. The document retains the exact 15 warm-ups, 45 measured
+observations, full fact inventories or their content-addressed bytes, raw
+metrics, complete reachable durable rows and blobs, process/failure evidence,
+interruptions, and unsafe-control evidence.
+
+Producer diagnostics, checks, comparisons, status labels, and verdicts are
+nondeciding. The two-report combiner strictly decodes both documents, rejects
+unknown or missing fields, recomputes the complete execution matrices,
+inventories, caller facts, equivalence, reachable closure, metric vectors,
+summaries, paired differences, timing directions, and dominance directly from
+raw evidence, and requires identical frozen configuration/corpus authority
+with distinct exact CPython 3.11 and 3.12 environments. It cannot hard-code or
+trust a completeness claim.
+
+The combiner also requires a closed external-gate bundle bound to the same
+source SHA, admission SHA, configuration digest, corpus digest, exact prototype
+commit and tree, and audit subject identities. It records independent
+specification and standards audit results, the complete repository-checkpoint
+result, exact staged-scope/base/path review, sensitive-value review, and
+conventional Commit subject/body review. The exact archive ref and protected
+OID are included once created. The measurement script cannot self-certify
+those authorities.
+
+Missing, mismatched, stale, or inconclusive external evidence returns `revise`
+with typed unavailable. A completed audit returns `reject` only when it
+conclusively establishes that the selected registered design itself violates
+A1c preservation, correctness, storage, IPC, a supported platform, or the
+dominance rule. A correctable prototype or evidence-implementation defect that
+does not change the registration returns `revise`, including when the defect
+occurs at one of those boundaries; it does not by itself disprove the selected
+design. A failing
+repository checkpoint, staged-scope review, sensitive-value review, archive
+check, or conventional Commit review is a correctable integration defect and
+returns `revise` until the exact corrected source/commit and every affected
+gate are rerun. Only the combined raw reports plus a passing bound bundle may
+return `pass`.
 
 ## Correctness And Failure Oracles
 
@@ -431,8 +569,8 @@ The following prototype-local triples and postconditions are predeclared:
 | outer metric removed after terminal recovery | `A2P5.MEASUREMENT_UNAVAILABLE` | `unavailable` | `required comparative measurement is unavailable`; candidate target and attempt remain terminal `applied`, no domain state changes, and verdict is `revise` |
 | malformed process envelope or recognized-action payload | `A2P5.PROCESS_INVALID` | `invalid` | `process action payload is invalid`; no child, application attempt, durable mutation, or Git mutation occurs |
 | well-formed unknown or mismatched process pair | `A2P5.PROCESS_UNSUPPORTED` | `unsupported` | `process action is unsupported`; no child, application attempt, durable mutation, or Git mutation occurs |
-| decoder or executable unavailable before spawn | `A2P5.PROCESS_CAPABILITY_UNAVAILABLE` | `unavailable` | `required process decoder or executable is unavailable`; no child, application attempt, durable mutation, or Git mutation occurs |
-| timeout or bounded result unavailable after spawn | `A2P5.PROCESS_RESULT_UNAVAILABLE` | `unavailable` | `bounded process result is unavailable`; success is not inferred and the exact action-specific postcondition below applies |
+| decoder, executable, first-child spawn capability, or pre-child containment/owner proof unavailable before any spawn | `A2P5.PROCESS_CAPABILITY_UNAVAILABLE` | `unavailable` | `required process capability is unavailable`; no child, application attempt, durable mutation, or Git mutation occurs |
+| timeout, output bound/decode, later-child spawn or containment proof, nonzero clone completion including missing admitted material, or another required bounded action outcome unavailable after spawn | `A2P5.PROCESS_RESULT_UNAVAILABLE` | `unavailable` | `required bounded process outcome is unavailable`; success is not inferred and the exact action-specific postcondition below applies |
 
 Each negative differs from its valid source fixture in only the named
 condition. The oracle captures exact Authoring records, SQLite rows, target ref
@@ -446,7 +584,12 @@ and `resolve-target` reject stdout over the bound; `write-tree`, `commit-tree`,
 and `update-target` reject stderr over the bound. The injected child completes
 the named action before an output-bound rejection so its postcondition is
 deterministic. Auxiliary `update-target` fixtures cover expected, third, and
-unavailable target observations. The exact results are:
+unavailable target observations. Separate `clone-local` fixtures exercise
+strict output decode failure, child-two spawn failure, post-child containment
+proof loss, and a well-formed nonzero checkout for missing admitted material;
+each has at least one actual child start, removes the destination, leaves the
+configured source unchanged, and creates no accepted clone. The exact results
+are:
 
 | Action with unavailable result | Exact state and cold result |
 | --- | --- |
@@ -528,6 +671,34 @@ authority and creates no production Seam. Deleting the Authoring Module would
 redistribute revision, readiness, publication, and recovery knowledge into
 callers; deleting the baselines, collectors, and prototype removes only
 incidental evidence machinery.
+
+For this prototype, one authoritative live prototype-evolved `SnapshotModule`
+and its one canonical SQLite file own every snapshot-dependent revision/material,
+Analysis, readiness, and attempt-transition aggregate. A private conditional
+aggregate-publication/discovery seam may deepen the current store only to
+exercise expected-head CAS and cold discovery through the existing canonical
+aggregate tables. The prototype may not create a second SQLite file,
+authoritative domain owner, foreign table, binding store, or domain-level SQL
+path. Aggregate payload, children, and snapshot dependencies publish
+atomically. Before cold find or recovery, the current domain owner fully
+closes; a fresh owner then reopens the same file, with no overlap. The outer
+collector may inspect the file only through a sequential read-only connection
+after the domain owner closes and must close that connection before another
+domain owner opens. It never shares a connection or writes. This is disposable
+validation of the one-owner design; it selects no production schema, version,
+or migration and grants no canonical store edit.
+
+The two P3 unsafe-publication controls are reproduced as private negative-only
+scenarios: unchecked update must overwrite an independently advanced target,
+and publish-before-verify must expose a verification-invalid candidate. Their
+exact failure behavior excludes them before ranking; their timings and bytes
+never enter a candidate vector. They are unreachable private fault injections:
+the first makes the decoded `update-target` handler omit its expected-old OID
+only inside the negative harness, and the second invokes the ordinary decoded
+CAS action before the private verifier only inside that harness. Neither fault
+is accepted from the process envelope, Authoring Interface, or a ranked
+candidate; both remain within Adapter process ownership and the seven-action
+set.
 
 P5 is limited to the admitted commit, current corpus, exact replacement
 mutations, local Git and SQLite, single serial workflow, Linux, and the two

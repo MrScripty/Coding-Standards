@@ -768,3 +768,46 @@
   migration, and production source remain blocked until the dual-runtime
   prototype, independent audits, every repository gate, archival, and
   canonical verdict pass.
+
+## 2026-09-01 - A2-P5 Pre-Run Audit Correction Re-Admitted
+
+- Froze the first uncommitted P5 source revision at
+  `sha256:c1b64814727ef91a809eeff41152bc8eceb19ed0594774a55342bea6b4e14967`
+  and ran independent specification and 23-standard source audits before any
+  complete workload. Both returned `revise`; no runtime report, prototype
+  commit, archive ref, canonical Engine change, or P5 verdict was created.
+- The audits found executable evidence defects: the no-op material key could
+  collide; the measured continuation bypassed public A1c `resolve`; cold-find
+  and recovery were not genuine close/reopen; recovery metrics were lost or
+  replaced by zero; two SQLite files split aggregate authority; one Git setup
+  command escaped the closed Adapter; post-spawn publication could infer
+  success; negatives proved codes without all registered postconditions; the
+  closure and per-revision equivalence gates were incomplete; and the outer
+  combiner trusted producer labels instead of raw evidence. Candidate behavior
+  was sometimes represented by labels or separate controls instead of the
+  measured public boundary; logical-byte and timing values were not derived
+  from complete canonical records; authorization negatives omitted exact
+  grant/revocation reference and byte mismatches; runtime qualification was
+  incomplete; and process evidence did not fully prove pre-spawn state,
+  process-group descendant cleanup, exact object identity, or proof lifetime.
+- Preserved the exact selected and baseline candidates, five workloads, leaf
+  inventories, 60-workload and 15-interruption schedule per runtime, 17
+  failure triples, seven process actions and bounds, vector-dominance rule,
+  admitted base, private branch/worktree, and two-file prototype branch write
+  set. No observed result was used to change a candidate or threshold.
+- Re-registered the previously implicit invalid-workflow applicability rule.
+  Its authoring and create-through-typed-failure end-to-end timings plus
+  post-authoring checkpoint are applicable; later phases/checkpoints are
+  explicitly `workflow-terminated-before-phase`. A real zero remains distinct
+  from nonapplicable or missing evidence, and paired applicability must match.
+- Required one closed raw report per runtime, strict outer recomputation of
+  execution, equivalence, closure, metric, timing, and dominance evidence, and
+  a separately bound external-gate bundle before `pass`. Required one live
+  prototype-evolved Snapshot aggregate owner over one canonical SQLite file,
+  and kept source-ref normalization inside the existing bounded
+  `clone-local` action rather than adding an action.
+- The sole prototype source remains uncommitted and isolated while its owner
+  corrects the audit findings. The next allowed operation is another frozen-
+  hash specification and standards audit plus focused contract, oracle,
+  lifecycle, and report-integrity checks on both supported runtimes; complete
+  P5 measurement remains blocked until those three gate groups pass.
