@@ -69,8 +69,6 @@
         analyses: {},
         approvals: {},
         readiness: {},
-        currentAnalysis: null,
-        currentReadiness: null,
         authorization: { decision: "allow", version: 1 },
         target: {
           expectedByDeployment: "commit:base",
@@ -86,8 +84,8 @@
       const state = clone(previous);
       state.clock += 1;
 
-      function finish(code, outcome, nextOperations = []) {
-        const result = { code, outcome, nextOperations };
+      function finish(code, outcome, nextOperations = [], value = {}) {
+        const result = { code, outcome, nextOperations, ...value };
         state.events.push({ at: state.clock, command: clone(command), result });
         return { state, result };
       }
@@ -100,14 +98,13 @@
         return requireProposal() ? state.proposal.revisions[state.proposal.head] : null;
       }
 
-      function readinessIsCurrent() {
-        if (!state.currentReadiness || !state.currentAnalysis || !requireProposal()) return false;
-        const proof = state.readiness[state.currentReadiness];
-        const analysis = state.analyses[state.currentAnalysis];
+      function readinessIsCurrent(readinessId) {
+        if (!readinessId || !requireProposal()) return false;
+        const proof = state.readiness[readinessId];
+        const analysis = proof ? state.analyses[proof.analysis] : null;
         return Boolean(
           proof && analysis &&
           proof.revision === state.proposal.head &&
-          proof.analysis === state.currentAnalysis &&
           analysis.revision === state.proposal.head &&
           proof.authorizationVersion === state.authorization.version &&
           proof.target === state.target.expectedByDeployment
@@ -132,7 +129,7 @@
               }
             }
           };
-          return finish("PROPOSAL.CREATED", "success", ["analyze", "revise"]);
+          return finish("PROPOSAL.CREATED", "success", ["analyze", "revise"], { revision });
         }
 
         case "revise": {
@@ -150,10 +147,8 @@
             semanticProposals: []
           };
           state.proposal.head = revision;
-          state.currentAnalysis = null;
-          state.currentReadiness = null;
           state.attempt = null;
-          return finish("PROPOSAL.REVISED", "success", ["analyze", "revise"]);
+          return finish("PROPOSAL.REVISED", "success", ["analyze", "revise"], { revision });
         }
 
         case "analyze": {
@@ -166,25 +161,29 @@
             state: "complete",
             owner: "accepted-a1c-analysis"
           };
-          state.currentAnalysis = id;
-          state.currentReadiness = null;
-          return finish("ANALYSIS.COMPLETE", "success", ["approve-semantic", "approve-relationship", "approve-lifecycle"]);
+          return finish(
+            "ANALYSIS.COMPLETE",
+            "success",
+            ["approve-semantic", "approve-relationship", "approve-lifecycle"],
+            { analysis: id }
+          );
         }
 
         case "approve": {
-          if (!state.currentAnalysis) return finish("ANALYSIS.MISSING", "invalid", ["analyze"]);
-          const analysis = state.analyses[state.currentAnalysis];
+          if (!command.analysis) return finish("ANALYSIS.MISSING", "invalid", ["analyze"]);
+          const analysis = state.analyses[command.analysis];
+          if (!analysis) return finish("ANALYSIS.UNAVAILABLE", "unavailable", ["analyze"]);
           if (analysis.revision !== state.proposal.head) {
             return finish("ANALYSIS.STALE", "stale", ["analyze"]);
           }
           if (!["semantic", "relationship", "lifecycle"].includes(command.approval)) {
             return finish("APPROVAL.INVALID_KIND", "invalid");
           }
-          const key = `${state.proposal.head}:${command.approval}`;
+          const key = `${state.proposal.head}:${command.analysis}:${command.approval}`;
           state.approvals[key] = {
             kind: command.approval,
             revision: state.proposal.head,
-            analysis: state.currentAnalysis,
+            analysis: command.analysis,
             issuer: `issuer:${command.approval}`,
             decision: "accept"
           };
@@ -195,13 +194,14 @@
           if (state.authorization.decision !== "allow") {
             return finish("AUTHORING.UNAUTHORIZED", "unauthorized");
           }
-          if (!state.currentAnalysis) return finish("ANALYSIS.MISSING", "invalid", ["analyze"]);
-          const analysis = state.analyses[state.currentAnalysis];
+          if (!command.analysis) return finish("ANALYSIS.MISSING", "invalid", ["analyze"]);
+          const analysis = state.analyses[command.analysis];
+          if (!analysis) return finish("ANALYSIS.UNAVAILABLE", "unavailable", ["analyze"]);
           if (analysis.revision !== state.proposal.head) {
             return finish("ANALYSIS.STALE", "stale", ["analyze"]);
           }
           const missing = ["semantic", "relationship", "lifecycle"].filter(
-            kind => !state.approvals[`${state.proposal.head}:${kind}`]
+            kind => !state.approvals[`${state.proposal.head}:${command.analysis}:${kind}`]
           );
           if (missing.length) {
             return finish("READINESS.INCOMPLETE", "invalid", missing.map(kind => `approve-${kind}`));
@@ -211,14 +211,13 @@
           state.readiness[id] = {
             id,
             revision: state.proposal.head,
-            analysis: state.currentAnalysis,
+            analysis: command.analysis,
             approvals: ["semantic", "relationship", "lifecycle"],
             authorizationVersion: state.authorization.version,
             target: state.target.expectedByDeployment,
             verificationContract: "verification-contract:current"
           };
-          state.currentReadiness = id;
-          return finish("READINESS.READY", "success", ["stage"]);
+          return finish("READINESS.READY", "success", ["stage"], { readiness: id });
         }
 
         case "revoke": {
@@ -235,21 +234,21 @@
           if (state.authorization.decision !== "allow") {
             return finish("AUTHORING.UNAUTHORIZED", "unauthorized");
           }
-          if (!state.currentReadiness) return finish("READINESS.MISSING", "invalid", ["derive-readiness"]);
-          if (!readinessIsCurrent()) return finish("READINESS.STALE", "stale", ["derive-readiness"]);
+          if (!command.readiness) return finish("READINESS.MISSING", "invalid", ["derive-readiness"]);
+          if (!readinessIsCurrent(command.readiness)) return finish("READINESS.STALE", "stale", ["derive-readiness"]);
           state.counters.attempt += 1;
           const id = `attempt:${state.counters.attempt}`;
           state.attempt = {
             id,
             revision: state.proposal.head,
-            readiness: state.currentReadiness,
+            readiness: command.readiness,
             baseTarget: state.target.expectedByDeployment,
             candidate: `commit:candidate-${state.counters.attempt}`,
             phase: "staged",
             verification: "pending",
             result: null
           };
-          return finish("APPLICATION.STAGED", "success", ["verify"]);
+          return finish("APPLICATION.STAGED", "success", ["verify"], { attempt: id });
         }
 
         case "verify": {
@@ -296,7 +295,7 @@
           if (!state.attempt || !["verified", "publication-unknown"].includes(state.attempt.phase)) {
             return finish("APPLICATION.NOT_VERIFIED", "invalid", ["verify"]);
           }
-          if (state.authorization.decision !== "allow" || !readinessIsCurrent()) {
+          if (state.authorization.decision !== "allow" || !readinessIsCurrent(state.attempt.readiness)) {
             return finish("AUTHORING.UNAUTHORIZED_OR_STALE", "unauthorized", ["derive-readiness"]);
           }
           if (state.target.observations.length !== 1) {
@@ -356,11 +355,24 @@
 
   let current = AuthoringModel.initialState();
   let last = { code: "NONE", outcome: "not-run", nextOperations: ["create"] };
+  let selected = { analysis: null, readiness: null };
 
   function apply(command) {
-    const step = AuthoringModel.transition(current, command);
+    const bound = JSON.parse(JSON.stringify(command));
+    if (["approve", "derive-readiness"].includes(bound.kind) && !bound.analysis) {
+      bound.analysis = selected.analysis;
+    }
+    if (bound.kind === "stage" && !bound.readiness) {
+      bound.readiness = selected.readiness;
+    }
+    const step = AuthoringModel.transition(current, bound);
     current = step.state;
     last = step.result;
+    if (last.analysis) selected.analysis = last.analysis;
+    if (last.readiness) selected.readiness = last.readiness;
+    if (last.code === "PROPOSAL.REVISED") {
+      selected = { analysis: null, readiness: null };
+    }
     render();
     return last;
   }
@@ -411,7 +423,12 @@
     "Mutation invalidates proof": [
       ...setup.slice(0, 6),
       [{ kind: "revise", expectedHead: "revision:1" }, "PROPOSAL.REVISED"],
-      [{ kind: "stage" }, "READINESS.MISSING"]
+      [{ kind: "stage", readiness: "readiness:1" }, "READINESS.STALE"]
+    ],
+    "Stale analysis is not current": [
+      ...setup.slice(0, 2),
+      [{ kind: "revise", expectedHead: "revision:1" }, "PROPOSAL.REVISED"],
+      [{ kind: "derive-readiness", analysis: "analysis:1" }, "ANALYSIS.STALE"]
     ],
     "Revoked authority": [
       ...setup.slice(0, 6),
@@ -442,6 +459,7 @@
 
   function runScenario(name) {
     current = AuthoringModel.initialState();
+    selected = { analysis: null, readiness: null };
     const failures = [];
     const observations = [];
     for (const [command, expected] of scenarios[name]) {
@@ -458,7 +476,10 @@
 
   function render() {
     document.getElementById("last-result").textContent = JSON.stringify(last, null, 2);
-    document.getElementById("state").textContent = JSON.stringify({ ...current, events: undefined }, null, 2);
+    document.getElementById("state").textContent = JSON.stringify({
+      domain: { ...current, events: undefined },
+      callerSelections: selected
+    }, null, 2);
     document.getElementById("trace").textContent = JSON.stringify(current.events, null, 2);
   }
 
@@ -488,6 +509,7 @@
   reset.textContent = "Reset";
   reset.addEventListener("click", () => {
     current = AuthoringModel.initialState();
+    selected = { analysis: null, readiness: null };
     last = { code: "NONE", outcome: "not-run", nextOperations: ["create"] };
     document.getElementById("scenario-result").className = "";
     document.getElementById("scenario-result").textContent = "No guided scenario run.";
