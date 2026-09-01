@@ -800,28 +800,30 @@ handoff without moving normative guidance.
 `milestone-7-trust-lifecycle-replan.md`,
 `milestone-7-trust-lifecycle-groups.tsv`, and
 `milestone-7-trust-lifecycle-next-slice.tsv` replace the premature final-
-closure handoff after the critical trust-boundary slices. The focused checker
-proves the 90-ID trust remainder, the 26-ID lifecycle bridge, owner
-availability, dependency order, and the exact generic Concurrency next slice
-without changing normative guidance or final dispositions.
+closure handoff after the critical trust-boundary slices. The registered
+`milestone-7-trust-lifecycle-replan` suite proves the 90-ID trust remainder,
+the 26-ID lifecycle bridge, owner availability, dependency order, and the exact
+generic Concurrency next slice without changing normative guidance or final
+dispositions or using nested Bash execution.
 
-`verify-concurrency-policy.sh` checks generic shared-state, lock-boundary,
-nonblocking async, failure-observation, and cancellation-ownership decisions.
-It proves exact disposition of `STD-0263` through `STD-0268` and `STD-0270`
-through `STD-0272`, validates canonical metadata and routing, preserves only
-unmoved language-specific migration material, and rejects unprotected
-mutation, callbacks under locks, fire-and-forget work, synchronous async
-fallback, discarded failure, ignored cancellation, and universal
-language-specific mechanisms. It also verifies the exact `STD-0269` C# async
-parent-index disposition while preserving separately owned language
-specialization.
+The registered `concurrency-policy` suite checks generic shared-state,
+lock-boundary, nonblocking async, failure-observation, and cancellation-
+ownership decisions. It proves exact disposition of `STD-0263` through
+`STD-0268` and `STD-0270` through `STD-0272`, validates canonical metadata and
+routing, preserves only unmoved language-specific migration material, and
+rejects unprotected mutation, callbacks under locks, fire-and-forget work,
+synchronous async fallback, discarded failure, ignored cancellation, and
+universal language-specific mechanisms. It also verifies the exact `STD-0269`
+C# async and `STD-0274` Rust parent-index dispositions while preserving
+separately owned language specialization without nested Bash execution.
 
 `milestone-7-rust-async-decomposition.md` and
 `milestone-7-rust-async-slices.tsv` split the nine Rust Async identifiers into
-four serial specialization slices after generic Concurrency. The focused
-decomposition checker validates exact ownership, proposed dispositions,
-dependency order, lifecycle progress, active-plan handoff, and the
-planning-only boundary without moving normative guidance.
+four serial specialization slices after generic Concurrency. The registered
+`milestone-7-rust-async-decomposition` suite validates exact ownership,
+proposed dispositions, dependency order, lifecycle progress, active-plan
+handoff, and the planning-only boundary without moving normative guidance or
+using nested Bash execution.
 
 `milestone-7-f025-f026-decomposition.md` and
 `milestone-7-f025-f026-slices.tsv` split ten dependent Rust Language Binding
@@ -834,12 +836,12 @@ boundary without moving normative guidance.
 `milestone-7-independent-trust-replan.md`,
 `milestone-7-independent-trust-groups.tsv`, and
 `milestone-7-independent-trust-next-slice.tsv` resume the independent
-trust-boundary wave after the lifecycle bridge. The focused checker proves the
-61-ID/six-proposed-owner frozen baseline, 59-ID current remainder after event
-registration and wire-representation acceptance, owner existence, accepted
-Contracts/Interop/Rust Language Binding dependencies, residual decomposition
-status, and the historical corrected `STD-0757` proposal. The accepted
-`7.4b7h` re-plan rejects a six-ID Security draft that still mixed Core,
+trust-boundary wave after the lifecycle bridge.
+The registered `milestone-7-independent-trust-replan` suite proves the
+61-ID/six-proposed-owner frozen baseline and accepted pretrain disposition
+evidence. It also checks owner and dependency existence, empty next-slice state,
+and accepted report and finding projections without nested execution. The
+accepted `7.4b7h` re-plan rejects a six-ID Security draft that still mixed Core,
 Contracts, Security, implementation structure, and field-rule ownership.
 Accepted `7.4b7i` establishes the bounded Rust wire-representation contract
 and disposition. Accepted `7.4b7j` re-measures the remainder, records accepted
@@ -858,15 +860,15 @@ original-input reuse, history flags, stale proof,
 mutable aliases, implicit cross-boundary trust, permissive defaults, weaker
 decoders, and redundant-decoding mandates.
 
-`milestone-7-execution-train.tsv` and
-`verify-milestone-7-execution-train.sh` replace routine planning/implementation
-alternation for the 589-ID remainder. They prove exact one-time coverage across
-47 source/owner clusters, owner-state honesty, final-closure isolation, five
-dependency waves, five complete-suite checkpoints, and the active integration
-cursor. The manifest is immutable: exact dispositions derive a contiguous
-completed prefix and the first wholly remaining row, while partial cluster
-completion is rejected. Manifest rows authorize pre-slice review; they do not
-pre-approve final owners or dispositions.
+`milestone-7-execution-train.tsv` and the registered `execution-train` suite
+replace routine planning/implementation alternation for the 589-ID remainder.
+The suite uses a typed migration-only Python state model to prove exact one-time
+coverage across 47 source/owner clusters, owner-state honesty, final-closure
+isolation, five dependency waves, five complete-suite checkpoints, and the
+active integration cursor. The manifest is immutable: exact dispositions
+derive a contiguous completed prefix and the first wholly remaining row, while
+partial cluster completion is rejected. Manifest rows authorize pre-slice
+review; they do not pre-approve final owners or dispositions.
 
 `milestone-7-execution-decomposition.tsv` overlays ordered owner-coherent child
 slices when pre-slice review rejects a mixed-role baseline row. The baseline

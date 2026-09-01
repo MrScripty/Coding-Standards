@@ -1,0 +1,202 @@
+schema_version = 1
+id = "concurrency-policy"
+owner = "topic.concurrency"
+description = "Generic shared-state, lock-boundary, nonblocking async, owned failure, cancellation, routing, and disposition authority without Bash orchestration."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/concurrency/ownership-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+state = ["immutable", "mutable", "none"]
+coordination = ["none", "ownership", "message", "atomic", "lock", "transaction", "unprotected", "language-specific"]
+lock_scope = ["released", "held", "not-applicable"]
+external = ["none", "callback"]
+execution = ["sync", "async-nonblocking", "async-blocking"]
+work_owner = ["declared", "missing", "unavailable", "not-required"]
+failure = ["observed", "discarded", "not-required"]
+cancellation = ["propagated", "ignored", "not-required"]
+fallback = ["none", "fire-and-forget", "sync-block", "language-mechanism"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { all = [
+    { field = "state", op = "eq", value = "mutable" },
+    { field = "coordination", op = "eq", value = "unprotected" },
+  ] },
+  { all = [
+    { field = "lock_scope", op = "eq", value = "held" },
+    { field = "external", op = "eq", value = "callback" },
+  ] },
+  { field = "execution", op = "eq", value = "async-blocking" },
+  { field = "work_owner", op = "eq", value = "missing" },
+  { field = "failure", op = "eq", value = "discarded" },
+  { field = "cancellation", op = "eq", value = "ignored" },
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "coordination", op = "eq", value = "language-specific" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [{ field = "work_owner", op = "eq", value = "unavailable" }]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0263", "CONCURRENCY-STANDARDS.md", "1", "1", "topic", "refine", "Concurrency Standards"],
+  ["STD-0264", "CONCURRENCY-STANDARDS.md", "5", "2", "topic", "refine", "Core Principles"],
+  ["STD-0265", "CONCURRENCY-STANDARDS.md", "7", "3", "topic", "refine", "1. Prefer Message Passing Over Shared Mutable State"],
+  ["STD-0266", "CONCURRENCY-STANDARDS.md", "23", "3", "topic", "refine", "2. Protect Shared Mutable State"],
+  ["STD-0267", "CONCURRENCY-STANDARDS.md", "48", "3", "topic", "refine", "3. Keep Related State Under One Lock"],
+  ["STD-0268", "CONCURRENCY-STANDARDS.md", "67", "3", "topic", "refine", "4. Keep Async Paths Non-Blocking"],
+  ["STD-0270", "CONCURRENCY-STANDARDS.md", "100", "3", "topic", "refine", "Always Observe Task Errors"],
+  ["STD-0271", "CONCURRENCY-STANDARDS.md", "121", "3", "topic", "refine", "Never Block on Async"],
+  ["STD-0272", "CONCURRENCY-STANDARDS.md", "137", "3", "topic", "refine", "Pass CancellationToken Through Async Chains"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0263", "STD-0264", "STD-0265", "STD-0266", "STD-0267", "STD-0268", "STD-0270", "STD-0271", "STD-0272"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0263", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "move", "establish the generic concurrency owner"],
+  ["STD-0264", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "move", "establish generic concurrency principles"],
+  ["STD-0265", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "treat message passing as a selection decision rather than a universal architecture"],
+  ["STD-0266", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "distinguish immutable and synchronized data and prohibit callbacks under locks"],
+  ["STD-0267", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "protect related invariants without requiring one locking mechanism"],
+  ["STD-0268", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "require nonblocking async and lifecycle paths"],
+  ["STD-0270", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "require owned observation of asynchronous failures"],
+  ["STD-0271", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "remove synchronous blocking as an async fallback"],
+  ["STD-0272", "CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "refine", "require cancellation propagation through owned async work"],
+  ["STD-0269", "CONCURRENCY-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "index", "convert the C sharp async parent heading into a non-normative routing index while preserving separately owned child specializations"],
+  ["STD-0274", "CONCURRENCY-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "index", "replace legacy Rust concurrency cross references with a non-normative route to canonical Rust Async and Rust Security profiles"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0263", "STD-0264", "STD-0265", "STD-0266", "STD-0267", "STD-0268", "STD-0269", "STD-0270", "STD-0271", "STD-0272", "STD-0274"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/concurrency.md"]
+
+[[checks]]
+id = "router-projection"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["topics/concurrency.md"]
+prohibited = []
+
+[[checks]]
+id = "canonical-policy"
+type = "text"
+path = "topics/concurrency.md"
+required = [
+  "Immutable or otherwise thread-safe data does not require a lock",
+  "Message passing can remove shared mutation, but it is not a universal",
+  "Do not invoke callbacks, signals, user code, plugin code",
+  "Async request, startup, shutdown, health, and supervision paths",
+  "Every asynchronous operation that can outlive its immediate call site",
+  "Cancellation must propagate through all owned work",
+  "typed `invalid`, `unsupported`, or `unavailable`",
+  "Do not continue through fire-and-forget work",
+]
+prohibited = [
+  "SelectionChanged?.Invoke(_state);",
+  "protect them with a single lock",
+  "_ = DoWorkAsync();",
+  "_ = Task.Run(async () =>",
+  "ConfigureAwait(false).GetAwaiter().GetResult()",
+  "Thread.Sleep(200);",
+]
+
+[[checks]]
+id = "legacy-route"
+type = "text"
+path = "CONCURRENCY-STANDARDS.md"
+required = [
+  "topics/concurrency.md",
+  "## C# Async/Await Index",
+  "### C# Continuation Scheduling",
+  "## Rust Concurrency Routing Index",
+  "## TypeScript Async Index",
+  "## Godot Framework Index",
+  "[Rust Async profile](profiles/languages/rust/async.md)",
+  "[Rust Security profile](profiles/languages/rust/security.md)",
+]
+prohibited = [
+  "This is a non-normative migration index",
+  "remain migration material",
+  "retained below",
+  "legacy authority",
+  "SelectionChanged?.Invoke(_state);",
+  "protect them with a single lock",
+  "_ = DoWorkAsync();",
+  "_ = Task.Run(async () =>",
+  "ConfigureAwait(false).GetAwaiter().GetResult()",
+  "Thread.Sleep(200);",
+  "languages/rust/RUST-ASYNC-STANDARDS.md",
+  "languages/rust/RUST-SECURITY-STANDARDS.md",
+  "## C# Async/Await Rules",
+]
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F019 | Resolved in Milestone 7.4b4b |"]
+prohibited = []
+
+[[checks]]
+id = "source-package-projection"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv"
+header = ["manifest_order", "source", "verifier_subjects"]
+unique = [["manifest_order"], ["source"]]
+[[checks.projections]]
+columns = ["manifest_order", "source", "verifier_subjects"]
+order = "source"
+expected = [["5", "CONCURRENCY-STANDARDS.md", "suite:concurrency-policy"]]
+[checks.projections.where]
+field = "source"
+op = "eq"
+value = "CONCURRENCY-STANDARDS.md"
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "registered `concurrency-policy` suite",
+  "generic shared-state,\nlock-boundary, nonblocking async",
+  "exact disposition of `STD-0263` through\n`STD-0268`",
+]
+prohibited = ["`verify-concurrency-policy.sh` checks generic shared-state"]
+
+[[checks]]
+id = "obsolete-authority"
+type = "path_state"
+present = ["evaluation/standards-effectiveness/suites/concurrency-policy.toml"]
+absent = ["evaluation/standards-effectiveness/verify-concurrency-policy.sh"]

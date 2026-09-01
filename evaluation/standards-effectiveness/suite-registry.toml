@@ -1161,11 +1161,6 @@ path = "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml"
 requires = []
 
 [[suites]]
-id = "errexit-zero-accumulation"
-path = "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml"
-requires = []
-
-[[suites]]
 id = "historical-row-checker-ownership"
 path = "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml"
 requires = []
@@ -1323,4 +1318,29 @@ requires = []
 [[suites]]
 id = "interop-event-registration"
 path = "evaluation/standards-effectiveness/suites/interop-event-registration.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-independent-trust-replan"
+path = "evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml"
+requires = []
+
+[[suites]]
+id = "concurrency-policy"
+path = "evaluation/standards-effectiveness/suites/concurrency-policy.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-trust-lifecycle-replan"
+path = "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-rust-async-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml"
+requires = []
+
+[[suites]]
+id = "execution-train"
+path = "evaluation/standards-effectiveness/suites/execution-train.toml"
 requires = []

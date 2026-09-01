@@ -6945,3 +6945,149 @@ plan, and complete mixed evidence pass. Final graph: 12 Bash checkers, 14
 nodes, 81 edges, and 14 components. The old checker is absent without nested
 execution, a normative policy rewrite, compatibility representation, or
 fallback.
+
+### M6-I114 Independent-Trust Re-plan Acceptance
+
+Fresh post-M6-I113 evidence reports 12 Bash verifiers, 14 nodes, 81 edges,
+and 14 components. The 249-line
+`verify-milestone-7-independent-trust-replan.sh` is the sole checker with zero
+actual verifier/helper inbound dependencies, at wave 5. It invokes six retained
+verifier gates and has six frozen contract-inbound references.
+
+The package uses `shared-contract` execution because the protected Bash-only
+zero-accumulation suite and the row-35 transitive-caller contract must retire
+with the checker. One nine-check `migration.parent-plan` suite preserves the
+exact six-group frozen structure, five accepted pretrain dispositions, empty
+next-slice state, required owner and dependency paths, accepted report and
+parent projections, finding closure, documentation, and terminal authority
+state.
+
+The zero-accumulation suite and fixture retire without a compatibility check
+because their only contract was the removed Bash arithmetic mechanism. The
+row-35 caller manifest becomes empty and its suite drops the obsolete direct-
+invocation assertion. Contract ownership, Concurrency, Interop boundary,
+Milestone decomposition, execution-train, and plan-fixture gates remain
+independent through twelve M6-I114 dispositions. Fourteen prior rows transfer
+to the new registered suite.
+
+Nine rejecting mutations and one accepting report-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components. The old checker,
+Bash-only suite, and fixture are absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I115 Generic Concurrency Policy Acceptance
+
+Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,
+and 13 components. Four verifiers have no actual verifier/helper inbound
+dependencies. The 172-line `verify-concurrency-policy.sh` is the sole
+highest-wave root at wave 4. It has no executable inbound caller, four frozen
+contract references, one metadata helper, and two retained verifier gates.
+
+The package uses `shared-contract` execution because the source-package
+subject and row-35 README dependency contract transition with the checker.
+One eleven-check `topic.concurrency` suite preserves all 20 typed shared-state,
+lock-boundary, async, failure, cancellation, fallback, and availability
+decisions. It also preserves nine exact source identities, eleven exact
+dispositions including the C# and Rust parent indexes, metadata closure,
+Router and canonical policy, bounded legacy indexes, finding closure,
+source-package authority, documentation, and terminal path state.
+
+The source-package subject becomes `suite:concurrency-policy`, while row-35
+releases the obsolete Bash README dependency. A native metadata-graph
+assertion replaces helper execution. Trust-lifecycle and plan-fixture checks
+remain independent through six M6-I115 dispositions. Twelve prior M6-I44,
+M6-I71, M6-I73, M6-I84, M6-I113, and M6-I114 records transfer to registered
+suite evidence.
+
+Ten rejecting mutations and one accepting fixture-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 10 Bash checkers, 12 nodes, 53 edges, and 12
+components. The old checker is absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I117 Rust Async Decomposition Acceptance
+
+Fresh post-M6-I116 evidence reports 9 Bash verifiers, 11 nodes, 45 edges, and
+11 components. Rust Async decomposition and execution-train are the two
+zero-inbound wave-2 roots. The 129-line
+`verify-milestone-7-rust-async-decomposition.sh` has the smaller dependency
+surface with one retained gate versus four.
+
+The `serial-coherent` package registers one eight-check
+`migration.parent-plan` suite. It preserves the exact nine-ID/four-slice map,
+accepted dispositions, inventory sources, owner targets, report semantics,
+parent route, documentation, and terminal path state. Plan fixtures remain
+independent through two M6-I117 dispositions. Ten historical M6-M1, M6-M2,
+M6-I60, M6-I87, and M6-I116 records transfer to suite evidence.
+
+Six rejecting mutations and one accepting report-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 8 Bash checkers, 10 nodes, 41 edges, and 10
+components. The old checker is absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I116 Trust/Lifecycle Re-plan Acceptance
+
+Fresh post-M6-I115 evidence reports 10 Bash verifiers, 12 nodes, 53 edges,
+and 12 components. The 176-line
+`verify-milestone-7-trust-lifecycle-replan.sh` is the sole
+zero-executable-inbound root at the highest wave, wave 3. It has two frozen
+contract references and three retained verifier dependencies.
+
+The `serial-coherent` package registers one fourteen-check
+`migration.parent-plan` suite. It preserves the exact nine frozen groups and
+their 90 trust and 26 lifecycle-bridge identifiers, all 17 generic Concurrency
+and nine Rust Async bridge dispositions, the exact nine-item next slice and
+source/owner projections, ten dependent Rust items and dispositions, accepted
+owner paths, report, parent, finding, documentation, and terminal path state.
+
+Rolling decomposition, Rust Async decomposition, and plan-fixture gates remain
+independent through six M6-I116 dispositions. Ten historical M6-M1, M6-M2,
+M6-I87, M6-I104, and M6-I115 records transfer to registered suite evidence.
+
+Twelve rejecting mutations and one accepting report-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 9 Bash checkers, 11 nodes, 45 edges, and 11
+components. The old checker is absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I118 Execution-Train Acceptance
+
+Fresh post-M6-I117 evidence reports 8 Bash verifiers, 10 executable nodes, 41
+conservative edges, and 10 components. The 234-line execution-train checker is
+the sole zero-executable-inbound component at the highest wave, wave 2, with
+four retained verifier dependencies and two frozen contract references.
+
+The `shared-contract` package registers one four-check
+`migration.parent-plan` suite and one strict migration-only `execution_train`
+check kind. The typed state model preserves the exact 47-row, 589-identifier,
+five-checkpoint train, decomposition coverage, owner-map alignment,
+whole-cluster disposition progress, one-time owner transitions, effective
+owner-path state, and contiguous active-frontier ordering. It has no command,
+callback, expression, compatibility-parser, or copied-progress surface.
+
+Rolling decomposition, owner-state transitions, plan fixtures, and
+verification-gate policy remain independent through eight M6-I118 edge
+dispositions. All 128 accepted historical records that formerly selected the
+execution-train checker now select registered suite authority without changing
+their historical source or target identity.
+
+Canonical success and eight rejecting train-order, source-mapping,
+partial-progress, decomposition-coverage, owner-transition, owner-path,
+remaining-coverage, and closed-schema mutations prove parity under both
+authorities. Exact final compilation renews 22/22 dependency-local requirements
+and leaves 29 stable, closing 51/51 coverage. All focused, engine,
+repository-Git, graph, declarative, generated, numeric, plan, and complete
+mixed evidence pass. Final graph: 7 Bash checkers, 9 executable nodes, 33
+edges, and 9 components. The old checker is absent without nested execution, a
+normative or legacy source rewrite, compatibility representation, or fallback.

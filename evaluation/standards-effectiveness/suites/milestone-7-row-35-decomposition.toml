@@ -112,7 +112,6 @@ unique = [["caller"]]
 columns = ["caller", "shared_checker"]
 order = "source"
 expected = [
-  ["evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
 ]
 
 [[checks]]
@@ -125,13 +124,6 @@ manifest_path = "evaluation/standards-effectiveness/milestone-7-row-35-transitiv
 manifest_header = ["caller", "shared_checker"]
 manifest_path_column = "caller"
 literal = "verify-contract-ownership.sh\"\n"
-
-[[checks]]
-id = "independent-trust-invocation"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh"
-required = ["\n\"$SCRIPT_DIR/verify-contract-ownership.sh\"\n"]
-prohibited = []
 
 [[checks]]
 id = "decomposition-report"
