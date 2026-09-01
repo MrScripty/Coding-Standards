@@ -15476,3 +15476,26 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 18-entrypoint checkpoint pass. Final graph: 18 Bash
   checkers, 21 nodes, 118 edges, and 21 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I108 Language-Binding Boundary Acceptance
+
+- Fresh post-M6-I107 evidence reports 18 Bash verifiers, 21 nodes, 118 edges,
+  and 21 components. Four verifiers have no executable inbound edge. The
+  126-line language-binding boundary verifier is the smallest highest-wave
+  root at wave 1, declares one metadata helper, and invokes one retained
+  decomposition gate. M6-I108 is `shared-contract` at train order 223 because
+  the row-35 README dependency manifest requires a final-state transition.
+- One eight-check `profile.boundary.language-bindings` suite preserves all 14
+  typed representation decisions, four exact source identities and
+  dispositions, metadata closure, canonical profile text, Router and legacy
+  routes, no-fallback policy, and documentation.
+- A native metadata-graph assertion replaces helper execution. F022/F023
+  decomposition remains an independent gate through four edge dispositions.
+  Six earlier M6-I68, M6-I70, and M6-I96 records transfer to registered suite
+  evidence, and the row-35 manifest releases the retired direct dependency.
+- Seven mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 17-entrypoint checkpoint pass. Final graph: 17
+  Bash checkers, 20 nodes, 111 edges, and 20 components; fresh graph evidence
+  is required next.

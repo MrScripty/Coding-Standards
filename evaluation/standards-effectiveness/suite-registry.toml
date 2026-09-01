@@ -1294,3 +1294,8 @@ requires = []
 id = "systemic-finding-replanning"
 path = "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml"
 requires = []
+
+[[suites]]
+id = "language-binding-boundary"
+path = "evaluation/standards-effectiveness/suites/language-binding-boundary.toml"
+requires = []

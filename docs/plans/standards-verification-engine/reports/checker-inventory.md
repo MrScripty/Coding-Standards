@@ -6760,3 +6760,34 @@ closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
 plan, and complete mixed evidence pass. Final graph: 18 Bash checkers, 21 nodes,
 118 edges, and 21 components. The old checker is absent without nested
 execution, a source-policy rewrite, compatibility representation, or fallback.
+
+### M6-I108 Language-Binding Boundary Acceptance
+
+Fresh post-M6-I107 evidence reports 18 Bash verifiers, 21 nodes, 118 edges,
+and 21 components. Four verifiers have no executable inbound edge. The
+126-line `verify-language-binding-boundary.sh` is the smallest root at the
+highest dependency wave 1. Its incoming references are accepted plan, edge,
+and row-35 evidence; it declares one metadata helper and invokes the retained
+F022/F023 decomposition checker.
+
+The package uses `shared-contract` execution because its boundary-profile
+contract and documentation projection require the cross-owner row-35 README
+dependency manifest to release the retired path. No shared engine, schema,
+fixture, or source-policy change is required. One eight-check suite preserves
+all 14 typed representation decisions, four exact source identities and
+dispositions, metadata closure, canonical profile text, Router and legacy
+routes, no-fallback policy, and documentation.
+
+A native metadata-graph assertion replaces helper execution. F022/F023
+decomposition remains an independent gate through four edge dispositions. Six
+prior M6-I68, M6-I70, and M6-I96 records transfer to registered suite evidence,
+and the row-35 manifest releases the retired direct dependency.
+
+Seven mutations reject decision-outcome drift, source-identity drift,
+disposition drift, metadata drift, canonical-profile drift, Router-route drift,
+and active legacy-policy drift. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 17 Bash checkers, 20 nodes, 111 edges, and 20
+components. The old checker is absent without nested execution, a source-policy
+rewrite, compatibility representation, or fallback.

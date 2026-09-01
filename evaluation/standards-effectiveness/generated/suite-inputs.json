@@ -509,6 +509,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -999,6 +1004,18 @@
       ]
     },
     {
+      "digest": "sha256:3a04185235f1721919d1372668bb33259719dfc6ff46f324146cb599d6c60b15",
+      "path": "LANGUAGE-BINDINGS-STANDARDS.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "language-binding-boundary"
+        }
+      ]
+    },
+    {
       "digest": "sha256:a92b83759e6a79fe88ad87a6d5a63f0514068ca8d14cca68cd4f62673955d9e6",
       "path": "LAUNCHER-STANDARDS.md",
       "state": "present",
@@ -1274,6 +1291,11 @@
           "check": "router-route",
           "role": "content",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "router-route",
+          "role": "content",
+          "suite": "language-binding-boundary"
         },
         {
           "check": "language-index-links",
@@ -1837,7 +1859,7 @@
       ]
     },
     {
-      "digest": "sha256:d78f4ead5749f5a3269f64dcb318b2ce0f4dfc397d58ce476d508340c1f45886",
+      "digest": "sha256:f81f7ced17ac39bd913483a6ec9ee9597c6f53292acdb5745b8001c0b0ec4525",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1849,7 +1871,7 @@
       ]
     },
     {
-      "digest": "sha256:77f622c64e9604d9365c6d17c829e19c3dc45eec0b1c1ccfcac06147cc119419",
+      "digest": "sha256:5d1686e783fe12925475f95b7badfa03e354f60377d1964d6d82b0ebf5627706",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1922,6 +1944,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "language-binding-boundary"
         },
         {
           "check": "documentation-projection",
@@ -2155,7 +2182,7 @@
       ]
     },
     {
-      "digest": "sha256:e1397089ad7c974b13c940813aa0062c7391574365957e020acfb253afb77dfe",
+      "digest": "sha256:90ff4f012b0dcf3f3b7d9a90965e80c58a3679b67370d888258213a8e220d23e",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2590,6 +2617,11 @@
           "check": "exact-dispositions",
           "role": "table",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "language-binding-boundary"
         },
         {
           "check": "exact-dispositions",
@@ -3448,7 +3480,7 @@
       ]
     },
     {
-      "digest": "sha256:584d4e99956cc6d7d8a09eabeafc1df73759af3b898661090f55b408a8f3be09",
+      "digest": "sha256:7dd4c7ed0efe376cbbf9213b0fdba7f5acd04df9f47f58acbf5e5cbcf5885005",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4550,6 +4582,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "language-binding-mechanism-selection"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:659eb8eb5aa94043d4d4353d9bc96da8a7252847ccf134c6583b8551f04b4c3a",
+      "path": "evaluation/standards-effectiveness/fixtures/language-bindings/representation-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "language-binding-boundary"
         }
       ]
     },
@@ -6816,7 +6860,7 @@
       ]
     },
     {
-      "digest": "sha256:88d2423e2900108822cbf06a29212fe0b83beeeb1e4645538b15df0551a175ad",
+      "digest": "sha256:9b585bc82c6d2bef572d7dccf5acc3508a1ea35daeb9d81a2c395317aa708c22",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6828,7 +6872,7 @@
       ]
     },
     {
-      "digest": "sha256:b1faa328a07730ebce21f7b111fbfeee4de4b741e1ce592f1fd898776fa452b2",
+      "digest": "sha256:3e4115229c4bca49bbcc0665ff4f12f6ec3001a9a3f3c33581d7fb2ef9ca7540",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7016,6 +7060,11 @@
           "check": "source-identities",
           "role": "table",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "language-binding-boundary"
         },
         {
           "check": "source-identities",
@@ -8709,7 +8758,7 @@
       ]
     },
     {
-      "digest": "sha256:32209388b1e57d5318b745e02bf365bac25b40ca09ee9e911cc15ca8485612c4",
+      "digest": "sha256:fabf5b5a81018e405756309004fe05f7746de57b4b929ee4127baf722e2814e5",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -9702,7 +9751,7 @@
       ]
     },
     {
-      "digest": "sha256:0d37c726ad8ed06daaad5ee74b5cf919f50f042b5c044d0de15947f1f4092efa",
+      "digest": "sha256:315d366b55347647ec17969710f81d1a7dc06b2a8daf14893a1086a1679de5c5",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10688,6 +10737,18 @@
     {
       "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5fc89ca3138c8e964ea350641c16810c4dd6105bea291959d01bf3656ddce781",
+      "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
       "state": "present",
       "uses": [
         {
@@ -13004,38 +13065,6 @@
       ]
     },
     {
-      "digest": "sha256:a5d878ba9d215cfc74c3ce736978a7da67c29609c2955c269c90eb4285791293",
-      "path": "evaluation/standards-effectiveness/verify-language-binding-boundary.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "path": "evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh",
       "state": "absent",
       "uses": [
@@ -14234,6 +14263,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -14410,6 +14444,16 @@
       "path": "profiles/boundaries/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "canonical-profile",
+          "role": "content",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
         {
           "check": "canonical-profile",
           "role": "content",
@@ -21222,6 +21266,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -22002,6 +22051,11 @@
           "check": "security-policy",
           "role": "content",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
         },
         {
           "check": "metadata-closure",
@@ -23087,6 +23141,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "language-binding-wire-representation"
         },
         {
@@ -23448,11 +23507,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:0d37c726ad8ed06daaad5ee74b5cf919f50f042b5c044d0de15947f1f4092efa",
+    "digest": "sha256:315d366b55347647ec17969710f81d1a7dc06b2a8daf14893a1086a1679de5c5",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:2a1ea46532b3abf7facd809dbf26ac916b7acdb93b9c4aa7bbcd5098772861ef",
+    "digest": "sha256:b17e6047da32d70aad1ac8841fae9d9593d0d8fc42de83f5514cc0208059bf46",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25073,6 +25132,12 @@
       "digest": "sha256:53273ae8842181a91c26524544bd05e21bbb98b9acb840cb3035dc63e3f9b749",
       "id": "systemic-finding-replanning",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:5fc89ca3138c8e964ea350641c16810c4dd6105bea291959d01bf3656ddce781",
+      "id": "language-binding-boundary",
+      "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
       "requires": []
     }
   ]
