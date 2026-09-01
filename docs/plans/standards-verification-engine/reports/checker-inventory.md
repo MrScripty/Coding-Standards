@@ -7060,3 +7060,34 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 9 Bash checkers, 11 nodes, 45 edges, and 11
 components. The old checker is absent without nested execution, a normative
 or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I118 Execution-Train Acceptance
+
+Fresh post-M6-I117 evidence reports 8 Bash verifiers, 10 executable nodes, 41
+conservative edges, and 10 components. The 234-line execution-train checker is
+the sole zero-executable-inbound component at the highest wave, wave 2, with
+four retained verifier dependencies and two frozen contract references.
+
+The `shared-contract` package registers one four-check
+`migration.parent-plan` suite and one strict migration-only `execution_train`
+check kind. The typed state model preserves the exact 47-row, 589-identifier,
+five-checkpoint train, decomposition coverage, owner-map alignment,
+whole-cluster disposition progress, one-time owner transitions, effective
+owner-path state, and contiguous active-frontier ordering. It has no command,
+callback, expression, compatibility-parser, or copied-progress surface.
+
+Rolling decomposition, owner-state transitions, plan fixtures, and
+verification-gate policy remain independent through eight M6-I118 edge
+dispositions. All 128 accepted historical records that formerly selected the
+execution-train checker now select registered suite authority without changing
+their historical source or target identity.
+
+Canonical success and eight rejecting train-order, source-mapping,
+partial-progress, decomposition-coverage, owner-transition, owner-path,
+remaining-coverage, and closed-schema mutations prove parity under both
+authorities. Exact final compilation renews 22/22 dependency-local requirements
+and leaves 29 stable, closing 51/51 coverage. All focused, engine,
+repository-Git, graph, declarative, generated, numeric, plan, and complete
+mixed evidence pass. Final graph: 7 Bash checkers, 9 executable nodes, 33
+edges, and 9 components. The old checker is absent without nested execution, a
+normative or legacy source rewrite, compatibility representation, or fallback.

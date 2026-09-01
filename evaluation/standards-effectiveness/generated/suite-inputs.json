@@ -286,6 +286,11 @@
           "suite": "disabled-behavior-claims"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "root-projection",
           "role": "content",
           "suite": "frontend-owner-contract"
@@ -405,6 +410,11 @@
           "suite": "csharp-async-owner-contract"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "legacy-projection",
           "role": "content",
           "suite": "godot-owner-contract"
@@ -505,6 +515,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "documentation-reference"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -1002,6 +1017,11 @@
           "suite": "cross-language-contract"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "prohibited-authority",
           "role": "content",
           "suite": "interop-applicability-index"
@@ -1316,6 +1336,11 @@
           "check": "router-projection",
           "role": "content",
           "suite": "documentation-decisions"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "router-routes",
@@ -1909,7 +1934,7 @@
       ]
     },
     {
-      "digest": "sha256:4de2017e41edca1f82e64583a83919b7f6b35cb79a28d8deb1dc0b478a0f07e0",
+      "digest": "sha256:504344a61f41acb468f26074169c9b84081f83bf408535a22a5d980e716eaaf5",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1921,7 +1946,19 @@
       ]
     },
     {
-      "digest": "sha256:a489fcd55e16b2b2ef77a4bc8c1cd6fe2443b64a3c4c5aba42467d351310031c",
+      "digest": "sha256:e2fb81f4f527183370aedb77421a9aa2fdaf93f6bd166063bd4097bfcd748812",
+      "path": "docs/plans/standards-verification-engine/reports/m6-i118-execution-train-admission.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "admission-boundary",
+          "role": "content",
+          "suite": "execution-train"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:b44ee274bae1b26e01337a710b752cb69752b62d8b5bb3f768ebd849257cad59",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1989,6 +2026,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "documentation-policy-consolidation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "execution-train"
         },
         {
           "check": "documentation-projection",
@@ -2277,7 +2319,7 @@
       ]
     },
     {
-      "digest": "sha256:849f884b0f2bdb4b1a438553620b5632ea269af3ff7b7e2763f624a700094cd2",
+      "digest": "sha256:12cff1651f071e89acef7b16364237923f3113b960187a907e41bbf5ac728a80",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2617,6 +2659,11 @@
           "check": "dispositions",
           "role": "content",
           "suite": "documentation-traceability-policy"
+        },
+        {
+          "check": "state-model",
+          "role": "dispositions",
+          "suite": "execution-train"
         },
         {
           "check": "exact-dispositions",
@@ -3625,7 +3672,7 @@
       ]
     },
     {
-      "digest": "sha256:d219cb231636cc2dd2361de1d9bf5066739fe8114adf9271b0a6d11e6bc303ce",
+      "digest": "sha256:e745460ee95949870ddd1f79e7480bff784fd9415d35cb3fdd1c251ddb6c9768",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -7106,7 +7153,7 @@
       ]
     },
     {
-      "digest": "sha256:9161a7fc5ebac71782ed872e9dae53f677389485db042e62c2d469d28aa7e535",
+      "digest": "sha256:70e9fade75cbd0ab3eb4c36e992ce54eed095396bb1ef9fa1a96746e45e9755c",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7118,7 +7165,7 @@
       ]
     },
     {
-      "digest": "sha256:9f48b024fd18e6451fb72d378671d57ff4feacdf835d0741eb6c166b2ffe1883",
+      "digest": "sha256:2da9fbcf7fa02ce46d3dc80f0287866c1cedb14c9ae737960ca0d7e701c9229f",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7190,6 +7237,11 @@
       "path": "evaluation/standards-effectiveness/generated/rule-owner-map.tsv",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-map",
+          "suite": "execution-train"
+        },
         {
           "check": "language-index-owner-map",
           "role": "table",
@@ -7567,7 +7619,7 @@
       ]
     },
     {
-      "digest": "sha256:72938a355ce4954cc1ca86d9ced2e80ef4a3d721f20a8a58c0f8cc723b42cf65",
+      "digest": "sha256:8e803e9788465864cf6d349301648145a823aa303be4b603e919474f34c751a5",
       "path": "evaluation/standards-effectiveness/migration-python-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -7773,6 +7825,11 @@
           "check": "execution-overlay",
           "role": "table",
           "suite": "dependencies-owner-contract"
+        },
+        {
+          "check": "state-model",
+          "role": "execution-decomposition",
+          "suite": "execution-train"
         },
         {
           "check": "disposition-lineage",
@@ -8130,6 +8187,11 @@
           "check": "execution-train",
           "role": "table",
           "suite": "dependencies-owner-contract"
+        },
+        {
+          "check": "state-model",
+          "role": "execution-train",
+          "suite": "execution-train"
         },
         {
           "check": "historical-train-rows",
@@ -10146,7 +10208,7 @@
       ]
     },
     {
-      "digest": "sha256:4e21f4be50b8f1571b91ddf1db51385496d1c59b35adb7aa1eae31242c226cee",
+      "digest": "sha256:e080bd586f8c778bd71e31cabe95ed4555543954ad1d8f5164702fc9497dd55e",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10934,6 +10996,23 @@
       "path": "evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml",
       "state": "present",
       "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c1523b7390ff9e619e18fbc6d2c2855b860bdddd7e53d9ba63811d8ba03ef6cf",
+      "path": "evaluation/standards-effectiveness/suites/execution-train.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "terminal-authority",
+          "role": "required-present",
+          "suite": "execution-train"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -13528,24 +13607,13 @@
       ]
     },
     {
-      "digest": "sha256:179670b893bbe60a842b036a7a507d560de6c0f6331f33e85a78307d7ce7ee4e",
       "path": "evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
+          "check": "terminal-authority",
+          "role": "required-absent",
+          "suite": "execution-train"
         }
       ]
     },
@@ -13881,6 +13949,11 @@
           "check": "legacy-route",
           "role": "content",
           "suite": "binding-generation-authority"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "legacy-route",
@@ -14251,6 +14324,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "profile",
           "role": "content",
           "suite": "frontend-applicability"
@@ -14377,6 +14455,11 @@
       "path": "profiles/applications/launcher.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
@@ -14589,6 +14672,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "event-registration-policy",
           "role": "content",
           "suite": "interop-event-registration"
@@ -14726,6 +14814,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "ipc-policy",
           "role": "content",
           "suite": "ipc-payload-validation"
@@ -14802,6 +14895,11 @@
       "path": "profiles/boundaries/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "canonical-profile",
           "role": "content",
@@ -14970,6 +15068,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "profile",
           "role": "content",
           "suite": "persistence-durable-mutation"
@@ -15036,6 +15139,11 @@
       "path": "profiles/frameworks/godot.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "canonical-owner-projection",
           "role": "content",
@@ -15114,6 +15222,11 @@
           "suite": "csharp-async-owner-contract"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
           "suite": "milestone-7-row-13-decomposition"
@@ -15180,6 +15293,11 @@
       "path": "profiles/languages/rust/README.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "language-index-links",
           "role": "link-target",
@@ -15438,6 +15556,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -15682,6 +15805,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -15748,6 +15876,11 @@
       "path": "profiles/languages/rust/dependencies.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -15912,6 +16045,11 @@
       "path": "profiles/languages/rust/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "required-paths",
           "role": "required-present",
@@ -16090,6 +16228,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "canonical-paths",
           "role": "required-present",
           "suite": "milestone-7-row-22-decomposition"
@@ -16191,6 +16334,11 @@
       "path": "profiles/languages/rust/security.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "required-paths",
           "role": "required-present",
@@ -16318,6 +16466,11 @@
       "path": "profiles/languages/rust/tooling.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -16488,6 +16641,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "frontend-rendering-synchronization"
@@ -16584,6 +16742,11 @@
       "path": "profiles/languages/typescript/async.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "metadata-closure",
           "role": "metadata",
@@ -16968,6 +17131,11 @@
           "check": "reference-projection",
           "role": "content",
           "suite": "architecture-process-instance-coordination"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "canonical-owner-path",
@@ -17672,6 +17840,11 @@
       "path": "reference/recipes/tooling.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "tooling-reference",
           "role": "content",
@@ -19920,7 +20093,7 @@
       ]
     },
     {
-      "digest": "sha256:323d821c9afb6c4b1ff424e87ac8c4e3ffb65028eca9b29b9f1e032f3330c287",
+      "digest": "sha256:b1e296d352d598482e27ca4801e0d833072a5ed65d40a1ee4df361a236843828",
       "path": "tools/standards_verifier/standards_verifier/checks/__init__.py",
       "state": "present",
       "uses": [
@@ -20080,6 +20253,28 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:36fc9a6c54bdd2268065b48571c1b90f73b1f27c7ec311632f16c7adb2263d78",
+      "path": "tools/standards_verifier/standards_verifier/checks/execution_train.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "migration-python-candidate-completeness",
+          "role": "package-python",
+          "suite": "checker-migration-packages"
+        },
+        {
+          "check": "terminal-authority",
+          "role": "required-present",
+          "suite": "execution-train"
         }
       ]
     },
@@ -21079,6 +21274,18 @@
       ]
     },
     {
+      "digest": "sha256:69a893110eaa8b9c15c0b94bc5c0901d818d04b8bdf05ff35d0e3883f47dc212",
+      "path": "tools/standards_verifier/tests/test_execution_train.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "terminal-authority",
+          "role": "required-present",
+          "suite": "execution-train"
+        }
+      ]
+    },
+    {
       "digest": "sha256:7432123e0efd61f24a11b2688770f2dd73efe0cfb577398fde714229450e1032",
       "path": "tools/standards_verifier/tests/test_file_contracts.py",
       "state": "present",
@@ -21261,6 +21468,11 @@
           "suite": "accessibility-owner-contract"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "frontend-rendering-synchronization"
@@ -21358,6 +21570,11 @@
           "suite": "core-simplicity"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "canonical-owner-paths",
           "role": "required-present",
           "suite": "milestone-7-row-15-decomposition"
@@ -21438,6 +21655,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "concurrency-policy"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -21680,6 +21902,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -21959,6 +22186,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "cross-platform-policy",
           "role": "content",
           "suite": "filesystem-containment-policy"
@@ -22074,6 +22306,11 @@
           "check": "owner",
           "role": "content",
           "suite": "dependency-standards-consolidation"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "dependencies-policy",
@@ -22193,6 +22430,11 @@
           "suite": "diagnostics-owner-contract"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -22239,6 +22481,11 @@
       "path": "topics/licensing.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "owner",
           "role": "content",
@@ -22311,6 +22558,11 @@
       "path": "topics/performance.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "canonical-owner-paths",
           "role": "required-present",
@@ -22393,6 +22645,11 @@
       "path": "topics/resilience.md",
       "state": "present",
       "uses": [
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
         {
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
@@ -22484,6 +22741,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -22810,6 +23072,11 @@
           "suite": "commit-consolidation-dispositions"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "commit-projection",
           "role": "content",
           "suite": "planning-consolidation"
@@ -22922,6 +23189,11 @@
           "suite": "evidence-oracle-boundaries"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "canonical-owner-path",
           "role": "required-present",
           "suite": "milestone-7-row-41-decomposition"
@@ -23017,6 +23289,11 @@
           "check": "workflow-projections",
           "role": "content",
           "suite": "core-simplicity"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "workflow",
@@ -23131,6 +23408,11 @@
           "suite": "core-simplicity"
         },
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "planning-workflow",
           "role": "content",
           "suite": "planning-admission"
@@ -23226,6 +23508,11 @@
           "check": "release-policy",
           "role": "content",
           "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "canonical-owner-paths",
@@ -23440,6 +23727,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
+        },
+        {
           "check": "tooling-workflow",
           "role": "content",
           "suite": "frontend-typescript-tooling"
@@ -23600,6 +23892,11 @@
           "check": "verification-policy",
           "role": "content",
           "suite": "evidence-oracle-boundaries"
+        },
+        {
+          "check": "state-model",
+          "role": "owner-state",
+          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -24010,11 +24307,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:4e21f4be50b8f1571b91ddf1db51385496d1c59b35adb7aa1eae31242c226cee",
+    "digest": "sha256:e080bd586f8c778bd71e31cabe95ed4555543954ad1d8f5164702fc9497dd55e",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:e6e24e48de9b6fd3ff9ce7cb1f58dd443665141dfba5392763f550cf3bb8eedc",
+    "digest": "sha256:6c0a695a39495b50bd5d8afc4b0fc334c78d0a71688cd37e7bb2d6b65ac76195",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25689,6 +25986,12 @@
       "digest": "sha256:e34b635fa03df276587aa58cc93e972aef252451660cdb9537d53a101b400c84",
       "id": "milestone-7-rust-async-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:c1523b7390ff9e619e18fbc6d2c2855b860bdddd7e53d9ba63811d8ba03ef6cf",
+      "id": "execution-train",
+      "path": "evaluation/standards-effectiveness/suites/execution-train.toml",
       "requires": []
     }
   ]

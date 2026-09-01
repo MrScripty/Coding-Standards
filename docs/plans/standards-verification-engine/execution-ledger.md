@@ -7269,3 +7269,22 @@
   tests, package and edge authority, exact generated freshness, numeric
   lifecycle, focused independent gates, complete declarative verification,
   both plan checks, and the complete mixed checkpoint.
+
+## 2026-09-01 - M6-I118 Execution-Train Acceptance
+
+- Replaced the 234-line execution-train Bash coordinator with one strict
+  migration-only Python state model and one four-check registered
+  `migration.parent-plan` suite at train order 233.
+- Preserved the exact 47-row, 589-identifier, five-checkpoint train,
+  decomposition coverage, owner-map alignment, all-or-none cluster progress,
+  one-time owner transitions, effective owner-path state, and contiguous
+  active-frontier ordering without nested execution or copied derived state.
+- Four retained gates remain independent through eight current dispositions.
+  All 128 accepted historical records transfer their replacement evidence to
+  `suite:execution-train` without rewriting historical source or target
+  identities.
+- Canonical success and eight rejecting shared mutations prove parity. Exact
+  final compilation renews 22/22 dependency-local requirements and leaves 29
+  stable, closing 51/51 coverage. Focused, engine, repository-Git, graph,
+  declarative, generated, numeric, plan, and complete mixed evidence pass.
+  Final graph: 7 Bash checkers, 9 nodes, 33 edges, and 9 components.

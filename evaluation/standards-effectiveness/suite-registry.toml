@@ -1339,3 +1339,8 @@ requires = []
 id = "milestone-7-rust-async-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "execution-train"
+path = "evaluation/standards-effectiveness/suites/execution-train.toml"
+requires = []

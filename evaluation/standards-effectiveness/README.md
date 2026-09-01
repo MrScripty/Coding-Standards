@@ -860,15 +860,15 @@ original-input reuse, history flags, stale proof,
 mutable aliases, implicit cross-boundary trust, permissive defaults, weaker
 decoders, and redundant-decoding mandates.
 
-`milestone-7-execution-train.tsv` and
-`verify-milestone-7-execution-train.sh` replace routine planning/implementation
-alternation for the 589-ID remainder. They prove exact one-time coverage across
-47 source/owner clusters, owner-state honesty, final-closure isolation, five
-dependency waves, five complete-suite checkpoints, and the active integration
-cursor. The manifest is immutable: exact dispositions derive a contiguous
-completed prefix and the first wholly remaining row, while partial cluster
-completion is rejected. Manifest rows authorize pre-slice review; they do not
-pre-approve final owners or dispositions.
+`milestone-7-execution-train.tsv` and the registered `execution-train` suite
+replace routine planning/implementation alternation for the 589-ID remainder.
+The suite uses a typed migration-only Python state model to prove exact one-time
+coverage across 47 source/owner clusters, owner-state honesty, final-closure
+isolation, five dependency waves, five complete-suite checkpoints, and the
+active integration cursor. The manifest is immutable: exact dispositions
+derive a contiguous completed prefix and the first wholly remaining row, while
+partial cluster completion is rejected. Manifest rows authorize pre-slice
+review; they do not pre-approve final owners or dispositions.
 
 `milestone-7-execution-decomposition.tsv` overlays ordered owner-coherent child
 slices when pre-slice review rejects a mixed-role baseline row. The baseline

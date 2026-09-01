@@ -174,6 +174,15 @@ operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
 variables, or write files.
 
+The migration-only `execution_train` check reads the immutable train,
+decomposition, owner map, and accepted dispositions through exact table
+schemas. It expands baseline ranges, proves one-time child coverage, rejects
+partial or noncontiguous progress, applies one-time owner creation transitions,
+and checks the resulting contained owner paths. Its immutable row, identifier,
+and checkpoint totals are explicit suite inputs; derived progress and logical
+cluster counts are not stored as parallel authority. The check is removed with
+its registered suite at zero-Bash acceptance.
+
 One invocation catalog owns every validated registry entry and every suite body
 loaded for that invocation. Listing validates the registry without parsing suite
 bodies. Focused execution parses only the selected dependency closure, while

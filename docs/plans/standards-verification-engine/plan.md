@@ -5,18 +5,17 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** implement admitted M6-I118 from its frozen shared-contract
-boundary, then run its focused, mutation, graph, coverage, and complete mixed
-acceptance evidence
+**Next slice:** run a fresh post-M6-I118 graph audit; do not preselect the next
+package from evidence captured before this accepted shared-contract package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I117 replaced the Rust Async decomposition Bash
-checker with registered declarative authority at train order 232.
+**Latest accepted slice:** M6-I118 replaced the execution-train Bash checker
+with one migration-owned typed Python check and registered suite at train order
+233.
 
-**Latest admitted slice:** M6-I118 admits the execution-train Bash checker for
-replacement by one migration-owned typed Python check and registered suite at
-train order 233.
+**Latest admitted slice:** `none`; the next package requires fresh graph and
+ownership evidence.
 
 **Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
@@ -132,11 +131,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I117 at train
-order 232.
+**Accepted boundary:** package records are accepted through M6-I118 at train
+order 233.
 
-**Current derived state:** 268 registered declarative suites, 8 retained Bash
-checkers, 10 executable nodes, 41 conservative reference edges, and 10
+**Current derived state:** 269 registered declarative suites, 7 retained Bash
+checkers, 9 executable nodes, 33 conservative reference edges, and 9
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -181,7 +180,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I117 Rust Async decomposition accepted at train order 232 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I118 execution train accepted at train order 233 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

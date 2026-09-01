@@ -14,6 +14,7 @@ from .derived_evidence import (
     parse_table_text_absence_check,
 )
 from .edge_dispositions import parse_edge_dispositions_check
+from .execution_train import parse_execution_train_check
 from .exact_text import parse_exact_text_check
 from .git_index_paths import parse_git_index_paths_check
 from .inclusion import parse_inclusion_check
@@ -67,6 +68,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_table_text_absence_check(raw, suite_id)
     if kind == "edge_dispositions":
         return parse_edge_dispositions_check(raw, suite_id)
+    if kind == "execution_train":
+        return parse_execution_train_check(raw, suite_id)
     if kind == "exact_text":
         return parse_exact_text_check(raw, suite_id)
     if kind == "git_index_paths":
