@@ -286,11 +286,12 @@ terminology, paper-only assumptions, or unresolved publication facts.
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 - `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html`
 - `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py`
 
-The five prototype paths are writable only in governed isolated prototype
+The six currently registered prototype paths are writable only in governed isolated prototype
 branches or worktrees and never enter the canonical integration branch. The
 canonical branch accepts their exact evidence pointers, verdicts, and validated
 decisions through the named reports. Each prototype branch also owns its local

@@ -312,3 +312,21 @@
   passed. Protected the tip at
   `refs/archive/a2-prototypes/p4-facade-workflow`, verified the worktree clean,
   and removed it without merging either artifact to canonical `main`.
+
+## 2026-09-01 - A2-P2R Projected-Analysis Replay Protocol
+
+- P2 established exact compiler equivalence but could not pass a proposal
+  revision through the snapshot-bound A1c prepare contract. Registered P2R to
+  decide the remaining identity and cold-replay question before P4R or P5.
+- The experiment compares the bounded representation seams exposed by the
+  current implementation: mutable current-head lookup, ephemeral material
+  injection, a synthetic proposed snapshot, changed A1c AnalysisState identity,
+  and a separate authoring-analysis authority.
+- The oracle requires two byte-distinct revisions over one base and identical
+  declared analysis changes to remain distinguishable after head movement and
+  process reopen. It uses the current A1c codec and generated contract rather
+  than a replacement analyzer or invented state format.
+- A preserving injective and replayable candidate may pass. If every bounded
+  candidate either loses identity or violates an explicit A1c/P1/P2 choice, the
+  required verdict is `reject-requires-product-reauthorization`; A2 may not
+  choose which protected decision to change. P4R and P5 remain blocked.
