@@ -15567,3 +15567,22 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 14-entrypoint checkpoint pass. Final graph: 14 Bash
   checkers, 16 nodes, 93 edges, and 16 components; fresh graph evidence is
   required next.
+
+## 2026-09-01 - M6-I112 Contract-Decision Fixture Acceptance
+
+- Fresh post-M6-I111 evidence reports 14 Bash verifiers, 16 nodes, 93 edges,
+  and 16 components. The 43-line contract-decision verifier is the sole graph
+  root at wave 0 and has no executable dependency. M6-I112 is
+  `serial-coherent` at train order 227.
+- One two-check `topic.contracts` suite preserves all five enum domains and the
+  four cross-field rules for replacement, derived-state rebuild, degradation,
+  and unknown substitute authority. The fixture gains an explicit native
+  expected-outcome projection.
+- Two earlier M6-I98 records transfer to registered suite evidence;
+  `binding-contract-evolution` remains an independently registered gate.
+- Eleven mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  independent-suite checks, all suites, graph and generated freshness, numeric
+  lifecycle, plan checks, and the complete 13-entrypoint checkpoint pass.
+  Final graph: 13 Bash checkers, 15 nodes, 92 edges, and 15 components; fresh
+  graph evidence is required next.

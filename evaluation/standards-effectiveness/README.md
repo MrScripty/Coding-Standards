@@ -394,12 +394,14 @@ smoke-as-feature substitution.
 
 ## Contract Decision Fixtures
 
-`verify-contract-decisions.sh` checks coordinated replacement, persisted
-migration, public versioning, independently deployed negotiation, generated
-artifacts, derived-state rebuild, valid degradation, and typed unavailable,
-invalid, or unsupported outcomes. It rejects replacement across independent or
-authoritative-state boundaries and degradation without an authoritative,
-semantically equivalent source.
+`fixtures/contracts/decisions.tsv` and the registered `contract-decisions`
+suite check coordinated replacement, persisted migration, public versioning,
+independently deployed negotiation, generated artifacts, derived-state
+rebuild, valid degradation, and typed unavailable, invalid, or unsupported
+outcomes. They reject replacement across independent or authoritative-state
+boundaries, invalid derived-state rebuilds, degradation without an
+authoritative semantically equivalent source, and untyped handling of an
+unknown substitute.
 
 `verify-contract-ownership.sh` checks that legacy architecture, coding,
 interop, release, and binding guidance links to the canonical topic and does not

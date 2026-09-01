@@ -1,11 +1,11 @@
-case	class	deployment	state	substitute	action
-coordinated-internal	internal-coordinated	atomic	ephemeral	none	replace
-retained-schema	persisted	atomic	authoritative	none	migrate
-public-api	public-versioned	independent	ephemeral	none	version
-overlapping-services	distributed-independent	independent	ephemeral	none	negotiate
-generated-binding	generated	atomic	ephemeral	none	regenerate
-corrupt-authoritative-store	persisted	atomic	authoritative	none	typed-invalid
-disposable-index	persisted	atomic	derived	authoritative-equivalent	rebuild-derived
-valid-read-cache	distributed-independent	independent	derived	authoritative-equivalent	degrade-defined
-unknown-stale-cache	distributed-independent	independent	derived	unknown	typed-unavailable
-unsupported-wire-version	distributed-independent	independent	ephemeral	none	typed-unsupported
+case	class	deployment	state	substitute	action	expected
+coordinated-internal	internal-coordinated	atomic	ephemeral	none	replace	allow
+retained-schema	persisted	atomic	authoritative	none	migrate	allow
+public-api	public-versioned	independent	ephemeral	none	version	allow
+overlapping-services	distributed-independent	independent	ephemeral	none	negotiate	allow
+generated-binding	generated	atomic	ephemeral	none	regenerate	allow
+corrupt-authoritative-store	persisted	atomic	authoritative	none	typed-invalid	allow
+disposable-index	persisted	atomic	derived	authoritative-equivalent	rebuild-derived	allow
+valid-read-cache	distributed-independent	independent	derived	authoritative-equivalent	degrade-defined	allow
+unknown-stale-cache	distributed-independent	independent	derived	unknown	typed-unavailable	allow
+unsupported-wire-version	distributed-independent	independent	ephemeral	none	typed-unsupported	allow

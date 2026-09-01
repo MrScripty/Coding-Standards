@@ -6883,3 +6883,31 @@ Exact final compilation renews 22/22 dependency-local requirements and leaves
 numeric, plan, and complete mixed evidence pass. Final graph: 14 Bash checkers,
 16 nodes, 93 edges, and 16 components. The old checker is absent without nested
 execution, a source-policy rewrite, compatibility representation, or fallback.
+
+### M6-I112 Contract-Decision Fixture Acceptance
+
+Fresh post-M6-I111 evidence reports 14 Bash verifiers, 16 nodes, 93 edges,
+and 16 components. The 43-line `verify-contract-decisions.sh` is the sole graph
+root at wave 0 and has no executable dependency. Its incoming references are
+accepted documentation and edge evidence.
+
+The package uses `serial-coherent` execution because the typed fixture,
+historical edge transfer, and documentation projection share the Contracts
+owner. No shared engine, schema, normative policy, or live consumer manifest
+changes. One two-check suite preserves all five enum domains and the four
+cross-field rules for replacement, derived-state rebuild, degradation, and
+unknown substitute authority.
+
+The fixture gains an explicit expected-outcome column for the native decision
+assertion. Two prior M6-I98 records transfer to registered suite evidence;
+`binding-contract-evolution` remains an independently registered gate.
+
+Eleven mutations reject every enum-domain violation, replacement across
+independent or authoritative-state boundaries, invalid derived-state rebuild,
+degradation without equivalent authority, and an unknown substitute without a
+typed diagnostic under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 13 Bash checkers, 15 nodes, 92 edges, and 15
+components. The old checker is absent without nested execution, a normative
+policy rewrite, compatibility representation, or fallback.

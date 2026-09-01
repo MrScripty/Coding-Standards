@@ -1314,3 +1314,8 @@ requires = []
 id = "runtime-decoding-policy"
 path = "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml"
 requires = []
+
+[[suites]]
+id = "contract-decisions"
+path = "evaluation/standards-effectiveness/suites/contract-decisions.toml"
+requires = []
