@@ -7010,3 +7010,30 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 10 Bash checkers, 12 nodes, 53 edges, and 12
 components. The old checker is absent without nested execution, a normative
 or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I116 Trust/Lifecycle Re-plan Acceptance
+
+Fresh post-M6-I115 evidence reports 10 Bash verifiers, 12 nodes, 53 edges,
+and 12 components. The 176-line
+`verify-milestone-7-trust-lifecycle-replan.sh` is the sole
+zero-executable-inbound root at the highest wave, wave 3. It has two frozen
+contract references and three retained verifier dependencies.
+
+The `serial-coherent` package registers one fourteen-check
+`migration.parent-plan` suite. It preserves the exact nine frozen groups and
+their 90 trust and 26 lifecycle-bridge identifiers, all 17 generic Concurrency
+and nine Rust Async bridge dispositions, the exact nine-item next slice and
+source/owner projections, ten dependent Rust items and dispositions, accepted
+owner paths, report, parent, finding, documentation, and terminal path state.
+
+Rolling decomposition, Rust Async decomposition, and plan-fixture gates remain
+independent through six M6-I116 dispositions. Ten historical M6-M1, M6-M2,
+M6-I87, M6-I104, and M6-I115 records transfer to registered suite evidence.
+
+Twelve rejecting mutations and one accepting report-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 9 Bash checkers, 11 nodes, 45 edges, and 11
+components. The old checker is absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.

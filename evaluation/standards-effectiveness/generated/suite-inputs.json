@@ -1909,7 +1909,7 @@
       ]
     },
     {
-      "digest": "sha256:1b406e5340389033aec8ef10bdff8bcb283017e7298438e49593ef46649e2946",
+      "digest": "sha256:4af003ade85c4af5d810e68ddb6755b0cfb1cd309ca56ac8aaab025a290d723e",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1921,7 +1921,7 @@
       ]
     },
     {
-      "digest": "sha256:d2d89094b5fde323993d6fd8956c597547b16bb101f80a18e5cd5d8a5e24a53e",
+      "digest": "sha256:15757a3f2b7bdd88906b7869904a37bd84455bc2b004598349d231f1da5dca79",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2049,6 +2049,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "milestone-7-independent-trust-replan"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
         },
         {
           "check": "removed-authority",
@@ -2267,7 +2272,7 @@
       ]
     },
     {
-      "digest": "sha256:711e0c7f6cb1a1b9a73a2ad8b76d2a16cde7b413e8ebb4e29986ad2cd4b6f124",
+      "digest": "sha256:fc1fc7e1ceb6b76ce3bb8e302067152e1dd6483537e100d9ae591f9f301ab433",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2907,6 +2912,26 @@
           "check": "disposition-coverage",
           "role": "table",
           "suite": "milestone-7-row-8-decomposition"
+        },
+        {
+          "check": "concurrency-bridge-completion",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        },
+        {
+          "check": "dependent-dispositions",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        },
+        {
+          "check": "generic-dispositions",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        },
+        {
+          "check": "rust-async-bridge-completion",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
         },
         {
           "check": "dispositions",
@@ -3590,7 +3615,7 @@
       ]
     },
     {
-      "digest": "sha256:8561aeff5f5e0caa11f690aaac6e31946b0bdc29cab0620e3783b3929ea1e748",
+      "digest": "sha256:9e1129d694b4fd3feaf1f5f869fd3ccf7b9d928dbd357613e695b4d67ff1676c",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3645,6 +3670,11 @@
           "check": "resolved-finding",
           "role": "content",
           "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
         },
         {
           "check": "finding-closure",
@@ -7066,7 +7096,7 @@
       ]
     },
     {
-      "digest": "sha256:dbeeaac717813bc8a50e29c52542f67423da31e98ac6b3c349ba828e366c17a8",
+      "digest": "sha256:8dbbf82bdc6968f2f50046aefafb77383b4dfb0c5b2dc184f81f08b188936e97",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7078,7 +7108,7 @@
       ]
     },
     {
-      "digest": "sha256:db951cdf3d0ffdc23582d175e42905fa0d4d0c82dc25a28a8ad90fe31fc29bf4",
+      "digest": "sha256:45ec5835d50f06a086bd14fd1e68e7fa681bb9e27cb99cc36e949b648dfc4d5e",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7169,6 +7199,11 @@
           "check": "owner-map-lineage",
           "role": "right",
           "suite": "milestone-7-row-47-decomposition"
+        },
+        {
+          "check": "generic-owner-map",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
         },
         {
           "check": "disposition-closure",
@@ -7681,6 +7716,11 @@
           "check": "parent-projection",
           "role": "content",
           "suite": "milestone-7-independent-trust-replan"
+        },
+        {
+          "check": "parent-projection",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
         }
       ]
     },
@@ -8293,6 +8333,11 @@
           "check": "slice-map",
           "role": "table",
           "suite": "milestone-7-f025-f026-decomposition"
+        },
+        {
+          "check": "dependent-slice-map",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
         }
       ]
     },
@@ -9549,6 +9594,30 @@
       ]
     },
     {
+      "digest": "sha256:cf0a5e246adccd9632962a2c1427eafea9e528e4bae5a82b945b1e43f1771d55",
+      "path": "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-groups.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "trust-lifecycle-groups",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7e97b0dff525a65f103eeeec97d7fd1109c527d269fca9f33831a1e6cc3b3cb0",
+      "path": "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-next-slice.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "generic-next-slice",
+          "role": "table",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        }
+      ]
+    },
+    {
       "digest": "sha256:0fe6e1b84862b5962a02d14130905a8f9d9f6015fad528453b941eefb073c369",
       "path": "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md",
       "state": "present",
@@ -9557,6 +9626,11 @@
           "check": "trust-replan-route",
           "role": "content",
           "suite": "milestone-7-f025-f026-decomposition"
+        },
+        {
+          "check": "accepted-report",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
         }
       ]
     },
@@ -10023,7 +10097,7 @@
       ]
     },
     {
-      "digest": "sha256:1d814d28a56de1bc4d0e5dcacf660aabe3b2e7d2d74f32bbe49b7fd5e336efc0",
+      "digest": "sha256:868869b7c8630c2234cd64341bfa5feb8c281e20bb02877f72a2528e05552d9f",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11673,6 +11747,23 @@
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-8-decomposition.toml",
       "state": "present",
       "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:07c787dcbc6d2ab49ab80ee65ec8f9c15b5000718164771cf1b4eec2973f8811",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "obsolete-authority",
+          "role": "required-present",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -13448,24 +13539,13 @@
       ]
     },
     {
-      "digest": "sha256:bcf0e4b7552ff6ab94470d541d61e4fb033448037fb134d7e7c5ab46a4d609b9",
       "path": "evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
+          "check": "obsolete-authority",
+          "role": "required-absent",
+          "suite": "milestone-7-trust-lifecycle-replan"
         }
       ]
     },
@@ -15398,6 +15478,11 @@
           "check": "required-paths",
           "role": "required-present",
           "suite": "milestone-7-independent-trust-replan"
+        },
+        {
+          "check": "accepted-bridge-owners",
+          "role": "required-present",
+          "suite": "milestone-7-trust-lifecycle-replan"
         },
         {
           "check": "current-structure",
@@ -21315,6 +21400,11 @@
           "suite": "milestone-7-row-18-decomposition"
         },
         {
+          "check": "accepted-bridge-owners",
+          "role": "required-present",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        },
+        {
           "check": "concurrency-owner",
           "role": "content",
           "suite": "network-transport-policy"
@@ -23865,11 +23955,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:1d814d28a56de1bc4d0e5dcacf660aabe3b2e7d2d74f32bbe49b7fd5e336efc0",
+    "digest": "sha256:868869b7c8630c2234cd64341bfa5feb8c281e20bb02877f72a2528e05552d9f",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:0da09983a060cd5ecf3e54e195534efdbc07ef313411cdddde1a75e4bde4b81b",
+    "digest": "sha256:0b93b8ba3b2b413f597bbed714c3f77de52a21b9a2b79511adebf70c798e9b63",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25532,6 +25622,12 @@
       "digest": "sha256:2005dc9b950eda0510233f20448fe41989ad9ec730fa134407b6cfc9f3c3f890",
       "id": "concurrency-policy",
       "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:07c787dcbc6d2ab49ab80ee65ec8f9c15b5000718164771cf1b4eec2973f8811",
+      "id": "milestone-7-trust-lifecycle-replan",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml",
       "requires": []
     }
   ]

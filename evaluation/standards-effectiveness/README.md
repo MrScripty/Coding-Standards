@@ -800,10 +800,11 @@ handoff without moving normative guidance.
 `milestone-7-trust-lifecycle-replan.md`,
 `milestone-7-trust-lifecycle-groups.tsv`, and
 `milestone-7-trust-lifecycle-next-slice.tsv` replace the premature final-
-closure handoff after the critical trust-boundary slices. The focused checker
-proves the 90-ID trust remainder, the 26-ID lifecycle bridge, owner
-availability, dependency order, and the exact generic Concurrency next slice
-without changing normative guidance or final dispositions.
+closure handoff after the critical trust-boundary slices. The registered
+`milestone-7-trust-lifecycle-replan` suite proves the 90-ID trust remainder,
+the 26-ID lifecycle bridge, owner availability, dependency order, and the exact
+generic Concurrency next slice without changing normative guidance or final
+dispositions or using nested Bash execution.
 
 The registered `concurrency-policy` suite checks generic shared-state,
 lock-boundary, nonblocking async, failure-observation, and cancellation-

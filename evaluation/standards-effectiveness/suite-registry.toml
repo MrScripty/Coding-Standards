@@ -1329,3 +1329,8 @@ requires = []
 id = "concurrency-policy"
 path = "evaluation/standards-effectiveness/suites/concurrency-policy.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-trust-lifecycle-replan"
+path = "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml"
+requires = []

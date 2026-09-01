@@ -7204,3 +7204,26 @@
   and closes 51/51 coverage. Focused, graph, declarative, generated, numeric,
   plan, and complete mixed evidence pass. Final graph: 10 Bash checkers, 12
   nodes, 53 edges, and 12 components.
+
+## 2026-09-01 - M6-I116 Trust/Lifecycle Re-plan Acceptance
+
+- Fresh post-M6-I115 evidence reports 10 Bash verifiers, 12 nodes, 53 edges,
+  and 12 components. The 176-line trust/lifecycle re-plan verifier is the sole
+  zero-executable-inbound root at the highest wave, wave 3, with two frozen
+  contract references and three retained verifier dependencies. M6-I116 is
+  `serial-coherent` at train order 231.
+- One fourteen-check `migration.parent-plan` suite preserves the exact nine
+  frozen trust/lifecycle groups, 90 trust IDs, 26 bridge IDs, all 17 generic
+  Concurrency and nine Rust Async bridge dispositions, the exact nine-item
+  generic next slice, source and owner projections, ten dependent Rust items,
+  accepted owner paths, report, parent, finding, documentation, and terminal
+  authority state.
+- Rolling decomposition, Rust Async decomposition, and plan-fixture checks
+  remain independent through six M6-I116 edge dispositions. Ten earlier
+  M6-M1, M6-M2, M6-I87, M6-I104, and M6-I115 records transfer to registered
+  suite evidence.
+- Twelve rejecting mutations and one accepting report-extension mutation
+  prove parity. Exact 22/22 dependency-local renewal leaves 29 requirements
+  stable and closes 51/51 coverage. Focused, graph, declarative, generated,
+  numeric, plan, and complete mixed evidence pass. Final graph: 9 Bash
+  checkers, 11 nodes, 45 edges, and 11 components.
