@@ -6889,3 +6889,22 @@
   row-35 consumer checks, all suites, graph and generated freshness, numeric
   lifecycle, plan checks, and the complete 25-entrypoint checkpoint pass.
   Final graph: 25 Bash checkers, 28 nodes, 168 edges, and 28 components.
+
+## 2026-08-31 - M6-I101 Language-Profile Routing Acceptance
+
+- Fresh post-M6-I100 evidence reports 25 Bash verifiers, 28 nodes, 168 edges,
+  and 28 components. Eight verifiers have no executable inbound edge,
+  including four at the highest dependency wave 4. The 35-line language-
+  profile routing verifier is the smallest highest-wave root and invokes one
+  retained verifier gate. M6-I101 is `serial-coherent` at train order 216.
+- One five-check `STANDARDS-ROUTER.md` suite preserves all 13 typed routing
+  decisions, exact STD-0183 source identity and disposition, the bounded
+  legacy root route, and condition-selected Router policy.
+- Row-15 decomposition remains an independent gate. Fourteen earlier M6-P4,
+  M6-P5, M6-P8, M6-P9, M6-I76, M6-I77, and M6-I95 records transfer to
+  registered suite evidence.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 24-entrypoint checkpoint pass. Final graph: 24 Bash checkers, 27
+  nodes, 164 edges, and 27 components.

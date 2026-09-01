@@ -1191,6 +1191,11 @@ path = "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml
 requires = []
 
 [[suites]]
+id = "language-profile-routing"
+path = "evaluation/standards-effectiveness/suites/language-profile-routing.toml"
+requires = []
+
+[[suites]]
 id = "binding-generation-authority"
 path = "evaluation/standards-effectiveness/suites/binding-generation-authority.toml"
 requires = []

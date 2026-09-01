@@ -6560,3 +6560,30 @@ numeric, plan, and complete mixed evidence pass. Final graph: 25 Bash
 checkers, 28 nodes, 168 edges, and 28 components. The old checker is absent
 without nested execution, a source-policy rewrite, compatibility
 representation, layer merging, or fallback.
+
+### M6-I101 Language-Profile Routing Acceptance
+
+Fresh post-M6-I100 evidence reports 25 Bash verifiers, 28 nodes, 168 edges,
+and 28 components. Eight verifiers have no executable inbound edge, including
+four at the highest dependency wave 4. The 35-line
+`verify-language-profile-routing.sh` is the smallest highest-wave root and
+invokes one retained row-15 lifecycle verifier.
+
+The package uses `serial-coherent` execution because its Router-owned decision,
+route, and disposition contract has no shared consumer transition. One
+five-check `STANDARDS-ROUTER.md` suite preserves all 13 typed routing
+decisions, exact STD-0183 source identity and disposition, the bounded legacy
+root route, and condition-selected Router policy.
+
+Row-15 decomposition remains an independent gate through two edge
+dispositions. Fourteen earlier M6-P4, M6-P5, M6-P8, M6-P9, M6-I76, M6-I77,
+and M6-I95 records transfer to registered suite evidence.
+
+Four mutations reject decision-outcome drift, disposition-rationale drift,
+legacy-route drift, and Router-policy drift. Exact final compilation renews
+9/9 dependency-local requirements and leaves 42 stable, closing 51/51
+coverage. All focused, graph, declarative, generated, numeric, plan, and
+complete mixed evidence pass. Final graph: 24 Bash checkers, 27 nodes, 164
+edges, and 27 components. The old checker is absent without nested execution,
+a source-policy rewrite, compatibility representation, inferred profile, or
+fallback.

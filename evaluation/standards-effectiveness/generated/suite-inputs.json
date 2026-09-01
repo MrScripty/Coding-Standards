@@ -286,6 +286,11 @@
           "suite": "implementation-disabled-lifecycle"
         },
         {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "language-profile-routing"
+        },
+        {
           "check": "routes-and-legacy",
           "role": "content",
           "suite": "licensing-owner-contract"
@@ -1256,6 +1261,11 @@
           "suite": "language-index-closure"
         },
         {
+          "check": "router-policy",
+          "role": "content",
+          "suite": "language-profile-routing"
+        },
+        {
           "check": "router-projection",
           "role": "content",
           "suite": "launcher-owner-row-14"
@@ -1802,7 +1812,7 @@
       ]
     },
     {
-      "digest": "sha256:94ba3299b4812c7ce9accc1841cbcbc12f98eddfd09c35872a4a7eee8a145fa8",
+      "digest": "sha256:ea3ac7edd2a7cecfbb3a89035b878cf8239fca5a9669afc6d53ba4983e3ba808",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2110,7 +2120,7 @@
       ]
     },
     {
-      "digest": "sha256:f9184cbd0b1842f4df8107f4066278dd7b5b0532cad409608b3dc70c91dfad7a",
+      "digest": "sha256:d3d22a65d583dde7d7024214c85976192044f28276d446f8e801d8ca2d5964ff",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2560,6 +2570,11 @@
           "check": "language-index-dispositions",
           "role": "table",
           "suite": "language-index-closure"
+        },
+        {
+          "check": "exact-disposition",
+          "role": "table",
+          "suite": "language-profile-routing"
         },
         {
           "check": "exact-disposition-identities",
@@ -3373,7 +3388,7 @@
       ]
     },
     {
-      "digest": "sha256:ec0927111e6a4a5777e245c0f9d623322da37f3c9b0ffc82f5ccc94d52c826e2",
+      "digest": "sha256:3f8695b3c578b2081d44cca67e60819603c55f8a76f0a0fa905220761b129ec8",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -5430,6 +5445,18 @@
       ]
     },
     {
+      "digest": "sha256:59e51a5c48c4f74720d622db54165e20cf4a93add5321e75b3e08b28bb353969",
+      "path": "evaluation/standards-effectiveness/fixtures/routing/language-profile-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "language-profile-routing"
+        }
+      ]
+    },
+    {
       "digest": "sha256:0d9371f0c2b76b3f417a1043cc98759789211d985339d46917aeabaa4e03dcc6",
       "path": "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv",
       "state": "present",
@@ -6695,7 +6722,7 @@
       ]
     },
     {
-      "digest": "sha256:ad20d995d49c22b8b9825913468b73837f938f475d6c972034efc173d7f9534b",
+      "digest": "sha256:2da6715da66f461d7bf3111566d49bd40ae481d5a8fb9d25f117935d26b44d4e",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6707,7 +6734,7 @@
       ]
     },
     {
-      "digest": "sha256:3cea6d13adf97977a14d1d90ba934a0c55fc024c51d4a3556edc37eea254e211",
+      "digest": "sha256:db78ce80ed98eb0cad88d7d845c7adfffe10aa267f6b747d6abe94c80c5a945b",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6900,6 +6927,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "source-identity",
+          "role": "table",
+          "suite": "language-profile-routing"
         },
         {
           "check": "inventory-source-lineage",
@@ -9390,7 +9422,7 @@
       ]
     },
     {
-      "digest": "sha256:bb598e56899e883f5b890d0ecfe9871f05bff57f1d884397b99436ccf24c897f",
+      "digest": "sha256:7ad0f693da0df35d9499ffb6e87cddad757a07ce4e640bacc05527b8472c5dff",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10412,6 +10444,18 @@
     {
       "digest": "sha256:62a774bd79f8580e89dff8bbcf0854fc6b3b86d395b015064aa26081aa91e45a",
       "path": "evaluation/standards-effectiveness/suites/language-index-closure.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:41b3364b2b4d181f5f5aedcf30a74cbc860b857eac959ce44d7eb22104df9bee",
+      "path": "evaluation/standards-effectiveness/suites/language-profile-routing.toml",
       "state": "present",
       "uses": [
         {
@@ -12657,28 +12701,6 @@
         {
           "check": "readme-dependency-paths",
           "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:efbfd609c6f688f64b9473b72d329f5ed47fb96e7050b54dd0017b624f9e8577",
-      "path": "evaluation/standards-effectiveness/verify-language-profile-routing.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
           "suite": "milestone-7-row-35-decomposition"
         },
         {
@@ -23160,11 +23182,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:bb598e56899e883f5b890d0ecfe9871f05bff57f1d884397b99436ccf24c897f",
+    "digest": "sha256:7ad0f693da0df35d9499ffb6e87cddad757a07ce4e640bacc05527b8472c5dff",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:f3cb7fa0146a143a36bdc371e701730154fb675a7a6386524ce1b5320c0d7d81",
+    "digest": "sha256:b9b3419a824992dc46ee681760dd2e32d6e258ae1b4cd339e57c8fa153b33dad",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24653,6 +24675,12 @@
       "digest": "sha256:5d365d5b293daadefe2b25da1d4bdfc3d0435826699e994304cacdc2258168b4",
       "id": "rust-binding-architecture",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:41b3364b2b4d181f5f5aedcf30a74cbc860b857eac959ce44d7eb22104df9bee",
+      "id": "language-profile-routing",
+      "path": "evaluation/standards-effectiveness/suites/language-profile-routing.toml",
       "requires": []
     },
     {

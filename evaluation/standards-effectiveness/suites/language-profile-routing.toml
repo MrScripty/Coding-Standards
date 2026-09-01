@@ -1,0 +1,87 @@
+schema_version = 1
+id = "language-profile-routing"
+owner = "STANDARDS-ROUTER.md"
+description = "Condition-selected language profile routing with typed missing, unsupported, unavailable, and no-fallback outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/routing/language-profile-decisions.tsv"
+expected_column = "expected"
+default = "route"
+[checks.domains]
+case = ["*"]
+condition = ["none", "rust", "rust-async", "rust-target", "csharp-async", "typescript-async", "unknown", "other"]
+facts = ["complete", "missing"]
+profile = ["none", "rust", "rust-async", "rust-cross-platform", "csharp-async", "typescript-async", "missing", "unsupported"]
+capability = ["not-required", "available", "unavailable", "unsupported"]
+fallback = ["none", "legacy-root", "rust-layout", "nearby-language", "inline"]
+expected = ["no-profile", "route", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "fallback", op = "ne", value = "none" }]
+[[checks.rules]]
+outcome = "no-profile"
+[checks.rules.when]
+all = [{ field = "condition", op = "eq", value = "none" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "facts", op = "eq", value = "missing" },
+  { field = "profile", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+]
+
+[[checks]]
+id = "source-identity"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [["STD-0183", "CODING-STANDARDS.md", "2", "core", "split", "Language-Specific Guidelines"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0183"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0183", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index", "replace the language-specific parent with a non-normative route to condition-selected language profiles without legacy location or incremental-migration authority"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0183"
+
+[[checks]]
+id = "legacy-route"
+type = "markdown_section_text"
+path = "CODING-STANDARDS.md"
+heading = "## Language-Specific Guidelines Legacy Route"
+scope = "body"
+required = ["STANDARDS-ROUTER.md#language-profiles", "policy remains in Core, workflows, and topics."]
+prohibited = ["languages/<language>/", "Existing inline ecosystem sections can be migrated incrementally"]
+
+[[checks]]
+id = "router-policy"
+type = "markdown_section_text"
+path = "STANDARDS-ROUTER.md"
+heading = "## Language Profiles"
+scope = "body"
+required = ["No language-specific mechanism changes", "Language profiles specialize mechanisms only"]
+prohibited = []
