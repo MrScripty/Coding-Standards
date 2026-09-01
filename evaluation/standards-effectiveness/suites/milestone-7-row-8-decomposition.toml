@@ -1,0 +1,81 @@
+schema_version = 1
+id = "milestone-7-row-8-decomposition"
+owner = "migration.parent-plan"
+description = "Exact row-8 generation-and-build decomposition evidence without nested checker execution."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint"]
+order = "source"
+expected = [
+  ["8", "1", "STD-0782,STD-0783", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "exists", "pre-slice-review", "focused"],
+  ["8", "2", "STD-0784", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "exists", "pre-slice-review", "focused"],
+  ["8", "3", "STD-0785,STD-0786,STD-0787,STD-0788", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "exists", "pre-slice-review", "focused"],
+  ["8", "4", "STD-0789", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "exists", "pre-slice-review", "focused"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "8"
+
+[[checks]]
+id = "disposition-coverage"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0782", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "refine", "select canonical binding-generation authority from the applicable contract rather than a compiled artifact or framework default"],
+  ["STD-0783", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "refine", "require declared generator deterministic derivation and producer-consumer consistency evidence for affected outputs"],
+  ["STD-0784", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "select annotation placement from the binding mechanism and core-adapter ownership rather than a proc-macro or definition-file default"],
+  ["STD-0785", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine", "derive binding build and generation procedures from the accepted release artifact plan rather than fixed language commands"],
+  ["STD-0786", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine", "require selected authority generator toolchain inputs targets outputs reproducibility controls and evidence before commands are chosen"],
+  ["STD-0787", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "remove", "remove product-specific compiled-library build and Python generation commands as universal release policy"],
+  ["STD-0788", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "remove", "remove community bindgen and custom binary examples as universal release policy and reject alternate-generator recovery"],
+  ["STD-0789", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "index", "convert the Build System Organization heading into a non-normative routing index while preserving separately owned child references"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0782", "STD-0783", "STD-0784", "STD-0785", "STD-0786", "STD-0787", "STD-0788", "STD-0789"]
+
+[[checks]]
+id = "accelerated-package"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+[[checks.projections]]
+columns = ["train_order", "package_id", "risk_class", "owner", "semantic_outcome", "prerequisites"]
+order = "source"
+expected = [["8", "P04", "refinement", "profiles/languages/rust/language-bindings.md", "rust-binding-generation-and-build-decomposition", "core,workflow.verification,workflow.release,profile.language.rust,profile.boundary.language-bindings,topic.contracts"]]
+[checks.projections.where]
+field = "train_order"
+op = "eq"
+value = "8"
+
+[[checks]]
+id = "decomposition-record"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-8-decomposition.md"
+required = [
+  "generation authority, Rust",
+  "## Ordered Children",
+  "Contracts-owned generation authority",
+  "Rust Language Binding-owned annotation placement",
+  "Release-owned build and generation",
+  "legacy-index closure",
+  "hand-maintained bindings",
+  "## Verifier Ownership",
+  "registered `milestone-7-row-8-decomposition` suite",
+  "This planning slice changes only",
+]
+prohibited = [
+  "(`Planned`)",
+  "verify-milestone-7-row-8-decomposition.sh",
+]

@@ -1812,7 +1812,7 @@
       ]
     },
     {
-      "digest": "sha256:ea3ac7edd2a7cecfbb3a89035b878cf8239fca5a9669afc6d53ba4983e3ba808",
+      "digest": "sha256:86d014d41afee5f48b2122c481a7a305cf4b8cbfe7cd9c789501d289e4d2f1b5",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2120,7 +2120,7 @@
       ]
     },
     {
-      "digest": "sha256:d3d22a65d583dde7d7024214c85976192044f28276d446f8e801d8ca2d5964ff",
+      "digest": "sha256:f9c1f32dba7f113ef84b5ee3c003c177cf2c0e71de9a2430fb005accd7c50b8d",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2715,6 +2715,11 @@
           "check": "exact-dispositions",
           "role": "table",
           "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "disposition-coverage",
+          "role": "table",
+          "suite": "milestone-7-row-8-decomposition"
         },
         {
           "check": "dispositions",
@@ -3388,7 +3393,7 @@
       ]
     },
     {
-      "digest": "sha256:3f8695b3c578b2081d44cca67e60819603c55f8a76f0a0fa905220761b129ec8",
+      "digest": "sha256:c44135b55958f2cdcf98982d3d3f90aa3cae0bca6855f5c497b69165b90b39e9",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -6722,7 +6727,7 @@
       ]
     },
     {
-      "digest": "sha256:2da6715da66f461d7bf3111566d49bd40ae481d5a8fb9d25f117935d26b44d4e",
+      "digest": "sha256:deaacd377769203002cb7d9ff9fc2b2da82d16eb524909d24eae5d21b4db62bd",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6734,7 +6739,7 @@
       ]
     },
     {
-      "digest": "sha256:db78ce80ed98eb0cad88d7d845c7adfffe10aa267f6b747d6abe94c80c5a945b",
+      "digest": "sha256:e6cb4ecb52b9aea4feee03362d6f5bb3b6c96c52844ab5e3250df695fc482f03",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7233,6 +7238,11 @@
           "check": "accelerated-package",
           "role": "table",
           "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "accelerated-package",
+          "role": "table",
+          "suite": "milestone-7-row-8-decomposition"
         }
       ]
     },
@@ -7515,6 +7525,11 @@
           "check": "decomposition",
           "role": "table",
           "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "execution-decomposition",
+          "role": "table",
+          "suite": "milestone-7-row-8-decomposition"
         },
         {
           "check": "disposition-lineage",
@@ -8916,6 +8931,18 @@
       ]
     },
     {
+      "digest": "sha256:f9f35ca4f3626c97939e129b1b24c7afbd23b2e8319457bee6dc17ba3e8b74c8",
+      "path": "evaluation/standards-effectiveness/milestone-7-row-8-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-8-decomposition"
+        }
+      ]
+    },
+    {
       "digest": "sha256:fe240a36ba05ede1004e396f76d9ba17ca826ea3fd0fe8e51f7762c432002b4b",
       "path": "evaluation/standards-effectiveness/milestone-7-source-index-verifier-replan.md",
       "state": "present",
@@ -9422,7 +9449,7 @@
       ]
     },
     {
-      "digest": "sha256:7ad0f693da0df35d9499ffb6e87cddad757a07ce4e640bacc05527b8472c5dff",
+      "digest": "sha256:148be2d6db0d49df1ad9e6f5d6d47073462daf0ab9d4b12aa386cbfe3a305c69",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10322,7 +10349,7 @@
       ]
     },
     {
-      "digest": "sha256:d3444e95e9adf28c43ba645ea2d62da8e49d9eace1109e71c2b814161c732b81",
+      "digest": "sha256:4992a616340fb902c18fa49bf9dffc16259687d8b9fbbce17f52ff8cff116bff",
       "path": "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml",
       "state": "present",
       "uses": [
@@ -10912,6 +10939,18 @@
     {
       "digest": "sha256:cdcd0055af0e04f3ff17205464ca6a176985049f03b441cae318895e62cf195c",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-7-decomposition.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:e80b0a67434c4dbf4311aabc8904027d8af5272939648596ed977e5ceac5d12b",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-row-8-decomposition.toml",
       "state": "present",
       "uses": [
         {
@@ -12891,33 +12930,6 @@
       "uses": [
         {
           "check": "row-5-lifecycle",
-          "role": "content",
-          "suite": "historical-row-checker-ownership"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:5c36ead0205751918b35e5d902f4bdc4539b8fd233d3c76be03ba8866de42a38",
-      "path": "evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "row-8-lifecycle",
           "role": "content",
           "suite": "historical-row-checker-ownership"
         },
@@ -23182,11 +23194,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:7ad0f693da0df35d9499ffb6e87cddad757a07ce4e640bacc05527b8472c5dff",
+    "digest": "sha256:148be2d6db0d49df1ad9e6f5d6d47073462daf0ab9d4b12aa386cbfe3a305c69",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:b9b3419a824992dc46ee681760dd2e32d6e258ae1b4cd339e57c8fa153b33dad",
+    "digest": "sha256:46203de1c52784b7c752f94f3311fe0932d4381a3d6489f53a7166103ee6269d",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24648,7 +24660,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:d3444e95e9adf28c43ba645ea2d62da8e49d9eace1109e71c2b814161c732b81",
+      "digest": "sha256:4992a616340fb902c18fa49bf9dffc16259687d8b9fbbce17f52ff8cff116bff",
       "id": "historical-row-checker-ownership",
       "path": "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml",
       "requires": []
@@ -24681,6 +24693,12 @@
       "digest": "sha256:41b3364b2b4d181f5f5aedcf30a74cbc860b857eac959ce44d7eb22104df9bee",
       "id": "language-profile-routing",
       "path": "evaluation/standards-effectiveness/suites/language-profile-routing.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:e80b0a67434c4dbf4311aabc8904027d8af5272939648596ed977e5ceac5d12b",
+      "id": "milestone-7-row-8-decomposition",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-row-8-decomposition.toml",
       "requires": []
     },
     {

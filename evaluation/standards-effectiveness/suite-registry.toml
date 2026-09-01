@@ -1196,6 +1196,11 @@ path = "evaluation/standards-effectiveness/suites/language-profile-routing.toml"
 requires = []
 
 [[suites]]
+id = "milestone-7-row-8-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-8-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "binding-generation-authority"
 path = "evaluation/standards-effectiveness/suites/binding-generation-authority.toml"
 requires = []

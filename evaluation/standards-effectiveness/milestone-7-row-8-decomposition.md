@@ -38,13 +38,20 @@ toolchain, artifact, or evidence facts require typed diagnostics rather than
 hand-maintained bindings, guessed commands, another generator, or default
 success.
 
+## Verifier Ownership
+
+The registered `milestone-7-row-8-decomposition` suite owns the exact row-8
+decomposition, disposition coverage, accelerated package, and planning-record
+evidence. The accelerated-execution re-plan and execution-train checkers remain
+independent complete-runner gates; the row-8 suite does not invoke them.
+
 ## Scope
 
 This planning slice changes only the row-8 decomposition overlay, package
-outcome/prerequisites, this report and checker, active-plan/ledger/evaluation
-tracking, and superseded cursor assertions. It changes no normative or legacy
-standard, disposition, router, metadata, generated inventory, configuration,
-lockfile, or downstream repository.
+outcome/prerequisites, this report and declarative suite, active-plan/ledger/
+evaluation tracking, and superseded cursor assertions. It changes no normative
+or legacy standard, disposition, router, metadata, generated inventory,
+configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
