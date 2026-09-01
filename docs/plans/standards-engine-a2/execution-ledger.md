@@ -348,3 +348,19 @@
 - The user authorized a Sol/xhigh subagent for isolated prototype creation.
   No subagent may stage, commit, update a ref, synchronize a branch, edit a
   shared generated artifact, or modify another worktree.
+
+## 2026-09-01 - P1 Live Worktree Protection Superseded
+
+- A read-only worktree audit observed that
+  `/tmp/coding-standards-a2-p1-state-model` had advanced from accepted P1 tip
+  `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` through unrelated M6 commits to
+  observed head `deeee481c4f5bd707952c3da9e1d54df657a592a` and contained uncommitted
+  M6 paths.
+- Verified `refs/archive/a2-prototypes/p1-state-model` still resolves exactly to
+  the accepted P1 tip. P1 evidence and source remain recoverable without using
+  the repurposed live worktree.
+- Superseded the false `retained-protected` disposition with
+  `archive-protected; live worktree unavailable to A2`. A2 will not modify,
+  clean, synchronize, or remove the out-of-scope worktree or branch. Any future
+  hands-on P1 review requires a separately admitted clean worktree from the
+  archive ref.

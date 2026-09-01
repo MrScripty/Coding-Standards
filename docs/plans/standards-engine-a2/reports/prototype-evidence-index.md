@@ -9,7 +9,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 
 | ID | Exact path | Branch and worktree | Exact admitted base | Prototype commit | Verdict | Worktree disposition |
 | --- | --- | --- | --- | --- | --- | --- |
-| A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; `/tmp/coding-standards-a2-p1-state-model` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `retained-protected` at archived tip `refs/archive/a2-prototypes/p1-state-model` |
+| A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; original `/tmp/coding-standards-a2-p1-state-model` now contains out-of-scope M6 work | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `archive-protected` exactly at `refs/archive/a2-prototypes/p1-state-model`; live worktree unavailable to A2 |
 | A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `3bab6e981d6e902e087f485c03fca78d0505a39e` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p2-projected-view` |
 | A2-P2R | `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py` | `prototype/a2-m0-projected-analysis-replay`; `/tmp/coding-standards-a2-p2r-projected-analysis-replay` | `c509d61ed0537907191ea615f4a613fc02dabcb2`; worktree creation pending | pending | pending | pending; expected `removed-archived` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
@@ -110,21 +110,20 @@ A1C-U03, A1C-U06, A1C-U07, A1C-U15, A1C-U19, and A1C-U20. The public operation
 shape, persistent representation, publication mechanism, and performance
 selection remain unadmitted for A2-P2 through A2-P5.
 
-### Retained Worktree Contract
+### Archive And Superseded Worktree Contract
 
-- Purpose: allow the product owner to drive and inspect the human-facing state
-  prototype before Milestone 0 design acceptance.
-- Owner: A2 prototype owner.
-- Head and reachability: clean tip
-  `a6a2e1060e07f5f16d2ee91f72720e31751ba27b`, archived exactly by
-  `refs/archive/a2-prototypes/p1-state-model`.
-- Synchronization: frozen; no rebase, merge, or edit without a new registered
-  prototype question or corrective evidence commit.
-- Consumer: product-owner design review only; no runtime, generated contract,
-  canonical Engine, or integration consumer.
-- Retirement: after product-owner feedback is recorded, or before Milestone 0
-  acceptance, whichever comes first; then verify the archive ref and remove
-  only this clean task-owned worktree.
+The accepted P1 evidence remains reachable exactly at
+`refs/archive/a2-prototypes/p1-state-model` tip
+`a6a2e1060e07f5f16d2ee91f72720e31751ba27b`. A later audit observed that the
+original worktree and branch had advanced through unrelated M6 commits and
+contained uncommitted M6 changes. A2 does not modify, clean, synchronize, or
+remove that out-of-scope worktree.
+
+The prior `retained-protected` live-worktree contract is therefore superseded
+by `archive-protected`. Product-owner hands-on review requires a new separately
+admitted clean worktree reconstructed from the exact archive ref. The prototype
+still has no runtime, generated-contract, canonical Engine, or integration
+consumer.
 
 ## A2-P2 Projected View
 
