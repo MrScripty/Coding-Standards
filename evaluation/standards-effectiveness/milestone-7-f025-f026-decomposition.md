@@ -16,7 +16,7 @@ fresh pre-slice review before their implementation contracts become active.
 **Allowed write set:**
 
 - this report and its slice map;
-- `verify-milestone-7-f025-f026-decomposition.sh`;
+- the registered `milestone-7-f025-f026-decomposition` suite;
 - the parent trust/lifecycle checker for removal of its obsolete current-slice
   assertion only;
 - parent decomposition and handoff reports;
@@ -31,6 +31,14 @@ identifiers, canonical owners, proposed dispositions, serial dependency order,
 stable parent acceptance, one implementation-ready slice, planning-only write
 boundary, plan lifecycle, shell syntax, whitespace, and all affected
 standards-effectiveness regressions.
+
+## Verifier Ownership
+
+The registered `milestone-7-f025-f026-decomposition` suite owns the exact slice
+map, source and owner projections, accepted dispositions, planning record, and
+parent handoff routes. The trust/lifecycle re-plan and plan-fixture checkers
+remain independent complete-runner gates; the decomposition suite does not
+invoke them.
 
 ## Trigger And Scope
 
@@ -99,7 +107,7 @@ while adapters own only the selected host representation and adaptation.
 - `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`;
 - `evaluation/standards-effectiveness/fixtures/rust/binding-architecture-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-rust-binding-architecture.sh`;
-- this decomposition checker for disposition and handoff state only;
+- the registered decomposition suite for disposition and handoff state only;
 - the parent trust/lifecycle checker for disposition-derived progress only;
 - the accepted Rust Async lifecycle checker for removal of temporary finding-
   status assertions only;
@@ -187,7 +195,7 @@ and lifecycle owners.
 - `evaluation/standards-effectiveness/verify-rust-binding-runtime.sh`;
 - the accepted binding architecture checker for removal of its temporary
   `F025` status assertion only;
-- this decomposition checker for disposition and handoff state only;
+- the registered decomposition suite for disposition and handoff state only;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 

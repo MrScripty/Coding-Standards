@@ -1206,6 +1206,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-5-decompositio
 requires = []
 
 [[suites]]
+id = "milestone-7-f025-f026-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-f025-f026-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "binding-generation-authority"
 path = "evaluation/standards-effectiveness/suites/binding-generation-authority.toml"
 requires = []

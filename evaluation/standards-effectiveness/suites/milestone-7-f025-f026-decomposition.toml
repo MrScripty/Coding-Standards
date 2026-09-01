@@ -1,0 +1,141 @@
+schema_version = 1
+id = "milestone-7-f025-f026-decomposition"
+owner = "migration.parent-plan"
+description = "Exact dependent Rust decomposition, ownership, disposition, and handoff evidence without nested checker execution."
+
+[[checks]]
+id = "slice-map"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-f025-f026-slices.tsv"
+header = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+non_empty = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+unique = [["order"], ["id"]]
+[[checks.projections]]
+columns = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["7.4b5b", "1", "STD-0759", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "separate domain core behavior from binding frameworks and host runtimes"],
+  ["7.4b5b", "2", "STD-0760", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "require one-way adapter dependency and framework-free core verification"],
+  ["7.4b5b", "3", "STD-0790", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "place optional binding support at the adapter and package boundary"],
+  ["7.4b5b", "4", "STD-0791", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "remove core package examples that add binding framework dependencies"],
+  ["7.4b5c", "5", "STD-0798", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "separate host handle lifetime from runtime lifecycle ownership"],
+  ["7.4b5c", "6", "STD-0799", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "consume injected lifecycle capability instead of embedding an owned runtime"],
+  ["7.4b5c", "7", "STD-0800", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "adapt host async calls without alternate runtime or synchronous-drive fallback"],
+  ["7.4b5d", "8", "STD-0781", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "delegate only the explicit typed unsupported outcome"],
+  ["7.4b5e", "9", "STD-0822", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "preserve validated filesystem authority through the Rust operation"],
+  ["7.4b5f", "10", "STD-0825", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "bind listener admission capacity tasks outcomes and shutdown to explicit owners"],
+]
+
+[[checks]]
+id = "disposition-coverage"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0759", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "separate domain core behavior from binding frameworks and host runtimes"],
+  ["STD-0760", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "require one-way adapter dependency and framework-free core verification"],
+  ["STD-0790", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "place optional binding support at the adapter and package boundary"],
+  ["STD-0791", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "remove core package examples that add binding framework dependencies"],
+  ["STD-0798", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "separate host handle lifetime from runtime lifecycle ownership"],
+  ["STD-0799", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "consume injected lifecycle capability instead of embedding an owned runtime"],
+  ["STD-0800", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "adapt host async calls without alternate runtime or synchronous-drive fallback"],
+  ["STD-0781", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "delegate only the explicit typed unsupported outcome"],
+  ["STD-0822", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "preserve validated filesystem authority through the Rust operation"],
+  ["STD-0825", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "bind listener exposure admission connection work outcomes and shutdown to explicit owners"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0759", "STD-0760", "STD-0790", "STD-0791", "STD-0798", "STD-0799", "STD-0800", "STD-0781", "STD-0822", "STD-0825"]
+
+[[checks]]
+id = "inventory-sources"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0759", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0760", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0781", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0790", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0791", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0798", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0799", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0800", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0822", "languages/rust/RUST-SECURITY-STANDARDS.md"],
+  ["STD-0825", "languages/rust/RUST-SECURITY-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0759", "STD-0760", "STD-0790", "STD-0791", "STD-0798", "STD-0799", "STD-0800", "STD-0781", "STD-0822", "STD-0825"]
+
+[[checks]]
+id = "owner-map-targets"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
+header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
+[[checks.projections]]
+columns = ["id", "future_owner"]
+order = "source"
+expected = [
+  ["STD-0759", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0760", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0781", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0790", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0791", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0798", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0799", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0800", "profiles/languages/rust/language-bindings.md"],
+  ["STD-0822", "profiles/languages/rust/security.md"],
+  ["STD-0825", "profiles/languages/rust/security.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0759", "STD-0760", "STD-0790", "STD-0791", "STD-0798", "STD-0799", "STD-0800", "STD-0781", "STD-0822", "STD-0825"]
+
+[[checks]]
+id = "decomposition-record"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md"
+required = [
+  "[milestone-7-f025-f026-slices.tsv](milestone-7-f025-f026-slices.tsv)",
+  "Only accepted implementation slices are fully specified.",
+  "The accepted `STD-0802` disposition",
+  "Bindings adapt a host call to an injected runtime/lifecycle capability",
+  "a canonicalized `PathBuf` alone is not durable authority",
+  "keep each call's input, cancellation, result, and failure state scoped",
+  "## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary",
+  "## Accepted Slice 7.4b5c: Binding Runtime And Handle Adaptation",
+  "## Accepted Slice 7.4b5d: Explicit Executor Delegation",
+  "## Accepted Slice 7.4b5e: Rust Filesystem Authority Through Use",
+  "## Accepted Slice 7.4b5f: Lifecycle-Owned Listener Work",
+  "**Accepted result:**",
+  "**Handoff:** this dependent sequence is complete.",
+  "**No fallback:**",
+  "independent trust-boundary remainder",
+  "## Verifier Ownership",
+  "registered `milestone-7-f025-f026-decomposition` suite",
+]
+prohibited = ["verify-milestone-7-f025-f026-decomposition.sh"]
+
+[[checks]]
+id = "parent-decomposition-route"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-decomposition.md"
+required = ["(milestone-7-f025-f026-decomposition.md)"]
+prohibited = []
+
+[[checks]]
+id = "trust-replan-route"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md"
+required = ["(milestone-7-f025-f026-decomposition.md)"]
+prohibited = []

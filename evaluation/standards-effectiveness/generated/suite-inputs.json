@@ -1812,7 +1812,7 @@
       ]
     },
     {
-      "digest": "sha256:442886a8c2c057072a600697dcc6490f2161d91195b8eb53fc3026f67ba6f972",
+      "digest": "sha256:ca71d2a5d471e52f6c757edcb236553b16f88fbd3160842477478d4645bf20f4",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2120,7 +2120,7 @@
       ]
     },
     {
-      "digest": "sha256:593f1d5357c3586f988489d83000362f1530e987be7d49c0d2d9271b6110c39d",
+      "digest": "sha256:636a67953c6c199088358b32e97fb8604afec3205f4c0a58d32aa241a0242fa1",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2600,6 +2600,11 @@
           "check": "disposition-lineage",
           "role": "right",
           "suite": "milestone-7-f018-decomposition"
+        },
+        {
+          "check": "disposition-coverage",
+          "role": "table",
+          "suite": "milestone-7-f025-f026-decomposition"
         },
         {
           "check": "exact-dispositions",
@@ -3398,7 +3403,7 @@
       ]
     },
     {
-      "digest": "sha256:baf4fe15f899e663a1645d79e646f2ef2f32200e804d2c5b3b0e266d1335cb78",
+      "digest": "sha256:a33f15f236100411663857c21acec3b7b5ebffd1d4d4c3ce657edeca1705622f",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -6737,7 +6742,7 @@
       ]
     },
     {
-      "digest": "sha256:8390c9ae92595cdd39aae9315a8f729bf1f85605551982ba7d90371993b74ac8",
+      "digest": "sha256:2a531be2bb71f4c480ed0cf67cbbb99c10b77776fcf736d552de7a28db2d93f2",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6749,7 +6754,7 @@
       ]
     },
     {
-      "digest": "sha256:0e2e5f1c8c5281494e4cc4188aa41915f57999b8fa54e321682362d0316fa9e9",
+      "digest": "sha256:54a320ff0950b8a5946ed8a3a780b3076098d3266c7f794bed6969efd8f99595",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6825,6 +6830,11 @@
           "check": "language-index-owner-map",
           "role": "table",
           "suite": "language-index-closure"
+        },
+        {
+          "check": "owner-map-targets",
+          "role": "table",
+          "suite": "milestone-7-f025-f026-decomposition"
         },
         {
           "check": "owner-map-lineage",
@@ -6952,6 +6962,11 @@
           "check": "inventory-source-lineage",
           "role": "right",
           "suite": "milestone-7-f018-decomposition"
+        },
+        {
+          "check": "inventory-sources",
+          "role": "table",
+          "suite": "milestone-7-f025-f026-decomposition"
         },
         {
           "check": "inventory-identities",
@@ -7258,6 +7273,18 @@
           "check": "accelerated-package",
           "role": "table",
           "suite": "milestone-7-row-8-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:3814084445f9ad547f645b61e30f6727ed77ffbf7ce50977b7b335f3313bb73b",
+      "path": "evaluation/standards-effectiveness/milestone-7-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "parent-decomposition-route",
+          "role": "content",
+          "suite": "milestone-7-f025-f026-decomposition"
         }
       ]
     },
@@ -7816,6 +7843,30 @@
           "check": "slice-map",
           "role": "table",
           "suite": "milestone-7-f018-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ba897fd93f2e256b927634686d7aa8a5419643f855c263c2f6b3fd6dd82ccf3d",
+      "path": "evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-f025-f026-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:08953e87e8d450b9d44f1ecad8dabe067c41635876ab9cd028f0995cb4698b61",
+      "path": "evaluation/standards-effectiveness/milestone-7-f025-f026-slices.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "slice-map",
+          "role": "table",
+          "suite": "milestone-7-f025-f026-decomposition"
         }
       ]
     },
@@ -9019,6 +9070,18 @@
       ]
     },
     {
+      "digest": "sha256:0fe6e1b84862b5962a02d14130905a8f9d9f6015fad528453b941eefb073c369",
+      "path": "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "trust-replan-route",
+          "role": "content",
+          "suite": "milestone-7-f025-f026-decomposition"
+        }
+      ]
+    },
+    {
       "digest": "sha256:6af387ff519826ffc7fe3120884cca52e7b92a2a8f2b816961faee27dfb557ee",
       "path": "evaluation/standards-effectiveness/milestone-7-undisposed-source-audit.md",
       "state": "present",
@@ -9481,7 +9544,7 @@
       ]
     },
     {
-      "digest": "sha256:738c1751efb430607436b858cbd893e4f0dbf8199224068c1205fe9c8de588d8",
+      "digest": "sha256:fc8149ecd6a9a118a93d095292eae7ccad45df0cd643b0342fc0784c875acecf",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10575,6 +10638,18 @@
     {
       "digest": "sha256:fa8f21be2db6ed1ca8b7fa1b947d6b173b099e6a84bc4fafd273e8acd12cc8a7",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:3861bd8dbc8554e162518200815b3b141a7399f78e838970552368b45c8cb488",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-f025-f026-decomposition.toml",
       "state": "present",
       "uses": [
         {
@@ -12862,28 +12937,6 @@
     {
       "digest": "sha256:7acf3b1fd9598ff0c59857abc2250aa7b7b7b6131b9e29a2eba36a94559c5130",
       "path": "evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:23aef63ae854133a06441d49bd17085a4cd5f38e5a3076332f07aed6580d06e7",
-      "path": "evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh",
       "state": "present",
       "uses": [
         {
@@ -23226,11 +23279,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:738c1751efb430607436b858cbd893e4f0dbf8199224068c1205fe9c8de588d8",
+    "digest": "sha256:fc8149ecd6a9a118a93d095292eae7ccad45df0cd643b0342fc0784c875acecf",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:58c459ac579dc4ad25fc94afb0df3baf30e5887dbe8e4eb1f293d7fbcc4af328",
+    "digest": "sha256:3c143e6d3773a9a9614a71d064d5b558da22815dd72778f5796ac2d539bea279",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24737,6 +24790,12 @@
       "digest": "sha256:dc02ea25393cd8ba2b4edd9352d15adf2442df4ab81bc57c6bc5e4a397d2ce39",
       "id": "milestone-7-row-5-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-5-decomposition.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:3861bd8dbc8554e162518200815b3b141a7399f78e838970552368b45c8cb488",
+      "id": "milestone-7-f025-f026-decomposition",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-f025-f026-decomposition.toml",
       "requires": []
     },
     {
