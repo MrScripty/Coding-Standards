@@ -364,3 +364,49 @@
   clean, synchronize, or remove the out-of-scope worktree or branch. Any future
   hands-on P1 review requires a separately admitted clean worktree from the
   archive ref.
+
+## 2026-09-01 - A2-P2R Requires Product Reauthorization
+
+- Accepted isolated evidence commit
+  `a0478c5c363d851435f193ef5be7ec75255378af` with terminal verdict
+  `reject-requires-product-reauthorization`. No A2 design candidate was
+  admitted.
+- Two byte-distinct proposal revisions with one base and identical declared
+  analysis changes encoded through the unchanged A1c `AnalysisState` to the
+  same 876 bytes and the same `AnalysisHandle`. Ambient current-head replay
+  drifted after head movement, while invocation-only material was unavailable
+  in a fresh process.
+- The three injective and replayable representations each crossed a protected
+  boundary: synthetic proposed snapshots violate A1C-U06 and P2, encoding the
+  revision into state changes A1c identity and contract semantics, and an outer
+  authoring-analysis state establishes a second durable analysis authority.
+  Composite handles, aggregate-child indexes, duplicate-root surrogates, and
+  field or semantic salts reduced to those same tested classes.
+- The executable used the current A1c state codec, generated `PrepareCall`,
+  analyzer snapshot-mismatch guard, and fresh child-process replay. An
+  independent read-only implementation and ADR audit reproduced the identity
+  collision and found no additional preserving representation seam.
+- Linux CPython 3.12.3 in the dependency-complete verifier environment passed
+  the full oracle. CPython 3.11 passed syntax parsing only because the system
+  environment lacked `jsonschema`; no 3.11 runtime, SQLite restart,
+  full-corpus, migration, public behavior, latency, or platform-completeness
+  claim is admitted.
+- The isolated branch passed Ruff, formatting, generated freshness at 12 Bash
+  verifiers, 14 graph nodes, 81 edges, and 14 components, all 265 declarative
+  suites, exact staged diff integrity, and sensitive-value review. Its commit
+  uses a conventional imperative subject and records rationale, scope, and
+  contract effects in the body.
+- Protected exact tip `a0478c5c363d851435f193ef5be7ec75255378af`
+  at `refs/archive/a2-prototypes/p2r-projected-analysis-replay`, verified the
+  worktree clean, and removed only that task-owned `/tmp` worktree. Source
+  identity is
+  `sha256:ee36875535c9befb6c1f183fd71436699cd1f15bd7e0a64b138625158cba5097`;
+  neither prototype artifact entered canonical `main`.
+- The canonical evidence update passed A2 plan structure, plan lifecycle
+  fixtures, generated freshness, all 265 declarative suites, exact staged diff
+  integrity, and sensitive-value review. Regeneration changed no canonical
+  generated artifact.
+- P4R, P5, and production work are stopped. The next slice is an explicit
+  product-owner disposition: reopen A1c analysis identity, permit proposal
+  snapshot authority, permit a second analysis authority, or reduce A2's
+  projected-analysis objective. A2 selects none of these by implication.

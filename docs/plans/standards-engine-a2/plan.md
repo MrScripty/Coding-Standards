@@ -4,7 +4,8 @@
 
 **Current phase:** Milestone 0 A1c preservation and design validation
 
-**Next slice:** A2-P2R isolated projected-analysis identity and replay execution
+**Next slice:** Product-owner disposition of the A1c projected-analysis
+identity conflict
 
 **Acceptance status:** `pending`
 
@@ -354,11 +355,13 @@ canonical `main`.
   real scratch SQLite CAS and cold reopen, stage-before-publication, concurrent
   target change, interruption recovery, generated facade shape, and the
   representative agent workflow. Use disposable repositories and stores only.
-- [ ] Revise the P2 end-to-end claim with an exact projected-analysis identity
+- [x] Revise the P2 end-to-end claim with an exact projected-analysis identity
   and cold-replay experiment. Determine whether one private Authoring seam can
   reuse the existing analyzer while preserving A1c's immutable AnalysisState,
   non-Git change-set, lifecycle, and no-proposal-snapshot decisions; reject the
   seam and require product reauthorization if those constraints cannot coexist.
+  P2R rejected all five bounded representation seams and admitted no A2 design;
+  exact evidence is recorded in the prototype index.
 - [ ] Revise P4 only after P2R settles projected analysis identity. Retest the
   explicit additive facade without a projected `SnapshotHandle`, mutable
   current-evidence selector, caller-supplied ref or object ID, tagged dispatch,
@@ -411,7 +414,12 @@ canonical `main`.
 
 ## Blockers
 
-- `none` for explicit Milestone 0 start admission.
+- A2-P2R found no injective, immutable, cold-replayable projected-analysis seam
+  that preserves the unchanged A1c `AnalysisState`, non-Git proposal material,
+  no-proposal-snapshot choice, and single analysis authority. P4R, P5, and A2
+  production planning remain unavailable until the product owner explicitly
+  reauthorizes one protected A1c boundary through an A1c re-plan or reduces the
+  A2 objective so projected proposal analysis is no longer required.
 - Production implementation remains unavailable until A2-A11 and every
   design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
   the plan names and admits an exact implementation slice.

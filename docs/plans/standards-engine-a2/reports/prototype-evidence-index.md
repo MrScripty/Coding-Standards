@@ -1,6 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1 and P3 pass; P2 and P4 revise; P2R/P4R and P5 pending`
+**Status:** `P1 and P3 pass; P2 and P4 revise; P2R rejected pending product
+reauthorization; P4R and P5 blocked`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -11,7 +12,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | --- | --- | --- | --- | --- | --- | --- |
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; original `/tmp/coding-standards-a2-p1-state-model` now contains out-of-scope M6 work | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `archive-protected` exactly at `refs/archive/a2-prototypes/p1-state-model`; live worktree unavailable to A2 |
 | A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `3bab6e981d6e902e087f485c03fca78d0505a39e` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p2-projected-view` |
-| A2-P2R | `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py` | `prototype/a2-m0-projected-analysis-replay`; `/tmp/coding-standards-a2-p2r-projected-analysis-replay` | `c509d61ed0537907191ea615f4a613fc02dabcb2`; worktree creation pending | pending | pending | pending; expected `removed-archived` |
+| A2-P2R | `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py` | `prototype/a2-m0-projected-analysis-replay`; removed `/tmp/coding-standards-a2-p2r-projected-analysis-replay` | `c509d61ed0537907191ea615f4a613fc02dabcb2` | `a0478c5c363d851435f193ef5be7ec75255378af` | `reject-requires-product-reauthorization` | `removed-archived` at `refs/archive/a2-prototypes/p2r-projected-analysis-replay` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
@@ -201,6 +202,99 @@ The clean task-owned worktree was removed after archive ref
 `refs/archive/a2-prototypes/p2-projected-view` was verified at exact tip
 `3bab6e981d6e902e087f485c03fca78d0505a39e`. The prototype and branch-local
 projection remain recoverable and did not enter canonical `main`.
+
+## A2-P2R Projected-Analysis Identity And Replay
+
+### Question And Environment
+
+P2R asked whether any private seam can give two byte-distinct projected
+proposal revisions to the existing analyzer while retaining an injective,
+immutable, cold-replayable identity through the unchanged A1c `AnalysisState`.
+It compared exactly the five predeclared locations where revision-specific
+information could reside: ambient current-head lookup, invocation-only
+material injection, the proposed-snapshot field, existing A1c identity fields,
+or a separate durable analysis authority.
+
+The accepted command was
+`PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 /tmp/coding-standards-verifier/bin/python -P tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py`
+on Linux CPython 3.12.3 in the dependency-complete verifier environment. Cold
+replay used fresh child processes over serialized fixture bytes. CPython 3.11
+passed syntax parsing, but its system environment lacked `jsonschema`; this
+prototype makes no CPython 3.11 runtime or platform-completeness claim.
+
+### Results
+
+| Candidate or oracle | Exact result |
+| --- | --- |
+| Unchanged A1c state | both revisions encoded to the same 876 bytes and `analysis:sha256:bc1fa2a16bb6697dc9abab5ba139bf67d74ce033c1c14b7682049c0eccc1f6b0` |
+| Ambient current head | revision A replay resolved revision B after head movement; identity was non-injective |
+| Ephemeral injection | both cold replays returned `A2P2R.EPHEMERAL_INPUT_MISSING`; no replay authority survived |
+| Synthetic proposed snapshot | distinct identities and exact replay succeeded, but only by representing proposal material as an A1c snapshot, prohibited by A1C-U06 and P2 |
+| Changed A1c identity | adding `projected_revision` to the change produced distinct 931-byte states with 55 retained identity bytes and exact replay; generated `PrepareCall` rejected it at `/request/changes/0`, the current analyzer erased it to the original declared change, and a top-level state field returned `ANALYSIS.INVALID_STATE` |
+| Separate authoring-analysis state | distinct 184-byte outer states replayed exactly through two authorities; the current A1c codec rejected the outer state |
+| Analyzer material guard | current `evaluate_analysis` returned `ANALYSIS.SNAPSHOT_MISMATCH` when material did not match the state's proposed snapshot root |
+| Candidate-space check | composite proposal/analysis handles and aggregate-child indexes reduce to a second authority; duplicate-root surrogates reduce to proposal-as-snapshot; existing-field and semantic-proposal salts reduce to changed A1c identity semantics |
+| Terminal threshold | all five candidates were inadmissible, all registered cold-process observations were exact, the codec and contract oracle was available, and the admissible candidate count was zero |
+
+An independent read-only audit of the current state codec, generated contracts,
+prepare/resolve flow, aggregate store, and A1c ADR reproduced equal state bytes
+and equal analysis IDs for the collision case. It found no sixth preserving
+location: a composite handle, aggregate child, authorization record, duplicate
+root, prior analysis, or semantic salt reduces to one of the five tested
+representation classes.
+
+### Four-Dimension Verdict
+
+- **Effectiveness:** `reject`. Neither unchanged-state candidate can identify
+  and cold-replay the exact proposal revision. Every candidate that can do so
+  changes a protected product or architecture boundary.
+- **Efficiency:** `unavailable` for design admission. The executable records
+  876-byte unchanged states, 931-byte identity-overloaded states, and 184-byte
+  outer second-authority states, but no candidate is correctness-equivalent and
+  admissible. These representation observations establish no latency, durable
+  storage, or full-corpus budget.
+- **Correctness:** `pass` for the terminal rejection. The current A1c codec,
+  generated prepare contract, analyzer material guard, fresh-process replay,
+  exact negative results, and independent implementation audit agree. SQLite
+  restart, full-corpus compilation, migration, and public behavior remain
+  outside this claim.
+- **Standards compliance:** `pass` for the isolated rejection evidence. The
+  test-only source and branch-local repository digest passed Ruff, formatting,
+  generated freshness, all 265 declarative suites, exact staged diff, and
+  sensitive-value review. The commit has a conventional subject and a body
+  recording rationale, scope, and contract effect.
+
+### Admitted And Rejected Decisions
+
+Admit the negative design fact only: no private projected-analysis seam exists
+under the complete protected constraint set. P2's private exact-mutation
+content Adapter remains valid for compilation equivalence but is not an
+analysis identity or replay design. Admit no new operation, public field,
+state format, proposal snapshot, facade root, durable mapping, analysis owner,
+or production source.
+
+Reject mutable current-head lookup and invocation-only material injection
+outright. Do not select among the three replayable conflicts. Product-owner
+reauthorization would have to reopen A1c analysis identity/codec semantics,
+permit proposal material to become snapshot authority, or permit a separate
+authoring-analysis identity and authority. Reducing A2 so projected proposal
+analysis is no longer required is the non-reauthorization alternative. Each
+choice materially changes product scope or a protected A1c decision and
+requires an explicit user decision plus a re-plan; A2 cannot choose it.
+
+P4R, P5, the public contract, persisted authoring design, facade, and production
+implementation remain unavailable until that disposition is recorded and the
+selected boundary receives a newly admitted prototype.
+
+### Archived Worktree Contract
+
+The final source identity is
+`sha256:ee36875535c9befb6c1f183fd71436699cd1f15bd7e0a64b138625158cba5097`.
+The clean task-owned worktree was removed after archive ref
+`refs/archive/a2-prototypes/p2r-projected-analysis-replay` was verified at
+exact tip `a0478c5c363d851435f193ef5be7ec75255378af`. The source and its
+branch-local generated projection remain recoverable and did not enter
+canonical `main`.
 
 ## A2-P3 Publication And Recovery
 
