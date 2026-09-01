@@ -5,8 +5,8 @@
 **Current phase:** Milestone 0 A1c projected-material reauthorization and
 design validation
 
-**Next slice:** A2-P2R2 isolated projected-material identity execution
-admission
+**Next slice:** A2-P2R2 isolated projected-material identity prototype
+execution
 
 **Acceptance status:** `pending`
 
@@ -438,8 +438,9 @@ canonical `main`.
 
 ## Blockers
 
-- No blocker affects A2-P2R2 execution admission. The user supplied the exact
-  product reauthorization needed to validate projected-material identity.
+- No blocker affects A2-P2R2 prototype execution. The user supplied the exact
+  product reauthorization and this plan records the exact isolated execution
+  admission needed to validate projected-material identity.
 - P4R, P5, an A1c ADR amendment, public or persisted contract selection, and
   production planning remain unavailable until A2-P2R2 passes every identity,
   replay, lifecycle, single-authority, efficiency, platform, and

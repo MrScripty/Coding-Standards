@@ -452,3 +452,58 @@
   registry, suite definitions, existing file entries, and retirement evidence
   remained unchanged. Exact staged-scope, sensitive-value, and
   conventional-message review remain Commit-owned gates.
+
+## 2026-09-01 - A2-P2R2 Isolated Execution Admitted
+
+- Admitted exact base `a959ca3d6112ce4b3dc532805cbcb24b2e7fce2c`, branch
+  `prototype/a2-m0-projected-material-identity`, and task-owned worktree
+  `/tmp/coding-standards-a2-p2r2-projected-material-identity`. Neither the
+  branch nor worktree existed when this authority was recorded.
+- The prototype owner may author only
+  `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py`.
+  The A2 integration owner alone may stage that file, regenerate and stage the
+  branch-local `evaluation/standards-effectiveness/generated/suite-inputs.json`,
+  review the exact diff, commit the isolated evidence, protect its exact tip at
+  `refs/archive/a2-prototypes/p2r2-projected-material-identity`, remove the
+  worktree and branch, and record the canonical verdict.
+- The representative caller supplies only one opaque immutable revision handle.
+  The selected candidate must use one evolved Analysis-owned state, one current
+  compiler and Analysis kernel, and one real scratch SQLite/Snapshot owner. It
+  must not expose material resolution, caller changes, content, repository or
+  store facts, current-head selection, or a second analysis state.
+- Exact candidate diagnostics, prohibited controls, and pass, revise, or reject
+  thresholds remain those registered in the canonical design-validation
+  protocol. This admission does not add an outcome code, change an oracle, or
+  reinterpret an exact rejection after execution begins.
+- The real lifecycle oracle must retain current `SNAPSHOT.QUARANTINED`,
+  `SNAPSHOT.EXPIRED`, and `SNAPSHOT.UNAVAILABLE` outcomes, demonstrate exact
+  revision and analysis replay after SQLite close/reopen and proposal-head
+  movement, and prove aggregate quarantine, complete undelete, and atomic purge
+  without independent revision retention.
+- Efficiency evidence compares the selected bounded material reference with
+  the current omitted-reference collision and correctness-equivalent full
+  projected-material embedding. It records canonical state, reference,
+  revision, full-material, database, and dependency-row bytes; caller fields;
+  fixed resolver calls; one warm-up plus every repeated timing observation; and
+  rejects a corpus-sized per-analysis state or a strictly dominated candidate.
+- The complete oracle must execute with dependency-complete Linux CPython 3.11
+  at `/tmp/coding-standards-a1c-py311/bin/python` and CPython 3.12 at
+  `/tmp/coding-standards-a1c-py312/bin/python`. The exact commands are
+  `PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 /tmp/coding-standards-a1c-py311/bin/python -P tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py`
+  and the same command with the admitted CPython 3.12 interpreter. Ruff,
+  formatting, generated freshness, package-boundary selection, plan lifecycle,
+  all declarative suites, exact diff, sensitive-value review, and conventional
+  Commit review remain independent gates.
+- A fresh A1c `create_snapshot` plus `query(route)` execution on the admitted
+  base selected the same 22 standards registered by the protocol and returned
+  zero unresolved fact categories.
+- The branch-local generated diff may change only the repository-index digest.
+  Prototype source never merges to `main`. P4R, P5, an A1c ADR amendment,
+  public or persisted contract selection, migration, and production source
+  remain blocked until a passing result is recorded canonically.
+- Canonical admission verification passed plan structure and lifecycle,
+  generated freshness at 7 retained Bash verifiers, 9 dependency-graph nodes,
+  33 edges, and 9 components, all 269 declarative suites, every retained Bash
+  checker through the complete checkpoint, diff integrity, and unchanged
+  canonical generated evidence. Exact staged-scope, sensitive-value, and
+  conventional-message review remain Commit-owned gates.
