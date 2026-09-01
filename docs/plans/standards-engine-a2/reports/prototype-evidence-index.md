@@ -10,10 +10,10 @@ branch commits and terminal worktree dispositions after each isolated run.
 | ID | Exact path | Branch and worktree | Exact admitted base | Prototype commit | Verdict | Worktree disposition |
 | --- | --- | --- | --- | --- | --- | --- |
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; `/tmp/coding-standards-a2-p1-state-model` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `retained-protected` at archived tip `refs/archive/a2-prototypes/p1-state-model` |
-| A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | suspended pending exact path-correction re-admission | pending | pending | pending; expected `removed-archived` |
-| A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | suspended pending exact path-correction re-admission | pending | pending | pending; expected `removed-archived` |
-| A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | suspended pending exact path-correction re-admission | pending | pending | pending; expected `removed-archived` |
-| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | suspended pending exact path-correction re-admission; worktree not yet created | pending | pending | pending; expected `removed-archived` |
+| A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
+| A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
+| A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
+| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
 
 The A2 prototype owner owns each private worktree, its one authored source
 path, and the branch-local generated suite-input projection required by that
@@ -29,9 +29,10 @@ P5 artifacts must change only the repository-index digest. Python prototypes
 remain below the package's existing `tests` boundary; no prototype becomes a
 production package input or requires production ownership. P2 through P4 must
 move their unchanged authored file to the corrected exact path and fast-forward
-only after a later canonical record names the path-correction commit. P5 must be
-created directly from that re-admitted base. No other prototype-source rewrite,
-merge, or copying is authorized by this correction.
+to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
+before staging. P5 must be created directly from that re-admitted base. No
+other prototype-source rewrite, merge, or copying is authorized by this
+correction.
 
 ## A2-P1 Authoring State Model
 

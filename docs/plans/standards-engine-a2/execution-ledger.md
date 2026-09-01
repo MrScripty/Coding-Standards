@@ -223,3 +223,8 @@
   stop and re-plan rather than broadening production ownership for test code.
 - P2 through P4 require a later exact-base re-admission before moving their
   completed uncommitted source or fast-forwarding again. P5 remains uncreated.
+- Re-admitted P2 through P5 at exact path-correction commit
+  `a8c7b04504b58446fc0fd6c53b867ddeb7827185`. P2 through P4 may now
+  fast-forward and mechanically move only their unchanged uncommitted source
+  to the registered test path before staging; P5 must be created directly from
+  this base. All other branch and write-set constraints remain unchanged.
