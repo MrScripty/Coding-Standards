@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 0 A1c preservation and design validation
 
-**Next slice:** A2-P2R projected-analysis identity and replay protocol admission
+**Next slice:** A2-P2R isolated projected-analysis identity and replay execution
 
 **Acceptance status:** `pending`
 

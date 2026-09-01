@@ -330,3 +330,21 @@
   candidate either loses identity or violates an explicit A1c/P1/P2 choice, the
   required verdict is `reject-requires-product-reauthorization`; A2 may not
   choose which protected decision to change. P4R and P5 remain blocked.
+
+## 2026-09-01 - A2-P2R Isolated Execution Admitted
+
+- Admitted exact base `c509d61ed0537907191ea615f4a613fc02dabcb2`, branch
+  `prototype/a2-m0-projected-analysis-replay`, and task-owned worktree
+  `/tmp/coding-standards-a2-p2r-projected-analysis-replay`.
+- The prototype owner may author only
+  `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py`.
+  The integration owner alone stages it, regenerates and stages the branch-local
+  `evaluation/standards-effectiveness/generated/suite-inputs.json`, performs
+  exact review, commits, protects the tip, and records canonical evidence.
+- The branch-local generated diff must change only the repository-index digest.
+  The source is a test-only throwaway artifact with no canonical runtime
+  consumer and is never merged. P4R, P5, production source, contracts, stores,
+  and facade implementation remain unavailable.
+- The user authorized a Sol/xhigh subagent for isolated prototype creation.
+  No subagent may stage, commit, update a ref, synchronize a branch, edit a
+  shared generated artifact, or modify another worktree.
