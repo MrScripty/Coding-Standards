@@ -10,10 +10,10 @@ branch commits and terminal worktree dispositions after each isolated run.
 | ID | Exact path | Branch and worktree | Exact admitted base | Prototype commit | Verdict | Worktree disposition |
 | --- | --- | --- | --- | --- | --- | --- |
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; `/tmp/coding-standards-a2-p1-state-model` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `retained-protected` at archived tip `refs/archive/a2-prototypes/p1-state-model` |
-| A2-P2 | `tools/standards_engine/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
-| A2-P3 | `tools/standards_engine/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
-| A2-P4 | `tools/standards_engine/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
-| A2-P5 | `tools/standards_engine/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
+| A2-P2 | `tools/standards_engine/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `fe4c6c11b5bac1a3cca72b4a6cf3310b2100cee3` after governed fast-forward from creation base `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
+| A2-P3 | `tools/standards_engine/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `fe4c6c11b5bac1a3cca72b4a6cf3310b2100cee3` after governed fast-forward from creation base `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
+| A2-P4 | `tools/standards_engine/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `fe4c6c11b5bac1a3cca72b4a6cf3310b2100cee3` after governed fast-forward from creation base `bbdfb485e914540e0e53092dab71c9b80f55102d` | pending | pending | pending; expected `removed-archived` |
+| A2-P5 | `tools/standards_engine/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `fe4c6c11b5bac1a3cca72b4a6cf3310b2100cee3`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
 
 The A2 prototype owner owns each private worktree, its one authored source
 path, and the branch-local generated suite-input projection required by that
@@ -29,6 +29,11 @@ only the repository-index digest. Python artifacts under the existing Engine
 package additionally add their exact path and content digest to the already
 selected `python-package-contract` input set. That derived entry is evidence of
 the staged branch write set, not admission to canonical production source.
+P2 through P4 may fast-forward from their unchanged creation base to correction
+commit `fe4c6c11b5bac1a3cca72b4a6cf3310b2100cee3` only after their authored
+source is complete and before staging or commit. P5 must be created directly
+from that corrected base. No prototype-source rebase, merge, or copying is
+authorized by this correction.
 
 ## A2-P1 Authoring State Model
 

@@ -199,3 +199,9 @@
   is committed and the exact staged projection, focused prototype runs, and
   complete declarative checkpoint pass. A2 production source, contracts,
   stores, facade, and publication authority remain unavailable.
+- Re-admitted P2, P3, and P4 at correction commit
+  `fe4c6c11b5bac1a3cca72b4a6cf3310b2100cee3` by a fast-forward from their
+  unchanged creation base after each owner finishes and before staging. P5 has
+  not been created and must use the corrected commit as its creation base.
+  This synchronization changes no authored prototype source and keeps each
+  branch private and unmerged.
