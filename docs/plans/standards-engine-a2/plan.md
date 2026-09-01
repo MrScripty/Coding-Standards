@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 A1c projected-material reauthorization and
-design validation
+**Current phase:** Milestone 0 facade revalidation after projected-material
+identity acceptance
 
-**Next slice:** A2-P2R2 isolated projected-material identity prototype
-execution
+**Next slice:** Register and admit the isolated A2-P4R facade-composition
+prototype
 
 **Acceptance status:** `pending`
 
@@ -379,12 +379,15 @@ canonical `main`.
   seam and require product reauthorization if those constraints cannot coexist.
   P2R rejected all five bounded representation seams and admitted no A2 design;
   exact evidence is recorded in the prototype index.
-- [ ] Run A2-P2R2 against the selected exact projected-revision material
+- [x] Run A2-P2R2 against the selected exact projected-revision material
   reference. Prove injective canonical identity, unchanged snapshot analysis,
   exact cold-process replay after head movement, real SQLite dependency and
   lifecycle behavior, typed missing/wrong-base/tampered/quarantined outcomes,
   bounded identity overhead, one Analysis authority, and dependency-complete
   Linux CPython 3.11 and 3.12 execution before admitting an ADR or source plan.
+  Passing evidence is archived at exact commit
+  `b76f443b5bc05b179d20193bf27ea4d3054db7f3` and recorded in the prototype
+  evidence index.
 - [ ] Revise P4 only after P2R2 accepts projected-material identity. Retest the
   explicit additive facade without a projected `SnapshotHandle`, mutable
   current-evidence selector, caller-supplied ref or object ID, tagged dispatch,
@@ -438,13 +441,12 @@ canonical `main`.
 
 ## Blockers
 
-- No blocker affects A2-P2R2 prototype execution. The user supplied the exact
-  product reauthorization and this plan records the exact isolated execution
-  admission needed to validate projected-material identity.
-- P4R, P5, an A1c ADR amendment, public or persisted contract selection, and
-  production planning remain unavailable until A2-P2R2 passes every identity,
-  replay, lifecycle, single-authority, efficiency, platform, and
-  standards-compliance threshold.
+- No design blocker affects A2-P4R registration and execution admission.
+  A2-P2R2 passed every identity, replay, lifecycle, single-authority,
+  efficiency, platform, and standards-compliance threshold.
+- P5, an A1c ADR amendment, public or persisted contract selection, and
+  production planning remain unavailable until P4R validates an exact facade
+  composition without restoring any of P4's rejected stand-ins.
 - Production implementation remains unavailable until A2-A11 and every
   design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
   the plan names and admits an exact implementation slice.

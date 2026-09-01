@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1 and P3 pass; P2 and P4 revise; P2R rejected; exact A1c
-reauthorization recorded; P2R2 execution admitted; P4R and P5 blocked`
+**Status:** `P1, P2R2, and P3 pass; P2 and P4 revise; P2R rejected; P4R
+registration and execution admission next; P5 blocked`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -13,7 +13,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; original `/tmp/coding-standards-a2-p1-state-model` now contains out-of-scope M6 work | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `archive-protected` exactly at `refs/archive/a2-prototypes/p1-state-model`; live worktree unavailable to A2 |
 | A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `3bab6e981d6e902e087f485c03fca78d0505a39e` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p2-projected-view` |
 | A2-P2R | `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py` | `prototype/a2-m0-projected-analysis-replay`; removed `/tmp/coding-standards-a2-p2r-projected-analysis-replay` | `c509d61ed0537907191ea615f4a613fc02dabcb2` | `a0478c5c363d851435f193ef5be7ec75255378af` | `reject-requires-product-reauthorization` | `removed-archived` at `refs/archive/a2-prototypes/p2r-projected-analysis-replay` |
-| A2-P2R2 | `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py` | `prototype/a2-m0-projected-material-identity`; `/tmp/coding-standards-a2-p2r2-projected-material-identity` not created | `a959ca3d6112ce4b3dc532805cbcb24b2e7fce2c` | pending | pending | creation admitted; expected `removed-archived` |
+| A2-P2R2 | `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py` | removed `prototype/a2-m0-projected-material-identity`; removed `/tmp/coding-standards-a2-p2r2-projected-material-identity` | `a959ca3d6112ce4b3dc532805cbcb24b2e7fce2c` | `b76f443b5bc05b179d20193bf27ea4d3054db7f3` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p2r2-projected-material-identity` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
@@ -303,6 +303,111 @@ The clean task-owned worktree was removed after archive ref
 `refs/archive/a2-prototypes/p2r-projected-analysis-replay` was verified at
 exact tip `a0478c5c363d851435f193ef5be7ec75255378af`. The source and its
 branch-local generated projection remain recoverable and did not enter
+canonical `main`.
+
+## A2-P2R2 Projected-Material Identity And Replay
+
+### Question And Environment
+
+P2R2 asked whether the explicitly reauthorized closed projected-revision
+material reference can give one evolved Analysis-owned state injective identity
+and exact cold replay through the current compiler, Analysis kernel, Snapshot
+Module, and SQLite owner without changing snapshot-backed A1c behavior. It
+compared the selected bounded reference with the omitted-reference collision
+and a correctness-equivalent persisted full-material control while retaining
+ambient-head, proposal-as-snapshot, identity-salt, and second-analysis-authority
+cases as prohibited controls.
+
+The exact prototype command ran with dependency-complete Linux CPython 3.11.14
+and SQLite 3.50.4, then CPython 3.12.3 and SQLite 3.45.1. Each run used an
+independent real scratch Git repository, scratch SQLite store, actual repository
+head movement, store close/reopen, and fresh child processes. Both environments
+returned `pass` for all 42 registered verdict gates.
+
+### Results
+
+| Evidence | Exact result |
+| --- | --- |
+| Representative caller | one `analyze_revision(revision_handle)` call; exact `self, revision_handle` signature; no caller changes, material, repository/store facts, resolver, or current head |
+| Injective identity | two equal-descriptor revisions produced distinct canonical revision bytes, distinct 1,046-byte state encodings, and distinct analysis handles |
+| Cold replay | both handles resolved their exact original revision and evaluation in fresh processes after the scratch repository head advanced |
+| Snapshot preservation | semantic projection and state replay remained exact; the generated contract still rejected a revision handle; all eight current operation roots were unchanged |
+| Dependency and lifecycle | real SQLite rows bound each selected revision and analysis to its base; quarantine and undelete were exact; purge removed every base-dependent record atomically while the independent alternate root, dependency, and load remained exact |
+| Typed boundaries | missing, wrong-base, wrong-dependency, malformed, tampered, retained-input, retained-semantic, unsupported-contract, quarantined, expired, unknown-root, and purged cases reached their exact registered outcomes |
+| Prohibited controls | ambient current-head lookup, proposal-as-snapshot, identity salt, and a duplicate Analysis authority were absent and verdict-gated |
+
+The two immutable revision identities were
+`proposal-revision:sha256:f843f7fbc07f62aceb6344dcb4bf367f4e9b0bc700c79a3e5d05df2c09d30f7f`
+and
+`proposal-revision:sha256:6f2ee7040c08cf3d1ff423a9bb86abd62f33b6191e8cd57a94d1095d3cb0c204`.
+Their analysis identities were
+`analysis:sha256:8780425f2a174631fa7107e2ff03bbabc3f0893d11dca6f7a2f9faee8f836228`
+and
+`analysis:sha256:5acc65501667a6cc00a299d5f3ddd17d7c804ce285b72787090d07e860ae69d3`.
+
+### Efficiency Evidence
+
+The selected canonical material reference was 202 bytes, the Analysis state
+1,046 bytes, and the immutable revision payload 1,636,286 bytes. Including
+record identities and dependency rows, selected durable material was 1,637,766
+bytes. The correctness-equivalent persisted full-material control was
+14,626,773 durable bytes over a 7,265,159-byte base corpus and therefore about
+8.9 times larger. The scratch SQLite allocation was 41,275,392 bytes and is a
+descriptive allocation observation, not retained product state or a budget.
+
+After one warm-up, all three CPython 3.11 selected compilation observations
+ranged from 7.61 to 7.66 seconds and the full-material observations from 3.34
+to 3.36 seconds. CPython 3.12 observations ranged from 7.92 to 7.93 seconds and
+3.41 to 3.43 seconds respectively. The selected resolver is slower in this
+prototype, but the full-material control does not strictly dominate it because
+it retains substantially more durable material. No production latency promise
+or guessed threshold is admitted; P5 owns the combined-workflow comparison.
+
+### Four-Dimension Verdict
+
+- **Effectiveness:** `pass`. One opaque caller handle reaches exact analysis
+  and replay for both immutable revisions without caller-owned internal facts,
+  ambient selection, or another analysis authority.
+- **Efficiency:** `pass` for the registered P2R2 comparison. The selected state
+  retains bounded identity plus change-proportional revision material instead
+  of a full projected corpus per analysis, and the faster full-material control
+  does not strictly dominate across the registered resource dimensions.
+- **Correctness:** `pass`. Identity, compiler and kernel reuse, exact fresh-
+  process replay, current snapshot regression, typed failures, real SQLite
+  dependency closure, quarantine, undelete, atomic purge, and independent-root
+  survival are executable verdict gates on both supported runtimes.
+- **Standards compliance:** `pass`. Independent specification and standards
+  audits reported no remaining source-level blocker. Ruff, formatting, plan
+  lifecycle, generated freshness at 7 retained Bash verifiers, the 9-node and
+  33-edge dependency graph, all 269 declarative suites, the complete checkpoint,
+  staged-scope, sensitive-value, and conventional-commit review passed.
+
+### Admitted Decision And Limits
+
+Admit for later canonical design one closed Analysis-owned proposed-material
+value with snapshot and projected-revision variants, an immutable Authoring-
+owned proposal revision, private exact material resolution into the current
+compiler, retained normalized analysis inputs checked against that revision,
+and typed snapshot dependencies inside the one SQLite aggregate owner. Analysis
+remains the sole analysis authority. Reject mutable-head replay, invocation-only
+material, proposal snapshots, identity salts, composite external handles, full
+projected-material-per-analysis storage, and a second analysis state.
+
+This is design evidence, not canonical source or contract authority. The
+prototype-local operation name, codecs, handles, compatibility value, state and
+store versions, migration decision, and generated request/result shapes remain
+unselected. Only exact replacement mutations were exercised. P4R must select a
+preservation-safe facade composition, and P5 must measure the combined design,
+before ADR or production planning can proceed.
+
+### Archive And Worktree Contract
+
+Evidence commit `b76f443b5bc05b179d20193bf27ea4d3054db7f3` has source identity
+`sha256:255ff74886a4e34b5d30717c25d72997851404d9d81097680bf3bb8eb2837376`
+and remains reachable at
+`refs/archive/a2-prototypes/p2r2-projected-material-identity`. The exact clean
+task-owned worktree and temporary branch were removed after archive verification.
+The prototype and its branch-local repository-index digest did not enter
 canonical `main`.
 
 ## A2-P3 Publication And Recovery

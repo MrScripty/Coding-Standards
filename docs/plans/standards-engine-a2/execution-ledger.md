@@ -507,3 +507,75 @@
   checker through the complete checkpoint, diff integrity, and unchanged
   canonical generated evidence. Exact staged-scope, sensitive-value, and
   conventional-message review remain Commit-owned gates.
+
+## 2026-09-01 - A2-P2R2 Projected-Material Identity Accepted
+
+- Accepted isolated evidence commit
+  `b76f443b5bc05b179d20193bf27ea4d3054db7f3` with terminal verdict `pass`.
+  Its exact source identity is
+  `sha256:255ff74886a4e34b5d30717c25d72997851404d9d81097680bf3bb8eb2837376`.
+- The representative caller used exactly one
+  `analyze_revision(revision_handle)` call and supplied no changes, material,
+  repository or store facts, resolver, or current head. Two byte-distinct
+  revisions with equal declared changes produced distinct canonical 1,046-byte
+  Analysis states and distinct handles.
+- Fresh child processes reopened the real scratch SQLite store after actual
+  scratch-repository head movement and replayed each exact original revision,
+  state, and evaluation through the current compiler and Analysis kernel. The
+  missing-revision trace contained exactly `load-proposal-revision` and no
+  current-head lookup.
+- Current snapshot-backed analysis retained its semantic projection, exact
+  replay, generated-contract rejection of a revision handle, and all eight A1c
+  operation roots. Ambient-head resolution, proposal-as-snapshot, identity
+  salt, and a duplicate Analysis authority were absent and verdict-gated.
+- Real SQLite evidence proved exact base dependencies, close/reopen,
+  quarantine, complete undelete, and atomic purge. After the selected base was
+  purged, all of its dependent revision and analysis records were unavailable;
+  the independent alternate root was the sole surviving root, retained its
+  exact dependency, and loaded successfully.
+- Missing, wrong-base, wrong-dependency, malformed, tampered, retained-input,
+  retained-semantic, unsupported-contract, quarantined, expired, unknown-root,
+  and purged cases reached their exact registered typed outcomes. The final
+  specification and standards audits reported no remaining pass-oracle or
+  source-level standards blocker.
+- The selected reference was 202 bytes, its state 1,046 bytes, its immutable
+  revision payload 1,636,286 bytes, and its measured durable representation
+  1,637,766 bytes. The correctness-equivalent persisted full-material control
+  was 14,626,773 durable bytes. The selected compile path was slower in the
+  prototype, but the full-material control was not strictly dominant because
+  it retained about 8.9 times more durable material. No product latency promise
+  is inferred.
+- Both admitted full commands passed all 42 verdict gates: Linux CPython
+  3.11.14 with SQLite 3.50.4 and CPython 3.12.3 with SQLite 3.45.1. Every run
+  retained one warm-up plus all three timing observations. Ruff and formatting
+  passed for the exact committed source.
+- The isolated branch passed generated freshness at 7 retained Bash verifiers,
+  the 9-node, 33-edge, 9-component dependency graph, all 269 declarative suites,
+  every retained Bash checker through `verify.py --complete`, plan lifecycle,
+  staged diff integrity, and sensitive-value review. Its generated diff changed
+  only the repository-index digest, and its conventional commit records
+  rationale, scope, and contract effects.
+- Protected the exact evidence commit at
+  `refs/archive/a2-prototypes/p2r2-projected-material-identity`, verified the
+  ref and commit, removed only the clean task-owned
+  `/tmp/coding-standards-a2-p2r2-projected-material-identity` worktree, removed
+  its temporary branch, and reverified the archived commit remains reachable.
+  The terminal disposition is `removed-archived`; no prototype source entered
+  canonical `main`.
+- Admit only the design decision: one closed Analysis-owned proposed-material
+  value, immutable Authoring-owned revision, private exact resolver into the
+  current compiler, and typed dependencies inside the one Snapshot/SQLite
+  aggregate owner. Prototype-local codecs, operation names, handles, versions,
+  migration, generated shapes, and source remain unadmitted.
+- The next slice is canonical registration and execution admission for A2-P4R.
+  It must revalidate a minimal explicit facade composition using the accepted
+  projected-material design without a projected `SnapshotHandle`, mutable
+  current-evidence selector, caller Git coordination, tagged dispatch, or A1c
+  query/inspect overload. P5, ADR amendment, contracts, migration, and
+  production source remain blocked.
+- This canonical acceptance update passed A2 plan structure, plan lifecycle,
+  generated freshness at 7 retained Bash verifiers, the 9-node, 33-edge,
+  9-component graph, all 269 declarative suites, every retained Bash checker
+  through the complete checkpoint, and diff integrity. Regeneration changed no
+  canonical artifact. Exact staged-scope, sensitive-value, and conventional-
+  message review remain Commit-owned gates.
