@@ -1319,3 +1319,8 @@ requires = []
 id = "contract-decisions"
 path = "evaluation/standards-effectiveness/suites/contract-decisions.toml"
 requires = []
+
+[[suites]]
+id = "interop-event-registration"
+path = "evaluation/standards-effectiveness/suites/interop-event-registration.toml"
+requires = []

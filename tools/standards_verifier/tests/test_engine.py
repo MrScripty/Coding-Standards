@@ -14,6 +14,7 @@ import sys
 
 sys.path.insert(0, str(ENGINE_ROOT))
 
+from standards_verifier.checks.predicates import parse_predicate
 from standards_verifier.cli import main
 from standards_verifier.diagnostics import Diagnostic, EngineError
 from standards_verifier.engine import Verifier
@@ -590,6 +591,34 @@ class EngineTest(unittest.TestCase):
 
                 self.assertEqual(result.status, "failed")
                 self.assertEqual(result.diagnostics[0].code, expected_code)
+
+    def test_predicates_compare_declared_fields_without_expression_evaluation(self) -> None:
+        equal = parse_predicate(
+            {"field": "observed", "op": "eq_field", "other_field": "selected"},
+            "decision",
+            "outcomes",
+        )
+        different = parse_predicate(
+            {"field": "observed", "op": "ne_field", "other_field": "selected"},
+            "decision",
+            "outcomes",
+        )
+
+        self.assertEqual(equal.fields(), {"observed", "selected"})
+        self.assertTrue(equal.evaluate({"observed": "a", "selected": "a"}))
+        self.assertFalse(equal.evaluate({"observed": "a", "selected": "b"}))
+        self.assertFalse(different.evaluate({"observed": "a", "selected": "a"}))
+        self.assertTrue(different.evaluate({"observed": "a", "selected": "b"}))
+
+        with self.assertRaises(EngineError) as raised:
+            parse_predicate(
+                {"field": "observed", "op": "eq_field", "value": "selected"},
+                "decision",
+                "outcomes",
+            )
+        self.assertEqual(
+            raised.exception.diagnostic.code, "CONFIG.PREDICATE_FIELD_VALUE"
+        )
 
     def test_decision_missing_input_is_unavailable(self) -> None:
         suite_path = self.write_decision_suite()

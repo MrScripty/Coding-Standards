@@ -10,6 +10,7 @@ from ..diagnostics import Diagnostic, EngineError
 class Predicate:
     kind: str
     field: str | None = None
+    other_field: str | None = None
     values: tuple[str, ...] = ()
     children: tuple["Predicate", ...] = ()
 
@@ -30,10 +31,18 @@ class Predicate:
             return observed in self.values
         if self.kind == "not_in":
             return observed not in self.values
+        if self.kind == "eq_field":
+            assert self.other_field is not None
+            return observed == row[self.other_field]
+        if self.kind == "ne_field":
+            assert self.other_field is not None
+            return observed != row[self.other_field]
         raise AssertionError(f"unhandled predicate kind: {self.kind}")
 
     def fields(self) -> set[str]:
         if self.field is not None:
+            if self.other_field is not None:
+                return {self.field, self.other_field}
             return {self.field}
         return set().union(*(child.fields() for child in self.children))
 
@@ -89,6 +98,8 @@ def parse_predicate(raw: Any, suite: str, check: str) -> Predicate:
         "ne",
         "in",
         "not_in",
+        "eq_field",
+        "ne_field",
     }:
         raise EngineError(
             Diagnostic(
@@ -99,6 +110,23 @@ def parse_predicate(raw: Any, suite: str, check: str) -> Predicate:
                 check=check,
             )
         )
+    if op in {"eq_field", "ne_field"}:
+        other_field = raw.get("other_field")
+        if (
+            set(raw) != {"field", "op", "other_field"}
+            or not isinstance(other_field, str)
+            or not other_field
+        ):
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.PREDICATE_FIELD_VALUE",
+                    "invalid",
+                    f"{op} predicate requires one non-empty other_field",
+                    suite=suite,
+                    check=check,
+                )
+            )
+        return Predicate(kind=op, field=field, other_field=other_field)
     if op in {"eq", "ne"}:
         if set(raw) != {"field", "op", "value"} or not isinstance(
             raw.get("value"), str

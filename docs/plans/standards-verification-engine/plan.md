@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I112 graph audit; do not preselect the next
-package from evidence captured before this accepted serial-coherent package
+**Next slice:** run a fresh post-M6-I113 graph audit; do not preselect the next
+package from evidence captured before this accepted shared-contract package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I112 replaced the contract-decision Bash checker
-with registered declarative authority at train order 227.
+**Latest accepted slice:** M6-I113 replaced the Interop event-registration Bash
+checker with registered declarative authority at train order 228.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I112 at train
-order 227.
+**Accepted boundary:** package records are accepted through M6-I113 at train
+order 228.
 
-**Current derived state:** 264 registered declarative suites, 13 retained Bash
-checkers, 15 executable nodes, 92 conservative reference edges, and 15
+**Current derived state:** 265 registered declarative suites, 12 retained Bash
+checkers, 14 executable nodes, 81 conservative reference edges, and 14
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I112 contract decisions accepted at train order 227 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I113 Interop event registration accepted at train order 228 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

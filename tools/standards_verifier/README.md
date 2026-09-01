@@ -206,6 +206,12 @@ single/multi forms, inferred columns, fewer than two outputs, duplicate columns,
 and output-to-output predicates are invalid; the engine does not select a
 fallback representation.
 
+Predicate leaves compare one field with a literal through `eq`, `ne`, `in`, or
+`not_in`, or compare two declared row fields through `eq_field` or `ne_field`
+with an exact `other_field`. Field comparison does not evaluate expressions,
+coerce values, infer columns, or permit a multi-output rule to reference an
+output column.
+
 The bounded `exact_text` check compares a contained regular file's raw bytes
 with inline expected TOML text encoded as UTF-8. It performs no newline,
 whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,

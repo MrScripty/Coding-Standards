@@ -6911,3 +6911,37 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 13 Bash checkers, 15 nodes, 92 edges, and 15
 components. The old checker is absent without nested execution, a normative
 policy rewrite, compatibility representation, or fallback.
+
+### M6-I113 Interop Event-Registration Acceptance
+
+Fresh post-M6-I112 evidence reports 13 Bash verifiers, 15 nodes, 92 edges,
+and 15 components. No verifier has zero conservative executable inbound
+references. The 262-line `verify-interop-event-registration.sh` is the sole
+checker with zero actual verifier/helper inbound dependencies, at wave 6. Its
+one conservative executable inbound reference is frozen independent-trust
+lifecycle evidence; it declares one metadata helper and three retained
+verifier gates.
+
+The package uses `shared-contract` execution because exact event-order parity
+requires one reusable decision-predicate contract. Strict `eq_field` and
+`ne_field` leaves compare two declared row fields without expression
+evaluation, coercion, inferred columns, or output-field access. One 13-check
+`profile.boundary.interop` suite preserves all 43 typed decisions, the complete
+60 valid five-step orders with quiescence before release, fixture evidence,
+exact `STD-0473` identity and disposition, metadata closure, conditional
+Concurrency routing, canonical profile and no-fallback policy, bounded legacy
+routing, finding closure, and documentation.
+
+A native metadata-graph assertion replaces helper execution. Concurrency,
+Interop boundary, and independent-trust re-plan checks remain independent
+gates through eight edge dispositions. Two prior M6-I73 records transfer to
+registered suite evidence.
+
+Sixteen rejecting mutations and one accepting alternate-order mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, engine, repository-git, graph, declarative, generated, numeric,
+plan, and complete mixed evidence pass. Final graph: 12 Bash checkers, 14
+nodes, 81 edges, and 14 components. The old checker is absent without nested
+execution, a normative policy rewrite, compatibility representation, or
+fallback.

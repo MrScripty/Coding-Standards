@@ -514,6 +514,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "ipc-payload-validation"
         },
         {
@@ -995,6 +1000,16 @@
           "check": "required-routes",
           "role": "content",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "legacy-structure",
+          "role": "content",
+          "suite": "interop-event-registration"
         },
         {
           "check": "legacy-interop-route",
@@ -1879,7 +1894,7 @@
       ]
     },
     {
-      "digest": "sha256:6d176a7ec54fe66803ba8a6223daee2de3cbab8bef444a15f1a7909357a03dd2",
+      "digest": "sha256:8cd340828273b1c51dc8a9c6a2f97732cd64ea350b9c4c3e9d129c13882b762e",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1891,7 +1906,7 @@
       ]
     },
     {
-      "digest": "sha256:b27b9adb176c78ea7e5f394b84d9c46a0357d7a3d131db8d62778f275fb2ed39",
+      "digest": "sha256:9cba00aa1701aa03d4fc54066af0847c94f7a4672cd6845b2ea237730bae5528",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1969,6 +1984,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "interop-event-registration"
         },
         {
           "check": "documentation-projection",
@@ -2222,7 +2242,7 @@
       ]
     },
     {
-      "digest": "sha256:0ce136093f7762382340d4ae06a25647ca61af150418aea1c4b253b8abb9f4fc",
+      "digest": "sha256:32196c4246d3ffb5135495197e320d563e7d9ae46905e8a5f5563b81b7fe522e",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2652,6 +2672,11 @@
           "check": "exact-disposition",
           "role": "table",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "exact-disposition",
+          "role": "table",
+          "suite": "interop-event-registration"
         },
         {
           "check": "exact-dispositions",
@@ -3530,7 +3555,7 @@
       ]
     },
     {
-      "digest": "sha256:5530bb1de4e645772b0ba90d9320ec0147a80ffdc2876e1aabcd5697d4e07853",
+      "digest": "sha256:8a25ed630a4031d8e53674e7d63ccbbe30bca2282acea30194115d50cff7c8ec",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3550,6 +3575,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "interop-event-registration"
         },
         {
           "check": "finding-closure",
@@ -4637,6 +4667,23 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "review-template-projection"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:98c4cf83822efa947899f6fdb4dc3aa2200898930f9a16c68135697e94af896b",
+      "path": "evaluation/standards-effectiveness/fixtures/interop/event-registration-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "fixture-evidence",
+          "role": "table",
+          "suite": "interop-event-registration"
         }
       ]
     },
@@ -6963,7 +7010,7 @@
       ]
     },
     {
-      "digest": "sha256:e831a047a3854d2d1839de56efdf8dd56a7a18b3372185ceff55cb90a257f0d4",
+      "digest": "sha256:a860f0b4a14798263fea8df0ea24336e859175f20715db2366b810123e843e78",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6975,7 +7022,7 @@
       ]
     },
     {
-      "digest": "sha256:d0a68f5a8bf50768eca18f62c2f2df3ea928e534891a32d626ae48250faec057",
+      "digest": "sha256:8a0e08d9408a78db02543926bf4e632326d2e6ae041ebf4e43b4e0fe9883877c",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7158,6 +7205,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "source-identity",
+          "role": "table",
+          "suite": "interop-event-registration"
         },
         {
           "check": "source-identities",
@@ -9864,7 +9916,7 @@
       ]
     },
     {
-      "digest": "sha256:9309af1a3feeea31771586a165050c42a74e91453ce217e598fef8261b7db164",
+      "digest": "sha256:c5c21c9903a277e286692207e9c1192784e3ad32b2fbc10ee68a1480022dc359",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10862,6 +10914,18 @@
     {
       "digest": "sha256:2798cb67138bcaefc27984efcef9ed494c4e80cf075e673d5d3d05c447aad2a1",
       "path": "evaluation/standards-effectiveness/suites/interop-applicability-index.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:1b67e9813e548d9e60ea53ecef8e277fa931e3efe5e17a2e84514e553303c8cc",
+      "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
       "state": "present",
       "uses": [
         {
@@ -13160,28 +13224,6 @@
       ]
     },
     {
-      "digest": "sha256:b2d4380e2bd3135ad7b1cf4e506e62b96517afa52a56106f60e1851e17efec80",
-      "path": "evaluation/standards-effectiveness/verify-interop-event-registration.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "path": "evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh",
       "state": "absent",
       "uses": [
@@ -14323,6 +14365,26 @@
       "path": "profiles/boundaries/interop.md",
       "state": "present",
       "uses": [
+        {
+          "check": "event-registration-policy",
+          "role": "content",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "no-fallback-policy",
+          "role": "content",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "profile-metadata",
+          "role": "content",
+          "suite": "interop-event-registration"
+        },
         {
           "check": "metadata-closure",
           "role": "metadata",
@@ -20180,7 +20242,7 @@
       ]
     },
     {
-      "digest": "sha256:6e5ed795fc92e7d7ae74bf369a7f36017b0fe0c647769dcfda85e6112c80d424",
+      "digest": "sha256:d41f8ed712ee2bcf301d797168d172cb04907d85b7a75c9adffc2cfcfdc3454b",
       "path": "tools/standards_verifier/standards_verifier/checks/predicates.py",
       "state": "present",
       "uses": [
@@ -20747,7 +20809,7 @@
       ]
     },
     {
-      "digest": "sha256:fd3c5ec01f33e1d94bf4562fdde423730a45bf1f6de9e73114e3afb09391568c",
+      "digest": "sha256:66f50960a33163d5e4556bc4046bd28fa5fa00509c80d40eba174ea2c3c10456",
       "path": "tools/standards_verifier/tests/test_engine.py",
       "state": "present",
       "uses": [
@@ -21115,6 +21177,11 @@
           "suite": "frontend-rendering-synchronization"
         },
         {
+          "check": "concurrency-route",
+          "role": "content",
+          "suite": "interop-event-registration"
+        },
+        {
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
           "suite": "milestone-7-row-18-decomposition"
@@ -21355,6 +21422,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
         },
         {
           "check": "metadata-closure",
@@ -22154,6 +22226,11 @@
           "check": "security-policy",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
         },
         {
           "check": "metadata-closure",
@@ -23254,6 +23331,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "ipc-payload-validation"
         },
         {
@@ -23635,11 +23717,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:9309af1a3feeea31771586a165050c42a74e91453ce217e598fef8261b7db164",
+    "digest": "sha256:c5c21c9903a277e286692207e9c1192784e3ad32b2fbc10ee68a1480022dc359",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:01c4c2788dab939533542690e7cae1456144a3dfcb4665b62904b3cbd043f6bd",
+    "digest": "sha256:2da02e7ab88f282ba3bef1369f813fd39d97fc45e0e91e5f1aba7edf53b9b3e5",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25290,6 +25372,12 @@
       "digest": "sha256:7284ac74890e177b0186f382a3f047eea772318011a0267d2926de7c4937baec",
       "id": "contract-decisions",
       "path": "evaluation/standards-effectiveness/suites/contract-decisions.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:1b67e9813e548d9e60ea53ecef8e277fa931e3efe5e17a2e84514e553303c8cc",
+      "id": "interop-event-registration",
+      "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
       "requires": []
     }
   ]

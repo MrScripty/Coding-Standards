@@ -15586,3 +15586,27 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, plan checks, and the complete 13-entrypoint checkpoint pass.
   Final graph: 13 Bash checkers, 15 nodes, 92 edges, and 15 components; fresh
   graph evidence is required next.
+
+## 2026-09-01 - M6-I113 Interop Event-Registration Acceptance
+
+- Fresh post-M6-I112 evidence reports 13 Bash verifiers, 15 nodes, 92 edges,
+  and 15 components. No verifier has zero conservative executable inbound
+  references. The 262-line event-registration verifier is the sole checker
+  with zero actual verifier/helper inbound dependencies, at wave 6, and has
+  one frozen executable reference. M6-I113 is `shared-contract` at train order
+  228.
+- Strict `eq_field` and `ne_field` predicates provide the bounded input-field
+  comparison needed for order parity. One 13-check `profile.boundary.interop`
+  suite preserves all 43 typed decisions, the complete 60 valid lifecycle
+  orders, fixture evidence, exact source identity and disposition, metadata,
+  conditional Concurrency routing, profile and legacy policy, finding closure,
+  and documentation.
+- A native metadata-graph assertion replaces helper execution. Three retained
+  verifiers remain independent through eight edge dispositions, and two
+  earlier M6-I73 records transfer to registered suite evidence.
+- Sixteen rejecting mutations, one accepting alternate-order mutation, and
+  exact 22/22 dependency-local renewal leave 29 requirements stable and close
+  51/51 coverage. Focused, engine, repository-git, graph, declarative,
+  generated, numeric, plan, and complete mixed evidence pass. Final graph: 12
+  Bash checkers, 14 nodes, 81 edges, and 14 components; fresh graph evidence
+  is required next.

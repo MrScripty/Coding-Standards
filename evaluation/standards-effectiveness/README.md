@@ -902,15 +902,15 @@ disposition, bounded legacy replacement, and Rust operation evidence using
 unbounded capacity, default overflow, silent discard, alternate runtime,
 prior-input carry-forward, and weaker evidence.
 
-`verify-interop-event-registration.sh` checks provider-governed registration
-phases, delivery and local-work independence, current callback input,
-conditional Concurrency ownership, in-flight delivery, provider-selected
-repeated/concurrent unregistration outcomes, valid release/shutdown orders, and
-phase-aware typed diagnostics. It proves exact disposition of `STD-0473` and
-rejects destruction/finalizer/garbage-collection cleanup, stale registration,
-silent callback dropping, wrong-thread retry, alternate events, detached work,
-input carry-forward, assumed idempotence, universal ordering, and false cleanup
-success.
+The registered `interop-event-registration` suite checks provider-governed
+registration phases, delivery and local-work independence, current callback
+input, conditional Concurrency ownership, in-flight delivery,
+provider-selected repeated/concurrent unregistration outcomes, valid
+release/shutdown orders, and phase-aware typed diagnostics. It proves exact
+disposition of `STD-0473` and rejects destruction/finalizer/garbage-collection
+cleanup, stale registration, silent callback dropping, wrong-thread retry,
+alternate events, detached work, input carry-forward, assumed idempotence,
+universal ordering, and false cleanup success.
 
 The registered `rust-target-configuration` suite evaluates
 `fixtures/rust/target-configuration-decisions.tsv` for declared Rust targets,
