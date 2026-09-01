@@ -298,6 +298,8 @@ paper-only assumptions, or unresolved publication facts.
 - `docs/plans/standards-engine-a2/reports/application-and-recovery-contract.md`
 - `docs/plans/standards-engine-a2/reports/design-validation-protocol.md`
 - `docs/plans/standards-engine-a2/reports/prototype-evidence-index.md`
+- `docs/plans/standards-engine-a2/reports/p4r-facade-composition-admission.md`
+- `docs/plans/standards-engine-a2/reports/p5-combined-efficiency-admission.md`
 - `docs/plans/standards-engine-a2/reports/a2-plan-admission.md`
 - `docs/decisions/standards-engine-a2.md`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
@@ -307,9 +309,10 @@ paper-only assumptions, or unresolved publication facts.
 - `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py`
 
-The seven currently registered prototype paths are writable only in governed
+The eight currently registered prototype paths are writable only in governed
 isolated prototype branches or worktrees and never enter the canonical
 integration branch. The
 canonical branch accepts their exact evidence pointers, verdicts, and validated
