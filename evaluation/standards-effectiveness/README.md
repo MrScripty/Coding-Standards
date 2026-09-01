@@ -81,13 +81,13 @@ helper, launcher, metadata-schema, edge-contract, or routing-contract change.
 Run a retained Bash checker between checkpoints only when the generated graph
 proves that the package changed evidence it consumes.
 
-`check-decision-table.sh` is the reusable semantic-fixture engine. A package
-supplies an ordered schema, decisions with expected outcomes, and observed
-outcomes derived by its own domain logic. The engine validates exact headers,
-finite domains, unique cases, exact observed coverage, and outcome equality.
-`verify-decision-table-engine.sh` covers valid input plus duplicate schema,
-invalid wildcard, invalid domain, duplicate case, mismatch, missing case,
-extra case, and unavailable-input failures.
+The registered `decision-engine-contract` suite exercises canonical
+decision-table evaluation through the Python engine. A package supplies finite
+domains, ordered rules, decisions, and expected typed outcomes in one owned
+contract without a separate observed-result compatibility input.
+Direct Python engine tests cover duplicate domains, invalid wildcards, values outside
+their domains, duplicate cases, mismatches, unavailable input, and rejection
+of the retired observed-result configuration.
 
 `milestone-7-row-5-decomposition.md` splits immutable row 5 into Rust
 core/adapter testability, generic boundary-mechanism selection, Contracts-owned

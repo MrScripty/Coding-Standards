@@ -6791,3 +6791,34 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 17 Bash checkers, 20 nodes, 111 edges, and 20
 components. The old checker is absent without nested execution, a source-policy
 rewrite, compatibility representation, or fallback.
+
+### M6-I109 Decision-Table Bash Component Acceptance
+
+Fresh post-M6-I108 evidence reports 17 Bash verifiers, 20 nodes, 111 edges,
+and 20 components. Four verifiers have no executable inbound edge. The 53-line
+`verify-decision-table-engine.sh` is the smallest root at the highest dependency
+wave 1 and the last live caller of the 157-line `check-decision-table.sh`
+helper. Its only incoming contract evidence is accepted edge history.
+
+The package uses `shared-contract` execution because deleting the reusable Bash
+helper transfers its positive contract to a registered Python suite and its
+malformed-input contract to direct engine tests. No engine implementation,
+schema, policy source, or business fixture changes. The two-check suite
+preserves four canonical typed decisions and documentation. Six direct negative
+Python contracts plus the existing mismatch test cover duplicate domains,
+invalid wildcards, out-of-domain values, duplicate cases, unavailable input,
+outcome mismatch, and rejection of retired observed-result configuration.
+
+The verifier, helper, and nine compatibility-only schema, observed, and
+malformed fixtures are removed together. Two outgoing edge records move to the
+registered decision assertion, and two prior M6-I107 records transfer to
+registered suite evidence.
+
+Three mutations reject typed-outcome drift, domain drift, and duplicate case
+identity under both authorities. Exact final compilation renews 17/17
+dependency-local requirements and leaves 34 stable, closing 51/51 coverage.
+All focused, engine-test, graph, declarative, generated, numeric, plan, and
+complete mixed evidence pass. Final graph: 16 Bash checkers, 18 nodes, 105
+edges, and 18 components. Both Bash paths and compatibility fixtures are absent
+without an engine implementation rewrite, wrapper, alternate observed
+representation, or fallback.

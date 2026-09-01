@@ -543,6 +543,89 @@ class EngineTest(unittest.TestCase):
         self.assertEqual([result.id for result in results], ["text", "decision"])
         self.assertTrue(all(result.status == "passed" for result in results))
 
+    def test_decision_domains_reject_duplicates_and_non_case_wildcards(self) -> None:
+        for replacement, expected_code in (
+            ('state = ["accepted", "accepted"]', "CONFIG.DOMAIN"),
+            ('state = ["*"]', "CONFIG.DOMAIN_WILDCARD"),
+        ):
+            with self.subTest(expected_code=expected_code):
+                suite_path = self.write_decision_suite()
+                suite = self.root / suite_path
+                suite.write_text(
+                    suite.read_text(encoding="utf-8").replace(
+                        'state = ["accepted", "missing"]', replacement, 1
+                    ),
+                    encoding="utf-8",
+                )
+                self.write_registry([("decision", suite_path, [])])
+
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, self.registry).run()
+
+                self.assertEqual(raised.exception.diagnostic.code, expected_code)
+
+    def test_decision_rows_reject_domain_and_case_identity_drift(self) -> None:
+        for before, after, expected_code in (
+            (
+                "invalid\taccepted\tsupported\tlegacy\ttyped-invalid",
+                "invalid\tguessed\tsupported\tlegacy\ttyped-invalid",
+                "TABLE.VALUE_OUTSIDE_DOMAIN",
+            ),
+            (
+                "invalid\taccepted\tsupported\tlegacy\ttyped-invalid",
+                "accepted\taccepted\tsupported\tlegacy\ttyped-invalid",
+                "TABLE.DUPLICATE_CASE",
+            ),
+        ):
+            with self.subTest(expected_code=expected_code):
+                suite_path = self.write_decision_suite()
+                fixture = self.root / "decisions.tsv"
+                fixture.write_text(
+                    fixture.read_text(encoding="utf-8").replace(before, after, 1),
+                    encoding="utf-8",
+                )
+                self.write_registry([("decision", suite_path, [])])
+
+                result = Verifier(self.root, self.registry).run()[0]
+
+                self.assertEqual(result.status, "failed")
+                self.assertEqual(result.diagnostics[0].code, expected_code)
+
+    def test_decision_missing_input_is_unavailable(self) -> None:
+        suite_path = self.write_decision_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'path = "decisions.tsv"', 'path = "missing.tsv"', 1
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("decision", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_decision_rejects_legacy_observed_configuration(self) -> None:
+        suite_path = self.write_decision_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'path = "decisions.tsv"',
+                'path = "decisions.tsv"\nobserved_path = "observed.tsv"',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("decision", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+        self.assertEqual(raised.exception.diagnostic.field, "observed_path")
+
     def test_multi_output_decision_passes_with_typed_unavailable(self) -> None:
         suite_path = self.write_multi_decision_suite()
         self.write_registry([("multi-decision", suite_path, [])])

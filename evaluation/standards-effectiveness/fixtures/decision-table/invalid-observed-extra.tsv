@@ -1,6 +1,0 @@
-case	actual
-selected	allow
-missing	typed-unavailable
-unsupported	typed-unsupported
-fallback	typed-invalid
-extra	allow

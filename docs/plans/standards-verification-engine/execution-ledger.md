@@ -7052,3 +7052,26 @@
   row-35 checks, all suites, graph and generated freshness, numeric lifecycle,
   plan checks, and the complete 17-entrypoint checkpoint pass. Final graph: 17
   Bash checkers, 20 nodes, 111 edges, and 20 components.
+
+## 2026-08-31 - M6-I109 Decision-Table Bash Component Acceptance
+
+- Fresh post-M6-I108 evidence reports 17 Bash verifiers, 20 nodes, 111 edges,
+  and 20 components. Four verifiers have no executable inbound edge. The
+  53-line decision-table fixture verifier is the smallest highest-wave root at
+  wave 1 and the last live caller of its 157-line Bash helper. M6-I109 is
+  `shared-contract` at train order 224 because helper retirement transfers
+  reusable engine-test authority.
+- One two-check `verification-engine.decision` suite preserves four canonical
+  typed decisions and documentation. Six direct negative Python contracts plus
+  the existing mismatch test cover duplicate domains, invalid wildcards,
+  out-of-domain values, duplicate cases, unavailable input, outcome mismatch,
+  and rejection of the retired observed-result configuration.
+- The verifier, helper, and nine compatibility-only schema, observed, and
+  malformed fixtures are removed together. Two outgoing edge records move to
+  the registered decision assertion, and two earlier M6-I107 records transfer
+  to registered suite evidence.
+- Three shared fixture mutations and exact 17/17 dependency-local renewal leave
+  34 requirements stable and close 51/51 coverage. Focused suite, package,
+  edge, engine-test, graph, declarative, generated, numeric, and plan checks
+  plus the complete 16-entrypoint checkpoint pass. Final graph: 16 Bash
+  checkers, 18 nodes, 105 edges, and 18 components.

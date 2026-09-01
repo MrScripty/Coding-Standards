@@ -1,3 +1,0 @@
-case	contract	fallback	expected
-selected	selected	none	allow
-selected	missing	none	typed-unavailable

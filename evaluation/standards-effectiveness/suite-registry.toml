@@ -1299,3 +1299,8 @@ requires = []
 id = "language-binding-boundary"
 path = "evaluation/standards-effectiveness/suites/language-binding-boundary.toml"
 requires = []
+
+[[suites]]
+id = "decision-engine-contract"
+path = "evaluation/standards-effectiveness/suites/decision-engine-contract.toml"
+requires = []

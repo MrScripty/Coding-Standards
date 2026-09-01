@@ -1859,7 +1859,7 @@
       ]
     },
     {
-      "digest": "sha256:f81f7ced17ac39bd913483a6ec9ee9597c6f53292acdb5745b8001c0b0ec4525",
+      "digest": "sha256:e230d4ad544159d43b3ad66f462bc8adf997b5b9f76deaa56c39e6505c539a7e",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1871,7 +1871,7 @@
       ]
     },
     {
-      "digest": "sha256:5d1686e783fe12925475f95b7badfa03e354f60377d1964d6d82b0ebf5627706",
+      "digest": "sha256:bea5ae06c67b8723d0bc86a692c7c90c9e763a1d3e9d33787783dbb4d30514c3",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1904,6 +1904,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "csharp-async-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "decision-engine-contract"
         },
         {
           "check": "documentation-projection",
@@ -2182,7 +2187,7 @@
       ]
     },
     {
-      "digest": "sha256:90ff4f012b0dcf3f3b7d9a90965e80c58a3679b67370d888258213a8e220d23e",
+      "digest": "sha256:0eb373f6ddfa7a6492a03791b2dc6eefdd8dedc12c5452c452f560f14458ed8e",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3480,7 +3485,7 @@
       ]
     },
     {
-      "digest": "sha256:7dd4c7ed0efe376cbbf9213b0fdba7f5acd04df9f47f58acbf5e5cbcf5885005",
+      "digest": "sha256:2102eaaa5a2c1bdd3960e7a96703b5533ae038c8dd59f0ac102fc960afd63b54",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4243,6 +4248,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "csharp-async-owner-contract"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f18f8c70ed05c96deee0f58bdadbcc4d29279b3b42cae5fe7e7f22ab84674d13",
+      "path": "evaluation/standards-effectiveness/fixtures/decision-table/valid-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decision-contract",
+          "role": "decision-table",
+          "suite": "decision-engine-contract"
         }
       ]
     },
@@ -6860,7 +6877,7 @@
       ]
     },
     {
-      "digest": "sha256:9b585bc82c6d2bef572d7dccf5acc3508a1ea35daeb9d81a2c395317aa708c22",
+      "digest": "sha256:d9b8e12040c871f431d7e23ec3e55ed9b271a5207addcc52e60c54a40f0fa979",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6872,7 +6889,7 @@
       ]
     },
     {
-      "digest": "sha256:3e4115229c4bca49bbcc0665ff4f12f6ec3001a9a3f3c33581d7fb2ef9ca7540",
+      "digest": "sha256:4f2f5644f34e143f54d88c67a35f64cb5f66efa484015db25af6070b57e319dc",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -9751,7 +9768,7 @@
       ]
     },
     {
-      "digest": "sha256:315d366b55347647ec17969710f81d1a7dc06b2a8daf14893a1086a1679de5c5",
+      "digest": "sha256:0495e4042474a2d45c88f6d2a3e6634db8177f91ecf841e1d781cc99dc499673",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10293,6 +10310,18 @@
     {
       "digest": "sha256:90f403a25a8c2ad9d097ab43d7ef33fef1570bd692b3991d9a4db0fef8b9527a",
       "path": "evaluation/standards-effectiveness/suites/csharp-async-owner-contract.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:1d6f3b19adfb87de7b117e84c9a03881023fe58c5268d1de3db49dc8855889a4",
+      "path": "evaluation/standards-effectiveness/suites/decision-engine-contract.toml",
       "state": "present",
       "uses": [
         {
@@ -12979,28 +13008,6 @@
         {
           "check": "readme-dependency-paths",
           "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:cc8ea00037c032ebb7ab16e9ba66752f3aab1e9a754389cdf771fa714ffe501c",
-      "path": "evaluation/standards-effectiveness/verify-decision-table-engine.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
           "suite": "milestone-7-row-35-decomposition"
         },
         {
@@ -20649,7 +20656,7 @@
       ]
     },
     {
-      "digest": "sha256:04f453614a01ee6249a91c6932126277fc4005501be5638dadbd3251aac12655",
+      "digest": "sha256:fd3c5ec01f33e1d94bf4562fdde423730a45bf1f6de9e73114e3afb09391568c",
       "path": "tools/standards_verifier/tests/test_engine.py",
       "state": "present",
       "uses": [
@@ -23507,11 +23514,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:315d366b55347647ec17969710f81d1a7dc06b2a8daf14893a1086a1679de5c5",
+    "digest": "sha256:0495e4042474a2d45c88f6d2a3e6634db8177f91ecf841e1d781cc99dc499673",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:b17e6047da32d70aad1ac8841fae9d9593d0d8fc42de83f5514cc0208059bf46",
+    "digest": "sha256:715ba8dcb12230d0aeecd00f1d7f98b40db485ce083bfbe4fe84ccb677e0b27a",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25138,6 +25145,12 @@
       "digest": "sha256:5fc89ca3138c8e964ea350641c16810c4dd6105bea291959d01bf3656ddce781",
       "id": "language-binding-boundary",
       "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:1d6f3b19adfb87de7b117e84c9a03881023fe58c5268d1de3db49dc8855889a4",
+      "id": "decision-engine-contract",
+      "path": "evaluation/standards-effectiveness/suites/decision-engine-contract.toml",
       "requires": []
     }
   ]

@@ -1,5 +1,0 @@
-column	allowed
-case	*
-contract	selected,missing,unsupported
-fallback	none,default,alternate
-expected	allow,typed-invalid,typed-unsupported,typed-unavailable
