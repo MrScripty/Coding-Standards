@@ -1,0 +1,105 @@
+schema_version = 1
+id = "binding-generation-authority"
+owner = "topic.contracts"
+description = "Contract-selected binding-generation authority with deterministic derivation, complete producer/consumer evidence, typed failures, and no alternate recovery path."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/binding-generation-authority-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+authority = ["schema", "generator-input", "producer-contract", "compiled-artifact", "source-annotation", "consumer-output", "missing"]
+generator = ["available", "missing"]
+derivation = ["deterministic", "missing"]
+evidence = ["complete", "missing"]
+fallback = ["none", "alternate-generator", "hand-maintained", "default-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "authority", op = "in", values = ["compiled-artifact", "source-annotation", "consumer-output"] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "generator", op = "eq", value = "missing" },
+  { field = "derivation", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0782", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+  ["STD-0783", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0782", "STD-0783"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0782", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "refine", "select canonical binding-generation authority from the applicable contract rather than a compiled artifact or framework default"],
+  ["STD-0783", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "refine", "require declared generator deterministic derivation and producer-consumer consistency evidence for affected outputs"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0782", "STD-0783"]
+
+[[checks]]
+id = "canonical-contract"
+type = "text"
+path = "topics/contracts.md"
+required = [
+  "Select canonical generation authority",
+  "compiled implementation artifact",
+  "source annotation",
+  "consumer output",
+  "deterministic derivation",
+  "producer/consumer consistency",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "## Code Generation Strategy"
+scope = "body"
+required = ["topics/contracts.md#cross-language-contract-selection"]
+prohibited = [
+  "Bindings are generated from the compiled core library",
+  "The annotated Rust code is the single source of truth",
+  "uniffi-bindgen generate",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["registered `binding-generation-authority` suite"]
+prohibited = ["verify-binding-generation-authority.sh"]

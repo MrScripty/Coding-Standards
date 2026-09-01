@@ -6351,3 +6351,30 @@ plan, and complete mixed evidence pass. Final graph: 32 Bash checkers, 35
 nodes, 229 edges, and 35 components. The old checker is absent without a
 source-policy rewrite, nested execution, wrapper, compatibility
 representation, or fallback.
+
+### M6-I94 Binding-Generation Authority Acceptance
+
+Fresh post-M6-I93 evidence reports 32 Bash verifiers, 35 nodes, 229 edges,
+and 35 components. Six verifiers have no executable inbound edge. The 62-line
+`verify-binding-generation-authority.sh` is the smaller of two roots at the
+highest dependency wave 6; its only inbound references are README and accepted
+edge evidence. It invokes one generic helper and two retained verifier gates.
+The package is `serial-coherent` because no shared engine, schema, policy, or
+unresolved owner contract changes.
+
+One six-check `topic.contracts` suite preserves the 13-case typed decision
+matrix, both exact source identities and dispositions, canonical Contracts
+authority, the bounded legacy route, and the README projection. A native
+decision assertion replaces helper execution. Binding-contract evolution and
+row-8 lifecycle remain independent gates. Two prior M6-I93 records transition
+to registered suite evidence, while the redundant schema and observed fixtures
+retire with the Bash checker.
+
+Four mutations reject decision-outcome drift, disposition-target drift,
+source-identity drift, and stale README checker authority. Exact
+final compilation renews 22 dependency-local requirements and leaves 29
+stable, closing 51/51 coverage. All focused, graph, declarative, generated,
+numeric, plan, and complete mixed evidence pass. Final graph: 31 Bash checkers,
+34 nodes, 223 edges, and 34 components. The old checker is absent without a
+source-policy rewrite, nested execution, wrapper, compatibility
+representation, or fallback.

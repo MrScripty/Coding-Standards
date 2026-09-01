@@ -267,12 +267,13 @@ lockstep or independent versions (including lockstep inferred from shared
 build provenance), compatibility shims, incomplete evidence, and default
 success.
 
-`fixtures/contracts/binding-generation-authority-*.tsv` and
-`verify-binding-generation-authority.sh` select canonical binding-generation
-authority from declared contract facts and require deterministic derivation
-plus producer/consumer consistency evidence. They reject compiled artifacts,
-source annotations, generated consumer outputs, alternate generators,
-hand-maintained bindings, and default success as authority or recovery paths.
+`fixtures/contracts/binding-generation-authority-decisions.tsv` and the
+registered `binding-generation-authority` suite select canonical
+binding-generation authority from declared contract facts and require
+deterministic derivation plus producer/consumer consistency evidence. They
+reject compiled artifacts, source annotations, generated consumer outputs,
+alternate generators, hand-maintained bindings, and default success as
+authority or recovery paths.
 
 `fixtures/rust/binding-annotation-placement-decisions.tsv` and the registered
 `rust-binding-annotation-placement` suite select Rust annotation placement from

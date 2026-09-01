@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I93 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I94 graph audit; do not preselect the next
 package from evidence captured before this accepted serial package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I93 replaced the Rust binding title-index closure
-verifier with one owner-local declarative suite at train order 208.
+**Latest accepted slice:** M6-I94 replaced the binding-generation authority
+verifier with one owner-local declarative suite at train order 209.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I93 at train
-order 208.
+**Accepted boundary:** package records are accepted through M6-I94 at train
+order 209.
 
-**Current derived state:** 245 registered declarative suites, 32 retained Bash
-checkers, 35 executable nodes, 229 conservative reference edges, and 35
+**Current derived state:** 246 registered declarative suites, 31 retained Bash
+checkers, 34 executable nodes, 223 conservative reference edges, and 34
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I93 Rust binding title-index closure accepted at train order 208 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I94 binding-generation authority accepted at train order 209 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

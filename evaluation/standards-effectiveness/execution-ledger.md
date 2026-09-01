@@ -15179,3 +15179,24 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 32-entrypoint checkpoint pass. Final graph: 32 Bash
   checkers, 35 nodes, 229 edges, and 35 components; fresh graph evidence is
   required next.
+
+## 2026-08-31 - M6-I94 Binding-Generation Authority Acceptance
+
+- Fresh post-M6-I93 evidence reports 32 Bash verifiers, 35 nodes, 229 edges,
+  and 35 components. Six verifiers have no executable inbound edge; the
+  62-line binding-generation authority verifier is the smaller of two roots at
+  the highest dependency wave 6. M6-I94 is `serial-coherent` at train order
+  209.
+- One six-check `topic.contracts` suite preserves all 13 typed decisions, both
+  exact source identities and dispositions, canonical Contracts authority, the
+  bounded legacy route, and the README projection.
+- A native decision assertion replaces helper execution. Binding-contract
+  evolution and row-8 lifecycle remain independent gates; two prior M6-I93
+  records move to registered suite evidence. Redundant schema and observed
+  fixtures retire with the Bash checker.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  suite checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 31-entrypoint checkpoint pass. Final graph: 31
+  Bash checkers, 34 nodes, 223 edges, and 34 components; fresh graph evidence
+  is required next.

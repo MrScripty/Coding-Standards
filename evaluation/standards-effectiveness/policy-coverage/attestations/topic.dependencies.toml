@@ -18,7 +18,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.dependencies.requirement-and-ownership
 [[attestations]]
-requirement_id = "sha256:3f0bf02a07ceee5e0aa8d242607698484a2bc306c960349ac16e62d9256d049f"
+requirement_id = "sha256:4a958240c6bb04670e1559056f4eaaa542687efc9bf3d697da671be86df382f7"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md",

@@ -1787,7 +1787,7 @@
       ]
     },
     {
-      "digest": "sha256:ed95f490b1a053185497d944b7e4528b297a7837614e092b2ee53106912a225e",
+      "digest": "sha256:88754f707ac8ed1a1a2a3fe0814b36ad67f2a9f17a1e681b7b262e7337da0e31",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1799,7 +1799,7 @@
       ]
     },
     {
-      "digest": "sha256:85a87d5c09bc7fc27237eb5bf3806dd738797f67bdb6db02f56fd68c45a90e80",
+      "digest": "sha256:e8a2615d4616ace61857d0c9213b8915ef940148fff786e614ac008e05365520",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1807,6 +1807,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "architecture-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "binding-generation-authority"
         },
         {
           "check": "commit-evaluation-documentation",
@@ -2065,7 +2070,7 @@
       ]
     },
     {
-      "digest": "sha256:a6279ef375d937b878738c034c8328aba1c7c92b6c4e33b336364196cc067e1d",
+      "digest": "sha256:a928cfc9be93b2bcd7bef62e54f95538d7883b0b4da6d9e519d7d7c41bbdad60",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2240,6 +2245,11 @@
           "check": "dispositions",
           "role": "table",
           "suite": "binding-artifact-composition"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "binding-generation-authority"
         },
         {
           "check": "exact-disposition",
@@ -3298,7 +3308,7 @@
       ]
     },
     {
-      "digest": "sha256:56b09d03759461e8930460dc81919fcd7fdb86150ac24aa05962a23d71cce987",
+      "digest": "sha256:16c0930829a7f3b13db9c808ddc71ae9b6fa3fce24e0762ef92801f6e5bd5106",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3776,6 +3786,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "contract-artifact-selection"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:8cb5adb9458a4abc01a8c84867b566ed5bc5a7a5818929f23f64b1315d773005",
+      "path": "evaluation/standards-effectiveness/fixtures/contracts/binding-generation-authority-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "binding-generation-authority"
         }
       ]
     },
@@ -6555,7 +6577,7 @@
       ]
     },
     {
-      "digest": "sha256:e331ca49ca78028c89c73b0ad6e7c66aba1da3d341a0987fc500861b38aa6ba4",
+      "digest": "sha256:20652c8e25b72652f9349079a4b5ad1e320a94a0e827308215e8ceade558e58a",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6567,7 +6589,7 @@
       ]
     },
     {
-      "digest": "sha256:bb8f46233ecb57cc36ba90b344fd2b9213e5d24d01efc29f27848dc6e11594ab",
+      "digest": "sha256:1be34bf43f78df3f93b9e86c1f517353aa462b4602c561496de63ab2a5ccf246",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6691,6 +6713,11 @@
       "path": "evaluation/standards-effectiveness/generated/section-inventory.tsv",
       "state": "present",
       "uses": [
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "binding-generation-authority"
+        },
         {
           "check": "commit-identifier-coverage",
           "role": "left",
@@ -9183,7 +9210,7 @@
       ]
     },
     {
-      "digest": "sha256:a8e7ce3db6b9cd3c8641242b5c0cabb49ddc2fea6357818d18953dd0fbc12ea1",
+      "digest": "sha256:1ed21dc04b0a6a5e905556bc7972e6f93ca9748d08e82113b2795a253dbe78cc",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -9485,6 +9512,18 @@
     {
       "digest": "sha256:9d8d7924a3cdc957376a57b3507797c576fdb951a6be3fbc9f5c0013b95d2994",
       "path": "evaluation/standards-effectiveness/suites/binding-artifact-composition.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ef7405140c8b7f62830ee1d94533e08d3faa49198ec9a0ad01b4694da3ddd984",
+      "path": "evaluation/standards-effectiveness/suites/binding-generation-authority.toml",
       "state": "present",
       "uses": [
         {
@@ -12177,28 +12216,6 @@
       ]
     },
     {
-      "digest": "sha256:09784e42f31404fa831c5661bd852f391829fa85ab705dc77623abe5db97131a",
-      "path": "evaluation/standards-effectiveness/verify-binding-generation-authority.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:51088e43eb241dba1105c02693a147dcb1d23fb2ab9984d23f8baa13da90197e",
       "path": "evaluation/standards-effectiveness/verify-concurrency-policy.sh",
       "state": "present",
@@ -13184,6 +13201,11 @@
           "check": "former-source",
           "role": "content",
           "suite": "binding-artifact-composition"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "binding-generation-authority"
         },
         {
           "check": "former-source",
@@ -20620,6 +20642,11 @@
           "suite": "architecture-pattern-reference-owner"
         },
         {
+          "check": "canonical-contract",
+          "role": "content",
+          "suite": "binding-generation-authority"
+        },
+        {
           "check": "owner-policy",
           "role": "content",
           "suite": "contract-artifact-selection"
@@ -22863,11 +22890,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:a8e7ce3db6b9cd3c8641242b5c0cabb49ddc2fea6357818d18953dd0fbc12ea1",
+    "digest": "sha256:1ed21dc04b0a6a5e905556bc7972e6f93ca9748d08e82113b2795a253dbe78cc",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:73fa8d3f9a22cae6a83ec58e82c4daf430f158979a9495f0cc12130429fcc378",
+    "digest": "sha256:8ec772893a5098065e450da180daf82da5de12887c418a0baa59799e3527930d",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24338,6 +24365,12 @@
       "digest": "sha256:afafbea1cf1f05756aee3dad2918e755aafd44dfaf50e9d161716e66afdb7234",
       "id": "rust-binding-title-index-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-title-index-closure.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:ef7405140c8b7f62830ee1d94533e08d3faa49198ec9a0ad01b4694da3ddd984",
+      "id": "binding-generation-authority",
+      "path": "evaluation/standards-effectiveness/suites/binding-generation-authority.toml",
       "requires": []
     },
     {

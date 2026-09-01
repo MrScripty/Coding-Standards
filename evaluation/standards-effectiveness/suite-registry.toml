@@ -1176,6 +1176,11 @@ path = "evaluation/standards-effectiveness/suites/rust-binding-title-index-closu
 requires = []
 
 [[suites]]
+id = "binding-generation-authority"
+path = "evaluation/standards-effectiveness/suites/binding-generation-authority.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []
