@@ -7180,3 +7180,27 @@
   and closes 51/51 coverage. Focused,
   graph, declarative, generated, numeric, plan, and complete mixed evidence
   pass. Final graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components.
+
+## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
+
+- Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,
+  and 13 components. Four verifiers have no actual verifier/helper inbound
+  dependencies. The 172-line Concurrency policy verifier is the sole
+  highest-wave root at wave 4, with no executable inbound caller, four frozen
+  contract references, one metadata helper, and two retained verifier gates.
+  M6-I115 is `shared-contract` at train order 230.
+- One eleven-check `topic.concurrency` suite preserves all 20 typed ownership
+  decisions, nine source identities, eleven exact dispositions, metadata,
+  Router and canonical policy, bounded legacy indexes, finding closure,
+  source-package authority, documentation, and terminal path state.
+- The source-package subject transfers to registered suite authority and the
+  row-35 README dependency row retires. A native metadata-graph assertion
+  replaces helper execution. Trust-lifecycle and plan-fixture checks remain
+  independent through six M6-I115 edge dispositions, and twelve earlier
+  M6-I44, M6-I71, M6-I73, M6-I84, M6-I113, and M6-I114 rows transfer to the
+  registered suite.
+- Ten rejecting mutations and one accepting fixture-extension mutation prove
+  parity. Exact 22/22 dependency-local renewal leaves 29 requirements stable
+  and closes 51/51 coverage. Focused, graph, declarative, generated, numeric,
+  plan, and complete mixed evidence pass. Final graph: 10 Bash checkers, 12
+  nodes, 53 edges, and 12 components.

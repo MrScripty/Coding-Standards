@@ -395,6 +395,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "concurrency-policy"
+        },
+        {
           "check": "legacy-projection",
           "role": "content",
           "suite": "csharp-async-owner-contract"
@@ -455,6 +460,11 @@
           "check": "core-code-branch-terminology",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "concurrency-policy"
         },
         {
           "check": "metadata-closure",
@@ -1278,6 +1288,11 @@
           "suite": "commit-consolidation-dispositions"
         },
         {
+          "check": "router-projection",
+          "role": "content",
+          "suite": "concurrency-policy"
+        },
+        {
           "check": "router",
           "role": "content",
           "suite": "concurrent-plan-integration"
@@ -1894,7 +1909,7 @@
       ]
     },
     {
-      "digest": "sha256:59c447a5d985ef13ef49994b96fd753c525bfe23f366db205aabc05c4cb83367",
+      "digest": "sha256:1b406e5340389033aec8ef10bdff8bcb283017e7298438e49593ef46649e2946",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1906,7 +1921,7 @@
       ]
     },
     {
-      "digest": "sha256:006873eab8fbd1ebac10c16ef460ee369d45354761e7a709d7f34bb158044ea6",
+      "digest": "sha256:d2d89094b5fde323993d6fd8956c597547b16bb101f80a18e5cd5d8a5e24a53e",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1929,6 +1944,11 @@
           "check": "commit-evaluation-documentation",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "concurrency-policy"
         },
         {
           "check": "documentation-projection",
@@ -2247,7 +2267,7 @@
       ]
     },
     {
-      "digest": "sha256:c9ea780dd78d4e6340d1a86aaf7fe9ed8d6ba8cc2145395b59314743f47541de",
+      "digest": "sha256:711e0c7f6cb1a1b9a73a2ad8b76d2a16cde7b413e8ebb4e29986ad2cd4b6f124",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2457,6 +2477,11 @@
           "check": "commit-target-files",
           "role": "paths",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "concurrency-policy"
         },
         {
           "check": "exact-dispositions",
@@ -3565,7 +3590,7 @@
       ]
     },
     {
-      "digest": "sha256:93e8300a1d5382f75277b1b3048319522fbb91cba13d3df0716502b1187b6078",
+      "digest": "sha256:8561aeff5f5e0caa11f690aaac6e31946b0bdc29cab0620e3783b3929ea1e748",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3581,6 +3606,11 @@
       "path": "evaluation/standards-effectiveness/findings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "concurrency-policy"
+        },
         {
           "check": "finding-closure",
           "role": "content",
@@ -4032,6 +4062,18 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5a183f21db7148904f5c5940d91c9547778b11faba5666e70f21413657d4a01c",
+      "path": "evaluation/standards-effectiveness/fixtures/concurrency/ownership-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "concurrency-policy"
         }
       ]
     },
@@ -7024,7 +7066,7 @@
       ]
     },
     {
-      "digest": "sha256:29256fe47b879d2e4592418687be7a111d50b15e407d2576fe35e4a9a070e376",
+      "digest": "sha256:dbeeaac717813bc8a50e29c52542f67423da31e98ac6b3c349ba828e366c17a8",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7036,7 +7078,7 @@
       ]
     },
     {
-      "digest": "sha256:1b7e84b6bcc86013435897f4abbc6f1e4f90e81bb0bc35f6eb956e1d298bdbcf",
+      "digest": "sha256:db951cdf3d0ffdc23582d175e42905fa0d4d0c82dc25a28a8ad90fe31fc29bf4",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7179,6 +7221,11 @@
           "check": "commit-identifier-coverage",
           "role": "left",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "concurrency-policy"
         },
         {
           "check": "section-inventory",
@@ -8978,7 +9025,7 @@
       ]
     },
     {
-      "digest": "sha256:9f06c4c43e14605c208a6798afc605827de4845fe254a26ee91a2c0c813ffe82",
+      "digest": "sha256:e5307015f92c829a993d7c2e161fa777aec1b41ecc8417eeea7ce047940a6216",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -9470,10 +9517,15 @@
       ]
     },
     {
-      "digest": "sha256:bd2ec89227eec4a42e7a283b784ca6b98307d25a929028c97bb30abf545fea6d",
+      "digest": "sha256:f8bfd834862185a69e20abdc2dd53d37a0113ea1724d0c8c049f724aab21404a",
       "path": "evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv",
       "state": "present",
       "uses": [
+        {
+          "check": "source-package-projection",
+          "role": "table",
+          "suite": "concurrency-policy"
+        },
         {
           "check": "source-package-authority",
           "role": "table",
@@ -9971,7 +10023,7 @@
       ]
     },
     {
-      "digest": "sha256:b4ac207cfbaa4a7bbf6a2e8a3d1339e61bd4004c4af4949f5a96d9c8daaaabc2",
+      "digest": "sha256:1d814d28a56de1bc4d0e5dcacf660aabe3b2e7d2d74f32bbe49b7fd5e336efc0",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10347,6 +10399,23 @@
       "path": "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
       "state": "present",
       "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2005dc9b950eda0510233f20448fe41989ad9ec730fa134407b6cfc9f3c3f890",
+      "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "obsolete-authority",
+          "role": "required-present",
+          "suite": "concurrency-policy"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -13194,39 +13263,13 @@
       ]
     },
     {
-      "digest": "sha256:51088e43eb241dba1105c02693a147dcb1d23fb2ab9984d23f8baa13da90197e",
       "path": "evaluation/standards-effectiveness/verify-concurrency-policy.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        },
-        {
-          "check": "verifier-subjects",
-          "role": "checker-subject",
-          "suite": "source-package-preparation"
+          "check": "obsolete-authority",
+          "role": "required-absent",
+          "suite": "concurrency-policy"
         }
       ]
     },
@@ -21247,6 +21290,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "canonical-policy",
+          "role": "content",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "concurrency-policy"
+        },
+        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "frontend-rendering-synchronization"
@@ -23371,6 +23424,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "contract-http-outcome-projection"
         },
         {
@@ -23807,11 +23865,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:b4ac207cfbaa4a7bbf6a2e8a3d1339e61bd4004c4af4949f5a96d9c8daaaabc2",
+    "digest": "sha256:1d814d28a56de1bc4d0e5dcacf660aabe3b2e7d2d74f32bbe49b7fd5e336efc0",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:d47e8c4173b979a2824ab1a757d6bd623092b4a96abfcdce6ae06c9fd67d4c18",
+    "digest": "sha256:0da09983a060cd5ecf3e54e195534efdbc07ef313411cdddde1a75e4bde4b81b",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25468,6 +25526,12 @@
       "digest": "sha256:03edc3c48d4f61ef85997611a8f0189b4af0589973c8d29d1bb3f02091228f11",
       "id": "milestone-7-independent-trust-replan",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:2005dc9b950eda0510233f20448fe41989ad9ec730fa134407b6cfc9f3c3f890",
+      "id": "concurrency-policy",
+      "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
       "requires": []
     }
   ]

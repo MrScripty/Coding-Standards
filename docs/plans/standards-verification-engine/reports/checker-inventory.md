@@ -6978,3 +6978,35 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components. The old checker,
 Bash-only suite, and fixture are absent without nested execution, a normative
 or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I115 Generic Concurrency Policy Acceptance
+
+Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,
+and 13 components. Four verifiers have no actual verifier/helper inbound
+dependencies. The 172-line `verify-concurrency-policy.sh` is the sole
+highest-wave root at wave 4. It has no executable inbound caller, four frozen
+contract references, one metadata helper, and two retained verifier gates.
+
+The package uses `shared-contract` execution because the source-package
+subject and row-35 README dependency contract transition with the checker.
+One eleven-check `topic.concurrency` suite preserves all 20 typed shared-state,
+lock-boundary, async, failure, cancellation, fallback, and availability
+decisions. It also preserves nine exact source identities, eleven exact
+dispositions including the C# and Rust parent indexes, metadata closure,
+Router and canonical policy, bounded legacy indexes, finding closure,
+source-package authority, documentation, and terminal path state.
+
+The source-package subject becomes `suite:concurrency-policy`, while row-35
+releases the obsolete Bash README dependency. A native metadata-graph
+assertion replaces helper execution. Trust-lifecycle and plan-fixture checks
+remain independent through six M6-I115 dispositions. Twelve prior M6-I44,
+M6-I71, M6-I73, M6-I84, M6-I113, and M6-I114 records transfer to registered
+suite evidence.
+
+Ten rejecting mutations and one accepting fixture-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 10 Bash checkers, 12 nodes, 53 edges, and 12
+components. The old checker is absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.
