@@ -293,7 +293,11 @@ terminology, paper-only assumptions, or unresolved publication facts.
 The five prototype paths are writable only in governed isolated prototype
 branches or worktrees and never enter the canonical integration branch. The
 canonical branch accepts their exact evidence pointers, verdicts, and validated
-decisions through the named reports.
+decisions through the named reports. Each prototype branch also owns its local
+mechanically regenerated `evaluation/standards-effectiveness/generated/suite-inputs.json`
+because staging a new prototype path changes that branch's repository-index
+observation. The generated diff must change only the derived index digest and
+is never integrated into canonical `main`.
 
 **Tasks:**
 

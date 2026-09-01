@@ -85,10 +85,16 @@ Each prototype receives its own private task branch and `/tmp` worktree from
 the exact canonical commit containing this protocol. A separately committed
 execution-admission record must name that base, branch, worktree, and write set
 on canonical `main` before creation. The prototype owner is the A2 prototype
-owner; the integration target and owner are canonical `main` and the A2 integration owner.
-The prototype-only write set is exactly the path in the registration table.
-The worktree uses disposable repositories and stores only, has no canonical
-runtime consumer, and is never merged.
+owner; the integration target and owner are canonical `main` and the A2
+integration owner.
+The authored prototype write set is exactly the path in the registration
+table. Its branch-local commit also owns the mechanically regenerated
+`evaluation/standards-effectiveness/generated/suite-inputs.json` after the
+prototype path is staged. Exact review must show that this generated file
+changes only its repository-index digest. The worktree uses disposable
+repositories and stores only, has no canonical runtime consumer, and is never
+merged; neither the prototype nor its branch-local generated projection enters
+canonical `main`.
 
 Each prototype is committed with focused reproduction evidence. The canonical
 [prototype evidence index](prototype-evidence-index.md) later records the exact

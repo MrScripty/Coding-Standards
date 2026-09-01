@@ -1,5 +1,20 @@
 # Standards Engine A2 Controlled Authoring Ledger
 
+## 2026-09-01 - Prototype Generated-Evidence Re-plan
+
+- A2-P1's pre-commit review found that staging the new prototype source changes
+  the governed repository-index observation. The previously admitted one-file
+  branch write set would therefore leave generated evidence stale.
+- Expanded each isolated prototype branch write set to its one registered
+  source path plus branch-local
+  `evaluation/standards-effectiveness/generated/suite-inputs.json`.
+- The source must be staged before mechanical regeneration. Exact review must
+  prove that only the generated repository-index digest changes; the branch-
+  local projection is archived with the prototype and never merged to
+  canonical `main`.
+- No prototype was committed before this re-plan. A2-P1 remains the exact next
+  slice; production authority remains unavailable.
+
 ## 2026-09-01 - Exact Prototype Execution Admission
 
 - Fixed all five prototype branches at committed protocol base
