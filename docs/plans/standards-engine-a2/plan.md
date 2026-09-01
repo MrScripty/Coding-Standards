@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 0 A1c preservation and design validation
 
-**Next slice:** A2-P1 isolated authoring state-model prototype and guided scenarios
+**Next slice:** A2-P2 projected-view equivalence prototype and evidence review
 
 **Acceptance status:** `pending`
 
@@ -340,7 +340,7 @@ is never integrated into canonical `main`.
   correctness invariants and negative cases, current standards route, deciding
   oracle, environment, limits, and pass, revise, or reject threshold before a
   prototype or minimum viable test begins.
-- [ ] Run the isolated logic prototype for proposal revision, head CAS,
+- [x] Run the isolated logic prototype for proposal revision, head CAS,
   analysis/readiness invalidation, apply, interruption, and recovery states.
   Expose the complete relevant state and exercise guided happy, stale,
   unauthorized, conflicting, and unknown-outcome scenarios.

@@ -1,5 +1,29 @@
 # Standards Engine A2 Controlled Authoring Ledger
 
+## 2026-09-01 - A2-P1 Authoring State-Model Verdict
+
+- Created the isolated human-drivable HTML prototype from exact admitted base
+  `bbdfb485e914540e0e53092dab71c9b80f55102d`. The initial prototype commit is
+  `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`.
+- The first run identified mutable current-analysis and current-readiness
+  selectors as a prohibited risk to A1c's immutable, branchable analysis
+  semantics. Corrective commit
+  `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` removed them and made commands
+  carry exact opaque handles while leaving only the proposal head mutable.
+- All nine guided happy, stale-head, stale-analysis, proof-invalidation,
+  revoked-authority, target-conflict, interruption, applied-before-response,
+  and contradictory-observation scenarios passed.
+- Generated freshness and all 265 declarative suites passed on the prototype
+  branch. Exact review found one authored HTML file and only the branch-local
+  generated repository-index digest; whitespace, sensitive-value, and external-
+  dependency scans passed.
+- Recorded an A2-P1 `pass` limited to the pure state-model claim. SQLite, Git,
+  facade, authorization-provider, platform, and resource claims remain with
+  A2-P2 through A2-P5.
+- Protected the clean tip with `refs/archive/a2-prototypes/p1-state-model` and
+  retained the worktree under the explicit product-owner review contract in
+  the prototype evidence index. A2-P2 is next for canonical evidence review.
+
 ## 2026-09-01 - Prototype Generated-Evidence Re-plan
 
 - A2-P1's pre-commit review found that staging the new prototype source changes
