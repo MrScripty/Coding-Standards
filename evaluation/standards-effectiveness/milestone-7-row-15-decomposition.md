@@ -46,12 +46,20 @@ profile-before-optimization slogans as universal defaults. Missing owner,
 contract, applicability, capability, or evidence facts require typed
 diagnostics rather than an incumbent recipe or default success.
 
+## Verifier Ownership
+
+The registered `milestone-7-row-15-decomposition` suite owns the exact 15-child
+decomposition, all 60 source dispositions, canonical owner paths, and completed
+planning record. The execution-train checker remains an independent complete-
+runner gate; the row-15 suite does not invoke it.
+
 ## Scope
 
-This slice changes only decomposition, package classification, report/checker,
-plan/ledger/evaluation tracking, and superseded cursor assertions. It changes
-no normative or legacy standard, disposition, router, metadata, generated
-inventory, owner map, configuration, lockfile, or downstream repository.
+This slice changes only decomposition, package classification, report/
+declarative suite, plan/ledger/evaluation tracking, and superseded cursor
+assertions. It changes no normative or legacy standard, disposition, router,
+metadata, generated inventory, owner map, configuration, lockfile, or
+downstream repository.
 
 ## Next Slice
 

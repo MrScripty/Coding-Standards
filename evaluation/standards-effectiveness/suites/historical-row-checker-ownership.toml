@@ -1,7 +1,7 @@
 schema_version = 1
 id = "historical-row-checker-ownership"
 owner = "migration.parent-plan"
-description = "Completed-row ownership evidence excludes live lifecycle assertions from the retained historical decomposition verifier."
+description = "Completed-row ownership evidence records historical train state without retaining checker lifecycle assertions."
 
 [[checks]]
 id = "forbidden-lifecycle"
@@ -32,9 +32,3 @@ expected = [
 field = "order"
 op = "in"
 values = ["5", "8", "15", "43"]
-
-[[checks]]
-id = "row-15-lifecycle"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh"
-prohibited = ["(`Planned`)"]

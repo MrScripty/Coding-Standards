@@ -6671,3 +6671,31 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 21 Bash checkers, 24 nodes, 144 edges, and 24
 components. The old checker is absent without nested execution, a source-policy
 rewrite, compatibility representation, or fallback.
+
+### M6-I105 Row-15 Decomposition Acceptance
+
+Fresh post-M6-I104 evidence reports 21 Bash verifiers, 24 nodes, 144 edges,
+and 24 components. Six verifiers have no executable inbound edge, including
+three at the highest dependency wave 3. The 25-line
+`verify-milestone-7-row-15-decomposition.sh` is the smallest highest-wave root.
+Its incoming references are accepted plan, edge, and historical-suite evidence;
+it invokes one retained verifier gate.
+
+The package uses `serial-coherent` execution because the decomposition record
+and historical lifecycle assertion share migration-parent ownership. No shared
+engine, schema, fixture, or source policy changes. One four-check suite
+preserves the exact 15-child decomposition, all 60 source dispositions, the
+completed planning record, and five canonical owner paths.
+
+Execution-train lifecycle remains an independent gate through two edge
+dispositions. Thirty-two prior wave, M6-Q3, M6-Q4, M6-I21, M6-I45, and M6-I101
+records transfer to registered suite evidence. The historical-row suite
+releases its final temporary retained-checker assertion.
+
+Four mutations reject decomposition-rationale drift, disposition-owner drift,
+planning-text drift, and owner-path drift. Exact final compilation renews 9/9
+dependency-local requirements and leaves 42 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 20 Bash checkers, 23 nodes, 139 edges, and 23
+components. The old checker is absent without nested execution, a source-policy
+rewrite, compatibility representation, or fallback.

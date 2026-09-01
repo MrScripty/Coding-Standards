@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I104 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I105 graph audit; do not preselect the next
 package from evidence captured before this accepted serial package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I104 replaced the F025/F026 decomposition
-verifier with one migration-parent declarative suite at train order 219.
+**Latest accepted slice:** M6-I105 replaced the row-15 decomposition verifier
+with one migration-parent declarative suite at train order 220.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I104 at train
-order 219.
+**Accepted boundary:** package records are accepted through M6-I105 at train
+order 220.
 
-**Current derived state:** 256 registered declarative suites, 21 retained Bash
-checkers, 24 executable nodes, 144 conservative reference edges, and 24
+**Current derived state:** 257 registered declarative suites, 20 retained Bash
+checkers, 23 executable nodes, 139 conservative reference edges, and 23
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I104 F025/F026 decomposition accepted at train order 219 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I105 row-15 decomposition accepted at train order 220 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

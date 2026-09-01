@@ -6967,3 +6967,23 @@
   graph and generated freshness, numeric lifecycle, plan checks, and the
   complete 21-entrypoint checkpoint pass. Final graph: 21 Bash checkers, 24
   nodes, 144 edges, and 24 components.
+
+## 2026-08-31 - M6-I105 Row-15 Decomposition Acceptance
+
+- Fresh post-M6-I104 evidence reports 21 Bash verifiers, 24 nodes, 144 edges,
+  and 24 components. Six verifiers have no executable inbound edge, including
+  three at the highest dependency wave 3. The 25-line row-15 decomposition
+  verifier is the smallest highest-wave root and invokes one retained verifier
+  gate. M6-I105 is `serial-coherent` at train order 220.
+- One four-check `migration.parent-plan` suite preserves the exact 15-child
+  execution decomposition, all 60 source dispositions, completed planning
+  record, and five canonical owner paths.
+- Execution-train lifecycle remains an independent gate. Thirty-two earlier
+  wave, M6-Q3, M6-Q4, M6-I21, M6-I45, and M6-I101 records transfer to
+  registered suite evidence, and the historical-row suite releases its final
+  temporary retained-checker assertion.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package, edge, and historical-suite
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 20-entrypoint checkpoint pass. Final graph: 20 Bash
+  checkers, 23 nodes, 139 edges, and 23 components.
