@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I109 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I110 graph audit; do not preselect the next
 package from evidence captured before this accepted shared-contract package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I109 replaced the decision-table Bash component
-with registered Python decision and test authority at train order 224.
+**Latest accepted slice:** M6-I110 replaced the Rust binding-conversion Bash
+checker with registered declarative authority at train order 225.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I109 at train
-order 224.
+**Accepted boundary:** package records are accepted through M6-I110 at train
+order 225.
 
-**Current derived state:** 261 registered declarative suites, 16 retained Bash
-checkers, 18 executable nodes, 105 conservative reference edges, and 18
+**Current derived state:** 262 registered declarative suites, 15 retained Bash
+checkers, 17 executable nodes, 97 conservative reference edges, and 17
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I109 decision-table Bash component accepted at train order 224 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I110 Rust binding conversions accepted at train order 225 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

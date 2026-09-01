@@ -1,0 +1,167 @@
+schema_version = 1
+id = "rust-binding-conversions"
+owner = "profile.language.rust.language-bindings"
+description = "Mechanism-selected Rust binding conversions with declared representation, checked failure, native/host evidence, explicit ownership, and no fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-conversion-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+mechanism = ["framework", "serialized", "c-abi", "opaque", "generated"]
+representation = ["declared", "undeclared", "incompatible"]
+conversion = ["infallible", "checked-valid", "rejected", "schema-valid", "schema-invalid", "unchecked", "infallible-claim", "not-required"]
+boundary = ["native-host", "native-only", "not-checked"]
+ownership = ["declared", "missing", "not-required"]
+fallback = ["none", "lossy-path", "default", "json-abi", "alternate-framework"]
+expected = ["allow", "typed-invalid", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "representation", op = "eq", value = "undeclared" },
+  { field = "conversion", op = "in", values = ["rejected", "schema-invalid", "unchecked", "infallible-claim"] },
+  { all = [
+    { field = "representation", op = "eq", value = "declared" },
+    { field = "boundary", op = "ne", value = "native-host" },
+  ] },
+  { field = "ownership", op = "eq", value = "missing" },
+  { field = "fallback", op = "ne", value = "none" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "representation"
+op = "eq"
+value = "incompatible"
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0772", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "192", "2", "language-profile", "split", "FFI Wrapper Design"],
+  ["STD-0773", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "194", "3", "language-profile", "split", "Wrapper Type Conventions"],
+  ["STD-0774", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "233", "3", "language-profile", "split", "When to Annotate Core Types Directly"],
+  ["STD-0775", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "256", "3", "language-profile", "split", "From/Into Implementation Pattern"],
+  ["STD-0794", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "560", "2", "language-profile", "split", "Type Mapping Rules"],
+  ["STD-0795", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "562", "3", "language-profile", "split", "FFI-Safe Type Inventory"],
+  ["STD-0796", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "580", "3", "language-profile", "split", "Conversion Strategy Decision Matrix"],
+  ["STD-0801", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "691", "2", "language-profile", "split", "Testing Strategy"],
+  ["STD-0802", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "714", "3", "language-profile", "split", "Rules"],
+  ["STD-0803", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "722", "3", "language-profile", "split", "Conversion Test Example"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0772", "STD-0773", "STD-0774", "STD-0775", "STD-0794", "STD-0795", "STD-0796", "STD-0801", "STD-0802", "STD-0803"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0772", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "move", "establish Rust binding conversion ownership"],
+  ["STD-0773", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "replace unchecked wrapper conversions"],
+  ["STD-0774", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "classify framework-liftable and ABI-safe types separately"],
+  ["STD-0775", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "use fallible conversion when representation can reject"],
+  ["STD-0794", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "move", "preserve explicit type mapping ownership"],
+  ["STD-0795", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "remove false universal FFI-safe classifications"],
+  ["STD-0796", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "select conversion by the concrete boundary mechanism"],
+  ["STD-0801", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "merge", "join conversion verification to the canonical specialization"],
+  ["STD-0802", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "require success rejection and boundary round-trip coverage"],
+  ["STD-0803", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "replace infallible-only conversion examples"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0772", "STD-0773", "STD-0774", "STD-0775", "STD-0794", "STD-0795", "STD-0796", "STD-0801", "STD-0802", "STD-0803"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/security.md",
+  "profiles/boundaries/interop.md",
+  "profiles/boundaries/language-bindings.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/language-bindings.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = [
+  "## Representation Categories",
+  "Framework lifting is not C-ABI safety",
+  "## Fallible Conversion",
+  "Reserve `From` and `Into`",
+  "`TryFrom`, `TryInto`",
+  "## Stable C ABI",
+  "## Verification",
+  "concrete native/host boundary",
+  "## No Fallback",
+]
+prohibited = []
+
+[[checks]]
+id = "rust-index-route"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["(language-bindings.md)"]
+prohibited = []
+
+[[checks]]
+id = "generic-specialization"
+type = "text"
+path = "profiles/boundaries/language-bindings.md"
+required = ["Rust specialization"]
+prohibited = []
+
+[[checks]]
+id = "legacy-route"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["profiles/languages/rust/language-bindings.md"]
+prohibited = [
+  "Cast with `as`",
+  "to_string_lossy",
+  "as_millis() as u64",
+  "Every FFI wrapper type implements `From",
+  "| `String` | Yes",
+  "| `Vec<T>` (T is FFI-safe) | Yes",
+  "| `Option<T>` (T is FFI-safe) | Yes",
+]
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F022 | Resolved in Milestone 7.4b3g |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "`fixtures/rust/binding-conversion-decisions.tsv` and the registered\n`rust-binding-conversions` suite distinguish framework lifting",
+]
+prohibited = ["verify-rust-binding-conversions.sh"]

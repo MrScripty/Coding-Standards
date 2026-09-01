@@ -9,7 +9,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-node-catalog-additions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
@@ -26,14 +25,11 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
@@ -74,15 +70,12 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-trust
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 executable_reference	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 executable_reference	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 executable_reference	tools/standards_verifier/tests/test_suite_inputs.py	evaluation/standards-effectiveness/verify-contract-ownership.sh
 helper_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 helper_dependency	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
@@ -103,4 +96,3 @@ verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-rust-a
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh

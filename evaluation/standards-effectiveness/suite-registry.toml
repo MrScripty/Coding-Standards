@@ -1304,3 +1304,8 @@ requires = []
 id = "decision-engine-contract"
 path = "evaluation/standards-effectiveness/suites/decision-engine-contract.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-conversions"
+path = "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml"
+requires = []

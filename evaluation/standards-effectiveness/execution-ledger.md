@@ -15523,3 +15523,27 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   plus the complete 16-entrypoint checkpoint pass. Final graph: 16 Bash
   checkers, 18 nodes, 105 edges, and 18 components; fresh graph evidence is
   required next.
+
+## 2026-09-01 - M6-I110 Rust Binding-Conversion Acceptance
+
+- Fresh post-M6-I109 evidence reports 16 Bash verifiers, 18 nodes, 105 edges,
+  and 18 components. Four verifiers have no executable inbound edge. The
+  132-line Rust binding-conversion verifier is the smaller highest-wave root at
+  wave 1, declares one metadata helper, and invokes one retained decomposition
+  gate. M6-I110 is `shared-contract` at train order 225 because both row-35
+  README manifests require final-state transitions.
+- One ten-check `profile.language.rust.language-bindings` suite preserves all
+  25 typed conversion decisions, ten exact source identities and dispositions,
+  metadata closure, canonical profile and index routes, bounded legacy routing
+  and unsafe-pattern removal, F022 closure, no-fallback precedence, and
+  documentation.
+- A native metadata-graph assertion replaces helper execution. F022/F023
+  decomposition remains an independent gate. Ten earlier M6-I59, M6-I64,
+  M6-I69, M6-I70, and M6-I93 records transfer to registered suite evidence,
+  and both row-35 manifests release the retired path.
+- Ten mutations and exact 22/22 dependency-local renewal leave 29 requirements
+  stable and close 51/51 coverage. Focused package, edge, and row-35 checks,
+  all suites, graph and generated freshness, numeric lifecycle, plan checks,
+  and the complete
+  15-entrypoint checkpoint pass. Final graph: 15 Bash checkers, 17 nodes, 97
+  edges, and 17 components; fresh graph evidence is required next.

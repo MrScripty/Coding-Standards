@@ -639,6 +639,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-enum-representation"
         },
         {
@@ -1859,7 +1864,7 @@
       ]
     },
     {
-      "digest": "sha256:e230d4ad544159d43b3ad66f462bc8adf997b5b9f76deaa56c39e6505c539a7e",
+      "digest": "sha256:2fbf1a682b554900589da143881a69928971eabb23a6602ca9953928a175e947",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1871,7 +1876,7 @@
       ]
     },
     {
-      "digest": "sha256:bea5ae06c67b8723d0bc86a692c7c90c9e763a1d3e9d33787783dbb4d30514c3",
+      "digest": "sha256:940d57dfece33cef979eb8eecec910bb1c2bd86f1281422acb9c474c707906a5",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2038,6 +2043,11 @@
         {
           "check": "documentation-projection",
           "role": "content",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
           "suite": "rust-binding-core-adapter-testability"
         },
         {
@@ -2187,7 +2197,7 @@
       ]
     },
     {
-      "digest": "sha256:0eb373f6ddfa7a6492a03791b2dc6eefdd8dedc12c5452c452f560f14458ed8e",
+      "digest": "sha256:c57fcc01115c6b1faac11ba53a3f1296d444933548f71c5ab698d819aff59bde",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3024,6 +3034,11 @@
           "suite": "rust-binding-contract-discovery"
         },
         {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "rust-binding-conversions"
+        },
+        {
           "check": "exact-disposition",
           "role": "table",
           "suite": "rust-binding-core-adapter-testability"
@@ -3485,7 +3500,7 @@
       ]
     },
     {
-      "digest": "sha256:2102eaaa5a2c1bdd3960e7a96703b5533ae038c8dd59f0ac102fc960afd63b54",
+      "digest": "sha256:3ccdfbe5633752494065674ca09986542fbdfb23ce7083e39e287900505dc18e",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3545,6 +3560,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "finding-closure",
@@ -5838,6 +5858,18 @@
       ]
     },
     {
+      "digest": "sha256:4cdcb88095639711127016f4dfd8737606b4a3b735ceb922b588dd034157297c",
+      "path": "evaluation/standards-effectiveness/fixtures/rust/binding-conversion-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "rust-binding-conversions"
+        }
+      ]
+    },
+    {
       "digest": "sha256:87fa8a686cdda536f5a3dd49e027c1ef9a10c130cc8d02e78323a2b0492cda6b",
       "path": "evaluation/standards-effectiveness/fixtures/rust/binding-core-adapter-testability-decisions.tsv",
       "state": "present",
@@ -6877,7 +6909,7 @@
       ]
     },
     {
-      "digest": "sha256:d9b8e12040c871f431d7e23ec3e55ed9b271a5207addcc52e60c54a40f0fa979",
+      "digest": "sha256:a76a46a3791e580f050d7594eb3aa08d69c229b3dc0f06099eae6e1a62afac14",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6889,7 +6921,7 @@
       ]
     },
     {
-      "digest": "sha256:4f2f5644f34e143f54d88c67a35f64cb5f66efa484015db25af6070b57e319dc",
+      "digest": "sha256:0b10e6b97a7020f2f69897b7b31c00adca52fcaedc6cce0664ff2713c37805a0",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7202,6 +7234,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "section-inventory",
@@ -8758,7 +8795,7 @@
       ]
     },
     {
-      "digest": "sha256:32a10d8273eeb2e650fc0df8d1b05445f5c7e7496b1a17570cc9b542854c280d",
+      "digest": "sha256:4d7b449b33beb2028b311f9775dde9c24b7dbf32a494e0ca51daac55c9986349",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
       "state": "present",
       "uses": [
@@ -8775,7 +8812,7 @@
       ]
     },
     {
-      "digest": "sha256:fabf5b5a81018e405756309004fe05f7746de57b4b929ee4127baf722e2814e5",
+      "digest": "sha256:9f06c4c43e14605c208a6798afc605827de4845fe254a26ee91a2c0c813ffe82",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -9768,7 +9805,7 @@
       ]
     },
     {
-      "digest": "sha256:0495e4042474a2d45c88f6d2a3e6634db8177f91ecf841e1d781cc99dc499673",
+      "digest": "sha256:6974df68be8e0108fb950dbf8bb343327a031499c1b649c657ae350678de9283",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11945,6 +11982,18 @@
       ]
     },
     {
+      "digest": "sha256:8a64cd31537bc469b428fcb41c232003d87eb6994186f98eaf7a7d957eb97dcf",
+      "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:9cfff7a5170f81605472f4ce1db80c74a1facfcf75b909363967a52c0494f763",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-core-adapter-testability.toml",
       "state": "present",
@@ -13306,43 +13355,6 @@
       ]
     },
     {
-      "digest": "sha256:c6413da1c7c2010eb88479021eb9a553d04ec25b0ec3ba706a08707bff1635cc",
-      "path": "evaluation/standards-effectiveness/verify-rust-binding-conversions.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:f086d321bac68995751cfbf2033dfb26fede93a653fead00756f770a4312a671",
       "path": "evaluation/standards-effectiveness/verify-verification-gate-model.sh",
       "state": "present",
@@ -13625,6 +13637,11 @@
           "check": "former-source",
           "role": "content",
           "suite": "rust-binding-contract-discovery"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "legacy-index",
@@ -14315,6 +14332,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-enum-representation"
         },
         {
@@ -14540,6 +14562,16 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "generic-specialization",
+          "role": "content",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "metadata-closure",
@@ -14893,6 +14925,16 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "rust-index-route",
+          "role": "content",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "metadata-closure",
@@ -15580,6 +15622,16 @@
           "check": "rust-profile",
           "role": "content",
           "suite": "rust-binding-contract-discovery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "profile-policy",
+          "role": "content",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "canonical-profile",
@@ -21388,6 +21440,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-enum-representation"
         },
         {
@@ -22128,6 +22185,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
         },
         {
           "check": "metadata-closure",
@@ -23293,6 +23355,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "rust-binding-enum-representation"
         },
         {
@@ -23514,11 +23581,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:0495e4042474a2d45c88f6d2a3e6634db8177f91ecf841e1d781cc99dc499673",
+    "digest": "sha256:6974df68be8e0108fb950dbf8bb343327a031499c1b649c657ae350678de9283",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:715ba8dcb12230d0aeecd00f1d7f98b40db485ce083bfbe4fe84ccb677e0b27a",
+    "digest": "sha256:e70fab1047cd9eeeb0a41fe7355913eb9923ec62f3060fe47403b51f5da3e91d",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25151,6 +25218,12 @@
       "digest": "sha256:1d6f3b19adfb87de7b117e84c9a03881023fe58c5268d1de3db49dc8855889a4",
       "id": "decision-engine-contract",
       "path": "evaluation/standards-effectiveness/suites/decision-engine-contract.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:8a64cd31537bc469b428fcb41c232003d87eb6994186f98eaf7a7d957eb97dcf",
+      "id": "rust-binding-conversions",
+      "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
       "requires": []
     }
   ]

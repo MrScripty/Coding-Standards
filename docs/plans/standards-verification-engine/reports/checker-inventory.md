@@ -6822,3 +6822,37 @@ complete mixed evidence pass. Final graph: 16 Bash checkers, 18 nodes, 105
 edges, and 18 components. Both Bash paths and compatibility fixtures are absent
 without an engine implementation rewrite, wrapper, alternate observed
 representation, or fallback.
+
+### M6-I110 Rust Binding-Conversion Acceptance
+
+Fresh post-M6-I109 evidence reports 16 Bash verifiers, 18 nodes, 105 edges,
+and 18 components. Four verifiers have no executable inbound edge. The
+132-line `verify-rust-binding-conversions.sh` is the smaller highest-wave root
+at wave 1. It declares one metadata helper and invokes the retained F022/F023
+decomposition gate; four contract records and two row-35 manifests reference
+the current path.
+
+The package uses `shared-contract` execution because the language-profile
+contract and documentation projection require both cross-owner row-35 README
+manifests to release the retired path. No shared engine, schema, fixture, or
+source-policy change is required. One ten-check suite preserves all 25 typed
+conversion decisions, ten exact source identities and dispositions, metadata
+closure, canonical profile and index routes, bounded legacy routing and unsafe-
+pattern removal, F022 closure, no-fallback precedence, and documentation.
+
+A native metadata-graph assertion replaces helper execution. F022/F023
+decomposition remains an independent gate through four edge dispositions. Ten
+prior M6-I59, M6-I64, M6-I69, M6-I70, and M6-I93 records transfer to registered
+suite evidence. The row-35 consumer and dependency manifests release the
+retired path.
+
+Ten mutations reject decision-outcome drift, source-identity drift,
+disposition drift, metadata drift, canonical-profile drift, Rust-index drift,
+generic-specialization drift, legacy-route drift, active legacy unsafe policy,
+and F022 finding drift under both authorities. Exact final compilation renews
+22/22 dependency-local requirements and leaves 29 stable, closing 51/51
+coverage. All focused, graph, declarative, generated, numeric, plan, and
+complete mixed
+evidence pass. Final graph: 15 Bash checkers, 17 nodes, 97 edges, and 17
+components. The old checker is absent without nested execution, a source-policy
+rewrite, compatibility representation, or fallback.
