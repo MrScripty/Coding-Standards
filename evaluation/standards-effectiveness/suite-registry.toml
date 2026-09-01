@@ -1221,6 +1221,11 @@ path = "evaluation/standards-effectiveness/suites/cross-language-contract.toml"
 requires = []
 
 [[suites]]
+id = "milestone-7-accelerated-execution-replan"
+path = "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml"
+requires = []
+
+[[suites]]
 id = "binding-generation-authority"
 path = "evaluation/standards-effectiveness/suites/binding-generation-authority.toml"
 requires = []

@@ -6728,3 +6728,35 @@ closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
 plan, and complete mixed evidence pass. Final graph: 19 Bash checkers, 22 nodes,
 127 edges, and 22 components. The old checker is absent without nested
 execution, a source-policy rewrite, compatibility representation, or fallback.
+
+### M6-I107 Accelerated-Execution Re-plan Acceptance
+
+Fresh post-M6-I106 evidence reports 19 Bash verifiers, 22 nodes, 127 edges,
+and 22 components. Five verifiers have no executable inbound edge. The
+176-line `verify-milestone-7-accelerated-execution-replan.sh` is the sole root
+at the highest dependency wave 3. Its incoming references are accepted plan
+and edge evidence; it declares one generic decision helper and invokes three
+retained verifier gates.
+
+The package uses `serial-coherent` execution because the report, package/train
+relationship evidence, and documentation projection share migration-parent
+ownership. No shared engine, schema, fixture, or source-policy change is
+required. One eleven-check suite preserves all 43 train orders, 40 package
+identities, repeated-package cohesion, owner and baseline alignment, train
+gates, four creation transitions, ten typed owner-action decisions, accepted
+report and finding evidence, and documentation.
+
+A native decision assertion replaces the declared helper. Decision-engine
+fixtures, execution-train lifecycle, and plan fixtures remain independent
+gates through eight edge dispositions. Eighteen prior M6-T8, M6-I53, M6-I55,
+M6-I56, M6-I58, M6-I62, M6-I63, M6-I102, and M6-I103 records transfer to
+registered suite evidence.
+
+Seven mutations reject owner alignment drift, repeated-package outcome drift,
+creation-gate drift, typed owner-action outcome drift, creation-transition
+drift, immutable-train gate drift, and report-review drift. Exact final
+compilation renews 17/17 dependency-local requirements and leaves 34 stable,
+closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
+plan, and complete mixed evidence pass. Final graph: 18 Bash checkers, 21 nodes,
+118 edges, and 21 components. The old checker is absent without nested
+execution, a source-policy rewrite, compatibility representation, or fallback.

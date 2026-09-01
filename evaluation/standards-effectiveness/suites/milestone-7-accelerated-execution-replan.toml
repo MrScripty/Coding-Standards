@@ -1,0 +1,313 @@
+schema_version = 1
+id = "milestone-7-accelerated-execution-replan"
+owner = "migration.parent-plan"
+description = "Exact accelerated-package membership, immutable-train alignment, owner-action decisions, creation transitions, and accepted re-plan evidence without nested execution."
+
+[[checks]]
+id = "accelerated-packages"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+non_empty = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+unique = [["train_order"]]
+[checks.domains]
+risk_class = ["mechanical", "consolidation", "refinement", "safety-critical", "new-owner-design"]
+owner_action = ["existing-review", "create-before-populate", "populate-after-create", "closure-only"]
+verification_family = ["decision-table", "owner-contract", "migration-structure", "custom-semantic"]
+draft_mode = ["isolated-draft", "serial-only"]
+integration_gate = ["focused", "full-suite"]
+[[checks.projections]]
+columns = ["train_order"]
+order = "source"
+expected = [
+  ["5"], ["6"], ["7"], ["8"], ["9"], ["10"], ["11"], ["12"], ["13"], ["14"],
+  ["15"], ["16"], ["17"], ["18"], ["19"], ["20"], ["21"], ["22"], ["23"], ["24"],
+  ["25"], ["26"], ["27"], ["28"], ["29"], ["30"], ["31"], ["32"], ["33"], ["34"],
+  ["35"], ["36"], ["37"], ["38"], ["39"], ["40"], ["41"], ["42"], ["43"], ["44"],
+  ["45"], ["46"], ["47"],
+]
+[[checks.projections]]
+columns = ["package_id"]
+order = "source"
+expected = [
+  ["P01"], ["P02"], ["P03"], ["P04"], ["P05"], ["P06"], ["P07"], ["P08"], ["P08"], ["P09"],
+  ["P10"], ["P11"], ["P12"], ["P13"], ["P14"], ["P15"], ["P16"], ["P17"], ["P18"], ["P19P"],
+  ["P19I"], ["P20"], ["P21"], ["P22"], ["P23"], ["P24"], ["P25"], ["P26"], ["P27"], ["P28"],
+  ["P29"], ["P30"], ["P30"], ["P31"], ["P32"], ["P32"], ["P33"], ["P34"], ["P35"], ["P36"],
+  ["P37"], ["P38"], ["P39"],
+]
+[[checks.projections]]
+columns = ["package_id", "owner", "risk_class", "verification_family", "semantic_outcome"]
+order = "source"
+expected = [
+  ["P08", "topics/concurrency.md", "refinement", "decision-table", "async-specialization-row-decomposition"],
+  ["P08", "topics/concurrency.md", "refinement", "decision-table", "async-specialization-row-decomposition"],
+  ["P30", "reference/patterns/architecture.md", "new-owner-design", "owner-contract", "architecture-pattern-reference-extraction"],
+  ["P30", "reference/patterns/architecture.md", "new-owner-design", "owner-contract", "architecture-pattern-reference-extraction"],
+  ["P32", "reference/patterns/architecture.md", "consolidation", "migration-structure", "architecture-pattern-reference-extraction"],
+  ["P32", "reference/patterns/architecture.md", "consolidation", "migration-structure", "architecture-pattern-reference-extraction"],
+]
+[checks.projections.where]
+field = "package_id"
+op = "in"
+values = ["P08", "P30", "P32"]
+[[checks.projections]]
+columns = ["train_order", "owner"]
+order = "source"
+expected = [
+  ["28", "topics/accessibility.md"],
+  ["31", "topics/diagnostics.md"],
+  ["32", "profiles/boundaries/persistence.md"],
+  ["36", "reference/patterns/architecture.md"],
+  ["37", "reference/patterns/architecture.md"],
+]
+[checks.projections.where]
+field = "owner_action"
+op = "eq"
+value = "create-before-populate"
+[[checks.projections]]
+columns = ["train_order", "owner"]
+order = "source"
+expected = [
+  ["39", "reference/patterns/architecture.md"],
+  ["40", "reference/patterns/architecture.md"],
+]
+[checks.projections.where]
+field = "owner_action"
+op = "eq"
+value = "populate-after-create"
+
+[[checks.row_constraints]]
+id = "creation-risk"
+where = { field = "owner_action", op = "eq", value = "create-before-populate" }
+require = { field = "risk_class", op = "eq", value = "new-owner-design" }
+
+[[checks.row_constraints]]
+id = "creation-verification"
+where = { field = "owner_action", op = "eq", value = "create-before-populate" }
+require = { field = "verification_family", op = "eq", value = "owner-contract" }
+
+[[checks.row_constraints]]
+id = "creation-gate"
+where = { field = "owner_action", op = "eq", value = "create-before-populate" }
+require = { field = "integration_gate", op = "eq", value = "full-suite" }
+
+[[checks.row_constraints]]
+id = "population-risk"
+where = { field = "owner_action", op = "eq", value = "populate-after-create" }
+require = { field = "risk_class", op = "eq", value = "consolidation" }
+
+[[checks.row_constraints]]
+id = "population-verification"
+where = { field = "owner_action", op = "eq", value = "populate-after-create" }
+require = { field = "verification_family", op = "eq", value = "migration-structure" }
+
+[[checks]]
+id = "train-owner-alignment"
+type = "relation"
+mode = "ordered"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+columns = ["train_order", "owner"]
+order = "source"
+[checks.right]
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+columns = ["order", "owner"]
+order = "source"
+[checks.right.where]
+field = "order"
+op = "in"
+values = [
+  "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+  "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
+]
+
+[[checks]]
+id = "missing-owner-baselines"
+type = "relation"
+mode = "ordered"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+columns = ["train_order", "owner"]
+order = "source"
+[checks.left.where]
+field = "owner_action"
+op = "in"
+values = ["create-before-populate", "populate-after-create"]
+[checks.right]
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+columns = ["order", "owner"]
+order = "source"
+[checks.right.where]
+all = [
+  { field = "order", op = "in", values = ["5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47"] },
+  { field = "owner_state", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "existing-owner-baselines"
+type = "relation"
+mode = "ordered"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+columns = ["train_order", "owner"]
+order = "source"
+[checks.left.where]
+field = "owner_action"
+op = "in"
+values = ["existing-review", "closure-only"]
+[checks.right]
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+columns = ["order", "owner"]
+order = "source"
+[checks.right.where]
+all = [
+  { field = "order", op = "in", values = ["5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47"] },
+  { field = "owner_state", op = "eq", value = "exists" },
+]
+
+[[checks]]
+id = "full-suite-train-gates"
+type = "inclusion"
+[checks.members]
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+columns = ["order"]
+order = "source"
+[checks.members.where]
+all = [
+  { field = "order", op = "in", values = ["5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47"] },
+  { field = "checkpoint", op = "eq", value = "full-suite" },
+]
+[checks.container]
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+columns = ["train_order"]
+order = "source"
+[checks.container.where]
+field = "integration_gate"
+op = "eq"
+value = "full-suite"
+
+[[checks]]
+id = "creation-transitions"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["baseline_order", "owner", "owner_transition"]
+order = "source"
+expected = [
+  ["28", "topics/accessibility.md", "missing-to-exists"],
+  ["31", "topics/diagnostics.md", "missing-to-exists"],
+  ["32", "profiles/boundaries/persistence.md", "missing-to-exists"],
+  ["36", "reference/patterns/architecture.md", "missing-to-exists"],
+]
+[checks.projections.where]
+all = [
+  { field = "owner", op = "in", values = ["topics/accessibility.md", "topics/diagnostics.md", "profiles/boundaries/persistence.md", "reference/patterns/architecture.md"] },
+  { field = "owner_transition", op = "eq", value = "missing-to-exists" },
+]
+
+[[checks]]
+id = "owner-action-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/execution-train/package-owner-action-decisions.tsv"
+expected_column = "expected"
+default = "typed-invalid"
+[checks.domains]
+case = ["*"]
+owner_action = ["existing-review", "create-before-populate", "populate-after-create", "closure-only", "implicit"]
+baseline = ["exists", "missing"]
+prior_creation = ["yes", "no"]
+risk = ["mechanical", "consolidation", "new-owner-design"]
+verification = ["owner-contract", "migration-structure"]
+integration_gate = ["focused", "full-suite"]
+expected = ["allow", "typed-invalid"]
+[[checks.rules]]
+outcome = "allow"
+[checks.rules.when]
+all = [
+  { field = "owner_action", op = "in", values = ["existing-review", "closure-only"] },
+  { field = "baseline", op = "eq", value = "exists" },
+]
+[[checks.rules]]
+outcome = "allow"
+[checks.rules.when]
+all = [
+  { field = "owner_action", op = "eq", value = "create-before-populate" },
+  { field = "baseline", op = "eq", value = "missing" },
+  { field = "risk", op = "eq", value = "new-owner-design" },
+  { field = "verification", op = "eq", value = "owner-contract" },
+  { field = "integration_gate", op = "eq", value = "full-suite" },
+]
+[[checks.rules]]
+outcome = "allow"
+[checks.rules.when]
+all = [
+  { field = "owner_action", op = "eq", value = "populate-after-create" },
+  { field = "baseline", op = "eq", value = "missing" },
+  { field = "prior_creation", op = "eq", value = "yes" },
+  { field = "risk", op = "eq", value = "consolidation" },
+  { field = "verification", op = "eq", value = "migration-structure" },
+]
+
+[[checks]]
+id = "accepted-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md"
+required = [
+  "570 frozen identifiers remain in 43 pending logical clusters",
+  "maps every pending immutable-train row to one of 40 packages",
+  "Every legacy identifier receives exactly one final disposition",
+  "No risk class permits compatibility copies",
+  "`decision-table`",
+  "`owner-contract`",
+  "`migration-structure`",
+  "`custom-semantic`",
+  "There is no wholesale checker rewrite",
+  "Twelve canonical owners are still missing",
+  "`isolated-draft`",
+  "`serial-only`",
+  "Both reviews are required",
+  "final `7.4c` milestone",
+  "set -euo pipefail",
+  "changes no normative or legacy standard",
+  "registered declarative suite",
+]
+prohibited = ["verify-milestone-7-accelerated-execution-replan.sh"]
+
+[[checks]]
+id = "resolved-findings"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = [
+  "| F070 | Resolved in Milestone 7.4b8l |",
+  "| F071 | Resolved in Milestone 7.4b8m |",
+  "| F072 | Resolved in Milestone 7.4b8n |",
+]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "registered `milestone-7-accelerated-execution-replan` suite",
+  "exact pending-row coverage",
+  "immutable-train alignment",
+  "owner-action decisions",
+]
+prohibited = ["`verify-milestone-7-accelerated-execution-replan.sh`"]
+
+[[checks]]
+id = "obsolete-authority"
+type = "path_state"
+present = ["evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml"]
+absent = ["evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh"]

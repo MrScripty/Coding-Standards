@@ -7009,3 +7009,24 @@
   checks, all suites, graph and generated freshness, numeric lifecycle, plan
   checks, and the complete 19-entrypoint checkpoint pass. Final graph: 19 Bash
   checkers, 22 nodes, 127 edges, and 22 components.
+
+## 2026-08-31 - M6-I107 Accelerated-Execution Re-plan Acceptance
+
+- Fresh post-M6-I106 evidence reports 19 Bash verifiers, 22 nodes, 127 edges,
+  and 22 components. Five verifiers have no executable inbound edge. The
+  176-line accelerated-execution re-plan verifier is the sole highest-wave
+  root at wave 3 and declares one helper while invoking three retained
+  verifier gates. M6-I107 is `serial-coherent` at train order 222.
+- One eleven-check `migration.parent-plan` suite preserves all 43 train orders,
+  40 package identities, repeated-package cohesion, owner/baseline alignment,
+  train gates, four creation transitions, ten owner-action decisions, accepted
+  report and finding evidence, and documentation.
+- A native decision assertion replaces the declared helper. Decision-engine
+  fixtures, execution-train lifecycle, and plan fixtures remain independent
+  gates. Eighteen earlier M6-T8, M6-I53, M6-I55, M6-I56, M6-I58, M6-I62,
+  M6-I63, M6-I102, and M6-I103 records transfer to registered suite evidence.
+- Seven mutations and exact 17/17 dependency-local renewal leave 34
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 18-entrypoint checkpoint pass. Final graph: 18 Bash
+  checkers, 21 nodes, 118 edges, and 21 components.

@@ -66,10 +66,11 @@ and train-coherent packages. `milestone-7-accelerated-packages.tsv` freezes
 risk, owner action, verification family, parallel-draft eligibility,
 integration gate, semantic outcome, and prerequisites.
 
-`verify-milestone-7-accelerated-execution-replan.sh` proves exact pending-row
-coverage, package cohesion, missing-owner state, immutable-train alignment,
-active-plan handoff, and plan lifecycle. Shared integration remains serial,
-and complete-suite checkpoints remain fail-fast.
+The registered `milestone-7-accelerated-execution-replan` suite runs through
+the Python engine. It proves exact pending-row coverage, package cohesion,
+missing-owner state, immutable-train alignment, owner-action decisions, and
+accepted re-plan evidence. Shared integration remains serial, and
+complete-suite checkpoints remain fail-fast.
 
 During Bash-to-declarative migration, package admission and implementation run
 focused dependency closure, package/edge authority, the complete declarative

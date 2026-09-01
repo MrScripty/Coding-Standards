@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I106 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I107 graph audit; do not preselect the next
 package from evidence captured before this accepted serial package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I106 replaced the cross-language contract verifier
-with one Contracts-owned declarative suite at train order 221.
+**Latest accepted slice:** M6-I107 replaced the accelerated-execution re-plan
+verifier with one migration-parent declarative suite at train order 222.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I106 at train
-order 221.
+**Accepted boundary:** package records are accepted through M6-I107 at train
+order 222.
 
-**Current derived state:** 258 registered declarative suites, 19 retained Bash
-checkers, 22 executable nodes, 127 conservative reference edges, and 22
+**Current derived state:** 259 registered declarative suites, 18 retained Bash
+checkers, 21 executable nodes, 118 conservative reference edges, and 21
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I106 cross-language contract accepted at train order 221 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I107 accelerated-execution re-plan accepted at train order 222 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

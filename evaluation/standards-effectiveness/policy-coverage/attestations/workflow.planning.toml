@@ -191,7 +191,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.planning.projection-completeness
 [[attestations]]
-requirement_id = "sha256:4654bbe8fb871ae70292a06eb626308f24c8ef73a81c641830680047e6c748e6"
+requirement_id = "sha256:e2a11be81110e2d18959869033091b69a29c186550649f7423b93ae2f43fd8bd"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

@@ -16,7 +16,7 @@ review. Finding `F070` records that re-plan trigger.
 
 This planning slice may change only:
 
-- this report and its acceleration manifest and checker;
+- this report, its acceleration manifest, and its registered declarative suite;
 - the evaluation index, findings, active plan, and execution ledger.
 
 It changes no normative or legacy standard, disposition, immutable-train row,

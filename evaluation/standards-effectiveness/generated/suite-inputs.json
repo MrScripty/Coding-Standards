@@ -1837,7 +1837,7 @@
       ]
     },
     {
-      "digest": "sha256:6a3c2961d173143f2f8df207967385623083d5ca25670fea4549f7e60862b5c7",
+      "digest": "sha256:d78f4ead5749f5a3269f64dcb318b2ce0f4dfc397d58ce476d508340c1f45886",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1849,7 +1849,7 @@
       ]
     },
     {
-      "digest": "sha256:62dbe8ba1a549726baf2c4712a0da7b8e38d831104acaa2494755df92614575e",
+      "digest": "sha256:77f622c64e9604d9365c6d17c829e19c3dc45eec0b1c1ccfcac06147cc119419",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1942,6 +1942,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "launcher-population"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-accelerated-execution-replan"
         },
         {
           "check": "removed-authority",
@@ -2150,7 +2155,7 @@
       ]
     },
     {
-      "digest": "sha256:f848e18063f38032d1f5987ef25e433f47fba0fb76051dbe71085460168276ba",
+      "digest": "sha256:e1397089ad7c974b13c940813aa0062c7391574365957e020acfb253afb77dfe",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3443,7 +3448,7 @@
       ]
     },
     {
-      "digest": "sha256:383b5b1992b29fb6e6fe07880266741be8ad8abcc710424514886b3440754fa2",
+      "digest": "sha256:584d4e99956cc6d7d8a09eabeafc1df73759af3b898661090f55b408a8f3be09",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3468,6 +3473,11 @@
           "check": "finding-closure",
           "role": "content",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "resolved-findings",
+          "role": "content",
+          "suite": "milestone-7-accelerated-execution-replan"
         },
         {
           "check": "resolved-finding",
@@ -4343,6 +4353,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "documentation-traceability-policy"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:45847d36307a5248c43877c79d7cf19843ae84250fcefaea4a0c709cb406b8e8",
+      "path": "evaluation/standards-effectiveness/fixtures/execution-train/package-owner-action-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "owner-action-decisions",
+          "role": "decision-table",
+          "suite": "milestone-7-accelerated-execution-replan"
         }
       ]
     },
@@ -6794,7 +6816,7 @@
       ]
     },
     {
-      "digest": "sha256:1041a0070bea130a36ed330efba8b0270bbad9f550215e37d2400a36af30bae4",
+      "digest": "sha256:88d2423e2900108822cbf06a29212fe0b83beeeb1e4645538b15df0551a175ad",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6806,7 +6828,7 @@
       ]
     },
     {
-      "digest": "sha256:3a77cb5f2a703b626cff04e54162f08ed3562de6e185230e30caaea81b136efc",
+      "digest": "sha256:b1faa328a07730ebce21f7b111fbfeee4de4b741e1ce592f1fd898776fa452b2",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7232,6 +7254,18 @@
       ]
     },
     {
+      "digest": "sha256:d198ebfb01fefa441a4a7c76f098b58166a34eef86903d5144f42f83f4816653",
+      "path": "evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "accepted-report",
+          "role": "content",
+          "suite": "milestone-7-accelerated-execution-replan"
+        }
+      ]
+    },
+    {
       "digest": "sha256:95c47f8424a136cde99e25902fc4f551af891500e637997a95fa29699c4746e9",
       "path": "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv",
       "state": "present",
@@ -7245,6 +7279,31 @@
           "check": "accelerated-package",
           "role": "table",
           "suite": "launcher-owner-row-14"
+        },
+        {
+          "check": "accelerated-packages",
+          "role": "table",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "existing-owner-baselines",
+          "role": "left",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "full-suite-train-gates",
+          "role": "container",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "missing-owner-baselines",
+          "role": "left",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "train-owner-alignment",
+          "role": "left",
+          "suite": "milestone-7-accelerated-execution-replan"
         },
         {
           "check": "accelerated-package",
@@ -7409,6 +7468,11 @@
           "check": "decomposition",
           "role": "table",
           "suite": "launcher-owner-row-14"
+        },
+        {
+          "check": "creation-transitions",
+          "role": "table",
+          "suite": "milestone-7-accelerated-execution-replan"
         },
         {
           "check": "canonical-owner-paths",
@@ -7731,6 +7795,26 @@
           "check": "execution-train",
           "role": "table",
           "suite": "launcher-owner-row-14"
+        },
+        {
+          "check": "existing-owner-baselines",
+          "role": "right",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "full-suite-train-gates",
+          "role": "members",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "missing-owner-baselines",
+          "role": "right",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "train-owner-alignment",
+          "role": "right",
+          "suite": "milestone-7-accelerated-execution-replan"
         },
         {
           "check": "execution-train-owner",
@@ -9618,7 +9702,7 @@
       ]
     },
     {
-      "digest": "sha256:ee20ff465713e97c81df821f95d839a3f4d635ff0cd05861f34b6034285651ca",
+      "digest": "sha256:0d37c726ad8ed06daaad5ee74b5cf919f50f042b5c044d0de15947f1f4092efa",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10714,6 +10798,23 @@
       "path": "evaluation/standards-effectiveness/suites/metadata-fixtures.toml",
       "state": "present",
       "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:83f3cd5fb3e6dfd265336a41e873710cfeb17c8e70fc67ac563e0c05435ea288",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "obsolete-authority",
+          "role": "required-present",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -12935,24 +13036,13 @@
       ]
     },
     {
-      "digest": "sha256:a898b3dfb74130f122fc366370eedca2139421fa3c1a921f772e0593ea0cd435",
       "path": "evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
+          "check": "obsolete-authority",
+          "role": "required-absent",
+          "suite": "milestone-7-accelerated-execution-replan"
         }
       ]
     },
@@ -23358,7 +23448,7 @@
     }
   ],
   "registry": {
-    "digest": "sha256:ee20ff465713e97c81df821f95d839a3f4d635ff0cd05861f34b6034285651ca",
+    "digest": "sha256:0d37c726ad8ed06daaad5ee74b5cf919f50f042b5c044d0de15947f1f4092efa",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
@@ -24887,6 +24977,12 @@
       "digest": "sha256:d9af1608deb2feab365cf238dd188b29a34449c950504cb39d835e3cec84167e",
       "id": "cross-language-contract",
       "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:83f3cd5fb3e6dfd265336a41e873710cfeb17c8e70fc67ac563e0c05435ea288",
+      "id": "milestone-7-accelerated-execution-replan",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml",
       "requires": []
     },
     {
