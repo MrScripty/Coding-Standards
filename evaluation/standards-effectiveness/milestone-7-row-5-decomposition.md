@@ -14,7 +14,7 @@ compatibility, and version-discovery defaults.
 
 This slice changes only:
 
-- this report and its focused checker;
+- this report and its focused declarative suite;
 - the execution decomposition overlay;
 - the acceleration package outcome; and
 - the active plan, acceleration report, evaluation index, findings, and
@@ -114,6 +114,14 @@ This decomposition does not retain:
 - alternate discovery, guessed compatibility, or default success.
 
 Missing contract facts or capability return the applicable typed diagnostic.
+
+## Verifier Ownership
+
+The registered `milestone-7-row-5-decomposition` suite owns the exact row-5
+decomposition, disposition coverage, accelerated package, completed finding,
+and canonical owner-path evidence. The accelerated-execution re-plan and
+execution-train checkers remain independent complete-runner gates; the row-5
+suite does not invoke them.
 
 ## Progress
 
