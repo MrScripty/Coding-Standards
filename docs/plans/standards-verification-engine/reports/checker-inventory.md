@@ -7011,6 +7011,29 @@ evidence pass. Final graph: 10 Bash checkers, 12 nodes, 53 edges, and 12
 components. The old checker is absent without nested execution, a normative
 or legacy source rewrite, compatibility representation, or fallback.
 
+### M6-I117 Rust Async Decomposition Acceptance
+
+Fresh post-M6-I116 evidence reports 9 Bash verifiers, 11 nodes, 45 edges, and
+11 components. Rust Async decomposition and execution-train are the two
+zero-inbound wave-2 roots. The 129-line
+`verify-milestone-7-rust-async-decomposition.sh` has the smaller dependency
+surface with one retained gate versus four.
+
+The `serial-coherent` package registers one eight-check
+`migration.parent-plan` suite. It preserves the exact nine-ID/four-slice map,
+accepted dispositions, inventory sources, owner targets, report semantics,
+parent route, documentation, and terminal path state. Plan fixtures remain
+independent through two M6-I117 dispositions. Ten historical M6-M1, M6-M2,
+M6-I60, M6-I87, and M6-I116 records transfer to suite evidence.
+
+Six rejecting mutations and one accepting report-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph, declarative, generated, numeric, plan, and complete mixed
+evidence pass. Final graph: 8 Bash checkers, 10 nodes, 41 edges, and 10
+components. The old checker is absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.
+
 ### M6-I116 Trust/Lifecycle Re-plan Acceptance
 
 Fresh post-M6-I115 evidence reports 10 Bash verifiers, 12 nodes, 53 edges,

@@ -1334,3 +1334,8 @@ requires = []
 id = "milestone-7-trust-lifecycle-replan"
 path = "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-rust-async-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml"
+requires = []

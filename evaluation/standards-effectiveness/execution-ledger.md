@@ -15680,3 +15680,23 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   numeric, plan, and complete mixed evidence pass. Final graph: 9 Bash
   checkers, 11 nodes, 45 edges, and 11 components; fresh graph evidence is
   required next.
+
+## 2026-09-01 - M6-I117 Rust Async Decomposition Acceptance
+
+- Fresh post-M6-I116 evidence reports 9 Bash verifiers, 11 nodes, 45 edges,
+  and 11 components. Rust Async decomposition and execution-train are the two
+  zero-inbound roots at wave 2. The 129-line Rust Async verifier has the
+  smaller dependency surface with one retained gate versus four. M6-I117 is
+  `serial-coherent` at train order 232.
+- One eight-check `migration.parent-plan` suite preserves the exact nine-ID,
+  four-slice decomposition map, accepted dispositions, inventory sources,
+  owner targets, report semantics, parent route, documentation, and terminal
+  authority state.
+- Plan fixtures remain independent through two M6-I117 edge dispositions. Ten
+  earlier M6-M1, M6-M2, M6-I60, M6-I87, and M6-I116 records transfer to
+  registered suite evidence.
+- Six rejecting mutations and one accepting report-extension mutation prove
+  parity. Exact 22/22 dependency-local renewal leaves 29 requirements stable
+  and closes 51/51 coverage. Focused, graph, declarative, generated, numeric,
+  plan, and complete mixed evidence pass. Final graph: 8 Bash checkers, 10
+  nodes, 41 edges, and 10 components; fresh graph evidence is required next.

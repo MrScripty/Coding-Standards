@@ -819,10 +819,11 @@ separately owned language specialization without nested Bash execution.
 
 `milestone-7-rust-async-decomposition.md` and
 `milestone-7-rust-async-slices.tsv` split the nine Rust Async identifiers into
-four serial specialization slices after generic Concurrency. The focused
-decomposition checker validates exact ownership, proposed dispositions,
-dependency order, lifecycle progress, active-plan handoff, and the
-planning-only boundary without moving normative guidance.
+four serial specialization slices after generic Concurrency. The registered
+`milestone-7-rust-async-decomposition` suite validates exact ownership,
+proposed dispositions, dependency order, lifecycle progress, active-plan
+handoff, and the planning-only boundary without moving normative guidance or
+using nested Bash execution.
 
 `milestone-7-f025-f026-decomposition.md` and
 `milestone-7-f025-f026-slices.tsv` split ten dependent Rust Language Binding
