@@ -1,10 +1,10 @@
 # Plan: Standards Engine A2 Controlled Authoring
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 0 awaiting explicit start admission
+**Current phase:** Milestone 0 A1c preservation and design validation
 
-**Next slice:** Milestone 0 A1c preservation, product, contract, and prototype admission
+**Next slice:** exact isolated prototype execution admission from the committed Milestone 0 protocol
 
 **Acceptance status:** `pending`
 
@@ -297,16 +297,16 @@ decisions through the named reports.
 
 **Tasks:**
 
-- [ ] Route the exact product and artifact facts through the current executable
+- [x] Route the exact product and artifact facts through the current executable
   Router and record selected owners and explicit exclusions.
-- [ ] Build an exact A1c decision-preservation matrix from every binding choice
+- [x] Build an exact A1c decision-preservation matrix from every binding choice
   explicitly selected or clarified by the user. For every A2 design element,
   record `unchanged`, `composed-without-change`, `prohibited-conflict`, or
   `requires-separate-user-reauthorization`; leave no decision implicit.
-- [ ] Trace representative create, discover, revise, query, analyze, approve,
+- [x] Trace representative create, discover, revise, query, analyze, approve,
   apply, stale-head, verification-failure, interruption, recovery, snapshot
   deletion, and agent-handoff workflows through the current A1c Interface.
-- [ ] Inventory every current facade consumer, retained store, deployment,
+- [x] Inventory every current facade consumer, retained store, deployment,
   harness, provider, authorization owner, publication target, repository
   integration, generated artifact, and implementation consumer.
 - [ ] Choose one exact canonical application success meaning. If an external
@@ -331,7 +331,7 @@ decisions through the named reports.
 - [ ] Classify generated, internal-coordinated, persisted, public-versioned,
   and distributed-independent contracts; decide whether A2 is the
   feature-completeness trigger for cross-engine compatibility planning.
-- [ ] Define one design-validation protocol that requires a named question,
+- [x] Define one design-validation protocol that requires a named question,
   effectiveness criterion, efficiency metric and comparison or budget,
   correctness invariants and negative cases, current standards route, deciding
   oracle, environment, limits, and pass, revise, or reject threshold before a
@@ -388,7 +388,7 @@ decisions through the named reports.
 - This plan names one exact first production implementation slice and write set
   before Milestone 0 becomes `Accepted`.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 
@@ -457,4 +457,4 @@ mechanism and evidence; no cleanup is inferred from acceptance or rejection.
 - Deferred follow-ups: Plan C external-project baselines; Windows and macOS
   support; cross-engine stored-state compatibility when Milestone 0 does not
   select A2 as its feature-completeness trigger
-- Final status: `Planned`
+- Final status: `Active`

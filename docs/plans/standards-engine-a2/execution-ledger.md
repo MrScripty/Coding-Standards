@@ -1,5 +1,50 @@
 # Standards Engine A2 Controlled Authoring Ledger
 
+## 2026-09-01 - Milestone 0 Baseline And Protocol
+
+- Executed the current public A1c snapshot and route path. The exact facts
+  selected 22 standards with no unresolved category: Core, Router, eight
+  workflows, the library, generated-contract and persistence profiles, and
+  nine topic owners. Concurrent Plan Integration, language, framework,
+  interop, and IPC profiles remain explicitly unselected for this slice.
+- Indexed 20 explicit A1c user decisions and found no authorized A2 conflict.
+  Cross-engine compatibility remains unresolved until the product owner
+  separately decides whether A2 is the feature-completeness trigger.
+- The bounded repository inventory found the generated A1c contract and test
+  consumers but no non-test runtime import or registration, package entry
+  point, or retained SQLite/database file. This does not claim that external
+  deployments or copied stores are absent.
+- Recorded the current eight-operation v12/request-v4/result-v4/handle-v5
+  public contract and exact Snapshot Module store-v1 schema. A proposal cannot
+  be reinterpreted as either snapshot input accepted by current `query` or
+  `prepare`.
+- Predeclared five isolated prototype questions, comparisons, effectiveness
+  criteria, efficiency measures, correctness invariants and negative cases,
+  executable standards route, oracles, limits, and verdict thresholds before
+  prototype execution.
+- Production source, public contract, generated facade, canonical store, and
+  standards publication remain unavailable. The next coherent boundary is a
+  committed exact-base execution admission for the separately governed
+  prototype branches and worktrees.
+- Verification passed: active-plan structure and lifecycle contracts, exact
+  staged whitespace review, generated freshness at 12 retained Bash verifiers,
+  14 nodes, 81 edges, and 14 components, all 265 registered declarative
+  suites, and all 28 Standards Engine facade tests in 705.764 seconds. The
+  generated suite-input projection changed only its repository-index digest
+  for the five newly tracked Milestone 0 report paths.
+
+## 2026-09-01 - Milestone 0 Start Admission
+
+- The user explicitly invoked `start` for the canonical
+  `docs/plans/standards-engine-a2/plan.md` while the plan was `Planned`.
+- Transitioned the plan and Milestone 0 to `Active`. The exact next slice is the
+  A1c preservation matrix, current consumer/state inventory, and
+  design-validation protocol.
+- Production Standards Engine source, public contract, canonical store,
+  generated facade, and canonical standards mutation remain unavailable.
+- Prototype artifacts remain separately governed isolated-branch work and are
+  not admitted by the lifecycle transition alone.
+
 ## 2026-09-01 - Standards-Compliant Plan Formation
 
 - The user requested that the future A2 proposal be updated for current
