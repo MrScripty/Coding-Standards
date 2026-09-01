@@ -180,3 +180,22 @@
   Planning, Implementation, Verification, Documentation, Commit,
   Architecture, Performance, Contracts, Persistence, Security, Resilience,
   and systemic-finding owners. Tracked and new-file whitespace checks passed.
+
+## 2026-09-01 - Prototype Generated-Input Contract Correction
+
+- Exact staged review of A2-P3 stopped prototype admission before commit when
+  generation added both the expected repository-index digest and an exact
+  `python-package-contract` file-input entry for the staged Python artifact.
+- The prior prototype execution contract was correct for the HTML A2-P1 path
+  but incorrectly generalized that only the repository-index digest could
+  change. The current package-contract input already selects Python files below
+  `tools/standards_engine`; this is generated evidence, not a new canonical
+  consumer or production-source admission.
+- Corrected the plan, validation protocol, and evidence index to permit exactly
+  one path-and-content entry for a selected prototype plus the derived index
+  digest. Existing inputs, registry and suite definitions, graph, inventory,
+  and retirement evidence remain immutable.
+- A2-P3 remains uncommitted in its isolated branch until this canonical re-plan
+  is committed and the exact staged projection, focused prototype runs, and
+  complete declarative checkpoint pass. A2 production source, contracts,
+  stores, facade, and publication authority remain unavailable.

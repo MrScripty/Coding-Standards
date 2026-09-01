@@ -24,6 +24,12 @@ named recovery ref before its worktree is removed. A material result that
 changes a registered question, oracle, state model, or threshold requires a new
 canonical admission.
 
+The generated projection diff is path-sensitive. The HTML P1 artifact changes
+only the repository-index digest. Python artifacts under the existing Engine
+package additionally add their exact path and content digest to the already
+selected `python-package-contract` input set. That derived entry is evidence of
+the staged branch write set, not admission to canonical production source.
+
 ## A2-P1 Authoring State Model
 
 ### Question And Environment

@@ -91,10 +91,13 @@ The authored prototype write set is exactly the path in the registration
 table. Its branch-local commit also owns the mechanically regenerated
 `evaluation/standards-effectiveness/generated/suite-inputs.json` after the
 prototype path is staged. Exact review must show that this generated file
-changes only its repository-index digest. The worktree uses disposable
-repositories and stores only, has no canonical runtime consumer, and is never
-merged; neither the prototype nor its branch-local generated projection enters
-canonical `main`.
+changes only its repository-index digest plus, when the path is already
+selected by a package-contract input, one exact present-file entry for the
+authored prototype path and content digest. Existing file entries, registry and
+suite-definition digests, graph, inventory, and retirement evidence must
+remain unchanged. The worktree uses disposable repositories and stores only,
+has no canonical runtime consumer, and is never merged; neither the prototype
+nor its branch-local generated projection enters canonical `main`.
 
 Each prototype is committed with focused reproduction evidence. The canonical
 [prototype evidence index](prototype-evidence-index.md) later records the exact
