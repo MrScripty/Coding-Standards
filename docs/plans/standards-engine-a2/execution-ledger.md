@@ -410,3 +410,45 @@
   product-owner disposition: reopen A1c analysis identity, permit proposal
   snapshot authority, permit a second analysis authority, or reduce A2's
   projected-analysis objective. A2 selects none of these by implication.
+
+## 2026-09-01 - Projected-Material Reauthorization And Re-Plan
+
+- After reviewing the P2R collision and the proposed correction, the user
+  explicitly selected the narrow A1c evolution that includes one exact
+  immutable projected proposal revision in Analysis identity, typed dependency
+  closure, and cold replay. This supersedes only the snapshot-only proposed
+  analysis-material assumption for design validation.
+- The selected candidate is one closed Analysis-owned proposed-material value
+  with snapshot and projected-revision variants. A private material-resolution
+  seam has two Adapters feeding the existing compiler and Analysis kernel.
+  Authoring owns immutable revisions and the mutable proposal head; Analysis
+  remains the only analysis authority; Snapshot remains the one SQLite
+  aggregate owner.
+- Proposal-as-snapshot, mutable or ambient current-head resolution,
+  invocation-only material, identity salting, composite external handles, a
+  second authoring-analysis state, public generic storage, and changes to the
+  existing eight A1c operation roots remain unauthorized.
+- Planning authority does not admit an A1c ADR amendment, generated contract,
+  store or state version, migration, public operation shape, production source,
+  or canonical implementation. The current A1c ADR and implementation remain
+  runtime authority until an accepted prototype and later exact cutover plan
+  supersede them.
+- Registered A2-P2R2 at
+  `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py`.
+  Its oracle requires injective canonical identity, exact fresh-process replay
+  after head movement, unchanged snapshot behavior, real SQLite dependency and
+  lifecycle proof, exact missing/wrong-base/tampered/quarantined outcomes,
+  bounded reference rather than corpus-sized state, one authority, and
+  dependency-complete Linux CPython 3.11 and 3.12 execution.
+- P2R2 execution admission is the one next slice. Its branch, worktree, exact
+  base, and prototype-only write set must be committed before creation. P4R,
+  P5, ADR work, and production planning remain blocked until P2R2 passes; a
+  failure returns to product re-planning without selecting a rejected fallback.
+- This canonical planning slice passed A2 plan structure, plan lifecycle
+  fixtures, generated freshness at 12 Bash verifiers, 14 graph nodes, 81 edges,
+  and 14 components, all 265 declarative suites, and diff integrity.
+  After staging the new tracked reauthorization report, regeneration changed
+  only the generator-owned repository-index digest; graph, structure inventory,
+  registry, suite definitions, existing file entries, and retirement evidence
+  remained unchanged. Exact staged-scope, sensitive-value, and
+  conventional-message review remain Commit-owned gates.

@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1 and P3 pass; P2 and P4 revise; P2R rejected pending product
-reauthorization; P4R and P5 blocked`
+**Status:** `P1 and P3 pass; P2 and P4 revise; P2R rejected; exact A1c
+reauthorization recorded; P2R2 planned; P4R and P5 blocked`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -13,6 +13,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; original `/tmp/coding-standards-a2-p1-state-model` now contains out-of-scope M6 work | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `archive-protected` exactly at `refs/archive/a2-prototypes/p1-state-model`; live worktree unavailable to A2 |
 | A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `3bab6e981d6e902e087f485c03fca78d0505a39e` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p2-projected-view` |
 | A2-P2R | `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py` | `prototype/a2-m0-projected-analysis-replay`; removed `/tmp/coding-standards-a2-p2r-projected-analysis-replay` | `c509d61ed0537907191ea615f4a613fc02dabcb2` | `a0478c5c363d851435f193ef5be7ec75255378af` | `reject-requires-product-reauthorization` | `removed-archived` at `refs/archive/a2-prototypes/p2r-projected-analysis-replay` |
+| A2-P2R2 | `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py` | `prototype/a2-m0-projected-material-identity`; `/tmp/coding-standards-a2-p2r2-projected-material-identity` not created | pending execution-admission commit | pending | pending | pending; expected `removed-archived` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
@@ -26,17 +27,20 @@ named recovery ref before its worktree is removed. A material result that
 changes a registered question, oracle, state model, or threshold requires a new
 canonical admission.
 
-The generated projection diff is path-sensitive. P1 and the Python P2 through
-P5 artifacts must change only the repository-index digest. Python prototypes
-remain below the package's existing `tests` boundary; no prototype becomes a
-production package input or requires production ownership. P2 through P4 must
-move their unchanged authored file to the corrected exact path and fast-forward
+The generated projection diff is path-sensitive. P1 and every Python prototype
+(P2, P2R, P2R2, P3, P4, and P5) must change only the repository-index digest.
+Python prototypes remain below the package's existing `tests` boundary; no
+prototype becomes a production package input or requires production ownership.
+P2, P3, and P4 must move their unchanged authored file to the corrected exact
+path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
-before staging. P5 must be created directly from that re-admitted base. No
-other prototype-source rewrite, merge, or copying is authorized by this
-correction. Exact review may update only a moved artifact's embedded run path
-and minimum `__file__` parent depth under the separately recorded relocation
-rule; the final evidence must record the resulting source identity.
+before staging. P5 must be created directly from that re-admitted base. P2R2
+must be created only after its separately committed execution admission names
+the current exact base. No other prototype-source rewrite, merge, or copying
+is authorized by this correction. Exact review may update only a moved
+artifact's embedded run path and minimum `__file__` parent depth under the
+separately recorded relocation rule; the final evidence must record the
+resulting source identity.
 
 ## A2-P1 Authoring State Model
 
@@ -282,9 +286,14 @@ analysis is no longer required is the non-reauthorization alternative. Each
 choice materially changes product scope or a protected A1c decision and
 requires an explicit user decision plus a re-plan; A2 cannot choose it.
 
+On 2026-09-01 the user subsequently selected the A1c identity/codec evolution
+for prototype-first validation. That authority does not change P2R's rejection
+verdict or admit its source. The exact selected scope is recorded in the
+[projected-material reauthorization](a1c-projected-material-reauthorization.md),
+and P2R2 now owns the new deciding prototype.
+
 P4R, P5, the public contract, persisted authoring design, facade, and production
-implementation remain unavailable until that disposition is recorded and the
-selected boundary receives a newly admitted prototype.
+implementation remain unavailable until P2R2 accepts the selected boundary.
 
 ### Archived Worktree Contract
 
@@ -426,10 +435,11 @@ dispatch and A1c `query`/`inspect` overload. Do not admit the eight candidate
 roots, candidate contract version, request fields, internal seams, or modeled
 workflow.
 
-P4R must follow P2R. It must remove proposal-as-snapshot, keep analysis,
-approval, and readiness immutable and explicitly addressed, and obtain target
-authority from trusted deployment context while preserving P3's expected-ref
-publication internally. If it cannot do so, the facade remains rejected.
+P4R must follow an accepted P2R2. It must remove proposal-as-snapshot, keep
+analysis, approval, and readiness immutable and explicitly addressed, and
+obtain target authority from trusted deployment context while preserving P3's
+expected-ref publication internally. If it cannot do so, the facade remains
+rejected.
 
 ### Archived Worktree Contract
 

@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 A1c preservation and design validation
+**Current phase:** Milestone 0 A1c projected-material reauthorization and
+design validation
 
-**Next slice:** Product-owner disposition of the A1c projected-analysis
-identity conflict
+**Next slice:** A2-P2R2 isolated projected-material identity execution
+admission
 
 **Acceptance status:** `pending`
 
@@ -15,6 +16,9 @@ identity conflict
 
 **Formation audit:**
 [A2 current-boundary and standards audit](reports/formation-and-standards-audit.md)
+
+**A1c reauthorization:**
+[Projected-material identity and replay](reports/a1c-projected-material-reauthorization.md)
 
 ## Objective
 
@@ -26,11 +30,13 @@ canonical standards authority without exposing partial publication or guessing
 at stale, interrupted, or unknown outcomes.
 
 Every A2 design preserves the explicit user-selected A1c product and
-architecture decisions. Milestone 0 owns the product, contract, architecture,
-and design-validation facts required to make the A2 objective implementable.
-It admits only isolated, disposable prototypes and minimum viable design tests;
-it does not authorize production source, public contract, persisted-store, or
-canonical-standards mutation.
+architecture decisions except the one exact snapshot-only proposed-material
+assumption the user reauthorized for projected-material identity validation on
+2026-09-01. Milestone 0 owns the product, contract, architecture, and
+design-validation facts required to make the A2 objective implementable. It
+admits only isolated, disposable prototypes and minimum viable design tests; it
+does not authorize production source, public contract, persisted-store, ADR,
+or canonical-standards mutation.
 
 ## Objective Acceptance
 
@@ -46,7 +52,7 @@ canonical-standards mutation.
 | A2-A8 | One canonical generated public contract governs every admitted authoring input, result, handle, operation capability, typed failure, Python model, agent-tool projection, example, and actual facade path; freshness, semantic conformance, and public behavior have separate deciding evidence. | `contract` | `repository-supported verification environments` | `automated` | `pending` | pending |
 | A2-A9 | Real Linux CPython 3.11 and 3.12 evidence exercises cross-invocation proposal work, concurrent head and target changes, Git and SQLite behavior, authorization, verification failure, interruption recovery, and the complete public workflow. | `user-workflow` | `required-real` | `automated` | `pending` | pending |
 | A2-A10 | One coherent candidate has complete implementation-consumer dispositions, exact policy-impact and coverage closure, focused and repository-wide verification, and independent Standards and specification acceptance. | `integration` | `not-applicable` | `manual` | `pending` | pending |
-| A2-A11 | An exact preservation matrix demonstrates that every explicit user-selected A1c decision remains unchanged and that each A2 responsibility is either a non-conflicting composition, an A2-local addition, or unavailable pending separate explicit user authority; no A2 plan, prototype, contract, migration, or implementation silently supersedes A1c. | `contract` | `not-applicable` | `manual` | `pending` | pending |
+| A2-A11 | An exact preservation matrix demonstrates that every explicit user-selected A1c decision is unchanged or has one exact explicit user reauthorization with supersession scope and new acceptance evidence; each A2 responsibility is a non-conflicting composition, an A2-local addition, or unavailable. No plan, prototype, contract, migration, or implementation silently supersedes A1c. | `contract` | `not-applicable` | `manual` | `pending` | [Projected-material reauthorization](reports/a1c-projected-material-reauthorization.md) and pending independent reconciliation |
 | A2-A12 | Before a material A2 design or procedure is admitted, a question-specific disposable prototype or minimum viable test records representative workflows, predeclared effectiveness criteria, an owned efficiency metric and comparison or budget, correctness invariants and negative cases, the current routed standards set, deciding oracles, limitations, and a pass, revise, or reject disposition. | `integration` | `representative` | `manual` | `pending` | pending |
 | A2-A13 | No production Standards Engine source, public contract, canonical store, generated facade, or canonical standards authority changes before A2-A11 and every design-dependent A2-A12 record required by the exact implementation slice are accepted; prototype shells, fake success, test-only state, and scratch persistence remain unreachable from and absent from the canonical implementation. | `integration` | `not-applicable` | `automated` | `pending` | pending |
 | A2-A14 | Every A2 plan, procedure, prototype-evidence, and implementation outcome is routed through the current applicable standards, passes claim-matched verification, receives exact staged-scope and sensitive-file review, and is recorded through a coherent conventional commit boundary selected by the Commit workflow without plan-owned commit topology. | `integration` | `repository-supported verification environments` | `manual` | `pending` | pending |
@@ -86,7 +92,8 @@ canonical-standards mutation.
 
 - Production implementation during Milestone 0.
 - Changing, weakening, reinterpreting, or silently superseding an explicit
-  user-selected A1c design decision.
+  user-selected A1c design decision outside the exact projected-material
+  identity reauthorization recorded by this plan.
 - Treating an unvalidated design as implementation authority or placing
   prototype-only source, fake state, scratch stores, or test scaffolding in the
   canonical Standards Engine implementation.
@@ -113,11 +120,12 @@ canonical-standards mutation.
 - The current accepted A1c architecture and its corrective revalidation are
   the implementation baseline. Historical A1 packet, report, authority-view,
   and A1b persistence mechanisms are evidence, not fallback design authority.
-- Explicit user-selected A1c decisions are immutable inputs to A2. When an A2
-  idea conflicts with one, the idea is `invalid` for A2; work stops until the
-  user separately and explicitly authorizes reconsideration through an A1c
-  re-plan. A2 acceptance, prototype evidence, convenience, or implementation
-  pressure cannot supply that authority.
+- Explicit user-selected A1c decisions are immutable inputs to A2 unless the
+  user separately and exactly reauthorizes one through an A1c re-plan. The
+  2026-09-01 authority covers only replacement of snapshot-only proposed
+  analysis material with an exact immutable projected-revision reference. A2
+  acceptance, prototype evidence, convenience, or implementation pressure
+  cannot broaden that authority.
 - The user authorized formation of a standards-compliant proposal, not
   production implementation or canonical standards mutation.
 - Milestone 0 is the only admitted discovery scope. No production edit is
@@ -177,8 +185,9 @@ canonical-standards mutation.
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
 | This plan is the sole current planning authority for A2. The Plan A1 brief's controlled-authoring passages remain historical discovery evidence and must be interpreted through current A1c terminology. | Planning owner | [Formation audit](reports/formation-and-standards-audit.md) and the historical brief's non-authorizing status | Scattered future-A2 notes as an apparent proposal |
-| Treat every explicit user-selected A1c product and architecture decision as a protected inherited contract. A2 may compose new authoring behavior around it but may not change, weaken, reinterpret, migrate away from, or supersede it. A conflict is `invalid` until separate explicit user authority and an A1c re-plan exist. | User and A1c product owner | Accepted [A1c binding decisions](../standards-engine-a1c/plan.md#binding-decisions) and the [formation audit](reports/formation-and-standards-audit.md#a1c-user-decision-preservation-boundary) | A2 ownership treated as authority to reopen A1c |
-| Preserve A1c snapshot immutability, unique lifecycle roots, generated facade, single aggregate `AnalysisState`, deterministic pending and complete projections, exact dependency-local coverage, opaque handles, and typed failures. Extend them through composition rather than reopening A1c generally. | A2 product and Architecture owners | Accepted [A1c ADR](../../decisions/standards-engine-a1c.md) and [corrective plan](../standards-engine-a1c-repair/plan.md) | Pre-A1c packet, report, generic authority, or mutable analysis designs |
+| Treat every explicit user-selected A1c product and architecture decision as a protected inherited contract unless an exact later user decision reauthorizes it through an A1c re-plan. The 2026-09-01 reauthorization is limited to projected-material Analysis identity and replay; every other A1c choice remains protected. | User and A1c product owner | Accepted [A1c binding decisions](../standards-engine-a1c/plan.md#binding-decisions), the [formation audit](reports/formation-and-standards-audit.md#a1c-user-decision-preservation-boundary), and the [exact reauthorization](reports/a1c-projected-material-reauthorization.md) | A blanket prohibition on any A1c reconsideration, and A2 ownership treated as authority to reopen unrelated A1c choices |
+| Evolve the snapshot-only proposed input of one immutable `AnalysisState` into one exact immutable proposed-material reference whose closed variants identify either an accepted snapshot or a projected proposal revision. Include that reference in Analysis identity, typed dependency closure, and cold replay; a proposal revision is not snapshot authority. This decision authorizes prototype-first validation, not canonical implementation or ADR amendment. | User, A1c product owner, Analysis, Authoring, and Architecture owners | [P2R terminal evidence](reports/prototype-evidence-index.md#a2-p2r-projected-analysis-identity-and-replay) and [projected-material reauthorization](reports/a1c-projected-material-reauthorization.md) | A1c proposed analysis material restricted to `SnapshotId` and the prior P2R product-reauthorization blocker |
+| Preserve A1c snapshot immutability, unique lifecycle roots, generated facade, single aggregate `AnalysisState`, deterministic pending and complete projections, exact dependency-local coverage, opaque handles, and typed failures. Use one private material-resolution seam with snapshot and projected-revision Adapters feeding the same compiler and Analysis kernel; do not create a second analysis authority or public generic material Interface. | A2 product and Architecture owners | Accepted [A1c ADR](../../decisions/standards-engine-a1c.md), [corrective plan](../standards-engine-a1c-repair/plan.md), and the [deep Module composition](reports/a1c-projected-material-reauthorization.md#selected-composition) | Pre-A1c packet/report designs, proposal-as-snapshot, mutable analysis, composite external handles, or a second authoring-analysis state |
 | Store proposed edits as non-Git change material rooted in one immutable A1c snapshot. A revision owns exact proposed content and semantic-proposal material but is not accepted canonical authority. | Authoring and Snapshot owners | Accepted [A1c product decision](../standards-engine-a1c/plan.md#binding-decisions) | Embedded Git repositories, full corpus copies per edit, or proposal-as-accepted-snapshot |
 | Keep revisions immutable and content-bound while one proposal lifecycle root owns a durable mutable head. Advance the head only from an exact expected revision through compare-and-swap; keep A1c analysis transitions immutable and branchable. | Authoring, Concurrency, and Persistence owners | Accepted [A1 single-state replan](../standards-engine-navigation-analysis/reports/milestone-4-packet-supersession-replan.md) | Mutable packet/report supersession or a mutable analysis head |
 | Bind apply readiness to the current complete A1c `AnalysisHandle`; do not store or accept an independently authored completion Boolean. Semantic, relationship, and lifecycle acceptance remain separately authorized authoring decisions. | Authoring and Analysis owners | Current A1c contract and historical A2 separation rationale | `CompletedAnalysisReport`, packet completeness, or analysis completion as apply authority |
@@ -266,9 +275,10 @@ canonical-standards mutation.
 
 **Goal:** Produce one independently reviewed product, Interface, authority,
 persistence, application, recovery, dependency, platform, design-validation,
-and acceptance design that preserves every explicit A1c user decision and can
-admit an exact first A2 implementation slice without relying on stale A1
-terminology, paper-only assumptions, or unresolved publication facts.
+and acceptance design that preserves every unreopened A1c user decision,
+validates the one exact projected-material reauthorization, and can admit an
+exact first A2 implementation slice without relying on stale A1 terminology,
+paper-only assumptions, or unresolved publication facts.
 
 **Allowed write set:**
 
@@ -277,6 +287,7 @@ terminology, paper-only assumptions, or unresolved publication facts.
 - `docs/plans/standards-engine-a2/issues.md`
 - `docs/plans/standards-engine-a2/reports/product-contract-discovery.md`
 - `docs/plans/standards-engine-a2/reports/a1c-user-decision-preservation.md`
+- `docs/plans/standards-engine-a2/reports/a1c-projected-material-reauthorization.md`
 - `docs/plans/standards-engine-a2/reports/consumer-and-state-inventory.md`
 - `docs/plans/standards-engine-a2/reports/interface-and-composed-design.md`
 - `docs/plans/standards-engine-a2/reports/application-and-recovery-contract.md`
@@ -288,12 +299,14 @@ terminology, paper-only assumptions, or unresolved publication facts.
 - `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html`
 - `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/projected-analysis-replay.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py`
 
-The six currently registered prototype paths are writable only in governed isolated prototype
-branches or worktrees and never enter the canonical integration branch. The
+The seven currently registered prototype paths are writable only in governed
+isolated prototype branches or worktrees and never enter the canonical
+integration branch. The
 canonical branch accepts their exact evidence pointers, verdicts, and validated
 decisions through the named reports. Each prototype branch also owns its local
 mechanically regenerated `evaluation/standards-effectiveness/generated/suite-inputs.json`
@@ -314,6 +327,10 @@ canonical `main`.
   explicitly selected or clarified by the user. For every A2 design element,
   record `unchanged`, `composed-without-change`, `prohibited-conflict`, or
   `requires-separate-user-reauthorization`; leave no decision implicit.
+- [x] Record the user's exact 2026-09-01 reauthorization of projected-material
+  Analysis identity and replay, its supersession scope, the unchanged A1c
+  choices, and the prohibition on treating planning authority as production or
+  ADR amendment authority.
 - [x] Trace representative create, discover, revise, query, analyze, approve,
   apply, stale-head, verification-failure, interruption, recovery, snapshot
   deletion, and agent-handoff workflows through the current A1c Interface.
@@ -362,7 +379,13 @@ canonical `main`.
   seam and require product reauthorization if those constraints cannot coexist.
   P2R rejected all five bounded representation seams and admitted no A2 design;
   exact evidence is recorded in the prototype index.
-- [ ] Revise P4 only after P2R settles projected analysis identity. Retest the
+- [ ] Run A2-P2R2 against the selected exact projected-revision material
+  reference. Prove injective canonical identity, unchanged snapshot analysis,
+  exact cold-process replay after head movement, real SQLite dependency and
+  lifecycle behavior, typed missing/wrong-base/tampered/quarantined outcomes,
+  bounded identity overhead, one Analysis authority, and dependency-complete
+  Linux CPython 3.11 and 3.12 execution before admitting an ADR or source plan.
+- [ ] Revise P4 only after P2R2 accepts projected-material identity. Retest the
   explicit additive facade without a projected `SnapshotHandle`, mutable
   current-evidence selector, caller-supplied ref or object ID, tagged dispatch,
   or A1c query/inspect overload before selecting any operation root.
@@ -389,8 +412,9 @@ canonical `main`.
 - The product owner selects the exact caller-visible application outcome and
   accepts every representative workflow and typed terminal result.
 - The A1c preservation report covers every explicit user-selected decision,
-  records no unauthorized change, and is independently reconciled against the
-  accepted A1c plan and current public behavior.
+  distinguishes unchanged choices from the one exact projected-material
+  reauthorization, records no unauthorized expansion, and is independently
+  reconciled against the accepted A1c plan and current public behavior.
 - Every material design and procedure has accepted, question-specific
   effectiveness, efficiency, correctness, and standards-compliance evidence.
   Prototype success is used only to admit a decision; no prototype source or
@@ -414,12 +438,12 @@ canonical `main`.
 
 ## Blockers
 
-- A2-P2R found no injective, immutable, cold-replayable projected-analysis seam
-  that preserves the unchanged A1c `AnalysisState`, non-Git proposal material,
-  no-proposal-snapshot choice, and single analysis authority. P4R, P5, and A2
-  production planning remain unavailable until the product owner explicitly
-  reauthorizes one protected A1c boundary through an A1c re-plan or reduces the
-  A2 objective so projected proposal analysis is no longer required.
+- No blocker affects A2-P2R2 execution admission. The user supplied the exact
+  product reauthorization needed to validate projected-material identity.
+- P4R, P5, an A1c ADR amendment, public or persisted contract selection, and
+  production planning remain unavailable until A2-P2R2 passes every identity,
+  replay, lifecycle, single-authority, efficiency, platform, and
+  standards-compliance threshold.
 - Production implementation remains unavailable until A2-A11 and every
   design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
   the plan names and admits an exact implementation slice.
@@ -433,7 +457,8 @@ canonical `main`.
 - Proposal content cannot pass through the existing semantic owners without a
   material A1c Interface or Analysis replacement.
 - Any design requires changing, weakening, or reinterpreting an explicit
-  user-selected A1c decision.
+  user-selected A1c decision outside the exact projected-material identity and
+  replay reauthorization.
 - A prototype or minimum viable test fails, lacks a deciding oracle, cannot
   establish a representative effectiveness or efficiency claim, or reveals a
   materially different state, trust, persistence, or publication model.
