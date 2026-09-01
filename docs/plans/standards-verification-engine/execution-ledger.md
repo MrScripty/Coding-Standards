@@ -7247,3 +7247,25 @@
   and closes 51/51 coverage. Focused, graph, declarative, generated, numeric,
   plan, and complete mixed evidence pass. Final graph: 8 Bash checkers, 10
   nodes, 41 edges, and 10 components.
+
+## 2026-09-01 - M6-I118 Execution-Train Admission
+
+- Fresh post-M6-I117 evidence reports 8 Bash verifiers, 10 nodes, 41 edges,
+  and 10 components. The 234-line execution-train verifier is the sole
+  zero-executable-inbound root at the highest wave, wave 2. It owns four
+  retained verifier dependencies and two frozen contract references.
+- M6-I118 is admitted as `shared-contract` at train order 233 because exact
+  lifecycle parity requires one typed, migration-only Python check kind. The
+  check owns immutable-train expansion, decomposition coverage, disposition
+  progress, owner-transition sequencing, owner-path state, and active-cluster
+  ordering without arbitrary command execution or copied derived state.
+- The frozen write set includes one registered suite, the typed check and its
+  direct tests, terminal migration-Python disposition, eight current edge
+  dispositions, 128 historical gate transfers, generated evidence, exact
+  dependency-local coverage renewal, documentation, and plan acceptance
+  records. Rolling decomposition, owner-state transitions, plan fixtures, and
+  verification-gate policy remain independent retained gates.
+- Acceptance requires Bash/Python mutation parity, direct Python negative
+  tests, package and edge authority, exact generated freshness, numeric
+  lifecycle, focused independent gates, complete declarative verification,
+  both plan checks, and the complete mixed checkpoint.

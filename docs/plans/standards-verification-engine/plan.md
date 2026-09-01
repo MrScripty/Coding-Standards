@@ -5,16 +5,18 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I117 graph audit; do not preselect the next
-package from evidence captured before this accepted serial-coherent package
+**Next slice:** implement admitted M6-I118 from its frozen shared-contract
+boundary, then run its focused, mutation, graph, coverage, and complete mixed
+acceptance evidence
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I117 replaced the Rust Async decomposition Bash
 checker with registered declarative authority at train order 232.
 
-**Latest admitted slice:** `none`; the next package requires fresh graph and
-ownership evidence.
+**Latest admitted slice:** M6-I118 admits the execution-train Bash checker for
+replacement by one migration-owned typed Python check and registered suite at
+train order 233.
 
 **Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
