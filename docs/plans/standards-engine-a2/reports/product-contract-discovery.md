@@ -1,6 +1,6 @@
 # A2 Product-Contract Discovery
 
-**Status:** `working evidence; application success selection pending`
+**Status:** `direct canonical publication selected; exact contract pending`
 
 ## Caller And Deployment
 
@@ -46,6 +46,26 @@ by the Engine. The caller must not supply:
 
 ## Application Success Decision
 
+On 2026-09-01 the user directed A2 to proceed with the recommended direct
+canonical-publication outcome. The configured Coding Standards repository and
+its `refs/heads/main` ref are the one target authority. The Authoring Module,
+not the caller, resolves that repository, target ref, expected old object, and
+candidate object from trusted execution context and durable state.
+
+`applied` means all of the following are established:
+
+1. the candidate bytes passed every required verification;
+2. the configured canonical ref changed from the internally captured expected
+   object to the verified candidate through an atomic expected-target update;
+3. a post-publication observation resolves that ref to the exact candidate; and
+4. the durable application attempt records the established identity.
+
+A candidate commit, export, or external submission is not `applied`. An
+unavailable or contradictory observation never guesses success and remains a
+typed recovery outcome. This product decision selects the success meaning; it
+does not yet admit a public result schema, Git implementation, store version,
+migration, or production source.
+
 One exact caller-visible meaning remains to be selected after the real scratch
 publication/recovery prototype:
 
@@ -56,9 +76,8 @@ publication/recovery prototype:
 | Patch export | A verified external artifact was produced | `exported` | External integration remains unobserved; A2 cannot report `applied`. |
 | Pull-request submission | A request was accepted by an external service | `submitted` | Merge and canonical publication remain external and must be confirmed independently. |
 
-The current recommendation to test is direct canonical-ref publication because
-it is the only candidate that satisfies the accepted A2 objective without an
-external observer. The recommendation is not yet a product selection. A
+Direct canonical-ref publication is selected because it is the only candidate
+that satisfies the accepted A2 objective without an external observer. A
 successful candidate commit, export, or submission cannot be relabeled
 `applied`.
 
@@ -66,11 +85,9 @@ successful candidate commit, export, or submission cannot be relabeled
 
 The product owner must still select:
 
-1. the exact canonical target and direct-publication versus external-
-   integration outcome;
-2. whether A2 constitutes Coding Standards feature completeness for the A1c
+1. whether A2 constitutes Coding Standards feature completeness for the A1c
    cross-engine compatibility decision; and
-3. whether proposal abandonment has a caller-required lifecycle distinct from
+2. whether proposal abandonment has a caller-required lifecycle distinct from
    deletion of its base snapshot.
 
 No production Interface or persisted design is admitted while these choices

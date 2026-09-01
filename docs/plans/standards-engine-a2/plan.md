@@ -176,9 +176,10 @@ or canonical-standards mutation.
 - The current repository may have A1c stores or public consumers created after
   the historical empty inventory. The Contracts owner must perform a fresh
   bounded inventory rather than inheriting the old absence finding.
-- The selected canonical publication outcome may be an atomic canonical-ref
-  update or an externally integrated artifact. The product owner must choose
-  one exact success meaning; Milestone 0 may not describe both as `Applied`.
+- The selected canonical publication outcome is an atomic expected-target
+  update of the configured Coding Standards `refs/heads/main`. Only an exact
+  observed verified candidate at that ref is `applied`; external artifacts or
+  submissions are distinct non-application outcomes.
 
 ## Binding Decisions
 
@@ -193,6 +194,7 @@ or canonical-standards mutation.
 | Bind apply readiness to the current complete A1c `AnalysisHandle`; do not store or accept an independently authored completion Boolean. Semantic, relationship, and lifecycle acceptance remain separately authorized authoring decisions. | Authoring and Analysis owners | Current A1c contract and historical A2 separation rationale | `CompletedAnalysisReport`, packet completeness, or analysis completion as apply authority |
 | Treat controlled authoring as one coherent responsibility and evaluate one deep Authoring Module whose Interface hides revision identity, head coordination, approval invalidation, staging, publication, and recovery mechanics. Add only evidence-backed internal seams and Adapters. | Architecture owner | [Formation audit](reports/formation-and-standards-audit.md) and Architecture composed-design admission | Separate shallow public Modules for revisions, heads, approvals, attempts, and recovery |
 | Write and prove an isolated candidate before authoritative publication whenever the selected repository mechanism supports that ordering. Publish only through an exact expected-target transition and return success only after the published identity and postcondition are established. | Authoring, Persistence, Repository, Verification, and Commit owners | Persistence durable-mutation contract and historical A2 post-write-verification requirement | Publish-then-hope, default rollback, or successful staging treated as application |
+| Publish a verified candidate directly to the configured Coding Standards `refs/heads/main` and return `applied` only after an atomic expected-target transition and exact postcondition observation. Keep the repository, ref, expected object, candidate object, and Git coordination behind the Authoring Interface. | User, Product, Authoring, Repository Adapter, and Release owners | [Selected application success](reports/product-contract-discovery.md#application-success-decision) and accepted P3 publication/recovery evidence | Candidate creation, patch export, or external submission treated as application; caller-supplied Git target facts; success inferred from an unavailable observation |
 | Handles identify state but grant no capability. Trusted execution context supplies operation-specific authority, and apply-time proof binds the exact revision, target, action, evidence, and current authorization authority. | Security and Authoring owners | Accepted A1c authorization decision and Security input-validation authority | Self-asserted request capabilities, possession authority, or proposal-time authorization reused without proof |
 | Select public and persisted compatibility only from a fresh producer, consumer, retained-state, deployment, and feature-completeness inventory. Use coordinated replacement when all affected contracts are owned and no overlap is promised; add migration or compatibility only for a real supported consumer. | Contracts, Persistence, and Release owners | Contracts evolution policy and A1c's deferred cross-engine promise | Automatic v12/store-v1 compatibility, speculative dual readers, or silent reinterpretation |
 | Retain Linux CPython 3.11 and 3.12 as the only current platform claim. Platform-neutral design remains a constraint, not evidence for Windows or macOS support. | Product and Platform owners | Accepted A1c platform evidence | Inheriting A1c read-only evidence for new authoring, Git-write, or recovery behavior |
@@ -337,9 +339,12 @@ canonical `main`.
 - [x] Inventory every current facade consumer, retained store, deployment,
   harness, provider, authorization owner, publication target, repository
   integration, generated artifact, and implementation consumer.
-- [ ] Choose one exact canonical application success meaning. If an external
+- [x] Choose one exact canonical application success meaning. If an external
   patch or pull-request integration is selected, use an exported or submitted
   outcome until external canonical publication is independently confirmed.
+  The user selected direct expected-target publication to the configured
+  Coding Standards `refs/heads/main`; only its exact observed verified
+  candidate postcondition is `applied`.
 - [ ] Compare proposal-view Interface designs against caller knowledge, A1c
   reuse, public contract evolution, identity meaning, migration, failure,
   Locality, and Depth; reject both proposal-as-snapshot and a second analyzer.

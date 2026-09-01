@@ -579,3 +579,22 @@
   through the complete checkpoint, and diff integrity. Regeneration changed no
   canonical artifact. Exact staged-scope, sensitive-value, and conventional-
   message review remain Commit-owned gates.
+
+## 2026-09-01 - Direct Canonical Publication Selected
+
+- In response to the explicit product-choice request, the user directed A2 to
+  proceed with the recommended direct canonical-publication outcome. The
+  configured Coding Standards repository and `refs/heads/main` are the one
+  canonical publication authority; callers never supply a repository, ref,
+  expected object, candidate object, or Git coordination fact.
+- `applied` now has one exact meaning: verified candidate bytes were published
+  from the internally captured expected target through an atomic compare-and-
+  swap, a post-publication observation resolved the configured ref to that
+  exact candidate, and the durable attempt retained the established identity.
+- Candidate creation, patch export, and external submission remain distinct
+  non-application outcomes. Unavailable or contradictory observation remains
+  typed recovery evidence and never implies success or default rollback.
+- This resolves A2-002 and the product fact needed by the P4R terminal
+  operation comparison. It does not admit a result schema, target-selection
+  input, Git implementation, store/version change, migration, ADR, or
+  production source. P4R execution admission remains the next slice.
