@@ -2,7 +2,7 @@ schema_version = 5
 
 # workflow.commit.branch-context
 [[attestations]]
-requirement_id = "sha256:8e1f212708a768b1cbe1a663d27eed2945ceb975884529734c665dde0396d4db"
+requirement_id = "sha256:78414ab7d7d38a2b829dc22c66697ddd386908c5f26fe4b88070bc3970347ad5"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -20,7 +20,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.branch-history-review
 [[attestations]]
-requirement_id = "sha256:ee3ef78548039a64fd7829cffcb54c2ac926082e78bbd8773a8b74902a6aca74"
+requirement_id = "sha256:7b140b8a07cc5e1e80850c2e6211995df4d24cf16109339a96fd759e2f20e98d"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -38,7 +38,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.cherry-pick-lineage
 [[attestations]]
-requirement_id = "sha256:bef85fafd22a7c63e3dfc122b4a56e6fc4a2c2e0d441617699e7084f30260764"
+requirement_id = "sha256:3af0c5b0aff88d3d08ad0e79c2188506634fcc5484239168f64111bc54e0c423"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -56,7 +56,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.commit-message
 [[attestations]]
-requirement_id = "sha256:6621a87fe11ef419cd892350815810778b63396588512974a5b85066a5cae175"
+requirement_id = "sha256:f02c0d79cdcb1a04f262339601a2632c945c7f4af60120887f551e1d2e0f6cb9"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -74,7 +74,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.hook-bypass-authority
 [[attestations]]
-requirement_id = "sha256:465ef1119eb864e4ad486480504794025658c516a72e6710e6bbcd24e8000663"
+requirement_id = "sha256:a54467b2a3979f73dc5cdab623ab66f0ef89f1a98975c376d4f99f6a811f3035"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -92,7 +92,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.integration-mechanisms
 [[attestations]]
-requirement_id = "sha256:5fea079ca29220c7386a257e02597f141e9f72d39ccaf64b4fe6cdc382fcaded"
+requirement_id = "sha256:f83152e5a896b85881cce87a0c7e0af4a2ce65f0c66a7e741dcd756ac5020e4b"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -110,7 +110,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.invalid-outcomes
 [[attestations]]
-requirement_id = "sha256:9d36b0c7167753a18e55852dd4d712770f21cbf6a69a65a3560f06a13b8e5225"
+requirement_id = "sha256:fbfb8f533e46dbf409c7d45718c719310a1e05070eaf3441b6a6346faa8b750d"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -128,7 +128,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.isolation-applicability
 [[attestations]]
-requirement_id = "sha256:f8a4eb68c6e2b64b4bdf7776a5658a07e4de2dd250baa4808a4cbf8b248a7043"
+requirement_id = "sha256:fd9ff12dc8c89d146ea403f3d9f14ab748c1ed54baa12d9f91172d88f22d4f7a"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -146,7 +146,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.per-commit-boundary
 [[attestations]]
-requirement_id = "sha256:891dc415ef411f8e75be5b9bb6ff38c7ee488df18c3fd4434a626bb81a720ede"
+requirement_id = "sha256:efb066f7727e0bd13add596e6203e8c16a6333264cdc89369494dd84bd17d973"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -164,7 +164,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.rewrite-authority
 [[attestations]]
-requirement_id = "sha256:f358f575527285913bc3ec2368856d49be6f7bf2fb5d8917c7fbac29e9e06bff"
+requirement_id = "sha256:b6501016fc01244e3fa53aad53c1e6fddfd634b77420dc2cad66d337c1d92132"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -182,7 +182,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.terminal-branch-lifecycle
 [[attestations]]
-requirement_id = "sha256:1fcb4f327c42275bcf14385ab05374b72e322ec786f090438d35e7c998c5bbb5"
+requirement_id = "sha256:8200cbf56092652ba9a858901c399b737bb5100bb55271598e18d9f7af4a8da9"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -200,7 +200,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.topology
 [[attestations]]
-requirement_id = "sha256:d82fe22b400c15a50638ce8c7e60b62f7217c0fd573fe08647c7a56fc94c333b"
+requirement_id = "sha256:07138d0162d411789a85d5ed38d890731a463b155dbd531be8b6543a236886b0"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -218,7 +218,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # workflow.commit.worktree-lifecycle
 [[attestations]]
-requirement_id = "sha256:5ca98c5bbd3185382a4e9e82386e2d48ddf03059a75fc075e4e20cce955a2027"
+requirement_id = "sha256:3f0e14d46be0efdfb9a1085935ddcef508f3972aef87eca7574addfbbac5af32"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

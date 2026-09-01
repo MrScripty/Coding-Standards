@@ -1309,3 +1309,8 @@ requires = []
 id = "rust-binding-conversions"
 path = "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml"
 requires = []
+
+[[suites]]
+id = "runtime-decoding-policy"
+path = "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml"
+requires = []

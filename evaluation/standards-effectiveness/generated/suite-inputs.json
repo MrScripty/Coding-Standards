@@ -217,6 +217,16 @@
           "check": "legacy-index",
           "role": "content",
           "suite": "resilience-recovery-policy"
+        },
+        {
+          "check": "legacy-active-policy-absence",
+          "role": "content",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "runtime-decoding-policy"
         }
       ]
     },
@@ -600,6 +610,11 @@
           "check": "router-links",
           "role": "link-target",
           "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
         },
         {
           "check": "metadata",
@@ -1864,7 +1879,7 @@
       ]
     },
     {
-      "digest": "sha256:2fbf1a682b554900589da143881a69928971eabb23a6602ca9953928a175e947",
+      "digest": "sha256:1e058dcf5380f8ae3c6e526def5468433fa687fd219d18869b8b763a22c6d8a0",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1876,7 +1891,7 @@
       ]
     },
     {
-      "digest": "sha256:940d57dfece33cef979eb8eecec910bb1c2bd86f1281422acb9c474c707906a5",
+      "digest": "sha256:0ecfd75bcf819b1b25d7a62f3dde79efc200dfd939a4aa082b7c2f52567e8cf2",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2019,6 +2034,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "release-procedure-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "runtime-decoding-policy"
         },
         {
           "check": "documentation-projection",
@@ -2197,7 +2217,7 @@
       ]
     },
     {
-      "digest": "sha256:c57fcc01115c6b1faac11ba53a3f1296d444933548f71c5ab698d819aff59bde",
+      "digest": "sha256:0eb0c07dfe4a54b2f9575b3d5c6ba6d55ff22f7f8e24bb6a48b89c26b77e9196",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2954,6 +2974,11 @@
           "suite": "root-index-closure"
         },
         {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "runtime-decoding-policy"
+        },
+        {
           "check": "disposition",
           "role": "content",
           "suite": "rust-api-boundaries"
@@ -3500,7 +3525,7 @@
       ]
     },
     {
-      "digest": "sha256:3ccdfbe5633752494065674ca09986542fbdfb23ce7083e39e287900505dc18e",
+      "digest": "sha256:8b053baec448b4665142ae92b871f14b7285d35925a2704cc85f5f58ef275d39",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4145,6 +4170,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "contract-planning-boundary"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:171b40660a117001c08e2793eb468cbb0006eac48bbc04bd84429b70ea95c49a",
+      "path": "evaluation/standards-effectiveness/fixtures/contracts/runtime-decoding-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "runtime-decoding-policy"
         }
       ]
     },
@@ -6909,7 +6946,7 @@
       ]
     },
     {
-      "digest": "sha256:a76a46a3791e580f050d7594eb3aa08d69c229b3dc0f06099eae6e1a62afac14",
+      "digest": "sha256:db760332f80a6601ce17e02f46d6bd53429939c46ce7fabfbe4b6d00b772af75",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6921,7 +6958,7 @@
       ]
     },
     {
-      "digest": "sha256:0b10e6b97a7020f2f69897b7b31c00adca52fcaedc6cce0664ff2713c37805a0",
+      "digest": "sha256:2ae6f61c878f79c046dc913c802a584c3a5ab6618c6510f55f903ea9b0aafd0d",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7204,6 +7241,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "runtime-decoding-policy"
         },
         {
           "check": "section-inventory",
@@ -9805,7 +9847,7 @@
       ]
     },
     {
-      "digest": "sha256:6974df68be8e0108fb950dbf8bb343327a031499c1b649c657ae350678de9283",
+      "digest": "sha256:0962eff2ca521e8530927ca3b6daec9062f30e005c15c574c2244981b30b6d90",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11790,6 +11832,18 @@
       ]
     },
     {
+      "digest": "sha256:c9f812263e6c7e3b1ee949514c4aacf1ef436619d58118681a2f6d97d72c7252",
+      "path": "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:3d20621df6f78ee72d6f5ba205e135438e2fc11d336362f9b1e2f5f74ae15b8c",
       "path": "evaluation/standards-effectiveness/suites/rust-adoption-notes-retirement.toml",
       "state": "present",
@@ -13329,28 +13383,6 @@
           "check": "retained-plan-fixture-consumer",
           "role": "content",
           "suite": "systemic-finding-replanning"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:85cbb56d45cc2d4d97a514fc67410db7ffcb32ea9fdd01c85fea0d001c0d8cdf",
-      "path": "evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
         }
       ]
     },
@@ -21423,6 +21455,16 @@
           "suite": "router-legacy-route-closure"
         },
         {
+          "check": "contract-policy",
+          "role": "content",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
           "check": "metadata",
           "role": "metadata",
           "suite": "rust-api-owner-contract"
@@ -23318,6 +23360,11 @@
           "suite": "router-legacy-route-closure"
         },
         {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
           "check": "metadata",
           "role": "metadata",
           "suite": "rust-api-owner-contract"
@@ -23581,11 +23628,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:6974df68be8e0108fb950dbf8bb343327a031499c1b649c657ae350678de9283",
+    "digest": "sha256:0962eff2ca521e8530927ca3b6daec9062f30e005c15c574c2244981b30b6d90",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:e70fab1047cd9eeeb0a41fe7355913eb9923ec62f3060fe47403b51f5da3e91d",
+    "digest": "sha256:4d81f4731033efcb3750ca6eb529e0bb1fa2156788e2545bf2db5b2f901ec67e",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25224,6 +25271,12 @@
       "digest": "sha256:8a64cd31537bc469b428fcb41c232003d87eb6994186f98eaf7a7d957eb97dcf",
       "id": "rust-binding-conversions",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:c9f812263e6c7e3b1ee949514c4aacf1ef436619d58118681a2f6d97d72c7252",
+      "id": "runtime-decoding-policy",
+      "path": "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml",
       "requires": []
     }
   ]

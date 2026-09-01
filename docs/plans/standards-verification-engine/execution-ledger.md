@@ -7099,3 +7099,22 @@
   and the complete
   15-entrypoint checkpoint pass. Final graph: 15 Bash checkers, 17 nodes, 97
   edges, and 17 components.
+
+## 2026-09-01 - M6-I111 Runtime-Decoding Policy Acceptance
+
+- Fresh post-M6-I110 evidence reports 15 Bash verifiers, 17 nodes, 97 edges,
+  and 17 components. Two verifiers have no executable inbound edge. The
+  142-line runtime-decoding verifier is the sole highest-wave root at wave 1
+  and declares one metadata helper. M6-I111 is `serial-coherent` at train order
+  226.
+- One eight-check `topic.contracts` suite preserves all ten typed decoding
+  decisions, four exact source identities and dispositions, metadata closure,
+  canonical runtime-proof policy, bounded legacy route retirement, repository-
+  wide unsafe-pattern absence, no-fallback precedence, and documentation.
+- A native metadata-graph assertion replaces helper execution. Six earlier
+  M6-I82, M6-I83, and M6-I106 records transfer to registered suite evidence.
+- Eight mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 14-entrypoint checkpoint pass. Final graph: 14 Bash
+  checkers, 16 nodes, 93 edges, and 16 components.

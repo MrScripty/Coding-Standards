@@ -6852,7 +6852,34 @@ generic-specialization drift, legacy-route drift, active legacy unsafe policy,
 and F022 finding drift under both authorities. Exact final compilation renews
 22/22 dependency-local requirements and leaves 29 stable, closing 51/51
 coverage. All focused, graph, declarative, generated, numeric, plan, and
-complete mixed
-evidence pass. Final graph: 15 Bash checkers, 17 nodes, 97 edges, and 17
-components. The old checker is absent without nested execution, a source-policy
-rewrite, compatibility representation, or fallback.
+complete mixed evidence pass. Final graph: 15 Bash checkers, 17 nodes, 97
+edges, and 17 components. The old checker is absent without nested execution,
+a source-policy rewrite, compatibility representation, or fallback.
+
+### M6-I111 Runtime-Decoding Policy Acceptance
+
+Fresh post-M6-I110 evidence reports 15 Bash verifiers, 17 nodes, 97 edges,
+and 17 components. Two verifiers have no executable inbound edge. The 142-line
+`verify-runtime-decoding-policy.sh` is the sole highest-wave root at wave 1. It
+declares one metadata helper; its incoming references are accepted plan and
+edge evidence.
+
+The package uses `serial-coherent` execution because the Contracts policy,
+frozen lineage, legacy route, and documentation projection share one owner. No
+shared engine, schema, fixture, source policy, or live consumer manifest changes.
+One eight-check suite preserves all ten typed decoding decisions, four exact
+source identities and dispositions, metadata closure, canonical runtime-proof
+policy, bounded legacy route retirement, repository-wide unsafe-pattern
+absence, no-fallback precedence, and documentation.
+
+A native metadata-graph assertion replaces helper execution. Six prior M6-I82,
+M6-I83, and M6-I106 records transfer to registered suite evidence.
+
+Eight mutations reject decision-outcome drift, source-identity drift,
+disposition drift, metadata drift, canonical-policy drift, legacy-route drift,
+active legacy policy, and unsafe contract fallback under both authorities.
+Exact final compilation renews 22/22 dependency-local requirements and leaves
+29 stable, closing 51/51 coverage. All focused, graph, declarative, generated,
+numeric, plan, and complete mixed evidence pass. Final graph: 14 Bash checkers,
+16 nodes, 93 edges, and 16 components. The old checker is absent without nested
+execution, a source-policy rewrite, compatibility representation, or fallback.

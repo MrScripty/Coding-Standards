@@ -1,0 +1,155 @@
+schema_version = 1
+id = "runtime-decoding-policy"
+owner = "topic.contracts"
+description = "Boundary runtime decoding as complete invariant proof with validated construction, typed outcomes, explicit internal applicability, and no assertion or original-input fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/runtime-decoding-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+applicability = ["boundary", "internal"]
+input_trust = ["unknown", "validated"]
+decoder_status = ["success", "failure", "unavailable", "not-required"]
+invariant_coverage = ["complete", "partial", "not-required"]
+normalization = ["valid", "invalid", "not-required"]
+version = ["supported", "unsupported", "not-versioned"]
+construction = ["decoder", "assertion", "original", "none"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "applicability", op = "eq", value = "internal" },
+  { any = [
+    { field = "input_trust", op = "ne", value = "validated" },
+    { field = "decoder_status", op = "ne", value = "not-required" },
+    { field = "invariant_coverage", op = "ne", value = "not-required" },
+    { field = "normalization", op = "ne", value = "not-required" },
+    { field = "version", op = "ne", value = "not-versioned" },
+    { field = "construction", op = "ne", value = "none" },
+  ] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "applicability", op = "eq", value = "boundary" },
+  { field = "decoder_status", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [
+  { field = "applicability", op = "eq", value = "boundary" },
+  { field = "version", op = "eq", value = "unsupported" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "applicability", op = "eq", value = "boundary" },
+  { any = [
+    { field = "decoder_status", op = "ne", value = "success" },
+    { field = "invariant_coverage", op = "ne", value = "complete" },
+    { field = "normalization", op = "eq", value = "invalid" },
+    { field = "construction", op = "ne", value = "decoder" },
+  ] },
+]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0051", "ARCHITECTURE-PATTERNS.md", "250", "2", "mixed", "split", "Executable Boundary Contracts"],
+  ["STD-0052", "ARCHITECTURE-PATTERNS.md", "252", "3", "mixed", "split", "The Pattern"],
+  ["STD-0053", "ARCHITECTURE-PATTERNS.md", "267", "3", "mixed", "split", "Plain Types vs Executable Contracts"],
+  ["STD-0054", "ARCHITECTURE-PATTERNS.md", "280", "3", "mixed", "split", "Contract Requirements"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0051", "STD-0052", "STD-0053", "STD-0054"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0051", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "merge", "executable boundary contract concern"],
+  ["STD-0052", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine", "define runtime decoding as proof"],
+  ["STD-0053", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine", "remove assertion as validation and preserve applicability"],
+  ["STD-0054", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine", "require complete invariant checks and typed diagnostics"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0051", "STD-0052", "STD-0053", "STD-0054"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md"]
+
+[[checks]]
+id = "contract-policy"
+type = "text"
+path = "topics/contracts.md"
+required = [
+  "## Runtime Decoding At Boundaries",
+  "A validated value is a construction result, not a type annotation.",
+  "Before constructing a validated value, check every invariant required by that",
+  "type assertion, generic object check",
+  "`invalid` for malformed data",
+  "`unsupported` for a well-formed version",
+  "`unavailable` when required decoding capability",
+  "Do not fall back to a cast",
+  "kept inside one trusted in-process boundary",
+]
+prohibited = [
+  "input as CreateJobRequest",
+  "runtime input is trusted blindly",
+  "Validate once at the boundary, then pass validated values inward.",
+]
+
+[[checks]]
+id = "legacy-route"
+type = "markdown_section_text"
+path = "ARCHITECTURE-PATTERNS.md"
+heading = "## Executable Boundary Contracts"
+required = ["topics/contracts.md#runtime-decoding-at-boundaries"]
+prohibited = ["### ", "```", "input as CreateJobRequest", "throws/returns error if invalid"]
+
+[[checks]]
+id = "legacy-active-policy-absence"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = []
+prohibited = [
+  "input as CreateJobRequest",
+  "runtime input is trusted blindly",
+  "Validate once at the boundary, then pass validated values inward.",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "`fixtures/contracts/runtime-decoding-decisions.tsv` and the registered\n`runtime-decoding-policy` suite check when runtime decoding applies",
+]
+prohibited = ["verify-runtime-decoding-policy.sh"]
