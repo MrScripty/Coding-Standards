@@ -265,3 +265,26 @@
 - The existing exact admitted base remains
   `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; the path correction does not
   synchronize prototype branches with later canonical evidence commits.
+
+## 2026-09-01 - A2-P2 Projected-View Evidence Requires Revision
+
+- Accepted isolated evidence commit
+  `3bab6e981d6e902e087f485c03fca78d0505a39e` with verdict `revise`, not
+  `pass`. The exact-mutation overlay and independent scratch Git capture exposed
+  the same 970-path corpus and semantic signature across three repeated runs,
+  and every registered negative case matched its exact diagnostic.
+- The generated A1c `PrepareCall` rejected a proposal revision at
+  `/request/proposed_snapshot/kind` with `CONTRACT.INVALID_INSTANCE`. The
+  prototype did not evade that boundary by minting a proposal snapshot,
+  changing an A1c operation, or creating a second analyzer.
+- Admitted only the private exact-mutation content Adapter candidate. Durable
+  delta storage, add/delete behavior, projected analysis identity, and cold
+  replay remain unavailable. The next slice is an exact P2R protocol to test
+  whether those analysis constraints can coexist with accepted A1c choices.
+- The isolated branch passed Ruff, formatting, generated freshness, all 265
+  declarative suites, exact staged review, and sensitive-value review. The
+  dependency-complete environment was CPython 3.12.3; no CPython 3.11 claim is
+  admitted.
+- Protected exact tip `3bab6e981d6e902e087f485c03fca78d0505a39e` at
+  `refs/archive/a2-prototypes/p2-projected-view`, verified the task worktree was
+  clean, and removed it. Neither branch artifact entered canonical `main`.

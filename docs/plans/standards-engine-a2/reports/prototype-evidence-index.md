@@ -1,6 +1,6 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1 and P3 pass; P2 revision and P4/P5 review pending`
+**Status:** `P1 and P3 pass; P2 revise; P2R and P4/P5 pending`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -10,7 +10,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | ID | Exact path | Branch and worktree | Exact admitted base | Prototype commit | Verdict | Worktree disposition |
 | --- | --- | --- | --- | --- | --- | --- |
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; `/tmp/coding-standards-a2-p1-state-model` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `retained-protected` at archived tip `refs/archive/a2-prototypes/p1-state-model` |
-| A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
+| A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `3bab6e981d6e902e087f485c03fca78d0505a39e` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p2-projected-view` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
@@ -124,6 +124,83 @@ selection remain unadmitted for A2-P2 through A2-P5.
 - Retirement: after product-owner feedback is recorded, or before Milestone 0
   acceptance, whichever comes first; then verify the archive ref and remove
   only this clean task-owned worktree.
+
+## A2-P2 Projected View
+
+### Question And Environment
+
+P2 asked whether exact non-Git replacement mutations can overlay a frozen A1c
+snapshot, traverse the current compiler path, and remain semantically identical
+to the same bytes captured independently through scratch Git without minting a
+proposal snapshot or a second analyzer.
+
+The accepted command was
+`PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 /tmp/coding-standards-verifier/bin/python -P tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py`
+on Linux CPython 3.12.3. The verifier environment supplied the current project
+dependency set. System CPython 3.11 and 3.12 invocations without that environment
+were unavailable because `jsonschema` was absent; P2 therefore makes no 3.11
+runtime claim.
+
+### Results
+
+| Evidence | Exact result |
+| --- | --- |
+| Semantic signature | overlay and scratch Git capture were equal |
+| Requested corpus | identical 970 paths; digest `sha256:1ac080b26274ff3d54822eac12e9c6e32ded0524657a169ffc71dd8d4d74b05a` |
+| Repeated comparison | three post-warm-up overlay and scratch runs remained equivalent |
+| Exact negative cases | invalid path, traversal, missing target, duplicate mutation, and semantic-invalid diagnostics matched |
+| A1c analyzer boundary | `PrepareCall` rejected `proposal-revision-handle` at `/request/proposed_snapshot/kind` with `CONTRACT.INVALID_INSTANCE` |
+| A1c preservation | no snapshot-store mutation, proposal snapshot, second analyzer, or existing public-operation change |
+
+The run observed a 7,100,838-byte requested base corpus, 800,550 bytes of
+retained mutation path-and-content material including the required regenerated
+suite-input projection, 62 changed byte positions, a 7,100,839-byte scratch
+requested corpus, an 8,990,720-byte scratch snapshot store, and 13,239,201
+tracked scratch-worktree bytes. Repeated compile observations ranged from about
+1.67 to 1.70 seconds. These values are descriptive only; persistence and a
+product latency budget were not tested.
+
+### Four-Dimension Verdict
+
+- **Effectiveness:** `revise`. The overlay supplies the exact requested corpus
+  through the existing compiler, but the end-to-end analysis workflow is
+  unavailable because the current public contract accepts only a
+  `SnapshotHandle` as proposed material.
+- **Efficiency:** `revise`. Replacement mutations avoid retaining the complete
+  corpus in the candidate Adapter and are not dominated by the measured full
+  scratch materialization, but durable delta representation, additions,
+  deletions, and combined-workflow cost remain untested.
+- **Correctness:** `pass` for compiler equivalence and exact negative cases;
+  `unavailable` for projected analysis and cold replay. The tightened executable
+  oracle returns `revise` only when every equivalence and exact diagnostic holds
+  and the exact A1c contract boundary is observed.
+- **Standards compliance:** `pass` for the isolated evidence commit. The final
+  test-only source and branch-local index digest passed Ruff, formatting,
+  generated freshness, all 265 declarative suites, staged diff, and
+  sensitive-value review. Missing CPython 3.11 dependencies remain an explicit
+  prototype limitation and block any production portability claim.
+
+### Admitted, Rejected, And Revised Decisions
+
+Admit only a private exact-mutation content Adapter candidate over a frozen A1c
+base. Reject full-corpus-per-revision storage, proposal-as-snapshot, a second
+analyzer, public A1c operation changes, and weaker negative-case matching.
+
+Revise the end-to-end design before P5 or production planning. A2-P2R must
+determine whether the existing analyzer can consume projected material while
+retaining an exact immutable analysis identity and cold-replay input under the
+accepted A1c `AnalysisState`, non-Git change-set, lifecycle, and handle choices.
+If that is impossible, A2 must record the conflict and request explicit product
+reauthorization rather than changing A1c by implication.
+
+### Archived Worktree Contract
+
+The final source identity is
+`sha256:120cbaf126a390808473faf8d18f6f29d4b35448243359f029459e11f0916284`.
+The clean task-owned worktree was removed after archive ref
+`refs/archive/a2-prototypes/p2-projected-view` was verified at exact tip
+`3bab6e981d6e902e087f485c03fca78d0505a39e`. The prototype and branch-local
+projection remain recoverable and did not enter canonical `main`.
 
 ## A2-P3 Publication And Recovery
 

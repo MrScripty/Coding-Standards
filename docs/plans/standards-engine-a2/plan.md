@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 0 A1c preservation and design validation
 
-**Next slice:** A2-P2 projected-view equivalence prototype and evidence review
+**Next slice:** A2-P2R projected-analysis identity and replay protocol admission
 
 **Acceptance status:** `pending`
 
@@ -353,6 +353,11 @@ canonical `main`.
   real scratch SQLite CAS and cold reopen, stage-before-publication, concurrent
   target change, interruption recovery, generated facade shape, and the
   representative agent workflow. Use disposable repositories and stores only.
+- [ ] Revise the P2 end-to-end claim with an exact projected-analysis identity
+  and cold-replay experiment. Determine whether one private Authoring seam can
+  reuse the existing analyzer while preserving A1c's immutable AnalysisState,
+  non-Git change-set, lifecycle, and no-proposal-snapshot decisions; reject the
+  seam and require product reauthorization if those constraints cannot coexist.
 - [ ] Measure every material candidate against its predeclared efficiency
   claim using an owned workload, metric, baseline or budget, environment, and
   variability policy. Record the correctness and resource tradeoff; do not
