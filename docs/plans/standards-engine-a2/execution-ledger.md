@@ -598,3 +598,51 @@
   operation comparison. It does not admit a result schema, target-selection
   input, Git implementation, store/version change, migration, ADR, or
   production source. P4R execution admission remains the next slice.
+
+## 2026-09-01 - A2-P4R Facade Composition Admitted
+
+- Admitted exact base `fc7dbeabb5828b5b6f3840a1ff004209ae291385`,
+  private branch `prototype/a2-m0-facade-composition`, and task-owned worktree
+  `/tmp/coding-standards-a2-p4r-facade-composition`. Neither branch nor
+  worktree existed when this authority was recorded.
+- Registered sole authored source
+  `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py`.
+  The integration owner may stage it, regenerate only the branch-local suite-
+  input repository digest, verify and commit the isolated evidence, protect
+  its exact tip at `refs/archive/a2-prototypes/p4r-facade-composition`, remove
+  its clean task resources, and record the canonical verdict.
+- Three independent deep-Module comparisons produced a minimal three-root goal
+  Interface, a flexible revision-addressed eight-root portfolio, and a common-
+  caller typed-continuation portfolio. The minimal design risks variant-driven
+  state transitions, fixed query, eager analysis, and merged review/apply/
+  recovery contracts. The flexible design preserves semantics but exposes
+  relationships derivable from exact handles.
+- Selected the typed-continuation portfolio only as the candidate under test:
+  explicit create, discover, revise, query, analyze, review, apply, and recover
+  intents carry base/revision/analysis/readiness/application handles. The
+  private Authoring Module derives projected material, proposal binding,
+  current-head checks, target authority, Git facts, verification, and recovery
+  observations.
+- P4R measures calls, atomic caller facts, defined fields, result-carried
+  handles, ambiguity, coordinated owners, and deletion-test leverage over one
+  equivalent workflow. Timing is immaterial. A smaller but semantically
+  incomplete Interface cannot dominate a correctness-complete candidate.
+- The current A1c manifest and capability maps remain the preservation
+  authority. Prototype-local state and method introspection decide only the
+  candidate shape. The current compiler must still reject additive roots; no
+  generated contract, version, schema, facade, or source change is admitted.
+- Exact wrong-handle, stale-revision, analysis mismatch/incomplete, stale-
+  readiness, unauthorized review/application, unsupported-contract, stale-
+  target, and unavailable-recovery outcomes must preserve state. All eight A1c
+  roots, one Analysis authority, private dependency seams, and the selected
+  direct-publication postcondition are verdict gates.
+- Dependency-complete Linux CPython 3.11 and 3.12, independent specification
+  and standards review, Ruff, formatting, generated freshness, package
+  selection, plan lifecycle, every declarative and retained Bash check, staged
+  scope, sensitive-value review, and conventional Commit review are required.
+- A fresh public A1c `create_snapshot` plus `query(route)` execution on the
+  admitted base selected the protocol's same 22 standards and returned zero
+  unresolved fact categories.
+- Prototype source never merges to `main`. P5, ADR, public/persisted contracts,
+  migration, and production source remain blocked until P4R passes and its
+  exact `removed-archived` disposition is recorded canonically.

@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
 **Status:** `P1, P2R2, and P3 pass; P2 and P4 revise; P2R rejected; P4R
-registration and execution admission next; P5 blocked`
+execution admitted; P5 blocked`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -16,6 +16,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P2R2 | `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py` | removed `prototype/a2-m0-projected-material-identity`; removed `/tmp/coding-standards-a2-p2r2-projected-material-identity` | `a959ca3d6112ce4b3dc532805cbcb24b2e7fce2c` | `b76f443b5bc05b179d20193bf27ea4d3054db7f3` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p2r2-projected-material-identity` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
+| A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | `prototype/a2-m0-facade-composition`; `/tmp/coding-standards-a2-p4r-facade-composition` not created | `fc7dbeabb5828b5b6f3840a1ff004209ae291385` | pending | pending | creation admitted; expected `removed-archived` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
 
 The A2 prototype owner owns each private worktree, its one authored source
@@ -28,7 +29,8 @@ changes a registered question, oracle, state model, or threshold requires a new
 canonical admission.
 
 The generated projection diff is path-sensitive. P1 and every Python prototype
-(P2, P2R, P2R2, P3, P4, and P5) must change only the repository-index digest.
+(P2, P2R, P2R2, P3, P4, P4R, and P5) must change only the repository-index
+digest.
 Python prototypes remain below the package's existing `tests` boundary; no
 prototype becomes a production package input or requires production ownership.
 P2, P3, and P4 must move their unchanged authored file to the corrected exact
@@ -36,7 +38,10 @@ path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
 before staging. P5 must be created directly from that re-admitted base. P2R2
 must be created only after its separately committed execution admission names
-the current exact base. No other prototype-source rewrite, merge, or copying
+the current exact base. P4R must be created only from the exact base and path
+registered by its separately committed
+[execution admission](p4r-facade-composition-admission.md). No other
+prototype-source rewrite, merge, or copying
 is authorized by this correction. Exact review may update only a moved
 artifact's embedded run path and minimum `__file__` parent depth under the
 separately recorded relocation rule; the final evidence must record the

@@ -5,8 +5,7 @@
 **Current phase:** Milestone 0 facade revalidation after projected-material
 identity acceptance
 
-**Next slice:** Register and admit the isolated A2-P4R facade-composition
-prototype
+**Next slice:** Execute the isolated A2-P4R facade-composition prototype
 
 **Acceptance status:** `pending`
 
@@ -19,6 +18,9 @@ prototype
 
 **A1c reauthorization:**
 [Projected-material identity and replay](reports/a1c-projected-material-reauthorization.md)
+
+**P4R execution admission:**
+[Facade-composition comparison and oracle](reports/p4r-facade-composition-admission.md)
 
 ## Objective
 
@@ -396,7 +398,10 @@ canonical `main`.
 - [ ] Revise P4 only after P2R2 accepts projected-material identity. Retest the
   explicit additive facade without a projected `SnapshotHandle`, mutable
   current-evidence selector, caller-supplied ref or object ID, tagged dispatch,
-  or A1c query/inspect overload before selecting any operation root.
+  or A1c query/inspect overload before selecting any operation root. Execute
+  the exact typed-continuation comparison admitted in the
+  [P4R report](reports/p4r-facade-composition-admission.md) from fixed base
+  `fc7dbeabb5828b5b6f3840a1ff004209ae291385`.
 - [ ] Measure every material candidate against its predeclared efficiency
   claim using an owned workload, metric, baseline or budget, environment, and
   variability policy. Record the correctness and resource tradeoff; do not
@@ -446,9 +451,10 @@ canonical `main`.
 
 ## Blockers
 
-- No design blocker affects A2-P4R registration and execution admission.
-  A2-P2R2 passed every identity, replay, lifecycle, single-authority,
-  efficiency, platform, and standards-compliance threshold.
+- No design blocker affects the admitted A2-P4R execution. A2-P2R2 passed
+  every identity, replay, lifecycle, single-authority, efficiency, platform,
+  and standards-compliance threshold, and the user selected direct configured-
+  main publication as the one application success meaning.
 - P5, an A1c ADR amendment, public or persisted contract selection, and
   production planning remain unavailable until P4R validates an exact facade
   composition without restoring any of P4's rejected stand-ins.
