@@ -258,10 +258,11 @@ compatibility, and evidence from declared consumer and product contracts. It
 rejects automatic exports, fixed support tiers, forced parity, wrapper-owned
 domain semantics, native-only evidence, and default success.
 
-`fixtures/contracts/binding-evolution-*.tsv` and
-`verify-binding-contract-evolution.sh` classify binding artifacts by applicable
-contract class, regenerate only affected generated outputs, and derive version
-relationships from deployment and consumer facts. They reject assumed
+`fixtures/contracts/binding-evolution-decisions.tsv` and the registered
+`binding-contract-evolution` suite classify binding artifacts by applicable
+contract class. The registered `binding-contract-evolution` suite regenerates
+only affected generated outputs and derives version relationships from
+deployment and consumer facts. It rejects assumed
 additive compatibility, regenerate-all and skip-regeneration paths, forced
 lockstep or independent versions (including lockstep inferred from shared
 build provenance), compatibility shims, incomplete evidence, and default

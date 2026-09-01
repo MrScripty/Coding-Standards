@@ -6823,3 +6823,25 @@
   consumer checks, all suites, graph and generated freshness, numeric lifecycle,
   plan checks, and the complete 28-entrypoint checkpoint pass.
   Final graph: 28 Bash checkers, 31 nodes, 196 edges, and 31 components.
+
+## 2026-08-31 - M6-I98 Binding Contract-Evolution Acceptance
+
+- Fresh post-M6-I97 evidence reports 28 Bash verifiers, 31 nodes, 196 edges,
+  and 31 components. Eight verifiers have no executable inbound edge, including
+  three at the highest dependency wave 5. The 126-line contract-evolution
+  verifier is the smallest highest-wave root. It invokes one generic helper
+  and four retained verifier gates. M6-I98 is `shared-contract` at train order
+  213 because the row-35 transitive-caller contract requires a final-state
+  consumer transition.
+- One seven-check `topic.contracts` suite preserves all 19 typed decisions,
+  three exact source identities and dispositions, canonical per-artifact
+  evolution policy, both bounded legacy routes, and the README projection.
+- A native decision assertion replaces helper execution. Contract decisions,
+  contract ownership, row-5 lifecycle, and execution-train evidence remain
+  independent gates. The row-35 suite and caller manifest release the retired
+  invocation, and two earlier M6-I94 records transfer to suite evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 consumer checks, all suites, graph and generated freshness, numeric
+  lifecycle, plan checks, and the complete 27-entrypoint checkpoint pass.
+  Final graph: 27 Bash checkers, 30 nodes, 183 edges, and 30 components.

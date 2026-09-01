@@ -1186,6 +1186,11 @@ path = "evaluation/standards-effectiveness/suites/binding-generation-authority.t
 requires = []
 
 [[suites]]
+id = "binding-contract-evolution"
+path = "evaluation/standards-effectiveness/suites/binding-contract-evolution.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-43-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-43-decomposition.toml"
 requires = []

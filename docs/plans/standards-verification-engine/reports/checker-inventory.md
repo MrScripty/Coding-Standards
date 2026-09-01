@@ -6469,3 +6469,34 @@ complete mixed evidence pass. Final graph: 28 Bash checkers, 31 nodes, 196
 edges, and 31 components. The old checker is absent without merging the nested
 index into title or lifecycle authority, nested execution, a source-policy
 rewrite, compatibility representation, or fallback.
+
+### M6-I98 Binding Contract-Evolution Acceptance
+
+Fresh post-M6-I97 evidence reports 28 Bash verifiers, 31 nodes, 196 edges,
+and 31 components. Eight verifiers have no executable inbound edge, including
+three at the highest dependency wave 5. The 126-line
+`verify-binding-contract-evolution.sh` is the smallest highest-wave root. Its
+incoming references are README and accepted consumer or edge evidence; it
+invokes one generic decision helper and four retained verifier gates.
+
+The package uses `shared-contract` execution because row 35 derives the
+transitive callers of contract ownership and must remove the retiring caller
+from both its manifest and registered suite. No shared engine, schema, or
+source policy changes. One seven-check `topic.contracts` suite preserves all
+19 typed evolution decisions, the three exact source identities and
+dispositions, canonical per-artifact evolution policy, Compatibility Notes and
+Versioning routes, and the README projection.
+
+A native decision assertion replaces helper execution. Contract decisions,
+contract ownership, row-5 lifecycle, and execution-train evidence remain
+independent gates through eight edge dispositions. The row-35 suite and caller
+manifest release the retired invocation, two prior M6-I94 records transfer to
+registered suite evidence, and redundant schema and observed fixtures retire.
+
+Four mutations reject decision-outcome drift, disposition-rationale drift,
+canonical contract drift, and stale README checker authority. Exact final
+compilation renews 22/22 dependency-local requirements and leaves 29 stable,
+closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
+plan, and complete mixed evidence pass. Final graph: 27 Bash checkers, 30
+nodes, 183 edges, and 30 components. The old checker is absent without nested
+execution, a source-policy rewrite, compatibility representation, or fallback.
