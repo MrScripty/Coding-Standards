@@ -6699,3 +6699,32 @@ All focused, graph, declarative, generated, numeric, plan, and complete mixed
 evidence pass. Final graph: 20 Bash checkers, 23 nodes, 139 edges, and 23
 components. The old checker is absent without nested execution, a source-policy
 rewrite, compatibility representation, or fallback.
+
+### M6-I106 Cross-Language Contract Acceptance
+
+Fresh post-M6-I105 evidence reports 20 Bash verifiers, 23 nodes, 139 edges,
+and 23 components. Five verifiers have no executable inbound edge, including
+two at the highest dependency wave 3. The 122-line
+`verify-cross-language-contract.sh` is the smaller highest-wave root. Its
+incoming references are accepted plan and edge evidence; it invokes one generic
+metadata helper and three retained verifier gates.
+
+The package uses `shared-contract` execution because the Contracts suite,
+row-35 transitive caller, and README consumers require final-state transitions.
+No shared engine, schema, source policy, or fixture changes. One ten-check suite
+preserves all 16 typed decisions, four exact source identities and dispositions,
+metadata closure, canonical policy, bounded legacy routes, and documentation.
+
+A native metadata-graph assertion replaces helper execution. Contract
+ownership, runtime decoding, and execution-train remain independent gates
+through six edge dispositions. Four prior M6-I68 and M6-I93 records transfer to
+registered suite evidence. The row-35 manifest releases the retired transitive
+caller.
+
+Five mutations reject decision-outcome drift, disposition-owner drift, source-
+identity drift, canonical-policy drift, and legacy-route drift. Exact final
+compilation renews 22/22 dependency-local requirements and leaves 29 stable,
+closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
+plan, and complete mixed evidence pass. Final graph: 19 Bash checkers, 22 nodes,
+127 edges, and 22 components. The old checker is absent without nested
+execution, a source-policy rewrite, compatibility representation, or fallback.

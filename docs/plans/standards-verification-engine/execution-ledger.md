@@ -6987,3 +6987,25 @@
   checks, all suites, graph and generated freshness, numeric lifecycle, plan
   checks, and the complete 20-entrypoint checkpoint pass. Final graph: 20 Bash
   checkers, 23 nodes, 139 edges, and 23 components.
+
+## 2026-08-31 - M6-I106 Cross-Language Contract Acceptance
+
+- Fresh post-M6-I105 evidence reports 20 Bash verifiers, 23 nodes, 139 edges,
+  and 23 components. Five verifiers have no executable inbound edge, including
+  two at the highest dependency wave 3. The 122-line cross-language contract
+  verifier is the smaller highest-wave root and invokes one metadata helper and
+  three retained verifier gates. M6-I106 is `shared-contract` at train order
+  221 because row-35 transitive caller and README consumers require final-state
+  transitions.
+- One ten-check `topic.contracts` suite preserves all 16 typed decisions, four
+  exact source identities and dispositions, metadata closure, canonical policy,
+  bounded legacy routes, and the README projection.
+- A native metadata-graph assertion replaces helper execution. Contract
+  ownership, runtime decoding, and execution-train remain independent gates.
+  Four earlier M6-I68 and M6-I93 records transfer to registered suite evidence,
+  and the row-35 transitive manifest releases the retired caller.
+- Five mutations and exact 22/22 dependency-local renewal leave 29 requirements
+  stable and close 51/51 coverage. Focused package, edge, and row-35 consumer
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 19-entrypoint checkpoint pass. Final graph: 19 Bash
+  checkers, 22 nodes, 127 edges, and 22 components.

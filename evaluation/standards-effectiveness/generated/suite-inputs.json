@@ -469,6 +469,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "documentation-changelog-closure"
         },
         {
@@ -936,6 +941,26 @@
       "path": "INTEROP-STANDARDS.md",
       "state": "present",
       "uses": [
+        {
+          "check": "legacy-contract-maintenance",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "legacy-message-validation",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "legacy-route-closure",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "legacy-serialization-alignment",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
         {
           "check": "prohibited-authority",
           "role": "content",
@@ -1812,7 +1837,7 @@
       ]
     },
     {
-      "digest": "sha256:dacc06f433fd4cd15d164d20fe67cab7bfe954a8d6630588d22d874c0fd04a8f",
+      "digest": "sha256:6a3c2961d173143f2f8df207967385623083d5ca25670fea4549f7e60862b5c7",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1824,7 +1849,7 @@
       ]
     },
     {
-      "digest": "sha256:f4836d965f4a7cade2fd8beb81b605d6297b35252c40eb6427107c48208ed992",
+      "digest": "sha256:62dbe8ba1a549726baf2c4712a0da7b8e38d831104acaa2494755df92614575e",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1847,6 +1872,11 @@
           "check": "commit-evaluation-documentation",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "cross-language-contract"
         },
         {
           "check": "documentation-projection",
@@ -2120,7 +2150,7 @@
       ]
     },
     {
-      "digest": "sha256:5e0b86d7135f5f0cb27083644d50f90a055945a4d39fb5f4ae171ab901efa4e2",
+      "digest": "sha256:f848e18063f38032d1f5987ef25e433f47fba0fb76051dbe71085460168276ba",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2380,6 +2410,11 @@
           "check": "dispositions",
           "role": "content",
           "suite": "core-simplicity"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "cross-language-contract"
         },
         {
           "check": "exact-disposition",
@@ -3408,7 +3443,7 @@
       ]
     },
     {
-      "digest": "sha256:0f293f565a3d6ad9b85788cc65fefea79f32202c7ae1f10b081ecb672e69c876",
+      "digest": "sha256:383b5b1992b29fb6e6fe07880266741be8ad8abcc710424514886b3440754fa2",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3932,6 +3967,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "contract-boundary-proof"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5c19e69c13c2c4964ff40df706274ce717e1c68fc1898bc03dc9720759d53354",
+      "path": "evaluation/standards-effectiveness/fixtures/contracts/cross-language-contract-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "cross-language-contract"
         }
       ]
     },
@@ -6747,7 +6794,7 @@
       ]
     },
     {
-      "digest": "sha256:45730d59a57e4cf180cbc291f776e4aff68cf915bc9705937bb013a5f923cf34",
+      "digest": "sha256:1041a0070bea130a36ed330efba8b0270bbad9f550215e37d2400a36af30bae4",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6759,7 +6806,7 @@
       ]
     },
     {
-      "digest": "sha256:6833bda30136944837f84aec3a709710c8073ad9e2afdc71b13b01cd5755e545",
+      "digest": "sha256:3a77cb5f2a703b626cff04e54162f08ed3562de6e185230e30caaea81b136efc",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6907,6 +6954,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "cross-language-contract"
         },
         {
           "check": "section-inventory",
@@ -8590,7 +8642,7 @@
       ]
     },
     {
-      "digest": "sha256:5e5c5dbe342f2684fca8de3be1ac8ea54e4cb042f66f7443262bff7de6e0407e",
+      "digest": "sha256:a3975de6840d3fcd1979d700019f277b3dc7e11573f73f8c8ef43850453736ab",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv",
       "state": "present",
       "uses": [
@@ -9566,7 +9618,7 @@
       ]
     },
     {
-      "digest": "sha256:8f3f6209cac83022a2cca5370e4c9b8de9769f23934ab16d3e08db1bf0bbef4e",
+      "digest": "sha256:ee20ff465713e97c81df821f95d839a3f4d635ff0cd05861f34b6034285651ca",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10084,6 +10136,18 @@
     {
       "digest": "sha256:39d4198a226e1cd3ee2d70eea4113860f48388b130776048ff9d56f722d54dfa",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:d9af1608deb2feab365cf238dd188b29a34449c950504cb39d835e3cec84167e",
+      "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
       "state": "present",
       "uses": [
         {
@@ -10910,7 +10974,7 @@
       ]
     },
     {
-      "digest": "sha256:000a00f95eec7227f624e3e579a85bf409044135c87220dbd3d7205fcdded4a7",
+      "digest": "sha256:a96f9b90babb250a55af3a71bcadbbf2f06ba92f3847ff8a513435dedc3135e1",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12752,38 +12816,6 @@
         },
         {
           "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:be548fc2e277e6f90402eb95716e691b9400e54fa6c41163f00751e693817bc4",
-      "path": "evaluation/standards-effectiveness/verify-cross-language-contract.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "cross-language-contract-invocation",
-          "role": "content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
           "role": "manifested-content",
           "suite": "milestone-7-row-35-decomposition"
         },
@@ -21063,6 +21095,16 @@
           "suite": "contract-semantic-preservation"
         },
         {
+          "check": "canonical-contract",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "documentation-changelog-closure"
@@ -22908,6 +22950,11 @@
           "suite": "core-simplicity"
         },
         {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
           "check": "owner",
           "role": "content",
           "suite": "disabled-behavior-claims"
@@ -23311,11 +23358,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:8f3f6209cac83022a2cca5370e4c9b8de9769f23934ab16d3e08db1bf0bbef4e",
+    "digest": "sha256:ee20ff465713e97c81df821f95d839a3f4d635ff0cd05861f34b6034285651ca",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:70fe282c37ea6091bfdd667f1872f1c32990536a384728452dd4eda69037a4e7",
+    "digest": "sha256:2a1ea46532b3abf7facd809dbf26ac916b7acdb93b9c4aa7bbcd5098772861ef",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24125,7 +24172,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:000a00f95eec7227f624e3e579a85bf409044135c87220dbd3d7205fcdded4a7",
+      "digest": "sha256:a96f9b90babb250a55af3a71bcadbbf2f06ba92f3847ff8a513435dedc3135e1",
       "id": "milestone-7-row-35-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "requires": []
@@ -24834,6 +24881,12 @@
       "digest": "sha256:483e7186834274d00032ac442a9cb6e6c3ace75bbf34077cfc8bd3be46b17c48",
       "id": "milestone-7-row-15-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-15-decomposition.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:d9af1608deb2feab365cf238dd188b29a34449c950504cb39d835e3cec84167e",
+      "id": "cross-language-contract",
+      "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
       "requires": []
     },
     {

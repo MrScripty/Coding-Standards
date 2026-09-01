@@ -1,6 +1,5 @@
 edge_type	source	target
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
@@ -21,7 +20,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-decisions.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
@@ -43,7 +41,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/policy-impact-node-catalog.toml	evaluation/standards-effectiveness/check-plan-structure.sh
@@ -53,7 +50,6 @@ contract_reference	evaluation/standards-effectiveness/suites/errexit-zero-accumu
 contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-contract-ownership.sh
-contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-cross-language-contract.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/suites/planning-consolidation.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml	evaluation/standards-effectiveness/check-plan-structure.sh
@@ -61,10 +57,6 @@ contract_reference	evaluation/standards-effectiveness/suites/systemic-finding-re
 executable_reference	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
-executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-decision-table-engine.sh	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
@@ -101,7 +93,6 @@ executable_reference	tools/standards_verifier/standards_verifier/inventory.py	ev
 executable_reference	tools/standards_verifier/tests/test_inventory.py	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	tools/standards_verifier/tests/test_suite_inputs.py	evaluation/standards-effectiveness/verify-contract-ownership.sh
 helper_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-decision-table-engine.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -112,9 +103,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-runtime-decoding-pol
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh

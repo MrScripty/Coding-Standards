@@ -883,13 +883,14 @@ global-validator, fixed-rule, cast, duplicate-inline, original-input,
 permissive-default, and weaker-validator fallbacks using
 `fixtures/security/input-validation-authority-decisions.tsv`.
 
-`fixtures/contracts/cross-language-contract-decisions.tsv` and
-`verify-cross-language-contract.sh` check contract-class selection, canonical
-wire/schema authority, coordinated and independently deployed consumer
-updates, contract-matched evidence, typed invalid/unsupported/unavailable
-outcomes, four exact dispositions, and bounded legacy replacement. They reject
-schema guessing, old-shape and dual-shape compatibility shims, permissive
-defaults, ambiguous authority, incomplete updates, and missing evidence.
+The registered `cross-language-contract` suite checks contract-class selection,
+canonical wire/schema authority, coordinated and independently deployed
+consumer updates, contract-matched evidence, typed
+invalid/unsupported/unavailable outcomes, four exact dispositions, and bounded
+legacy replacement using
+`fixtures/contracts/cross-language-contract-decisions.tsv`. It rejects schema
+guessing, old-shape and dual-shape compatibility shims, permissive defaults,
+ambiguous authority, incomplete updates, and missing evidence.
 
 The registered `rust-external-input-queue` suite checks selected capacity,
 overload, retention/eviction, telemetry, ownership, typed outcomes, exact
