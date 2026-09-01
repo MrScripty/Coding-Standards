@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
 **Status:** `P1, P2R2, P3, and P4R pass; P2 and P4 revise; P2R rejected;
-P5 requires current-base re-admission`
+P5 execution admitted`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -17,7 +17,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
 | A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | removed `prototype/a2-m0-facade-composition`; removed `/tmp/coding-standards-a2-p4r-facade-composition` | `fc7dbeabb5828b5b6f3840a1ff004209ae291385` | `9a0c34325e2849c437072b12b3188bede7f08d4e` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p4r-facade-composition` |
-| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | branch and worktree not created | not selected; the prior `a8c7b04504b58446fc0fd6c53b867ddeb7827185` registration predates accepted P2R2/P4R design | pending re-admission | pending | pending; expected `removed-archived` |
+| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency-measurement`; `/tmp/coding-standards-a2-p5-efficiency-measurement` not created | `b503dcb76fd27aca41df154f37e20f6635de44bf` | pending | pending | creation admitted; expected `removed-archived` |
 
 The A2 prototype owner owns each private worktree, its one authored source
 path, and the branch-local generated suite-input projection required by that
@@ -36,8 +36,9 @@ prototype becomes a production package input or requires production ownership.
 P2, P3, and P4 had to move their unchanged authored file to the corrected exact
 path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
-before staging. That former P5 base is no longer current and grants no creation
-authority. P2R2
+before staging. That former P5 base grants no creation authority; P5 must use
+the exact current base and isolation in its separately committed
+[execution admission](p5-combined-efficiency-admission.md). P2R2
 must be created only after its separately committed execution admission names
 the current exact base. P4R must be created only from the exact base and path
 registered by its separately committed

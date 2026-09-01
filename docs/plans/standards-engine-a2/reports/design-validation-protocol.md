@@ -46,19 +46,22 @@ claim is `unavailable` and the material design is not admitted.
 
 ## Current Executable Standards Route
 
-The public A1c `create_snapshot` plus `query(route)` path was run with planning,
+The public A1c `create_snapshot` plus `query(route)` path was refreshed for P5
+on exact base `b503dcb76fd27aca41df154f37e20f6635de44bf` with planning,
 implementation, verification, documentation, commit, build, and tooling
 activities; library application; generated-contract and persistence
 boundaries; and architecture, contracts, concurrency, resilience,
 cross-platform, dependencies, security, diagnostics, and performance topics.
-It returned 22 selected standards and zero unresolved fact categories:
+P5 also selects the IPC boundary because it crosses and measures the Git
+subprocess contract. The route returned 23 selected standards and zero
+unresolved fact categories:
 
 - `core` and `router`;
 - `workflow.planning`, `workflow.implementation`, `workflow.verification`,
   `workflow.documentation`, `workflow.commit`, `workflow.build`,
   `workflow.tooling`, and dependency-selected `workflow.release`;
-- `profile.application.library`, `profile.boundary.generated-contract`, and
-  `profile.boundary.persistence`; and
+- `profile.application.library`, `profile.boundary.generated-contract`,
+  `profile.boundary.ipc`, and `profile.boundary.persistence`; and
 - `topic.architecture`, `topic.contracts`, `topic.concurrency`,
   `topic.resilience`, `topic.cross-platform`, `topic.dependencies`,
   `topic.security`, `topic.diagnostics`, and `topic.performance`.
@@ -66,8 +69,7 @@ It returned 22 selected standards and zero unresolved fact categories:
 Concurrent Plan Integration is explicitly excluded because Milestone 0 has one
 serial integration owner and no independently integrated development proposals.
 No language or framework profile is selected; Python is the experiment
-mechanism, not a new public language contract. Interop and IPC are excluded
-until a candidate actually crosses those boundaries.
+mechanism, not a new public language contract. Interop remains excluded.
 
 ## Prototype Registrations
 
@@ -80,7 +82,7 @@ until a candidate actually crosses those boundaries.
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | Can scratch SQLite attempt state and Git expected-ref publication prove stage-before-publish and cold recovery? Compare expected-target atomic update with unchecked ref update and publish-before-verify. | Verified candidate is invisible until one publication transition; caller never coordinates Git. Record Git/process calls, durable attempt bytes, scratch bytes, and repeated phase time. | Real scratch SQLite and Git; stale target, verification failure, unauthorized attempt, interruption at every material phase, applied-before-response, unchanged target, contradictory target, and cold reopen. | `pass` only if unchecked/publish-first alternatives are rejected and recovery distinguishes unchanged, applied, stale, and recovery-required without guessing or rollback. |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | Which additive explicit operation set forms the smallest deep Authoring Interface while preserving all eight A1c roots? Compare explicit authoring operations, a tagged dispatch, and A1c query/inspect overload. | Representative workflow completes with no caller-owned internal facts; compare operation roots, calls, request fields, coordinated schema changes, and next-operation ambiguity. | Current operation manifest and generated-facade model; invalid kind, wrong handle, stale expected head, unauthorized apply, and unsupported contract. | `pass` only for an explicit additive Interface that preserves all eight roots, rejects dispatch/overload alternatives, and is not dominated in caller knowledge and change locality. |
 | A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | Can a typed-continuation portfolio remove P4's projected snapshot, mutable evidence, and caller Git stand-ins while retaining explicit caller goals? Compare it with a minimal three-root goal Interface, a flexible revision-addressed portfolio, P4's invalid surface, tagged dispatch, and A1c overload. | Complete the representative handle-carried workflow with arbitrary projected query, unchanged Analysis continuation, direct configured-main application, and recovery. Record calls, atomic caller facts, defined fields, result handles, ambiguity, coordinated owners, and deletion-test leverage; timing is immaterial. | Exact current A1c manifest/capabilities, prototype-local method introspection and state/trace, accepted P2R2/P3 decisions, and current compiler rejection of unadmitted roots. Wrong handle, stale revision, analysis mismatch/incomplete, stale readiness, unauthorized review/apply, unsupported contract, stale internal target, and unavailable recovery must not mutate state. | `pass` only if every exact invariant and negative passes on dependency-complete CPython 3.11 and 3.12, no forbidden caller fact or second authority appears, next handles are complete, existing A1c behavior is unchanged, and no correctness-equivalent candidate strictly dominates the selected Interface. |
-| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | Is the selected combined design non-dominated on the current corpus and representative workflow? Compare overlay/delta state with full-copy-per-revision and selected facade with alternatives. | Report public calls, caller fields, base/changed/durable/scratch bytes, Git/process calls, and repeated wall-time observations after warm-up. No unowned latency promise is inferred. | Measured filesystem/store sizes and monotonic clock over equivalent validated work; include no-op, small edit, multi-file edit, invalid edit, and repeated revision. | `pass` only if selected candidates are correctness-equivalent, no candidate strictly dominates them, and durable revision state is proportional to change material rather than full corpus bytes. |
+| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | Is the accepted P2R2 material plus P4R facade plus P3 publication/recovery composition non-dominated? Compare selected material with a full-material control and selected facade with the correctness-equivalent flexible facade; exclude unsafe or incomplete controls before ranking. Exact authority is the [P5 admission](p5-combined-efficiency-admission.md). | Run frozen no-op, small-edit, multi-file, invalid-edit, and three-revision workloads. Record calls, fields, named facts, corpus/change/logical-durable/SQLite/scratch bytes, material/Git/process calls, and external monotonic phase/end-to-end observations. Use one warm-up and three rotated fresh-scratch observations per runtime/candidate/case; no unowned budget is inferred. | Current compiler and Analysis kernel, generated A1c DTOs/manifest, independent materialization, real scratch SQLite close/reopen, real scratch Git expected-target publication/recovery, external filesystem accounting, and closed IPC process decoding. Every registered invalid, unavailable, unauthorized, rejected, stale, contradictory, interrupted, and missing-process case has an exact triple, exact state/ref/attempt/recovery postcondition, and no unrelated mutation. | `pass` only on equivalent validated work on both runtimes, exact failure and recovery outcomes, structurally change-proportional selected storage with no full corpus, complete raw observations, and no registered ranking-eligible correctness-equivalent baseline strictly dominating the selection. Missing deciding evidence is `revise`; preservation, correctness, storage, IPC, platform, or dominance failure is `reject`. |
 
 ## Isolation And Commit Contract
 

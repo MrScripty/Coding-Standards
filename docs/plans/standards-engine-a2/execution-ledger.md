@@ -688,3 +688,83 @@
 - The next slice is a new committed P5 admission. The former P5 base predates
   the accepted P2R2 material model and P4R facade and grants no execution
   authority.
+
+## 2026-09-01 - A2-P5 Combined Efficiency Admitted
+
+- Corrected the Milestone 0 authority list in prior plan-only commit
+  `b503dcb76fd27aca41df154f37e20f6635de44bf` before creating the new admission
+  report. That commit is P5's exact base and includes all eight governed
+  prototype paths plus the P4R and P5 report paths.
+- Replaced the stale formation-era P5 entry with an exact combined-design
+  question over accepted P2R2 projected material, P4R typed continuation, and
+  P3 verified expected-target publication/recovery. Earlier prototype timings
+  and byte observations are predecessor evidence, not P5 measurements or
+  budgets.
+- Registered `selected`, correctness-equivalent `full-material`, and
+  correctness-equivalent `flexible-facade` candidates. Unsafe publication and
+  correctness-incomplete facade shapes are negative controls only and cannot
+  enter dominance ranking. The full-material/flexible cross-product has no
+  independent deciding value and is omitted by the deletion test.
+- Froze no-op, small-edit, multi-file, invalid-edit, and three-revision
+  workloads. The normal flow has 11 A2 calls plus one current A1c resolve, or
+  two for multi-file. Independently named selected/flexible leaves total 46/49
+  for no-op, 49/52 for small-edit, and 62/65 for multi-file. The invalid pair
+  totals 10/11, while the repeated flow has 23 A2 calls plus three resolves and
+  117/122 leaves. The admission owns every leaf name and value, including
+  rationale, read/related requests, resolve evidence, review decisions, and
+  dynamic-handle source; prototype code cannot select them later.
+- Replaced P4R's prototype-local fact continuation with actual current A1c
+  Analysis work. Commit-only revisions must return exactly one current
+  `consumer-disposition` for `commit-consolidation-dispositions`; multi-file
+  adds `policy-semantic-impact` in exact order. Current obligation handles and
+  fingerprints drive one 10-leaf submission each, and the final resolve must
+  be `complete-result`. The complete prototype authorization contract,
+  revocation authority, subject binding, submission/authorization/revocation
+  references, exact resolved bytes, digests, decision, and revocation state are
+  frozen so authorization identity and durable bytes cannot drift.
+- Probed that exact Analysis work through canonical A1c create/prepare/resolve
+  on the admitted base. CPython 3.11.14/SQLite 3.50.4 and CPython
+  3.12.3/SQLite 3.45.1 both completed the one-target sequence in one resolve
+  and the ordered two-target sequence in two. This freezes workload shape only;
+  projected-material equivalence remains P5's deciding oracle.
+- Assigned calls, fields, facts, corpus/change/logical-durable/SQLite/scratch
+  bytes, material/Git/process calls, and external monotonic phase/end-to-end
+  observations to an outer collector. One warm-up plus three rotated fresh-
+  scratch observations run for every runtime/candidate/case. Mixed timing on
+  either runtime is overlapping and cannot decide dominance; no latency or
+  resource budget is inferred.
+- Predeclared equivalent-byte, compiler/Analysis, immutable replay, facade,
+  candidate identity, verification, expected-target publication, exact
+  observation, cold recovery, A1c preservation, authority, and caller-privacy
+  gates. Seventeen bounded prototype-local failure triples cover mutation,
+  material, candidate, revision, authority, verification, target, observation,
+  interruption, baseline, measurement, and IPC process boundaries. Each owns
+  an exact state/ref/attempt/recovery postcondition and forbids unrelated
+  mutation.
+- Refreshed the public A1c route on exact base
+  `b503dcb76fd27aca41df154f37e20f6635de44bf`. Selecting IPC for the measured
+  Git subprocess boundary produced 23 standards and zero unresolved facts.
+  The closed private process Adapter freezes a five-field envelope, seven
+  exact Git actions, typed decode-before-dispatch, a 30-second timeout, and
+  262,144-byte stdout/stderr bounds. It separates pre-spawn capability failure
+  from post-spawn result uncertainty and never uses a shell or permissive
+  fallback.
+- Required P3 preservation evidence now includes interruption before staging,
+  during staging, during verification, after verification before publication,
+  and after successful CAS before response for every ranking candidate on both
+  runtimes. Cold recovery must distinguish unchanged from applied using exact
+  durable attempt and target observation; verification failure remains
+  `verification-failed` with the candidate nonauthoritative.
+- Admitted private branch `prototype/a2-m0-efficiency-measurement`, task-owned
+  worktree `/tmp/coding-standards-a2-p5-efficiency-measurement`, sole authored
+  source
+  `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py`,
+  repository-digest-only branch projection, archive ref
+  `refs/archive/a2-prototypes/p5-efficiency-measurement`, and terminal
+  `removed-archived` disposition. Every fixture publishes only to clone-local
+  `refs/heads/main`, initially fixed to the admitted base. Neither branch nor
+  worktree existed when this authority was recorded.
+- P5 source never merges to `main`. ADR, schemas, versions, persistence,
+  migration, and production source remain blocked until the dual-runtime
+  prototype, independent audits, every repository gate, archival, and
+  canonical verdict pass.

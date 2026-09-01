@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 combined-design efficiency re-admission after
-facade acceptance
+**Current phase:** Milestone 0 combined-design efficiency validation
 
-**Next slice:** Re-register and admit A2-P5 against the accepted P2R2 material
-model and P4R facade on the current canonical base
+**Next slice:** Execute the isolated A2-P5 combined-efficiency prototype from
+exact base `b503dcb76fd27aca41df154f37e20f6635de44bf`
 
 **Acceptance status:** `pending`
 
@@ -22,6 +21,9 @@ model and P4R facade on the current canonical base
 
 **P4R decision record:**
 [Facade-composition admission and terminal evidence](reports/p4r-facade-composition-admission.md)
+
+**P5 execution admission:**
+[Combined-design efficiency comparison and oracle](reports/p5-combined-efficiency-admission.md)
 
 ## Objective
 
@@ -458,14 +460,11 @@ canonical `main`.
 
 ## Blockers
 
-- No design blocker affects a fresh P5 registration. P2R2 accepted projected-
-  material identity, P4R accepted the typed-continuation facade without P4's
-  rejected stand-ins, and the user selected direct configured-main publication
-  as the one application success meaning.
-- P5 execution is not yet authorized. Its former base predates the accepted
-  P2R2 and P4R decisions; a new committed admission must freeze the combined
-  workload, correctness-equivalent baselines, metrics, variability policy,
-  exact current base, isolated write set, and terminal disposition first.
+- No design blocker affects the admitted P5 execution. The committed
+  [P5 admission](reports/p5-combined-efficiency-admission.md) freezes the
+  accepted combined design, correctness-equivalent baselines, five workloads,
+  external metrics, variability rule, exact failures, current 23-standard
+  route, base, isolated write set, and terminal disposition.
 - An A1c ADR amendment, public or persisted contract selection, and production
   planning remain unavailable until P5 passes and its canonical verdict is
   recorded.
