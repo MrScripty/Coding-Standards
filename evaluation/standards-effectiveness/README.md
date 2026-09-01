@@ -918,12 +918,13 @@ best-effort support, feature-as-target substitution, unjustified build
 scripts, ambiguous combinations, universal layouts, numeric `cfg` thresholds,
 named substitute tools, alternate targets, and weaker evidence.
 
-`verify-rust-binding-architecture.sh` checks framework-independent Rust core
-types and behavior, one-way adapter dependencies, adapter-scoped binding
-features, generated-output ownership, framework-free core verification, and
-typed capability failure. It proves exact disposition of `STD-0759`,
-`STD-0760`, `STD-0790`, and `STD-0791` and rejects layer merging, skipped core
-verification, hand-edited generated output, and alternate-framework fallback.
+The registered `rust-binding-architecture` suite checks framework-independent
+Rust core types and behavior, one-way adapter dependencies, adapter-scoped
+binding features, generated-output ownership, framework-free core
+verification, and typed capability failure. It proves exact disposition of
+`STD-0759`, `STD-0760`, `STD-0790`, and `STD-0791` and rejects layer merging,
+skipped core verification, hand-edited generated output, and alternate-
+framework fallback.
 
 The registered `rust-async-boundary` suite checks contract-driven Rust
 sync/async selection, exact disposition of `STD-0717` and `STD-0718`, profile

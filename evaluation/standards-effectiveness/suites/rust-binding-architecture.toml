@@ -1,0 +1,152 @@
+schema_version = 1
+id = "rust-binding-architecture"
+owner = "profile.language.rust.language-bindings"
+description = "Framework-independent Rust core and adapter ownership, one-way dependencies, generated-output authority, and typed no-fallback outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-architecture-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+scope = ["core", "adapter", "generated"]
+annotation = ["none", "independent", "coupled"]
+framework_dependency = ["absent", "present"]
+host_behavior = ["absent", "present"]
+dependency_direction = ["none", "adapter-to-core", "core-to-adapter", "generated-to-adapter"]
+generated_state = ["generated", "hand-edited", "not-applicable"]
+core_verification = ["pass", "missing", "not-applicable"]
+capability = ["available", "unavailable", "not-required"]
+fallback = ["none", "merge-layers", "skip-core-test", "alternate-framework"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { all = [
+    { field = "scope", op = "eq", value = "core" },
+    { any = [
+      { field = "annotation", op = "eq", value = "coupled" },
+      { field = "framework_dependency", op = "eq", value = "present" },
+      { field = "host_behavior", op = "eq", value = "present" },
+      { field = "dependency_direction", op = "eq", value = "core-to-adapter" },
+      { field = "core_verification", op = "ne", value = "pass" },
+    ] },
+  ] },
+  { all = [
+    { field = "scope", op = "eq", value = "adapter" },
+    { field = "dependency_direction", op = "ne", value = "adapter-to-core" },
+  ] },
+  { all = [
+    { field = "scope", op = "eq", value = "generated" },
+    { any = [
+      { field = "dependency_direction", op = "ne", value = "generated-to-adapter" },
+      { field = "generated_state", op = "ne", value = "generated" },
+    ] },
+  ] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unavailable" }]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0759", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "2", "language-profile", "split", "Three-Layer Architecture"],
+  ["STD-0760", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "3", "language-profile", "split", "Rules"],
+  ["STD-0790", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "3", "language-profile", "split", "Feature Flags for Optional Binding Support"],
+  ["STD-0791", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "1", "language-profile", "split", "mylib-core/Cargo.toml"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0759", "STD-0760", "STD-0790", "STD-0791"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0759", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "separate domain core behavior from binding frameworks and host runtimes"],
+  ["STD-0760", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "require one-way adapter dependency and framework-free core verification"],
+  ["STD-0790", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "place optional binding support at the adapter and package boundary"],
+  ["STD-0791", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "remove core package examples that add binding framework dependencies"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0759", "STD-0760", "STD-0790", "STD-0791"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/language-bindings.md"]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = ["## Core And Adapter Boundary", "usable without a binding", "Adapters depend on core contracts", "adds no binding-", "A disabled-by-default", "## Verification", "core build and tests without binding features", "dependency and feature inspection", "## No Fallback", "cannot add a"]
+prohibited = []
+
+[[checks]]
+id = "rust-index-route"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["(language-bindings.md)"]
+prohibited = []
+
+[[checks]]
+id = "generic-layer-owner"
+type = "text"
+path = "profiles/boundaries/language-bindings.md"
+required = ["## Layer Ownership"]
+prohibited = []
+
+[[checks]]
+id = "legacy-architecture-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "## Three-Layer Architecture"
+scope = "body"
+required = ["language-bindings.md#core-and-adapter-boundary"]
+prohibited = ["Layer 3:", "optional `cfg_attr` annotations", "Multiple binding crates can coexist", "### Rules"]
+
+[[checks]]
+id = "legacy-feature-route"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### Feature Flags for Optional Binding Support"
+scope = "body"
+required = ["language-bindings.md#core-and-adapter-boundary"]
+prohibited = ["Core types that can be annotated directly", "# mylib-core/Cargo.toml", "[features]", "dep:uniffi"]
+
+[[checks]]
+id = "legacy-structure"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["### Workspace Layout", "## Memory Ownership Model", "## Async Bridging"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["registered `rust-binding-architecture` suite"]
+prohibited = ["verify-rust-binding-architecture.sh"]

@@ -15307,3 +15307,26 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, plan checks, and the complete 26-entrypoint checkpoint pass.
   Final graph: 26 Bash checkers, 29 nodes, 176 edges, and 29 components; fresh
   graph evidence is required next.
+
+## 2026-08-31 - M6-I100 Rust Binding-Architecture Acceptance
+
+- Fresh post-M6-I99 evidence reports 26 Bash verifiers, 29 nodes, 176 edges,
+  and 29 components. Eight verifiers have no executable inbound edge. The
+  151-line binding-architecture verifier is the sole root at the highest
+  dependency wave 5. It invokes one generic metadata helper and one retained
+  verifier gate. M6-I100 is `shared-contract` at train order 215 because both
+  row-35 README manifests require final-state transitions.
+- One eleven-check `profile.language.rust.language-bindings` suite preserves
+  all 15 typed decisions, four exact source identities and dispositions,
+  metadata closure, core/adapter and generic layer ownership, Rust index
+  routing, both bounded legacy routes, and the README projection.
+- A native metadata-graph assertion replaces helper execution. F025/F026
+  decomposition remains an independent gate. Both row-35 manifests release
+  the retired checker, and eight earlier M6-I24, M6-I59, M6-I93, and M6-I95
+  records transfer to registered suite evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 consumer checks, all suites, graph and generated freshness, numeric
+  lifecycle, plan checks, and the complete 25-entrypoint checkpoint pass.
+  Final graph: 25 Bash checkers, 28 nodes, 168 edges, and 28 components; fresh
+  graph evidence is required next.

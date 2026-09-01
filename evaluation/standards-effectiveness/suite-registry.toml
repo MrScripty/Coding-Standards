@@ -1186,6 +1186,11 @@ path = "evaluation/standards-effectiveness/suites/rust-binding-runtime.toml"
 requires = []
 
 [[suites]]
+id = "rust-binding-architecture"
+path = "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml"
+requires = []
+
+[[suites]]
 id = "binding-generation-authority"
 path = "evaluation/standards-effectiveness/suites/binding-generation-authority.toml"
 requires = []

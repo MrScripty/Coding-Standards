@@ -6530,3 +6530,33 @@ numeric, plan, and complete mixed evidence pass. Final graph: 26 Bash
 checkers, 29 nodes, 176 edges, and 29 components. The old checker is absent
 without nested execution, a source-policy rewrite, compatibility
 representation, request-state carry-forward, or fallback.
+
+### M6-I100 Rust Binding-Architecture Acceptance
+
+Fresh post-M6-I99 evidence reports 26 Bash verifiers, 29 nodes, 176 edges,
+and 29 components. Eight verifiers have no executable inbound edge; the
+151-line `verify-rust-binding-architecture.sh` is the sole root at the highest
+dependency wave 5. It invokes one generic metadata helper and one retained
+F025/F026 lifecycle verifier.
+
+The package uses `shared-contract` execution because row 35 classifies the
+retiring checker in both README dependency and consumer manifests. No shared
+engine, schema, fixture, or source policy changes. One eleven-check
+`profile.language.rust.language-bindings` suite preserves all 15 typed
+architecture decisions, four exact source identities and dispositions,
+metadata closure, core/adapter and generic layer ownership, Rust index routing,
+both bounded legacy routes, and the README projection.
+
+A native metadata-graph assertion replaces helper execution. The F025/F026
+decomposition remains an independent gate through two edge dispositions. Both
+row-35 manifests release the retired checker, and eight prior M6-I24, M6-I59,
+M6-I93, and M6-I95 records transfer to registered suite evidence.
+
+Four mutations reject decision-outcome drift, disposition-rationale drift,
+core/adapter owner-policy drift, and stale README checker authority. Exact
+final compilation renews 22/22 dependency-local requirements and leaves 29
+stable, closing 51/51 coverage. All focused, graph, declarative, generated,
+numeric, plan, and complete mixed evidence pass. Final graph: 25 Bash
+checkers, 28 nodes, 168 edges, and 28 components. The old checker is absent
+without nested execution, a source-policy rewrite, compatibility
+representation, layer merging, or fallback.
