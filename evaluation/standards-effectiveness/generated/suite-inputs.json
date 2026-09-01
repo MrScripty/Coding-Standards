@@ -1894,7 +1894,7 @@
       ]
     },
     {
-      "digest": "sha256:8cd340828273b1c51dc8a9c6a2f97732cd64ea350b9c4c3e9d129c13882b762e",
+      "digest": "sha256:59c447a5d985ef13ef49994b96fd753c525bfe23f366db205aabc05c4cb83367",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1906,7 +1906,7 @@
       ]
     },
     {
-      "digest": "sha256:9cba00aa1701aa03d4fc54066af0847c94f7a4672cd6845b2ea237730bae5528",
+      "digest": "sha256:006873eab8fbd1ebac10c16ef460ee369d45354761e7a709d7f34bb158044ea6",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2024,6 +2024,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
         },
         {
           "check": "removed-authority",
@@ -2242,7 +2247,7 @@
       ]
     },
     {
-      "digest": "sha256:32196c4246d3ffb5135495197e320d563e7d9ae46905e8a5f5563b81b7fe522e",
+      "digest": "sha256:c9ea780dd78d4e6340d1a86aaf7fe9ed8d6ba8cc2145395b59314743f47541de",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2742,6 +2747,11 @@
           "check": "disposition-coverage",
           "role": "table",
           "suite": "milestone-7-f025-f026-decomposition"
+        },
+        {
+          "check": "pretrain-dispositions",
+          "role": "table",
+          "suite": "milestone-7-independent-trust-replan"
         },
         {
           "check": "exact-dispositions",
@@ -3555,7 +3565,7 @@
       ]
     },
     {
-      "digest": "sha256:8a25ed630a4031d8e53674e7d63ccbbe30bca2282acea30194115d50cff7c8ec",
+      "digest": "sha256:93e8300a1d5382f75277b1b3048319522fbb91cba13d3df0716502b1187b6078",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3590,6 +3600,11 @@
           "check": "resolved-findings",
           "role": "content",
           "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "finding-closure",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
         },
         {
           "check": "resolved-finding",
@@ -5251,14 +5266,13 @@
       ]
     },
     {
-      "digest": "sha256:360cfa979165506c883e36947772ec1cc4bbfef4e48a8ba955a8bcf6160621c8",
       "path": "evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "protected-target",
-          "role": "table",
-          "suite": "errexit-zero-accumulation"
+          "check": "obsolete-authority",
+          "role": "required-absent",
+          "suite": "milestone-7-independent-trust-replan"
         }
       ]
     },
@@ -7010,7 +7024,7 @@
       ]
     },
     {
-      "digest": "sha256:a860f0b4a14798263fea8df0ea24336e859175f20715db2366b810123e843e78",
+      "digest": "sha256:29256fe47b879d2e4592418687be7a111d50b15e407d2576fe35e4a9a070e376",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7022,7 +7036,7 @@
       ]
     },
     {
-      "digest": "sha256:8a0e08d9408a78db02543926bf4e632326d2e6ae041ebf4e43b4e0fe9883877c",
+      "digest": "sha256:1b7e84b6bcc86013435897f4abbc6f1e4f90e81bb0bc35f6eb956e1d298bdbcf",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7615,6 +7629,11 @@
           "check": "parent-decomposition-route",
           "role": "content",
           "suite": "milestone-7-f025-f026-decomposition"
+        },
+        {
+          "check": "parent-projection",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
         }
       ]
     },
@@ -8310,6 +8329,42 @@
       ]
     },
     {
+      "digest": "sha256:4861d57ae44103f709703474e482c1a0d2568a2a7082be3bfcda05e77f1c1d38",
+      "path": "evaluation/standards-effectiveness/milestone-7-independent-trust-groups.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "trust-groups",
+          "role": "table",
+          "suite": "milestone-7-independent-trust-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:24080f51ec4607ba28a056ab09b361e3d9e9e5aad1d41ffd06e6b01ec9a3454b",
+      "path": "evaluation/standards-effectiveness/milestone-7-independent-trust-next-slice.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "next-slice-closure",
+          "role": "table",
+          "suite": "milestone-7-independent-trust-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:fe95fd9041123667b71ae021fc91ed91f191e0db2dc10f77818cf02412617477",
+      "path": "evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "accepted-report",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
+        }
+      ]
+    },
+    {
       "digest": "sha256:d6f4c3bdaa61d394d5701908b22f8deac2c6c9a1508e51af1d634f73daa01349",
       "path": "evaluation/standards-effectiveness/milestone-7-row-13-decomposition.md",
       "state": "present",
@@ -8940,7 +8995,7 @@
       ]
     },
     {
-      "digest": "sha256:a3975de6840d3fcd1979d700019f277b3dc7e11573f73f8c8ef43850453736ab",
+      "digest": "sha256:a77d16d12c14a7cc9b50e88177c52833ac5d7d29c67809d8969c6ab7c4b188cf",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv",
       "state": "present",
       "uses": [
@@ -9916,7 +9971,7 @@
       ]
     },
     {
-      "digest": "sha256:c5c21c9903a277e286692207e9c1192784e3ad32b2fbc10ee68a1480022dc359",
+      "digest": "sha256:b4ac207cfbaa4a7bbf6a2e8a3d1339e61bd4004c4af4949f5a96d9c8daaaabc2",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10660,14 +10715,13 @@
       ]
     },
     {
-      "digest": "sha256:229d7475de1ba85bbef3126c340dd237591448994428921a4f15f4df705b38ac",
       "path": "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
+          "check": "obsolete-authority",
+          "role": "required-absent",
+          "suite": "milestone-7-independent-trust-replan"
         }
       ]
     },
@@ -11109,6 +11163,23 @@
       ]
     },
     {
+      "digest": "sha256:03edc3c48d4f61ef85997611a8f0189b4af0589973c8d29d1bb3f02091228f11",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "obsolete-authority",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:05f4d9ae595e55679410f8d7d779526daaa539d831bf2c70b6112e907b481637",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-13-decomposition.toml",
       "state": "present",
@@ -11337,7 +11408,7 @@
       ]
     },
     {
-      "digest": "sha256:a96f9b90babb250a55af3a71bcadbbf2f06ba92f3847ff8a513435dedc3135e1",
+      "digest": "sha256:f86606d79a7f100f63f76b9d32483b872b42a37a2dbeeb9021609282a2465a1c",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "state": "present",
       "uses": [
@@ -13301,39 +13372,13 @@
       ]
     },
     {
-      "digest": "sha256:2341b4954d78547ef2863157f8e545d0aa84c2a510101357d26ca8436a9b205e",
       "path": "evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "safe-mechanism",
-          "role": "content",
-          "suite": "errexit-zero-accumulation"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "independent-trust-invocation",
-          "role": "content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
+          "check": "obsolete-authority",
+          "role": "required-absent",
+          "suite": "milestone-7-independent-trust-replan"
         }
       ]
     },
@@ -14396,6 +14441,11 @@
           "suite": "language-binding-wire-representation"
         },
         {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -14603,6 +14653,11 @@
           "check": "profile-policy",
           "role": "content",
           "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
         },
         {
           "check": "canonical-owner-paths",
@@ -15297,6 +15352,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -15613,6 +15673,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -15664,6 +15729,11 @@
       "path": "profiles/languages/rust/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
         {
           "check": "canonical-profile",
           "role": "content",
@@ -15938,6 +16008,11 @@
       "path": "profiles/languages/rust/security.md",
       "state": "present",
       "uses": [
+        {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
         {
           "check": "canonical-profile",
           "role": "content",
@@ -21444,6 +21519,11 @@
           "suite": "language-binding-wire-representation"
         },
         {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
           "suite": "milestone-7-row-18-decomposition"
@@ -21689,6 +21769,11 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
         },
         {
           "check": "cross-platform-owner",
@@ -22256,6 +22341,11 @@
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
           "suite": "launcher-owner-row-14"
+        },
+        {
+          "check": "required-paths",
+          "role": "required-present",
+          "suite": "milestone-7-independent-trust-replan"
         },
         {
           "check": "canonical-prerequisites",
@@ -23717,11 +23807,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:c5c21c9903a277e286692207e9c1192784e3ad32b2fbc10ee68a1480022dc359",
+    "digest": "sha256:b4ac207cfbaa4a7bbf6a2e8a3d1339e61bd4004c4af4949f5a96d9c8daaaabc2",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:0ebf5c1bcac1020954edbe34b9b9ed50e7905234b20862eb4b8a56fd6f05ee70",
+    "digest": "sha256:d47e8c4173b979a2824ab1a757d6bd623092b4a96abfcdce6ae06c9fd67d4c18",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24531,7 +24621,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:a96f9b90babb250a55af3a71bcadbbf2f06ba92f3847ff8a513435dedc3135e1",
+      "digest": "sha256:f86606d79a7f100f63f76b9d32483b872b42a37a2dbeeb9021609282a2465a1c",
       "id": "milestone-7-row-35-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "requires": []
@@ -25177,12 +25267,6 @@
       "requires": []
     },
     {
-      "digest": "sha256:229d7475de1ba85bbef3126c340dd237591448994428921a4f15f4df705b38ac",
-      "id": "errexit-zero-accumulation",
-      "path": "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml",
-      "requires": []
-    },
-    {
       "digest": "sha256:c63dcfacdad501e4c845a1b528ad30e0c3d47ad405e343bdcb46902c3bee5df8",
       "id": "historical-row-checker-ownership",
       "path": "evaluation/standards-effectiveness/suites/historical-row-checker-ownership.toml",
@@ -25378,6 +25462,12 @@
       "digest": "sha256:1b67e9813e548d9e60ea53ecef8e277fa931e3efe5e17a2e84514e553303c8cc",
       "id": "interop-event-registration",
       "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:03edc3c48d4f61ef85997611a8f0189b4af0589973c8d29d1bb3f02091228f11",
+      "id": "milestone-7-independent-trust-replan",
+      "path": "evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml",
       "requires": []
     }
   ]

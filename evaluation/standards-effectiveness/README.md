@@ -834,12 +834,12 @@ boundary without moving normative guidance.
 `milestone-7-independent-trust-replan.md`,
 `milestone-7-independent-trust-groups.tsv`, and
 `milestone-7-independent-trust-next-slice.tsv` resume the independent
-trust-boundary wave after the lifecycle bridge. The focused checker proves the
-61-ID/six-proposed-owner frozen baseline, 59-ID current remainder after event
-registration and wire-representation acceptance, owner existence, accepted
-Contracts/Interop/Rust Language Binding dependencies, residual decomposition
-status, and the historical corrected `STD-0757` proposal. The accepted
-`7.4b7h` re-plan rejects a six-ID Security draft that still mixed Core,
+trust-boundary wave after the lifecycle bridge.
+The registered `milestone-7-independent-trust-replan` suite proves the
+61-ID/six-proposed-owner frozen baseline and accepted pretrain disposition
+evidence. It also checks owner and dependency existence, empty next-slice state,
+and accepted report and finding projections without nested execution. The
+accepted `7.4b7h` re-plan rejects a six-ID Security draft that still mixed Core,
 Contracts, Security, implementation structure, and field-rule ownership.
 Accepted `7.4b7i` establishes the bounded Rust wire-representation contract
 and disposition. Accepted `7.4b7j` re-measures the remainder, records accepted

@@ -6945,3 +6945,36 @@ plan, and complete mixed evidence pass. Final graph: 12 Bash checkers, 14
 nodes, 81 edges, and 14 components. The old checker is absent without nested
 execution, a normative policy rewrite, compatibility representation, or
 fallback.
+
+### M6-I114 Independent-Trust Re-plan Acceptance
+
+Fresh post-M6-I113 evidence reports 12 Bash verifiers, 14 nodes, 81 edges,
+and 14 components. The 249-line
+`verify-milestone-7-independent-trust-replan.sh` is the sole checker with zero
+actual verifier/helper inbound dependencies, at wave 5. It invokes six retained
+verifier gates and has six frozen contract-inbound references.
+
+The package uses `shared-contract` execution because the protected Bash-only
+zero-accumulation suite and the row-35 transitive-caller contract must retire
+with the checker. One nine-check `migration.parent-plan` suite preserves the
+exact six-group frozen structure, five accepted pretrain dispositions, empty
+next-slice state, required owner and dependency paths, accepted report and
+parent projections, finding closure, documentation, and terminal authority
+state.
+
+The zero-accumulation suite and fixture retire without a compatibility check
+because their only contract was the removed Bash arithmetic mechanism. The
+row-35 caller manifest becomes empty and its suite drops the obsolete direct-
+invocation assertion. Contract ownership, Concurrency, Interop boundary,
+Milestone decomposition, execution-train, and plan-fixture gates remain
+independent through twelve M6-I114 dispositions. Fourteen prior rows transfer
+to the new registered suite.
+
+Nine rejecting mutations and one accepting report-extension mutation prove
+parity under both authorities. Exact final compilation renews 22/22
+dependency-local requirements and leaves 29 stable, closing 51/51 coverage.
+All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components. The old checker,
+Bash-only suite, and fixture are absent without nested execution, a normative
+or legacy source rewrite, compatibility representation, or fallback.

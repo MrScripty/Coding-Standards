@@ -1,0 +1,174 @@
+schema_version = 1
+id = "milestone-7-independent-trust-replan"
+owner = "migration.parent-plan"
+description = "Frozen independent-trust grouping, accepted pretrain dispositions, empty next-slice state, accepted report evidence, and dependency presence without nested Bash execution."
+
+[[checks]]
+id = "trust-groups"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-independent-trust-groups.tsv"
+header = ["order", "proposed_owner", "frozen_ids", "owner_state", "prerequisite", "status", "known_missing_owner", "pretrain_accepted_ids"]
+non_empty = ["order", "proposed_owner", "frozen_ids", "owner_state", "prerequisite", "status", "known_missing_owner", "pretrain_accepted_ids"]
+unique = [["order"], ["proposed_owner"]]
+[checks.domains]
+owner_state = ["exists"]
+known_missing_owner = ["none"]
+[[checks.projections]]
+columns = ["order", "proposed_owner", "frozen_ids", "owner_state", "prerequisite", "status", "known_missing_owner", "pretrain_accepted_ids"]
+order = "source"
+expected = [
+  ["1", "topics/security.md", "7", "exists", "topics/contracts.md", "train-decomposed", "none", "STD-0583,STD-0601"],
+  ["2", "topics/cross-platform.md", "6", "exists", "none", "decomposition", "none", "none"],
+  ["3", "profiles/boundaries/interop.md", "10", "exists", "topics/contracts.md", "train-decomposed", "none", "STD-0473"],
+  ["4", "profiles/languages/rust/interop.md", "1", "exists", "profiles/languages/rust/language-bindings.md,topics/contracts.md", "pretrain-complete", "none", "STD-0757"],
+  ["5", "profiles/languages/rust/security.md", "3", "exists", "topics/security.md", "train-decomposed", "none", "STD-0824"],
+  ["6", "profiles/languages/rust/language-bindings.md", "34", "exists", "profiles/boundaries/language-bindings.md,profiles/languages/rust/async.md", "decomposition", "none", "none"],
+]
+
+[[checks]]
+id = "pretrain-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [
+  ["STD-0473"],
+  ["STD-0757"],
+  ["STD-0824"],
+  ["STD-0583"],
+  ["STD-0601"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0473", "STD-0583", "STD-0601", "STD-0757", "STD-0824"]
+
+[[checks]]
+id = "next-slice-closure"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-independent-trust-next-slice.tsv"
+header = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = []
+
+[[checks]]
+id = "required-paths"
+type = "path_state"
+present = [
+  "topics/security.md",
+  "topics/cross-platform.md",
+  "topics/contracts.md",
+  "profiles/boundaries/interop.md",
+  "profiles/boundaries/language-bindings.md",
+  "profiles/languages/rust/async.md",
+  "profiles/languages/rust/interop.md",
+  "profiles/languages/rust/security.md",
+  "profiles/languages/rust/language-bindings.md",
+]
+
+[[checks]]
+id = "accepted-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md"
+required = [
+  "589 residual identifiers across 28 legacy",
+  "61 frozen baseline identifiers and 56 current identifiers",
+  "`F048`",
+  "`F049`",
+  "## Accepted Slice 7.4b7f: Planning-Only Remainder Re-plan",
+  "No normative or legacy standard, final disposition",
+  "in-flight delivery",
+  "fixtures/interop/event-registration-decisions.tsv",
+  "verify-interop-event-registration.sh",
+  "conditional Concurrency selection",
+  "provider contract select",
+  "lifecycle phase",
+  "## Accepted Slice 7.4b7f2: Executor Delegation Verification Repair",
+  "## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract",
+  "## Accepted Slice 7.4b7h: Independent Trust Remainder Re-plan",
+  "## Planned Slice 7.4b7i: Rust Serialized Binding Representation",
+  "## Accepted Slice 7.4b7i: Rust Serialized Binding Representation",
+  "## Planned Slice 7.4b7j: Independent Trust Remainder Re-plan",
+  "## Accepted Slice 7.4b7j: Independent Trust Remainder Re-plan",
+  "## Planned Slice 7.4b7k: Rust External-Input Queue Contract",
+  "## Accepted Slice 7.4b7k: Rust External-Input Queue Contract",
+  "## Planned Slice 7.4b7l: Independent Trust Remainder Re-plan",
+  "## Accepted Slice 7.4b7l: Independent Trust Remainder Re-plan",
+  "## Planned Slice 7.4b7m: Validation Proof-Lifetime Contract",
+  "## Accepted Slice 7.4b7m: Validation Proof-Lifetime Contract",
+  "## Planned Slice 7.4b7n: Independent Trust Remainder Re-plan",
+  "## Accepted Slice 7.4b7n: Accelerated Execution Train",
+  "## Planned Slice 7.4b8a: Security Validation Cluster",
+  "rolling remainder is 593 identifiers",
+  "independent trust subset is 60 identifiers",
+  "Their 61 frozen identifiers include accepted `STD-0473`",
+  "`STD-0757` is a serialized Rust/host representation",
+  "first isolated draft selected six generic Security",
+  "schema-free JSON",
+  "`F051`",
+  "pre-existing checker defect",
+  "rolling remainder is 592 identifiers across 28 legacy sources and 27",
+  "27 focused wire-representation decisions",
+  "`STD-0824` is a bounded external-input queue rule",
+  "`F052`",
+  "`STD-0583` and `STD-0601` are one validation",
+  "`F053`",
+  "rolling remainder is 589 identifiers",
+  "rolling remainder is 591 identifiers",
+  "independent trust remainder",
+  "independent trust\nremainder is 59 identifiers",
+  "**No fallback:**",
+  "**Pre-slice review:** accepted.",
+]
+prohibited = []
+
+[[checks]]
+id = "parent-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-decomposition.md"
+required = [
+  "(milestone-7-independent-trust-replan.md)",
+  "56-identifier pretrain remainder across six proposed-owner groups",
+]
+prohibited = []
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = [
+  "| F048 | Execution train active after Milestone 7.4b7o |",
+  "Resolve the residual cross-role destinations",
+  "| F049 | Resolved in Milestone 7.4b7g |",
+  "| F050 | Resolved in Milestone 7.4b7f2 |",
+  "| F051 | Resolved in Milestone 7.4b7i |",
+  "| F052 | Resolved in Milestone 7.4b7k |",
+  "| F053 | Resolved in Milestone 7.4b7m |",
+]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "registered `milestone-7-independent-trust-replan` suite",
+  "61-ID/six-proposed-owner frozen baseline",
+  "accepted pretrain disposition",
+]
+prohibited = ["`verify-milestone-7-independent-trust-replan.sh`"]
+
+[[checks]]
+id = "obsolete-authority"
+type = "path_state"
+present = ["evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml"]
+absent = [
+  "evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh",
+  "evaluation/standards-effectiveness/suites/errexit-zero-accumulation.toml",
+  "evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv",
+]

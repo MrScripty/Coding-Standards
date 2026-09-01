@@ -7159,3 +7159,24 @@
   51/51 coverage. Focused, engine, repository-git, graph, declarative,
   generated, numeric, plan, and complete mixed evidence pass. Final graph: 12
   Bash checkers, 14 nodes, 81 edges, and 14 components.
+
+## 2026-09-01 - M6-I114 Independent-Trust Re-plan Acceptance
+
+- Fresh post-M6-I113 evidence reports 12 Bash verifiers, 14 nodes, 81 edges,
+  and 14 components. The 249-line independent-trust re-plan verifier is the
+  sole checker with zero actual verifier/helper inbound dependencies, at wave
+  5. M6-I114 is `shared-contract` at train order 229.
+- One nine-check `migration.parent-plan` suite preserves the exact six-group
+  frozen structure, five accepted pretrain dispositions, empty next-slice
+  state, required owner and dependency paths, accepted report and parent
+  projections, finding closure, documentation, and terminal authority state.
+- The Bash-only zero-accumulation suite and fixture retire with their protected
+  checker. Row-35 transitive-caller evidence closes at empty, six retained
+  verifiers remain independent through twelve edge dispositions, and fourteen
+  earlier M6-I70, M6-I79, M6-I81 through M6-I84, and M6-I113 rows transfer to
+  registered suite evidence.
+- Nine rejecting mutations and one accepting report-extension mutation prove
+  parity. Exact 22/22 dependency-local renewal leaves 29 requirements stable
+  and closes 51/51 coverage. Focused,
+  graph, declarative, generated, numeric, plan, and complete mixed evidence
+  pass. Final graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components.
