@@ -205,3 +205,21 @@
   not been created and must use the corrected commit as its creation base.
   This synchronization changes no authored prototype source and keeps each
   branch private and unmerged.
+
+## 2026-09-01 - Python Prototype Test-Boundary Correction
+
+- P3 logic, CPython 3.11/3.12 runs, Ruff checks, and generated freshness passed,
+  but the required complete-suite checkpoint stopped its admission with
+  `PYTHON_PACKAGE.UNOWNED_SOURCE`. A tracked `.py` file below
+  `tools/standards_engine/prototypes` is production Python under the current
+  package contract even when its filename says prototype.
+- Suspended P2 through P5 execution before any Python prototype commit. Moved
+  their registered paths below the existing
+  `tools/standards_engine/tests/prototypes/a2` test boundary. This preserves
+  throwaway classification without changing the production package manifest,
+  dependency closure, public roots, A1c operations, or canonical Engine code.
+- Restored the exact generated-evidence expectation to one repository-index
+  digest only. A package-input entry or unowned-source diagnostic now requires
+  stop and re-plan rather than broadening production ownership for test code.
+- P2 through P4 require a later exact-base re-admission before moving their
+  completed uncommitted source or fast-forwarding again. P5 remains uncreated.

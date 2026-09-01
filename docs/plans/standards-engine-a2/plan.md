@@ -285,10 +285,10 @@ terminology, paper-only assumptions, or unresolved publication facts.
 - `docs/decisions/standards-engine-a2.md`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
 - `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html`
-- `tools/standards_engine/prototypes/a2/projected-view.prototype.py`
-- `tools/standards_engine/prototypes/a2/publication-recovery.prototype.py`
-- `tools/standards_engine/prototypes/a2/facade-workflow.prototype.py`
-- `tools/standards_engine/prototypes/a2/efficiency-measurement.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py`
 
 The five prototype paths are writable only in governed isolated prototype
 branches or worktrees and never enter the canonical integration branch. The
@@ -296,11 +296,13 @@ canonical branch accepts their exact evidence pointers, verdicts, and validated
 decisions through the named reports. Each prototype branch also owns its local
 mechanically regenerated `evaluation/standards-effectiveness/generated/suite-inputs.json`
 because staging a new prototype path changes that branch's repository-index
-observation. For a prototype path selected by an existing package-contract
-input, the generated diff must also add that exact path and content digest to
-the selected input set. No registry, suite-definition, existing-file, graph,
-inventory, or retirement evidence may change. The branch-local projection is
-never integrated into canonical `main`.
+observation. Executable Python prototypes must remain below the package's
+existing `tests` boundary so the package contract excludes them from production
+source ownership and import-closure checks. The generated diff must change only
+the derived index digest; a package-input entry is a stop condition. No
+registry, suite-definition, existing-file, graph, inventory, or retirement
+evidence may change. The branch-local projection is never integrated into
+canonical `main`.
 
 **Tasks:**
 
