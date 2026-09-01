@@ -23721,7 +23721,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:8683bbfce4feb40d8bcdd376f26e8591988ec12aa1fec946e1283f2b5b2be461",
+    "digest": "sha256:0ebf5c1bcac1020954edbe34b9b9ed50e7905234b20862eb4b8a56fd6f05ee70",
     "uses": [
       {
         "check": "python-package-contract",

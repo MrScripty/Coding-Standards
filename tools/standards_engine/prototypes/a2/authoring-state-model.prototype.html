@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A2-P1 throwaway authoring state model</title>
+  <style>
+    body { font: 15px/1.45 system-ui, sans-serif; margin: 2rem; max-width: 1100px; }
+    button { margin: .2rem; padding: .45rem .7rem; }
+    pre { background: #f3f3f3; border: 1px solid #ccc; padding: 1rem; overflow: auto; }
+    .warning { border: 2px solid #a33; padding: 1rem; }
+    .pass { color: #176b2c; }
+    .fail { color: #9b1c1c; }
+    .columns { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 800px) { .columns { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>A2-P1: authoring state-model prototype</h1>
+  <p class="warning"><strong>Throwaway design evidence.</strong> This file is
+    not production code, a public contract, or canonical Engine authority. It
+    uses fake opaque identities and in-memory state so a human can inspect the
+    proposed transitions.</p>
+
+  <h2>Question</h2>
+  <p>Can one Authoring model combine immutable revisions and evidence with one
+    compare-and-swap proposal head, then distinguish stale, unauthorized,
+    interrupted, applied, and recovery-required outcomes without changing A1c
+    snapshot or analysis semantics?</p>
+
+  <h2>Guided scenarios</h2>
+  <p>Each button resets state, executes the registered sequence, checks every
+    typed result, and leaves the complete final state visible below.</p>
+  <div id="scenarios"></div>
+  <pre id="scenario-result">No guided scenario run.</pre>
+
+  <h2>Free play</h2>
+  <div id="actions"></div>
+  <p>Normal revise uses the current head. “Stale revise” deliberately supplies
+    a wrong expected head. “Interrupted publish” updates the target but withholds
+    the success response so recovery must establish the result.</p>
+
+  <div class="columns">
+    <section>
+      <h2>Last typed result</h2>
+      <pre id="last-result"></pre>
+    </section>
+    <section>
+      <h2>Complete relevant state</h2>
+      <pre id="state"></pre>
+    </section>
+  </div>
+
+  <h2>Transition trace</h2>
+  <pre id="trace"></pre>
+
+  <script>
+  "use strict";
+
+  const AuthoringModel = (() => {
+    const clone = value => JSON.parse(JSON.stringify(value));
+
+    function initialState() {
+      return {
+        schema: "a2-p1.throwaway.v1",
+        clock: 0,
+        counters: { revision: 0, analysis: 0, readiness: 0, attempt: 0 },
+        proposal: null,
+        analyses: {},
+        approvals: {},
+        readiness: {},
+        currentAnalysis: null,
+        currentReadiness: null,
+        authorization: { decision: "allow", version: 1 },
+        target: {
+          expectedByDeployment: "commit:base",
+          actual: "commit:base",
+          observations: ["commit:base"]
+        },
+        attempt: null,
+        events: []
+      };
+    }
+
+    function transition(previous, command) {
+      const state = clone(previous);
+      state.clock += 1;
+
+      function finish(code, outcome, nextOperations = []) {
+        const result = { code, outcome, nextOperations };
+        state.events.push({ at: state.clock, command: clone(command), result });
+        return { state, result };
+      }
+
+      function requireProposal() {
+        return state.proposal !== null;
+      }
+
+      function currentRevision() {
+        return requireProposal() ? state.proposal.revisions[state.proposal.head] : null;
+      }
+
+      function readinessIsCurrent() {
+        if (!state.currentReadiness || !state.currentAnalysis || !requireProposal()) return false;
+        const proof = state.readiness[state.currentReadiness];
+        const analysis = state.analyses[state.currentAnalysis];
+        return Boolean(
+          proof && analysis &&
+          proof.revision === state.proposal.head &&
+          proof.analysis === state.currentAnalysis &&
+          analysis.revision === state.proposal.head &&
+          proof.authorizationVersion === state.authorization.version &&
+          proof.target === state.target.expectedByDeployment
+        );
+      }
+
+      switch (command.kind) {
+        case "create": {
+          if (requireProposal()) return finish("PROPOSAL.ALREADY_EXISTS", "invalid");
+          state.counters.revision += 1;
+          const revision = `revision:${state.counters.revision}`;
+          state.proposal = {
+            id: "proposal:1",
+            baseSnapshot: "snapshot:opaque-a1c-root",
+            head: revision,
+            revisions: {
+              [revision]: {
+                id: revision,
+                parent: null,
+                mutations: [{ kind: "modify", path: "workflows/planning.md", content: "v1" }],
+                semanticProposals: []
+              }
+            }
+          };
+          return finish("PROPOSAL.CREATED", "success", ["analyze", "revise"]);
+        }
+
+        case "revise": {
+          if (!requireProposal()) return finish("PROPOSAL.UNAVAILABLE", "unavailable");
+          if (command.expectedHead !== state.proposal.head) {
+            return finish("PROPOSAL.STALE_HEAD", "stale", ["inspect", "revise"]);
+          }
+          state.counters.revision += 1;
+          const parent = state.proposal.head;
+          const revision = `revision:${state.counters.revision}`;
+          state.proposal.revisions[revision] = {
+            id: revision,
+            parent,
+            mutations: [{ kind: "modify", path: "workflows/planning.md", content: command.content || revision }],
+            semanticProposals: []
+          };
+          state.proposal.head = revision;
+          state.currentAnalysis = null;
+          state.currentReadiness = null;
+          state.attempt = null;
+          return finish("PROPOSAL.REVISED", "success", ["analyze", "revise"]);
+        }
+
+        case "analyze": {
+          if (!currentRevision()) return finish("PROPOSAL.UNAVAILABLE", "unavailable");
+          state.counters.analysis += 1;
+          const id = `analysis:${state.counters.analysis}`;
+          state.analyses[id] = {
+            id,
+            revision: state.proposal.head,
+            state: "complete",
+            owner: "accepted-a1c-analysis"
+          };
+          state.currentAnalysis = id;
+          state.currentReadiness = null;
+          return finish("ANALYSIS.COMPLETE", "success", ["approve-semantic", "approve-relationship", "approve-lifecycle"]);
+        }
+
+        case "approve": {
+          if (!state.currentAnalysis) return finish("ANALYSIS.MISSING", "invalid", ["analyze"]);
+          const analysis = state.analyses[state.currentAnalysis];
+          if (analysis.revision !== state.proposal.head) {
+            return finish("ANALYSIS.STALE", "stale", ["analyze"]);
+          }
+          if (!["semantic", "relationship", "lifecycle"].includes(command.approval)) {
+            return finish("APPROVAL.INVALID_KIND", "invalid");
+          }
+          const key = `${state.proposal.head}:${command.approval}`;
+          state.approvals[key] = {
+            kind: command.approval,
+            revision: state.proposal.head,
+            analysis: state.currentAnalysis,
+            issuer: `issuer:${command.approval}`,
+            decision: "accept"
+          };
+          return finish("APPROVAL.RECORDED", "success", ["derive-readiness"]);
+        }
+
+        case "derive-readiness": {
+          if (state.authorization.decision !== "allow") {
+            return finish("AUTHORING.UNAUTHORIZED", "unauthorized");
+          }
+          if (!state.currentAnalysis) return finish("ANALYSIS.MISSING", "invalid", ["analyze"]);
+          const analysis = state.analyses[state.currentAnalysis];
+          if (analysis.revision !== state.proposal.head) {
+            return finish("ANALYSIS.STALE", "stale", ["analyze"]);
+          }
+          const missing = ["semantic", "relationship", "lifecycle"].filter(
+            kind => !state.approvals[`${state.proposal.head}:${kind}`]
+          );
+          if (missing.length) {
+            return finish("READINESS.INCOMPLETE", "invalid", missing.map(kind => `approve-${kind}`));
+          }
+          state.counters.readiness += 1;
+          const id = `readiness:${state.counters.readiness}`;
+          state.readiness[id] = {
+            id,
+            revision: state.proposal.head,
+            analysis: state.currentAnalysis,
+            approvals: ["semantic", "relationship", "lifecycle"],
+            authorizationVersion: state.authorization.version,
+            target: state.target.expectedByDeployment,
+            verificationContract: "verification-contract:current"
+          };
+          state.currentReadiness = id;
+          return finish("READINESS.READY", "success", ["stage"]);
+        }
+
+        case "revoke": {
+          state.authorization = { decision: "deny", version: state.authorization.version + 1 };
+          return finish("AUTHORIZATION.REVOKED", "success");
+        }
+
+        case "authorize": {
+          state.authorization = { decision: "allow", version: state.authorization.version + 1 };
+          return finish("AUTHORIZATION.GRANTED", "success", ["derive-readiness"]);
+        }
+
+        case "stage": {
+          if (state.authorization.decision !== "allow") {
+            return finish("AUTHORING.UNAUTHORIZED", "unauthorized");
+          }
+          if (!state.currentReadiness) return finish("READINESS.MISSING", "invalid", ["derive-readiness"]);
+          if (!readinessIsCurrent()) return finish("READINESS.STALE", "stale", ["derive-readiness"]);
+          state.counters.attempt += 1;
+          const id = `attempt:${state.counters.attempt}`;
+          state.attempt = {
+            id,
+            revision: state.proposal.head,
+            readiness: state.currentReadiness,
+            baseTarget: state.target.expectedByDeployment,
+            candidate: `commit:candidate-${state.counters.attempt}`,
+            phase: "staged",
+            verification: "pending",
+            result: null
+          };
+          return finish("APPLICATION.STAGED", "success", ["verify"]);
+        }
+
+        case "verify": {
+          if (!state.attempt || state.attempt.phase !== "staged") {
+            return finish("APPLICATION.NOT_STAGED", "invalid", ["stage"]);
+          }
+          if (command.accepted === false) {
+            state.attempt.phase = "verification-failed";
+            state.attempt.verification = "failed";
+            state.attempt.result = "verification-failed";
+            return finish("APPLICATION.VERIFICATION_FAILED", "invalid", ["revise"]);
+          }
+          state.attempt.phase = "verified";
+          state.attempt.verification = "passed";
+          return finish("APPLICATION.VERIFIED", "success", ["publish"]);
+        }
+
+        case "external-target-change": {
+          state.target.actual = command.target || "commit:external-change";
+          state.target.observations = [state.target.actual];
+          return finish("TARGET.CHANGED_EXTERNALLY", "success");
+        }
+
+        case "observe-contradiction": {
+          state.target.observations = [state.target.actual, "commit:contradictory-observer"];
+          return finish("TARGET.OBSERVATION_CONTRADICTORY", "success", ["recover"]);
+        }
+
+        case "observe-unavailable": {
+          state.target.observations = [];
+          return finish("TARGET.OBSERVATION_UNAVAILABLE", "unavailable", ["recover"]);
+        }
+
+        case "interrupt-before-publish": {
+          if (!state.attempt || state.attempt.phase !== "verified") {
+            return finish("APPLICATION.NOT_VERIFIED", "invalid");
+          }
+          state.attempt.phase = "publication-unknown";
+          state.attempt.result = "recovery-required";
+          return finish("APPLICATION.RECOVERY_REQUIRED", "unknown", ["recover"]);
+        }
+
+        case "publish": {
+          if (!state.attempt || !["verified", "publication-unknown"].includes(state.attempt.phase)) {
+            return finish("APPLICATION.NOT_VERIFIED", "invalid", ["verify"]);
+          }
+          if (state.authorization.decision !== "allow" || !readinessIsCurrent()) {
+            return finish("AUTHORING.UNAUTHORIZED_OR_STALE", "unauthorized", ["derive-readiness"]);
+          }
+          if (state.target.observations.length !== 1) {
+            state.attempt.phase = "publication-unknown";
+            state.attempt.result = "recovery-required";
+            return finish("APPLICATION.RECOVERY_REQUIRED", "unknown", ["recover"]);
+          }
+          if (state.target.observations[0] !== state.attempt.baseTarget) {
+            state.attempt.phase = "stale-target";
+            state.attempt.result = "stale-target";
+            return finish("APPLICATION.STALE_TARGET", "stale", ["inspect", "revise"]);
+          }
+          state.target.actual = state.attempt.candidate;
+          state.target.observations = [state.attempt.candidate];
+          if (command.interruptAfterPublication) {
+            state.attempt.phase = "publication-unknown";
+            state.attempt.result = "recovery-required";
+            return finish("APPLICATION.RECOVERY_REQUIRED", "unknown", ["recover"]);
+          }
+          state.attempt.phase = "applied";
+          state.attempt.result = "applied";
+          return finish("APPLICATION.APPLIED", "success", ["inspect"]);
+        }
+
+        case "recover": {
+          if (!state.attempt) return finish("APPLICATION.ATTEMPT_MISSING", "unavailable");
+          const observed = state.target.observations;
+          if (observed.length !== 1) {
+            state.attempt.phase = "publication-unknown";
+            state.attempt.result = "recovery-required";
+            return finish("APPLICATION.RECOVERY_REQUIRED", "unknown", ["recover"]);
+          }
+          if (observed[0] === state.attempt.candidate) {
+            state.attempt.phase = "applied";
+            state.attempt.result = "applied";
+            return finish("APPLICATION.APPLIED", "success", ["inspect"]);
+          }
+          if (observed[0] === state.attempt.baseTarget) {
+            state.attempt.phase = "verified";
+            state.attempt.result = "not-published";
+            return finish("APPLICATION.RESUMABLE", "success", ["publish"]);
+          }
+          state.attempt.phase = "stale-target";
+          state.attempt.result = "stale-target";
+          return finish("APPLICATION.STALE_TARGET", "stale", ["inspect", "revise"]);
+        }
+
+        default:
+          return finish("COMMAND.UNSUPPORTED", "unsupported");
+      }
+    }
+
+    return { initialState, transition };
+  })();
+
+  window.AuthoringModel = AuthoringModel;
+
+  let current = AuthoringModel.initialState();
+  let last = { code: "NONE", outcome: "not-run", nextOperations: ["create"] };
+
+  function apply(command) {
+    const step = AuthoringModel.transition(current, command);
+    current = step.state;
+    last = step.result;
+    render();
+    return last;
+  }
+
+  function commandFor(name) {
+    const commands = {
+      "Create": () => ({ kind: "create" }),
+      "Revise current": () => ({ kind: "revise", expectedHead: current.proposal?.head, content: `edit-${current.clock}` }),
+      "Stale revise": () => ({ kind: "revise", expectedHead: "revision:stale", content: "must-not-land" }),
+      "Analyze": () => ({ kind: "analyze" }),
+      "Approve semantic": () => ({ kind: "approve", approval: "semantic" }),
+      "Approve relationship": () => ({ kind: "approve", approval: "relationship" }),
+      "Approve lifecycle": () => ({ kind: "approve", approval: "lifecycle" }),
+      "Derive readiness": () => ({ kind: "derive-readiness" }),
+      "Revoke": () => ({ kind: "revoke" }),
+      "Authorize": () => ({ kind: "authorize" }),
+      "Stage": () => ({ kind: "stage" }),
+      "Verify": () => ({ kind: "verify" }),
+      "Fail verification": () => ({ kind: "verify", accepted: false }),
+      "External target change": () => ({ kind: "external-target-change" }),
+      "Interrupt before publish": () => ({ kind: "interrupt-before-publish" }),
+      "Publish": () => ({ kind: "publish" }),
+      "Interrupted publish": () => ({ kind: "publish", interruptAfterPublication: true }),
+      "Contradict observations": () => ({ kind: "observe-contradiction" }),
+      "Lose observations": () => ({ kind: "observe-unavailable" }),
+      "Recover": () => ({ kind: "recover" })
+    };
+    return commands[name]();
+  }
+
+  const setup = [
+    [{ kind: "create" }, "PROPOSAL.CREATED"],
+    [{ kind: "analyze" }, "ANALYSIS.COMPLETE"],
+    [{ kind: "approve", approval: "semantic" }, "APPROVAL.RECORDED"],
+    [{ kind: "approve", approval: "relationship" }, "APPROVAL.RECORDED"],
+    [{ kind: "approve", approval: "lifecycle" }, "APPROVAL.RECORDED"],
+    [{ kind: "derive-readiness" }, "READINESS.READY"],
+    [{ kind: "stage" }, "APPLICATION.STAGED"],
+    [{ kind: "verify" }, "APPLICATION.VERIFIED"]
+  ];
+
+  const scenarios = {
+    "Happy apply": [...setup, [{ kind: "publish" }, "APPLICATION.APPLIED"]],
+    "Stale head CAS": [
+      [{ kind: "create" }, "PROPOSAL.CREATED"],
+      [{ kind: "revise", expectedHead: "revision:stale" }, "PROPOSAL.STALE_HEAD"]
+    ],
+    "Mutation invalidates proof": [
+      ...setup.slice(0, 6),
+      [{ kind: "revise", expectedHead: "revision:1" }, "PROPOSAL.REVISED"],
+      [{ kind: "stage" }, "READINESS.MISSING"]
+    ],
+    "Revoked authority": [
+      ...setup.slice(0, 6),
+      [{ kind: "revoke" }, "AUTHORIZATION.REVOKED"],
+      [{ kind: "stage" }, "AUTHORING.UNAUTHORIZED"]
+    ],
+    "Concurrent target change": [
+      ...setup,
+      [{ kind: "external-target-change" }, "TARGET.CHANGED_EXTERNALLY"],
+      [{ kind: "publish" }, "APPLICATION.STALE_TARGET"]
+    ],
+    "Interrupted before publish": [
+      ...setup,
+      [{ kind: "interrupt-before-publish" }, "APPLICATION.RECOVERY_REQUIRED"],
+      [{ kind: "recover" }, "APPLICATION.RESUMABLE"]
+    ],
+    "Applied before response": [
+      ...setup,
+      [{ kind: "publish", interruptAfterPublication: true }, "APPLICATION.RECOVERY_REQUIRED"],
+      [{ kind: "recover" }, "APPLICATION.APPLIED"]
+    ],
+    "Contradictory observation": [
+      ...setup,
+      [{ kind: "observe-contradiction" }, "TARGET.OBSERVATION_CONTRADICTORY"],
+      [{ kind: "recover" }, "APPLICATION.RECOVERY_REQUIRED"]
+    ]
+  };
+
+  function runScenario(name) {
+    current = AuthoringModel.initialState();
+    const failures = [];
+    const observations = [];
+    for (const [command, expected] of scenarios[name]) {
+      const actual = apply(command).code;
+      observations.push(`${command.kind}: ${actual}`);
+      if (actual !== expected) failures.push(`expected ${expected}, observed ${actual}`);
+    }
+    const output = document.getElementById("scenario-result");
+    output.className = failures.length ? "fail" : "pass";
+    output.textContent = `${failures.length ? "FAIL" : "PASS"} ${name}\n` +
+      observations.join("\n") +
+      (failures.length ? `\n\n${failures.join("\n")}` : "");
+  }
+
+  function render() {
+    document.getElementById("last-result").textContent = JSON.stringify(last, null, 2);
+    document.getElementById("state").textContent = JSON.stringify({ ...current, events: undefined }, null, 2);
+    document.getElementById("trace").textContent = JSON.stringify(current.events, null, 2);
+  }
+
+  const scenarioRoot = document.getElementById("scenarios");
+  for (const name of Object.keys(scenarios)) {
+    const button = document.createElement("button");
+    button.textContent = name;
+    button.addEventListener("click", () => runScenario(name));
+    scenarioRoot.appendChild(button);
+  }
+
+  const actionRoot = document.getElementById("actions");
+  for (const name of [
+    "Create", "Revise current", "Stale revise", "Analyze",
+    "Approve semantic", "Approve relationship", "Approve lifecycle",
+    "Derive readiness", "Revoke", "Authorize", "Stage", "Verify",
+    "Fail verification", "External target change", "Interrupt before publish",
+    "Publish", "Interrupted publish", "Contradict observations",
+    "Lose observations", "Recover"
+  ]) {
+    const button = document.createElement("button");
+    button.textContent = name;
+    button.addEventListener("click", () => apply(commandFor(name)));
+    actionRoot.appendChild(button);
+  }
+  const reset = document.createElement("button");
+  reset.textContent = "Reset";
+  reset.addEventListener("click", () => {
+    current = AuthoringModel.initialState();
+    last = { code: "NONE", outcome: "not-run", nextOperations: ["create"] };
+    document.getElementById("scenario-result").className = "";
+    document.getElementById("scenario-result").textContent = "No guided scenario run.";
+    render();
+  });
+  actionRoot.appendChild(reset);
+  render();
+  </script>
+</body>
+</html>
