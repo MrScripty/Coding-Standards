@@ -1,7 +1,7 @@
 schema_version = 1
 id = "historical-row-checker-ownership"
 owner = "migration.parent-plan"
-description = "Completed-row ownership evidence excludes live lifecycle assertions from the four retained historical decomposition verifiers."
+description = "Completed-row ownership evidence excludes live lifecycle assertions from the three retained historical decomposition verifiers."
 
 [[checks]]
 id = "forbidden-lifecycle"
@@ -49,10 +49,4 @@ prohibited = ["(`Planned`)"]
 id = "row-15-lifecycle"
 type = "text"
 path = "evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh"
-prohibited = ["(`Planned`)"]
-
-[[checks]]
-id = "row-43-lifecycle"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh"
 prohibited = ["(`Planned`)"]

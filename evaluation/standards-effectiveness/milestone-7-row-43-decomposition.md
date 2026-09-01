@@ -19,11 +19,12 @@ reference extraction, or policy copy is required.
 ## Verifier Ownership
 
 The accepted `verify-rust-binding-index-closure.sh` remains the focused owner
-for `STD-0789`, the nested Build System Organization migration index. Row 43
-uses the registered `rust-binding-title-index-closure` suite for the `STD-0758`
-document-title closure. The immutable P35 semantic outcome
+for `STD-0789`, the nested Build System Organization migration index. The
+registered `rust-binding-title-index-closure` suite owns the direct `STD-0758`
+index contract. The registered `milestone-7-row-43-decomposition` suite owns
+this row's lifecycle evidence. The immutable P35 semantic outcome
 `rust-binding-index-closure` names the package result, not a required checker
-filename. Neither verification owner owns the other disposition.
+filename. None of these authorities owns another's disposition or lifecycle.
 
 ## Exact Outcome
 
@@ -42,9 +43,9 @@ Planning acceptance does not dispose `STD-0758`.
 ## Bounded Write Set
 
 Planning may touch only this decomposition, its owner-validation fixture and
-checker, the active plan, and the execution ledger. Implementation may touch
-only the exact disposition table, the title-specific focused suite, the row-43
-checker, plan, and ledger.
+lifecycle suite, the active plan, and the execution ledger. Implementation may
+touch only the exact disposition table, the title-specific focused suite, the
+row-43 lifecycle suite, plan, and ledger.
 
 The accepted `STD-0789` verifier,
 `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`, canonical profiles and

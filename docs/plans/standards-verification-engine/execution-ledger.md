@@ -6765,3 +6765,21 @@
   suite checks, all suites, graph and generated freshness, numeric lifecycle,
   plan checks, and the complete 31-entrypoint checkpoint pass. Final graph: 31
   Bash checkers, 34 nodes, 223 edges, and 34 components.
+
+## 2026-08-31 - M6-I95 Row-43 Decomposition Acceptance
+
+- Fresh post-M6-I94 evidence reports 31 Bash verifiers, 34 nodes, 223 edges,
+  and 34 components. Six verifiers have no executable inbound edge; the
+  56-line row-43 decomposition verifier is the sole root at the highest
+  dependency wave 6. M6-I95 is `serial-coherent` at train order 210.
+- One seven-check `migration.parent-plan` suite preserves the exact execution-
+  train, P35 package, owner-validation, decomposition, Rust binding route,
+  profile, and prerequisite contract without absorbing the title policy.
+- Eight outgoing records retain four independent gates, two earlier M6-I93
+  records transfer to registered suite evidence, and the historical-row suite
+  releases its temporary retained-checker assertion.
+- Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
+  stable and close 51/51 coverage. Focused package and edge checks, all suites,
+  graph and generated freshness, numeric
+  lifecycle, plan checks, and the complete 30-entrypoint checkpoint pass.
+  Final graph: 30 Bash checkers, 33 nodes, 211 edges, and 33 components.

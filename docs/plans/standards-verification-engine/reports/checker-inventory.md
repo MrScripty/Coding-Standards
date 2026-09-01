@@ -6378,3 +6378,33 @@ numeric, plan, and complete mixed evidence pass. Final graph: 31 Bash checkers,
 34 nodes, 223 edges, and 34 components. The old checker is absent without a
 source-policy rewrite, nested execution, wrapper, compatibility
 representation, or fallback.
+
+### M6-I95 Row-43 Decomposition Acceptance
+
+Fresh post-M6-I94 evidence reports 31 Bash verifiers, 34 nodes, 223 edges,
+and 34 components. Six verifiers have no executable inbound edge. The 56-line
+`verify-milestone-7-row-43-decomposition.sh` is the sole root at the highest
+dependency wave 6; its incoming references are retained consumer and accepted
+edge evidence rather than commands. It invokes four retained verifier gates.
+The package is `serial-coherent` because no shared engine, schema, policy, or
+unresolved owner contract changes.
+
+One seven-check `migration.parent-plan` suite preserves the exact execution-
+train row, P35 package, owner-validation record, decomposition contract, legacy
+Rust binding routes, canonical profile metadata, and prerequisite paths. The
+separately owned title suite continues to prove all 52 source identities,
+disposition closure, and nested-index separation without duplicated policy.
+
+Rust binding index, binding architecture, language-profile routing, and the
+execution train remain independent gates through eight edge dispositions. Two
+prior M6-I93 records transfer to registered row-43 suite evidence, and the
+historical-row suite releases its temporary retained-checker assertion.
+
+Four mutations reject train-row drift, owner-disposition drift, profile-
+metadata drift, and stale row-43 checker authority. Exact final compilation
+renews 9/9 dependency-local requirements and leaves 42 requirements stable,
+closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
+plan, and complete mixed evidence pass.
+Final graph: 30 Bash checkers, 33 nodes, 211 edges, and 33 components. The old
+checker is absent without duplicated title policy, nested execution, wrapper,
+compatibility representation, or fallback.
