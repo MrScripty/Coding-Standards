@@ -32,7 +32,9 @@ move their unchanged authored file to the corrected exact path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
 before staging. P5 must be created directly from that re-admitted base. No
 other prototype-source rewrite, merge, or copying is authorized by this
-correction.
+correction. Exact review may update only a moved artifact's embedded run path
+and minimum `__file__` parent depth under the separately recorded relocation
+rule; the final evidence must record the resulting source identity.
 
 ## A2-P1 Authoring State Model
 

@@ -252,3 +252,16 @@
   `refs/archive/a2-prototypes/p3-publication-recovery`, verified a clean
   worktree, and removed only that task-owned `/tmp` worktree. The artifacts are
   recoverable from the archive ref and were not merged to canonical `main`.
+
+## 2026-09-01 - Relocated Prototype Self-Reference Correction
+
+- Pre-staging review at the corrected paths found that P2's embedded run command
+  still named the old path and its repository-root parent depth was one level
+  short. P4 had the same embedded-path issue and its manifest-root parent depth
+  was one level short.
+- Authorized only those exact relocation-derived self-reference corrections,
+  with mandatory exact source-diff review and complete prototype rerun. No
+  state, facade, comparison, oracle, criterion, or threshold logic may change.
+- The existing exact admitted base remains
+  `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; the path correction does not
+  synchronize prototype branches with later canonical evidence commits.

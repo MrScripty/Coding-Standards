@@ -109,6 +109,13 @@ a named recovery ref before the worktree becomes `removed-archived`, or the
 worktree receives an explicit `retained-protected` contract. No branch or
 worktree cleanup is inferred.
 
+When a pre-authored prototype is mechanically relocated to its registered test
+path, exact review may correct only an embedded reproduction path and the
+minimum `__file__` parent depth needed to retain the same repository or package
+root. The prototype owner must review the exact source diff and rerun the full
+registered oracle. Any other logic, question, comparison, criterion, or
+threshold change remains a stop-and-replan result.
+
 ## Evidence Boundary
 
 Prototype pass admits only the stated design decision for a later exact
