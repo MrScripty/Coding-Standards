@@ -358,6 +358,10 @@ canonical `main`.
   reuse the existing analyzer while preserving A1c's immutable AnalysisState,
   non-Git change-set, lifecycle, and no-proposal-snapshot decisions; reject the
   seam and require product reauthorization if those constraints cannot coexist.
+- [ ] Revise P4 only after P2R settles projected analysis identity. Retest the
+  explicit additive facade without a projected `SnapshotHandle`, mutable
+  current-evidence selector, caller-supplied ref or object ID, tagged dispatch,
+  or A1c query/inspect overload before selecting any operation root.
 - [ ] Measure every material candidate against its predeclared efficiency
   claim using an owned workload, metric, baseline or budget, environment, and
   variability policy. Record the correctness and resource tradeoff; do not

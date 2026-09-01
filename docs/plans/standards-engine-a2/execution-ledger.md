@@ -288,3 +288,27 @@
 - Protected exact tip `3bab6e981d6e902e087f485c03fca78d0505a39e` at
   `refs/archive/a2-prototypes/p2-projected-view`, verified the task worktree was
   clean, and removed it. Neither branch artifact entered canonical `main`.
+
+## 2026-09-01 - A2-P4 Facade Evidence Requires Revision
+
+- Accepted isolated evidence commit
+  `47cfcd5340196b275b910a398d61b7ef68a8e071` with verdict `revise`. The
+  manifest-derived A1c roots and all local workflow and negative-case checks
+  passed on CPython 3.11 and 3.12.
+- The surface comparison retained one provisional finding: eight explicit
+  additive roots require the same eight calls but 16 caller field occurrences,
+  versus 24 for tagged dispatch and 28 plus four changed A1c definitions for
+  query/inspect overload. Tagged dispatch and overload are rejected.
+- Cross-prototype review found that the modeled explicit workflow minted a
+  projected `SnapshotHandle`, stored mutable current analysis/decision
+  selectors, and required caller-supplied Git ref/OID target facts. A new exact
+  invariant detects all three conflicts. The eight roots and their requests are
+  therefore not selected.
+- P4R is ordered after P2R and must preserve immutable explicitly addressed
+  evidence, no proposal-as-snapshot, and deployment-owned target authority.
+  P5 remains blocked until both revised candidates reach terminal evidence.
+- Ruff, formatting, both supported Python runtimes, generated freshness, all
+  265 declarative suites, exact staged review, and sensitive-value review
+  passed. Protected the tip at
+  `refs/archive/a2-prototypes/p4-facade-workflow`, verified the worktree clean,
+  and removed it without merging either artifact to canonical `main`.

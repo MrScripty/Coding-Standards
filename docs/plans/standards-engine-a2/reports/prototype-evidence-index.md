@@ -1,6 +1,6 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1 and P3 pass; P2 revise; P2R and P4/P5 pending`
+**Status:** `P1 and P3 pass; P2 and P4 revise; P2R/P4R and P5 pending`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -12,7 +12,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; `/tmp/coding-standards-a2-p1-state-model` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `retained-protected` at archived tip `refs/archive/a2-prototypes/p1-state-model` |
 | A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `3bab6e981d6e902e087f485c03fca78d0505a39e` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p2-projected-view` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
-| A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
+| A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
 
 The A2 prototype owner owns each private worktree, its one authored source
@@ -274,3 +274,74 @@ The clean task-owned worktree was removed after archive ref
 `refs/archive/a2-prototypes/p3-publication-recovery` was verified at exact tip
 `53fd98f292400aee6929d0cc950cc6163944a5a5`. The source and branch-local
 projection remain recoverable from that ref; neither entered canonical `main`.
+
+## A2-P4 Facade Workflow
+
+### Question And Environment
+
+P4 compared eight explicit additive Authoring operations with a single tagged
+dispatch and with overloading the accepted A1c `query` and `inspect` roots. It
+also exercised a representative create, discover, revise, query, analyze,
+approve, apply, and recover workflow plus wrong-handle, stale-head,
+unauthorized, unsupported-contract, and invalid-selector cases.
+
+The accepted command was
+`PYTHONDONTWRITEBYTECODE=1 python3.11 -P tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py`,
+repeated on CPython 3.12. Both runtimes loaded the current A1c operation roots
+from the manifest and produced the exact expected `revise` verdict.
+
+### Results
+
+| Candidate or invariant | Exact result |
+| --- | --- |
+| Current A1c roots | all eight manifest roots preserved and unmodified |
+| Explicit additive surface | eight calls, 16 caller field occurrences, no next-operation ambiguity in the modeled flow |
+| Tagged dispatch | eight calls, 24 field occurrences, all steps share one ambiguous root |
+| A1c overload | eight calls, 28 field occurrences, four duplicated Module-owned facts, four current definitions changed |
+| Local negative cases | exact rejections with no mutation; all 11 original invariants passed |
+| Cross-prototype preservation | twelfth invariant detected all three prohibited stand-ins |
+
+The prohibited stand-ins were a projected `SnapshotHandle` for proposal
+material, mutable current analysis/decision selectors, and a caller-supplied
+target containing `ref` and `expected_oid`. The first conflicts with A1C-U06
+and P2, the second with P1's immutable explicitly addressed evidence, and the
+third with A1C-U04 and P3's caller-hidden Git coordination.
+
+### Four-Dimension Verdict
+
+- **Effectiveness:** `revise`. The in-memory workflow completed, but only by
+  using three prohibited stand-ins. It cannot establish an admissible
+  end-to-end Authoring workflow.
+- **Efficiency:** `pass` only for the surface comparison. Explicit roots avoid
+  eight tagged selectors and avoid the overload candidate's duplicated facts
+  and coordinated A1c changes. No contract, persistence, or combined-workflow
+  efficiency claim is admitted.
+- **Correctness:** `pass` for manifest-root preservation, local handle/CAS and
+  authorization rejections, and exact conflict detection; `unavailable` for a
+  preservation-safe query/analyze/apply composition.
+- **Standards compliance:** `pass` for revise evidence. Both supported Python
+  runtimes, Ruff, formatting, generated freshness, all 265 declarative suites,
+  exact staged diff, and sensitive-value review passed. The audit refuses to
+  select the candidate rather than changing prior decisions by implication.
+
+### Admitted, Rejected, And Revised Decisions
+
+Admit only the comparative finding that explicit additive operations are the
+non-dominated surface candidate among the three tested shapes. Reject tagged
+dispatch and A1c `query`/`inspect` overload. Do not admit the eight candidate
+roots, candidate contract version, request fields, internal seams, or modeled
+workflow.
+
+P4R must follow P2R. It must remove proposal-as-snapshot, keep analysis,
+approval, and readiness immutable and explicitly addressed, and obtain target
+authority from trusted deployment context while preserving P3's expected-ref
+publication internally. If it cannot do so, the facade remains rejected.
+
+### Archived Worktree Contract
+
+The final source identity is
+`sha256:6965a383b673b38b70a9b7cfece083465f84d229148e24ec0603adb4ac7b2013`.
+The clean task-owned worktree was removed after archive ref
+`refs/archive/a2-prototypes/p4-facade-workflow` was verified at exact tip
+`47cfcd5340196b275b910a398d61b7ef68a8e071`. The artifacts remain recoverable
+and were not merged to canonical `main`.
