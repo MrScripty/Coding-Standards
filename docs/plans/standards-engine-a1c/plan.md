@@ -721,5 +721,11 @@ review finds a material contract or architecture change.
 ## Final Acceptance
 
 - Acceptance status: `satisfied`
-- Deferred follow-ups: `A2 remains unauthorized; cross-engine migration remains deferred until feature completeness; Windows and macOS support require real platform evidence`
+- Deferred follow-ups: A2 planning continues under the separately admitted
+  [controlled-authoring plan](../standards-engine-a2/plan.md), which cannot
+  change explicit user-selected A1c decisions; production A2 implementation
+  remains unavailable until design validation passes and that plan admits an
+  exact slice;
+  cross-engine migration remains deferred until feature completeness; Windows
+  and macOS support require real platform evidence
 - Final status: `Accepted`

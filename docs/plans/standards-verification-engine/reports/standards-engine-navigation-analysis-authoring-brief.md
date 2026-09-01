@@ -4,17 +4,28 @@
 
 This brief records proposed requirements for Plan A1 of the agent-facing Standards Engine. It is a non-authorizing investigation report; its proposals become durable authority only through an accepted `plan.md` and architectural decision.
 
-Current planning authority is the
+Accepted navigation-and-analysis authority is recorded in the
 [Standards Engine Navigation and Analysis plan](../../standards-engine-navigation-analysis/plan.md).
 
-This brief covers navigation and read-only analysis only. Controlled authoring is a separate future product that requires its own brief after A1 proves the interface. A1 must preserve compatible identity and snapshot concepts, but it does not authorize proposal storage, mutation, application, or recovery implementation.
+This brief covers navigation and read-only analysis only. Current
+controlled-authoring planning authority is the
+[Standards Engine A2 plan](../../standards-engine-a2/plan.md). The A2 passages
+in this Plan A1 brief remain historical discovery evidence; pre-A1c packet,
+report, and proposal terminology in this file does not supersede the accepted
+A1c `AnalysisState`, `AnalysisHandle`, `PendingResult`, `CompleteResult`,
+snapshot aggregate, generated facade, or current A2 plan.
+The A2 plan treats every explicit user-selected A1c decision as a protected
+input and blocks canonical engine changes until the relevant disposable
+prototype or minimum viable design tests establish effectiveness, efficiency,
+correctness, and current standards compliance.
 
 Existing future work remains separate:
 
 - **Plan B:** Evidence-oracle policy and projection-check correction.
 - **Plan C:** External project application and standards-upgrade baselines.
 
-The active plan remains the sole owner of implementation admission, blockers, recovery sequencing, and the next slice.
+Each canonical plan remains the sole owner of its implementation admission,
+blockers, recovery sequencing, and next slice.
 
 ---
 
@@ -93,9 +104,20 @@ A1 analyzes supplied base and proposed snapshots. It does not own proposal mutat
 
 ## Future controlled authoring
 
-Controlled authoring is outside A1. After A1 acceptance, a new brief may investigate change sessions, proposal revisions, mutations, semantic acceptance, authorization, coherent application, verification, and recovery.
+Controlled authoring remains outside Plan A1. The separately formed
+[A2 plan](../../standards-engine-a2/plan.md) now owns product discovery,
+proposal revisions, mutation, semantic acceptance, authorization, coherent
+application, verification, recovery, lifecycle state, blockers, and
+implementation admission.
 
-Any future authoring design must reuse A1 snapshot, identity, query, impact, applicability, and packet semantics rather than creating a second analyzer. It must use a distinct apply-eligible report type and must not return application success before post-write verification passes.
+The durable constraint from this brief remains: A2 reuses current A1c snapshot,
+identity, query, impact, applicability, coverage, and single-`AnalysisState`
+semantics rather than creating a second analyzer. A distinct apply-readiness
+proof must bind the current complete `AnalysisHandle`, and application success
+requires the selected verification and canonical publication postcondition.
+No proposed A2 design may change an explicit A1c choice, and no production
+implementation slice may begin before its question-specific pre-canonical
+design evidence is accepted.
 
 ## Plan B: Evidence-oracle recovery
 
@@ -653,9 +675,13 @@ proposed semantic revision: 1
 semantic state: proposed
 ```
 
-A proposed snapshot that directly represents an unreviewed semantic revision as accepted is invalid. The semantic overlay is part of `AnalysisRequest` and packet identity. A future controlled-authoring proposal may own the same overlay and project it into `AnalysisRequest`, but only a separately authorized future application workflow may promote a proposed revision into accepted canonical authority.
+A proposed snapshot that directly represents an unreviewed semantic revision as accepted is invalid. The semantic overlay is part of `AnalysisRequest` and historical packet identity. Current A2 discovery must determine how an immutable proposal revision owns equivalent semantic-proposal material and projects it through A1c analysis, but only a separately authorized application workflow may promote a proposed revision into accepted canonical authority.
 
-An A1 `CompletedAnalysisReport` may establish that impact analysis is complete for the supplied accepted and proposed snapshots. It does not accept a proposed semantic revision or authorize canonical application. A future authoring design must use a distinct `ApplyReadyChangeReport` after obtaining semantic, relationship, and lifecycle approvals.
+Current A1c may project a `CompleteResult` from an exact `AnalysisHandle`. That
+result establishes analysis completeness only; it does not accept a proposed
+semantic revision or authorize canonical application. A2 must derive a
+distinct apply-readiness proof after obtaining semantic, relationship, and
+lifecycle approvals.
 
 ## Lifecycle
 
@@ -1090,7 +1116,11 @@ The equality is set equality, and the implementation must additionally prove:
 
 `complete` is a derived state computed from these invariants. It must not be an independently authored Boolean or an unchecked assertion in a report.
 
-For A1, completeness means that the analysis obligations required by the request are resolved. It does not promote proposed semantic state. A future `ApplyReadyChangeReport` may reference a `CompletedAnalysisReport`, but it must remain a distinct type with separately authorized semantic, relationship, and lifecycle acceptance.
+For current A1c, completeness means that the analysis obligations required by
+the request are resolved. It does not promote proposed semantic state. An A2
+apply-readiness proof may reference the exact complete `AnalysisHandle`, but it
+must remain distinct from `CompleteResult` and bind separately authorized
+semantic, relationship, and lifecycle acceptance.
 
 ---
 
@@ -1241,7 +1271,13 @@ Capabilities should include:
 
 Read, analysis, consumer-review, impact-review, and audit-review capabilities are independent. A caller that can prepare a packet does not thereby gain authority to submit a disposition, impact classification, or audit declaration.
 
-Future authoring capabilities—including semantic review, relationship review, lifecycle review, proposal mutation, and canonical application—must be designed and authorized in the separate future authoring brief. That brief must require a distinct `ApplyReadyChangeReport` and must complete post-write verification before returning `AppliedResult`; verification failure must produce a non-success outcome with an explicit rollback or recovery contract.
+Current A2 capabilities—including semantic review, relationship review,
+lifecycle review, proposal mutation, and canonical application—are governed by
+the separate [A2 plan](../../standards-engine-a2/plan.md). That plan requires a
+distinct apply-readiness proof, exact candidate verification, and an
+established canonical publication postcondition before an applied success;
+verification or publication failure produces a typed non-success outcome with
+an explicit recovery contract.
 
 ---
 
@@ -1455,4 +1491,8 @@ describe its task
     → produce a complete impact report
 ```
 
-The A1 result is one agent-facing Standards Engine interface, one canonical metadata projection, a neutral graph implementation, and deterministic snapshot-bound navigation and impact analysis. Evidence from that accepted interface will determine whether and how a separate controlled-authoring module is justified.
+The accepted A1/A1c result is one agent-facing Standards Engine Interface, one
+canonical metadata projection, a neutral graph implementation, and
+deterministic snapshot-bound navigation and impact analysis. The separate A2
+plan now owns the product evidence and composed-design admission needed to
+justify the exact controlled-authoring Module and Interface.
