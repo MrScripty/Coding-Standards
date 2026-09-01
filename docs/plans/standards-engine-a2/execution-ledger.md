@@ -228,3 +228,27 @@
   fast-forward and mechanically move only their unchanged uncommitted source
   to the registered test path before staging; P5 must be created directly from
   this base. All other branch and write-set constraints remain unchanged.
+
+## 2026-09-01 - A2-P3 Publication-Recovery Evidence Accepted
+
+- Accepted isolated prototype commit
+  `53fd98f292400aee6929d0cc950cc6163944a5a5` with verdict `pass` after the
+  unchanged source moved to its corrected test-only path.
+- All 13 safe, negative, observation, and unsafe-control scenarios passed on
+  both CPython 3.11 and 3.12. Five repeated safe-path observations per runtime
+  also passed. Real Git expected-old-OID publication preserved a competing
+  target, and real SQLite cold reopen distinguished unchanged, applied, stale,
+  verification-failed, unauthorized, invalid, and unavailable outcomes without
+  rollback or guessed success.
+- The selected candidate is isolated staging, verification before one
+  expected-target ref transition, and durable observation-based recovery.
+  Unchecked update and publish-before-verify are rejected. Product selection of
+  the canonical publication outcome remains unresolved and un-inferred.
+- Final generated review changed only the branch-local repository-index digest.
+  Ruff and format checks, both supported Python runtimes, generated freshness,
+  all 265 declarative suites, staged diff integrity, and sensitive-value review
+  passed.
+- Protected the exact tip at
+  `refs/archive/a2-prototypes/p3-publication-recovery`, verified a clean
+  worktree, and removed only that task-owned `/tmp` worktree. The artifacts are
+  recoverable from the archive ref and were not merged to canonical `main`.

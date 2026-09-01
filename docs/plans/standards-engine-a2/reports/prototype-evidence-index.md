@@ -1,6 +1,6 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `exact executions admitted; runs pending`
+**Status:** `P1 and P3 pass; P2 revision and P4/P5 review pending`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -11,7 +11,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | --- | --- | --- | --- | --- | --- | --- |
 | A2-P1 | `tools/standards_engine/prototypes/a2/authoring-state-model.prototype.html` | `prototype/a2-m0-state-model`; `/tmp/coding-standards-a2-p1-state-model` | `bbdfb485e914540e0e53092dab71c9b80f55102d` | `9b3e2111f6909d93e6c2d86f8c7dbb805dad07f8`, corrected by `a6a2e1060e07f5f16d2ee91f72720e31751ba27b` | `pass` | `retained-protected` at archived tip `refs/archive/a2-prototypes/p1-state-model` |
 | A2-P2 | `tools/standards_engine/tests/prototypes/a2/projected-view.prototype.py` | `prototype/a2-m0-projected-view`; `/tmp/coding-standards-a2-p2-projected-view` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
-| A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
+| A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | pending | pending | pending; expected `removed-archived` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
 
@@ -122,3 +122,76 @@ selection remain unadmitted for A2-P2 through A2-P5.
 - Retirement: after product-owner feedback is recorded, or before Milestone 0
   acceptance, whichever comes first; then verify the archive ref and remove
   only this clean task-owned worktree.
+
+## A2-P3 Publication And Recovery
+
+### Question And Environment
+
+The prototype asked whether one Authoring Module can keep a candidate outside
+authoritative visibility, verify it, publish through an expected-old-OID ref
+transition, and recover a truthful typed outcome after interruption from
+durable attempt facts and current Git observation.
+
+It used real temporary Git repositories and SQLite databases that were removed
+after each process. The accepted command was
+`PYTHONDONTWRITEBYTECODE=1 python3.11 -P tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py`,
+repeated with `python3.12`. Evidence covered CPython 3.11.14 with SQLite 3.50.4,
+CPython 3.12.3 with SQLite 3.45.1, and Git 2.43.0.
+
+### Results
+
+| Evidence group | Exact result |
+| --- | --- |
+| Safe and recovery scenarios | 13 of 13 passed |
+| Repeated safe-path observations | 5 of 5 passed on each supported Python runtime |
+| Expected-ref conflict | stale publication rejected; competing target preserved |
+| Verification failure | target remained unchanged; cold recovery returned `verification-failed` |
+| Authorization rejection | no staging Git call or candidate identity was created |
+| Applied before response | cold reopen observed candidate identity and returned `applied` |
+| Unavailable observation | returned `unavailable` without persisting a guessed outcome |
+| Contradictory observation | unverified authoritative candidate returned `invalid` |
+| Unsafe controls | unchecked update overwrote concurrent work; publish-before-verify exposed invalid content |
+
+The five repeated safe-path observations each used 12 Git/process calls, a
+12,288-byte SQLite file allocation, and 39,658 to 39,659 scratch bytes. These
+are descriptive local observations, not production budgets.
+
+### Four-Dimension Verdict
+
+- **Effectiveness:** `pass`. Stage, verify, expected-target publish, and cold
+  recover form one complete workflow, and recovery distinguishes unchanged,
+  applied, stale, verification-failed, unauthorized, invalid, and unavailable
+  observations without caller-coordinated Git.
+- **Efficiency:** `pass` for the registered comparison only. The safe path adds
+  one compare-and-swap ref transition and durable attempt facts; the unsafe
+  alternatives are correctness-dominated. Timing and byte observations do not
+  admit a production resource budget; P5 owns combined-design comparison.
+- **Correctness:** `pass`. Real Git proves expected-old-OID lost-update
+  prevention, real SQLite cold reopen proves durable observation, and the two
+  unsafe controls prove why update-without-CAS and publish-before-verify are
+  rejected.
+- **Standards compliance:** `pass`. The final test-only branch changed one
+  authored source plus only the derived repository-index digest. Ruff,
+  formatting, generated freshness, both supported Python runtimes, staged diff
+  review, sensitive-value review, and all 265 declarative suites passed.
+
+### Admitted And Rejected Decisions
+
+Admit isolated staging, verification before publication, expected-old-OID Git
+ref publication, durable attempt identities, and cold observation-based
+recovery as the publication mechanism candidate. Establishing the expected
+candidate identity is required before reporting success. Reject unchecked ref
+updates, publication before verification, inferred rollback, and success from
+unavailable or contradictory observation.
+
+This result does not yet select the product's canonical publication outcome,
+which remains a product-owner decision. It also does not admit a cross-store
+transaction, provider authorization mechanism, concurrent-process scheduler,
+canonical store schema, public facade, or production performance claim.
+
+### Archived Worktree Contract
+
+The clean task-owned worktree was removed after archive ref
+`refs/archive/a2-prototypes/p3-publication-recovery` was verified at exact tip
+`53fd98f292400aee6929d0cc950cc6163944a5a5`. The source and branch-local
+projection remain recoverable from that ref; neither entered canonical `main`.
