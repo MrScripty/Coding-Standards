@@ -6780,6 +6780,25 @@
   releases its temporary retained-checker assertion.
 - Four mutations and exact 9/9 dependency-local renewal leave 42 requirements
   stable and close 51/51 coverage. Focused package and edge checks, all suites,
-  graph and generated freshness, numeric
-  lifecycle, plan checks, and the complete 30-entrypoint checkpoint pass.
+  graph and generated freshness, numeric lifecycle, plan checks, and the
+  complete 30-entrypoint checkpoint pass.
   Final graph: 30 Bash checkers, 33 nodes, 211 edges, and 33 components.
+
+## 2026-08-31 - M6-I96 Language-Binding Mechanism-Selection Acceptance
+
+- Fresh post-M6-I95 evidence reports 30 Bash verifiers, 33 nodes, 211 edges,
+  and 33 components. Eight verifiers have no executable inbound edge, including
+  five at the highest dependency wave 5. The 113-line mechanism-selection
+  verifier forms one bounded owner-local decision package. M6-I96 is
+  `serial-coherent` at train order 211.
+- One six-check `profile.boundary.language-bindings` suite preserves all 20
+  typed decisions, both exact source identities and dispositions, canonical
+  boundary policy, the bounded legacy route, and the README projection.
+- A native decision assertion replaces helper execution. Three retained
+  verifiers remain independent gates, two earlier M6-I93 records transfer to
+  suite evidence, and redundant schema and observed fixtures retire.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package and edge
+  checks, all suites, graph and generated freshness, numeric lifecycle, plan
+  checks, and the complete 29-entrypoint checkpoint pass.
+  Final graph: 29 Bash checkers, 32 nodes, 201 edges, and 32 components.

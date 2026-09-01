@@ -243,13 +243,13 @@ native/host evidence. They reject missing or contradictory package facts,
 reversed dependencies, required-evidence exclusion, native-only or
 alternate-framework substitution, and default success with typed outcomes.
 
-`fixtures/language-bindings/mechanism-selection-*.tsv` and
-`verify-language-binding-mechanism-selection.sh` select in-process framework,
-serialized, stable-ABI, or opaque-handle mechanisms, or a separately governed
-IPC boundary, from complete boundary facts. They reject topology and lifecycle
-contradictions, unavailable evidence, target-count and host-label defaults,
-UI-technology defaults, alternate mechanisms, process substitution, and
-default success.
+`fixtures/language-bindings/mechanism-selection-decisions.tsv` and the
+registered `language-binding-mechanism-selection` suite select in-process
+framework, serialized, stable-ABI, or opaque-handle mechanisms, or a separately
+governed IPC boundary, from complete boundary facts. They reject topology and
+lifecycle contradictions, unavailable evidence, target-count and host-label
+defaults, UI-technology defaults, alternate mechanisms, process substitution,
+and default success.
 
 The registered `language-binding-surface-contract` suite evaluates
 `fixtures/language-bindings/surface-contract-decisions.tsv` to select exported

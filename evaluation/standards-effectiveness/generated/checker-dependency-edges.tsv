@@ -5,7 +5,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh
@@ -35,7 +34,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -107,10 +105,6 @@ executable_reference	evaluation/standards-effectiveness/verify-interop-event-reg
 executable_reference	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-language-binding-boundary.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-language-binding-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/check-decision-table.sh
-executable_reference	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
-executable_reference	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-language-profile-routing.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-decision-table-engine.sh
@@ -157,7 +151,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-decision-table-engin
 helper_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-language-binding-boundary.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 helper_dependency	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -178,9 +171,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-interop-event-regi
 verifier_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-interop-event-registration.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-language-profile-routing.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-decision-table-engine.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh

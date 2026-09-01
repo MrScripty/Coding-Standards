@@ -1792,7 +1792,7 @@
       ]
     },
     {
-      "digest": "sha256:79ee85378a1542551407433a19c0f326733fdf5b7d5d1772b9217703ee507d2e",
+      "digest": "sha256:2c7d17c0776656558ece75f60abfa73df85d6c8b2586906d08ea8606543134df",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1804,7 +1804,7 @@
       ]
     },
     {
-      "digest": "sha256:e8a2615d4616ace61857d0c9213b8915ef940148fff786e614ac008e05365520",
+      "digest": "sha256:ffcead521348cb8ee24ed42be4fb7f4f7dd55514b6909dcb66fa09493e192e31",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1867,6 +1867,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "language-binding-mechanism-selection"
         },
         {
           "check": "documentation-projection",
@@ -2075,7 +2080,7 @@
       ]
     },
     {
-      "digest": "sha256:a8ef5d933289d90c9446059bb825810348c923b7c4fb44ddbf556cea5be53d0f",
+      "digest": "sha256:19d40aad661cf0f64b17f04a3f15137cb997c2554665eb66f9c44c4e16a9a0d8",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2500,6 +2505,11 @@
           "check": "exact-dispositions",
           "role": "table",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "language-binding-mechanism-selection"
         },
         {
           "check": "dispositions",
@@ -3313,7 +3323,7 @@
       ]
     },
     {
-      "digest": "sha256:867a6728fffee36b686dc6258d62d66c5a0c92d9438af6822e68d03152d09da6",
+      "digest": "sha256:6c6b297ece7af2bebf2a525c6102899c1101d1354a3d3c44ac90fc53e9421d30",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4352,6 +4362,18 @@
           "check": "decisions",
           "role": "decision-table",
           "suite": "testing-language-binding-evidence"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c4a5f5f1d5dd767645e6cda35e62e420835a23e83f89822631c2ee2e855e636c",
+      "path": "evaluation/standards-effectiveness/fixtures/language-bindings/mechanism-selection-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decisions",
+          "role": "decision-table",
+          "suite": "language-binding-mechanism-selection"
         }
       ]
     },
@@ -6582,7 +6604,7 @@
       ]
     },
     {
-      "digest": "sha256:4e6e33c7a5a5597d963a556803f3b69f2a74bad5247b5db29f722431fddaf696",
+      "digest": "sha256:1d9bf0e6abc80239a87a35cef4539ab5c0bfba368ad020a352ab1fee18aee14a",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6594,7 +6616,7 @@
       ]
     },
     {
-      "digest": "sha256:a782b5791c760ee7d35e5331120d782e29db4ab1064e877dfe3fdcbc9f577aba",
+      "digest": "sha256:add61ce210548ea965f29bf7818564d00536c5f74f2f599fd374414618270428",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6767,6 +6789,11 @@
           "check": "source-identities",
           "role": "table",
           "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "language-binding-mechanism-selection"
         },
         {
           "check": "section-inventory",
@@ -9242,7 +9269,7 @@
       ]
     },
     {
-      "digest": "sha256:e57933d88b6c6f12eeee084c98447e79cdde896791ee4b8e6545c5b142a30fad",
+      "digest": "sha256:1502a561a114a3390f2aa55accc72e6338eceade1a42d0b8ddf4c4f185b95c6e",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10204,6 +10231,18 @@
     {
       "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:68a38cb09a20489c9e57eaa0d6ed9d51de8edeb696645196a2f266e6fa02b5b8",
+      "path": "evaluation/standards-effectiveness/suites/language-binding-mechanism-selection.toml",
       "state": "present",
       "uses": [
         {
@@ -12491,28 +12530,6 @@
       ]
     },
     {
-      "digest": "sha256:60491236647c178570ecef27cc827746c8efb50146039b6d3b0a5dad94984705",
-      "path": "evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:efbfd609c6f688f64b9473b72d329f5ed47fb96e7050b54dd0017b624f9e8577",
       "path": "evaluation/standards-effectiveness/verify-language-profile-routing.sh",
       "state": "present",
@@ -13223,6 +13240,11 @@
           "check": "legacy-route",
           "role": "content",
           "suite": "binding-generation-authority"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
+          "suite": "language-binding-mechanism-selection"
         },
         {
           "check": "former-source",
@@ -14044,6 +14066,11 @@
       "path": "profiles/boundaries/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "canonical-profile",
+          "role": "content",
+          "suite": "language-binding-mechanism-selection"
+        },
         {
           "check": "canonical-profile",
           "role": "content",
@@ -22927,11 +22954,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:e57933d88b6c6f12eeee084c98447e79cdde896791ee4b8e6545c5b142a30fad",
+    "digest": "sha256:1502a561a114a3390f2aa55accc72e6338eceade1a42d0b8ddf4c4f185b95c6e",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:622cb5e0b3471e96f7349ce911156ed4cdfe9710d43600916fba1777e5480de3",
+    "digest": "sha256:833f9503637e613dcae81c610e27fca84596b5ba95e9f6fe8f2f0a45d1d82a49",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24414,6 +24441,12 @@
       "digest": "sha256:7c542297e26996e4c4275ee63f7865019aaece308eded7bb4a51115ae067c5bc",
       "id": "milestone-7-row-43-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-43-decomposition.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:68a38cb09a20489c9e57eaa0d6ed9d51de8edeb696645196a2f266e6fa02b5b8",
+      "id": "language-binding-mechanism-selection",
+      "path": "evaluation/standards-effectiveness/suites/language-binding-mechanism-selection.toml",
       "requires": []
     },
     {

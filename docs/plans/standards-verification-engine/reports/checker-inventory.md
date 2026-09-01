@@ -6408,3 +6408,33 @@ plan, and complete mixed evidence pass.
 Final graph: 30 Bash checkers, 33 nodes, 211 edges, and 33 components. The old
 checker is absent without duplicated title policy, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I96 Language-Binding Mechanism-Selection Acceptance
+
+Fresh post-M6-I95 evidence reports 30 Bash verifiers, 33 nodes, 211 edges,
+and 33 components. Eight verifiers have no executable inbound edge, including
+five at the highest dependency wave 5. The 113-line
+`verify-language-binding-mechanism-selection.sh` has only README and accepted
+contract evidence incoming, and its decision table, two dispositions, profile
+owner, and documentation consumer form one bounded owner-local contract. It
+invokes one generic helper and three retained verifier gates. The package is
+`serial-coherent` because no shared engine, schema, policy, or unresolved owner
+contract changes.
+
+One six-check `profile.boundary.language-bindings` suite preserves all 20 typed
+decisions, both exact source identities and dispositions, canonical boundary-
+profile policy, the bounded legacy route, and the README projection. A native
+decision assertion replaces helper execution. Language-binding boundary,
+row-5 lifecycle, and execution-train evidence remain independent gates.
+
+Two prior M6-I93 records transfer to registered suite evidence, while the
+redundant schema and observed fixtures retire with the Bash checker. Four
+mutations reject decision-outcome drift, disposition-target drift, source-
+identity drift, and stale README checker authority.
+
+Exact final compilation renews 22/22 dependency-local requirements and leaves
+29 requirements stable, closing 51/51 coverage. All focused, graph,
+declarative, generated, numeric, plan, and complete mixed evidence pass. Final
+graph: 29 Bash checkers, 32 nodes, 201 edges, and 32 components. The old checker
+is absent without a source-policy rewrite, nested execution, wrapper,
+compatibility representation, or fallback.

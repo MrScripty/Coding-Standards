@@ -1186,6 +1186,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-43-decompositi
 requires = []
 
 [[suites]]
+id = "language-binding-mechanism-selection"
+path = "evaluation/standards-effectiveness/suites/language-binding-mechanism-selection.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-44-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml"
 requires = []
