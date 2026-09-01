@@ -687,11 +687,11 @@ unsafe-pattern removal, no-fallback precedence, and F022 closure.
 
 ## Rust Binding Runtime Decision Fixtures
 
-`fixtures/rust/binding-runtime-decisions.tsv` and
-`verify-rust-binding-runtime.sh` distinguish host-handle lifetime from
-composition-owned runtime and task lifecycle. They check shared runtime reuse
-with fresh per-call state, persistence hints without ownership transfer,
-scoped or lifecycle-tracked work, typed unavailable outcomes, exact
+The registered `rust-binding-runtime` suite and its
+`fixtures/rust/binding-runtime-decisions.tsv` fixture distinguish host-handle
+lifetime from composition-owned runtime and task lifecycle. They check shared
+runtime reuse with fresh per-call state, persistence hints without ownership
+transfer, scoped or lifecycle-tracked work, typed unavailable outcomes, exact
 dispositions, bounded legacy replacement, no alternate-runtime or synchronous-
 drive fallback, and F025 closure.
 

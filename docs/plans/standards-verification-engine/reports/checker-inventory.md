@@ -6500,3 +6500,33 @@ closing 51/51 coverage. All focused, graph, declarative, generated, numeric,
 plan, and complete mixed evidence pass. Final graph: 27 Bash checkers, 30
 nodes, 183 edges, and 30 components. The old checker is absent without nested
 execution, a source-policy rewrite, compatibility representation, or fallback.
+
+### M6-I99 Rust Binding-Runtime Acceptance
+
+Fresh post-M6-I98 evidence reports 27 Bash verifiers, 30 nodes, 183 edges,
+and 30 components. Nine verifiers have no executable inbound edge; the
+148-line `verify-rust-binding-runtime.sh` is the smaller of the two roots at
+the highest dependency wave 5. It invokes one generic metadata helper and one
+retained F025/F026 lifecycle verifier.
+
+The package uses `shared-contract` execution because row 35 derives the Bash
+checkers that read a non-root README and must release the retiring checker from
+its consumer manifest. No shared engine, schema, fixture, or source policy
+changes. One eleven-check `profile.language.rust.language-bindings` suite
+preserves all 22 typed runtime decisions, three exact source identities and
+dispositions, metadata closure, composition and async lifecycle ownership,
+both bounded legacy routes, F025 closure, and the README projection.
+
+A native metadata-graph assertion replaces helper execution. The F025/F026
+decomposition remains an independent gate through two edge dispositions. The
+row-35 manifest releases the retired README consumer, and two prior M6-I93
+records transfer to registered suite evidence.
+
+Four mutations reject decision-outcome drift, disposition-rationale drift,
+composition-owner policy drift, and stale README checker authority. Exact
+final compilation renews 19/19 dependency-local requirements and leaves 32
+stable, closing 51/51 coverage. All focused, graph, declarative, generated,
+numeric, plan, and complete mixed evidence pass. Final graph: 26 Bash
+checkers, 29 nodes, 176 edges, and 29 components. The old checker is absent
+without nested execution, a source-policy rewrite, compatibility
+representation, request-state carry-forward, or fallback.

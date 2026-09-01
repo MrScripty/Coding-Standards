@@ -6845,3 +6845,25 @@
   row-35 consumer checks, all suites, graph and generated freshness, numeric
   lifecycle, plan checks, and the complete 27-entrypoint checkpoint pass.
   Final graph: 27 Bash checkers, 30 nodes, 183 edges, and 30 components.
+
+## 2026-08-31 - M6-I99 Rust Binding-Runtime Acceptance
+
+- Fresh post-M6-I98 evidence reports 27 Bash verifiers, 30 nodes, 183 edges,
+  and 30 components. Nine verifiers have no executable inbound edge. The
+  148-line binding-runtime verifier is the smaller of two roots at the highest
+  dependency wave 5. It invokes one generic metadata helper and one retained
+  verifier gate. M6-I99 is `shared-contract` at train order 214 because the
+  row-35 README-consumer contract requires a final-state manifest transition.
+- One eleven-check `profile.language.rust.language-bindings` suite preserves
+  all 22 typed decisions, three exact source identities and dispositions,
+  metadata closure, composition and async lifecycle ownership, both bounded
+  legacy routes, F025 closure, and the README projection.
+- A native metadata-graph assertion replaces helper execution. F025/F026
+  decomposition remains an independent gate. The row-35 manifest releases the
+  retired README consumer, and two earlier M6-I93 records transfer to
+  registered suite evidence.
+- Four mutations and exact 19/19 dependency-local renewal leave 32
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  row-35 consumer checks, all suites, graph and generated freshness, numeric
+  lifecycle, plan checks, and the complete 26-entrypoint checkpoint pass.
+  Final graph: 26 Bash checkers, 29 nodes, 176 edges, and 29 components.

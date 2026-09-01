@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I98 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I99 graph audit; do not preselect the next
 package from evidence captured before this accepted serial package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I98 replaced the binding contract-evolution
-verifier with one Contracts-owned declarative suite at train order 213.
+**Latest accepted slice:** M6-I99 replaced the Rust binding-runtime verifier
+with one Rust Language Bindings-owned declarative suite at train order 214.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I98 at train
-order 213.
+**Accepted boundary:** package records are accepted through M6-I99 at train
+order 214.
 
-**Current derived state:** 250 registered declarative suites, 27 retained Bash
-checkers, 30 executable nodes, 183 conservative reference edges, and 30
+**Current derived state:** 251 registered declarative suites, 26 retained Bash
+checkers, 29 executable nodes, 176 conservative reference edges, and 29
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I98 binding contract evolution accepted at train order 213 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I99 Rust binding runtime accepted at train order 214 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
