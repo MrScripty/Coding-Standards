@@ -18,7 +18,7 @@ reference extraction, or policy copy is required.
 
 ## Verifier Ownership
 
-The accepted `verify-rust-binding-index-closure.sh` remains the focused owner
+The registered `rust-binding-index-closure` suite remains the focused owner
 for `STD-0789`, the nested Build System Organization migration index. The
 registered `rust-binding-title-index-closure` suite owns the direct `STD-0758`
 index contract. The registered `milestone-7-row-43-decomposition` suite owns
@@ -47,7 +47,7 @@ lifecycle suite, the active plan, and the execution ledger. Implementation may
 touch only the exact disposition table, the title-specific focused suite, the
 row-43 lifecycle suite, plan, and ledger.
 
-The accepted `STD-0789` verifier,
+The registered `STD-0789` suite,
 `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`, canonical profiles and
 workflows, generated inventories, immutable train, package manifest, README
 files, templates, configuration, lockfiles, and downstream repositories remain
@@ -69,7 +69,7 @@ closure.
 The legacy title and route cannot select a binding framework, ABI, runtime,
 package layout, generator, representation, conversion, lifecycle, compatibility
 mode, or verification substitute. Missing or contradictory owner lineage is a
-typed planning diagnostic. Do not modify the accepted `STD-0789` checker,
+typed planning diagnostic. Do not weaken the registered `STD-0789` suite,
 restore old mechanisms, copy canonical rules into the index, retain an
 undisposed title, or substitute another owner or weaker binding default.
 

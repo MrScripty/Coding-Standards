@@ -1792,7 +1792,7 @@
       ]
     },
     {
-      "digest": "sha256:2c7d17c0776656558ece75f60abfa73df85d6c8b2586906d08ea8606543134df",
+      "digest": "sha256:13e03d5fbccb35623a9d63daf4003c0a017bf6867cb942aad816ff77c5cba7ca",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1804,7 +1804,7 @@
       ]
     },
     {
-      "digest": "sha256:ffcead521348cb8ee24ed42be4fb7f4f7dd55514b6909dcb66fa09493e192e31",
+      "digest": "sha256:610c31fd8a0554bc1bab29c4304eeb12899a4816e3994cdf59706f77c7c9c5db",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -1966,6 +1966,11 @@
         {
           "check": "documentation-projection",
           "role": "content",
+          "suite": "rust-binding-index-closure"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
           "suite": "rust-binding-workspace-evidence"
         },
         {
@@ -2080,7 +2085,7 @@
       ]
     },
     {
-      "digest": "sha256:19d40aad661cf0f64b17f04a3f15137cb997c2554665eb66f9c44c4e16a9a0d8",
+      "digest": "sha256:8af7715bb7347b5a9ce2df61fa997c3c5e2178ed69d34f877d13a7ffff45f553",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2897,6 +2902,11 @@
           "suite": "rust-binding-executor-delegation"
         },
         {
+          "check": "exact-disposition",
+          "role": "table",
+          "suite": "rust-binding-index-closure"
+        },
+        {
           "check": "disposition-closure",
           "role": "right",
           "suite": "rust-binding-title-index-closure"
@@ -3323,7 +3333,7 @@
       ]
     },
     {
-      "digest": "sha256:6c6b297ece7af2bebf2a525c6102899c1101d1354a3d3c44ac90fc53e9421d30",
+      "digest": "sha256:cee8b3ce43e40a88c2d1aa6c5c5bb8855182e21a7f679f850a1d641f943b9c50",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -6604,7 +6614,7 @@
       ]
     },
     {
-      "digest": "sha256:1d9bf0e6abc80239a87a35cef4539ab5c0bfba368ad020a352ab1fee18aee14a",
+      "digest": "sha256:5616691f03b9086582479137c3656001a7df45996bd0bcc2da30f746413f4224",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -6616,7 +6626,7 @@
       ]
     },
     {
-      "digest": "sha256:add61ce210548ea965f29bf7818564d00536c5f74f2f599fd374414618270428",
+      "digest": "sha256:a15e2f50716fcf7177abeab260cb5569b2f8f38783e904255825ca0cef71ec81",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -6914,6 +6924,11 @@
           "check": "source-membership",
           "role": "table",
           "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "source-identity",
+          "role": "table",
+          "suite": "rust-binding-index-closure"
         },
         {
           "check": "source-identity",
@@ -8584,7 +8599,7 @@
       ]
     },
     {
-      "digest": "sha256:a9fea4d053a9fe2dd71cfef512192f775011fdd32b104b778eb780ec6f4ae51d",
+      "digest": "sha256:6df935074560a2f0bf9a1550f650bc32b5608c2bc640c007385706a273e24441",
       "path": "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md",
       "state": "present",
       "uses": [
@@ -8592,6 +8607,16 @@
           "check": "decomposition-record",
           "role": "content",
           "suite": "milestone-7-row-43-decomposition"
+        },
+        {
+          "check": "row-43-owner-projection",
+          "role": "content",
+          "suite": "rust-binding-index-closure"
+        },
+        {
+          "check": "nested-index-separation",
+          "role": "content",
+          "suite": "rust-binding-title-index-closure"
         },
         {
           "check": "row-43-projection",
@@ -9269,7 +9294,7 @@
       ]
     },
     {
-      "digest": "sha256:1502a561a114a3390f2aa55accc72e6338eceade1a42d0b8ddf4c4f185b95c6e",
+      "digest": "sha256:85c27b571c4060aa617ab151561760d352651cf711a3afa9b35379464edad47c",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10661,7 +10686,7 @@
       ]
     },
     {
-      "digest": "sha256:7c542297e26996e4c4275ee63f7865019aaece308eded7bb4a51115ae067c5bc",
+      "digest": "sha256:124d0efa63ad70ff5371436569d19ab569d218b05b73db13869494f28df292bc",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-43-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11369,7 +11394,19 @@
       ]
     },
     {
-      "digest": "sha256:afafbea1cf1f05756aee3dad2918e755aafd44dfaf50e9d161716e66afdb7234",
+      "digest": "sha256:b7bd34f6fc094400bfb5466adbbca44c65e9b0993837c46445761f1484d0d629",
+      "path": "evaluation/standards-effectiveness/suites/rust-binding-index-closure.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:4ea888698d584b04c37898c9da92d7114d140d12e35ccfdd696056f53f8e1593",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-title-index-closure.toml",
       "state": "present",
       "uses": [
@@ -12974,33 +13011,6 @@
       ]
     },
     {
-      "digest": "sha256:cfc47e9aafff37357de23e193929b26c67e2cd99105268dab4bf3580890e8d6e",
-      "path": "evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        },
-        {
-          "check": "nested-index-separation",
-          "role": "content",
-          "suite": "rust-binding-title-index-closure"
-        }
-      ]
-    },
-    {
       "digest": "sha256:5cc87c131ac2430d6c0e90d7ec3a9dbb588eb7c66440d4117c6cac1697480b30",
       "path": "evaluation/standards-effectiveness/verify-rust-binding-runtime.sh",
       "state": "present",
@@ -13330,6 +13340,16 @@
           "check": "legacy-structure",
           "role": "content",
           "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "child-route-structure",
+          "role": "content",
+          "suite": "rust-binding-index-closure"
+        },
+        {
+          "check": "legacy-index",
+          "role": "content",
+          "suite": "rust-binding-index-closure"
         },
         {
           "check": "title-body",
@@ -22954,11 +22974,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:1502a561a114a3390f2aa55accc72e6338eceade1a42d0b8ddf4c4f185b95c6e",
+    "digest": "sha256:85c27b571c4060aa617ab151561760d352651cf711a3afa9b35379464edad47c",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:833f9503637e613dcae81c610e27fca84596b5ba95e9f6fe8f2f0a45d1d82a49",
+    "digest": "sha256:0c6a9f34df0d43f419f38ea074caf670039543592e7d834ab2c2d86b1f307dbd",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24426,9 +24446,15 @@
       "requires": []
     },
     {
-      "digest": "sha256:afafbea1cf1f05756aee3dad2918e755aafd44dfaf50e9d161716e66afdb7234",
+      "digest": "sha256:4ea888698d584b04c37898c9da92d7114d140d12e35ccfdd696056f53f8e1593",
       "id": "rust-binding-title-index-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-title-index-closure.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:b7bd34f6fc094400bfb5466adbbca44c65e9b0993837c46445761f1484d0d629",
+      "id": "rust-binding-index-closure",
+      "path": "evaluation/standards-effectiveness/suites/rust-binding-index-closure.toml",
       "requires": []
     },
     {
@@ -24438,7 +24464,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:7c542297e26996e4c4275ee63f7865019aaece308eded7bb4a51115ae067c5bc",
+      "digest": "sha256:124d0efa63ad70ff5371436569d19ab569d218b05b73db13869494f28df292bc",
       "id": "milestone-7-row-43-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-43-decomposition.toml",
       "requires": []

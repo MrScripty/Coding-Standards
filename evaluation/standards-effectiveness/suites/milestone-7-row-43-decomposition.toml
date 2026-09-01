@@ -56,6 +56,7 @@ required = [
   "52 frozen identifiers",
   "## Verifier Ownership",
   "registered `rust-binding-title-index-closure` suite",
+  "registered `rust-binding-index-closure` suite",
   "registered `milestone-7-row-43-decomposition` suite",
   "does not dispose `STD-0758`",
   "## Exact Outcome",
@@ -68,7 +69,10 @@ required = [
   "## Typed Outcomes And No Fallback",
   "## Re-plan Triggers",
 ]
-prohibited = ["verify-milestone-7-row-43-decomposition.sh"]
+prohibited = [
+  "verify-milestone-7-row-43-decomposition.sh",
+  "verify-rust-binding-index-closure.sh",
+]
 
 [[checks]]
 id = "legacy-index-routes"

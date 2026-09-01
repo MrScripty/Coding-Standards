@@ -15239,3 +15239,25 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checks, and the complete 29-entrypoint checkpoint pass.
   Final graph: 29 Bash checkers, 32 nodes, 201 edges, and 32 components; fresh
   graph evidence is required next.
+
+## 2026-08-31 - M6-I97 Rust Binding Nested-Index Acceptance
+
+- Fresh post-M6-I96 evidence reports 29 Bash verifiers, 32 nodes, 201 edges,
+  and 32 components. Eight verifiers have no executable inbound edge, including
+  four at the highest dependency wave 5. The 22-line nested-index verifier is
+  the smallest highest-wave root and invokes one retained verifier gate.
+  M6-I97 is `shared-contract` at train order 212 because title-index and row-43
+  lifecycle suites both require a consumer-authority transition.
+- One six-check `profile.language.rust.language-bindings` suite preserves the
+  exact STD-0789 identity and disposition, non-normative legacy index, both
+  separately owned child routes, README projection, and three-way row-43 owner
+  separation.
+- The title-index and row-43 lifecycle suites now assert registered nested-
+  index suite identity. Row-8 lifecycle remains an independent gate, and four
+  earlier M6-I93 and M6-I95 records transfer to registered suite evidence.
+- Four mutations and exact 22/22 dependency-local renewal leave 29
+  requirements stable and close 51/51 coverage. Focused package, edge, and
+  consumer checks, all suites, graph and generated freshness, numeric lifecycle,
+  plan checks, and the complete 28-entrypoint checkpoint pass.
+  Final graph: 28 Bash checkers, 31 nodes, 196 edges, and 31 components; fresh
+  graph evidence is required next.

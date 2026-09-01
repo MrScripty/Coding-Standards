@@ -1,0 +1,82 @@
+schema_version = 1
+id = "rust-binding-index-closure"
+owner = "profile.language.rust.language-bindings"
+description = "Exact STD-0789 lineage, disposition, and non-normative Rust binding build-system index closure with separately owned child routes."
+
+[[checks]]
+id = "source-identity"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [["STD-0789", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "2", "language-profile", "split", "Build System Organization"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0789"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0789", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "index", "convert the Build System Organization heading into a non-normative routing index while preserving separately owned child references"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0789"
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "## Build System Organization Index"
+scope = "body"
+required = [
+  "non-normative migration index",
+  "Rust Language Binding Profile",
+  "Binding Generation Procedures",
+  "separately owned migration references",
+  "does not add a package",
+]
+prohibited = []
+
+[[checks]]
+id = "child-route-structure"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = [
+  "## Build System Organization Index",
+  "### Feature Flags for Optional Binding Support",
+  "### cdylib Configuration",
+]
+prohibited = ["\n## Build System Organization\n"]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["registered `rust-binding-index-closure` suite"]
+prohibited = ["verify-rust-binding-index-closure.sh"]
+
+[[checks]]
+id = "row-43-owner-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md"
+required = [
+  "registered `rust-binding-index-closure` suite",
+  "registered `rust-binding-title-index-closure` suite",
+  "registered `milestone-7-row-43-decomposition` suite",
+]
+prohibited = [
+  "verify-rust-binding-index-closure.sh",
+  "verify-rust-binding-title-index-closure.sh",
+  "verify-milestone-7-row-43-decomposition.sh",
+]

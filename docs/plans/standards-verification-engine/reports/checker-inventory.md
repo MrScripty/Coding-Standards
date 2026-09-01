@@ -6438,3 +6438,34 @@ declarative, generated, numeric, plan, and complete mixed evidence pass. Final
 graph: 29 Bash checkers, 32 nodes, 201 edges, and 32 components. The old checker
 is absent without a source-policy rewrite, nested execution, wrapper,
 compatibility representation, or fallback.
+
+### M6-I97 Rust Binding Nested-Index Acceptance
+
+Fresh post-M6-I96 evidence reports 29 Bash verifiers, 32 nodes, 201 edges,
+and 32 components. Eight verifiers have no executable inbound edge, including
+four at the highest dependency wave 5. The 22-line
+`verify-rust-binding-index-closure.sh` is the smallest highest-wave root. Its
+incoming references are README, historical documentation, and accepted
+consumer or edge evidence; it invokes only the row-8 lifecycle verifier.
+
+The package uses `shared-contract` execution because the existing title-index
+and row-43 lifecycle suites both consumed the checker identity and must retain
+their explicit three-way ownership separation. No shared engine, schema, or
+source policy changes. One six-check
+`profile.language.rust.language-bindings` suite preserves the exact STD-0789
+source identity and disposition, non-normative legacy index text, both child
+route headings, README projection, and row-43 owner projection.
+
+The title-index and row-43 lifecycle suites now require the registered nested-
+index suite rather than the removed Bash path. Row-8 lifecycle remains an
+independent gate through two edge dispositions. Four prior M6-I93 and M6-I95
+records transfer to registered suite evidence.
+
+Four mutations reject source-identity drift, disposition-rationale drift,
+legacy-index drift, and stale checker-name ownership. Exact final compilation
+renews 22/22 dependency-local requirements and leaves 29 stable, closing 51/51
+coverage. All focused, graph, declarative, generated, numeric, plan, and
+complete mixed evidence pass. Final graph: 28 Bash checkers, 31 nodes, 196
+edges, and 31 components. The old checker is absent without merging the nested
+index into title or lifecycle authority, nested execution, a source-policy
+rewrite, compatibility representation, or fallback.

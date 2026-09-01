@@ -286,9 +286,9 @@ procedures from accepted release artifact plans. They reject fixed commands,
 compiled-artifact defaults, alternate generators, and missing toolchain or
 evidence facts.
 
-`verify-rust-binding-index-closure.sh` verifies that the former Rust build
-system heading is only a non-normative routing index and that its separately
-owned child references remain explicit.
+The registered `rust-binding-index-closure` suite verifies that the former
+Rust build-system heading is only a non-normative routing index and that its
+separately owned child references remain explicit.
 
 `fixtures/rust/security-panic-boundary-decisions.tsv` and
 the registered `rust-security-panic-boundary` suite specialize recoverable-error and

@@ -1,7 +1,7 @@
 schema_version = 1
 id = "rust-binding-title-index-closure"
 owner = "profile.language.rust.language-bindings"
-description = "Exact Rust Language Bindings title-index ownership, intro-only no-default policy, and nested index separation without Bash composition."
+description = "Exact Rust Language Bindings title-index ownership, intro-only no-default policy, and registered nested-index owner separation."
 
 [[checks]]
 id = "source-identities"
@@ -114,9 +114,15 @@ prohibited = [" must ", " always ", " fallback", " default framework", " default
 [[checks]]
 id = "nested-index-separation"
 type = "text"
-path = "evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh"
-required = ["STD-0789"]
-prohibited = ["STD-0758"]
+path = "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md"
+required = [
+  "registered `rust-binding-title-index-closure` suite",
+  "registered `rust-binding-index-closure` suite",
+]
+prohibited = [
+  "verify-rust-binding-title-index-closure.sh",
+  "verify-rust-binding-index-closure.sh",
+]
 
 [[checks]]
 id = "row-43-projection"
