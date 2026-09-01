@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 0 A1c preservation and design validation
 
-**Next slice:** exact isolated prototype execution admission from the committed Milestone 0 protocol
+**Next slice:** A2-P1 isolated authoring state-model prototype and guided scenarios
 
 **Acceptance status:** `pending`
 

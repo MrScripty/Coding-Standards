@@ -1,5 +1,20 @@
 # Standards Engine A2 Controlled Authoring Ledger
 
+## 2026-09-01 - Exact Prototype Execution Admission
+
+- Fixed all five prototype branches at committed protocol base
+  `bbdfb485e914540e0e53092dab71c9b80f55102d` before creating a worktree.
+- Assigned one private branch, one exact `/tmp` worktree, and one prototype-only
+  source path to each registered question. The A2 prototype owner owns those
+  worktrees; canonical `main` and the A2 integration owner own the evidence
+  records only.
+- Selected serial execution in A2-P1 through A2-P5 order. Every run uses
+  disposable state, has no production consumer, never merges, and is expected
+  to become `removed-archived` only after its exact commit is protected by a
+  named recovery ref.
+- Admitted A2-P1 as the next exact slice. No production source, public contract,
+  canonical store, generated facade, or standards publication is admitted.
+
 ## 2026-09-01 - Milestone 0 Baseline And Protocol
 
 - Executed the current public A1c snapshot and route path. The exact facts

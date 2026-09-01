@@ -82,9 +82,10 @@ until a candidate actually crosses those boundaries.
 ## Isolation And Commit Contract
 
 Each prototype receives its own private task branch and `/tmp` worktree from
-the exact canonical commit containing this protocol and its later exact
-execution-admission record. The prototype owner is the A2 prototype owner; the
-integration target and owner are canonical `main` and the A2 integration owner.
+the exact canonical commit containing this protocol. A separately committed
+execution-admission record must name that base, branch, worktree, and write set
+on canonical `main` before creation. The prototype owner is the A2 prototype
+owner; the integration target and owner are canonical `main` and the A2 integration owner.
 The prototype-only write set is exactly the path in the registration table.
 The worktree uses disposable repositories and stores only, has no canonical
 runtime consumer, and is never merged.
