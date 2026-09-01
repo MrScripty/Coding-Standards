@@ -1,6 +1,7 @@
 # A2-P4R Facade-Composition Execution Admission
 
-**Status:** `execution admitted; no Interface selected`
+**Status:** `executed; pass; typed-continuation design admitted for later
+contract planning`
 
 ## Question And Scope
 
@@ -186,3 +187,33 @@ implementation write sets remain later decisions.
 The prototype source and branch-local generated projection never merge to
 `main`. P5, ADR, public/persisted contract selection, migration, and production
 source remain blocked until a passing P4R verdict is recorded canonically.
+
+## Terminal Result
+
+P4R passed on frozen source
+`sha256:d3e9d80f3561eb83d818969cdf586d423baba594a8a435a547e2c5dc034c036f`
+and evidence commit `9a0c34325e2849c437072b12b3188bede7f08d4e`.
+All 34 executable gates passed on dependency-complete Linux CPython 3.11.14
+and 3.12.3, including the real current A1c platform-harness continuation. The
+representative workload supplied exactly its 49 independently named required
+facts across 11 A2 calls plus unchanged A1c `resolve`; 28 negative cases
+covered all 17 registered failure contracts.
+
+The admitted design is the eight-intent typed-continuation portfolio recorded
+above. The run exercised only exact replacement mutations. Current generated
+`QueryCall` validation covered route, read, and related request variants, while
+prototype-local projected answers deliberately made no claim to be canonical
+A1c `QueryResult` semantics. Exact schemas, public versions, handle wire
+formats, persistence, migration, ADR, production write sets, and Engine code
+remain deferred.
+
+Independent specification and standards reviews passed on the exact frozen
+hash after their findings were corrected. The complete repository checkpoint
+passed 269 of 269 declarative checks and all seven retained Bash verifiers.
+The evidence commit is protected at
+`refs/archive/a2-prototypes/p4r-facade-composition`; the clean worktree and
+temporary branch were removed, and no prototype source entered `main`.
+
+The next slice is a fresh P5 admission against the accepted P2R2 material model
+and this accepted P4R facade. The former P5 base predates both and is not valid
+execution authority.

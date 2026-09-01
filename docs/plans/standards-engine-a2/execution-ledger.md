@@ -646,3 +646,45 @@
 - Prototype source never merges to `main`. P5, ADR, public/persisted contracts,
   migration, and production source remain blocked until P4R passes and its
   exact `removed-archived` disposition is recorded canonically.
+
+## 2026-09-01 - A2-P4R Facade Composition Accepted
+
+- Created the admitted private worktree from exact base
+  `fc7dbeabb5828b5b6f3840a1ff004209ae291385` and authored only
+  `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py`.
+  Its final frozen identity was
+  `sha256:d3e9d80f3561eb83d818969cdf586d423baba594a8a435a547e2c5dc034c036f`.
+- The first self-reported green result was not accepted. Independent
+  specification and standards audits found current-handle, boundary, privacy,
+  failure, query, mutation-scope, A1c-meaning, fact-baseline, and unavailable-
+  outcome gaps. Each finding was corrected and the source was re-frozen before
+  review; both final independent audits returned `pass` on the exact hash.
+- The accepted run exposed exactly eight explicit intents and 16 defined
+  caller fields. The representative workflow used 11 A2 calls plus unchanged
+  A1c `resolve`; proposal, revision, analysis, readiness, and application
+  handles each had observable downstream leverage.
+- Current generated `QueryCall` decoded route, read, and related variants, and
+  current generated `ResolveCall` retained exact A1c analysis/work binding and
+  failure meanings. Prototype-local projected answers explicitly did not claim
+  canonical A1c `QueryResult` semantics. Only exact replacement mutations were
+  admitted and exercised.
+- All 34 verdict gates passed on dependency-complete Linux CPython 3.11.14 and
+  3.12.3. The workload supplied exactly 49 of 49 independently named facts; 28
+  negative cases covered all 17 registered failure contracts with bounded
+  results, complete traces, and authoring/coordination nonmutation.
+- Ruff, formatting, generated freshness, plan structure, all 269 declarative
+  checks, all seven retained Bash verifiers, staged-scope, sensitive-value, and
+  conventional Commit review passed. The isolated evidence was committed as
+  `9a0c34325e2849c437072b12b3188bede7f08d4e` with only the prototype source
+  and branch-local repository-index digest.
+- Verified archive ref `refs/archive/a2-prototypes/p4r-facade-composition` at
+  that exact commit, then removed the clean worktree and temporary branch. No
+  prototype source or generated branch projection entered canonical `main`.
+- Admitted the common-caller typed-continuation portfolio for later contract
+  and implementation planning. Rejected minimal merged goals, redundant
+  flexible facts, P4 caller stand-ins, tagged dispatch, and A1c overload.
+  Exact schemas, versions, wire handles, persistence, migration, ADR,
+  production write sets, and Engine code remain unselected.
+- The next slice is a new committed P5 admission. The former P5 base predates
+  the accepted P2R2 material model and P4R facade and grants no execution
+  authority.

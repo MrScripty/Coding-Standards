@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1, P2R2, and P3 pass; P2 and P4 revise; P2R rejected; P4R
-execution admitted; P5 blocked`
+**Status:** `P1, P2R2, P3, and P4R pass; P2 and P4 revise; P2R rejected;
+P5 requires current-base re-admission`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -16,8 +16,8 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P2R2 | `tools/standards_engine/tests/prototypes/a2/projected-material-identity.prototype.py` | removed `prototype/a2-m0-projected-material-identity`; removed `/tmp/coding-standards-a2-p2r2-projected-material-identity` | `a959ca3d6112ce4b3dc532805cbcb24b2e7fce2c` | `b76f443b5bc05b179d20193bf27ea4d3054db7f3` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p2r2-projected-material-identity` |
 | A2-P3 | `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py` | `prototype/a2-m0-publication-recovery`; `/tmp/coding-standards-a2-p3-publication-recovery` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `53fd98f292400aee6929d0cc950cc6163944a5a5` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p3-publication-recovery` |
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
-| A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | `prototype/a2-m0-facade-composition`; `/tmp/coding-standards-a2-p4r-facade-composition` not created | `fc7dbeabb5828b5b6f3840a1ff004209ae291385` | pending | pending | creation admitted; expected `removed-archived` |
-| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | `prototype/a2-m0-efficiency`; `/tmp/coding-standards-a2-p5-efficiency` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185`; worktree not yet created | pending | pending | pending; expected `removed-archived` |
+| A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | removed `prototype/a2-m0-facade-composition`; removed `/tmp/coding-standards-a2-p4r-facade-composition` | `fc7dbeabb5828b5b6f3840a1ff004209ae291385` | `9a0c34325e2849c437072b12b3188bede7f08d4e` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p4r-facade-composition` |
+| A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | branch and worktree not created | not selected; the prior `a8c7b04504b58446fc0fd6c53b867ddeb7827185` registration predates accepted P2R2/P4R design | pending re-admission | pending | pending; expected `removed-archived` |
 
 The A2 prototype owner owns each private worktree, its one authored source
 path, and the branch-local generated suite-input projection required by that
@@ -33,10 +33,11 @@ The generated projection diff is path-sensitive. P1 and every Python prototype
 digest.
 Python prototypes remain below the package's existing `tests` boundary; no
 prototype becomes a production package input or requires production ownership.
-P2, P3, and P4 must move their unchanged authored file to the corrected exact
+P2, P3, and P4 had to move their unchanged authored file to the corrected exact
 path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
-before staging. P5 must be created directly from that re-admitted base. P2R2
+before staging. That former P5 base is no longer current and grants no creation
+authority. P2R2
 must be created only after its separately committed execution admission names
 the current exact base. P4R must be created only from the exact base and path
 registered by its separately committed
@@ -559,3 +560,95 @@ The clean task-owned worktree was removed after archive ref
 `refs/archive/a2-prototypes/p4-facade-workflow` was verified at exact tip
 `47cfcd5340196b275b910a398d61b7ef68a8e071`. The artifacts remain recoverable
 and were not merged to canonical `main`.
+
+## A2-P4R Facade Composition
+
+### Question And Environment
+
+P4R tested whether a common-caller typed-continuation facade could preserve
+eight distinct Authoring intents without P4's proposal-as-snapshot, mutable
+evidence selector, caller Git facts, tagged dispatch, or A1c overload. It
+compared the selected portfolio with a minimal three-root goal Interface, a
+flexible revision-addressed portfolio, P4's invalid explicit surface, tagged
+dispatch, and A1c overload.
+
+The frozen source identity was
+`sha256:d3e9d80f3561eb83d818969cdf586d423baba594a8a435a547e2c5dc034c036f`.
+The exact prototype ran with `PYTHONDONTWRITEBYTECODE=1`, `PYTHONPATH=.`, and
+safe-path `-P` in the dependency-complete
+`/tmp/coding-standards-a1c-py311` and
+`/tmp/coding-standards-a1c-py312` environments. The real current A1c platform
+harness created, queried, prepared, resolved, and inspected scratch state in
+each run, then removed it.
+
+### Results
+
+| Candidate or invariant | Exact result |
+| --- | --- |
+| Selected public shape | exactly `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, `analyze_proposal`, `review_proposal`, `apply_proposal`, and `recover_application`; 16 defined caller fields |
+| Representative work | 11 A2 calls plus unchanged A1c `resolve`; all proposal, revision, analysis, readiness, and application handles had observable downstream use |
+| Query composition | current generated `QueryCall` decoded canonical route, read, and related requests; historical read survived head movement; prototype-local projected answers explicitly made no canonical A1c `QueryResult` claim |
+| Caller knowledge | 49 independently named required atomic facts and exactly 49 supplied; no forbidden repository, ref, OID, store, resolver, capability, or completion fact |
+| Failure coverage | 28 negative cases covered every one of 17 registered failure contracts with exact bounded results, complete Adapter traces, and nonmutation |
+| Publication and recovery | success required verified candidate identity, expected-target CAS, and exact post-observation; unavailable or contradictory observation never inferred success |
+| Candidate comparison | no correctness-equivalent candidate strictly dominated the selected portfolio on calls, caller facts, fields, ambiguity, and coordinated owners |
+| A1c preservation | exact eight roots and capabilities unchanged; additive roots still rejected; generated snapshot, analysis, query, and resolve DTOs composed without another Analysis authority |
+
+Both CPython 3.11.14 and 3.12.3 returned `pass` for all 34 verdict gates,
+reported the 49/49 workload, advanced a real A1c resolve handle, and removed
+their temporary state. Independent specification and standards audits passed
+on the exact frozen hash after rejecting and correcting earlier overclaims in
+mutation scope, query variants, A1c failure meanings, and unavailable-target
+classification. Ruff, formatting, generated freshness, plan structure, all
+269 declarative checks, all seven retained Bash verifiers, staged-scope,
+sensitive-value, and commit review passed.
+
+### Four-Dimension Verdict
+
+- **Effectiveness:** `pass`. A caller completed create, cold handoff and
+  rediscovery, revise, historical and current query, projected analysis through
+  unchanged A1c `resolve`, review, direct application, and recovery using only
+  authored facts and returned opaque handles.
+- **Efficiency:** `pass` for the registered Interface question. The selected
+  candidate supplied exactly the independently named workload facts and was
+  not strictly dominated by a correctness-equivalent alternative. Timing,
+  durable-byte, and combined-workflow claims remain owned by P5.
+- **Correctness:** `pass` for facade shape and composition. Exact bindings,
+  authorization ordering, immutable history, query-union handling, current
+  resolve meanings, publication observation, recovery, failures, traces, and
+  nonmutation were executable gates. P2R2 and P3 remain authoritative for real
+  material persistence and Git semantics.
+- **Standards compliance:** `pass`. Both independent frozen-source audits and
+  every required runtime, repository, diff, sensitive-value, and commit gate
+  passed before archival.
+
+### Admitted And Deferred Decisions
+
+Admit the typed-continuation portfolio as the A2 facade design for later
+contract and implementation planning. Its public intents and caller fields are
+the eight shapes listed above; the Authoring Module privately derives proposal
+binding, projected material, head checks, target authority, verification, Git
+facts, and recovery observations. Only exact replacement mutations were in
+scope. Existing A1c `resolve` remains the continuation for pending Analysis.
+
+Reject the minimal merged-goal Interface, redundant flexible handles, P4's
+caller stand-ins, tagged dispatch, and A1c root overload. Do not yet select
+exact request/result schemas, a public Interface version, handle wire formats,
+store representation, migration, an ADR, production write sets, or Engine
+code. Generated `QueryCall` compatibility proves the current request union can
+be carried; prototype-local projected answers are not canonical A1c result
+semantics.
+
+P5 must be re-registered against the accepted P2R2 material model and this P4R
+facade before it can execute. The former P5 base and unexecuted isolation entry
+predate both accepted decisions and are not creation authority.
+
+### Archived Worktree Contract
+
+Evidence commit `9a0c34325e2849c437072b12b3188bede7f08d4e`
+was created from exact admitted base
+`fc7dbeabb5828b5b6f3840a1ff004209ae291385`. The archive ref
+`refs/archive/a2-prototypes/p4r-facade-composition` was verified at that exact
+tip before the clean worktree and temporary branch were removed. The prototype
+source and branch-local repository-index projection remain recoverable only
+from the archive and did not enter canonical `main`.

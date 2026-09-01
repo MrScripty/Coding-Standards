@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 facade revalidation after projected-material
-identity acceptance
+**Current phase:** Milestone 0 combined-design efficiency re-admission after
+facade acceptance
 
-**Next slice:** Execute the isolated A2-P4R facade-composition prototype
+**Next slice:** Re-register and admit A2-P5 against the accepted P2R2 material
+model and P4R facade on the current canonical base
 
 **Acceptance status:** `pending`
 
@@ -19,8 +20,8 @@ identity acceptance
 **A1c reauthorization:**
 [Projected-material identity and replay](reports/a1c-projected-material-reauthorization.md)
 
-**P4R execution admission:**
-[Facade-composition comparison and oracle](reports/p4r-facade-composition-admission.md)
+**P4R decision record:**
+[Facade-composition admission and terminal evidence](reports/p4r-facade-composition-admission.md)
 
 ## Objective
 
@@ -395,13 +396,16 @@ canonical `main`.
   Passing evidence is archived at exact commit
   `b76f443b5bc05b179d20193bf27ea4d3054db7f3` and recorded in the prototype
   evidence index.
-- [ ] Revise P4 only after P2R2 accepts projected-material identity. Retest the
+- [x] Revise P4 only after P2R2 accepts projected-material identity. Retest the
   explicit additive facade without a projected `SnapshotHandle`, mutable
   current-evidence selector, caller-supplied ref or object ID, tagged dispatch,
   or A1c query/inspect overload before selecting any operation root. Execute
   the exact typed-continuation comparison admitted in the
   [P4R report](reports/p4r-facade-composition-admission.md) from fixed base
-  `fc7dbeabb5828b5b6f3840a1ff004209ae291385`.
+  `fc7dbeabb5828b5b6f3840a1ff004209ae291385`. P4R passed all 34 gates on
+  CPython 3.11 and 3.12; exact evidence is archived at commit
+  `9a0c34325e2849c437072b12b3188bede7f08d4e` and recorded in the prototype
+  evidence index.
 - [ ] Measure every material candidate against its predeclared efficiency
   claim using an owned workload, metric, baseline or budget, environment, and
   variability policy. Record the correctness and resource tradeoff; do not
@@ -451,13 +455,17 @@ canonical `main`.
 
 ## Blockers
 
-- No design blocker affects the admitted A2-P4R execution. A2-P2R2 passed
-  every identity, replay, lifecycle, single-authority, efficiency, platform,
-  and standards-compliance threshold, and the user selected direct configured-
-  main publication as the one application success meaning.
-- P5, an A1c ADR amendment, public or persisted contract selection, and
-  production planning remain unavailable until P4R validates an exact facade
-  composition without restoring any of P4's rejected stand-ins.
+- No design blocker affects a fresh P5 registration. P2R2 accepted projected-
+  material identity, P4R accepted the typed-continuation facade without P4's
+  rejected stand-ins, and the user selected direct configured-main publication
+  as the one application success meaning.
+- P5 execution is not yet authorized. Its former base predates the accepted
+  P2R2 and P4R decisions; a new committed admission must freeze the combined
+  workload, correctness-equivalent baselines, metrics, variability policy,
+  exact current base, isolated write set, and terminal disposition first.
+- An A1c ADR amendment, public or persisted contract selection, and production
+  planning remain unavailable until P5 passes and its canonical verdict is
+  recorded.
 - Production implementation remains unavailable until A2-A11 and every
   design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
   the plan names and admits an exact implementation slice.
