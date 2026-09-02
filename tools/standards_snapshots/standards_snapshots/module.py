@@ -13,10 +13,13 @@ from tools.standards_identity.standards_identity import (
 from .errors import invalid
 from .model import (
     AggregateRecord,
+    AggregateRoot,
+    AggregateRootPage,
     CapturedContent,
     ChildHandle,
     DeleteSnapshotResult,
     FindSnapshotsRequest,
+    FindAggregateRootsRequest,
     PutResult,
     SnapshotId,
     SnapshotPage,
@@ -58,12 +61,17 @@ class SnapshotModule:
         snapshot_id_factory: Callable[[], SnapshotId] | None = None,
         quarantine_seconds: int = DEFAULT_QUARANTINE_SECONDS,
     ) -> SnapshotModule:
-        return cls(
-            SQLiteSnapshotStore(path),
-            now=now,
-            snapshot_id_factory=snapshot_id_factory,
-            quarantine_seconds=quarantine_seconds,
-        )
+        store = SQLiteSnapshotStore(path)
+        try:
+            return cls(
+                store,
+                now=now,
+                snapshot_id_factory=snapshot_id_factory,
+                quarantine_seconds=quarantine_seconds,
+            )
+        except Exception:
+            store.close()
+            raise
 
     def close(self) -> None:
         self._store.close()
@@ -120,6 +128,16 @@ class SnapshotModule:
     def publish_aggregate(self, record: AggregateRecord) -> PutResult:
         self.maintain()
         return self._store.publish_aggregate(record)
+
+    def create_aggregate_root(self, root: AggregateRoot, head: AggregateRecord) -> None:
+        self.maintain()
+        self._store.create_aggregate_root(root, head)
+
+    def find_aggregate_roots(
+        self, request: FindAggregateRootsRequest
+    ) -> AggregateRootPage:
+        self.maintain()
+        return self._store.find_aggregate_roots(request)
 
     def load_aggregate(self, aggregate_id: str) -> AggregateRecord:
         self.maintain()

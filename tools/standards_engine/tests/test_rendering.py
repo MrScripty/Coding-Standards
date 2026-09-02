@@ -65,6 +65,21 @@ class TextRenderingTest(unittest.TestCase):
             "MESSAGE The submission does not address current work.\n",
         )
 
+    def test_proposal_projection_exposes_only_opaque_handles(self) -> None:
+        proposal = "proposal:v1:00000000-0000-4000-8000-000000000001"
+        revision = "proposal-revision:sha256:" + "a" * 64
+
+        self.assertEqual(
+            render_text(
+                {
+                    "kind": "create-proposal-result",
+                    "proposal": {"id": proposal},
+                    "revision": {"id": revision},
+                }
+            ),
+            f"CREATE-PROPOSAL-RESULT {proposal} {revision}\n",
+        )
+
     def test_every_public_result_kind_has_a_rendering_dispatch(self) -> None:
         schema = json.loads(
             (
@@ -96,6 +111,8 @@ class TextRenderingTest(unittest.TestCase):
             "find-snapshots-result",
             "delete-snapshot-result",
             "undelete-snapshot-result",
+            "create-proposal-result",
+            "find-proposals-result",
         }
         unsupported = {
             kind

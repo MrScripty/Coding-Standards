@@ -1221,6 +1221,57 @@
       ],
       "type": "object"
     },
+    "CreateProposalCall": {
+      "additionalProperties": false,
+      "properties": {
+        "base_snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "kind": {
+          "const": "create-proposal"
+        },
+        "mutations": {
+          "items": {
+            "$ref": "#/$defs/ReplacementMutation"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "semantic_proposals": {
+          "items": {
+            "$ref": "#/$defs/SemanticProposal"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "base_snapshot",
+        "mutations",
+        "semantic_proposals"
+      ],
+      "type": "object"
+    },
+    "CreateProposalResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "create-proposal-result"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "proposal",
+        "revision"
+      ],
+      "type": "object"
+    },
     "CreateSnapshotCall": {
       "additionalProperties": false,
       "properties": {
@@ -1760,6 +1811,48 @@
         "type",
         "states",
         "nullable"
+      ],
+      "type": "object"
+    },
+    "FindProposalsCall": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "kind": {
+          "const": "find-proposals"
+        },
+        "limit": {
+          "default": 50,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "FindProposalsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "continuation": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "kind": {
+          "const": "find-proposals-result"
+        },
+        "proposals": {
+          "items": {
+            "$ref": "#/$defs/ProposalSummary"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "proposals"
       ],
       "type": "object"
     },
@@ -2448,6 +2541,70 @@
       ],
       "type": "object"
     },
+    "ProposalHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ProposalId"
+        },
+        "kind": {
+          "const": "proposal-handle"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "ProposalId": {
+      "pattern": "^proposal:v1:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "ProposalRevisionHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ProposalRevisionId"
+        },
+        "kind": {
+          "const": "proposal-revision-handle"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "ProposalRevisionId": {
+      "pattern": "^proposal-revision:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "ProposalSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "head_revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        }
+      },
+      "required": [
+        "proposal",
+        "head_revision"
+      ],
+      "type": "object"
+    },
     "ProvenanceRecord": {
       "additionalProperties": false,
       "properties": {
@@ -2999,6 +3156,26 @@
       ],
       "type": "object"
     },
+    "ReplacementMutation": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "replace"
+        },
+        "path": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "path",
+        "value"
+      ],
+      "type": "object"
+    },
     "RepositoryPath": {
       "items": {
         "$ref": "#/$defs/NonEmptyString"
@@ -3428,7 +3605,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 12,
+  "interface_schema_version": 13,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -3530,6 +3707,30 @@
       },
       "result_definitions": [
         "InspectionResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.author",
+      "id": "create_proposal",
+      "input_definition": "CreateProposalCall",
+      "input_schema": {
+        "$ref": "#/$defs/CreateProposalCall"
+      },
+      "result_definitions": [
+        "CreateProposalResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.read",
+      "id": "find_proposals",
+      "input_definition": "FindProposalsCall",
+      "input_schema": {
+        "$ref": "#/$defs/FindProposalsCall"
+      },
+      "result_definitions": [
+        "FindProposalsResult",
         "RejectedResult"
       ]
     }

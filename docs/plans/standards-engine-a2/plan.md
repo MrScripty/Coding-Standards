@@ -2,12 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 phase-capability validation
+**Current phase:** Milestone 0 validation for the next slice after accepted
+Milestone 1 proposal creation and discovery
 
-**Next slice:** Create the isolated A2-P5C branch and worktree from exact
-admitted base `9f6dd8a9484cc1b2421b29829ea928a9413905f9`, then author only the
-registered resource-free phase capability and minimum viable test; P5R and
-P5M remain unavailable
+**Next slice:** design-validate and admit the smallest coherent
+`revise_proposal` plus immutable revision-read slice; do not implement revision
+CAS, projected analysis, review, application, Git publication, recovery, or
+phase-resource machinery until its exact evidence and write set are accepted
 
 **Acceptance status:** `pending`
 
@@ -44,9 +45,10 @@ architecture decisions except the one exact snapshot-only proposed-material
 assumption the user reauthorized for projected-material identity validation on
 2026-09-01. Milestone 0 owns the product, contract, architecture, and
 design-validation facts required to make the A2 objective implementable. It
-admits only isolated, disposable prototypes and minimum viable design tests; it
-does not authorize production source, public contract, persisted-store, ADR,
-or canonical-standards mutation.
+admits isolated, disposable prototypes and minimum viable design tests. The
+user's 2026-09-02 implementation direction authorizes only the exact first
+production slice recorded in Milestone 1; it does not authorize later A2
+behavior or canonical-standards mutation.
 
 ## Objective Acceptance
 
@@ -61,7 +63,7 @@ or canonical-standards mutation.
 | A2-A7 | Durable proposal, head, readiness, attempt, and snapshot-dependent state have one owner, exact schema and version roles, atomic lifecycle and purge behavior, cold-process reconstruction, and an accepted A1c-store migration or typed-rejection decision derived from current consumers. | `system` | `required-real` | `automated` | `pending` | pending |
 | A2-A8 | One canonical generated public contract governs every admitted authoring input, result, handle, operation capability, typed failure, Python model, agent-tool projection, example, and actual facade path; freshness, semantic conformance, and public behavior have separate deciding evidence. | `contract` | `repository-supported verification environments` | `automated` | `pending` | pending |
 | A2-A9 | Real Linux CPython 3.11 and 3.12 evidence exercises cross-invocation proposal work, concurrent head and target changes, Git and SQLite behavior, authorization, verification failure, interruption recovery, and the complete public workflow. | `user-workflow` | `required-real` | `automated` | `pending` | pending |
-| A2-A10 | One coherent candidate has complete implementation-consumer dispositions, exact policy-impact and coverage closure, focused and repository-wide verification, and independent Standards and specification acceptance. | `integration` | `not-applicable` | `manual` | `pending` | pending |
+| A2-A10 | One coherent candidate has complete dispositions for the standards-policy effects it actually introduces, exact standards policy-impact and coverage closure, focused and repository-wide verification, and independent Standards and specification acceptance. Engine implementation membership is not added to standards graphs. | `integration` | `not-applicable` | `manual` | `pending` | pending |
 | A2-A11 | An exact preservation matrix demonstrates that every explicit user-selected A1c decision is unchanged or has one exact explicit user reauthorization with supersession scope and new acceptance evidence; each A2 responsibility is a non-conflicting composition, an A2-local addition, or unavailable. No plan, prototype, contract, migration, or implementation silently supersedes A1c. | `contract` | `not-applicable` | `manual` | `pending` | [Projected-material reauthorization](reports/a1c-projected-material-reauthorization.md) and pending independent reconciliation |
 | A2-A12 | Before a material A2 design or procedure is admitted, a question-specific disposable prototype or minimum viable test records representative workflows, predeclared effectiveness criteria, an owned efficiency metric and comparison or budget, correctness invariants and negative cases, the current routed standards set, deciding oracles, limitations, and a pass, revise, or reject disposition. | `integration` | `representative` | `manual` | `pending` | pending |
 | A2-A13 | No production Standards Engine source, public contract, canonical store, generated facade, or canonical standards authority changes before A2-A11 and every design-dependent A2-A12 record required by the exact implementation slice are accepted; prototype shells, fake success, test-only state, and scratch persistence remain unreachable from and absent from the canonical implementation. | `integration` | `not-applicable` | `automated` | `pending` | pending |
@@ -100,7 +102,8 @@ or canonical-standards mutation.
 
 ### Out Of Scope
 
-- Production implementation during Milestone 0.
+- Production implementation outside the exact admitted Milestone 1
+  `create_proposal`/`find_proposals` slice while later A2 design remains active.
 - Changing, weakening, reinterpreting, or silently superseding an explicit
   user-selected A1c design decision outside the exact projected-material
   identity reauthorization recorded by this plan.
@@ -136,13 +139,14 @@ or canonical-standards mutation.
   analysis material with an exact immutable projected-revision reference. A2
   acceptance, prototype evidence, convenience, or implementation pressure
   cannot broaden that authority.
-- The user authorized formation of a standards-compliant proposal, not
-  production implementation or canonical standards mutation.
-- Milestone 0 is the only admitted discovery scope. No production edit is
-  available until the A1c preservation matrix and every applicable design
-  validation record are accepted, Milestone 0 is accepted, this plan is
-  re-planned with one exact implementation slice and write set, and the
-  required implementation operation is explicitly admitted.
+- The user explicitly authorized standards-compliant production implementation
+  on 2026-09-02. That authority is bounded to a slice whose design evidence,
+  public readback, write set, and verification are named here; it does not
+  authorize canonical standards mutation.
+- Milestone 0 remains the discovery owner for later A2 behavior. Production
+  edits are available only for the exact Milestone 1 slice; every later slice
+  still requires its applicable A1c preservation and design-validation records
+  plus an exact write set before implementation.
 - A material design or procedure requires the smallest adequate pre-canonical
   prototype or minimum viable test. Its record names the question, claim,
   representative workload or scenario, oracle, effectiveness criterion,
@@ -159,6 +163,10 @@ or canonical-standards mutation.
   workflow. Plans do not prescribe commit count or topology; Commit owns the
   coherent boundary, exact staging, sensitive-file review, verification,
   conventional message, branch/worktree lifecycle, and evidence record.
+- Standards graphs remain exclusively standards-domain authority. A2 consumes
+  them through accepted A1c analysis semantics for proposed standards content;
+  Engine implementation sources, tests, proposals, and revisions are not graph
+  members or policy-impact consumers merely because they implement A2.
 - The active Generic Standards Verification Engine migration must publish its
   required fresh graph audit before A2 freezes verifier consumers, graph
   relationships, coverage subjects, generated projections, or acceptance
@@ -211,6 +219,7 @@ or canonical-standards mutation.
 | Admit each material A2 design and procedure only after a bounded prototype or minimum viable test supplies distinct effectiveness, efficiency, correctness, and current standards-compliance evidence against predeclared questions and oracles. Prototype success admits a decision for implementation planning, not production behavior or objective acceptance. | Product, Architecture, Performance, and Verification owners | User direction and claim/evidence boundaries in Verification, Performance, and Architecture | Paper-only design acceptance, successful execution as correctness, or prototype behavior treated as production proof |
 | Keep prototype source outside the canonical integration branch. Commit it only on a governed isolated prototype branch as primary evidence, point the canonical issue or report to the exact commit, and integrate only the validated decision. Select retention, archival, worktree removal, and branch disposition through the Commit workflow. | Prototype owner, A2 integration owner, and Commit owner | Prototype isolation contract and Commit branch/worktree lifecycle | Experimental shell, scratch state, fake success, or broad prototype code copied into production |
 | Apply the current Router and every selected standard to all A2 plans, procedures, prototypes, verification, and implementation. Commit each coherent verified repository outcome through exact staged review and a conventional commit; the plan records semantic slices and evidence but does not own Git topology or cadence. | Planning, Implementation, Verification, Documentation, and Commit owners | Current routed standards and Commit workflow | Uncommitted durable authority, unchecked procedure changes, plan-prescribed commit topology, or verification logs used as commit messages |
+| Admit the first production slice as the paired `create_proposal` and `find_proposals` operations. Use exact replacement mutations, A1c `SemanticProposal` values, proposal UUID lifecycle identity, content-bound immutable revision identity, one snapshot-dependent aggregate head, store-v1-to-v2 atomic migration, and public cold-reopen readback. Preserve the eight A1c operations unchanged and omit revision CAS, projected analysis, Git, recovery, measurement, and P5C forwarding machinery. | User, Product, Authoring, Snapshot, Contracts, Architecture, and Planning owners | Accepted P1/P2R2/P4R decisions, passing P5C evidence at `82a37ed0f7d40cbb105df1c25381a9073b330e49`, independent slice review, and [A2 ADR](../../decisions/standards-engine-a2.md) | The former blanket production blocker and P5 resource/measurement work treated as a prerequisite for resource-free proposal creation/discovery |
 
 ## Evidence And Oracle Plan
 
@@ -428,12 +437,16 @@ canonical `main`.
   measurement coupling, and incomplete process-group termination. No behavior
   or dual-runtime command ran. Exact rejected source is removed-archived at
   commit `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6`.
-- [ ] Execute A2-P5C as one resource-free phase-capability MVT. Preserve all
+- [x] Execute A2-P5C as one resource-free phase-capability MVT. Preserve all
   eight explicit A1c roots as same-name typed delegation, permanently revoke
   retained callback capabilities, preserve exact call/result/failure identity,
   and satisfy the Architecture-owned structural budget. The capability Module
   has no Engine, process, path, SQLite, lifecycle, metric, candidate, or report
-  knowledge; the MVT uses Engine only as signature authority.
+  knowledge; the MVT uses Engine only as signature authority. The corrected
+  source passed both supported runtimes, focused quality checks, generated
+  freshness, all 269 declarative suites, and all seven retained Bash verifiers
+  at archive commit `82a37ed0f7d40cbb105df1c25381a9073b330e49`; its
+  original class-identity assertion remains separately rejected evidence.
 - [ ] Admit A2-P5R only after P5C passes at one immutable source identity. P5R
   alone may validate actual scratch Git/process, Snapshot/SQLite, Engine,
   observation, reopen, cleanup, and terminal ownership while consuming P5C
@@ -450,8 +463,9 @@ canonical `main`.
   superseding A2 ADR candidate, derive exact objective oracles, and delete or
   decline every permanent mechanism without distinct deciding value.
 - [ ] After the active verification migration's fresh graph audit, query the
-  exact A2 implementation-consumer population and record every non-blocked
-  disposition and required coverage owner.
+  exact standards-policy population exercised by A2 proposal analysis and
+  record every non-blocked standards disposition and required coverage owner;
+  do not register Engine implementation artifacts as standards graph members.
 - [ ] Obtain one independent planning review of all Milestone 0 artifacts and
   re-plan this file with exact implementation milestones, write sets, gates,
   blockers, and one next slice.
@@ -483,9 +497,62 @@ canonical `main`.
 - This plan names one exact first production implementation slice and write set
   before Milestone 0 becomes `Accepted`.
 
+Milestone 0 has admitted the exact Milestone 1 slice. Its remaining items stay
+active only as prerequisites for later A2 behavior.
+
 **Status:** `Active`
 
+### Milestone 1: Durable Proposal Creation And Discovery
+
+Deliver one usable authoring increment through the actual generated facade:
+
+- [x] Add `create_proposal(base_snapshot, mutations, semantic_proposals)` and
+  `find_proposals(after, limit)` without changing the existing eight A1c
+  operations or introducing tagged dispatch.
+- [x] Store a unique proposal lifecycle root, one content-bound immutable
+  initial revision, and one head reference atomically under the existing
+  Snapshot/SQLite owner. Hide the proposal while its base snapshot is
+  quarantined and remove it when that snapshot is purged.
+- [x] Allocate interface schema v13, proposal/proposal-revision handle schema
+  v1, Authoring material contract v1, and store schema v2 independently. Migrate
+  an exact integrity-valid store v1 to the exact v2 schema atomically; preserve
+  every A1c row family, reject schema lookalikes/corruption before mutation,
+  reject unrelated/future stores before persistent configuration, prove
+  interruption rollback and failed-open cleanup, and retain no dual reader or
+  fallback.
+- [x] Exercise creation and cold-reopen discovery through `AgentToolFacade`,
+  including a fresh process and owned close path; invalid/duplicate/missing
+  replacement inputs; persisted revision revalidation; snapshot lifecycle;
+  stable transactional pagination; store migration; generated
+  semantics/freshness; typed invalid Unicode identity material; facade-owned
+  close behavior with deployment-owned store selection; and unchanged A1c
+  regression paths.
+- [x] Pass both supported runtimes, complete repository verification, staged
+  scope and sensitive-value review, generated-diff review, and the Commit
+  workflow; record the coherent commit boundary in the execution ledger.
+
+The coherent write set is the A2 plan/ledger and ADR; canonical schema,
+interface, examples, handle fixtures, compiler and generated projections; the
+private Authoring Module; generic aggregate-head persistence owned by
+`standards_snapshots`; Engine/facade composition; focused Authoring, store,
+contract, and existing A1c regression tests; and mechanically required
+repository projections. Revision CAS, projected analysis, proposal query,
+review/readiness, Git publication, application/recovery, P5 resource ownership,
+P5 measurement, and P5C production code are excluded.
+
+**Acceptance gate:** The two operations round-trip through the public facade
+after a cold reopen on CPython 3.11 and 3.12; invalid material has typed failure;
+exact valid v1 stores migrate without changing any A1c row and interruption
+rolls back; invalid persisted revision authority is rejected; snapshot
+quarantine/purge governs proposals; generated and repository verification
+pass; and the staged diff contains no excluded mechanism or sensitive value.
+
+**Status:** `Accepted`
+
 ## Blockers
+
+No blocker applies to the exact Milestone 1 slice. The following constraints
+remain blockers for later A2 slices:
 
 - The combined P5 executable is superseded before measurement. Its final
   frozen source passed supporting focused checks but failed independent
@@ -495,21 +562,14 @@ canonical `main`.
   domain, measurement, and evidence concerns. Exact terminal evidence and the
   dependency-ordered replacement are owned by the
   [P5 decomposition](reports/p5-lifecycle-decomposition.md).
-- P5L is rejected and removed-archived without behavior. It grants no
-  correction or successor execution authority. P5C alone is admitted from
-  exact base `9f6dd8a9484cc1b2421b29829ea928a9413905f9` with the two-source
-  resource-free write set registered by the
-  [design-validation protocol](reports/design-validation-protocol.md) and
-  [prototype evidence index](reports/prototype-evidence-index.md). P5R, P5M,
-  and all combined efficiency measurement remain unavailable until their
-  dependency-ordered predecessors pass both supported runtimes and independent
-  audits.
-- An A1c ADR amendment, public or persisted contract selection, and production
-  planning remain unavailable until P5C, a separately admitted P5R, and a
-  later separately admitted P5M pass and their canonical verdicts are recorded.
-- Production implementation remains unavailable until A2-A11 and every
-  design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
-  the plan names and admits an exact implementation slice.
+- P5L is rejected and removed-archived without behavior. Corrected P5C passed
+  but has no production consumer and therefore supplies evidence only. P5R and
+  P5M remain unavailable and become relevant only if a later exact slice owns
+  real process/resource lifetime or a material efficiency decision.
+- Revision CAS, projected analysis, public query/review/application operations,
+  Git publication/recovery, and their persisted and trust contracts remain
+  unavailable until their own design evidence and exact write sets are
+  admitted. Milestone 1 does not imply that authority.
 
 ## Re-Plan Triggers
 

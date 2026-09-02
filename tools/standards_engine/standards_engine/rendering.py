@@ -118,6 +118,22 @@ def _snapshot_lifecycle(value: Mapping[str, object]) -> str:
     return f"{kind.upper()} {_snapshot_id(snapshot or value)}\n"
 
 
+def _proposal_lifecycle(value: Mapping[str, object]) -> str:
+    kind = str(value["kind"])
+    proposals = _items(value, "proposals")
+    if kind == "find-proposals-result":
+        lines = [f"PROPOSALS {len(proposals)}"]
+        lines.extend(
+            f"  {_proposal_id(item)} {_revision_id(item.get('head_revision'))}"
+            for item in proposals
+        )
+        return "\n".join(lines) + "\n"
+    return (
+        f"{kind.upper()} {_proposal_id(value)} "
+        f"{_revision_id(value.get('revision'))}\n"
+    )
+
+
 def _rejection(value: Mapping[str, object]) -> str:
     return (
         "\n".join(
@@ -147,6 +163,14 @@ def _snapshot_id(value: Mapping[str, object]) -> str:
         return str(snapshot.get("id", ""))
     nested = _mapping(snapshot.get("snapshot"))
     return str(nested.get("id", ""))
+
+
+def _proposal_id(value: Mapping[str, object]) -> str:
+    return str(_mapping(value.get("proposal")).get("id", ""))
+
+
+def _revision_id(value: object) -> str:
+    return str(_mapping(value).get("id", ""))
 
 
 def _items(
@@ -179,6 +203,8 @@ _RESULT_RENDERERS: dict[
     "find-snapshots-result": _snapshot_lifecycle,
     "delete-snapshot-result": _snapshot_lifecycle,
     "undelete-snapshot-result": _snapshot_lifecycle,
+    "create-proposal-result": _proposal_lifecycle,
+    "find-proposals-result": _proposal_lifecycle,
     "route-result": _navigation,
     "read-result": _navigation,
     "related-result": _navigation,

@@ -1,6 +1,6 @@
 # A2-P5 Lifecycle-First Decomposition Re-Plan
 
-**Status:** `P5L rejected before behavior and removed-archived; P5C dependency split provisionally admissible; registration and lifecycle owned by linked canonical artifacts`
+**Status:** `P5L rejected before behavior and removed-archived; corrected P5C passed and removed-archived; P5R/P5M remain unselected`
 
 ## P5L Terminal Result
 
@@ -83,10 +83,17 @@ This report owns only the dependency order and composed-design result.
 | Deletion results | Deleting P5C's phase seam either exposes raw Engine or redistributes eight typed liveness checks and revocation into its future owner callback boundary, so the seam contains necessary complexity. Deleting either MVT removes only evidence. P5R, P5M, and any measurement Adapter have no current mechanism to delete. |
 | Inherent and cumulative machinery | Current executable scope is one small phase capability, one plain resource-free MVT, and one mechanically changed repository-index digest. The necessary complexity is one active-or-revoked gate, one lease, eight same-name methods, and exact `PhaseRevokedError("phase capability is revoked")` with no cause before stale target access. There is no resource owner, process harness, SQLite observer, metric, candidate set, dominance logic, timing loop, report schema, registry, combiner, or production Module. |
 
-The replacement composition is `applicable` and provisionally admissible for
-P5C only. P5C remains prototype-only and never merges to `main`. P5R, P5M,
-canonical Engine changes, public contract evolution, schema, migration, and
-production planning remain unavailable.
+The replacement composition is `applicable`. Corrected P5C passed on CPython
+3.11 and 3.12 at immutable commit
+`82a37ed0f7d40cbb105df1c25381a9073b330e49`; its resource-free source and MVT
+hashes are respectively
+`b9a993b243771f61dfe9dde57511d26dea8e4f87edd8982f6e380f025e332785`
+and `0dbffe94546a749b71daedfc629b8c415953f0f5de85a43f23a1927fd87a9501`.
+P5C remains prototype-only and never merges to `main`: the current production
+facade has no callback owner that would consume a second eight-method surface.
+P5R and P5M remain unselected and are not prerequisites for resource-free
+proposal creation/discovery; later resource-owning or measurement slices must
+admit them only if their exact behavior has a real consumer.
 
 The remaining P5/P5L registration below is retained only as historical audit
 context. It cannot create a branch, execute a command, select an Interface, or

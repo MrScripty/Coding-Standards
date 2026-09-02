@@ -930,3 +930,71 @@
   `9f6dd8a9484cc1b2421b29829ea928a9413905f9`, then authors the registered P5C
   capability and MVT. P5R, P5M, and canonical implementation remain
   unavailable.
+
+## 2026-09-02 - Milestone 1 Proposal Creation And Discovery Accepted
+
+- Corrected P5C passed as isolated evidence at commit
+  `82a37ed0f7d40cbb105df1c25381a9073b330e49`, protected by
+  `refs/archive/a2-prototypes/p5c-phase-capability-passed`. Its prototype and
+  minimum-viable-test source identities are
+  `sha256:b9a993b243771f61dfe9dde57511d26dea8e4f87edd8982f6e380f025e332785`
+  and
+  `sha256:0dbffe94546a749b71daedfc629b8c415953f0f5de85a43f23a1927fd87a9501`.
+  No production caller needs its second eight-method forwarding surface, so
+  no P5C, P5R, P5M, timing, or phase-resource machinery entered canonical code.
+- Implemented the smallest usable production boundary:
+  `AgentToolFacade -> StandardsEngine -> AuthoringModule -> SnapshotModule` for
+  additive `create_proposal` and `find_proposals`. Initial revisions bind the
+  unique proposal lifecycle, ordinal, base snapshot, normalized exact
+  replacements, normalized semantic proposals, and Authoring contract v1 to a
+  content identity. Cold discovery revalidates the canonical bytes, record
+  kind, dependencies, proposal binding, and content identity before exposing a
+  revision handle.
+- Extended the existing single SQLite owner to store one proposal root/head
+  atomically, discover roots in durable insertion order under one read
+  transaction, inherit snapshot quarantine/undelete/purge, and retain minimal
+  root tombstones against expired-ID aliasing. No second store, repository
+  abstraction, compatibility reader, migration framework, public persistence
+  protocol, or caller-selected store path was added.
+- Selected one exact store-v1-to-v2 transition. Existing database identity,
+  version, exact DDL, and integrity are proved before persistent SQLite
+  configuration or migration. The write transaction re-proves v1, publishes
+  and proves exact v2, and rolls back injected interruption. Evidence preserves
+  nonempty content, file, active/quarantined root, aggregate, dependency,
+  child, and purge-tombstone row families; rejects schema lookalikes,
+  foreign-key corruption, unrelated WAL stores, and future versions; closes
+  failed opens; and removes only an identity-matched failed first-staging file.
+- Interface schema v13 and proposal/proposal-revision handle schema v1 extend
+  the original eight A1c roots without renaming, reordering, overloading, or
+  changing their request/result versions. The generated Python and agent-tool
+  projections, examples, handle fixtures, compiler closure, text rendering,
+  and facade methods agree. Store selection remains deployment-owned and the
+  facade now owns an explicit close/context-manager lifecycle.
+- Current Linux CPython 3.11 and 3.12 evidence passes the same 58 tests per
+  runtime: 25 Authoring/Snapshot behavior tests, 20 Contracts compiler/
+  projection tests, and 13 generated-contract/rendering tests. They include a
+  real fresh-process facade reopen, invalid creation and persisted-authority
+  Unicode, duplicate/missing mutation targets, content-bound reconstruction,
+  clock rollback pagination, lifecycle/purge, exact migration, interruption,
+  and failed-open negatives. Projection freshness, Ruff, plan structure, and
+  diff hygiene pass.
+- Independent Standards/specification review first found and then verified
+  closure of pre-mutation integrity and exact-schema gaps, incomplete A1c row
+  and process evidence, unvalidated persisted heads, resource leaks, an unused
+  Authoring injection seam, unstable split-read pagination, test-only public
+  store selection, pre-rejection SQLite mutation, and raw identity errors.
+  Both final review axes report `pass` with no blocker or high finding. Review
+  also found no high unnecessary machinery.
+- The complete 269-suite repository checkpoint, all seven retained Bash
+  checkers, exact staged scope, generated diff, sensitive-value review, and the
+  conventional commit are the final Commit-owned boundary for this accepted
+  slice. Revision CAS, immutable revision read, projected analysis,
+  review/readiness, application, Git publication, and recovery remain
+  unimplemented. The next operation is design validation and exact admission
+  for the smallest coherent revision-CAS/read slice.
+- A final review proposed registering the new Authoring source and tests in the
+  standards policy-impact graph. That proposal was rejected because standards
+  graphs are standards-domain authority, not an Engine implementation
+  registry. No A2 feature node or relationship was retained; the accepted A1c
+  graph remains unchanged, and A2 consumes it only when analyzing proposed
+  standards content.

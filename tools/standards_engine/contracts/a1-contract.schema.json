@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1c-v12",
-  "title": "Standards Engine A1c contract",
-  "description": "Canonical typed contract for snapshot lifecycle, navigation, inspection, and immutable standards-change analysis.",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v13",
+  "title": "Standards Engine A2 contract",
+  "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
     {
       "$ref": "#/$defs/CreateSnapshotCall"
@@ -15,6 +15,18 @@
     },
     {
       "$ref": "#/$defs/FindSnapshotsResult"
+    },
+    {
+      "$ref": "#/$defs/CreateProposalCall"
+    },
+    {
+      "$ref": "#/$defs/CreateProposalResult"
+    },
+    {
+      "$ref": "#/$defs/FindProposalsCall"
+    },
+    {
+      "$ref": "#/$defs/FindProposalsResult"
     },
     {
       "$ref": "#/$defs/DeleteSnapshotCall"
@@ -1478,6 +1490,14 @@
       "type": "string",
       "pattern": "^analysis:sha256:[0-9a-f]{64}$"
     },
+    "ProposalId": {
+      "type": "string",
+      "pattern": "^proposal:v1:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "ProposalRevisionId": {
+      "type": "string",
+      "pattern": "^proposal-revision:sha256:[0-9a-f]{64}$"
+    },
     "ChildId": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
@@ -1522,6 +1542,46 @@
         },
         "schema_version": {
           "const": 5
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalHandle": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "properties": {
+        "kind": {
+          "const": "proposal-handle"
+        },
+        "id": {
+          "$ref": "#/$defs/ProposalId"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalRevisionHandle": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "properties": {
+        "kind": {
+          "const": "proposal-revision-handle"
+        },
+        "id": {
+          "$ref": "#/$defs/ProposalRevisionId"
+        },
+        "schema_version": {
+          "const": 1
         }
       },
       "additionalProperties": false
@@ -1743,6 +1803,135 @@
         },
         "continuation": {
           "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReplacementMutation": {
+      "type": "object",
+      "required": [
+        "op",
+        "path",
+        "value"
+      ],
+      "properties": {
+        "op": {
+          "const": "replace"
+        },
+        "path": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalSummary": {
+      "type": "object",
+      "required": [
+        "proposal",
+        "head_revision"
+      ],
+      "properties": {
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "head_revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreateProposalCall": {
+      "type": "object",
+      "required": [
+        "kind",
+        "base_snapshot",
+        "mutations",
+        "semantic_proposals"
+      ],
+      "properties": {
+        "kind": {
+          "const": "create-proposal"
+        },
+        "base_snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "mutations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ReplacementMutation"
+          }
+        },
+        "semantic_proposals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SemanticProposal"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreateProposalResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "proposal",
+        "revision"
+      ],
+      "properties": {
+        "kind": {
+          "const": "create-proposal-result"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FindProposalsCall": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "find-proposals"
+        },
+        "after": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "FindProposalsResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "proposals"
+      ],
+      "properties": {
+        "kind": {
+          "const": "find-proposals-result"
+        },
+        "proposals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProposalSummary"
+          }
+        },
+        "continuation": {
+          "$ref": "#/$defs/ProposalHandle"
         }
       },
       "additionalProperties": false

@@ -99,10 +99,14 @@ from ._generated_contract import (
     CoverageAttestationSubmission,
     CreateSnapshotCall,
     CreateSnapshotResult,
+    CreateProposalCall,
+    CreateProposalResult,
     DeleteSnapshotCall,
     DeleteSnapshotResult,
     FindSnapshotsCall,
     FindSnapshotsResult,
+    FindProposalsCall,
+    FindProposalsResult,
     InspectCall,
     ImpactDispositionSubmission,
     InspectionResult,
@@ -126,6 +130,14 @@ from ._generated_contract import (
     SnapshotInspectionResult,
     UndeleteSnapshotCall,
     UndeleteSnapshotResult,
+)
+from .authoring import (
+    AuthoringError,
+    AuthoringModule,
+    FindProposalsRequest,
+    Mutation,
+    ProposalId,
+    ProposalSummary as AuthoringProposalSummary,
 )
 
 
@@ -191,6 +203,7 @@ class StandardsEngine:
     ) -> None:
         self._repository = repository
         self._snapshots = snapshots
+        self._authoring = AuthoringModule(snapshots)
         self._execution_context = execution_context or AnalysisExecutionContext()
         self._temporary_store = temporary_store
 
@@ -294,6 +307,49 @@ class StandardsEngine:
                 value["continuation"] = self._snapshot_handle(page.continuation)
             return FindSnapshotsResult.from_value(value)
         except SnapshotError as error:
+            return self._domain_rejection(error)
+
+    def create_proposal(
+        self, call: CreateProposalCall
+    ) -> CreateProposalResult | RejectedResult:
+        try:
+            summary, revision = self._authoring.create_proposal(
+                self._snapshot_id(call.base_snapshot),
+                (
+                    Mutation(SnapshotPath.parse(item.path), item.value)
+                    for item in call.mutations
+                ),
+                (item.as_contract() for item in call.semantic_proposals),
+            )
+            return CreateProposalResult.from_value(
+                {
+                    "kind": "create-proposal-result",
+                    "proposal": self._proposal_handle(summary.proposal),
+                    "revision": self._proposal_revision_handle(revision.revision_id),
+                }
+            )
+        except (AuthoringError, SnapshotError) as error:
+            return self._domain_rejection(error)
+
+    def find_proposals(
+        self, call: FindProposalsCall
+    ) -> FindProposalsResult | RejectedResult:
+        try:
+            after = (
+                None
+                if isinstance(call.after, MissingValue)
+                else ProposalId(call.after.id)
+            )
+            limit = 50 if isinstance(call.limit, MissingValue) else int(call.limit)
+            page = self._authoring.find_proposals(FindProposalsRequest(after, limit))
+            value: dict[str, object] = {
+                "kind": "find-proposals-result",
+                "proposals": [self._proposal_summary(item) for item in page.proposals],
+            }
+            if page.continuation is not None:
+                value["continuation"] = self._proposal_handle(page.continuation)
+            return FindProposalsResult.from_value(value)
+        except (AuthoringError, SnapshotError) as error:
             return self._domain_rejection(error)
 
     def delete_snapshot(
@@ -1728,6 +1784,25 @@ class StandardsEngine:
     def _snapshot_handle(snapshot: SnapshotId) -> dict[str, object]:
         return {"kind": "snapshot-handle", "id": str(snapshot), "schema_version": 5}
 
+    @staticmethod
+    def _proposal_handle(proposal: ProposalId) -> dict[str, object]:
+        return {"kind": "proposal-handle", "id": str(proposal), "schema_version": 1}
+
+    @staticmethod
+    def _proposal_revision_handle(revision: str) -> dict[str, object]:
+        return {
+            "kind": "proposal-revision-handle",
+            "id": revision,
+            "schema_version": 1,
+        }
+
+    @classmethod
+    def _proposal_summary(cls, summary: AuthoringProposalSummary) -> dict[str, object]:
+        return {
+            "proposal": cls._proposal_handle(summary.proposal),
+            "head_revision": cls._proposal_revision_handle(summary.head_revision),
+        }
+
     @classmethod
     def _summary(cls, summary: SnapshotSummary) -> dict[str, object]:
         value: dict[str, object] = {
@@ -1769,6 +1844,7 @@ class StandardsEngine:
     def _domain_errors() -> tuple[type[Exception], ...]:
         return (
             SnapshotError,
+            AuthoringError,
             GitRepositoryError,
             MetadataError,
             PolicyImpactError,

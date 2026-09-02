@@ -89,6 +89,24 @@
       }
     },
     {
+      "name": "proposal",
+      "definition": "ProposalHandle",
+      "value": {
+        "kind": "proposal-handle",
+        "id": "proposal:v1:00000000-0000-4000-8000-000000000001",
+        "schema_version": 1
+      }
+    },
+    {
+      "name": "proposal-revision",
+      "definition": "ProposalRevisionHandle",
+      "value": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "schema_version": 1
+      }
+    },
+    {
       "name": "analysis",
       "definition": "AnalysisHandle",
       "value": {

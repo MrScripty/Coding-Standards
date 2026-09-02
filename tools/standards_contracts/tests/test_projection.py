@@ -54,9 +54,7 @@ class ContractProjectionTest(unittest.TestCase):
         with self.assertRaises(ContractError):
             generated.QueryCall.from_value({"request": value["request"]})
         with self.assertRaises(ContractError):
-            generated.QueryCall(
-                snapshot=selected.snapshot, request={"kind": "route"}
-            )
+            generated.QueryCall(snapshot=selected.snapshot, request={"kind": "route"})
 
         mutable_value = copy.deepcopy(value)
         direct = generated.QueryCall(
@@ -306,10 +304,12 @@ class ContractProjectionTest(unittest.TestCase):
                 "prepare",
                 "resolve",
                 "inspect",
+                "create_proposal",
+                "find_proposals",
             ),
         )
         self.assertEqual(set(tools["$defs"]), set(schema["$defs"]))
-        self.assertEqual(tools["interface_schema_version"], 12)
+        self.assertEqual(tools["interface_schema_version"], 13)
         self.assertEqual(tools["request_contract_version"], 4)
         self.assertEqual(tools["result_projection_version"], 4)
         json.dumps(tools)

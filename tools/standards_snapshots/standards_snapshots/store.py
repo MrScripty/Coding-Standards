@@ -1,19 +1,24 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import sqlite3
 import stat
 from collections.abc import Iterator
 from contextlib import contextmanager
+from functools import lru_cache
 from pathlib import Path
 
 from .errors import SnapshotError, invalid, unavailable, unsupported
 from .model import (
     AggregateChild,
     AggregateRecord,
+    AggregateRoot,
+    AggregateRootPage,
     CapturedContent,
     DeleteSnapshotResult,
+    FindAggregateRootsRequest,
     FindSnapshotsRequest,
     PutResult,
     SnapshotId,
@@ -24,7 +29,7 @@ from .model import (
 )
 
 APPLICATION_ID = 0x43534131
-USER_VERSION = 1
+USER_VERSION = 2
 BUSY_TIMEOUT_MS = 5_000
 
 _SCHEMA = """
@@ -67,6 +72,26 @@ CREATE TABLE aggregate_snapshot_dependencies (
         ON DELETE CASCADE,
     PRIMARY KEY (aggregate_id, snapshot_id)
 ) STRICT, WITHOUT ROWID;
+CREATE TABLE aggregate_roots (
+    aggregate_id TEXT COLLATE BINARY PRIMARY KEY,
+    aggregate_kind TEXT COLLATE BINARY NOT NULL,
+    head_aggregate_id TEXT COLLATE BINARY NOT NULL
+        REFERENCES aggregate_records(aggregate_id),
+    created_at INTEGER NOT NULL CHECK (created_at >= 0),
+    sequence INTEGER NOT NULL UNIQUE CHECK (sequence > 0)
+) STRICT, WITHOUT ROWID;
+CREATE TABLE aggregate_root_snapshot_dependencies (
+    aggregate_id TEXT COLLATE BINARY NOT NULL REFERENCES aggregate_roots(aggregate_id)
+        ON DELETE CASCADE,
+    snapshot_id TEXT COLLATE BINARY NOT NULL REFERENCES snapshot_roots(snapshot_id)
+        ON DELETE CASCADE,
+    PRIMARY KEY (aggregate_id, snapshot_id)
+) STRICT, WITHOUT ROWID;
+CREATE TABLE aggregate_root_tombstones (
+    aggregate_id TEXT COLLATE BINARY PRIMARY KEY,
+    aggregate_kind TEXT COLLATE BINARY NOT NULL,
+    purged_at INTEGER NOT NULL CHECK (purged_at >= 0)
+) STRICT, WITHOUT ROWID;
 CREATE TABLE child_index (
     aggregate_id TEXT COLLATE BINARY NOT NULL REFERENCES aggregate_records(aggregate_id)
         ON DELETE CASCADE,
@@ -83,6 +108,18 @@ CREATE TABLE purged_root_tombstones (
 CREATE TRIGGER delete_root_aggregate
 BEFORE DELETE ON snapshot_roots
 BEGIN
+    INSERT INTO aggregate_root_tombstones
+        SELECT roots.aggregate_id, roots.aggregate_kind, tombstones.purged_at
+        FROM aggregate_roots roots
+        JOIN aggregate_root_snapshot_dependencies dependencies
+            ON dependencies.aggregate_id = roots.aggregate_id
+        JOIN purged_root_tombstones tombstones
+            ON tombstones.snapshot_id = dependencies.snapshot_id
+        WHERE dependencies.snapshot_id = OLD.snapshot_id;
+    DELETE FROM aggregate_roots WHERE aggregate_id IN (
+        SELECT aggregate_id FROM aggregate_root_snapshot_dependencies
+        WHERE snapshot_id = OLD.snapshot_id
+    );
     DELETE FROM aggregate_records WHERE aggregate_id IN (
         SELECT aggregate_id FROM aggregate_snapshot_dependencies
         WHERE snapshot_id = OLD.snapshot_id
@@ -109,30 +146,100 @@ CREATE TRIGGER aggregate_dependencies_no_update
 BEFORE UPDATE ON aggregate_snapshot_dependencies BEGIN
     SELECT RAISE(ABORT, 'aggregate dependencies are immutable');
 END;
+CREATE TRIGGER aggregate_roots_no_material_update
+BEFORE UPDATE OF aggregate_id, aggregate_kind, created_at, sequence ON aggregate_roots BEGIN
+    SELECT RAISE(ABORT, 'aggregate root material is immutable');
+END;
+CREATE TRIGGER aggregate_root_dependencies_no_update
+BEFORE UPDATE ON aggregate_root_snapshot_dependencies BEGIN
+    SELECT RAISE(ABORT, 'aggregate root dependencies are immutable');
+END;
+CREATE TRIGGER aggregate_root_tombstones_no_update
+BEFORE UPDATE ON aggregate_root_tombstones BEGIN
+    SELECT RAISE(ABORT, 'aggregate root tombstones are immutable');
+END;
 CREATE TRIGGER child_index_no_update
 BEFORE UPDATE ON child_index BEGIN
     SELECT RAISE(ABORT, 'aggregate children are immutable');
 END;
 """
 
-_EXPECTED_SCHEMA_OBJECTS = frozenset(
-    {
-        ("table", "content_sets"),
-        ("table", "content_files"),
-        ("table", "snapshot_roots"),
-        ("table", "aggregate_records"),
-        ("table", "aggregate_snapshot_dependencies"),
-        ("table", "child_index"),
-        ("table", "purged_root_tombstones"),
-        ("trigger", "delete_root_aggregate"),
-        ("trigger", "content_sets_no_update"),
-        ("trigger", "content_files_no_update"),
-        ("trigger", "snapshot_material_no_update"),
-        ("trigger", "aggregate_records_no_update"),
-        ("trigger", "aggregate_dependencies_no_update"),
-        ("trigger", "child_index_no_update"),
-    }
+# Content identity of the accepted v1 sqlite_schema rows, including DDL bodies.
+_VERSION_1_SCHEMA_SHA256 = (
+    "1a1a831376cf67bcabbb2ebb231845bcff6e549b950bebbc83ce1df84dac5d83"
 )
+
+_MIGRATION_1_TO_2 = (
+    """CREATE TABLE aggregate_roots (
+    aggregate_id TEXT COLLATE BINARY PRIMARY KEY,
+    aggregate_kind TEXT COLLATE BINARY NOT NULL,
+    head_aggregate_id TEXT COLLATE BINARY NOT NULL
+        REFERENCES aggregate_records(aggregate_id),
+    created_at INTEGER NOT NULL CHECK (created_at >= 0),
+    sequence INTEGER NOT NULL UNIQUE CHECK (sequence > 0)
+) STRICT, WITHOUT ROWID""",
+    """CREATE TABLE aggregate_root_snapshot_dependencies (
+    aggregate_id TEXT COLLATE BINARY NOT NULL REFERENCES aggregate_roots(aggregate_id)
+        ON DELETE CASCADE,
+    snapshot_id TEXT COLLATE BINARY NOT NULL REFERENCES snapshot_roots(snapshot_id)
+        ON DELETE CASCADE,
+    PRIMARY KEY (aggregate_id, snapshot_id)
+) STRICT, WITHOUT ROWID""",
+    """CREATE TABLE aggregate_root_tombstones (
+    aggregate_id TEXT COLLATE BINARY PRIMARY KEY,
+    aggregate_kind TEXT COLLATE BINARY NOT NULL,
+    purged_at INTEGER NOT NULL CHECK (purged_at >= 0)
+) STRICT, WITHOUT ROWID""",
+    "DROP TRIGGER delete_root_aggregate",
+    """CREATE TRIGGER delete_root_aggregate
+BEFORE DELETE ON snapshot_roots
+BEGIN
+    INSERT INTO aggregate_root_tombstones
+        SELECT roots.aggregate_id, roots.aggregate_kind, tombstones.purged_at
+        FROM aggregate_roots roots
+        JOIN aggregate_root_snapshot_dependencies dependencies
+            ON dependencies.aggregate_id = roots.aggregate_id
+        JOIN purged_root_tombstones tombstones
+            ON tombstones.snapshot_id = dependencies.snapshot_id
+        WHERE dependencies.snapshot_id = OLD.snapshot_id;
+    DELETE FROM aggregate_roots WHERE aggregate_id IN (
+        SELECT aggregate_id FROM aggregate_root_snapshot_dependencies
+        WHERE snapshot_id = OLD.snapshot_id
+    );
+    DELETE FROM aggregate_records WHERE aggregate_id IN (
+        SELECT aggregate_id FROM aggregate_snapshot_dependencies
+        WHERE snapshot_id = OLD.snapshot_id
+    );
+END""",
+    """CREATE TRIGGER aggregate_roots_no_material_update
+BEFORE UPDATE OF aggregate_id, aggregate_kind, created_at, sequence ON aggregate_roots BEGIN
+    SELECT RAISE(ABORT, 'aggregate root material is immutable');
+END""",
+    """CREATE TRIGGER aggregate_root_dependencies_no_update
+BEFORE UPDATE ON aggregate_root_snapshot_dependencies BEGIN
+    SELECT RAISE(ABORT, 'aggregate root dependencies are immutable');
+END""",
+    """CREATE TRIGGER aggregate_root_tombstones_no_update
+BEFORE UPDATE ON aggregate_root_tombstones BEGIN
+    SELECT RAISE(ABORT, 'aggregate root tombstones are immutable');
+END""",
+)
+
+
+@lru_cache(maxsize=1)
+def _expected_schema_definition() -> tuple[tuple[str, str, str, str], ...]:
+    connection = sqlite3.connect(":memory:", isolation_level=None)
+    try:
+        connection.executescript(_SCHEMA)
+        return tuple(
+            (str(kind), str(name), str(table), str(sql))
+            for kind, name, table, sql in connection.execute(
+                "SELECT type, name, tbl_name, sql FROM sqlite_schema "
+                "WHERE name NOT LIKE 'sqlite_%' ORDER BY type, name"
+            ).fetchall()
+        )
+    finally:
+        connection.close()
 
 
 class SQLiteSnapshotStore:
@@ -143,6 +250,7 @@ class SQLiteSnapshotStore:
             )
         self.path = path
         existed = path.exists() or path.is_symlink()
+        created_identity: tuple[int, int] | None = None
         if existed:
             observed = path.lstat()
             if not stat.S_ISREG(observed.st_mode):
@@ -156,29 +264,58 @@ class SQLiteSnapshotStore:
             flags |= getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
             try:
                 descriptor = os.open(path, flags, 0o600)
+                observed = os.fstat(descriptor)
+                created_identity = (observed.st_dev, observed.st_ino)
                 os.close(descriptor)
             except OSError as error:
                 raise unavailable("SNAPSHOT_STORE.UNAVAILABLE", str(error)) from error
+        connection: sqlite3.Connection | None = None
         try:
-            self._connection = sqlite3.connect(
+            connection = sqlite3.connect(
                 path, isolation_level=None, timeout=BUSY_TIMEOUT_MS / 1000
             )
+            self._connection = connection
             self._connection.enable_load_extension(False)
-            self._configure()
             if existed:
-                self._verify_schema()
+                self._verify_existing_authority()
+                self._configure()
+                self._prepare_existing_schema()
             else:
+                self._configure()
                 self._initialize_schema()
             self._verify_integrity()
-        except SnapshotError:
+        except Exception as error:
+            self._cleanup_failed_open(connection, created_identity)
+            if isinstance(error, SnapshotError):
+                raise
+            if isinstance(error, sqlite3.DatabaseError):
+                raise invalid("SNAPSHOT_STORE.INVALID_DATABASE", str(error)) from error
+            if isinstance(error, OSError):
+                raise unavailable("SNAPSHOT_STORE.UNAVAILABLE", str(error)) from error
             raise
-        except sqlite3.DatabaseError as error:
-            raise invalid("SNAPSHOT_STORE.INVALID_DATABASE", str(error)) from error
-        except OSError as error:
-            raise unavailable("SNAPSHOT_STORE.UNAVAILABLE", str(error)) from error
 
     def close(self) -> None:
         self._connection.close()
+
+    def _cleanup_failed_open(
+        self,
+        connection: sqlite3.Connection | None,
+        created_identity: tuple[int, int] | None,
+    ) -> None:
+        if connection is not None:
+            connection.close()
+        if created_identity is None:
+            return
+        try:
+            observed = self.path.lstat()
+            if (
+                stat.S_ISREG(observed.st_mode)
+                and not self.path.is_symlink()
+                and (observed.st_dev, observed.st_ino) == created_identity
+            ):
+                self.path.unlink()
+        except FileNotFoundError:
+            pass
 
     @contextmanager
     def _transaction(self, *, write: bool) -> Iterator[None]:
@@ -447,38 +584,7 @@ class SQLiteSnapshotStore:
             began = True
             for snapshot in record.snapshots:
                 self.snapshot(snapshot)
-            existing = self._connection.execute(
-                "SELECT aggregate_kind, payload FROM aggregate_records WHERE aggregate_id = ?",
-                (record.aggregate_id,),
-            ).fetchone()
-            if existing is None:
-                self._connection.execute(
-                    "INSERT INTO aggregate_records VALUES (?, ?, ?)",
-                    (record.aggregate_id, record.kind, sqlite3.Binary(record.payload)),
-                )
-                for snapshot in record.snapshots:
-                    self._connection.execute(
-                        "INSERT INTO aggregate_snapshot_dependencies VALUES (?, ?)",
-                        (record.aggregate_id, str(snapshot)),
-                    )
-                for child in record.children:
-                    self._connection.execute(
-                        "INSERT INTO child_index VALUES (?, ?, ?, ?)",
-                        (
-                            record.aggregate_id,
-                            child.kind,
-                            child.child_id,
-                            sqlite3.Binary(child.payload),
-                        ),
-                    )
-                result: PutResult = "inserted"
-            elif self._load_aggregate_unchecked(record.aggregate_id) == record:
-                result = "existing-identical"
-            else:
-                raise invalid(
-                    "AGGREGATE.ID_COLLISION",
-                    "one aggregate ID identifies contradictory material",
-                )
+            result = self._publish_aggregate_unchecked(record)
             self._connection.execute("COMMIT")
             began = False
         except SnapshotError:
@@ -490,6 +596,91 @@ class SQLiteSnapshotStore:
                 self._connection.execute("ROLLBACK")
             raise self._adapt(error) from error
         return result
+
+    def create_aggregate_root(self, root: AggregateRoot, head: AggregateRecord) -> None:
+        if root.head_id != head.aggregate_id or root.snapshots != head.snapshots:
+            raise invalid(
+                "AGGREGATE.INVALID_ROOT_HEAD",
+                "initial aggregate root and head must have identical dependencies",
+            )
+        with self._transaction(write=True):
+            for snapshot in root.snapshots:
+                self.snapshot(snapshot)
+            if self._connection.execute(
+                "SELECT 1 FROM aggregate_root_tombstones WHERE aggregate_id = ?",
+                (root.aggregate_id,),
+            ).fetchone():
+                raise invalid(
+                    "AGGREGATE.ROOT_ID_COLLISION",
+                    "generated aggregate root ID identifies an expired root",
+                )
+            self._publish_aggregate_unchecked(head)
+            sequence = int(
+                self._connection.execute(
+                    "SELECT COALESCE(MAX(sequence), 0) + 1 FROM aggregate_roots"
+                ).fetchone()[0]
+            )
+            try:
+                self._connection.execute(
+                    "INSERT INTO aggregate_roots VALUES (?, ?, ?, ?, ?)",
+                    (
+                        root.aggregate_id,
+                        root.kind,
+                        root.head_id,
+                        root.created_at,
+                        sequence,
+                    ),
+                )
+            except sqlite3.IntegrityError as error:
+                raise invalid(
+                    "AGGREGATE.ROOT_ID_COLLISION",
+                    "generated aggregate root ID already exists",
+                ) from error
+            for snapshot in root.snapshots:
+                self._connection.execute(
+                    "INSERT INTO aggregate_root_snapshot_dependencies VALUES (?, ?)",
+                    (root.aggregate_id, str(snapshot)),
+                )
+
+    def find_aggregate_roots(
+        self, request: FindAggregateRootsRequest
+    ) -> AggregateRootPage:
+        with self._transaction(write=False):
+            if request.after is None:
+                cursor_sql = ""
+                parameters: tuple[object, ...] = (request.kind, request.limit + 1)
+            else:
+                cursor = self._connection.execute(
+                    "SELECT sequence FROM aggregate_roots "
+                    "WHERE aggregate_id = ? AND aggregate_kind = ?",
+                    (request.after, request.kind),
+                ).fetchone()
+                if cursor is None:
+                    raise invalid(
+                        "AGGREGATE.INVALID_ROOT_CONTINUATION",
+                        "aggregate root continuation is unavailable",
+                    )
+                cursor_sql = "AND sequence > ? "
+                parameters = (
+                    request.kind,
+                    int(cursor[0]),
+                    request.limit + 1,
+                )
+            rows = self._connection.execute(
+                "SELECT aggregate_id FROM aggregate_roots "
+                "WHERE aggregate_kind = ? "
+                "AND NOT EXISTS ("
+                "SELECT 1 FROM aggregate_root_snapshot_dependencies dependencies "
+                "JOIN snapshot_roots roots ON roots.snapshot_id = dependencies.snapshot_id "
+                "WHERE dependencies.aggregate_id = aggregate_roots.aggregate_id "
+                "AND roots.lifecycle != 'active') "
+                f"{cursor_sql}ORDER BY sequence LIMIT ?",
+                parameters,
+            ).fetchall()
+            selected = rows[: request.limit]
+            roots = tuple(self._load_root_unchecked(str(row[0])) for row in selected)
+        continuation = roots[-1].aggregate_id if len(rows) > request.limit else None
+        return AggregateRootPage(roots, continuation)
 
     def load_aggregate(self, aggregate_id: str) -> AggregateRecord:
         with self._transaction(write=False):
@@ -522,6 +713,9 @@ class SQLiteSnapshotStore:
             "snapshot_roots",
             "aggregate_records",
             "aggregate_snapshot_dependencies",
+            "aggregate_roots",
+            "aggregate_root_snapshot_dependencies",
+            "aggregate_root_tombstones",
             "child_index",
             "purged_root_tombstones",
         )
@@ -563,6 +757,62 @@ class SQLiteSnapshotStore:
             raise self._adapt(error) from error
         return AggregateRecord(
             aggregate_id, str(row[0]), bytes(row[1]), snapshots, children
+        )
+
+    def _load_root_unchecked(self, aggregate_id: str) -> AggregateRoot:
+        row = self._connection.execute(
+            "SELECT aggregate_kind, head_aggregate_id, created_at "
+            "FROM aggregate_roots WHERE aggregate_id = ?",
+            (aggregate_id,),
+        ).fetchone()
+        if row is None:
+            raise unavailable(
+                "AGGREGATE.ROOT_UNAVAILABLE",
+                f"aggregate root {aggregate_id!r} is unavailable",
+            )
+        snapshots = tuple(
+            SnapshotId(str(item[0]))
+            for item in self._connection.execute(
+                "SELECT snapshot_id FROM aggregate_root_snapshot_dependencies "
+                "WHERE aggregate_id = ? ORDER BY snapshot_id",
+                (aggregate_id,),
+            ).fetchall()
+        )
+        return AggregateRoot(
+            aggregate_id, str(row[0]), str(row[1]), snapshots, int(row[2])
+        )
+
+    def _publish_aggregate_unchecked(self, record: AggregateRecord) -> PutResult:
+        existing = self._connection.execute(
+            "SELECT aggregate_kind, payload FROM aggregate_records WHERE aggregate_id = ?",
+            (record.aggregate_id,),
+        ).fetchone()
+        if existing is None:
+            self._connection.execute(
+                "INSERT INTO aggregate_records VALUES (?, ?, ?)",
+                (record.aggregate_id, record.kind, sqlite3.Binary(record.payload)),
+            )
+            for snapshot in record.snapshots:
+                self._connection.execute(
+                    "INSERT INTO aggregate_snapshot_dependencies VALUES (?, ?)",
+                    (record.aggregate_id, str(snapshot)),
+                )
+            for child in record.children:
+                self._connection.execute(
+                    "INSERT INTO child_index VALUES (?, ?, ?, ?)",
+                    (
+                        record.aggregate_id,
+                        child.kind,
+                        child.child_id,
+                        sqlite3.Binary(child.payload),
+                    ),
+                )
+            return "inserted"
+        if self._load_aggregate_unchecked(record.aggregate_id) == record:
+            return "existing-identical"
+        raise invalid(
+            "AGGREGATE.ID_COLLISION",
+            "one aggregate ID identifies contradictory material",
         )
 
     def _content_files(self, content_id: str) -> tuple[tuple[str, bytes], ...]:
@@ -646,6 +896,72 @@ class SQLiteSnapshotStore:
             raise
         self._verify_schema()
 
+    def _prepare_existing_schema(self) -> None:
+        application_id = self._connection.execute("PRAGMA application_id").fetchone()[0]
+        user_version = self._connection.execute("PRAGMA user_version").fetchone()[0]
+        if application_id != APPLICATION_ID:
+            raise invalid(
+                "SNAPSHOT_STORE.INVALID_APPLICATION",
+                f"expected application {APPLICATION_ID}, observed {application_id}",
+            )
+        if user_version == 1:
+            self._migrate_version_one()
+        self._verify_schema()
+
+    def _verify_existing_authority(self) -> None:
+        application_id = self._connection.execute("PRAGMA application_id").fetchone()[0]
+        user_version = self._connection.execute("PRAGMA user_version").fetchone()[0]
+        if application_id != APPLICATION_ID:
+            raise invalid(
+                "SNAPSHOT_STORE.INVALID_APPLICATION",
+                f"expected application {APPLICATION_ID}, observed {application_id}",
+            )
+        if user_version > USER_VERSION:
+            raise unsupported(
+                "SNAPSHOT_STORE.UNSUPPORTED_VERSION",
+                f"unsupported schema version {user_version}",
+            )
+        if user_version == 1:
+            self._verify_version_one_schema()
+            self._verify_integrity()
+            return
+        if user_version != USER_VERSION:
+            raise invalid(
+                "SNAPSHOT_STORE.INVALID_VERSION",
+                f"expected schema version 1 or {USER_VERSION}, observed {user_version}",
+            )
+        self._verify_schema()
+        self._verify_integrity()
+
+    def _migrate_version_one(self) -> None:
+        with self._transaction(write=True):
+            application_id = self._connection.execute(
+                "PRAGMA application_id"
+            ).fetchone()[0]
+            user_version = self._connection.execute("PRAGMA user_version").fetchone()[0]
+            if application_id != APPLICATION_ID:
+                raise invalid(
+                    "SNAPSHOT_STORE.INVALID_APPLICATION",
+                    f"expected application {APPLICATION_ID}, observed {application_id}",
+                )
+            if user_version == USER_VERSION:
+                self._verify_schema()
+                return
+            if user_version != 1:
+                raise invalid(
+                    "SNAPSHOT_STORE.INVALID_VERSION",
+                    f"expected schema version 1, observed {user_version}",
+                )
+            self._verify_version_one_schema()
+            self._verify_integrity()
+            for statement in _MIGRATION_1_TO_2:
+                self._connection.execute(statement)
+            self._migration_stage("after-schema")
+            self._connection.execute(f"PRAGMA user_version={USER_VERSION}")
+            self._verify_schema()
+            self._verify_integrity()
+            self._migration_stage("before-commit")
+
     def _verify_schema(self) -> None:
         application_id = self._connection.execute("PRAGMA application_id").fetchone()[0]
         user_version = self._connection.execute("PRAGMA user_version").fetchone()[0]
@@ -664,14 +980,28 @@ class SQLiteSnapshotStore:
                 "SNAPSHOT_STORE.INVALID_VERSION",
                 f"expected schema version {USER_VERSION}, observed {user_version}",
             )
-        rows = self._connection.execute(
-            "SELECT type, name FROM sqlite_schema WHERE name NOT LIKE 'sqlite_%'"
-        ).fetchall()
-        if (
-            frozenset((str(kind), str(name)) for kind, name in rows)
-            != _EXPECTED_SCHEMA_OBJECTS
-        ):
+        if self._schema_definition() != _expected_schema_definition():
             raise invalid("SNAPSHOT_STORE.INVALID_SCHEMA", "SQLite schema differs")
+
+    def _verify_version_one_schema(self) -> None:
+        encoded = json.dumps(
+            self._schema_definition(), ensure_ascii=False, separators=(",", ":")
+        ).encode("utf-8")
+        observed = hashlib.sha256(encoded).hexdigest()
+        if observed != _VERSION_1_SCHEMA_SHA256:
+            raise invalid(
+                "SNAPSHOT_STORE.INVALID_SCHEMA",
+                f"SQLite v1 schema digest differs: {observed}",
+            )
+
+    def _schema_definition(self) -> tuple[tuple[str, str, str, str], ...]:
+        return tuple(
+            (str(kind), str(name), str(table), str(sql))
+            for kind, name, table, sql in self._connection.execute(
+                "SELECT type, name, tbl_name, sql FROM sqlite_schema "
+                "WHERE name NOT LIKE 'sqlite_%' ORDER BY type, name"
+            ).fetchall()
+        )
 
     def _verify_integrity(self) -> None:
         if self._connection.execute("PRAGMA integrity_check").fetchall() != [("ok",)]:
@@ -685,6 +1015,9 @@ class SQLiteSnapshotStore:
 
     def _purge_stage(self, stage: str, snapshot_id: str) -> None:
         del stage, snapshot_id
+
+    def _migration_stage(self, stage: str) -> None:
+        del stage
 
     @staticmethod
     def _adapt(error: sqlite3.DatabaseError) -> SnapshotError:

@@ -1,8 +1,9 @@
-# Standards Engine A1c Contracts
+# Standards Engine A2 Contracts
 
-This directory owns the serialized public shape of the read-only Standards
-Engine interface. Runtime policy meaning, identity construction, persistence,
-repository loading, and controlled authoring belong to their domain Modules.
+This directory owns the serialized public shape of the Standards Engine
+interface. Runtime policy meaning, identity construction, persistence,
+repository loading, and controlled-authoring behavior belong to their domain
+Modules.
 
 ## Authority
 
@@ -37,11 +38,15 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `prepare` | `PrepareCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
 | `resolve` | `ResolveCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
 | `inspect` | `InspectCall` | `InspectionResult` | `RejectedResult` |
+| `create_proposal` | `CreateProposalCall` | `CreateProposalResult` | `RejectedResult` |
+| `find_proposals` | `FindProposalsCall` | `FindProposalsResult` | `RejectedResult` |
 
-Interface schema version 12 uses request contract version 4 and result
-projection version 4. Public handles use schema version 5. Unsupported
-well-formed compatibility keys return `unsupported`; there is no old-version
-parser or fallback.
+Interface schema version 13 adds the two A2 operations without changing the
+eight A1c operations. It retains request contract version 4 and result
+projection version 4 because their owned A1c promises are unchanged. A1c
+handles remain at schema version 5; proposal and proposal-revision handles
+begin at schema version 1. Unsupported well-formed compatibility keys return
+`unsupported`; there is no old-version parser or fallback.
 
 Trusted provider and authorization context is injected by the Engine
 composition root. Caller-authored requests cannot grant capabilities or supply
@@ -55,8 +60,9 @@ its material record, ordering, deduplication, semantic identity, and direct
 authority references. Schema annotations, generated classes, builds, and
 release versions do not acquire domain authority.
 
-`standards_snapshots` stores immutable captured content and opaque snapshot and
-analysis aggregates. `repository_git` captures exact object bytes from the
+`standards_snapshots` stores immutable captured content, immutable dependent
+records, and opaque mutable aggregate heads. Proposal revisions remain
+immutable; only their proposal root selects a head. `repository_git` captures exact object bytes from the
 current canonical `HEAD`; subsequent reads, inspections, and cold
 reconstruction resolve the retained snapshot and never substitute the live
 worktree. Equal captured bytes may share internal storage, but each public

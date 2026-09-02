@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1, P2R2, P3, and P4R pass; P2 and P4 revise; P2R rejected;
-combined P5 and P5L evidence rejected before behavior; P5C admitted but not created`
+**Status:** `P1, P2R2, P3, P4R, and corrected P5C pass; P2 and P4 revise;
+P2R rejected; combined P5 and P5L evidence rejected before behavior`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -19,7 +19,7 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | removed `prototype/a2-m0-facade-composition`; removed `/tmp/coding-standards-a2-p4r-facade-composition` | `fc7dbeabb5828b5b6f3840a1ff004209ae291385` | `9a0c34325e2849c437072b12b3188bede7f08d4e` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p4r-facade-composition` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | removed `prototype/a2-m0-efficiency-measurement`; removed `/tmp/coding-standards-a2-p5-efficiency-measurement` | `b503dcb76fd27aca41df154f37e20f6635de44bf` | `c939f693660561833e4a079ad7ebe9d725fbabe2` | `reject-evidence-implementation`; no measurement or combined-design verdict | `removed-archived` at `refs/archive/a2-prototypes/p5-efficiency-measurement` |
 | A2-P5L | `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py` | removed `prototype/a2-m0-lifecycle-ownership`; removed `/tmp/coding-standards-a2-p5l-lifecycle-ownership` | `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` | `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6` | `reject-evidence-implementation`; no behavior or lifecycle verdict | `removed-archived` at `refs/archive/a2-prototypes/p5l-lifecycle-ownership` |
-| A2-P5C | `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py` | intended `prototype/a2-m0-phase-capability`; intended `/tmp/coding-standards-a2-p5c-phase-capability` | `9f6dd8a9484cc1b2421b29829ea928a9413905f9` | pending | admitted; not created | no branch or worktree exists; expected `removed-archived` after execution |
+| A2-P5C | `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py` | removed `prototype/a2-m0-phase-capability-passed`; removed `/tmp/coding-standards-a2-p5c-phase-capability-passed` | `9f6dd8a9484cc1b2421b29829ea928a9413905f9`; corrected execution descended through rejected evidence commit `81a6b86636f59b7d1ef4c4d31a0199531a5984ee` | `82a37ed0f7d40cbb105df1c25381a9073b330e49` | `pass`; the prior source is separately `reject-frozen-source` | `removed-archived` at `refs/archive/a2-prototypes/p5c-phase-capability-passed`; rejected source retained at `refs/archive/a2-prototypes/p5c-phase-capability` |
 
 The A2 prototype owner owns each private worktree, its exact registered
 authored source path or paths, and the branch-local generated suite-input
@@ -40,8 +40,9 @@ P2, P3, and P4 had to move their unchanged authored file to the corrected exact
 path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
 before staging. The former combined P5 and P5L admissions are historical and
-grant no creation authority. P5C is admitted only from the exact base under the
-[lifecycle-first decomposition](p5-lifecycle-decomposition.md). P2R2 and P4R
+grant no creation authority. Corrected P5C passed only as resource-free evidence
+under the [lifecycle-first decomposition](p5-lifecycle-decomposition.md); no
+production caller needs its duplicate forwarding surface. P2R2 and P4R
 were created only after their durable execution admissions named the exact
 bases and paths; P4R's record is the
 [execution admission](p4r-facade-composition-admission.md). No other

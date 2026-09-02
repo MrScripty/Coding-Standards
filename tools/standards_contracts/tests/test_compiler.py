@@ -28,6 +28,8 @@ class ContractCompilerTest(unittest.TestCase):
                 "prepare",
                 "resolve",
                 "inspect",
+                "create_proposal",
+                "find_proposals",
             ),
         )
         self.assertEqual(
@@ -52,7 +54,9 @@ class ContractCompilerTest(unittest.TestCase):
         )
 
         schema, interface = canonical_inputs()
-        schema["$defs"]["QueryCall"]["properties"]["snapshot"] = {"$ref": "#/$defs/Missing"}
+        schema["$defs"]["QueryCall"]["properties"]["snapshot"] = {
+            "$ref": "#/$defs/Missing"
+        }
         with self.assertRaises(ContractError) as caught:
             compile_contracts(schema, interface)
         self.assertEqual(
@@ -204,7 +208,7 @@ class ContractCompilerTest(unittest.TestCase):
         interface["operations"].clear()
 
         self.assertEqual(compiled.schema["title"], expected_schema["title"])
-        self.assertEqual(len(compiled.interface.operations), 8)
+        self.assertEqual(len(compiled.interface.operations), 10)
 
 
 if __name__ == "__main__":

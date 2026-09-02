@@ -307,13 +307,80 @@ class AggregateRecord:
         object.__setattr__(self, "children", selected_children)
 
 
+@dataclass(frozen=True, slots=True, order=True)
+class AggregateRoot:
+    aggregate_id: str
+    kind: str
+    head_id: str
+    snapshots: tuple[SnapshotId, ...]
+    created_at: int
+
+    def __post_init__(self) -> None:
+        _scalar(self.aggregate_id, "aggregate root ID")
+        _scalar(self.kind, "aggregate root kind")
+        _scalar(self.head_id, "aggregate root head ID")
+        if (
+            type(self.snapshots) is not tuple
+            or not self.snapshots
+            or any(type(item) is not SnapshotId for item in self.snapshots)
+            or tuple(sorted(self.snapshots)) != self.snapshots
+            or len(set(self.snapshots)) != len(self.snapshots)
+        ):
+            raise invalid(
+                "AGGREGATE.INVALID_ROOT_DEPENDENCIES",
+                "aggregate root dependencies must be unique sorted SnapshotId values",
+            )
+        if type(self.created_at) is not int or self.created_at < 0:
+            raise invalid(
+                "AGGREGATE.INVALID_ROOT_TIME",
+                "aggregate root creation time must be a nonnegative integer",
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class FindAggregateRootsRequest:
+    kind: str
+    after: str | None = None
+    limit: int = 50
+
+    def __post_init__(self) -> None:
+        _scalar(self.kind, "aggregate root kind")
+        if self.after is not None:
+            _scalar(self.after, "aggregate root continuation")
+        if type(self.limit) is not int or not 1 <= self.limit <= 100:
+            raise invalid(
+                "AGGREGATE.INVALID_ROOT_LIMIT",
+                "aggregate root discovery limit must be 1 through 100",
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class AggregateRootPage:
+    roots: tuple[AggregateRoot, ...]
+    continuation: str | None
+
+    def __post_init__(self) -> None:
+        if (
+            type(self.roots) is not tuple
+            or any(type(item) is not AggregateRoot for item in self.roots)
+            or (self.continuation is not None and type(self.continuation) is not str)
+        ):
+            raise invalid(
+                "AGGREGATE.INVALID_ROOT_PAGE",
+                "aggregate root page contains an invalid root or continuation",
+            )
+
+
 __all__ = (
     "AggregateChild",
     "AggregateRecord",
+    "AggregateRoot",
+    "AggregateRootPage",
     "CapturedContent",
     "ChildHandle",
     "DeleteSnapshotResult",
     "FindSnapshotsRequest",
+    "FindAggregateRootsRequest",
     "Lifecycle",
     "MAX_AGGREGATE_BYTES",
     "MAX_CHILD_BYTES",

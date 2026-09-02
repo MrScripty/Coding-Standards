@@ -17,8 +17,10 @@ from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from ._generated_contract import (
     CreateSnapshotCall,
+    CreateProposalCall,
     DeleteSnapshotCall,
     FindSnapshotsCall,
+    FindProposalsCall,
     InspectCall,
     PrepareCall,
     QueryCall,
@@ -56,7 +58,21 @@ class AgentToolFacade:
     @classmethod
     def open_repository(cls, root: Path) -> AgentToolFacade:
         repo_root = root.resolve()
-        return cls(StandardsEngine.open_repository(repo_root), _contracts(repo_root))
+        engine = StandardsEngine.open_repository(repo_root)
+        try:
+            return cls(engine, _contracts(repo_root))
+        except Exception:
+            engine.close()
+            raise
+
+    def close(self) -> None:
+        self._engine.close()
+
+    def __enter__(self) -> AgentToolFacade:
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        self.close()
 
     def create_snapshot(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(
@@ -71,6 +87,18 @@ class AgentToolFacade:
         if isinstance(call, dict):
             return call
         return self._result("find_snapshots", self._engine.find_snapshots(call))
+
+    def create_proposal(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("create_proposal", arguments, CreateProposalCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("create_proposal", self._engine.create_proposal(call))
+
+    def find_proposals(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("find_proposals", arguments, FindProposalsCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("find_proposals", self._engine.find_proposals(call))
 
     def delete_snapshot(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(

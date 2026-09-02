@@ -1,7 +1,7 @@
 # A1c User-Decision Preservation Matrix
 
-**Status:** `exact projected-material reauthorization recorded; independent
-reconciliation pending`
+**Status:** `Milestone 1 create/find reconciliation accepted; later A2
+reconciliation remains active`
 
 ## Authority And Method
 
@@ -19,7 +19,10 @@ dispositions:
   reopen the decision; or
 - `explicitly-reauthorized-for-replan`: the user named one exact supersession
   scope, but prototype, ADR, contract, migration, and implementation acceptance
-  remain separately required.
+  remain separately required; or
+- `explicitly-reauthorized-for-a2-integration`: the user permitted one exact
+  A1c integration change whose implementation and regression evidence are
+  named by the current A2 slice.
 
 Prototype evidence may validate an A2 composition. It cannot authorize a
 different A1c choice.
@@ -44,10 +47,10 @@ different A1c choice.
 | A1C-U14 | One SQLite-backed Snapshot Module owns durable aggregate state and derived child indexes; there is no generic repository, public persistence Protocol, Engine backup/restore Interface, or independent child authority. | A2 durable state is evaluated as records and indexes within that owned aggregate, with one schema decision. | `composed-without-change` | Persistence design has one owner and deletion test; a second store or public storage abstraction is `prohibited-conflict`. |
 | A1C-U15 | One compiled public facade contract and domain-local material identity/version constants govern A1c; broad version bags and per-operation persisted authority are absent. | A2 may add reachable schema definitions and operations through the same compiler while each new durable identity owns only its material version. | `composed-without-change` | One schema/interface projection produces Python and agent-tool shapes; version-role audit finds no ambient bag. |
 | A1C-U16 | Coverage identity is dependency-local; repository-global suite-input freshness is outside product analysis identity. | Proposal analysis binds exact relevant content, facts, relationships, contracts, and horizon inputs, not the current repository index. | `unchanged` | Unrelated repository-index changes do not invalidate a retained analysis; material dependency changes do. |
-| A1C-U17 | Cross-engine stored-state compatibility and migration are deferred until Coding Standards is feature complete; incompatible state is never silently reinterpreted. | Milestone 0 must decide whether A2 is the feature-completeness trigger before selecting coordinated replacement, migration, or a compatibility window. | `requires-separate-user-reauthorization` until feature-completeness selection | Current consumer/store inventory plus an explicit product-owner feature-completeness decision. Prototype evidence alone cannot trigger compatibility. |
+| A1C-U17 | Cross-engine stored-state compatibility and migration are deferred until Coding Standards is feature complete; incompatible state is never silently reinterpreted. | Milestone 1 adds one same-engine, atomic store-v1-to-v2 migration so retained A1c stores gain empty aggregate-head tables without losing A1c rows. It adds no cross-engine reader, compatibility window, fallback, or migration framework; after migration the store is only v2. | `explicitly-reauthorized-for-a2-integration` by the user's 2026-09-02 permission to alter A1c for a standards-aligned A2 fit | An exact integrity-valid v1 store reopens as exact v2 with every A1c table row unchanged; schema lookalikes, corrupt stores, and future versions reject before mutation; injected interruption preserves v1; cross-engine compatibility remains deferred. |
 | A1C-U18 | Linux CPython 3.11 and 3.12 are the only accepted platforms; Windows and macOS remain unclaimed without equivalent real evidence. | A2 must re-prove new Git, SQLite, filesystem, locking, and recovery behavior on both accepted runtimes. | `composed-without-change` | Required-real public workflow passes on Linux CPython 3.11 and 3.12; other platforms remain unsupported or unclaimed. |
 | A1C-U19 | Semantic understanding and judgment stay with the agent; the Engine owns declared mechanical contracts and projections only. | A2 records authorized semantic, relationship, and lifecycle decisions but cannot generate their meaning or infer acceptance from prose. | `composed-without-change` | Apply readiness contains explicit authorized decisions and mechanical proof; no generated semantic-acceptance Boolean exists. |
-| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | P4R verified the exact manifest and capability maps, real current A1c continuation, and current compiler rejection of unadmitted additive roots. A later contract differential must still exercise all eight A1c operations before and after any admitted A2 cutover. |
+| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v13 retains the eight roots in their original order and adds only `create_proposal` and `find_proposals`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
 | A1C-U21 | The accepted A1c ADR and current codec identify proposed analysis material only through `proposed_snapshot`; exact cold replay reloads snapshot bytes. | Replace only that snapshot-only material assumption with one closed Analysis-owned proposed-material reference whose variants identify an exact snapshot or an exact immutable proposal revision. Include it in identity, typed dependency closure, and cold replay while retaining one `AnalysisState` and one analyzer. | `explicitly-reauthorized-for-replan` on 2026-09-01 | [Exact product authority and selected scope](a1c-projected-material-reauthorization.md), followed by P2R2 identity collision, head-movement, real SQLite cold-reopen/lifecycle, negative-dependency, snapshot-regression, bounded-overhead, and Linux CPython 3.11/3.12 evidence. |
 
 ## Conflict Register
@@ -64,14 +67,35 @@ snapshot-only proposed-analysis input is no longer protected against the exact
 P2R2 candidate, but mutable head lookup, proposal-as-snapshot, identity salting,
 composite external handles, and a second analysis authority remain invalid.
 
+## Milestone 1 Reconciliation
+
+The first production slice changes only the boundaries that its usable behavior
+requires. `create_proposal` and `find_proposals` are additive explicit roots;
+the facade, Engine, Authoring Module, and one SQLite owner form the actual call
+path. Proposal and revision handles contain no repository, Git, store, content
+hash, or capability facts. Revisions are immutable exact replacement material;
+the proposal head is the only selected mutable authoring field. Snapshot
+quarantine, undelete, and purge govern the proposal without a second lifecycle
+owner.
+
+The store migration is the one deliberate A1c integration change. It is an
+atomic additive transition from current store v1 to v2, not cross-engine
+compatibility and not a general migrator. It verifies exact source schema and
+integrity before mutation, verifies the exact destination before commit, and
+preserves every A1c row family under success and injected interruption.
+Unrelated or malformed stores reject before persistent SQLite configuration,
+and failed initialization owns its connection and exact staging file. The
+unchanged A1c behavior and all eight A1c operations remain covered by their
+existing tests. Independent slice
+review rejected production P5C as unused forwarding machinery and selected the
+paired create/find boundary because only public cold-reopen discovery can prove
+the claimed durable behavior.
+
 ## Current Verdict
 
-The user explicitly reauthorized A1C-U21 for prototype-first re-planning and no
-other A1c choice. P2R2 and P4R passed independent review and demonstrate that
-the selected material identity and facade can compose without changing another
-protected A1c decision. They do not admit an ADR, version, migration, public
-contract, persisted state, or source change. A1C-U17 remains deliberately
-unresolved: A2 cannot declare feature completeness or a cross-engine
-compatibility promise without a fresh consumer/store inventory and separate
-product selection. A2-A11 remains active through P5 and final composed-design
-review.
+Milestone 1 is reconciled for proposal creation/discovery only. The user
+explicitly reauthorized A1C-U21 for later projected-material implementation and
+permitted standards-aligned A1c integration changes; this slice uses the latter
+only for the exact store-v1-to-v2 transition above. Cross-engine compatibility,
+feature completeness, projected analysis, revision CAS, review, application,
+and recovery remain unresolved and cannot inherit Milestone 1 authority.

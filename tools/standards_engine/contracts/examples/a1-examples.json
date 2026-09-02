@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 12,
+  "interface_schema_version": 13,
   "examples": [
     {
       "name": "create-snapshot",
@@ -40,6 +40,34 @@
           "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
           "schema_version": 5
         }
+      }
+    },
+    {
+      "name": "create-proposal",
+      "definition": "CreateProposalCall",
+      "value": {
+        "kind": "create-proposal",
+        "base_snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "mutations": [
+          {
+            "op": "replace",
+            "path": "workflows/planning.md",
+            "value": "# Planning\n"
+          }
+        ],
+        "semantic_proposals": []
+      }
+    },
+    {
+      "name": "find-proposals",
+      "definition": "FindProposalsCall",
+      "value": {
+        "kind": "find-proposals",
+        "limit": 25
       }
     },
     {
