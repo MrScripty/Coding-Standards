@@ -2,13 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 combined-design efficiency validation
+**Current phase:** Milestone 0 lifecycle-evidence decomposition
 
-**Next slice:** Correct and independently re-audit the isolated A2-P5
-combined-efficiency prototype against its clarified execution admission before
-any complete dual-runtime measurement; both supported runtimes must first pass
-the focused contract, oracle, lifecycle, and report-integrity probes on the
-same frozen source hash
+**Next slice:** Create the isolated A2-P5L branch and worktree from exact
+admitted base `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae`, then author only the
+registered owner Module and lifecycle minimum viable test; P5M remains
+unavailable
 
 **Acceptance status:** `pending`
 
@@ -27,6 +26,9 @@ same frozen source hash
 
 **P5 execution admission:**
 [Combined-design efficiency comparison and oracle](reports/p5-combined-efficiency-admission.md)
+
+**P5 replacement re-plan:**
+[Lifecycle-first evidence decomposition](reports/p5-lifecycle-decomposition.md)
 
 ## Objective
 
@@ -305,6 +307,7 @@ paper-only assumptions, or unresolved publication facts.
 - `docs/plans/standards-engine-a2/reports/prototype-evidence-index.md`
 - `docs/plans/standards-engine-a2/reports/p4r-facade-composition-admission.md`
 - `docs/plans/standards-engine-a2/reports/p5-combined-efficiency-admission.md`
+- `docs/plans/standards-engine-a2/reports/p5-lifecycle-decomposition.md`
 - `docs/plans/standards-engine-a2/reports/a2-plan-admission.md`
 - `docs/decisions/standards-engine-a2.md`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
@@ -315,9 +318,10 @@ paper-only assumptions, or unresolved publication facts.
 - `tools/standards_engine/tests/prototypes/a2/publication-recovery.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py`
 - `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py`
-- `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py`
+- `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py`
 
-The eight currently registered prototype paths are writable only in governed
+Prototype paths in this write set are writable only in governed
 isolated prototype branches or worktrees and never enter the canonical
 integration branch. The
 canonical branch accepts their exact evidence pointers, verdicts, and validated
@@ -418,6 +422,16 @@ canonical `main`.
   claim using an owned workload, metric, baseline or budget, environment, and
   variability policy. Record the correctness and resource tradeoff; do not
   guess a threshold or substitute a weaker microbenchmark.
+- [ ] Execute A2-P5L before re-admitting combined measurement. Select one
+  private lifecycle owner Interface only if the actual clone, process,
+  one-store, Engine, read-only observation, cold-reopen, failure, and terminal
+  paths pass on CPython 3.11 and 3.12 without stale ownership or helper-only
+  proof. A nonpassing frozen source terminates and re-plans; it is not
+  corrected in place.
+- [ ] Admit A2-P5M only after P5L passes at an exact immutable owner Module
+  identity. Its measurement driver may consume that Interface but cannot edit,
+  copy, wrap, or reimplement lifecycle ownership or rebuild the accepted
+  predecessors' general evidence frameworks.
 - [ ] Record each prototype's exact question, commit identity, reproduction
   instructions, results, limitations, A1c preservation disposition, standards
   review, verdict, and terminal branch/worktree status. Reject or revise a
@@ -463,20 +477,22 @@ canonical `main`.
 
 ## Blockers
 
-- The first uncommitted P5 source revision failed independent specification and
-  standards audits before measurement. The clarified committed
-  [P5 admission](reports/p5-combined-efficiency-admission.md) keeps the accepted
-  combined design, baselines, five workloads, thresholds, 23-standard route,
-  exact base, isolated write set, and terminal disposition, while freezing the
-  invalid-workflow applicability matrix, raw-report recalculation, one-store
-  evidence boundary, and external-gate bundle. Source correction, frozen-source
-  audits, and focused probes are admitted. Complete P5 measurement remains
-  blocked until the corrected frozen source passes both independent audits and
-  the focused contract, oracle, lifecycle, and report-integrity probes on
-  CPython 3.11 and 3.12.
+- The combined P5 executable is superseded before measurement. Its final
+  frozen source passed supporting focused checks but failed independent
+  specification and Standards audits because the actual cold-reopen path kept
+  a stale owner, acquisition began outside ownership, process registration had
+  an unproved gap, and one source coupled independently changing lifecycle,
+  domain, measurement, and evidence concerns. Exact terminal evidence and the
+  dependency-ordered replacement are owned by the
+  [P5 decomposition](reports/p5-lifecycle-decomposition.md).
+- P5L execution is admitted only from exact base
+  `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` with the two-source
+  prototype-only write set in the decomposition. P5M and all combined
+  efficiency measurement remain unavailable until an immutable P5L owner
+  Module passes both supported runtimes and independent audits.
 - An A1c ADR amendment, public or persisted contract selection, and production
-  planning remain unavailable until P5 passes and its canonical verdict is
-  recorded.
+  planning remain unavailable until P5L and a later separately admitted P5M
+  pass and their canonical verdicts are recorded.
 - Production implementation remains unavailable until A2-A11 and every
   design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
   the plan names and admits an exact implementation slice.

@@ -811,3 +811,69 @@
   hash specification and standards audit plus focused contract, oracle,
   lifecycle, and report-integrity checks on both supported runtimes; complete
   P5 measurement remains blocked until those three gate groups pass.
+
+## 2026-09-01 - Combined P5 Stopped And Lifecycle Evidence Decomposed
+
+- Froze the terminal combined source at
+  `sha256:2ea0e614494d9ad6034aab7bd9955c93e38f949486de08400584ffac7a87635f`
+  (20,102 lines; 800,190 bytes). Ruff and all five focused modes passed on
+  CPython 3.11 and 3.12. No complete workload or measurement ran.
+- Independent specification and Standards audits both returned hard-stop
+  `revise`. The actual workload did not adopt the owner returned by cold
+  reopen; clone, store, and Engine acquisition began outside atomic ownership;
+  and the process proof did not close the `Popen` return-to-registration
+  interval. Focused injection began after the disputed boundaries and could
+  not establish the registered transition.
+- Classified the finding as systemic. One source coupled process runtime,
+  persistence evolution, Authoring behavior, measurement, recomputation,
+  external gates, and self-tests. The resulting correction propagation
+  triggered Planning re-plan and Architecture composed-design review rather
+  than another local patch.
+- Preserved the rejected primary source only on private prototype commit
+  `c939f693660561833e4a079ad7ebe9d725fbabe2`. Its branch diff contains the
+  exact source plus one mechanically changed repository-index digest. Ruff,
+  generated-artifact freshness, all 269 declarative suites, staged diff, and
+  sensitive-value review passed; those supporting gates do not change the
+  rejection verdict.
+- Protected the commit at
+  `refs/archive/a2-prototypes/p5-efficiency-measurement`, verified exact
+  reachability, removed the clean task-owned worktree
+  `/tmp/coding-standards-a2-p5-efficiency-measurement`, and deleted only the
+  temporary branch `prototype/a2-m0-efficiency-measurement`. The archive ref
+  remains the recovery authority.
+- Superseded the combined executable and separated lifecycle ownership from
+  comparative measurement. P5L owns only the real acquisition, process,
+  one-store, Engine, post-close observation, reopen, and cleanup
+  invariant. P5M remains unavailable until P5L accepts one immutable owner
+  Module that a later measurement driver can consume without modification or
+  reimplementation.
+- Re-ran the complete composed-design probe. Lifecycle and measurement have
+  independent change reasons and evidence; only lifecycle necessarily
+  interleaves resource identity, ordering, and time. Deleting the owner would
+  redistribute necessary cleanup knowledge, while deleting either evidence
+  driver removes only prototype machinery. No production Module, Interface,
+  schema, contract, migration, benchmark, or canonical Engine source is
+  admitted.
+- Independent re-plan reviews verified the archive evidence and required four
+  corrections before execution: remove plan-owned commit topology, revoke all
+  remaining measurement authority from rejected P5, register one exact A1c
+  operation/result and owner-generation sequence, complete the repeated
+  efficiency vector, and explicitly reconcile the current Engine composition
+  root, Repository Git Adapter, and Snapshot/SQLite owner.
+- This durable re-plan admits P5L only from exact prototype base
+  `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae`. The exact sequence is create
+  snapshot through typed `StandardsEngine`, read `core`, close/observe/reopen,
+  find the same active snapshot, and repeat the identical typed read under one
+  logical owner and distinct generations. One fresh-scratch observation per
+  candidate/runtime records deterministic calls, fields, exposed lifecycle
+  knowledge, durable bytes, and scratch bytes. Timing is inapplicable because
+  it has no deciding P5L claim.
+- The next slice creates the registered isolated P5L branch and worktree from
+  that base and authors only the owner Module and minimum viable test. Commit
+  retains authority over coherent boundaries. P5M and canonical Engine,
+  contract, schema, migration, or production work remain unavailable.
+- After the corrections, both independent re-plan reviews returned `pass`.
+  Plan structure, generated freshness, all 269 declarative suites, all seven
+  retained Bash verifiers, exact staged-scope and generated-diff review, and
+  sensitive-value review passed. The generated projection changed only its
+  repository-index digest; no prototype or canonical Engine source is staged.

@@ -1,6 +1,23 @@
 # A2-P5 Combined-Design Efficiency Execution Admission
 
-**Status:** `correction and re-audit admitted; complete measurement blocked`
+**Status:** `superseded before measurement; historical registration only`
+
+The final combined executable was frozen at
+`sha256:2ea0e614494d9ad6034aab7bd9955c93e38f949486de08400584ffac7a87635f`.
+All dual-runtime focused supporting checks passed, but independent
+specification and Standards audits rejected the actual lifecycle evidence:
+cold reopen retained a stale owner, material acquisition began outside atomic
+ownership, and process creation retained an unproved registration gap. The
+source also coupled lifecycle, process, persistence, domain, measurement, and
+evidence responsibilities broadly enough to trigger systemic re-planning.
+
+No complete workload or measurement ran, and no combined-design verdict was
+produced. The rejected source is archive-protected at prototype-only commit
+`c939f693660561833e4a079ad7ebe9d725fbabe2`; it never entered canonical
+`main`. The current authority is the
+[lifecycle-first decomposition](p5-lifecycle-decomposition.md). The remaining
+content below preserves the superseded registration and cannot authorize
+execution or correction.
 
 ## Question And Authority Boundary
 
@@ -10,11 +27,10 @@ is the P2R2 change-proportional projected-revision material model, the P4R
 typed-continuation facade, and P3 verified expected-target publication with
 observation-based cold recovery.
 
-P5 measures a design comparison only. It selects no latency, throughput,
-memory, capacity, schema, migration, public version, verifier portfolio, or
-platform promise. A prototype result can admit the combined design to later
-production planning; it cannot establish production performance or authorize
-canonical Engine code.
+Historical P5 attempted a design comparison only. It selected no latency,
+throughput, memory, capacity, schema, migration, public version, verifier
+portfolio, or platform promise. It produced no result and has no current
+execution authority.
 
 The accepted predecessor authorities are:
 
@@ -29,9 +45,10 @@ The accepted predecessor authorities are:
   for the eight-intent, 16-field typed-continuation facade and its 49-fact
   representative workload.
 
-Those earlier observations are design inputs, not reusable P5 measurements or
-budgets. P5 must measure the combined candidates again from the exact admitted
-base.
+Those earlier observations remain design inputs, not reusable combined
+measurements or budgets. Only a future separately admitted P5M may measure the
+combined candidates, and it remains blocked until it can consume immutable
+accepted P5L owner source without changing it.
 
 ## Current Standards Route
 
