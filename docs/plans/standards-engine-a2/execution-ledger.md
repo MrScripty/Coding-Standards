@@ -877,3 +877,56 @@
   retained Bash verifiers, exact staged-scope and generated-diff review, and
   sensitive-value review passed. The generated projection changed only its
   repository-index digest; no prototype or canonical Engine source is staged.
+
+## 2026-09-01 - P5L Rejected And Phase Capability Separated
+
+- Created the registered P5L worktree from exact base
+  `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` and authored only its two
+  registered prototype paths. Before behavior, removed fixed dominance/report
+  machinery and replaced its fixed fault list with actual-path discovery.
+  Ruff check and format verification passed.
+- Froze the exact two-file source at framed SHA-256
+  `20a3261fb376985d536175e5ddd5a76c2002e024748c05ee3a195062d5d18c72`.
+  The owner source was
+  `a4ef1ade142cdde6507a5f0ae731f24afca6d9de2e111e9bfb5ee209d1d59323`;
+  the MVT source was
+  `fdd56472169d61180eaa6b700fe0ac46b4d1bcca95e13f1d53a32df6ce827b0b`.
+  No prototype behavior, resource workflow, or dual-runtime command ran.
+- The independent specification audit returned hard-stop `reject`: the stale
+  linear facade retained evidence access; the transfer interval was not
+  failure-contained; the async primary occurred after registration; structural
+  and correctness claims were literals; and preservation failures could escape
+  cleanup containment and be masked by residual-state assertions.
+- The independent Standards audit separately returned `reject`: callbacks
+  received raw `StandardsEngine`; lifecycle owned byte/schema evidence; a
+  successful child could clear its process group before descendants were
+  terminal; and structural equivalence remained label-based. The 1,433-line
+  total was not itself a finding.
+- Staged only the exact frozen sources and mechanically derived
+  repository-index digest. Ruff, generated freshness, all 269 declarative
+  suites, all seven retained Bash verifiers, diff hygiene, generated-diff
+  review, and sensitive-value review passed. Committed the archive outcome as
+  `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6` with no A1c, Engine, contract,
+  schema, store, or canonical plan change.
+- Protected that exact commit at
+  `refs/archive/a2-prototypes/p5l-lifecycle-ownership`, removed the clean
+  task-owned worktree `/tmp/coding-standards-a2-p5l-lifecycle-ownership`,
+  deleted only `prototype/a2-m0-lifecycle-ownership`, and reverified the archive
+  ref. Terminal disposition is `removed-archived`.
+- Decomposed the failed owner again at its actual change reasons. P5C owns only
+  resource-free, synchronous, same-name delegation for all eight current A1c
+  roots and permanent callback-capability revocation. P5R remains unavailable
+  and alone may later own real Engine, Git/process, Snapshot/SQLite,
+  observation, reopen, cleanup, and terminal evidence. P5M remains unavailable
+  until both immutable predecessors pass.
+- Registered one selected P5C design and an Architecture-owned structural
+  budget instead of another candidate/dominance framework. Its two-file MVT
+  uses current Engine signatures and generated types plus a recording target;
+  it creates no process, path, SQLite state, persisted bytes, timing sample,
+  JSON schema, report, metric registry, or generic dispatch. Any frozen-source
+  audit or supported-runtime failure terminates and archives the source.
+- The next slice creates only `prototype/a2-m0-phase-capability` and
+  `/tmp/coding-standards-a2-p5c-phase-capability` from exact base
+  `9f6dd8a9484cc1b2421b29829ea928a9413905f9`, then authors the registered P5C
+  capability and MVT. P5R, P5M, and canonical implementation remain
+  unavailable.

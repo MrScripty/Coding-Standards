@@ -1,7 +1,7 @@
 # A2 Milestone 0 Prototype Evidence Index
 
 **Status:** `P1, P2R2, P3, and P4R pass; P2 and P4 revise; P2R rejected;
-combined P5 evidence rejected before measurement; P5L admitted but not created`
+combined P5 and P5L evidence rejected before behavior; P5C admitted but not created`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -18,7 +18,8 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | `prototype/a2-m0-facade-workflow`; `/tmp/coding-standards-a2-p4-facade-workflow` | `a8c7b04504b58446fc0fd6c53b867ddeb7827185` after governed fast-forward and exact-path move from the uncommitted creation worktree | `47cfcd5340196b275b910a398d61b7ef68a8e071` | `revise` | `removed-archived` at `refs/archive/a2-prototypes/p4-facade-workflow` |
 | A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | removed `prototype/a2-m0-facade-composition`; removed `/tmp/coding-standards-a2-p4r-facade-composition` | `fc7dbeabb5828b5b6f3840a1ff004209ae291385` | `9a0c34325e2849c437072b12b3188bede7f08d4e` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/p4r-facade-composition` |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | removed `prototype/a2-m0-efficiency-measurement`; removed `/tmp/coding-standards-a2-p5-efficiency-measurement` | `b503dcb76fd27aca41df154f37e20f6635de44bf` | `c939f693660561833e4a079ad7ebe9d725fbabe2` | `reject-evidence-implementation`; no measurement or combined-design verdict | `removed-archived` at `refs/archive/a2-prototypes/p5-efficiency-measurement` |
-| A2-P5L | `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py` | intended `prototype/a2-m0-lifecycle-ownership`; intended `/tmp/coding-standards-a2-p5l-lifecycle-ownership` | `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` | pending | admitted; not created | no branch or worktree exists; expected `removed-archived` after execution |
+| A2-P5L | `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py` | removed `prototype/a2-m0-lifecycle-ownership`; removed `/tmp/coding-standards-a2-p5l-lifecycle-ownership` | `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` | `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6` | `reject-evidence-implementation`; no behavior or lifecycle verdict | `removed-archived` at `refs/archive/a2-prototypes/p5l-lifecycle-ownership` |
+| A2-P5C | `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py` | intended `prototype/a2-m0-phase-capability`; intended `/tmp/coding-standards-a2-p5c-phase-capability` | `9f6dd8a9484cc1b2421b29829ea928a9413905f9` | pending | admitted; not created | no branch or worktree exists; expected `removed-archived` after execution |
 
 The A2 prototype owner owns each private worktree, its exact registered
 authored source path or paths, and the branch-local generated suite-input
@@ -31,15 +32,15 @@ changes a registered question, oracle, state model, or threshold requires a new
 canonical admission.
 
 The generated projection diff is path-sensitive. P1 and every Python prototype
-(P2, P2R, P2R2, P3, P4, P4R, P5, and P5L) must change only the
+(P2, P2R, P2R2, P3, P4, P4R, P5, P5L, and P5C) must change only the
 repository-index digest.
 Python prototypes remain below the package's existing `tests` boundary; no
 prototype becomes a production package input or requires production ownership.
 P2, P3, and P4 had to move their unchanged authored file to the corrected exact
 path and fast-forward
 to path-correction commit `a8c7b04504b58446fc0fd6c53b867ddeb7827185`
-before staging. The former combined P5 admission is historical and grants no
-creation authority. P5L is admitted only from the exact base under the
+before staging. The former combined P5 and P5L admissions are historical and
+grant no creation authority. P5C is admitted only from the exact base under the
 [lifecycle-first decomposition](p5-lifecycle-decomposition.md). P2R2 and P4R
 were created only after their durable execution admissions named the exact
 bases and paths; P4R's record is the
@@ -97,8 +98,8 @@ and only `proposal.head` is mutable.
   the caller. A mutable completion Boolean is strictly worse because it needs
   extra invalidation writes and cannot by itself identify the revision,
   analysis, authority, target, or verification proof. No latency, storage, or
-  production resource claim is made; a future separately admitted P5M owns
-  combined measurement and remains blocked on immutable accepted P5L source.
+  production resource claim is made; future P5M owns combined measurement and
+  remains blocked on immutable accepted P5C and P5R sources.
 - **Correctness:** `pass` for pure transition logic. The exact negative cases
   passed after the A1c preservation correction. SQLite durability, Git
   atomicity, generated facade conformance, and real authorization providers
@@ -370,9 +371,8 @@ to 3.36 seconds. CPython 3.12 observations ranged from 7.92 to 7.93 seconds and
 3.41 to 3.43 seconds respectively. The selected resolver is slower in this
 prototype, but the full-material control does not strictly dominate it because
 it retains substantially more durable material. No production latency promise
-or guessed threshold is admitted; a future separately admitted P5M owns the
-combined-workflow comparison and remains blocked on immutable accepted P5L
-source.
+or guessed threshold is admitted; future P5M owns the combined-workflow
+comparison and remains blocked on immutable accepted P5C and P5R sources.
 
 ### Four-Dimension Verdict
 
@@ -408,8 +408,8 @@ This is design evidence, not canonical source or contract authority. The
 prototype-local operation name, codecs, handles, compatibility value, state and
 store versions, migration decision, and generated request/result shapes remain
 unselected. Only exact replacement mutations were exercised. P4R has selected
-a preservation-safe facade composition; a future separately admitted P5M must
-measure the combined design from immutable accepted P5L source before ADR or
+a preservation-safe facade composition; future separately admitted P5M must
+measure the combined design from immutable accepted P5C and P5R sources before ADR or
 production planning can proceed.
 
 ### Archive And Worktree Contract
@@ -464,9 +464,8 @@ are descriptive local observations, not production budgets.
 - **Efficiency:** `pass` for the registered comparison only. The safe path adds
   one compare-and-swap ref transition and durable attempt facts; the unsafe
   alternatives are correctness-dominated. Timing and byte observations do not
-  admit a production resource budget; a future separately admitted P5M owns
-  combined-design comparison and remains blocked on immutable accepted P5L
-  source.
+  admit a production resource budget; future P5M owns combined-design
+  comparison and remains blocked on immutable accepted P5C and P5R sources.
 - **Correctness:** `pass`. Real Git proves expected-old-OID lost-update
   prevention, real SQLite cold reopen proves durable observation, and the two
   unsafe controls prove why update-without-CAS and publish-before-verify are
@@ -621,7 +620,8 @@ sensitive-value, and commit review passed.
   candidate supplied exactly the independently named workload facts and was
   not strictly dominated by a correctness-equivalent alternative. Timing,
   durable-byte, and combined-workflow claims remain owned by a future
-  separately admitted P5M that is blocked on immutable accepted P5L source.
+  separately admitted P5M that is blocked on immutable accepted P5C and P5R
+  sources.
 - **Correctness:** `pass` for facade shape and composition. Exact bindings,
   authorization ordering, immutable history, query-union handling, current
   resolve meanings, publication observation, recovery, failures, traces, and
@@ -651,7 +651,7 @@ semantics.
 The combined P5 that followed this decision was registered separately but
 terminated before measurement. Its lifecycle-first replacement is owned by the
 [P5 decomposition](p5-lifecycle-decomposition.md); neither this P4R evidence
-nor the rejected P5 source grants P5L creation authority.
+nor the rejected P5 source grants P5C creation authority.
 
 ### Archived Worktree Contract
 
@@ -705,6 +705,52 @@ for that archive outcome without changing the rejection.
 
 The clean task-owned worktree and temporary branch were removed after exact
 archive verification. Neither prototype artifact entered canonical `main`.
-Issue A2-013 is closed by this hard stop; A2-014 and the
-[lifecycle-first decomposition](p5-lifecycle-decomposition.md) own the next
-evidence design.
+Issue A2-013 is closed by this hard stop. The
+[design-validation protocol](design-validation-protocol.md) owns every later
+P5 registration; the [P5 decomposition](p5-lifecycle-decomposition.md) owns
+dependency order and composed-design disposition only.
+
+## A2-P5L Lifecycle-Owner Evidence Rejection
+
+### Frozen Bundle And Audit Boundary
+
+P5L authored one lifecycle owner and one MVT on exact admitted base
+`8a0d7df08e68fddbd60a7e2f3d2e267036c827ae`. The exact framed two-file bundle
+SHA-256 was
+`20a3261fb376985d536175e5ddd5a76c2002e024748c05ee3a195062d5d18c72`.
+The owner source SHA-256 was
+`a4ef1ade142cdde6507a5f0ae731f24afca6d9de2e111e9bfb5ee209d1d59323`;
+the MVT source SHA-256 was
+`fdd56472169d61180eaa6b700fe0ac46b4d1bcca95e13f1d53a32df6ce827b0b`.
+Ruff check and formatting passed, then the source froze. No MVT behavior,
+resource workload, or CPython 3.11/3.12 command ran.
+
+The independent specification audit rejected five material defects: stale
+linear evidence authority, an uncontained linear transfer interval,
+post-registration rather than pre-registration asynchronous failure evidence,
+literal structural/correctness claims, and preservation failures outside
+cleanup containment. The independent Standards audit separately rejected raw
+Engine exposure, lifecycle/measurement/schema coupling, incomplete successful
+process-group termination, and the same label-based evidence.
+
+This is `reject-evidence-implementation`. It rejects the P5L source and its
+three-candidate lifecycle comparison, not accepted P2R2, P3, P4R, the current
+A1c Engine, or the still-unmeasured combined A2 question. It grants no local
+correction or P5M authority.
+
+### Archive And Worktree Contract
+
+The exact rejected sources and mechanically changed repository-index digest
+are preserved only at prototype commit
+`4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6` under
+`refs/archive/a2-prototypes/p5l-lifecycle-ownership`. Generated freshness, all
+269 declarative suites, all seven retained Bash verifiers, staged-diff review,
+and sensitive-value review passed for that archive outcome without changing
+the rejection.
+
+The clean task worktree and temporary branch were removed after the archive
+ref was verified at the exact commit. Neither source entered canonical
+`main`. Issue A2-014 is closed by this hard stop. Issue A2-015 identifies the
+active finding, the [design-validation protocol](design-validation-protocol.md)
+admits only the smaller resource-free P5C question, and the
+[P5 decomposition](p5-lifecycle-decomposition.md) keeps P5R/P5M unavailable.

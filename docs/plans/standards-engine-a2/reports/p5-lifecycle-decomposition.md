@@ -1,8 +1,98 @@
 # A2-P5 Lifecycle-First Decomposition Re-Plan
 
-**Status:** `execution admitted from exact prototype base 8a0d7df08e68fddbd60a7e2f3d2e267036c827ae; no branch or worktree created`
+**Status:** `P5L rejected before behavior and removed-archived; P5C dependency split provisionally admissible; registration and lifecycle owned by linked canonical artifacts`
 
-## Trigger And Terminal Evidence
+## P5L Terminal Result
+
+The exact frozen P5L bundle had framed SHA-256
+`20a3261fb376985d536175e5ddd5a76c2002e024748c05ee3a195062d5d18c72`.
+The owner source had SHA-256
+`a4ef1ade142cdde6507a5f0ae731f24afca6d9de2e111e9bfb5ee209d1d59323`;
+the MVT source had SHA-256
+`fdd56472169d61180eaa6b700fe0ac46b4d1bcca95e13f1d53a32df6ce827b0b`.
+Ruff check and format verification passed before the freeze. No prototype
+behavior or dual-runtime command ran.
+
+Independent specification and Standards audits both returned `reject`. The
+linear candidate left an evidence method usable through its stale facade and
+had an unguarded observation-to-transfer interval. The asynchronous process
+fixture delivered its primary failure only after registration rather than
+proving the pre-registration state. Structural counts and correctness
+equivalence were literals rather than actual-trace evidence. Preservation
+failures could escape cleanup containment and be replaced by a residual-state
+assertion. The owner also exposed the raw `StandardsEngine`, coupled lifecycle
+with byte/schema evidence, and cleared a successful child process group before
+proving the group terminal.
+
+The source is preserved only at prototype commit
+`4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6` and archive ref
+`refs/archive/a2-prototypes/p5l-lifecycle-ownership`. Its generated projection
+changed only the repository-index digest. Generated freshness, all 269
+declarative suites, all seven retained Bash verifiers, staged-diff review, and
+sensitive-value review passed for the archive outcome; those checks do not
+change the rejection. The clean task worktree and temporary branch were
+removed after exact archive verification. P5L has no correction, execution,
+selection, or P5M admission authority.
+
+## Second Decomposition: P5C, P5R, Then P5M
+
+The rejection exposed two independently changing invariants that P5L had
+combined:
+
+1. **A2-P5C phase capability** decides only whether synchronous callback code
+   can invoke all eight exact current A1c operation roots without receiving
+   `StandardsEngine` or another resource or cleanup capability through the
+   supported callback Interface. It owns typed same-name delegation and
+   permanent phase revocation, not resource lifecycle or adversarial Python
+   isolation.
+2. **A2-P5R resource ownership** remains unavailable until P5C passes at one
+   immutable source identity. A later durable admission may compose that exact
+   capability with scratch Git/process, Snapshot/SQLite, Engine,
+   closed-store-observation, reopen, and terminal ownership. It may not edit,
+   copy, or independently reimplement P5C.
+3. **A2-P5M combined measurement** remains unavailable until P5R accepts one
+   immutable resource owner. No observer, Adapter, Interface, metric source,
+   or executable is selected; those facts belong to a future admission.
+
+This order is one-way. The P5C capability Module imports generated A1c
+call/result types and typing support only. The MVT may import
+`StandardsEngine` solely as signature authority. Neither has path, Git,
+process, signal, SQLite, measurement, schema, candidate, dominance, or report
+knowledge. Deleting P5C
+would force P5R either to expose the Engine or to duplicate typed delegation
+and revocation. Deleting later P5R leaves P5C intact. The eight-method surface
+follows A1c's existing explicit roots; it adds no generic dispatch or future
+Authoring operation.
+
+## Current Composed-Design Admission
+
+The [design-validation protocol](design-validation-protocol.md) is the sole
+owner of P5C's question, structural budget, oracle, and pass threshold. The
+[prototype evidence index](prototype-evidence-index.md) owns its exact base,
+paths, branch/worktree lifecycle, commit, verdict, and archive disposition.
+This report owns only the dependency order and composed-design result.
+
+| Probe | Current result |
+| --- | --- |
+| Independent concerns | P5C's what is typed delegation/revocation, its who is a trusted composition owner and synchronous callback, its how is one private gate/lease, its when is callback dynamic scope, its where is a resource-free prototype Module, and its why is removing raw Engine from the supported callback Interface while preserving A1c roots. It is not an adversarial Python isolation boundary. P5R, if later admitted, owns resource acquisition/lifetime/termination. P5M, if later admitted, owns combined measurement. Their owners, state, failure, and change reasons differ. |
+| Required and accidental interleaving | P5C necessarily interleaves target liveness with one callback invocation. A later P5R would necessarily supply its live Engine only to P5C's trusted seam, but no P5R composition is selected. Measurement has no current interleaving or mechanism. |
+| Caller and composition knowledge | Through the supported Interface, a trusted callback receives one synchronous capability plus current generated calls/results; it receives no Engine or lifecycle action. P5C's trusted composition seam knows one target and callback. Hostile reflection through Python private attributes, bound methods, closures, frames, garbage-collector state, or monkeypatching is explicitly unsupported and cannot inherit P5C evidence. No caller, P5R, or P5M Interface is invented beyond that registered seam. |
+| Representative forced changes | An A1c root/signature change forces A1c/Contracts review and P5C revalidation, then invalidates dependants. A revocation or callback-scope change touches P5C. A resource acquisition/cleanup change belongs only to future P5R. A metric or comparison change belongs only to future P5M. Concurrent or asynchronous callback demand rejects P5C's serial contract and re-plans through Concurrency. |
+| Dependency direction | P5C points to stable generated A1c call/result types; its MVT uses current Engine signatures as authority, not as a runtime resource. Future P5R may depend on one immutable P5C source. No dependency points from P5C toward resource or measurement mechanisms. |
+| Independent evolution, verification, failure, and replacement | P5C is resource-free and can pass, fail, or be deleted before P5R exists. P5R and P5M remain unavailable and therefore contribute no source, state, failure, or replacement mechanism. Their future admission must re-run this probe against actual composition. |
+| Deletion results | Deleting P5C's phase seam either exposes raw Engine or redistributes eight typed liveness checks and revocation into its future owner callback boundary, so the seam contains necessary complexity. Deleting either MVT removes only evidence. P5R, P5M, and any measurement Adapter have no current mechanism to delete. |
+| Inherent and cumulative machinery | Current executable scope is one small phase capability, one plain resource-free MVT, and one mechanically changed repository-index digest. The necessary complexity is one active-or-revoked gate, one lease, eight same-name methods, and exact `PhaseRevokedError("phase capability is revoked")` with no cause before stale target access. There is no resource owner, process harness, SQLite observer, metric, candidate set, dominance logic, timing loop, report schema, registry, combiner, or production Module. |
+
+The replacement composition is `applicable` and provisionally admissible for
+P5C only. P5C remains prototype-only and never merges to `main`. P5R, P5M,
+canonical Engine changes, public contract evolution, schema, migration, and
+production planning remain unavailable.
+
+The remaining P5/P5L registration below is retained only as historical audit
+context. It cannot create a branch, execute a command, select an Interface, or
+admit P5R/P5M.
+
+## Historical Combined-P5 Trigger And Terminal Evidence
 
 The combined P5 evidence implementation stopped before measurement. Its final
 frozen source was 20,102 lines and 800,190 bytes with SHA-256
@@ -28,7 +118,7 @@ measured workflow. The former correction admission and combined executable are
 superseded. The accepted P2R2 material, P3 publication/recovery, and P4R
 typed-continuation decisions are not rejected.
 
-## Replacement Composition
+## Historical First Replacement Composition
 
 P5 is replaced by two dependency-ordered questions:
 
@@ -52,7 +142,7 @@ resources. A P5M need that expands the P5L Interface or changes its
 implementation rejects the proposed measurement shape and re-plans; it does
 not reopen P5L in place.
 
-## P5L Registered Question
+## Historical P5L Registered Question
 
 Can one deep private owner Module make every required resource unreachable
 outside one current generation, perform cold reopen without an unowned or stale
@@ -73,7 +163,7 @@ no resource exists before an owner can dispose it, and the caller never owns
 component cleanup order. The selected Interface must provide more lifecycle
 Leverage than the facts and ordering it exposes.
 
-## Four-Dimension Oracle
+## Historical P5L Four-Dimension Oracle
 
 ### Effectiveness
 
@@ -183,7 +273,7 @@ unnecessary Interface knowledge, or a supported-runtime design failure is
 `reject`. There is no correction cycle: either nonpassing verdict terminates
 the P5L source and requires a new canonical re-plan.
 
-## Composed-Design Admission
+## Historical P5L Composed-Design Admission
 
 | Probe | Replacement disposition |
 | --- | --- |
@@ -201,7 +291,7 @@ for execution from the exact base below. P5L acceptance decides a
 prototype-only owner design, not a permanent production Module or public
 Interface.
 
-## Exact A1c Preservation Dispositions
+## Historical P5L A1c Preservation Dispositions
 
 | Accepted A1c decision or owner | P5L disposition | Executable preservation oracle |
 | --- | --- | --- |
@@ -218,7 +308,7 @@ Interface.
 Any disposition or oracle that cannot be proven on the frozen actual path is a
 P5L rejection, not permission to alter A1c.
 
-## Environment And Reproduction Contract
+## Historical P5L Environment And Reproduction Contract
 
 The only claimed environment is dependency-complete Linux with current local
 Git and SQLite under CPython 3.11 and 3.12. The immutable repository input is
@@ -241,7 +331,7 @@ authored files, generated freshness, every declarative suite, exact branch
 write-set and generated-digest review, sensitive-value review, and Commit
 review. Supporting repository gates cannot override a P5L oracle failure.
 
-## Isolation And Write Set
+## Historical P5L Isolation And Write Set
 
 The intended private resources are:
 
@@ -264,7 +354,7 @@ The prototype branch never merges to `main`. The two authored files must remain
 excluded from production package inputs, and the generated projection may
 change only its repository-index digest.
 
-## Explicit Exclusions And Next Slice
+## Historical P5L Exclusions And Supersession
 
 P5L may not contain A2 proposal/revision/readiness/attempt implementations,
 the former collector graph, full-corpus or aggregate measurement candidates,
@@ -273,7 +363,8 @@ dominance logic, a report combiner, external-gate bundle, the former
 migration, compatibility reader, canonical Engine change, or a second
 Snapshot/Analysis/persistence authority.
 
-The next slice creates the registered isolated branch and worktree from the
-exact admitted base, then authors only the owner Module and lifecycle MVT.
-Future P5M, canonical Engine work, and all excluded machinery remain
-unavailable.
+This registration terminated at the frozen-source audit and cannot create or
+execute P5L again. The next slice creates only the registered isolated P5C
+branch and worktree from the exact admitted base, then authors the phase
+capability and its minimum viable test. P5R, P5M, canonical Engine work, and
+all excluded machinery remain unavailable.

@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 lifecycle-evidence decomposition
+**Current phase:** Milestone 0 phase-capability validation
 
-**Next slice:** Create the isolated A2-P5L branch and worktree from exact
-admitted base `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae`, then author only the
-registered owner Module and lifecycle minimum viable test; P5M remains
-unavailable
+**Next slice:** Create the isolated A2-P5C branch and worktree from exact
+admitted base `9f6dd8a9484cc1b2421b29829ea928a9413905f9`, then author only the
+registered resource-free phase capability and minimum viable test; P5R and
+P5M remain unavailable
 
 **Acceptance status:** `pending`
 
@@ -422,16 +422,26 @@ canonical `main`.
   claim using an owned workload, metric, baseline or budget, environment, and
   variability policy. Record the correctness and resource tradeoff; do not
   guess a threshold or substitute a weaker microbenchmark.
-- [ ] Execute A2-P5L before re-admitting combined measurement. Select one
-  private lifecycle owner Interface only if the actual clone, process,
-  one-store, Engine, read-only observation, cold-reopen, failure, and terminal
-  paths pass on CPython 3.11 and 3.12 without stale ownership or helper-only
-  proof. A nonpassing frozen source terminates and re-plans; it is not
-  corrected in place.
-- [ ] Admit A2-P5M only after P5L passes at an exact immutable owner Module
-  identity. Its measurement driver may consume that Interface but cannot edit,
-  copy, wrap, or reimplement lifecycle ownership or rebuild the accepted
-  predecessors' general evidence frameworks.
+- [x] Terminate A2-P5L at its frozen-source audit. Both independent axes
+  rejected raw Engine exposure, stale linear authority, an uncontained handoff,
+  post-registration async evidence, literal structural claims, lifecycle/
+  measurement coupling, and incomplete process-group termination. No behavior
+  or dual-runtime command ran. Exact rejected source is removed-archived at
+  commit `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6`.
+- [ ] Execute A2-P5C as one resource-free phase-capability MVT. Preserve all
+  eight explicit A1c roots as same-name typed delegation, permanently revoke
+  retained callback capabilities, preserve exact call/result/failure identity,
+  and satisfy the Architecture-owned structural budget. The capability Module
+  has no Engine, process, path, SQLite, lifecycle, metric, candidate, or report
+  knowledge; the MVT uses Engine only as signature authority.
+- [ ] Admit A2-P5R only after P5C passes at one immutable source identity. P5R
+  alone may validate actual scratch Git/process, Snapshot/SQLite, Engine,
+  observation, reopen, cleanup, and terminal ownership while consuming P5C
+  unchanged.
+- [ ] Admit A2-P5M only after P5R passes at exact immutable capability and
+  owner identities. Its measurement driver may observe those Interfaces but
+  cannot edit, copy, wrap, or reimplement their ownership behavior or rebuild
+  the accepted predecessors' general evidence frameworks.
 - [ ] Record each prototype's exact question, commit identity, reproduction
   instructions, results, limitations, A1c preservation disposition, standards
   review, verdict, and terminal branch/worktree status. Reject or revise a
@@ -485,14 +495,18 @@ canonical `main`.
   domain, measurement, and evidence concerns. Exact terminal evidence and the
   dependency-ordered replacement are owned by the
   [P5 decomposition](reports/p5-lifecycle-decomposition.md).
-- P5L execution is admitted only from exact base
-  `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` with the two-source
-  prototype-only write set in the decomposition. P5M and all combined
-  efficiency measurement remain unavailable until an immutable P5L owner
-  Module passes both supported runtimes and independent audits.
+- P5L is rejected and removed-archived without behavior. It grants no
+  correction or successor execution authority. P5C alone is admitted from
+  exact base `9f6dd8a9484cc1b2421b29829ea928a9413905f9` with the two-source
+  resource-free write set registered by the
+  [design-validation protocol](reports/design-validation-protocol.md) and
+  [prototype evidence index](reports/prototype-evidence-index.md). P5R, P5M,
+  and all combined efficiency measurement remain unavailable until their
+  dependency-ordered predecessors pass both supported runtimes and independent
+  audits.
 - An A1c ADR amendment, public or persisted contract selection, and production
-  planning remain unavailable until P5L and a later separately admitted P5M
-  pass and their canonical verdicts are recorded.
+  planning remain unavailable until P5C, a separately admitted P5R, and a
+  later separately admitted P5M pass and their canonical verdicts are recorded.
 - Production implementation remains unavailable until A2-A11 and every
   design-dependent A2-A12 record are satisfied, Milestone 0 is accepted, and
   the plan names and admits an exact implementation slice.

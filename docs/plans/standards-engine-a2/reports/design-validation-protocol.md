@@ -34,15 +34,18 @@ after seeing results creates a new claim registration and requires a re-run.
 | Dimension | Admission rule | Insufficient substitute |
 | --- | --- | --- |
 | Effectiveness | The representative caller completes the named job using only allowed knowledge and every advertised next action is derivable from returned state. | The harness executes without showing that the caller workflow works. |
-| Efficiency | Record public call count, caller-supplied field count, durable bytes, scratch bytes, and wall time where applicable. A candidate passes only if it is not strictly dominated by a correctness-equivalent candidate and does not violate A1c's no-full-corpus-per-edit decision. A product latency or resource promise requires an owner-supplied budget; none is guessed. | A faster microbenchmark that omits persistence, validation, or equivalent work. |
+| Efficiency | Record public call count, caller-supplied field count, durable bytes, scratch bytes, and wall time where applicable. A design passes only against its registered correctness-equivalent comparison or an exact Product/Architecture-owned structural or resource budget; it must also preserve A1c's no-full-corpus-per-edit decision. A product latency or resource promise requires an owner-supplied budget; none is guessed. | A faster microbenchmark that omits persistence, validation, equivalent work, or the registered budget. |
 | Correctness | Every registered invariant and negative case reaches its predeclared typed state; the highest-fidelity available independent authority decides representation, SQLite, Git, contract, or semantic behavior. | Successful execution, local implementation agreement, generated freshness, or a mocked boundary alone. |
 | Standards compliance | The current executable route is recorded; each selected normative owner is reviewed against the design and evidence. Claim-matched verification and Commit review remain separate from prototype behavior. | A checklist, stale route, or passing unrelated repository suite. |
 
 Pairwise efficiency comparison uses representative repeated observations after
-one warm-up where timing is material. The record reports every observation and
-environment; it does not hide variability behind a single best run. If no
-correctness-equivalent baseline or owner-supplied budget exists, the efficiency
-claim is `unavailable` and the material design is not admitted.
+one warm-up where timing is material. A registered structural budget uses
+actual Interface signatures and traces once per supported runtime; it does not
+create timing repetitions when time has no deciding claim. The record reports
+every applicable observation and environment and does not hide variability
+behind a single best run. If no correctness-equivalent baseline or exact
+owner-supplied budget exists, the efficiency claim is `unavailable` and the
+material design is not admitted.
 
 ## Current Executable Standards Route
 
@@ -71,12 +74,18 @@ serial integration owner and no independently integrated development proposals.
 No language or framework profile is selected; Python is the experiment
 mechanism, not a new public language contract. Interop remains excluded.
 
-The combined P5 executable later failed independent lifecycle and composition
-audits before measurement. That failure does not alter the selected standards
-population. P5L narrows the executable claim to lifecycle ownership; every
-listed owner remains applicable because the real MVT still crosses A1c,
-SQLite, local Git/process, filesystem, verification, planning, and Commit
-boundaries.
+The combined P5 executable and its P5L replacement later failed independent
+lifecycle and composition audits before measurement or behavior. P5C is a new,
+narrower, resource-free executable claim. Its selected owners are Core,
+Planning, Implementation, Verification, Documentation, Commit, Build, Tooling,
+Release, Library, Generated Contract, Architecture, Contracts, Dependencies,
+Security, and Resilience. Resilience owns preservation of the callback or
+target failure and terminal revocation when that dependency fails. IPC,
+Persistence, Concurrency, Cross-Platform, Diagnostics, and Performance are not
+selected for P5C because it makes no resource, asynchronous, platform,
+diagnostic, or measurement claim. A future P5R or P5M admission must refresh
+its own executable route rather than inherit the historical 23-standard P5
+route or P5C's narrower route.
 
 ## Prototype Registrations
 
@@ -90,7 +99,43 @@ boundaries.
 | A2-P4 | `tools/standards_engine/tests/prototypes/a2/facade-workflow.prototype.py` | Which additive explicit operation set forms the smallest deep Authoring Interface while preserving all eight A1c roots? Compare explicit authoring operations, a tagged dispatch, and A1c query/inspect overload. | Representative workflow completes with no caller-owned internal facts; compare operation roots, calls, request fields, coordinated schema changes, and next-operation ambiguity. | Current operation manifest and generated-facade model; invalid kind, wrong handle, stale expected head, unauthorized apply, and unsupported contract. | `pass` only for an explicit additive Interface that preserves all eight roots, rejects dispatch/overload alternatives, and is not dominated in caller knowledge and change locality. |
 | A2-P4R | `tools/standards_engine/tests/prototypes/a2/facade-composition.prototype.py` | Can a typed-continuation portfolio remove P4's projected snapshot, mutable evidence, and caller Git stand-ins while retaining explicit caller goals? Compare it with a minimal three-root goal Interface, a flexible revision-addressed portfolio, P4's invalid surface, tagged dispatch, and A1c overload. | Complete the representative handle-carried workflow with arbitrary projected query, unchanged Analysis continuation, direct configured-main application, and recovery. Record calls, atomic caller facts, defined fields, result handles, ambiguity, coordinated owners, and deletion-test leverage; timing is immaterial. | Exact current A1c manifest/capabilities, prototype-local method introspection and state/trace, accepted P2R2/P3 decisions, and current compiler rejection of unadmitted roots. Wrong handle, stale revision, analysis mismatch/incomplete, stale readiness, unauthorized review/apply, unsupported contract, stale internal target, and unavailable recovery must not mutate state. | `pass` only if every exact invariant and negative passes on dependency-complete CPython 3.11 and 3.12, no forbidden caller fact or second authority appears, next handles are complete, existing A1c behavior is unchanged, and no correctness-equivalent candidate strictly dominates the selected Interface. |
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | Historical combined-design comparison superseded before measurement. Exact terminal authority is the [P5 decomposition](p5-lifecycle-decomposition.md). | No result: supporting gates could not establish actual lifecycle ownership. | Independent audits found stale reopen ownership, pre-owner acquisition, an unproved process-registration gap, and excessive change propagation. | `reject-evidence-implementation`; no combined-design verdict and no correction authority. |
-| A2-P5L | `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py` and `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py` | Can one private owner Module govern actual scratch Git/process, A1c Snapshot/SQLite, Engine, read-only observation, cold reopen, and terminal cleanup without stale ownership? Compare persistent in-place, linear replacement, and callback-scoped owner Interfaces; delete the former collector graph. | Execute the exact typed `StandardsEngine` create-snapshot, read-`core`, close/observe/reopen, find-active-snapshot, repeat-read sequence registered in the [P5L decomposition](p5-lifecycle-decomposition.md). Record owner and A1c calls, caller fields, visible resources/order/cleanup/state, and three-checkpoint durable and scratch bytes once per candidate/runtime. Report both runtime values without aggregation; wall time is inapplicable because it has no deciding claim. Structural non-dominance and zero owner-specific product persistence decide efficiency. | Actual current A1c, scratch SQLite and Git, real child/process-group observation, and faults at every acquisition, process-registration, reopen, observer, body, and cleanup boundary. Exact `O`/`G1`/`G2` identity, exact generated result equality, primary cause, zero residual state, current A1c preservation dispositions, and fresh rerun are required. | `pass` only when one non-dominated Interface passes unchanged on CPython 3.11 and 3.12 plus independent frozen-bundle audits. Any nonpassing source terminates and re-plans; P5M remains unavailable. |
+| A2-P5L | `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py` and `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py` | Historical P5 lifecycle-owner question superseded at frozen-source audit. | No behavior or runtime observation ran. | Independent audits rejected stale linear authority, an uncontained handoff, post-registration async evidence, literal structural claims, raw Engine exposure, lifecycle/measurement coupling, and incomplete process-group terminal ownership. | `reject-evidence-implementation`; removed-archived at exact commit `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6`; no correction or successor execution authority. |
+| A2-P5C | `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_prototype.py` and `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py` | Can one synchronous callback-scoped capability mirror all eight current explicit A1c roots, delegate identical generated requests to the same-named target methods, and permanently revoke after return or failure while omitting Engine and resource lifecycle from its supported callback Interface? Use one selected design and an owned structural budget, not candidate comparison. | One phase entry, one callback parameter, eight exact typed roots, one request per delegation, one private lease/capability per phase, one exact `PhaseRevokedError`, and zero generic tags, returned resource/cleanup identities, lifecycle ordering, cleanup branches, I/O, persisted bytes, timing, or report artifacts. | Current `StandardsEngine` signatures and generated call/result types plus one resource-free recording target. Require exact request/result/target-failure/body-failure identity, retained and returned capability revocation, successive-phase isolation, and exact `PhaseRevokedError("phase capability is revoked")` with no cause before stale target access. Also require the exact public surface, forbidden imports, and unchanged A1c sources. | `pass` only if one frozen bundle passes independent source audits and the unchanged resource-free MVT on dependency-complete CPython 3.11 and 3.12 within the exact budget. Any nonpass terminates and archives the source; P5R and P5M remain unavailable. |
+
+P5C supports only `--all`. After both frozen-source audits pass, execute the
+unchanged source once per supported runtime:
+
+```text
+PYTHONDONTWRITEBYTECODE=1 python3.11 -P tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py --all
+PYTHONDONTWRITEBYTECODE=1 python3.12 -P tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py --all
+```
+
+Success prints exactly `P5C PASS` and exits zero. P5C creates no report or
+result file. A failed assertion or unavailable dependency exits nonzero and
+cannot be converted into a pass label.
+
+P5C is an accidental-authority and lifetime-safety experiment for trusted,
+synchronous Python composition. Its supported boundary is the capability's
+public methods, callback arguments, and ordinary phase-owned return values. It
+does not claim confidentiality, sandboxing, or containment against hostile
+inspection of private attributes, bound methods, closures, frames, garbage-
+collector state, monkeypatching, or other reflective Python mechanisms. A
+caller requiring an adversarial boundary rejects this composition and must
+return to Security-owned isolation design; P5C evidence cannot admit that use.
+
+### P5C A1c Preservation Dispositions
+
+| Accepted decision | P5C disposition | Deciding oracle |
+| --- | --- | --- |
+| A1C-U02 harness-managed calls and custom integration | `unchanged`: P5C is a private prototype-only composition seam, not a deployment mode, public tool call, or alternate behavior contract. | Both sources remain below the test/prototype boundary and excluded from package/public entrypoints; the generated agent-tool projection and current public Engine contract remain byte-identical. |
+| A1C-U03 distinct invocation/handoff lifetimes | `composed-without-change`: the private phase lifetime is shorter than an Engine invocation and grants no durable authority; generated handles/results remain ordinary immutable values. | A retained or returned phase capability is revoked on normal return and exact body/target failure, while the identical generated request/result objects cross the callback unchanged. No capability is serialized or persisted. |
+| A1C-U12 explicit Snapshot operations | `unchanged`: P5C mirrors `create_snapshot`, `find_snapshots`, `delete_snapshot`, and `undelete_snapshot` as separate same-name typed methods and adds no tag, overload, catalog, or Engine constructor state. | Signature/type-hint comparison proves the four exact roots; the recording target receives each identical call once; forbidden-surface review rejects generic dispatch and lifecycle methods. |
+| A1C-U15 one generated facade contract | `unchanged`: P5C consumes current generated request/result types and defines no schema, codec, version, projection, or public operation. | Generated-contract, agent-tool, operation-manifest, and package-input identities are unchanged; the capability Module imports generated types and typing support only. |
+| A1C-U18 supported runtimes | `composed-without-change`: P5C claims only resource-free synchronous behavior on dependency-complete Linux CPython 3.11 and 3.12. | The identical frozen bundle passes once on each accepted runtime; no Windows, macOS, process, filesystem, SQLite, or concurrent behavior is claimed. |
+| A1C-U20 eight accepted typed operations | `unchanged`: P5C has exactly the same eight operation names, generated call parameters, and result unions; it neither replaces nor adds a public Engine root. | Resolved signature/type comparison against current `StandardsEngine`, exact same-object request/result/failure delegation for every root, and byte-identical Engine/generated sources all pass. |
+
+Any nonpassing preservation row rejects the frozen P5C source. It does not
+authorize an A1c change.
 
 ## Isolation And Commit Contract
 
