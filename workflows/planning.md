@@ -7,7 +7,7 @@
 - Level: `MUST`
 - Applies when: Work requires sequencing, shared decisions, migration, delegation, or acceptance across multiple boundaries.
 - Does not apply when: A bounded local change has an obvious write set, regression check, and acceptance path.
-- Requires: `core`, `workflow.implementation`, `workflow.verification`
+- Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.development-proportionality`
 - Specializes: `none`
 - Verification: Active-plan structure fixtures and objective-level acceptance review.
 - Canonical owner: `workflows/planning.md`

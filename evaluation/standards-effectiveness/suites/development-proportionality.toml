@@ -1,0 +1,181 @@
+schema_version = 1
+id = "development-proportionality"
+owner = "workflow.development-proportionality"
+description = "Development proportionality decisions, direct Router selection, and Planning prerequisite order."
+
+[[checks]]
+id = "development-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/development/proportionality-decisions.tsv"
+expected_column = "expected"
+default = "implement"
+
+[checks.domains]
+case = ["*"]
+contract = ["satisfied", "unsatisfied"]
+blocker = ["missing-authority-or-state", "none"]
+investigation = ["none", "proposed"]
+decision_relevance = ["adjacent", "current", "not-applicable"]
+reversibility = ["irreversible", "not-applicable", "reversible"]
+consequence = ["bounded", "high", "not-applicable"]
+cheaper_path = ["implementation", "investigation", "not-applicable"]
+facts = ["complete", "contradictory", "missing"]
+expected = ["blocked", "defer-and-implement", "implement", "invalid", "investigate", "unavailable"]
+
+[[checks.rules]]
+outcome = "unavailable"
+[checks.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+
+[[checks.rules]]
+outcome = "invalid"
+[checks.rules.when]
+all = [{ field = "facts", op = "eq", value = "contradictory" }]
+
+[[checks.rules]]
+outcome = "blocked"
+[checks.rules.when]
+all = [{ field = "blocker", op = "eq", value = "missing-authority-or-state" }]
+
+[[checks.rules]]
+outcome = "investigate"
+[checks.rules.when]
+all = [{ field = "contract", op = "eq", value = "unsatisfied" }]
+
+[[checks.rules]]
+outcome = "defer-and-implement"
+[checks.rules.when]
+all = [
+  { field = "investigation", op = "eq", value = "proposed" },
+  { field = "decision_relevance", op = "eq", value = "adjacent" },
+]
+
+[[checks.rules]]
+outcome = "investigate"
+[checks.rules.when]
+all = [
+  { field = "investigation", op = "eq", value = "proposed" },
+  { field = "decision_relevance", op = "eq", value = "current" },
+  { any = [
+    { field = "reversibility", op = "eq", value = "irreversible" },
+    { field = "consequence", op = "eq", value = "high" },
+    { field = "cheaper_path", op = "eq", value = "investigation" },
+  ] },
+]
+
+[[checks]]
+id = "routing-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/development/routing-decisions.tsv"
+input_columns = ["uncertainty_reduction", "planning", "facts"]
+
+[checks.domains]
+case = ["*"]
+uncertainty_reduction = ["no", "yes"]
+planning = ["no", "yes"]
+facts = ["complete", "missing"]
+expected_development = ["exclude", "select", "unresolved"]
+expected_planning = ["exclude", "select", "unresolved"]
+expected_route = ["route", "unresolved"]
+
+[[checks.outputs]]
+column = "expected_development"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "uncertainty_reduction", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_planning"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "planning", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_route"
+default = "route"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+
+[[checks]]
+id = "routing-closure"
+type = "metadata_route"
+path = "evaluation/standards-effectiveness/fixtures/development/routing-decisions.tsv"
+header = ["case", "uncertainty_reduction", "planning", "facts", "expected_development", "expected_planning", "expected_route"]
+expectations_path = "evaluation/standards-effectiveness/fixtures/development/routing-routes.tsv"
+route_column = "expected_route"
+resolved = "route"
+unresolved = "unresolved"
+base_modules = ["router"]
+selections = [
+  { column = "expected_development", selected = "select", excluded = "exclude", module = "workflow.development-proportionality" },
+  { column = "expected_planning", selected = "select", excluded = "exclude", module = "workflow.planning" },
+]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/development-proportionality.md"
+required = [
+  "- ID: `workflow.development-proportionality`",
+  "smallest reversible production implementation over further design",
+  "Do not spend more effort reducing uncertainty than the plausible rework or",
+  "This workflow owns whether the next development action is `implement`,",
+  "discovering adjacent uncertainty does not automatically",
+  "A completed investigation returns to the Development Decision.",
+]
+prohibited = [
+  "always prototype",
+  "always investigate",
+  "minimum number of reviews",
+]
+
+[[checks]]
+id = "router-policy"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = [
+  "could delay a contract-satisfying implementation | [Development Proportionality](workflows/development-proportionality.md)",
+]
+
+[[checks]]
+id = "planning-prerequisite"
+type = "text"
+path = "workflows/planning.md"
+required = [
+  "- Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.development-proportionality`",
+]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "STANDARDS-ROUTER.md",
+  "workflows/development-proportionality.md",
+  "workflows/implementation.md",
+  "workflows/planning.md",
+  "workflows/verification.md",
+]
+
+[[checks]]
+id = "local-links"
+type = "markdown_links"
+paths = [
+  "STANDARDS-ROUTER.md",
+  "workflows/development-proportionality.md",
+  "workflows/planning.md",
+]

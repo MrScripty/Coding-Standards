@@ -631,6 +631,11 @@ path = "evaluation/standards-effectiveness/suites/s1-routing.toml"
 requires = []
 
 [[suites]]
+id = "development-proportionality"
+path = "evaluation/standards-effectiveness/suites/development-proportionality.toml"
+requires = []
+
+[[suites]]
 id = "milestone-7-row-35-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml"
 requires = []

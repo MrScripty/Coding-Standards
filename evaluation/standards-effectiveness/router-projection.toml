@@ -6,10 +6,10 @@ base_modules = ["router"]
 
 [[facts]]
 id = "routing.activities"
-semantic_revision = 1
+semantic_revision = 2
 type = "enum-set"
 nullable = false
-values = ["implementation", "verification", "planning", "commit", "documentation", "build", "tooling", "release"]
+values = ["implementation", "verification", "uncertainty-reduction", "planning", "commit", "documentation", "build", "tooling", "release"]
 aliases = []
 meaning = "The development activities performed by the requested work."
 context_kind = "task-route"
@@ -111,6 +111,11 @@ when = { operator = "contains", fact = "routing.activities", value = "implementa
 id = "route.workflow.verification"
 target = "workflow.verification"
 when = { operator = "contains", fact = "routing.activities", value = "verification" }
+
+[[rules]]
+id = "route.workflow.development-proportionality"
+target = "workflow.development-proportionality"
+when = { operator = "contains", fact = "routing.activities", value = "uncertainty-reduction" }
 
 [[rules]]
 id = "route.workflow.planning"

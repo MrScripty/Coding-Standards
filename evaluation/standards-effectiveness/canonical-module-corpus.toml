@@ -53,6 +53,7 @@ members = [
   "topics/security.md",
   "workflows/build.md",
   "workflows/commit.md",
+  "workflows/development-proportionality.md",
   "workflows/documentation.md",
   "workflows/implementation.md",
   "workflows/planning.md",

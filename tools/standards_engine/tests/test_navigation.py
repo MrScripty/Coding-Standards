@@ -128,6 +128,46 @@ class NavigationTest(unittest.TestCase):
         self.assertIsInstance(invalid, RejectedResult)
         self.assertEqual(invalid.code, "APPLICABILITY.INVALID")
 
+    def test_development_proportionality_routes_directly_and_before_planning(self) -> None:
+        direct = self.engine.query(
+            QueryCall(
+                self.snapshot,
+                RouteRequest(
+                    "route",
+                    self.route_facts(
+                        **{"routing.activities": ["uncertainty-reduction"]}
+                    ),
+                ),
+            )
+        )
+        self.assertIsInstance(direct, RouteResult)
+        direct_targets = [item.target for item in direct.reading_plan]
+        self.assertIn("workflow.development-proportionality", direct_targets)
+        self.assertNotIn("workflow.planning", direct_targets)
+        self.assertLess(
+            direct_targets.index("workflow.implementation"),
+            direct_targets.index("workflow.development-proportionality"),
+        )
+        self.assertLess(
+            direct_targets.index("workflow.verification"),
+            direct_targets.index("workflow.development-proportionality"),
+        )
+
+        planning = self.engine.query(
+            QueryCall(
+                self.snapshot,
+                RouteRequest(
+                    "route", self.route_facts(**{"routing.activities": ["planning"]})
+                ),
+            )
+        )
+        self.assertIsInstance(planning, RouteResult)
+        planning_targets = [item.target for item in planning.reading_plan]
+        self.assertLess(
+            planning_targets.index("workflow.development-proportionality"),
+            planning_targets.index("workflow.planning"),
+        )
+
     def test_read_related_and_inspect_share_the_snapshot_root(self) -> None:
         read = self.engine.query(
             QueryCall(self.snapshot, ReadRequest("read", "workflow.planning"))

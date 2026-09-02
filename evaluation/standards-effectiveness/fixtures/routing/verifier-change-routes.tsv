@@ -4,7 +4,7 @@ local_check_existing_module	workflow.implementation,workflow.verification	core,w
 independent_authority_parser	topic.architecture,workflow.implementation,workflow.verification	core,workflow.implementation,workflow.verification,topic.contracts,topic.architecture
 repository_graph_composition	topic.architecture,workflow.implementation,workflow.verification	core,workflow.implementation,workflow.verification,topic.contracts,topic.architecture
 measured_loading_claim	topic.performance,workflow.implementation,workflow.verification	core,workflow.implementation,workflow.verification,topic.performance
-migration_only_retirement	workflow.implementation,workflow.planning,workflow.verification	core,workflow.implementation,workflow.verification,workflow.planning
+migration_only_retirement	workflow.implementation,workflow.planning,workflow.verification	core,workflow.implementation,workflow.verification,workflow.development-proportionality,workflow.planning
 local_migration_mechanic	workflow.implementation,workflow.verification	core,workflow.implementation,workflow.verification
 unknown_authority	unresolved	unresolved
 unknown_workload	unresolved	unresolved

@@ -1,0 +1,6 @@
+case	direct_modules	requires_closure
+uncertainty_only	router,workflow.development-proportionality	core,router,workflow.implementation,workflow.verification,workflow.development-proportionality
+planning_only	router,workflow.planning	core,router,workflow.implementation,workflow.verification,workflow.development-proportionality,workflow.planning
+both	router,workflow.development-proportionality,workflow.planning	core,router,workflow.implementation,workflow.verification,workflow.development-proportionality,workflow.planning
+neither	router	core,router
+missing	unresolved	unresolved

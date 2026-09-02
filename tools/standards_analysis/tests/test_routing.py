@@ -33,6 +33,12 @@ class RouterProjectionTest(unittest.TestCase):
         self.assertEqual(boundaries.semantic_revision, 2)
         self.assertIn("generated-contract", boundaries.values)
 
+        activities = next(
+            fact for fact in projection.facts if fact.id == "routing.activities"
+        )
+        self.assertEqual(activities.semantic_revision, 2)
+        self.assertIn("uncertainty-reduction", activities.values)
+
         generated_contract = next(
             rule
             for rule in projection.rules
@@ -52,6 +58,28 @@ class RouterProjectionTest(unittest.TestCase):
                 "operator": "contains",
                 "fact": "routing.boundaries",
                 "value": "generated-contract",
+            },
+        )
+
+        development_proportionality = next(
+            rule
+            for rule in projection.rules
+            if rule.id == "route.workflow.development-proportionality"
+        )
+        self.assertEqual(
+            development_proportionality.target,
+            "workflow.development-proportionality",
+        )
+        self.assertEqual(
+            development_proportionality.program.referenced_facts,
+            ("routing.activities",),
+        )
+        self.assertEqual(
+            development_proportionality.program.as_expression(),
+            {
+                "operator": "contains",
+                "fact": "routing.activities",
+                "value": "uncertainty-reduction",
             },
         )
 

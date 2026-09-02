@@ -502,6 +502,21 @@
           "suite": "cross-language-contract"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "documentation-changelog-closure"
@@ -1288,7 +1303,7 @@
       ]
     },
     {
-      "digest": "sha256:e2c5403320f1ccf415ceddaee6a5ed60ffa7651683202484d4be1c45f13b4dbf",
+      "digest": "sha256:c68dd3a8cad1bbf380ecc9f498f3eb42d19269393dc25fb708692609a9a6b8b0",
       "path": "STANDARDS-ROUTER.md",
       "state": "present",
       "uses": [
@@ -1326,6 +1341,26 @@
           "check": "router-projection",
           "role": "content",
           "suite": "dependencies-owner-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "markdown",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "router-policy",
+          "role": "content",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "router",
@@ -2260,10 +2295,15 @@
       ]
     },
     {
-      "digest": "sha256:97b46395be6933b5efb5c42a2f6b4bc1f44028fc0141d431345094d5ca3c3c28",
+      "digest": "sha256:b670bf6f7bf4511ad38747e81bb017f34a75d699e423b5126917da9fa6f036cf",
       "path": "evaluation/standards-effectiveness/canonical-module-corpus.toml",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module-corpus",
+          "suite": "development-proportionality"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -4577,6 +4617,47 @@
       ]
     },
     {
+      "digest": "sha256:03a34e322bf08fc393f2906d38b1f2442f5f7de589ec57f73c6810502345f757",
+      "path": "evaluation/standards-effectiveness/fixtures/development/proportionality-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "development-decisions",
+          "role": "decision-table",
+          "suite": "development-proportionality"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:52e4f2d3057fcffd984efd87e4d9f49062d3a17c5c64c04d0a7cec06dfef6432",
+      "path": "evaluation/standards-effectiveness/fixtures/development/routing-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "routing-closure",
+          "role": "routing-cases",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-decisions",
+          "role": "decision-table",
+          "suite": "development-proportionality"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:9c448510b67a5ee44cb9b6ed55ac89b6de8f008ab4518fd7659c09bd63f71141",
+      "path": "evaluation/standards-effectiveness/fixtures/development/routing-routes.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "routing-closure",
+          "role": "routing-expectations",
+          "suite": "development-proportionality"
+        }
+      ]
+    },
+    {
       "digest": "sha256:fd88d2a32e40c17014c438aaea11c05f1cb906ac65ad09c7cbe997e7d50e6457",
       "path": "evaluation/standards-effectiveness/fixtures/diagnostics/activity-context-decisions.tsv",
       "state": "present",
@@ -5847,7 +5928,7 @@
       ]
     },
     {
-      "digest": "sha256:e4415d1ca665a3ad5fd90cce41a808d153385ba86ef375f6e3d6747405d45cbe",
+      "digest": "sha256:bb5885423dbd9aa75f0badeb976a6928d925eb3db554f1ff3b1d7f6e4e690564",
       "path": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
       "state": "present",
       "uses": [
@@ -5893,7 +5974,7 @@
       ]
     },
     {
-      "digest": "sha256:973a157ae7ccdc7e2bfb4070c069db6ae5251ebade369db1656bf8cd340122fe",
+      "digest": "sha256:078308398ff5447ce76df5a774285518149b74e33093e36bddce263dff0e2d61",
       "path": "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv",
       "state": "present",
       "uses": [
@@ -10191,7 +10272,7 @@
       ]
     },
     {
-      "digest": "sha256:74bda807977875d47f5694cabfa17d3202ec616d78381abe6e1b5433e9cfde67",
+      "digest": "sha256:85e54935b9f1bf4907c2a9a3b9648387db5d7dd5b7f17153940b4a6b0d364040",
       "path": "evaluation/standards-effectiveness/router-projection.toml",
       "state": "present",
       "uses": [
@@ -10208,7 +10289,7 @@
       ]
     },
     {
-      "digest": "sha256:e080bd586f8c778bd71e31cabe95ed4555543954ad1d8f5164702fc9497dd55e",
+      "digest": "sha256:25ddc4db3d456fb8c6e2350d4d36935b26b569bd63979efd10fef8eeb2a4af97",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10839,6 +10920,18 @@
     {
       "digest": "sha256:32c97305b57bf315b3aa42876945854b862945190a311bd590f6455494bce756",
       "path": "evaluation/standards-effectiveness/suites/dependency-standards-consolidation.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ca0308961cb826ff2ba840b037f323b9766d434d694a6467b4a269991ffb00fd",
+      "path": "evaluation/standards-effectiveness/suites/development-proportionality.toml",
       "state": "present",
       "uses": [
         {
@@ -13127,7 +13220,7 @@
       ]
     },
     {
-      "digest": "sha256:f28da74b0c043211375707e91034b6bc8b6ba70f7d245ba09e0d4ef0e64a5c2f",
+      "digest": "sha256:8ce2ea11077419cf36796f3e8ecd2b622a59bd4966cb651dda5686b46de9c1e4",
       "path": "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml",
       "state": "present",
       "uses": [
@@ -14324,6 +14417,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -14456,6 +14559,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -14531,6 +14644,16 @@
           "check": "library-projection",
           "role": "content",
           "suite": "core-simplicity"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "current-structure",
@@ -14610,6 +14733,16 @@
           "suite": "core-simplicity"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "profile-projection",
           "role": "content",
           "suite": "generated-contract-semantic-conformance"
@@ -14671,6 +14804,16 @@
       "path": "profiles/boundaries/interop.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -14814,6 +14957,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -14895,6 +15048,16 @@
       "path": "profiles/boundaries/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -15068,6 +15231,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -15139,6 +15312,16 @@
       "path": "profiles/frameworks/godot.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -15222,6 +15405,16 @@
           "suite": "csharp-async-owner-contract"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -15293,6 +15486,16 @@
       "path": "profiles/languages/rust/README.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -15556,6 +15759,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -15652,6 +15865,16 @@
       "path": "profiles/languages/rust/async.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "required-paths",
           "role": "required-present",
@@ -15805,6 +16028,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -15876,6 +16109,16 @@
       "path": "profiles/languages/rust/dependencies.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -15989,6 +16232,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "required-paths",
           "role": "required-present",
           "suite": "milestone-7-independent-trust-replan"
@@ -16045,6 +16293,11 @@
       "path": "profiles/languages/rust/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -16228,6 +16481,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -16334,6 +16597,11 @@
       "path": "profiles/languages/rust/security.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -16467,6 +16735,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -16589,6 +16867,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -16640,6 +16923,16 @@
       "path": "profiles/languages/typescript.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -16742,6 +17035,16 @@
       "path": "profiles/languages/typescript/async.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -16858,6 +17161,16 @@
           "check": "profile-contract",
           "role": "content",
           "suite": "concurrent-plan-integration"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "current-structure",
@@ -17133,6 +17446,11 @@
           "suite": "architecture-process-instance-coordination"
         },
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -17205,6 +17523,11 @@
           "suite": "accessibility-owner-contract"
         },
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -17240,6 +17563,11 @@
           "check": "commit-target-files",
           "role": "projected-repository-path",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "current-structure",
@@ -17296,6 +17624,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "reference",
           "role": "content",
           "suite": "diagnostics-activity-context"
@@ -17332,6 +17665,11 @@
       "path": "reference/recipes/documentation.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "metadata-closure",
           "role": "metadata",
@@ -17389,6 +17727,11 @@
       "path": "reference/recipes/frontend.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "reference",
           "role": "content",
@@ -17472,6 +17815,11 @@
           "suite": "contract-http-outcome-projection"
         },
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -17498,6 +17846,11 @@
       "path": "reference/recipes/implementation.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "reference",
           "role": "content",
@@ -17530,6 +17883,11 @@
       "path": "reference/recipes/persistence.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "reference",
           "role": "content",
@@ -17578,6 +17936,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -17614,6 +17977,11 @@
       "path": "reference/recipes/rust-dependencies.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -17676,6 +18044,11 @@
       "path": "reference/recipes/rust-release.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "canonical-paths",
           "role": "required-present",
@@ -17748,6 +18121,11 @@
       "path": "reference/recipes/rust-tooling.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -17840,6 +18218,11 @@
       "path": "reference/recipes/tooling.md",
       "state": "present",
       "uses": [
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -17951,6 +18334,11 @@
           "check": "template-projection",
           "role": "content",
           "suite": "core-simplicity"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
         },
         {
           "check": "template-projection",
@@ -18692,7 +19080,7 @@
       ]
     },
     {
-      "digest": "sha256:5c17e07dace6aa300bc9bc54142f82748a8b431e637c993c9d42c21f499d1ce7",
+      "digest": "sha256:5f04bf454d9b079855031114a0542985107fcb457e893897aeeff37c2f704921",
       "path": "tools/standards_analysis/tests/test_routing.py",
       "state": "present",
       "uses": [
@@ -19199,6 +19587,18 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a29cb86d8e6bdf13a32268536f714ab75c650a331eb1123e56d0ac0f1e4338b4",
+      "path": "tools/standards_engine/standards_engine/authoring.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
         }
       ]
     },
@@ -21468,6 +21868,16 @@
           "suite": "accessibility-owner-contract"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -21570,6 +21980,16 @@
           "suite": "core-simplicity"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -21655,6 +22075,16 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "concurrency-policy"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "state-model",
@@ -21897,6 +22327,16 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "metadata-closure",
@@ -22186,6 +22626,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -22308,6 +22758,16 @@
           "suite": "dependency-standards-consolidation"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -22420,6 +22880,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "owner",
           "role": "content",
           "suite": "diagnostics-activity-context"
@@ -22481,6 +22951,16 @@
       "path": "topics/licensing.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -22558,6 +23038,16 @@
       "path": "topics/performance.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -22645,6 +23135,16 @@
       "path": "topics/resilience.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "state-model",
           "role": "owner-state",
@@ -22741,6 +23241,16 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "state-model",
@@ -22990,6 +23500,16 @@
           "suite": "build-owner-contract"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -23070,6 +23590,16 @@
           "check": "hook-bypass-owner",
           "role": "content",
           "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "state-model",
@@ -23154,10 +23684,92 @@
       ]
     },
     {
+      "digest": "sha256:2ed335f76610f0f6d896ba0021c2e3d3ba322df4cfffabb6c8108f99b08b698d",
+      "path": "workflows/development-proportionality.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "local-links",
+          "role": "markdown",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "workflow-policy",
+          "role": "content",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        }
+      ]
+    },
+    {
       "digest": "sha256:154f4d866ef99ccfde5f85cc01de2e5480e25e8c116cd5b9082b9e69d42faf6b",
       "path": "workflows/documentation.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
         {
           "check": "workflow-owner",
           "role": "content",
@@ -23291,6 +23903,21 @@
           "suite": "core-simplicity"
         },
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -23393,7 +24020,7 @@
       ]
     },
     {
-      "digest": "sha256:dc03e458da467b32718f01257185b824b1d86ed7ff3dd637d8e77c7259d44b5c",
+      "digest": "sha256:7ff38aeba33dbc6e4b39a23cd5b9e27396dce92412aadde5a2a7e602efd319a8",
       "path": "workflows/planning.md",
       "state": "present",
       "uses": [
@@ -23406,6 +24033,31 @@
           "check": "planning-projection",
           "role": "content",
           "suite": "core-simplicity"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "local-links",
+          "role": "markdown",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "planning-prerequisite",
+          "role": "content",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "state-model",
@@ -23498,6 +24150,16 @@
           "check": "release-owner",
           "role": "content",
           "suite": "binding-artifact-composition"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "metadata-closure",
@@ -23727,6 +24389,16 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
@@ -23877,6 +24549,21 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
         },
         {
           "check": "owner",
@@ -24307,11 +24994,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:e080bd586f8c778bd71e31cabe95ed4555543954ad1d8f5164702fc9497dd55e",
+    "digest": "sha256:25ddc4db3d456fb8c6e2350d4d36935b26b569bd63979efd10fef8eeb2a4af97",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:f2ff5ec498f0dc1bfb2cd5292e87587bbc9e239e4f1a34fe7efc6ded9c5c809d",
+    "digest": "sha256:da5daaa64695f01c7c7d486601750cdad525fff902809994846376aaa6ece5a3",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25121,6 +25808,12 @@
       "requires": []
     },
     {
+      "digest": "sha256:ca0308961cb826ff2ba840b037f323b9766d434d694a6467b4a269991ffb00fd",
+      "id": "development-proportionality",
+      "path": "evaluation/standards-effectiveness/suites/development-proportionality.toml",
+      "requires": []
+    },
+    {
       "digest": "sha256:f86606d79a7f100f63f76b9d32483b872b42a37a2dbeeb9021609282a2465a1c",
       "id": "milestone-7-row-35-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
@@ -25875,7 +26568,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:f28da74b0c043211375707e91034b6bc8b6ba70f7d245ba09e0d4ef0e64a5c2f",
+      "digest": "sha256:8ce2ea11077419cf36796f3e8ecd2b622a59bd4966cb651dda5686b46de9c1e4",
       "id": "standards-recovery-routing",
       "path": "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml",
       "requires": []

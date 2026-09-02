@@ -33,6 +33,7 @@ observable task conditions. Do not read every document by default.
 | --- | --- |
 | Any code or standards change | [Implementation](workflows/implementation.md) |
 | Behavior or contract must be proven | [Verification](workflows/verification.md) |
+| A prototype, design investigation, evidence cycle, review, or re-plan could delay a contract-satisfying implementation | [Development Proportionality](workflows/development-proportionality.md) |
 | Material sequencing, independently owned contract, migration, coordination, rollout, risk, acceptance complexity, or re-planning | [Planning](workflows/planning.md) |
 | Commit creation, history maintenance, or branch/worktree isolation, integration, terminal lifecycle, or cleanup decisions | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
