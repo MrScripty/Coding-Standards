@@ -169,9 +169,37 @@ class GitRepository:
         self._max_object_bytes = max_object_bytes
 
     def current_revision(self) -> RepositoryRevision:
+        return self._revision("HEAD^{commit}")
+
+    def branch_revision(self, branch: str) -> RepositoryRevision:
+        if (
+            type(branch) is not str
+            or not branch
+            or "\0" in branch
+            or any(0xD800 <= ord(character) <= 0xDFFF for character in branch)
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_BRANCH",
+                "branch name must be a nonempty Unicode scalar string without NUL",
+            )
+        checked = git_command(
+            self._repository,
+            ("check-ref-format", "--branch", branch),
+            max_output_bytes=256,
+        )
+        if checked.returncode != 0 or checked.stdout.decode(
+            "utf-8", "replace"
+        ).strip() != branch:
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_BRANCH",
+                "branch name is not canonical",
+            )
+        return self._revision(f"refs/heads/{branch}^{{commit}}")
+
+    def _revision(self, revision: str) -> RepositoryRevision:
         output = git_output(
             self._repository,
-            ("rev-parse", "--verify", "--end-of-options", "HEAD^{commit}"),
+            ("rev-parse", "--verify", "--end-of-options", revision),
             max_output_bytes=256,
         )
         try:

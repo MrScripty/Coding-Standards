@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 16,
+  "interface_schema_version": 17,
   "examples": [
     {
       "name": "create-snapshot",
@@ -114,6 +114,59 @@
           "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "schema_version": 1
         }
+      }
+    },
+    {
+      "name": "review-proposal",
+      "definition": "ReviewProposalCall",
+      "value": {
+        "kind": "review-proposal",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 6
+        },
+        "decisions": [
+          {
+            "owner": "consumer",
+            "decision": "accept",
+            "rationale": "Consumer obligations are satisfied.",
+            "evidence": [
+              {
+                "id": "evidence.consumer-review",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          {
+            "owner": "impact",
+            "decision": "accept",
+            "rationale": "Policy impact obligations are satisfied.",
+            "evidence": [
+              {
+                "id": "evidence.impact-review",
+                "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          {
+            "owner": "audit",
+            "decision": "accept",
+            "rationale": "Audit coverage obligations are satisfied.",
+            "evidence": [
+              {
+                "id": "evidence.audit-review",
+                "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          }
+        ]
       }
     },
     {

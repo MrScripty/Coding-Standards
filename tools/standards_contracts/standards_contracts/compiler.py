@@ -38,6 +38,7 @@ _SCHEMA_KEYS = frozenset(
         "additionalProperties",
         "items",
         "minItems",
+        "maxItems",
         "uniqueItems",
         "minLength",
         "pattern",
@@ -76,6 +77,7 @@ _OPERATIONS = (
     "revise_proposal",
     "query_proposal",
     "analyze_proposal",
+    "review_proposal",
 )
 _ASCII_PATTERN = re.compile(r"\A[\x20-\x7e]*\Z")
 
@@ -273,7 +275,7 @@ def _parse_interface(
             "operations must be exactly create_snapshot, find_snapshots, "
             "delete_snapshot, undelete_snapshot, query, prepare, resolve, inspect, "
             "create_proposal, find_proposals, revise_proposal, query_proposal, "
-            "analyze_proposal",
+            "analyze_proposal, review_proposal",
         )
     resolve = next(operation for operation in operations if operation.id == "resolve")
     submission_definition = definitions[resolve.input_definition]["properties"][

@@ -136,6 +136,14 @@ def _proposal_lifecycle(value: Mapping[str, object]) -> str:
     )
 
 
+def _proposal_review(value: Mapping[str, object]) -> str:
+    readiness = _mapping(value.get("readiness"))
+    return (
+        f"PROPOSAL REVIEW {_revision_id(value.get('revision'))} "
+        f"{readiness.get('id', '')} [{value.get('status', '')}]\n"
+    )
+
+
 def _rejection(value: Mapping[str, object]) -> str:
     return (
         "\n".join(
@@ -208,6 +216,7 @@ _RESULT_RENDERERS: dict[
     "create-proposal-result": _proposal_lifecycle,
     "find-proposals-result": _proposal_lifecycle,
     "revise-proposal-result": _proposal_lifecycle,
+    "review-proposal-result": _proposal_review,
     "route-result": _navigation,
     "read-result": _navigation,
     "related-result": _navigation,

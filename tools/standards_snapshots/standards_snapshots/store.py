@@ -21,6 +21,7 @@ from .model import (
     DeleteSnapshotResult,
     FindAggregateRootsRequest,
     FindSnapshotsRequest,
+    GuardedAggregatePutResult,
     PutResult,
     SnapshotId,
     SnapshotFile,
@@ -742,6 +743,32 @@ class SQLiteSnapshotStore:
                 )
             self._advance_root_stage("after-root-update", aggregate_id)
         return "advanced"
+
+    def publish_aggregate_if_root_head(
+        self,
+        aggregate_id: str,
+        expected_head_id: str,
+        record: AggregateRecord,
+    ) -> GuardedAggregatePutResult:
+        _root_reference(aggregate_id, "aggregate root ID")
+        _root_reference(expected_head_id, "expected aggregate root head ID")
+        if type(record) is not AggregateRecord:
+            raise invalid(
+                "AGGREGATE.INVALID_RECORD",
+                "guarded aggregate publication requires an exact AggregateRecord",
+            )
+        with self._transaction(write=True):
+            root = self._load_root_unchecked(aggregate_id)
+            for snapshot in root.snapshots:
+                self.snapshot(snapshot)
+            if root.snapshots != record.snapshots:
+                raise invalid(
+                    "AGGREGATE.INVALID_DEPENDENCIES",
+                    "guarded aggregate and root must have identical dependencies",
+                )
+            if root.head_id != expected_head_id:
+                return "stale"
+            return self._publish_aggregate_unchecked(record)
 
     def load_aggregate(self, aggregate_id: str) -> AggregateRecord:
         with self._transaction(write=False):

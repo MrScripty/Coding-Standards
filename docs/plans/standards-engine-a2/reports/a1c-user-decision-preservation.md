@@ -1,6 +1,6 @@
 # A1c User-Decision Preservation Matrix
 
-**Status:** `Milestone 4 proposal analysis reconciliation accepted; later A2
+**Status:** `Milestone 5 proposal review reconciliation accepted; later A2
 reconciliation remains active`
 
 ## Authority And Method
@@ -50,7 +50,7 @@ different A1c choice.
 | A1C-U17 | Cross-engine stored-state compatibility and migration are deferred until Coding Standards is feature complete; incompatible state is never silently reinterpreted. | Milestone 1 adds one same-engine, atomic store-v1-to-v2 migration so retained A1c stores gain empty aggregate-head tables without losing A1c rows. It adds no cross-engine reader, compatibility window, fallback, or migration framework; after migration the store is only v2. | `explicitly-reauthorized-for-a2-integration` by the user's 2026-09-02 permission to alter A1c for a standards-aligned A2 fit | An exact integrity-valid v1 store reopens as exact v2 with every A1c table row unchanged; schema lookalikes, corrupt stores, and future versions reject before mutation; injected interruption preserves v1; cross-engine compatibility remains deferred. |
 | A1C-U18 | Linux CPython 3.11 and 3.12 are the only accepted platforms; Windows and macOS remain unclaimed without equivalent real evidence. | A2 must re-prove new Git, SQLite, filesystem, locking, and recovery behavior on both accepted runtimes. | `composed-without-change` | Required-real public workflow passes on Linux CPython 3.11 and 3.12; other platforms remain unsupported or unclaimed. |
 | A1C-U19 | Semantic understanding and judgment stay with the agent; the Engine owns declared mechanical contracts and projections only. | A2 records authorized semantic, relationship, and lifecycle decisions but cannot generate their meaning or infer acceptance from prose. | `composed-without-change` | Apply readiness contains explicit authorized decisions and mechanical proof; no generated semantic-acceptance Boolean exists. |
-| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v16 retains the eight roots in their original order and adds only `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, and `analyze_proposal`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
+| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v17 retains the eight roots in their original order and adds only `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, `analyze_proposal`, and `review_proposal`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
 | A1C-U21 | The accepted A1c ADR and prior codec identified proposed analysis material only through `proposed_snapshot`; exact cold replay reloaded snapshot bytes. | Replace only that snapshot-only material assumption with one closed Analysis-owned proposed-material reference whose variants identify an exact snapshot or an exact immutable proposal revision. Include it in identity, typed dependency closure, and cold replay while retaining one `AnalysisState` and one analyzer. | `explicitly-reauthorized-for-a2-integration` by the user's 2026-09-01 design decision and 2026-09-02 implementation direction | [Exact product authority and selected scope](a1c-projected-material-reauthorization.md), accepted P2R2 identity/cold-replay/lifecycle evidence, Analysis state v5 and identity/handle v6 coordinated replacement, exact revision input revalidation, unchanged snapshot-backed regression, and Linux CPython 3.11/3.12 production evidence. |
 
 ## Conflict Register
@@ -135,11 +135,35 @@ snapshot-dependency sets, so a schema bump or migration would add no new store
 promise. Obsolete Analysis state is rejected as unsupported; there is no dual
 reader, alias, or silent reinterpretation.
 
+## Milestone 5 Reconciliation
+
+Proposal review composes after A1c Analysis without changing its state,
+completion rule, obligations, dispositions, authorization records, public
+results, or `resolve` behavior. A2 requires the exact revision-backed Analysis
+to be complete and rejects the otherwise-complete `requires-change` outcome;
+it does not rewrite that disposition or infer semantic acceptance. Consumer,
+impact, and audit readiness decisions are new explicit, evidence-backed
+aggregate approvals. Each has an authorization subject derived from the exact
+Analysis, revision, and decision, using the existing three A1c review
+capabilities.
+
+Readiness is one immutable snapshot-dependent aggregate, not another Analysis
+state, report, packet, mutable head, or lifecycle root. The Snapshot owner
+atomically checks that the analyzed revision remains the proposal head while
+publishing it. The Engine privately derives configured `refs/heads/main`,
+requires it to equal the base snapshot source, and binds its exact object plus
+the versioned Standards Verifier `complete` checkpoint into readiness. Callers
+cannot supply revision, proposal head, target, verifier, capability, or storage
+facts. Interface v17 and readiness contract/handle v1 are additive; Analysis
+v5/handle v6, request v4, result v5, proposal revision handle v1, Authoring
+revision contract v1, and store v2 retain their promises.
+
 ## Current Verdict
 
-Milestone 4 is reconciled for proposal analysis. The original eight A1c
-operations remain explicit and retain their behavior; snapshot-backed
-`prepare`, inspection, and `resolve` use the evolved state without acquiring a
-second analyzer or proposal authority. Cross-engine compatibility, feature
-completeness, review, application, and recovery remain unresolved and cannot
-inherit Milestone 4 authority.
+Milestone 5 is reconciled for proposal review readiness. The original eight
+A1c operations remain explicit and retain their behavior; revision-backed
+Analysis remains the single source of completion and obligation truth. Review
+adds no second analyzer, review lifecycle, or standards-graph membership.
+Cross-engine compatibility, feature completeness, application, Git
+publication, and recovery remain unresolved and cannot inherit Milestone 5
+authority.

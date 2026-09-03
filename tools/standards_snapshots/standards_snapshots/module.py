@@ -21,6 +21,7 @@ from .model import (
     DeleteSnapshotResult,
     FindSnapshotsRequest,
     FindAggregateRootsRequest,
+    GuardedAggregatePutResult,
     PutResult,
     SnapshotId,
     SnapshotPage,
@@ -129,6 +130,19 @@ class SnapshotModule:
     def publish_aggregate(self, record: AggregateRecord) -> PutResult:
         self.maintain()
         return self._store.publish_aggregate(record)
+
+    def publish_aggregate_if_root_head(
+        self,
+        aggregate_id: str,
+        expected_head_id: str,
+        record: AggregateRecord,
+    ) -> GuardedAggregatePutResult:
+        self.maintain()
+        return self._store.publish_aggregate_if_root_head(
+            aggregate_id,
+            expected_head_id,
+            record,
+        )
 
     def create_aggregate_root(self, root: AggregateRoot, head: AggregateRecord) -> None:
         self.maintain()

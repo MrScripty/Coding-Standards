@@ -3176,6 +3176,30 @@
       ],
       "type": "object"
     },
+    "ReadinessHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ReadinessId"
+        },
+        "kind": {
+          "const": "readiness-handle"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "ReadinessId": {
+      "pattern": "^readiness:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
     "ReadingPlanEntry": {
       "additionalProperties": false,
       "properties": {
@@ -3537,6 +3561,92 @@
         "operation",
         "request_kind",
         "analysis"
+      ],
+      "type": "object"
+    },
+    "ReviewDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "const": "accept"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "owner": {
+          "enum": [
+            "consumer",
+            "impact",
+            "audit"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "owner",
+        "decision",
+        "rationale",
+        "evidence"
+      ],
+      "type": "object"
+    },
+    "ReviewProposalCall": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/ReviewDecision"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "const": "review-proposal"
+        },
+        "prior_readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "analysis",
+        "decisions"
+      ],
+      "type": "object"
+    },
+    "ReviewProposalResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "review-proposal-result"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "status": {
+          "const": "ready"
+        }
+      },
+      "required": [
+        "kind",
+        "readiness",
+        "revision",
+        "status"
       ],
       "type": "object"
     },
@@ -3946,7 +4056,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 16,
+  "interface_schema_version": 17,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -4109,6 +4219,18 @@
       "result_definitions": [
         "PendingResult",
         "CompleteResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.review",
+      "id": "review_proposal",
+      "input_definition": "ReviewProposalCall",
+      "input_schema": {
+        "$ref": "#/$defs/ReviewProposalCall"
+      },
+      "result_definitions": [
+        "ReviewProposalResult",
         "RejectedResult"
       ]
     }

@@ -48,6 +48,7 @@ class GeneratedContractTest(unittest.TestCase):
             "revise_proposal": generated.ReviseProposalCall,
             "query_proposal": generated.QueryProposalCall,
             "analyze_proposal": generated.AnalyzeProposalCall,
+            "review_proposal": generated.ReviewProposalCall,
         }
 
         for operation in contracts.interface.operations:
@@ -135,7 +136,7 @@ class GeneratedContractTest(unittest.TestCase):
             with self.subTest(path=path.relative_to(REPO_ROOT)):
                 self.assertEqual(path.read_text(encoding="utf-8"), projection)
 
-    def test_generated_native_models_decode_complete_v16_values(self) -> None:
+    def test_generated_native_models_decode_complete_v17_values(self) -> None:
         request_value = {"kind": "read", "target": "workflow.planning"}
         request = generated.decode_contract("QueryRequest", request_value)
         self.assertIsInstance(request, generated.ReadRequest)
@@ -156,6 +157,32 @@ class GeneratedContractTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             generated.ReadRequest.from_value({"kind": "read"})
 
+    def test_review_call_requires_exactly_three_decisions(self) -> None:
+        examples = json.loads(
+            (REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json")
+            .read_text(encoding="utf-8")
+        )["examples"]
+        call = next(
+            item["value"]
+            for item in examples
+            if item["definition"] == "ReviewProposalCall"
+        )
+
+        generated.ReviewProposalCall.from_value(call)
+        with self.assertRaises(ValueError):
+            generated.ReviewProposalCall.from_value(
+                {
+                    **call,
+                    "decisions": [
+                        *call["decisions"],
+                        {
+                            **call["decisions"][0],
+                            "rationale": "A duplicate owner cannot add a fourth decision.",
+                        },
+                    ],
+                }
+            )
+
     def test_agent_tools_are_the_exact_compiler_projection(self) -> None:
         tools_path = (
             REPO_ROOT
@@ -164,7 +191,7 @@ class GeneratedContractTest(unittest.TestCase):
         projected = render_repository_projections()[tools_path]
         self.assertEqual(tools_path.read_text(encoding="utf-8"), projected)
 
-    def test_authored_v16_examples_satisfy_the_public_contract(self) -> None:
+    def test_authored_v17_examples_satisfy_the_public_contract(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         path = REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"
@@ -201,6 +228,7 @@ class GeneratedContractTest(unittest.TestCase):
                 "AnalysisChildHandle",
                 "ProposalHandle",
                 "ProposalRevisionHandle",
+                "ReadinessHandle",
             },
         )
         for fixture in handles:

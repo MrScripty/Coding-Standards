@@ -382,6 +382,62 @@ class SnapshotStoreTests(unittest.TestCase):
                     unavailable_record.exception.failure.code, "AGGREGATE.UNAVAILABLE"
                 )
 
+    def test_aggregate_publication_can_require_an_exact_current_root_head(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            with SnapshotModule.open(Path(temporary) / "snapshots.sqlite3") as module:
+                snapshot = module.create_snapshot(capture()).snapshot
+                initial = AggregateRecord(
+                    "revision:initial", "revision", b"one", (snapshot,)
+                )
+                root = AggregateRoot(
+                    "proposal:test", "proposal", initial.aggregate_id, (snapshot,), 1
+                )
+                module.create_aggregate_root(root, initial)
+                readiness = AggregateRecord(
+                    "readiness:current", "readiness", b"ready", (snapshot,)
+                )
+
+                self.assertEqual(
+                    module.publish_aggregate_if_root_head(
+                        root.aggregate_id, initial.aggregate_id, readiness
+                    ),
+                    "inserted",
+                )
+                self.assertEqual(
+                    module.publish_aggregate_if_root_head(
+                        root.aggregate_id, initial.aggregate_id, readiness
+                    ),
+                    "existing-identical",
+                )
+                advanced = AggregateRecord(
+                    "revision:advanced", "revision", b"two", (snapshot,)
+                )
+                self.assertEqual(
+                    module.advance_aggregate_root(
+                        root.aggregate_id, initial.aggregate_id, advanced
+                    ),
+                    "advanced",
+                )
+                stale = AggregateRecord(
+                    "readiness:stale", "readiness", b"stale", (snapshot,)
+                )
+                before = module._store.counts()
+                self.assertEqual(
+                    module.publish_aggregate_if_root_head(
+                        root.aggregate_id, initial.aggregate_id, stale
+                    ),
+                    "stale",
+                )
+                self.assertEqual(module._store.counts(), before)
+                with self.assertRaises(SnapshotError) as unavailable_record:
+                    module.load_aggregate(stale.aggregate_id)
+                self.assertEqual(
+                    unavailable_record.exception.failure.code,
+                    "AGGREGATE.UNAVAILABLE",
+                )
+
     def test_interrupted_aggregate_root_advance_rolls_back_record_and_head(
         self,
     ) -> None:

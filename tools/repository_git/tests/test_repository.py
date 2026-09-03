@@ -56,6 +56,23 @@ class GitRepositoryTests(unittest.TestCase):
                 b"other",
             )
 
+    def test_branch_revision_is_independent_of_the_checked_out_head(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_text("main", encoding="utf-8")
+            self._commit(root, "main")
+            self._git(root, "branch", "-M", "main")
+            main = self._git(root, "rev-parse", "HEAD").strip()
+            self._git(root, "switch", "-qc", "other")
+            (root / "value.txt").write_text("other", encoding="utf-8")
+            self._commit(root, "other")
+
+            repository = GitRepository(root)
+
+            self.assertNotEqual(repository.current_revision().oid, main)
+            self.assertEqual(repository.branch_revision("main").oid, main)
+
     def test_path_and_object_failures_are_typed(self) -> None:
         for raw in ("", "/absolute", "../outside", "a//b", ".git/config"):
             with self.subTest(raw=raw), self.assertRaises(GitRepositoryError) as raised:

@@ -42,6 +42,20 @@ replay. Stored normalized changes and semantic proposals are revalidated
 against the exact revision during every evaluation. Existing pending/complete
 results and `resolve` continue through the same Analysis kernel.
 
+The fifth production boundary adds
+`review_proposal(analysis, decisions, prior_readiness?)`. The Engine accepts
+only a complete revision-backed Analysis with no `requires-change`
+disposition, then derives the immutable revision, current proposal head, and
+configured `refs/heads/main` target internally. Consumer, impact, and audit
+acceptances each carry explicit rationale and evidence and receive an
+independent authorization through their existing review capability. A
+content-bound readiness identity binds those decisions and authorization
+records to the exact Analysis, revision, base snapshot, current target object,
+target ref, and the Standards Verifier semantic-revision-1 `complete`
+checkpoint. The Snapshot owner checks the exact proposal head and publishes
+the immutable readiness aggregate in one transaction. A prior identical proof
+is idempotent; stale or mismatched authority cannot publish readiness.
+
 Proposal IDs are unique lifecycle identities (`proposal:v1:<uuid4>`). Initial
 revision IDs are content-bound identities over proposal ID, ordinal, base
 snapshot, normalized replacement material, semantic proposals, and the
@@ -64,18 +78,18 @@ failed first initialization removes only the exact staging file it created.
 The facade keeps store selection at the deployment boundary and exposes an
 owned close/context-manager lifecycle, not a caller-selected store path.
 
-The public interface declares `standards.proposal.author` and
-`standards.proposal.read` capabilities at the same deployment boundary that
-owns the existing A1c capabilities; the domain does not add a second ambient
-authorization mechanism. Interface schema v16 adds proposal analysis. Analysis
-state v5, Analysis identity/handle v6, and result projection v5 are coordinated
-current-engine replacements; obsolete Analysis state is unsupported rather
-than dual-read or silently reinterpreted. Request contract v4, proposal
-revision handle v1, Authoring contract v1, and store schema v2 remain unchanged
-because their owned promises do not change. In particular, the store already
-owns opaque aggregate bytes and exact snapshot-dependency sets, so it needs no
-no-op migration. This decision does not yet add review/readiness, Git
-publication, or recovery. The tested P5C forwarding capability is intentionally
+The public interface declares proposal author, read, and composite review
+capabilities at the same deployment boundary that owns the existing A1c
+capabilities; the domain does not add a second ambient authorization mechanism
+or a generic capability-set contract. Interface schema v17 adds proposal
+review. Readiness contract/handle v1 is additive. Analysis state v5, Analysis
+identity/handle v6, result projection v5, request contract v4, proposal
+revision handle v1, Authoring revision contract v1, and store schema v2 remain
+unchanged because their owned promises do not change. The store already owns
+opaque aggregate bytes, exact snapshot dependencies, and transactional
+aggregate publication, so readiness requires no schema migration or mutable
+index. This decision does not yet add application, Git writes, verification
+execution, or recovery. The tested P5C forwarding capability is intentionally
 not productionized because no real caller needs a second eight-method A1c
 surface.
 

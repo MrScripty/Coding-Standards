@@ -76,6 +76,17 @@
       },
       "encoded_hex": "7b226b696e64223a22696d706163742d7472616365222c227265766973696f6e223a317d",
       "expected": "impact-trace:sha256:8fdc155684d261426d7208ff3539482b1df6f5b47c09f4ff1781eba73aafdfc3"
+    },
+    {
+      "name": "proposal-readiness",
+      "domain": "coding-standards:proposal-readiness:v1",
+      "prefix": "readiness",
+      "value": {
+        "kind": "proposal-readiness",
+        "revision": 1
+      },
+      "encoded_hex": "7b226b696e64223a2270726f706f73616c2d72656164696e657373222c227265766973696f6e223a317d",
+      "expected": "readiness:sha256:41b5305e6ba1480d6ccc4e31ddbed88467007d9526c0c014e89d0494427e0b86"
     }
   ],
   "public_handles": [
@@ -113,6 +124,15 @@
         "kind": "analysis-handle",
         "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "schema_version": 6
+      }
+    },
+    {
+      "name": "proposal-readiness",
+      "definition": "ReadinessHandle",
+      "value": {
+        "kind": "readiness-handle",
+        "id": "readiness:sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "schema_version": 1
       }
     },
     {

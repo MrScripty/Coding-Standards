@@ -95,6 +95,22 @@ class TextRenderingTest(unittest.TestCase):
             f"NAVIGATION {revision}\n  POLICY workflow.planning\n",
         )
 
+    def test_proposal_review_renders_only_opaque_authority(self) -> None:
+        revision = "proposal-revision:sha256:" + "a" * 64
+        readiness = "readiness:sha256:" + "b" * 64
+
+        self.assertEqual(
+            render_text(
+                {
+                    "kind": "review-proposal-result",
+                    "readiness": {"id": readiness},
+                    "revision": {"id": revision},
+                    "status": "ready",
+                }
+            ),
+            f"PROPOSAL REVIEW {revision} {readiness} [ready]\n",
+        )
+
     def test_every_public_result_kind_has_a_rendering_dispatch(self) -> None:
         schema = json.loads(
             (
@@ -129,6 +145,7 @@ class TextRenderingTest(unittest.TestCase):
             "create-proposal-result",
             "find-proposals-result",
             "revise-proposal-result",
+            "review-proposal-result",
             "proposal-route-result",
             "proposal-read-result",
             "proposal-related-result",

@@ -11,6 +11,7 @@ MAX_CHILD_BYTES = 4 * 1024 * 1024
 Lifecycle = Literal["active", "quarantined"]
 PutResult = Literal["inserted", "existing-identical"]
 AdvanceAggregateRootResult = Literal["advanced", "stale"]
+GuardedAggregatePutResult = Literal["inserted", "existing-identical", "stale"]
 
 
 def _scalar(value: str, description: str) -> None:
@@ -383,6 +384,7 @@ __all__ = (
     "DeleteSnapshotResult",
     "FindSnapshotsRequest",
     "FindAggregateRootsRequest",
+    "GuardedAggregatePutResult",
     "Lifecycle",
     "MAX_AGGREGATE_BYTES",
     "MAX_CHILD_BYTES",

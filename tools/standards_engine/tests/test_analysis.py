@@ -26,6 +26,7 @@ from tools.standards_engine.standards_engine import (
     AnalysisChildInspectionResult,
     AnalysisHandle,
     AnalysisInspectionResult,
+    CompleteResult,
     CreateProposalCall,
     CreateProposalResult,
     CreateSnapshotCall,
@@ -34,6 +35,7 @@ from tools.standards_engine.standards_engine import (
     PrepareCall,
     RejectedResult,
     ResolveCall,
+    ReviewProposalResult,
     ReviseProposalCall,
     ReviseProposalResult,
     StandardsEngine,
@@ -82,6 +84,18 @@ def _reference(identifier: str) -> EvidenceReference:
         "repository-content",
         "1",
     )
+
+
+def _review_decisions() -> list[dict[str, object]]:
+    return [
+        {
+            "owner": owner,
+            "decision": "accept",
+            "rationale": f"The {owner} review is satisfied by the completed analysis.",
+            "evidence": [_reference(f"proposal-{owner}-review").as_contract()],
+        }
+        for owner in ("consumer", "impact", "audit")
+    ]
 
 
 class ExactAuthorizer:
@@ -232,6 +246,142 @@ class AnalysisWorkflowTest(unittest.TestCase):
         successor_state = self.engine.inspect(InspectCall(successor.handle))
         self.assertIsInstance(successor_state, AnalysisInspectionResult)
         self.assertEqual(successor_state.state.proposed_reference, created.revision)
+
+    def test_review_composition_publishes_readiness_for_complete_analysis(self) -> None:
+        capture = self.engine._snapshots.load_content(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        commit_workflow = next(
+            item.content.decode("utf-8")
+            for item in capture.files
+            if str(item.path) == "workflows/commit.md"
+        )
+        compiled = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        policy = next(
+            item
+            for item in compiled.corpus.policy_unit_corpus.units
+            if item.id == "workflow.commit.commit-message"
+        )
+        created = self.engine.create_proposal(
+            CreateProposalCall.from_value(
+                {
+                    "kind": "create-proposal",
+                    "base_snapshot": self.snapshot.as_contract(),
+                    "mutations": [
+                        {
+                            "op": "replace",
+                            "path": "workflows/commit.md",
+                            "value": commit_workflow,
+                        }
+                    ],
+                    "semantic_proposals": [
+                        {
+                            "policy": policy.id,
+                            "accepted_semantic_revision": policy.semantic_revision,
+                            "proposed_semantic_revision": policy.semantic_revision + 1,
+                            "intent": "Exercise one real A1c semantic review path.",
+                            "structural_digest": policy.structural_digest,
+                        }
+                    ],
+                }
+            )
+        )
+        self.assertIsInstance(created, CreateProposalResult)
+        facade = AgentToolFacade(self.engine, _contracts(REPO_ROOT))
+        pending = PendingResult.from_value(
+            facade.analyze_proposal({"revision": created.revision.as_contract()})
+        )
+
+        incomplete_call = {
+            "kind": "review-proposal",
+            "analysis": pending.handle.as_contract(),
+            "decisions": _review_decisions(),
+        }
+        incomplete = facade.review_proposal(incomplete_call)
+        self.assertEqual(incomplete["code"], "AUTHORING.ANALYSIS_INCOMPLETE")
+
+        pending_state = self.engine._load_analysis(pending.handle)
+        requires_change = pending_state.with_decisions(
+            dispositions=(
+                {
+                    "obligation_id": "obligation:requires-change",
+                    "result": "requires-change",
+                },
+            )
+        )
+        self.engine._snapshots.publish_aggregate(requires_change.aggregate(()))
+        blocked_call = {
+            **incomplete_call,
+            "analysis": self.engine._analysis_handle(requires_change.analysis_id),
+        }
+        with mock.patch.object(
+            self.engine,
+            "_evaluate",
+            return_value=mock.Mock(complete=True),
+        ):
+            blocked = facade.review_proposal(blocked_call)
+        self.assertEqual(blocked["code"], "AUTHORING.REVIEW_NOT_READY")
+
+        coverage_pending = PendingResult.from_value(
+            facade.resolve(
+                self.disposition_submission(
+                    pending, "proposal-review-evidence"
+                ).as_contract()
+            )
+        )
+        self.assertEqual(
+            {
+                item.request_kind
+                for item in coverage_pending.next_operations
+                if item.operation == "resolve"
+            },
+            {"coverage-attestation"},
+        )
+        complete = CompleteResult.from_value(
+            facade.resolve(
+                self.coverage_submission(
+                    coverage_pending, "proposal-audit-evidence"
+                ).as_contract()
+            )
+        )
+        call = {
+            **incomplete_call,
+            "analysis": complete.handle.as_contract(),
+        }
+        with (
+            mock.patch.object(
+                self.engine,
+                "_evaluate",
+                return_value=mock.Mock(complete=True),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                return_value=mock.Mock(oid="b" * 40),
+            ),
+        ):
+            stale_target = facade.review_proposal(call)
+        self.assertEqual(stale_target["code"], "AUTHORING.TARGET_STALE")
+
+        reviewed = ReviewProposalResult.from_value(facade.review_proposal(call))
+        with mock.patch.object(
+            self.engine,
+            "_evaluate",
+            return_value=mock.Mock(complete=True),
+        ):
+            repeated = ReviewProposalResult.from_value(
+                facade.review_proposal(
+                    {**call, "prior_readiness": reviewed.readiness.as_contract()}
+                )
+            )
+
+        self.assertEqual(reviewed.revision, created.revision)
+        self.assertEqual(repeated.readiness, reviewed.readiness)
+        readiness = self.engine._authoring.read_readiness(reviewed.readiness.id)
+        self.assertEqual(readiness.analysis_id, complete.handle.id)
+        self.assertEqual(readiness.revision_id, created.revision.id)
 
     def test_equal_transition_is_idempotent_and_different_evidence_branches(self) -> None:
         parent = self.prepare()
@@ -441,6 +591,30 @@ finally:
                     "rationale": "The exact selected consumer was reviewed.",
                     "evidence": [evidence.as_contract()],
                     "fingerprint": obligation.fingerprint.as_contract(),
+                },
+            }
+        )
+
+    @staticmethod
+    def coverage_submission(result, evidence_id: str) -> ResolveCall:
+        operation = next(
+            item
+            for item in result.next_operations
+            if item.request_kind == "coverage-attestation"
+        )
+        return ResolveCall.from_value(
+            {
+                "analysis": result.handle.as_contract(),
+                "submission": {
+                    "kind": "coverage-attestation",
+                    "claim": {
+                        "requirement": operation.work.as_contract(),
+                        "conclusion": "complete",
+                        "evidence": [_reference(evidence_id).as_contract()],
+                        "explicit_exclusions": [],
+                        "rationale": "The exact changed policy coverage was reviewed.",
+                        "auditor_provenance": "standards.review.audit:test-authorized",
+                    },
                 },
             }
         )

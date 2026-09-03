@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v16",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v17",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -42,6 +42,12 @@
     },
     {
       "$ref": "#/$defs/AnalyzeProposalCall"
+    },
+    {
+      "$ref": "#/$defs/ReviewProposalCall"
+    },
+    {
+      "$ref": "#/$defs/ReviewProposalResult"
     },
     {
       "$ref": "#/$defs/DeleteSnapshotCall"
@@ -1513,6 +1519,10 @@
       "type": "string",
       "pattern": "^proposal-revision:sha256:[0-9a-f]{64}$"
     },
+    "ReadinessId": {
+      "type": "string",
+      "pattern": "^readiness:sha256:[0-9a-f]{64}$"
+    },
     "ChildId": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
@@ -1594,6 +1604,26 @@
         },
         "id": {
           "$ref": "#/$defs/ProposalRevisionId"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReadinessHandle": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "properties": {
+        "kind": {
+          "const": "readiness-handle"
+        },
+        "id": {
+          "$ref": "#/$defs/ReadinessId"
         },
         "schema_version": {
           "const": 1
@@ -2238,6 +2268,92 @@
       "properties": {
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReviewDecision": {
+      "type": "object",
+      "required": [
+        "owner",
+        "decision",
+        "rationale",
+        "evidence"
+      ],
+      "properties": {
+        "owner": {
+          "enum": [
+            "consumer",
+            "impact",
+            "audit"
+          ]
+        },
+        "decision": {
+          "const": "accept"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReviewProposalCall": {
+      "type": "object",
+      "required": [
+        "kind",
+        "analysis",
+        "decisions"
+      ],
+      "properties": {
+        "kind": {
+          "const": "review-proposal"
+        },
+        "analysis": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "decisions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ReviewDecision"
+          }
+        },
+        "prior_readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReviewProposalResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "readiness",
+        "revision",
+        "status"
+      ],
+      "properties": {
+        "kind": {
+          "const": "review-proposal-result"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "status": {
+          "const": "ready"
         }
       },
       "additionalProperties": false

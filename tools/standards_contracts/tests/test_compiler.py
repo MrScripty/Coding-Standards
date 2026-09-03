@@ -33,6 +33,7 @@ class ContractCompilerTest(unittest.TestCase):
                 "revise_proposal",
                 "query_proposal",
                 "analyze_proposal",
+                "review_proposal",
             ),
         )
         self.assertEqual(
@@ -100,7 +101,6 @@ class ContractCompilerTest(unittest.TestCase):
             ("not", {"type": "null"}),
             ("if", {"type": "string"}),
             ("contains", {"type": "string"}),
-            ("maxItems", 2),
             ("maxLength", 2),
             ("exclusiveMinimum", 0),
             ("examples", ["example"]),
@@ -211,7 +211,7 @@ class ContractCompilerTest(unittest.TestCase):
         interface["operations"].clear()
 
         self.assertEqual(compiled.schema["title"], expected_schema["title"])
-        self.assertEqual(len(compiled.interface.operations), 13)
+        self.assertEqual(len(compiled.interface.operations), 14)
 
 
 if __name__ == "__main__":

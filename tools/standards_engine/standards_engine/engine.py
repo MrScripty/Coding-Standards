@@ -123,6 +123,8 @@ from ._generated_contract import (
     QueryProposalCall,
     QueryProposalResult,
     QueryResult,
+    ReviewProposalCall,
+    ReviewProposalResult,
     ProposalReadResult,
     ProposalRelatedResult,
     ProposalRevisionHandle,
@@ -147,11 +149,14 @@ from ._generated_contract import (
 from .authoring import (
     AuthoringError,
     AuthoringModule,
+    CANONICAL_TARGET_BRANCH,
     FindProposalsRequest,
     Mutation,
     ProposalId,
     ProposalRevision,
+    REVIEW_CAPABILITIES,
     ProposalSummary as AuthoringProposalSummary,
+    review_decision_subject,
 )
 
 
@@ -612,6 +617,85 @@ class StandardsEngine:
             return self._evaluate_publish_project(
                 state,
                 self._evaluate_compiled(state, accepted, proposed, revision),
+            )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
+    def review_proposal(
+        self, call: ReviewProposalCall
+    ) -> ReviewProposalResult | RejectedResult:
+        try:
+            state = self._load_analysis(call.analysis)
+            evaluation = self._evaluate(state)
+            if not evaluation.complete:
+                return self._reject(
+                    "AUTHORING.ANALYSIS_INCOMPLETE",
+                    "unavailable",
+                    "Proposal review requires a complete analysis.",
+                )
+            if any(
+                self._plain(item).get("result") == "requires-change"
+                for item in state.dispositions
+            ):
+                return self._reject(
+                    "AUTHORING.REVIEW_NOT_READY",
+                    "unavailable",
+                    "The completed analysis records a required proposal change.",
+                )
+            proposed = state.proposed_material
+            if not isinstance(proposed, ProjectedRevisionMaterialRef):
+                return self._reject(
+                    "AUTHORING.ANALYSIS_NOT_PROPOSAL",
+                    "invalid",
+                    "Proposal review requires analysis of an immutable proposal revision.",
+                )
+            revision = self._authoring.read_revision(proposed.revision_id)
+            target = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+            base = self._snapshots.snapshot(revision.base_snapshot)
+            if target.oid != base.source_revision:
+                return self._reject(
+                    "AUTHORING.TARGET_STALE",
+                    "unavailable",
+                    "The configured main branch no longer matches the proposal base.",
+                )
+            decisions = tuple(item.as_contract() for item in call.decisions)
+            authorizations = tuple(
+                construct_authorization_record(
+                    self._execution_context,
+                    AuthorizationRequest(
+                        "review-proposal",
+                        "proposal-review-decision",
+                        review_decision_subject(
+                            state.analysis_id,
+                            revision.revision_id,
+                            decision,
+                        ),
+                        REVIEW_CAPABILITIES[str(decision["owner"])],
+                        self._evidence(call.decisions[index].evidence),
+                    ),
+                ).as_contract()
+                for index, decision in enumerate(decisions)
+            )
+            prior = (
+                None
+                if isinstance(call.prior_readiness, MissingValue)
+                else call.prior_readiness.id
+            )
+            readiness = self._authoring.review_proposal(
+                state.analysis_id,
+                revision.revision_id,
+                decisions,
+                authorizations,
+                target,
+                prior_readiness=prior,
+            )
+            return ReviewProposalResult.from_value(
+                {
+                    "kind": "review-proposal-result",
+                    "readiness": self._readiness_handle(readiness.readiness_id),
+                    "revision": self._proposal_revision_handle(revision.revision_id),
+                    "status": "ready",
+                }
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
@@ -2139,6 +2223,14 @@ class StandardsEngine:
         return {
             "kind": "proposal-revision-handle",
             "id": revision,
+            "schema_version": 1,
+        }
+
+    @staticmethod
+    def _readiness_handle(readiness: str) -> dict[str, object]:
+        return {
+            "kind": "readiness-handle",
+            "id": readiness,
             "schema_version": 1,
         }
 

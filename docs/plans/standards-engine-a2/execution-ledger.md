@@ -1123,3 +1123,58 @@
   boundary. Review/readiness, application, Git publication, recovery,
   resource ownership, and measurement remain absent; the next slice is exact
   admission and design reconciliation for `review_proposal`.
+
+## 2026-09-02 - Milestone 5 Proposal Review Readiness Accepted
+
+- Implemented additive
+  `review_proposal(analysis, decisions, prior_readiness?)` through the generated
+  facade and Engine. The caller supplies only one Analysis handle, three
+  explicit evidence-backed consumer/impact/audit acceptances, and optional
+  prior readiness. The Engine derives revision, proposal, configured
+  `refs/heads/main`, target object, verification contract, and authorization
+  subjects. Pending Analysis, snapshot-backed Analysis, a completed
+  `requires-change` disposition, stale target, stale proposal head, malformed
+  review, unavailable authorization, and mismatched prior readiness cannot
+  return success.
+- Added one immutable content-bound readiness aggregate. Its identity includes
+  the exact base snapshot, Analysis, proposal revision, canonical decisions,
+  authorization records, configured target ref and object, and the
+  Standards-Verifier-owned semantic-revision-1 `complete` checkpoint. The
+  existing Snapshot/SQLite owner checks the proposal root's exact current head
+  and publishes readiness in one transaction. Exact repetition is idempotent;
+  stale publication inserts no record. Store schema v2 and proposal-head state
+  are unchanged.
+- Added only the private supporting behavior required by that composition:
+  Repository Git resolves a validated exact local branch independently of
+  checked-out `HEAD`; Snapshot persistence conditionally publishes an ordinary
+  immutable aggregate under an existing root-head guard; Authoring validates
+  and reconstructs readiness. There is no readiness root/index, application,
+  Git write, candidate checkout, verification executor, recovery/attempt
+  state, cache, compatibility reader, resource capability, phase, measurement
+  mechanism, or Engine node in a standards graph.
+- Interface schema v17 adds the review call/result and readiness handle v1.
+  The operation manifest exposes one composite `standards.proposal.review`
+  capability, while the Engine independently authorizes each decision through
+  the existing consumer, impact, and audit capabilities. Analysis state v5 and
+  handle v6, request contract v4, result projection v5, proposal revision
+  handle v1, Authoring revision contract v1, and store schema v2 retain their
+  promises. Canonical schema, generated Python and agent-tool projections,
+  examples, identity fixtures, facade, renderer, and compiler closure agree.
+- Linux CPython 3.11 and 3.12 each pass the same focused persistence,
+  Repository Git, Authoring, generated-contract, rendering, identity, compiler,
+  and projection matrix plus the exact A1c-to-A2 review-composition case. That
+  case publicly analyzes one real semantic proposal, observes pending work,
+  resolves its consumer disposition and fresh audit attestation to a real A1c
+  `CompleteResult`, rejects stale target state, publishes readiness, and reuses
+  the exact prior readiness through the generated facade.
+  Focused coverage proves detached-HEAD-independent target selection, durable
+  reopen, content invalidation, prior-proof mismatch, exact authorization
+  binding, incomplete/required-change/stale-target rejection, and the atomic
+  proposal-head race. Ruff, projection freshness, plan structure, generated
+  evidence, and diff hygiene pass.
+- The complete repository checkpoint passes all 270 declarative suites and all
+  seven retained Bash checkers on both supported runtimes. Exact staged scope,
+  generated diff, sensitive-value review, and the conventional commit form the
+  final Commit-owned boundary. Application, Git publication, and recovery
+  remain absent; the next slice is current-state reconciliation and exact
+  admission for `apply_proposal`.

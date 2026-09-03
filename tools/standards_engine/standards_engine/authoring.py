@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 import uuid
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Literal
 
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
+    RepositoryRevision,
+)
 from tools.standards_identity.standards_identity import (
     IdentityArray,
     IdentityError,
@@ -26,8 +31,24 @@ from tools.standards_snapshots.standards_snapshots import (
 )
 
 AUTHORING_CONTRACT_VERSION = 1
+READINESS_CONTRACT_VERSION = 1
 PROPOSAL_KIND = "proposal"
 REVISION_KIND = "proposal-revision"
+READINESS_KIND = "proposal-readiness"
+CANONICAL_TARGET_BRANCH = "main"
+CANONICAL_TARGET_REF = "refs/heads/main"
+APPLICATION_VERIFICATION_CONTRACT = IdentityObject(
+    (
+        ("checkpoint", "complete"),
+        ("owner", "standards-verifier"),
+        ("semantic_revision", 1),
+    )
+)
+REVIEW_CAPABILITIES = {
+    "audit": "standards.review.audit",
+    "consumer": "standards.review.consumer",
+    "impact": "standards.review.impact",
+}
 FailureOutcome = Literal["invalid", "unavailable", "unsupported"]
 
 
@@ -216,6 +237,149 @@ class ProposalSummary:
             )
 
 
+@dataclass(frozen=True, slots=True, init=False)
+class ProposalReadiness:
+    base_snapshot: SnapshotId
+    analysis_id: str
+    revision_id: str
+    decisions: tuple[IdentityObject, ...]
+    authorization_records: tuple[IdentityObject, ...]
+    expected_target: RepositoryRevision
+
+    def __init__(
+        self,
+        base_snapshot: SnapshotId,
+        analysis_id: str,
+        revision_id: str,
+        decisions: Iterable[Mapping[str, object]],
+        authorization_records: Iterable[Mapping[str, object]],
+        expected_target: RepositoryRevision,
+    ) -> None:
+        if (
+            type(base_snapshot) is not SnapshotId
+            or not _analysis_id(analysis_id)
+            or not _revision_id(revision_id)
+            or type(expected_target) is not RepositoryRevision
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_READINESS",
+                "readiness requires exact base, analysis, revision, and target identities",
+            )
+        selected_decisions = tuple(
+            item
+            for _encoded, item in sorted(
+                {
+                    encode_identity_value(item): item
+                    for item in (_review_decision(value) for value in decisions)
+                }.items()
+            )
+        )
+        plain_decisions = {
+            str(item["owner"]): item
+            for item in map(_plain_identity, selected_decisions)
+            if type(item) is dict
+        }
+        if (
+            len(selected_decisions) != len(REVIEW_CAPABILITIES)
+            or set(plain_decisions) != set(REVIEW_CAPABILITIES)
+        ):
+            raise _invalid(
+                "AUTHORING.REVIEW_INCOMPLETE",
+                "consumer, impact, and audit decisions must each explicitly accept with rationale and evidence",
+            )
+        selected_authorizations = _readiness_records(
+            authorization_records,
+            "review authorization",
+        )
+        observed_owners: set[str] = set()
+        observed_authorization_ids: set[str] = set()
+        for item in map(_plain_identity, selected_authorizations):
+            if not _authorization_record(item):
+                raise _invalid(
+                    "AUTHORING.INVALID_REVIEW_AUTHORIZATION",
+                    "review authorization must satisfy the exact authorization record contract",
+                )
+            reference = item.get("reference") if type(item) is dict else None
+            capability = (
+                reference.get("capability") if type(reference) is dict else None
+            )
+            owner = next(
+                (
+                    selected_owner
+                    for selected_owner, selected_capability in REVIEW_CAPABILITIES.items()
+                    if selected_capability == capability
+                ),
+                None,
+            )
+            decision = plain_decisions.get(owner) if owner is not None else None
+            subject_id = (
+                review_decision_subject(analysis_id, revision_id, decision)
+                if decision is not None
+                else None
+            )
+            if (
+                type(item) is not dict
+                or item.get("action") != "review-proposal"
+                or item.get("subject_kind") != "proposal-review-decision"
+                or item.get("subject_id") != subject_id
+                or capability not in REVIEW_CAPABILITIES.values()
+            ):
+                raise _invalid(
+                    "AUTHORING.INVALID_REVIEW_AUTHORIZATION",
+                    "review authorization must bind the exact analysis, revision, decision, and capability",
+                )
+            if owner is not None:
+                observed_owners.add(owner)
+            if type(reference) is dict:
+                observed_authorization_ids.add(str(reference["id"]))
+        if (
+            len(selected_authorizations) != len(REVIEW_CAPABILITIES)
+            or observed_owners != set(REVIEW_CAPABILITIES)
+            or len(observed_authorization_ids) != len(REVIEW_CAPABILITIES)
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_REVIEW_AUTHORIZATION",
+                "readiness requires consumer, impact, and audit authorization",
+            )
+        object.__setattr__(self, "base_snapshot", base_snapshot)
+        object.__setattr__(self, "analysis_id", analysis_id)
+        object.__setattr__(self, "revision_id", revision_id)
+        object.__setattr__(self, "decisions", selected_decisions)
+        object.__setattr__(self, "authorization_records", selected_authorizations)
+        object.__setattr__(self, "expected_target", expected_target)
+
+    @property
+    def readiness_id(self) -> str:
+        return hash_identity(
+            "coding-standards:proposal-readiness:v1",
+            "readiness",
+            self.identity_material(),
+        )
+
+    def identity_material(self) -> IdentityObject:
+        return IdentityObject(
+            (
+                ("analysis", self.analysis_id),
+                ("authorization_records", IdentityArray(self.authorization_records)),
+                ("base_snapshot", str(self.base_snapshot)),
+                ("contract_version", READINESS_CONTRACT_VERSION),
+                ("decisions", IdentityArray(self.decisions)),
+                ("expected_target", self.expected_target.oid),
+                ("revision", self.revision_id),
+                ("target_ref", CANONICAL_TARGET_REF),
+                ("verification_contract", APPLICATION_VERIFICATION_CONTRACT),
+            )
+        )
+
+    def aggregate(self) -> AggregateRecord:
+        return AggregateRecord(
+            self.readiness_id,
+            READINESS_KIND,
+            encode_identity_value(self.identity_material()),
+            (self.base_snapshot,),
+        )
+
+
 @dataclass(frozen=True, slots=True)
 class FindProposalsRequest:
     after: ProposalId | None = None
@@ -333,12 +497,124 @@ class AuthoringModule:
             )
         return ProposalSummary(expected.proposal, revision.revision_id), revision
 
+    def review_proposal(
+        self,
+        analysis_id: str,
+        revision_id: str,
+        decisions: Iterable[Mapping[str, object]],
+        authorization_records: Iterable[Mapping[str, object]],
+        expected_target: RepositoryRevision,
+        *,
+        prior_readiness: str | None = None,
+    ) -> ProposalReadiness:
+        revision = self.read_revision(revision_id)
+        readiness = ProposalReadiness(
+            revision.base_snapshot,
+            analysis_id,
+            revision.revision_id,
+            decisions,
+            authorization_records,
+            expected_target,
+        )
+        if prior_readiness is not None:
+            prior = self.read_readiness(prior_readiness)
+            if prior != readiness:
+                raise _invalid(
+                    "AUTHORING.READINESS_MISMATCH",
+                    "prior readiness does not match the current review",
+                )
+        published = self._snapshots.publish_aggregate_if_root_head(
+            str(revision.proposal),
+            revision.revision_id,
+            readiness.aggregate(),
+        )
+        if published == "stale":
+            raise _invalid(
+                "AUTHORING.REVISION_STALE",
+                "analysis revision is no longer the current proposal head",
+            )
+        return readiness
+
+    def read_readiness(self, readiness_id: str) -> ProposalReadiness:
+        if not _readiness_id(readiness_id):
+            raise _invalid(
+                "AUTHORING.INVALID_READINESS_ID",
+                "readiness ID has an invalid domain or digest",
+            )
+        readiness = self._readiness_from_record(
+            self._snapshots.load_aggregate(readiness_id)
+        )
+        revision = self.read_revision(readiness.revision_id)
+        if revision.base_snapshot != readiness.base_snapshot:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_READINESS",
+                "stored readiness and revision base snapshots differ",
+            )
+        return readiness
+
     def _summary_from_root(self, root: AggregateRoot) -> ProposalSummary:
         revision = self._revision_from_record(
             self._snapshots.load_aggregate(root.head_id)
         )
         self._validate_root_revision(root, revision)
         return ProposalSummary(revision.proposal, revision.revision_id)
+
+    @staticmethod
+    def _readiness_from_record(record: AggregateRecord) -> ProposalReadiness:
+        try:
+            material = json.loads(record.payload)
+            if (
+                type(material) is not dict
+                or set(material)
+                != {
+                    "analysis",
+                    "authorization_records",
+                    "base_snapshot",
+                    "contract_version",
+                    "decisions",
+                    "expected_target",
+                    "revision",
+                    "target_ref",
+                    "verification_contract",
+                }
+                or material["contract_version"] != READINESS_CONTRACT_VERSION
+                or material["target_ref"] != CANONICAL_TARGET_REF
+                or material["verification_contract"]
+                != _plain_identity(APPLICATION_VERIFICATION_CONTRACT)
+                or type(material["decisions"]) is not list
+                or type(material["authorization_records"]) is not list
+                or encode_identity_value(_identity_value(material)) != record.payload
+            ):
+                raise _invalid(
+                    "AUTHORING.INVALID_STORED_READINESS",
+                    "stored readiness material is not canonical",
+                )
+            readiness = ProposalReadiness(
+                SnapshotId(material["base_snapshot"]),
+                material["analysis"],
+                material["revision"],
+                material["decisions"],
+                material["authorization_records"],
+                RepositoryRevision(material["expected_target"]),
+            )
+        except (
+            AuthoringError,
+            GitRepositoryError,
+            IdentityError,
+            SnapshotError,
+            json.JSONDecodeError,
+            UnicodeError,
+        ) as error:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_READINESS",
+                "stored readiness cannot be decoded",
+            ) from error
+        if record.kind != READINESS_KIND or readiness.aggregate() != record:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_READINESS",
+                "stored readiness authority disagrees with its identity",
+            )
+        return readiness
 
     @staticmethod
     def _revision_from_record(record: AggregateRecord) -> ProposalRevision:
@@ -457,6 +733,175 @@ def _identity_record(value: Mapping[str, object]) -> IdentityObject:
     return selected
 
 
+def _plain_identity(value: IdentityValue) -> object:
+    if isinstance(value, IdentityObject):
+        return {key: _plain_identity(item) for key, item in value.members}
+    if isinstance(value, IdentityArray):
+        return [_plain_identity(item) for item in value.values]
+    return value
+
+
+def _readiness_records(
+    values: Iterable[Mapping[str, object]],
+    label: str,
+) -> tuple[IdentityObject, ...]:
+    try:
+        selected = tuple(_identity_record(item) for item in values)
+    except (AuthoringError, TypeError) as error:
+        raise _invalid(
+            "AUTHORING.INVALID_READINESS",
+            f"{label} must contain canonical identity values",
+        ) from error
+    return tuple(
+        item
+        for _encoded, item in sorted(
+            {encode_identity_value(item): item for item in selected}.items()
+        )
+    )
+
+
+def _review_decision(value: Mapping[str, object]) -> IdentityObject:
+    try:
+        selected = _identity_record(value)
+        plain = _plain_identity(selected)
+    except (AuthoringError, TypeError) as error:
+        raise _invalid(
+            "AUTHORING.INVALID_REVIEW_DECISION",
+            "review decision must contain canonical identity values",
+        ) from error
+    evidence = plain.get("evidence") if type(plain) is dict else None
+    if (
+        type(plain) is not dict
+        or set(plain) != {"owner", "decision", "rationale", "evidence"}
+        or plain["owner"] not in REVIEW_CAPABILITIES
+        or plain["decision"] != "accept"
+        or not _nonempty_scalar_string(plain["rationale"])
+        or type(evidence) is not list
+        or not evidence
+        or any(not _evidence_reference(item) for item in evidence)
+        or len({encode_identity_value(_identity_value(item)) for item in evidence})
+        != len(evidence)
+    ):
+        raise _invalid(
+            "AUTHORING.INVALID_REVIEW_DECISION",
+            "review decision requires an exact owner, acceptance, rationale, and unique evidence",
+        )
+    normalized = dict(plain)
+    normalized["evidence"] = sorted(
+        evidence,
+        key=lambda item: encode_identity_value(_identity_value(item)),
+    )
+    return _identity_record(normalized)
+
+
+def review_decision_subject(
+    analysis_id: str,
+    revision_id: str,
+    decision: Mapping[str, object],
+) -> str:
+    if not _analysis_id(analysis_id) or not _revision_id(revision_id):
+        raise _invalid(
+            "AUTHORING.INVALID_REVIEW_DECISION",
+            "review decision subject requires exact analysis and revision identities",
+        )
+    return hash_identity(
+        "coding-standards:proposal-review-decision:v1",
+        "proposal-review-decision",
+        IdentityObject(
+            (
+                ("analysis", analysis_id),
+                ("decision", _review_decision(decision)),
+                ("revision", revision_id),
+            )
+        ),
+    )
+
+
+def _evidence_reference(value: object) -> bool:
+    if type(value) is not dict or set(value) != {
+        "id",
+        "digest",
+        "provider_contract",
+        "provider_contract_version",
+    }:
+        return False
+    return (
+        _canonical_id(value["id"])
+        and _digest(value["digest"])
+        and _canonical_id(value["provider_contract"])
+        and _nonempty_scalar_string(value["provider_contract_version"])
+    )
+
+
+def _authorization_record(value: object) -> bool:
+    if type(value) is not dict or set(value) != {
+        "reference",
+        "issuer_semantic_revision",
+        "principal",
+        "action",
+        "subject_kind",
+        "subject_id",
+        "authorization_evidence",
+        "revocation_authority",
+        "revocation_authority_semantic_revision",
+        "revocation_evidence",
+    }:
+        return False
+    reference = value["reference"]
+    if (
+        type(reference) is not dict
+        or set(reference) != {"id", "issuer", "capability", "authority_digest"}
+        or not _digest_id(reference["id"], "authorization:sha256:")
+        or not _canonical_id(reference["issuer"])
+        or not _canonical_id(reference["capability"])
+        or not _digest(reference["authority_digest"])
+        or type(value["issuer_semantic_revision"]) is not int
+        or value["issuer_semantic_revision"] < 1
+        or not _canonical_id(value["principal"])
+        or not _canonical_id(value["action"])
+        or not _canonical_id(value["subject_kind"])
+        or not _nonempty_scalar_string(value["subject_id"])
+        or not _canonical_id(value["revocation_authority"])
+        or type(value["revocation_authority_semantic_revision"]) is not int
+        or value["revocation_authority_semantic_revision"] < 1
+    ):
+        return False
+    for key in ("authorization_evidence", "revocation_evidence"):
+        evidence = value[key]
+        if (
+            type(evidence) is not list
+            or not evidence
+            or any(not _evidence_reference(item) for item in evidence)
+            or len(
+                {
+                    encode_identity_value(_identity_value(item))
+                    for item in evidence
+                }
+            )
+            != len(evidence)
+        ):
+            return False
+    return True
+
+
+def _canonical_id(value: object) -> bool:
+    return type(value) is str and re.fullmatch(
+        r"[A-Za-z0-9][A-Za-z0-9._:/-]*", value
+    ) is not None
+
+
+def _digest(value: object) -> bool:
+    return type(value) is str and re.fullmatch(r"sha256:[0-9a-f]{64}", value) is not None
+
+
+def _nonempty_scalar_string(value: object) -> bool:
+    return (
+        type(value) is str
+        and bool(value)
+        and not any(0xD800 <= ord(character) <= 0xDFFF for character in value)
+    )
+
+
 def _stored_mutation(value: object) -> Mutation:
     if (
         type(value) is not dict
@@ -481,8 +926,28 @@ def _revision_id(value: object) -> bool:
     )
 
 
+def _analysis_id(value: object) -> bool:
+    return _digest_id(value, "analysis:sha256:")
+
+
+def _readiness_id(value: object) -> bool:
+    return _digest_id(value, "readiness:sha256:")
+
+
+def _digest_id(value: object, prefix: str) -> bool:
+    if type(value) is not str or not value.startswith(prefix):
+        return False
+    digest = value.removeprefix(prefix)
+    return len(digest) == 64 and all(
+        character in "0123456789abcdef" for character in digest
+    )
+
+
 __all__ = (
     "AUTHORING_CONTRACT_VERSION",
+    "APPLICATION_VERIFICATION_CONTRACT",
+    "CANONICAL_TARGET_BRANCH",
+    "CANONICAL_TARGET_REF",
     "AuthoringError",
     "AuthoringFailure",
     "AuthoringModule",
@@ -490,6 +955,11 @@ __all__ = (
     "Mutation",
     "ProposalId",
     "ProposalPage",
+    "ProposalReadiness",
     "ProposalRevision",
     "ProposalSummary",
+    "READINESS_CONTRACT_VERSION",
+    "READINESS_KIND",
+    "REVIEW_CAPABILITIES",
+    "review_decision_subject",
 )

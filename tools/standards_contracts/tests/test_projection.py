@@ -245,6 +245,20 @@ class ContractProjectionTest(unittest.TestCase):
         )
 
         schema = copy.deepcopy(canonical_schema)
+        schema["$defs"]["AllExpression"]["properties"]["expressions"][
+            "maxItems"
+        ] = 1
+        changed_compiled = compile_contracts(schema, interface)
+        two_expressions = {
+            "operator": "all",
+            "expressions": [{"operator": "always"}, {"operator": "always"}],
+        }
+        self.assertTrue(self.accepts(baseline, "AllExpression", two_expressions))
+        self.assertFalse(
+            self.accepts(changed_compiled, "AllExpression", two_expressions)
+        )
+
+        schema = copy.deepcopy(canonical_schema)
         schema["$defs"]["AllExpression"]["properties"]["expressions"]["minItems"] = 2
         changed_compiled = compile_contracts(schema, interface)
         self.assertFalse(
@@ -309,10 +323,11 @@ class ContractProjectionTest(unittest.TestCase):
                 "revise_proposal",
                 "query_proposal",
                 "analyze_proposal",
+                "review_proposal",
             ),
         )
         self.assertEqual(set(tools["$defs"]), set(schema["$defs"]))
-        self.assertEqual(tools["interface_schema_version"], 16)
+        self.assertEqual(tools["interface_schema_version"], 17)
         self.assertEqual(tools["request_contract_version"], 4)
         self.assertEqual(tools["result_projection_version"], 5)
         json.dumps(tools)

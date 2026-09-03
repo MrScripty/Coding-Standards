@@ -9,7 +9,7 @@ inspected.
 The public operations are snapshot-bound `query`, immutable-state `prepare` and
 `resolve`, handle-based `inspect`, and the admitted A2 authoring operations
 `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, and
-`analyze_proposal`.
+`analyze_proposal`, followed by `review_proposal`.
 Proposal creation
 stores exact non-Git replacement material under an immutable revision and a
 durable proposal head; revision advances that head only from its exact expected
@@ -24,7 +24,14 @@ lifecycle when opened from a repository. `analyze_proposal` derives normalized
 policy-unit changes from one exact revision and its base, then creates the same
 immutable A1c Analysis state used by `prepare` and `resolve`. Exact revision
 identity participates in cold replay without treating projected material as a
-snapshot. Routing evaluates the registered
+snapshot. `review_proposal` accepts only a complete current revision analysis
+with no `requires-change` disposition and three explicit evidence-backed
+consumer, impact, and audit acceptances. The Engine derives the proposal head,
+configured `refs/heads/main`, and Standards Verifier `complete` checkpoint,
+then publishes one immutable content-bound readiness aggregate under an atomic
+proposal-head guard. The readiness handle is an input for later application;
+it does not inspect, apply, write Git, or create a second review lifecycle.
+Routing evaluates the registered
 Router projection and derives dependency closure from the neutral standards graph.
 Read-only change analysis compares exact accepted and proposed authority,
 derives fact requirements and impact obligations, validates evidence-backed

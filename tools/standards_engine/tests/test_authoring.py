@@ -17,7 +17,10 @@ from tools.standards_engine.standards_engine.authoring import (
     FindProposalsRequest,
     Mutation,
     ProposalId,
+    ProposalReadiness,
+    review_decision_subject,
 )
+from tools.repository_git.repository_git import RepositoryRevision
 from tools.standards_engine.standards_engine.tools import _contracts
 from tools.standards_snapshots.standards_snapshots import (
     AggregateRecord,
@@ -46,7 +49,252 @@ def _snapshot_handle(snapshot: object) -> dict[str, object]:
     return {"kind": "snapshot-handle", "id": str(snapshot), "schema_version": 5}
 
 
+def _review_decisions() -> tuple[dict[str, object], ...]:
+    return tuple(
+        {
+            "owner": owner,
+            "decision": "accept",
+            "rationale": f"The {owner} review obligations are satisfied.",
+            "evidence": [
+                {
+                    "id": f"evidence.review.{owner}",
+                    "digest": "sha256:" + character * 64,
+                    "provider_contract": "evidence.review",
+                    "provider_contract_version": "1",
+                }
+            ],
+        }
+        for owner, character in zip(
+            ("consumer", "impact", "audit"),
+            ("a", "b", "c"),
+            strict=True,
+        )
+    )
+
+
+def _review_authorizations(
+    analysis: str,
+    revision: str,
+    decisions: tuple[dict[str, object], ...],
+) -> tuple[dict[str, object], ...]:
+    capabilities = {
+        "consumer": "standards.review.consumer",
+        "impact": "standards.review.impact",
+        "audit": "standards.review.audit",
+    }
+    return tuple(
+        {
+            "reference": {
+                "id": f"authorization:sha256:{index:064x}",
+                "issuer": "issuer.fixture",
+                "capability": capability,
+                "authority_digest": "sha256:" + "a" * 64,
+            },
+            "issuer_semantic_revision": 1,
+            "principal": "principal.fixture",
+            "action": "review-proposal",
+            "subject_kind": "proposal-review-decision",
+            "subject_id": review_decision_subject(analysis, revision, decision),
+            "authorization_evidence": [
+                {
+                    "id": "evidence.authorization",
+                    "digest": "sha256:" + "d" * 64,
+                    "provider_contract": "authorization-grant.v1",
+                    "provider_contract_version": "1",
+                }
+            ],
+            "revocation_authority": "revocation.fixture",
+            "revocation_authority_semantic_revision": 1,
+            "revocation_evidence": [
+                {
+                    "id": "evidence.revocation",
+                    "digest": "sha256:" + "e" * 64,
+                    "provider_contract": "authorization-revocation.v1",
+                    "provider_contract_version": "1",
+                }
+            ],
+        }
+        for index, decision in enumerate(decisions, 1)
+        for capability in (capabilities[str(decision["owner"])],)
+    )
+
+
 class AuthoringTests(unittest.TestCase):
+    def test_readiness_is_content_bound_durable_and_current_head_guarded(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            database = Path(temporary) / "standards.sqlite3"
+            snapshots = SnapshotModule.open(database)
+            base = snapshots.create_snapshot(_capture()).snapshot
+            authoring = AuthoringModule(snapshots)
+            _summary, revision = authoring.create_proposal(
+                base,
+                (Mutation(SnapshotPath.parse("CORE-STANDARDS.md"), "# Ready\n"),),
+                (),
+            )
+            analysis = "analysis:sha256:" + "a" * 64
+            target = RepositoryRevision("b" * 40)
+            decisions = _review_decisions()
+            authorizations = _review_authorizations(
+                analysis,
+                revision.revision_id,
+                decisions,
+            )
+            readiness = authoring.review_proposal(
+                analysis,
+                revision.revision_id,
+                decisions,
+                authorizations,
+                target,
+            )
+            repeated = authoring.review_proposal(
+                analysis,
+                revision.revision_id,
+                decisions,
+                authorizations,
+                target,
+                prior_readiness=readiness.readiness_id,
+            )
+            changed_decisions = tuple(
+                {
+                    **decision,
+                    "rationale": (
+                        "The audit was independently re-evaluated."
+                        if decision["owner"] == "audit"
+                        else decision["rationale"]
+                    ),
+                }
+                for decision in decisions
+            )
+            before_mismatch = snapshots._store.counts()
+            with self.assertRaises(AuthoringError) as mismatch:
+                authoring.review_proposal(
+                    analysis,
+                    revision.revision_id,
+                    changed_decisions,
+                    _review_authorizations(
+                        analysis,
+                        revision.revision_id,
+                        changed_decisions,
+                    ),
+                    target,
+                    prior_readiness=readiness.readiness_id,
+                )
+
+            self.assertEqual(repeated, readiness)
+            expanded_decisions = tuple(
+                {
+                    **decision,
+                    "evidence": [
+                        *decision["evidence"],
+                        {
+                            "id": f"evidence.review.{decision['owner']}.second",
+                            "digest": "sha256:" + "f" * 64,
+                            "provider_contract": "evidence.review",
+                            "provider_contract_version": "1",
+                        },
+                    ],
+                }
+                for decision in decisions
+            )
+            reordered_decisions = tuple(
+                {**decision, "evidence": list(reversed(decision["evidence"]))}
+                for decision in expanded_decisions
+            )
+            expanded = ProposalReadiness(
+                base,
+                analysis,
+                revision.revision_id,
+                expanded_decisions,
+                _review_authorizations(
+                    analysis,
+                    revision.revision_id,
+                    expanded_decisions,
+                ),
+                target,
+            )
+            reordered = ProposalReadiness(
+                base,
+                analysis,
+                revision.revision_id,
+                reordered_decisions,
+                _review_authorizations(
+                    analysis,
+                    revision.revision_id,
+                    reordered_decisions,
+                ),
+                target,
+            )
+            self.assertEqual(reordered, expanded)
+            self.assertEqual(
+                mismatch.exception.failure.code,
+                "AUTHORING.READINESS_MISMATCH",
+            )
+            self.assertEqual(snapshots._store.counts(), before_mismatch)
+            self.assertEqual(readiness.aggregate().snapshots, (base,))
+            snapshots.close()
+            with SnapshotModule.open(database) as reopened:
+                reconstructed = AuthoringModule(reopened).read_readiness(
+                    readiness.readiness_id
+                )
+                self.assertEqual(reconstructed, readiness)
+
+                current = AuthoringModule(reopened)
+                current.revise_proposal(
+                    revision.revision_id,
+                    (Mutation(SnapshotPath.parse("CORE-STANDARDS.md"), "# Later\n"),),
+                    (),
+                )
+                before = reopened._store.counts()
+                with self.assertRaises(AuthoringError) as stale:
+                    current.review_proposal(
+                        "analysis:sha256:" + "c" * 64,
+                        revision.revision_id,
+                        decisions,
+                        _review_authorizations(
+                            "analysis:sha256:" + "c" * 64,
+                            revision.revision_id,
+                            decisions,
+                        ),
+                        target,
+                    )
+                self.assertEqual(stale.exception.failure.code, "AUTHORING.REVISION_STALE")
+                self.assertEqual(reopened._store.counts(), before)
+
+    def test_readiness_rejects_incomplete_decisions_without_persistence(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            snapshots = SnapshotModule.open(Path(temporary) / "standards.sqlite3")
+            base = snapshots.create_snapshot(_capture()).snapshot
+            authoring = AuthoringModule(snapshots)
+            _summary, revision = authoring.create_proposal(
+                base,
+                (Mutation(SnapshotPath.parse("CORE-STANDARDS.md"), "# Ready\n"),),
+                (),
+            )
+            before = snapshots._store.counts()
+            analysis = "analysis:sha256:" + "a" * 64
+            decisions = _review_decisions()
+
+            with self.assertRaises(AuthoringError) as incomplete:
+                ProposalReadiness(
+                    base,
+                    analysis,
+                    revision.revision_id,
+                    (decisions[2],),
+                    _review_authorizations(
+                        analysis,
+                        revision.revision_id,
+                        decisions,
+                    ),
+                    RepositoryRevision("b" * 40),
+                )
+
+            self.assertEqual(
+                incomplete.exception.failure.code,
+                "AUTHORING.REVIEW_INCOMPLETE",
+            )
+            self.assertEqual(snapshots._store.counts(), before)
+            snapshots.close()
+
     def test_create_and_find_are_durable_through_the_public_facade(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             repository = Path(temporary) / "repository"
