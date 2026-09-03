@@ -3,12 +3,12 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 0 validation for the next slice after accepted
-Milestone 2 proposal revision
+Milestone 3 proposal content query
 
-**Next slice:** admit the smallest coherent `query_proposal` projected-content
-read through the accepted Authoring and A1c material seams; do not implement
-analysis, review, application, Git publication, recovery, or phase-resource
-machinery until its exact evidence and write set are accepted
+**Next slice:** reconcile the accepted P2R2 projected-material identity and
+replay design with current production state, then admit the smallest coherent
+`analyze_proposal` write set; do not implement review, application, Git
+publication, recovery, or phase-resource machinery with it
 
 **Acceptance status:** `pending`
 
@@ -47,7 +47,7 @@ assumption the user reauthorized for projected-material identity validation on
 design-validation facts required to make the A2 objective implementable. It
 admits isolated, disposable prototypes and minimum viable design tests. The
 user's 2026-09-02 implementation directions authorize only the exact production
-slices recorded in Milestones 1 and 2; they do not authorize later A2 behavior
+slices recorded in Milestones 1 through 3; they do not authorize later A2 behavior
 or canonical-standards mutation.
 
 ## Objective Acceptance
@@ -103,7 +103,8 @@ or canonical-standards mutation.
 ### Out Of Scope
 
 - Production implementation outside the exact admitted Milestone 1
-  `create_proposal`/`find_proposals` and Milestone 2 `revise_proposal` slices
+  `create_proposal`/`find_proposals`, Milestone 2 `revise_proposal`, and
+  Milestone 3 `query_proposal` slices
   while later A2 design remains active.
 - Changing, weakening, reinterpreting, or silently superseding an explicit
   user-selected A1c design decision outside the exact projected-material
@@ -145,7 +146,7 @@ or canonical-standards mutation.
   public readback, write set, and verification are named here; it does not
   authorize canonical standards mutation.
 - Milestone 0 remains the discovery owner for later A2 behavior. Production
-  edits are available only for the exact Milestone 1 and Milestone 2 slices;
+  edits are available only for the exact Milestone 1 through Milestone 3 slices;
   every later slice still requires its applicable A1c preservation and
   design-validation records plus an exact write set before implementation.
 - A material design or procedure requires the smallest adequate pre-canonical
@@ -222,6 +223,7 @@ or canonical-standards mutation.
 | Apply the current Router and every selected standard to all A2 plans, procedures, prototypes, verification, and implementation. Commit each coherent verified repository outcome through exact staged review and a conventional commit; the plan records semantic slices and evidence but does not own Git topology or cadence. | Planning, Implementation, Verification, Documentation, and Commit owners | Current routed standards and Commit workflow | Uncommitted durable authority, unchecked procedure changes, plan-prescribed commit topology, or verification logs used as commit messages |
 | Admit the first production slice as the paired `create_proposal` and `find_proposals` operations. Use exact replacement mutations, A1c `SemanticProposal` values, proposal UUID lifecycle identity, content-bound immutable revision identity, one snapshot-dependent aggregate head, store-v1-to-v2 atomic migration, and public cold-reopen readback. Preserve the eight A1c operations unchanged and omit revision CAS, projected analysis, Git, recovery, measurement, and P5C forwarding machinery. | User, Product, Authoring, Snapshot, Contracts, Architecture, and Planning owners | Accepted P1/P2R2/P4R decisions, passing P5C evidence at `82a37ed0f7d40cbb105df1c25381a9073b330e49`, independent slice review, and [A2 ADR](../../decisions/standards-engine-a2.md) | The former blanket production blocker and P5 resource/measurement work treated as a prerequisite for resource-free proposal creation/discovery |
 | Admit the second production slice as one additive `revise_proposal(expected_revision, mutations, semantic_proposals)` operation. Keep immutable revision read internal to Authoring, derive proposal and base identity from the expected revision, publish one new content-bound revision and advance its proposal head in one Snapshot-owned compare-and-swap transaction, and reject a stale expected head as `invalid` without publishing the candidate. Retain store schema v2, handle schema v1, and the A1c request/result promises; omit public revision read, projected content, analysis, review, application, Git, recovery, retry, and compatibility machinery. | User, Product, Authoring, Snapshot, Contracts, Concurrency, Architecture, and Planning owners | Accepted P1 immutable-state/CAS evidence, accepted P4R explicit-operation and stale-outcome evidence, Milestone 1 production boundaries, Development Proportionality, and Milestone 2 dual-runtime focused and repository verification | Revision CAS and immutable read treated as blocked on another prototype despite accepted deciding evidence, or broadened into the later projected-content/query lifecycle |
+| Admit the third production slice as one additive `query_proposal(revision, request)` operation covering current route, read, and related requests. Resolve only the exact immutable revision over its retained base snapshot through one private replacement source, then reuse the existing A1c compiler and navigation implementation. Project revision-anchored results as noncanonical `projection` authority without snapshot child or inspect handles. Retain store schema v2, proposal revision handle v1, and A1c request/result promises; omit projected analysis, review, readiness, application, Git, recovery, cache, second semantic owners, and phase machinery. | User, Product, Authoring, Engine, Contracts, Architecture, and Planning owners | Accepted P2 replacement-overlay equivalence, accepted P4R explicit-operation evidence, accepted Milestones 1 and 2, Development Proportionality, and Milestone 3 dual-runtime focused and repository verification | Projected query treated as blocked on another prototype despite accepted evidence, or implemented through proposal-as-snapshot, duplicated navigation, false snapshot authority, or broadened later lifecycle machinery |
 
 ## Evidence And Oracle Plan
 
@@ -499,8 +501,8 @@ canonical `main`.
 - This plan names one exact first production implementation slice and write set
   before Milestone 0 becomes `Accepted`.
 
-Milestone 0 has admitted the exact Milestone 1 slice. Its remaining items stay
-active only as prerequisites for later A2 behavior.
+Milestone 0 has admitted the exact Milestone 1 through Milestone 3 slices. Its
+remaining items stay active only as prerequisites for later A2 behavior.
 
 **Status:** `Active`
 
@@ -596,10 +598,55 @@ sensitive-value, and Commit checks pass.
 
 **Status:** `Accepted`
 
+### Milestone 3: Proposal Content Query
+
+Deliver one read-only projected-content workflow through the same public facade
+and the accepted A1c semantic owners:
+
+- [x] Add `query_proposal(revision, request)` as one explicit generated
+  operation supporting the current route, read, and related request variants.
+  Accept only an exact immutable revision handle; do not resolve a mutable
+  proposal head or expose caller-selected material facts.
+- [x] Overlay the revision's exact replacement bytes on its retained frozen
+  base snapshot through one private source and compile that material with the
+  existing metadata, policy-impact, graph, Router, coverage, and
+  repository-coverage owners.
+- [x] Share route, read, related, and relationship calculations with A1c
+  `query`. Keep proposal results revision-anchored, mark projected standards
+  material as `projection`, and omit snapshot child and inspect handles.
+- [x] Allocate interface schema v15 while retaining request contract v4,
+  result projection v4, proposal revision handle v1, Authoring material
+  contract v1, store schema v2, and all existing A1c operation and result
+  behavior.
+- [x] Exercise all three requests, exact historical read after head advance,
+  invalid projected content, read-only store behavior, facade round-trip,
+  generated semantics/freshness, and unchanged A1c behavior on Linux CPython
+  3.11 and 3.12.
+
+The coherent write set is this plan, ledger, preservation report, A2 ADR, and
+Engine README; the canonical schema, interface manifest, examples, compiler
+operation closure, and generated projections; the private Engine material and
+authority-projection seams plus facade composition; focused navigation,
+generated-contract, compiler, and projection tests; and mechanically required
+repository projections. It includes no store/schema change, mutable proposal
+lookup, public generic material Interface, proposal child handle, analysis,
+approval, readiness, application, Git, recovery, retry, cache, compatibility,
+resource-owner, or measurement mechanism.
+
+**Acceptance gate:** Exact revision route, read, and related results pass
+through the facade; projected content and next operations remain revision-bound
+after head movement and never claim snapshot authority; invalid projected
+content returns typed failure; queries leave durable counts unchanged;
+canonical and generated contracts agree; both supported runtimes, affected
+tests, complete repository verification, staged scope, generated diff,
+sensitive-value review, and Commit checks pass.
+
+**Status:** `Accepted`
+
 ## Blockers
 
-No blocker applies to the exact Milestone 1 or Milestone 2 slice. The following
-constraints remain blockers for later A2 slices:
+No blocker applies to the exact Milestone 1 through Milestone 3 slices. The
+following constraints remain blockers for later A2 slices:
 
 - The combined P5 executable is superseded before measurement. Its final
   frozen source passed supporting focused checks but failed independent
@@ -613,10 +660,10 @@ constraints remain blockers for later A2 slices:
   but has no production consumer and therefore supplies evidence only. P5R and
   P5M remain unavailable and become relevant only if a later exact slice owns
   real process/resource lifetime or a material efficiency decision.
-- Projected analysis, public query/review/application operations, Git
+- Projected analysis, public review/application operations, Git
   publication/recovery, and their persisted and trust contracts remain
   unavailable until their own design evidence and exact write sets are
-  admitted. Milestones 1 and 2 do not imply that authority.
+  admitted. Milestones 1 through 3 do not imply that authority.
 
 ## Re-Plan Triggers
 

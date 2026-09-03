@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v14",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v15",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -33,6 +33,12 @@
     },
     {
       "$ref": "#/$defs/ReviseProposalResult"
+    },
+    {
+      "$ref": "#/$defs/QueryProposalCall"
+    },
+    {
+      "$ref": "#/$defs/QueryProposalResult"
     },
     {
       "$ref": "#/$defs/DeleteSnapshotCall"
@@ -2088,6 +2094,33 @@
       },
       "additionalProperties": false
     },
+    "QueryProposalNextOperation": {
+      "type": "object",
+      "required": [
+        "operation",
+        "request_kind",
+        "revision"
+      ],
+      "properties": {
+        "operation": {
+          "const": "query_proposal"
+        },
+        "request_kind": {
+          "enum": [
+            "route",
+            "read",
+            "related"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "additionalProperties": false
+    },
     "ResolveNextOperation": {
       "type": "object",
       "required": [
@@ -2168,6 +2201,22 @@
       },
       "additionalProperties": false
     },
+    "QueryProposalCall": {
+      "type": "object",
+      "required": [
+        "revision",
+        "request"
+      ],
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "request": {
+          "$ref": "#/$defs/QueryRequest"
+        }
+      },
+      "additionalProperties": false
+    },
     "PolicySummary": {
       "type": "object",
       "required": [
@@ -2209,6 +2258,80 @@
         "handle": {
           "$ref": "#/$defs/SnapshotChildHandle"
         },
+        "source": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "relation": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "direction": {
+          "enum": [
+            "incoming",
+            "outgoing"
+          ]
+        },
+        "traversal_eligible": {
+          "type": "boolean"
+        },
+        "applicability": {
+          "enum": [
+            "true",
+            "false",
+            "unknown",
+            "not-declared"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalPolicySummary": {
+      "type": "object",
+      "required": [
+        "id",
+        "authority",
+        "scope"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "authority": {
+          "enum": [
+            "normative",
+            "projection",
+            "contextual",
+            "evidence"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ReviewScope"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalRelationshipSummary": {
+      "type": "object",
+      "required": [
+        "source",
+        "target",
+        "relation",
+        "groups",
+        "direction",
+        "traversal_eligible",
+        "applicability"
+      ],
+      "properties": {
         "source": {
           "$ref": "#/$defs/CanonicalId"
         },
@@ -2421,6 +2544,157 @@
         },
         {
           "$ref": "#/$defs/RelatedResult"
+        }
+      ]
+    },
+    "ProposalRouteResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "revision",
+        "reading_plan",
+        "unresolved_questions",
+        "next_operations"
+      ],
+      "properties": {
+        "kind": {
+          "const": "proposal-route-result"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "reading_plan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReadingPlanEntry"
+          }
+        },
+        "unresolved_questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Question"
+          }
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QueryProposalNextOperation"
+          }
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalReadResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "revision",
+        "policy",
+        "content",
+        "requires",
+        "specializes",
+        "related",
+        "next_operations"
+      ],
+      "properties": {
+        "kind": {
+          "const": "proposal-read-result"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "policy": {
+          "$ref": "#/$defs/ProposalPolicySummary"
+        },
+        "content": {
+          "type": "string"
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "uniqueItems": true
+        },
+        "specializes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "uniqueItems": true
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProposalRelationshipSummary"
+          }
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QueryProposalNextOperation"
+          }
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProposalRelatedResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "revision",
+        "target",
+        "policy_unit_mapping",
+        "relationships",
+        "next_operations"
+      ],
+      "properties": {
+        "kind": {
+          "const": "proposal-related-result"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "policy_unit_mapping": {
+          "$ref": "#/$defs/PolicyUnitMapping"
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProposalRelationshipSummary"
+          }
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QueryProposalNextOperation"
+          }
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "QueryProposalResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ProposalRouteResult"
+        },
+        {
+          "$ref": "#/$defs/ProposalReadResult"
+        },
+        {
+          "$ref": "#/$defs/ProposalRelatedResult"
         }
       ]
     },

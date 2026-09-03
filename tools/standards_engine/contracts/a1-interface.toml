@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 14
+interface_schema_version = 15
 request_contract_version = 4
 result_projection_version = 4
 
@@ -68,3 +68,9 @@ id = "revise_proposal"
 input_definition = "ReviseProposalCall"
 result_definitions = ["ReviseProposalResult", "RejectedResult"]
 capability = "standards.proposal.author"
+
+[[operations]]
+id = "query_proposal"
+input_definition = "QueryProposalCall"
+result_definitions = ["QueryProposalResult", "RejectedResult"]
+capability = "standards.proposal.read"

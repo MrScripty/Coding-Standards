@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 14,
+  "interface_schema_version": 15,
   "examples": [
     {
       "name": "create-snapshot",
@@ -88,6 +88,21 @@
           }
         ],
         "semantic_proposals": []
+      }
+    },
+    {
+      "name": "query-proposal-read",
+      "definition": "QueryProposalCall",
+      "value": {
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "request": {
+          "kind": "read",
+          "target": "workflow.planning"
+        }
       }
     },
     {

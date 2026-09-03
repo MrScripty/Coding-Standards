@@ -1,15 +1,24 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 
 from tools.standards_engine.standards_engine import (
+    AgentToolFacade,
+    CreateProposalCall,
+    CreateProposalResult,
     CreateSnapshotCall,
     InspectCall,
     PolicyInspectionResult,
+    ProposalReadResult,
+    ProposalRelatedResult,
+    ProposalRouteResult,
     QueryCall,
+    QueryProposalCall,
     ReadRequest,
     ReadResult,
     RelatedRequest,
@@ -17,11 +26,42 @@ from tools.standards_engine.standards_engine import (
     RejectedResult,
     RouteRequest,
     RouteResult,
+    ReviseProposalCall,
+    ReviseProposalResult,
     StandardsEngine,
 )
+from tools.standards_engine.standards_engine.tools import _contracts
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+SUITE_INPUTS = "evaluation/standards-effectiveness/generated/suite-inputs.json"
+
+
+def _projected_mutations(
+    planning: str, manifest_content: bytes
+) -> list[dict[str, object]]:
+    manifest = json.loads(manifest_content)
+    planning_entry = next(
+        item for item in manifest["files"] if item["path"] == "workflows/planning.md"
+    )
+    planning_entry["digest"] = (
+        "sha256:" + hashlib.sha256(planning.encode("utf-8")).hexdigest()
+    )
+    projected_manifest = (
+        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    )
+    return [
+        {
+            "op": "replace",
+            "path": "workflows/planning.md",
+            "value": planning,
+        },
+        {
+            "op": "replace",
+            "path": SUITE_INPUTS,
+            "value": projected_manifest,
+        },
+    ]
 
 
 class NavigationTest(unittest.TestCase):
@@ -222,6 +262,157 @@ class NavigationTest(unittest.TestCase):
 
         self.assertIsInstance(before, ReadResult)
         self.assertEqual(before, after)
+
+    def test_proposal_query_projects_every_request_from_an_exact_revision(self) -> None:
+        capture = self.engine._snapshots.load_content(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        files = {str(item.path): item.content for item in capture.files}
+        planning = files["workflows/planning.md"].decode("utf-8")
+        initial_content = planning.replace(
+            "Store a planned effort under one directory:",
+            "Store an initial proposed effort under one directory:",
+        )
+        revised_content = planning.replace(
+            "Store a planned effort under one directory:",
+            "Store a revised proposed effort under one directory:",
+        )
+        self.assertNotEqual(initial_content, planning)
+        created = self.engine.create_proposal(
+            CreateProposalCall.from_value(
+                {
+                    "kind": "create-proposal",
+                    "base_snapshot": self.snapshot.as_contract(),
+                    "mutations": _projected_mutations(
+                        initial_content, files[SUITE_INPUTS]
+                    ),
+                    "semantic_proposals": [],
+                }
+            )
+        )
+        self.assertIsInstance(created, CreateProposalResult)
+        counts = self.engine._snapshots._store.counts()
+
+        route = self.engine.query_proposal(
+            QueryProposalCall(
+                created.revision,
+                RouteRequest(
+                    "route",
+                    self.route_facts(**{"routing.activities": ["planning"]}),
+                ),
+            )
+        )
+        self.assertIsInstance(route, ProposalRouteResult)
+        self.assertEqual(route.revision, created.revision)
+        self.assertTrue(route.next_operations)
+        self.assertTrue(
+            all(item.authority == "projection" for item in route.reading_plan)
+        )
+        self.assertTrue(
+            all(
+                item.operation == "query_proposal" and item.revision == created.revision
+                for item in route.next_operations
+            )
+        )
+
+        read_call = QueryProposalCall(
+            created.revision,
+            ReadRequest("read", "workflow.planning"),
+        )
+        read = ProposalReadResult.from_value(
+            AgentToolFacade(self.engine, _contracts(REPO_ROOT)).query_proposal(
+                read_call.as_contract()
+            )
+        )
+        self.assertEqual(read.content, initial_content)
+        self.assertEqual(read.policy.id, "workflow.planning")
+        self.assertEqual(read.policy.authority, "projection")
+        self.assertEqual(read.summary, "Read projected standard workflow.planning.")
+        self.assertEqual(len(read.next_operations), 1)
+        self.assertEqual(read.next_operations[0].operation, "query_proposal")
+        self.assertNotIn("snapshot", read.as_contract())
+
+        related = self.engine.query_proposal(
+            QueryProposalCall(
+                created.revision,
+                RelatedRequest(
+                    "related", "workflow.planning", ("policy-impact",), "both", False
+                ),
+            )
+        )
+        self.assertIsInstance(related, ProposalRelatedResult)
+        self.assertTrue(related.relationships)
+        self.assertTrue(
+            all("handle" not in item.as_contract() for item in related.relationships)
+        )
+        self.assertEqual(self.engine._snapshots._store.counts(), counts)
+
+        revised = self.engine.revise_proposal(
+            ReviseProposalCall.from_value(
+                {
+                    "kind": "revise-proposal",
+                    "expected_revision": created.revision.as_contract(),
+                    "mutations": _projected_mutations(
+                        revised_content, files[SUITE_INPUTS]
+                    ),
+                    "semantic_proposals": [],
+                }
+            )
+        )
+        self.assertIsInstance(revised, ReviseProposalResult)
+        revised_counts = self.engine._snapshots._store.counts()
+        historical = self.engine.query_proposal(
+            QueryProposalCall(
+                created.revision,
+                ReadRequest("read", "workflow.planning"),
+            )
+        )
+        current = self.engine.query_proposal(
+            QueryProposalCall(
+                revised.revision,
+                ReadRequest("read", "workflow.planning"),
+            )
+        )
+        self.assertIsInstance(historical, ProposalReadResult)
+        self.assertIsInstance(current, ProposalReadResult)
+        self.assertEqual(historical.content, initial_content)
+        self.assertEqual(current.content, revised_content)
+        self.assertEqual(self.engine._snapshots._store.counts(), revised_counts)
+
+    def test_proposal_query_returns_typed_failure_for_invalid_projected_content(
+        self,
+    ) -> None:
+        capture = self.engine._snapshots.load_content(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        files = {str(item.path): item.content for item in capture.files}
+        invalid_content = "# Planning without canonical metadata\n"
+        created = self.engine.create_proposal(
+            CreateProposalCall.from_value(
+                {
+                    "kind": "create-proposal",
+                    "base_snapshot": self.snapshot.as_contract(),
+                    "mutations": _projected_mutations(
+                        invalid_content, files[SUITE_INPUTS]
+                    ),
+                    "semantic_proposals": [],
+                }
+            )
+        )
+        self.assertIsInstance(created, CreateProposalResult)
+        counts = self.engine._snapshots._store.counts()
+
+        rejected = self.engine.query_proposal(
+            QueryProposalCall(
+                created.revision,
+                ReadRequest("read", "workflow.planning"),
+            )
+        )
+
+        self.assertIsInstance(rejected, RejectedResult)
+        self.assertEqual(rejected.outcome, "invalid")
+        self.assertNotEqual(rejected.code, "INTERFACE.INVALID_ARGUMENTS")
+        self.assertEqual(self.engine._snapshots._store.counts(), counts)
 
 
 if __name__ == "__main__":

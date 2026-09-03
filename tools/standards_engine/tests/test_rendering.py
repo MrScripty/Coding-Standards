@@ -80,6 +80,21 @@ class TextRenderingTest(unittest.TestCase):
             f"CREATE-PROPOSAL-RESULT {proposal} {revision}\n",
         )
 
+    def test_projected_navigation_renders_revision_authority(self) -> None:
+        revision = "proposal-revision:sha256:" + "a" * 64
+
+        self.assertEqual(
+            render_text(
+                {
+                    "kind": "proposal-read-result",
+                    "revision": {"id": revision},
+                    "policy": {"id": "workflow.planning"},
+                    "relationships": [],
+                }
+            ),
+            f"NAVIGATION {revision}\n  POLICY workflow.planning\n",
+        )
+
     def test_every_public_result_kind_has_a_rendering_dispatch(self) -> None:
         schema = json.loads(
             (
@@ -113,6 +128,10 @@ class TextRenderingTest(unittest.TestCase):
             "undelete-snapshot-result",
             "create-proposal-result",
             "find-proposals-result",
+            "revise-proposal-result",
+            "proposal-route-result",
+            "proposal-read-result",
+            "proposal-related-result",
         }
         unsupported = {
             kind

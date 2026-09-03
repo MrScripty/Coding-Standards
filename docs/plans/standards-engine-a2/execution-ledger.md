@@ -1037,3 +1037,52 @@
   the final coherent boundary. Public proposal projection, projected analysis,
   review/readiness, application, Git publication, and recovery remain absent;
   the next slice is the smallest `query_proposal` projected-content read.
+
+## 2026-09-02 - Milestone 3 Proposal Content Query Accepted
+
+- Implemented additive `query_proposal(revision, request)` through the generated
+  facade and Engine. The exact historical revision is reconstructed over its
+  retained frozen base snapshot through one private replacement source and
+  compiled by the existing A1c metadata, policy-impact, graph, Router,
+  coverage, and repository-coverage owners. There is no proposal-as-snapshot
+  conversion, second parser, graph, Router, content store, or cache.
+- Refactored route, read, related, and relationship projection around one
+  private authority seam while retaining the existing semantic calculations.
+  Snapshot query continues to return snapshot and inspect handles. Proposal
+  query returns revision-anchored route/read/related results, marks policy and
+  reading-plan authority as `projection`, omits snapshot child and inspect
+  handles, and carries the same exact revision in every continuation.
+  Historical reads remain unchanged after proposal-head advance, and valid or
+  invalid proposal queries do not mutate durable counts.
+- Interface schema v15 adds only `query_proposal` and its proposal-specific
+  result algebra. Request contract v4, result projection v4, snapshot and
+  analysis handles v5, proposal handles v1, Authoring contract v1, store schema
+  v2, and all eight A1c operation roots remain unchanged. Canonical schema,
+  interface, example, compiler operation closure, generated Python and
+  agent-tool projections, facade, text renderer, and Engine agree.
+- The same 36 focused tests pass on Linux CPython 3.11 and 3.12: two exact
+  projected-navigation behaviors, eight generated-contract tests, twenty
+  contract compiler/projection tests, and six renderer tests. They cover all
+  three query requests, public facade transport, exact historical revision,
+  dependent suite-input replacement, typed invalid projected content,
+  read-only store behavior, projection authority, generated freshness, and
+  renderer closure. The reused 3.11 verification environment was updated only
+  in `/tmp` to the repository-locked `jsonschema==4.26.0` and
+  `referencing==0.37.0` before its contract run.
+- One package-wide Engine run passed 39 of 40 tests and exposed only missing
+  authoring renderer dispatch, including the pre-existing revision result. The
+  bounded renderer correction then passed all six current renderer tests on both
+  runtimes; the 35 non-renderer tests and their code paths were unchanged, so
+  Development Proportionality did not require repeating the 13-minute package run. The
+  affected `policy-semantic-impact`,
+  `generated-contract-semantic-conformance`, `a1c-aggregate-replay`, and
+  `a1c-public-cutover` suites plus the selected A1c lifecycle dependency all
+  pass.
+- Ruff, projection freshness, plan structure, generated-evidence freshness,
+  and diff hygiene pass. The complete repository checkpoint passes all 270
+  declarative suites and all seven retained Bash checkers. The staged scope,
+  generated diff, sensitive-value review, and conventional commit are the
+  remaining Commit-owned boundary. Projected analysis, review/readiness,
+  application, Git publication, recovery, resource ownership, and measurement
+  remain absent; the next slice is current-state reconciliation and exact
+  admission for `analyze_proposal`.

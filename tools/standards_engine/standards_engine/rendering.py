@@ -95,12 +95,14 @@ def _observation(value: Mapping[str, object]) -> str:
 
 
 def _navigation(value: Mapping[str, object]) -> str:
-    lines = [f"NAVIGATION {_snapshot_id(value)}"]
+    authority = _snapshot_id(value) or _revision_id(value.get("revision"))
+    lines = [f"NAVIGATION {authority}"]
     for item in _items(value, "reading_plan"):
         lines.append(f"  READ {item['target']} [{item['state']}]")
     policy = _mapping(value.get("policy"))
     if policy:
-        lines.append(f"  POLICY {_mapping(policy.get('handle')).get('child_id', '')}")
+        identity = _mapping(policy.get("handle")).get("child_id") or policy.get("id", "")
+        lines.append(f"  POLICY {identity}")
     relationships = _items(value, "relationships")
     if relationships:
         lines.append(f"  RELATIONSHIPS {len(relationships)}")
@@ -205,9 +207,13 @@ _RESULT_RENDERERS: dict[
     "undelete-snapshot-result": _snapshot_lifecycle,
     "create-proposal-result": _proposal_lifecycle,
     "find-proposals-result": _proposal_lifecycle,
+    "revise-proposal-result": _proposal_lifecycle,
     "route-result": _navigation,
     "read-result": _navigation,
     "related-result": _navigation,
+    "proposal-route-result": _navigation,
+    "proposal-read-result": _navigation,
+    "proposal-related-result": _navigation,
     "rejected-result": _rejection,
 }
 

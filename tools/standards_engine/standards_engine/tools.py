@@ -24,6 +24,7 @@ from ._generated_contract import (
     InspectCall,
     PrepareCall,
     QueryCall,
+    QueryProposalCall,
     ReviseProposalCall,
     ResolveCall,
     UndeleteSnapshotCall,
@@ -106,6 +107,12 @@ class AgentToolFacade:
         if isinstance(call, dict):
             return call
         return self._result("revise_proposal", self._engine.revise_proposal(call))
+
+    def query_proposal(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("query_proposal", arguments, QueryProposalCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("query_proposal", self._engine.query_proposal(call))
 
     def delete_snapshot(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(

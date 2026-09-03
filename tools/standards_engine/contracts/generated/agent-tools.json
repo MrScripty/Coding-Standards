@@ -2565,6 +2565,178 @@
       "pattern": "^proposal:v1:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     },
+    "ProposalPolicySummary": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "enum": [
+            "normative",
+            "projection",
+            "contextual",
+            "evidence"
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "scope": {
+          "$ref": "#/$defs/ReviewScope"
+        }
+      },
+      "required": [
+        "id",
+        "authority",
+        "scope"
+      ],
+      "type": "object"
+    },
+    "ProposalReadResult": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "proposal-read-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/QueryProposalNextOperation"
+          },
+          "type": "array"
+        },
+        "policy": {
+          "$ref": "#/$defs/ProposalPolicySummary"
+        },
+        "related": {
+          "items": {
+            "$ref": "#/$defs/ProposalRelationshipSummary"
+          },
+          "type": "array"
+        },
+        "requires": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "specializes": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "revision",
+        "policy",
+        "content",
+        "requires",
+        "specializes",
+        "related",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "ProposalRelatedResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "proposal-related-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/QueryProposalNextOperation"
+          },
+          "type": "array"
+        },
+        "policy_unit_mapping": {
+          "$ref": "#/$defs/PolicyUnitMapping"
+        },
+        "relationships": {
+          "items": {
+            "$ref": "#/$defs/ProposalRelationshipSummary"
+          },
+          "type": "array"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "revision",
+        "target",
+        "policy_unit_mapping",
+        "relationships",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "ProposalRelationshipSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "applicability": {
+          "enum": [
+            "true",
+            "false",
+            "unknown",
+            "not-declared"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "incoming",
+            "outgoing"
+          ]
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "relation": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "source": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "traversal_eligible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source",
+        "target",
+        "relation",
+        "groups",
+        "direction",
+        "traversal_eligible",
+        "applicability"
+      ],
+      "type": "object"
+    },
     "ProposalRevisionHandle": {
       "additionalProperties": false,
       "properties": {
@@ -2588,6 +2760,46 @@
     "ProposalRevisionId": {
       "pattern": "^proposal-revision:sha256:[0-9a-f]{64}$",
       "type": "string"
+    },
+    "ProposalRouteResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "proposal-route-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/QueryProposalNextOperation"
+          },
+          "type": "array"
+        },
+        "reading_plan": {
+          "items": {
+            "$ref": "#/$defs/ReadingPlanEntry"
+          },
+          "type": "array"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "unresolved_questions": {
+          "items": {
+            "$ref": "#/$defs/Question"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "revision",
+        "reading_plan",
+        "unresolved_questions",
+        "next_operations"
+      ],
+      "type": "object"
     },
     "ProposalSummary": {
       "additionalProperties": false,
@@ -2744,6 +2956,62 @@
         "snapshot"
       ],
       "type": "object"
+    },
+    "QueryProposalCall": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/QueryRequest"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "required": [
+        "revision",
+        "request"
+      ],
+      "type": "object"
+    },
+    "QueryProposalNextOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "query_proposal"
+        },
+        "request_kind": {
+          "enum": [
+            "route",
+            "read",
+            "related"
+          ]
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "operation",
+        "request_kind",
+        "revision"
+      ],
+      "type": "object"
+    },
+    "QueryProposalResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ProposalRouteResult"
+        },
+        {
+          "$ref": "#/$defs/ProposalReadResult"
+        },
+        {
+          "$ref": "#/$defs/ProposalRelatedResult"
+        }
+      ]
     },
     "QueryRequest": {
       "oneOf": [
@@ -3656,7 +3924,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 14,
+  "interface_schema_version": 15,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -3794,6 +4062,18 @@
       },
       "result_definitions": [
         "ReviseProposalResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.read",
+      "id": "query_proposal",
+      "input_definition": "QueryProposalCall",
+      "input_schema": {
+        "$ref": "#/$defs/QueryProposalCall"
+      },
+      "result_definitions": [
+        "QueryProposalResult",
         "RejectedResult"
       ]
     }

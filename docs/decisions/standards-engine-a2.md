@@ -18,6 +18,18 @@ SQLite compare-and-swap transaction. A stale expected head is an `invalid`
 result and publishes no candidate record. Historical revision reconstruction is
 an internal Authoring seam, not another public operation.
 
+The third production boundary adds `query_proposal(revision, request)`. The
+Engine reconstructs that exact immutable revision, overlays its replacement
+bytes on the retained base snapshot, and compiles the projected material
+through the same A1c metadata, policy-impact, graph, Router, coverage, and
+repository-coverage owners. Route, read, and related use one shared navigation
+implementation with authority-specific result projection. Proposal results and
+continuations are anchored to the revision, identify projected content as
+`projection`, and expose no snapshot child or inspect handle. Historical
+revision queries remain stable after proposal-head movement. There is no
+second parser, graph, Router, content store, cache, or proposal-as-snapshot
+conversion.
+
 Proposal IDs are unique lifecycle identities (`proposal:v1:<uuid4>`). Initial
 revision IDs are content-bound identities over proposal ID, ordinal, base
 snapshot, normalized replacement material, semantic proposals, and the
@@ -43,11 +55,11 @@ owned close/context-manager lifecycle, not a caller-selected store path.
 The public interface declares `standards.proposal.author` and
 `standards.proposal.read` capabilities at the same deployment boundary that
 owns the existing A1c capabilities; the domain does not add a second ambient
-authorization mechanism. Interface schema v14 adds proposal revision without
-changing the A1c request/result promises, existing handle versions, Authoring
-material identity, or store schema. This decision does not yet add public
-proposal projection, projected analysis, review/readiness, Git publication, or
-recovery. The tested P5C forwarding capability is intentionally not
+authorization mechanism. Interface schema v15 adds proposal content query
+without changing the A1c request/result promises, existing handle versions,
+Authoring material identity, or store schema. This decision does not yet add
+projected analysis, review/readiness, Git publication, or recovery. The tested
+P5C forwarding capability is intentionally not
 productionized because no real caller needs a second eight-method A1c surface.
 
 Standards graphs remain exclusively standards-domain authority. A2 consumes

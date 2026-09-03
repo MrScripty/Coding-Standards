@@ -115,7 +115,13 @@ from ._generated_contract import (
     ProvideFactSubmission,
     PolicyInspectionResult,
     QueryCall,
+    QueryProposalCall,
+    QueryProposalResult,
     QueryResult,
+    ProposalReadResult,
+    ProposalRelatedResult,
+    ProposalRevisionHandle,
+    ProposalRouteResult,
     ReadRequest,
     ReadResult,
     RejectedResult,
@@ -139,6 +145,7 @@ from .authoring import (
     FindProposalsRequest,
     Mutation,
     ProposalId,
+    ProposalRevision,
     ProposalSummary as AuthoringProposalSummary,
 )
 
@@ -190,6 +197,120 @@ class _GitRevisionSource:
                     path=path,
                 )
             ) from error
+
+
+class _ProjectedRevisionSource:
+    """Exact replacement overlay over one immutable snapshot capture."""
+
+    def __init__(self, base: FrozenContentSource, revision: ProposalRevision) -> None:
+        self._base = base
+        self._replacements = {
+            str(mutation.path): mutation.value.encode("utf-8")
+            for mutation in revision.mutations
+        }
+
+    def read_bytes(self, path: str) -> bytes:
+        normalized = str(SnapshotPath.parse(path))
+        replacement = self._replacements.get(normalized)
+        if replacement is not None:
+            return replacement
+        return self._base.read_bytes(normalized)
+
+
+@dataclass(frozen=True, slots=True)
+class _QueryProjection:
+    """Authority-specific public projection over shared navigation semantics."""
+
+    authority: SnapshotHandle | ProposalRevisionHandle
+    anchor: str
+    operation: str
+    result_prefix: str
+
+    @classmethod
+    def snapshot(cls, handle: SnapshotHandle) -> _QueryProjection:
+        return cls(handle, "snapshot", "query", "")
+
+    @classmethod
+    def proposal(cls, handle: ProposalRevisionHandle) -> _QueryProjection:
+        return cls(handle, "revision", "query_proposal", "proposal-")
+
+    def result(self, request_kind: str) -> dict[str, object]:
+        return {
+            "kind": f"{self.result_prefix}{request_kind}-result",
+            self.anchor: self.authority.as_contract(),
+        }
+
+    def next_operation(
+        self, request_kind: str, target: str | None = None
+    ) -> dict[str, object]:
+        value: dict[str, object] = {
+            "operation": self.operation,
+            "request_kind": request_kind,
+            self.anchor: self.authority.as_contract(),
+        }
+        if target is not None:
+            value["target"] = target
+        return value
+
+    def policy_summary(
+        self, identity: str, authority: str, scope: dict[str, object]
+    ) -> dict[str, object]:
+        value: dict[str, object] = {
+            "authority": (
+                authority
+                if isinstance(self.authority, SnapshotHandle)
+                else "projection"
+            ),
+            "scope": scope,
+        }
+        if isinstance(self.authority, SnapshotHandle):
+            value["handle"] = self._snapshot_child_handle("policy", identity)
+        else:
+            value["id"] = identity
+        return value
+
+    def reading_plan_entry(self, value: dict[str, object]) -> dict[str, object]:
+        if isinstance(self.authority, SnapshotHandle):
+            return value
+        return {**value, "authority": "projection"}
+
+    def read_summary(self, identity: str) -> str:
+        material = (
+            "canonical" if isinstance(self.authority, SnapshotHandle) else "projected"
+        )
+        return f"Read {material} standard {identity}."
+
+    def relationship_summary(
+        self, identity: str, value: dict[str, object]
+    ) -> dict[str, object]:
+        if isinstance(self.authority, SnapshotHandle):
+            return {
+                "handle": self._snapshot_child_handle("relationship", identity),
+                **value,
+            }
+        return value
+
+    def inspect_operation(self, identity: str) -> dict[str, object] | None:
+        if not isinstance(self.authority, SnapshotHandle):
+            return None
+        return {
+            "operation": "inspect",
+            "request_kind": "inspect",
+            "handle": self._snapshot_child_handle("policy", identity),
+        }
+
+    def _snapshot_child_handle(
+        self, child_kind: str, child_id: str
+    ) -> dict[str, object]:
+        if not isinstance(self.authority, SnapshotHandle):
+            raise RuntimeError("proposal projections do not mint snapshot children")
+        return {
+            "kind": "snapshot-child-handle",
+            "snapshot": self.authority.as_contract(),
+            "child_kind": child_kind,
+            "child_id": child_id,
+            "schema_version": 5,
+        }
 
 
 class StandardsEngine:
@@ -419,6 +540,39 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    def query_proposal(
+        self, call: QueryProposalCall
+    ) -> QueryProposalResult | RejectedResult:
+        try:
+            revision = self._authoring.read_revision(call.revision.id)
+            compiled = self._compiled_revision(revision)
+            projection = _QueryProjection.proposal(call.revision)
+            if isinstance(call.request, RouteRequest):
+                return ProposalRouteResult.from_value(
+                    self._route_value(projection, compiled, call.request)
+                )
+            if isinstance(call.request, ReadRequest):
+                value = self._read_value(projection, compiled, call.request)
+                return (
+                    value
+                    if isinstance(value, RejectedResult)
+                    else ProposalReadResult.from_value(value)
+                )
+            if isinstance(call.request, RelatedRequest):
+                value = self._related_value(projection, compiled, call.request)
+                return (
+                    value
+                    if isinstance(value, RejectedResult)
+                    else ProposalRelatedResult.from_value(value)
+                )
+            return self._reject(
+                "NAVIGATION.UNSUPPORTED_REQUEST",
+                "unsupported",
+                "The query request kind is unsupported.",
+            )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
     def prepare(
         self, call: PrepareCall
     ) -> PendingResult | CompleteResult | RejectedResult:
@@ -504,6 +658,13 @@ class StandardsEngine:
         return self._compile(
             FrozenContentSource((str(item.path), item.content) for item in capture.files)
         )
+
+    def _compiled_revision(self, revision: ProposalRevision) -> CompiledSnapshot:
+        capture = self._snapshots.load_content(revision.base_snapshot)
+        base = FrozenContentSource(
+            (str(item.path), item.content) for item in capture.files
+        )
+        return self._compile(_ProjectedRevisionSource(base, revision))
 
     @staticmethod
     def _compile(source: ContentSource) -> CompiledSnapshot:
@@ -1448,6 +1609,16 @@ class StandardsEngine:
         compiled: CompiledSnapshot,
         request: RouteRequest,
     ) -> RouteResult:
+        return RouteResult.from_value(
+            self._route_value(_QueryProjection.snapshot(snapshot), compiled, request)
+        )
+
+    def _route_value(
+        self,
+        projection: _QueryProjection,
+        compiled: CompiledSnapshot,
+        request: RouteRequest,
+    ) -> dict[str, object]:
         facts = compiled.router.fact_schema.bind(request.as_contract()["facts"])
         selected = set(compiled.router.base_modules)
         unresolved: set[str] = set()
@@ -1517,32 +1688,26 @@ class StandardsEngine:
                 target, compiled.corpus, compiled.graph
             ),
         )
-        reading_plan = [item.as_contract() for item in entries]
+        reading_plan = [
+            projection.reading_plan_entry(item.as_contract()) for item in entries
+        ]
         questions = [
             self._route_question(compiled.router, fact) for fact in sorted(unresolved)
         ]
-        return RouteResult.from_value(
-            {
-                "kind": "route-result",
-                "snapshot": snapshot.as_contract(),
-                "reading_plan": reading_plan,
-                "unresolved_questions": questions,
-                "next_operations": [
-                    {
-                        "operation": "query",
-                        "request_kind": "read",
-                        "target": item["target"],
-                        "snapshot": snapshot.as_contract(),
-                    }
-                    for item in reading_plan
-                    if item["state"] == "selected"
-                ],
-                "summary": (
-                    f"Selected {len(ordered)} standards with "
-                    f"{len(questions)} unresolved fact categories."
-                ),
-            }
-        )
+        return {
+            **projection.result("route"),
+            "reading_plan": reading_plan,
+            "unresolved_questions": questions,
+            "next_operations": [
+                projection.next_operation("read", str(item["target"]))
+                for item in reading_plan
+                if item["state"] == "selected"
+            ],
+            "summary": (
+                f"Selected {len(ordered)} standards with "
+                f"{len(questions)} unresolved fact categories."
+            ),
+        }
 
     def _read(
         self,
@@ -1550,15 +1715,25 @@ class StandardsEngine:
         compiled: CompiledSnapshot,
         request: ReadRequest,
     ) -> ReadResult | RejectedResult:
+        value = self._read_value(_QueryProjection.snapshot(snapshot), compiled, request)
+        return (
+            value if isinstance(value, RejectedResult) else ReadResult.from_value(value)
+        )
+
+    def _read_value(
+        self,
+        projection: _QueryProjection,
+        compiled: CompiledSnapshot,
+        request: ReadRequest,
+    ) -> dict[str, object] | RejectedResult:
         selected = _resolve_policy(compiled.corpus, request.target)
         if selected is None:
             return self._reject(
                 "NAVIGATION.UNKNOWN_POLICY", "unavailable", "The policy is unavailable."
             )
         policy, module = selected
-        policy_handle = self._policy_handle(snapshot, policy, module)
         relationships = self._relationships(
-            snapshot, compiled, policy, module, None, Direction.BOTH, False
+            projection, compiled, policy, module, None, Direction.BOTH, False
         )
         if isinstance(policy, PolicyUnit):
             content = policy.content
@@ -1568,35 +1743,24 @@ class StandardsEngine:
             content = compiled.source.read_bytes(module.path).decode("utf-8")
             scope = {"kind": "whole-artifact"}
             target = module.module_id
-        return ReadResult.from_value(
-            {
-                "kind": "read-result",
-                "snapshot": snapshot.as_contract(),
-                "policy": {
-                    "handle": policy_handle,
-                    "authority": "contextual" if module.role == "reference" else "normative",
-                    "scope": scope,
-                },
-                "content": content,
-                "requires": list(module.requires),
-                "specializes": list(module.specializes),
-                "related": relationships,
-                "next_operations": [
-                    {
-                        "operation": "query",
-                        "request_kind": "related",
-                        "target": target,
-                        "snapshot": snapshot.as_contract(),
-                    },
-                    {
-                        "operation": "inspect",
-                        "request_kind": "inspect",
-                        "handle": policy_handle,
-                    },
-                ],
-                "summary": f"Read canonical standard {target}.",
-            }
-        )
+        next_operations = [projection.next_operation("related", target)]
+        inspection = projection.inspect_operation(target)
+        if inspection is not None:
+            next_operations.append(inspection)
+        return {
+            **projection.result("read"),
+            "policy": projection.policy_summary(
+                target,
+                "contextual" if module.role == "reference" else "normative",
+                scope,
+            ),
+            "content": content,
+            "requires": list(module.requires),
+            "specializes": list(module.specializes),
+            "related": relationships,
+            "next_operations": next_operations,
+            "summary": projection.read_summary(target),
+        }
 
     def _related(
         self,
@@ -1604,6 +1768,21 @@ class StandardsEngine:
         compiled: CompiledSnapshot,
         request: RelatedRequest,
     ) -> RelatedResult | RejectedResult:
+        value = self._related_value(
+            _QueryProjection.snapshot(snapshot), compiled, request
+        )
+        return (
+            value
+            if isinstance(value, RejectedResult)
+            else RelatedResult.from_value(value)
+        )
+
+    def _related_value(
+        self,
+        projection: _QueryProjection,
+        compiled: CompiledSnapshot,
+        request: RelatedRequest,
+    ) -> dict[str, object] | RejectedResult:
         selected = _resolve_policy(compiled.corpus, request.target)
         if selected is None:
             return self._reject(
@@ -1611,7 +1790,7 @@ class StandardsEngine:
             )
         policy, module = selected
         relationships = self._relationships(
-            snapshot,
+            projection,
             compiled,
             policy,
             module,
@@ -1630,21 +1809,18 @@ class StandardsEngine:
                 "policy_units": [item.id for item in units],
             }
         )
-        return RelatedResult.from_value(
-            {
-                "kind": "related-result",
-                "snapshot": snapshot.as_contract(),
-                "target": target,
-                "policy_unit_mapping": mapping,
-                "relationships": relationships,
-                "next_operations": [],
-                "summary": f"Found {len(relationships)} declared relationships.",
-            }
-        )
+        return {
+            **projection.result("related"),
+            "target": target,
+            "policy_unit_mapping": mapping,
+            "relationships": relationships,
+            "next_operations": [],
+            "summary": f"Found {len(relationships)} declared relationships.",
+        }
 
     def _relationships(
         self,
-        snapshot: SnapshotHandle,
+        projection: _QueryProjection,
         compiled: CompiledSnapshot,
         selected: PolicyUnit | ModuleMetadata,
         module: ModuleMetadata,
@@ -1682,30 +1858,30 @@ class StandardsEngine:
                 pairs = ((item.edge, item.direction) for item in views)
             for edge, selected_direction in pairs:
                 chosen[(edge.id, selected_direction.value)] = self._relationship_summary(
-                    snapshot, compiled, edge, selected_direction
+                    projection, compiled, edge, selected_direction
                 )
         return [chosen[key] for key in sorted(chosen)]
 
     def _relationship_summary(
         self,
-        snapshot: SnapshotHandle,
+        projection: _QueryProjection,
         compiled: CompiledSnapshot,
         edge: Edge,
         direction: Direction,
     ) -> dict[str, object]:
         semantics = compiled.policy_impact.semantics.get(edge.id)
-        return {
-            "handle": self._snapshot_child_handle(
-                snapshot, "relationship", f"{direction.value}:{edge.id}"
-            ),
-            "source": edge.source,
-            "target": edge.target,
-            "relation": edge.relation,
-            "groups": list(edge.groups),
-            "direction": direction.value,
-            "traversal_eligible": edge.traversable,
-            "applicability": "unknown" if semantics is not None else "not-declared",
-        }
+        return projection.relationship_summary(
+            f"{direction.value}:{edge.id}",
+            {
+                "source": edge.source,
+                "target": edge.target,
+                "relation": edge.relation,
+                "groups": list(edge.groups),
+                "direction": direction.value,
+                "traversal_eligible": edge.traversable,
+                "applicability": "unknown" if semantics is not None else "not-declared",
+            },
+        )
 
     def _inspect_snapshot_child(
         self, handle: SnapshotChildHandle
@@ -1766,7 +1942,10 @@ class StandardsEngine:
                 {
                     "kind": "relationship-inspection-result",
                     "relationship": self._relationship_summary(
-                        handle.snapshot, compiled, edge, direction
+                        _QueryProjection.snapshot(handle.snapshot),
+                        compiled,
+                        edge,
+                        direction,
                     ),
                     "policy_semantics": (
                         None
@@ -1842,27 +2021,6 @@ class StandardsEngine:
     @staticmethod
     def _snapshot_id(handle: SnapshotHandle) -> SnapshotId:
         return SnapshotId(handle.id)
-
-    @staticmethod
-    def _snapshot_child_handle(
-        snapshot: SnapshotHandle, child_kind: str, child_id: str
-    ) -> dict[str, object]:
-        return {
-            "kind": "snapshot-child-handle",
-            "snapshot": snapshot.as_contract(),
-            "child_kind": child_kind,
-            "child_id": child_id,
-            "schema_version": 5,
-        }
-
-    def _policy_handle(
-        self,
-        snapshot: SnapshotHandle,
-        selected: PolicyUnit | ModuleMetadata,
-        module: ModuleMetadata,
-    ) -> dict[str, object]:
-        identity = selected.id if isinstance(selected, PolicyUnit) else module.module_id
-        return self._snapshot_child_handle(snapshot, "policy", identity)
 
     @staticmethod
     def _domain_errors() -> tuple[type[Exception], ...]:
