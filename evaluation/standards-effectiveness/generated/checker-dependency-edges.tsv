@@ -8,7 +8,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-owner-state-transitions.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-verification-gate-model.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/policy-impact-node-catalog.toml	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/policy-impact/topic.architecture.toml	evaluation/standards-effectiveness/check-plan-structure.sh

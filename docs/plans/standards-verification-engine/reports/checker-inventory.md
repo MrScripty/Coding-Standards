@@ -4716,6 +4716,28 @@ checkers, 6 executable nodes, 22 edges, and 6 components. The old checker is
 absent without engine changes, nested execution, normative policy changes,
 compatibility behavior, or fallback.
 
+### M6-I121 Verification-Gate Model Acceptance
+
+Fresh post-M6-I120 evidence reports 5 Bash verifiers, 6 executable nodes, 22
+conservative edges, and 6 components. The 10-line
+`verify-verification-gate-model.sh` has no verifier or helper dependency and is
+selected as a `serial-coherent` `migration.parent-plan` package.
+
+The accepted `execution-train` state model already owns focused decomposition,
+owner-reviewed creation transitions, and the exact five full-suite train
+checkpoints. The accepted `milestone-7-accelerated-execution-replan` suite
+already owns creation gates and train/package alignment. One exact projection
+adds the sole missing invariant: the 23 full-suite package orders.
+
+The two M6-I118 historical edge records transfer to those exact suites.
+Canonical success and six rejecting decomposition-checkpoint,
+transition-activation, train-count, package-count, alignment, and creation-gate
+mutations prove parity under both authorities. Focused, generated, numeric,
+declarative, plan, and complete mixed evidence pass. Final graph: 4 Bash
+checkers, 5 executable nodes, 21 edges, and 5 components. The old checker is
+absent without a duplicate suite, new engine mechanism, nested execution,
+compatibility representation, or fallback.
+
 ### M6-I32 Discover-Or-Create Reference Admission
 
 Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture

@@ -2009,7 +2009,7 @@
       ]
     },
     {
-      "digest": "sha256:39e4b12ff935847dfd6490306e050ff4aabcf0499f6912863f1d3e761b9ae920",
+      "digest": "sha256:80ad113b3318e848038810a77b8c2edd9e0ec00c5785f71c36145098380a91cc",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2399,7 +2399,7 @@
       ]
     },
     {
-      "digest": "sha256:edb49b80192e248335b39ca682b7c32048a2a24b2950a6c19899dfd544e340bb",
+      "digest": "sha256:0a484fb0ca78f33f41afcbcf543af6ffe7e94287c26a92b04e4d71917beaa736",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3757,7 +3757,7 @@
       ]
     },
     {
-      "digest": "sha256:71a108f1743efd37528ba77afffdedf6a5f7c3245c0448df3bd34cfb4c79b3c4",
+      "digest": "sha256:c0408a423822e2a70a1d72efa48152e4c4f846cdf4b1a38fb20059d16d5dcd64",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -7291,7 +7291,7 @@
       ]
     },
     {
-      "digest": "sha256:e9ad30d3a8cf09abbac52cbe5aad58d0d0c0fe30364a5f1e78341b9e51f0c3e0",
+      "digest": "sha256:2310b8d71bca9f8594dfd5a235ad9f94ceda9399bdd3f8f6a43d763552335cff",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7303,7 +7303,7 @@
       ]
     },
     {
-      "digest": "sha256:45e52bbdae00f8c54b8b7304a8843a5899161662927e83a67785cec175fbfc0a",
+      "digest": "sha256:e957f7b3f9397658494d76b2fc61a359479219219e7ef750d014e4626d881f2a",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -11572,7 +11572,7 @@
       ]
     },
     {
-      "digest": "sha256:83f3cd5fb3e6dfd265336a41e873710cfeb17c8e70fc67ac563e0c05435ea288",
+      "digest": "sha256:ae8051562968068656a9a0450ad215cd98eeaed1c661aaa47db23310ce767c3e",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml",
       "state": "present",
       "uses": [
@@ -13838,28 +13838,6 @@
           "check": "retained-plan-fixture-consumer",
           "role": "content",
           "suite": "systemic-finding-replanning"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:f086d321bac68995751cfbf2033dfb26fede93a653fead00756f770a4312a671",
-      "path": "evaluation/standards-effectiveness/verify-verification-gate-model.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
         }
       ]
     },
@@ -26600,7 +26578,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:83f3cd5fb3e6dfd265336a41e873710cfeb17c8e70fc67ac563e0c05435ea288",
+      "digest": "sha256:ae8051562968068656a9a0450ad215cd98eeaed1c661aaa47db23310ce767c3e",
       "id": "milestone-7-accelerated-execution-replan",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml",
       "requires": []

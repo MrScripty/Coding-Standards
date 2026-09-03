@@ -7320,3 +7320,21 @@
 - Canonical success and ten rejecting mutations prove parity. Focused,
   generated, numeric, declarative, plan, and complete mixed evidence pass.
   Final graph: 5 Bash checkers, 6 nodes, 22 edges, and 6 components.
+
+## 2026-09-03 - M6-I121 Verification-Gate Model Acceptance
+
+- Fresh post-M6-I120 evidence reports 5 Bash verifiers, 6 nodes, 22 edges,
+  and 6 components. The 10-line verification-gate checker is a
+  dependency-free `migration.parent-plan` package at train order 236.
+- Five of its six invariants were already owned by the accepted
+  `execution-train` state model and accelerated-replan suite. One exact
+  projection now preserves the 23 full-suite accelerated-package orders, so
+  the two existing suites jointly own complete behavior without a duplicate
+  suite or new engine mechanism.
+- Both M6-I118 historical gate records transfer to exact registered suite
+  evidence. Canonical Bash and Python execution passes, and both authorities
+  reject all six checkpoint, transition, count, alignment, and creation-gate
+  mutations.
+- Focused, generated, numeric, declarative, plan, and complete mixed evidence
+  pass. Final graph: 4 Bash checkers, 5 nodes, 21 edges, and 5 components;
+  fresh graph evidence is required next.

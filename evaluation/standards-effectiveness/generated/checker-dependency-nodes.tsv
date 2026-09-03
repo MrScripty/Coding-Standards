@@ -4,4 +4,3 @@ evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh	verifier	
 evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh	verifier	yes	component-572e52e35399637057c19ce2396fe5791f1e3339d8c1db61cfb66be8f5abafd8	1	no	0	0	2	0	0
 evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	yes	component-6b68dca809c343cfd0363eb43d1e2d2d9020dd18b9448cdf1a601a40eb573b62	1	no	0	1	1	0	0
 evaluation/standards-effectiveness/verify-plan-fixtures.sh	verifier	yes	component-6a60c37c93d5b66cf98456f78fcd1d0613ab20920652a16e03fc7dcb991081c1	1	no	1	0	3	0	1
-evaluation/standards-effectiveness/verify-verification-gate-model.sh	verifier	yes	component-b249848fe54669c6b885ac972c487fc835de7d49e23115056ab7db0fd940225d	1	no	0	0	1	0	0

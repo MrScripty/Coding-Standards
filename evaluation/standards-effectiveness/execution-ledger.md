@@ -15648,6 +15648,22 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   Final graph: 5 Bash checkers, 6 nodes, 22 edges, and 6 components; fresh graph
   evidence is required next.
 
+## 2026-09-03 - M6-I121 Verification-Gate Model Acceptance
+
+- Fresh post-M6-I120 evidence selected the 10-line, dependency-free
+  verification-gate checker as a `serial-coherent` package at train order 236.
+- Accepted execution-train authority already preserves focused decomposition,
+  owner-reviewed creation transitions, and the exact five train checkpoints.
+  Accepted accelerated-replan authority already preserves creation gates and
+  train/package alignment; one new exact projection closes the 23-package gate
+  set without another suite.
+- Two historical M6-I118 edge rows transfer to the exact registered owners.
+  Canonical Bash and Python execution passes, and six paired mutations prove
+  rejection parity for every former checker condition.
+- Focused, generated, numeric, declarative, plan, and complete mixed evidence
+  pass. Final graph: 4 Bash checkers, 5 nodes, 21 edges, and 5 components;
+  fresh graph evidence is required next.
+
 ## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
 
 - Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,

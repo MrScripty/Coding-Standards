@@ -342,3 +342,10 @@
   retained F022/F023 decomposition gate.
 - Five Bash checkers remain before the zero-Bash-triggered migration-only Python
   dispositions execute.
+
+## 2026-09-03 - M6-I121 Terminal-Lifecycle Projection
+
+- Accepted M6-I121 removed the verification-gate Bash checker by consolidating
+  complete behavior into two existing registered parent-plan suites.
+- Four Bash checkers remain before the accepted zero-Bash trigger can execute
+  migration-only Python dispositions.
