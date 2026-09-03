@@ -1,12 +1,12 @@
 # Plan: Standards Engine A2 Logical Authoring
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 0: logical-authoring contract validation
+**Current phase:** Milestone 1: proposal-safe logical authoring
 
-**Next slice:** start Milestone 0 by refreshing the consumer and persisted-state
-inventory, comparing bounded Interface alternatives, and running one scratch
-minimum viable test of the selected logical-authoring design
+**Next slice:** replace the public repository-shaped proposal payload with the
+admitted atomic logical change set, implement its private projection through
+the existing A1c compiler path, and verify immutable replay and typed failures
 
 **Acceptance status:** `pending`
 
@@ -45,7 +45,7 @@ canonical Git authority; remote push is not part of this plan.
 | LA-A5 | A1c snapshot and Analysis behavior and A2 proposal-head, readiness, authorization, application, and recovery invariants remain one coherent implementation with no second parser, graph, analyzer, store, semantic authority, or caller-owned persistence/repository mechanism. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
 | LA-A6 | Invalid IDs or content, dangling or cyclic relationships, incomplete semantic declarations, stale proposal or target state, unavailable authority, unsupported retained formats, failed verification, and uncertain publication remain typed and publish no partial canonical result. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
 | LA-A7 | The complete public workflow and its real Git/SQLite boundaries pass on the supported Linux CPython 3.11 and 3.12 runtimes, including cold reopen, concurrent proposal-head and target changes, and interruption recovery. | `user-workflow` | `required-real` | `automated` | `pending` | pending |
-| LA-A8 | The admitted design passes a pre-canonical minimum viable test for effectiveness, efficiency, correctness, and routed standards compliance, then implementation proceeds without another investigation unless a named unresolved issue threatens an irreversible or high-consequence outcome. | `integration` | `representative` | `manual` | `pending` | pending |
+| LA-A8 | The admitted design passes a pre-canonical minimum viable test for effectiveness, efficiency, correctness, and routed standards compliance, then implementation proceeds without another investigation unless a named unresolved issue threatens an irreversible or high-consequence outcome. | `integration` | `representative` | `manual` | `satisfied` | [Milestone 0 Interface admission](reports/m0-interface-admission.md) |
 
 ## Scope
 
@@ -161,6 +161,8 @@ canonical Git authority; remote push is not part of this plan.
 | Use coordinated replacement of the current public and persisted authoring representation only if the refreshed inventory confirms there is no retained independent consumer. Otherwise stop and plan the exact overlap or migration. | Contracts and Persistence owners | Current accepted A2 inventory, to be refreshed in Milestone 0 | A speculative compatibility shim or unconditional breaking replacement |
 | End application at the configured local canonical ref. Do not add remote push. | Product and Repository owners | User direction on 2026-09-03 | Any earlier interpretation that A2 must publish to a remote |
 | Admit production implementation after the selected Interface satisfies the product contract and routed standards in one bounded minimum viable test. Do not add another design cycle without a named high-consequence or irreversible issue. | Development Proportionality, Product, and Planning owners | `workflow.development-proportionality` and the observed prior investigation loop | Open-ended prototype/review/re-plan cycles |
+| Keep the existing operation roots and carry one atomic, cumulative, closed `StandardsChangeSet` through `create_proposal` and `revise_proposal`. Support plain authored policy content and registered policy-unit placement, but no public document AST or arbitrary unregistered-section reorganization. | Product, Architecture, Contracts, and Authoring owners | [Milestone 0 Interface admission](reports/m0-interface-admission.md) | Public replacement mutations, a one-edit restriction, a collapsed effect facade, and a general desired-document algebra |
+| Cut over to public Interface v20 and Authoring contract v2 without compatibility overlap; preserve Analysis request v4, result/state v5, handle schema v5, and Snapshot store schema v2. | Contracts, Identity, and Persistence owners | [Milestone 0 consumer and state inventory](reports/m0-current-consumer-inventory.md) | A speculative compatibility reader, store migration framework, or unrelated identity/version change |
 
 ## Evidence And Oracle Plan
 
@@ -249,23 +251,23 @@ accepted A2 document changes in this milestone.
 
 **Tasks:**
 
-- [ ] Refresh public/generated consumers, persisted stores, supported runtimes,
+- [x] Refresh public/generated consumers, persisted stores, supported runtimes,
   current formats, and every standards representation the logical writer must
   project; give each one a disposition.
-- [ ] Frame and compare radically different Interface shapes, including a
+- [x] Frame and compare radically different Interface shapes, including a
   minimal command algebra, operation-specific authoring, and desired-state
   definition, by Depth, caller knowledge, Locality, failures, and deletion
   result. This comparison is bounded design evidence, not three production
   implementations.
-- [ ] Select one candidate and run one disposable minimum viable test covering
+- [x] Select one candidate and run one disposable minimum viable test covering
   create, revise, explicit relationship change/reorganization, remove,
   deterministic projection, cold replay, stale head, and invalid semantic
   closure through real canonical compilers.
-- [ ] Record effectiveness, caller-efficiency, correctness, standards route,
+- [x] Record effectiveness, caller-efficiency, correctness, standards route,
   negative results, limitations, dependency decision, and version/invalidation
   decisions; confirm the predeclared Milestone 1 write set or re-plan it before
   implementation.
-- [ ] Return one Development Decision: `implement`, `investigate`,
+- [x] Return one Development Decision: `implement`, `investigate`,
   `defer-and-implement`, or `blocked`. Only a named unresolved irreversible or
   high-consequence issue may select another investigation.
 
@@ -277,7 +279,7 @@ accepted A2 document changes in this milestone.
   composed-design probe passes; and the decision is `implement` with an exact
   production write set, or the plan records the precise blocker/re-plan.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 1: Implement Proposal-Safe Logical Authoring
 
@@ -338,7 +340,7 @@ other file, Milestone 0 must re-plan before implementation.
   design matches the Milestone 0 admission and contains no forbidden legacy or
   parallel machinery.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 2: Apply A Complete Standards Change Locally
 
@@ -473,4 +475,4 @@ machinery.
 
 - Acceptance status: `pending`
 - Deferred follow-ups: `none`
-- Final status: `Planned`
+- Final status: `Active`
