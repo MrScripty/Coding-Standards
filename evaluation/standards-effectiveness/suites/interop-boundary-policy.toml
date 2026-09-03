@@ -1,0 +1,138 @@
+schema_version = 1
+id = "interop-boundary-policy"
+owner = "profile.boundary.interop"
+description = "Foreign-memory authority, typed boundary outcomes, canonical ownership, and legacy-route retirement."
+
+[[checks]]
+id = "foreign-memory-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/interop/foreign-memory-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+representation = ["valid", "unsupported"]
+allocation = ["valid", "invalid", "unavailable"]
+initialized = ["valid", "partial", "not-required"]
+access = ["allowed", "denied"]
+lifetime = ["valid", "expired"]
+thread = ["valid", "wrong", "not-required"]
+release = ["valid", "double", "not-required"]
+copy = ["after-proof", "before-proof", "none"]
+proof = ["complete", "guessed", "sentinel", "alternate", "none"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "representation", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [{ field = "allocation", op = "eq", value = "unavailable" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "allocation", op = "eq", value = "invalid" },
+  { field = "initialized", op = "eq", value = "partial" },
+  { field = "access", op = "eq", value = "denied" },
+  { field = "lifetime", op = "eq", value = "expired" },
+  { field = "thread", op = "eq", value = "wrong" },
+  { field = "release", op = "eq", value = "double" },
+  { field = "copy", op = "eq", value = "before-proof" },
+  { field = "proof", op = "ne", value = "complete" },
+]
+
+[[checks]]
+id = "source-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0465", "INTEROP-STANDARDS.md"],
+  ["STD-0466", "INTEROP-STANDARDS.md"],
+  ["STD-0467", "INTEROP-STANDARDS.md"],
+  ["STD-0468", "INTEROP-STANDARDS.md"],
+  ["STD-0469", "INTEROP-STANDARDS.md"],
+  ["STD-0470", "INTEROP-STANDARDS.md"],
+  ["STD-0471", "INTEROP-STANDARDS.md"],
+  ["STD-0472", "INTEROP-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0465", "STD-0466", "STD-0467", "STD-0468", "STD-0469", "STD-0470", "STD-0471", "STD-0472"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0465", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "move"],
+  ["STD-0466", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "move"],
+  ["STD-0467", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "merge"],
+  ["STD-0468", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "refine"],
+  ["STD-0469", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "refine"],
+  ["STD-0470", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "refine"],
+  ["STD-0471", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "refine"],
+  ["STD-0472", "INTEROP-STANDARDS.md", "profiles/boundaries/interop.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0465", "STD-0466", "STD-0467", "STD-0468", "STD-0469", "STD-0470", "STD-0471", "STD-0472"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/security.md",
+  "profiles/boundaries/interop.md",
+]
+
+[[checks]]
+id = "canonical-profile"
+type = "text"
+path = "profiles/boundaries/interop.md"
+required = [
+  "## Foreign Authority",
+  "allocation identity",
+  "initialized readable or writable extent",
+  "provider-guaranteed lifetime",
+  "## Copying Is Not Proof",
+  "## Initialization And Release",
+  "## Thread And Callback Contract",
+  "Return `invalid`",
+  "`unsupported`",
+  "`unavailable`",
+  "## No Fallback",
+]
+prohibited = []
+
+[[checks]]
+id = "router-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["profiles/boundaries/interop.md"]
+prohibited = []
+
+[[checks]]
+id = "legacy-route"
+type = "markdown_section_text"
+path = "INTEROP-STANDARDS.md"
+heading = "# Interop Standards"
+scope = "subtree"
+required = ["profiles/boundaries/interop.md"]
+prohibited = ["```", "JsonSerializer", "IDisposable", "CallDeferred", "Always copy", "Validate before use"]

@@ -334,3 +334,11 @@
 - The recovery remains active until the six retained Bash checkers and the
   zero-Bash-triggered migration-only Python subjects reach their accepted
   terminal dispositions.
+
+## 2026-09-03 - M6-I120 Terminal-Lifecycle Projection
+
+- Accepted M6-I120 removed the Interop boundary Bash verifier with one
+  registered owner suite, native metadata verification, and an independently
+  retained F022/F023 decomposition gate.
+- Five Bash checkers remain before the zero-Bash-triggered migration-only Python
+  dispositions execute.

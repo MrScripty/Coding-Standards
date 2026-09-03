@@ -523,8 +523,8 @@ unchecked-conversion, and default-success fallbacks.
 
 ## Interop Authority Decision Fixtures
 
-`fixtures/interop/foreign-memory-decisions.tsv` and
-`verify-interop-boundary-policy.sh` check foreign representation and allocation
+`fixtures/interop/foreign-memory-decisions.tsv` and the registered
+`interop-boundary-policy` suite check foreign representation and allocation
 authority, initialized extent, access, lifetime, thread, release, copy ordering,
 typed invalid/unsupported/unavailable outcomes, exact dispositions, metadata,
 routing, legacy links, and removal of copy-before-proof guidance.

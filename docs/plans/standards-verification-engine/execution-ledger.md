@@ -7305,3 +7305,18 @@
 - Canonical success and ten rejecting mutations prove parity. Focused,
   generated, numeric, unit, declarative, plan, and complete mixed evidence
   pass. Final graph: 6 Bash checkers, 8 nodes, 30 edges, and 8 components.
+
+## 2026-09-03 - M6-I120 Interop Boundary Acceptance
+
+- Fresh post-M6-I119 evidence reports two zero-inbound wave-1 roots. The
+  138-line Interop boundary checker uses only existing engine mechanics;
+  plan-fixture migration requires a separate shared plan-contract admission.
+- One seven-check `profile.boundary.interop` suite preserves every
+  foreign-memory decision, exact source and disposition, metadata closure,
+  canonical and legacy routing, typed outcome, and no-fallback claim.
+- Native metadata replaces helper execution, F022/F023 remains an independent
+  gate, the last row-35 Bash dependency closes, six historical records transfer
+  to suite authority, and four M6-I120 dependency dispositions are accepted.
+- Canonical success and ten rejecting mutations prove parity. Focused,
+  generated, numeric, declarative, plan, and complete mixed evidence pass.
+  Final graph: 5 Bash checkers, 6 nodes, 22 edges, and 6 components.

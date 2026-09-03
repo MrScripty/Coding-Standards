@@ -564,6 +564,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "interop-event-registration"
         },
         {
@@ -1064,6 +1069,11 @@
         {
           "check": "legacy-route",
           "role": "content",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "legacy-route",
+          "role": "content",
           "suite": "interop-event-registration"
         },
         {
@@ -1421,6 +1431,11 @@
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "implementation-versus-dependency"
+        },
+        {
+          "check": "router-route",
+          "role": "content",
+          "suite": "interop-boundary-policy"
         },
         {
           "check": "router-route",
@@ -1994,7 +2009,7 @@
       ]
     },
     {
-      "digest": "sha256:8f007946582113ab4d1e7fffe2c0cfeda8262dee96c2c72a9bb2ba47014fb053",
+      "digest": "sha256:39e4b12ff935847dfd6490306e050ff4aabcf0499f6912863f1d3e761b9ae920",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2018,7 +2033,7 @@
       ]
     },
     {
-      "digest": "sha256:a6a96f33902ff1f9934888a9f1d2923a1181cc010f4a5ad446ad59122bad135a",
+      "digest": "sha256:18f358b609384985e81029069cfe5788a41a0c818ae6b1d3ca7b9bbd53465a57",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2384,7 +2399,7 @@
       ]
     },
     {
-      "digest": "sha256:aa903482a444297aa09c1db347cbc304832e811d39be760f5e3511873ad4ab2f",
+      "digest": "sha256:edb49b80192e248335b39ca682b7c32048a2a24b2950a6c19899dfd544e340bb",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -2824,6 +2839,11 @@
           "check": "exact-disposition",
           "role": "table",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "exact-dispositions",
+          "role": "table",
+          "suite": "interop-boundary-policy"
         },
         {
           "check": "exact-disposition",
@@ -3737,7 +3757,7 @@
       ]
     },
     {
-      "digest": "sha256:ee4bc3d2bbe14755a08de5d2af0d94c35602188dfef0febe2e3641d79064d486",
+      "digest": "sha256:71a108f1743efd37528ba77afffdedf6a5f7c3245c0448df3bd34cfb4c79b3c4",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4934,6 +4954,18 @@
           "check": "fixture-evidence",
           "role": "table",
           "suite": "interop-event-registration"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:12242005909ec4a6d9b14059f05af8d9734fad778c5b1516a615eabebabebefc",
+      "path": "evaluation/standards-effectiveness/fixtures/interop/foreign-memory-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "foreign-memory-decisions",
+          "role": "decision-table",
+          "suite": "interop-boundary-policy"
         }
       ]
     },
@@ -7259,7 +7291,7 @@
       ]
     },
     {
-      "digest": "sha256:ab7fb9109b21307a3baddfbf63e45803a159a291c5edff18f1540a71a991a531",
+      "digest": "sha256:e9ad30d3a8cf09abbac52cbe5aad58d0d0c0fe30364a5f1e78341b9e51f0c3e0",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7271,7 +7303,7 @@
       ]
     },
     {
-      "digest": "sha256:20cd37c21e1908d617f821f41bf92b34ca5cf747afd35574b67a2b65aef86512",
+      "digest": "sha256:45e52bbdae00f8c54b8b7304a8843a5899161662927e83a67785cec175fbfc0a",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -7474,6 +7506,11 @@
           "check": "section-inventory",
           "role": "table",
           "suite": "interop-applicability-index"
+        },
+        {
+          "check": "source-identities",
+          "role": "table",
+          "suite": "interop-boundary-policy"
         },
         {
           "check": "source-identity",
@@ -9263,7 +9300,7 @@
       ]
     },
     {
-      "digest": "sha256:08747fe2ef9bca67bf51c42360c0bb5c23f287f4cb85d91cce8a129e1fab2236",
+      "digest": "sha256:b1607c625f7e39489738e47bd975ca1c56d55862fc408fdda28b67d5caeb8a28",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -10314,7 +10351,7 @@
       ]
     },
     {
-      "digest": "sha256:e7abd2d02398fc5e26681d564da36c039cfe46b79c6d4f489ae78eaa2268268a",
+      "digest": "sha256:2590be93cace95ff2d7ad5cf6c979ad98f5b64c33953de1bbc6a782c24640f8b",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11369,6 +11406,18 @@
     {
       "digest": "sha256:2798cb67138bcaefc27984efcef9ed494c4e80cf075e673d5d3d05c447aad2a1",
       "path": "evaluation/standards-effectiveness/suites/interop-applicability-index.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:fba2a7f7f2b577d771eb97cdfb34caaa89a51eb8a513dfc3a461b16933098c2e",
+      "path": "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml",
       "state": "present",
       "uses": [
         {
@@ -13640,38 +13689,6 @@
       ]
     },
     {
-      "digest": "sha256:e6e15daea1f368448657030c2e7bfea3917cb1615bf07a72bd21b28772208fa9",
-      "path": "evaluation/standards-effectiveness/verify-interop-boundary-policy.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "path": "evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh",
       "state": "absent",
       "uses": [
@@ -14828,6 +14845,16 @@
           "check": "state-model",
           "role": "owner-state",
           "suite": "execution-train"
+        },
+        {
+          "check": "canonical-profile",
+          "role": "content",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
         },
         {
           "check": "event-registration-policy",
@@ -22393,6 +22420,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "interop-event-registration"
         },
         {
@@ -23308,6 +23340,11 @@
           "check": "security-policy",
           "role": "content",
           "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
         },
         {
           "check": "metadata-closure",
@@ -24640,6 +24677,11 @@
         {
           "check": "metadata-closure",
           "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
           "suite": "interop-event-registration"
         },
         {
@@ -25026,11 +25068,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:e7abd2d02398fc5e26681d564da36c039cfe46b79c6d4f489ae78eaa2268268a",
+    "digest": "sha256:2590be93cace95ff2d7ad5cf6c979ad98f5b64c33953de1bbc6a782c24640f8b",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:87cb6138441b8b054c9646f6c042ce25d08a481e7d8459f4eba55113ba2430e7",
+    "digest": "sha256:4c38e47fffa02d8db559071d99c9c392675c9260fee1e7ef72eefc5ec8a08b15",
     "uses": [
       {
         "check": "python-package-contract",
@@ -26723,6 +26765,12 @@
       "digest": "sha256:77cfa7dca878a3c2f0a95a3a1c0f8072ccf3535fe0314278ab5264a2c5c1cc56",
       "id": "contract-ownership",
       "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:fba2a7f7f2b577d771eb97cdfb34caaa89a51eb8a513dfc3a461b16933098c2e",
+      "id": "interop-boundary-policy",
+      "path": "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml",
       "requires": []
     }
   ]

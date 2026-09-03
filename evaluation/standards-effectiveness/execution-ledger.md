@@ -15633,6 +15633,21 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   pass. Final graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components;
   fresh graph evidence is required next.
 
+## 2026-09-03 - M6-I120 Interop Boundary Acceptance
+
+- Fresh post-M6-I119 evidence selected the zero-inbound wave-1 Interop boundary
+  checker as a `serial-coherent` package using existing engine mechanics.
+- The registered seven-check `profile.boundary.interop` suite preserves typed
+  decisions, exact source and disposition evidence, metadata, canonical and
+  legacy routing, and no-fallback policy.
+- Metadata execution becomes native, F022/F023 remains an independent gate, the
+  last row-35 Bash dependency closes, and exact historical/dependency
+  dispositions transfer to durable evidence.
+- Canonical success and ten rejecting mutations prove parity. Focused,
+  generated, numeric, declarative, plan, and complete mixed evidence pass.
+  Final graph: 5 Bash checkers, 6 nodes, 22 edges, and 6 components; fresh graph
+  evidence is required next.
+
 ## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
 
 - Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,

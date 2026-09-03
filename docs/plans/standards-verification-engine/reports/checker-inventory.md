@@ -4689,6 +4689,33 @@ retained Bash checkers. Final graph evidence contains 98 nodes, 616 edges, and
 wrappers, compatibility representations, false dependencies, dual authority,
 or fallback.
 
+### M6-I120 Interop Boundary Acceptance
+
+Fresh post-M6-I119 evidence reports 6 Bash verifiers, 8 executable nodes, 30
+conservative edges, and 8 components. The 138-line Interop boundary verifier
+and the 55-line plan-fixture verifier are the two zero-inbound wave-1 roots.
+Interop is selected because all seven semantic checks compose from existing
+engine mechanics, while plan-fixture migration requires a separately admitted
+shared plan-contract check.
+
+The `serial-coherent` package registers one seven-check
+`profile.boundary.interop` suite. It preserves all foreign-memory decisions,
+eight exact source identities and dispositions, metadata closure, canonical
+foreign authority, Router selection, bounded legacy routing, typed outcomes,
+and no-fallback policy. The metadata helper becomes a native graph assertion;
+the F022/F023 decomposition remains an independently executed retained gate.
+
+The last row-35 Bash README dependency closes. Six historical M6-I33, M6-I113,
+and M6-I114 records transfer to `suite:interop-boundary-policy`, and four
+M6-I120 rows preserve the two retired executable dependencies.
+
+Canonical success and ten rejecting decision, source, disposition, metadata,
+policy, route, and legacy mutations prove parity. Focused, generated, numeric,
+declarative, plan, and complete mixed evidence pass. Final graph: 5 Bash
+checkers, 6 executable nodes, 22 edges, and 6 components. The old checker is
+absent without engine changes, nested execution, normative policy changes,
+compatibility behavior, or fallback.
+
 ### M6-I32 Discover-Or-Create Reference Admission
 
 Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture
