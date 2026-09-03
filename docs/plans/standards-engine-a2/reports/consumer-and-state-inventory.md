@@ -1,10 +1,12 @@
-# A2 Current Consumer And State Inventory
+# A2 Consumer And State Inventory
 
-**Observation date:** `2026-09-01`
+**Status:** `Accepted after the 2026-09-03 final refresh`
+
+**Initial observation date:** `2026-09-01`
 
 **Admitted baseline:** `d9d5b56a622ba4ce77ac0feb37ac7e0b116b1d1e`
 
-## Result
+## Initial Result
 
 The bounded current repository contains the A1c implementation, generated
 contract projections, package and contract tests, and the fresh-process
@@ -20,7 +22,7 @@ still requires a post-M6-I113 ownership audit before another migration package
 is admitted. A2 therefore does not freeze future implementation-consumer or
 coverage totals from this inventory.
 
-## Bounded Search
+## Initial Bounded Search
 
 | Population | Bounded method | Current result | Meaning |
 | --- | --- | --- | --- |
@@ -35,7 +37,7 @@ coverage totals from this inventory.
 | Publication target | Inspect `repository_git` and the A1c composition root | Current configured repository `HEAD` is read authority; no write-capable Adapter exists | Milestone 0 must select one exact publication target and success postcondition before production planning. |
 | Verification graph | Run the generated-artifact freshness check | Fresh: 12 Bash verifiers, 14 nodes, 81 edges, 14 components | Structural evidence is current, but the active migration plan still owns its next read-only audit and later mutations. |
 
-## Current Public Contract
+## Initial Public Contract
 
 - Interface schema version: `12`.
 - Request contract version: `4`.
@@ -54,7 +56,7 @@ analysis request accepts a base and proposed `SnapshotHandle`. A proposal
 revision is not accepted canonical snapshot authority, so A2 cannot pass a
 proposal revision through either field by reinterpretation.
 
-## Current Durable State
+## Initial Durable State
 
 The default store is one SQLite Snapshot Module with application ID
 `0x43534131`, schema user version `1`, and a 5000 ms busy timeout. Its exact
@@ -72,7 +74,7 @@ Open rejects a wrong application ID, a newer version as `unsupported`, any
 other version as `invalid`, and any non-exact schema. No migration mechanism or
 compatibility reader exists.
 
-## Compatibility And Release Consequences
+## Initial Compatibility And Release Consequences
 
 The current-tree evidence would permit a coordinated repository-owned public
 contract replacement because every discovered public projection and test
@@ -84,12 +86,10 @@ consumer is jointly controlled. It does not authorize that selection:
 3. The product owner has not yet selected A2 as the feature-completeness
    trigger or promised an overlap window.
 
-Therefore the current disposition is `decision-pending`, not “migration not
-needed.” If the product owner selects feature completeness with A2 and confirms
-no supported external overlap, one coordinated replacement plus typed stale-
-state rejection is the minimal candidate. A real supported retained consumer
-would instead require a bounded migration or compatibility contract with an
-owner and retirement trigger.
+Therefore the initial disposition was `decision-pending`, not “migration not
+needed.” The final refresh below resolves that decision. A real supported
+retained consumer would instead require a bounded migration or compatibility
+contract with an owner and retirement trigger.
 
 ## Reproduction Boundary
 
@@ -99,3 +99,33 @@ check, and the accepted A1c fresh-process tests as behavioral evidence. It did
 not inspect user home directories, deployment machines, unpublished packages,
 or external registries. Those boundaries are deliberate and must not be
 reported as empty populations.
+
+## Final Refresh: 2026-09-03
+
+The final A2 audit repeated the bounded searches at
+`82a0ddf315a08364357f6564018e37bdbeb72a1a` plus the reviewed closure repair.
+It again found no non-test current-tree runtime consumer, registered package
+entry point, or tracked `.sqlite`, `.sqlite3`, `.db`, or `.db3` file. The
+coordinated repository-owned schema compiler, generated projections, examples,
+and tests remain the complete discovered public-contract consumer closure.
+External deployments and copied stores remain outside this repository search.
+
+The current public contract is interface v19, request v4, and result projection
+v5 with the eight unchanged A1c operation roots plus eight additive A2 roots:
+`create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`,
+`analyze_proposal`, `review_proposal`, `apply_proposal`, and
+`recover_application`. The current Snapshot store is exact schema v2. A2 is
+feature complete for this initial controlled-authoring scope, so these are the
+single supported current formats. No current consumer justifies a compatibility
+reader, dual format, or general migration framework; a newly discovered
+independent consumer is a re-plan trigger.
+
+The fresh generated verification audit reports seven retained Bash verifiers,
+nine dependency nodes, 33 edges, and nine components. The complete checkpoint
+selects 270 declarative suites. The independently owned Generic Standards
+Verification Engine migration remains active, so A2 freezes none of those
+counts in runtime behavior: every application verifies its exact candidate
+against the candidate's current complete checkpoint. Engine implementation
+artifacts remain outside canonical standards membership. The Engine
+implementation file is an explicit implementation-projection consumer in the
+policy-impact graph, not a standard.

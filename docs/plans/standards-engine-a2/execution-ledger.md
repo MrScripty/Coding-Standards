@@ -1322,3 +1322,43 @@
 - Independent specification and Standards re-reviews report no remaining hard
   violation in this runtime-fix boundary. The separate final acceptance record
   owns feature-completeness, issue closure, and objective status.
+
+## 2026-09-03 - A2 Initial Controlled-Authoring Scope Accepted
+
+- The final bounded product/consumer refresh found no non-test current-tree
+  Engine consumer, package entry point, or tracked retained store. Interface
+  v19 and store v2 are the sole supported current formats. A2 is feature
+  complete for the initial controlled-authoring scope; a compatibility reader,
+  overlap window, or general migration framework has no current consumer.
+- The final preservation reconciliation accepts A1C-U01 through A1C-U21. The
+  eight A1c public operation roots and all unreauthorized product choices remain
+  unchanged. The 2026-09-01 projected-material decision and the 2026-09-02
+  exact same-engine store-v1-to-v2 migration remain the only two integration
+  scopes; result projection v4-to-v5 and Analysis identity/handle v5-to-v6 are
+  recorded coordinated A2 changes rather than mislabeled as unchanged.
+- Objective criteria A2-A1 through A2-A14 are accepted with composed public
+  workflow evidence across create/discover, revise CAS, exact query, cold
+  analysis replay, readiness/application behavior, and real Git/SQLite
+  interruption recovery. The exact disposition and deciding evidence are in
+  [the final acceptance audit](reports/a2-plan-admission.md).
+- Independent Standards and specification reviews initially rejected the
+  production range, then separately accepted the runtime closure at signed
+  commit `3933c74a1a6a86cb191092a020d2753308dc6e2e`. Standards reports no
+  remaining hard violation; specification reports no remaining runtime
+  blocker. The questioned monolithic workflow test is not required because the
+  claim-matched public tests compose the complete cross-process evidence.
+- The final audit resolves A2-007, A2-008, A2-010, A2-011, A2-012, A2-015, and
+  A2-016. P5/P5L remain rejected evidence. P5C remains accepted evidence only;
+  P5R/P5M are terminally not admitted because no production resource or
+  measurement consumer exists. No second analyzer, capability surface,
+  resource owner, measurement driver, compatibility machinery, application
+  scan/index, retry loop, or Engine standards-graph node was added.
+- Each supported runtime passes the focused M5-M7 workflow, all 50 Standards
+  Engine tests, all 20 Standards Contracts tests, and the complete checkpoint
+  of 270 declarative suites plus seven retained Bash checkers. Ruff, generated
+  contract freshness, plan structure, generated verification freshness, diff
+  hygiene, staged-scope review, and sensitive-file review pass.
+- Milestone 0 and Milestones 1 through 7 are accepted. No A2 milestone remains.
+  A new consumer, retained-store overlap, platform, publication model, or
+  caller-visible behavior must enter through the recorded re-plan triggers;
+  acceptance grants no authority for speculative runtime machinery.

@@ -1,7 +1,6 @@
 # A1c User-Decision Preservation Matrix
 
-**Status:** `Milestone 7 application recovery reconciliation accepted; final A2
-reconciliation remains active`
+**Status:** `Accepted by final A2 reconciliation`
 
 ## Authority And Method
 
@@ -205,15 +204,15 @@ intents without a selection are not silently reinterpreted and receive typed
 `APPLICATION.NOT_ADMITTED`; the current internal coordinated-consumer
 inventory does not justify migration machinery.
 
-## Current Verdict
+## Final Verdict
 
-Milestone 7 is reconciled for lost-response application recovery. The original
-eight A1c operations remain explicit and retain their behavior;
+Milestone 7 and final A2 acceptance are reconciled. The original eight A1c
+operations remain explicit and retain their behavior;
 revision-backed Analysis remains the single source of completion and
 obligation truth, readiness remains the review authority, the Standards
 Verifier remains the complete-checkpoint owner, and Repository Git remains the
 only Git Adapter. Application adds no second analyzer, mutable lifecycle,
 automatic retry/rollback, generic process/resource machinery, or
-standards-graph membership. Cross-engine compatibility, feature completeness,
-and final A2 acceptance remain unresolved and cannot inherit Milestone 7
-authority.
+standards-graph membership. A2 is feature complete for the initial controlled-
+authoring scope; cross-engine compatibility remains unavailable without a real
+independent consumer or retained store and cannot inherit A2 authority.

@@ -1,6 +1,6 @@
 # A2 Product-Contract Discovery
 
-**Status:** `direct canonical publication selected; exact contract pending`
+**Status:** `accepted for the initial controlled-authoring scope`
 
 ## Caller And Deployment
 
@@ -24,10 +24,10 @@ publication targets or standards authority.
 | Query/read | A1c `query` compiles and navigates one immutable snapshot | Project the proposal revision through the same compiler and semantic owners without treating it as accepted snapshot authority | route/read/related results; invalid projection; unresolved facts; unavailable authority |
 | Analyze | A1c `prepare`, `resolve`, one immutable `AnalysisState`, and one `AnalysisHandle` own analysis | Bind analysis to the exact proposal revision and reuse current semantics without caller-duplicated facts or a second analyzer | pending; complete; rejected; prior-analysis reuse; material invalidation |
 | Approve | `resolve` records authorized analysis submissions; completion is derived, not authored | Record separately authorized semantic, relationship, lifecycle, mutation, and apply decisions and derive readiness for the exact revision | ready; incomplete; unauthorized; revoked; stale revision; stale analysis |
-| Apply | A1c has no canonical mutation operation | Materialize an isolated candidate, verify its exact bytes, publish through an expected-target transition, establish postcondition, and retain a recoverable attempt | applied; stale target; verification failed; unauthorized; unavailable; recovery required |
-| Snapshot delete/undelete | Quarantine and undelete operate on the complete aggregate with one fixed deadline | Proposal, revision, readiness, and attempt records follow the base root lifecycle without independent destructive operations | quarantined; restored; expired; purged; no partial child state |
-| Interruption/recovery | Stored A1c handles reconstruct after cold process restart | Recover an attempt from durable base, candidate, target, phase, and observations without guessing or default rollback | unchanged/resumable; applied/confirmed; stale/conflicting; recovery required |
-| Agent handoff | Opaque handles cross authorized handoffs and process boundaries | A second authorized agent continues from proposal or attempt handles under current authority | resolved; unauthorized; revoked; unsupported contract |
+| Apply | A1c has no canonical mutation operation | Materialize an isolated candidate, verify its exact bytes, publish through an expected-target transition, establish the postcondition, and retain immutable application intent, selection, and outcome | applied; stale target; verification failed; unauthorized; unavailable; recovery required |
+| Snapshot delete/undelete | Quarantine and undelete operate on the complete aggregate with one fixed deadline | Proposal, revision, readiness, application intent, selection, and outcome records follow the base root lifecycle without independent destructive operations | quarantined; restored; expired; purged; no partial child state |
+| Interruption/recovery | Stored A1c handles reconstruct after cold process restart | Resolve the readiness-selected immutable application and either return its durable outcome or reconcile the current exact target observation without resuming publication | applied/confirmed; expected target; diverged target; observation unavailable; outcome persistence unavailable |
+| Agent handoff | Opaque handles cross authorized handoffs and process boundaries | A second authorized agent continues from proposal or readiness handles under current authority | resolved; unauthorized; revoked; unsupported contract |
 
 ## Caller Knowledge Budget
 
@@ -58,16 +58,14 @@ candidate object from trusted execution context and durable state.
 2. the configured canonical ref changed from the internally captured expected
    object to the verified candidate through an atomic expected-target update;
 3. a post-publication observation resolves that ref to the exact candidate; and
-4. the durable application attempt records the established identity.
+4. the durable immutable application outcome records the established identity.
 
 A candidate commit, export, or external submission is not `applied`. An
 unavailable or contradictory observation never guesses success and remains a
-typed recovery outcome. This product decision selects the success meaning; it
-does not yet admit a public result schema, Git implementation, store version,
-migration, or production source.
+typed recovery outcome. The current interface v19, Repository Git Adapter,
+Snapshot store v2, and Authoring implementation realize this selected meaning.
 
-One exact caller-visible meaning remains to be selected after the real scratch
-publication/recovery prototype:
+The deciding caller-visible outcome comparison was:
 
 | Candidate outcome | Exact postcondition | Valid result name | Product consequence |
 | --- | --- | --- | --- |
@@ -81,14 +79,18 @@ that satisfies the accepted A2 objective without an external observer. A
 successful candidate commit, export, or submission cannot be relabeled
 `applied`.
 
-## Current Open Product Choices
+## Final Product Choices
 
-The product owner must still select:
+A2 constitutes feature completeness for the initial Coding Standards
+controlled-authoring scope. The fresh bounded repository inventory finds only
+coordinated current-tree contract and test consumers and no retained store, so
+v19/store-v2 is the one supported current format. No cross-engine reader,
+overlap window, or migration framework is justified. Discovery of an
+independently deployed consumer or retained external store is a re-plan trigger,
+not a reason to build compatibility machinery speculatively.
 
-1. whether A2 constitutes Coding Standards feature completeness for the A1c
-   cross-engine compatibility decision; and
-2. whether proposal abandonment has a caller-required lifecycle distinct from
-   deletion of its base snapshot.
-
-No production Interface or persisted design is admitted while these choices
-materially affect it.
+No current caller requires proposal abandonment independently of its base
+snapshot. Proposal state therefore retains the accepted aggregate lifecycle:
+snapshot quarantine, undelete, expiry, and purge govern the complete dependent
+closure. A future distinct abandonment need requires separate product and
+lifecycle evidence.
