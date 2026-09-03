@@ -1,13 +1,14 @@
 # Plan: Standards Engine A2 Controlled Authoring
 
-**Plan status:** `Accepted`
+**Plan status:** `Superseded`
 
-**Current phase:** A2 controlled authoring accepted for the initial scope
+**Current phase:** replacement-based controlled authoring implemented; the
+unmet logical-authoring contract is governed by the corrective continuation
 
-**Next slice:** none; a new consumer, retained-store overlap, platform, or
-product behavior requires a separately admitted re-plan
+**Next slice:** none; continue only through the
+[A2 logical-authoring plan](../standards-engine-a2-logical-authoring/plan.md)
 
-**Acceptance status:** `satisfied`
+**Acceptance status:** `partial`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -33,6 +34,9 @@ product behavior requires a separately admitted re-plan
 
 **Final acceptance:**
 [A2 final acceptance audit](reports/a2-plan-admission.md)
+
+**Corrective continuation:**
+[A2 logical authoring](../standards-engine-a2-logical-authoring/plan.md)
 
 ## Objective
 
@@ -60,7 +64,7 @@ canonical-standards mutation.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A2-A1 | An authorized agent creates, discovers, revises, reads, and analyzes a durable proposal across process and agent-turn boundaries without supplying repository paths, Git objects, raw authority bytes, or independently duplicated analysis facts. | `user-workflow` | `representative` | `automated` | `satisfied` | [Final acceptance audit](reports/a2-plan-admission.md#objective-disposition) |
+| A2-A1 | An authorized agent creates, discovers, revises, reads, and analyzes a durable proposal across process and agent-turn boundaries without supplying repository paths, Git objects, raw authority bytes, or independently duplicated analysis facts. | `user-workflow` | `representative` | `automated` | `pending` | [The 2026-09-03 gap audit](../standards-engine-a2-logical-authoring/reports/current-interface-gap.md) found that the public mutation still requires a repository path and complete replacement file. |
 | A2-A2 | Every proposal revision is immutable and binds its base snapshot, exact mutations, semantic-proposal material, and material contract identities; one durable proposal head advances only by compare-and-swap and rejects a stale expected head without altering another revision. | `contract` | `not-applicable` | `automated` | `satisfied` | [Final acceptance audit](reports/a2-plan-admission.md#objective-disposition) |
 | A2-A3 | Proposal navigation and impact analysis execute through the accepted A1c metadata, graph, applicability, policy-impact, coverage, and single-`AnalysisState` semantics; a current complete `AnalysisHandle` is reused rather than replaced by an A2 analyzer, packet, report lifecycle, or mutable analysis head. | `integration` | `not-applicable` | `automated` | `satisfied` | [Final acceptance audit](reports/a2-plan-admission.md#objective-disposition) |
 | A2-A4 | Apply readiness is a distinct immutable proof bound to the exact current proposal revision, complete analysis handle, required semantic, relationship, and lifecycle approvals, evidence, authorization authority, target authority, and verification contract; mutation or authority change invalidates only materially dependent proof. | `contract` | `not-applicable` | `automated` | `satisfied` | [Final acceptance audit](reports/a2-plan-admission.md#objective-disposition) |
@@ -954,9 +958,11 @@ mechanism and evidence; no cleanup is inferred from acceptance or rejection.
 
 ## Final Acceptance
 
-- Acceptance status: `satisfied`
+- Acceptance status: `partial`
 - Deferred follow-ups: Plan C external-project baselines; Windows and macOS
   support; cross-engine stored-state compatibility if a real independent
-  consumer or retained store is discovered
-- Final status: `Accepted`
-- Evidence: [A2 final acceptance audit](reports/a2-plan-admission.md)
+  consumer or retained store is discovered; path-free logical authoring is
+  active in the [corrective continuation](../standards-engine-a2-logical-authoring/plan.md)
+- Final status: `Superseded`
+- Evidence: [A2 replacement-scope audit](reports/a2-plan-admission.md) and
+  [current Interface gap](../standards-engine-a2-logical-authoring/reports/current-interface-gap.md)

@@ -1,17 +1,27 @@
 # A2 Final Acceptance Audit
 
-**Status:** `Accepted for the initial controlled-authoring scope`
+**Status:** `Accepted evidence for the replacement-based scope; superseded for
+objective-wide acceptance`
 
 **Production range:**
 `f6020239ccd901cf3b778a7d98f7c9ef6bf5d60a..cb04cab59a56f0c53d8e38f7955162530d82cd57`
 
 ## Decision
 
-A2 is feature complete for the initial Coding Standards controlled-authoring
-scope. The accepted facade creates, discovers, revises, reads, analyzes,
-reviews, applies, and recovers durable standards proposals while preserving the
-eight A1c operation roots and the two exact recorded A1c integration scopes.
-No later A2 milestone or speculative runtime mechanism remains admitted.
+A2 is feature complete for replacement-based Coding Standards controlled
+authoring. The facade creates, discovers, revises, reads, analyzes, reviews,
+applies, and recovers durable replacement proposals while preserving the eight
+A1c operation roots and the two exact recorded A1c integration scopes. The
+evidence in this report remains accepted for that implemented behavior.
+
+The 2026-09-03 audit found that objective A2-A1 was accepted too broadly. The
+public `ReplacementMutation` still requires a repository-relative path and the
+complete replacement file, and it cannot add, remove, or relocate a target.
+This report therefore does not prove path-free logical standards authoring.
+The original plan is superseded with partial objective acceptance, and the
+[A2 logical-authoring plan](../../standards-engine-a2-logical-authoring/plan.md)
+owns the corrective continuation. This correction does not invalidate the
+runtime, safety, or replacement-workflow evidence below.
 
 The final audit initially rejected acceptance and produced one runtime closure.
 Its current signed identity is
@@ -122,7 +132,7 @@ agreement between observed `refs/heads/main` and the durable applied outcome.
 
 | Criterion | Disposition | Evidence summary |
 | --- | --- | --- |
-| A2-A1 | accepted | Public durable create/discover/revise/read/analyze workflow and opaque cross-process handles |
+| A2-A1 | not accepted as stated | Public durable create/discover/revise/read/analyze and opaque cross-process handles pass, but callers still supply repository paths and complete replacement files. |
 | A2-A2 | accepted | Immutable content-bound revisions and Snapshot-owned proposal-head CAS |
 | A2-A3 | accepted | One A1c compiler/navigation/Analysis kernel and exact projected-material replay |
 | A2-A4 | accepted | Immutable content-bound readiness with separate current review/apply/recovery authority |
