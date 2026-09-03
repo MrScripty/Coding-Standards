@@ -31,6 +31,7 @@ from tools.standards_engine.standards_engine import (
     AnalysisChildInspectionResult,
     AnalysisHandle,
     AnalysisInspectionResult,
+    ApplyProposalResult,
     CompleteResult,
     CreateProposalCall,
     CreateProposalResult,
@@ -53,12 +54,16 @@ from tools.repository_git.repository_git import (
     MaterializedCandidate,
     RepositoryPath,
     RepositoryRevision,
+    git_output,
 )
 from tools.standards_verifier.standards_verifier import CompleteVerificationResult
 from tools.standards_verifier.standards_verifier.diagnostics import Diagnostic
 from tools.standards_engine.standards_engine.tools import _contracts
 from tools.standards_engine.standards_engine.authoring import (
+    ProposalApplication,
+    ProposalRevision,
     REVIEW_CAPABILITIES,
+    proposal_commit_message,
     review_decision_subject,
 )
 from tools.standards_snapshots.standards_snapshots import (
@@ -395,6 +400,21 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     engine._repository.branch_revision("main"),
                     application.candidate,
                 )
+                commit = git_output(
+                    repository,
+                    ("cat-file", "commit", application.candidate.oid),
+                )
+                headers, separator, message = commit.partition(b"\n\n")
+                self.assertEqual(separator, b"\n\n")
+                self.assertIn(
+                    f"parent {expected.oid}".encode("ascii"), headers.splitlines()
+                )
+                self.assertEqual(
+                    message,
+                    proposal_commit_message(
+                        engine._authoring.read_revision(created.revision.id)
+                    ).encode(),
+                )
                 applied_planning = engine._repository.read_file(
                     application.candidate,
                     RepositoryPath.parse(path),
@@ -447,6 +467,355 @@ class AnalysisWorkflowTest(unittest.TestCase):
             self.assertEqual(cold_application, application)
             self.assertEqual(cold_outcome.candidate, application.candidate)
             self.assertEqual(cold_outcome.status, "applied")
+
+    def test_apply_create_and_retire_owns_topology_and_commit(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            repository = root / "repository"
+            store = root / "standards.sqlite3"
+            _clone_tracked_worktree(repository)
+            context = AnalysisExecutionContext(ExactAuthorizer())
+            engine = StandardsEngine.open_repository(
+                repository,
+                store_path=store,
+                execution_context=context,
+            )
+            facade = AgentToolFacade(engine, _contracts(repository))
+            standard_path = "topics/logical-application-test.md"
+            policy_path = (
+                "evaluation/standards-effectiveness/policy-units/"
+                "topic.logical-application-test.toml"
+            )
+            impact_path = (
+                "evaluation/standards-effectiveness/policy-impact/"
+                "topic.logical-application-test.toml"
+            )
+            relationship = {
+                "source_policy": "topic.logical-application-test.policy",
+                "consumer": "workflow.planning",
+                "relation": "normative-consumer",
+                "applicability": {"operator": "always"},
+                "source_scope": None,
+                "consumer_scope": None,
+                "evidence_owner": "suite:core-simplicity",
+                "rationale": "Planning consumes the application fixture policy.",
+            }
+
+            def readiness_for(
+                revision_id: str,
+                expected: RepositoryRevision,
+                marker: str,
+            ):
+                analysis = "analysis:sha256:" + marker * 64
+                decisions = _review_decisions()
+                authorizations = tuple(
+                    construct_authorization_record(
+                        context,
+                        AuthorizationRequest(
+                            "review-proposal",
+                            "proposal-review-decision",
+                            review_decision_subject(analysis, revision_id, decision),
+                            REVIEW_CAPABILITIES[str(decision["owner"])],
+                            (_reference(f"topology-{marker}-{decision['owner']}"),),
+                        ),
+                    ).as_contract()
+                    for decision in decisions
+                )
+                return engine._authoring.review_proposal(
+                    analysis,
+                    revision_id,
+                    decisions,
+                    authorizations,
+                    expected,
+                )
+
+            def apply_ready(readiness_id: str) -> ProposalApplication:
+                applied = ApplyProposalResult.from_value(
+                    facade.apply_proposal(
+                        {
+                            "kind": "apply-proposal",
+                            "readiness": {
+                                "kind": "readiness-handle",
+                                "id": readiness_id,
+                                "schema_version": 1,
+                            },
+                        }
+                    )
+                )
+                return engine._authoring.read_application(applied.application.id)
+
+            def assert_commit(
+                application: ProposalApplication,
+                revision: ProposalRevision,
+                expected: RepositoryRevision,
+            ) -> None:
+                commit = git_output(
+                    repository,
+                    ("cat-file", "commit", application.candidate.oid),
+                )
+                headers, separator, message = commit.partition(b"\n\n")
+                self.assertEqual(separator, b"\n\n")
+                self.assertIn(
+                    f"parent {expected.oid}".encode("ascii"), headers.splitlines()
+                )
+                self.assertEqual(message, proposal_commit_message(revision).encode())
+
+            try:
+                initial = engine._repository.branch_revision("main")
+                base_result = engine.create_snapshot(
+                    CreateSnapshotCall.from_value({"kind": "create-snapshot"})
+                )
+                self.assertIsInstance(base_result, CreateSnapshotResult)
+                created = CreateProposalResult.from_value(
+                    facade.create_proposal(
+                        {
+                            "kind": "create-proposal",
+                            "base_snapshot": base_result.snapshot.snapshot.as_contract(),
+                            "change_set": {
+                                "purpose": {
+                                    "summary": "add logical application fixture",
+                                    "rationale": "Exercise Engine-owned additions and derived standards projections.",
+                                    "evidence": [
+                                        _reference("topology-create").as_contract()
+                                    ],
+                                },
+                                "edits": [
+                                    {
+                                        "kind": "create-standard",
+                                        "standard": {
+                                            "id": "topic.logical-application-test",
+                                            "title": "Logical Application Test",
+                                            "role": "topic",
+                                            "level": "MUST",
+                                            "applies_when": "Logical application is tested.",
+                                            "does_not_apply_when": "Logical application is not tested.",
+                                            "verification": "Standards Engine application tests.",
+                                            "body": "## Application Policy\n\nUse the Engine Interface.\n",
+                                        },
+                                        "requires": ["core"],
+                                        "specializes": [],
+                                        "policy_units": [
+                                            {
+                                                "id": "topic.logical-application-test.policy",
+                                                "heading_chain": ["Application Policy"],
+                                                "semantic_revision": 1,
+                                                "intent": "Create one application test policy.",
+                                                "aliases": [],
+                                                "predecessors": [],
+                                                "successors": [],
+                                            }
+                                        ],
+                                    },
+                                    {
+                                        "kind": "put-policy-relationship",
+                                        "relationship": relationship,
+                                    },
+                                ],
+                            },
+                        }
+                    )
+                )
+                create_revision = engine._authoring.read_revision(created.revision.id)
+                create_ready = readiness_for(created.revision.id, initial, "b")
+                create_application = apply_ready(create_ready.readiness_id)
+                assert_commit(create_application, create_revision, initial)
+                created_paths = {
+                    str(path)
+                    for path in engine._repository.revision_paths(
+                        create_application.candidate
+                    )
+                }
+                self.assertTrue(
+                    {standard_path, policy_path, impact_path} <= created_paths
+                )
+                created_modes = {
+                    line.partition(" ")[2]: line.partition(" ")[0]
+                    for line in git_output(
+                        repository,
+                        (
+                            "ls-tree",
+                            "-r",
+                            "--format=%(objectmode) %(path)",
+                            create_application.candidate.oid,
+                        ),
+                    )
+                    .decode("utf-8")
+                    .splitlines()
+                }
+                self.assertEqual(
+                    {
+                        path: created_modes[path]
+                        for path in (standard_path, policy_path, impact_path)
+                    },
+                    {
+                        standard_path: "100644",
+                        policy_path: "100644",
+                        impact_path: "100644",
+                    },
+                )
+                self.assertFalse((repository / standard_path).exists())
+
+                facade.close()
+                engine = StandardsEngine.open_repository(
+                    repository,
+                    store_path=store,
+                    execution_context=context,
+                )
+                facade = AgentToolFacade(engine, _contracts(repository))
+                self.assertEqual(
+                    engine._repository.branch_revision("main"),
+                    create_application.candidate,
+                )
+                created_snapshot = engine.create_snapshot(
+                    CreateSnapshotCall.from_value({"kind": "create-snapshot"})
+                )
+                self.assertIsInstance(created_snapshot, CreateSnapshotResult)
+                created_read = facade.query(
+                    {
+                        "snapshot": created_snapshot.snapshot.snapshot.as_contract(),
+                        "request": {
+                            "kind": "read",
+                            "target": "topic.logical-application-test",
+                        },
+                    }
+                )
+                self.assertEqual(created_read["kind"], "read-result")
+                self.assertIn("Use the Engine Interface.", created_read["content"])
+                retired = CreateProposalResult.from_value(
+                    facade.create_proposal(
+                        {
+                            "kind": "create-proposal",
+                            "base_snapshot": created_snapshot.snapshot.snapshot.as_contract(),
+                            "change_set": {
+                                "purpose": {
+                                    "summary": "retire logical application fixture",
+                                    "rationale": "Exercise Engine-owned removals and exact generated cleanup.",
+                                    "evidence": [
+                                        _reference("topology-retire").as_contract()
+                                    ],
+                                },
+                                "edits": [
+                                    {
+                                        "kind": "retire-policy-unit",
+                                        "policy": "topic.logical-application-test.policy",
+                                        "retired_semantic_revision": 1,
+                                        "successors": [],
+                                        "relationship_dispositions": [
+                                            {
+                                                "relationship": {
+                                                    "kind": "policy-relationship",
+                                                    "source_policy": relationship[
+                                                        "source_policy"
+                                                    ],
+                                                    "consumer": relationship[
+                                                        "consumer"
+                                                    ],
+                                                    "relation": relationship[
+                                                        "relation"
+                                                    ],
+                                                },
+                                                "disposition": "remove",
+                                                "rationale": "Remove the retired policy relationship.",
+                                                "evidence": [
+                                                    _reference(
+                                                        "topology-retire-policy"
+                                                    ).as_contract()
+                                                ],
+                                            }
+                                        ],
+                                        "evidence": [
+                                            _reference(
+                                                "topology-retire-policy-unit"
+                                            ).as_contract()
+                                        ],
+                                    },
+                                    {
+                                        "kind": "retire-standard",
+                                        "standard": "topic.logical-application-test",
+                                        "successors": [],
+                                        "relationship_dispositions": [
+                                            {
+                                                "relationship": {
+                                                    "kind": "module-relationship",
+                                                    "source": "topic.logical-application-test",
+                                                    "target": "core",
+                                                    "relation": "requires",
+                                                },
+                                                "disposition": "remove",
+                                                "rationale": "Remove the retired dependency.",
+                                                "evidence": [
+                                                    _reference(
+                                                        "topology-retire-standard"
+                                                    ).as_contract()
+                                                ],
+                                            }
+                                        ],
+                                        "evidence": [
+                                            _reference(
+                                                "topology-retire-module"
+                                            ).as_contract()
+                                        ],
+                                    },
+                                ],
+                            },
+                        }
+                    )
+                )
+                retire_revision = engine._authoring.read_revision(retired.revision.id)
+                retire_ready = readiness_for(
+                    retired.revision.id,
+                    create_application.candidate,
+                    "c",
+                )
+                retire_application = apply_ready(retire_ready.readiness_id)
+                assert_commit(
+                    retire_application,
+                    retire_revision,
+                    create_application.candidate,
+                )
+                retired_paths = {
+                    str(path)
+                    for path in engine._repository.revision_paths(
+                        retire_application.candidate
+                    )
+                }
+                self.assertFalse({standard_path, impact_path} & retired_paths)
+                self.assertIn(policy_path, retired_paths)
+                retired_policy = engine._repository.read_file(
+                    retire_application.candidate,
+                    RepositoryPath.parse(policy_path),
+                )
+                self.assertIn(b"[[tombstone]]", retired_policy)
+                self.assertNotIn(b"[[policy_unit]]", retired_policy)
+                self.assertFalse((repository / standard_path).exists())
+
+                facade.close()
+                engine = StandardsEngine.open_repository(
+                    repository,
+                    store_path=store,
+                    execution_context=context,
+                )
+                facade = AgentToolFacade(engine, _contracts(repository))
+                self.assertEqual(
+                    engine._repository.branch_revision("main"),
+                    retire_application.candidate,
+                )
+                retired_snapshot = engine.create_snapshot(
+                    CreateSnapshotCall.from_value({"kind": "create-snapshot"})
+                )
+                self.assertIsInstance(retired_snapshot, CreateSnapshotResult)
+                retired_read = facade.query(
+                    {
+                        "snapshot": retired_snapshot.snapshot.snapshot.as_contract(),
+                        "request": {
+                            "kind": "read",
+                            "target": "topic.logical-application-test",
+                        },
+                    }
+                )
+                self.assertEqual(retired_read["code"], "NAVIGATION.UNKNOWN_POLICY")
+            finally:
+                facade.close()
 
     def test_prepare_persists_parent_bound_public_work(self) -> None:
         result = self.prepare()
@@ -814,6 +1183,43 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(readiness.analysis_id, complete.handle.id)
         self.assertEqual(readiness.revision_id, created.revision.id)
 
+        revision = self.engine._authoring.read_revision(created.revision.id)
+        projection = self.engine._proposal_projection(revision)
+        projected_files = dict(projection.source.files)
+        uncaptured_path = next(
+            path
+            for path in revision.base_repository_paths
+            if path not in projected_files
+        )
+        projected_files[uncaptured_path] = b"not captured authority\n"
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                return_value=readiness.expected_target,
+            ),
+            mock.patch.object(
+                self.engine,
+                "_proposal_projection",
+                return_value=mock.Mock(
+                    source=mock.Mock(files=tuple(projected_files.items())),
+                    repository_paths=projection.repository_paths,
+                ),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+            ) as collision_materialization,
+        ):
+            collision = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(collision["code"], "APPLICATION.TOPOLOGY_INVALID")
+        collision_materialization.assert_not_called()
+
         with mock.patch.object(
             self.engine._repository, "branch_revision"
         ) as unadmitted_observation:
@@ -924,7 +1330,12 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     Diagnostic(
                         "CHECKPOINT.FAILED",
                         "invalid",
-                        "fixture verification failed",
+                        "/tmp/private-candidate/secret: " + "x" * 4096,
+                        suite="suite.fixture",
+                        check="check.fixture",
+                        path="/tmp/private-candidate/secret",
+                        row=42,
+                        field="private-field",
                     ),
                     2,
                 ),
@@ -937,6 +1348,16 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 }
             )
         self.assertEqual(verification_failed["code"], "APPLICATION.VERIFICATION_FAILED")
+        self.assertEqual(
+            verification_failed["details"],
+            {
+                "verification_exit_code": 2,
+                "verification_code": "CHECKPOINT.FAILED",
+                "verification_outcome": "invalid",
+                "verification_suite": "suite.fixture",
+                "verification_check": "check.fixture",
+            },
+        )
         failed_publish.assert_not_called()
         self.assertEqual(self.engine._snapshots._store.counts(), counts_before_failure)
 
@@ -964,13 +1385,15 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine._authoring,
                 "admit_application",
-                return_value=mock.Mock(),
-            ),
+            ) as invalid_admission,
             mock.patch.object(
                 self.engine._repository,
-                "publish_candidate",
+                "validate_candidate",
                 side_effect=invalid_candidate,
             ),
+            mock.patch.object(
+                self.engine._repository, "publish_candidate"
+            ) as invalid_publish,
             mock.patch.object(
                 self.engine,
                 "_application_verifier",
@@ -987,6 +1410,115 @@ class AnalysisWorkflowTest(unittest.TestCase):
             candidate_rejected["code"], "REPOSITORY_GIT.CANDIDATE_DIVERGED"
         )
         self.assertEqual(candidate_rejected["kind"], "rejected-result")
+        self.assertEqual(candidate_rejected["outcome"], "invalid")
+        invalid_admission.assert_not_called()
+        invalid_publish.assert_not_called()
+
+        unavailable_publication = GitRepositoryError(
+            GitRepositoryFailure(
+                "unavailable",
+                "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+                "fixture publication is unavailable",
+            )
+        )
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                side_effect=(
+                    readiness.expected_target,
+                    readiness.expected_target,
+                ),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+                return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._authoring,
+                "admit_application",
+                return_value=mock.Mock(application_id="application:sha256:" + "f" * 64),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "validate_candidate",
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "publish_candidate",
+                side_effect=unavailable_publication,
+            ),
+            mock.patch.object(
+                self.engine,
+                "_application_verifier",
+                return_value=CompleteVerificationResult((), 0, None, 0),
+            ),
+        ):
+            publication_unavailable = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(
+            publication_unavailable["code"], "APPLICATION.PUBLICATION_UNAVAILABLE"
+        )
+        self.assertEqual(
+            publication_unavailable["kind"],
+            "application-recovery-required-result",
+        )
+        self.assertIn(
+            "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+            publication_unavailable["message"],
+        )
+
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                side_effect=(
+                    readiness.expected_target,
+                    readiness.expected_target,
+                ),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+                return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._authoring,
+                "admit_application",
+                return_value=mock.Mock(application_id="application:sha256:" + "e" * 64),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "validate_candidate",
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "publish_candidate",
+                return_value="stale",
+            ),
+            mock.patch.object(
+                self.engine,
+                "_application_verifier",
+                return_value=CompleteVerificationResult((), 0, None, 0),
+            ),
+        ):
+            publication_stale = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(
+            publication_stale["code"], "APPLICATION.RECOVERY_TARGET_DIVERGED"
+        )
+        self.assertEqual(
+            publication_stale["kind"], "application-recovery-required-result"
+        )
 
         unavailable_observation = GitRepositoryError(
             GitRepositoryFailure(
@@ -1014,6 +1546,10 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 self.engine._repository,
                 "publish_candidate",
                 return_value="updated",
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "validate_candidate",
             ),
             mock.patch.object(
                 self.engine,

@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Literal
 
 from tools.repository_git.repository_git import (
+    CandidateCommitMessage,
     GitRepositoryError,
     RepositoryPath,
     RepositoryRevision,
@@ -209,6 +210,29 @@ class ProposalRevision:
             encode_identity_value(self.identity_material()),
             (self.base_snapshot,),
         )
+
+
+def proposal_commit_message(revision: ProposalRevision) -> CandidateCommitMessage:
+    """Project immutable proposal purpose into one canonical Git message."""
+
+    if type(revision) is not ProposalRevision or not revision.change_sets:
+        raise _invalid(
+            "AUTHORING.INVALID_COMMIT_MATERIAL",
+            "candidate commit requires one exact non-empty proposal revision",
+        )
+    try:
+        return CandidateCommitMessage(
+            "feat(standards): apply standards change: "
+            f"{revision.change_sets[-1].purpose.summary}",
+            "\n\n".join(
+                change_set.purpose.rationale for change_set in revision.change_sets
+            ),
+        )
+    except GitRepositoryError as error:
+        raise _invalid(
+            "AUTHORING.INVALID_COMMIT_MATERIAL",
+            "proposal purpose does not form a canonical standards commit message",
+        ) from error
 
 
 @dataclass(frozen=True, slots=True, order=True)
@@ -729,6 +753,7 @@ class AuthoringModule:
         prior_readiness: str | None = None,
     ) -> ProposalReadiness:
         revision = self.read_revision(revision_id)
+        proposal_commit_message(revision)
         readiness = ProposalReadiness(
             revision.base_snapshot,
             analysis_id,
@@ -1571,5 +1596,6 @@ __all__ = (
     "application_recovery_subject",
     "application_selection_id",
     "application_subject",
+    "proposal_commit_message",
     "review_decision_subject",
 )

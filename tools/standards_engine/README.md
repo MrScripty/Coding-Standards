@@ -40,22 +40,30 @@ creates the same immutable A1c Analysis state used by `prepare` and `resolve`.
 Authoring callers do not submit `semantic_proposals`; that field remains an A1c
 Analysis representation. Exact revision identity participates in cold replay
 without treating projected material as a Snapshot. `review_proposal` accepts
-only a complete current revision analysis
-with no `requires-change` disposition and three explicit evidence-backed
+only a complete current revision analysis with no `requires-change`
+disposition and three explicit evidence-backed
 consumer, impact, and audit acceptances. The Engine derives the proposal head,
 configured `refs/heads/main`, and Standards Verifier `complete` checkpoint,
-then publishes one immutable content-bound readiness aggregate under an atomic
-proposal-head guard. `apply_proposal` accepts only that readiness handle,
+derives an imperative proposal-specific conventional subject plus material
+rationale from the explicit purpose, then publishes one immutable content-bound
+readiness aggregate under an atomic proposal-head guard. `apply_proposal`
+accepts only that readiness handle,
 obtains current apply authorization, creates and validates a deterministic
-candidate in a private local clone, and runs the Standards Verifier `complete`
-checkpoint against the exact checkout before import. It records immutable
-verified intent, advances only `refs/heads/main` with an expected-target
-compare-and-swap, observes the exact candidate, and records an immutable
-applied outcome before returning `applied`. During Milestone 1, application is
-supported only when the logical projection changes existing paths; applying
-added or removed paths follows in Milestone 2. Application is local and never
-pushes a remote. Ambiguous post-verification
-publication or persistence returns the durable application handle as
+candidate with the complete Engine-projected add, modify, relocate, and remove
+topology in a private local clone, and runs the Standards Verifier `complete`
+checkpoint against the exact checkout before import. Candidate identity binds
+the exact parent, tree, executable decisions, and proposal-specific message.
+Mechanically authored standards authorities are canonical regular,
+non-executable data files; an existing non-canonical executable authority is
+normalized when that authority changes. The Engine revalidates the candidate
+after the external checkpoint and before durable admission. Failed-verification
+results expose only bounded public code, outcome, suite, and check identifiers;
+raw verifier messages and repository paths remain private. It records immutable
+verified intent, advances only `refs/heads/main` with an
+expected-target compare-and-swap, observes the exact candidate, and records an
+immutable applied outcome before returning `applied`. Application is local and never
+pushes a remote. Every failure after durable application admission returns the
+application handle as
 `recovery-required`. Application admission atomically records one immutable
 readiness-to-application selection with the verified intent.
 `recover_application(readiness)` requires separate current recovery authority,

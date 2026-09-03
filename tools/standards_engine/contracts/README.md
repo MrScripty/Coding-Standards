@@ -103,11 +103,13 @@ aggregates, stage content, verify again, publish Git, or infer success from an
 unchanged target. `repository_git` captures exact object bytes from the current
 canonical `HEAD`; subsequent reads, inspections, and cold reconstruction
 resolve the retained snapshot and never substitute the live worktree. During
-application it also owns isolated candidate materialization and the exact
-canonical ref compare-and-swap. Milestone 1 application supports a logical
-projection only when its Git topology is replacement-only; local application
-of added or removed paths follows in Milestone 2. Neither milestone includes a
-remote push. Equal captured bytes may share internal
+application it also owns isolated add, modify, relocate, and remove candidate
+materialization, canonical non-executable mode for mechanically authored
+standards authorities, deterministic imperative commit identity from validated
+proposal purpose, and the exact canonical ref compare-and-swap. Application
+verifies the exact candidate before publishing it locally and includes no
+remote push. Equal
+captured bytes may share internal
 storage, but each public snapshot has an independent opaque identity and
 lifecycle.
 

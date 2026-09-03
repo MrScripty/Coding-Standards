@@ -12,21 +12,30 @@ The Adapter can also return the exact sorted path observation for a retained
 commit tree; callers persist that observation when later deterministic
 projections must survive worktree or branch replacement.
 
-Write-capable callers provide one exact base revision and path-component-safe
-replacement values. The Adapter creates a private local clone, preserves
-tracked executable modes, constructs a deterministic conventional commit, and
-checks the candidate filesystem and index against that object. Publication
+Write-capable callers provide one exact base revision, path-component-safe file
+values with explicit executable decisions, exact removals, and one validated
+conventional commit message. The Adapter creates a private local clone, writes
+blobs and the candidate index without traversing caller-selected filesystem
+paths, rejects conflicting or no-effect topology, constructs a deterministic
+commit from the exact parent, tree, and message, and checks the candidate
+filesystem and index against that object. An active candidate can be
+revalidated after an external read-only check and is revalidated again before
+publication. File-size observation precedes content reads, so verifier drift
+cannot bypass the candidate object bound. An explicit removal plus addition
+represents relocation; the Adapter does not infer rename semantics. Publication
 accepts only a still-active candidate issued by that Adapter instance,
 revalidates it, imports its objects without a destination ref, and
 updates only `refs/heads/main` through Git's expected-old-object
-compare-and-swap. Replacement staging uses literal path semantics, and the
+compare-and-swap. Removal staging uses literal path semantics, and the
 private clone retains no canonical-repository remote. The source worktree and
 index are not staging authority.
 
-All Git subprocesses receive a sanitized environment, bounded output, and a
-fixed timeout. Missing objects are `unavailable`; malformed or contradictory
-objects are `invalid`; unsupported object modes, path encodings, and output
-sizes are `unsupported`.
+Candidate blobs and the constructed commit must fit the same object bound used
+by exact reads, so publication cannot create content that a subsequent Adapter
+read rejects by size. All Git subprocesses receive a sanitized environment,
+bounded output, and a fixed timeout. Missing objects are `unavailable`;
+malformed or contradictory objects are `invalid`; unsupported object modes,
+path encodings, and output sizes are `unsupported`.
 
 Git remains the established implementation for object resolution and reported
 object type. This Adapter locally interprets only the leading commit-tree field

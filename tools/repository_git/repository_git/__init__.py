@@ -1,5 +1,7 @@
 from .errors import FailureKind, GitRepositoryError, GitRepositoryFailure
 from .model import (
+    CandidateCommitMessage,
+    CandidateFile,
     CapturedFile,
     GitCommandResult,
     GitlinkRepository,
@@ -23,6 +25,8 @@ from .repository import (
 __all__ = (
     "COMMAND_TIMEOUT_SECONDS",
     "DEFAULT_OUTPUT_LIMIT",
+    "CandidateCommitMessage",
+    "CandidateFile",
     "CapturedFile",
     "FailureKind",
     "GitCommandResult",

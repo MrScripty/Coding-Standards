@@ -181,3 +181,85 @@ create ledger entries.
   Milestone 2. Remote push remains out of scope.
 - Persistent evidence:
   [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md).
+
+## 2026-09-03 — Milestone 2 Start
+
+- Operation: explicit `start` from `Planned` to `Active` under the user's
+  instruction to continue standards-compliant implementation.
+- Slice: deepen the existing Repository Git candidate materialization from
+  replacement-only bytes to the exact Engine-owned proposed topology, and
+  replace the generic candidate message with validated proposal-specific
+  conventional commit material derived from the immutable change purpose.
+- Preserved boundary: the existing readiness, authorization, verification,
+  application selection, local-ref compare-and-swap, durable outcome, and
+  observation-only recovery lifecycle remains authoritative. No new public
+  operation, graph, store, background mechanism, arbitrary ref, signing
+  promise, or remote publication seam is admitted.
+- Development Decision: `implement`. Milestone 0 already validated this
+  reversible production design; the named M2 tests can decide correctness.
+  No additional prototype or design investigation is warranted unless the
+  current Repository Git boundary cannot represent exact topology atomically.
+- Isolation: direct serial implementation in the declared write set. Permitted
+  parallel Sol xhigh agents perform read-only seam reviews and do not edit,
+  stage, commit, or share temporary Git state.
+
+## 2026-09-03 — Milestone 2 Review Corrections
+
+- The bounded read-only audit found three acceptance-relevant defects: the
+  post-verifier candidate was first revalidated only after admission; raw
+  verifier message/path details crossed the public diagnostic seam; and index
+  additions preceded removals for directory/file topology replacement.
+- Correction: Repository Git now exposes active-candidate revalidation. The
+  Engine invokes it after the external complete checkpoint and before durable
+  admission, while publication retains its own validation. Pre-admission drift
+  preserves its exact typed result; post-admission terminal uncertainty keeps
+  the durable recovery handle, and known CAS target divergence uses the
+  existing distinct recovery code.
+- Correction: verification failure projection retains only the bounded exit,
+  outcome, code, suite, and check identifiers. Raw messages, candidate paths,
+  rows, and fields remain private.
+- Correction: Repository Git validates final topology against the original
+  tree, removes validated paths first, then adds candidate blobs. Focused tests
+  cover file-to-directory, directory-to-file, no-effect/conflicting topology,
+  active-candidate validation, and verifier drift beyond the object bound.
+- Development Decision: `implement`. Each finding directly violated a named
+  M2 acceptance property and had one local reversible correction. The
+  correction audit found all three resolved and no remaining blocker; no
+  adjacent investigation was admitted.
+
+## 2026-09-03 — Milestone 2 Accepted
+
+- Operation: `accept` Milestone 2 and advance the active phase to Milestone 3.
+- Application result: the Engine compiles logical revisions into exact
+  Engine-owned add, modify, relocate, remove, generated-projection, and
+  canonical non-executable authority changes. Repository Git creates the exact
+  parent/tree/message commit in an isolated clone and publishes only the
+  verified object through the configured local-main compare-and-swap.
+- Commit contract: readiness validates one imperative proposal-specific
+  conventional subject and cumulative material rationale derived from the
+  immutable explicit purposes. Exact tests inspect message bytes, parent,
+  topology, modes, deterministic identity, and message-sensitive identity.
+- Real workflow evidence: create then retire, two exact complete checkpoints,
+  local publication, Git tree/mode/message inspection, SQLite process reopen,
+  created-standard readback, and retired-standard absence passed on Linux
+  CPython 3.11 in 694.321 seconds and CPython 3.12 in 699.315 seconds.
+- Correction evidence: the full review/application failure and recovery
+  composition passed after the corrections on CPython 3.11 in 753.446 seconds
+  and CPython 3.12 in 813.348 seconds.
+- Final staged-candidate confirmation: the corrected create/retire workflow
+  passed again on CPython 3.11 in 610.781 seconds and CPython 3.12 in 646.718
+  seconds. The exact staged repository separately passed 270 of 270 declarative
+  suites and all seven retained Bash checkers with no failure or blocked suite.
+- Component evidence: Repository Git passes 11 of 11 tests; Authoring/logical
+  compilation passes 25 of 25; Contracts passes 20 of 20; Analysis passes 86
+  of 86; generated-artifact and suite-input projection passes 19 of 19; Ruff
+  formatting/check and diff hygiene pass.
+- Independent review: the final bounded correction audit found no remaining
+  acceptance blocker and confirmed the accepted A2 recovery contract, private
+  diagnostic seam, topology ordering, authority ownership, and lack of a
+  second graph, analyzer, store, or publication mechanism.
+- Scope boundary: application ends at configured local `refs/heads/main`.
+  Remote push, candidate signing, inferred semantic graph changes, background
+  retry, rollback, and caller-owned repository or SQLite access remain absent.
+- Persistent evidence:
+  [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md).

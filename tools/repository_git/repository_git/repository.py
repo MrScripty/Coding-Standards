@@ -12,6 +12,8 @@ from typing import Iterable, Iterator, Literal, Sequence
 
 from .errors import GitRepositoryError, invalid, unavailable, unsupported
 from .model import (
+    CandidateCommitMessage,
+    CandidateFile,
     CapturedFile,
     GitCommandResult,
     GitlinkRepository,
@@ -24,7 +26,6 @@ from .model import (
 DEFAULT_OUTPUT_LIMIT = 64 * 1024 * 1024
 ERROR_OUTPUT_LIMIT = 1024 * 1024
 COMMAND_TIMEOUT_SECONDS = 30
-CANDIDATE_COMMIT_MESSAGE = "feat(standards): apply approved proposal\n"
 
 
 def sanitized_git_environment() -> dict[str, str]:
@@ -234,25 +235,42 @@ class GitRepository:
     def materialize_candidate(
         self,
         expected: RepositoryRevision,
-        replacements: Iterable[CapturedFile],
+        files: Iterable[CandidateFile],
+        *,
+        removals: Iterable[RepositoryPath] = (),
+        commit: CandidateCommitMessage,
     ) -> Iterator[MaterializedCandidate]:
         if type(expected) is not RepositoryRevision:
             raise invalid(
                 "REPOSITORY_GIT.INVALID_CANDIDATE",
                 "candidate base must be an exact RepositoryRevision",
             )
-        supplied = tuple(replacements)
-        if any(type(item) is not CapturedFile for item in supplied):
+        supplied = tuple(files)
+        removed = tuple(removals)
+        if any(type(item) is not CandidateFile for item in supplied) or any(
+            type(item) is not RepositoryPath for item in removed
+        ):
             raise invalid(
                 "REPOSITORY_GIT.INVALID_CANDIDATE",
-                "candidate replacements must be exact CapturedFile values",
+                "candidate files and removals must use exact Repository Git values",
             )
         selected = tuple(sorted(supplied, key=lambda item: item.path))
-        paths = tuple(item.path for item in selected)
-        if not selected or len(set(paths)) != len(paths):
+        removed = tuple(sorted(removed))
+        file_paths = tuple(item.path for item in selected)
+        paths = (*file_paths, *removed)
+        if (
+            type(commit) is not CandidateCommitMessage
+            or not paths
+            or len(set(paths)) != len(paths)
+        ):
             raise invalid(
                 "REPOSITORY_GIT.INVALID_CANDIDATE",
-                "candidate replacements must be nonempty and path-unique",
+                "candidate change must have one commit message and nonempty unique paths",
+            )
+        if any(len(item.content) > self._max_object_bytes for item in selected):
+            raise unsupported(
+                "REPOSITORY_GIT.CANDIDATE_OBJECT_LIMIT",
+                f"candidate blob exceeds {self._max_object_bytes} bytes",
             )
         self._object(self._repository, expected.oid, "commit", _algorithm(expected.oid))
 
@@ -280,36 +298,62 @@ class GitRepository:
                 ("checkout", "--detach", "--force", expected.oid),
             )
             entries = _index_entries(candidate_root)
-            for replacement in selected:
-                path = str(replacement.path)
+            _validate_candidate_topology(entries, selected, removed)
+            for removal in removed:
+                path = str(removal)
                 try:
                     mode, _oid = entries[path]
                 except KeyError as error:
                     raise unavailable(
                         "REPOSITORY_GIT.CANDIDATE_PATH_UNAVAILABLE",
-                        f"replacement target {path!r} is absent from the candidate base",
+                        f"removal target {path!r} is absent from the candidate base",
                     ) from error
                 if mode not in {"100644", "100755"}:
                     raise unsupported(
                         "REPOSITORY_GIT.CANDIDATE_PATH_UNSUPPORTED",
-                        f"replacement target {path!r} is not a regular file",
+                        f"removal target {path!r} is not a regular file",
                     )
-                self._write_candidate_file(candidate_root, replacement)
-
-            git_output(
-                candidate_root,
-                (
-                    "--literal-pathspecs",
-                    "add",
-                    "--all",
-                    "--",
-                    *(str(path) for path in paths),
-                ),
-            )
+                git_output(
+                    candidate_root,
+                    (
+                        "--literal-pathspecs",
+                        "update-index",
+                        "--force-remove",
+                        "--",
+                        path,
+                    ),
+                )
+            for candidate_file in selected:
+                path = str(candidate_file.path)
+                existing = entries.get(path)
+                if existing is not None and existing[0] not in {"100644", "100755"}:
+                    raise unsupported(
+                        "REPOSITORY_GIT.CANDIDATE_PATH_UNSUPPORTED",
+                        f"candidate target {path!r} is not a regular file",
+                    )
+                self._write_candidate_index_file(candidate_root, candidate_file)
             tree = _ascii_oid(
                 git_output(candidate_root, ("write-tree",), max_output_bytes=256),
                 "candidate tree",
             )
+            expected_tree = _ascii_oid(
+                git_output(
+                    candidate_root,
+                    (
+                        "rev-parse",
+                        "--verify",
+                        "--end-of-options",
+                        f"{expected.oid}^{{tree}}",
+                    ),
+                    max_output_bytes=256,
+                ),
+                "expected tree",
+            )
+            if tree == expected_tree:
+                raise invalid(
+                    "REPOSITORY_GIT.CANDIDATE_NO_EFFECT",
+                    "candidate change does not alter the expected repository tree",
+                )
             environment = sanitized_git_environment()
             environment.update(
                 {
@@ -327,11 +371,32 @@ class GitRepository:
                         candidate_root,
                         ("commit-tree", tree, "-p", expected.oid),
                         environment,
-                        input_bytes=CANDIDATE_COMMIT_MESSAGE.encode("utf-8"),
+                        input_bytes=commit.encode(),
                         max_output_bytes=256,
                     ),
                     "candidate commit",
                 )
+            )
+            try:
+                self._object(
+                    candidate_root,
+                    candidate_revision.oid,
+                    "commit",
+                    _algorithm(candidate_revision.oid),
+                )
+            except GitRepositoryError as error:
+                if error.failure.code not in {
+                    "REPOSITORY_GIT.OBJECT_LIMIT",
+                    "REPOSITORY_GIT.OUTPUT_LIMIT",
+                }:
+                    raise
+                raise unsupported(
+                    "REPOSITORY_GIT.CANDIDATE_OBJECT_LIMIT",
+                    f"candidate commit exceeds {self._max_object_bytes} bytes",
+                ) from error
+            git_output(
+                candidate_root,
+                ("read-tree", "--reset", "-u", expected.oid),
             )
             git_output(
                 candidate_root,
@@ -414,6 +479,19 @@ class GitRepository:
             candidate.revision,
         )
 
+    def validate_candidate(self, candidate: MaterializedCandidate) -> None:
+        """Revalidate one active candidate after an external read-only check."""
+
+        if (
+            type(candidate) is not MaterializedCandidate
+            or id(candidate) not in self._active_candidates
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+                "validation requires one active candidate issued by this Adapter",
+            )
+        self._validate_candidate(candidate)
+
     def _resolve_uncertain_publication(
         self,
         branch: str,
@@ -463,25 +541,28 @@ class GitRepository:
             git_output(candidate_root, ("update-ref", reference, oid))
 
     @staticmethod
-    def _write_candidate_file(root: Path, replacement: CapturedFile) -> None:
-        destination = root.joinpath(*replacement.path.components)
-        try:
-            if destination.is_symlink() or not destination.is_file():
-                raise OSError("replacement target is not a regular file")
-            resolved = destination.resolve(strict=True)
-            if not resolved.is_relative_to(root):
-                raise OSError("replacement target escapes the candidate root")
-            flags = os.O_WRONLY | os.O_TRUNC
-            if hasattr(os, "O_NOFOLLOW"):
-                flags |= os.O_NOFOLLOW
-            descriptor = os.open(destination, flags)
-            with os.fdopen(descriptor, "wb") as handle:
-                handle.write(replacement.content)
-        except OSError as error:
-            raise unavailable(
-                "REPOSITORY_GIT.CANDIDATE_WRITE_UNAVAILABLE",
-                f"candidate replacement could not be written: {error}",
-            ) from error
+    def _write_candidate_index_file(root: Path, candidate: CandidateFile) -> None:
+        oid = _ascii_oid(
+            git_output(
+                root,
+                ("hash-object", "-w", "--stdin"),
+                input_bytes=candidate.content,
+                max_output_bytes=256,
+            ),
+            "candidate blob",
+        )
+        mode = "100755" if candidate.executable else "100644"
+        git_output(
+            root,
+            (
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                mode,
+                oid,
+                str(candidate.path),
+            ),
+        )
 
     def _validate_candidate(self, candidate: MaterializedCandidate) -> None:
         if not candidate.root.is_dir():
@@ -532,6 +613,11 @@ class GitRepository:
                     raise invalid(
                         "REPOSITORY_GIT.CANDIDATE_DIVERGED",
                         f"candidate path {relative!r} is not a regular file",
+                    )
+                if observed.st_size > self._max_object_bytes:
+                    raise unsupported(
+                        "REPOSITORY_GIT.CANDIDATE_OBJECT_LIMIT",
+                        f"candidate path {relative!r} exceeds {self._max_object_bytes} bytes",
                     )
                 files[relative] = path
         if set(files) != set(entries):
@@ -875,6 +961,24 @@ def _index_entries(root: Path) -> dict[str, tuple[str, str]]:
             )
         entries[path] = (mode, oid)
     return entries
+
+
+def _validate_candidate_topology(
+    entries: dict[str, tuple[str, str]],
+    files: tuple[CandidateFile, ...],
+    removals: tuple[RepositoryPath, ...],
+) -> None:
+    desired = set(entries) - {str(path) for path in removals}
+    desired.update(str(candidate.path) for candidate in files)
+    for raw_path in sorted(desired):
+        path = RepositoryPath.parse(raw_path)
+        for length in range(1, len(path.components)):
+            ancestor = "/".join(path.components[:length])
+            if ancestor in desired:
+                raise invalid(
+                    "REPOSITORY_GIT.CANDIDATE_TOPOLOGY_CONFLICT",
+                    f"candidate file {raw_path!r} is nested below file {ancestor!r}",
+                )
 
 
 def _algorithm(oid: str) -> str:

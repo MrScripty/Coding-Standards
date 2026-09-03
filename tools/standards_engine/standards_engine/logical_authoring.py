@@ -801,6 +801,7 @@ class LogicalProjection:
     semantic_proposals: tuple[dict[str, object], ...]
     analysis_policy_ids: tuple[str, ...]
     analysis_module_ids: tuple[str, ...]
+    repository_paths: tuple[str, ...]
 
 
 class LogicalAuthoringCompiler:
@@ -840,6 +841,7 @@ class LogicalAuthoringCompiler:
 
         base_compiled = self._compile_authorities(base)
         files = dict(base.files)
+        repository_paths = selected_repository_paths
         for change_set in program.change_sets:
             before = dict(files)
             for edit in sorted(change_set.edits, key=_projection_order):
@@ -855,7 +857,7 @@ class LogicalAuthoringCompiler:
                     "AUTHORING.NO_EFFECT",
                     "logical change set does not change the current standards projection",
                 )
-            _refresh_suite_input_projection(
+            repository_paths = _refresh_suite_input_projection(
                 files,
                 base_file_paths,
                 selected_repository_paths,
@@ -870,6 +872,7 @@ class LogicalAuthoringCompiler:
             _semantic_proposals(base_compiled, compiled, program),
             _analysis_policy_ids(base_compiled, compiled, program),
             _analysis_module_ids(program),
+            repository_paths,
         )
 
     def _apply_edit(
@@ -2216,7 +2219,7 @@ def _refresh_suite_input_projection(
     files: dict[str, bytes],
     base_file_paths: frozenset[str],
     base_repository_paths: tuple[str, ...],
-) -> None:
+) -> tuple[str, ...]:
     """Delegate the proposed manifest to its canonical compiler."""
 
     try:
@@ -2252,6 +2255,7 @@ def _refresh_suite_input_projection(
                 root,
                 repository_paths=proposed_paths,
             )
+        return proposed_paths
     except AuthoringError:
         raise
     except EngineError as error:

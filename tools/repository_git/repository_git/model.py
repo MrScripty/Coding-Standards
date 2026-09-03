@@ -8,6 +8,10 @@ from typing import Iterable
 from .errors import invalid
 
 _OID = re.compile(r"(?:[0-9a-f]{40}|[0-9a-f]{64})\Z", re.ASCII)
+_CONVENTIONAL_SUBJECT = re.compile(
+    r"[a-z][a-z0-9-]*(?:\([a-z0-9][a-z0-9.-]*\))?!?: [^\r\n]+\Z",
+    re.ASCII,
+)
 
 
 def _scalar(value: str, description: str) -> None:
@@ -99,6 +103,58 @@ class CapturedFile:
             )
 
 
+@dataclass(frozen=True, slots=True, order=True)
+class CandidateFile:
+    path: RepositoryPath
+    content: bytes
+    executable: bool
+
+    def __post_init__(self) -> None:
+        if (
+            type(self.path) is not RepositoryPath
+            or type(self.content) is not bytes
+            or type(self.executable) is not bool
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE_FILE",
+                "candidate file requires a RepositoryPath, exact bytes, and an executable decision",
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class CandidateCommitMessage:
+    subject: str
+    body: str
+
+    def __post_init__(self) -> None:
+        if (
+            type(self.subject) is not str
+            or type(self.body) is not str
+            or not self.body
+            or any(
+                0xD800 <= ord(character) <= 0xDFFF
+                for character in self.subject + self.body
+            )
+            or _CONVENTIONAL_SUBJECT.fullmatch(self.subject) is None
+            or self.subject != self.subject.strip()
+            or self.body != self.body.strip()
+            or any(ord(character) < 0x20 for character in self.subject)
+            or any(
+                (ord(character) < 0x20 and character not in {"\n", "\t"})
+                or ord(character) == 0x7F
+                for character in self.body
+            )
+            or any(ord(character) == 0x7F for character in self.subject)
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_COMMIT_MESSAGE",
+                "candidate commit message must have one conventional subject and a normalized material body",
+            )
+
+    def encode(self) -> bytes:
+        return f"{self.subject}\n\n{self.body}\n".encode("utf-8")
+
+
 @dataclass(frozen=True, slots=True, init=False)
 class RepositoryCapture:
     revision: RepositoryRevision
@@ -187,6 +243,8 @@ class GitCommandResult:
 
 
 __all__ = (
+    "CandidateCommitMessage",
+    "CandidateFile",
     "CapturedFile",
     "GitCommandResult",
     "GitlinkRepository",

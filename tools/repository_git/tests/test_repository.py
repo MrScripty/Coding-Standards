@@ -10,7 +10,8 @@ from unittest import mock
 import tools.repository_git.repository_git.repository as repository_module
 
 from tools.repository_git.repository_git import (
-    CapturedFile,
+    CandidateCommitMessage,
+    CandidateFile,
     GitRepository,
     GitRepositoryError,
     GitRepositoryFailure,
@@ -22,6 +23,12 @@ from tools.repository_git.repository_git import (
     indexed_paths,
     sanitized_git_environment,
     staged_name_status,
+)
+
+
+_COMMIT = CandidateCommitMessage(
+    "feat(standards): revise candidate fixture",
+    "Exercise exact isolated candidate construction.",
 )
 
 
@@ -110,6 +117,7 @@ class GitRepositoryTests(unittest.TestCase):
             executable.chmod(0o755)
             magic = root / ":(exclude,glob)**"
             magic.write_bytes(b"accepted magic\n")
+            (root / "obsolete.txt").write_bytes(b"relocated\n")
             self._commit(root, "initial")
             self._git(root, "branch", "-M", "main")
             repository = GitRepository(root)
@@ -120,18 +128,26 @@ class GitRepositoryTests(unittest.TestCase):
             source_index = self._git(root, "write-tree").strip()
             source_status = self._git(root, "status", "--porcelain=v1", "-z")
 
-            replacements = (
-                CapturedFile(
+            files = (
+                CandidateFile(
                     RepositoryPath.parse(":(exclude,glob)**"),
                     b"proposed magic\n",
+                    False,
                 ),
-                CapturedFile(
+                CandidateFile(
                     RepositoryPath.parse("executable.sh"),
                     b"#!/bin/sh\nexit 7\n",
+                    True,
                 ),
-                CapturedFile(
+                CandidateFile(
+                    RepositoryPath.parse("nested/new.txt"),
+                    b"relocated\n",
+                    False,
+                ),
+                CandidateFile(
                     RepositoryPath.parse("regular.txt"),
                     b"proposed\n",
+                    False,
                 ),
             )
             forged = MaterializedCandidate(
@@ -145,7 +161,12 @@ class GitRepositoryTests(unittest.TestCase):
                 unissued.exception.failure.code,
                 "REPOSITORY_GIT.INVALID_CANDIDATE",
             )
-            with repository.materialize_candidate(expected, replacements) as candidate:
+            with repository.materialize_candidate(
+                expected,
+                files,
+                removals=(RepositoryPath.parse("obsolete.txt"),),
+                commit=_COMMIT,
+            ) as candidate:
                 self.assertEqual(candidate.expected, expected)
                 self.assertEqual(
                     repository.branch_revision("main"),
@@ -168,20 +189,61 @@ class GitRepositoryTests(unittest.TestCase):
                     (candidate.root / ":(exclude,glob)**").read_bytes(),
                     b"proposed magic\n",
                 )
+                self.assertEqual(
+                    (candidate.root / "nested/new.txt").read_bytes(),
+                    b"relocated\n",
+                )
+                self.assertFalse((candidate.root / "obsolete.txt").exists())
                 self.assertTrue(
                     (candidate.root / "executable.sh").stat().st_mode & 0o111
+                )
+                self.assertFalse(
+                    (candidate.root / "nested/new.txt").stat().st_mode & 0o111
                 )
                 self.assertEqual(self._git(candidate.root, "remote"), "")
                 first_revision = candidate.revision
                 self.assertEqual(
-                    self._git(candidate.root, "log", "-1", "--format=%B"),
-                    "feat(standards): apply approved proposal\n\n",
+                    self._git(candidate.root, "rev-parse", "HEAD^"),
+                    expected.oid + "\n",
                 )
+                self.assertEqual(
+                    self._git(
+                        candidate.root,
+                        "ls-tree",
+                        "-r",
+                        "--format=%(objectmode) %(path)",
+                        "HEAD",
+                    ),
+                    "100644 :(exclude,glob)**\n"
+                    "100755 executable.sh\n"
+                    "100644 nested/new.txt\n"
+                    "100644 regular.txt\n",
+                )
+                self.assertEqual(
+                    self._git(candidate.root, "log", "-1", "--format=%B"),
+                    "feat(standards): revise candidate fixture\n\n"
+                    "Exercise exact isolated candidate construction.\n\n",
+                )
+                repository.validate_candidate(candidate)
 
                 with repository.materialize_candidate(
-                    expected, replacements
+                    expected,
+                    files,
+                    removals=(RepositoryPath.parse("obsolete.txt"),),
+                    commit=_COMMIT,
                 ) as repeated:
                     self.assertEqual(repeated.revision, first_revision)
+
+                with repository.materialize_candidate(
+                    expected,
+                    files,
+                    removals=(RepositoryPath.parse("obsolete.txt"),),
+                    commit=CandidateCommitMessage(
+                        "feat(standards): revise another candidate fixture",
+                        "Exercise a distinct exact commit message.",
+                    ),
+                ) as different_message:
+                    self.assertNotEqual(different_message.revision, first_revision)
 
                 self.assertEqual(
                     repository.publish_candidate(candidate, expected),
@@ -192,6 +254,167 @@ class GitRepositoryTests(unittest.TestCase):
             self.assertEqual((root / "regular.txt").read_bytes(), b"accepted\n")
             self.assertEqual(self._git(root, "write-tree").strip(), source_index)
 
+    def test_candidate_rejects_invalid_topology_and_no_effect(self) -> None:
+        for subject, body in (
+            ("not conventional", "Material rationale."),
+            ("feat(standards): valid\nsecond", "Material rationale."),
+            ("feat(standards): valid\tcontrol", "Material rationale."),
+            ("feat(standards): valid", ""),
+            ("feat(standards): valid", "surrounding rationale "),
+            ("feat(standards): valid", "embedded\x1bcontrol"),
+        ):
+            with (
+                self.subTest(subject=subject, body=body),
+                self.assertRaises(GitRepositoryError) as invalid_message,
+            ):
+                CandidateCommitMessage(subject, body)
+            self.assertEqual(
+                invalid_message.exception.failure.code,
+                "REPOSITORY_GIT.INVALID_COMMIT_MESSAGE",
+            )
+
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"accepted\n")
+            (root / "file-to-directory").write_bytes(b"former file\n")
+            (root / "directory-to-file").mkdir()
+            (root / "directory-to-file" / "child.txt").write_bytes(b"former child\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            value = RepositoryPath.parse("value.txt")
+
+            with repository.materialize_candidate(
+                expected,
+                (
+                    CandidateFile(
+                        RepositoryPath.parse("file-to-directory/child.txt"),
+                        b"new child\n",
+                        False,
+                    ),
+                    CandidateFile(
+                        RepositoryPath.parse("directory-to-file"),
+                        b"new file\n",
+                        False,
+                    ),
+                ),
+                removals=(
+                    RepositoryPath.parse("file-to-directory"),
+                    RepositoryPath.parse("directory-to-file/child.txt"),
+                ),
+                commit=_COMMIT,
+            ) as directory_file_replacement:
+                self.assertEqual(
+                    (
+                        directory_file_replacement.root
+                        / "file-to-directory"
+                        / "child.txt"
+                    ).read_bytes(),
+                    b"new child\n",
+                )
+                self.assertEqual(
+                    (
+                        directory_file_replacement.root / "directory-to-file"
+                    ).read_bytes(),
+                    b"new file\n",
+                )
+
+            with self.assertRaises(GitRepositoryError) as overlap:
+                with repository.materialize_candidate(
+                    expected,
+                    (CandidateFile(value, b"proposed\n", False),),
+                    removals=(value,),
+                    commit=_COMMIT,
+                ):
+                    pass
+            self.assertEqual(
+                overlap.exception.failure.code, "REPOSITORY_GIT.INVALID_CANDIDATE"
+            )
+
+            with self.assertRaises(GitRepositoryError) as conflict:
+                with repository.materialize_candidate(
+                    expected,
+                    (
+                        CandidateFile(
+                            RepositoryPath.parse("value.txt/nested"), b"nested", False
+                        ),
+                    ),
+                    commit=_COMMIT,
+                ):
+                    pass
+            self.assertEqual(
+                conflict.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_TOPOLOGY_CONFLICT",
+            )
+
+            with self.assertRaises(GitRepositoryError) as missing:
+                with repository.materialize_candidate(
+                    expected,
+                    (),
+                    removals=(RepositoryPath.parse("absent.txt"),),
+                    commit=_COMMIT,
+                ):
+                    pass
+            self.assertEqual(
+                missing.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_PATH_UNAVAILABLE",
+            )
+
+            with self.assertRaises(GitRepositoryError) as no_effect:
+                with repository.materialize_candidate(
+                    expected,
+                    (CandidateFile(value, b"accepted\n", False),),
+                    commit=_COMMIT,
+                ):
+                    pass
+            self.assertEqual(
+                no_effect.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_NO_EFFECT",
+            )
+
+            bounded = GitRepository(root, max_object_bytes=1024)
+            with bounded.materialize_candidate(
+                expected,
+                (CandidateFile(value, b"proposed\n", False),),
+                commit=_COMMIT,
+            ) as oversized_drift:
+                (oversized_drift.root / "value.txt").write_bytes(b"x" * 1025)
+                with self.assertRaises(GitRepositoryError) as drift_limit:
+                    bounded.validate_candidate(oversized_drift)
+            self.assertEqual(
+                drift_limit.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_OBJECT_LIMIT",
+            )
+
+            with self.assertRaises(GitRepositoryError) as large_blob:
+                with bounded.materialize_candidate(
+                    expected,
+                    (CandidateFile(value, b"x" * 1025, False),),
+                    commit=_COMMIT,
+                ):
+                    pass
+            self.assertEqual(
+                large_blob.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_OBJECT_LIMIT",
+            )
+
+            with self.assertRaises(GitRepositoryError) as large_commit:
+                with bounded.materialize_candidate(
+                    expected,
+                    (CandidateFile(value, b"proposed\n", False),),
+                    commit=CandidateCommitMessage(
+                        "feat(standards): exercise bounded commit",
+                        "x" * 1025,
+                    ),
+                ):
+                    pass
+            self.assertEqual(
+                large_commit.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_OBJECT_LIMIT",
+            )
+
     def test_candidate_publication_rejects_stale_target_and_drift(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             root = Path(temporary)
@@ -201,9 +424,13 @@ class GitRepositoryTests(unittest.TestCase):
             self._git(root, "branch", "-M", "main")
             repository = GitRepository(root)
             expected = repository.branch_revision("main")
-            replacement = CapturedFile(RepositoryPath.parse("value.txt"), b"proposed\n")
+            replacement = CandidateFile(
+                RepositoryPath.parse("value.txt"), b"proposed\n", False
+            )
 
-            with repository.materialize_candidate(expected, (replacement,)) as drifted:
+            with repository.materialize_candidate(
+                expected, (replacement,), commit=_COMMIT
+            ) as drifted:
                 (drifted.root / "value.txt").write_bytes(b"unverified drift\n")
                 with self.assertRaises(GitRepositoryError) as changed:
                     repository.publish_candidate(drifted, expected)
@@ -214,7 +441,7 @@ class GitRepositoryTests(unittest.TestCase):
             self.assertEqual(repository.branch_revision("main"), expected)
 
             with repository.materialize_candidate(
-                expected, (replacement,)
+                expected, (replacement,), commit=_COMMIT
             ) as candidate:
                 (root / "competing.txt").write_bytes(b"competing\n")
                 self._commit(root, "competing")
@@ -241,11 +468,13 @@ class GitRepositoryTests(unittest.TestCase):
             self._commit(root, "competing")
             competing = repository.current_revision()
             self._git(root, "switch", "-q", "main")
-            replacement = CapturedFile(RepositoryPath.parse("value.txt"), b"proposed\n")
+            replacement = CandidateFile(
+                RepositoryPath.parse("value.txt"), b"proposed\n", False
+            )
             original_git_command = repository_module.git_command
 
             with repository.materialize_candidate(
-                expected, (replacement,)
+                expected, (replacement,), commit=_COMMIT
             ) as candidate:
                 raced = False
 
@@ -303,11 +532,13 @@ class GitRepositoryTests(unittest.TestCase):
             self._commit(root, "competing")
             competing = repository.current_revision()
             self._git(root, "switch", "-q", "main")
-            replacement = CapturedFile(RepositoryPath.parse("value.txt"), b"proposed\n")
+            replacement = CandidateFile(
+                RepositoryPath.parse("value.txt"), b"proposed\n", False
+            )
             original_git_command = repository_module.git_command
 
             with repository.materialize_candidate(
-                expected, (replacement,)
+                expected, (replacement,), commit=_COMMIT
             ) as candidate:
 
                 def interrupt_after_update(

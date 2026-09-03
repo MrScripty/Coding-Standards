@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2: complete local application
+**Current phase:** Milestone 3: objective acceptance
 
-**Next slice:** extend the existing isolated candidate path from exact
-replacement to the Engine-owned add, modify, relocate, and remove topology;
-then create and inspect one proposal-specific standards-compliant local commit
+**Next slice:** independently audit the complete logical-authoring artifact,
+run the objective evidence portfolio, and remove any retained machinery that
+lacks a current owner
 
 **Acceptance status:** `pending`
 
@@ -41,10 +41,10 @@ canonical Git authority; remote push is not part of this plan.
 | LA-A1 | The generated public Interface accepts canonical-ID standards-domain intent and never requires a repository path, full-file replacement, raw Markdown metadata envelope, TOML/JSON representation, SQL, Git ref, or Git object ID from the agent. | `contract` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
 | LA-A2 | Through the public proposal workflow, an agent can add a standard, revise its authored policy, explicitly change its relationships or placement, remove it, query the exact proposal revision, and analyze the resulting standards graph after process replacement. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
 | LA-A3 | For each supported intent, the Engine updates every mechanically required canonical representation and derived projection selected by current authorities, while semantic relationships, policy-impact declarations, lifecycle meaning, rationale, and evidence originate only from explicit caller or reviewer decisions and are never inferred. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
-| LA-A4 | Apply materializes additions, revisions, relocations, and removals in an isolated candidate, rejects invalid or incomplete authority closure, passes the exact current complete checkpoint, creates a proposal-specific standards-compliant commit, and atomically publishes only the verified commit to the configured local canonical ref. | `system` | `required-real` | `automated` | `pending` | pending |
-| LA-A5 | A1c snapshot and Analysis behavior and A2 proposal-head, readiness, authorization, application, and recovery invariants remain one coherent implementation with no second parser, graph, analyzer, store, semantic authority, or caller-owned persistence/repository mechanism. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
-| LA-A6 | Invalid IDs or content, dangling or cyclic relationships, incomplete semantic declarations, stale proposal or target state, unavailable authority, unsupported retained formats, failed verification, and uncertain publication remain typed and publish no partial canonical result. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
-| LA-A7 | The complete public workflow and its real Git/SQLite boundaries pass on the supported Linux CPython 3.11 and 3.12 runtimes, including cold reopen, concurrent proposal-head and target changes, and interruption recovery. | `user-workflow` | `required-real` | `automated` | `pending` | pending |
+| LA-A4 | Apply materializes additions, revisions, relocations, and removals in an isolated candidate, rejects invalid or incomplete authority closure, passes the exact current complete checkpoint, creates a proposal-specific standards-compliant commit, and atomically publishes only the verified commit to the configured local canonical ref. | `system` | `required-real` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
+| LA-A5 | A1c snapshot and Analysis behavior and A2 proposal-head, readiness, authorization, application, and recovery invariants remain one coherent implementation with no second parser, graph, analyzer, store, semantic authority, or caller-owned persistence/repository mechanism. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
+| LA-A6 | Invalid IDs or content, dangling or cyclic relationships, incomplete semantic declarations, stale proposal or target state, unavailable authority, unsupported retained formats, failed verification, and uncertain publication remain typed and publish no partial canonical result. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
+| LA-A7 | The complete public workflow and its real Git/SQLite boundaries pass on the supported Linux CPython 3.11 and 3.12 runtimes, including cold reopen, concurrent proposal-head and target changes, and interruption recovery. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
 | LA-A8 | The admitted design passes a pre-canonical minimum viable test for effectiveness, efficiency, correctness, and routed standards compliance, then implementation proceeds without another investigation unless a named unresolved issue threatens an irreversible or high-consequence outcome. | `integration` | `representative` | `manual` | `satisfied` | [Milestone 0 Interface admission](reports/m0-interface-admission.md) |
 
 ## Scope
@@ -402,19 +402,19 @@ listed above triggers re-planning before implementation.
 
 **Tasks:**
 
-- [ ] Materialize additions, modifications, relocations, removals, executable
+- [x] Materialize additions, modifications, relocations, removals, executable
   modes, and generated projections in the existing isolated candidate
   lifecycle without changing the configured worktree or index.
-- [ ] Derive and validate one proposal-specific conventional commit subject
+- [x] Derive and validate one proposal-specific conventional commit subject
   and material body from explicit normalized proposal facts; include it in
   candidate identity and deterministic reconstruction where required.
-- [ ] Preserve readiness, current authorization, exact complete verification,
+- [x] Preserve readiness, current authorization, exact complete verification,
   application selection, local ref compare-and-swap, observation, durable
   outcome, and observation-only recovery semantics.
-- [ ] Prove that incomplete authority closure, invalid graph/corpus state,
+- [x] Prove that incomplete authority closure, invalid graph/corpus state,
   verification failure, stale target, and uncertain publication never become
   application success.
-- [ ] Update the A2 ADR and contract documentation to supersede only the
+- [x] Update the A2 ADR and contract documentation to supersede only the
   replacement-shaped public Interface and generic candidate message.
 
 **Acceptance gate:**
@@ -424,7 +424,7 @@ listed above triggers re-planning before implementation.
   workflow; no remote operation is reachable; and all A1c/A2 preserved
   behavior remains green.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 3: Objective Acceptance
 

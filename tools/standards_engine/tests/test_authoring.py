@@ -21,6 +21,7 @@ from tools.standards_engine.standards_engine.authoring import (
     ProposalId,
     ProposalReadiness,
     application_subject,
+    proposal_commit_message,
     review_decision_subject,
 )
 from tools.standards_engine.standards_engine.logical_authoring import (
@@ -221,6 +222,39 @@ def _application_authorization(
 
 
 class AuthoringTests(unittest.TestCase):
+    def test_readiness_rejects_invalid_proposal_commit_material(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            snapshots = SnapshotModule.open(Path(temporary) / "standards.sqlite3")
+            base = snapshots.create_snapshot(_capture()).snapshot
+            authoring = _authoring(snapshots)
+            _summary, revision = authoring.create_proposal(
+                base,
+                _change_set("invalid\ncommit subject"),
+            )
+            analysis = "analysis:sha256:" + "a" * 64
+            decisions = _review_decisions()
+            before = snapshots._store.counts()
+
+            with self.assertRaises(AuthoringError) as invalid:
+                authoring.review_proposal(
+                    analysis,
+                    revision.revision_id,
+                    decisions,
+                    _review_authorizations(
+                        analysis,
+                        revision.revision_id,
+                        decisions,
+                    ),
+                    RepositoryRevision("b" * 40),
+                )
+
+            self.assertEqual(
+                invalid.exception.failure.code,
+                "AUTHORING.INVALID_COMMIT_MATERIAL",
+            )
+            self.assertEqual(snapshots._store.counts(), before)
+            snapshots.close()
+
     def test_application_intent_is_current_head_guarded_and_records_applied(
         self,
     ) -> None:
@@ -715,6 +749,25 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                 self.assertEqual(
                     current.change_sets[-1].purpose.summary,
                     "revised proposal",
+                )
+                historical_message = proposal_commit_message(historical)
+                current_message = proposal_commit_message(current)
+                self.assertEqual(
+                    historical_message.subject,
+                    "feat(standards): apply standards change: initial proposal",
+                )
+                self.assertEqual(
+                    historical_message.body,
+                    "Exercise the initial proposal authoring transition.",
+                )
+                self.assertEqual(
+                    current_message.subject,
+                    "feat(standards): apply standards change: revised proposal",
+                )
+                self.assertEqual(
+                    current_message.body,
+                    "Exercise the initial proposal authoring transition.\n\n"
+                    "Exercise the revised proposal authoring transition.",
                 )
 
     def test_create_rejects_duplicate_facets_and_validator_failure_is_atomic(

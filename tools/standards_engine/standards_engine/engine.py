@@ -9,7 +9,7 @@ from pathlib import Path
 
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
 from tools.repository_git.repository_git import (
-    CapturedFile,
+    CandidateFile,
     GitRepository,
     GitRepositoryError,
     RepositoryPath,
@@ -172,6 +172,7 @@ from .authoring import (
     ProposalSummary as AuthoringProposalSummary,
     application_subject,
     application_recovery_subject,
+    proposal_commit_message,
     review_decision_subject,
 )
 from .logical_authoring import (
@@ -184,6 +185,7 @@ from .logical_authoring import (
 
 
 DEFAULT_STORE = ".standards-engine/snapshots-v1.sqlite3"
+_CANONICAL_AUTHORITY_EXECUTABLE = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -784,19 +786,39 @@ class StandardsEngine:
             base_capture = self._snapshots.load_content(revision.base_snapshot)
             base_files = {str(item.path): item.content for item in base_capture.files}
             proposed_files = dict(projection.source.files)
-            if set(base_files) != set(proposed_files):
+            base_paths = set(revision.base_repository_paths)
+            proposed_paths = set(projection.repository_paths)
+            added_paths = proposed_paths - base_paths
+            removed_paths = base_paths - proposed_paths
+            uncaptured_existing_paths = (
+                set(proposed_files) - set(base_files)
+            ) & base_paths
+            if (
+                not added_paths <= set(proposed_files)
+                or not removed_paths <= set(base_files)
+                or uncaptured_existing_paths
+            ):
                 return self._reject(
-                    "APPLICATION.TOPOLOGY_UNSUPPORTED",
-                    "unsupported",
-                    "Milestone 1 application supports replacement-only logical projections.",
+                    "APPLICATION.TOPOLOGY_INVALID",
+                    "invalid",
+                    "The logical projection does not contain exact authority for its topology change.",
                 )
-            replacements = tuple(
-                CapturedFile(RepositoryPath.parse(path), content)
+            candidate_files = tuple(
+                CandidateFile(
+                    RepositoryPath.parse(path),
+                    content,
+                    _CANONICAL_AUTHORITY_EXECUTABLE,
+                )
                 for path, content in sorted(proposed_files.items())
-                if base_files[path] != content
+                if path in added_paths or base_files.get(path) != content
             )
             with self._repository.materialize_candidate(
-                readiness.expected_target, replacements
+                readiness.expected_target,
+                candidate_files,
+                removals=tuple(
+                    RepositoryPath.parse(path) for path in sorted(removed_paths)
+                ),
+                commit=proposal_commit_message(revision),
             ) as candidate:
                 try:
                     verification = self._application_verifier(candidate.root)
@@ -826,6 +848,7 @@ class StandardsEngine:
                         code,
                         outcome,
                         "The exact candidate did not pass the complete verification checkpoint.",
+                        details=_verification_failure_details(verification),
                     )
                 if (
                     self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
@@ -836,6 +859,7 @@ class StandardsEngine:
                         "unavailable",
                         "The configured main branch changed before application admission.",
                     )
+                self._repository.validate_candidate(candidate)
                 application = self._authoring.admit_application(
                     readiness.readiness_id,
                     authorization.as_contract(),
@@ -847,21 +871,17 @@ class StandardsEngine:
                         readiness.expected_target,
                     )
                 except GitRepositoryError as error:
-                    if (
-                        error.failure.code
-                        != "REPOSITORY_GIT.PUBLICATION_OUTCOME_UNAVAILABLE"
-                    ):
-                        return self._domain_rejection(error)
                     return self._application_recovery_required(
                         application,
                         "APPLICATION.PUBLICATION_UNAVAILABLE",
-                        "Canonical publication could not establish a terminal result.",
+                        "Canonical publication did not establish an applied result after "
+                        f"admission ({error.failure.code}).",
                     )
                 if publication == "stale":
-                    return self._reject(
-                        "APPLICATION.TARGET_STALE",
-                        "unavailable",
-                        "The configured main branch changed before publication.",
+                    return self._application_recovery_required(
+                        application,
+                        "APPLICATION.RECOVERY_TARGET_DIVERGED",
+                        "The configured main branch changed after application admission.",
                     )
                 try:
                     observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
@@ -2705,17 +2725,52 @@ class StandardsEngine:
         )
 
     @staticmethod
-    def _reject(code: str, outcome: str, message: str) -> RejectedResult:
+    def _reject(
+        code: str,
+        outcome: str,
+        message: str,
+        *,
+        details: Mapping[str, object] | None = None,
+    ) -> RejectedResult:
         return RejectedResult.from_value(
             {
                 "kind": "rejected-result",
                 "code": code,
                 "outcome": outcome,
                 "message": message,
-                "details": {},
+                "details": {} if details is None else dict(details),
                 "next_operations": [],
             }
         )
+
+
+def _verification_failure_details(
+    verification: CompleteVerificationResult,
+) -> dict[str, object]:
+    diagnostic = verification.diagnostic
+    if diagnostic is None:  # pragma: no cover - CompleteVerificationResult invariant
+        return {"verification_exit_code": verification.exit_code}
+    details: dict[str, object] = {
+        "verification_exit_code": verification.exit_code,
+        "verification_outcome": diagnostic.outcome,
+    }
+    if _bounded_diagnostic_identifier(diagnostic.code):
+        details["verification_code"] = diagnostic.code
+    for name in ("suite", "check"):
+        value = getattr(diagnostic, name)
+        if _bounded_diagnostic_identifier(value):
+            details[f"verification_{name}"] = value
+    return details
+
+
+def _bounded_diagnostic_identifier(value: object) -> bool:
+    return (
+        type(value) is str
+        and 0 < len(value) <= 128
+        and value.isascii()
+        and value[0].isalnum()
+        and all(character.isalnum() or character in "._:/-" for character in value)
+    )
 
 
 def _resolve_policy(
