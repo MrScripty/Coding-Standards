@@ -7368,3 +7368,21 @@
   mutations prove parity. Focused, generated, numeric, declarative, plan, and
   complete mixed evidence pass. Final graph: 2 Bash checkers, 3 nodes, 18
   edges, and 3 components; fresh graph evidence is required next.
+
+## 2026-09-03 - M6-I124 Rolling Decomposition Acceptance
+
+- Fresh post-M6-I123 evidence selected the 115-line rolling-decomposition
+  checker as the final package independent of the shared plan-contract
+  component, at train order 239.
+- One registered eight-check `migration.parent-plan` suite preserves the exact
+  33-owner wave structure, all owner paths, the nine-ID first slice, owner-map
+  and final disposition lineage, report semantics, documentation, and terminal
+  path state.
+- Six M6-I114, M6-I116, and M6-I118 historical records transfer to suite
+  evidence. The suite-input self-test now validates the retired checker as an
+  absent terminal input; no numeric Bash candidate remains to substitute.
+- Canonical execution and 22 paired rejecting wave, slice, lineage, row, and
+  report mutations prove parity. Focused, generated, numeric, unit,
+  declarative, plan, and complete mixed evidence pass. Final graph: 1 Bash
+  checker, 2 nodes, 15 edges, and 2 components. The shared plan contract must
+  be admitted before the final component changes.

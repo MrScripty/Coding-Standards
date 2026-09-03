@@ -143,9 +143,21 @@ class SuiteInputProjectionTest(unittest.TestCase):
         self.assertGreater(len(projection["suites"]), 0)
         self.assertGreater(len(projection["files"]), 0)
         files = {item["path"]: item for item in projection["files"]}
+        retired_checker = files[
+            "evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh"
+        ]
+        self.assertEqual(retired_checker["state"], "absent")
+        retired_uses = {
+            (use["suite"], use["check"], use["role"])
+            for use in retired_checker["uses"]
+        }
         self.assertIn(
-            "evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh",
-            files,
+            (
+                "milestone-7-decomposition",
+                "terminal-authority",
+                "required-absent",
+            ),
+            retired_uses,
         )
         lifecycle_uses = {
             (use["suite"], use["check"], use["role"])
@@ -161,21 +173,6 @@ class SuiteInputProjectionTest(unittest.TestCase):
             ),
             lifecycle_uses,
         )
-        checker_uses = {
-            (use["suite"], use["check"], use["role"])
-            for use in files[
-                "evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh"
-            ]["uses"]
-        }
-        self.assertIn(
-            (
-                "numeric-comparison-classification",
-                "candidate-lifecycle",
-                "numeric-lifecycle",
-            ),
-            checker_uses,
-        )
-
     def test_repository_index_membership_changes_projection_identity(self) -> None:
         first = compile_suite_input_projection(self.root)["repository_index"]
         self.write("tracked-later.md", "new tracked input\n")

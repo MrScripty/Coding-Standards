@@ -363,3 +363,11 @@
   registered suite with exact final source and disposition lineage.
 - Two Bash checkers remain before the accepted zero-Bash trigger can execute
   migration-only Python dispositions.
+
+## 2026-09-03 - M6-I124 Terminal-Lifecycle Projection
+
+- Accepted M6-I124 removed the rolling-decomposition Bash checker through one
+  registered suite with exact wave, owner, first-slice, and lineage evidence.
+- One Bash checker and its shared plan helper remain. The plan contract must be
+  admitted before the zero-Bash trigger can execute migration-only Python
+  dispositions.

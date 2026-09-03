@@ -777,10 +777,10 @@ every frozen section identifier as roles are migrated.
 
 `milestone-7-decomposition.md`, `milestone-7-waves.tsv`, and
 `milestone-7-first-slice.tsv` define the rolling owner-and-correctness sequence
-for the remaining consolidation. `verify-milestone-7-decomposition.sh` checks
-the remaining inventory totals, complete wave ownership, missing-owner count,
-and exact first-slice proposal without treating later proposed dispositions as
-accepted.
+for the remaining consolidation. The registered `milestone-7-decomposition`
+suite checks the exact 33-owner wave structure and nine-ID first slice,
+available owners, inventory and disposition lineage, and report semantics
+without treating later proposed dispositions as accepted.
 
 `milestone-7-f018-decomposition.md` and
 `milestone-7-f018-slices.tsv` record the accepted split of critical

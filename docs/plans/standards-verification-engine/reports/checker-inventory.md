@@ -4784,6 +4784,30 @@ graph: 2 Bash checkers, 3 executable nodes, 18 edges, and 3 components. The old
 checker is absent without engine changes, copied normative policy,
 compatibility representation, or fallback.
 
+### M6-I124 Rolling Decomposition Acceptance
+
+Fresh post-M6-I123 evidence reports 2 Bash verifiers, 3 executable nodes, 18
+conservative edges, and 3 components. The 115-line
+`verify-milestone-7-decomposition.sh` is the final retained checker outside the
+plan-fixture/helper component and is selected as a `serial-coherent`
+`migration.parent-plan` package.
+
+One registered eight-check suite preserves the exact 33-owner, five-wave map,
+all current owner paths, the exact nine-ID first slice, owner-map source/owner
+lineage, accepted source/target/disposition lineage, report semantics,
+documentation, and terminal path state. The suite-input projection self-test
+now asserts the retired checker as an absent terminal input because no retained
+Bash checker has a numeric-comparison candidate.
+
+Six M6-I114, M6-I116, and M6-I118 historical records transfer to
+`suite:milestone-7-decomposition`. Canonical execution and 22 paired rejecting
+wave, order, owner, count, rationale, row-shape, first-slice, inventory,
+disposition, and report mutations prove parity. Focused, generated, numeric,
+unit, declarative, plan, and complete mixed evidence pass. Final graph: 1 Bash
+checker, 2 executable nodes, 15 edges, and 2 components. The old checker is
+absent without engine changes, compatibility representation, or fallback; the
+shared plan contract remains separately admitted work.
+
 ### M6-I32 Discover-Or-Create Reference Admission
 
 Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture

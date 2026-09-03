@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I123 graph audit; do not preselect the next
-package from evidence captured before the accepted F022/F023 package
+**Next slice:** run a fresh post-M6-I124 graph audit and admit the shared plan
+contract before changing the final plan-fixture/helper component
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I123 replaced the F022/F023 decomposition Bash
-checker with one registered `migration.parent-plan` suite at train order 238.
+**Latest accepted slice:** M6-I124 replaced the rolling decomposition Bash
+checker with one registered `migration.parent-plan` suite at train order 239.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I123 at train
-order 238.
+**Accepted boundary:** package records are accepted through M6-I124 at train
+order 239.
 
-**Current derived state:** 274 registered declarative suites, 2 retained Bash
-checkers, 3 executable nodes, 18 conservative reference edges, and 3
+**Current derived state:** 275 registered declarative suites, 1 retained Bash
+checker, 2 executable nodes, 15 conservative reference edges, and 2
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -179,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I123 F022/F023 decomposition accepted at train order 238 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I124 rolling decomposition accepted at train order 239 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

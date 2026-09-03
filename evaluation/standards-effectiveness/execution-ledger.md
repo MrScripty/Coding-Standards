@@ -15693,6 +15693,23 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checkers, 3 nodes, 18 edges, and 3 components; fresh graph evidence is
   required next.
 
+## 2026-09-03 - M6-I124 Rolling Decomposition Acceptance
+
+- Fresh post-M6-I123 evidence selected the rolling-decomposition checker as the
+  final `serial-coherent` package outside the shared plan component, at train
+  order 239.
+- One eight-check `migration.parent-plan` suite preserves the exact 33-owner
+  wave map, owner availability, nine-ID first slice, owner-map and disposition
+  lineage, report semantics, documentation, and terminal path authority.
+- Six historical records transfer to the suite. The suite-input self-test now
+  asserts terminal absence because no live Bash checker owns a numeric
+  comparison candidate after this deletion.
+- Canonical success and 22 paired rejecting wave, first-slice, lineage, row,
+  and report mutations prove parity. Focused, generated, numeric, unit,
+  declarative, plan, and complete mixed evidence pass. Final graph: 1 Bash
+  checker, 2 nodes, 15 edges, and 2 components. Shared plan-contract admission
+  is required next.
+
 ## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
 
 - Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,

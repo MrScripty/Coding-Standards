@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 5 terminal migration lifecycle and Bash retirement
 
-**Next slice:** run a fresh post-M6-I123 checker graph audit; do not preselect
-the next Bash-retirement package from earlier evidence
+**Next slice:** run a fresh post-M6-I124 checker graph audit and admit the
+shared plan contract before changing the final Bash/helper component
 
 **Acceptance status:** `pending`
 
