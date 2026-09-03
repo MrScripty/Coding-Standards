@@ -4761,6 +4761,29 @@ executable nodes, 20 edges, and 4 components. The old checker is absent without
 engine changes, copied lifecycle state, compatibility representation, or
 fallback.
 
+### M6-I123 F022/F023 Decomposition Acceptance
+
+Fresh post-M6-I122 evidence reports 3 Bash verifiers, 4 executable nodes, 20
+conservative edges, and 4 components. The 173-line
+`verify-milestone-7-f022-f023-decomposition.sh` is the only retained checker
+with no executable inbound reference and is selected as a `serial-coherent`,
+safety-critical `migration.parent-plan` package.
+
+One registered six-check suite preserves the exact 34 identifiers and six
+serial slices, bounded source/target/disposition domains, source inventory
+lineage, final accepted dispositions, F022/F023 report semantics,
+documentation, and terminal path state. It uses existing table, relation, text,
+and path checks without changing shared engine mechanics.
+
+Twelve M6-M3, M6-I65, M6-I88, M6-I108, M6-I110, and M6-I120 historical records
+transfer to `suite:milestone-7-f022-f023-decomposition`. Canonical execution
+and 18 paired rejecting structure, identity, source, target, disposition,
+inventory, row-shape, rationale, and report mutations prove parity. Focused,
+generated, numeric, declarative, plan, and complete mixed evidence pass. Final
+graph: 2 Bash checkers, 3 executable nodes, 18 edges, and 3 components. The old
+checker is absent without engine changes, copied normative policy,
+compatibility representation, or fallback.
+
 ### M6-I32 Discover-Or-Create Reference Admission
 
 Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture

@@ -1364,3 +1364,8 @@ requires = []
 id = "owner-state-transitions"
 path = "evaluation/standards-effectiveness/suites/owner-state-transitions.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-f022-f023-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-f022-f023-decomposition.toml"
+requires = []

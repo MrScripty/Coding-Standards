@@ -7353,3 +7353,18 @@
   and closed-row parity. Focused, generated, numeric, unit, declarative, plan,
   and complete mixed evidence pass. Final graph: 3 Bash checkers, 4 nodes, 20
   edges, and 4 components; fresh graph evidence is required next.
+
+## 2026-09-03 - M6-I123 F022/F023 Decomposition Acceptance
+
+- Fresh post-M6-I122 evidence reports 3 Bash verifiers, 4 nodes, 20 edges, and
+  4 components. F022/F023 decomposition is the sole retained checker with zero
+  executable inbound references and is selected at train order 238.
+- One registered six-check `migration.parent-plan` suite preserves the exact
+  34-ID, six-slice order, inventory sources, accepted targets and dispositions,
+  report semantics, documentation, and terminal path state.
+- Twelve M6-M3, M6-I65, M6-I88, M6-I108, M6-I110, and M6-I120 historical
+  records transfer to registered suite evidence.
+- Canonical execution and 18 paired rejecting structure, lineage, and report
+  mutations prove parity. Focused, generated, numeric, declarative, plan, and
+  complete mixed evidence pass. Final graph: 2 Bash checkers, 3 nodes, 18
+  edges, and 3 components; fresh graph evidence is required next.

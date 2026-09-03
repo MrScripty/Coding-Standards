@@ -793,9 +793,9 @@ owners, dispositions, ordering, named fixtures, and accepted plan state.
 `milestone-7-f022-f023-slices.tsv` split critical foreign-memory, unsafe-
 contract, ABI-classification, and conversion findings `F022` and `F023` into
 six serial generic and Rust-specialized slices.
-`verify-milestone-7-f022-f023-decomposition.sh` checks the exact 34
-identifiers, owners, dispositions, ordering, named fixtures, and active-plan
-handoff without moving normative guidance.
+The registered `milestone-7-f022-f023-decomposition` suite checks the exact 34
+identifiers, owners, dispositions, and ordering plus inventory lineage, report
+semantics, and lifecycle handoff without moving normative guidance.
 
 `milestone-7-trust-lifecycle-replan.md`,
 `milestone-7-trust-lifecycle-groups.tsv`, and

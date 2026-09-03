@@ -356,3 +356,10 @@
   registered fixture-driven decision suite.
 - Three Bash checkers remain before the accepted zero-Bash trigger can execute
   migration-only Python dispositions.
+
+## 2026-09-03 - M6-I123 Terminal-Lifecycle Projection
+
+- Accepted M6-I123 removed the F022/F023 decomposition Bash checker through one
+  registered suite with exact final source and disposition lineage.
+- Two Bash checkers remain before the accepted zero-Bash trigger can execute
+  migration-only Python dispositions.

@@ -15678,6 +15678,21 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   and complete mixed evidence pass. Final graph: 3 Bash checkers, 4 nodes, 20
   edges, and 4 components; fresh graph evidence is required next.
 
+## 2026-09-03 - M6-I123 F022/F023 Decomposition Acceptance
+
+- Fresh post-M6-I122 evidence selects the only zero-executable-inbound retained
+  checker: the 173-line F022/F023 decomposition gate at train order 238.
+- One six-check `migration.parent-plan` suite preserves the exact 34 IDs across
+  six serial slices, source inventory lineage, final disposition lineage,
+  safety report semantics, documentation, and terminal path authority.
+- Twelve accepted historical records transfer to the registered suite without
+  changing historical source or target identities.
+- Canonical success and 18 paired rejecting slice, order, identity, lineage,
+  row-contract, and report mutations prove parity. Focused, generated, numeric,
+  declarative, plan, and complete mixed evidence pass. Final graph: 2 Bash
+  checkers, 3 nodes, 18 edges, and 3 components; fresh graph evidence is
+  required next.
+
 ## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
 
 - Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,
