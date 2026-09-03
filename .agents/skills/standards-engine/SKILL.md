@@ -51,13 +51,13 @@ Inspect every returned `kind`:
   `recover_application` using the same readiness handle. Do not repeat apply,
   infer publication, or repair Git manually.
 
-The skill transport opens the normal durable Engine store and cannot create
-authorization. `review_proposal`, `apply_proposal`, and
-`recover_application` succeed only when the host composition root binds the
-required current authorization adapter. Treat
+The skill transport opens the normal durable Engine store with the repository's
+owner-operated, in-process always-allow authorizer. It authorizes each exact
+request and records local authorization and revocation evidence; no external
+authorization service or session token is required. Low-level Engine callers
+may deliberately supply another authorization adapter or none. Treat
 `ANALYSIS.AUTHORIZATION_UNAVAILABLE`, `ANALYSIS.UNAUTHORIZED`, and
-`ANALYSIS.AUTHORIZATION_UNSUPPORTED` as stopping outcomes; test authorizers are
-not production credentials.
+`ANALYSIS.AUTHORIZATION_UNSUPPORTED` from such a caller as stopping outcomes.
 
 ## Choose The Workflow
 

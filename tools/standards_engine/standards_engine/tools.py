@@ -1,10 +1,20 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import tomllib
 from collections.abc import Mapping
 from pathlib import Path
 
+from tools.standards_analysis.standards_analysis import (
+    AnalysisExecutionContext,
+    AuthorizationAuthorityContract,
+    AuthorizationClaim,
+    AuthorizationRequest,
+    EvidenceContractKey,
+    EvidenceReference,
+    ResolvedEvidence,
+)
 from tools.standards_contracts.standards_contracts import (
     CompiledContracts,
     ContractError,
@@ -39,6 +49,49 @@ INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
 INTERFACE_CONTRACT = "tools/standards_engine/contracts/a1-interface.toml"
 
 
+def _local_evidence(identifier: str) -> ResolvedEvidence:
+    content = identifier.encode("utf-8")
+    reference = EvidenceReference(
+        identifier,
+        "sha256:" + hashlib.sha256(content).hexdigest(),
+        "repository-content",
+        "1",
+    )
+    return ResolvedEvidence(reference, content)
+
+
+class LocalAlwaysAllowAuthorizer:
+    """Authorize every exact request made through the local agent facade."""
+
+    contract = AuthorizationAuthorityContract(
+        "issuer.standards-engine.local",
+        1,
+        "principal.standards-engine.local",
+        "authorization-grant.v1",
+        (EvidenceContractKey("repository-content", "1"),),
+        "revocation.standards-engine.local",
+        1,
+        "authorization-revocation.v1",
+        (EvidenceContractKey("repository-content", "1"),),
+    )
+
+    def authorize(self, request: AuthorizationRequest) -> AuthorizationClaim:
+        return AuthorizationClaim(
+            request.action,
+            request.subject_kind,
+            request.subject_id,
+            request.capability,
+            tuple(
+                ResolvedEvidence(item, item.id.encode("utf-8"))
+                for item in request.evidence
+            ),
+            (_local_evidence("standards-engine.local-authorization"),),
+            (_local_evidence("standards-engine.local-revocation"),),
+            "not-revoked",
+            "allow",
+        )
+
+
 class InterfaceVersionError(ValueError):
     pass
 
@@ -64,7 +117,10 @@ class AgentToolFacade:
     @classmethod
     def open_repository(cls, root: Path) -> AgentToolFacade:
         repo_root = root.resolve()
-        engine = StandardsEngine.open_repository(repo_root)
+        engine = StandardsEngine.open_repository(
+            repo_root,
+            execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer()),
+        )
         try:
             return cls(engine, _contracts(repo_root))
         except Exception:

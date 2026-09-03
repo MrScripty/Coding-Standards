@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -8,12 +9,18 @@ import tomllib
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest import mock
 
+from tools.standards_analysis.standards_analysis import (
+    AuthorizationClaim,
+    AuthorizationRequest,
+    EvidenceReference,
+)
 from tools.standards_contracts.standards_contracts import (
     compile_contracts,
     render_repository_projections,
 )
-from tools.standards_engine.standards_engine import AgentToolFacade
+from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import _generated_contract as generated
 
 
@@ -30,6 +37,41 @@ def _canonical_contracts() -> tuple[dict[str, object], dict[str, object]]:
 
 
 class GeneratedContractTest(unittest.TestCase):
+    def test_local_facade_binds_always_allow_authorization(self) -> None:
+        engine = SimpleNamespace(close=lambda: None)
+        with mock.patch.object(
+            StandardsEngine, "open_repository", return_value=engine
+        ) as open_repository:
+            facade = AgentToolFacade.open_repository(REPO_ROOT)
+
+        self.assertIs(facade._engine, engine)
+        context = open_repository.call_args.kwargs["execution_context"]
+        identifier = "evidence.local-request"
+        reference = EvidenceReference(
+            identifier,
+            "sha256:" + hashlib.sha256(identifier.encode("utf-8")).hexdigest(),
+            "repository-content",
+            "1",
+        )
+        request = AuthorizationRequest(
+            "consumer-disposition",
+            "obligation",
+            "obligation:local",
+            "standards.review.consumer",
+            (reference,),
+        )
+
+        claim = context.authorization.authorize(request)
+
+        self.assertIsInstance(claim, AuthorizationClaim)
+        self.assertEqual(claim.action, request.action)
+        self.assertEqual(claim.subject_kind, request.subject_kind)
+        self.assertEqual(claim.subject_id, request.subject_id)
+        self.assertEqual(claim.capability, request.capability)
+        self.assertEqual(claim.submission_evidence[0].content, identifier.encode())
+        self.assertEqual(claim.revocation_state, "not-revoked")
+        self.assertEqual(claim.decision, "allow")
+
     def test_interface_operations_bind_generated_calls_results_and_facade(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)

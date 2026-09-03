@@ -19958,7 +19958,7 @@
       ]
     },
     {
-      "digest": "sha256:c5f57dceffcc7f0b341ad417ca97bf0b982b9cef9d360e450eb536a03ceae449",
+      "digest": "sha256:8da4eaf472b7a012f914a20648709b4fb0f2cffd40e31540203406fbe3d89197",
       "path": "tools/standards_engine/standards_engine/tools.py",
       "state": "present",
       "uses": [
@@ -20008,7 +20008,7 @@
       ]
     },
     {
-      "digest": "sha256:683c771571e9aca030225dcacbaf8d502b5049b15c0615444d16cec08434f257",
+      "digest": "sha256:81c5d0bf30dff2a7a5d72076319c7d6b61e784ee488a7566629d4f3720fa0f2e",
       "path": "tools/standards_engine/tests/test_generated_contract.py",
       "state": "present",
       "uses": [
@@ -25377,7 +25377,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:e5821e70e33d9e36c49bc70f670f11b76c937db1648fd53d6c1385d2914c0206",
+    "digest": "sha256:9ba9060608a027dc3304cb72857916b01c95ebb7646060cec8fe566187a280f4",
     "uses": [
       {
         "check": "python-package-contract",
