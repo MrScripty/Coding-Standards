@@ -6,8 +6,11 @@ A2 extends the accepted A1c facade additively. Its first production boundary is
 `create_proposal` plus `find_proposals`: an agent supplies one retained snapshot,
 exact non-Git replacement mutations, and A1c-shaped semantic proposals; the
 Engine returns opaque proposal and immutable revision handles and can rediscover
-the proposal after process replacement. The original eight A1c operations,
-their request/result versions, and their behavior remain unchanged.
+the proposal after process replacement. The original eight A1c operation roots,
+request shapes, and behavior remain unchanged. A2's coordinated contract
+evolution advances the shared result projection from v4 to v5 and the Analysis
+identity/handle from v5 to v6 for projected-revision material; those are
+recorded A1c integration changes, not unchanged A1c versions.
 
 The second production boundary adds `revise_proposal`. Its caller supplies one
 expected immutable revision plus the complete replacement and semantic material
@@ -114,10 +117,10 @@ boundary that owns the existing A1c capabilities; the domain does not add a seco
 authorization mechanism or a generic capability-set contract. Interface
 schema v19 adds application recovery after v18 application. Readiness
 contract/handle v1 and application contract/handle v1 are additive. Analysis
-state v5, Analysis identity/handle
-v6, result projection v5, request contract v4, proposal revision handle v1,
-Authoring revision contract v1, and store schema v2 remain unchanged because
-their owned promises do not change. The store already owns opaque aggregate
+state v5, Analysis identity/handle v6, result projection v5, request contract
+v4, proposal revision handle v1, Authoring revision contract v1, and store
+schema v2 remain at their accepted pre-Milestone-7 A2 values because recovery
+changes none of those owned promises. The store already owns opaque aggregate
 bytes, exact snapshot dependencies, and transactional aggregate publication,
 so verified intent, selection, and outcome records require no schema migration
 or mutable index. This decision does not add automatic retry/rollback, a

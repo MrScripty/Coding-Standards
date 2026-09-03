@@ -730,18 +730,8 @@ class StandardsEngine:
         self, call: ApplyProposalCall
     ) -> ApplyProposalResult | ApplicationRecoveryRequiredResult | RejectedResult:
         try:
-            readiness, revision = self._authoring.application_revision(
-                call.readiness.id
-            )
-            if (
-                self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-                != readiness.expected_target
-            ):
-                return self._reject(
-                    "APPLICATION.TARGET_STALE",
-                    "unavailable",
-                    "The configured main branch no longer matches the readiness target.",
-                )
+            readiness = self._authoring.read_readiness(call.readiness.id)
+            revision = self._authoring.read_revision(readiness.revision_id)
             authorization = construct_authorization_record(
                 self._execution_context,
                 AuthorizationRequest(
@@ -756,6 +746,30 @@ class StandardsEngine:
                     (),
                 ),
             )
+            try:
+                self._authoring.read_selected_application(readiness.readiness_id)
+            except AuthoringError as error:
+                if error.failure.code != "APPLICATION.NOT_ADMITTED":
+                    raise
+            else:
+                return self._reject(
+                    "APPLICATION.ALREADY_ADMITTED",
+                    "invalid",
+                    "This readiness already selected an application; use "
+                    "recover_application.",
+                )
+            readiness, revision = self._authoring.application_revision(
+                call.readiness.id
+            )
+            if (
+                self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+                != readiness.expected_target
+            ):
+                return self._reject(
+                    "APPLICATION.TARGET_STALE",
+                    "unavailable",
+                    "The configured main branch no longer matches the readiness target.",
+                )
             replacements = tuple(
                 CapturedFile(
                     RepositoryPath(mutation.path.components),

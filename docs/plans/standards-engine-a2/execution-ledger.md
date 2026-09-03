@@ -1289,3 +1289,36 @@
   supported runtimes. Milestone 7 is accepted. The next work is the bounded A2
   feature-completeness and final acceptance audit, not another speculative
   runtime slice.
+
+## 2026-09-03 - Final Audit Runtime Closure Accepted
+
+- Independent specification review of the complete A2 production range found
+  that `apply_proposal` could reach verification and a second Git publication
+  attempt after the readiness had already selected an application. Independent
+  Standards review separately found that apply observed the Git target before
+  current authorization, and that active plan/ADR wording contradicted the two
+  recorded A1c integration scopes and their version effects.
+- The Engine now resolves the canonical readiness subject, obtains current
+  apply authorization, and checks the immutable selection before any Git
+  observation, candidate materialization, verification, or publication. A
+  selected readiness returns typed `APPLICATION.ALREADY_ADMITTED` and directs
+  the caller to the separately authorized recovery operation. A readiness with
+  no selection retains the accepted M6 application path; atomic admission
+  remains the concurrent race authority.
+- Focused regression evidence proves an unauthorized apply performs no Git
+  observation and a repeated apply performs no Git observation,
+  materialization, verification, or publication. The negative Git-error case
+  now isolates its mocked projection from durable admission so unrelated
+  scenarios do not reuse an intentionally consumed readiness.
+- The final audit also detected the stale repository-index digest left by the
+  M7 tracked-file additions. Owner regeneration changed only that derived
+  digest; the current graph and inventory remain seven Bash verifiers, nine
+  nodes, 33 edges, and nine components.
+- The focused M5-M7 workflow passes on Linux CPython 3.11 and 3.12. Each runtime
+  also passes all 50 Standards Engine tests and all 20 Standards Contracts
+  tests. Ruff, generated contract freshness, plan structure, and diff hygiene
+  pass. Both complete repository checkpoints pass all 270 declarative suites
+  and all seven retained Bash checkers.
+- Independent specification and Standards re-reviews report no remaining hard
+  violation in this runtime-fix boundary. The separate final acceptance record
+  owns feature-completeness, issue closure, and objective status.

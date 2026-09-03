@@ -708,7 +708,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 self.engine._repository,
                 "branch_revision",
                 return_value=readiness.expected_target,
-            ),
+            ) as unauthorized_observation,
             mock.patch.object(
                 self.engine._repository,
                 "materialize_candidate",
@@ -726,6 +726,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 }
             )
         self.assertEqual(unauthorized["code"], "ANALYSIS.UNAUTHORIZED")
+        unauthorized_observation.assert_not_called()
         unauthorized_materialization.assert_not_called()
         self.assertEqual(self.engine._snapshots._store.counts(), rejected_counts)
 
@@ -790,6 +791,11 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 self.engine._repository,
                 "materialize_candidate",
                 return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._authoring,
+                "admit_application",
+                return_value=mock.Mock(),
             ),
             mock.patch.object(
                 self.engine._repository,
@@ -863,6 +869,33 @@ class AnalysisWorkflowTest(unittest.TestCase):
             recovery_required["application"]["id"]
         )
         self.assertEqual(persisted_intent.candidate, candidate.revision)
+
+        with (
+            mock.patch.object(
+                self.engine._repository, "branch_revision"
+            ) as repeated_apply_observation,
+            mock.patch.object(
+                self.engine._repository, "materialize_candidate"
+            ) as repeated_apply_materialization,
+            mock.patch.object(
+                self.engine._repository, "publish_candidate"
+            ) as repeated_apply_publication,
+            mock.patch.object(
+                self.engine, "_application_verifier"
+            ) as repeated_apply_verification,
+        ):
+            repeated_apply = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(repeated_apply["kind"], "rejected-result")
+        self.assertEqual(repeated_apply["code"], "APPLICATION.ALREADY_ADMITTED")
+        repeated_apply_observation.assert_not_called()
+        repeated_apply_materialization.assert_not_called()
+        repeated_apply_publication.assert_not_called()
+        repeated_apply_verification.assert_not_called()
 
         recovery_counts = self.engine._snapshots._store.counts()
         recovery_cases = (
