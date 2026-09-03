@@ -146,6 +146,8 @@ class TextRenderingTest(unittest.TestCase):
             "find-proposals-result",
             "revise-proposal-result",
             "review-proposal-result",
+            "apply-proposal-result",
+            "application-recovery-required-result",
             "proposal-route-result",
             "proposal-read-result",
             "proposal-related-result",

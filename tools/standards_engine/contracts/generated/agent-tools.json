@@ -445,6 +445,102 @@
         }
       ]
     },
+    "ApplicationHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ApplicationId"
+        },
+        "kind": {
+          "const": "application-handle"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "ApplicationId": {
+      "pattern": "^application:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "ApplicationRecoveryRequiredResult": {
+      "additionalProperties": false,
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/ApplicationHandle"
+        },
+        "code": {
+          "enum": [
+            "APPLICATION.PUBLICATION_UNAVAILABLE",
+            "APPLICATION.OBSERVATION_UNAVAILABLE",
+            "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE"
+          ]
+        },
+        "kind": {
+          "const": "application-recovery-required-result"
+        },
+        "message": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "outcome": {
+          "const": "unavailable"
+        },
+        "status": {
+          "const": "recovery-required"
+        }
+      },
+      "required": [
+        "kind",
+        "application",
+        "status",
+        "code",
+        "outcome",
+        "message"
+      ],
+      "type": "object"
+    },
+    "ApplyProposalCall": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "apply-proposal"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "readiness"
+      ],
+      "type": "object"
+    },
+    "ApplyProposalResult": {
+      "additionalProperties": false,
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/ApplicationHandle"
+        },
+        "kind": {
+          "const": "apply-proposal-result"
+        },
+        "status": {
+          "const": "applied"
+        }
+      },
+      "required": [
+        "kind",
+        "application",
+        "status"
+      ],
+      "type": "object"
+    },
     "AuthorizationId": {
       "pattern": "^authorization:sha256:[0-9a-f]{64}$",
       "type": "string"
@@ -4056,7 +4152,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 17,
+  "interface_schema_version": 18,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -4231,6 +4327,19 @@
       },
       "result_definitions": [
         "ReviewProposalResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.apply",
+      "id": "apply_proposal",
+      "input_definition": "ApplyProposalCall",
+      "input_schema": {
+        "$ref": "#/$defs/ApplyProposalCall"
+      },
+      "result_definitions": [
+        "ApplyProposalResult",
+        "ApplicationRecoveryRequiredResult",
         "RejectedResult"
       ]
     }

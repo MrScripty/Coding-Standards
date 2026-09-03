@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import io
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -259,13 +260,17 @@ def _render_retirements(retirements: dict[str, str]) -> str:
     return output.getvalue()
 
 
-def check_retirements(root: Path) -> int:
+def check_retirements(
+    root: Path,
+    *,
+    output: Callable[[str], None] = print,
+) -> int:
     try:
         validate_state(load_state(root))
     except NumericRetirementDiagnostic as error:
-        print(error)
+        output(str(error))
         return error.exit_code
-    print(f"PASS {RETIREMENTS_PATH.as_posix()}")
+    output(f"PASS {RETIREMENTS_PATH.as_posix()}")
     return 0
 
 

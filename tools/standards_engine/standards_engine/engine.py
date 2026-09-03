@@ -9,10 +9,15 @@ from pathlib import Path
 
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
 from tools.repository_git.repository_git import (
+    CapturedFile,
     GitRepository,
     GitRepositoryError,
     RepositoryPath,
     RepositoryRevision,
+)
+from tools.standards_verifier.standards_verifier import (
+    CompleteVerificationResult,
+    run_complete_verification,
 )
 from tools.standards_analysis.standards_analysis import (
     ANALYSIS_CONTRACT_VERSION,
@@ -95,6 +100,9 @@ from tools.standards_snapshots.standards_snapshots import (
 
 from ._generated_contract import (
     AnalyzeProposalCall,
+    ApplicationRecoveryRequiredResult,
+    ApplyProposalCall,
+    ApplyProposalResult,
     AnalysisChildHandle,
     AnalysisChildInspectionResult,
     AnalysisHandle,
@@ -147,15 +155,18 @@ from ._generated_contract import (
     UndeleteSnapshotResult,
 )
 from .authoring import (
+    APPLICATION_CAPABILITY,
     AuthoringError,
     AuthoringModule,
     CANONICAL_TARGET_BRANCH,
     FindProposalsRequest,
     Mutation,
     ProposalId,
+    ProposalApplication,
     ProposalRevision,
     REVIEW_CAPABILITIES,
     ProposalSummary as AuthoringProposalSummary,
+    application_subject,
     review_decision_subject,
 )
 
@@ -338,6 +349,9 @@ class StandardsEngine:
         self._snapshots = snapshots
         self._authoring = AuthoringModule(snapshots)
         self._execution_context = execution_context or AnalysisExecutionContext()
+        self._application_verifier = lambda root: run_complete_verification(
+            root, quiet=True
+        )
         self._temporary_store = temporary_store
 
     @classmethod
@@ -697,6 +711,147 @@ class StandardsEngine:
                     "status": "ready",
                 }
             )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
+    def apply_proposal(
+        self, call: ApplyProposalCall
+    ) -> ApplyProposalResult | ApplicationRecoveryRequiredResult | RejectedResult:
+        try:
+            readiness, revision = self._authoring.application_revision(
+                call.readiness.id
+            )
+            if (
+                self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+                != readiness.expected_target
+            ):
+                return self._reject(
+                    "APPLICATION.TARGET_STALE",
+                    "unavailable",
+                    "The configured main branch no longer matches the readiness target.",
+                )
+            authorization = construct_authorization_record(
+                self._execution_context,
+                AuthorizationRequest(
+                    "apply-proposal",
+                    "proposal-application",
+                    application_subject(
+                        readiness.readiness_id,
+                        revision.revision_id,
+                        readiness.expected_target,
+                    ),
+                    APPLICATION_CAPABILITY,
+                    (),
+                ),
+            )
+            replacements = tuple(
+                CapturedFile(
+                    RepositoryPath(mutation.path.components),
+                    mutation.value.encode("utf-8"),
+                )
+                for mutation in revision.mutations
+            )
+            with self._repository.materialize_candidate(
+                readiness.expected_target, replacements
+            ) as candidate:
+                try:
+                    verification = self._application_verifier(candidate.root)
+                except OSError:
+                    return self._reject(
+                        "APPLICATION.VERIFICATION_UNAVAILABLE",
+                        "unavailable",
+                        "The complete candidate verification could not be executed.",
+                    )
+                if type(verification) is not CompleteVerificationResult:
+                    return self._reject(
+                        "APPLICATION.VERIFICATION_INVALID",
+                        "invalid",
+                        "The complete verifier returned an invalid result.",
+                    )
+                if verification.exit_code != 0:
+                    outcome = {
+                        3: "unavailable",
+                        4: "unsupported",
+                    }.get(verification.exit_code, "invalid")
+                    code = {
+                        "unavailable": "APPLICATION.VERIFICATION_UNAVAILABLE",
+                        "unsupported": "APPLICATION.VERIFICATION_UNSUPPORTED",
+                        "invalid": "APPLICATION.VERIFICATION_FAILED",
+                    }[outcome]
+                    return self._reject(
+                        code,
+                        outcome,
+                        "The exact candidate did not pass the complete verification checkpoint.",
+                    )
+                if (
+                    self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+                    != readiness.expected_target
+                ):
+                    return self._reject(
+                        "APPLICATION.TARGET_STALE",
+                        "unavailable",
+                        "The configured main branch changed before application admission.",
+                    )
+                application = self._authoring.admit_application(
+                    readiness.readiness_id,
+                    authorization.as_contract(),
+                    candidate.revision,
+                )
+                try:
+                    publication = self._repository.publish_candidate(
+                        candidate,
+                        readiness.expected_target,
+                    )
+                except GitRepositoryError as error:
+                    if (
+                        error.failure.code
+                        != "REPOSITORY_GIT.PUBLICATION_OUTCOME_UNAVAILABLE"
+                    ):
+                        return self._domain_rejection(error)
+                    return self._application_recovery_required(
+                        application,
+                        "APPLICATION.PUBLICATION_UNAVAILABLE",
+                        "Canonical publication could not establish a terminal result.",
+                    )
+                if publication == "stale":
+                    return self._reject(
+                        "APPLICATION.TARGET_STALE",
+                        "unavailable",
+                        "The configured main branch changed before publication.",
+                    )
+                try:
+                    observed = self._repository.branch_revision(
+                        CANONICAL_TARGET_BRANCH
+                    )
+                except GitRepositoryError:
+                    return self._application_recovery_required(
+                        application,
+                        "APPLICATION.OBSERVATION_UNAVAILABLE",
+                        "The canonical target could not be observed after publication.",
+                    )
+                if observed != candidate.revision:
+                    return self._application_recovery_required(
+                        application,
+                        "APPLICATION.OBSERVATION_UNAVAILABLE",
+                        "The canonical target did not retain the candidate after publication.",
+                    )
+                try:
+                    self._authoring.record_applied(application)
+                except SnapshotError:
+                    return self._application_recovery_required(
+                        application,
+                        "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
+                        "The applied outcome could not be recorded durably.",
+                    )
+                return ApplyProposalResult.from_value(
+                    {
+                        "kind": "apply-proposal-result",
+                        "application": self._application_handle(
+                            application.application_id
+                        ),
+                        "status": "applied",
+                    }
+                )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -2233,6 +2388,34 @@ class StandardsEngine:
             "id": readiness,
             "schema_version": 1,
         }
+
+    @staticmethod
+    def _application_handle(application: str) -> dict[str, object]:
+        return {
+            "kind": "application-handle",
+            "id": application,
+            "schema_version": 1,
+        }
+
+    @classmethod
+    def _application_recovery_required(
+        cls,
+        application: ProposalApplication,
+        code: str,
+        message: str,
+    ) -> ApplicationRecoveryRequiredResult:
+        return ApplicationRecoveryRequiredResult.from_value(
+            {
+                "kind": "application-recovery-required-result",
+                "application": cls._application_handle(
+                    application.application_id
+                ),
+                "status": "recovery-required",
+                "code": code,
+                "outcome": "unavailable",
+                "message": message,
+            }
+        )
 
     @classmethod
     def _proposal_summary(cls, summary: AuthoringProposalSummary) -> dict[str, object]:

@@ -34,6 +34,7 @@ class ContractCompilerTest(unittest.TestCase):
                 "query_proposal",
                 "analyze_proposal",
                 "review_proposal",
+                "apply_proposal",
             ),
         )
         self.assertEqual(
@@ -211,7 +212,7 @@ class ContractCompilerTest(unittest.TestCase):
         interface["operations"].clear()
 
         self.assertEqual(compiled.schema["title"], expected_schema["title"])
-        self.assertEqual(len(compiled.interface.operations), 14)
+        self.assertEqual(len(compiled.interface.operations), 15)
 
 
 if __name__ == "__main__":

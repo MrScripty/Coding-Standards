@@ -1,6 +1,6 @@
 # A1c User-Decision Preservation Matrix
 
-**Status:** `Milestone 5 proposal review reconciliation accepted; later A2
+**Status:** `Milestone 6 verified application reconciliation accepted; later A2
 reconciliation remains active`
 
 ## Authority And Method
@@ -33,11 +33,11 @@ different A1c choice.
 | --- | --- | --- | --- | --- |
 | A1C-U01 | Software-development agents acting for developers are the first caller; the Python Interface is the access seam. | Controlled authoring serves the same caller through additive generated Python operations. | `composed-without-change` | Representative agent workflow requires no human CLI or second public access contract. |
 | A1C-U02 | Harness-managed tool calls are the primary deployment; embedded Python is a custom integration under the same public behavior. | Proposal and application handles must round-trip through independent tool invocations. | `composed-without-change` | Cold-process workflow and generated-facade evidence agree on one result contract. |
-| A1C-U03 | Engine invocation, agent turn, workflow, and agent instance are distinct lifetimes; handles survive ordinary invocation and authorized handoff boundaries. | Proposal, revision, readiness, and attempt handles must be durable and possession must not grant authority. | `composed-without-change` | Close/reopen and coordinator-to-subagent scenarios resolve the same immutable identity under current authorization. |
+| A1C-U03 | Engine invocation, agent turn, workflow, and agent instance are distinct lifetimes; handles survive ordinary invocation and authorized handoff boundaries. | Proposal, revision, readiness, and application handles must be durable and possession must not grant authority. | `composed-without-change` | Close/reopen and coordinator-to-subagent scenarios resolve the same immutable identity under current authorization. |
 | A1C-U04 | Snapshot creation captures the configured canonical repository's current `HEAD`; callers cannot select repository paths, commits, trees, Git objects, or raw bytes. | A proposal begins from a caller-supplied opaque `SnapshotHandle`; target authority is deployment-owned trusted context. | `composed-without-change` | No authoring request field exposes repository path, revision, ref, object ID, store path, or authority bytes. |
 | A1C-U05 | Snapshots remain until explicit authorized deletion; no age, inactivity, process, agent, reachability, or pressure inference deletes them. | Proposal abandonment cannot implicitly delete its base snapshot. | `unchanged` | Only the accepted snapshot lifecycle operations can initiate aggregate quarantine. |
 | A1C-U06 | Proposed edits are non-Git change sets linked to one immutable snapshot, use the same navigation, inspection, analysis, and verification semantics, and are deleted with that snapshot. | A2 owns immutable proposal revisions over exact non-Git mutations. The selected private projected-revision material reference must feed the same compiler and Analysis kernel without turning the revision into snapshot authority. | `composed-without-change` | P2 proved compiler equivalence; P2R2 proved injective identity, replay, lifecycle closure, and one Analysis authority; P4R carried the exact revision through the facade. Proposal-as-snapshot, embedded Git, full-corpus-per-edit, and a second analyzer remain `prohibited-conflict`. |
-| A1C-U07 | A snapshot and all linked change sets, analyses, and dependent artifacts form one lifecycle aggregate. | Proposal roots, revisions, readiness proofs, and attempts declare exact snapshot dependencies. | `composed-without-change` | Quarantine, undelete, expiry, and purge operate over the complete dependency closure with no caller enumeration. |
+| A1C-U07 | A snapshot and all linked change sets, analyses, and dependent artifacts form one lifecycle aggregate. | Proposal roots, revisions, readiness proofs, application intents, and outcomes declare exact snapshot dependencies. | `composed-without-change` | Quarantine, undelete, expiry, and purge operate over the complete dependency closure with no caller enumeration. |
 | A1C-U08 | Deletion is aggregate quarantine followed by policy expiry; complete undelete is available; backup/restore remains outside the Engine Interface. | A2 adds no backup, restore, partial undelete, or independent child movement operation. | `unchanged` | Existing A1c lifecycle differential remains unchanged after any later A2 contract slice. |
 | A1C-U09 | Quarantine defaults to seven days, deployment configuration alone may change it, and each deletion freezes its deadline. | A2 state inherits the base root's fixed deadline and cannot set or extend it. | `unchanged` | Repeated deletion and proposal activity leave the recorded purge deadline unchanged. |
 | A1C-U10 | Immediate purge is not exposed. | A2 adds no proposal or apply variant that bypasses quarantine. | `unchanged` | Generated operation closure contains no immediate-purge capability or result. |
@@ -50,7 +50,7 @@ different A1c choice.
 | A1C-U17 | Cross-engine stored-state compatibility and migration are deferred until Coding Standards is feature complete; incompatible state is never silently reinterpreted. | Milestone 1 adds one same-engine, atomic store-v1-to-v2 migration so retained A1c stores gain empty aggregate-head tables without losing A1c rows. It adds no cross-engine reader, compatibility window, fallback, or migration framework; after migration the store is only v2. | `explicitly-reauthorized-for-a2-integration` by the user's 2026-09-02 permission to alter A1c for a standards-aligned A2 fit | An exact integrity-valid v1 store reopens as exact v2 with every A1c table row unchanged; schema lookalikes, corrupt stores, and future versions reject before mutation; injected interruption preserves v1; cross-engine compatibility remains deferred. |
 | A1C-U18 | Linux CPython 3.11 and 3.12 are the only accepted platforms; Windows and macOS remain unclaimed without equivalent real evidence. | A2 must re-prove new Git, SQLite, filesystem, locking, and recovery behavior on both accepted runtimes. | `composed-without-change` | Required-real public workflow passes on Linux CPython 3.11 and 3.12; other platforms remain unsupported or unclaimed. |
 | A1C-U19 | Semantic understanding and judgment stay with the agent; the Engine owns declared mechanical contracts and projections only. | A2 records authorized semantic, relationship, and lifecycle decisions but cannot generate their meaning or infer acceptance from prose. | `composed-without-change` | Apply readiness contains explicit authorized decisions and mechanical proof; no generated semantic-acceptance Boolean exists. |
-| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v17 retains the eight roots in their original order and adds only `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, `analyze_proposal`, and `review_proposal`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
+| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 adds explicit authoring and application operations with separate capabilities; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v18 retains the eight roots in their original order and adds only `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, `analyze_proposal`, `review_proposal`, and `apply_proposal`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
 | A1C-U21 | The accepted A1c ADR and prior codec identified proposed analysis material only through `proposed_snapshot`; exact cold replay reloaded snapshot bytes. | Replace only that snapshot-only material assumption with one closed Analysis-owned proposed-material reference whose variants identify an exact snapshot or an exact immutable proposal revision. Include it in identity, typed dependency closure, and cold replay while retaining one `AnalysisState` and one analyzer. | `explicitly-reauthorized-for-a2-integration` by the user's 2026-09-01 design decision and 2026-09-02 implementation direction | [Exact product authority and selected scope](a1c-projected-material-reauthorization.md), accepted P2R2 identity/cold-replay/lifecycle evidence, Analysis state v5 and identity/handle v6 coordinated replacement, exact revision input revalidation, unchanged snapshot-backed regression, and Linux CPython 3.11/3.12 production evidence. |
 
 ## Conflict Register
@@ -158,12 +158,37 @@ facts. Interface v17 and readiness contract/handle v1 are additive; Analysis
 v5/handle v6, request v4, result v5, proposal revision handle v1, Authoring
 revision contract v1, and store v2 retain their promises.
 
+## Milestone 6 Reconciliation
+
+Proposal application composes after readiness without changing any A1c
+operation, handle, semantic owner, Analysis behavior, snapshot lifecycle, or
+caller-controlled field. The caller supplies only the readiness handle. The
+Engine privately derives the exact revision, expected target, replacements,
+verification contract, canonical ref, and current apply authorization. The
+readiness handle grants no authority.
+
+Repository Git owns the bounded write mechanism: a private local clone proves
+one deterministic candidate before its object is imported, and one exact ref
+compare-and-swap is the only canonical mutation. The configured worktree and
+index are never used as staging authority. Authoring stores the verified intent
+before publication and stores a separate immutable applied outcome only after
+exact observation. Existing Snapshot store v2 already supports both ordinary
+snapshot-dependent aggregates, so no schema, mutable application head, phase
+ledger, retry, rollback, generic resource owner, or compatibility reader is
+introduced. Interface v18 and application contract/handle v1 are additive;
+readiness v1, Analysis v5/handle v6, request v4, result v5, proposal revision
+handle v1, Authoring revision v1, and store v2 retain their promises. A bounded
+`recovery-required` result reports only that terminal authority is unavailable;
+public recovery remains a separately admitted later operation.
+
 ## Current Verdict
 
-Milestone 5 is reconciled for proposal review readiness. The original eight
-A1c operations remain explicit and retain their behavior; revision-backed
-Analysis remains the single source of completion and obligation truth. Review
-adds no second analyzer, review lifecycle, or standards-graph membership.
-Cross-engine compatibility, feature completeness, application, Git
-publication, and recovery remain unresolved and cannot inherit Milestone 5
-authority.
+Milestone 6 is reconciled for verified proposal application. The original
+eight A1c operations remain explicit and retain their behavior;
+revision-backed Analysis remains the single source of completion and
+obligation truth, readiness remains the review authority, the Standards
+Verifier remains the complete-checkpoint owner, and Repository Git remains the
+only Git Adapter. Application adds no second analyzer, mutable lifecycle,
+automatic rollback, generic process/resource machinery, or standards-graph
+membership. Cross-engine compatibility, feature completeness, and public
+recovery remain unresolved and cannot inherit Milestone 6 authority.

@@ -133,6 +133,25 @@ class RepositoryCapture:
 
 
 @dataclass(frozen=True, slots=True)
+class MaterializedCandidate:
+    root: Path
+    expected: RepositoryRevision
+    revision: RepositoryRevision
+
+    def __post_init__(self) -> None:
+        if (
+            not isinstance(self.root, Path)
+            or not self.root.is_absolute()
+            or type(self.expected) is not RepositoryRevision
+            or type(self.revision) is not RepositoryRevision
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+                "candidate requires an absolute root and exact revisions",
+            )
+
+
+@dataclass(frozen=True, slots=True)
 class GitlinkRepository:
     prefix: RepositoryPath
     repository: Path
@@ -171,6 +190,7 @@ __all__ = (
     "CapturedFile",
     "GitCommandResult",
     "GitlinkRepository",
+    "MaterializedCandidate",
     "RepositoryCapture",
     "RepositoryPath",
     "RepositoryRevision",

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 17,
+  "interface_schema_version": 18,
   "examples": [
     {
       "name": "create-snapshot",
@@ -167,6 +167,18 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "name": "apply-proposal",
+      "definition": "ApplyProposalCall",
+      "value": {
+        "kind": "apply-proposal",
+        "readiness": {
+          "kind": "readiness-handle",
+          "id": "readiness:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
       }
     },
     {

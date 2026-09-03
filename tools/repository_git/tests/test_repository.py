@@ -5,12 +5,19 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
+
+import tools.repository_git.repository_git.repository as repository_module
 
 from tools.repository_git.repository_git import (
+    CapturedFile,
     GitRepository,
     GitRepositoryError,
+    GitRepositoryFailure,
     GitlinkRepository,
+    MaterializedCandidate,
     RepositoryPath,
+    RepositoryRevision,
     git_output,
     indexed_paths,
     sanitized_git_environment,
@@ -72,6 +79,267 @@ class GitRepositoryTests(unittest.TestCase):
 
             self.assertNotEqual(repository.current_revision().oid, main)
             self.assertEqual(repository.branch_revision("main").oid, main)
+
+    def test_candidate_is_isolated_and_published_by_expected_target(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "regular.txt").write_bytes(b"accepted\n")
+            executable = root / "executable.sh"
+            executable.write_bytes(b"#!/bin/sh\nexit 0\n")
+            executable.chmod(0o755)
+            magic = root / ":(exclude,glob)**"
+            magic.write_bytes(b"accepted magic\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+
+            (root / "unrelated.txt").write_bytes(b"staged but unrelated\n")
+            self._git(root, "add", "unrelated.txt")
+            source_index = self._git(root, "write-tree").strip()
+            source_status = self._git(root, "status", "--porcelain=v1", "-z")
+
+            replacements = (
+                CapturedFile(
+                    RepositoryPath.parse(":(exclude,glob)**"),
+                    b"proposed magic\n",
+                ),
+                CapturedFile(
+                    RepositoryPath.parse("executable.sh"),
+                    b"#!/bin/sh\nexit 7\n",
+                ),
+                CapturedFile(
+                    RepositoryPath.parse("regular.txt"),
+                    b"proposed\n",
+                ),
+            )
+            forged = MaterializedCandidate(
+                root,
+                expected,
+                RepositoryRevision("f" * 40),
+            )
+            with self.assertRaises(GitRepositoryError) as unissued:
+                repository.publish_candidate(forged, expected)
+            self.assertEqual(
+                unissued.exception.failure.code,
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+            )
+            with repository.materialize_candidate(expected, replacements) as candidate:
+                self.assertEqual(candidate.expected, expected)
+                self.assertEqual(
+                    repository.branch_revision("main"),
+                    expected,
+                )
+                self.assertEqual(self._git(root, "write-tree").strip(), source_index)
+                self.assertEqual(
+                    self._git(root, "status", "--porcelain=v1", "-z"),
+                    source_status,
+                )
+                self.assertEqual(
+                    (candidate.root / "regular.txt").read_bytes(),
+                    b"proposed\n",
+                )
+                self.assertEqual(
+                    (candidate.root / "executable.sh").read_bytes(),
+                    b"#!/bin/sh\nexit 7\n",
+                )
+                self.assertEqual(
+                    (candidate.root / ":(exclude,glob)**").read_bytes(),
+                    b"proposed magic\n",
+                )
+                self.assertTrue((candidate.root / "executable.sh").stat().st_mode & 0o111)
+                self.assertEqual(self._git(candidate.root, "remote"), "")
+                first_revision = candidate.revision
+                self.assertEqual(
+                    self._git(candidate.root, "log", "-1", "--format=%B"),
+                    "feat(standards): apply approved proposal\n\n",
+                )
+
+                with repository.materialize_candidate(
+                    expected, replacements
+                ) as repeated:
+                    self.assertEqual(repeated.revision, first_revision)
+
+                self.assertEqual(
+                    repository.publish_candidate(candidate, expected),
+                    "updated",
+                )
+
+            self.assertEqual(repository.branch_revision("main"), first_revision)
+            self.assertEqual((root / "regular.txt").read_bytes(), b"accepted\n")
+            self.assertEqual(self._git(root, "write-tree").strip(), source_index)
+
+    def test_candidate_publication_rejects_stale_target_and_drift(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"accepted\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            replacement = CapturedFile(
+                RepositoryPath.parse("value.txt"), b"proposed\n"
+            )
+
+            with repository.materialize_candidate(expected, (replacement,)) as drifted:
+                (drifted.root / "value.txt").write_bytes(b"unverified drift\n")
+                with self.assertRaises(GitRepositoryError) as changed:
+                    repository.publish_candidate(drifted, expected)
+            self.assertEqual(
+                changed.exception.failure.code,
+                "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+            )
+            self.assertEqual(repository.branch_revision("main"), expected)
+
+            with repository.materialize_candidate(expected, (replacement,)) as candidate:
+                (root / "competing.txt").write_bytes(b"competing\n")
+                self._commit(root, "competing")
+                competing = repository.branch_revision("main")
+                self.assertEqual(
+                    repository.publish_candidate(candidate, expected),
+                    "stale",
+                )
+
+            self.assertEqual(repository.branch_revision("main"), competing)
+
+    def test_candidate_publication_loses_a_race_at_the_atomic_update(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"accepted\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+
+            self._git(root, "switch", "-qc", "competing")
+            (root / "competing.txt").write_bytes(b"competing\n")
+            self._commit(root, "competing")
+            competing = repository.current_revision()
+            self._git(root, "switch", "-q", "main")
+            replacement = CapturedFile(
+                RepositoryPath.parse("value.txt"), b"proposed\n"
+            )
+            original_git_command = repository_module.git_command
+
+            with repository.materialize_candidate(expected, (replacement,)) as candidate:
+                raced = False
+
+                def race_before_update(
+                    command_root: Path,
+                    arguments: tuple[str, ...],
+                    **options: object,
+                ):
+                    nonlocal raced
+                    if (
+                        not raced
+                        and arguments[:2] == ("update-ref", "refs/heads/main")
+                        and arguments[2] == candidate.revision.oid
+                    ):
+                        raced = True
+                        original_git_command(
+                            root,
+                            (
+                                "update-ref",
+                                "refs/heads/main",
+                                competing.oid,
+                                expected.oid,
+                            ),
+                            max_output_bytes=256,
+                        )
+                    return original_git_command(
+                        command_root,
+                        arguments,
+                        **options,
+                    )
+
+                with mock.patch.object(
+                    repository_module,
+                    "git_command",
+                    side_effect=race_before_update,
+                ):
+                    result = repository.publish_candidate(candidate, expected)
+
+            self.assertTrue(raced)
+            self.assertEqual(result, "stale")
+            self.assertEqual(repository.branch_revision("main"), competing)
+
+    def test_uncertain_update_preserves_recovery_required_authority(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"accepted\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+
+            self._git(root, "switch", "-qc", "competing")
+            (root / "competing.txt").write_bytes(b"competing\n")
+            self._commit(root, "competing")
+            competing = repository.current_revision()
+            self._git(root, "switch", "-q", "main")
+            replacement = CapturedFile(
+                RepositoryPath.parse("value.txt"), b"proposed\n"
+            )
+            original_git_command = repository_module.git_command
+
+            with repository.materialize_candidate(expected, (replacement,)) as candidate:
+
+                def interrupt_after_update(
+                    command_root: Path,
+                    arguments: tuple[str, ...],
+                    **options: object,
+                ):
+                    if (
+                        arguments[:2] == ("update-ref", "refs/heads/main")
+                        and arguments[2] == candidate.revision.oid
+                    ):
+                        original_git_command(
+                            root,
+                            arguments,
+                            **options,
+                        )
+                        original_git_command(
+                            root,
+                            (
+                                "update-ref",
+                                "refs/heads/main",
+                                competing.oid,
+                                candidate.revision.oid,
+                            ),
+                            max_output_bytes=256,
+                        )
+                        raise GitRepositoryError(
+                            GitRepositoryFailure(
+                                "unavailable",
+                                "REPOSITORY_GIT.COMMAND_TIMEOUT",
+                                "fixture command outcome is unknown",
+                            )
+                        )
+                    return original_git_command(
+                        command_root,
+                        arguments,
+                        **options,
+                    )
+
+                with (
+                    mock.patch.object(
+                        repository_module,
+                        "git_command",
+                        side_effect=interrupt_after_update,
+                    ),
+                    self.assertRaises(GitRepositoryError) as unavailable_outcome,
+                ):
+                    repository.publish_candidate(candidate, expected)
+
+            self.assertEqual(
+                unavailable_outcome.exception.failure.code,
+                "REPOSITORY_GIT.PUBLICATION_OUTCOME_UNAVAILABLE",
+            )
+            self.assertEqual(repository.branch_revision("main"), competing)
 
     def test_path_and_object_failures_are_typed(self) -> None:
         for raw in ("", "/absolute", "../outside", "a//b", ".git/config"):

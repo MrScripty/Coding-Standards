@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Callable
 from pathlib import Path
 from typing import Sequence
 
@@ -13,17 +14,21 @@ from .suite_inputs import check_suite_input_projection, write_suite_input_projec
 MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
 
 
-def check_generated_artifacts(root: Path) -> int:
-    suite_inputs_result = check_suite_input_projection(root)
+def check_generated_artifacts(
+    root: Path,
+    *,
+    output: Callable[[str], None] = print,
+) -> int:
+    suite_inputs_result = check_suite_input_projection(root, output=output)
     if suite_inputs_result != 0:
         return suite_inputs_result
-    inventory_result = check_inventory(root)
+    inventory_result = check_inventory(root, output=output)
     if inventory_result != 0:
         return inventory_result
-    graph_result = check_graph(root)
+    graph_result = check_graph(root, output=output)
     if graph_result != 0:
         return graph_result
-    return check_retirements(root)
+    return check_retirements(root, output=output)
 
 
 def write_generated_artifacts(root: Path) -> int:

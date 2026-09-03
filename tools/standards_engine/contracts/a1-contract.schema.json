@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v17",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v18",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -48,6 +48,15 @@
     },
     {
       "$ref": "#/$defs/ReviewProposalResult"
+    },
+    {
+      "$ref": "#/$defs/ApplyProposalCall"
+    },
+    {
+      "$ref": "#/$defs/ApplyProposalResult"
+    },
+    {
+      "$ref": "#/$defs/ApplicationRecoveryRequiredResult"
     },
     {
       "$ref": "#/$defs/DeleteSnapshotCall"
@@ -1523,6 +1532,10 @@
       "type": "string",
       "pattern": "^readiness:sha256:[0-9a-f]{64}$"
     },
+    "ApplicationId": {
+      "type": "string",
+      "pattern": "^application:sha256:[0-9a-f]{64}$"
+    },
     "ChildId": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
@@ -1624,6 +1637,26 @@
         },
         "id": {
           "$ref": "#/$defs/ReadinessId"
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApplicationHandle": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "schema_version"
+      ],
+      "properties": {
+        "kind": {
+          "const": "application-handle"
+        },
+        "id": {
+          "$ref": "#/$defs/ApplicationId"
         },
         "schema_version": {
           "const": 1
@@ -2354,6 +2387,78 @@
         },
         "status": {
           "const": "ready"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApplyProposalCall": {
+      "type": "object",
+      "required": [
+        "kind",
+        "readiness"
+      ],
+      "properties": {
+        "kind": {
+          "const": "apply-proposal"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApplyProposalResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "application",
+        "status"
+      ],
+      "properties": {
+        "kind": {
+          "const": "apply-proposal-result"
+        },
+        "application": {
+          "$ref": "#/$defs/ApplicationHandle"
+        },
+        "status": {
+          "const": "applied"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApplicationRecoveryRequiredResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "application",
+        "status",
+        "code",
+        "outcome",
+        "message"
+      ],
+      "properties": {
+        "kind": {
+          "const": "application-recovery-required-result"
+        },
+        "application": {
+          "$ref": "#/$defs/ApplicationHandle"
+        },
+        "status": {
+          "const": "recovery-required"
+        },
+        "code": {
+          "enum": [
+            "APPLICATION.PUBLICATION_UNAVAILABLE",
+            "APPLICATION.OBSERVATION_UNAVAILABLE",
+            "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE"
+          ]
+        },
+        "outcome": {
+          "const": "unavailable"
+        },
+        "message": {
+          "$ref": "#/$defs/NonEmptyString"
         }
       },
       "additionalProperties": false

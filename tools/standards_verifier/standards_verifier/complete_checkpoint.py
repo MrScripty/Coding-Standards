@@ -23,16 +23,29 @@ class RetainedCheckerResult:
         return 3 if self.diagnostic.outcome == "unavailable" else 2
 
 
-def run_retained_checkers(repo_root: Path) -> RetainedCheckerResult:
+def run_retained_checkers(
+    repo_root: Path, *, quiet: bool = False
+) -> RetainedCheckerResult:
     root = repo_root.resolve()
     records = sorted(collect_inventory(root), key=lambda record: record.checker)
     completed = 0
 
     for record in records:
         checker = root / record.checker
-        print(f"RUN {checker.name}", flush=True)
+        if not quiet:
+            print(f"RUN {checker.name}", flush=True)
         try:
-            result = subprocess.run([str(checker)], cwd=root, check=False)
+            output = (
+                {"stdout": subprocess.DEVNULL, "stderr": subprocess.DEVNULL}
+                if quiet
+                else {}
+            )
+            result = subprocess.run(
+                [str(checker)],
+                cwd=root,
+                check=False,
+                **output,
+            )
         except OSError as error:
             return RetainedCheckerResult(
                 checker_count=completed,

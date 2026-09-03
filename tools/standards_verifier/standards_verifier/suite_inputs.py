@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
 from typing import Sequence
 
@@ -22,6 +23,7 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 from .config import extend_catalog, load_registry_catalog
+from .diagnostics import Diagnostic, EngineError
 from .model import CheckContext, CheckFileInput, CheckRepositoryIndexInput
 from .paths import contained_file, contained_path
 
@@ -74,8 +76,15 @@ def compile_suite_input_manifest(
     for path, state in file_uses:
         previous = states.setdefault(path, state)
         if previous != state:
-            raise ValueError(
-                f"suite input has contradictory states: {path}: {previous}, {state}"
+            raise EngineError(
+                Diagnostic(
+                    "INPUT.CONTRADICTORY_STATE",
+                    "invalid",
+                    "suite input declarations require contradictory path states",
+                    path=path,
+                    expected=previous,
+                    observed=state,
+                )
             )
 
     files = []
@@ -86,7 +95,14 @@ def compile_suite_input_manifest(
         else:
             candidate = contained_path(repo_root, path)
             if candidate.exists() or candidate.is_symlink():
-                raise ValueError(f"suite input must be absent: {path}")
+                raise EngineError(
+                    Diagnostic(
+                        "INPUT.EXPECTED_ABSENT",
+                        "invalid",
+                        "suite input declared absent is present",
+                        path=path,
+                    )
+                )
             digest = None
         files.append(SuiteFileInput(path, state, digest, tuple(sorted(uses))))
 
@@ -126,11 +142,15 @@ def suite_input_projection_bytes(root: Path) -> bytes:
     return suite_input_manifest_bytes(compile_suite_input_manifest(root))
 
 
-def check_suite_input_projection(root: Path) -> int:
+def check_suite_input_projection(
+    root: Path,
+    *,
+    output: Callable[[str], None] = print,
+) -> int:
     expected = suite_input_projection_bytes(root)
     path = root / DEFAULT_PROJECTION
     if not path.is_file() or path.read_bytes() != expected:
-        print(f"STALE {DEFAULT_PROJECTION}")
+        output(f"STALE {DEFAULT_PROJECTION}")
         return 2
     return 0
 

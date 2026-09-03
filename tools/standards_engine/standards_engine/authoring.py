@@ -32,11 +32,15 @@ from tools.standards_snapshots.standards_snapshots import (
 
 AUTHORING_CONTRACT_VERSION = 1
 READINESS_CONTRACT_VERSION = 1
+APPLICATION_CONTRACT_VERSION = 1
 PROPOSAL_KIND = "proposal"
 REVISION_KIND = "proposal-revision"
 READINESS_KIND = "proposal-readiness"
+APPLICATION_KIND = "proposal-application"
+APPLICATION_OUTCOME_KIND = "proposal-application-outcome"
 CANONICAL_TARGET_BRANCH = "main"
 CANONICAL_TARGET_REF = "refs/heads/main"
+APPLICATION_CAPABILITY = "standards.proposal.apply"
 APPLICATION_VERIFICATION_CONTRACT = IdentityObject(
     (
         ("checkpoint", "complete"),
@@ -380,6 +384,163 @@ class ProposalReadiness:
         )
 
 
+@dataclass(frozen=True, slots=True, init=False)
+class ProposalApplication:
+    base_snapshot: SnapshotId
+    readiness_id: str
+    revision_id: str
+    authorization_record: IdentityObject
+    expected_target: RepositoryRevision
+    candidate: RepositoryRevision
+
+    def __init__(
+        self,
+        base_snapshot: SnapshotId,
+        readiness_id: str,
+        revision_id: str,
+        authorization_record: Mapping[str, object],
+        expected_target: RepositoryRevision,
+        candidate: RepositoryRevision,
+    ) -> None:
+        if (
+            type(base_snapshot) is not SnapshotId
+            or not _readiness_id(readiness_id)
+            or not _revision_id(revision_id)
+            or type(expected_target) is not RepositoryRevision
+            or type(candidate) is not RepositoryRevision
+            or candidate == expected_target
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION",
+                "application requires exact distinct readiness, revision, target, and candidate identities",
+            )
+        selected = _readiness_records(
+            (authorization_record,), "application authorization"
+        )
+        if len(selected) != 1:
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_AUTHORIZATION",
+                "application requires exactly one authorization record",
+            )
+        plain = _plain_identity(selected[0])
+        reference = plain.get("reference") if type(plain) is dict else None
+        if (
+            not _authorization_record(plain)
+            or type(plain) is not dict
+            or plain.get("action") != "apply-proposal"
+            or plain.get("subject_kind") != "proposal-application"
+            or plain.get("subject_id")
+            != application_subject(readiness_id, revision_id, expected_target)
+            or type(reference) is not dict
+            or reference.get("capability") != APPLICATION_CAPABILITY
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_AUTHORIZATION",
+                "application authorization must bind the readiness, revision, target, action, and capability",
+            )
+        object.__setattr__(self, "base_snapshot", base_snapshot)
+        object.__setattr__(self, "readiness_id", readiness_id)
+        object.__setattr__(self, "revision_id", revision_id)
+        object.__setattr__(self, "authorization_record", selected[0])
+        object.__setattr__(self, "expected_target", expected_target)
+        object.__setattr__(self, "candidate", candidate)
+
+    @property
+    def application_id(self) -> str:
+        return hash_identity(
+            "coding-standards:proposal-application:v1",
+            "application",
+            self.identity_material(),
+        )
+
+    def identity_material(self) -> IdentityObject:
+        return IdentityObject(
+            (
+                ("authorization_record", self.authorization_record),
+                ("base_snapshot", str(self.base_snapshot)),
+                ("candidate", self.candidate.oid),
+                ("contract_version", APPLICATION_CONTRACT_VERSION),
+                ("expected_target", self.expected_target.oid),
+                ("readiness", self.readiness_id),
+                ("revision", self.revision_id),
+                ("target_ref", CANONICAL_TARGET_REF),
+                ("verification_contract", APPLICATION_VERIFICATION_CONTRACT),
+                ("verification_result", "passed"),
+            )
+        )
+
+    def aggregate(self) -> AggregateRecord:
+        return AggregateRecord(
+            self.application_id,
+            APPLICATION_KIND,
+            encode_identity_value(self.identity_material()),
+            (self.base_snapshot,),
+        )
+
+    def applied_outcome(self) -> ProposalApplicationOutcome:
+        return ProposalApplicationOutcome(
+            self.base_snapshot,
+            self.application_id,
+            self.candidate,
+        )
+
+
+@dataclass(frozen=True, slots=True, init=False)
+class ProposalApplicationOutcome:
+    base_snapshot: SnapshotId
+    application_id: str
+    candidate: RepositoryRevision
+    status: Literal["applied"]
+
+    def __init__(
+        self,
+        base_snapshot: SnapshotId,
+        application_id: str,
+        candidate: RepositoryRevision,
+    ) -> None:
+        if (
+            type(base_snapshot) is not SnapshotId
+            or not _application_id(application_id)
+            or type(candidate) is not RepositoryRevision
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_OUTCOME",
+                "application outcome requires exact application and candidate identities",
+            )
+        object.__setattr__(self, "base_snapshot", base_snapshot)
+        object.__setattr__(self, "application_id", application_id)
+        object.__setattr__(self, "candidate", candidate)
+        object.__setattr__(self, "status", "applied")
+
+    @property
+    def outcome_id(self) -> str:
+        return hash_identity(
+            "coding-standards:proposal-application-outcome:v1",
+            "application-outcome",
+            self.identity_material(),
+        )
+
+    def identity_material(self) -> IdentityObject:
+        return IdentityObject(
+            (
+                ("application", self.application_id),
+                ("candidate", self.candidate.oid),
+                ("contract_version", APPLICATION_CONTRACT_VERSION),
+                ("observed_target", self.candidate.oid),
+                ("status", self.status),
+                ("target_ref", CANONICAL_TARGET_REF),
+            )
+        )
+
+    def aggregate(self) -> AggregateRecord:
+        return AggregateRecord(
+            self.outcome_id,
+            APPLICATION_OUTCOME_KIND,
+            encode_identity_value(self.identity_material()),
+            (self.base_snapshot,),
+        )
+
+
 @dataclass(frozen=True, slots=True)
 class FindProposalsRequest:
     after: ProposalId | None = None
@@ -552,6 +713,95 @@ class AuthoringModule:
             )
         return readiness
 
+    def application_revision(
+        self, readiness_id: str
+    ) -> tuple[ProposalReadiness, ProposalRevision]:
+        readiness = self.read_readiness(readiness_id)
+        revision = self.read_revision(readiness.revision_id)
+        root = self._snapshots.load_aggregate_root(str(revision.proposal))
+        self._validate_root_revision(root, revision)
+        if root.head_id != revision.revision_id:
+            raise _invalid(
+                "AUTHORING.READINESS_STALE",
+                "readiness revision is no longer the current proposal head",
+            )
+        return readiness, revision
+
+    def admit_application(
+        self,
+        readiness_id: str,
+        authorization_record: Mapping[str, object],
+        candidate: RepositoryRevision,
+    ) -> ProposalApplication:
+        readiness, revision = self.application_revision(readiness_id)
+        application = ProposalApplication(
+            readiness.base_snapshot,
+            readiness.readiness_id,
+            revision.revision_id,
+            authorization_record,
+            readiness.expected_target,
+            candidate,
+        )
+        published = self._snapshots.publish_aggregate_if_root_head(
+            str(revision.proposal),
+            revision.revision_id,
+            application.aggregate(),
+        )
+        if published == "stale":
+            raise _invalid(
+                "AUTHORING.READINESS_STALE",
+                "readiness revision is no longer the current proposal head",
+            )
+        return application
+
+    def read_application(self, application_id: str) -> ProposalApplication:
+        if not _application_id(application_id):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_ID",
+                "application ID has an invalid domain or digest",
+            )
+        application = self._application_from_record(
+            self._snapshots.load_aggregate(application_id)
+        )
+        readiness = self.read_readiness(application.readiness_id)
+        if (
+            readiness.base_snapshot != application.base_snapshot
+            or readiness.revision_id != application.revision_id
+            or readiness.expected_target != application.expected_target
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_APPLICATION",
+                "stored application and readiness authority disagree",
+            )
+        return application
+
+    def record_applied(
+        self, application: ProposalApplication
+    ) -> ProposalApplicationOutcome:
+        if type(application) is not ProposalApplication:
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION",
+                "applied outcome requires one exact application",
+            )
+        outcome = application.applied_outcome()
+        self._snapshots.publish_aggregate(outcome.aggregate())
+        return outcome
+
+    def read_application_outcome(
+        self, application_id: str
+    ) -> ProposalApplicationOutcome:
+        application = self.read_application(application_id)
+        expected = application.applied_outcome()
+        outcome = self._application_outcome_from_record(
+            self._snapshots.load_aggregate(expected.outcome_id)
+        )
+        if outcome != expected:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_APPLICATION_OUTCOME",
+                "stored application outcome disagrees with its application",
+            )
+        return outcome
+
     def _summary_from_root(self, root: AggregateRoot) -> ProposalSummary:
         revision = self._revision_from_record(
             self._snapshots.load_aggregate(root.head_id)
@@ -615,6 +865,118 @@ class AuthoringModule:
                 "stored readiness authority disagrees with its identity",
             )
         return readiness
+
+    @staticmethod
+    def _application_from_record(record: AggregateRecord) -> ProposalApplication:
+        try:
+            material = json.loads(record.payload)
+            if (
+                type(material) is not dict
+                or set(material)
+                != {
+                    "authorization_record",
+                    "base_snapshot",
+                    "candidate",
+                    "contract_version",
+                    "expected_target",
+                    "readiness",
+                    "revision",
+                    "target_ref",
+                    "verification_contract",
+                    "verification_result",
+                }
+                or material["contract_version"] != APPLICATION_CONTRACT_VERSION
+                or material["target_ref"] != CANONICAL_TARGET_REF
+                or material["verification_contract"]
+                != _plain_identity(APPLICATION_VERIFICATION_CONTRACT)
+                or material["verification_result"] != "passed"
+                or encode_identity_value(_identity_value(material)) != record.payload
+            ):
+                raise _invalid(
+                    "AUTHORING.INVALID_STORED_APPLICATION",
+                    "stored application material is not canonical",
+                )
+            application = ProposalApplication(
+                SnapshotId(material["base_snapshot"]),
+                material["readiness"],
+                material["revision"],
+                material["authorization_record"],
+                RepositoryRevision(material["expected_target"]),
+                RepositoryRevision(material["candidate"]),
+            )
+        except (
+            AuthoringError,
+            GitRepositoryError,
+            IdentityError,
+            SnapshotError,
+            json.JSONDecodeError,
+            UnicodeError,
+        ) as error:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_APPLICATION",
+                "stored application cannot be decoded",
+            ) from error
+        if record.kind != APPLICATION_KIND or application.aggregate() != record:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_APPLICATION",
+                "stored application authority disagrees with its identity",
+            )
+        return application
+
+    @staticmethod
+    def _application_outcome_from_record(
+        record: AggregateRecord,
+    ) -> ProposalApplicationOutcome:
+        try:
+            material = json.loads(record.payload)
+            if (
+                type(material) is not dict
+                or set(material)
+                != {
+                    "application",
+                    "candidate",
+                    "contract_version",
+                    "observed_target",
+                    "status",
+                    "target_ref",
+                }
+                or material["contract_version"] != APPLICATION_CONTRACT_VERSION
+                or material["target_ref"] != CANONICAL_TARGET_REF
+                or material["status"] != "applied"
+                or material["candidate"] != material["observed_target"]
+                or encode_identity_value(_identity_value(material)) != record.payload
+            ):
+                raise _invalid(
+                    "AUTHORING.INVALID_STORED_APPLICATION_OUTCOME",
+                    "stored application outcome is not canonical",
+                )
+            application = material["application"]
+            candidate = RepositoryRevision(material["candidate"])
+            base_snapshot = record.snapshots[0]
+            outcome = ProposalApplicationOutcome(
+                base_snapshot,
+                application,
+                candidate,
+            )
+        except (
+            AuthoringError,
+            GitRepositoryError,
+            IdentityError,
+            SnapshotError,
+            json.JSONDecodeError,
+            UnicodeError,
+            IndexError,
+        ) as error:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_APPLICATION_OUTCOME",
+                "stored application outcome cannot be decoded",
+            ) from error
+        if record.kind != APPLICATION_OUTCOME_KIND or outcome.aggregate() != record:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_APPLICATION_OUTCOME",
+                "stored application outcome authority disagrees with its identity",
+            )
+        return outcome
 
     @staticmethod
     def _revision_from_record(record: AggregateRecord) -> ProposalRevision:
@@ -817,6 +1179,35 @@ def review_decision_subject(
     )
 
 
+def application_subject(
+    readiness_id: str,
+    revision_id: str,
+    expected_target: RepositoryRevision,
+) -> str:
+    if (
+        not _readiness_id(readiness_id)
+        or not _revision_id(revision_id)
+        or type(expected_target) is not RepositoryRevision
+    ):
+        raise _invalid(
+            "AUTHORING.INVALID_APPLICATION",
+            "application subject requires exact readiness, revision, and target identities",
+        )
+    return hash_identity(
+        "coding-standards:proposal-application-subject:v1",
+        "proposal-application",
+        IdentityObject(
+            (
+                ("expected_target", expected_target.oid),
+                ("readiness", readiness_id),
+                ("revision", revision_id),
+                ("target_ref", CANONICAL_TARGET_REF),
+                ("verification_contract", APPLICATION_VERIFICATION_CONTRACT),
+            )
+        ),
+    )
+
+
 def _evidence_reference(value: object) -> bool:
     if type(value) is not dict or set(value) != {
         "id",
@@ -934,6 +1325,10 @@ def _readiness_id(value: object) -> bool:
     return _digest_id(value, "readiness:sha256:")
 
 
+def _application_id(value: object) -> bool:
+    return _digest_id(value, "application:sha256:")
+
+
 def _digest_id(value: object, prefix: str) -> bool:
     if type(value) is not str or not value.startswith(prefix):
         return False
@@ -944,6 +1339,10 @@ def _digest_id(value: object, prefix: str) -> bool:
 
 
 __all__ = (
+    "APPLICATION_CAPABILITY",
+    "APPLICATION_CONTRACT_VERSION",
+    "APPLICATION_KIND",
+    "APPLICATION_OUTCOME_KIND",
     "AUTHORING_CONTRACT_VERSION",
     "APPLICATION_VERIFICATION_CONTRACT",
     "CANONICAL_TARGET_BRANCH",
@@ -953,6 +1352,8 @@ __all__ = (
     "AuthoringModule",
     "FindProposalsRequest",
     "Mutation",
+    "ProposalApplication",
+    "ProposalApplicationOutcome",
     "ProposalId",
     "ProposalPage",
     "ProposalReadiness",
@@ -961,5 +1362,6 @@ __all__ = (
     "READINESS_CONTRACT_VERSION",
     "READINESS_KIND",
     "REVIEW_CAPABILITIES",
+    "application_subject",
     "review_decision_subject",
 )

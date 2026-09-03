@@ -4,6 +4,7 @@ import argparse
 import csv
 import io
 import re
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
@@ -162,22 +163,27 @@ def expected_inventory(root: Path) -> str:
     return render_inventory(collect_inventory(root))
 
 
-def check_inventory(root: Path, output_path: Path = OUTPUT_PATH) -> int:
+def check_inventory(
+    root: Path,
+    output_path: Path = OUTPUT_PATH,
+    *,
+    output: Callable[[str], None] = print,
+) -> int:
     target = root.resolve() / output_path
     if not target.is_file():
-        print(
+        output(
             f"INVENTORY.UNAVAILABLE [unavailable] (path={output_path.as_posix()}): generated checker inventory is absent"
         )
         return 3
     expected = expected_inventory(root)
     observed = target.read_text(encoding="utf-8")
     if observed != expected:
-        print(
+        output(
             f"INVENTORY.STALE [invalid] (path={output_path.as_posix()}): generated checker inventory does not match repository inputs"
         )
         return 1
     count = len(expected.splitlines()) - 1
-    print(f"PASS checker-structure-inventory ({count} current Bash verifiers)")
+    output(f"PASS checker-structure-inventory ({count} current Bash verifiers)")
     return 0
 
 

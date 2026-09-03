@@ -1,14 +1,15 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 - repository package root is installed before imports.
+
 import contextlib
 import io
-import json
 import subprocess
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import ANY, patch
 
 
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
@@ -16,8 +17,12 @@ import sys
 
 sys.path.insert(0, str(ENGINE_ROOT))
 
-from standards_verifier.cli import main
-from standards_verifier.complete_checkpoint import run_retained_checkers
+from standards_verifier.cli import main, run_complete_verification
+from standards_verifier.complete_checkpoint import (
+    RetainedCheckerResult,
+    run_retained_checkers,
+)
+from standards_verifier.diagnostics import Diagnostic, EngineError
 from standards_verifier.inventory import CheckerRecord
 
 
@@ -170,6 +175,57 @@ class CompleteCheckpointTest(unittest.TestCase):
         generated.assert_called_once_with(self.root)
         retained.assert_called_once_with(self.root)
         self.assertIn("PASS suite", output.getvalue())
+
+    @patch("standards_verifier.cli.Verifier")
+    @patch("standards_verifier.cli.run_retained_checkers")
+    @patch("standards_verifier.cli.check_generated_artifacts", return_value=0)
+    def test_programmatic_complete_returns_structured_quiet_result(
+        self,
+        generated,
+        retained,
+        verifier,
+    ) -> None:
+        verifier.return_value.run.return_value = []
+        retained.return_value = RetainedCheckerResult(2)
+
+        result = run_complete_verification(
+            self.root,
+            "registry.toml",
+            quiet=True,
+        )
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(result.checker_count, 2)
+        self.assertEqual(result.results, ())
+        generated.assert_called_once_with(self.root, output=ANY)
+        retained.assert_called_once_with(self.root, quiet=True)
+
+    @patch("standards_verifier.cli.Verifier")
+    @patch("standards_verifier.cli.run_retained_checkers")
+    @patch("standards_verifier.cli.check_generated_artifacts")
+    def test_programmatic_complete_translates_generated_artifact_error(
+        self,
+        generated,
+        retained,
+        verifier,
+    ) -> None:
+        diagnostic = Diagnostic(
+            "CONFIG.UNAVAILABLE",
+            "unavailable",
+            "fixture generated-artifact input is unavailable",
+        )
+        generated.side_effect = EngineError(diagnostic)
+
+        result = run_complete_verification(
+            self.root,
+            "registry.toml",
+            quiet=True,
+        )
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostic, diagnostic)
+        verifier.assert_not_called()
+        retained.assert_not_called()
 
     @patch("standards_verifier.cli.Verifier")
     @patch("standards_verifier.cli.run_retained_checkers")

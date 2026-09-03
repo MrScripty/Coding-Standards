@@ -33,10 +33,10 @@ class GeneratedArtifactsTest(unittest.TestCase):
 
         self.assertEqual(check_generated_artifacts(root), 0)
 
-        suite_inputs.assert_called_once_with(root)
-        inventory.assert_called_once_with(root)
-        graph.assert_called_once_with(root)
-        retirements.assert_called_once_with(root)
+        suite_inputs.assert_called_once_with(root, output=print)
+        inventory.assert_called_once_with(root, output=print)
+        graph.assert_called_once_with(root, output=print)
+        retirements.assert_called_once_with(root, output=print)
 
     @patch("standards_verifier.generated_artifacts.check_suite_input_projection")
     @patch("standards_verifier.generated_artifacts.check_retirements")
@@ -63,7 +63,7 @@ class GeneratedArtifactsTest(unittest.TestCase):
     ) -> None:
         self.assertEqual(check_generated_artifacts(Path("repo")), 2)
 
-        suite_inputs.assert_called_once_with(Path("repo"))
+        suite_inputs.assert_called_once_with(Path("repo"), output=print)
         inventory.assert_not_called()
 
     @patch("standards_verifier.generated_artifacts.write_suite_input_projection")

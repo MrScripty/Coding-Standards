@@ -3,10 +3,12 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import nullcontext
 from pathlib import Path
 from unittest import mock
 
@@ -15,10 +17,13 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisExecutionContext,
     AuthorizationAuthorityContract,
     AuthorizationClaim,
+    AuthorizationDenied,
+    AuthorizationRequest,
     EvidenceContractKey,
     EvidenceReference,
     ResolvedEvidence,
     SnapshotMaterialRef,
+    construct_authorization_record,
 )
 from tools.standards_engine.standards_engine import (
     AgentToolFacade,
@@ -27,6 +32,7 @@ from tools.standards_engine.standards_engine import (
     AnalysisHandle,
     AnalysisInspectionResult,
     CompleteResult,
+    ApplyProposalResult,
     CreateProposalCall,
     CreateProposalResult,
     CreateSnapshotCall,
@@ -40,8 +46,26 @@ from tools.standards_engine.standards_engine import (
     ReviseProposalResult,
     StandardsEngine,
 )
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
+    GitRepositoryFailure,
+    MaterializedCandidate,
+    RepositoryPath,
+    RepositoryRevision,
+)
+from tools.standards_verifier.standards_verifier import CompleteVerificationResult
+from tools.standards_verifier.standards_verifier.diagnostics import Diagnostic
 from tools.standards_engine.standards_engine.tools import _contracts
-from tools.standards_snapshots.standards_snapshots import SnapshotId
+from tools.standards_engine.standards_engine.authoring import (
+    REVIEW_CAPABILITIES,
+    review_decision_subject,
+)
+from tools.standards_snapshots.standards_snapshots import (
+    CapturedContent,
+    SnapshotFile,
+    SnapshotId,
+    SnapshotPath,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -98,6 +122,71 @@ def _review_decisions() -> list[dict[str, object]]:
     ]
 
 
+def _clone_tracked_worktree(destination: Path) -> None:
+    subprocess.run(
+        (
+            "git",
+            "clone",
+            "--local",
+            "--no-hardlinks",
+            "--quiet",
+            "--",
+            str(REPO_ROOT),
+            str(destination),
+        ),
+        check=True,
+    )
+    tracked = subprocess.run(
+        ("git", "-C", str(REPO_ROOT), "ls-files", "-z"),
+        check=True,
+        stdout=subprocess.PIPE,
+    ).stdout
+    for encoded in tracked.split(b"\0"):
+        if not encoded:
+            continue
+        relative = Path(os.fsdecode(encoded))
+        source = REPO_ROOT / relative
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if source.is_symlink():
+            if target.exists() or target.is_symlink():
+                target.unlink()
+            target.symlink_to(os.readlink(source))
+        else:
+            if target.is_symlink():
+                target.unlink()
+            shutil.copy2(source, target)
+    subprocess.run(
+        ("git", "-C", str(destination), "add", "--all"),
+        check=True,
+    )
+    changed = subprocess.run(
+        ("git", "-C", str(destination), "diff", "--cached", "--quiet"),
+        check=False,
+    )
+    if changed.returncode not in {0, 1}:
+        raise AssertionError("fixture Git index could not be compared")
+    if changed.returncode == 1:
+        subprocess.run(
+            (
+                "git",
+                "-C",
+                str(destination),
+                "-c",
+                "commit.gpgsign=false",
+                "-c",
+                "user.name=Standards Engine Test",
+                "-c",
+                "user.email=standards-engine-test@example.invalid",
+                "commit",
+                "--quiet",
+                "-m",
+                "test: materialize tracked worktree",
+            ),
+            check=True,
+        )
+
+
 class ExactAuthorizer:
     contract = AuthorizationAuthorityContract(
         "issuer.fixture",
@@ -128,6 +217,14 @@ class ExactAuthorizer:
         )
 
 
+class DenyingAuthorizer:
+    contract = ExactAuthorizer.contract
+
+    def authorize(self, request):
+        del request
+        return AuthorizationDenied("The exact application capability was denied.")
+
+
 class AnalysisWorkflowTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -147,6 +244,135 @@ class AnalysisWorkflowTest(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls.engine.close()
         cls.temporary.cleanup()
+
+    def test_apply_proposal_composes_real_verification_and_cold_readback(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            repository = root / "repository"
+            store = root / "standards.sqlite3"
+            _clone_tracked_worktree(repository)
+            context = AnalysisExecutionContext(ExactAuthorizer())
+            engine = StandardsEngine.open_repository(
+                repository,
+                store_path=store,
+                execution_context=context,
+            )
+            facade = AgentToolFacade(engine, _contracts(repository))
+            try:
+                expected = engine._repository.branch_revision("main")
+                path = "tools/standards_engine/README.md"
+                content = (repository / path).read_bytes()
+                replacement = content + b"\n<!-- exact application fixture -->\n"
+                base = engine._snapshots.create_snapshot(
+                    CapturedContent(
+                        expected.oid,
+                        (SnapshotFile(SnapshotPath.parse(path), content),),
+                    )
+                ).snapshot
+                created = CreateProposalResult.from_value(
+                    facade.create_proposal(
+                        {
+                            "kind": "create-proposal",
+                            "base_snapshot": {
+                                "kind": "snapshot-handle",
+                                "id": str(base),
+                                "schema_version": 5,
+                            },
+                            "mutations": [
+                                {
+                                    "op": "replace",
+                                    "path": path,
+                                    "value": replacement.decode("utf-8"),
+                                }
+                            ],
+                            "semantic_proposals": [],
+                        }
+                    )
+                )
+                analysis = "analysis:sha256:" + "a" * 64
+                decisions = _review_decisions()
+                authorizations = tuple(
+                    construct_authorization_record(
+                        context,
+                        AuthorizationRequest(
+                            "review-proposal",
+                            "proposal-review-decision",
+                            review_decision_subject(
+                                analysis,
+                                created.revision.id,
+                                decision,
+                            ),
+                            REVIEW_CAPABILITIES[str(decision["owner"])],
+                            (
+                                _reference(
+                                    f"proposal-{decision['owner']}-review"
+                                ),
+                            ),
+                        ),
+                    ).as_contract()
+                    for decision in decisions
+                )
+                readiness = engine._authoring.review_proposal(
+                    analysis,
+                    created.revision.id,
+                    decisions,
+                    authorizations,
+                    expected,
+                )
+
+                response = facade.apply_proposal(
+                    {
+                        "kind": "apply-proposal",
+                        "readiness": {
+                            "kind": "readiness-handle",
+                            "id": readiness.readiness_id,
+                            "schema_version": 1,
+                        },
+                    }
+                )
+                self.assertEqual(
+                    response.get("kind"), "apply-proposal-result", response
+                )
+                applied = ApplyProposalResult.from_value(response)
+                application = engine._authoring.read_application(
+                    applied.application.id
+                )
+                self.assertEqual(applied.status, "applied")
+                self.assertEqual(application.expected_target, expected)
+                self.assertNotEqual(application.candidate, expected)
+                self.assertEqual(
+                    engine._repository.branch_revision("main"),
+                    application.candidate,
+                )
+                self.assertEqual(
+                    engine._repository.read_file(
+                        application.candidate,
+                        RepositoryPath.parse(path),
+                    ),
+                    replacement,
+                )
+            finally:
+                facade.close()
+
+            reopened = StandardsEngine.open_repository(
+                repository,
+                store_path=store,
+                execution_context=context,
+            )
+            try:
+                cold_application = reopened._authoring.read_application(
+                    applied.application.id
+                )
+                cold_outcome = reopened._authoring.read_application_outcome(
+                    applied.application.id
+                )
+            finally:
+                reopened.close()
+            self.assertEqual(cold_application, application)
+            self.assertEqual(cold_outcome.candidate, application.candidate)
+            self.assertEqual(cold_outcome.status, "applied")
 
     def test_prepare_persists_parent_bound_public_work(self) -> None:
         result = self.prepare()
@@ -382,6 +608,244 @@ class AnalysisWorkflowTest(unittest.TestCase):
         readiness = self.engine._authoring.read_readiness(reviewed.readiness.id)
         self.assertEqual(readiness.analysis_id, complete.handle.id)
         self.assertEqual(readiness.revision_id, created.revision.id)
+
+        candidate = MaterializedCandidate(
+            Path(self.temporary.name),
+            readiness.expected_target,
+            RepositoryRevision("c" * 40),
+        )
+        rejected_counts = self.engine._snapshots._store.counts()
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                return_value=RepositoryRevision("d" * 40),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+            ) as stale_materialization,
+        ):
+            stale_target = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(stale_target["code"], "APPLICATION.TARGET_STALE")
+        stale_materialization.assert_not_called()
+        self.assertEqual(self.engine._snapshots._store.counts(), rejected_counts)
+
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                return_value=readiness.expected_target,
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+            ) as unauthorized_materialization,
+            mock.patch.object(
+                self.engine,
+                "_execution_context",
+                AnalysisExecutionContext(DenyingAuthorizer()),
+            ),
+        ):
+            unauthorized = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(unauthorized["code"], "ANALYSIS.UNAUTHORIZED")
+        unauthorized_materialization.assert_not_called()
+        self.assertEqual(self.engine._snapshots._store.counts(), rejected_counts)
+
+        counts_before_failure = self.engine._snapshots._store.counts()
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                return_value=readiness.expected_target,
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+                return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "publish_candidate",
+            ) as failed_publish,
+            mock.patch.object(
+                self.engine,
+                "_application_verifier",
+                return_value=CompleteVerificationResult(
+                    (),
+                    0,
+                    Diagnostic(
+                        "CHECKPOINT.FAILED",
+                        "invalid",
+                        "fixture verification failed",
+                    ),
+                    2,
+                ),
+            ),
+        ):
+            verification_failed = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(
+            verification_failed["code"], "APPLICATION.VERIFICATION_FAILED"
+        )
+        failed_publish.assert_not_called()
+        self.assertEqual(
+            self.engine._snapshots._store.counts(), counts_before_failure
+        )
+
+        invalid_candidate = GitRepositoryError(
+            GitRepositoryFailure(
+                "invalid",
+                "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                "fixture candidate diverged before publication",
+            )
+        )
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                side_effect=(
+                    readiness.expected_target,
+                    readiness.expected_target,
+                ),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+                return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "publish_candidate",
+                side_effect=invalid_candidate,
+            ),
+            mock.patch.object(
+                self.engine,
+                "_application_verifier",
+                return_value=CompleteVerificationResult((), 0, None, 0),
+            ),
+        ):
+            candidate_rejected = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(
+            candidate_rejected["code"], "REPOSITORY_GIT.CANDIDATE_DIVERGED"
+        )
+        self.assertEqual(candidate_rejected["kind"], "rejected-result")
+
+        unavailable_observation = GitRepositoryError(
+            GitRepositoryFailure(
+                "unavailable",
+                "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+                "fixture observation is unavailable",
+            )
+        )
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                side_effect=(
+                    readiness.expected_target,
+                    readiness.expected_target,
+                    unavailable_observation,
+                ),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+                return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "publish_candidate",
+                return_value="updated",
+            ),
+            mock.patch.object(
+                self.engine,
+                "_application_verifier",
+                return_value=CompleteVerificationResult((), 0, None, 0),
+            ),
+        ):
+            recovery_required = facade.apply_proposal(
+                {
+                    "kind": "apply-proposal",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(
+            recovery_required["kind"],
+            "application-recovery-required-result",
+        )
+        self.assertEqual(
+            recovery_required["code"], "APPLICATION.OBSERVATION_UNAVAILABLE"
+        )
+        persisted_intent = self.engine._authoring.read_application(
+            recovery_required["application"]["id"]
+        )
+        self.assertEqual(persisted_intent.candidate, candidate.revision)
+
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                side_effect=(
+                    readiness.expected_target,
+                    readiness.expected_target,
+                    candidate.revision,
+                ),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "materialize_candidate",
+                return_value=nullcontext(candidate),
+            ),
+            mock.patch.object(
+                self.engine._repository,
+                "publish_candidate",
+                return_value="updated",
+            ) as publish,
+            mock.patch.object(
+                self.engine,
+                "_application_verifier",
+                return_value=CompleteVerificationResult((), 0, None, 0),
+            ),
+        ):
+            applied = ApplyProposalResult.from_value(
+                facade.apply_proposal(
+                    {
+                        "kind": "apply-proposal",
+                        "readiness": reviewed.readiness.as_contract(),
+                    }
+                )
+            )
+        publish.assert_called_once()
+        self.assertEqual(applied.status, "applied")
+        self.assertEqual(
+            applied.application.id, recovery_required["application"]["id"]
+        )
+        application = self.engine._authoring.read_application(applied.application.id)
+        outcome = self.engine._authoring.read_application_outcome(
+            applied.application.id
+        )
+        self.assertEqual(application.candidate, candidate.revision)
+        self.assertEqual(outcome.candidate, candidate.revision)
 
     def test_equal_transition_is_idempotent_and_different_evidence_branches(self) -> None:
         parent = self.prepare()

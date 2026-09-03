@@ -38,6 +38,12 @@ adapter or fallback. `--complete` is mutually exclusive with selection/listing
 options and supports text output only while retained checkers can write their
 native output.
 
+Library consumers use `run_complete_verification(repo_root, quiet=True)` to
+receive the same checkpoint as one structured result. Quiet execution routes
+generated-check diagnostics through an invocation-local output callback and
+retained-checker output directly to the null device; it does not replace
+process-global Python streams.
+
 Run one suite and its dependencies:
 
 ```bash

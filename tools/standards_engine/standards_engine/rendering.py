@@ -144,6 +144,16 @@ def _proposal_review(value: Mapping[str, object]) -> str:
     )
 
 
+def _proposal_application(value: Mapping[str, object]) -> str:
+    application = _mapping(value.get("application"))
+    line = (
+        f"PROPOSAL APPLICATION {application.get('id', '')} "
+        f"[{value.get('status', '')}]"
+    )
+    code = value.get("code")
+    return f"{line}{'' if code is None else f' {code}'}\n"
+
+
 def _rejection(value: Mapping[str, object]) -> str:
     return (
         "\n".join(
@@ -217,6 +227,8 @@ _RESULT_RENDERERS: dict[
     "find-proposals-result": _proposal_lifecycle,
     "revise-proposal-result": _proposal_lifecycle,
     "review-proposal-result": _proposal_review,
+    "apply-proposal-result": _proposal_application,
+    "application-recovery-required-result": _proposal_application,
     "route-result": _navigation,
     "read-result": _navigation,
     "related-result": _navigation,

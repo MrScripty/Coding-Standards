@@ -2,16 +2,20 @@ from __future__ import annotations
 
 import hashlib
 import os
+import stat
 import subprocess
 import threading
+import tempfile
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Iterable, Iterator, Literal, Sequence
 
 from .errors import GitRepositoryError, invalid, unavailable, unsupported
 from .model import (
     CapturedFile,
     GitCommandResult,
     GitlinkRepository,
+    MaterializedCandidate,
     RepositoryCapture,
     RepositoryPath,
     RepositoryRevision,
@@ -20,6 +24,7 @@ from .model import (
 DEFAULT_OUTPUT_LIMIT = 64 * 1024 * 1024
 ERROR_OUTPUT_LIMIT = 1024 * 1024
 COMMAND_TIMEOUT_SECONDS = 30
+CANDIDATE_COMMIT_MESSAGE = "feat(standards): apply approved proposal\n"
 
 
 def sanitized_git_environment() -> dict[str, str]:
@@ -71,6 +76,7 @@ def git_command(
         input_bytes=input_bytes,
         stdout_limit=max_output_bytes,
         stderr_limit=ERROR_OUTPUT_LIMIT,
+        environment=sanitized_git_environment(),
     )
 
 
@@ -167,6 +173,7 @@ class GitRepository:
         self._repository = repository
         self._gitlinks = {item.prefix.components: item.repository for item in selected}
         self._max_object_bytes = max_object_bytes
+        self._active_candidates: set[int] = set()
 
     def current_revision(self) -> RepositoryRevision:
         return self._revision("HEAD^{commit}")
@@ -195,6 +202,337 @@ class GitRepository:
                 "branch name is not canonical",
             )
         return self._revision(f"refs/heads/{branch}^{{commit}}")
+
+    @contextmanager
+    def materialize_candidate(
+        self,
+        expected: RepositoryRevision,
+        replacements: Iterable[CapturedFile],
+    ) -> Iterator[MaterializedCandidate]:
+        if type(expected) is not RepositoryRevision:
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+                "candidate base must be an exact RepositoryRevision",
+            )
+        supplied = tuple(replacements)
+        if any(type(item) is not CapturedFile for item in supplied):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+                "candidate replacements must be exact CapturedFile values",
+            )
+        selected = tuple(sorted(supplied, key=lambda item: item.path))
+        paths = tuple(item.path for item in selected)
+        if not selected or len(set(paths)) != len(paths):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+                "candidate replacements must be nonempty and path-unique",
+            )
+        self._object(self._repository, expected.oid, "commit", _algorithm(expected.oid))
+
+        with tempfile.TemporaryDirectory(prefix="coding-standards-candidate-") as scratch:
+            candidate_root = Path(scratch).resolve() / "repository"
+            git_output(
+                self._repository,
+                (
+                    "clone",
+                    "--no-checkout",
+                    "--local",
+                    "--no-hardlinks",
+                    "--quiet",
+                    "--",
+                    str(self._repository),
+                    str(candidate_root),
+                ),
+            )
+            git_output(candidate_root, ("remote", "remove", "origin"))
+            self._copy_verification_refs(candidate_root)
+            git_output(
+                candidate_root,
+                ("checkout", "--detach", "--force", expected.oid),
+            )
+            entries = _index_entries(candidate_root)
+            for replacement in selected:
+                path = str(replacement.path)
+                try:
+                    mode, _oid = entries[path]
+                except KeyError as error:
+                    raise unavailable(
+                        "REPOSITORY_GIT.CANDIDATE_PATH_UNAVAILABLE",
+                        f"replacement target {path!r} is absent from the candidate base",
+                    ) from error
+                if mode not in {"100644", "100755"}:
+                    raise unsupported(
+                        "REPOSITORY_GIT.CANDIDATE_PATH_UNSUPPORTED",
+                        f"replacement target {path!r} is not a regular file",
+                    )
+                self._write_candidate_file(candidate_root, replacement)
+
+            git_output(
+                candidate_root,
+                (
+                    "--literal-pathspecs",
+                    "add",
+                    "--all",
+                    "--",
+                    *(str(path) for path in paths),
+                ),
+            )
+            tree = _ascii_oid(
+                git_output(candidate_root, ("write-tree",), max_output_bytes=256),
+                "candidate tree",
+            )
+            environment = sanitized_git_environment()
+            environment.update(
+                {
+                    "GIT_AUTHOR_DATE": "2000-01-01T00:00:00+00:00",
+                    "GIT_AUTHOR_EMAIL": "standards-engine@example.invalid",
+                    "GIT_AUTHOR_NAME": "Standards Engine",
+                    "GIT_COMMITTER_DATE": "2000-01-01T00:00:00+00:00",
+                    "GIT_COMMITTER_EMAIL": "standards-engine@example.invalid",
+                    "GIT_COMMITTER_NAME": "Standards Engine",
+                }
+            )
+            candidate_revision = RepositoryRevision(
+                _ascii_oid(
+                    _git_output_with_environment(
+                        candidate_root,
+                        ("commit-tree", tree, "-p", expected.oid),
+                        environment,
+                        input_bytes=CANDIDATE_COMMIT_MESSAGE.encode("utf-8"),
+                        max_output_bytes=256,
+                    ),
+                    "candidate commit",
+                )
+            )
+            git_output(
+                candidate_root,
+                ("update-ref", "refs/heads/main", candidate_revision.oid),
+            )
+            git_output(
+                candidate_root,
+                ("checkout", "--detach", "--force", candidate_revision.oid),
+            )
+            candidate = MaterializedCandidate(
+                candidate_root,
+                expected,
+                candidate_revision,
+            )
+            self._validate_candidate(candidate)
+            identity = id(candidate)
+            self._active_candidates.add(identity)
+            try:
+                yield candidate
+            finally:
+                self._active_candidates.discard(identity)
+
+    def publish_candidate(
+        self,
+        candidate: MaterializedCandidate,
+        expected: RepositoryRevision,
+    ) -> Literal["updated", "stale"]:
+        if (
+            type(candidate) is not MaterializedCandidate
+            or type(expected) is not RepositoryRevision
+            or candidate.expected != expected
+            or id(candidate) not in self._active_candidates
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_CANDIDATE",
+                "publication requires one active materialized candidate and its exact base",
+            )
+        branch = "main"
+        observed_before = self.branch_revision(branch)
+        if observed_before != expected:
+            return "stale"
+        target = f"refs/heads/{branch}"
+        self._validate_candidate(candidate)
+        git_output(
+            self._repository,
+            (
+                "fetch",
+                "--no-tags",
+                "--no-write-fetch-head",
+                "--quiet",
+                "--",
+                str(candidate.root),
+                "refs/heads/main",
+            ),
+        )
+        self._object(
+            self._repository,
+            candidate.revision.oid,
+            "commit",
+            _algorithm(candidate.revision.oid),
+        )
+        try:
+            updated = git_command(
+                self._repository,
+                ("update-ref", target, candidate.revision.oid, expected.oid),
+                max_output_bytes=256,
+            )
+        except GitRepositoryError as error:
+            return self._resolve_uncertain_publication(
+                branch,
+                expected,
+                candidate.revision,
+                prior_error=error,
+            )
+        if updated.returncode == 0:
+            return "updated"
+        return self._resolve_uncertain_publication(
+            branch,
+            expected,
+            candidate.revision,
+        )
+
+    def _resolve_uncertain_publication(
+        self,
+        branch: str,
+        expected: RepositoryRevision,
+        candidate: RepositoryRevision,
+        *,
+        prior_error: GitRepositoryError | None = None,
+    ) -> Literal["updated", "stale"]:
+        try:
+            observed = self.branch_revision(branch)
+        except GitRepositoryError as error:
+            raise unavailable(
+                "REPOSITORY_GIT.PUBLICATION_OUTCOME_UNAVAILABLE",
+                "the expected-target update completed without an observable terminal state",
+            ) from error
+        if observed == candidate:
+            return "updated"
+        if prior_error is not None:
+            raise unavailable(
+                "REPOSITORY_GIT.PUBLICATION_OUTCOME_UNAVAILABLE",
+                "the expected-target update completed without an observable terminal state",
+            ) from prior_error
+        if observed != expected:
+            return "stale"
+        raise unavailable(
+            "REPOSITORY_GIT.PUBLICATION_UNAVAILABLE",
+            "Git rejected the expected-target update while the target remained unchanged",
+        )
+
+    def _copy_verification_refs(self, candidate_root: Path) -> None:
+        output = git_output(
+            self._repository,
+            ("show-ref",),
+        )
+        for raw_line in output.splitlines():
+            try:
+                raw_oid, raw_ref = raw_line.split(b" ", 1)
+                oid = raw_oid.decode("ascii")
+                reference = raw_ref.decode("utf-8")
+            except (UnicodeDecodeError, ValueError) as error:
+                raise invalid(
+                    "REPOSITORY_GIT.INVALID_OUTPUT",
+                    "Git reference output is malformed",
+                ) from error
+            if reference == "refs/heads/main" or reference.endswith("^{}"):
+                continue
+            git_output(candidate_root, ("update-ref", reference, oid))
+
+    @staticmethod
+    def _write_candidate_file(root: Path, replacement: CapturedFile) -> None:
+        destination = root.joinpath(*replacement.path.components)
+        try:
+            if destination.is_symlink() or not destination.is_file():
+                raise OSError("replacement target is not a regular file")
+            resolved = destination.resolve(strict=True)
+            if not resolved.is_relative_to(root):
+                raise OSError("replacement target escapes the candidate root")
+            flags = os.O_WRONLY | os.O_TRUNC
+            if hasattr(os, "O_NOFOLLOW"):
+                flags |= os.O_NOFOLLOW
+            descriptor = os.open(destination, flags)
+            with os.fdopen(descriptor, "wb") as handle:
+                handle.write(replacement.content)
+        except OSError as error:
+            raise unavailable(
+                "REPOSITORY_GIT.CANDIDATE_WRITE_UNAVAILABLE",
+                f"candidate replacement could not be written: {error}",
+            ) from error
+
+    def _validate_candidate(self, candidate: MaterializedCandidate) -> None:
+        if not candidate.root.is_dir():
+            raise unavailable(
+                "REPOSITORY_GIT.CANDIDATE_UNAVAILABLE",
+                "materialized candidate is no longer available",
+            )
+        candidate_repository = GitRepository(candidate.root)
+        if candidate_repository.current_revision() != candidate.revision:
+            raise invalid(
+                "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                "candidate HEAD no longer identifies the verified revision",
+            )
+        index_status = git_command(
+            candidate.root,
+            ("diff", "--cached", "--quiet", candidate.revision.oid, "--"),
+            max_output_bytes=256,
+        )
+        if index_status.returncode != 0:
+            raise invalid(
+                "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                "candidate index differs from its revision",
+            )
+        entries = _index_entries(candidate.root)
+        files: dict[str, Path] = {}
+        for directory, names, filenames in os.walk(candidate.root):
+            current = Path(directory)
+            if current == candidate.root and ".git" in names:
+                names.remove(".git")
+            for name in names:
+                nested = current / name
+                if nested.is_symlink():
+                    raise invalid(
+                        "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                        "candidate contains a symlinked directory",
+                    )
+            for name in filenames:
+                path = current / name
+                relative = path.relative_to(candidate.root).as_posix()
+                try:
+                    observed = path.lstat()
+                except OSError as error:
+                    raise unavailable(
+                        "REPOSITORY_GIT.CANDIDATE_UNAVAILABLE",
+                        f"candidate path {relative!r} could not be observed: {error}",
+                    ) from error
+                if not stat.S_ISREG(observed.st_mode):
+                    raise invalid(
+                        "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                        f"candidate path {relative!r} is not a regular file",
+                    )
+                files[relative] = path
+        if set(files) != set(entries):
+            raise invalid(
+                "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                "candidate filesystem paths differ from its index",
+            )
+        algorithm = _algorithm(candidate.revision.oid)
+        for path, (mode, oid) in entries.items():
+            if mode not in {"100644", "100755"}:
+                raise unsupported(
+                    "REPOSITORY_GIT.CANDIDATE_PATH_UNSUPPORTED",
+                    f"candidate path {path!r} is not a regular file",
+                )
+            try:
+                content = files[path].read_bytes()
+                executable = bool(files[path].stat().st_mode & 0o111)
+            except OSError as error:
+                raise unavailable(
+                    "REPOSITORY_GIT.CANDIDATE_UNAVAILABLE",
+                    f"candidate path {path!r} could not be observed: {error}",
+                ) from error
+            header = f"blob {len(content)}\0".encode("ascii")
+            if hashlib.new(algorithm, header + content).hexdigest() != oid or (
+                executable != (mode == "100755")
+            ):
+                raise invalid(
+                    "REPOSITORY_GIT.CANDIDATE_DIVERGED",
+                    f"candidate path {path!r} differs from its object",
+                )
 
     def _revision(self, revision: str) -> RepositoryRevision:
         output = git_output(
@@ -348,6 +686,7 @@ def _run_bounded(
     input_bytes: bytes | None,
     stdout_limit: int,
     stderr_limit: int,
+    environment: dict[str, str],
 ) -> GitCommandResult:
     try:
         process = subprocess.Popen(
@@ -355,7 +694,7 @@ def _run_bounded(
             stdin=subprocess.PIPE if input_bytes is not None else subprocess.DEVNULL,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            env=sanitized_git_environment(),
+            env=environment,
         )
     except OSError as error:
         raise unavailable(
@@ -438,6 +777,75 @@ def _nul_fields(output: bytes, description: str) -> tuple[str, ...]:
             "REPOSITORY_GIT.INVALID_OUTPUT", f"{description} contains an empty field"
         )
     return tuple(fields)
+
+
+def _git_output_with_environment(
+    root: Path,
+    arguments: Sequence[str],
+    environment: dict[str, str],
+    *,
+    input_bytes: bytes | None = None,
+    max_output_bytes: int = DEFAULT_OUTPUT_LIMIT,
+) -> bytes:
+    result = _run_bounded(
+        ("git", "-C", str(root), *arguments),
+        input_bytes=input_bytes,
+        stdout_limit=max_output_bytes,
+        stderr_limit=ERROR_OUTPUT_LIMIT,
+        environment=environment,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", "replace").strip()
+        raise unavailable(
+            "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+            f"Git exited with {result.returncode}: {detail}",
+        )
+    return result.stdout
+
+
+def _ascii_oid(output: bytes, description: str) -> str:
+    try:
+        oid = output.decode("ascii").strip()
+        RepositoryRevision(oid)
+    except (UnicodeDecodeError, GitRepositoryError) as error:
+        raise invalid(
+            "REPOSITORY_GIT.INVALID_OUTPUT",
+            f"Git {description} output is not one canonical object ID",
+        ) from error
+    return oid
+
+
+def _index_entries(root: Path) -> dict[str, tuple[str, str]]:
+    fields = git_output(root, ("ls-files", "-s", "-z"))
+    entries: dict[str, tuple[str, str]] = {}
+    for raw in fields.split(b"\0"):
+        if not raw:
+            continue
+        header, separator, raw_path = raw.partition(b"\t")
+        parts = header.split(b" ")
+        if not separator or len(parts) != 3 or parts[2] != b"0":
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_OUTPUT",
+                "Git index output is malformed or contains an unmerged entry",
+            )
+        try:
+            mode = parts[0].decode("ascii")
+            oid = parts[1].decode("ascii")
+            path = raw_path.decode("utf-8")
+            RepositoryRevision(oid)
+            RepositoryPath.parse(path)
+        except (UnicodeDecodeError, GitRepositoryError) as error:
+            raise unsupported(
+                "REPOSITORY_GIT.PATH_ENCODING",
+                "Git index entry is not a supported canonical path or object",
+            ) from error
+        if path in entries:
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_OUTPUT",
+                f"Git index repeats path {path!r}",
+            )
+        entries[path] = (mode, oid)
+    return entries
 
 
 def _algorithm(oid: str) -> str:

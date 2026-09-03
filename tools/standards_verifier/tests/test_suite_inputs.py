@@ -97,10 +97,35 @@ class SuiteInputProjectionTest(unittest.TestCase):
     def test_present_absence_assertion_is_rejected(self) -> None:
         self.write("absent.md", "unexpected\n")
 
-        with self.assertRaises(ValueError) as caught:
+        with self.assertRaises(EngineError) as caught:
             compile_suite_input_projection(self.root)
 
-        self.assertIn("suite input must be absent", str(caught.exception))
+        self.assertEqual(
+            caught.exception.diagnostic.code, "INPUT.EXPECTED_ABSENT"
+        )
+
+    def test_contradictory_cross_check_states_are_typed(self) -> None:
+        suite = "evaluation/standards-effectiveness/suites/fixture.toml"
+        content = (self.root / suite).read_text(encoding="utf-8")
+        self.write(
+            suite,
+            content
+            + """
+
+            [[checks]]
+            id = "contradiction"
+            type = "path_state"
+            present = ["absent.md"]
+            absent = ["present.md"]
+            """,
+        )
+
+        with self.assertRaises(EngineError) as caught:
+            compile_suite_input_projection(self.root)
+
+        self.assertEqual(
+            caught.exception.diagnostic.code, "INPUT.CONTRADICTORY_STATE"
+        )
 
     def test_freshness_binds_suite_and_input_bytes(self) -> None:
         self.assertEqual(write_suite_input_projection(self.root), 0)

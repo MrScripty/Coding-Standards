@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import io
 from collections import defaultdict, deque
+from collections.abc import Callable
 from dataclasses import dataclass
 from hashlib import sha256
 from pathlib import Path
@@ -457,7 +458,11 @@ def _validate_tsv(
         )
 
 
-def check_graph(root: Path) -> int:
+def check_graph(
+    root: Path,
+    *,
+    output: Callable[[str], None] = print,
+) -> int:
     root = root.resolve()
     try:
         expected = expected_graph_outputs(root)
@@ -486,10 +491,10 @@ def check_graph(root: Path) -> int:
                     path=relative.as_posix(),
                 )
     except GraphDiagnostic as diagnostic:
-        print(diagnostic)
+        output(str(diagnostic))
         return diagnostic.exit_code
     graph = collect_migration_graph(root)
-    print(
+    output(
         f"PASS checker-dependency-graph "
         f"({len(graph.nodes)} nodes, {len(graph.edges)} edges, "
         f"{len(graph.components)} components)"

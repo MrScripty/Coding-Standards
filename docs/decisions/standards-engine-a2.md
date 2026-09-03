@@ -56,6 +56,23 @@ checkpoint. The Snapshot owner checks the exact proposal head and publishes
 the immutable readiness aggregate in one transaction. A prior identical proof
 is idempotent; stale or mismatched authority cannot publish readiness.
 
+The sixth production boundary adds `apply_proposal(readiness)`. The Engine
+reconstructs the exact current readiness and proposal revision, requires
+current application authorization, and materializes the revision's replacement
+bytes in a private local clone at the readiness target. Repository Git creates
+one deterministic conventional candidate commit and proves that its checkout,
+index, bytes, and executable modes agree with its object identity. The
+Standards Verifier owns the programmatic `complete` checkpoint and evaluates
+that exact candidate before any candidate object or application fact enters the
+configured repository. Authoring then persists one immutable verified intent
+under the exact proposal-head guard. Repository Git imports the candidate
+without a destination ref, advances only `refs/heads/main` through an
+expected-old-object compare-and-swap, and observes the target before Authoring
+persists the immutable applied outcome. Public success means all of those facts
+are established. An unavailable publication, observation, or outcome write
+returns the durable application handle as `recovery-required`; a public
+recovery operation is a later boundary.
+
 Proposal IDs are unique lifecycle identities (`proposal:v1:<uuid4>`). Initial
 revision IDs are content-bound identities over proposal ID, ordinal, base
 snapshot, normalized replacement material, semantic proposals, and the
@@ -78,20 +95,45 @@ failed first initialization removes only the exact staging file it created.
 The facade keeps store selection at the deployment boundary and exposes an
 owned close/context-manager lifecycle, not a caller-selected store path.
 
-The public interface declares proposal author, read, and composite review
-capabilities at the same deployment boundary that owns the existing A1c
-capabilities; the domain does not add a second ambient authorization mechanism
-or a generic capability-set contract. Interface schema v17 adds proposal
-review. Readiness contract/handle v1 is additive. Analysis state v5, Analysis
-identity/handle v6, result projection v5, request contract v4, proposal
-revision handle v1, Authoring revision contract v1, and store schema v2 remain
-unchanged because their owned promises do not change. The store already owns
-opaque aggregate bytes, exact snapshot dependencies, and transactional
-aggregate publication, so readiness requires no schema migration or mutable
-index. This decision does not yet add application, Git writes, verification
-execution, or recovery. The tested P5C forwarding capability is intentionally
-not productionized because no real caller needs a second eight-method A1c
-surface.
+The public interface declares proposal author, read, composite review, and
+application capabilities at the same deployment boundary that owns the
+existing A1c capabilities; the domain does not add a second ambient
+authorization mechanism or a generic capability-set contract. Interface
+schema v18 adds application. Readiness contract/handle v1 and application
+contract/handle v1 are additive. Analysis state v5, Analysis identity/handle
+v6, result projection v5, request contract v4, proposal revision handle v1,
+Authoring revision contract v1, and store schema v2 remain unchanged because
+their owned promises do not change. The store already owns opaque aggregate
+bytes, exact snapshot dependencies, and transactional aggregate publication,
+so verified intent and outcome records require no schema migration or mutable
+index. This decision does not add a public recovery operation, automatic
+retry/rollback, mutable application root or phase ledger, generic process or
+resource ownership, measurement mechanism, or standards-graph node. The tested
+P5C forwarding capability is intentionally not productionized because no real
+caller needs a second eight-method A1c surface.
+
+## Repository Git Dependency Re-evaluation
+
+Milestone 6 triggers the A1c decision's required re-evaluation because the
+Repository Git Adapter now coordinates candidate index construction and one
+ref mutation. The required capability is exact local-clone isolation,
+deterministic commit creation, complete-checkpoint execution against the exact
+checkout, object import without a destination ref, expected-old-object ref
+update, exact observation, bounded output, sanitized execution, and typed
+failure on Linux with the already required Git executable.
+
+The selected Git CLI Adapter delegates clone, checkout, index, object, and ref
+semantics to Git and adds only product-specific sequencing, containment,
+identity checks, and typed projection. Dulwich would add a second Git
+implementation and its runtime/security lifecycle while the deployment still
+requires Git for repository verification. pygit2/libgit2 would additionally
+add native ABI, provisioning, and target obligations. Raw filesystem or ref
+file mutation would locally implement repository semantics and is rejected.
+For this contract, extending the existing bounded Adapter has the smallest
+semantic and dependency surface. Re-evaluate again if a consumer requires
+remote transport, credentials, signatures, arbitrary refs, non-local
+repositories, merge/rebase semantics, or a platform without the selected Git
+executable.
 
 Standards graphs remain exclusively standards-domain authority. A2 consumes
 them through the accepted A1c analysis semantics when evaluating proposed

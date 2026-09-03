@@ -1178,3 +1178,57 @@
   final Commit-owned boundary. Application, Git publication, and recovery
   remain absent; the next slice is current-state reconciliation and exact
   admission for `apply_proposal`.
+
+## 2026-09-02 - Milestone 6 Verified Proposal Application Accepted
+
+- Implemented additive `apply_proposal(readiness)` through the generated facade
+  and Engine. The caller supplies only one opaque readiness handle. The Engine
+  revalidates the current proposal revision and fixed `refs/heads/main` target,
+  obtains current `standards.proposal.apply` authorization, and returns
+  `applied` only after exact publication observation and durable outcome
+  recording. Failed verification, denied authorization, and stale proposal or
+  target state remain typed rejections; an ambiguous post-publication state
+  returns a durable application handle with `recovery-required`.
+- Added immutable application-intent and applied-outcome aggregates under the
+  existing Snapshot/SQLite owner and proposal-current-head guard. Intent binds
+  readiness, revision, expected target, candidate, authorization, and the
+  complete-verification contract before Git publication. Store schema v2 is
+  unchanged. There is no application root, mutable phase ledger, automatic
+  retry or rollback, compatibility reader, public recovery operation, generic
+  resource framework, cache, or measurement mechanism.
+- Extended Repository Git with one bounded write path: a private local clone at
+  the readiness target, literal exact-file replacement with modes preserved, a
+  deterministic conventional candidate commit, candidate-provenance checks,
+  object import without a destination ref, and expected-old-object CAS of only
+  `refs/heads/main`. The configured worktree and index remain untouched.
+  Ambiguous command completion is re-observed and cannot be misreported as an
+  ordinary stale rejection. The Git CLI remains the selected Adapter after a
+  current dependency re-evaluation; documented re-plan triggers cover a future
+  library need.
+- Added a verifier-owned structured `complete` entry point. Quiet execution is
+  invocation-local rather than process-global, and generated-artifact,
+  declarative-suite, and retained-checker failures preserve typed invalid,
+  unavailable, or unsupported outcomes. Contradictory suite-input authority is
+  rejected at its owner rather than escaping the public apply facade.
+- Interface schema v18 adds only the apply operation, application handle v1,
+  applied result, and recovery-required result. Request contract v4, result
+  projection v5, readiness v1, Analysis v5/handle v6, Authoring revision v1,
+  and store v2 retain their promises. Canonical schema, examples, identity
+  fixtures, generated Python and agent-tool projections, facade, renderer, and
+  compiler operation closure agree.
+- Linux CPython 3.11 and 3.12 each pass 84 focused Repository Git, Verifier,
+  Authoring, generated-contract, and rendering tests plus 20 Contracts tests.
+  The ten-test Engine workflow passes on both runtimes and includes a real
+  history-preserving temporary Git repository, exact non-no-op replacement
+  bytes, the actual complete candidate verifier, generated facade transport,
+  CAS publication, durable SQLite intent/outcome, cold readback, and the
+  existing A1c analysis-to-readiness path. Independent closure review reports
+  no remaining blocking or medium M6 finding.
+- The complete repository checkpoint passes all 270 declarative suites and all
+  seven retained Bash checkers on both supported runtimes. Ruff, projection
+  freshness, plan structure, generated evidence, diff hygiene, exact staged
+  scope, generated diff, sensitive-value review, and the conventional commit
+  form the final Commit-owned boundary. Public application rediscovery and
+  recovery remain unimplemented; their smallest contract and lost-response
+  evidence are the next design-validation slice and have no admitted production
+  write set.

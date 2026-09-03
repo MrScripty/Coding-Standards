@@ -12,12 +12,15 @@ from pathlib import Path
 
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine.authoring import (
+    APPLICATION_CAPABILITY,
     AuthoringError,
     AuthoringModule,
     FindProposalsRequest,
     Mutation,
+    ProposalApplication,
     ProposalId,
     ProposalReadiness,
+    application_subject,
     review_decision_subject,
 )
 from tools.repository_git.repository_git import RepositoryRevision
@@ -119,7 +122,142 @@ def _review_authorizations(
     )
 
 
+def _application_authorization(
+    readiness: str,
+    revision: str,
+    target: RepositoryRevision,
+) -> dict[str, object]:
+    subject = application_subject(readiness, revision, target)
+    return {
+        "reference": {
+            "id": "authorization:sha256:" + "9" * 64,
+            "issuer": "issuer.fixture",
+            "capability": APPLICATION_CAPABILITY,
+            "authority_digest": "sha256:" + "a" * 64,
+        },
+        "issuer_semantic_revision": 1,
+        "principal": "principal.fixture",
+        "action": "apply-proposal",
+        "subject_kind": "proposal-application",
+        "subject_id": subject,
+        "authorization_evidence": [
+            {
+                "id": "evidence.authorization",
+                "digest": "sha256:" + "d" * 64,
+                "provider_contract": "authorization-grant.v1",
+                "provider_contract_version": "1",
+            }
+        ],
+        "revocation_authority": "revocation.fixture",
+        "revocation_authority_semantic_revision": 1,
+        "revocation_evidence": [
+            {
+                "id": "evidence.revocation",
+                "digest": "sha256:" + "e" * 64,
+                "provider_contract": "authorization-revocation.v1",
+                "provider_contract_version": "1",
+            }
+        ],
+    }
+
+
 class AuthoringTests(unittest.TestCase):
+    def test_application_intent_is_current_head_guarded_and_records_applied(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            database = Path(temporary) / "standards.sqlite3"
+            snapshots = SnapshotModule.open(database)
+            base = snapshots.create_snapshot(_capture()).snapshot
+            authoring = AuthoringModule(snapshots)
+            _summary, revision = authoring.create_proposal(
+                base,
+                (Mutation(SnapshotPath.parse("CORE-STANDARDS.md"), "# Ready\n"),),
+                (),
+            )
+            analysis = "analysis:sha256:" + "a" * 64
+            target = RepositoryRevision("b" * 40)
+            decisions = _review_decisions()
+            readiness = authoring.review_proposal(
+                analysis,
+                revision.revision_id,
+                decisions,
+                _review_authorizations(analysis, revision.revision_id, decisions),
+                target,
+            )
+            application = authoring.admit_application(
+                readiness.readiness_id,
+                _application_authorization(
+                    readiness.readiness_id,
+                    revision.revision_id,
+                    target,
+                ),
+                RepositoryRevision("c" * 40),
+            )
+            self.assertIsInstance(application, ProposalApplication)
+            self.assertEqual(
+                authoring.read_application(application.application_id),
+                application,
+            )
+            outcome = authoring.record_applied(application)
+            self.assertEqual(outcome.status, "applied")
+            self.assertEqual(
+                authoring.read_application_outcome(application.application_id),
+                outcome,
+            )
+
+            snapshots.close()
+            with SnapshotModule.open(database) as reopened:
+                cold = AuthoringModule(reopened)
+                self.assertEqual(
+                    cold.read_application(application.application_id),
+                    application,
+                )
+                self.assertEqual(
+                    cold.read_application_outcome(application.application_id),
+                    outcome,
+                )
+
+    def test_stale_readiness_cannot_publish_application_intent(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            snapshots = SnapshotModule.open(Path(temporary) / "standards.sqlite3")
+            base = snapshots.create_snapshot(_capture()).snapshot
+            authoring = AuthoringModule(snapshots)
+            _summary, revision = authoring.create_proposal(
+                base,
+                (Mutation(SnapshotPath.parse("CORE-STANDARDS.md"), "# Ready\n"),),
+                (),
+            )
+            analysis = "analysis:sha256:" + "a" * 64
+            target = RepositoryRevision("b" * 40)
+            decisions = _review_decisions()
+            readiness = authoring.review_proposal(
+                analysis,
+                revision.revision_id,
+                decisions,
+                _review_authorizations(analysis, revision.revision_id, decisions),
+                target,
+            )
+            authoring.revise_proposal(
+                revision.revision_id,
+                (Mutation(SnapshotPath.parse("CORE-STANDARDS.md"), "# Later\n"),),
+                (),
+            )
+            before = snapshots._store.counts()
+
+            with self.assertRaises(AuthoringError) as stale:
+                authoring.admit_application(
+                    readiness.readiness_id,
+                    _application_authorization(
+                        readiness.readiness_id,
+                        revision.revision_id,
+                        target,
+                    ),
+                    RepositoryRevision("c" * 40),
+                )
+
+            self.assertEqual(stale.exception.failure.code, "AUTHORING.READINESS_STALE")
+            self.assertEqual(snapshots._store.counts(), before)
+            snapshots.close()
+
     def test_readiness_is_content_bound_durable_and_current_head_guarded(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             database = Path(temporary) / "standards.sqlite3"

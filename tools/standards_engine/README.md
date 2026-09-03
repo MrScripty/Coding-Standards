@@ -9,7 +9,7 @@ inspected.
 The public operations are snapshot-bound `query`, immutable-state `prepare` and
 `resolve`, handle-based `inspect`, and the admitted A2 authoring operations
 `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, and
-`analyze_proposal`, followed by `review_proposal`.
+`analyze_proposal`, followed by `review_proposal` and `apply_proposal`.
 Proposal creation
 stores exact non-Git replacement material under an immutable revision and a
 durable proposal head; revision advances that head only from its exact expected
@@ -29,8 +29,18 @@ with no `requires-change` disposition and three explicit evidence-backed
 consumer, impact, and audit acceptances. The Engine derives the proposal head,
 configured `refs/heads/main`, and Standards Verifier `complete` checkpoint,
 then publishes one immutable content-bound readiness aggregate under an atomic
-proposal-head guard. The readiness handle is an input for later application;
-it does not inspect, apply, write Git, or create a second review lifecycle.
+proposal-head guard. `apply_proposal` accepts only that readiness handle,
+obtains current apply authorization, creates and validates a deterministic
+candidate in a private local clone, and runs the Standards Verifier `complete`
+checkpoint against the exact checkout before import. It records immutable
+verified intent, advances only `refs/heads/main` with an expected-target
+compare-and-swap, observes the exact candidate, and records an immutable
+applied outcome before returning `applied`. Ambiguous post-verification
+publication or persistence returns the durable application handle as
+`recovery-required`; public recovery is not part of this slice. Application
+does not use the configured worktree or index as staging authority and creates
+no mutable phase ledger, automatic retry, rollback, or second review
+lifecycle.
 Routing evaluates the registered
 Router projection and derives dependency closure from the neutral standards graph.
 Read-only change analysis compares exact accepted and proposed authority,

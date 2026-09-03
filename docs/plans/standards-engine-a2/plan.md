@@ -2,13 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 0 validation for the next slice after accepted
-Milestone 5 proposal review readiness
+**Current phase:** Milestone 6 accepted; public recovery admission pending
 
-**Next slice:** reconcile the accepted P3 application design with current
-production readiness, Repository Git, Snapshot persistence, and the complete
-verification checkpoint, then admit the smallest coherent `apply_proposal`
-write set; do not implement recovery or phase-resource machinery with it
+**Next slice:** reconcile and design-validate the smallest public application
+rediscovery/recovery contract for a lost caller response; admit no later
+production write set until that contract and its exact evidence are accepted
 
 **Acceptance status:** `pending`
 
@@ -46,8 +44,9 @@ assumption the user reauthorized for projected-material identity validation on
 2026-09-01. Milestone 0 owns the product, contract, architecture, and
 design-validation facts required to make the A2 objective implementable. It
 admits isolated, disposable prototypes and minimum viable design tests. The
-user's 2026-09-02 implementation directions authorize only the exact production
-slices recorded in Milestones 1 through 5; they do not authorize later A2
+user's 2026-09-02 implementation directions through the current continuation
+authorize only the exact production slices recorded in Milestones 1 through 6;
+they do not authorize later A2
 behavior or canonical-standards mutation.
 
 ## Objective Acceptance
@@ -60,7 +59,7 @@ behavior or canonical-standards mutation.
 | A2-A4 | Apply readiness is a distinct immutable proof bound to the exact current proposal revision, complete analysis handle, required semantic, relationship, and lifecycle approvals, evidence, authorization authority, target authority, and verification contract; mutation or authority change invalidates only materially dependent proof. | `contract` | `not-applicable` | `automated` | `pending` | pending |
 | A2-A5 | Application writes an isolated candidate, runs every required correctness proof against its exact bytes, publishes canonical authority only through the selected atomic expected-head transition, and returns success only after the published identity and postcondition are established. | `system` | `required-real` | `automated` | `pending` | pending |
 | A2-A6 | Invalid input, unsupported contract or platform, unavailable authority, unauthorized action, stale proposal or target state, verification failure, interruption, and unknown publication outcome remain distinguishable; no path silently retries, rebases, rolls back, substitutes authority, or reports partial success. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
-| A2-A7 | Durable proposal, head, readiness, attempt, and snapshot-dependent state have one owner, exact schema and version roles, atomic lifecycle and purge behavior, cold-process reconstruction, and an accepted A1c-store migration or typed-rejection decision derived from current consumers. | `system` | `required-real` | `automated` | `pending` | pending |
+| A2-A7 | Durable proposal, head, readiness, application intent/outcome, and snapshot-dependent state have one owner, exact schema and version roles, atomic lifecycle and purge behavior, cold-process reconstruction, and an accepted A1c-store migration or typed-rejection decision derived from current consumers. | `system` | `required-real` | `automated` | `pending` | pending |
 | A2-A8 | One canonical generated public contract governs every admitted authoring input, result, handle, operation capability, typed failure, Python model, agent-tool projection, example, and actual facade path; freshness, semantic conformance, and public behavior have separate deciding evidence. | `contract` | `repository-supported verification environments` | `automated` | `pending` | pending |
 | A2-A9 | Real Linux CPython 3.11 and 3.12 evidence exercises cross-invocation proposal work, concurrent head and target changes, Git and SQLite behavior, authorization, verification failure, interruption recovery, and the complete public workflow. | `user-workflow` | `required-real` | `automated` | `pending` | pending |
 | A2-A10 | One coherent candidate has complete dispositions for the standards-policy effects it actually introduces, exact standards policy-impact and coverage closure, focused and repository-wide verification, and independent Standards and specification acceptance. Engine implementation membership is not added to standards graphs. | `integration` | `not-applicable` | `manual` | `pending` | pending |
@@ -104,8 +103,8 @@ behavior or canonical-standards mutation.
 
 - Production implementation outside the exact admitted Milestone 1
   `create_proposal`/`find_proposals`, Milestone 2 `revise_proposal`, Milestone
-  3 `query_proposal`, Milestone 4 `analyze_proposal`, and Milestone 5
-  `review_proposal` slices
+  3 `query_proposal`, Milestone 4 `analyze_proposal`, Milestone 5
+  `review_proposal`, and Milestone 6 `apply_proposal` slices
   while later A2 design remains active.
 - Changing, weakening, reinterpreting, or silently superseding an explicit
   user-selected A1c design decision outside the exact projected-material
@@ -147,7 +146,7 @@ behavior or canonical-standards mutation.
   public readback, write set, and verification are named here; it does not
   authorize canonical standards mutation.
 - Milestone 0 remains the discovery owner for later A2 behavior. Production
-  edits are available only for the exact Milestone 1 through Milestone 5 slices;
+  edits are available only for the exact Milestone 1 through Milestone 6 slices;
   every later slice still requires its applicable A1c preservation and
   design-validation records plus an exact write set before implementation.
 - A material design or procedure requires the smallest adequate pre-canonical
@@ -227,6 +226,7 @@ behavior or canonical-standards mutation.
 | Admit the third production slice as one additive `query_proposal(revision, request)` operation covering current route, read, and related requests. Resolve only the exact immutable revision over its retained base snapshot through one private replacement source, then reuse the existing A1c compiler and navigation implementation. Project revision-anchored results as noncanonical `projection` authority without snapshot child or inspect handles. Retain store schema v2, proposal revision handle v1, and A1c request/result promises; omit projected analysis, review, readiness, application, Git, recovery, cache, second semantic owners, and phase machinery. | User, Product, Authoring, Engine, Contracts, Architecture, and Planning owners | Accepted P2 replacement-overlay equivalence, accepted P4R explicit-operation evidence, accepted Milestones 1 and 2, Development Proportionality, and Milestone 3 dual-runtime focused and repository verification | Projected query treated as blocked on another prototype despite accepted evidence, or implemented through proposal-as-snapshot, duplicated navigation, false snapshot authority, or broadened later lifecycle machinery |
 | Admit the fourth production slice as one additive `analyze_proposal(revision)` operation. Resolve the exact immutable revision and retained base, derive normalized A1c change descriptors from their compiled policy-unit corpora, retain those inputs with the revision's semantic proposals in one evolved `AnalysisState`, and revalidate them against the exact revision during cold replay and unchanged `resolve`. Advance only Analysis state format v5, identity domain v6, Analysis handle v6, result projection v5, and interface schema v16. Retain request contract v4, proposal revision handle v1, Authoring contract v1, and store schema v2 because their owned promises do not change. Use coordinated replacement and typed rejection of obsolete Analysis state; omit review, readiness, application, Git, recovery, compatibility readers, caches, second analyzers, and phase machinery. | User, Product, Analysis, Authoring, Snapshot, Contracts, Architecture, and Planning owners | Explicit A1c projected-material reauthorization, accepted P2R2 identity/replay/lifecycle evidence, accepted P4R facade continuation, accepted Milestones 1 through 3, Development Proportionality, and Milestone 4 dual-runtime focused and repository verification | Another prototype cycle despite deciding evidence; mutable-head replay; caller-supplied descriptors or material facts; proposal-as-snapshot; full projected corpus per analysis; silent old-state reinterpretation; no-op store migration; or broadened later lifecycle machinery |
 | Admit the fifth production slice as one additive `review_proposal(analysis, decisions, prior_readiness?)` operation. Require one complete revision-backed A1c Analysis with no `requires-change` disposition, exact evidence-backed consumer, impact, and audit acceptances, and separate current authorizations for each decision. Derive the exact revision, proposal head, configured `refs/heads/main` target, and versioned complete-verification checkpoint internally. Publish one content-bound immutable readiness aggregate only if the analyzed revision remains the proposal head in the same Snapshot-owned transaction. Advance only interface schema v17 and add readiness contract/handle v1. Retain Analysis v5/handle v6, request v4, result projection v5, Authoring revision contract v1, and store schema v2. Expose one composite operation capability while retaining the three existing decision capabilities internally; omit readiness inspection, application, Git writes, recovery, caches, phases, and measurement machinery. | User, Product, Analysis, Authoring, Snapshot, Repository, Security, Verification, Contracts, Architecture, and Planning owners | Accepted P4R explicit continuation, accepted Milestones 1 through 4, focused readiness composition and atomic-publication minimum viable tests, Development Proportionality, and Milestone 5 dual-runtime and repository verification | Another prototype cycle despite deciding evidence; completion treated as approval; caller-supplied revision, target, verifier, capability, or authority facts; mutable readiness; non-atomic head validation; duplicate review lifecycles; store migration; public capability-set machinery; or broadened application/recovery behavior |
+| Admit the sixth production slice as one additive `apply_proposal(readiness)` operation. Require current apply authorization, materialize the exact replacement set in an isolated local clone, create one deterministic conventional candidate commit, run the Standards Verifier `complete` checkpoint against that exact checked-out commit, and import only the passed candidate before an atomic expected-old-object update of configured `refs/heads/main`. Before Git publication, publish one content-bound verified application intent under the existing proposal-head guard; after exact target observation, publish one immutable applied outcome. Return an opaque application handle with `applied`, or the same handle with `recovery-required` when publication truth cannot be established. Advance only interface schema v18 and add application contract/handle v1. Retain request v4, result projection v5, readiness v1, Analysis v5/handle v6, Authoring revision v1, and store v2. Public recovery remains a later continuation; omit mutable attempt roots, phase ledgers, generic process/resource frameworks, retry loops, rollback, caches, compatibility readers, and measurement machinery. | User, Product, Authoring, Snapshot, Repository, Security, Verification, Contracts, Architecture, and Planning owners | Accepted P3 isolated-publication and interruption evidence, accepted P4R typed continuation, accepted Milestones 1 through 5, focused real-Git candidate/publication minimum viable tests, the existing complete-checkpoint contract, and Development Proportionality | Another broad prototype cycle despite deciding evidence; live worktree/index mutation; caller-supplied Git/verifier/target/authority facts; publication before verification or durable intent; inferred success; non-atomic target update; automatic retry/rollback; store migration; or recovery/resource/measurement machinery broadened into this slice |
 
 ## Evidence And Oracle Plan
 
@@ -389,7 +389,7 @@ canonical `main`.
 - [ ] Define the trusted execution context, principals, issuers, capabilities,
   review independence where required, revocation, path containment, Git
   environment, target-ref authority, and apply-time authorization proof.
-- [ ] Re-evaluate Git implementation-versus-dependency ownership before
+- [x] Re-evaluate Git implementation-versus-dependency ownership before
   extending `repository_git`; select the smallest write-capable Adapter or
   existing-Module change supported by actual consumers and the deletion test.
 - [ ] Classify generated, internal-coordinated, persisted, public-versioned,
@@ -504,7 +504,7 @@ canonical `main`.
 - This plan names one exact first production implementation slice and write set
   before Milestone 0 becomes `Accepted`.
 
-Milestone 0 has admitted the exact Milestone 1 through Milestone 5 slices. Its
+Milestone 0 has admitted the exact Milestone 1 through Milestone 6 slices. Its
 remaining items stay active only as prerequisites for later A2 behavior.
 
 **Status:** `Active`
@@ -759,9 +759,64 @@ generated diff, sensitive-value review, and Commit checks pass.
 
 **Status:** `Accepted`
 
+### Milestone 6: Verified Proposal Application
+
+Deliver one verified direct-publication operation through the same generated
+facade while retaining enough immutable state for a later recovery operation:
+
+- [x] Add `apply_proposal(readiness)` with only the opaque readiness handle as
+  caller input and `standards.proposal.apply` as its operation capability.
+  Return one application handle with status `applied` only after the exact
+  postcondition, or `recovery-required` when that postcondition is unavailable.
+- [x] Revalidate the readiness and obtain current apply authorization before
+  staging. Bind the authorization, readiness, revision, expected target,
+  candidate object, and complete-verification contract into one immutable
+  verified application intent.
+- [x] Materialize replacements in a private local clone at the readiness target;
+  leave the configured repository worktree and index untouched. Create one
+  deterministic conventional candidate commit and prove that its checked-out
+  bytes and index equal its object identity.
+- [x] Run the Standards Verifier `complete` checkpoint against the exact
+  candidate checkout. A failed, unavailable, or unsupported verification
+  cannot import or publish the candidate.
+- [x] Publish the verified intent under the proposal's exact current-head guard,
+  import the candidate object without a destination ref, update only
+  `refs/heads/main` with an expected-old-object compare-and-swap, and observe
+  the exact candidate before recording and returning `applied`.
+- [x] Reuse Snapshot store v2 immutable aggregates for the verified intent and
+  applied outcome. Do not add an application root, mutable phase ledger, store
+  migration, automatic retry/rollback, or public recovery operation.
+- [x] Allocate interface schema v18 plus application contract/handle v1. Retain
+  request contract v4, result projection v5, readiness v1, Analysis v5/handle
+  v6, Authoring revision v1, and store v2.
+- [x] Exercise effective isolation, exact bytes and executable modes,
+  deterministic candidate identity, verification-before-import, current-head
+  admission, apply authorization, target race, exact post-observation,
+  recovery-required projection, cold durable readback, generated facade
+  transport, and unchanged A1c behavior on Linux CPython 3.11 and 3.12.
+
+The coherent write set is this plan, ledger, preservation report, A2 ADR, and
+Engine/contract documentation; immutable application intent/outcome values and
+Authoring composition; Repository Git isolated-candidate, object-import, and
+ref-CAS behavior; one verifier-owned programmatic complete-checkpoint entry;
+canonical schema, interface manifest, examples, generated projections, facade,
+Engine, and renderer; focused Repository, Verifier, Authoring, contract, and
+composition tests; and mechanically required repository projections. It adds
+no standards-graph node.
+
+**Acceptance gate:** failed verification leaves canonical Git and durable
+application state unchanged; stale proposal or target and unauthorized apply
+cannot publish; every publish has a prior verified intent; `applied` requires
+the target CAS, exact observation, and durable applied outcome; ambiguous
+post-publication state returns the application handle as `recovery-required`;
+both supported runtimes, affected tests, complete repository verification,
+staged scope, generated diff, sensitive-value review, and Commit checks pass.
+
+**Status:** `Accepted`
+
 ## Blockers
 
-No blocker applies to the exact Milestone 1 through Milestone 5 slices. The
+No blocker applies to the exact Milestone 1 through Milestone 6 slices. The
 following constraints remain blockers for later A2 slices:
 
 - The combined P5 executable is superseded before measurement. Its final
@@ -776,10 +831,10 @@ following constraints remain blockers for later A2 slices:
   but has no production consumer and therefore supplies evidence only. P5R and
   P5M remain unavailable and become relevant only if a later exact slice owns
   real process/resource lifetime or a material efficiency decision.
-- Public application operations, Git publication/recovery, and their persisted
-  and trust contracts remain unavailable until their own design evidence and
-  exact write sets are admitted. Milestones 1 through 5 do not
-  imply that authority.
+- Public recovery and its additional outcomes remain unavailable until their
+  exact continuation contract and write set are admitted. Milestone 6 retains
+  the immutable application facts that recovery requires but does not expose,
+  simulate, or pre-implement that later operation.
 
 ## Re-Plan Triggers
 

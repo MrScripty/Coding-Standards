@@ -134,3 +134,28 @@ class SuiteResult:
             "check_count": self.check_count,
             "diagnostics": [diagnostic.as_dict() for diagnostic in self.diagnostics],
         }
+
+
+@dataclass(frozen=True, slots=True)
+class CompleteVerificationResult:
+    results: tuple[SuiteResult, ...]
+    checker_count: int
+    diagnostic: Diagnostic | None = None
+    exit_code: int = 0
+
+    def __post_init__(self) -> None:
+        if (
+            type(self.results) is not tuple
+            or any(type(item) is not SuiteResult for item in self.results)
+            or type(self.checker_count) is not int
+            or self.checker_count < 0
+            or (self.diagnostic is not None and type(self.diagnostic) is not Diagnostic)
+            or type(self.exit_code) is not int
+            or self.exit_code not in {0, 1, 2, 3, 4}
+        ):
+            raise ValueError("complete verification result is invalid")
+        if (self.exit_code == 0) != (
+            self.diagnostic is None
+            and all(item.exit_code == 0 for item in self.results)
+        ):
+            raise ValueError("complete verification result contradicts its status")
