@@ -46,6 +46,12 @@ class GitRepositoryTests(unittest.TestCase):
                 [(str(item.path), item.content) for item in capture.files],
                 [("nested/é.txt", b"exact\x00bytes"), ("other.txt", b"other")],
             )
+            self.assertEqual(
+                tuple(
+                    str(path) for path in repository.revision_paths(capture.revision)
+                ),
+                ("nested/é.txt", "other.txt"),
+            )
 
             (root / "other.txt").write_bytes(b"worktree mutation")
             self.assertEqual(
@@ -54,8 +60,22 @@ class GitRepositoryTests(unittest.TestCase):
                 ),
                 b"other",
             )
+            (root / "later.txt").write_bytes(b"later")
             self._commit(root, "next")
             self.assertNotEqual(repository.current_revision(), capture.revision)
+            self.assertEqual(
+                tuple(
+                    str(path) for path in repository.revision_paths(capture.revision)
+                ),
+                ("nested/é.txt", "other.txt"),
+            )
+            self.assertEqual(
+                tuple(
+                    str(path)
+                    for path in repository.revision_paths(repository.current_revision())
+                ),
+                ("later.txt", "nested/é.txt", "other.txt"),
+            )
             self.assertEqual(
                 repository.read_file(
                     capture.revision, RepositoryPath.parse("other.txt")
@@ -148,7 +168,9 @@ class GitRepositoryTests(unittest.TestCase):
                     (candidate.root / ":(exclude,glob)**").read_bytes(),
                     b"proposed magic\n",
                 )
-                self.assertTrue((candidate.root / "executable.sh").stat().st_mode & 0o111)
+                self.assertTrue(
+                    (candidate.root / "executable.sh").stat().st_mode & 0o111
+                )
                 self.assertEqual(self._git(candidate.root, "remote"), "")
                 first_revision = candidate.revision
                 self.assertEqual(
@@ -179,9 +201,7 @@ class GitRepositoryTests(unittest.TestCase):
             self._git(root, "branch", "-M", "main")
             repository = GitRepository(root)
             expected = repository.branch_revision("main")
-            replacement = CapturedFile(
-                RepositoryPath.parse("value.txt"), b"proposed\n"
-            )
+            replacement = CapturedFile(RepositoryPath.parse("value.txt"), b"proposed\n")
 
             with repository.materialize_candidate(expected, (replacement,)) as drifted:
                 (drifted.root / "value.txt").write_bytes(b"unverified drift\n")
@@ -193,7 +213,9 @@ class GitRepositoryTests(unittest.TestCase):
             )
             self.assertEqual(repository.branch_revision("main"), expected)
 
-            with repository.materialize_candidate(expected, (replacement,)) as candidate:
+            with repository.materialize_candidate(
+                expected, (replacement,)
+            ) as candidate:
                 (root / "competing.txt").write_bytes(b"competing\n")
                 self._commit(root, "competing")
                 competing = repository.branch_revision("main")
@@ -219,12 +241,12 @@ class GitRepositoryTests(unittest.TestCase):
             self._commit(root, "competing")
             competing = repository.current_revision()
             self._git(root, "switch", "-q", "main")
-            replacement = CapturedFile(
-                RepositoryPath.parse("value.txt"), b"proposed\n"
-            )
+            replacement = CapturedFile(RepositoryPath.parse("value.txt"), b"proposed\n")
             original_git_command = repository_module.git_command
 
-            with repository.materialize_candidate(expected, (replacement,)) as candidate:
+            with repository.materialize_candidate(
+                expected, (replacement,)
+            ) as candidate:
                 raced = False
 
                 def race_before_update(
@@ -281,12 +303,12 @@ class GitRepositoryTests(unittest.TestCase):
             self._commit(root, "competing")
             competing = repository.current_revision()
             self._git(root, "switch", "-q", "main")
-            replacement = CapturedFile(
-                RepositoryPath.parse("value.txt"), b"proposed\n"
-            )
+            replacement = CapturedFile(RepositoryPath.parse("value.txt"), b"proposed\n")
             original_git_command = repository_module.git_command
 
-            with repository.materialize_candidate(expected, (replacement,)) as candidate:
+            with repository.materialize_candidate(
+                expected, (replacement,)
+            ) as candidate:
 
                 def interrupt_after_update(
                     command_root: Path,

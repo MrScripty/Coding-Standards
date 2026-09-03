@@ -6,8 +6,13 @@ from typing import Iterable, Mapping
 
 from tools.graph_engine.graph_engine import EdgeRegistry
 from tools.standards_applicability.standards_applicability import FactContract
-from tools.standards_metadata.standards_metadata import CanonicalStandardsCorpus, ContentSource
-from tools.standards_policy_impact.standards_policy_impact import CompiledPolicyImpactSet
+from tools.standards_metadata.standards_metadata import (
+    CanonicalStandardsCorpus,
+    ContentSource,
+)
+from tools.standards_policy_impact.standards_policy_impact import (
+    CompiledPolicyImpactSet,
+)
 from .changes import (
     ChangeDescriptor,
     ChangeKind,
@@ -24,7 +29,12 @@ from .coverage import (
 )
 from .errors import AnalysisError, AnalysisFailure
 from .impact import ImpactSelection, select_impact
-from .keys import analysis_identity, analysis_key_bytes, analysis_value_digest, raw_digest
+from .keys import (
+    analysis_identity,
+    analysis_key_bytes,
+    analysis_value_digest,
+    raw_digest,
+)
 from .obligations import (
     COVERAGE_DECISION_CONTRACT,
     OBLIGATION_DOMAIN,
@@ -40,7 +50,13 @@ from .reading import (
     compile_reading_plan,
     consumer_reading_selections,
 )
-from .state import AnalysisState, ProposedMaterialRef, SnapshotMaterialRef, child_id, plain_record
+from .state import (
+    AnalysisState,
+    ProposedMaterialRef,
+    SnapshotMaterialRef,
+    child_id,
+    plain_record,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -140,21 +156,22 @@ def evaluate_analysis(
         proposed.corpus.policy_unit_corpus,
         descriptors,
         proposals,
+        accepted_module_ids=(item.module_id for item in accepted.corpus.modules),
+        proposed_module_ids=(item.module_id for item in proposed.corpus.modules),
     )
     context = {
         "subjects": sorted(
-            (
-                unit.as_contract()
-                for change in changes
-                for unit in change.changed_units
-            ),
+            (unit.as_contract() for change in changes for unit in change.changed_units),
             key=analysis_key_bytes,
         ),
         "changes": [item.as_contract() for item in descriptors],
         "semantic_proposals": [_proposal(item) for item in proposals],
     }
     context_id = child_id(context)
-    if accepted.policy_impact.fact_schema.digest != proposed.policy_impact.fact_schema.digest:
+    if (
+        accepted.policy_impact.fact_schema.digest
+        != proposed.policy_impact.fact_schema.digest
+    ):
         raise _error(
             "FACT_SCHEMA_EVOLUTION_UNSUPPORTED",
             "accepted and proposed fact schemas differ",
@@ -349,9 +366,7 @@ def _coverage(
                     "changed policy has no current coverage requirement",
                     outcome="unavailable",
                 )
-            requirement_projection = coverage_requirement_projection(
-                requirement, view
-            )
+            requirement_projection = coverage_requirement_projection(requirement, view)
             requirement_id = child_id(requirement_projection)
             attestation = supplied.get(requirement_id)
             certificate = None
@@ -448,7 +463,9 @@ def _coverage_obligations(
             DecisionDependency(
                 "provider-contract",
                 COVERAGE_DECISION_CONTRACT.id,
-                raw_digest(analysis_key_bytes(COVERAGE_DECISION_CONTRACT.as_contract())),
+                raw_digest(
+                    analysis_key_bytes(COVERAGE_DECISION_CONTRACT.as_contract())
+                ),
             ),
         )
         fingerprint = DecisionFingerprint(
@@ -487,7 +504,10 @@ def _valid_dispositions(
         item = dict(raw)
         obligation_id = str(item.get("obligation_id", ""))
         obligation = obligations.get(obligation_id)
-        if obligation is None or item.get("fingerprint") != obligation.fingerprint.as_contract():
+        if (
+            obligation is None
+            or item.get("fingerprint") != obligation.fingerprint.as_contract()
+        ):
             continue
         retained[obligation_id] = MappingProxyType(item)
     return tuple(retained[key] for key in sorted(retained))

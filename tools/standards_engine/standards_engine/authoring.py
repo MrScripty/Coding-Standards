@@ -6,10 +6,11 @@ import time
 import uuid
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from tools.repository_git.repository_git import (
     GitRepositoryError,
+    RepositoryPath,
     RepositoryRevision,
 )
 from tools.standards_identity.standards_identity import (
@@ -26,11 +27,13 @@ from tools.standards_snapshots.standards_snapshots import (
     FindAggregateRootsRequest,
     SnapshotId,
     SnapshotModule,
-    SnapshotPath,
     SnapshotError,
 )
 
-AUTHORING_CONTRACT_VERSION = 1
+if TYPE_CHECKING:
+    from .logical_authoring import StandardsChangeSet
+
+AUTHORING_CONTRACT_VERSION = 2
 READINESS_CONTRACT_VERSION = 1
 APPLICATION_CONTRACT_VERSION = 1
 APPLICATION_SELECTION_CONTRACT_VERSION = 1
@@ -80,6 +83,10 @@ def _unavailable(code: str, message: str) -> AuthoringError:
     return AuthoringError(AuthoringFailure(code, "unavailable", message))
 
 
+def _unsupported(code: str, message: str) -> AuthoringError:
+    return AuthoringError(AuthoringFailure(code, "unsupported", message))
+
+
 @dataclass(frozen=True, slots=True, order=True)
 class ProposalId:
     value: str
@@ -115,94 +122,64 @@ class ProposalId:
         return self.value
 
 
-@dataclass(frozen=True, slots=True, order=True)
-class Mutation:
-    path: SnapshotPath
-    value: str
-
-    def __post_init__(self) -> None:
-        if type(self.path) is not SnapshotPath or type(self.value) is not str:
-            raise _invalid(
-                "AUTHORING.INVALID_MUTATION",
-                "replacement mutation requires a snapshot path and exact text",
-            )
-        try:
-            self.value.encode("utf-8")
-        except UnicodeEncodeError as error:
-            raise _invalid(
-                "AUTHORING.INVALID_MUTATION",
-                "replacement text must contain Unicode scalar values",
-            ) from error
-
-    def as_contract(self) -> dict[str, object]:
-        return {"op": "replace", "path": str(self.path), "value": self.value}
-
-
 @dataclass(frozen=True, slots=True, init=False)
 class ProposalRevision:
     proposal: ProposalId
     ordinal: int
     base_snapshot: SnapshotId
-    mutations: tuple[Mutation, ...]
-    semantic_proposals: tuple[IdentityObject, ...]
+    base_repository_paths: tuple[str, ...]
+    change_sets: tuple[StandardsChangeSet, ...]
 
     def __init__(
         self,
         proposal: ProposalId,
         ordinal: int,
         base_snapshot: SnapshotId,
-        mutations: Iterable[Mutation],
-        semantic_proposals: Iterable[Mapping[str, object]],
+        base_repository_paths: Iterable[str],
+        change_sets: Iterable[StandardsChangeSet],
     ) -> None:
-        supplied_mutations = tuple(mutations)
-        if any(type(item) is not Mutation for item in supplied_mutations):
+        from .logical_authoring import StandardsChangeSet
+
+        selected_change_sets = tuple(change_sets)
+        try:
+            selected_paths = tuple(
+                sorted(
+                    str(RepositoryPath.parse(path)) for path in base_repository_paths
+                )
+            )
+        except (GitRepositoryError, TypeError) as error:
+            raise _invalid(
+                "AUTHORING.INVALID_REPOSITORY_PATHS",
+                "proposal revision repository paths are invalid",
+            ) from error
+        if any(type(item) is not StandardsChangeSet for item in selected_change_sets):
             raise _invalid(
                 "AUTHORING.INVALID_REVISION",
-                "proposal revision mutations must be exact Mutation values",
+                "proposal revision requires exact StandardsChangeSet values",
             )
-        selected_mutations = tuple(
-            sorted(supplied_mutations, key=lambda item: item.path)
-        )
-        paths = tuple(item.path for item in selected_mutations)
         if (
             type(proposal) is not ProposalId
             or type(ordinal) is not int
+            or ordinal != len(selected_change_sets)
             or ordinal < 1
             or type(base_snapshot) is not SnapshotId
-            or not selected_mutations
-            or len(set(paths)) != len(paths)
+            or not selected_paths
+            or len(set(selected_paths)) != len(selected_paths)
         ):
             raise _invalid(
                 "AUTHORING.INVALID_REVISION",
-                "proposal revision requires unique replacement paths and exact identities",
+                "proposal revision ordinal must match a non-empty logical history",
             )
-        try:
-            selected_semantic = tuple(
-                sorted(
-                    {
-                        encode_identity_value(_identity_value(item)): _identity_record(
-                            item
-                        )
-                        for item in semantic_proposals
-                    }.values(),
-                    key=encode_identity_value,
-                )
-            )
-        except IdentityError as error:
-            raise _invalid(
-                "AUTHORING.INVALID_SEMANTIC_PROPOSAL",
-                "semantic proposal must contain canonical identity values",
-            ) from error
         object.__setattr__(self, "proposal", proposal)
         object.__setattr__(self, "ordinal", ordinal)
         object.__setattr__(self, "base_snapshot", base_snapshot)
-        object.__setattr__(self, "mutations", selected_mutations)
-        object.__setattr__(self, "semantic_proposals", selected_semantic)
+        object.__setattr__(self, "base_repository_paths", selected_paths)
+        object.__setattr__(self, "change_sets", selected_change_sets)
 
     @property
     def revision_id(self) -> str:
         return hash_identity(
-            "coding-standards:proposal-revision:v1",
+            "coding-standards:proposal-revision:v2",
             "proposal-revision",
             self.identity_material(),
         )
@@ -211,16 +188,17 @@ class ProposalRevision:
         return IdentityObject(
             (
                 ("base_snapshot", str(self.base_snapshot)),
+                ("base_repository_paths", IdentityArray(self.base_repository_paths)),
                 ("contract_version", AUTHORING_CONTRACT_VERSION),
                 (
-                    "mutations",
+                    "change_sets",
                     IdentityArray(
-                        _identity_record(item.as_contract()) for item in self.mutations
+                        _identity_record(item.as_contract())
+                        for item in self.change_sets
                     ),
                 ),
                 ("ordinal", self.ordinal),
                 ("proposal", str(self.proposal)),
-                ("semantic_proposals", IdentityArray(self.semantic_proposals)),
             )
         )
 
@@ -632,10 +610,24 @@ class AuthoringModule:
         self,
         snapshots: SnapshotModule,
         *,
+        validate_revision: Callable[[ProposalRevision], None],
+        observe_repository_paths: Callable[[SnapshotId], Iterable[str]],
         now: Callable[[], int] | None = None,
         proposal_id_factory: Callable[[], ProposalId] | None = None,
     ) -> None:
         self._snapshots = snapshots
+        if not callable(validate_revision):
+            raise _invalid(
+                "AUTHORING.INVALID_REVISION_VALIDATOR",
+                "Authoring requires one prospective revision validator",
+            )
+        self._validate_revision = validate_revision
+        if not callable(observe_repository_paths):
+            raise _invalid(
+                "AUTHORING.INVALID_PATH_OBSERVER",
+                "Authoring requires one base-revision path observer",
+            )
+        self._observe_repository_paths = observe_repository_paths
         self._now = now or (lambda: int(time.time()))
         self._proposal_id_factory = proposal_id_factory or (
             lambda: ProposalId.from_uuid(uuid.uuid4())
@@ -644,8 +636,7 @@ class AuthoringModule:
     def create_proposal(
         self,
         base_snapshot: SnapshotId,
-        mutations: Iterable[Mutation],
-        semantic_proposals: Iterable[Mapping[str, object]],
+        change_set: StandardsChangeSet,
     ) -> tuple[ProposalSummary, ProposalRevision]:
         proposal = self._proposal_id_factory()
         if type(proposal) is not ProposalId:
@@ -654,9 +645,13 @@ class AuthoringModule:
                 "proposal ID factory must return an exact ProposalId",
             )
         revision = ProposalRevision(
-            proposal, 1, base_snapshot, mutations, semantic_proposals
+            proposal,
+            1,
+            base_snapshot,
+            self._observe_repository_paths(base_snapshot),
+            (change_set,),
         )
-        self._validate_mutation_targets(revision)
+        self._validate_revision(revision)
         root = AggregateRoot(
             str(proposal),
             PROPOSAL_KIND,
@@ -696,18 +691,23 @@ class AuthoringModule:
     def revise_proposal(
         self,
         expected_revision: str,
-        mutations: Iterable[Mutation],
-        semantic_proposals: Iterable[Mapping[str, object]],
+        change_set: StandardsChangeSet,
     ) -> tuple[ProposalSummary, ProposalRevision]:
         expected = self.read_revision(expected_revision)
+        root = self._snapshots.load_aggregate_root(str(expected.proposal))
+        if root.head_id != expected_revision:
+            raise _invalid(
+                "AUTHORING.REVISION_STALE",
+                "expected proposal revision is no longer the current head",
+            )
         revision = ProposalRevision(
             expected.proposal,
             expected.ordinal + 1,
             expected.base_snapshot,
-            mutations,
-            semantic_proposals,
+            expected.base_repository_paths,
+            (*expected.change_sets, change_set),
         )
-        self._validate_mutation_targets(revision)
+        self._validate_revision(revision)
         advanced = self._snapshots.advance_aggregate_root(
             str(expected.proposal), expected_revision, revision.aggregate()
         )
@@ -1156,31 +1156,45 @@ class AuthoringModule:
         try:
             material = json.loads(record.payload)
             if (
+                type(material) is dict
+                and type(material.get("contract_version")) is int
+                and material["contract_version"] != AUTHORING_CONTRACT_VERSION
+            ):
+                raise _unsupported(
+                    "AUTHORING.STORED_REVISION_CONTRACT_UNSUPPORTED",
+                    "stored proposal revision uses an unsupported Authoring contract",
+                )
+            if (
                 type(material) is not dict
                 or set(material)
                 != {
                     "base_snapshot",
+                    "base_repository_paths",
+                    "change_sets",
                     "contract_version",
-                    "mutations",
                     "ordinal",
                     "proposal",
-                    "semantic_proposals",
                 }
                 or material["contract_version"] != AUTHORING_CONTRACT_VERSION
-                or type(material["mutations"]) is not list
-                or type(material["semantic_proposals"]) is not list
+                or type(material["change_sets"]) is not list
+                or type(material["base_repository_paths"]) is not list
                 or encode_identity_value(_identity_value(material)) != record.payload
             ):
                 raise _invalid(
                     "AUTHORING.INVALID_STORED_REVISION",
                     "stored proposal revision material is not canonical",
                 )
+            from .logical_authoring import StandardsChangeSet
+
             revision = ProposalRevision(
                 ProposalId(material["proposal"]),
                 material["ordinal"],
                 SnapshotId(material["base_snapshot"]),
-                (_stored_mutation(item) for item in material["mutations"]),
-                material["semantic_proposals"],
+                material["base_repository_paths"],
+                (
+                    StandardsChangeSet.from_mapping(item)
+                    for item in material["change_sets"]
+                ),
             )
         except (
             AuthoringError,
@@ -1189,6 +1203,11 @@ class AuthoringModule:
             json.JSONDecodeError,
             UnicodeError,
         ) as error:
+            if (
+                isinstance(error, AuthoringError)
+                and error.failure.outcome == "unsupported"
+            ):
+                raise
             raise _invalid(
                 "AUTHORING.INVALID_STORED_REVISION",
                 "stored proposal revision cannot be decoded",
@@ -1212,20 +1231,6 @@ class AuthoringModule:
             raise _invalid(
                 "AUTHORING.INVALID_STORED_REVISION",
                 "stored proposal root and revision authority disagree",
-            )
-
-    def _validate_mutation_targets(self, revision: ProposalRevision) -> None:
-        available_paths = {
-            item.path
-            for item in self._snapshots.load_content(revision.base_snapshot).files
-        }
-        missing = [
-            item.path for item in revision.mutations if item.path not in available_paths
-        ]
-        if missing:
-            raise _invalid(
-                "AUTHORING.MUTATION_TARGET_UNAVAILABLE",
-                f"replacement target {missing[0]} is unavailable in the base snapshot",
             )
 
     def _time(self) -> int:
@@ -1506,21 +1511,6 @@ def _nonempty_scalar_string(value: object) -> bool:
     )
 
 
-def _stored_mutation(value: object) -> Mutation:
-    if (
-        type(value) is not dict
-        or set(value) != {"op", "path", "value"}
-        or value["op"] != "replace"
-        or type(value["path"]) is not str
-        or type(value["value"]) is not str
-    ):
-        raise _invalid(
-            "AUTHORING.INVALID_STORED_REVISION",
-            "stored proposal mutation is invalid",
-        )
-    return Mutation(SnapshotPath.parse(value["path"]), value["value"])
-
-
 def _revision_id(value: object) -> bool:
     if type(value) is not str or not value.startswith("proposal-revision:sha256:"):
         return False
@@ -1567,7 +1557,6 @@ __all__ = (
     "AuthoringFailure",
     "AuthoringModule",
     "FindProposalsRequest",
-    "Mutation",
     "ProposalApplication",
     "ProposalApplicationOutcome",
     "ProposalApplicationSelection",

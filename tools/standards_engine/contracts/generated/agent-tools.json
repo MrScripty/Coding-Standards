@@ -161,7 +161,6 @@
           "items": {
             "$ref": "#/$defs/ChangedPolicyUnit"
           },
-          "minItems": 1,
           "type": "array",
           "uniqueItems": true
         }
@@ -266,7 +265,7 @@
           "type": "array"
         },
         "contract_version": {
-          "const": 4
+          "const": 5
         },
         "kind": {
           "const": "analysis-request"
@@ -317,7 +316,7 @@
           "uniqueItems": true
         },
         "contract_version": {
-          "const": 5
+          "const": 6
         },
         "coverage_attestations": {
           "items": {
@@ -543,6 +542,30 @@
       ],
       "type": "object"
     },
+    "AuthoringTargetHandle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ChildId"
+        },
+        "kind": {
+          "const": "authoring-target-handle"
+        },
+        "schema_version": {
+          "const": 5
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "id",
+        "schema_version"
+      ],
+      "type": "object"
+    },
     "AuthorizationId": {
       "pattern": "^authorization:sha256:[0-9a-f]{64}$",
       "type": "string"
@@ -714,6 +737,7 @@
         },
         "kind": {
           "enum": [
+            "module",
             "modification",
             "addition",
             "removal",
@@ -741,6 +765,32 @@
         "accepted_ids",
         "proposed_ids",
         "scope"
+      ],
+      "type": "object"
+    },
+    "ChangePolicySemantics": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "intent": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "kind": {
+          "const": "change"
+        },
+        "proposed_semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "accepted_semantic_revision",
+        "proposed_semantic_revision",
+        "intent"
       ],
       "type": "object"
     },
@@ -1347,28 +1397,17 @@
         "base_snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
         },
+        "change_set": {
+          "$ref": "#/$defs/StandardsChangeSet"
+        },
         "kind": {
           "const": "create-proposal"
-        },
-        "mutations": {
-          "items": {
-            "$ref": "#/$defs/ReplacementMutation"
-          },
-          "minItems": 1,
-          "type": "array"
-        },
-        "semantic_proposals": {
-          "items": {
-            "$ref": "#/$defs/SemanticProposal"
-          },
-          "type": "array"
         }
       },
       "required": [
         "kind",
         "base_snapshot",
-        "mutations",
-        "semantic_proposals"
+        "change_set"
       ],
       "type": "object"
     },
@@ -1417,6 +1456,46 @@
       "required": [
         "kind",
         "snapshot"
+      ],
+      "type": "object"
+    },
+    "CreateStandardEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "create-standard"
+        },
+        "policy_units": {
+          "items": {
+            "$ref": "#/$defs/NewPolicyUnit"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "requires": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "specializes": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "standard": {
+          "$ref": "#/$defs/StandardContent"
+        }
+      },
+      "required": [
+        "kind",
+        "standard",
+        "requires",
+        "specializes",
+        "policy_units"
       ],
       "type": "object"
     },
@@ -2222,6 +2301,112 @@
         }
       ]
     },
+    "ModuleRelationshipKey": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "module-relationship"
+        },
+        "relation": {
+          "enum": [
+            "requires",
+            "specializes"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "relation",
+        "source",
+        "target"
+      ],
+      "type": "object"
+    },
+    "MovePolicyUnitEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "after_policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "kind": {
+          "const": "move-policy-unit"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "semantics": {
+          "$ref": "#/$defs/PolicySemanticIntent"
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "policy",
+        "standard",
+        "semantics"
+      ],
+      "type": "object"
+    },
+    "NewPolicyUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "aliases": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "heading_chain": {
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "intent": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "predecessors": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "semantic_revision": {
+          "const": 1
+        },
+        "successors": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "heading_chain",
+        "semantic_revision",
+        "intent",
+        "aliases",
+        "predecessors",
+        "successors"
+      ],
+      "type": "object"
+    },
     "NextOperation": {
       "oneOf": [
         {
@@ -2479,6 +2664,70 @@
       ],
       "type": "object"
     },
+    "PolicyRelationship": {
+      "additionalProperties": false,
+      "properties": {
+        "applicability": {
+          "$ref": "#/$defs/ApplicabilityExpression"
+        },
+        "consumer": {
+          "$ref": "#/$defs/RelationshipConsumer"
+        },
+        "consumer_scope": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ReviewScope"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_owner": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "relation": {
+          "enum": [
+            "normative-consumer",
+            "router-projection",
+            "prompt-projection",
+            "template-projection",
+            "reference-projection",
+            "fixture-projection",
+            "enforcement-suite-projection",
+            "documentation-projection",
+            "implementation-projection"
+          ]
+        },
+        "source_policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "source_scope": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ReviewScope"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "source_policy",
+        "consumer",
+        "relation",
+        "applicability",
+        "source_scope",
+        "consumer_scope",
+        "evidence_owner",
+        "rationale"
+      ],
+      "type": "object"
+    },
     "PolicyRelationshipInspection": {
       "additionalProperties": false,
       "properties": {
@@ -2538,6 +2787,40 @@
         "rationale"
       ],
       "type": "object"
+    },
+    "PolicyRelationshipKey": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer": {
+          "$ref": "#/$defs/RelationshipConsumer"
+        },
+        "kind": {
+          "const": "policy-relationship"
+        },
+        "relation": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "source_policy": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "source_policy",
+        "consumer",
+        "relation"
+      ],
+      "type": "object"
+    },
+    "PolicySemanticIntent": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PreservePolicySemantics"
+        },
+        {
+          "$ref": "#/$defs/ChangePolicySemantics"
+        }
+      ]
     },
     "PolicySummary": {
       "additionalProperties": false,
@@ -2661,6 +2944,27 @@
       ],
       "type": "object"
     },
+    "PreservePolicySemantics": {
+      "additionalProperties": false,
+      "properties": {
+        "intent": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "kind": {
+          "const": "preserve"
+        },
+        "semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "semantic_revision",
+        "intent"
+      ],
+      "type": "object"
+    },
     "ProposalHandle": {
       "additionalProperties": false,
       "properties": {
@@ -2770,6 +3074,9 @@
     "ProposalRelatedResult": {
       "additionalProperties": false,
       "properties": {
+        "authoring_target": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
         "kind": {
           "const": "proposal-related-result"
         },
@@ -3003,6 +3310,22 @@
         "contract",
         "contract_version",
         "input_digest"
+      ],
+      "type": "object"
+    },
+    "PutPolicyRelationshipEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "put-policy-relationship"
+        },
+        "relationship": {
+          "$ref": "#/$defs/PolicyRelationship"
+        }
+      },
+      "required": [
+        "kind",
+        "relationship"
       ],
       "type": "object"
     },
@@ -3482,6 +3805,9 @@
     "RelatedResult": {
       "additionalProperties": false,
       "properties": {
+        "authoring_target": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
         "kind": {
           "const": "related-result"
         },
@@ -3520,6 +3846,51 @@
       ],
       "type": "object"
     },
+    "RelationshipConsumer": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        }
+      ]
+    },
+    "RelationshipDisposition": {
+      "additionalProperties": false,
+      "properties": {
+        "disposition": {
+          "enum": [
+            "remove",
+            "retarget"
+          ]
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "relationship": {
+          "$ref": "#/$defs/RelationshipKey"
+        },
+        "replacement_consumer": {
+          "$ref": "#/$defs/RelationshipConsumer"
+        }
+      },
+      "required": [
+        "relationship",
+        "disposition",
+        "rationale",
+        "evidence"
+      ],
+      "type": "object"
+    },
     "RelationshipInspectionResult": {
       "additionalProperties": false,
       "properties": {
@@ -3550,6 +3921,16 @@
         "provenance"
       ],
       "type": "object"
+    },
+    "RelationshipKey": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ModuleRelationshipKey"
+        },
+        {
+          "$ref": "#/$defs/PolicyRelationshipKey"
+        }
+      ]
     },
     "RelationshipSummary": {
       "additionalProperties": false,
@@ -3604,23 +3985,55 @@
       ],
       "type": "object"
     },
-    "ReplacementMutation": {
+    "RemovePolicyRelationshipEdit": {
       "additionalProperties": false,
       "properties": {
-        "op": {
-          "const": "replace"
+        "kind": {
+          "const": "remove-policy-relationship"
         },
-        "path": {
-          "$ref": "#/$defs/NonEmptyString"
-        },
-        "value": {
-          "type": "string"
+        "relationship": {
+          "$ref": "#/$defs/PolicyRelationship"
         }
       },
       "required": [
-        "op",
-        "path",
-        "value"
+        "kind",
+        "relationship"
+      ],
+      "type": "object"
+    },
+    "ReplaceStandardRelationshipsEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "replace-standard-relationships"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "requires": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "specializes": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "standard",
+        "requires",
+        "specializes",
+        "rationale"
       ],
       "type": "object"
     },
@@ -3695,6 +4108,93 @@
         "operation",
         "request_kind",
         "analysis"
+      ],
+      "type": "object"
+    },
+    "RetirePolicyUnitEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "const": "retire-policy-unit"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "relationship_dispositions": {
+          "items": {
+            "$ref": "#/$defs/RelationshipDisposition"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "retired_semantic_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "successors": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "kind",
+        "policy",
+        "retired_semantic_revision",
+        "successors",
+        "relationship_dispositions",
+        "evidence"
+      ],
+      "type": "object"
+    },
+    "RetireStandardEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "const": "retire-standard"
+        },
+        "relationship_dispositions": {
+          "items": {
+            "$ref": "#/$defs/RelationshipDisposition"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "successors": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "kind",
+        "standard",
+        "successors",
+        "relationship_dispositions",
+        "evidence"
       ],
       "type": "object"
     },
@@ -3794,34 +4294,51 @@
         }
       ]
     },
+    "RevisePolicyUnitEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "kind": {
+          "const": "revise-policy-unit"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "semantics": {
+          "$ref": "#/$defs/PolicySemanticIntent"
+        },
+        "title": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "kind",
+        "policy",
+        "title",
+        "body",
+        "semantics"
+      ],
+      "type": "object"
+    },
     "ReviseProposalCall": {
       "additionalProperties": false,
       "properties": {
+        "change_set": {
+          "$ref": "#/$defs/StandardsChangeSet"
+        },
         "expected_revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
         },
         "kind": {
           "const": "revise-proposal"
-        },
-        "mutations": {
-          "items": {
-            "$ref": "#/$defs/ReplacementMutation"
-          },
-          "minItems": 1,
-          "type": "array"
-        },
-        "semantic_proposals": {
-          "items": {
-            "$ref": "#/$defs/SemanticProposal"
-          },
-          "type": "array"
         }
       },
       "required": [
         "kind",
         "expected_revision",
-        "mutations",
-        "semantic_proposals"
+        "change_set"
       ],
       "type": "object"
     },
@@ -3842,6 +4359,22 @@
         "kind",
         "proposal",
         "revision"
+      ],
+      "type": "object"
+    },
+    "ReviseStandardEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "revise-standard"
+        },
+        "standard": {
+          "$ref": "#/$defs/StandardContent"
+        }
+      },
+      "required": [
+        "kind",
+        "standard"
       ],
       "type": "object"
     },
@@ -4105,6 +4638,135 @@
       ],
       "type": "object"
     },
+    "StandardContent": {
+      "additionalProperties": false,
+      "properties": {
+        "applies_when": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "body": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "does_not_apply_when": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "level": {
+          "enum": [
+            "MUST",
+            "SHOULD",
+            "PROFILE",
+            "REFERENCE"
+          ]
+        },
+        "role": {
+          "enum": [
+            "core",
+            "router",
+            "workflow",
+            "profile",
+            "topic",
+            "reference"
+          ]
+        },
+        "title": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "verification": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "role",
+        "level",
+        "applies_when",
+        "does_not_apply_when",
+        "verification",
+        "body"
+      ],
+      "type": "object"
+    },
+    "StandardEdit": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CreateStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/ReviseStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/RevisePolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/MovePolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/RetirePolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/RetireStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/ReplaceStandardRelationshipsEdit"
+        },
+        {
+          "$ref": "#/$defs/PutPolicyRelationshipEdit"
+        },
+        {
+          "$ref": "#/$defs/RemovePolicyRelationshipEdit"
+        }
+      ]
+    },
+    "StandardsChangePurpose": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "summary": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "summary",
+        "rationale",
+        "evidence"
+      ],
+      "type": "object"
+    },
+    "StandardsChangeSet": {
+      "additionalProperties": false,
+      "properties": {
+        "edits": {
+          "items": {
+            "$ref": "#/$defs/StandardEdit"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "purpose": {
+          "$ref": "#/$defs/StandardsChangePurpose"
+        }
+      },
+      "required": [
+        "purpose",
+        "edits"
+      ],
+      "type": "object"
+    },
     "StructuredScope": {
       "additionalProperties": false,
       "properties": {
@@ -4190,7 +4852,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 19,
+  "interface_schema_version": 20,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -4395,7 +5057,7 @@
       ]
     }
   ],
-  "request_contract_version": 4,
-  "result_projection_version": 5,
+  "request_contract_version": 5,
+  "result_projection_version": 6,
   "schema_version": 1
 }

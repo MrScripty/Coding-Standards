@@ -28,6 +28,8 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     AnalysisFailure,
     AuthorizationRequest,
+    ChangeDescriptor,
+    ChangeKind,
     CoverageDefinitionIndex,
     DependencyCause,
     EvidenceReference,
@@ -163,7 +165,6 @@ from .authoring import (
     AuthoringModule,
     CANONICAL_TARGET_BRANCH,
     FindProposalsRequest,
-    Mutation,
     ProposalId,
     ProposalApplication,
     ProposalRevision,
@@ -172,6 +173,13 @@ from .authoring import (
     application_subject,
     application_recovery_subject,
     review_decision_subject,
+)
+from .logical_authoring import (
+    LogicalAuthoringCompiler,
+    LogicalProgram,
+    LogicalProjection,
+    StandardsChangeSet,
+    authoring_target_id,
 )
 
 
@@ -224,24 +232,6 @@ class _GitRevisionSource:
             ) from error
 
 
-class _ProjectedRevisionSource:
-    """Exact replacement overlay over one immutable snapshot capture."""
-
-    def __init__(self, base: FrozenContentSource, revision: ProposalRevision) -> None:
-        self._base = base
-        self._replacements = {
-            str(mutation.path): mutation.value.encode("utf-8")
-            for mutation in revision.mutations
-        }
-
-    def read_bytes(self, path: str) -> bytes:
-        normalized = str(SnapshotPath.parse(path))
-        replacement = self._replacements.get(normalized)
-        if replacement is not None:
-            return replacement
-        return self._base.read_bytes(normalized)
-
-
 @dataclass(frozen=True, slots=True)
 class _QueryProjection:
     """Authority-specific public projection over shared navigation semantics."""
@@ -250,14 +240,19 @@ class _QueryProjection:
     anchor: str
     operation: str
     result_prefix: str
+    authoring_snapshot: SnapshotHandle
 
     @classmethod
     def snapshot(cls, handle: SnapshotHandle) -> _QueryProjection:
-        return cls(handle, "snapshot", "query", "")
+        return cls(handle, "snapshot", "query", "", handle)
 
     @classmethod
-    def proposal(cls, handle: ProposalRevisionHandle) -> _QueryProjection:
-        return cls(handle, "revision", "query_proposal", "proposal-")
+    def proposal(
+        cls,
+        handle: ProposalRevisionHandle,
+        base_snapshot: SnapshotHandle,
+    ) -> _QueryProjection:
+        return cls(handle, "revision", "query_proposal", "proposal-", base_snapshot)
 
     def result(self, request_kind: str) -> dict[str, object]:
         return {
@@ -315,6 +310,15 @@ class _QueryProjection:
             }
         return value
 
+    def authoring_target(self, identity: str) -> dict[str, object]:
+        snapshot = self.authoring_snapshot
+        return {
+            "kind": "authoring-target-handle",
+            "snapshot": snapshot.as_contract(),
+            "id": authoring_target_id(snapshot.id, identity),
+            "schema_version": 5,
+        }
+
     def inspect_operation(self, identity: str) -> dict[str, object] | None:
         if not isinstance(self.authority, SnapshotHandle):
             return None
@@ -351,7 +355,12 @@ class StandardsEngine:
     ) -> None:
         self._repository = repository
         self._snapshots = snapshots
-        self._authoring = AuthoringModule(snapshots)
+        self._logical_authoring = LogicalAuthoringCompiler(self._compile)
+        self._authoring = AuthoringModule(
+            snapshots,
+            validate_revision=self._validate_logical_revision,
+            observe_repository_paths=self._repository_paths_for_snapshot,
+        )
         self._execution_context = execution_context or AnalysisExecutionContext()
         self._application_verifier = lambda root: run_complete_verification(
             root, quiet=True
@@ -472,11 +481,7 @@ class StandardsEngine:
         try:
             summary, revision = self._authoring.create_proposal(
                 self._snapshot_id(call.base_snapshot),
-                (
-                    Mutation(SnapshotPath.parse(item.path), item.value)
-                    for item in call.mutations
-                ),
-                (item.as_contract() for item in call.semantic_proposals),
+                StandardsChangeSet.from_mapping(call.change_set.as_contract()),
             )
             return CreateProposalResult.from_value(
                 {
@@ -485,7 +490,7 @@ class StandardsEngine:
                     "revision": self._proposal_revision_handle(revision.revision_id),
                 }
             )
-        except (AuthoringError, SnapshotError) as error:
+        except self._domain_errors() as error:
             return self._domain_rejection(error)
 
     def find_proposals(
@@ -506,7 +511,7 @@ class StandardsEngine:
             if page.continuation is not None:
                 value["continuation"] = self._proposal_handle(page.continuation)
             return FindProposalsResult.from_value(value)
-        except (AuthoringError, SnapshotError) as error:
+        except self._domain_errors() as error:
             return self._domain_rejection(error)
 
     def revise_proposal(
@@ -515,11 +520,7 @@ class StandardsEngine:
         try:
             summary, revision = self._authoring.revise_proposal(
                 call.expected_revision.id,
-                (
-                    Mutation(SnapshotPath.parse(item.path), item.value)
-                    for item in call.mutations
-                ),
-                (item.as_contract() for item in call.semantic_proposals),
+                StandardsChangeSet.from_mapping(call.change_set.as_contract()),
             )
             return ReviseProposalResult.from_value(
                 {
@@ -528,7 +529,7 @@ class StandardsEngine:
                     "revision": self._proposal_revision_handle(revision.revision_id),
                 }
             )
-        except (AuthoringError, SnapshotError) as error:
+        except self._domain_errors() as error:
             return self._domain_rejection(error)
 
     def delete_snapshot(
@@ -581,8 +582,13 @@ class StandardsEngine:
     ) -> QueryProposalResult | RejectedResult:
         try:
             revision = self._authoring.read_revision(call.revision.id)
-            compiled = self._compiled_revision(revision)
-            projection = _QueryProjection.proposal(call.revision)
+            compiled = self._proposal_projection(revision).compiled
+            projection = _QueryProjection.proposal(
+                call.revision,
+                SnapshotHandle.from_value(
+                    self._snapshot_handle(revision.base_snapshot)
+                ),
+            )
             if isinstance(call.request, RouteRequest):
                 return ProposalRouteResult.from_value(
                     self._route_value(projection, compiled, call.request)
@@ -615,14 +621,18 @@ class StandardsEngine:
         try:
             revision = self._authoring.read_revision(call.revision.id)
             accepted = self._compiled_snapshot(revision.base_snapshot)
-            proposed = self._compiled_revision(revision)
-            semantic_proposals = tuple(
-                self._plain(item) for item in revision.semantic_proposals
+            projection = self._proposal_projection(revision)
+            proposed = projection.compiled
+            semantic_proposals = projection.semantic_proposals
+            affected_policy_ids = set(projection.analysis_policy_ids)
+            affected_policy_ids.update(
+                str(item["policy"]) for item in semantic_proposals
             )
-            changes = derive_change_descriptors(
-                accepted.corpus.policy_unit_corpus,
-                proposed.corpus.policy_unit_corpus,
-                (str(item["policy"]) for item in semantic_proposals),
+            changes = self._proposal_change_descriptors(
+                accepted,
+                proposed,
+                projection,
+                affected_policy_ids,
             )
             attestations, authorizations = self._repository_decisions(
                 changes, accepted, proposed
@@ -770,12 +780,20 @@ class StandardsEngine:
                     "unavailable",
                     "The configured main branch no longer matches the readiness target.",
                 )
-            replacements = tuple(
-                CapturedFile(
-                    RepositoryPath(mutation.path.components),
-                    mutation.value.encode("utf-8"),
+            projection = self._proposal_projection(revision)
+            base_capture = self._snapshots.load_content(revision.base_snapshot)
+            base_files = {str(item.path): item.content for item in base_capture.files}
+            proposed_files = dict(projection.source.files)
+            if set(base_files) != set(proposed_files):
+                return self._reject(
+                    "APPLICATION.TOPOLOGY_UNSUPPORTED",
+                    "unsupported",
+                    "Milestone 1 application supports replacement-only logical projections.",
                 )
-                for mutation in revision.mutations
+            replacements = tuple(
+                CapturedFile(RepositoryPath.parse(path), content)
+                for path, content in sorted(proposed_files.items())
+                if base_files[path] != content
             )
             with self._repository.materialize_candidate(
                 readiness.expected_target, replacements
@@ -1031,11 +1049,27 @@ class StandardsEngine:
         )
 
     def _compiled_revision(self, revision: ProposalRevision) -> CompiledSnapshot:
+        return self._proposal_projection(revision).compiled
+
+    def _proposal_projection(self, revision: ProposalRevision) -> LogicalProjection:
         capture = self._snapshots.load_content(revision.base_snapshot)
         base = FrozenContentSource(
             (str(item.path), item.content) for item in capture.files
         )
-        return self._compile(_ProjectedRevisionSource(base, revision))
+        return self._logical_authoring.compile(
+            base,
+            LogicalProgram(revision.change_sets),
+            base_snapshot=str(revision.base_snapshot),
+            base_repository_paths=revision.base_repository_paths,
+        )
+
+    def _validate_logical_revision(self, revision: ProposalRevision) -> None:
+        self._proposal_projection(revision)
+
+    def _repository_paths_for_snapshot(self, snapshot: SnapshotId) -> tuple[str, ...]:
+        capture = self._snapshots.load_content(snapshot)
+        revision = RepositoryRevision(capture.source_revision)
+        return tuple(str(path) for path in self._repository.revision_paths(revision))
 
     @staticmethod
     def _compile(source: ContentSource) -> CompiledSnapshot:
@@ -1105,7 +1139,7 @@ class StandardsEngine:
                         "Proposal revision and analysis base snapshots differ.",
                     )
                 )
-            proposed = self._compiled_revision(revision)
+            proposed = self._proposal_projection(revision).compiled
         return self._evaluate_compiled(state, accepted, proposed, revision)
 
     def _evaluate_compiled(
@@ -1146,27 +1180,30 @@ class StandardsEngine:
             compiled.coverage,
         )
 
-    @classmethod
     def _validate_projected_inputs(
-        cls,
+        self,
         state: DomainAnalysisState,
         revision: ProposalRevision,
         accepted: CompiledSnapshot,
         proposed: CompiledSnapshot,
     ) -> None:
-        semantic_proposals = tuple(
-            cls._plain(item) for item in revision.semantic_proposals
+        projection = self._proposal_projection(revision)
+        semantic_proposals = projection.semantic_proposals
+        affected_policy_ids = set(projection.analysis_policy_ids)
+        affected_policy_ids.update(str(item["policy"]) for item in semantic_proposals)
+        changes = self._proposal_change_descriptors(
+            accepted,
+            proposed,
+            projection,
+            affected_policy_ids,
         )
-        changes = derive_change_descriptors(
-            accepted.corpus.policy_unit_corpus,
-            proposed.corpus.policy_unit_corpus,
-            (str(item["policy"]) for item in semantic_proposals),
+        retained_changes = tuple(self._plain(item) for item in state.changes)
+        retained_semantic = tuple(
+            self._plain(item) for item in state.semantic_proposals
         )
-        retained_changes = tuple(cls._plain(item) for item in state.changes)
-        retained_semantic = tuple(cls._plain(item) for item in state.semantic_proposals)
-        if cls._canonical_records(retained_changes) != cls._canonical_records(
+        if self._canonical_records(retained_changes) != self._canonical_records(
             item.as_contract() for item in changes
-        ) or cls._canonical_records(retained_semantic) != cls._canonical_records(
+        ) or self._canonical_records(retained_semantic) != self._canonical_records(
             semantic_proposals
         ):
             raise AnalysisError(
@@ -1176,6 +1213,56 @@ class StandardsEngine:
                     "Stored analysis inputs do not match the exact proposal revision.",
                 )
             )
+
+    @staticmethod
+    def _proposal_change_descriptors(
+        accepted: CompiledSnapshot,
+        proposed: CompiledSnapshot,
+        projection: LogicalProjection,
+        affected_policy_ids: Iterable[str],
+    ) -> tuple[ChangeDescriptor, ...]:
+        selected_policy_ids = tuple(affected_policy_ids)
+        policy_changes: tuple[ChangeDescriptor, ...] = ()
+        if (
+            accepted.corpus.policy_unit_corpus != proposed.corpus.policy_unit_corpus
+            or selected_policy_ids
+        ):
+            policy_changes = derive_change_descriptors(
+                accepted.corpus.policy_unit_corpus,
+                proposed.corpus.policy_unit_corpus,
+                selected_policy_ids,
+            )
+        scope = ReviewScope("whole-artifact")
+        module_changes = []
+        for module_id in projection.analysis_module_ids:
+            before = accepted.corpus.resolve_module(module_id)
+            after = proposed.corpus.resolve_module(module_id)
+            if before is None and after is None:
+                continue
+            if (
+                before is not None
+                and after is not None
+                and accepted.source.read_bytes(before.path)
+                == proposed.source.read_bytes(after.path)
+            ):
+                continue
+            module_changes.append(
+                ChangeDescriptor(
+                    ChangeKind.MODULE,
+                    (),
+                    (),
+                    scope,
+                    None if before is None else before.module_id,
+                    None if after is None else after.module_id,
+                )
+            )
+        changes = (*policy_changes, *module_changes)
+        if not changes:
+            return derive_change_descriptors(
+                accepted.corpus.policy_unit_corpus,
+                proposed.corpus.policy_unit_corpus,
+            )
+        return changes
 
     @staticmethod
     def _canonical_records(values: Iterable[Mapping[str, object]]) -> tuple[str, ...]:
@@ -1787,7 +1874,7 @@ class StandardsEngine:
             ],
             "domain_contracts": [self._plain(item) for item in state.domain_contracts],
             "execution_contracts": self._plain(state.execution_contracts),
-            "contract_version": 5,
+            "contract_version": ANALYSIS_CONTRACT_VERSION,
         }
         proposed_ref = state.proposed_material
         value["proposed_reference"] = (
@@ -2255,9 +2342,34 @@ class StandardsEngine:
     ) -> dict[str, object] | RejectedResult:
         selected = _resolve_policy(compiled.corpus, request.target)
         if selected is None:
-            return self._reject(
-                "NAVIGATION.UNKNOWN_POLICY", "unavailable", "The policy is unavailable."
+            artifact = compiled.policy_impact.artifacts.get(request.target)
+            if artifact is None:
+                return self._reject(
+                    "NAVIGATION.UNKNOWN_POLICY",
+                    "unavailable",
+                    "The policy is unavailable.",
+                )
+            relationships = self._relationships_from_targets(
+                projection,
+                compiled,
+                (artifact.id,),
+                tuple(request.groups),
+                Direction.parse(request.direction),
+                request.transitive,
             )
+            return {
+                **projection.result("related"),
+                "target": artifact.id,
+                "authoring_target": projection.authoring_target(artifact.id),
+                "policy_unit_mapping": {
+                    "state": "incomplete",
+                    "reason": "no-policy-units",
+                    "policy_units": [],
+                },
+                "relationships": relationships,
+                "next_operations": [],
+                "summary": f"Found {len(relationships)} declared relationships.",
+            }
         policy, module = selected
         relationships = self._relationships(
             projection,
@@ -2311,6 +2423,24 @@ class StandardsEngine:
                 ),
             )
         )
+        return self._relationships_from_targets(
+            projection,
+            compiled,
+            targets,
+            groups,
+            direction,
+            transitive,
+        )
+
+    def _relationships_from_targets(
+        self,
+        projection: _QueryProjection,
+        compiled: CompiledSnapshot,
+        targets: tuple[str, ...],
+        groups: tuple[str, ...] | None,
+        direction: Direction,
+        transitive: bool,
+    ) -> list[dict[str, object]]:
         chosen: dict[tuple[str, str], dict[str, object]] = {}
         for target in targets:
             if transitive:

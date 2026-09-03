@@ -8,6 +8,9 @@ The package owns no standards semantics, snapshot lifecycle, SQLite storage,
 or public Engine operation. Callers resolve one revision and retain that exact
 value while loaders request files. Worktree changes and later commits cannot
 substitute bytes for the retained revision.
+The Adapter can also return the exact sorted path observation for a retained
+commit tree; callers persist that observation when later deterministic
+projections must survive worktree or branch replacement.
 
 Write-capable callers provide one exact base revision and path-component-safe
 replacement values. The Adapter creates a private local clone, preserves

@@ -120,6 +120,78 @@ class ChangeClassificationTest(unittest.TestCase):
         )
         self.assertTrue(all(item.scope == WHOLE for item in derived))
 
+    def test_derives_unchanged_policy_when_it_seeds_an_affected_graph(self) -> None:
+        unchanged = unit("workflow.test.relationship-source")
+
+        derived = derive_change_descriptors(
+            corpus(unchanged),
+            corpus(unchanged),
+            affected_policy_ids=(unchanged.id,),
+        )
+
+        self.assertEqual(
+            derived,
+            (
+                descriptor(
+                    ChangeKind.MODIFICATION,
+                    (unchanged.id,),
+                    (unchanged.id,),
+                    scope=WHOLE,
+                ),
+            ),
+        )
+        changed = classify_changes(
+            corpus(unchanged),
+            corpus(unchanged),
+            derived,
+        )[0].changed_units[0]
+        self.assertEqual(changed.classification, ChangeClassification.UNCHANGED)
+        self.assertEqual(changed.semantic_state, SemanticState.ACCEPTED_UNCHANGED)
+
+    def test_module_change_seeds_module_graph_without_inventing_a_policy(self) -> None:
+        module_id = "topic.resilience"
+        change = descriptor(
+            ChangeKind.MODULE,
+            (),
+            (),
+            accepted_module=module_id,
+            proposed_module=module_id,
+            scope=WHOLE,
+        )
+
+        classified = classify_changes(
+            corpus(),
+            corpus(),
+            (change,),
+            accepted_module_ids=(module_id,),
+            proposed_module_ids=(module_id,),
+        )[0]
+
+        self.assertEqual(classified.changed_units, ())
+        self.assertEqual(classified.graph.accepted_seeds, (module_id,))
+        self.assertEqual(
+            classified.graph.accepted_groups,
+            (STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+        )
+        self.assertEqual(classified.graph.proposed_seeds, (module_id,))
+        self.assertEqual(
+            classified.graph.proposed_groups,
+            (STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+        )
+
+        with self.assertRaises(AnalysisError) as unavailable:
+            classify_changes(
+                corpus(),
+                corpus(),
+                (change,),
+                accepted_module_ids=(),
+                proposed_module_ids=(module_id,),
+            )
+        self.assertEqual(
+            unavailable.exception.failure.code,
+            "CHANGE.MODULE_UNAVAILABLE",
+        )
+
     def test_derives_split_and_merge_from_lifecycle_links(self) -> None:
         split_source = unit("workflow.test.split-source")
         split_a = unit(
@@ -211,7 +283,9 @@ class ChangeClassificationTest(unittest.TestCase):
         )[0]
 
         changed = result.changed_units[0]
-        self.assertEqual(changed.classification, ChangeClassification.SEMANTICALLY_CHANGED)
+        self.assertEqual(
+            changed.classification, ChangeClassification.SEMANTICALLY_CHANGED
+        )
         self.assertEqual(changed.semantic_state, SemanticState.PROPOSED)
         self.assertEqual(changed.proposed_semantic_revision, 4)
         self.assertEqual(result.graph.accepted_seeds, (before.id,))
@@ -220,7 +294,9 @@ class ChangeClassificationTest(unittest.TestCase):
         self.assertEqual(result.graph.proposed_groups, (POLICY_IMPACT,))
         validate_contract("ChangedPolicyUnit", changed.as_contract())
 
-    def test_representation_only_change_does_not_claim_semantic_equivalence(self) -> None:
+    def test_representation_only_change_does_not_claim_semantic_equivalence(
+        self,
+    ) -> None:
         before = unit()
         after = unit(representation=DIGEST_C)
 
@@ -377,21 +453,30 @@ class ChangeClassificationTest(unittest.TestCase):
             SemanticProposal(before.id, 3, 5, "Intent.", after.structural_digest),
             SemanticProposal(before.id, 3, 4, "Intent.", DIGEST_A),
         ):
-            with self.subTest(proposal=proposal), self.assertRaises(AnalysisError) as caught:
+            with (
+                self.subTest(proposal=proposal),
+                self.assertRaises(AnalysisError) as caught,
+            ):
                 classify_changes(
                     corpus(before),
                     corpus(after),
                     (descriptor(ChangeKind.MODIFICATION, (before.id,), (before.id,)),),
                     (proposal,),
                 )
-            self.assertEqual(caught.exception.failure.code, "CHANGE.SEMANTIC_PROPOSAL_MISMATCH")
+            self.assertEqual(
+                caught.exception.failure.code, "CHANGE.SEMANTIC_PROPOSAL_MISMATCH"
+            )
 
-    def test_addition_requires_semantic_overlay_and_cannot_reuse_tombstone(self) -> None:
+    def test_addition_requires_semantic_overlay_and_cannot_reuse_tombstone(
+        self,
+    ) -> None:
         added = unit(revision=1)
         change = descriptor(ChangeKind.ADDITION, (), (added.id,))
         with self.assertRaises(AnalysisError) as caught:
             classify_changes(corpus(), corpus(added), (change,))
-        self.assertEqual(caught.exception.failure.code, "CHANGE.SEMANTIC_PROPOSAL_REQUIRED")
+        self.assertEqual(
+            caught.exception.failure.code, "CHANGE.SEMANTIC_PROPOSAL_REQUIRED"
+        )
 
         retired = PolicyUnitTombstone(added.id, 1, (), "review.old", "units.toml")
         with self.assertRaises(AnalysisError) as caught:
@@ -399,7 +484,11 @@ class ChangeClassificationTest(unittest.TestCase):
                 corpus(tombstones=(retired,)),
                 corpus(added),
                 (change,),
-                (SemanticProposal(added.id, None, 1, "Intent.", added.structural_digest),),
+                (
+                    SemanticProposal(
+                        added.id, None, 1, "Intent.", added.structural_digest
+                    ),
+                ),
             )
         self.assertEqual(caught.exception.failure.code, "CHANGE.ADDED_ID_EXISTS")
 
@@ -433,7 +522,9 @@ class ChangeClassificationTest(unittest.TestCase):
                 (change,),
                 (SemanticProposal("workflow.other", 1, 2, "Intent.", DIGEST_A),),
             )
-        self.assertEqual(caught.exception.failure.code, "CHANGE.ORPHAN_SEMANTIC_PROPOSAL")
+        self.assertEqual(
+            caught.exception.failure.code, "CHANGE.ORPHAN_SEMANTIC_PROPOSAL"
+        )
 
     def test_same_and_cross_module_moves_select_exact_context(self) -> None:
         before = unit()
@@ -510,8 +601,12 @@ class ChangeClassificationTest(unittest.TestCase):
                 ),
             ),
             (
-                SemanticProposal(first.id, None, 1, "Split first policy.", first.structural_digest),
-                SemanticProposal(second.id, None, 1, "Split second policy.", second.structural_digest),
+                SemanticProposal(
+                    first.id, None, 1, "Split first policy.", first.structural_digest
+                ),
+                SemanticProposal(
+                    second.id, None, 1, "Split second policy.", second.structural_digest
+                ),
             ),
         )[0]
 
@@ -544,8 +639,20 @@ class ChangeClassificationTest(unittest.TestCase):
             predecessors=(first.id, second.id),
         )
         tombstones = (
-            PolicyUnitTombstone(first.id, first.semantic_revision, (merged.id,), "review.merge", "units.toml"),
-            PolicyUnitTombstone(second.id, second.semantic_revision, (merged.id,), "review.merge", "units.toml"),
+            PolicyUnitTombstone(
+                first.id,
+                first.semantic_revision,
+                (merged.id,),
+                "review.merge",
+                "units.toml",
+            ),
+            PolicyUnitTombstone(
+                second.id,
+                second.semantic_revision,
+                (merged.id,),
+                "review.merge",
+                "units.toml",
+            ),
         )
 
         result = classify_changes(
@@ -560,7 +667,13 @@ class ChangeClassificationTest(unittest.TestCase):
                 ),
             ),
             (
-                SemanticProposal(merged.id, None, 1, "Merge policy meaning.", merged.structural_digest),
+                SemanticProposal(
+                    merged.id,
+                    None,
+                    1,
+                    "Merge policy meaning.",
+                    merged.structural_digest,
+                ),
             ),
         )[0]
 

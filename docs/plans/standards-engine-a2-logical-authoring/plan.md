@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1: proposal-safe logical authoring
+**Current phase:** Milestone 2: complete local application
 
-**Next slice:** replace the public repository-shaped proposal payload with the
-admitted atomic logical change set, implement its private projection through
-the existing A1c compiler path, and verify immutable replay and typed failures
+**Next slice:** extend the existing isolated candidate path from exact
+replacement to the Engine-owned add, modify, relocate, and remove topology;
+then create and inspect one proposal-specific standards-compliant local commit
 
 **Acceptance status:** `pending`
 
@@ -38,9 +38,9 @@ canonical Git authority; remote push is not part of this plan.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| LA-A1 | The generated public Interface accepts canonical-ID standards-domain intent and never requires a repository path, full-file replacement, raw Markdown metadata envelope, TOML/JSON representation, SQL, Git ref, or Git object ID from the agent. | `contract` | `repository-supported verification environments` | `automated` | `pending` | pending |
-| LA-A2 | Through the public proposal workflow, an agent can add a standard, revise its authored policy, explicitly change its relationships or placement, remove it, query the exact proposal revision, and analyze the resulting standards graph after process replacement. | `user-workflow` | `required-real` | `automated` | `pending` | pending |
-| LA-A3 | For each supported intent, the Engine updates every mechanically required canonical representation and derived projection selected by current authorities, while semantic relationships, policy-impact declarations, lifecycle meaning, rationale, and evidence originate only from explicit caller or reviewer decisions and are never inferred. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
+| LA-A1 | The generated public Interface accepts canonical-ID standards-domain intent and never requires a repository path, full-file replacement, raw Markdown metadata envelope, TOML/JSON representation, SQL, Git ref, or Git object ID from the agent. | `contract` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
+| LA-A2 | Through the public proposal workflow, an agent can add a standard, revise its authored policy, explicitly change its relationships or placement, remove it, query the exact proposal revision, and analyze the resulting standards graph after process replacement. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
+| LA-A3 | For each supported intent, the Engine updates every mechanically required canonical representation and derived projection selected by current authorities, while semantic relationships, policy-impact declarations, lifecycle meaning, rationale, and evidence originate only from explicit caller or reviewer decisions and are never inferred. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
 | LA-A4 | Apply materializes additions, revisions, relocations, and removals in an isolated candidate, rejects invalid or incomplete authority closure, passes the exact current complete checkpoint, creates a proposal-specific standards-compliant commit, and atomically publishes only the verified commit to the configured local canonical ref. | `system` | `required-real` | `automated` | `pending` | pending |
 | LA-A5 | A1c snapshot and Analysis behavior and A2 proposal-head, readiness, authorization, application, and recovery invariants remain one coherent implementation with no second parser, graph, analyzer, store, semantic authority, or caller-owned persistence/repository mechanism. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
 | LA-A6 | Invalid IDs or content, dangling or cyclic relationships, incomplete semantic declarations, stale proposal or target state, unavailable authority, unsupported retained formats, failed verification, and uncertain publication remain typed and publish no partial canonical result. | `integration` | `repository-supported verification environments` | `automated` | `pending` | pending |
@@ -162,7 +162,7 @@ canonical Git authority; remote push is not part of this plan.
 | End application at the configured local canonical ref. Do not add remote push. | Product and Repository owners | User direction on 2026-09-03 | Any earlier interpretation that A2 must publish to a remote |
 | Admit production implementation after the selected Interface satisfies the product contract and routed standards in one bounded minimum viable test. Do not add another design cycle without a named high-consequence or irreversible issue. | Development Proportionality, Product, and Planning owners | `workflow.development-proportionality` and the observed prior investigation loop | Open-ended prototype/review/re-plan cycles |
 | Keep the existing operation roots and carry one atomic, cumulative, closed `StandardsChangeSet` through `create_proposal` and `revise_proposal`. Support plain authored policy content and registered policy-unit placement, but no public document AST or arbitrary unregistered-section reorganization. | Product, Architecture, Contracts, and Authoring owners | [Milestone 0 Interface admission](reports/m0-interface-admission.md) | Public replacement mutations, a one-edit restriction, a collapsed effect facade, and a general desired-document algebra |
-| Cut over to public Interface v20 and Authoring contract v2 without compatibility overlap; preserve Analysis request v4, result/state v5, handle schema v5, and Snapshot store schema v2. | Contracts, Identity, and Persistence owners | [Milestone 0 consumer and state inventory](reports/m0-current-consumer-inventory.md) | A speculative compatibility reader, store migration framework, or unrelated identity/version change |
+| Cut over to public Interface v20 and Authoring contract v2 without compatibility overlap. Milestone 1 supersedes the provisional Analysis preservation decision only as required by the admitted module-change variant: Analysis request becomes v5 and result/state becomes v6; handle schema v5 and Snapshot store schema v2 remain. | Contracts, Identity, Persistence, and A1c owners | [Milestone 0 consumer and state inventory](reports/m0-current-consumer-inventory.md) plus the Milestone 1 authority-closure correction | A speculative compatibility reader, store migration framework, unrelated identity/version change, or reusing v4/v5 for the new closed variant |
 
 ## Evidence And Oracle Plan
 
@@ -308,6 +308,18 @@ complete Engine-produced standards projection.
 - `tools/standards_engine/tests/test_navigation.py`
 - `tools/standards_engine/tests/test_platform_harness.py`
 - `tools/standards_engine/README.md`
+- `tools/standards_analysis/standards_analysis/changes.py`
+- `tools/standards_analysis/standards_analysis/kernel.py`
+- `tools/standards_analysis/standards_analysis/state.py`
+- `tools/standards_analysis/tests/test_changes.py`
+- `tools/standards_analysis/tests/test_state.py`
+- `tools/standards_contracts/tests/test_projection.py`
+- `tools/repository_git/repository_git/repository.py`
+- `tools/repository_git/tests/test_repository.py`
+- `tools/repository_git/README.md`
+- `tools/standards_verifier/standards_verifier/suite_inputs.py`
+- `tools/standards_verifier/standards_verifier/__init__.py`
+- `tools/standards_verifier/tests/test_suite_inputs.py`
 - `docs/plans/standards-engine-a2-logical-authoring/plan.md`
 - `docs/plans/standards-engine-a2-logical-authoring/execution-ledger.md`
 - `docs/plans/standards-engine-a2-logical-authoring/issues.md`
@@ -320,18 +332,23 @@ other file, Milestone 0 must re-plan before implementation.
 
 **Tasks:**
 
-- [ ] Change the canonical schema and generated facade atomically; remove the
+- [x] Change the canonical schema and generated facade atomically; remove the
   rejected public replacement shape and its old producer/consumer paths unless
   Milestone 0 admitted a real compatibility obligation.
-- [ ] Implement normalized immutable intent, deterministic revision identity,
+- [x] Implement normalized immutable intent, deterministic revision identity,
   validation, persistence/reopen behavior, and proposal-head compare-and-swap.
-- [ ] Implement the private write-side compiler for only the admitted standard
+- [x] Implement the private write-side compiler for only the admitted standard
   lifecycle and relationship operations, delegating existing semantic
   validation to canonical owners.
-- [ ] Reuse the exact A1c projection, navigation, and Analysis paths for the
-  compiled revision; do not introduce a proposal-only parser or graph.
-- [ ] Add focused, generated-contract, persistence, integration, and public
+- [x] Reuse the exact A1c projection, navigation, and Analysis paths for the
+  compiled revision; add the exact A1c module-change seed required for
+  standards with no registered policy units, and do not introduce a
+  proposal-only parser or graph.
+- [x] Add focused, generated-contract, persistence, integration, and public
   cross-process tests for positive and typed-negative cases on both runtimes.
+- [x] Capture the exact base-revision repository path authority in each logical
+  proposal and delegate complete generated suite-input projection to its
+  canonical generator, including topology and repository-index identity.
 
 **Acceptance gate:**
 
@@ -340,7 +357,7 @@ other file, Milestone 0 must re-plan before implementation.
   design matches the Milestone 0 admission and contains no forbidden legacy or
   parallel machinery.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Apply A Complete Standards Change Locally
 

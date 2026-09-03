@@ -35,6 +35,7 @@ from tools.standards_engine.standards_engine import (
     CreateProposalCall,
     CreateProposalResult,
     CreateSnapshotCall,
+    CreateSnapshotResult,
     InspectCall,
     PendingResult,
     PrepareCall,
@@ -61,45 +62,17 @@ from tools.standards_engine.standards_engine.authoring import (
     review_decision_subject,
 )
 from tools.standards_snapshots.standards_snapshots import (
-    CapturedContent,
-    SnapshotFile,
     SnapshotId,
     SnapshotError,
     SnapshotFailure,
-    SnapshotPath,
 )
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 POLICY = "workflow.planning.written-plan-applicability"
-SUITE_INPUTS = "evaluation/standards-effectiveness/generated/suite-inputs.json"
-
-
-def _projected_mutations(
-    planning: str, manifest_content: bytes
-) -> list[dict[str, object]]:
-    manifest = json.loads(manifest_content)
-    planning_entry = next(
-        item for item in manifest["files"] if item["path"] == "workflows/planning.md"
-    )
-    planning_entry["digest"] = (
-        "sha256:" + hashlib.sha256(planning.encode("utf-8")).hexdigest()
-    )
-    projected_manifest = (
-        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-    )
-    return [
-        {
-            "op": "replace",
-            "path": "workflows/planning.md",
-            "value": planning,
-        },
-        {
-            "op": "replace",
-            "path": SUITE_INPUTS,
-            "value": projected_manifest,
-        },
-    ]
+WRITTEN_PLAN_TITLE = "When A Written Plan Is Required"
+ARTIFACT_MODEL_POLICY = "workflow.planning.artifact-model"
+ARTIFACT_MODEL_TITLE = "Artifact Model"
 
 
 def _reference(identifier: str) -> EvidenceReference:
@@ -110,6 +83,49 @@ def _reference(identifier: str) -> EvidenceReference:
         "repository-content",
         "1",
     )
+
+
+def _section_body(document: str, title: str) -> str:
+    marker = f"## {title}\n"
+    if document.count(marker) != 1:
+        raise AssertionError(f"expected one registered section {title!r}")
+    remainder = document.partition(marker)[2]
+    body = remainder.partition("\n## ")[0].strip("\n")
+    if not body:
+        raise AssertionError(f"registered section {title!r} has no body")
+    return body
+
+
+def _policy_change_set(
+    *,
+    policy: str,
+    title: str,
+    body: str,
+    accepted_revision: int,
+    proposed_revision: int,
+    purpose: str,
+) -> dict[str, object]:
+    return {
+        "purpose": {
+            "summary": purpose,
+            "rationale": "Exercise Analysis over explicit logical standards intent.",
+            "evidence": [_reference(f"logical-authoring-{policy}").as_contract()],
+        },
+        "edits": [
+            {
+                "kind": "revise-policy-unit",
+                "policy": policy,
+                "title": title,
+                "body": body,
+                "semantics": {
+                    "kind": "change",
+                    "accepted_semantic_revision": accepted_revision,
+                    "proposed_semantic_revision": proposed_revision,
+                    "intent": purpose,
+                },
+            }
+        ],
+    }
 
 
 def _review_decisions() -> list[dict[str, object]]:
@@ -264,32 +280,53 @@ class AnalysisWorkflowTest(unittest.TestCase):
             facade = AgentToolFacade(engine, _contracts(repository))
             try:
                 expected = engine._repository.branch_revision("main")
-                path = "tools/standards_engine/README.md"
-                content = (repository / path).read_bytes()
-                replacement = content + b"\n<!-- exact application fixture -->\n"
-                base = engine._snapshots.create_snapshot(
-                    CapturedContent(
-                        expected.oid,
-                        (SnapshotFile(SnapshotPath.parse(path), content),),
-                    )
-                ).snapshot
+                path = "workflows/planning.md"
+                planning = (repository / path).read_text(encoding="utf-8")
+                snapshot_result = engine.create_snapshot(
+                    CreateSnapshotCall.from_value({"kind": "create-snapshot"})
+                )
+                self.assertIsInstance(snapshot_result, CreateSnapshotResult)
+                base = snapshot_result.snapshot.snapshot
+                module = engine._compiled_snapshot(
+                    engine._snapshot_id(base)
+                ).corpus.resolve_module("workflow.planning")
+                assert module is not None
+                owner_line = f"- Canonical owner: `{module.path}`\n\n"
+                body = planning.split(owner_line, 1)[1]
+                introduction = (
+                    "This standard is maintained through the Standards Engine.\n\n"
+                )
                 created = CreateProposalResult.from_value(
                     facade.create_proposal(
                         {
                             "kind": "create-proposal",
-                            "base_snapshot": {
-                                "kind": "snapshot-handle",
-                                "id": str(base),
-                                "schema_version": 5,
+                            "base_snapshot": base.as_contract(),
+                            "change_set": {
+                                "purpose": {
+                                    "summary": "exercise logical application",
+                                    "rationale": "Verify exact local application and recovery.",
+                                    "evidence": [
+                                        _reference("logical-application").as_contract()
+                                    ],
+                                },
+                                "edits": [
+                                    {
+                                        "kind": "revise-standard",
+                                        "standard": {
+                                            "id": module.module_id,
+                                            "title": planning.splitlines()[
+                                                0
+                                            ].removeprefix("# "),
+                                            "role": module.role,
+                                            "level": module.level,
+                                            "applies_when": module.applies_when,
+                                            "does_not_apply_when": module.excludes,
+                                            "verification": module.verification,
+                                            "body": introduction + body,
+                                        },
+                                    }
+                                ],
                             },
-                            "mutations": [
-                                {
-                                    "op": "replace",
-                                    "path": path,
-                                    "value": replacement.decode("utf-8"),
-                                }
-                            ],
-                            "semantic_proposals": [],
                         }
                     )
                 )
@@ -358,13 +395,12 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     engine._repository.branch_revision("main"),
                     application.candidate,
                 )
-                self.assertEqual(
-                    engine._repository.read_file(
-                        application.candidate,
-                        RepositoryPath.parse(path),
-                    ),
-                    replacement,
-                )
+                applied_planning = engine._repository.read_file(
+                    application.candidate,
+                    RepositoryPath.parse(path),
+                ).decode("utf-8")
+                self.assertIn(introduction.strip(), applied_planning)
+                self.assertNotEqual(applied_planning, planning)
             finally:
                 facade.close()
 
@@ -438,10 +474,10 @@ class AnalysisWorkflowTest(unittest.TestCase):
         files = {str(item.path): item.content for item in capture.files}
         planning = files["workflows/planning.md"].decode("utf-8")
         initial_content = planning.replace(
-            "Store a planned effort under one directory:",
-            "Store an analyzed proposed effort under one directory:",
+            "Create a written plan when the change introduces material sequencing,",
+            "Create an analyzed proposed plan when the change introduces material sequencing,",
         )
-        revised_content = planning.replace(
+        revised_content = initial_content.replace(
             "Store a planned effort under one directory:",
             "Store a later proposed effort under one directory:",
         )
@@ -451,10 +487,14 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 {
                     "kind": "create-proposal",
                     "base_snapshot": self.snapshot.as_contract(),
-                    "mutations": _projected_mutations(
-                        initial_content, files[SUITE_INPUTS]
+                    "change_set": _policy_change_set(
+                        policy=POLICY,
+                        title=WRITTEN_PLAN_TITLE,
+                        body=_section_body(initial_content, WRITTEN_PLAN_TITLE),
+                        accepted_revision=1,
+                        proposed_revision=2,
+                        purpose="Analyze one exact logical policy revision.",
                     ),
-                    "semantic_proposals": [],
                 }
             )
         )
@@ -473,10 +513,14 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 {
                     "kind": "revise-proposal",
                     "expected_revision": created.revision.as_contract(),
-                    "mutations": _projected_mutations(
-                        revised_content, files[SUITE_INPUTS]
+                    "change_set": _policy_change_set(
+                        policy=ARTIFACT_MODEL_POLICY,
+                        title=ARTIFACT_MODEL_TITLE,
+                        body=_section_body(revised_content, ARTIFACT_MODEL_TITLE),
+                        accepted_revision=1,
+                        proposed_revision=2,
+                        purpose="Analyze the immutable successor proposal revision.",
                     ),
-                    "semantic_proposals": [],
                 }
             )
         )
@@ -509,6 +553,139 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertIsInstance(successor_state, AnalysisInspectionResult)
         self.assertEqual(successor_state.state.proposed_reference, created.revision)
 
+    def test_relationship_only_proposals_enter_a1c_and_replay_cold(self) -> None:
+        module_change = {
+            "purpose": {
+                "summary": "Analyze one explicit module relationship change.",
+                "rationale": "Exercise A1c without changing policy text.",
+                "evidence": [_reference("module-relationship-change").as_contract()],
+            },
+            "edits": [
+                {
+                    "kind": "replace-standard-relationships",
+                    "standard": "topic.resilience",
+                    "requires": [
+                        "core",
+                        "topic.contracts",
+                        "topic.architecture",
+                        "workflow.verification",
+                    ],
+                    "specializes": [],
+                    "rationale": "Verification becomes an explicit prerequisite.",
+                }
+            ],
+        }
+        policy_change = {
+            "purpose": {
+                "summary": "Analyze one explicit policy relationship change.",
+                "rationale": "Exercise policy-impact analysis without changing policy text.",
+                "evidence": [_reference("policy-relationship-change").as_contract()],
+            },
+            "edits": [
+                {
+                    "kind": "put-policy-relationship",
+                    "relationship": {
+                        "source_policy": "topic.architecture.authority-scope-admission",
+                        "consumer": "workflow.verification",
+                        "relation": "normative-consumer",
+                        "applicability": {"operator": "always"},
+                        "source_scope": None,
+                        "consumer_scope": None,
+                        "evidence_owner": "suite:core-simplicity",
+                        "rationale": "Verification consumes authority-scope admission.",
+                    },
+                }
+            ],
+        }
+        capture = self.engine._snapshots.load_content(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        resilience_text = next(
+            item.content.decode("utf-8")
+            for item in capture.files
+            if str(item.path) == "topics/resilience.md"
+        )
+        resilience = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(self.snapshot)
+        ).corpus.resolve_module("topic.resilience")
+        assert resilience is not None
+        owner_line = f"- Canonical owner: `{resilience.path}`\n\n"
+        resilience_body = resilience_text.split(owner_line, 1)[1]
+        whole_standard_change = {
+            "purpose": {
+                "summary": "Analyze one unmapped whole-standard revision.",
+                "rationale": "Exercise A1c without inventing a policy owner.",
+                "evidence": [_reference("whole-standard-change").as_contract()],
+            },
+            "edits": [
+                {
+                    "kind": "revise-standard",
+                    "standard": {
+                        "id": resilience.module_id,
+                        "title": resilience_text.splitlines()[0].removeprefix("# "),
+                        "role": resilience.role,
+                        "level": resilience.level,
+                        "applies_when": resilience.applies_when,
+                        "does_not_apply_when": resilience.excludes,
+                        "verification": resilience.verification,
+                        "body": (
+                            "This revision exercises unmapped module analysis.\n\n"
+                            + resilience_body
+                        ),
+                    },
+                }
+            ],
+        }
+        results = []
+        for index, change_set in enumerate(
+            (module_change, policy_change, whole_standard_change)
+        ):
+            created = self.engine.create_proposal(
+                CreateProposalCall.from_value(
+                    {
+                        "kind": "create-proposal",
+                        "base_snapshot": self.snapshot.as_contract(),
+                        "change_set": change_set,
+                    }
+                )
+            )
+            self.assertIsInstance(created, CreateProposalResult)
+            result = self.engine.analyze_proposal(AnalyzeProposalCall(created.revision))
+            self.assertIsInstance(result, PendingResult)
+            assert isinstance(result, PendingResult)
+            self.assertTrue(result.changes)
+            evaluation = self.engine._evaluate(
+                self.engine._load_analysis(result.handle)
+            )
+            if index in {0, 2}:
+                self.assertTrue(
+                    any(
+                        change.descriptor.kind.value == "module"
+                        and change.changed_units == ()
+                        for change in evaluation.changes
+                    )
+                )
+            else:
+                self.assertTrue(
+                    any(
+                        unit.classification.value == "unchanged"
+                        for change in evaluation.changes
+                        for unit in change.changed_units
+                    )
+                )
+            results.append(result)
+
+        reopened = StandardsEngine.open_repository(
+            REPO_ROOT,
+            store_path=self.store,
+            execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+        )
+        try:
+            replayed = reopened._evaluate(reopened._load_analysis(results[0].handle))
+        finally:
+            reopened.close()
+        self.assertEqual(replayed.state.analysis_id, results[0].handle.id)
+
     def test_review_composition_publishes_readiness_for_complete_analysis(self) -> None:
         capture = self.engine._snapshots.load_content(
             self.engine._snapshot_id(self.snapshot)
@@ -531,22 +708,14 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 {
                     "kind": "create-proposal",
                     "base_snapshot": self.snapshot.as_contract(),
-                    "mutations": [
-                        {
-                            "op": "replace",
-                            "path": "workflows/commit.md",
-                            "value": commit_workflow,
-                        }
-                    ],
-                    "semantic_proposals": [
-                        {
-                            "policy": policy.id,
-                            "accepted_semantic_revision": policy.semantic_revision,
-                            "proposed_semantic_revision": policy.semantic_revision + 1,
-                            "intent": "Exercise one real A1c semantic review path.",
-                            "structural_digest": policy.structural_digest,
-                        }
-                    ],
+                    "change_set": _policy_change_set(
+                        policy=policy.id,
+                        title=policy.heading_path[-1],
+                        body=_section_body(commit_workflow, policy.heading_path[-1]),
+                        accepted_revision=policy.semantic_revision,
+                        proposed_revision=policy.semantic_revision + 1,
+                        purpose="Exercise one real A1c semantic review path.",
+                    ),
                 }
             )
         )
@@ -1195,7 +1364,7 @@ finally:
                 }
             ],
             "semantic_proposals": [],
-            "contract_version": 4,
+            "contract_version": 5,
         }
         if prior is not None:
             request["prior_analysis"] = prior

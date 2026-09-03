@@ -16,7 +16,7 @@ from .errors import AnalysisError, AnalysisFailure
 from .keys import analysis_identity, analysis_key, analysis_key_bytes, raw_digest
 
 
-ANALYSIS_CONTRACT_VERSION = 5
+ANALYSIS_CONTRACT_VERSION = 6
 ANALYSIS_IDENTITY_DOMAIN = "coding-standards:analysis:v6"
 ANALYSIS_AGGREGATE_KIND = "analysis-state"
 ANALYSIS_STATE_FIELDS = {
@@ -68,7 +68,11 @@ def _records(
     selected = []
     by_key: dict[str, bytes] = {}
     for supplied in values:
-        item = supplied if isinstance(supplied, IdentityObject) else _record(supplied, label)
+        item = (
+            supplied
+            if isinstance(supplied, IdentityObject)
+            else _record(supplied, label)
+        )
         plain = _plain(item)
         if not isinstance(plain, dict) or type(plain.get(key)) is not str:
             raise _error(
@@ -87,9 +91,7 @@ def _records(
         selected.append(item)
     return tuple(
         item
-        for _, item in sorted(
-            {_record_bytes(item): item for item in selected}.items()
-        )
+        for _, item in sorted({_record_bytes(item): item for item in selected}.items())
     )
 
 
@@ -348,11 +350,15 @@ class AnalysisState:
     @classmethod
     def decode(cls, payload: bytes) -> AnalysisState:
         if type(payload) is not bytes:
-            raise _error("ANALYSIS.INVALID_STATE", "Analysis state payload must be bytes.")
+            raise _error(
+                "ANALYSIS.INVALID_STATE", "Analysis state payload must be bytes."
+            )
         try:
             raw = json.loads(payload)
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
-            raise _error("ANALYSIS.INVALID_STATE", "Analysis state payload is invalid.") from error
+            raise _error(
+                "ANALYSIS.INVALID_STATE", "Analysis state payload is invalid."
+            ) from error
         if type(raw) is not dict or type(raw.get("contract_version")) is not int:
             raise _error(
                 "ANALYSIS.INVALID_STATE",
@@ -399,7 +405,8 @@ class AnalysisState:
     def with_decisions(
         self,
         *,
-        fact_observations: Iterable[Mapping[str, object] | IdentityObject] | None = None,
+        fact_observations: Iterable[Mapping[str, object] | IdentityObject]
+        | None = None,
         dispositions: Iterable[Mapping[str, object] | IdentityObject] | None = None,
         coverage_attestations: Iterable[Mapping[str, object] | IdentityObject]
         | None = None,

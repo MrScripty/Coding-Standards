@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 19,
+  "interface_schema_version": 20,
   "examples": [
     {
       "name": "create-snapshot",
@@ -52,14 +52,34 @@
           "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
           "schema_version": 5
         },
-        "mutations": [
-          {
-            "op": "replace",
-            "path": "workflows/planning.md",
-            "value": "# Planning\n"
-          }
-        ],
-        "semantic_proposals": []
+        "change_set": {
+          "purpose": {
+            "summary": "Clarify when written plans are required",
+            "rationale": "The policy should distinguish coordination risk from file-category triggers.",
+            "evidence": [
+              {
+                "id": "evidence.planning-review",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          "edits": [
+            {
+              "kind": "revise-policy-unit",
+              "policy": "workflow.planning.written-plan-applicability",
+              "title": "When A Written Plan Is Required",
+              "body": "Create a written plan when material sequencing, coordination, rollout, risk, or acceptance complexity must remain stable during implementation.",
+              "semantics": {
+                "kind": "change",
+                "accepted_semantic_revision": 1,
+                "proposed_semantic_revision": 2,
+                "intent": "Make coordination complexity, rather than file category, the deciding planning trigger."
+              }
+            }
+          ]
+        }
       }
     },
     {
@@ -80,14 +100,34 @@
           "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "schema_version": 1
         },
-        "mutations": [
-          {
-            "op": "replace",
-            "path": "workflows/planning.md",
-            "value": "# Revised planning\n"
-          }
-        ],
-        "semantic_proposals": []
+        "change_set": {
+          "purpose": {
+            "summary": "Refine the written-plan exclusion",
+            "rationale": "The bounded-local exclusion should remain explicit after the initial policy revision.",
+            "evidence": [
+              {
+                "id": "evidence.planning-follow-up",
+                "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          "edits": [
+            {
+              "kind": "revise-policy-unit",
+              "policy": "workflow.planning.written-plan-applicability",
+              "title": "When A Written Plan Is Required",
+              "body": "Apply the bounded-local exclusion first, then create a written plan only when material coordination or acceptance complexity must remain stable during implementation.",
+              "semantics": {
+                "kind": "change",
+                "accepted_semantic_revision": 1,
+                "proposed_semantic_revision": 2,
+                "intent": "Preserve the bounded-local exclusion while tightening the planning trigger."
+              }
+            }
+          ]
+        }
       }
     },
     {
@@ -274,7 +314,7 @@
             }
           ],
           "semantic_proposals": [],
-          "contract_version": 4
+          "contract_version": 5
         }
       }
     },

@@ -18,6 +18,7 @@ STANDARDS_SPECIALIZES = "standards-specializes"
 
 
 class ChangeKind(str, Enum):
+    MODULE = "module"
     MODIFICATION = "modification"
     ADDITION = "addition"
     REMOVAL = "removal"
@@ -38,6 +39,10 @@ class ChangedPolicyKind(str, Enum):
 
 
 CHANGE_GRAPH_GROUPS = {
+    "module": (
+        (STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+        (STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+    ),
     "modification": ((POLICY_IMPACT,), (POLICY_IMPACT,)),
     "addition": (
         (),
@@ -166,7 +171,9 @@ class ClassifiedChange:
     graph: GraphSeedSelection
 
 
-def _error(code: str, message: str, *, field: str | None = None, observed: str | None = None) -> AnalysisError:
+def _error(
+    code: str, message: str, *, field: str | None = None, observed: str | None = None
+) -> AnalysisError:
     return AnalysisError(
         AnalysisFailure(code, "invalid", message, field=field, observed=observed)
     )
@@ -175,11 +182,11 @@ def _error(code: str, message: str, *, field: str | None = None, observed: str |
 def derive_change_descriptors(
     accepted: PolicyUnitCorpus,
     proposed: PolicyUnitCorpus,
-    semantic_policy_ids: Iterable[str] = (),
+    affected_policy_ids: Iterable[str] = (),
 ) -> tuple[ChangeDescriptor, ...]:
     """Derive the smallest truthful A1c change set from two compiled corpora."""
 
-    proposals = set(semantic_policy_ids)
+    affected = set(affected_policy_ids)
     accepted_units = {item.id: item for item in accepted.units}
     proposed_units = {item.id: item for item in proposed.units}
     accepted_only = set(accepted_units) - set(proposed_units)
@@ -192,16 +199,15 @@ def derive_change_descriptors(
     for policy_id in sorted(set(accepted_units).intersection(proposed_units)):
         before = accepted_units[policy_id]
         after = proposed_units[policy_id]
-        if before == after and policy_id not in proposals:
+        if before == after and policy_id not in affected:
             continue
         kind = (
             ChangeKind.MOVE
-            if (before.module, before.heading_path) != (after.module, after.heading_path)
+            if (before.module, before.heading_path)
+            != (after.module, after.heading_path)
             else ChangeKind.MODIFICATION
         )
-        descriptors.append(
-            ChangeDescriptor(kind, (policy_id,), (policy_id,), scope)
-        )
+        descriptors.append(ChangeDescriptor(kind, (policy_id,), (policy_id,), scope))
 
     for policy_id in sorted(accepted_only):
         retired = proposed.resolve(policy_id)
@@ -246,6 +252,9 @@ def classify_changes(
     proposed: PolicyUnitCorpus,
     descriptors: Iterable[ChangeDescriptor],
     semantic_proposals: Iterable[SemanticProposal] = (),
+    *,
+    accepted_module_ids: Iterable[str] = (),
+    proposed_module_ids: Iterable[str] = (),
 ) -> tuple[ClassifiedChange, ...]:
     selected = tuple(descriptors)
     proposals = tuple(semantic_proposals)
@@ -270,6 +279,9 @@ def classify_changes(
         by_policy[proposal.policy] = proposal
 
     claimed: set[str] = set()
+    claimed_modules: set[str] = set()
+    accepted_modules = set(accepted_module_ids)
+    proposed_modules = set(proposed_module_ids)
     results: list[ClassifiedChange] = []
     for descriptor in selected:
         identities = set((*descriptor.accepted_ids, *descriptor.proposed_ids))
@@ -282,8 +294,30 @@ def classify_changes(
                 observed=sorted(overlap)[0],
             )
         claimed.update(identities)
+        module_identities = {
+            item
+            for item in (descriptor.accepted_module, descriptor.proposed_module)
+            if item is not None
+        }
+        if descriptor.kind is ChangeKind.MODULE:
+            module_overlap = claimed_modules.intersection(module_identities)
+            if module_overlap:
+                raise _error(
+                    "CHANGE.DUPLICATE_MODULE",
+                    "one module identity cannot be classified by multiple module changes",
+                    field="changes",
+                    observed=sorted(module_overlap)[0],
+                )
+            claimed_modules.update(module_identities)
         results.append(
-            _classify_change(accepted, proposed, descriptor, by_policy)
+            _classify_change(
+                accepted,
+                proposed,
+                descriptor,
+                by_policy,
+                accepted_modules,
+                proposed_modules,
+            )
         )
 
     unused = sorted(set(by_policy) - claimed)
@@ -302,7 +336,15 @@ def _classify_change(
     proposed: PolicyUnitCorpus,
     descriptor: ChangeDescriptor,
     proposals: dict[str, SemanticProposal],
+    accepted_modules: set[str],
+    proposed_modules: set[str],
 ) -> ClassifiedChange:
+    if descriptor.kind is ChangeKind.MODULE:
+        return _module_change(
+            descriptor,
+            accepted_modules,
+            proposed_modules,
+        )
     if descriptor.kind is ChangeKind.MODIFICATION:
         return _modification(accepted, proposed, descriptor, proposals)
     if descriptor.kind is ChangeKind.ADDITION:
@@ -320,6 +362,48 @@ def _classify_change(
         "change kind is not implemented by the current admitted slice",
         field="kind",
         observed=str(descriptor.kind),
+    )
+
+
+def _module_change(
+    descriptor: ChangeDescriptor,
+    accepted_modules: set[str],
+    proposed_modules: set[str],
+) -> ClassifiedChange:
+    before = descriptor.accepted_module
+    after = descriptor.proposed_module
+    if (
+        descriptor.accepted_ids
+        or descriptor.proposed_ids
+        or (before is None and after is None)
+        or (before is not None and after is not None and before != after)
+        or descriptor.scope.kind != "whole-artifact"
+    ):
+        raise _shape_error(ChangeKind.MODULE)
+    if before is not None and before not in accepted_modules:
+        raise _error(
+            "CHANGE.MODULE_UNAVAILABLE",
+            "accepted module change target is unavailable",
+            field="accepted_module",
+            observed=before,
+        )
+    if after is not None and after not in proposed_modules:
+        raise _error(
+            "CHANGE.MODULE_UNAVAILABLE",
+            "proposed module change target is unavailable",
+            field="proposed_module",
+            observed=after,
+        )
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind.value]
+    return ClassifiedChange(
+        descriptor,
+        (),
+        GraphSeedSelection(
+            () if before is None else (before,),
+            () if before is None else accepted_groups,
+            () if after is None else (after,),
+            () if after is None else proposed_groups,
+        ),
     )
 
 
@@ -578,9 +662,7 @@ def _move(
         descriptor.scope,
     )
     profile = (
-        "move-same-module"
-        if before.module == after.module
-        else "move-cross-module"
+        "move-same-module" if before.module == after.module else "move-cross-module"
     )
     accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[profile]
     accepted_seeds = (policy_id,)

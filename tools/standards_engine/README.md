@@ -2,29 +2,45 @@
 
 `tools/standards_engine/` is the typed composition facade for standards
 navigation, immutable analysis, and controlled authoring. Callers use canonical
-IDs and opaque handles; repository paths, metadata layouts, graph declarations,
-store locations, and source locators remain internal unless explicitly
-inspected.
+IDs, authored policy title/body content, explicit semantics, and opaque handles.
+Repository paths, complete files, Markdown metadata envelopes, TOML/JSON
+projections, SQLite records, Git refs/object IDs, and source locators remain
+private Engine implementation facts unless explicitly inspected.
 
 The public operations are snapshot-bound `query`, immutable-state `prepare` and
 `resolve`, handle-based `inspect`, and the admitted A2 authoring operations
 `create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, and
 `analyze_proposal`, followed by `review_proposal` and `apply_proposal`.
-Proposal creation
-stores exact non-Git replacement material under an immutable revision and a
-durable proposal head; revision advances that head only from its exact expected
-revision, and stale requests publish nothing. Discovery and internal revision
-readback reconstruct opaque identities after process replacement and revalidate
-persisted authority before use. `query_proposal` overlays one exact historical
-revision on its retained base snapshot and sends the resulting material through
-the same compiler, Router, and neutral standards graph as A1c `query`. Its
-results and continuations are revision-anchored projections and do not mint
-snapshot or inspect handles. The facade owns and closes its Engine/store
-lifecycle when opened from a repository. `analyze_proposal` derives normalized
-policy-unit changes from one exact revision and its base, then creates the same
-immutable A1c Analysis state used by `prepare` and `resolve`. Exact revision
-identity participates in cold replay without treating projected material as a
-snapshot. `review_proposal` accepts only a complete current revision analysis
+In Interface version 20, proposal creation and revision each carry one atomic
+`StandardsChangeSet`: an evidence-backed purpose plus explicit standards-domain
+edits. The common focused revision names a canonical policy unit and supplies
+its title, authored body, and preserve/change semantic intent. Creation,
+retirement, registered policy-unit movement, `Requires`/`Specializes` changes,
+and policy-impact or broader semantic relationships use other closed edit
+variants. No edit accepts paths or serialized repository files.
+
+Each accepted revision appends its normalized change set to an immutable
+logical program and advances the durable proposal head only from its exact
+expected revision; stale or invalid requests publish nothing. The Engine
+privately projects that program to the fixed Markdown, TOML, and JSON
+authorities and sends the result through the same compiler, Router, neutral
+standards graph, and coverage owners as A1c. Discovery and revision readback
+reconstruct the exact logical authority from SQLite after process replacement.
+`query_proposal` reads one exact historical revision; its results and
+continuations are revision-anchored projections and do not mint Snapshot or
+inspection authority. A `related` query for an exact non-standard relationship
+consumer returns an opaque `authoring_target` bound to the query Snapshot (or a
+proposal's retained base Snapshot). Relationship edits submit that handle;
+they never submit the consumer's repository locator as authoring input. The
+facade owns and closes its Engine/store lifecycle when opened from a repository.
+
+`analyze_proposal` derives normalized policy-unit changes and A1c semantic
+proposals from explicit authoring intent and the compiled base/candidate, then
+creates the same immutable A1c Analysis state used by `prepare` and `resolve`.
+Authoring callers do not submit `semantic_proposals`; that field remains an A1c
+Analysis representation. Exact revision identity participates in cold replay
+without treating projected material as a Snapshot. `review_proposal` accepts
+only a complete current revision analysis
 with no `requires-change` disposition and three explicit evidence-backed
 consumer, impact, and audit acceptances. The Engine derives the proposal head,
 configured `refs/heads/main`, and Standards Verifier `complete` checkpoint,
@@ -35,7 +51,10 @@ candidate in a private local clone, and runs the Standards Verifier `complete`
 checkpoint against the exact checkout before import. It records immutable
 verified intent, advances only `refs/heads/main` with an expected-target
 compare-and-swap, observes the exact candidate, and records an immutable
-applied outcome before returning `applied`. Ambiguous post-verification
+applied outcome before returning `applied`. During Milestone 1, application is
+supported only when the logical projection changes existing paths; applying
+added or removed paths follows in Milestone 2. Application is local and never
+pushes a remote. Ambiguous post-verification
 publication or persistence returns the durable application handle as
 `recovery-required`. Application admission atomically records one immutable
 readiness-to-application selection with the verified intent.

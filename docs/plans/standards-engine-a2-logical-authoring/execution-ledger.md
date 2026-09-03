@@ -91,3 +91,93 @@ create ledger entries.
   [Interface admission](reports/m0-interface-admission.md). The task-owned
   scratch directory, prototype source, SQLite file, and dependency cache were
   deleted after these results were recorded.
+
+## 2026-09-03 — Milestone 1 Authority-Closure Correction
+
+- Trigger: independent integration review proved that relationship-only edits
+  had no A1c analysis seed and that the provisional suite-input updater changed
+  existing digests without recomputing topology or repository-index identity.
+  Both defects directly violate the admitted Milestone 1 gate; neither is an
+  adjacent uncertainty.
+- Re-plan: expand the Milestone 1 write set only to the existing Repository Git
+  path-observation owner and the canonical suite-input generator plus their
+  focused tests and Adapter documentation. No Snapshot schema, second graph,
+  second generator, or public repository-shaped input is admitted.
+- Implementation decision: persist the exact base-revision path observation in
+  the immutable proposal revision, then let the canonical suite-input owner
+  compile against Engine-materialized captured authority and an explicit
+  proposed path observation. Seed relationship-only analysis with unchanged
+  affected policy units so the existing A1c classifier and graph comparison
+  remain the sole Analysis implementation.
+- Rejected correction: using an unchanged affected-policy seed works for
+  policy relationships but choosing one policy to represent a module
+  relationship is arbitrary and fails for standards with no registered policy
+  units. Do not retain that bridge.
+- A1c owner correction: admit one truthful `module` change descriptor with no
+  policy IDs, exact accepted/proposed module identities, and existing
+  `standards-requires`/`standards-specializes` graph groups. The existing A1c
+  kernel, impact traversal, and unmapped-normative obligation generator remain
+  the only Analysis implementation; the public Analysis state shape gains only
+  the new closed change-kind value.
+- Version consequence: because `module` extends the closed Analysis request and
+  persisted-state algebra, advance the request contract from v4 to v5 and the
+  result/state contract from v5 to v6 in the same coordinated Interface v20
+  cutover. The Milestone 0 inventory found no retained external state or
+  independently deployed consumer requiring overlap.
+- Stopping condition: public relationship-only analysis/reopen tests and exact
+  create/remove suite-input equality against the canonical generator pass; no
+  further design investigation is authorized by this finding.
+
+## 2026-09-03 — Milestone 1 Accepted
+
+- Operation: `accept` Milestone 1 and advance the active phase to Milestone 2.
+- Public cutover: Interface v20 and Authoring contract v2 replace the public
+  repository-shaped proposal mutation with one normalized cumulative
+  `StandardsChangeSet`. The generated facade, canonical schema, examples,
+  persisted revision identity, and cold reader changed atomically; the
+  refreshed inventory required no compatibility overlap.
+- Engine projection: one private fixed-authority compiler resolves canonical
+  IDs and opaque authoring targets, updates the current Markdown, corpus,
+  policy-unit, policy-impact, and generated suite-input representations, then
+  delegates semantic validation and projection to their existing owners. It
+  does not infer relationships, impact, lifecycle, or review decisions.
+- A1c composition: policy relationship edits retain their exact source-policy
+  seed. Whole-standard and module-relationship edits use the new exact A1c
+  `module` descriptor with no invented policy owner. Analysis request v5 and
+  result/state v6 record that closed variant; handle schema v5 and Snapshot
+  store schema v2 remain.
+- Path authority: each immutable proposal revision captures the exact path set
+  of its base Git tree. Logical projection materializes that captured
+  authority and delegates topology and repository-index calculation to the
+  canonical suite-input generator.
+- Positive evidence: public create, focused revision, relationship and
+  placement reorganization, retirement, exact query, A1c analysis, stale-head
+  rejection, deterministic identity, typed negatives, and SQLite cold replay
+  pass. The final no-policy-module, policy-relationship, whole-standard, and
+  cold-replay workflow passed in 234.588 seconds after the last source-equality
+  correction.
+- Component evidence: 86 of 86 `standards_analysis`, 20 of 20
+  `standards_contracts`, 10 of 10 Repository Git, and 15 of 15 canonical
+  suite-input tests pass; contract projections and changed-source Ruff checks
+  pass.
+- Runtime evidence: full Standards Engine discovery ran 63 tests on both Linux
+  CPython 3.11 and 3.12. Sixty-two tests passed on each initial run; the sole
+  application test correctly rejected while final documentation made the
+  generated inventory stale. After the staged source/index became stable and
+  the canonical inventory was regenerated, that exact application test passed
+  on both runtimes, completing equivalent 63-of-63 evidence without repeating
+  the unaffected tests.
+- Repository evidence: the final complete checkpoint passes all 270
+  declarative suites and seven retained Bash checkers; plan structure,
+  generated inventory and contract freshness, diff hygiene, staged scope, and
+  sensitive-file review pass.
+- Independent audit: the final read-only specification and routed-standards
+  review found no actionable blocker and confirmed that the arbitrary-policy
+  bridge, duplicate suite-input generation, and successor-validity gaps are
+  closed at their canonical owners.
+- Scope boundary: Milestone 1 creates immutable, analyzable logical proposals
+  but intentionally retains replacement-only application. Add/remove/relocate
+  candidate topology and proposal-specific local commit publication remain
+  Milestone 2. Remote push remains out of scope.
+- Persistent evidence:
+  [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md).

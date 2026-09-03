@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import subprocess
 import tempfile
 import unittest
@@ -9,6 +8,7 @@ from pathlib import Path
 
 from tools.standards_engine.standards_engine import (
     AgentToolFacade,
+    AuthoringTargetHandle,
     CreateProposalCall,
     CreateProposalResult,
     CreateSnapshotCall,
@@ -34,34 +34,61 @@ from tools.standards_engine.standards_engine.tools import _contracts
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SUITE_INPUTS = "evaluation/standards-effectiveness/generated/suite-inputs.json"
+WRITTEN_PLAN_POLICY = "workflow.planning.written-plan-applicability"
+WRITTEN_PLAN_TITLE = "When A Written Plan Is Required"
+ARTIFACT_MODEL_POLICY = "workflow.planning.artifact-model"
+ARTIFACT_MODEL_TITLE = "Artifact Model"
 
 
-def _projected_mutations(
-    planning: str, manifest_content: bytes
-) -> list[dict[str, object]]:
-    manifest = json.loads(manifest_content)
-    planning_entry = next(
-        item for item in manifest["files"] if item["path"] == "workflows/planning.md"
-    )
-    planning_entry["digest"] = (
-        "sha256:" + hashlib.sha256(planning.encode("utf-8")).hexdigest()
-    )
-    projected_manifest = (
-        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-    )
-    return [
-        {
-            "op": "replace",
-            "path": "workflows/planning.md",
-            "value": planning,
+def _section_body(document: str, title: str) -> str:
+    marker = f"## {title}\n"
+    if document.count(marker) != 1:
+        raise AssertionError(f"expected one registered section {title!r}")
+    remainder = document.partition(marker)[2]
+    body = remainder.partition("\n## ")[0].strip("\n")
+    if not body:
+        raise AssertionError(f"registered section {title!r} has no body")
+    return body
+
+
+def _policy_change_set(
+    document: str,
+    *,
+    policy: str,
+    title: str,
+    accepted_revision: int,
+    proposed_revision: int,
+) -> dict[str, object]:
+    body = _section_body(document, title)
+    digest = "sha256:" + hashlib.sha256(body.encode("utf-8")).hexdigest()
+    return {
+        "purpose": {
+            "summary": f"Revise {policy}",
+            "rationale": "Exercise proposal navigation over logical standards content.",
+            "evidence": [
+                {
+                    "id": f"test.navigation.{policy}",
+                    "digest": digest,
+                    "provider_contract": "test.fixture",
+                    "provider_contract_version": "1",
+                }
+            ],
         },
-        {
-            "op": "replace",
-            "path": SUITE_INPUTS,
-            "value": projected_manifest,
-        },
-    ]
+        "edits": [
+            {
+                "kind": "revise-policy-unit",
+                "policy": policy,
+                "title": title,
+                "body": body,
+                "semantics": {
+                    "kind": "change",
+                    "accepted_semantic_revision": accepted_revision,
+                    "proposed_semantic_revision": proposed_revision,
+                    "intent": "Exercise an explicit policy revision through proposal navigation.",
+                },
+            }
+        ],
+    }
 
 
 class NavigationTest(unittest.TestCase):
@@ -168,7 +195,9 @@ class NavigationTest(unittest.TestCase):
         self.assertIsInstance(invalid, RejectedResult)
         self.assertEqual(invalid.code, "APPLICABILITY.INVALID")
 
-    def test_development_proportionality_routes_directly_and_before_planning(self) -> None:
+    def test_development_proportionality_routes_directly_and_before_planning(
+        self,
+    ) -> None:
         direct = self.engine.query(
             QueryCall(
                 self.snapshot,
@@ -236,6 +265,19 @@ class NavigationTest(unittest.TestCase):
             all(item.handle.snapshot == self.snapshot for item in related.relationships)
         )
 
+        artifact = self.engine.query(
+            QueryCall(
+                self.snapshot,
+                RelatedRequest(
+                    "related", "prompts/planning.md", ("policy-impact",), "both", False
+                ),
+            )
+        )
+        self.assertIsInstance(artifact, RelatedResult)
+        self.assertIsInstance(artifact.authoring_target, AuthoringTargetHandle)
+        self.assertEqual(artifact.authoring_target.snapshot, self.snapshot)
+        self.assertTrue(artifact.relationships)
+
     def test_live_worktree_mutation_cannot_change_snapshot_reads(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repository"
@@ -270,10 +312,10 @@ class NavigationTest(unittest.TestCase):
         files = {str(item.path): item.content for item in capture.files}
         planning = files["workflows/planning.md"].decode("utf-8")
         initial_content = planning.replace(
-            "Store a planned effort under one directory:",
-            "Store an initial proposed effort under one directory:",
+            "Create a written plan when the change introduces material sequencing,",
+            "Create an initial proposed plan when the change introduces material sequencing,",
         )
-        revised_content = planning.replace(
+        revised_content = initial_content.replace(
             "Store a planned effort under one directory:",
             "Store a revised proposed effort under one directory:",
         )
@@ -283,10 +325,13 @@ class NavigationTest(unittest.TestCase):
                 {
                     "kind": "create-proposal",
                     "base_snapshot": self.snapshot.as_contract(),
-                    "mutations": _projected_mutations(
-                        initial_content, files[SUITE_INPUTS]
+                    "change_set": _policy_change_set(
+                        initial_content,
+                        policy=WRITTEN_PLAN_POLICY,
+                        title=WRITTEN_PLAN_TITLE,
+                        accepted_revision=1,
+                        proposed_revision=2,
                     ),
-                    "semantic_proposals": [],
                 }
             )
         )
@@ -324,7 +369,13 @@ class NavigationTest(unittest.TestCase):
                 read_call.as_contract()
             )
         )
-        self.assertEqual(read.content, initial_content)
+        self.assertIn(
+            "Create an initial proposed plan when the change introduces material sequencing,",
+            read.content,
+        )
+        self.assertNotIn(
+            "Store a revised proposed effort under one directory:", read.content
+        )
         self.assertEqual(read.policy.id, "workflow.planning")
         self.assertEqual(read.policy.authority, "projection")
         self.assertEqual(read.summary, "Read projected standard workflow.planning.")
@@ -352,10 +403,13 @@ class NavigationTest(unittest.TestCase):
                 {
                     "kind": "revise-proposal",
                     "expected_revision": created.revision.as_contract(),
-                    "mutations": _projected_mutations(
-                        revised_content, files[SUITE_INPUTS]
+                    "change_set": _policy_change_set(
+                        revised_content,
+                        policy=ARTIFACT_MODEL_POLICY,
+                        title=ARTIFACT_MODEL_TITLE,
+                        accepted_revision=1,
+                        proposed_revision=2,
                     ),
-                    "semantic_proposals": [],
                 }
             )
         )
@@ -375,37 +429,47 @@ class NavigationTest(unittest.TestCase):
         )
         self.assertIsInstance(historical, ProposalReadResult)
         self.assertIsInstance(current, ProposalReadResult)
-        self.assertEqual(historical.content, initial_content)
-        self.assertEqual(current.content, revised_content)
+        self.assertEqual(historical.content, read.content)
+        self.assertIn(
+            "Create an initial proposed plan when the change introduces material sequencing,",
+            current.content,
+        )
+        self.assertIn(
+            "Store a revised proposed effort under one directory:", current.content
+        )
+        self.assertNotEqual(historical.content, current.content)
         self.assertEqual(self.engine._snapshots._store.counts(), revised_counts)
 
-    def test_proposal_query_returns_typed_failure_for_invalid_projected_content(
+    def test_proposal_creation_returns_typed_failure_for_invalid_projected_content(
         self,
     ) -> None:
         capture = self.engine._snapshots.load_content(
             self.engine._snapshot_id(self.snapshot)
         )
         files = {str(item.path): item.content for item in capture.files}
-        invalid_content = "# Planning without canonical metadata\n"
-        created = self.engine.create_proposal(
+        planning = files["workflows/planning.md"].decode("utf-8")
+        invalid_change_set = _policy_change_set(
+            planning,
+            policy=WRITTEN_PLAN_POLICY,
+            title=WRITTEN_PLAN_TITLE,
+            accepted_revision=1,
+            proposed_revision=2,
+        )
+        invalid_edits = invalid_change_set["edits"]
+        if not isinstance(invalid_edits, list) or len(invalid_edits) != 1:
+            raise AssertionError("logical authoring fixture did not produce one edit")
+        invalid_edit = invalid_edits[0]
+        if not isinstance(invalid_edit, dict):
+            raise AssertionError("logical authoring fixture did not produce one edit")
+        invalid_edit["title"] = ARTIFACT_MODEL_TITLE
+        counts = self.engine._snapshots._store.counts()
+        rejected = self.engine.create_proposal(
             CreateProposalCall.from_value(
                 {
                     "kind": "create-proposal",
                     "base_snapshot": self.snapshot.as_contract(),
-                    "mutations": _projected_mutations(
-                        invalid_content, files[SUITE_INPUTS]
-                    ),
-                    "semantic_proposals": [],
+                    "change_set": invalid_change_set,
                 }
-            )
-        )
-        self.assertIsInstance(created, CreateProposalResult)
-        counts = self.engine._snapshots._store.counts()
-
-        rejected = self.engine.query_proposal(
-            QueryProposalCall(
-                created.revision,
-                ReadRequest("read", "workflow.planning"),
             )
         )
 

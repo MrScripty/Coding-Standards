@@ -172,7 +172,7 @@ def _analysis_request(snapshot: dict[str, object]) -> dict[str, object]:
             }
         ],
         "semantic_proposals": [],
-        "contract_version": 4,
+        "contract_version": 5,
     }
 
 
@@ -348,9 +348,7 @@ def _temporary_repository(root: Path) -> Path:
         subprocess.run(("git", *arguments), cwd=repository, check=True)
     (repository / "unrelated.txt").write_text("unrelated\n", encoding="utf-8")
     subprocess.run(("git", "add", "unrelated.txt"), cwd=repository, check=True)
-    subprocess.run(
-        ("git", "commit", "-q", "-m", "fixture"), cwd=repository, check=True
-    )
+    subprocess.run(("git", "commit", "-q", "-m", "fixture"), cwd=repository, check=True)
     return repository
 
 
@@ -451,8 +449,12 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
                 FindSnapshotsResult,
                 "find-snapshots",
             )
-            if snapshot not in [item.snapshot.as_contract() for item in found.snapshots]:
-                raise HarnessError("transferred snapshot is absent from active discovery")
+            if snapshot not in [
+                item.snapshot.as_contract() for item in found.snapshots
+            ]:
+                raise HarnessError(
+                    "transferred snapshot is absent from active discovery"
+                )
             read = _expect(
                 facade.call(
                     "query",
@@ -519,7 +521,9 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
                 unavailable.get("kind") != "rejected-result"
                 or unavailable.get("outcome") != "unavailable"
             ):
-                raise HarnessError("quarantined snapshot did not become typed unavailable")
+                raise HarnessError(
+                    "quarantined snapshot did not become typed unavailable"
+                )
             quarantined = _expect(
                 facade.call(
                     "find_snapshots",
@@ -528,8 +532,12 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
                 FindSnapshotsResult,
                 "find-snapshots/quarantined",
             )
-            if snapshot not in [item.snapshot.as_contract() for item in quarantined.snapshots]:
-                raise HarnessError("deleted snapshot is absent from quarantine discovery")
+            if snapshot not in [
+                item.snapshot.as_contract() for item in quarantined.snapshots
+            ]:
+                raise HarnessError(
+                    "deleted snapshot is absent from quarantine discovery"
+                )
             _expect(
                 facade.call(
                     "undelete_snapshot",

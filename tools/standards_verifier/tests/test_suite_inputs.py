@@ -100,9 +100,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
         with self.assertRaises(EngineError) as caught:
             compile_suite_input_projection(self.root)
 
-        self.assertEqual(
-            caught.exception.diagnostic.code, "INPUT.EXPECTED_ABSENT"
-        )
+        self.assertEqual(caught.exception.diagnostic.code, "INPUT.EXPECTED_ABSENT")
 
     def test_contradictory_cross_check_states_are_typed(self) -> None:
         suite = "evaluation/standards-effectiveness/suites/fixture.toml"
@@ -123,9 +121,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
         with self.assertRaises(EngineError) as caught:
             compile_suite_input_projection(self.root)
 
-        self.assertEqual(
-            caught.exception.diagnostic.code, "INPUT.CONTRADICTORY_STATE"
-        )
+        self.assertEqual(caught.exception.diagnostic.code, "INPUT.CONTRADICTORY_STATE")
 
     def test_freshness_binds_suite_and_input_bytes(self) -> None:
         self.assertEqual(write_suite_input_projection(self.root), 0)
@@ -188,6 +184,27 @@ class SuiteInputProjectionTest(unittest.TestCase):
         second = compile_suite_input_projection(self.root)["repository_index"]
 
         self.assertNotEqual(first, second)
+
+    def test_explicit_repository_paths_use_the_canonical_projection_owner(self) -> None:
+        indexed = compile_suite_input_projection(self.root)["repository_index"]
+        explicit = compile_suite_input_projection(
+            self.root,
+            repository_paths=(
+                "evaluation/standards-effectiveness/suite-registry.toml",
+                "evaluation/standards-effectiveness/suites/fixture.toml",
+                "present.md",
+            ),
+        )["repository_index"]
+        without_present = compile_suite_input_projection(
+            self.root,
+            repository_paths=(
+                "evaluation/standards-effectiveness/suite-registry.toml",
+                "evaluation/standards-effectiveness/suites/fixture.toml",
+            ),
+        )["repository_index"]
+
+        self.assertEqual(explicit, indexed)
+        self.assertNotEqual(without_present, indexed)
 
     def test_written_projection_rejects_stale_repository_index(self) -> None:
         self.assertEqual(write_suite_input_projection(self.root), 0)

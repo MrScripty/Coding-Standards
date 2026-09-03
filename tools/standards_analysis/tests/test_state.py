@@ -21,7 +21,7 @@ CHANGE = {
     "scope": {"kind": "whole-artifact"},
 }
 CONTRACTS = (
-    {"id": "analysis", "version": "5"},
+    {"id": "analysis", "version": "6"},
     {"id": "identity", "version": "2"},
 )
 EXECUTION = {
@@ -129,7 +129,7 @@ class AnalysisStateTest(unittest.TestCase):
 
     def test_well_formed_future_state_is_unsupported(self) -> None:
         value = json.loads(_state().encode())
-        value["contract_version"] = 6
+        value["contract_version"] = 7
 
         with self.assertRaises(AnalysisError) as caught:
             AnalysisState.decode(

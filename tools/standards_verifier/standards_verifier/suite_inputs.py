@@ -4,7 +4,11 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Sequence
 
-from tools.repository_git.repository_git import indexed_paths
+from tools.repository_git.repository_git import (
+    GitRepositoryError,
+    RepositoryPath,
+    indexed_paths,
+)
 from tools.standards_identity.standards_identity import (
     IdentityArray,
     IdentityObject,
@@ -49,6 +53,8 @@ def repository_index_digest(paths: Sequence[str]) -> str:
 def compile_suite_input_manifest(
     root: Path,
     registry_path: str = DEFAULT_REGISTRY,
+    *,
+    repository_paths: Sequence[str] | None = None,
 ) -> SuiteInputManifest:
     repo_root = root.resolve()
     catalog = load_registry_catalog(repo_root, registry_path)
@@ -118,8 +124,13 @@ def compile_suite_input_manifest(
     )
     index = None
     if index_uses:
+        observed_paths = (
+            indexed_paths(repo_root)
+            if repository_paths is None
+            else _repository_path_observation(repository_paths)
+        )
         index = RepositoryIndexObservation(
-            repository_index_digest(indexed_paths(repo_root)),
+            repository_index_digest(observed_paths),
             tuple(sorted(index_uses)),
         )
     return SuiteInputManifest(
@@ -134,12 +145,48 @@ def compile_suite_input_manifest(
 def compile_suite_input_projection(
     root: Path,
     registry_path: str = DEFAULT_REGISTRY,
+    *,
+    repository_paths: Sequence[str] | None = None,
 ) -> dict[str, object]:
-    return compile_suite_input_manifest(root, registry_path).as_projection()
+    return compile_suite_input_manifest(
+        root, registry_path, repository_paths=repository_paths
+    ).as_projection()
 
 
-def suite_input_projection_bytes(root: Path) -> bytes:
-    return suite_input_manifest_bytes(compile_suite_input_manifest(root))
+def suite_input_projection_bytes(
+    root: Path,
+    *,
+    repository_paths: Sequence[str] | None = None,
+) -> bytes:
+    return suite_input_manifest_bytes(
+        compile_suite_input_manifest(root, repository_paths=repository_paths)
+    )
+
+
+def _repository_path_observation(paths: Sequence[str]) -> tuple[str, ...]:
+    try:
+        selected = tuple(
+            sorted(
+                str(RepositoryPath.parse(path)) for path in paths if type(path) is str
+            )
+        )
+    except GitRepositoryError as error:
+        raise EngineError(
+            Diagnostic(
+                "INPUT.INVALID_REPOSITORY_PATH",
+                "invalid",
+                "explicit repository path observation is invalid",
+            )
+        ) from error
+    if len(selected) != len(paths) or len(set(selected)) != len(selected):
+        raise EngineError(
+            Diagnostic(
+                "INPUT.INVALID_REPOSITORY_PATHS",
+                "invalid",
+                "explicit repository path observation must contain unique strings",
+            )
+        )
+    return selected
 
 
 def check_suite_input_projection(

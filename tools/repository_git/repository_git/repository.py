@@ -194,14 +194,41 @@ class GitRepository:
             ("check-ref-format", "--branch", branch),
             max_output_bytes=256,
         )
-        if checked.returncode != 0 or checked.stdout.decode(
-            "utf-8", "replace"
-        ).strip() != branch:
+        if (
+            checked.returncode != 0
+            or checked.stdout.decode("utf-8", "replace").strip() != branch
+        ):
             raise invalid(
                 "REPOSITORY_GIT.INVALID_BRANCH",
                 "branch name is not canonical",
             )
         return self._revision(f"refs/heads/{branch}^{{commit}}")
+
+    def revision_paths(
+        self, revision: RepositoryRevision
+    ) -> tuple[RepositoryPath, ...]:
+        """Return the exact path observation for one retained commit tree."""
+
+        if type(revision) is not RepositoryRevision:
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_REVISION",
+                "repository path observation requires an exact revision",
+            )
+        fields = _nul_fields(
+            git_output(
+                self._repository,
+                (
+                    "ls-tree",
+                    "--full-tree",
+                    "-r",
+                    "--name-only",
+                    "-z",
+                    revision.oid,
+                ),
+            ),
+            "Git revision path output",
+        )
+        return tuple(sorted(RepositoryPath.parse(path) for path in fields))
 
     @contextmanager
     def materialize_candidate(
@@ -229,7 +256,9 @@ class GitRepository:
             )
         self._object(self._repository, expected.oid, "commit", _algorithm(expected.oid))
 
-        with tempfile.TemporaryDirectory(prefix="coding-standards-candidate-") as scratch:
+        with tempfile.TemporaryDirectory(
+            prefix="coding-standards-candidate-"
+        ) as scratch:
             candidate_root = Path(scratch).resolve() / "repository"
             git_output(
                 self._repository,
