@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 13,
+  "interface_schema_version": 14,
   "examples": [
     {
       "name": "create-snapshot",
@@ -68,6 +68,26 @@
       "value": {
         "kind": "find-proposals",
         "limit": 25
+      }
+    },
+    {
+      "name": "revise-proposal",
+      "definition": "ReviseProposalCall",
+      "value": {
+        "kind": "revise-proposal",
+        "expected_revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "mutations": [
+          {
+            "op": "replace",
+            "path": "workflows/planning.md",
+            "value": "# Revised planning\n"
+          }
+        ],
+        "semantic_proposals": []
       }
     },
     {

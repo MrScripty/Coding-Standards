@@ -998,3 +998,42 @@
   registry. No A2 feature node or relationship was retained; the accepted A1c
   graph remains unchanged, and A2 consumes it only when analyzing proposed
   standards content.
+
+## 2026-09-02 - Milestone 2 Proposal Revision Accepted
+
+- Implemented the next bounded public workflow as
+  `AgentToolFacade -> StandardsEngine -> AuthoringModule -> SnapshotModule` for
+  additive `revise_proposal`. The caller supplies only an exact expected
+  revision and complete successor mutation/semantic material; Authoring derives
+  proposal identity, base snapshot, and ordinal. Immutable revision readback is
+  internal and validates canonical bytes, kind, dependencies, proposal binding,
+  and content identity before use.
+- Reused store schema v2 and its existing single SQLite owner. One generic
+  `advance_aggregate_root` transaction checks the expected head before
+  publishing a candidate, then publishes the immutable record and advances the
+  head atomically. A stale request returns typed
+  `AUTHORING.REVISION_STALE`/`invalid` without a new record. Injected
+  interruption after record publication and after head update rolls back both
+  changes. No schema migration, second store, lock layer, retry, compatibility
+  reader, or public persistence contract was added.
+- Interface schema v14 adds only `revise_proposal`, retaining the original
+  eight A1c operations, request contract v4, result projection v4, proposal
+  handle schema v1, Authoring contract v1, and store schema v2. Canonical schema,
+  interface manifest, authored example, generated Python and agent-tool
+  projections, facade, and Engine agree. The Engine package now declares its
+  existing direct `standards-identity` dependency.
+- Linux CPython 3.11 and 3.12 each pass the same 47 focused Snapshot, Authoring,
+  generated-contract, compiler, and projection tests. The set proves public
+  close/reopen revision, invalid-target and stale nonmutation, historical
+  revision reconstruction, successful CAS, rollback at both interruption
+  points, generated freshness, and exact operation closure. A redundant broad
+  Engine discovery attempt was stopped when existing heavyweight navigation
+  cases supplied no additional evidence for the new operation; it was not used
+  as acceptance evidence.
+- Ruff, projection freshness, plan structure, diff hygiene, and the four
+  affected registered suites pass. The complete repository checkpoint passes
+  all 270 declarative suites and all seven retained Bash checkers. Exact staged
+  scope, generated diff, sensitive-value review, and the Commit workflow form
+  the final coherent boundary. Public proposal projection, projected analysis,
+  review/readiness, application, Git publication, and recovery remain absent;
+  the next slice is the smallest `query_proposal` projected-content read.

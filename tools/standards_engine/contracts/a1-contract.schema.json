@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v13",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v14",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -27,6 +27,12 @@
     },
     {
       "$ref": "#/$defs/FindProposalsResult"
+    },
+    {
+      "$ref": "#/$defs/ReviseProposalCall"
+    },
+    {
+      "$ref": "#/$defs/ReviseProposalResult"
     },
     {
       "$ref": "#/$defs/DeleteSnapshotCall"
@@ -1932,6 +1938,57 @@
         },
         "continuation": {
           "$ref": "#/$defs/ProposalHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReviseProposalCall": {
+      "type": "object",
+      "required": [
+        "kind",
+        "expected_revision",
+        "mutations",
+        "semantic_proposals"
+      ],
+      "properties": {
+        "kind": {
+          "const": "revise-proposal"
+        },
+        "expected_revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "mutations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ReplacementMutation"
+          }
+        },
+        "semantic_proposals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SemanticProposal"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReviseProposalResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "proposal",
+        "revision"
+      ],
+      "properties": {
+        "kind": {
+          "const": "revise-proposal-result"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
         }
       },
       "additionalProperties": false

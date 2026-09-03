@@ -40,13 +40,15 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `inspect` | `InspectCall` | `InspectionResult` | `RejectedResult` |
 | `create_proposal` | `CreateProposalCall` | `CreateProposalResult` | `RejectedResult` |
 | `find_proposals` | `FindProposalsCall` | `FindProposalsResult` | `RejectedResult` |
+| `revise_proposal` | `ReviseProposalCall` | `ReviseProposalResult` | `RejectedResult` |
 
-Interface schema version 13 adds the two A2 operations without changing the
-eight A1c operations. It retains request contract version 4 and result
-projection version 4 because their owned A1c promises are unchanged. A1c
-handles remain at schema version 5; proposal and proposal-revision handles
-begin at schema version 1. Unsupported well-formed compatibility keys return
-`unsupported`; there is no old-version parser or fallback.
+Interface schema version 14 adds proposal revision through exact expected-head
+compare-and-swap without changing the eight A1c operations or their request and
+result promises. It therefore retains request contract version 4 and result
+projection version 4. A1c handles remain at schema version 5; proposal and
+proposal-revision handles remain at schema version 1. Unsupported well-formed
+compatibility keys return `unsupported`; there is no old-version parser or
+fallback.
 
 Trusted provider and authorization context is injected by the Engine
 composition root. Caller-authored requests cannot grant capabilities or supply

@@ -10,6 +10,7 @@ MAX_AGGREGATE_BYTES = 16 * 1024 * 1024
 MAX_CHILD_BYTES = 4 * 1024 * 1024
 Lifecycle = Literal["active", "quarantined"]
 PutResult = Literal["inserted", "existing-identical"]
+AdvanceAggregateRootResult = Literal["advanced", "stale"]
 
 
 def _scalar(value: str, description: str) -> None:
@@ -372,6 +373,7 @@ class AggregateRootPage:
 
 
 __all__ = (
+    "AdvanceAggregateRootResult",
     "AggregateChild",
     "AggregateRecord",
     "AggregateRoot",

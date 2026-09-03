@@ -12,6 +12,7 @@ from tools.standards_identity.standards_identity import (
 
 from .errors import invalid
 from .model import (
+    AdvanceAggregateRootResult,
     AggregateRecord,
     AggregateRoot,
     AggregateRootPage,
@@ -138,6 +139,19 @@ class SnapshotModule:
     ) -> AggregateRootPage:
         self.maintain()
         return self._store.find_aggregate_roots(request)
+
+    def load_aggregate_root(self, aggregate_id: str) -> AggregateRoot:
+        self.maintain()
+        return self._store.load_aggregate_root(aggregate_id)
+
+    def advance_aggregate_root(
+        self,
+        aggregate_id: str,
+        expected_head_id: str,
+        head: AggregateRecord,
+    ) -> AdvanceAggregateRootResult:
+        self.maintain()
+        return self._store.advance_aggregate_root(aggregate_id, expected_head_id, head)
 
     def load_aggregate(self, aggregate_id: str) -> AggregateRecord:
         self.maintain()

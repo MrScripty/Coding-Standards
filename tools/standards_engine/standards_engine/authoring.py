@@ -271,17 +271,7 @@ class AuthoringModule:
         revision = ProposalRevision(
             proposal, 1, base_snapshot, mutations, semantic_proposals
         )
-        available_paths = {
-            item.path for item in self._snapshots.load_content(base_snapshot).files
-        }
-        missing = [
-            item.path for item in revision.mutations if item.path not in available_paths
-        ]
-        if missing:
-            raise _invalid(
-                "AUTHORING.MUTATION_TARGET_UNAVAILABLE",
-                f"replacement target {missing[0]} is unavailable in the base snapshot",
-            )
+        self._validate_mutation_targets(revision)
         root = AggregateRoot(
             str(proposal),
             PROPOSAL_KIND,
@@ -305,8 +295,53 @@ class AuthoringModule:
             None if page.continuation is None else ProposalId(page.continuation),
         )
 
+    def read_revision(self, revision_id: str) -> ProposalRevision:
+        if not _revision_id(revision_id):
+            raise _invalid(
+                "AUTHORING.INVALID_REVISION_ID",
+                "proposal revision ID has an invalid domain or digest",
+            )
+        revision = self._revision_from_record(
+            self._snapshots.load_aggregate(revision_id)
+        )
+        root = self._snapshots.load_aggregate_root(str(revision.proposal))
+        self._validate_root_revision(root, revision)
+        return revision
+
+    def revise_proposal(
+        self,
+        expected_revision: str,
+        mutations: Iterable[Mutation],
+        semantic_proposals: Iterable[Mapping[str, object]],
+    ) -> tuple[ProposalSummary, ProposalRevision]:
+        expected = self.read_revision(expected_revision)
+        revision = ProposalRevision(
+            expected.proposal,
+            expected.ordinal + 1,
+            expected.base_snapshot,
+            mutations,
+            semantic_proposals,
+        )
+        self._validate_mutation_targets(revision)
+        advanced = self._snapshots.advance_aggregate_root(
+            str(expected.proposal), expected_revision, revision.aggregate()
+        )
+        if advanced == "stale":
+            raise _invalid(
+                "AUTHORING.REVISION_STALE",
+                "expected proposal revision is no longer the current head",
+            )
+        return ProposalSummary(expected.proposal, revision.revision_id), revision
+
     def _summary_from_root(self, root: AggregateRoot) -> ProposalSummary:
-        record = self._snapshots.load_aggregate(root.head_id)
+        revision = self._revision_from_record(
+            self._snapshots.load_aggregate(root.head_id)
+        )
+        self._validate_root_revision(root, revision)
+        return ProposalSummary(revision.proposal, revision.revision_id)
+
+    @staticmethod
+    def _revision_from_record(record: AggregateRecord) -> ProposalRevision:
         try:
             material = json.loads(record.payload)
             if (
@@ -347,17 +382,40 @@ class AuthoringModule:
                 "AUTHORING.INVALID_STORED_REVISION",
                 "stored proposal revision cannot be decoded",
             ) from error
+        if record.kind != REVISION_KIND or revision.aggregate() != record:
+            raise _invalid(
+                "AUTHORING.INVALID_STORED_REVISION",
+                "stored proposal revision authority disagrees with its identity",
+            )
+        return revision
+
+    @staticmethod
+    def _validate_root_revision(
+        root: AggregateRoot, revision: ProposalRevision
+    ) -> None:
         if (
-            record.kind != REVISION_KIND
+            root.kind != PROPOSAL_KIND
             or revision.proposal != ProposalId(root.aggregate_id)
-            or revision.aggregate() != record
             or root.snapshots != (revision.base_snapshot,)
         ):
             raise _invalid(
                 "AUTHORING.INVALID_STORED_REVISION",
                 "stored proposal root and revision authority disagree",
             )
-        return ProposalSummary(revision.proposal, revision.revision_id)
+
+    def _validate_mutation_targets(self, revision: ProposalRevision) -> None:
+        available_paths = {
+            item.path
+            for item in self._snapshots.load_content(revision.base_snapshot).files
+        }
+        missing = [
+            item.path for item in revision.mutations if item.path not in available_paths
+        ]
+        if missing:
+            raise _invalid(
+                "AUTHORING.MUTATION_TARGET_UNAVAILABLE",
+                f"replacement target {missing[0]} is unavailable in the base snapshot",
+            )
 
     def _time(self) -> int:
         observed = self._now()

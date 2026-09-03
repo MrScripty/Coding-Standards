@@ -3260,6 +3260,57 @@
         }
       ]
     },
+    "ReviseProposalCall": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "kind": {
+          "const": "revise-proposal"
+        },
+        "mutations": {
+          "items": {
+            "$ref": "#/$defs/ReplacementMutation"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "semantic_proposals": {
+          "items": {
+            "$ref": "#/$defs/SemanticProposal"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "expected_revision",
+        "mutations",
+        "semantic_proposals"
+      ],
+      "type": "object"
+    },
+    "ReviseProposalResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "revise-proposal-result"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "proposal",
+        "revision"
+      ],
+      "type": "object"
+    },
     "RouteRequest": {
       "additionalProperties": false,
       "properties": {
@@ -3605,7 +3656,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 13,
+  "interface_schema_version": 14,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -3731,6 +3782,18 @@
       },
       "result_definitions": [
         "FindProposalsResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.author",
+      "id": "revise_proposal",
+      "input_definition": "ReviseProposalCall",
+      "input_schema": {
+        "$ref": "#/$defs/ReviseProposalCall"
+      },
+      "result_definitions": [
+        "ReviseProposalResult",
         "RejectedResult"
       ]
     }

@@ -121,6 +121,107 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                 ],
             )
 
+    def test_revise_is_durable_and_stale_writes_leave_no_partial_record(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            database = Path(temporary) / "standards.sqlite3"
+            snapshots = SnapshotModule.open(database)
+            base = snapshots.create_snapshot(_capture()).snapshot
+            with AgentToolFacade(
+                StandardsEngine(object(), snapshots),  # type: ignore[arg-type]
+                _contracts(REPOSITORY_ROOT),
+            ) as facade:
+                created = facade.create_proposal(
+                    {
+                        "kind": "create-proposal",
+                        "base_snapshot": _snapshot_handle(base),
+                        "mutations": [
+                            {
+                                "op": "replace",
+                                "path": "workflows/planning.md",
+                                "value": "# Initial proposal\n",
+                            }
+                        ],
+                        "semantic_proposals": [],
+                    }
+                )
+
+            initial_revision = created["revision"]
+            snapshots = SnapshotModule.open(database)
+            with AgentToolFacade(
+                StandardsEngine(object(), snapshots),  # type: ignore[arg-type]
+                _contracts(REPOSITORY_ROOT),
+            ) as facade:
+                initial_counts = snapshots._store.counts()
+
+                invalid_target = facade.revise_proposal(
+                    {
+                        "kind": "revise-proposal",
+                        "expected_revision": initial_revision,
+                        "mutations": [
+                            {
+                                "op": "replace",
+                                "path": "missing.md",
+                                "value": "missing",
+                            }
+                        ],
+                        "semantic_proposals": [],
+                    }
+                )
+                self.assertEqual(
+                    invalid_target["code"], "AUTHORING.MUTATION_TARGET_UNAVAILABLE"
+                )
+                self.assertEqual(snapshots._store.counts(), initial_counts)
+
+                revised = facade.revise_proposal(
+                    {
+                        "kind": "revise-proposal",
+                        "expected_revision": initial_revision,
+                        "mutations": [
+                            {
+                                "op": "replace",
+                                "path": "workflows/planning.md",
+                                "value": "# Revised proposal\n",
+                            }
+                        ],
+                        "semantic_proposals": [],
+                    }
+                )
+                self.assertEqual(revised["kind"], "revise-proposal-result")
+                self.assertEqual(revised["proposal"], created["proposal"])
+                after_revision = snapshots._store.counts()
+
+                stale = facade.revise_proposal(
+                    {
+                        "kind": "revise-proposal",
+                        "expected_revision": initial_revision,
+                        "mutations": [
+                            {
+                                "op": "replace",
+                                "path": "workflows/planning.md",
+                                "value": "# Stale proposal\n",
+                            }
+                        ],
+                        "semantic_proposals": [],
+                    }
+                )
+                self.assertEqual(stale["kind"], "rejected-result")
+                self.assertEqual(stale["code"], "AUTHORING.REVISION_STALE")
+                self.assertEqual(stale["outcome"], "invalid")
+                self.assertEqual(snapshots._store.counts(), after_revision)
+                found = facade.find_proposals({"kind": "find-proposals"})
+                self.assertEqual(
+                    found["proposals"][0]["head_revision"], revised["revision"]
+                )
+
+            with SnapshotModule.open(database) as reopened:
+                authoring = AuthoringModule(reopened)
+                historical = authoring.read_revision(initial_revision["id"])
+                current = authoring.read_revision(revised["revision"]["id"])
+                self.assertEqual(historical.ordinal, 1)
+                self.assertEqual(current.ordinal, 2)
+                self.assertEqual(historical.base_snapshot, current.base_snapshot)
+                self.assertEqual(current.mutations[0].value, "# Revised proposal\n")
+
     def test_create_rejects_duplicate_and_missing_replacement_targets(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             snapshots = SnapshotModule.open(Path(temporary) / "standards.sqlite3")

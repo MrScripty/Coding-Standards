@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 13
+interface_schema_version = 14
 request_contract_version = 4
 result_projection_version = 4
 
@@ -62,3 +62,9 @@ id = "find_proposals"
 input_definition = "FindProposalsCall"
 result_definitions = ["FindProposalsResult", "RejectedResult"]
 capability = "standards.proposal.read"
+
+[[operations]]
+id = "revise_proposal"
+input_definition = "ReviseProposalCall"
+result_definitions = ["ReviseProposalResult", "RejectedResult"]
+capability = "standards.proposal.author"

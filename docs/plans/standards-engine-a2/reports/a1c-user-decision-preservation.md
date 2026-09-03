@@ -1,6 +1,6 @@
 # A1c User-Decision Preservation Matrix
 
-**Status:** `Milestone 1 create/find reconciliation accepted; later A2
+**Status:** `Milestone 2 proposal revision reconciliation accepted; later A2
 reconciliation remains active`
 
 ## Authority And Method
@@ -50,7 +50,7 @@ different A1c choice.
 | A1C-U17 | Cross-engine stored-state compatibility and migration are deferred until Coding Standards is feature complete; incompatible state is never silently reinterpreted. | Milestone 1 adds one same-engine, atomic store-v1-to-v2 migration so retained A1c stores gain empty aggregate-head tables without losing A1c rows. It adds no cross-engine reader, compatibility window, fallback, or migration framework; after migration the store is only v2. | `explicitly-reauthorized-for-a2-integration` by the user's 2026-09-02 permission to alter A1c for a standards-aligned A2 fit | An exact integrity-valid v1 store reopens as exact v2 with every A1c table row unchanged; schema lookalikes, corrupt stores, and future versions reject before mutation; injected interruption preserves v1; cross-engine compatibility remains deferred. |
 | A1C-U18 | Linux CPython 3.11 and 3.12 are the only accepted platforms; Windows and macOS remain unclaimed without equivalent real evidence. | A2 must re-prove new Git, SQLite, filesystem, locking, and recovery behavior on both accepted runtimes. | `composed-without-change` | Required-real public workflow passes on Linux CPython 3.11 and 3.12; other platforms remain unsupported or unclaimed. |
 | A1C-U19 | Semantic understanding and judgment stay with the agent; the Engine owns declared mechanical contracts and projections only. | A2 records authorized semantic, relationship, and lifecycle decisions but cannot generate their meaning or infer acceptance from prose. | `composed-without-change` | Apply readiness contains explicit authorized decisions and mechanical proof; no generated semantic-acceptance Boolean exists. |
-| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v13 retains the eight roots in their original order and adds only `create_proposal` and `find_proposals`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
+| A1C-U20 | The current eight public operations and their typed behavior are the accepted A1c Interface. Canonical mutation requires separate A2 authority. | A2 evaluates only additive authoring operations and separate apply capability; it cannot remove, rename, overload, or weaken an A1c operation. | `composed-without-change` | Interface v14 retains the eight roots in their original order and adds only `create_proposal`, `find_proposals`, and `revise_proposal`; the complete A1c regression suite and platform harness remain deciding behavior evidence. |
 | A1C-U21 | The accepted A1c ADR and current codec identify proposed analysis material only through `proposed_snapshot`; exact cold replay reloads snapshot bytes. | Replace only that snapshot-only material assumption with one closed Analysis-owned proposed-material reference whose variants identify an exact snapshot or an exact immutable proposal revision. Include it in identity, typed dependency closure, and cold replay while retaining one `AnalysisState` and one analyzer. | `explicitly-reauthorized-for-replan` on 2026-09-01 | [Exact product authority and selected scope](a1c-projected-material-reauthorization.md), followed by P2R2 identity collision, head-movement, real SQLite cold-reopen/lifecycle, negative-dependency, snapshot-regression, bounded-overhead, and Linux CPython 3.11/3.12 evidence. |
 
 ## Conflict Register
@@ -91,11 +91,24 @@ review rejected production P5C as unused forwarding machinery and selected the
 paired create/find boundary because only public cold-reopen discovery can prove
 the claimed durable behavior.
 
+## Milestone 2 Reconciliation
+
+Proposal revision composes with A1c without changing an accepted A1c operation,
+handle, Analysis state, snapshot lifecycle, or semantic owner. The expected
+revision handle identifies immutable stored material; it grants no authority.
+The existing Snapshot owner performs the only mutable transition, and the
+existing store v2 schema already permits only the head-field update. The old
+and new revisions remain immutable and snapshot-dependent. No new store,
+schema migration, lock layer, retry behavior, public storage contract, or
+analysis representation is introduced.
+
 ## Current Verdict
 
-Milestone 1 is reconciled for proposal creation/discovery only. The user
-explicitly reauthorized A1C-U21 for later projected-material implementation and
-permitted standards-aligned A1c integration changes; this slice uses the latter
-only for the exact store-v1-to-v2 transition above. Cross-engine compatibility,
-feature completeness, projected analysis, revision CAS, review, application,
-and recovery remain unresolved and cannot inherit Milestone 1 authority.
+Milestone 2 is reconciled for proposal revision only. The user explicitly
+reauthorized A1C-U21 for later projected-material implementation and permitted
+standards-aligned A1c integration changes; Milestone 1 used that permission for
+the exact store-v1-to-v2 transition, while Milestone 2 reuses that admitted
+owner and schema without another A1c change. Cross-engine compatibility,
+feature completeness, projected analysis, public proposal projection, review,
+application, and recovery remain unresolved and cannot inherit Milestone 2
+authority.

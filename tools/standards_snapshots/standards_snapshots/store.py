@@ -12,6 +12,7 @@ from pathlib import Path
 
 from .errors import SnapshotError, invalid, unavailable, unsupported
 from .model import (
+    AdvanceAggregateRootResult,
     AggregateChild,
     AggregateRecord,
     AggregateRoot,
@@ -31,6 +32,19 @@ from .model import (
 APPLICATION_ID = 0x43534131
 USER_VERSION = 2
 BUSY_TIMEOUT_MS = 5_000
+
+
+def _root_reference(value: object, description: str) -> None:
+    if type(value) is not str or not value:
+        raise invalid(
+            "AGGREGATE.INVALID_ROOT_REFERENCE", f"{description} must be nonempty"
+        )
+    if "\0" in value or any(0xD800 <= ord(character) <= 0xDFFF for character in value):
+        raise invalid(
+            "AGGREGATE.INVALID_ROOT_REFERENCE",
+            f"{description} must contain Unicode scalar values without NUL",
+        )
+
 
 _SCHEMA = """
 CREATE TABLE content_sets (
@@ -682,6 +696,53 @@ class SQLiteSnapshotStore:
         continuation = roots[-1].aggregate_id if len(rows) > request.limit else None
         return AggregateRootPage(roots, continuation)
 
+    def load_aggregate_root(self, aggregate_id: str) -> AggregateRoot:
+        _root_reference(aggregate_id, "aggregate root ID")
+        with self._transaction(write=False):
+            root = self._load_root_unchecked(aggregate_id)
+            for snapshot in root.snapshots:
+                self.snapshot(snapshot)
+        return root
+
+    def advance_aggregate_root(
+        self,
+        aggregate_id: str,
+        expected_head_id: str,
+        head: AggregateRecord,
+    ) -> AdvanceAggregateRootResult:
+        _root_reference(aggregate_id, "aggregate root ID")
+        _root_reference(expected_head_id, "expected aggregate root head ID")
+        if type(head) is not AggregateRecord:
+            raise invalid(
+                "AGGREGATE.INVALID_ROOT_HEAD",
+                "aggregate root head must be an exact AggregateRecord",
+            )
+        with self._transaction(write=True):
+            root = self._load_root_unchecked(aggregate_id)
+            for snapshot in root.snapshots:
+                self.snapshot(snapshot)
+            if root.snapshots != head.snapshots:
+                raise invalid(
+                    "AGGREGATE.INVALID_ROOT_HEAD",
+                    "aggregate root and replacement head must have identical dependencies",
+                )
+            if root.head_id != expected_head_id:
+                return "stale"
+            self._publish_aggregate_unchecked(head)
+            self._advance_root_stage("after-record-publish", aggregate_id)
+            updated = self._connection.execute(
+                "UPDATE aggregate_roots SET head_aggregate_id = ? "
+                "WHERE aggregate_id = ? AND head_aggregate_id = ?",
+                (head.aggregate_id, aggregate_id, expected_head_id),
+            )
+            if updated.rowcount != 1:
+                raise invalid(
+                    "AGGREGATE.INVALID_ROOT_CAS",
+                    "aggregate root head changed outside its owning transaction",
+                )
+            self._advance_root_stage("after-root-update", aggregate_id)
+        return "advanced"
+
     def load_aggregate(self, aggregate_id: str) -> AggregateRecord:
         with self._transaction(write=False):
             record = self._load_aggregate_unchecked(aggregate_id)
@@ -1018,6 +1079,9 @@ class SQLiteSnapshotStore:
 
     def _migration_stage(self, stage: str) -> None:
         del stage
+
+    def _advance_root_stage(self, stage: str, aggregate_id: str) -> None:
+        del stage, aggregate_id
 
     @staticmethod
     def _adapt(error: sqlite3.DatabaseError) -> SnapshotError:

@@ -9,6 +9,15 @@ Engine returns opaque proposal and immutable revision handles and can rediscover
 the proposal after process replacement. The original eight A1c operations,
 their request/result versions, and their behavior remain unchanged.
 
+The second production boundary adds `revise_proposal`. Its caller supplies one
+expected immutable revision plus the complete replacement and semantic material
+for the successor. Authoring derives proposal identity, base snapshot, and next
+ordinal from the validated expected revision. It publishes the new immutable
+record and advances the existing proposal head through one Snapshot-owned
+SQLite compare-and-swap transaction. A stale expected head is an `invalid`
+result and publishes no candidate record. Historical revision reconstruction is
+an internal Authoring seam, not another public operation.
+
 Proposal IDs are unique lifecycle identities (`proposal:v1:<uuid4>`). Initial
 revision IDs are content-bound identities over proposal ID, ordinal, base
 snapshot, normalized replacement material, semantic proposals, and the
@@ -34,10 +43,12 @@ owned close/context-manager lifecycle, not a caller-selected store path.
 The public interface declares `standards.proposal.author` and
 `standards.proposal.read` capabilities at the same deployment boundary that
 owns the existing A1c capabilities; the domain does not add a second ambient
-authorization mechanism. This decision does not yet add revision CAS,
-projected analysis, review/readiness, Git publication, or recovery. The tested
-P5C forwarding capability is intentionally not productionized because no real
-caller needs a second eight-method A1c surface.
+authorization mechanism. Interface schema v14 adds proposal revision without
+changing the A1c request/result promises, existing handle versions, Authoring
+material identity, or store schema. This decision does not yet add public
+proposal projection, projected analysis, review/readiness, Git publication, or
+recovery. The tested P5C forwarding capability is intentionally not
+productionized because no real caller needs a second eight-method A1c surface.
 
 Standards graphs remain exclusively standards-domain authority. A2 consumes
 them through the accepted A1c analysis semantics when evaluating proposed

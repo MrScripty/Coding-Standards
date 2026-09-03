@@ -1,5 +1,6 @@
 from .errors import FailureKind, SnapshotError, SnapshotFailure
 from .model import (
+    AdvanceAggregateRootResult,
     AggregateChild,
     AggregateRecord,
     AggregateRoot,
@@ -21,6 +22,7 @@ from .module import DEFAULT_QUARANTINE_SECONDS, SnapshotModule
 
 __all__ = (
     "DEFAULT_QUARANTINE_SECONDS",
+    "AdvanceAggregateRootResult",
     "AggregateChild",
     "AggregateRecord",
     "AggregateRoot",

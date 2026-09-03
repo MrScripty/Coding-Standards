@@ -122,6 +122,8 @@ from ._generated_contract import (
     RelatedRequest,
     RelatedResult,
     RelationshipInspectionResult,
+    ReviseProposalCall,
+    ReviseProposalResult,
     ResolveCall,
     RouteRequest,
     RouteResult,
@@ -349,6 +351,28 @@ class StandardsEngine:
             if page.continuation is not None:
                 value["continuation"] = self._proposal_handle(page.continuation)
             return FindProposalsResult.from_value(value)
+        except (AuthoringError, SnapshotError) as error:
+            return self._domain_rejection(error)
+
+    def revise_proposal(
+        self, call: ReviseProposalCall
+    ) -> ReviseProposalResult | RejectedResult:
+        try:
+            summary, revision = self._authoring.revise_proposal(
+                call.expected_revision.id,
+                (
+                    Mutation(SnapshotPath.parse(item.path), item.value)
+                    for item in call.mutations
+                ),
+                (item.as_contract() for item in call.semantic_proposals),
+            )
+            return ReviseProposalResult.from_value(
+                {
+                    "kind": "revise-proposal-result",
+                    "proposal": self._proposal_handle(summary.proposal),
+                    "revision": self._proposal_revision_handle(revision.revision_id),
+                }
+            )
         except (AuthoringError, SnapshotError) as error:
             return self._domain_rejection(error)
 

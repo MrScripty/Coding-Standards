@@ -9,6 +9,7 @@ from pathlib import Path
 from tools.standards_snapshots.standards_snapshots import (
     AggregateChild,
     AggregateRecord,
+    AggregateRoot,
     ChildHandle,
     FindSnapshotsRequest,
     SnapshotError,
@@ -31,6 +32,16 @@ class _InterruptedMigrationStore(SQLiteSnapshotStore):
         if stage == "before-commit":
             type(self).interrupted_connection = self._connection
             raise RuntimeError("interrupted migration")
+
+
+class _InterruptedAdvanceStore(SQLiteSnapshotStore):
+    def __init__(self, path: Path, stage: str) -> None:
+        self._interrupted_stage = stage
+        super().__init__(path)
+
+    def _advance_root_stage(self, stage: str, aggregate_id: str) -> None:
+        if stage == self._interrupted_stage:
+            raise RuntimeError(f"interrupted {aggregate_id} at {stage}")
 
 
 class _FailedInitializationStore(SQLiteSnapshotStore):
@@ -324,6 +335,98 @@ class SnapshotStoreTests(unittest.TestCase):
                 self.assertEqual(
                     raised.exception.failure.code, "AGGREGATE.ID_COLLISION"
                 )
+
+    def test_aggregate_root_head_advances_once_and_rejects_a_stale_writer(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            with SnapshotModule.open(Path(temporary) / "snapshots.sqlite3") as module:
+                snapshot = module.create_snapshot(capture()).snapshot
+                initial = AggregateRecord(
+                    "revision:initial", "revision", b"one", (snapshot,)
+                )
+                revised = AggregateRecord(
+                    "revision:revised", "revision", b"two", (snapshot,)
+                )
+                stale = AggregateRecord(
+                    "revision:stale", "revision", b"three", (snapshot,)
+                )
+                root = AggregateRoot(
+                    "proposal:test", "proposal", initial.aggregate_id, (snapshot,), 1
+                )
+                module.create_aggregate_root(root, initial)
+
+                self.assertEqual(
+                    module.advance_aggregate_root(
+                        root.aggregate_id, initial.aggregate_id, revised
+                    ),
+                    "advanced",
+                )
+                self.assertEqual(
+                    module.load_aggregate_root(root.aggregate_id).head_id,
+                    revised.aggregate_id,
+                )
+                self.assertEqual(module.load_aggregate(initial.aggregate_id), initial)
+                self.assertEqual(module.load_aggregate(revised.aggregate_id), revised)
+                before_stale = module._store.counts()
+                self.assertEqual(
+                    module.advance_aggregate_root(
+                        root.aggregate_id, initial.aggregate_id, stale
+                    ),
+                    "stale",
+                )
+                self.assertEqual(module._store.counts(), before_stale)
+                with self.assertRaises(SnapshotError) as unavailable_record:
+                    module.load_aggregate(stale.aggregate_id)
+                self.assertEqual(
+                    unavailable_record.exception.failure.code, "AGGREGATE.UNAVAILABLE"
+                )
+
+    def test_interrupted_aggregate_root_advance_rolls_back_record_and_head(
+        self,
+    ) -> None:
+        for stage in ("after-record-publish", "after-root-update"):
+            with (
+                self.subTest(stage=stage),
+                tempfile.TemporaryDirectory(dir="/tmp") as temporary,
+            ):
+                path = Path(temporary) / "snapshots.sqlite3"
+                with SnapshotModule.open(path) as module:
+                    snapshot = module.create_snapshot(capture()).snapshot
+                    initial = AggregateRecord(
+                        "revision:initial", "revision", b"one", (snapshot,)
+                    )
+                    module.create_aggregate_root(
+                        AggregateRoot(
+                            "proposal:test",
+                            "proposal",
+                            initial.aggregate_id,
+                            (snapshot,),
+                            1,
+                        ),
+                        initial,
+                    )
+                revised = AggregateRecord(
+                    "revision:revised", "revision", b"two", (snapshot,)
+                )
+                interrupted = SnapshotModule(_InterruptedAdvanceStore(path, stage))
+                with self.assertRaisesRegex(RuntimeError, f"at {stage}"):
+                    interrupted.advance_aggregate_root(
+                        "proposal:test", initial.aggregate_id, revised
+                    )
+                interrupted.close()
+
+                with SnapshotModule.open(path) as reopened:
+                    self.assertEqual(
+                        reopened.load_aggregate_root("proposal:test").head_id,
+                        initial.aggregate_id,
+                    )
+                    with self.assertRaises(SnapshotError) as unavailable_record:
+                        reopened.load_aggregate(revised.aggregate_id)
+                    self.assertEqual(
+                        unavailable_record.exception.failure.code,
+                        "AGGREGATE.UNAVAILABLE",
+                    )
 
     def test_invalid_database_and_unsupported_path_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
