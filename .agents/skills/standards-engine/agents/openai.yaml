@@ -1,0 +1,4 @@
+interface:
+  display_name: "Standards Engine"
+  short_description: "Navigate and author standards through the Engine"
+  default_prompt: "Use $standards-engine to inspect and update repository standards through the Engine interface."
