@@ -63,7 +63,7 @@ replacement = ["canonical-router-or-owner-evidence"]
 [[checks.projections]]
 columns = ["file"]
 order = "source"
-expected = [["evaluation/standards-effectiveness/verify-contract-ownership.sh"]]
+expected = []
 [checks.projections.where]
 field = "current_dependency"
 op = "eq"

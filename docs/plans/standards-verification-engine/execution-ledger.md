@@ -7288,3 +7288,20 @@
   stable, closing 51/51 coverage. Focused, engine, repository-Git, graph,
   declarative, generated, numeric, plan, and complete mixed evidence pass.
   Final graph: 7 Bash checkers, 9 nodes, 33 edges, and 9 components.
+
+## 2026-09-03 - M6-I119 Contract Ownership Acceptance
+
+- Fresh post-M6-I118 evidence reports 7 Bash verifiers, 9 nodes, 33 edges, and
+  9 components. The 42-line contract-ownership verifier has no verifier/helper
+  dependency; its only executable inbound reference is a self-test whose
+  numeric-lifecycle coverage transfers to another live checker.
+- One eight-check `topic.contracts` suite preserves six canonical routes,
+  release entrypoint ownership, degraded-outcome authority, cross-language
+  selection, additive-compatibility qualification, and every prohibited
+  destructive or fallback phrase.
+- Row-35 closes its retired README dependency. Nine historical edge records
+  transfer to registered suite evidence without rewriting historical
+  identities.
+- Canonical success and ten rejecting mutations prove parity. Focused,
+  generated, numeric, unit, declarative, plan, and complete mixed evidence
+  pass. Final graph: 6 Bash checkers, 8 nodes, 30 edges, and 8 components.

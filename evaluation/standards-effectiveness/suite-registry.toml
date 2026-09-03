@@ -1349,3 +1349,8 @@ requires = []
 id = "execution-train"
 path = "evaluation/standards-effectiveness/suites/execution-train.toml"
 requires = []
+
+[[suites]]
+id = "contract-ownership"
+path = "evaluation/standards-effectiveness/suites/contract-ownership.toml"
+requires = []

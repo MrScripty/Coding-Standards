@@ -7091,3 +7091,31 @@ repository-Git, graph, declarative, generated, numeric, plan, and complete
 mixed evidence pass. Final graph: 7 Bash checkers, 9 executable nodes, 33
 edges, and 9 components. The old checker is absent without nested execution, a
 normative or legacy source rewrite, compatibility representation, or fallback.
+
+### M6-I119 Contract Ownership Acceptance
+
+Fresh post-M6-I118 evidence reports 7 Bash verifiers, 9 executable nodes, 33
+conservative edges, and 9 components. The 42-line
+`verify-contract-ownership.sh` is the smallest verifier with no verifier or
+helper dependency. Its sole executable inbound reference is a verifier
+self-test; the test retains the same numeric-lifecycle coverage against another
+live checker.
+
+The `serial-coherent` package registers one eight-check `topic.contracts`
+suite. It preserves all six canonical contract routes, the Release entrypoint,
+degraded-outcome authority, cross-language contract selection, the additive-
+compatibility qualification, and every prohibited destructive, default,
+partial, blanket-compatibility, and catch-all fallback phrase.
+
+The row-35 README dependency closes because registered owner evidence replaces
+the retired Bash route. Nine historical M6-P2, M6-I44, M6-I98, M6-I106, and
+M6-I114 records transfer to `suite:contract-ownership` without changing their
+historical source or target identities.
+
+Canonical success and ten rejecting route, authority, policy, and fallback
+mutations prove parity. The focused suite, row-35 suite, suite-input unit tests,
+generated freshness, numeric lifecycle, all declarative suites, plan checks,
+and complete mixed checkpoint pass. Final graph: 6 Bash checkers, 8 executable
+nodes, 30 edges, and 8 components. The old checker is absent without engine
+changes, nested execution, normative policy changes, compatibility behavior,
+or fallback.

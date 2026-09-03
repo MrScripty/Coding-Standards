@@ -325,3 +325,12 @@
 - This documentation migration changes neither recovery lifecycle authority
   nor checker-package admission; the fresh post-recovery graph audit remains
   the next slice.
+
+## 2026-09-03 - M6-I119 Terminal-Lifecycle Projection
+
+- Accepted M6-I119 removed the contract-ownership Bash verifier through one
+  registered owner suite while preserving exact route, fallback, lifecycle,
+  and mutation evidence.
+- The recovery remains active until the six retained Bash checkers and the
+  zero-Bash-triggered migration-only Python subjects reach their accepted
+  terminal dispositions.

@@ -403,11 +403,11 @@ boundaries, invalid derived-state rebuilds, degradation without an
 authoritative semantically equivalent source, and untyped handling of an
 unknown substitute.
 
-`verify-contract-ownership.sh` checks that legacy architecture, coding,
-interop, release, and binding guidance links to the canonical topic and does not
-restore universal append-only evolution, mandatory coexistence, destructive
-recovery, untyped cache/default fallback, blanket additive compatibility, or
-catch-all executor delegation.
+The registered `contract-ownership` suite checks that legacy architecture,
+coding, interop, release, and binding guidance links to the canonical topic and
+does not restore universal append-only evolution, mandatory coexistence,
+destructive recovery, untyped cache/default fallback, blanket additive
+compatibility, or catch-all executor delegation.
 
 `fixtures/contracts/runtime-decoding-decisions.tsv` and the registered
 `runtime-decoding-policy` suite check when runtime decoding applies, what

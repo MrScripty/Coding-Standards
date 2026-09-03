@@ -1,0 +1,77 @@
+schema_version = 1
+id = "contract-ownership"
+owner = "topic.contracts"
+description = "Canonical contract ownership, release routing, degraded-outcome authority, and cross-language selection without blanket compatibility or fallback."
+
+[[checks]]
+id = "coding-route"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["topics/contracts.md"]
+prohibited = []
+
+[[checks]]
+id = "interop-route"
+type = "text"
+path = "INTEROP-STANDARDS.md"
+required = ["topics/contracts.md"]
+prohibited = []
+
+[[checks]]
+id = "binding-route"
+type = "text"
+path = "LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["topics/contracts.md"]
+prohibited = []
+
+[[checks]]
+id = "release-workflow-route"
+type = "text"
+path = "workflows/release.md"
+required = ["topics/contracts.md"]
+prohibited = []
+
+[[checks]]
+id = "architecture-contract-authority"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "topics/contracts.md",
+  "Contract authority for degraded outcomes",
+  "topics/contracts.md#degraded-outcomes",
+]
+prohibited = [
+  "Append-only changes",
+  "Additive changes are safe",
+  "Delete and rebuild from scratch",
+  "continue with defaults or degraded mode",
+  "Use cached fallback or return partial results",
+  "returns safe defaults",
+]
+
+[[checks]]
+id = "rust-binding-contract-authority"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = [
+  "topics/contracts.md",
+  "topics/contracts.md#cross-language-contract-selection",
+]
+prohibited = [
+  "Additive changes are backward-compatible",
+  "Err(_) => self.host",
+]
+
+[[checks]]
+id = "contract-policy"
+type = "text"
+path = "topics/contracts.md"
+required = ["syntactically additive change is compatible only"]
+prohibited = []
+
+[[checks]]
+id = "release-entrypoint"
+type = "text"
+path = "RELEASE-STANDARDS.md"
+required = ["workflows/release.md"]
+prohibited = []

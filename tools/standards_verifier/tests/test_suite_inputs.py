@@ -144,7 +144,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
         self.assertGreater(len(projection["files"]), 0)
         files = {item["path"]: item for item in projection["files"]}
         self.assertIn(
-            "evaluation/standards-effectiveness/verify-contract-ownership.sh",
+            "evaluation/standards-effectiveness/verify-owner-state-transitions.sh",
             files,
         )
         lifecycle_uses = {
@@ -164,7 +164,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
         checker_uses = {
             (use["suite"], use["check"], use["role"])
             for use in files[
-                "evaluation/standards-effectiveness/verify-contract-ownership.sh"
+                "evaluation/standards-effectiveness/verify-owner-state-transitions.sh"
             ]["uses"]
         }
         self.assertIn(

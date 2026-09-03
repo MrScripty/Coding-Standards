@@ -154,6 +154,11 @@
           "suite": "contract-http-outcome-projection"
         },
         {
+          "check": "architecture-contract-authority",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
+        {
           "check": "architecture-boundary",
           "role": "content",
           "suite": "contract-planning-boundary"
@@ -264,6 +269,11 @@
           "check": "legacy-and-routes",
           "role": "content",
           "suite": "contract-invariants"
+        },
+        {
+          "check": "coding-route",
+          "role": "content",
+          "suite": "contract-ownership"
         },
         {
           "check": "legacy-and-route",
@@ -1012,6 +1022,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "interop-route",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
+        {
           "check": "legacy-contract-maintenance",
           "role": "content",
           "suite": "cross-language-contract"
@@ -1088,6 +1103,11 @@
       "path": "LANGUAGE-BINDINGS-STANDARDS.md",
       "state": "present",
       "uses": [
+        {
+          "check": "binding-route",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
         {
           "check": "legacy-route",
           "role": "content",
@@ -1218,6 +1238,11 @@
       "path": "RELEASE-STANDARDS.md",
       "state": "present",
       "uses": [
+        {
+          "check": "release-entrypoint",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
         {
           "check": "legacy-index",
           "role": "content",
@@ -1969,7 +1994,7 @@
       ]
     },
     {
-      "digest": "sha256:504344a61f41acb468f26074169c9b84081f83bf408535a22a5d980e716eaaf5",
+      "digest": "sha256:8f007946582113ab4d1e7fffe2c0cfeda8262dee96c2c72a9bb2ba47014fb053",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -1993,7 +2018,7 @@
       ]
     },
     {
-      "digest": "sha256:b44ee274bae1b26e01337a710b752cb69752b62d8b5bb3f768ebd849257cad59",
+      "digest": "sha256:a6a96f33902ff1f9934888a9f1d2923a1181cc010f4a5ad446ad59122bad135a",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2359,7 +2384,7 @@
       ]
     },
     {
-      "digest": "sha256:12cff1651f071e89acef7b16364237923f3113b960187a907e41bbf5ac728a80",
+      "digest": "sha256:aa903482a444297aa09c1db347cbc304832e811d39be760f5e3511873ad4ab2f",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3712,7 +3737,7 @@
       ]
     },
     {
-      "digest": "sha256:e745460ee95949870ddd1f79e7480bff784fd9415d35cb3fdd1c251ddb6c9768",
+      "digest": "sha256:ee4bc3d2bbe14755a08de5d2af0d94c35602188dfef0febe2e3641d79064d486",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -7234,7 +7259,7 @@
       ]
     },
     {
-      "digest": "sha256:70e9fade75cbd0ab3eb4c36e992ce54eed095396bb1ef9fa1a96746e45e9755c",
+      "digest": "sha256:ab7fb9109b21307a3baddfbf63e45803a159a291c5edff18f1540a71a991a531",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7246,7 +7271,7 @@
       ]
     },
     {
-      "digest": "sha256:2da9fbcf7fa02ce46d3dc80f0287866c1cedb14c9ae737960ca0d7e701c9229f",
+      "digest": "sha256:20cd37c21e1908d617f821f41bf92b34ca5cf747afd35574b67a2b65aef86512",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -9238,7 +9263,7 @@
       ]
     },
     {
-      "digest": "sha256:e5307015f92c829a993d7c2e161fa777aec1b41ecc8417eeea7ce047940a6216",
+      "digest": "sha256:08747fe2ef9bca67bf51c42360c0bb5c23f287f4cb85d91cce8a129e1fab2236",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
       "state": "present",
       "uses": [
@@ -10289,7 +10314,7 @@
       ]
     },
     {
-      "digest": "sha256:25ddc4db3d456fb8c6e2350d4d36935b26b569bd63979efd10fef8eeb2a4af97",
+      "digest": "sha256:e7abd2d02398fc5e26681d564da36c039cfe46b79c6d4f489ae78eaa2268268a",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -10776,6 +10801,18 @@
     {
       "digest": "sha256:6fbeff50ad920fa07a8a04231fc6a1ef9d2389ccc7a3af50247c4a8286e7a857",
       "path": "evaluation/standards-effectiveness/suites/contract-invariants.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:77cfa7dca878a3c2f0a95a3a1c0f8072ccf3535fe0314278ab5264a2c5c1cc56",
+      "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
       "state": "present",
       "uses": [
         {
@@ -11772,7 +11809,7 @@
       ]
     },
     {
-      "digest": "sha256:f86606d79a7f100f63f76b9d32483b872b42a37a2dbeeb9021609282a2465a1c",
+      "digest": "sha256:e3fee771714bbf19a4aa9cfdf3d2959ec248af2656060ed5c1203cfe8d353f26",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "state": "present",
       "uses": [
@@ -13603,38 +13640,6 @@
       ]
     },
     {
-      "digest": "sha256:0d4deb195adb7650d81179addca178a0c2c18594294753b423741a450efe9462",
-      "path": "evaluation/standards-effectiveness/verify-contract-ownership.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "manifested-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:e6e15daea1f368448657030c2e7bfea3917cb1615bf07a72bd21b28772208fa9",
       "path": "evaluation/standards-effectiveness/verify-interop-boundary-policy.sh",
       "state": "present",
@@ -14042,6 +14047,11 @@
           "check": "legacy-route",
           "role": "content",
           "suite": "binding-generation-authority"
+        },
+        {
+          "check": "rust-binding-contract-authority",
+          "role": "content",
+          "suite": "contract-ownership"
         },
         {
           "check": "state-model",
@@ -22321,6 +22331,11 @@
           "suite": "contract-invariants"
         },
         {
+          "check": "contract-policy",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
+        {
           "check": "canonical-owner",
           "role": "content",
           "suite": "contract-planning-boundary"
@@ -24164,6 +24179,11 @@
           "suite": "binding-artifact-composition"
         },
         {
+          "check": "release-workflow-route",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
+        {
           "check": "local-links",
           "role": "link-target",
           "suite": "development-proportionality"
@@ -25006,11 +25026,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:25ddc4db3d456fb8c6e2350d4d36935b26b569bd63979efd10fef8eeb2a4af97",
+    "digest": "sha256:e7abd2d02398fc5e26681d564da36c039cfe46b79c6d4f489ae78eaa2268268a",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:8b42e0bc58d92bee4482ef7415959e35eef19b1cddcb4075d7ec85b8b86c0258",
+    "digest": "sha256:87cb6138441b8b054c9646f6c042ce25d08a481e7d8459f4eba55113ba2430e7",
     "uses": [
       {
         "check": "python-package-contract",
@@ -25826,7 +25846,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:f86606d79a7f100f63f76b9d32483b872b42a37a2dbeeb9021609282a2465a1c",
+      "digest": "sha256:e3fee771714bbf19a4aa9cfdf3d2959ec248af2656060ed5c1203cfe8d353f26",
       "id": "milestone-7-row-35-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "requires": []
@@ -26697,6 +26717,12 @@
       "digest": "sha256:c1523b7390ff9e619e18fbc6d2c2855b860bdddd7e53d9ba63811d8ba03ef6cf",
       "id": "execution-train",
       "path": "evaluation/standards-effectiveness/suites/execution-train.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:77cfa7dca878a3c2f0a95a3a1c0f8072ccf3535fe0314278ab5264a2c5c1cc56",
+      "id": "contract-ownership",
+      "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
       "requires": []
     }
   ]
