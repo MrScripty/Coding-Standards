@@ -50,6 +50,7 @@ class GeneratedContractTest(unittest.TestCase):
             "analyze_proposal": generated.AnalyzeProposalCall,
             "review_proposal": generated.ReviewProposalCall,
             "apply_proposal": generated.ApplyProposalCall,
+            "recover_application": generated.RecoverApplicationCall,
         }
 
         for operation in contracts.interface.operations:
@@ -90,8 +91,9 @@ class GeneratedContractTest(unittest.TestCase):
         )
         facade = AgentToolFacade(engine, contracts)
         examples = json.loads(
-            (REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json")
-            .read_text(encoding="utf-8")
+            (
+                REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"
+            ).read_text(encoding="utf-8")
         )["examples"]
         arguments = next(
             item["value"] for item in examples if item["definition"] == "PrepareCall"
@@ -137,7 +139,7 @@ class GeneratedContractTest(unittest.TestCase):
             with self.subTest(path=path.relative_to(REPO_ROOT)):
                 self.assertEqual(path.read_text(encoding="utf-8"), projection)
 
-    def test_generated_native_models_decode_complete_v18_values(self) -> None:
+    def test_generated_native_models_decode_complete_v19_values(self) -> None:
         request_value = {"kind": "read", "target": "workflow.planning"}
         request = generated.decode_contract("QueryRequest", request_value)
         self.assertIsInstance(request, generated.ReadRequest)
@@ -158,10 +160,26 @@ class GeneratedContractTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             generated.ReadRequest.from_value({"kind": "read"})
 
+        recovery_value = {
+            "kind": "recover-application",
+            "readiness": {
+                "kind": "readiness-handle",
+                "id": "readiness:sha256:" + "d" * 64,
+                "schema_version": 1,
+            },
+        }
+        recovery = generated.RecoverApplicationCall.from_value(recovery_value)
+        self.assertEqual(recovery.as_contract(), recovery_value)
+        with self.assertRaises(ValueError):
+            generated.RecoverApplicationCall.from_value(
+                {**recovery_value, "application": "caller-selected"}
+            )
+
     def test_review_call_requires_exactly_three_decisions(self) -> None:
         examples = json.loads(
-            (REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json")
-            .read_text(encoding="utf-8")
+            (
+                REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"
+            ).read_text(encoding="utf-8")
         )["examples"]
         call = next(
             item["value"]
@@ -186,13 +204,12 @@ class GeneratedContractTest(unittest.TestCase):
 
     def test_agent_tools_are_the_exact_compiler_projection(self) -> None:
         tools_path = (
-            REPO_ROOT
-            / "tools/standards_engine/contracts/generated/agent-tools.json"
+            REPO_ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
         )
         projected = render_repository_projections()[tools_path]
         self.assertEqual(tools_path.read_text(encoding="utf-8"), projected)
 
-    def test_authored_v18_examples_satisfy_the_public_contract(self) -> None:
+    def test_authored_v19_examples_satisfy_the_public_contract(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         path = REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"

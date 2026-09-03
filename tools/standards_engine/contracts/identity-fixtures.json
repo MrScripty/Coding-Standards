@@ -98,6 +98,17 @@
       },
       "encoded_hex": "7b226b696e64223a2270726f706f73616c2d6170706c69636174696f6e222c227265766973696f6e223a317d",
       "expected": "application:sha256:f23fbfcc7b7e9e875b32fb308a3e428927371d774639401e356d3d9fccde0d41"
+    },
+    {
+      "name": "proposal-application-selection",
+      "domain": "coding-standards:proposal-application-selection:v1",
+      "prefix": "application-selection",
+      "value": {
+        "kind": "proposal-application-selection",
+        "revision": 1
+      },
+      "encoded_hex": "7b226b696e64223a2270726f706f73616c2d6170706c69636174696f6e2d73656c656374696f6e222c227265766973696f6e223a317d",
+      "expected": "application-selection:sha256:27bba77124967cedee876f3e3ae1a6a7ef17488b77837412942b5d5b57d23c10"
     }
   ],
   "public_handles": [

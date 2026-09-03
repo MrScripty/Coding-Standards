@@ -1232,3 +1232,60 @@
   recovery remain unimplemented; their smallest contract and lost-response
   evidence are the next design-validation slice and have no admitted production
   write set.
+
+## 2026-09-03 - Milestone 7 Lost-Response Recovery Accepted
+
+- Compared three bounded designs on exact Milestone 6 base
+  `992bd115017df53d41e413b0303d2ab92a1d0c0f`. Discovery plus recovery was
+  rejected because it required generic enumeration or an index and two calls;
+  repeated apply was rejected because it changed accepted apply semantics and
+  could resume Git publication. One explicit recovery operation plus one
+  immutable readiness selection was admitted under Development
+  Proportionality.
+- The single-file logic prototype passed all ten authorization, selection,
+  outcome, and target states with zero Git writes and at most one existing
+  outcome write. Its signed commit
+  `78033d3d65bdb003c57fa44940061a0df220c8a1` is protected at
+  `refs/archive/a2-prototypes/application-recovery-logic`. The real Git/SQLite
+  MVT passed identically on CPython 3.11 and 3.12: interrupted and conflicting
+  two-record admission rolled back, cold recovery returned the same
+  application, duplicate recovery added no write, the selection payload was
+  218 bytes, and store schema v2 remained unchanged. Its signed commit
+  `685badf5dddb872aeaf5666e646dd8bdd2dc8479` is protected at
+  `refs/archive/a2-prototypes/application-recovery-selection-mvt`. Both
+  prototype branches and worktrees were removed after ref verification.
+- Implemented additive `recover_application(readiness)` with current
+  `standards.proposal.recover` authorization. Authoring atomically publishes
+  the verified application intent and its readiness-derived selection under
+  the existing proposal-head guard. Recovery follows only that selection,
+  gives an existing immutable outcome terminal authority, and otherwise
+  records the existing outcome only after observing the exact candidate at
+  configured `refs/heads/main`.
+- Expected-target, diverged-target, unavailable-observation, missing-selection,
+  and outcome-persistence states remain typed and distinct. Recovery performs
+  no candidate materialization, verification, object import, Git update,
+  aggregate scan, mutable phase transition, retry, rollback, compatibility
+  fallback, or standards-graph mutation. No dependency, table, store version,
+  Repository Git implementation, verifier implementation, or A1c public
+  operation changed.
+- Interface schema v19 adds the recovery call/result and capability. Request
+  v4, result projection v5, application/readiness handles v1, Analysis
+  v5/handle v6, Authoring revision v1, and store v2 retain their owned
+  promises. The canonical schema, manifest, authored examples, identity
+  fixture, generated Python and agent-tool projections, facade, renderer, and
+  contract compiler agree.
+- On each of Linux CPython 3.11 and 3.12, 52 focused Snapshot, Authoring,
+  generated-contract, rendering, and identity tests pass, as do all 20
+  Standards Contracts tests. The two focused Engine workflows pass on both
+  runtimes: one covers authorization and every unresolved target projection;
+  the other runs real complete candidate verification and Git CAS, injects
+  outcome-persistence interruption, closes the process, and recovers from
+  readiness without staging, verification, or publication. A pre-regeneration
+  run correctly stopped at stale generated evidence; after the owner-generated
+  suite-input projection was refreshed, the exact real path passed.
+- Plan structure, Ruff, generated-contract freshness, generated verification
+  evidence, and diff hygiene pass. The complete repository checkpoint passes
+  all 270 declarative suites and all seven retained Bash checkers on both
+  supported runtimes. Milestone 7 is accepted. The next work is the bounded A2
+  feature-completeness and final acceptance audit, not another speculative
+  runtime slice.

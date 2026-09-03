@@ -12,6 +12,7 @@ Lifecycle = Literal["active", "quarantined"]
 PutResult = Literal["inserted", "existing-identical"]
 AdvanceAggregateRootResult = Literal["advanced", "stale"]
 GuardedAggregatePutResult = Literal["inserted", "existing-identical", "stale"]
+GuardedAggregateSetPutResult = Literal["published", "stale"]
 
 
 def _scalar(value: str, description: str) -> None:

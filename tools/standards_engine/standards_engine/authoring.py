@@ -33,14 +33,17 @@ from tools.standards_snapshots.standards_snapshots import (
 AUTHORING_CONTRACT_VERSION = 1
 READINESS_CONTRACT_VERSION = 1
 APPLICATION_CONTRACT_VERSION = 1
+APPLICATION_SELECTION_CONTRACT_VERSION = 1
 PROPOSAL_KIND = "proposal"
 REVISION_KIND = "proposal-revision"
 READINESS_KIND = "proposal-readiness"
 APPLICATION_KIND = "proposal-application"
 APPLICATION_OUTCOME_KIND = "proposal-application-outcome"
+APPLICATION_SELECTION_KIND = "proposal-application-selection"
 CANONICAL_TARGET_BRANCH = "main"
 CANONICAL_TARGET_REF = "refs/heads/main"
 APPLICATION_CAPABILITY = "standards.proposal.apply"
+APPLICATION_RECOVERY_CAPABILITY = "standards.proposal.recover"
 APPLICATION_VERIFICATION_CONTRACT = IdentityObject(
     (
         ("checkpoint", "complete"),
@@ -71,6 +74,10 @@ class AuthoringError(RuntimeError):
 
 def _invalid(code: str, message: str) -> AuthoringError:
     return AuthoringError(AuthoringFailure(code, "invalid", message))
+
+
+def _unavailable(code: str, message: str) -> AuthoringError:
+    return AuthoringError(AuthoringFailure(code, "unavailable", message))
 
 
 @dataclass(frozen=True, slots=True, order=True)
@@ -283,10 +290,9 @@ class ProposalReadiness:
             for item in map(_plain_identity, selected_decisions)
             if type(item) is dict
         }
-        if (
-            len(selected_decisions) != len(REVIEW_CAPABILITIES)
-            or set(plain_decisions) != set(REVIEW_CAPABILITIES)
-        ):
+        if len(selected_decisions) != len(REVIEW_CAPABILITIES) or set(
+            plain_decisions
+        ) != set(REVIEW_CAPABILITIES):
             raise _invalid(
                 "AUTHORING.REVIEW_INCOMPLETE",
                 "consumer, impact, and audit decisions must each explicitly accept with rationale and evidence",
@@ -482,6 +488,60 @@ class ProposalApplication:
             self.base_snapshot,
             self.application_id,
             self.candidate,
+        )
+
+    def selection(self) -> ProposalApplicationSelection:
+        return ProposalApplicationSelection(
+            self.base_snapshot,
+            self.readiness_id,
+            self.application_id,
+        )
+
+
+@dataclass(frozen=True, slots=True, init=False)
+class ProposalApplicationSelection:
+    base_snapshot: SnapshotId
+    readiness_id: str
+    application_id: str
+
+    def __init__(
+        self,
+        base_snapshot: SnapshotId,
+        readiness_id: str,
+        application_id: str,
+    ) -> None:
+        if (
+            type(base_snapshot) is not SnapshotId
+            or not _readiness_id(readiness_id)
+            or not _application_id(application_id)
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_SELECTION",
+                "application selection requires exact snapshot, readiness, and application identities",
+            )
+        object.__setattr__(self, "base_snapshot", base_snapshot)
+        object.__setattr__(self, "readiness_id", readiness_id)
+        object.__setattr__(self, "application_id", application_id)
+
+    @property
+    def selection_id(self) -> str:
+        return application_selection_id(self.readiness_id)
+
+    def identity_material(self) -> IdentityObject:
+        return IdentityObject(
+            (
+                ("application", self.application_id),
+                ("contract_version", APPLICATION_SELECTION_CONTRACT_VERSION),
+                ("readiness", self.readiness_id),
+            )
+        )
+
+    def aggregate(self) -> AggregateRecord:
+        return AggregateRecord(
+            self.selection_id,
+            APPLICATION_SELECTION_KIND,
+            encode_identity_value(self.identity_material()),
+            (self.base_snapshot,),
         )
 
 
@@ -742,15 +802,66 @@ class AuthoringModule:
             readiness.expected_target,
             candidate,
         )
-        published = self._snapshots.publish_aggregate_if_root_head(
-            str(revision.proposal),
-            revision.revision_id,
-            application.aggregate(),
-        )
+        try:
+            published = self._snapshots.publish_aggregate_set_if_root_head(
+                str(revision.proposal),
+                revision.revision_id,
+                (application.aggregate(), application.selection().aggregate()),
+            )
+        except SnapshotError as error:
+            if error.failure.code != "AGGREGATE.ID_COLLISION":
+                raise
+            try:
+                selected = self._application_selection_from_record(
+                    self._snapshots.load_aggregate(
+                        application_selection_id(readiness.readiness_id)
+                    )
+                )
+            except SnapshotError:
+                raise error
+            if selected.application_id != application.application_id:
+                raise _invalid(
+                    "AUTHORING.APPLICATION_SELECTION_CONFLICT",
+                    "one readiness cannot select different verified applications",
+                ) from error
+            raise
         if published == "stale":
             raise _invalid(
                 "AUTHORING.READINESS_STALE",
                 "readiness revision is no longer the current proposal head",
+            )
+        return application
+
+    def read_selected_application(self, readiness_id: str) -> ProposalApplication:
+        readiness = self.read_readiness(readiness_id)
+        try:
+            record = self._snapshots.load_aggregate(
+                application_selection_id(readiness.readiness_id)
+            )
+        except SnapshotError as error:
+            if error.failure.code != "AGGREGATE.UNAVAILABLE":
+                raise
+            raise _unavailable(
+                "APPLICATION.NOT_ADMITTED",
+                "no verified application was admitted for this readiness",
+            ) from error
+        selection = self._application_selection_from_record(record)
+        if (
+            selection.base_snapshot != readiness.base_snapshot
+            or selection.readiness_id != readiness.readiness_id
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_SELECTION",
+                "stored application selection and readiness authority disagree",
+            )
+        application = self.read_application(selection.application_id)
+        if (
+            application.base_snapshot != selection.base_snapshot
+            or application.readiness_id != selection.readiness_id
+        ):
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_SELECTION",
+                "stored application selection and application authority disagree",
             )
         return application
 
@@ -801,6 +912,21 @@ class AuthoringModule:
                 "stored application outcome disagrees with its application",
             )
         return outcome
+
+    def application_outcome(
+        self, application: ProposalApplication
+    ) -> ProposalApplicationOutcome | None:
+        if type(application) is not ProposalApplication:
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION",
+                "application outcome lookup requires one exact application",
+            )
+        try:
+            return self.read_application_outcome(application.application_id)
+        except SnapshotError as error:
+            if error.failure.code == "AGGREGATE.UNAVAILABLE":
+                return None
+            raise
 
     def _summary_from_root(self, root: AggregateRoot) -> ProposalSummary:
         revision = self._revision_from_record(
@@ -922,6 +1048,53 @@ class AuthoringModule:
                 "stored application authority disagrees with its identity",
             )
         return application
+
+    @staticmethod
+    def _application_selection_from_record(
+        record: AggregateRecord,
+    ) -> ProposalApplicationSelection:
+        try:
+            material = json.loads(record.payload)
+            if (
+                type(material) is not dict
+                or set(material)
+                != {
+                    "application",
+                    "contract_version",
+                    "readiness",
+                }
+                or material["contract_version"]
+                != APPLICATION_SELECTION_CONTRACT_VERSION
+                or encode_identity_value(_identity_value(material)) != record.payload
+                or len(record.snapshots) != 1
+            ):
+                raise _invalid(
+                    "AUTHORING.INVALID_APPLICATION_SELECTION",
+                    "stored application selection is not canonical",
+                )
+            selection = ProposalApplicationSelection(
+                record.snapshots[0],
+                material["readiness"],
+                material["application"],
+            )
+        except (
+            AuthoringError,
+            IdentityError,
+            SnapshotError,
+            json.JSONDecodeError,
+            UnicodeError,
+            IndexError,
+        ) as error:
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_SELECTION",
+                "stored application selection cannot be decoded",
+            ) from error
+        if record.kind != APPLICATION_SELECTION_KIND or selection.aggregate() != record:
+            raise _invalid(
+                "AUTHORING.INVALID_APPLICATION_SELECTION",
+                "stored application selection authority disagrees with its identity",
+            )
+        return selection
 
     @staticmethod
     def _application_outcome_from_record(
@@ -1208,6 +1381,48 @@ def application_subject(
     )
 
 
+def application_selection_id(readiness_id: str) -> str:
+    if not _readiness_id(readiness_id):
+        raise _invalid(
+            "AUTHORING.INVALID_READINESS_ID",
+            "application selection requires one exact readiness identity",
+        )
+    return hash_identity(
+        "coding-standards:proposal-application-selection:v1",
+        "application-selection",
+        IdentityObject((("readiness", readiness_id),)),
+    )
+
+
+def application_recovery_subject(
+    readiness_id: str,
+    revision_id: str,
+    expected_target: RepositoryRevision,
+) -> str:
+    if (
+        not _readiness_id(readiness_id)
+        or not _revision_id(revision_id)
+        or type(expected_target) is not RepositoryRevision
+    ):
+        raise _invalid(
+            "AUTHORING.INVALID_APPLICATION_RECOVERY",
+            "application recovery requires exact readiness, revision, and target identities",
+        )
+    return hash_identity(
+        "coding-standards:proposal-application-recovery-subject:v1",
+        "proposal-application-recovery",
+        IdentityObject(
+            (
+                ("expected_target", expected_target.oid),
+                ("readiness", readiness_id),
+                ("revision", revision_id),
+                ("target_ref", CANONICAL_TARGET_REF),
+                ("verification_contract", APPLICATION_VERIFICATION_CONTRACT),
+            )
+        ),
+    )
+
+
 def _evidence_reference(value: object) -> bool:
     if type(value) is not dict or set(value) != {
         "id",
@@ -1263,12 +1478,7 @@ def _authorization_record(value: object) -> bool:
             type(evidence) is not list
             or not evidence
             or any(not _evidence_reference(item) for item in evidence)
-            or len(
-                {
-                    encode_identity_value(_identity_value(item))
-                    for item in evidence
-                }
-            )
+            or len({encode_identity_value(_identity_value(item)) for item in evidence})
             != len(evidence)
         ):
             return False
@@ -1276,13 +1486,16 @@ def _authorization_record(value: object) -> bool:
 
 
 def _canonical_id(value: object) -> bool:
-    return type(value) is str and re.fullmatch(
-        r"[A-Za-z0-9][A-Za-z0-9._:/-]*", value
-    ) is not None
+    return (
+        type(value) is str
+        and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]*", value) is not None
+    )
 
 
 def _digest(value: object) -> bool:
-    return type(value) is str and re.fullmatch(r"sha256:[0-9a-f]{64}", value) is not None
+    return (
+        type(value) is str and re.fullmatch(r"sha256:[0-9a-f]{64}", value) is not None
+    )
 
 
 def _nonempty_scalar_string(value: object) -> bool:
@@ -1343,6 +1556,9 @@ __all__ = (
     "APPLICATION_CONTRACT_VERSION",
     "APPLICATION_KIND",
     "APPLICATION_OUTCOME_KIND",
+    "APPLICATION_RECOVERY_CAPABILITY",
+    "APPLICATION_SELECTION_CONTRACT_VERSION",
+    "APPLICATION_SELECTION_KIND",
     "AUTHORING_CONTRACT_VERSION",
     "APPLICATION_VERIFICATION_CONTRACT",
     "CANONICAL_TARGET_BRANCH",
@@ -1354,6 +1570,7 @@ __all__ = (
     "Mutation",
     "ProposalApplication",
     "ProposalApplicationOutcome",
+    "ProposalApplicationSelection",
     "ProposalId",
     "ProposalPage",
     "ProposalReadiness",
@@ -1362,6 +1579,8 @@ __all__ = (
     "READINESS_CONTRACT_VERSION",
     "READINESS_KIND",
     "REVIEW_CAPABILITIES",
+    "application_recovery_subject",
+    "application_selection_id",
     "application_subject",
     "review_decision_subject",
 )

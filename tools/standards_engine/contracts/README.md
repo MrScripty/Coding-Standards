@@ -45,15 +45,16 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `analyze_proposal` | `AnalyzeProposalCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
 | `review_proposal` | `ReviewProposalCall` | `ReviewProposalResult` | `RejectedResult` |
 | `apply_proposal` | `ApplyProposalCall` | `ApplyProposalResult` or `ApplicationRecoveryRequiredResult` | `RejectedResult` |
+| `recover_application` | `RecoverApplicationCall` | `RecoverApplicationResult` or `ApplicationRecoveryRequiredResult` | `RejectedResult` |
 
-Interface schema version 18 adds proposal application after the previously
-admitted proposal query, analysis, and review operations without changing the
-eight A1c operations or their request and result promises. Request contract
-version 4 and result projection version 5 are unchanged. Snapshot handles
-remain at schema version 5; Analysis handles remain at version 6; proposal,
-proposal-revision, readiness, and application handles remain at schema version
-1. Unsupported well-formed compatibility keys return `unsupported`; there is
-no old-version parser or fallback.
+Interface schema version 19 adds explicit recovery of an already admitted
+proposal application. It does not retry application or change the previously
+admitted proposal operations, the eight A1c operations, or their request and
+result promises. Request contract version 4 and result projection version 5
+are unchanged. Snapshot handles remain at schema version 5; Analysis handles
+remain at version 6; proposal, proposal-revision, readiness, and application
+handles remain at schema version 1. Unsupported well-formed compatibility
+keys return `unsupported`; there is no old-version parser or fallback.
 
 Trusted provider and authorization context is injected by the Engine
 composition root. Caller-authored requests cannot grant capabilities or supply
@@ -70,8 +71,13 @@ release versions do not acquire domain authority.
 `standards_snapshots` stores immutable captured content, immutable dependent
 records, and opaque mutable aggregate heads. Proposal revisions remain
 immutable; only their proposal root selects a head. Verified application
-intents and applied outcomes are immutable snapshot-dependent aggregates, not
-mutable roots. `repository_git` captures exact object bytes from the current
+intents, readiness-to-application selections, and applied outcomes are
+immutable snapshot-dependent aggregates, not mutable roots. Application
+admission writes the content-bound intent and its one-per-readiness selection
+atomically. Recovery follows that selection, requires current recovery
+authorization, and observes the fixed canonical target; it does not scan
+aggregates, stage content, verify again, publish Git, or infer success from an
+unchanged target. `repository_git` captures exact object bytes from the current
 canonical `HEAD`; subsequent reads, inspections, and cold reconstruction
 resolve the retained snapshot and never substitute the live worktree. During
 application it also owns isolated candidate materialization and the exact

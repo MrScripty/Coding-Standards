@@ -131,6 +131,8 @@ from ._generated_contract import (
     QueryProposalCall,
     QueryProposalResult,
     QueryResult,
+    RecoverApplicationCall,
+    RecoverApplicationResult,
     ReviewProposalCall,
     ReviewProposalResult,
     ProposalReadResult,
@@ -156,6 +158,7 @@ from ._generated_contract import (
 )
 from .authoring import (
     APPLICATION_CAPABILITY,
+    APPLICATION_RECOVERY_CAPABILITY,
     AuthoringError,
     AuthoringModule,
     CANONICAL_TARGET_BRANCH,
@@ -167,6 +170,7 @@ from .authoring import (
     REVIEW_CAPABILITIES,
     ProposalSummary as AuthoringProposalSummary,
     application_subject,
+    application_recovery_subject,
     review_decision_subject,
 )
 
@@ -440,8 +444,14 @@ class StandardsEngine:
         self, call: FindSnapshotsCall
     ) -> FindSnapshotsResult | RejectedResult:
         try:
-            lifecycle = "active" if isinstance(call.lifecycle, MissingValue) else call.lifecycle
-            after = None if isinstance(call.after, MissingValue) else self._snapshot_id(call.after)
+            lifecycle = (
+                "active" if isinstance(call.lifecycle, MissingValue) else call.lifecycle
+            )
+            after = (
+                None
+                if isinstance(call.after, MissingValue)
+                else self._snapshot_id(call.after)
+            )
             limit = 50 if isinstance(call.limit, MissingValue) else int(call.limit)
             page = self._snapshots.find_snapshots(
                 FindSnapshotsRequest(lifecycle, after, limit)
@@ -540,7 +550,9 @@ class StandardsEngine:
         self, call: UndeleteSnapshotCall
     ) -> UndeleteSnapshotResult | RejectedResult:
         try:
-            summary = self._snapshots.undelete_snapshot(self._snapshot_id(call.snapshot))
+            summary = self._snapshots.undelete_snapshot(
+                self._snapshot_id(call.snapshot)
+            )
             return UndeleteSnapshotResult.from_value(
                 {"kind": "undelete-snapshot-result", "snapshot": self._summary(summary)}
             )
@@ -820,9 +832,7 @@ class StandardsEngine:
                         "The configured main branch changed before publication.",
                     )
                 try:
-                    observed = self._repository.branch_revision(
-                        CANONICAL_TARGET_BRANCH
-                    )
+                    observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
                 except GitRepositoryError:
                     return self._application_recovery_required(
                         application,
@@ -852,6 +862,63 @@ class StandardsEngine:
                         "status": "applied",
                     }
                 )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
+    def recover_application(
+        self, call: RecoverApplicationCall
+    ) -> RecoverApplicationResult | ApplicationRecoveryRequiredResult | RejectedResult:
+        try:
+            readiness = self._authoring.read_readiness(call.readiness.id)
+            revision = self._authoring.read_revision(readiness.revision_id)
+            construct_authorization_record(
+                self._execution_context,
+                AuthorizationRequest(
+                    "recover-application",
+                    "proposal-application-recovery",
+                    application_recovery_subject(
+                        readiness.readiness_id,
+                        revision.revision_id,
+                        readiness.expected_target,
+                    ),
+                    APPLICATION_RECOVERY_CAPABILITY,
+                    (),
+                ),
+            )
+            application = self._authoring.read_selected_application(
+                readiness.readiness_id
+            )
+            if self._authoring.application_outcome(application) is not None:
+                return self._recovered_application(application)
+            try:
+                observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+            except GitRepositoryError:
+                return self._application_recovery_required(
+                    application,
+                    "APPLICATION.OBSERVATION_UNAVAILABLE",
+                    "The canonical target could not be observed during recovery.",
+                )
+            if observed == application.candidate:
+                try:
+                    self._authoring.record_applied(application)
+                except SnapshotError:
+                    return self._application_recovery_required(
+                        application,
+                        "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
+                        "The recovered applied outcome could not be recorded durably.",
+                    )
+                return self._recovered_application(application)
+            if observed == application.expected_target:
+                return self._application_recovery_required(
+                    application,
+                    "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
+                    "The current target cannot establish whether publication occurred.",
+                )
+            return self._application_recovery_required(
+                application,
+                "APPLICATION.RECOVERY_TARGET_DIVERGED",
+                "The current target differs from both the expected and candidate revisions.",
+            )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -904,7 +971,10 @@ class StandardsEngine:
                     self._snapshot_id(handle), include_quarantined=True
                 )
                 return SnapshotInspectionResult.from_value(
-                    {"kind": "snapshot-inspection-result", "snapshot": self._summary(summary)}
+                    {
+                        "kind": "snapshot-inspection-result",
+                        "snapshot": self._summary(summary),
+                    }
                 )
             if isinstance(handle, SnapshotChildHandle):
                 return self._inspect_snapshot_child(handle)
@@ -941,7 +1011,9 @@ class StandardsEngine:
     def _compiled_snapshot(self, snapshot: SnapshotId) -> CompiledSnapshot:
         capture = self._snapshots.load_content(snapshot)
         return self._compile(
-            FrozenContentSource((str(item.path), item.content) for item in capture.files)
+            FrozenContentSource(
+                (str(item.path), item.content) for item in capture.files
+            )
         )
 
     def _compiled_revision(self, revision: ProposalRevision) -> CompiledSnapshot:
@@ -1068,7 +1140,9 @@ class StandardsEngine:
         accepted: CompiledSnapshot,
         proposed: CompiledSnapshot,
     ) -> None:
-        semantic_proposals = tuple(cls._plain(item) for item in revision.semantic_proposals)
+        semantic_proposals = tuple(
+            cls._plain(item) for item in revision.semantic_proposals
+        )
         changes = derive_change_descriptors(
             accepted.corpus.policy_unit_corpus,
             proposed.corpus.policy_unit_corpus,
@@ -1093,7 +1167,9 @@ class StandardsEngine:
     def _canonical_records(values: Iterable[Mapping[str, object]]) -> tuple[str, ...]:
         return tuple(
             sorted(
-                json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                json.dumps(
+                    value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+                )
                 for value in values
             )
         )
@@ -1186,7 +1262,10 @@ class StandardsEngine:
                                 "Fact provider returned an unrecognized outcome.",
                             )
                         )
-                    if provider.contract.evidence_contract != requirement.fact.evidence_contract:
+                    if (
+                        provider.contract.evidence_contract
+                        != requirement.fact.evidence_contract
+                    ):
                         raise AnalysisError(
                             AnalysisFailure(
                                 "ANALYSIS.EVIDENCE_CONTRACT_MISMATCH",
@@ -1209,9 +1288,7 @@ class StandardsEngine:
                     provider_reference = {
                         "id": provider.contract.provider_id,
                         "contract": provider.contract.input_contract,
-                        "contract_version": str(
-                            provider.contract.semantic_revision
-                        ),
+                        "contract_version": str(provider.contract.semantic_revision),
                         "input_digest": analysis_value_digest(
                             [
                                 {
@@ -1277,7 +1354,9 @@ class StandardsEngine:
             )
         )
         current_contracts = tuple(
-            sorted((value["id"], value["version"]) for value in self._domain_contracts())
+            sorted(
+                (value["id"], value["version"]) for value in self._domain_contracts()
+            )
         )
         if stored_contracts != current_contracts:
             raise AnalysisError(
@@ -1586,7 +1665,8 @@ class StandardsEngine:
                         for item in state.dispositions
                     ],
                     "required_fact_requirements": [
-                        f"fact-requirement:{item.id}" for item in evaluation.requirements
+                        f"fact-requirement:{item.id}"
+                        for item in evaluation.requirements
                     ],
                     "observed_fact_requirements": [
                         f"fact-requirement:{self._plain(item)['requirement_id']}"
@@ -1691,9 +1771,7 @@ class StandardsEngine:
             "authorization_records": [
                 self._plain(item) for item in state.authorization_records
             ],
-            "domain_contracts": [
-                self._plain(item) for item in state.domain_contracts
-            ],
+            "domain_contracts": [self._plain(item) for item in state.domain_contracts],
             "execution_contracts": self._plain(state.execution_contracts),
             "contract_version": 5,
         }
@@ -1858,9 +1936,7 @@ class StandardsEngine:
                     "result": value["result"],
                     "rationale": value["rationale"],
                     "evidence": value["evidence"],
-                    "authorization": authorizations[
-                        str(value["authorization_id"])
-                    ],
+                    "authorization": authorizations[str(value["authorization_id"])],
                     "fingerprint": value["fingerprint"],
                 }
             )
@@ -1888,9 +1964,7 @@ class StandardsEngine:
                     "rationale": value["rationale"],
                     "auditor_provenance": value["auditor_provenance"],
                     "schema_version": value["schema_version"],
-                    "authorization": authorizations[
-                        str(value["authorization_id"])
-                    ],
+                    "authorization": authorizations[str(value["authorization_id"])],
                 }
             )
         return result
@@ -2215,7 +2289,12 @@ class StandardsEngine:
             if isinstance(selected, PolicyUnit)
             else (
                 module.module_id,
-                *(item.id for item in compiled.corpus.policy_unit_corpus.for_module(module.module_id)),
+                *(
+                    item.id
+                    for item in compiled.corpus.policy_unit_corpus.for_module(
+                        module.module_id
+                    )
+                ),
             )
         )
         chosen: dict[tuple[str, str], dict[str, object]] = {}
@@ -2239,8 +2318,10 @@ class StandardsEngine:
                 )
                 pairs = ((item.edge, item.direction) for item in views)
             for edge, selected_direction in pairs:
-                chosen[(edge.id, selected_direction.value)] = self._relationship_summary(
-                    projection, compiled, edge, selected_direction
+                chosen[(edge.id, selected_direction.value)] = (
+                    self._relationship_summary(
+                        projection, compiled, edge, selected_direction
+                    )
                 )
         return [chosen[key] for key in sorted(chosen)]
 
@@ -2407,13 +2488,23 @@ class StandardsEngine:
         return ApplicationRecoveryRequiredResult.from_value(
             {
                 "kind": "application-recovery-required-result",
-                "application": cls._application_handle(
-                    application.application_id
-                ),
+                "application": cls._application_handle(application.application_id),
                 "status": "recovery-required",
                 "code": code,
                 "outcome": "unavailable",
                 "message": message,
+            }
+        )
+
+    @classmethod
+    def _recovered_application(
+        cls, application: ProposalApplication
+    ) -> RecoverApplicationResult:
+        return RecoverApplicationResult.from_value(
+            {
+                "kind": "recover-application-result",
+                "application": cls._application_handle(application.application_id),
+                "status": "applied",
             }
         )
 

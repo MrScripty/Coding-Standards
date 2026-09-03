@@ -30,7 +30,9 @@ def _pending(value: Mapping[str, object]) -> str:
         for item in requirements:
             requirement = _mapping(item.get("requirement"))
             handle = _mapping(requirement.get("handle"))
-            lines.append(f"  {handle.get('child_id', '')} {requirement.get('fact', '')}")
+            lines.append(
+                f"  {handle.get('child_id', '')} {requirement.get('fact', '')}"
+            )
     if obligations:
         lines.append("REVIEWS")
         for item in obligations:
@@ -101,7 +103,9 @@ def _navigation(value: Mapping[str, object]) -> str:
         lines.append(f"  READ {item['target']} [{item['state']}]")
     policy = _mapping(value.get("policy"))
     if policy:
-        identity = _mapping(policy.get("handle")).get("child_id") or policy.get("id", "")
+        identity = _mapping(policy.get("handle")).get("child_id") or policy.get(
+            "id", ""
+        )
         lines.append(f"  POLICY {identity}")
     relationships = _items(value, "relationships")
     if relationships:
@@ -131,8 +135,7 @@ def _proposal_lifecycle(value: Mapping[str, object]) -> str:
         )
         return "\n".join(lines) + "\n"
     return (
-        f"{kind.upper()} {_proposal_id(value)} "
-        f"{_revision_id(value.get('revision'))}\n"
+        f"{kind.upper()} {_proposal_id(value)} {_revision_id(value.get('revision'))}\n"
     )
 
 
@@ -147,8 +150,7 @@ def _proposal_review(value: Mapping[str, object]) -> str:
 def _proposal_application(value: Mapping[str, object]) -> str:
     application = _mapping(value.get("application"))
     line = (
-        f"PROPOSAL APPLICATION {application.get('id', '')} "
-        f"[{value.get('status', '')}]"
+        f"PROPOSAL APPLICATION {application.get('id', '')} [{value.get('status', '')}]"
     )
     code = value.get("code")
     return f"{line}{'' if code is None else f' {code}'}\n"
@@ -228,6 +230,7 @@ _RESULT_RENDERERS: dict[
     "revise-proposal-result": _proposal_lifecycle,
     "review-proposal-result": _proposal_review,
     "apply-proposal-result": _proposal_application,
+    "recover-application-result": _proposal_application,
     "application-recovery-required-result": _proposal_application,
     "route-result": _navigation,
     "read-result": _navigation,

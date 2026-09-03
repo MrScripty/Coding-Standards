@@ -438,6 +438,80 @@ class SnapshotStoreTests(unittest.TestCase):
                     "AGGREGATE.UNAVAILABLE",
                 )
 
+    def test_guarded_aggregate_set_is_atomic_and_rejects_a_stale_head(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            with SnapshotModule.open(Path(temporary) / "snapshots.sqlite3") as module:
+                snapshot = module.create_snapshot(capture()).snapshot
+                initial = AggregateRecord(
+                    "revision:initial", "revision", b"one", (snapshot,)
+                )
+                root = AggregateRoot(
+                    "proposal:test", "proposal", initial.aggregate_id, (snapshot,), 1
+                )
+                module.create_aggregate_root(root, initial)
+                application = AggregateRecord(
+                    "application:test", "application", b"intent", (snapshot,)
+                )
+                selection = AggregateRecord(
+                    "application-selection:test",
+                    "application-selection",
+                    b"selection",
+                    (snapshot,),
+                )
+
+                self.assertEqual(
+                    module.publish_aggregate_set_if_root_head(
+                        root.aggregate_id,
+                        initial.aggregate_id,
+                        (application, selection),
+                    ),
+                    "published",
+                )
+                self.assertEqual(
+                    module.load_aggregate(application.aggregate_id), application
+                )
+                self.assertEqual(
+                    module.load_aggregate(selection.aggregate_id), selection
+                )
+
+                first = AggregateRecord(
+                    "application:rolled-back", "application", b"first", (snapshot,)
+                )
+                collision = AggregateRecord(
+                    initial.aggregate_id, "revision", b"contradiction", (snapshot,)
+                )
+                with self.assertRaises(SnapshotError) as conflict:
+                    module.publish_aggregate_set_if_root_head(
+                        root.aggregate_id,
+                        initial.aggregate_id,
+                        (first, collision),
+                    )
+                self.assertEqual(
+                    conflict.exception.failure.code, "AGGREGATE.ID_COLLISION"
+                )
+                with self.assertRaises(SnapshotError) as rolled_back:
+                    module.load_aggregate(first.aggregate_id)
+                self.assertEqual(
+                    rolled_back.exception.failure.code, "AGGREGATE.UNAVAILABLE"
+                )
+
+                stale = AggregateRecord(
+                    "application:stale", "application", b"stale", (snapshot,)
+                )
+                self.assertEqual(
+                    module.publish_aggregate_set_if_root_head(
+                        root.aggregate_id,
+                        "revision:other",
+                        (stale,),
+                    ),
+                    "stale",
+                )
+                with self.assertRaises(SnapshotError) as not_published:
+                    module.load_aggregate(stale.aggregate_id)
+                self.assertEqual(
+                    not_published.exception.failure.code, "AGGREGATE.UNAVAILABLE"
+                )
+
     def test_interrupted_aggregate_root_advance_rolls_back_record_and_head(
         self,
     ) -> None:

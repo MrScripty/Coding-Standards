@@ -22,6 +22,7 @@ from .model import (
     FindSnapshotsRequest,
     FindAggregateRootsRequest,
     GuardedAggregatePutResult,
+    GuardedAggregateSetPutResult,
     PutResult,
     SnapshotId,
     SnapshotPage,
@@ -142,6 +143,19 @@ class SnapshotModule:
             aggregate_id,
             expected_head_id,
             record,
+        )
+
+    def publish_aggregate_set_if_root_head(
+        self,
+        aggregate_id: str,
+        expected_head_id: str,
+        records: tuple[AggregateRecord, ...],
+    ) -> GuardedAggregateSetPutResult:
+        self.maintain()
+        return self._store.publish_aggregate_set_if_root_head(
+            aggregate_id,
+            expected_head_id,
+            records,
         )
 
     def create_aggregate_root(self, root: AggregateRoot, head: AggregateRecord) -> None:

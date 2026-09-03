@@ -479,7 +479,9 @@
           "enum": [
             "APPLICATION.PUBLICATION_UNAVAILABLE",
             "APPLICATION.OBSERVATION_UNAVAILABLE",
-            "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE"
+            "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
+            "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
+            "APPLICATION.RECOVERY_TARGET_DIVERGED"
           ]
         },
         "kind": {
@@ -3357,6 +3359,42 @@
         }
       ]
     },
+    "RecoverApplicationCall": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "recover-application"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "readiness"
+      ],
+      "type": "object"
+    },
+    "RecoverApplicationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/ApplicationHandle"
+        },
+        "kind": {
+          "const": "recover-application-result"
+        },
+        "status": {
+          "const": "applied"
+        }
+      },
+      "required": [
+        "kind",
+        "application",
+        "status"
+      ],
+      "type": "object"
+    },
     "RejectedResult": {
       "additionalProperties": false,
       "properties": {
@@ -4152,7 +4190,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 18,
+  "interface_schema_version": 19,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -4339,6 +4377,19 @@
       },
       "result_definitions": [
         "ApplyProposalResult",
+        "ApplicationRecoveryRequiredResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.recover",
+      "id": "recover_application",
+      "input_definition": "RecoverApplicationCall",
+      "input_schema": {
+        "$ref": "#/$defs/RecoverApplicationCall"
+      },
+      "result_definitions": [
+        "RecoverApplicationResult",
         "ApplicationRecoveryRequiredResult",
         "RejectedResult"
       ]

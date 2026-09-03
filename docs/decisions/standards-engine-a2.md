@@ -71,7 +71,20 @@ expected-old-object compare-and-swap, and observes the target before Authoring
 persists the immutable applied outcome. Public success means all of those facts
 are established. An unavailable publication, observation, or outcome write
 returns the durable application handle as `recovery-required`; a public
-recovery operation is a later boundary.
+recovery operation remains a separate boundary from application.
+
+The seventh production boundary adds `recover_application(readiness)`. During
+application admission, Authoring atomically stores the verified immutable
+intent and one immutable readiness-to-application selection. Recovery requires
+current `standards.proposal.recover` authority bound to the exact readiness,
+revision, expected target, fixed ref, and verification contract. It follows
+the derived selection directly and never enumerates applications. A durable
+applied outcome is historical authority even if `main` later moves. Without an
+outcome, only observing the exact candidate permits Authoring to record the
+already-established result. The expected target remains uncertain, another
+target is diverged, and an unavailable observation remains unavailable.
+Recovery performs no materialization, verification, object import, Git write,
+retry, rollback, mutable phase transition, or schema migration.
 
 Proposal IDs are unique lifecycle identities (`proposal:v1:<uuid4>`). Initial
 revision IDs are content-bound identities over proposal ID, ordinal, base
@@ -95,20 +108,21 @@ failed first initialization removes only the exact staging file it created.
 The facade keeps store selection at the deployment boundary and exposes an
 owned close/context-manager lifecycle, not a caller-selected store path.
 
-The public interface declares proposal author, read, composite review, and
-application capabilities at the same deployment boundary that owns the
-existing A1c capabilities; the domain does not add a second ambient
+The public interface declares proposal author, read, composite review,
+application, and application-recovery capabilities at the same deployment
+boundary that owns the existing A1c capabilities; the domain does not add a second ambient
 authorization mechanism or a generic capability-set contract. Interface
-schema v18 adds application. Readiness contract/handle v1 and application
-contract/handle v1 are additive. Analysis state v5, Analysis identity/handle
+schema v19 adds application recovery after v18 application. Readiness
+contract/handle v1 and application contract/handle v1 are additive. Analysis
+state v5, Analysis identity/handle
 v6, result projection v5, request contract v4, proposal revision handle v1,
 Authoring revision contract v1, and store schema v2 remain unchanged because
 their owned promises do not change. The store already owns opaque aggregate
 bytes, exact snapshot dependencies, and transactional aggregate publication,
-so verified intent and outcome records require no schema migration or mutable
-index. This decision does not add a public recovery operation, automatic
-retry/rollback, mutable application root or phase ledger, generic process or
-resource ownership, measurement mechanism, or standards-graph node. The tested
+so verified intent, selection, and outcome records require no schema migration
+or mutable index. This decision does not add automatic retry/rollback, a
+mutable application root or phase ledger, generic process or resource
+ownership, measurement mechanism, or standards-graph node. The tested
 P5C forwarding capability is intentionally not productionized because no real
 caller needs a second eight-method A1c surface.
 

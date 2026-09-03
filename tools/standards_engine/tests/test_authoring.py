@@ -162,7 +162,9 @@ def _application_authorization(
 
 
 class AuthoringTests(unittest.TestCase):
-    def test_application_intent_is_current_head_guarded_and_records_applied(self) -> None:
+    def test_application_intent_is_current_head_guarded_and_records_applied(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             database = Path(temporary) / "standards.sqlite3"
             snapshots = SnapshotModule.open(database)
@@ -183,6 +185,11 @@ class AuthoringTests(unittest.TestCase):
                 _review_authorizations(analysis, revision.revision_id, decisions),
                 target,
             )
+            with self.assertRaises(AuthoringError) as not_admitted:
+                authoring.read_selected_application(readiness.readiness_id)
+            self.assertEqual(
+                not_admitted.exception.failure.code, "APPLICATION.NOT_ADMITTED"
+            )
             application = authoring.admit_application(
                 readiness.readiness_id,
                 _application_authorization(
@@ -197,18 +204,63 @@ class AuthoringTests(unittest.TestCase):
                 authoring.read_application(application.application_id),
                 application,
             )
+            self.assertEqual(
+                authoring.read_selected_application(readiness.readiness_id),
+                application,
+            )
+            selection = application.selection().aggregate()
+            self.assertEqual(len(selection.payload), 218)
+            with self.assertRaises(AuthoringError) as invalid_selection:
+                authoring._application_selection_from_record(
+                    AggregateRecord(
+                        selection.aggregate_id,
+                        selection.kind,
+                        b"{}",
+                        selection.snapshots,
+                    )
+                )
+            self.assertEqual(
+                invalid_selection.exception.failure.code,
+                "AUTHORING.INVALID_APPLICATION_SELECTION",
+            )
+            self.assertIsNone(authoring.application_outcome(application))
+
+            conflicting_authorization = _application_authorization(
+                readiness.readiness_id,
+                revision.revision_id,
+                target,
+            )
+            conflicting_authorization["reference"] = {
+                **conflicting_authorization["reference"],
+                "id": "authorization:sha256:" + "8" * 64,
+            }
+            with self.assertRaises(AuthoringError) as conflict:
+                authoring.admit_application(
+                    readiness.readiness_id,
+                    conflicting_authorization,
+                    RepositoryRevision("c" * 40),
+                )
+            self.assertEqual(
+                conflict.exception.failure.code,
+                "AUTHORING.APPLICATION_SELECTION_CONFLICT",
+            )
             outcome = authoring.record_applied(application)
             self.assertEqual(outcome.status, "applied")
             self.assertEqual(
                 authoring.read_application_outcome(application.application_id),
                 outcome,
             )
+            self.assertEqual(authoring.application_outcome(application), outcome)
 
             snapshots.close()
             with SnapshotModule.open(database) as reopened:
                 cold = AuthoringModule(reopened)
                 self.assertEqual(
                     cold.read_application(application.application_id),
+                    application,
+                )
+                self.assertEqual(
+                    cold.read_selected_application(readiness.readiness_id),
                     application,
                 )
                 self.assertEqual(
@@ -395,7 +447,9 @@ class AuthoringTests(unittest.TestCase):
                         ),
                         target,
                     )
-                self.assertEqual(stale.exception.failure.code, "AUTHORING.REVISION_STALE")
+                self.assertEqual(
+                    stale.exception.failure.code, "AUTHORING.REVISION_STALE"
+                )
                 self.assertEqual(reopened._store.counts(), before)
 
     def test_readiness_rejects_incomplete_decisions_without_persistence(self) -> None:

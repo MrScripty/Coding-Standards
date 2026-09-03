@@ -22,6 +22,7 @@ from .model import (
     FindAggregateRootsRequest,
     FindSnapshotsRequest,
     GuardedAggregatePutResult,
+    GuardedAggregateSetPutResult,
     PutResult,
     SnapshotId,
     SnapshotFile,
@@ -769,6 +770,39 @@ class SQLiteSnapshotStore:
             if root.head_id != expected_head_id:
                 return "stale"
             return self._publish_aggregate_unchecked(record)
+
+    def publish_aggregate_set_if_root_head(
+        self,
+        aggregate_id: str,
+        expected_head_id: str,
+        records: tuple[AggregateRecord, ...],
+    ) -> GuardedAggregateSetPutResult:
+        _root_reference(aggregate_id, "aggregate root ID")
+        _root_reference(expected_head_id, "expected aggregate root head ID")
+        if (
+            type(records) is not tuple
+            or not records
+            or any(type(record) is not AggregateRecord for record in records)
+            or len({record.aggregate_id for record in records}) != len(records)
+        ):
+            raise invalid(
+                "AGGREGATE.INVALID_RECORD_SET",
+                "guarded aggregate-set publication requires unique exact records",
+            )
+        with self._transaction(write=True):
+            root = self._load_root_unchecked(aggregate_id)
+            for snapshot in root.snapshots:
+                self.snapshot(snapshot)
+            if any(record.snapshots != root.snapshots for record in records):
+                raise invalid(
+                    "AGGREGATE.INVALID_DEPENDENCIES",
+                    "guarded aggregates and root must have identical dependencies",
+                )
+            if root.head_id != expected_head_id:
+                return "stale"
+            for record in records:
+                self._publish_aggregate_unchecked(record)
+        return "published"
 
     def load_aggregate(self, aggregate_id: str) -> AggregateRecord:
         with self._transaction(write=False):

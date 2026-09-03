@@ -27,6 +27,7 @@ from ._generated_contract import (
     PrepareCall,
     QueryCall,
     QueryProposalCall,
+    RecoverApplicationCall,
     ReviewProposalCall,
     ReviseProposalCall,
     ResolveCall,
@@ -80,9 +81,7 @@ class AgentToolFacade:
         self.close()
 
     def create_snapshot(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "create_snapshot", arguments, CreateSnapshotCall
-        )
+        call = self._call_or_rejection("create_snapshot", arguments, CreateSnapshotCall)
         if isinstance(call, dict):
             return call
         return self._result("create_snapshot", self._engine.create_snapshot(call))
@@ -123,30 +122,32 @@ class AgentToolFacade:
         )
         if isinstance(call, dict):
             return call
-        return self._result(
-            "analyze_proposal", self._engine.analyze_proposal(call)
-        )
+        return self._result("analyze_proposal", self._engine.analyze_proposal(call))
 
     def review_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "review_proposal", arguments, ReviewProposalCall
-        )
+        call = self._call_or_rejection("review_proposal", arguments, ReviewProposalCall)
         if isinstance(call, dict):
             return call
         return self._result("review_proposal", self._engine.review_proposal(call))
 
     def apply_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "apply_proposal", arguments, ApplyProposalCall
-        )
+        call = self._call_or_rejection("apply_proposal", arguments, ApplyProposalCall)
         if isinstance(call, dict):
             return call
         return self._result("apply_proposal", self._engine.apply_proposal(call))
 
-    def delete_snapshot(self, arguments: object) -> dict[str, object]:
+    def recover_application(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(
-            "delete_snapshot", arguments, DeleteSnapshotCall
+            "recover_application", arguments, RecoverApplicationCall
         )
+        if isinstance(call, dict):
+            return call
+        return self._result(
+            "recover_application", self._engine.recover_application(call)
+        )
+
+    def delete_snapshot(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("delete_snapshot", arguments, DeleteSnapshotCall)
         if isinstance(call, dict):
             return call
         return self._result("delete_snapshot", self._engine.delete_snapshot(call))
@@ -253,8 +254,10 @@ class AgentToolFacade:
                 continue
             kind = kind_schema.get("const")
             version = version_schema.get("const")
-            if isinstance(kind, str) and kind.endswith("-handle") and isinstance(
-                version, int
+            if (
+                isinstance(kind, str)
+                and kind.endswith("-handle")
+                and isinstance(version, int)
             ):
                 versions[kind] = version
         return versions
@@ -280,7 +283,9 @@ class AgentToolFacade:
             if not isinstance(variants, list):
                 raise RuntimeError(f"result definition {name!r} has no model algebra")
             for variant in variants:
-                reference = variant.get("$ref") if isinstance(variant, Mapping) else None
+                reference = (
+                    variant.get("$ref") if isinstance(variant, Mapping) else None
+                )
                 if not isinstance(reference, str):
                     raise RuntimeError(
                         f"result definition {name!r} contains a non-reference variant"

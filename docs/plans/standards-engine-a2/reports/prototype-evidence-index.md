@@ -1,7 +1,8 @@
 # A2 Milestone 0 Prototype Evidence Index
 
-**Status:** `P1, P2R2, P3, P4R, and corrected P5C pass; P2 and P4 revise;
-P2R rejected; combined P5 and P5L evidence rejected before behavior`
+**Status:** `P1, P2R2, P3, P4R, corrected P5C, and P7 recovery pass;
+P2 and P4 revise; P2R rejected; combined P5 and P5L evidence rejected before
+behavior`
 
 The canonical [design-validation protocol](design-validation-protocol.md)
 predeclares every question, comparison, dimension, oracle, and threshold.
@@ -20,6 +21,8 @@ branch commits and terminal worktree dispositions after each isolated run.
 | A2-P5 | `tools/standards_engine/tests/prototypes/a2/efficiency-measurement.prototype.py` | removed `prototype/a2-m0-efficiency-measurement`; removed `/tmp/coding-standards-a2-p5-efficiency-measurement` | `b503dcb76fd27aca41df154f37e20f6635de44bf` | `c939f693660561833e4a079ad7ebe9d725fbabe2` | `reject-evidence-implementation`; no measurement or combined-design verdict | `removed-archived` at `refs/archive/a2-prototypes/p5-efficiency-measurement` |
 | A2-P5L | `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_owner_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_lifecycle_ownership_mvt.py` | removed `prototype/a2-m0-lifecycle-ownership`; removed `/tmp/coding-standards-a2-p5l-lifecycle-ownership` | `8a0d7df08e68fddbd60a7e2f3d2e267036c827ae` | `4c1c5359a8314fc9106de4a92dd7b3a7cb0e44e6` | `reject-evidence-implementation`; no behavior or lifecycle verdict | `removed-archived` at `refs/archive/a2-prototypes/p5l-lifecycle-ownership` |
 | A2-P5C | `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_prototype.py`; `tools/standards_engine/tests/prototypes/a2/p5_phase_capability_mvt.py` | removed `prototype/a2-m0-phase-capability-passed`; removed `/tmp/coding-standards-a2-p5c-phase-capability-passed` | `9f6dd8a9484cc1b2421b29829ea928a9413905f9`; corrected execution descended through rejected evidence commit `81a6b86636f59b7d1ef4c4d31a0199531a5984ee` | `82a37ed0f7d40cbb105df1c25381a9073b330e49` | `pass`; the prior source is separately `reject-frozen-source` | `removed-archived` at `refs/archive/a2-prototypes/p5c-phase-capability-passed`; rejected source retained at `refs/archive/a2-prototypes/p5c-phase-capability` |
+| A2-P7L | `tools/standards_engine/prototypes/a2/application-recovery.prototype.html` | removed `prototype/a2-application-recovery`; removed temporary worktree | `992bd115017df53d41e413b0303d2ab92a1d0c0f` | `78033d3d65bdb003c57fa44940061a0df220c8a1` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/application-recovery-logic` |
+| A2-P7M | `tools/standards_engine/tests/prototypes/a2/application-recovery-selection.prototype.py` | removed `prototype/a2-application-recovery-mvt`; removed temporary worktree | `992bd115017df53d41e413b0303d2ab92a1d0c0f` | `685badf5dddb872aeaf5666e646dd8bdd2dc8479` | `pass` | `removed-archived` at `refs/archive/a2-prototypes/application-recovery-selection-mvt` |
 
 The A2 prototype owner owns each private worktree, its exact registered
 authored source path or paths, and the branch-local generated suite-input
@@ -755,3 +758,27 @@ ref was verified at the exact commit. Neither source entered canonical
 active finding, the [design-validation protocol](design-validation-protocol.md)
 admits only the smaller resource-free P5C question, and the
 [P5 decomposition](p5-lifecycle-decomposition.md) keeps P5R/P5M unavailable.
+
+## A2-P7 Application Recovery
+
+P7 asked whether readiness alone can rediscover and recover one already
+admitted content-bound application after a lost response without changing
+`apply_proposal`, scanning aggregates, retrying Git, or adding mutable phase
+state. The logic comparison rejected discovery-plus-recovery and repeated
+apply, then selected one explicit recovery operation plus one immutable
+readiness selection. Its ten guided states all passed with zero Git writes and
+at most the one existing outcome write.
+
+The second MVT exercised the design against real SQLite transactions and a
+real Git expected-old-object ref transition on Linux CPython 3.11 and 3.12.
+Interrupted and conflicting two-record admissions were atomic, cold lookup
+returned the same application, duplicate recovery was idempotent, the
+selection payload was 218 bytes, and store schema v2 remained unchanged. The
+full question, thresholds, exact commands, four-dimension verdict, limits, and
+production admission are recorded in the
+[application recovery admission](application-recovery-admission.md).
+
+Both signed prototype commits descend directly from Milestone 6 base
+`992bd115017df53d41e413b0303d2ab92a1d0c0f`. Their archive refs were verified
+after their temporary branches and worktrees were removed. Neither source is
+present on canonical `main`; only the validated decision enters Milestone 7.

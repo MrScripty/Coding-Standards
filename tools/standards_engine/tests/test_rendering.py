@@ -114,8 +114,7 @@ class TextRenderingTest(unittest.TestCase):
     def test_every_public_result_kind_has_a_rendering_dispatch(self) -> None:
         schema = json.loads(
             (
-                REPO_ROOT
-                / "tools/standards_engine/contracts/a1-contract.schema.json"
+                REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json"
             ).read_text(encoding="utf-8")
         )
         kinds = {
@@ -147,6 +146,7 @@ class TextRenderingTest(unittest.TestCase):
             "revise-proposal-result",
             "review-proposal-result",
             "apply-proposal-result",
+            "recover-application-result",
             "application-recovery-required-result",
             "proposal-route-result",
             "proposal-read-result",

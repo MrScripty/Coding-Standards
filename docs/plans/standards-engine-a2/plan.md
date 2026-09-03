@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 accepted; public recovery admission pending
+**Current phase:** Milestone 7 application recovery accepted; final A2
+feature-completeness and acceptance audit pending
 
-**Next slice:** reconcile and design-validate the smallest public application
-rediscovery/recovery contract for a lost caller response; admit no later
-production write set until that contract and its exact evidence are accepted
+**Next slice:** perform the bounded feature-completeness, compatibility,
+preservation, and independent final acceptance audit; admit no new product
+machinery unless that audit identifies a concrete unmet contract
 
 **Acceptance status:** `pending`
 
@@ -29,6 +30,9 @@ production write set until that contract and its exact evidence are accepted
 **P5 replacement re-plan:**
 [Lifecycle-first evidence decomposition](reports/p5-lifecycle-decomposition.md)
 
+**Application recovery admission:**
+[Lost-response recovery design and evidence](reports/application-recovery-admission.md)
+
 ## Objective
 
 Provide software-development agents with one controlled-authoring workflow that
@@ -45,7 +49,7 @@ assumption the user reauthorized for projected-material identity validation on
 design-validation facts required to make the A2 objective implementable. It
 admits isolated, disposable prototypes and minimum viable design tests. The
 user's 2026-09-02 implementation directions through the current continuation
-authorize only the exact production slices recorded in Milestones 1 through 6;
+authorize only the exact production slices recorded in Milestones 1 through 7;
 they do not authorize later A2
 behavior or canonical-standards mutation.
 
@@ -104,7 +108,8 @@ behavior or canonical-standards mutation.
 - Production implementation outside the exact admitted Milestone 1
   `create_proposal`/`find_proposals`, Milestone 2 `revise_proposal`, Milestone
   3 `query_proposal`, Milestone 4 `analyze_proposal`, Milestone 5
-  `review_proposal`, and Milestone 6 `apply_proposal` slices
+  `review_proposal`, Milestone 6 `apply_proposal`, and Milestone 7
+  `recover_application` slices
   while later A2 design remains active.
 - Changing, weakening, reinterpreting, or silently superseding an explicit
   user-selected A1c design decision outside the exact projected-material
@@ -146,7 +151,7 @@ behavior or canonical-standards mutation.
   public readback, write set, and verification are named here; it does not
   authorize canonical standards mutation.
 - Milestone 0 remains the discovery owner for later A2 behavior. Production
-  edits are available only for the exact Milestone 1 through Milestone 6 slices;
+  edits are available only for the exact Milestone 1 through Milestone 7 slices;
   every later slice still requires its applicable A1c preservation and
   design-validation records plus an exact write set before implementation.
 - A material design or procedure requires the smallest adequate pre-canonical
@@ -227,6 +232,7 @@ behavior or canonical-standards mutation.
 | Admit the fourth production slice as one additive `analyze_proposal(revision)` operation. Resolve the exact immutable revision and retained base, derive normalized A1c change descriptors from their compiled policy-unit corpora, retain those inputs with the revision's semantic proposals in one evolved `AnalysisState`, and revalidate them against the exact revision during cold replay and unchanged `resolve`. Advance only Analysis state format v5, identity domain v6, Analysis handle v6, result projection v5, and interface schema v16. Retain request contract v4, proposal revision handle v1, Authoring contract v1, and store schema v2 because their owned promises do not change. Use coordinated replacement and typed rejection of obsolete Analysis state; omit review, readiness, application, Git, recovery, compatibility readers, caches, second analyzers, and phase machinery. | User, Product, Analysis, Authoring, Snapshot, Contracts, Architecture, and Planning owners | Explicit A1c projected-material reauthorization, accepted P2R2 identity/replay/lifecycle evidence, accepted P4R facade continuation, accepted Milestones 1 through 3, Development Proportionality, and Milestone 4 dual-runtime focused and repository verification | Another prototype cycle despite deciding evidence; mutable-head replay; caller-supplied descriptors or material facts; proposal-as-snapshot; full projected corpus per analysis; silent old-state reinterpretation; no-op store migration; or broadened later lifecycle machinery |
 | Admit the fifth production slice as one additive `review_proposal(analysis, decisions, prior_readiness?)` operation. Require one complete revision-backed A1c Analysis with no `requires-change` disposition, exact evidence-backed consumer, impact, and audit acceptances, and separate current authorizations for each decision. Derive the exact revision, proposal head, configured `refs/heads/main` target, and versioned complete-verification checkpoint internally. Publish one content-bound immutable readiness aggregate only if the analyzed revision remains the proposal head in the same Snapshot-owned transaction. Advance only interface schema v17 and add readiness contract/handle v1. Retain Analysis v5/handle v6, request v4, result projection v5, Authoring revision contract v1, and store schema v2. Expose one composite operation capability while retaining the three existing decision capabilities internally; omit readiness inspection, application, Git writes, recovery, caches, phases, and measurement machinery. | User, Product, Analysis, Authoring, Snapshot, Repository, Security, Verification, Contracts, Architecture, and Planning owners | Accepted P4R explicit continuation, accepted Milestones 1 through 4, focused readiness composition and atomic-publication minimum viable tests, Development Proportionality, and Milestone 5 dual-runtime and repository verification | Another prototype cycle despite deciding evidence; completion treated as approval; caller-supplied revision, target, verifier, capability, or authority facts; mutable readiness; non-atomic head validation; duplicate review lifecycles; store migration; public capability-set machinery; or broadened application/recovery behavior |
 | Admit the sixth production slice as one additive `apply_proposal(readiness)` operation. Require current apply authorization, materialize the exact replacement set in an isolated local clone, create one deterministic conventional candidate commit, run the Standards Verifier `complete` checkpoint against that exact checked-out commit, and import only the passed candidate before an atomic expected-old-object update of configured `refs/heads/main`. Before Git publication, publish one content-bound verified application intent under the existing proposal-head guard; after exact target observation, publish one immutable applied outcome. Return an opaque application handle with `applied`, or the same handle with `recovery-required` when publication truth cannot be established. Advance only interface schema v18 and add application contract/handle v1. Retain request v4, result projection v5, readiness v1, Analysis v5/handle v6, Authoring revision v1, and store v2. Public recovery remains a later continuation; omit mutable attempt roots, phase ledgers, generic process/resource frameworks, retry loops, rollback, caches, compatibility readers, and measurement machinery. | User, Product, Authoring, Snapshot, Repository, Security, Verification, Contracts, Architecture, and Planning owners | Accepted P3 isolated-publication and interruption evidence, accepted P4R typed continuation, accepted Milestones 1 through 5, focused real-Git candidate/publication minimum viable tests, the existing complete-checkpoint contract, and Development Proportionality | Another broad prototype cycle despite deciding evidence; live worktree/index mutation; caller-supplied Git/verifier/target/authority facts; publication before verification or durable intent; inferred success; non-atomic target update; automatic retry/rollback; store migration; or recovery/resource/measurement machinery broadened into this slice |
+| Admit the seventh production slice as one additive `recover_application(readiness)` operation. Atomically publish one immutable readiness-to-application selection with the Milestone 6 verified intent, require separate current recovery authorization, resolve only that selection, and treat an existing durable outcome as terminal authority. Without an outcome, observe configured `refs/heads/main`: persist the existing immutable applied outcome only when it exactly equals the candidate; retain typed uncertainty when it equals the expected target, typed divergence for another target, and typed unavailability when observation fails. Advance only interface schema v19. Retain application/readiness handles v1, request v4, result projection v5, Analysis v5/handle v6, Authoring revision v1, and store v2. Omit scans, indexes, tables, mutable phases, compatibility fallback, candidate staging, verification, object import, Git publication, retry, rollback, and standards-graph membership. | User, Product, Authoring, Snapshot, Repository, Security, Resilience, Contracts, Architecture, and Planning owners | Accepted [application recovery admission](reports/application-recovery-admission.md), signed P7 logic and real Git/SQLite MVTs, accepted Milestones 1 through 6, and Development Proportionality | Another prototype cycle after the bounded decision passed; repeated apply semantics; recovery before authorization; application enumeration; guessed history from an unchanged target; recovery Git writes; or a store migration without a current consumer |
 
 ## Evidence And Oracle Plan
 
@@ -814,9 +820,62 @@ staged scope, generated diff, sensitive-value review, and Commit checks pass.
 
 **Status:** `Accepted`
 
+### Milestone 7: Lost-Response Application Recovery
+
+Deliver one direct, authorized continuation for a verified application whose
+caller did not receive a terminal response:
+
+- [x] Add `recover_application(readiness)` with only the opaque readiness
+  handle as caller input and `standards.proposal.recover` as a separate current
+  capability. The handle grants no authority.
+- [x] Derive one immutable selection identity from readiness and atomically
+  publish that selection with the content-bound verified application intent
+  under the existing proposal-head guard. A conflicting application for the
+  same readiness rolls back both records.
+- [x] Resolve the selected application directly without aggregate enumeration,
+  a new table/index, or a current proposal-head requirement. A pre-Milestone-7
+  intent without a selection returns typed `APPLICATION.NOT_ADMITTED`.
+- [x] Return `applied` immediately for the existing exact immutable outcome.
+  Otherwise observe only configured `refs/heads/main`; if it equals the
+  candidate, record the existing applied outcome and return success. Preserve
+  typed uncertainty at the expected target, divergence at another target, and
+  observation or outcome-persistence unavailability.
+- [x] Perform no candidate materialization, verification, object import, ref
+  update, retry, rollback, mutable phase transition, compatibility scan, or
+  standards-graph mutation during recovery.
+- [x] Allocate interface schema v19 and retain application/readiness handles
+  v1, request v4, result projection v5, Analysis v5/handle v6, Authoring
+  revision v1, and store v2.
+- [x] Exercise interrupted and conflicting atomic admission, denied authority,
+  missing selection, exact candidate, existing outcome, expected and diverged
+  targets, unavailable observation, outcome-write interruption, duplicate
+  recovery, generated facade transport, real Git publication, cold process
+  replacement, and unchanged A1c behavior on Linux CPython 3.11 and 3.12.
+
+The coherent write set is this plan, ledger, issue register, preservation
+report, A2 ADR, recovery-admission report, prototype index, and Engine/contract
+documentation; one Snapshot-owned guarded aggregate-set publication method;
+the immutable selection, exact Authoring decoder and lookup; canonical schema,
+interface manifest, examples, identity fixture, generated projections, facade,
+Engine, and renderer; focused Snapshot, Authoring, contract, rendering, and
+Engine recovery tests; and mechanically required repository projections. It
+changes no Repository Git write or verifier code, dependency, table, store
+version, A1c public operation, or standards graph.
+
+**Acceptance gate:** application and selection are all-or-nothing; one
+readiness cannot select different applications; authorization precedes
+selection disclosure or target observation; recovery never writes Git or
+reruns verification; only an existing outcome or exact candidate observation
+returns `applied`; unresolved target states remain distinct; cold recovery
+returns the original application identity; both supported runtimes, affected
+tests, complete repository verification, staged scope, generated diff,
+sensitive-value review, and Commit checks pass.
+
+**Status:** `Accepted`
+
 ## Blockers
 
-No blocker applies to the exact Milestone 1 through Milestone 6 slices. The
+No blocker applies to the exact Milestone 1 through Milestone 7 slices. The
 following constraints remain blockers for later A2 slices:
 
 - The combined P5 executable is superseded before measurement. Its final
@@ -831,10 +890,10 @@ following constraints remain blockers for later A2 slices:
   but has no production consumer and therefore supplies evidence only. P5R and
   P5M remain unavailable and become relevant only if a later exact slice owns
   real process/resource lifetime or a material efficiency decision.
-- Public recovery and its additional outcomes remain unavailable until their
-  exact continuation contract and write set are admitted. Milestone 6 retains
-  the immutable application facts that recovery requires but does not expose,
-  simulate, or pre-implement that later operation.
+- Final A2 acceptance remains unavailable until the feature-completeness,
+  compatibility, preservation, repository-wide verification, and independent
+  Standards/specification audits close the objective-level criteria. This is
+  an audit boundary, not authority to add speculative runtime machinery.
 
 ## Re-Plan Triggers
 

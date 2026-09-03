@@ -32,7 +32,6 @@ from tools.standards_engine.standards_engine import (
     AnalysisHandle,
     AnalysisInspectionResult,
     CompleteResult,
-    ApplyProposalResult,
     CreateProposalCall,
     CreateProposalResult,
     CreateSnapshotCall,
@@ -40,6 +39,7 @@ from tools.standards_engine.standards_engine import (
     PendingResult,
     PrepareCall,
     RejectedResult,
+    RecoverApplicationResult,
     ResolveCall,
     ReviewProposalResult,
     ReviseProposalCall,
@@ -64,6 +64,8 @@ from tools.standards_snapshots.standards_snapshots import (
     CapturedContent,
     SnapshotFile,
     SnapshotId,
+    SnapshotError,
+    SnapshotFailure,
     SnapshotPath,
 )
 
@@ -305,11 +307,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                                 decision,
                             ),
                             REVIEW_CAPABILITIES[str(decision["owner"])],
-                            (
-                                _reference(
-                                    f"proposal-{decision['owner']}-review"
-                                ),
-                            ),
+                            (_reference(f"proposal-{decision['owner']}-review"),),
                         ),
                     ).as_contract()
                     for decision in decisions
@@ -322,24 +320,38 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     expected,
                 )
 
-                response = facade.apply_proposal(
-                    {
-                        "kind": "apply-proposal",
-                        "readiness": {
-                            "kind": "readiness-handle",
-                            "id": readiness.readiness_id,
-                            "schema_version": 1,
-                        },
-                    }
+                with mock.patch.object(
+                    engine._authoring,
+                    "record_applied",
+                    side_effect=SnapshotError(
+                        SnapshotFailure(
+                            "unavailable",
+                            "SNAPSHOT_STORE.PROTOTYPE_INTERRUPTION",
+                            "the response was lost before outcome persistence",
+                        )
+                    ),
+                ):
+                    response = facade.apply_proposal(
+                        {
+                            "kind": "apply-proposal",
+                            "readiness": {
+                                "kind": "readiness-handle",
+                                "id": readiness.readiness_id,
+                                "schema_version": 1,
+                            },
+                        }
+                    )
+                self.assertEqual(
+                    response.get("kind"),
+                    "application-recovery-required-result",
+                    response,
+                )
+                application = engine._authoring.read_application(
+                    response["application"]["id"]
                 )
                 self.assertEqual(
-                    response.get("kind"), "apply-proposal-result", response
+                    response["code"], "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE"
                 )
-                applied = ApplyProposalResult.from_value(response)
-                application = engine._authoring.read_application(
-                    applied.application.id
-                )
-                self.assertEqual(applied.status, "applied")
                 self.assertEqual(application.expected_target, expected)
                 self.assertNotEqual(application.candidate, expected)
                 self.assertEqual(
@@ -362,14 +374,40 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 execution_context=context,
             )
             try:
+                cold_facade = AgentToolFacade(reopened, _contracts(repository))
+                with (
+                    mock.patch.object(
+                        reopened._repository, "materialize_candidate"
+                    ) as materialize,
+                    mock.patch.object(
+                        reopened._repository, "publish_candidate"
+                    ) as publish,
+                    mock.patch.object(reopened, "_application_verifier") as verify,
+                ):
+                    recovered = RecoverApplicationResult.from_value(
+                        cold_facade.recover_application(
+                            {
+                                "kind": "recover-application",
+                                "readiness": {
+                                    "kind": "readiness-handle",
+                                    "id": readiness.readiness_id,
+                                    "schema_version": 1,
+                                },
+                            }
+                        )
+                    )
+                materialize.assert_not_called()
+                publish.assert_not_called()
+                verify.assert_not_called()
                 cold_application = reopened._authoring.read_application(
-                    applied.application.id
+                    recovered.application.id
                 )
                 cold_outcome = reopened._authoring.read_application_outcome(
-                    applied.application.id
+                    recovered.application.id
                 )
             finally:
                 reopened.close()
+            self.assertEqual(recovered.application.id, application.application_id)
             self.assertEqual(cold_application, application)
             self.assertEqual(cold_outcome.candidate, application.candidate)
             self.assertEqual(cold_outcome.status, "applied")
@@ -389,9 +427,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertIsInstance(state, AnalysisInspectionResult)
         self.assertEqual(state.state.handle, result.handle)
 
-        child = self.engine.inspect(
-            InspectCall(result.obligations[0].handle)
-        )
+        child = self.engine.inspect(InspectCall(result.obligations[0].handle))
         self.assertIsInstance(child, AnalysisChildInspectionResult)
         self.assertEqual(child.handle.analysis, result.handle)
 
@@ -609,6 +645,37 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(readiness.analysis_id, complete.handle.id)
         self.assertEqual(readiness.revision_id, created.revision.id)
 
+        with mock.patch.object(
+            self.engine._repository, "branch_revision"
+        ) as unadmitted_observation:
+            unadmitted = facade.recover_application(
+                {
+                    "kind": "recover-application",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(unadmitted["code"], "APPLICATION.NOT_ADMITTED")
+        unadmitted_observation.assert_not_called()
+
+        with (
+            mock.patch.object(
+                self.engine,
+                "_execution_context",
+                AnalysisExecutionContext(DenyingAuthorizer()),
+            ),
+            mock.patch.object(
+                self.engine._repository, "branch_revision"
+            ) as unauthorized_recovery_observation,
+        ):
+            unauthorized_recovery = facade.recover_application(
+                {
+                    "kind": "recover-application",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(unauthorized_recovery["code"], "ANALYSIS.UNAUTHORIZED")
+        unauthorized_recovery_observation.assert_not_called()
+
         candidate = MaterializedCandidate(
             Path(self.temporary.name),
             readiness.expected_target,
@@ -699,13 +766,9 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     "readiness": reviewed.readiness.as_contract(),
                 }
             )
-        self.assertEqual(
-            verification_failed["code"], "APPLICATION.VERIFICATION_FAILED"
-        )
+        self.assertEqual(verification_failed["code"], "APPLICATION.VERIFICATION_FAILED")
         failed_publish.assert_not_called()
-        self.assertEqual(
-            self.engine._snapshots._store.counts(), counts_before_failure
-        )
+        self.assertEqual(self.engine._snapshots._store.counts(), counts_before_failure)
 
         invalid_candidate = GitRepositoryError(
             GitRepositoryFailure(
@@ -801,53 +864,126 @@ class AnalysisWorkflowTest(unittest.TestCase):
         )
         self.assertEqual(persisted_intent.candidate, candidate.revision)
 
+        recovery_counts = self.engine._snapshots._store.counts()
+        recovery_cases = (
+            (
+                unavailable_observation,
+                "APPLICATION.OBSERVATION_UNAVAILABLE",
+            ),
+            (
+                readiness.expected_target,
+                "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
+            ),
+            (
+                RepositoryRevision("e" * 40),
+                "APPLICATION.RECOVERY_TARGET_DIVERGED",
+            ),
+        )
+        for observed, expected_code in recovery_cases:
+            with mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                side_effect=observed
+                if isinstance(observed, GitRepositoryError)
+                else None,
+                return_value=None
+                if isinstance(observed, GitRepositoryError)
+                else observed,
+            ):
+                unresolved = facade.recover_application(
+                    {
+                        "kind": "recover-application",
+                        "readiness": reviewed.readiness.as_contract(),
+                    }
+                )
+            self.assertEqual(unresolved["code"], expected_code)
+            self.assertEqual(self.engine._snapshots._store.counts(), recovery_counts)
+
         with (
             mock.patch.object(
                 self.engine._repository,
                 "branch_revision",
-                side_effect=(
-                    readiness.expected_target,
-                    readiness.expected_target,
-                    candidate.revision,
+                return_value=candidate.revision,
+            ),
+            mock.patch.object(
+                self.engine._authoring,
+                "record_applied",
+                side_effect=SnapshotError(
+                    SnapshotFailure(
+                        "unavailable",
+                        "SNAPSHOT_STORE.PROTOTYPE_INTERRUPTION",
+                        "the recovered outcome write was interrupted",
+                    )
                 ),
+            ),
+        ):
+            interrupted_recovery = facade.recover_application(
+                {
+                    "kind": "recover-application",
+                    "readiness": reviewed.readiness.as_contract(),
+                }
+            )
+        self.assertEqual(
+            interrupted_recovery["code"],
+            "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
+        )
+        self.assertEqual(self.engine._snapshots._store.counts(), recovery_counts)
+
+        with (
+            mock.patch.object(
+                self.engine._repository,
+                "branch_revision",
+                return_value=candidate.revision,
             ),
             mock.patch.object(
                 self.engine._repository,
                 "materialize_candidate",
-                return_value=nullcontext(candidate),
-            ),
-            mock.patch.object(
-                self.engine._repository,
-                "publish_candidate",
-                return_value="updated",
-            ) as publish,
+            ) as materialize,
+            mock.patch.object(self.engine._repository, "publish_candidate") as publish,
             mock.patch.object(
                 self.engine,
                 "_application_verifier",
-                return_value=CompleteVerificationResult((), 0, None, 0),
-            ),
+            ) as verifier,
         ):
-            applied = ApplyProposalResult.from_value(
-                facade.apply_proposal(
+            recovered = RecoverApplicationResult.from_value(
+                facade.recover_application(
                     {
-                        "kind": "apply-proposal",
+                        "kind": "recover-application",
                         "readiness": reviewed.readiness.as_contract(),
                     }
                 )
             )
-        publish.assert_called_once()
-        self.assertEqual(applied.status, "applied")
+        materialize.assert_not_called()
+        publish.assert_not_called()
+        verifier.assert_not_called()
+        self.assertEqual(recovered.status, "applied")
         self.assertEqual(
-            applied.application.id, recovery_required["application"]["id"]
+            recovered.application.id, recovery_required["application"]["id"]
         )
-        application = self.engine._authoring.read_application(applied.application.id)
+        application = self.engine._authoring.read_application(recovered.application.id)
         outcome = self.engine._authoring.read_application_outcome(
-            applied.application.id
+            recovered.application.id
         )
         self.assertEqual(application.candidate, candidate.revision)
         self.assertEqual(outcome.candidate, candidate.revision)
 
-    def test_equal_transition_is_idempotent_and_different_evidence_branches(self) -> None:
+        with mock.patch.object(
+            self.engine._repository, "branch_revision"
+        ) as completed_observation:
+            repeated_recovery = RecoverApplicationResult.from_value(
+                facade.recover_application(
+                    {
+                        "kind": "recover-application",
+                        "readiness": reviewed.readiness.as_contract(),
+                    }
+                )
+            )
+        completed_observation.assert_not_called()
+        self.assertEqual(repeated_recovery.application, recovered.application)
+
+    def test_equal_transition_is_idempotent_and_different_evidence_branches(
+        self,
+    ) -> None:
         parent = self.prepare()
         first_call = self.disposition_submission(parent, "review-evidence-one")
 
@@ -1030,9 +1166,7 @@ finally:
         }
         if prior is not None:
             request["prior_analysis"] = prior
-        return self.engine.prepare(
-            PrepareCall.from_value({"request": request})
-        )
+        return self.engine.prepare(PrepareCall.from_value({"request": request}))
 
     @staticmethod
     def disposition_submission(result, evidence_id: str) -> ResolveCall:
@@ -1082,6 +1216,7 @@ finally:
                 },
             }
         )
+
 
 if __name__ == "__main__":
     unittest.main()

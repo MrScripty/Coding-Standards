@@ -245,9 +245,7 @@ class ContractProjectionTest(unittest.TestCase):
         )
 
         schema = copy.deepcopy(canonical_schema)
-        schema["$defs"]["AllExpression"]["properties"]["expressions"][
-            "maxItems"
-        ] = 1
+        schema["$defs"]["AllExpression"]["properties"]["expressions"]["maxItems"] = 1
         changed_compiled = compile_contracts(schema, interface)
         two_expressions = {
             "operator": "all",
@@ -325,10 +323,11 @@ class ContractProjectionTest(unittest.TestCase):
                 "analyze_proposal",
                 "review_proposal",
                 "apply_proposal",
+                "recover_application",
             ),
         )
         self.assertEqual(set(tools["$defs"]), set(schema["$defs"]))
-        self.assertEqual(tools["interface_schema_version"], 18)
+        self.assertEqual(tools["interface_schema_version"], 19)
         self.assertEqual(tools["request_contract_version"], 4)
         self.assertEqual(tools["result_projection_version"], 5)
         json.dumps(tools)

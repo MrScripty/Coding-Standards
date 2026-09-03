@@ -37,10 +37,17 @@ verified intent, advances only `refs/heads/main` with an expected-target
 compare-and-swap, observes the exact candidate, and records an immutable
 applied outcome before returning `applied`. Ambiguous post-verification
 publication or persistence returns the durable application handle as
-`recovery-required`; public recovery is not part of this slice. Application
-does not use the configured worktree or index as staging authority and creates
-no mutable phase ledger, automatic retry, rollback, or second review
-lifecycle.
+`recovery-required`. Application admission atomically records one immutable
+readiness-to-application selection with the verified intent.
+`recover_application(readiness)` requires separate current recovery authority,
+resolves only that selection, and observes the configured canonical ref. An
+existing durable outcome returns `applied` without consulting current Git; an
+exact candidate at the ref records the missing outcome and returns `applied`.
+An unchanged expected target, another target, or unavailable observation stays
+explicitly recovery-required. Recovery never stages, verifies, imports,
+publishes, retries, rolls back, or scans application records. Application does
+not use the configured worktree or index as staging authority and creates no
+mutable phase ledger, automatic retry, rollback, or second review lifecycle.
 Routing evaluates the registered
 Router projection and derives dependency closure from the neutral standards graph.
 Read-only change analysis compares exact accepted and proposed authority,

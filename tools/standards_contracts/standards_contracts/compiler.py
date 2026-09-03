@@ -79,6 +79,7 @@ _OPERATIONS = (
     "analyze_proposal",
     "review_proposal",
     "apply_proposal",
+    "recover_application",
 )
 _ASCII_PATTERN = re.compile(r"\A[\x20-\x7e]*\Z")
 
@@ -276,7 +277,7 @@ def _parse_interface(
             "operations must be exactly create_snapshot, find_snapshots, "
             "delete_snapshot, undelete_snapshot, query, prepare, resolve, inspect, "
             "create_proposal, find_proposals, revise_proposal, query_proposal, "
-            "analyze_proposal, review_proposal, apply_proposal",
+            "analyze_proposal, review_proposal, apply_proposal, recover_application",
         )
     resolve = next(operation for operation in operations if operation.id == "resolve")
     submission_definition = definitions[resolve.input_definition]["properties"][
