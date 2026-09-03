@@ -336,3 +336,33 @@ create ledger entries.
 - Development Decision: `implement` is complete for LA-006 through LA-009.
   Proceed directly to the predeclared objective acceptance portfolio; no
   further investigation is authorized without a new failing named claim.
+
+## 2026-09-03 — Milestone 3 And A2 Accepted
+
+- Operation: `accept` Milestone 3 and the A2 logical-authoring objective.
+- Accepted implementation: signed local commits
+  `7bf74bb5a8cb0ffccaff3ec86550051f900fb4bb`,
+  `2be8ab21f8f6016c79509f74cbd5e98c1ab31fb0`, and
+  `6dc08d8abfb9d5d98b2e4293c0faa18d0efe8476`, reviewed as the fixed range
+  `52b096ded9c53afd439a3cf0efc4cc85252da570...6dc08d8abfb9d5d98b2e4293c0faa18d0efe8476`.
+- Objective dual-runtime evidence: all 67 Standards Engine tests pass on Linux
+  CPython 3.11 in 1,918.650 seconds and all 67 pass on Linux CPython 3.12 in
+  2,051.954 seconds. This portfolio composes contracts, generated facade,
+  public authoring, immutable replay, A1c navigation and Analysis, real
+  Git/SQLite application, verification, recovery, and rendering.
+- Supporting evidence: the focused public/compiler portfolio passes 14 of 14
+  on each runtime; Contracts pass 20 of 20; A1c Analysis passes 86 of 86; and
+  the exact acceptance candidate passes the current 270 declarative suites,
+  all seven retained Bash checkers, generated-artifact freshness, plan
+  structure, Ruff, and diff hygiene.
+- Independent reviews remained separate. Specification found and closed the
+  policy-free creation mismatch. Routed Standards found and closed explicit
+  unsupported applicability and confirmed the ephemeral candidate index has
+  deciding verifier authority. Architecture's deletion probe removed unused
+  logical-program identity/projection surface and found no second graph,
+  analyzer, store, compatibility layer, or measurement mechanism.
+- Findings LA-001 through LA-009 are resolved with no deferred follow-up.
+  Remote publication, inferred semantic authorship, candidate signing,
+  background retry, and caller access to repository or SQLite representations
+  remain outside the accepted product contract.
+- Persistent evidence: [Final acceptance](reports/final-acceptance.md).

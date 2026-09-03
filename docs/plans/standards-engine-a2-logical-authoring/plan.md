@@ -1,13 +1,12 @@
 # Plan: Standards Engine A2 Logical Authoring
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 3: objective acceptance
+**Current phase:** Complete
 
-**Next slice:** run the objective dual-runtime and complete acceptance evidence
-against the independently reviewed corrected artifact
+**Next slice:** none; A2 logical authoring is accepted
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -37,14 +36,14 @@ canonical Git authority; remote push is not part of this plan.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| LA-A1 | The generated public Interface accepts canonical-ID standards-domain intent and never requires a repository path, full-file replacement, raw Markdown metadata envelope, TOML/JSON representation, SQL, Git ref, or Git object ID from the agent. | `contract` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
-| LA-A2 | Through the public proposal workflow, an agent can add a standard, revise its authored policy, explicitly change its relationships or placement, remove it, query the exact proposal revision, and analyze the resulting standards graph after process replacement. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
-| LA-A3 | For each supported intent, the Engine updates every mechanically required canonical representation and derived projection selected by current authorities, while semantic relationships, policy-impact declarations, lifecycle meaning, rationale, and evidence originate only from explicit caller or reviewer decisions and are never inferred. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 1 logical-authoring evidence](reports/m1-logical-authoring-evidence.md) |
-| LA-A4 | Apply materializes additions, revisions, relocations, and removals in an isolated candidate, rejects invalid or incomplete authority closure, passes the exact current complete checkpoint, creates a proposal-specific standards-compliant commit, and atomically publishes only the verified commit to the configured local canonical ref. | `system` | `required-real` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
-| LA-A5 | A1c snapshot and Analysis behavior and A2 proposal-head, readiness, authorization, application, and recovery invariants remain one coherent implementation with no second parser, graph, analyzer, store, semantic authority, or caller-owned persistence/repository mechanism. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
-| LA-A6 | Invalid IDs or content, dangling or cyclic relationships, incomplete semantic declarations, stale proposal or target state, unavailable authority, unsupported retained formats, failed verification, and uncertain publication remain typed and publish no partial canonical result. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
-| LA-A7 | The complete public workflow and its real Git/SQLite boundaries pass on the supported Linux CPython 3.11 and 3.12 runtimes, including cold reopen, concurrent proposal-head and target changes, and interruption recovery. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md) |
-| LA-A8 | The admitted design passes a pre-canonical minimum viable test for effectiveness, efficiency, correctness, and routed standards compliance, then implementation proceeds without another investigation unless a named unresolved issue threatens an irreversible or high-consequence outcome. | `integration` | `representative` | `manual` | `satisfied` | [Milestone 0 Interface admission](reports/m0-interface-admission.md) |
+| LA-A1 | The generated public Interface accepts canonical-ID standards-domain intent and never requires a repository path, full-file replacement, raw Markdown metadata envelope, TOML/JSON representation, SQL, Git ref, or Git object ID from the agent. | `contract` | `repository-supported verification environments` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A2 | Through the public proposal workflow, an agent can add a standard, revise its authored policy, explicitly change its relationships or placement, remove it, query the exact proposal revision, and analyze the resulting standards graph after process replacement. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A3 | For each supported intent, the Engine updates every mechanically required canonical representation and derived projection selected by current authorities, while semantic relationships, policy-impact declarations, lifecycle meaning, rationale, and evidence originate only from explicit caller or reviewer decisions and are never inferred. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A4 | Apply materializes additions, revisions, relocations, and removals in an isolated candidate, rejects invalid or incomplete authority closure, passes the exact current complete checkpoint, creates a proposal-specific standards-compliant commit, and atomically publishes only the verified commit to the configured local canonical ref. | `system` | `required-real` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A5 | A1c snapshot and Analysis behavior and A2 proposal-head, readiness, authorization, application, and recovery invariants remain one coherent implementation with no second parser, graph, analyzer, store, semantic authority, or caller-owned persistence/repository mechanism. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A6 | Invalid IDs or content, dangling or cyclic relationships, incomplete semantic declarations, stale proposal or target state, unavailable authority, unsupported retained formats, failed verification, and uncertain publication remain typed and publish no partial canonical result. | `integration` | `repository-supported verification environments` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A7 | The complete public workflow and its real Git/SQLite boundaries pass on the supported Linux CPython 3.11 and 3.12 runtimes, including cold reopen, concurrent proposal-head and target changes, and interruption recovery. | `user-workflow` | `required-real` | `automated` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
+| LA-A8 | The admitted design passes a pre-canonical minimum viable test for effectiveness, efficiency, correctness, and routed standards compliance, then implementation proceeds without another investigation unless a named unresolved issue threatens an irreversible or high-consequence outcome. | `integration` | `representative` | `manual` | `satisfied` | [Final acceptance](reports/final-acceptance.md) |
 
 ## Scope
 
@@ -450,14 +449,14 @@ and re-plan.
 
 **Tasks:**
 
-- [ ] Run the focused, contract, integration, user-workflow, dual-runtime, and
+- [x] Run the focused, contract, integration, user-workflow, dual-runtime, and
   complete-checkpoint evidence named by LA-A1 through LA-A8.
 - [x] Perform independent specification and routed-standards review against one
   identified implementation candidate.
 - [x] Re-run the Architecture artifact probe and deletion test against the
   produced artifact, removing any retained compatibility, registry, Adapter,
   test, or measurement mechanism without a current owner.
-- [ ] Record every finding and disposition, final evidence, accepted local
+- [x] Record every finding and disposition, final evidence, accepted local
   commit range, and any deferred follow-up with owner and trigger.
 
 **Acceptance gate:**
@@ -466,7 +465,7 @@ and re-plan.
   disposition; all non-deferred milestones are Accepted or Superseded; and the
   final report identifies the exact accepted implementation and evidence.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ## Blockers
 
@@ -496,6 +495,7 @@ and re-plan.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: `none`
-- Final status: `Active`
+- Final status: `Accepted`
+- Evidence: [Final acceptance](reports/final-acceptance.md)
