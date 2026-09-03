@@ -16,6 +16,7 @@ from .changes import (
     SemanticProposal,
     SemanticState,
     classify_changes,
+    derive_change_descriptors,
 )
 from .coverage import (
     COVERAGE_EVIDENCE_CONTRACT,
@@ -73,7 +74,15 @@ from .routing import (
     load_router_projection,
 )
 from .keys import analysis_value_digest
-from .state import AnalysisState, child_id, plain_record
+from .state import (
+    ANALYSIS_CONTRACT_VERSION,
+    AnalysisState,
+    ProjectedRevisionMaterialRef,
+    ProposedMaterialRef,
+    SnapshotMaterialRef,
+    child_id,
+    plain_record,
+)
 from .trust import (
     AnalysisExecutionContext,
     AuthorizationAuthorityContract,
@@ -96,6 +105,7 @@ from .trust import (
 )
 
 __all__ = (
+    "ANALYSIS_CONTRACT_VERSION",
     "CHANGE_GRAPH_GROUPS",
     "CONSUMER_REVIEW_CONTRACT",
     "COVERAGE_DECISION_CONTRACT",
@@ -156,6 +166,8 @@ __all__ = (
     "ProviderObservationClaim",
     "ProviderRequest",
     "ProviderUnavailable",
+    "ProjectedRevisionMaterialRef",
+    "ProposedMaterialRef",
     "ReadingPlanEntry",
     "ReadingSelection",
     "ResolvedEvidence",
@@ -166,6 +178,7 @@ __all__ = (
     "RoutingRuleCause",
     "SemanticProposal",
     "SemanticState",
+    "SnapshotMaterialRef",
     "canonical_target_authority",
     "analysis_value_digest",
     "child_id",
@@ -178,6 +191,7 @@ __all__ = (
     "consumer_reading_selections",
     "derive_coverage_requirement",
     "derive_coverage_view",
+    "derive_change_descriptors",
     "evaluate_analysis",
     "generate_consumer_review_obligations",
     "generate_unmapped_normative_obligations",

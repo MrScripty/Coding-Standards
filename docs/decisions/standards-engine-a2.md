@@ -30,6 +30,18 @@ revision queries remain stable after proposal-head movement. There is no
 second parser, graph, Router, content store, cache, or proposal-as-snapshot
 conversion.
 
+The fourth production boundary adds `analyze_proposal(revision)`. Analysis
+resolves the exact immutable revision and base snapshot, compiles both through
+the current A1c semantic owners, and mechanically derives whole-artifact
+modification, move, addition, removal, split, and merge descriptors from their
+policy-unit corpora. The caller supplies no changes, content, repository facts,
+or material resolver. One evolved `AnalysisState` owns a closed snapshot or
+projected-revision material reference; the exact reference participates in
+state bytes, Analysis identity, dependency closure, inspection, and cold
+replay. Stored normalized changes and semantic proposals are revalidated
+against the exact revision during every evaluation. Existing pending/complete
+results and `resolve` continue through the same Analysis kernel.
+
 Proposal IDs are unique lifecycle identities (`proposal:v1:<uuid4>`). Initial
 revision IDs are content-bound identities over proposal ID, ordinal, base
 snapshot, normalized replacement material, semantic proposals, and the
@@ -55,12 +67,17 @@ owned close/context-manager lifecycle, not a caller-selected store path.
 The public interface declares `standards.proposal.author` and
 `standards.proposal.read` capabilities at the same deployment boundary that
 owns the existing A1c capabilities; the domain does not add a second ambient
-authorization mechanism. Interface schema v15 adds proposal content query
-without changing the A1c request/result promises, existing handle versions,
-Authoring material identity, or store schema. This decision does not yet add
-projected analysis, review/readiness, Git publication, or recovery. The tested
-P5C forwarding capability is intentionally not
-productionized because no real caller needs a second eight-method A1c surface.
+authorization mechanism. Interface schema v16 adds proposal analysis. Analysis
+state v5, Analysis identity/handle v6, and result projection v5 are coordinated
+current-engine replacements; obsolete Analysis state is unsupported rather
+than dual-read or silently reinterpreted. Request contract v4, proposal
+revision handle v1, Authoring contract v1, and store schema v2 remain unchanged
+because their owned promises do not change. In particular, the store already
+owns opaque aggregate bytes and exact snapshot-dependency sets, so it needs no
+no-op migration. This decision does not yet add review/readiness, Git
+publication, or recovery. The tested P5C forwarding capability is intentionally
+not productionized because no real caller needs a second eight-method A1c
+surface.
 
 Standards graphs remain exclusively standards-domain authority. A2 consumes
 them through the accepted A1c analysis semantics when evaluating proposed

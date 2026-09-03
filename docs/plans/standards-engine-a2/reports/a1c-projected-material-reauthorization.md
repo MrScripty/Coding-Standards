@@ -1,6 +1,6 @@
 # A1c Projected-Material Reauthorization
 
-**Status:** `authorized for design validation; production unavailable`
+**Status:** `implemented by accepted A2 Milestone 4`
 
 ## Authority And Exact Scope
 
@@ -138,3 +138,21 @@ Only a passing result admits an ADR and implementation re-plan. A failed
 identity, replay, lifecycle, or single-authority invariant rejects the selected
 representation and returns to the product owner; it does not reopen one of the
 already rejected alternatives as fallback.
+
+## Production Disposition
+
+P2R2 passed the required evidence and A2 Milestone 4 implements the selected
+correction. The bounded current inventory found one monorepo producer and
+generated facade consumer, possible retained same-engine store-v2 files, no
+promised cross-engine overlap, and no store interpretation of Analysis payload
+fields. The coordinated replacement therefore advances Analysis state to v5,
+its identity domain and handles to v6, result projection to v5, and interface
+schema to v16. Obsolete stored Analysis payloads fail as unsupported; they are
+not migrated, dual-read, aliased, or silently reinterpreted.
+
+Store schema v2 remains current. Its owned promise already accepts opaque
+aggregate payloads and arbitrary exact snapshot-dependency sets, including a
+revision-backed Analysis aggregate that depends only on the revision's retained
+base. Proposal revision handle v1 and Authoring contract v1 are likewise
+unchanged. Advancing any of those values would not identify a changed promise
+and would create the no-op version coupling this record prohibits.

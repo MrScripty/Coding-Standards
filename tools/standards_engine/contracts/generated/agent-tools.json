@@ -101,7 +101,7 @@
           "const": "analysis-child-handle"
         },
         "schema_version": {
-          "const": 5
+          "const": 6
         }
       },
       "required": [
@@ -212,7 +212,7 @@
           "const": "analysis-handle"
         },
         "schema_version": {
-          "const": 5
+          "const": 6
         }
       },
       "required": [
@@ -241,6 +241,16 @@
         "state"
       ],
       "type": "object"
+    },
+    "AnalysisMaterialHandle": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      ]
     },
     "AnalysisRequest": {
       "additionalProperties": false,
@@ -307,7 +317,7 @@
           "uniqueItems": true
         },
         "contract_version": {
-          "const": 4
+          "const": 5
         },
         "coverage_attestations": {
           "items": {
@@ -347,8 +357,8 @@
         "kind": {
           "const": "analysis-state"
         },
-        "proposed_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "proposed_reference": {
+          "$ref": "#/$defs/AnalysisMaterialHandle"
         },
         "semantic_proposals": {
           "items": {
@@ -362,7 +372,7 @@
         "kind",
         "handle",
         "base_snapshot",
-        "proposed_snapshot",
+        "proposed_reference",
         "changes",
         "semantic_proposals",
         "fact_observations",
@@ -372,6 +382,18 @@
         "domain_contracts",
         "execution_contracts",
         "contract_version"
+      ],
+      "type": "object"
+    },
+    "AnalyzeProposalCall": {
+      "additionalProperties": false,
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      },
+      "required": [
+        "revision"
       ],
       "type": "object"
     },
@@ -3924,7 +3946,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 15,
+  "interface_schema_version": 16,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -4076,9 +4098,22 @@
         "QueryProposalResult",
         "RejectedResult"
       ]
+    },
+    {
+      "capability": "standards.analyze",
+      "id": "analyze_proposal",
+      "input_definition": "AnalyzeProposalCall",
+      "input_schema": {
+        "$ref": "#/$defs/AnalyzeProposalCall"
+      },
+      "result_definitions": [
+        "PendingResult",
+        "CompleteResult",
+        "RejectedResult"
+      ]
     }
   ],
   "request_contract_version": 4,
-  "result_projection_version": 4,
+  "result_projection_version": 5,
   "schema_version": 1
 }

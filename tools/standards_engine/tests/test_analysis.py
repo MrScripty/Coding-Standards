@@ -18,24 +18,60 @@ from tools.standards_analysis.standards_analysis import (
     EvidenceContractKey,
     EvidenceReference,
     ResolvedEvidence,
+    SnapshotMaterialRef,
 )
 from tools.standards_engine.standards_engine import (
+    AgentToolFacade,
+    AnalyzeProposalCall,
     AnalysisChildInspectionResult,
     AnalysisHandle,
     AnalysisInspectionResult,
+    CreateProposalCall,
+    CreateProposalResult,
     CreateSnapshotCall,
     InspectCall,
     PendingResult,
     PrepareCall,
     RejectedResult,
     ResolveCall,
+    ReviseProposalCall,
+    ReviseProposalResult,
     StandardsEngine,
 )
+from tools.standards_engine.standards_engine.tools import _contracts
 from tools.standards_snapshots.standards_snapshots import SnapshotId
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 POLICY = "workflow.planning.written-plan-applicability"
+SUITE_INPUTS = "evaluation/standards-effectiveness/generated/suite-inputs.json"
+
+
+def _projected_mutations(
+    planning: str, manifest_content: bytes
+) -> list[dict[str, object]]:
+    manifest = json.loads(manifest_content)
+    planning_entry = next(
+        item for item in manifest["files"] if item["path"] == "workflows/planning.md"
+    )
+    planning_entry["digest"] = (
+        "sha256:" + hashlib.sha256(planning.encode("utf-8")).hexdigest()
+    )
+    projected_manifest = (
+        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    )
+    return [
+        {
+            "op": "replace",
+            "path": "workflows/planning.md",
+            "value": planning,
+        },
+        {
+            "op": "replace",
+            "path": SUITE_INPUTS,
+            "value": projected_manifest,
+        },
+    ]
 
 
 def _reference(identifier: str) -> EvidenceReference:
@@ -118,6 +154,84 @@ class AnalysisWorkflowTest(unittest.TestCase):
         )
         self.assertIsInstance(child, AnalysisChildInspectionResult)
         self.assertEqual(child.handle.analysis, result.handle)
+
+    def test_proposal_analysis_derives_inputs_and_replays_exact_revision(self) -> None:
+        capture = self.engine._snapshots.load_content(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        files = {str(item.path): item.content for item in capture.files}
+        planning = files["workflows/planning.md"].decode("utf-8")
+        initial_content = planning.replace(
+            "Store a planned effort under one directory:",
+            "Store an analyzed proposed effort under one directory:",
+        )
+        revised_content = planning.replace(
+            "Store a planned effort under one directory:",
+            "Store a later proposed effort under one directory:",
+        )
+        self.assertNotEqual(initial_content, planning)
+        created = self.engine.create_proposal(
+            CreateProposalCall.from_value(
+                {
+                    "kind": "create-proposal",
+                    "base_snapshot": self.snapshot.as_contract(),
+                    "mutations": _projected_mutations(
+                        initial_content, files[SUITE_INPUTS]
+                    ),
+                    "semantic_proposals": [],
+                }
+            )
+        )
+        self.assertIsInstance(created, CreateProposalResult)
+        facade = AgentToolFacade(self.engine, _contracts(REPO_ROOT))
+        initial = PendingResult.from_value(
+            facade.analyze_proposal({"revision": created.revision.as_contract()})
+        )
+        inspected = self.engine.inspect(InspectCall(initial.handle))
+        self.assertIsInstance(inspected, AnalysisInspectionResult)
+        self.assertEqual(inspected.state.proposed_reference, created.revision)
+        self.assertTrue(initial.changes)
+
+        revised = self.engine.revise_proposal(
+            ReviseProposalCall.from_value(
+                {
+                    "kind": "revise-proposal",
+                    "expected_revision": created.revision.as_contract(),
+                    "mutations": _projected_mutations(
+                        revised_content, files[SUITE_INPUTS]
+                    ),
+                    "semantic_proposals": [],
+                }
+            )
+        )
+        self.assertIsInstance(revised, ReviseProposalResult)
+        later = self.engine.analyze_proposal(AnalyzeProposalCall(revised.revision))
+        self.assertIsInstance(later, PendingResult)
+        self.assertNotEqual(initial.handle, later.handle)
+
+        historical = self.engine.inspect(InspectCall(initial.handle))
+        self.assertIsInstance(historical, AnalysisInspectionResult)
+        self.assertEqual(historical.state.proposed_reference, created.revision)
+        reopened = StandardsEngine.open_repository(
+            REPO_ROOT,
+            store_path=self.store,
+            execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+        )
+        try:
+            replayed = reopened._evaluate(reopened._load_analysis(initial.handle))
+        finally:
+            reopened.close()
+        self.assertEqual(replayed.state.analysis_id, initial.handle.id)
+        self.assertEqual(
+            tuple(item.descriptor.as_contract() for item in replayed.changes),
+            tuple(item.as_contract() for item in initial.changes),
+        )
+        successor = self.engine.resolve(
+            self.disposition_submission(initial, "proposal-review-evidence")
+        )
+        successor_state = self.engine.inspect(InspectCall(successor.handle))
+        self.assertIsInstance(successor_state, AnalysisInspectionResult)
+        self.assertEqual(successor_state.state.proposed_reference, created.revision)
 
     def test_equal_transition_is_idempotent_and_different_evidence_branches(self) -> None:
         parent = self.prepare()
@@ -255,7 +369,7 @@ finally:
         snapshot_id = SnapshotId(self.snapshot.id)
         state = DomainAnalysisState(
             snapshot_id,
-            snapshot_id,
+            SnapshotMaterialRef(snapshot_id),
             (
                 {
                     "kind": "modification",
@@ -274,7 +388,7 @@ finally:
             {
                 "kind": "analysis-handle",
                 "id": state.analysis_id,
-                "schema_version": 5,
+                "schema_version": 6,
             }
         )
 

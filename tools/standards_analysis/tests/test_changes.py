@@ -15,6 +15,7 @@ from tools.standards_analysis.standards_analysis import (
     SemanticProposal,
     SemanticState,
     classify_changes,
+    derive_change_descriptors,
 )
 from contract_support import validate_contract
 from tools.standards_metadata.standards_metadata import (
@@ -40,6 +41,7 @@ def unit(
     revision: int = 3,
     heading: tuple[str, ...] = ("Policy",),
     predecessors: tuple[str, ...] = (),
+    successors: tuple[str, ...] = (),
 ) -> PolicyUnit:
     return PolicyUnit(
         policy_id,
@@ -48,7 +50,7 @@ def unit(
         revision,
         (),
         predecessors,
-        (),
+        successors,
         "module.md",
         "## Policy\n\nText.\n",
         representation,
@@ -84,6 +86,104 @@ def descriptor(
 
 
 class ChangeClassificationTest(unittest.TestCase):
+    def test_derives_modification_move_addition_and_removal(self) -> None:
+        modified = unit("workflow.test.modified")
+        moved = unit("workflow.test.moved", heading=("Before",))
+        removed = unit("workflow.test.removed")
+        added = unit("workflow.test.added", revision=1)
+        tombstone = PolicyUnitTombstone(
+            removed.id,
+            removed.semantic_revision,
+            (),
+            "review.retirement",
+            "units.toml",
+        )
+
+        derived = derive_change_descriptors(
+            corpus(modified, moved, removed),
+            corpus(
+                unit(modified.id, representation=DIGEST_C),
+                unit(moved.id, heading=("After",)),
+                added,
+                tombstones=(tombstone,),
+            ),
+        )
+
+        self.assertEqual(
+            {(item.kind, item.accepted_ids, item.proposed_ids) for item in derived},
+            {
+                (ChangeKind.MODIFICATION, (modified.id,), (modified.id,)),
+                (ChangeKind.MOVE, (moved.id,), (moved.id,)),
+                (ChangeKind.REMOVAL, (removed.id,), ()),
+                (ChangeKind.ADDITION, (), (added.id,)),
+            },
+        )
+        self.assertTrue(all(item.scope == WHOLE for item in derived))
+
+    def test_derives_split_and_merge_from_lifecycle_links(self) -> None:
+        split_source = unit("workflow.test.split-source")
+        split_a = unit(
+            "workflow.test.split-a",
+            revision=1,
+            predecessors=(split_source.id,),
+        )
+        split_b = unit(
+            "workflow.test.split-b",
+            revision=1,
+            predecessors=(split_source.id,),
+        )
+        merge_a = unit("workflow.test.merge-a")
+        merge_b = unit("workflow.test.merge-b")
+        merged = unit(
+            "workflow.test.merged",
+            revision=1,
+            predecessors=(merge_a.id, merge_b.id),
+        )
+        tombstones = (
+            PolicyUnitTombstone(
+                split_source.id,
+                split_source.semantic_revision,
+                (split_a.id, split_b.id),
+                "review.split",
+                "units.toml",
+            ),
+            PolicyUnitTombstone(
+                merge_a.id,
+                merge_a.semantic_revision,
+                (merged.id,),
+                "review.merge",
+                "units.toml",
+            ),
+            PolicyUnitTombstone(
+                merge_b.id,
+                merge_b.semantic_revision,
+                (merged.id,),
+                "review.merge",
+                "units.toml",
+            ),
+        )
+
+        derived = derive_change_descriptors(
+            corpus(split_source, merge_a, merge_b),
+            corpus(split_a, split_b, merged, tombstones=tombstones),
+        )
+
+        self.assertEqual(
+            {(item.kind, item.accepted_ids, item.proposed_ids) for item in derived},
+            {
+                (
+                    ChangeKind.SPLIT,
+                    (split_source.id,),
+                    tuple(sorted((split_a.id, split_b.id))),
+                ),
+                (
+                    ChangeKind.MERGE,
+                    tuple(sorted((merge_a.id, merge_b.id))),
+                    (merged.id,),
+                ),
+            },
+        )
+
     def test_semantic_modification_binds_overlay_and_exact_graph_groups(self) -> None:
         before = unit()
         after = unit(representation=DIGEST_B, structural=DIGEST_C)

@@ -172,6 +172,75 @@ def _error(code: str, message: str, *, field: str | None = None, observed: str |
     )
 
 
+def derive_change_descriptors(
+    accepted: PolicyUnitCorpus,
+    proposed: PolicyUnitCorpus,
+    semantic_policy_ids: Iterable[str] = (),
+) -> tuple[ChangeDescriptor, ...]:
+    """Derive the smallest truthful A1c change set from two compiled corpora."""
+
+    proposals = set(semantic_policy_ids)
+    accepted_units = {item.id: item for item in accepted.units}
+    proposed_units = {item.id: item for item in proposed.units}
+    accepted_only = set(accepted_units) - set(proposed_units)
+    proposed_only = set(proposed_units) - set(accepted_units)
+    consumed_accepted: set[str] = set()
+    consumed_proposed: set[str] = set()
+    scope = ReviewScope("whole-artifact")
+    descriptors: list[ChangeDescriptor] = []
+
+    for policy_id in sorted(set(accepted_units).intersection(proposed_units)):
+        before = accepted_units[policy_id]
+        after = proposed_units[policy_id]
+        if before == after and policy_id not in proposals:
+            continue
+        kind = (
+            ChangeKind.MOVE
+            if (before.module, before.heading_path) != (after.module, after.heading_path)
+            else ChangeKind.MODIFICATION
+        )
+        descriptors.append(
+            ChangeDescriptor(kind, (policy_id,), (policy_id,), scope)
+        )
+
+    for policy_id in sorted(accepted_only):
+        retired = proposed.resolve(policy_id)
+        if not isinstance(retired, PolicyUnitTombstone) or len(retired.successors) < 2:
+            continue
+        successors = tuple(sorted(retired.successors))
+        descriptors.append(
+            ChangeDescriptor(ChangeKind.SPLIT, (policy_id,), successors, scope)
+        )
+        consumed_accepted.add(policy_id)
+        consumed_proposed.update(successors)
+
+    for policy_id in sorted(proposed_only - consumed_proposed):
+        successor = proposed_units[policy_id]
+        if len(successor.predecessors) < 2:
+            continue
+        predecessors = tuple(sorted(successor.predecessors))
+        descriptors.append(
+            ChangeDescriptor(ChangeKind.MERGE, predecessors, (policy_id,), scope)
+        )
+        consumed_accepted.update(predecessors)
+        consumed_proposed.add(policy_id)
+
+    descriptors.extend(
+        ChangeDescriptor(ChangeKind.REMOVAL, (policy_id,), (), scope)
+        for policy_id in sorted(accepted_only - consumed_accepted)
+    )
+    descriptors.extend(
+        ChangeDescriptor(ChangeKind.ADDITION, (), (policy_id,), scope)
+        for policy_id in sorted(proposed_only - consumed_proposed)
+    )
+    if not descriptors:
+        raise _error(
+            "CHANGE.EMPTY",
+            "projected material does not contain an analyzable policy-unit change",
+        )
+    return tuple(descriptors)
+
+
 def classify_changes(
     accepted: PolicyUnitCorpus,
     proposed: PolicyUnitCorpus,

@@ -47,6 +47,7 @@ class GeneratedContractTest(unittest.TestCase):
             "find_proposals": generated.FindProposalsCall,
             "revise_proposal": generated.ReviseProposalCall,
             "query_proposal": generated.QueryProposalCall,
+            "analyze_proposal": generated.AnalyzeProposalCall,
         }
 
         for operation in contracts.interface.operations:
@@ -134,7 +135,7 @@ class GeneratedContractTest(unittest.TestCase):
             with self.subTest(path=path.relative_to(REPO_ROOT)):
                 self.assertEqual(path.read_text(encoding="utf-8"), projection)
 
-    def test_generated_native_models_decode_complete_v15_values(self) -> None:
+    def test_generated_native_models_decode_complete_v16_values(self) -> None:
         request_value = {"kind": "read", "target": "workflow.planning"}
         request = generated.decode_contract("QueryRequest", request_value)
         self.assertIsInstance(request, generated.ReadRequest)
@@ -163,7 +164,7 @@ class GeneratedContractTest(unittest.TestCase):
         projected = render_repository_projections()[tools_path]
         self.assertEqual(tools_path.read_text(encoding="utf-8"), projected)
 
-    def test_authored_v15_examples_satisfy_the_public_contract(self) -> None:
+    def test_authored_v16_examples_satisfy_the_public_contract(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         path = REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"
@@ -182,7 +183,7 @@ class GeneratedContractTest(unittest.TestCase):
                 self.assertEqual(set(example), {"name", "definition", "value"})
                 contracts.validate(example["definition"], example["value"])
 
-    def test_identity_fixtures_use_valid_public_v5_handles(self) -> None:
+    def test_identity_fixtures_use_valid_public_handle_versions(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         path = REPO_ROOT / "tools/standards_engine/contracts/identity-fixtures.json"

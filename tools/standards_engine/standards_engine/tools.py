@@ -16,6 +16,7 @@ from . import _generated_contract as generated_contract
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from ._generated_contract import (
+    AnalyzeProposalCall,
     CreateSnapshotCall,
     CreateProposalCall,
     DeleteSnapshotCall,
@@ -113,6 +114,16 @@ class AgentToolFacade:
         if isinstance(call, dict):
             return call
         return self._result("query_proposal", self._engine.query_proposal(call))
+
+    def analyze_proposal(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "analyze_proposal", arguments, AnalyzeProposalCall
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result(
+            "analyze_proposal", self._engine.analyze_proposal(call)
+        )
 
     def delete_snapshot(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(

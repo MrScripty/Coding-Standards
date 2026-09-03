@@ -26,7 +26,7 @@ path = "tools/standards_analysis/standards_analysis/state.py"
 required = [
   "class AnalysisState",
   "base_snapshot",
-  "proposed_snapshot",
+  "proposed_material",
   "coverage_attestations",
   "authorization_records",
 ]

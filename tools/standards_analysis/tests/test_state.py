@@ -4,7 +4,11 @@ import json
 import unittest
 
 from tools.standards_analysis.standards_analysis import AnalysisError
-from tools.standards_analysis.standards_analysis.state import AnalysisState
+from tools.standards_analysis.standards_analysis.state import (
+    AnalysisState,
+    ProjectedRevisionMaterialRef,
+    SnapshotMaterialRef,
+)
 from tools.standards_snapshots.standards_snapshots import SnapshotId
 
 
@@ -17,7 +21,7 @@ CHANGE = {
     "scope": {"kind": "whole-artifact"},
 }
 CONTRACTS = (
-    {"id": "analysis", "version": "4"},
+    {"id": "analysis", "version": "5"},
     {"id": "identity", "version": "2"},
 )
 EXECUTION = {
@@ -29,7 +33,7 @@ EXECUTION = {
 def _state(**overrides: object) -> AnalysisState:
     values: dict[str, object] = {
         "base_snapshot": BASE,
-        "proposed_snapshot": PROPOSED,
+        "proposed_material": SnapshotMaterialRef(PROPOSED),
         "changes": (CHANGE,),
         "domain_contracts": CONTRACTS,
         "execution_contracts": EXECUTION,
@@ -95,6 +99,22 @@ class AnalysisStateTest(unittest.TestCase):
         self.assertEqual(aggregate.snapshots, (BASE, PROPOSED))
         self.assertEqual(aggregate.payload, state.encode())
 
+    def test_projected_revision_is_identity_bound_and_depends_on_its_base(self) -> None:
+        revision = "proposal-revision:sha256:" + "c" * 64
+        projected = _state(
+            proposed_material=ProjectedRevisionMaterialRef(revision, BASE)
+        )
+        other = _state(
+            proposed_material=ProjectedRevisionMaterialRef(
+                "proposal-revision:sha256:" + "d" * 64,
+                BASE,
+            )
+        )
+
+        self.assertNotEqual(projected.analysis_id, other.analysis_id)
+        self.assertEqual(AnalysisState.decode(projected.encode()), projected)
+        self.assertEqual(projected.aggregate(()).snapshots, (BASE,))
+
     def test_malformed_current_state_is_invalid(self) -> None:
         value = json.loads(_state().encode())
         del value["changes"]
@@ -109,7 +129,24 @@ class AnalysisStateTest(unittest.TestCase):
 
     def test_well_formed_future_state_is_unsupported(self) -> None:
         value = json.loads(_state().encode())
-        value["contract_version"] = 5
+        value["contract_version"] = 6
+
+        with self.assertRaises(AnalysisError) as caught:
+            AnalysisState.decode(
+                json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+            )
+
+        self.assertEqual(
+            caught.exception.failure.code,
+            "ANALYSIS.STATE_CONTRACT_UNSUPPORTED",
+        )
+        self.assertEqual(caught.exception.failure.outcome, "unsupported")
+
+    def test_obsolete_snapshot_only_state_is_unsupported(self) -> None:
+        value = json.loads(_state().encode())
+        proposed = value.pop("proposed_material")
+        value["proposed_snapshot"] = proposed["snapshot"]
+        value["contract_version"] = 4
 
         with self.assertRaises(AnalysisError) as caught:
             AnalysisState.decode(

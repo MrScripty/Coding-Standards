@@ -1086,3 +1086,40 @@
   application, Git publication, recovery, resource ownership, and measurement
   remain absent; the next slice is current-state reconciliation and exact
   admission for `analyze_proposal`.
+
+## 2026-09-02 - Milestone 4 Proposal Analysis Accepted
+
+- Implemented additive `analyze_proposal(revision)` through the generated
+  facade and Engine. The Engine reads one exact immutable proposal revision,
+  compiles its frozen base and projected standards content with the existing
+  A1c compiler, mechanically derives the normalized whole-artifact change set,
+  and delegates semantic and repository coverage evaluation to the existing
+  Analysis owners. The operation returns the existing pending/complete result
+  algebra and introduces no review, readiness, application, Git, recovery,
+  cache, alternate graph, or alternate Router machinery.
+- Reauthorized the A1c Analysis material boundary as a closed snapshot-or-
+  proposal-revision reference. Snapshot analysis retains its exact public
+  request and behavior. Proposal analysis stores the exact revision reference;
+  cold replay reconstructs that revision over its frozen base and revalidates
+  derived changes and semantic proposals before evaluation. Historical
+  analysis therefore remains stable after the proposal head advances.
+- Interface schema v16 adds only `analyze_proposal`. Analysis state contract
+  v5 and analysis handle/child schema v6 make the material kind explicit.
+  Request contract v4, result projection v5, Authoring contract v1, proposal
+  handles v1, and store schema v2 retain their promises. The existing store
+  already persists opaque aggregate bytes and arbitrary dependency sets, so a
+  no-op schema migration was rejected. The coordinated Analysis contract
+  replacement has no compatibility reader or silent reinterpretation.
+- Linux CPython 3.11 and 3.12 each pass the same 35 focused Analysis state,
+  change-derivation, and generated-contract tests; 11 compiler/projection
+  tests; the eight-test A1c analysis module; the new exact-revision cold-reopen
+  production test; and the nine-test closed-store facade/rendering harness.
+  The complete 84-test Analysis package also passes on 3.12.
+- Ruff, projection freshness, plan structure, diff hygiene, and the five
+  affected registered suites pass. The complete repository checkpoint passes
+  all 270 declarative suites and all seven retained Bash checkers on both
+  supported runtimes. Exact staged scope, generated diff, sensitive-value
+  review, and the conventional commit form the remaining Commit-owned
+  boundary. Review/readiness, application, Git publication, recovery,
+  resource ownership, and measurement remain absent; the next slice is exact
+  admission and design reconciliation for `review_proposal`.

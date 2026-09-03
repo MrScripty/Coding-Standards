@@ -15,6 +15,7 @@ from tools.repository_git.repository_git import (
     RepositoryRevision,
 )
 from tools.standards_analysis.standards_analysis import (
+    ANALYSIS_CONTRACT_VERSION,
     AnalysisEvaluation,
     AnalysisExecutionContext,
     AnalysisMaterial,
@@ -31,10 +32,12 @@ from tools.standards_analysis.standards_analysis import (
     ProviderObservationClaim,
     ProviderRequest,
     ProviderUnavailable,
+    ProjectedRevisionMaterialRef,
     ReadingSelection,
     RepositoryCoverageDecisions,
     ReviewScope,
     RouterProjection,
+    SnapshotMaterialRef,
     RoutingBaseCause,
     RoutingRuleCause,
     analysis_value_digest,
@@ -42,6 +45,7 @@ from tools.standards_analysis.standards_analysis import (
     child_id as analysis_child_id,
     compile_coverage_definitions,
     compile_reading_plan,
+    derive_change_descriptors,
     evaluate_analysis,
     construct_authorization_record,
     load_coverage_horizon,
@@ -90,6 +94,7 @@ from tools.standards_snapshots.standards_snapshots import (
 )
 
 from ._generated_contract import (
+    AnalyzeProposalCall,
     AnalysisChildHandle,
     AnalysisChildInspectionResult,
     AnalysisHandle,
@@ -573,6 +578,44 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    def analyze_proposal(
+        self, call: AnalyzeProposalCall
+    ) -> PendingResult | CompleteResult | RejectedResult:
+        try:
+            revision = self._authoring.read_revision(call.revision.id)
+            accepted = self._compiled_snapshot(revision.base_snapshot)
+            proposed = self._compiled_revision(revision)
+            semantic_proposals = tuple(
+                self._plain(item) for item in revision.semantic_proposals
+            )
+            changes = derive_change_descriptors(
+                accepted.corpus.policy_unit_corpus,
+                proposed.corpus.policy_unit_corpus,
+                (str(item["policy"]) for item in semantic_proposals),
+            )
+            attestations, authorizations = self._repository_decisions(
+                changes, accepted, proposed
+            )
+            state = DomainAnalysisState(
+                revision.base_snapshot,
+                ProjectedRevisionMaterialRef(
+                    revision.revision_id,
+                    revision.base_snapshot,
+                ),
+                (item.as_contract() for item in changes),
+                semantic_proposals,
+                coverage_attestations=attestations,
+                authorization_records=authorizations,
+                domain_contracts=self._domain_contracts(),
+                execution_contracts=self._execution_context.contract_view(),
+            )
+            return self._evaluate_publish_project(
+                state,
+                self._evaluate_compiled(state, accepted, proposed, revision),
+            )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
     def prepare(
         self, call: PrepareCall
     ) -> PendingResult | CompleteResult | RejectedResult:
@@ -587,7 +630,7 @@ class StandardsEngine:
             )
             state = DomainAnalysisState(
                 base_snapshot,
-                proposed_snapshot,
+                SnapshotMaterialRef(proposed_snapshot),
                 (item.as_contract() for item in request.changes),
                 (item.as_contract() for item in request.semantic_proposals),
                 coverage_attestations=attestations,
@@ -597,7 +640,10 @@ class StandardsEngine:
             )
             if not isinstance(request.prior_analysis, MissingValue):
                 state = self._reuse_prior(state, request.prior_analysis)
-            return self._evaluate_publish_project(state)
+            return self._evaluate_publish_project(
+                state,
+                self._evaluate_compiled(state, base, proposed),
+            )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -719,16 +765,55 @@ class StandardsEngine:
         )
 
     def _evaluate(self, state: DomainAnalysisState) -> AnalysisEvaluation:
+        accepted = self._compiled_snapshot(state.base_snapshot)
+        proposed_ref = state.proposed_material
+        if isinstance(proposed_ref, SnapshotMaterialRef):
+            proposed = self._compiled_snapshot(proposed_ref.snapshot)
+            revision = None
+        else:
+            revision = self._authoring.read_revision(proposed_ref.revision_id)
+            if revision.base_snapshot != state.base_snapshot:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "ANALYSIS.MATERIAL_BASE_MISMATCH",
+                        "invalid",
+                        "Proposal revision and analysis base snapshots differ.",
+                    )
+                )
+            proposed = self._compiled_revision(revision)
+        return self._evaluate_compiled(state, accepted, proposed, revision)
+
+    def _evaluate_compiled(
+        self,
+        state: DomainAnalysisState,
+        accepted: CompiledSnapshot,
+        proposed: CompiledSnapshot,
+        revision: ProposalRevision | None = None,
+    ) -> AnalysisEvaluation:
+        proposed_ref = state.proposed_material
+        if isinstance(proposed_ref, ProjectedRevisionMaterialRef):
+            if revision is None or revision.revision_id != proposed_ref.revision_id:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "ANALYSIS.MATERIAL_INPUT_MISMATCH",
+                        "invalid",
+                        "Resolved proposal revision does not match the analysis state.",
+                    )
+                )
+            self._validate_projected_inputs(state, revision, accepted, proposed)
         return evaluate_analysis(
             state,
-            self._analysis_material(state.base_snapshot),
-            self._analysis_material(state.proposed_snapshot),
+            self._analysis_material(SnapshotMaterialRef(state.base_snapshot), accepted),
+            self._analysis_material(proposed_ref, proposed),
         )
 
-    def _analysis_material(self, snapshot: SnapshotId) -> AnalysisMaterial:
-        compiled = self._compiled_snapshot(snapshot)
+    @staticmethod
+    def _analysis_material(
+        reference: SnapshotMaterialRef | ProjectedRevisionMaterialRef,
+        compiled: CompiledSnapshot,
+    ) -> AnalysisMaterial:
         return AnalysisMaterial(
-            snapshot,
+            reference,
             compiled.source,
             compiled.corpus,
             compiled.graph,
@@ -736,10 +821,50 @@ class StandardsEngine:
             compiled.coverage,
         )
 
+    @classmethod
+    def _validate_projected_inputs(
+        cls,
+        state: DomainAnalysisState,
+        revision: ProposalRevision,
+        accepted: CompiledSnapshot,
+        proposed: CompiledSnapshot,
+    ) -> None:
+        semantic_proposals = tuple(cls._plain(item) for item in revision.semantic_proposals)
+        changes = derive_change_descriptors(
+            accepted.corpus.policy_unit_corpus,
+            proposed.corpus.policy_unit_corpus,
+            (str(item["policy"]) for item in semantic_proposals),
+        )
+        retained_changes = tuple(cls._plain(item) for item in state.changes)
+        retained_semantic = tuple(cls._plain(item) for item in state.semantic_proposals)
+        if cls._canonical_records(retained_changes) != cls._canonical_records(
+            item.as_contract() for item in changes
+        ) or cls._canonical_records(retained_semantic) != cls._canonical_records(
+            semantic_proposals
+        ):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.MATERIAL_INPUT_MISMATCH",
+                    "invalid",
+                    "Stored analysis inputs do not match the exact proposal revision.",
+                )
+            )
+
+    @staticmethod
+    def _canonical_records(values: Iterable[Mapping[str, object]]) -> tuple[str, ...]:
+        return tuple(
+            sorted(
+                json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                for value in values
+            )
+        )
+
     def _evaluate_publish_project(
-        self, state: DomainAnalysisState
+        self,
+        state: DomainAnalysisState,
+        evaluation: AnalysisEvaluation | None = None,
     ) -> PendingResult | CompleteResult:
-        evaluation = self._evaluate(state)
+        evaluation = self._evaluate(state) if evaluation is None else evaluation
         state, evaluation = self._apply_providers(state, evaluation)
         self._snapshots.publish_aggregate(
             state.aggregate(self._analysis_children(evaluation))
@@ -761,12 +886,6 @@ class StandardsEngine:
                         str(state.base_snapshot),
                         analysis_value_digest(str(state.base_snapshot)),
                     ),
-                    ("proposed", "snapshot"): ImmutableProviderInput(
-                        "proposed",
-                        "snapshot",
-                        str(state.proposed_snapshot),
-                        analysis_value_digest(str(state.proposed_snapshot)),
-                    ),
                     ("current", "requirement"): ImmutableProviderInput(
                         "current",
                         "requirement",
@@ -774,6 +893,21 @@ class StandardsEngine:
                         analysis_value_digest(dict(requirement.projection)),
                     ),
                 }
+                proposed_ref = state.proposed_material
+                if isinstance(proposed_ref, SnapshotMaterialRef):
+                    available_inputs[("proposed", "snapshot")] = ImmutableProviderInput(
+                        "proposed",
+                        "snapshot",
+                        str(proposed_ref.snapshot),
+                        analysis_value_digest(str(proposed_ref.snapshot)),
+                    )
+                else:
+                    available_inputs[("proposed", "revision")] = ImmutableProviderInput(
+                        "proposed",
+                        "revision",
+                        proposed_ref.revision_id,
+                        analysis_value_digest(proposed_ref.as_contract()),
+                    )
                 for provider in self._execution_context.providers:
                     try:
                         inputs = tuple(
@@ -1304,11 +1438,10 @@ class StandardsEngine:
         )
 
     def _state_projection(self, state: DomainAnalysisState) -> dict[str, object]:
-        return {
+        value: dict[str, object] = {
             "kind": "analysis-state",
             "handle": self._analysis_handle(state.analysis_id),
             "base_snapshot": self._snapshot_handle(state.base_snapshot),
-            "proposed_snapshot": self._snapshot_handle(state.proposed_snapshot),
             "changes": [self._plain(item) for item in state.changes],
             "semantic_proposals": [
                 self._plain(item) for item in state.semantic_proposals
@@ -1323,8 +1456,15 @@ class StandardsEngine:
                 self._plain(item) for item in state.domain_contracts
             ],
             "execution_contracts": self._plain(state.execution_contracts),
-            "contract_version": 4,
+            "contract_version": 5,
         }
+        proposed_ref = state.proposed_material
+        value["proposed_reference"] = (
+            self._snapshot_handle(proposed_ref.snapshot)
+            if isinstance(proposed_ref, SnapshotMaterialRef)
+            else self._proposal_revision_handle(proposed_ref.revision_id)
+        )
+        return value
 
     def _context_projection(
         self,
@@ -1529,7 +1669,10 @@ class StandardsEngine:
     @staticmethod
     def _domain_contracts() -> tuple[dict[str, str], ...]:
         return (
-            {"id": "standards-analysis", "version": "4"},
+            {
+                "id": "standards-analysis",
+                "version": str(ANALYSIS_CONTRACT_VERSION),
+            },
             {"id": "standards-applicability", "version": str(LANGUAGE_VERSION)},
             {"id": "standards-coverage", "version": str(HORIZON_VERSION)},
             {"id": "standards-graph", "version": "1"},
@@ -1547,7 +1690,7 @@ class StandardsEngine:
         return {
             "kind": "analysis-handle",
             "id": analysis_id,
-            "schema_version": 5,
+            "schema_version": 6,
         }
 
     @classmethod
@@ -1562,7 +1705,7 @@ class StandardsEngine:
             "analysis": cls._analysis_handle(analysis_id),
             "child_kind": child_kind,
             "child_id": child_id,
-            "schema_version": 5,
+            "schema_version": 6,
         }
 
     @staticmethod

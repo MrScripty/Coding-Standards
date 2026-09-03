@@ -8,8 +8,6 @@ from tools.graph_engine.graph_engine import EdgeRegistry
 from tools.standards_applicability.standards_applicability import FactContract
 from tools.standards_metadata.standards_metadata import CanonicalStandardsCorpus, ContentSource
 from tools.standards_policy_impact.standards_policy_impact import CompiledPolicyImpactSet
-from tools.standards_snapshots.standards_snapshots import SnapshotId
-
 from .changes import (
     ChangeDescriptor,
     ChangeKind,
@@ -42,12 +40,12 @@ from .reading import (
     compile_reading_plan,
     consumer_reading_selections,
 )
-from .state import AnalysisState, child_id, plain_record
+from .state import AnalysisState, ProposedMaterialRef, SnapshotMaterialRef, child_id, plain_record
 
 
 @dataclass(frozen=True, slots=True)
 class AnalysisMaterial:
-    snapshot: SnapshotId
+    reference: ProposedMaterialRef
     root: ContentSource
     corpus: CanonicalStandardsCorpus
     graph: EdgeRegistry
@@ -125,10 +123,13 @@ def evaluate_analysis(
     accepted: AnalysisMaterial,
     proposed: AnalysisMaterial,
 ) -> AnalysisEvaluation:
-    if accepted.snapshot != state.base_snapshot or proposed.snapshot != state.proposed_snapshot:
+    if (
+        accepted.reference != SnapshotMaterialRef(state.base_snapshot)
+        or proposed.reference != state.proposed_material
+    ):
         raise _error(
-            "ANALYSIS.SNAPSHOT_MISMATCH",
-            "Analysis material does not match the state snapshot roots.",
+            "ANALYSIS.MATERIAL_MISMATCH",
+            "Analysis material does not match the state material references.",
         )
     descriptors = tuple(parse_change(plain_record(item)) for item in state.changes)
     proposals = tuple(

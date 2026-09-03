@@ -405,6 +405,46 @@ The additional Git Module improves the composition: it prevents both duplicated
 security behavior and an inverted Verifier-to-Snapshot dependency while adding
 no semantic or lifecycle authority.
 
+## A2 Projected-Material Supersession
+
+Accepted A2 Milestone 4 supersedes only A1c's snapshot-only proposed-analysis
+material assumption. One immutable Analysis-owned reference now identifies
+either an exact proposed snapshot or an exact immutable proposal revision over
+the Analysis base snapshot. Snapshot-backed `prepare` maps its existing
+`proposed_snapshot` request to the snapshot variant. Additive
+`analyze_proposal(revision)` resolves the revision's retained base and exact
+replacement overlay without accepting caller-supplied changes, material,
+repository facts, or resolver choice.
+
+For revision-backed analysis, Analysis derives whole-artifact change
+descriptors from the compiled accepted and projected policy-unit corpora and
+retains those normalized inputs with the revision's semantic proposals. Every
+evaluation, including cold replay and the existing `resolve`, reloads the exact
+revision and rejects any retained-input mismatch. The revision reference is
+part of Analysis identity, so byte-distinct revisions cannot alias even when
+their derived descriptors are equal. The Analysis aggregate depends on the
+base snapshot; the snapshot variant also depends on its proposed snapshot.
+Proposal revisions remain Authoring-owned, snapshot-dependent records and do
+not become snapshot or Analysis authority.
+
+This is a coordinated current-engine contract replacement: Analysis state is
+v5, its identity domain and public handles are v6, result projection is v5,
+and the generated interface is v16. Obsolete Analysis state is unsupported;
+there is no dual reader, handle alias, or silent reinterpretation. A1c request
+contract v4 is unchanged. Proposal revision handle v1, Authoring contract v1,
+and SQLite store schema v2 are also unchanged because their owned promises do
+not change: the Snapshot store already persists opaque aggregate bytes and
+exact arbitrary snapshot-dependency sets. A no-op store migration is rejected
+as unnecessary machinery.
+
+The existing compiler, Analysis kernel, immutable transition model,
+pending/complete projections, inspection, and `resolve` remain the sole
+semantic path. Revision-backed fact providers may request a proposed
+`revision` immutable input; Analysis never labels a revision as a proposed
+`snapshot`. This supersession adds no mutable proposal-head replay, projected
+corpus copy, generic public material Interface, second analyzer, review or
+readiness state, application, Git publication, or recovery behavior.
+
 ## Migration
 
 The migration is an atomic A1b-to-A1c source and public-contract replacement.

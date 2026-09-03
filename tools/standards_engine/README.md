@@ -8,7 +8,8 @@ inspected.
 
 The public operations are snapshot-bound `query`, immutable-state `prepare` and
 `resolve`, handle-based `inspect`, and the admitted A2 authoring operations
-`create_proposal`, `find_proposals`, `revise_proposal`, and `query_proposal`.
+`create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, and
+`analyze_proposal`.
 Proposal creation
 stores exact non-Git replacement material under an immutable revision and a
 durable proposal head; revision advances that head only from its exact expected
@@ -19,7 +20,11 @@ revision on its retained base snapshot and sends the resulting material through
 the same compiler, Router, and neutral standards graph as A1c `query`. Its
 results and continuations are revision-anchored projections and do not mint
 snapshot or inspect handles. The facade owns and closes its Engine/store
-lifecycle when opened from a repository. Routing evaluates the registered
+lifecycle when opened from a repository. `analyze_proposal` derives normalized
+policy-unit changes from one exact revision and its base, then creates the same
+immutable A1c Analysis state used by `prepare` and `resolve`. Exact revision
+identity participates in cold replay without treating projected material as a
+snapshot. Routing evaluates the registered
 Router projection and derives dependency closure from the neutral standards graph.
 Read-only change analysis compares exact accepted and proposed authority,
 derives fact requirements and impact obligations, validates evidence-backed

@@ -308,12 +308,13 @@ class ContractProjectionTest(unittest.TestCase):
                 "find_proposals",
                 "revise_proposal",
                 "query_proposal",
+                "analyze_proposal",
             ),
         )
         self.assertEqual(set(tools["$defs"]), set(schema["$defs"]))
-        self.assertEqual(tools["interface_schema_version"], 15)
+        self.assertEqual(tools["interface_schema_version"], 16)
         self.assertEqual(tools["request_contract_version"], 4)
-        self.assertEqual(tools["result_projection_version"], 4)
+        self.assertEqual(tools["result_projection_version"], 5)
         json.dumps(tools)
 
 

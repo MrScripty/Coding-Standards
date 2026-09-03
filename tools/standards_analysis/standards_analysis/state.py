@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 
@@ -15,12 +16,12 @@ from .errors import AnalysisError, AnalysisFailure
 from .keys import analysis_identity, analysis_key, analysis_key_bytes, raw_digest
 
 
-ANALYSIS_CONTRACT_VERSION = 4
-ANALYSIS_IDENTITY_DOMAIN = "coding-standards:analysis:v5"
+ANALYSIS_CONTRACT_VERSION = 5
+ANALYSIS_IDENTITY_DOMAIN = "coding-standards:analysis:v6"
 ANALYSIS_AGGREGATE_KIND = "analysis-state"
 ANALYSIS_STATE_FIELDS = {
     "base_snapshot",
-    "proposed_snapshot",
+    "proposed_material",
     "changes",
     "semantic_proposals",
     "fact_observations",
@@ -31,6 +32,7 @@ ANALYSIS_STATE_FIELDS = {
     "execution_contracts",
     "contract_version",
 }
+_PROPOSAL_REVISION_ID = re.compile(r"^proposal-revision:sha256:[0-9a-f]{64}$")
 
 
 def _error(code: str, message: str) -> AnalysisError:
@@ -120,10 +122,75 @@ def _authorization_records(
     return tuple(item for _, item in sorted(selected.values()))
 
 
+@dataclass(frozen=True, slots=True)
+class SnapshotMaterialRef:
+    snapshot: SnapshotId
+
+    def __post_init__(self) -> None:
+        if type(self.snapshot) is not SnapshotId:
+            raise _error(
+                "ANALYSIS.INVALID_MATERIAL",
+                "Snapshot material requires an exact snapshot root.",
+            )
+
+    def as_contract(self) -> dict[str, object]:
+        return {"kind": "snapshot", "snapshot": str(self.snapshot)}
+
+
+@dataclass(frozen=True, slots=True)
+class ProjectedRevisionMaterialRef:
+    revision_id: str
+    base_snapshot: SnapshotId
+
+    def __post_init__(self) -> None:
+        if (
+            type(self.revision_id) is not str
+            or _PROPOSAL_REVISION_ID.fullmatch(self.revision_id) is None
+            or type(self.base_snapshot) is not SnapshotId
+        ):
+            raise _error(
+                "ANALYSIS.INVALID_MATERIAL",
+                "Projected material requires an exact proposal revision and base root.",
+            )
+
+    def as_contract(self) -> dict[str, object]:
+        return {
+            "kind": "projected-revision",
+            "revision_id": self.revision_id,
+            "base_snapshot": str(self.base_snapshot),
+        }
+
+
+ProposedMaterialRef = SnapshotMaterialRef | ProjectedRevisionMaterialRef
+
+
+def _material_ref(value: object) -> ProposedMaterialRef:
+    if type(value) is not dict or type(value.get("kind")) is not str:
+        raise _error(
+            "ANALYSIS.INVALID_MATERIAL",
+            "Proposed material reference is invalid.",
+        )
+    if value["kind"] == "snapshot" and set(value) == {"kind", "snapshot"}:
+        return SnapshotMaterialRef(SnapshotId(value["snapshot"]))
+    if value["kind"] == "projected-revision" and set(value) == {
+        "kind",
+        "revision_id",
+        "base_snapshot",
+    }:
+        return ProjectedRevisionMaterialRef(
+            value["revision_id"],
+            SnapshotId(value["base_snapshot"]),
+        )
+    raise _error(
+        "ANALYSIS.INVALID_MATERIAL",
+        "Proposed material reference kind or fields are invalid.",
+    )
+
+
 @dataclass(frozen=True, slots=True, init=False)
 class AnalysisState:
     base_snapshot: SnapshotId
-    proposed_snapshot: SnapshotId
+    proposed_material: ProposedMaterialRef
     changes: tuple[IdentityObject, ...]
     semantic_proposals: tuple[IdentityObject, ...]
     fact_observations: tuple[IdentityObject, ...]
@@ -136,7 +203,7 @@ class AnalysisState:
     def __init__(
         self,
         base_snapshot: SnapshotId,
-        proposed_snapshot: SnapshotId,
+        proposed_material: ProposedMaterialRef,
         changes: Iterable[Mapping[str, object] | IdentityObject],
         semantic_proposals: Iterable[Mapping[str, object] | IdentityObject] = (),
         fact_observations: Iterable[Mapping[str, object] | IdentityObject] = (),
@@ -146,10 +213,21 @@ class AnalysisState:
         domain_contracts: Iterable[Mapping[str, object] | IdentityObject] = (),
         execution_contracts: Mapping[str, object] | IdentityObject | None = None,
     ) -> None:
-        if type(base_snapshot) is not SnapshotId or type(proposed_snapshot) is not SnapshotId:
+        if type(base_snapshot) is not SnapshotId or not isinstance(
+            proposed_material,
+            (SnapshotMaterialRef, ProjectedRevisionMaterialRef),
+        ):
             raise _error(
-                "ANALYSIS.INVALID_SNAPSHOT",
-                "AnalysisState requires exact snapshot roots.",
+                "ANALYSIS.INVALID_MATERIAL",
+                "AnalysisState requires an exact base and proposed material.",
+            )
+        if (
+            isinstance(proposed_material, ProjectedRevisionMaterialRef)
+            and proposed_material.base_snapshot != base_snapshot
+        ):
+            raise _error(
+                "ANALYSIS.MATERIAL_BASE_MISMATCH",
+                "Projected material must use the analysis base snapshot.",
             )
         selected_changes = tuple(
             sorted(
@@ -207,7 +285,7 @@ class AnalysisState:
             )
         )
         object.__setattr__(self, "base_snapshot", base_snapshot)
-        object.__setattr__(self, "proposed_snapshot", proposed_snapshot)
+        object.__setattr__(self, "proposed_material", proposed_material)
         object.__setattr__(self, "changes", selected_changes)
         object.__setattr__(self, "semantic_proposals", selected_proposals)
         object.__setattr__(
@@ -248,7 +326,7 @@ class AnalysisState:
     def identity_material(self) -> dict[str, object]:
         return {
             "base_snapshot": str(self.base_snapshot),
-            "proposed_snapshot": str(self.proposed_snapshot),
+            "proposed_material": self.proposed_material.as_contract(),
             "changes": [_plain(item) for item in self.changes],
             "semantic_proposals": [_plain(item) for item in self.semantic_proposals],
             "fact_observations": [_plain(item) for item in self.fact_observations],
@@ -296,7 +374,7 @@ class AnalysisState:
         try:
             state = cls(
                 SnapshotId(raw["base_snapshot"]),
-                SnapshotId(raw["proposed_snapshot"]),
+                _material_ref(raw["proposed_material"]),
                 raw["changes"],
                 raw["semantic_proposals"],
                 raw["fact_observations"],
@@ -330,7 +408,7 @@ class AnalysisState:
     ) -> AnalysisState:
         return AnalysisState(
             self.base_snapshot,
-            self.proposed_snapshot,
+            self.proposed_material,
             self.changes,
             self.semantic_proposals,
             self.fact_observations if fact_observations is None else fact_observations,
@@ -353,11 +431,14 @@ class AnalysisState:
         self,
         children: Iterable[tuple[str, str, Mapping[str, object]]],
     ) -> AggregateRecord:
+        dependencies = {self.base_snapshot}
+        if isinstance(self.proposed_material, SnapshotMaterialRef):
+            dependencies.add(self.proposed_material.snapshot)
         return AggregateRecord(
             self.analysis_id,
             ANALYSIS_AGGREGATE_KIND,
             self.encode(),
-            {self.base_snapshot, self.proposed_snapshot},
+            dependencies,
             (
                 AggregateChild(kind, child_id, analysis_key_bytes(payload))
                 for kind, child_id, payload in children
@@ -369,7 +450,7 @@ def analysis_handle(analysis_id: str) -> dict[str, object]:
     return {
         "kind": "analysis-handle",
         "id": analysis_id,
-        "schema_version": 5,
+        "schema_version": 6,
     }
 
 
@@ -383,7 +464,7 @@ def child_handle(
         "analysis": analysis_handle(analysis_id),
         "child_kind": child_kind,
         "child_id": child_id,
-        "schema_version": 5,
+        "schema_version": 6,
     }
 
 
@@ -404,6 +485,9 @@ __all__ = (
     "ANALYSIS_IDENTITY_DOMAIN",
     "ANALYSIS_STATE_FIELDS",
     "AnalysisState",
+    "ProjectedRevisionMaterialRef",
+    "ProposedMaterialRef",
+    "SnapshotMaterialRef",
     "analysis_handle",
     "child_handle",
     "child_id",

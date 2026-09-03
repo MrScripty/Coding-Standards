@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v15",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v16",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -39,6 +39,9 @@
     },
     {
       "$ref": "#/$defs/QueryProposalResult"
+    },
+    {
+      "$ref": "#/$defs/AnalyzeProposalCall"
     },
     {
       "$ref": "#/$defs/DeleteSnapshotCall"
@@ -1553,7 +1556,7 @@
           "$ref": "#/$defs/AnalysisId"
         },
         "schema_version": {
-          "const": 5
+          "const": 6
         }
       },
       "additionalProperties": false
@@ -1659,10 +1662,20 @@
           "$ref": "#/$defs/ChildId"
         },
         "schema_version": {
-          "const": 5
+          "const": 6
         }
       },
       "additionalProperties": false
+    },
+    "AnalysisMaterialHandle": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      ]
     },
     "InspectableHandle": {
       "oneOf": [
@@ -2213,6 +2226,18 @@
         },
         "request": {
           "$ref": "#/$defs/QueryRequest"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AnalyzeProposalCall": {
+      "type": "object",
+      "required": [
+        "revision"
+      ],
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
         }
       },
       "additionalProperties": false
@@ -3532,7 +3557,7 @@
         "kind",
         "handle",
         "base_snapshot",
-        "proposed_snapshot",
+        "proposed_reference",
         "changes",
         "semantic_proposals",
         "fact_observations",
@@ -3553,8 +3578,8 @@
         "base_snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
         },
-        "proposed_snapshot": {
-          "$ref": "#/$defs/SnapshotHandle"
+        "proposed_reference": {
+          "$ref": "#/$defs/AnalysisMaterialHandle"
         },
         "changes": {
           "type": "array",
@@ -3611,7 +3636,7 @@
           "$ref": "#/$defs/AnalysisExecutionContractView"
         },
         "contract_version": {
-          "const": 4
+          "const": 5
         }
       },
       "additionalProperties": false

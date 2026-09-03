@@ -112,7 +112,7 @@
       "value": {
         "kind": "analysis-handle",
         "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "schema_version": 5
+        "schema_version": 6
       }
     },
     {
@@ -138,11 +138,11 @@
         "analysis": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 5
+          "schema_version": 6
         },
         "child_kind": "context",
         "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-        "schema_version": 5
+        "schema_version": 6
       }
     }
   ]
