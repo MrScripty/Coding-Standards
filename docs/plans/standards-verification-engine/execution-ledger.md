@@ -7338,3 +7338,18 @@
 - Focused, generated, numeric, declarative, plan, and complete mixed evidence
   pass. Final graph: 4 Bash checkers, 5 nodes, 21 edges, and 5 components;
   fresh graph evidence is required next.
+
+## 2026-09-03 - M6-I122 Owner-State Transition Acceptance
+
+- Fresh post-M6-I121 evidence selected the 63-line, dependency-free owner-state
+  transition checker as a `serial-coherent` package at train order 237.
+- One registered five-check `migration.parent-plan` suite preserves all 11 row,
+  7 activation, and 15 shared-owner decisions through the existing typed
+  decision engine, plus documentation and terminal path authority.
+- Both M6-I118 historical gate records transfer to the registered suite. The
+  suite-input projection self-test retains its numeric-lifecycle assertion
+  against another live checker.
+- Canonical execution and 34 paired rejecting mutations prove fixture, outcome,
+  and closed-row parity. Focused, generated, numeric, unit, declarative, plan,
+  and complete mixed evidence pass. Final graph: 3 Bash checkers, 4 nodes, 20
+  edges, and 4 components; fresh graph evidence is required next.

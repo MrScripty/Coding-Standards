@@ -5,14 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I121 graph audit; do not preselect the next
-package from evidence captured before the accepted verification-gate package
+**Next slice:** run a fresh post-M6-I122 graph audit; do not preselect the next
+package from evidence captured before the accepted owner-state package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I121 replaced the verification-gate Bash checker
-through the existing execution-train and accelerated-replan suites at train
-order 236.
+**Latest accepted slice:** M6-I122 replaced the owner-state transition Bash
+checker with one registered `migration.parent-plan` suite at train order 237.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -131,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I121 at train
-order 236.
+**Accepted boundary:** package records are accepted through M6-I122 at train
+order 237.
 
-**Current derived state:** 272 registered declarative suites, 4 retained Bash
-checkers, 5 executable nodes, 21 conservative reference edges, and 5
+**Current derived state:** 273 registered declarative suites, 3 retained Bash
+checkers, 4 executable nodes, 20 conservative reference edges, and 4
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -180,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I121 verification-gate model accepted at train order 236 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I122 owner-state transitions accepted at train order 237 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

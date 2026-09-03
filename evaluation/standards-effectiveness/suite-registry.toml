@@ -1359,3 +1359,8 @@ requires = []
 id = "interop-boundary-policy"
 path = "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml"
 requires = []
+
+[[suites]]
+id = "owner-state-transitions"
+path = "evaluation/standards-effectiveness/suites/owner-state-transitions.toml"
+requires = []

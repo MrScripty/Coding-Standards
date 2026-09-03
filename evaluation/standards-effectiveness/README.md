@@ -870,9 +870,16 @@ derive a contiguous completed prefix and the first wholly remaining row, while
 partial cluster completion is rejected. Manifest rows authorize pre-slice
 review; they do not pre-approve final owners or dispositions.
 
+The registered `owner-state-transitions` suite checks the fixture-owned
+baseline, activation, and shared-owner transition decisions. It rejects
+contradictory creation state, premature or repeated creation, invalid
+activation, and filesystem state that does not match the effective owner
+state.
+
 `milestone-7-execution-decomposition.tsv` overlays ordered owner-coherent child
 slices when pre-slice review rejects a mixed-role baseline row. The baseline
-manifest remains immutable; the train checker requires exact child coverage,
+manifest remains immutable; the execution-train state model requires exact
+child coverage,
 whole-child dispositions, contiguous logical progress, honest owner state, and
 an active plan cursor naming every noncontiguous child identifier. Children
 may retain one canonical owner while separating independently testable

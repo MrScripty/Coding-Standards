@@ -2009,7 +2009,7 @@
       ]
     },
     {
-      "digest": "sha256:80ad113b3318e848038810a77b8c2edd9e0ec00c5785f71c36145098380a91cc",
+      "digest": "sha256:e8ae2b17c92dbc1a3fb5d8e29b082f055442d88e31a8a43dddabe56c091a8a16",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2033,7 +2033,7 @@
       ]
     },
     {
-      "digest": "sha256:18f358b609384985e81029069cfe5788a41a0c818ae6b1d3ca7b9bbd53465a57",
+      "digest": "sha256:b6e2e1b41a34875916c54fc65f10a8a963bd49a2cbc8824cc2305ada44db198e",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2191,6 +2191,11 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "network-transport-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "owner-state-transitions"
         },
         {
           "check": "removed-authority",
@@ -2399,7 +2404,7 @@
       ]
     },
     {
-      "digest": "sha256:0a484fb0ca78f33f41afcbcf543af6ffe7e94287c26a92b04e4d71917beaa736",
+      "digest": "sha256:c38b64cafc5bd5485448447c1f5a19169e178c9c909b1774d61db95b762412ef",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3757,7 +3762,7 @@
       ]
     },
     {
-      "digest": "sha256:c0408a423822e2a70a1d72efa48152e4c4f846cdf4b1a38fb20059d16d5dcd64",
+      "digest": "sha256:9db1381f1f8a3674258dd3bebfd8bb4e23e99e1cc2569074a920175b3968a033",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -4780,6 +4785,30 @@
       ]
     },
     {
+      "digest": "sha256:4697ad715469da777f519ad8bfffa86229d5fad9ac28803148a5b7ae80010809",
+      "path": "evaluation/standards-effectiveness/fixtures/execution-train/owner-activation-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "activation-transitions",
+          "role": "decision-table",
+          "suite": "owner-state-transitions"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:443f7b58e3042c987a543dcf12d4a363403541afcdfb693d85f659f547e42a84",
+      "path": "evaluation/standards-effectiveness/fixtures/execution-train/owner-state-transition-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "row-transitions",
+          "role": "decision-table",
+          "suite": "owner-state-transitions"
+        }
+      ]
+    },
+    {
       "digest": "sha256:45847d36307a5248c43877c79d7cf19843ae84250fcefaea4a0c709cb406b8e8",
       "path": "evaluation/standards-effectiveness/fixtures/execution-train/package-owner-action-decisions.tsv",
       "state": "present",
@@ -4788,6 +4817,18 @@
           "check": "owner-action-decisions",
           "role": "decision-table",
           "suite": "milestone-7-accelerated-execution-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2585b19c6628c7a6b91c2106eb5f9833e160187a5f084c707847a87d084a500e",
+      "path": "evaluation/standards-effectiveness/fixtures/execution-train/shared-owner-state-transition-decisions.tsv",
+      "state": "present",
+      "uses": [
+        {
+          "check": "shared-owner-transitions",
+          "role": "decision-table",
+          "suite": "owner-state-transitions"
         }
       ]
     },
@@ -7291,7 +7332,7 @@
       ]
     },
     {
-      "digest": "sha256:2310b8d71bca9f8594dfd5a235ad9f94ceda9399bdd3f8f6a43d763552335cff",
+      "digest": "sha256:bd090c501c9be464e177ad0f0937774e779358e8541ca0fd1917e991bd333e81",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7303,7 +7344,7 @@
       ]
     },
     {
-      "digest": "sha256:e957f7b3f9397658494d76b2fc61a359479219219e7ef750d014e4626d881f2a",
+      "digest": "sha256:b6094938f08176210c3b3de02a9803bd6d80a1b656a23cc932bbe0d02699bcda",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -10351,7 +10392,7 @@
       ]
     },
     {
-      "digest": "sha256:2590be93cace95ff2d7ad5cf6c979ad98f5b64c33953de1bbc6a782c24640f8b",
+      "digest": "sha256:6315e8184190e47fa0456bfa074f102106259718573c2bb2415d3890f8148528",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -12144,6 +12185,23 @@
       ]
     },
     {
+      "digest": "sha256:08b32009b1a166dfb9893eca4af03992f18f111e1fe31fb9b362d80d1dd94abd",
+      "path": "evaluation/standards-effectiveness/suites/owner-state-transitions.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "terminal-authority",
+          "role": "required-present",
+          "suite": "owner-state-transitions"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:977844b3ba5490041e99abb4e40092a54a6916627802eba6ed42e43f6843259b",
       "path": "evaluation/standards-effectiveness/suites/performance-owner-contract.toml",
       "state": "present",
@@ -13788,24 +13846,13 @@
       ]
     },
     {
-      "digest": "sha256:a57473b512e0a927e3ed267fb0b32cb4c7a7fffce3641f5bdc720a096d5350c9",
       "path": "evaluation/standards-effectiveness/verify-owner-state-transitions.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
+          "check": "terminal-authority",
+          "role": "required-absent",
+          "suite": "owner-state-transitions"
         }
       ]
     },
@@ -25046,11 +25093,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:2590be93cace95ff2d7ad5cf6c979ad98f5b64c33953de1bbc6a782c24640f8b",
+    "digest": "sha256:6315e8184190e47fa0456bfa074f102106259718573c2bb2415d3890f8148528",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:4c38e47fffa02d8db559071d99c9c392675c9260fee1e7ef72eefc5ec8a08b15",
+    "digest": "sha256:a09ec2262002f91a66c7410923a2c36856d2221c29ff17a92b4643063359bace",
     "uses": [
       {
         "check": "python-package-contract",
@@ -26749,6 +26796,12 @@
       "digest": "sha256:fba2a7f7f2b577d771eb97cdfb34caaa89a51eb8a513dfc3a461b16933098c2e",
       "id": "interop-boundary-policy",
       "path": "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml",
+      "requires": []
+    },
+    {
+      "digest": "sha256:08b32009b1a166dfb9893eca4af03992f18f111e1fe31fb9b362d80d1dd94abd",
+      "id": "owner-state-transitions",
+      "path": "evaluation/standards-effectiveness/suites/owner-state-transitions.toml",
       "requires": []
     }
   ]

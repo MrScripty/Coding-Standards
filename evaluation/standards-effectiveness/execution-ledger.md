@@ -15664,6 +15664,20 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   pass. Final graph: 4 Bash checkers, 5 nodes, 21 edges, and 5 components;
   fresh graph evidence is required next.
 
+## 2026-09-03 - M6-I122 Owner-State Transition Acceptance
+
+- Fresh post-M6-I121 evidence selected the 63-line owner-state checker as a
+  dependency-free `serial-coherent` package at train order 237.
+- One five-check `migration.parent-plan` suite preserves the fixture-owned row,
+  activation, and shared-owner transition models using the accepted decision
+  engine. Documentation and terminal path checks close the Bash authority.
+- Two historical M6-I118 records transfer to the suite, while the suite-input
+  self-test keeps numeric-lifecycle coverage against another live checker.
+- Canonical success and 34 paired rejecting row-outcome and closed-schema
+  mutations prove parity. Focused, generated, numeric, unit, declarative, plan,
+  and complete mixed evidence pass. Final graph: 3 Bash checkers, 4 nodes, 20
+  edges, and 4 components; fresh graph evidence is required next.
+
 ## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
 
 - Fresh post-M6-I114 evidence reports 11 Bash verifiers, 13 nodes, 63 edges,

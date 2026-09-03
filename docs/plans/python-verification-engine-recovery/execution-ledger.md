@@ -349,3 +349,10 @@
   complete behavior into two existing registered parent-plan suites.
 - Four Bash checkers remain before the accepted zero-Bash trigger can execute
   migration-only Python dispositions.
+
+## 2026-09-03 - M6-I122 Terminal-Lifecycle Projection
+
+- Accepted M6-I122 removed the owner-state transition Bash checker through one
+  registered fixture-driven decision suite.
+- Three Bash checkers remain before the accepted zero-Bash trigger can execute
+  migration-only Python dispositions.

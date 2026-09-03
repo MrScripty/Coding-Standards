@@ -4738,6 +4738,29 @@ checkers, 5 executable nodes, 21 edges, and 5 components. The old checker is
 absent without a duplicate suite, new engine mechanism, nested execution,
 compatibility representation, or fallback.
 
+### M6-I122 Owner-State Transition Acceptance
+
+Fresh post-M6-I121 evidence reports 4 Bash verifiers, 5 executable nodes, 21
+conservative edges, and 5 components. The 63-line
+`verify-owner-state-transitions.sh` has no verifier or helper dependency and is
+selected as a `serial-coherent` `migration.parent-plan` package.
+
+One registered five-check suite expresses the 11 baseline-row, 7 activation,
+and 15 shared-owner transition cases through existing decision mechanics. It
+preserves effective filesystem state, missing-to-exists completion, one-time
+shared-owner creation, allowed activation, typed-invalid outcomes,
+documentation, and terminal path state. The suite-input projection self-test
+retains its numeric-lifecycle assertion against the live rolling-decomposition
+checker.
+
+Both M6-I118 historical records transfer to `suite:owner-state-transitions`.
+Canonical execution and 34 paired outcome-flip and extra-column mutations prove
+parity under both authorities. Focused, generated, numeric, unit, declarative,
+plan, and complete mixed evidence pass. Final graph: 3 Bash checkers, 4
+executable nodes, 20 edges, and 4 components. The old checker is absent without
+engine changes, copied lifecycle state, compatibility representation, or
+fallback.
+
 ### M6-I32 Discover-Or-Create Reference Admission
 
 Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture

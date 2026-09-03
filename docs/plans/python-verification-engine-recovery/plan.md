@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 5 terminal migration lifecycle and Bash retirement
 
-**Next slice:** run a fresh post-M6-I121 checker graph audit; do not preselect
+**Next slice:** run a fresh post-M6-I122 checker graph audit; do not preselect
 the next Bash-retirement package from earlier evidence
 
 **Acceptance status:** `pending`
