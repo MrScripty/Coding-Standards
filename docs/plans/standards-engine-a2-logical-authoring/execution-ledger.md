@@ -263,3 +263,76 @@ create ledger entries.
   retry, rollback, and caller-owned repository or SQLite access remain absent.
 - Persistent evidence:
   [Milestone 2 local-application evidence](reports/m2-local-application-evidence.md).
+
+## 2026-09-03 — Milestone 3 Start And Review Re-Plan
+
+- Operation: explicit `start` from `Planned` to `Active` under the user's
+  instruction to continue standards-compliant implementation.
+- Candidate: independently review the fixed implementation range
+  `52b096ded9c53afd439a3cf0efc4cc85252da570...2be8ab21f8f6016c79509f74cbd5e98c1ab31fb0`.
+  The specification and routed-standards axes remain separate; the
+  Architecture artifact probe supplies a third deletion/ownership result.
+- Review findings: LA-006 records the public/compiler disagreement over
+  policy-free standard creation. LA-007 records the review hypothesis that
+  temporary Git initialization and staging were non-deciding before apply.
+  LA-008 records change-program digest, serialization, append, and projection
+  surface with no production owner. No reviewer found a second graph,
+  analyzer, store, persistence owner, compatibility layer, remote operation,
+  or structural redesign need.
+- Re-plan: admit only `logical_authoring.py`, `test_analysis.py`,
+  `test_logical_authoring.py`, and the exact M0 Git-boundary clarification in
+  addition to the existing Milestone 3 records.
+  The pre-agreed behavioral seam is the generated public proposal/Analysis
+  Interface; focused compiler coverage remains the existing canonical
+  projection seam. One public red/green regression owns LA-006. Existing
+  projection evidence and a static deletion check own LA-007 and LA-008; an
+  implementation-coupled subprocess assertion is intentionally not added.
+- Development Decision: `implement`. Each correction is local, reversible,
+  directly required by the accepted contract or deletion test, and can be
+  decided by the named evidence. No further design investigation is admitted
+  unless the corrected public workflow or canonical compiler rejects.
+- Review refinement: a second Standards pass found LA-009, a well-formed
+  shared applicability variant that the TOML destination cannot represent.
+  The Contracts owner requires an explicit `unsupported` result rather than
+  the current `invalid` serialization failure. This is one additional focused
+  red/green correction inside the already admitted compiler/test write set;
+  it does not change the generated contract or canonical TOML dialect.
+- Retention evidence for LA-007: removing temporary Git initialization and
+  staging made 12 of 13 focused workflows fail because the registered
+  migration-package authority independently reads index membership while
+  enumerating suite inputs. The explicit repository-path argument controls the
+  manifest's index digest but does not replace that authority input. Both Git
+  commands therefore have material deciding value and remain; no verifier
+  redesign is admitted.
+
+## 2026-09-03 — Milestone 3 Review Corrections Verified
+
+- LA-006 red/green: the new generated-Interface workflow first returned
+  `AUTHORING.POLICY_UNITS_REQUIRED`; after the compiler correction it creates
+  the policy-free standard and A1c reports one truthful module change with no
+  changed policy unit. No empty policy-unit sidecar is invented.
+- LA-009 red/green: a syntactically valid null-bearing relationship first
+  returned generic `AUTHORING.INVALID_ARGUMENTS`; it now returns
+  `AUTHORING.UNSUPPORTED_APPLICABILITY` with outcome `unsupported` before the
+  fixed TOML authority is written.
+- Deletion result: the unused logical-program version, digest, serialization,
+  append, and projected-program surface is absent. The temporary Git index is
+  retained only after its removal proved a registered verifier authority
+  depends on it; the M0 promise now names configured canonical Git state
+  precisely.
+- Focused evidence: the compiler/public portfolio passes 14 of 14 on Linux
+  CPython 3.11 in 171.800 seconds and 14 of 14 on Linux CPython 3.12 in
+  187.675 seconds. Contracts pass 20 of 20, A1c Analysis passes 86 of 86,
+  changed-source Ruff check/format pass, and static reference search finds no
+  deleted logical-program surface.
+- Repository evidence: the mechanically refreshed generated artifacts are
+  current; plan structure and the complete checkpoint pass 270 of 270
+  declarative suites plus all seven retained Bash checkers.
+- Independent closure: separate Spec and routed-standards reviews found no
+  unresolved blocker. They confirm the public policy-free workflow, exact A1c
+  reuse, explicit unsupported representation result, required ephemeral index
+  authority, deleted incidental machinery, and unchanged public/local-only
+  boundary.
+- Development Decision: `implement` is complete for LA-006 through LA-009.
+  Proceed directly to the predeclared objective acceptance portfolio; no
+  further investigation is authorized without a new failing named claim.

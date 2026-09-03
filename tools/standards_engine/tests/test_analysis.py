@@ -922,6 +922,53 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertIsInstance(successor_state, AnalysisInspectionResult)
         self.assertEqual(successor_state.state.proposed_reference, created.revision)
 
+    def test_policy_free_standard_creation_enters_public_analysis(self) -> None:
+        facade = AgentToolFacade(self.engine, _contracts(REPO_ROOT))
+        created = facade.create_proposal(
+            {
+                "kind": "create-proposal",
+                "base_snapshot": self.snapshot.as_contract(),
+                "change_set": {
+                    "purpose": {
+                        "summary": "add policy-free standard",
+                        "rationale": "Exercise the admitted optional policy-unit boundary.",
+                        "evidence": [_reference("policy-free-standard").as_contract()],
+                    },
+                    "edits": [
+                        {
+                            "kind": "create-standard",
+                            "standard": {
+                                "id": "topic.policy-free-test",
+                                "title": "Policy Free Test",
+                                "role": "topic",
+                                "level": "MUST",
+                                "applies_when": "Policy-free standard creation is tested.",
+                                "does_not_apply_when": "A registered policy unit is required.",
+                                "verification": "Standards Engine public workflow tests.",
+                                "body": "This standard has no registered policy units.\n",
+                            },
+                            "requires": ["core"],
+                            "specializes": [],
+                            "policy_units": [],
+                        }
+                    ],
+                },
+            }
+        )
+        self.assertEqual(created["kind"], "create-proposal-result", created)
+
+        analyzed = PendingResult.from_value(
+            facade.analyze_proposal({"revision": created["revision"]})
+        )
+        self.assertEqual(analyzed.changed_units, ())
+        self.assertTrue(
+            any(
+                change.kind == "module"
+                and change.proposed_module == "topic.policy-free-test"
+                for change in analyzed.changes
+            )
+        )
+
     def test_relationship_only_proposals_enter_a1c_and_replay_cold(self) -> None:
         module_change = {
             "purpose": {

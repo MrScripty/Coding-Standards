@@ -173,7 +173,7 @@ class LogicalAuthoringTests(unittest.TestCase):
             "schema_version": 5,
         }
 
-    def test_change_set_is_immutable_and_normalized_before_program_append(self) -> None:
+    def test_change_set_is_immutable_and_normalized_before_compilation(self) -> None:
         edits = [
             {
                 "kind": "replace-standard-relationships",
@@ -217,7 +217,6 @@ class LogicalAuthoringTests(unittest.TestCase):
         )
 
         self.assertEqual(first, shuffled)
-        self.assertEqual(first.digest, shuffled.digest)
         self.assertEqual(
             [item["kind"] for item in first.as_contract()["edits"]],
             ["revise-policy-unit", "replace-standard-relationships"],
@@ -230,11 +229,7 @@ class LogicalAuthoringTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             revision.semantics["intent"] = "mutated"  # type: ignore[index, union-attr]
 
-        empty = LogicalProgram()
-        accumulated = empty.append(first)
-        self.assertEqual(empty.change_sets, ())
-        self.assertEqual(accumulated.change_sets, (first,))
-        self.assertNotEqual(empty.digest, accumulated.digest)
+        self.assertEqual(LogicalProgram((first,)).change_sets, (first,))
 
     def test_compiler_projects_module_relationships_through_current_owners(
         self,
@@ -264,7 +259,7 @@ class LogicalAuthoringTests(unittest.TestCase):
 
         projection = LogicalAuthoringCompiler(StandardsEngine._compile).compile(
             self.base,
-            LogicalProgram().append(change_set),
+            LogicalProgram((change_set,)),
             base_repository_paths=self.repository_paths,
         )
 
@@ -313,7 +308,7 @@ class LogicalAuthoringTests(unittest.TestCase):
 
         projection = LogicalAuthoringCompiler(StandardsEngine._compile).compile(
             self.base,
-            LogicalProgram().append(change_set),
+            LogicalProgram((change_set,)),
             base_repository_paths=self.repository_paths,
         )
 
@@ -577,6 +572,39 @@ class LogicalAuthoringTests(unittest.TestCase):
             added.analysis_policy_ids,
             ("topic.architecture.authority-scope-admission",),
         )
+
+    def test_null_applicability_is_unsupported_by_toml_authority(self) -> None:
+        relationship = self.new_relationship()
+        relationship["source_policy"] = "topic.architecture.authority-scope-admission"
+        relationship["applicability"] = {
+            "operator": "equals",
+            "fact": "optional",
+            "value": None,
+        }
+
+        with self.assertRaises(AuthoringError) as raised:
+            LogicalAuthoringCompiler(StandardsEngine._compile).compile(
+                self.base,
+                LogicalProgram(
+                    (
+                        self.change_set(
+                            [
+                                {
+                                    "kind": "put-policy-relationship",
+                                    "relationship": relationship,
+                                }
+                            ]
+                        ),
+                    )
+                ),
+                base_repository_paths=self.repository_paths,
+            )
+
+        self.assertEqual(
+            raised.exception.failure.code,
+            "AUTHORING.UNSUPPORTED_APPLICABILITY",
+        )
+        self.assertEqual(raised.exception.failure.outcome, "unsupported")
 
     def test_created_standard_can_be_retired_with_complete_explicit_closure(
         self,

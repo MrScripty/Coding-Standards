@@ -36,7 +36,6 @@ from tools.standards_verifier.standards_verifier import (
 from .authoring import AuthoringError, AuthoringFailure
 
 
-LOGICAL_AUTHORING_CONTRACT_VERSION = 2
 _CANONICAL_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]*$")
 _SEMANTIC_ID = re.compile(r"^[a-z][a-z0-9-]*(?:\.[a-z][a-z0-9-]*)*$")
 _DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -679,6 +678,11 @@ def _policy_relationship(value: object) -> dict[str, object]:
             "AUTHORING.INVALID_ARGUMENTS",
             "relationship applicability must be an object",
         )
+    if _contains_null(raw["applicability"]):
+        raise _unsupported(
+            "AUTHORING.UNSUPPORTED_APPLICABILITY",
+            "relationship applicability contains a scalar the canonical TOML authority cannot represent",
+        )
     for field in ("source_scope", "consumer_scope"):
         if raw[field] is not None and not isinstance(raw[field], Mapping):
             raise _invalid(
@@ -687,6 +691,16 @@ def _policy_relationship(value: object) -> dict[str, object]:
     _canonical_id(raw["evidence_owner"], "relationship evidence owner")
     _text(raw["rationale"], "relationship rationale")
     return raw
+
+
+def _contains_null(value: object) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, Mapping):
+        return any(_contains_null(item) for item in value.values())
+    if isinstance(value, list):
+        return any(_contains_null(item) for item in value)
+    return False
 
 
 def _relationship_consumer(value: object) -> object:
@@ -752,12 +766,6 @@ class StandardsChangeSet:
             "edits": [item.as_contract() for item in self.edits],
         }
 
-    @property
-    def digest(self) -> str:
-        return _digest_value(
-            "coding-standards:standards-change-set:v2", self.as_contract()
-        )
-
 
 @dataclass(frozen=True, slots=True)
 class LogicalProgram:
@@ -772,32 +780,11 @@ class LogicalProgram:
             )
         object.__setattr__(self, "change_sets", selected)
 
-    def append(self, change_set: StandardsChangeSet) -> LogicalProgram:
-        if type(change_set) is not StandardsChangeSet:
-            raise _invalid(
-                "AUTHORING.INVALID_LOGICAL_PROGRAM",
-                "logical program append requires one exact StandardsChangeSet",
-            )
-        return LogicalProgram((*self.change_sets, change_set))
-
-    def as_contract(self) -> dict[str, object]:
-        return {
-            "contract_version": LOGICAL_AUTHORING_CONTRACT_VERSION,
-            "change_sets": [item.as_contract() for item in self.change_sets],
-        }
-
-    @property
-    def digest(self) -> str:
-        return _digest_value(
-            "coding-standards:logical-authoring-program:v2", self.as_contract()
-        )
-
 
 @dataclass(frozen=True, slots=True)
 class LogicalProjection:
     source: FrozenContentSource
     compiled: Any
-    program: LogicalProgram
     semantic_proposals: tuple[dict[str, object], ...]
     analysis_policy_ids: tuple[str, ...]
     analysis_module_ids: tuple[str, ...]
@@ -868,7 +855,6 @@ class LogicalAuthoringCompiler:
         return LogicalProjection(
             source,
             compiled,
-            program,
             _semantic_proposals(base_compiled, compiled, program),
             _analysis_policy_ids(base_compiled, compiled, program),
             _analysis_module_ids(program),
@@ -945,11 +931,6 @@ class LogicalAuthoringCompiler:
             )
         units_value = edit["policy_units"]
         assert isinstance(units_value, list)
-        if not units_value:
-            raise _invalid(
-                "AUTHORING.POLICY_UNITS_REQUIRED",
-                "a new standard requires at least one registered policy unit",
-            )
         units = [_mapping(item, "new policy unit") for item in units_value]
         for unit in units:
             if corpus.resolve_policy_unit(str(unit["id"])) is not None:
@@ -966,30 +947,31 @@ class LogicalAuthoringCompiler:
         _set_registry_list(
             files, CANONICAL_MODULE_CORPUS, "members", path, present=True
         )
-        sidecar = _policy_sidecar_path(standard_id)
-        if sidecar in files:
-            raise _invalid(
-                "AUTHORING.PROJECTION_DISAGREEMENT",
-                f"derived policy-unit sidecar for {standard_id!r} already exists",
+        if units:
+            sidecar = _policy_sidecar_path(standard_id)
+            if sidecar in files:
+                raise _invalid(
+                    "AUTHORING.PROJECTION_DISAGREEMENT",
+                    f"derived policy-unit sidecar for {standard_id!r} already exists",
+                )
+            files[sidecar] = _render_policy_sidecar(
+                [
+                    {
+                        "id": unit["id"],
+                        "module": standard_id,
+                        "heading_path": unit["heading_chain"],
+                        "semantic_revision": 1,
+                        "aliases": unit["aliases"],
+                        "predecessors": unit["predecessors"],
+                        "successors": unit["successors"],
+                    }
+                    for unit in units
+                ],
+                [],
             )
-        files[sidecar] = _render_policy_sidecar(
-            [
-                {
-                    "id": unit["id"],
-                    "module": standard_id,
-                    "heading_path": unit["heading_chain"],
-                    "semantic_revision": 1,
-                    "aliases": unit["aliases"],
-                    "predecessors": unit["predecessors"],
-                    "successors": unit["successors"],
-                }
-                for unit in units
-            ],
-            [],
-        )
-        _set_registry_list(
-            files, POLICY_UNIT_REGISTRY, "sources", sidecar, present=True
-        )
+            _set_registry_list(
+                files, POLICY_UNIT_REGISTRY, "sources", sidecar, present=True
+            )
 
     @staticmethod
     def _revise_standard(
@@ -2281,7 +2263,6 @@ def _refresh_suite_input_projection(
 __all__ = (
     "ChangePurpose",
     "EvidenceReference",
-    "LOGICAL_AUTHORING_CONTRACT_VERSION",
     "LogicalAuthoringCompiler",
     "LogicalProjection",
     "LogicalProgram",

@@ -118,7 +118,11 @@ disposition. Missing meaning is a typed rejection.
 
 Every exact revision remains queryable and analyzable after a later head
 advance or process replacement. A stale or invalid change set stores nothing
-and does not advance the proposal head. No Git write occurs before apply.
+and does not advance the proposal head. No configured repository, index, Git
+object, or ref is written before apply. The private compiler may create
+task-owned ephemeral Git state solely to evaluate current index-dependent
+canonical verification authorities; that state is deleted with the projection
+and is never a proposal, persistence, or publication authority.
 
 ## Typed Failure Contract
 

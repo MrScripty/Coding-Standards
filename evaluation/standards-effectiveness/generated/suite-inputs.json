@@ -19641,7 +19641,7 @@
       ]
     },
     {
-      "digest": "sha256:6ef90c8142029f549dd41149f8561c797eb5ab740e7df07be14915f2a70f96fd",
+      "digest": "sha256:49241e84c6d9e4f4642b63e01987f6810623596dfed6d51c1ec2c019cd6d9142",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -19703,7 +19703,7 @@
       ]
     },
     {
-      "digest": "sha256:f5fc69d204175b161d38f7ee974b36922b432ebf9f93ae344100dd88499c6805",
+      "digest": "sha256:70aee6573cc1d94b26f895306d3dd24287c0e1978972af05a1e88363fb44ab73",
       "path": "tools/standards_engine/tests/test_analysis.py",
       "state": "present",
       "uses": [

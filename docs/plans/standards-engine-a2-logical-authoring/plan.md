@@ -4,9 +4,8 @@
 
 **Current phase:** Milestone 3: objective acceptance
 
-**Next slice:** independently audit the complete logical-authoring artifact,
-run the objective evidence portfolio, and remove any retained machinery that
-lacks a current owner
+**Next slice:** run the objective dual-runtime and complete acceptance evidence
+against the independently reviewed corrected artifact
 
 **Acceptance status:** `pending`
 
@@ -437,18 +436,25 @@ machinery.
 - `docs/plans/standards-engine-a2-logical-authoring/plan.md`
 - `docs/plans/standards-engine-a2-logical-authoring/execution-ledger.md`
 - `docs/plans/standards-engine-a2-logical-authoring/issues.md`
+- `docs/plans/standards-engine-a2-logical-authoring/reports/m0-interface-admission.md`
 - `docs/plans/standards-engine-a2-logical-authoring/reports/final-acceptance.md`
 - `evaluation/standards-effectiveness/generated/suite-inputs.json`
-- Exact implementation or evidence paths required to resolve a review finding
-  only after this plan is re-planned with that write set.
+- `tools/standards_engine/standards_engine/logical_authoring.py`
+- `tools/standards_engine/tests/test_analysis.py`
+- `tools/standards_engine/tests/test_logical_authoring.py`
+
+The three implementation paths and exact M0 wording clarification were
+admitted after the independent review found LA-006 through LA-009. No other
+implementation or evidence path may change without another concrete finding
+and re-plan.
 
 **Tasks:**
 
 - [ ] Run the focused, contract, integration, user-workflow, dual-runtime, and
   complete-checkpoint evidence named by LA-A1 through LA-A8.
-- [ ] Perform independent specification and routed-standards review against one
+- [x] Perform independent specification and routed-standards review against one
   identified implementation candidate.
-- [ ] Re-run the Architecture artifact probe and deletion test against the
+- [x] Re-run the Architecture artifact probe and deletion test against the
   produced artifact, removing any retained compatibility, registry, Adapter,
   test, or measurement mechanism without a current owner.
 - [ ] Record every finding and disposition, final evidence, accepted local
@@ -460,7 +466,7 @@ machinery.
   disposition; all non-deferred milestones are Accepted or Superseded; and the
   final report identifies the exact accepted implementation and evidence.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 
