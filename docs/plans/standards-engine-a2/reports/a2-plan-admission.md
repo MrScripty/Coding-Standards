@@ -3,7 +3,7 @@
 **Status:** `Accepted for the initial controlled-authoring scope`
 
 **Production range:**
-`f6020239ccd901cf3b778a7d98f7c9ef6bf5d60a..3933c74a1a6a86cb191092a020d2753308dc6e2e`
+`f6020239ccd901cf3b778a7d98f7c9ef6bf5d60a..cb04cab59a56f0c53d8e38f7955162530d82cd57`
 
 ## Decision
 
@@ -13,12 +13,15 @@ reviews, applies, and recovers durable standards proposals while preserving the
 eight A1c operation roots and the two exact recorded A1c integration scopes.
 No later A2 milestone or speculative runtime mechanism remains admitted.
 
-The final audit initially rejected acceptance and produced one closure commit,
-`3933c74a1a6a86cb191092a020d2753308dc6e2e`. That signed commit prevents
-repeated application after immutable selection, moves current apply
-authorization before selection and Git access, refreshes stale generated input
-evidence, and reconciles contradictory plan and ADR statements. Independent
-Standards and specification re-reviews report no remaining hard violation.
+The final audit initially rejected acceptance and produced one runtime closure.
+Its current signed identity is
+`cb04cab59a56f0c53d8e38f7955162530d82cd57`, the tree-identical replacement
+for pre-message-rewrite commit
+`3933c74a1a6a86cb191092a020d2753308dc6e2e`. The closure prevents repeated
+application after immutable selection, moves current apply authorization before
+selection and Git access, refreshes stale generated input evidence, and
+reconciles contradictory plan and ADR statements. Independent Standards and
+specification re-reviews report no remaining hard violation.
 
 ## Feature Completeness And Compatibility
 

@@ -1362,3 +1362,32 @@
   A new consumer, retained-store overlap, platform, publication model, or
   caller-visible behavior must enter through the recorded re-plan triggers;
   acceptance grants no authority for speculative runtime machinery.
+
+## 2026-09-03 - Pushed A2 Commit Messages Rewritten
+
+- The repository owner explicitly authorized rewriting the three pushed A2
+  milestone commits whose subject-only messages omitted material rationale and
+  contract effects. The exact unchanged base is
+  `3fff34175ca51b0cda4f55745786204c38012266`; the range is linear and contains
+  no merge.
+- Before rewriting, exact tip
+  `c713f077d3f0823beb682ac457f35d7af26e2db5` was protected at the non-branch
+  ref `refs/archive/history-rewrites/a2-message-rewrite-2026-09-03` and verified.
+  The observed pushed authority was exact `origin/main` at
+  `82a0ddf315a08364357f6564018e37bdbeb72a1a`.
+- Replacement lineage is exact:
+
+  | Original | Signed replacement | Disposition |
+  | --- | --- | --- |
+  | `3ee86130c3a7f6febf635a9e3b48015ab770d9ce` | `96c71939678643bd5ce5e36547c38f39e767dbc5` | Milestone 5 tree and author identity retained; message now records readiness scope and contract effects |
+  | `992bd115017df53d41e413b0303d2ab92a1d0c0f` | `9ccf1af2afd03840ced1bdbb69b954e039a6c692` | Milestone 6 tree and author identity retained; message now records verification, publication, persistence, and typed outcomes |
+  | `82a0ddf315a08364357f6564018e37bdbeb72a1a` | `5e1ec078236667b17f4c3b8b782ae3d9fa8e482c` | Milestone 7 tree and author identity retained; message now records separate recovery authority and observation-only behavior |
+  | `3933c74a1a6a86cb191092a020d2753308dc6e2e` | `cb04cab59a56f0c53d8e38f7955162530d82cd57` | Unchanged runtime-closure message, tree, and author identity replayed onto corrected ancestry |
+  | `c713f077d3f0823beb682ac457f35d7af26e2db5` | `9b8d1de5a6ed16da4c2a6535daf752ebef4c0562` | Unchanged final-acceptance message, tree, and author identity replayed onto corrected ancestry |
+
+- Direct tree comparisons prove each named milestone replacement is unchanged,
+  and the rewritten tip before this lineage record is byte-identical to the
+  protected original tip. All five rewritten commits have good ED25519
+  signatures. Historical prototype records intentionally retain their original
+  exact base IDs because their archive refs still preserve those executions;
+  the mapping above supplies current-main lineage without falsifying evidence.
