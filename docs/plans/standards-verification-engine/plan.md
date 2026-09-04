@@ -5,16 +5,17 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I124 graph audit and admit the shared plan
-contract before changing the final plan-fixture/helper component
+**Next slice:** implement admitted M6-I125 with plan-contract parity,
+mutation, graph, and complete-checkpoint evidence
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I124 replaced the rolling decomposition Bash
 checker with one registered `migration.parent-plan` suite at train order 239.
 
-**Latest admitted slice:** `none`; the next package requires fresh graph and
-ownership evidence.
+**Latest admitted slice:** M6-I125 may replace the final Bash verifier with a
+typed plan contract while retaining its helper solely as an Engine-declared
+policy projection until those relationships transfer.
 
 **Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)

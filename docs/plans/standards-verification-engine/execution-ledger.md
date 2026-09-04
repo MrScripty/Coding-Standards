@@ -7386,3 +7386,24 @@
   declarative, plan, and complete mixed evidence pass. Final graph: 1 Bash
   checker, 2 nodes, 15 edges, and 2 components. The shared plan contract must
   be admitted before the final component changes.
+
+## 2026-09-03 - M6-I125 Plan Contract Admission
+
+- Fresh post-M6-I124 evidence reports 1 Bash verifier, 2 nodes, 15 edges, and
+  2 components. The 55-line plan-fixture verifier is the sole executable root
+  and delegates to one 226-line plan-structure helper.
+- M6-I125 is admitted as `shared-contract` at train order 240 because exact
+  plan-lifecycle and composed-design parity requires one reusable typed
+  `plan_contract` check kind owned by `workflow.planning`.
+- The package may delete the Bash verifier after canonical success, exact
+  rejecting diagnostics, mutation parity, direct unit tests, and complete
+  mixed evidence pass. The helper remains temporarily, without execution or
+  fallback authority, only because two Standards Engine relationships still
+  name it as a policy projection.
+- The resulting generated verifier graph must be header-only before a fresh
+  Standards Engine proposal transfers those relationships to the registered
+  planning suite. A later package will then delete the helper.
+- Pre-acceptance integration evidence showed that the three affected suite
+  definitions change 50 of 51 current coverage views. The frozen write set is
+  corrected before acceptance to own all eleven affected attestation sources
+  and require exact 50/50 dependency-local renewal.

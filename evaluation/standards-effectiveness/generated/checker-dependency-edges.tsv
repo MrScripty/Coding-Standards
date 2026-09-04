@@ -1,6 +1,7 @@
 edge_type	source	target
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/planned-node-catalog-additions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	docs/plans/standards-simplicity-and-evidence-proportionality/reports/policy-impact-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
+contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/policy-impact/a1c/relationship-migration.tsv	evaluation/standards-effectiveness/check-plan-structure.sh

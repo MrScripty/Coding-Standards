@@ -2019,7 +2019,7 @@
       ]
     },
     {
-      "digest": "sha256:1ecf4b278100baf0cb155b80c35879ffaae14c874958ebeb95d323e18ad0fe92",
+      "digest": "sha256:1ccbc1d2e5270f008023e062b369e442c3ba30aa22fe1d6c6296b2977c636a7e",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2424,7 +2424,7 @@
       ]
     },
     {
-      "digest": "sha256:55d19c617d6a4c481c068efe30293f91f1f87d89b20a0309f5e667194861eadc",
+      "digest": "sha256:8aa07f0b42925e106b66b059c2418840127cb5b8a7110c1238b55ea43a7d8b9d",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3792,7 +3792,7 @@
       ]
     },
     {
-      "digest": "sha256:9e0c89ba5cc4ec35065e9fefc744fdaea92eb602c89aa2c3b94258465444f4df",
+      "digest": "sha256:416127608e5cdb02ee341a3faf56af72e6c31abf7703e8c034e214923990529e",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -7362,7 +7362,7 @@
       ]
     },
     {
-      "digest": "sha256:5f9c8ca12beea0091f433bef2fc3877ade8e80a203f57a942080f5e21c7a1907",
+      "digest": "sha256:ffbb5249bdd43bdc2bb10fb3c9a5e4550fbdae22aa999a370b79bec500a6c4bf",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7374,7 +7374,7 @@
       ]
     },
     {
-      "digest": "sha256:1c27aecb19a2080f3fc0706de7d2ccf7936201005e3d5eeee8386b14778c4777",
+      "digest": "sha256:65796c8def6b4b8b3a9fc2260b28be075ac1c9b40475c06b993f2b147b2c3c05",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
