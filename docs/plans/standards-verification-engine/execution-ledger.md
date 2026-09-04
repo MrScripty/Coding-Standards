@@ -7494,3 +7494,21 @@
 - Terminal disposition: rewritten `main` is the retained integration branch;
   the source range is superseded and recoverable through the named protected
   ref. No source commit was dropped without an explicit accepted replacement.
+
+## 2026-09-04 - Migration Backup Branch Retirement
+
+- The maintainer explicitly authorized cleanup of the unneeded local branches
+  after accepting the standards-aligned migration history. Neither backup is
+  published, checked out, consumed by a worktree, or required by a pending
+  integration.
+- `backup/bash-migration-pre-history-alignment-20260903` at `ef400727` is
+  `discard-authorized`: the source-to-accepted mapping above preserves its
+  lineage, and accepted commit `7cff858b` has the same terminal tree.
+- `backup/bash-migration-pre-compliance-20260903` at `40d87cf3` is
+  `discard-authorized`: its unique commits `1fd2a5ca` and `40d87cf3` were the
+  rejected, over-broad migration attempt. Their intended plan-contract and
+  Python-only outcomes were superseded by the staged accepted range
+  `878e1e34` through `7cff858b`, with final evidence recorded by `48b4723e`.
+- Terminal disposition: retain `main` and permanently retire both named backup
+  refs. The source commit IDs remain in this ledger for audit, but no recovery
+  ref is promised after repository garbage collection.
