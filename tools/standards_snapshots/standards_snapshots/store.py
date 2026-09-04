@@ -365,7 +365,7 @@ class SQLiteSnapshotStore:
             began = True
             existing_files = self._content_files(content_id)
             submitted_files = tuple(
-                (str(item.path), item.content) for item in capture.files
+                sorted((str(item.path), item.content) for item in capture.files)
             )
             if existing_files:
                 if existing_files != submitted_files:

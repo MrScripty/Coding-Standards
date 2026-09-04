@@ -33,6 +33,23 @@ def capture(content: bytes = b"canonical") -> CapturedContent:
 
 
 class SnapshotModuleTests(unittest.TestCase):
+    def test_equal_content_with_nested_paths_can_be_recaptured_after_reopen(self) -> None:
+        files = tuple(
+            SnapshotFile(SnapshotPath.parse(path), path.encode("utf-8"))
+            for path in ("profiles/rust.md", "profiles/rust/api.md")
+        )
+        first_capture = CapturedContent("first-revision", files)
+        second_capture = CapturedContent("second-revision", reversed(files))
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            database = Path(temporary) / "snapshots.sqlite3"
+            with SnapshotModule.open(database) as module:
+                first = module.create_snapshot(first_capture)
+            with SnapshotModule.open(database) as module:
+                second = module.create_snapshot(second_capture)
+                self.assertNotEqual(first.snapshot, second.snapshot)
+                self.assertEqual(module.load_content(first.snapshot), first_capture)
+                self.assertEqual(module.load_content(second.snapshot), second_capture)
+
     def test_nested_domain_values_reject_ambiguous_or_wrong_types(self) -> None:
         for operation in (
             lambda: SnapshotPath("ambiguous"),
