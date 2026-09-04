@@ -1,0 +1,4958 @@
+{
+  "source": {
+    "kind": "create-snapshot-result",
+    "snapshot": {
+      "created_at": 1788559468,
+      "lifecycle": "active",
+      "snapshot": {
+        "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "source_revision": "bec1f5d93757172b537ffe1f911ececf693c6b20"
+    }
+  },
+  "method": "Whitespace-delimited words include metadata, headings, tables and code. Normative membership excludes reference role. Route costs deduplicate whole selected modules. Link observations scan inline Markdown links outside fences and need manual confirmation.",
+  "modules": 60,
+  "normative_modules": 46,
+  "reference_modules": 14,
+  "normative_words": 57946,
+  "reference_words": 10153,
+  "roles": {
+    "core": 1,
+    "router": 1,
+    "profile": 24,
+    "reference": 14,
+    "topic": 11,
+    "workflow": 9
+  },
+  "requires_edges": 137,
+  "specializes_edges": 30,
+  "direct_router_targets": 41,
+  "unreachable_normative_modules": [
+    "profile.language.rust.interop",
+    "profile.language.rust.language-bindings",
+    "profile.language.rust.security",
+    "profile.language.rust.unsafe"
+  ],
+  "phrase_occurrences": {
+    "do not": 372,
+    "fallback": 52,
+    "unavailable": 195,
+    "selected": 366,
+    "authority": 321
+  },
+  "verified_suites": 271,
+  "verified_checks": 1621,
+  "verification_statuses": {
+    "passed": 271
+  },
+  "link_observations": [
+    {
+      "source": "profiles/languages/rust/security.md",
+      "line": 17,
+      "destination": "../../../languages/rust/RUST-API-STANDARDS.md#result-option-panic",
+      "problem": "missing-heading"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "core",
+      "path": "CORE-STANDARDS.md",
+      "words": 1424,
+      "lines": 207,
+      "requires": [],
+      "specializes": [],
+      "role": "core"
+    },
+    {
+      "id": "router",
+      "path": "STANDARDS-ROUTER.md",
+      "words": 1587,
+      "lines": 195,
+      "requires": [
+        "core"
+      ],
+      "specializes": [],
+      "role": "router"
+    },
+    {
+      "id": "profile.application.frontend",
+      "path": "profiles/applications/frontend.md",
+      "words": 1217,
+      "lines": 177,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.accessibility"
+      ],
+      "specializes": [
+        "topic.contracts",
+        "topic.accessibility"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.application.launcher",
+      "path": "profiles/applications/launcher.md",
+      "words": 838,
+      "lines": 132,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.resilience"
+      ],
+      "specializes": [],
+      "role": "profile"
+    },
+    {
+      "id": "profile.application.library",
+      "path": "profiles/applications/library.md",
+      "words": 316,
+      "lines": 56,
+      "requires": [
+        "core"
+      ],
+      "specializes": [],
+      "role": "profile"
+    },
+    {
+      "id": "profile.boundary.interop",
+      "path": "profiles/boundaries/interop.md",
+      "words": 1037,
+      "lines": 172,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.security"
+      ],
+      "specializes": [
+        "topic.contracts",
+        "topic.security"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.boundary.generated-contract",
+      "path": "profiles/boundaries/generated-contract.md",
+      "words": 493,
+      "lines": 72,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "workflow.build",
+        "topic.contracts",
+        "topic.dependencies"
+      ],
+      "specializes": [
+        "topic.contracts"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.boundary.ipc",
+      "path": "profiles/boundaries/ipc.md",
+      "words": 536,
+      "lines": 98,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.security"
+      ],
+      "specializes": [
+        "topic.contracts",
+        "topic.security"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.boundary.language-bindings",
+      "path": "profiles/boundaries/language-bindings.md",
+      "words": 1615,
+      "lines": 246,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts",
+        "profile.boundary.interop"
+      ],
+      "specializes": [
+        "topic.contracts",
+        "profile.boundary.interop"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.boundary.persistence",
+      "path": "profiles/boundaries/persistence.md",
+      "words": 1050,
+      "lines": 152,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts"
+      ],
+      "specializes": [
+        "topic.contracts"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.framework.godot",
+      "path": "profiles/frameworks/godot.md",
+      "words": 454,
+      "lines": 73,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.concurrency"
+      ],
+      "specializes": [
+        "topic.concurrency"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.csharp.async",
+      "path": "profiles/languages/csharp/async.md",
+      "words": 405,
+      "lines": 66,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.concurrency"
+      ],
+      "specializes": [
+        "topic.concurrency"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust",
+      "path": "profiles/languages/rust/README.md",
+      "words": 489,
+      "lines": 81,
+      "requires": [
+        "core"
+      ],
+      "specializes": [],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.api",
+      "path": "profiles/languages/rust/api.md",
+      "words": 1400,
+      "lines": 197,
+      "requires": [
+        "core",
+        "topic.contracts",
+        "topic.architecture",
+        "topic.resilience",
+        "topic.dependencies",
+        "workflow.documentation",
+        "profile.application.library",
+        "profile.language.rust"
+      ],
+      "specializes": [
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.async",
+      "path": "profiles/languages/rust/async.md",
+      "words": 1453,
+      "lines": 229,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.concurrency",
+        "profile.language.rust"
+      ],
+      "specializes": [
+        "topic.concurrency",
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.cross-platform",
+      "path": "profiles/languages/rust/cross-platform.md",
+      "words": 734,
+      "lines": 113,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.cross-platform",
+        "profile.language.rust"
+      ],
+      "specializes": [
+        "topic.cross-platform",
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.dependencies",
+      "path": "profiles/languages/rust/dependencies.md",
+      "words": 816,
+      "lines": 123,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "profile.language.rust",
+        "topic.dependencies"
+      ],
+      "specializes": [
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.interop",
+      "path": "profiles/languages/rust/interop.md",
+      "words": 591,
+      "lines": 99,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "profile.language.rust",
+        "profile.boundary.interop"
+      ],
+      "specializes": [
+        "profile.language.rust",
+        "profile.boundary.interop"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.language-bindings",
+      "path": "profiles/languages/rust/language-bindings.md",
+      "words": 3402,
+      "lines": 489,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "profile.language.rust",
+        "profile.boundary.language-bindings"
+      ],
+      "specializes": [
+        "profile.language.rust",
+        "profile.boundary.language-bindings"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.release",
+      "path": "profiles/languages/rust/release.md",
+      "words": 908,
+      "lines": 131,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "workflow.release",
+        "profile.language.rust",
+        "profile.language.rust.dependencies"
+      ],
+      "specializes": [
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.security",
+      "path": "profiles/languages/rust/security.md",
+      "words": 1325,
+      "lines": 193,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.security",
+        "profile.language.rust"
+      ],
+      "specializes": [
+        "topic.security",
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.tooling",
+      "path": "profiles/languages/rust/tooling.md",
+      "words": 1420,
+      "lines": 202,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "workflow.tooling",
+        "profile.language.rust"
+      ],
+      "specializes": [
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.rust.unsafe",
+      "path": "profiles/languages/rust/unsafe.md",
+      "words": 659,
+      "lines": 109,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "profile.language.rust"
+      ],
+      "specializes": [
+        "profile.language.rust"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.typescript",
+      "path": "profiles/languages/typescript.md",
+      "words": 580,
+      "lines": 91,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts"
+      ],
+      "specializes": [
+        "topic.contracts"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.language.typescript.async",
+      "path": "profiles/languages/typescript/async.md",
+      "words": 444,
+      "lines": 70,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.concurrency",
+        "profile.language.typescript"
+      ],
+      "specializes": [
+        "topic.concurrency"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "profile.workflow.concurrent-plan-integration",
+      "path": "profiles/workflows/concurrent-plan-integration.md",
+      "words": 753,
+      "lines": 117,
+      "requires": [
+        "core",
+        "workflow.planning",
+        "workflow.verification"
+      ],
+      "specializes": [
+        "workflow.planning"
+      ],
+      "role": "profile"
+    },
+    {
+      "id": "reference.patterns.architecture",
+      "path": "reference/patterns/architecture.md",
+      "words": 2160,
+      "lines": 369,
+      "requires": [
+        "topic.architecture"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.accessibility",
+      "path": "reference/recipes/accessibility.md",
+      "words": 732,
+      "lines": 163,
+      "requires": [
+        "topic.accessibility"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.commits",
+      "path": "reference/recipes/commits.md",
+      "words": 714,
+      "lines": 178,
+      "requires": [
+        "workflow.commit"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.diagnostics",
+      "path": "reference/recipes/diagnostics.md",
+      "words": 228,
+      "lines": 52,
+      "requires": [
+        "topic.diagnostics"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.documentation",
+      "path": "reference/recipes/documentation.md",
+      "words": 881,
+      "lines": 232,
+      "requires": [
+        "workflow.documentation"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.frontend",
+      "path": "reference/recipes/frontend.md",
+      "words": 326,
+      "lines": 83,
+      "requires": [
+        "profile.application.frontend",
+        "profile.language.typescript.async"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.http",
+      "path": "reference/recipes/http.md",
+      "words": 564,
+      "lines": 126,
+      "requires": [
+        "topic.contracts",
+        "topic.security"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.implementation",
+      "path": "reference/recipes/implementation.md",
+      "words": 166,
+      "lines": 35,
+      "requires": [
+        "workflow.implementation"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.persistence",
+      "path": "reference/recipes/persistence.md",
+      "words": 345,
+      "lines": 76,
+      "requires": [
+        "profile.boundary.persistence"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.releases",
+      "path": "reference/recipes/releases.md",
+      "words": 271,
+      "lines": 55,
+      "requires": [
+        "workflow.release"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.rust-dependencies",
+      "path": "reference/recipes/rust-dependencies.md",
+      "words": 674,
+      "lines": 149,
+      "requires": [
+        "topic.dependencies",
+        "profile.language.rust.dependencies"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.rust-release",
+      "path": "reference/recipes/rust-release.md",
+      "words": 599,
+      "lines": 141,
+      "requires": [
+        "workflow.release",
+        "profile.language.rust.release"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.rust-tooling",
+      "path": "reference/recipes/rust-tooling.md",
+      "words": 834,
+      "lines": 182,
+      "requires": [
+        "workflow.verification",
+        "workflow.tooling",
+        "profile.language.rust.tooling"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "reference.recipes.tooling",
+      "path": "reference/recipes/tooling.md",
+      "words": 1659,
+      "lines": 452,
+      "requires": [
+        "workflow.tooling",
+        "topic.dependencies"
+      ],
+      "specializes": [],
+      "role": "reference"
+    },
+    {
+      "id": "topic.accessibility",
+      "path": "topics/accessibility.md",
+      "words": 1488,
+      "lines": 216,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.architecture",
+      "path": "topics/architecture.md",
+      "words": 1351,
+      "lines": 191,
+      "requires": [
+        "core",
+        "topic.contracts"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.concurrency",
+      "path": "topics/concurrency.md",
+      "words": 829,
+      "lines": 134,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.contracts",
+      "path": "topics/contracts.md",
+      "words": 4629,
+      "lines": 652,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.cross-platform",
+      "path": "topics/cross-platform.md",
+      "words": 906,
+      "lines": 146,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.dependencies",
+      "path": "topics/dependencies.md",
+      "words": 1767,
+      "lines": 263,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "workflow.release"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.diagnostics",
+      "path": "topics/diagnostics.md",
+      "words": 620,
+      "lines": 97,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.licensing",
+      "path": "topics/licensing.md",
+      "words": 511,
+      "lines": 79,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.performance",
+      "path": "topics/performance.md",
+      "words": 757,
+      "lines": 115,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.resilience",
+      "path": "topics/resilience.md",
+      "words": 1118,
+      "lines": 165,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "topic.security",
+      "path": "topics/security.md",
+      "words": 1417,
+      "lines": 212,
+      "requires": [
+        "core",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "topic"
+    },
+    {
+      "id": "workflow.build",
+      "path": "workflows/build.md",
+      "words": 678,
+      "lines": 99,
+      "requires": [
+        "core",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.commit",
+      "path": "workflows/commit.md",
+      "words": 1852,
+      "lines": 277,
+      "requires": [
+        "core",
+        "workflow.implementation"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.development-proportionality",
+      "path": "workflows/development-proportionality.md",
+      "words": 748,
+      "lines": 129,
+      "requires": [
+        "core",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.documentation",
+      "path": "workflows/documentation.md",
+      "words": 1136,
+      "lines": 159,
+      "requires": [
+        "core"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.implementation",
+      "path": "workflows/implementation.md",
+      "words": 1092,
+      "lines": 169,
+      "requires": [
+        "core"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.planning",
+      "path": "workflows/planning.md",
+      "words": 2416,
+      "lines": 390,
+      "requires": [
+        "core",
+        "workflow.implementation",
+        "workflow.verification",
+        "workflow.development-proportionality"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.release",
+      "path": "workflows/release.md",
+      "words": 3320,
+      "lines": 482,
+      "requires": [
+        "core",
+        "workflow.verification",
+        "topic.contracts"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.tooling",
+      "path": "workflows/tooling.md",
+      "words": 1341,
+      "lines": 189,
+      "requires": [
+        "core",
+        "workflow.implementation",
+        "workflow.verification",
+        "workflow.commit"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    },
+    {
+      "id": "workflow.verification",
+      "path": "workflows/verification.md",
+      "words": 4024,
+      "lines": 554,
+      "requires": [
+        "core"
+      ],
+      "specializes": [],
+      "role": "workflow"
+    }
+  ],
+  "routes": [
+    {
+      "case": "audit",
+      "selected": [
+        "core",
+        "router",
+        "workflow.implementation",
+        "workflow.verification",
+        "workflow.development-proportionality"
+      ],
+      "count": 5,
+      "words": 8875,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "uncertainty-reduction"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.development-proportionality->core",
+                "source": "workflow.development-proportionality"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.development-proportionality->workflow.implementation",
+                "source": "workflow.development-proportionality"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.development-proportionality->workflow.verification",
+                "source": "workflow.development-proportionality"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.development-proportionality",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.development-proportionality",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.development-proportionality"
+          }
+        ],
+        "summary": "Selected 5 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "durable-worker",
+      "selected": [
+        "core",
+        "router",
+        "workflow.implementation",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.security",
+        "workflow.development-proportionality",
+        "profile.boundary.ipc",
+        "profile.boundary.persistence",
+        "topic.concurrency",
+        "topic.diagnostics",
+        "topic.resilience",
+        "workflow.planning"
+      ],
+      "count": 13,
+      "words": 21490,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "planning",
+                "implementation",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "persistence",
+                "ipc"
+              ]
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "concurrency",
+                "resilience",
+                "diagnostics"
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.ipc->core",
+                "source": "profile.boundary.ipc"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.persistence->core",
+                "source": "profile.boundary.persistence"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.concurrency->core",
+                "source": "topic.concurrency"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->core",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.diagnostics->core",
+                "source": "topic.diagnostics"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.resilience->core",
+                "source": "topic.resilience"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.security->core",
+                "source": "topic.security"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.development-proportionality->core",
+                "source": "workflow.development-proportionality"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.planning->core",
+                "source": "workflow.planning"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.development-proportionality->workflow.implementation",
+                "source": "workflow.development-proportionality"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.planning->workflow.implementation",
+                "source": "workflow.planning"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.ipc->workflow.verification",
+                "source": "profile.boundary.ipc"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.persistence->workflow.verification",
+                "source": "profile.boundary.persistence"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.concurrency->workflow.verification",
+                "source": "topic.concurrency"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->workflow.verification",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.diagnostics->workflow.verification",
+                "source": "topic.diagnostics"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.resilience->workflow.verification",
+                "source": "topic.resilience"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.security->workflow.verification",
+                "source": "topic.security"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.development-proportionality->workflow.verification",
+                "source": "workflow.development-proportionality"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.planning->workflow.verification",
+                "source": "workflow.planning"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.contracts",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.ipc->topic.contracts",
+                "source": "profile.boundary.ipc"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.persistence->topic.contracts",
+                "source": "profile.boundary.persistence"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.diagnostics->topic.contracts",
+                "source": "topic.diagnostics"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.resilience->topic.contracts",
+                "source": "topic.resilience"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.security",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.ipc->topic.security",
+                "source": "profile.boundary.ipc"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.development-proportionality",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.planning->workflow.development-proportionality",
+                "source": "workflow.planning"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.ipc",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.ipc",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.persistence",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.persistence",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.concurrency",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.topic.concurrency",
+                "facts": [
+                  "routing.topics"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.diagnostics",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.topic.diagnostics",
+                "facts": [
+                  "routing.topics"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.resilience",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.topic.resilience",
+                "facts": [
+                  "routing.topics"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.planning",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.planning",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.contracts"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.security"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.development-proportionality"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.ipc"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.persistence"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.concurrency"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.diagnostics"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.resilience"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.planning"
+          }
+        ],
+        "summary": "Selected 13 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "generated-contract",
+      "selected": [
+        "core",
+        "router",
+        "workflow.implementation",
+        "workflow.verification",
+        "topic.contracts",
+        "workflow.build",
+        "workflow.release",
+        "topic.dependencies",
+        "profile.boundary.generated-contract"
+      ],
+      "count": 9,
+      "words": 19014,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "implementation",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "generated-contract"
+              ]
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->core",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->core",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.dependencies->core",
+                "source": "topic.dependencies"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.build->core",
+                "source": "workflow.build"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.release->core",
+                "source": "workflow.release"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.build->workflow.implementation",
+                "source": "workflow.build"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->workflow.verification",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->workflow.verification",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.dependencies->workflow.verification",
+                "source": "topic.dependencies"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.build->workflow.verification",
+                "source": "workflow.build"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.release->workflow.verification",
+                "source": "workflow.release"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.contracts",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->topic.contracts",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.release->topic.contracts",
+                "source": "workflow.release"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.build",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->workflow.build",
+                "source": "profile.boundary.generated-contract"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.release",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.dependencies->workflow.release",
+                "source": "topic.dependencies"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.dependencies",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->topic.dependencies",
+                "source": "profile.boundary.generated-contract"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.generated-contract",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.generated-contract",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.contracts"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.build"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.release"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.dependencies"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.generated-contract"
+          }
+        ],
+        "summary": "Selected 9 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "no-activities",
+      "selected": [
+        "core",
+        "router"
+      ],
+      "count": 2,
+      "words": 3011,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          }
+        ],
+        "summary": "Selected 2 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "persisted-schema",
+      "selected": [
+        "core",
+        "router",
+        "workflow.verification",
+        "topic.contracts",
+        "workflow.implementation",
+        "profile.boundary.persistence"
+      ],
+      "count": 6,
+      "words": 13806,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "implementation",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "persistence"
+              ]
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "contracts"
+              ]
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.persistence->core",
+                "source": "profile.boundary.persistence"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->core",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.persistence->workflow.verification",
+                "source": "profile.boundary.persistence"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->workflow.verification",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.contracts",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.persistence->topic.contracts",
+                "source": "profile.boundary.persistence"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.topic.contracts",
+                "facts": [
+                  "routing.topics"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.persistence",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.persistence",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.contracts"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.persistence"
+          }
+        ],
+        "summary": "Selected 6 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "rust-ffi",
+      "selected": [
+        "core",
+        "router",
+        "profile.application.library",
+        "workflow.documentation",
+        "profile.language.rust",
+        "workflow.implementation",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.architecture",
+        "topic.resilience",
+        "topic.security",
+        "workflow.build",
+        "workflow.release",
+        "topic.dependencies",
+        "profile.boundary.interop",
+        "profile.boundary.generated-contract",
+        "profile.boundary.language-bindings",
+        "profile.language.rust.api"
+      ],
+      "count": 18,
+      "words": 28893,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "implementation",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "interop",
+                "language-bindings",
+                "generated-contract"
+              ]
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "rust",
+                "rust-api"
+              ]
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.application.library->core",
+                "source": "profile.application.library"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->core",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.interop->core",
+                "source": "profile.boundary.interop"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.language-bindings->core",
+                "source": "profile.boundary.language-bindings"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust->core",
+                "source": "profile.language.rust"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->core",
+                "source": "profile.language.rust.api"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.architecture->core",
+                "source": "topic.architecture"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->core",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.dependencies->core",
+                "source": "topic.dependencies"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.resilience->core",
+                "source": "topic.resilience"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.security->core",
+                "source": "topic.security"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.build->core",
+                "source": "workflow.build"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.documentation->core",
+                "source": "workflow.documentation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.release->core",
+                "source": "workflow.release"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.application.library",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->profile.application.library",
+                "source": "profile.language.rust.api"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.documentation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->workflow.documentation",
+                "source": "profile.language.rust.api"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.rust",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->profile.language.rust",
+                "source": "profile.language.rust.api"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.language.rust",
+                "facts": [
+                  "routing.languages"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.build->workflow.implementation",
+                "source": "workflow.build"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->workflow.verification",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.interop->workflow.verification",
+                "source": "profile.boundary.interop"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.language-bindings->workflow.verification",
+                "source": "profile.boundary.language-bindings"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->workflow.verification",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.dependencies->workflow.verification",
+                "source": "topic.dependencies"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.resilience->workflow.verification",
+                "source": "topic.resilience"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.security->workflow.verification",
+                "source": "topic.security"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.build->workflow.verification",
+                "source": "workflow.build"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.release->workflow.verification",
+                "source": "workflow.release"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.contracts",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->topic.contracts",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.interop->topic.contracts",
+                "source": "profile.boundary.interop"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.language-bindings->topic.contracts",
+                "source": "profile.boundary.language-bindings"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->topic.contracts",
+                "source": "profile.language.rust.api"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.architecture->topic.contracts",
+                "source": "topic.architecture"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.resilience->topic.contracts",
+                "source": "topic.resilience"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.release->topic.contracts",
+                "source": "workflow.release"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.architecture",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->topic.architecture",
+                "source": "profile.language.rust.api"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.resilience",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->topic.resilience",
+                "source": "profile.language.rust.api"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.security",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.interop->topic.security",
+                "source": "profile.boundary.interop"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.build",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->workflow.build",
+                "source": "profile.boundary.generated-contract"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.release",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.dependencies->workflow.release",
+                "source": "topic.dependencies"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.dependencies",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.generated-contract->topic.dependencies",
+                "source": "profile.boundary.generated-contract"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.api->topic.dependencies",
+                "source": "profile.language.rust.api"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.interop",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.boundary.language-bindings->profile.boundary.interop",
+                "source": "profile.boundary.language-bindings"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.interop",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.generated-contract",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.generated-contract",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.boundary.language-bindings",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.boundary.language-bindings",
+                "facts": [
+                  "routing.boundaries"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.rust.api",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.language.rust-api",
+                "facts": [
+                  "routing.languages"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.application.library"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.documentation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.language.rust"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.contracts"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.architecture"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.resilience"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.security"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.build"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.release"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.dependencies"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.interop"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.generated-contract"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.boundary.language-bindings"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.language.rust.api"
+          }
+        ],
+        "summary": "Selected 18 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "rust-tooling",
+      "selected": [
+        "core",
+        "router",
+        "workflow.implementation",
+        "workflow.commit",
+        "profile.language.rust",
+        "workflow.verification",
+        "workflow.tooling",
+        "profile.language.rust.tooling"
+      ],
+      "count": 8,
+      "words": 13229,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "tooling",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "rust",
+                "rust-tooling"
+              ]
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust->core",
+                "source": "profile.language.rust"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.tooling->core",
+                "source": "profile.language.rust.tooling"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.commit->core",
+                "source": "workflow.commit"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.tooling->core",
+                "source": "workflow.tooling"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.commit->workflow.implementation",
+                "source": "workflow.commit"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.tooling->workflow.implementation",
+                "source": "workflow.tooling"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.commit",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.tooling->workflow.commit",
+                "source": "workflow.tooling"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.rust",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.tooling->profile.language.rust",
+                "source": "profile.language.rust.tooling"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.language.rust",
+                "facts": [
+                  "routing.languages"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.tooling->workflow.verification",
+                "source": "profile.language.rust.tooling"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.tooling->workflow.verification",
+                "source": "workflow.tooling"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.tooling",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust.tooling->workflow.tooling",
+                "source": "profile.language.rust.tooling"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.tooling",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.rust.tooling",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.language.rust-tooling",
+                "facts": [
+                  "routing.languages"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.commit"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.language.rust"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.tooling"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.language.rust.tooling"
+          }
+        ],
+        "summary": "Selected 8 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "s1-rust-library-fix",
+      "selected": [
+        "core",
+        "router",
+        "profile.application.library",
+        "profile.language.rust",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "count": 6,
+      "words": 8932,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "implementation",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "library"
+              ]
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "rust"
+              ]
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.application.library->core",
+                "source": "profile.application.library"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.rust->core",
+                "source": "profile.language.rust"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.application.library",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.application.library",
+                "facts": [
+                  "routing.applications"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.rust",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.language.rust",
+                "facts": [
+                  "routing.languages"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.application.library"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.language.rust"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          }
+        ],
+        "summary": "Selected 6 standards with 0 unresolved fact categories."
+      }
+    },
+    {
+      "case": "typescript-ui-label",
+      "selected": [
+        "core",
+        "router",
+        "workflow.verification",
+        "topic.accessibility",
+        "topic.contracts",
+        "workflow.implementation",
+        "profile.application.frontend",
+        "profile.language.typescript"
+      ],
+      "count": 8,
+      "words": 16041,
+      "request": {
+        "snapshot": {
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "kind": "snapshot-handle",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "route",
+          "facts": {
+            "routing.activities": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "implementation",
+                "verification"
+              ]
+            },
+            "routing.workflow-profiles": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.applications": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "frontend"
+              ]
+            },
+            "routing.boundaries": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.languages": {
+              "state": "known",
+              "type": "enum-set",
+              "value": [
+                "typescript"
+              ]
+            },
+            "routing.frameworks": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            },
+            "routing.topics": {
+              "state": "known",
+              "type": "enum-set",
+              "value": []
+            }
+          }
+        }
+      },
+      "result": {
+        "kind": "route-result",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+          "schema_version": 5
+        },
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.application.frontend->core",
+                "source": "profile.application.frontend"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.typescript->core",
+                "source": "profile.language.typescript"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.accessibility->core",
+                "source": "topic.accessibility"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->core",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.implementation->core",
+                "source": "workflow.implementation"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:workflow.verification->core",
+                "source": "workflow.verification"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.verification",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.application.frontend->workflow.verification",
+                "source": "profile.application.frontend"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.typescript->workflow.verification",
+                "source": "profile.language.typescript"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.accessibility->workflow.verification",
+                "source": "topic.accessibility"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:topic.contracts->workflow.verification",
+                "source": "topic.contracts"
+              },
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.verification",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.accessibility",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.application.frontend->topic.accessibility",
+                "source": "profile.application.frontend"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "topic.contracts",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.application.frontend->topic.contracts",
+                "source": "profile.application.frontend"
+              },
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:profile.language.typescript->topic.contracts",
+                "source": "profile.language.typescript"
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": [
+                  "routing.activities"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.application.frontend",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.application.frontend",
+                "facts": [
+                  "routing.applications"
+                ]
+              }
+            ],
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.typescript",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.language.typescript",
+                "facts": [
+                  "routing.languages"
+                ]
+              }
+            ],
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [],
+        "next_operations": [
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "core"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "router"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.verification"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.accessibility"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "topic.contracts"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "workflow.implementation"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.application.frontend"
+          },
+          {
+            "operation": "query",
+            "request_kind": "read",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+              "schema_version": 5
+            },
+            "target": "profile.language.typescript"
+          }
+        ],
+        "summary": "Selected 8 standards with 0 unresolved fact categories."
+      }
+    }
+  ],
+  "missing_facts_probe": {
+    "request": {
+      "snapshot": {
+        "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "request": {
+        "kind": "route",
+        "facts": {}
+      }
+    },
+    "result": {
+      "kind": "route-result",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+        "schema_version": 5
+      },
+      "reading_plan": [
+        {
+          "target": "core",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "requires",
+              "edge": "metadata-requires:router->core",
+              "source": "router"
+            }
+          ],
+          "state": "selected"
+        },
+        {
+          "target": "router",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-base",
+              "projection": "router.executable-projection"
+            }
+          ],
+          "state": "selected"
+        },
+        {
+          "target": "profile.application.frontend",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.application.frontend",
+              "facts": [
+                "routing.applications"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.application.launcher",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.application.launcher",
+              "facts": [
+                "routing.applications"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.application.library",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.application.library",
+              "facts": [
+                "routing.applications"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.boundary.generated-contract",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.boundary.generated-contract",
+              "facts": [
+                "routing.boundaries"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.boundary.interop",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.boundary.interop",
+              "facts": [
+                "routing.boundaries"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.boundary.ipc",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.boundary.ipc",
+              "facts": [
+                "routing.boundaries"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.boundary.language-bindings",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.boundary.language-bindings",
+              "facts": [
+                "routing.boundaries"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.boundary.persistence",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.boundary.persistence",
+              "facts": [
+                "routing.boundaries"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.framework.godot",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.framework.godot",
+              "facts": [
+                "routing.frameworks"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.csharp.async",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.csharp-async",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust.api",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust-api",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust.async",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust-async",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust.cross-platform",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust-cross-platform",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust.dependencies",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust-dependencies",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust.release",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust-release",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.rust.tooling",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.rust-tooling",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.typescript",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.typescript",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.language.typescript.async",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.language.typescript-async",
+              "facts": [
+                "routing.languages"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "profile.workflow.concurrent-plan-integration",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.profile.concurrent-plan-integration",
+              "facts": [
+                "routing.workflow-profiles"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.accessibility",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.accessibility",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.architecture",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.architecture",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.concurrency",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.concurrency",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.contracts",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.contracts",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.cross-platform",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.cross-platform",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.dependencies",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.dependencies",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.diagnostics",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.diagnostics",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.licensing",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.licensing",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.performance",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.performance",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.resilience",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.resilience",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "topic.security",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.topic.security",
+              "facts": [
+                "routing.topics"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.build",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.build",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.commit",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.commit",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.development-proportionality",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.development-proportionality",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.documentation",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.documentation",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.implementation",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.implementation",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.planning",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.planning",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.release",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.release",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.tooling",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.tooling",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        },
+        {
+          "target": "workflow.verification",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "authority": "normative",
+          "reasons": [
+            {
+              "kind": "routing-rule",
+              "rule": "route.workflow.verification",
+              "facts": [
+                "routing.activities"
+              ]
+            }
+          ],
+          "state": "unresolved"
+        }
+      ],
+      "unresolved_questions": [
+        {
+          "id": "question.routing.activities",
+          "kind": "applicability-fact",
+          "prompt": "Which development activities are part of the requested work?",
+          "state": "required",
+          "permitted_answers": [
+            "build",
+            "commit",
+            "documentation",
+            "implementation",
+            "planning",
+            "release",
+            "tooling",
+            "uncertainty-reduction",
+            "verification",
+            "none"
+          ]
+        },
+        {
+          "id": "question.routing.applications",
+          "kind": "applicability-fact",
+          "prompt": "Which application forms are affected?",
+          "state": "required",
+          "permitted_answers": [
+            "frontend",
+            "launcher",
+            "library",
+            "none"
+          ]
+        },
+        {
+          "id": "question.routing.boundaries",
+          "kind": "applicability-fact",
+          "prompt": "Which authority or representation boundaries are crossed?",
+          "state": "required",
+          "permitted_answers": [
+            "generated-contract",
+            "interop",
+            "ipc",
+            "language-bindings",
+            "persistence",
+            "none"
+          ]
+        },
+        {
+          "id": "question.routing.frameworks",
+          "kind": "applicability-fact",
+          "prompt": "Which framework-specific mechanisms are affected?",
+          "state": "required",
+          "permitted_answers": [
+            "godot",
+            "none"
+          ]
+        },
+        {
+          "id": "question.routing.languages",
+          "kind": "applicability-fact",
+          "prompt": "Which language-specific mechanisms are affected?",
+          "state": "required",
+          "permitted_answers": [
+            "csharp-async",
+            "rust",
+            "rust-api",
+            "rust-async",
+            "rust-cross-platform",
+            "rust-dependencies",
+            "rust-release",
+            "rust-tooling",
+            "typescript",
+            "typescript-async",
+            "none"
+          ]
+        },
+        {
+          "id": "question.routing.topics",
+          "kind": "applicability-fact",
+          "prompt": "Which cross-cutting concerns are affected?",
+          "state": "required",
+          "permitted_answers": [
+            "accessibility",
+            "architecture",
+            "concurrency",
+            "contracts",
+            "cross-platform",
+            "dependencies",
+            "diagnostics",
+            "licensing",
+            "performance",
+            "resilience",
+            "security",
+            "none"
+          ]
+        },
+        {
+          "id": "question.routing.workflow-profiles",
+          "kind": "applicability-fact",
+          "prompt": "Can multiple outstanding proposals become stale before serial integration?",
+          "state": "required",
+          "permitted_answers": [
+            "concurrent-plan-integration",
+            "none"
+          ]
+        }
+      ],
+      "next_operations": [
+        {
+          "operation": "query",
+          "request_kind": "read",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+            "schema_version": 5
+          },
+          "target": "core"
+        },
+        {
+          "operation": "query",
+          "request_kind": "read",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:e7643eb3-8fa7-4837-95a6-5816002c2765",
+            "schema_version": 5
+          },
+          "target": "router"
+        }
+      ],
+      "summary": "Selected 2 standards with 7 unresolved fact categories."
+    }
+  }
+}
