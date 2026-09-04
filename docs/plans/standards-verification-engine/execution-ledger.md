@@ -7462,3 +7462,35 @@
   migration roots. The verification-engine plan and its Python design recovery
   are accepted; detailed evidence is in
   [M6-Z1 closure](reports/m6-z1-zero-bash-closure.md).
+
+## 2026-09-04 - Migration History Alignment
+
+- The maintainer explicitly authorized rewriting the unpushed migration range
+  after commit-standard review found a corrective fixup, bodyless contract
+  changes, and process-only boundaries splitting coherent outcomes. The exact
+  intended base is `5a3806c0bf4a9521b1f2e1fee95834d633b1949e`.
+- The original `main` tip
+  `ef400727e2d81a467af64b95f64e7c631096faee` is protected at
+  `backup/bash-migration-pre-history-alignment-20260903`. That recovery ref is
+  `retained-protected`, owned by the maintainer for rewrite rollback, has no
+  synchronization consumer, and may retire only with later explicit maintainer
+  authority after the rewritten history is accepted.
+- Integration mode: authorized local reconstruction and squash onto the exact
+  intended base. The range was unpushed, `origin/main` remained at `7bf74bb5`,
+  only `main` contained the original tip, no merge topology was present, and no
+  registered worktree used an affected commit.
+
+| Source commit or commits | Accepted replacement | Outcome |
+| --- | --- | --- |
+| `ecd12435`, `c0363d4a` | `db169446` | One corrected shared-contract admission with rationale |
+| `886c52d2`, `e49c875b`, `1956679f` | `83dbdab6` | One atomic plan-checker replacement, relationship transfer, and final-helper retirement |
+| `fc22c42a`, `9790e576`, `ef400727` | `7cff858b` | One atomic terminal projection retirement and zero-Bash cleanup |
+
+- The accepted terminal tree is byte-identical to the protected source tip.
+  Post-rewrite verification passed all 349 verifier tests, all 271 registered
+  suites, all 68 Standards Engine tests, 37 neutral graph tests, 11 repository
+  Git tests, suite-input freshness, coverage authority, zero-Bash inventory,
+  and diff integrity.
+- Terminal disposition: rewritten `main` is the retained integration branch;
+  the source range is superseded and recoverable through the named protected
+  ref. No source commit was dropped without an explicit accepted replacement.
