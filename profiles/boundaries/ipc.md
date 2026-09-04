@@ -7,7 +7,7 @@
 - Level: `PROFILE`
 - Applies when: Structured requests, responses, commands, queries, or events cross a process, message, plugin-host, worker, or independently deployed component boundary.
 - Does not apply when: Values remain inside one trusted process without serialization, message dispatch, or independently evolving producer and consumer.
-- Requires: `core`, `workflow.verification`, `topic.contracts`, `topic.security`
+- Requires: `core`, `workflow.verification`, `topic.contracts`, `topic.security`, `topic.contracts.protocols`
 - Specializes: `topic.contracts`, `topic.security`
 - Verification: Action-specific payload decision fixtures and affected producer/consumer boundary tests.
 - Canonical owner: `profiles/boundaries/ipc.md`

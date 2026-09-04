@@ -77,9 +77,9 @@ outcome = "direct"
 all = [{ field = "meaning", op = "eq", value = "clear" }]
 
 [[checks]]
-id = "owner"
+id = "owner-detail-1"
 type = "text"
-path = "CORE-STANDARDS.md"
+path = "topics/code-design.md"
 required = ["### Code And Terminology Discipline", "call site may", "Do not apply blanket extraction", "Delete code, aliases, adapters", "Choose names from domain meaning", "Do not fall back to fixed call counts"]
 prohibited = []
 

@@ -7,7 +7,7 @@
 - Level: `PROFILE`
 - Applies when: A schema or generator produces program-facing models, validators, tool definitions, bindings, configuration, or another consumed representation.
 - Does not apply when: Generation produces no representation interpreted by a program consumer, or the change preserves the generated contract and all of its consumers unchanged.
-- Requires: `core`, `workflow.verification`, `workflow.build`, `topic.contracts`, `topic.dependencies`
+- Requires: `core`, `workflow.verification`, `workflow.build`, `topic.contracts`, `topic.dependencies`, `topic.contracts.schemas`
 - Specializes: `topic.contracts`
 - Verification: Generated-contract routing, semantic-conformance, freshness, public-consumer, unsupported-domain, and reconstruction evidence.
 - Canonical owner: `profiles/boundaries/generated-contract.md`

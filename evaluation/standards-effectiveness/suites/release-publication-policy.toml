@@ -81,29 +81,21 @@ values = ["STD-0566", "STD-0567", "STD-0568", "STD-0569", "STD-0570", "STD-0571"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md"]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "workflow-policy"
 type = "text"
 path = "workflows/release.md"
-required = [
-  "## Publication Presentation",
-  "A publication surface presents an accepted release to consumers",
-  "own versioning, channels, artifact identity",
-  "A provider feature or manual",
-  "Major version zero does not by itself",
-  "summaries may supplement",
-  "Present the exact artifact identities and relationships",
-  "release-publication diagnostic",
-]
-prohibited = [
-  "GitHub's auto-generated release notes",
-  "CI creates draft GitHub Release",
-  "my-tool-1.0.0-x86_64",
-  "libmy_lib-1.0.0",
-  "checksums-sha256.txt",
-]
+required = ["## Publication Presentation"]
+prohibited = ["GitHub's auto-generated release notes", "CI creates draft GitHub Release", "my-tool-1.0.0-x86_64", "libmy_lib-1.0.0", "checksums-sha256.txt"]
+
+[[checks]]
+id = "workflow-policy-detail-1"
+type = "text"
+path = "workflows/release/operations.md"
+required = ["A publication surface presents an accepted release to consumers", "own versioning, channels, artifact identity", "A provider feature or manual", "Major version zero does not by itself", "summaries may supplement", "Present the exact artifact identities and relationships", "release-publication diagnostic"]
+prohibited = ["GitHub's auto-generated release notes", "CI creates draft GitHub Release", "my-tool-1.0.0-x86_64", "libmy_lib-1.0.0", "checksums-sha256.txt"]
 
 [[checks]]
 id = "legacy-index"

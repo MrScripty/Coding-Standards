@@ -64,7 +64,7 @@ prohibited = []
 id = "router-projection"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["Common application launcher command projection, lifecycle, delegation, or outcome-preservation contract is required"]
+required = ["Change a launcher command, lifecycle, delegation, or outcome"]
 prohibited = []
 
 [[checks]]

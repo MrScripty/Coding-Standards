@@ -39,7 +39,14 @@ any = [
 id = "verification-policy"
 type = "text"
 path = "workflows/verification.md"
-required = ["## Evidence Oracle Boundaries", "## Negative Fixture Isolation", "## Property And Differential Evidence", "observed result identifies the expected", "diagnostic or failure point"]
+required = ["## Evidence Oracle Boundaries", "## Negative Fixture Isolation", "## Property And Differential Evidence"]
+prohibited = []
+
+[[checks]]
+id = "verification-policy-detail-1"
+type = "text"
+path = "workflows/verification/oracles.md"
+required = ["observed result identifies the expected", "diagnostic or failure point"]
 prohibited = []
 
 [[checks]]

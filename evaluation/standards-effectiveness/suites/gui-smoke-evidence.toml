@@ -102,18 +102,14 @@ expected = [
 id = "canonical-owner"
 type = "text"
 path = "workflows/verification.md"
-required = [
-  "### GUI Smoke Evidence",
-  "display or session capability",
-  "sandbox policy",
-  "software rendering, sandbox flags",
-  "state isolation",
-  "bounded process-lifecycle behavior",
-  "verification-only procedure separate from normal interactive startup",
-  "Verification owns its evidence kind",
-  "runner behavior, missing required capability",
-  "does not fall back to startup-only evidence",
-]
+required = ["### GUI Smoke Evidence"]
+prohibited = []
+
+[[checks]]
+id = "canonical-owner-detail-1"
+type = "text"
+path = "workflows/verification/gui.md"
+required = ["display or session capability", "sandbox policy", "software rendering, sandbox flags", "state isolation", "bounded process-lifecycle behavior", "verification-only procedure separate from normal interactive startup", "Verification owns its evidence kind", "runner behavior, missing required capability", "does not fall back to startup-only evidence"]
 prohibited = []
 
 [[checks]]

@@ -12,6 +12,7 @@ default = "allow"
 [checks.domains]
 case = ["*"]
 facts = ["complete", "contradictory"]
+context = ["required-contract", "ordinary-source"]
 mechanism = ["missing", "selected"]
 scope = ["complete", "missing"]
 precedence = ["complete", "missing"]
@@ -21,7 +22,7 @@ expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
-any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+any = [{ all = [{ field = "fallback", op = "ne", value = "none" }, { field = "context", op = "eq", value = "required-contract" }] }, { field = "fallback", op = "eq", value = "silent-omit" }, { field = "facts", op = "eq", value = "contradictory" }]
 [[checks.rules]]
 outcome = "typed-unavailable"
 [checks.rules.when]
@@ -35,7 +36,7 @@ all = [{ field = "representable", op = "eq", value = "no" }]
 id = "workflow"
 type = "text"
 path = "workflows/tooling.md"
-required = ["## Editor And File Configuration", "editor-neutral configuration mechanism", "file-format semantics", "generated-file authority", "configuration's scope", "EditorConfig is one possible transport", "Do not default to spaces", "typed `invalid`", "typed `unavailable`", "typed `unsupported`"]
+required = ["## Editor And File Configuration", "editor-neutral configuration mechanism", "file-format semantics", "generated-file authority", "configuration's scope", "SHOULD use UTF-8", "Preserve an existing adequate", "File formats and consumers can require exceptions", "typed `invalid`", "typed `unavailable`", "typed `unsupported`"]
 prohibited = []
 [[checks]]
 id = "former-source"

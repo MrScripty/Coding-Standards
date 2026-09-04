@@ -1,0 +1,784 @@
+{
+  "method": "Same original task facts with known-empty routing.details. Compiled executable Router expressions and Requires closure; whole-artifact whitespace word counts including metadata. This is repository navigation evidence, not a downstream agent trial.",
+  "normative_modules": 56,
+  "unreachable": [],
+  "routes": [
+    {
+      "case": "audit",
+      "facts": {
+        "activities": [
+          "uncertainty-reduction"
+        ],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [],
+        "languages": [],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 8875,
+      "after_words": 7914,
+      "before_modules": 5,
+      "after_modules": 5,
+      "selected": [
+        "core",
+        "router",
+        "workflow.development-proportionality",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "removed": [],
+      "added": []
+    },
+    {
+      "case": "durable-worker",
+      "facts": {
+        "activities": [
+          "planning",
+          "implementation",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [
+          "persistence",
+          "ipc"
+        ],
+        "languages": [],
+        "frameworks": [],
+        "topics": [
+          "concurrency",
+          "resilience",
+          "diagnostics"
+        ],
+        "details": []
+      },
+      "before_words": 21490,
+      "after_words": 20814,
+      "before_modules": 13,
+      "after_modules": 15,
+      "selected": [
+        "core",
+        "profile.boundary.ipc",
+        "profile.boundary.persistence",
+        "router",
+        "topic.concurrency",
+        "topic.contracts",
+        "topic.contracts.evolution",
+        "topic.contracts.protocols",
+        "topic.diagnostics",
+        "topic.resilience",
+        "topic.security",
+        "workflow.development-proportionality",
+        "workflow.implementation",
+        "workflow.planning",
+        "workflow.verification"
+      ],
+      "removed": [],
+      "added": [
+        "topic.contracts.evolution",
+        "topic.contracts.protocols"
+      ]
+    },
+    {
+      "case": "generated-contract",
+      "facts": {
+        "activities": [
+          "implementation",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [
+          "generated-contract"
+        ],
+        "languages": [],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 19014,
+      "after_words": 13425,
+      "before_modules": 9,
+      "after_modules": 9,
+      "selected": [
+        "core",
+        "profile.boundary.generated-contract",
+        "router",
+        "topic.contracts",
+        "topic.contracts.schemas",
+        "topic.dependencies",
+        "workflow.build",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "removed": [
+        "workflow.release"
+      ],
+      "added": [
+        "topic.contracts.schemas"
+      ]
+    },
+    {
+      "case": "no-activities",
+      "facts": {
+        "activities": [],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [],
+        "languages": [],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 3011,
+      "after_words": 2735,
+      "before_modules": 2,
+      "after_modules": 2,
+      "selected": [
+        "core",
+        "router"
+      ],
+      "removed": [],
+      "added": []
+    },
+    {
+      "case": "persisted-schema",
+      "facts": {
+        "activities": [
+          "implementation",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [
+          "persistence"
+        ],
+        "languages": [],
+        "frameworks": [],
+        "topics": [
+          "contracts"
+        ],
+        "details": []
+      },
+      "before_words": 13806,
+      "after_words": 11863,
+      "before_modules": 6,
+      "after_modules": 7,
+      "selected": [
+        "core",
+        "profile.boundary.persistence",
+        "router",
+        "topic.contracts",
+        "topic.contracts.evolution",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "removed": [],
+      "added": [
+        "topic.contracts.evolution"
+      ]
+    },
+    {
+      "case": "rust-ffi",
+      "facts": {
+        "activities": [
+          "implementation",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [
+          "interop",
+          "language-bindings",
+          "generated-contract"
+        ],
+        "languages": [
+          "rust",
+          "rust-api"
+        ],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 28893,
+      "after_words": 25109,
+      "before_modules": 18,
+      "after_modules": 18,
+      "selected": [
+        "core",
+        "profile.boundary.generated-contract",
+        "profile.boundary.interop",
+        "profile.boundary.language-bindings",
+        "profile.language.rust",
+        "profile.language.rust.api",
+        "profile.language.rust.interop",
+        "profile.language.rust.language-bindings",
+        "router",
+        "topic.contracts",
+        "topic.contracts.evolution",
+        "topic.contracts.schemas",
+        "topic.dependencies",
+        "topic.security",
+        "workflow.build",
+        "workflow.documentation",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "removed": [
+        "profile.application.library",
+        "topic.architecture",
+        "topic.resilience",
+        "workflow.release"
+      ],
+      "added": [
+        "profile.language.rust.interop",
+        "profile.language.rust.language-bindings",
+        "topic.contracts.evolution",
+        "topic.contracts.schemas"
+      ]
+    },
+    {
+      "case": "rust-tooling",
+      "facts": {
+        "activities": [
+          "tooling",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [],
+        "boundaries": [],
+        "languages": [
+          "rust",
+          "rust-tooling"
+        ],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 13229,
+      "after_words": 10573,
+      "before_modules": 8,
+      "after_modules": 7,
+      "selected": [
+        "core",
+        "profile.language.rust",
+        "profile.language.rust.tooling",
+        "router",
+        "workflow.implementation",
+        "workflow.tooling",
+        "workflow.verification"
+      ],
+      "removed": [
+        "workflow.commit"
+      ],
+      "added": []
+    },
+    {
+      "case": "s1-rust-library-fix",
+      "facts": {
+        "activities": [
+          "implementation",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [
+          "library"
+        ],
+        "boundaries": [],
+        "languages": [
+          "rust"
+        ],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 8932,
+      "after_words": 7971,
+      "before_modules": 6,
+      "after_modules": 6,
+      "selected": [
+        "core",
+        "profile.application.library",
+        "profile.language.rust",
+        "router",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "removed": [],
+      "added": []
+    },
+    {
+      "case": "typescript-ui-label",
+      "facts": {
+        "activities": [
+          "implementation",
+          "verification"
+        ],
+        "workflow-profiles": [],
+        "applications": [
+          "frontend"
+        ],
+        "boundaries": [],
+        "languages": [
+          "typescript"
+        ],
+        "frameworks": [],
+        "topics": [],
+        "details": []
+      },
+      "before_words": 16041,
+      "after_words": 10587,
+      "before_modules": 8,
+      "after_modules": 7,
+      "selected": [
+        "core",
+        "profile.application.frontend",
+        "profile.language.typescript",
+        "router",
+        "topic.accessibility",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "removed": [
+        "topic.contracts"
+      ],
+      "added": []
+    }
+  ],
+  "verified_suites": 271,
+  "verified_checks": 1641,
+  "verification_statuses": [
+    "passed"
+  ],
+  "routing_and_link_tests": 11,
+  "moved_policy_units": {
+    "contracts.toml": "schema_version = 1\n\n[[policy_unit]]\nid = \"topic.contracts.declaration-and-semantic-authority\"\nmodule = \"topic.contracts.schemas\"\nheading_path = [\"Declaration And Semantic Authority\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.contracts.version-scope-and-invalidation\"\nmodule = \"topic.contracts.schemas\"\nheading_path = [\"Version Scope And Invalidation\"]\nsemantic_revision = 2\n\n[[policy_unit]]\nid = \"topic.contracts.generated-semantic-conformance\"\nmodule = \"topic.contracts.schemas\"\nheading_path = [\"Generated Contract Semantic Conformance\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.contracts.schema-dialect-and-vocabulary\"\nmodule = \"topic.contracts.schemas\"\nheading_path = [\"Schema Dialect And Vocabulary\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.contracts.identity-versus-instance-equality\"\nmodule = \"topic.contracts\"\nheading_path = [\"Identity And Instance Equality\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.contracts.validation-proof-lifetime\"\nmodule = \"topic.contracts\"\nheading_path = [\"Validation Proof Lifetime\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.contracts.invariant-contracts\"\nmodule = \"topic.contracts\"\nheading_path = [\"Invariant Contracts\"]\nsemantic_revision = 1\n",
+    "core.toml": "schema_version = 1\n\n[[policy_unit]]\nid = \"core.simplicity-and-complection\"\nmodule = \"topic.code-design\"\nheading_path = [\"Simplicity And Ownership\", \"Simple, Easy, And Complection\"]\nsemantic_revision = 2\n",
+    "verification.toml": "schema_version = 1\n\n[[policy_unit]]\nid = \"workflow.verification.acceptance-claims\"\nmodule = \"workflow.verification\"\nheading_path = [\"Acceptance Is A Set Of Claims\"]\nsemantic_revision = 3\n\n[[policy_unit]]\nid = \"workflow.verification.evidence-oracle-boundary\"\nmodule = \"workflow.verification.oracles\"\nheading_path = [\"Evidence Oracle Boundaries\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"workflow.verification.negative-fixture-isolation\"\nmodule = \"workflow.verification.oracles\"\nheading_path = [\"Negative Fixture Isolation\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"workflow.verification.differential-evidence\"\nmodule = \"workflow.verification.oracles\"\nheading_path = [\"Property And Differential Evidence\"]\nsemantic_revision = 1\n",
+    "architecture.toml": "schema_version = 1\n\n[[policy_unit]]\nid = \"topic.architecture.composed-design-admission\"\nmodule = \"topic.architecture\"\nheading_path = [\"Composed Design Admission\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.architecture.authority-scope-admission\"\nmodule = \"topic.architecture\"\nheading_path = [\"Authority Scope Admission\"]\nsemantic_revision = 1\n\n[[policy_unit]]\nid = \"topic.architecture.immutable-authority-closure\"\nmodule = \"topic.architecture.replay\"\nheading_path = [\"Immutable Authority Closure\"]\nsemantic_revision = 3\n"
+  },
+  "canonical_files": [
+    {
+      "id": "core",
+      "path": "CORE-STANDARDS.md",
+      "words": 1147,
+      "digest": "sha256:f6b4320dc96ec702dc3673390b45734767c53704229c8f8ef96dff48b8655900"
+    },
+    {
+      "id": "router",
+      "path": "STANDARDS-ROUTER.md",
+      "words": 1588,
+      "digest": "sha256:bf74f561c40aaa16387d8559ae2353a686216eaea25c15342d7a534441cd5aeb"
+    },
+    {
+      "id": "profile.application.frontend",
+      "path": "profiles/applications/frontend.md",
+      "words": 1254,
+      "digest": "sha256:32ab0d4e9f24dfcd48661f8fd3ea7547c0b6f7fc995b6c8e1d3bc0938606797b"
+    },
+    {
+      "id": "profile.application.launcher",
+      "path": "profiles/applications/launcher.md",
+      "words": 838,
+      "digest": "sha256:f4229bd7d628ad50dc65132652432ca77ef7d0a50790931942469608fd6401e2"
+    },
+    {
+      "id": "profile.application.library",
+      "path": "profiles/applications/library.md",
+      "words": 316,
+      "digest": "sha256:ae605d474a922b213257916824344dadadf505aee9c585e055198208f7b8e834"
+    },
+    {
+      "id": "profile.boundary.interop",
+      "path": "profiles/boundaries/interop.md",
+      "words": 1037,
+      "digest": "sha256:85dc7f9b39ebea867d721436bc40b4b0407be564a3e04ef2f798d6bae19b471f"
+    },
+    {
+      "id": "profile.boundary.generated-contract",
+      "path": "profiles/boundaries/generated-contract.md",
+      "words": 494,
+      "digest": "sha256:f60172051d187b1d3107706eb64fc94cff622d5e6840ec868686e5eb62b45c69"
+    },
+    {
+      "id": "profile.boundary.ipc",
+      "path": "profiles/boundaries/ipc.md",
+      "words": 537,
+      "digest": "sha256:2f6d0391e6a01fecf259386f314daccdcd0ed5c0b58ac0fadc6816b8171347e4"
+    },
+    {
+      "id": "profile.boundary.language-bindings",
+      "path": "profiles/boundaries/language-bindings.md",
+      "words": 1615,
+      "digest": "sha256:c63f9d48fe8cbae4d6f685f54e72b81de60201453ce6f5752c7a75c38bc15072"
+    },
+    {
+      "id": "profile.boundary.persistence",
+      "path": "profiles/boundaries/persistence.md",
+      "words": 1182,
+      "digest": "sha256:9ec9473c865a4293433d0f22d0b82b6089fce9a72b47c7f735612a20faf1734b"
+    },
+    {
+      "id": "profile.framework.godot",
+      "path": "profiles/frameworks/godot.md",
+      "words": 454,
+      "digest": "sha256:4481df92a00c8a14e2c5fd0deda83878d6c31f65f9e56aea3f394330c9588e65"
+    },
+    {
+      "id": "profile.language.csharp.async",
+      "path": "profiles/languages/csharp/async.md",
+      "words": 405,
+      "digest": "sha256:a276e54d170e2f090d3ff6fc5fc92dba41e606d3000c1a6d24731d4869ada6bb"
+    },
+    {
+      "id": "profile.language.rust",
+      "path": "profiles/languages/rust/README.md",
+      "words": 489,
+      "digest": "sha256:a7fc50a6d4f1c07b2b4b3e5ceb8ad94f3e6a5deb21a4852e1fb9e09570ae77ea"
+    },
+    {
+      "id": "profile.language.rust.api",
+      "path": "profiles/languages/rust/api.md",
+      "words": 1445,
+      "digest": "sha256:ac03ecf806d8d2c64bc45f94642b9ea9256c37d33c94b754ec61e8cda2cb966b"
+    },
+    {
+      "id": "profile.language.rust.async",
+      "path": "profiles/languages/rust/async.md",
+      "words": 1453,
+      "digest": "sha256:dab13f7a7d75b950431392c93cdd43b14546f5d83e0768f108f0c6ca881d16fc"
+    },
+    {
+      "id": "profile.language.rust.cross-platform",
+      "path": "profiles/languages/rust/cross-platform.md",
+      "words": 734,
+      "digest": "sha256:1b30a6385f91af4d3b4a3e33eb72fb9b067339f5237f44297817fa3bec55998d"
+    },
+    {
+      "id": "profile.language.rust.dependencies",
+      "path": "profiles/languages/rust/dependencies.md",
+      "words": 816,
+      "digest": "sha256:a94b2b6b549009b3ffca0176230594e8258dae4bfa0fed58397fd85a37cc734b"
+    },
+    {
+      "id": "profile.language.rust.interop",
+      "path": "profiles/languages/rust/interop.md",
+      "words": 591,
+      "digest": "sha256:fecc60fddd0d93706adc49055a4aa93183b7a7bda5d05ee975a11acb4e54abd9"
+    },
+    {
+      "id": "profile.language.rust.language-bindings",
+      "path": "profiles/languages/rust/language-bindings.md",
+      "words": 2521,
+      "digest": "sha256:91c26196e5a976dcf20759cc6d787605dc327a0704d08929cce05b71acadf1b9"
+    },
+    {
+      "id": "profile.language.rust.release",
+      "path": "profiles/languages/rust/release.md",
+      "words": 908,
+      "digest": "sha256:83046b90ebebd76de9db7838150c5533853d748d063ff342cfa90c1fa9b4e9a0"
+    },
+    {
+      "id": "profile.language.rust.security",
+      "path": "profiles/languages/rust/security.md",
+      "words": 1325,
+      "digest": "sha256:b2dd9fbdce8496cad999c6963f13992e0384d6a4bd2d4bd1e971153e07f6257e"
+    },
+    {
+      "id": "profile.language.rust.tooling",
+      "path": "profiles/languages/rust/tooling.md",
+      "words": 1558,
+      "digest": "sha256:2b28ef71141b860f0497f8379701027e4e1aaa9aabb40720e875725933d33652"
+    },
+    {
+      "id": "profile.language.rust.unsafe",
+      "path": "profiles/languages/rust/unsafe.md",
+      "words": 659,
+      "digest": "sha256:2093d5d2945dcc8423802e56df0a6651036167d35edf23e663b8725d7b94f25c"
+    },
+    {
+      "id": "profile.language.typescript",
+      "path": "profiles/languages/typescript.md",
+      "words": 679,
+      "digest": "sha256:b40eef63e3fe3fd066827cf3d1ac86a5402e8bdf27c54dea7ff1912a4cfd496e"
+    },
+    {
+      "id": "profile.language.typescript.async",
+      "path": "profiles/languages/typescript/async.md",
+      "words": 444,
+      "digest": "sha256:8f7c6995b6d11fb2a2459cb42742f11dd5ce156dfb4a6afa00eab3b1280add2d"
+    },
+    {
+      "id": "profile.workflow.concurrent-plan-integration",
+      "path": "profiles/workflows/concurrent-plan-integration.md",
+      "words": 753,
+      "digest": "sha256:813dfc2487ddc83e91e572fcd0e4a54ebaf79efe7fca7ec58defc765f888b294"
+    },
+    {
+      "id": "reference.patterns.architecture",
+      "path": "reference/patterns/architecture.md",
+      "words": 2160,
+      "digest": "sha256:a8c99c51686929c288f4be92e948a653e987183be628faa6c1c69dcaf3664130"
+    },
+    {
+      "id": "reference.recipes.accessibility",
+      "path": "reference/recipes/accessibility.md",
+      "words": 732,
+      "digest": "sha256:fe801646da0b337d04627df3aa04ddaaa01d2b88214f05e8a361cc59d86a37f9"
+    },
+    {
+      "id": "reference.recipes.commits",
+      "path": "reference/recipes/commits.md",
+      "words": 714,
+      "digest": "sha256:9c687d7381a795c2dcf5f1b6ee8cf511ca6d71f2d45401e7fb491ead3cde56b0"
+    },
+    {
+      "id": "reference.recipes.diagnostics",
+      "path": "reference/recipes/diagnostics.md",
+      "words": 228,
+      "digest": "sha256:ad3c747d1b70fc03d29d1563930ae49c25bd9e169ef9865e63c1eba111b4ba6e"
+    },
+    {
+      "id": "reference.recipes.documentation",
+      "path": "reference/recipes/documentation.md",
+      "words": 881,
+      "digest": "sha256:002a6bc7b5732642e4ed0d22bd60fb0a1fa91b57f6925e5cf0cf0ebda006ce57"
+    },
+    {
+      "id": "reference.recipes.frontend",
+      "path": "reference/recipes/frontend.md",
+      "words": 326,
+      "digest": "sha256:f9cf565f427661cca05bd3281db600472498c35e0667904a68868d5603e6f46d"
+    },
+    {
+      "id": "reference.recipes.http",
+      "path": "reference/recipes/http.md",
+      "words": 564,
+      "digest": "sha256:22703818103908f3738726a04fc96e9b851a9749049b3f661e25440abf3d22f4"
+    },
+    {
+      "id": "reference.recipes.implementation",
+      "path": "reference/recipes/implementation.md",
+      "words": 166,
+      "digest": "sha256:adbecd045ceb28bb9cc9f4ce4582c1f3551b6d69f1523f632b459f2d3b3d3ca1"
+    },
+    {
+      "id": "reference.recipes.persistence",
+      "path": "reference/recipes/persistence.md",
+      "words": 345,
+      "digest": "sha256:14dcc68c9dd307cd2ac5b380c4de6daa60421e255f54cc23d55f73a0b6f074c6"
+    },
+    {
+      "id": "reference.recipes.releases",
+      "path": "reference/recipes/releases.md",
+      "words": 271,
+      "digest": "sha256:55a721945a6e1e89b0df70cdf9bf149e4c4b288539587fcaa3f2c2ed3d722b77"
+    },
+    {
+      "id": "reference.recipes.rust-dependencies",
+      "path": "reference/recipes/rust-dependencies.md",
+      "words": 674,
+      "digest": "sha256:3101a6f55ea6b8ed6ec6a57bade9c292f9cf16886b0cfca350b10e2430d8faab"
+    },
+    {
+      "id": "reference.recipes.rust-release",
+      "path": "reference/recipes/rust-release.md",
+      "words": 599,
+      "digest": "sha256:7fe2daa727bddfea1e708124606dfd4f299223fc30bf541f2cf669625fc62d01"
+    },
+    {
+      "id": "reference.recipes.rust-tooling",
+      "path": "reference/recipes/rust-tooling.md",
+      "words": 977,
+      "digest": "sha256:cf85a48e0e2e346ef6445e89d6a14adcf17b55dc8818661e13a1cca44f3c1d50"
+    },
+    {
+      "id": "reference.recipes.tooling",
+      "path": "reference/recipes/tooling.md",
+      "words": 1760,
+      "digest": "sha256:2e5e78f40c0c4863a6a9f473044b952d516df463027cd6a7c0cf0e944dd6ece1"
+    },
+    {
+      "id": "topic.accessibility",
+      "path": "topics/accessibility.md",
+      "words": 1488,
+      "digest": "sha256:e1dac1dc41f883418d3b753db8ffa53d485b4f3afec2e48b1c0fee371771f6d6"
+    },
+    {
+      "id": "topic.architecture",
+      "path": "topics/architecture.md",
+      "words": 1166,
+      "digest": "sha256:d35471532ba216056a4a88474fac15f2aada1de866ada136efb31ce26dc06036"
+    },
+    {
+      "id": "topic.concurrency",
+      "path": "topics/concurrency.md",
+      "words": 829,
+      "digest": "sha256:5b82d0d8ff127750d3c1501ba5fe1e6afb5cb3a3eb55fcfc25040b811d4cf313"
+    },
+    {
+      "id": "topic.contracts",
+      "path": "topics/contracts.md",
+      "words": 2400,
+      "digest": "sha256:3190700189e589d7baec3551ff6330ca7afd64d8f425566cb621db9dd1399532"
+    },
+    {
+      "id": "topic.cross-platform",
+      "path": "topics/cross-platform.md",
+      "words": 906,
+      "digest": "sha256:c987d41ddd217575811a520df61f5dd87ae660c55cfa3ce39ba0bcfaced1281a"
+    },
+    {
+      "id": "topic.dependencies",
+      "path": "topics/dependencies.md",
+      "words": 1766,
+      "digest": "sha256:b9698a1985aec38491f2d66d141978952fa691bef99ee7222f67e992d552b07f"
+    },
+    {
+      "id": "topic.diagnostics",
+      "path": "topics/diagnostics.md",
+      "words": 620,
+      "digest": "sha256:5e8e057397835fe09d9b02f74f080b39ed11d7062625c76cf8161b048f81bf7a"
+    },
+    {
+      "id": "topic.licensing",
+      "path": "topics/licensing.md",
+      "words": 511,
+      "digest": "sha256:80e8558198346fd6f5f57d5756fcf81d0929ebcbc4ca18288e22aba946bd4cb7"
+    },
+    {
+      "id": "topic.performance",
+      "path": "topics/performance.md",
+      "words": 711,
+      "digest": "sha256:ff1ce8f1e7592c14bbb8f84fd2d6fef2434e861c29ddf517fe5f9ba9d983ae40"
+    },
+    {
+      "id": "topic.resilience",
+      "path": "topics/resilience.md",
+      "words": 1418,
+      "digest": "sha256:573d59e334455d8f35c4e9213ce7f68a6edb23c36a36abdf72104af3f27685e8"
+    },
+    {
+      "id": "topic.security",
+      "path": "topics/security.md",
+      "words": 1735,
+      "digest": "sha256:6623902d266d7b831ebca661721daea4e238a5bf5b3ab5a49ec9746e3a957f05"
+    },
+    {
+      "id": "workflow.build",
+      "path": "workflows/build.md",
+      "words": 678,
+      "digest": "sha256:85aaf15fab1bc4695a48bb95135c93d7526ddc269c114b6d1952be93c6a47ecb"
+    },
+    {
+      "id": "workflow.commit",
+      "path": "workflows/commit.md",
+      "words": 1852,
+      "digest": "sha256:c2e86c065db1e2907201beaa8efb872acffaaff650959c15407c48384c870757"
+    },
+    {
+      "id": "workflow.development-proportionality",
+      "path": "workflows/development-proportionality.md",
+      "words": 748,
+      "digest": "sha256:2ed335f76610f0f6d896ba0021c2e3d3ba322df4cfffabb6c8108f99b08b698d"
+    },
+    {
+      "id": "workflow.documentation",
+      "path": "workflows/documentation.md",
+      "words": 1136,
+      "digest": "sha256:154f4d866ef99ccfde5f85cc01de2e5480e25e8c116cd5b9082b9e69d42faf6b"
+    },
+    {
+      "id": "workflow.implementation",
+      "path": "workflows/implementation.md",
+      "words": 1092,
+      "digest": "sha256:df92415045cb0a7b038ab2f19bf27f18735dbc53b73591f5cceea102b659a6fb"
+    },
+    {
+      "id": "workflow.planning",
+      "path": "workflows/planning.md",
+      "words": 2416,
+      "digest": "sha256:7ff38aeba33dbc6e4b39a23cd5b9e27396dce92412aadde5a2a7e602efd319a8"
+    },
+    {
+      "id": "workflow.release",
+      "path": "workflows/release.md",
+      "words": 2387,
+      "digest": "sha256:de8ee6dd4a4f05f7146e21033beea7a40d1ddd036a3e8eb55279fa7ca6ebb37d"
+    },
+    {
+      "id": "workflow.tooling",
+      "path": "workflows/tooling.md",
+      "words": 1360,
+      "digest": "sha256:c04548baad9eb10a83b7d9359532e4e2defd9968cc7058ed59314cb6df4abf57"
+    },
+    {
+      "id": "workflow.verification",
+      "path": "workflows/verification.md",
+      "words": 3339,
+      "digest": "sha256:06ddcd7f0f80c4459f117d242a3f664cdb6e11d7e9649e7ba2f955e5a4cf684c"
+    },
+    {
+      "id": "topic.architecture.replay",
+      "path": "topics/architecture/replay.md",
+      "words": 422,
+      "digest": "sha256:678edd13bdaf6db9604c8dd4e98cc68e358d6e39eba8089d4f0ab69b52a085c5"
+    },
+    {
+      "id": "topic.contracts.schemas",
+      "path": "topics/contracts/schemas.md",
+      "words": 921,
+      "digest": "sha256:428bd940c6d843d8b2a0fe53ef8f473c753863b31c94ada006997c72eb2dfc72"
+    },
+    {
+      "id": "topic.contracts.protocols",
+      "path": "topics/contracts/protocols.md",
+      "words": 648,
+      "digest": "sha256:a49bb7b346c3fcacc39cc4402d8338b211df98299185aa0b6a5549d52e520194"
+    },
+    {
+      "id": "topic.contracts.evolution",
+      "path": "topics/contracts/evolution.md",
+      "words": 1115,
+      "digest": "sha256:9789fccbc295188ec264a50d0e4183021e6bc136807d49eb7417b1159f0e86b8"
+    },
+    {
+      "id": "workflow.verification.oracles",
+      "path": "workflows/verification/oracles.md",
+      "words": 493,
+      "digest": "sha256:f5cfd7d06a894f8f63ed14ebefafb6c861015bcd9746862e23d3918d1397f191"
+    },
+    {
+      "id": "workflow.verification.platforms",
+      "path": "workflows/verification/platforms.md",
+      "words": 287,
+      "digest": "sha256:a27afd0d5e11f8e4bd5f3319b1a2da55593ac59a9f4b8eb82e7e8641c32f9a7d"
+    },
+    {
+      "id": "profile.language.rust.binding-lifecycle",
+      "path": "profiles/languages/rust/binding-lifecycle.md",
+      "words": 1034,
+      "digest": "sha256:3c0e6d192dd9789b0919c18afd943c6073a4b1150b08cd5a42dca6e32c7a3476"
+    },
+    {
+      "id": "workflow.release.operations",
+      "path": "workflows/release/operations.md",
+      "words": 1059,
+      "digest": "sha256:580416b544b345e82cd0b422dd65be4a51b932fc55ee69c9260027f7d6310424"
+    },
+    {
+      "id": "workflow.verification.gui",
+      "path": "workflows/verification/gui.md",
+      "words": 261,
+      "digest": "sha256:042d4fb92f880a07d1f025ace5c02aa211fadf921dd4a98701755f2e2edcbe8a"
+    },
+    {
+      "id": "topic.code-design",
+      "path": "topics/code-design.md",
+      "words": 733,
+      "digest": "sha256:659f47b7d53abc05627cb3672aab33265062f92001b4d212d4c52ffd8c2de8e0"
+    }
+  ]
+}

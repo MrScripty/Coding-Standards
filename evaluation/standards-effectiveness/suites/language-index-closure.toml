@@ -87,10 +87,5 @@ expected = [
 id = "language-index-router-owner"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = [
-  "ID: `router`",
-  "Requires: `core`",
-  "Canonical owner: `STANDARDS-ROUTER.md`",
-  "## Language Profiles",
-]
+required = ["ID: `router`", "Requires: `core`", "Canonical owner: `STANDARDS-ROUTER.md`", "## Language Profiles"]
 prohibited = []

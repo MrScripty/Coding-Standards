@@ -93,16 +93,7 @@ values = ["STD-0772", "STD-0773", "STD-0774", "STD-0775", "STD-0794", "STD-0795"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/contracts.md",
-  "topics/security.md",
-  "profiles/boundaries/interop.md",
-  "profiles/boundaries/language-bindings.md",
-  "profiles/languages/rust/README.md",
-  "profiles/languages/rust/language-bindings.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/language-bindings.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "profiles/languages/rust/binding-lifecycle.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "profile-policy"

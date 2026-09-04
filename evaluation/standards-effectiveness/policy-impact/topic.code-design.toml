@@ -1,0 +1,34 @@
+schema_version = 2
+owner = "topic.code-design"
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "topic.architecture"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Architecture specializes artifact-level simplicity and tests the composition after introducing a Seam."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Verification keeps correctness evidence distinct from simplicity evidence."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The fixture models post-Seam composition, caller knowledge, change Locality, independent evolution, and deletion."
+
+[[relationships]]
+source = "core.simplicity-and-complection"
+consumer = "core-simplicity"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The suite enforces the first-class Core simplicity and complection unit."

@@ -20,6 +20,17 @@ representation and compatibility; Concurrency owns ordering and concurrent
 access; Resilience owns failure and degradation; deployment and application
 profiles own concrete mechanisms.
 
+## Design Vocabulary
+
+A **module** owns a coherent responsibility behind an **interface**, the
+behavior and obligations visible to callers. A **seam** is a boundary where an
+implementation can vary without changing the caller's contract. **Depth** is
+how much useful responsibility an interface hides; **leverage** is the useful
+work enabled by that interface; **locality** means a change stays with its
+owning concern. These terms describe design effects, not counts of files or
+classes. Capitalization elsewhere in this library does not introduce a new
+kind of object.
+
 ## Concern Boundaries
 
 Separate concerns when they change for different reasons, require different
@@ -136,39 +147,7 @@ selection inside business policy.
 
 ## Immutable Authority Closure
 
-An immutable, replayable, or inspectable handle binds the complete transitive
-authority closure required to reproduce every result advertised from that
-handle. The closure includes each authority, contract, provider input, and
-authorization view whose value can affect the result, referenced through an
-exact immutable identity.
-
-Derive that closure from the handle's advertised operations, result semantics,
-supported lifetime, and reconstruction promise. An in-process handle need not
-be independently persisted when its contract ends with the owning process. A
-handle promising cold replay or use after its producer ends must bind a durable
-reconstruction source. Do not strengthen an in-process inspection promise into
-cold replay merely because persistence machinery is available.
-
-Closure completeness does not require one separately persisted identity,
-codec, version, handle, allocation ordinal, registry, or lifecycle object for
-each concern. One immutable aggregate may carry the complete admitted closure.
-Require independently replaceable records only when an independently owned
-authority, consumer promise, lifetime, or reconstruction path needs them. The
-ability to name a field or serialize a record is not evidence that another
-authority object is required.
-
-Resolution cannot depend on ambient mutable state, an instance-local cache,
-the originating process, undeclared providers, fresh authorization, or a live
-filesystem or service read that is not itself bound into the closure. Derived
-results may be cached, but cache availability and process history cannot change
-their meaning.
-
-Persistence owns reopening through real store adapters, and Contracts owns
-handle representation and version behavior. If any required authority cannot
-be resolved exactly, return `unavailable`; if resolved content contradicts its
-identity or closure, return `invalid`; and if the representation or contract
-version is well formed but unsupported, return `unsupported`. Do not replace a
-missing immutable input with current ambient state.
+When a handle promises immutable results or replay, follow [Immutable Authority Closure](architecture/replay.md#immutable-authority-closure).
 
 ## Typed Outcomes
 

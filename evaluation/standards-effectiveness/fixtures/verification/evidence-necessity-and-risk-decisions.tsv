@@ -1,21 +1,22 @@
-case	mechanism	reachability	consequence	oracle	proof_boundary	existing_evidence	alternative	marginal_value	lifecycle_cost	identity_purpose	retention	expected
-arbitrary_input_validation	runtime-validation	reachable	material	adequate	new	absent	insufficient	independent	proportionate	not-applicable	trigger	admit
-durable_corruption_contract	contract-test	reachable	material	adequate	new	absent	insufficient	independent	proportionate	not-applicable	trigger	admit
-escaping_internal_error	contract-test	reachable	material	adequate	existing	overlaps	insufficient	independent	proportionate	not-applicable	trigger	admit
-justified_defense_in_depth	contract-test	reachable	material	adequate	existing	overlaps	insufficient	independent	proportionate	not-applicable	trigger	admit
-subsumed_regression	test	reachable	material	adequate	existing	subsumes	insufficient	none	proportionate	not-applicable	trigger	no-permanent-evidence
-impossible_by_construction	runtime-validation	none	material	adequate	existing	absent	adequate-construction	none	proportionate	not-applicable	trigger	no-permanent-evidence
-type_system_sufficient	runtime-validation	none	material	adequate	existing	absent	adequate-type	none	proportionate	not-applicable	trigger	no-permanent-evidence
-static_analysis_sufficient	test	reachable	material	adequate	existing	absent	adequate-static	none	proportionate	not-applicable	trigger	no-permanent-evidence
-deeper_interface_sufficient	runtime-validation	none	material	adequate	existing	absent	adequate-interface	none	proportionate	not-applicable	trigger	no-permanent-evidence
-normal_failure_sufficient	test	reachable	immaterial	adequate	existing	absent	adequate-normal-failure	none	proportionate	not-applicable	trigger	no-permanent-evidence
-trace_led_debugging_sufficient	trace	reachable	immaterial	adequate	existing	absent	adequate-trace	none	proportionate	not-applicable	trigger	no-permanent-evidence
-incidental_byte_hash	hash	reachable	material	adequate	existing	absent	insufficient	independent	proportionate	incidental	trigger	no-permanent-evidence
-semantic_identity_hash	hash	reachable	material	adequate	existing	absent	insufficient	independent	proportionate	semantic	trigger	no-permanent-evidence
-exact_byte_contract_hash	hash	reachable	material	adequate	new	absent	insufficient	independent	proportionate	exact-contract	trigger	admit
-disproportionate_lifecycle_cost	test	reachable	material	adequate	existing	absent	insufficient	independent	disproportionate	not-applicable	trigger	no-permanent-evidence
-unreachable_failure	test	none	material	adequate	existing	absent	insufficient	independent	proportionate	not-applicable	trigger	no-permanent-evidence
-immaterial_consequence	test	reachable	immaterial	adequate	existing	absent	insufficient	independent	proportionate	not-applicable	trigger	no-permanent-evidence
-unknown_reachability	test	unknown	material	adequate	unknown	absent	unknown	unknown	unknown	not-applicable	missing	typed-unavailable
-missing_oracle	test	reachable	material	missing	existing	absent	insufficient	independent	proportionate	not-applicable	trigger	typed-unavailable
-missing_retention_trigger	test	reachable	material	adequate	existing	absent	insufficient	independent	proportionate	not-applicable	missing	typed-unavailable
+case	review_scope	mechanism	reachability	consequence	oracle	proof_boundary	existing_evidence	alternative	marginal_value	lifecycle_cost	identity_purpose	retention	expected
+arbitrary_input_validation	substantial-machinery	runtime-validation	reachable	material	adequate	new	absent	insufficient	independent	proportionate	not-applicable	trigger	admit
+durable_corruption_contract	substantial-machinery	contract-test	reachable	material	adequate	new	absent	insufficient	independent	proportionate	not-applicable	trigger	admit
+escaping_internal_error	substantial-machinery	contract-test	reachable	material	adequate	existing	overlaps	insufficient	independent	proportionate	not-applicable	trigger	admit
+justified_defense_in_depth	substantial-machinery	contract-test	reachable	material	adequate	existing	overlaps	insufficient	independent	proportionate	not-applicable	trigger	admit
+subsumed_regression	substantial-machinery	test	reachable	material	adequate	existing	subsumes	insufficient	none	proportionate	not-applicable	trigger	no-permanent-evidence
+impossible_by_construction	substantial-machinery	runtime-validation	none	material	adequate	existing	absent	adequate-construction	none	proportionate	not-applicable	trigger	no-permanent-evidence
+type_system_sufficient	substantial-machinery	runtime-validation	none	material	adequate	existing	absent	adequate-type	none	proportionate	not-applicable	trigger	no-permanent-evidence
+static_analysis_sufficient	substantial-machinery	test	reachable	material	adequate	existing	absent	adequate-static	none	proportionate	not-applicable	trigger	no-permanent-evidence
+deeper_interface_sufficient	substantial-machinery	runtime-validation	none	material	adequate	existing	absent	adequate-interface	none	proportionate	not-applicable	trigger	no-permanent-evidence
+normal_failure_sufficient	substantial-machinery	test	reachable	immaterial	adequate	existing	absent	adequate-normal-failure	none	proportionate	not-applicable	trigger	no-permanent-evidence
+trace_led_debugging_sufficient	substantial-machinery	trace	reachable	immaterial	adequate	existing	absent	adequate-trace	none	proportionate	not-applicable	trigger	no-permanent-evidence
+incidental_byte_hash	substantial-machinery	hash	reachable	material	adequate	existing	absent	insufficient	independent	proportionate	incidental	trigger	no-permanent-evidence
+semantic_identity_hash	substantial-machinery	hash	reachable	material	adequate	existing	absent	insufficient	independent	proportionate	semantic	trigger	no-permanent-evidence
+exact_byte_contract_hash	substantial-machinery	hash	reachable	material	adequate	new	absent	insufficient	independent	proportionate	exact-contract	trigger	admit
+disproportionate_lifecycle_cost	substantial-machinery	test	reachable	material	adequate	existing	absent	insufficient	independent	disproportionate	not-applicable	trigger	no-permanent-evidence
+unreachable_failure	substantial-machinery	test	none	material	adequate	existing	absent	insufficient	independent	proportionate	not-applicable	trigger	no-permanent-evidence
+immaterial_consequence	substantial-machinery	test	reachable	immaterial	adequate	existing	absent	insufficient	independent	proportionate	not-applicable	trigger	no-permanent-evidence
+unknown_reachability	substantial-machinery	test	unknown	material	adequate	unknown	absent	unknown	unknown	unknown	not-applicable	missing	typed-unavailable
+missing_oracle	substantial-machinery	test	reachable	material	missing	existing	absent	insufficient	independent	proportionate	not-applicable	trigger	typed-unavailable
+missing_retention_trigger	substantial-machinery	test	reachable	material	adequate	existing	absent	insufficient	independent	proportionate	not-applicable	missing	typed-unavailable
+ordinary_regression_no_cost_record	ordinary-regression	test	reachable	material	adequate	new	absent	insufficient	independent	unknown	not-applicable	missing	admit

@@ -17,6 +17,26 @@ selection, configuration, automation, and scheduling. [Dependencies](../../topic
 owns dependency selection and installation. Projects must make those decisions
 before adapting an example below.
 
+## Maintained Editor Configuration Recipe
+
+For ordinary UTF-8 source files shared across editors, an `.editorconfig` can
+express the Tooling defaults without selecting a language formatter:
+
+```ini
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+```
+
+Scope this to owned source files when the repository also contains formats
+whose consumers require a different encoding or ending. Leave indentation and
+language layout to the existing formatter. Verify an affected editor or tool
+actually consumes the settings, then check the resulting file with its real
+consumer. The following retained migration examples illustrate additional
+mechanisms and historical configurations, not a current universal preset.
+
 ## Legacy Tool Setup And Package Script Example
 
 The legacy setup example listed EditorConfig, a formatter such as Prettier, a

@@ -14,7 +14,7 @@
 
 ## Panic And Recoverable Error Boundary
 
-Apply the [Rust API error policy](../../../languages/rust/RUST-API-STANDARDS.md#result-option-panic)
+Apply the [Rust API error policy](api.md#failure-expression-mechanisms)
 to public and internal fallible Rust operations. This profile specializes that
 policy for production request paths, lifecycle code, background services, and
 network handlers: recoverable errors must remain typed results and must not be

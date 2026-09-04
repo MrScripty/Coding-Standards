@@ -96,11 +96,7 @@ values = ["STD-0583", "STD-0601"]
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/contracts.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "contract-policy"

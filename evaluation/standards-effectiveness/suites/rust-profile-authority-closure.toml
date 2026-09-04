@@ -6,7 +6,7 @@ description = "Canonical Rust profile metadata, routes, typed diagnostics, and n
 [[checks]]
 id = "rust-profile-metadata"
 type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "profiles/languages/rust/README.md"]
+paths = ["CORE-STANDARDS.md", "profiles/languages/rust/README.md", "topics/code-design.md"]
 
 [[checks]]
 id = "rust-profile-links"

@@ -16,4 +16,8 @@ declaration_sources = [
   "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
+  "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml",
+  "evaluation/standards-effectiveness/policy-impact/topic.architecture.replay.toml",
+  "evaluation/standards-effectiveness/policy-impact/topic.code-design.toml",
+  "evaluation/standards-effectiveness/policy-impact/topic.contracts.schemas.toml",
 ]

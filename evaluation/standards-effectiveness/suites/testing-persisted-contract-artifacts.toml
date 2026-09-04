@@ -47,7 +47,14 @@ any = [
 id = "canonical-policy"
 type = "text"
 path = "topics/contracts.md"
-required = ["## Persisted Contract Artifacts", "canonical authority, applicable contract version", "Validation proves that the current artifact satisfies", "Regeneration proves deterministic derivation", "it does not by itself prove that consumers accept", "Do not accept a stale artifact"]
+required = ["## Persisted Contract Artifacts"]
+prohibited = []
+
+[[checks]]
+id = "canonical-policy-detail-1"
+type = "text"
+path = "topics/contracts/evolution.md"
+required = ["canonical authority, applicable contract version", "Validation proves that the current artifact satisfies", "Regeneration proves deterministic derivation", "it does not by itself prove that consumers accept", "Do not accept a stale artifact"]
 prohibited = []
 
 [[checks]]

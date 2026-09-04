@@ -142,16 +142,12 @@ values = ["STD-0474", "STD-0475", "STD-0477", "STD-0481"]
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/contracts.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "canonical-contract"
 type = "markdown_section_text"
-path = "topics/contracts.md"
+path = "topics/contracts/evolution.md"
 heading = "## Cross-Language Contract Selection"
 required = [
   "one canonical authority",

@@ -1,5 +1,7 @@
 # Standards implementation status — 2026-09-04
 
+**Historical proposal record:** superseded by the user-authorized [direct migration](standards-migration-2026-09-04.md). The Engine handles below were not applied.
+
 This is a nonnormative implementation record. The proposed standards changes below are not applied or accepted.
 
 The audit and evidence were committed as `a72105c8`. A snapshot path-ordering defect was reproduced, fixed, and committed as `7cf8a884`; all 23 snapshot tests pass. Reopening a store and capturing identical nested paths under a different source revision now succeeds in the regression test.

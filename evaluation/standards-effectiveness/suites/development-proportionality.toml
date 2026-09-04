@@ -147,9 +147,7 @@ prohibited = [
 id = "router-policy"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = [
-  "could delay a contract-satisfying implementation | [Development Proportionality](workflows/development-proportionality.md)",
-]
+required = ["Investigation or evidence work may delay a sufficient implementation | [Development Proportionality](workflows/development-proportionality.md)"]
 
 [[checks]]
 id = "planning-prerequisite"
@@ -162,14 +160,7 @@ required = [
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "STANDARDS-ROUTER.md",
-  "workflows/development-proportionality.md",
-  "workflows/implementation.md",
-  "workflows/planning.md",
-  "workflows/verification.md",
-]
+paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/development-proportionality.md", "workflows/implementation.md", "workflows/planning.md", "workflows/verification.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "local-links"

@@ -85,7 +85,7 @@ prohibited = ["planning-admission-v1", "planning-transition-v1", "complete-trans
 id = "router"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["## Workflow Profiles", "Concurrent Plan Integration profile", "Two or more proposals may remain outstanding", "Do not select concurrent plan integration for serial collaboration", "The Concurrent Plan Integration profile is also excluded"]
+required = ["## Workflow Profiles", "Concurrent Plan Integration profile", "Multiple outstanding proposals can become stale before serial integration", "The Concurrent Plan Integration profile is also excluded"]
 prohibited = []
 
 [[checks]]

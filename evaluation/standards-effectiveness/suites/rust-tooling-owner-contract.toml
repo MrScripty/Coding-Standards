@@ -45,16 +45,7 @@ value = "unsupported"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/implementation.md",
-  "workflows/commit.md",
-  "workflows/verification.md",
-  "workflows/tooling.md",
-  "profiles/languages/rust/README.md",
-  "profiles/languages/rust/tooling.md",
-  "reference/recipes/rust-tooling.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/implementation.md", "workflows/commit.md", "workflows/verification.md", "workflows/tooling.md", "profiles/languages/rust/README.md", "profiles/languages/rust/tooling.md", "reference/recipes/rust-tooling.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "profile-policy"

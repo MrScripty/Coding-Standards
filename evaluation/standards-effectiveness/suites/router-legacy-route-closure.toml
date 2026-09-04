@@ -42,16 +42,7 @@ order = "source"
 id = "router-policy"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = [
-  "Select a canonical topic only when its observable condition is present",
-  "## Legacy Entry Points",
-  "Canonical modules own all normative rules.",
-  "non-normative navigation only",
-  "It does not establish",
-  "applicability, preserve an older rule, or provide fallback authority.",
-  "return an Invalid Routing diagnostic",
-  "instead of selecting a legacy entrypoint",
-]
+required = ["## Invalid Or Legacy Routing", "Use canonical owners for policy; legacy entrypoints are navigation only.", "Report unresolved material facts", "Do not\nsubstitute a legacy rule or assume an unknown condition is absent."]
 prohibited = [
   "until migration",
   "Existing files retain authority only for rules not yet moved",

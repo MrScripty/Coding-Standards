@@ -24,8 +24,14 @@ has three independent dimensions:
 An objective may require several claims. Evidence satisfies only the claim it
 actually proves. Do not compare unrelated kinds as one scalar hierarchy.
 
-Before adding a permanent test, validator, verifier, integrity check, hash,
-snapshot, contract, or other evidence mechanism, establish:
+For an ordinary regression, identify the reachable failure, assert the observable
+result at its owner, and run affected checks. Reuse an existing test or a
+construction guarantee when it already proves the claim. A focused regression
+test does not require a separate admission record or a seven-part cost review.
+
+Before adding costly, overlapping, brittle, or architectural evidence machinery
+(such as a new validator, verifier, integrity system, snapshot framework, or
+custom test harness), establish:
 
 - the reachable failure and its material consequence;
 - the claim, proof boundary, and adequate independent or authoritative oracle;
@@ -219,90 +225,19 @@ Label the smoke by evidence kind and asserted behavior. Startup alone is usually
 
 ### GUI Smoke Evidence
 
-When a smoke procedure launches a GUI or desktop runtime, qualify the claim
-against the environment and execution mode that materially affect startup.
-Record applicable display or session capability, sandbox policy, graphics
-capability, shared-memory or equivalent resource constraints, state isolation,
-and bounded process-lifecycle behavior. Select mechanisms only after these
-facts and the supported target contract are known.
-
-CI-specific display servers, software rendering, sandbox flags, resource
-limits, or process wrappers are valid only when the selected smoke environment
-requires them and the procedure records their effect on the claim. Keep a
-verification-only procedure separate from normal interactive startup when
-their runtime contracts differ. Do not silently weaken the user runtime,
-inherit an operator desktop session, or choose a conventional virtual display,
-graphics mode, sandbox setting, shared-memory workaround, or timeout.
-
-The application launcher may expose and transport the selected procedure, but
-Verification owns its evidence kind, environment qualification, execution
-mode, assertions, and acceptance result. A local reproduction is supporting
-evidence unless its environment satisfies the same material facts. Undeclared
-runner behavior, missing required capability, premature exit, failed
-assertions, or an environment mismatch blocks the claim with the applicable
-typed diagnostic; it does not fall back to startup-only evidence, another
-environment, or default success.
+For interactive graphical acceptance, follow [GUI Smoke Evidence](verification/gui.md#gui-smoke-evidence).
 
 ## Evidence Oracle Boundaries
 
-For each acceptance claim, identify the observation mechanism and the exact
-property it can decide. The expected property must come from authority
-independent of the subject under test. Two projections that share one semantic
-implementation can prove agreement with each other, but not conformance to an
-external contract.
-
-Keep these evidence boundaries explicit:
-
-- deterministic generation proves freshness from the selected source, not
-  semantic completeness;
-- an exact literal proves literal identity only when literal identity is the
-  contract;
-- coordinated edits to a subject and a copied expectation do not provide an
-  independent oracle; and
-- mutation evidence proves detection of the sampled mutations, not complete
-  detection outside the sampled domain.
-
-When the required claim has no independent or otherwise authoritative oracle,
-return `unavailable`. When the mechanism cannot decide the claimed property,
-the evidence is `invalid`. Do not upgrade local agreement, freshness, parsing,
-snapshot equality, or a passing harness into a stronger conformance claim.
+When a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Evidence Oracle Boundaries](verification/oracles.md#evidence-oracle-boundaries).
 
 ## Negative Fixture Isolation
 
-A negative fixture proves its intended failure only when every unrelated
-precondition is valid and the observed result identifies the expected
-diagnostic or failure point. Record the expected typed diagnostic and the
-relevant complete message or structured fields when those details distinguish
-the target failure from earlier validation failures.
-
-Construct the fixture from a valid case by changing only the condition under
-test where practical. A nonzero exit, thrown exception, generic rejection, or
-substring match is insufficient when several validators can reject the same
-input. If the fixture cannot reach the intended boundary, classify the
-evidence as `invalid`; do not count incidental failure as acceptance.
+When a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Negative Fixture Isolation](verification/oracles.md#negative-fixture-isolation).
 
 ## Property And Differential Evidence
 
-Property, generative, mutation, and differential evidence must name:
-
-- the property being tested;
-- the generated or sampled input domain;
-- the independent or authoritative oracle;
-- the compared implementations or projections;
-- reproducibility and shrinking behavior where applicable; and
-- the unsupported or unexamined domain.
-
-Comparison between local implementations proves consistency only unless an
-independent authority establishes expected semantics. External conformance
-claims require the selected specification, reference implementation, official
-corpus, or another authority that is independent of the implementations being
-compared. A sampled counterexample can disprove a universal claim; absence of
-one does not prove completeness beyond the declared domain.
-
-Return `unsupported` when the selected oracle or corpus does not cover a
-well-formed required domain and `unavailable` when required authority or
-reproducibility inputs cannot be obtained. Do not silently narrow the claim to
-the cases a generator or local comparator happens to support.
+When a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Property And Differential Evidence](verification/oracles.md#property-and-differential-evidence).
 
 ## Test Design
 
@@ -499,33 +434,7 @@ default acceptance.
 
 ## Platform Evidence Coverage
 
-For each declared platform-support claim, record every required target or
-environment and map it to the evidence kind, environment qualification,
-execution mode, and observed result that prove that claim. Required behavior
-must be evidenced on every target whose real behavior is part of the support
-contract. A build, simulation, or result from one target does not prove
-different target behavior.
-
-Best-effort and unsupported targets remain explicit and cannot satisfy a
-required target entry. A best-effort failure may leave the required claim
-accepted only when the support contract makes that target genuinely optional
-and the result is still recorded.
-
-Select local hooks, push or review checks, hosted or self-managed runners,
-provider matrices, dedicated hardware, release gates, and manual procedures
-from risk, cost, target availability, credentials, and release facts.
-Failure fan-out and early termination are orchestration decisions; neither
-`fail-fast` setting is universal. Different environments may use different
-commands when they prove the same declared claim.
-
-If any required target result is missing, failed, or blocked, acceptance
-remains blocked. Contradictory support/evidence mappings are invalid, an
-explicitly unsupported target is unsupported, and missing support, target,
-environment, scheduling, or orchestration facts are unavailable.
-
-Do not infer Linux and Windows, substitute current-platform compilation,
-weaken a required target to best-effort, copy a provider matrix, or impose a
-fixed pre-commit, pre-push, push, or pull-request schedule as fallback.
+When a claim spans supported targets or requires platform-specific evidence, follow [Platform Evidence Coverage](verification/platforms.md#platform-evidence-coverage).
 
 ## Unavailable Evidence
 

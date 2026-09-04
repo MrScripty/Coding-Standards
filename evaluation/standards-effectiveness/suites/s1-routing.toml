@@ -90,14 +90,7 @@ selections = [
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "STANDARDS-ROUTER.md",
-  "workflows/implementation.md",
-  "workflows/verification.md",
-  "profiles/applications/library.md",
-  "profiles/languages/rust/README.md",
-]
+paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/implementation.md", "workflows/verification.md", "profiles/applications/library.md", "profiles/languages/rust/README.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "core-id"
@@ -115,7 +108,7 @@ required = ["\n- ID: `router`\n"]
 id = "bounded-planning-route"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["Apply the bounded-local exclusion before Planning triggers", "does not require a written plan merely because it touches multiple files"]
+required = ["A bounded change with a clear objective and acceptance path needs no written", "plan solely because it crosses files or layers."]
 prohibited = ["Multi-step work, architectural decisions, or re-planning"]
 
 [[checks]]

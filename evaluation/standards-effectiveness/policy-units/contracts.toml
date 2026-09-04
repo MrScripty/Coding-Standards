@@ -2,25 +2,25 @@ schema_version = 1
 
 [[policy_unit]]
 id = "topic.contracts.declaration-and-semantic-authority"
-module = "topic.contracts"
+module = "topic.contracts.schemas"
 heading_path = ["Declaration And Semantic Authority"]
 semantic_revision = 1
 
 [[policy_unit]]
 id = "topic.contracts.version-scope-and-invalidation"
-module = "topic.contracts"
+module = "topic.contracts.schemas"
 heading_path = ["Version Scope And Invalidation"]
 semantic_revision = 2
 
 [[policy_unit]]
 id = "topic.contracts.generated-semantic-conformance"
-module = "topic.contracts"
+module = "topic.contracts.schemas"
 heading_path = ["Generated Contract Semantic Conformance"]
 semantic_revision = 1
 
 [[policy_unit]]
 id = "topic.contracts.schema-dialect-and-vocabulary"
-module = "topic.contracts"
+module = "topic.contracts.schemas"
 heading_path = ["Schema Dialect And Vocabulary"]
 semantic_revision = 1
 

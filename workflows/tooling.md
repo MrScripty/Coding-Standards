@@ -7,7 +7,7 @@
 - Level: `MUST`
 - Applies when: A change selects, configures, schedules, or coordinates development tools or automation.
 - Does not apply when: No development-tool selection, configuration, scheduling, or orchestration behavior changes.
-- Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.commit`
+- Requires: `core`, `workflow.implementation`, `workflow.verification`
 - Specializes: `none`
 - Verification: Tool selection, hook orchestration, scheduling, cost, and persisted-artifact decision fixtures plus affected real automation evidence.
 - Canonical owner: `workflows/tooling.md`
@@ -57,17 +57,18 @@ requirements, file-format semantics, generated-file authority, supported
 platforms, and selected tool capabilities. Define the configuration's scope and
 precedence where multiple mechanisms or nested files can apply.
 
-EditorConfig is one possible transport for selected settings; its availability
-does not make it the default. Do not default to spaces, indentation width, line
-ending, character encoding, final-newline, trailing-whitespace, file-pattern,
-or language-family settings. Do not copy a universal settings table when owned
-files or consumers require different behavior.
+For ordinary new source files, SHOULD use UTF-8, a final newline, and the
+language formatter's conventional layout. Preserve an existing adequate
+repository convention. Use an editor-neutral configuration such as EditorConfig
+when several editors need the same settings; let the language formatter own
+language formatting where it already does so.
 
-Contradictory repository, consumer, or file-format requirements produce typed
-`invalid`. Missing required scope, precedence, or authoritative setting facts
-produce typed `unavailable`. A required setting that no supported mechanism can
-represent produces typed `unsupported`; do not silently omit it or substitute a
-conventional value.
+File formats and consumers can require exceptions: preserve significant
+whitespace, binary/generated content, required encodings, and protocol line
+endings. Scope exceptions to the affected files and verify the consumer can
+read the result. Do not normalize an unrelated repository as part of a local
+change. Missing material consumer requirements need investigation; ordinary
+formatting choices may use these defaults without a separate approval.
 
 ## Persisted Artifact Checks
 

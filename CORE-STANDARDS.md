@@ -15,6 +15,38 @@
 These are the universal invariants. Load additional guidance through
 [STANDARDS-ROUTER.md](STANDARDS-ROUTER.md), not by reading the entire library.
 
+## Reading And Applying These Standards
+
+Read Core, then use the Router to select the workflows, topics, and profiles
+that match the task. Requires means an unconditional prerequisite; Specializes
+identifies a refinement of a broader concept. A related link is a route to
+additional guidance when its stated condition applies, not a request to read
+all descendants.
+
+MUST states an obligation within its applicability. SHOULD is the recommended
+starting point; depart when a concrete project constraint justifies it.
+Profiles refine shared obligations for a technology or boundary. References
+provide examples and explanation rather than additional requirements.
+
+Apply governing external requirements and explicit project public contracts,
+persisted contracts, and accepted architectural decisions first, then Core,
+applicable profile mechanisms, and selected workflows and topics. A profile
+cannot silently weaken the generic obligation it specializes. Identify an
+actual conflict and obtain an explicit, owned, justified exception; do not
+claim that an overridden obligation was satisfied.
+
+When a standard asks for a contract or decision, start from the existing code,
+accepted design, tool configuration, and consumer requirements. For routine
+reversible choices, use a suitable established convention and explain a
+material departure. Record reasoning in proportion to the consequence; an
+ordinary local choice does not require a separate approval or design document.
+
+A developer who lacks material facts should state the missing fact and its
+consequence in ordinary prose and continue independent work. References to
+invalid, unsupported, or unavailable do not require production error variants
+for development uncertainty. Machine interfaces use their declared diagnostic
+contract; production behavior uses the owning domain's failure contract.
+
 ## Objective And Scope
 
 - Preserve the requested externally meaningful outcome through implementation
@@ -26,89 +58,18 @@ These are the universal invariants. Load additional guidance through
 
 ## Simplicity And Ownership
 
-- Separate concerns that change for different reasons. Do not split coherent
-  behavior merely to reduce file or line counts.
-- Give each policy, state, lifecycle, contract, and generated artifact one
-  canonical owner.
-- Keep business policy independent of transport, UI projection, persistence,
-  runtime wiring, and diagnostics unless the domain itself requires coupling.
-- Make dependencies point toward stable contracts and owned abstractions.
-- Do not create a second source of truth to avoid changing the real owner.
+Keep one coherent concern together. Separate concerns that change for different
+reasons, and give each state, contract, policy, and lifecycle one owner. A useful
+abstraction lets callers ignore a decision it owns without hiding material
+failure, ordering, or resource obligations. Compare the knowledge required of
+callers before and after; fewer files or types do not by themselves mean a
+simpler design.
 
-Simplicity is the reduction of entanglement and reasoning load, not the
-minimization of files, types, dependencies, abstractions, or lines. A boundary
-is useful when it lets a maintainer understand or change one concern without
-also understanding unrelated transport, lifecycle, persistence, runtime, UI,
-timing, or diagnostics policy.
-
-Keep one coherent concern together when its invariants, lifecycle, inputs,
-outputs, and failure behavior form one decision. Introduce a named boundary
-when it separates independently changing decisions, establishes one owner, or
-makes an invariant enforceable. More named components can be simpler when each
-removes unrelated context from the others.
-
-Do not select a design from a file-length threshold, type count, dependency
-count, call-site count, repository layout, incumbent abstraction, or smallest
-diff. If material ownership, invariants, lifecycle, failure, or change facts
-are unresolved, return the applicable typed diagnostic or record the decision
-before implementation rather than choosing the fewest visible constructs.
-
-### Code And Terminology Discipline
-
-Use the least code and structure that make the owned behavior, invariants,
-lifecycle, failures, and side effects clear. Additional structure is justified
-when it separates independently changing decisions, enforces an invariant,
-removes repeated reasoning, or supports demonstrated variants. It is not
-justified by speculative reuse, a preferred construct count, an incumbent
-pattern, or the smallest visible diff.
-
-Create an abstraction only when callers can safely ignore a concern that the
-abstraction owns. Keep its material lifecycle, ordering, state authority,
-failure behavior, and side effects visible in the contract. One call site may
-justify a boundary and many call sites may not; call count does not decide.
-
-Consolidate repeated implementations when they express the same owned
-contract and independent copies create divergence risk. Keep superficially
-similar implementations separate when their owners, invariants, lifecycle, or
-change axes differ. Do not apply blanket extraction, reuse, or duplication
-rules.
-
-Delete code, aliases, adapters, flags, comments, and conditional code branches
-that have no current owner or supported contract. Preserve a path only for a
-real active consumer, retained state, deployment overlap, or other declared
-lifecycle obligation. Unverified future use and incumbent presence are not
-retention authority.
-
-Choose names from domain meaning, role, unit, ownership, lifecycle, and
-observable effect at the narrowest useful scope. Use one term for one concept
-within a contract and distinguish different concepts even when their
-implementations look alike. Rename when current terminology misstates the
-owned concept; do not keep or copy a name solely for consistency with an
-incumbent, framework convention, or generic naming recipe.
-
-Missing or contradictory ownership, invariant, consumer, lifecycle, or domain
-meaning requires a typed diagnostic or a recorded decision before structural
-change. Do not fall back to fixed call counts, blanket DRY, universal brevity,
-speculative extension points, existing terminology, or copied examples.
-
-### Simple, Easy, And Complection
-
-For these standards, **simple** describes an artifact whose distinct concerns
-are not interleaved. **Easy** describes an approach that is familiar, nearby,
-available, or convenient to a particular person or environment. Easy and simple
-may coincide, but neither proves the other.
-
-An artifact is **complex** or **complected** when otherwise independent concerns
-must be understood or changed together because their knowledge, state,
-identity, value, time, location, representation, mechanism, or policy is
-interleaved. To **compose** is only to place concerns together; composition,
-decomposition, and naming do not decide simplicity.
-
-Judge the produced artifact and its evolution, not the ease of authoring,
-generation, installation, familiarity, or conformance to an incumbent pattern.
-Simplicity evidence asks whether independent concerns can be understood and
-changed independently and whether each change exposes only the knowledge it
-owns. Counts may locate accumulated cost but cannot decide simplicity.
+Consolidate implementations of the same contract when copies risk divergence;
+keep superficially similar code separate when its invariants or owners differ.
+Use domain terms, remove unsupported dead paths, and add reuse machinery for a
+current need. When choosing structure or terminology, follow
+[Code Design And Ownership](topics/code-design.md).
 
 ## Authority And Boundaries
 
@@ -187,8 +148,10 @@ ambient setting, or incumbent default.
 
 ## Verification
 
-- Add the smallest test that fails for the defect or missing behavior before or
-  with its implementation.
+- For a behavior change or defect, add a focused regression test before or
+  with the implementation when existing evidence does not already prove the
+  property. A construction proof or existing test can suffice when it covers
+  the actual risk; explain material limits.
 - Run focused checks for the changed behavior and affected static/toolchain
   contracts.
 - Use integration, contract, system, user-workflow, environment-gated, and

@@ -12,6 +12,22 @@
 - Verification: Rust tooling mechanism decisions plus claim-matched adapter, command, configuration, target, and evidence checks selected by generic owners.
 - Canonical owner: `profiles/languages/rust/tooling.md`
 
+## Practical Starting Point
+
+For an ordinary Rust source change, SHOULD start with `cargo fmt --check`,
+`cargo check`, focused `cargo test` selection, and the repository's Clippy
+policy. Run them in the owning crate or workspace with the toolchain and
+features the repository supports. Existing scripts that implement these checks
+are suitable entrypoints; do not invent a second orchestration layer.
+
+Use the standard test runner until measured runtime, isolation, or reporting
+needs justify another runner. Add a feature/target matrix when supported
+combinations can change behavior; an exhaustive power set of features is not a
+default. Add compile-fail tests for a promised rejection by the compiler, and
+property tests when broad generated cases can challenge a stated invariant.
+Benchmark when the change makes a performance claim. These starting points do
+not prove unsupported targets or replace a required boundary test.
+
 ## Mechanism Authority
 
 Generic owners select claims, evidence sufficiency, test design, lint purpose

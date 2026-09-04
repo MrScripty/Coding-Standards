@@ -63,9 +63,9 @@ prohibited = [
 ]
 
 [[checks]]
-id = "contract-policy"
+id = "contract-policy-detail-1"
 type = "text"
-path = "topics/contracts.md"
+path = "topics/contracts/evolution.md"
 required = ["syntactically additive change is compatible only"]
 prohibited = []
 

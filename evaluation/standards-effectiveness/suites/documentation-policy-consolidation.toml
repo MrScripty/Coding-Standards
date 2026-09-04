@@ -50,10 +50,7 @@ require = { field = "target", op = "in", values = ["workflows/documentation.md",
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/documentation.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/documentation.md", "topics/code-design.md"]
 
 [[checks]]
 id = "workflow-projection"

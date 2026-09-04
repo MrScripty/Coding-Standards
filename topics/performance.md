@@ -58,20 +58,14 @@ accepted.
 
 ## Benchmarks And Regression Evidence
 
-A benchmark names the claim it supports and preserves the material measurement
-contract. Use a microbenchmark for an isolated mechanism claim and a broader
-integration or user-workflow measurement for an end-to-end claim. Neither is a
-universal substitute for the other.
+Use a microbenchmark for an isolated mechanism claim and an integration or
+user-workflow measurement for an end-to-end claim. Choose the narrowest
+measurement that covers the property; neither form substitutes for the other.
 
-Regression thresholds account for expected variability and decision cost.
-Select absolute budgets, relative comparisons, statistical tests, trend
-analysis, or another method from the claim. Do not require one duration,
-percent threshold, benchmark framework, CI schedule, sample count, or target
-machine for every project.
-
-Documentation records durable claim, tradeoff, and reproduction facts that
-cannot be recovered from the code and evidence. Do not require a copied
-performance comment template or treat documentation as measurement.
+[Performance Test Evidence](#performance-test-evidence) defines the shared
+workload, baseline, environment, threshold, and reporting requirements.
+Documentation records durable claim, tradeoff, and reproduction facts that cannot be recovered
+from the code and evidence. Documentation does not replace measurement.
 
 ## Performance Test Evidence
 

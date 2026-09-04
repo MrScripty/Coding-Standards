@@ -404,7 +404,7 @@ prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed 
 id = "router-commit-route"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["workflows/commit.md", "branch/worktree isolation", "terminal lifecycle"]
+required = ["workflows/commit.md", "manage history, branches, or worktrees"]
 prohibited = []
 
 [[checks]]
@@ -470,6 +470,13 @@ prohibited = ["always create a branch", "always cherry-pick", "Force-remove dirt
 id = "core-code-branch-terminology"
 type = "text"
 path = "CORE-STANDARDS.md"
+required = []
+prohibited = ["comments, and branches that have no"]
+
+[[checks]]
+id = "core-code-branch-terminology-detail-1"
+type = "text"
+path = "topics/code-design.md"
 required = ["conditional code branches"]
 prohibited = ["comments, and branches that have no"]
 

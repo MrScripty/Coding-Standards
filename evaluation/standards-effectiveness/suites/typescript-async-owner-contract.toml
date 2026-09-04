@@ -63,7 +63,7 @@ prohibited = []
 id = "router-projection"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["TypeScript `Promise`, overlapping invocation, stale-result, cancellation, or async state-application mechanism changes"]
+required = ["Change promises, overlapping calls, cancellation, or stale-result handling"]
 prohibited = []
 
 [[checks]]

@@ -145,23 +145,7 @@ prohibited = []
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "STANDARDS-ROUTER.md",
-  "profiles/boundaries/generated-contract.md",
-  "topics/architecture.md",
-  "topics/contracts.md",
-  "topics/dependencies.md",
-  "workflows/build.md",
-  "workflows/commit.md",
-  "workflows/development-proportionality.md",
-  "workflows/documentation.md",
-  "workflows/implementation.md",
-  "workflows/planning.md",
-  "workflows/release.md",
-  "workflows/tooling.md",
-  "workflows/verification.md",
-]
+paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "profiles/boundaries/generated-contract.md", "topics/architecture.md", "topics/contracts.md", "topics/dependencies.md", "workflows/build.md", "workflows/commit.md", "workflows/development-proportionality.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/planning.md", "workflows/release.md", "workflows/tooling.md", "workflows/verification.md", "topics/architecture/replay.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "registered-consumers"

@@ -18,6 +18,30 @@ supported Rust and Cargo mechanisms only after those contracts are accepted.
 Examples added during migration cannot select tools, commands, configurations,
 versions, targets, features, schedules, thresholds, or acceptance.
 
+## Maintained Local Check Recipe
+
+For a normal Rust source change, start in the owning crate with the repository's
+configured toolchain. These commands implement the conditional starting point
+in the [Rust Tooling profile](../../profiles/languages/rust/tooling.md#practical-starting-point):
+
+```sh
+cargo fmt --check
+cargo check
+cargo test parser_rejects_invalid_length
+cargo clippy
+```
+
+Replace the test filter with the actual affected test; check the test count so
+a misspelled filter does not look like successful verification. If there is no
+useful filter, run the owning crate's tests. Use repository scripts when they
+already select the right features, targets, lint settings, and environment.
+This recipe checks local formatting, static consistency, a regression, and
+lint diagnostics. Add boundary evidence when the change crosses a boundary.
+
+The sections below retain historical migration examples. Their pinned versions,
+optional products, and broad workspace flags are not maintained recommendations;
+consult the current owning profile before using one.
+
 ## Cargo Baseline Command Examples
 
 One legacy baseline listed:

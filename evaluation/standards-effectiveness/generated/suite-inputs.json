@@ -457,7 +457,7 @@
       ]
     },
     {
-      "digest": "sha256:c88411444199e5f2e174c981d5019fcd83afec170d58261204ddb2d32eb2c779",
+      "digest": "sha256:f6b4320dc96ec702dc3673390b45734767c53704229c8f8ef96dff48b8655900",
       "path": "CORE-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -480,11 +480,6 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "contract-http-outcome-projection"
-        },
-        {
-          "check": "owner",
-          "role": "content",
-          "suite": "core-code-discipline"
         },
         {
           "check": "owner",
@@ -1323,7 +1318,7 @@
       ]
     },
     {
-      "digest": "sha256:c68dd3a8cad1bbf380ecc9f498f3eb42d19269393dc25fb708692609a9a6b8b0",
+      "digest": "sha256:bf74f561c40aaa16387d8559ae2353a686216eaea25c15342d7a534441cd5aeb",
       "path": "STANDARDS-ROUTER.md",
       "state": "present",
       "uses": [
@@ -2814,7 +2809,7 @@
       ]
     },
     {
-      "digest": "sha256:b670bf6f7bf4511ad38747e81bb017f34a75d699e423b5126917da9fa6f036cf",
+      "digest": "sha256:9be1486ee2dc77c94d14d3a90344cbabffa776b30bc30bd1bbac091a5c99226c",
       "path": "evaluation/standards-effectiveness/canonical-module-corpus.toml",
       "state": "present",
       "uses": [
@@ -6550,7 +6545,7 @@
       ]
     },
     {
-      "digest": "sha256:bb5885423dbd9aa75f0badeb976a6928d925eb3db554f1ff3b1d7f6e4e690564",
+      "digest": "sha256:acaf8e60acd4b322dff9238f17b0d660c9a231c2b26c04509b0b893aaf1e4eb2",
       "path": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
       "state": "present",
       "uses": [
@@ -7565,7 +7560,7 @@
       ]
     },
     {
-      "digest": "sha256:d8adb67a8ab6334a57b1c8d43148b504ed93f7756209dda215eae9b6ecc84af6",
+      "digest": "sha256:b37269b7f18710353ec3d975e31f729072daa7a1686b1c93613bf9abac1f5f29",
       "path": "evaluation/standards-effectiveness/fixtures/tooling/editor-configuration-decisions.tsv",
       "state": "present",
       "uses": [
@@ -7649,7 +7644,7 @@
       ]
     },
     {
-      "digest": "sha256:64c8fef3f612225621766bfe978eb983a31f80e748c409261ba7100787c58579",
+      "digest": "sha256:9c94b5e2311538ffb60657bbad4844817782a059419ef4c9ef49787850846891",
       "path": "evaluation/standards-effectiveness/fixtures/typescript/static-analysis-decisions.tsv",
       "state": "present",
       "uses": [
@@ -7721,7 +7716,7 @@
       ]
     },
     {
-      "digest": "sha256:bbba35c0f0082dd966de32d65132303c6b26666d1cbf6b36e4d0a7d3a8c93871",
+      "digest": "sha256:cdc4b73fb7edbcc7d763cdeacdbc267c0c56dd37ebaa1f110af7a75fbf1dad0a",
       "path": "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv",
       "state": "present",
       "uses": [
@@ -9801,7 +9796,7 @@
       ]
     },
     {
-      "digest": "sha256:eb6fa6f3544fabc6108bf8c64a9f53460962f8860825ad90f9c250998a77aa6b",
+      "digest": "sha256:bb42042c7b6f5c4987537dca0df628f370fabdb23cd59744c83526a13d667236",
       "path": "evaluation/standards-effectiveness/policy-impact-registry.toml",
       "state": "present",
       "uses": [
@@ -9813,7 +9808,7 @@
       ]
     },
     {
-      "digest": "sha256:614f52bdb8c83ff9021fdf7c5574bf80c1b7ab86a0781bcd17bcca6558f80b5d",
+      "digest": "sha256:8ab9eb353591a9cba5b7fc54654f547b10284ca6311dbfd32cdf335e5db4abca",
       "path": "evaluation/standards-effectiveness/policy-impact/core.toml",
       "state": "present",
       "uses": [
@@ -9849,7 +9844,19 @@
       ]
     },
     {
-      "digest": "sha256:a53dbe327598919cce5d94568193958cb13ed3a5700ba5bcadf6a1267b4054cf",
+      "digest": "sha256:95e2de6a0b95474d5ed40aa8e0a1e0d162f8b8aa6f1544bbbd4ccbcd643a5f8b",
+      "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.replay.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:3b72675f6410a22ef26d3e8fcdbdbc35386da8096d4df4eb9c64af9930f69608",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
       "state": "present",
       "uses": [
@@ -9861,7 +9868,31 @@
       ]
     },
     {
-      "digest": "sha256:91537ecba89959f3b9b3c853b384de7f3983cf5364fed2acbf946c5fdee47032",
+      "digest": "sha256:714ba82f9f05ed91c89430fa3d339ad763849bec195270a0a43ac7051db20251",
+      "path": "evaluation/standards-effectiveness/policy-impact/topic.code-design.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:23d4b92e95e29693c8333c38c5735700fa82e4be8829837cffae3f340bccc7bc",
+      "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.schemas.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:75f7c60d10383703189e9301953308dfb57a4dc3833c3d9927a6d2f700b9b24a",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml",
       "state": "present",
       "uses": [
@@ -9933,7 +9964,19 @@
       ]
     },
     {
-      "digest": "sha256:abf882cd2f5a5e57cfee71a82c220765afbc29e4716eb5883cbc8b496421a976",
+      "digest": "sha256:c428f6dd4407232902124f49099288f0117dbc9fa0f55af2a2ade233318920cf",
+      "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7cdafd5add67fed4acec12d8c0f6bdb03ac6effe134e46185debceefa467dfff",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
       "state": "present",
       "uses": [
@@ -9945,7 +9988,7 @@
       ]
     },
     {
-      "digest": "sha256:1d15577e271682cc750eb08582a7b19721af3030fabb8d913fc540e0b5c174d2",
+      "digest": "sha256:543621778e8bd4434bc161a4050882292e3a6a58de3409719998bdae882a9dda",
       "path": "evaluation/standards-effectiveness/policy-units/architecture.toml",
       "state": "present",
       "uses": [
@@ -9979,7 +10022,7 @@
       ]
     },
     {
-      "digest": "sha256:0c059e57a2fd62d76bee6a3d68bf892be95617e369f6d3ac70544818317dcc79",
+      "digest": "sha256:46173a8c88ba2d2cd1b5b7af392856b37502005391fa4164e213a432dee26c80",
       "path": "evaluation/standards-effectiveness/policy-units/contracts.toml",
       "state": "present",
       "uses": [
@@ -9996,7 +10039,7 @@
       ]
     },
     {
-      "digest": "sha256:c694c4547838d679e4577892f776a8ee18277ea91b989059451f5fbc3af569b5",
+      "digest": "sha256:fde178ae1471e3a4fb6cd280711a36f8c02ca84ae7c8cd0b410df555dd5a1ef8",
       "path": "evaluation/standards-effectiveness/policy-units/core.toml",
       "state": "present",
       "uses": [
@@ -10142,7 +10185,7 @@
       ]
     },
     {
-      "digest": "sha256:56983757fa7734e5172c75412f0abf2da51b883fcec8627cc1934f26484b6635",
+      "digest": "sha256:d5bc88378caefe4604ff9086251a8b9a45ce5185802c0fde53f5411a8a93e806",
       "path": "evaluation/standards-effectiveness/policy-units/verification.toml",
       "state": "present",
       "uses": [
@@ -10159,7 +10202,7 @@
       ]
     },
     {
-      "digest": "sha256:85e54935b9f1bf4907c2a9a3b9648387db5d7dd5b7f17153940b4a6b0d364040",
+      "digest": "sha256:38f649788773960b5a9534bf677bfe48cbf5f177510da2608ed2c6bd7b515fb4",
       "path": "evaluation/standards-effectiveness/router-projection.toml",
       "state": "present",
       "uses": [
@@ -10200,7 +10243,7 @@
       ]
     },
     {
-      "digest": "sha256:1e7e2b158fa1a316a102549f54850a89f262e3e86d898bbfca3db0db137220b7",
+      "digest": "sha256:88c71fad5fb5c4f52b117872df5c7bbf963d99705c626abf3b6631b4bed7c8c2",
       "path": "evaluation/standards-effectiveness/suites/a1c-contract-conformance.toml",
       "state": "present",
       "uses": [
@@ -10236,7 +10279,7 @@
       ]
     },
     {
-      "digest": "sha256:7daf8b06c547c3e6842e3897d8be8e822bca2f177f9f823d42d846c0b53c003d",
+      "digest": "sha256:cc8645f9ecd3dc1fa914a3e85b01b0168d7e9b3c7aa52e736f02f8ac7ea3a56d",
       "path": "evaluation/standards-effectiveness/suites/acceptance-claims.toml",
       "state": "present",
       "uses": [
@@ -10488,7 +10531,7 @@
       ]
     },
     {
-      "digest": "sha256:ce83964ee088a2c1f56220b981e840006ae2b1789a8e0a75760c38c3fcb2b463",
+      "digest": "sha256:5412cc81feab145225417c710457d81a7a935b030f9be13acd8bde75efa24925",
       "path": "evaluation/standards-effectiveness/suites/binding-contract-evolution.toml",
       "state": "present",
       "uses": [
@@ -10500,7 +10543,7 @@
       ]
     },
     {
-      "digest": "sha256:789c66be8f03eecaec211a464efea6a8e53946fd641a202cf2b3f469e2f24e99",
+      "digest": "sha256:5d123435e8c283d276c8f575a74d618149a4ca01bd413d603660a89618c7b607",
       "path": "evaluation/standards-effectiveness/suites/binding-generation-authority.toml",
       "state": "present",
       "uses": [
@@ -10536,7 +10579,7 @@
       ]
     },
     {
-      "digest": "sha256:ad92bece8308680e71ed2715d053c70a57535f5154b462c16562a723c9fa95e9",
+      "digest": "sha256:7e5d2aa17be90daf391e8ba5269955c5d14b5fe83585603ee40fa91996708f57",
       "path": "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
       "state": "present",
       "uses": [
@@ -10548,7 +10591,7 @@
       ]
     },
     {
-      "digest": "sha256:cfe17726620e203cf4473b102540f1f1e3d782eb7a3fb3458239d20d02bd2d38",
+      "digest": "sha256:b07d79f01327c4426aeaa37f89f43636614be04a850402c03ff81ca5be6714f6",
       "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
       "state": "present",
       "uses": [
@@ -10565,7 +10608,7 @@
       ]
     },
     {
-      "digest": "sha256:99a2e79c67956815fb24aa6dcfb623bdd71de3dd46188b89ee3dce23fa575234",
+      "digest": "sha256:20c06bded29a58d971f381c1d08b32bd5ba16ae5a6eee238b42148e53783cd11",
       "path": "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml",
       "state": "present",
       "uses": [
@@ -10589,7 +10632,7 @@
       ]
     },
     {
-      "digest": "sha256:560be027136a654786b9defd4a4a496976c7bfe24909228e20a42ffcf31a2dd6",
+      "digest": "sha256:398a62829da3004922f954be5b60b6b71c9b9f5ebb530cdf69570c990b15e05c",
       "path": "evaluation/standards-effectiveness/suites/contract-authority-scope.toml",
       "state": "present",
       "uses": [
@@ -10625,7 +10668,7 @@
       ]
     },
     {
-      "digest": "sha256:57b8696468309e5a78bf979eb2cade6bf3703f790e87cf5c07cd44ee95a74137",
+      "digest": "sha256:03abcda2285ab8828688003f5c0c9f9b70a53822f1343c993c285b16c56c7662",
       "path": "evaluation/standards-effectiveness/suites/contract-http-adapter-proof.toml",
       "state": "present",
       "uses": [
@@ -10637,7 +10680,7 @@
       ]
     },
     {
-      "digest": "sha256:d09d842e8236d706d3e344ee73eefbadc2c64bbcfc404b05749950e8cc191f4f",
+      "digest": "sha256:bd9221bc25a6bfdd3ba1f85f7d082ea2d3e8a7342710b621f901be37c58ffa57",
       "path": "evaluation/standards-effectiveness/suites/contract-http-outcome-projection.toml",
       "state": "present",
       "uses": [
@@ -10661,7 +10704,7 @@
       ]
     },
     {
-      "digest": "sha256:77cfa7dca878a3c2f0a95a3a1c0f8072ccf3535fe0314278ab5264a2c5c1cc56",
+      "digest": "sha256:073b8e6ec34ff3a494517a719b55fca111d5b88d5c6b38edaa4cfb9dcb3167d2",
       "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
       "state": "present",
       "uses": [
@@ -10673,7 +10716,7 @@
       ]
     },
     {
-      "digest": "sha256:c4b3cd5cd54ca6c78373009a411a50d82adbe73ad8119279d46b0db7e88182b7",
+      "digest": "sha256:8a564dc408d50d7a800643b2081afd1f8107005f1a914d7c3e9b98d32e180bc4",
       "path": "evaluation/standards-effectiveness/suites/contract-planning-boundary.toml",
       "state": "present",
       "uses": [
@@ -10697,7 +10740,7 @@
       ]
     },
     {
-      "digest": "sha256:3c5791b847c3dd88c411a0984c22e30ceced7a1f418f2dd2315eeca983bb99c7",
+      "digest": "sha256:b0d503e0e57904a7c6f6838b5844eceda1421d2976764f0c775391d7849a8ae4",
       "path": "evaluation/standards-effectiveness/suites/core-code-discipline.toml",
       "state": "present",
       "uses": [
@@ -10721,7 +10764,7 @@
       ]
     },
     {
-      "digest": "sha256:39d4198a226e1cd3ee2d70eea4113860f48388b130776048ff9d56f722d54dfa",
+      "digest": "sha256:c35021f1b2064c15034e1fd19d3cdb5886c560a4327b25fff73bbfae34d1fb7b",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml",
       "state": "present",
       "uses": [
@@ -10733,7 +10776,7 @@
       ]
     },
     {
-      "digest": "sha256:da21bee3d591c8bd2ae058ab21a0ea206bb44c645efd5454d3a995a9a1345000",
+      "digest": "sha256:d88787509e9757747396c8330f5a04a61d22b62f7a7428692c66d36d54e7a27e",
       "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
       "state": "present",
       "uses": [
@@ -10745,7 +10788,7 @@
       ]
     },
     {
-      "digest": "sha256:6915b23b1ad56ef2a4c7f0c381c3f175a81702dd5ba66843baba2b6e4c61d7ba",
+      "digest": "sha256:51b2b64ec7a0eb7a74bafdd7d0885cb9074d435ca22f4c0193e823fd03a52e55",
       "path": "evaluation/standards-effectiveness/suites/csharp-async-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -10817,7 +10860,7 @@
       ]
     },
     {
-      "digest": "sha256:ca0308961cb826ff2ba840b037f323b9766d434d694a6467b4a269991ffb00fd",
+      "digest": "sha256:3b0cb19392d95f760d7a40b221541d4b480740ce155b4e9477a3f39f49adab07",
       "path": "evaluation/standards-effectiveness/suites/development-proportionality.toml",
       "state": "present",
       "uses": [
@@ -10865,7 +10908,7 @@
       ]
     },
     {
-      "digest": "sha256:806ecf0801ff9ef19291fcbb101314261de9657105490eb86dc6e4e46db35f65",
+      "digest": "sha256:2e4ddfd449b848f0deb010089a66160d9d877d9f1e32e857b1f03cc8e316de76",
       "path": "evaluation/standards-effectiveness/suites/documentation-changelog-closure.toml",
       "state": "present",
       "uses": [
@@ -10913,7 +10956,7 @@
       ]
     },
     {
-      "digest": "sha256:cc76a5ab4181bb5c78951acdffa35659416bf13e0357e8910269a7f31a974f91",
+      "digest": "sha256:39fc280404ebd573d882572d481eb2101c5f51c32149f3948c2c1e1fc933b0ae",
       "path": "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml",
       "state": "present",
       "uses": [
@@ -10925,7 +10968,7 @@
       ]
     },
     {
-      "digest": "sha256:68f61d4ea613eee4853a26f27a8f7b1dd99606c4290687ca53377b62f69dc336",
+      "digest": "sha256:38c72785c35ac1cbc5bc6f2a7e1378b2160cffb35ed0d444437a39c6a1107b27",
       "path": "evaluation/standards-effectiveness/suites/documentation-reference.toml",
       "state": "present",
       "uses": [
@@ -10960,7 +11003,7 @@
       ]
     },
     {
-      "digest": "sha256:fd984e0b92f7efe04f154f264dbe1ae23fbc22ab73a6806240232f5bdb8b7a92",
+      "digest": "sha256:613ba999ca73c5fba92fff0edc9b20a4a93707979131e95fee7d0f41e1a010a0",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "state": "present",
       "uses": [
@@ -10972,7 +11015,7 @@
       ]
     },
     {
-      "digest": "sha256:ce56b6286d899a108fa02dd543485887a9d8075c0c8546f81369110ef3a768ff",
+      "digest": "sha256:eda9b2a5ea23a576c8506b539a8829ac201887f0a24678cd2e3d6ce50b22d659",
       "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
       "state": "present",
       "uses": [
@@ -11032,7 +11075,7 @@
       ]
     },
     {
-      "digest": "sha256:ec7f6c285c6fc54efd8a26817d0babcb20181642bfc2b9cbfd0e2c53b8b75c8f",
+      "digest": "sha256:a73a731b4444009a9b7f187d4b4e6380789a9fdce3e3592dedb3b4d04c848d21",
       "path": "evaluation/standards-effectiveness/suites/frontend-rendering-synchronization.toml",
       "state": "present",
       "uses": [
@@ -11104,7 +11147,7 @@
       ]
     },
     {
-      "digest": "sha256:e413eec7cbd7a438746849ec8d7e5db2a04dda0901da2c89f03f9275513e7f8a",
+      "digest": "sha256:19a4902ebe02423586ba382dad8b1d03f099bdbc87920a299c2c3bb239c741c9",
       "path": "evaluation/standards-effectiveness/suites/godot-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -11116,7 +11159,7 @@
       ]
     },
     {
-      "digest": "sha256:a72aad4f8bab50a49c65d335daa3d1e53829a0bade493b543bf08fb5e2259434",
+      "digest": "sha256:31dc0f70b0587b8a6ea2590613db7872994b8ddc4d0f36ae65dc520277467cfb",
       "path": "evaluation/standards-effectiveness/suites/gui-smoke-evidence.toml",
       "state": "present",
       "uses": [
@@ -11176,7 +11219,7 @@
       ]
     },
     {
-      "digest": "sha256:b8196781106266952aa583e691ba91f1e67f4c0893624717221c86b41c971270",
+      "digest": "sha256:82f351c86be9f57054d94170d26271f0462b2645a4dee89f1b0001a27b1f5395",
       "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
       "state": "present",
       "uses": [
@@ -11200,7 +11243,7 @@
       ]
     },
     {
-      "digest": "sha256:fba2a7f7f2b577d771eb97cdfb34caaa89a51eb8a513dfc3a461b16933098c2e",
+      "digest": "sha256:f13bc8e4a4c3153bbf50ded865f2713edfebdd9a82f4631025771a1528cf9dc4",
       "path": "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml",
       "state": "present",
       "uses": [
@@ -11212,7 +11255,7 @@
       ]
     },
     {
-      "digest": "sha256:1189617c4a20327d33e3c610e354a868b27627a6579dd0bda8b76b509c83796b",
+      "digest": "sha256:8e944e49df09d6ef81e9adefeb786458b9f683d4a47238d1c6494ae0778b08ae",
       "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
       "state": "present",
       "uses": [
@@ -11224,7 +11267,7 @@
       ]
     },
     {
-      "digest": "sha256:27c88e4084300c46b09cf1c0aec611215c50b59dcb0ad05b9a2f34ed6804282a",
+      "digest": "sha256:ba2eb1fcbc7cbd1428ae88ccf10fabbbf2c836ca00f03b6eea26c30203b8bce6",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
       "state": "present",
       "uses": [
@@ -11236,7 +11279,7 @@
       ]
     },
     {
-      "digest": "sha256:b1e67eb4eb416d5ee1b3596eea4542129457f44cf22613b6d8fb51fde64a8354",
+      "digest": "sha256:dd60e51479a660dec03a993ff157c7adfe9364475d3e75e2577ae61f583fb591",
       "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
       "state": "present",
       "uses": [
@@ -11272,7 +11315,7 @@
       ]
     },
     {
-      "digest": "sha256:9aec9295d05fd647ef45ec56c2f5d5ee5d6c69b34c30c087ef17b9fc8eb7031e",
+      "digest": "sha256:f1f5bd7093fc898de781aeaf75cbb0ff8c97a317fd7bd73898566351e3251adf",
       "path": "evaluation/standards-effectiveness/suites/language-binding-wire-representation.toml",
       "state": "present",
       "uses": [
@@ -11284,7 +11327,7 @@
       ]
     },
     {
-      "digest": "sha256:62a774bd79f8580e89dff8bbcf0854fc6b3b86d395b015064aa26081aa91e45a",
+      "digest": "sha256:1447892b364342a4afd78f8e64ca6ececb2a89f1dbb7004186f06e592f40a720",
       "path": "evaluation/standards-effectiveness/suites/language-index-closure.toml",
       "state": "present",
       "uses": [
@@ -11308,7 +11351,7 @@
       ]
     },
     {
-      "digest": "sha256:aa7d945fb68e729e04b51a9f684ad82466d9c6b2accee012a3bb73114fffea0c",
+      "digest": "sha256:a6ae2c058a4254e372ec99aa881548ef55376ad50fe9a918093163c44691e6f0",
       "path": "evaluation/standards-effectiveness/suites/launcher-owner-row-14.toml",
       "state": "present",
       "uses": [
@@ -11938,7 +11981,7 @@
       ]
     },
     {
-      "digest": "sha256:30637d963f2c7b0c2745c978c419c2bf1642f996bdd208201e114412f2c590ea",
+      "digest": "sha256:31acf27a781e0fe988fd1ec2c81e8bdd59b40b9a18f778b880902e9596f81e51",
       "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
       "state": "present",
       "uses": [
@@ -12003,7 +12046,7 @@
       ]
     },
     {
-      "digest": "sha256:515303d53dfdb1f8c93f145e1ffd7a6405b85cd9e0aba1ad01cc3dde2a33dd3c",
+      "digest": "sha256:3aa4acaed8a01f66e9c627cf8d867334a19b5215abbf11bbb717f2327a83b352",
       "path": "evaluation/standards-effectiveness/suites/persistence-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -12068,7 +12111,7 @@
       ]
     },
     {
-      "digest": "sha256:1745460b8fa21fb2d43e8e40159c9c0efc6594ab5483637973e6e81836cad0da",
+      "digest": "sha256:9b483761a81300fde84a2f1fa247ee07cccd6ad3a5adf9f3b4aca4237ba4c1ed",
       "path": "evaluation/standards-effectiveness/suites/platform-evidence-coverage.toml",
       "state": "present",
       "uses": [
@@ -12116,7 +12159,7 @@
       ]
     },
     {
-      "digest": "sha256:de88f92097808e73a47545ef392ac00bd0eef42b69adf6c1135a1c3a0c5959c7",
+      "digest": "sha256:47b30fe2e29a0f01185adc4f59a95ceb97e3db40cd6a9433d995b1b8416f85e7",
       "path": "evaluation/standards-effectiveness/suites/release-artifact-policy.toml",
       "state": "present",
       "uses": [
@@ -12152,7 +12195,7 @@
       ]
     },
     {
-      "digest": "sha256:4a18c02b150c6ca20eb792ce56a5281a16c97da5502f61c24075afba15a7eb82",
+      "digest": "sha256:2f3f2a1766c81cc5f363606fedaae16ecf1cf8d4f8f59fcb2032e0a7fdda056f",
       "path": "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml",
       "state": "present",
       "uses": [
@@ -12164,7 +12207,7 @@
       ]
     },
     {
-      "digest": "sha256:7db3df6058695449ec9fe95f8872a3b047cc40dfb913b7f8a8d51f54123a4378",
+      "digest": "sha256:851944535984beaa5301eefb838bbbb96769e553e9fd388197aeab2ca685ad03",
       "path": "evaluation/standards-effectiveness/suites/release-pipeline-policy.toml",
       "state": "present",
       "uses": [
@@ -12176,7 +12219,7 @@
       ]
     },
     {
-      "digest": "sha256:0ced798a34560a0d935612b89ef2c0ad57102faed21b8c35c18fd3ae04c784df",
+      "digest": "sha256:b78bc76e7e3e768f114cac16a16258ebafbaf554211fa018c398f33b906bcc31",
       "path": "evaluation/standards-effectiveness/suites/release-procedure-policy.toml",
       "state": "present",
       "uses": [
@@ -12188,7 +12231,7 @@
       ]
     },
     {
-      "digest": "sha256:b0e71cf6aca2646018544dc113cd3820ef19e661b1e628a6b481b7e405a8989d",
+      "digest": "sha256:8389a5b7522047912be78375af664318f56f32c6e2b7b619ea8e2349be42d691",
       "path": "evaluation/standards-effectiveness/suites/release-publication-policy.toml",
       "state": "present",
       "uses": [
@@ -12200,7 +12243,7 @@
       ]
     },
     {
-      "digest": "sha256:ff6d5dbb0ade3c8f9ed6f025b33d8d3a3abb0d82c9915ca7ded6efff1785cddf",
+      "digest": "sha256:8f6b1e414e51f1c06cba513d485483c43f4c76f084d728c9a3a3e3645d5d77de",
       "path": "evaluation/standards-effectiveness/suites/release-recovery-policy.toml",
       "state": "present",
       "uses": [
@@ -12212,7 +12255,7 @@
       ]
     },
     {
-      "digest": "sha256:c55ce6fa90a9e64d573c00031d59083357a55f5dd70e9fb3f515ce0c4eebab0c",
+      "digest": "sha256:cf22cae085916be05e028e081edd53125232ba1639235dc235f1ad0add82dde9",
       "path": "evaluation/standards-effectiveness/suites/release-reference-closure.toml",
       "state": "present",
       "uses": [
@@ -12224,7 +12267,7 @@
       ]
     },
     {
-      "digest": "sha256:2b4406531e5143304c4b1583d59790d986df9c8b5f8f3263266dafb41f516a01",
+      "digest": "sha256:78c4b0f1810a593efa72f38bacf16dff01ba76d58213ce848edfe3347cd0031a",
       "path": "evaluation/standards-effectiveness/suites/release-workflow-foundation.toml",
       "state": "present",
       "uses": [
@@ -12296,7 +12339,7 @@
       ]
     },
     {
-      "digest": "sha256:13749a687702644f532bebdceee86c4f699cb1be4034c34660e4c6135df08fb8",
+      "digest": "sha256:b5e25251c9f6cd2e12e25a5e0fa2c1c90ae06da466b253af52963e33349ce76c",
       "path": "evaluation/standards-effectiveness/suites/router-legacy-route-closure.toml",
       "state": "present",
       "uses": [
@@ -12308,7 +12351,7 @@
       ]
     },
     {
-      "digest": "sha256:1c8c2df87e62141fbf72340c750a996c154e144107543aca5042a7340be62186",
+      "digest": "sha256:3c5fede61e0aaa6bf25f35def50698454c28d8fc26dd664395e9ffb9ea396ff5",
       "path": "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml",
       "state": "present",
       "uses": [
@@ -12368,7 +12411,7 @@
       ]
     },
     {
-      "digest": "sha256:01d337e9921ee386f5d783e5199ffc72f210f3b51627afd9d97b7346c6a4b0e8",
+      "digest": "sha256:e1d7067dc9d67c273546c674f9e697b3fab8d497b897004d2035da3682750c52",
       "path": "evaluation/standards-effectiveness/suites/rust-api-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -12404,7 +12447,7 @@
       ]
     },
     {
-      "digest": "sha256:dcef9db6348f275c1229b1f7e94962a6ddfb5d5a850e12546b4e93089da72b60",
+      "digest": "sha256:88621d9c4ed570fa58677676d7859bd1ed50aec0d70f64ceff41f20fab7d3cd8",
       "path": "evaluation/standards-effectiveness/suites/rust-async-blocking-mutex.toml",
       "state": "present",
       "uses": [
@@ -12416,7 +12459,7 @@
       ]
     },
     {
-      "digest": "sha256:29ade79c966bf0d59cbeaeb3d6ee49e06e697cacd808208105219a4a3f25b878",
+      "digest": "sha256:f0788967cb792f07876199d0b8c40baed0a7f5cc3e11acd883e09bb6310582c5",
       "path": "evaluation/standards-effectiveness/suites/rust-async-boundary.toml",
       "state": "present",
       "uses": [
@@ -12428,7 +12471,7 @@
       ]
     },
     {
-      "digest": "sha256:aaba9751b1a842c3c3571e2a6d85e596c3b65071baf1bda275ba026fd954c412",
+      "digest": "sha256:944d21c0b76f3fb90b106316fcfe7c6b793028144d0b3607564ee9db74adaf94",
       "path": "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml",
       "state": "present",
       "uses": [
@@ -12440,7 +12483,7 @@
       ]
     },
     {
-      "digest": "sha256:00aa17e674c1ba2f54f2e9c047a501adb1ccb56791a34acba5239b9f3ad8b6c8",
+      "digest": "sha256:b246a6b3efbf863866daf0ac36f81c7e5f2f6f545e4a80ed4657640948da2ff2",
       "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
       "state": "present",
       "uses": [
@@ -12464,7 +12507,7 @@
       ]
     },
     {
-      "digest": "sha256:a488d58a763c859a512b765b00e6b831dfd7f2c2b11029809e39aab1c5a4af1f",
+      "digest": "sha256:0efabd64bd3c02f72856387130d89dce693f6e032fae714e96a21e524d795eb7",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml",
       "state": "present",
       "uses": [
@@ -12488,7 +12531,7 @@
       ]
     },
     {
-      "digest": "sha256:2b6e5f18d1a3573b47e8b0d165409d4194f3387bfd11b2342ebfc164d758c459",
+      "digest": "sha256:5a43926d942b06b21cd94cd021c5e8f58bea6d2617bc785b119d518d7011e75a",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml",
       "state": "present",
       "uses": [
@@ -12512,7 +12555,7 @@
       ]
     },
     {
-      "digest": "sha256:9d3233afc99262a1b354100b019158b619f3fe8f94c9bec0ea962654d468e2d2",
+      "digest": "sha256:89a1a530521d565c039ddcb620e3aa60b7fa198664a921df07f70b787147420e",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
       "state": "present",
       "uses": [
@@ -12536,7 +12579,7 @@
       ]
     },
     {
-      "digest": "sha256:a9c7917400721fc8bb133d45a96c1de2f78fa602ad5179a1bd9cd37786d2bc67",
+      "digest": "sha256:05ad43a229cc871364ec3b6848e5303618bab74857c90e647b76d901d24a736c",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-enum-representation.toml",
       "state": "present",
       "uses": [
@@ -12548,7 +12591,7 @@
       ]
     },
     {
-      "digest": "sha256:99c14c964e9298cfc826c577ffd21e32634c32c32ad473fa844f5cf015c4b01a",
+      "digest": "sha256:9aa68cafc425b6504824bad3b7241bfd052becf09781af4b4795211aff292402",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml",
       "state": "present",
       "uses": [
@@ -12560,7 +12603,7 @@
       ]
     },
     {
-      "digest": "sha256:395a373eef0b7d60604dc47fc961d4d406e4349487704b18309ce6efae56e36e",
+      "digest": "sha256:2b6b908b972a14ec456438f20d49b22b5403cc25b644079ebe812229e49c888e",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
       "state": "present",
       "uses": [
@@ -12572,7 +12615,7 @@
       ]
     },
     {
-      "digest": "sha256:3bb3dbec024f2c1d283699eb7ec939347bd1f9c4e61d2d927a4b41baee3a377d",
+      "digest": "sha256:eb4280d4c4ee2a51fee40ed16a30744b6a6d01255796c84d3739e941700e76f1",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml",
       "state": "present",
       "uses": [
@@ -12596,7 +12639,7 @@
       ]
     },
     {
-      "digest": "sha256:9d17a0b077f63f69b77a82690941a055455387e85e6391ac84c957640776b9f9",
+      "digest": "sha256:2db8b5e60cd66b822ea1d0237815fb774a39c1bceb06ca3c5b6f845cb4681488",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-runtime.toml",
       "state": "present",
       "uses": [
@@ -12632,7 +12675,7 @@
       ]
     },
     {
-      "digest": "sha256:5dc253781fc694f84531b82a2810f839a818d14fe95a4be8e4c9c9ebb5b02edb",
+      "digest": "sha256:e92113a34e8423d1fcd37edc1d73343eb411b70e0650b3a8051b674abf737dc3",
       "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
       "state": "present",
       "uses": [
@@ -12668,7 +12711,7 @@
       ]
     },
     {
-      "digest": "sha256:f9f23a5d2e3c800b1fc06951ab1ad5512c3c0860bb3e05340cd4db0e392109be",
+      "digest": "sha256:236d8699fc6389ac9070b8f679548da6c8d4a53967de536ab511e4021d094bde",
       "path": "evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml",
       "state": "present",
       "uses": [
@@ -12704,7 +12747,7 @@
       ]
     },
     {
-      "digest": "sha256:9715d516fed2c6359de2ed7bd1b9f510c11cf2520c7a02693c7c50d603f4c956",
+      "digest": "sha256:b5c2261f20bc59be8b8c42518998fefed92bab7528734394596d246b91814b8a",
       "path": "evaluation/standards-effectiveness/suites/rust-dependency-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -12728,7 +12771,7 @@
       ]
     },
     {
-      "digest": "sha256:c1fa35a46f1b31798fa73d0b94711aec730ef339ca0ffd848c2b7feb4dd7257a",
+      "digest": "sha256:397750abd5f5391b7d7004bce06f98779f936f77cf38dd8c86c622ecd69cf4f9",
       "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
       "state": "present",
       "uses": [
@@ -12740,7 +12783,7 @@
       ]
     },
     {
-      "digest": "sha256:efb8415398261f8651d10a054b767cf38c27d6526784951bf1d206ba43c87c05",
+      "digest": "sha256:3efb3fa0ba1902cdc1d547b56661f926dd2f545f352ff844580189a331ef6634",
       "path": "evaluation/standards-effectiveness/suites/rust-filesystem-authority.toml",
       "state": "present",
       "uses": [
@@ -12764,7 +12807,7 @@
       ]
     },
     {
-      "digest": "sha256:048ef600b2f5cf921f2d295b14863f3192872816ad913c5fe79c4034510e3e99",
+      "digest": "sha256:c668af507eb63b0a944135c648d4d7378b105f73726ad5521c0ee5eb5762d4ef",
       "path": "evaluation/standards-effectiveness/suites/rust-interop-memory.toml",
       "state": "present",
       "uses": [
@@ -12776,7 +12819,7 @@
       ]
     },
     {
-      "digest": "sha256:a3529078c9b10ab805384aaa5da5f31c218b07457856701648f4d0a6377e5280",
+      "digest": "sha256:38ed67490e71368a9278442a6d3a5ec7b8beced7516354c08f6b0b090171de32",
       "path": "evaluation/standards-effectiveness/suites/rust-listener-lifecycle.toml",
       "state": "present",
       "uses": [
@@ -12800,7 +12843,7 @@
       ]
     },
     {
-      "digest": "sha256:19167df89bf3fa25a51c26adc39b0f9f7826445f114430d47299af57d309877c",
+      "digest": "sha256:42769c3e6a1c984d6041e7c58549578f9ea6d26a121c7e39c91678ff3dbe2124",
       "path": "evaluation/standards-effectiveness/suites/rust-profile-authority-closure.toml",
       "state": "present",
       "uses": [
@@ -12836,7 +12879,7 @@
       ]
     },
     {
-      "digest": "sha256:27428f673c317266ce3c73b2ac7ee1517c95fd4eb9a1051dee5401b66e466ba6",
+      "digest": "sha256:372fe5b2bdbf56cabc688e345a43dad113f94d28e01023dec2dcd74666423628",
       "path": "evaluation/standards-effectiveness/suites/rust-release-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -12896,7 +12939,7 @@
       ]
     },
     {
-      "digest": "sha256:36b748bcd80b6e7dc61f4b13f9b5d70ded1dba76359056e32412ed7a584b9580",
+      "digest": "sha256:f7eecdc03a02dcb6a6bee4b898e1f7ba6bc57192bbbf1aa71bebb84d7e258a1c",
       "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
       "state": "present",
       "uses": [
@@ -13016,7 +13059,7 @@
       ]
     },
     {
-      "digest": "sha256:1392fafae0bbe595a8e1770a79a4ab364dfe4d3e7f151552625baab31bdd23b6",
+      "digest": "sha256:157220d9e93bfa1a51be0f207abad722fed07f9a3bb60c801b1bd65a278980de",
       "path": "evaluation/standards-effectiveness/suites/rust-tooling-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -13064,7 +13107,7 @@
       ]
     },
     {
-      "digest": "sha256:795a8a74afd36941c6aa0901b1db4f4c46a23c455f2ac33b72e58af80350bacd",
+      "digest": "sha256:5ff2df851c8978be5783bf088310e893f1a9c4ed487798ac32995286999c13d7",
       "path": "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml",
       "state": "present",
       "uses": [
@@ -13076,7 +13119,7 @@
       ]
     },
     {
-      "digest": "sha256:7b2d221d0b8af54862d35d2574dbaa3368593a81d10540e7a7bb62ecc13bf9e2",
+      "digest": "sha256:c303c9353a6a3b8777362413154a62337a7e58459e9b171dd15443255c4e96cd",
       "path": "evaluation/standards-effectiveness/suites/rust-wire-representation.toml",
       "state": "present",
       "uses": [
@@ -13088,7 +13131,7 @@
       ]
     },
     {
-      "digest": "sha256:ccb4f136d50d69745b7ae7c7b150aa135209f90d7b4046e6479a6c24731bfe0d",
+      "digest": "sha256:d2a82fe5c0ad689e7f7c39b61b1d6aa85c967c2f22ecdfb6a99f8201e48fe9de",
       "path": "evaluation/standards-effectiveness/suites/s1-routing.toml",
       "state": "present",
       "uses": [
@@ -13134,7 +13177,7 @@
       ]
     },
     {
-      "digest": "sha256:8ce2ea11077419cf36796f3e8ecd2b622a59bd4966cb651dda5686b46de9c1e4",
+      "digest": "sha256:643f750077f0bdec726a0a732a6d9db06a846b99ac1c69b756693fd0c6bcfe95",
       "path": "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml",
       "state": "present",
       "uses": [
@@ -13290,7 +13333,7 @@
       ]
     },
     {
-      "digest": "sha256:1a9c8f04a673712da1b5b17d657eb87beeed33499a8804c690b9488ad8afb3b6",
+      "digest": "sha256:80cbe08df800fd3d15bd90c3d903292bb62c53e7c45a2c929fd0c51eca127f38",
       "path": "evaluation/standards-effectiveness/suites/testing-persisted-contract-artifacts.toml",
       "state": "present",
       "uses": [
@@ -13374,7 +13417,7 @@
       ]
     },
     {
-      "digest": "sha256:c6a253bf2a2666204622bbba1cb138046ecd2c7be0fca2fa64220b21e86cd579",
+      "digest": "sha256:3a81f69ca74df95c54f9b7171ad1497a9efe8082e397ecad57ea02b0d3675816",
       "path": "evaluation/standards-effectiveness/suites/tooling-editor-configuration.toml",
       "state": "present",
       "uses": [
@@ -13434,7 +13477,7 @@
       ]
     },
     {
-      "digest": "sha256:4b27163ff621c61db227d46e5fa3888a07136c720d020a2db9c6f901f042b56c",
+      "digest": "sha256:cd33fa6bf1d9046f1397887f3a14610e9c1e2fb0e9eb9b222eaab0ed38b7bd4f",
       "path": "evaluation/standards-effectiveness/suites/typescript-async-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -13458,7 +13501,7 @@
       ]
     },
     {
-      "digest": "sha256:6826d60e74b07171d883abea52ca6dd1d23c4cd2e644807df7c48f436d85967c",
+      "digest": "sha256:736f325ccd7e5f896c4e27761586a2eb730f72193bcd50633b86861535ecf596",
       "path": "evaluation/standards-effectiveness/suites/typescript-static-analysis.toml",
       "state": "present",
       "uses": [
@@ -13470,7 +13513,7 @@
       ]
     },
     {
-      "digest": "sha256:b2a0fb714af33c4455d29ea61910209d4d6174d1915d8608d08d68b6a0495f85",
+      "digest": "sha256:8e178df7d34b06d10c668d4e83691ea8eba265b2e8a304a6c02f5bad95619b35",
       "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
       "state": "present",
       "uses": [
@@ -14487,7 +14530,7 @@
       ]
     },
     {
-      "digest": "sha256:e28be5197c4270f15585a5bba60cc02a2b1292ecbd8e9bb1b54b48760a0cff33",
+      "digest": "sha256:32ab0d4e9f24dfcd48661f8fd3ea7547c0b6f7fc995b6c8e1d3bc0938606797b",
       "path": "profiles/applications/frontend.md",
       "state": "present",
       "uses": [
@@ -14793,7 +14836,7 @@
       ]
     },
     {
-      "digest": "sha256:33b87946765bdf7e232d8351349a449298d39013635c1dd2ab7af7f129b1265b",
+      "digest": "sha256:f60172051d187b1d3107706eb64fc94cff622d5e6840ec868686e5eb62b45c69",
       "path": "profiles/boundaries/generated-contract.md",
       "state": "present",
       "uses": [
@@ -15037,7 +15080,7 @@
       ]
     },
     {
-      "digest": "sha256:04f5d3df6834c1f3763c77ff7d541d8617a7e67f911f2e8b22a669bdc9be5de2",
+      "digest": "sha256:2f6d0391e6a01fecf259386f314daccdcd0ed5c0b58ac0fadc6816b8171347e4",
       "path": "profiles/boundaries/ipc.md",
       "state": "present",
       "uses": [
@@ -15311,7 +15354,7 @@
       ]
     },
     {
-      "digest": "sha256:a3f033f67d5dd6603333e6359cf3b1afdae91cade3e585d640179adf9e328dc9",
+      "digest": "sha256:9ec9473c865a4293433d0f22d0b82b6089fce9a72b47c7f735612a20faf1734b",
       "path": "profiles/boundaries/persistence.md",
       "state": "present",
       "uses": [
@@ -15829,7 +15872,7 @@
       ]
     },
     {
-      "digest": "sha256:98bf92c10d624c2ce864f0ab9b4d53418e59866a7fbd25f100d1a88ea1774aaa",
+      "digest": "sha256:ac03ecf806d8d2c64bc45f94642b9ea9256c37d33c94b754ec61e8cda2cb966b",
       "path": "profiles/languages/rust/api.md",
       "state": "present",
       "uses": [
@@ -16103,6 +16146,123 @@
       ]
     },
     {
+      "digest": "sha256:3c0e6d192dd9789b0919c18afd943c6073a4b1150b08cd5a42dca6e32c7a3476",
+      "path": "profiles/languages/rust/binding-lifecycle.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "profile-policy-detail-1",
+          "role": "content",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "profile-policy-detail-1",
+          "role": "content",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "profile-policy-detail-1",
+          "role": "content",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "profile-policy-detail-1",
+          "role": "content",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        }
+      ]
+    },
+    {
       "digest": "sha256:1b30a6385f91af4d3b4a3e33eb72fb9b067339f5237f44297817fa3bec55998d",
       "path": "profiles/languages/rust/cross-platform.md",
       "state": "present",
@@ -16312,6 +16472,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
@@ -16335,6 +16500,16 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
         },
         {
           "check": "metadata-closure",
@@ -16374,10 +16549,15 @@
       ]
     },
     {
-      "digest": "sha256:57718361432f13d005c0e35476b47554ec553b2af66450c2520e658ab11c0489",
+      "digest": "sha256:91c26196e5a976dcf20759cc6d787605dc327a0704d08929cce05b71acadf1b9",
       "path": "profiles/languages/rust/language-bindings.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
         {
           "check": "routing-closure",
           "role": "canonical-module",
@@ -16417,6 +16597,16 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
         },
         {
           "check": "rust-profile",
@@ -16678,10 +16868,15 @@
       ]
     },
     {
-      "digest": "sha256:34cbcf8baa4ceaafa273a4c4043e6797fb5bdd083647df23905e807577559a30",
+      "digest": "sha256:b2dd9fbdce8496cad999c6963f13992e0384d6a4bd2d4bd1e971153e07f6257e",
       "path": "profiles/languages/rust/security.md",
       "state": "present",
       "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
         {
           "check": "routing-closure",
           "role": "canonical-module",
@@ -16711,6 +16906,16 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
         },
         {
           "check": "metadata-closure",
@@ -16815,7 +17020,7 @@
       ]
     },
     {
-      "digest": "sha256:bc49b4d5ba2cb76fd7f24b0dbe9627987d2551ce0db5307d8b4ac301afc6cca5",
+      "digest": "sha256:2b28ef71141b860f0497f8379701027e4e1aaa9aabb40720e875725933d33652",
       "path": "profiles/languages/rust/tooling.md",
       "state": "present",
       "uses": [
@@ -16952,6 +17157,11 @@
       "state": "present",
       "uses": [
         {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
@@ -16970,6 +17180,16 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
         },
         {
           "check": "rust-profile-links",
@@ -17009,7 +17229,7 @@
       ]
     },
     {
-      "digest": "sha256:69a311aed0fbfaf32e9051b9cea1de7ced5ab26d682a002509559a889504760b",
+      "digest": "sha256:b40eef63e3fe3fd066827cf3d1ac86a5402e8bdf27c54dea7ff1912a4cfd496e",
       "path": "profiles/languages/typescript.md",
       "state": "present",
       "uses": [
@@ -18197,7 +18417,7 @@
       ]
     },
     {
-      "digest": "sha256:f94b8f742b24ee80918f235965f7afc29fe811b0d4ca261a6650b43287bae7eb",
+      "digest": "sha256:cf85a48e0e2e346ef6445e89d6a14adcf17b55dc8818661e13a1cca44f3c1d50",
       "path": "reference/recipes/rust-tooling.md",
       "state": "present",
       "uses": [
@@ -18294,7 +18514,7 @@
       ]
     },
     {
-      "digest": "sha256:7c555737971608b7a498bb4bc9c6af8dd8c7c4a139d73837f10ddc00c7ab6c0c",
+      "digest": "sha256:2e5e78f40c0c4863a6a9f473044b952d516df463027cd6a7c0cf0e944dd6ece1",
       "path": "reference/recipes/tooling.md",
       "state": "present",
       "uses": [
@@ -19155,7 +19375,7 @@
       ]
     },
     {
-      "digest": "sha256:5f04bf454d9b079855031114a0542985107fcb457e893897aeeff37c2f704921",
+      "digest": "sha256:628568c02b5f6271277320815434e0f2ff397d61444244f1022be2fd00a6471d",
       "path": "tools/standards_analysis/tests/test_routing.py",
       "state": "present",
       "uses": [
@@ -20441,7 +20661,7 @@
       ]
     },
     {
-      "digest": "sha256:7644f46f89796980698c5c06e397bd7f8adbbea720e453fd3dfef6e2dd62a4ca",
+      "digest": "sha256:9fb28637faadcc55f8842efaa367c9488c5470f076de265bbdf0e08446b56521",
       "path": "tools/standards_snapshots/standards_snapshots/store.py",
       "state": "present",
       "uses": [
@@ -20463,7 +20683,7 @@
       ]
     },
     {
-      "digest": "sha256:ea1de9c24115379fd616490d9d705c6aa570495c668071e23aeb1b6a93501ef3",
+      "digest": "sha256:1e584da33a550a390a1a255171f1c8a2a3cca3a151b389b66a8b78f580d0634b",
       "path": "tools/standards_snapshots/tests/test_module.py",
       "state": "present",
       "uses": [
@@ -21576,7 +21796,7 @@
       ]
     },
     {
-      "digest": "sha256:fb5b416758e9a325e6557f332c83a71a684731e1f3dc510609b9210d62b9f94f",
+      "digest": "sha256:d35471532ba216056a4a88474fac15f2aada1de866ada136efb31ce26dc06036",
       "path": "topics/architecture.md",
       "state": "present",
       "uses": [
@@ -21679,6 +21899,415 @@
           "check": "requires-closure",
           "role": "canonical-module",
           "suite": "standards-recovery-routing"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:678edd13bdaf6db9604c8dd4e98cc68e358d6e39eba8089d4f0ab69b52a085c5",
+      "path": "topics/architecture/replay.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "architecture-policy-detail-1",
+          "role": "content",
+          "suite": "contract-authority-scope"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:659f47b7d53abc05627cb3672aab33265062f92001b4d212d4c52ffd8c2de8e0",
+      "path": "topics/code-design.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "core-code-branch-terminology-detail-1",
+          "role": "content",
+          "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "owner-detail-1",
+          "role": "content",
+          "suite": "core-code-discipline"
+        },
+        {
+          "check": "owner-detail-1",
+          "role": "content",
+          "suite": "core-simplicity"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-policy-consolidation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-reference"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-blocking-mutex"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-filesystem-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-listener-lifecycle"
+        },
+        {
+          "check": "rust-profile-metadata",
+          "role": "metadata",
+          "suite": "rust-profile-authority-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-tooling-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-unsafe-contracts"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -21875,7 +22504,7 @@
       ]
     },
     {
-      "digest": "sha256:a2553b9194802c19c5478b35c31d4a83165105235c088231e345e01ca90fbd3f",
+      "digest": "sha256:3190700189e589d7baec3551ff6330ca7afd64d8f425566cb621db9dd1399532",
       "path": "topics/contracts.md",
       "state": "present",
       "uses": [
@@ -21883,16 +22512,6 @@
           "check": "metadata",
           "role": "metadata",
           "suite": "architecture-pattern-reference-owner"
-        },
-        {
-          "check": "canonical-contract",
-          "role": "content",
-          "suite": "binding-contract-evolution"
-        },
-        {
-          "check": "canonical-contract",
-          "role": "content",
-          "suite": "binding-generation-authority"
         },
         {
           "check": "owner-policy",
@@ -21930,11 +22549,6 @@
           "suite": "contract-invariants"
         },
         {
-          "check": "contract-policy",
-          "role": "content",
-          "suite": "contract-ownership"
-        },
-        {
           "check": "canonical-owner",
           "role": "content",
           "suite": "contract-planning-boundary"
@@ -21943,11 +22557,6 @@
           "check": "owner-policy",
           "role": "content",
           "suite": "contract-semantic-preservation"
-        },
-        {
-          "check": "canonical-contract",
-          "role": "content",
-          "suite": "cross-language-contract"
         },
         {
           "check": "metadata-closure",
@@ -22252,6 +22861,767 @@
       ]
     },
     {
+      "digest": "sha256:9789fccbc295188ec264a50d0e4183021e6bc136807d49eb7417b1159f0e86b8",
+      "path": "topics/contracts/evolution.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "canonical-contract-detail-1",
+          "role": "content",
+          "suite": "binding-contract-evolution"
+        },
+        {
+          "check": "canonical-contract-detail-1",
+          "role": "content",
+          "suite": "binding-generation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "contract-policy-detail-1",
+          "role": "content",
+          "suite": "contract-ownership"
+        },
+        {
+          "check": "canonical-owner-detail-1",
+          "role": "content",
+          "suite": "contract-planning-boundary"
+        },
+        {
+          "check": "canonical-contract",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "canonical-policy-detail-1",
+          "role": "content",
+          "suite": "testing-persisted-contract-artifacts"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a49bb7b346c3fcacc39cc4402d8338b211df98299185aa0b6a5549d52e520194",
+      "path": "topics/contracts/protocols.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "canonical-policy-detail-1",
+          "role": "content",
+          "suite": "contract-http-adapter-proof"
+        },
+        {
+          "check": "contract-policy-detail-1",
+          "role": "content",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:428bd940c6d843d8b2a0fe53ef8f473c753863b31c94ada006997c72eb2dfc72",
+      "path": "topics/contracts/schemas.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "contracts-policy-detail-1",
+          "role": "content",
+          "suite": "contract-authority-scope"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "contracts-policy-detail-1",
+          "role": "content",
+          "suite": "generated-contract-semantic-conformance"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        }
+      ]
+    },
+    {
       "digest": "sha256:c987d41ddd217575811a520df61f5dd87ae660c55cfa3ce39ba0bcfaced1281a",
       "path": "topics/cross-platform.md",
       "state": "present",
@@ -22364,7 +23734,7 @@
       ]
     },
     {
-      "digest": "sha256:530cc8b314a186b7046396fc7b3e7728b32f1af89fa8cac8d18a0b58dedfb6c1",
+      "digest": "sha256:b9698a1985aec38491f2d66d141978952fa691bef99ee7222f67e992d552b07f",
       "path": "topics/dependencies.md",
       "state": "present",
       "uses": [
@@ -22660,7 +24030,7 @@
       ]
     },
     {
-      "digest": "sha256:6492b56d06a1358852b02d7741e9bef68815778f3f58da1461030dda1969868b",
+      "digest": "sha256:ff1ce8f1e7592c14bbb8f84fd2d6fef2434e861c29ddf517fe5f9ba9d983ae40",
       "path": "topics/performance.md",
       "state": "present",
       "uses": [
@@ -22752,7 +24122,7 @@
       ]
     },
     {
-      "digest": "sha256:8f0706f63de8c8aa0d8e242cba80110def802a3b445c8c5d9e604f4e3fe9d868",
+      "digest": "sha256:573d59e334455d8f35c4e9213ce7f68a6edb23c36a36abdf72104af3f27685e8",
       "path": "topics/resilience.md",
       "state": "present",
       "uses": [
@@ -22854,7 +24224,7 @@
       ]
     },
     {
-      "digest": "sha256:e55062decb2cdf41d1d7b5f72931e51bbbb3a4732eb3135a4b141797aa566b91",
+      "digest": "sha256:6623902d266d7b831ebca661721daea4e238a5bf5b3ab5a49ec9746e3a957f05",
       "path": "topics/security.md",
       "state": "present",
       "uses": [
@@ -23763,7 +25133,7 @@
       ]
     },
     {
-      "digest": "sha256:ad14b32992d05009ba5398b52780aa76514c30e08c935400a7e7e8a3767a523f",
+      "digest": "sha256:de8ee6dd4a4f05f7146e21033beea7a40d1ddd036a3e8eb55279fa7ca6ebb37d",
       "path": "workflows/release.md",
       "state": "present",
       "uses": [
@@ -24005,7 +25375,149 @@
       ]
     },
     {
-      "digest": "sha256:e98262c3cac666e07f9168ebd4f96b8de9f07cc8f6b62b0e603410ff5c6b0bf1",
+      "digest": "sha256:580416b544b345e82cd0b422dd65be4a51b932fc55ee69c9260027f7d6310424",
+      "path": "workflows/release/operations.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "workflow-policy-detail-1",
+          "role": "content",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "workflow-policy-detail-1",
+          "role": "content",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "workflow-policy-detail-1",
+          "role": "content",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "workflow-policy-detail-1",
+          "role": "content",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c04548baad9eb10a83b7d9359532e4e2defd9968cc7058ed59314cb6df4abf57",
       "path": "workflows/tooling.md",
       "state": "present",
       "uses": [
@@ -24137,7 +25649,7 @@
       ]
     },
     {
-      "digest": "sha256:fcb1448fda020793189408d53d784587cd488c5ef7cc264ee71a2dceb5a52a5c",
+      "digest": "sha256:06ddcd7f0f80c4459f117d242a3f664cdb6e11d7e9649e7ba2f955e5a4cf684c",
       "path": "workflows/verification.md",
       "state": "present",
       "uses": [
@@ -24617,6 +26129,957 @@
           "suite": "verification-quality-gates"
         }
       ]
+    },
+    {
+      "digest": "sha256:042d4fb92f880a07d1f025ace5c02aa211fadf921dd4a98701755f2e2edcbe8a",
+      "path": "workflows/verification/gui.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "canonical-owner-detail-1",
+          "role": "content",
+          "suite": "gui-smoke-evidence"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-blocking-mutex"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-filesystem-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-listener-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-tooling-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-unsafe-contracts"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f5cfd7d06a894f8f63ed14ebefafb6c861015bcd9746862e23d3918d1397f191",
+      "path": "workflows/verification/oracles.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "verification-policy-detail-1",
+          "role": "content",
+          "suite": "evidence-oracle-boundaries"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-blocking-mutex"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-filesystem-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-listener-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-tooling-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-unsafe-contracts"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a27afd0d5e11f8e4bd5f3319b1a2da55593ac59a9f4b8eb82e7e8641c32f9a7d",
+      "path": "workflows/verification/platforms.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "contract-http-outcome-projection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "documentation-changelog-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "frontend-rendering-synchronization"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-boundary-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "persistence-owner-contract"
+        },
+        {
+          "check": "verification-owner-detail-1",
+          "role": "content",
+          "suite": "platform-evidence-coverage"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-artifact-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-maintenance-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-pipeline-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-publication-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-recovery-policy"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-reference-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "release-workflow-foundation"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "metadata",
+          "role": "metadata",
+          "suite": "rust-api-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-blocking-mutex"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-cancellation-observability"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-candidate-inspection"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-dependency-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-filesystem-authority"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-interop-memory"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-listener-lifecycle"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-release-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-tooling-owner-contract"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-unsafe-contracts"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
+        },
+        {
+          "check": "metadata-closure",
+          "role": "metadata",
+          "suite": "validation-proof-lifetime"
+        }
+      ]
     }
   ],
   "registry": {
@@ -24624,7 +27087,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:9da22b7e2ac54d98c1549170036cf3e0cadd2a0b6337132f49095a67490d9baa",
+    "digest": "sha256:cd152e3703935a82cb252e4aadec8143e422bd5227eecf352db5a45dc539c6ea",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24759,7 +27222,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:c6a253bf2a2666204622bbba1cb138046ecd2c7be0fca2fa64220b21e86cd579",
+      "digest": "sha256:3a81f69ca74df95c54f9b7171ad1497a9efe8082e397ecad57ea02b0d3675816",
       "id": "tooling-editor-configuration",
       "path": "evaluation/standards-effectiveness/suites/tooling-editor-configuration.toml",
       "requires": []
@@ -24789,7 +27252,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:6826d60e74b07171d883abea52ca6dd1d23c4cd2e644807df7c48f436d85967c",
+      "digest": "sha256:736f325ccd7e5f896c4e27761586a2eb730f72193bcd50633b86861535ecf596",
       "id": "typescript-static-analysis",
       "path": "evaluation/standards-effectiveness/suites/typescript-static-analysis.toml",
       "requires": []
@@ -24801,7 +27264,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:7daf8b06c547c3e6842e3897d8be8e822bca2f177f9f823d42d846c0b53c003d",
+      "digest": "sha256:cc8645f9ecd3dc1fa914a3e85b01b0168d7e9b3c7aa52e736f02f8ac7ea3a56d",
       "id": "acceptance-claims",
       "path": "evaluation/standards-effectiveness/suites/acceptance-claims.toml",
       "requires": []
@@ -24885,7 +27348,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:1745460b8fa21fb2d43e8e40159c9c0efc6594ab5483637973e6e81836cad0da",
+      "digest": "sha256:9b483761a81300fde84a2f1fa247ee07cccd6ad3a5adf9f3b4aca4237ba4c1ed",
       "id": "platform-evidence-coverage",
       "path": "evaluation/standards-effectiveness/suites/platform-evidence-coverage.toml",
       "requires": []
@@ -25061,7 +27524,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:1a9c8f04a673712da1b5b17d657eb87beeed33499a8804c690b9488ad8afb3b6",
+      "digest": "sha256:80cbe08df800fd3d15bd90c3d903292bb62c53e7c45a2c929fd0c51eca127f38",
       "id": "testing-persisted-contract-artifacts",
       "path": "evaluation/standards-effectiveness/suites/testing-persisted-contract-artifacts.toml",
       "requires": []
@@ -25085,13 +27548,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:3c5791b847c3dd88c411a0984c22e30ceced7a1f418f2dd2315eeca983bb99c7",
+      "digest": "sha256:b0d503e0e57904a7c6f6838b5844eceda1421d2976764f0c775391d7849a8ae4",
       "id": "core-code-discipline",
       "path": "evaluation/standards-effectiveness/suites/core-code-discipline.toml",
       "requires": []
     },
     {
-      "digest": "sha256:39d4198a226e1cd3ee2d70eea4113860f48388b130776048ff9d56f722d54dfa",
+      "digest": "sha256:c35021f1b2064c15034e1fd19d3cdb5886c560a4327b25fff73bbfae34d1fb7b",
       "id": "core-simplicity",
       "path": "evaluation/standards-effectiveness/suites/core-simplicity.toml",
       "requires": []
@@ -25109,7 +27572,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:c4b3cd5cd54ca6c78373009a411a50d82adbe73ad8119279d46b0db7e88182b7",
+      "digest": "sha256:8a564dc408d50d7a800643b2081afd1f8107005f1a914d7c3e9b98d32e180bc4",
       "id": "contract-planning-boundary",
       "path": "evaluation/standards-effectiveness/suites/contract-planning-boundary.toml",
       "requires": []
@@ -25219,7 +27682,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:560be027136a654786b9defd4a4a496976c7bfe24909228e20a42ffcf31a2dd6",
+      "digest": "sha256:398a62829da3004922f954be5b60b6b71c9b9f5ebb530cdf69570c990b15e05c",
       "id": "contract-authority-scope",
       "path": "evaluation/standards-effectiveness/suites/contract-authority-scope.toml",
       "requires": []
@@ -25261,7 +27724,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:a72aad4f8bab50a49c65d335daa3d1e53829a0bade493b543bf08fb5e2259434",
+      "digest": "sha256:31dc0f70b0587b8a6ea2590613db7872994b8ddc4d0f36ae65dc520277467cfb",
       "id": "gui-smoke-evidence",
       "path": "evaluation/standards-effectiveness/suites/gui-smoke-evidence.toml",
       "requires": [
@@ -25275,13 +27738,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:c55ce6fa90a9e64d573c00031d59083357a55f5dd70e9fb3f515ce0c4eebab0c",
+      "digest": "sha256:cf22cae085916be05e028e081edd53125232ba1639235dc235f1ad0add82dde9",
       "id": "release-reference-closure",
       "path": "evaluation/standards-effectiveness/suites/release-reference-closure.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ff6d5dbb0ade3c8f9ed6f025b33d8d3a3abb0d82c9915ca7ded6efff1785cddf",
+      "digest": "sha256:8f6b1e414e51f1c06cba513d485483c43f4c76f084d728c9a3a3e3645d5d77de",
       "id": "release-recovery-policy",
       "path": "evaluation/standards-effectiveness/suites/release-recovery-policy.toml",
       "requires": [
@@ -25289,7 +27752,7 @@
       ]
     },
     {
-      "digest": "sha256:4a18c02b150c6ca20eb792ce56a5281a16c97da5502f61c24075afba15a7eb82",
+      "digest": "sha256:2f3f2a1766c81cc5f363606fedaae16ecf1cf8d4f8f59fcb2032e0a7fdda056f",
       "id": "release-maintenance-policy",
       "path": "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml",
       "requires": [
@@ -25297,7 +27760,7 @@
       ]
     },
     {
-      "digest": "sha256:7db3df6058695449ec9fe95f8872a3b047cc40dfb913b7f8a8d51f54123a4378",
+      "digest": "sha256:851944535984beaa5301eefb838bbbb96769e553e9fd388197aeab2ca685ad03",
       "id": "release-pipeline-policy",
       "path": "evaluation/standards-effectiveness/suites/release-pipeline-policy.toml",
       "requires": [
@@ -25305,7 +27768,7 @@
       ]
     },
     {
-      "digest": "sha256:de88f92097808e73a47545ef392ac00bd0eef42b69adf6c1135a1c3a0c5959c7",
+      "digest": "sha256:47b30fe2e29a0f01185adc4f59a95ceb97e3db40cd6a9433d995b1b8416f85e7",
       "id": "release-artifact-policy",
       "path": "evaluation/standards-effectiveness/suites/release-artifact-policy.toml",
       "requires": [
@@ -25313,7 +27776,7 @@
       ]
     },
     {
-      "digest": "sha256:b0e71cf6aca2646018544dc113cd3820ef19e661b1e628a6b481b7e405a8989d",
+      "digest": "sha256:8389a5b7522047912be78375af664318f56f32c6e2b7b619ea8e2349be42d691",
       "id": "release-publication-policy",
       "path": "evaluation/standards-effectiveness/suites/release-publication-policy.toml",
       "requires": [
@@ -25321,19 +27784,19 @@
       ]
     },
     {
-      "digest": "sha256:806ecf0801ff9ef19291fcbb101314261de9657105490eb86dc6e4e46db35f65",
+      "digest": "sha256:2e4ddfd449b848f0deb010089a66160d9d877d9f1e32e857b1f03cc8e316de76",
       "id": "documentation-changelog-closure",
       "path": "evaluation/standards-effectiveness/suites/documentation-changelog-closure.toml",
       "requires": []
     },
     {
-      "digest": "sha256:68f61d4ea613eee4853a26f27a8f7b1dd99606c4290687ca53377b62f69dc336",
+      "digest": "sha256:38c72785c35ac1cbc5bc6f2a7e1378b2160cffb35ed0d444437a39c6a1107b27",
       "id": "documentation-reference",
       "path": "evaluation/standards-effectiveness/suites/documentation-reference.toml",
       "requires": []
     },
     {
-      "digest": "sha256:2b4406531e5143304c4b1583d59790d986df9c8b5f8f3263266dafb41f516a01",
+      "digest": "sha256:78c4b0f1810a593efa72f38bacf16dff01ba76d58213ce848edfe3347cd0031a",
       "id": "release-workflow-foundation",
       "path": "evaluation/standards-effectiveness/suites/release-workflow-foundation.toml",
       "requires": []
@@ -25351,67 +27814,67 @@
       "requires": []
     },
     {
-      "digest": "sha256:9715d516fed2c6359de2ed7bd1b9f510c11cf2520c7a02693c7c50d603f4c956",
+      "digest": "sha256:b5c2261f20bc59be8b8c42518998fefed92bab7528734394596d246b91814b8a",
       "id": "rust-dependency-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/rust-dependency-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:27428f673c317266ce3c73b2ac7ee1517c95fd4eb9a1051dee5401b66e466ba6",
+      "digest": "sha256:372fe5b2bdbf56cabc688e345a43dad113f94d28e01023dec2dcd74666423628",
       "id": "rust-release-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/rust-release-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1392fafae0bbe595a8e1770a79a4ab364dfe4d3e7f151552625baab31bdd23b6",
+      "digest": "sha256:157220d9e93bfa1a51be0f207abad722fed07f9a3bb60c801b1bd65a278980de",
       "id": "rust-tooling-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/rust-tooling-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:f9f23a5d2e3c800b1fc06951ab1ad5512c3c0860bb3e05340cd4db0e392109be",
+      "digest": "sha256:236d8699fc6389ac9070b8f679548da6c8d4a53967de536ab511e4021d094bde",
       "id": "rust-dependency-candidate-inspection",
       "path": "evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml",
       "requires": []
     },
     {
-      "digest": "sha256:dcef9db6348f275c1229b1f7e94962a6ddfb5d5a850e12546b4e93089da72b60",
+      "digest": "sha256:88621d9c4ed570fa58677676d7859bd1ed50aec0d70f64ceff41f20fab7d3cd8",
       "id": "rust-async-blocking-mutex",
       "path": "evaluation/standards-effectiveness/suites/rust-async-blocking-mutex.toml",
       "requires": []
     },
     {
-      "digest": "sha256:aaba9751b1a842c3c3571e2a6d85e596c3b65071baf1bda275ba026fd954c412",
+      "digest": "sha256:944d21c0b76f3fb90b106316fcfe7c6b793028144d0b3607564ee9db74adaf94",
       "id": "rust-async-cancellation-observability",
       "path": "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml",
       "requires": []
     },
     {
-      "digest": "sha256:048ef600b2f5cf921f2d295b14863f3192872816ad913c5fe79c4034510e3e99",
+      "digest": "sha256:c668af507eb63b0a944135c648d4d7378b105f73726ad5521c0ee5eb5762d4ef",
       "id": "rust-interop-memory",
       "path": "evaluation/standards-effectiveness/suites/rust-interop-memory.toml",
       "requires": []
     },
     {
-      "digest": "sha256:d09d842e8236d706d3e344ee73eefbadc2c64bbcfc404b05749950e8cc191f4f",
+      "digest": "sha256:bd9221bc25a6bfdd3ba1f85f7d082ea2d3e8a7342710b621f901be37c58ffa57",
       "id": "contract-http-outcome-projection",
       "path": "evaluation/standards-effectiveness/suites/contract-http-outcome-projection.toml",
       "requires": []
     },
     {
-      "digest": "sha256:515303d53dfdb1f8c93f145e1ffd7a6405b85cd9e0aba1ad01cc3dde2a33dd3c",
+      "digest": "sha256:3aa4acaed8a01f66e9c627cf8d867334a19b5215abbf11bbb717f2327a83b352",
       "id": "persistence-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/persistence-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ccb4f136d50d69745b7ae7c7b150aa135209f90d7b4046e6479a6c24731bfe0d",
+      "digest": "sha256:d2a82fe5c0ad689e7f7c39b61b1d6aa85c967c2f22ecdfb6a99f8201e48fe9de",
       "id": "s1-routing",
       "path": "evaluation/standards-effectiveness/suites/s1-routing.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ca0308961cb826ff2ba840b037f323b9766d434d694a6467b4a269991ffb00fd",
+      "digest": "sha256:3b0cb19392d95f760d7a40b221541d4b480740ce155b4e9477a3f39f49adab07",
       "id": "development-proportionality",
       "path": "evaluation/standards-effectiveness/suites/development-proportionality.toml",
       "requires": []
@@ -25429,7 +27892,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:62a774bd79f8580e89dff8bbcf0854fc6b3b86d395b015064aa26081aa91e45a",
+      "digest": "sha256:1447892b364342a4afd78f8e64ca6ececb2a89f1dbb7004186f06e592f40a720",
       "id": "language-index-closure",
       "path": "evaluation/standards-effectiveness/suites/language-index-closure.toml",
       "requires": []
@@ -25453,7 +27916,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:19167df89bf3fa25a51c26adc39b0f9f7826445f114430d47299af57d309877c",
+      "digest": "sha256:42769c3e6a1c984d6041e7c58549578f9ea6d26a121c7e39c91678ff3dbe2124",
       "id": "rust-profile-authority-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-profile-authority-closure.toml",
       "requires": []
@@ -25531,7 +27994,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:57b8696468309e5a78bf979eb2cade6bf3703f790e87cf5c07cd44ee95a74137",
+      "digest": "sha256:03abcda2285ab8828688003f5c0c9f9b70a53822f1343c993c285b16c56c7662",
       "id": "contract-http-adapter-proof",
       "path": "evaluation/standards-effectiveness/suites/contract-http-adapter-proof.toml",
       "requires": []
@@ -25579,7 +28042,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:99a2e79c67956815fb24aa6dcfb623bdd71de3dd46188b89ee3dce23fa575234",
+      "digest": "sha256:20c06bded29a58d971f381c1d08b32bd5ba16ae5a6eee238b42148e53783cd11",
       "id": "concurrent-plan-integration",
       "path": "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml",
       "requires": [
@@ -25637,7 +28100,7 @@
       ]
     },
     {
-      "digest": "sha256:13749a687702644f532bebdceee86c4f699cb1be4034c34660e4c6135df08fb8",
+      "digest": "sha256:b5e25251c9f6cd2e12e25a5e0fa2c1c90ae06da466b253af52963e33349ce76c",
       "id": "router-legacy-route-closure",
       "path": "evaluation/standards-effectiveness/suites/router-legacy-route-closure.toml",
       "requires": [
@@ -25645,7 +28108,7 @@
       ]
     },
     {
-      "digest": "sha256:ad92bece8308680e71ed2715d053c70a57535f5154b462c16562a723c9fa95e9",
+      "digest": "sha256:7e5d2aa17be90daf391e8ba5269955c5d14b5fe83585603ee40fa91996708f57",
       "id": "commit-consolidation-dispositions",
       "path": "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
       "requires": []
@@ -25671,7 +28134,7 @@
       ]
     },
     {
-      "digest": "sha256:01d337e9921ee386f5d783e5199ffc72f210f3b51627afd9d97b7346c6a4b0e8",
+      "digest": "sha256:e1d7067dc9d67c273546c674f9e697b3fab8d497b897004d2035da3682750c52",
       "id": "rust-api-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/rust-api-owner-contract.toml",
       "requires": []
@@ -25767,7 +28230,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:ec7f6c285c6fc54efd8a26817d0babcb20181642bfc2b9cbfd0e2c53b8b75c8f",
+      "digest": "sha256:a73a731b4444009a9b7f187d4b4e6380789a9fdce3e3592dedb3b4d04c848d21",
       "id": "frontend-rendering-synchronization",
       "path": "evaluation/standards-effectiveness/suites/frontend-rendering-synchronization.toml",
       "requires": []
@@ -25839,7 +28302,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:6915b23b1ad56ef2a4c7f0c381c3f175a81702dd5ba66843baba2b6e4c61d7ba",
+      "digest": "sha256:51b2b64ec7a0eb7a74bafdd7d0885cb9074d435ca22f4c0193e823fd03a52e55",
       "id": "csharp-async-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/csharp-async-owner-contract.toml",
       "requires": []
@@ -25859,13 +28322,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:4b27163ff621c61db227d46e5fa3888a07136c720d020a2db9c6f901f042b56c",
+      "digest": "sha256:cd33fa6bf1d9046f1397887f3a14610e9c1e2fb0e9eb9b222eaab0ed38b7bd4f",
       "id": "typescript-async-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/typescript-async-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:e413eec7cbd7a438746849ec8d7e5db2a04dda0901da2c89f03f9275513e7f8a",
+      "digest": "sha256:19a4902ebe02423586ba382dad8b1d03f099bdbc87920a299c2c3bb239c741c9",
       "id": "godot-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/godot-owner-contract.toml",
       "requires": []
@@ -25913,7 +28376,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:29ade79c966bf0d59cbeaeb3d6ee49e06e697cacd808208105219a4a3f25b878",
+      "digest": "sha256:f0788967cb792f07876199d0b8c40baed0a7f5cc3e11acd883e09bb6310582c5",
       "id": "rust-async-boundary",
       "path": "evaluation/standards-effectiveness/suites/rust-async-boundary.toml",
       "requires": []
@@ -25925,67 +28388,67 @@
       "requires": []
     },
     {
-      "digest": "sha256:aa7d945fb68e729e04b51a9f684ad82466d9c6b2accee012a3bb73114fffea0c",
+      "digest": "sha256:a6ae2c058a4254e372ec99aa881548ef55376ad50fe9a918093163c44691e6f0",
       "id": "launcher-owner-row-14",
       "path": "evaluation/standards-effectiveness/suites/launcher-owner-row-14.toml",
       "requires": []
     },
     {
-      "digest": "sha256:99c14c964e9298cfc826c577ffd21e32634c32c32ad473fa844f5cf015c4b01a",
+      "digest": "sha256:9aa68cafc425b6504824bad3b7241bfd052becf09781af4b4795211aff292402",
       "id": "rust-binding-error-mapping",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml",
       "requires": []
     },
     {
-      "digest": "sha256:795a8a74afd36941c6aa0901b1db4f4c46a23c455f2ac33b72e58af80350bacd",
+      "digest": "sha256:5ff2df851c8978be5783bf088310e893f1a9c4ed487798ac32995286999c13d7",
       "id": "rust-unsafe-contracts",
       "path": "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml",
       "requires": []
     },
     {
-      "digest": "sha256:cc76a5ab4181bb5c78951acdffa35659416bf13e0357e8910269a7f31a974f91",
+      "digest": "sha256:39fc280404ebd573d882572d481eb2101c5f51c32149f3948c2c1e1fc933b0ae",
       "id": "documentation-policy-consolidation",
       "path": "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:0ced798a34560a0d935612b89ef2c0ad57102faed21b8c35c18fd3ae04c784df",
+      "digest": "sha256:b78bc76e7e3e768f114cac16a16258ebafbaf554211fa018c398f33b906bcc31",
       "id": "release-procedure-policy",
       "path": "evaluation/standards-effectiveness/suites/release-procedure-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:9aec9295d05fd647ef45ec56c2f5d5ee5d6c69b34c30c087ef17b9fc8eb7031e",
+      "digest": "sha256:f1f5bd7093fc898de781aeaf75cbb0ff8c97a317fd7bd73898566351e3251adf",
       "id": "language-binding-wire-representation",
       "path": "evaluation/standards-effectiveness/suites/language-binding-wire-representation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:a9c7917400721fc8bb133d45a96c1de2f78fa602ad5179a1bd9cd37786d2bc67",
+      "digest": "sha256:05ad43a229cc871364ec3b6848e5303618bab74857c90e647b76d901d24a736c",
       "id": "rust-binding-enum-representation",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-enum-representation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:7b2d221d0b8af54862d35d2574dbaa3368593a81d10540e7a7bb62ecc13bf9e2",
+      "digest": "sha256:c303c9353a6a3b8777362413154a62337a7e58459e9b171dd15443255c4e96cd",
       "id": "rust-wire-representation",
       "path": "evaluation/standards-effectiveness/suites/rust-wire-representation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:2b6e5f18d1a3573b47e8b0d165409d4194f3387bfd11b2342ebfc164d758c459",
+      "digest": "sha256:5a43926d942b06b21cd94cd021c5e8f58bea6d2617bc785b119d518d7011e75a",
       "id": "rust-binding-callback-task",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml",
       "requires": []
     },
     {
-      "digest": "sha256:3bb3dbec024f2c1d283699eb7ec939347bd1f9c4e61d2d927a4b41baee3a377d",
+      "digest": "sha256:eb4280d4c4ee2a51fee40ed16a30744b6a6d01255796c84d3739e941700e76f1",
       "id": "rust-binding-executor-delegation",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:395a373eef0b7d60604dc47fc961d4d406e4349487704b18309ce6efae56e36e",
+      "digest": "sha256:2b6b908b972a14ec456438f20d49b22b5403cc25b644079ebe812229e49c888e",
       "id": "rust-binding-event-delivery",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
       "requires": []
@@ -25997,67 +28460,67 @@
       "requires": []
     },
     {
-      "digest": "sha256:36b748bcd80b6e7dc61f4b13f9b5d70ded1dba76359056e32412ed7a584b9580",
+      "digest": "sha256:f7eecdc03a02dcb6a6bee4b898e1f7ba6bc57192bbbf1aa71bebb84d7e258a1c",
       "id": "rust-security-panic-boundary",
       "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
       "requires": []
     },
     {
-      "digest": "sha256:c1fa35a46f1b31798fa73d0b94711aec730ef339ca0ffd848c2b7feb4dd7257a",
+      "digest": "sha256:397750abd5f5391b7d7004bce06f98779f936f77cf38dd8c86c622ecd69cf4f9",
       "id": "rust-external-input-queue",
       "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b2a0fb714af33c4455d29ea61910209d4d6174d1915d8608d08d68b6a0495f85",
+      "digest": "sha256:8e178df7d34b06d10c668d4e83691ea8eba265b2e8a304a6c02f5bad95619b35",
       "id": "validation-proof-lifetime",
       "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b8196781106266952aa583e691ba91f1e67f4c0893624717221c86b41c971270",
+      "digest": "sha256:82f351c86be9f57054d94170d26271f0462b2645a4dee89f1b0001a27b1f5395",
       "id": "input-validation-authority",
       "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
       "requires": []
     },
     {
-      "digest": "sha256:30637d963f2c7b0c2745c978c419c2bf1642f996bdd208201e114412f2c590ea",
+      "digest": "sha256:31acf27a781e0fe988fd1ec2c81e8bdd59b40b9a18f778b880902e9596f81e51",
       "id": "network-transport-policy",
       "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:efb8415398261f8651d10a054b767cf38c27d6526784951bf1d206ba43c87c05",
+      "digest": "sha256:3efb3fa0ba1902cdc1d547b56661f926dd2f545f352ff844580189a331ef6634",
       "id": "rust-filesystem-authority",
       "path": "evaluation/standards-effectiveness/suites/rust-filesystem-authority.toml",
       "requires": []
     },
     {
-      "digest": "sha256:a3529078c9b10ab805384aaa5da5f31c218b07457856701648f4d0a6377e5280",
+      "digest": "sha256:38ed67490e71368a9278442a6d3a5ec7b8beced7516354c08f6b0b090171de32",
       "id": "rust-listener-lifecycle",
       "path": "evaluation/standards-effectiveness/suites/rust-listener-lifecycle.toml",
       "requires": []
     },
     {
-      "digest": "sha256:00aa17e674c1ba2f54f2e9c047a501adb1ccb56791a34acba5239b9f3ad8b6c8",
+      "digest": "sha256:b246a6b3efbf863866daf0ac36f81c7e5f2f6f545e4a80ed4657640948da2ff2",
       "id": "rust-async-lifecycle",
       "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
       "requires": []
     },
     {
-      "digest": "sha256:5dc253781fc694f84531b82a2810f839a818d14fe95a4be8e4c9c9ebb5b02edb",
+      "digest": "sha256:e92113a34e8423d1fcd37edc1d73343eb411b70e0650b3a8051b674abf737dc3",
       "id": "rust-boundary-arithmetic",
       "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ce56b6286d899a108fa02dd543485887a9d8075c0c8546f81369110ef3a768ff",
+      "digest": "sha256:eda9b2a5ea23a576c8506b539a8829ac201887f0a24678cd2e3d6ce50b22d659",
       "id": "filesystem-containment-policy",
       "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:27c88e4084300c46b09cf1c0aec611215c50b59dcb0ad05b9a2f34ed6804282a",
+      "digest": "sha256:ba2eb1fcbc7cbd1428ae88ccf10fabbbf2c836ca00f03b6eea26c30203b8bce6",
       "id": "ipc-payload-validation",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
       "requires": []
@@ -26081,13 +28544,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:9d17a0b077f63f69b77a82690941a055455387e85e6391ac84c957640776b9f9",
+      "digest": "sha256:2db8b5e60cd66b822ea1d0237815fb774a39c1bceb06ca3c5b6f845cb4681488",
       "id": "rust-binding-runtime",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-runtime.toml",
       "requires": []
     },
     {
-      "digest": "sha256:a488d58a763c859a512b765b00e6b831dfd7f2c2b11029809e39aab1c5a4af1f",
+      "digest": "sha256:0efabd64bd3c02f72856387130d89dce693f6e032fae714e96a21e524d795eb7",
       "id": "rust-binding-architecture",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml",
       "requires": []
@@ -26123,7 +28586,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:da21bee3d591c8bd2ae058ab21a0ea206bb44c645efd5454d3a995a9a1345000",
+      "digest": "sha256:d88787509e9757747396c8330f5a04a61d22b62f7a7428692c66d36d54e7a27e",
       "id": "cross-language-contract",
       "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
       "requires": []
@@ -26135,13 +28598,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:789c66be8f03eecaec211a464efea6a8e53946fd641a202cf2b3f469e2f24e99",
+      "digest": "sha256:5d123435e8c283d276c8f575a74d618149a4ca01bd413d603660a89618c7b607",
       "id": "binding-generation-authority",
       "path": "evaluation/standards-effectiveness/suites/binding-generation-authority.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ce83964ee088a2c1f56220b981e840006ae2b1789a8e0a75760c38c3fcb2b463",
+      "digest": "sha256:5412cc81feab145225417c710457d81a7a935b030f9be13acd8bde75efa24925",
       "id": "binding-contract-evolution",
       "path": "evaluation/standards-effectiveness/suites/binding-contract-evolution.toml",
       "requires": []
@@ -26171,19 +28634,19 @@
       "requires": []
     },
     {
-      "digest": "sha256:8ce2ea11077419cf36796f3e8ecd2b622a59bd4966cb651dda5686b46de9c1e4",
+      "digest": "sha256:643f750077f0bdec726a0a732a6d9db06a846b99ac1c69b756693fd0c6bcfe95",
       "id": "standards-recovery-routing",
       "path": "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml",
       "requires": []
     },
     {
-      "digest": "sha256:fd984e0b92f7efe04f154f264dbe1ae23fbc22ab73a6806240232f5bdb8b7a92",
+      "digest": "sha256:613ba999ca73c5fba92fff0edc9b20a4a93707979131e95fee7d0f41e1a010a0",
       "id": "evidence-oracle-boundaries",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1e7e2b158fa1a316a102549f54850a89f262e3e86d898bbfca3db0db137220b7",
+      "digest": "sha256:88c71fad5fb5c4f52b117872df5c7bbf963d99705c626abf3b6631b4bed7c8c2",
       "id": "generated-contract-semantic-conformance",
       "path": "evaluation/standards-effectiveness/suites/a1c-contract-conformance.toml",
       "requires": []
@@ -26225,7 +28688,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:b1e67eb4eb416d5ee1b3596eea4542129457f44cf22613b6d8fb51fde64a8354",
+      "digest": "sha256:dd60e51479a660dec03a993ff157c7adfe9364475d3e75e2577ae61f583fb591",
       "id": "language-binding-boundary",
       "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
       "requires": []
@@ -26237,13 +28700,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:9d3233afc99262a1b354100b019158b619f3fe8f94c9bec0ea962654d468e2d2",
+      "digest": "sha256:89a1a530521d565c039ddcb620e3aa60b7fa198664a921df07f70b787147420e",
       "id": "rust-binding-conversions",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1c8c2df87e62141fbf72340c750a996c154e144107543aca5042a7340be62186",
+      "digest": "sha256:3c5fede61e0aaa6bf25f35def50698454c28d8fc26dd664395e9ffb9ea396ff5",
       "id": "runtime-decoding-policy",
       "path": "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml",
       "requires": []
@@ -26255,7 +28718,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:1189617c4a20327d33e3c610e354a868b27627a6579dd0bda8b76b509c83796b",
+      "digest": "sha256:8e944e49df09d6ef81e9adefeb786458b9f683d4a47238d1c6494ae0778b08ae",
       "id": "interop-event-registration",
       "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
       "requires": []
@@ -26267,7 +28730,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:cfe17726620e203cf4473b102540f1f1e3d782eb7a3fb3458239d20d02bd2d38",
+      "digest": "sha256:b07d79f01327c4426aeaa37f89f43636614be04a850402c03ff81ca5be6714f6",
       "id": "concurrency-policy",
       "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
       "requires": []
@@ -26285,13 +28748,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:77cfa7dca878a3c2f0a95a3a1c0f8072ccf3535fe0314278ab5264a2c5c1cc56",
+      "digest": "sha256:073b8e6ec34ff3a494517a719b55fca111d5b88d5c6b38edaa4cfb9dcb3167d2",
       "id": "contract-ownership",
       "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
       "requires": []
     },
     {
-      "digest": "sha256:fba2a7f7f2b577d771eb97cdfb34caaa89a51eb8a513dfc3a461b16933098c2e",
+      "digest": "sha256:f13bc8e4a4c3153bbf50ded865f2713edfebdd9a82f4631025771a1528cf9dc4",
       "id": "interop-boundary-policy",
       "path": "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml",
       "requires": []

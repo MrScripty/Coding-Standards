@@ -61,15 +61,14 @@ all = [
 id = "canonical-policy"
 type = "text"
 path = "topics/contracts.md"
-required = [
-  "## Protocol Adapter Proof",
-  "producer adapter accepts an already authoritative operation outcome",
-  "consumer adapter treats the received response as unknown",
-  "neither status nor body alone proves the outcome",
-  "application error through successful HTTP transport",
-  "Adapters do not select disclosure",
-  "Do not substitute a generic error",
-]
+required = ["## Protocol Adapter Proof"]
+prohibited = []
+
+[[checks]]
+id = "canonical-policy-detail-1"
+type = "text"
+path = "topics/contracts/protocols.md"
+required = ["producer adapter accepts an already authoritative operation outcome", "consumer adapter treats the received response as unknown", "neither status nor body alone proves the outcome", "application error through successful HTTP transport", "Adapters do not select disclosure", "Do not substitute a generic error"]
 prohibited = []
 
 [[checks]]

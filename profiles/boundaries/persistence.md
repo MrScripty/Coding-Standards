@@ -7,10 +7,26 @@
 - Level: `PROFILE`
 - Applies when: A change creates or changes a durable read, write, publication, transaction, migration-application, version-ledger, or store-mutation boundary.
 - Does not apply when: State is proven process-local and ephemeral, or the change preserves every selected durable-state mechanism and contract unchanged.
-- Requires: `core`, `workflow.verification`, `topic.contracts`
+- Requires: `core`, `workflow.verification`, `topic.contracts`, `topic.contracts.evolution`
 - Specializes: `topic.contracts`
 - Verification: Persistence owner decisions plus claim-matched durable source, destination, publication, interruption, and reopening evidence.
 - Canonical owner: `profiles/boundaries/persistence.md`
+
+## Concurrent Durable Updates
+
+When two writers can update the same invariant, a read followed by an
+unconditional write can lose an update. For example, both writers reading
+revision 7 and saving a new balance must not silently overwrite one another.
+Use a conditional revision update and check that it succeeded, or a transaction
+whose isolation and locking protect the entire invariant. A uniqueness check
+followed by a separate insert is subject to the same race; enforce uniqueness
+at the durable boundary.
+
+On a retryable conflict, re-read and re-evaluate the whole transaction within
+a bounded budget. Do not retry only the final statement using stale decisions,
+and do not repeat nontransactional external effects without their own
+idempotency or coordination contract. Test concurrent writers and aborted
+transactions against the actual store guarantees.
 
 ## Durable Boundary Authority
 

@@ -96,7 +96,7 @@ values = ["STD-0531", "STD-0532", "STD-0533", "STD-0534", "STD-0535", "STD-0536"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md"]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "workflow-policy"

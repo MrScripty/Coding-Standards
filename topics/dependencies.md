@@ -7,7 +7,7 @@
 - Level: `MUST`
 - Applies when: A change adds, selects, resolves, installs, updates, removes, audits, or changes ownership of a software, toolchain, service, build, test, runtime, or system dependency, or decides to implement difficult standardized semantics instead of adopting an established implementation.
 - Does not apply when: No dependency requirement, implementation-versus-adoption decision, declaration, resolution, provisioning, or lifecycle behavior changes.
-- Requires: `core`, `workflow.verification`, `workflow.release`
+- Requires: `core`, `workflow.verification`
 - Specializes: `none`
 - Verification: Dependency requirement, ownership, selection, resolution, authorization, satisfaction, and lifecycle decision fixtures plus affected real resolver and consumer evidence.
 - Canonical owner: `topics/dependencies.md`

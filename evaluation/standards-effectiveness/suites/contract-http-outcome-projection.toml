@@ -97,27 +97,20 @@ values = ["STD-0126", "STD-0127", "STD-0128", "STD-0129"]
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/security.md",
-  "topics/contracts.md",
-  "reference/recipes/http.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/security.md", "topics/contracts.md", "reference/recipes/http.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "contract-policy"
 type = "text"
 path = "topics/contracts.md"
-required = [
-  "## Protocol Outcome Projection",
-  "authoritative operation outcome",
-  "transport-level success may carry a rejected application outcome",
-  "Status, headers or equivalent control metadata",
-  "Security selects what may be disclosed",
-  "Do not guess a status or envelope",
-  "[HTTP projection recipes]",
-]
+required = ["## Protocol Outcome Projection"]
+prohibited = []
+
+[[checks]]
+id = "contract-policy-detail-1"
+type = "text"
+path = "topics/contracts/protocols.md"
+required = ["authoritative operation outcome", "transport-level success may carry a rejected application outcome", "Status, headers or equivalent control metadata", "Security selects what may be disclosed", "Do not guess a status or envelope", "[HTTP projection recipes]"]
 prohibited = []
 
 [[checks]]

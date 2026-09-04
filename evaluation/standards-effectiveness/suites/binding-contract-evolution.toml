@@ -115,23 +115,10 @@ op = "in"
 values = ["STD-0767", "STD-0807", "STD-0808"]
 
 [[checks]]
-id = "canonical-contract"
+id = "canonical-contract-detail-1"
 type = "text"
-path = "topics/contracts.md"
-required = [
-  "classify each affected artifact independently",
-  "canonical generator input",
-  "shared release input",
-  "Common build or release provenance",
-  "does not select a compatibility class",
-  "Regenerate only affected outputs",
-  "private implementation change does not require",
-  "derive every affected output deterministically",
-  "Select shared or independent artifact versions",
-  "force native libraries and host packages into",
-  "syntactically additive change is compatible only",
-  "exhaustive variants",
-]
+path = "topics/contracts/evolution.md"
+required = ["classify each affected artifact independently", "canonical generator input", "shared release input", "Common build or release provenance", "does not select a compatibility class", "Regenerate only affected outputs", "private implementation change does not require", "derive every affected output deterministically", "Select shared or independent artifact versions", "force native libraries and host packages into", "syntactically additive change is compatible only", "exhaustive variants"]
 prohibited = []
 
 [[checks]]

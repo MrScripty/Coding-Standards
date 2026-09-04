@@ -7,10 +7,15 @@
 - Level: `PROFILE`
 - Applies when: TypeScript source, compiler configuration, declarations, generated TypeScript, or TypeScript-visible contract surfaces change.
 - Does not apply when: No TypeScript-owned source, configuration, generated artifact, or consumer surface changes.
-- Requires: `core`, `workflow.verification`, `topic.contracts`
+- Requires: `core`, `workflow.verification`
 - Specializes: `topic.contracts`
 - Verification: TypeScript public-surface, inference, runtime-decoding, contract-projection, and generated-type decision fixtures plus affected compiler and consumer evidence.
 - Canonical owner: `profiles/languages/typescript.md`
+
+Select [Contracts](../../topics/contracts.md) when this change affects a runtime
+boundary, domain invariant, public representation, or compatibility promise.
+A local presentation or implementation change does not select that topic by
+itself. The specialization applies when the corresponding concern is affected.
 
 ## Public Type Surfaces
 
@@ -66,15 +71,21 @@ default success.
 
 Select type-aware lint scope from the actual TypeScript project boundaries,
 included source and configuration consumers, parser/compiler compatibility,
-generated-source authority, and required lint claims. Select compiler checks
-individually from owned invariants, emitted declaration contracts, runtime
-assumptions, migration constraints, and supported toolchain capability.
+generated-source authority, and required lint claims. For new owned TypeScript
+code, SHOULD enable `strict` as the starting point: it catches common nullability
+and implicit-type mistakes before runtime. Existing projects may adopt it in
+stages with explicit debt boundaries. Individual overrides need a concrete
+compatibility or migration reason. Review newly enabled diagnostics on compiler
+upgrades, since the strict family can grow. Runtime decoding remains necessary
+for untrusted values even when strict compilation succeeds.
 
 Architecture analysis must derive prohibited and required relationships from
 the canonical architecture contract. A linter selector or custom rule is an
 implementation mechanism, not architecture authority. Do not default to an
 ESLint version, parser, preset, formatter integration, file glob, ignore list,
-strict-mode bundle, compiler-flag list, severity, or custom-rule implementation.
+additional compiler-flag list, severity, or custom-rule implementation.
+The strict default above is conditional guidance, not a fixed version or universal
+lint preset.
 
 Contradictory project, compiler, consumer, or architecture facts are `invalid`.
 Missing project boundaries, rule authority, or required configuration evidence

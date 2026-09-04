@@ -71,17 +71,10 @@ op = "in"
 values = ["STD-0782", "STD-0783"]
 
 [[checks]]
-id = "canonical-contract"
+id = "canonical-contract-detail-1"
 type = "text"
-path = "topics/contracts.md"
-required = [
-  "Select canonical generation authority",
-  "compiled implementation artifact",
-  "source annotation",
-  "consumer output",
-  "deterministic derivation",
-  "producer/consumer consistency",
-]
+path = "topics/contracts/evolution.md"
+required = ["Select canonical generation authority", "compiled implementation artifact", "source annotation", "consumer output", "deterministic derivation", "producer/consumer consistency"]
 prohibited = []
 
 [[checks]]

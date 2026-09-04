@@ -86,11 +86,14 @@ prohibited = [
 id = "canonical-owner"
 type = "text"
 path = "topics/contracts.md"
-required = [
-  "Unknown facts produce an unresolved-contract diagnostic.",
-  "internal-coordinated",
-  "distributed-independent",
-]
+required = ["Unknown facts produce an unresolved-contract diagnostic."]
+prohibited = []
+
+[[checks]]
+id = "canonical-owner-detail-1"
+type = "text"
+path = "topics/contracts/evolution.md"
+required = ["internal-coordinated", "distributed-independent"]
 prohibited = []
 
 [[checks]]

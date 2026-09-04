@@ -60,14 +60,14 @@ any = [
 id = "owner"
 type = "text"
 path = "CORE-STANDARDS.md"
-required = [
-  "### Simple, Easy, And Complection",
-  "**simple** describes an artifact whose distinct concerns\nare not interleaved",
-  "**Easy** describes an approach that is familiar",
-  "To **compose** is only to place concerns together",
-  "Simplicity evidence asks whether independent concerns can be understood and\nchanged independently",
-  "Counts may locate accumulated cost but cannot decide simplicity",
-]
+required = []
+prohibited = ["composition root", "Tests, types, schemas"]
+
+[[checks]]
+id = "owner-detail-1"
+type = "text"
+path = "topics/code-design.md"
+required = ["### Simple, Easy, And Complection", "**simple** describes an artifact whose distinct concerns\nare not interleaved", "**Easy** describes an approach that is familiar", "To **compose** is only to place concerns together", "Simplicity evidence asks whether independent concerns can be understood and\nchanged independently", "Counts may locate accumulated cost but cannot decide simplicity"]
 prohibited = ["composition root", "Tests, types, schemas"]
 
 [[checks]]

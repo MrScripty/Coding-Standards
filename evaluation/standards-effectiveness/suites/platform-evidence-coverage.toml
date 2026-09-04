@@ -59,16 +59,14 @@ all = [
 id = "verification-owner"
 type = "text"
 path = "workflows/verification.md"
-required = [
-  "## Platform Evidence Coverage",
-  "record every required target",
-  "result from one target does not prove",
-  "remain explicit and cannot satisfy",
-  "Failure fan-out and early termination",
-  "required target result is missing",
-  "Do not infer Linux and Windows",
-  "fixed pre-commit",
-]
+required = ["## Platform Evidence Coverage"]
+prohibited = []
+
+[[checks]]
+id = "verification-owner-detail-1"
+type = "text"
+path = "workflows/verification/platforms.md"
+required = ["record every required target", "result from one target does not prove", "remain explicit and cannot satisfy", "Failure fan-out and early termination", "required target result is missing", "Do not infer Linux and Windows", "fixed pre-commit"]
 prohibited = []
 
 [[checks]]

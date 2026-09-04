@@ -69,13 +69,7 @@ key = "id"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/contracts.md",
-  "workflows/release.md",
-  "profiles/languages/rust/README.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "profiles/languages/rust/README.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "workflow-policy"
@@ -103,7 +97,7 @@ prohibited = [
 id = "router-projection"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["| Rust source, Cargo metadata, or Rust-generated artifacts change |"]
+required = ["| Change Rust source, Cargo metadata, or generated Rust artifacts |"]
 prohibited = []
 
 [[checks]]

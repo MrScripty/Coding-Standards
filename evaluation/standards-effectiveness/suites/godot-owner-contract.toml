@@ -70,7 +70,7 @@ prohibited = []
 id = "router-projection"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["Godot object, node, scene-tree, signal, resource, thread-affinity, deferred-dispatch, or object-lifetime mechanism changes"]
+required = ["Change Godot object, scene, signal, resource, threading, or lifetime mechanisms"]
 prohibited = []
 
 [[checks]]

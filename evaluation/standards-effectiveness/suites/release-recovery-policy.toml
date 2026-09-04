@@ -73,33 +73,18 @@ values = ["STD-0577", "STD-0578", "STD-0579", "STD-0580", "STD-0581"]
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/contracts.md",
-  "workflows/release.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "workflow-policy"
 type = "text"
 path = "workflows/release.md"
-required = [
-  "## Recovery And Withdrawal",
-  "Published artifacts may be immutable, cached",
-  "Classify affected release units, versions, channels",
-  "withdrawal as erasure",
-  "Urgency does not grant implicit authority",
-  "recovery status cannot waive normal acceptance",
-  "it is not a universal post-incident record",
-  "typed release-recovery",
-]
-prohibited = [
-  "Revert the GitHub Release to draft",
-  "crates.io, npm, PyPI",
-  "Address the issue on `main`",
-  "[Hotfix Workflow](#hotfix-workflow)",
-  "Publish a new patch version",
-  "do not wait for consensus",
-  "Add a brief post-mortem note to the changelog",
-]
+required = ["## Recovery And Withdrawal"]
+prohibited = ["Revert the GitHub Release to draft", "crates.io, npm, PyPI", "Address the issue on `main`", "[Hotfix Workflow](#hotfix-workflow)", "Publish a new patch version", "do not wait for consensus", "Add a brief post-mortem note to the changelog"]
+
+[[checks]]
+id = "workflow-policy-detail-1"
+type = "text"
+path = "workflows/release/operations.md"
+required = ["Published artifacts may be immutable, cached", "Classify affected release units, versions, channels", "withdrawal as erasure", "Urgency does not grant implicit authority", "recovery status cannot waive normal acceptance", "it is not a universal post-incident record", "typed release-recovery"]
+prohibited = ["Revert the GitHub Release to draft", "crates.io, npm, PyPI", "Address the issue on `main`", "[Hotfix Workflow](#hotfix-workflow)", "Publish a new patch version", "do not wait for consensus", "Add a brief post-mortem note to the changelog"]

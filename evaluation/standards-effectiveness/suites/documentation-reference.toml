@@ -86,7 +86,7 @@ values = ["STD-0376", "STD-0377", "STD-0378", "STD-0379", "STD-0380", "STD-0381"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/documentation.md", "reference/recipes/documentation.md"]
+paths = ["CORE-STANDARDS.md", "workflows/documentation.md", "reference/recipes/documentation.md", "topics/code-design.md"]
 
 [[checks]]
 id = "reference-boundary"

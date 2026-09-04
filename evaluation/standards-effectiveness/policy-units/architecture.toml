@@ -14,6 +14,6 @@ semantic_revision = 1
 
 [[policy_unit]]
 id = "topic.architecture.immutable-authority-closure"
-module = "topic.architecture"
+module = "topic.architecture.replay"
 heading_path = ["Immutable Authority Closure"]
-semantic_revision = 2
+semantic_revision = 3

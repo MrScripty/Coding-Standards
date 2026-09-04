@@ -12,6 +12,7 @@ default = "allow"
 [checks.domains]
 case = ["*"]
 facts = ["complete", "contradictory"]
+context = ["required-contract", "new-owned-code"]
 authority = ["explicit", "missing"]
 capability = ["supported", "unsupported"]
 boundary = ["complete", "missing"]
@@ -20,7 +21,7 @@ expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
-any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+any = [{ all = [{ field = "fallback", op = "ne", value = "none" }, { any = [{ field = "context", op = "eq", value = "required-contract" }, { field = "fallback", op = "ne", value = "strict-preset" }] }] }, { field = "facts", op = "eq", value = "contradictory" }]
 [[checks.rules]]
 outcome = "typed-unavailable"
 [checks.rules.when]
@@ -34,7 +35,7 @@ all = [{ field = "capability", op = "eq", value = "unsupported" }]
 id = "profile"
 type = "text"
 path = "profiles/languages/typescript.md"
-required = ["## Static Analysis And Compiler Configuration", "actual TypeScript project boundaries", "Architecture analysis must derive", "parser, preset, formatter integration", "are `invalid`", "is `unavailable`", "is `unsupported`"]
+required = ["## Static Analysis And Compiler Configuration", "SHOULD enable `strict`", "Existing projects may adopt it in", "Review newly enabled diagnostics", "actual TypeScript project boundaries", "Architecture analysis must derive", "parser, preset, formatter integration", "are `invalid`", "is `unavailable`", "is `unsupported`"]
 prohibited = []
 [[checks]]
 id = "reference"

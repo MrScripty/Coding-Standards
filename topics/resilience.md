@@ -97,6 +97,42 @@ Record attempts, terminal outcome, cancellation, and recovery evidence at the
 owner that controls the operation. Typed diagnostics preserve the distinction
 between failed, unavailable, unsupported, and successfully degraded outcomes.
 
+### Remote Retry Budgets And Unknown Outcomes
+
+For a remote operation, give one layer responsibility for retries. Bound the
+whole operation with an end-to-end deadline, including queueing, attempts, and
+backoff; a per-attempt timeout alone does not bound user latency. Propagate the
+remaining budget and cancellation to downstream work. Avoid multiplying
+retries at several layers. Use capped backoff with jitter for transient shared
+failures, honoring valid service retry hints within the remaining budget.
+
+A timeout after sending a mutation can mean the effect committed but its reply
+was lost. Treat that as an unknown outcome, not proof of failure. Reconcile
+through an operation identifier or retry under an idempotency contract before
+attempting the effect again. Test lost replies and exhausted deadlines as well
+as ordinary transient failures.
+
+### Idempotency Records
+
+When duplicate delivery can repeat an effect, define the key's scope (such as
+caller, operation, and resource), bind it to the request's meaning, and reject
+reuse with conflicting input. Record the deduplication result and effect in one
+atomic boundary where possible. If they cross systems, use an explicit durable
+coordination protocol and reconciliation; a local cache does not make the
+remote effect atomic. Define how long records are retained relative to the
+supported retry window and what happens after expiry. Test concurrent duplicate
+requests, conflicting input, interrupted writes, and expiry.
+
+### Time Semantics
+
+Distinguish an elapsed duration, a deadline, an instant, and a civil date/time.
+Use a monotonic clock for in-process elapsed budgets; a wall clock can jump.
+Do not persist or transmit a process-local monotonic timestamp as a portable
+instant. For cross-process deadlines, define clock-skew assumptions and bound
+the local remaining budget. Calendar schedules need a timezone and a policy
+for ambiguous or missing civil times. Use controllable clocks in tests when
+timing affects correctness rather than relying on sleeps.
+
 ## State Reconstruction
 
 Delete, replace, seed, or rebuild state only when the Contracts owner proves

@@ -11,6 +11,7 @@ expected_column = "expected"
 default = "admit"
 [checks.domains]
 case = ["*"]
+review_scope = ["ordinary-regression", "substantial-machinery"]
 mechanism = ["contract-test", "hash", "runtime-validation", "test", "trace"]
 reachability = ["none", "reachable", "unknown"]
 consequence = ["immaterial", "material", "unknown"]
@@ -23,6 +24,19 @@ lifecycle_cost = ["disproportionate", "proportionate", "unknown"]
 identity_purpose = ["exact-contract", "incidental", "not-applicable", "semantic"]
 retention = ["missing", "trigger"]
 expected = ["admit", "no-permanent-evidence", "typed-unavailable"]
+[[checks.rules]]
+outcome = "admit"
+[checks.rules.when]
+all = [
+  { field = "review_scope", op = "eq", value = "ordinary-regression" },
+  { field = "marginal_value", op = "ne", value = "none" },
+  { field = "lifecycle_cost", op = "ne", value = "disproportionate" },
+  { field = "reachability", op = "eq", value = "reachable" },
+  { field = "consequence", op = "eq", value = "material" },
+  { field = "oracle", op = "eq", value = "adequate" },
+  { field = "existing_evidence", op = "eq", value = "absent" },
+  { field = "alternative", op = "eq", value = "insufficient" },
+]
 [[checks.rules]]
 outcome = "typed-unavailable"
 [checks.rules.when]
@@ -91,7 +105,7 @@ required = [
   "## Execution Mode",
   "Either mode is acceptable for this claim.",
   "Derive each blocking or advisory gate from a named acceptance claim",
-  "Before adding a permanent test, validator, verifier, integrity check, hash",
+  "Before adding costly, overlapping, brittle, or architectural evidence machinery",
   "the mechanism's marginal deciding value after that overlap",
   "why exact byte identity is required",
   "could be wrong is not by",

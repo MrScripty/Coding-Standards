@@ -86,26 +86,20 @@ values = ["STD-0798", "STD-0799", "STD-0800"]
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "topics/concurrency.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/async.md", "profiles/languages/rust/language-bindings.md"]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "topics/concurrency.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/async.md", "profiles/languages/rust/language-bindings.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "profiles/languages/rust/binding-lifecycle.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "profile-policy"
 type = "text"
 path = "profiles/languages/rust/language-bindings.md"
-required = [
-  "## Handle And Runtime Adaptation",
-  "Distinguish a host-visible handle from runtime and task lifecycle.",
-  "application's composition owner",
-  "across calls or workflow runs without making",
-  "Each call creates fresh input, cancellation, result, and failure state.",
-  "persistence or keep-alive request",
-  "owner before submission",
-  "does not synchronously drive",
-  "typed `unsupported` or `unavailable`",
-  "async.md",
-  "## Verification",
-  "## No Fallback",
-]
+required = ["## Handle And Runtime Adaptation", "## Verification", "## No Fallback"]
+prohibited = []
+
+[[checks]]
+id = "profile-policy-detail-1"
+type = "text"
+path = "profiles/languages/rust/binding-lifecycle.md"
+required = ["Distinguish a host-visible handle from runtime and task lifecycle.", "application's composition owner", "across calls or workflow runs without making", "Each call creates fresh input, cancellation, result, and failure state.", "persistence or keep-alive request", "owner before submission", "does not synchronously drive", "typed `unsupported` or `unavailable`", "async.md"]
 prohibited = []
 
 [[checks]]

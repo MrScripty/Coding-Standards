@@ -62,10 +62,10 @@ prompt = "Which authority or representation boundaries are crossed?"
 
 [[facts]]
 id = "routing.languages"
-semantic_revision = 1
+semantic_revision = 2
 type = "enum-set"
 nullable = false
-values = ["csharp-async", "rust", "rust-api", "rust-dependencies", "rust-release", "rust-tooling", "rust-async", "rust-cross-platform", "typescript", "typescript-async"]
+values = ["csharp-async", "rust", "rust-api", "rust-dependencies", "rust-release", "rust-tooling", "rust-async", "rust-cross-platform", "typescript", "typescript-async", "rust-unsafe", "rust-security", "rust-interop", "rust-language-bindings"]
 aliases = []
 meaning = "Language-specific mechanisms affected by the requested work."
 context_kind = "task-route"
@@ -101,6 +101,20 @@ answer_contract = "fact-value.v1"
 evidence_contract = "evidence-reference.v1"
 authorization_capability = "standards.analyze"
 prompt = "Which cross-cutting concerns are affected?"
+
+[[facts]]
+id = "routing.details"
+semantic_revision = 1
+type = "enum-set"
+nullable = false
+values = ["topic.code-design", "topic.architecture.replay", "topic.contracts.schemas", "topic.contracts.protocols", "topic.contracts.evolution", "workflow.verification.oracles", "workflow.verification.platforms", "profile.language.rust.binding-lifecycle", "workflow.release.operations", "workflow.verification.gui"]
+aliases = []
+meaning = "Specialized decisions affected by the task; choose from the conditional detail table after the broad concerns."
+context_kind = "task-route"
+answer_contract = "fact-value.v1"
+evidence_contract = "evidence-reference.v1"
+authorization_capability = "standards.analyze"
+prompt = "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations?"
 
 [[rules]]
 id = "route.workflow.implementation"
@@ -301,3 +315,73 @@ when = { operator = "contains", fact = "routing.topics", value = "architecture" 
 id = "route.topic.security"
 target = "topic.security"
 when = { operator = "contains", fact = "routing.topics", value = "security" }
+
+[[rules]]
+id = "route.language.rust-unsafe"
+target = "profile.language.rust.unsafe"
+when = { operator = "contains", fact = "routing.languages", value = "rust-unsafe" }
+
+[[rules]]
+id = "route.language.rust-security"
+target = "profile.language.rust.security"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust-security" }, { operator = "all", expressions = [{ operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust" }, { operator = "contains", fact = "routing.languages", value = "rust-api" }, { operator = "contains", fact = "routing.languages", value = "rust-dependencies" }, { operator = "contains", fact = "routing.languages", value = "rust-release" }, { operator = "contains", fact = "routing.languages", value = "rust-tooling" }, { operator = "contains", fact = "routing.languages", value = "rust-async" }, { operator = "contains", fact = "routing.languages", value = "rust-cross-platform" }, { operator = "contains", fact = "routing.languages", value = "rust-unsafe" }, { operator = "contains", fact = "routing.languages", value = "rust-security" }, { operator = "contains", fact = "routing.languages", value = "rust-interop" }, { operator = "contains", fact = "routing.languages", value = "rust-language-bindings" }] }, { operator = "contains", fact = "routing.topics", value = "security" }] }] }
+
+[[rules]]
+id = "route.language.rust-interop"
+target = "profile.language.rust.interop"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust-interop" }, { operator = "all", expressions = [{ operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust" }, { operator = "contains", fact = "routing.languages", value = "rust-api" }, { operator = "contains", fact = "routing.languages", value = "rust-dependencies" }, { operator = "contains", fact = "routing.languages", value = "rust-release" }, { operator = "contains", fact = "routing.languages", value = "rust-tooling" }, { operator = "contains", fact = "routing.languages", value = "rust-async" }, { operator = "contains", fact = "routing.languages", value = "rust-cross-platform" }, { operator = "contains", fact = "routing.languages", value = "rust-unsafe" }, { operator = "contains", fact = "routing.languages", value = "rust-security" }, { operator = "contains", fact = "routing.languages", value = "rust-interop" }, { operator = "contains", fact = "routing.languages", value = "rust-language-bindings" }] }, { operator = "contains", fact = "routing.boundaries", value = "interop" }] }] }
+
+[[rules]]
+id = "route.language.rust-language-bindings"
+target = "profile.language.rust.language-bindings"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust-language-bindings" }, { operator = "all", expressions = [{ operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust" }, { operator = "contains", fact = "routing.languages", value = "rust-api" }, { operator = "contains", fact = "routing.languages", value = "rust-dependencies" }, { operator = "contains", fact = "routing.languages", value = "rust-release" }, { operator = "contains", fact = "routing.languages", value = "rust-tooling" }, { operator = "contains", fact = "routing.languages", value = "rust-async" }, { operator = "contains", fact = "routing.languages", value = "rust-cross-platform" }, { operator = "contains", fact = "routing.languages", value = "rust-unsafe" }, { operator = "contains", fact = "routing.languages", value = "rust-security" }, { operator = "contains", fact = "routing.languages", value = "rust-interop" }, { operator = "contains", fact = "routing.languages", value = "rust-language-bindings" }] }, { operator = "contains", fact = "routing.boundaries", value = "language-bindings" }] }] }
+
+[[rules]]
+id = "route.detail.topic.architecture.replay"
+target = "topic.architecture.replay"
+when = { operator = "contains", fact = "routing.details", value = "topic.architecture.replay" }
+
+[[rules]]
+id = "route.detail.topic.contracts.schemas"
+target = "topic.contracts.schemas"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.details", value = "topic.contracts.schemas" }, { operator = "contains", fact = "routing.boundaries", value = "generated-contract" }] }
+
+[[rules]]
+id = "route.detail.topic.contracts.protocols"
+target = "topic.contracts.protocols"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.details", value = "topic.contracts.protocols" }, { operator = "contains", fact = "routing.boundaries", value = "ipc" }] }
+
+[[rules]]
+id = "route.detail.topic.contracts.evolution"
+target = "topic.contracts.evolution"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.details", value = "topic.contracts.evolution" }, { operator = "any", expressions = [{ operator = "contains", fact = "routing.boundaries", value = "persistence" }, { operator = "contains", fact = "routing.boundaries", value = "language-bindings" }] }] }
+
+[[rules]]
+id = "route.detail.workflow.verification.oracles"
+target = "workflow.verification.oracles"
+when = { operator = "contains", fact = "routing.details", value = "workflow.verification.oracles" }
+
+[[rules]]
+id = "route.detail.workflow.verification.platforms"
+target = "workflow.verification.platforms"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.details", value = "workflow.verification.platforms" }, { operator = "all", expressions = [{ operator = "contains", fact = "routing.activities", value = "verification" }, { operator = "any", expressions = [{ operator = "contains", fact = "routing.topics", value = "cross-platform" }, { operator = "contains", fact = "routing.languages", value = "rust-cross-platform" }] }] }] }
+
+[[rules]]
+id = "route.detail.profile.language.rust.binding-lifecycle"
+target = "profile.language.rust.binding-lifecycle"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.details", value = "profile.language.rust.binding-lifecycle" }, { operator = "all", expressions = [{ operator = "any", expressions = [{ operator = "contains", fact = "routing.languages", value = "rust" }, { operator = "contains", fact = "routing.languages", value = "rust-api" }, { operator = "contains", fact = "routing.languages", value = "rust-dependencies" }, { operator = "contains", fact = "routing.languages", value = "rust-release" }, { operator = "contains", fact = "routing.languages", value = "rust-tooling" }, { operator = "contains", fact = "routing.languages", value = "rust-async" }, { operator = "contains", fact = "routing.languages", value = "rust-cross-platform" }, { operator = "contains", fact = "routing.languages", value = "rust-unsafe" }, { operator = "contains", fact = "routing.languages", value = "rust-security" }, { operator = "contains", fact = "routing.languages", value = "rust-interop" }, { operator = "contains", fact = "routing.languages", value = "rust-language-bindings" }] }, { operator = "contains", fact = "routing.boundaries", value = "language-bindings" }, { operator = "contains", fact = "routing.languages", value = "rust-async" }] }] }
+
+[[rules]]
+id = "route.detail.workflow.release.operations"
+target = "workflow.release.operations"
+when = { operator = "contains", fact = "routing.details", value = "workflow.release.operations" }
+
+[[rules]]
+id = "route.detail.workflow.verification.gui"
+target = "workflow.verification.gui"
+when = { operator = "contains", fact = "routing.details", value = "workflow.verification.gui" }
+
+[[rules]]
+id = "route.detail.topic.code-design"
+target = "topic.code-design"
+when = { operator = "any", expressions = [{ operator = "contains", fact = "routing.details", value = "topic.code-design" }, { operator = "contains", fact = "routing.topics", value = "architecture" }] }

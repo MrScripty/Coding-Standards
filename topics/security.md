@@ -5,12 +5,53 @@
 - ID: `topic.security`
 - Role: `topic`
 - Level: `MUST`
-- Applies when: Untrusted input can authorize an operation, resource access, side effect, or security-relevant decision, or a network listener exposes and retains resources.
-- Does not apply when: No untrusted value influences authority or security-relevant behavior and no network listener accepts externally initiated work.
+- Applies when: A change affects untrusted input, protected resources, identity, authorization, sensitive data, credentials, cryptography, secure transport, executable dependency trust, or network listeners.
+- Does not apply when: No trust boundary, protected operation, sensitive data, credential, cryptographic, dependency trust, or listener behavior is affected.
 - Requires: `core`, `workflow.verification`
 - Specializes: `none`
 - Verification: Untrusted-input, filesystem-containment, and network-transport decision fixtures plus affected trust-boundary tests.
 - Canonical owner: `topics/security.md`
+
+## Identity And Permission
+
+At a protected operation, distinguish valid input, authenticated identity, and
+permission to perform the requested action on the requested resource. A valid
+identifier or an authenticated caller does not prove authorization. Establish
+identity through the application's supported authentication mechanism; verify
+credential authenticity, intended issuer and audience, lifetime, and revocation
+where the mechanism requires them. Do not trust caller-supplied identity or
+role headers merely because their shape is valid. Enforce
+permission at the trusted boundary before disclosing data or performing the
+effect, including tenant and ownership constraints. Deny access unless the
+applicable policy permits it; do not rely on a hidden UI control or an earlier
+unrelated authorization check. Test forbidden actions, cross-owner and
+cross-tenant access where relevant, and revoked or expired authority.
+
+## Sensitive Data And Credentials
+
+Identify sensitive fields and the owners allowed to receive them. Minimize
+collection, retention, and disclosure across responses, logs, traces, caches,
+and diagnostic artifacts. Redact before exporting diagnostics; return bounded
+public failure information while preserving useful restricted diagnostics.
+Keep secrets out of source control and ordinary logs. Supply credentials
+through the deployment's secret mechanism with the narrowest required access,
+and define rotation and revocation for long-lived credentials.
+
+For network paths carrying sensitive data or credentials, use an established
+secure transport with peer verification. Use maintained cryptographic
+implementations and the platform's secure randomness and key storage rather
+than custom cryptography. Select algorithms and configuration against the
+actual threat model and supported platform requirements.
+
+## Dependency And Build Trust
+
+Treat downloaded packages, build tools, generated artifacts, and CI extensions
+as executable trust decisions. Select their source and identity explicitly,
+verify the integrity or provenance required by the distribution contract, and
+restrict the credentials and authority available to them. Keep untrusted
+contribution jobs away from publication secrets. Own vulnerability triage and
+remediation across the supported lifecycle; a clean scan alone does not prove
+trustworthiness. Dependencies and Build own the corresponding procedures.
 
 ## Untrusted Structured Input
 

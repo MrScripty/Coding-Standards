@@ -108,12 +108,7 @@ values = ["STD-0289", "STD-0290", "STD-0291", "STD-0292", "STD-0293", "STD-0584"
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
-paths = [
-  "CORE-STANDARDS.md",
-  "workflows/verification.md",
-  "topics/security.md",
-  "topics/cross-platform.md",
-]
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/security.md", "topics/cross-platform.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "router-routes"

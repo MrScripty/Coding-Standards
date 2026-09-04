@@ -7,10 +7,15 @@
 - Level: `PROFILE`
 - Applies when: A web or web-technology user interface, component, rendering path, interaction, frontend state projection, or frontend test changes.
 - Does not apply when: No user-interface projection, interaction, frontend state, or frontend-owned evidence changes.
-- Requires: `core`, `workflow.verification`, `topic.contracts`, `topic.accessibility`
+- Requires: `core`, `workflow.verification`, `topic.accessibility`
 - Specializes: `topic.contracts`, `topic.accessibility`
 - Verification: Frontend authority, projection, synchronization, interaction, accessibility, and evidence decision fixtures plus affected component and real-browser evidence.
 - Canonical owner: `profiles/applications/frontend.md`
+
+Select [Contracts](../../topics/contracts.md) when this change affects a runtime
+boundary, domain invariant, public representation, or compatibility promise.
+A local presentation or implementation change does not select that topic by
+itself. The specialization applies when the corresponding concern is affected.
 
 ## Applicability Decision
 

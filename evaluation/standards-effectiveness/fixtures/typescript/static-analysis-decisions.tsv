@@ -1,11 +1,12 @@
-case	facts	authority	capability	boundary	fallback	expected
-supported	complete	explicit	supported	complete	none	allow
-contradictory	contradictory	explicit	supported	complete	none	typed-invalid
-missing_authority	complete	missing	supported	complete	none	typed-unavailable
-missing_boundary	complete	explicit	supported	missing	none	typed-unavailable
-unsupported	complete	explicit	unsupported	complete	none	typed-unsupported
-eslint_default	complete	explicit	supported	complete	eslint-9	typed-invalid
-preset_default	complete	explicit	supported	complete	strict-preset	typed-invalid
-flags_default	complete	explicit	supported	complete	strict-flags	typed-invalid
-rule_default	complete	explicit	supported	complete	custom-rule	typed-invalid
-weaker_scope	complete	explicit	supported	complete	broaden-scope	typed-invalid
+case	facts	context	authority	capability	boundary	fallback	expected
+supported	complete	required-contract	explicit	supported	complete	none	allow
+contradictory	contradictory	required-contract	explicit	supported	complete	none	typed-invalid
+missing_authority	complete	required-contract	missing	supported	complete	none	typed-unavailable
+missing_boundary	complete	required-contract	explicit	supported	missing	none	typed-unavailable
+unsupported	complete	required-contract	explicit	unsupported	complete	none	typed-unsupported
+eslint_default	complete	required-contract	explicit	supported	complete	eslint-9	typed-invalid
+preset_default	complete	required-contract	explicit	supported	complete	strict-preset	typed-invalid
+flags_default	complete	required-contract	explicit	supported	complete	strict-flags	typed-invalid
+rule_default	complete	required-contract	explicit	supported	complete	custom-rule	typed-invalid
+weaker_scope	complete	required-contract	explicit	supported	complete	broaden-scope	typed-invalid
+strict_new_owned_code	complete	new-owned-code	explicit	supported	complete	strict-preset	allow

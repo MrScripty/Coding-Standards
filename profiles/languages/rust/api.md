@@ -7,10 +7,19 @@
 - Level: `PROFILE`
 - Applies when: A Rust change selects or changes public or boundary-facing type, conversion, visibility, result, panic, trait, parameter, Cargo-feature, or Rustdoc mechanisms.
 - Does not apply when: No Rust API mechanism changes, or the task only selects the generic invariant, architecture, failure, dependency, documentation, compatibility, or consumer contract.
-- Requires: `core`, `topic.contracts`, `topic.architecture`, `topic.resilience`, `topic.dependencies`, `workflow.documentation`, `profile.application.library`, `profile.language.rust`
+- Requires: `core`, `topic.contracts`, `workflow.documentation`, `profile.language.rust`
 - Specializes: `profile.language.rust`
 - Verification: Rust API decision fixtures plus affected public API, consumer, compile, and documentation evidence selected by the generic owners.
 - Canonical owner: `profiles/languages/rust/api.md`
+
+## Conditional Generic Guidance
+
+Select [Architecture](../../../topics/architecture.md) when responsibility or
+state ownership changes, [Resilience](../../../topics/resilience.md) when
+failure or retry semantics change, and [Dependencies](../../../topics/dependencies.md)
+when dependency or feature selection changes. Select the
+[Library profile](../../applications/library.md) for a reusable package; an API
+inside an application does not by itself make that application a library.
 
 ## API Mechanism Authority
 
