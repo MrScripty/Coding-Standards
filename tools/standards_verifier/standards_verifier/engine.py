@@ -7,7 +7,6 @@ from .diagnostics import Diagnostic, EngineError
 from .graph_adapters import SUITE_DEPENDENCIES, suite_dependency_registry
 from .model import (
     CheckContext,
-    CompleteSuiteCatalogCheck,
     Suite,
     SuiteCatalog,
     SuiteResult,
@@ -36,16 +35,6 @@ class Verifier:
         selected_ids = self._selection(selected)
         order = self._execution_order(selected_ids)
         catalog = extend_catalog(self.repo_root, self.catalog, order)
-        if any(
-            isinstance(check, CompleteSuiteCatalogCheck)
-            for suite in catalog.suites
-            for check in suite.checks
-        ):
-            catalog = extend_catalog(
-                self.repo_root,
-                catalog,
-                self.list_suites(),
-            )
         self.catalog = catalog
         results = []
         by_id: dict[str, SuiteResult] = {}

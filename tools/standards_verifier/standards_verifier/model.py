@@ -40,12 +40,6 @@ def absent_inputs(role: str, *paths: str) -> tuple[CheckFileInput, ...]:
     return tuple(CheckFileInput(path, "absent", role) for path in paths)
 
 
-class CompleteSuiteCatalogCheck:
-    """Marker for checks whose invariant inspects every registered suite body."""
-
-    __slots__ = ()
-
-
 @dataclass(frozen=True, slots=True)
 class Suite:
     id: str
@@ -102,16 +96,6 @@ class SuiteCatalog:
                 return suite
         raise KeyError(f"suite is absent from the catalog: {suite_id}")
 
-    def suite_for_path(self, path: str) -> Suite | None:
-        for entry in self.entries:
-            if entry.path == path:
-                return next(
-                    (suite for suite in self.suites if suite.id == entry.id),
-                    None,
-                )
-        return None
-
-
 @dataclass(frozen=True, slots=True)
 class CheckContext:
     repo_root: Path
@@ -139,7 +123,6 @@ class SuiteResult:
 @dataclass(frozen=True, slots=True)
 class CompleteVerificationResult:
     results: tuple[SuiteResult, ...]
-    checker_count: int
     diagnostic: Diagnostic | None = None
     exit_code: int = 0
 
@@ -147,8 +130,6 @@ class CompleteVerificationResult:
         if (
             type(self.results) is not tuple
             or any(type(item) is not SuiteResult for item in self.results)
-            or type(self.checker_count) is not int
-            or self.checker_count < 0
             or (self.diagnostic is not None and type(self.diagnostic) is not Diagnostic)
             or type(self.exit_code) is not int
             or self.exit_code not in {0, 1, 2, 3, 4}

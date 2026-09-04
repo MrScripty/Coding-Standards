@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verifier migration after accepted Python-engine
-audit follow-up recovery
+**Current phase:** Milestone 7 manual semantic-ownership review after accepted
+zero-Bash verification closure
 
-**Next slice:** execute M6-Z1 terminal zero-Bash cleanup for migration-only
-Python machinery and the remaining Bash launchers
+**Next slice:** complete manual semantic-ownership review `D001` through `D010`
 
 **Acceptance status:** `partial`
 
@@ -139,7 +138,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | M6-I126 final-helper retirement accepted at train order 241; terminal cleanup remains |
+| 7 | Role-based consolidation and verification migration | `Active` | M6-Z1 verification migration accepted; manual `D001` through `D010` review remains |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -148,9 +147,10 @@ complete; `Accepted` requires the named evidence.
 without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-I126
-at train order 241. The canonical package manifest contains the exact package
-state; the execution ledger contains detailed slice evidence.
+recorded `7.4c3` packages. Verification migration is accepted through M6-Z1:
+the complete command is Python-only, and no Bash verifier, helper, launcher, or
+temporary migration model remains. The execution ledger and terminal report
+contain detailed slice evidence.
 
 **Accepted recovery boundary:** M6-I16 is accepted after one-owner final-state
 proof. The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
@@ -160,16 +160,9 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Audit the fresh post-recovery graph through the verification-engine plan.
-2. Continue owner-coherent Python-engine migration until no Bash verifier,
-   helper, or migration launcher remains.
-3. Use focused final-state evidence for each package and run the complete mixed
-   checkpoint at owner-wave or shared-contract acceptance, zero-Bash closure,
-   or when cumulative retained-Bash/consumer evidence cannot prove accepted
-   packages independent.
-4. Regenerate canonical inventories and prove exact dispositions, no source
+1. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
-5. Complete manual semantic-ownership review `D001` through `D010` before
+2. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
 **Current blocker:** `none`.
@@ -201,11 +194,11 @@ engine is the sole verification authority.
   reference material, migration packages, declarative checks, and pilots carry
   separate evidence and can fail without inheriting each other's authority.
 - Necessary complexity and containment: temporary Bash graph evidence and
-  mixed execution are contained to Milestone 7 and have an explicit zero-Bash
-  deletion boundary.
-- Deletion and cumulative machinery result: each accepted slice deletes its
-  replaced Bash authority, and remaining migration machinery must disappear at
-  zero-Bash closure rather than becoming permanent infrastructure.
+  mixed execution were contained to the verification migration and removed at
+  the accepted zero-Bash boundary.
+- Deletion and cumulative machinery result: each accepted slice deleted its
+  replaced Bash authority, and the remaining migration machinery disappeared
+  at zero-Bash closure rather than becoming permanent infrastructure.
 
 ## Evidence Index
 
@@ -216,12 +209,10 @@ engine is the sole verification authority.
 | Rule ownership | [Owner map](../evaluation/standards-effectiveness/owner-map.tsv) and [generated owner map](../evaluation/standards-effectiveness/generated/rule-owner-map.tsv) |
 | Rule dispositions | [Consolidation dispositions](../evaluation/standards-effectiveness/consolidation-dispositions.tsv) |
 | Milestone 7 decomposition | [Execution decomposition](../evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv) |
-| Checker migration lifecycle | [Checker migration packages](../evaluation/standards-effectiveness/checker-migration-packages.tsv) |
-| Executable-edge lifecycle | [Executable edge dispositions](../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
-| Verification-engine current state | [Verification-engine plan](../docs/plans/standards-verification-engine/plan.md) and [ledger](../docs/plans/standards-verification-engine/execution-ledger.md) |
-| Migration-Python terminal lifecycle | [Terminal dispositions](../evaluation/standards-effectiveness/migration-python-dispositions.tsv) |
+| Verification migration lifecycle | [Verification-engine plan](../docs/plans/standards-verification-engine/plan.md), [ledger](../docs/plans/standards-verification-engine/execution-ledger.md), and [M6-Z1 closure](../docs/plans/standards-verification-engine/reports/m6-z1-zero-bash-closure.md) |
+| Migration-Python terminal lifecycle | [Recovery plan](../docs/plans/python-verification-engine-recovery/plan.md) and [ledger](../docs/plans/python-verification-engine-recovery/execution-ledger.md) |
 | Current recovery state | [Generic edge-system recovery](../docs/plans/generic-edge-system/plan.md) and [ledger](../docs/plans/generic-edge-system/execution-ledger.md) |
-| Active engine recovery | [Python verification engine design recovery](../docs/plans/python-verification-engine-recovery/plan.md) |
+| Accepted engine recovery | [Python verification engine design recovery](../docs/plans/python-verification-engine-recovery/plan.md) |
 
 ## Blockers
 

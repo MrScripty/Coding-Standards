@@ -364,9 +364,7 @@ class StandardsEngine:
             observe_repository_paths=self._repository_paths_for_snapshot,
         )
         self._execution_context = execution_context or AnalysisExecutionContext()
-        self._application_verifier = lambda root: run_complete_verification(
-            root, quiet=True
-        )
+        self._application_verifier = run_complete_verification
         self._temporary_store = temporary_store
 
     @classmethod

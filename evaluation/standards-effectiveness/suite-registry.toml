@@ -141,16 +141,6 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-19-structure.t
 requires = []
 
 [[suites]]
-id = "checker-migration-packages"
-path = "evaluation/standards-effectiveness/suites/checker-migration-packages.toml"
-requires = []
-
-[[suites]]
-id = "executable-edge-dispositions"
-path = "evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml"
-requires = []
-
-[[suites]]
 id = "contract-boundary-proof"
 path = "evaluation/standards-effectiveness/suites/contract-boundary-proof.toml"
 requires = []
@@ -618,11 +608,6 @@ requires = []
 [[suites]]
 id = "persistence-owner-contract"
 path = "evaluation/standards-effectiveness/suites/persistence-owner-contract.toml"
-requires = []
-
-[[suites]]
-id = "numeric-comparison-classification"
-path = "evaluation/standards-effectiveness/suites/numeric-comparison-classification.toml"
 requires = []
 
 [[suites]]
@@ -1343,11 +1328,6 @@ requires = []
 [[suites]]
 id = "milestone-7-rust-async-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml"
-requires = []
-
-[[suites]]
-id = "execution-train"
-path = "evaluation/standards-effectiveness/suites/execution-train.toml"
 requires = []
 
 [[suites]]

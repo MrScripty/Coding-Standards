@@ -61,8 +61,8 @@ Consequently:
 
 ## Reproducibility
 
-Run `generate-baseline.sh` against a clone containing the baseline commit.
-Expected outputs are recorded in `generated/`. The generator:
+Expected outputs from the accepted baseline capture are recorded in
+`generated/`. The retired migration-only generator:
 
 1. reads tracked artifacts from the baseline Git tree;
 2. reads ignored prompts only from committed baseline snapshots;
@@ -70,9 +70,9 @@ Expected outputs are recorded in `generated/`. The generator:
 4. regenerates file metrics and all 916 section identifiers; and
 5. emits the summary values above.
 
-The frozen outputs must not be regenerated against later standards content.
-After restructuring, use a separate comparison output and preserve this
-baseline.
+The generator retired at zero-Bash closure. The frozen outputs must not be
+regenerated against later standards content. After restructuring, use a
+separate comparison output and preserve this baseline.
 
 ## Known Baseline Limitations
 

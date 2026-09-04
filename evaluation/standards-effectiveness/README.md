@@ -12,7 +12,7 @@ restructure plan was added and before normative standards changed.
 `corpus.tsv` classifies every Markdown artifact by its current kind,
 normative role, preliminary target role, preliminary disposition, and frozen
 source.
-`generate-baseline.sh` reads each artifact from the frozen commit and writes:
+The accepted baseline capture wrote:
 
 - `generated/file-metrics.tsv`: lines, headings, and strong imperative
   occurrences by file;
@@ -20,14 +20,8 @@ source.
   normative or operationally derived guidance; and
 - `generated/summary.tsv`: corpus totals used by the baseline report.
 
-Run:
-
-```bash
-./evaluation/standards-effectiveness/generate-baseline.sh \
-  /path/to/Coding-Standards
-```
-
-Generated metrics are factual inventory. `findings.md` owns semantic findings
+Those generated metrics are frozen factual inventory. The migration-only
+generator retired at zero-Bash closure; `findings.md` owns semantic findings
 such as duplication, conflicts, broad obligations, and ownership gaps.
 
 The working tree contains ignored prompt files. Their contents are frozen under
@@ -52,11 +46,12 @@ fixture requires a recorded reason and before/after rescoring.
 - `metadata-schema.md` defines canonical module metadata.
 - `owner-map.tsv` and `owner-overrides.tsv` map the baseline corpus to proposed
   canonical owners.
-- `generate-owner-map.sh` writes the complete 916-section owner proposal.
+- The generated owner-map proposal is retained as accepted evidence; its
+  migration-only generator retired at zero-Bash closure.
 - The registered `metadata-fixtures` suite validates the metadata contract and
   its exact positive and negative diagnostic corpus through the Python engine.
-- `check-metadata.sh` remains a migration-owned helper for its existing
-  semantic consumers only; migrated suites do not execute it as a fallback.
+- Registered metadata suites own validation directly; no Bash metadata helper
+  or fallback remains.
 
 ## Accelerated Milestone 7 Execution
 
@@ -69,17 +64,10 @@ integration gate, semantic outcome, and prerequisites.
 The registered `milestone-7-accelerated-execution-replan` suite runs through
 the Python engine. It proves exact pending-row coverage, package cohesion,
 missing-owner state, immutable-train alignment, owner-action decisions, and
-accepted re-plan evidence. Shared integration remains serial, and
-complete-suite checkpoints remain fail-fast.
-
-During Bash-to-declarative migration, package admission and implementation run
-focused dependency closure, package/edge authority, the complete declarative
-registry, graph and plan checks, route/removal evidence, diff integrity, and
-declared read-only-source checks. Run the transitive mixed Bash suite once at a
-bounded wave checkpoint, or immediately before and after a shared engine,
-helper, launcher, metadata-schema, edge-contract, or routing-contract change.
-Run a retained Bash checker between checkpoints only when the generated graph
-proves that the package changed evidence it consumes.
+accepted re-plan evidence. Shared integration remains serial. The completed
+Bash-to-declarative migration now has one Python-only complete checkpoint; its
+temporary package, edge, numeric, and retained-process lifecycle machinery has
+retired.
 
 The registered `decision-engine-contract` suite exercises canonical
 decision-table evaluation through the Python engine. A package supplies finite

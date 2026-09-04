@@ -7441,3 +7441,24 @@
   Final executable evidence remains header-only at 0 nodes, 0 edges, and 0
   components. No Bash verifier or helper remains; M6-Z1 terminal cleanup is
   next.
+
+## 2026-09-03 - M6-Z1 Zero-Bash Closure
+
+- Standards Engine applications `fc22c42a` and `9790e576` retired the three
+  migration-launcher and five migration-only module projections before their
+  implementation paths were removed.
+- Executed every accepted terminal disposition: deleted the final three Bash
+  launchers, temporary migration Python modules and check kinds, four temporary
+  suites, generated graph/numeric evidence, lifecycle tables, and orphan
+  supplemental catalog nodes.
+- Complete mode now invokes the immutable Python catalog directly and exposes
+  one result model through text, JSON, and the library API. No retained-process
+  phase, generated migration preflight, adapter, compatibility path, or
+  fallback remains.
+- All 51 dependency-local coverage requirement IDs were renewed against the
+  final suite-input horizon. The 349 verifier tests, 68 Standards Engine tests,
+  and all 271 registered suites pass; text and JSON complete summaries agree.
+- Final inventory contains no `.sh` path under the evaluation or verifier
+  migration roots. The verification-engine plan and its Python design recovery
+  are accepted; detailed evidence is in
+  [M6-Z1 closure](reports/m6-z1-zero-bash-closure.md).

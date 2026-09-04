@@ -13,8 +13,6 @@ from .derived_evidence import (
     parse_repository_subjects_check,
     parse_table_text_absence_check,
 )
-from .edge_dispositions import parse_edge_dispositions_check
-from .execution_train import parse_execution_train_check
 from .exact_text import parse_exact_text_check
 from .git_index_paths import parse_git_index_paths_check
 from .inclusion import parse_inclusion_check
@@ -28,8 +26,6 @@ from .markdown_section_text import parse_markdown_section_text_check
 from .markdown_structure import parse_markdown_structure_check
 from .metadata import parse_metadata_graph_check
 from .metadata_route import parse_metadata_route_check
-from .migration_python_dispositions import parse_migration_python_dispositions_check
-from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .path_state import parse_path_state_check
 from .plan_contract import parse_plan_contract_check
 from .policy_impact import parse_policy_impact_check
@@ -67,10 +63,6 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_key_coverage_check(raw, suite_id)
     if kind == "table_text_absence":
         return parse_table_text_absence_check(raw, suite_id)
-    if kind == "edge_dispositions":
-        return parse_edge_dispositions_check(raw, suite_id)
-    if kind == "execution_train":
-        return parse_execution_train_check(raw, suite_id)
     if kind == "exact_text":
         return parse_exact_text_check(raw, suite_id)
     if kind == "git_index_paths":
@@ -105,16 +97,12 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_metadata_graph_check(raw, suite_id)
     if kind == "metadata_route":
         return parse_metadata_route_check(raw, suite_id)
-    if kind == "migration_python_dispositions":
-        return parse_migration_python_dispositions_check(raw, suite_id)
     if kind == "reference_inventory":
         return parse_reference_inventory_check(raw, suite_id)
     if kind == "table":
         return parse_table_check(raw, suite_id)
     if kind == "relation":
         return parse_relation_check(raw, suite_id)
-    if kind == "numeric_audit_lifecycle":
-        return parse_numeric_lifecycle_check(raw, suite_id)
     raise EngineError(
         Diagnostic(
             code="CONFIG.UNKNOWN_CHECK",

@@ -15842,3 +15842,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   generated, numeric, unit, declarative, plan, and complete mixed evidence
   pass. Final graph: 6 Bash checkers, 8 nodes, 30 edges, and 8 components;
   fresh graph evidence is required next.
+
+## 2026-09-03 - M6-Z1 Verification Migration Acceptance
+
+- The accepted M6-I126 boundary contained no Bash verifier or helper. M6-Z1
+  completed the terminal cleanup by retiring the remaining three Bash
+  launchers and every zero-Bash-triggered temporary Python lifecycle path.
+- Standards Engine applications `fc22c42a` and `9790e576` removed the affected
+  policy projections before implementation deletion. Current policy coverage
+  remains complete at 51 of 51 renewed requirements.
+- The canonical complete command now runs only the 271-suite Python catalog;
+  text and JSON modes agree with 271 passes and no failures or blocks.
+- Verifier and Standards Engine regressions pass, the suite-input projection is
+  fresh, and no `.sh` path remains under the evaluation or verifier migration
+  roots. The verification-engine and Python-engine recovery plans are accepted;
+  parent Milestone 7 continues only with manual semantic-ownership review.

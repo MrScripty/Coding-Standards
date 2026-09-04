@@ -3,7 +3,8 @@
 ## Boundary
 
 The canonical disposition authority is
-[`migration-python-dispositions.tsv`](../../../../../evaluation/standards-effectiveness/migration-python-dispositions.tsv).
+`migration-python-dispositions.tsv`, which retired with its migration-only
+subjects at M6-Z1 and remains available through repository history.
 It covers migration-only Python modules and exposed check kinds plus the
 launchers, integration hooks, tests, suites, live lifecycle records, generated
 artifacts, and documentation that would otherwise preserve those interfaces.

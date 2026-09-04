@@ -28,21 +28,14 @@ PYTHONPATH="$PWD" /tmp/coding-standards-verifier/bin/python -P \
   tools/standards_verifier/verify.py --complete
 ```
 
-Complete mode first verifies the generated Bash migration inventory and graph,
-then runs every registered declarative suite once in dependency order, and
-finally fail-fast executes each retained Bash verifier in deterministic
-inventory order. Retained executable paths are derived from repository files,
-not suite or registry configuration. When no Bash verifiers remain, the same
-command succeeds after the generated and declarative phases without a special
-adapter or fallback. `--complete` is mutually exclusive with selection/listing
-options and supports text output only while retained checkers can write their
-native output.
+Complete mode runs every registered Python suite once in dependency order.
+It has no generated migration preflight, retained-process phase, adapter, or
+fallback. `--complete` is mutually exclusive with selection and listing
+options and supports both text and JSON output.
 
-Library consumers use `run_complete_verification(repo_root, quiet=True)` to
-receive the same checkpoint as one structured result. Quiet execution routes
-generated-check diagnostics through an invocation-local output callback and
-retained-checker output directly to the null device; it does not replace
-process-global Python streams.
+Library consumers use `run_complete_verification(repo_root)` to receive the
+same Python-only checkpoint as one structured result. Suite execution itself
+does not write progress output or substitute process-global streams.
 
 Run one suite and its dependencies:
 
@@ -82,10 +75,11 @@ owner metadata, contained consumers, supported policy relations, non-empty
 applicability, registered evidence owners, duplicate semantic identities, and
 current policy-unit coverage certificates. Every semantic consumer, including
 an enforcement suite, is selected only by an explicit compiled relationship.
-Hyperlinks, lexical similarity, standards `Requires`, suite ownership, and the
-temporary Bash checker graph never create semantic impact edges. The independent
-coverage horizon and authorized audit detect missing consumers; missing edges
-require an explicit declaration correction.
+Hyperlinks, lexical similarity, standards `Requires`, and suite ownership do
+not create semantic impact edges. The retired temporary Bash checker graph did
+not create them either. The independent coverage horizon and authorized audit
+detect missing consumers; missing edges require an explicit declaration
+correction.
 
 Repository graph composition reads canonical standards membership from
 `evaluation/standards-effectiveness/canonical-module-corpus.toml`. That
@@ -96,98 +90,10 @@ derived by excluding the `reference` role. Semantic validation suites do not
 select graph membership, and corpus, node, role, and edge counts are derived
 observations rather than stored acceptance values.
 
-Regenerate or verify the exact Bash checker structure and dependency graph
-artifacts:
-
-```bash
-python3 tools/standards_verifier/generate_inventory.py --write
-python3 tools/standards_verifier/generate_inventory.py --check
-```
-
-The generated artifacts measure structure only. They record exact executable
-and frozen-contract references, uniquely resolved verifier/helper dependencies,
-strongly connected components, and condensation waves. Missing or ambiguous
-targets are typed diagnostics. The generator does not infer canonical owner,
-semantic risk, package cohesion, or migration disposition from a filename,
-shell mechanism, or graph shape; those remain reviewed planning decisions.
-Component identities derive from each component's exact sorted canonical member
-paths, so unrelated checker insertion or removal does not renumber surviving
-components. Identity changes when component membership changes.
-Component list columns use `-` for an empty set and comma-separated repository
-paths or component identifiers otherwise.
-
-Create the immutable numeric-comparison audit baseline:
-
-```bash
-python3 tools/standards_verifier/generate_numeric_audit.py --write
-```
-
-The numeric audit derives canonical scope from current `verify-*.sh` inventory
-and records comparisons where an adjacent operand is an exact numeric literal.
-It recognizes shell numeric operators and symbolic comparison operators through
-two fixed lexical matchers; it does not parse Bash or infer semantic meaning.
-Candidate IDs derive from checker path, matcher, exact expression, and repeated
-expression occurrence, so unrelated line movement changes diagnostics but not
-identity. The generated TSV owns paths, expressions, source positions,
-fingerprints, and cardinality and must not be hand-edited. `--write` is
-idempotent for identical content and refuses to replace a changed baseline.
-It has no current-state check mode because accepted checker retirement must not
-rewrite or invalidate historical evidence.
-
-Verify baseline classification and current lifecycle:
-
-```bash
-python3 tools/standards_verifier/verify.py --suite numeric-comparison-classification
-```
-
-The suite's `numeric_audit_lifecycle` check derives current candidates from the
-same canonical collector. Current identities must remain a subset of the
-immutable baseline. A missing identity is valid only when its checker is absent
-from canonical live inventory and exactly one accepted `checker:<path>` package
-row supplies a non-empty owner, or when an accepted candidate-retirement package
-owns an exact generated candidate mapping. A still-live unexplained candidate,
-new identity, missing or ambiguous package, non-accepted package, unavailable
-owner, stale mapping, and unknown mapping produce typed diagnostics. Baseline,
-classification, package, and retirement schemas are exact. The check writes no
-current snapshot, owner map, progress, or count and infers neither package nor
-owner from names, routes, source text, or graph relationships.
-
-Record exact live-checker candidate retirements only after adding an explicit
-package in the `admitted` state:
-
-```bash
-python3 tools/standards_verifier/generate_numeric_retirements.py \
-  --write --package-id <package-id>
-```
-
-The recorder derives all currently missing live-checker candidate identities,
-preserves existing mappings, and refuses to add identities to an accepted
-package. After review, change the package state to `accepted` and verify exact
-coverage:
-
-```bash
-python3 tools/standards_verifier/generate_numeric_retirements.py --check
-```
-
-The generated mapping is durable evidence rather than semantic authority. The
-package supplies owner, outcome, and acceptance; no candidate identity,
-expression, source position, or count is manually copied.
-`verify.py --complete` includes this freshness check after checker inventory and
-dependency-graph verification.
-
 Suite and registry TOML is strict. Unknown keys, schema versions, check kinds,
 operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
 variables, or write files.
-
-The migration-only `execution_train` check reads the immutable train,
-decomposition, owner map, and accepted dispositions through exact table
-schemas. It expands baseline ranges, proves one-time child coverage, rejects
-partial or noncontiguous progress, applies one-time owner creation transitions,
-and checks the resulting contained owner paths. Its immutable row, identifier,
-and checkpoint totals are explicit suite inputs; derived progress and logical
-cluster counts are not stored as parallel authority. The check is removed with
-its registered suite at zero-Bash acceptance.
 
 The `plan_contract` check validates one contained UTF-8 Markdown plan against
 the repository's lifecycle, objective-evidence, final-projection, and
@@ -202,13 +108,6 @@ bodies. Focused execution parses only the selected dependency closure, while
 `--all` and `--complete` parse every registered suite. An unrelated malformed
 suite therefore does not block listing or ordinary focused execution; a
 malformed selected suite or dependency remains a typed failure.
-
-A check whose invariant inspects assertion identities outside its execution
-closure explicitly implements the complete-catalog marker. The engine then
-loads every suite body through the same strict parser before running that check.
-Execution and catalog-aware checks consume that catalog; checks do not reopen
-registry or suite TOML, construct a second reverse index, or fall back to a
-check-local representation.
 
 The `decision` check has two mutually exclusive canonical forms. The compact
 single-output form uses `expected_column`, `default`, and ordered `rules`; its
@@ -462,18 +361,9 @@ check kind. `markdown_structure` owns exact headings and line ceilings;
 `table`, `repository_paths`, `key_coverage`, and `relation` own membership and
 identifier evidence; Markdown checks own target and exact-destination coverage;
 and table-derived or inline text checks own non-authority and Router exclusion.
-The source-index suite and fixtures contain the migration policy. Generic
-Python modules contain no source-index schema, migration state, Router prose,
-or fixed fixture topology.
-
-Numeric count-authority migration uses a generated immutable lexical snapshot,
-not a manually maintained candidate manifest. The snapshot derives all
-mechanical candidate facts and totals from canonical Bash verifier inventory.
-It is deliberately semantic-free: later reviewed evidence may classify a
-generated identity, but cannot restate its path, expression, owner, normal
-disposition, package, progress, or cardinality. Missing, malformed, duplicate,
-escaping, invalid UTF-8, changed, unavailable, and unauthorized lifecycle
-evidence has typed outcomes.
+The source-index suite and fixtures contain source-index policy. Generic Python
+modules contain no source-index schema, migration state, Router prose, or fixed
+fixture topology.
 
 The `metadata_graph` check parses the nine canonical Markdown metadata fields
 without global normalization. Direct mode accepts one non-empty `paths` list
@@ -499,55 +389,6 @@ graph engine; it does not copy edges into Python, infer modules from prose or
 links, or substitute a nearby route. Resolved rows reject unresolved selection
 values, unresolved rows reject partial selections, and decision and expectation
 case sets must match exactly.
-
-The temporary `migration_python_dispositions` check derives module and check-kind
-candidates from explicit top-level lifecycle declarations in Python source. A
-module declaration supplies the terminal trigger; a check module may also
-declare its registered check kinds. Module IDs and repository paths derive from
-the contained package location. The reviewed disposition table remains the
-decision owner and must cover the derived candidate set exactly. The check does
-not classify candidates from names, imports, links, directories, or the
-disposition table itself, and it terminates with the migration-only system at
-accepted zero-Bash closure.
-
-The `edge_dispositions` check validates migration packages against the exact
-generated executable graph. Packages opt into exactly one configured mode.
-`edge-dispositions` requires every incident `executable_reference`,
-`helper_dependency`, and `verifier_dependency` edge to have one exact manifest
-row. `edge-free` prohibits manifest rows and requires the generated graph to
-contain no incident executable edges. Admitted edge-free packages must retain
-their checker; accepted edge-free packages must not. Admitted edge packages
-must name present edges; accepted edge packages retain their historical rows
-while their checker and graph edges are absent.
-
-Edge identity is the exact type, source, and target tuple. The package checker
-must be exactly one endpoint, which determines direction without a separate
-schema field or inferred default. Retained checker and artifact replacements
-name the opposite endpoint: the callee for an outbound edge or the caller for
-an inbound edge. Accepted packages reject both surviving prerequisites and
-dangling callers that still reference the deleted checker.
-
-Each edge row has one of these dispositions and replacement forms:
-
-| Disposition | Replacement form |
-| --- | --- |
-| `native-engine` | `assertion:<suite-path>#<check-id>` |
-| `independent-gate` | `checker:<path>` or `suite:<registered-suite-id>` |
-| `suite-requires` | `suite:<source-suite-id>-><target-suite-id>` |
-| `same-owner-package` | `package:<package-id>` |
-| `external-owned-artifact` | `artifact:<path>` |
-| `invalid/unresolved` | `unresolved:none` |
-
-Native assertions must name an existing check in a registered package-owned
-suite. A suite-backed independent gate names one registered suite, and its
-evidence must equal that suite's exact registry path. It does not create or
-require a registry dependency. Suite requirements are distinct: they must name
-an actual registry `requires` edge whose source suite is in the package write
-set. Retained checkers and external artifacts must equal the endpoint opposite
-the package checker. Replacement and evidence paths are repository-contained
-regular files. An `invalid/unresolved` row may document an admitted blocker but
-cannot be accepted. The check never infers a disposition from graph shape,
-replacement syntax, or registry topology, and it never executes a replacement.
 
 ## Git Reachability Evidence
 

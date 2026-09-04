@@ -296,11 +296,6 @@
           "suite": "disabled-behavior-claims"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "root-projection",
           "role": "content",
           "suite": "frontend-owner-contract"
@@ -420,11 +415,6 @@
           "suite": "csharp-async-owner-contract"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "legacy-projection",
           "role": "content",
           "suite": "godot-owner-contract"
@@ -540,11 +530,6 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "documentation-reference"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -1057,11 +1042,6 @@
           "suite": "cross-language-contract"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "prohibited-authority",
           "role": "content",
           "suite": "interop-applicability-index"
@@ -1411,11 +1391,6 @@
           "check": "router-projection",
           "role": "content",
           "suite": "documentation-decisions"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "router-routes",
@@ -2019,7 +1994,7 @@
       ]
     },
     {
-      "digest": "sha256:1f4d59f5f4a22efc9f74ddf7ec518bbcddea6a0e0311751a2a3319db25164a32",
+      "digest": "sha256:d7d000e1781ef8b279f1248f3634f519979d42a28f2f17477d1c0f7a75368690",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2031,19 +2006,7 @@
       ]
     },
     {
-      "digest": "sha256:e2fb81f4f527183370aedb77421a9aa2fdaf93f6bd166063bd4097bfcd748812",
-      "path": "docs/plans/standards-verification-engine/reports/m6-i118-execution-train-admission.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "admission-boundary",
-          "role": "content",
-          "suite": "execution-train"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:b10fe8488f0ed0ce7203227744cf292296dcf7d6ebd35d59cb479601caef1edd",
+      "digest": "sha256:234fc6fe2b731be31f0d54c2917b48157f18aeb2b59281354dee542ed4913765",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2111,11 +2074,6 @@
           "check": "documentation-projection",
           "role": "content",
           "suite": "documentation-policy-consolidation"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "execution-train"
         },
         {
           "check": "documentation-projection",
@@ -2393,28 +2351,6 @@
           "check": "requires-closure",
           "role": "canonical-module-corpus",
           "suite": "standards-recovery-routing"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:4b38bf712f08322390353979aa3a1f87b273bfee9c4fbe78af84d01014e701e5",
-      "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "admitted-packages",
-          "role": "table",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "edge-contract",
-          "role": "packages",
-          "suite": "executable-edge-dispositions"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
         }
       ]
     },
@@ -2737,11 +2673,6 @@
           "check": "dispositions",
           "role": "content",
           "suite": "documentation-traceability-policy"
-        },
-        {
-          "check": "state-model",
-          "role": "dispositions",
-          "suite": "execution-train"
         },
         {
           "check": "exact-dispositions",
@@ -3761,18 +3692,6 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:a08c2f88a07de490f74f93fbbb28931a60d5f72464c1b72541003ac70745e08f",
-      "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "edge-contract",
-          "role": "dispositions",
-          "suite": "executable-edge-dispositions"
         }
       ]
     },
@@ -7563,40 +7482,6 @@
       ]
     },
     {
-      "digest": "sha256:b967d37364be8666cca81218f59dd23ad05ae29ebbfe6f254e93f758a2471e19",
-      "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "edge-contract",
-          "role": "edges",
-          "suite": "executable-edge-dispositions"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:b5edcab3d42e7fef51981742123506bf2ba8dd66ccc32ce8edd12ebd95084e4d",
-      "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "reference-inventory",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "reference-inventory",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:40ec9414089fa5a0c8d38ab7ad868f0d9359148bb05c3e1bd81664cf714635ab",
       "path": "evaluation/standards-effectiveness/generated/file-metrics.tsv",
       "state": "present",
@@ -7609,49 +7494,10 @@
       ]
     },
     {
-      "digest": "sha256:c38743dd8617ec212a4ca827bf6e376cf9507bec0de3aee1dd9a21014090802f",
-      "path": "evaluation/standards-effectiveness/generated/numeric-candidate-retirements.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:d46c837d2ba342261c56053f7f9fcc86b6fd6d10174e854dd29afc97f66ea2c1",
-      "path": "evaluation/standards-effectiveness/generated/numeric-comparison-candidates.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        },
-        {
-          "check": "generated-candidate-coverage",
-          "role": "right",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:2983fe4f609b7b3c601eb5954c6b8f6b84a92175d76d28056a0ff7efd9b5d56b",
       "path": "evaluation/standards-effectiveness/generated/rule-owner-map.tsv",
       "state": "present",
       "uses": [
-        {
-          "check": "state-model",
-          "role": "owner-map",
-          "suite": "execution-train"
-        },
         {
           "check": "language-index-owner-map",
           "role": "table",
@@ -8044,23 +7890,6 @@
       ]
     },
     {
-      "digest": "sha256:8e803e9788465864cf6d349301648145a823aa303be4b603e919474f34c751a5",
-      "path": "evaluation/standards-effectiveness/migration-python-dispositions.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "dispositions",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "migration-python-terminal-dispositions",
-          "role": "table",
-          "suite": "checker-migration-packages"
-        }
-      ]
-    },
-    {
       "digest": "sha256:d198ebfb01fefa441a4a7c76f098b58166a34eef86903d5144f42f83f4816653",
       "path": "evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md",
       "state": "present",
@@ -8255,11 +8084,6 @@
           "check": "execution-overlay",
           "role": "table",
           "suite": "dependencies-owner-contract"
-        },
-        {
-          "check": "state-model",
-          "role": "execution-decomposition",
-          "suite": "execution-train"
         },
         {
           "check": "disposition-lineage",
@@ -8617,11 +8441,6 @@
           "check": "execution-train",
           "role": "table",
           "suite": "dependencies-owner-contract"
-        },
-        {
-          "check": "state-model",
-          "role": "execution-train",
-          "suite": "execution-train"
         },
         {
           "check": "historical-train-rows",
@@ -9626,57 +9445,6 @@
       ]
     },
     {
-      "digest": "sha256:4d7b449b33beb2028b311f9775dde9c24b7dbf32a494e0ca51daac55c9986349",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-readme-consumers",
-          "role": "reference-inventory",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-consumer-classifications",
-          "role": "table",
-          "suite": "milestone-7-row-35-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:b1607c625f7e39489738e47bd975ca1c56d55862fc408fdda28b67d5caeb8a28",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "readme-dependency-lifecycle",
-          "role": "table",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "readme-dependency-paths",
-          "role": "reference-inventory",
-          "suite": "milestone-7-row-35-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:a77d16d12c14a7cc9b50e88177c52833ac5d7d29c67809d8969c6ab7c4b188cf",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "derived-transitive-callers",
-          "role": "reference-inventory",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "transitive-callers",
-          "role": "table",
-          "suite": "milestone-7-row-35-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:837b5b23f1028eb59705b7aa4ed855c3bc84a536cac55b966092f42bba9ac189",
       "path": "evaluation/standards-effectiveness/milestone-7-row-36-decomposition.md",
       "state": "present",
@@ -10256,40 +10024,6 @@
       ]
     },
     {
-      "digest": "sha256:8b4eee3452200f2def21f98e855be2368bab95cbe16c448ce5a04bd34621bf6a",
-      "path": "evaluation/standards-effectiveness/numeric-candidate-retirement-packages.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:14b81cd0c68c1a7c19ef57e57cfe05918f9ae178b93f477284d0a1113a640677",
-      "path": "evaluation/standards-effectiveness/numeric-comparison-decisions.tsv",
-      "state": "present",
-      "uses": [
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        },
-        {
-          "check": "classification-schema",
-          "role": "table",
-          "suite": "numeric-comparison-classification"
-        },
-        {
-          "check": "generated-candidate-coverage",
-          "role": "left",
-          "suite": "numeric-comparison-classification"
-        }
-      ]
-    },
-    {
       "digest": "sha256:7bdb126c8b4284825d74999e9adf6b433e3173e42dd54f8ab7fd26ba772f4a08",
       "path": "evaluation/standards-effectiveness/owner-map.tsv",
       "state": "present",
@@ -10319,7 +10053,7 @@
       ]
     },
     {
-      "digest": "sha256:e21b049c938ecb9fbdabdfcaf3c370483912c9d9384789c5c862ac7aee8288a8",
+      "digest": "sha256:1960fc9f040cd7a14d0b68d9f67da94538ecbac2377c62b5b7cb088c0aa4fdf3",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -10415,7 +10149,7 @@
       ]
     },
     {
-      "digest": "sha256:a3e8affda880fc280f5f24dababecc156760906791e38a1199420e665d5058f3",
+      "digest": "sha256:87eec2efc2e7faa7e01caa4e03a708bab4d8f751de9e6bdafa0009c2e20433ec",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml",
       "state": "present",
       "uses": [
@@ -10706,7 +10440,7 @@
       ]
     },
     {
-      "digest": "sha256:4c0c459232a57e036a16572c59d22ffe8fd2dd62d9972beafb79a2a731a39fe2",
+      "digest": "sha256:58edf5631abd45f7c716d8c08fa1a627651971694f67060346c4394509ef74b0",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -11044,18 +10778,6 @@
     {
       "digest": "sha256:f9a49c7fc9883c1c318d0617dd82d810ee8fda93b08277937a9364c44ede231f",
       "path": "evaluation/standards-effectiveness/suites/build-owner-contract.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:5a32b61ba2a419c1847bd68e17636de8d522a337dac076a4480d2bda55306577",
-      "path": "evaluation/standards-effectiveness/suites/checker-migration-packages.toml",
       "state": "present",
       "uses": [
         {
@@ -11502,39 +11224,10 @@
       ]
     },
     {
-      "digest": "sha256:dd164d955995c7de3680c926e8af0b08b53c3ee0677b2213a78d6a8c94414918",
+      "digest": "sha256:0d93ef2eb12d87da4de74a7962f2591e4880493e41829abf081307e9af975295",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "state": "present",
       "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:abf4534ce2fad6f96a20b949e6c990248118f90199088bc26a80bdc53f97d10d",
-      "path": "evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:c1523b7390ff9e619e18fbc6d2c2855b860bdddd7e53d9ba63811d8ba03ef6cf",
-      "path": "evaluation/standards-effectiveness/suites/execution-train.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "terminal-authority",
-          "role": "required-present",
-          "suite": "execution-train"
-        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -12247,7 +11940,7 @@
       ]
     },
     {
-      "digest": "sha256:e3fee771714bbf19a4aa9cfdf3d2959ec248af2656060ed5c1203cfe8d353f26",
+      "digest": "sha256:d49f0ee944625464181b13a22da31efac2544d3c595c4bb0ccb48e0ae8b4875b",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12511,18 +12204,6 @@
     {
       "digest": "sha256:0b573ba1173073612859872cfde46d36e3e7a93ce1909b8f043408acdab6970a",
       "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:4c423b225904726c355f705cd834344282ce24e40452f2522b4b2e82d527e0f2",
-      "path": "evaluation/standards-effectiveness/suites/numeric-comparison-classification.toml",
       "state": "present",
       "uses": [
         {
@@ -14122,17 +13803,6 @@
       ]
     },
     {
-      "path": "evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh",
-      "state": "absent",
-      "uses": [
-        {
-          "check": "terminal-authority",
-          "role": "required-absent",
-          "suite": "execution-train"
-        }
-      ]
-    },
-    {
       "path": "evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh",
       "state": "absent",
       "uses": [
@@ -14404,11 +14074,6 @@
           "check": "rust-binding-contract-authority",
           "role": "content",
           "suite": "contract-ownership"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "legacy-route",
@@ -14789,11 +14454,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "profile",
           "role": "content",
           "suite": "frontend-applicability"
@@ -14934,11 +14594,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "canonical-owner-paths",
@@ -15187,11 +14842,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "canonical-profile",
           "role": "content",
           "suite": "interop-boundary-policy"
@@ -15354,11 +15004,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "ipc-policy",
           "role": "content",
           "suite": "ipc-payload-validation"
@@ -15449,11 +15094,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "canonical-profile",
@@ -15638,11 +15278,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "wave-owner-availability",
           "role": "required-present",
           "suite": "milestone-7-decomposition"
@@ -15723,11 +15358,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "canonical-owner-projection",
@@ -15817,11 +15447,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "canonical-owner-paths",
           "role": "projected-repository-path",
           "suite": "milestone-7-row-13-decomposition"
@@ -15897,11 +15522,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "language-index-links",
@@ -16174,11 +15794,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -16455,11 +16070,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "wave-owner-availability",
           "role": "required-present",
           "suite": "milestone-7-decomposition"
@@ -16540,11 +16150,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -16729,11 +16334,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -16928,11 +16528,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "wave-owner-availability",
           "role": "required-present",
           "suite": "milestone-7-decomposition"
@@ -17043,11 +16638,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -17190,11 +16780,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -17391,11 +16976,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "frontend-rendering-synchronization"
@@ -17501,11 +17081,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -17906,11 +17481,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -18684,11 +18254,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "tooling-reference",
@@ -20081,7 +19646,7 @@
       ]
     },
     {
-      "digest": "sha256:1fa350905d3e63afc52632602bc8b70cec4c2938855ac2b35e3650f135879832",
+      "digest": "sha256:87de9d75ddca67314d05e686934a2b1738e0610839bc88ca9c49295188cb0633",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -20165,7 +19730,7 @@
       ]
     },
     {
-      "digest": "sha256:70aee6573cc1d94b26f895306d3dd24287c0e1978972af05a1e88363fb44ab73",
+      "digest": "sha256:8813f487faf90b2458f25f5d2248d20873d9640c0d63c445a8f60ced1f658412",
       "path": "tools/standards_engine/tests/test_analysis.py",
       "state": "present",
       "uses": [
@@ -20872,58 +20437,7 @@
       ]
     },
     {
-      "digest": "sha256:d83c3bc8ce8d3cc5a66ff68c0a78567907f2b0cc35ad3bc150887805f1329060",
-      "path": "tools/standards_verifier/generate_inventory.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:f04a51dab416bf243df26b68edbea311f09a38eb1cb0b8ce17ae005e2fc587a4",
-      "path": "tools/standards_verifier/generate_numeric_audit.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:8ae693386ae513e96fe5410a38e416128a33e4da870b5d3103a8e4595835dd0a",
-      "path": "tools/standards_verifier/generate_numeric_retirements.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:6fb8860f63d3e0c4d413468bb3c523278af3df32e835ab1fcbbe674602086c4d",
+      "digest": "sha256:94009a1e1f42d9cb6d526e440c21c3e835cb0ffa2d42a8ba4fd83acff8281274",
       "path": "tools/standards_verifier/pyproject.toml",
       "state": "present",
       "uses": [
@@ -20940,7 +20454,7 @@
       ]
     },
     {
-      "digest": "sha256:7139e5fd933acbc8ad991ffe1fb71edf71ad00498d6e86d3412eb070f36b5a36",
+      "digest": "sha256:d6d5b8e919779f87ad279769712ae251aa6f57b49fb0f2363e15ea73422a48c5",
       "path": "tools/standards_verifier/standards_verifier/__init__.py",
       "state": "present",
       "uses": [
@@ -20948,11 +20462,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -20967,7 +20476,7 @@
       ]
     },
     {
-      "digest": "sha256:696b999590f84af04df87758b24a1b0209af15ccfa21faf760451ea2c28e1467",
+      "digest": "sha256:31dbd2565b5229a20675140a5e459861dce6148ebf6d7ca37fed0555406ec3d7",
       "path": "tools/standards_verifier/standards_verifier/checks/__init__.py",
       "state": "present",
       "uses": [
@@ -20975,11 +20484,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21002,11 +20506,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         }
       ]
     },
@@ -21019,11 +20518,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "current-structure",
@@ -21041,11 +20535,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21070,33 +20559,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:649e06921217d695ad88dbfcb94ee80b6f63e6439b6aac16a223df8970109002",
-      "path": "tools/standards_verifier/standards_verifier/checks/edge_dispositions.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21114,11 +20576,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21131,28 +20588,6 @@
       ]
     },
     {
-      "digest": "sha256:36fc9a6c54bdd2268065b48571c1b90f73b1f27c7ec311632f16c7adb2263d78",
-      "path": "tools/standards_verifier/standards_verifier/checks/execution_train.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "terminal-authority",
-          "role": "required-present",
-          "suite": "execution-train"
-        }
-      ]
-    },
-    {
       "digest": "sha256:741e4925d70dfd7245b0602ee3fdbb59b688399a94c7950bbc33547846478bf9",
       "path": "tools/standards_verifier/standards_verifier/checks/git_index_paths.py",
       "state": "present",
@@ -21161,11 +20596,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "current-structure",
@@ -21183,11 +20613,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21212,11 +20637,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21234,11 +20654,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21254,11 +20669,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         }
       ]
     },
@@ -21271,11 +20681,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         }
       ]
     },
@@ -21288,11 +20693,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21317,11 +20717,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21337,11 +20732,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "current-structure",
@@ -21361,11 +20751,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21381,11 +20766,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "current-structure",
@@ -21405,11 +20785,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21425,11 +20800,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21454,58 +20824,9 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:d7419150a705e37f84d618bbe1d2e352d59691bf4d20d377fd721fe50abeab60",
-      "path": "tools/standards_verifier/standards_verifier/checks/migration_python_dispositions.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:2e7b7aafc5013ae0c72a9aa5c871a33fa90d52dc12d71d449c28d649b1ccba7c",
-      "path": "tools/standards_verifier/standards_verifier/checks/numeric_lifecycle.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "current-structure",
@@ -21523,11 +20844,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21552,11 +20868,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21577,11 +20888,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21606,11 +20912,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21626,11 +20927,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "current-structure",
@@ -21650,11 +20946,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21670,11 +20961,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21699,11 +20985,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21721,11 +21002,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21738,7 +21014,7 @@
       ]
     },
     {
-      "digest": "sha256:cf5642fa2567730e448f2265a694bcfecd492a55fea265912d6287fa7943431f",
+      "digest": "sha256:9bd69963a333f0590c47c86f23425412ab9358ffe2c94d676c23ba40c5b68c34",
       "path": "tools/standards_verifier/standards_verifier/cli.py",
       "state": "present",
       "uses": [
@@ -21746,33 +21022,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:f4493f58618f4df01d44c508ed5dce23f7ba5a23e12af9b3c9fe228e3b4c800a",
-      "path": "tools/standards_verifier/standards_verifier/complete_checkpoint.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "registered-consumers",
-          "role": "required-present",
-          "suite": "evidence-oracle-boundaries"
         }
       ]
     },
@@ -21785,11 +21034,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -21809,11 +21053,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21821,7 +21060,7 @@
       ]
     },
     {
-      "digest": "sha256:a5ef46c85c66e579ce8d0b657f2fab47cfae25d3b2c5564e28b9bdf58b0ca5dc",
+      "digest": "sha256:ba53599cdc5927b018daf020a55cb12c474fde1ae26d99e0caaaad5fca59f979",
       "path": "tools/standards_verifier/standards_verifier/engine.py",
       "state": "present",
       "uses": [
@@ -21831,11 +21070,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21843,7 +21077,7 @@
       ]
     },
     {
-      "digest": "sha256:ab45492a0641c7c85466214e45c30e838c8ebb0b9b621611387fc7a887b5bfc8",
+      "digest": "sha256:752db9aab7b47e4e6431bf2772d15550963c25034df773154c2507950b611269",
       "path": "tools/standards_verifier/standards_verifier/entrypoints.py",
       "state": "present",
       "uses": [
@@ -21851,38 +21085,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:07ef0314fa2c1539139c270cba84a2802c1ba43a287c700a24cf1a78ffe28640",
-      "path": "tools/standards_verifier/standards_verifier/generated_artifacts.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "registered-consumers",
-          "role": "required-present",
-          "suite": "evidence-oracle-boundaries"
         },
         {
           "check": "current-structure",
@@ -21902,11 +21104,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -21922,60 +21119,11 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         }
       ]
     },
     {
-      "digest": "sha256:745868e4da6de5d131610e946d7070eb9749fa8d9adb2b7d6534797f21906474",
-      "path": "tools/standards_verifier/standards_verifier/inventory.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
-          "check": "registered-consumers",
-          "role": "required-present",
-          "suite": "evidence-oracle-boundaries"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:76be903403bbbf153a3c6b1e3ccb9d97a2a970f1c71b43e7cc327c16ad0c9074",
-      "path": "tools/standards_verifier/standards_verifier/migration_graph.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:c8e7c7c03c2185191451001b989b5e68290e3fc95e71e4d82fde693dc7117c46",
+      "digest": "sha256:53e0107d7cb1157e932e44ee3f57aa939fd36c935874f01404c857400d49441d",
       "path": "tools/standards_verifier/standards_verifier/model.py",
       "state": "present",
       "uses": [
@@ -21985,11 +21133,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
@@ -21998,40 +21141,6 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:a23a8aa5b2bd3f4d79125f037d605fcd44d4b88bb4665959bff4d90a5b339dcb",
-      "path": "tools/standards_verifier/standards_verifier/numeric_audit.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:5a10ce55ca77ba399cb611fbee49e04f95f610246623450217272ba95f837cb2",
-      "path": "tools/standards_verifier/standards_verifier/numeric_retirements.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         }
       ]
     },
@@ -22044,11 +21153,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         }
       ]
     },
@@ -22061,11 +21165,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -22090,11 +21189,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -22110,11 +21204,6 @@
           "check": "python-package-contract",
           "role": "package-contract-input",
           "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
         },
         {
           "check": "registered-consumers",
@@ -22139,11 +21228,6 @@
           "suite": "a1c-public-cutover"
         },
         {
-          "check": "migration-python-candidate-completeness",
-          "role": "package-python",
-          "suite": "checker-migration-packages"
-        },
-        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
@@ -22151,19 +21235,7 @@
       ]
     },
     {
-      "digest": "sha256:ff183c930c65839979a1d61a1da8065aade66fa57808347164d0c6c4192aca09",
-      "path": "tools/standards_verifier/tests/test_complete_checkpoint.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "registered-consumers",
-          "role": "required-present",
-          "suite": "evidence-oracle-boundaries"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:66f50960a33163d5e4556bc4046bd28fa5fa00509c80d40eba174ea2c3c10456",
+      "digest": "sha256:e05fefc81d0698f7f184f1079f7e83ffa1f1756a14e3ca37dab1fcdc6f6acd27",
       "path": "tools/standards_verifier/tests/test_engine.py",
       "state": "present",
       "uses": [
@@ -22175,44 +21247,8 @@
       ]
     },
     {
-      "digest": "sha256:69a893110eaa8b9c15c0b94bc5c0901d818d04b8bdf05ff35d0e3883f47dc212",
-      "path": "tools/standards_verifier/tests/test_execution_train.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "terminal-authority",
-          "role": "required-present",
-          "suite": "execution-train"
-        }
-      ]
-    },
-    {
       "digest": "sha256:7432123e0efd61f24a11b2688770f2dd73efe0cfb577398fde714229450e1032",
       "path": "tools/standards_verifier/tests/test_file_contracts.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "registered-consumers",
-          "role": "required-present",
-          "suite": "evidence-oracle-boundaries"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:891b1362ea79aadf0d17c4fb663026f2de4a992ddc383815afb968d9c7fb077b",
-      "path": "tools/standards_verifier/tests/test_generated_artifacts.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "registered-consumers",
-          "role": "required-present",
-          "suite": "evidence-oracle-boundaries"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:bf289df1247ba1a228a480679ba8189ba21e1b7250d2d7d5172a377549f8a545",
-      "path": "tools/standards_verifier/tests/test_inventory.py",
       "state": "present",
       "uses": [
         {
@@ -22396,11 +21432,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "frontend-rendering-synchronization"
@@ -22513,11 +21544,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "canonical-owner-paths",
           "role": "required-present",
           "suite": "milestone-7-row-15-decomposition"
@@ -22608,11 +21634,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -22875,11 +21896,6 @@
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "documentation-changelog-closure"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -23179,11 +22195,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "cross-platform-policy",
           "role": "content",
           "suite": "filesystem-containment-policy"
@@ -23314,11 +22325,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "dependencies-policy",
@@ -23453,11 +22459,6 @@
           "suite": "diagnostics-owner-contract"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "wave-owner-availability",
           "role": "required-present",
           "suite": "milestone-7-decomposition"
@@ -23518,11 +22519,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "owner",
@@ -23605,11 +22601,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "canonical-owner-paths",
@@ -23702,11 +22693,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "wave-owner-availability",
@@ -23814,11 +22800,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -24175,11 +23156,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "commit-projection",
           "role": "content",
           "suite": "planning-consolidation"
@@ -24374,11 +23350,6 @@
           "suite": "evidence-oracle-boundaries"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "wave-owner-availability",
           "role": "required-present",
           "suite": "milestone-7-decomposition"
@@ -24494,11 +23465,6 @@
           "check": "routing-closure",
           "role": "canonical-module",
           "suite": "development-proportionality"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "workflow",
@@ -24643,11 +23609,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "wave-owner-availability",
           "role": "required-present",
           "suite": "milestone-7-decomposition"
@@ -24763,11 +23724,6 @@
           "check": "release-policy",
           "role": "content",
           "suite": "documentation-changelog-closure"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "canonical-owner-paths",
@@ -24992,11 +23948,6 @@
           "suite": "development-proportionality"
         },
         {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
-        },
-        {
           "check": "tooling-workflow",
           "role": "content",
           "suite": "frontend-typescript-tooling"
@@ -25177,11 +24128,6 @@
           "check": "verification-policy",
           "role": "content",
           "suite": "evidence-oracle-boundaries"
-        },
-        {
-          "check": "state-model",
-          "role": "owner-state",
-          "suite": "execution-train"
         },
         {
           "check": "metadata-closure",
@@ -25602,21 +24548,16 @@
     }
   ],
   "registry": {
-    "digest": "sha256:4c0c459232a57e036a16572c59d22ffe8fd2dd62d9972beafb79a2a731a39fe2",
+    "digest": "sha256:58edf5631abd45f7c716d8c08fa1a627651971694f67060346c4394509ef74b0",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:222e9b1ae0ebfefb06a3ad8012fe5d14be29f9f2e161d01e7e87785fe74b8928",
+    "digest": "sha256:7a80ebaf22e1b1e3e82a84411e7c4046275e8cc3f2a0f5c37c3c08432627382a",
     "uses": [
       {
         "check": "python-package-contract",
         "role": "package-source-membership",
         "suite": "a1c-public-cutover"
-      },
-      {
-        "check": "migration-python-candidate-completeness",
-        "role": "package-source-membership",
-        "suite": "checker-migration-packages"
       },
       {
         "check": "tracked-prompt",
@@ -25803,18 +24744,6 @@
       "digest": "sha256:9ccc502bf31061fcfa967d2957bf504e73d435c2641b8744091de350703012db",
       "id": "milestone-7-row-19-structure",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-19-structure.toml",
-      "requires": []
-    },
-    {
-      "digest": "sha256:5a32b61ba2a419c1847bd68e17636de8d522a337dac076a4480d2bda55306577",
-      "id": "checker-migration-packages",
-      "path": "evaluation/standards-effectiveness/suites/checker-migration-packages.toml",
-      "requires": []
-    },
-    {
-      "digest": "sha256:abf4534ce2fad6f96a20b949e6c990248118f90199088bc26a80bdc53f97d10d",
-      "id": "executable-edge-dispositions",
-      "path": "evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml",
       "requires": []
     },
     {
@@ -26404,12 +25333,6 @@
       "requires": []
     },
     {
-      "digest": "sha256:4c423b225904726c355f705cd834344282ce24e40452f2522b4b2e82d527e0f2",
-      "id": "numeric-comparison-classification",
-      "path": "evaluation/standards-effectiveness/suites/numeric-comparison-classification.toml",
-      "requires": []
-    },
-    {
       "digest": "sha256:ccb4f136d50d69745b7ae7c7b150aa135209f90d7b4046e6479a6c24731bfe0d",
       "id": "s1-routing",
       "path": "evaluation/standards-effectiveness/suites/s1-routing.toml",
@@ -26422,7 +25345,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:e3fee771714bbf19a4aa9cfdf3d2959ec248af2656060ed5c1203cfe8d353f26",
+      "digest": "sha256:d49f0ee944625464181b13a22da31efac2544d3c595c4bb0ccb48e0ae8b4875b",
       "id": "milestone-7-row-35-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "requires": []
@@ -27182,7 +26105,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:dd164d955995c7de3680c926e8af0b08b53c3ee0677b2213a78d6a8c94414918",
+      "digest": "sha256:0d93ef2eb12d87da4de74a7962f2591e4880493e41829abf081307e9af975295",
       "id": "evidence-oracle-boundaries",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "requires": []
@@ -27287,12 +26210,6 @@
       "digest": "sha256:e34b635fa03df276587aa58cc93e972aef252451660cdb9537d53a101b400c84",
       "id": "milestone-7-rust-async-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml",
-      "requires": []
-    },
-    {
-      "digest": "sha256:c1523b7390ff9e619e18fbc6d2c2855b860bdddd7e53d9ba63811d8ba03ef6cf",
-      "id": "execution-train",
-      "path": "evaluation/standards-effectiveness/suites/execution-train.toml",
       "requires": []
     },
     {

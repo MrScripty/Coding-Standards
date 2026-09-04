@@ -1640,6 +1640,63 @@ class EngineTest(unittest.TestCase):
         self.assertEqual(status, 0)
         self.assertEqual(output.getvalue(), "broken\n")
 
+    def test_complete_runs_the_full_python_suite_catalog(self) -> None:
+        self.write("evidence.md", "required\n")
+        first = self.write_text_suite("first")
+        second = self.write_text_suite("second")
+        self.write_registry([("first", first, []), ("second", second, [])])
+        output = io.StringIO()
+
+        with contextlib.redirect_stdout(output):
+            status = main(
+                [
+                    "--repo-root",
+                    str(self.root),
+                    "--registry",
+                    self.registry,
+                    "--complete",
+                ],
+                default_repo_root=self.root,
+            )
+
+        self.assertEqual(status, 0)
+        self.assertIn("PASS first", output.getvalue())
+        self.assertIn("PASS second", output.getvalue())
+        self.assertIn("SUMMARY selected=2 passed=2 failed=0 blocked=0", output.getvalue())
+
+    def test_complete_supports_structured_json_output(self) -> None:
+        self.write("evidence.md", "required\n")
+        suite_path = self.write_text_suite("text")
+        self.write_registry([("text", suite_path, [])])
+        output = io.StringIO()
+
+        with contextlib.redirect_stdout(output):
+            status = main(
+                [
+                    "--repo-root",
+                    str(self.root),
+                    "--registry",
+                    self.registry,
+                    "--complete",
+                    "--format",
+                    "json",
+                ],
+                default_repo_root=self.root,
+            )
+
+        payload = json.loads(output.getvalue())
+        self.assertEqual(status, 0)
+        self.assertEqual(
+            payload["summary"],
+            {
+                "selected": 1,
+                "passed": 1,
+                "failed": 0,
+                "blocked": 0,
+            },
+        )
+        self.assertEqual(payload["results"][0]["id"], "text")
+
     def test_focused_selection_ignores_unrelated_malformed_suite(self) -> None:
         self.write("evidence.md", "required\n")
         selected = self.write_text_suite("selected")

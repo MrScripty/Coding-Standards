@@ -2,7 +2,7 @@ schema_version = 5
 
 # topic.architecture.authority-scope-admission
 [[attestations]]
-requirement_id = "sha256:8ad3a8e8e8020942be4c00aa43bac9d5a34287f43d7bd0f1df70c3d027713510"
+requirement_id = "sha256:6b093f0051e4bed335b041a8b8ca520e00b8b193f6be5e5bc32559489a6e086a"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
@@ -18,7 +18,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.architecture.composed-design-admission
 [[attestations]]
-requirement_id = "sha256:61b2e8fa89be73edd0a86641c694a4758a063d02787f1f1953d0de71be4f94ab"
+requirement_id = "sha256:19160f99fcd5ffa64211db5a47990d38fbe5b8c4f755e2f16c6eb6a6bb455991"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
@@ -31,7 +31,7 @@ auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-gua
 
 # topic.architecture.immutable-authority-closure
 [[attestations]]
-requirement_id = "sha256:13512c71ed90ddb0b7e84e9f66db68966892e4373593e9a1e14128b268455351"
+requirement_id = "sha256:afc34f7fdcad06405a4dfd3b47b96d2ba33068aa5e5699e1d71565fd68df92a9"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

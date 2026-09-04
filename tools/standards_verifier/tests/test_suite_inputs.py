@@ -174,19 +174,9 @@ class SuiteInputProjectionTest(unittest.TestCase):
                 for use in plan_checker["uses"]
             },
         )
-        lifecycle_uses = {
-            (use["suite"], use["check"], use["role"])
-            for use in files[
-                "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv"
-            ]["uses"]
-        }
-        self.assertIn(
-            (
-                "numeric-comparison-classification",
-                "candidate-lifecycle",
-                "numeric-lifecycle",
-            ),
-            lifecycle_uses,
+        self.assertNotIn(
+            "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
+            files,
         )
 
     def test_repository_index_membership_changes_projection_identity(self) -> None:

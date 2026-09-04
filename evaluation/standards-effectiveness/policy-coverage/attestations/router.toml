@@ -2,7 +2,7 @@ schema_version = 5
 
 # router.generated-contract-profile-applicability
 [[attestations]]
-requirement_id = "sha256:a5b7e41fe7fe5bee11b97b3457a12d53460b0501c11e03b418a1e949e25cd987"
+requirement_id = "sha256:e4361f1f35a59c43a9478828b4f5b3d13362f9a07e302953718e594c3b70fe6b"
 conclusion = "complete"
 evidence = [
   "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",

@@ -1373,7 +1373,6 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 "_application_verifier",
                 return_value=CompleteVerificationResult(
                     (),
-                    0,
                     Diagnostic(
                         "CHECKPOINT.FAILED",
                         "invalid",
@@ -1444,7 +1443,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine,
                 "_application_verifier",
-                return_value=CompleteVerificationResult((), 0, None, 0),
+                return_value=CompleteVerificationResult((), None, 0),
             ),
         ):
             candidate_rejected = facade.apply_proposal(
@@ -1499,7 +1498,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine,
                 "_application_verifier",
-                return_value=CompleteVerificationResult((), 0, None, 0),
+                return_value=CompleteVerificationResult((), None, 0),
             ),
         ):
             publication_unavailable = facade.apply_proposal(
@@ -1551,7 +1550,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine,
                 "_application_verifier",
-                return_value=CompleteVerificationResult((), 0, None, 0),
+                return_value=CompleteVerificationResult((), None, 0),
             ),
         ):
             publication_stale = facade.apply_proposal(
@@ -1601,7 +1600,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine,
                 "_application_verifier",
-                return_value=CompleteVerificationResult((), 0, None, 0),
+                return_value=CompleteVerificationResult((), None, 0),
             ),
         ):
             recovery_required = facade.apply_proposal(

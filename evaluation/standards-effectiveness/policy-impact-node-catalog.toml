@@ -434,18 +434,6 @@ id = "tools/standards_policy_impact/standards_policy_impact/__init__.py"
 metadata = { repository_path = "tools/standards_policy_impact/standards_policy_impact/__init__.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
-id = "tools/standards_verifier/generate_inventory.py"
-metadata = { repository_path = "tools/standards_verifier/generate_inventory.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
-id = "tools/standards_verifier/generate_numeric_audit.py"
-metadata = { repository_path = "tools/standards_verifier/generate_numeric_audit.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
-id = "tools/standards_verifier/generate_numeric_retirements.py"
-metadata = { repository_path = "tools/standards_verifier/generate_numeric_retirements.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
 id = "tools/standards_verifier/pyproject.toml"
 metadata = { repository_path = "tools/standards_verifier/pyproject.toml", artifact_kind = "implementation-artifact", authority = "projection" }
 
@@ -620,10 +608,6 @@ id = "tools/standards_verifier/standards_verifier/repository_graph.py"
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/repository_graph.py", artifact_kind = "implementation-artifact", authority = "evidence" }
 
 [[nodes]]
-id = "tools/standards_verifier/standards_verifier/generated_artifacts.py"
-metadata = { repository_path = "tools/standards_verifier/standards_verifier/generated_artifacts.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
 id = "tools/standards_verifier/standards_verifier/suite_inputs.py"
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/suite_inputs.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
@@ -634,10 +618,6 @@ metadata = { repository_path = "tools/standards_verifier/standards_verifier/chec
 [[nodes]]
 id = "tools/standards_verifier/standards_verifier/checks/derived_evidence.py"
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/derived_evidence.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
-id = "tools/standards_verifier/standards_verifier/checks/edge_dispositions.py"
-metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/edge_dispositions.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
 id = "tools/standards_verifier/standards_verifier/checks/exact_text.py"
@@ -690,18 +670,6 @@ metadata = { repository_path = "tools/standards_verifier/standards_verifier/chec
 [[nodes]]
 id = "tools/standards_verifier/standards_verifier/checks/metadata_route.py"
 metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/metadata_route.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
-id = "tools/standards_verifier/standards_verifier/checks/migration_python_dispositions.py"
-metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/migration_python_dispositions.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
-id = "tools/standards_verifier/standards_verifier/checks/numeric_lifecycle.py"
-metadata = { repository_path = "tools/standards_verifier/standards_verifier/checks/numeric_lifecycle.py", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
-id = "tools/standards_verifier/standards_verifier/inventory.py"
-metadata = { repository_path = "tools/standards_verifier/standards_verifier/inventory.py", artifact_kind = "implementation-artifact", authority = "projection" }
 
 [[nodes]]
 id = "tools/standards_verifier/standards_verifier/checks/path_state.py"

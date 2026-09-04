@@ -5,10 +5,8 @@ import json
 from pathlib import Path
 from typing import Sequence
 
-from .complete_checkpoint import run_retained_checkers
 from .diagnostics import Diagnostic, EngineError
 from .engine import Verifier
-from .generated_artifacts import check_generated_artifacts
 from .model import CompleteVerificationResult, SuiteResult
 
 
@@ -26,7 +24,7 @@ def _parser(default_repo_root: Path) -> argparse.ArgumentParser:
     parser.add_argument(
         "--complete",
         action="store_true",
-        help="check generated evidence, run all suites, then fail-fast run retained Bash checkers",
+        help="run the complete registered Python suite catalog",
     )
     parser.add_argument("--list", action="store_true", help="list registered suite IDs")
     parser.add_argument("--format", choices=("text", "json"), default="text")
@@ -73,46 +71,13 @@ def _render_error(diagnostic: Diagnostic, output_format: str) -> str:
 def run_complete_verification(
     repo_root: Path,
     registry: str = "evaluation/standards-effectiveness/suite-registry.toml",
-    *,
-    quiet: bool = False,
 ) -> CompleteVerificationResult:
     try:
-        artifact_exit = (
-            check_generated_artifacts(repo_root, output=lambda _message: None)
-            if quiet
-            else check_generated_artifacts(repo_root)
-        )
-        if artifact_exit != 0:
-            outcome = {3: "unavailable", 4: "unsupported"}.get(
-                artifact_exit, "invalid"
-            )
-            return CompleteVerificationResult(
-                (),
-                0,
-                Diagnostic(
-                    "CHECKPOINT.GENERATED_ARTIFACTS",
-                    outcome,
-                    "generated verification evidence is not current",
-                ),
-                artifact_exit if artifact_exit in {1, 2, 3, 4} else 2,
-            )
         results = tuple(Verifier(repo_root, registry).run(None))
         suite_exit = max((result.exit_code for result in results), default=0)
-        if suite_exit != 0:
-            return CompleteVerificationResult(results, 0, None, suite_exit)
-        retained = (
-            run_retained_checkers(repo_root, quiet=True)
-            if quiet
-            else run_retained_checkers(repo_root)
-        )
-        return CompleteVerificationResult(
-            results,
-            retained.checker_count,
-            retained.diagnostic,
-            0 if retained.diagnostic is None else retained.exit_code,
-        )
+        return CompleteVerificationResult(results, None, suite_exit)
     except EngineError as error:
-        return CompleteVerificationResult((), 0, error.diagnostic, error.exit_code)
+        return CompleteVerificationResult((), error.diagnostic, error.exit_code)
 
 
 def main(argv: Sequence[str] | None = None, *, default_repo_root: Path) -> int:
@@ -126,28 +91,19 @@ def main(argv: Sequence[str] | None = None, *, default_repo_root: Path) -> int:
                     "--complete cannot be combined with --all, --suite, or --list",
                 )
             )
-        if args.complete and args.format != "text":
-            raise EngineError(
-                Diagnostic(
-                    "SELECTION.FORMAT_CONFLICT",
-                    "invalid",
-                    "--complete supports text output only while retained checkers remain",
-                    field="format",
-                    expected="text",
-                    observed=args.format,
-                )
-            )
         if args.complete:
             complete = run_complete_verification(args.repo_root, args.registry)
-            if complete.results:
-                print(_render_text(list(complete.results)))
-            if complete.diagnostic is not None:
-                print(complete.diagnostic.render())
-            if complete.exit_code == 0:
+            if args.format == "json":
                 print(
-                    "Complete standards checkpoint passed: "
-                    f"{complete.checker_count} retained Bash checkers"
+                    _render_error(complete.diagnostic, args.format)
+                    if complete.diagnostic is not None
+                    else _render_json(list(complete.results))
                 )
+            else:
+                if complete.results:
+                    print(_render_text(list(complete.results)))
+                if complete.diagnostic is not None:
+                    print(complete.diagnostic.render())
             return complete.exit_code
         verifier = Verifier(args.repo_root, args.registry)
         if args.list:

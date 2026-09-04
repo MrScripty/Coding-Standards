@@ -1,13 +1,12 @@
 # Plan: Python Verification Engine Design Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 5 terminal migration lifecycle and Bash retirement
+**Current phase:** terminal migration lifecycle accepted
 
-**Next slice:** execute the accepted zero-Bash terminal dispositions and remove
-the remaining migration-only launchers and Python machinery
+**Next slice:** `none`
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Accepted base:** `56f5124b1ed848fa80b8f35e46a298d4a33ed37c`
 
@@ -34,7 +33,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters, policy literals in generic checks, or independently repeated source-membership sets. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 8 shared-contract acceptance](reports/milestone-8-shared-contracts.md) |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims with identified budget authority and current three-sample complete-workload evidence. | `focused` | `representative` | `automated` | `satisfied` | [Milestone 9 current performance and recovery acceptance](reports/milestone-9-current-performance-and-acceptance.md) |
-| A6 | Every mechanically derived migration-only Python candidate has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `pending` | Candidate completeness is satisfied by [Milestone 7 evidence](reports/milestone-7-routing-and-candidates.md); terminal deletion remains due at zero Bash. |
+| A6 | Every mechanically derived migration-only Python candidate has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `satisfied` | Candidate completeness is established by [Milestone 7 evidence](reports/milestone-7-routing-and-candidates.md), and execution by [M6-Z1 closure](../standards-verification-engine/reports/m6-z1-zero-bash-closure.md). |
 | A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `satisfied` | [Milestone 9 current performance and recovery acceptance](reports/milestone-9-current-performance-and-acceptance.md) |
 
 ## Scope
@@ -97,8 +96,9 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
   are derived observations, not stored acceptance constants.
 - A strict path-only corpus manifest is the smallest non-inferred membership
   authority compatible with explicit source registration.
-- Bash migration can resume after the pre-zero-Bash recovery gates are accepted
-  and a terminal-disposition table governs remaining migration-only Python.
+- Bash migration resumed only after the pre-zero-Bash recovery gates were
+  accepted and the terminal-disposition table governed the remaining
+  migration-only Python.
 
 ## Binding Decisions
 
@@ -111,7 +111,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | Result semantics | Assertion mismatches return `1`; invalid representation/configuration returns `2`; unavailable returns `3`; unsupported returns `4`. | Engine README and audit PE-04 | Exception-default status for assertion failures |
 | Policy interfaces | Module depth and coherent ownership decide retention; consumer count does not. Policy literals remain outside generic checks. | Core and audit PE-01/PE-07 | One-consumer and second-consumer thresholds |
 | Performance | Measure named workflows before changing loading, scans, or caching; retain the simplest implementation satisfying accepted claims. | Performance topic and audit PE-03/PE-06 | Unowned speed claims |
-| Terminal lifecycle | Every migration-only Python path receives `retain`, `replace`, or `delete` with a current consumer and trigger; no default retention. | Audit PE-05 | Literal zero-Bash closure without Python disposition |
+| Terminal lifecycle | During migration, every migration-only Python path received `retain`, `replace`, or `delete` with a current consumer and trigger; M6-Z1 then executed and retired that authority. | Audit PE-05 and [M6-Z1 closure](../standards-verification-engine/reports/m6-z1-zero-bash-closure.md) | Literal zero-Bash closure without Python disposition |
 
 ## Simplicity And Ownership Review
 
@@ -324,10 +324,10 @@ delete all implementation without a current post-migration consumer.
 - [x] Record one `retain`, `replace`, or `delete` disposition, current consumer,
   terminal trigger, and evidence owner for every migration-only module and check
   kind before checker migration resumes.
-- [ ] Resume Bash retirement only under the accepted disposition authority.
-- [ ] At zero Bash, remove temporary inventory, graph, retirement, edge, numeric,
+- [x] Resume Bash retirement only under the accepted disposition authority.
+- [x] At zero Bash, remove temporary inventory, graph, retirement, edge, numeric,
   and retained-checkpoint paths according to the table.
-- [ ] Prove the final Python-only command has one meaning and no migration
+- [x] Prove the final Python-only command has one meaning and no migration
   compatibility authority.
 
 **Acceptance gate:** the disposition table is complete before migration resumes;
@@ -335,7 +335,7 @@ at zero Bash every triggered disposition is satisfied, the repository-wide
 policy-literal prohibition passes, and the Python-only complete checkpoint is
 accepted.
 
-**Status:** `Active`; pre-resume disposition gate accepted
+**Status:** `Accepted`; terminal dispositions executed by M6-Z1
 
 ### Milestone 6: Audit Follow-Up Admission And Current Baseline
 
@@ -504,7 +504,6 @@ registry/catalog authority, active plans, and acceptance state overlap.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
-- Deferred follow-ups: Milestone 5 deletion executes at the accepted zero-Bash
-  trigger; its disposition table is not deferred.
-- Final status: `Active`
+- Acceptance status: `satisfied`
+- Deferred follow-ups: `none`
+- Final status: `Accepted`

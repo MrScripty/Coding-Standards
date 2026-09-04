@@ -389,3 +389,21 @@
 - The verifier graph remains header-only and no Bash verifier or helper
   remains. The accepted `zero-bash-accepted` terminal dispositions and the
   remaining Bash launchers are the next cleanup boundary.
+
+## 2026-09-03 - Milestone 5 And Recovery Acceptance
+
+- M6-Z1 executed every accepted zero-Bash terminal disposition and removed all
+  migration-only inventory, graph, numeric, edge, retained-checkpoint, and
+  execution-train Python paths without retaining historical references as live
+  consumers.
+- Three remaining Bash launchers, four temporary suites, their lifecycle
+  tables and generated observations, and orphan supplemental catalog nodes
+  retired in the same terminal boundary.
+- Complete mode has one Python-only meaning across its CLI and library result;
+  text and JSON runs both pass all 271 registered suites.
+- All 349 verifier tests and all 68 Standards Engine tests pass from the
+  accepted final state. The zero-Bash path inventory is empty, and current
+  suite-input and 51-requirement coverage authority is fresh.
+- Result: Milestone 5 and the Python verification engine design recovery are
+  accepted with no deferred follow-up. See the
+  [M6-Z1 closure](../standards-verification-engine/reports/m6-z1-zero-bash-closure.md).
