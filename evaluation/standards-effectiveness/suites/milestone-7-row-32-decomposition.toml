@@ -67,7 +67,7 @@ values = ["STD-0106", "STD-0107", "STD-0108", "STD-0109", "STD-0110", "STD-0111"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-32-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-32-decomposition.md"
 required = ["## Owner Contract", "does not own every in-memory mutation", "## Exact Ownership", "`32.1`", "`32.2`", "`32.3`", "## Typed Outcomes And No Fallback", "Do not fall back to partial writes", "## Re-plan Triggers"]
 prohibited = []
 

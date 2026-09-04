@@ -110,6 +110,6 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-boundary-arithmetic` suite checks conversion before"]
 prohibited = ["`verify-rust-boundary-arithmetic.sh` check conversion before arithmetic,"]

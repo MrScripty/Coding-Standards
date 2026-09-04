@@ -83,7 +83,7 @@ rationale = "Fixture distinguishes local consistency from independent external c
 
 [[relationships]]
 source = "workflow.verification.differential-evidence"
-consumer = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
+consumer = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"

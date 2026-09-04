@@ -69,7 +69,7 @@ where = { field = "baseline_order", op = "eq", value = "18" }
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-18-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-18-decomposition.md"
 required = [
   "Those concerns do not share one canonical",
   "## Ordered Implementation",

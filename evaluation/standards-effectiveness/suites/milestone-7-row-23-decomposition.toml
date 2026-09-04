@@ -76,7 +76,7 @@ values = ["STD-0831", "STD-0832", "STD-0833", "STD-0834", "STD-0835", "STD-0836"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-23-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-23-decomposition.md"
 required = ["## Owner Contract", "does not own claim selection", "## Exact Dispositions", "## Ordered Children", "## Child 23.7 Harness Decomposition Replan", "## Child 23.10 Generic Build Owner Replan", "tools, repository size, workspace layout, ecosystem popularity, command", "success, and legacy required/optional/recommended labels are not fallbacks.", "## Re-plan Triggers"]
 prohibited = []
 

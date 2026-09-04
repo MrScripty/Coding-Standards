@@ -143,13 +143,13 @@ prohibited = []
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F025 | Resolved in Milestone 7.4b5c |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["registered `rust-binding-runtime` suite"]
 prohibited = ["verify-rust-binding-runtime.sh"]

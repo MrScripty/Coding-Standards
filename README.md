@@ -27,6 +27,16 @@ establish applicability or ownership.
 - [Plan template](templates/PLAN-TEMPLATE.md)
 - [Pull request template](templates/PULL_REQUEST_TEMPLATE.md)
 
+## Maintaining This Repository
+
+- [Active work](docs/plans/README.md) and [completed work](docs/archive/README.md)
+- [Architecture decisions](docs/decisions/README.md)
+- [Standards Engine](tools/standards_engine/README.md)
+- [Verification commands](tools/standards_verifier/README.md)
+- [Evaluation evidence and fixtures](evaluation/standards-effectiveness/README.md)
+
+These non-normative resources describe repository maintenance and history.
+
 ## License
 
 Repository license terms are in [LICENSE](LICENSE).

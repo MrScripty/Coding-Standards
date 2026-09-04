@@ -151,6 +151,6 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-async-lifecycle` suite checks composition-owned runtime capability,"]
 prohibited = ["`verify-rust-async-lifecycle.sh` checks composition-owned runtime capability,"]

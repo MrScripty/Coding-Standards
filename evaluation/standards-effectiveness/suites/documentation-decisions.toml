@@ -126,6 +126,6 @@ prohibited = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `documentation-decisions` suite checks that durable documentation is"]
 prohibited = ["`verify-documentation-decisions.sh` checks that durable documentation is"]

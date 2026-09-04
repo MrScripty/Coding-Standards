@@ -156,6 +156,6 @@ value = "LAUNCHER-STANDARDS.md"
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["`fixtures/launcher/population-decisions.tsv` and the registered\n`launcher-population` suite validate canonical Launcher population"]
 prohibited = ["`verify-launcher-population.sh` validate canonical Launcher population"]

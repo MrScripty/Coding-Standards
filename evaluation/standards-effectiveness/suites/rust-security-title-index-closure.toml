@@ -65,6 +65,6 @@ prohibited = ["STD-0821"]
 [[checks]]
 id = "row-44-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-44-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-44-decomposition.md"
 required = ["registered `rust-security-title-index-closure` suite"]
 prohibited = ["verify-rust-security-title-index-closure.sh"]

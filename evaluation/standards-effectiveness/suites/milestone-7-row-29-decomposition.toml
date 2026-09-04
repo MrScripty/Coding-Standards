@@ -44,7 +44,7 @@ expected = [["STD-0046"], ["STD-0047"], ["STD-0048"], ["STD-0049"], ["STD-0050"]
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-29-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-29-decomposition.md"
 required = [
   "## Owner Contract",
   "sole normative owner",

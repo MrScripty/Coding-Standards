@@ -122,13 +122,13 @@ prohibited = []
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F066 | Resolved in Milestone 7.4b8j |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-binding-callback-task` suite checks selected task representation,"]
 prohibited = ["`verify-rust-binding-callback-task.sh` check selected task representation,"]

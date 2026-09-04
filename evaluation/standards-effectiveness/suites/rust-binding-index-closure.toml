@@ -62,14 +62,14 @@ prohibited = ["\n## Build System Organization\n"]
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["registered `rust-binding-index-closure` suite"]
 prohibited = ["verify-rust-binding-index-closure.sh"]
 
 [[checks]]
 id = "row-43-owner-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md"
 required = [
   "registered `rust-binding-index-closure` suite",
   "registered `rust-binding-title-index-closure` suite",

@@ -1,13 +1,17 @@
 # Standards Engine Navigation And Analysis
 
-**Status:** Accepted
+**Status:** Accepted historically; partially superseded
 
 The policy-impact ownership, relationship-kind version 1, public repository
 declaration exposure, compiled semantic inspection, and associated version
 clauses in this decision are superseded by
 [Standards Engine Policy-Impact Authority V2](standards-engine-policy-impact-authority-v2.md).
-All other A1 decisions and the historical version 9 acceptance remain in
-force.
+The contract-compilation, identity, snapshot, storage, execution-closure, and
+public-projection architecture was subsequently superseded by
+[A1b](standards-engine-a1b.md), whose runtime architecture was superseded by
+[A1c](standards-engine-a1c.md). [A2](standards-engine-a2.md) adds controlled
+logical authoring. The version 9 acceptance remains historical evidence;
+consult the [decision index](README.md) for current architecture.
 
 The repository will provide a read-only Standards Engine facade over neutral
 metadata, generic graph traversal, and standards-specific analysis. A1 uses one

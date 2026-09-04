@@ -111,6 +111,6 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-binding-enum-representation` suite checks mechanism-specific enum"]
 prohibited = ["`verify-rust-binding-enum-representation.sh` check mechanism-specific enum"]

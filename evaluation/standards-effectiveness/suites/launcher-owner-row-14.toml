@@ -171,7 +171,7 @@ where = { field = "baseline_order", op = "eq", value = "14" }
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-14-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-14-decomposition.md"
 required = [
   "do not share one canonical owner",
   "### Child 14.1: Launcher Population And Structural Closure",
@@ -188,7 +188,7 @@ prohibited = []
 [[checks]]
 id = "readme-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "`launcher-owner-row-14` suite establish the Launcher application profile",
   "exact five-child row-14 decomposition",

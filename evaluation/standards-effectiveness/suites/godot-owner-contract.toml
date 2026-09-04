@@ -123,6 +123,6 @@ all = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["the registered `godot-owner-contract` suite establish the Godot framework profile"]
 prohibited = ["`verify-godot-owner-contract.sh` establish the Godot framework profile"]

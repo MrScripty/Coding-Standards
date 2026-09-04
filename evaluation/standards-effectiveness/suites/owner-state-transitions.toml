@@ -126,7 +126,7 @@ any = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `owner-state-transitions` suite",
   "baseline, activation, and shared-owner transition decisions",

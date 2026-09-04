@@ -115,6 +115,6 @@ all = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["the registered `csharp-async-owner-contract` suite establish the C# Async profile"]
 prohibited = ["`verify-csharp-async-owner-contract.sh` establish the C# Async profile"]

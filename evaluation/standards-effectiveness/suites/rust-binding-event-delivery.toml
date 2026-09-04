@@ -132,13 +132,13 @@ prohibited = []
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F064 | Resolved in Milestone 7.4b8i |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-binding-event-delivery` suite checks contract-selected push, pull, and"]
 prohibited = ["`verify-rust-binding-event-delivery.sh` check contract-selected push, pull, and"]

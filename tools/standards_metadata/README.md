@@ -31,3 +31,6 @@ Run the focused tests:
 ```bash
 python3 -m unittest discover -s tools/standards_metadata/tests
 ```
+
+The [module metadata schema](metadata-schema.md) documents authored fields,
+grammar, invariants, and the validation boundary.

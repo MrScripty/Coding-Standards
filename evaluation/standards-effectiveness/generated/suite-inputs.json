@@ -1197,7 +1197,7 @@
       ]
     },
     {
-      "digest": "sha256:2364144beba93672fbafec5d3855319a2b9b74b3fe4cc972c5d9d6667788fa98",
+      "digest": "sha256:f39750d097bd6477d6d2ad36595557fe4c5ab4686b661aa7db970900d26ddd5d",
       "path": "README.md",
       "state": "present",
       "uses": [
@@ -1705,7 +1705,7 @@
       ]
     },
     {
-      "digest": "sha256:30418fd4834df7a81a28920e49d1243cdb2cc03be98bc3f3e26ed0bb5358d225",
+      "digest": "sha256:519b8b832ed7c0af599910e96ce85cf7dddce99eb2c567138597baffb60cda83",
       "path": "TESTING-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -1869,8 +1869,20 @@
       ]
     },
     {
+      "digest": "sha256:bff761af1bf70045605783529b18d1bd13d6ca3010daf0f2a14c81be0563a5f3",
+      "path": "docs/archive/README.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        }
+      ]
+    },
+    {
       "digest": "sha256:a963325e64968c817f742ecafc471bd3c7116790b1b27793c2f662b0800e4dd0",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-acceptance.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-acceptance.md",
       "state": "present",
       "uses": [
         {
@@ -1882,7 +1894,7 @@
     },
     {
       "digest": "sha256:8719737866c188dac345287c95c08ef2829084f197c70697994df76a973a115c",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-ii-candidate.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-ii-candidate.md",
       "state": "present",
       "uses": [
         {
@@ -1894,7 +1906,7 @@
     },
     {
       "digest": "sha256:8c31a67dcac35a15d30fbac291135a936eaab53f04278e81048f6c360519eaa2",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iii-candidate.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iii-candidate.md",
       "state": "present",
       "uses": [
         {
@@ -1906,7 +1918,7 @@
     },
     {
       "digest": "sha256:8311885f4f67de17e2b664389a650fa79efaafaa3e1e8ca05ffac43e8ddadde1",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iv-candidate.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-iv-candidate.md",
       "state": "present",
       "uses": [
         {
@@ -1918,7 +1930,7 @@
     },
     {
       "digest": "sha256:aef8d6393b0a4723a8f8d6c12a19e7ffe85398493b0664e66521db15da2b5c98",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-v-candidate.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-v-candidate.md",
       "state": "present",
       "uses": [
         {
@@ -1930,7 +1942,7 @@
     },
     {
       "digest": "sha256:1b927deccd25730f2ac21423622418d5914722f67326caf2acbfac686131eed0",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-vi-candidate.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-boundary-repair-vi-candidate.md",
       "state": "present",
       "uses": [
         {
@@ -1942,7 +1954,7 @@
     },
     {
       "digest": "sha256:efd7b5951ce3fba13faeb40880bea359ad33b1ea6c9eac4d316968c40611db10",
-      "path": "docs/plans/standards-engine-navigation-analysis/reports/a1-final-acceptance.md",
+      "path": "docs/archive/plans/standards-engine-navigation-analysis/reports/a1-final-acceptance.md",
       "state": "present",
       "uses": [
         {
@@ -1954,7 +1966,7 @@
     },
     {
       "digest": "sha256:aa1524948ef48af8b77b5ae32890cb7616915f689dd0ae129929702292e183bc",
-      "path": "docs/plans/standards-engine-standards-recovery/issues.md",
+      "path": "docs/archive/plans/standards-engine-standards-recovery/issues.md",
       "state": "present",
       "uses": [
         {
@@ -1966,7 +1978,7 @@
     },
     {
       "digest": "sha256:9d88ee140bbe3a0827c486a5e1bae02342ec53eca2b4ccd1fdf9ba0e4d0dabcb",
-      "path": "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md",
+      "path": "docs/archive/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md",
       "state": "present",
       "uses": [
         {
@@ -1978,7 +1990,7 @@
     },
     {
       "digest": "sha256:f99c3d906f196a4d933f96af4a6fcaf2c27eb2ac02b0cf3d183fe464366c54b5",
-      "path": "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md",
+      "path": "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md",
       "state": "present",
       "uses": [
         {
@@ -1994,8 +2006,8 @@
       ]
     },
     {
-      "digest": "sha256:d7d000e1781ef8b279f1248f3634f519979d42a28f2f17477d1c0f7a75368690",
-      "path": "docs/plans/standards-verification-engine/plan.md",
+      "digest": "sha256:e782eed1f0f0c3d1c7a04cf76de624264d26153c1e764b1a614e31ca0d4a9719",
+      "path": "docs/archive/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
         {
@@ -2006,314 +2018,798 @@
       ]
     },
     {
-      "digest": "sha256:234fc6fe2b731be31f0d54c2917b48157f18aeb2b59281354dee542ed4913765",
-      "path": "evaluation/standards-effectiveness/README.md",
+      "digest": "sha256:d4c6d7cd795b4f11afde4ef01d6cefafc82f0972db6a61feb559928b93241573",
+      "path": "docs/decisions/README.md",
       "state": "present",
       "uses": [
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "architecture-owner-contract"
-        },
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5d6624982d9d7d1484fcdc75c0a02abb08767123f793b3b9ca23e922aaa0f896",
+      "path": "docs/plans/README.md",
+      "state": "present",
+      "uses": [
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "binding-contract-evolution"
-        },
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:653c0f41be02e360f403e0845dd639a7cffb843cead192ade2eb68bf37df53f5",
+      "path": "docs/plans/standards-library-effectiveness/issues.md",
+      "state": "present",
+      "uses": [
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "binding-generation-authority"
-        },
-        {
-          "check": "commit-evaluation-documentation",
-          "role": "content",
-          "suite": "commit-consolidation-dispositions"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "concurrency-policy"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "contract-decisions"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "cross-language-contract"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "csharp-async-owner-contract"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "decision-engine-contract"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "dependencies-owner-contract"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "dependencies-population"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "documentation-decisions"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "documentation-policy-consolidation"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "filesystem-containment-policy"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "godot-owner-contract"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "input-validation-authority"
         },
         {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "interop-event-registration"
         },
         {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "ipc-payload-validation"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "language-binding-boundary"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "language-binding-mechanism-selection"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "language-binding-wire-representation"
-        },
-        {
-          "check": "readme-projection",
-          "role": "content",
-          "suite": "launcher-owner-row-14"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "launcher-population"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "resolved-findings",
           "role": "content",
           "suite": "milestone-7-accelerated-execution-replan"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "milestone-7-decomposition"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "milestone-7-f022-f023-decomposition"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "milestone-7-independent-trust-replan"
         },
         {
-          "check": "documentation-projection",
+          "check": "resolved-finding",
           "role": "content",
-          "suite": "milestone-7-rust-async-decomposition"
+          "suite": "milestone-7-row-5-decomposition"
         },
         {
-          "check": "documentation-projection",
+          "check": "resolved-finding",
+          "role": "content",
+          "suite": "milestone-7-row-7-decomposition"
+        },
+        {
+          "check": "finding-closure",
           "role": "content",
           "suite": "milestone-7-trust-lifecycle-replan"
         },
         {
-          "check": "removed-authority",
-          "role": "content",
-          "suite": "native-artifact-loading"
-        },
-        {
-          "check": "removed-authority",
-          "role": "content",
-          "suite": "native-artifact-release"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "network-transport-policy"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "owner-state-transitions"
-        },
-        {
-          "check": "removed-authority",
-          "role": "content",
-          "suite": "platform-evidence-coverage"
-        },
-        {
-          "check": "removed-authority",
+          "check": "accepted-finding",
           "role": "content",
           "suite": "platform-target-policy"
         },
         {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "accepted-finding",
           "role": "content",
-          "suite": "release-procedure-policy"
+          "suite": "rust-async-cancellation-observability"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "runtime-decoding-policy"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-async-boundary"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-async-lifecycle"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-binding-architecture"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-callback-task"
         },
         {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-conversions"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-binding-core-adapter-testability"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-binding-enum-representation"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-binding-error-mapping"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-event-delivery"
         },
         {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-executor-delegation"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-binding-index-closure"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-binding-runtime"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-binding-workspace-evidence"
-        },
-        {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-boundary-arithmetic"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-external-input-queue"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-filesystem-authority"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-listener-lifecycle"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "rust-security-panic-boundary"
-        },
-        {
-          "check": "removed-authority",
+          "check": "accepted-finding",
           "role": "content",
           "suite": "rust-target-configuration"
         },
         {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-unsafe-contracts"
         },
         {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "rust-wire-representation"
         },
         {
-          "check": "documentation-projection",
-          "role": "content",
-          "suite": "typescript-async-owner-contract"
-        },
-        {
-          "check": "documentation-projection",
+          "check": "finding-closure",
           "role": "content",
           "suite": "validation-proof-lifetime"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:61474282fd0d1232509ddd73100d55aa1310f95895ee21d2133726322dea729a",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-accelerated-execution-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "accepted-report",
+          "role": "content",
+          "suite": "milestone-7-accelerated-execution-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:d6ea0388f08c14ebe9f9341fc8d48396add013020788bab8f8c4d4e8f9a8eba7",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-decomposition"
+        },
+        {
+          "check": "parent-decomposition-route",
+          "role": "content",
+          "suite": "milestone-7-f025-f026-decomposition"
+        },
+        {
+          "check": "parent-projection",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
+          "check": "parent-projection",
+          "role": "content",
+          "suite": "milestone-7-rust-async-decomposition"
+        },
+        {
+          "check": "parent-projection",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5ec03df7071b6e6f7d0476a89e7c7b20fef085d328f5a2f6538bcfd1216807a8",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-f018-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-f018-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:dcf70cc9515b049ecaa8c0b25aa64d26d0e3f343ed960926e3b6f9a5e7730f3f",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-f022-f023-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-f022-f023-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5f567f67c5b0e82e378fb3e1c79092347ad76410333391e1a3052acff2a710cf",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-f025-f026-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-f025-f026-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f71a262e408b6fee2e99af67d1bacab55670505738921d4802063a525c109f5a",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-final-source-closure.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "closure-policy",
+          "role": "content",
+          "suite": "final-source-closure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:8fd6e21778bcfbc9b6b114fb390b0f51979f57268b295f388cbb41c10ba7bb81",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-independent-trust-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "accepted-report",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:d6f4c3bdaa61d394d5701908b22f8deac2c6c9a1508e51af1d634f73daa01349",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-13-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-13-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2c5fdb1d649a0ac5e0b31359b5764b7c133c28bf1819f3bfc6ade1388ad9266d",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-14-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "launcher-owner-row-14"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7e579fccb661d977badb39c9c276030327c219e17a1dbc86d15e07d932c041c0",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-15-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-15-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:86e9c56d40f7cb828f3d0dd509b79a32b960b9c559e916ac064f0d31a9caa40e",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-18-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-18-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:0402bfc839bf4a2a4264ae7dd0974b4b98770efba837a0c8fae6912d580afea1",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-19-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-19-structure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:9d50fe2d75239e9d841a58e58f9cc84954602aee2020e1555dc66a3f33ff8b85",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-19-owner-validation.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "owner-validation-report",
+          "role": "content",
+          "suite": "milestone-7-row-19-structure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:e7b1410344ef11e32dd44c7fa5ba49920b0d9ccd3af0ea066fd7aded42377716",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-20-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-20-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:21f9d130d3f92838dee967bbcd14d08b880c0e662855350bdbcc0d4522c4b1b4",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-21-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-21-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:419a9796e0abd4fbc688a459ac048895f2344804dbf71e7dacbae175f996b62d",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-22-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-22-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:20756c4155d3c423472eeb217f319f96897566bd6ea4fc1ecd02ba6ca914b4cb",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-23-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-23-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:9e92c2a0bfde73176385ee653ec7cef8d744478a15643bf3335a3cb824547ae6",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-24-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-24-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:bbc09a9f56e6ccc55c55f824305cb6dcc2415cfa03382857b47e92fea616763d",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-25-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-25-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:901aeff5c7ad03fd21585b3730695daa63c3381d958df4e9a0e7d97df5fcd6dc",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-26-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-26-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:074e224bac36f8e41d56213ad9efbd0e24660259fc05543ab0933a35253ac508",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-27-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-27-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:3a927126cf49319727ad22791a5d17c9a6141b2cf21801585be492575c387982",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-28-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "contract",
+          "role": "content",
+          "suite": "milestone-7-row-28-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ad809905fc2d7255b5cb83b797bde7a4a25684b74b04bfb2ecec0d3f96f94633",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-29-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-29-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:39249e3536fc1375fb8ba68d71e3d75878293bd04ff1e514f8fe79e06083f0b8",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-30-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-30-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:88f15bd8b55854f5d887a16cd6f07a64f25eccaf21b4d9cfe09080f2953a9f55",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-31-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-31-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:565cf833ff9f1696859d46bbfaf4f0954f923e96ee05a51e51c6ed28da5237cc",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-32-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-32-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c2ea3ce95acf23c239b578ee77c745742d6b136b60487b858c0990219097d57c",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-33-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-33-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:671fbf9b7174eb25b3bb6a27314f02391669e1fc5c25c8aac345482a148fac01",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-34-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-row-34-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2c59bd879b9a87ee61c05779367cdd3188017c15b3ee8eba5276e4977bcad986",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-35-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-35-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:837b5b23f1028eb59705b7aa4ed855c3bc84a536cac55b966092f42bba9ac189",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-36-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-36-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f3c42eaa20d3a6c1b0a45362d7ddc44535c87447b93cb265496c526eb5f2d1f5",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-37-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-row-37-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:45b61aea0f202cde9b08d05de348d504f7c2f713b79f2b167e8b757238cca620",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-38-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-row-38-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:898da0aa0c3ab7ef79b5099b6da05eda735229a9bf8f6ccab5f53be9bff693e5",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-39-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-39-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7b4c1ed26ee2d9bf772e66b33823c5ca64639ba27ed3c949825158c67fd88840",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-40-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-40-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7aee073f9a43e9c708c16cea5b2e5862accf251eda251e3e419a5ee88e80326c",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-41-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-41-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5174ba6057997828f82659abeacda4d85d25de52e81d53c33432a04104ed74cf",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-42-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-42-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:6df935074560a2f0bf9a1550f650bc32b5608c2bc640c007385706a273e24441",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-43-decomposition"
+        },
+        {
+          "check": "row-43-owner-projection",
+          "role": "content",
+          "suite": "rust-binding-index-closure"
+        },
+        {
+          "check": "nested-index-separation",
+          "role": "content",
+          "suite": "rust-binding-title-index-closure"
+        },
+        {
+          "check": "row-43-projection",
+          "role": "content",
+          "suite": "rust-binding-title-index-closure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:85da899489fd40775f697b85031c09339fdc95480c1b1cd8672beb532874e822",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-44-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-44-decomposition"
+        },
+        {
+          "check": "row-44-projection",
+          "role": "content",
+          "suite": "rust-security-title-index-closure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7f30a0956e6dd75babfc07cba4adb7b47f2ad57de6718f37d739bc4bef90598a",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-45-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "row-45-decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-45-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:89b1ef067761adbb8a602628483b2a75e2f89a04e53520bdd8f17e37d4f0166e",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-46-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "row-46-decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-46-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:aa02562be8cd3ec14f1796b453320f24497543df4812067726da929e37670055",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-47-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-row-47-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:cef3b9ff5738bf1cc145d094730d1af8b831861b5c35cb91381cff5d448dfd53",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-5-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-5-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:4a6867ca7af775cc79d230f603b946dc98652342b35e9889d2359e550facac5c",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-6-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "report",
+          "role": "content",
+          "suite": "milestone-7-row-6-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ce3f6abe18109f13ba521aa621d7c4a88129d40bed6e59a8b42ced689fb0d43d",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-7-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-row-7-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f9f35ca4f3626c97939e129b1b24c7afbd23b2e8319457bee6dc17ba3e8b74c8",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-row-8-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-record",
+          "role": "content",
+          "suite": "milestone-7-row-8-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:84aa529adb7b37515dad672cdf9974ab3eb9f6048c5e40b73ce7992bf681dccd",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-rust-async-decomposition.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "decomposition-report",
+          "role": "content",
+          "suite": "milestone-7-rust-async-decomposition"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:8d8627d03d532d3abe862a4019bf665e367501c3e54642c0d445e14930f566ed",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-source-index-verifier-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "verifier-replan-policy",
+          "role": "content",
+          "suite": "final-source-closure"
+        },
+        {
+          "check": "preparation-policy",
+          "role": "content",
+          "suite": "source-package-preparation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f1d4e4c8ed8e1d43d5a7466d5183adf2e2348c888b2c8b4333cb9b414909c7c9",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-trust-lifecycle-replan.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "trust-replan-route",
+          "role": "content",
+          "suite": "milestone-7-f025-f026-decomposition"
+        },
+        {
+          "check": "accepted-report",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:6af387ff519826ffc7fe3120884cca52e7b92a2a8f2b816961faee27dfb557ee",
+      "path": "docs/plans/standards-library-effectiveness/reports/milestone-7-undisposed-source-audit.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "closure-report",
+          "role": "content",
+          "suite": "readme-template-derivation-closure"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a69f12b8d4a2d1cc3f5efe3bfb5972c762b43f65d0bf6802509ab4b6f05cb1fa",
+      "path": "evaluation/standards-effectiveness/README.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
         }
       ]
     },
@@ -3692,128 +4188,6 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:71f082d79e3eaf7c79a98b60f6cf308e725a41bbce166dedde0a0538d2871357",
-      "path": "evaluation/standards-effectiveness/findings.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "concurrency-policy"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "input-validation-authority"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "interop-event-registration"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "ipc-payload-validation"
-        },
-        {
-          "check": "resolved-findings",
-          "role": "content",
-          "suite": "milestone-7-accelerated-execution-replan"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "milestone-7-independent-trust-replan"
-        },
-        {
-          "check": "resolved-finding",
-          "role": "content",
-          "suite": "milestone-7-row-5-decomposition"
-        },
-        {
-          "check": "resolved-finding",
-          "role": "content",
-          "suite": "milestone-7-row-7-decomposition"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "milestone-7-trust-lifecycle-replan"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "network-transport-policy"
-        },
-        {
-          "check": "accepted-finding",
-          "role": "content",
-          "suite": "platform-target-policy"
-        },
-        {
-          "check": "accepted-finding",
-          "role": "content",
-          "suite": "rust-async-cancellation-observability"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-binding-callback-task"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-binding-conversions"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-binding-event-delivery"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-binding-executor-delegation"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-binding-runtime"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-external-input-queue"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-listener-lifecycle"
-        },
-        {
-          "check": "accepted-finding",
-          "role": "content",
-          "suite": "rust-target-configuration"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-unsafe-contracts"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "rust-wire-representation"
-        },
-        {
-          "check": "finding-closure",
-          "role": "content",
-          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -7890,18 +8264,6 @@
       ]
     },
     {
-      "digest": "sha256:d198ebfb01fefa441a4a7c76f098b58166a34eef86903d5144f42f83f4816653",
-      "path": "evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "accepted-report",
-          "role": "content",
-          "suite": "milestone-7-accelerated-execution-replan"
-        }
-      ]
-    },
-    {
       "digest": "sha256:95c47f8424a136cde99e25902fc4f551af891500e637997a95fa29699c4746e9",
       "path": "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv",
       "state": "present",
@@ -8025,38 +8387,6 @@
           "check": "accelerated-package",
           "role": "table",
           "suite": "milestone-7-row-8-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:3814084445f9ad547f645b61e30f6727ed77ffbf7ce50977b7b335f3313bb73b",
-      "path": "evaluation/standards-effectiveness/milestone-7-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-decomposition"
-        },
-        {
-          "check": "parent-decomposition-route",
-          "role": "content",
-          "suite": "milestone-7-f025-f026-decomposition"
-        },
-        {
-          "check": "parent-projection",
-          "role": "content",
-          "suite": "milestone-7-independent-trust-replan"
-        },
-        {
-          "check": "parent-projection",
-          "role": "content",
-          "suite": "milestone-7-rust-async-decomposition"
-        },
-        {
-          "check": "parent-projection",
-          "role": "content",
-          "suite": "milestone-7-trust-lifecycle-replan"
         }
       ]
     },
@@ -8615,18 +8945,6 @@
       ]
     },
     {
-      "digest": "sha256:3cab1fc27aeef59094b19ba2cc080cdd3063ae2d7817457cd7ed1289e4cd3669",
-      "path": "evaluation/standards-effectiveness/milestone-7-f018-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-f018-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:f127022ffb0c4160680c797339280cc228f05641771f5c36319ef76dc3a254a6",
       "path": "evaluation/standards-effectiveness/milestone-7-f018-slices.tsv",
       "state": "present",
@@ -8645,18 +8963,6 @@
           "check": "slice-map",
           "role": "table",
           "suite": "milestone-7-f018-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:eed2f03c22bfb689aac47b377e45af955288679b31412def0545a0f5cdd63bac",
-      "path": "evaluation/standards-effectiveness/milestone-7-f022-f023-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-f022-f023-decomposition"
         }
       ]
     },
@@ -8683,18 +8989,6 @@
       ]
     },
     {
-      "digest": "sha256:ba897fd93f2e256b927634686d7aa8a5419643f855c263c2f6b3fd6dd82ccf3d",
-      "path": "evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-f025-f026-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:08953e87e8d450b9d44f1ecad8dabe067c41635876ab9cd028f0995cb4698b61",
       "path": "evaluation/standards-effectiveness/milestone-7-f025-f026-slices.tsv",
       "state": "present",
@@ -8708,18 +9002,6 @@
           "check": "dependent-slice-map",
           "role": "table",
           "suite": "milestone-7-trust-lifecycle-replan"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:f71a262e408b6fee2e99af67d1bacab55670505738921d4802063a525c109f5a",
-      "path": "evaluation/standards-effectiveness/milestone-7-final-source-closure.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "closure-policy",
-          "role": "content",
-          "suite": "final-source-closure"
         }
       ]
     },
@@ -8837,90 +9119,6 @@
       ]
     },
     {
-      "digest": "sha256:fe95fd9041123667b71ae021fc91ed91f191e0db2dc10f77818cf02412617477",
-      "path": "evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "accepted-report",
-          "role": "content",
-          "suite": "milestone-7-independent-trust-replan"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:d6f4c3bdaa61d394d5701908b22f8deac2c6c9a1508e51af1d634f73daa01349",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-13-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-13-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:2c5fdb1d649a0ac5e0b31359b5764b7c133c28bf1819f3bfc6ade1388ad9266d",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-14-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "launcher-owner-row-14"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:7e579fccb661d977badb39c9c276030327c219e17a1dbc86d15e07d932c041c0",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-15-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-15-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:86e9c56d40f7cb828f3d0dd509b79a32b960b9c559e916ac064f0d31a9caa40e",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-18-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-18-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:0402bfc839bf4a2a4264ae7dd0974b4b98770efba837a0c8fae6912d580afea1",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-19-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-19-structure"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:9d50fe2d75239e9d841a58e58f9cc84954602aee2020e1555dc66a3f33ff8b85",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "owner-validation-report",
-          "role": "content",
-          "suite": "milestone-7-row-19-structure"
-        }
-      ]
-    },
-    {
       "digest": "sha256:efaaa2291fe5bd78895d4675a5151143f795b80660e49747103cf8e5a17b6d85",
       "path": "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.tsv",
       "state": "present",
@@ -8929,18 +9127,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-19-structure"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:e7b1410344ef11e32dd44c7fa5ba49920b0d9ccd3af0ea066fd7aded42377716",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-20-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-20-decomposition"
         }
       ]
     },
@@ -8972,18 +9158,6 @@
       ]
     },
     {
-      "digest": "sha256:21f9d130d3f92838dee967bbcd14d08b880c0e662855350bdbcc0d4522c4b1b4",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-21-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-21-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:b5ba8e35e0c663b68a7f2fbb498bfb38d0bf155f7ed46b2c083c04d78530d5ba",
       "path": "evaluation/standards-effectiveness/milestone-7-row-21-owner-validation.tsv",
       "state": "present",
@@ -9002,18 +9176,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-21-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:419a9796e0abd4fbc688a459ac048895f2344804dbf71e7dacbae175f996b62d",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-22-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-22-decomposition"
         }
       ]
     },
@@ -9040,18 +9202,6 @@
       ]
     },
     {
-      "digest": "sha256:20756c4155d3c423472eeb217f319f96897566bd6ea4fc1ecd02ba6ca914b4cb",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-23-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-23-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:20499ff9de638015b7be2e84ab164007762c0f227d3d231a765b339bd472dc4b",
       "path": "evaluation/standards-effectiveness/milestone-7-row-23-owner-validation.tsv",
       "state": "present",
@@ -9070,18 +9220,6 @@
           "check": "disposition-lineage",
           "role": "expected",
           "suite": "rust-no-std-closure"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:9e92c2a0bfde73176385ee653ec7cef8d744478a15643bf3335a3cb824547ae6",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-24-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-24-decomposition"
         }
       ]
     },
@@ -9108,18 +9246,6 @@
       ]
     },
     {
-      "digest": "sha256:78ed8a7ac64006c30d6fdc2ae762cf11a234ff014a50a100bfb402aa87cc25a3",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-25-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-25-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:8dc69d38aff12a34b8d90205c3f4b4000623dd846b32903345a93a53013f4995",
       "path": "evaluation/standards-effectiveness/milestone-7-row-25-owner-validation.tsv",
       "state": "present",
@@ -9138,18 +9264,6 @@
           "check": "disposition-lineage",
           "role": "expected",
           "suite": "plan-implementation-entrypoint"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:901aeff5c7ad03fd21585b3730695daa63c3381d958df4e9a0e7d97df5fcd6dc",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-26-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-26-decomposition"
         }
       ]
     },
@@ -9176,18 +9290,6 @@
       ]
     },
     {
-      "digest": "sha256:074e224bac36f8e41d56213ad9efbd0e24660259fc05543ab0933a35253ac508",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-27-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-27-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:73373c68d3a9ef77b986d319a15f1fde89ecf57f4f0072d5fad1a7f72786b299",
       "path": "evaluation/standards-effectiveness/milestone-7-row-27-owner-validation.tsv",
       "state": "present",
@@ -9210,30 +9312,6 @@
       ]
     },
     {
-      "digest": "sha256:3a927126cf49319727ad22791a5d17c9a6141b2cf21801585be492575c387982",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-28-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "contract",
-          "role": "content",
-          "suite": "milestone-7-row-28-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:ad809905fc2d7255b5cb83b797bde7a4a25684b74b04bfb2ecec0d3f96f94633",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-29-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-29-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:986bab28f0120938d0c8c581d0a2721ee2a7aaf0c2fc17111836825a9905f883",
       "path": "evaluation/standards-effectiveness/milestone-7-row-29-owner-validation.tsv",
       "state": "present",
@@ -9242,18 +9320,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-29-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:39249e3536fc1375fb8ba68d71e3d75878293bd04ff1e514f8fe79e06083f0b8",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-30-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-30-decomposition"
         }
       ]
     },
@@ -9270,18 +9336,6 @@
       ]
     },
     {
-      "digest": "sha256:88f15bd8b55854f5d887a16cd6f07a64f25eccaf21b4d9cfe09080f2953a9f55",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-31-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-31-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:f3964c205655dc3973d45b106031680f300bbf21da79416485fdb81fb5de08e4",
       "path": "evaluation/standards-effectiveness/milestone-7-row-31-owner-validation.tsv",
       "state": "present",
@@ -9290,18 +9344,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-31-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:565cf833ff9f1696859d46bbfaf4f0954f923e96ee05a51e51c6ed28da5237cc",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-32-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-32-decomposition"
         }
       ]
     },
@@ -9333,18 +9375,6 @@
       ]
     },
     {
-      "digest": "sha256:c2ea3ce95acf23c239b578ee77c745742d6b136b60487b858c0990219097d57c",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-33-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-33-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:3d5dbbb7b49cd1622c7bfb5897a89022e4b5d4cf2bffefe5d6a61509cc15e8a8",
       "path": "evaluation/standards-effectiveness/milestone-7-row-33-owner-validation.tsv",
       "state": "present",
@@ -9363,18 +9393,6 @@
           "check": "disposition-lineage",
           "role": "left",
           "suite": "milestone-7-row-33-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:671fbf9b7174eb25b3bb6a27314f02391669e1fc5c25c8aac345482a148fac01",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-34-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-row-34-decomposition"
         }
       ]
     },
@@ -9421,18 +9439,6 @@
       ]
     },
     {
-      "digest": "sha256:91a3dd0624974a726febeb1be950bda0f4aacedf0ccf317f2d19c7b4f9c2a92e",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-35-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-35-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:c6e7b56c5f7c4b0b1a788df5c872882e894038273fbe8a4e329d9a5f5b7fbaaf",
       "path": "evaluation/standards-effectiveness/milestone-7-row-35-owner-validation.tsv",
       "state": "present",
@@ -9441,18 +9447,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-35-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:837b5b23f1028eb59705b7aa4ed855c3bc84a536cac55b966092f42bba9ac189",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-36-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-36-decomposition"
         }
       ]
     },
@@ -9490,18 +9484,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-36-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:f3c42eaa20d3a6c1b0a45362d7ddc44535c87447b93cb265496c526eb5f2d1f5",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-37-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-row-37-decomposition"
         }
       ]
     },
@@ -9548,18 +9530,6 @@
       ]
     },
     {
-      "digest": "sha256:45b61aea0f202cde9b08d05de348d504f7c2f713b79f2b167e8b757238cca620",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-38-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-row-38-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:be67f0765b69fb4c5392d6fe00d3a47e1390374ed90b7ca49e796d901700c8bc",
       "path": "evaluation/standards-effectiveness/milestone-7-row-38-owner-validation.tsv",
       "state": "present",
@@ -9577,18 +9547,6 @@
       ]
     },
     {
-      "digest": "sha256:898da0aa0c3ab7ef79b5099b6da05eda735229a9bf8f6ccab5f53be9bff693e5",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-39-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-39-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:7264e25c7acab41c894f5f51296762a47080496760f6c9cb7271cd39a69f6a10",
       "path": "evaluation/standards-effectiveness/milestone-7-row-39-owner-validation.tsv",
       "state": "present",
@@ -9597,18 +9555,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-39-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:7b4c1ed26ee2d9bf772e66b33823c5ca64639ba27ed3c949825158c67fd88840",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-40-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-40-decomposition"
         }
       ]
     },
@@ -9625,18 +9571,6 @@
       ]
     },
     {
-      "digest": "sha256:7aee073f9a43e9c708c16cea5b2e5862accf251eda251e3e419a5ee88e80326c",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-41-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-41-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:47e2d9f29c03657969f94511fa7d6e14602fcc44274954f8b122fa1d4133a8ee",
       "path": "evaluation/standards-effectiveness/milestone-7-row-41-owner-validation.tsv",
       "state": "present",
@@ -9645,18 +9579,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-41-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:5174ba6057997828f82659abeacda4d85d25de52e81d53c33432a04104ed74cf",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-42-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-42-decomposition"
         }
       ]
     },
@@ -9673,33 +9595,6 @@
       ]
     },
     {
-      "digest": "sha256:6df935074560a2f0bf9a1550f650bc32b5608c2bc640c007385706a273e24441",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-43-decomposition"
-        },
-        {
-          "check": "row-43-owner-projection",
-          "role": "content",
-          "suite": "rust-binding-index-closure"
-        },
-        {
-          "check": "nested-index-separation",
-          "role": "content",
-          "suite": "rust-binding-title-index-closure"
-        },
-        {
-          "check": "row-43-projection",
-          "role": "content",
-          "suite": "rust-binding-title-index-closure"
-        }
-      ]
-    },
-    {
       "digest": "sha256:14f2406f1fcaba27f792cccce5f917d55f92be9dc821b122e114731affc78abe",
       "path": "evaluation/standards-effectiveness/milestone-7-row-43-owner-validation.tsv",
       "state": "present",
@@ -9708,23 +9603,6 @@
           "check": "owner-validation",
           "role": "table",
           "suite": "milestone-7-row-43-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:85da899489fd40775f697b85031c09339fdc95480c1b1cd8672beb532874e822",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-44-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-44-decomposition"
-        },
-        {
-          "check": "row-44-projection",
-          "role": "content",
-          "suite": "rust-security-title-index-closure"
         }
       ]
     },
@@ -9741,18 +9619,6 @@
       ]
     },
     {
-      "digest": "sha256:7f30a0956e6dd75babfc07cba4adb7b47f2ad57de6718f37d739bc4bef90598a",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-45-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "row-45-decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-45-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:fdffd88a8add5bb4e25ca6f296dd2d5512f758b149e2e302bc472fc75184ae11",
       "path": "evaluation/standards-effectiveness/milestone-7-row-45-owner-validation.tsv",
       "state": "present",
@@ -9761,18 +9627,6 @@
           "check": "language-index-owner-validation",
           "role": "table",
           "suite": "language-index-closure"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:89b1ef067761adbb8a602628483b2a75e2f89a04e53520bdd8f17e37d4f0166e",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-46-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "row-46-decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-46-decomposition"
         }
       ]
     },
@@ -9795,18 +9649,6 @@
           "check": "row-46-owner-validation",
           "role": "table",
           "suite": "milestone-7-row-46-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:aa02562be8cd3ec14f1796b453320f24497543df4812067726da929e37670055",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-47-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-row-47-decomposition"
         }
       ]
     },
@@ -9838,66 +9680,6 @@
       ]
     },
     {
-      "digest": "sha256:aed079ef9ff9b950e46856dc771930821efcd30bec1b2cbfc5dab74818aead4d",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-5-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-5-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:e8afbf9426ce08b5d153e53e90d0b9605069f1478ee2f065ddcb1fcafd363038",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-6-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "report",
-          "role": "content",
-          "suite": "milestone-7-row-6-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:682dcbc48616209263ea6695eb2d4c54732deb38d899709b5847b69e54e19a47",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-7-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-row-7-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:f9f35ca4f3626c97939e129b1b24c7afbd23b2e8319457bee6dc17ba3e8b74c8",
-      "path": "evaluation/standards-effectiveness/milestone-7-row-8-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-record",
-          "role": "content",
-          "suite": "milestone-7-row-8-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:647a7f30c8d12f758d10af8060ac242d9e30e85a58294f4361e3f75ba75e32b1",
-      "path": "evaluation/standards-effectiveness/milestone-7-rust-async-decomposition.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "decomposition-report",
-          "role": "content",
-          "suite": "milestone-7-rust-async-decomposition"
-        }
-      ]
-    },
-    {
       "digest": "sha256:79e750cd62ef2e0f293e9606625717a2787683c508ecf455e12b7e1edfcb3284",
       "path": "evaluation/standards-effectiveness/milestone-7-rust-async-slices.tsv",
       "state": "present",
@@ -9906,23 +9688,6 @@
           "check": "slice-map",
           "role": "table",
           "suite": "milestone-7-rust-async-decomposition"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:fe240a36ba05ede1004e396f76d9ba17ca826ea3fd0fe8e51f7762c432002b4b",
-      "path": "evaluation/standards-effectiveness/milestone-7-source-index-verifier-replan.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "verifier-replan-policy",
-          "role": "content",
-          "suite": "final-source-closure"
-        },
-        {
-          "check": "preparation-policy",
-          "role": "content",
-          "suite": "source-package-preparation"
         }
       ]
     },
@@ -9983,35 +9748,6 @@
       ]
     },
     {
-      "digest": "sha256:0fe6e1b84862b5962a02d14130905a8f9d9f6015fad528453b941eefb073c369",
-      "path": "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "trust-replan-route",
-          "role": "content",
-          "suite": "milestone-7-f025-f026-decomposition"
-        },
-        {
-          "check": "accepted-report",
-          "role": "content",
-          "suite": "milestone-7-trust-lifecycle-replan"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:6af387ff519826ffc7fe3120884cca52e7b92a2a8f2b816961faee27dfb557ee",
-      "path": "evaluation/standards-effectiveness/milestone-7-undisposed-source-audit.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "closure-report",
-          "role": "content",
-          "suite": "readme-template-derivation-closure"
-        }
-      ]
-    },
-    {
       "digest": "sha256:95dc8672b2b6971d3e6cb99bc6f96e41e591370c9dbc0d64c95ef964ff9eb0d6",
       "path": "evaluation/standards-effectiveness/milestone-7-waves.tsv",
       "state": "present",
@@ -10053,7 +9789,7 @@
       ]
     },
     {
-      "digest": "sha256:1960fc9f040cd7a14d0b68d9f67da94538ecbac2377c62b5b7cb088c0aa4fdf3",
+      "digest": "sha256:52d192e8c45a5dd4e1a5fc3190c1ce1619964ab10fc744badd0371caa84157dc",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -10125,7 +9861,7 @@
       ]
     },
     {
-      "digest": "sha256:a341375727c371fa9089c0fbbe4e968b1e78c3caf995d1d3c1003c994a70e580",
+      "digest": "sha256:91537ecba89959f3b9b3c853b384de7f3983cf5364fed2acbf946c5fdee47032",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml",
       "state": "present",
       "uses": [
@@ -10173,7 +9909,7 @@
       ]
     },
     {
-      "digest": "sha256:8382a2d2c21771584e0d8067c0836b84774464c8d275df4f3b462cd4fe9f7589",
+      "digest": "sha256:6e2c17364df6bad85b9ff93462b9aca07c0d7bef0af499f7524e41de06c6ed72",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
       "state": "present",
       "uses": [
@@ -10197,7 +9933,7 @@
       ]
     },
     {
-      "digest": "sha256:dfc7d28c1a71780a9f552d50ab0e7546825a69896229d5448c7ed163a3faa88a",
+      "digest": "sha256:abf882cd2f5a5e57cfee71a82c220765afbc29e4716eb5883cbc8b496421a976",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
       "state": "present",
       "uses": [
@@ -10464,7 +10200,7 @@
       ]
     },
     {
-      "digest": "sha256:e4c384a0c0a013391cedc24c23c719a7e827b49745793461f14c07afe65be150",
+      "digest": "sha256:1e7e2b158fa1a316a102549f54850a89f262e3e86d898bbfca3db0db137220b7",
       "path": "evaluation/standards-effectiveness/suites/a1c-contract-conformance.toml",
       "state": "present",
       "uses": [
@@ -10680,7 +10416,7 @@
       ]
     },
     {
-      "digest": "sha256:29f041423faacdb8c9bedd9d1b4718bbcb1b221a2734cd1d8bbb8030de400760",
+      "digest": "sha256:d38597b705fac38cdd36c9d127cba4b1f7543edfeb79b15dd3d61ea2f5be920e",
       "path": "evaluation/standards-effectiveness/suites/architecture-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -10752,7 +10488,7 @@
       ]
     },
     {
-      "digest": "sha256:ad6030629f69407409dc8041aa43b634099783e367377d212cf701dbeff6239c",
+      "digest": "sha256:ce83964ee088a2c1f56220b981e840006ae2b1789a8e0a75760c38c3fcb2b463",
       "path": "evaluation/standards-effectiveness/suites/binding-contract-evolution.toml",
       "state": "present",
       "uses": [
@@ -10764,7 +10500,7 @@
       ]
     },
     {
-      "digest": "sha256:ef7405140c8b7f62830ee1d94533e08d3faa49198ec9a0ad01b4694da3ddd984",
+      "digest": "sha256:789c66be8f03eecaec211a464efea6a8e53946fd641a202cf2b3f469e2f24e99",
       "path": "evaluation/standards-effectiveness/suites/binding-generation-authority.toml",
       "state": "present",
       "uses": [
@@ -10800,7 +10536,7 @@
       ]
     },
     {
-      "digest": "sha256:fcde7ede7bf324c68313d462dd153c8606d72335b71b2e7a6438a7819a12f332",
+      "digest": "sha256:ad92bece8308680e71ed2715d053c70a57535f5154b462c16562a723c9fa95e9",
       "path": "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
       "state": "present",
       "uses": [
@@ -10812,7 +10548,7 @@
       ]
     },
     {
-      "digest": "sha256:2005dc9b950eda0510233f20448fe41989ad9ec730fa134407b6cfc9f3c3f890",
+      "digest": "sha256:cfe17726620e203cf4473b102540f1f1e3d782eb7a3fb3458239d20d02bd2d38",
       "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
       "state": "present",
       "uses": [
@@ -10877,7 +10613,7 @@
       ]
     },
     {
-      "digest": "sha256:7284ac74890e177b0186f382a3f047eea772318011a0267d2926de7c4937baec",
+      "digest": "sha256:cc543e7d9b41c607adbae899f1216e46400e4ad6c074dabad47c801a9106a702",
       "path": "evaluation/standards-effectiveness/suites/contract-decisions.toml",
       "state": "present",
       "uses": [
@@ -10997,7 +10733,7 @@
       ]
     },
     {
-      "digest": "sha256:d9af1608deb2feab365cf238dd188b29a34449c950504cb39d835e3cec84167e",
+      "digest": "sha256:da21bee3d591c8bd2ae058ab21a0ea206bb44c645efd5454d3a995a9a1345000",
       "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
       "state": "present",
       "uses": [
@@ -11009,7 +10745,7 @@
       ]
     },
     {
-      "digest": "sha256:90f403a25a8c2ad9d097ab43d7ef33fef1570bd692b3991d9a4db0fef8b9527a",
+      "digest": "sha256:6915b23b1ad56ef2a4c7f0c381c3f175a81702dd5ba66843baba2b6e4c61d7ba",
       "path": "evaluation/standards-effectiveness/suites/csharp-async-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -11021,7 +10757,7 @@
       ]
     },
     {
-      "digest": "sha256:1d6f3b19adfb87de7b117e84c9a03881023fe58c5268d1de3db49dc8855889a4",
+      "digest": "sha256:25c530087680d0964a2b056a305a968e50d3d60447a2894621d7ae743ceacc56",
       "path": "evaluation/standards-effectiveness/suites/decision-engine-contract.toml",
       "state": "present",
       "uses": [
@@ -11033,7 +10769,7 @@
       ]
     },
     {
-      "digest": "sha256:42120c122812a86020ca65c78c1a48232ed837dd65f29b9556d0f92cb625dd4c",
+      "digest": "sha256:4a460ce4406f70e8fa6546f3d05fb22a31bc881249bb09b2e2d96ada8d402541",
       "path": "evaluation/standards-effectiveness/suites/dependencies-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -11045,7 +10781,7 @@
       ]
     },
     {
-      "digest": "sha256:1ce75050aefbbd01754a5b37aaff7fc376b10a57a4aaba026a99bed1c1ad0cc5",
+      "digest": "sha256:6cde4dab469681fdcfe64d2f886b44f7edbd96c8e3efd2480b78f0cde6828061",
       "path": "evaluation/standards-effectiveness/suites/dependencies-population.toml",
       "state": "present",
       "uses": [
@@ -11141,7 +10877,7 @@
       ]
     },
     {
-      "digest": "sha256:4a07dff9e7caafa5c926ca378b03e726a675313ce7c898e75a9021f293ba25d6",
+      "digest": "sha256:30c50d6566830d8d3d59b444a636f646bc3757e8f858f70198d6b49fe4e97d6c",
       "path": "evaluation/standards-effectiveness/suites/documentation-decisions.toml",
       "state": "present",
       "uses": [
@@ -11177,7 +10913,7 @@
       ]
     },
     {
-      "digest": "sha256:f7fbb134e9c1e0cf4faad8ec1aa2129cde1422417b426fad6559e6253eaf465e",
+      "digest": "sha256:cc76a5ab4181bb5c78951acdffa35659416bf13e0357e8910269a7f31a974f91",
       "path": "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml",
       "state": "present",
       "uses": [
@@ -11224,7 +10960,7 @@
       ]
     },
     {
-      "digest": "sha256:0d93ef2eb12d87da4de74a7962f2591e4880493e41829abf081307e9af975295",
+      "digest": "sha256:fd984e0b92f7efe04f154f264dbe1ae23fbc22ab73a6806240232f5bdb8b7a92",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "state": "present",
       "uses": [
@@ -11236,7 +10972,7 @@
       ]
     },
     {
-      "digest": "sha256:b08f8638c35992f6c8e86bb0946b5b56e131da275c7b0862808ce1ed99b892a3",
+      "digest": "sha256:ce56b6286d899a108fa02dd543485887a9d8075c0c8546f81369110ef3a768ff",
       "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
       "state": "present",
       "uses": [
@@ -11248,7 +10984,7 @@
       ]
     },
     {
-      "digest": "sha256:2aa8c3e0865fa5abd4f3c4ea4edbbb6ca9edff55298e00f563496a869a5dd6de",
+      "digest": "sha256:1b68d9c3e7d01ee6aa4dff22a9c4bb819030aa216a5ee6c21483ac84b630ebd2",
       "path": "evaluation/standards-effectiveness/suites/final-source-closure.toml",
       "state": "present",
       "uses": [
@@ -11368,7 +11104,7 @@
       ]
     },
     {
-      "digest": "sha256:dddf8025107e4583259546385e40b33ed7c34540e4f97accdbe33ac3aa940524",
+      "digest": "sha256:e413eec7cbd7a438746849ec8d7e5db2a04dda0901da2c89f03f9275513e7f8a",
       "path": "evaluation/standards-effectiveness/suites/godot-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -11440,7 +11176,7 @@
       ]
     },
     {
-      "digest": "sha256:888922c368125f3fa96264a240d8355044caab41140286485912d49d42db1fbb",
+      "digest": "sha256:b8196781106266952aa583e691ba91f1e67f4c0893624717221c86b41c971270",
       "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
       "state": "present",
       "uses": [
@@ -11476,7 +11212,7 @@
       ]
     },
     {
-      "digest": "sha256:1b67e9813e548d9e60ea53ecef8e277fa931e3efe5e17a2e84514e553303c8cc",
+      "digest": "sha256:1189617c4a20327d33e3c610e354a868b27627a6579dd0bda8b76b509c83796b",
       "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
       "state": "present",
       "uses": [
@@ -11488,7 +11224,7 @@
       ]
     },
     {
-      "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
+      "digest": "sha256:27c88e4084300c46b09cf1c0aec611215c50b59dcb0ad05b9a2f34ed6804282a",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
       "state": "present",
       "uses": [
@@ -11500,7 +11236,7 @@
       ]
     },
     {
-      "digest": "sha256:5fc89ca3138c8e964ea350641c16810c4dd6105bea291959d01bf3656ddce781",
+      "digest": "sha256:b1e67eb4eb416d5ee1b3596eea4542129457f44cf22613b6d8fb51fde64a8354",
       "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
       "state": "present",
       "uses": [
@@ -11512,7 +11248,7 @@
       ]
     },
     {
-      "digest": "sha256:68a38cb09a20489c9e57eaa0d6ed9d51de8edeb696645196a2f266e6fa02b5b8",
+      "digest": "sha256:56555b1afea8bcdbfe3fb87d7125a1967ec2b8c9999d049a2cff93037e640da1",
       "path": "evaluation/standards-effectiveness/suites/language-binding-mechanism-selection.toml",
       "state": "present",
       "uses": [
@@ -11536,7 +11272,7 @@
       ]
     },
     {
-      "digest": "sha256:b0ce71b44bf140047f3e07c2dccf9c537b2f24831a07e09d47cd15852eed7a0d",
+      "digest": "sha256:9aec9295d05fd647ef45ec56c2f5d5ee5d6c69b34c30c087ef17b9fc8eb7031e",
       "path": "evaluation/standards-effectiveness/suites/language-binding-wire-representation.toml",
       "state": "present",
       "uses": [
@@ -11572,7 +11308,7 @@
       ]
     },
     {
-      "digest": "sha256:8afeb80b890418b4fd083df80af92dfab39fdc10790f7c3584f4004b92978ffb",
+      "digest": "sha256:aa7d945fb68e729e04b51a9f684ad82466d9c6b2accee012a3bb73114fffea0c",
       "path": "evaluation/standards-effectiveness/suites/launcher-owner-row-14.toml",
       "state": "present",
       "uses": [
@@ -11584,7 +11320,7 @@
       ]
     },
     {
-      "digest": "sha256:20ad8fd8e3ec6590013181897deca1fa80d7e9e8ada0b9714d9ecf3612e4d846",
+      "digest": "sha256:62748d6b7552729e8c2456e70ecc78c28cd413e86a469465efc507a82d7c7194",
       "path": "evaluation/standards-effectiveness/suites/launcher-population.toml",
       "state": "present",
       "uses": [
@@ -11620,7 +11356,7 @@
       ]
     },
     {
-      "digest": "sha256:ae8051562968068656a9a0450ad215cd98eeaed1c661aaa47db23310ce767c3e",
+      "digest": "sha256:97467207268dc4d436fad8690c77988145937528094e9e5511a67032362e92f5",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml",
       "state": "present",
       "uses": [
@@ -11637,7 +11373,7 @@
       ]
     },
     {
-      "digest": "sha256:49ba4e6d6d1e19bf8149aa32d2899ec850bed99e696deaaac7bc138897e51199",
+      "digest": "sha256:5a5bed4639e379577d94f9bd08c5e99f243082d6a73f6fa612a98098ef5d25d1",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11654,7 +11390,7 @@
       ]
     },
     {
-      "digest": "sha256:fa8f21be2db6ed1ca8b7fa1b947d6b173b099e6a84bc4fafd273e8acd12cc8a7",
+      "digest": "sha256:095a2a48e2d8fc9a4ecfdbe4c181c84832a28ea5dd316a2db5b0c2c0ed5645ab",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11666,7 +11402,7 @@
       ]
     },
     {
-      "digest": "sha256:befad5ab483c30a3a06b01b873bafa113acf65962542646136cd9adb12c5f8bd",
+      "digest": "sha256:c46d7b691b87e9c4323ea32c87f2f6a9f611b355fb7ba573a503f6a37c463aae",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f022-f023-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11683,7 +11419,7 @@
       ]
     },
     {
-      "digest": "sha256:3861bd8dbc8554e162518200815b3b141a7399f78e838970552368b45c8cb488",
+      "digest": "sha256:518dfaebbe2902d67a7abde4c0e6f41e0bb6692d95440aeabc5fe5f895168414",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f025-f026-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11695,7 +11431,7 @@
       ]
     },
     {
-      "digest": "sha256:03edc3c48d4f61ef85997611a8f0189b4af0589973c8d29d1bb3f02091228f11",
+      "digest": "sha256:fdfbfdb994d7cdf0ccf3bc34ba8522b121a04393a427dd8ba8cc3151ab552ecf",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml",
       "state": "present",
       "uses": [
@@ -11712,7 +11448,7 @@
       ]
     },
     {
-      "digest": "sha256:05f4d9ae595e55679410f8d7d779526daaa539d831bf2c70b6112e907b481637",
+      "digest": "sha256:0dd998f5d8abc4765fcbe8afa76c1ff6333562f66a39e09342deb7d86db7d34a",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-13-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11724,7 +11460,7 @@
       ]
     },
     {
-      "digest": "sha256:483e7186834274d00032ac442a9cb6e6c3ace75bbf34077cfc8bd3be46b17c48",
+      "digest": "sha256:7e8b4eea5d3d0ea1c434c7ee88e92e62b8de2866e7aec34c436afdea2c1cfa4d",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-15-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11736,7 +11472,7 @@
       ]
     },
     {
-      "digest": "sha256:dd692925dda8e7d1912e90aacc8cc44be28c9b79bdd3bbf782fbd5fb4021e440",
+      "digest": "sha256:9b6b1e7b30f51b5febd712ca28fb34908c0e373deb6ba9be69592d5fa15991bb",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-18-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11748,7 +11484,7 @@
       ]
     },
     {
-      "digest": "sha256:9ccc502bf31061fcfa967d2957bf504e73d435c2641b8744091de350703012db",
+      "digest": "sha256:2403b372325a09304a75200c4906b3d5d37411808fc09e807f2afdf1f888e630",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-19-structure.toml",
       "state": "present",
       "uses": [
@@ -11760,7 +11496,7 @@
       ]
     },
     {
-      "digest": "sha256:98f9cbd23c554cecde2f8f72d0dcc7dcce91b3f30d1f3ef969b0cb90263462e7",
+      "digest": "sha256:35fac11d1c0e01ad5fbff6b8dfda8c29733251f37d1477ffa469e2f1915ab740",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-20-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11772,7 +11508,7 @@
       ]
     },
     {
-      "digest": "sha256:80510fa408c97c369cb65bc5359ad5659ead255f60eb7fe000164911c63ac528",
+      "digest": "sha256:1723381ae302a12178307611f7a087ee5340e642eb263f07378d2c4165de8212",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-21-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11784,7 +11520,7 @@
       ]
     },
     {
-      "digest": "sha256:0d887649d8548f64283c71322d375e94af50c71c02dc7ae734c0ee453861cdee",
+      "digest": "sha256:9e1d2226fa960854fc2144d65b5fbd52e9ffdbdbc3e3b9f380820412f8c94cc4",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-22-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11796,7 +11532,7 @@
       ]
     },
     {
-      "digest": "sha256:6fd5a7952be47aac5538a8eaf0ea497a7b09454142938fb302f03d097dad082d",
+      "digest": "sha256:3f37ae96c7e6de91dc4100656b551fc5c0b7e571990363e202261610b991658d",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-23-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11808,7 +11544,7 @@
       ]
     },
     {
-      "digest": "sha256:27201e8e23fd783e40c2abdb96d83e98b87df8da586a1e0a0b623edc08f85c28",
+      "digest": "sha256:698ac7992ead0276d76eb644ea240ae0f658db693cc613c24c7cb95017b5e8ae",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-24-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11820,7 +11556,7 @@
       ]
     },
     {
-      "digest": "sha256:4bc780f178afe571265ad5ddde571103745ee615bf4c31de725776b77a75a04e",
+      "digest": "sha256:3fb4ea747a051858a40a632a4499fd59279b95bc9023789d66286e1b4f542046",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-25-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11832,7 +11568,7 @@
       ]
     },
     {
-      "digest": "sha256:253410065774ab4b76ce2920ed0c471038fa5bfc50ade3230b2473553b3a6ced",
+      "digest": "sha256:f3cd0b7b082fa16c94a6d8adf060d5cf83db453ccf724bb3746a07c6c1262c13",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-26-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11844,7 +11580,7 @@
       ]
     },
     {
-      "digest": "sha256:cfe104fd6d7594b333ff6e577ac22e6701ba5d5268d614b907df2446e424116d",
+      "digest": "sha256:ed339059a0d27eeed848ef3ca20a21e04f1bcdd119f8d90d614ecc37375b687a",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-27-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11856,7 +11592,7 @@
       ]
     },
     {
-      "digest": "sha256:23ddc2900c82c2d7d4a5e85760de1525ee3eeb57c6bf86784908306173bed312",
+      "digest": "sha256:a8670cf3c5f7e17e142036e01a3a62f96bc6859c9e2ac33c77915064629c831d",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-28-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11868,7 +11604,7 @@
       ]
     },
     {
-      "digest": "sha256:34f76d02d8fbc9d0318947b38d4190e810d498ca3b53a864e493c5d873e1eb12",
+      "digest": "sha256:4ab30a3410d10ba5d7872d7c95be82d551dca81051d62cbbb45b9d752780fa61",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-29-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11880,7 +11616,7 @@
       ]
     },
     {
-      "digest": "sha256:0a1560acf1adbe5c3aefa3aea650fac52adf5ccc45fd7dc38ce3a19e9f49a0b0",
+      "digest": "sha256:4b650ca7bbbc90ade53bc00a524281f08e538229cea2ffc0e09d80d3b5f78dbc",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-30-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11892,7 +11628,7 @@
       ]
     },
     {
-      "digest": "sha256:c826ce8002b3b05d052d9c3b24611eef792b96d35f547158307e151887754b9e",
+      "digest": "sha256:6df525db580f57f75155b440a5569512bb735d9eb02531a25e5f10ea665fa04e",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-31-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11904,7 +11640,7 @@
       ]
     },
     {
-      "digest": "sha256:581d482ca68e0d694b3c95260c3531961e6c0d657e11fa726f4edc3a54990680",
+      "digest": "sha256:09101b65132e17391aad6e4985cb2984d90ce08fc8bf85f990ef89c620eb401c",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-32-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11916,7 +11652,7 @@
       ]
     },
     {
-      "digest": "sha256:1a3fe7ef06765256573e15a9a0f62631f737b6324ef7415a5793eada0e057d5c",
+      "digest": "sha256:3fa1dd2bde02502b6e59ee539ffc5b3ede9dbf935eae29a7829912d1f9a92c87",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-33-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11928,7 +11664,7 @@
       ]
     },
     {
-      "digest": "sha256:3b04a3f9780afeb87b587b3434f7e9968552eed6bb946cb4fe1f50d69664d026",
+      "digest": "sha256:9883556717f337a70c78de897613bbf32dad1251a94329da022a2e0b9ca607a3",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-34-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11940,7 +11676,7 @@
       ]
     },
     {
-      "digest": "sha256:d49f0ee944625464181b13a22da31efac2544d3c595c4bb0ccb48e0ae8b4875b",
+      "digest": "sha256:fac69bfd7d15b8df30006ece588389907aeeaaacaf9c9dce2f45dde0bea459f6",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11952,7 +11688,7 @@
       ]
     },
     {
-      "digest": "sha256:be212d0729d42377950ce7b0ebbd488642072255e6d46ead139d14007f3becc3",
+      "digest": "sha256:59c305cb0904d160a2c5f3195a26f001a8fe212bd6b68cd234642edb90ae1b7f",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-36-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11964,7 +11700,7 @@
       ]
     },
     {
-      "digest": "sha256:1ef6ac7a00ec8c08c86d441e09eb3243299d2e53b71ad77772fd309b6d215e19",
+      "digest": "sha256:c762ce89be4616802a339c401b0c700ce40e57dbb779172f8336446ebbe85e1a",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-37-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11976,7 +11712,7 @@
       ]
     },
     {
-      "digest": "sha256:7737d3b78726b9ecd370a5aeeeb6d9bf530aa4a5f096bcfab923bbd85a301a58",
+      "digest": "sha256:21874496d0cbfbc402e0bf23e49258173d612868e47837103710879811f1d2d8",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-38-decomposition.toml",
       "state": "present",
       "uses": [
@@ -11988,7 +11724,7 @@
       ]
     },
     {
-      "digest": "sha256:41981164d9e7cc7b2698fcd0b13468c2d51cb7340a9f620affa00737c79f4060",
+      "digest": "sha256:531d5d90489f43e33ede286b1ea2d6bc73b1a61b23186a402464191189c19256",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-39-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12000,7 +11736,7 @@
       ]
     },
     {
-      "digest": "sha256:69d7a96d62c3ef7165b5ded3e844a83cc7bb49ae22962fb3d0dda8eccb0a4981",
+      "digest": "sha256:a9fdcb5054cfd5156d851ff1a34494629df744763db799a084a814b9ca943b16",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-40-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12012,7 +11748,7 @@
       ]
     },
     {
-      "digest": "sha256:1f5368f18209f7a3104604952157ae6673da7f6f0ec072748f814d10d8db95dd",
+      "digest": "sha256:4cfb5b01618bbae686f54e30728c7ddc681bdc21d7de00c4aaf91ac166d23ef2",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-41-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12024,7 +11760,7 @@
       ]
     },
     {
-      "digest": "sha256:fa3d1c7f643dd95b70757343217d4b02168de069e8fc161097f44e2fad82baac",
+      "digest": "sha256:d0545a2629182a748ffaf1b979a93915e40199a370e634dc516e2e6d238bc1ca",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-42-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12036,7 +11772,7 @@
       ]
     },
     {
-      "digest": "sha256:124d0efa63ad70ff5371436569d19ab569d218b05b73db13869494f28df292bc",
+      "digest": "sha256:0f1fc5f7f3813821c935b7b13612f2de73dbfe9e7bfbfb8dd796dfda59c1160b",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-43-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12048,7 +11784,7 @@
       ]
     },
     {
-      "digest": "sha256:5a1550d574a0988a6245bb96240ebf15790ac0049d0bdcf1e9ec309773a9ccc9",
+      "digest": "sha256:1a505fe348566304277fb53caea90cc26f6a1b3d0120260ef2f0b9dab73a0907",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12060,7 +11796,7 @@
       ]
     },
     {
-      "digest": "sha256:e1a99f541b5d855c6ec1c3bec203be6625df6573784287afb9a17b81b98a45ca",
+      "digest": "sha256:37cf94fb3a34016a26860701310315c731b84107a4f3ae266e2a4b37978e95dd",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-45-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12072,7 +11808,7 @@
       ]
     },
     {
-      "digest": "sha256:d666b2340cc73cc8a31c38eb7c5aae34e72c39c3888ff3941cd7b7e395777feb",
+      "digest": "sha256:5e484891a1d0e468a316dbd56fb12fd32e0c3b455737ad3f214d0fdb543275e9",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-46-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12084,7 +11820,7 @@
       ]
     },
     {
-      "digest": "sha256:b2db44638759a6cc73b4af298fef03572121f993271912e032cdd7d04840bfb6",
+      "digest": "sha256:bfa651833a8c73c638544a4921b27ae32a7ba850f9984b8d3a831d1dd383cc6d",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-47-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12096,7 +11832,7 @@
       ]
     },
     {
-      "digest": "sha256:dc02ea25393cd8ba2b4edd9352d15adf2442df4ab81bc57c6bc5e4a397d2ce39",
+      "digest": "sha256:061ae9713746e06b775ae85287b870d4a5c1de7de2a70f67801f69f5b4445c00",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-5-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12108,7 +11844,7 @@
       ]
     },
     {
-      "digest": "sha256:f1723bf03cad37827ab5d1366534042e02ed34820cbe17610ad3a650afd97d34",
+      "digest": "sha256:645691317be6043737c72e91fca7e48b48dd35c4ec970cae0f5d7fdb9021d5ae",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-6-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12120,7 +11856,7 @@
       ]
     },
     {
-      "digest": "sha256:cdcd0055af0e04f3ff17205464ca6a176985049f03b441cae318895e62cf195c",
+      "digest": "sha256:6aaed397191eadbaed2f07b5acd8bddf169416bb2e55845059a899612a8b13c1",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-7-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12132,7 +11868,7 @@
       ]
     },
     {
-      "digest": "sha256:e80b0a67434c4dbf4311aabc8904027d8af5272939648596ed977e5ceac5d12b",
+      "digest": "sha256:7ef5038b872230e4bf621b19e846a2c86c41e13f476c268c5cc59bb55efdf0a1",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-8-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12144,7 +11880,7 @@
       ]
     },
     {
-      "digest": "sha256:e34b635fa03df276587aa58cc93e972aef252451660cdb9537d53a101b400c84",
+      "digest": "sha256:5d46a608da49a7ca85a52e2ea8a9234737c6ace6f2e12d9b9dd8335008ed1e13",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml",
       "state": "present",
       "uses": [
@@ -12161,7 +11897,7 @@
       ]
     },
     {
-      "digest": "sha256:07c787dcbc6d2ab49ab80ee65ec8f9c15b5000718164771cf1b4eec2973f8811",
+      "digest": "sha256:23bd7a2a11cd33ad25b6650fe1464bc1b5759d92854ff8ee8e3353de0681d4c6",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml",
       "state": "present",
       "uses": [
@@ -12178,7 +11914,7 @@
       ]
     },
     {
-      "digest": "sha256:96a32ca40dc9f096466d94132e0e90e6cda1d86c187be1cb4c80dfe7dc88de22",
+      "digest": "sha256:7ea06a5a2f08217aa540444ee3db7fb5262b12a198b5992d6c95fb4b1b640684",
       "path": "evaluation/standards-effectiveness/suites/native-artifact-loading.toml",
       "state": "present",
       "uses": [
@@ -12190,7 +11926,7 @@
       ]
     },
     {
-      "digest": "sha256:e7d63a31b5a795b0cfb3b8c9f1013df64b71ee01b5134b003b042826c485c176",
+      "digest": "sha256:39b5099cc5dc66d4ba592fac75f641a4d5201d86094b8c42e84154028d1b3eea",
       "path": "evaluation/standards-effectiveness/suites/native-artifact-release.toml",
       "state": "present",
       "uses": [
@@ -12202,7 +11938,7 @@
       ]
     },
     {
-      "digest": "sha256:0b573ba1173073612859872cfde46d36e3e7a93ce1909b8f043408acdab6970a",
+      "digest": "sha256:30637d963f2c7b0c2745c978c419c2bf1642f996bdd208201e114412f2c590ea",
       "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
       "state": "present",
       "uses": [
@@ -12214,7 +11950,7 @@
       ]
     },
     {
-      "digest": "sha256:08b32009b1a166dfb9893eca4af03992f18f111e1fe31fb9b362d80d1dd94abd",
+      "digest": "sha256:ff0b253920f3d76368c9c86f7ff336b2edb423a2c553e3405df0322d32f23e37",
       "path": "evaluation/standards-effectiveness/suites/owner-state-transitions.toml",
       "state": "present",
       "uses": [
@@ -12332,7 +12068,7 @@
       ]
     },
     {
-      "digest": "sha256:6d1aa089268a5f78d1a4d9b8c8bf176b636ca55554514a6a0174b8374024be05",
+      "digest": "sha256:1745460b8fa21fb2d43e8e40159c9c0efc6594ab5483637973e6e81836cad0da",
       "path": "evaluation/standards-effectiveness/suites/platform-evidence-coverage.toml",
       "state": "present",
       "uses": [
@@ -12344,7 +12080,7 @@
       ]
     },
     {
-      "digest": "sha256:b876b4ac1bff9b458f2abcad2f81373eae718c90fdb1720adb583cbb8518ad03",
+      "digest": "sha256:835a7c9802b20b1c7f4af4a1c91b33c5140a40f91db036615dcd8185534e764e",
       "path": "evaluation/standards-effectiveness/suites/platform-target-policy.toml",
       "state": "present",
       "uses": [
@@ -12368,7 +12104,7 @@
       ]
     },
     {
-      "digest": "sha256:d841bca144f69d66550b10d831724a46feadf948a448e0a42e7af2f04acd2f13",
+      "digest": "sha256:25124ce2b65c46d901ef942c68290e0020ce0a57c9714c52a48b6f694716665f",
       "path": "evaluation/standards-effectiveness/suites/readme-template-derivation-closure.toml",
       "state": "present",
       "uses": [
@@ -12440,7 +12176,7 @@
       ]
     },
     {
-      "digest": "sha256:6ea2986d903fe0341f18a69660d4efeaca10e679e2e4abf6580a8f900295ceb9",
+      "digest": "sha256:0ced798a34560a0d935612b89ef2c0ad57102faed21b8c35c18fd3ae04c784df",
       "path": "evaluation/standards-effectiveness/suites/release-procedure-policy.toml",
       "state": "present",
       "uses": [
@@ -12548,7 +12284,7 @@
       ]
     },
     {
-      "digest": "sha256:e2703b0deadc8e21b391dd1bf2bd9fa7546ff96e120a4c94c728bb4f962b5796",
+      "digest": "sha256:1ef8e060f03d565b540ab94c1716f80f998aa3bad7f49fb1b781316b0b83643d",
       "path": "evaluation/standards-effectiveness/suites/root-index-closure.toml",
       "state": "present",
       "uses": [
@@ -12572,7 +12308,7 @@
       ]
     },
     {
-      "digest": "sha256:c9f812263e6c7e3b1ee949514c4aacf1ef436619d58118681a2f6d97d72c7252",
+      "digest": "sha256:1c8c2df87e62141fbf72340c750a996c154e144107543aca5042a7340be62186",
       "path": "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml",
       "state": "present",
       "uses": [
@@ -12680,7 +12416,7 @@
       ]
     },
     {
-      "digest": "sha256:4cb5b243f4fa4dfabe3c247ecac68f485ade1a398732b0e388298111652ef25a",
+      "digest": "sha256:29ade79c966bf0d59cbeaeb3d6ee49e06e697cacd808208105219a4a3f25b878",
       "path": "evaluation/standards-effectiveness/suites/rust-async-boundary.toml",
       "state": "present",
       "uses": [
@@ -12692,7 +12428,7 @@
       ]
     },
     {
-      "digest": "sha256:cb2db7da77bd34117d25f8f59f76f20d4d5ee3d4ae980dfff490b1cf9e972c71",
+      "digest": "sha256:aaba9751b1a842c3c3571e2a6d85e596c3b65071baf1bda275ba026fd954c412",
       "path": "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml",
       "state": "present",
       "uses": [
@@ -12704,7 +12440,7 @@
       ]
     },
     {
-      "digest": "sha256:a980080fc72122a766b03e5592003fceff572c42e76ceed3e43790966eb0c482",
+      "digest": "sha256:00aa17e674c1ba2f54f2e9c047a501adb1ccb56791a34acba5239b9f3ad8b6c8",
       "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
       "state": "present",
       "uses": [
@@ -12728,7 +12464,7 @@
       ]
     },
     {
-      "digest": "sha256:5d365d5b293daadefe2b25da1d4bdfc3d0435826699e994304cacdc2258168b4",
+      "digest": "sha256:a488d58a763c859a512b765b00e6b831dfd7f2c2b11029809e39aab1c5a4af1f",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml",
       "state": "present",
       "uses": [
@@ -12752,7 +12488,7 @@
       ]
     },
     {
-      "digest": "sha256:0e8b6627b15051e6a386b170bd46bec82c24a2357e35709d2b74ebd6714ffbf9",
+      "digest": "sha256:2b6e5f18d1a3573b47e8b0d165409d4194f3387bfd11b2342ebfc164d758c459",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml",
       "state": "present",
       "uses": [
@@ -12776,7 +12512,7 @@
       ]
     },
     {
-      "digest": "sha256:8a64cd31537bc469b428fcb41c232003d87eb6994186f98eaf7a7d957eb97dcf",
+      "digest": "sha256:9d3233afc99262a1b354100b019158b619f3fe8f94c9bec0ea962654d468e2d2",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
       "state": "present",
       "uses": [
@@ -12788,7 +12524,7 @@
       ]
     },
     {
-      "digest": "sha256:9cfff7a5170f81605472f4ce1db80c74a1facfcf75b909363967a52c0494f763",
+      "digest": "sha256:5ae2447cd6bff27f17071c4b3c3681e6fa8f6b83d94733c5fbf52555862186fb",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-core-adapter-testability.toml",
       "state": "present",
       "uses": [
@@ -12800,7 +12536,7 @@
       ]
     },
     {
-      "digest": "sha256:ceefe01f4878c09eab4f6c06baca8eca6207317991bdbda8325efd5523dae9d0",
+      "digest": "sha256:a9c7917400721fc8bb133d45a96c1de2f78fa602ad5179a1bd9cd37786d2bc67",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-enum-representation.toml",
       "state": "present",
       "uses": [
@@ -12812,7 +12548,7 @@
       ]
     },
     {
-      "digest": "sha256:faa5732ef3933a79391cb96389315232d380a0ce075cabaaf1481e2379ae4dec",
+      "digest": "sha256:99c14c964e9298cfc826c577ffd21e32634c32c32ad473fa844f5cf015c4b01a",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml",
       "state": "present",
       "uses": [
@@ -12824,7 +12560,7 @@
       ]
     },
     {
-      "digest": "sha256:a1c19ebbfe8a49bc7ff2401dcd53d20adf686c3bed0203172e11a78fe6faa0d6",
+      "digest": "sha256:395a373eef0b7d60604dc47fc961d4d406e4349487704b18309ce6efae56e36e",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
       "state": "present",
       "uses": [
@@ -12836,7 +12572,7 @@
       ]
     },
     {
-      "digest": "sha256:ff96c8ebc05c646f422bf3e46408c89d2c5cb6409c2e8cce4d9f21b33a02bdae",
+      "digest": "sha256:3bb3dbec024f2c1d283699eb7ec939347bd1f9c4e61d2d927a4b41baee3a377d",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml",
       "state": "present",
       "uses": [
@@ -12848,7 +12584,7 @@
       ]
     },
     {
-      "digest": "sha256:b7bd34f6fc094400bfb5466adbbca44c65e9b0993837c46445761f1484d0d629",
+      "digest": "sha256:592c030b22d372fa5e0d30fb321bba95d8b4ac1ff6b2b8a5266b41726eb62fc1",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-index-closure.toml",
       "state": "present",
       "uses": [
@@ -12860,7 +12596,7 @@
       ]
     },
     {
-      "digest": "sha256:4cd5f60d233aadc8c3c9bb8870fa11ef12fe16db237c0d23832f4aa6f03cec20",
+      "digest": "sha256:9d17a0b077f63f69b77a82690941a055455387e85e6391ac84c957640776b9f9",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-runtime.toml",
       "state": "present",
       "uses": [
@@ -12872,7 +12608,7 @@
       ]
     },
     {
-      "digest": "sha256:4ea888698d584b04c37898c9da92d7114d140d12e35ccfdd696056f53f8e1593",
+      "digest": "sha256:a674cf477059e05131da763550759cb34e40cfee4b0403577b955ed3d63b9c6f",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-title-index-closure.toml",
       "state": "present",
       "uses": [
@@ -12884,7 +12620,7 @@
       ]
     },
     {
-      "digest": "sha256:0b4e432e96f8d3e7ebd664bf0ef911605c0d010760eddafb3c2fb3e465702c05",
+      "digest": "sha256:1d50f01cfd48e7ba8db759a9c6bbd5d902e6c958f8d9826f146947b86eb4f2dd",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-workspace-evidence.toml",
       "state": "present",
       "uses": [
@@ -12896,7 +12632,7 @@
       ]
     },
     {
-      "digest": "sha256:f973fa37c8771253bf9707bcb61eacec693f49ff91fc14d179607ffa2c560add",
+      "digest": "sha256:5dc253781fc694f84531b82a2810f839a818d14fe95a4be8e4c9c9ebb5b02edb",
       "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
       "state": "present",
       "uses": [
@@ -12992,7 +12728,7 @@
       ]
     },
     {
-      "digest": "sha256:7fb6788209091be0f4d4c2eba056c448912906915b67f68a3811a6b6eb0b7f28",
+      "digest": "sha256:c1fa35a46f1b31798fa73d0b94711aec730ef339ca0ffd848c2b7feb4dd7257a",
       "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
       "state": "present",
       "uses": [
@@ -13004,7 +12740,7 @@
       ]
     },
     {
-      "digest": "sha256:c20dc80c8dbdf1e5e8301123f6188db19511b2e4bb03e29301a73744020f12d0",
+      "digest": "sha256:efb8415398261f8651d10a054b767cf38c27d6526784951bf1d206ba43c87c05",
       "path": "evaluation/standards-effectiveness/suites/rust-filesystem-authority.toml",
       "state": "present",
       "uses": [
@@ -13040,7 +12776,7 @@
       ]
     },
     {
-      "digest": "sha256:41cfb5fd7e40562bc7dc18a597ba4757e6667d84cd817314bb6f7f98b025cd07",
+      "digest": "sha256:a3529078c9b10ab805384aaa5da5f31c218b07457856701648f4d0a6377e5280",
       "path": "evaluation/standards-effectiveness/suites/rust-listener-lifecycle.toml",
       "state": "present",
       "uses": [
@@ -13160,7 +12896,7 @@
       ]
     },
     {
-      "digest": "sha256:4c44d56ccc59707bde788bf6a4f0ae18f44c98c3f4ad711f82fd277362d911ed",
+      "digest": "sha256:36b748bcd80b6e7dc61f4b13f9b5d70ded1dba76359056e32412ed7a584b9580",
       "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
       "state": "present",
       "uses": [
@@ -13172,7 +12908,7 @@
       ]
     },
     {
-      "digest": "sha256:75a916f22d3ade15863f147f64afe6c38663068b1cbe06f351772fbd15e9649f",
+      "digest": "sha256:d90b49df6fadf2437d5a5f24151dbfdc6fb326fd6381b18baa1ac63398b9eb65",
       "path": "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml",
       "state": "present",
       "uses": [
@@ -13184,7 +12920,7 @@
       ]
     },
     {
-      "digest": "sha256:27e8ce3b94ac3cd11b2d7236c7275353b4046f5dfc0370dfcad7ff426fc126d9",
+      "digest": "sha256:4b9e1d9ed6592463364eecf8d43b630c0789a83845fc5e38084b772c32a8bc87",
       "path": "evaluation/standards-effectiveness/suites/rust-target-configuration.toml",
       "state": "present",
       "uses": [
@@ -13328,7 +13064,7 @@
       ]
     },
     {
-      "digest": "sha256:84e23164f645f58c37b4d51738dd5bba17778276d0e468747525ca71f381358a",
+      "digest": "sha256:795a8a74afd36941c6aa0901b1db4f4c46a23c455f2ac33b72e58af80350bacd",
       "path": "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml",
       "state": "present",
       "uses": [
@@ -13340,7 +13076,7 @@
       ]
     },
     {
-      "digest": "sha256:a882a83e7099742b87ad02a79d8f25b3bbffcde7287ab0ee3293d16eefabe497",
+      "digest": "sha256:7b2d221d0b8af54862d35d2574dbaa3368593a81d10540e7a7bb62ecc13bf9e2",
       "path": "evaluation/standards-effectiveness/suites/rust-wire-representation.toml",
       "state": "present",
       "uses": [
@@ -13386,7 +13122,7 @@
       ]
     },
     {
-      "digest": "sha256:6920c6acd0c254f9b32362a7861e7a487c85c868f5f2417410ff380eeba8b7c3",
+      "digest": "sha256:2298a6098d46491ea269113d5a2d97706a9ce1ba7028993a2c15bf789e2e492d",
       "path": "evaluation/standards-effectiveness/suites/source-package-preparation.toml",
       "state": "present",
       "uses": [
@@ -13410,7 +13146,7 @@
       ]
     },
     {
-      "digest": "sha256:f6914f4ada9d21f31d2ed741c83def865db8e20e7da3d424db9918768d4fc3d0",
+      "digest": "sha256:505bff555cc90448a78d7b5e3a30e1b0553339981a7b4252eb1339ad481c800d",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml",
       "state": "present",
       "uses": [
@@ -13578,7 +13314,7 @@
       ]
     },
     {
-      "digest": "sha256:f6b5ddd3ad1f174335b2e2f40ea1133ced69196732185d4924acabd461263a7c",
+      "digest": "sha256:a4a114b7c2a5dd491e7e7df0538a8aea4e09a401a303c1661fd5a1e6f3f40e31",
       "path": "evaluation/standards-effectiveness/suites/testing-source-closure.toml",
       "state": "present",
       "uses": [
@@ -13698,7 +13434,7 @@
       ]
     },
     {
-      "digest": "sha256:9538b24e6037ff9821d706c0ffd5b98a10d17e9e3c1dad68f85d278bac74a8a0",
+      "digest": "sha256:4b27163ff621c61db227d46e5fa3888a07136c720d020a2db9c6f901f042b56c",
       "path": "evaluation/standards-effectiveness/suites/typescript-async-owner-contract.toml",
       "state": "present",
       "uses": [
@@ -13734,7 +13470,7 @@
       ]
     },
     {
-      "digest": "sha256:180bb1aa4de47baf0938fd5bddf7be232406b9f33dd22aaf235b67425bf71411",
+      "digest": "sha256:b2a0fb714af33c4455d29ea61910209d4d6174d1915d8608d08d68b6a0495f85",
       "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
       "state": "present",
       "uses": [
@@ -13766,6 +13502,318 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2d6ee3db131be7da46f5e35fb7024515920b35d8a51da3b22d01c50d8c5c87ea",
+      "path": "evaluation/standards-effectiveness/verification-guide.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "architecture-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "binding-contract-evolution"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "binding-generation-authority"
+        },
+        {
+          "check": "commit-evaluation-documentation",
+          "role": "content",
+          "suite": "commit-consolidation-dispositions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "concurrency-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "contract-decisions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "cross-language-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "csharp-async-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "decision-engine-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "dependencies-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "dependencies-population"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "documentation-decisions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "documentation-policy-consolidation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "filesystem-containment-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "godot-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "input-validation-authority"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "interop-event-registration"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "ipc-payload-validation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "language-binding-boundary"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "language-binding-mechanism-selection"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "language-binding-wire-representation"
+        },
+        {
+          "check": "readme-projection",
+          "role": "content",
+          "suite": "launcher-owner-row-14"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "launcher-population"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-accelerated-execution-replan"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-decomposition"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-f022-f023-decomposition"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-independent-trust-replan"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-rust-async-decomposition"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "milestone-7-trust-lifecycle-replan"
+        },
+        {
+          "check": "removed-authority",
+          "role": "content",
+          "suite": "native-artifact-loading"
+        },
+        {
+          "check": "removed-authority",
+          "role": "content",
+          "suite": "native-artifact-release"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "network-transport-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "owner-state-transitions"
+        },
+        {
+          "check": "removed-authority",
+          "role": "content",
+          "suite": "platform-evidence-coverage"
+        },
+        {
+          "check": "removed-authority",
+          "role": "content",
+          "suite": "platform-target-policy"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "release-procedure-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "runtime-decoding-policy"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-async-boundary"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-async-lifecycle"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-architecture"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-callback-task"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-conversions"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-core-adapter-testability"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-enum-representation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-error-mapping"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-event-delivery"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-executor-delegation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-index-closure"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-runtime"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-binding-workspace-evidence"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-boundary-arithmetic"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-external-input-queue"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-filesystem-authority"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-listener-lifecycle"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-security-panic-boundary"
+        },
+        {
+          "check": "removed-authority",
+          "role": "content",
+          "suite": "rust-target-configuration"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-unsafe-contracts"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "rust-wire-representation"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "typescript-async-owner-contract"
+        },
+        {
+          "check": "documentation-projection",
+          "role": "content",
+          "suite": "validation-proof-lifetime"
         }
       ]
     },
@@ -16630,7 +16678,7 @@
       ]
     },
     {
-      "digest": "sha256:fcff0e29af5b37cb2afbb01a8f52c047e88ebcd2e3664f7f9e7bff73995966e3",
+      "digest": "sha256:34cbcf8baa4ceaafa273a4c4043e6797fb5bdd083647df23905e807577559a30",
       "path": "profiles/languages/rust/security.md",
       "state": "present",
       "uses": [
@@ -17693,7 +17741,7 @@
       ]
     },
     {
-      "digest": "sha256:7b2ff2130844f727d9bf58247e0d02534e445ceadcd1679fb32303a8c96785de",
+      "digest": "sha256:002a6bc7b5732642e4ed0d22bd60fb0a1fa91b57f6925e5cf0cf0ebda006ce57",
       "path": "reference/recipes/documentation.md",
       "state": "present",
       "uses": [
@@ -19418,6 +19466,18 @@
       ]
     },
     {
+      "digest": "sha256:9d5d391fa4a18a9e54254b5b40a2b5861a653fa987833cbf43a074f955b7c14c",
+      "path": "tools/standards_engine/README.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        }
+      ]
+    },
+    {
       "digest": "sha256:f735c6dd7756f855211e4278142f1b7c3847c6cd247af83c474fe2c8e4233ff2",
       "path": "tools/standards_engine/contracts/README.md",
       "state": "present",
@@ -20433,6 +20493,18 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2b68d22da573b185d903af5e699545167541049e4a8780785168bbdafdb70909",
+      "path": "tools/standards_verifier/README.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
         }
       ]
     },
@@ -24552,7 +24624,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:7a80ebaf22e1b1e3e82a84411e7c4046275e8cc3f2a0f5c37c3c08432627382a",
+    "digest": "sha256:9da22b7e2ac54d98c1549170036cf3e0cadd2a0b6337132f49095a67490d9baa",
     "uses": [
       {
         "check": "python-package-contract",
@@ -24735,13 +24807,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:fa8f21be2db6ed1ca8b7fa1b947d6b173b099e6a84bc4fafd273e8acd12cc8a7",
+      "digest": "sha256:095a2a48e2d8fc9a4ecfdbe4c181c84832a28ea5dd316a2db5b0c2c0ed5645ab",
       "id": "milestone-7-f018-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:9ccc502bf31061fcfa967d2957bf504e73d435c2641b8744091de350703012db",
+      "digest": "sha256:2403b372325a09304a75200c4906b3d5d37411808fc09e807f2afdf1f888e630",
       "id": "milestone-7-row-19-structure",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-19-structure.toml",
       "requires": []
@@ -24801,31 +24873,31 @@
       "requires": []
     },
     {
-      "digest": "sha256:96a32ca40dc9f096466d94132e0e90e6cda1d86c187be1cb4c80dfe7dc88de22",
+      "digest": "sha256:7ea06a5a2f08217aa540444ee3db7fb5262b12a198b5992d6c95fb4b1b640684",
       "id": "native-artifact-loading",
       "path": "evaluation/standards-effectiveness/suites/native-artifact-loading.toml",
       "requires": []
     },
     {
-      "digest": "sha256:e7d63a31b5a795b0cfb3b8c9f1013df64b71ee01b5134b003b042826c485c176",
+      "digest": "sha256:39b5099cc5dc66d4ba592fac75f641a4d5201d86094b8c42e84154028d1b3eea",
       "id": "native-artifact-release",
       "path": "evaluation/standards-effectiveness/suites/native-artifact-release.toml",
       "requires": []
     },
     {
-      "digest": "sha256:6d1aa089268a5f78d1a4d9b8c8bf176b636ca55554514a6a0174b8374024be05",
+      "digest": "sha256:1745460b8fa21fb2d43e8e40159c9c0efc6594ab5483637973e6e81836cad0da",
       "id": "platform-evidence-coverage",
       "path": "evaluation/standards-effectiveness/suites/platform-evidence-coverage.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b876b4ac1bff9b458f2abcad2f81373eae718c90fdb1720adb583cbb8518ad03",
+      "digest": "sha256:835a7c9802b20b1c7f4af4a1c91b33c5140a40f91db036615dcd8185534e764e",
       "id": "platform-target-policy",
       "path": "evaluation/standards-effectiveness/suites/platform-target-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:27e8ce3b94ac3cd11b2d7236c7275353b4046f5dfc0370dfcad7ff426fc126d9",
+      "digest": "sha256:4b9e1d9ed6592463364eecf8d43b630c0789a83845fc5e38084b772c32a8bc87",
       "id": "rust-target-configuration",
       "path": "evaluation/standards-effectiveness/suites/rust-target-configuration.toml",
       "requires": [
@@ -25001,7 +25073,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:f6b5ddd3ad1f174335b2e2f40ea1133ced69196732185d4924acabd461263a7c",
+      "digest": "sha256:a4a114b7c2a5dd491e7e7df0538a8aea4e09a401a303c1661fd5a1e6f3f40e31",
       "id": "testing-source-closure",
       "path": "evaluation/standards-effectiveness/suites/testing-source-closure.toml",
       "requires": []
@@ -25043,7 +25115,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:34f76d02d8fbc9d0318947b38d4190e810d498ca3b53a864e493c5d873e1eb12",
+      "digest": "sha256:4ab30a3410d10ba5d7872d7c95be82d551dca81051d62cbbb45b9d752780fa61",
       "id": "milestone-7-row-29-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-29-decomposition.toml",
       "requires": [
@@ -25051,85 +25123,85 @@
       ]
     },
     {
-      "digest": "sha256:23ddc2900c82c2d7d4a5e85760de1525ee3eeb57c6bf86784908306173bed312",
+      "digest": "sha256:a8670cf3c5f7e17e142036e01a3a62f96bc6859c9e2ac33c77915064629c831d",
       "id": "milestone-7-row-28-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-28-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:98f9cbd23c554cecde2f8f72d0dcc7dcce91b3f30d1f3ef969b0cb90263462e7",
+      "digest": "sha256:35fac11d1c0e01ad5fbff6b8dfda8c29733251f37d1477ffa469e2f1915ab740",
       "id": "milestone-7-row-20-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-20-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:80510fa408c97c369cb65bc5359ad5659ead255f60eb7fe000164911c63ac528",
+      "digest": "sha256:1723381ae302a12178307611f7a087ee5340e642eb263f07378d2c4165de8212",
       "id": "milestone-7-row-21-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-21-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:0d887649d8548f64283c71322d375e94af50c71c02dc7ae734c0ee453861cdee",
+      "digest": "sha256:9e1d2226fa960854fc2144d65b5fbd52e9ffdbdbc3e3b9f380820412f8c94cc4",
       "id": "milestone-7-row-22-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-22-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:27201e8e23fd783e40c2abdb96d83e98b87df8da586a1e0a0b623edc08f85c28",
+      "digest": "sha256:698ac7992ead0276d76eb644ea240ae0f658db693cc613c24c7cb95017b5e8ae",
       "id": "milestone-7-row-24-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-24-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:cfe104fd6d7594b333ff6e577ac22e6701ba5d5268d614b907df2446e424116d",
+      "digest": "sha256:ed339059a0d27eeed848ef3ca20a21e04f1bcdd119f8d90d614ecc37375b687a",
       "id": "milestone-7-row-27-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-27-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:4bc780f178afe571265ad5ddde571103745ee615bf4c31de725776b77a75a04e",
+      "digest": "sha256:3fb4ea747a051858a40a632a4499fd59279b95bc9023789d66286e1b4f542046",
       "id": "milestone-7-row-25-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-25-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:253410065774ab4b76ce2920ed0c471038fa5bfc50ade3230b2473553b3a6ced",
+      "digest": "sha256:f3cd0b7b082fa16c94a6d8adf060d5cf83db453ccf724bb3746a07c6c1262c13",
       "id": "milestone-7-row-26-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-26-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1a3fe7ef06765256573e15a9a0f62631f737b6324ef7415a5793eada0e057d5c",
+      "digest": "sha256:3fa1dd2bde02502b6e59ee539ffc5b3ede9dbf935eae29a7829912d1f9a92c87",
       "id": "milestone-7-row-33-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-33-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:581d482ca68e0d694b3c95260c3531961e6c0d657e11fa726f4edc3a54990680",
+      "digest": "sha256:09101b65132e17391aad6e4985cb2984d90ce08fc8bf85f990ef89c620eb401c",
       "id": "milestone-7-row-32-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-32-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:7737d3b78726b9ecd370a5aeeeb6d9bf530aa4a5f096bcfab923bbd85a301a58",
+      "digest": "sha256:21874496d0cbfbc402e0bf23e49258173d612868e47837103710879811f1d2d8",
       "id": "milestone-7-row-38-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-38-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:f1723bf03cad37827ab5d1366534042e02ed34820cbe17610ad3a650afd97d34",
+      "digest": "sha256:645691317be6043737c72e91fca7e48b48dd35c4ec970cae0f5d7fdb9021d5ae",
       "id": "milestone-7-row-6-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-6-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:6fd5a7952be47aac5538a8eaf0ea497a7b09454142938fb302f03d097dad082d",
+      "digest": "sha256:3f37ae96c7e6de91dc4100656b551fc5c0b7e571990363e202261610b991658d",
       "id": "milestone-7-row-23-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-23-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b2db44638759a6cc73b4af298fef03572121f993271912e032cdd7d04840bfb6",
+      "digest": "sha256:bfa651833a8c73c638544a4921b27ae32a7ba850f9984b8d3a831d1dd383cc6d",
       "id": "milestone-7-row-47-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-47-decomposition.toml",
       "requires": []
@@ -25153,7 +25225,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:0a1560acf1adbe5c3aefa3aea650fac52adf5ccc45fd7dc38ce3a19e9f49a0b0",
+      "digest": "sha256:4b650ca7bbbc90ade53bc00a524281f08e538229cea2ffc0e09d80d3b5f78dbc",
       "id": "milestone-7-row-30-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-30-decomposition.toml",
       "requires": [
@@ -25174,7 +25246,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:c826ce8002b3b05d052d9c3b24611eef792b96d35f547158307e151887754b9e",
+      "digest": "sha256:6df525db580f57f75155b440a5569512bb735d9eb02531a25e5f10ea665fa04e",
       "id": "milestone-7-row-31-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-31-decomposition.toml",
       "requires": [
@@ -25309,7 +25381,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:cb2db7da77bd34117d25f8f59f76f20d4d5ee3d4ae980dfff490b1cf9e972c71",
+      "digest": "sha256:aaba9751b1a842c3c3571e2a6d85e596c3b65071baf1bda275ba026fd954c412",
       "id": "rust-async-cancellation-observability",
       "path": "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml",
       "requires": []
@@ -25345,13 +25417,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:d49f0ee944625464181b13a22da31efac2544d3c595c4bb0ccb48e0ae8b4875b",
+      "digest": "sha256:fac69bfd7d15b8df30006ece588389907aeeaaacaf9c9dce2f45dde0bea459f6",
       "id": "milestone-7-row-35-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:e2703b0deadc8e21b391dd1bf2bd9fa7546ff96e120a4c94c728bb4f962b5796",
+      "digest": "sha256:1ef8e060f03d565b540ab94c1716f80f998aa3bad7f49fb1b781316b0b83643d",
       "id": "root-index-closure",
       "path": "evaluation/standards-effectiveness/suites/root-index-closure.toml",
       "requires": []
@@ -25363,7 +25435,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:e1a99f541b5d855c6ec1c3bec203be6625df6573784287afb9a17b81b98a45ca",
+      "digest": "sha256:37cf94fb3a34016a26860701310315c731b84107a4f3ae266e2a4b37978e95dd",
       "id": "milestone-7-row-45-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-45-decomposition.toml",
       "requires": []
@@ -25387,7 +25459,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:d666b2340cc73cc8a31c38eb7c5aae34e72c39c3888ff3941cd7b7e395777feb",
+      "digest": "sha256:5e484891a1d0e468a316dbd56fb12fd32e0c3b455737ad3f214d0fdb543275e9",
       "id": "milestone-7-row-46-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-46-decomposition.toml",
       "requires": []
@@ -25441,19 +25513,19 @@
       "requires": []
     },
     {
-      "digest": "sha256:be212d0729d42377950ce7b0ebbd488642072255e6d46ead139d14007f3becc3",
+      "digest": "sha256:59c305cb0904d160a2c5f3195a26f001a8fe212bd6b68cd234642edb90ae1b7f",
       "id": "milestone-7-row-36-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-36-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:3b04a3f9780afeb87b587b3434f7e9968552eed6bb946cb4fe1f50d69664d026",
+      "digest": "sha256:9883556717f337a70c78de897613bbf32dad1251a94329da022a2e0b9ca607a3",
       "id": "milestone-7-row-34-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-34-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1ef6ac7a00ec8c08c86d441e09eb3243299d2e53b71ad77772fd309b6d215e19",
+      "digest": "sha256:c762ce89be4616802a339c401b0c700ce40e57dbb779172f8336446ebbe85e1a",
       "id": "milestone-7-row-37-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-37-decomposition.toml",
       "requires": []
@@ -25551,13 +25623,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:6920c6acd0c254f9b32362a7861e7a487c85c868f5f2417410ff380eeba8b7c3",
+      "digest": "sha256:2298a6098d46491ea269113d5a2d97706a9ce1ba7028993a2c15bf789e2e492d",
       "id": "source-package-preparation",
       "path": "evaluation/standards-effectiveness/suites/source-package-preparation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:2aa8c3e0865fa5abd4f3c4ea4edbbb6ca9edff55298e00f563496a869a5dd6de",
+      "digest": "sha256:1b68d9c3e7d01ee6aa4dff22a9c4bb819030aa216a5ee6c21483ac84b630ebd2",
       "id": "final-source-closure",
       "path": "evaluation/standards-effectiveness/suites/final-source-closure.toml",
       "requires": [
@@ -25573,7 +25645,7 @@
       ]
     },
     {
-      "digest": "sha256:fcde7ede7bf324c68313d462dd153c8606d72335b71b2e7a6438a7819a12f332",
+      "digest": "sha256:ad92bece8308680e71ed2715d053c70a57535f5154b462c16562a723c9fa95e9",
       "id": "commit-consolidation-dispositions",
       "path": "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
       "requires": []
@@ -25665,13 +25737,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:1f5368f18209f7a3104604952157ae6673da7f6f0ec072748f814d10d8db95dd",
+      "digest": "sha256:4cfb5b01618bbae686f54e30728c7ddc681bdc21d7de00c4aaf91ac166d23ef2",
       "id": "milestone-7-row-41-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-41-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:69d7a96d62c3ef7165b5ded3e844a83cc7bb49ae22962fb3d0dda8eccb0a4981",
+      "digest": "sha256:a9fdcb5054cfd5156d851ff1a34494629df744763db799a084a814b9ca943b16",
       "id": "milestone-7-row-40-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-40-decomposition.toml",
       "requires": []
@@ -25683,7 +25755,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:dd692925dda8e7d1912e90aacc8cc44be28c9b79bdd3bbf782fbd5fb4021e440",
+      "digest": "sha256:9b6b1e7b30f51b5febd712ca28fb34908c0e373deb6ba9be69592d5fa15991bb",
       "id": "milestone-7-row-18-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-18-decomposition.toml",
       "requires": []
@@ -25743,13 +25815,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:41981164d9e7cc7b2698fcd0b13468c2d51cb7340a9f620affa00737c79f4060",
+      "digest": "sha256:531d5d90489f43e33ede286b1ea2d6bc73b1a61b23186a402464191189c19256",
       "id": "milestone-7-row-39-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-39-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:29f041423faacdb8c9bedd9d1b4718bbcb1b221a2734cd1d8bbb8030de400760",
+      "digest": "sha256:d38597b705fac38cdd36c9d127cba4b1f7543edfeb79b15dd3d61ea2f5be920e",
       "id": "architecture-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/architecture-owner-contract.toml",
       "requires": []
@@ -25761,19 +25833,19 @@
       "requires": []
     },
     {
-      "digest": "sha256:1ce75050aefbbd01754a5b37aaff7fc376b10a57a4aaba026a99bed1c1ad0cc5",
+      "digest": "sha256:6cde4dab469681fdcfe64d2f886b44f7edbd96c8e3efd2480b78f0cde6828061",
       "id": "dependencies-population",
       "path": "evaluation/standards-effectiveness/suites/dependencies-population.toml",
       "requires": []
     },
     {
-      "digest": "sha256:90f403a25a8c2ad9d097ab43d7ef33fef1570bd692b3991d9a4db0fef8b9527a",
+      "digest": "sha256:6915b23b1ad56ef2a4c7f0c381c3f175a81702dd5ba66843baba2b6e4c61d7ba",
       "id": "csharp-async-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/csharp-async-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:d841bca144f69d66550b10d831724a46feadf948a448e0a42e7af2f04acd2f13",
+      "digest": "sha256:25124ce2b65c46d901ef942c68290e0020ce0a57c9714c52a48b6f694716665f",
       "id": "readme-template-derivation-closure",
       "path": "evaluation/standards-effectiveness/suites/readme-template-derivation-closure.toml",
       "requires": [
@@ -25781,43 +25853,43 @@
       ]
     },
     {
-      "digest": "sha256:4a07dff9e7caafa5c926ca378b03e726a675313ce7c898e75a9021f293ba25d6",
+      "digest": "sha256:30c50d6566830d8d3d59b444a636f646bc3757e8f858f70198d6b49fe4e97d6c",
       "id": "documentation-decisions",
       "path": "evaluation/standards-effectiveness/suites/documentation-decisions.toml",
       "requires": []
     },
     {
-      "digest": "sha256:9538b24e6037ff9821d706c0ffd5b98a10d17e9e3c1dad68f85d278bac74a8a0",
+      "digest": "sha256:4b27163ff621c61db227d46e5fa3888a07136c720d020a2db9c6f901f042b56c",
       "id": "typescript-async-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/typescript-async-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:dddf8025107e4583259546385e40b33ed7c34540e4f97accdbe33ac3aa940524",
+      "digest": "sha256:e413eec7cbd7a438746849ec8d7e5db2a04dda0901da2c89f03f9275513e7f8a",
       "id": "godot-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/godot-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:05f4d9ae595e55679410f8d7d779526daaa539d831bf2c70b6112e907b481637",
+      "digest": "sha256:0dd998f5d8abc4765fcbe8afa76c1ff6333562f66a39e09342deb7d86db7d34a",
       "id": "milestone-7-row-13-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-13-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:0b4e432e96f8d3e7ebd664bf0ef911605c0d010760eddafb3c2fb3e465702c05",
+      "digest": "sha256:1d50f01cfd48e7ba8db759a9c6bbd5d902e6c958f8d9826f146947b86eb4f2dd",
       "id": "rust-binding-workspace-evidence",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-workspace-evidence.toml",
       "requires": []
     },
     {
-      "digest": "sha256:42120c122812a86020ca65c78c1a48232ed837dd65f29b9556d0f92cb625dd4c",
+      "digest": "sha256:4a460ce4406f70e8fa6546f3d05fb22a31bc881249bb09b2e2d96ada8d402541",
       "id": "dependencies-owner-contract",
       "path": "evaluation/standards-effectiveness/suites/dependencies-owner-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:cdcd0055af0e04f3ff17205464ca6a176985049f03b441cae318895e62cf195c",
+      "digest": "sha256:6aaed397191eadbaed2f07b5acd8bddf169416bb2e55845059a899612a8b13c1",
       "id": "milestone-7-row-7-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-7-decomposition.toml",
       "requires": []
@@ -25835,157 +25907,157 @@
       "requires": []
     },
     {
-      "digest": "sha256:9cfff7a5170f81605472f4ce1db80c74a1facfcf75b909363967a52c0494f763",
+      "digest": "sha256:5ae2447cd6bff27f17071c4b3c3681e6fa8f6b83d94733c5fbf52555862186fb",
       "id": "rust-binding-core-adapter-testability",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-core-adapter-testability.toml",
       "requires": []
     },
     {
-      "digest": "sha256:4cb5b243f4fa4dfabe3c247ecac68f485ade1a398732b0e388298111652ef25a",
+      "digest": "sha256:29ade79c966bf0d59cbeaeb3d6ee49e06e697cacd808208105219a4a3f25b878",
       "id": "rust-async-boundary",
       "path": "evaluation/standards-effectiveness/suites/rust-async-boundary.toml",
       "requires": []
     },
     {
-      "digest": "sha256:20ad8fd8e3ec6590013181897deca1fa80d7e9e8ada0b9714d9ecf3612e4d846",
+      "digest": "sha256:62748d6b7552729e8c2456e70ecc78c28cd413e86a469465efc507a82d7c7194",
       "id": "launcher-population",
       "path": "evaluation/standards-effectiveness/suites/launcher-population.toml",
       "requires": []
     },
     {
-      "digest": "sha256:8afeb80b890418b4fd083df80af92dfab39fdc10790f7c3584f4004b92978ffb",
+      "digest": "sha256:aa7d945fb68e729e04b51a9f684ad82466d9c6b2accee012a3bb73114fffea0c",
       "id": "launcher-owner-row-14",
       "path": "evaluation/standards-effectiveness/suites/launcher-owner-row-14.toml",
       "requires": []
     },
     {
-      "digest": "sha256:faa5732ef3933a79391cb96389315232d380a0ce075cabaaf1481e2379ae4dec",
+      "digest": "sha256:99c14c964e9298cfc826c577ffd21e32634c32c32ad473fa844f5cf015c4b01a",
       "id": "rust-binding-error-mapping",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml",
       "requires": []
     },
     {
-      "digest": "sha256:84e23164f645f58c37b4d51738dd5bba17778276d0e468747525ca71f381358a",
+      "digest": "sha256:795a8a74afd36941c6aa0901b1db4f4c46a23c455f2ac33b72e58af80350bacd",
       "id": "rust-unsafe-contracts",
       "path": "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml",
       "requires": []
     },
     {
-      "digest": "sha256:f7fbb134e9c1e0cf4faad8ec1aa2129cde1422417b426fad6559e6253eaf465e",
+      "digest": "sha256:cc76a5ab4181bb5c78951acdffa35659416bf13e0357e8910269a7f31a974f91",
       "id": "documentation-policy-consolidation",
       "path": "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:6ea2986d903fe0341f18a69660d4efeaca10e679e2e4abf6580a8f900295ceb9",
+      "digest": "sha256:0ced798a34560a0d935612b89ef2c0ad57102faed21b8c35c18fd3ae04c784df",
       "id": "release-procedure-policy",
       "path": "evaluation/standards-effectiveness/suites/release-procedure-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b0ce71b44bf140047f3e07c2dccf9c537b2f24831a07e09d47cd15852eed7a0d",
+      "digest": "sha256:9aec9295d05fd647ef45ec56c2f5d5ee5d6c69b34c30c087ef17b9fc8eb7031e",
       "id": "language-binding-wire-representation",
       "path": "evaluation/standards-effectiveness/suites/language-binding-wire-representation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ceefe01f4878c09eab4f6c06baca8eca6207317991bdbda8325efd5523dae9d0",
+      "digest": "sha256:a9c7917400721fc8bb133d45a96c1de2f78fa602ad5179a1bd9cd37786d2bc67",
       "id": "rust-binding-enum-representation",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-enum-representation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:a882a83e7099742b87ad02a79d8f25b3bbffcde7287ab0ee3293d16eefabe497",
+      "digest": "sha256:7b2d221d0b8af54862d35d2574dbaa3368593a81d10540e7a7bb62ecc13bf9e2",
       "id": "rust-wire-representation",
       "path": "evaluation/standards-effectiveness/suites/rust-wire-representation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:0e8b6627b15051e6a386b170bd46bec82c24a2357e35709d2b74ebd6714ffbf9",
+      "digest": "sha256:2b6e5f18d1a3573b47e8b0d165409d4194f3387bfd11b2342ebfc164d758c459",
       "id": "rust-binding-callback-task",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ff96c8ebc05c646f422bf3e46408c89d2c5cb6409c2e8cce4d9f21b33a02bdae",
+      "digest": "sha256:3bb3dbec024f2c1d283699eb7ec939347bd1f9c4e61d2d927a4b41baee3a377d",
       "id": "rust-binding-executor-delegation",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml",
       "requires": []
     },
     {
-      "digest": "sha256:a1c19ebbfe8a49bc7ff2401dcd53d20adf686c3bed0203172e11a78fe6faa0d6",
+      "digest": "sha256:395a373eef0b7d60604dc47fc961d4d406e4349487704b18309ce6efae56e36e",
       "id": "rust-binding-event-delivery",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml",
       "requires": []
     },
     {
-      "digest": "sha256:75a916f22d3ade15863f147f64afe6c38663068b1cbe06f351772fbd15e9649f",
+      "digest": "sha256:d90b49df6fadf2437d5a5f24151dbfdc6fb326fd6381b18baa1ac63398b9eb65",
       "id": "rust-security-title-index-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-security-title-index-closure.toml",
       "requires": []
     },
     {
-      "digest": "sha256:4c44d56ccc59707bde788bf6a4f0ae18f44c98c3f4ad711f82fd277362d911ed",
+      "digest": "sha256:36b748bcd80b6e7dc61f4b13f9b5d70ded1dba76359056e32412ed7a584b9580",
       "id": "rust-security-panic-boundary",
       "path": "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml",
       "requires": []
     },
     {
-      "digest": "sha256:7fb6788209091be0f4d4c2eba056c448912906915b67f68a3811a6b6eb0b7f28",
+      "digest": "sha256:c1fa35a46f1b31798fa73d0b94711aec730ef339ca0ffd848c2b7feb4dd7257a",
       "id": "rust-external-input-queue",
       "path": "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml",
       "requires": []
     },
     {
-      "digest": "sha256:180bb1aa4de47baf0938fd5bddf7be232406b9f33dd22aaf235b67425bf71411",
+      "digest": "sha256:b2a0fb714af33c4455d29ea61910209d4d6174d1915d8608d08d68b6a0495f85",
       "id": "validation-proof-lifetime",
       "path": "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml",
       "requires": []
     },
     {
-      "digest": "sha256:888922c368125f3fa96264a240d8355044caab41140286485912d49d42db1fbb",
+      "digest": "sha256:b8196781106266952aa583e691ba91f1e67f4c0893624717221c86b41c971270",
       "id": "input-validation-authority",
       "path": "evaluation/standards-effectiveness/suites/input-validation-authority.toml",
       "requires": []
     },
     {
-      "digest": "sha256:0b573ba1173073612859872cfde46d36e3e7a93ce1909b8f043408acdab6970a",
+      "digest": "sha256:30637d963f2c7b0c2745c978c419c2bf1642f996bdd208201e114412f2c590ea",
       "id": "network-transport-policy",
       "path": "evaluation/standards-effectiveness/suites/network-transport-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:c20dc80c8dbdf1e5e8301123f6188db19511b2e4bb03e29301a73744020f12d0",
+      "digest": "sha256:efb8415398261f8651d10a054b767cf38c27d6526784951bf1d206ba43c87c05",
       "id": "rust-filesystem-authority",
       "path": "evaluation/standards-effectiveness/suites/rust-filesystem-authority.toml",
       "requires": []
     },
     {
-      "digest": "sha256:41cfb5fd7e40562bc7dc18a597ba4757e6667d84cd817314bb6f7f98b025cd07",
+      "digest": "sha256:a3529078c9b10ab805384aaa5da5f31c218b07457856701648f4d0a6377e5280",
       "id": "rust-listener-lifecycle",
       "path": "evaluation/standards-effectiveness/suites/rust-listener-lifecycle.toml",
       "requires": []
     },
     {
-      "digest": "sha256:a980080fc72122a766b03e5592003fceff572c42e76ceed3e43790966eb0c482",
+      "digest": "sha256:00aa17e674c1ba2f54f2e9c047a501adb1ccb56791a34acba5239b9f3ad8b6c8",
       "id": "rust-async-lifecycle",
       "path": "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml",
       "requires": []
     },
     {
-      "digest": "sha256:f973fa37c8771253bf9707bcb61eacec693f49ff91fc14d179607ffa2c560add",
+      "digest": "sha256:5dc253781fc694f84531b82a2810f839a818d14fe95a4be8e4c9c9ebb5b02edb",
       "id": "rust-boundary-arithmetic",
       "path": "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b08f8638c35992f6c8e86bb0946b5b56e131da275c7b0862808ce1ed99b892a3",
+      "digest": "sha256:ce56b6286d899a108fa02dd543485887a9d8075c0c8546f81369110ef3a768ff",
       "id": "filesystem-containment-policy",
       "path": "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:6a1c1b2fc9bbbe7fd2c2f3a7d0cc341d5e5ba10bef9a28f71ec8888d58ddc5dc",
+      "digest": "sha256:27c88e4084300c46b09cf1c0aec611215c50b59dcb0ad05b9a2f34ed6804282a",
       "id": "ipc-payload-validation",
       "path": "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml",
       "requires": []
@@ -25997,25 +26069,25 @@
       "requires": []
     },
     {
-      "digest": "sha256:4ea888698d584b04c37898c9da92d7114d140d12e35ccfdd696056f53f8e1593",
+      "digest": "sha256:a674cf477059e05131da763550759cb34e40cfee4b0403577b955ed3d63b9c6f",
       "id": "rust-binding-title-index-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-title-index-closure.toml",
       "requires": []
     },
     {
-      "digest": "sha256:b7bd34f6fc094400bfb5466adbbca44c65e9b0993837c46445761f1484d0d629",
+      "digest": "sha256:592c030b22d372fa5e0d30fb321bba95d8b4ac1ff6b2b8a5266b41726eb62fc1",
       "id": "rust-binding-index-closure",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-index-closure.toml",
       "requires": []
     },
     {
-      "digest": "sha256:4cd5f60d233aadc8c3c9bb8870fa11ef12fe16db237c0d23832f4aa6f03cec20",
+      "digest": "sha256:9d17a0b077f63f69b77a82690941a055455387e85e6391ac84c957640776b9f9",
       "id": "rust-binding-runtime",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-runtime.toml",
       "requires": []
     },
     {
-      "digest": "sha256:5d365d5b293daadefe2b25da1d4bdfc3d0435826699e994304cacdc2258168b4",
+      "digest": "sha256:a488d58a763c859a512b765b00e6b831dfd7f2c2b11029809e39aab1c5a4af1f",
       "id": "rust-binding-architecture",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml",
       "requires": []
@@ -26027,73 +26099,73 @@
       "requires": []
     },
     {
-      "digest": "sha256:e80b0a67434c4dbf4311aabc8904027d8af5272939648596ed977e5ceac5d12b",
+      "digest": "sha256:7ef5038b872230e4bf621b19e846a2c86c41e13f476c268c5cc59bb55efdf0a1",
       "id": "milestone-7-row-8-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-8-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:dc02ea25393cd8ba2b4edd9352d15adf2442df4ab81bc57c6bc5e4a397d2ce39",
+      "digest": "sha256:061ae9713746e06b775ae85287b870d4a5c1de7de2a70f67801f69f5b4445c00",
       "id": "milestone-7-row-5-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-5-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:3861bd8dbc8554e162518200815b3b141a7399f78e838970552368b45c8cb488",
+      "digest": "sha256:518dfaebbe2902d67a7abde4c0e6f41e0bb6692d95440aeabc5fe5f895168414",
       "id": "milestone-7-f025-f026-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f025-f026-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:483e7186834274d00032ac442a9cb6e6c3ace75bbf34077cfc8bd3be46b17c48",
+      "digest": "sha256:7e8b4eea5d3d0ea1c434c7ee88e92e62b8de2866e7aec34c436afdea2c1cfa4d",
       "id": "milestone-7-row-15-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-15-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:d9af1608deb2feab365cf238dd188b29a34449c950504cb39d835e3cec84167e",
+      "digest": "sha256:da21bee3d591c8bd2ae058ab21a0ea206bb44c645efd5454d3a995a9a1345000",
       "id": "cross-language-contract",
       "path": "evaluation/standards-effectiveness/suites/cross-language-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ae8051562968068656a9a0450ad215cd98eeaed1c661aaa47db23310ce767c3e",
+      "digest": "sha256:97467207268dc4d436fad8690c77988145937528094e9e5511a67032362e92f5",
       "id": "milestone-7-accelerated-execution-replan",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ef7405140c8b7f62830ee1d94533e08d3faa49198ec9a0ad01b4694da3ddd984",
+      "digest": "sha256:789c66be8f03eecaec211a464efea6a8e53946fd641a202cf2b3f469e2f24e99",
       "id": "binding-generation-authority",
       "path": "evaluation/standards-effectiveness/suites/binding-generation-authority.toml",
       "requires": []
     },
     {
-      "digest": "sha256:ad6030629f69407409dc8041aa43b634099783e367377d212cf701dbeff6239c",
+      "digest": "sha256:ce83964ee088a2c1f56220b981e840006ae2b1789a8e0a75760c38c3fcb2b463",
       "id": "binding-contract-evolution",
       "path": "evaluation/standards-effectiveness/suites/binding-contract-evolution.toml",
       "requires": []
     },
     {
-      "digest": "sha256:124d0efa63ad70ff5371436569d19ab569d218b05b73db13869494f28df292bc",
+      "digest": "sha256:0f1fc5f7f3813821c935b7b13612f2de73dbfe9e7bfbfb8dd796dfda59c1160b",
       "id": "milestone-7-row-43-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-43-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:68a38cb09a20489c9e57eaa0d6ed9d51de8edeb696645196a2f266e6fa02b5b8",
+      "digest": "sha256:56555b1afea8bcdbfe3fb87d7125a1967ec2b8c9999d049a2cff93037e640da1",
       "id": "language-binding-mechanism-selection",
       "path": "evaluation/standards-effectiveness/suites/language-binding-mechanism-selection.toml",
       "requires": []
     },
     {
-      "digest": "sha256:5a1550d574a0988a6245bb96240ebf15790ac0049d0bdcf1e9ec309773a9ccc9",
+      "digest": "sha256:1a505fe348566304277fb53caea90cc26f6a1b3d0120260ef2f0b9dab73a0907",
       "id": "milestone-7-row-44-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-44-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:fa3d1c7f643dd95b70757343217d4b02168de069e8fc161097f44e2fad82baac",
+      "digest": "sha256:d0545a2629182a748ffaf1b979a93915e40199a370e634dc516e2e6d238bc1ca",
       "id": "milestone-7-row-42-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-row-42-decomposition.toml",
       "requires": []
@@ -26105,13 +26177,13 @@
       "requires": []
     },
     {
-      "digest": "sha256:0d93ef2eb12d87da4de74a7962f2591e4880493e41829abf081307e9af975295",
+      "digest": "sha256:fd984e0b92f7efe04f154f264dbe1ae23fbc22ab73a6806240232f5bdb8b7a92",
       "id": "evidence-oracle-boundaries",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "requires": []
     },
     {
-      "digest": "sha256:e4c384a0c0a013391cedc24c23c719a7e827b49745793461f14c07afe65be150",
+      "digest": "sha256:1e7e2b158fa1a316a102549f54850a89f262e3e86d898bbfca3db0db137220b7",
       "id": "generated-contract-semantic-conformance",
       "path": "evaluation/standards-effectiveness/suites/a1c-contract-conformance.toml",
       "requires": []
@@ -26147,67 +26219,67 @@
       "requires": []
     },
     {
-      "digest": "sha256:f6914f4ada9d21f31d2ed741c83def865db8e20e7da3d424db9918768d4fc3d0",
+      "digest": "sha256:505bff555cc90448a78d7b5e3a30e1b0553339981a7b4252eb1339ad481c800d",
       "id": "systemic-finding-replanning",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml",
       "requires": []
     },
     {
-      "digest": "sha256:5fc89ca3138c8e964ea350641c16810c4dd6105bea291959d01bf3656ddce781",
+      "digest": "sha256:b1e67eb4eb416d5ee1b3596eea4542129457f44cf22613b6d8fb51fde64a8354",
       "id": "language-binding-boundary",
       "path": "evaluation/standards-effectiveness/suites/language-binding-boundary.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1d6f3b19adfb87de7b117e84c9a03881023fe58c5268d1de3db49dc8855889a4",
+      "digest": "sha256:25c530087680d0964a2b056a305a968e50d3d60447a2894621d7ae743ceacc56",
       "id": "decision-engine-contract",
       "path": "evaluation/standards-effectiveness/suites/decision-engine-contract.toml",
       "requires": []
     },
     {
-      "digest": "sha256:8a64cd31537bc469b428fcb41c232003d87eb6994186f98eaf7a7d957eb97dcf",
+      "digest": "sha256:9d3233afc99262a1b354100b019158b619f3fe8f94c9bec0ea962654d468e2d2",
       "id": "rust-binding-conversions",
       "path": "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml",
       "requires": []
     },
     {
-      "digest": "sha256:c9f812263e6c7e3b1ee949514c4aacf1ef436619d58118681a2f6d97d72c7252",
+      "digest": "sha256:1c8c2df87e62141fbf72340c750a996c154e144107543aca5042a7340be62186",
       "id": "runtime-decoding-policy",
       "path": "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:7284ac74890e177b0186f382a3f047eea772318011a0267d2926de7c4937baec",
+      "digest": "sha256:cc543e7d9b41c607adbae899f1216e46400e4ad6c074dabad47c801a9106a702",
       "id": "contract-decisions",
       "path": "evaluation/standards-effectiveness/suites/contract-decisions.toml",
       "requires": []
     },
     {
-      "digest": "sha256:1b67e9813e548d9e60ea53ecef8e277fa931e3efe5e17a2e84514e553303c8cc",
+      "digest": "sha256:1189617c4a20327d33e3c610e354a868b27627a6579dd0bda8b76b509c83796b",
       "id": "interop-event-registration",
       "path": "evaluation/standards-effectiveness/suites/interop-event-registration.toml",
       "requires": []
     },
     {
-      "digest": "sha256:03edc3c48d4f61ef85997611a8f0189b4af0589973c8d29d1bb3f02091228f11",
+      "digest": "sha256:fdfbfdb994d7cdf0ccf3bc34ba8522b121a04393a427dd8ba8cc3151ab552ecf",
       "id": "milestone-7-independent-trust-replan",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-independent-trust-replan.toml",
       "requires": []
     },
     {
-      "digest": "sha256:2005dc9b950eda0510233f20448fe41989ad9ec730fa134407b6cfc9f3c3f890",
+      "digest": "sha256:cfe17726620e203cf4473b102540f1f1e3d782eb7a3fb3458239d20d02bd2d38",
       "id": "concurrency-policy",
       "path": "evaluation/standards-effectiveness/suites/concurrency-policy.toml",
       "requires": []
     },
     {
-      "digest": "sha256:07c787dcbc6d2ab49ab80ee65ec8f9c15b5000718164771cf1b4eec2973f8811",
+      "digest": "sha256:23bd7a2a11cd33ad25b6650fe1464bc1b5759d92854ff8ee8e3353de0681d4c6",
       "id": "milestone-7-trust-lifecycle-replan",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml",
       "requires": []
     },
     {
-      "digest": "sha256:e34b635fa03df276587aa58cc93e972aef252451660cdb9537d53a101b400c84",
+      "digest": "sha256:5d46a608da49a7ca85a52e2ea8a9234737c6ace6f2e12d9b9dd8335008ed1e13",
       "id": "milestone-7-rust-async-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml",
       "requires": []
@@ -26225,19 +26297,19 @@
       "requires": []
     },
     {
-      "digest": "sha256:08b32009b1a166dfb9893eca4af03992f18f111e1fe31fb9b362d80d1dd94abd",
+      "digest": "sha256:ff0b253920f3d76368c9c86f7ff336b2edb423a2c553e3405df0322d32f23e37",
       "id": "owner-state-transitions",
       "path": "evaluation/standards-effectiveness/suites/owner-state-transitions.toml",
       "requires": []
     },
     {
-      "digest": "sha256:befad5ab483c30a3a06b01b873bafa113acf65962542646136cd9adb12c5f8bd",
+      "digest": "sha256:c46d7b691b87e9c4323ea32c87f2f6a9f611b355fb7ba573a503f6a37c463aae",
       "id": "milestone-7-f022-f023-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-f022-f023-decomposition.toml",
       "requires": []
     },
     {
-      "digest": "sha256:49ba4e6d6d1e19bf8149aa32d2899ec850bed99e696deaaac7bc138897e51199",
+      "digest": "sha256:5a5bed4639e379577d94f9bd08c5e99f243082d6a73f6fa612a98098ef5d25d1",
       "id": "milestone-7-decomposition",
       "path": "evaluation/standards-effectiveness/suites/milestone-7-decomposition.toml",
       "requires": []

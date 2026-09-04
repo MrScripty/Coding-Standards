@@ -43,8 +43,8 @@ id = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
-id = "evaluation/standards-effectiveness/README.md"
-metadata = { repository_path = "evaluation/standards-effectiveness/README.md", artifact_kind = "documentation", authority = "projection" }
+id = "evaluation/standards-effectiveness/verification-guide.md"
+metadata = { repository_path = "evaluation/standards-effectiveness/verification-guide.md", artifact_kind = "documentation", authority = "projection" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
@@ -222,12 +222,12 @@ aliases = ["evaluation/standards-effectiveness/suites/systemic-finding-replannin
 metadata = { repository_path = "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml", suite_id = "systemic-finding-replanning", artifact_kind = "enforcement-suite", authority = "evidence" }
 
 [[nodes]]
-id = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
-metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md", artifact_kind = "documentation", authority = "evidence" }
+id = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
+metadata = { repository_path = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md", artifact_kind = "documentation", authority = "evidence" }
 
 [[nodes]]
-id = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md"
-metadata = { repository_path = "docs/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md", artifact_kind = "documentation", authority = "evidence" }
+id = "docs/archive/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md"
+metadata = { repository_path = "docs/archive/plans/standards-engine-standards-recovery/reports/historical-a1-repair-reproductions.md", artifact_kind = "documentation", authority = "evidence" }
 
 [[nodes]]
 id = "tools/standards_engine/contracts/a1-contract.schema.json"

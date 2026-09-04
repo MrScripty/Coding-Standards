@@ -53,7 +53,7 @@ expected = [
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-35-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-35-decomposition.md"
 required = [
   "## Owner Contract",
   "sole authority",

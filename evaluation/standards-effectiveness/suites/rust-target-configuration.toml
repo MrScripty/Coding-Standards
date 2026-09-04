@@ -195,13 +195,13 @@ values = ["STD-0726", "STD-0727", "STD-0728", "STD-0729", "STD-0730"]
 [[checks]]
 id = "accepted-finding"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F047 | Resolved in Milestone 7.4b7e |"]
 prohibited = []
 
 [[checks]]
 id = "removed-authority"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["registered `rust-target-configuration` suite"]
 prohibited = ["verify-rust-target-configuration.sh"]

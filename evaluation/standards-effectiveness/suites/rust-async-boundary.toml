@@ -147,6 +147,6 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-async-boundary` suite checks contract-driven Rust\nsync/async"]
 prohibited = ["`verify-rust-async-boundary.sh` checks contract-driven Rust sync/async"]

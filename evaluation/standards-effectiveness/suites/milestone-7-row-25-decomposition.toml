@@ -63,7 +63,7 @@ value = "prompts/implement-plan.md"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-25-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-25-decomposition.md"
 required = ["## Owner Contract", "identifier lineage", "## Exact Dispositions", "`STD-0852` through `STD-0858`", "## Ordered Children", "`25.1a`", "`25.1b`", "## Child 25.1 Plan Identity Replan", "Security owns path", "Cross-Platform applies conditionally", "## Child 25.1 Lifecycle Admission Replan", "`start` accepts only `Planned`", "`continue` accepts only `Active`", "`verify` accepts `Implemented` or `Verifying`", "## Child 25.1 Concurrent Admission Replan", "explicit expected revision", "Concurrency owns stale-read", "Independent transitions may be planned or implemented concurrently", "shared authority remain serial integration-owner writes", "## Child 25.1 Admission Revision Representation Replan", "`planning-admission-v1`", "## Child 25.1 Transition Envelope Replan", "`planning-transition-v1`", "proposing actor", "bounded write set", "prerequisite transition identities", "semantic outcomes", "separate deterministic identity", "## Child 25.1 Revision-Checked Serial Integration Replan", "two revision gates", "## Child 25.1 Revision Evidence Replan", "## Child 25.1 Partial Integration Recovery Replan", "`complete-transition`", "`restore-prior-state`", "`supersede-transition`", "Recovery never reuses", "state-file-wins or", "ledger-wins", "No recovery journal", "reservations, leases, queues, heartbeats", "## Re-plan Triggers"]
 prohibited = []
 

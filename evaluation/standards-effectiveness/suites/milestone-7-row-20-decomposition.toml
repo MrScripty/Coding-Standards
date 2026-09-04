@@ -75,7 +75,7 @@ value = "languages/rust/RUST-API-STANDARDS.md"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-20-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-20-decomposition.md"
 required = ["## Owner Contract", "narrow language specialization", "does not own domain invariants", "Generic owners", "selects a supported Rust expression", "## Exact Dispositions", "## Ordered Children", "## Re-plan Triggers", "## Child 20.4 Ownership Replan", "Contracts owns expected absence, invariant violation", "Resilience owns operational failure, recovery", "## Child 20.5 Ownership Replan", "Library owns supported real", "Verification owns claim-matched", "## Child 20.5 Artifact-Surface Ownership Correction", "Rust Dependency owns Cargo manifest", "Rust API owns Rust `cfg`", "## Child 20.6 Ownership Replan", "Rust Unsafe owns public unsafe", "Rust API owns only Rustdoc syntax"]
 prohibited = []
 

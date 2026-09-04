@@ -38,6 +38,6 @@ split = { field = "verifier_subjects", delimiter = "," }
 [[checks]]
 id = "preparation-policy"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-source-index-verifier-replan.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-source-index-verifier-replan.md"
 required = ["## Concurrent Preparation And Serial Acceptance", "Preparation order and acceptance order are separate contracts.", "Workers cannot edit shared acceptance state.", "A prepared package is not accepted evidence.", "one complete-suite run may accept", "non-overlapping former", "Architecture remains excluded from preparation wave `p1`"]
 prohibited = []

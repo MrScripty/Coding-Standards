@@ -78,7 +78,7 @@ prohibited = []
 [[checks]]
 id = "known-a1-nonconformance"
 type = "text"
-path = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
+path = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
 required = ["Draft 2020-12", "nonconformance"]
 prohibited = []
 

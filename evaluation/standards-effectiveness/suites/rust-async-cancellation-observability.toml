@@ -125,5 +125,5 @@ prohibited = [
 [[checks]]
 id = "accepted-finding"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F045 | Resolved in Milestone 7.4b4g |"]

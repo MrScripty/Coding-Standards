@@ -7,8 +7,8 @@ description = "Exact root README structure, resources, links, routing boundary, 
 id = "root-structure"
 type = "markdown_structure"
 path = "README.md"
-headings = ["# Standards Library", "## Start Here", "## Resources", "## License"]
-maximum_lines = 32
+headings = ["# Standards Library", "## Start Here", "## Resources", "## Maintaining This Repository", "## License"]
+maximum_lines = 48
 
 [[checks]]
 id = "root-resources"

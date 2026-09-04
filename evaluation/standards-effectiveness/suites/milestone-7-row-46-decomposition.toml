@@ -88,6 +88,6 @@ value = "languages/rust/RUST-STANDARDS.md"
 [[checks]]
 id = "row-46-decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-46-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-46-decomposition.md"
 required = ["## Re-plan Finding", "cannot close as one mechanical index update", "## Owner Contract", "## Exact Outcomes", "`STD-0827`", "`STD-0830`", "## Ordered Children", "`46.1`", "`46.2`", "`46.3`", "## Consumer Audit Impact", "## Bounded Write Sets", "## Verification Gates", "## Typed Outcomes And No Fallback", "## Re-plan Triggers"]
 prohibited = []

@@ -140,7 +140,7 @@ boundary, artifact, input, and enforcement behavior before adaptation.
 ### Impact Map
 
 Follow the
-[Documentation Workflow](workflows/documentation.md). Automated enforcement
+[Documentation Workflow](../../workflows/documentation.md). Automated enforcement
 must operate on project-owned facts rather than treating every source change as
 a decision change.
 

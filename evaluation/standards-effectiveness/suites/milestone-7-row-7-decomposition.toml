@@ -94,7 +94,7 @@ where = { field = "baseline_order", op = "eq", value = "7" }
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-7-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-7-decomposition.md"
 required = [
   "mixes Rust workspace and verification mechanics, release artifact composition",
   "### Child 7.1: Rust Binding Workspace And Evidence Boundary",
@@ -113,6 +113,6 @@ prohibited = []
 [[checks]]
 id = "resolved-finding"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F074 | Resolved in Milestone 7.4b8w |"]
 prohibited = []

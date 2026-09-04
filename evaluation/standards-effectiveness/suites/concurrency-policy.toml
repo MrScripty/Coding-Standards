@@ -165,7 +165,7 @@ prohibited = [
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F019 | Resolved in Milestone 7.4b4b |"]
 prohibited = []
 
@@ -187,7 +187,7 @@ value = "CONCURRENCY-STANDARDS.md"
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `concurrency-policy` suite",
   "generic shared-state,\nlock-boundary, nonblocking async",

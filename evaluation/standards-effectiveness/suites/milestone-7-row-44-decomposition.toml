@@ -50,7 +50,7 @@ expected = [["STD-0821", "profiles/languages/rust/security.md", "index", "none"]
 [[checks]]
 id = "decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-44-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-44-decomposition.md"
 required = [
   "## Owner Review",
   "six frozen identifiers",

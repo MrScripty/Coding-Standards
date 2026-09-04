@@ -92,6 +92,6 @@ values = ["STD-0298", "STD-0299"]
 [[checks]]
 id = "removed-authority"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["registered `platform-evidence-coverage` suite"]
 prohibited = ["verify-platform-evidence-coverage.sh", "platform-evidence-*.tsv"]

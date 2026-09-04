@@ -50,7 +50,7 @@ expected = [["STD-0349", "workflows/documentation.md", "index", "none"]]
 [[checks]]
 id = "decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-41-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-41-decomposition.md"
 required = [
   "## Owner Review",
   "`STD-0349`",

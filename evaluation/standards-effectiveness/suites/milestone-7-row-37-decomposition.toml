@@ -68,7 +68,7 @@ where = { field = "source", op = "eq", value = "ARCHITECTURE-PATTERNS.md" }
 [[checks]]
 id = "report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-37-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-37-decomposition.md"
 required = ["## Owner Contract", "independent owner review", "## Exact Ownership", "`37.1`", "`37.2`", "`37.3`", "`37.4`", "## Reference Selection", "view-model class and directory tree are removed", "## Bounded Write Sets", "## Verification Gates", "P30 closes only", "## Typed Outcomes And No Fallback", "## Re-plan Triggers"]
 prohibited = []
 

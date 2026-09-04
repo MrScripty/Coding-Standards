@@ -176,13 +176,13 @@ prohibited = ["msg.payload as SelectItemCommand['payload']", "msg as ValidatedMe
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F018 | Resolved in Milestone 7.4b2c |", "| F059 | Resolved in Milestone 7.4b8d |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `ipc-payload-validation` suite checks"]
 prohibited = ["`verify-ipc-payload-validation.sh` check complete envelope and category/action"]

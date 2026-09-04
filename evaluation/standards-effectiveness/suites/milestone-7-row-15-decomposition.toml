@@ -111,7 +111,7 @@ values = ["STD-0135", "STD-0136", "STD-0137", "STD-0138", "STD-0139", "STD-0140"
 [[checks]]
 id = "decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-15-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-15-decomposition.md"
 required = [
   "not one Core consolidation",
   "## Ordered Children",

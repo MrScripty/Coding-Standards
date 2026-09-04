@@ -139,13 +139,13 @@ prohibited = ["InputValidator", "SafeNamePattern", "Regex", "minLength", "maxLen
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F056 | Resolved in Milestone 7.4b8a |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `input-validation-authority` suite checks operation-specific"]
 prohibited = ["`verify-input-validation-authority.sh` check operation-specific"]

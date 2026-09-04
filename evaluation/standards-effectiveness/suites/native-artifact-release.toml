@@ -81,6 +81,6 @@ values = ["STD-0296", "STD-0297"]
 [[checks]]
 id = "removed-authority"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["registered `native-artifact-release` suite"]
 prohibited = ["verify-native-artifact-release.sh", "native-artifact-*.tsv"]

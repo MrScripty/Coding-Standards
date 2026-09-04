@@ -48,7 +48,7 @@ any = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "`fixtures/contracts/decisions.tsv` and the registered `contract-decisions`\nsuite check coordinated replacement",
   "invalid derived-state rebuilds",

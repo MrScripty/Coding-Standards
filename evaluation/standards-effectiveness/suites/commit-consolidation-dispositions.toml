@@ -476,7 +476,7 @@ prohibited = ["comments, and branches that have no"]
 [[checks]]
 id = "commit-evaluation-documentation"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["branch-lifecycle outcomes", "proportionate isolation", "least-", "terminal classification", "replacement lineage", "bounded cleanup authority", "without letting one decision mask another", "retained-ref", "registration-only", "archived", "task-worktree terminal fixture", "reachability-safe removal", "no historical or", "repository-wide cleanup"]
 prohibited = []
 

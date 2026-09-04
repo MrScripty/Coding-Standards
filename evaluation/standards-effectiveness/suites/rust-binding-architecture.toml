@@ -147,6 +147,6 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["registered `rust-binding-architecture` suite"]
 prohibited = ["verify-rust-binding-architecture.sh"]

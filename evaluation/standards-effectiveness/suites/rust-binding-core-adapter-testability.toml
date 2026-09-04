@@ -112,6 +112,6 @@ prohibited = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["`binding-core-adapter-testability-decisions.tsv` and the registered\n`rust-binding-core-adapter-testability` suite require distinct"]
 prohibited = ["`verify-rust-binding-core-adapter-testability.sh` require distinct"]

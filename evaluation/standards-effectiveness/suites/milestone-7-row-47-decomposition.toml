@@ -102,7 +102,7 @@ value = "templates/README-TEMPLATE.md"
 [[checks]]
 id = "report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-47-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-47-decomposition.md"
 required = ["## Review Finding", "one coherent Documentation-owned", "## Owner Contract", "## Exact Outcomes", "## Ordered Child", "`47.1`", "## Verification Gates", "## Typed Outcomes And No Fallback", "Do not infer a README from directory shape", "## Re-plan Triggers"]
 prohibited = []
 

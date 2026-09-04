@@ -96,6 +96,6 @@ values = ["STD-0761", "STD-0762"]
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["`rust-binding-workspace-evidence` suite select shared or separate Rust"]
 prohibited = ["`verify-rust-binding-workspace-evidence.sh` select shared or separate Rust"]

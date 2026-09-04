@@ -34,7 +34,7 @@ value = "45"
 [[checks]]
 id = "row-45-decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-45-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-45-decomposition.md"
 required = [
   "## Owner Review",
   "## Exact Outcomes",

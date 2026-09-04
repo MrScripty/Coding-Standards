@@ -81,7 +81,7 @@ prohibited = [
 [[checks]]
 id = "closure-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-undisposed-source-audit.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-undisposed-source-audit.md"
 required = [
   "observes zero undisposed source gaps",
   "Restoring the universal README",

@@ -194,7 +194,7 @@ present = ["topics/concurrency.md", "profiles/languages/rust/async.md"]
 [[checks]]
 id = "accepted-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-trust-lifecycle-replan.md"
 required = [
   "641 undisposed frozen identifiers",
   "90 trust-boundary identifiers",
@@ -215,21 +215,21 @@ prohibited = []
 [[checks]]
 id = "parent-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md"
 required = ["(milestone-7-trust-lifecycle-replan.md)"]
 prohibited = []
 
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F044 | Resolved in Milestone 7.4b4a |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered\n`milestone-7-trust-lifecycle-replan` suite",
   "90-ID trust remainder",

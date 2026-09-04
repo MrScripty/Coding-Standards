@@ -165,13 +165,13 @@ prohibited = []
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F026 | Resolved in Milestone 7.4b5f |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-listener-lifecycle` suite checks service-contract exposure,"]
 prohibited = ["`verify-rust-listener-lifecycle.sh` checks service-contract exposure,"]

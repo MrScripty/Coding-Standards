@@ -6,7 +6,10 @@ This decision supersedes only the policy-impact ownership,
 relationship-kind version 1, public repository-declaration exposure, compiled
 semantic inspection, and associated version clauses in
 [Standards Engine Navigation And Analysis](standards-engine-navigation-analysis.md).
-The remaining A1 decisions and historical version 9 acceptance stay in force.
+This decision did not replace the remaining A1 architecture at that time.
+Later [A1b](standards-engine-a1b.md) and [A1c](standards-engine-a1c.md)
+decisions supersede the architecture scopes they identify. The version 9
+acceptance remains historical evidence; see the [decision index](README.md).
 
 The Standards Engine will replace the split policy-impact catalog, relationship,
 verification, coverage, and public-schema interpretations with one compiled

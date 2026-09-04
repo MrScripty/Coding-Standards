@@ -29,6 +29,6 @@ value = "28"
 [[checks]]
 id = "contract"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-28-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-28-decomposition.md"
 required = ["## Owner Contract", "modality", "## Exact Ownership", "## Ordered Children", "`28.1`", "`28.6`", "## No-Fallback Rule", "## Re-plan Triggers"]
 prohibited = []

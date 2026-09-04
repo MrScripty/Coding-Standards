@@ -163,6 +163,6 @@ prohibited = ["StartsWith(", ".startsWith(", "Normalize before comparing.", "Str
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `filesystem-containment-policy` suite checks"]
 prohibited = ["`verify-filesystem-containment-policy.sh` check component-aware containment,"]

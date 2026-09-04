@@ -427,7 +427,7 @@ rationale = "The registered Commit suite enforces every audited Commit projectio
 
 [[relationships]]
 source = "workflow.commit.per-commit-boundary"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
@@ -435,7 +435,7 @@ rationale = "The standards-effectiveness README documents the registered Commit 
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
@@ -443,7 +443,7 @@ rationale = "The standards-effectiveness README documents the registered Commit 
 
 [[relationships]]
 source = "workflow.commit.branch-context"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
@@ -451,7 +451,7 @@ rationale = "The standards-effectiveness README documents the registered Commit 
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
@@ -459,7 +459,7 @@ rationale = "The standards-effectiveness README documents the registered Commit 
 
 [[relationships]]
 source = "workflow.commit.cherry-pick-lineage"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
@@ -467,7 +467,7 @@ rationale = "The standards-effectiveness README documents the registered Commit 
 
 [[relationships]]
 source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"
@@ -475,7 +475,7 @@ rationale = "The standards-effectiveness README documents the registered Commit 
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
-consumer = "evaluation/standards-effectiveness/README.md"
+consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:commit-consolidation-dispositions"

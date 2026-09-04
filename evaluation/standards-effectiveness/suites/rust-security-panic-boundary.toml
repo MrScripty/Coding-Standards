@@ -105,6 +105,6 @@ prohibited = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["the registered `rust-security-panic-boundary` suite specialize recoverable-error and"]
 prohibited = ["`verify-rust-security-panic-boundary.sh` specialize recoverable-error and"]

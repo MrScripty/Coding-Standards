@@ -42,7 +42,7 @@ object type. This Adapter locally interprets only the leading commit-tree field
 and raw tree-entry framing so it can verify exact returned object hashes and
 traverse explicitly mapped gitlinks without pathspec or worktree semantics. The
 read-only implementation-versus-dependency comparison is recorded in the
-[A1c corrective decision](../../docs/plans/standards-engine-a1c-repair/reports/dependency-and-version-decisions.md).
+[A1c corrective decision](../../docs/archive/plans/standards-engine-a1c-repair/reports/dependency-and-version-decisions.md).
 The write-capable re-evaluation is recorded in the
 [A2 decision](../../docs/decisions/standards-engine-a2.md#repository-git-dependency-re-evaluation).
 Re-evaluate again before materially extending the selected local publication

@@ -140,7 +140,7 @@ prohibited = ["## Systemic Finding Audit"]
 id = "registered-consumers"
 type = "path_state"
 present = [
-  "docs/plans/standards-engine-standards-recovery/issues.md",
+  "docs/archive/plans/standards-engine-standards-recovery/issues.md",
   "prompts/full-codebase-standards-refactor.md",
   "tools/standards_verifier/standards_verifier/checks/plan_contract.py",
   "tools/standards_verifier/tests/test_plan_contract.py",

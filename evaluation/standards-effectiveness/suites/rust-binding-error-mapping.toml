@@ -124,7 +124,7 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "`fixtures/rust/binding-error-mapping-decisions.tsv` and the registered\n`rust-binding-error-mapping` suite check selected host error contracts",
 ]

@@ -114,7 +114,7 @@ prohibited = [" must ", " always ", " fallback", " default framework", " default
 [[checks]]
 id = "nested-index-separation"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md"
 required = [
   "registered `rust-binding-title-index-closure` suite",
   "registered `rust-binding-index-closure` suite",
@@ -127,6 +127,6 @@ prohibited = [
 [[checks]]
 id = "row-43-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-43-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md"
 required = ["registered `rust-binding-title-index-closure` suite"]
 prohibited = ["verify-rust-binding-title-index-closure.sh"]

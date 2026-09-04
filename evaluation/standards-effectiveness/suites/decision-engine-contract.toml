@@ -36,7 +36,7 @@ value = "missing"
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `decision-engine-contract` suite",
   "Direct Python engine tests",

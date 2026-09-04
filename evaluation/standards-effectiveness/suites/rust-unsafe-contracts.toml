@@ -130,14 +130,14 @@ prohibited = [
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F023 | Resolved in Milestone 7.4b3f |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "`fixtures/rust/unsafe-contract-decisions.tsv` and the registered\n`rust-unsafe-contracts` suite distinguish adjacent operation proof",
 ]

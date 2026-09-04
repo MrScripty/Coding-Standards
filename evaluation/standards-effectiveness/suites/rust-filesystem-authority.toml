@@ -136,6 +136,6 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-filesystem-authority` suite checks"]
 prohibited = ["`verify-rust-filesystem-authority.sh` check that Rust operations preserve"]

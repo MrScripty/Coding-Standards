@@ -73,7 +73,7 @@ required = [
   "(topics/contracts.md)",
   "(profiles/applications/frontend.md)",
   "(topics/performance.md)",
-  "(profiles/README.md)",
+  "(STANDARDS-ROUTER.md#language-profiles)",
   "non-normative compatibility index",
   "defines no testing policy",
   "never this index",

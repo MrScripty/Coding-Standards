@@ -75,7 +75,7 @@ value = "languages/rust/RUST-RELEASE-STANDARDS.md"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-22-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-22-decomposition.md"
 required = ["## Owner Contract", "narrow Rust and Cargo release", "does not own release boundaries", "## Exact Dispositions", "Four manifest and configuration examples move", "## Ordered Children", "## Child 22.2 Lockfile Ownership Replan", "Rust Dependency owns Cargo resolver metadata", "Rust Release owns only Rust toolchain declaration mechanisms", "No alias, shared lockfile owner", "## Re-plan Triggers"]
 prohibited = []
 

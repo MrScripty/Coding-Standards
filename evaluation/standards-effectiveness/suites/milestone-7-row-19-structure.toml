@@ -116,14 +116,14 @@ values = ["STD-0677", "STD-0678", "STD-0679", "STD-0680", "STD-0682", "STD-0686"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-19-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-19-decomposition.md"
 required = ["## Proposed Owner Contract", "does not own what evidence proves", "must not fall back", "## Ordered Children", "18 overlay rows", "canonical-owner-homogeneous", "Child `19.8` is a reviewed split package", "exactly one `split` disposition", "Child `19.9` applies the same boundary", "Child `19.12` applies the split boundary", "Child `19.13` applies the same boundary", "Child `19.15` reconciles replacement lineage", "Child `19.16` keeps Implementation", "## Implementation Sequence", "## Re-plan Triggers"]
 prohibited = []
 
 [[checks]]
 id = "owner-validation-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-19-owner-validation.md"
 required = ["## Boundary Result", "validates creating `workflows/tooling.md`", "## Required Option 2 Package", "before normative implementation", "## Re-plan Triggers"]
 prohibited = []
 

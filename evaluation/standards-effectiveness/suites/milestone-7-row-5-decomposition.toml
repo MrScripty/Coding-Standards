@@ -60,7 +60,7 @@ value = "5"
 [[checks]]
 id = "decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-5-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-5-decomposition.md"
 required = [
   "contains four independently changeable outcomes",
   "### Child 5.1: Rust Core And Adapter Testability",
@@ -84,7 +84,7 @@ prohibited = [
 [[checks]]
 id = "resolved-finding"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F072 | Resolved in Milestone 7.4b8n |"]
 prohibited = []
 

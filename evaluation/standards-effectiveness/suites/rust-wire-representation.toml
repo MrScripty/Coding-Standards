@@ -110,13 +110,13 @@ prohibited = ["RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment"]
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F051 | Resolved in Milestone 7.4b7i |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-wire-representation` suite requires a selected schema and"]
 prohibited = ["`verify-rust-wire-representation.sh` require a selected schema and"]

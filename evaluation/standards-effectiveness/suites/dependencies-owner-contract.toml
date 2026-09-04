@@ -115,6 +115,6 @@ value = "16"
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["`dependencies-owner-contract` suite establish the Dependencies topic"]
 prohibited = ["`verify-dependencies-owner-contract.sh` establish the Dependencies topic"]

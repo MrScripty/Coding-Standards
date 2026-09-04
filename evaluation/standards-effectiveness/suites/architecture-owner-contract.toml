@@ -69,7 +69,7 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["the registered `architecture-owner-contract` suite establish Architecture ownership"]
 prohibited = ["`verify-architecture-owner-contract.sh` establish Architecture ownership"]
 

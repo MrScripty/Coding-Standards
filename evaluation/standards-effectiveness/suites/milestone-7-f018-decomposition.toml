@@ -76,6 +76,6 @@ values = ["STD-0051", "STD-0052", "STD-0053", "STD-0054", "STD-0063", "STD-0064"
 [[checks]]
 id = "report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-f018-decomposition.md"
-required = ["[milestone-7-f018-slices.tsv](milestone-7-f018-slices.tsv)", "fixtures/contracts/runtime-decoding-decisions.tsv", "fixtures/ipc/action-payload-decisions.tsv", "type assertion", "typed `unsupported`", "no default action", "Finding `F018` is resolved"]
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-f018-decomposition.md"
+required = ["[milestone-7-f018-slices.tsv](../../../../evaluation/standards-effectiveness/milestone-7-f018-slices.tsv)", "fixtures/contracts/runtime-decoding-decisions.tsv", "fixtures/ipc/action-payload-decisions.tsv", "type assertion", "typed `unsupported`", "no default action", "Finding `F018` is resolved"]
 prohibited = ["both slices `Planned`", "`7.4b2c` `Planned`"]

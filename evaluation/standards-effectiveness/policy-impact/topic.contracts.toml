@@ -443,7 +443,7 @@ rationale = "Persisted authority verifies opaque semantic handles without substi
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
-consumer = "docs/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
+consumer = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"

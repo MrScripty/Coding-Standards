@@ -50,7 +50,7 @@ expected = [["STD-0134", "reference/patterns/architecture.md", "merge-duplicate"
 [[checks]]
 id = "decomposition-record"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-40-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-40-decomposition.md"
 required = [
   "## Owner Review",
   "`STD-0134`",

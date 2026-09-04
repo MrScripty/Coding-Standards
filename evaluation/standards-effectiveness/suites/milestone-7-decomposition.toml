@@ -157,10 +157,10 @@ values = ["STD-0289", "STD-0290", "STD-0291", "STD-0292", "STD-0293", "STD-0584"
 [[checks]]
 id = "report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md"
 required = [
-  "[milestone-7-waves.tsv](milestone-7-waves.tsv)",
-  "[milestone-7-first-slice.tsv](milestone-7-first-slice.tsv)",
+  "[milestone-7-waves.tsv](../../../../evaluation/standards-effectiveness/milestone-7-waves.tsv)",
+  "[milestone-7-first-slice.tsv](../../../../evaluation/standards-effectiveness/milestone-7-first-slice.tsv)",
   "typed diagnostic",
 ]
 prohibited = []
@@ -168,7 +168,7 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `milestone-7-decomposition`\nsuite",
   "exact 33-owner wave structure and nine-ID first slice",

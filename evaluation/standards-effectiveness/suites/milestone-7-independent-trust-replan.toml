@@ -74,7 +74,7 @@ present = [
 [[checks]]
 id = "accepted-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-independent-trust-replan.md"
 required = [
   "589 residual identifiers across 28 legacy",
   "61 frozen baseline identifiers and 56 current identifiers",
@@ -130,7 +130,7 @@ prohibited = []
 [[checks]]
 id = "parent-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md"
 required = [
   "(milestone-7-independent-trust-replan.md)",
   "56-identifier pretrain remainder across six proposed-owner groups",
@@ -140,7 +140,7 @@ prohibited = []
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = [
   "| F048 | Execution train active after Milestone 7.4b7o |",
   "Resolve the residual cross-role destinations",
@@ -155,7 +155,7 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `milestone-7-independent-trust-replan` suite",
   "61-ID/six-proposed-owner frozen baseline",

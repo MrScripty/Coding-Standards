@@ -113,7 +113,7 @@ prohibited = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "The registered `documentation-policy-consolidation` suite proves exact semantic membership and disposition of",
 ]

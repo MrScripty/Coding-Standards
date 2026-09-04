@@ -132,7 +132,7 @@ prohibited = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "The registered `release-procedure-policy` suite checks router-driven profile selection,",
 ]

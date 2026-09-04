@@ -36,10 +36,10 @@ established the actual A1c contract:
 - semantic understanding remains with the agent.
 
 The bounded A1c prototype and composed-design review are recorded in
-[architecture experiment results](../plans/standards-engine-a1c/reports/architecture-experiment-results.md).
+[architecture experiment results](../archive/plans/standards-engine-a1c/reports/architecture-experiment-results.md).
 The remaining capture, aggregate-lifecycle, and complete-Interface assumptions
 are exercised in the
-[binding assumptions validation](../plans/standards-engine-a1c/reports/a1c-binding-assumptions-validation.md).
+[binding assumptions validation](../archive/plans/standards-engine-a1c/reports/a1c-binding-assumptions-validation.md).
 That evidence confirms the selected mechanisms while retaining production
 parity, generated-contract, authorization, and verified-platform gates.
 
@@ -307,7 +307,7 @@ deferred; a later stable-release plan must define it before making such a
 promise.
 
 The current role and bump rules are recorded in the
-[A1c corrective version matrix](../plans/standards-engine-a1c-repair/reports/dependency-and-version-decisions.md).
+[A1c corrective version matrix](../archive/plans/standards-engine-a1c-repair/reports/dependency-and-version-decisions.md).
 Interface, request, result, handle, AnalysisState format, Analysis identity, and
 SQLite store values advance only for their named promise; none is an umbrella
 implementation or release version.
@@ -456,7 +456,7 @@ A1b suites and graph records are replaced, not retained as parallel runtime
 authority.
 
 The exact component and consumer dispositions are owned by the
-[migration inventory](../plans/standards-engine-a1c/reports/a1b-to-a1c-migration-inventory.md).
+[migration inventory](../archive/plans/standards-engine-a1c/reports/a1b-to-a1c-migration-inventory.md).
 The completed relationship-migration table is retained as historical evidence
 only. It is not an active suite input, graph consumer, or permanent comparison
 between historical and current policy authority.

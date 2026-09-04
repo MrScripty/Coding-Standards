@@ -103,9 +103,9 @@ values = ["STD-0717", "STD-0718", "STD-0719", "STD-0720", "STD-0721", "STD-0722"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-rust-async-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-rust-async-decomposition.md"
 required = [
-  "[milestone-7-rust-async-slices.tsv](milestone-7-rust-async-slices.tsv)",
+  "[milestone-7-rust-async-slices.tsv](../../../../evaluation/standards-effectiveness/milestone-7-rust-async-slices.tsv)",
   "Only the first implementation slice is fully specified.",
   "dropping a Rust future stops polling that future",
   "does not by itself authorize force-aborting work",
@@ -119,14 +119,14 @@ prohibited = []
 [[checks]]
 id = "parent-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md"
 required = ["(milestone-7-rust-async-decomposition.md)"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered\n`milestone-7-rust-async-decomposition` suite",
   "nine Rust Async identifiers",

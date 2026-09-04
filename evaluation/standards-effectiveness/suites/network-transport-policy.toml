@@ -168,13 +168,13 @@ prohibited = ["127.0.0.1", "0.0.0.0", "::1", "platform's loopback address", "Eve
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F016 | Resolved in Milestone 7.4b7a |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `network-transport-policy` suite checks"]
 prohibited = ["`verify-network-transport-policy.sh` check service/deployment-selected"]

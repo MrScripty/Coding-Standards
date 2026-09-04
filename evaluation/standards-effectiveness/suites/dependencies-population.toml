@@ -68,7 +68,7 @@ prohibited = [
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["the registered `dependencies-population` suite prove the Launcher dependency-installation"]
 prohibited = ["`verify-dependencies-population.sh` prove the Launcher dependency-installation"]
 

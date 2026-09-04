@@ -14,7 +14,7 @@ Use the canonical owner for the concern being decided:
 | Persisted contract artifact validation | [Contracts](topics/contracts.md) |
 | Frontend interaction and browser evidence | [Frontend](profiles/applications/frontend.md) |
 | Performance workloads, budgets, and benchmark evidence | [Performance](topics/performance.md) |
-| Language-specific syntax and commands | [Profiles](profiles/README.md) |
+| Language-specific syntax and commands | [Profiles](STANDARDS-ROUTER.md#language-profiles) |
 
 Repository plans select the required claims and evidence from those owners.
 Completion follows the accepted plan and observed results, never this index.

@@ -273,7 +273,7 @@ all = [
 [[checks]]
 id = "accepted-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-accelerated-execution-replan.md"
 required = [
   "570 frozen identifiers remain in 43 pending logical clusters",
   "maps every pending immutable-train row to one of 40 packages",
@@ -298,7 +298,7 @@ prohibited = ["verify-milestone-7-accelerated-execution-replan.sh"]
 [[checks]]
 id = "resolved-findings"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = [
   "| F070 | Resolved in Milestone 7.4b8l |",
   "| F071 | Resolved in Milestone 7.4b8m |",
@@ -309,7 +309,7 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `milestone-7-accelerated-execution-replan` suite",
   "exact pending-row coverage",

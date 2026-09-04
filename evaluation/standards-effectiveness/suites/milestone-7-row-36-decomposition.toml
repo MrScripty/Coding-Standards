@@ -76,7 +76,7 @@ value = "ARCHITECTURE-PATTERNS.md"
 [[checks]]
 id = "decomposition-report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-row-36-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-36-decomposition.md"
 required = ["## Owner Contract", "sole normative owner", "rows 37, 39, and 40", "## Exact Ownership", "`36.1`", "`36.2`", "`36.3`", "`36.4`", "P30 remains open", "## Bounded Write Sets", "## Shared Owner State Replan", "do not inherit", "## Typed Outcomes And No Fallback", "## Re-plan Triggers"]
 prohibited = []
 

@@ -31,7 +31,7 @@ sentinel, ignored error, alternate operation, or broad catch-all recovery.
 
 ## Filesystem Authority Through Use
 
-Apply the generic [Security filesystem contract](../../topics/security.md#filesystem-containment)
+Apply the generic [Security filesystem contract](../../../topics/security.md#filesystem-containment)
 before a Rust filesystem operation. A canonicalized `PathBuf` records identity
 and containment at validation time; it does not preserve authority when a
 component can be replaced before use.

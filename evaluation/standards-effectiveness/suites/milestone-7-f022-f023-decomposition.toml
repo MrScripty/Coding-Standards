@@ -96,9 +96,9 @@ values = ["STD-0465", "STD-0466", "STD-0467", "STD-0468", "STD-0469", "STD-0470"
 [[checks]]
 id = "report"
 type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-f022-f023-decomposition.md"
+path = "docs/plans/standards-library-effectiveness/reports/milestone-7-f022-f023-decomposition.md"
 required = [
-  "[milestone-7-f022-f023-slices.tsv](milestone-7-f022-f023-slices.tsv)",
+  "[milestone-7-f022-f023-slices.tsv](../../../../evaluation/standards-effectiveness/milestone-7-f022-f023-slices.tsv)",
   "framework may lift or serialize",
   "allocation, initialization, alignment, provenance, lifetime",
   "copying afterward cannot repair invalid slice construction",
@@ -112,7 +112,7 @@ prohibited = []
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = [
   "registered `milestone-7-f022-f023-decomposition` suite",
   "exact 34\nidentifiers, owners, dispositions, and ordering",

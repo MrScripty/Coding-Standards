@@ -137,13 +137,13 @@ prohibited = ["MAX_QUEUE", "drop_oldest", "msgs.drain", "tracing::warn"]
 [[checks]]
 id = "finding-closure"
 type = "text"
-path = "evaluation/standards-effectiveness/findings.md"
+path = "docs/plans/standards-library-effectiveness/issues.md"
 required = ["| F052 | Resolved in Milestone 7.4b7k |"]
 prohibited = []
 
 [[checks]]
 id = "documentation-projection"
 type = "text"
-path = "evaluation/standards-effectiveness/README.md"
+path = "evaluation/standards-effectiveness/verification-guide.md"
 required = ["The registered `rust-external-input-queue` suite checks selected capacity,"]
 prohibited = ["`verify-rust-external-input-queue.sh` check selected capacity, overload,"]

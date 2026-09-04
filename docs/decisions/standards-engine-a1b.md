@@ -1,15 +1,19 @@
 # Standards Engine A1b Contract And Authority Foundations
 
-**Status:** Accepted
+**Status:** Accepted historically; runtime architecture superseded by A1c
+
+[A1c](standards-engine-a1c.md) replaces this runtime architecture. This
+decision and its acceptance evidence preserve the A1b design history;
+consult the [decision index](README.md) for current architecture.
 
 This decision supersedes the A1 contract-compilation, identity, snapshot,
 storage, execution-closure, and public-projection architecture. It also
-supersedes the C1 through C6 A1b planning designs. The active implementation
-authority is the
-[A1b plan](../plans/standards-engine-a1b/plan.md). The implementation is
+supersedes the C1 through C6 A1b planning designs. Its completed implementation
+is recorded in the
+[A1b plan](../archive/plans/standards-engine-a1b/plan.md). The implementation is
 accepted at commit `84412f22fa9fe082f089eaa347c30c23f185ffee`, tree
 `8e0f96a61fcea2398418b17d16a061c20f7463f5`, by the
-[final content-bound acceptance](../plans/standards-engine-a1b/reports/a1b-final-acceptance.md).
+[final content-bound acceptance](../archive/plans/standards-engine-a1b/reports/a1b-final-acceptance.md).
 
 ## Context
 
@@ -32,10 +36,10 @@ not preserve the repair machinery.
 
 The historical analysis is recorded in:
 
-- [A1b redesign brief](../plans/standards-verification-engine/reports/standards-engine-a1b-redesign-authoring-brief.md);
-- [C6/C7 design history](../plans/standards-engine-a1b/reports/c6-c7-design-history-research.md);
-- [C7 design proposal](../plans/standards-engine-a1b/reports/c7-design-proposal.md); and
-- [C7 SQLite audit](../plans/standards-engine-a1b/reports/c7-sqlite-storage-audit.md).
+- [A1b redesign brief](../archive/plans/standards-verification-engine/reports/standards-engine-a1b-redesign-authoring-brief.md);
+- [C6/C7 design history](../archive/plans/standards-engine-a1b/reports/c6-c7-design-history-research.md);
+- [C7 design proposal](../archive/plans/standards-engine-a1b/reports/c7-design-proposal.md); and
+- [C7 SQLite audit](../archive/plans/standards-engine-a1b/reports/c7-sqlite-storage-audit.md).
 
 ## Decision
 
@@ -593,7 +597,7 @@ Re-plan if:
 ## Acceptance
 
 This ADR is `Accepted` for the exact implementation boundary identified by the
-[final content-bound acceptance](../plans/standards-engine-a1b/reports/a1b-final-acceptance.md).
+[final content-bound acceptance](../archive/plans/standards-engine-a1b/reports/a1b-final-acceptance.md).
 That review proves the contract, identity, storage, capture, operation,
 consumed-trust, package, migration-deletion, consumer-disposition, and coverage
 claims with no blocked consumer. A2 remains outside this decision.

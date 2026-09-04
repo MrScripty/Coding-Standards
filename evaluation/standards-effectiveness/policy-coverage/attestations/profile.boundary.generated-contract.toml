@@ -2,37 +2,39 @@ schema_version = 5
 
 # profile.boundary.generated-contract.applicability
 [[attestations]]
-requirement_id = "sha256:7fce2f394d1a4ec047abd65008938874934b429e9187c5f167e24605a151328d"
+requirement_id = "sha256:7c10b71448277ae02fdac6422656a6c668a4b6e450e1331869f25af9858fb78d"
 conclusion = "complete"
 evidence = [
-  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
-  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
-  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
-  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
-  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
-  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
-  "docs/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+  "docs/archive/documentation-cleanup.md",
+  "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
 ]
 explicit_exclusions = []
-rationale = "The exact dependency-local requirement for profile.boundary.generated-contract.applicability is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
-auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
+rationale = "Documentation cleanup revalidated this relocated consumer and evidence closure without policy-meaning changes; the linked cleanup review records the comparison. Prior acceptance rationale: The exact dependency-local requirement for profile.boundary.generated-contract.applicability is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:documentation-cleanup"
 
 # profile.boundary.generated-contract.semantic-closure
 [[attestations]]
-requirement_id = "sha256:e228421bbc4357a3ac1d1b76af96254f4a03794659c7302ee66f6c61aa134946"
+requirement_id = "sha256:e7d4c0de730553cccc7554c081145dca14841448afacedf88e4ee1423daf887b"
 conclusion = "complete"
 evidence = [
-  "docs/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
-  "docs/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
-  "docs/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
-  "docs/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
-  "docs/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
-  "docs/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
-  "docs/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
-  "docs/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
-  "docs/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
-  "docs/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md",
+  "docs/archive/documentation-cleanup.md",
+  "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+  "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+  "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+  "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+  "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+  "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+  "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+  "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+  "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+  "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md",
 ]
 explicit_exclusions = []
-rationale = "The exact dependency-local requirement for profile.boundary.generated-contract.semantic-closure is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
-auditor_provenance = "standards.review.audit:user-authorized:a1b-serial-plan-guardrail"
+rationale = "Documentation cleanup revalidated this relocated consumer and evidence closure without policy-meaning changes; the linked cleanup review records the comparison. Prior acceptance rationale: The exact dependency-local requirement for profile.boundary.generated-contract.semantic-closure is the mechanically derived subset of the previously reviewed global horizon identified by the retained evidence. The current A1c repair audit confirms its selected projection and evidence closure; no unreviewed or blocked consumer remains."
+auditor_provenance = "standards.review.audit:user-authorized:documentation-cleanup"
