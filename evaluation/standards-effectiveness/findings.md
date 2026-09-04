@@ -150,7 +150,7 @@ changes and focused fixture evidence.
 | F067 | Resolved in Milestone 7.4b8k | `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`; frozen ID `STD-0797` now selects enum representation from the concrete framework, wire, ABI, opaque-handle, or generated-wrapper contract without native-layout, inferred-value, sentinel, or alternate-mechanism fallback. | 7 |
 | F068 | Resolved in Milestone 7.4b8k | `verify-rust-wire-representation.sh` required a superseded next-slice string and compared an unrelated legacy prefix to `HEAD`; the permanent verifier now checks only its accepted state and bounded wire concern. | 7 |
 | F069 | Resolved in Milestone 7.4b8k | The aggregate verification invocation used `pipefail` without `errexit`, allowing a failed checker before the loop's last command to be masked; cumulative verification is rerun with `set -euo pipefail`. | 7 |
-| F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
+| F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `tools/standards_verifier/standards_verifier/checks/plan_contract.py` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings
 

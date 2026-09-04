@@ -5,17 +5,16 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** implement admitted M6-I125 with plan-contract parity,
-mutation, graph, and complete-checkpoint evidence
+**Next slice:** execute M6-Z1 terminal zero-Bash cleanup for migration-only
+Python machinery and the remaining Bash launchers
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I124 replaced the rolling decomposition Bash
-checker with one registered `migration.parent-plan` suite at train order 239.
+**Latest accepted slice:** M6-I126 retired the final Bash helper after the
+Standards Engine transferred its policy relationships, at train order 241.
 
-**Latest admitted slice:** M6-I125 may replace the final Bash verifier with a
-typed plan contract while retaining its helper solely as an Engine-declared
-policy projection until those relationships transfer.
+**Latest admitted slice:** `none`; M6-Z1 follows the accepted terminal
+disposition authority.
 
 **Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
@@ -131,13 +130,13 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I124 at train
-order 239.
+**Accepted boundary:** package records are accepted through M6-I126 at train
+order 241.
 
-**Current derived state:** 275 registered declarative suites, 1 retained Bash
-checker, 2 executable nodes, 15 conservative reference edges, and 2
-components. These values are observations from generated evidence and do not
-authorize package selection or ownership.
+**Current derived state:** 275 registered declarative suites, no retained Bash
+verifier or helper, and a header-only executable graph. Migration-only Bash
+launchers remain for M6-Z1. These values are observations from generated
+evidence and do not authorize package selection or ownership.
 
 ## Simplicity And Ownership Review
 
@@ -180,7 +179,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I124 rolling decomposition accepted at train order 239 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I126 final-helper retirement accepted at train order 241; terminal cleanup remains |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

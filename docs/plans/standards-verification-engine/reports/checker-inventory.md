@@ -7238,3 +7238,39 @@ and complete mixed checkpoint pass. Final graph: 6 Bash checkers, 8 executable
 nodes, 30 edges, and 8 components. The old checker is absent without engine
 changes, nested execution, normative policy changes, compatibility behavior,
 or fallback.
+
+### M6-I125 Plan Contract Acceptance
+
+Fresh post-M6-I124 evidence reports one 55-line Bash verifier delegating to one
+226-line helper, with 2 nodes, 15 edges, and 2 components before admission
+documentation. The verifier is the sole executable root and is selected at
+train order 240 as a `shared-contract` package owned by `workflow.planning`.
+
+One typed `plan_contract` check and nineteen fixture assertions in the existing
+`planning-consolidation` suite preserve lifecycle domains, headings, fields,
+objective evidence, accepted-plan closure, final projections, execution-history
+exclusion, applicability, reasons, and all eight composed-design probes.
+
+All four valid fixtures pass and all fifteen invalid fixtures preserve the
+Bash helper's exact diagnostic. Twenty-four historical records transfer to the
+registered suite. Exact 50/50 dependency-local renewal closes 51/51 current
+coverage. The verifier is absent, the generated executable graph is
+header-only, and the helper remains non-executed only as an Engine-declared
+policy projection pending relationship transfer.
+
+### M6-I126 Final Helper Retirement
+
+After Standards Engine application `e49c875b` moved the two live policy
+relationships to `planning-consolidation`, `check-plan-structure.sh` had no
+remaining executable, policy, or catalog consumer. The serial-coherent package
+at train order 241 deletes the 226-line helper, removes three text-only
+consumer checks, and retires the orphan supplemental node declaration.
+
+Four accepted M6-V2 and M6-I125 historical records retain their original
+source and target identities while selecting `suite:planning-consolidation` as
+the current independent evidence. Exact 51/51 dependency-local renewal restores
+all policy coverage. Focused retirement checks, all 275 registered suites,
+generated freshness, verifier and graph tests, active-plan contracts, and the
+complete checkpoint pass. The generated executable graph remains header-only.
+No Bash verifier or helper remains; terminal M6-Z1 cleanup of migration-only
+machinery and the remaining launchers is next.

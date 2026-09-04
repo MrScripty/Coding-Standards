@@ -356,8 +356,8 @@ atomic closure; retained route and audit gates remain independent.
 
 ## Plan Lifecycle Fixtures
 
-`check-plan-structure.sh` and `verify-plan-fixtures.sh` enforce deterministic
-active-plan structure:
+The registered `planning-consolidation` suite uses the typed `plan_contract`
+check to enforce deterministic active-plan structure:
 
 - current lifecycle state, phase, and exactly one next slice;
 - plan-level acceptance status;
@@ -367,7 +367,9 @@ active-plan structure:
 - no `Accepted` state while acceptance remains pending, partial, or blocked.
 
 Human review still owns whether the named evidence semantically proves the
-objective.
+objective. The Standards Engine transfers both Planning and Architecture
+enforcement relationships directly to `planning-consolidation`; no Bash plan
+helper or fallback verifier remains.
 
 ## Acceptance Claim Fixtures
 

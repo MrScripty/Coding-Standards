@@ -15633,6 +15633,21 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   pass. Final graph: 11 Bash checkers, 13 nodes, 63 edges, and 13 components;
   fresh graph evidence is required next.
 
+## 2026-09-03 - M6-I126 Final Helper Retirement
+
+- The Standards Engine transferred both live plan-helper policy relationships
+  to `suite:planning-consolidation`; the helper then had no execution, policy,
+  or catalog consumer.
+- The train-order 241 package deletes the helper and its orphan catalog node,
+  removes three helper-text assertions, and transfers four historical edge
+  records to the typed planning suite.
+- Exact 51/51 dependency-local coverage renewal restores all current policy
+  coverage views. Forty-four focused checks and all 275 registered suites
+  pass. Generated evidence remains current at 0 Bash verifiers, 0 graph nodes,
+  0 edges, and 0 components; verifier, graph, plan, and complete checkpoints
+  pass. M6-Z1 owns the remaining migration-only Python and Bash-launcher
+  cleanup.
+
 ## 2026-09-03 - M6-I120 Interop Boundary Acceptance
 
 - Fresh post-M6-I119 evidence selected the zero-inbound wave-1 Interop boundary
@@ -15709,6 +15724,22 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   declarative, plan, and complete mixed evidence pass. Final graph: 1 Bash
   checker, 2 nodes, 15 edges, and 2 components. Shared plan-contract admission
   is required next.
+
+## 2026-09-03 - M6-I125 Plan Contract Acceptance
+
+- Fresh post-M6-I124 evidence selected the 55-line plan-fixture verifier as the
+  final executable Bash package at train order 240. Its 226-line helper remains
+  a Standards Engine policy projection rather than execution fallback.
+- One typed `plan_contract` check and nineteen assertions in the registered
+  `planning-consolidation` suite preserve four accepting fixtures and the exact
+  diagnostics for all fifteen rejecting fixtures.
+- Twenty-four historical gate records transfer to registered suite authority.
+  The package's two current helper edges retain explicit external-artifact
+  dispositions until the Standards Engine relationship transfer.
+- Exact 50/50 dependency-local renewal leaves one requirement stable and closes
+  51/51 coverage. Focused, unit, generated, numeric, graph, declarative,
+  retained-helper, and complete mixed evidence pass. Final verifier graph: 0
+  nodes, 0 edges, and 0 components; one non-executed Bash policy helper remains.
 
 ## 2026-09-01 - M6-I115 Generic Concurrency Policy Acceptance
 

@@ -189,6 +189,13 @@ and checkpoint totals are explicit suite inputs; derived progress and logical
 cluster counts are not stored as parallel authority. The check is removed with
 its registered suite at zero-Bash acceptance.
 
+The `plan_contract` check validates one contained UTF-8 Markdown plan against
+the repository's lifecycle, objective-evidence, final-projection, and
+composed-design structure. A suite declares whether the plan is `valid` or
+`invalid` and may bind an invalid fixture to its exact diagnostic. The check
+does not execute a helper, accept callbacks, infer compatibility forms, or
+decide whether cited evidence semantically proves an objective.
+
 One invocation catalog owns every validated registry entry and every suite body
 loaded for that invocation. Listing validates the registry without parsing suite
 bodies. Focused execution parses only the selected dependency closure, while

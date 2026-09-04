@@ -90,11 +90,133 @@ required = ["do not mirror commit cadence into planning artifacts"]
 prohibited = ["update active plan, issue, and ledger state when those artifacts exist"]
 
 [[checks]]
-id = "plan-structure-enforcement"
-type = "text"
-path = "evaluation/standards-effectiveness/check-plan-structure.sh"
-required = ["## Simplicity And Ownership Review", "composed-design review requires one Applicability field", "not-applicable composed-design review requires a concrete Reason", "applicable composed-design review requires %s"]
-prohibited = []
+id = "valid-active-plan"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/valid-active.md"
+expected = "valid"
+
+[[checks]]
+id = "valid-blocked-plan"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/valid-blocked.md"
+expected = "valid"
+
+[[checks]]
+id = "valid-accepted-plan"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/valid-accepted.md"
+expected = "valid"
+
+[[checks]]
+id = "valid-superseded-plan"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/valid-superseded.md"
+expected = "valid"
+
+[[checks]]
+id = "invalid-accepted-malformed-objective-status"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-malformed-objective-status.md"
+expected = "invalid"
+message = "objective A1 has invalid status satified"
+
+[[checks]]
+id = "invalid-accepted-missing-final-projections"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-missing-final-projections.md"
+expected = "invalid"
+message = "accepted plan requires both final acceptance projections"
+
+[[checks]]
+id = "invalid-accepted-pending-criterion"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-pending-criterion.md"
+expected = "invalid"
+message = "accepted plan has unsatisfied objective A1"
+
+[[checks]]
+id = "invalid-accepted-satisfied-without-evidence"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-satisfied-without-evidence.md"
+expected = "invalid"
+message = "satisfied objective A1 requires evidence"
+
+[[checks]]
+id = "invalid-duplicate-composed-design-probe"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-duplicate-composed-design-probe.md"
+expected = "invalid"
+message = "applicable composed-design review requires Independent concepts and dimensions"
+
+[[checks]]
+id = "invalid-execution-history"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-execution-history.md"
+expected = "invalid"
+message = "execution history belongs in the ledger"
+
+[[checks]]
+id = "invalid-headless-accepted"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-headless-accepted.md"
+expected = "invalid"
+message = "accepted plan has partial acceptance"
+
+[[checks]]
+id = "invalid-incomplete-composed-design-review"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-incomplete-composed-design-review.md"
+expected = "invalid"
+message = "applicable composed-design review requires Deletion and cumulative machinery result"
+
+[[checks]]
+id = "invalid-missing-composed-design-applicability"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-missing-composed-design-applicability.md"
+expected = "invalid"
+message = "expected one ## Simplicity And Ownership Review heading"
+
+[[checks]]
+id = "invalid-missing-next"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-missing-next.md"
+expected = "invalid"
+message = "expected one Next slice field"
+
+[[checks]]
+id = "invalid-objective-partial"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-objective-partial.md"
+expected = "invalid"
+message = "objective A1 has invalid status partial"
+
+[[checks]]
+id = "invalid-three-state"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-three-state.md"
+expected = "invalid"
+message = "invalid plan status Complete"
+
+[[checks]]
+id = "invalid-unreasoned-composed-design-exclusion"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-unreasoned-composed-design-exclusion.md"
+expected = "invalid"
+message = "not-applicable composed-design review requires a concrete Reason"
+
+[[checks]]
+id = "invalid-whitespace-composed-design-probe"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-probe.md"
+expected = "invalid"
+message = "applicable composed-design review requires Deletion and cumulative machinery result"
+
+[[checks]]
+id = "invalid-whitespace-composed-design-reason"
+type = "plan_contract"
+path = "evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-reason.md"
+expected = "invalid"
+message = "not-applicable composed-design review requires a concrete Reason"
 
 [[checks]]
 id = "planning-prompt-projection"
@@ -133,3 +255,9 @@ header = ["id", "source", "target", "disposition", "rationale"]
 columns = ["id"]
 order = "source"
 where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" }
+
+[[checks]]
+id = "terminal-authority"
+type = "path_state"
+present = ["evaluation/standards-effectiveness/suites/planning-consolidation.toml"]
+absent = ["evaluation/standards-effectiveness/verify-plan-fixtures.sh"]

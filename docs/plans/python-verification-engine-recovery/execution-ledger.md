@@ -371,3 +371,21 @@
 - One Bash checker and its shared plan helper remain. The plan contract must be
   admitted before the zero-Bash trigger can execute migration-only Python
   dispositions.
+
+## 2026-09-03 - M6-I125 Terminal-Lifecycle Projection
+
+- Accepted M6-I125 removed the final Bash verifier through a typed plan
+  contract with exact success and diagnostic parity across all 19 fixtures.
+- The generated verifier graph is now header-only. One non-executed plan
+  helper remains until the Standards Engine transfers its two declared policy
+  relationships; terminal migration-Python dispositions do not execute before
+  that helper and the remaining Bash launchers retire.
+
+## 2026-09-03 - M6-I126 Terminal-Lifecycle Projection
+
+- Standards Engine relationship transfer and accepted M6-I126 retirement
+  remove the final non-executed Bash helper without changing plan-contract
+  semantics or retaining a fallback path.
+- The verifier graph remains header-only and no Bash verifier or helper
+  remains. The accepted `zero-bash-accepted` terminal dispositions and the
+  remaining Bash launchers are the next cleanup boundary.

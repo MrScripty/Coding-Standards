@@ -2,84 +2,36 @@ schema_version = 2
 owner = "topic.architecture"
 
 [[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "profile.application.library"
-relation = "normative-consumer"
+source = "topic.architecture.immutable-authority-closure"
+consumer = "a1c-aggregate-replay"
+relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "Library Interfaces are admitted from Depth, Leverage, caller knowledge, Locality, and current independent reasons for generality."
+evidence_owner = "suite:a1c-aggregate-replay"
+rationale = "Suite enforces immutable AnalysisState replay and parent-bound derived work."
 
 [[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "profile.boundary.generated-contract"
-relation = "normative-consumer"
+source = "topic.architecture.immutable-authority-closure"
+consumer = "a1c-snapshot-lifecycle"
+relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "Generated boundaries must reduce composed knowledge rather than merely automate coordinated propagation."
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Suite enforces exact snapshot capture, storage, and lifecycle closure."
 
 [[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "workflow.planning"
-relation = "normative-consumer"
+source = "topic.architecture.authority-scope-admission"
+consumer = "contract-authority-scope"
+relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "Planning owns the recorded applicability decision and complete artifact probe for material composed designs."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Suite enforces authority-scope admission and its direct projections."
 
 [[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "workflow.implementation"
-relation = "normative-consumer"
+source = "topic.architecture.immutable-authority-closure"
+consumer = "contract-authority-scope"
+relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "Implementation reports hidden knowledge and representative changes that reach wider than the admitted owners."
-
-[[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "prompts/planning.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "The planning prompt asks the Architecture-owned artifact questions and limits hypothetical Adapters to Seam-shape probes."
-
-[[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "prompts/implement-plan.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "The implementation prompt preserves and challenges the admitted composition against observed changes."
-
-[[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "prompts/full-codebase-standards-refactor.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "Full review tests representative change paths, Interface knowledge, and deletion results."
-
-[[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "templates/PLAN-TEMPLATE.md"
-relation = "template-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:plan-template-projection"
-rationale = "The template projects the Architecture-specific probe when composed-design review applies."
-
-[[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "evaluation/standards-effectiveness/check-plan-structure.sh"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The checker rejects a missing applicability record, an unreasoned exclusion, and an unanswered applicable review."
-
-[[relationships]]
-source = "topic.architecture.composed-design-admission"
-consumer = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "The joint fixture tests composition, Depth, caller knowledge, change Locality, independent evolution, and deletion."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The existing authority and version-scope suite supplies project-agnostic closure admission evidence."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
@@ -88,6 +40,30 @@ relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:core-simplicity"
 rationale = "The existing suite owns the coherent Core and Architecture decision family."
+
+[[relationships]]
+source = "topic.architecture.authority-scope-admission"
+consumer = "evaluation/standards-effectiveness/fixtures/architecture/authority-scope-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture distinguishes coherent aggregation, explicit reference, accidental umbrella authority, and missing facts."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Fixture covers promise-bounded in-process use, cold reconstruction, aggregate closure, justified separation, and ambient-state rejection."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "The joint fixture tests composition, Depth, caller knowledge, change Locality, independent evolution, and deletion."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
@@ -106,12 +82,12 @@ evidence_owner = "suite:plan-template-projection"
 rationale = "The template suite enforces the Architecture projection without adding another suite."
 
 [[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "profile.boundary.generated-contract"
-relation = "normative-consumer"
+source = "topic.architecture.composed-design-admission"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "The Generated Contract profile records owned and referenced authority before accepting a canonical declaration."
+evidence_owner = "suite:planning-consolidation"
+rationale = "The registered Planning suite enforces the composed-design applicability record, concrete exclusion reason, and complete artifact probes."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
@@ -122,108 +98,28 @@ evidence_owner = "suite:contract-authority-scope"
 rationale = "The Library profile keeps a coherent reusable responsibility independent of unrelated startup, UI, transport, and global lifecycle concerns."
 
 [[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "profile.application.library"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Library Interfaces are admitted from Depth, Leverage, caller knowledge, Locality, and current independent reasons for generality."
+
+[[relationships]]
 source = "topic.architecture.authority-scope-admission"
-consumer = "profile.boundary.language-bindings"
+consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
-rationale = "Language-binding adapters own representation and lifecycle adaptation without acquiring domain authority."
+rationale = "The Generated Contract profile records owned and referenced authority before accepting a canonical declaration."
 
 [[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "workflow.build"
+source = "topic.architecture.composed-design-admission"
+consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Build owns build actions and generated derivation while content and domain authorities remain independently owned."
-
-[[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "prompts/planning.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Planning records responsibility, referenced authorities, independent change axes, and lifecycle owners."
-
-[[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "prompts/implement-plan.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Implementation preserves the admitted authority scope rather than transferring ownership through a generated artifact."
-
-[[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "templates/PLAN-TEMPLATE.md"
-relation = "template-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "The proportional simplicity review records canonical and referenced authorities for applicable plans."
-
-[[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "The authored interface schema is a current canonical artifact whose responsibility and referenced authorities require impact review."
-
-[[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "evaluation/standards-effectiveness/fixtures/architecture/authority-scope-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Fixture distinguishes coherent aggregation, explicit reference, accidental umbrella authority, and missing facts."
-
-[[relationships]]
-source = "topic.architecture.authority-scope-admission"
-consumer = "contract-authority-scope"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Suite enforces authority-scope admission and its direct projections."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "profile.boundary.persistence"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Persistence owns durable reopening of immutable authority and analysis state."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "topic.contracts"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Contracts owns handle representation, version roles, identity effects, and proof lifetime for the admitted closure."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "topic.security"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Security owns the trust consequences of captured authorization and rejects ambient authority at a new boundary."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "topic.resilience"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Resilience owns selected cold reconstruction and recovery behavior when the advertised lifetime crosses a failure boundary."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "workflow.verification"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Verification owns evidence that the advertised lifetime and reconstruction path reproduce the selected result semantics."
+evidence_owner = "suite:core-simplicity"
+rationale = "Generated boundaries must reduce composed knowledge rather than merely automate coordinated propagation."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
@@ -234,100 +130,76 @@ evidence_owner = "suite:contract-authority-scope"
 rationale = "Generated Contract consumes reachable semantic closure and reconstruction promises without requiring one artifact per concern."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_engine/standards_engine/engine.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The engine resolves reads and inspection from the exact captured authority view."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_snapshots/standards_snapshots/module.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Content snapshot identities bind exact logical paths and raw bytes."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_analysis/standards_analysis/kernel.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The analysis kernel evaluates only declared immutable authority and dependency-valid accepted decisions."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Generated result projections expose the reproducible value derived from one immutable analysis state."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
-relation = "fixture-projection"
+source = "topic.architecture.authority-scope-admission"
+consumer = "profile.boundary.language-bindings"
+relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
-rationale = "Fixture covers promise-bounded in-process use, cold reconstruction, aggregate closure, justified separation, and ambient-state rejection."
+rationale = "Language-binding adapters own representation and lifecycle adaptation without acquiring domain authority."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "contract-authority-scope"
-relation = "enforcement-suite-projection"
+consumer = "profile.boundary.persistence"
+relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "suite:contract-authority-scope"
-rationale = "The existing authority and version-scope suite supplies project-agnostic closure admission evidence."
+rationale = "Persistence owns durable reopening of immutable authority and analysis state."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "a1c-snapshot-lifecycle"
-relation = "enforcement-suite-projection"
+source = "topic.architecture.composed-design-admission"
+consumer = "prompts/full-codebase-standards-refactor.md"
+relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Suite enforces exact snapshot capture, storage, and lifecycle closure."
+evidence_owner = "suite:core-simplicity"
+rationale = "Full review tests representative change paths, Interface knowledge, and deletion results."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "a1c-aggregate-replay"
-relation = "enforcement-suite-projection"
+source = "topic.architecture.authority-scope-admission"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-aggregate-replay"
-rationale = "Suite enforces immutable AnalysisState replay and parent-bound derived work."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Implementation preserves the admitted authority scope rather than transferring ownership through a generated artifact."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_analysis/standards_analysis/coverage.py"
-relation = "implementation-projection"
+source = "topic.architecture.composed-design-admission"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Analysis owns the sole v3 coverage publication, claim validation, authorization, and certificate boundary."
+evidence_owner = "suite:core-simplicity"
+rationale = "The implementation prompt preserves and challenges the admitted composition against observed changes."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
-relation = "implementation-projection"
+source = "topic.architecture.authority-scope-admission"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Static verification consumes Engine-composed coverage instead of reconstructing certificate identity."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Planning records responsibility, referenced authorities, independent change axes, and lifecycle owners."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_engine/tests/test_analysis.py"
-relation = "fixture-projection"
+source = "topic.architecture.composed-design-admission"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The fixture proves deterministic branching and cold replay through stored authority without live trust replay."
+evidence_owner = "suite:core-simplicity"
+rationale = "The planning prompt asks the Architecture-owned artifact questions and limits hypothetical Adapters to Seam-shape probes."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_verifier/tests/test_policy_impact.py"
-relation = "fixture-projection"
+source = "topic.architecture.authority-scope-admission"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The fixture proves custom manifests acquire no implicit coverage and registered verification consumes Engine-composed authority."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The proportional simplicity review records canonical and referenced authorities for applicable plans."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The template projects the Architecture-specific probe when composed-design review applies."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
@@ -347,6 +219,30 @@ rationale = "The graph registry validates immutable provider and relationship-ki
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/repository_git/repository_git/model.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Platform checks bound the admitted durability profile without changing authority identity."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/coverage.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Analysis owns the sole v3 coverage publication, claim validation, authorization, and certificate boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/kernel.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "The analysis kernel evaluates only declared immutable authority and dependency-valid accepted decisions."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/state.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
@@ -362,36 +258,36 @@ evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "Trust adapters bind provider and authorization claims to exact immutable contracts and inputs."
 
 [[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_snapshots/standards_snapshots/errors.py"
+source = "topic.architecture.authority-scope-admission"
+consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Authority failures preserve typed ownership at the persistence boundary."
+evidence_owner = "suite:contract-authority-scope"
+rationale = "The authored interface schema is a current canonical artifact whose responsibility and referenced authorities require impact review."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_snapshots/standards_snapshots/model.py"
+consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Authority models define the immutable content and reference records stored by the repository."
+rationale = "Generated result projections expose the reproducible value derived from one immutable analysis state."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/repository_git/repository_git/model.py"
+consumer = "tools/standards_engine/standards_engine/engine.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Platform checks bound the admitted durability profile without changing authority identity."
+rationale = "The engine resolves reads and inspection from the exact captured authority view."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "tools/standards_snapshots/standards_snapshots/store.py"
-relation = "implementation-projection"
+consumer = "tools/standards_engine/tests/test_analysis.py"
+relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The SQLite store owns durable content-addressed object persistence and reconstruction."
+rationale = "The fixture proves deterministic branching and cold replay through stored authority without live trust replay."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
@@ -424,3 +320,107 @@ relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:a1c-snapshot-lifecycle"
 rationale = "The policy-impact compiler constructs immutable source-owned relationship authority."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_snapshots/standards_snapshots/errors.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Authority failures preserve typed ownership at the persistence boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_snapshots/standards_snapshots/model.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Authority models define the immutable content and reference records stored by the repository."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_snapshots/standards_snapshots/module.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Content snapshot identities bind exact logical paths and raw bytes."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_snapshots/standards_snapshots/store.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "The SQLite store owns durable content-addressed object persistence and reconstruction."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "Static verification consumes Engine-composed coverage instead of reconstructing certificate identity."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_verifier/tests/test_policy_impact.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:a1c-snapshot-lifecycle"
+rationale = "The fixture proves custom manifests acquire no implicit coverage and registered verification consumes Engine-composed authority."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "topic.contracts"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Contracts owns handle representation, version roles, identity effects, and proof lifetime for the admitted closure."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "topic.resilience"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Resilience owns selected cold reconstruction and recovery behavior when the advertised lifetime crosses a failure boundary."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "topic.security"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Security owns the trust consequences of captured authorization and rejects ambient authority at a new boundary."
+
+[[relationships]]
+source = "topic.architecture.authority-scope-admission"
+consumer = "workflow.build"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Build owns build actions and generated derivation while content and domain authorities remain independently owned."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:core-simplicity"
+rationale = "Implementation reports hidden knowledge and representative changes that reach wider than the admitted owners."
+
+[[relationships]]
+source = "topic.architecture.composed-design-admission"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Planning owns the recorded applicability decision and complete artifact probe for material composed designs."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "workflow.verification"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:contract-authority-scope"
+rationale = "Verification owns evidence that the advertised lifetime and reconstruction path reproduce the selected result semantics."

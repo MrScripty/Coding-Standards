@@ -11,10 +11,6 @@ id = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv", artifact_kind = "fixture", authority = "evidence" }
 
 [[nodes]]
-id = "evaluation/standards-effectiveness/check-plan-structure.sh"
-metadata = { repository_path = "evaluation/standards-effectiveness/check-plan-structure.sh", artifact_kind = "implementation-artifact", authority = "projection" }
-
-[[nodes]]
 id = "prompts/full-codebase-standards-refactor.md"
 metadata = { repository_path = "prompts/full-codebase-standards-refactor.md", artifact_kind = "prompt", authority = "projection" }
 

@@ -137,23 +137,11 @@ required = ["# Plan: Systemic Finding Without Audit", "**Plan status:** `Blocked
 prohibited = ["## Systemic Finding Audit"]
 
 [[checks]]
-id = "retained-plan-structure-consumer"
-type = "text"
-path = "evaluation/standards-effectiveness/check-plan-structure.sh"
-required = ["#!/usr/bin/env bash", "set -euo pipefail"]
-prohibited = []
-
-[[checks]]
-id = "retained-plan-fixture-consumer"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-plan-fixtures.sh"
-required = ["#!/usr/bin/env bash", "set -euo pipefail"]
-prohibited = []
-
-[[checks]]
 id = "registered-consumers"
 type = "path_state"
 present = [
   "docs/plans/standards-engine-standards-recovery/issues.md",
   "prompts/full-codebase-standards-refactor.md",
+  "tools/standards_verifier/standards_verifier/checks/plan_contract.py",
+  "tools/standards_verifier/tests/test_plan_contract.py",
 ]

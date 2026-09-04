@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 5 terminal migration lifecycle and Bash retirement
 
-**Next slice:** run a fresh post-M6-I124 checker graph audit and admit the
-shared plan contract before changing the final Bash/helper component
+**Next slice:** execute the accepted zero-Bash terminal dispositions and remove
+the remaining migration-only launchers and Python machinery
 
 **Acceptance status:** `pending`
 

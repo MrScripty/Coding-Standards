@@ -31,6 +31,7 @@ from .metadata_route import parse_metadata_route_check
 from .migration_python_dispositions import parse_migration_python_dispositions_check
 from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .path_state import parse_path_state_check
+from .plan_contract import parse_plan_contract_check
 from .policy_impact import parse_policy_impact_check
 from .python_package_contract import parse_python_package_contract_check
 from .reference_inventory import parse_reference_inventory_check
@@ -94,6 +95,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_line_budget_check(raw, suite_id)
     if kind == "path_state":
         return parse_path_state_check(raw, suite_id)
+    if kind == "plan_contract":
+        return parse_plan_contract_check(raw, suite_id)
     if kind == "policy_impact":
         return parse_policy_impact_check(raw, suite_id)
     if kind == "python_package_contract":

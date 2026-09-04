@@ -7407,3 +7407,37 @@
   definitions change 50 of 51 current coverage views. The frozen write set is
   corrected before acceptance to own all eleven affected attestation sources
   and require exact 50/50 dependency-local renewal.
+
+## 2026-09-03 - M6-I125 Plan Contract Acceptance
+
+- Replaced the 55-line plan-fixture Bash verifier with one typed
+  `plan_contract` check and nineteen fixture assertions in the registered
+  `planning-consolidation` suite.
+- Four valid plans pass and all fifteen invalid plans preserve the Bash
+  helper's exact rejecting diagnostic. Direct parser tests reject unknown and
+  contradictory configuration without command execution or fallback.
+- Twenty-four accepted historical gate records transfer to
+  `suite:planning-consolidation`. The package's two helper edges remain
+  explicitly assigned to the retained policy projection until the Standards
+  Engine moves those relationships.
+- Exact 50/50 dependency-local coverage renewal closes 51/51 current coverage.
+  Focused, unit, generated, numeric, graph, declarative, retained-helper, and
+  complete mixed evidence pass. The frozen verifier graph is header-only; one
+  non-executed policy helper remains.
+
+## 2026-09-03 - M6-I126 Final Helper Retirement
+
+- Standards Engine application `e49c875b` transferred the Architecture and
+  Planning enforcement relationships from the non-executed plan helper to the
+  registered `planning-consolidation` suite without changing policy semantics.
+- The serial-coherent package at train order 241 deletes the unreferenced
+  226-line helper, retires its orphan supplemental catalog node, and removes
+  three text-only consumer checks. Four historical edge records now select the
+  typed planning suite while preserving their original endpoints.
+- Exact 51/51 dependency-local coverage renewal restores every current policy
+  coverage view. Focused retirement suites, all 275 declarative suites,
+  generated evidence, verifier and graph tests, plan contracts, and the
+  complete checkpoint pass.
+  Final executable evidence remains header-only at 0 nodes, 0 edges, and 0
+  components. No Bash verifier or helper remains; M6-Z1 terminal cleanup is
+  next.

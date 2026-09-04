@@ -57,20 +57,6 @@ required = ["## Evidence And Oracle Plan", "Intended negative failure", "agreeme
 prohibited = []
 
 [[checks]]
-id = "retained-plan-structure-consumer"
-type = "text"
-path = "evaluation/standards-effectiveness/check-plan-structure.sh"
-required = ["#!/usr/bin/env bash", "set -euo pipefail"]
-prohibited = []
-
-[[checks]]
-id = "retained-plan-fixture-consumer"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-plan-fixtures.sh"
-required = ["#!/usr/bin/env bash", "set -euo pipefail"]
-prohibited = []
-
-[[checks]]
 id = "registered-consumers"
 type = "path_state"
 present = [
@@ -95,6 +81,7 @@ present = [
   "tools/standards_verifier/standards_verifier/checks/metadata.py",
   "tools/standards_verifier/standards_verifier/checks/metadata_route.py",
   "tools/standards_verifier/standards_verifier/checks/path_state.py",
+  "tools/standards_verifier/standards_verifier/checks/plan_contract.py",
   "tools/standards_verifier/standards_verifier/checks/policy_impact.py",
   "tools/standards_verifier/standards_verifier/checks/predicates.py",
   "tools/standards_verifier/standards_verifier/checks/relation.py",
@@ -116,6 +103,7 @@ present = [
   "tools/standards_verifier/tests/test_metadata.py",
   "tools/standards_verifier/tests/test_metadata_route.py",
   "tools/standards_verifier/tests/test_policy_impact.py",
+  "tools/standards_verifier/tests/test_plan_contract.py",
   "tools/standards_verifier/tests/test_repository_graph.py",
   "tools/standards_verifier/tests/test_routing_checks.py",
 ]

@@ -159,6 +159,21 @@ class SuiteInputProjectionTest(unittest.TestCase):
             ),
             retired_uses,
         )
+        plan_checker = files[
+            "evaluation/standards-effectiveness/verify-plan-fixtures.sh"
+        ]
+        self.assertEqual(plan_checker["state"], "absent")
+        self.assertIn(
+            (
+                "planning-consolidation",
+                "terminal-authority",
+                "required-absent",
+            ),
+            {
+                (use["suite"], use["check"], use["role"])
+                for use in plan_checker["uses"]
+            },
+        )
         lifecycle_uses = {
             (use["suite"], use["check"], use["role"])
             for use in files[
@@ -173,6 +188,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
             ),
             lifecycle_uses,
         )
+
     def test_repository_index_membership_changes_projection_identity(self) -> None:
         first = compile_suite_input_projection(self.root)["repository_index"]
         self.write("tracked-later.md", "new tracked input\n")

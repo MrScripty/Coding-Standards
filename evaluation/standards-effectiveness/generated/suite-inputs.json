@@ -2019,7 +2019,7 @@
       ]
     },
     {
-      "digest": "sha256:1ccbc1d2e5270f008023e062b369e442c3ba30aa22fe1d6c6296b2977c636a7e",
+      "digest": "sha256:1f4d59f5f4a22efc9f74ddf7ec518bbcddea6a0e0311751a2a3319db25164a32",
       "path": "docs/plans/standards-verification-engine/plan.md",
       "state": "present",
       "uses": [
@@ -2043,7 +2043,7 @@
       ]
     },
     {
-      "digest": "sha256:43faa2e859f55f02d74f70f26e042fb2bcc8f17cc057436a705eff1384961432",
+      "digest": "sha256:b10fe8488f0ed0ce7203227744cf292296dcf7d6ebd35d59cb479601caef1edd",
       "path": "evaluation/standards-effectiveness/README.md",
       "state": "present",
       "uses": [
@@ -2397,34 +2397,7 @@
       ]
     },
     {
-      "digest": "sha256:2e19823694bcb75b34d7daa0451f34359b0f9a6c73fa255bcdbcfe9c88753e57",
-      "path": "evaluation/standards-effectiveness/check-plan-structure.sh",
-      "state": "present",
-      "uses": [
-        {
-          "check": "retained-plan-structure-consumer",
-          "role": "content",
-          "suite": "evidence-oracle-boundaries"
-        },
-        {
-          "check": "plan-structure-enforcement",
-          "role": "content",
-          "suite": "planning-consolidation"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        },
-        {
-          "check": "retained-plan-structure-consumer",
-          "role": "content",
-          "suite": "systemic-finding-replanning"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:8aa07f0b42925e106b66b059c2418840127cb5b8a7110c1238b55ea43a7d8b9d",
+      "digest": "sha256:4b38bf712f08322390353979aa3a1f87b273bfee9c4fbe78af84d01014e701e5",
       "path": "evaluation/standards-effectiveness/checker-migration-packages.tsv",
       "state": "present",
       "uses": [
@@ -3792,7 +3765,7 @@
       ]
     },
     {
-      "digest": "sha256:416127608e5cdb02ee341a3faf56af72e6c31abf7703e8c034e214923990529e",
+      "digest": "sha256:a08c2f88a07de490f74f93fbbb28931a60d5f72464c1b72541003ac70745e08f",
       "path": "evaluation/standards-effectiveness/executable-edge-dispositions.tsv",
       "state": "present",
       "uses": [
@@ -3804,7 +3777,7 @@
       ]
     },
     {
-      "digest": "sha256:f6a8dee63ef0e6192c39022e7a87f32b0218230dae66a675969379bc20d1c531",
+      "digest": "sha256:71f082d79e3eaf7c79a98b60f6cf308e725a41bbce166dedde0a0538d2871357",
       "path": "evaluation/standards-effectiveness/findings.md",
       "state": "present",
       "uses": [
@@ -5712,6 +5685,234 @@
       ]
     },
     {
+      "digest": "sha256:b097bacf82568192c9087800f99126cfc1071e0f7340b567cdf2be144130fdca",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-malformed-objective-status.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-accepted-malformed-objective-status",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:9b29a201762e4ec3535104e692fffff83979805b3a76cd059b100aa784077cc1",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-missing-final-projections.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-accepted-missing-final-projections",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7fb320d27c8a779e8d3418a3580301008e1302f50436b945d9e5c6c0c8d21738",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-pending-criterion.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-accepted-pending-criterion",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:8cc388259f047c5bed9f1c39ae5647b3c4e78889b6cf5e6803b836019c384fa2",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-accepted-satisfied-without-evidence.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-accepted-satisfied-without-evidence",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:011aa18a7b88d82fc6b164f163dda938e59d1d57c040c7ed93e0e6aa61499f03",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-duplicate-composed-design-probe.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-duplicate-composed-design-probe",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5e619e5e89ec1f39f30152a626efb399503df7d060813d6f88c253f4d9aa7a7a",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-execution-history.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-execution-history",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:9a104fb2730160b1966f6f676e7276649ab9fb3c099dd2ad8cbff5a57b6ba3b1",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-headless-accepted.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-headless-accepted",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:d96a2009793bc2ad18c8aaae67e60df00d3f91cb78a9a950140cf7d015640ca7",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-incomplete-composed-design-review.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-incomplete-composed-design-review",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c96a4b777506b536f25c72867dc5decd6ba069cb304290631dab83a709546e29",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-missing-composed-design-applicability.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-missing-composed-design-applicability",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:4fe7f1b78346674db605e0510103cb65221044e1334a239d548a40b96330ac50",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-missing-next.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-missing-next",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:b80611bfeda96e9fcbdca6fb62ff14a0e54117e4a6445fb6172bac509af4d799",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-objective-partial.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-objective-partial",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:53af1a7828676fc0f94814b4152129f33b0dc82026973fc6bae925a246388fef",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-three-state.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-three-state",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:7625cd98c65e59ea66eaee3969fc5b73300a95faea98721173ca80917c2a320f",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-unreasoned-composed-design-exclusion.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-unreasoned-composed-design-exclusion",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a3601a27b5bbed0f24d22b1c93d4a4206f29b1cc120cbc2ae6b6e2995a7caba5",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-probe.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-whitespace-composed-design-probe",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:e1198ac7c730cab63d7da022456f7f879c6259969254583c1729720b1cdb9fff",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-reason.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "invalid-whitespace-composed-design-reason",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:022d92646aa8a99dfb40a309b526e95b4043ce66e1a37ede5a055936b259ab7d",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/valid-accepted.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "valid-accepted-plan",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:4afe36413311b1739fe1914a87f5dcf3e52a9ba01a603f580737fcde2027ef79",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/valid-active.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "valid-active-plan",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:aa8d2e0bc92ba552064b05b0ee1b406798c6b98ffd08ec5c47278398fb676772",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/valid-blocked.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "valid-blocked-plan",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:07c2ef51116492aa967da016eab1fb80a63176f0ca6c1ae738d9f7a7150f1365",
+      "path": "evaluation/standards-effectiveness/fixtures/plans/valid-superseded.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "valid-superseded-plan",
+          "role": "plan-contract",
+          "suite": "planning-consolidation"
+        }
+      ]
+    },
+    {
       "digest": "sha256:b9262f05f2939115f65e19bb3c7ecbccebe0fced3d309fa185bd764677279c3f",
       "path": "evaluation/standards-effectiveness/fixtures/policy-impact/duplicate-edge.toml",
       "state": "present",
@@ -7362,7 +7563,7 @@
       ]
     },
     {
-      "digest": "sha256:ffbb5249bdd43bdc2bb10fb3c9a5e4550fbdae22aa999a370b79bec500a6c4bf",
+      "digest": "sha256:b967d37364be8666cca81218f59dd23ad05ae29ebbfe6f254e93f758a2471e19",
       "path": "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv",
       "state": "present",
       "uses": [
@@ -7374,7 +7575,7 @@
       ]
     },
     {
-      "digest": "sha256:65796c8def6b4b8b3a9fc2260b28be075ac1c9b40475c06b993f2b147b2c3c05",
+      "digest": "sha256:b5edcab3d42e7fef51981742123506bf2ba8dd66ccc32ce8edd12ebd95084e4d",
       "path": "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
       "state": "present",
       "uses": [
@@ -10118,7 +10319,7 @@
       ]
     },
     {
-      "digest": "sha256:fe5451a7e3da39c7f01fe7957e00fc2ea222b61de3abcdc3b0d45e0e1cc726da",
+      "digest": "sha256:e21b049c938ecb9fbdabdfcaf3c370483912c9d9384789c5c862ac7aee8288a8",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -10178,7 +10379,7 @@
       ]
     },
     {
-      "digest": "sha256:82005200e12d2e6befa306f3c3236a3a210bd0b18f277ef80e48a53a77a75ca0",
+      "digest": "sha256:a53dbe327598919cce5d94568193958cb13ed3a5700ba5bcadf6a1267b4054cf",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
       "state": "present",
       "uses": [
@@ -10250,7 +10451,7 @@
       ]
     },
     {
-      "digest": "sha256:a396d1bfaabea81ebd193f4238530f8c7c313533ea5b4d9e7078724d7f3b90e5",
+      "digest": "sha256:d1fa2df06f6f836e3f012f7c88d94ceac1585bb0b15f3a665ace7a70cfddf3c3",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
       "state": "present",
       "uses": [
@@ -11301,7 +11502,7 @@
       ]
     },
     {
-      "digest": "sha256:1e05f948e3482d4bdbec1275db24e2c3607b89d21509f0acc544350af1550a7c",
+      "digest": "sha256:dd164d955995c7de3680c926e8af0b08b53c3ee0677b2213a78d6a8c94414918",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "state": "present",
       "uses": [
@@ -12433,10 +12634,15 @@
       ]
     },
     {
-      "digest": "sha256:ed60c312b58e2429104c9888161963c7d96f4091fca35714f610fc1a866dc2d0",
+      "digest": "sha256:b88621985bfa5460d0ebb2923aa215df4137b4e69aab6f50265cb5b0c55883d6",
       "path": "evaluation/standards-effectiveness/suites/planning-consolidation.toml",
       "state": "present",
       "uses": [
+        {
+          "check": "terminal-authority",
+          "role": "required-present",
+          "suite": "planning-consolidation"
+        },
         {
           "check": "current-structure",
           "role": "registered-policy-impact",
@@ -13523,7 +13729,7 @@
       ]
     },
     {
-      "digest": "sha256:53273ae8842181a91c26524544bd05e21bbb98b9acb840cb3035dc63e3f9b749",
+      "digest": "sha256:f6914f4ada9d21f31d2ed741c83def865db8e20e7da3d424db9918768d4fc3d0",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml",
       "state": "present",
       "uses": [
@@ -13982,34 +14188,13 @@
       ]
     },
     {
-      "digest": "sha256:962bee0a4f0f3e75e04245c81196601561e30111e739ab37a1d8b8e1e2e426c7",
       "path": "evaluation/standards-effectiveness/verify-plan-fixtures.sh",
-      "state": "present",
+      "state": "absent",
       "uses": [
         {
-          "check": "retained-plan-fixture-consumer",
-          "role": "content",
-          "suite": "evidence-oracle-boundaries"
-        },
-        {
-          "check": "derived-readme-consumers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "derived-transitive-callers",
-          "role": "candidate-content",
-          "suite": "milestone-7-row-35-decomposition"
-        },
-        {
-          "check": "candidate-lifecycle",
-          "role": "numeric-lifecycle",
-          "suite": "numeric-comparison-classification"
-        },
-        {
-          "check": "retained-plan-fixture-consumer",
-          "role": "content",
-          "suite": "systemic-finding-replanning"
+          "check": "terminal-authority",
+          "role": "required-absent",
+          "suite": "planning-consolidation"
         }
       ]
     },
@@ -20782,7 +20967,7 @@
       ]
     },
     {
-      "digest": "sha256:b1e296d352d598482e27ca4801e0d833072a5ed65d40a1ee4df361a236843828",
+      "digest": "sha256:696b999590f84af04df87758b24a1b0209af15ccfa21faf760451ea2c28e1467",
       "path": "tools/standards_verifier/standards_verifier/checks/__init__.py",
       "state": "present",
       "uses": [
@@ -21353,6 +21538,33 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c30aca2b9009746a5427013c8d6904c345d9e4a963d2ff5d1d70cc5358d08ac8",
+      "path": "tools/standards_verifier/standards_verifier/checks/plan_contract.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        },
+        {
+          "check": "migration-python-candidate-completeness",
+          "role": "package-python",
+          "suite": "checker-migration-packages"
+        },
+        {
+          "check": "registered-consumers",
+          "role": "required-present",
+          "suite": "evidence-oracle-boundaries"
+        },
+        {
+          "check": "registered-consumers",
+          "role": "required-present",
+          "suite": "systemic-finding-replanning"
         }
       ]
     },
@@ -22031,6 +22243,23 @@
           "check": "registered-consumers",
           "role": "required-present",
           "suite": "evidence-oracle-boundaries"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c854a10d01cf49af13fc91a9acd5a201a955323ead717b95795e42e8e6133279",
+      "path": "tools/standards_verifier/tests/test_plan_contract.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "registered-consumers",
+          "role": "required-present",
+          "suite": "evidence-oracle-boundaries"
+        },
+        {
+          "check": "registered-consumers",
+          "role": "required-present",
+          "suite": "systemic-finding-replanning"
         }
       ]
     },
@@ -25377,7 +25606,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:9ba9060608a027dc3304cb72857916b01c95ebb7646060cec8fe566187a280f4",
+    "digest": "sha256:222e9b1ae0ebfefb06a3ad8012fe5d14be29f9f2e161d01e7e87785fe74b8928",
     "uses": [
       {
         "check": "python-package-contract",
@@ -26427,7 +26656,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:ed60c312b58e2429104c9888161963c7d96f4091fca35714f610fc1a866dc2d0",
+      "digest": "sha256:b88621985bfa5460d0ebb2923aa215df4137b4e69aab6f50265cb5b0c55883d6",
       "id": "planning-consolidation",
       "path": "evaluation/standards-effectiveness/suites/planning-consolidation.toml",
       "requires": []
@@ -26953,7 +27182,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:1e05f948e3482d4bdbec1275db24e2c3607b89d21509f0acc544350af1550a7c",
+      "digest": "sha256:dd164d955995c7de3680c926e8af0b08b53c3ee0677b2213a78d6a8c94414918",
       "id": "evidence-oracle-boundaries",
       "path": "evaluation/standards-effectiveness/suites/evidence-oracle-boundaries.toml",
       "requires": []
@@ -26995,7 +27224,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:53273ae8842181a91c26524544bd05e21bbb98b9acb840cb3035dc63e3f9b749",
+      "digest": "sha256:f6914f4ada9d21f31d2ed741c83def865db8e20e7da3d424db9918768d4fc3d0",
       "id": "systemic-finding-replanning",
       "path": "evaluation/standards-effectiveness/suites/systemic-finding-replanning.toml",
       "requires": []

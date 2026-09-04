@@ -82,3 +82,12 @@ Acceptance requires:
    and the complete mixed checkpoint; and
 6. staged-scope, sensitive-content, whitespace, source-unchanged, and removed-
    path review.
+
+## Acceptance Result
+
+Accepted. Four valid and fifteen invalid fixtures have exact Bash/Python result
+and diagnostic parity; direct parser and contract tests pass. Twenty-four
+historical gate records now select `suite:planning-consolidation`, 50 affected
+coverage identities are renewed, and all 51 current coverage requirements are
+closed. The generated verifier graph is header-only. The plan helper remains
+non-executed solely until its two Standards Engine relationships transfer.
