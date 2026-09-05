@@ -6,16 +6,16 @@ source = "workflow.planning.written-plan-applicability"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Fixture records the analysis-only full-review prompt's Router and Planning delegation decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Fixture records the analysis-only full-review prompt's Router and Planning delegation decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Negative fixture isolates the missing systemic class audit and disposition failure. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Negative fixture isolates the missing systemic class audit and disposition failure. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.acceptance-claims"
@@ -102,120 +102,120 @@ source = "workflow.planning.concurrent-integration-routing"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.lifecycle"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/full-codebase-standards-refactor.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The full-codebase review entrypoint delegates analysis-only plan construction to Planning. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The full-codebase review entrypoint delegates analysis-only plan construction to Planning. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.concurrent-integration-routing"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.plan-admission"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation stops and returns to planning when a defect applies beyond the admitted instance or write set. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation stops and returns to planning when a defect applies beyond the admitted instance or write set. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.active-plan-fields"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint creates and preserves the required composed-design applicability record. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning entrypoint creates and preserves the required composed-design applicability record. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.artifact-model"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.concurrent-work"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.milestones-and-slices"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.replanning"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint re-runs the artifact probe after material replacement instead of inheriting a prior review. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning entrypoint re-runs the artifact probe after material replacement instead of inheriting a prior review. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning audits the affected policy class and replans the complete consumer set when a finding is systemic. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning audits the affected policy class and replans the complete consumer set when a finding is systemic. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.concurrent-integration-routing"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.written-plan-applicability"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.concurrent-integration-routing"
@@ -238,125 +238,125 @@ source = "workflow.planning.active-plan-fields"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template makes composed-design applicability mandatory and the complete artifact probe conditional. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template makes composed-design applicability mandatory and the complete artifact probe conditional. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.artifact-model"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template projects current Planning artifact fields and conditional concurrency records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template projects current Planning artifact fields and conditional concurrency records. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.concurrent-work"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template projects current Planning artifact fields and conditional concurrency records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template projects current Planning artifact fields and conditional concurrency records. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.replanning"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template records material replacement, cumulative machinery, and observed propagation as composed-design re-plan triggers. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template records material replacement, cumulative machinery, and observed propagation as composed-design re-plan triggers. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.repository-isolation"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template projects current Planning artifact fields and conditional concurrency records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template projects current Planning artifact fields and conditional concurrency records. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template records the systemic invariant, audited population, and complete disposition set. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template records the systemic invariant, audited population, and complete disposition set. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "topic.architecture"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Architecture can be affected when systemic repair selects deletion, consolidation, a smaller Interface, or a changed composition. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Architecture can be affected when systemic repair selects deletion, consolidation, a smaller Interface, or a changed composition. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.current-state"
 consumer = "workflow.commit"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "Commit consumes Planning artifact-update boundaries when an active plan governs the work. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Commit consumes Planning artifact-update boundaries when an active plan governs the work. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.acceptance-claims"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.current-state"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.lifecycle"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.plan-admission"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation consumes the bounded stopping decision and resumes only after the owner and reachable population are dispositioned. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes the bounded stopping decision and resumes only after the owner and reachable population are dispositioned. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.systemic-finding-replan"
 consumer = "workflow.verification"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Verification can be affected when stronger construction, a smaller proof surface, or proof substitution replaces accumulated evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Verification can be affected when stronger construction, a smaller proof surface, or proof substitution replaces accumulated evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.projection-completeness"
 consumer = "tools/standards_engine/standards_engine/evidence_maintenance.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Maintains evidence registrations and preserves actual normative consumer links during retirement."
+evidence_owner = "review:consumer"
+rationale = "Maintains evidence registrations and preserves actual normative consumer links during retirement. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.planning.projection-completeness"
 consumer = "tools/standards_engine/tests/test_evidence_maintenance.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface."
+evidence_owner = "review:consumer"
+rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface. Review binds this consumer and relationship; it requires substantive evidence before certification."

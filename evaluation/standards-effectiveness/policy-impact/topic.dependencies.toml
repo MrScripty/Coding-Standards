@@ -14,573 +14,453 @@ source = "topic.dependencies.requirement-and-ownership"
 consumer = "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Generated Contract work records whether required schema semantics are implemented locally or delegated to a dependency. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Generated Contract work records whether required schema semantics are implemented locally or delegated to a dependency. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation follows the admitted dependency decision rather than adding an undeclared dependency or partial local implementation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation follows the admitted dependency decision rather than adding an undeclared dependency or partial local implementation. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning records the explicit implementation-versus-dependency decision and evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning records the explicit implementation-versus-dependency decision and evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Router selects dependency policy when unsupported semantics require an implementation-versus-dependency decision. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Router selects dependency policy when unsupported semantics require an implementation-versus-dependency decision. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/graph_engine/graph_engine/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/graph_engine/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/query_edges.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/repository_git/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/repository_git/repository_git/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/repository_git/repository_git/errors.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs the Repository Git public failure model used across Module boundaries. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs the Repository Git public failure model used across Module boundaries. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/repository_git/repository_git/repository.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_analysis/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_analysis/standards_analysis/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_analysis/standards_analysis/routing.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "Routing consumes repository-owned package boundaries through their declared public roots. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Routing consumes repository-owned package boundaries through their declared public roots. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_applicability/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_applicability/standards_applicability/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_contracts/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_contracts/standards_contracts/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_engine/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_engine/standards_engine/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_graph/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_graph/standards_graph/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_identity/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_identity/standards_identity/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_metadata/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_metadata/standards_metadata/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_metadata/standards_metadata/corpus.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs canonical corpus composition behind the Metadata public root. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs canonical corpus composition behind the Metadata public root. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_metadata/standards_metadata/loader.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs canonical module loading behind the Metadata public root. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs canonical module loading behind the Metadata public root. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_metadata/standards_metadata/suite_inputs.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "Metadata owns neutral suite-input manifest validation and dependency projection while Verifier retains checker discovery and generation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Metadata owns neutral suite-input manifest validation and dependency projection while Verifier retains checker discovery and generation. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_policy_impact/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_policy_impact/standards_policy_impact/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_snapshots/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs the Snapshot package manifest and declared dependencies. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs the Snapshot package manifest and declared dependencies. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_snapshots/standards_snapshots/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs the Snapshot package public root. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs the Snapshot package public root. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The verifier check facade statically composes every registered check parser through owned package imports. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/decision.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/derived_evidence.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/exact_text.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/git_index_paths.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/inclusion.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/keyed_relation.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/line_budget.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/markdown_headings.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The verifier check facade statically composes every registered check parser through owned package imports. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/markdown_link_coverage.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/markdown_links.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/markdown_section_text.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/markdown_structure.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/metadata.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/metadata_route.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/path_state.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/policy_impact.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/python_package_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/reference_inventory.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/relation.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/checks/table.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
-
-[[relationships]]
-source = "topic.dependencies.requirement-and-ownership"
-consumer = "tools/standards_verifier/standards_verifier/checks/text.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/entrypoints.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/git_reachability.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/model.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package dependency contract governs this check-owned authority-input declaration or its shared verifier model. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs the Verifier-to-Engine composition dependency and its public-root import. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs the Verifier-to-Engine composition dependency and its public-root import. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/python_packages.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/repository_graph.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "Repository graph composition imports graph and policy-impact behavior through their public package roots. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Repository graph composition imports graph and policy-impact behavior through their public package roots. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/standards_verifier/suite_inputs.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The verifier owns the typed projection from parsed suite checks to coverage input state. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The verifier owns the typed projection from parsed suite checks to coverage input state. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/tests/test_python_package_contract.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/standards_verifier/verify.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.requirement-and-ownership"
 consumer = "tools/verify_git_reachability.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-public-cutover"
-rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The package ownership contract governs this manifest-owned public boundary or its executable verification. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation may need review when local standardized semantics require a dependency decision or renewal. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation may need review when local standardized semantics require a dependency decision or renewal. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.dependencies.implementation-versus-dependency"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning may need review when dependency-selection facts, lifecycle triggers, or ownership obligations change. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning may need review when dependency-selection facts, lifecycle triggers, or ownership obligations change. Review binds this consumer and relationship; it requires substantive evidence before certification."

@@ -14,125 +14,125 @@ source = "topic.architecture.authority-scope-admission"
 consumer = "profile.application.library"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The Library profile keeps a coherent reusable responsibility independent of unrelated startup, UI, transport, and global lifecycle concerns. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The Library profile keeps a coherent reusable responsibility independent of unrelated startup, UI, transport, and global lifecycle concerns. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "profile.application.library"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Library Interfaces are admitted from Depth, Leverage, caller knowledge, Locality, and current independent reasons for generality. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Library Interfaces are admitted from Depth, Leverage, caller knowledge, Locality, and current independent reasons for generality. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The Generated Contract profile records owned and referenced authority before accepting a canonical declaration. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The Generated Contract profile records owned and referenced authority before accepting a canonical declaration. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Generated boundaries must reduce composed knowledge rather than merely automate coordinated propagation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Generated boundaries must reduce composed knowledge rather than merely automate coordinated propagation. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "profile.boundary.language-bindings"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Language-binding adapters own representation and lifecycle adaptation without acquiring domain authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Language-binding adapters own representation and lifecycle adaptation without acquiring domain authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "prompts/full-codebase-standards-refactor.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Full review tests representative change paths, Interface knowledge, and deletion results. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Full review tests representative change paths, Interface knowledge, and deletion results. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation preserves the admitted authority scope rather than transferring ownership through a generated artifact. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation preserves the admitted authority scope rather than transferring ownership through a generated artifact. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The implementation prompt preserves and challenges the admitted composition against observed changes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The implementation prompt preserves and challenges the admitted composition against observed changes. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning records responsibility, referenced authorities, independent change axes, and lifecycle owners. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning records responsibility, referenced authorities, independent change axes, and lifecycle owners. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The planning prompt asks the Architecture-owned artifact questions and limits hypothetical Adapters to Seam-shape probes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The planning prompt asks the Architecture-owned artifact questions and limits hypothetical Adapters to Seam-shape probes. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The proportional simplicity review records canonical and referenced authorities for applicable plans. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The proportional simplicity review records canonical and referenced authorities for applicable plans. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The template projects the Architecture-specific probe when composed-design review applies. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The template projects the Architecture-specific probe when composed-design review applies. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The authored interface schema is a current canonical artifact whose responsibility and referenced authorities require impact review. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The authored interface schema is a current canonical artifact whose responsibility and referenced authorities require impact review. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.authority-scope-admission"
 consumer = "workflow.build"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Build owns build actions and generated derivation while content and domain authorities remain independently owned. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Build owns build actions and generated derivation while content and domain authorities remain independently owned. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation reports hidden knowledge and representative changes that reach wider than the admitted owners. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation reports hidden knowledge and representative changes that reach wider than the admitted owners. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.architecture.composed-design-admission"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "Planning owns the recorded applicability decision and complete artifact probe for material composed designs. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning owns the recorded applicability decision and complete artifact probe for material composed designs. Review binds this consumer and relationship; it requires substantive evidence before certification."

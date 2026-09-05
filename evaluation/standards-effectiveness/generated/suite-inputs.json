@@ -1757,7 +1757,7 @@
       ]
     },
     {
-      "digest": "sha256:d39c72cb23938921e91a413902382752dfb204fd6d577806e7fb95396acc1136",
+      "digest": "sha256:0ce115e945217602985748ab0a5cfebece88afea67556219f002f61bbd4da666",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -1793,7 +1793,7 @@
       ]
     },
     {
-      "digest": "sha256:b088d619266d8118cd64948ecbb27ba27caeaaf5669bd50982d1e75703238c6a",
+      "digest": "sha256:fbb55f82fae2bebedc0321dd7cce41b0d58b42c743129f9dda27d13f2e6c0d61",
       "path": "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
       "state": "present",
       "uses": [
@@ -1805,7 +1805,7 @@
       ]
     },
     {
-      "digest": "sha256:8da68e9a6fef72eecc5c6dd205e6e69a284798aca9c08f9dc2d766ed35e10a62",
+      "digest": "sha256:243b24b8d82640c7490b1ab2b54ef9a306f19ef5eb9241c25a3db485a4eb07c0",
       "path": "evaluation/standards-effectiveness/policy-impact/router.toml",
       "state": "present",
       "uses": [
@@ -1817,7 +1817,7 @@
       ]
     },
     {
-      "digest": "sha256:5a59d98543fe4bbe0aee4cd8347b5471ef70ee1145e728449b5758c4ace0ee66",
+      "digest": "sha256:2eeabd0c64634b6ed8c495026082a9c132af1c044e1eace1b9d6e06e8ac526e0",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.replay.toml",
       "state": "present",
       "uses": [
@@ -1829,7 +1829,7 @@
       ]
     },
     {
-      "digest": "sha256:261d23fba234b04a9b499dace4fbe881267aeae5df08796f2d25087b9842c7da",
+      "digest": "sha256:54580f09627ecc95abe7c006d184337b6eebddc964a4143b3fcaf44c04a59450",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
       "state": "present",
       "uses": [
@@ -1841,7 +1841,7 @@
       ]
     },
     {
-      "digest": "sha256:0b7acbdec7eb19d54b4c1f8caea97c7f72bebda9197dd72d424b4d123c39f696",
+      "digest": "sha256:5e3d83121400074df55c42371ef07889c950115053cc265eb5716d612c3d8dc5",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.code-design.toml",
       "state": "present",
       "uses": [
@@ -1853,7 +1853,7 @@
       ]
     },
     {
-      "digest": "sha256:e11e8b76a7171beaf4def15f2993e0d688da58f65f4f14c523b8f4193db7be40",
+      "digest": "sha256:aa0bf335515960965a525ba8185bedb17ee2f878d5f382ce3bd0ace953245f44",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.schemas.toml",
       "state": "present",
       "uses": [
@@ -1865,7 +1865,7 @@
       ]
     },
     {
-      "digest": "sha256:97390c07de020cac33bee2c08e69d8d4cd283c9f863268ffadc9deed3bc10b1e",
+      "digest": "sha256:2c1e93c817770e3477959caaae062402bca443fdfee77199d9ded310daed8c9c",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml",
       "state": "present",
       "uses": [
@@ -1877,7 +1877,7 @@
       ]
     },
     {
-      "digest": "sha256:720cdcb8fc4af2176b6ae4a60b0f0c9ce6c225253f920b1b03070170e231d974",
+      "digest": "sha256:96d2320dc0057604286e5970e4ff1bf67d87c95db6f856fde824fe123ad67295",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml",
       "state": "present",
       "uses": [
@@ -1889,7 +1889,7 @@
       ]
     },
     {
-      "digest": "sha256:802f0abef89441d3bb253c51d746152507d5cd7e9c4a4ba8da4117848523e2cc",
+      "digest": "sha256:e01898ff8c57d909485a5046f0d137f45dbd600cbe75af0df16c890241caeb86",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml",
       "state": "present",
       "uses": [
@@ -1901,7 +1901,7 @@
       ]
     },
     {
-      "digest": "sha256:cce3533fe1e93d94e22b7dbdae127bc1ab4bfcd0c54bddb5c615012ac7af6592",
+      "digest": "sha256:d66e72f730c1e518cbebd0c99b7e3e68430b264a60fe1fa0b303109287bed9a7",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.security.toml",
       "state": "present",
       "uses": [
@@ -1913,7 +1913,7 @@
       ]
     },
     {
-      "digest": "sha256:e8af128123a954c0bde908fb48ea6c28bf9f7c7788c10c6d4a03eb227005ef96",
+      "digest": "sha256:75ff91b8cf3e581bdb7877d8e22983ea9732e5f82cf3d735325d9654590c039e",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
       "state": "present",
       "uses": [
@@ -1925,7 +1925,7 @@
       ]
     },
     {
-      "digest": "sha256:f6bc270e0b8e4236c0214e95f86846e52ed5b09be5cf4cc7440de1acd98f3faa",
+      "digest": "sha256:561863d7efbdef4b489c64d331a60142ed80d9a72996a2e25e3d6a2a62bf4b7a",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
       "state": "present",
       "uses": [
@@ -1937,7 +1937,7 @@
       ]
     },
     {
-      "digest": "sha256:5005a254e80602bd6f2e833d190a00cdeca043cc5d2c059c882c7482f5985586",
+      "digest": "sha256:a5a3012b02ba4922d1a61539347eefcfbad0adf5db4c0128fc421c2b9e97e9aa",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml",
       "state": "present",
       "uses": [
@@ -1949,7 +1949,7 @@
       ]
     },
     {
-      "digest": "sha256:83f19fb6550d4e41d6401edfdb0c9dd13312f6cf81a29f8e9c874be4975f595d",
+      "digest": "sha256:43507e5326df2c64a01051014de9e3e45ee8fb4a10d1d1e568dc2cdb22174aab",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
       "state": "present",
       "uses": [
@@ -7806,125 +7806,6 @@
       ]
     },
     {
-      "digest": "sha256:eaaa1f4541d9f70f67b1163a21eb31ca3683617ebe78b719bbb80fe4e2da4800",
-      "path": "tools/standards_verifier/standards_verifier/checks/decision.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:6f5d35b507a7ef8098f2649ce20002ea27a017286c115be43b0e97faedc03994",
-      "path": "tools/standards_verifier/standards_verifier/checks/derived_evidence.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:7f0053fecf7e4dcc53bb77859f2dd3b10fd9a5b60ab0d4546a8fb3473fcc132d",
-      "path": "tools/standards_verifier/standards_verifier/checks/exact_text.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:741e4925d70dfd7245b0602ee3fdbb59b688399a94c7950bbc33547846478bf9",
-      "path": "tools/standards_verifier/standards_verifier/checks/git_index_paths.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:9e0b1a737bf48064b7e5bbda0a1336a15be5e297a6c215d0711f2aedd272f10f",
-      "path": "tools/standards_verifier/standards_verifier/checks/inclusion.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:a9ee048aa21130a96d4cc2a5f4bb50f1b9f1cdc08f9743474d7c9abce586cf9d",
-      "path": "tools/standards_verifier/standards_verifier/checks/keyed_relation.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:17424155d6cc9f1e19db80da36dbec58e5c0ac667575373a98183251e39110a9",
-      "path": "tools/standards_verifier/standards_verifier/checks/line_budget.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
       "digest": "sha256:0ebf225e5597c9df33c13ad3b52d6edb847bc0b3fa36a4df955c69f971825492",
       "path": "tools/standards_verifier/standards_verifier/checks/literal_matching.py",
       "state": "present",
@@ -7949,40 +7830,6 @@
       ]
     },
     {
-      "digest": "sha256:6fcd87a0954416b1e436a1050bf54c4becc9752afa8c3146d9fc34d066269805",
-      "path": "tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:3f428e69a23a237fdb6639919033a423e2a9d9480c17a41a49ba316eb0310988",
-      "path": "tools/standards_verifier/standards_verifier/checks/markdown_headings.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
       "digest": "sha256:6960efd3b3d28ef8a48568a47664a00eb935d483f66cc52860cd5c0cb28a6dd4",
       "path": "tools/standards_verifier/standards_verifier/checks/markdown_link_coverage.py",
       "state": "present",
@@ -8002,40 +7849,6 @@
     {
       "digest": "sha256:71f7e3097e33f7280843f1aa4b76efd364e4f0fb37d55c88ae673996417b007a",
       "path": "tools/standards_verifier/standards_verifier/checks/markdown_links.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:ef0ba7c0e17e909396f06601e94042c646b40a9341581d99817e5ccb5f8c0f66",
-      "path": "tools/standards_verifier/standards_verifier/checks/markdown_section_text.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:c4ac607c77d3c5984f1cae44873b435dec63bd46e815e0fb0bed7967faffc7b5",
-      "path": "tools/standards_verifier/standards_verifier/checks/markdown_structure.py",
       "state": "present",
       "uses": [
         {
@@ -8082,23 +7895,6 @@
     {
       "digest": "sha256:851911aac82981be25f52c9bad00a8f7a05ad0c048c8fef20320dfe72a8ed69d",
       "path": "tools/standards_verifier/standards_verifier/checks/metadata_route.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:be7208e9c45ab3fbb961b6a25ce900b7a6c85fcf594795d2d5fd7caf097588db",
-      "path": "tools/standards_verifier/standards_verifier/checks/path_state.py",
       "state": "present",
       "uses": [
         {
@@ -8172,59 +7968,8 @@
       ]
     },
     {
-      "digest": "sha256:b96b7f0408e62f5c402ea3cc5e95568fd4c0c90e4b62b50b5c4bec1adc6514fa",
-      "path": "tools/standards_verifier/standards_verifier/checks/reference_inventory.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:76081a140b498f717b11cc2f42ab9c839f7462724e2a47f12d943ed969b765f6",
-      "path": "tools/standards_verifier/standards_verifier/checks/relation.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
       "digest": "sha256:74dcf361fd2edc4f10f4a3e54494d54b19fad403972178002b9db56c437857f0",
       "path": "tools/standards_verifier/standards_verifier/checks/table.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
-        },
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:44818710e294aa9ceba6e2877e70878c18a5fb8b77f457118cdf7aeb07057f6a",
-      "path": "tools/standards_verifier/standards_verifier/checks/text.py",
       "state": "present",
       "uses": [
         {
@@ -13432,7 +13177,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:2cccc94b6d64ac16ace0019d0f1b226aa17413f91187e95b024798705c647638",
+    "digest": "sha256:55809fb76f041edc1c27a69f66106271646aa5084b445b76b0ce3bde5a943bb3",
     "uses": [
       {
         "check": "python-package-contract",

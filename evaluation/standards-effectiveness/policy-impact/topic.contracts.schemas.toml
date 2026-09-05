@@ -6,296 +6,296 @@ source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The Generated Contract profile projects declaration scope while retaining independently owned executable and domain semantics. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The Generated Contract profile projects declaration scope while retaining independently owned executable and domain semantics. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "profile.boundary.language-bindings"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Language-binding schemas and generated wrappers project boundary representation while domain semantics remain in their owner. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Language-binding schemas and generated wrappers project boundary representation while domain semantics remain in their owner. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "profile.boundary.ipc"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "IPC schemas, decoders, and dispatch handlers preserve distinct declaration and executable semantic authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "IPC schemas, decoders, and dispatch handlers preserve distinct declaration and executable semantic authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "workflow.build"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Build explicitly owns derivation actions rather than the content contracts they consume. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Build explicitly owns derivation actions rather than the content contracts they consume. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning distinguishes owned responsibility from referenced semantic authorities. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning distinguishes owned responsibility from referenced semantic authorities. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation preserves independently owned semantics across declaration and generated projections. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation preserves independently owned semantics across declaration and generated projections. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template records owned and referenced canonical authorities for contract-heavy work. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template records owned and referenced canonical authorities for contract-heavy work. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The canonical declaration contains representation and referenced executable semantics that require distinct ownership review. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The canonical declaration contains representation and referenced executable semantics that require distinct ownership review. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The generator projects declaration semantics and must not become an implicit owner for unrelated domain policy. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The generator projects declaration semantics and must not become an implicit owner for unrelated domain policy. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_contracts/standards_contracts/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The contract compiler delegates schema semantics while preserving their declared authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The contract compiler delegates schema semantics while preserving their declared authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The generated representation is a projection, not a transfer of canonical domain authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The generated representation is a projection, not a transfer of canonical domain authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_engine/standards_engine/tools.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The public facade interprets the declaration at a consumer boundary and must retain explicit semantic ownership. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The public facade interprets the declaration at a consumer boundary and must retain explicit semantic ownership. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The Generated Contract profile records compatibility and material invalidation scopes for generated versions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The Generated Contract profile records compatibility and material invalidation scopes for generated versions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "profile.application.library"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Library compatibility distinguishes coordinated internal modules from independently versioned public and persisted contracts. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Library compatibility distinguishes coordinated internal modules from independently versioned public and persisted contracts. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "profile.boundary.language-bindings"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Binding, native, and host artifacts use explicit compatibility cohorts rather than a shared version string as proof. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Binding, native, and host artifacts use explicit compatibility cohorts rather than a shared version string as proof. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "profile.boundary.ipc"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "IPC version markers and extra-field behavior belong to the selected producer-consumer compatibility promise. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "IPC version markers and extra-field behavior belong to the selected producer-consumer compatibility promise. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "profile.boundary.persistence"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Persistence consumes Contracts-owned supported-version, identity, migration, and invalidation decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Persistence consumes Contracts-owned supported-version, identity, migration, and invalidation decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "workflow.release"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Release units and version choices follow the Contracts-owned compatibility promise rather than workspace or artifact co-location. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Release units and version choices follow the Contracts-owned compatibility promise rather than workspace or artifact co-location. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning records version and identity-invalidation scope before implementation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning records version and identity-invalidation scope before implementation. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation rejects umbrella versions and unrelated identity invalidation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation rejects umbrella versions and unrelated identity invalidation. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template records version and identity-invalidation scopes for applicable contract-heavy changes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template records version and identity-invalidation scopes for applicable contract-heavy changes. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The interface schema declares interface, domain, handle, and provider versions whose scopes require review. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The interface schema declares interface, domain, handle, and provider versions whose scopes require review. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The generator projects interface version information into multiple generated consumers. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The generator projects interface version information into multiple generated consumers. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The generated contract carries version constraints and identity selections derived from the declaration. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The generated contract carries version constraints and identity selections derived from the declaration. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "tools/standards_engine/standards_engine/tools.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The public facade enforces declared handle versions at the generated boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The public facade enforces declared handle versions at the generated boundary. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "tools/standards_snapshots/standards_snapshots/model.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Content snapshot identity binds exact logical paths and raw bytes; interpretation contracts remain separately owned authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Content snapshot identity binds exact logical paths and raw bytes; interpretation contracts remain separately owned authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.version-scope-and-invalidation"
 consumer = "tools/standards_analysis/standards_analysis/kernel.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Analysis state identity binds exact material authority and dependency-valid decisions without an umbrella version bag. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Analysis state identity binds exact material authority and dependency-valid decisions without an umbrella version bag. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Router selects the Generated Contract profile when authored schemas or generated interfaces are in scope. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Router selects the Generated Contract profile when authored schemas or generated interfaces are in scope. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The Generated Contract profile specializes the general contract-semantic requirements for generated interfaces. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The Generated Contract profile specializes the general contract-semantic requirements for generated interfaces. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "workflow.build"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Build workflows preserve generated-output freshness while semantic correctness remains separately evidenced. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Build workflows preserve generated-output freshness while semantic correctness remains separately evidenced. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "workflow.tooling"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Tooling workflows select generators and independent validators appropriate to the declared contract. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Tooling workflows select generators and independent validators appropriate to the declared contract. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Planning distinguishes generated freshness, semantic correctness, and independent conformance evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning distinguishes generated freshness, semantic correctness, and independent conformance evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Implementation preserves the admitted generated-contract evidence domains. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation preserves the admitted generated-contract evidence domains. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The generator must project every supported schema semantic rather than only declaration freshness. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The generator must project every supported schema semantic rather than only declaration freshness. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Generated public models are a semantic projection of the canonical schema. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Generated public models are a semantic projection of the canonical schema. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The public package facade exposes the generated request and result algebra. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The public package facade exposes the generated request and result algebra. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/tools.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The agent facade decodes requests and returns results through the generated contract boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The agent facade decodes requests and returns results through the generated contract boundary. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
@@ -310,40 +310,40 @@ source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The profile requires an explicit schema dialect, vocabulary, and unsupported-keyword policy. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The profile requires an explicit schema dialect, vocabulary, and unsupported-keyword policy. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "topic.dependencies"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Unsupported schema semantics trigger an explicit implementation-versus-dependency decision. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Unsupported schema semantics trigger an explicit implementation-versus-dependency decision. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "tools/standards_engine/contracts/a1-contract.schema.json"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The schema declares its dialect and vocabulary authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The schema declares its dialect and vocabulary authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "tools/standards_contracts/standards_contracts/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The generator rejects unsupported schema semantics instead of silently omitting them. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The generator rejects unsupported schema semantics instead of silently omitting them. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
 consumer = "tools/standards_contracts/standards_contracts/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The compiler validates through the selected Draft 2020-12 implementation and rejects unsupported projection semantics. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The compiler validates through the selected Draft 2020-12 implementation and rejects unsupported projection semantics. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.schema-dialect-and-vocabulary"
@@ -358,101 +358,101 @@ source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/contracts/a1-interface.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The interface contract owns operation roots, capabilities, and independent compatibility versions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The interface contract owns operation roots, capabilities, and independent compatibility versions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_contracts/standards_contracts/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The contract compiler closes the reachable schema and interface algebra. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The contract compiler closes the reachable schema and interface algebra. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/contracts/generated/agent-tools.json"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Agent tools are a disposable exact projection of the compiled public operations. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Agent tools are a disposable exact projection of the compiled public operations. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/contracts/examples/a1-examples.json"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Authored v11 examples exercise public operation, result, and inspection shapes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Authored v11 examples exercise public operation, result, and inspection shapes. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/contracts/README.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Contract documentation projects the same authority and validation boundaries. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Contract documentation projects the same authority and validation boundaries. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_engine/standards_engine/rendering.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Rendering exhaustively consumes the current generated result algebra. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Rendering exhaustively consumes the current generated result algebra. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Private import fixtures prove generated and handwritten consumers use only public roots. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Private import fixtures prove generated and handwritten consumers use only public roots. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_analysis/standards_analysis/coverage.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Authored coverage claims remain separate from Analysis-owned validation and derived certificates. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Authored coverage claims remain separate from Analysis-owned validation and derived certificates. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_analysis/tests/test_coverage.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The fixture proves stale claims cannot become current certificates and exact authorization, revocation, and evidence authority is enforced. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The fixture proves stale claims cannot become current certificates and exact authorization, revocation, and evidence authority is enforced. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_contracts/standards_contracts/errors.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Contract compilation and validation failures retain typed semantic ownership. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Contract compilation and validation failures retain typed semantic ownership. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_contracts/standards_contracts/model.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Contract models represent the canonical compiled schema and public operation algebra. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Contract models represent the canonical compiled schema and public operation algebra. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.generated-semantic-conformance"
 consumer = "tools/standards_verifier/standards_verifier/checks/contract_projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The verifier proves generated projection freshness and declared contract semantics through the public compiler. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The verifier proves generated projection freshness and declared contract semantics through the public compiler. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "topic.contracts.declaration-and-semantic-authority"
 consumer = "tools/standards_analysis/standards_analysis/coverage_publication.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Owns exact receipt evidence, authorization binding, and repository readback; source changes require review of those observable behaviors."
+evidence_owner = "review:consumer"
+rationale = "Owns exact receipt evidence, authorization binding, and repository readback; source changes require review of those observable behaviors. Review binds this consumer and relationship; it requires substantive evidence before certification."

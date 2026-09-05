@@ -6,13 +6,13 @@ source = "core.simplicity-and-complection"
 consumer = "topic.architecture"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Architecture specializes artifact-level simplicity and tests the composition after introducing a Seam. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Architecture specializes artifact-level simplicity and tests the composition after introducing a Seam. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "core.simplicity-and-complection"
 consumer = "workflow.verification"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Verification keeps correctness evidence distinct from simplicity evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Verification keeps correctness evidence distinct from simplicity evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."

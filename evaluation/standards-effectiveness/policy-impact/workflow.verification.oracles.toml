@@ -6,48 +6,48 @@ source = "workflow.verification.evidence-oracle-boundary"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Planning identifies the deciding oracle and separates freshness, local agreement, and external conformance. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Planning identifies the deciding oracle and separates freshness, local agreement, and external conformance. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Implementation preserves admitted oracle fidelity and rejects weaker substitutes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Implementation preserves admitted oracle fidelity and rejects weaker substitutes. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "The plan template records material claim, domain, oracle, unsupported-domain, and negative-failure evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "The plan template records material claim, domain, oracle, unsupported-domain, and negative-failure evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "workflow.documentation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Documentation preserves durable claim and evidence provenance without becoming the oracle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Documentation preserves durable claim and evidence provenance without becoming the oracle. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.negative-fixture-isolation"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Negative fixture retains unrelated plan preconditions while omitting the systemic audit under test. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Negative fixture retains unrelated plan preconditions while omitting the systemic audit under test. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.differential-evidence"
 consumer = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Evidence report records the sampled equality counterexample and independent specification oracle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+evidence_owner = "review:consumer"
+rationale = "Evidence report records the sampled equality counterexample and independent specification oracle. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.differential-evidence"
@@ -62,13 +62,13 @@ source = "workflow.verification.evidence-oracle-boundary"
 consumer = "tools/standards_engine/tests/test_coverage_publication.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Exercises the public audit, verification, application, recovery, and independent readback path. A graph registration captures test inputs; evidence of passing requires executing this test."
+evidence_owner = "review:consumer"
+rationale = "Exercises the public audit, verification, application, recovery, and independent readback path. A graph registration captures test inputs; evidence of passing requires executing this test. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "tools/standards_engine/tests/test_evidence_maintenance.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:policy-semantic-impact"
-rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface."
+evidence_owner = "review:consumer"
+rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface. Review binds this consumer and relationship; it requires substantive evidence before certification."
