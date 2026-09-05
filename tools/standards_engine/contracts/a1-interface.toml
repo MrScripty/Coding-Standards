@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 23
+interface_schema_version = 24
 request_contract_version = 5
 result_projection_version = 6
 
@@ -110,3 +110,9 @@ id = "verify_proposal"
 input_definition = "VerifyProposalCall"
 result_definitions = ["VerifyProposalResult", "RejectedResult"]
 capability = "standards.proposal.read"
+
+[[operations]]
+id = "maintain_evidence"
+input_definition = "MaintainEvidenceCall"
+result_definitions = ["MaintainEvidenceResult", "RejectedResult"]
+capability = "standards.verify"

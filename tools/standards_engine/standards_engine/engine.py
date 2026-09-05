@@ -12,6 +12,7 @@ from pathlib import Path
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
 from tools.repository_git.repository_git import (
     CandidateFile,
+    CandidateCommitMessage,
     GitRepository,
     GitRepositoryError,
     RepositoryPath,
@@ -116,6 +117,8 @@ from ._generated_contract import (
     CompleteResult,
     ConsumerDispositionSubmission,
     CoverageAttestationSubmission,
+    MaintainEvidenceCall,
+    MaintainEvidenceResult,
     VerifyRepositoryCall,
     VerifyRepositoryResult,
     VerifyProposalCall,
@@ -487,6 +490,134 @@ class StandardsEngine:
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def maintain_evidence(
+        self, call: MaintainEvidenceCall
+    ) -> MaintainEvidenceResult | RejectedResult:
+        """Preview or apply explicit evidence maintenance to the working tree.
+
+        This operation never certifies policy completeness or publishes a Git ref.
+        """
+        from .evidence_maintenance import revise_evidence
+        from .logical_authoring import _refresh_suite_input_projection
+
+        try:
+            expected = RepositoryRevision(call.expected_revision)
+            if self._repository.current_revision() != expected:
+                return self._reject(
+                    "EVIDENCE.REVISION_STALE",
+                    "unavailable",
+                    "Repository revision changed before evidence maintenance.",
+                )
+            construct_authorization_record(
+                self._execution_context,
+                AuthorizationRequest(
+                    "maintain-evidence",
+                    "evidence-maintenance",
+                    analysis_value_digest(call.as_contract()),
+                    "standards.verify",
+                    tuple(
+                        EvidenceReference(**item.as_contract())
+                        for item in call.evidence
+                    ),
+                ),
+            )
+            paths = self._repository.revision_paths(expected)
+            files = {
+                str(path): self._repository.read_file(expected, path) for path in paths
+            }
+            compiled = self._compile(FrozenContentSource(files))
+            requirements = {
+                coverage_requirement_id(compiled.coverage.requirements[s], v)
+                for s, v in compiled.coverage.views.items()
+            }
+            proposed = revise_evidence(files, call.plan.as_contract(), requirements)
+            _refresh_suite_input_projection(proposed, frozenset(files), tuple(files))
+            self._compile(FrozenContentSource(proposed))
+            changed = sorted(p for p, data in proposed.items() if files.get(p) != data)
+            removed = sorted(set(files) - set(proposed))
+            if not changed and not removed:
+                return self._reject(
+                    "EVIDENCE.NO_EFFECT",
+                    "invalid",
+                    "The maintenance plan changes no evidence registrations.",
+                )
+            with self._repository.materialize_candidate(
+                expected,
+                tuple(
+                    CandidateFile(RepositoryPath.parse(p), proposed[p], False)
+                    for p in changed
+                ),
+                removals=tuple(RepositoryPath.parse(p) for p in removed),
+                commit=CandidateCommitMessage(
+                    "chore(evidence): maintain standards evidence",
+                    "Apply explicitly selected evidence retirements and consumer registrations.",
+                ),
+            ) as candidate:
+                verification = _verification_report(
+                    self._application_verifier(candidate.root)
+                )
+            if call.apply and verification["passed"]:
+                root = self._repository.root
+                if self._repository.current_revision() != expected:
+                    return self._reject(
+                        "EVIDENCE.REVISION_STALE",
+                        "unavailable",
+                        "Repository revision changed during evidence verification.",
+                    )
+                for path in [*changed, *removed]:
+                    target = root / path
+                    if target.is_symlink() or any(
+                        parent.is_symlink()
+                        for parent in target.parents
+                        if parent != root and root in parent.parents
+                    ):
+                        return self._reject(
+                            "EVIDENCE.WORKTREE_CHANGED",
+                            "unavailable",
+                            "A maintenance path contains a symlink.",
+                        )
+                    actual = target.read_bytes() if target.is_file() else None
+                    if actual != files.get(path):
+                        return self._reject(
+                            "EVIDENCE.WORKTREE_CHANGED",
+                            "unavailable",
+                            f"Maintenance would overwrite changed content: {path}",
+                        )
+                written = []
+                try:
+                    for path in changed:
+                        target = root / path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        target.write_bytes(proposed[path])
+                        written.append(path)
+                    for path in removed:
+                        (root / path).unlink()
+                        written.append(path)
+                except OSError:
+                    for path in reversed(written):
+                        if path in files:
+                            (root / path).write_bytes(files[path])
+                        else:
+                            (root / path).unlink(missing_ok=True)
+                    raise
+            return MaintainEvidenceResult.from_value(
+                {
+                    "kind": "maintain-evidence-result",
+                    "applied": bool(call.apply and verification["passed"]),
+                    "changed_files": changed,
+                    "removed_files": removed,
+                    "verification": verification,
+                }
+            )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+        except OSError:
+            return self._reject(
+                "EVIDENCE.MAINTENANCE_UNAVAILABLE",
+                "unavailable",
+                "Evidence maintenance could not complete; inspect working-tree state before retrying.",
+            )
 
     def verify_repository(
         self, call: VerifyRepositoryCall
@@ -948,7 +1079,12 @@ class StandardsEngine:
             base_paths = set(revision.base_repository_paths)
             proposed_paths = set(projection.repository_paths)
             self._publish_coverage_into_candidate(
-                readiness, revision, projection, base_files, proposed_files, proposed_paths
+                readiness,
+                revision,
+                projection,
+                base_files,
+                proposed_files,
+                proposed_paths,
             )
             added_paths = proposed_paths - base_paths
             removed_paths = base_paths - proposed_paths
@@ -1931,9 +2067,7 @@ class StandardsEngine:
                 "requirement_id": coverage.requirement_id,
                 "conclusion": claim.conclusion,
                 "evidence": [item.as_contract() for item in evidence],
-                "explicit_exclusions": [
-                    item.as_contract() for item in exclusions
-                ],
+                "explicit_exclusions": [item.as_contract() for item in exclusions],
                 "rationale": claim.rationale,
                 "auditor_provenance": claim.auditor_provenance,
                 "schema_version": 4,
@@ -2658,7 +2792,8 @@ class StandardsEngine:
                             ),
                             "status": (
                                 "current-attestation"
-                                if unit.id in compiled.repository_coverage.covered_subjects
+                                if unit.id
+                                in compiled.repository_coverage.covered_subjects
                                 else "review-required"
                             ),
                         }

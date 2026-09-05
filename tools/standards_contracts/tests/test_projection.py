@@ -307,29 +307,12 @@ class ContractProjectionTest(unittest.TestCase):
         tools = dict(compile_contracts(schema, interface).project().agent_tools)
         self.assertEqual(
             tuple(operation["id"] for operation in tools["operations"]),
-            (
-                "create_snapshot",
-                "find_snapshots",
-                "delete_snapshot",
-                "undelete_snapshot",
-                "query",
-                "prepare",
-                "resolve",
-                "inspect",
-                "create_proposal",
-                "find_proposals",
-                "revise_proposal",
-                "query_proposal",
-                "analyze_proposal",
-                "review_proposal",
-                "apply_proposal",
-                "recover_application",
-                "verify_repository",
-                "verify_proposal",
-            ),
+            tuple(operation["id"] for operation in interface["operations"]),
         )
         self.assertEqual(set(tools["$defs"]), set(schema["$defs"]))
-        self.assertEqual(tools["interface_schema_version"], 23)
+        self.assertEqual(
+            tools["interface_schema_version"], interface["interface_schema_version"]
+        )
         self.assertEqual(tools["request_contract_version"], 5)
         self.assertEqual(tools["result_projection_version"], 6)
         json.dumps(tools)

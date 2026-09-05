@@ -243,6 +243,7 @@ _RESULT_RENDERERS: dict[
     Callable[[Mapping[str, object]], str],
 ] = {
     "verify-repository-result": _verification,
+    "maintain-evidence-result": _verification,
     "verify-proposal-result": _verification,
     "pending-result": _pending,
     "complete-result": _complete,

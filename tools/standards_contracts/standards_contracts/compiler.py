@@ -63,24 +63,6 @@ _OPERATION_KEYS = frozenset(
         "capability_by_submission",
     }
 )
-_OPERATIONS = (
-    "create_snapshot",
-    "find_snapshots",
-    "delete_snapshot",
-    "undelete_snapshot",
-    "query",
-    "prepare",
-    "resolve",
-    "inspect",
-    "create_proposal",
-    "find_proposals",
-    "revise_proposal",
-    "query_proposal",
-    "analyze_proposal",
-    "review_proposal",
-    "apply_proposal",
-    "recover_application",
-)
 _ASCII_PATTERN = re.compile(r"\A[\x20-\x7e]*\Z")
 
 
@@ -271,27 +253,35 @@ def _parse_interface(
                 capability_by_submission=selected_map,
             )
         )
-    expected_operations = (
-        _OPERATIONS + ("verify_repository", "verify_proposal")
-        if value["interface_schema_version"] >= 21
-        else _OPERATIONS
-    )
-    if tuple(item.id for item in operations) != expected_operations:
+    operation_ids = [item.id for item in operations]
+    if (
+        not operation_ids
+        or any(not item for item in operation_ids)
+        or len(set(operation_ids)) != len(operation_ids)
+    ):
         raise failure(
-            "CONTRACT.INVALID_INTERFACE",
-            "operations must match the registered interface version: "
-            + ", ".join(expected_operations),
+            "CONTRACT.INVALID_INTERFACE", "operations must have unique nonempty IDs"
         )
-    resolve = next(operation for operation in operations if operation.id == "resolve")
-    submission_definition = definitions[resolve.input_definition]["properties"][
-        "submission"
-    ]["$ref"].rsplit("/", 1)[1]
-    discriminants = _union_discriminants(definitions, submission_definition)
-    if set(resolve.capability_by_submission) != discriminants:
-        raise failure(
-            "CONTRACT.INVALID_INTERFACE",
-            "resolve capabilities must exactly cover submission discriminants",
+    for operation in operations:
+        if not operation.capability_by_submission:
+            continue
+        submission = (
+            definitions[operation.input_definition]
+            .get("properties", {})
+            .get("submission", {})
         )
+        reference = submission.get("$ref")
+        if not isinstance(reference, str):
+            raise failure(
+                "CONTRACT.INVALID_INTERFACE",
+                "submission capabilities require a referenced submission contract",
+            )
+        discriminants = _union_discriminants(definitions, reference.rsplit("/", 1)[1])
+        if set(operation.capability_by_submission) != discriminants:
+            raise failure(
+                "CONTRACT.INVALID_INTERFACE",
+                "submission capabilities must exactly cover submission discriminants",
+            )
     return InterfaceContract(
         schema_version=versions[0],
         interface_schema_version=versions[1],

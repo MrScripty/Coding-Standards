@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 23,
+  "interface_schema_version": 24,
   "examples": [
     {
       "name": "create-snapshot",
@@ -404,6 +404,34 @@
         "kind": "audit-policy-unit",
         "policy": "workflow.planning.written-plan-applicability",
         "rationale": "Review and publish coverage through Engine audit authority."
+      }
+    },
+    {
+      "name": "preview-evidence-maintenance",
+      "definition": "MaintainEvidenceCall",
+      "value": {
+        "kind": "maintain-evidence",
+        "expected_revision": "0000000000000000000000000000000000000000",
+        "evidence": [
+          {
+            "provider_contract": "repository-content",
+            "provider_contract_version": "1",
+            "id": "docs/audits/stale-certificate-review-2026-09-04.md",
+            "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "plan": {
+          "prune_stale_certificates": true,
+          "retire_suites": [],
+          "retire_checks": [],
+          "retire_inputs": [],
+          "suite_descriptions": [],
+          "replacement_evidence_owner": "suite:policy-semantic-impact",
+          "replacement_evidence_rationale": "Checks declaration integrity; semantic review is separate.",
+          "relationship_updates": [],
+          "consumer_registrations": []
+        },
+        "apply": false
       }
     }
   ]

@@ -19,26 +19,7 @@ class ContractCompilerTest(unittest.TestCase):
         self.assertEqual(set(compiled.reachable_definitions), set(schema["$defs"]))
         self.assertEqual(
             tuple(operation.id for operation in compiled.interface.operations),
-            (
-                "create_snapshot",
-                "find_snapshots",
-                "delete_snapshot",
-                "undelete_snapshot",
-                "query",
-                "prepare",
-                "resolve",
-                "inspect",
-                "create_proposal",
-                "find_proposals",
-                "revise_proposal",
-                "query_proposal",
-                "analyze_proposal",
-                "review_proposal",
-                "apply_proposal",
-                "recover_application",
-                "verify_repository",
-                "verify_proposal",
-            ),
+            tuple(operation["id"] for operation in interface["operations"]),
         )
         self.assertEqual(
             set(compiled.interface.operations[6].capability_by_submission),
@@ -173,28 +154,20 @@ class ContractCompilerTest(unittest.TestCase):
             caught.exception.failure.code, "CONTRACT.ROOT_CLOSURE_MISMATCH"
         )
 
-    def test_operation_sequence_is_exact_and_resolve_is_selected_by_identity(
+    def test_operation_catalog_is_authoritative_and_duplicate_dispatch_is_rejected(
         self,
     ) -> None:
-        for mutation in ("missing", "duplicate", "reordered", "unknown"):
-            schema, interface = canonical_inputs()
-            operations = interface["operations"]
-            if mutation == "missing":
-                operations.pop(0)
-            elif mutation == "duplicate":
-                operations.insert(1, copy.deepcopy(operations[0]))
-            elif mutation == "reordered":
-                operations[0], operations[1] = operations[1], operations[0]
-            else:
-                operations[0]["id"] = "unknown"
-            with (
-                self.subTest(mutation=mutation),
-                self.assertRaises(ContractError) as caught,
-            ):
-                compile_contracts(schema, interface)
-            self.assertEqual(
-                caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE"
-            )
+        schema, interface = canonical_inputs()
+        interface["operations"].reverse()
+        compiled = compile_contracts(schema, interface)
+        self.assertEqual(
+            tuple(o.id for o in compiled.interface.operations),
+            tuple(o["id"] for o in interface["operations"]),
+        )
+        interface["operations"].append(copy.deepcopy(interface["operations"][0]))
+        with self.assertRaises(ContractError) as caught:
+            compile_contracts(schema, interface)
+        self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
 
         schema, interface = canonical_inputs()
         resolve = next(

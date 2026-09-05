@@ -135,3 +135,14 @@ Repository verification does not create an accepted Snapshot. Snapshot capture
 still reads the committed revision. Proposal verification materializes an
 isolated candidate and runs the same checkpoint used by application; it does
 not publish a ref or supply review decisions. Application rechecks the candidate.
+
+## Evidence Catalog Maintenance
+
+Use `maintain_evidence` for explicit certificate/check/suite retirements,
+evidence descriptions, and consumer registrations. Discover its schema and
+supply the current Git revision plus exact review evidence. Preview with
+`apply: false`; inspect changed/removed paths and `verification.passed`.
+`apply: true` verifies the candidate again and updates only unchanged affected
+working-tree paths. Commit the resulting maintenance with its review record.
+This operation does not change normative policy, certify completeness, publish
+Git refs, or require replacement attestations for deleted stale claims.

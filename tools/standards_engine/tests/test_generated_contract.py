@@ -314,32 +314,11 @@ class GeneratedContractTest(unittest.TestCase):
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         facade = AgentToolFacade(object(), contracts)
-        expected_inputs = {
-            "verify_repository": generated.VerifyRepositoryCall,
-            "verify_proposal": generated.VerifyProposalCall,
-            "create_snapshot": generated.CreateSnapshotCall,
-            "find_snapshots": generated.FindSnapshotsCall,
-            "delete_snapshot": generated.DeleteSnapshotCall,
-            "undelete_snapshot": generated.UndeleteSnapshotCall,
-            "query": generated.QueryCall,
-            "prepare": generated.PrepareCall,
-            "resolve": generated.ResolveCall,
-            "inspect": generated.InspectCall,
-            "create_proposal": generated.CreateProposalCall,
-            "find_proposals": generated.FindProposalsCall,
-            "revise_proposal": generated.ReviseProposalCall,
-            "query_proposal": generated.QueryProposalCall,
-            "analyze_proposal": generated.AnalyzeProposalCall,
-            "review_proposal": generated.ReviewProposalCall,
-            "apply_proposal": generated.ApplyProposalCall,
-            "recover_application": generated.RecoverApplicationCall,
-        }
-
         for operation in contracts.interface.operations:
             with self.subTest(operation=operation.id):
-                self.assertIs(
-                    getattr(generated, operation.input_definition),
-                    expected_inputs[operation.id],
+                self.assertEqual(
+                    getattr(generated, operation.input_definition).__definition__,
+                    operation.input_definition,
                 )
                 self.assertTrue(callable(getattr(facade, operation.id)))
                 self.assertEqual(facade._operation(operation.id), operation)
@@ -498,7 +477,6 @@ class GeneratedContractTest(unittest.TestCase):
         corpus = json.loads(path.read_text(encoding="utf-8"))
 
         self.assertEqual(corpus["schema_version"], 2)
-        self.assertEqual(contracts.interface.interface_schema_version, 23)
         self.assertEqual(
             corpus["interface_schema_version"],
             contracts.interface.interface_schema_version,

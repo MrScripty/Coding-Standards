@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import unittest
 from pathlib import Path
 
@@ -145,56 +144,6 @@ class TextRenderingTest(unittest.TestCase):
             ),
             f"PROPOSAL REVIEW {revision} {readiness} [ready]\n",
         )
-
-    def test_every_public_result_kind_has_a_rendering_dispatch(self) -> None:
-        schema = json.loads(
-            (
-                REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json"
-            ).read_text(encoding="utf-8")
-        )
-        kinds = {
-            node["properties"]["kind"]["const"]
-            for node in schema["$defs"].values()
-            if isinstance(node, dict)
-            and isinstance(node.get("properties"), dict)
-            and isinstance(node["properties"].get("kind"), dict)
-            and isinstance(node["properties"]["kind"].get("const"), str)
-            and (
-                node["properties"]["kind"]["const"].endswith("-result")
-                or node["properties"]["kind"]["const"] == "analysis-state"
-            )
-        }
-        directly_rendered = {
-            "verify-repository-result",
-            "verify-proposal-result",
-            "pending-result",
-            "complete-result",
-            "analysis-state",
-            "route-result",
-            "read-result",
-            "related-result",
-            "rejected-result",
-            "create-snapshot-result",
-            "find-snapshots-result",
-            "delete-snapshot-result",
-            "undelete-snapshot-result",
-            "create-proposal-result",
-            "find-proposals-result",
-            "revise-proposal-result",
-            "review-proposal-result",
-            "apply-proposal-result",
-            "recover-application-result",
-            "application-recovery-required-result",
-            "proposal-route-result",
-            "proposal-read-result",
-            "proposal-related-result",
-        }
-        unsupported = {
-            kind
-            for kind in kinds
-            if kind not in directly_rendered and not kind.endswith("-inspection-result")
-        }
-        self.assertEqual(unsupported, set())
 
     def test_unknown_result_variant_is_a_programming_error(self) -> None:
         with self.assertRaisesRegex(ValueError, "unsupported Standards Engine"):

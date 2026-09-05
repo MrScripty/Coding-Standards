@@ -33,6 +33,7 @@ from . import _generated_contract as generated_contract
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from ._generated_contract import (
+    MaintainEvidenceCall,
     VerifyRepositoryCall,
     VerifyProposalCall,
     AnalyzeProposalCall,
@@ -200,6 +201,14 @@ class AgentToolFacade:
         if isinstance(call, dict):
             return call
         return self._result("query_proposal", self._engine.query_proposal(call))
+
+    def maintain_evidence(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "maintain_evidence", arguments, MaintainEvidenceCall
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result("maintain_evidence", self._engine.maintain_evidence(call))
 
     def verify_repository(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(

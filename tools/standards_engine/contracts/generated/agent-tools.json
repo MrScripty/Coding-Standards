@@ -1803,6 +1803,141 @@
       ],
       "type": "object"
     },
+    "EvidenceCheckRetirement": {
+      "additionalProperties": false,
+      "properties": {
+        "check": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "suite": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "suite",
+        "check"
+      ],
+      "type": "object"
+    },
+    "EvidenceConsumerRegistration": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_kind": {
+          "enum": [
+            "implementation-artifact",
+            "fixture"
+          ],
+          "type": "string"
+        },
+        "evidence_owner": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "rationale": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "relation": {
+          "enum": [
+            "implementation-projection",
+            "fixture-projection"
+          ],
+          "type": "string"
+        },
+        "source_policies": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "path",
+        "artifact_kind",
+        "source_policies",
+        "relation",
+        "evidence_owner",
+        "rationale"
+      ],
+      "type": "object"
+    },
+    "EvidenceMaintenancePlan": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer_registrations": {
+          "items": {
+            "$ref": "#/$defs/EvidenceConsumerRegistration"
+          },
+          "type": "array"
+        },
+        "prune_stale_certificates": {
+          "type": "boolean"
+        },
+        "relationship_updates": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRelationshipUpdate"
+          },
+          "type": "array"
+        },
+        "replacement_evidence_owner": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "replacement_evidence_rationale": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "retire_checks": {
+          "items": {
+            "$ref": "#/$defs/EvidenceCheckRetirement"
+          },
+          "type": "array"
+        },
+        "retire_inputs": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "retire_suites": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "suite_descriptions": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSuiteDescription"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "prune_stale_certificates",
+        "retire_suites",
+        "retire_checks",
+        "retire_inputs",
+        "suite_descriptions",
+        "replacement_evidence_owner",
+        "replacement_evidence_rationale",
+        "relationship_updates",
+        "consumer_registrations"
+      ],
+      "type": "object"
+    },
     "EvidenceReference": {
       "additionalProperties": false,
       "properties": {
@@ -1824,6 +1959,57 @@
         "digest",
         "provider_contract",
         "provider_contract_version"
+      ],
+      "type": "object"
+    },
+    "EvidenceRelationshipUpdate": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "evidence_owner": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "rationale": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "relation": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_policy": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_policy",
+        "consumer",
+        "relation",
+        "evidence_owner",
+        "rationale"
+      ],
+      "type": "object"
+    },
+    "EvidenceSuiteDescription": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "suite": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "suite",
+        "description"
       ],
       "type": "object"
     },
@@ -2420,6 +2606,75 @@
           "$ref": "#/$defs/AnalysisChildInspectionResult"
         }
       ]
+    },
+    "MaintainEvidenceCall": {
+      "additionalProperties": false,
+      "properties": {
+        "apply": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "expected_revision": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "maintain-evidence"
+        },
+        "plan": {
+          "$ref": "#/$defs/EvidenceMaintenancePlan"
+        }
+      },
+      "required": [
+        "kind",
+        "expected_revision",
+        "evidence",
+        "plan",
+        "apply"
+      ],
+      "type": "object"
+    },
+    "MaintainEvidenceResult": {
+      "additionalProperties": false,
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "changed_files": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "const": "maintain-evidence-result"
+        },
+        "removed_files": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "verification": {
+          "$ref": "#/$defs/VerificationReport"
+        }
+      },
+      "required": [
+        "kind",
+        "applied",
+        "changed_files",
+        "removed_files",
+        "verification"
+      ],
+      "type": "object"
     },
     "ModuleRelationshipKey": {
       "additionalProperties": false,
@@ -5297,7 +5552,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 23,
+  "interface_schema_version": 24,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -5522,6 +5777,18 @@
       },
       "result_definitions": [
         "VerifyProposalResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.verify",
+      "id": "maintain_evidence",
+      "input_definition": "MaintainEvidenceCall",
+      "input_schema": {
+        "$ref": "#/$defs/MaintainEvidenceCall"
+      },
+      "result_definitions": [
+        "MaintainEvidenceResult",
         "RejectedResult"
       ]
     }

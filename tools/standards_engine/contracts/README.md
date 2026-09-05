@@ -46,10 +46,11 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `review_proposal` | `ReviewProposalCall` | `ReviewProposalResult` | `RejectedResult` |
 | `apply_proposal` | `ApplyProposalCall` | `ApplyProposalResult` or `ApplicationRecoveryRequiredResult` | `RejectedResult` |
 | `recover_application` | `RecoverApplicationCall` | `RecoverApplicationResult` or `ApplicationRecoveryRequiredResult` | `RejectedResult` |
+| `maintain_evidence` | `MaintainEvidenceCall` | `MaintainEvidenceResult` | `RejectedResult` |
 | `verify_repository` | `VerifyRepositoryCall` | `VerifyRepositoryResult` | `RejectedResult` |
 | `verify_proposal` | `VerifyProposalCall` | `VerifyProposalResult` | `RejectedResult` |
 
-Interface schema version 23 adds `audit-policy-unit` edits for publishing
+Interface schema version 24 adds `audit-policy-unit` edits for publishing
 coverage reviews through the configured Engine audit authority. The edit names
 a registered policy and rationale; it requests review and publication without
 altering standards text. Current certificates need no renewal. Analysis and
@@ -179,3 +180,10 @@ validates every authored example through the same production contract runtime.
 Generated freshness is not semantic conformance evidence by itself; the
 registered contract suite separately exercises the selected Draft validator,
 public behavior, identity equality, and unsupported-profile outcomes.
+
+Evidence catalog maintenance accepts explicit retirements and consumer updates.
+Use `apply: false` to inspect the verified candidate and `apply: true` to write
+that candidate's evidence changes to the working tree. It binds an expected Git
+revision, verifies supplied review evidence, and refuses to overwrite changed
+paths. It never certifies completeness or publishes a Git ref. Normative edits
+continue to use proposals; commit evidence maintenance with its review record.

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v23",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v24",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -114,6 +114,12 @@
     },
     {
       "$ref": "#/$defs/VerifyProposalResult"
+    },
+    {
+      "$ref": "#/$defs/MaintainEvidenceCall"
+    },
+    {
+      "$ref": "#/$defs/MaintainEvidenceResult"
     }
   ],
   "$defs": {
@@ -5412,6 +5418,261 @@
         }
       },
       "additionalProperties": false
+    },
+    "EvidenceCheckRetirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "suite",
+        "check"
+      ],
+      "properties": {
+        "suite": {
+          "type": "string",
+          "minLength": 1
+        },
+        "check": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "EvidenceSuiteDescription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "suite",
+        "description"
+      ],
+      "properties": {
+        "suite": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "EvidenceRelationshipUpdate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_policy",
+        "consumer",
+        "relation",
+        "evidence_owner",
+        "rationale"
+      ],
+      "properties": {
+        "source_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consumer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "EvidenceConsumerRegistration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "artifact_kind",
+        "source_policies",
+        "relation",
+        "evidence_owner",
+        "rationale"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_kind": {
+          "type": "string",
+          "enum": [
+            "implementation-artifact",
+            "fixture"
+          ]
+        },
+        "source_policies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "implementation-projection",
+            "fixture-projection"
+          ]
+        },
+        "evidence_owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "EvidenceMaintenancePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prune_stale_certificates",
+        "retire_suites",
+        "retire_checks",
+        "retire_inputs",
+        "suite_descriptions",
+        "replacement_evidence_owner",
+        "replacement_evidence_rationale",
+        "relationship_updates",
+        "consumer_registrations"
+      ],
+      "properties": {
+        "prune_stale_certificates": {
+          "type": "boolean"
+        },
+        "retire_suites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "retire_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceCheckRetirement"
+          }
+        },
+        "retire_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "suite_descriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceSuiteDescription"
+          }
+        },
+        "replacement_evidence_owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replacement_evidence_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relationship_updates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceRelationshipUpdate"
+          }
+        },
+        "consumer_registrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceConsumerRegistration"
+          }
+        }
+      }
+    },
+    "MaintainEvidenceCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "expected_revision",
+        "evidence",
+        "plan",
+        "apply"
+      ],
+      "properties": {
+        "kind": {
+          "const": "maintain-evidence"
+        },
+        "expected_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "minItems": 1
+        },
+        "plan": {
+          "$ref": "#/$defs/EvidenceMaintenancePlan"
+        },
+        "apply": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MaintainEvidenceResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "applied",
+        "changed_files",
+        "removed_files",
+        "verification"
+      ],
+      "properties": {
+        "kind": {
+          "const": "maintain-evidence-result"
+        },
+        "applied": {
+          "type": "boolean"
+        },
+        "changed_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "removed_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/VerificationReport"
+        }
+      }
     }
   }
 }
