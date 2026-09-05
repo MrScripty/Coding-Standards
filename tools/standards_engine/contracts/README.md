@@ -73,6 +73,22 @@ native and focused operations; the Python facade and reference CLI keep their
 existing advanced capabilities. Schema generation remains the single shape
 owner for both catalogs.
 
+## Client Presentation And Focused Continuations
+
+Interface version 29 adds `FocusedQueryNextOperation`. Focused navigation
+projects native query continuations to `route`, `read`, or `related`, retaining
+snapshot, target, and request kind. Native `query` keeps its native continuation
+names; native and focused results share the expanded continuation union.
+No request, domain identity, analysis replay, or persistence version changes.
+
+MCP input schemas expand canonical references inline until recursion, then keep
+the recursive reference and its complete definition closure. This makes the
+containing authoring objects and all edit variants explicit to clients without
+weakening canonical validation or imposing a recursive expression depth cap.
+Reference siblings retain conjunction semantics. Output schemas keep their
+existing reference closures. This is transport presentation, not new domain
+schema authority. Reconnect clients after updating the advertised catalog.
+
 ## Public Operations
 
 | Operation | Input | Success result | Expected rejection |

@@ -2554,6 +2554,37 @@
       ],
       "type": "object"
     },
+    "FocusedQueryNextOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "route",
+            "read",
+            "related"
+          ]
+        },
+        "request_kind": {
+          "enum": [
+            "route",
+            "read",
+            "related"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "operation",
+        "request_kind",
+        "snapshot"
+      ],
+      "type": "object"
+    },
     "GeneralSelectionReason": {
       "additionalProperties": false,
       "properties": {
@@ -2936,6 +2967,9 @@
         },
         {
           "$ref": "#/$defs/InspectNextOperation"
+        },
+        {
+          "$ref": "#/$defs/FocusedQueryNextOperation"
         }
       ]
     },
@@ -6099,7 +6133,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 28,
+  "interface_schema_version": 29,
   "operations": [
     {
       "capability": "standards.snapshot.create",

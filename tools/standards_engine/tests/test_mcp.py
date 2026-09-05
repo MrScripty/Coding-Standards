@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import redirect_stderr
 import io
+from copy import deepcopy
 import json
 import os
 from pathlib import Path
@@ -13,7 +14,12 @@ from unittest.mock import patch
 from jsonschema import Draft202012Validator
 
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
-from tools.standards_engine.standards_engine.mcp import MCPServer, serve, tool_catalog
+from tools.standards_engine.standards_engine.mcp import (
+    MCPServer,
+    serve,
+    tool_catalog,
+    input_schema,
+)
 from tools.standards_engine.standards_engine.tools import _contracts
 
 
@@ -101,6 +107,100 @@ class MCPTest(unittest.TestCase):
             server.dispatch(request("tools/call", {"name": "query"}))["error"]["code"],
             -32602,
         )
+
+    def test_authoring_inputs_expose_structure_and_preserve_recursive_validation(self):
+        catalog = {tool["name"]: tool for tool in tool_catalog(ROOT)}
+        generated = json.loads(
+            (
+                ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
+            ).read_text()
+        )
+        definitions = generated["$defs"]
+        examples = json.loads(
+            (
+                ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"
+            ).read_text()
+        )["examples"]
+        change = deepcopy(
+            next(
+                x["value"]["change_set"]
+                for x in examples
+                if x["definition"] == "ProposeCall"
+            )
+        )
+        rule = deepcopy(
+            next(
+                x["value"] for x in examples if x["definition"] == "PutRoutingRuleEdit"
+            )
+        )
+        expression = rule["rule"]["when"]
+        for _ in range(12):
+            expression = {"operator": "not", "expression": expression}
+        rule["rule"]["when"] = expression
+        change["edits"] = [rule]
+        original = {**definitions["ProposeCall"], "$defs": definitions}
+        projected = catalog["propose"]["inputSchema"]
+        for name in ("propose", "revise"):
+            shape = catalog[name]["inputSchema"]["properties"]["change_set"]
+            self.assertEqual(shape["type"], "object")
+            self.assertEqual(set(shape["required"]), {"purpose", "edits"})
+            self.assertEqual(shape["properties"]["purpose"]["type"], "object")
+            edits = shape["properties"]["edits"]["items"]["oneOf"]
+            self.assertEqual(len(edits), len(definitions["StandardEdit"]["oneOf"]))
+            self.assertTrue(all(edit["type"] == "object" for edit in edits))
+        self.assertEqual(
+            catalog["propose"]["inputSchema"]["properties"]["snapshot"]["type"],
+            "object",
+        )
+        for validator in (
+            Draft202012Validator(original),
+            Draft202012Validator(projected),
+        ):
+            validator.validate({"change_set": change})
+            invalid = deepcopy(change)
+            invalid["edits"][0]["rule"]["when"]["expression"]["expression"] = {
+                "operator": "invented"
+            }
+            self.assertFalse(validator.is_valid({"change_set": invalid}))
+            self.assertFalse(
+                validator.is_valid({"change_set": {**change, "extra": True}})
+            )
+            self.assertFalse(
+                validator.is_valid({"change_set": {**change, "edits": []}})
+            )
+
+    def test_input_projection_preserves_reference_siblings(self):
+        schema = input_schema(
+            {"$ref": "#/$defs/Name", "minLength": 3},
+            {"Name": {"type": "string", "maxLength": 5}},
+        )
+        validator = Draft202012Validator(schema)
+        self.assertTrue(validator.is_valid("name"))
+        for invalid in ("a", "too long", 12):
+            self.assertFalse(validator.is_valid(invalid))
+
+    def test_default_guidance_uses_available_recovery_tools(self):
+        server = MCPServer(ROOT)
+        instructions = initialize(server)["result"]["instructions"]
+        self.assertNotIn("recover_application", instructions)
+        self.assertIn("recover", instructions)
+        with (
+            patch.object(AgentToolFacade, "open_repository") as opened,
+            redirect_stderr(io.StringIO()),
+        ):
+            facade = opened.return_value.__enter__.return_value
+            facade.apply.side_effect = RuntimeError("failure")
+            response = server.dispatch(
+                request(
+                    "tools/call",
+                    {"name": "apply", "arguments": {"context": {"opaque": "identity"}}},
+                )
+            )["result"]
+            self.assertTrue(response["isError"])
+            self.assertIn("workflow_status", response["content"][0]["text"])
+            self.assertNotIn("recover_application", response["content"][0]["text"])
+            facade.apply.assert_called_once()
+            facade.recover.assert_not_called()
 
     def test_lifecycle_and_protocol_errors_never_open_engine(self):
         server = MCPServer(ROOT, advanced=True)

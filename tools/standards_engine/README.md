@@ -144,3 +144,10 @@ explicit review, successful application, an interrupted application, cold-proces
 recovery, and stale revision handling in an isolated repository. `--pending-only`
 covers explicit resolution of pending normative work. Recorded acceptance and
 client versions are in the [agent interface plan](../../docs/plans/standards-agent-interface/plan.md).
+
+The optional `tests/codex_navigation_client.py` harness exercises the actual
+configured Codex app-server client without starting a model turn. Run it with
+the locked Engine Python; it requires `codex` on PATH and `standards-engine`
+configured for this checkout. It checks inline authoring fields and follows
+focused route/read continuations with exact snapshot reuse in an ephemeral
+client thread. It does not modify standards or apply proposals.

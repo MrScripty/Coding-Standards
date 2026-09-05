@@ -120,7 +120,7 @@ def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
                 "name": name,
                 "description": DESCRIPTIONS[name],
                 "annotations": {"readOnlyHint": name in READ_ONLY_OPERATIONS},
-                "inputSchema": schema_closure(
+                "inputSchema": input_schema(
                     definitions[operation["input_definition"]], definitions
                 ),
                 "outputSchema": schema_closure(
@@ -138,6 +138,36 @@ def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
     return result
 
 
+def input_schema(root: dict, definitions: dict) -> dict:
+    """Expose input structure inline, retaining references only at recursion.
+
+    Inline containing objects so client reference rendering is only needed at
+    recursive expression fields. Validation keywords and the remaining reference
+    closure retain their canonical semantics.
+    """
+
+    def expand(value, active=()):
+        if isinstance(value, list):
+            return [expand(item, active) for item in value]
+        if not isinstance(value, dict):
+            return value
+        if "$ref" in value:
+            reference = value["$ref"]
+            if not reference.startswith("#/$defs/"):
+                raise ValueError(f"Unsupported input schema reference: {reference}")
+            name = reference.removeprefix("#/$defs/")
+            if name in active:
+                return value
+            resolved = expand(definitions[name], (*active, name))
+            siblings = {key: item for key, item in value.items() if key != "$ref"}
+            if siblings:
+                return {"allOf": [resolved, expand(siblings, active)]}
+            return resolved
+        return {key: expand(item, active) for key, item in value.items()}
+
+    return schema_closure(expand(root), definitions)
+
+
 class ProtocolError(Exception):
     def __init__(self, code: int, message: str) -> None:
         super().__init__(message)
@@ -147,6 +177,7 @@ class ProtocolError(Exception):
 class MCPServer:
     def __init__(self, root: Path, *, advanced: bool = False) -> None:
         self.root = root.resolve()
+        self.advanced = advanced
         self.tools = tool_catalog(self.root, advanced=advanced)
         self.names = {tool["name"] for tool in self.tools}
         self.initialized = False
@@ -205,7 +236,14 @@ class MCPServer:
                 "protocolVersion": PROTOCOL_VERSION,
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": "standards-engine", "version": "0.1.0"},
-                "instructions": "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues only through recover_application, never an apply retry.",
+                "instructions": (
+                    "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
+                    + (
+                        " Native advanced operations use recover_application with readiness."
+                        if self.advanced
+                        else ""
+                    )
+                ),
             }
         if not self.ready:
             raise ProtocolError(-32000, "Initialize the session before using tools.")
@@ -234,7 +272,14 @@ class MCPServer:
                 "content": [
                     {
                         "type": "text",
-                        "text": "Engine invocation failed; inspect server stderr. Outcome is unknown: do not automatically retry a mutation. For interrupted application, use recover_application with the original readiness.",
+                        "text": (
+                            "Engine invocation failed; inspect server stderr. Outcome is unknown: do not automatically retry a mutation. "
+                            + (
+                                "For interrupted native application, use recover_application with the original readiness."
+                                if name in ("apply_proposal", "recover_application")
+                                else "For interrupted focused application, use workflow_status with the original context and follow its recovery continuation."
+                            )
+                        ),
                     }
                 ],
             }

@@ -3018,6 +3018,9 @@
         },
         {
           "$ref": "#/$defs/InspectNextOperation"
+        },
+        {
+          "$ref": "#/$defs/FocusedQueryNextOperation"
         }
       ]
     },
@@ -6277,6 +6280,37 @@
         "status",
         "next_operations"
       ]
+    },
+    "FocusedQueryNextOperation": {
+      "type": "object",
+      "required": [
+        "operation",
+        "request_kind",
+        "snapshot"
+      ],
+      "properties": {
+        "operation": {
+          "enum": [
+            "route",
+            "read",
+            "related"
+          ]
+        },
+        "request_kind": {
+          "enum": [
+            "route",
+            "read",
+            "related"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "additionalProperties": false
     }
   }
 }

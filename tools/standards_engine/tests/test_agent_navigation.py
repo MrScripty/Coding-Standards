@@ -83,7 +83,13 @@ class AgentNavigationTest(unittest.TestCase):
             {"snapshot": self.snapshot, "request": {"kind": "route", "facts": facts}}
         )
         self.assertEqual(result["reading_plan"], native["reading_plan"])
-        self.assertEqual(result["next_operations"], native["next_operations"])
+        self.assertEqual(
+            result["next_operations"],
+            [
+                {**item, "operation": item["request_kind"]}
+                for item in native["next_operations"]
+            ],
+        )
         self.assertEqual(result["facts"], facts)
 
     def test_supplied_snapshot_never_captures_ambient_authority(self):
@@ -143,7 +149,18 @@ class AgentNavigationTest(unittest.TestCase):
             {"snapshot": self.snapshot, "request": {"kind": "related", **request}}
         )
         focused = self.facade.related({"snapshot": self.snapshot, **request})
-        self.assertEqual(focused, native)
+        self.assertEqual(
+            focused,
+            {
+                **native,
+                "next_operations": [
+                    {**item, "operation": item["request_kind"]}
+                    if item["operation"] == "query"
+                    else item
+                    for item in native["next_operations"]
+                ],
+            },
+        )
         self.assertEqual(focused["kind"], "related-result")
         self.assertTrue(focused["relationships"])
         artifact = self.facade.related(
@@ -154,6 +171,37 @@ class AgentNavigationTest(unittest.TestCase):
             {"snapshot": self.snapshot, **{**request, "groups": ["invented"]}}
         )
         self.assertEqual(invalid["kind"], "rejected-result")
+
+    def test_focused_read_continuations_are_callable_against_exact_snapshot(self):
+        from tools.standards_engine.standards_engine.mcp import tool_catalog
+
+        catalog = {item["name"] for item in tool_catalog(ROOT)}
+        native = self.facade.query(
+            {
+                "snapshot": self.snapshot,
+                "request": {"kind": "read", "target": "workflow.planning"},
+            }
+        )
+        self.assertTrue(
+            any(item["operation"] == "query" for item in native["next_operations"])
+        )
+        for detail in ("compact", "full"):
+            result = self.facade.read(
+                {
+                    "snapshot": self.snapshot,
+                    "target": "workflow.planning",
+                    "detail": detail,
+                }
+            )
+            for item in result["next_operations"]:
+                self.assertIn(item["operation"], catalog)
+                if item["operation"] == "read":
+                    self.assertEqual(item["snapshot"], self.snapshot)
+                    followed = self.facade.read(
+                        {"snapshot": item["snapshot"], "target": item["target"]}
+                    )
+                    self.assertEqual(followed["kind"], "compact-read-result", followed)
+                    self.assertEqual(followed["snapshot"], self.snapshot)
 
     def test_vocabulary_matches_router_and_questions_are_typed(self):
         result = self.facade.routing_facts({"snapshot": self.snapshot})

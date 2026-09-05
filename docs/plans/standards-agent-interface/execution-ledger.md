@@ -81,3 +81,21 @@ directly, with a regression assertion and real publication/recovery coverage.
 identically at Milestone 2 because it requested a nonexistent consumer
 disposition. The accepted fixture has only an audit-coverage obligation. Corrected
 the test to assert and resolve that obligation without changing production rules.
+
+## 2026-09-05: Client Schema And Continuation Fixes
+
+**Request:** Address hidden authoring schemas and unavailable continuation names
+before returning to the separate effectiveness plan.
+
+**Outcome:** Inline nonrecursive input schema references from canonical
+contracts, preserving recursive validation. Engine-owned navigation projection
+uses focused tool names. Default instructions and unknown-outcome guidance use
+context-based recovery; advanced native operations retain readiness guidance.
+
+**Evidence:** [Client follow-ups](reports/client-followups.md), 37 focused
+regressions, 20 contract tests, Codex CLI 0.153.4 app-server schema consumption
+and same-snapshot route/read, and the 73-suite / 121-check Engine checkpoint.
+The local client check starts no model turn. This conversation needs a reconnect
+to inspect its final model-visible declarations.
+
+**Commit subject:** `fix(standards-engine): expose authoring schemas and focused continuations`

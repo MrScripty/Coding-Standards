@@ -5,6 +5,19 @@ from __future__ import annotations
 from . import _generated_contract as contract
 
 
+def focused_continuations(value):
+    """Project native query hints onto the corresponding focused operations."""
+    return {
+        **value,
+        "next_operations": [
+            {**item, "operation": item["request_kind"]}
+            if item["operation"] == "query"
+            else item
+            for item in value["next_operations"]
+        ],
+    }
+
+
 def navigate(engine, operation: str, call):
     arguments = call.as_contract()
     snapshot = arguments.pop("snapshot", None)
@@ -23,11 +36,15 @@ def navigate(engine, operation: str, call):
             handle = contract.SnapshotHandle.from_value(snapshot)
             compiled = engine._compiled_snapshot(engine._snapshot_id(handle))
             return contract.AgentRouteResult.from_value(
-                engine._route_value(
-                    _QueryProjection.snapshot(handle),
-                    compiled,
-                    contract.RouteRequest.from_value({"kind": "route", **arguments}),
-                    explain=True,
+                focused_continuations(
+                    engine._route_value(
+                        _QueryProjection.snapshot(handle),
+                        compiled,
+                        contract.RouteRequest.from_value(
+                            {"kind": "route", **arguments}
+                        ),
+                        explain=True,
+                    )
                 )
             )
         except engine._domain_errors() as error:
@@ -40,12 +57,12 @@ def navigate(engine, operation: str, call):
             }
         )
     )
+    value = focused_continuations(result.as_contract())
     if isinstance(result, contract.ReadResult) and detail == "compact":
-        value = result.as_contract()
         del value["related"]
         value.update(kind="compact-read-result", detail="compact")
         return contract.CompactReadResult.from_value(value)
-    return result
+    return type(result).from_value(value)
 
 
 def fact_definitions(router):
