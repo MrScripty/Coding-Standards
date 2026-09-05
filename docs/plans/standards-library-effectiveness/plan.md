@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 7 navigation source correction
 
-**Next slice:** use the verified `rewrite-navigation-index` proposal path to
-correct the nine admitted legacy sources, then review all 27 retained entrypoints.
-See the [implementation evidence](reports/milestone-7-navigation-authoring-implementation.md).
+**Next slice:** correct the additional Coding index with preserved declared
+section routes, then repeat the final 27-entrypoint link audit. See the
+[declared-route admission and evidence](reports/milestone-7-declared-route-admission.md).
 
 **Acceptance status:** `partial`
 

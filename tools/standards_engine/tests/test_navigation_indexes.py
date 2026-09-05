@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import copy
+import csv
+import io
 import json
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 from types import SimpleNamespace
 from pathlib import Path
@@ -15,6 +18,8 @@ from tools.standards_engine.standards_engine import AgentToolFacade
 from tools.standards_engine.standards_engine.authoring import AuthoringError
 from tools.standards_engine.standards_engine.navigation_indexes import (
     CATALOG,
+    ROUTES,
+    SUITES,
     load_indexes,
 )
 from tools.standards_metadata.standards_metadata import FrozenContentSource
@@ -31,6 +36,44 @@ from tools.standards_engine.tests.test_agent_workflow import (
 
 
 class NavigationIndexAuthorityTest(unittest.TestCase):
+    def test_old_captured_index_without_route_inventory_remains_readable(self):
+        source = FrozenContentSource(
+            {
+                CATALOG: b'schema_version = 1\n[[indexes]]\nid = "navigation.old"\npath = "old.md"\ndestinations = []\n',
+                "old.md": b"# Old index\n",
+                SUITES: b"suites = []\n",
+            }
+        )
+        index = load_indexes(source, SimpleNamespace(resolve_module=lambda _: None))[0]
+        self.assertEqual(index.routes, ())
+
+    def test_declared_routes_bind_their_owner_content_and_exact_declarations(self):
+        module = SimpleNamespace(module_id="topic.owner", path="owner.md")
+        corpus = SimpleNamespace(
+            resolve_module=lambda value: (
+                module if value in {"topic.owner", "owner.md"} else None
+            )
+        )
+        files = {
+            CATALOG: b'schema_version = 1\n[[indexes]]\nid = "navigation.old"\npath = "old.md"\ndestinations = []\n',
+            "old.md": b"# Old index\n",
+            SUITES: b"suites = []\n",
+            "owner.md": b"# Section\nOriginal policy\n",
+            ROUTES: b"source\troute\tdestination\nold.md\towner\towner.md#section\n",
+        }
+        before = load_indexes(FrozenContentSource(files), corpus)[0]
+        files["owner.md"] = b"# Section\nChanged policy\n"
+        after = load_indexes(FrozenContentSource(files), corpus)[0]
+        self.assertEqual(
+            before.review.representation_digest, after.review.representation_digest
+        )
+        self.assertNotEqual(before.review.review_digest, after.review.review_digest)
+        files[ROUTES] = b"source\troute\tdestination\nold.md\towner\towner.md\n"
+        retargeted = load_indexes(FrozenContentSource(files), corpus)[0]
+        self.assertNotEqual(
+            after.review.representation_digest, retargeted.review.representation_digest
+        )
+
     def test_absent_catalog_exposes_no_authoring_capability(self):
         self.assertEqual(load_indexes(FrozenContentSource({}), None), ())
 
@@ -86,7 +129,7 @@ class NavigationIndexAuthorityTest(unittest.TestCase):
         )
 
 
-class NavigationIndexWorkflowTest(unittest.TestCase):
+class NavigationIndexFixture(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.temporary = tempfile.TemporaryDirectory(prefix="navigation-index-test-")
@@ -98,6 +141,7 @@ class NavigationIndexWorkflowTest(unittest.TestCase):
             "tools/standards_engine/standards_engine/_generated_contract.py",
         ):
             shutil.copyfile(ROOT / relative, cls.root / relative)
+        cls.seed_legacy_fixture()
         subprocess.run(["git", "add", "--all"], cwd=cls.root, check=True)
         with AgentToolFacade.open_repository(cls.root) as fixture_facade:
             refreshed = fixture_facade.verify_repository(
@@ -127,9 +171,62 @@ class NavigationIndexWorkflowTest(unittest.TestCase):
             x for x in directory["indexes"] if x["id"] == "navigation.frontend"
         )
         cls.snapshot = directory["authority"]
+        cls.indexes = {entry["id"]: entry for entry in directory["indexes"]}
         cls.entry = next(
             x for x in directory["indexes"] if x["id"] == "navigation.tooling"
         )
+
+    @classmethod
+    def seed_legacy_fixture(cls):
+        """Own the obsolete test input even after the real index is corrected."""
+        from tools.standards_engine.standards_engine.logical_authoring import (
+            _toml_inline,
+        )
+
+        required = set()
+        registry = tomllib.loads((cls.root / SUITES).read_text())
+        for suite in registry["suites"]:
+            path = cls.root / suite["path"]
+            document = tomllib.loads(path.read_text())
+            changed = False
+            for check in document["checks"]:
+                if (
+                    check["type"] != "markdown_targets"
+                    or check["path"] != "TOOLING-STANDARDS.md"
+                ):
+                    continue
+                check["required"] = [
+                    "FRONTEND-STANDARDS.md"
+                    if target == "profiles/applications/frontend.md"
+                    else target
+                    for target in check["required"]
+                ]
+                required.update(check["required"])
+                changed = True
+            if changed:
+                lines = [
+                    f"{key} = {_toml_inline(value)}"
+                    for key, value in document.items()
+                    if key != "checks"
+                ]
+                for check in document["checks"]:
+                    lines.extend(("", "[[checks]]"))
+                    lines.extend(
+                        f"{key} = {_toml_inline(value)}" for key, value in check.items()
+                    )
+                path.write_text("\n".join(lines) + "\n")
+        (cls.root / "TOOLING-STANDARDS.md").write_text(
+            "# Legacy Tooling Fixture\n\nObsolete fixture scheduling defaults.\n\n"
+            + "\n".join(f"- [Destination]({path})" for path in sorted(required))
+            + "\n"
+        )
+        coding = cls.root / "CODING-STANDARDS.md"
+        obsolete = "CORE-STANDARDS.md#code-and-terminology-discipline"
+        if obsolete not in coding.read_text():
+            coding.write_text(
+                coding.read_text()
+                + f"\n- Obsolete fixture terminology: [Core]({obsolete})\n"
+            )
 
     @classmethod
     def tearDownClass(cls):
@@ -176,6 +273,8 @@ class NavigationIndexWorkflowTest(unittest.TestCase):
             {"snapshot": self.snapshot, "change_set": change or self.change()}
         )
 
+
+class NavigationIndexWorkflowTest(NavigationIndexFixture):
     def test_invalid_selections_do_not_create_an_applicable_candidate(self):
         variants = []
         for destinations in (
@@ -375,6 +474,106 @@ class NavigationIndexWorkflowTest(unittest.TestCase):
             {"snapshot": current["authority"], "change_set": unchanged}
         )
         self.assertEqual(rejected["code"], "AUTHORING.NO_EFFECT", rejected)
+
+
+class ProtectedNavigationIndexTest(NavigationIndexFixture):
+    def change(self):
+        change = super().change()
+        change["purpose"]["summary"] = "Correct an isolated Coding navigation fixture"
+        change["purpose"]["rationale"] = (
+            "Exercise preservation of declared Coding navigation routes."
+        )
+        change["edits"] = [
+            {
+                "kind": "rewrite-navigation-index",
+                "entrypoint": self.indexes["navigation.coding"]["entrypoint"],
+                "destinations": [
+                    "core",
+                    "router",
+                    "topic.architecture",
+                    "topic.resilience",
+                    "topic.contracts",
+                    "topic.dependencies",
+                    "workflow.verification",
+                    "workflow.implementation",
+                    "workflow.build",
+                    "topic.licensing",
+                    "profile.language.typescript",
+                    "profile.language.typescript.async",
+                    "profile.application.frontend",
+                    "topic.performance",
+                    "topic.code-design",
+                ],
+                "rationale": "Remove the obsolete unlisted link while preserving every declared route.",
+            }
+        ]
+        return change
+
+    def test_declared_routes_reject_omitted_owners_and_unsupported_artifacts(self):
+        omitted = self.change()
+        omitted["edits"][0]["destinations"].remove("topic.contracts")
+        result = self.propose(omitted)
+        self.assertEqual(result["code"], "NAVIGATION.REQUIRED_DESTINATION", result)
+        artifact = self.change()
+        artifact["edits"][0]["entrypoint"] = self.indexes["navigation.plan"][
+            "entrypoint"
+        ]
+        artifact["edits"][0]["destinations"] = ["router", "workflow.planning"]
+        result = self.propose(artifact)
+        self.assertEqual(
+            result["code"], "NAVIGATION.ARTIFACT_ROUTE_UNSUPPORTED", result
+        )
+
+    def test_z_declared_sections_survive_verified_index_application(self):
+        inventory = (self.root / ROUTES).read_bytes()
+        required = [
+            row["destination"]
+            for row in csv.DictReader(io.StringIO(inventory.decode()), delimiter="\t")
+            if row["source"] == "CODING-STANDARDS.md"
+        ]
+        proposed = self.propose()
+        self.assertEqual(proposed["status"], "needs-action", proposed)
+        self.assertEqual(len(proposed["outcome"]["obligations"]), 1)
+        preview = self.facade.query_proposal(
+            {
+                "revision": proposed["revision"],
+                "request": {"kind": "read", "target": "navigation.coding"},
+            }
+        )
+        content = preview["indexes"][0]["content"]
+        self.assertNotIn("CORE-STANDARDS.md#code-and-terminology-discipline", content)
+        self.assertIn("](topics/code-design.md)", content)
+        for destination in required:
+            self.assertIn(f"]({destination})", content)
+        obligation = proposed["outcome"]["obligations"][0]
+        resolved = self.facade.resolve_workflow(
+            {
+                "context": proposed["context"],
+                "submission": {
+                    "kind": "impact-disposition",
+                    "obligation": obligation["handle"],
+                    "result": "confirmed",
+                    "rationale": "The exact fixture retains all declared routes and canonical owners.",
+                    "evidence": [evidence(self.root)],
+                    "fingerprint": obligation["fingerprint"],
+                },
+            }
+        )
+        self.assertEqual(resolved["status"], "complete", resolved)
+        ready = self.facade.review(
+            {"context": resolved["context"], "decisions": decisions(self.root)}
+        )
+        self.assertEqual(ready["status"], "ready", ready)
+        applied = self.facade.apply({"context": ready["context"]})
+        self.assertEqual(applied["status"], "applied", applied)
+        self.assertEqual(
+            self.facade.read({"target": "navigation.coding"})["indexes"][0]["content"],
+            content,
+        )
+        published_inventory = subprocess.check_output(
+            ["git", "show", "main:" + ROUTES], cwd=self.root
+        )
+        self.assertEqual(published_inventory, inventory)
 
 
 if __name__ == "__main__":

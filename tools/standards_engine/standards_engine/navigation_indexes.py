@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+import csv
+import io
 import json
 import posixpath
 import re
 import tomllib
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 from tools.repository_git.repository_git import RepositoryPath
 from tools.standards_metadata.standards_metadata import (
@@ -26,6 +28,46 @@ from .authoring import _invalid, _unavailable
 CATALOG = "tools/standards_engine/navigation-indexes.toml"
 DIRECTORY = "navigation-indexes"
 SUITES = "evaluation/standards-effectiveness/suite-registry.toml"
+ROUTES = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+
+
+def _route_rows(source: ContentSource) -> tuple[dict[str, str], ...]:
+    try:
+        content = source.read_bytes(ROUTES).decode("utf-8")
+    except MetadataError as error:
+        if error.failure.code != "INPUT.UNAVAILABLE":
+            raise
+        return ()
+    except UnicodeError as error:
+        raise _invalid(
+            "NAVIGATION.INVALID_ROUTES", "Route declarations require UTF-8."
+        ) from error
+    reader = csv.DictReader(io.StringIO(content), delimiter="\t", strict=True)
+    if reader.fieldnames != ["source", "route", "destination"]:
+        raise _invalid(
+            "NAVIGATION.INVALID_ROUTES", "Unsupported route declaration shape."
+        )
+    try:
+        rows = tuple(reader)
+    except csv.Error as error:
+        raise _invalid(
+            "NAVIGATION.INVALID_ROUTES", "Malformed route declarations."
+        ) from error
+    identities = set()
+    for row in rows:
+        if set(row) != {"source", "route", "destination"} or any(
+            not isinstance(value, str) or not value or "\n" in value or "\r" in value
+            for value in row.values()
+        ):
+            raise _invalid("NAVIGATION.INVALID_ROUTES", "Incomplete route declaration.")
+        key = row["source"], row["route"]
+        if key in identities or re.fullmatch(r"[a-z][a-z0-9_-]*", row["route"]) is None:
+            raise _invalid(
+                "NAVIGATION.INVALID_ROUTES",
+                "Route names must be unique within an index.",
+            )
+        identities.add(key)
+    return rows
 
 
 def _navigation_checks(source):
@@ -46,12 +88,20 @@ def _digest(value: object) -> str:
 
 
 @dataclass(frozen=True, slots=True)
+class NavigationRoute:
+    name: str
+    destination: str
+    standard: str | None
+
+
+@dataclass(frozen=True, slots=True)
 class NavigationIndex:
     id: str
     path: str
     content: str
     destinations: tuple[str, ...]
     review: NavigationIndexAuthority
+    routes: tuple[NavigationRoute, ...] = ()
 
 
 def load_indexes(
@@ -85,6 +135,7 @@ def load_indexes(
         )
     identities, paths, result = set(), set(), []
     enforcement = None
+    route_rows = None
     for row in catalog["indexes"]:
         if not isinstance(row, dict) or set(row) != {"id", "path", "destinations"}:
             raise _invalid(
@@ -145,6 +196,32 @@ def load_indexes(
             )
         if enforcement is None:
             enforcement = _navigation_checks(source)
+            route_rows = _route_rows(source)
+        declared = tuple(row for row in route_rows if row["source"] == path)
+        routes = []
+        for declaration in declared:
+            target = posixpath.normpath(
+                posixpath.join(
+                    posixpath.dirname(path),
+                    unquote(declaration["destination"]).partition("#")[0],
+                )
+            )
+            module = corpus.resolve_module(target)
+            routes.append(
+                NavigationRoute(
+                    declaration["route"],
+                    declaration["destination"],
+                    None if module is None else module.module_id,
+                )
+            )
+            if module is not None:
+                authority = (
+                    module.module_id,
+                    module.path,
+                    file_digest(source.read_bytes(module.path)),
+                )
+                if authority not in authorities:
+                    authorities.append(authority)
         representation = _digest(
             {
                 "registration": row,
@@ -154,6 +231,7 @@ def load_indexes(
                     for suite, check in enforcement
                     if check["path"] == path
                 ],
+                **({"declared_routes": declared} if declared else {}),
             }
         )
         review = NavigationIndexAuthority(
@@ -162,7 +240,9 @@ def load_indexes(
             _digest({"index": representation, "destinations": authorities}),
         )
         result.append(
-            NavigationIndex(identity, path, body, tuple(destinations), review)
+            NavigationIndex(
+                identity, path, body, tuple(destinations), review, tuple(routes)
+            )
         )
         identities.add(identity)
         paths.add(path)
@@ -200,6 +280,7 @@ def rewrite_index(
             "Target is not a registered navigation index in this snapshot.",
         )
     links = []
+    rendered = set()
     for destination in sorted(edit["destinations"]):
         module = corpus.resolve_module(destination)
         if module is None or module.module_id != destination:
@@ -214,6 +295,22 @@ def rewrite_index(
             safe="/.-_",
         )
         links.append(f"- [{destination}]({url})")
+        rendered.add(url)
+    for route in index.routes:
+        if route.standard is None:
+            raise _unavailable(
+                "NAVIGATION.ARTIFACT_ROUTE_UNSUPPORTED",
+                "This index requires an artifact route outside canonical standard selection.",
+            )
+        if route.standard not in edit["destinations"]:
+            raise _invalid(
+                "NAVIGATION.REQUIRED_DESTINATION",
+                f"Declared route {route.name!r} requires canonical destination {route.standard!r}.",
+            )
+        url = quote(unquote(route.destination), safe="/.-_#")
+        if url not in rendered:
+            links.append(f"- [{route.standard} ({route.name})]({url})")
+            rendered.add(url)
     files[index.path] = (
         f"# {index.id}\n\n"
         "This is a non-normative navigation index. Policy is owned by the linked\n"

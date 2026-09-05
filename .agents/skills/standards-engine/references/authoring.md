@@ -113,6 +113,11 @@ handle and its selected canonical `standard`. The Engine updates the matching
 checks atomically with the index. Other required destinations remain enforced;
 unused or stale dispositions are rejected.
 
+Index rewrites preserve declared section routes for explicitly selected
+canonical owners. Select every required owner; the Engine rejects omissions.
+Required artifact routes, such as the Plan template, remain outside this edit's
+canonical-standard selection. Do not weaken their coverage inventory to proceed.
+
 ## Coverage Audit Publication
 
 Use `read` with `include_coverage: true` to identify registered policy units

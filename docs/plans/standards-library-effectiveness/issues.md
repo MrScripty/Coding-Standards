@@ -223,31 +223,28 @@ not imply Milestone 7 acceptance.
 
 | ID | Severity | Evidence and affected owner | Disposition and required verification |
 | --- | --- | --- | --- |
-| M7-OWN-01 | High | Legacy Tooling claims automation authority and prescribes hook, parallelism, and staged-file defaults contrary to canonical `workflow.tooling`; report includes exact passages. | Re-plan: correct through Engine-owned source authoring in Milestone 7; manually prove navigation-only behavior and verify affected destinations and consumers. |
-| M7-OWN-02 | High | Legacy Rust Bindings permits framework derives in core and prescribes representation/test/workspace choices contrary to `profile.language.rust.language-bindings` and generic binding/verification owners. | Re-plan: review the whole legacy binding entrypoint and its declared consumers, remove competing authority, and preserve canonical conversion, core-isolation, and real-host proof. Recheck D006 and D010 before acceptance. |
-| M7-OWN-03 | Medium | Launcher retains legacy authority and install-output requirements; Architecture retains contract-freeze instructions and policy summaries. Other manifest entrypoints retain migration-pending prose or imperative headings. | Re-plan: apply the same navigation-only invariant to all 27 retained sources. Pure navigation requires semantic review; disclaimer, size, or keyword checks are insufficient. |
-| M7-OWN-04 | Medium | Rust Security's panic-policy link targets the removed `RUST-API-STANDARDS.md#result-option-panic` heading; source-index suite membership does not cover the entire legacy population, and `markdown_links` checks file existence rather than heading fragments. | Re-plan: correct the owner route and verify actual path/fragment destinations across the selected population. Keep D009 source closure open until corrected. |
+| M7-OWN-01 | High | Legacy Tooling claims automation authority and prescribes hook, parallelism, and staged-file defaults contrary to canonical `workflow.tooling`; report includes exact passages. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
+| M7-OWN-02 | High | Legacy Rust Bindings permits framework derives in core and prescribes representation/test/workspace choices contrary to `profile.language.rust.language-bindings` and generic binding/verification owners. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
+| M7-OWN-03 | Medium | Launcher retains legacy authority and install-output requirements; Architecture retains contract-freeze instructions and policy summaries. Other manifest entrypoints retain migration-pending prose or imperative headings. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
+| M7-OWN-04 | Medium | Rust Security's panic-policy link targets the removed `RUST-API-STANDARDS.md#result-option-panic` heading; source-index suite membership does not cover the entire legacy population, and `markdown_links` checks file existence rather than heading fragments. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
 | M7-OWN-05 | Medium | The old final-closure procedure treats frozen corpus classifications and retired migration gates as current authority. | Fix-now in review/re-plan slice: preserve frozen evidence, separate historical ID reconciliation from live metadata/routing and manual source review, and replace the active acceptance procedure. |
 | M7-OWN-06 | Low | Current tracked planning/implementation prompts repeat procedural instructions despite D005's original route-only aspiration; no conflicting slice/commit instruction was found in the reviewed prompts. | Defer to A5 concision review in Milestone 8. Compare retained instructions with their owners and justify necessary projections before claiming route-only or reduced interaction cost. |
+| M7-OWN-07 | Medium | Full-population inspection found `CODING-STANDARDS.md` linking to Core's removed Code And Terminology Discipline heading. The current owner is `topic.code-design`; the stale link is unlisted, while seventeen other Coding routes are protected by the current inventory. | Fix-now: use the extended index renderer with explicit owners and preserved declared sections. Keep the inventory unchanged, verify every destination, and rerun the 27-entrypoint audit. |
 
-M7-OWN-01 through M7-OWN-04 prevent Milestone 7 acceptance. They share the
-systemic invariant that an old entrypoint must not remain a second policy
-owner. The next slice admits the bounded Engine-owned correction, including
-any required authoring capability and declared consumer scope. No normative
-source correction was performed by this review slice.
+### Published Correction And Remaining Route
 
-### Navigation Authoring Admission
+The Engine capability is committed in `c99773d8`; it published the nine admitted
+corrections in `67d3e205`. Accepted reads match all nine previews. All 70 canonical
+modules and the other eighteen entrypoints are unchanged. Four declared
+required-destination checks were retargeted exactly as admitted; unrelated
+assertions and all route inventories were preserved.
 
-The [follow-up admission](reports/milestone-7-navigation-authoring-admission.md)
-bounds nine source replacements and eighteen retained indexes. The live Engine
-rejects the legacy Tooling path with `NAVIGATION.UNKNOWN_POLICY`; its fourteen
-proposal edit variants do not expose legacy-index authoring. Implement the
-admitted `rewrite-navigation-index` proposal path before source correction.
-Do not route text changes through evidence maintenance or treat Tooling's empty
-impact query and incomplete mapping as audited evidence of no consumers.
+The full 27-entrypoint audit checked 195 local inline links and 24 fragments,
+finding the one additional Coding fragment above. Historical reconciliation
+still covers all 916 IDs, and the live Router has 54 canonical targets. These
+are separate evidence claims, not semantic coverage attestations.
 
-Six observed inline links into legacy entrypoints are owned by three of the
-replacement sources and have explicit canonical-destination dispositions in
-the admission. Existing route-coverage inventories and frozen history are
-preserved. M7-OWN-01 through M7-OWN-04 remain open until Engine application and
-source review; admission alone does not resolve them.
+The [declared-route extension](reports/milestone-7-declared-route-admission.md)
+preserves required sections for explicitly selected owners through the existing
+rewrite operation. It adds no tool or edit type. M7-OWN-07 currently prevents
+Milestone 7 acceptance. M7-OWN-06 remains deferred to Milestone 8's A5 review.

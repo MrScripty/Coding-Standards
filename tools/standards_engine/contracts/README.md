@@ -52,6 +52,12 @@ duplicated, stale, or unselected retargets reject the candidate.
 The default MCP catalog retains its existing tools; discovery uses `read` and
 authoring uses `propose`/`revise`. There is no raw Markdown or path write input.
 
+Registered section-route inventories are captured with the index and preserved
+when rewriting for explicitly selected canonical owners. Their declarations
+and owner content are bound into review evidence. Missing required owners and
+required non-standard artifact routes reject the rewrite. This renderer
+behavior adds no public operation, edit variant, or contract shape.
+
 Interface version 26 adds `route`, `read`, and `related` with direct domain
 arguments and an optional `snapshot`. Omission captures new accepted authority
 for that call; a supplied handle is used exactly. Every successful result

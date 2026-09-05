@@ -15933,3 +15933,31 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   M7-OWN-04, A2, and Milestone 7 acceptance remain open until that correction and
   manual source review. The unrelated untracked prototype is preserved.
 - Commit subject: `feat(standards): author registered navigation indexes`.
+
+## 2026-09-05 - Nine Indexes Published And Declared Routes Preserved
+
+- The fresh MCP process inspected nine source indexes and forty selected owners.
+  Their policy-impact queries exposed 167 unique declared edges, with no endpoint
+  in the selected legacy sources; incomplete policy mappings remain explicit.
+- Reviewed all nine exact previews, resolved nine index-impact obligations, and
+  accepted consumer, impact, and audit review. The exact candidate passed 73
+  suites and 121 checks. Engine application published `67d3e205`, and accepted
+  reads match every preview. The checkout was then switched to the Engine's
+  published commit; no caller-authored standards mutation was used.
+- Manual review covered all eighteen retained entrypoints. The published diff
+  preserves their bytes and all seventy canonical modules. It retargets exactly
+  four declared required-destination checks, retaining all unrelated assertions.
+  Historical reconciliation covers all 916 IDs; all 54 Router targets remain
+  canonical. Frozen evidence and route inventories are unchanged.
+- The all-source link audit checked 195 local inline links and 24 fragments and
+  found one additional stale Coding anchor. That unlisted link is outside the
+  seventeen protected Coding routes. M7-OWN-01 through M7-OWN-04 are resolved;
+  M7-OWN-07 keeps Milestone 7 and A2 open.
+- Admitted and implemented preservation of captured required section routes for
+  explicitly selected canonical owners in the existing rewrite operation. No
+  new tool, edit type, raw link writer, or inventory rewrite is introduced.
+- All fourteen navigation tests and fourteen MCP/replay tests pass. Fixtures now
+  own their obsolete source input. Ruff, skill validation, and the Engine
+  checkpoint pass (73 suites, 121 structural checks). Next: use this capability
+  for the additional Coding correction and repeat the final source audit.
+- Commit subject: `fix(standards): preserve declared navigation routes`.
