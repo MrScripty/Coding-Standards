@@ -57,8 +57,8 @@ verification and application. See [Codex MCP configuration](https://learn.chatgp
 
 Client configuration formats differ; preserve the command, arguments, and
 environment when translating these examples. Reconnect the client after
-registration or an Engine contract update. Confirm that `create_snapshot` and
-`query` are available before starting a standards workflow.
+registration or an Engine contract update. Confirm that `route`, `read`, and
+`propose` are available before starting a standards workflow.
 
 The server supports MCP protocol `2025-11-25` over newline-delimited stdio,
 with initialization, ping, tool discovery, and tool calls. It needs no additional
@@ -85,3 +85,18 @@ and `--example` options remain available; routine MCP use needs none of them.
 Protocol references: [tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools),
 [stdio transport](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports),
 and [lifecycle](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle).
+
+## Advanced Native Operations
+
+The default catalog exposes 15 focused tools. Add `--advanced` to the server
+arguments and reconnect when native snapshot administration, accepted-snapshot
+Analysis, verification preflight, or evidence maintenance is required. That
+catalog exposes all supported generated native and focused operations. The
+reference CLI also retains all native operations; there is no automatic fallback
+from a rejected focused call to a native mutation.
+
+Workflow contexts reference existing immutable revision, analysis, or readiness
+records. Reconnection requires no transport session recovery or context cache.
+`workflow-result` preserves the native outcome and provides Engine-derived next
+operations. A rejected nested outcome sets MCP `isError`; pending or recovery
+outcomes retain their explicit status.

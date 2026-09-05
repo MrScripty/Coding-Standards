@@ -46,7 +46,7 @@ def initialize(server):
 
 class MCPTest(unittest.TestCase):
     def test_catalog_schemas_validate_authored_examples_and_resolve_refs(self):
-        catalog = {tool["name"]: tool for tool in tool_catalog(ROOT)}
+        catalog = {tool["name"]: tool for tool in tool_catalog(ROOT, advanced=True)}
         contract = json.loads(
             (
                 ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
@@ -81,8 +81,29 @@ class MCPTest(unittest.TestCase):
                 if example["definition"] == operation["input_definition"]:
                     Draft202012Validator(tool["inputSchema"]).validate(example["value"])
 
-    def test_lifecycle_and_protocol_errors_never_open_engine(self):
+    def test_default_catalog_focuses_navigation_and_workflows(self):
+        catalog = {t["name"] for t in tool_catalog(ROOT)}
+        self.assertTrue(
+            {
+                "route",
+                "routing_facts",
+                "propose",
+                "review",
+                "apply",
+                "recover",
+            }.issubset(catalog)
+        )
+        self.assertNotIn("query", catalog)
+        self.assertNotIn("apply_proposal", catalog)
         server = MCPServer(ROOT)
+        initialize(server)
+        self.assertEqual(
+            server.dispatch(request("tools/call", {"name": "query"}))["error"]["code"],
+            -32602,
+        )
+
+    def test_lifecycle_and_protocol_errors_never_open_engine(self):
+        server = MCPServer(ROOT, advanced=True)
         with patch.object(AgentToolFacade, "open_repository") as opened:
             self.assertEqual(
                 server.dispatch(request("tools/list"))["error"]["code"], -32000
@@ -106,7 +127,7 @@ class MCPTest(unittest.TestCase):
             opened.assert_not_called()
 
     def test_preserves_typed_outcomes_and_never_retries(self):
-        server = MCPServer(ROOT)
+        server = MCPServer(ROOT, advanced=True)
         initialize(server)
         for kind in (
             "pending-result",
@@ -137,7 +158,7 @@ class MCPTest(unittest.TestCase):
                 opened.return_value.__exit__.assert_called_once()
 
     def test_internal_failure_is_tool_error_without_retry(self):
-        server = MCPServer(ROOT)
+        server = MCPServer(ROOT, advanced=True)
         initialize(server)
         with (
             patch.object(AgentToolFacade, "open_repository") as opened,
@@ -154,7 +175,7 @@ class MCPTest(unittest.TestCase):
             facade.recover_application.assert_not_called()
 
     def test_real_snapshot_read_and_validation_through_server(self):
-        server = MCPServer(ROOT)
+        server = MCPServer(ROOT, advanced=True)
         initialize(server)
         with StandardsEngine.open_repository(ROOT, durable=False) as engine:
             facade = AgentToolFacade(engine, _contracts(ROOT))
@@ -213,7 +234,7 @@ class MCPTest(unittest.TestCase):
     def test_parse_errors_and_notifications_keep_stream_synchronized(self):
         output = io.StringIO()
         serve(
-            MCPServer(ROOT),
+            MCPServer(ROOT, advanced=True),
             io.StringIO(
                 "bad json\n"
                 + json.dumps({"jsonrpc": "2.0", "method": "notifications/cancelled"})
@@ -261,7 +282,7 @@ class MCPTest(unittest.TestCase):
         self.assertEqual(result.stderr, "")
         responses = [json.loads(line) for line in result.stdout.splitlines()]
         self.assertEqual([r["id"] for r in responses], [1, 2])
-        self.assertIn("query", {t["name"] for t in responses[1]["result"]["tools"]})
+        self.assertIn("route", {t["name"] for t in responses[1]["result"]["tools"]})
 
 
 if __name__ == "__main__":

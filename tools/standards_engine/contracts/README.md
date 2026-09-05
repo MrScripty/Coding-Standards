@@ -46,10 +46,50 @@ uses the same fact projection as full Router reads and introduces no new fact
 semantics. `known-absent`, unknown, nullable values, and collection values retain
 the applicability owner's meanings.
 
+## Focused Authoring Context
+
+Interface version 28 adds `propose`, `revise`, `analyze`, `resolve_workflow`,
+`review`, `apply`, `recover`, `workflow_status`, and `resume`. `WorkflowContext`
+is a union of existing immutable revision, analysis, and readiness handles.
+The Engine derives the linked state; clients cannot submit conflicting handle
+combinations. No new handle version or workflow persistence is introduced.
+
+`WorkflowResult` preserves a native `outcome` when applicable and returns the
+current context, exact proposal/revision, status, and bound continuations with
+remaining caller input names. Existing native schemas define those inputs.
+The context does not grant authorization or select a newer revision. Old Analysis
+branches retain their existing immutable branch semantics. Stale revisions need
+explicit `resume`; readiness retains exact review and application identity.
+
+`propose`/`revise` stop after analysis. Rejection after creation preserves the
+revision context. Review and application are never implicit. Recovery-required
+permits only recovery with the same readiness. Native atomic guards protect
+review and publication even if the head changes after a continuation is shown.
+Terminal native application/recovery outcomes are preserved without a secondary
+store read that could obscure the already-established outcome.
+
+The default MCP catalog contains 15 focused tools. `--advanced` exposes all 32
+native and focused operations; the Python facade and reference CLI keep their
+existing advanced capabilities. Schema generation remains the single shape
+owner for both catalogs.
+
 ## Public Operations
 
 | Operation | Input | Success result | Expected rejection |
 | --- | --- | --- | --- |
+| `route` | `RouteCall` | `AgentRouteResult` | `RejectedResult` |
+| `read` | `ReadCall` | `CompactReadResult` or `ReadResult` | `RejectedResult` |
+| `related` | `RelatedCall` | `RelatedResult` | `RejectedResult` |
+| `routing_facts` | `RoutingFactsCall` | `RoutingFactsResult` | `RejectedResult` |
+| `propose` | `ProposeCall` | `WorkflowResult` | `RejectedResult` |
+| `revise` | `ReviseCall` | `WorkflowResult` | `RejectedResult` |
+| `analyze` | `AnalyzeCall` | `WorkflowResult` | `RejectedResult` |
+| `resolve_workflow` | `ResolveWorkflowCall` | `WorkflowResult` | `RejectedResult` |
+| `review` | `ReviewCall` | `WorkflowResult` | `RejectedResult` |
+| `apply` | `ApplyCall` | `WorkflowResult` | `RejectedResult` |
+| `recover` | `RecoverCall` | `WorkflowResult` | `RejectedResult` |
+| `workflow_status` | `WorkflowStatusCall` | `WorkflowResult` | `RejectedResult` |
+| `resume` | `ResumeCall` | `WorkflowResult` | `RejectedResult` |
 | `create_snapshot` | `CreateSnapshotCall` | `CreateSnapshotResult` | `RejectedResult` |
 | `find_snapshots` | `FindSnapshotsCall` | `FindSnapshotsResult` | `RejectedResult` |
 | `delete_snapshot` | `DeleteSnapshotCall` | `DeleteSnapshotResult` | `RejectedResult` |

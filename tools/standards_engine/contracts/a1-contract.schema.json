@@ -147,6 +147,36 @@
     },
     {
       "$ref": "#/$defs/RoutingFactsResult"
+    },
+    {
+      "$ref": "#/$defs/ProposeCall"
+    },
+    {
+      "$ref": "#/$defs/WorkflowResult"
+    },
+    {
+      "$ref": "#/$defs/ReviseCall"
+    },
+    {
+      "$ref": "#/$defs/AnalyzeCall"
+    },
+    {
+      "$ref": "#/$defs/ResolveWorkflowCall"
+    },
+    {
+      "$ref": "#/$defs/ReviewCall"
+    },
+    {
+      "$ref": "#/$defs/ApplyCall"
+    },
+    {
+      "$ref": "#/$defs/RecoverCall"
+    },
+    {
+      "$ref": "#/$defs/WorkflowStatusCall"
+    },
+    {
+      "$ref": "#/$defs/ResumeCall"
     }
   ],
   "$defs": {
@@ -5989,6 +6019,264 @@
         }
       },
       "additionalProperties": false
+    },
+    "WorkflowContext": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      ]
+    },
+    "ProposeCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "change_set": {
+          "$ref": "#/$defs/StandardsChangeSet"
+        }
+      },
+      "required": [
+        "change_set"
+      ]
+    },
+    "ReviseCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "change_set": {
+          "$ref": "#/$defs/StandardsChangeSet"
+        }
+      },
+      "required": [
+        "context",
+        "change_set"
+      ]
+    },
+    "AnalyzeCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ]
+    },
+    "ResolveWorkflowCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "submission": {
+          "$ref": "#/$defs/Submission"
+        }
+      },
+      "required": [
+        "context",
+        "submission"
+      ]
+    },
+    "ReviewCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "decisions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ReviewDecision"
+          }
+        }
+      },
+      "required": [
+        "context",
+        "decisions"
+      ]
+    },
+    "ApplyCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ]
+    },
+    "RecoverCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ]
+    },
+    "WorkflowStatusCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ]
+    },
+    "ResumeCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ]
+    },
+    "WorkflowContinuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "revise",
+            "analyze",
+            "resolve_workflow",
+            "review",
+            "apply",
+            "recover",
+            "workflow_status",
+            "resume"
+          ]
+        },
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "required_inputs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "change_set",
+              "submission",
+              "decisions"
+            ]
+          }
+        }
+      },
+      "required": [
+        "operation",
+        "context",
+        "required_inputs"
+      ]
+    },
+    "WorkflowOutcome": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CreateProposalResult"
+        },
+        {
+          "$ref": "#/$defs/ReviseProposalResult"
+        },
+        {
+          "$ref": "#/$defs/PendingResult"
+        },
+        {
+          "$ref": "#/$defs/CompleteResult"
+        },
+        {
+          "$ref": "#/$defs/ReviewProposalResult"
+        },
+        {
+          "$ref": "#/$defs/ApplyProposalResult"
+        },
+        {
+          "$ref": "#/$defs/ApplicationRecoveryRequiredResult"
+        },
+        {
+          "$ref": "#/$defs/RecoverApplicationResult"
+        },
+        {
+          "$ref": "#/$defs/RejectedResult"
+        }
+      ]
+    },
+    "WorkflowResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "workflow-result"
+        },
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "needs-action",
+            "complete",
+            "requires-change",
+            "ready",
+            "recovery-required",
+            "applied",
+            "rejected",
+            "stale"
+          ]
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WorkflowContinuation"
+          }
+        },
+        "outcome": {
+          "$ref": "#/$defs/WorkflowOutcome"
+        }
+      },
+      "required": [
+        "kind",
+        "context",
+        "proposal",
+        "revision",
+        "status",
+        "next_operations"
+      ]
     }
   }
 }

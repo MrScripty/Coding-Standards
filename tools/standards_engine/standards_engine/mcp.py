@@ -21,6 +21,8 @@ PROTOCOL_VERSION = "2025-11-25"
 CONTRACT_PATH = "tools/standards_engine/contracts/generated/agent-tools.json"
 READ_ONLY_OPERATIONS = frozenset(
     {
+        "workflow_status",
+        "resume",
         "find_snapshots",
         "find_proposals",
         "query",
@@ -28,7 +30,35 @@ READ_ONLY_OPERATIONS = frozenset(
         "inspect",
     }
 )
+FOCUSED_OPERATIONS = frozenset(
+    {
+        "route",
+        "read",
+        "related",
+        "routing_facts",
+        "inspect",
+        "query_proposal",
+        "propose",
+        "revise",
+        "analyze",
+        "resolve_workflow",
+        "review",
+        "apply",
+        "recover",
+        "workflow_status",
+        "resume",
+    }
+)
 DESCRIPTIONS = {
+    "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
+    "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",
+    "analyze": "Analyze the exact draft context and return pending requirements or complete analysis with a new context.",
+    "resolve_workflow": "Supply one actual evidence or owner-decision submission for pending workflow context. Return the new immutable context and Engine-derived continuations.",
+    "review": "Explicitly accept complete analysis using three evidence-backed review decisions. Requires user authorization. Returns readiness as context, without applying.",
+    "apply": "Explicitly verify and locally publish the exact accepted workflow context. Requires user authorization. Recovery-required continues only through recover; never retry an interrupted apply.",
+    "recover": "Explicitly observe the application bound to readiness context after recovery-required. Requires current recovery authority. Never verifies, publishes, retries, or rolls back.",
+    "workflow_status": "Reconstruct the exact workflow context and legal continuations from durable Engine records. Does not select newer revisions or perform mutation.",
+    "resume": "Explicitly select the current revision of the proposal identified by context. Returns a draft context; analysis is a separate next action. Recovery-required must be recovered first.",
     "routing_facts": "Discover snapshot-bound registered routing facts, meanings, types, allowed values, nullability and aliases. Supply known facts to route; missing facts remain unknown. Omit snapshot to capture new accepted authority.",
     "route": "Route explicit registered facts to applicable standards and required closure. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Preserve unresolved questions.",
     "read": "Read exact authoritative policy by canonical ID. Compact detail preserves text and essential authority; full detail includes all relationship rows. Omit snapshot to capture new authority or supply an exact returned snapshot.",
@@ -77,12 +107,14 @@ def schema_closure(root: dict, definitions: dict) -> dict:
     return {**root, "$defs": selected}
 
 
-def tool_catalog(root: Path) -> list[dict]:
+def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
     contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
     definitions = contract["$defs"]
     result = []
     for operation in contract["operations"]:
         name = operation["id"]
+        if not advanced and name not in FOCUSED_OPERATIONS:
+            continue
         result.append(
             {
                 "name": name,
@@ -113,9 +145,9 @@ class ProtocolError(Exception):
 
 
 class MCPServer:
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, *, advanced: bool = False) -> None:
         self.root = root.resolve()
-        self.tools = tool_catalog(self.root)
+        self.tools = tool_catalog(self.root, advanced=advanced)
         self.names = {tool["name"] for tool in self.tools}
         self.initialized = False
         self.ready = False
@@ -209,7 +241,8 @@ class MCPServer:
         return {
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
-            "isError": value.get("kind") == "rejected-result",
+            "isError": value.get("kind") == "rejected-result"
+            or value.get("status") == "rejected",
         }
 
 
@@ -235,8 +268,17 @@ def main() -> int:
         description="Serve Standards Engine tools over MCP stdio."
     )
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument(
+        "--advanced",
+        action="store_true",
+        help="Expose the complete native and focused catalog.",
+    )
     arguments = parser.parse_args()
-    serve(MCPServer(arguments.repo_root), sys.stdin, sys.stdout)
+    serve(
+        MCPServer(arguments.repo_root, advanced=arguments.advanced),
+        sys.stdin,
+        sys.stdout,
+    )
     return 0
 
 

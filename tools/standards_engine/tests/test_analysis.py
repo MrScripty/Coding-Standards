@@ -1202,13 +1202,9 @@ class AnalysisWorkflowTest(unittest.TestCase):
             blocked = facade.review_proposal(blocked_call)
         self.assertEqual(blocked["code"], "AUTHORING.REVIEW_NOT_READY")
 
-        coverage_pending = PendingResult.from_value(
-            facade.resolve(
-                self.disposition_submission(
-                    pending, "proposal-review-evidence"
-                ).as_contract()
-            )
-        )
+        # This policy has no selected consumer disposition in the accepted
+        # corpus. Its remaining review obligation is exact audit coverage.
+        coverage_pending = pending
         self.assertEqual(
             {
                 item.request_kind

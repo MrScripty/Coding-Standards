@@ -435,6 +435,18 @@
       ],
       "type": "object"
     },
+    "AnalyzeCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ],
+      "type": "object"
+    },
     "AnalyzeProposalCall": {
       "additionalProperties": false,
       "properties": {
@@ -554,6 +566,18 @@
         "code",
         "outcome",
         "message"
+      ],
+      "type": "object"
+    },
+    "ApplyCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
       ],
       "type": "object"
     },
@@ -3771,6 +3795,21 @@
       ],
       "type": "object"
     },
+    "ProposeCall": {
+      "additionalProperties": false,
+      "properties": {
+        "change_set": {
+          "$ref": "#/$defs/StandardsChangeSet"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "change_set"
+      ],
+      "type": "object"
+    },
     "ProvenanceRecord": {
       "additionalProperties": false,
       "properties": {
@@ -4343,6 +4382,18 @@
       ],
       "type": "object"
     },
+    "RecoverCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ],
+      "type": "object"
+    },
     "RejectedResult": {
       "additionalProperties": false,
       "properties": {
@@ -4813,6 +4864,34 @@
       ],
       "type": "object"
     },
+    "ResolveWorkflowCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "submission": {
+          "$ref": "#/$defs/Submission"
+        }
+      },
+      "required": [
+        "context",
+        "submission"
+      ],
+      "type": "object"
+    },
+    "ResumeCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ],
+      "type": "object"
+    },
     "RetirePolicyUnitEdit": {
       "additionalProperties": false,
       "properties": {
@@ -4897,6 +4976,28 @@
         "successors",
         "relationship_dispositions",
         "evidence"
+      ],
+      "type": "object"
+    },
+    "ReviewCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/ReviewDecision"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "context",
+        "decisions"
       ],
       "type": "object"
     },
@@ -4995,6 +5096,22 @@
           "$ref": "#/$defs/WholeArtifactScope"
         }
       ]
+    },
+    "ReviseCall": {
+      "additionalProperties": false,
+      "properties": {
+        "change_set": {
+          "$ref": "#/$defs/StandardsChangeSet"
+        },
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context",
+        "change_set"
+      ],
+      "type": "object"
     },
     "RevisePolicyUnitEdit": {
       "additionalProperties": false,
@@ -5839,9 +5956,150 @@
         "kind"
       ],
       "type": "object"
+    },
+    "WorkflowContext": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        {
+          "$ref": "#/$defs/ReadinessHandle"
+        }
+      ]
+    },
+    "WorkflowContinuation": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "operation": {
+          "enum": [
+            "revise",
+            "analyze",
+            "resolve_workflow",
+            "review",
+            "apply",
+            "recover",
+            "workflow_status",
+            "resume"
+          ]
+        },
+        "required_inputs": {
+          "items": {
+            "enum": [
+              "change_set",
+              "submission",
+              "decisions"
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "operation",
+        "context",
+        "required_inputs"
+      ],
+      "type": "object"
+    },
+    "WorkflowOutcome": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CreateProposalResult"
+        },
+        {
+          "$ref": "#/$defs/ReviseProposalResult"
+        },
+        {
+          "$ref": "#/$defs/PendingResult"
+        },
+        {
+          "$ref": "#/$defs/CompleteResult"
+        },
+        {
+          "$ref": "#/$defs/ReviewProposalResult"
+        },
+        {
+          "$ref": "#/$defs/ApplyProposalResult"
+        },
+        {
+          "$ref": "#/$defs/ApplicationRecoveryRequiredResult"
+        },
+        {
+          "$ref": "#/$defs/RecoverApplicationResult"
+        },
+        {
+          "$ref": "#/$defs/RejectedResult"
+        }
+      ]
+    },
+    "WorkflowResult": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "kind": {
+          "const": "workflow-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/WorkflowContinuation"
+          },
+          "type": "array"
+        },
+        "outcome": {
+          "$ref": "#/$defs/WorkflowOutcome"
+        },
+        "proposal": {
+          "$ref": "#/$defs/ProposalHandle"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "needs-action",
+            "complete",
+            "requires-change",
+            "ready",
+            "recovery-required",
+            "applied",
+            "rejected",
+            "stale"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "context",
+        "proposal",
+        "revision",
+        "status",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "WorkflowStatusCall": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        }
+      },
+      "required": [
+        "context"
+      ],
+      "type": "object"
     }
   },
-  "interface_schema_version": 27,
+  "interface_schema_version": 28,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -6127,6 +6385,119 @@
       },
       "result_definitions": [
         "RoutingFactsResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.author",
+      "id": "propose",
+      "input_definition": "ProposeCall",
+      "input_schema": {
+        "$ref": "#/$defs/ProposeCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.author",
+      "id": "revise",
+      "input_definition": "ReviseCall",
+      "input_schema": {
+        "$ref": "#/$defs/ReviseCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.analyze",
+      "id": "analyze",
+      "input_definition": "AnalyzeCall",
+      "input_schema": {
+        "$ref": "#/$defs/AnalyzeCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability_by_submission": {
+        "consumer-disposition": "standards.review.consumer",
+        "coverage-attestation": "standards.review.audit",
+        "impact-disposition": "standards.review.impact",
+        "provide-fact": "standards.analyze"
+      },
+      "id": "resolve_workflow",
+      "input_definition": "ResolveWorkflowCall",
+      "input_schema": {
+        "$ref": "#/$defs/ResolveWorkflowCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.review",
+      "id": "review",
+      "input_definition": "ReviewCall",
+      "input_schema": {
+        "$ref": "#/$defs/ReviewCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.apply",
+      "id": "apply",
+      "input_definition": "ApplyCall",
+      "input_schema": {
+        "$ref": "#/$defs/ApplyCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.proposal.recover",
+      "id": "recover",
+      "input_definition": "RecoverCall",
+      "input_schema": {
+        "$ref": "#/$defs/RecoverCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "workflow_status",
+      "input_definition": "WorkflowStatusCall",
+      "input_schema": {
+        "$ref": "#/$defs/WorkflowStatusCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "resume",
+      "input_definition": "ResumeCall",
+      "input_schema": {
+        "$ref": "#/$defs/ResumeCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
         "RejectedResult"
       ]
     }

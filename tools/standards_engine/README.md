@@ -8,9 +8,9 @@ projections, SQLite records, Git refs/object IDs, and source locators remain
 private Engine implementation facts unless explicitly inspected or selected
 for evidence catalog maintenance.
 
-Agents use the MCP stdio server in `standards_engine/mcp.py`. It exposes every
-generated Interface operation as a native tool with self-contained input and
-output schemas, preserving typed results and exact handles. See
+Agents use the MCP stdio server in `standards_engine/mcp.py`. Its default catalog exposes
+focused navigation and context-based authoring with generated input/output
+schemas. `--advanced` exposes the complete native catalog. See
 [agent connection setup](../../.agents/skills/standards-engine/references/environment.md).
 The existing `.agents/skills/standards-engine/scripts/invoke.py` remains the
 reference/debugging transport.
@@ -28,6 +28,17 @@ its title, authored body, and preserve/change semantic intent. Creation,
 retirement, registered policy-unit movement, `Requires`/`Specializes` changes,
 and policy-impact or broader semantic relationships use other closed edit
 variants. No edit accepts paths or serialized repository files.
+
+Focused `propose` and `revise` compose the existing creation/revision and
+Analysis operations. Their `workflow-result` returns one `context` referencing
+an immutable revision, analysis, or readiness record. The Engine reconstructs
+all linked identities, status, and continuations from existing durable records.
+`resolve_workflow` supplies a real decision/evidence submission; `review`,
+`apply`, and `recover` remain explicit actions. `workflow_status` observes the
+exact context, while `resume` explicitly selects the current proposal revision.
+No transport context cache, mutable workflow store, or new identity scheme is
+introduced. Current authorization and native atomic publication guards remain
+required. Native Python/CLI operations remain supported.
 
 Each accepted revision appends its normalized change set to an immutable
 logical program and advances the durable proposal head only from its exact
@@ -121,3 +132,15 @@ replace independently edited working-tree files. Commit its resulting files
 with the maintenance review. It neither edits normative policy nor issues a
 certificate. Use the normal Engine audit publication workflow for an actual
 review; `review:consumer` ownership alone creates no attestation.
+
+## Agent Interface Acceptance
+
+Focused tests live in `tests/test_agent_navigation.py`, `tests/test_agent_workflow.py`,
+and `tests/test_mcp.py`. The real-client harness `tests/mcp_workflow_client.py`
+requires the official MCP SDK in a separate client environment; it is not an
+Engine dependency. From the repository root, run it with `PYTHONPATH=.` and
+`--engine-python /path/to/locked-engine-python`. The default walkthrough covers
+explicit review, successful application, an interrupted application, cold-process
+recovery, and stale revision handling in an isolated repository. `--pending-only`
+covers explicit resolution of pending normative work. Recorded acceptance and
+client versions are in the [agent interface plan](../../docs/plans/standards-agent-interface/plan.md).

@@ -55,3 +55,29 @@ accepted. A3 is satisfied; no Router or fact semantics changed.
 official MCP client walkthrough. Milestone 1 commit: `e9bac84f`.
 
 **Commit subject:** `feat(standards-engine): expose routing facts and explanations`
+
+## 2026-09-05: Milestone 3 Accepted
+
+**Outcome:** One immutable context carries authoring state; Engine-derived
+continuations preserve explicit review, exact application, and separate recovery.
+All objective acceptance criteria are satisfied. No new context store or identity
+version was necessary.
+
+**Evidence:** [Milestone 3](reports/milestone-3.md), including real-client normal
+publication, pending resolution, stale revision rejection, cold-process recovery,
+and supported Python verification. Milestone 2 commit: `d97e1028`.
+
+**Scope:** Default MCP discovery now exposes 15 focused operations; all 32 remain
+available with `--advanced`. Skills use the focused surface. Personal client
+configuration and the unrelated prototype remain untouched.
+
+**Finding resolved:** Terminal application outcomes must survive projection even
+when a later state read would fail. The wrapper preserves the native outcome
+directly, with a regression assertion and real publication/recovery coverage.
+
+**Commit subject:** `feat(standards-engine): bind authoring tools to immutable workflow context`
+
+**Additional fixture correction:** A broadened native review regression failed
+identically at Milestone 2 because it requested a nonexistent consumer
+disposition. The accepted fixture has only an audit-coverage obligation. Corrected
+the test to assert and resolve that obligation without changing production rules.

@@ -53,6 +53,9 @@ route again against the same snapshot. The advanced Router read with
 
 ## Accepted-Snapshot Analysis
 
+Use the advanced MCP catalog for accepted-snapshot Analysis and snapshot
+administration. Proposal workflows use focused context operations instead.
+
 Use `prepare` only when comparing two accepted Snapshot handles. Supply the
 explicit change descriptors required by its schema; proposal authoring instead
 uses `analyze_proposal`, which derives those descriptors from the immutable

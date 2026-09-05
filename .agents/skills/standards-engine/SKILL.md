@@ -15,7 +15,7 @@ Engine request into direct file, SQL, or Git mutations.
 Use the `standards-engine` MCP tools. The client supplies each operation's
 current input schema; call the named tool directly with structured arguments.
 Tool-name prefixes vary by client; operation names match the Engine contract
-(for example, `create_snapshot`, `query`, and `create_proposal`).
+(for example, `route`, `read`, and `propose`).
 
 Use `routing_facts` when the registered fact vocabulary is unknown. Use
 `route` with explicit engineering facts, `read` for exact policy, and
@@ -33,26 +33,40 @@ Python CLI remains a debugging/reference transport, not the normal skill
 workflow. An unavailable tool connection does not authorize direct standards
 mutation.
 
-Inspect every returned `kind`:
+For authoring, `propose` and `revise` automatically analyze the exact new
+revision. Carry the returned `context` into subsequent workflow calls. It
+references immutable Engine records; preserve it unchanged. `workflow_status`
+reconstructs that exact state after reconnecting. `resume` explicitly selects
+the current proposal revision and returns a draft context.
 
-- A success result advances the workflow using only its returned handles.
-- A `pending-result` is an immutable Analysis state. Follow its projected work
-  and `next_operations`, then submit the requested evidence or disposition with
-  `resolve`.
-- A `rejected-result` is a domain outcome. Follow its `next_operations` when
-  present; otherwise report the code and outcome. Preserve the Engine boundary
-  instead of bypassing rejection with repository edits.
-- An `application-recovery-required-result` advances only through
-  `recover_application` using the same readiness handle. Do not repeat apply,
+Inspect each result's `kind`. A `workflow-result` carries `status`, the native
+`outcome` when applicable, and Engine-derived `next_operations`:
+
+- `needs-action`: supply only the actual evidence or authorized decision named
+  in `outcome`, using `resolve_workflow` and the current context.
+- `complete`: review is possible only with explicit evidence-backed acceptances.
+- `requires-change`: revise the proposal; do not treat completed analysis as
+  approval of its content.
+- `ready`: `apply` verifies and locally publishes the exact accepted context
+  only when the user's authorization covers application.
+- `recovery-required`: use `recover` with the same context. Do not repeat apply,
   infer publication, or repair Git manually.
+- `stale`: inspect the historical result or explicitly `resume`; never replace
+  a reviewed revision implicitly.
+- `rejected` or a top-level `rejected-result`: report the exact code/outcome and
+  follow supported continuations. An unavailable tool or authority is not
+  permission to mutate standards directly.
 
-The MCP transport opens the normal durable Engine store with the repository's
-owner-operated, in-process always-allow authorizer. It authorizes each exact
-request and records local authorization and revocation evidence; no external
-authorization service or session token is required. Low-level Engine callers
-may deliberately supply another authorization adapter or none. Treat
-`ANALYSIS.AUTHORIZATION_UNAVAILABLE`, `ANALYSIS.UNAUTHORIZED`, and
-`ANALYSIS.AUTHORIZATION_UNSUPPORTED` from such a caller as stopping outcomes.
+A continuation supplies bound `context` and names remaining caller inputs. Its
+presence is not an authorization grant; the Engine revalidates current state
+and authority on every action. Transport failure after a mutation has an unknown
+outcome. For interrupted application, retain the readiness context and inspect
+`workflow_status` to obtain the supported recovery continuation.
+
+The default MCP catalog exposes focused tools. Native snapshot administration,
+accepted-snapshot Analysis, verification preflight, and evidence maintenance
+remain available through the explicit advanced catalog; see
+[references/environment.md](references/environment.md).
 
 ## Choose The Workflow
 

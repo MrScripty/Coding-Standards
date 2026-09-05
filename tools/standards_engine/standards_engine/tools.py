@@ -268,6 +268,60 @@ class AgentToolFacade:
             return call
         return self._result("undelete_snapshot", self._engine.undelete_snapshot(call))
 
+    def propose(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("propose", arguments, generated_contract.ProposeCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("propose", self._engine.propose(call))
+
+    def revise(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("revise", arguments, generated_contract.ReviseCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("revise", self._engine.revise(call))
+
+    def analyze(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("analyze", arguments, generated_contract.AnalyzeCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("analyze", self._engine.analyze(call))
+
+    def resolve_workflow(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("resolve_workflow", arguments, generated_contract.ResolveWorkflowCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("resolve_workflow", self._engine.resolve_workflow(call))
+
+    def review(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("review", arguments, generated_contract.ReviewCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("review", self._engine.review(call))
+
+    def apply(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("apply", arguments, generated_contract.ApplyCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("apply", self._engine.apply(call))
+
+    def recover(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("recover", arguments, generated_contract.RecoverCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("recover", self._engine.recover(call))
+
+    def workflow_status(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("workflow_status", arguments, generated_contract.WorkflowStatusCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("workflow_status", self._engine.workflow_status(call))
+
+    def resume(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("resume", arguments, generated_contract.ResumeCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("resume", self._engine.resume(call))
+
     def route(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("route", arguments, generated_contract.RouteCall)
         if isinstance(call, dict):

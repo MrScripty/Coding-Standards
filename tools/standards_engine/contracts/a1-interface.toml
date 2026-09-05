@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 27
+interface_schema_version = 28
 request_contract_version = 5
 result_projection_version = 6
 
@@ -139,4 +139,58 @@ capability = "standards.read"
 id = "routing_facts"
 input_definition = "RoutingFactsCall"
 result_definitions = ["RoutingFactsResult", "RejectedResult"]
+capability = "standards.read"
+
+[[operations]]
+id = "propose"
+input_definition = "ProposeCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.proposal.author"
+
+[[operations]]
+id = "revise"
+input_definition = "ReviseCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.proposal.author"
+
+[[operations]]
+id = "analyze"
+input_definition = "AnalyzeCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.analyze"
+
+[[operations]]
+id = "resolve_workflow"
+input_definition = "ResolveWorkflowCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability_by_submission = { provide-fact = "standards.analyze", consumer-disposition = "standards.review.consumer", impact-disposition = "standards.review.impact", coverage-attestation = "standards.review.audit" }
+
+[[operations]]
+id = "review"
+input_definition = "ReviewCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.proposal.review"
+
+[[operations]]
+id = "apply"
+input_definition = "ApplyCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.proposal.apply"
+
+[[operations]]
+id = "recover"
+input_definition = "RecoverCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.proposal.recover"
+
+[[operations]]
+id = "workflow_status"
+input_definition = "WorkflowStatusCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability = "standards.read"
+
+[[operations]]
+id = "resume"
+input_definition = "ResumeCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
 capability = "standards.read"

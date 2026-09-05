@@ -1,12 +1,12 @@
 # Plan: A Simpler Agent Interface For The Standards Engine
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 3 — bound authoring contexts and mechanical continuations
+**Current phase:** Final acceptance
 
-**Next slice:** Implement Engine-validated authoring contexts and state-specific continuation operations.
+**Next slice:** None; all three milestones are accepted.
 
-**Acceptance status:** `partial`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -22,8 +22,8 @@ explicit engineering facts and semantic intent.
 
 The existing MCP transport removes shell invocation and manual schema discovery.
 This plan improves the Interface that transport exposes. The user has authorized implementation and milestone commits. The existing
-MCP work is included as the Milestone 1 prerequisite; it is not evidence that
-the focused improvements are already delivered.
+MCP work was included as the Milestone 1 prerequisite. The milestone reports
+record the delivered improvements and their acceptance evidence.
 
 ## Objective Acceptance
 
@@ -32,11 +32,11 @@ the focused improvements are already delivered.
 | A1 | Given known explicit facts, one `route` call without a snapshot captures authority and returns the same selections, required closure, and unresolved conditions as explicit snapshot plus native routing. | `integration` | isolated repository | `automated` | `satisfied` | [Milestone 1 evidence](reports/milestone-1.md) |
 | A2 | Default `read` returns exact policy content and essential authority metadata without the full relationship projection; full detail remains retrievable against the same snapshot. | `integration` | isolated repository | `automated` | `satisfied` | [Milestone 1 evidence](reports/milestone-1.md) |
 | A3 | An agent can discover the registered fact vocabulary and distinguish base selection, matched rules, required dependencies, and unresolved applicability from structured results. | `integration` | isolated repository | `automated` | `satisfied` | [Milestone 2 evidence](reports/milestone-2.md) |
-| A4 | One returned workflow context carries the identities needed for subsequent authoring steps and survives process replacement without silently switching proposal revisions. | `integration` | isolated durable repository, separate processes | `automated` | `pending` | Milestone 3 |
-| A5 | Stale, mismatched, forged, or cross-repository contexts and illegal transitions cannot publish or reinterpret accepted content; current authorization remains independently required. | `integration` | isolated durable repository | `automated` | `pending` | Milestone 3 |
-| A6 | Mechanical progression stops at missing facts, evidence, semantic decisions, authorization, rejection, or recovery; application uses the exact accepted readiness and is never automatically retried. | `integration` | isolated repository with controlled failure injection | `automated` | `pending` | Milestone 3 |
-| A7 | A real MCP client can perform lookup and the authoring/recovery scenarios with native tools and the revised skill, without shell schema discovery or caller-managed private state. | `user-visible` | configured MCP client and isolated repository | `manual` | `pending` | Recorded client walkthrough |
-| A8 | Generated contracts, focused regressions, skill validation, and the complete repository checkpoint pass; declared supported Python and reference-transport consumers remain usable. | `integration` | repository-supported Python environments | `automated` | `pending` | Final verification report |
+| A4 | One returned workflow context carries the identities needed for subsequent authoring steps and survives process replacement without silently switching proposal revisions. | `integration` | isolated durable repository, separate processes | `automated` | `satisfied` | [Milestone 3 evidence](reports/milestone-3.md) |
+| A5 | Stale, mismatched, forged, or cross-repository contexts and illegal transitions cannot publish or reinterpret accepted content; current authorization remains independently required. | `integration` | isolated durable repository | `automated` | `satisfied` | [Milestone 3 evidence](reports/milestone-3.md) |
+| A6 | Mechanical progression stops at missing facts, evidence, semantic decisions, authorization, rejection, or recovery; application uses the exact accepted readiness and is never automatically retried. | `integration` | isolated repository with controlled failure injection | `automated` | `satisfied` | [Milestone 3 evidence](reports/milestone-3.md) |
+| A7 | A real MCP client can perform lookup and the authoring/recovery scenarios with native tools and the revised skill, without shell schema discovery or caller-managed private state. | `user-visible` | configured MCP client and isolated repository | `manual` | `satisfied` | [Recorded SDK client walkthrough](reports/milestone-3.md) |
+| A8 | Generated contracts, focused regressions, skill validation, and the complete repository checkpoint pass; declared supported Python and reference-transport consumers remain usable. | `integration` | repository-supported Python environments | `automated` | `satisfied` | [Final verification](reports/milestone-3.md) |
 
 ## Scope
 
@@ -107,6 +107,23 @@ A task starts with known facts or vocabulary discovery, routes, then reads the
 selected policies using the returned snapshot. A changed task supplies revised
 facts; a request for current accepted standards explicitly creates new snapshot
 state. Neither action silently changes existing proposal or reading authority.
+
+## Milestone 3 Context Representation
+
+The workflow context references one existing immutable revision, analysis, or
+readiness record. Engine reconstructs the proposal, base snapshot, exact revision,
+analysis, and application selection through that record's existing links. No
+new workflow store, handle identity version, or persistent aggregate is needed.
+This removes caller-side combinations that could disagree by construction;
+stored association checks remain Engine-owned. Historical Analysis branches
+remain valid immutable branches, not a hidden latest-analysis selection.
+
+Focused `propose` and `revise` compose native creation/revision with analysis,
+then stop at the returned decision/evidence requirements. `review`, `apply`, and
+`recover` remain separate explicit tools. `workflow_status` observes the bound
+context; `resume` explicitly selects the current proposal revision and returns
+a draft context requiring an explicit next action. Default MCP discovery favors
+the focused surface; `--advanced` exposes the complete supported native catalog.
 
 ## Simplicity And Ownership Review
 
@@ -255,29 +272,29 @@ bounded owner-path revision described below before implementation.
 
 **Tasks:**
 
-- [ ] Specify the minimal context aggregate and its lifecycle from the existing
+- [x] Specify the minimal context aggregate and its lifecycle from the existing
   snapshot, proposal, revision, analysis, readiness, and application records.
   Choose a generated value/reference representation that Engine can validate
   after restart; avoid new persistence if existing records suffice.
-- [ ] Bound the exact identity/store owner paths if durable representation must
+- [x] Bound the exact identity/store owner paths if durable representation must
   change. Record the required compatibility and invalidation effects, then
   revise the write set before editing those owners.
-- [ ] Validate association and repository scope for every context member. Return
+- [x] Validate association and repository scope for every context member. Return
   a new immutable context after progression; never mutate an old context to
   select a newer proposal head. Resume exposes current head explicitly.
-- [ ] Project actionable continuations from Engine state with bound identities
+- [x] Project actionable continuations from Engine state with bound identities
   and schemas for the remaining caller inputs. Retain historical inspection;
   reject stale transition attempts even when a prior result offered them.
-- [ ] Add focused context-consuming authoring operations. Compose only the
+- [x] Add focused context-consuming authoring operations. Compose only the
   deterministic steps authorized by each operation, stopping on the first
   pending decision, unavailable authority, rejection, or recovery result.
-- [ ] Keep `review`, `apply`, and `recover` explicit and semantically distinct.
+- [x] Keep `review`, `apply`, and `recover` explicit and semantically distinct.
   Reuse existing verification within apply; do not introduce a second review
   lifecycle or repeat an apply after interruption. Coverage-audit sequencing
   remains governed by current Engine readiness requirements.
-- [ ] Test process replacement, concurrent revisions, changed authorization,
+- [x] Test process replacement, concurrent revisions, changed authorization,
   foreign/malformed contexts, interrupted application, and observational recovery.
-- [ ] Cut over the authoring skill and complete the real-client walkthrough.
+- [x] Cut over the authoring skill and complete the real-client walkthrough.
   Reduce default tool duplication with explicit dispositions for every existing
   native/administrative operation; preserve supported advanced access.
 
@@ -286,12 +303,13 @@ Record baseline-versus-final tool calls and caller-carried identities for an
 ordinary proposal, a proposal requiring a decision, a stale revision, and
 recovery. A successful happy path alone cannot accept this milestone.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ## Blockers
 
-None for planning. MCP client registration is not established in this session;
-real-client evidence is required before acceptance. See issue I2.
+None. An isolated official MCP SDK client completed the navigation, authoring,
+and recovery walkthroughs. Personal client configuration was not changed.
+See issue I2 and the milestone evidence for the scope of this acceptance.
 
 ## Re-Plan Triggers
 
@@ -310,7 +328,7 @@ real-client evidence is required before acceptance. See issue I2.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: semantic search and interpreter models are excluded by
   user direction; reconsider only on an explicit future request.
-- Final status: `Planned`
+- Final status: `Accepted`

@@ -107,6 +107,16 @@ from tools.standards_snapshots.standards_snapshots import (
 )
 
 from ._generated_contract import (
+    WorkflowResult,
+    ProposeCall,
+    ReviseCall,
+    AnalyzeCall,
+    ResolveWorkflowCall,
+    ReviewCall,
+    ApplyCall,
+    RecoverCall,
+    WorkflowStatusCall,
+    ResumeCall,
     RouteCall,
     RoutingFactsCall,
     RoutingFactsResult,
@@ -868,6 +878,51 @@ class StandardsEngine:
         except SnapshotError as error:
             return self._domain_rejection(error)
 
+    def propose(self, call: ProposeCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import propose
+
+        return propose(self, call)
+
+    def revise(self, call: ReviseCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "revise", call)
+
+    def analyze(self, call: AnalyzeCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "analyze", call)
+
+    def resolve_workflow(self, call: ResolveWorkflowCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "resolve_workflow", call)
+
+    def review(self, call: ReviewCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "review", call)
+
+    def apply(self, call: ApplyCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "apply", call)
+
+    def recover(self, call: RecoverCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "recover", call)
+
+    def workflow_status(self, call: WorkflowStatusCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "workflow_status", call)
+
+    def resume(self, call: ResumeCall) -> WorkflowResult | RejectedResult:
+        from .agent_workflow import advance
+
+        return advance(self, "resume", call)
+
     def route(self, call: RouteCall) -> AgentRouteResult | RejectedResult:
         from .agent_navigation import navigate
 
@@ -985,6 +1040,10 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @classmethod
+    def _review_requires_change(cls, state: DomainAnalysisState) -> bool:
+        return any(cls._plain(item).get("result") == "requires-change" for item in state.dispositions)
+
     def review_proposal(
         self, call: ReviewProposalCall
     ) -> ReviewProposalResult | RejectedResult:
@@ -997,10 +1056,7 @@ class StandardsEngine:
                     "unavailable",
                     "Proposal review requires a complete analysis.",
                 )
-            if any(
-                self._plain(item).get("result") == "requires-change"
-                for item in state.dispositions
-            ):
+            if self._review_requires_change(state):
                 return self._reject(
                     "AUTHORING.REVIEW_NOT_READY",
                     "unavailable",

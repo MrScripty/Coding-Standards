@@ -13,8 +13,8 @@ Completed prerequisites do not close the parent objective. See the
 [archive](../archive/README.md) for accepted and superseded plans, and the
 [decision index](../decisions/README.md) for current architecture.
 
-## Planned Agent Interface Work
+## Accepted Agent Interface Work
 
-[Standards Agent Interface](standards-agent-interface/plan.md) plans focused
+[Standards Agent Interface](standards-agent-interface/plan.md) delivers focused
 navigation, explicit-fact discovery and routing explanations, and bound authoring
-contexts over the Engine. It is `Active`; navigation and routing explanations are accepted; authoring contexts are next. It does not replace the active Standards Library Effectiveness effort.
+contexts over the Engine. It is `Accepted`; all three milestones and their acceptance checks are complete. It does not replace the active Standards Library Effectiveness effort.

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 27,
+  "interface_schema_version": 28,
   "examples": [
     {
       "name": "create-snapshot",
@@ -464,6 +464,191 @@
       "name": "discover-routing-facts",
       "definition": "RoutingFactsCall",
       "value": {}
+    },
+    {
+      "name": "workflow-propose",
+      "definition": "ProposeCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "change_set": {
+          "purpose": {
+            "summary": "Clarify when written plans are required",
+            "rationale": "The policy should distinguish coordination risk from file-category triggers.",
+            "evidence": [
+              {
+                "id": "evidence.planning-review",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          "edits": [
+            {
+              "kind": "revise-policy-unit",
+              "policy": "workflow.planning.written-plan-applicability",
+              "title": "When A Written Plan Is Required",
+              "body": "Create a written plan when material sequencing, coordination, rollout, risk, or acceptance complexity must remain stable during implementation.",
+              "semantics": {
+                "kind": "change",
+                "accepted_semantic_revision": 1,
+                "proposed_semantic_revision": 2,
+                "intent": "Make coordination complexity, rather than file category, the deciding planning trigger."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "workflow-revise",
+      "definition": "ReviseCall",
+      "value": {
+        "context": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "change_set": {
+          "purpose": {
+            "summary": "Clarify when written plans are required",
+            "rationale": "The policy should distinguish coordination risk from file-category triggers.",
+            "evidence": [
+              {
+                "id": "evidence.planning-review",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          "edits": [
+            {
+              "kind": "revise-policy-unit",
+              "policy": "workflow.planning.written-plan-applicability",
+              "title": "When A Written Plan Is Required",
+              "body": "Create a written plan when material sequencing, coordination, rollout, risk, or acceptance complexity must remain stable during implementation.",
+              "semantics": {
+                "kind": "change",
+                "accepted_semantic_revision": 1,
+                "proposed_semantic_revision": 2,
+                "intent": "Make coordination complexity, rather than file category, the deciding planning trigger."
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "workflow-analyze",
+      "definition": "AnalyzeCall",
+      "value": {
+        "context": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "workflow-review",
+      "definition": "ReviewCall",
+      "value": {
+        "context": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 6
+        },
+        "decisions": [
+          {
+            "owner": "consumer",
+            "decision": "accept",
+            "rationale": "Consumer obligations are satisfied.",
+            "evidence": [
+              {
+                "id": "evidence.consumer-review",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          {
+            "owner": "impact",
+            "decision": "accept",
+            "rationale": "Policy impact obligations are satisfied.",
+            "evidence": [
+              {
+                "id": "evidence.impact-review",
+                "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          },
+          {
+            "owner": "audit",
+            "decision": "accept",
+            "rationale": "Audit coverage obligations are satisfied.",
+            "evidence": [
+              {
+                "id": "evidence.audit-review",
+                "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "provider_contract": "review-evidence",
+                "provider_contract_version": "1"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "workflow-apply",
+      "definition": "ApplyCall",
+      "value": {
+        "context": {
+          "kind": "readiness-handle",
+          "id": "readiness:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "workflow-recover",
+      "definition": "RecoverCall",
+      "value": {
+        "context": {
+          "kind": "readiness-handle",
+          "id": "readiness:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "workflow-workflow_status",
+      "definition": "WorkflowStatusCall",
+      "value": {
+        "context": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "workflow-resume",
+      "definition": "ResumeCall",
+      "value": {
+        "context": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
+      }
     }
   ]
 }

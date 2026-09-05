@@ -699,6 +699,11 @@ class AuthoringModule:
             None if page.continuation is None else ProposalId(page.continuation),
         )
 
+    def current_revision(self, proposal: ProposalId) -> ProposalRevision:
+        root = self._snapshots.load_aggregate_root(str(proposal))
+        summary = self._summary_from_root(root)
+        return self.read_revision(summary.head_revision)
+
     def read_revision(self, revision_id: str) -> ProposalRevision:
         if not _revision_id(revision_id):
             raise _invalid(

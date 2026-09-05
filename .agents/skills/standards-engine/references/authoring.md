@@ -6,38 +6,39 @@ Repository representation remains private.
 
 ## Proposal Lifecycle
 
-1. Call `create_snapshot`; use its returned Snapshot handle as the proposal
-   base.
-2. Form one non-empty `StandardsChangeSet` with an evidence-backed `purpose`
-   and the smallest complete set of explicit edits. Use the `create_proposal` tool
-   schema supplied by the client.
-3. Call `create_proposal`. Retain both the proposal and exact revision handles.
-4. Use `query_proposal` to read, route, or inspect relationships in that exact
-   projected revision. For ordinary edits, run `verify_proposal` and inspect
-   its report. Coverage-audit proposals require review readiness before
-   verification. Call `analyze_proposal` with the revision handle; a passing
-   checkpoint does not replace semantic review.
-5. Resolve each pending Analysis requirement for which an authorized owner has
-   supplied the exact decision and evidence through the public `resolve`
-   operation. Otherwise stop and report the pending state. The Engine derives
-   mechanical projection only.
-6. If the proposal must change, call `revise_proposal` with the exact current
-   `expected_revision` and another atomic change set, then analyze the returned
-   revision. A stale revision is rejected rather than merged implicitly.
-7. After Analysis is complete, `review_proposal` requires explicit consumer,
-   impact, and audit decisions with evidence plus current trusted
-   authorization. Retain the returned readiness handle.
-8. For coverage audits, call `verify_proposal` with both the revision and
-   readiness handles and require a passing result. Then call `apply_proposal`
-   once with that readiness handle. Success means the
-   exact candidate passed the complete checkpoint and was published to the
-   configured local canonical ref.
-9. If application returns recovery-required, call `recover_application` with
-   the same readiness handle. Recovery observes durable state; it does not
-   stage, verify, publish, retry, or roll back.
+1. Form one non-empty `StandardsChangeSet` with an evidence-backed purpose and
+   the smallest complete set of explicit edits. Use the `propose` tool schema.
+2. Call `propose` with that change set and a retained snapshot, or omit snapshot
+   to capture current accepted authority. The Engine creates the proposal and
+   analyzes it. Retain its returned `context`.
+3. For `needs-action`, inspect `outcome.fact_requirements`, `outcome.obligations`,
+   and the projected work. Use `resolve_workflow` with the current context and
+   one actual evidence/owner-decision submission. A returned context identifies
+   the exact resulting immutable analysis branch.
+4. If meaning must change, call `revise` with the context and an atomic change
+   set. It derives the exact expected revision and analyzes the successor.
+   Stale contexts reject instead of selecting a newer head.
+5. `complete` analysis can be explicitly `review`ed with consumer, impact, and
+   audit acceptances and their evidence. `requires-change` permits revision,
+   not review. User authorization must cover the requested review.
+6. `ready` returns a readiness context. Call `apply` once when authorized. It
+   verifies the exact candidate (including coverage-audit publication) through
+   the Engine's complete checkpoint before local publication.
+7. For `recovery-required`, call `recover` using that same context. It observes
+   durable state without verification, publication, retries, or rollback.
 
-Use `find_proposals` to resume durable proposal heads and `query_proposal` to
-reconstruct an exact historical revision after process replacement.
+Use `workflow_status` to reconstruct exact state after reconnecting. A `stale`
+context remains historical; `resume` explicitly selects the proposal's current
+revision and returns a draft context for `analyze` or `revise`. Existing Analysis
+branches remain immutable branches; there is no hidden latest-analysis pointer.
+If all task context is lost, use advanced `find_proposals` and pass the selected
+revision as context to resume explicitly.
+
+`query_proposal` and the returned `revision` remain available for exact historical
+reads and relationship discovery. Native preflight `verify_proposal` is in the
+advanced catalog; it does not replace review or the verification inside apply.
+A verification or Analysis failure after proposal creation retains a revision
+context when available, so the created proposal is not mistaken for absent work.
 
 ## Edit Selection
 
@@ -56,7 +57,7 @@ The closed edit variants are:
 - `put-routing-fact` / `remove-routing-fact`
 - `audit-policy-unit`
 
-Use the `create_proposal` tool definition for their current exact fields. In
+Use the `propose` tool definition for their current exact fields. In
 particular:
 
 - whole-standard body changes must include companion policy-unit semantic
@@ -69,8 +70,9 @@ particular:
 - non-standard relationship consumers use an `authoring-target-handle`
   returned by Snapshot-bound relationship discovery.
 
-Before editing routes, use `query` or `query_proposal` with a Router read
-request: `{"kind":"read","target":"router","include_routing":true}`. The
+Before editing routes, use focused `read` or `query_proposal` with a Router read
+request: `{"target":"router","include_routing":true}` for `read` (add the native
+`kind: "read"` inside the request for `query_proposal`). The
 returned `routing` field supplies editable rule and fact definitions.
 
 Routing edits name canonical rule, fact, and target IDs. A rule supplies its
@@ -100,10 +102,10 @@ review rationale. These edits request certificate publication without changing
 standard text. Already-current certificates need no renewal.
 
 Resolve the exact coverage and consumer obligations, then obtain review
-readiness. `verify_proposal` requires that readiness for an audit proposal so
-it checks the candidate containing the receipt. Application reauthorizes the
-review through the configured Engine auditor, checks destination evidence and
-requirement identities, and publishes through the normal application lifecycle.
+readiness with `review`. `apply` verifies the candidate containing the receipt
+and reauthorizes publication through the configured Engine auditor. If a
+separate preflight is needed, advanced `verify_proposal` requires both the
+returned revision and readiness context for a coverage-audit proposal.
 
 Repository publications use Engine audit authority. Receipt records preserve
 the actual auditor separately from caller-supplied provenance, along with
@@ -124,6 +126,8 @@ outcome for this workflow.
 
 ## Repository Verification
 
+These administrative calls use the explicit advanced MCP catalog.
+
 Use `verify_repository` to check the current working tree. Set
 `refresh_verification_inputs` to `false` for a read-only checkpoint. When
 source edits have made the generated suite-input manifest stale, set it to
@@ -137,6 +141,8 @@ isolated candidate and runs the same checkpoint used by application; it does
 not publish a ref or supply review decisions. Application rechecks the candidate.
 
 ## Evidence Catalog Maintenance
+
+Use the advanced MCP catalog for these operations.
 
 Use `maintain_evidence` for explicit certificate/check/suite retirements,
 evidence descriptions, and consumer registrations. Use its tool schema and
