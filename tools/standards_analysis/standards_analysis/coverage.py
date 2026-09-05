@@ -732,7 +732,12 @@ def load_repository_coverage_decisions(
             field="attestation source",
         )
         claims = declaration["attestations"]
-        if declaration["schema_version"] != 5 or not isinstance(claims, list):
+        version = declaration["schema_version"]
+        if (
+            type(version) is not int
+            or version not in {5, 6}
+            or not isinstance(claims, list)
+        ):
             raise _error(
                 "COVERAGE.ATTESTATION_VERSION",
                 "unsupported repository attestation source version",
@@ -745,9 +750,11 @@ def load_repository_coverage_decisions(
                     "attestation must be a table",
                     path=claim_source,
                 )
-            claim = _coverage_claim(raw_claim, claim_source)
-            inputs.update(claim["evidence"])
-            inputs.update(claim["explicit_exclusions"])
+            claim = _coverage_claim(raw_claim, claim_source, version)
+            inputs.update(
+                item.id if isinstance(item, EvidenceReference) else item
+                for item in (*claim["evidence"], *claim["explicit_exclusions"])
+            )
             requirement_id = str(claim["requirement_id"])
             subject = requirement_subjects.get(requirement_id)
             if subject is None:
@@ -767,12 +774,16 @@ def load_repository_coverage_decisions(
                     observed=str(claim["auditor_provenance"]),
                 )
             evidence = tuple(
-                _repository_evidence(source, path)
-                for path in claim["evidence"]
+                item
+                if isinstance(item, EvidenceReference)
+                else _repository_evidence(source, item)
+                for item in claim["evidence"]
             )
             exclusions = tuple(
-                _repository_evidence(source, path)
-                for path in claim["explicit_exclusions"]
+                item
+                if isinstance(item, EvidenceReference)
+                else _repository_evidence(source, item)
+                for item in claim["explicit_exclusions"]
             )
             authorization = construct_authorization_record(
                 AnalysisExecutionContext(authority),
@@ -781,7 +792,7 @@ def load_repository_coverage_decisions(
                     "coverage-requirement",
                     requirement_id,
                     authority.capability,
-                    evidence,
+                    (*evidence, *exclusions),
                 ),
             )
             legacy_grant = analysis_identity(
@@ -795,7 +806,10 @@ def load_repository_coverage_decisions(
                 },
             )
             authorization_id = str(authorization.reference["id"])
-            if legacy_grant in authority.revoked or authorization_id in authority.revoked:
+            if (
+                legacy_grant in authority.revoked
+                or authorization_id in authority.revoked
+            ):
                 raise _error(
                     "COVERAGE.AUTHORIZATION_REVOKED",
                     "repository coverage authorization is revoked",
@@ -807,9 +821,7 @@ def load_repository_coverage_decisions(
                     "requirement_id": requirement_id,
                     "conclusion": claim["conclusion"],
                     "evidence": [item.as_contract() for item in evidence],
-                    "explicit_exclusions": [
-                        item.as_contract() for item in exclusions
-                    ],
+                    "explicit_exclusions": [item.as_contract() for item in exclusions],
                     "rationale": claim["rationale"],
                     "auditor_provenance": claim["auditor_provenance"],
                     "schema_version": 4,
@@ -945,7 +957,9 @@ def _load_repository_authorization(
     )
 
 
-def _coverage_claim(raw: Mapping[str, object], path: str) -> dict[str, object]:
+def _coverage_claim(
+    raw: Mapping[str, object], path: str, version: int = 5
+) -> dict[str, object]:
     fields = {
         "requirement_id",
         "conclusion",
@@ -967,18 +981,72 @@ def _coverage_claim(raw: Mapping[str, object], path: str) -> dict[str, object]:
             raw["requirement_id"], path=path
         ),
         "conclusion": conclusion,
-        "evidence": _texts(raw["evidence"], path=path, field="evidence"),
-        "explicit_exclusions": _texts(
+        "evidence": _claim_evidence(
+            raw["evidence"], path=path, field="evidence", version=version
+        ),
+        "explicit_exclusions": _claim_evidence(
             raw["explicit_exclusions"],
             path=path,
             field="explicit_exclusions",
             allow_empty=True,
+            version=version,
         ),
         "rationale": _text(raw["rationale"], path=path, field="rationale"),
         "auditor_provenance": _text(
             raw["auditor_provenance"], path=path, field="auditor_provenance"
         ),
     }
+
+
+def _claim_evidence(
+    value: object, *, path: str, field: str, version: int, allow_empty: bool = False
+) -> tuple[str, ...] | tuple[EvidenceReference, ...]:
+    if version == 5:
+        return _texts(value, path=path, field=field, allow_empty=allow_empty)
+    if not isinstance(value, list) or (not value and not allow_empty):
+        raise _error(
+            "COVERAGE.EVIDENCE",
+            "pinned evidence must be an array",
+            path=path,
+            field=field,
+        )
+    references = []
+    fields = {"id", "digest", "provider_contract", "provider_contract_version"}
+    for item in value:
+        if not isinstance(item, dict):
+            raise _error(
+                "COVERAGE.EVIDENCE",
+                "pinned evidence must contain reference tables",
+                path=path,
+                field=field,
+            )
+        _exact(item, required=fields, allowed=fields, path=path, field=field)
+        reference = EvidenceReference(
+            **{
+                key: _text(item[key], path=path, field=f"{field}.{key}")
+                for key in fields
+            }
+        )
+        if (
+            reference.provider_contract != "repository-content"
+            or reference.provider_contract_version != "1"
+            or re.fullmatch(r"sha256:[0-9a-f]{64}", reference.digest) is None
+        ):
+            raise _error(
+                "COVERAGE.EVIDENCE",
+                "pinned repository evidence requires a SHA-256 digest and repository-content version 1",
+                path=path,
+                field=field,
+            )
+        references.append(reference)
+    if len({item.id for item in references}) != len(references):
+        raise _error(
+            "COVERAGE.EVIDENCE",
+            "pinned evidence paths must be unique",
+            path=path,
+            field=field,
+        )
+    return tuple(references)
 
 
 def _coverage_requirement_digest(value: object, *, path: str) -> str:

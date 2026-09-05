@@ -1730,6 +1730,7 @@ class StandardsEngine:
             if obligation is None:
                 self._not_applicable()
             evidence = self._evidence(claim.evidence)
+            exclusions = self._evidence(claim.explicit_exclusions)
             authorization = construct_authorization_record(
                 self._execution_context,
                 AuthorizationRequest(
@@ -1737,7 +1738,7 @@ class StandardsEngine:
                     "coverage-requirement",
                     coverage.requirement_id,
                     "standards.review.audit",
-                    evidence,
+                    (*evidence, *exclusions),
                 ),
             )
             attestation = {
@@ -1745,8 +1746,7 @@ class StandardsEngine:
                 "conclusion": claim.conclusion,
                 "evidence": [item.as_contract() for item in evidence],
                 "explicit_exclusions": [
-                    item.as_contract()
-                    for item in self._evidence(claim.explicit_exclusions)
+                    item.as_contract() for item in exclusions
                 ],
                 "rationale": claim.rationale,
                 "auditor_provenance": claim.auditor_provenance,

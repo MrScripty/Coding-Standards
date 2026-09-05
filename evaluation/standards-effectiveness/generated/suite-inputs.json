@@ -15759,7 +15759,7 @@
       ]
     },
     {
-      "digest": "sha256:cc3f904adf4f9bc7817762aa1aa71ca4140c136a4992c85aaf282c3b034a8e7e",
+      "digest": "sha256:da6f91d3180f1ac870662d873966edcd7a8a04ac7c48c0415aeeefc4ba1f0e31",
       "path": "tools/standards_analysis/standards_analysis/coverage.py",
       "state": "present",
       "uses": [
@@ -15966,7 +15966,7 @@
       ]
     },
     {
-      "digest": "sha256:709ed8ea6cdc9efa29f19c949556cd87a68299e100b6345a0c13d3b9b7054249",
+      "digest": "sha256:6dd351c941cfff935420a54f72835503162b9e2258727cac10d3f5d7218caf22",
       "path": "tools/standards_analysis/tests/test_coverage.py",
       "state": "present",
       "uses": [
@@ -16529,7 +16529,7 @@
       ]
     },
     {
-      "digest": "sha256:5cbe818daae19adfd4e122ce9544ede95f21f010505d6b7a8a8e3cd7deea01b6",
+      "digest": "sha256:ed96b5efea5f6b25e9d32930bef3c675060d42d7f3182264e50cead340c8505c",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -16613,7 +16613,7 @@
       ]
     },
     {
-      "digest": "sha256:ea243900ed69bdf182d2e490fdbc924d5965686962bca86f50d561040f026929",
+      "digest": "sha256:00aea599846505886e20099385f6575ca503bcb5efadb5e22f15794e556bf36a",
       "path": "tools/standards_engine/tests/test_analysis.py",
       "state": "present",
       "uses": [
@@ -23502,7 +23502,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:7444dff8810be4354127aca0cfd705400ab40c2297d6686348610e53f89223a1",
+    "digest": "sha256:5a792ccbbe267e8b4cd92369a29b856fcabff8212496f2a89a7fa7c3c3893004",
     "uses": [
       {
         "check": "python-package-contract",

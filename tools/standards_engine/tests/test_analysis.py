@@ -249,6 +249,32 @@ class DenyingAuthorizer:
 
 
 class AnalysisWorkflowTest(unittest.TestCase):
+    def test_coverage_exclusions_require_exact_evidence_before_resolution(self):
+        pending = self.prepare()
+        self.assertIsInstance(pending, PendingResult)
+        submission = self.coverage_submission(pending, "coverage-review").as_contract()
+        exclusion = _reference("excluded-consumer")
+        submission["submission"]["claim"]["explicit_exclusions"] = [
+            {**exclusion.as_contract(), "digest": "sha256:" + "0" * 64}
+        ]
+        counts = self.engine._snapshots._store.counts()
+        rejected = self.engine.resolve(ResolveCall.from_value(submission))
+        self.assertIsInstance(rejected, RejectedResult)
+        self.assertEqual(rejected.code, "ANALYSIS.EVIDENCE_DIGEST_MISMATCH")
+        self.assertEqual(self.engine._snapshots._store.counts(), counts)
+
+        submission["submission"]["claim"]["explicit_exclusions"] = [
+            exclusion.as_contract()
+        ]
+        authorizer = self.engine._execution_context.authorization
+        with mock.patch.object(
+            authorizer, "authorize", wraps=authorizer.authorize
+        ) as authorize:
+            resolved = self.engine.resolve(ResolveCall.from_value(submission))
+        self.assertIsInstance(resolved, (PendingResult, CompleteResult))
+        request = authorize.call_args.args[0]
+        self.assertEqual(request.evidence, (_reference("coverage-review"), exclusion))
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.temporary = tempfile.TemporaryDirectory()

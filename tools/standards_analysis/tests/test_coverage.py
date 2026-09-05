@@ -295,24 +295,47 @@ class CoverageTest(unittest.TestCase):
         requirement_id: str | None = None,
         principal: str = "principal.coverage",
         duplicate: bool = False,
+        pinned: bool = False,
+        exclusions: tuple[str, ...] = (),
     ) -> None:
         definitions = self.definitions()
         current_requirement = coverage_requirement_id(
             definitions.requirements["workflow.policy.rule"],
             definitions.views["workflow.policy.rule"],
         )
+
+        def evidence_value(path):
+            if not pinned:
+                return json.dumps(path)
+            fields = {
+                "id": path,
+                "digest": "sha256:"
+                + hashlib.sha256((self.root / path).read_bytes()).hexdigest(),
+                "provider_contract": "repository-content",
+                "provider_contract_version": "1",
+            }
+            return (
+                "{ "
+                + ", ".join(
+                    f"{key} = {json.dumps(value)}" for key, value in fields.items()
+                )
+                + " }"
+            )
+
         claim = f"""
             [[attestations]]
             requirement_id = "{requirement_id or current_requirement}"
             conclusion = "complete"
-            evidence = ["evidence/review.md"]
-            explicit_exclusions = []
+            evidence = [{evidence_value("evidence/review.md")}]
+            explicit_exclusions = [{", ".join(evidence_value(path) for path in exclusions)}]
             rationale = "The bounded horizon was reviewed."
             auditor_provenance = "{principal}"
         """
         self.write(
             "attestations.toml",
-            "schema_version = 5\n" + claim + (claim if duplicate else ""),
+            f"schema_version = {6 if pinned else 5}\n"
+            + claim
+            + (claim if duplicate else ""),
         )
 
     def load_decisions(self):
@@ -468,6 +491,41 @@ class CoverageTest(unittest.TestCase):
             }.issubset(decisions.input_sources)
         )
 
+    def test_pinned_attestation_rejects_changed_review_or_exclusion_bytes(self):
+        for changed in ("evidence/review.md", "evidence/exclusion.md"):
+            with self.subTest(changed=changed):
+                self.write("evidence/review.md", "Reviewed evidence.\n")
+                self.write("evidence/exclusion.md", "Reviewed exclusion.\n")
+                self.write_attestations(
+                    pinned=True, exclusions=("evidence/exclusion.md",)
+                )
+                decisions = self.load_decisions()
+                self.assertEqual(decisions.covered_subjects, {"workflow.policy.rule"})
+                self.assertIn("evidence/exclusion.md", decisions.input_sources)
+                self.write(changed, "Changed after review.\n")
+                with self.assertRaises(AnalysisError) as caught:
+                    self.load_decisions()
+                self.assertEqual(
+                    caught.exception.failure.code, "ANALYSIS.EVIDENCE_DIGEST_MISMATCH"
+                )
+
+    def test_pinned_attestation_remains_bound_to_its_requirement(self):
+        self.write_attestations(pinned=True, requirement_id="sha256:" + "0" * 64)
+        self.assertFalse(self.load_decisions().covered_subjects)
+
+    def test_pinned_attestation_rejects_unknown_provider(self):
+        self.write_attestations(pinned=True)
+        path = self.root / "attestations.toml"
+        path.write_text(
+            path.read_text().replace(
+                'provider_contract = "repository-content"',
+                'provider_contract = "unknown"',
+            )
+        )
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+        self.assertEqual(caught.exception.failure.code, "COVERAGE.EVIDENCE")
+
     def test_stale_repository_attestation_is_not_current_coverage(self) -> None:
         self.write_attestations(requirement_id="sha256:" + "0" * 64)
 
@@ -483,7 +541,9 @@ class CoverageTest(unittest.TestCase):
 
         self.assertFalse(self.load_decisions().covered_subjects)
 
-    def test_unrelated_input_change_preserves_exact_repository_attestation(self) -> None:
+    def test_unrelated_input_change_preserves_exact_repository_attestation(
+        self,
+    ) -> None:
         self.write_attestations()
 
         self.write("inputs/unrelated.md", "# Unrelated changed\n")

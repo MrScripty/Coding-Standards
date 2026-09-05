@@ -35,3 +35,19 @@ Run tests:
 ```bash
 python3 -m unittest discover -s tools/standards_analysis/tests
 ```
+
+## Repository coverage evidence
+
+Repository attestation schema 6 stores each `evidence` and `explicit_exclusions`
+entry as an exact evidence reference: `id`, `digest`, `provider_contract`, and
+`provider_contract_version`. The supported repository provider is
+`repository-content`, version `1`; its ID is the repository evidence path.
+Loading a current claim verifies both evidence and exclusion bytes against the
+stored SHA-256 digests before accepting the authorization.
+
+Schema 5 remains readable for existing and historical certificates. Its entries
+are paths and have no retained review-time digest. Do not mechanically convert
+them to schema 6: hashing current files cannot establish which bytes a past
+review examined. New certificate publication must retain the references from
+the actual authorized review. Both formats still require the exact current
+coverage requirement and the configured repository auditor.
