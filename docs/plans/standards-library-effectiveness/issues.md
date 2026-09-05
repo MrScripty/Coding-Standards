@@ -213,3 +213,25 @@ single-owner requirement should eliminate all competing normative ownership.
 All findings are deferred to their named milestones because Milestone 0 cannot
 change normative standards. Critical findings must be addressed before the
 affected source can become canonical in Milestone 7.
+
+## 2026-09-05 Semantic Ownership Review
+
+The [D001–D010 review](reports/milestone-7-semantic-ownership-review.md)
+records current findings against `2cbe11e1`; the original D table above remains
+the historical baseline, not the current authority map. Review completion does
+not imply Milestone 7 acceptance.
+
+| ID | Severity | Evidence and affected owner | Disposition and required verification |
+| --- | --- | --- | --- |
+| M7-OWN-01 | High | Legacy Tooling claims automation authority and prescribes hook, parallelism, and staged-file defaults contrary to canonical `workflow.tooling`; report includes exact passages. | Re-plan: correct through Engine-owned source authoring in Milestone 7; manually prove navigation-only behavior and verify affected destinations and consumers. |
+| M7-OWN-02 | High | Legacy Rust Bindings permits framework derives in core and prescribes representation/test/workspace choices contrary to `profile.language.rust.language-bindings` and generic binding/verification owners. | Re-plan: review the whole legacy binding entrypoint and its declared consumers, remove competing authority, and preserve canonical conversion, core-isolation, and real-host proof. Recheck D006 and D010 before acceptance. |
+| M7-OWN-03 | Medium | Launcher retains legacy authority and install-output requirements; Architecture retains contract-freeze instructions and policy summaries. Other manifest entrypoints retain migration-pending prose or imperative headings. | Re-plan: apply the same navigation-only invariant to all 27 retained sources. Pure navigation requires semantic review; disclaimer, size, or keyword checks are insufficient. |
+| M7-OWN-04 | Medium | Rust Security's panic-policy link targets the removed `RUST-API-STANDARDS.md#result-option-panic` heading; source-index suite membership does not cover the entire legacy population, and `markdown_links` checks file existence rather than heading fragments. | Re-plan: correct the owner route and verify actual path/fragment destinations across the selected population. Keep D009 source closure open until corrected. |
+| M7-OWN-05 | Medium | The old final-closure procedure treats frozen corpus classifications and retired migration gates as current authority. | Fix-now in review/re-plan slice: preserve frozen evidence, separate historical ID reconciliation from live metadata/routing and manual source review, and replace the active acceptance procedure. |
+| M7-OWN-06 | Low | Current tracked planning/implementation prompts repeat procedural instructions despite D005's original route-only aspiration; no conflicting slice/commit instruction was found in the reviewed prompts. | Defer to A5 concision review in Milestone 8. Compare retained instructions with their owners and justify necessary projections before claiming route-only or reduced interaction cost. |
+
+M7-OWN-01 through M7-OWN-04 prevent Milestone 7 acceptance. They share the
+systemic invariant that an old entrypoint must not remain a second policy
+owner. The next slice admits the bounded Engine-owned correction, including
+any required authoring capability and declared consumer scope. No normative
+source correction was performed by this review slice.

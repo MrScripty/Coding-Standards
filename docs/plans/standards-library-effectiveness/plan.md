@@ -2,12 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 manual semantic-ownership review after accepted
-zero-Bash verification closure
+**Current phase:** Milestone 7 source-closure correction after semantic review
 
-**Next slice:** complete manual semantic-ownership review `D001` through `D010`
+**Next slice:** admit the Engine-owned legacy-index correction for the 27-source
+manifest population, including its supported semantic edit and consumer scope
 
 **Acceptance status:** `partial`
+
+**Composed-design review:** `not-applicable` to the current review/re-plan
+slice: it records ownership findings without changing Engine composition.
+Reassess when admitting any required Engine capability change.
 
 **Execution ledger:** [Milestone execution ledger](execution-ledger.md)
 
@@ -42,7 +46,7 @@ universal architecture policy.
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
 | A1 | Fixed scenarios improve or preserve every critical rubric dimension. | `satisfied` | [Baseline scores](../../../evaluation/standards-effectiveness/baseline-scores.md) and [current rescore](../../archive/plans/planning-proportionality-recovery/reports/scenario-rescore.md) |
-| A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `pending` | [Generated owner map](../../../evaluation/standards-effectiveness/generated/rule-owner-map.tsv); [consolidation dispositions](../../../evaluation/standards-effectiveness/consolidation-dispositions.tsv) |
+| A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `pending` | [Current semantic review and inventory reconciliation](reports/milestone-7-semantic-ownership-review.md); historical dispositions do not prove current source closure |
 | A3 | Two independent downstream pilots complete without loading the full library. | `pending` | Milestone 8 |
 | A4 | Migration and standards-version guidance is published. | `pending` | Milestone 8 |
 | A5 | Final manual review confirms the library is stack-agnostic, routed, concise, and free of competing normative owners. | `pending` | Milestone 8 |
@@ -138,7 +142,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../../../workflows/verification.md), [Release](../../../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../../../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../../../workflows/documentation.md), [Commit](../../../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | M6-Z1 verification migration accepted; manual `D001` through `D010` review remains |
+| 7 | Role-based consolidation and verification migration | `Active` | D001–D010 reviewed; legacy authority and navigation findings require correction before acceptance |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -146,8 +150,12 @@ complete; `Accepted` requires the named evidence.
 **Goal:** Complete canonical-owner migration and eliminate legacy verification
 without losing mapped semantics.
 
-**Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-Z1:
+**Accepted boundary:** the recorded `7.4c3` packages remain historical evidence,
+but their source-closure conclusion is superseded by the
+[current semantic review](reports/milestone-7-semantic-ownership-review.md).
+Legacy Tooling and Rust Bindings still contain competing instructions;
+other retained entrypoints need purity or route correction. Verification
+migration remains accepted through M6-Z1:
 the complete command is Python-only, and no Bash verifier, helper, launcher, or
 temporary migration model remains. The execution ledger and terminal report
 contain detailed slice evidence.
@@ -160,16 +168,24 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Regenerate canonical inventories and prove exact dispositions, no source
-   gaps, no normative legacy source rows, and no legacy Router routes.
-2. Complete manual semantic-ownership review `D001` through `D010` before
-   Milestone 7 acceptance.
+1. Admit and implement the bounded source correction described in the
+   [review](reports/milestone-7-semantic-ownership-review.md#corrective-slice-and-acceptance),
+   through supported Engine-owned semantic operations and consumer review.
+2. Recheck the affected D001–D010 findings and prove pure navigation and valid
+   destinations across all 27 retained entrypoints.
+3. Preserve frozen baseline inventories. Reconcile historical ID dispositions
+   separately from current canonical membership, registered routing, actual
+   source contents, and current structural checks. Do not regenerate frozen
+   corpus classifications or revive retired migration/prose gates.
 
-**Current blocker:** `none`.
+**Current blocker:** Milestone 7 acceptance is held by M7-OWN-01 through
+M7-OWN-04 in [issues.md](issues.md#2026-09-05-semantic-ownership-review).
+The next corrective admission can proceed; no external dependency blocks it.
 
-**Acceptance gate:** every rule identifier has a final disposition; structural,
-routing, ownership, source-closure, and no-legacy checks pass; the final Python
-engine is the sole verification authority.
+**Acceptance gate:** every frozen identifier has a final disposition; live
+structural and routing checks pass; manual review establishes single ownership
+and navigation-only legacy sources with valid destinations. The Python
+checkpoint owns registered structural verification, not prose conformance.
 
 ## Simplicity And Ownership Review
 

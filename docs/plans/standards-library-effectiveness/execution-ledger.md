@@ -15857,3 +15857,34 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   fresh, and no `.sh` path remains under the evaluation or verifier migration
   roots. The verification-engine and Python-engine recovery plans are accepted;
   parent Milestone 7 continues only with manual semantic-ownership review.
+
+## 2026-09-05 - D001–D010 Review And Source-Closure Re-plan
+
+- Continued `docs/plans/standards-library-effectiveness/plan.md` at its admitted
+  manual review slice. The [review report](reports/milestone-7-semantic-ownership-review.md)
+  records canonical Engine reads against one snapshot of `2cbe11e1`, compared
+  with legacy entrypoints, current prompts/templates, and registered checks.
+- Found competing Tooling and Rust Bindings instructions, other non-pure
+  entrypoints, and an obsolete Rust Security route. M7-OWN-01 through
+  M7-OWN-04 remain open. D005's route-only prompt aspiration is deferred to A5
+  as M7-OWN-06; no downstream pilot or full prose-conformance claim was made.
+- Historical reconciliation found 916 unique IDs with exactly one disposition
+  each and no missing, extra, or source-mismatched IDs. All 27 manifest paths
+  exist; none belongs to the live 70-module canonical corpus. The snapshot's
+  54 registered routing rules target canonical IDs, not legacy files.
+- Superseded the current source-consolidation conclusion and the instruction
+  to regenerate frozen corpus classifications. M7-OWN-05 is addressed by the
+  revised acceptance procedure. Historical accepted packages and baseline
+  evidence are preserved; Milestone 7 remains Active and A2 remains pending.
+- The next slice admits an Engine-owned correction over the bounded legacy
+  population, with supported semantic operations and declared consumer scope.
+  This review changes its report, findings, active plan, this ledger, and the
+  Engine-refreshed suite-input projection; no normative source or Engine
+  implementation was changed.
+- The Engine `verify_repository` operation with input refresh passed all 73
+  registered suites and 121 structural checks, with zero failures. A focused
+  path/heading inspection found no unresolved link in the new report or
+  updated plan. Staged review confirms the declared documentation write set
+  and generated projection only; the unrelated prototype remains untracked.
+  No implementation unit tests were required for this reports-only slice.
+  Commit subject: `docs(standards): record semantic ownership closure gaps`.
