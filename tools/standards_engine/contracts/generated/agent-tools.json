@@ -1014,6 +1014,66 @@
       "pattern": "^sha256:[0-9a-f]{64}$",
       "type": "string"
     },
+    "CompactReadResult": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "coverage": {
+          "$ref": "#/$defs/ReadCoverage"
+        },
+        "detail": {
+          "const": "compact"
+        },
+        "kind": {
+          "const": "compact-read-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "type": "array"
+        },
+        "policy": {
+          "$ref": "#/$defs/PolicySummary"
+        },
+        "requires": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "routing": {
+          "$ref": "#/$defs/RoutingConfiguration"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "specializes": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "policy",
+        "content",
+        "requires",
+        "specializes",
+        "next_operations",
+        "detail"
+      ],
+      "type": "object"
+    },
     "CompleteResult": {
       "additionalProperties": false,
       "properties": {
@@ -3980,6 +4040,35 @@
       ],
       "type": "object"
     },
+    "ReadCall": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "description": "Compact preserves exact policy and essential authority; full includes all relationship rows.",
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "include_coverage": {
+          "description": "Include current repository attestation status for registered policy units in this read scope.",
+          "type": "boolean"
+        },
+        "include_routing": {
+          "type": "boolean"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
     "ReadCoverage": {
       "additionalProperties": false,
       "description": "Repository attestation status bound to this snapshot or proposal. Empty subjects means no registered policy units in scope, not complete coverage. Analysis-local attestations are not repository certificates.",
@@ -4246,6 +4335,43 @@
         "message",
         "details",
         "next_operations"
+      ],
+      "type": "object"
+    },
+    "RelatedCall": {
+      "additionalProperties": false,
+      "properties": {
+        "direction": {
+          "enum": [
+            "incoming",
+            "outgoing",
+            "both"
+          ]
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "transitive": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "target",
+        "groups",
+        "direction",
+        "transitive"
       ],
       "type": "object"
     },
@@ -4900,6 +5026,21 @@
       "required": [
         "kind",
         "standard"
+      ],
+      "type": "object"
+    },
+    "RouteCall": {
+      "additionalProperties": false,
+      "properties": {
+        "facts": {
+          "$ref": "#/$defs/FactSet"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "facts"
       ],
       "type": "object"
     },
@@ -5561,7 +5702,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 25,
+  "interface_schema_version": 26,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -5798,6 +5939,43 @@
       },
       "result_definitions": [
         "MaintainEvidenceResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "route",
+      "input_definition": "RouteCall",
+      "input_schema": {
+        "$ref": "#/$defs/RouteCall"
+      },
+      "result_definitions": [
+        "RouteResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "read",
+      "input_definition": "ReadCall",
+      "input_schema": {
+        "$ref": "#/$defs/ReadCall"
+      },
+      "result_definitions": [
+        "CompactReadResult",
+        "ReadResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "related",
+      "input_definition": "RelatedCall",
+      "input_schema": {
+        "$ref": "#/$defs/RelatedCall"
+      },
+      "result_definitions": [
+        "RelatedResult",
         "RejectedResult"
       ]
     }

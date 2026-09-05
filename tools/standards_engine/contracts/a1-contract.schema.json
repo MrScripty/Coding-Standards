@@ -11,10 +11,49 @@
       "$ref": "#/$defs/CreateSnapshotResult"
     },
     {
+      "$ref": "#/$defs/RejectedResult"
+    },
+    {
       "$ref": "#/$defs/FindSnapshotsCall"
     },
     {
       "$ref": "#/$defs/FindSnapshotsResult"
+    },
+    {
+      "$ref": "#/$defs/DeleteSnapshotCall"
+    },
+    {
+      "$ref": "#/$defs/DeleteSnapshotResult"
+    },
+    {
+      "$ref": "#/$defs/UndeleteSnapshotCall"
+    },
+    {
+      "$ref": "#/$defs/UndeleteSnapshotResult"
+    },
+    {
+      "$ref": "#/$defs/QueryCall"
+    },
+    {
+      "$ref": "#/$defs/QueryResult"
+    },
+    {
+      "$ref": "#/$defs/PrepareCall"
+    },
+    {
+      "$ref": "#/$defs/PendingResult"
+    },
+    {
+      "$ref": "#/$defs/CompleteResult"
+    },
+    {
+      "$ref": "#/$defs/ResolveCall"
+    },
+    {
+      "$ref": "#/$defs/InspectCall"
+    },
+    {
+      "$ref": "#/$defs/InspectionResult"
     },
     {
       "$ref": "#/$defs/CreateProposalCall"
@@ -65,45 +104,6 @@
       "$ref": "#/$defs/RecoverApplicationResult"
     },
     {
-      "$ref": "#/$defs/DeleteSnapshotCall"
-    },
-    {
-      "$ref": "#/$defs/DeleteSnapshotResult"
-    },
-    {
-      "$ref": "#/$defs/UndeleteSnapshotCall"
-    },
-    {
-      "$ref": "#/$defs/UndeleteSnapshotResult"
-    },
-    {
-      "$ref": "#/$defs/QueryCall"
-    },
-    {
-      "$ref": "#/$defs/QueryResult"
-    },
-    {
-      "$ref": "#/$defs/PrepareCall"
-    },
-    {
-      "$ref": "#/$defs/PendingResult"
-    },
-    {
-      "$ref": "#/$defs/CompleteResult"
-    },
-    {
-      "$ref": "#/$defs/ResolveCall"
-    },
-    {
-      "$ref": "#/$defs/InspectCall"
-    },
-    {
-      "$ref": "#/$defs/InspectionResult"
-    },
-    {
-      "$ref": "#/$defs/RejectedResult"
-    },
-    {
       "$ref": "#/$defs/VerifyRepositoryCall"
     },
     {
@@ -120,6 +120,27 @@
     },
     {
       "$ref": "#/$defs/MaintainEvidenceResult"
+    },
+    {
+      "$ref": "#/$defs/RouteCall"
+    },
+    {
+      "$ref": "#/$defs/RouteResult"
+    },
+    {
+      "$ref": "#/$defs/ReadCall"
+    },
+    {
+      "$ref": "#/$defs/CompactReadResult"
+    },
+    {
+      "$ref": "#/$defs/ReadResult"
+    },
+    {
+      "$ref": "#/$defs/RelatedCall"
+    },
+    {
+      "$ref": "#/$defs/RelatedResult"
     }
   ],
   "$defs": {
@@ -5682,6 +5703,147 @@
           "$ref": "#/$defs/VerificationReport"
         }
       }
+    },
+    "RouteCall": {
+      "type": "object",
+      "required": [
+        "facts"
+      ],
+      "properties": {
+        "facts": {
+          "$ref": "#/$defs/FactSet"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReadCall": {
+      "type": "object",
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "include_routing": {
+          "type": "boolean"
+        },
+        "include_coverage": {
+          "type": "boolean",
+          "description": "Include current repository attestation status for registered policy units in this read scope."
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact preserves exact policy and essential authority; full includes all relationship rows."
+        }
+      },
+      "additionalProperties": false
+    },
+    "RelatedCall": {
+      "type": "object",
+      "required": [
+        "target",
+        "groups",
+        "direction",
+        "transitive"
+      ],
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          }
+        },
+        "direction": {
+          "enum": [
+            "incoming",
+            "outgoing",
+            "both"
+          ]
+        },
+        "transitive": {
+          "type": "boolean",
+          "default": false
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompactReadResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "snapshot",
+        "policy",
+        "content",
+        "requires",
+        "specializes",
+        "next_operations",
+        "detail"
+      ],
+      "properties": {
+        "kind": {
+          "const": "compact-read-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "policy": {
+          "$ref": "#/$defs/PolicySummary"
+        },
+        "content": {
+          "type": "string"
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "uniqueItems": true
+        },
+        "specializes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "uniqueItems": true
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "routing": {
+          "$ref": "#/$defs/RoutingConfiguration"
+        },
+        "coverage": {
+          "$ref": "#/$defs/ReadCoverage"
+        },
+        "detail": {
+          "const": "compact"
+        }
+      },
+      "additionalProperties": false
     }
   }
 }

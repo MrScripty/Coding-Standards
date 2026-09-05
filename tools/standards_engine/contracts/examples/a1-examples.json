@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 25,
+  "interface_schema_version": 26,
   "examples": [
     {
       "name": "create-snapshot",
@@ -432,6 +432,32 @@
           "consumer_registrations": []
         },
         "apply": false
+      }
+    },
+    {
+      "name": "focused-route",
+      "definition": "RouteCall",
+      "value": {
+        "facts": {}
+      }
+    },
+    {
+      "name": "focused-read",
+      "definition": "ReadCall",
+      "value": {
+        "target": "workflow.planning"
+      }
+    },
+    {
+      "name": "focused-related",
+      "definition": "RelatedCall",
+      "value": {
+        "target": "workflow.planning",
+        "groups": [
+          "standards-requires"
+        ],
+        "direction": "outgoing",
+        "transitive": false
       }
     }
   ]

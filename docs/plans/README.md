@@ -12,3 +12,10 @@ reviews D001–D010, downstream pilots, migration publication, and final accepta
 Completed prerequisites do not close the parent objective. See the
 [archive](../archive/README.md) for accepted and superseded plans, and the
 [decision index](../decisions/README.md) for current architecture.
+
+## Planned Agent Interface Work
+
+[Standards Agent Interface](standards-agent-interface/plan.md) plans focused
+navigation, explicit-fact discovery and routing explanations, and bound authoring
+contexts over the Engine. It is `Active`; focused navigation is accepted and the next slice is fact
+discovery and routing explanations. It does not replace the active Standards Library Effectiveness effort.

@@ -8,8 +8,17 @@ projections, SQLite records, Git refs/object IDs, and source locators remain
 private Engine implementation facts unless explicitly inspected or selected
 for evidence catalog maintenance.
 
-Discover the current operations and examples through the generated public
-Interface using `.agents/skills/standards-engine/scripts/invoke.py --list`.
+Agents use the MCP stdio server in `standards_engine/mcp.py`. It exposes every
+generated Interface operation as a native tool with self-contained input and
+output schemas, preserving typed results and exact handles. See
+[agent connection setup](../../.agents/skills/standards-engine/references/environment.md).
+The existing `.agents/skills/standards-engine/scripts/invoke.py` remains the
+reference/debugging transport.
+`route`, `read`, and `related` accept an optional snapshot; omission captures
+accepted authority and returns its handle. `read` defaults to compact exact
+policy content and essential metadata; `detail: "full"` returns all relationship
+rows. Native `query` remains available.
+
 Navigation reads immutable snapshots; proposal analysis, review, verification,
 and application operate on exact revision handles. Proposal creation and
 revision each carry one atomic

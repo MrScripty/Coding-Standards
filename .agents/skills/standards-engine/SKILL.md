@@ -10,33 +10,27 @@ Markdown, metadata, supplementary projections, SQLite state, and local Git
 publication. Supply domain intent and reuse opaque handles; never translate an
 Engine request into direct file, SQL, or Git mutations.
 
-## Invoke The Interface
+## Use The Agent Tools
 
-Run from the repository root. The bundled transport reads one JSON object from
-standard input and prints one structured Engine result:
+Use the `standards-engine` MCP tools. The client supplies each operation's
+current input schema; call the named tool directly with structured arguments.
+Tool-name prefixes vary by client; operation names match the Engine contract
+(for example, `create_snapshot`, `query`, and `create_proposal`).
 
-```bash
-printf '%s\n' '{"kind":"create-snapshot"}' |
-  PYTHONPATH=. python3 -P .agents/skills/standards-engine/scripts/invoke.py create_snapshot
-```
+Use `route` with explicit engineering facts, `read` for exact policy, and
+`related` for relationships. Omit `snapshot` on the first call to capture
+accepted authority; reuse the returned snapshot on subsequent calls. Omission
+always captures a new snapshot, so carry the handle when continuing a task.
+Compact reads preserve exact policy text and essential authority. Select
+`detail: "full"` only when the complete relationship projection is needed.
+Route from known facts; obtain missing facts instead of inventing applicability.
+Natural-language interpretation remains the calling agent's responsibility.
 
-Discover the current contract rather than recalling fields:
-
-```bash
-PYTHONPATH=. python3 -P .agents/skills/standards-engine/scripts/invoke.py --list
-PYTHONPATH=. python3 -P .agents/skills/standards-engine/scripts/invoke.py --example create_proposal
-PYTHONPATH=. python3 -P .agents/skills/standards-engine/scripts/invoke.py --schema create_proposal
-```
-
-Contract discovery needs only Python 3.11 or newer. Engine invocation also
-needs the repository's pinned Python dependencies. If the transport reports
-that they are unavailable, read
-[references/environment.md](references/environment.md); do not replace the
-locked environment with guessed packages or versions.
-
-Keep scratch request JSON outside the repository. Pass the complete result
-handle from one operation into the next without constructing, shortening, or
-editing its identity.
+If the tools are unavailable, read
+[references/environment.md](references/environment.md) for MCP setup. The
+Python CLI remains a debugging/reference transport, not the normal skill
+workflow. An unavailable tool connection does not authorize direct standards
+mutation.
 
 Inspect every returned `kind`:
 
@@ -51,7 +45,7 @@ Inspect every returned `kind`:
   `recover_application` using the same readiness handle. Do not repeat apply,
   infer publication, or repair Git manually.
 
-The skill transport opens the normal durable Engine store with the repository's
+The MCP transport opens the normal durable Engine store with the repository's
 owner-operated, in-process always-allow authorizer. It authorizes each exact
 request and records local authorization and revocation evidence; no external
 authorization service or session token is required. Low-level Engine callers

@@ -1,26 +1,26 @@
 # Navigation And Analysis
 
 Use this workflow for immutable reading. Request shapes come from the generated
-contract; inspect them with `invoke.py --example <operation>` and
-`invoke.py --schema <operation>`.
+MCP tool definitions supplied by the client; invoke the tools directly.
 
 ## Snapshot-Bound Reading
 
-1. Call `create_snapshot` and retain the returned `snapshot` handle. A snapshot
-   captures the current canonical Git revision and all authority needed for
-   later reads; it is not the live worktree.
-2. Call `query` with that handle and one request:
-   - `route` selects the directly applicable standards and required closure
-     from explicit facts;
-   - `read` returns one canonical standard by logical ID;
-   - `related` traverses an allowed relationship group and direction.
-3. Use returned inspect operations and handles when more detail is needed.
-   `inspect` accepts opaque handles; it does not accept repository locators.
+1. Call `route`, `read`, or `related`. Supply a retained `snapshot` to continue
+   an existing task, or omit it to capture current canonical accepted authority.
+   Snapshot capture reads the canonical Git revision, not the live worktree.
+2. Reuse the complete returned `snapshot` in subsequent calls. Independent calls
+   without that handle intentionally capture authority independently.
+3. `route` selects applicable standards and required closure from explicit facts;
+   `read` returns exact policy by canonical ID; `related` traverses explicitly
+   selected permitted relationship groups and directions.
+4. Use returned inspect operations and handles when more detail is needed.
+   `inspect` accepts opaque handles, not repository locators.
 
-A `read-result` includes its complete related projection and can be large. For
-a graph question, issue `related` directly. For policy text, retain the result
-in task-owned scratch state and select its `content` and `policy` fields rather
-than loading unrelated relationship rows into the working context.
+The default `read` result is compact: exact content, policy authority,
+prerequisites, specialization, and continuations. Use `detail: "full"` for the
+complete relationship projection or call `related` for a graph question.
+`include_coverage` remains available when coverage status matters. The advanced
+`query` operation retains its native request and complete-result behavior.
 
 For a non-standard relationship consumer, `related` may return an
 `authoring-target-handle`. Preserve that whole Snapshot-bound handle for a

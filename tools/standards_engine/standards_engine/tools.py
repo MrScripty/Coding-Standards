@@ -268,6 +268,24 @@ class AgentToolFacade:
             return call
         return self._result("undelete_snapshot", self._engine.undelete_snapshot(call))
 
+    def route(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("route", arguments, generated_contract.RouteCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("route", self._engine.route(call))
+
+    def read(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("read", arguments, generated_contract.ReadCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("read", self._engine.read(call))
+
+    def related(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("related", arguments, generated_contract.RelatedCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("related", self._engine.related(call))
+
     def query(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("query", arguments, QueryCall)
         if isinstance(call, dict):

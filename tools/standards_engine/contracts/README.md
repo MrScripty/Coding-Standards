@@ -26,6 +26,18 @@ Files under [`examples/`](examples/) are reviewed authored fixtures. Each
 example names one reachable schema definition and supplies one value. They do
 not define fields, defaults, variants, identity, or runtime semantics.
 
+## Focused Agent Navigation
+
+Interface version 26 adds `route`, `read`, and `related` with direct domain
+arguments and an optional `snapshot`. Omission captures new accepted authority
+for that call; a supplied handle is used exactly. Every successful result
+returns the effective snapshot. Native `query` remains available.
+
+`read` defaults to `compact-read-result`: exact content, policy authority,
+prerequisites, specialization, requested coverage/routing detail, and
+continuations, without the complete `related` projection. `detail: "full"`
+returns the native `read-result`. Both share the same snapshot semantics.
+
 ## Public Operations
 
 | Operation | Input | Success result | Expected rejection |

@@ -107,6 +107,10 @@ from tools.standards_snapshots.standards_snapshots import (
 )
 
 from ._generated_contract import (
+    RouteCall,
+    ReadCall,
+    RelatedCall,
+    CompactReadResult,
     AnalyzeProposalCall,
     ApplicationRecoveryRequiredResult,
     ApplyProposalCall,
@@ -860,6 +864,21 @@ class StandardsEngine:
             )
         except SnapshotError as error:
             return self._domain_rejection(error)
+
+    def route(self, call: RouteCall) -> RouteResult | RejectedResult:
+        from .agent_navigation import navigate
+
+        return navigate(self, "route", call)
+
+    def read(self, call: ReadCall) -> ReadResult | CompactReadResult | RejectedResult:
+        from .agent_navigation import navigate
+
+        return navigate(self, "read", call)
+
+    def related(self, call: RelatedCall) -> RelatedResult | RejectedResult:
+        from .agent_navigation import navigate
+
+        return navigate(self, "related", call)
 
     def query(self, call: QueryCall) -> QueryResult | RejectedResult:
         try:

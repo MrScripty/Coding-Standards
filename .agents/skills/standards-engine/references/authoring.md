@@ -9,8 +9,8 @@ Repository representation remains private.
 1. Call `create_snapshot`; use its returned Snapshot handle as the proposal
    base.
 2. Form one non-empty `StandardsChangeSet` with an evidence-backed `purpose`
-   and the smallest complete set of explicit edits. Inspect the live
-   `create_proposal` schema before constructing it.
+   and the smallest complete set of explicit edits. Use the `create_proposal` tool
+   schema supplied by the client.
 3. Call `create_proposal`. Retain both the proposal and exact revision handles.
 4. Use `query_proposal` to read, route, or inspect relationships in that exact
    projected revision. For ordinary edits, run `verify_proposal` and inspect
@@ -56,7 +56,7 @@ The closed edit variants are:
 - `put-routing-fact` / `remove-routing-fact`
 - `audit-policy-unit`
 
-Use `invoke.py --schema create_proposal` for their current exact fields. In
+Use the `create_proposal` tool definition for their current exact fields. In
 particular:
 
 - whole-standard body changes must include companion policy-unit semantic
@@ -139,7 +139,7 @@ not publish a ref or supply review decisions. Application rechecks the candidate
 ## Evidence Catalog Maintenance
 
 Use `maintain_evidence` for explicit certificate/check/suite retirements,
-evidence descriptions, and consumer registrations. Discover its schema and
+evidence descriptions, and consumer registrations. Use its tool schema and
 supply the current Git revision plus exact review evidence. Preview with
 `apply: false`; inspect changed/removed paths and `verification.passed`.
 `apply: true` verifies the candidate again and updates only unchanged affected
