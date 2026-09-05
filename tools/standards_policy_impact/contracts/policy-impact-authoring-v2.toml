@@ -3,7 +3,7 @@ provider_contract_version = 2
 catalog_contract_version = 2
 declaration_schema_version = 2
 relationship_kind_contract_version = 2
-evidence_owner_rule = "required-registered-suite"
+evidence_owner_rule = "registered-suite-or-consumer-review"
 
 artifact_kinds = [
   "documentation",

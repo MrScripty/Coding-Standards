@@ -6,7 +6,7 @@ source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-admission"
+evidence_owner = "suite:policy-semantic-impact"
 rationale = "First duplicate fixture relationship."
 
 [[relationships]]
@@ -14,5 +14,5 @@ source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-admission"
+evidence_owner = "suite:policy-semantic-impact"
 rationale = "Second duplicate fixture relationship."

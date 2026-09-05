@@ -1,8 +1,7 @@
 schema_version = 1
 id = "contract-ownership"
 owner = "topic.contracts"
-description = "Navigation destinations for the documented owners; policy meaning requires semantic review."
-
+description = "Checks declared Markdown destinations. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "coding-route-destinations"

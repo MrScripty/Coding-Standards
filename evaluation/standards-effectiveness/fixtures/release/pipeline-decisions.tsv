@@ -1,7 +1,0 @@
-case	authenticated_dispatch	immutable_source	required_claims_satisfied	artifact_plan_satisfied	explicit_destination	expected_handoff
-protected-release-reference	yes	yes	yes	yes	yes	yes
-ordinary-branch-push	no	yes	yes	yes	yes	no
-mutable-release-source	yes	no	yes	yes	yes	no
-missing-behavior-claim	yes	yes	no	yes	yes	no
-missing-required-artifact	yes	yes	yes	no	yes	no
-unknown-publication-target	yes	yes	yes	yes	no	no

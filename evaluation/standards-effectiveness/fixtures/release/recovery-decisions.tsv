@@ -1,7 +1,0 @@
-case	affected_scope	channel_capability	authority_resolved	safe_action	replacement_evidence	expected_recovery
-accepted-recovery	yes	yes	yes	yes	yes	yes
-unknown-affected-scope	no	yes	yes	yes	yes	no
-unsupported-withdrawal	yes	no	yes	yes	yes	no
-implicit-emergency-authority	yes	yes	no	yes	yes	no
-unsafe-recovery-action	yes	yes	yes	no	yes	no
-unverified-replacement	yes	yes	yes	yes	no	no

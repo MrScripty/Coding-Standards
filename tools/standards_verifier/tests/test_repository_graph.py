@@ -54,8 +54,8 @@ class RepositoryGraphTest(unittest.TestCase):
         )
 
     def test_suite_id_and_path_report_policy_and_dependency_edges(self) -> None:
-        suite_id = "concurrent-plan-integration"
-        suite_path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"
+        suite_id = "release-recovery-policy"
+        suite_path = "evaluation/standards-effectiveness/suites/release-recovery-policy.toml"
 
         self.assertEqual(
             self.registry.incident(suite_id),
@@ -126,7 +126,7 @@ class RepositoryGraphTest(unittest.TestCase):
                 "-P",
                 str(REPO_ROOT / "tools/query_edges.py"),
                 "--node",
-                "concurrent-plan-integration",
+                "release-recovery-policy",
             ],
             cwd=Path("/tmp"),
             env={

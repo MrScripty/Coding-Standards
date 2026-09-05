@@ -1,47 +1,10 @@
 schema_version = 1
 id = "rust-release-evidence"
 owner = "profile.language.rust.release"
-description = "Rust release evidence selected per declared claim and scope without an every-release command checklist."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/release-evidence-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-claim = ["accepted", "contradictory", "missing"]
-scope = ["known", "unknown"]
-capability = ["supported", "unsupported"]
-evidence = ["complete", "incomplete"]
-fallback = ["all-features", "artifact-name-agreement", "benchmark-update", "changelog-agreement", "command-success", "dependency-audit", "every-release", "metadata-agreement", "none", "tag-agreement", "warning-denial", "workspace-scope"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [{ field = "fallback", op = "ne", value = "none" }, { field = "claim", op = "eq", value = "contradictory" }]
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [{ field = "claim", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "unknown" }, { field = "evidence", op = "eq", value = "incomplete" }]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-all = [{ field = "capability", op = "eq", value = "unsupported" }]
-
+description = "Checks declared Markdown destinations. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "source-index-destinations"
 type = "markdown_targets"
 path = "languages/rust/RUST-RELEASE-STANDARDS.md"
 required = ["profiles/languages/rust/dependencies.md", "profiles/languages/rust/release.md", "reference/recipes/rust-release.md", "topics/contracts.md", "topics/dependencies.md", "topics/licensing.md", "workflows/documentation.md", "workflows/release.md", "workflows/tooling.md", "workflows/verification.md"]
-
-[[checks]]
-id = "disposition-records"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-non_empty = []
-unique = []
-projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0820", "languages/rust/RUST-RELEASE-STANDARDS.md", "profiles/languages/rust/release.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0820"}]}}]

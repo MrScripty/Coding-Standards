@@ -1,318 +1,65 @@
 schema_version = 1
 id = "source-index-closures"
 owner = "verification-engine.migration-source-closure"
-description = "Declarative closure proof for registered former normative source indexes without a policy-specific engine interface."
-
-[[checks]]
-id = "undisposed-baseline-headings"
-type = "baseline_markdown_headings"
-inventory = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
-dispositions = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-expected = "evaluation/standards-effectiveness/fixtures/migration/undisposed-source-gaps.tsv"
-summary = "evaluation/standards-effectiveness/generated/summary.tsv"
-[checks.classifications]
-retained-diff = "present"
-deferred-row38 = "absent"
-deferred-row47 = "absent"
-
-[[checks]]
-id = "closure-manifest"
-type = "table"
-path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
-header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
-non_empty = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
-unique = [["order"], ["source"]]
-members = { key = "source", path = "evaluation/standards-effectiveness/corpus.tsv", header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"], columns = ["path"], order = "source", where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] } }
-[[checks.projections]]
-columns = ["source", "canonical_owner", "current_shape", "treatment"]
-order = "lexical"
-expected = [
-  ["CODING-STANDARDS.md", "CORE-STANDARDS.md", "expanded", "rewrite-index"],
-  ["COMMIT-STANDARDS.md", "workflows/commit.md", "concise", "retain-index"],
-  ["CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "expanded", "rewrite-index"],
-  ["CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "expanded", "rewrite-index"],
-  ["DOCUMENTATION-STANDARDS.md", "workflows/documentation.md", "concise", "retain-index"],
-  ["FRONTEND-STANDARDS.md", "profiles/applications/frontend.md", "concise", "rewrite-index"],
-  ["PLAN-STANDARDS.md", "workflows/planning.md", "concise", "retain-index"],
-  ["SECURITY-STANDARDS.md", "topics/security.md", "expanded", "rewrite-index"],
-]
-[[checks]]
-id = "canonical-owner-paths"
-type = "repository_paths"
-[checks.paths]
-path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
-header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
-columns = ["canonical_owner"]
-order = "source"
-
-[[checks]]
-id = "corpus-membership"
-type = "table"
-path = "evaluation/standards-effectiveness/corpus.tsv"
-header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
-non_empty = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
-unique = [["path"]]
-members = { key = "path", path = "evaluation/standards-effectiveness/corpus.tsv", header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"], columns = ["path"], order = "source", where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] } }
-[[checks.projections]]
-columns = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
-order = "lexical"
-expected = [
-  ["CODING-STANDARDS.md", "standard", "derived", "core", "split", "git"],
-  ["COMMIT-STANDARDS.md", "standard", "derived", "workflow", "refine", "git"],
-  ["CONCURRENCY-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
-  ["CROSS-PLATFORM-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
-  ["DOCUMENTATION-STANDARDS.md", "standard", "derived", "workflow", "split", "git"],
-  ["FRONTEND-STANDARDS.md", "standard", "derived", "profile", "refine", "git"],
-  ["PLAN-STANDARDS.md", "standard", "derived", "workflow", "replace", "git"],
-  ["SECURITY-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
-]
-[[checks]]
-id = "owner-map-source-coverage"
-type = "key_coverage"
-[checks.keys]
-path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
-header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
-columns = ["source"]
-order = "source"
-[checks.records]
-path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
-header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
-columns = ["current_path"]
-order = "source"
-
-[[checks]]
-id = "disposition-source-coverage"
-type = "key_coverage"
-[checks.keys]
-path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
-header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
-columns = ["source"]
-order = "source"
-[checks.records]
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-columns = ["source"]
-order = "source"
-
-[[checks]]
-id = "identifier-membership"
-type = "relation"
-mode = "set"
-[checks.left]
-path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
-header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
-columns = ["current_path", "id"]
-order = "source"
-[checks.right]
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-columns = ["source", "id"]
-order = "source"
-
-[[checks]]
-id = "declared-routes"
-type = "table"
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-non_empty = ["source", "route", "destination"]
-unique = [["source", "route"], ["source", "destination"]]
-
-[[checks]]
-id = "declared-prohibitions"
-type = "table"
-path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
-header = ["source", "literal"]
-non_empty = ["source", "literal"]
-unique = [["source", "literal"]]
+description = "Checks current navigation link coverage, resolvable Markdown links. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "source-links"
 type = "markdown_links"
-[checks.members]
-path = "evaluation/standards-effectiveness/corpus.tsv"
-header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
-columns = ["path"]
-order = "source"
-where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] }
-
-[[checks]]
-id = "coding-structure"
-type = "markdown_structure"
-path = "CODING-STANDARDS.md"
-headings = ["# Coding Standards Legacy Index", "## Universal Coding Routes", "## Error Handling Legacy Route", "## Boundary Validation Legacy Route", "## Dependency Management Legacy Route", "## Invariants And Safety Legacy Route", "## Disabled Features Legacy Route", "## Build Behavior Route", "## License Attribution Legacy Route", "## Language-Specific Guidelines Legacy Route", "## Frontend Standards Legacy Route", "## Performance Legacy Route"]
-maximum_lines = 64
-
-[[checks]]
-id = "commit-structure"
-type = "markdown_structure"
-path = "COMMIT-STANDARDS.md"
-headings = ["# Commit Standards Legacy Index", "## Canonical Commit Routes"]
-maximum_lines = 20
-
-[[checks]]
-id = "concurrency-structure"
-type = "markdown_structure"
-path = "CONCURRENCY-STANDARDS.md"
-headings = ["# Concurrency Standards", "## Canonical Concurrency Routes", "## C# Async/Await Index", "### C# Continuation Scheduling", "## Rust Concurrency Routing Index", "## TypeScript Async Index", "## Godot Framework Index"]
-maximum_lines = 36
-
-[[checks]]
-id = "cross-platform-structure"
-type = "markdown_structure"
-path = "CROSS-PLATFORM-STANDARDS.md"
-headings = ["# Cross-Platform Standards", "## Canonical Platform Routes", "## Release And Verification Routes"]
-maximum_lines = 24
-
-[[checks]]
-id = "documentation-structure"
-type = "markdown_structure"
-path = "DOCUMENTATION-STANDARDS.md"
-headings = ["# Documentation Standards", "## Canonical Documentation Routes"]
-maximum_lines = 20
-
-[[checks]]
-id = "frontend-structure"
-type = "markdown_structure"
-path = "FRONTEND-STANDARDS.md"
-headings = ["# Frontend Standards Migration Index"]
-maximum_lines = 30
-
-[[checks]]
-id = "planning-structure"
-type = "markdown_structure"
-path = "PLAN-STANDARDS.md"
-headings = ["# Plan Standards", "## Canonical Planning Routes"]
-maximum_lines = 20
-
-[[checks]]
-id = "security-structure"
-type = "markdown_structure"
-path = "SECURITY-STANDARDS.md"
-headings = ["# Security Standards", "## Canonical Security Routes", "## Contract And Execution Routes"]
-maximum_lines = 28
+members = { columns = ["path"], header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"], order = "source", path = "evaluation/standards-effectiveness/corpus.tsv", where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] } }
 
 [[checks]]
 id = "coding-routes"
 type = "markdown_link_coverage"
 path = "CODING-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "CODING-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "CODING-STANDARDS.md" } }
 
 [[checks]]
 id = "commit-routes"
 type = "markdown_link_coverage"
 path = "COMMIT-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" } }
 
 [[checks]]
 id = "concurrency-routes"
 type = "markdown_link_coverage"
 path = "CONCURRENCY-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "CONCURRENCY-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "CONCURRENCY-STANDARDS.md" } }
 
 [[checks]]
 id = "cross-platform-routes"
 type = "markdown_link_coverage"
 path = "CROSS-PLATFORM-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "CROSS-PLATFORM-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "CROSS-PLATFORM-STANDARDS.md" } }
 
 [[checks]]
 id = "documentation-routes"
 type = "markdown_link_coverage"
 path = "DOCUMENTATION-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "DOCUMENTATION-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "DOCUMENTATION-STANDARDS.md" } }
 
 [[checks]]
 id = "frontend-routes"
 type = "markdown_link_coverage"
 path = "FRONTEND-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "FRONTEND-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "FRONTEND-STANDARDS.md" } }
 
 [[checks]]
 id = "planning-routes"
 type = "markdown_link_coverage"
 path = "PLAN-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" }
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" } }
 
 [[checks]]
 id = "security-routes"
 type = "markdown_link_coverage"
 path = "SECURITY-STANDARDS.md"
 identity = "destination"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
-header = ["source", "route", "destination"]
-columns = ["destination"]
-order = "source"
-where = { field = "source", op = "eq", value = "SECURITY-STANDARDS.md" }
-
-[[checks]]
-id = "security-title-disposition"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition"]
-order = "source"
-expected = [["STD-0582", "SECURITY-STANDARDS.md", "topics/security.md", "index"]]
-[checks.projections.where]
-field = "id"
-op = "eq"
-value = "STD-0582"
-
-[[checks]]
-id = "frontend-accessibility-disposition"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition"]
-order = "source"
-expected = [["STD-0464", "FRONTEND-STANDARDS.md", "topics/accessibility.md", "index"]]
-[checks.projections.where]
-field = "id"
-op = "eq"
-value = "STD-0464"
+members = { columns = ["destination"], header = ["source", "route", "destination"], order = "source", path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv", where = { field = "source", op = "eq", value = "SECURITY-STANDARDS.md" } }

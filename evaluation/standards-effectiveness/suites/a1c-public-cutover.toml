@@ -1,35 +1,9 @@
 schema_version = 1
 id = "a1c-public-cutover"
 owner = "topic.dependencies"
-description = "The A1c replacement exposes only manifest-owned public package roots and the generated v12 eight-operation facade."
+description = "Checks Python package dependency and public-import boundaries. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "python-package-contract"
 type = "python_package_contract"
 fixtures = "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml"
-
-[[checks]]
-id = "module-public-roots"
-type = "path_state"
-present = [
-  "tools/repository_git/pyproject.toml",
-  "tools/repository_git/repository_git/__init__.py",
-  "tools/standards_snapshots/pyproject.toml",
-  "tools/standards_snapshots/standards_snapshots/__init__.py",
-  "tools/standards_identity/pyproject.toml",
-  "tools/standards_identity/standards_identity/__init__.py",
-  "tools/standards_contracts/pyproject.toml",
-  "tools/standards_contracts/standards_contracts/__init__.py",
-  "tools/standards_engine/pyproject.toml",
-  "tools/standards_engine/standards_engine/__init__.py",
-]
-absent = [
-  "tools/standards_authority/pyproject.toml",
-  "tools/standards_analysis/standards_analysis/authority.py",
-  "tools/standards_analysis/standards_analysis/coverage_authority.py",
-  "tools/standards_analysis/standards_analysis/suite_inputs.py",
-  "tools/standards_engine/standards_engine/authority.py",
-  "tools/standards_graph/standards_graph/authority.py",
-  "tools/standards_metadata/standards_metadata/authority.py",
-  "tools/standards_policy_impact/standards_policy_impact/authority.py",
-]

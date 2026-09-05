@@ -104,22 +104,31 @@ def revise_evidence(
         result[REGISTRY] = _dump(registry)
     retained = {s["id"] for s in registry["suites"]}
     replacement = plan["replacement_evidence_owner"]
-    if not replacement.startswith("suite:") or replacement[6:] not in retained:
+    if replacement != "review:consumer" and (
+        not replacement.startswith("suite:") or replacement[6:] not in retained
+    ):
         raise _invalid(
             "EVIDENCE.INVALID_OWNER",
-            "Replacement evidence owner must be a retained suite",
+            "Replacement evidence owner must be a retained suite or consumer review",
         )
 
+    catalog = _load(files, CATALOG)
+    evidence_paths = {
+        n["metadata"]["repository_path"]
+        for n in catalog["nodes"]
+        if n["metadata"].get("authority") in {"evidence", "projection"}
+        and n["metadata"].get("artifact_kind") in {"implementation-artifact", "fixture"}
+    }
     retired_inputs = set(plan["retire_inputs"])
     for path in retired_inputs:
         if (
-            not path.startswith("evaluation/standards-effectiveness/fixtures/")
+            not (path.startswith("evaluation/standards-effectiveness/fixtures/") or path in evidence_paths)
             or path not in files
             or ".." in path.split("/")
         ):
             raise _invalid(
                 "EVIDENCE.INVALID_RETIREMENT",
-                "Only existing evidence fixture inputs may be retired",
+                "Only existing fixtures or registered evidence artifacts may be retired",
             )
         for s in registry["suites"]:
             if path in result[s["path"]].decode():
@@ -128,7 +137,6 @@ def revise_evidence(
                     f"Retained suite {s['id']} still uses {path}",
                 )
         result.pop(path)
-    catalog = _load(files, CATALOG)
     removed_nodes = {
         n["id"]
         for n in catalog["nodes"]

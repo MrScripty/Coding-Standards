@@ -40,6 +40,5 @@ also contains historical evaluation material.
 Milestone reports live beside the
 [active plan](../../docs/plans/standards-library-effectiveness/plan.md).
 Completed plan bundles and their acceptance evidence are indexed in the
-[archive](../../docs/archive/README.md). Retained migration tables in this
-directory remain inputs to registered suites; archival location alone does
-not make an artifact disposable.
+[archive](../../docs/archive/README.md). Historical tables are not current conformance evidence. The live registry
+identifies retained checks; obsolete simulations and migration gates were retired.

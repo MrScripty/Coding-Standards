@@ -6,29 +6,13 @@ source = "core.simplicity-and-complection"
 consumer = "topic.architecture"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "Architecture specializes artifact-level simplicity and tests the composition after introducing a Seam."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Architecture specializes artifact-level simplicity and tests the composition after introducing a Seam. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "core.simplicity-and-complection"
 consumer = "workflow.verification"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "Verification keeps correctness evidence distinct from simplicity evidence."
-
-[[relationships]]
-source = "core.simplicity-and-complection"
-consumer = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "The fixture models post-Seam composition, caller knowledge, change Locality, independent evolution, and deletion."
-
-[[relationships]]
-source = "core.simplicity-and-complection"
-consumer = "core-simplicity"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:core-simplicity"
-rationale = "The suite enforces the first-class Core simplicity and complection unit."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Verification keeps correctness evidence distinct from simplicity evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."

@@ -6,6 +6,15 @@ import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
+
+from standards_verifier.config import parse_check as parse_registered_check
+from standards_verifier.model import (
+    CheckRepositoryIndexInput,
+    present_inputs,
+    absent_inputs,
+)
 
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.suite_inputs import (
@@ -18,6 +27,31 @@ from standards_verifier.suite_inputs import (
 
 class SuiteInputProjectionTest(unittest.TestCase):
     def setUp(self) -> None:
+        def parse_fixture(raw, suite):
+            if raw.get("type") != "fixture_inputs":
+                return parse_registered_check(raw, suite)
+
+            def inputs(context):
+                return (
+                    *present_inputs(
+                        "content", *([raw["path"]] if "path" in raw else [])
+                    ),
+                    *present_inputs("required-present", *raw.get("present", [])),
+                    *absent_inputs("required-absent", *raw.get("absent", [])),
+                    *(
+                        (CheckRepositoryIndexInput("tracked"),)
+                        if "tracked" in raw
+                        else ()
+                    ),
+                )
+
+            return SimpleNamespace(id=raw["id"], authority_inputs=inputs)
+
+        adapter = patch(
+            "standards_verifier.config.parse_check", side_effect=parse_fixture
+        )
+        adapter.start()
+        self.addCleanup(adapter.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
         self.write(
@@ -41,7 +75,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
 
             [[checks]]
             id = "content"
-            type = "text"
+            type = "fixture_inputs"
             path = "present.md"
             required = ["present"]
             prohibited = []
@@ -49,13 +83,13 @@ class SuiteInputProjectionTest(unittest.TestCase):
 
             [[checks]]
             id = "state"
-            type = "path_state"
+            type = "fixture_inputs"
             present = ["present.md"]
             absent = ["absent.md"]
 
             [[checks]]
             id = "tracked"
-            type = "git_index_paths"
+            type = "fixture_inputs"
             tracked = ["present.md"]
             """,
         )
@@ -112,7 +146,7 @@ class SuiteInputProjectionTest(unittest.TestCase):
 
             [[checks]]
             id = "contradiction"
-            type = "path_state"
+            type = "fixture_inputs"
             present = ["absent.md"]
             absent = ["present.md"]
             """,
@@ -143,41 +177,12 @@ class SuiteInputProjectionTest(unittest.TestCase):
         self.assertGreater(len(projection["suites"]), 0)
         self.assertGreater(len(projection["files"]), 0)
         files = {item["path"]: item for item in projection["files"]}
-        retired_checker = files[
-            "evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh"
-        ]
-        self.assertEqual(retired_checker["state"], "absent")
-        retired_uses = {
-            (use["suite"], use["check"], use["role"])
-            for use in retired_checker["uses"]
-        }
-        self.assertIn(
-            (
-                "milestone-7-decomposition",
-                "terminal-authority",
-                "required-absent",
-            ),
-            retired_uses,
-        )
-        plan_checker = files[
-            "evaluation/standards-effectiveness/verify-plan-fixtures.sh"
-        ]
-        self.assertEqual(plan_checker["state"], "absent")
-        self.assertIn(
-            (
-                "planning-consolidation",
-                "terminal-authority",
-                "required-absent",
-            ),
-            {
-                (use["suite"], use["check"], use["role"])
-                for use in plan_checker["uses"]
-            },
-        )
-        self.assertNotIn(
-            "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv",
-            files,
-        )
+        for path in (
+            "tools/standards_analysis/standards_analysis/coverage_publication.py",
+            "tools/standards_engine/tests/test_coverage_publication.py",
+        ):
+            self.assertEqual(files[path]["state"], "present")
+            self.assertTrue(files[path]["uses"])
 
     def test_repository_index_membership_changes_projection_identity(self) -> None:
         first = compile_suite_input_projection(self.root)["repository_index"]
@@ -254,14 +259,8 @@ class SuiteInputProjectionTest(unittest.TestCase):
 
             [[checks]]
             id = "references"
-            type = "reference_inventory"
-            candidates_path = "candidates.tsv"
-            candidates_header = ["path"]
-            candidate_path_column = "path"
-            manifest_path = "manifest.tsv"
-            manifest_header = ["path"]
-            manifest_path_column = "path"
-            literal = "selected-marker"
+            type = "markdown_links"
+            members = { path = "candidates.tsv", header = ["path"], columns = ["path"], order = "source" }
             """,
         )
         self.write("candidates.tsv", "path\nconsumer.md\n")
@@ -273,16 +272,6 @@ class SuiteInputProjectionTest(unittest.TestCase):
         self.write("consumer.md", "selected-marker changed\n")
 
         self.assertEqual(check_suite_input_projection(self.root), 2)
-
-    def test_projection_compiler_does_not_dispatch_on_check_classes(self) -> None:
-        source = (
-            Path(__file__).resolve().parents[1]
-            / "standards_verifier"
-            / "suite_inputs.py"
-        ).read_text(encoding="utf-8")
-
-        self.assertNotIn("isinstance(check", source)
-        self.assertNotIn(".checks.", source)
 
     def test_written_projection_is_canonical_json(self) -> None:
         write_suite_input_projection(self.root)

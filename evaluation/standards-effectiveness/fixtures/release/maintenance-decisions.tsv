@@ -1,7 +1,0 @@
-case	maintenance_contract	immutable_lineage	supported_line	reconciliation	channel_contract	expected_release
-supported-maintenance-release	yes	yes	yes	yes	yes	yes
-missing-maintenance-contract	no	yes	yes	yes	yes	no
-mutable-source-lineage	yes	no	yes	yes	yes	no
-unsupported-release-line	yes	yes	no	yes	yes	no
-unreconciled-remediation	yes	yes	yes	no	yes	no
-implicit-default-channel	yes	yes	yes	yes	no	no

@@ -4,37 +4,15 @@ from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
-from .baseline_markdown_headings import parse_baseline_markdown_headings_check
 from .contract_projection import parse_contract_projection_check
-from .decision import parse_decision_check
-from .derived_evidence import (
-    parse_key_coverage_check,
-    parse_repository_paths_check,
-    parse_repository_subjects_check,
-    parse_table_text_absence_check,
-)
-from .exact_text import parse_exact_text_check
-from .git_index_paths import parse_git_index_paths_check
-from .inclusion import parse_inclusion_check
-from .keyed_relation import parse_keyed_relation_check
-from .line_budget import parse_line_budget_check
-from .markdown_heading_cardinality import parse_markdown_heading_cardinality_check
-from .markdown_headings import parse_markdown_headings_check
 from .markdown_link_coverage import parse_markdown_link_coverage_check
 from .markdown_links import parse_markdown_links_check
 from .markdown_targets import parse_markdown_targets_check
-from .markdown_section_text import parse_markdown_section_text_check
-from .markdown_structure import parse_markdown_structure_check
 from .metadata import parse_metadata_graph_check
 from .metadata_route import parse_metadata_route_check
-from .path_state import parse_path_state_check
 from .plan_contract import parse_plan_contract_check
 from .policy_impact import parse_policy_impact_check
 from .python_package_contract import parse_python_package_contract_check
-from .reference_inventory import parse_reference_inventory_check
-from .relation import parse_relation_check
-from .table import parse_table_check
-from .text import parse_text_check
 
 
 def parse_check(raw: Any, suite_id: str) -> Check:
@@ -48,48 +26,14 @@ def parse_check(raw: Any, suite_id: str) -> Check:
             )
         )
     kind = raw.get("type")
-    if kind == "text":
-        return parse_text_check(raw, suite_id)
-    if kind == "baseline_markdown_headings":
-        return parse_baseline_markdown_headings_check(raw, suite_id)
-    if kind == "decision":
-        return parse_decision_check(raw, suite_id)
     if kind == "contract_projection":
         return parse_contract_projection_check(raw, suite_id)
-    if kind == "repository_subjects":
-        return parse_repository_subjects_check(raw, suite_id)
-    if kind == "repository_paths":
-        return parse_repository_paths_check(raw, suite_id)
-    if kind == "key_coverage":
-        return parse_key_coverage_check(raw, suite_id)
-    if kind == "table_text_absence":
-        return parse_table_text_absence_check(raw, suite_id)
-    if kind == "exact_text":
-        return parse_exact_text_check(raw, suite_id)
-    if kind == "git_index_paths":
-        return parse_git_index_paths_check(raw, suite_id)
-    if kind == "inclusion":
-        return parse_inclusion_check(raw, suite_id)
-    if kind == "keyed_relation":
-        return parse_keyed_relation_check(raw, suite_id)
     if kind == "markdown_targets":
         return parse_markdown_targets_check(raw, suite_id)
     if kind == "markdown_links":
         return parse_markdown_links_check(raw, suite_id)
     if kind == "markdown_link_coverage":
         return parse_markdown_link_coverage_check(raw, suite_id)
-    if kind == "markdown_heading_cardinality":
-        return parse_markdown_heading_cardinality_check(raw, suite_id)
-    if kind == "markdown_headings":
-        return parse_markdown_headings_check(raw, suite_id)
-    if kind == "markdown_section_text":
-        return parse_markdown_section_text_check(raw, suite_id)
-    if kind == "markdown_structure":
-        return parse_markdown_structure_check(raw, suite_id)
-    if kind == "line_budget":
-        return parse_line_budget_check(raw, suite_id)
-    if kind == "path_state":
-        return parse_path_state_check(raw, suite_id)
     if kind == "plan_contract":
         return parse_plan_contract_check(raw, suite_id)
     if kind == "policy_impact":
@@ -100,12 +44,6 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_metadata_graph_check(raw, suite_id)
     if kind == "metadata_route":
         return parse_metadata_route_check(raw, suite_id)
-    if kind == "reference_inventory":
-        return parse_reference_inventory_check(raw, suite_id)
-    if kind == "table":
-        return parse_table_check(raw, suite_id)
-    if kind == "relation":
-        return parse_relation_check(raw, suite_id)
     raise EngineError(
         Diagnostic(
             code="CONFIG.UNKNOWN_CHECK",

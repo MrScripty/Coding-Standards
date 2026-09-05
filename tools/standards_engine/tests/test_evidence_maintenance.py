@@ -118,6 +118,32 @@ class EvidenceMaintenanceTest(unittest.TestCase):
         )
         self.assertIn("suites/old.toml", original)
 
+    def test_registered_checker_retirement_removes_its_graph_edges(self):
+        import tomllib
+
+        original = fixture()
+        path = "tools/checker.py"
+        original[path] = b"obsolete implementation"
+        catalog = tomllib.loads(original[CATALOG].decode())
+        catalog["nodes"].append({"id": path, "metadata": {
+            "repository_path": path, "artifact_kind": "implementation-artifact",
+            "authority": "projection",
+        }})
+        original[CATALOG] = _dump(catalog)
+        declarations = tomllib.loads(original["impact.toml"].decode())
+        declarations["relationships"].append({
+            **declarations["relationships"][0], "consumer": path,
+            "relation": "implementation-projection",
+        })
+        original["impact.toml"] = _dump(declarations)
+        request = plan()
+        request["retire_inputs"] = [path]
+        result = revise_evidence(original, request, set())
+        self.assertNotIn(path, result)
+        self.assertNotIn(path, [n["id"] for n in tomllib.loads(result[CATALOG].decode())["nodes"]])
+        self.assertNotIn(path, [r["consumer"] for r in tomllib.loads(result["impact.toml"].decode())["relationships"]])
+        self.assertIn(path, original)
+
     def test_pruning_preserves_current_claims_and_removes_stale_receipts(self):
         import tomllib
 
@@ -175,7 +201,7 @@ class EvidenceMaintenanceTest(unittest.TestCase):
 
 
 class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
-    def test_preview_failure_and_overlap_preserve_working_tree_then_apply_prunes(self):
+    def test_preview_and_overlap_preserve_working_tree_then_apply_prunes(self):
         import hashlib
         import tempfile
         from pathlib import Path

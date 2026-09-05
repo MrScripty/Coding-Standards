@@ -589,8 +589,8 @@ class StandardsEngine:
                     for path in changed:
                         target = root / path
                         target.parent.mkdir(parents=True, exist_ok=True)
-                        target.write_bytes(proposed[path])
                         written.append(path)
+                        target.write_bytes(proposed[path])
                     for path in removed:
                         (root / path).unlink()
                         written.append(path)

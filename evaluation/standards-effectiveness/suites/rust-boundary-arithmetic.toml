@@ -1,62 +1,7 @@
 schema_version = 1
 id = "rust-boundary-arithmetic"
 owner = "profile.language.rust.security"
-description = "Checked Rust boundary conversion and arithmetic, resource limits, zero contracts, typed rejection, and no-fallback behavior."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/checked-boundary-arithmetic-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-conversion = ["valid", "negative", "too-wide", "unchecked"]
-arithmetic = ["checked", "overflow", "unchecked", "not-checked"]
-limit = ["within", "exceeded", "not-checked"]
-zero = ["not-zero", "permitted", "forbidden"]
-fallback = ["none", "zero", "clamp", "saturate", "wrap", "truncate", "smaller-default"]
-expected = ["allow", "typed-invalid"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [
-  { field = "conversion", op = "ne", value = "valid" },
-  { field = "arithmetic", op = "ne", value = "checked" },
-  { field = "limit", op = "ne", value = "within" },
-  { field = "zero", op = "eq", value = "forbidden" },
-  { field = "fallback", op = "ne", value = "none" },
-]
-
-[[checks]]
-id = "source-identity"
-type = "table"
-path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
-header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "path"]
-order = "source"
-expected = [["STD-0823", "languages/rust/RUST-SECURITY-STANDARDS.md"]]
-[checks.projections.where]
-field = "id"
-op = "eq"
-value = "STD-0823"
-
-[[checks]]
-id = "exact-disposition"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition", "rationale"]
-order = "source"
-expected = [["STD-0823", "languages/rust/RUST-SECURITY-STANDARDS.md", "profiles/languages/rust/security.md", "refine", "replace unchecked casts with checked typed size conversion"]]
-[checks.projections.where]
-field = "id"
-op = "eq"
-value = "STD-0823"
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata-closure"

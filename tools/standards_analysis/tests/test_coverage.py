@@ -517,6 +517,28 @@ class CoverageTest(unittest.TestCase):
         self.assertNotEqual(first_horizon.digest, second_horizon.digest)
         self.assertEqual(first_requirement, second_requirement)
 
+    def test_consumer_review_tracks_its_consumer_without_suite_fanout(self):
+        compiled = self.compiled(relationship=True)
+        compiled = replace(compiled, semantics={
+            key: replace(value, evidence_owner="review:consumer")
+            for key, value in compiled.semantics.items()
+        })
+
+        def requirement():
+            horizon = load_coverage_horizon(
+                self.root, self.corpus, compiled, "horizon.toml"
+            )
+            view = derive_coverage_view(self.corpus.policy_units[0], compiled, horizon)
+            return coverage_requirement_id(derive_coverage_requirement(view), view)
+
+        first = requirement()
+        self.write("inputs/unrelated.md", "Unrelated implementation changed\n")
+        self.write_suite_projection()
+        self.assertEqual(first, requirement())
+        self.write("inputs/consumer.md", "Consumer implementation changed\n")
+        self.write_suite_projection()
+        self.assertNotEqual(first, requirement())
+
     def test_selected_suite_input_changes_subject_requirement(self) -> None:
         compiled = self.compiled(relationship=True)
         first_horizon = load_coverage_horizon(

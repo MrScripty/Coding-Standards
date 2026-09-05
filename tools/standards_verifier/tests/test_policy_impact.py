@@ -288,7 +288,7 @@ class PolicyImpactTest(unittest.TestCase):
         contract = self.root / "contract.toml"
         contract.write_text(
             contract.read_text(encoding="utf-8").replace(
-                'evidence_owner_rule = "required-registered-suite"',
+                'evidence_owner_rule = "registered-suite-or-consumer-review"',
                 'evidence_owner_rule = "optional"',
             ),
             encoding="utf-8",
@@ -401,8 +401,6 @@ class PolicyImpactTest(unittest.TestCase):
         self.assertTrue(
             {
                 "prompts/full-codebase-standards-refactor.md",
-                "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv",
-                "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml",
             }.issubset(consumers)
         )
         self.assertEqual(graph.outgoing("workflow.planning", ("policy-impact",)), ())
@@ -425,7 +423,7 @@ class PolicyImpactTest(unittest.TestCase):
         }
 
         self.assertIn(
-            "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
+            "reference/recipes/commits.md",
             consumers,
         )
         self.assertEqual(graph.outgoing("workflow.commit", ("policy-impact",)), ())

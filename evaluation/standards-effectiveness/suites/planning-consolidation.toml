@@ -1,61 +1,7 @@
 schema_version = 1
 id = "planning-consolidation"
 owner = "workflow.planning"
-description = "Fact-driven planning decisions, canonical owner content, legacy-index routing, and derived disposition coverage without fallback defaults."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-objective = ["changed", "clear", "contradictory"]
-scope = ["bounded"]
-facts = ["complete", "missing", "unsupported"]
-ownership = ["overlap", "owned"]
-acceptance = ["complete", "missing"]
-next_slice = ["multiple", "one"]
-fallback = ["append-only", "commit-cadence", "headless-fallback", "implementation-success", "none", "page-count", "question-count", "template-proof", "worker-count"]
-concurrency = ["applicable", "not-applicable", "unknown"]
-plan_git_topology = ["ancestry", "cadence", "count", "none", "parentage"]
-review_binding = ["ancestry", "content", "head"]
-lifecycle_commit = ["coherent-outcome", "state-only"]
-composed_review = ["applicable-answered", "applicable-unanswered", "missing", "not-applicable-reasoned", "not-applicable-unreasoned"]
-replacement_review = ["inherited", "none", "rerun", "unknown"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [
-  { field = "fallback", op = "ne", value = "none" },
-  { field = "objective", op = "eq", value = "contradictory" },
-  { field = "ownership", op = "eq", value = "overlap" },
-  { field = "next_slice", op = "eq", value = "multiple" },
-  { field = "plan_git_topology", op = "ne", value = "none" },
-  { field = "review_binding", op = "ne", value = "content" },
-  { field = "lifecycle_commit", op = "eq", value = "state-only" },
-  { field = "replacement_review", op = "eq", value = "inherited" },
-]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-field = "facts"
-op = "eq"
-value = "unsupported"
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [
-  { field = "facts", op = "eq", value = "missing" },
-  { field = "acceptance", op = "eq", value = "missing" },
-  { field = "concurrency", op = "eq", value = "unknown" },
-  { field = "composed_review", op = "eq", value = "missing" },
-  { field = "composed_review", op = "eq", value = "applicable-unanswered" },
-  { field = "composed_review", op = "eq", value = "not-applicable-unreasoned" },
-  { field = "replacement_review", op = "eq", value = "unknown" },
-]
+description = "Checks structured plan lifecycle records. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "valid-active-plan"
@@ -185,26 +131,3 @@ type = "plan_contract"
 path = "evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-reason.md"
 expected = "invalid"
 message = "not-applicable composed-design review requires a concrete Reason"
-
-[[checks]]
-id = "disposition-coverage"
-type = "relation"
-mode = "set"
-[checks.left]
-path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
-header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
-columns = ["id"]
-order = "source"
-where = { field = "path", op = "eq", value = "PLAN-STANDARDS.md" }
-[checks.right]
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-columns = ["id"]
-order = "source"
-where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" }
-
-[[checks]]
-id = "terminal-authority"
-type = "path_state"
-present = ["evaluation/standards-effectiveness/suites/planning-consolidation.toml"]
-absent = ["evaluation/standards-effectiveness/verify-plan-fixtures.sh"]

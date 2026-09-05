@@ -25,8 +25,13 @@ reclassify relation targets.
 
 Consumer coverage is not compiled relationship semantics. The downstream
 `standards_analysis` Module derives coverage views, requirements, attestations,
-and certificates from this compiled set plus an independent registered audit
-horizon.
+and certificates from this compiled set plus a registered audit horizon.
+That horizon bounds declared review inputs; it cannot discover missing consumers.
+
+An evidence owner is either a registered `suite:<id>` or `review:consumer`.
+Consumer review binds the exact policy, relationship, and consumer content without
+adding a suite dependency. It requires an actual review before certification.
+The compiler still accepts the earlier suite-only contract for historical reads.
 
 Run focused tests with:
 

@@ -1,7 +1,0 @@
-case	accepted_handoff	explicit_destination	channel_projection	release_notes	artifact_presentation	expected_publication
-accepted-publication	yes	yes	yes	yes	yes	yes
-missing-pipeline-handoff	no	yes	yes	yes	yes	no
-provider-default-destination	yes	no	yes	yes	yes	no
-unresolved-channel-projection	yes	yes	no	yes	yes	no
-missing-required-disclosure	yes	yes	yes	no	yes	no
-ambiguous-artifact-presentation	yes	yes	yes	yes	no	no

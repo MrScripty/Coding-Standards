@@ -1,8 +1,0 @@
-case	boundary_changed	contract_changed	cross_boundary_decision	operation_changed	expected_boundary_readme	expected_contract_readme	expected_adr	expected_runbook	expected_none
-local-implementation	no	no	no	no	no	no	no	no	yes
-new-responsibility-boundary	yes	no	no	no	yes	no	no	no	no
-consumer-contract-change	yes	yes	no	no	no	yes	no	no	no
-cross-boundary-architecture	yes	no	yes	no	yes	no	yes	no	no
-contract-architecture	yes	yes	yes	no	no	yes	yes	no	no
-operator-recovery-procedure	no	no	no	yes	no	no	no	yes	no
-boundary-with-runbook	yes	no	no	yes	yes	no	no	yes	no

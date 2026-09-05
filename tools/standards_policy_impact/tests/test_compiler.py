@@ -72,10 +72,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             {"operator": "always"},
         )
         self.assertEqual(semantics.applicability_program.referenced_facts, ())
-        self.assertEqual(
-            semantics.evidence_owner,
-            "suite:plan-implementation-entrypoint",
-        )
 
     def test_compiled_authority_joins_module_and_policy_unit_graph_sources(self) -> None:
         corpus = load_canonical_standards_corpus(REPO_ROOT)
@@ -154,7 +150,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             (
                 "unsupported-evidence-rule",
                 lambda value: value.replace(
-                    'evidence_owner_rule = "required-registered-suite"',
+                    'evidence_owner_rule = "registered-suite-or-consumer-review"',
                     'evidence_owner_rule = "optional"',
                 ),
                 "POLICY_IMPACT.UNSUPPORTED_CONTRACT",

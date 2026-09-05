@@ -1,6 +1,0 @@
-case	ships_artifact	bundles_dependencies	external_sbom_requirement	checksum_consumed	resolved_closure_source	consumer_resolves	expected_sbom	expected_checksum	expected_lockfile
-cli-binary	yes	yes	no	yes	yes	no	yes	yes	yes
-registry-library	yes	no	no	no	no	yes	no	no	no
-regulated-library	yes	no	yes	yes	no	yes	yes	yes	no
-mixed-workspace	yes	no	no	no	yes	yes	no	no	yes
-internal-build	no	yes	no	no	yes	no	no	no	no

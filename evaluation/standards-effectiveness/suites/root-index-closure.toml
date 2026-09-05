@@ -1,33 +1,7 @@
 schema_version = 1
 id = "root-index-closure"
 owner = "STANDARDS-ROUTER.md"
-description = "Exact root README structure, resources, links, routing boundary, and accepted dispositions without nested checker execution."
-
-[[checks]]
-id = "root-structure"
-type = "markdown_structure"
-path = "README.md"
-headings = ["# Standards Library", "## Start Here", "## Resources", "## Maintaining This Repository", "## License"]
-maximum_lines = 48
-
-[[checks]]
-id = "root-resources"
-type = "table"
-path = "evaluation/standards-effectiveness/fixtures/router/root-index-resources.tsv"
-header = ["resource", "target", "role"]
-non_empty = ["resource", "target", "role"]
-unique = [["resource"], ["target"]]
-[[checks.projections]]
-columns = ["resource", "target", "role"]
-order = "source"
-expected = [
-  ["core", "CORE-STANDARDS.md", "canonical-foundation"],
-  ["router", "STANDARDS-ROUTER.md", "canonical-routing"],
-  ["readme_template", "templates/README-TEMPLATE.md", "non-normative-resource"],
-  ["plan_template", "templates/PLAN-TEMPLATE.md", "non-normative-resource"],
-  ["pull_request_template", "templates/PULL_REQUEST_TEMPLATE.md", "non-normative-resource"],
-  ["license", "LICENSE", "authoritative-license"],
-]
+description = "Checks current navigation link coverage, resolvable Markdown links. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "root-links"
@@ -39,29 +13,4 @@ id = "root-router-routes"
 type = "markdown_link_coverage"
 path = "STANDARDS-ROUTER.md"
 identity = "repository-path"
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/router/root-route-evidence.tsv"
-header = ["concern", "owner"]
-columns = ["owner"]
-order = "source"
-
-[[checks]]
-id = "root-dispositions"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition"]
-order = "source"
-expected = [
-  ["STD-0001", "README.md", "STANDARDS-ROUTER.md", "index"],
-  ["STD-0002", "README.md", "STANDARDS-ROUTER.md", "split"],
-  ["STD-0003", "README.md", "STANDARDS-ROUTER.md", "index"],
-  ["STD-0004", "README.md", "STANDARDS-ROUTER.md", "index"],
-  ["STD-0005", "README.md", "STANDARDS-ROUTER.md", "index"],
-  ["STD-0006", "README.md", "LICENSE", "index"],
-]
-[checks.projections.where]
-field = "id"
-op = "in"
-values = ["STD-0001", "STD-0002", "STD-0003", "STD-0004", "STD-0005", "STD-0006"]
+members = { columns = ["owner"], header = ["concern", "owner"], order = "source", path = "evaluation/standards-effectiveness/fixtures/router/root-route-evidence.tsv" }

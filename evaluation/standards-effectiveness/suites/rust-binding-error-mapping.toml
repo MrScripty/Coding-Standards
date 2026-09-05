@@ -1,70 +1,7 @@
 schema_version = 1
 id = "rust-binding-error-mapping"
 owner = "profile.language.rust.language-bindings"
-description = "Contract-selected Rust host error mapping with typed diagnostics and no lossy or framework-default fallback."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/binding-error-mapping-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-contract = ["selected", "missing", "contradictory"]
-category = ["stable", "unsupported", "wrong", "collapsed"]
-cancellation = ["preserved", "lost", "not-applicable"]
-context = ["bounded", "unbounded", "not-required"]
-sensitivity = ["safe", "sensitive"]
-mapping = ["checked", "rejected", "infallible-claim"]
-capability = ["available", "unavailable"]
-evidence = ["native-host", "native-only", "missing"]
-fallback = ["none", "string-flatten", "generic-error", "named-framework", "drop-semantics", "default-success"]
-expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [
-  { field = "fallback", op = "ne", value = "none" },
-  { field = "contract", op = "eq", value = "contradictory" },
-  { field = "category", op = "in", values = ["wrong", "collapsed"] },
-  { field = "cancellation", op = "eq", value = "lost" },
-  { field = "context", op = "eq", value = "unbounded" },
-  { field = "sensitivity", op = "eq", value = "sensitive" },
-  { field = "mapping", op = "ne", value = "checked" },
-]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-field = "category"
-op = "eq"
-value = "unsupported"
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [
-  { field = "contract", op = "eq", value = "missing" },
-  { field = "capability", op = "eq", value = "unavailable" },
-  { field = "evidence", op = "ne", value = "native-host" },
-]
-
-[[checks]]
-id = "exact-dispositions"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition"]
-order = "source"
-expected = [
-  ["STD-0776", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
-  ["STD-0777", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
-]
-[checks.projections.where]
-field = "id"
-op = "in"
-values = ["STD-0776", "STD-0777"]
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata-closure"

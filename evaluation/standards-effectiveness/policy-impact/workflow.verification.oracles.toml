@@ -6,80 +6,40 @@ source = "workflow.verification.evidence-oracle-boundary"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "Planning identifies the deciding oracle and separates freshness, local agreement, and external conformance."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Planning identifies the deciding oracle and separates freshness, local agreement, and external conformance. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "Implementation preserves admitted oracle fidelity and rejects weaker substitutes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation preserves admitted oracle fidelity and rejects weaker substitutes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "The plan template records material claim, domain, oracle, unsupported-domain, and negative-failure evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The plan template records material claim, domain, oracle, unsupported-domain, and negative-failure evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "workflow.documentation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "Documentation preserves durable claim and evidence provenance without becoming the oracle."
-
-[[relationships]]
-source = "workflow.verification.evidence-oracle-boundary"
-consumer = "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "Fixture separates valid independent evidence from freshness-only and local-agreement fallbacks."
-
-[[relationships]]
-source = "workflow.verification.evidence-oracle-boundary"
-consumer = "evidence-oracle-boundaries"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "Suite enforces the evidence-oracle policy and agent projections."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Documentation preserves durable claim and evidence provenance without becoming the oracle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.negative-fixture-isolation"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:systemic-finding-replanning"
-rationale = "Negative fixture retains unrelated plan preconditions while omitting the systemic audit under test."
-
-[[relationships]]
-source = "workflow.verification.negative-fixture-isolation"
-consumer = "systemic-finding-replanning"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:systemic-finding-replanning"
-rationale = "Suite proves the negative fixture's intended systemic-audit failure boundary."
-
-[[relationships]]
-source = "workflow.verification.negative-fixture-isolation"
-consumer = "evidence-oracle-boundaries"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:evidence-oracle-boundaries"
-rationale = "Suite rejects incidental negative-fixture failure as acceptance evidence."
-
-[[relationships]]
-source = "workflow.verification.differential-evidence"
-consumer = "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Fixture distinguishes local consistency from independent external conformance."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Negative fixture retains unrelated plan preconditions while omitting the systemic audit under test. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.differential-evidence"
@@ -87,7 +47,7 @@ consumer = "docs/archive/plans/standards-engine-standards-recovery/reports/json-
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Evidence report records the sampled equality counterexample and independent specification oracle."
+rationale = "Evidence report records the sampled equality counterexample and independent specification oracle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.differential-evidence"
@@ -95,4 +55,20 @@ consumer = "generated-contract-semantic-conformance"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Suite classifies local agreement and independent conformance separately."
+rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
+
+[[relationships]]
+source = "workflow.verification.evidence-oracle-boundary"
+consumer = "tools/standards_engine/tests/test_coverage_publication.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Exercises the public audit, verification, application, recovery, and independent readback path. A graph registration captures test inputs; evidence of passing requires executing this test."
+
+[[relationships]]
+source = "workflow.verification.evidence-oracle-boundary"
+consumer = "tools/standards_engine/tests/test_evidence_maintenance.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface."

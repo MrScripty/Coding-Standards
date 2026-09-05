@@ -6,101 +6,85 @@ source = "workflow.verification.acceptance-claims"
 consumer = "topic.contracts"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Contracts may need review when evidence admission changes validation, proof, or invariant machinery."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Contracts may need review when evidence admission changes validation, proof, or invariant machinery. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "topic.dependencies"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Dependencies may need review when a permanent proof tool or standardized semantic implementation is proposed."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Dependencies may need review when a permanent proof tool or standardized semantic implementation is proposed. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "topic.diagnostics"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Diagnostics may need review when trace-led diagnosis substitutes for permanent verification machinery."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Diagnostics may need review when trace-led diagnosis substitutes for permanent verification machinery. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "topic.resilience"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Resilience may need review when failure consequence selects recovery or retained evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Resilience may need review when failure consequence selects recovery or retained evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "topic.security"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Security may need review when adversarial reachability justifies validation or defense in depth."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Security may need review when adversarial reachability justifies validation or defense in depth. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Planning may need review when the facts required to admit or retire acceptance evidence change."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Planning may need review when the facts required to admit or retire acceptance evidence change. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Implementation may need review when permanent checks are admitted, replaced, or rejected."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation may need review when permanent checks are admitted, replaced, or rejected. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "workflow.documentation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Documentation may need review when evidence context becomes a durable responsibility."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Documentation may need review when evidence context becomes a durable responsibility. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "workflow.release"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Release may need review when exact-byte identity or retained artifact evidence is an accepted claim."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Release may need review when exact-byte identity or retained artifact evidence is an accepted claim. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Generated Contract may need review when freshness, semantic conformance, or byte identity is proposed as evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Generated Contract may need review when freshness, semantic conformance, or byte identity is proposed as evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "profile.boundary.persistence"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "Persistence may need review when durable corruption or recovery consequences justify evidence."
-
-[[relationships]]
-source = "workflow.verification.acceptance-claims"
-consumer = "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "The fixture distinguishes necessary evidence from subsumed, incidental, or disproportionate permanent machinery."
-
-[[relationships]]
-source = "workflow.verification.acceptance-claims"
-consumer = "acceptance-claims"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:acceptance-claims"
-rationale = "The existing suite supplies repository conformance evidence for acceptance-claim and permanent-evidence admission."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Persistence may need review when durable corruption or recovery consequences justify evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."

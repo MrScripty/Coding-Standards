@@ -1,9 +1,0 @@
-concern	owner
-acceptance	workflows/verification.md
-concurrency	topics/concurrency.md
-bindings	profiles/boundaries/language-bindings.md
-resilience	topics/resilience.md
-contracts	topics/contracts.md
-frontend	profiles/applications/frontend.md
-performance	topics/performance.md
-languages	profiles/README.md

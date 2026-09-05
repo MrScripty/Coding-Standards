@@ -1,49 +1,10 @@
 schema_version = 1
 id = "rust-dependency-build-cost"
 owner = "profile.language.rust.dependencies"
-description = "Rust dependency build-cost measurement from explicit claims, inputs, baselines, and evidence without fixed thresholds or command defaults."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/dependency-build-cost-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-claim = ["accepted", "contradictory", "missing"]
-measurement = ["graph-count", "timing"]
-inputs = ["known", "unknown"]
-baseline = ["known", "missing"]
-capability = ["supported", "unsupported"]
-evidence = ["complete", "incomplete"]
-fallback = ["command-success", "count-threshold", "feature-reduction", "fixed-percentage", "leaf-crate", "none", "required-alternative"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [{ field = "fallback", op = "ne", value = "none" }, { field = "claim", op = "eq", value = "contradictory" }]
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [{ field = "claim", op = "eq", value = "missing" }, { field = "inputs", op = "eq", value = "unknown" }, { field = "baseline", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "incomplete" }]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-all = [{ field = "capability", op = "eq", value = "unsupported" }]
-
+description = "Checks declared Markdown destinations. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "source-index-destinations"
 type = "markdown_targets"
 path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
 required = ["profiles/languages/rust/api.md", "profiles/languages/rust/dependencies.md", "reference/recipes/rust-dependencies.md", "topics/dependencies.md", "topics/licensing.md", "topics/performance.md", "topics/security.md", "workflows/tooling.md", "workflows/verification.md"]
-
-[[checks]]
-id = "dispositions-records"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-non_empty = []
-unique = []
-projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0749", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "profiles/languages/rust/dependencies.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0749"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0750", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0750"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0751", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0751"}]}}]

@@ -1,7 +1,7 @@
 schema_version = 1
 id = "rust-profile-authority-closure"
 owner = "profiles/languages/rust/README.md"
-description = "Canonical Rust profile metadata, routes, typed diagnostics, and no-legacy authority without nested checker execution."
+description = "Checks resolvable Markdown links, current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "rust-profile-metadata"

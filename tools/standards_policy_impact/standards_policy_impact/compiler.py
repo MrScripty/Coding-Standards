@@ -51,7 +51,8 @@ SEMANTIC_GROUP = "semantic"
 SOURCE_ID = "standards.policy-impact"
 CATALOG_SOURCE_ID = "standards.policy-impact-catalog"
 RELATIONSHIP_KIND_CONTRACT_VERSION = 2
-EVIDENCE_OWNER_RULE = "required-registered-suite"
+EVIDENCE_OWNER_RULE = "registered-suite-or-consumer-review"
+_LEGACY_EVIDENCE_OWNER_RULE = "required-registered-suite"
 RELATION_FIELDS = {
     "source",
     "consumer",
@@ -280,7 +281,7 @@ def _load_authoring_contract(source: ContentSource, path: str) -> _AuthoringCont
         )
     artifact_kinds = frozenset(_texts(raw, "artifact_kinds", path))
     evidence_owner_rule = _text(raw, "evidence_owner_rule", path)
-    if evidence_owner_rule != EVIDENCE_OWNER_RULE:
+    if evidence_owner_rule not in {EVIDENCE_OWNER_RULE, _LEGACY_EVIDENCE_OWNER_RULE}:
         raise _error(
             "POLICY_IMPACT.UNSUPPORTED_CONTRACT",
             "evidence-owner rule is unsupported",
@@ -433,7 +434,10 @@ def _load_catalog(
         path=path,
         owner=path,
     )
-    if raw["schema_version"] != contract.catalog_version or raw["source_id"] != CATALOG_SOURCE_ID:
+    if (
+        raw["schema_version"] != contract.catalog_version
+        or raw["source_id"] != CATALOG_SOURCE_ID
+    ):
         raise _error(
             "POLICY_IMPACT.CATALOG",
             "catalog schema or source identity is invalid",
@@ -456,7 +460,9 @@ def _load_catalog(
         )
         metadata = item["metadata"]
         if not isinstance(metadata, dict):
-            raise _error("POLICY_IMPACT.CATALOG", "node metadata must be a table", path=path)
+            raise _error(
+                "POLICY_IMPACT.CATALOG", "node metadata must be a table", path=path
+            )
         _exact(
             metadata,
             allowed={"repository_path", "artifact_kind", "authority", "suite_id"},
@@ -466,9 +472,11 @@ def _load_catalog(
         )
         node_id = _text(item, "id", path)
         aliases_value = item.get("aliases", [])
-        if not isinstance(aliases_value, list) or any(
-            not isinstance(alias, str) or not alias for alias in aliases_value
-        ) or len(set(aliases_value)) != len(aliases_value):
+        if (
+            not isinstance(aliases_value, list)
+            or any(not isinstance(alias, str) or not alias for alias in aliases_value)
+            or len(set(aliases_value)) != len(aliases_value)
+        ):
             raise _error("POLICY_IMPACT.CATALOG", "node aliases are invalid", path=path)
         artifact_kind = _text(metadata, "artifact_kind", path)
         if artifact_kind not in contract.artifact_kinds:
@@ -543,15 +551,21 @@ def _load_catalog(
 def _load_suite_registry(source: ContentSource, path: str) -> Mapping[str, str]:
     raw = _load_toml(source, path)
     if raw.get("schema_version") != 1 or not isinstance(raw.get("suites"), list):
-        raise _error("POLICY_IMPACT.SUITE_REGISTRY", "suite registry is invalid", path=path)
+        raise _error(
+            "POLICY_IMPACT.SUITE_REGISTRY", "suite registry is invalid", path=path
+        )
     suites: dict[str, str] = {}
     for item in raw["suites"]:
         if not isinstance(item, dict):
-            raise _error("POLICY_IMPACT.SUITE_REGISTRY", "suite must be a table", path=path)
+            raise _error(
+                "POLICY_IMPACT.SUITE_REGISTRY", "suite must be a table", path=path
+            )
         suite_id = _text(item, "id", path)
         suite_path = _text(item, "path", path)
         if suite_id in suites:
-            raise _error("POLICY_IMPACT.SUITE_REGISTRY", "suite IDs must be unique", path=path)
+            raise _error(
+                "POLICY_IMPACT.SUITE_REGISTRY", "suite IDs must be unique", path=path
+            )
         suites[suite_id] = suite_path
     return dict(sorted(suites.items()))
 
@@ -621,9 +635,8 @@ def _load_declarations(
         )
         owner = _text(raw, "owner", path)
         relationships = raw["relationships"]
-        if (
-            raw["schema_version"] != contract.declaration_version
-            or not isinstance(relationships, list)
+        if raw["schema_version"] != contract.declaration_version or not isinstance(
+            relationships, list
         ):
             raise _error(
                 "POLICY_IMPACT.UNSUPPORTED_DECLARATION",
@@ -653,8 +666,7 @@ def _load_declarations(
                 "applicability",
                 "rationale",
             }
-            if contract.evidence_owner_rule == EVIDENCE_OWNER_RULE:
-                required.add("evidence_owner")
+            required.add("evidence_owner")
             _exact(
                 item,
                 allowed=RELATION_FIELDS,
@@ -713,10 +725,7 @@ def _target_matches(
             consumer in artifacts
             and artifacts[consumer].artifact_kind == "routing-projection"
         )
-    return (
-        consumer in artifacts
-        and artifacts[consumer].artifact_kind == target_class
-    )
+    return consumer in artifacts and artifacts[consumer].artifact_kind == target_class
 
 
 def compile_policy_impact(
@@ -767,7 +776,9 @@ def compile_policy_impact(
     modules = {module.module_id: module.role for module in corpus.modules}
     module_ids = set(modules)
     policy_units = corpus.policy_unit_corpus
-    node_ids = module_ids | {unit.id for unit in policy_units.units} | set(catalog.artifacts)
+    node_ids = (
+        module_ids | {unit.id for unit in policy_units.units} | set(catalog.artifacts)
+    )
     groups = {group.id for group in contract.groups}
     kinds = contract.relationship_kinds
     facts = _load_facts(selected_source, fact_catalog)
@@ -881,22 +892,27 @@ def compile_policy_impact(
         natural_keys.add(natural_key)
 
         evidence_owner = declaration.evidence_owner
-        if not evidence_owner.startswith("suite:"):
-            raise _error(
-                "POLICY_IMPACT.EVIDENCE_OWNER",
-                "evidence owner must use suite:<registered-id>",
-                path=declaration.source_path,
-                observed=evidence_owner,
-            )
-        matches = suite_nodes.get(evidence_owner.removeprefix("suite:"), [])
-        if len(matches) != 1:
-            raise _error(
-                "POLICY_IMPACT.EVIDENCE_OWNER",
-                "evidence owner must resolve to exactly one canonical suite node",
-                path=declaration.source_path,
-                observed=evidence_owner,
-                unavailable=not matches,
-            )
+        consumer_review = (
+            evidence_owner == "review:consumer"
+            and contract.evidence_owner_rule == EVIDENCE_OWNER_RULE
+        )
+        if not consumer_review:
+            if not evidence_owner.startswith("suite:"):
+                raise _error(
+                    "POLICY_IMPACT.EVIDENCE_OWNER",
+                    "evidence owner must use suite:<registered-id>",
+                    path=declaration.source_path,
+                    observed=evidence_owner,
+                )
+            matches = suite_nodes.get(evidence_owner.removeprefix("suite:"), [])
+            if len(matches) != 1:
+                raise _error(
+                    "POLICY_IMPACT.EVIDENCE_OWNER",
+                    "evidence owner must resolve to exactly one canonical suite node",
+                    path=declaration.source_path,
+                    observed=evidence_owner,
+                    unavailable=not matches,
+                )
 
         edge_id = policy_impact_edge_id(*natural_key)
         propagation = kind.propagation

@@ -7,7 +7,7 @@ consumer = "tools/standards_identity/standards_identity/encoding.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Identity v2 preserves exact Unicode scalar values and remains distinct from schema instance equality."
+rationale = "Identity v2 preserves exact Unicode scalar values and remains distinct from schema instance equality. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -15,7 +15,7 @@ consumer = "tools/standards_contracts/standards_contracts/runtime.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Contract runtime validation preserves JSON Schema instance equality without identity normalization."
+rationale = "Contract runtime validation preserves JSON Schema instance equality without identity normalization. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -23,7 +23,7 @@ consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Generated validators preserve the same schema equality semantics as the canonical contract."
+rationale = "Generated validators preserve the same schema equality semantics as the canonical contract. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -31,7 +31,7 @@ consumer = "tools/standards_applicability/standards_applicability/core.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Applicability values use their declared domain equality without inheriting schema or identity rules accidentally."
+rationale = "Applicability values use their declared domain equality without inheriting schema or identity rules accidentally. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -39,7 +39,7 @@ consumer = "tools/standards_snapshots/standards_snapshots/store.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Persisted authority verifies opaque semantic handles without substituting schema-instance equality."
+rationale = "Persisted authority verifies opaque semantic handles without substituting schema-instance equality. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -47,7 +47,7 @@ consumer = "docs/archive/plans/standards-engine-standards-recovery/reports/json-
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The reproduction records the known A1 schema-instance equality disagreement without correcting A1 during recovery."
+rationale = "The reproduction records the known A1 schema-instance equality disagreement without correcting A1 during recovery. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -55,7 +55,7 @@ consumer = "generated-contract-semantic-conformance"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Suite keeps schema, domain, and identity equality claims separate."
+rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -63,7 +63,7 @@ consumer = "tools/standards_engine/contracts/identity-fixtures.json"
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Identity fixtures own reviewed v2 framing and domain-separated expected values."
+rationale = "Identity fixtures own reviewed v2 framing and domain-separated expected values. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -71,7 +71,7 @@ consumer = "tools/standards_identity/README.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Identity documentation projects exact codepoint-preserving framing without domain semantics."
+rationale = "Identity documentation projects exact codepoint-preserving framing without domain semantics. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -79,7 +79,7 @@ consumer = "tools/standards_analysis/standards_analysis/keys.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Analysis constructs typed local ordering, digest, and identity inputs."
+rationale = "Analysis constructs typed local ordering, digest, and identity inputs. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -87,7 +87,7 @@ consumer = "tools/standards_analysis/standards_analysis/coverage.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Coverage constructs domain-owned coverage and fingerprint records."
+rationale = "Coverage constructs domain-owned coverage and fingerprint records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -95,7 +95,7 @@ consumer = "tools/standards_analysis/standards_analysis/impact.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Impact constructs versioned trace identity records."
+rationale = "Impact constructs versioned trace identity records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -103,7 +103,7 @@ consumer = "tools/standards_analysis/standards_analysis/obligations.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Obligations construct versioned decision identity records."
+rationale = "Obligations construct versioned decision identity records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -111,7 +111,7 @@ consumer = "tools/standards_analysis/standards_analysis/reading.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Reading plans use typed selection keys for ordering and deduplication."
+rationale = "Reading plans use typed selection keys for ordering and deduplication. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -119,7 +119,7 @@ consumer = "tools/standards_metadata/standards_metadata/policy_units.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Metadata owns policy-unit structural encoding and raw representation digests."
+rationale = "Metadata owns policy-unit structural encoding and raw representation digests. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -127,7 +127,7 @@ consumer = "tools/standards_metadata/standards_metadata/suite_inputs.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Metadata derives suite dependency identity from typed canonical records while retaining raw file digests as separate evidence."
+rationale = "Metadata derives suite dependency identity from typed canonical records while retaining raw file digests as separate evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -135,7 +135,7 @@ consumer = "tools/standards_metadata/standards_metadata/__init__.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "The Metadata root no longer exports generic serialization authority."
+rationale = "The Metadata root no longer exports generic serialization authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.identity-versus-instance-equality"
@@ -143,188 +143,164 @@ consumer = "tools/standards_identity/standards_identity/errors.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "Identity errors reject malformed or mismatched content identities without substituting schema equality."
+rationale = "Identity errors reject malformed or mismatched content identities without substituting schema equality. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Generated Contract may need review when proof-bearing generated representations or their invalidation conditions change."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Generated Contract may need review when proof-bearing generated representations or their invalidation conditions change. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "profile.boundary.ipc"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "IPC may need review when process-crossing input creates or invalidates proof."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "IPC may need review when process-crossing input creates or invalidates proof. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "profile.boundary.language-bindings"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Language Bindings may need review when representation conversion preserves or loses proof."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Language Bindings may need review when representation conversion preserves or loses proof. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "profile.boundary.persistence"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Persistence may need review when reopening or independent mutation creates a new proof boundary."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Persistence may need review when reopening or independent mutation creates a new proof boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "topic.security"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Security may need review when proof is retained or re-established at a trust boundary."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Security may need review when proof is retained or re-established at a trust boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "topic.resilience"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Resilience may need review when persisted or reconstructed state requires new proof."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Resilience may need review when persisted or reconstructed state requires new proof. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "workflow.verification"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Verification may need review when proof construction, preservation, or invalidation changes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Verification may need review when proof construction, preservation, or invalidation changes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Planning may need review when a material proof boundary or invalidation condition changes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Planning may need review when a material proof boundary or invalidation condition changes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.validation-proof-lifetime"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Implementation may need review when code must preserve and directly consume a proof-bearing representation."
-
-[[relationships]]
-source = "topic.contracts.validation-proof-lifetime"
-consumer = "evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "The existing fixture distinguishes intact proof from representation loss, mutation, contract change, and a new boundary."
-
-[[relationships]]
-source = "topic.contracts.validation-proof-lifetime"
-consumer = "contract-invariants"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "The existing Contracts suite supplies repository conformance evidence for proof lifetime."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation may need review when code must preserve and directly consume a proof-bearing representation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Generated Contract may need review when invariant failure classification changes external proof or typed outcomes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Generated Contract may need review when invariant failure classification changes external proof or typed outcomes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "profile.boundary.ipc"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "IPC may need review when independently authored input or dispatch can expose an invariant violation."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "IPC may need review when independently authored input or dispatch can expose an invariant violation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "profile.boundary.language-bindings"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Language Bindings may need review when invariant failure crosses a public language seam."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Language Bindings may need review when invariant failure crosses a public language seam. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "profile.boundary.persistence"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Persistence may need review when an invariant violation can corrupt authoritative state or require recovery."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Persistence may need review when an invariant violation can corrupt authoritative state or require recovery. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "workflow.verification"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Verification may need review when invariant source or consequence changes the required evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Verification may need review when invariant source or consequence changes the required evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "topic.security"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Security may need review when arbitrary or adversarial input is the invariant-failure source."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Security may need review when arbitrary or adversarial input is the invariant-failure source. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "topic.resilience"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Resilience may need review when an invariant violation requires recovery or authoritative-state handling."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Resilience may need review when an invariant violation requires recovery or authoritative-state handling. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "topic.diagnostics"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Diagnostics may need review when a contained defect uses immediate failure and trace-led diagnosis."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Diagnostics may need review when a contained defect uses immediate failure and trace-led diagnosis. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Planning may need review when failure consequence changes required machinery or evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Planning may need review when failure consequence changes required machinery or evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.contracts.invariant-contracts"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "Implementation may need review when the selected invariant outcome or enforcement point changes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation may need review when the selected invariant outcome or enforcement point changes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
-source = "topic.contracts.invariant-contracts"
-consumer = "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv"
-relation = "fixture-projection"
+source = "topic.contracts.validation-proof-lifetime"
+consumer = "tools/standards_analysis/standards_analysis/coverage_publication.py"
+relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "The fixture distinguishes contained defects from arbitrary input, public escape, and authoritative corruption."
-
-[[relationships]]
-source = "topic.contracts.invariant-contracts"
-consumer = "contract-invariants"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-invariants"
-rationale = "The existing Contracts suite supplies repository conformance evidence for invariant ownership and failure outcomes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Owns exact receipt evidence, authorization binding, and repository readback; source changes require review of those observable behaviors."

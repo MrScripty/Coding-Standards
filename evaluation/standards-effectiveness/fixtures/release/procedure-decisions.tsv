@@ -1,8 +1,0 @@
-case	release_boundary	profiles_selected	decisions_accepted	claims_satisfied	immutable_dispatch	artifacts_verified	publication_resolved	expected_completion
-accepted-release-procedure	yes	yes	yes	yes	yes	yes	yes	yes
-missing-language-profile	yes	no	yes	yes	yes	yes	yes	no
-unresolved-release-decision	yes	yes	no	yes	yes	yes	yes	no
-missing-behavior-claim	yes	yes	yes	no	yes	yes	yes	no
-mutable-dispatch-source	yes	yes	yes	yes	no	yes	yes	no
-unverified-artifact-set	yes	yes	yes	yes	yes	no	yes	no
-unresolved-publication	yes	yes	yes	yes	yes	yes	no	no

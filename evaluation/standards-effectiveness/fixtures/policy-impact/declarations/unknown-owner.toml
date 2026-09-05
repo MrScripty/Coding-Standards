@@ -6,5 +6,5 @@ source = "workflow.unknown"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:planning-admission"
+evidence_owner = "suite:policy-semantic-impact"
 rationale = "Unknown owner fixture relationship."

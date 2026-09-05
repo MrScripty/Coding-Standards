@@ -1,51 +1,7 @@
 schema_version = 1
 id = "documentation-policy-consolidation"
 owner = "workflow.documentation"
-description = "Exact Documentation consolidation membership, disposition, routing, and no-blanket-rule closure without numeric-range or copied-row authority."
-
-[[checks]]
-id = "source-membership"
-type = "table"
-path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
-header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
-non_empty = ["id", "path"]
-unique = [["id"]]
-[checks.domains]
-path = ["DOCUMENTATION-STANDARDS.md"]
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/documentation/policy-consolidation-members.tsv"
-header = ["id"]
-columns = ["id"]
-order = "source"
-key = "id"
-
-[[checks]]
-id = "exact-dispositions"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-non_empty = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[checks.domains]
-source = ["DOCUMENTATION-STANDARDS.md"]
-target = ["none", "workflows/documentation.md", "templates/README-TEMPLATE.md"]
-disposition = ["move", "remove"]
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/documentation/policy-consolidation-members.tsv"
-header = ["id"]
-columns = ["id"]
-order = "source"
-key = "id"
-
-[[checks.row_constraints]]
-id = "removed-target"
-where = { field = "disposition", op = "eq", value = "remove" }
-require = { field = "target", op = "eq", value = "none" }
-
-[[checks.row_constraints]]
-id = "moved-target"
-where = { field = "disposition", op = "eq", value = "move" }
-require = { field = "target", op = "in", values = ["workflows/documentation.md", "templates/README-TEMPLATE.md"] }
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata-closure"

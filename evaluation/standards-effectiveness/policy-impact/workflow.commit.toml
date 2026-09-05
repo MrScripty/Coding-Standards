@@ -6,152 +6,152 @@ source = "workflow.commit.per-commit-boundary"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.terminal-branch-lifecycle"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.branch-history-review"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.hook-bypass-authority"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.rewrite-authority"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.terminal-branch-lifecycle"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.branch-history-review"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "workflow.planning"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:concurrent-plan-integration"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.cherry-pick-lineage"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:concurrent-plan-integration"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.terminal-branch-lifecycle"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:concurrent-plan-integration"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:concurrent-plan-integration"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.terminal-branch-lifecycle"
@@ -159,335 +159,143 @@ consumer = "workflow.release"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "suite:release-maintenance-policy"
-rationale = "Release maintenance may use an explicitly retained long-lived branch but its existing contract requires no normative correction for ordinary branch lifecycle."
+rationale = "Release maintenance may use an explicitly retained long-lived branch but its existing contract requires no normative correction for ordinary branch lifecycle. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.per-commit-boundary"
 consumer = "reference.recipes.commits"
 relation = "reference-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
 consumer = "reference.recipes.commits"
 relation = "reference-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "reference.recipes.commits"
 relation = "reference-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority."
-
-[[relationships]]
-source = "workflow.commit.per-commit-boundary"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The authority fixture enforces existing staged-review and history-rewrite decisions."
-
-[[relationships]]
-source = "workflow.commit.rewrite-authority"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The authority fixture enforces existing staged-review and history-rewrite decisions."
-
-[[relationships]]
-source = "workflow.commit.hook-bypass-authority"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The hook fixture enforces existing explicit bypass authority and no-fallback outcomes."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
-
-[[relationships]]
-source = "workflow.commit.branch-context"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
-
-[[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
-
-[[relationships]]
-source = "workflow.commit.cherry-pick-lineage"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
-
-[[relationships]]
-source = "workflow.commit.worktree-lifecycle"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
-
-[[relationships]]
-source = "workflow.commit.worktree-lifecycle"
-consumer = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The terminal fixture enforces bounded reachability-aware final-state evidence for worktrees created by the governed task without authorizing historical cleanup."
-
-[[relationships]]
-source = "workflow.commit.per-commit-boundary"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.branch-context"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.cherry-pick-lineage"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.worktree-lifecycle"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.branch-history-review"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.hook-bypass-authority"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.rewrite-authority"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.topology"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.commit-message"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
-
-[[relationships]]
-source = "workflow.commit.invalid-outcomes"
-consumer = "commit-consolidation-dispositions"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.per-commit-boundary"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.isolation-applicability"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.branch-context"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.integration-mechanisms"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.cherry-pick-lineage"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.terminal-branch-lifecycle"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:commit-consolidation-dispositions"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."
-
-[[relationships]]
-source = "workflow.commit.per-commit-boundary"
-consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The Planning fixture enforces Commit ownership of coherent commit boundaries and rejection of plan-owned Git topology."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "workflow.commit.per-commit-boundary"
@@ -495,4 +303,4 @@ consumer = "planning-consolidation"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:planning-consolidation"
-rationale = "The registered Planning suite enforces Commit ownership of coherent commit boundaries."
+rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."

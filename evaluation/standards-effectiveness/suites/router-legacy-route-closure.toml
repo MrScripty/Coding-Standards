@@ -1,17 +1,7 @@
 schema_version = 1
 id = "router-legacy-route-closure"
 owner = "STANDARDS-ROUTER.md"
-description = "Router legacy-entrypoint exclusion derived from canonical replacement and final-source evidence."
-
-[[checks]]
-id = "replacement-table"
-type = "table"
-path = "evaluation/standards-effectiveness/fixtures/router/legacy-route-replacements.tsv"
-header = ["concern", "legacy_route", "canonical_owner", "expected"]
-non_empty = ["concern", "legacy_route", "canonical_owner", "expected"]
-unique = [["concern"], ["legacy_route"]]
-[checks.domains]
-expected = ["canonical-only"]
+description = "Checks resolvable Markdown links. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "router-links"

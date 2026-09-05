@@ -1,75 +1,7 @@
 schema_version = 1
 id = "s1-routing"
 owner = "migration.parent-plan"
-description = "Exact S1 Rust-library and verifier-change routing, metadata closure, local links, bounded context, and root full-library-read prohibition without Bash execution or fallback inference."
-
-[[checks]]
-id = "verifier-change-routing"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
-input_columns = ["module_boundary", "dependency_direction", "performance_concern", "migration_lifecycle", "planning_scope", "facts"]
-[checks.domains]
-case = ["*"]
-module_boundary = ["changed", "unchanged", "unknown"]
-dependency_direction = ["changed", "unchanged", "unknown"]
-performance_concern = ["changed", "none", "unknown"]
-migration_lifecycle = ["changed", "none", "unknown"]
-planning_scope = ["bounded", "material", "unknown"]
-facts = ["complete", "missing"]
-expected_architecture = ["exclude", "select", "unresolved"]
-expected_performance = ["exclude", "select", "unresolved"]
-expected_planning = ["exclude", "select", "unresolved"]
-expected_route = ["route", "unresolved"]
-
-[[checks.outputs]]
-column = "expected_architecture"
-default = "exclude"
-[[checks.outputs.rules]]
-outcome = "unresolved"
-[checks.outputs.rules.when]
-all = [{ field = "facts", op = "eq", value = "missing" }]
-[[checks.outputs.rules]]
-outcome = "select"
-[checks.outputs.rules.when]
-any = [
-  { field = "module_boundary", op = "eq", value = "changed" },
-  { field = "dependency_direction", op = "eq", value = "changed" },
-]
-
-[[checks.outputs]]
-column = "expected_performance"
-default = "exclude"
-[[checks.outputs.rules]]
-outcome = "unresolved"
-[checks.outputs.rules.when]
-all = [{ field = "facts", op = "eq", value = "missing" }]
-[[checks.outputs.rules]]
-outcome = "select"
-[checks.outputs.rules.when]
-all = [{ field = "performance_concern", op = "eq", value = "changed" }]
-
-[[checks.outputs]]
-column = "expected_planning"
-default = "exclude"
-[[checks.outputs.rules]]
-outcome = "unresolved"
-[checks.outputs.rules.when]
-all = [{ field = "facts", op = "eq", value = "missing" }]
-[[checks.outputs.rules]]
-outcome = "select"
-[checks.outputs.rules.when]
-all = [
-  { field = "migration_lifecycle", op = "eq", value = "changed" },
-  { field = "planning_scope", op = "eq", value = "material" },
-]
-
-[[checks.outputs]]
-column = "expected_route"
-default = "route"
-[[checks.outputs.rules]]
-outcome = "unresolved"
-[checks.outputs.rules.when]
-all = [{ field = "facts", op = "eq", value = "missing" }]
+description = "Checks resolvable Markdown links, current metadata graph constraints, fact-driven routing outcomes. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "verifier-change-route-closure"
@@ -81,11 +13,7 @@ route_column = "expected_route"
 resolved = "route"
 unresolved = "unresolved"
 base_modules = ["workflow.implementation", "workflow.verification"]
-selections = [
-  { column = "expected_architecture", selected = "select", excluded = "exclude", module = "topic.architecture" },
-  { column = "expected_performance", selected = "select", excluded = "exclude", module = "topic.performance" },
-  { column = "expected_planning", selected = "select", excluded = "exclude", module = "workflow.planning" },
-]
+selections = [{ column = "expected_architecture", excluded = "exclude", module = "topic.architecture", selected = "select" }, { column = "expected_performance", excluded = "exclude", module = "topic.performance", selected = "select" }, { column = "expected_planning", excluded = "exclude", module = "workflow.planning", selected = "select" }]
 
 [[checks]]
 id = "metadata-closure"
@@ -95,27 +23,4 @@ paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/implementation.m
 [[checks]]
 id = "local-links"
 type = "markdown_links"
-paths = [
-  "CORE-STANDARDS.md",
-  "STANDARDS-ROUTER.md",
-  "workflows/implementation.md",
-  "workflows/verification.md",
-  "profiles/applications/library.md",
-  "profiles/languages/rust/README.md",
-]
-
-[[checks]]
-id = "context-budget"
-type = "line_budget"
-paths = [
-  "CORE-STANDARDS.md",
-  "STANDARDS-ROUTER.md",
-  "workflows/implementation.md",
-  "workflows/verification.md",
-  "profiles/applications/library.md",
-  "profiles/languages/rust/README.md",
-]
-baseline_path = "evaluation/standards-effectiveness/generated/summary.tsv"
-baseline_key = "normative_and_derived_lines"
-maximum_numerator = 1
-maximum_denominator = 4
+paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/implementation.md", "workflows/verification.md", "profiles/applications/library.md", "profiles/languages/rust/README.md"]

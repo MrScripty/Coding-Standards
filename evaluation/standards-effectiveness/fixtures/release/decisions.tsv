@@ -1,6 +1,0 @@
-case	ships_artifact	published_promise	consumer_visible	expected_release	expected_changelog
-internal-coordinated	no	no	no	no	no
-artifact-rebuild	yes	no	no	yes	no
-public-api-change	no	yes	yes	yes	yes
-published-fix	yes	yes	yes	yes	yes
-internal-refactor-in-release	yes	yes	no	yes	no

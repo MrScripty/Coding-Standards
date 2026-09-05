@@ -1,9 +1,0 @@
-case	declaration_scope	semantic_owner	extension_behavior	capability	expected
-representation_with_domain_reference	representation	distinct	reference	supported	allow
-domain_contract_single_owner	domain	same	not-applicable	supported	allow
-coherent_combined_contract	mixed	same	reference	supported	allow
-annotation_transfers_authority	representation	distinct	transfer	supported	typed-invalid
-contradictory_semantic_owner	mixed	contradictory	reference	supported	typed-invalid
-missing_semantic_owner	representation	missing	reference	supported	typed-unavailable
-unknown_declaration_scope	unknown	same	reference	supported	typed-unavailable
-unsupported_semantic_family	representation	distinct	reference	unsupported	typed-unsupported

@@ -23,7 +23,12 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from .errors import AnalysisError, AnalysisFailure
-from .keys import analysis_identity, analysis_key_bytes, analysis_value_digest, raw_digest
+from .keys import (
+    analysis_identity,
+    analysis_key_bytes,
+    analysis_value_digest,
+    raw_digest,
+)
 from .trust import (
     AnalysisExecutionContext,
     AuthorizationAuthorityContract,
@@ -309,7 +314,6 @@ class _RepositoryAuthorization:
         )
 
 
-
 def _merge_member(
     members: dict[str, tuple[set[str], str]],
     member_id: str,
@@ -436,7 +440,9 @@ def _load_coverage_horizon(
                 _file_fingerprint(selected_source, source_path),
             )
 
-    suite_registry_path = _text(raw["suite_registry"], path=path, field="suite_registry")
+    suite_registry_path = _text(
+        raw["suite_registry"], path=path, field="suite_registry"
+    )
     suite_inputs_path = _text(raw["suite_inputs"], path=path, field="suite_inputs")
     try:
         suite_inputs = load_suite_input_manifest(selected_source, suite_inputs_path)
@@ -575,6 +581,8 @@ def derive_coverage_view(
                 observed=semantics.consumer,
             ) from error
         local_members[consumer.id] = consumer
+        if semantics.evidence_owner == "review:consumer":
+            continue
         suite_id = semantics.evidence_owner.removeprefix("suite:")
         if not semantics.evidence_owner.startswith("suite:"):
             raise _error(
@@ -838,7 +846,12 @@ def load_repository_coverage_decisions(
     if registry_version == 3:
         from .coverage_publication import load_engine_coverage_receipt
 
-        for path in _texts(registry["engine_sources"], path=attestation_registry, field="engine_sources", allow_empty=True):
+        for path in _texts(
+            registry["engine_sources"],
+            path=attestation_registry,
+            field="engine_sources",
+            allow_empty=True,
+        ):
             inputs.add(path)
             loaded = load_engine_coverage_receipt(
                 source, path, definitions, authority.revoked
@@ -904,8 +917,7 @@ def _load_repository_authorization(
     if (
         revoked["schema_version"] != 1
         or revoked["authority_id"] != raw["revocation_authority_id"]
-        or revoked["semantic_revision"]
-        != raw["revocation_authority_semantic_revision"]
+        or revoked["semantic_revision"] != raw["revocation_authority_semantic_revision"]
     ):
         raise _error(
             "COVERAGE.REVOCATION_AUTHORITY_MISMATCH",
@@ -920,9 +932,7 @@ def _load_repository_authorization(
     evidence = tuple(
         _resolved_repository_evidence(source, item) for item in evidence_paths
     )
-    revocation_evidence = (
-        _resolved_repository_evidence(source, revocations_path),
-    )
+    revocation_evidence = (_resolved_repository_evidence(source, revocations_path),)
     evidence_contracts = tuple(
         sorted(
             {

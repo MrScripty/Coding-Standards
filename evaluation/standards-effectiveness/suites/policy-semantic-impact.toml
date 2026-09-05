@@ -1,7 +1,7 @@
 schema_version = 1
 id = "policy-semantic-impact"
 owner = "workflow.planning"
-description = "Policy-specific validation over the generic policy-impact edge group, including compiler-owned target compatibility, strict evidence resolution, and typed negative fixtures without inferred edges."
+description = "Checks declared policy-consumer graph integrity. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "current-structure"
@@ -11,38 +11,4 @@ source_registry = "evaluation/standards-effectiveness/edge-source-registry.toml"
 [[checks]]
 id = "negative-fixtures"
 type = "policy_impact"
-
-[[checks.cases]]
-id = "duplicate-edge"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/duplicate-edge.toml"
-expected = ["POLICY_IMPACT.DUPLICATE_EDGE"]
-
-[[checks.cases]]
-id = "unknown-owner"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/unknown-owner.toml"
-expected = ["POLICY_IMPACT.UNKNOWN_OWNER"]
-
-[[checks.cases]]
-id = "unknown-consumer"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/unknown-consumer.toml"
-expected = ["POLICY_IMPACT.UNKNOWN_CONSUMER"]
-
-[[checks.cases]]
-id = "missing-applicability"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-applicability.toml"
-expected = ["POLICY_IMPACT.APPLICABILITY"]
-
-[[checks.cases]]
-id = "malformed-relation"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/malformed-relation.toml"
-expected = ["POLICY_IMPACT.RELATION"]
-
-[[checks.cases]]
-id = "path-escape"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/path-escape.toml"
-expected = ["PATH.OUTSIDE_REPOSITORY"]
-
-[[checks.cases]]
-id = "missing-file"
-manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-file.toml"
-expected = ["INPUT.UNAVAILABLE"]
+cases = [{ expected = ["POLICY_IMPACT.DUPLICATE_EDGE"], id = "duplicate-edge", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/duplicate-edge.toml" }, { expected = ["POLICY_IMPACT.UNKNOWN_OWNER"], id = "unknown-owner", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/unknown-owner.toml" }, { expected = ["POLICY_IMPACT.UNKNOWN_CONSUMER"], id = "unknown-consumer", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/unknown-consumer.toml" }, { expected = ["POLICY_IMPACT.APPLICABILITY"], id = "missing-applicability", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-applicability.toml" }, { expected = ["POLICY_IMPACT.RELATION"], id = "malformed-relation", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/malformed-relation.toml" }, { expected = ["PATH.OUTSIDE_REPOSITORY"], id = "path-escape", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/path-escape.toml" }, { expected = ["INPUT.UNAVAILABLE"], id = "missing-file", manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-file.toml" }]

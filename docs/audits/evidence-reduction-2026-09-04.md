@@ -57,3 +57,19 @@ application in an isolated repository, preservation of independent edits, and
 retention of current claims. The initial repository checkpoint passed 271 suites
 and 858 checks. Catalog reduction and the final functional verification follow
 that implementation boundary.
+
+## Applied catalog reduction
+
+Engine maintenance removed 51 stale claims in 11 files, 737 checks, 198 empty
+suites, and 218 unused fixture inputs. The resulting checkpoint passes 73 suites
+and 121 checks. No replacement certificate was issued. The retained checks have
+narrow descriptions and the active verification guides no longer claim that
+policy simulations demonstrate consumer behavior.
+
+Consumer-local review ownership (`review:consumer`) preserves policy,
+relationship, and direct consumer fingerprints without importing an unrelated
+suite closure. A focused mutation test confirms that consumer changes invalidate
+the requirement while unrelated input changes do not. The historical suite-only
+contract remains readable. Registered obsolete checker implementations are being
+retired through the same Engine operation so their graph edges disappear with
+the files. The final validation below records that second maintenance pass.

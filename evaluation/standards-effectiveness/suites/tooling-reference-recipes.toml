@@ -1,23 +1,13 @@
 schema_version = 1
 id = "tooling-reference-recipes"
 owner = "reference.tooling"
-description = "Navigation destinations for the documented owners; policy meaning requires semantic review."
-
+description = "Checks declared Markdown destinations. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "reference-destinations"
 type = "markdown_targets"
 path = "reference/recipes/tooling.md"
 required = ["profiles/languages/typescript.md", "topics/dependencies.md", "workflows/tooling.md"]
-
-[[checks]]
-id = "dispositions-records"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-non_empty = []
-unique = []
-projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0656", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "retire"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0656"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0657", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0657"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0658", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0658"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0659", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0659"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0661", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0661"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0676", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0676"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0667", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "retire"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0667"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0668", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0668"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0669", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0669"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0670", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0670"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0671", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0671"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0672", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0672"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0684", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0684"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0685", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "retire"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0685"}]}}]
 
 [[checks]]
 id = "former-source-destinations"

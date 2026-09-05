@@ -1,70 +1,7 @@
 schema_version = 1
 id = "release-procedure-policy"
 owner = "workflow.release"
-description = "Router-selected, decision-derived release procedure with exact semantic membership and no universal tool or command fallback."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/release/procedure-decisions.tsv"
-expected_column = "expected_completion"
-default = "no"
-[checks.domains]
-case = ["*"]
-release_boundary = ["yes", "no"]
-profiles_selected = ["yes", "no"]
-decisions_accepted = ["yes", "no"]
-claims_satisfied = ["yes", "no"]
-immutable_dispatch = ["yes", "no"]
-artifacts_verified = ["yes", "no"]
-publication_resolved = ["yes", "no"]
-expected_completion = ["yes", "no"]
-[[checks.rules]]
-outcome = "yes"
-[checks.rules.when]
-all = [
-  { field = "release_boundary", op = "eq", value = "yes" },
-  { field = "profiles_selected", op = "eq", value = "yes" },
-  { field = "decisions_accepted", op = "eq", value = "yes" },
-  { field = "claims_satisfied", op = "eq", value = "yes" },
-  { field = "immutable_dispatch", op = "eq", value = "yes" },
-  { field = "artifacts_verified", op = "eq", value = "yes" },
-  { field = "publication_resolved", op = "eq", value = "yes" },
-]
-
-[[checks]]
-id = "source-membership"
-type = "table"
-path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
-header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
-non_empty = ["id", "path"]
-unique = [["id"]]
-[checks.domains]
-path = ["RELEASE-STANDARDS.md"]
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/release/procedure-policy-members.tsv"
-header = ["id"]
-columns = ["id"]
-order = "source"
-key = "id"
-
-[[checks]]
-id = "exact-dispositions"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-non_empty = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[checks.domains]
-source = ["RELEASE-STANDARDS.md"]
-target = ["workflows/release.md"]
-disposition = ["move"]
-[checks.members]
-path = "evaluation/standards-effectiveness/fixtures/release/procedure-policy-members.tsv"
-header = ["id"]
-columns = ["id"]
-order = "source"
-key = "id"
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata-closure"

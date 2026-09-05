@@ -3,240 +3,224 @@ owner = "topic.architecture.replay"
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
-consumer = "a1c-aggregate-replay"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-aggregate-replay"
-rationale = "Suite enforces immutable AnalysisState replay and parent-bound derived work."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "a1c-snapshot-lifecycle"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Suite enforces exact snapshot capture, storage, and lifecycle closure."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "contract-authority-scope"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "The existing authority and version-scope suite supplies project-agnostic closure admission evidence."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
-consumer = "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Fixture covers promise-bounded in-process use, cold reconstruction, aggregate closure, justified separation, and ambient-state rejection."
-
-[[relationships]]
-source = "topic.architecture.immutable-authority-closure"
 consumer = "profile.boundary.generated-contract"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Generated Contract consumes reachable semantic closure and reconstruction promises without requiring one artifact per concern."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Generated Contract consumes reachable semantic closure and reconstruction promises without requiring one artifact per concern. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "profile.boundary.persistence"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Persistence owns durable reopening of immutable authority and analysis state."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Persistence owns durable reopening of immutable authority and analysis state. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/graph_engine/graph_engine/projection.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Graph projections preserve owner-declared immutable authority identities."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Graph projections preserve owner-declared immutable authority identities. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/graph_engine/graph_engine/registry.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The graph registry validates immutable provider and relationship-kind contracts."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The graph registry validates immutable provider and relationship-kind contracts. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/repository_git/repository_git/model.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Platform checks bound the admitted durability profile without changing authority identity."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Platform checks bound the admitted durability profile without changing authority identity. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/coverage.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Analysis owns the sole v3 coverage publication, claim validation, authorization, and certificate boundary."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Analysis owns the sole v3 coverage publication, claim validation, authorization, and certificate boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/kernel.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The analysis kernel evaluates only declared immutable authority and dependency-valid accepted decisions."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The analysis kernel evaluates only declared immutable authority and dependency-valid accepted decisions. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/state.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Analysis authority models declare role-qualified roots and transitive closure records."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Analysis authority models declare role-qualified roots and transitive closure records. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_analysis/standards_analysis/trust.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Trust adapters bind provider and authorization claims to exact immutable contracts and inputs."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Trust adapters bind provider and authorization claims to exact immutable contracts and inputs. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_engine/standards_engine/_generated_contract.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Generated result projections expose the reproducible value derived from one immutable analysis state."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Generated result projections expose the reproducible value derived from one immutable analysis state. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_engine/standards_engine/engine.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The engine resolves reads and inspection from the exact captured authority view."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The engine resolves reads and inspection from the exact captured authority view. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_engine/tests/test_analysis.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The fixture proves deterministic branching and cold replay through stored authority without live trust replay."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The fixture proves deterministic branching and cold replay through stored authority without live trust replay. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_graph/standards_graph/repository.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Repository graph authority records reconstruct graph nodes and relationships from immutable objects."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Repository graph authority records reconstruct graph nodes and relationships from immutable objects. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_metadata/standards_metadata/source.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Metadata authority records preserve snapshot-bound module and policy-unit corpus identities."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Metadata authority records preserve snapshot-bound module and policy-unit corpus identities. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_metadata/standards_metadata/suite_inputs.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Suite dependency fingerprints bind the exact transitive suite definitions, registered inputs, and applicable repository-index observation."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Suite dependency fingerprints bind the exact transitive suite definitions, registered inputs, and applicable repository-index observation. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_policy_impact/standards_policy_impact/compiler.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The policy-impact compiler constructs immutable source-owned relationship authority."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The policy-impact compiler constructs immutable source-owned relationship authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_snapshots/standards_snapshots/errors.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Authority failures preserve typed ownership at the persistence boundary."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Authority failures preserve typed ownership at the persistence boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_snapshots/standards_snapshots/model.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Authority models define the immutable content and reference records stored by the repository."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Authority models define the immutable content and reference records stored by the repository. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_snapshots/standards_snapshots/module.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Content snapshot identities bind exact logical paths and raw bytes."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Content snapshot identities bind exact logical paths and raw bytes. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_snapshots/standards_snapshots/store.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The SQLite store owns durable content-addressed object persistence and reconstruction."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The SQLite store owns durable content-addressed object persistence and reconstruction. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_verifier/standards_verifier/policy_impact.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "Static verification consumes Engine-composed coverage instead of reconstructing certificate identity."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Static verification consumes Engine-composed coverage instead of reconstructing certificate identity. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "tools/standards_verifier/tests/test_policy_impact.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The fixture proves custom manifests acquire no implicit coverage and registered verification consumes Engine-composed authority."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The fixture proves custom manifests acquire no implicit coverage and registered verification consumes Engine-composed authority. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "topic.contracts"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Contracts owns handle representation, version roles, identity effects, and proof lifetime for the admitted closure."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Contracts owns handle representation, version roles, identity effects, and proof lifetime for the admitted closure. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "topic.resilience"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Resilience owns selected cold reconstruction and recovery behavior when the advertised lifetime crosses a failure boundary."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Resilience owns selected cold reconstruction and recovery behavior when the advertised lifetime crosses a failure boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "topic.security"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Security owns the trust consequences of captured authorization and rejects ambient authority at a new boundary."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Security owns the trust consequences of captured authorization and rejects ambient authority at a new boundary. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.architecture.immutable-authority-closure"
 consumer = "workflow.verification"
 relation = "normative-consumer"
 applicability = { operator = "always" }
-evidence_owner = "suite:contract-authority-scope"
-rationale = "Verification owns evidence that the advertised lifetime and reconstruction path reproduce the selected result semantics."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Verification owns evidence that the advertised lifetime and reconstruction path reproduce the selected result semantics. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_analysis/standards_analysis/coverage_publication.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Owns exact receipt evidence, authorization binding, and repository readback; source changes require review of those observable behaviors."
+
+[[relationships]]
+source = "topic.architecture.immutable-authority-closure"
+consumer = "tools/standards_engine/tests/test_coverage_publication.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "Exercises the public audit, verification, application, recovery, and independent readback path. A graph registration captures test inputs; evidence of passing requires executing this test."

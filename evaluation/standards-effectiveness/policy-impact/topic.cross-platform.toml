@@ -6,53 +6,37 @@ source = "topic.cross-platform.filesystem-paths"
 consumer = "tools/repository_git/pyproject.toml"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.cross-platform.filesystem-paths"
 consumer = "tools/standards_snapshots/README.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.cross-platform.filesystem-paths"
 consumer = "tools/repository_git/repository_git/repository.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.cross-platform.filesystem-paths"
 consumer = "tools/standards_snapshots/standards_snapshots/store.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."
 
 [[relationships]]
 source = "topic.cross-platform.filesystem-paths"
 consumer = "tools/standards_snapshots/tests/test_store.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
-
-[[relationships]]
-source = "topic.cross-platform.filesystem-paths"
-consumer = "evaluation/standards-effectiveness/fixtures/architecture/a1c-snapshots/snapshot-lifecycle-decisions.tsv"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
-
-[[relationships]]
-source = "topic.cross-platform.filesystem-paths"
-consumer = "a1c-snapshot-lifecycle"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:a1c-snapshot-lifecycle"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer."
+evidence_owner = "suite:policy-semantic-impact"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. The evidence suite checks its declared structural inputs; runtime and semantic acceptance require the actual consumer evidence."

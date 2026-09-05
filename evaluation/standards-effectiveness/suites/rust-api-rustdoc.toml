@@ -1,51 +1,10 @@
 schema_version = 1
 id = "rust-api-rustdoc"
 owner = "profile.language.rust.api"
-description = "Rustdoc expression selected from canonical content owners without documentation checklists or mechanism defaults."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/api-rustdoc-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-documentation = ["accepted", "contradictory", "missing"]
-contracts = ["accepted", "contradictory", "missing"]
-resilience = ["accepted", "contradictory", "missing", "not-applicable"]
-dependencies = ["accepted", "contradictory", "missing", "not-applicable"]
-unsafe = ["accepted", "contradictory", "missing", "not-applicable"]
-library = ["accepted", "contradictory", "missing"]
-mechanism = ["crate-doc", "doctest", "heading", "intra-doc-link", "item-doc"]
-capability = ["supported", "unsupported"]
-fallback = ["crate-checklist", "errors-checklist", "example-checklist", "feature-location", "mechanics-rule", "none", "safety-checklist"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [{ field = "fallback", op = "ne", value = "none" }, { field = "documentation", op = "eq", value = "contradictory" }, { field = "contracts", op = "eq", value = "contradictory" }, { field = "resilience", op = "eq", value = "contradictory" }, { field = "dependencies", op = "eq", value = "contradictory" }, { field = "unsafe", op = "eq", value = "contradictory" }, { field = "library", op = "eq", value = "contradictory" }]
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [{ field = "documentation", op = "eq", value = "missing" }, { field = "contracts", op = "eq", value = "missing" }, { field = "resilience", op = "eq", value = "missing" }, { field = "dependencies", op = "eq", value = "missing" }, { field = "unsafe", op = "eq", value = "missing" }, { field = "library", op = "eq", value = "missing" }]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-all = [{ field = "capability", op = "eq", value = "unsupported" }]
-
+description = "Checks declared Markdown destinations. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "source-index-destinations"
 type = "markdown_targets"
 path = "languages/rust/RUST-API-STANDARDS.md"
 required = ["profiles/applications/library.md", "profiles/languages/rust/api.md", "profiles/languages/rust/unsafe.md", "topics/architecture.md", "topics/contracts.md", "topics/dependencies.md", "topics/resilience.md", "topics/security.md", "workflows/documentation.md", "workflows/verification.md"]
-
-[[checks]]
-id = "disposition-records"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-non_empty = []
-unique = []
-projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0716", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0716"}]}}]

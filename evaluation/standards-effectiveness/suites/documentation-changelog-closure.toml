@@ -1,71 +1,7 @@
 schema_version = 1
 id = "documentation-changelog-closure"
 owner = "workflow.release"
-description = "Exact changelog migration to Release Workflow without fixed-format boilerplate or stale examples."
-
-[[checks]]
-id = "section-inventory"
-type = "table"
-path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
-header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
-order = "source"
-expected = [
-  ["STD-0421", "DOCUMENTATION-STANDARDS.md", "521", "2", "workflow", "split", "Changelog"],
-  ["STD-0422", "DOCUMENTATION-STANDARDS.md", "526", "3", "workflow", "split", "When to Maintain"],
-  ["STD-0423", "DOCUMENTATION-STANDARDS.md", "530", "3", "workflow", "split", "Format (Keep a Changelog)"],
-  ["STD-0424", "DOCUMENTATION-STANDARDS.md", "533", "1", "workflow", "split", "Changelog"],
-  ["STD-0425", "DOCUMENTATION-STANDARDS.md", "537", "2", "workflow", "split", "[Unreleased]"],
-  ["STD-0426", "DOCUMENTATION-STANDARDS.md", "539", "3", "workflow", "split", "Added"],
-  ["STD-0427", "DOCUMENTATION-STANDARDS.md", "542", "3", "workflow", "split", "Changed"],
-  ["STD-0428", "DOCUMENTATION-STANDARDS.md", "545", "3", "workflow", "split", "Deprecated"],
-  ["STD-0429", "DOCUMENTATION-STANDARDS.md", "548", "3", "workflow", "split", "Removed"],
-  ["STD-0430", "DOCUMENTATION-STANDARDS.md", "551", "3", "workflow", "split", "Fixed"],
-  ["STD-0431", "DOCUMENTATION-STANDARDS.md", "554", "3", "workflow", "split", "Security"],
-  ["STD-0432", "DOCUMENTATION-STANDARDS.md", "557", "2", "workflow", "split", "[1.2.0] - 2024-01-15"],
-  ["STD-0433", "DOCUMENTATION-STANDARDS.md", "559", "3", "workflow", "split", "Added"],
-  ["STD-0434", "DOCUMENTATION-STANDARDS.md", "562", "2", "workflow", "split", "[1.1.0] - 2024-01-01"],
-  ["STD-0435", "DOCUMENTATION-STANDARDS.md", "564", "3", "workflow", "split", "Fixed"],
-  ["STD-0436", "DOCUMENTATION-STANDARDS.md", "568", "3", "workflow", "split", "Categories"],
-]
-[checks.projections.where]
-field = "id"
-op = "in"
-values = ["STD-0421", "STD-0422", "STD-0423", "STD-0424", "STD-0425", "STD-0426", "STD-0427", "STD-0428", "STD-0429", "STD-0430", "STD-0431", "STD-0432", "STD-0433", "STD-0434", "STD-0435", "STD-0436"]
-
-[[checks]]
-id = "dispositions"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition", "rationale"]
-order = "source"
-expected = [
-  ["STD-0421", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "canonical changelog ownership"],
-  ["STD-0422", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "release-fact changelog applicability"],
-  ["STD-0423", "DOCUMENTATION-STANDARDS.md", "none", "remove", "fixed changelog format mandate"],
-  ["STD-0424", "DOCUMENTATION-STANDARDS.md", "none", "remove", "boilerplate changelog example title"],
-  ["STD-0425", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "unreleased collection option"],
-  ["STD-0426", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "added category example"],
-  ["STD-0427", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "changed category example"],
-  ["STD-0428", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "deprecated category example"],
-  ["STD-0429", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "removed category example"],
-  ["STD-0430", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "fixed category example"],
-  ["STD-0431", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "security category example"],
-  ["STD-0432", "DOCUMENTATION-STANDARDS.md", "none", "remove", "stale dated release example"],
-  ["STD-0433", "DOCUMENTATION-STANDARDS.md", "none", "remove", "duplicate added example"],
-  ["STD-0434", "DOCUMENTATION-STANDARDS.md", "none", "remove", "second stale dated release example"],
-  ["STD-0435", "DOCUMENTATION-STANDARDS.md", "none", "remove", "duplicate fixed example"],
-  ["STD-0436", "DOCUMENTATION-STANDARDS.md", "workflows/release.md", "move", "project-owned changelog categories"],
-]
-[checks.projections.where]
-field = "id"
-op = "in"
-values = ["STD-0421", "STD-0422", "STD-0423", "STD-0424", "STD-0425", "STD-0426", "STD-0427", "STD-0428", "STD-0429", "STD-0430", "STD-0431", "STD-0432", "STD-0433", "STD-0434", "STD-0435", "STD-0436"]
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata-closure"

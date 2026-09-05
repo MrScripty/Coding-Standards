@@ -1,65 +1,9 @@
 schema_version = 1
 id = "rust-release-owner-contract"
 owner = "profile.language.rust.release"
-description = "Rust release mechanism authority and typed outcomes without incumbent metadata, installed-tool, checklist, or command-success fallback."
-
-[[checks]]
-id = "mechanism-decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/release-owner-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-contract = ["accepted", "contradictory", "missing"]
-release_unit = ["known", "unknown"]
-consumer = ["known", "unknown"]
-channel = ["known", "unknown"]
-mechanism = ["toolchain", "package-metadata", "publish-control", "workspace-metadata", "automation-adapter", "evidence"]
-capability = ["supported", "unsupported"]
-fallback = ["none", "incumbent-metadata", "installed-tool", "fixed-checklist", "command-success"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [
-  { field = "fallback", op = "ne", value = "none" },
-  { field = "contract", op = "eq", value = "contradictory" },
-]
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [
-  { field = "contract", op = "eq", value = "missing" },
-  { field = "release_unit", op = "eq", value = "unknown" },
-  { field = "consumer", op = "eq", value = "unknown" },
-  { field = "channel", op = "eq", value = "unknown" },
-]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-field = "capability"
-op = "eq"
-value = "unsupported"
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "workflows/release.md", "topics/contracts.md", "topics/dependencies.md", "profiles/languages/rust/README.md", "profiles/languages/rust/dependencies.md", "profiles/languages/rust/release.md", "reference/recipes/rust-release.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "disposition"
-type = "table"
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-unique = [["id"]]
-[[checks.projections]]
-columns = ["id", "source", "target", "disposition", "rationale"]
-order = "source"
-expected = [
-  ["STD-0810", "languages/rust/RUST-RELEASE-STANDARDS.md", "profiles/languages/rust/release.md", "index", "route the Rust release parent to the narrow Rust and Cargo mechanism specialization while generic policy recipes and separately tracked legacy sections remain with their canonical owners"],
-]
-[checks.projections.where]
-field = "id"
-op = "eq"
-value = "STD-0810"

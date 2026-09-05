@@ -1,91 +1,9 @@
 schema_version = 1
 id = "rust-api-owner-contract"
 owner = "profile.language.rust.api"
-description = "Rust API trait, parameter, and ownership mechanism authority with typed no-fallback outcomes and derived migration lineage."
-
-[[checks]]
-id = "decisions"
-type = "decision"
-path = "evaluation/standards-effectiveness/fixtures/rust/api-owner-decisions.tsv"
-expected_column = "expected"
-default = "allow"
-[checks.domains]
-case = ["*"]
-contract = ["accepted", "contradictory", "missing"]
-consumer = ["known", "unknown"]
-mechanism = ["borrowed", "derive", "generic", "owned", "sealed"]
-semantics = ["contradictory", "preserved"]
-ownership = ["borrowed", "contradictory", "owned", "transferred"]
-capability = ["supported", "unsupported"]
-fallback = ["clone", "compile-success", "none", "owned-parameter", "universal-derive"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
-[[checks.rules]]
-outcome = "typed-invalid"
-[checks.rules.when]
-any = [
-  { field = "fallback", op = "ne", value = "none" },
-  { field = "contract", op = "eq", value = "contradictory" },
-  { field = "semantics", op = "eq", value = "contradictory" },
-  { field = "ownership", op = "eq", value = "contradictory" },
-]
-[[checks.rules]]
-outcome = "typed-unavailable"
-[checks.rules.when]
-any = [
-  { field = "contract", op = "eq", value = "missing" },
-  { field = "consumer", op = "eq", value = "unknown" },
-]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-field = "capability"
-op = "eq"
-value = "unsupported"
+description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "metadata"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "workflows/release.md", "topics/contracts.md", "topics/architecture.md", "topics/resilience.md", "topics/dependencies.md", "workflows/documentation.md", "profiles/applications/library.md", "profiles/languages/rust/README.md", "profiles/languages/rust/api.md", "topics/architecture/replay.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "lineage-identity"
-type = "relation"
-mode = "set"
-[checks.left]
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
-columns = ["ids"]
-order = "source"
-where = { all = [{ field = "baseline_order", op = "eq", value = "20" }, { field = "child_order", op = "eq", value = "1" }] }
-split = { field = "ids", delimiter = "," }
-[checks.right]
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-columns = ["id"]
-order = "source"
-where = { all = [
-  { field = "source", op = "eq", value = "languages/rust/RUST-API-STANDARDS.md" },
-  { field = "target", op = "eq", value = "profiles/languages/rust/api.md" },
-  { field = "disposition", op = "in", values = ["index", "refine"] },
-] }
-
-[[checks]]
-id = "lineage-owner-disposition"
-type = "keyed_relation"
-[checks.keys]
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
-columns = ["ids"]
-order = "source"
-where = { all = [{ field = "baseline_order", op = "eq", value = "20" }, { field = "child_order", op = "eq", value = "1" }] }
-split = { field = "ids", delimiter = "," }
-[checks.expected]
-path = "evaluation/standards-effectiveness/milestone-7-row-20-owner-validation.tsv"
-header = ["id", "owner", "disposition", "outcome"]
-key = "id"
-values = ["owner", "disposition"]
-[checks.observed]
-path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-header = ["id", "source", "target", "disposition", "rationale"]
-key = "id"
-values = ["target", "disposition"]
