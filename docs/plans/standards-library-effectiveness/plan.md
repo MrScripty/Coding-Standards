@@ -2,18 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 navigation source correction
+**Current phase:** Milestone 8 admission and planning
 
-**Next slice:** correct the additional Coding index with preserved declared
-section routes, then repeat the final 27-entrypoint link audit. See the
-[declared-route admission and evidence](reports/milestone-7-declared-route-admission.md).
+**Next slice:** select two bounded independent downstream pilots and admit the
+scenario comparison, migration guidance, and final concision review. Milestone 7
+is accepted in the [source closure report](reports/milestone-7-source-closure.md).
 
 **Acceptance status:** `partial`
 
 **Composed-design review:** `applicable`; the
 [navigation authoring admission](reports/milestone-7-navigation-authoring-admission.md#composed-design-review)
-records the eight artifact probes for the Engine extension. The capability is
-implemented and verified; source correction and Milestone 7 acceptance remain open.
+records the eight artifact probes for the Engine extension. Implementation,
+source application, and Milestone 7 verification are complete.
 
 **Execution ledger:** [Milestone execution ledger](execution-ledger.md)
 
@@ -48,7 +48,7 @@ universal architecture policy.
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
 | A1 | Fixed scenarios improve or preserve every critical rubric dimension. | `satisfied` | [Baseline scores](../../../evaluation/standards-effectiveness/baseline-scores.md) and [current rescore](../../archive/plans/planning-proportionality-recovery/reports/scenario-rescore.md) |
-| A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `pending` | [Current semantic review and inventory reconciliation](reports/milestone-7-semantic-ownership-review.md); historical dispositions do not prove current source closure |
+| A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `satisfied` | [Accepted source closure](reports/milestone-7-source-closure.md), with separate current-source and historical reconciliation evidence |
 | A3 | Two independent downstream pilots complete without loading the full library. | `pending` | Milestone 8 |
 | A4 | Migration and standards-version guidance is published. | `pending` | Milestone 8 |
 | A5 | Final manual review confirms the library is stack-agnostic, routed, concise, and free of competing normative owners. | `pending` | Milestone 8 |
@@ -144,23 +144,29 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../../../workflows/verification.md), [Release](../../../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../../../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../../../workflows/documentation.md), [Commit](../../../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | D001–D010 reviewed; legacy authority and navigation findings require correction before acceptance |
-| 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
+| 7 | Role-based consolidation and verification migration | `Accepted` | [Source closure](reports/milestone-7-source-closure.md): 27 entrypoints reviewed, ten corrected through the Engine |
+| 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Ready for bounded admission; pilots and final review remain unexecuted |
 
 ### Milestone 7 Current State
 
-**Goal:** Complete canonical-owner migration and eliminate legacy verification
-without losing mapped semantics.
+**Status:** `Accepted`. The [source closure report](reports/milestone-7-source-closure.md)
+binds acceptance to Engine publications `67d3e205` and `ff6f3b21` and the
+D001–D010 [semantic ownership review](reports/milestone-7-semantic-ownership-review.md).
+Ten legacy indexes were corrected; seventeen retain their reviewed bytes.
+All 70 canonical modules remain unchanged. The final population audit resolves
+197 local inline links and 21 heading fragments across all 27 entrypoints.
 
-**Accepted boundary:** the recorded `7.4c3` packages remain historical evidence,
-but their source-closure conclusion is superseded by the
-[current semantic review](reports/milestone-7-semantic-ownership-review.md).
-Legacy Tooling and Rust Bindings still contain competing instructions;
-other retained entrypoints need purity or route correction. Verification
-migration remains accepted through M6-Z1:
-the complete command is Python-only, and no Bash verifier, helper, launcher, or
-temporary migration model remains. The execution ledger and terminal report
-contain detailed slice evidence.
+**Authority and verification:** M7-OWN-01 through M7-OWN-05 and M7-OWN-07 are
+resolved. All 916 historical identifiers are reconciled separately from current
+canonical membership and 54 canonical Router rules. Frozen evidence is preserved.
+The Engine checkpoint passes 73 suites and 121 structural checks; it does not
+certify prose conformance or downstream effectiveness. M7-OWN-06 remains in
+Milestone 8's A5 concision review.
+
+**Accepted migration boundary:** verification migration remains accepted through
+M6-Z1: the complete command is Python-only, with no Bash verifier, helper,
+launcher, or temporary migration model. Earlier `7.4c3` source-closure claims
+are historical evidence superseded by the current review and final closure.
 
 **Accepted recovery boundary:** M6-I16 is accepted after one-owner final-state
 proof. The [work proportionality and policy impact recovery](../../archive/plans/work-proportionality-and-policy-impact/plan.md)
@@ -168,32 +174,11 @@ and [generic edge-system recovery](../../archive/plans/generic-edge-system/plan.
 are accepted. Fresh post-recovery evidence selected M6-I17 and fresh
 post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
-**Remaining work:**
-
-1. Implement the admitted navigation authoring capability through the existing
-   proposal, review, and application lifecycle. The current fourteen edit
-   variants cannot edit the unregistered legacy sources; evidence maintenance
-   is not an alternate text-authoring path.
-2. Apply the nine source replacements in the
-   [admission](reports/milestone-7-navigation-authoring-admission.md#bounded-source-correction),
-   retaining the other eighteen indexes and existing source-specific
-   route-coverage claims.
-3. Recheck the affected D001–D010 findings and prove pure navigation and valid
-   destinations across all 27 retained entrypoints.
-4. Preserve frozen baseline inventories. Reconcile historical ID dispositions
-   separately from current canonical membership, registered routing, actual
-   source contents, and current structural checks. Do not regenerate frozen
-   corpus classifications or revive retired migration/prose gates.
-
-**Current blocker:** Milestone 7 acceptance is held by M7-OWN-01 through
-M7-OWN-04 in [issues.md](issues.md#2026-09-05-semantic-ownership-review).
-The required Engine extension is admitted and can proceed; no external
-dependency blocks its implementation.
-
-**Acceptance gate:** every frozen identifier has a final disposition; live
-structural and routing checks pass; manual review establishes single ownership
-and navigation-only legacy sources with valid destinations. The Python
-checkpoint owns registered structural verification, not prose conformance.
+**Remaining work:** Milestone 8 scenario comparison, two independent downstream
+pilots, migration and standards-version guidance, and final manual review.
+A2 is satisfied at the reviewed source boundary; A3, A4, and A5 remain pending.
+Incomplete declared relationship mappings are explicit and are not interpreted
+as proof of complete semantic consumer coverage.
 
 ## Simplicity And Ownership Review
 
@@ -271,7 +256,7 @@ report before continuing.
 
 ## Final Acceptance
 
-- **Objective evidence:** Pending Milestone 7 closure, Milestone 8 scenario
+- **Objective evidence:** Pending Milestone 8 scenario
   comparison, two downstream pilots, migration publication, and manual review.
 - **Deferred follow-ups:** None beyond milestones explicitly marked `Planned`.
 - **Final status:** `Active`

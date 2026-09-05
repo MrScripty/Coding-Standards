@@ -227,24 +227,24 @@ not imply Milestone 7 acceptance.
 | M7-OWN-02 | High | Legacy Rust Bindings permits framework derives in core and prescribes representation/test/workspace choices contrary to `profile.language.rust.language-bindings` and generic binding/verification owners. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
 | M7-OWN-03 | Medium | Launcher retains legacy authority and install-output requirements; Architecture retains contract-freeze instructions and policy summaries. Other manifest entrypoints retain migration-pending prose or imperative headings. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
 | M7-OWN-04 | Medium | Rust Security's panic-policy link targets the removed `RUST-API-STANDARDS.md#result-option-panic` heading; source-index suite membership does not cover the entire legacy population, and `markdown_links` checks file existence rather than heading fragments. | Resolved by Engine publication `67d3e205` and exact accepted-source review. The additional Coding fragment finding below remains separate. |
-| M7-OWN-05 | Medium | The old final-closure procedure treats frozen corpus classifications and retired migration gates as current authority. | Fix-now in review/re-plan slice: preserve frozen evidence, separate historical ID reconciliation from live metadata/routing and manual source review, and replace the active acceptance procedure. |
+| M7-OWN-05 | Medium | The old final-closure procedure treats frozen corpus classifications and retired migration gates as current authority. | Resolved by the revised closure procedure in `19764768` and final source reconciliation: frozen evidence is preserved and historical dispositions are checked separately from current authority. |
 | M7-OWN-06 | Low | Current tracked planning/implementation prompts repeat procedural instructions despite D005's original route-only aspiration; no conflicting slice/commit instruction was found in the reviewed prompts. | Defer to A5 concision review in Milestone 8. Compare retained instructions with their owners and justify necessary projections before claiming route-only or reduced interaction cost. |
-| M7-OWN-07 | Medium | Full-population inspection found `CODING-STANDARDS.md` linking to Core's removed Code And Terminology Discipline heading. The current owner is `topic.code-design`; the stale link is unlisted, while seventeen other Coding routes are protected by the current inventory. | Fix-now: use the extended index renderer with explicit owners and preserved declared sections. Keep the inventory unchanged, verify every destination, and rerun the 27-entrypoint audit. |
+| M7-OWN-07 | Medium | Full-population inspection found `CODING-STANDARDS.md` linking to Core's removed Code And Terminology Discipline heading. The current owner is `topic.code-design`; the stale link is unlisted, while seventeen other Coding routes are protected by the current inventory. | Resolved by Engine publication `ff6f3b21`: Coding selects Code Design, preserves all seventeen declared routes, and passes the final 27-entrypoint link audit with unchanged inventory. |
 
-### Published Correction And Remaining Route
+### Published Corrections And Source Closure
 
-The Engine capability is committed in `c99773d8`; it published the nine admitted
-corrections in `67d3e205`. Accepted reads match all nine previews. All 70 canonical
-modules and the other eighteen entrypoints are unchanged. Four declared
-required-destination checks were retargeted exactly as admitted; unrelated
-assertions and all route inventories were preserved.
+The Engine capability in `c99773d8` published nine corrections in `67d3e205`.
+The route-preservation extension in `a94bbcd2` enabled the additional Coding
+correction in `ff6f3b21`. Accepted reads match all ten previews. Seventeen other
+entrypoints and all 70 canonical modules remain unchanged. Exactly four
+required-destination checks were retargeted as admitted; unrelated assertions
+and the route inventory are unchanged.
 
-The full 27-entrypoint audit checked 195 local inline links and 24 fragments,
-finding the one additional Coding fragment above. Historical reconciliation
-still covers all 916 IDs, and the live Router has 54 canonical targets. These
-are separate evidence claims, not semantic coverage attestations.
+The initial population audit found the additional Coding anchor after checking
+195 links and 24 fragments. The final audit checks 197 local inline links and
+21 fragments with no unresolved targets. All 916 historical IDs reconcile, and
+the live Router has 54 canonical rules. These remain separate evidence claims.
 
-The [declared-route extension](reports/milestone-7-declared-route-admission.md)
-preserves required sections for explicitly selected owners through the existing
-rewrite operation. It adds no tool or edit type. M7-OWN-07 currently prevents
-Milestone 7 acceptance. M7-OWN-06 remains deferred to Milestone 8's A5 review.
+The [source closure report](reports/milestone-7-source-closure.md) records
+Milestone 7 and A2 acceptance. M7-OWN-06 remains deferred to Milestone 8's A5
+review; downstream effectiveness and complete semantic coverage are not claimed.

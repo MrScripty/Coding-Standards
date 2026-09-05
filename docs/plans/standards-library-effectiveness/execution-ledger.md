@@ -15961,3 +15961,29 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   checkpoint pass (73 suites, 121 structural checks). Next: use this capability
   for the additional Coding correction and repeat the final source audit.
 - Commit subject: `fix(standards): preserve declared navigation routes`.
+
+## 2026-09-05 - Milestone 7 Source Closure Accepted
+
+- The existing Engine rewrite operation preserved all seventeen declared Coding
+  routes while selecting fifteen canonical owners, including Code Design.
+  Reviewed content passed 73 suites and 121 checks; exact Engine application
+  published `ff6f3b21`. Accepted content and destinations match the preview.
+- Final source audit against `c99773d8` reviews all 27 entrypoints: ten corrected
+  by `67d3e205` and `ff6f3b21`, seventeen unchanged. All 70 canonical module bodies
+  are unchanged. All 197 local inline links and 21 heading fragments resolve.
+- Exactly four admitted required-destination assertions changed. All other
+  assertions and the route inventory are unchanged. Historical reconciliation
+  covers all 916 IDs separately from the 54 canonical Router rules; frozen
+  evidence is preserved.
+- Fourteen navigation and fourteen MCP/replay tests pass for the extension.
+  Both protected-navigation tests pass again after live source correction.
+  Final documentation verification passes 73 suites and 121 structural checks.
+- [Source closure report](reports/milestone-7-source-closure.md) closes A2 and
+  Milestone 7. M7-OWN-01 through M7-OWN-05 and M7-OWN-07 are resolved. M7-OWN-06
+  remains in Milestone 8's A5 review. No downstream pilot, complete semantic
+  coverage, or universal prose conformance is inferred from structural results.
+- The overall plan remains active for Milestone 8: scenario comparison, two
+  independent pilots, migration/version guidance, and final manual review.
+  Fresh MCP processes work; the connected client needs a restart to reload its
+  cached contract. No remote push; the unrelated untracked prototype is retained.
+- Commit subject: `docs(standards): accept milestone seven source closure`.
