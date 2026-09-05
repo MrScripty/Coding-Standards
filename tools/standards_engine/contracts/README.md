@@ -49,7 +49,15 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `verify_repository` | `VerifyRepositoryCall` | `VerifyRepositoryResult` | `RejectedResult` |
 | `verify_proposal` | `VerifyProposalCall` | `VerifyProposalResult` | `RejectedResult` |
 
-Interface schema version 21 adds routing rule/fact edits and explicit
+Interface schema version 22 adds optional `include_coverage` to `read` requests
+through both `query` and `query_proposal`. The result lists the registered policy
+units in that read scope, their current requirement identities, and whether the
+captured repository has a current attestation. An empty list means no registered
+units, not complete coverage. This read does not include Analysis-local claims
+or certify the quality of the standard. Use Analysis to obtain review obligations
+and submit evidence for an exact requirement.
+
+Version 21 added routing rule/fact edits and explicit
 verification operations. Routing edits are atomic with standards edits: the
 Engine maintains readable selection rows, compiles expressions against the
 final fact schema, checks target uniqueness, and refreshes derived verification

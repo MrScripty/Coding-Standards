@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v21",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v22",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -809,6 +809,10 @@
         },
         "include_routing": {
           "type": "boolean"
+        },
+        "include_coverage": {
+          "type": "boolean",
+          "description": "Include current repository attestation status for registered policy units in this read scope."
         }
       },
       "additionalProperties": false
@@ -3439,6 +3443,9 @@
         },
         "routing": {
           "$ref": "#/$defs/RoutingConfiguration"
+        },
+        "coverage": {
+          "$ref": "#/$defs/ReadCoverage"
         }
       },
       "additionalProperties": false
@@ -3623,6 +3630,9 @@
         },
         "routing": {
           "$ref": "#/$defs/RoutingConfiguration"
+        },
+        "coverage": {
+          "$ref": "#/$defs/ReadCoverage"
         }
       },
       "additionalProperties": false
@@ -5311,6 +5321,45 @@
           }
         }
       }
+    },
+    "PolicyCoverageStatus": {
+      "type": "object",
+      "required": [
+        "subject",
+        "requirement_id",
+        "status"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "requirement_id": {
+          "$ref": "#/$defs/Digest"
+        },
+        "status": {
+          "enum": [
+            "current-attestation",
+            "review-required"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReadCoverage": {
+      "type": "object",
+      "description": "Repository attestation status bound to this snapshot or proposal. Empty subjects means no registered policy units in scope, not complete coverage. Analysis-local attestations are not repository certificates.",
+      "required": [
+        "subjects"
+      ],
+      "properties": {
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PolicyCoverageStatus"
+          }
+        }
+      },
+      "additionalProperties": false
     }
   }
 }

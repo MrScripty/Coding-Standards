@@ -53,6 +53,7 @@ from tools.standards_analysis.standards_analysis import (
     canonical_target_authority,
     child_id as analysis_child_id,
     compile_coverage_definitions,
+    coverage_requirement_id,
     compile_reading_plan,
     derive_change_descriptors,
     evaluate_analysis,
@@ -2452,6 +2453,32 @@ class StandardsEngine:
         inspection = projection.inspect_operation(target)
         if inspection is not None:
             next_operations.append(inspection)
+        coverage = {}
+        if request.include_coverage is True:
+            units = (
+                (policy,)
+                if isinstance(policy, PolicyUnit)
+                else compiled.corpus.policy_unit_corpus.for_module(module.module_id)
+            )
+            coverage = {
+                "coverage": {
+                    "subjects": [
+                        {
+                            "subject": unit.id,
+                            "requirement_id": coverage_requirement_id(
+                                compiled.coverage.requirements[unit.id],
+                                compiled.coverage.views[unit.id],
+                            ),
+                            "status": (
+                                "current-attestation"
+                                if unit.id in compiled.repository_coverage.covered_subjects
+                                else "review-required"
+                            ),
+                        }
+                        for unit in sorted(units, key=lambda unit: unit.id)
+                    ]
+                }
+            }
         routing = {}
         if request.include_routing is True:
             if target != "router":
@@ -2515,6 +2542,7 @@ class StandardsEngine:
         return {
             **projection.result("read"),
             **routing,
+            **coverage,
             "policy": projection.policy_summary(
                 target,
                 "contextual" if module.role == "reference" else "normative",

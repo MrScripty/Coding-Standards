@@ -128,6 +128,12 @@ def _navigation(value: Mapping[str, object]) -> str:
     relationships = _items(value, "relationships")
     if relationships:
         lines.append(f"  RELATIONSHIPS {len(relationships)}")
+    if "coverage" in value:
+        subjects = _items(_mapping(value["coverage"]), "subjects")
+        if not subjects:
+            lines.append("  COVERAGE No registered policy units in this scope")
+        for item in subjects:
+            lines.append(f"  COVERAGE {item['subject']} [{item['status']}]")
     return "\n".join(lines) + "\n"
 
 

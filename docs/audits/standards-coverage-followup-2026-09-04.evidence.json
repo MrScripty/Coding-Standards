@@ -1,0 +1,1726 @@
+{
+  "schema_version": 1,
+  "method": "Read exact Git commit bytes through FrozenContentSource; compile coverage with the current production standards_analysis owner. Compare projections by registered subject ID. No attestation renewal or semantic sufficiency inference.",
+  "compiler_commit": "5d406ff46d3f5dcda0f5b3ad7a0da1e682d6f8a6",
+  "observations": [
+    {
+      "commit": "bec1f5d93757172b537ffe1f911ececf693c6b20",
+      "registered_subjects": 51,
+      "stored_claims": 51,
+      "current_attestations": 51
+    },
+    {
+      "commit": "5adff47f63d453217e6379292cf0863471d802c1",
+      "registered_subjects": 51,
+      "stored_claims": 51,
+      "current_attestations": 10
+    },
+    {
+      "commit": "5d406ff46d3f5dcda0f5b3ad7a0da1e682d6f8a6",
+      "registered_subjects": 51,
+      "stored_claims": 51,
+      "current_attestations": 0
+    }
+  ],
+  "subjects": [
+    {
+      "subject": "core.simplicity-and-complection",
+      "previous_owner": "core",
+      "current_owner": "topic.code-design",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:64b3c6ed0a1f97c99b7b04d61d468b64d62ce087a36c5f8057548f5b685bc57d",
+      "current_requirement_id": "sha256:d72d99c1b086ef4824db24a1771da6b17e2ab4c76a83ead2b88bcd261dc2443a",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:core-simplicity",
+        "repository:topics/architecture.md",
+        "repository:workflows/verification.md",
+        "suite-dependency:core-simplicity"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/core.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "profile.boundary.generated-contract.applicability",
+      "previous_owner": "profile.boundary.generated-contract",
+      "current_owner": "profile.boundary.generated-contract",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:7c10b71448277ae02fdac6422656a6c668a4b6e450e1331869f25af9858fb78d",
+      "current_requirement_id": "sha256:9636eec055a12f2b8723a1747e6a7eb0497ccbde59ec1413ec40f3884da2cb38",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
+        "policy-impact-node:evaluation/standards-effectiveness/router-projection.toml",
+        "policy-impact-node:standards-recovery-routing",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:standards-recovery-routing"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "profile.boundary.generated-contract.semantic-closure",
+      "previous_owner": "profile.boundary.generated-contract",
+      "current_owner": "profile.boundary.generated-contract",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:e7d4c0de730553cccc7554c081145dca14841448afacedf88e4ee1423daf887b",
+      "current_requirement_id": "sha256:739b68f68d2534efd019997588d6849c161538e36ade1c8a6fe57ef58832ac9e",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:contract-authority-scope",
+        "policy-impact-node:generated-contract-semantic-conformance",
+        "policy-impact-node:tools/standards_contracts/standards_contracts/compiler.py",
+        "policy-impact-node:tools/standards_engine/contracts/a1-contract.schema.json",
+        "policy-impact-node:tools/standards_engine/contracts/a1-interface.toml",
+        "policy-impact-node:tools/standards_engine/contracts/examples/a1-examples.json",
+        "policy-impact-node:tools/standards_engine/contracts/generated/agent-tools.json",
+        "policy-impact-node:tools/standards_engine/standards_engine/_generated_contract.py",
+        "policy-impact-node:tools/standards_engine/standards_engine/tools.py",
+        "repository:topics/contracts.md",
+        "repository:topics/dependencies.md",
+        "repository:workflows/verification.md",
+        "suite-dependency:contract-authority-scope",
+        "suite-dependency:evidence-oracle-boundaries",
+        "suite-dependency:generated-contract-semantic-conformance",
+        "suite-dependency:implementation-versus-dependency"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "router.generated-contract-profile-applicability",
+      "previous_owner": "router",
+      "current_owner": "router",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:1fcfaf8b9fdf5d3f56f27918d7362a34f76ec7e1bec991089948fe397476cdba",
+      "current_requirement_id": "sha256:bc9f6c17a8d94964975ff6522de4a5416a49167271f46fefa444b37126dee932",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
+        "policy-impact-node:evaluation/standards-effectiveness/router-projection.toml",
+        "policy-impact-node:standards-recovery-routing",
+        "repository:profiles/boundaries/generated-contract.md",
+        "suite-dependency:standards-recovery-routing"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/router.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.architecture.authority-scope-admission",
+      "previous_owner": "topic.architecture",
+      "current_owner": "topic.architecture",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:5dee69f83ff164fdebfca1db9c3ebcee6090c978e2ac6cae84a8433452e911af",
+      "current_requirement_id": "sha256:b2cbecd4e567b717c2d8ed62d0d4f76b2f164b27e7e475bff036447fb7e61a5f",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:contract-authority-scope",
+        "policy-impact-node:tools/standards_engine/contracts/a1-contract.schema.json",
+        "repository:profiles/boundaries/generated-contract.md",
+        "suite-dependency:contract-authority-scope"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.architecture.composed-design-admission",
+      "previous_owner": "topic.architecture",
+      "current_owner": "topic.architecture",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:1d0fb5af699fda0da64bd0b48724a924267f43895daa658604bdc5700a10352c",
+      "current_requirement_id": "sha256:ba8a287d07d96256c94e4c44e71a272df52e5ddf9cf9145f6ae838f8b9c73359",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:core-simplicity",
+        "policy-impact-node:plan-template-projection",
+        "policy-impact-node:planning-consolidation",
+        "repository:profiles/boundaries/generated-contract.md",
+        "suite-dependency:core-simplicity",
+        "suite-dependency:plan-template-projection",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.architecture.immutable-authority-closure",
+      "previous_owner": "topic.architecture",
+      "current_owner": "topic.architecture.replay",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 3,
+      "previous_requirement_id": "sha256:b3102c3d284b66e590851cb169e3c04effb67c6933c3a958f3420d58e6a0060b",
+      "current_requirement_id": "sha256:692f9bc73dd28d364bd7ce3961df01c8cd49165e67327081eeaecab8366adab5",
+      "changed_view_fields": [
+        "owner",
+        "semantic_revision",
+        "representation_digest",
+        "structural_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:a1c-aggregate-replay",
+        "policy-impact-node:contract-authority-scope",
+        "policy-impact-node:tools/standards_engine/standards_engine/_generated_contract.py",
+        "policy-impact-node:tools/standards_engine/standards_engine/engine.py",
+        "policy-impact-node:tools/standards_engine/tests/test_analysis.py",
+        "policy-impact-node:tools/standards_snapshots/standards_snapshots/store.py",
+        "policy-impact-node:tools/standards_verifier/tests/test_policy_impact.py",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:profiles/boundaries/persistence.md",
+        "repository:topics/contracts.md",
+        "repository:topics/resilience.md",
+        "repository:topics/security.md",
+        "repository:workflows/verification.md",
+        "suite-dependency:a1c-aggregate-replay",
+        "suite-dependency:a1c-snapshot-lifecycle",
+        "suite-dependency:contract-authority-scope"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.declaration-and-semantic-authority",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts.schemas",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:83768befd4c83634d7cce4df1ee6a261865945217b9af6d7346a689468b229cf",
+      "current_requirement_id": "sha256:5a6945b573b355484c16fddec70dc909a50d6f4ce74c2f64f17bd52c6ff12d1d",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:contract-authority-scope",
+        "policy-impact-node:tools/standards_contracts/standards_contracts/compiler.py",
+        "policy-impact-node:tools/standards_engine/contracts/a1-contract.schema.json",
+        "policy-impact-node:tools/standards_engine/standards_engine/_generated_contract.py",
+        "policy-impact-node:tools/standards_engine/standards_engine/tools.py",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:profiles/boundaries/ipc.md",
+        "suite-dependency:a1c-aggregate-replay",
+        "suite-dependency:contract-authority-scope"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.generated-semantic-conformance",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts.schemas",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:5913b483f495fef9c910ac348ead730755838caf699f9768c2672f44ff471f23",
+      "current_requirement_id": "sha256:958d4da7ce431b17795edd85a24d831db5391506a459593e9cd1ae8bd702a213",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:generated-contract-semantic-conformance",
+        "policy-impact-node:tools/standards_contracts/standards_contracts/compiler.py",
+        "policy-impact-node:tools/standards_engine/contracts/README.md",
+        "policy-impact-node:tools/standards_engine/contracts/a1-interface.toml",
+        "policy-impact-node:tools/standards_engine/contracts/examples/a1-examples.json",
+        "policy-impact-node:tools/standards_engine/contracts/generated/agent-tools.json",
+        "policy-impact-node:tools/standards_engine/standards_engine/_generated_contract.py",
+        "policy-impact-node:tools/standards_engine/standards_engine/rendering.py",
+        "policy-impact-node:tools/standards_engine/standards_engine/tools.py",
+        "repository:STANDARDS-ROUTER.md",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:workflows/tooling.md",
+        "suite-dependency:generated-contract-semantic-conformance"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.identity-versus-instance-equality",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:5e47f466665ba8a7b2440dca2467ca77860a117172c31934ac6d91aa7ee59c01",
+      "current_requirement_id": "sha256:8f09d0a91c5b9f52bbf4419348654f5de3e34782ff848dc1e2e88dba61e0d62a",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:generated-contract-semantic-conformance",
+        "policy-impact-node:tools/standards_engine/standards_engine/_generated_contract.py",
+        "policy-impact-node:tools/standards_snapshots/standards_snapshots/store.py",
+        "suite-dependency:generated-contract-semantic-conformance"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.invariant-contracts",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:48ce3cfc1533af1a2bcbe5214289a1a0cde2b19e63df8712e8251595398b8bc6",
+      "current_requirement_id": "sha256:3445ae829e1c980e29ab9afe27c547d9f4771e58dc2e7a1530e889fc53a0c20e",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:contract-invariants",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:profiles/boundaries/ipc.md",
+        "repository:profiles/boundaries/persistence.md",
+        "repository:topics/resilience.md",
+        "repository:topics/security.md",
+        "repository:workflows/verification.md",
+        "suite-dependency:contract-invariants"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.schema-dialect-and-vocabulary",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts.schemas",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:359bfb67c80a55989b1cd59f44ff9a41100e31268f79b0e3b6641afc7771a497",
+      "current_requirement_id": "sha256:75e4ee5dc5ac523b728f5df6d01c89394bc5fbea7409dae09faf6f33d7929bac",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:generated-contract-semantic-conformance",
+        "policy-impact-node:tools/standards_contracts/standards_contracts/compiler.py",
+        "policy-impact-node:tools/standards_engine/contracts/a1-contract.schema.json",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:topics/dependencies.md",
+        "suite-dependency:generated-contract-semantic-conformance",
+        "suite-dependency:implementation-versus-dependency"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.validation-proof-lifetime",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:381bbf65485ca716c3cc61cbd19883e8d98bbae956c1600634c33dd6667bc638",
+      "current_requirement_id": "sha256:5aa210807b93e81aefe092aae2a0699c3fe44e73f8eba45d61f829ea395135d4",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:contract-invariants",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:profiles/boundaries/ipc.md",
+        "repository:profiles/boundaries/persistence.md",
+        "repository:topics/resilience.md",
+        "repository:topics/security.md",
+        "repository:workflows/verification.md",
+        "suite-dependency:contract-invariants"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.contracts.version-scope-and-invalidation",
+      "previous_owner": "topic.contracts",
+      "current_owner": "topic.contracts.schemas",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:24f33789b72eae0ae1dd8d35b1066eaf86abf57d15cc4a20cbd4e1764d2b62ba",
+      "current_requirement_id": "sha256:b8e9e996ea200f1c6d605dffbe897ec36190bba47615f183d2cf837ec7d454d7",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:contract-authority-scope",
+        "policy-impact-node:tools/standards_engine/contracts/a1-contract.schema.json",
+        "policy-impact-node:tools/standards_engine/standards_engine/_generated_contract.py",
+        "policy-impact-node:tools/standards_engine/standards_engine/tools.py",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:profiles/boundaries/ipc.md",
+        "repository:profiles/boundaries/persistence.md",
+        "repository:workflows/release.md",
+        "suite-dependency:contract-authority-scope"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.cross-platform.filesystem-paths",
+      "previous_owner": "topic.cross-platform",
+      "current_owner": "topic.cross-platform",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:82ea90c0fb63701462655b8722eb5d2d5f0a49524631f2a1af7a800188c9b9b1",
+      "current_requirement_id": "sha256:38b9b24f574884ca16861e439362e88dfd2c04007333a49d8313afc0b7c2b807",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:tools/repository_git/repository_git/repository.py",
+        "policy-impact-node:tools/standards_snapshots/standards_snapshots/store.py",
+        "suite-dependency:a1c-snapshot-lifecycle"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.cross-platform.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.dependencies.implementation-versus-dependency",
+      "previous_owner": "topic.dependencies",
+      "current_owner": "topic.dependencies",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:e30c9aac47279ce61d3e74534742eeb0185ee671690f5ffa90b31b45aa7435e9",
+      "current_requirement_id": "sha256:1c6d21efdd7af68cfd30edc35b7b6689e4e10f425290ded13b1691ed616feefc",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:implementation-versus-dependency",
+        "repository:STANDARDS-ROUTER.md",
+        "repository:profiles/boundaries/generated-contract.md",
+        "suite-dependency:implementation-versus-dependency"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.dependencies.requirement-and-ownership",
+      "previous_owner": "topic.dependencies",
+      "current_owner": "topic.dependencies",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:1821dd613f49329493bbc49f796701798a3c5c0dc1eeb0ffd5c1b1c2d9c65dcd",
+      "current_requirement_id": "sha256:7847b4d4c0a71f3b1ff41667a7a94041920be778585cbc9bea1f196e735c0726",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:tools/repository_git/repository_git/repository.py",
+        "policy-impact-node:tools/standards_verifier/standards_verifier/__init__.py",
+        "policy-impact-node:tools/standards_verifier/standards_verifier/checks/__init__.py",
+        "suite-dependency:a1c-public-cutover"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "topic.security.filesystem-containment",
+      "previous_owner": "topic.security",
+      "current_owner": "topic.security",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:404b83308728327610a9d672a5f24f85848cc7465451be7f493bfdc5f04b7e7e",
+      "current_requirement_id": "sha256:4ca7319d35786a71b9e5f9a1d462e30bd07a7e899c84f788f7ded0417a9b154f",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:tools/repository_git/repository_git/repository.py",
+        "policy-impact-node:tools/standards_snapshots/standards_snapshots/store.py",
+        "policy-impact-node:tools/standards_snapshots/tests/test_module.py",
+        "suite-dependency:a1c-snapshot-lifecycle"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.security.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.branch-context",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:f47f2e66a362ed05beaa3017b1341407700f74ad2291b98d080c7585579f34cf",
+      "current_requirement_id": "sha256:04c146428e6078cf04d7a1996120d50694fda42b232bdf856bddd8fcad07df14",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.branch-history-review",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:4fdff10fa78d13754a7718d9f231a02bbb048e61cdf08fd98d678810c5dfd068",
+      "current_requirement_id": "sha256:27edbb85be53ac1544ffb60cf69c66a90d20567c01688f088e9e79de6303f3c6",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.cherry-pick-lineage",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:59f19203a06e77f32441d05f098eb4b1122cfa52d476a21265110a00ff021488",
+      "current_requirement_id": "sha256:844aa90c0abe6b92168f82dbe30f28057aef9c927bf25d51bd367370fab2293c",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "suite-dependency:commit-consolidation-dispositions",
+        "suite-dependency:concurrent-plan-integration"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.commit-message",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:10c122b1eaa52e6cd7a9c681d8acb9dfec7c39f500a403ce37c19832635f278d",
+      "current_requirement_id": "sha256:5320cf311561b3dd106758b64c8d6e44b482641d49c0e98a88aaf386291efa0b",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.hook-bypass-authority",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:418d1d1e014009acb47aadda8aca2715e964b3dc2062afc98dad909c70bd7869",
+      "current_requirement_id": "sha256:e1a904bfa2f0983e575f426628da575848a0b985f0e83b9a6a5f95739d214456",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.integration-mechanisms",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:9f9e8bd70cbad09463eee519b11b5be82080c2bf4e2921451b59f69dc4d919b6",
+      "current_requirement_id": "sha256:b0ce20fbb9a809d744cb43c9f67d3c9ea03c1f5cbe4f13727717ae4bedf022e1",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions",
+        "suite-dependency:concurrent-plan-integration"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.invalid-outcomes",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:4a083d4e1b24d061b074ae136c1020959ded4208c1bbadfa78dd1d80dca69424",
+      "current_requirement_id": "sha256:b26c12223bc3d72bd0dd42fbbc14fd232558870f98b8d847b5bc71da49dd3f70",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.isolation-applicability",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:b6f33a25611dfa471afc2a7f99527a1590677f96fc17e83f5114d62d96b38955",
+      "current_requirement_id": "sha256:dccfbeb19b2a77ff556da72c0379d206c801c7cfa5228d9d9cc2e6be3dee2c60",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.per-commit-boundary",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:0cdd6e70015c5d00caf0f17b390e220339404156ee920264fa2952e0baa3ea7b",
+      "current_requirement_id": "sha256:0f310f365c5f315a22e8946b761e887986b4ca030f2f09341ef8873ab47d629c",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "policy-impact-node:planning-consolidation",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.rewrite-authority",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:02608720089e81b398632e423d2a5b47b678f72b6b4477a3e572d55d48a531f3",
+      "current_requirement_id": "sha256:5f708cfc09a2e16fd07364716233274500a9a1df763a7179a24ccfb347f79d1a",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.terminal-branch-lifecycle",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:1d1f1f13e0c82b3b711d3055fefa3885e896a42bc80c689118ae5311bc78c439",
+      "current_requirement_id": "sha256:d4c464873d70bcfba23d931251e077e4f5f57a7ba443115183fd67c885fd7660",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "repository:workflows/release.md",
+        "suite-dependency:commit-consolidation-dispositions",
+        "suite-dependency:concurrent-plan-integration",
+        "suite-dependency:release-maintenance-policy"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.topology",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:b8617b7237c035bc869dff123a3a6b3e57cf2a336b5ef25346a804eecee3829f",
+      "current_requirement_id": "sha256:95ce2cf59080100956db0893fd151e224d2b2896b6730333b72ae66eb0c3653b",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "suite-dependency:commit-consolidation-dispositions"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.commit.worktree-lifecycle",
+      "previous_owner": "workflow.commit",
+      "current_owner": "workflow.commit",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:413e3de281b31083024dc37333bf053e391fba5771a784ac142ac2dcfc4b34be",
+      "current_requirement_id": "sha256:676483432ccc1de31e736ca08376d1894d2205c7900882c8b47811436bbc10c1",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:commit-consolidation-dispositions",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:commit-consolidation-dispositions",
+        "suite-dependency:concurrent-plan-integration"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.acceptance-claims",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:db82231750443c583a9921748390832023cf01eca1b1123dd6de07f98fcf3cb0",
+      "current_requirement_id": "sha256:cd893e15032fc25fa2d5a7ccc5d171ca76f0a57e85ac8083ba574f065fd7dcae",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:planning-admission",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.active-plan-fields",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:1a06c53bbb30d9528c374ff93c710124058d75d3779a0afb50f22f540df6e009",
+      "current_requirement_id": "sha256:1cc7cff717fdc1ad4271b05a3868d63354fd2aad535997c790804db93d47ed69",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:plan-template-projection",
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:plan-template-projection",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.artifact-model",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:59fed90b9dd161ba9a9736e9862956c13eaa97c206325e8899caaca0dc9735b9",
+      "current_requirement_id": "sha256:adb1d1a9eb1e76cd0e35315f487106b92f86f461304aa907700710759935e734",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:plan-template-projection",
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:plan-template-projection",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.completion",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:58322e0dfcfd0df357b5bee292911bcdc485585fe8fb22d63f7a915308823f1d",
+      "current_requirement_id": "sha256:da9ab800c2e43eb84aa7d48a63b1720a4fbd8bd66d306ead2c3ba7ca66269e48",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.concurrent-integration-routing",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:0f859192c2552ea7e64eefcd3f768b026efecee5b09d8e464d87b2afe17b0f7f",
+      "current_requirement_id": "sha256:a50f9f6e4eb94f69a2d87642bccc58b0ffd0d49947037c209d5e00be1b1105fc",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:concurrent-plan-integration",
+        "policy-impact-node:s1-routing",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:concurrent-plan-integration",
+        "suite-dependency:plan-implementation-entrypoint",
+        "suite-dependency:planning-admission",
+        "suite-dependency:s1-routing"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.concurrent-work",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:e90686698cf9fa9cb61fe201651cce13e8825ffca7bbfff8c82fa36f83874c49",
+      "current_requirement_id": "sha256:62d607bc563f7d21cee23cf7253735a2f4749b6759b2b323a8267c44da429386",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:plan-template-projection",
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:plan-template-projection",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.current-state",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:d082878bea231939c02172cacfa568ac848b38d3a82c8c069e7dd3cb2f421db0",
+      "current_requirement_id": "sha256:125e893e960ec31f7ca371d9a169bee663d871959a24463e87461c9207175757",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:planning-admission",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.findings",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:0b333cb418ba12f7843195cced80e05e9f041dee48be154f50d18303a50ec5ee",
+      "current_requirement_id": "sha256:362088d0a112f8c37dabeb36a1a78562ed66e73cbb8ce22ad86bb2ea07a8c974",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.lifecycle",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:012cb2b955bcb6af801d2a235429173c43ae92d48f5466f6a02fdbe64c4db882",
+      "current_requirement_id": "sha256:74228e2fc8145b268a8ab4f377c101ceadb4a8b2c395f48342fe93fdfa4f19c6",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:plan-implementation-entrypoint",
+        "policy-impact-node:planning-admission",
+        "suite-dependency:concurrent-plan-integration",
+        "suite-dependency:plan-implementation-entrypoint",
+        "suite-dependency:planning-admission"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.milestones-and-slices",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:56fee6f7803f916b959b14ee296a575865c61bbbe1fcbce8a6cce6662154f8d6",
+      "current_requirement_id": "sha256:b791335fd9541632da16ee379747fd7ccc7984df796b21be0da62157c6e31645",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:planning-admission",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.plan-admission",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:a20e34de1c78a1f9debe6dfc2945664d5766ecec3963c80c0ea54f66c09e0e0b",
+      "current_requirement_id": "sha256:0ba4efed5b7b03e6630103cce6f304f706ffe15d25dd3a75802f8a34a046617b",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:plan-implementation-entrypoint",
+        "policy-impact-node:planning-admission",
+        "suite-dependency:plan-implementation-entrypoint",
+        "suite-dependency:planning-admission"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.projection-completeness",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:d9d15e5d5c2de1c5270a28c238b4b955de8d949349a717e2a4d8c363edb87a22",
+      "current_requirement_id": "sha256:b04d8673c4105d578d204ca4053dc9f2e0c70711c94e8c56f6b1b3e84adb0888",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "suite-dependency:policy-semantic-impact"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.replanning",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:b197429f4c621a0a3dc0e5db3e645bdc6aed777c5bcd16b3e5a803a50f4b8e2b",
+      "current_requirement_id": "sha256:0ed6e3d96ffa87e9f7ccd419d279f1e91ae26f867c6c79ecff515973ff34c6fc",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:planning-consolidation",
+        "suite-dependency:plan-template-projection",
+        "suite-dependency:planning-consolidation"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.repository-isolation",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:d57d0bcee17f8dc14d0659de2c0879a43a0a96ca5543486efc554862fc4cf3bf",
+      "current_requirement_id": "sha256:ca0ab28b1639e3e052615ff02e517fa69c11919124135818243ef70652e3b39b",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:plan-template-projection",
+        "suite-dependency:plan-template-projection"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.systemic-finding-replan",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 2,
+      "previous_requirement_id": "sha256:1326b860b96ad48b90987b4cf5d4369bfc86b11dd9ab31e9c143e2320d91b420",
+      "current_requirement_id": "sha256:9c6604c2373dbb38f07f444ad9fd4b7129fb18488253df015123a22780a50a40",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:systemic-finding-replanning",
+        "repository:topics/architecture.md",
+        "repository:workflows/verification.md",
+        "suite-dependency:systemic-finding-replanning"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.planning.written-plan-applicability",
+      "previous_owner": "workflow.planning",
+      "current_owner": "workflow.planning",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:88b30746c481d37efbf7b72ee04e465b6fb5d6cad2577213c5c07456012b1ec0",
+      "current_requirement_id": "sha256:0137c26a8b00ab4a4c52bed96855a6e0b29bebbf386f7133b41fb90aae70dbb9",
+      "changed_view_fields": [
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:full-review-prompt-entrypoint",
+        "policy-impact-node:planning-admission",
+        "policy-impact-node:s1-routing",
+        "repository:STANDARDS-ROUTER.md",
+        "suite-dependency:concurrent-plan-integration",
+        "suite-dependency:full-review-prompt-entrypoint",
+        "suite-dependency:planning-admission",
+        "suite-dependency:planning-consolidation",
+        "suite-dependency:s1-routing"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.verification.acceptance-claims",
+      "previous_owner": "workflow.verification",
+      "current_owner": "workflow.verification",
+      "previous_semantic_revision": 2,
+      "current_semantic_revision": 3,
+      "previous_requirement_id": "sha256:950d0ab36f6648c9da44c01efc0bb932b1ede63d51f232508a889f066799e592",
+      "current_requirement_id": "sha256:9172da5885fa9bbb6b39bbd733b3431a2e80455b417e75bf720eac7a93913366",
+      "changed_view_fields": [
+        "semantic_revision",
+        "representation_digest",
+        "structural_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:acceptance-claims",
+        "policy-impact-node:evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv",
+        "repository:profiles/boundaries/generated-contract.md",
+        "repository:profiles/boundaries/persistence.md",
+        "repository:topics/contracts.md",
+        "repository:topics/dependencies.md",
+        "repository:topics/resilience.md",
+        "repository:topics/security.md",
+        "repository:workflows/release.md",
+        "suite-dependency:acceptance-claims"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.verification.differential-evidence",
+      "previous_owner": "workflow.verification",
+      "current_owner": "workflow.verification.oracles",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:6b756afee3bd7ceed528ba8381df4d789928ed7c3e0630d2affdd5a6a2ae6c4e",
+      "current_requirement_id": "sha256:8370b8511be7f6a369e532931777c1a474acfbc95cdeb76f533a89c7190f198a",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:generated-contract-semantic-conformance",
+        "suite-dependency:generated-contract-semantic-conformance"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.verification.evidence-oracle-boundary",
+      "previous_owner": "workflow.verification",
+      "current_owner": "workflow.verification.oracles",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:b29b84ff2961f9b9e38947511f8b7aa1990a02bd20c66ab5e00687651ac137bd",
+      "current_requirement_id": "sha256:fe5fc20f75d720b660be4e69e3ef6e3ef10e12e76f4b9a6a9c10313144a84add",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:evidence-oracle-boundaries",
+        "suite-dependency:evidence-oracle-boundaries"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    },
+    {
+      "subject": "workflow.verification.negative-fixture-isolation",
+      "previous_owner": "workflow.verification",
+      "current_owner": "workflow.verification.oracles",
+      "previous_semantic_revision": 1,
+      "current_semantic_revision": 1,
+      "previous_requirement_id": "sha256:fed579cf56f0b17deea0f140ed1998ee82911236753b0871999d5cc0844603bd",
+      "current_requirement_id": "sha256:17b064c2410fd277677545a5daf94a3eadaba3c664a90132e908b52da362cef8",
+      "changed_view_fields": [
+        "owner",
+        "representation_digest",
+        "horizon"
+      ],
+      "changed_horizon_members": [
+        "policy-impact-node:evidence-oracle-boundaries",
+        "policy-impact-node:systemic-finding-replanning",
+        "suite-dependency:evidence-oracle-boundaries",
+        "suite-dependency:systemic-finding-replanning"
+      ],
+      "stored_claim_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "previous_evidence": [
+        "docs/archive/documentation-cleanup.md",
+        "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+        "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+        "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+        "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+        "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+        "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+        "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md"
+      ],
+      "review_status": "required"
+    }
+  ],
+  "public_read": {
+    "request": {
+      "snapshot": {
+        "id": "snapshot:v1:579e4ad8-e228-4610-86db-e1bef8846f58",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "request": {
+        "kind": "read",
+        "target": "workflow.planning",
+        "include_coverage": true
+      }
+    },
+    "result_kind": "read-result",
+    "coverage": {
+      "subjects": [
+        {
+          "requirement_id": "sha256:cd893e15032fc25fa2d5a7ccc5d171ca76f0a57e85ac8083ba574f065fd7dcae",
+          "status": "review-required",
+          "subject": "workflow.planning.acceptance-claims"
+        },
+        {
+          "requirement_id": "sha256:1cc7cff717fdc1ad4271b05a3868d63354fd2aad535997c790804db93d47ed69",
+          "status": "review-required",
+          "subject": "workflow.planning.active-plan-fields"
+        },
+        {
+          "requirement_id": "sha256:adb1d1a9eb1e76cd0e35315f487106b92f86f461304aa907700710759935e734",
+          "status": "review-required",
+          "subject": "workflow.planning.artifact-model"
+        },
+        {
+          "requirement_id": "sha256:da9ab800c2e43eb84aa7d48a63b1720a4fbd8bd66d306ead2c3ba7ca66269e48",
+          "status": "review-required",
+          "subject": "workflow.planning.completion"
+        },
+        {
+          "requirement_id": "sha256:a50f9f6e4eb94f69a2d87642bccc58b0ffd0d49947037c209d5e00be1b1105fc",
+          "status": "review-required",
+          "subject": "workflow.planning.concurrent-integration-routing"
+        },
+        {
+          "requirement_id": "sha256:62d607bc563f7d21cee23cf7253735a2f4749b6759b2b323a8267c44da429386",
+          "status": "review-required",
+          "subject": "workflow.planning.concurrent-work"
+        },
+        {
+          "requirement_id": "sha256:125e893e960ec31f7ca371d9a169bee663d871959a24463e87461c9207175757",
+          "status": "review-required",
+          "subject": "workflow.planning.current-state"
+        },
+        {
+          "requirement_id": "sha256:362088d0a112f8c37dabeb36a1a78562ed66e73cbb8ce22ad86bb2ea07a8c974",
+          "status": "review-required",
+          "subject": "workflow.planning.findings"
+        },
+        {
+          "requirement_id": "sha256:74228e2fc8145b268a8ab4f377c101ceadb4a8b2c395f48342fe93fdfa4f19c6",
+          "status": "review-required",
+          "subject": "workflow.planning.lifecycle"
+        },
+        {
+          "requirement_id": "sha256:b791335fd9541632da16ee379747fd7ccc7984df796b21be0da62157c6e31645",
+          "status": "review-required",
+          "subject": "workflow.planning.milestones-and-slices"
+        },
+        {
+          "requirement_id": "sha256:0ba4efed5b7b03e6630103cce6f304f706ffe15d25dd3a75802f8a34a046617b",
+          "status": "review-required",
+          "subject": "workflow.planning.plan-admission"
+        },
+        {
+          "requirement_id": "sha256:b04d8673c4105d578d204ca4053dc9f2e0c70711c94e8c56f6b1b3e84adb0888",
+          "status": "review-required",
+          "subject": "workflow.planning.projection-completeness"
+        },
+        {
+          "requirement_id": "sha256:0ed6e3d96ffa87e9f7ccd419d279f1e91ae26f867c6c79ecff515973ff34c6fc",
+          "status": "review-required",
+          "subject": "workflow.planning.replanning"
+        },
+        {
+          "requirement_id": "sha256:ca0ab28b1639e3e052615ff02e517fa69c11919124135818243ef70652e3b39b",
+          "status": "review-required",
+          "subject": "workflow.planning.repository-isolation"
+        },
+        {
+          "requirement_id": "sha256:9c6604c2373dbb38f07f444ad9fd4b7129fb18488253df015123a22780a50a40",
+          "status": "review-required",
+          "subject": "workflow.planning.systemic-finding-replan"
+        },
+        {
+          "requirement_id": "sha256:0137c26a8b00ab4a4c52bed96855a6e0b29bebbf386f7133b41fb90aae70dbb9",
+          "status": "review-required",
+          "subject": "workflow.planning.written-plan-applicability"
+        }
+      ]
+    }
+  }
+}

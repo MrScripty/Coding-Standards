@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tomllib
 import unittest
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -37,6 +38,76 @@ def _canonical_contracts() -> tuple[dict[str, object], dict[str, object]]:
 
 
 class GeneratedContractTest(unittest.TestCase):
+    def test_coverage_read_is_scoped_optional_and_uses_repository_authority(self):
+        from tools.standards_analysis.standards_analysis import (
+            RepositoryCoverageDecisions,
+            coverage_requirement_id,
+        )
+        from tools.standards_engine.standards_engine.tools import _contracts
+
+        with StandardsEngine.open_repository(REPO_ROOT, durable=False) as engine:
+            facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
+            created = facade.create_snapshot({"kind": "create-snapshot"})
+            self.assertEqual(created["kind"], "create-snapshot-result", created)
+            handle = created["snapshot"]["snapshot"]
+            snapshot = generated.SnapshotHandle.from_value(handle)
+            compiled = engine._compiled_snapshot(engine._snapshot_id(snapshot))
+            units = compiled.corpus.policy_unit_corpus.for_module("workflow.planning")
+            selected = units[0].id
+            # Exercise the read adapter against both authoritative decisions.
+            authority = RepositoryCoverageDecisions({selected: {}}, {}, ())
+            with mock.patch.object(
+                engine,
+                "_compiled_snapshot",
+                return_value=replace(compiled, repository_coverage=authority),
+            ):
+                query = {
+                    "snapshot": handle,
+                    "request": {
+                        "kind": "read",
+                        "target": "workflow.planning",
+                    },
+                }
+                self.assertNotIn("coverage", facade.query(query))
+                query["request"]["include_coverage"] = False
+                self.assertNotIn("coverage", facade.query(query))
+                query["request"]["include_coverage"] = True
+                result = facade.query(query)
+                self.assertEqual(result["kind"], "read-result", result)
+                subjects = result["coverage"]["subjects"]
+                self.assertEqual(
+                    [s["subject"] for s in subjects], sorted(u.id for u in units)
+                )
+                for item in subjects:
+                    subject = item["subject"]
+                    self.assertEqual(
+                        item["requirement_id"],
+                        coverage_requirement_id(
+                            compiled.coverage.requirements[subject],
+                            compiled.coverage.views[subject],
+                        ),
+                    )
+                    self.assertEqual(
+                        item["status"],
+                        "current-attestation"
+                        if subject == selected
+                        else "review-required",
+                    )
+                query["request"]["target"] = selected
+                self.assertEqual(
+                    facade.query(query)["coverage"]["subjects"],
+                    [item for item in subjects if item["subject"] == selected],
+                )
+                unregistered = next(
+                    module.module_id
+                    for module in compiled.corpus.modules
+                    if not compiled.corpus.policy_unit_corpus.for_module(
+                        module.module_id
+                    )
+                )
+                query["request"]["target"] = unregistered
+                self.assertEqual(facade.query(query)["coverage"], {"subjects": []})
+
     def test_verification_is_exposed_without_publication_and_refresh_is_explicit(self):
         from tools.standards_verifier.standards_verifier import (
             CompleteVerificationResult,
@@ -85,6 +156,7 @@ class GeneratedContractTest(unittest.TestCase):
             self.assertEqual(plain["kind"], "read-result", plain)
             self.assertNotIn("routing", plain)
             query["request"]["include_routing"] = True
+            query["request"]["include_coverage"] = True
             detailed = facade.query(query)
             self.assertEqual(detailed["kind"], "read-result", detailed)
             self.assertTrue(detailed["routing"]["rules"])
@@ -151,6 +223,10 @@ class GeneratedContractTest(unittest.TestCase):
                 }
             )
             self.assertEqual(draft["kind"], "proposal-read-result", draft)
+            self.assertEqual(
+                [item["subject"] for item in draft["coverage"]["subjects"]],
+                [item["subject"] for item in detailed["coverage"]["subjects"]],
+            )
             observed = next(
                 item for item in draft["routing"]["rules"] if item["id"] == rule["id"]
             )
@@ -422,7 +498,7 @@ class GeneratedContractTest(unittest.TestCase):
         corpus = json.loads(path.read_text(encoding="utf-8"))
 
         self.assertEqual(corpus["schema_version"], 2)
-        self.assertEqual(contracts.interface.interface_schema_version, 21)
+        self.assertEqual(contracts.interface.interface_schema_version, 22)
         self.assertEqual(
             corpus["interface_schema_version"],
             contracts.interface.interface_schema_version,

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 21,
+  "interface_schema_version": 22,
   "examples": [
     {
       "name": "create-snapshot",
@@ -386,6 +386,15 @@
         "kind": "read",
         "target": "router",
         "include_routing": true
+      }
+    },
+    {
+      "name": "read-policy-coverage",
+      "definition": "ReadRequest",
+      "value": {
+        "kind": "read",
+        "target": "workflow.planning",
+        "include_coverage": true
       }
     }
   ]

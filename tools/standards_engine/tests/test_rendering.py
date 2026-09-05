@@ -11,6 +11,18 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class TextRenderingTest(unittest.TestCase):
+    def test_coverage_projection_preserves_subject_and_status(self):
+        for status in ("current-attestation", "review-required"):
+            subject = "workflow.planning.acceptance-claims"
+            rendered = render_text(
+                {
+                    "kind": "read-result",
+                    "coverage": {"subjects": [{"subject": subject, "status": status}]},
+                }
+            )
+            self.assertIn(subject, rendered)
+            self.assertIn(status, rendered)
+
     def test_verification_projection_preserves_revision_and_diagnostic_identity(self):
         revision = "proposal-revision:sha256:" + "a" * 64
         report = {

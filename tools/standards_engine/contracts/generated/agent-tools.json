@@ -2668,6 +2668,29 @@
       ],
       "type": "object"
     },
+    "PolicyCoverageStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "$ref": "#/$defs/Digest"
+        },
+        "status": {
+          "enum": [
+            "current-attestation",
+            "review-required"
+          ]
+        },
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "subject",
+        "requirement_id",
+        "status"
+      ],
+      "type": "object"
+    },
     "PolicyImpactSelectionReason": {
       "additionalProperties": false,
       "properties": {
@@ -3099,6 +3122,9 @@
       "properties": {
         "content": {
           "type": "string"
+        },
+        "coverage": {
+          "$ref": "#/$defs/ReadCoverage"
         },
         "kind": {
           "const": "proposal-read-result"
@@ -3647,9 +3673,29 @@
       ],
       "type": "object"
     },
+    "ReadCoverage": {
+      "additionalProperties": false,
+      "description": "Repository attestation status bound to this snapshot or proposal. Empty subjects means no registered policy units in scope, not complete coverage. Analysis-local attestations are not repository certificates.",
+      "properties": {
+        "subjects": {
+          "items": {
+            "$ref": "#/$defs/PolicyCoverageStatus"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "subjects"
+      ],
+      "type": "object"
+    },
     "ReadRequest": {
       "additionalProperties": false,
       "properties": {
+        "include_coverage": {
+          "description": "Include current repository attestation status for registered policy units in this read scope.",
+          "type": "boolean"
+        },
         "include_routing": {
           "type": "boolean"
         },
@@ -3671,6 +3717,9 @@
       "properties": {
         "content": {
           "type": "string"
+        },
+        "coverage": {
+          "$ref": "#/$defs/ReadCoverage"
         },
         "kind": {
           "const": "read-result"
@@ -5196,7 +5245,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 21,
+  "interface_schema_version": 22,
   "operations": [
     {
       "capability": "standards.snapshot.create",

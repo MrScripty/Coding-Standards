@@ -293,7 +293,10 @@ class NavigationTest(unittest.TestCase):
                     CreateSnapshotCall.from_value({"kind": "create-snapshot"})
                 )
                 snapshot = created.snapshot.snapshot
-                call = QueryCall(snapshot, ReadRequest("read", "workflow.planning"))
+                call = QueryCall(
+                    snapshot,
+                    ReadRequest("read", "workflow.planning", include_coverage=True),
+                )
                 before = engine.query(call)
                 (root / "workflows/planning.md").write_text(
                     "# Mutated worktree\n", encoding="utf-8"
@@ -306,20 +309,17 @@ class NavigationTest(unittest.TestCase):
         self.assertEqual(before, after)
 
     def test_proposal_query_projects_every_request_from_an_exact_revision(self) -> None:
-        capture = self.engine._snapshots.load_content(
-            self.engine._snapshot_id(self.snapshot)
+        initial_body = "Navigation fixture: initial policy revision."
+        revised_body = "Navigation fixture: second policy revision."
+        initial_content = f"## {WRITTEN_PLAN_TITLE}\n{initial_body}\n"
+        revised_content = f"## {ARTIFACT_MODEL_TITLE}\n{revised_body}\n"
+        accepted = self.engine.query(
+            QueryCall(
+                self.snapshot,
+                ReadRequest("read", "workflow.planning", include_coverage=True),
+            )
         )
-        files = {str(item.path): item.content for item in capture.files}
-        planning = files["workflows/planning.md"].decode("utf-8")
-        initial_content = planning.replace(
-            "Create a written plan when the change introduces material sequencing,",
-            "Create an initial proposed plan when the change introduces material sequencing,",
-        )
-        revised_content = initial_content.replace(
-            "Store a planned effort under one directory:",
-            "Store a revised proposed effort under one directory:",
-        )
-        self.assertNotEqual(initial_content, planning)
+        self.assertIsInstance(accepted, ReadResult)
         created = self.engine.create_proposal(
             CreateProposalCall.from_value(
                 {
@@ -362,23 +362,26 @@ class NavigationTest(unittest.TestCase):
 
         read_call = QueryProposalCall(
             created.revision,
-            ReadRequest("read", "workflow.planning"),
+            ReadRequest("read", "workflow.planning", include_coverage=True),
         )
         read = ProposalReadResult.from_value(
             AgentToolFacade(self.engine, _contracts(REPO_ROOT)).query_proposal(
                 read_call.as_contract()
             )
         )
-        self.assertIn(
-            "Create an initial proposed plan when the change introduces material sequencing,",
-            read.content,
-        )
-        self.assertNotIn(
-            "Store a revised proposed effort under one directory:", read.content
+        self.assertIn(initial_body, read.content)
+        self.assertNotIn(revised_body, read.content)
+        accepted_ids = {
+            item.subject: item.requirement_id for item in accepted.coverage.subjects
+        }
+        draft_ids = {
+            item.subject: item.requirement_id for item in read.coverage.subjects
+        }
+        self.assertNotEqual(
+            accepted_ids[WRITTEN_PLAN_POLICY], draft_ids[WRITTEN_PLAN_POLICY]
         )
         self.assertEqual(read.policy.id, "workflow.planning")
         self.assertEqual(read.policy.authority, "projection")
-        self.assertEqual(read.summary, "Read projected standard workflow.planning.")
         self.assertEqual(len(read.next_operations), 1)
         self.assertEqual(read.next_operations[0].operation, "query_proposal")
         self.assertNotIn("snapshot", read.as_contract())
@@ -418,24 +421,29 @@ class NavigationTest(unittest.TestCase):
         historical = self.engine.query_proposal(
             QueryProposalCall(
                 created.revision,
-                ReadRequest("read", "workflow.planning"),
+                ReadRequest("read", "workflow.planning", include_coverage=True),
             )
         )
         current = self.engine.query_proposal(
             QueryProposalCall(
                 revised.revision,
-                ReadRequest("read", "workflow.planning"),
+                ReadRequest("read", "workflow.planning", include_coverage=True),
             )
         )
         self.assertIsInstance(historical, ProposalReadResult)
         self.assertIsInstance(current, ProposalReadResult)
         self.assertEqual(historical.content, read.content)
-        self.assertIn(
-            "Create an initial proposed plan when the change introduces material sequencing,",
-            current.content,
-        )
-        self.assertIn(
-            "Store a revised proposed effort under one directory:", current.content
+        self.assertIn(initial_body, current.content)
+        self.assertIn(revised_body, current.content)
+        self.assertEqual(historical.coverage, read.coverage)
+        historical_ids = {
+            item.subject: item.requirement_id for item in historical.coverage.subjects
+        }
+        current_ids = {
+            item.subject: item.requirement_id for item in current.coverage.subjects
+        }
+        self.assertNotEqual(
+            historical_ids[ARTIFACT_MODEL_POLICY], current_ids[ARTIFACT_MODEL_POLICY]
         )
         self.assertNotEqual(historical.content, current.content)
         self.assertEqual(self.engine._snapshots._store.counts(), revised_counts)
