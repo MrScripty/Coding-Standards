@@ -4,20 +4,4 @@ authoring_contract = "tools/standards_policy_impact/contracts/policy-impact-auth
 node_catalog = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
 fact_catalog = "evaluation/standards-effectiveness/policy-impact-facts.toml"
 suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
-declaration_sources = [
-  "evaluation/standards-effectiveness/policy-impact/core.toml",
-  "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
-  "evaluation/standards-effectiveness/policy-impact/router.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.security.toml",
-  "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
-  "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
-  "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml",
-  "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.architecture.replay.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.code-design.toml",
-  "evaluation/standards-effectiveness/policy-impact/topic.contracts.schemas.toml",
-]
+declaration_sources = ["evaluation/standards-effectiveness/policy-impact/core.toml", "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml", "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml", "evaluation/standards-effectiveness/policy-impact/topic.contracts.toml", "evaluation/standards-effectiveness/policy-impact/topic.cross-platform.toml", "evaluation/standards-effectiveness/policy-impact/topic.dependencies.toml", "evaluation/standards-effectiveness/policy-impact/topic.security.toml", "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml", "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml", "evaluation/standards-effectiveness/policy-impact/workflow.verification.toml", "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml", "evaluation/standards-effectiveness/policy-impact/topic.architecture.replay.toml", "evaluation/standards-effectiveness/policy-impact/topic.code-design.toml", "evaluation/standards-effectiveness/policy-impact/topic.contracts.schemas.toml"]

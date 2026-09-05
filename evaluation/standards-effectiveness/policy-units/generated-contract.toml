@@ -5,9 +5,3 @@ id = "profile.boundary.generated-contract.applicability"
 module = "profile.boundary.generated-contract"
 heading_path = ["Applicability"]
 semantic_revision = 1
-
-[[policy_unit]]
-id = "profile.boundary.generated-contract.semantic-closure"
-module = "profile.boundary.generated-contract"
-heading_path = ["Semantic Closure"]
-semantic_revision = 2

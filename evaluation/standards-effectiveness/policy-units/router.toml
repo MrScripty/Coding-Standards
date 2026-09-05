@@ -1,7 +1,0 @@
-schema_version = 1
-
-[[policy_unit]]
-id = "router.generated-contract-profile-applicability"
-module = "router"
-heading_path = ["Generated Contract Profile Applicability"]
-semantic_revision = 1

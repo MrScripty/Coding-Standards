@@ -34,30 +34,6 @@ evidence_owner = "review:consumer"
 rationale = "Documentation preserves durable claim and evidence provenance without becoming the oracle. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.verification.negative-fixture-isolation"
-consumer = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
-relation = "fixture-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Negative fixture retains unrelated plan preconditions while omitting the systemic audit under test. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.verification.differential-evidence"
-consumer = "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md"
-relation = "documentation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Evidence report records the sampled equality counterexample and independent specification oracle. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.verification.differential-evidence"
-consumer = "generated-contract-semantic-conformance"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:generated-contract-semantic-conformance"
-rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
-
-[[relationships]]
 source = "workflow.verification.evidence-oracle-boundary"
 consumer = "tools/standards_engine/tests/test_coverage_publication.py"
 relation = "fixture-projection"

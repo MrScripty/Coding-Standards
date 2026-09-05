@@ -10,30 +10,6 @@ evidence_owner = "review:consumer"
 rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "router"
-relation = "router-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "router"
-relation = "router-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "router"
-relation = "router-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "router"
 relation = "router-projection"
@@ -42,76 +18,12 @@ evidence_owner = "review:consumer"
 rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.commit.branch-history-review"
-consumer = "router"
-relation = "router-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.hook-bypass-authority"
-consumer = "router"
-relation = "router-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.rewrite-authority"
-consumer = "router"
-relation = "router-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "workflow.implementation"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "workflow.implementation"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "workflow.implementation"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.branch-history-review"
-consumer = "workflow.implementation"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "workflow.planning"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
@@ -122,52 +34,12 @@ evidence_owner = "review:consumer"
 rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "profile.workflow.concurrent-plan-integration"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.cherry-pick-lineage"
-consumer = "profile.workflow.concurrent-plan-integration"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "profile.workflow.concurrent-plan-integration"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
-consumer = "workflow.release"
-relation = "normative-consumer"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "Release maintenance may use an explicitly retained long-lived branch but its existing contract requires no normative correction for ordinary branch lifecycle. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "prompts/planning.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
@@ -178,36 +50,12 @@ evidence_owner = "review:consumer"
 rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "prompts/implement-plan.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "prompts/implement-plan.md"
-relation = "prompt-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "templates/PLAN-TEMPLATE.md"
-relation = "template-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.commit.worktree-lifecycle"
@@ -226,14 +74,6 @@ evidence_owner = "review:consumer"
 rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "reference.recipes.commits"
-relation = "reference-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
 source = "workflow.commit.worktree-lifecycle"
 consumer = "reference.recipes.commits"
 relation = "reference-projection"
@@ -243,46 +83,6 @@ rationale = "The non-normative Commit recipe illustrates selected inspection, in
 
 [[relationships]]
 source = "workflow.commit.per-commit-boundary"
-consumer = "evaluation/standards-effectiveness/verification-guide.md"
-relation = "documentation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.isolation-applicability"
-consumer = "evaluation/standards-effectiveness/verification-guide.md"
-relation = "documentation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.branch-context"
-consumer = "evaluation/standards-effectiveness/verification-guide.md"
-relation = "documentation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.integration-mechanisms"
-consumer = "evaluation/standards-effectiveness/verification-guide.md"
-relation = "documentation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.cherry-pick-lineage"
-consumer = "evaluation/standards-effectiveness/verification-guide.md"
-relation = "documentation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "workflow.commit.terminal-branch-lifecycle"
 consumer = "evaluation/standards-effectiveness/verification-guide.md"
 relation = "documentation-projection"
 applicability = { operator = "always" }

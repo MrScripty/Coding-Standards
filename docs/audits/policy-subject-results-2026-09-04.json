@@ -1,0 +1,45 @@
+{
+  "purpose": "Record actual policy-subject maintenance; no certificate or automatic completeness claim.",
+  "before": {
+    "subjects": 51,
+    "relationships": 341
+  },
+  "after": {
+    "subjects": 24,
+    "relationships": 259,
+    "certificates": 0
+  },
+  "content_comparison": {
+    "unchanged_standard_documents": 70,
+    "retained_subjects": 24,
+    "changed_standard_documents": []
+  },
+  "engine_application": {
+    "applied": true,
+    "changed_files": [
+      "evaluation/standards-effectiveness/generated/suite-inputs.json",
+      "evaluation/standards-effectiveness/policy-impact-registry.toml",
+      "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
+      "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
+      "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
+      "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml",
+      "evaluation/standards-effectiveness/policy-units/commit.toml",
+      "evaluation/standards-effectiveness/policy-units/generated-contract.toml",
+      "evaluation/standards-effectiveness/policy-units/planning.toml",
+      "evaluation/standards-effectiveness/policy-units/registry.toml",
+      "evaluation/standards-effectiveness/policy-units/verification.toml"
+    ],
+    "kind": "maintain-evidence-result",
+    "removed_files": [
+      "evaluation/standards-effectiveness/policy-impact/router.toml",
+      "evaluation/standards-effectiveness/policy-units/router.toml"
+    ],
+    "verification": {
+      "checks": 121,
+      "exit_code": 0,
+      "failures": [],
+      "passed": true,
+      "suites": 73
+    }
+  }
+}

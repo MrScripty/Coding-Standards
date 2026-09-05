@@ -29,4 +29,26 @@ turning a misspelling into a no-op. Historical snapshots retain their original
 registrations. No replacement certificate or tombstone claims that the underlying
 coding guidance was retired.
 
-Validation and application results follow below.
+## Application and validation
+
+Engine preview and application both passed 73 suites and 121 checks. The applied
+change removed 27 subject registrations, 82 source relationships, and two empty
+Router declaration files. It retained 24 subjects and 259 relationships. All
+70 standard documents match the pre-maintenance revision byte for byte.
+No certificates were issued; retained subjects remain review-required.
+
+Validation passed the 20 contract tests, 7 maintenance tests, 22 metadata/graph/
+policy-compiler tests, 156 Verifier tests, 99 Analysis tests, and 7 Engine
+navigation tests. The Analysis tests include mandatory whole-artifact review for
+unmapped normative changes. Maintenance exercises preview, application,
+independent-edit protection, unknown-subject rejection, and preservation of
+retained units and guidance. All 21 logical-authoring tests also passed against
+the reduced corpus. The [application result](policy-subject-results-2026-09-04.json)
+records the exact maintenance outcome and content comparison.
+
+Tests that used removed subjects as arbitrary fixtures now use retained subjects;
+no registration was kept merely to satisfy a test. Ruff passes for changed
+Python with the existing standalone-test import-order exception (`E402`), and
+Git whitespace checks pass. This record is historical review evidence, not a
+new executable conformance gate.
+

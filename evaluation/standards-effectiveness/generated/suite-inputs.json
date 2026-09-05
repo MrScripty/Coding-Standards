@@ -1769,7 +1769,7 @@
       ]
     },
     {
-      "digest": "sha256:bb42042c7b6f5c4987537dca0df628f370fabdb23cd59744c83526a13d667236",
+      "digest": "sha256:c93a521afd336f33bcb7e7259fab44366cae160b4dd50364d995b4ea605793c2",
       "path": "evaluation/standards-effectiveness/policy-impact-registry.toml",
       "state": "present",
       "uses": [
@@ -1793,20 +1793,8 @@
       ]
     },
     {
-      "digest": "sha256:fbb55f82fae2bebedc0321dd7cce41b0d58b42c743129f9dda27d13f2e6c0d61",
+      "digest": "sha256:e9f3bfdd6e521fe53345841661e121f63e64f6344e4d53ae7e11b94331587ea3",
       "path": "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:243b24b8d82640c7490b1ab2b54ef9a306f19ef5eb9241c25a3db485a4eb07c0",
-      "path": "evaluation/standards-effectiveness/policy-impact/router.toml",
       "state": "present",
       "uses": [
         {
@@ -1913,7 +1901,7 @@
       ]
     },
     {
-      "digest": "sha256:75ff91b8cf3e581bdb7877d8e22983ea9732e5f82cf3d735325d9654590c039e",
+      "digest": "sha256:54c2deaa6b2de044cb3638c6d8d2418faed4e96d1b6a507a6258f0611ffa2e8a",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
       "state": "present",
       "uses": [
@@ -1925,7 +1913,7 @@
       ]
     },
     {
-      "digest": "sha256:561863d7efbdef4b489c64d331a60142ed80d9a72996a2e25e3d6a2a62bf4b7a",
+      "digest": "sha256:110833e9f6bdda14d19a4d0c027adf684a54637e703b3426824cbc521374cc0e",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
       "state": "present",
       "uses": [
@@ -1937,7 +1925,7 @@
       ]
     },
     {
-      "digest": "sha256:a5a3012b02ba4922d1a61539347eefcfbad0adf5db4c0128fc421c2b9e97e9aa",
+      "digest": "sha256:73e939f94f9a6958e1d2c49d109e2ae97a0c479e06e0f6d59784cddf94aaeda5",
       "path": "evaluation/standards-effectiveness/policy-impact/workflow.verification.oracles.toml",
       "state": "present",
       "uses": [
@@ -1978,7 +1966,7 @@
       ]
     },
     {
-      "digest": "sha256:fcab3fcddd50d29a77a4e4f5155d5c74f2e48abcea7d5b5974abd9969ed84232",
+      "digest": "sha256:bd425832871bca5c719851b23487c0e5d2a6abb2c036dc6859d696dad18513bf",
       "path": "evaluation/standards-effectiveness/policy-units/commit.toml",
       "state": "present",
       "uses": [
@@ -2063,7 +2051,7 @@
       ]
     },
     {
-      "digest": "sha256:5bde76511bdaefb712b3562a5118adf9df8d1d1dcbd4d3c222ac2512c454a36d",
+      "digest": "sha256:e7b675bcc5ad102845b3a7dc372cd9a5cd88affb61ddd65ee32b042863f0e58a",
       "path": "evaluation/standards-effectiveness/policy-units/generated-contract.toml",
       "state": "present",
       "uses": [
@@ -2080,7 +2068,7 @@
       ]
     },
     {
-      "digest": "sha256:ccf956038bb9f2b71907181ded228391757b22ebafc2768334e851790c5bb693",
+      "digest": "sha256:8b40f8e501de041a01afe60077fe38b350be2d8ff1b48f22104c12498ef20657",
       "path": "evaluation/standards-effectiveness/policy-units/planning.toml",
       "state": "present",
       "uses": [
@@ -2097,25 +2085,8 @@
       ]
     },
     {
-      "digest": "sha256:9a45a63f086be502086060cb2c8958ddf83fff655414bf534a66f23c8dcf844e",
+      "digest": "sha256:ff3c82cd6617853fa0648360816a58d87fa9f121c974055901a128d1145f2cac",
       "path": "evaluation/standards-effectiveness/policy-units/registry.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        },
-        {
-          "check": "negative-fixtures",
-          "role": "canonical-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:2a1b2bbea3c8548e6c03b045e94f2a853e340ecf35248c09273cdc352927a5d2",
-      "path": "evaluation/standards-effectiveness/policy-units/router.toml",
       "state": "present",
       "uses": [
         {
@@ -2148,7 +2119,7 @@
       ]
     },
     {
-      "digest": "sha256:d5bc88378caefe4604ff9086251a8b9a45ce5185802c0fde53f5411a8a93e806",
+      "digest": "sha256:74a7888b5dfa2dc18968c5d4755faa5532248bf004d1f5cfc23f7cf4d5d0d849",
       "path": "evaluation/standards-effectiveness/policy-units/verification.toml",
       "state": "present",
       "uses": [
@@ -13177,7 +13148,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:ea82c7982dbb7eeca1e41e853a92187223e5eb0f380f86f30179a74666a994b8",
+    "digest": "sha256:f6ff8d0612f566463a7f743c89fd4c8d156b394dd7af5abed03f750411b583ab",
     "uses": [
       {
         "check": "python-package-contract",

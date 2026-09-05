@@ -11,15 +11,3 @@ id = "workflow.verification.evidence-oracle-boundary"
 module = "workflow.verification.oracles"
 heading_path = ["Evidence Oracle Boundaries"]
 semantic_revision = 1
-
-[[policy_unit]]
-id = "workflow.verification.negative-fixture-isolation"
-module = "workflow.verification.oracles"
-heading_path = ["Negative Fixture Isolation"]
-semantic_revision = 1
-
-[[policy_unit]]
-id = "workflow.verification.differential-evidence"
-module = "workflow.verification.oracles"
-heading_path = ["Property And Differential Evidence"]
-semantic_revision = 1

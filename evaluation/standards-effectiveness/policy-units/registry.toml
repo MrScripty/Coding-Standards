@@ -1,14 +1,2 @@
 schema_version = 1
-sources = [
-  "evaluation/standards-effectiveness/policy-units/architecture.toml",
-  "evaluation/standards-effectiveness/policy-units/core.toml",
-  "evaluation/standards-effectiveness/policy-units/commit.toml",
-  "evaluation/standards-effectiveness/policy-units/contracts.toml",
-  "evaluation/standards-effectiveness/policy-units/cross-platform.toml",
-  "evaluation/standards-effectiveness/policy-units/dependencies.toml",
-  "evaluation/standards-effectiveness/policy-units/generated-contract.toml",
-  "evaluation/standards-effectiveness/policy-units/planning.toml",
-  "evaluation/standards-effectiveness/policy-units/router.toml",
-  "evaluation/standards-effectiveness/policy-units/security.toml",
-  "evaluation/standards-effectiveness/policy-units/verification.toml",
-]
+sources = ["evaluation/standards-effectiveness/policy-units/architecture.toml", "evaluation/standards-effectiveness/policy-units/core.toml", "evaluation/standards-effectiveness/policy-units/commit.toml", "evaluation/standards-effectiveness/policy-units/contracts.toml", "evaluation/standards-effectiveness/policy-units/cross-platform.toml", "evaluation/standards-effectiveness/policy-units/dependencies.toml", "evaluation/standards-effectiveness/policy-units/generated-contract.toml", "evaluation/standards-effectiveness/policy-units/planning.toml", "evaluation/standards-effectiveness/policy-units/security.toml", "evaluation/standards-effectiveness/policy-units/verification.toml"]
