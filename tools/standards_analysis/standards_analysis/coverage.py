@@ -700,14 +700,18 @@ def load_repository_coverage_decisions(
             "coverage requirements do not have unique identities",
         )
     registry = _toml(source, attestation_registry)
+    registry_version = registry.get("schema_version")
+    registry_fields = {"schema_version", "sources"}
+    if registry_version == 3:
+        registry_fields.add("engine_sources")
     _exact(
         registry,
-        required={"schema_version", "sources"},
-        allowed={"schema_version", "sources"},
+        required=registry_fields,
+        allowed=registry_fields,
         path=attestation_registry,
         field="attestation registry",
     )
-    if registry["schema_version"] != 2:
+    if type(registry_version) is not int or registry_version not in {2, 3}:
         raise _error(
             "COVERAGE.ATTESTATION_VERSION",
             "unsupported repository attestation registry version",
@@ -831,6 +835,27 @@ def load_repository_coverage_decisions(
             authorizations[authorization_id] = MappingProxyType(
                 authorization.as_contract()
             )
+    if registry_version == 3:
+        from .coverage_publication import load_engine_coverage_receipt
+
+        for path in _texts(registry["engine_sources"], path=attestation_registry, field="engine_sources", allow_empty=True):
+            inputs.add(path)
+            loaded = load_engine_coverage_receipt(
+                source, path, definitions, authority.revoked
+            )
+            if loaded is None:
+                continue
+            subject, claim, authorization, evidence_paths = loaded
+            if subject in attestations:
+                raise _error(
+                    "COVERAGE.DUPLICATE_SUBJECT",
+                    "coverage subject has more than one current attestation",
+                    path=path,
+                    observed=subject,
+                )
+            inputs.update(evidence_paths)
+            attestations[subject] = MappingProxyType(claim)
+            authorizations[claim["authorization_id"]] = MappingProxyType(authorization)
     return RepositoryCoverageDecisions(
         attestations,
         authorizations,

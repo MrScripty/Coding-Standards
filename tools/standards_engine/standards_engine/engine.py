@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import tempfile
+import tomllib
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
@@ -174,6 +175,7 @@ from .authoring import (
     FindProposalsRequest,
     ProposalId,
     ProposalApplication,
+    ProposalReadiness,
     ProposalRevision,
     REVIEW_CAPABILITIES,
     ProposalSummary as AuthoringProposalSummary,
@@ -533,8 +535,31 @@ class StandardsEngine:
             base_files = {str(item.path): item.content for item in base.files}
             proposed_files = dict(projection.source.files)
             base_paths = set(revision.base_repository_paths)
-            added = set(projection.repository_paths) - base_paths
-            removed = base_paths - set(projection.repository_paths)
+            proposed_paths = set(projection.repository_paths)
+            if not isinstance(call.readiness, MissingValue):
+                readiness = self._authoring.read_readiness(call.readiness.id)
+                if readiness.revision_id != revision.revision_id:
+                    return self._reject(
+                        "VERIFICATION.READINESS_MISMATCH",
+                        "invalid",
+                        "Readiness must bind the requested proposal revision.",
+                    )
+                self._publish_coverage_into_candidate(
+                    readiness,
+                    revision,
+                    projection,
+                    base_files,
+                    proposed_files,
+                    proposed_paths,
+                )
+            elif self._coverage_audit_subjects(revision):
+                return self._reject(
+                    "VERIFICATION.REVIEW_REQUIRED",
+                    "unavailable",
+                    "Coverage publication verification requires the proposal's review readiness.",
+                )
+            added = proposed_paths - base_paths
+            removed = base_paths - proposed_paths
             if (
                 not added <= set(proposed_files)
                 or not removed <= set(base_files)
@@ -568,6 +593,11 @@ class StandardsEngine:
                 {
                     "kind": "verify-proposal-result",
                     "revision": call.revision.as_contract(),
+                    **(
+                        {"readiness": call.readiness.as_contract()}
+                        if not isinstance(call.readiness, MissingValue)
+                        else {}
+                    ),
                     "verification": report,
                 }
             )
@@ -917,6 +947,9 @@ class StandardsEngine:
             proposed_files = dict(projection.source.files)
             base_paths = set(revision.base_repository_paths)
             proposed_paths = set(projection.repository_paths)
+            self._publish_coverage_into_candidate(
+                readiness, revision, projection, base_files, proposed_files, proposed_paths
+            )
             added_paths = proposed_paths - base_paths
             removed_paths = base_paths - proposed_paths
             uncaptured_existing_paths = (
@@ -1045,6 +1078,159 @@ class StandardsEngine:
                 )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def _publish_coverage_into_candidate(
+        self,
+        readiness: ProposalReadiness,
+        revision: ProposalRevision,
+        projection: LogicalProjection,
+        base_files: dict[str, bytes],
+        proposed_files: dict[str, bytes],
+        proposed_paths: set[str],
+    ) -> None:
+        from tools.standards_analysis.standards_analysis import (
+            render_engine_coverage_receipt,
+        )
+        from .logical_authoring import _refresh_suite_input_projection
+
+        subjects = self._coverage_audit_subjects(revision)
+        if not subjects:
+            return
+        state = self._load_analysis(
+            AnalysisHandle.from_value(self._analysis_handle(readiness.analysis_id))
+        )
+        if (
+            not isinstance(state.proposed_material, ProjectedRevisionMaterialRef)
+            or state.proposed_material.revision_id != revision.revision_id
+            or state.base_snapshot != revision.base_snapshot
+        ):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "COVERAGE.PUBLICATION_REVIEW_MISMATCH",
+                    "invalid",
+                    "The coverage review must bind this exact proposal revision.",
+                )
+            )
+        evaluation = self._evaluate(state)
+        if not evaluation.complete:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "COVERAGE.PUBLICATION_INCOMPLETE",
+                    "unavailable",
+                    "Coverage publication requires a complete reviewed Analysis.",
+                )
+            )
+        claims = {
+            self._plain(item)["requirement_id"]: self._plain(item)
+            for item in state.coverage_attestations
+        }
+        authorizations = {
+            self._plain(item)["reference"]["id"]: self._plain(item)
+            for item in state.authorization_records
+        }
+        registry_path = "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
+        registry = tomllib.loads(proposed_files[registry_path].decode("utf-8"))
+        receipt_paths = set(registry.get("engine_sources", []))
+        original_captured_paths = frozenset(base_files)
+        for subject in subjects:
+            requirement = coverage_requirement_id(
+                projection.compiled.coverage.requirements[subject],
+                projection.compiled.coverage.views[subject],
+            )
+            claim = claims.get(requirement)
+            if claim is None or claim["authorization_id"] not in authorizations:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "COVERAGE.PUBLICATION_UNREVIEWED",
+                        "unavailable",
+                        "The selected policy lacks an exact authorized coverage review.",
+                    )
+                )
+            for reference in (*claim["evidence"], *claim["explicit_exclusions"]):
+                path = reference["id"]
+                if path not in proposed_files:
+                    if path not in proposed_paths:
+                        raise AnalysisError(
+                            AnalysisFailure(
+                                "COVERAGE.PUBLICATION_EVIDENCE_UNCOMMITTED",
+                                "unavailable",
+                                "Published review evidence must exist in the destination repository.",
+                            )
+                        )
+                    content = self._repository.read_file(
+                        readiness.expected_target, RepositoryPath.parse(path)
+                    )
+                    base_files[path] = content
+                    proposed_files[path] = content
+            receipt = render_engine_coverage_receipt(
+                FrozenContentSource(proposed_files),
+                projection.compiled.coverage,
+                subject,
+                claim,
+                authorizations[claim["authorization_id"]],
+                state.analysis_id,
+                self._execution_context,
+            )
+            path = (
+                "evaluation/standards-effectiveness/policy-coverage/engine/"
+                + analysis_value_digest(subject).removeprefix("sha256:")
+                + ".json"
+            )
+            if path in proposed_paths and path not in proposed_files:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "COVERAGE.PUBLICATION_PATH_CONFLICT",
+                        "invalid",
+                        "The Engine receipt path is occupied outside captured authority.",
+                    )
+                )
+            proposed_files[path] = receipt
+            proposed_paths.add(path)
+            receipt_paths.add(path)
+        registry["schema_version"] = 3
+        registry["engine_sources"] = sorted(receipt_paths)
+        proposed_files[registry_path] = (
+            "schema_version = 3\n"
+            + "\n".join(
+                key
+                + " = [\n"
+                + "".join(
+                    "  " + json.dumps(path, ensure_ascii=False) + ",\n"
+                    for path in registry[key]
+                )
+                + "]\n"
+                for key in ("sources", "engine_sources")
+            )
+        ).encode("utf-8")
+        proposed_paths.update(
+            _refresh_suite_input_projection(
+                proposed_files,
+                original_captured_paths,
+                revision.base_repository_paths,
+            )
+        )
+        final = self._compile(FrozenContentSource(proposed_files))
+        if not set(subjects) <= final.repository_coverage.covered_subjects:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "COVERAGE.PUBLICATION_STALE",
+                    "invalid",
+                    "Publication changed the reviewed coverage requirement; a fresh review is required.",
+                )
+            )
+
+    @staticmethod
+    def _coverage_audit_subjects(revision: ProposalRevision) -> tuple[str, ...]:
+        return tuple(
+            sorted(
+                {
+                    edit.as_contract()["policy"]
+                    for change_set in revision.change_sets
+                    for edit in change_set.edits
+                    if edit.as_contract()["kind"] == "audit-policy-unit"
+                }
+            )
+        )
 
     def recover_application(
         self, call: RecoverApplicationCall
@@ -2465,6 +2651,7 @@ class StandardsEngine:
                     "subjects": [
                         {
                             "subject": unit.id,
+                            **self._coverage_authority(compiled, unit.id),
                             "requirement_id": coverage_requirement_id(
                                 compiled.coverage.requirements[unit.id],
                                 compiled.coverage.views[unit.id],
@@ -2554,6 +2741,24 @@ class StandardsEngine:
             "related": relationships,
             "next_operations": next_operations,
             "summary": projection.read_summary(target),
+        }
+
+    @staticmethod
+    def _coverage_authority(
+        compiled: CompiledSnapshot, subject: str
+    ) -> dict[str, object]:
+        claim = compiled.repository_coverage.attestations.get(subject, {})
+        authorization = compiled.repository_coverage.authorization_records.get(
+            claim.get("authorization_id")
+        )
+        if authorization is None:
+            return {}
+        return {
+            "authority": {
+                "issuer": authorization["reference"]["issuer"],
+                "principal": authorization["principal"],
+                "authorization_id": authorization["reference"]["id"],
+            }
         }
 
     def _related(

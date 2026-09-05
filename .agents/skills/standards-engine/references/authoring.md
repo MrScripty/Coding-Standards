@@ -13,9 +13,10 @@ Repository representation remains private.
    `create_proposal` schema before constructing it.
 3. Call `create_proposal`. Retain both the proposal and exact revision handles.
 4. Use `query_proposal` to read, route, or inspect relationships in that exact
-   projected revision. Run `verify_proposal` against that revision and inspect
-   its verification report. Call `analyze_proposal` with the revision handle;
-   a passing checkpoint does not replace semantic review.
+   projected revision. For ordinary edits, run `verify_proposal` and inspect
+   its report. Coverage-audit proposals require review readiness before
+   verification. Call `analyze_proposal` with the revision handle; a passing
+   checkpoint does not replace semantic review.
 5. Resolve each pending Analysis requirement for which an authorized owner has
    supplied the exact decision and evidence through the public `resolve`
    operation. Otherwise stop and report the pending state. The Engine derives
@@ -26,7 +27,9 @@ Repository representation remains private.
 7. After Analysis is complete, `review_proposal` requires explicit consumer,
    impact, and audit decisions with evidence plus current trusted
    authorization. Retain the returned readiness handle.
-8. Call `apply_proposal` once with that readiness handle. Success means the
+8. For coverage audits, call `verify_proposal` with both the revision and
+   readiness handles and require a passing result. Then call `apply_proposal`
+   once with that readiness handle. Success means the
    exact candidate passed the complete checkpoint and was published to the
    configured local canonical ref.
 9. If application returns recovery-required, call `recover_application` with
@@ -51,6 +54,7 @@ The closed edit variants are:
 - `remove-policy-relationship`
 - `put-routing-rule` / `remove-routing-rule`
 - `put-routing-fact` / `remove-routing-fact`
+- `audit-policy-unit`
 
 Use `invoke.py --schema create_proposal` for their current exact fields. In
 particular:
@@ -87,6 +91,26 @@ Do not infer semantic relatedness, impact, lifecycle meaning, evidence
 sufficiency, or successors from prose. If the user has not decided required
 meaning, stop at the typed rejection or ask for that decision instead of
 manufacturing closure.
+
+## Coverage Audit Publication
+
+Use `read` with `include_coverage: true` to identify registered policy units
+requiring review. Add `audit-policy-unit` edits naming those policies and the
+review rationale. These edits request certificate publication without changing
+standard text. Already-current certificates need no renewal.
+
+Resolve the exact coverage and consumer obligations, then obtain review
+readiness. `verify_proposal` requires that readiness for an audit proposal so
+it checks the candidate containing the receipt. Application reauthorizes the
+review through the configured Engine auditor, checks destination evidence and
+requirement identities, and publishes through the normal application lifecycle.
+
+Repository publications use Engine audit authority. Receipt records preserve
+the actual auditor separately from caller-supplied provenance, along with
+pinned evidence and authorization proof. Evidence must exist in the destination
+repository with the reviewed bytes. A changed authority or invalidated
+requirement requires fresh review; switching authority does not renew a claim.
+A subsequent Snapshot read reports the retained auditor with coverage status.
 
 ## Publication Boundary
 

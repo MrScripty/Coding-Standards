@@ -384,10 +384,24 @@ class AuthorizationRecord:
         }
 
 
+@dataclass(frozen=True, slots=True)
+class ResolvedAuthorization:
+    record: AuthorizationRecord
+    authority: AuthorizationAuthorityContract
+    claim: AuthorizationClaim
+
+
 def construct_authorization_record(
     context: AnalysisExecutionContext,
     request: AuthorizationRequest,
 ) -> AuthorizationRecord:
+    return resolve_authorization(context, request).record
+
+
+def resolve_authorization(
+    context: AnalysisExecutionContext,
+    request: AuthorizationRequest,
+) -> ResolvedAuthorization:
     adapter = context.authorization
     if adapter is None:
         raise _error(
@@ -488,7 +502,7 @@ def construct_authorization_record(
         "capability": request.capability,
         "authority_digest": authority_digest,
     }
-    return AuthorizationRecord(
+    record = AuthorizationRecord(
         reference,
         authority.issuer_semantic_revision,
         authority.principal_id,
@@ -500,6 +514,7 @@ def construct_authorization_record(
         authority.revocation_authority_semantic_revision,
         revocation_evidence,
     )
+    return ResolvedAuthorization(record, authority, outcome)
 
 
 def _require_evidence_contracts(

@@ -104,7 +104,11 @@ from .trust import (
     construct_authorization_record,
 )
 
+from .coverage_publication import render_engine_coverage_receipt
+
+
 __all__ = (
+    "render_engine_coverage_receipt",
     "ANALYSIS_CONTRACT_VERSION",
     "CHANGE_GRAPH_GROUPS",
     "CONSUMER_REVIEW_CONTRACT",

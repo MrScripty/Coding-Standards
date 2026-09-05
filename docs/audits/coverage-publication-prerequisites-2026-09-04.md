@@ -1,5 +1,10 @@
 # Coverage publication prerequisites
 
+The user subsequently selected Engine audit authority. The
+[publication implementation](engine-audit-publication-2026-09-04.md) records that
+decision and the resulting Engine workflow; the investigation below explains
+the prerequisites.
+
 Investigation of the [coverage publication gap](standards-coverage-followup-2026-09-04.md)
 found two evidence-integrity issues that must be addressed before persisting
 new reviews.
@@ -52,7 +57,7 @@ Two viable ownership choices remain:
 | Engine audit authority | Bind publication to the Engine's configured auditor and retain that authority with the reviewed claim for future snapshots. |
 | Separate repository auditor | Require the configured repository auditor to authorize admission of an Engine review; retain both the original review provenance and repository admission authority. |
 
-The user has been asked which authority future snapshots should trust. Neither
+The user selected Engine audit authority after this investigation. Neither
 choice may rewrite the review's evidence, provenance, or requirement identity.
 After that decision, publication should consume the immutable reviewed claim,
 recheck its exact destination requirement and evidence, and use the existing

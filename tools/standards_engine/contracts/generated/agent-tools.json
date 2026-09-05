@@ -542,6 +542,26 @@
       ],
       "type": "object"
     },
+    "AuditPolicyUnitEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "audit-policy-unit"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "kind",
+        "policy",
+        "rationale"
+      ],
+      "type": "object"
+    },
     "AuthoredRoutingFact": {
       "additionalProperties": false,
       "properties": {
@@ -1370,6 +1390,26 @@
       "required": [
         "kind",
         "claim"
+      ],
+      "type": "object"
+    },
+    "CoverageAuditAuthority": {
+      "additionalProperties": false,
+      "properties": {
+        "authorization_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "issuer": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "principal": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "issuer",
+        "principal",
+        "authorization_id"
       ],
       "type": "object"
     },
@@ -2671,6 +2711,9 @@
     "PolicyCoverageStatus": {
       "additionalProperties": false,
       "properties": {
+        "authority": {
+          "$ref": "#/$defs/CoverageAuditAuthority"
+        },
         "requirement_id": {
           "$ref": "#/$defs/Digest"
         },
@@ -4970,6 +5013,9 @@
         },
         {
           "$ref": "#/$defs/RemoveRoutingFactEdit"
+        },
+        {
+          "$ref": "#/$defs/AuditPolicyUnitEdit"
         }
       ]
     },
@@ -5166,6 +5212,9 @@
         "kind": {
           "const": "verify-proposal"
         },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
+        },
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
         }
@@ -5181,6 +5230,9 @@
       "properties": {
         "kind": {
           "const": "verify-proposal-result"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
         },
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
@@ -5245,7 +5297,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 22,
+  "interface_schema_version": 23,
   "operations": [
     {
       "capability": "standards.snapshot.create",

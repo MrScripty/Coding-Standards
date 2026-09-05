@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 22,
+  "interface_schema_version": 23,
   "examples": [
     {
       "name": "create-snapshot",
@@ -395,6 +395,15 @@
         "kind": "read",
         "target": "workflow.planning",
         "include_coverage": true
+      }
+    },
+    {
+      "name": "audit-policy-coverage",
+      "definition": "AuditPolicyUnitEdit",
+      "value": {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.written-plan-applicability",
+        "rationale": "Review and publish coverage through Engine audit authority."
       }
     }
   ]

@@ -450,6 +450,11 @@ def _edit(value: object) -> LogicalEdit:
         else:
             identifier = _semantic_id(value, f"routing {field} ID")
         return _structured(raw, target=identifier, facet=f"routing-{field}")
+    if kind == "audit-policy-unit":
+        _exact(raw, {"kind", "policy", "rationale"}, "coverage audit edit")
+        policy = _semantic_id(raw["policy"], "policy ID")
+        _text(raw["rationale"], "coverage audit rationale")
+        return _structured(raw, target=policy, facet="coverage-audit")
     if kind == "revise-standard":
         _exact(raw, {"kind", "standard"}, "revise-standard edit")
         standard = _standard_content(raw["standard"])
@@ -904,7 +909,10 @@ class LogicalAuthoringCompiler:
                     base_snapshot,
                     compile_current,
                 )
-            if files == before:
+            if files == before and not any(
+                edit.as_contract()["kind"] == "audit-policy-unit"
+                for edit in change_set.edits
+            ):
                 raise _invalid(
                     "AUTHORING.NO_EFFECT",
                     "logical change set does not change the current standards projection",
@@ -946,7 +954,19 @@ class LogicalAuthoringCompiler:
             )
         raw = edit.as_contract()
         kind = raw["kind"]
-        if kind in {
+        if kind == "audit-policy-unit":
+            current = compile_current(files)
+            if raw["policy"] not in current.coverage.views:
+                raise _invalid(
+                    "AUTHORING.UNKNOWN_POLICY",
+                    "Coverage audit requires a registered policy unit.",
+                )
+            if raw["policy"] in current.repository_coverage.covered_subjects:
+                raise _invalid(
+                    "AUTHORING.COVERAGE_CURRENT",
+                    "The policy already has a current coverage certificate.",
+                )
+        elif kind in {
             "put-routing-rule",
             "remove-routing-rule",
             "put-routing-fact",
@@ -1564,6 +1584,7 @@ def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
         "remove-policy-relationship": 40,
         "retire-policy-unit": 50,
         "retire-standard": 60,
+        "audit-policy-unit": 70,
     }
     return priority[kind], _canonical_json(edit.as_contract())
 
@@ -2121,6 +2142,9 @@ def _analysis_policy_ids(
         for edit in change_set.edits:
             raw = edit.as_contract()
             kind = raw["kind"]
+            if kind == "audit-policy-unit":
+                selected.add(str(raw["policy"]))
+                continue
             if kind not in {
                 "put-policy-relationship",
                 "remove-policy-relationship",

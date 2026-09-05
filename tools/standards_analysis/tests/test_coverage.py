@@ -35,6 +35,140 @@ from tools.standards_policy_impact.standards_policy_impact import (
 
 
 class CoverageTest(unittest.TestCase):
+    def test_engine_receipt_uses_engine_authority_and_retains_exact_review(self):
+        from tools.standards_metadata.standards_metadata import DirectoryContentSource
+        from tools.standards_analysis.standards_analysis.coverage import (
+            _load_repository_authorization,
+        )
+        from tools.standards_analysis.standards_analysis.coverage_publication import (
+            render_engine_coverage_receipt,
+        )
+        from tools.standards_analysis.standards_analysis.trust import (
+            AnalysisExecutionContext,
+            AuthorizationRequest,
+            construct_authorization_record,
+            EvidenceReference,
+        )
+
+        self.write_attestations(pinned=True)
+        original = dict(self.load_decisions().attestations["workflow.policy.rule"])
+        source = DirectoryContentSource(self.root)
+        legacy = _load_repository_authorization(
+            source, "authorization.toml", "revocations.toml"
+        )
+        engine = replace(
+            legacy, contract=replace(legacy.contract, principal_id="engine.auditor")
+        )
+        context = AnalysisExecutionContext(engine)
+        request = AuthorizationRequest(
+            "coverage-attestation",
+            "coverage-requirement",
+            original["requirement_id"],
+            "standards.review.audit",
+            tuple(EvidenceReference(**item) for item in original["evidence"]),
+        )
+        authorization = construct_authorization_record(context, request).as_contract()
+        claim = {
+            **original,
+            "authorization_id": authorization["reference"]["id"],
+            "auditor_provenance": "Reviewer-supplied context is retained separately from authority.",
+        }
+        receipt = render_engine_coverage_receipt(
+            source,
+            self.definitions(),
+            "workflow.policy.rule",
+            claim,
+            authorization,
+            "analysis-fixture",
+            context,
+        )
+        self.write("engine-review.json", receipt.decode())
+        self.write(
+            "attestation-sources.toml",
+            'schema_version = 3\nsources = []\nengine_sources = ["engine-review.json"]\n',
+        )
+        loaded = self.load_decisions()
+        self.assertEqual(loaded.attestations["workflow.policy.rule"], claim)
+        self.assertEqual(
+            loaded.authorization_records[claim["authorization_id"]]["principal"],
+            "engine.auditor",
+        )
+        self.assertIn("evidence/review.md", loaded.input_sources)
+
+        changed_authority = AnalysisExecutionContext(
+            replace(
+                engine,
+                contract=replace(engine.contract, principal_id="engine.replacement"),
+            )
+        )
+        with self.assertRaises(AnalysisError) as caught:
+            render_engine_coverage_receipt(
+                source,
+                self.definitions(),
+                "workflow.policy.rule",
+                claim,
+                authorization,
+                "analysis-fixture",
+                changed_authority,
+            )
+        self.assertEqual(
+            caught.exception.failure.code, "COVERAGE.PUBLICATION_AUTHORITY_CHANGED"
+        )
+        definitions = self.definitions()
+        changed_view = replace(
+            definitions.views["workflow.policy.rule"], semantic_revision=2
+        )
+        changed_definitions = replace(
+            definitions, views={"workflow.policy.rule": changed_view}
+        )
+        with self.assertRaises(AnalysisError) as caught:
+            render_engine_coverage_receipt(
+                source,
+                changed_definitions,
+                "workflow.policy.rule",
+                claim,
+                authorization,
+                "analysis-fixture",
+                context,
+            )
+        self.assertEqual(caught.exception.failure.code, "COVERAGE.PUBLICATION_STALE")
+
+        prior_revocations = (self.root / "revocations.toml").read_text()
+        self.write(
+            "revocations.toml",
+            'schema_version = 1\nauthority_id = "authority.revocations"\nsemantic_revision = 1\nrevoked_grants = ['
+            + json.dumps(claim["authorization_id"])
+            + "]\n",
+        )
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+        self.assertEqual(
+            caught.exception.failure.code, "COVERAGE.AUTHORIZATION_REVOKED"
+        )
+        self.write("revocations.toml", prior_revocations)
+
+        altered_claim = json.loads(receipt)
+        altered_claim["claim"]["rationale"] = "Changed after publication authorization."
+        self.write("engine-review.json", json.dumps(altered_claim))
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+        self.assertEqual(caught.exception.failure.code, "COVERAGE.ENGINE_RECEIPT_INVALID")
+        altered = json.loads(receipt)
+        altered["authorization"]["principal"] = "another.auditor"
+        self.write("engine-review.json", json.dumps(altered))
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+        self.assertEqual(
+            caught.exception.failure.code, "COVERAGE.ENGINE_RECEIPT_INVALID"
+        )
+        self.write("engine-review.json", receipt.decode())
+        self.write("evidence/review.md", "Changed after review.\n")
+        with self.assertRaises(AnalysisError) as caught:
+            self.load_decisions()
+        self.assertEqual(
+            caught.exception.failure.code, "ANALYSIS.EVIDENCE_DIGEST_MISMATCH"
+        )
+
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)

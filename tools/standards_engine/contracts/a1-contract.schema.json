@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v22",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v23",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -2607,6 +2607,9 @@
         },
         {
           "$ref": "#/$defs/RemoveRoutingFactEdit"
+        },
+        {
+          "$ref": "#/$defs/AuditPolicyUnitEdit"
         }
       ]
     },
@@ -5277,6 +5280,9 @@
         },
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
         }
       }
     },
@@ -5297,6 +5303,9 @@
         },
         "verification": {
           "$ref": "#/$defs/VerificationReport"
+        },
+        "readiness": {
+          "$ref": "#/$defs/ReadinessHandle"
         }
       }
     },
@@ -5341,6 +5350,9 @@
             "current-attestation",
             "review-required"
           ]
+        },
+        "authority": {
+          "$ref": "#/$defs/CoverageAuditAuthority"
         }
       },
       "additionalProperties": false
@@ -5357,6 +5369,46 @@
           "items": {
             "$ref": "#/$defs/PolicyCoverageStatus"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuditPolicyUnitEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "policy",
+        "rationale"
+      ],
+      "properties": {
+        "kind": {
+          "const": "audit-policy-unit"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoverageAuditAuthority": {
+      "type": "object",
+      "required": [
+        "issuer",
+        "principal",
+        "authorization_id"
+      ],
+      "properties": {
+        "issuer": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "principal": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "authorization_id": {
+          "$ref": "#/$defs/NonEmptyString"
         }
       },
       "additionalProperties": false

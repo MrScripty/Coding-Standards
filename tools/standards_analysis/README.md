@@ -51,3 +51,19 @@ them to schema 6: hashing current files cannot establish which bytes a past
 review examined. New certificate publication must retain the references from
 the actual authorized review. Both formats still require the exact current
 coverage requirement and the configured repository auditor.
+
+Attestation registry schema 3 adds `engine_sources`, an explicit list of
+repository-trusted Engine audit receipt files. Each receipt preserves the
+Engine authority contract, authorization record and proof bytes, reviewed
+claim, and originating Analysis ID. Registry membership admits that Engine
+authority; the loader checks the authorization identity and pinned repository
+evidence rather than substituting the historical repository auditor. The
+existing `revoked_grants` list also rejects revoked Engine authorization IDs.
+Stale requirements are ignored, and duplicate current claims are rejected.
+Receipt readback requires no Engine database. Legacy `sources` retain their
+original auditor and formats; the publication path does not relabel them.
+
+Receipts also retain a publication authorization whose subject binds the whole
+claim, original review authorization, Analysis ID, and policy subject. Replaying
+it detects claim changes even when all referenced files still match their
+digests. Either retained authorization ID can be revoked.

@@ -49,7 +49,18 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `verify_repository` | `VerifyRepositoryCall` | `VerifyRepositoryResult` | `RejectedResult` |
 | `verify_proposal` | `VerifyProposalCall` | `VerifyProposalResult` | `RejectedResult` |
 
-Interface schema version 22 adds optional `include_coverage` to `read` requests
+Interface schema version 23 adds `audit-policy-unit` edits for publishing
+coverage reviews through the configured Engine audit authority. The edit names
+a registered policy and rationale; it requests review and publication without
+altering standards text. Current certificates need no renewal. Analysis and
+review must complete before `verify_proposal` can check an audit proposal;
+supply its optional `readiness` handle. The result echoes that readiness.
+Application publishes the exact reviewed receipt with the candidate, using the
+existing verification, local publication, and recovery lifecycle. Subsequent
+coverage reads include the retained auditor's issuer, principal, and
+authorization ID. A caller's provenance text does not determine audit authority.
+
+Version 22 added optional `include_coverage` to `read` requests
 through both `query` and `query_proposal`. The result lists the registered policy
 units in that read scope, their current requirement identities, and whether the
 captured repository has a current attestation. An empty list means no registered

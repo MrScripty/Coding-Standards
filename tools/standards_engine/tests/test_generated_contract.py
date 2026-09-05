@@ -498,7 +498,7 @@ class GeneratedContractTest(unittest.TestCase):
         corpus = json.loads(path.read_text(encoding="utf-8"))
 
         self.assertEqual(corpus["schema_version"], 2)
-        self.assertEqual(contracts.interface.interface_schema_version, 22)
+        self.assertEqual(contracts.interface.interface_schema_version, 23)
         self.assertEqual(
             corpus["interface_schema_version"],
             contracts.interface.interface_schema_version,
