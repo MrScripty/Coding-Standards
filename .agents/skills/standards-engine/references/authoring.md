@@ -146,3 +146,11 @@ supply the current Git revision plus exact review evidence. Preview with
 working-tree paths. Commit the resulting maintenance with its review record.
 This operation does not change normative policy, certify completeness, publish
 Git refs, or require replacement attestations for deleted stale claims.
+
+Use `plan.unregister_policy_subjects` for explicit review-registration pruning.
+This removes selected subjects and their incident policy relationships without
+removing standard text or module routing. Review the retained and removed scopes
+in the evidence record; unregistered text still receives ordinary whole-artifact
+change analysis. Use `retire-policy-unit` instead only when the normative policy
+itself is being retired. Maintenance prunes claims against the final candidate's
+requirements, including claims invalidated by the registration changes.

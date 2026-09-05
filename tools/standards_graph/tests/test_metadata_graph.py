@@ -42,10 +42,10 @@ class MetadataGraphTest(unittest.TestCase):
         self.assertIn(METADATA_REQUIRES, groups)
         self.assertIn("policy-impact", groups)
         self.assertEqual(len(registry.edges), len(set(registry.edges)))
-        self.assertIn("workflow.planning.plan-admission", registry.nodes)
+        self.assertIn("workflow.planning.written-plan-applicability", registry.nodes)
         self.assertTrue(
             registry.outgoing(
-                "workflow.planning.plan-admission",
+                "workflow.planning.written-plan-applicability",
                 ("policy-impact",),
             )
         )

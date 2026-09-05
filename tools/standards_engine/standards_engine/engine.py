@@ -499,7 +499,7 @@ class StandardsEngine:
 
         This operation never certifies policy completeness or publishes a Git ref.
         """
-        from .evidence_maintenance import revise_evidence
+        from .evidence_maintenance import prune_certificates, revise_evidence
         from .logical_authoring import _refresh_suite_input_projection
 
         try:
@@ -534,7 +534,15 @@ class StandardsEngine:
             }
             proposed = revise_evidence(files, call.plan.as_contract(), requirements)
             _refresh_suite_input_projection(proposed, frozenset(files), tuple(files))
-            self._compile(FrozenContentSource(proposed))
+            candidate_compiled = self._compile(FrozenContentSource(proposed))
+            if call.plan.prune_stale_certificates or call.plan.as_contract().get("unregister_policy_subjects"):
+                requirements = {
+                    coverage_requirement_id(candidate_compiled.coverage.requirements[s], v)
+                    for s, v in candidate_compiled.coverage.views.items()
+                }
+                proposed = prune_certificates(proposed, requirements)
+                _refresh_suite_input_projection(proposed, frozenset(files), tuple(files))
+                self._compile(FrozenContentSource(proposed))
             changed = sorted(p for p, data in proposed.items() if files.get(p) != data)
             removed = sorted(set(files) - set(proposed))
             if not changed and not removed:

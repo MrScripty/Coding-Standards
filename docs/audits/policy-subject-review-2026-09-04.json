@@ -1,0 +1,314 @@
+{
+  "purpose": "Review the value of separate policy subjects, not sentence-by-sentence conformance.",
+  "before": 51,
+  "retained": 24,
+  "unregistered": 27,
+  "subjects": [
+    {
+      "subject": "topic.architecture.composed-design-admission",
+      "module": "topic.architecture",
+      "decision": "keep",
+      "reason": "Evaluates whether the complete Engine design earns its permanent mechanisms."
+    },
+    {
+      "subject": "topic.architecture.authority-scope-admission",
+      "module": "topic.architecture",
+      "decision": "keep",
+      "reason": "Protects distinct owners of graph, policy, routing, and evidence semantics."
+    },
+    {
+      "subject": "topic.architecture.immutable-authority-closure",
+      "module": "topic.architecture.replay",
+      "decision": "keep",
+      "reason": "Owns the actual immutable snapshot and cold-replay promise."
+    },
+    {
+      "subject": "core.simplicity-and-complection",
+      "module": "topic.code-design",
+      "decision": "keep",
+      "reason": "Keeps design review focused on independent concerns and the cost exposed to callers."
+    },
+    {
+      "subject": "workflow.commit.per-commit-boundary",
+      "module": "workflow.commit",
+      "decision": "keep",
+      "reason": "Owns the actual staged publication and affected-check boundary."
+    },
+    {
+      "subject": "workflow.commit.isolation-applicability",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Branch selection is useful workflow advice, but the Engine review scope can remain at publication and resource safety."
+    },
+    {
+      "subject": "workflow.commit.branch-context",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Branch-context bookkeeping does not need a per-section completeness certificate."
+    },
+    {
+      "subject": "workflow.commit.integration-mechanisms",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Generic Git integration guidance is broader than the Engine publication contract; review it as workflow guidance."
+    },
+    {
+      "subject": "workflow.commit.cherry-pick-lineage",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Selective integration advice is not an Engine-supported cherry-pick operation requiring its own audit subject."
+    },
+    {
+      "subject": "workflow.commit.terminal-branch-lifecycle",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Terminal classifications overlap resource-lifecycle review and add a second bookkeeping boundary."
+    },
+    {
+      "subject": "workflow.commit.worktree-lifecycle",
+      "module": "workflow.commit",
+      "decision": "keep",
+      "reason": "Owns safe cleanup of real Git resources without losing uniquely reachable work."
+    },
+    {
+      "subject": "workflow.commit.branch-history-review",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "History review advice is outside the Engine publication operation; a certificate does not perform that review."
+    },
+    {
+      "subject": "workflow.commit.hook-bypass-authority",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "The Engine does not provide a hook-bypass operation. The safety guidance remains, without speculative conformance machinery."
+    },
+    {
+      "subject": "workflow.commit.rewrite-authority",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "The Engine does not expose history rewriting. Preserve the guidance; remove the unused audit subject."
+    },
+    {
+      "subject": "workflow.commit.topology",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Topology advice is not a separate Engine guarantee; publication tests cover the real supported topology."
+    },
+    {
+      "subject": "workflow.commit.commit-message",
+      "module": "workflow.commit",
+      "decision": "keep",
+      "reason": "Owns the actual commit artifact produced by Engine application."
+    },
+    {
+      "subject": "workflow.commit.invalid-outcomes",
+      "module": "workflow.commit",
+      "decision": "unregister",
+      "reason": "Restates failures already owned by the preceding rules; no separate semantic subject is needed."
+    },
+    {
+      "subject": "topic.contracts.declaration-and-semantic-authority",
+      "module": "topic.contracts.schemas",
+      "decision": "keep",
+      "reason": "Distinguishes the public declaration from delegated validation and domain semantics."
+    },
+    {
+      "subject": "topic.contracts.version-scope-and-invalidation",
+      "module": "topic.contracts.schemas",
+      "decision": "keep",
+      "reason": "Controls meaningful compatibility and review invalidation boundaries."
+    },
+    {
+      "subject": "topic.contracts.generated-semantic-conformance",
+      "module": "topic.contracts.schemas",
+      "decision": "keep",
+      "reason": "Owns actual generated models and public consumer behavior."
+    },
+    {
+      "subject": "topic.contracts.schema-dialect-and-vocabulary",
+      "module": "topic.contracts.schemas",
+      "decision": "keep",
+      "reason": "Bounds supported schema behavior and explicit unsupported outcomes."
+    },
+    {
+      "subject": "topic.contracts.identity-versus-instance-equality",
+      "module": "topic.contracts",
+      "decision": "keep",
+      "reason": "Prevents identity normalization from changing validation semantics."
+    },
+    {
+      "subject": "topic.contracts.validation-proof-lifetime",
+      "module": "topic.contracts",
+      "decision": "keep",
+      "reason": "Owns when a validated value can be reused and when boundary validation is necessary."
+    },
+    {
+      "subject": "topic.contracts.invariant-contracts",
+      "module": "topic.contracts",
+      "decision": "keep",
+      "reason": "Connects observable invariants, enforcement ownership, and appropriate failures."
+    },
+    {
+      "subject": "topic.cross-platform.filesystem-paths",
+      "module": "topic.cross-platform",
+      "decision": "keep",
+      "reason": "Owns real path handling across valid repository paths and platforms."
+    },
+    {
+      "subject": "topic.dependencies.implementation-versus-dependency",
+      "module": "topic.dependencies",
+      "decision": "keep",
+      "reason": "Controls the cost and correctness of reimplementing standardized semantics."
+    },
+    {
+      "subject": "topic.dependencies.requirement-and-ownership",
+      "module": "topic.dependencies",
+      "decision": "keep",
+      "reason": "Owns real executable dependency declarations and reproducible environments."
+    },
+    {
+      "subject": "profile.boundary.generated-contract.applicability",
+      "module": "profile.boundary.generated-contract",
+      "decision": "keep",
+      "reason": "Owns the routing decision for actual generated program contracts."
+    },
+    {
+      "subject": "profile.boundary.generated-contract.semantic-closure",
+      "module": "profile.boundary.generated-contract",
+      "decision": "unregister",
+      "reason": "Explicitly delegates to Contracts, Build, Verification, and Dependencies; a separate subject duplicates those owners."
+    },
+    {
+      "subject": "workflow.planning.written-plan-applicability",
+      "module": "workflow.planning",
+      "decision": "keep",
+      "reason": "Keeps routine development free of unnecessary planning ceremony."
+    },
+    {
+      "subject": "workflow.planning.artifact-model",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Directory layout is readable planning guidance; a separate certificate duplicates review of structured active-plan records."
+    },
+    {
+      "subject": "workflow.planning.active-plan-fields",
+      "module": "workflow.planning",
+      "decision": "keep",
+      "reason": "Owns the structured plan records that the retained plan checker actually accepts."
+    },
+    {
+      "subject": "workflow.planning.lifecycle",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Lifecycle guidance remains in Planning; a separate coverage certificate adds no independent Engine operation."
+    },
+    {
+      "subject": "workflow.planning.plan-admission",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Admission ceremony does not need its own coverage certificate; planning applicability and actual record validation remain."
+    },
+    {
+      "subject": "workflow.planning.concurrent-integration-routing",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Concurrent-work specialization remains routable through the module graph; no separate subject certificate is needed."
+    },
+    {
+      "subject": "workflow.planning.repository-isolation",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Repeats Commit isolation guidance at the planning surface; retain the guidance without a second review subject."
+    },
+    {
+      "subject": "workflow.planning.projection-completeness",
+      "module": "workflow.planning",
+      "decision": "keep",
+      "reason": "Owns coordinated standards, routing, graph, and consumer updates through the Engine."
+    },
+    {
+      "subject": "workflow.planning.acceptance-claims",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Repeats the Verification-owned acceptance policy; one substantive owner is sufficient."
+    },
+    {
+      "subject": "workflow.planning.milestones-and-slices",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Useful work-sizing advice, but no distinct Engine behavior requires a permanent per-section audit subject."
+    },
+    {
+      "subject": "workflow.planning.current-state",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Document housekeeping does not justify its own recurring completeness certificate."
+    },
+    {
+      "subject": "workflow.planning.replanning",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Replanning guidance is reviewed with the workflow; a per-section certificate adds no independent assurance."
+    },
+    {
+      "subject": "workflow.planning.systemic-finding-replan",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Specializes replanning and design admission; retain the advice without another review obligation."
+    },
+    {
+      "subject": "workflow.planning.findings",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Issue-record fields are process bookkeeping, not a separate Engine guarantee."
+    },
+    {
+      "subject": "workflow.planning.concurrent-work",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Delegation guidance belongs in the workflow and does not need a separate certificate."
+    },
+    {
+      "subject": "workflow.planning.completion",
+      "module": "workflow.planning",
+      "decision": "unregister",
+      "reason": "Completion bookkeeping duplicates actual acceptance evidence and plan validation."
+    },
+    {
+      "subject": "router.generated-contract-profile-applicability",
+      "module": "router",
+      "decision": "unregister",
+      "reason": "Duplicates applicability owned by the generated-contract profile; router behavior is tested directly."
+    },
+    {
+      "subject": "topic.security.filesystem-containment",
+      "module": "topic.security",
+      "decision": "keep",
+      "reason": "Protects filesystem authority for reading and applying standards."
+    },
+    {
+      "subject": "workflow.verification.acceptance-claims",
+      "module": "workflow.verification",
+      "decision": "keep",
+      "reason": "Owns whether retained verification earns its cost and proves the objective."
+    },
+    {
+      "subject": "workflow.verification.evidence-oracle-boundary",
+      "module": "workflow.verification.oracles",
+      "decision": "keep",
+      "reason": "Prevents structural agreement from being presented as semantic conformance."
+    },
+    {
+      "subject": "workflow.verification.negative-fixture-isolation",
+      "module": "workflow.verification.oracles",
+      "decision": "unregister",
+      "reason": "A useful testing technique covered by the retained evidence-boundary policy; not a separate completeness subject."
+    },
+    {
+      "subject": "workflow.verification.differential-evidence",
+      "module": "workflow.verification.oracles",
+      "decision": "unregister",
+      "reason": "Specializes the retained oracle boundary; do not certify the same oracle principle twice."
+    }
+  ]
+}

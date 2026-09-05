@@ -1923,6 +1923,15 @@
             "$ref": "#/$defs/EvidenceSuiteDescription"
           },
           "type": "array"
+        },
+        "unregister_policy_subjects": {
+          "description": "Remove selected review-subject registrations and their source relationships while preserving normative Markdown.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "required": [
@@ -5552,7 +5561,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 24,
+  "interface_schema_version": 25,
   "operations": [
     {
       "capability": "standards.snapshot.create",

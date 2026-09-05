@@ -5602,6 +5602,15 @@
           "items": {
             "$ref": "#/$defs/EvidenceConsumerRegistration"
           }
+        },
+        "unregister_policy_subjects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Remove selected review-subject registrations and their source relationships while preserving normative Markdown."
         }
       }
     },

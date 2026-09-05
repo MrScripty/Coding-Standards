@@ -36,8 +36,8 @@ from tools.standards_engine.standards_engine.tools import _contracts
 REPO_ROOT = Path(__file__).resolve().parents[3]
 WRITTEN_PLAN_POLICY = "workflow.planning.written-plan-applicability"
 WRITTEN_PLAN_TITLE = "When A Written Plan Is Required"
-ARTIFACT_MODEL_POLICY = "workflow.planning.artifact-model"
-ARTIFACT_MODEL_TITLE = "Artifact Model"
+PROJECTION_POLICY = "workflow.planning.projection-completeness"
+PROJECTION_TITLE = "Policy Projection Completeness"
 
 
 def _section_body(document: str, title: str) -> str:
@@ -313,7 +313,7 @@ class NavigationTest(unittest.TestCase):
         initial_body = "Navigation fixture: initial policy revision."
         revised_body = "Navigation fixture: second policy revision."
         initial_content = f"## {WRITTEN_PLAN_TITLE}\n{initial_body}\n"
-        revised_content = f"## {ARTIFACT_MODEL_TITLE}\n{revised_body}\n"
+        revised_content = f"## {PROJECTION_TITLE}\n{revised_body}\n"
         accepted = self.engine.query(
             QueryCall(
                 self.snapshot,
@@ -409,8 +409,8 @@ class NavigationTest(unittest.TestCase):
                     "expected_revision": created.revision.as_contract(),
                     "change_set": _policy_change_set(
                         revised_content,
-                        policy=ARTIFACT_MODEL_POLICY,
-                        title=ARTIFACT_MODEL_TITLE,
+                        policy=PROJECTION_POLICY,
+                        title=PROJECTION_TITLE,
                         accepted_revision=1,
                         proposed_revision=2,
                     ),
@@ -444,7 +444,7 @@ class NavigationTest(unittest.TestCase):
             item.subject: item.requirement_id for item in current.coverage.subjects
         }
         self.assertNotEqual(
-            historical_ids[ARTIFACT_MODEL_POLICY], current_ids[ARTIFACT_MODEL_POLICY]
+            historical_ids[PROJECTION_POLICY], current_ids[PROJECTION_POLICY]
         )
         self.assertNotEqual(historical.content, current.content)
         self.assertEqual(self.engine._snapshots._store.counts(), revised_counts)
@@ -470,7 +470,7 @@ class NavigationTest(unittest.TestCase):
         invalid_edit = invalid_edits[0]
         if not isinstance(invalid_edit, dict):
             raise AssertionError("logical authoring fixture did not produce one edit")
-        invalid_edit["title"] = ARTIFACT_MODEL_TITLE
+        invalid_edit["title"] = PROJECTION_TITLE
         counts = self.engine._snapshots._store.counts()
         rejected = self.engine.create_proposal(
             CreateProposalCall.from_value(

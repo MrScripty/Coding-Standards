@@ -14,6 +14,7 @@ ATTESTATIONS = (
     "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
 )
 IMPACT = "evaluation/standards-effectiveness/policy-impact-registry.toml"
+POLICIES = "evaluation/standards-effectiveness/policy-units/registry.toml"
 
 
 def _load(files: Mapping[str, bytes], path: str) -> dict:
@@ -38,6 +39,25 @@ def revise_evidence(
 ) -> dict[str, bytes]:
     """Project an explicit maintenance plan; the Engine verifies before writing."""
     result = dict(files)
+    unregistered = set(plan.get("unregister_policy_subjects", []))
+    if unregistered:
+        policy_registry = _load(files, POLICIES)
+        sources = {p: _load(files, p) for p in policy_registry["sources"]}
+        active = {u["id"] for doc in sources.values() for u in doc.get("policy_unit", [])}
+        unknown = unregistered - active
+        if unknown:
+            raise _invalid("EVIDENCE.UNKNOWN_POLICY", f"Unknown active subjects: {sorted(unknown)}")
+        for path, doc in sources.items():
+            remaining = [u for u in doc.get("policy_unit", []) if u["id"] not in unregistered]
+            if remaining == doc.get("policy_unit", []):
+                continue
+            if remaining or doc.get("tombstone"):
+                doc["policy_unit"] = remaining
+                result[path] = _dump(doc)
+            else:
+                result.pop(path)
+                policy_registry["sources"].remove(path)
+        result[POLICIES] = _dump(policy_registry)
     registry = _load(files, REGISTRY)
     suites = {s["id"]: s for s in registry["suites"]}
     retired = set(plan["retire_suites"])
@@ -148,7 +168,10 @@ def revise_evidence(
     declarations = {p: _load(files, p) for p in impact_registry["declaration_sources"]}
     for doc in declarations.values():
         doc["relationships"] = [
-            r for r in doc["relationships"] if r["consumer"] not in removed_nodes
+            r for r in doc["relationships"]
+            if r["consumer"] not in removed_nodes
+            and r["source"] not in unregistered
+            and r["consumer"] not in unregistered
         ]
         for r in doc["relationships"]:
             if r["evidence_owner"].removeprefix("suite:") in retired:
@@ -217,7 +240,13 @@ def revise_evidence(
         result[CATALOG] = _dump(catalog)
     for path, doc in declarations.items():
         if doc != _load(files, path):
-            result[path] = _dump(doc)
+            if not doc["relationships"]:
+                result.pop(path)
+                impact_registry["declaration_sources"].remove(path)
+            else:
+                result[path] = _dump(doc)
+    if impact_registry != _load(files, IMPACT):
+        result[IMPACT] = _dump(impact_registry)
 
     # Keep the unrelated evidence-owner precondition valid in retained graph
     # compiler fixtures. Intentional malformed owners/consumers remain unchanged.
@@ -240,32 +269,39 @@ def revise_evidence(
             result[path] = _dump(doc)
 
     if plan["prune_stale_certificates"]:
-        registry = _load(files, ATTESTATIONS)
-        kept = []
-        for path in registry["sources"]:
-            doc = _load(files, path)
-            claims = [
-                c
-                for c in doc["attestations"]
-                if c["requirement_id"] in current_requirements
-            ]
-            if claims:
-                kept.append(path)
-                if claims != doc["attestations"]:
-                    doc["attestations"] = claims
-                    result[path] = _dump(doc)
-            else:
-                result.pop(path)
-        registry["sources"] = kept
-        kept = []
-        for path in registry.get("engine_sources", []):
-            receipt = json.loads(files[path])
-            if receipt["claim"]["requirement_id"] in current_requirements:
-                kept.append(path)
-            else:
-                result.pop(path)
-        if "engine_sources" in registry:
-            registry["engine_sources"] = kept
-        if registry != _load(files, ATTESTATIONS):
-            result[ATTESTATIONS] = _dump(registry)
+        result = prune_certificates(result, current_requirements)
+    return result
+
+
+def prune_certificates(files: Mapping[str, bytes], current_requirements: set[str]) -> dict[str, bytes]:
+    """Keep only claims whose requirement survives the complete maintenance."""
+    result = dict(files)
+    registry = _load(files, ATTESTATIONS)
+    kept = []
+    for path in registry["sources"]:
+        doc = _load(files, path)
+        claims = [
+            c
+            for c in doc["attestations"]
+            if c["requirement_id"] in current_requirements
+        ]
+        if claims:
+            kept.append(path)
+            if claims != doc["attestations"]:
+                doc["attestations"] = claims
+                result[path] = _dump(doc)
+        else:
+            result.pop(path)
+    registry["sources"] = kept
+    kept = []
+    for path in registry.get("engine_sources", []):
+        receipt = json.loads(files[path])
+        if receipt["claim"]["requirement_id"] in current_requirements:
+            kept.append(path)
+        else:
+            result.pop(path)
+    if "engine_sources" in registry:
+        registry["engine_sources"] = kept
+    if registry != _load(files, ATTESTATIONS):
+        result[ATTESTATIONS] = _dump(registry)
     return result

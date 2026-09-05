@@ -8,6 +8,7 @@ from tools.standards_engine.standards_engine.evidence_maintenance import (
     ATTESTATIONS,
     CATALOG,
     IMPACT,
+    POLICIES,
     REGISTRY,
     _dump,
     revise_evidence,
@@ -144,6 +145,27 @@ class EvidenceMaintenanceTest(unittest.TestCase):
         self.assertNotIn(path, [r["consumer"] for r in tomllib.loads(result["impact.toml"].decode())["relationships"]])
         self.assertIn(path, original)
 
+    def test_subject_unregistration_preserves_guidance_and_retained_units(self):
+        import tomllib
+
+        original = fixture()
+        original[POLICIES] = _dump({"schema_version": 1, "sources": ["units/retire.toml", "units/keep.toml"]})
+        original["units/retire.toml"] = _dump({"schema_version": 1, "policy_unit": [{"id": "topic.owner.policy"}]})
+        original["units/keep.toml"] = _dump({"schema_version": 1, "policy_unit": [{"id": "topic.other.rule"}]})
+        original["topics/owner.md"] = b"# Useful coding guidance\nKeep the actual guidance.\n"
+        request = {**plan(), "unregister_policy_subjects": ["topic.owner.policy"]}
+        result = revise_evidence(original, request, set())
+        self.assertEqual(result["topics/owner.md"], original["topics/owner.md"])
+        self.assertEqual(result["units/keep.toml"], original["units/keep.toml"])
+        self.assertNotIn("units/retire.toml", result)
+        self.assertNotIn("impact.toml", result)
+        self.assertEqual(tomllib.loads(result[POLICIES].decode())["sources"], ["units/keep.toml"])
+        self.assertEqual(tomllib.loads(result[IMPACT].decode())["declaration_sources"], [])
+        with self.assertRaises(AuthoringError) as caught:
+            revise_evidence(original, {**request, "unregister_policy_subjects": ["typo"]}, set())
+        self.assertEqual(caught.exception.failure.code, "EVIDENCE.UNKNOWN_POLICY")
+        self.assertIn("units/retire.toml", original)
+
     def test_pruning_preserves_current_claims_and_removes_stale_receipts(self):
         import tomllib
 
@@ -223,6 +245,12 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
             _clone_tracked_worktree(repository)
             obsolete = "evaluation/standards-effectiveness/fixtures/obsolete-engine-evidence.md"
             (repository / obsolete).write_text("Historical fixture evidence.\n")
+            import tomllib
+            policy_sources = tomllib.loads((repository / POLICIES).read_text())["sources"]
+            selected_subject = next(
+                u["id"] for path in policy_sources
+                for u in tomllib.loads((repository / path).read_text()).get("policy_unit", [])
+            )
             with StandardsEngine.open_repository(
                 repository,
                 store_path=Path(temporary) / "engine.sqlite3",
@@ -281,6 +309,7 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                         **plan(),
                         "prune_stale_certificates": True,
                         "retire_inputs": [obsolete],
+                        "unregister_policy_subjects": [selected_subject],
                         "replacement_evidence_owner": "review:consumer",
                     },
                     "apply": False,
@@ -290,7 +319,7 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                 self.assertTrue(preview["verification"]["passed"], preview)
                 self.assertFalse(preview["applied"])
                 self.assertTrue(preview["removed_files"])
-                victim = repository / preview["removed_files"][0]
+                victim = repository / obsolete
                 before = victim.read_bytes()
                 victim.write_bytes(before + b"\n# independent edit\n")
                 # Candidate verification already ran; exercise post-verification overlap admission.

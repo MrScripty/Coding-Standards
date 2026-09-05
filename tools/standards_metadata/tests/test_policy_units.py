@@ -95,7 +95,7 @@ class PolicyUnitTest(unittest.TestCase):
         corpus = load_canonical_standards_corpus(REPO_ROOT)
 
         planning = corpus.resolve_module("workflow.planning")
-        admission = corpus.resolve_policy_unit("workflow.planning.plan-admission")
+        admission = corpus.resolve_policy_unit("workflow.planning.written-plan-applicability")
         self.assertIsNotNone(planning)
         self.assertIsNotNone(admission)
         assert planning is not None and admission is not None

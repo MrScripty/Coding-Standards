@@ -59,8 +59,8 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             "prompt",
         )
         edge_id = (
-            "policy-impact:v1/workflow.planning.plan-admission/prompt-projection/"
-            "prompts%2Fimplement-plan.md"
+            "policy-impact:v1/workflow.planning.written-plan-applicability/prompt-projection/"
+            "prompts%2Fplanning.md"
         )
         edge = next(edge for edge in compiled.graph.edges if edge.id == edge_id)
         semantics = compiled.semantics_for(edge_id)

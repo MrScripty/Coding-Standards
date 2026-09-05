@@ -102,7 +102,11 @@ unit tests or certify semantic completeness.
 
 `maintain_evidence` previews or applies explicit retirements of stale claims,
 checks, suites, fixtures, and registered evidence implementations. It can revise
-evidence descriptions and consumer registrations. It binds an expected Git
+evidence descriptions and consumer registrations. Optional
+`unregister_policy_subjects` removes selected review subjects and their incident
+policy relationships while preserving the standards text, module routes, and
+ordinary review obligations. Certificates are pruned against the resulting
+requirements. It binds an expected Git
 revision and actual review evidence, verifies a candidate, and refuses to
 replace independently edited working-tree files. Commit its resulting files
 with the maintenance review. It neither edits normative policy nor issues a

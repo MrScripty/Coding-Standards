@@ -76,8 +76,8 @@ from tools.standards_snapshots.standards_snapshots import (
 REPO_ROOT = Path(__file__).resolve().parents[3]
 POLICY = "workflow.planning.written-plan-applicability"
 WRITTEN_PLAN_TITLE = "When A Written Plan Is Required"
-ARTIFACT_MODEL_POLICY = "workflow.planning.artifact-model"
-ARTIFACT_MODEL_TITLE = "Artifact Model"
+PROJECTION_POLICY = "workflow.planning.projection-completeness"
+PROJECTION_TITLE = "Policy Projection Completeness"
 
 
 def _reference(identifier: str) -> EvidenceReference:
@@ -914,9 +914,9 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     "kind": "revise-proposal",
                     "expected_revision": created.revision.as_contract(),
                     "change_set": _policy_change_set(
-                        policy=ARTIFACT_MODEL_POLICY,
-                        title=ARTIFACT_MODEL_TITLE,
-                        body=_section_body(revised_content, ARTIFACT_MODEL_TITLE),
+                        policy=PROJECTION_POLICY,
+                        title=PROJECTION_TITLE,
+                        body=_section_body(revised_content, PROJECTION_TITLE),
                         accepted_revision=1,
                         proposed_revision=2,
                         purpose="Analyze the immutable successor proposal revision.",
