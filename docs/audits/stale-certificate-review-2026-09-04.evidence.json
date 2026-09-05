@@ -1,0 +1,4385 @@
+{
+  "schema_version": 1,
+  "reviewed_revision": "53e750327c1f8410d3db278eb652e70df52ae118",
+  "snapshot": {
+    "id": "snapshot:v1:a10a7ab2-9e4b-461e-9106-67812fbe80b7",
+    "kind": "snapshot-handle",
+    "schema_version": 5
+  },
+  "scope": "Validity and renewal review of every existing certificate; substantive findings on changed policy, graph and evidence boundaries. Not a completed semantic audit of every implementation consumer.",
+  "counts": {
+    "registered_subjects": 51,
+    "legacy_claims": 51,
+    "current_claims": 0,
+    "moved_subjects": 9,
+    "changed_semantic_revisions": 2,
+    "subjects_with_removed_phrase_checks": 48
+  },
+  "receipt_input_coverage": {
+    "tools/standards_analysis/standards_analysis/coverage_publication.py": [
+      {
+        "subject": "topic.dependencies.requirement-and-ownership",
+        "direct": false,
+        "via_suites": [
+          "a1c-public-cutover"
+        ]
+      }
+    ],
+    "tools/standards_engine/tests/test_coverage_publication.py": []
+  },
+  "legacy_evidence_inventory": [
+    {
+      "path": "docs/archive/documentation-cleanup.md",
+      "exists": true,
+      "observed_digest": "sha256:bdf82d21f80bb1cd1a5e3225f2d8c1bf145e846f97ae16bf0459b156307aa9eb"
+    },
+    {
+      "path": "docs/archive/plans/contract-authority-scope/reports/authority-scope-impact-review.md",
+      "exists": true,
+      "observed_digest": "sha256:ece84246a728dad52f7d9ae12ad7bb6f32ff4c9e25e743ec7a15adfb876106e7"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-a1b/reports/a1b-authority-closure-audit.md",
+      "exists": true,
+      "observed_digest": "sha256:2a2d4b3f6c430333312defe08ba8a14d387b30ad45211a0b453195bc0de3e1e2"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-a1b/reports/a1b-consumer-dispositions.md",
+      "exists": true,
+      "observed_digest": "sha256:ce653133c94a8e04bcea2855f9a48ccd0c80c58840b5418bd6bfc9aa9d338c35"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-a1b/reports/a1b-contract-profile-audit.md",
+      "exists": true,
+      "observed_digest": "sha256:8d79eb07eed874a38293cb3108b3476138db35c0eb64fe9b70638a65d4361d31"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-a1b/reports/serial-plan-commit-boundary-guardrail.md",
+      "exists": true,
+      "observed_digest": "sha256:8f4c49b775777aa4a29702c6d175cf98c0ca57953910add3fd14ef327210e65a"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-a1c-repair/reports/seven-subject-current-standards-audit.md",
+      "exists": true,
+      "observed_digest": "sha256:6176bd0885bd70ed4202cf2a149ff709e4915552854d000b00ddfee6de562cad"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-a1c/reports/a1c-cutover-evidence.md",
+      "exists": true,
+      "observed_digest": "sha256:81b9db8714a480f951dc22c55a46219004c29611fd950673a3b3c25737da8c49"
+    },
+    {
+      "path": "docs/archive/plans/standards-engine-policy-impact-authority-v2/reports/certify-recovered-coverage.md",
+      "exists": true,
+      "observed_digest": "sha256:483857a22a50ad2e9a5a110e7bda8e10415d42ae90f90430bc08a1361c71e3ce"
+    },
+    {
+      "path": "docs/archive/plans/standards-simplicity-and-evidence-proportionality/reports/milestone-1-composed-simplicity-acceptance.md",
+      "exists": true,
+      "observed_digest": "sha256:e5653b25dd27772402448915f1e8eae741cfe5187aac0f11946ff67fb0e70bd6"
+    },
+    {
+      "path": "docs/archive/plans/standards-verification-engine/reports/m6-i73-event-delivery-admission.md",
+      "exists": true,
+      "observed_digest": "sha256:80fd22df2ff1be8b9e4af0207dfcd66f44cee60a570e166a626a2a9ba3a597d1"
+    },
+    {
+      "path": "docs/archive/plans/standards-verification-engine/reports/m6-i74-baseline-heading-admission.md",
+      "exists": true,
+      "observed_digest": "sha256:f172922b327b7866b81660eaf2d5c89dcbef8a74807ec92fb6fa47d8ab67e65a"
+    },
+    {
+      "path": "docs/archive/plans/standards-verification-engine/reports/m6-i75-decision-traceability-admission.md",
+      "exists": true,
+      "observed_digest": "sha256:28fef8709f4a214eda6c5f5f62f3ef6b5df98f36eda5c798ed73c2cd1a2d3fb2"
+    },
+    {
+      "path": "docs/archive/plans/standards-verification-engine/reports/m6-i76-rust-security-title-index-admission.md",
+      "exists": true,
+      "observed_digest": "sha256:b4f7c5118ca691ac31e4c5246e7c01ec9fd20a3bb535f660171aec28b4cbafdb"
+    }
+  ],
+  "subjects": [
+    {
+      "subject": "core.simplicity-and-complection",
+      "owner": "topic.code-design",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:64b3c6ed0a1f97c99b7b04d61d468b64d62ce087a36c5f8057548f5b685bc57d",
+      "current_requirement_id": "sha256:d72d99c1b086ef4824db24a1771da6b17e2ab4c76a83ead2b88bcd261dc2443a",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/core.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "core",
+      "evidence_suites": [
+        "core-simplicity"
+      ],
+      "transitive_evidence_suites": [
+        "core-simplicity"
+      ],
+      "relationships": [
+        {
+          "source": "core.simplicity-and-complection",
+          "target": "core-simplicity",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "core.simplicity-and-complection",
+          "target": "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "core.simplicity-and-complection",
+          "target": "topic.architecture",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "core.simplicity-and-complection",
+          "target": "workflow.verification",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 14,
+      "suites_with_removed_phrase_checks": [
+        "core-simplicity"
+      ]
+    },
+    {
+      "subject": "profile.boundary.generated-contract.applicability",
+      "owner": "profile.boundary.generated-contract",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:7c10b71448277ae02fdac6422656a6c668a4b6e450e1331869f25af9858fb78d",
+      "current_requirement_id": "sha256:9636eec055a12f2b8723a1747e6a7eb0497ccbde59ec1413ec40f3884da2cb38",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "profile.boundary.generated-contract",
+      "evidence_suites": [
+        "standards-recovery-routing"
+      ],
+      "transitive_evidence_suites": [
+        "standards-recovery-routing"
+      ],
+      "relationships": [
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "standards-recovery-routing",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "evaluation/standards-effectiveness/router-projection.toml",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.applicability",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 2,
+      "suites_with_removed_phrase_checks": [
+        "standards-recovery-routing"
+      ]
+    },
+    {
+      "subject": "profile.boundary.generated-contract.semantic-closure",
+      "owner": "profile.boundary.generated-contract",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:e7d4c0de730553cccc7554c081145dca14841448afacedf88e4ee1423daf887b",
+      "current_requirement_id": "sha256:dfc63c49bd2b4658a01e57c91b61c48541dc758f1187d1e41fcb4ba866a8a1f8",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/profile.boundary.generated-contract.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "profile.boundary.generated-contract",
+      "evidence_suites": [
+        "contract-authority-scope",
+        "evidence-oracle-boundaries",
+        "generated-contract-semantic-conformance",
+        "implementation-versus-dependency"
+      ],
+      "transitive_evidence_suites": [
+        "contract-authority-scope",
+        "evidence-oracle-boundaries",
+        "generated-contract-semantic-conformance",
+        "implementation-versus-dependency"
+      ],
+      "relationships": [
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "contract-authority-scope",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "generated-contract-semantic-conformance",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_engine/contracts/examples/a1-examples.json",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_contracts/standards_contracts/compiler.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_contracts/standards_contracts/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_engine/contracts/a1-contract.schema.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_engine/contracts/a1-interface.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_engine/contracts/generated/agent-tools.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_engine/standards_engine/_generated_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "tools/standards_engine/standards_engine/tools.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "topic.contracts",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "topic.dependencies",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "workflow.build",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "profile.boundary.generated-contract.semantic-closure",
+          "target": "workflow.verification",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 19,
+      "suites_with_removed_phrase_checks": [
+        "contract-authority-scope",
+        "evidence-oracle-boundaries",
+        "generated-contract-semantic-conformance",
+        "implementation-versus-dependency"
+      ]
+    },
+    {
+      "subject": "router.generated-contract-profile-applicability",
+      "owner": "router",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:1fcfaf8b9fdf5d3f56f27918d7362a34f76ec7e1bec991089948fe397476cdba",
+      "current_requirement_id": "sha256:bc9f6c17a8d94964975ff6522de4a5416a49167271f46fefa444b37126dee932",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/router.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "router",
+      "evidence_suites": [
+        "standards-recovery-routing"
+      ],
+      "transitive_evidence_suites": [
+        "standards-recovery-routing"
+      ],
+      "relationships": [
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "standards-recovery-routing",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "router.generated-contract-profile-applicability",
+          "target": "evaluation/standards-effectiveness/router-projection.toml",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 2,
+      "suites_with_removed_phrase_checks": [
+        "standards-recovery-routing"
+      ]
+    },
+    {
+      "subject": "topic.architecture.authority-scope-admission",
+      "owner": "topic.architecture",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:5dee69f83ff164fdebfca1db9c3ebcee6090c978e2ac6cae84a8433452e911af",
+      "current_requirement_id": "sha256:89fce3647a928adeab3f89695d2c68ba885fe7799a389ecb5f4349fff682aa05",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.architecture",
+      "evidence_suites": [
+        "contract-authority-scope"
+      ],
+      "transitive_evidence_suites": [
+        "contract-authority-scope"
+      ],
+      "relationships": [
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "contract-authority-scope",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "evaluation/standards-effectiveness/fixtures/architecture/authority-scope-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "tools/standards_engine/contracts/a1-contract.schema.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "profile.application.library",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "profile.boundary.language-bindings",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "workflow.build",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.authority-scope-admission",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 8,
+      "suites_with_removed_phrase_checks": [
+        "contract-authority-scope"
+      ]
+    },
+    {
+      "subject": "topic.architecture.composed-design-admission",
+      "owner": "topic.architecture",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:1d0fb5af699fda0da64bd0b48724a924267f43895daa658604bdc5700a10352c",
+      "current_requirement_id": "sha256:ba8a287d07d96256c94e4c44e71a272df52e5ddf9cf9145f6ae838f8b9c73359",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.architecture",
+      "evidence_suites": [
+        "core-simplicity",
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "core-simplicity",
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "core-simplicity",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "plan-template-projection",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "profile.application.library",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "prompts/full-codebase-standards-refactor.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.composed-design-admission",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 21,
+      "suites_with_removed_phrase_checks": [
+        "core-simplicity",
+        "plan-template-projection",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "topic.architecture.immutable-authority-closure",
+      "owner": "topic.architecture.replay",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:b3102c3d284b66e590851cb169e3c04effb67c6933c3a958f3420d58e6a0060b",
+      "current_requirement_id": "sha256:be6b1180f97db6cca6112db7db7b9a73be5e82e38d7509243ebf2f01391d73fc",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.architecture.toml",
+      "semantic_revision": 3,
+      "previous_semantic_revision": 2,
+      "previous_owner": "topic.architecture",
+      "evidence_suites": [
+        "a1c-aggregate-replay",
+        "a1c-snapshot-lifecycle",
+        "contract-authority-scope"
+      ],
+      "transitive_evidence_suites": [
+        "a1c-aggregate-replay",
+        "a1c-snapshot-lifecycle",
+        "contract-authority-scope"
+      ],
+      "relationships": [
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "a1c-aggregate-replay",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "a1c-snapshot-lifecycle",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "contract-authority-scope",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "evaluation/standards-effectiveness/fixtures/architecture/immutable-authority-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_engine/tests/test_analysis.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_verifier/tests/test_policy_impact.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/graph_engine/graph_engine/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/graph_engine/graph_engine/registry.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/repository_git/repository_git/model.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_analysis/standards_analysis/coverage.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_analysis/standards_analysis/kernel.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_analysis/standards_analysis/state.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_analysis/standards_analysis/trust.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_engine/standards_engine/_generated_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_engine/standards_engine/engine.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_graph/standards_graph/repository.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_metadata/standards_metadata/source.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_metadata/standards_metadata/suite_inputs.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_policy_impact/standards_policy_impact/compiler.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_snapshots/standards_snapshots/errors.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_snapshots/standards_snapshots/model.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_snapshots/standards_snapshots/module.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_snapshots/standards_snapshots/store.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "tools/standards_verifier/standards_verifier/policy_impact.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "profile.boundary.persistence",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "topic.contracts",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "topic.resilience",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "topic.security",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.architecture.immutable-authority-closure",
+          "target": "workflow.verification",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Policy meaning changed: the legacy unchanged-meaning rationale cannot decide the new semantic revision.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed.",
+        "F1: receipt implementation and its integration test are outside this subject's declared input closure."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 9,
+      "suites_with_removed_phrase_checks": [
+        "a1c-aggregate-replay",
+        "contract-authority-scope"
+      ]
+    },
+    {
+      "subject": "topic.contracts.declaration-and-semantic-authority",
+      "owner": "topic.contracts.schemas",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:83768befd4c83634d7cce4df1ee6a261865945217b9af6d7346a689468b229cf",
+      "current_requirement_id": "sha256:d681c9f0e919c8507594f55cd3a3f4365bb5a3b3f350e3f1ca8c1c88d17801c7",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "a1c-aggregate-replay",
+        "contract-authority-scope"
+      ],
+      "transitive_evidence_suites": [
+        "a1c-aggregate-replay",
+        "a1c-snapshot-lifecycle",
+        "contract-authority-scope"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "contract-authority-scope",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/declaration-authority-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_analysis/tests/test_coverage.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_analysis/standards_analysis/coverage.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_contracts/standards_contracts/compiler.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_contracts/standards_contracts/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_engine/contracts/a1-contract.schema.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_engine/standards_engine/_generated_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "tools/standards_engine/standards_engine/tools.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "profile.boundary.ipc",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "profile.boundary.language-bindings",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "workflow.build",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.declaration-and-semantic-authority",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 9,
+      "suites_with_removed_phrase_checks": [
+        "a1c-aggregate-replay",
+        "contract-authority-scope"
+      ]
+    },
+    {
+      "subject": "topic.contracts.generated-semantic-conformance",
+      "owner": "topic.contracts.schemas",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:5913b483f495fef9c910ac348ead730755838caf699f9768c2672f44ff471f23",
+      "current_requirement_id": "sha256:3543f3085e65454805d37a91b7b6e37726ff12520563cf714808fae491d6522b",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "generated-contract-semantic-conformance"
+      ],
+      "transitive_evidence_suites": [
+        "generated-contract-semantic-conformance"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/contracts/README.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "generated-contract-semantic-conformance",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/contracts/examples/a1-examples.json",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_contracts/standards_contracts/compiler.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_contracts/standards_contracts/errors.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_contracts/standards_contracts/model.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_contracts/standards_contracts/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/contracts/a1-interface.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/contracts/generated/agent-tools.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/standards_engine/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/standards_engine/_generated_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/standards_engine/rendering.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_engine/standards_engine/tools.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "tools/standards_verifier/standards_verifier/checks/contract_projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "workflow.build",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "workflow.tooling",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.generated-semantic-conformance",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 4,
+      "suites_with_removed_phrase_checks": [
+        "generated-contract-semantic-conformance"
+      ]
+    },
+    {
+      "subject": "topic.contracts.identity-versus-instance-equality",
+      "owner": "topic.contracts",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:5e47f466665ba8a7b2440dca2467ca77860a117172c31934ac6d91aa7ee59c01",
+      "current_requirement_id": "sha256:47e1280a73a0bc5a0f83ee3d310e8a6209fb21bd341182cf1e2531c04483c6d2",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "generated-contract-semantic-conformance"
+      ],
+      "transitive_evidence_suites": [
+        "generated-contract-semantic-conformance"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_identity/README.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "generated-contract-semantic-conformance",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_engine/contracts/identity-fixtures.json",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_analysis/standards_analysis/coverage.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_analysis/standards_analysis/impact.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_analysis/standards_analysis/keys.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_analysis/standards_analysis/obligations.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_analysis/standards_analysis/reading.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_applicability/standards_applicability/core.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_contracts/standards_contracts/runtime.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_engine/standards_engine/_generated_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_identity/standards_identity/encoding.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_identity/standards_identity/errors.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_metadata/standards_metadata/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_metadata/standards_metadata/policy_units.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_metadata/standards_metadata/suite_inputs.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.identity-versus-instance-equality",
+          "target": "tools/standards_snapshots/standards_snapshots/store.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 4,
+      "suites_with_removed_phrase_checks": [
+        "generated-contract-semantic-conformance"
+      ]
+    },
+    {
+      "subject": "topic.contracts.invariant-contracts",
+      "owner": "topic.contracts",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:48ce3cfc1533af1a2bcbe5214289a1a0cde2b19e63df8712e8251595398b8bc6",
+      "current_requirement_id": "sha256:3445ae829e1c980e29ab9afe27c547d9f4771e58dc2e7a1530e889fc53a0c20e",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "contract-invariants"
+      ],
+      "transitive_evidence_suites": [
+        "contract-invariants"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "contract-invariants",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "profile.boundary.ipc",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "profile.boundary.language-bindings",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "profile.boundary.persistence",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "topic.diagnostics",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "topic.resilience",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "topic.security",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.invariant-contracts",
+          "target": "workflow.verification",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 3,
+      "suites_with_removed_phrase_checks": [
+        "contract-invariants"
+      ]
+    },
+    {
+      "subject": "topic.contracts.schema-dialect-and-vocabulary",
+      "owner": "topic.contracts.schemas",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:359bfb67c80a55989b1cd59f44ff9a41100e31268f79b0e3b6641afc7771a497",
+      "current_requirement_id": "sha256:a0ea4a443e212935b24e274908a9ca019dcd9245fdd50d4ce734d2ff2f0a9502",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "generated-contract-semantic-conformance",
+        "implementation-versus-dependency"
+      ],
+      "transitive_evidence_suites": [
+        "generated-contract-semantic-conformance",
+        "implementation-versus-dependency"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "generated-contract-semantic-conformance",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "tools/standards_contracts/standards_contracts/compiler.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "tools/standards_contracts/standards_contracts/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "tools/standards_engine/contracts/a1-contract.schema.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.schema-dialect-and-vocabulary",
+          "target": "topic.dependencies",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 7,
+      "suites_with_removed_phrase_checks": [
+        "generated-contract-semantic-conformance",
+        "implementation-versus-dependency"
+      ]
+    },
+    {
+      "subject": "topic.contracts.validation-proof-lifetime",
+      "owner": "topic.contracts",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:381bbf65485ca716c3cc61cbd19883e8d98bbae956c1600634c33dd6667bc638",
+      "current_requirement_id": "sha256:5aa210807b93e81aefe092aae2a0699c3fe44e73f8eba45d61f829ea395135d4",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "contract-invariants"
+      ],
+      "transitive_evidence_suites": [
+        "contract-invariants"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "contract-invariants",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/validation-proof-lifetime-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "profile.boundary.ipc",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "profile.boundary.language-bindings",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "profile.boundary.persistence",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "topic.resilience",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "topic.security",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.validation-proof-lifetime",
+          "target": "workflow.verification",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 3,
+      "suites_with_removed_phrase_checks": [
+        "contract-invariants"
+      ]
+    },
+    {
+      "subject": "topic.contracts.version-scope-and-invalidation",
+      "owner": "topic.contracts.schemas",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:24f33789b72eae0ae1dd8d35b1066eaf86abf57d15cc4a20cbd4e1764d2b62ba",
+      "current_requirement_id": "sha256:9876b701bf2fd982880a4f18c1da92966fe3f0c9099473db6395d0b3c41c9aef",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.contracts.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "topic.contracts",
+      "evidence_suites": [
+        "contract-authority-scope"
+      ],
+      "transitive_evidence_suites": [
+        "contract-authority-scope"
+      ],
+      "relationships": [
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "contract-authority-scope",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/version-scope-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "tools/standards_analysis/standards_analysis/kernel.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "tools/standards_contracts/standards_contracts/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "tools/standards_engine/contracts/a1-contract.schema.json",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "tools/standards_engine/standards_engine/_generated_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "tools/standards_engine/standards_engine/tools.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "tools/standards_snapshots/standards_snapshots/model.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "profile.application.library",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "profile.boundary.ipc",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "profile.boundary.language-bindings",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "profile.boundary.persistence",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "workflow.release",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.contracts.version-scope-and-invalidation",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 8,
+      "suites_with_removed_phrase_checks": [
+        "contract-authority-scope"
+      ]
+    },
+    {
+      "subject": "topic.cross-platform.filesystem-paths",
+      "owner": "topic.cross-platform",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:82ea90c0fb63701462655b8722eb5d2d5f0a49524631f2a1af7a800188c9b9b1",
+      "current_requirement_id": "sha256:38b9b24f574884ca16861e439362e88dfd2c04007333a49d8313afc0b7c2b807",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.cross-platform.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.cross-platform",
+      "evidence_suites": [
+        "a1c-snapshot-lifecycle"
+      ],
+      "transitive_evidence_suites": [
+        "a1c-snapshot-lifecycle"
+      ],
+      "relationships": [
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "tools/standards_snapshots/README.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "a1c-snapshot-lifecycle",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "evaluation/standards-effectiveness/fixtures/architecture/a1c-snapshots/snapshot-lifecycle-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "tools/standards_snapshots/tests/test_store.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "tools/repository_git/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "tools/repository_git/repository_git/repository.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.cross-platform.filesystem-paths",
+          "target": "tools/standards_snapshots/standards_snapshots/store.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 0,
+      "suites_with_removed_phrase_checks": []
+    },
+    {
+      "subject": "topic.dependencies.implementation-versus-dependency",
+      "owner": "topic.dependencies",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:e30c9aac47279ce61d3e74534742eeb0185ee671690f5ffa90b31b45aa7435e9",
+      "current_requirement_id": "sha256:1c6d21efdd7af68cfd30edc35b7b6689e4e10f425290ded13b1691ed616feefc",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "topic.dependencies",
+      "evidence_suites": [
+        "implementation-versus-dependency"
+      ],
+      "transitive_evidence_suites": [
+        "implementation-versus-dependency"
+      ],
+      "relationships": [
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "implementation-versus-dependency",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "evaluation/standards-effectiveness/fixtures/dependencies/implementation-versus-dependency-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.implementation-versus-dependency",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 3,
+      "suites_with_removed_phrase_checks": [
+        "implementation-versus-dependency"
+      ]
+    },
+    {
+      "subject": "topic.dependencies.requirement-and-ownership",
+      "owner": "topic.dependencies",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:1821dd613f49329493bbc49f796701798a3c5c0dc1eeb0ffd5c1b1c2d9c65dcd",
+      "current_requirement_id": "sha256:97dccde5d5dc297adb0a0bb3bfe03431ac4f81f609bf92c90cdc22e61f852e1a",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.dependencies.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.dependencies",
+      "evidence_suites": [
+        "a1c-public-cutover"
+      ],
+      "transitive_evidence_suites": [
+        "a1c-aggregate-replay",
+        "a1c-public-cutover",
+        "a1c-snapshot-lifecycle",
+        "generated-contract-semantic-conformance"
+      ],
+      "relationships": [
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "a1c-public-cutover",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/a1c/python-package-imports.toml",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/tests/test_python_package_contract.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/graph_engine/graph_engine/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/graph_engine/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/query_edges.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/repository_git/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/repository_git/repository_git/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/repository_git/repository_git/errors.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/repository_git/repository_git/repository.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_analysis/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_analysis/standards_analysis/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_analysis/standards_analysis/routing.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_applicability/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_applicability/standards_applicability/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_contracts/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_contracts/standards_contracts/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_contracts/standards_contracts/projection.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_engine/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_engine/standards_engine/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_graph/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_graph/standards_graph/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_identity/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_identity/standards_identity/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_metadata/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_metadata/standards_metadata/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_metadata/standards_metadata/corpus.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_metadata/standards_metadata/loader.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_metadata/standards_metadata/suite_inputs.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_policy_impact/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_policy_impact/standards_policy_impact/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_snapshots/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_snapshots/standards_snapshots/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/pyproject.toml",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/__init__.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/decision.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/derived_evidence.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/exact_text.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/git_index_paths.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/inclusion.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/keyed_relation.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/line_budget.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/markdown_headings.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/markdown_link_coverage.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/markdown_links.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/markdown_section_text.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/markdown_structure.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/metadata.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/metadata_route.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/path_state.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/policy_impact.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/python_package_contract.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/reference_inventory.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/relation.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/table.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/checks/text.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/entrypoints.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/git_reachability.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/model.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/policy_impact.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/python_packages.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/repository_graph.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/standards_verifier/suite_inputs.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/standards_verifier/verify.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.dependencies.requirement-and-ownership",
+          "target": "tools/verify_git_reachability.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 5,
+      "suites_with_removed_phrase_checks": [
+        "a1c-aggregate-replay",
+        "generated-contract-semantic-conformance"
+      ]
+    },
+    {
+      "subject": "topic.security.filesystem-containment",
+      "owner": "topic.security",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:404b83308728327610a9d672a5f24f85848cc7465451be7f493bfdc5f04b7e7e",
+      "current_requirement_id": "sha256:4ca7319d35786a71b9e5f9a1d462e30bd07a7e899c84f788f7ded0417a9b154f",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/topic.security.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "topic.security",
+      "evidence_suites": [
+        "a1c-snapshot-lifecycle"
+      ],
+      "transitive_evidence_suites": [
+        "a1c-snapshot-lifecycle"
+      ],
+      "relationships": [
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "a1c-snapshot-lifecycle",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "evaluation/standards-effectiveness/fixtures/architecture/a1c-snapshots/snapshot-lifecycle-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "tools/repository_git/tests/test_repository.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "tools/standards_snapshots/tests/test_module.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "tools/standards_snapshots/tests/test_store.py",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "tools/repository_git/repository_git/repository.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "tools/standards_snapshots/standards_snapshots/module.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "topic.security.filesystem-containment",
+          "target": "tools/standards_snapshots/standards_snapshots/store.py",
+          "relation": "implementation-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 0,
+      "suites_with_removed_phrase_checks": []
+    },
+    {
+      "subject": "workflow.commit.branch-context",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:f47f2e66a362ed05beaa3017b1341407700f74ad2291b98d080c7585579f34cf",
+      "current_requirement_id": "sha256:04c146428e6078cf04d7a1996120d50694fda42b232bdf856bddd8fcad07df14",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.branch-context",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.branch-context",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.branch-context",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.branch-history-review",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:4fdff10fa78d13754a7718d9f231a02bbb048e61cdf08fd98d678810c5dfd068",
+      "current_requirement_id": "sha256:27edbb85be53ac1544ffb60cf69c66a90d20567c01688f088e9e79de6303f3c6",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.branch-history-review",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.branch-history-review",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.branch-history-review",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.cherry-pick-lineage",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:59f19203a06e77f32441d05f098eb4b1122cfa52d476a21265110a00ff021488",
+      "current_requirement_id": "sha256:844aa90c0abe6b92168f82dbe30f28057aef9c927bf25d51bd367370fab2293c",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.cherry-pick-lineage",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.cherry-pick-lineage",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.cherry-pick-lineage",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.cherry-pick-lineage",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 23,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission"
+      ]
+    },
+    {
+      "subject": "workflow.commit.commit-message",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:10c122b1eaa52e6cd7a9c681d8acb9dfec7c39f500a403ce37c19832635f278d",
+      "current_requirement_id": "sha256:5320cf311561b3dd106758b64c8d6e44b482641d49c0e98a88aaf386291efa0b",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.commit-message",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.hook-bypass-authority",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:418d1d1e014009acb47aadda8aca2715e964b3dc2062afc98dad909c70bd7869",
+      "current_requirement_id": "sha256:e1a904bfa2f0983e575f426628da575848a0b985f0e83b9a6a5f95739d214456",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.hook-bypass-authority",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.hook-bypass-authority",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.hook-bypass-authority",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.integration-mechanisms",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:9f9e8bd70cbad09463eee519b11b5be82080c2bf4e2921451b59f69dc4d919b6",
+      "current_requirement_id": "sha256:b0ce20fbb9a809d744cb43c9f67d3c9ea03c1f5cbe4f13727717ae4bedf022e1",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "reference.recipes.commits",
+          "relation": "reference-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.integration-mechanisms",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 23,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission"
+      ]
+    },
+    {
+      "subject": "workflow.commit.invalid-outcomes",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:4a083d4e1b24d061b074ae136c1020959ded4208c1bbadfa78dd1d80dca69424",
+      "current_requirement_id": "sha256:b26c12223bc3d72bd0dd42fbbc14fd232558870f98b8d847b5bc71da49dd3f70",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.invalid-outcomes",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.isolation-applicability",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:b6f33a25611dfa471afc2a7f99527a1590677f96fc17e83f5114d62d96b38955",
+      "current_requirement_id": "sha256:dccfbeb19b2a77ff556da72c0379d206c801c7cfa5228d9d9cc2e6be3dee2c60",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.isolation-applicability",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.per-commit-boundary",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:0cdd6e70015c5d00caf0f17b390e220339404156ee920264fa2952e0baa3ea7b",
+      "current_requirement_id": "sha256:0f310f365c5f315a22e8946b761e887986b4ca030f2f09341ef8873ab47d629c",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/authority.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "reference.recipes.commits",
+          "relation": "reference-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.per-commit-boundary",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 20,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.commit.rewrite-authority",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:02608720089e81b398632e423d2a5b47b678f72b6b4477a3e572d55d48a531f3",
+      "current_requirement_id": "sha256:5f708cfc09a2e16fd07364716233274500a9a1df763a7179a24ccfb347f79d1a",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.rewrite-authority",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.rewrite-authority",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/authority.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.rewrite-authority",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.terminal-branch-lifecycle",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:1d1f1f13e0c82b3b711d3055fefa3885e896a42bc80c689118ae5311bc78c439",
+      "current_requirement_id": "sha256:d4c464873d70bcfba23d931251e077e4f5f57a7ba443115183fd67c885fd7660",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "release-maintenance-policy"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission",
+        "release-maintenance-policy",
+        "release-reference-closure"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "workflow.release",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.terminal-branch-lifecycle",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 28,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission",
+        "release-maintenance-policy",
+        "release-reference-closure"
+      ]
+    },
+    {
+      "subject": "workflow.commit.topology",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:b8617b7237c035bc869dff123a3a6b3e57cf2a336b5ef25346a804eecee3829f",
+      "current_requirement_id": "sha256:95ce2cf59080100956db0893fd151e224d2b2896b6730333b72ae66eb0c3653b",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.topology",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions"
+      ]
+    },
+    {
+      "subject": "workflow.commit.worktree-lifecycle",
+      "owner": "workflow.commit",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:413e3de281b31083024dc37333bf053e391fba5771a784ac142ac2dcfc4b34be",
+      "current_requirement_id": "sha256:676483432ccc1de31e736ca08376d1894d2205c7900882c8b47811436bbc10c1",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.commit",
+      "evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration"
+      ],
+      "transitive_evidence_suites": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "evaluation/standards-effectiveness/verification-guide.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "commit-consolidation-dispositions",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "reference.recipes.commits",
+          "relation": "reference-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.commit.worktree-lifecycle",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 23,
+      "suites_with_removed_phrase_checks": [
+        "commit-consolidation-dispositions",
+        "concurrent-plan-integration",
+        "planning-admission"
+      ]
+    },
+    {
+      "subject": "workflow.planning.acceptance-claims",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:db82231750443c583a9921748390832023cf01eca1b1123dd6de07f98fcf3cb0",
+      "current_requirement_id": "sha256:cd893e15032fc25fa2d5a7ccc5d171ca76f0a57e85ac8083ba574f065fd7dcae",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "planning-admission",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "planning-admission",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.acceptance-claims",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.acceptance-claims",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 6,
+      "suites_with_removed_phrase_checks": [
+        "planning-admission",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.active-plan-fields",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:1a06c53bbb30d9528c374ff93c710124058d75d3779a0afb50f22f540df6e009",
+      "current_requirement_id": "sha256:1cc7cff717fdc1ad4271b05a3868d63354fd2aad535997c790804db93d47ed69",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.active-plan-fields",
+          "target": "plan-template-projection",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.active-plan-fields",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.active-plan-fields",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.active-plan-fields",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.active-plan-fields",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.active-plan-fields",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 7,
+      "suites_with_removed_phrase_checks": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.artifact-model",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:59fed90b9dd161ba9a9736e9862956c13eaa97c206325e8899caaca0dc9735b9",
+      "current_requirement_id": "sha256:adb1d1a9eb1e76cd0e35315f487106b92f86f461304aa907700710759935e734",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.artifact-model",
+          "target": "plan-template-projection",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.artifact-model",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.artifact-model",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.artifact-model",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.artifact-model",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.artifact-model",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 7,
+      "suites_with_removed_phrase_checks": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.completion",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:58322e0dfcfd0df357b5bee292911bcdc485585fe8fb22d63f7a915308823f1d",
+      "current_requirement_id": "sha256:da9ab800c2e43eb84aa7d48a63b1720a4fbd8bd66d306ead2c3ba7ca66269e48",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.completion",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.completion",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 4,
+      "suites_with_removed_phrase_checks": [
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.concurrent-integration-routing",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:0f859192c2552ea7e64eefcd3f768b026efecee5b09d8e464d87b2afe17b0f7f",
+      "current_requirement_id": "sha256:217fd569c675bb1e7ad3ee29a883db5aae43441fbf3f3525a44c6e5fe06602bc",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "concurrent-plan-integration",
+        "plan-implementation-entrypoint",
+        "planning-admission",
+        "s1-routing"
+      ],
+      "transitive_evidence_suites": [
+        "concurrent-plan-integration",
+        "plan-implementation-entrypoint",
+        "planning-admission",
+        "s1-routing"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "concurrent-plan-integration",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "s1-routing",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-integration-routing",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 16,
+      "suites_with_removed_phrase_checks": [
+        "concurrent-plan-integration",
+        "plan-implementation-entrypoint",
+        "planning-admission",
+        "s1-routing"
+      ]
+    },
+    {
+      "subject": "workflow.planning.concurrent-work",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:e90686698cf9fa9cb61fe201651cce13e8825ffca7bbfff8c82fa36f83874c49",
+      "current_requirement_id": "sha256:62d607bc563f7d21cee23cf7253735a2f4749b6759b2b323a8267c44da429386",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.concurrent-work",
+          "target": "plan-template-projection",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-work",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-work",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-work",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-work",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.concurrent-work",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 7,
+      "suites_with_removed_phrase_checks": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.current-state",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:d082878bea231939c02172cacfa568ac848b38d3a82c8c069e7dd3cb2f421db0",
+      "current_requirement_id": "sha256:125e893e960ec31f7ca371d9a169bee663d871959a24463e87461c9207175757",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "planning-admission",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "planning-admission",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.current-state",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.current-state",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.current-state",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.current-state",
+          "target": "workflow.commit",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.current-state",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 6,
+      "suites_with_removed_phrase_checks": [
+        "planning-admission",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.findings",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:0b333cb418ba12f7843195cced80e05e9f041dee48be154f50d18303a50ec5ee",
+      "current_requirement_id": "sha256:362088d0a112f8c37dabeb36a1a78562ed66e73cbb8ce22ad86bb2ea07a8c974",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.findings",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.findings",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 4,
+      "suites_with_removed_phrase_checks": [
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.lifecycle",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:012cb2b955bcb6af801d2a235429173c43ae92d48f5466f6a02fdbe64c4db882",
+      "current_requirement_id": "sha256:3c04521b76aef78c16d505c5d70f161da0d423aa46b2d51f16eff85852db8dc9",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "concurrent-plan-integration",
+        "plan-implementation-entrypoint",
+        "planning-admission"
+      ],
+      "transitive_evidence_suites": [
+        "concurrent-plan-integration",
+        "plan-implementation-entrypoint",
+        "planning-admission"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.lifecycle",
+          "target": "plan-implementation-entrypoint",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.lifecycle",
+          "target": "planning-admission",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.lifecycle",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.lifecycle",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.lifecycle",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 8,
+      "suites_with_removed_phrase_checks": [
+        "concurrent-plan-integration",
+        "plan-implementation-entrypoint",
+        "planning-admission"
+      ]
+    },
+    {
+      "subject": "workflow.planning.milestones-and-slices",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:56fee6f7803f916b959b14ee296a575865c61bbbe1fcbce8a6cce6662154f8d6",
+      "current_requirement_id": "sha256:b791335fd9541632da16ee379747fd7ccc7984df796b21be0da62157c6e31645",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "planning-admission",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "planning-admission",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.milestones-and-slices",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.milestones-and-slices",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.milestones-and-slices",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 6,
+      "suites_with_removed_phrase_checks": [
+        "planning-admission",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.plan-admission",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:a20e34de1c78a1f9debe6dfc2945664d5766ecec3963c80c0ea54f66c09e0e0b",
+      "current_requirement_id": "sha256:7edd6b6c4ebcba343d974e796004739282d4f021f119d5566b765a451db56960",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "plan-implementation-entrypoint",
+        "planning-admission"
+      ],
+      "transitive_evidence_suites": [
+        "plan-implementation-entrypoint",
+        "planning-admission"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.plan-admission",
+          "target": "plan-implementation-entrypoint",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.plan-admission",
+          "target": "planning-admission",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.plan-admission",
+          "target": "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.plan-admission",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.plan-admission",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.plan-admission",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 3,
+      "suites_with_removed_phrase_checks": [
+        "plan-implementation-entrypoint",
+        "planning-admission"
+      ]
+    },
+    {
+      "subject": "workflow.planning.projection-completeness",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:d9d15e5d5c2de1c5270a28c238b4b955de8d949349a717e2a4d8c363edb87a22",
+      "current_requirement_id": "sha256:905b8c1802182085030cb8f009cf3ef59a61c8b712bdcd1ae1ed59b5f4aa7414",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "policy-semantic-impact"
+      ],
+      "transitive_evidence_suites": [
+        "policy-semantic-impact"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.projection-completeness",
+          "target": "policy-semantic-impact",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 0,
+      "suites_with_removed_phrase_checks": []
+    },
+    {
+      "subject": "workflow.planning.replanning",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:b197429f4c621a0a3dc0e5db3e645bdc6aed777c5bcd16b3e5a803a50f4b8e2b",
+      "current_requirement_id": "sha256:0ed6e3d96ffa87e9f7ccd419d279f1e91ae26f867c6c79ecff515973ff34c6fc",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "transitive_evidence_suites": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.replanning",
+          "target": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.replanning",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.replanning",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.replanning",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 7,
+      "suites_with_removed_phrase_checks": [
+        "plan-template-projection",
+        "planning-consolidation"
+      ]
+    },
+    {
+      "subject": "workflow.planning.repository-isolation",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:d57d0bcee17f8dc14d0659de2c0879a43a0a96ca5543486efc554862fc4cf3bf",
+      "current_requirement_id": "sha256:ca0ab28b1639e3e052615ff02e517fa69c11919124135818243ef70652e3b39b",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "plan-template-projection"
+      ],
+      "transitive_evidence_suites": [
+        "plan-template-projection"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.repository-isolation",
+          "target": "plan-template-projection",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.repository-isolation",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.repository-isolation",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 3,
+      "suites_with_removed_phrase_checks": [
+        "plan-template-projection"
+      ]
+    },
+    {
+      "subject": "workflow.planning.systemic-finding-replan",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:1326b860b96ad48b90987b4cf5d4369bfc86b11dd9ab31e9c143e2320d91b420",
+      "current_requirement_id": "sha256:9c6604c2373dbb38f07f444ad9fd4b7129fb18488253df015123a22780a50a40",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 2,
+      "previous_semantic_revision": 2,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "systemic-finding-replanning"
+      ],
+      "transitive_evidence_suites": [
+        "systemic-finding-replanning"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "systemic-finding-replanning",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-replan-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "topic.architecture",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "workflow.verification",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.systemic-finding-replan",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 5,
+      "suites_with_removed_phrase_checks": [
+        "systemic-finding-replanning"
+      ]
+    },
+    {
+      "subject": "workflow.planning.written-plan-applicability",
+      "owner": "workflow.planning",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:88b30746c481d37efbf7b72ee04e465b6fb5d6cad2577213c5c07456012b1ec0",
+      "current_requirement_id": "sha256:de64074eed79b017fba03cb60d1b8ac387b2c7c0361de21284c759a416e9ceac",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.planning",
+      "evidence_suites": [
+        "concurrent-plan-integration",
+        "full-review-prompt-entrypoint",
+        "planning-admission",
+        "planning-consolidation",
+        "s1-routing"
+      ],
+      "transitive_evidence_suites": [
+        "concurrent-plan-integration",
+        "full-review-prompt-entrypoint",
+        "planning-admission",
+        "planning-consolidation",
+        "s1-routing"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "full-review-prompt-entrypoint",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "planning-admission",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "s1-routing",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "prompts/full-codebase-standards-refactor.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.planning.written-plan-applicability",
+          "target": "router",
+          "relation": "router-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 20,
+      "suites_with_removed_phrase_checks": [
+        "concurrent-plan-integration",
+        "full-review-prompt-entrypoint",
+        "planning-admission",
+        "planning-consolidation",
+        "s1-routing"
+      ]
+    },
+    {
+      "subject": "workflow.verification.acceptance-claims",
+      "owner": "workflow.verification",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:950d0ab36f6648c9da44c01efc0bb932b1ede63d51f232508a889f066799e592",
+      "current_requirement_id": "sha256:9172da5885fa9bbb6b39bbd733b3431a2e80455b417e75bf720eac7a93913366",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "semantic_revision": 3,
+      "previous_semantic_revision": 2,
+      "previous_owner": "workflow.verification",
+      "evidence_suites": [
+        "acceptance-claims"
+      ],
+      "transitive_evidence_suites": [
+        "acceptance-claims"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "acceptance-claims",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "evaluation/standards-effectiveness/fixtures/verification/evidence-necessity-and-risk-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "profile.boundary.generated-contract",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "profile.boundary.persistence",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "topic.contracts",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "topic.dependencies",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "topic.diagnostics",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "topic.resilience",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "topic.security",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "workflow.documentation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "workflow.implementation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "workflow.planning",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.acceptance-claims",
+          "target": "workflow.release",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy meaning changed: the legacy unchanged-meaning rationale cannot decide the new semantic revision.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 1,
+      "suites_with_removed_phrase_checks": [
+        "acceptance-claims"
+      ]
+    },
+    {
+      "subject": "workflow.verification.differential-evidence",
+      "owner": "workflow.verification.oracles",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:6b756afee3bd7ceed528ba8381df4d789928ed7c3e0630d2affdd5a6a2ae6c4e",
+      "current_requirement_id": "sha256:5a4f6b1dc4e77226f9876e7525a38a82c255e21da90821175ec0be1dc65f115c",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.verification",
+      "evidence_suites": [
+        "generated-contract-semantic-conformance"
+      ],
+      "transitive_evidence_suites": [
+        "generated-contract-semantic-conformance"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.verification.differential-evidence",
+          "target": "docs/archive/plans/standards-engine-standards-recovery/reports/json-schema-instance-equality-reproduction.md",
+          "relation": "documentation-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.differential-evidence",
+          "target": "generated-contract-semantic-conformance",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.differential-evidence",
+          "target": "evaluation/standards-effectiveness/fixtures/contracts/generated-contract-conformance-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 4,
+      "suites_with_removed_phrase_checks": [
+        "generated-contract-semantic-conformance"
+      ]
+    },
+    {
+      "subject": "workflow.verification.evidence-oracle-boundary",
+      "owner": "workflow.verification.oracles",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:b29b84ff2961f9b9e38947511f8b7aa1990a02bd20c66ab5e00687651ac137bd",
+      "current_requirement_id": "sha256:fe5fc20f75d720b660be4e69e3ef6e3ef10e12e76f4b9a6a9c10313144a84add",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.verification",
+      "evidence_suites": [
+        "evidence-oracle-boundaries"
+      ],
+      "transitive_evidence_suites": [
+        "evidence-oracle-boundaries"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.verification.evidence-oracle-boundary",
+          "target": "evidence-oracle-boundaries",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.evidence-oracle-boundary",
+          "target": "evaluation/standards-effectiveness/fixtures/verification/evidence-oracle-decisions.tsv",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.evidence-oracle-boundary",
+          "target": "workflow.documentation",
+          "relation": "normative-consumer",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.evidence-oracle-boundary",
+          "target": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.evidence-oracle-boundary",
+          "target": "prompts/planning.md",
+          "relation": "prompt-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.evidence-oracle-boundary",
+          "target": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed.",
+        "F2/F3: review claim-target discrimination and evidence-owner scope in evidence-oracle-boundaries before renewal."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 4,
+      "suites_with_removed_phrase_checks": [
+        "evidence-oracle-boundaries"
+      ]
+    },
+    {
+      "subject": "workflow.verification.negative-fixture-isolation",
+      "owner": "workflow.verification.oracles",
+      "status": "review-required",
+      "legacy_requirement_id": "sha256:fed579cf56f0b17deea0f140ed1998ee82911236753b0871999d5cc0844603bd",
+      "current_requirement_id": "sha256:17b064c2410fd277677545a5daf94a3eadaba3c664a90132e908b52da362cef8",
+      "legacy_source": "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.verification.toml",
+      "semantic_revision": 1,
+      "previous_semantic_revision": 1,
+      "previous_owner": "workflow.verification",
+      "evidence_suites": [
+        "evidence-oracle-boundaries",
+        "systemic-finding-replanning"
+      ],
+      "transitive_evidence_suites": [
+        "evidence-oracle-boundaries",
+        "systemic-finding-replanning"
+      ],
+      "relationships": [
+        {
+          "source": "workflow.verification.negative-fixture-isolation",
+          "target": "evidence-oracle-boundaries",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.negative-fixture-isolation",
+          "target": "systemic-finding-replanning",
+          "relation": "enforcement-suite-projection",
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification.negative-fixture-isolation",
+          "target": "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md",
+          "relation": "fixture-projection",
+          "direction": "outgoing"
+        }
+      ],
+      "renewal_review": [
+        "Current requirement does not match the stored legacy claim. Reconcile changed consumer/evidence closure before any complete attestation.",
+        "Policy moved: review the new canonical owner and navigation without changing its stable subject ID.",
+        "Selected evidence suites lost phrase assertions; assess remaining structural/decision evidence and record manual review where needed.",
+        "F2/F3: review claim-target discrimination and evidence-owner scope in evidence-oracle-boundaries before renewal."
+      ],
+      "review_conclusion": "Legacy certificate is not current; this review does not authorize a complete replacement claim.",
+      "removed_phrase_check_count": 9,
+      "suites_with_removed_phrase_checks": [
+        "evidence-oracle-boundaries",
+        "systemic-finding-replanning"
+      ]
+    }
+  ],
+  "oracle_decision_probe": [
+    {
+      "input": {
+        "case": "review-probe",
+        "claim": "named",
+        "oracle": "generated-output",
+        "authority_mutation": "detected",
+        "negative_preconditions": "satisfied",
+        "local_agreement": "yes",
+        "external_contract": "none"
+      },
+      "actual": "typed-invalid"
+    },
+    {
+      "input": {
+        "case": "review-probe",
+        "claim": "named",
+        "oracle": "generated-output",
+        "authority_mutation": "detected",
+        "negative_preconditions": "satisfied",
+        "local_agreement": "yes",
+        "external_contract": "selected"
+      },
+      "actual": "typed-invalid"
+    },
+    {
+      "input": {
+        "case": "review-probe",
+        "claim": "named",
+        "oracle": "local-implementation",
+        "authority_mutation": "detected",
+        "negative_preconditions": "satisfied",
+        "local_agreement": "yes",
+        "external_contract": "none"
+      },
+      "actual": "typed-invalid"
+    },
+    {
+      "input": {
+        "case": "review-probe",
+        "claim": "named",
+        "oracle": "local-implementation",
+        "authority_mutation": "detected",
+        "negative_preconditions": "satisfied",
+        "local_agreement": "yes",
+        "external_contract": "selected"
+      },
+      "actual": "typed-invalid"
+    }
+  ],
+  "phrase_check_inventory": {
+    "path": "docs/audits/standards-verification-investigation-2026-09-04.evidence.json",
+    "digest": "sha256:bead54b06399073acd0d1d0730739b7b5ab7f0a26bde53da8edf3ea87d043fe8"
+  },
+  "repository_verification": {
+    "kind": "verify-repository-result",
+    "refreshed_verification_inputs": false,
+    "verification": {
+      "checks": 858,
+      "exit_code": 0,
+      "failures": [],
+      "passed": true,
+      "suites": 271
+    }
+  }
+}
