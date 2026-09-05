@@ -41,5 +41,51 @@
       "passed": true,
       "suites": 73
     }
+  },
+  "committed_engine_readback": {
+    "revision": "eac749147070dd0464c06d78d9f15609b46afc8e",
+    "coverage": {
+      "workflow.planning": {
+        "subjects": [
+          {
+            "subject": "workflow.planning.active-plan-fields",
+            "requirement_id": "sha256:6fbe0d8337d2cdacdbb21002df40816efc6f85b004e8e9b1cf662a6182e9408d",
+            "status": "review-required"
+          },
+          {
+            "subject": "workflow.planning.projection-completeness",
+            "requirement_id": "sha256:8292ab8fe3d8c6056fd7cbf95962e6e43e4ad3e759b4617f1be85126edf0eab4",
+            "status": "review-required"
+          },
+          {
+            "subject": "workflow.planning.written-plan-applicability",
+            "requirement_id": "sha256:900790911d243c2e7c1389476f8a61eb939878e9c90181cc890b73a02a98328a",
+            "status": "review-required"
+          }
+        ]
+      },
+      "workflow.commit": {
+        "subjects": [
+          {
+            "subject": "workflow.commit.commit-message",
+            "requirement_id": "sha256:bb5c7e2cfe1f98a46f29985f53145668f8cadef9a2cd9227bbea6296d5841531",
+            "status": "review-required"
+          },
+          {
+            "subject": "workflow.commit.per-commit-boundary",
+            "requirement_id": "sha256:019ae076be12d4f65a03dc0bac39afd546d4568bdee48d57e50cc9436df849f3",
+            "status": "review-required"
+          },
+          {
+            "subject": "workflow.commit.worktree-lifecycle",
+            "requirement_id": "sha256:8bd84ea013e47be34ffd40772a99e9ff805ffe27b67f4bc36bf0efcf4047efc6",
+            "status": "review-required"
+          }
+        ]
+      },
+      "router": {
+        "subjects": []
+      }
+    }
   }
 }

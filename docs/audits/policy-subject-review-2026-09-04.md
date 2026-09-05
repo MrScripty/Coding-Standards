@@ -52,3 +52,7 @@ Python with the existing standalone-test import-order exception (`E402`), and
 Git whitespace checks pass. This record is historical review evidence, not a
 new executable conformance gate.
 
+Committed public-Interface readback confirms three Planning subjects, three
+Commit subjects, and no separate Router subject. Each retained selection reports
+`review-required`; the cleanup did not manufacture certificates. The exact read
+results are retained in the application-result record.
