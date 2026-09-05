@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 26,
+  "interface_schema_version": 27,
   "examples": [
     {
       "name": "create-snapshot",
@@ -459,6 +459,11 @@
         "direction": "outgoing",
         "transitive": false
       }
+    },
+    {
+      "name": "discover-routing-facts",
+      "definition": "RoutingFactsCall",
+      "value": {}
     }
   ]
 }

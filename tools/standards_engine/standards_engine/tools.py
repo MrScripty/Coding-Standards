@@ -274,6 +274,12 @@ class AgentToolFacade:
             return call
         return self._result("route", self._engine.route(call))
 
+    def routing_facts(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("routing_facts", arguments, generated_contract.RoutingFactsCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("routing_facts", self._engine.routing_facts(call))
+
     def read(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("read", arguments, generated_contract.ReadCall)
         if isinstance(call, dict):

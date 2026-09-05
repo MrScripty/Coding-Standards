@@ -30,6 +30,27 @@ Use `find_snapshots` to resume a known lifecycle. Delete or undelete a snapshot
 only when the user requested that lifecycle change; deletion does not authorize
 standards mutation.
 
+## Explicit Facts And Routing Explanations
+
+Call `routing_facts` to discover fact IDs, aliases, types, allowed values,
+nullability, meaning, and prompts. Reuse its snapshot when routing. Supply a
+`FactValue` for each known fact using the tool schema; enum-set values are arrays,
+boolean values are booleans, and null is valid only for nullable definitions.
+An explicit empty set or `known-absent` is different from an omitted/unknown fact.
+
+Focused `route` returns canonicalized supplied `facts`, `reading_plan` causes,
+selected or unresolved `rules` with their exact expressions, and typed
+`unresolved_questions`. Each question carries its registered `fact` definition.
+A rule expression describes evaluated applicability; it is not a semantic
+explanation invented from policy prose. Required dependency reasons identify
+their exact graph edge and source. Several reasons may select the same standard.
+
+Supply only facts supported by the task. Unknown facts remain unresolved; a
+route with unresolved questions is not proof that the selected set is complete.
+Use returned definitions to request the missing engineering information, then
+route again against the same snapshot. The advanced Router read with
+`include_routing` remains available for explicit rule authoring.
+
 ## Accepted-Snapshot Analysis
 
 Use `prepare` only when comparing two accepted Snapshot handles. Supply the

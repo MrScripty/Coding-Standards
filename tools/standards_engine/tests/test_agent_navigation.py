@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import json
 from pathlib import Path
 import unittest
@@ -34,7 +35,11 @@ class AgentNavigationTest(unittest.TestCase):
             }
         )
         self.assertNotEqual(automatic["snapshot"], self.snapshot)
-        self.assertEqual(automatic, native)
+        self.assertEqual(automatic["reading_plan"], native["reading_plan"])
+        self.assertEqual(
+            [q["id"] for q in automatic["unresolved_questions"]],
+            [q["id"] for q in native["unresolved_questions"]],
+        )
         self.assertTrue(automatic["unresolved_questions"])
         selected = {
             r["target"] for r in automatic["reading_plan"] if r["state"] == "selected"
@@ -74,15 +79,12 @@ class AgentNavigationTest(unittest.TestCase):
                 "profile.language.rust",
             }.issubset({r["target"] for r in result["reading_plan"]})
         )
-        self.assertEqual(
-            result,
-            self.facade.query(
-                {
-                    "snapshot": self.snapshot,
-                    "request": {"kind": "route", "facts": facts},
-                }
-            ),
+        native = self.facade.query(
+            {"snapshot": self.snapshot, "request": {"kind": "route", "facts": facts}}
         )
+        self.assertEqual(result["reading_plan"], native["reading_plan"])
+        self.assertEqual(result["next_operations"], native["next_operations"])
+        self.assertEqual(result["facts"], facts)
 
     def test_supplied_snapshot_never_captures_ambient_authority(self):
         with patch.object(
@@ -152,6 +154,133 @@ class AgentNavigationTest(unittest.TestCase):
             {"snapshot": self.snapshot, **{**request, "groups": ["invented"]}}
         )
         self.assertEqual(invalid["kind"], "rejected-result")
+
+    def test_vocabulary_matches_router_and_questions_are_typed(self):
+        result = self.facade.routing_facts({"snapshot": self.snapshot})
+        router = self.facade.query(
+            {
+                "snapshot": self.snapshot,
+                "request": {
+                    "kind": "read",
+                    "target": "router",
+                    "include_routing": True,
+                },
+            }
+        )
+        self.assertEqual(result["facts"], router["routing"]["facts"])
+        self.assertNotIn("rules", result)
+        unresolved = self.facade.route({"snapshot": self.snapshot, "facts": {}})
+        definitions = {fact["id"]: fact for fact in result["facts"]}
+        for question in unresolved["unresolved_questions"]:
+            self.assertEqual(question["fact"], definitions[question["fact"]["id"]])
+            self.assertNotIn("permitted_answers", question)
+        rules = {rule["id"]: rule for rule in router["routing"]["rules"]}
+        for rule in unresolved["rules"]:
+            self.assertEqual(rule["when"], rules[rule["id"]]["when"])
+            self.assertEqual(rule["state"], "unresolved")
+
+    def test_boolean_nullable_set_facts_aliases_and_multiple_causes(self):
+        from tools.standards_applicability.standards_applicability import (
+            compile_fact_schema,
+        )
+        from tools.standards_analysis.standards_analysis.routing import RouteRule
+
+        compiled = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(contract.SnapshotHandle.from_value(self.snapshot))
+        )
+        declaration = compiled.router.fact_schema.as_declaration()
+        common = declaration["facts"][0]
+        declaration["facts"] = [
+            {
+                **common,
+                "id": "test.enabled",
+                "type": "boolean",
+                "nullable": False,
+                "values": [],
+                "aliases": ["test.on"],
+            },
+            {
+                **common,
+                "id": "test.optional",
+                "type": "string",
+                "nullable": True,
+                "values": [],
+                "aliases": [],
+            },
+            {
+                **common,
+                "id": "test.tags",
+                "type": "enum-set",
+                "nullable": False,
+                "values": ["x", "y"],
+                "aliases": [],
+            },
+        ]
+        schema = compile_fact_schema(declaration)
+        expressions = [
+            {"operator": "equals", "fact": "test.enabled", "value": True},
+            {"operator": "exists", "fact": "test.optional"},
+            {"operator": "contains", "fact": "test.tags", "value": "x"},
+        ]
+        router = replace(
+            compiled.router,
+            facts=schema.definitions,
+            fact_schema=schema,
+            rules=tuple(
+                RouteRule(f"rule.test{i}", "core", schema.compile(expression))
+                for i, expression in enumerate(expressions)
+            ),
+        )
+        with patch.object(
+            self.engine,
+            "_compiled_snapshot",
+            return_value=replace(compiled, router=router),
+        ):
+            missing = self.facade.route({"snapshot": self.snapshot, "facts": {}})
+            self.assertEqual(
+                {q["fact"]["type"] for q in missing["unresolved_questions"]},
+                {"boolean", "string", "enum-set"},
+            )
+            facts = {
+                "test.on": {"type": "boolean", "state": "known", "value": True},
+                "test.optional": {"type": "string", "state": "known", "value": None},
+                "test.tags": {"type": "enum-set", "state": "known", "value": ["x"]},
+            }
+            selected = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+            self.assertEqual(selected["unresolved_questions"], [])
+            self.assertIn("test.enabled", selected["facts"])
+            self.assertNotIn("test.on", selected["facts"])
+            self.assertEqual([r["state"] for r in selected["rules"]], ["selected"] * 3)
+            core = next(r for r in selected["reading_plan"] if r["target"] == "core")
+            self.assertEqual(
+                len([r for r in core["reasons"] if r["kind"] == "routing-rule"]), 3
+            )
+            conflict = self.facade.route(
+                {
+                    "snapshot": self.snapshot,
+                    "facts": {**facts, "test.enabled": facts["test.on"]},
+                }
+            )
+            self.assertEqual(conflict["code"], "APPLICABILITY.INVALID")
+            facts["test.on"]["value"] = False
+            facts["test.tags"]["value"] = []
+            negative = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+            self.assertNotIn("rule.test0", {r["id"] for r in negative["rules"]})
+            self.assertNotIn("rule.test2", {r["id"] for r in negative["rules"]})
+
+    def test_invalid_routing_values_do_not_become_negative_facts(self):
+        for facts in (
+            {"invented": {"type": "boolean", "state": "known", "value": True}},
+            {
+                "routing.languages": {
+                    "type": "enum-set",
+                    "state": "known",
+                    "value": ["invented"],
+                }
+            },
+        ):
+            result = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+            self.assertEqual(result["code"], "APPLICABILITY.INVALID")
 
     def test_capture_rejection_never_advances_to_query(self):
         rejected = contract.RejectedResult.from_value(

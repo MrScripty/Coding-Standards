@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 — discoverable facts and explainable routing
+**Current phase:** Milestone 3 — bound authoring contexts and mechanical continuations
 
-**Next slice:** Expose snapshot-bound routing facts and typed deterministic routing explanations.
+**Next slice:** Implement Engine-validated authoring contexts and state-specific continuation operations.
 
 **Acceptance status:** `partial`
 
@@ -31,7 +31,7 @@ the focused improvements are already delivered.
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | Given known explicit facts, one `route` call without a snapshot captures authority and returns the same selections, required closure, and unresolved conditions as explicit snapshot plus native routing. | `integration` | isolated repository | `automated` | `satisfied` | [Milestone 1 evidence](reports/milestone-1.md) |
 | A2 | Default `read` returns exact policy content and essential authority metadata without the full relationship projection; full detail remains retrievable against the same snapshot. | `integration` | isolated repository | `automated` | `satisfied` | [Milestone 1 evidence](reports/milestone-1.md) |
-| A3 | An agent can discover the registered fact vocabulary and distinguish base selection, matched rules, required dependencies, and unresolved applicability from structured results. | `integration` | isolated repository | `automated` | `pending` | Milestone 2 |
+| A3 | An agent can discover the registered fact vocabulary and distinguish base selection, matched rules, required dependencies, and unresolved applicability from structured results. | `integration` | isolated repository | `automated` | `satisfied` | [Milestone 2 evidence](reports/milestone-2.md) |
 | A4 | One returned workflow context carries the identities needed for subsequent authoring steps and survives process replacement without silently switching proposal revisions. | `integration` | isolated durable repository, separate processes | `automated` | `pending` | Milestone 3 |
 | A5 | Stale, mismatched, forged, or cross-repository contexts and illegal transitions cannot publish or reinterpret accepted content; current authorization remains independently required. | `integration` | isolated durable repository | `automated` | `pending` | Milestone 3 |
 | A6 | Mechanical progression stops at missing facts, evidence, semantic decisions, authorization, rejection, or recovery; application uses the exact accepted readiness and is never automatically retried. | `integration` | isolated repository with controlled failure injection | `automated` | `pending` | Milestone 3 |
@@ -221,26 +221,26 @@ fact semantics require an evidence-backed write-set revision before editing.
 
 **Tasks:**
 
-- [ ] Expose `routing_facts` from current snapshot-bound fact definitions.
+- [x] Expose `routing_facts` from current snapshot-bound fact definitions.
   Separate consumer vocabulary discovery from authoring rule inspection.
-- [ ] Project existing base, rule, and dependency causes in a compact structured
+- [x] Project existing base, rule, and dependency causes in a compact structured
   form. Retain all applicable causes when several rules select one standard.
-- [ ] Bind explanations to the supplied facts and same snapshot. Show registered
+- [x] Bind explanations to the supplied facts and same snapshot. Show registered
   rule meaning and graph causes; do not generate semantic prose or claim
   minimal causal proofs that the evaluator does not establish.
-- [ ] Preserve unresolved applicability separately from selected standards and
+- [x] Preserve unresolved applicability separately from selected standards and
   definite non-selection. Include answer shapes suitable for the actual fact
   type; check nullable and set-valued facts as well as enumerations.
-- [ ] Cover complete, partial, conflicting/invalid, unknown, aliased, and explicit
+- [x] Cover complete, partial, conflicting/invalid, unknown, aliased, and explicit
   negative facts using the existing vocabulary's actual supported semantics.
-- [ ] Update the navigation skill around discover → supply facts → route → read,
+- [x] Update the navigation skill around discover → supply facts → route → read,
   allowing agents with known valid facts to start directly at route.
 
 **Acceptance gate:** A3 and the routing portions of A7. Existing routing causes,
 questions, and definitions remain the source of explanations; no second Router
 or policy selection logic appears in the facade.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 3: Bound Authoring Contexts And Mechanical Continuations
 

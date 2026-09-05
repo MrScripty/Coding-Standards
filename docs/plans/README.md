@@ -17,5 +17,4 @@ Completed prerequisites do not close the parent objective. See the
 
 [Standards Agent Interface](standards-agent-interface/plan.md) plans focused
 navigation, explicit-fact discovery and routing explanations, and bound authoring
-contexts over the Engine. It is `Active`; focused navigation is accepted and the next slice is fact
-discovery and routing explanations. It does not replace the active Standards Library Effectiveness effort.
+contexts over the Engine. It is `Active`; navigation and routing explanations are accepted; authoring contexts are next. It does not replace the active Standards Library Effectiveness effort.

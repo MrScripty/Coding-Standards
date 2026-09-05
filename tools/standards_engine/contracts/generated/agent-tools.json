@@ -24,6 +24,57 @@
       ],
       "type": "object"
     },
+    "AgentRouteResult": {
+      "additionalProperties": false,
+      "properties": {
+        "facts": {
+          "$ref": "#/$defs/FactSet"
+        },
+        "kind": {
+          "const": "agent-route-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "type": "array"
+        },
+        "reading_plan": {
+          "items": {
+            "$ref": "#/$defs/ReadingPlanEntry"
+          },
+          "type": "array"
+        },
+        "rules": {
+          "items": {
+            "$ref": "#/$defs/RoutingRuleExplanation"
+          },
+          "type": "array"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "unresolved_questions": {
+          "items": {
+            "$ref": "#/$defs/RoutingQuestion"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "reading_plan",
+        "unresolved_questions",
+        "next_operations",
+        "facts",
+        "rules"
+      ],
+      "type": "object"
+    },
     "AllExpression": {
       "additionalProperties": false,
       "properties": {
@@ -5138,6 +5189,94 @@
       ],
       "type": "object"
     },
+    "RoutingFactsCall": {
+      "additionalProperties": false,
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "RoutingFactsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/AuthoredRoutingFact"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "const": "routing-facts-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "facts"
+      ],
+      "type": "object"
+    },
+    "RoutingQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "fact": {
+          "$ref": "#/$defs/AuthoredRoutingFact"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "kind": {
+          "const": "applicability-fact"
+        },
+        "prompt": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "state": {
+          "const": "required"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "prompt",
+        "state",
+        "fact"
+      ],
+      "type": "object"
+    },
+    "RoutingRuleExplanation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "state": {
+          "enum": [
+            "selected",
+            "unresolved"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "when": {
+          "$ref": "#/$defs/ApplicabilityExpression"
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "when",
+        "state"
+      ],
+      "type": "object"
+    },
     "RoutingRuleReadingReason": {
       "additionalProperties": false,
       "properties": {
@@ -5702,7 +5841,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 26,
+  "interface_schema_version": 27,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -5950,7 +6089,7 @@
         "$ref": "#/$defs/RouteCall"
       },
       "result_definitions": [
-        "RouteResult",
+        "AgentRouteResult",
         "RejectedResult"
       ]
     },
@@ -5976,6 +6115,18 @@
       },
       "result_definitions": [
         "RelatedResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "routing_facts",
+      "input_definition": "RoutingFactsCall",
+      "input_schema": {
+        "$ref": "#/$defs/RoutingFactsCall"
+      },
+      "result_definitions": [
+        "RoutingFactsResult",
         "RejectedResult"
       ]
     }

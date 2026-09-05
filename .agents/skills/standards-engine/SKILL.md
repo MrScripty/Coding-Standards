@@ -17,7 +17,8 @@ current input schema; call the named tool directly with structured arguments.
 Tool-name prefixes vary by client; operation names match the Engine contract
 (for example, `create_snapshot`, `query`, and `create_proposal`).
 
-Use `route` with explicit engineering facts, `read` for exact policy, and
+Use `routing_facts` when the registered fact vocabulary is unknown. Use
+`route` with explicit engineering facts, `read` for exact policy, and
 `related` for relationships. Omit `snapshot` on the first call to capture
 accepted authority; reuse the returned snapshot on subsequent calls. Omission
 always captures a new snapshot, so carry the handle when continuing a task.

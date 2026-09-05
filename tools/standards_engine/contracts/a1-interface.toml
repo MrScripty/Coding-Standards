@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 26
+interface_schema_version = 27
 request_contract_version = 5
 result_projection_version = 6
 
@@ -120,7 +120,7 @@ capability = "standards.verify"
 [[operations]]
 id = "route"
 input_definition = "RouteCall"
-result_definitions = ["RouteResult", "RejectedResult"]
+result_definitions = ["AgentRouteResult", "RejectedResult"]
 capability = "standards.read"
 
 [[operations]]
@@ -133,4 +133,10 @@ capability = "standards.read"
 id = "related"
 input_definition = "RelatedCall"
 result_definitions = ["RelatedResult", "RejectedResult"]
+capability = "standards.read"
+
+[[operations]]
+id = "routing_facts"
+input_definition = "RoutingFactsCall"
+result_definitions = ["RoutingFactsResult", "RejectedResult"]
 capability = "standards.read"

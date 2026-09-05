@@ -125,7 +125,7 @@
       "$ref": "#/$defs/RouteCall"
     },
     {
-      "$ref": "#/$defs/RouteResult"
+      "$ref": "#/$defs/AgentRouteResult"
     },
     {
       "$ref": "#/$defs/ReadCall"
@@ -141,6 +141,12 @@
     },
     {
       "$ref": "#/$defs/RelatedResult"
+    },
+    {
+      "$ref": "#/$defs/RoutingFactsCall"
+    },
+    {
+      "$ref": "#/$defs/RoutingFactsResult"
     }
   ],
   "$defs": {
@@ -5841,6 +5847,145 @@
         },
         "detail": {
           "const": "compact"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RoutingFactsCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      }
+    },
+    "RoutingFactsResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "snapshot",
+        "facts"
+      ],
+      "properties": {
+        "kind": {
+          "const": "routing-facts-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AuthoredRoutingFact"
+          }
+        }
+      }
+    },
+    "RoutingQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "prompt",
+        "state",
+        "fact"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "kind": {
+          "const": "applicability-fact"
+        },
+        "prompt": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "state": {
+          "const": "required"
+        },
+        "fact": {
+          "$ref": "#/$defs/AuthoredRoutingFact"
+        }
+      }
+    },
+    "RoutingRuleExplanation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "when",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "when": {
+          "$ref": "#/$defs/ApplicabilityExpression"
+        },
+        "state": {
+          "enum": [
+            "selected",
+            "unresolved"
+          ]
+        }
+      }
+    },
+    "AgentRouteResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "snapshot",
+        "reading_plan",
+        "unresolved_questions",
+        "next_operations",
+        "facts",
+        "rules"
+      ],
+      "properties": {
+        "kind": {
+          "const": "agent-route-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "reading_plan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReadingPlanEntry"
+          }
+        },
+        "unresolved_questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RoutingQuestion"
+          }
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "facts": {
+          "$ref": "#/$defs/FactSet"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RoutingRuleExplanation"
+          }
         }
       },
       "additionalProperties": false

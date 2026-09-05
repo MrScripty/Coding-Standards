@@ -38,6 +38,14 @@ prerequisites, specialization, requested coverage/routing detail, and
 continuations, without the complete `related` projection. `detail: "full"`
 returns the native `read-result`. Both share the same snapshot semantics.
 
+Interface version 27 adds `routing_facts` and a focused `agent-route-result`.
+The latter retains the native reading plan, with canonicalized supplied facts,
+exact evaluated rule expressions/states, and fact-typed unresolved questions.
+Native `query` route results retain their existing shape. Vocabulary discovery
+uses the same fact projection as full Router reads and introduces no new fact
+semantics. `known-absent`, unknown, nullable values, and collection values retain
+the applicability owner's meanings.
+
 ## Public Operations
 
 | Operation | Input | Success result | Expected rejection |

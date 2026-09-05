@@ -45,3 +45,13 @@ as prerequisites. The unrelated proportionality-routing prototype is excluded.
 production snapshot identity behavior was correct. No domain semantics changed.
 
 **Commit subject:** `feat(standards-engine): add focused agent navigation tools`
+
+## 2026-09-05: Milestone 2 Accepted
+
+**Outcome:** Registered fact discovery and deterministic explanation projection
+accepted. A3 is satisfied; no Router or fact semantics changed.
+
+**Evidence:** [Milestone 2](reports/milestone-2.md), 32 passing tests and an
+official MCP client walkthrough. Milestone 1 commit: `e9bac84f`.
+
+**Commit subject:** `feat(standards-engine): expose routing facts and explanations`

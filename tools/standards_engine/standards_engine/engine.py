@@ -108,6 +108,9 @@ from tools.standards_snapshots.standards_snapshots import (
 
 from ._generated_contract import (
     RouteCall,
+    RoutingFactsCall,
+    RoutingFactsResult,
+    AgentRouteResult,
     ReadCall,
     RelatedCall,
     CompactReadResult,
@@ -865,10 +868,15 @@ class StandardsEngine:
         except SnapshotError as error:
             return self._domain_rejection(error)
 
-    def route(self, call: RouteCall) -> RouteResult | RejectedResult:
+    def route(self, call: RouteCall) -> AgentRouteResult | RejectedResult:
         from .agent_navigation import navigate
 
         return navigate(self, "route", call)
+
+    def routing_facts(self, call: RoutingFactsCall) -> RoutingFactsResult | RejectedResult:
+        from .agent_navigation import routing_facts
+
+        return routing_facts(self, call)
 
     def read(self, call: ReadCall) -> ReadResult | CompactReadResult | RejectedResult:
         from .agent_navigation import navigate
@@ -2672,6 +2680,8 @@ class StandardsEngine:
         projection: _QueryProjection,
         compiled: CompiledSnapshot,
         request: RouteRequest,
+        *,
+        explain: bool = False,
     ) -> dict[str, object]:
         facts = compiled.router.fact_schema.bind(request.as_contract()["facts"])
         selected = set(compiled.router.base_modules)
@@ -2748,8 +2758,27 @@ class StandardsEngine:
         questions = [
             self._route_question(compiled.router, fact) for fact in sorted(unresolved)
         ]
+        explanation = {}
+        if explain:
+            from .agent_navigation import fact_definitions
+
+            definitions = {item["id"]: item for item in fact_definitions(compiled.router)}
+            questions = [
+                {"id": f"question.{fact}", "kind": "applicability-fact",
+                 "state": "required", "prompt": definitions[fact]["prompt"],
+                 "fact": definitions[fact]}
+                for fact in sorted(unresolved)
+            ]
+            explanation = {
+                "kind": "agent-route-result",
+                "facts": {key: value.as_contract() for key, value in facts.canonical_values.items()},
+                "rules": [{"id": rule.id, "target": rule.target,
+                           "when": rule.program.as_expression(), "state": state}
+                          for rule, state in rule_results],
+            }
         return {
             **projection.result("route"),
+            **explanation,
             "reading_plan": reading_plan,
             "unresolved_questions": questions,
             "next_operations": [
@@ -2873,21 +2902,9 @@ class StandardsEngine:
                         ),
                     }
                 )
-            fields = {
-                "id",
-                "semantic_revision",
-                "type",
-                "nullable",
-                "values",
-                "aliases",
-                "meaning",
-                "prompt",
-            }
-            facts = []
-            for fact in compiled.router.facts:
-                value = fact.as_contract()
-                value["values"] = list(fact.values)
-                facts.append({key: value[key] for key in fields})
+            from .agent_navigation import fact_definitions
+
+            facts = fact_definitions(compiled.router)
             routing = {"routing": {"rules": rules, "facts": facts}}
         return {
             **projection.result("read"),
