@@ -2,16 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 source-closure correction after semantic review
+**Current phase:** Milestone 7 Engine navigation-authoring extension
 
-**Next slice:** admit the Engine-owned legacy-index correction for the 27-source
-manifest population, including its supported semantic edit and consumer scope
+**Next slice:** implement and verify the complete snapshot-bound
+`rewrite-navigation-index` proposal path described in the
+[navigation authoring admission](reports/milestone-7-navigation-authoring-admission.md)
 
 **Acceptance status:** `partial`
 
-**Composed-design review:** `not-applicable` to the current review/re-plan
-slice: it records ownership findings without changing Engine composition.
-Reassess when admitting any required Engine capability change.
+**Composed-design review:** `applicable`; the
+[navigation authoring admission](reports/milestone-7-navigation-authoring-admission.md#composed-design-review)
+records the eight artifact probes for the Engine extension. The feature is
+admitted, not implemented or accepted.
 
 **Execution ledger:** [Milestone execution ledger](execution-ledger.md)
 
@@ -168,19 +170,25 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Admit and implement the bounded source correction described in the
-   [review](reports/milestone-7-semantic-ownership-review.md#corrective-slice-and-acceptance),
-   through supported Engine-owned semantic operations and consumer review.
-2. Recheck the affected D001–D010 findings and prove pure navigation and valid
+1. Implement the admitted navigation authoring capability through the existing
+   proposal, review, and application lifecycle. The current fourteen edit
+   variants cannot edit the unregistered legacy sources; evidence maintenance
+   is not an alternate text-authoring path.
+2. Apply the nine source replacements in the
+   [admission](reports/milestone-7-navigation-authoring-admission.md#bounded-source-correction),
+   retaining the other eighteen indexes and existing source-specific
+   route-coverage claims.
+3. Recheck the affected D001–D010 findings and prove pure navigation and valid
    destinations across all 27 retained entrypoints.
-3. Preserve frozen baseline inventories. Reconcile historical ID dispositions
+4. Preserve frozen baseline inventories. Reconcile historical ID dispositions
    separately from current canonical membership, registered routing, actual
    source contents, and current structural checks. Do not regenerate frozen
    corpus classifications or revive retired migration/prose gates.
 
 **Current blocker:** Milestone 7 acceptance is held by M7-OWN-01 through
 M7-OWN-04 in [issues.md](issues.md#2026-09-05-semantic-ownership-review).
-The next corrective admission can proceed; no external dependency blocks it.
+The required Engine extension is admitted and can proceed; no external
+dependency blocks its implementation.
 
 **Acceptance gate:** every frozen identifier has a final disposition; live
 structural and routing checks pass; manual review establishes single ownership

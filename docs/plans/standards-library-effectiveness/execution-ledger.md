@@ -15888,3 +15888,27 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   and generated projection only; the unrelated prototype remains untracked.
   No implementation unit tests were required for this reports-only slice.
   Commit subject: `docs(standards): record semantic ownership closure gaps`.
+
+## 2026-09-05 - Navigation Authoring Admission
+
+- Continued the named plan's admission slice against `19764768`. The live MCP
+  schema and Engine projection code confirm that no existing edit can rewrite
+  an unregistered legacy entrypoint. A legacy Tooling relationship query
+  returned `NAVIGATION.UNKNOWN_POLICY` / `unavailable`; the canonical Tooling
+  query returned an incomplete policy mapping and no declared relationships.
+- Admitted a typed navigation-only proposal edit with snapshot-bound source
+  registration, canonical destination selection, Engine rendering, explicit
+  index change/review evidence, and existing verification/publication/recovery.
+  The [admission report](reports/milestone-7-navigation-authoring-admission.md)
+  records the composed-design probes and behavior-level acceptance cases.
+- Bounded source application to nine replacements and eighteen retained
+  indexes. Six observed tracked-Markdown inline links into legacy sources are
+  all inside the replacement population and have canonical-destination
+  dispositions. This is link evidence, not inferred semantic-impact coverage.
+- Replaced the plan's admission next step with complete Engine capability
+  implementation. No Engine capability or standards correction is claimed
+  implemented; M7-OWN-01 through M7-OWN-04 and Milestone 7 acceptance remain open.
+- Admission links and staged whitespace checks pass. Engine verification with
+  generated input refresh passes all 73 suites and 121 structural checks.
+  This validates the documentation slice, not the proposed capability.
+  Commit subject: `docs(standards): admit navigation index authoring`.

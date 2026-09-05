@@ -235,3 +235,19 @@ systemic invariant that an old entrypoint must not remain a second policy
 owner. The next slice admits the bounded Engine-owned correction, including
 any required authoring capability and declared consumer scope. No normative
 source correction was performed by this review slice.
+
+### Navigation Authoring Admission
+
+The [follow-up admission](reports/milestone-7-navigation-authoring-admission.md)
+bounds nine source replacements and eighteen retained indexes. The live Engine
+rejects the legacy Tooling path with `NAVIGATION.UNKNOWN_POLICY`; its fourteen
+proposal edit variants do not expose legacy-index authoring. Implement the
+admitted `rewrite-navigation-index` proposal path before source correction.
+Do not route text changes through evidence maintenance or treat Tooling's empty
+impact query and incomplete mapping as audited evidence of no consumers.
+
+Six observed inline links into legacy entrypoints are owned by three of the
+replacement sources and have explicit canonical-destination dispositions in
+the admission. Existing route-coverage inventories and frozen history are
+preserved. M7-OWN-01 through M7-OWN-04 remain open until Engine application and
+source review; admission alone does not resolve them.
