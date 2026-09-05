@@ -6903,7 +6903,7 @@
       ]
     },
     {
-      "digest": "sha256:9d5d391fa4a18a9e54254b5b40a2b5861a653fa987833cbf43a074f955b7c14c",
+      "digest": "sha256:83dfbe1399b20d6ab0553279ffc30de4245e106dd95d115e1de602a24b141c56",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7075,7 +7075,7 @@
       ]
     },
     {
-      "digest": "sha256:74313ba6d95d3c72208a8ff50383c5f9776e0a7e911b8de753c555a69ac18407",
+      "digest": "sha256:e3f6b32460231f6a63328afd7db5af1273f52b8302f409abf0fcc8c13f5daa9d",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7155,7 +7155,7 @@
       ]
     },
     {
-      "digest": "sha256:00aea599846505886e20099385f6575ca503bcb5efadb5e22f15794e556bf36a",
+      "digest": "sha256:95203c4eecc5cdcfe36ccdbe7eeaa15a6515bcc72d138cc8d443dc5faf8ac528",
       "path": "tools/standards_engine/tests/test_analysis.py",
       "state": "present",
       "uses": [
@@ -7179,7 +7179,7 @@
       ]
     },
     {
-      "digest": "sha256:046204ded29779c7c37b0ed7eb45eb4d0f69ec755044f5eaab2358357f569803",
+      "digest": "sha256:32aada5f7867656e7db82d024cdcdd0e7a79eca2c24a637ba3f30ab29c73c7e9",
       "path": "tools/standards_engine/tests/test_evidence_maintenance.py",
       "state": "present",
       "uses": [

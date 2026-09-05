@@ -5,13 +5,14 @@ navigation, immutable analysis, and controlled authoring. Callers use canonical
 IDs, authored policy title/body content, explicit semantics, and opaque handles.
 Repository paths, complete files, Markdown metadata envelopes, TOML/JSON
 projections, SQLite records, Git refs/object IDs, and source locators remain
-private Engine implementation facts unless explicitly inspected.
+private Engine implementation facts unless explicitly inspected or selected
+for evidence catalog maintenance.
 
-The public operations are snapshot-bound `query`, immutable-state `prepare` and
-`resolve`, handle-based `inspect`, and the admitted A2 authoring operations
-`create_proposal`, `find_proposals`, `revise_proposal`, `query_proposal`, and
-`analyze_proposal`, followed by `review_proposal` and `apply_proposal`.
-In Interface version 20, proposal creation and revision each carry one atomic
+Discover the current operations and examples through the generated public
+Interface using `.agents/skills/standards-engine/scripts/invoke.py --list`.
+Navigation reads immutable snapshots; proposal analysis, review, verification,
+and application operate on exact revision handles. Proposal creation and
+revision each carry one atomic
 `StandardsChangeSet`: an evidence-backed purpose plus explicit standards-domain
 edits. The common focused revision names a canonical policy unit and supplies
 its title, authored body, and preserve/change semantic intent. Creation,
@@ -91,3 +92,19 @@ Run tests:
 ```bash
 python3 -m unittest discover -s tools/standards_engine/tests
 ```
+
+## Evidence and repository verification
+
+`verify_repository` checks the working tree and can refresh its generated input
+manifest. Missing inputs return typed diagnostics, including their paths.
+The checkpoint validates declared structure; it does not execute the Engine's
+unit tests or certify semantic completeness.
+
+`maintain_evidence` previews or applies explicit retirements of stale claims,
+checks, suites, fixtures, and registered evidence implementations. It can revise
+evidence descriptions and consumer registrations. It binds an expected Git
+revision and actual review evidence, verifies a candidate, and refuses to
+replace independently edited working-tree files. Commit its resulting files
+with the maintenance review. It neither edits normative policy nor issues a
+certificate. Use the normal Engine audit publication workflow for an actual
+review; `review:consumer` ownership alone creates no attestation.

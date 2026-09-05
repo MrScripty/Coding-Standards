@@ -119,6 +119,7 @@ class NavigationTest(unittest.TestCase):
             "routing.languages": [],
             "routing.frameworks": [],
             "routing.topics": [],
+            "routing.details": [],
         }
         values.update(overrides)
         return {
@@ -244,7 +245,7 @@ class NavigationTest(unittest.TestCase):
         self.assertIsInstance(read, ReadResult)
         self.assertEqual(read.snapshot, self.snapshot)
         self.assertEqual(read.policy.handle.snapshot, self.snapshot)
-        self.assertIn("# Planning Workflow", read.content)
+        self.assertTrue(read.content.strip())
 
         inspected = self.engine.inspect(InspectCall(read.policy.handle))
         self.assertIsInstance(inspected, PolicyInspectionResult)

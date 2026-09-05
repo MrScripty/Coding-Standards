@@ -157,7 +157,7 @@ class LogicalAuthoringTests(unittest.TestCase):
             "applicability": {"operator": "always"},
             "source_scope": None,
             "consumer_scope": None,
-            "evidence_owner": "suite:core-simplicity",
+            "evidence_owner": "review:consumer",
             "rationale": "Planning consumes the logical-authoring policy.",
         }
 
@@ -528,7 +528,7 @@ class LogicalAuthoringTests(unittest.TestCase):
             "applicability": {"operator": "always"},
             "source_scope": None,
             "consumer_scope": None,
-            "evidence_owner": "suite:core-simplicity",
+            "evidence_owner": "review:consumer",
             "rationale": "Verification consumes the authority-scope decision.",
         }
         addition = self.change_set(
@@ -818,7 +818,7 @@ class LogicalAuthoringTests(unittest.TestCase):
             "applicability": {"operator": "always"},
             "source_scope": None,
             "consumer_scope": None,
-            "evidence_owner": "suite:core-simplicity",
+            "evidence_owner": "review:consumer",
             "rationale": "The prompt projects the authority-scope decision.",
         }
 

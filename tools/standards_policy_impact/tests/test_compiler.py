@@ -95,6 +95,28 @@ class PolicyImpactCompilerTest(unittest.TestCase):
         )
         self.assertEqual(registry.outgoing("workflow.planning", ("policy-impact",)), ())
 
+    def test_consumer_review_requires_the_new_contract_and_legacy_suites_still_load(self):
+        for owner, legacy, accepted in (
+            ("review:consumer", False, True),
+            ("review:consumer", True, False),
+            ("suite:evidence", True, True),
+        ):
+            with self.subTest(owner=owner, legacy=legacy):
+                declaration = self.relationships(self.relationship(evidence=owner))
+                with self.fixture(declaration) as (root, corpus):
+                    if legacy:
+                        contract = root / "contract.toml"
+                        contract.write_text(contract.read_text().replace(
+                            "registered-suite-or-consumer-review", "required-registered-suite"
+                        ))
+                    if accepted:
+                        compiled = compile_policy_impact(root, corpus, "registry.toml")
+                        self.assertEqual(next(iter(compiled.semantics.values())).evidence_owner, owner)
+                    else:
+                        with self.assertRaises(PolicyImpactError) as caught:
+                            compile_policy_impact(root, corpus, "registry.toml")
+                        self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.EVIDENCE_OWNER")
+
     def test_invalid_declarations_reject_with_typed_failures(self) -> None:
         cases = (
             (

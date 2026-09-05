@@ -19,7 +19,7 @@ Current implemented foundation:
 - consolidated consumer-review obligations keyed by exact consumer, scope, and
   review contract, with plural source/edge/trace provenance and fact-bound
   decision fingerprints;
-- independent content-fingerprinted policy-consumer horizons;
+- content-fingerprinted horizons for explicitly registered policy consumers;
 - mandatory audit-coverage work for changed policies without current
   certificates, including policies with no declared consumers; and
 - two-identity coverage requirements, attestations, and reusable certificates;
@@ -67,3 +67,10 @@ Receipts also retain a publication authorization whose subject binds the whole
 claim, original review authorization, Analysis ID, and policy subject. Replaying
 it detects claim changes even when all referenced files still match their
 digests. Either retained authorization ID can be revoked.
+
+The horizon is a declared review scope. It cannot establish that undeclared
+consumers do not exist. A `review:consumer` relationship binds its direct consumer
+without importing a suite's unrelated inputs; suite evidence adds the selected
+suite closure. Neither relationship ownership nor a passing graph check supplies
+an audit decision. The current repository has no stored certificates following
+the September 2026 retirement; review-required is the expected state.

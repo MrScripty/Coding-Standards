@@ -141,6 +141,31 @@ class GeneratedContractTest(unittest.TestCase):
                 self.assertEqual(denied["kind"], "rejected-result")
                 refresh.assert_not_called()
 
+    def test_missing_verification_input_returns_a_typed_rejection(self):
+        from tools.standards_analysis.standards_analysis import AnalysisExecutionContext
+        from tools.standards_engine.standards_engine.tools import LocalAlwaysAllowAuthorizer, _contracts
+        from tools.standards_verifier.standards_verifier.diagnostics import Diagnostic, EngineError
+
+        with StandardsEngine.open_repository(
+            REPO_ROOT, durable=False,
+            execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer(REPO_ROOT)),
+        ) as engine:
+            facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
+            with mock.patch(
+                "tools.standards_engine.standards_engine.engine.write_suite_input_projection",
+                side_effect=EngineError(Diagnostic(
+                    "INPUT.UNAVAILABLE", "unavailable", "Fixture input was removed",
+                    path="fixtures/missing.md",
+                )),
+            ):
+                result = facade.verify_repository({
+                    "kind": "verify-repository", "refresh_verification_inputs": True,
+                })
+            self.assertEqual(result["kind"], "rejected-result")
+            self.assertEqual(result["code"], "INPUT.UNAVAILABLE")
+            self.assertEqual(result["outcome"], "unavailable")
+            self.assertEqual(result["details"]["path"], "fixtures/missing.md")
+
     def test_router_read_exposes_editable_definitions_only_when_requested(self):
         from tools.standards_engine.standards_engine.tools import _contracts
 

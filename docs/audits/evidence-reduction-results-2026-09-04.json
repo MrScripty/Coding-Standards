@@ -1,0 +1,53 @@
+{
+  "purpose": "Historical record of evidence retirement and the observed Engine checks; not a conformance gate.",
+  "catalog": {
+    "before_suites": 271,
+    "before_checks": 858,
+    "after_suites": 73,
+    "after_checks": 121,
+    "removed_stale_claims": 51,
+    "removed_empty_suites": 198,
+    "removed_fixture_inputs": 218,
+    "removed_checker_modules": 16,
+    "consumer_review_relationship_updates": 319
+  },
+  "graph_locality": {
+    "registered_subjects": 51,
+    "stored_claims": 0,
+    "mutated_input": "tools/standards_analysis/standards_analysis/coverage_publication.py",
+    "changed_requirements": [
+      "topic.architecture.immutable-authority-closure",
+      "topic.contracts.declaration-and-semantic-authority",
+      "topic.contracts.validation-proof-lifetime",
+      "topic.dependencies.requirement-and-ownership",
+      "workflow.planning.projection-completeness"
+    ],
+    "unrelated_commit_policy_unchanged": true
+  },
+  "maintenance": [
+    {
+      "applied": true,
+      "changed_files": 96,
+      "removed_files": 427,
+      "verification": {
+        "checks": 121,
+        "exit_code": 0,
+        "failures": [],
+        "passed": true,
+        "suites": 73
+      }
+    },
+    {
+      "applied": true,
+      "changed_files": 16,
+      "removed_files": 15,
+      "verification": {
+        "checks": 121,
+        "exit_code": 0,
+        "failures": [],
+        "passed": true,
+        "suites": 73
+      }
+    }
+  ]
+}

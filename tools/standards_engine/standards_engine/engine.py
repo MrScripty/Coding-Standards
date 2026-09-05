@@ -20,6 +20,7 @@ from tools.repository_git.repository_git import (
 )
 from tools.standards_verifier.standards_verifier import (
     CompleteVerificationResult,
+    EngineError as VerificationError,
     run_complete_verification,
     write_suite_input_projection,
 )
@@ -3263,10 +3264,18 @@ class StandardsEngine:
             AnalysisError,
             ApplicabilityError,
             GraphError,
+            VerificationError,
         )
 
     @classmethod
     def _domain_rejection(cls, error: Exception) -> RejectedResult:
+        if isinstance(error, VerificationError):
+            diagnostic = error.diagnostic
+            return cls._reject(
+                diagnostic.code, diagnostic.outcome, diagnostic.message,
+                details={key: value for key, value in diagnostic.as_dict().items()
+                         if key not in {"code", "outcome", "message"}},
+            )
         failure = getattr(error, "failure", None)
         if failure is None:
             raise error

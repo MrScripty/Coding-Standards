@@ -528,7 +528,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 "applicability": {"operator": "always"},
                 "source_scope": None,
                 "consumer_scope": None,
-                "evidence_owner": "suite:core-simplicity",
+                "evidence_owner": "review:consumer",
                 "rationale": "Planning consumes the application fixture policy.",
             }
 
@@ -1038,7 +1038,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                         "applicability": {"operator": "always"},
                         "source_scope": None,
                         "consumer_scope": None,
-                        "evidence_owner": "suite:core-simplicity",
+                        "evidence_owner": "review:consumer",
                         "rationale": "Verification consumes authority-scope admission.",
                     },
                 }

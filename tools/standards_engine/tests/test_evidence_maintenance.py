@@ -201,7 +201,7 @@ class EvidenceMaintenanceTest(unittest.TestCase):
 
 
 class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
-    def test_preview_and_overlap_preserve_working_tree_then_apply_prunes(self):
+    def test_preview_and_overlap_preserve_working_tree_then_apply_retires(self):
         import hashlib
         import tempfile
         from pathlib import Path
@@ -221,6 +221,8 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             repository = Path(temporary) / "repository"
             _clone_tracked_worktree(repository)
+            obsolete = "evaluation/standards-effectiveness/fixtures/obsolete-engine-evidence.md"
+            (repository / obsolete).write_text("Historical fixture evidence.\n")
             with StandardsEngine.open_repository(
                 repository,
                 store_path=Path(temporary) / "engine.sqlite3",
@@ -239,6 +241,7 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                         "add",
                         "--",
                         "evaluation/standards-effectiveness/generated/suite-inputs.json",
+                        obsolete,
                     ),
                 )
                 git_output(
@@ -277,7 +280,8 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                     "plan": {
                         **plan(),
                         "prune_stale_certificates": True,
-                        "replacement_evidence_owner": "suite:policy-semantic-impact",
+                        "retire_inputs": [obsolete],
+                        "replacement_evidence_owner": "review:consumer",
                     },
                     "apply": False,
                 }
