@@ -918,7 +918,8 @@
             "removal",
             "move",
             "split",
-            "merge"
+            "merge",
+            "navigation-index"
           ]
         },
         "proposed_ids": {
@@ -2603,7 +2604,8 @@
             "question",
             "audit-coverage",
             "unmapped-normative-change",
-            "structured-scope-analysis-unsupported"
+            "structured-scope-analysis-unsupported",
+            "navigation-index-change"
           ]
         },
         "question": {
@@ -2902,6 +2904,88 @@
         "policy",
         "standard",
         "semantics"
+      ],
+      "type": "object"
+    },
+    "NavigationIndexEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "destinations": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "id",
+        "entrypoint",
+        "destinations"
+      ],
+      "type": "object"
+    },
+    "NavigationIndexesResult": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SnapshotHandle"
+            },
+            {
+              "$ref": "#/$defs/ProposalRevisionHandle"
+            }
+          ]
+        },
+        "indexes": {
+          "items": {
+            "$ref": "#/$defs/NavigationIndexEntry"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "navigation-indexes-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "maxItems": 0,
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "authority",
+        "indexes",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "NavigationRetarget": {
+      "additionalProperties": false,
+      "properties": {
+        "entrypoint": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "entrypoint",
+        "standard"
       ],
       "type": "object"
     },
@@ -4093,6 +4177,9 @@
         },
         {
           "$ref": "#/$defs/ProposalRelatedResult"
+        },
+        {
+          "$ref": "#/$defs/NavigationIndexesResult"
         }
       ]
     },
@@ -4119,6 +4206,9 @@
         },
         {
           "$ref": "#/$defs/RelatedResult"
+        },
+        {
+          "$ref": "#/$defs/NavigationIndexesResult"
         }
       ]
     },
@@ -5231,6 +5321,42 @@
       ],
       "type": "object"
     },
+    "RewriteNavigationIndexEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "destinations": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "kind": {
+          "const": "rewrite-navigation-index"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "retargets": {
+          "items": {
+            "$ref": "#/$defs/NavigationRetarget"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "kind",
+        "entrypoint",
+        "destinations",
+        "rationale"
+      ],
+      "type": "object"
+    },
     "RouteCall": {
       "additionalProperties": false,
       "properties": {
@@ -5711,6 +5837,9 @@
         },
         {
           "$ref": "#/$defs/AuditPolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/RewriteNavigationIndexEdit"
         }
       ]
     },
@@ -6133,7 +6262,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 29,
+  "interface_schema_version": 30,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -6395,6 +6524,7 @@
       "result_definitions": [
         "CompactReadResult",
         "ReadResult",
+        "NavigationIndexesResult",
         "RejectedResult"
       ]
     },

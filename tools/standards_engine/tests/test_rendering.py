@@ -10,6 +10,25 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class TextRenderingTest(unittest.TestCase):
+    def test_navigation_indexes_preserve_authority_and_exact_content(self):
+        content = "# navigation.old\n\n- [Owner](owner.md)\n"
+        rendered = render_text(
+            {
+                "kind": "navigation-indexes-result",
+                "authority": {"id": "snapshot:exact"},
+                "indexes": [
+                    {
+                        "id": "navigation.old",
+                        "destinations": ["topic.owner"],
+                        "content": content,
+                    }
+                ],
+            }
+        )
+        self.assertIn("snapshot:exact", rendered)
+        self.assertIn("NON-NORMATIVE", rendered)
+        self.assertIn(content, rendered)
+
     def test_coverage_projection_preserves_subject_and_status(self):
         for status in ("current-attestation", "review-required"):
             subject = "workflow.planning.acceptance-claims"

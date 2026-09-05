@@ -177,6 +177,9 @@
     },
     {
       "$ref": "#/$defs/ResumeCall"
+    },
+    {
+      "$ref": "#/$defs/NavigationIndexesResult"
     }
   ],
   "$defs": {
@@ -592,7 +595,8 @@
             "question",
             "audit-coverage",
             "unmapped-normative-change",
-            "structured-scope-analysis-unsupported"
+            "structured-scope-analysis-unsupported",
+            "navigation-index-change"
           ]
         },
         "source": {
@@ -1167,7 +1171,8 @@
             "removal",
             "move",
             "split",
-            "merge"
+            "merge",
+            "navigation-index"
           ]
         },
         "accepted_ids": {
@@ -2673,6 +2678,9 @@
         },
         {
           "$ref": "#/$defs/AuditPolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/RewriteNavigationIndexEdit"
         }
       ]
     },
@@ -3600,6 +3608,9 @@
         },
         {
           "$ref": "#/$defs/RelatedResult"
+        },
+        {
+          "$ref": "#/$defs/NavigationIndexesResult"
         }
       ]
     },
@@ -3760,6 +3771,9 @@
         },
         {
           "$ref": "#/$defs/ProposalRelatedResult"
+        },
+        {
+          "$ref": "#/$defs/NavigationIndexesResult"
         }
       ]
     },
@@ -6308,6 +6322,124 @@
         },
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RewriteNavigationIndexEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "entrypoint",
+        "destinations",
+        "rationale"
+      ],
+      "properties": {
+        "kind": {
+          "const": "rewrite-navigation-index"
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "retargets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NavigationRetarget"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "NavigationIndexEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "entrypoint",
+        "destinations"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "uniqueItems": true
+        },
+        "content": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NavigationIndexesResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "authority",
+        "indexes",
+        "next_operations"
+      ],
+      "properties": {
+        "kind": {
+          "const": "navigation-indexes-result"
+        },
+        "authority": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SnapshotHandle"
+            },
+            {
+              "$ref": "#/$defs/ProposalRevisionHandle"
+            }
+          ]
+        },
+        "indexes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NavigationIndexEntry"
+          },
+          "minItems": 1
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "maxItems": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "NavigationRetarget": {
+      "type": "object",
+      "required": [
+        "entrypoint",
+        "standard"
+      ],
+      "properties": {
+        "entrypoint": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
         }
       },
       "additionalProperties": false

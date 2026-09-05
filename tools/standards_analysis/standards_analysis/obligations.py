@@ -188,6 +188,63 @@ class Obligation:
 
 
 @dataclass(frozen=True, slots=True)
+class NavigationIndexAuthority:
+    """Exact index representation and the destination authority reviewed with it."""
+
+    id: str
+    representation_digest: str
+    review_digest: str
+
+
+def generate_navigation_index_obligations(
+    accepted: Iterable[NavigationIndexAuthority],
+    proposed: Iterable[NavigationIndexAuthority],
+) -> tuple[Obligation, ...]:
+    before = {item.id: item for item in accepted}
+    after = {item.id: item for item in proposed}
+    obligations = []
+    for identity in sorted(before.keys() | after.keys()):
+        old, new = before.get(identity), after.get(identity)
+        if (
+            old is not None
+            and new is not None
+            and old.representation_digest == new.representation_digest
+        ):
+            continue
+        dependencies = tuple(
+            DecisionDependency(
+                "representation", f"{identity}:{side}", item.review_digest
+            )
+            for side, item in (("accepted", old), ("proposed", new))
+            if item is not None
+        )
+        fingerprint = DecisionFingerprint(
+            "navigation-index-change",
+            "decision-contract.navigation-index-change.v1",
+            dependencies,
+        )
+        reason = {"kind": "navigation-index-change", "source": identity}
+        identifying = {
+            "target": identity,
+            "scope": {"kind": "whole-artifact"},
+            "fingerprint": fingerprint.as_contract(),
+        }
+        obligations.append(
+            Obligation(
+                analysis_identity(OBLIGATION_DOMAIN, "obligation", identifying),
+                "impact-review",
+                identity,
+                ReviewScope("whole-artifact"),
+                (reason,),
+                "required",
+                ("impact-disposition",),
+                fingerprint,
+            )
+        )
+    return tuple(obligations)
+
+
+@dataclass(frozen=True, slots=True)
 class ConsumerTraceReference:
     id: str
     graph: str

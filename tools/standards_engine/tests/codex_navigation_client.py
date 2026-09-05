@@ -82,10 +82,10 @@ async def main():
                         "oneOf"
                     ]
                 )
-                == 14
+                == 15
             )
             print(
-                "Codex authoring schema: purpose, edits, 14 inline edit variants",
+                "Codex authoring schema: purpose, edits, 15 inline edit variants",
                 flush=True,
             )
             for name in ("propose", "revise", "resolve_workflow"):
@@ -102,7 +102,7 @@ async def main():
                     "provider_contract_version",
                 }
                 if name != "resolve_workflow":
-                    assert len(documented["$defs"]["StandardEdit"]["oneOf"]) == 14
+                    assert len(documented["$defs"]["StandardEdit"]["oneOf"]) == 15
             print(
                 "Codex descriptions: exact nested edit/evidence contracts preserved",
                 flush=True,

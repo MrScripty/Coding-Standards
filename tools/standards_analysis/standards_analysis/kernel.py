@@ -41,6 +41,8 @@ from .obligations import (
     DecisionDependency,
     DecisionFingerprint,
     Obligation,
+    NavigationIndexAuthority,
+    generate_navigation_index_obligations,
     generate_consumer_review_obligations,
     generate_unmapped_normative_obligations,
 )
@@ -67,6 +69,7 @@ class AnalysisMaterial:
     graph: EdgeRegistry
     policy_impact: CompiledPolicyImpactSet
     coverage: CoverageDefinitionIndex
+    navigation_indexes: tuple[NavigationIndexAuthority, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -151,6 +154,9 @@ def evaluate_analysis(
     proposals = tuple(
         parse_semantic_proposal(plain_record(item)) for item in state.semantic_proposals
     )
+    navigation_obligations = generate_navigation_index_obligations(
+        accepted.navigation_indexes, proposed.navigation_indexes
+    )
     changes = classify_changes(
         accepted.corpus.policy_unit_corpus,
         proposed.corpus.policy_unit_corpus,
@@ -158,6 +164,7 @@ def evaluate_analysis(
         proposals,
         accepted_module_ids=(item.module_id for item in accepted.corpus.modules),
         proposed_module_ids=(item.module_id for item in proposed.corpus.modules),
+        changed_navigation_ids=(item.target for item in navigation_obligations),
     )
     context = {
         "subjects": sorted(
@@ -233,6 +240,7 @@ def evaluate_analysis(
                 item.id: item
                 for item in (
                     *generate_consumer_review_obligations(selections),
+                    *navigation_obligations,
                     *_coverage_obligations(changes, coverage, accepted, proposed),
                     *generate_unmapped_normative_obligations(
                         accepted.root,
@@ -355,6 +363,8 @@ def _coverage(
     results: dict[str, CoverageProjection] = {}
     consumed: set[str] = set()
     for change in changes:
+        if change.descriptor.kind is ChangeKind.NAVIGATION_INDEX:
+            continue
         material = proposed if change.descriptor.proposed_ids else accepted
         subjects = change.descriptor.proposed_ids or change.descriptor.accepted_ids
         for subject in subjects:

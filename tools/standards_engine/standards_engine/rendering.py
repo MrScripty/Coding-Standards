@@ -21,6 +21,17 @@ def render_text(value: ContractValue | Mapping[str, object]) -> str:
     return renderer(contract)
 
 
+def _navigation_indexes(value: Mapping[str, object]) -> str:
+    authority = _mapping(value.get("authority"))
+    lines = [f"NAVIGATION INDEXES {authority.get('id', '')}", "NON-NORMATIVE"]
+    for entry in _items(value, "indexes"):
+        lines.append(str(entry["id"]))
+        lines.extend(f"  {destination}" for destination in entry["destinations"])
+        if "content" in entry:
+            lines.append(str(entry["content"]).rstrip("\n"))
+    return "\n".join(lines) + "\n"
+
+
 def _verification(value: Mapping[str, object]) -> str:
     report = _mapping(value.get("verification"))
     status = "passed" if report.get("passed") else "failed"
@@ -261,6 +272,7 @@ _RESULT_RENDERERS: dict[
     "application-recovery-required-result": _proposal_application,
     "route-result": _navigation,
     "read-result": _navigation,
+    "navigation-indexes-result": _navigation_indexes,
     "related-result": _navigation,
     "proposal-route-result": _navigation,
     "proposal-read-result": _navigation,

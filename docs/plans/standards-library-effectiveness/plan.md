@@ -2,18 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 Engine navigation-authoring extension
+**Current phase:** Milestone 7 navigation source correction
 
-**Next slice:** implement and verify the complete snapshot-bound
-`rewrite-navigation-index` proposal path described in the
-[navigation authoring admission](reports/milestone-7-navigation-authoring-admission.md)
+**Next slice:** use the verified `rewrite-navigation-index` proposal path to
+correct the nine admitted legacy sources, then review all 27 retained entrypoints.
+See the [implementation evidence](reports/milestone-7-navigation-authoring-implementation.md).
 
 **Acceptance status:** `partial`
 
 **Composed-design review:** `applicable`; the
 [navigation authoring admission](reports/milestone-7-navigation-authoring-admission.md#composed-design-review)
-records the eight artifact probes for the Engine extension. The feature is
-admitted, not implemented or accepted.
+records the eight artifact probes for the Engine extension. The capability is
+implemented and verified; source correction and Milestone 7 acceptance remain open.
 
 **Execution ledger:** [Milestone execution ledger](execution-ledger.md)
 

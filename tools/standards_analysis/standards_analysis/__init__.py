@@ -53,6 +53,8 @@ from .obligations import (
     DecisionDependency,
     DecisionFingerprint,
     Obligation,
+    NavigationIndexAuthority,
+    generate_navigation_index_obligations,
     generate_consumer_review_obligations,
     generate_unmapped_normative_obligations,
 )
@@ -165,6 +167,8 @@ __all__ = (
     "ImpactTrace",
     "ImmutableProviderInput",
     "Obligation",
+    "NavigationIndexAuthority",
+    "generate_navigation_index_obligations",
     "ProviderInputRole",
     "ProviderNoObservation",
     "ProviderObservationClaim",

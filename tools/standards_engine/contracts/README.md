@@ -28,6 +28,30 @@ not define fields, defaults, variants, identity, or runtime semantics.
 
 ## Focused Agent Navigation
 
+Interface version 30 adds `rewrite-navigation-index` to the proposal edit
+algebra. `read(target="navigation-indexes")` lists registered entrypoint
+handles; reading a listed ID returns its captured content. The typed
+`navigation-indexes-result` carries exact snapshot or proposal `authority`,
+entrypoint handles, and canonical destination selections. It is navigation
+material, not a normative standard or coverage attestation.
+
+The Engine resolves source locations from its navigation registration and
+renders links from explicit canonical IDs. Index-only changes produce mandatory
+impact-review obligations bound to accepted/proposed index representation and
+selected destination authority. Existing review, readiness, verification,
+local application, and recovery apply. Older snapshots without registrations
+retain ordinary reads but cannot author indexes; no current-worktree authority
+is inserted into them. No handle format or policy semantic revision changes.
+
+Optional `retargets` explicitly pair registered legacy entrypoint handles with
+selected canonical destinations. The Engine updates matching required-link
+declarations for the edited index atomically and binds those declarations into
+snapshot/review authority. Unrelated assertions remain enforced. Unused,
+duplicated, stale, or unselected retargets reject the candidate.
+
+The default MCP catalog retains its existing tools; discovery uses `read` and
+authoring uses `propose`/`revise`. There is no raw Markdown or path write input.
+
 Interface version 26 adds `route`, `read`, and `related` with direct domain
 arguments and an optional `snapshot`. Omission captures new accepted authority
 for that call; a supplied handle is used exactly. Every successful result

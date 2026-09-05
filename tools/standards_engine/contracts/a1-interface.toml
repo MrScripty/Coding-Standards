@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 29
+interface_schema_version = 30
 request_contract_version = 5
 result_projection_version = 6
 
@@ -126,7 +126,7 @@ capability = "standards.read"
 [[operations]]
 id = "read"
 input_definition = "ReadCall"
-result_definitions = ["CompactReadResult", "ReadResult", "RejectedResult"]
+result_definitions = ["CompactReadResult", "ReadResult", "NavigationIndexesResult", "RejectedResult"]
 capability = "standards.read"
 
 [[operations]]

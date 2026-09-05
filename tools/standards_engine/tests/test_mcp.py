@@ -197,7 +197,7 @@ class MCPTest(unittest.TestCase):
                 {"id", "digest", "provider_contract", "provider_contract_version"},
             )
             if name != "resolve_workflow":
-                self.assertEqual(len(documented["$defs"]["StandardEdit"]["oneOf"]), 14)
+                self.assertEqual(len(documented["$defs"]["StandardEdit"]["oneOf"]), 15)
             Draft202012Validator.check_schema(documented)
 
     def test_input_projection_preserves_reference_siblings(self):

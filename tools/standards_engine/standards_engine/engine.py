@@ -137,6 +137,7 @@ from ._generated_contract import (
     CoverageAttestationSubmission,
     MaintainEvidenceCall,
     MaintainEvidenceResult,
+    NavigationIndexesResult,
     VerifyRepositoryCall,
     VerifyRepositoryResult,
     VerifyProposalCall,
@@ -212,6 +213,7 @@ from .logical_authoring import (
     StandardsChangeSet,
     authoring_target_id,
 )
+from .navigation_indexes import NavigationIndex
 
 
 DEFAULT_STORE = ".standards-engine/snapshots-v1.sqlite3"
@@ -227,6 +229,7 @@ class CompiledSnapshot:
     router: RouterProjection
     coverage: CoverageDefinitionIndex
     repository_coverage: RepositoryCoverageDecisions
+    navigation_indexes: tuple[NavigationIndex, ...] = ()
 
     def semantic_signature(self) -> tuple[object, ...]:
         return (
@@ -238,6 +241,7 @@ class CompiledSnapshot:
             tuple(self.graph.edges.items()),
             self.coverage,
             self.repository_coverage,
+            self.navigation_indexes,
         )
 
 
@@ -981,6 +985,8 @@ class StandardsEngine:
                 return (
                     value
                     if isinstance(value, RejectedResult)
+                    else NavigationIndexesResult.from_value(value)
+                    if value["kind"] == "navigation-indexes-result"
                     else ProposalReadResult.from_value(value)
                 )
             if isinstance(call.request, RelatedRequest):
@@ -1636,6 +1642,8 @@ class StandardsEngine:
 
     @staticmethod
     def _compile(source: ContentSource) -> CompiledSnapshot:
+        from .navigation_indexes import load_indexes
+
         corpus = load_canonical_standards_corpus(source)
         impact = compile_policy_impact(source, corpus)
         graph = standards_navigation_registry(
@@ -1654,6 +1662,7 @@ class StandardsEngine:
             router,
             coverage,
             repository_coverage,
+            load_indexes(source, corpus),
         )
 
     @staticmethod
@@ -1741,6 +1750,7 @@ class StandardsEngine:
             compiled.graph,
             compiled.policy_impact,
             compiled.coverage,
+            tuple(item.review for item in compiled.navigation_indexes),
         )
 
     def _validate_projected_inputs(
@@ -1819,7 +1829,15 @@ class StandardsEngine:
                     None if after is None else after.module_id,
                 )
             )
-        changes = (*policy_changes, *module_changes)
+        before_indexes = {item.id: item for item in accepted.navigation_indexes}
+        navigation_changes = tuple(
+            ChangeDescriptor(ChangeKind.NAVIGATION_INDEX, (item.id,), (item.id,), scope)
+            for item in proposed.navigation_indexes
+            if item.id in before_indexes
+            and item.review.representation_digest
+            != before_indexes[item.id].review.representation_digest
+        )
+        changes = (*policy_changes, *module_changes, *navigation_changes)
         if not changes:
             return derive_change_descriptors(
                 accepted.corpus.policy_unit_corpus,
@@ -2853,10 +2871,14 @@ class StandardsEngine:
         snapshot: SnapshotHandle,
         compiled: CompiledSnapshot,
         request: ReadRequest,
-    ) -> ReadResult | RejectedResult:
+    ) -> ReadResult | NavigationIndexesResult | RejectedResult:
         value = self._read_value(_QueryProjection.snapshot(snapshot), compiled, request)
         return (
-            value if isinstance(value, RejectedResult) else ReadResult.from_value(value)
+            value
+            if isinstance(value, RejectedResult)
+            else NavigationIndexesResult.from_value(value)
+            if value["kind"] == "navigation-indexes-result"
+            else ReadResult.from_value(value)
         )
 
     def _read_value(
@@ -2865,6 +2887,44 @@ class StandardsEngine:
         compiled: CompiledSnapshot,
         request: ReadRequest,
     ) -> dict[str, object] | RejectedResult:
+        from .navigation_indexes import DIRECTORY
+
+        if request.target == DIRECTORY or request.target.startswith("navigation."):
+            indexes = tuple(
+                item
+                for item in compiled.navigation_indexes
+                if request.target == DIRECTORY or item.id == request.target
+            )
+            if not indexes:
+                return self._reject(
+                    "NAVIGATION.INDEX_UNAVAILABLE",
+                    "unavailable",
+                    "This authority has no selected navigation index registration.",
+                )
+            if request.include_coverage is True or request.include_routing is True:
+                return self._reject(
+                    "NAVIGATION.INDEX_OPTIONS_INVALID",
+                    "invalid",
+                    "Navigation indexes have no policy coverage or Router definitions.",
+                )
+            return {
+                "kind": "navigation-indexes-result",
+                "authority": projection.authority.as_contract(),
+                "indexes": [
+                    {
+                        "id": item.id,
+                        "entrypoint": projection.authoring_target(item.id),
+                        "destinations": list(item.destinations),
+                        **(
+                            {"content": item.content}
+                            if request.target != DIRECTORY
+                            else {}
+                        ),
+                    }
+                    for item in indexes
+                ],
+                "next_operations": [],
+            }
         selected = _resolve_policy(compiled.corpus, request.target)
         if selected is None:
             return self._reject(

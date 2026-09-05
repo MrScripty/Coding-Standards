@@ -56,6 +56,7 @@ The closed edit variants are:
 - `put-routing-rule` / `remove-routing-rule`
 - `put-routing-fact` / `remove-routing-fact`
 - `audit-policy-unit`
+- `rewrite-navigation-index`
 
 Use the `propose` tool definition for their current exact fields. In
 particular:
@@ -93,6 +94,24 @@ Do not infer semantic relatedness, impact, lifecycle meaning, evidence
 sufficiency, or successors from prose. If the user has not decided required
 meaning, stop at the typed rejection or ask for that decision instead of
 manufacturing closure.
+
+## Navigation Index Correction
+
+For a legacy navigation correction, call `read` with target
+`navigation-indexes`. Reuse the result's snapshot `authority` and read a returned
+navigation ID to inspect its current content. `rewrite-navigation-index` takes
+the returned `entrypoint` handle, explicitly selected canonical destination IDs,
+and rationale. The Engine renders the index and requires an evidence-backed
+impact disposition for its exact candidate. Use `query_proposal` to read that
+candidate before resolving and reviewing it. Navigation results do not confer
+normative policy authority. An older snapshot without registrations returns
+`NAVIGATION.INDEX_UNAVAILABLE`; capture new authority explicitly when needed.
+
+When a declared destination check requires an obsolete legacy link, supply an
+explicit `retargets` disposition with that legacy entrypoint's snapshot-bound
+handle and its selected canonical `standard`. The Engine updates the matching
+checks atomically with the index. Other required destinations remain enforced;
+unused or stale dispositions are rejected.
 
 ## Coverage Audit Publication
 

@@ -1,0 +1,136 @@
+schema_version = 1
+
+[[indexes]]
+id = "navigation.coding"
+path = "CODING-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.commit"
+path = "COMMIT-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.plan"
+path = "PLAN-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.documentation"
+path = "DOCUMENTATION-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.concurrency"
+path = "CONCURRENCY-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.security"
+path = "SECURITY-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.cross-platform"
+path = "CROSS-PLATFORM-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.dependency"
+path = "DEPENDENCY-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.interop"
+path = "INTEROP-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.language-bindings"
+path = "LANGUAGE-BINDINGS-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.accessibility"
+path = "ACCESSIBILITY-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.architecture-patterns"
+path = "ARCHITECTURE-PATTERNS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.tooling"
+path = "TOOLING-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.testing"
+path = "TESTING-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.release"
+path = "RELEASE-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.frontend"
+path = "FRONTEND-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.launcher"
+path = "LAUNCHER-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-api"
+path = "languages/rust/RUST-API-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-async"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-cross-platform"
+path = "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-dependency"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-interop"
+path = "languages/rust/RUST-INTEROP-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-language-bindings"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-release"
+path = "languages/rust/RUST-RELEASE-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-security"
+path = "languages/rust/RUST-SECURITY-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-tooling"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+destinations = []
+
+[[indexes]]
+id = "navigation.rust-unsafe"
+path = "languages/rust/RUST-UNSAFE-STANDARDS.md"
+destinations = []

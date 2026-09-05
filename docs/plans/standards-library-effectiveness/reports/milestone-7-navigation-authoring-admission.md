@@ -163,3 +163,26 @@ consumer dispositions, apply through the Engine, and recheck all 27 sources.
 Current structural verification is supporting evidence; manual ownership and
 navigation review closes M7-OWN-01 through M7-OWN-04. A5 prompt simplification
 and downstream pilots remain separately owned.
+
+## Implementation Discovery: Declared Legacy Destinations
+
+The implementation scan of all 73 registered structural suites found four
+checks that require obsolete legacy destinations: three Tooling checks require
+`FRONTEND-STANDARDS.md`, and the Rust Binding contract check requires legacy
+Testing, Rust Cross-Platform, and Rust Interop destinations. These are current
+consumers in addition to the eight source-specific inventories considered above.
+
+Extend the admitted edit with optional explicit `retargets` dispositions. Each
+pairs a snapshot-bound registered legacy entrypoint handle with a selected
+canonical standard. The Engine replaces only matching required destinations in
+checks for the edited index; it preserves every other assertion and rejects
+unused, duplicated, or stale dispositions. Capture those declarations in the
+snapshot and bind their exact content into index review evidence. This realizes
+the already reviewed consumer replacements without disabling enforcement.
+
+The implementation file set comprises the Engine navigation catalog and module;
+Engine snapshot, authoring, rendering, and MCP integration; Analysis change,
+kernel, and obligation integration; the canonical schema/interface/examples and
+generated Python/tool projections; focused navigation and rendering tests and
+MCP contract-count fixtures; contract documentation and the skill's authoring
+reference. Generated verification inputs are refreshed through the Engine.

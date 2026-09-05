@@ -18,6 +18,7 @@ STANDARDS_SPECIALIZES = "standards-specializes"
 
 
 class ChangeKind(str, Enum):
+    NAVIGATION_INDEX = "navigation-index"
     MODULE = "module"
     MODIFICATION = "modification"
     ADDITION = "addition"
@@ -39,6 +40,7 @@ class ChangedPolicyKind(str, Enum):
 
 
 CHANGE_GRAPH_GROUPS = {
+    "navigation-index": ((), ()),
     "module": (
         (STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
         (STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
@@ -255,6 +257,7 @@ def classify_changes(
     *,
     accepted_module_ids: Iterable[str] = (),
     proposed_module_ids: Iterable[str] = (),
+    changed_navigation_ids: Iterable[str] = (),
 ) -> tuple[ClassifiedChange, ...]:
     selected = tuple(descriptors)
     proposals = tuple(semantic_proposals)
@@ -282,6 +285,7 @@ def classify_changes(
     claimed_modules: set[str] = set()
     accepted_modules = set(accepted_module_ids)
     proposed_modules = set(proposed_module_ids)
+    navigation_ids = set(changed_navigation_ids)
     results: list[ClassifiedChange] = []
     for descriptor in selected:
         identities = set((*descriptor.accepted_ids, *descriptor.proposed_ids))
@@ -317,6 +321,7 @@ def classify_changes(
                 by_policy,
                 accepted_modules,
                 proposed_modules,
+                navigation_ids,
             )
         )
 
@@ -338,7 +343,23 @@ def _classify_change(
     proposals: dict[str, SemanticProposal],
     accepted_modules: set[str],
     proposed_modules: set[str],
+    navigation_ids: set[str],
 ) -> ClassifiedChange:
+    if descriptor.kind is ChangeKind.NAVIGATION_INDEX:
+        if (
+            len(descriptor.accepted_ids) != 1
+            or descriptor.accepted_ids != descriptor.proposed_ids
+            or descriptor.accepted_module is not None
+            or descriptor.proposed_module is not None
+            or descriptor.scope.kind != "whole-artifact"
+        ):
+            raise _shape_error(ChangeKind.NAVIGATION_INDEX)
+        if descriptor.accepted_ids[0] not in navigation_ids:
+            raise _error(
+                "CHANGE.NAVIGATION_UNAVAILABLE",
+                "Navigation change must name an actually changed registered index.",
+            )
+        return ClassifiedChange(descriptor, (), GraphSeedSelection((), (), (), ()))
     if descriptor.kind is ChangeKind.MODULE:
         return _module_change(
             descriptor,

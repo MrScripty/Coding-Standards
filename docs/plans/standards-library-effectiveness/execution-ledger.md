@@ -15912,3 +15912,24 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   generated input refresh passes all 73 suites and 121 structural checks.
   This validates the documentation slice, not the proposed capability.
   Commit subject: `docs(standards): admit navigation index authoring`.
+
+## 2026-09-05 - Navigation Authoring Capability
+
+- Implemented the admitted complete navigation-index proposal path. The
+  [implementation report](reports/milestone-7-navigation-authoring-implementation.md)
+  records its authority boundary, public interface, and verification evidence.
+- Discovered four current checks requiring obsolete legacy destinations and
+  admitted explicit snapshot-bound retarget dispositions. They update matching
+  destination assertions atomically without removing unrelated requirements.
+- All 99 Analysis tests pass. Engine discovery passed 126 of 129 tests initially;
+  the two stale-input fixtures and obsolete checkout assertion pass in the final
+  12-test focused rerun, which also covers both subsequently added navigation
+  tests. All current Engine tests have passing evidence across those runs.
+- Fresh-process MCP reading, contract projection checks, Ruff, and skill
+  validation pass. Engine verification with generated input refresh passes
+  73 suites and 121 structural checks. These checks do not certify prose or
+  downstream policy effectiveness.
+- The capability is ready for the nine-source correction. M7-OWN-01 through
+  M7-OWN-04, A2, and Milestone 7 acceptance remain open until that correction and
+  manual source review. The unrelated untracked prototype is preserved.
+- Commit subject: `feat(standards): author registered navigation indexes`.

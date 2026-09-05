@@ -459,6 +459,47 @@ def _edit(value: object) -> LogicalEdit:
         _exact(raw, {"kind", "standard"}, "revise-standard edit")
         standard = _standard_content(raw["standard"])
         return _structured(raw, target=str(standard["id"]), facet="standard")
+    if kind == "rewrite-navigation-index":
+        fields = {"kind", "entrypoint", "destinations", "rationale"}
+        if "retargets" in raw:
+            fields.add("retargets")
+            if not isinstance(raw["retargets"], list):
+                raise _invalid(
+                    "AUTHORING.INVALID_ARGUMENTS",
+                    "Retarget dispositions must be a list.",
+                )
+            for retarget in raw["retargets"]:
+                record = _mapping(retarget, "navigation retarget")
+                _exact(record, {"entrypoint", "standard"}, "navigation retarget")
+                if not isinstance(
+                    _relationship_consumer(record["entrypoint"]), Mapping
+                ):
+                    raise _invalid(
+                        "AUTHORING.INVALID_TARGET_HANDLE",
+                        "Retargets require entrypoint handles.",
+                    )
+                _semantic_id(record["standard"], "navigation destination")
+        _exact(raw, fields, "navigation index edit")
+        target = _relationship_consumer(raw["entrypoint"])
+        if not isinstance(target, Mapping):
+            raise _invalid(
+                "AUTHORING.INVALID_TARGET_HANDLE",
+                "Navigation requires an opaque entrypoint handle.",
+            )
+        destinations = raw["destinations"]
+        if not isinstance(destinations, list) or not destinations:
+            raise _invalid(
+                "AUTHORING.INVALID_ARGUMENTS",
+                "Navigation requires at least one canonical destination.",
+            )
+        for destination in destinations:
+            _semantic_id(destination, "navigation destination")
+        if len(set(destinations)) != len(destinations):
+            raise _invalid(
+                "AUTHORING.INVALID_ARGUMENTS", "Navigation destinations must be unique."
+            )
+        _text(raw["rationale"], "navigation rationale")
+        return _structured(raw, target=str(target["id"]), facet="navigation-index")
     if kind == "move-policy-unit":
         fields = {"kind", "policy", "standard", "semantics"}
         if "after_policy" in raw:
@@ -977,6 +1018,16 @@ class LogicalAuthoringCompiler:
             self._create_standard(files, raw)
         elif kind == "revise-standard":
             self._revise_standard(files, raw)
+        elif kind == "rewrite-navigation-index":
+            from .navigation_indexes import rewrite_index
+
+            rewrite_index(
+                files,
+                raw,
+                base_compiled.navigation_indexes,
+                compile_current(files).corpus,
+                base_snapshot,
+            )
         elif kind == "move-policy-unit":
             self._move_policy_unit(files, raw, base_compiled.corpus, compile_current)
         elif kind == "retire-policy-unit":
@@ -1574,6 +1625,7 @@ def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
         "create-standard": 0,
         "put-routing-fact": 45,
         "revise-standard": 10,
+        "rewrite-navigation-index": 65,
         "put-routing-rule": 45,
         "remove-routing-rule": 45,
         "remove-routing-fact": 45,
