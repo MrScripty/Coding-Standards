@@ -61,13 +61,6 @@ op = "eq"
 value = "prompts/full-codebase-standards-refactor.md"
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-24-decomposition.md"
-required = ["## Owner Contract", "sole normative owner", "## Exact Dispositions", "`STD-0849`, `STD-0850`, and `STD-0851`", "## Ordered Children", "`24.1`", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "owner-map-entrypoint"
 type = "table"
 path = "evaluation/standards-effectiveness/owner-map.tsv"

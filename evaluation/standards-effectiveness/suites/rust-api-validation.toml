@@ -32,21 +32,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/api.md"
-required = ["## Validated Type And Conversion Mechanisms", "selects an invariant owner, enforcement point, proof lifetime", "invalidates its invariant; re-establish proof at the canonical enforcement", "are mechanisms, not defaults", "a parse-once slogan", "mandate one conversion trait by input category", "complete operation-specific validation"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-API-STANDARDS.md"
-required = ["topics/contracts.md", "topics/security.md"]
-prohibited = ["if this bug ships, how bad is it", "pub struct Port", "Use `TryFrom`"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0707\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t", "STD-0708\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0707", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0707"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0708", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0708"}]}}]

@@ -423,3 +423,26 @@ ordinary result path and therefore return status `1`. Execution exceptions are
 classified from their typed outcome as invalid (`2`), unavailable (`3`), or
 unsupported (`4`), independent of output format. `EngineError` derives that
 status from its diagnostic outcome and accepts no separate numeric override.
+
+## What the checkpoint proves
+
+Registered checks validate graph relationships, routing behavior, structured
+records, navigation destinations, fixture decisions, and representation
+contracts. They do not establish the meaning or sufficiency of standards prose.
+Semantic review must assess the changed guidance and affected consumers through
+the Standards Engine Analysis/review workflow.
+
+Use `markdown_targets` for required navigation destinations: `path` names the
+source and `required` lists normalized repository-relative target paths. Link
+labels, surrounding prose, wrapping, and order may change. Use typed table
+projections for keyed records and behavioral tests for implementation contracts.
+
+Current suites must not use `text`, `exact_text`, `markdown_section_text`, or
+`table_text_absence` to freeze wording. Their parsers remain available for
+historical captured suite definitions. A repository regression check guards
+current registrations. Exact comparisons remain appropriate for protocol IDs,
+content digests, canonical serialization, and generated projections: those
+checks compare a representation contract rather than an editorial sentence.
+
+See the [investigation](../../docs/audits/standards-verification-investigation-2026-09-04.md)
+for retired assertions, structural replacements, and evidence limitations.

@@ -38,41 +38,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner-projection"
-type = "text"
-path = "topics/dependencies.md"
-required = [
-  "### Provisioning Procedure",
-  "independently identifiable unit",
-  "already satisfied requirement is not mutated",
-  "preserves per-requirement",
-  "re-evaluate the same satisfaction contract",
-  "Function names, process exit codes",
-  "cannot create missing authority",
-  "reinterpret failure as success",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-projection"
-type = "text"
-path = "LAUNCHER-STANDARDS.md"
-required = ["[Dependencies](topics/dependencies.md)"]
-prohibited = [
-  "## Dependency Installation Standards",
-  "check_<name>",
-  "install_<name>",
-  "monolithic check",
-]
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["the registered `dependencies-population` suite prove the Launcher dependency-installation"]
-prohibited = ["`verify-dependencies-population.sh` prove the Launcher dependency-installation"]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

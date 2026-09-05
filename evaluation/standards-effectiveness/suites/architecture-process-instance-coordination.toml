@@ -46,65 +46,6 @@ op = "eq"
 value = "unsupported"
 
 [[checks]]
-id = "legacy-projection"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "## Process Instance Coordination",
-  "[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant)",
-  "[Contracts](topics/contracts.md)",
-  "[Cross-Platform](topics/cross-platform.md#platform-support-contract)",
-  "[Resilience](topics/resilience.md#failure-classification-and-decision)",
-  "No PID contents",
-  "canonical typed outcome",
-]
-prohibited = []
-
-[[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = [
-  "## Conditional Process Instance Coordination",
-  "selected instance identity",
-  "selected coordination boundary",
-  "Evidence that appears stale is not deletion authority",
-  "this pattern does not apply",
-  "the diagram or successful startup proves none",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-default-removal"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = [
-  "### PID File Rules",
-  "### PID File Contents",
-  "### Handling PID Reuse",
-  "### Stale PID File Cleanup",
-  "kill(pid, 0)",
-  "/proc/[pid]/stat",
-  "Always log when reclaiming",
-]
-
-[[checks]]
-id = "reference-default-removal"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = []
-prohibited = [
-  "### PID File Rules",
-  "### PID File Contents",
-  "### Handling PID Reuse",
-  "### Stale PID File Cleanup",
-  "kill(pid, 0)",
-  "/proc/[pid]/stat",
-  "Always log when reclaiming",
-]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

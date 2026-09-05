@@ -35,20 +35,6 @@ outcome = "typed-unavailable"
 all = [{ field = "scope", op = "eq", value = "selected" }, { any = [{ field = "owner", op = "eq", value = "missing" }, { field = "identity", op = "eq", value = "missing" }, { field = "mechanism", op = "eq", value = "missing" }, { field = "cleanup", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "missing" }] }]
 
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = ["## Lifecycle-Owned Frontend Work", "Concurrency owns generic work lifecycle", "Select a resource holder and cleanup trigger", "mechanism, not a default", "Prevent duplicate active work and stale result application", "Do not", "stale-result discard"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/frontend.md"
-required = ["## Illustrative React Timer Adapter", "This example does not select React", "duplicate exclusion", "stale-result rejection"]
-prohibited = []
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

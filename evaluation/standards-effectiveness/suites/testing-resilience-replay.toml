@@ -41,30 +41,12 @@ any = [
   { field = "boundary", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "canonical-policy"
-type = "text"
-path = "topics/resilience.md"
-required = ["## Replay And Resumption Evidence", "authoritative history or checkpoint", "projection convergence after recovery", "repair or rejection of partial work", "A pure helper, successful restart, empty-state", "Do not restart from an inferred position"]
-prohibited = []
 
 [[checks]]
-id = "testing-route-and-legacy"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["topics/resilience.md"]
-prohibited = ["These checks may be integration or end-to-end tests"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0617\tTESTING-STANDARDS.md\ttopics/resilience.md\trefine\trequire authoritative replay duplicate convergence resumption and partial-failure evidence through real persistence and execution boundaries without helper restart snapshot inferred-position state-reset or weaker-path substitution"]
-prohibited = []
-
-[[checks]]
-id = "row-18-route"
-type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-required = ["18\t3\tSTD-0617\tTESTING-STANDARDS.md\ttopics/resilience.md\texists\tpre-slice-review\tfocused"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0617", "TESTING-STANDARDS.md", "topics/resilience.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0617"}]}}]

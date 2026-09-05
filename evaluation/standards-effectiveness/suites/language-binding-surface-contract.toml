@@ -49,20 +49,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/boundaries/language-bindings.md"
-required = ["## Exported Surface Contract", "Expose only selected client operations", "parity nor divergence is a default", "no fixed support-tier vocabulary is universal", "native and real host evidence", "Do not export all technically available operations"]
-prohibited = []
-
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-required = ["language-bindings.md#exported-surface-contract", "Rust does not define a universal support-tier vocabulary"]
-prohibited = ["Export only client-facing capabilities by default", "supported`, `experimental`, and `internal-only", "Surface Review Questions"]
-
-[[checks]]
 id = "section-inventory"
 type = "table"
 path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"

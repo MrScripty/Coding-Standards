@@ -73,13 +73,6 @@ op = "eq"
 value = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-21-decomposition.md"
-required = ["## Owner Contract", "narrow Rust and Cargo mechanism", "does not own dependency selection", "## Exact Dispositions", "Fourteen command, manifest, and shell examples move", "## Ordered Children", "## Child 21.4 Artifact-Surface Ownership Replan", "Rust Dependency owns Cargo manifest dependency optionality", "Rust API separately owns Rust", "retain aliases, compatibility wording", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "execution-train-owner"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

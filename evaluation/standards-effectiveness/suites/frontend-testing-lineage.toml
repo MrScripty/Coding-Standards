@@ -4,13 +4,6 @@ owner = "profile.application.frontend"
 description = "Exact Frontend testing legacy lineage to the required Testing Frontend evidence contract."
 
 [[checks]]
-id = "evidence-section"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = ["## Evidence"]
-prohibited = []
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

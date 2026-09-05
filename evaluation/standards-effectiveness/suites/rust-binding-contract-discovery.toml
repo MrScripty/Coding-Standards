@@ -45,20 +45,6 @@ any = [
 ]
 
 [[checks]]
-id = "rust-profile"
-type = "text"
-path = "profiles/languages/rust/language-bindings.md"
-required = ["## Contract Discovery Adaptation", "only when the selected Contracts-owned", "exported operation, handshake field, package", "not a universal", "Return `invalid`", "`unsupported`", "`unavailable`", "universal `version()`", "alternate discovery", "default success"]
-prohibited = []
-
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-required = ["language-bindings.md#contract-discovery-adaptation"]
-prohibited = ["pub fn version()", "CARGO_PKG_VERSION"]
-
-[[checks]]
 id = "disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

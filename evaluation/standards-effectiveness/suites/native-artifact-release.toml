@@ -44,23 +44,6 @@ any = [
 ]
 
 [[checks]]
-id = "release-owner"
-type = "text"
-path = "workflows/release.md"
-required = [
-  "## Artifact Plan",
-  "For a native artifact",
-  "operating-system name alone",
-  "authoritative acquisition location",
-  "install or provision, and load",
-  "do not attach installation prose",
-  "unresolved artifact-plan diagnostic",
-  "guess a conventional filename",
-  "publish with incomplete consumer information",
-]
-prohibited = []
-
-[[checks]]
 id = "dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -77,10 +60,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0296", "STD-0297"]
-
-[[checks]]
-id = "removed-authority"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["registered `native-artifact-release` suite"]
-prohibited = ["verify-native-artifact-release.sh", "native-artifact-*.tsv"]

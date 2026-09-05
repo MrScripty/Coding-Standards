@@ -45,28 +45,6 @@ op = "eq"
 value = "unsupported"
 
 [[checks]]
-id = "legacy-selection-closure"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "## Choosing Patterns",
-  "[Standards Router](STANDARDS-ROUTER.md)",
-  "actual responsibility",
-  "A broad situation label does not select",
-  "[Architecture Pattern Reference](reference/patterns/architecture.md)",
-  "nearest example",
-  "canonical typed outcome",
-]
-prohibited = [
-  "| Situation | Recommended Pattern |",
-  "| Multi-layer application | Layered Separation of Concerns |",
-  "| Client-server state management | Backend-Owned Data |",
-  "| Parallel team development | Immutable Contracts |",
-  "| Single-instance process requirement | Process Instance Coordination |",
-  "| Service that any process may need to start | Discover-or-Create |",
-]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

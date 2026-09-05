@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 20,
+  "interface_schema_version": 21,
   "examples": [
     {
       "name": "create-snapshot",
@@ -339,6 +339,53 @@
         "message": "The requested immutable snapshot is unavailable.",
         "details": {},
         "next_operations": []
+      }
+    },
+    {
+      "name": "verify-current-repository",
+      "definition": "VerifyRepositoryCall",
+      "value": {
+        "kind": "verify-repository",
+        "refresh_verification_inputs": false
+      }
+    },
+    {
+      "name": "put-routing-rule",
+      "definition": "PutRoutingRuleEdit",
+      "value": {
+        "kind": "put-routing-rule",
+        "rule": {
+          "id": "route.example",
+          "target": "topic.contracts",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "implementation"
+          },
+          "condition": "Implementation work changes a contract."
+        },
+        "rationale": "Select contract guidance when its condition holds."
+      }
+    },
+    {
+      "name": "verify-exact-proposal-revision",
+      "definition": "VerifyProposalCall",
+      "value": {
+        "kind": "verify-proposal",
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "read-editable-router-definitions",
+      "definition": "ReadRequest",
+      "value": {
+        "kind": "read",
+        "target": "router",
+        "include_routing": true
       }
     }
   ]

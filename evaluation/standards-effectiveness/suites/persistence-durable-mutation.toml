@@ -35,28 +35,6 @@ outcome = "typed-unavailable"
 all = [{ field = "durable_scope", op = "eq", value = "selected" }, { any = [{ field = "invariant", op = "eq", value = "missing" }, { field = "source", op = "eq", value = "missing" }, { field = "destination", op = "eq", value = "missing" }, { field = "capability", op = "eq", value = "missing" }, { field = "publication", op = "eq", value = "unknown" }, { field = "proof", op = "eq", value = "missing" }] }]
 
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/boundaries/persistence.md"
-required = ["## Durable Mutation Contract", "authoritative precondition", "isolated staging", "mandatory five-phase", "temporarily invalid representation", "prohibited partial state", "production path.", "guessed state"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/persistence.md"
-required = ["## Illustrative Staged Publication", "This material is non-normative", "do not authorize placeholders", "authoritative publication."]
-prohibited = []
-
-[[checks]]
-id = "legacy-section"
-type = "markdown_section_text"
-path = "ARCHITECTURE-PATTERNS.md"
-heading = "## Phased Mutation Pattern"
-required = ["[Persistence boundary profile]", "[Persistence Mechanism Recipes]", "Generic process-local mutation remains outside"]
-prohibited = ["function merge_nodes", "### The Pattern", "Use placeholder values", "debug builds", "append only"]
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

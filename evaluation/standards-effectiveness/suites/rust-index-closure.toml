@@ -47,10 +47,3 @@ expected = [
 field = "source"
 op = "eq"
 value = "languages/rust/RUST-STANDARDS.md"
-
-[[checks]]
-id = "rust-index-authority"
-type = "text"
-path = "languages/rust/RUST-STANDARDS.md"
-required = ["non-normative migration navigation", "does not establish applicability, precedence, or a default mechanism", "[canonical Rust profile]", "routing to specialized owners", "typed `unavailable`", "typed `invalid`", "typed `unsupported`", "fallback authority"]
-prohibited = ["## Documents", "## Relationship To Generic Standards", "## Default Rust Position", "| Document | Purpose | When to Use |", "Criterion", "rule wins for Rust crates", "retain authority", "RUST-API-STANDARDS.md", "RUST-TOOLING-STANDARDS.md"]

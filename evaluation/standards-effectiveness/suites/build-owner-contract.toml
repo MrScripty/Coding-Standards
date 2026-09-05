@@ -31,24 +31,3 @@ any = [{ field = "authority", op = "eq", value = "missing" }, { field = "inputs"
 outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
-
-[[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/build.md"
-required = ["ID: `workflow.build`", "## Build Authority", "## Inputs, Outputs, And Side Effects", "## Invalidation And Incrementality", "## Environment And External Effects", "## Determinism And Reproducibility", "## Typed Outcomes"]
-prohibited = []
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Build](workflows/build.md)"]
-prohibited = []
-
-[[checks]]
-id = "root-index"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["[Build workflow](workflows/build.md)"]
-prohibited = []

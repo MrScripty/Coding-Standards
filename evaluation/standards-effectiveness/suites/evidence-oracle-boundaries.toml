@@ -36,34 +36,6 @@ any = [
 ]
 
 [[checks]]
-id = "verification-policy"
-type = "text"
-path = "workflows/verification.md"
-required = ["## Evidence Oracle Boundaries", "## Negative Fixture Isolation", "## Property And Differential Evidence"]
-prohibited = []
-
-[[checks]]
-id = "verification-policy-detail-1"
-type = "text"
-path = "workflows/verification/oracles.md"
-required = ["observed result identifies the expected", "diagnostic or failure point"]
-prohibited = []
-
-[[checks]]
-id = "agent-projections"
-type = "text"
-path = "prompts/planning.md"
-required = ["identify the deciding oracle", "A generated artifact or second local", "implementation is not an independent semantic oracle"]
-prohibited = []
-
-[[checks]]
-id = "template-projection"
-type = "text"
-path = "templates/PLAN-TEMPLATE.md"
-required = ["## Evidence And Oracle Plan", "Intended negative failure", "agreement between local", "implementations as external conformance"]
-prohibited = []
-
-[[checks]]
 id = "registered-consumers"
 type = "path_state"
 present = [

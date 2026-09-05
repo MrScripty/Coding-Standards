@@ -33,10 +33,19 @@ def capture(content: bytes = b"canonical") -> CapturedContent:
 
 
 class SnapshotModuleTests(unittest.TestCase):
-    def test_equal_content_with_nested_paths_can_be_recaptured_after_reopen(self) -> None:
+    def test_equal_content_with_nested_paths_can_be_recaptured_after_reopen(
+        self,
+    ) -> None:
         files = tuple(
             SnapshotFile(SnapshotPath.parse(path), path.encode("utf-8"))
-            for path in ("profiles/rust.md", "profiles/rust/api.md")
+            for path in (
+                "profiles/rust.md",
+                "profiles/rust/api.md",
+                "profiles/rust-api.md",
+                "profiles/é.md",
+                "profiles/e\u0301.md",
+                "profiles/é/api.md",
+            )
         )
         first_capture = CapturedContent("first-revision", files)
         second_capture = CapturedContent("second-revision", reversed(files))

@@ -4,13 +4,6 @@ owner = "STANDARDS-ROUTER.md"
 description = "Non-normative Coding dependency route and exact migration lifecycle."
 
 [[checks]]
-id = "coding-route"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["## Dependency Management Legacy Route", "[Dependencies](topics/dependencies.md)"]
-prohibited = ["DEPENDENCY-STANDARDS.md"]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

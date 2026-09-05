@@ -192,53 +192,6 @@ type = "path_state"
 present = ["topics/concurrency.md", "profiles/languages/rust/async.md"]
 
 [[checks]]
-id = "accepted-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-trust-lifecycle-replan.md"
-required = [
-  "641 undisposed frozen identifiers",
-  "90 trust-boundary identifiers",
-  "F025",
-  "F026",
-  "Establish generic concurrency ownership before the Rust async",
-  "shutdown canonical in the Rust language-binding profile",
-  "No normative standard, final disposition",
-  "## Accepted Slice 7.4b4b: Generic Concurrency Contract",
-  "## Accepted Slice 7.4b4c: Rust Async Decomposition",
-  "## Accepted Slice 7.4b5a: Dependent Rust Decomposition",
-  "milestone-7-f025-f026-decomposition.md",
-  "callbacks and other externally controlled code do not execute while the",
-  "**No fallback:**",
-]
-prohibited = []
-
-[[checks]]
-id = "parent-projection"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md"
-required = ["(milestone-7-trust-lifecycle-replan.md)"]
-prohibited = []
-
-[[checks]]
-id = "finding-closure"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = ["| F044 | Resolved in Milestone 7.4b4a |"]
-prohibited = []
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = [
-  "registered\n`milestone-7-trust-lifecycle-replan` suite",
-  "90-ID trust remainder",
-  "26-ID lifecycle bridge",
-  "without nested Bash execution",
-]
-prohibited = ["The focused checker\nproves the 90-ID trust remainder"]
-
-[[checks]]
 id = "obsolete-authority"
 type = "path_state"
 present = ["evaluation/standards-effectiveness/suites/milestone-7-trust-lifecycle-replan.toml"]

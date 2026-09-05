@@ -73,38 +73,3 @@ all = [{ field = "compatibility", op = "in", values = ["overlap", "contradictory
 outcome = "dependency-blocked"
 [checks.rules.when]
 all = [{ field = "compatibility", op = "eq", value = "dependency-blocked" }]
-
-[[checks]]
-id = "profile-contract"
-type = "text"
-path = "profiles/workflows/concurrent-plan-integration.md"
-required = ["## Applicability", "at least two proposals can remain outstanding", "Do not apply it to serial work", "## Proposal Contract", "## Revision And Compatibility Checks", "semantically `stale`", "Classify overlap or contradictory outcomes as `conflicting`", "## Serial Integration And Reconciliation", "## Mechanism Boundary", "does not prescribe hashes", "semantic"]
-prohibited = ["planning-admission-v1", "planning-transition-v1", "complete-transition", "restore-prior-state", "supersede-transition"]
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["## Workflow Profiles", "Concurrent Plan Integration profile", "Multiple outstanding proposals can become stale before serial integration", "The Concurrent Plan Integration profile is also excluded"]
-prohibited = []
-
-[[checks]]
-id = "reference-boundary"
-type = "text"
-path = "reference/recipes/concurrent-plan-integration.md"
-required = ["This document is non-normative", "## Revision Mechanism Examples", "## Framed Content Digest Example", "illustration"]
-prohibited = ["**Standards metadata**", "- Level: `MUST`"]
-
-[[checks]]
-id = "prompt-projection"
-type = "text"
-path = "prompts/implement-plan.md"
-required = ["only when multiple outstanding", "can become stale before integration", "do not request a", "revision token"]
-prohibited = ["planning-admission-v1", "planning-transition-v1"]
-
-[[checks]]
-id = "template-projection"
-type = "text"
-path = "templates/PLAN-TEMPLATE.md"
-required = ["When the", "Concurrent Plan Integration profile", "Omit those fields when the", "profile does not apply", "Do not add digest or transition-envelope fields"]
-prohibited = ["planning-admission-v1", "planning-transition-v1"]

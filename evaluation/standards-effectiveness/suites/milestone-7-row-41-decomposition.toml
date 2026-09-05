@@ -48,40 +48,6 @@ order = "source"
 expected = [["STD-0349", "workflows/documentation.md", "index", "none"]]
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-41-decomposition.md"
-required = [
-  "## Owner Review",
-  "`STD-0349`",
-  "independent normative rule",
-  "## Exact Outcome",
-  "`index` disposition",
-  "retained-diff",
-  "## Ordered Child",
-  "`41.1`",
-  "## Bounded Write Set",
-  "## Verification Gates",
-  "focused P33",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "DOCUMENTATION-STANDARDS.md"
-required = [
-  "# Documentation Standards",
-  "[Documentation Workflow](workflows/documentation.md)",
-  "[Documentation Recipe](reference/recipes/documentation.md)",
-  "[Release Workflow](workflows/release.md)",
-  "This index has no independent normative authority",
-]
-prohibited = []
-
-[[checks]]
 id = "canonical-owner-path"
 type = "path_state"
 present = ["workflows/documentation.md"]

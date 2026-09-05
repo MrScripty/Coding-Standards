@@ -61,13 +61,6 @@ op = "eq"
 value = "templates/PULL_REQUEST_TEMPLATE.md"
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-27-decomposition.md"
-required = ["## Owner Contract", "sole normative owner", "optional derived projection", "## Exact Dispositions", "`STD-0888` through `STD-0898`", "`27.1`", "## Projection Requirements", "checked boxes", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

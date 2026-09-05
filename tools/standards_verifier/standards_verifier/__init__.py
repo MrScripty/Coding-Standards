@@ -3,7 +3,7 @@
 from .cli import run_complete_verification
 from .diagnostics import EngineError
 from .model import CompleteVerificationResult
-from .suite_inputs import suite_input_projection_bytes
+from .suite_inputs import suite_input_projection_bytes, write_suite_input_projection
 
 from .entrypoints import (
     git_reachability_main,
@@ -19,4 +19,5 @@ __all__ = (
     "run_complete_verification",
     "suite_input_projection_bytes",
     "verifier_main",
+    "write_suite_input_projection",
 )

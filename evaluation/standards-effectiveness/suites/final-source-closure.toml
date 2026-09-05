@@ -69,17 +69,3 @@ path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
 header = ["id", "source", "target", "disposition", "rationale"]
 columns = ["source"]
 order = "source"
-
-[[checks]]
-id = "closure-policy"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-final-source-closure.md"
-required = ["## Re-plan Finding", "## Retention Decision", "## Bounded Write Sets", "## Verification Gates", "manual `D001` through `D010` review", "## Typed Outcomes And No Fallback", "## Re-plan Triggers", "There is no fallback to the frozen legacy source"]
-prohibited = []
-
-[[checks]]
-id = "verifier-replan-policy"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-source-index-verifier-replan.md"
-required = ["## Re-plan Finding", "one reusable source-index closure engine", "Each accepted source package owns one distinct fixture directory.", "## Canonical Inputs", "## Engine Contract", "## Negative Engine Evidence", "same engine used by the live aggregate verifier", "durable package contract. It does not own the", "live source-index aggregate verifier owns implementation acceptance", "## Source-Specific Checker Repair", "A source package may update only its own source-specific checker", "retain semantic owner, route, disposition, and negative evidence", "cannot add dual old/new assertions", "Shared engine code, aggregate policy, cross-source checkers", "checker-infrastructure re-plan", "## Concurrent Preparation And Serial Acceptance", "Preparation order and acceptance order are separate contracts.", "Workers cannot edit shared acceptance state.", "A prepared package is not accepted evidence.", "one complete-suite run may accept", "Architecture remains excluded from preparation wave `p1`", "## Nested Route Schema Replacement", "three-column schema `route`, `target`, and `href`", "normalizes `href` against the", "The old two-column schema is invalid after this repair.", "compatibility parser, inferred href, root-relative-link convention, or nested", "## Historical Checker Repair", "routes established when that row was accepted. It cannot require", "mutable source prose to retain a migration-era sentence", "the preparation inventory assigns the checker to", "negative self-scan prevents the historical checker", "## Mixed Documentation Changelog Checker Repair", "mixed policy infrastructure and", "Separate serial repair `7.4c3hdoc` removes the blanket heading", "preserves all 16 exact changelog dispositions", "Explicit prohibited legacy policy headings", "owned by the aggregate source-closure engine", "## Bounded Write Sets", "## No Fallback", "old bespoke Coding verifier is removed", "## Verification Gates", "## Re-plan Triggers"]
-prohibited = []

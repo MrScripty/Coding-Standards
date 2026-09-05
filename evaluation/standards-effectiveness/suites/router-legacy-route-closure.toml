@@ -17,33 +17,3 @@ expected = ["canonical-only"]
 id = "router-links"
 type = "markdown_links"
 paths = ["STANDARDS-ROUTER.md"]
-
-[[checks]]
-id = "replacement-route-absence"
-type = "table_text_absence"
-path = "STANDARDS-ROUTER.md"
-[checks.literals]
-path = "evaluation/standards-effectiveness/fixtures/router/legacy-route-replacements.tsv"
-header = ["concern", "legacy_route", "canonical_owner", "expected"]
-columns = ["legacy_route"]
-order = "source"
-
-[[checks]]
-id = "final-source-absence"
-type = "table_text_absence"
-path = "STANDARDS-ROUTER.md"
-[checks.literals]
-path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
-header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
-columns = ["source"]
-order = "source"
-
-[[checks]]
-id = "router-policy"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["## Invalid Or Legacy Routing", "Use canonical owners for policy; legacy entrypoints are navigation only.", "Report unresolved material facts", "Do not\nsubstitute a legacy rule or assume an unknown condition is absent."]
-prohibited = [
-  "until migration",
-  "Existing files retain authority only for rules not yet moved",
-]

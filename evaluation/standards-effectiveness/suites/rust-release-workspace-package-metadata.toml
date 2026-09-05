@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/release.md"
-required = ["## Cargo Workspace Package-Metadata Mechanisms", "Each inherited field remains an accepted fact", "cannot require lockstep versioning"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-release.md"
-required = ["## Workspace Package-Metadata Example", "[workspace.package]", "separately owned Rust Dependency mechanisms"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-RELEASE-STANDARDS.md"
-required = []
-prohibited = ["Use `[workspace.package]` to define shared version metadata once"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0815\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t", "STD-0816\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t", "STD-0817\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0815", "languages/rust/RUST-RELEASE-STANDARDS.md", "profiles/languages/rust/release.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0815"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0816", "languages/rust/RUST-RELEASE-STANDARDS.md", "reference/recipes/rust-release.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0816"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0817", "languages/rust/RUST-RELEASE-STANDARDS.md", "reference/recipes/rust-release.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0817"}]}}]

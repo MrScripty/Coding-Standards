@@ -48,35 +48,6 @@ order = "source"
 expected = [["STD-0582", "topics/security.md", "index", "none"]]
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-42-decomposition.md"
-required = [
-  "## Owner Review",
-  "title contributes no independent",
-  "## Verifier Ownership",
-  "registered `source-index-closures` suite",
-  "registered `milestone-7-row-42-decomposition` suite",
-  "## Exact Outcome",
-  "`index` disposition",
-  "## Ordered Child",
-  "`42.1`",
-  "## Bounded Write Set",
-  "## Verification Gates",
-  "focused P34",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = ["verify-milestone-7-row-42-decomposition.sh"]
-
-[[checks]]
-id = "source-index-authority"
-type = "text"
-path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
-required = ["id = \"security-title-disposition\"", "STD-0582"]
-prohibited = ["verify-security-index-closure.sh"]
-
-[[checks]]
 id = "canonical-prerequisites"
 type = "path_state"
 present = [

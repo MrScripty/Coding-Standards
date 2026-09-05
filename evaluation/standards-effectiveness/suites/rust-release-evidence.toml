@@ -30,46 +30,18 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
-[[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/release.md"
-required = ["## Rust Release Evidence Mechanisms", "proves only its declared claim", "No fixed command set applies"]
-prohibited = []
 
 [[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-release.md"
-required = ["## Release Evidence Command Examples", "cargo clippy --workspace", "do not form an every-release checklist"]
-prohibited = []
-
-[[checks]]
-id = "source-index"
-type = "exact_text"
+id = "source-index-destinations"
+type = "markdown_targets"
 path = "languages/rust/RUST-RELEASE-STANDARDS.md"
-expected = """# Rust Release Standards Migration Index
-
-This is a non-normative migration index. Rust release policy and mechanisms
-have moved to canonical owners; this file defines no release, contract,
-dependency, licensing, documentation, tooling, verification, recipe, or Cargo
-mechanism requirement.
-
-- [Rust release mechanisms](../../profiles/languages/rust/release.md)
-- [Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)
-- [Release](../../workflows/release.md)
-- [Verification](../../workflows/verification.md)
-- [Tooling](../../workflows/tooling.md)
-- [Dependencies](../../topics/dependencies.md)
-- [Contracts](../../topics/contracts.md)
-- [Licensing](../../topics/licensing.md)
-- [Documentation](../../workflows/documentation.md)
-- [Rust release recipes](../../reference/recipes/rust-release.md)
-"""
+required = ["profiles/languages/rust/dependencies.md", "profiles/languages/rust/release.md", "reference/recipes/rust-release.md", "topics/contracts.md", "topics/dependencies.md", "topics/licensing.md", "workflows/documentation.md", "workflows/release.md", "workflows/tooling.md", "workflows/verification.md"]
 
 [[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0820\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0820", "languages/rust/RUST-RELEASE-STANDARDS.md", "profiles/languages/rust/release.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0820"}]}}]

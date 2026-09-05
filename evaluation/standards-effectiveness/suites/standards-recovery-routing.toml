@@ -129,20 +129,6 @@ selections = [
 ]
 
 [[checks]]
-id = "router-policy"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["## Generated Contract Profile Applicability", "not replace unresolved boundary, consumer, deployment, or persistence facts", "with a smaller static module list"]
-prohibited = []
-
-[[checks]]
-id = "profile-policy"
-type = "text"
-path = "profiles/boundaries/generated-contract.md"
-required = ["ID: `profile.boundary.generated-contract`", "## Applicability", "## Semantic Closure", "Generated output, copied expectations, or agreement among local projections", "cannot be the sole semantic oracle"]
-prohibited = []
-
-[[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "profiles/boundaries/generated-contract.md", "topics/architecture.md", "topics/contracts.md", "topics/dependencies.md", "workflows/build.md", "workflows/commit.md", "workflows/development-proportionality.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/planning.md", "workflows/release.md", "workflows/tooling.md", "workflows/verification.md", "topics/architecture/replay.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]

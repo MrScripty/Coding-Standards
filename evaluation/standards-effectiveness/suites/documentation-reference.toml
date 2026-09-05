@@ -87,37 +87,3 @@ values = ["STD-0376", "STD-0377", "STD-0378", "STD-0379", "STD-0380", "STD-0381"
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/documentation.md", "reference/recipes/documentation.md", "topics/code-design.md"]
-
-[[checks]]
-id = "reference-boundary"
-type = "text"
-path = "reference/recipes/documentation.md"
-required = [
-  "# Documentation Recipe",
-  "Level: `REFERENCE`",
-  "[Documentation Workflow](../../workflows/documentation.md)",
-  "It does not require",
-  "documentation for every public symbol or algorithm",
-]
-prohibited = [
-  "All public functions, classes, and types should be documented",
-  "All rows in a table must use the same column widths",
-  "Always include:",
-  "For non-trivial algorithms, provide comprehensive documentation",
-]
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "DOCUMENTATION-STANDARDS.md"
-required = ["reference/recipes/documentation.md"]
-prohibited = [
-  "## Code Comments",
-  "## Markdown Formatting",
-  "## API Documentation",
-  "## Algorithm Documentation",
-  "All public functions, classes, and types should be documented",
-  "All rows in a table must use the same column widths",
-  "Always include:",
-  "For non-trivial algorithms, provide comprehensive documentation",
-]

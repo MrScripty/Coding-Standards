@@ -43,20 +43,6 @@ any = [
 ]
 
 [[checks]]
-id = "release-owner"
-type = "text"
-path = "workflows/release.md"
-required = ["### Binding Artifact Roles And Composition", "internal adapter, wrapper, generator, schema, or build input", "Record which items are release artifacts", "separate or bundled composition", "not the product identity", "compatibility and version relationships remain Contracts-owned", "unresolved artifact-plan diagnostic", "Do not assume one native library per target", "Do not publish an internal build input"]
-prohibited = []
-
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-required = ["workflows/release.md#binding-artifact-roles-and-composition"]
-prohibited = ["Ship one product-native shared library", "Package generated host-language bindings separately", "pantograph-headless-native-linux-x64.zip", "optional secondary artifacts"]
-
-[[checks]]
 id = "dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

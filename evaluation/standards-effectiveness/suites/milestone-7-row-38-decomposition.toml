@@ -47,13 +47,6 @@ op = "eq"
 value = "STD-0088"
 
 [[checks]]
-id = "report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-38-decomposition.md"
-required = ["## Owner Contract", "Directory count, file count, path names", "## Exact Ownership", "`STD-0088`", "Activity Tracing is `STD-0089`", "## Source-Gap Recovery", "restoring legacy policy", "## Typed Outcomes And No Fallback", "No missing fact selects a README", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

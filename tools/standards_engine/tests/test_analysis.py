@@ -335,6 +335,11 @@ class AnalysisWorkflowTest(unittest.TestCase):
                         }
                     )
                 )
+                verified = facade.verify_proposal({"kind": "verify-proposal", "revision": created.revision.as_contract()})
+                self.assertEqual(verified["kind"], "verify-proposal-result")
+                self.assertTrue(verified["verification"]["passed"], verified)
+                self.assertEqual(engine._repository.branch_revision("main"), expected)
+                self.assertEqual((repository / path).read_text(encoding="utf-8"), planning)
                 analysis = "analysis:sha256:" + "a" * 64
                 decisions = _review_decisions()
                 authorizations = tuple(

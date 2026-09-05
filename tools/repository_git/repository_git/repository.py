@@ -176,6 +176,11 @@ class GitRepository:
         self._max_object_bytes = max_object_bytes
         self._active_candidates: set[int] = set()
 
+    @property
+    def root(self) -> Path:
+        """Working repository root for owner-operated verification."""
+        return self._repository
+
     def current_revision(self) -> RepositoryRevision:
         return self._revision("HEAD^{commit}")
 

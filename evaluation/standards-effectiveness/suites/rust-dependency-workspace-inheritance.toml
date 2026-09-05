@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "cargo_support", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/dependencies.md"
-required = ["## Workspace Inheritance Mechanisms", "inheritance coordinates selected manifest facts", "not transfer ownership to the workspace root", "Member count"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-dependencies.md"
-required = ["## Workspace Inheritance Examples", "workspace = true", "make member count, root placement"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
-required = []
-prohibited = ["two or more workspace members", "serde = { workspace = true }"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0735\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0736\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0737\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0735", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "profiles/languages/rust/dependencies.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0735"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0736", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0736"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0737", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0737"}]}}]

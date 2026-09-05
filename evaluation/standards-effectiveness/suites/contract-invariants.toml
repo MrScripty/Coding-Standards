@@ -66,31 +66,12 @@ any = [
   { field = "selected_outcome", op = "eq", value = "unknown" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "topics/contracts.md"
-required = ["## Invariant Contracts", "Preconditions describe facts", "mode alone does not decide", "Verification selects evidence", "Do not require one test per sentence", "Distinguish arbitrary or adversarial input", "Immediate failure with trace-led diagnosis is valid", "Panic, recovery, rejection, or graceful termination is valid only"]
-prohibited = []
 
 [[checks]]
-id = "legacy-and-routes"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["topics/contracts.md#invariant-contracts", "workflows/verification.md#selecting-claims"]
-prohibited = ["### Validation Strategy", "Every invariant should have corresponding tests"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0167\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the invariants parent with routes to canonical Contracts and Verification authority",
-  "STD-0168\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdocument material invariants at their canonical owner when meaning enforcement invalidation or outcomes are not evident",
-  "STD-0169\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdefine owned observable invariant contracts without copied graph examples",
-  "STD-0170\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdefine caller-establishable preconditions without transferring implementation obligations",
-  "STD-0171\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdefine outcome-specific postconditions guaranteed by the operation",
-  "STD-0172\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tselect enforcement from authority impact boundaries mutation and proof lifetime without build-mode or failure-mechanism defaults",
-  "STD-0173\tCODING-STANDARDS.md\tworkflows/verification.md\trefine\tselect objective-aligned invariant evidence without mandatory test-per-invariant or test-name proof",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0167", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0167"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0168", "CODING-STANDARDS.md", "topics/contracts.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0168"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0169", "CODING-STANDARDS.md", "topics/contracts.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0169"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0170", "CODING-STANDARDS.md", "topics/contracts.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0170"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0171", "CODING-STANDARDS.md", "topics/contracts.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0171"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0172", "CODING-STANDARDS.md", "topics/contracts.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0172"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0173", "CODING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0173"}]}}]

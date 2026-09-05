@@ -72,10 +72,3 @@ order = "lexical"
 field = "id"
 op = "in"
 values = ["STD-0051", "STD-0052", "STD-0053", "STD-0054", "STD-0063", "STD-0064", "STD-0065", "STD-0066", "STD-0067", "STD-0068", "STD-0592", "STD-0593", "STD-0594", "STD-0595"]
-
-[[checks]]
-id = "report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-f018-decomposition.md"
-required = ["[milestone-7-f018-slices.tsv](../../../../evaluation/standards-effectiveness/milestone-7-f018-slices.tsv)", "fixtures/contracts/runtime-decoding-decisions.tsv", "fixtures/ipc/action-payload-decisions.tsv", "type assertion", "typed `unsupported`", "no default action", "Finding `F018` is resolved"]
-prohibited = ["both slices `Planned`", "`7.4b2c` `Planned`"]

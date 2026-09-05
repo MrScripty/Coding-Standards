@@ -94,24 +94,3 @@ any = [
     { field = "evidence_mode", op = "eq", value = "automated" },
   ] },
 ]
-
-[[checks]]
-id = "canonical-policy"
-type = "text"
-path = "workflows/verification.md"
-required = [
-  "## Evidence Kind",
-  "## Environment Qualification",
-  "## Execution Mode",
-  "Either mode is acceptable for this claim.",
-  "Derive each blocking or advisory gate from a named acceptance claim",
-  "Before adding costly, overlapping, brittle, or architectural evidence machinery",
-  "the mechanism's marginal deciding value after that overlap",
-  "why exact byte identity is required",
-  "could be wrong is not by",
-  "independent reachable failure or supplies distinct deciding value",
-  "Select the smallest complete claim set",
-  "Simulation proves only its modeled contract.",
-  "Manual execution is not stronger than automation.",
-]
-prohibited = ["kind@environment@mode"]

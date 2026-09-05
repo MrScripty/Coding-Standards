@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import subprocess
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -886,6 +887,269 @@ class LogicalAuthoringTests(unittest.TestCase):
                 base_repository_paths=self.repository_paths,
             )
         self.assertEqual(cycle_error.exception.failure.code, "METADATA.REQUIRES_CYCLE")
+
+    def routing_projection(self, edits):
+        return LogicalAuthoringCompiler(StandardsEngine._compile).compile(
+            self.base,
+            LogicalProgram((self.change_set(edits),)),
+            base_repository_paths=self.repository_paths,
+        )
+
+    def route_edit(self, target="topic.logical-authoring-test"):
+        return {
+            "kind": "put-routing-rule",
+            "rule": {
+                "id": "route.logical-authoring-test",
+                "target": target,
+                "when": {
+                    "operator": "contains",
+                    "fact": "routing.activities",
+                    "value": "implementation",
+                },
+                "condition": "Work exercises logical authoring.",
+            },
+            "rationale": "Exercise routing through the public authoring language.",
+        }
+
+    def test_create_nested_standard_and_route_atomically(self):
+        standard = self.new_standard_edit()
+        standard["standard"]["id"] = "topic.logical-authoring-test.detail"
+        standard["policy_units"][0]["id"] = "topic.logical-authoring-test.detail.policy"
+        projection = self.routing_projection(
+            [
+                self.route_edit("topic.logical-authoring-test.detail"),
+                standard,
+            ]
+        )
+        files = dict(projection.source.files)
+        self.assertIn("topics/logical-authoring-test/detail.md", files)
+        self.assertIn("router", projection.analysis_module_ids)
+        rules = {rule.id: rule.target for rule in projection.compiled.router.rules}
+        self.assertEqual(
+            rules["route.logical-authoring-test"], "topic.logical-authoring-test.detail"
+        )
+        self.assert_suite_input_projection_is_canonical(projection)
+
+    def test_rule_update_and_removal_keep_readable_and_executable_routes_in_sync(self):
+        raw = tomllib.loads(
+            dict(self.base.files)[
+                "evaluation/standards-effectiveness/router-projection.toml"
+            ].decode()
+        )
+        rule = dict(raw["rules"][0])
+        rule.update(when={"operator": "always"}, condition="Applicable to every task.")
+        updated = self.routing_projection(
+            [
+                {
+                    "kind": "put-routing-rule",
+                    "rule": rule,
+                    "rationale": "Exercise update.",
+                }
+            ]
+        )
+        self.assertEqual(
+            next(
+                item.program.as_expression()
+                for item in updated.compiled.router.rules
+                if item.id == rule["id"]
+            ),
+            {"operator": "always"},
+        )
+        removed = self.routing_projection(
+            [
+                {
+                    "kind": "remove-routing-rule",
+                    "rule": rule["id"],
+                    "rationale": "Exercise removal.",
+                }
+            ]
+        )
+        self.assertNotIn(
+            rule["id"], {item.id for item in removed.compiled.router.rules}
+        )
+
+    def test_route_targets_can_be_swapped_in_one_atomic_change(self):
+        raw = tomllib.loads(
+            dict(self.base.files)[
+                "evaluation/standards-effectiveness/router-projection.toml"
+            ].decode()
+        )
+        first, second = (dict(item) for item in raw["rules"][:2])
+        first["target"], second["target"] = second["target"], first["target"]
+        edits = [
+            {
+                "kind": "put-routing-rule",
+                "rule": dict(rule, condition="Exercise target exchange."),
+                "rationale": "Change the final routing graph atomically.",
+            }
+            for rule in (first, second)
+        ]
+        projection = self.routing_projection(edits)
+        targets = {rule.id: rule.target for rule in projection.compiled.router.rules}
+        self.assertEqual(targets[first["id"]], first["target"])
+        self.assertEqual(targets[second["id"]], second["target"])
+
+    def test_new_fact_and_rule_compile_together_and_unused_fact_can_be_removed(self):
+        fact = {
+            "id": "routing.authoring-test",
+            "semantic_revision": 1,
+            "type": "enum-set",
+            "nullable": False,
+            "values": ["selected"],
+            "aliases": [],
+            "meaning": "Select the authoring test guidance.",
+            "prompt": "Is this authoring test selected?",
+        }
+        route = self.route_edit()
+        route["rule"]["when"].update(fact=fact["id"], value="selected")
+        projection = self.routing_projection(
+            [
+                route,
+                self.new_standard_edit(),
+                {
+                    "kind": "put-routing-fact",
+                    "fact": fact,
+                    "rationale": "Declare a new selection domain.",
+                },
+            ]
+        )
+        self.assertEqual(
+            next(
+                rule.program.referenced_facts
+                for rule in projection.compiled.router.rules
+                if rule.id == route["rule"]["id"]
+            ),
+            (fact["id"],),
+        )
+        compiler = LogicalAuthoringCompiler(StandardsEngine._compile)
+        removed = compiler.compile(
+            projection.source,
+            LogicalProgram(
+                (
+                    self.change_set(
+                        [
+                            {
+                                "kind": "remove-routing-fact",
+                                "fact": fact["id"],
+                                "rationale": "Remove unused domain.",
+                            },
+                            {
+                                "kind": "remove-routing-rule",
+                                "rule": route["rule"]["id"],
+                                "rationale": "Remove its only selection.",
+                            },
+                        ]
+                    ),
+                )
+            ),
+            base_repository_paths=projection.repository_paths,
+        )
+        self.assertNotIn(
+            fact["id"], {item.id for item in removed.compiled.router.facts}
+        )
+
+    def test_duplicate_route_target_rejected(self):
+        with self.assertRaises(AuthoringError) as caught:
+            self.routing_projection([self.route_edit("workflow.verification")])
+        self.assertEqual(
+            caught.exception.failure.code, "AUTHORING.DUPLICATE_ROUTE_TARGET"
+        )
+
+    def test_unknown_route_fact_is_rejected_without_changing_base(self):
+        edit = self.route_edit()
+        edit["rule"]["when"]["fact"] = "routing.missing"
+        original = self.base.files
+        from tools.standards_analysis.standards_analysis import AnalysisError
+
+        with self.assertRaises(AnalysisError):
+            self.routing_projection([self.new_standard_edit(), edit])
+        self.assertEqual(self.base.files, original)
+
+    def test_fact_presentation_and_value_order_preserve_semantic_revision(self):
+        raw = tomllib.loads(
+            dict(self.base.files)[
+                "evaluation/standards-effectiveness/router-projection.toml"
+            ].decode()
+        )
+        fact = {
+            key: value
+            for key, value in raw["facts"][0].items()
+            if key
+            in {
+                "id",
+                "semantic_revision",
+                "type",
+                "nullable",
+                "values",
+                "aliases",
+                "meaning",
+                "prompt",
+            }
+        }
+        fact["values"] = list(reversed(fact["values"]))
+        fact["prompt"] = "Which activities does this task involve?"
+        fact["aliases"] = ["routing.activity-alias"]
+        projection = self.routing_projection(
+            [
+                {
+                    "kind": "put-routing-fact",
+                    "fact": fact,
+                    "rationale": "Reorder display values without changing their domain.",
+                }
+            ]
+        )
+        selected = next(
+            item for item in projection.compiled.router.facts if item.id == fact["id"]
+        )
+        self.assertEqual(selected.semantic_revision, fact["semantic_revision"])
+        self.assertEqual(set(selected.values), set(fact["values"]))
+
+    def test_fact_revision_and_referenced_removal_are_validated(self):
+        raw = tomllib.loads(
+            dict(self.base.files)[
+                "evaluation/standards-effectiveness/router-projection.toml"
+            ].decode()
+        )
+        fact = {
+            key: value
+            for key, value in raw["facts"][0].items()
+            if key
+            in {
+                "id",
+                "semantic_revision",
+                "type",
+                "nullable",
+                "values",
+                "aliases",
+                "meaning",
+                "prompt",
+            }
+        }
+        fact["meaning"] = "A changed meaning for the activity domain."
+        edit = {
+            "kind": "put-routing-fact",
+            "fact": fact,
+            "rationale": "Exercise fact revision.",
+        }
+        with self.assertRaises(AuthoringError) as caught:
+            self.routing_projection([edit])
+        self.assertEqual(
+            caught.exception.failure.code, "AUTHORING.INVALID_SEMANTIC_REVISION"
+        )
+        fact["semantic_revision"] += 1
+        self.routing_projection([edit])
+        from tools.standards_analysis.standards_analysis import AnalysisError
+
+        with self.assertRaises(AnalysisError):
+            self.routing_projection(
+                [
+                    {
+                        "kind": "remove-routing-fact",
+                        "fact": fact["id"],
+                        "rationale": "Referenced facts cannot disappear.",
+                    }
+                ]
+            )
 
 
 if __name__ == "__main__":

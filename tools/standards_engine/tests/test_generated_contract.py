@@ -37,6 +37,126 @@ def _canonical_contracts() -> tuple[dict[str, object], dict[str, object]]:
 
 
 class GeneratedContractTest(unittest.TestCase):
+    def test_verification_is_exposed_without_publication_and_refresh_is_explicit(self):
+        from tools.standards_verifier.standards_verifier import (
+            CompleteVerificationResult,
+        )
+        from tools.standards_engine.standards_engine.tools import _contracts
+
+        with StandardsEngine.open_repository(REPO_ROOT, durable=False) as engine:
+            facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
+            with (
+                mock.patch.object(
+                    engine,
+                    "_application_verifier",
+                    return_value=CompleteVerificationResult(()),
+                ) as verify,
+                mock.patch(
+                    "tools.standards_engine.standards_engine.engine.write_suite_input_projection"
+                ) as refresh,
+                mock.patch.object(engine._repository, "publish_candidate") as publish,
+            ):
+                result = facade.verify_repository(
+                    {"kind": "verify-repository", "refresh_verification_inputs": False}
+                )
+                self.assertTrue(result["verification"]["passed"])
+                verify.assert_called_once_with(REPO_ROOT)
+                refresh.assert_not_called()
+                publish.assert_not_called()
+                # A low-level caller without authorization cannot refresh inputs.
+                denied = facade.verify_repository(
+                    {"kind": "verify-repository", "refresh_verification_inputs": True}
+                )
+                self.assertEqual(denied["kind"], "rejected-result")
+                refresh.assert_not_called()
+
+    def test_router_read_exposes_editable_definitions_only_when_requested(self):
+        from tools.standards_engine.standards_engine.tools import _contracts
+
+        with StandardsEngine.open_repository(REPO_ROOT, durable=False) as engine:
+            facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
+            created = facade.create_snapshot({"kind": "create-snapshot"})
+            self.assertEqual(created["kind"], "create-snapshot-result", created)
+            query = {
+                "snapshot": created["snapshot"]["snapshot"],
+                "request": {"kind": "read", "target": "router"},
+            }
+            plain = facade.query(query)
+            self.assertEqual(plain["kind"], "read-result", plain)
+            self.assertNotIn("routing", plain)
+            query["request"]["include_routing"] = True
+            detailed = facade.query(query)
+            self.assertEqual(detailed["kind"], "read-result", detailed)
+            self.assertTrue(detailed["routing"]["rules"])
+            self.assertTrue(detailed["routing"]["facts"])
+            contracts = _contracts(REPO_ROOT)
+            for rule in detailed["routing"]["rules"]:
+                contracts.validate(
+                    "PutRoutingRuleEdit",
+                    {
+                        "kind": "put-routing-rule",
+                        "rule": rule,
+                        "rationale": "Use the Engine's editable routing definition.",
+                    },
+                )
+            for fact in detailed["routing"]["facts"]:
+                contracts.validate(
+                    "PutRoutingFactEdit",
+                    {
+                        "kind": "put-routing-fact",
+                        "fact": fact,
+                        "rationale": "Use the Engine's editable fact definition.",
+                    },
+                )
+
+            rule = dict(
+                detailed["routing"]["rules"][0],
+                when={"operator": "always"},
+                condition="Exercise authoring | verify the public round trip.",
+            )
+            evidence = {
+                "id": "CORE-STANDARDS.md",
+                "digest": "sha256:"
+                + hashlib.sha256(
+                    (REPO_ROOT / "CORE-STANDARDS.md").read_bytes()
+                ).hexdigest(),
+                "provider_contract": "repository-content",
+                "provider_contract_version": "1",
+            }
+            proposed = facade.create_proposal(
+                {
+                    "kind": "create-proposal",
+                    "base_snapshot": query["snapshot"],
+                    "change_set": {
+                        "purpose": {
+                            "summary": "Test routing authoring",
+                            "rationale": "Read, edit, and inspect routing through the public Interface.",
+                            "evidence": [evidence],
+                        },
+                        "edits": [
+                            {
+                                "kind": "put-routing-rule",
+                                "rule": rule,
+                                "rationale": "Exercise an unconditional route.",
+                            }
+                        ],
+                    },
+                }
+            )
+            self.assertEqual(proposed["kind"], "create-proposal-result", proposed)
+            draft = facade.query_proposal(
+                {
+                    "revision": proposed["revision"],
+                    "request": query["request"],
+                }
+            )
+            self.assertEqual(draft["kind"], "proposal-read-result", draft)
+            observed = next(
+                item for item in draft["routing"]["rules"] if item["id"] == rule["id"]
+            )
+            self.assertEqual(observed["when"], {"operator": "always"})
+            self.assertEqual(observed["condition"], rule["condition"])
+
     def test_local_facade_binds_always_allow_authorization(self) -> None:
         engine = SimpleNamespace(close=lambda: None)
         with mock.patch.object(
@@ -46,10 +166,11 @@ class GeneratedContractTest(unittest.TestCase):
 
         self.assertIs(facade._engine, engine)
         context = open_repository.call_args.kwargs["execution_context"]
-        identifier = "evidence.local-request"
+        identifier = "CORE-STANDARDS.md"
+        content = (REPO_ROOT / identifier).read_bytes()
         reference = EvidenceReference(
             identifier,
-            "sha256:" + hashlib.sha256(identifier.encode("utf-8")).hexdigest(),
+            "sha256:" + hashlib.sha256(content).hexdigest(),
             "repository-content",
             "1",
         )
@@ -68,15 +189,58 @@ class GeneratedContractTest(unittest.TestCase):
         self.assertEqual(claim.subject_kind, request.subject_kind)
         self.assertEqual(claim.subject_id, request.subject_id)
         self.assertEqual(claim.capability, request.capability)
-        self.assertEqual(claim.submission_evidence[0].content, identifier.encode())
+        self.assertEqual(claim.submission_evidence[0].content, content)
         self.assertEqual(claim.revocation_state, "not-revoked")
         self.assertEqual(claim.decision, "allow")
+
+    def test_local_evidence_rejects_missing_files_and_wrong_digests(self):
+        from tools.standards_engine.standards_engine.tools import (
+            LocalAlwaysAllowAuthorizer,
+        )
+        from tools.standards_analysis.standards_analysis import (
+            AnalysisError,
+            AuthorizationUnavailable,
+        )
+
+        authorizer = LocalAlwaysAllowAuthorizer(REPO_ROOT)
+        for identifier in ("missing-review-evidence.md", "../outside.md"):
+            reference = EvidenceReference(
+                identifier, "sha256:" + "0" * 64, "repository-content", "1"
+            )
+            outcome = authorizer.authorize(
+                AuthorizationRequest(
+                    "review-proposal",
+                    "proposal",
+                    "example",
+                    "standards.review.consumer",
+                    (reference,),
+                )
+            )
+            self.assertIsInstance(outcome, AuthorizationUnavailable)
+        reference = EvidenceReference(
+            "CORE-STANDARDS.md", "sha256:" + "0" * 64, "repository-content", "1"
+        )
+        with self.assertRaises(AnalysisError) as caught:
+            authorizer.authorize(
+                AuthorizationRequest(
+                    "review-proposal",
+                    "proposal",
+                    "example",
+                    "standards.review.consumer",
+                    (reference,),
+                )
+            )
+        self.assertEqual(
+            caught.exception.failure.code, "ANALYSIS.EVIDENCE_DIGEST_MISMATCH"
+        )
 
     def test_interface_operations_bind_generated_calls_results_and_facade(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         facade = AgentToolFacade(object(), contracts)
         expected_inputs = {
+            "verify_repository": generated.VerifyRepositoryCall,
+            "verify_proposal": generated.VerifyProposalCall,
             "create_snapshot": generated.CreateSnapshotCall,
             "find_snapshots": generated.FindSnapshotsCall,
             "delete_snapshot": generated.DeleteSnapshotCall,
@@ -251,14 +415,14 @@ class GeneratedContractTest(unittest.TestCase):
         projected = render_repository_projections()[tools_path]
         self.assertEqual(tools_path.read_text(encoding="utf-8"), projected)
 
-    def test_authored_v20_examples_satisfy_the_public_contract(self) -> None:
+    def test_authored_examples_satisfy_the_public_contract(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
         path = REPO_ROOT / "tools/standards_engine/contracts/examples/a1-examples.json"
         corpus = json.loads(path.read_text(encoding="utf-8"))
 
         self.assertEqual(corpus["schema_version"], 2)
-        self.assertEqual(contracts.interface.interface_schema_version, 20)
+        self.assertEqual(contracts.interface.interface_schema_version, 21)
         self.assertEqual(
             corpus["interface_schema_version"],
             contracts.interface.interface_schema_version,

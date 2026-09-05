@@ -45,22 +45,6 @@ order = "source"
 expected = [["STD-0089"], ["STD-0090"], ["STD-0091"], ["STD-0092"]]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-31-decomposition.md"
-required = [
-  "## Owner Contract",
-  "Contracts owns typed outcome meaning",
-  "does not mandate logging",
-  "## Exact Ownership",
-  "`31.1`",
-  "`31.2`",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = []
-
-[[checks]]
 id = "execution-train-owner"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

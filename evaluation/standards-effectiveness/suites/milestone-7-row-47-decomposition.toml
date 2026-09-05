@@ -100,13 +100,6 @@ op = "eq"
 value = "templates/README-TEMPLATE.md"
 
 [[checks]]
-id = "report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-47-decomposition.md"
-required = ["## Review Finding", "one coherent Documentation-owned", "## Owner Contract", "## Exact Outcomes", "## Ordered Child", "`47.1`", "## Verification Gates", "## Typed Outcomes And No Fallback", "Do not infer a README from directory shape", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "corpus"
 type = "table"
 path = "evaluation/standards-effectiveness/corpus.tsv"
@@ -119,17 +112,3 @@ expected = [["templates/README-TEMPLATE.md", "template", "derived", "reference",
 field = "path"
 op = "eq"
 value = "templates/README-TEMPLATE.md"
-
-[[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/documentation.md"
-required = ["ID: `workflow.documentation`", "Requires: `core`", "Canonical owner: `workflows/documentation.md`", "If the impact cannot be classified", "Contradictory trigger", "Do not default to a `src/` directory, README per directory, fixed headings"]
-prohibited = []
-
-[[checks]]
-id = "template"
-type = "text"
-path = "templates/README-TEMPLATE.md"
-required = ["selects a", "`boundary-readme` or `contract-readme`", "Delete instructions and optional", "sections that do not apply", "## Purpose", "## Responsibility", "## Invariants", "## Entry Points", "## Decision Links", "## Consumer Contract", "## Produced Contract"]
-prohibited = ["\n## Contents\n", "\n## Problem\n", "\n## Constraints\n", "\n## Decision\n", "\n## Alternatives Rejected\n", "\n## Revisit Triggers\n", "\n## Dependencies\n", "\n### Internal\n", "\n### External\n", "\n## Related ADRs\n", "\n## Usage Examples\n", "\n## API Consumer Contract\n", "\n## Structured Producer Contract\n", "\n## Testing\n", "\n## Notes\n"]

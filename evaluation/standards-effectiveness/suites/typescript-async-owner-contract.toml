@@ -44,44 +44,6 @@ outcome = "typed-unsupported"
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
 [[checks]]
-id = "canonical-owner-projection"
-type = "text"
-path = "profiles/languages/typescript/async.md"
-required = [
-  "ID: `profile.language.typescript.async`",
-  "Specializes: `topic.concurrency`",
-  "Establish Current-Invocation Authority",
-  "Classify Every Completion",
-  "scope-owned generation token",
-  "process-global counter",
-  "typed `invalid`, `unsupported`, or `unavailable`",
-  "Do not continue with a process-global counter",
-]
-prohibited = []
-
-[[checks]]
-id = "router-projection"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["Change promises, overlapping calls, cancellation, or stale-result handling"]
-prohibited = []
-
-[[checks]]
-id = "legacy-projection"
-type = "text"
-path = "CONCURRENCY-STANDARDS.md"
-required = [
-  "## TypeScript Async Index",
-  "[TypeScript Async Profile](profiles/languages/typescript/async.md)",
-]
-prohibited = [
-  "## TypeScript Concurrency Rules",
-  "### Guard Against Stale Async Responses",
-  "let currentRequestId = 0;",
-  "Stale — discard",
-]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -113,10 +75,3 @@ all = [
   { field = "baseline_order", op = "eq", value = "13" },
   { field = "child_order", op = "eq", value = "3" },
 ]
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["the registered `typescript-async-owner-contract` suite establish the TypeScript Async"]
-prohibited = ["`verify-typescript-async-owner-contract.sh` establish the TypeScript Async"]

@@ -365,7 +365,7 @@ class SQLiteSnapshotStore:
             began = True
             existing_files = self._content_files(content_id)
             submitted_files = tuple(
-                sorted((str(item.path), item.content) for item in capture.files)
+                (str(item.path), item.content) for item in capture.files
             )
             if existing_files:
                 if existing_files != submitted_files:
@@ -941,7 +941,7 @@ class SQLiteSnapshotStore:
         try:
             rows = self._connection.execute(
                 "SELECT logical_path, raw_bytes, byte_length, sha256 FROM content_files "
-                "WHERE content_id = ? ORDER BY logical_path",
+                "WHERE content_id = ?",
                 (content_id,),
             ).fetchall()
         except sqlite3.DatabaseError as error:
@@ -958,7 +958,9 @@ class SQLiteSnapshotStore:
                     "stored content bytes are contradictory",
                 )
             selected.append((str(path), content))
-        return tuple(selected)
+        # SQL row order and slash-joined string order are not domain path order.
+        # Use the same component ordering as CapturedContent on every read.
+        return tuple(sorted(selected, key=lambda item: SnapshotPath.parse(item[0])))
 
     def _raise_missing(self, snapshot: SnapshotId) -> None:
         tombstone = self._connection.execute(

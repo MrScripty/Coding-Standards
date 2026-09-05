@@ -28,18 +28,3 @@ unique = [["id"]]
 columns = ["id", "classification", "reason"]
 order = "source"
 expected = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "DOCUMENTATION-STANDARDS.md"
-required = [
-  "# Documentation Standards",
-  "non-normative navigation",
-  "Router's typed",
-  "[Documentation Workflow](workflows/documentation.md)",
-  "[Documentation Recipe](reference/recipes/documentation.md)",
-  "[Release Workflow](workflows/release.md)",
-  "This index has no independent normative authority",
-]
-prohibited = []

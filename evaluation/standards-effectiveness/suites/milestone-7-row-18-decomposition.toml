@@ -65,20 +65,3 @@ header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_stat
 columns = ["owner"]
 order = "source"
 where = { field = "baseline_order", op = "eq", value = "18" }
-
-[[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-18-decomposition.md"
-required = [
-  "Those concerns do not share one canonical",
-  "## Ordered Implementation",
-  "suite labels as evidence",
-  "typed diagnostics",
-  "no normative or legacy standard",
-  "## Refined Verification Boundary",
-  "eight Verification children",
-  "final legacy-closure child",
-  "Row 21 child `21.1` creates the narrow Rust dependency",
-]
-prohibited = []

@@ -42,27 +42,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = ["ID: `profile.application.frontend`", "## Projection Authority", "## Rendering And Synchronization", "## Interaction And Accessibility", "infer domain authority", "source contract is", "not interaction proof"]
-prohibited = []
-
-[[checks]]
-id = "router-projection"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Frontend application profile](profiles/applications/frontend.md)"]
-prohibited = []
-
-[[checks]]
-id = "root-projection"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["[Frontend application profile](profiles/applications/frontend.md)"]
-prohibited = ["[FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md)"]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

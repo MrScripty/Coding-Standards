@@ -74,17 +74,3 @@ values = ["STD-0561", "STD-0562", "STD-0563", "STD-0564", "STD-0565"]
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "workflow-policy"
-type = "text"
-path = "workflows/release.md"
-required = ["## Maintenance And Channels"]
-prohibited = ["git checkout -b hotfix/vX.Y.Z", "release/X.Y", "12 months of security patches", "`stable`, `beta`, `nightly`", "Flags should be short-lived", "Library releases typically do not need feature flags"]
-
-[[checks]]
-id = "workflow-policy-detail-1"
-type = "text"
-path = "workflows/release/operations.md"
-required = ["maintenance contract before making that promise", "has no intrinsic branch, tag, maintenance duration", "Do not mutate published bytes or silently omit an affected supported", "release-maintenance diagnostic", "A release channel is a consumer contract", "Prerelease identifiers and channels are independent decisions", "release-channel diagnostic", "Feature flags and runtime activation controls do not define release channels"]
-prohibited = ["git checkout -b hotfix/vX.Y.Z", "release/X.Y", "12 months of security patches", "`stable`, `beta`, `nightly`", "Flags should be short-lived", "Library releases typically do not need feature flags"]

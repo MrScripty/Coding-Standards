@@ -48,57 +48,6 @@ order = "source"
 expected = [["STD-0758", "profiles/languages/rust/language-bindings.md", "index", "none"]]
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md"
-required = [
-  "## Owner Review",
-  "52 frozen identifiers",
-  "## Verifier Ownership",
-  "registered `rust-binding-title-index-closure` suite",
-  "registered `rust-binding-index-closure` suite",
-  "registered `milestone-7-row-43-decomposition` suite",
-  "does not dispose `STD-0758`",
-  "## Exact Outcome",
-  "`index` disposition",
-  "## Ordered Child",
-  "`43.1`",
-  "## Bounded Write Set",
-  "## Verification Gates",
-  "focused package P35",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = [
-  "verify-milestone-7-row-43-decomposition.sh",
-  "verify-rust-binding-index-closure.sh",
-]
-
-[[checks]]
-id = "legacy-index-routes"
-type = "text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-required = [
-  "# Rust Language Bindings Standards",
-  "RUST-INTEROP-STANDARDS.md",
-  "RUST-CROSS-PLATFORM-STANDARDS.md",
-  "Contract Evolution And Degraded Outcomes",
-  "profiles/languages/rust/language-bindings.md",
-]
-prohibited = []
-
-[[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/languages/rust/language-bindings.md"
-required = [
-  "ID: `profile.language.rust.language-bindings`",
-  "Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.language-bindings`",
-  "Canonical owner: `profiles/languages/rust/language-bindings.md`",
-]
-prohibited = []
-
-[[checks]]
 id = "canonical-prerequisites"
 type = "path_state"
 present = [

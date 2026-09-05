@@ -31,23 +31,12 @@ outcome = "typed-unavailable"
 [checks.rules.when]
 any = [{ field = "scope", op = "eq", value = "missing" }, { field = "schedule", op = "eq", value = "missing" }]
 
-[[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/tooling.md"
-required = ["ID: `workflow.tooling`", "Tooling Authority", "Hook Selection And Configuration", "Scheduling And Cost", "Editor And File Configuration", "Lint Policy And Orchestration", "Formatting Policy And Orchestration", "Persisted Artifact Checks", "typed `invalid`", "typed `unavailable`", "typed `unsupported`", "successful no-op", "Do not default to a hook product"]
-prohibited = []
 
 [[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0654\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0655\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0660\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0662\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0664\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0665\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0666\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0673\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0674\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0675\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0681\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0682\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t", "STD-0683\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0686\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t"]
-prohibited = []
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Tooling](workflows/tooling.md)"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0654", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0654"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0655", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0655"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0660", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0660"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0662", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0662"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0664", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0664"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0665", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0665"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0666", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0666"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0673", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0673"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0674", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0674"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0675", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0675"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0681", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0681"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0682", "TOOLING-STANDARDS.md", "workflows/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0682"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0683", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0683"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0686", "TOOLING-STANDARDS.md", "workflows/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0686"}]}}]

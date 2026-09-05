@@ -46,27 +46,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/accessibility.md"
-required = ["## Input Modality Equivalence", "## Focus Visibility And Authority", "## Focus Lifecycle", "does not establish another", "fixed trap"]
-prohibited = []
-
-[[checks]]
-id = "web-reference"
-type = "text"
-path = "reference/recipes/accessibility.md"
-required = ["## Web Focus Mechanisms", ":focus-visible", "outline-offset: 2px", "Escape"]
-prohibited = []
-
-[[checks]]
-id = "legacy-index-closure"
-type = "text"
-path = "ACCESSIBILITY-STANDARDS.md"
-required = ["## Keyboard And Focus Semantics (Migrated)", "[Accessibility](topics/accessibility.md)", "[Accessibility Recipes](reference/recipes/accessibility.md)"]
-prohibited = [":focus-visible"]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

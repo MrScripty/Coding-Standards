@@ -64,13 +64,6 @@ op = "in"
 values = ["STD-0126", "STD-0127", "STD-0128", "STD-0129", "STD-0130", "STD-0131", "STD-0132", "STD-0133"]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-33-decomposition.md"
-required = ["## Owner Contract", "sole normative owner for outcome meaning", "IPC remains transport-independent", "## Exact Ownership", "`33.1`", "`33.2`", "reference/recipes/http.md", "## Typed Outcomes And No Fallback", "default an unknown failure to `500`", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

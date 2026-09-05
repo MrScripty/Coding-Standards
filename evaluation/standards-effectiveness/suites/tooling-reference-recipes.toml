@@ -1,25 +1,26 @@
 schema_version = 1
 id = "tooling-reference-recipes"
 owner = "reference.tooling"
-description = "Non-normative Tooling examples and routes without product, installation, configuration, or command defaults."
+description = "Navigation destinations for the documented owners; policy meaning requires semantic review."
+
 
 [[checks]]
-id = "reference"
-type = "text"
+id = "reference-destinations"
+type = "markdown_targets"
 path = "reference/recipes/tooling.md"
-required = ["# Tooling Recipes", "Role: `reference`", "Level: `REFERENCE`", "This material is non-normative", "../../workflows/tooling.md", "../../topics/dependencies.md", "do not define a fallback configuration", "## EditorConfig Example", "only one possible transport", "../../workflows/tooling.md#editor-and-file-configuration", "not recommended defaults", "## Linter Category Examples", "taxonomy and products are illustrative only", "../../workflows/tooling.md#lint-policy-and-orchestration", "## TypeScript Tooling Examples", "Product-specific failure modes", "examples only, not defaults", "## Formatting Automation Examples", "editor.formatOnSave", "examples only", "grant mutation authority", "prettier --check \"src/**/*.ts\""]
-prohibited = []
+required = ["profiles/languages/typescript.md", "topics/dependencies.md", "workflows/tooling.md"]
 
 [[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0656\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire\t", "STD-0657\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0658\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0659\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0661\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0676\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0667\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire\t", "STD-0668\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0669\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0670\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0671\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0672\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0684\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0685\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0656", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "retire"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0656"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0657", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0657"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0658", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0658"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0659", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0659"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0661", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0661"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0676", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0676"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0667", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "retire"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0667"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0668", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0668"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0669", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0669"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0670", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0670"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0671", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0671"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0672", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0672"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0684", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0684"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0685", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "retire"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0685"}]}}]
 
 [[checks]]
-id = "former-source"
-type = "text"
+id = "former-source-destinations"
+type = "markdown_targets"
 path = "TOOLING-STANDARDS.md"
-required = ["[Tooling recipe](reference/recipes/tooling.md#hook-feedback)", "[Tooling recipe](reference/recipes/tooling.md#lefthook-example)"]
-prohibited = ["### Recommended Tool: Lefthook", "npm install lefthook --save-dev", "curl -sSfL https://get.lh.run | sh", "See [templates/lefthook.yml]", "See [templates/.editorconfig]", "# Web files typically use 2-space indent", "| Category | Purpose | Examples |", "Enable all strict checks for type safety", "| Mistake | Symptom | Fix |", "prettier --check \"src/**/*.ts\""]
+required = ["FRONTEND-STANDARDS.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]

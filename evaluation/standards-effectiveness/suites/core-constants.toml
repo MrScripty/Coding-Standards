@@ -43,27 +43,12 @@ outcome = "keep-local"
 [checks.rules.when]
 all = [{ field = "meaning", op = "eq", value = "obvious" }]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "CORE-STANDARDS.md"
-required = ["### Semantic Constants And Configuration", "coordinated change must be explicit", "narrowest concern that owns", "imports do not transfer ownership", "Do not turn invariants into settings"]
-prohibited = []
 
 [[checks]]
-id = "legacy"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = []
-prohibited = ["### No Magic Numbers or Strings"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0148\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdefine semantic constant and configuration ownership from meaning units policy lifecycle and override authority",
-  "STD-0149\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tname literals only when semantic ownership or coordinated change requires it rather than banning every literal",
-  "STD-0150\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tplace values with the narrowest owning concern rather than a universal centralized constants container",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0148", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0148"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0149", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0149"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0150", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0150"}]}}]

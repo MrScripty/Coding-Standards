@@ -35,17 +35,3 @@ expected = [["languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md", "reference", "no
 field = "path"
 op = "eq"
 value = "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
-
-[[checks]]
-id = "legacy-index-route-absent"
-type = "text"
-path = "languages/rust/RUST-STANDARDS.md"
-required = []
-prohibited = ["RUST-STANDARDS-ADOPTION-NOTES.md"]
-
-[[checks]]
-id = "router-route-absent"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = []
-prohibited = ["RUST-STANDARDS-ADOPTION-NOTES.md"]

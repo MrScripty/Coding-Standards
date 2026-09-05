@@ -40,31 +40,12 @@ any = [
   { field = "context", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "workflows/verification.md"
-required = ["## Coverage And Durable Evidence Records", "does not prove observable", "named risk or claim", "cannot be recovered from the check name", "requiring an inline comment", "successful instrumentation"]
-prohibited = []
 
 [[checks]]
-id = "legacy-routes"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["| Acceptance claims, evidence kinds, environments, test design, placement, coverage, test data, async evidence, supporting gates, and diagnosis | [Verification](workflows/verification.md) |"]
-prohibited = ["Simple getters/setters with no logic", "directly above the test"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0625\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace coverage guidance parent with a non-normative route to canonical coverage interpretation",
-  "STD-0626\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect coverage metric scope threshold and baseline from named risk history tooling and decision cost without universal percentages",
-  "STD-0627\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect coverage exclusions from generated unreachable and instrumentation authority without conventional exclusion lists",
-  "STD-0628\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\ttreat coverage as a path diagnostic without inferring behavior assertion quality evidence fidelity or acceptance from target attainment",
-  "STD-0629\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace test documentation parent with a non-normative route to canonical durable evidence records",
-  "STD-0630\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\trecord non-recoverable defect invariant environment and interpretation context at the owning evidence without mandatory inline comments",
-  "STD-0631\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\trecord non-recoverable fixture shape authority at the owning artifact without mandatory diagrams tables or templates",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0625", "TESTING-STANDARDS.md", "workflows/verification.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0625"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0626", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0626"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0627", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0627"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0628", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0628"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0629", "TESTING-STANDARDS.md", "workflows/verification.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0629"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0630", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0630"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0631", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0631"}]}}]

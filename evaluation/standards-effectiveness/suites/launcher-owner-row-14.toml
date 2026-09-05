@@ -45,29 +45,6 @@ any = [
 ]
 
 [[checks]]
-id = "owner-profile"
-type = "text"
-path = "profiles/applications/launcher.md"
-required = [
-  "ID: `profile.application.launcher`",
-  "Launcher Authority",
-  "Select Actions From Declared Capabilities",
-  "Delegate Without Upgrading Evidence",
-  "Own Process And State Boundaries",
-  "does not own application business logic",
-  "typed `invalid`, `unsupported`, or `unavailable`",
-  "Do not continue through a guessed action",
-]
-prohibited = []
-
-[[checks]]
-id = "router-projection"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["Change a launcher command, lifecycle, delegation, or outcome"]
-prohibited = []
-
-[[checks]]
 id = "exact-disposition-identities"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -167,30 +144,3 @@ header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_stat
 columns = ["owner"]
 order = "source"
 where = { field = "baseline_order", op = "eq", value = "14" }
-
-[[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-14-decomposition.md"
-required = [
-  "do not share one canonical owner",
-  "### Child 14.1: Launcher Population And Structural Closure",
-  "### Child 14.2: GUI Smoke Acceptance",
-  "### Child 14.3: Dependencies Owner And Population",
-  "### Child 14.4: Build Procedure",
-  "### Child 14.5: Generated Command Security",
-  "successful build no-ops",
-  "typed outcomes",
-  "no normative or legacy standard",
-]
-prohibited = []
-
-[[checks]]
-id = "readme-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = [
-  "`launcher-owner-row-14` suite establish the Launcher application profile",
-  "exact five-child row-14 decomposition",
-]
-prohibited = ["`verify-launcher-owner-contract.sh` establish the Launcher application profile"]

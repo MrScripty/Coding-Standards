@@ -33,27 +33,6 @@ outcome = "typed-unavailable"
 any = [{ field = "meaning", op = "eq", value = "missing" }, { field = "classification", op = "eq", value = "missing" }, { field = "equivalent", op = "eq", value = "missing" }, { field = "context", op = "eq", value = "missing" }, { field = "state", op = "eq", value = "missing" }, { field = "capability", op = "eq", value = "missing" }]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/accessibility.md"
-required = ["## Media Meaning And Classification", "## Equivalent Media Outcomes", "filename", "library convention"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/accessibility.md"
-required = ["## Web Image And Icon Mechanisms", "alt=\"\"", "alt=\"Error\"", "aria-hidden=\"true\""]
-prohibited = []
-
-[[checks]]
-id = "legacy-index-purity"
-type = "text"
-path = "ACCESSIBILITY-STANDARDS.md"
-required = ["## Media Semantics (Migrated)"]
-prohibited = ["<img"]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

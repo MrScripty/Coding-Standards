@@ -85,20 +85,3 @@ header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_stat
 columns = ["owner"]
 order = "source"
 where = { field = "baseline_order", op = "eq", value = "13" }
-
-[[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-13-decomposition.md"
-required = [
-  "do not share a specialization owner",
-  "### Child 13.1: C# Async Owner And Population",
-  "### Child 13.2: Rust Routing Index",
-  "### Child 13.3: TypeScript Async Owner And Population",
-  "### Child 13.4: Godot Framework Owner And Population",
-  "silent stale-result discard",
-  "`CallDeferred` and `IsInstanceValid` are available mechanisms",
-  "typed diagnostics",
-  "changes no normative or legacy standard",
-]
-prohibited = []

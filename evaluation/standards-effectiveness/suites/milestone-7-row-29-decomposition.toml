@@ -42,23 +42,6 @@ order = "source"
 expected = [["STD-0046"], ["STD-0047"], ["STD-0048"], ["STD-0049"], ["STD-0050"]]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-29-decomposition.md"
-required = [
-  "## Owner Contract",
-  "sole normative owner",
-  "freeze coordinates concurrent work",
-  "## Exact Dispositions",
-  "`STD-0046` through `STD-0050`",
-  "`29.1`",
-  "## Decision Requirements",
-  "universal append-only evolution",
-  "## Re-plan Triggers",
-]
-prohibited = []
-
-[[checks]]
 id = "execution-train-owner"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/tooling.md"
-required = ["## Rust Test-Runner Adapter Mechanisms", "After Tooling selects a test runner", "cannot select"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-tooling.md"
-required = ["## Nextest Command Examples", "cargo nextest run --workspace", "do not select nextest"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-TOOLING-STANDARDS.md"
-required = []
-prohibited = ["Use nextest when it materially improves"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0835\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0835", "languages/rust/RUST-TOOLING-STANDARDS.md", "profiles/languages/rust/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0835"}]}}]

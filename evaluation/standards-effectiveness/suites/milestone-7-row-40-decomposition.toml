@@ -48,26 +48,6 @@ order = "source"
 expected = [["STD-0134", "reference/patterns/architecture.md", "merge-duplicate", "none"]]
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-40-decomposition.md"
-required = [
-  "## Owner Review",
-  "`STD-0134`",
-  "pattern presence",
-  "## Exact Outcome",
-  "`merge-duplicate`",
-  "## Ordered Child",
-  "`40.1`",
-  "## Bounded Write Set",
-  "## Verification Gates",
-  "focused P32 gate",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = []
-
-[[checks]]
 id = "canonical-owner-path"
 type = "path_state"
 present = ["reference/patterns/architecture.md"]

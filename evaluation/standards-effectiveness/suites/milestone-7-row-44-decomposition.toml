@@ -48,53 +48,6 @@ order = "source"
 expected = [["STD-0821", "profiles/languages/rust/security.md", "index", "none"]]
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-44-decomposition.md"
-required = [
-  "## Owner Review",
-  "six frozen identifiers",
-  "## Verifier Ownership",
-  "registered `rust-security-title-index-closure` suite",
-  "registered `milestone-7-row-44-decomposition` suite",
-  "does not dispose `STD-0821`",
-  "## Exact Outcome",
-  "`index` disposition",
-  "## Ordered Child",
-  "`44.1`",
-  "## Bounded Write Set",
-  "## Verification Gates",
-  "focused package P36",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = ["verify-milestone-7-row-44-decomposition.sh"]
-
-[[checks]]
-id = "legacy-index-routes"
-type = "text"
-path = "languages/rust/RUST-SECURITY-STANDARDS.md"
-required = [
-  "# Rust Security Standards",
-  "Security Standards",
-  "profiles/languages/rust/security.md",
-  "profiles/languages/rust/async.md",
-  "RUST-API-STANDARDS.md",
-]
-prohibited = []
-
-[[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/languages/rust/security.md"
-required = [
-  "ID: `profile.language.rust.security`",
-  "Requires: `core`, `workflow.verification`, `topic.security`, `profile.language.rust`",
-  "Canonical owner: `profiles/languages/rust/security.md`",
-]
-prohibited = []
-
-[[checks]]
 id = "canonical-prerequisites"
 type = "path_state"
 present = [

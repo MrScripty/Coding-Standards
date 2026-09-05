@@ -58,13 +58,6 @@ all = [
 ]
 
 [[checks]]
-id = "execution-owner-coverage"
-type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-required = ["workflows/tooling.md", "workflows/verification.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "topics/dependencies.md", "profiles/languages/typescript.md", "reference/recipes/tooling.md"]
-prohibited = []
-
-[[checks]]
 id = "owner-validation"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.tsv"
@@ -112,31 +105,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0677", "STD-0678", "STD-0679", "STD-0680", "STD-0682", "STD-0686", "STD-0689", "STD-0690", "STD-0692", "STD-0696", "STD-0697", "STD-0698", "STD-0699", "STD-0700"]
-
-[[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-19-decomposition.md"
-required = ["## Proposed Owner Contract", "does not own what evidence proves", "must not fall back", "## Ordered Children", "18 overlay rows", "canonical-owner-homogeneous", "Child `19.8` is a reviewed split package", "exactly one `split` disposition", "Child `19.9` applies the same boundary", "Child `19.12` applies the split boundary", "Child `19.13` applies the same boundary", "Child `19.15` reconciles replacement lineage", "Child `19.16` keeps Implementation", "## Implementation Sequence", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
-id = "owner-validation-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-19-owner-validation.md"
-required = ["## Boundary Result", "validates creating `workflows/tooling.md`", "## Required Option 2 Package", "before normative implementation", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
-id = "tooling-owner"
-type = "text"
-path = "workflows/tooling.md"
-required = ["ID: `workflow.tooling`"]
-prohibited = []
-
-[[checks]]
-id = "tooling-reference"
-type = "text"
-path = "reference/recipes/tooling.md"
-required = ["ID: `reference.recipes.tooling`"]
-prohibited = []

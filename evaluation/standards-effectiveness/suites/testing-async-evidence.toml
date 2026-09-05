@@ -41,31 +41,12 @@ any = [
   { field = "timing", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "workflows/verification.md"
-required = ["## Async Completion And Failure Evidence", "terminal state and externally meaningful", "not a universal pair", "cannot substitute for the selected boundary", "weaker-boundary evidence"]
-prohibited = []
 
 [[checks]]
-id = "legacy-routes"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = [
-  "| Acceptance claims, evidence kinds, environments, test design, placement, coverage, test data, async evidence, supporting gates, and diagnosis | [Verification](workflows/verification.md) |",
-  "| Concurrent test resources and asynchronous lifecycle obligations | [Concurrency](topics/concurrency.md) |",
-]
-prohibited = ["// GOOD: Properly awaited", "Upstream non-success responses"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0636\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace async-testing parent with a non-normative route to canonical completion and outcome evidence while preserving Concurrency lifecycle ownership",
-  "STD-0637\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect await join event callback polling clock harness or process observation from the owned terminal state without await-syntax or runner-exit defaults",
-  "STD-0638\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tderive success failure cancellation timeout retry and partial-result cases from the owned contract without universal success-and-failure pairs",
-  "STD-0640\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tprove service-boundary outcomes effects termination and diagnostics at the selected boundary without generic error checklists mocks or weaker-boundary substitution",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0636", "TESTING-STANDARDS.md", "workflows/verification.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0636"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0637", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0637"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0638", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0638"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0640", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0640"}]}}]

@@ -34,27 +34,6 @@ outcome = "typed-unavailable"
 all = [{ field = "scope", op = "eq", value = "selected" }, { any = [{ field = "project", op = "eq", value = "missing" }, { field = "runtime", op = "eq", value = "missing" }, { field = "rule", op = "eq", value = "missing" }, { field = "purpose", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "missing" }] }]
 
 [[checks]]
-id = "typescript-profile"
-type = "text"
-path = "profiles/languages/typescript.md"
-required = ["## Static Analysis And Compiler Configuration", "Select type-aware lint scope", "Do not default to an", "Missing project boundaries"]
-prohibited = []
-
-[[checks]]
-id = "tooling-workflow"
-type = "text"
-path = "workflows/tooling.md"
-required = ["## Lint Policy And Orchestration", "purpose", "severity"]
-prohibited = []
-
-[[checks]]
-id = "tooling-reference"
-type = "text"
-path = "reference/recipes/tooling.md"
-required = ["### Illustrative React Automatic JSX Lint Adapter", "This snippet does not select React", "version label cannot replace evidence"]
-prohibited = []
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

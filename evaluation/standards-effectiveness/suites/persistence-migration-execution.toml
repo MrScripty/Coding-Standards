@@ -41,28 +41,6 @@ outcome = "typed-unavailable"
 all = [{ field = "selection", op = "eq", value = "selected" }, { any = [{ field = "artifact", op = "eq", value = "missing" }, { field = "identity", op = "eq", value = "missing" }, { field = "integrity", op = "eq", value = "missing" }, { field = "order", op = "eq", value = "missing" }, { field = "ledger", op = "eq", value = "missing" }, { field = "coordination", op = "eq", value = "missing" }, { field = "capability", op = "eq", value = "missing" }] }]
 
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/boundaries/persistence.md"
-required = ["## Migration Execution Contract", "source and destination states selected", "migration identity and integrity", "deterministic dependency", "ledger consistent", "does not authorize repeated application", "startup is one possible trigger", "none is a compatibility default"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/persistence.md"
-required = ["## Illustrative Migration Adapters", "These filenames, fields, SQL types", "explicitly selected startup adapter", "not discover pending work by guess"]
-prohibited = []
-
-[[checks]]
-id = "legacy-section"
-type = "markdown_section_text"
-path = "ARCHITECTURE-PATTERNS.md"
-heading = "## Schema Versioning and Migration"
-required = ["[Persistence boundary profile]", "[Contracts]", "[Persistence Mechanism Recipes]"]
-prohibited = ["### The Pattern", "001_initial_schema.sql", "schema_migrations", "apply_pending_migrations", "Add column", "Two-phase removal", "destructive replacement does not require a speculative"]
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

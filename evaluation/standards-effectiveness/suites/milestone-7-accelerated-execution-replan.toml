@@ -271,54 +271,6 @@ all = [
 ]
 
 [[checks]]
-id = "accepted-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-accelerated-execution-replan.md"
-required = [
-  "570 frozen identifiers remain in 43 pending logical clusters",
-  "maps every pending immutable-train row to one of 40 packages",
-  "Every legacy identifier receives exactly one final disposition",
-  "No risk class permits compatibility copies",
-  "`decision-table`",
-  "`owner-contract`",
-  "`migration-structure`",
-  "`custom-semantic`",
-  "There is no wholesale checker rewrite",
-  "Twelve canonical owners are still missing",
-  "`isolated-draft`",
-  "`serial-only`",
-  "Both reviews are required",
-  "final `7.4c` milestone",
-  "set -euo pipefail",
-  "changes no normative or legacy standard",
-  "registered declarative suite",
-]
-prohibited = ["verify-milestone-7-accelerated-execution-replan.sh"]
-
-[[checks]]
-id = "resolved-findings"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = [
-  "| F070 | Resolved in Milestone 7.4b8l |",
-  "| F071 | Resolved in Milestone 7.4b8m |",
-  "| F072 | Resolved in Milestone 7.4b8n |",
-]
-prohibited = []
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = [
-  "registered `milestone-7-accelerated-execution-replan` suite",
-  "exact pending-row coverage",
-  "immutable-train alignment",
-  "owner-action decisions",
-]
-prohibited = ["`verify-milestone-7-accelerated-execution-replan.sh`"]
-
-[[checks]]
 id = "obsolete-authority"
 type = "path_state"
 present = ["evaluation/standards-effectiveness/suites/milestone-7-accelerated-execution-replan.toml"]

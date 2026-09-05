@@ -32,45 +32,18 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
-[[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/dependencies.md"
-required = ["## Build-Cost Measurement Mechanisms", "Performance defines the build-cost claim", "does not select a percentage threshold"]
-prohibited = []
 
 [[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-dependencies.md"
-required = ["## Build-Cost Measurement Examples", "cargo build --timings", "do not establish a 20 percent threshold"]
-prohibited = []
-
-[[checks]]
-id = "source-index"
-type = "exact_text"
+id = "source-index-destinations"
+type = "markdown_targets"
 path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
-expected = """# Rust Dependency Standards Migration Index
-
-This is a non-normative migration index. Rust dependency policy has moved to
-canonical owners; this file defines no dependency, security, licensing,
-performance, verification, tooling, public-feature, recipe, or Cargo mechanism
-requirement.
-
-- [Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)
-- [Rust API mechanisms](../../profiles/languages/rust/api.md)
-- [Dependencies](../../topics/dependencies.md)
-- [Performance](../../topics/performance.md)
-- [Security](../../topics/security.md)
-- [Licensing](../../topics/licensing.md)
-- [Verification](../../workflows/verification.md)
-- [Tooling](../../workflows/tooling.md)
-- [Rust dependency recipes](../../reference/recipes/rust-dependencies.md)
-"""
+required = ["profiles/languages/rust/api.md", "profiles/languages/rust/dependencies.md", "reference/recipes/rust-dependencies.md", "topics/dependencies.md", "topics/licensing.md", "topics/performance.md", "topics/security.md", "workflows/tooling.md", "workflows/verification.md"]
 
 [[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0749\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0750\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0751\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0749", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "profiles/languages/rust/dependencies.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0749"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0750", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0750"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0751", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0751"}]}}]

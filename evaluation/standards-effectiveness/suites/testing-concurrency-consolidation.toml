@@ -33,33 +33,12 @@ any = [
   { field = "substitute", op = "ne", value = "none" },
 ]
 
-[[checks]]
-id = "canonical-policy"
-type = "text"
-path = "topics/concurrency.md"
-required = ["## Isolate Verification Resources", "Restore borrowed global state and terminate owned work", "Serialization is a valid selected mechanism only when", "Do not serialize as a fallback", "timer, subscription, polling, and retry cleanup", "current-invocation results winning over stale overlapping work", "passing build, startup smoke, happy path, serialized rerun"]
-prohibited = []
 
 [[checks]]
-id = "testing-route-and-legacy"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["[Concurrency](topics/concurrency.md)"]
-prohibited = ["If isolation is impossible, serialize", "Run affected suites with normal parallelism enabled"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0611\tTESTING-STANDARDS.md\ttopics/concurrency.md\trefine\trequire verification-resource ownership or explicit invariant-matched coordination without serialization ambient identity weakened parallelism or stale-state fallback",
-  "STD-0639\tTESTING-STANDARDS.md\ttopics/concurrency.md\trefine\trequire lifecycle cleanup retry restart stale-result cancellation and partial-state evidence without build smoke happy-path serialized-rerun or weakened-assertion substitution",
-]
-prohibited = []
-
-[[checks]]
-id = "row-18-route"
-type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-required = ["18\t1\tSTD-0611,STD-0639\tTESTING-STANDARDS.md\ttopics/concurrency.md\texists\tpre-slice-review\tfocused"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0611", "TESTING-STANDARDS.md", "topics/concurrency.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0611"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0639", "TESTING-STANDARDS.md", "topics/concurrency.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0639"}]}}]

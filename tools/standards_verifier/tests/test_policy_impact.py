@@ -5,6 +5,8 @@ import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
@@ -351,12 +353,35 @@ class PolicyImpactTest(unittest.TestCase):
         )
 
     def test_registered_loader_consumes_engine_coverage_authority(self) -> None:
-        covered = load_registered_policy_impact(
-            REPO_ROOT,
-            DEFAULT_SOURCE_REGISTRY,
-            {},
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+        subjects = frozenset(
+            unit.id
+            for unit in corpus.policy_unit_corpus.for_module("workflow.planning")
         )
-        self.assertIn("workflow.planning", covered.covered_owners)
+        self.assertTrue(subjects)
+        for selected in (subjects, frozenset()):
+            with (
+                self.subTest(covered=bool(selected)),
+                patch(
+                    "standards_verifier.policy_impact.load_repository_coverage_decisions",
+                    return_value=SimpleNamespace(
+                        covered_subjects=selected, input_sources=()
+                    ),
+                ) as authority,
+            ):
+                adapter = load_registered_policy_impact(
+                    REPO_ROOT, DEFAULT_SOURCE_REGISTRY, {}
+                )
+            authority.assert_called_once()
+            self.assertEqual(
+                "workflow.planning" in adapter.covered_owners, bool(selected)
+            )
+            if not selected:
+                with self.assertRaises(EngineError) as raised:
+                    adapter.consumers_for("workflow.planning")
+                self.assertEqual(
+                    raised.exception.diagnostic.code, "POLICY_IMPACT.OWNER_NOT_AUDITED"
+                )
 
     def test_current_planning_graph_has_explicit_consumer_and_alias_closure(
         self,
@@ -419,6 +444,7 @@ class PolicyImpactTest(unittest.TestCase):
                 / "tools/standards_verifier/standards_verifier/policy_impact_cli.py"
             ).exists()
         )
+
 
 if __name__ == "__main__":
     unittest.main()

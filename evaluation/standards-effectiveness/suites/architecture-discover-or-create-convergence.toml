@@ -48,53 +48,6 @@ op = "eq"
 value = "unsupported"
 
 [[checks]]
-id = "legacy-projection"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "## Discover-or-Create Pattern",
-  "[Architecture](topics/architecture.md)",
-  "[Contracts](topics/contracts.md)",
-  "[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant)",
-  "[Resilience](topics/resilience.md)",
-  "[Security](topics/security.md#network-transport-boundary)",
-  "possible mechanisms",
-  "cannot establish applicability",
-]
-prohibited = []
-
-[[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = [
-  "## Conditional Discover-Or-Create Convergence",
-  "selected discovery operation",
-  "creation authorized",
-  "Neither discovery failure",
-  "does not require connection before creation",
-  "loop until success",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-default-removal"
-type = "markdown_section_text"
-path = "ARCHITECTURE-PATTERNS.md"
-heading = "## Discover-or-Create Pattern"
-required = []
-prohibited = [
-  "### The Pattern",
-  "### Instance Convergence Flow",
-  "### Rules",
-  "### Ownership Models",
-  "Attempt connection before creation",
-  "Retry with backoff after lock failure",
-  "Last-client-standing",
-  "Independent daemon",
-]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

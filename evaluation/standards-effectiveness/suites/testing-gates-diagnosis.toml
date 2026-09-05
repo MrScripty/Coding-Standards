@@ -43,26 +43,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "workflows/verification.md"
-required = [
-  "## Supporting Gates And Claim-Directed Diagnosis",
-  "supporting gate and cannot replace",
-  "information gain",
-  "source order is",
-  "default acceptance",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["workflows/verification.md"]
-prohibited = ["Is it a compiler/type error?", "Always compile after edits"]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

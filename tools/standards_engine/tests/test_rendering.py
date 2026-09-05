@@ -11,6 +11,29 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class TextRenderingTest(unittest.TestCase):
+    def test_verification_projection_preserves_revision_and_diagnostic_identity(self):
+        revision = "proposal-revision:sha256:" + "a" * 64
+        report = {
+            "passed": False,
+            "exit_code": 1,
+            "suites": 1,
+            "checks": 1,
+            "failures": [
+                {
+                    "code": "ASSERT.MARKDOWN_TARGET_MISSING",
+                    "message": "Required destination is absent.",
+                    "suite": "navigation",
+                    "check": "owners",
+                }
+            ],
+        }
+        for kind in ("verify-repository-result", "verify-proposal-result"):
+            rendered = render_text(
+                {"kind": kind, "verification": report, "revision": {"id": revision}}
+            )
+            self.assertIn(revision, rendered)
+            self.assertIn(report["failures"][0]["code"], rendered)
+
     def test_pending_projection_is_deterministic_and_work_focused(self) -> None:
         pending = {
             "kind": "pending-result",
@@ -130,6 +153,8 @@ class TextRenderingTest(unittest.TestCase):
             )
         }
         directly_rendered = {
+            "verify-repository-result",
+            "verify-proposal-result",
             "pending-result",
             "complete-result",
             "analysis-state",

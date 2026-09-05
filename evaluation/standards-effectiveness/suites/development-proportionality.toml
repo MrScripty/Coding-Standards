@@ -126,38 +126,6 @@ selections = [
 ]
 
 [[checks]]
-id = "workflow-policy"
-type = "text"
-path = "workflows/development-proportionality.md"
-required = [
-  "- ID: `workflow.development-proportionality`",
-  "smallest reversible production implementation over further design",
-  "Do not spend more effort reducing uncertainty than the plausible rework or",
-  "This workflow owns whether the next development action is `implement`,",
-  "discovering adjacent uncertainty does not automatically",
-  "A completed investigation returns to the Development Decision.",
-]
-prohibited = [
-  "always prototype",
-  "always investigate",
-  "minimum number of reviews",
-]
-
-[[checks]]
-id = "router-policy"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["Investigation or evidence work may delay a sufficient implementation | [Development Proportionality](workflows/development-proportionality.md)"]
-
-[[checks]]
-id = "planning-prerequisite"
-type = "text"
-path = "workflows/planning.md"
-required = [
-  "- Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.development-proportionality`",
-]
-
-[[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/development-proportionality.md", "workflows/implementation.md", "workflows/planning.md", "workflows/verification.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]

@@ -41,38 +41,12 @@ any = [
   { field = "evidence", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "topics/performance.md"
-required = ["ID: `topic.performance`", "## Performance Claim Authority", "## Measurement Contract", "## Optimization Decision", "## Benchmarks And Regression Evidence", "does not independently", "mechanisms, not defaults", "Documentation records durable claim"]
-prohibited = []
 
 [[checks]]
-id = "routes-and-legacy"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["[Performance](topics/performance.md)"]
-prohibited = ["Avoid allocations in hot paths", "Code runs once at startup"]
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Performance](topics/performance.md)"]
-prohibited = []
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0188\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the performance parent with a non-normative route to canonical Performance authority",
-  "STD-0189\tCODING-STANDARDS.md\ttopics/performance.md\trefine\trecord durable claim tradeoff and reproduction facts without a copied performance documentation template",
-  "STD-0190\tCODING-STANDARDS.md\ttopics/performance.md\trefine\tdefine performance from an owned metric workload budget environment and consumer claim without a hot-path label default",
-  "STD-0191\tCODING-STANDARDS.md\ttopics/performance.md\trefine\tselect optimization mechanisms from measured contributors and tradeoffs without preallocation batching or early-out defaults",
-  "STD-0192\tCODING-STANDARDS.md\ttopics/performance.md\trefine\tselect benchmark scope threshold environment and schedule from the claim without fixed targets or automated-regression defaults",
-  "STD-0193\tCODING-STANDARDS.md\ttopics/performance.md\trefine\trequire claim-matched measurement and evidence without universal profile documentation benchmark or allocation rules",
-  "STD-0194\tCODING-STANDARDS.md\ttopics/performance.md\trefine\toptimize from owned unsatisfied claims and measured contributors without hot-loop startup critical-path or readability slogans",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0188", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0188"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0189", "CODING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0189"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0190", "CODING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0190"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0191", "CODING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0191"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0192", "CODING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0192"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0193", "CODING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0193"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0194", "CODING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0194"}]}}]

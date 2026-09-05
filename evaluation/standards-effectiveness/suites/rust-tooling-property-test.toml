@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/tooling.md"
-required = ["## Property-Test Harness Adapter Mechanisms", "After Contracts accepts the invariant and domain authority", "cannot select property testing"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-tooling.md"
-required = ["## Property-Test Harness Examples", "generated graph and edge values", "do not select proptest"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-TOOLING-STANDARDS.md"
-required = []
-prohibited = ["Use property tests for:"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0838\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0838", "languages/rust/RUST-TOOLING-STANDARDS.md", "profiles/languages/rust/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0838"}]}}]

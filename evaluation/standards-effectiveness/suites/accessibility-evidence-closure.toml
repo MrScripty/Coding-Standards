@@ -33,33 +33,12 @@ outcome = "typed-unavailable"
 any = [{ field = "claim", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "missing" }, { field = "mechanism", op = "eq", value = "missing" }, { field = "environment", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "missing" }, { field = "tooling", op = "eq", value = "missing" }]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/accessibility.md"
-required = ["## Accessibility Evidence Claims", "Tooling selects", "does not prove"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/accessibility.md"
-required = ["## Legacy JSX Lint Mechanisms", "eslint-plugin-jsx-a11y", "click-events-have-key-events"]
-prohibited = []
-
-[[checks]]
 id = "legacy-headings"
 type = "markdown_headings"
 path = "ACCESSIBILITY-STANDARDS.md"
 level = 2
 required = ["Migrated"]
 prohibited = []
-
-[[checks]]
-id = "legacy-boundary"
-type = "text"
-path = "ACCESSIBILITY-STANDARDS.md"
-required = []
-prohibited = ["eslint-plugin", "jsx-a11y", "npm install"]
 
 [[checks]]
 id = "exact-dispositions"

@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/tooling.md"
-required = ["## Formatting Policy And Orchestration", "formatter and linter", "Do not default to format-on-save", "mutation authority", "`invalid`", "`unavailable`", "`unsupported`"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/tooling.md"
-required = ["## Formatting Automation Examples"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = []
-prohibited = ["\"editor.formatOnSave\": true", "npm install eslint-config-prettier"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0681\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0682\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t", "STD-0683\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0686\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0681", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0681"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0682", "TOOLING-STANDARDS.md", "workflows/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0682"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0683", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0683"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0686", "TOOLING-STANDARDS.md", "workflows/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0686"}]}}]

@@ -67,21 +67,3 @@ expected = [["STD-0183", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index", 
 field = "id"
 op = "eq"
 value = "STD-0183"
-
-[[checks]]
-id = "legacy-route"
-type = "markdown_section_text"
-path = "CODING-STANDARDS.md"
-heading = "## Language-Specific Guidelines Legacy Route"
-scope = "body"
-required = ["STANDARDS-ROUTER.md#language-profiles", "policy remains in Core, workflows, and topics."]
-prohibited = ["languages/<language>/", "Existing inline ecosystem sections can be migrated incrementally"]
-
-[[checks]]
-id = "router-policy"
-type = "markdown_section_text"
-path = "STANDARDS-ROUTER.md"
-heading = "## Language Profiles"
-scope = "body"
-required = ["No language-specific mechanism changes", "Language profiles specialize mechanisms only"]
-prohibited = []

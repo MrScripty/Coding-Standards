@@ -33,21 +33,12 @@ any = [
   { field = "context", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "topics/resilience.md"
-required = ["## Failure Boundaries And Diagnostics", "narrowest", "Preserve original", "Do not mandate logging", "successful fallback"]
-prohibited = []
 
 [[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0151\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace error handling with canonical Resilience routing",
-  "STD-0152\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\tselect failure representation from language and operation contracts",
-  "STD-0153\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\thandle failures at the narrowest boundary owning recovery outcome or diagnostics while preserving causes",
-  "STD-0154\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\tderive bounded diagnostic context and channels from operator and application contracts",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0151", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0151"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0152", "CODING-STANDARDS.md", "topics/resilience.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0152"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0153", "CODING-STANDARDS.md", "topics/resilience.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0153"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0154", "CODING-STANDARDS.md", "topics/resilience.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0154"}]}}]

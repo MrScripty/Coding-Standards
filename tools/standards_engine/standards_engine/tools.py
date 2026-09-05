@@ -11,6 +11,8 @@ from tools.standards_analysis.standards_analysis import (
     AuthorizationAuthorityContract,
     AuthorizationClaim,
     AuthorizationRequest,
+    AuthorizationUnavailable,
+    AuthorizationUnsupported,
     EvidenceContractKey,
     EvidenceReference,
     ResolvedEvidence,
@@ -22,10 +24,17 @@ from tools.standards_contracts.standards_contracts import (
     compile_contracts,
 )
 
+from tools.standards_metadata.standards_metadata import (
+    DirectoryContentSource,
+    MetadataError,
+)
+
 from . import _generated_contract as generated_contract
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from ._generated_contract import (
+    VerifyRepositoryCall,
+    VerifyProposalCall,
     AnalyzeProposalCall,
     ApplyProposalCall,
     CreateSnapshotCall,
@@ -54,7 +63,7 @@ def _local_evidence(identifier: str) -> ResolvedEvidence:
     reference = EvidenceReference(
         identifier,
         "sha256:" + hashlib.sha256(content).hexdigest(),
-        "repository-content",
+        "local-statement",
         "1",
     )
     return ResolvedEvidence(reference, content)
@@ -65,26 +74,44 @@ class LocalAlwaysAllowAuthorizer:
 
     contract = AuthorizationAuthorityContract(
         "issuer.standards-engine.local",
-        1,
+        2,
         "principal.standards-engine.local",
         "authorization-grant.v1",
-        (EvidenceContractKey("repository-content", "1"),),
+        (EvidenceContractKey("local-statement", "1"),),
         "revocation.standards-engine.local",
-        1,
+        2,
         "authorization-revocation.v1",
-        (EvidenceContractKey("repository-content", "1"),),
+        (EvidenceContractKey("local-statement", "1"),),
     )
 
-    def authorize(self, request: AuthorizationRequest) -> AuthorizationClaim:
+    def __init__(self, root: Path) -> None:
+        self._source = DirectoryContentSource(root)
+
+    def authorize(
+        self, request: AuthorizationRequest
+    ) -> AuthorizationClaim | AuthorizationUnavailable | AuthorizationUnsupported:
+        resolved = []
+        for reference in request.evidence:
+            if (reference.provider_contract, reference.provider_contract_version) != (
+                "repository-content",
+                "1",
+            ):
+                return AuthorizationUnsupported(
+                    "Local submissions require the repository-content version 1 provider."
+                )
+            try:
+                content = self._source.read_bytes(reference.id)
+            except (MetadataError, OSError):
+                return AuthorizationUnavailable(
+                    "Submitted repository evidence could not be read."
+                )
+            resolved.append(ResolvedEvidence(reference, content))
         return AuthorizationClaim(
             request.action,
             request.subject_kind,
             request.subject_id,
             request.capability,
-            tuple(
-                ResolvedEvidence(item, item.id.encode("utf-8"))
-                for item in request.evidence
-            ),
+            tuple(resolved),
             (_local_evidence("standards-engine.local-authorization"),),
             (_local_evidence("standards-engine.local-revocation"),),
             "not-revoked",
@@ -119,7 +146,9 @@ class AgentToolFacade:
         repo_root = root.resolve()
         engine = StandardsEngine.open_repository(
             repo_root,
-            execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer()),
+            execution_context=AnalysisExecutionContext(
+                LocalAlwaysAllowAuthorizer(repo_root)
+            ),
         )
         try:
             return cls(engine, _contracts(repo_root))
@@ -171,6 +200,20 @@ class AgentToolFacade:
         if isinstance(call, dict):
             return call
         return self._result("query_proposal", self._engine.query_proposal(call))
+
+    def verify_repository(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "verify_repository", arguments, VerifyRepositoryCall
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result("verify_repository", self._engine.verify_repository(call))
+
+    def verify_proposal(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("verify_proposal", arguments, VerifyProposalCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("verify_proposal", self._engine.verify_proposal(call))
 
     def analyze_proposal(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection(

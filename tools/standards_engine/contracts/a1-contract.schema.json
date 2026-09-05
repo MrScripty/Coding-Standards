@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v20",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v21",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -102,6 +102,18 @@
     },
     {
       "$ref": "#/$defs/RejectedResult"
+    },
+    {
+      "$ref": "#/$defs/VerifyRepositoryCall"
+    },
+    {
+      "$ref": "#/$defs/VerifyRepositoryResult"
+    },
+    {
+      "$ref": "#/$defs/VerifyProposalCall"
+    },
+    {
+      "$ref": "#/$defs/VerifyProposalResult"
     }
   ],
   "$defs": {
@@ -794,6 +806,9 @@
         },
         "target": {
           "$ref": "#/$defs/CanonicalId"
+        },
+        "include_routing": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false
@@ -2576,6 +2591,18 @@
         },
         {
           "$ref": "#/$defs/RemovePolicyRelationshipEdit"
+        },
+        {
+          "$ref": "#/$defs/PutRoutingRuleEdit"
+        },
+        {
+          "$ref": "#/$defs/RemoveRoutingRuleEdit"
+        },
+        {
+          "$ref": "#/$defs/PutRoutingFactEdit"
+        },
+        {
+          "$ref": "#/$defs/RemoveRoutingFactEdit"
         }
       ]
     },
@@ -3409,6 +3436,9 @@
         },
         "summary": {
           "type": "string"
+        },
+        "routing": {
+          "$ref": "#/$defs/RoutingConfiguration"
         }
       },
       "additionalProperties": false
@@ -3590,6 +3620,9 @@
         },
         "summary": {
           "type": "string"
+        },
+        "routing": {
+          "$ref": "#/$defs/RoutingConfiguration"
         }
       },
       "additionalProperties": false
@@ -4955,6 +4988,329 @@
         }
       },
       "additionalProperties": false
+    },
+    "AuthoredRoutingRule": {
+      "type": "object",
+      "required": [
+        "id",
+        "target",
+        "when",
+        "condition"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "when": {
+          "$ref": "#/$defs/ApplicabilityExpression"
+        },
+        "condition": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuthoredRoutingFact": {
+      "type": "object",
+      "required": [
+        "id",
+        "semantic_revision",
+        "type",
+        "nullable",
+        "values",
+        "aliases",
+        "meaning",
+        "prompt"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "semantic_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "enum": [
+            "boolean",
+            "enum",
+            "string",
+            "string-set",
+            "enum-set",
+            "canonical-id"
+          ]
+        },
+        "nullable": {
+          "type": "boolean"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "uniqueItems": true
+        },
+        "meaning": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "prompt": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PutRoutingRuleEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rule",
+        "rationale"
+      ],
+      "properties": {
+        "kind": {
+          "const": "put-routing-rule"
+        },
+        "rule": {
+          "$ref": "#/$defs/AuthoredRoutingRule"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RemoveRoutingRuleEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rule",
+        "rationale"
+      ],
+      "properties": {
+        "kind": {
+          "const": "remove-routing-rule"
+        },
+        "rule": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PutRoutingFactEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "fact",
+        "rationale"
+      ],
+      "properties": {
+        "kind": {
+          "const": "put-routing-fact"
+        },
+        "fact": {
+          "$ref": "#/$defs/AuthoredRoutingFact"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RemoveRoutingFactEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "fact",
+        "rationale"
+      ],
+      "properties": {
+        "kind": {
+          "const": "remove-routing-fact"
+        },
+        "fact": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VerificationFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message",
+        "suite",
+        "check"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "message": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "suite": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "check": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "VerificationReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passed",
+        "exit_code",
+        "suites",
+        "checks",
+        "failures"
+      ],
+      "properties": {
+        "passed": {
+          "type": "boolean"
+        },
+        "exit_code": {
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "suites": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "checks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VerificationFailure"
+          }
+        }
+      }
+    },
+    "VerifyRepositoryCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "refresh_verification_inputs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "verify-repository"
+        },
+        "refresh_verification_inputs": {
+          "type": "boolean"
+        }
+      }
+    },
+    "VerifyRepositoryResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "refreshed_verification_inputs",
+        "verification"
+      ],
+      "properties": {
+        "kind": {
+          "const": "verify-repository-result"
+        },
+        "refreshed_verification_inputs": {
+          "type": "boolean"
+        },
+        "verification": {
+          "$ref": "#/$defs/VerificationReport"
+        }
+      }
+    },
+    "VerifyProposalCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "revision"
+      ],
+      "properties": {
+        "kind": {
+          "const": "verify-proposal"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        }
+      }
+    },
+    "VerifyProposalResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "revision",
+        "verification"
+      ],
+      "properties": {
+        "kind": {
+          "const": "verify-proposal-result"
+        },
+        "revision": {
+          "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "verification": {
+          "$ref": "#/$defs/VerificationReport"
+        }
+      }
+    },
+    "RoutingConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facts",
+        "rules"
+      ],
+      "properties": {
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AuthoredRoutingFact"
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AuthoredRoutingRule"
+          }
+        }
+      }
     }
   }
 }

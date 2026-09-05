@@ -29,27 +29,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/tooling.md"
-required = ["## Cargo Build-Script Expression Mechanisms", "After Build accepts the action", "cannot create build authority"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-tooling.md"
-required = ["## Cargo Build-Script Examples", "SOURCE_DATE_EPOCH", "discovery material only"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-TOOLING-STANDARDS.md"
-required = []
-prohibited = ["Use `build.rs` sparingly"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0841\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0841", "languages/rust/RUST-TOOLING-STANDARDS.md", "profiles/languages/rust/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0841"}]}}]

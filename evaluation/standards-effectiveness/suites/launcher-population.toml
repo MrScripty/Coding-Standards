@@ -91,54 +91,6 @@ op = "in"
 values = ["STD-0508", "STD-0509", "STD-0510"]
 
 [[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/applications/launcher.md"
-required = [
-  "universal fixed flag set",
-  "Do not require one help layout",
-  "build a missing artifact implicitly",
-  "silently using ambient user state",
-  "Implementation Mechanism",
-  "compiled launchers, task runners",
-  "string evaluation, raw interpolation",
-  "numeric codes are not universal",
-  "explicit lossy-mapping diagnostic",
-  "repeated invocations without state carry-forward",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "LAUNCHER-STANDARDS.md"
-required = [
-  "# Launcher Standards Legacy Index",
-  "[Dependencies](topics/dependencies.md)",
-  "[Release](workflows/release.md#build-procedure-selection)",
-  "[Security](topics/security.md#generated-command-and-configuration-text)",
-]
-prohibited = [
-  "## Core CLI Contract",
-  "### Required Flags",
-  "### Canonical Usage",
-  "## Runtime Standards",
-  "## Managed State Standards",
-  "## Help Standards",
-  "## Exit Codes",
-  "## Bash Implementation Rules",
-  "## Reference Template",
-  "## Compliance Checklist",
-  "## Dependency Installation Standards",
-  "## Build Standards",
-  "## Desktop Entry and Script Generation Safety",
-  "check_<name>",
-  "install_<name>",
-  "app-build-tool",
-  "NEEDS_BUILD=",
-]
-
-[[checks]]
 id = "source-package-authority"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv"
@@ -152,10 +104,3 @@ expected = [["17", "LAUNCHER-STANDARDS.md", "suite:launcher-population"]]
 field = "source"
 op = "eq"
 value = "LAUNCHER-STANDARDS.md"
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["`fixtures/launcher/population-decisions.tsv` and the registered\n`launcher-population` suite validate canonical Launcher population"]
-prohibited = ["`verify-launcher-population.sh` validate canonical Launcher population"]

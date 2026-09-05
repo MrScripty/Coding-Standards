@@ -32,27 +32,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/dependencies.md"
-required = ["Graph inspection scope comes from the claim", "only their declared graph facts", "required audit schedule"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-dependencies.md"
-required = ["## Dependency Graph Inspection Examples", "cargo tree --depth 1", "cargo tree --duplicates", "not establish a required pre-addition"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
-required = []
-prohibited = ["cargo tree --depth 1", "before dependency additions"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0741\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0742\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0743\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0744\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0745\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0746\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0741", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "profiles/languages/rust/dependencies.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0741"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0742", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0742"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0743", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0743"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0744", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0744"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0745", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0745"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0746", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0746"}]}}]

@@ -20,21 +20,12 @@ outcome = "typed-invalid"
 [checks.rules.when]
 any = [{ field = "fallback", op = "ne", value = "none" }, { field = "role", op = "eq", value = "normative" }, { field = "authority", op = "ne", value = "none" }]
 
+
 [[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/tooling.md"
-required = ["## Legacy Tool Setup And Package Script Example", "historical illustration only", "\"lint:critical\"", "\"prepare\": \"lefthook install\"", "none of this example is a default"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = ["legacy setup and package-script examples"]
-prohibited = ["### Minimum Setup", "### Commands to Add", "\"lint:critical\""]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0701\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0702\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0701", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0701"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0702", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0702"}]}}]

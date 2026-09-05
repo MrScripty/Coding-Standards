@@ -45,54 +45,6 @@ op = "eq"
 value = "coupled"
 
 [[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = [
-  "## Conditional Layered Arrangement",
-  "This shape does not require these names, four layers",
-  "Dependencies in an adaptation point toward the owner of each stable contract",
-  "### Conditional Consequences",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-routes"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "[Architecture](topics/architecture.md)",
-  "[Architecture Pattern Reference](reference/patterns/architecture.md#conditional-layered-arrangement)",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-universal-defaults"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = [
-  "Dependencies point inward only",
-  "Domain is the core and depends on nothing",
-  "Organize code into horizontal layers",
-  "Outer layers depend on inner layers",
-  "Inner layers never depend on outer layers",
-]
-
-[[checks]]
-id = "reference-universal-defaults"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = []
-prohibited = [
-  "Dependencies point inward only",
-  "Domain is the core and depends on nothing",
-  "Organize code into horizontal layers",
-  "Outer layers depend on inner layers",
-  "Inner layers never depend on outer layers",
-]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

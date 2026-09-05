@@ -16,27 +16,6 @@ type = "markdown_links"
 paths = ["languages/README.md"]
 
 [[checks]]
-id = "language-index-boundary"
-type = "text"
-path = "languages/README.md"
-required = [
-  "non-normative navigation",
-  "[Language Profiles](../STANDARDS-ROUTER.md#language-profiles)",
-  "not select a profile or establish applicability or ownership",
-  "[Rust profile](../profiles/languages/rust/README.md)",
-  "Unknown applicability is a Router diagnostic",
-  "fallback authority",
-]
-prohibited = [
-  "## Languages",
-  "They do not replace Core",
-  "should not live inline",
-  "legacy [Rust index]",
-  "rust/RUST-STANDARDS.md",
-  "| Language | Standards |",
-]
-
-[[checks]]
 id = "language-index-owner-map"
 type = "table"
 path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
@@ -82,10 +61,3 @@ expected = [
   ["STD-0704", "STANDARDS-ROUTER.md", "index", "none"],
   ["STD-0705", "STANDARDS-ROUTER.md", "index", "none"],
 ]
-
-[[checks]]
-id = "language-index-router-owner"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["ID: `router`", "Requires: `core`", "Canonical owner: `STANDARDS-ROUTER.md`", "## Language Profiles"]
-prohibited = []

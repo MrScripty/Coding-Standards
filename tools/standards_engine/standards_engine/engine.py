@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import tempfile
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
@@ -18,6 +19,7 @@ from tools.repository_git.repository_git import (
 from tools.standards_verifier.standards_verifier import (
     CompleteVerificationResult,
     run_complete_verification,
+    write_suite_input_projection,
 )
 from tools.standards_analysis.standards_analysis import (
     ANALYSIS_CONTRACT_VERSION,
@@ -112,6 +114,10 @@ from ._generated_contract import (
     CompleteResult,
     ConsumerDispositionSubmission,
     CoverageAttestationSubmission,
+    VerifyRepositoryCall,
+    VerifyRepositoryResult,
+    VerifyProposalCall,
+    VerifyProposalResult,
     CreateSnapshotCall,
     CreateSnapshotResult,
     CreateProposalCall,
@@ -344,6 +350,36 @@ class _QueryProjection:
         }
 
 
+def _verification_report(verification: CompleteVerificationResult) -> dict[str, object]:
+    if type(verification) is not CompleteVerificationResult:
+        raise AnalysisError(
+            AnalysisFailure(
+                "VERIFICATION.INVALID_RESULT",
+                "invalid",
+                "Verifier returned an invalid result.",
+            )
+        )
+    diagnostics = [verification.diagnostic] if verification.diagnostic else []
+    diagnostics.extend(
+        item for result in verification.results for item in result.diagnostics
+    )
+    return {
+        "passed": verification.exit_code == 0,
+        "exit_code": verification.exit_code,
+        "suites": len(verification.results),
+        "checks": sum(result.check_count for result in verification.results),
+        "failures": [
+            {
+                "code": item.code,
+                "message": item.message,
+                "suite": item.suite,
+                "check": item.check,
+            }
+            for item in diagnostics
+        ],
+    }
+
+
 class StandardsEngine:
     """Composition root for immutable snapshots and generated A1c values."""
 
@@ -448,6 +484,100 @@ class StandardsEngine:
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def verify_repository(
+        self, call: VerifyRepositoryCall
+    ) -> VerifyRepositoryResult | RejectedResult:
+        """Verify the working tree; optional refresh owns only derived suite inputs."""
+        try:
+            if call.refresh_verification_inputs:
+                construct_authorization_record(
+                    self._execution_context,
+                    AuthorizationRequest(
+                        "refresh-verification-inputs",
+                        "repository",
+                        "standards",
+                        "standards.verify",
+                        (),
+                    ),
+                )
+                write_suite_input_projection(self._repository.root)
+            report = _verification_report(
+                self._application_verifier(self._repository.root)
+            )
+            return VerifyRepositoryResult.from_value(
+                {
+                    "kind": "verify-repository-result",
+                    "refreshed_verification_inputs": call.refresh_verification_inputs,
+                    "verification": report,
+                }
+            )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+        except OSError:
+            return self._reject(
+                "VERIFICATION.UNAVAILABLE",
+                "unavailable",
+                "Repository verification could not execute.",
+            )
+
+    def verify_proposal(
+        self, call: VerifyProposalCall
+    ) -> VerifyProposalResult | RejectedResult:
+        """Run the application checkpoint against a private candidate without publication."""
+        try:
+            revision = self._authoring.read_revision(call.revision.id)
+            projection = self._proposal_projection(revision)
+            base = self._snapshots.load_content(revision.base_snapshot)
+            base_files = {str(item.path): item.content for item in base.files}
+            proposed_files = dict(projection.source.files)
+            base_paths = set(revision.base_repository_paths)
+            added = set(projection.repository_paths) - base_paths
+            removed = base_paths - set(projection.repository_paths)
+            if (
+                not added <= set(proposed_files)
+                or not removed <= set(base_files)
+                or (set(proposed_files) - set(base_files)) & base_paths
+            ):
+                return self._reject(
+                    "VERIFICATION.TOPOLOGY_INVALID",
+                    "invalid",
+                    "The projection lacks exact authority for its topology change.",
+                )
+            files = tuple(
+                CandidateFile(
+                    RepositoryPath.parse(path), content, _CANONICAL_AUTHORITY_EXECUTABLE
+                )
+                for path, content in proposed_files.items()
+                if base_files.get(path) != content
+            )
+            parent = RepositoryRevision(
+                self._snapshots.snapshot(revision.base_snapshot).source_revision
+            )
+            with self._repository.materialize_candidate(
+                parent,
+                files,
+                removals=tuple(RepositoryPath.parse(path) for path in sorted(removed)),
+                commit=proposal_commit_message(revision),
+            ) as candidate:
+                report = _verification_report(
+                    self._application_verifier(candidate.root)
+                )
+            return VerifyProposalResult.from_value(
+                {
+                    "kind": "verify-proposal-result",
+                    "revision": call.revision.as_contract(),
+                    "verification": report,
+                }
+            )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+        except OSError:
+            return self._reject(
+                "VERIFICATION.UNAVAILABLE",
+                "unavailable",
+                "Proposal verification could not execute.",
+            )
 
     def find_snapshots(
         self, call: FindSnapshotsCall
@@ -2322,8 +2452,69 @@ class StandardsEngine:
         inspection = projection.inspect_operation(target)
         if inspection is not None:
             next_operations.append(inspection)
+        routing = {}
+        if request.include_routing is True:
+            if target != "router":
+                return self._reject(
+                    "NAVIGATION.ROUTING_TARGET_INVALID",
+                    "invalid",
+                    "Routing definitions are available when reading Router.",
+                )
+            document = compiled.source.read_bytes(compiled.router.source).decode(
+                "utf-8"
+            )
+            section = document.split("## Workflow Selection", 1)[1].split(
+                "## S1 Rust Library Bug-Fix Route", 1
+            )[0]
+            rules = []
+            for rule in compiled.router.rules:
+                owner = compiled.corpus.resolve_module(rule.target)
+                assert owner is not None
+                pattern = re.compile(
+                    r"\[[^]]+\]\(" + re.escape(owner.path) + r"(?:#[^)]*)?\)"
+                )
+                rows = [
+                    line
+                    for line in section.splitlines()
+                    if line.startswith("|") and pattern.search(line)
+                ]
+                if len(rows) != 1:
+                    return self._reject(
+                        "NAVIGATION.ROUTING_GUIDANCE_AMBIGUOUS",
+                        "invalid",
+                        "A routing rule requires exactly one readable selection row.",
+                    )
+                rules.append(
+                    {
+                        "id": rule.id,
+                        "target": rule.target,
+                        "when": rule.program.as_expression(),
+                        "condition": re.sub(
+                            r"\\([\\|])",
+                            r"\1",
+                            re.split(r"(?<!\\)\|", rows[0], maxsplit=2)[1].strip(),
+                        ),
+                    }
+                )
+            fields = {
+                "id",
+                "semantic_revision",
+                "type",
+                "nullable",
+                "values",
+                "aliases",
+                "meaning",
+                "prompt",
+            }
+            facts = []
+            for fact in compiled.router.facts:
+                value = fact.as_contract()
+                value["values"] = list(fact.values)
+                facts.append({key: value[key] for key in fields})
+            routing = {"routing": {"rules": rules, "facts": facts}}
         return {
             **projection.result("read"),
+            **routing,
             "policy": projection.policy_summary(
                 target,
                 "contextual" if module.role == "reference" else "normative",

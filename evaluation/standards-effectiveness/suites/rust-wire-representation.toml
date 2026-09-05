@@ -84,39 +84,3 @@ key = "id"
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/language-bindings.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "profiles/languages/rust/binding-lifecycle.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "profile-policy"
-type = "text"
-path = "profiles/languages/rust/language-bindings.md"
-required = ["## Serialized Wire Representation", "Select the wire schema, serializer contract", "effective wire representation is derived", "Account for every applicable attribute.", "Receiving consumers must agree", "Generated types do not replace runtime decoding.", "typed `invalid`", "`unsupported`", "`unavailable`", "Rust-to-host and host-to-Rust", "Producer-only snapshots", "schema-free JSON", "another serializer or binding mechanism"]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "markdown_section_text"
-path = "languages/rust/RUST-INTEROP-STANDARDS.md"
-heading = "## Serde Wire-Format Alignment"
-required = ["profiles/languages/rust/language-bindings.md#serialized-wire-representation"]
-prohibited = ["#[derive(Serialize, Deserialize)]", "type ServerMessage", "Use explicit `rename_all`", "Prefer shared schema generation"]
-
-[[checks]]
-id = "rust-index"
-type = "text"
-path = "profiles/languages/rust/README.md"
-required = ["(language-bindings.md)"]
-prohibited = ["RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment"]
-
-[[checks]]
-id = "finding-closure"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = ["| F051 | Resolved in Milestone 7.4b7i |"]
-prohibited = []
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["The registered `rust-wire-representation` suite requires a selected schema and"]
-prohibited = ["`verify-rust-wire-representation.sh` require a selected schema and"]

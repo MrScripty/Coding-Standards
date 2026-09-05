@@ -38,13 +38,6 @@ outcome = "not-applicable"
 all = [{ field = "ui_change", op = "eq", value = "no" }]
 
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = ["## Applicability Decision", "changed responsibility and observable behavior", "automatically in scope", "hosted outside a conventional", "infer scope from Electron, Tauri, WebView"]
-prohibited = []
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

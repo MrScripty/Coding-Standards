@@ -33,39 +33,11 @@ outcome = "typed-unsupported"
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
 [[checks]]
-id = "cross-platform-owner"
-type = "text"
-path = "profiles/languages/rust/cross-platform.md"
-required = ["## `no_std` Target Capability Contract", "Select `no_std`, `alloc`, or `std` support only", "do not substitute a host build"]
-prohibited = []
-
-[[checks]]
-id = "tooling-adapter"
-type = "text"
-path = "profiles/languages/rust/tooling.md"
-required = ["## `no_std` Evidence Adapter Mechanisms", "After Rust Cross-Platform accepts", "cannot select default features"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-tooling.md"
-required = ["## `no_std` Command Examples", "cargo check --no-default-features", "do not select `no_std` support"]
-prohibited = []
-
-[[checks]]
 id = "legacy-heading-closure"
 type = "markdown_heading_cardinality"
 path = "languages/rust/RUST-TOOLING-STANDARDS.md"
 level = 2
 cardinality = "empty"
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "languages/rust/RUST-TOOLING-STANDARDS.md"
-required = ["non-normative migration index"]
-prohibited = []
 
 [[checks]]
 id = "disposition-lineage"

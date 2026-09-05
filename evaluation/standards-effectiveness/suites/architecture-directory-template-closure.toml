@@ -33,28 +33,6 @@ any = [
 ]
 
 [[checks]]
-id = "legacy-closure"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "[Concern Boundaries](topics/architecture.md#concern-boundaries)",
-  "[Documentation Workflow](workflows/documentation.md)",
-  "No general-purpose project tree is retained",
-  "not select responsibilities",
-  "## Activity Tracing Pattern",
-  "## Process Instance Coordination",
-  "## Discover-or-Create Pattern",
-]
-prohibited = [
-  "A general-purpose project layout",
-  "presentation/           # UI layer",
-  "application/            # Application layer",
-  "domain/                 # Domain layer",
-  "shared/                 # Cross-cutting concerns",
-  "Directory README Requirement",
-]
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

@@ -62,13 +62,6 @@ op = "in"
 values = ["STD-0294", "STD-0295", "STD-0296", "STD-0297", "STD-0298", "STD-0299"]
 
 [[checks]]
-id = "report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-6-decomposition.md"
-required = ["## Cross-Platform Decomposition", "### Child 6.1: Native Artifact Loading", "### Child 6.2: Native Artifact Identity And Installation", "### Child 6.3: Platform Evidence Scheduling", "## No Fallback", "Strategy as a mandatory native-loading abstraction", "guessed prefixes, extensions, platform names", "fixed Linux/Windows target set", "alternate loader, artifact, target, or weaker evidence", "typed diagnostics"]
-prohibited = []
-
-[[checks]]
 id = "train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

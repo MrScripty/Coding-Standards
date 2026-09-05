@@ -1,6 +1,6 @@
 ---
 name: standards-engine
-description: Navigate, analyze, and author this repository's coding standards through the Standards Engine. Use when an agent needs to route or read standards, inspect related policies, propose or revise a standards change, review or apply a proposal, or recover an application; do not use for ordinary source-code edits.
+description: Navigate, analyze, and author this repository's coding standards through the Standards Engine. Use when an agent needs to route or read standards, inspect related policies, propose or revise a standards change, review or apply a proposal, verify standards, or recover an application; do not use for ordinary source-code edits.
 ---
 
 # Standards Engine
@@ -63,7 +63,8 @@ may deliberately supply another authorization adapter or none. Treat
 
 - For routing, reading, relationship discovery, or accepted-snapshot Analysis,
   read [references/navigation.md](references/navigation.md).
-- For any proposal, revision, review, application, or recovery, read
+- For proposal edits (including routing), verification, review, application,
+  or recovery, read
   [references/authoring.md](references/authoring.md) before the first authoring
   call.
 

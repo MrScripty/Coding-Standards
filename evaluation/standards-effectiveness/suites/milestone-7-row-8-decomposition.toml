@@ -58,24 +58,3 @@ expected = [["8", "P04", "refinement", "profiles/languages/rust/language-binding
 field = "train_order"
 op = "eq"
 value = "8"
-
-[[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-8-decomposition.md"
-required = [
-  "generation authority, Rust",
-  "## Ordered Children",
-  "Contracts-owned generation authority",
-  "Rust Language Binding-owned annotation placement",
-  "Release-owned build and generation",
-  "legacy-index closure",
-  "hand-maintained bindings",
-  "## Verifier Ownership",
-  "registered `milestone-7-row-8-decomposition` suite",
-  "This planning slice changes only",
-]
-prohibited = [
-  "(`Planned`)",
-  "verify-milestone-7-row-8-decomposition.sh",
-]

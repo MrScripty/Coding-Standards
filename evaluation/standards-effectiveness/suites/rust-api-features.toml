@@ -33,21 +33,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/api.md"
-required = ["## Rust Source Feature Expression Mechanisms", "After Dependencies selects feature, optional-dependency, default, target", "selects supported real consumer configurations; Documentation selects durable", "artifacts; and Verification selects claim-matched evidence", "Rust source mechanisms are not feature-policy defaults", "Cargo manifest dependency mechanisms belong only", "configuration without the applicable generic owner decisions", "capability", "evidence. Cargo manifest dependency mechanisms"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-API-STANDARDS.md"
-required = ["topics/dependencies.md", "topics/contracts.md", "profiles/applications/library.md", "workflows/documentation.md", "workflows/verification.md"]
-prohibited = ["Keep default features minimal", "cargo check --workspace --all-features", "Optional deeper checks with `cargo hack`"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0715\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0715", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0715"}]}}]

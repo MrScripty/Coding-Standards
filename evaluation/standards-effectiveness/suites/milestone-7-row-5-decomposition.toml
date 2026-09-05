@@ -58,37 +58,6 @@ op = "eq"
 value = "5"
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-5-decomposition.md"
-required = [
-  "contains four independently changeable outcomes",
-  "### Child 5.1: Rust Core And Adapter Testability",
-  "### Child 5.2: Boundary Mechanism Selection",
-  "### Child 5.3: Binding Contract Evolution",
-  "### Child 5.4: Rust Contract Discovery Adaptation",
-  "All children must receive exact dispositions in order",
-  "target-count or host-label mechanism defaults",
-  "blanket additive compatibility",
-  "universal runtime version export",
-  "typed diagnostic",
-  "changes no normative or legacy standard",
-  "## Verifier Ownership",
-  "registered `milestone-7-row-5-decomposition` suite",
-]
-prohibited = [
-  "(`Planned`)",
-  "verify-milestone-7-row-5-decomposition.sh",
-]
-
-[[checks]]
-id = "resolved-finding"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = ["| F072 | Resolved in Milestone 7.4b8n |"]
-prohibited = []
-
-[[checks]]
 id = "canonical-owner-paths"
 type = "path_state"
 present = [

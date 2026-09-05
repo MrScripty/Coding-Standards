@@ -34,13 +34,6 @@ type = "git_index_paths"
 tracked = ["prompts/full-codebase-standards-refactor.md"]
 
 [[checks]]
-id = "prompt-content"
-type = "text"
-path = "prompts/full-codebase-standards-refactor.md"
-required = ["analysis only", "[`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md)", "[`Planning Workflow`](../workflows/planning.md)", "Preserve the requested", "evidence that will accept it"]
-prohibited = ["1. Route applicable", "Write `plan.md`", "docs/plans/<plan-slug>", "sub-agent", "/media/", "/home/"]
-
-[[checks]]
 id = "single-title"
 type = "markdown_heading_cardinality"
 path = "prompts/full-codebase-standards-refactor.md"

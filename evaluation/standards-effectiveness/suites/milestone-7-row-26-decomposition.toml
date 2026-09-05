@@ -61,13 +61,6 @@ op = "eq"
 value = "templates/PLAN-TEMPLATE.md"
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-26-decomposition.md"
-required = ["## Owner Contract", "sole normative owner", "is a derived", "projection that transports selected fields", "Do not restore frozen headings as compatibility text", "## Exact Dispositions", "`STD-0859` through `STD-0887`", "## Ordered Children", "`26.1`", "## Projection Requirements", "fixed milestone counts", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

@@ -46,8 +46,36 @@ not define fields, defaults, variants, identity, or runtime semantics.
 | `review_proposal` | `ReviewProposalCall` | `ReviewProposalResult` | `RejectedResult` |
 | `apply_proposal` | `ApplyProposalCall` | `ApplyProposalResult` or `ApplicationRecoveryRequiredResult` | `RejectedResult` |
 | `recover_application` | `RecoverApplicationCall` | `RecoverApplicationResult` or `ApplicationRecoveryRequiredResult` | `RejectedResult` |
+| `verify_repository` | `VerifyRepositoryCall` | `VerifyRepositoryResult` | `RejectedResult` |
+| `verify_proposal` | `VerifyProposalCall` | `VerifyProposalResult` | `RejectedResult` |
 
-Interface schema version 20 replaces repository-shaped authoring mutations
+Interface schema version 21 adds routing rule/fact edits and explicit
+verification operations. Routing edits are atomic with standards edits: the
+Engine maintains readable selection rows, compiles expressions against the
+final fact schema, checks target uniqueness, and refreshes derived verification
+inputs. Fact revisions advance when their meaning or value domain changes;
+question wording alone preserves the revision. New topic and workflow IDs may
+name nested detail pages.
+
+A Router `read` request may set `include_routing: true` to return exact authored
+fact and rule definitions suitable for edits. This works through `query` for a
+Snapshot and `query_proposal` for a draft. The option is omitted from ordinary
+reads, keeping navigation concise.
+
+`verify_proposal` runs the full application checkpoint on a private candidate
+for an exact revision and returns its report without publication or review
+admission. `verify_repository` checks the working tree; its explicit
+`refresh_verification_inputs` option rebuilds the derived suite-input manifest
+under `standards.verify` authorization. Neither operation marks semantic review
+complete. Callers must inspect `verification.passed` and failures.
+
+The local facade resolves `repository-content` version 1 evidence IDs as
+repository-relative file paths and checks their exact bytes against the supplied
+digest. Its own authorization/revocation statements use `local-statement`
+version 1, under local authority revision 2. Missing documents and unsupported
+providers produce typed outcomes; identifiers never substitute for file content.
+
+Interface schema version 20 replaced repository-shaped authoring mutations
 with one atomic `StandardsChangeSet` on each `create_proposal` and
 `revise_proposal` call. A change set contains one evidence-backed purpose and
 an unordered, non-empty set of closed standards-domain edits. Callers provide

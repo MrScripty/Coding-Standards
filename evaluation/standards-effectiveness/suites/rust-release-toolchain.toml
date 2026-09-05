@@ -36,27 +36,12 @@ outcome = "route-rust-dependency"
 [checks.rules.when]
 all = [{ field = "mechanism", op = "eq", value = "lockfile" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/release.md"
-required = ["## Toolchain Declaration Mechanisms", "select supported Rust toolchain declaration mechanisms", "Lockfile selection and resolution policy remain", "re-own, alias, or infer"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-release.md"
-required = ["## Toolchain Declaration Example", "channel = \"1.78.0\"", "does not require pinning"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-RELEASE-STANDARDS.md"
-required = ["[Release](../../workflows/release.md)", "[Dependencies](../../topics/dependencies.md)", "[Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)", "[Rust release mechanisms](../../profiles/languages/rust/release.md)"]
-prohibited = ["Application repositories and production workspaces should commit"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0811\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t", "STD-0812\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0811", "languages/rust/RUST-RELEASE-STANDARDS.md", "profiles/languages/rust/release.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0811"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0812", "languages/rust/RUST-RELEASE-STANDARDS.md", "reference/recipes/rust-release.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0812"}]}}]

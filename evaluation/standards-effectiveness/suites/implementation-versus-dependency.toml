@@ -71,27 +71,6 @@ all = [
 ]
 
 [[checks]]
-id = "dependencies-policy"
-type = "text"
-path = "topics/dependencies.md"
-required = ["## Implementation Versus Dependency", "conformance", "maintenance", "security", "continuing cost of keeping a local subset correct", "materially extending its semantic surface", "automatic deletion of an unchanged accepted local", "A thin Adapter that delegates the standardized semantics", "domain-specific product may own distinct local semantics"]
-prohibited = []
-
-[[checks]]
-id = "planning-projection"
-type = "text"
-path = "prompts/planning.md"
-required = ["evaluate an", "established dependency against the maintained local subset", "unsupported-domain costs"]
-prohibited = []
-
-[[checks]]
-id = "implementation-projection"
-type = "text"
-path = "prompts/implement-plan.md"
-required = ["implementation-versus-dependency decision"]
-prohibited = []
-
-[[checks]]
 id = "registered-consumers"
 type = "path_state"
 present = [

@@ -124,17 +124,3 @@ values = ["STD-0543", "STD-0544", "STD-0545", "STD-0546", "STD-0547", "STD-0548"
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "workflow-policy"
-type = "text"
-path = "workflows/release.md"
-required = ["## Artifact Plan", "## Reproducibility"]
-prohibited = ["SHA256 checksums | Always", "Recommended for all releases", "Commit lockfiles for applications; omit them for libraries.", "not required for initial or pre-1.0 releases", "Use GitHub's pre-release flag for `0.x.y`", "Generate `checksums-sha256.txt`", "Generate SBOM"]
-
-[[checks]]
-id = "workflow-policy-detail-1"
-type = "text"
-path = "workflows/release/operations.md"
-required = ["Major version zero does not by itself"]
-prohibited = ["SHA256 checksums | Always", "Recommended for all releases", "Commit lockfiles for applications; omit them for libraries.", "not required for initial or pre-1.0 releases", "Use GitHub's pre-release flag for `0.x.y`", "Generate `checksums-sha256.txt`", "Generate SBOM"]

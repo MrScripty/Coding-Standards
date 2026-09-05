@@ -32,21 +32,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "representable", op = "eq", value = "no" }]
 
+
 [[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/tooling.md"
-required = ["## Editor And File Configuration", "editor-neutral configuration mechanism", "file-format semantics", "generated-file authority", "configuration's scope", "SHOULD use UTF-8", "Preserve an existing adequate", "File formats and consumers can require exceptions", "typed `invalid`", "typed `unavailable`", "typed `unsupported`"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = ["[Tooling](workflows/tooling.md#editor-and-file-configuration)"]
-prohibited = ["| Setting | Recommended |"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0666\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0673\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0666", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0666"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0673", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0673"}]}}]

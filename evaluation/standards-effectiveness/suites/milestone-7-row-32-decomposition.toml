@@ -65,13 +65,6 @@ op = "in"
 values = ["STD-0106", "STD-0107", "STD-0108", "STD-0109", "STD-0110", "STD-0111", "STD-0112", "STD-0113", "STD-0114", "STD-0115", "STD-0116", "STD-0117", "STD-0118"]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-32-decomposition.md"
-required = ["## Owner Contract", "does not own every in-memory mutation", "## Exact Ownership", "`32.1`", "`32.2`", "`32.3`", "## Typed Outcomes And No Fallback", "Do not fall back to partial writes", "## Re-plan Triggers"]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

@@ -58,38 +58,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "workflows/planning.md"
-required = [
-  "## When A Written Plan Is Required",
-  "## Artifact Model",
-  "## Required Active-Plan Fields",
-  "## Milestones And Slices",
-  "## Current State, Not History",
-  "## Re-Planning",
-  "## Concurrent Work",
-  "Do not substitute a headless path",
-  "Apply the bounded-local exclusion before the written-plan triggers",
-  "A written plan may contain one milestone and one implementation slice",
-  "Do not split work merely to minimize diff size or satisfy",
-  "they do not\nown Git commit topology",
-  "Bind review to\nthe identified material content",
-  "`Implemented` is not complete",
-  "Every nonterminal written plan governed by this revision records the\ncomposed-design review as `applicable` or `not-applicable`",
-  "When applicable,\nanswer every artifact probe",
-  "Do not inherit a prior design's composed-design review after a material\nreplacement",
-]
-prohibited = []
-
-[[checks]]
-id = "commit-projection"
-type = "text"
-path = "workflows/commit.md"
-required = ["do not mirror commit cadence into planning artifacts"]
-prohibited = ["update active plan, issue, and ledger state when those artifacts exist"]
-
-[[checks]]
 id = "valid-active-plan"
 type = "plan_contract"
 path = "evaluation/standards-effectiveness/fixtures/plans/valid-active.md"
@@ -217,27 +185,6 @@ type = "plan_contract"
 path = "evaluation/standards-effectiveness/fixtures/plans/invalid-whitespace-composed-design-reason.md"
 expected = "invalid"
 message = "not-applicable composed-design review requires a concrete Reason"
-
-[[checks]]
-id = "planning-prompt-projection"
-type = "text"
-path = "prompts/planning.md"
-required = ["Select one coherent implementation unit", "a plan", "may contain one milestone and one slice", "Keep Git topology out of the plan", "leave coherent commit boundaries to the Commit workflow"]
-prohibited = ["Use thin vertical milestones"]
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "PLAN-STANDARDS.md"
-required = [
-  "# Plan Standards",
-  "[workflows/planning.md](workflows/planning.md)",
-  "contains no independent normative planning",
-]
-prohibited = [
-  "## When a Plan Is Required",
-  "## Concurrent Worker Execution",
-]
 
 [[checks]]
 id = "disposition-coverage"

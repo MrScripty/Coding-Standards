@@ -48,29 +48,6 @@ type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "workflows/release.md", "topics/contracts.md", "topics/architecture.md", "topics/resilience.md", "topics/dependencies.md", "workflows/documentation.md", "profiles/applications/library.md", "profiles/languages/rust/README.md", "profiles/languages/rust/api.md", "topics/architecture/replay.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
-id = "profile-policy"
-type = "text"
-path = "profiles/languages/rust/api.md"
-required = [
-  "## API Mechanism Authority",
-  "Generic owners select invariants",
-  "## Public Contract Trait Mechanisms",
-  "are mechanisms, not baseline requirements",
-  "## Parameter And Ownership Mechanisms",
-  "## Typed Outcomes",
-  "Do not fall back to an incumbent signature",
-  "## Verification",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-route-and-retired-defaults"
-type = "text"
-path = "languages/rust/RUST-API-STANDARDS.md"
-required = ["[Rust API mechanisms](../../profiles/languages/rust/api.md)"]
-prohibited = ["Implement or derive", "Use `impl AsRef"]
-
-[[checks]]
 id = "lineage-identity"
 type = "relation"
 mode = "set"

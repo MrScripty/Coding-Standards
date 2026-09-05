@@ -53,31 +53,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "profiles/boundaries/language-bindings.md"
-required = [
-  "## Binding Evidence Cohorts",
-  "select evidence that independently covers the",
-  "native adapter contract and the real host consumer contract",
-  "release cohort or compatibility contract",
-  "sharing a build directory, version string, or generation run is not",
-  "Evidence breadth follows declared consumers",
-  "helper path, wrapper test, native-only test, host-only smoke",
-  "do not infer per-change, pre-push, CI, or release cadence",
-  "Do not substitute another artifact",
-  "host, wrapper, smoke path, schedule, or weaker evidence",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["language-bindings.md"]
-prohibited = ["for most repos this means pre-push", "Recommended coverage split"]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

@@ -59,26 +59,6 @@ any = [
 ]
 
 [[checks]]
-id = "cross-platform-owner"
-type = "text"
-path = "topics/cross-platform.md"
-required = [
-  "## Platform Support Contract",
-  "project, product, or release contract",
-  "Product target names and support tiers are project facts",
-  "## Platform Behavior Isolation",
-  "smallest cohesive boundary",
-  "Select compile-time, runtime, composition, and dispatch mechanisms",
-  "No Strategy/Factory",
-  "not graceful degradation",
-  "typed `invalid`",
-  "`unsupported`",
-  "`unavailable`",
-  "### No Fallback",
-]
-prohibited = []
-
-[[checks]]
 id = "dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -102,17 +82,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0280", "STD-0281", "STD-0282", "STD-0283", "STD-0284", "STD-0285", "STD-0286", "STD-0287", "STD-0288"]
-
-[[checks]]
-id = "accepted-finding"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = ["| F046 | Resolved in Milestone 7.4b7c |"]
-prohibited = []
-
-[[checks]]
-id = "removed-authority"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["registered `platform-target-policy` suite"]
-prohibited = ["verify-platform-target-policy.sh"]

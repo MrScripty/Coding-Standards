@@ -31,21 +31,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/api.md"
-required = ["## Crate And Module Boundary Mechanisms", "After Architecture selects responsibility, dependency direction", "and toolchain capability. Conditional compilation must preserve one coherent", "Crates, modules, visibility modifiers, re-exports, and `cfg` are mechanisms", "not architecture defaults. Do not prescribe `core`, `contracts`, `adapter`", "without the accepted architecture and consumer facts"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-API-STANDARDS.md"
-required = ["[Architecture](../../topics/architecture.md)"]
-prohibited = ["Common roles:", "crate_name/", "Keep `cfg()` in thin platform modules"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0709\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t", "STD-0710\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0709", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0709"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0710", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0710"}]}}]

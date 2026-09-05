@@ -64,28 +64,6 @@ expected = [
 ]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-39-decomposition.md"
-required = [
-  "## Re-plan Trigger",
-  "single-owner review could not confirm",
-  "## Owner Contract",
-  "## Exact Ownership",
-  "`39.1`",
-  "`39.2`",
-  "`39.3`",
-  "## Reference Selection",
-  "Fixed PID-file",
-  "## Bounded Write Sets",
-  "## Verification Gates",
-  "P32 remains open",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

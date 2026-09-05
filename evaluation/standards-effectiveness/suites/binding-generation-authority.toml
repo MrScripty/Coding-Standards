@@ -69,30 +69,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0782", "STD-0783"]
-
-[[checks]]
-id = "canonical-contract-detail-1"
-type = "text"
-path = "topics/contracts/evolution.md"
-required = ["Select canonical generation authority", "compiled implementation artifact", "source annotation", "consumer output", "deterministic derivation", "producer/consumer consistency"]
-prohibited = []
-
-[[checks]]
-id = "legacy-route"
-type = "markdown_section_text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-heading = "## Code Generation Strategy"
-scope = "body"
-required = ["topics/contracts.md#cross-language-contract-selection"]
-prohibited = [
-  "Bindings are generated from the compiled core library",
-  "The annotated Rust code is the single source of truth",
-  "uniffi-bindgen generate",
-]
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["registered `binding-generation-authority` suite"]
-prohibited = ["verify-binding-generation-authority.sh"]

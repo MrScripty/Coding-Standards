@@ -42,40 +42,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/languages/rust/language-bindings.md"
-required = [
-  "Select crate, package, workspace-member, feature, generated-output, and script",
-  "code may use separate packages or remain in one package",
-  "not evidence waivers",
-  "real host evidence remains part of acceptance",
-  "typed `unavailable`",
-  "typed `invalid`",
-  "Do not prescribe a crate tree",
-  "substitute native-only tests",
-  "select another framework",
-  "report default success",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "markdown_section_text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-heading = "### Workspace Layout"
-required = [
-  "language-bindings.md#package-and-workspace-placement",
-  "No crate tree",
-]
-prohibited = [
-  "[workspace]",
-  "default-members",
-  "mylib-uniffi",
-  "generate-bindings.sh",
-]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -92,10 +58,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0761", "STD-0762"]
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["`rust-binding-workspace-evidence` suite select shared or separate Rust"]
-prohibited = ["`verify-rust-binding-workspace-evidence.sh` select shared or separate Rust"]

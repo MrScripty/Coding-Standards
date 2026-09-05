@@ -44,20 +44,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/dependencies.md"
-required = ["ID: `topic.dependencies`", "Dependency Authority", "Requirement And Ownership", "Candidate Selection", "Resolution And Reproducibility", "Satisfaction And Provisioning", "Declare each dependency at the narrowest boundary", "Popularity, recency, download count", "automation authority", "typed `invalid`", "Do not continue with an incumbent"]
-prohibited = []
-
-[[checks]]
-id = "router-projection"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required"]
-prohibited = []
-
-[[checks]]
 id = "disposition-membership"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -111,10 +97,3 @@ expected = [["consolidation", "topics/dependencies.md", "existing-review", "deci
 field = "train_order"
 op = "eq"
 value = "16"
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["`dependencies-owner-contract` suite establish the Dependencies topic"]
-prohibited = ["`verify-dependencies-owner-contract.sh` establish the Dependencies topic"]

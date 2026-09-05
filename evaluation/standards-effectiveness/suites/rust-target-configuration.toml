@@ -66,111 +66,12 @@ any = [
   { field = "environment", op = "eq", value = "unknown" },
 ]
 
-[[checks]]
-id = "rust-owner"
-type = "text"
-path = "profiles/languages/rust/cross-platform.md"
-required = [
-  "## Rust Target Contract",
-  "project, product, or release target",
-  "## Configuration And Placement",
-  "`cfg`",
-  "build scripts, features, composition, and dispatch",
-  "smallest",
-  "No shared trait,",
-  "Inline `cfg`",
-  "## Evidence By Claim",
-  "Target compilation does not prove linking",
-  "typed `invalid`, `unsupported`, or `unavailable`",
-  "## No Fallback",
-]
-prohibited = [
-  "RUST-CROSS-PLATFORM-STANDARDS.md",
-  "x86_64-unknown-linux-gnu",
-  "x86_64-pc-windows-msvc",
-  "aarch64-apple-darwin",
-  "Best-effort",
-  "five lines or fewer",
-  "three or more parameters",
-  "two inline `cfg()` blocks",
-  "Use `cross`",
-  "containerized builds",
-  "hosted CI runners",
-]
 
 [[checks]]
-id = "rust-profile-index"
-type = "text"
-path = "profiles/languages/rust/README.md"
-required = [
-  "Rust target selection, configuration placement",
-  "[Rust Cross-Platform profile](cross-platform.md)",
-]
-prohibited = [
-  "RUST-CROSS-PLATFORM-STANDARDS.md",
-  "x86_64-unknown-linux-gnu",
-  "x86_64-pc-windows-msvc",
-  "aarch64-apple-darwin",
-  "Best-effort",
-  "five lines or fewer",
-  "three or more parameters",
-  "two inline `cfg()` blocks",
-  "Use `cross`",
-  "containerized builds",
-  "hosted CI runners",
-]
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md)"]
-prohibited = [
-  "RUST-CROSS-PLATFORM-STANDARDS.md",
-  "x86_64-unknown-linux-gnu",
-  "x86_64-pc-windows-msvc",
-  "aarch64-apple-darwin",
-  "Best-effort",
-  "five lines or fewer",
-  "three or more parameters",
-  "two inline `cfg()` blocks",
-  "Use `cross`",
-  "containerized builds",
-  "hosted CI runners",
-]
-
-[[checks]]
-id = "root-readme-negative"
-type = "text"
-path = "README.md"
-required = []
-prohibited = [
-  "RUST-CROSS-PLATFORM-STANDARDS.md",
-  "x86_64-unknown-linux-gnu",
-  "x86_64-pc-windows-msvc",
-  "aarch64-apple-darwin",
-  "Best-effort",
-  "five lines or fewer",
-  "three or more parameters",
-  "two inline `cfg()` blocks",
-  "Use `cross`",
-  "containerized builds",
-  "hosted CI runners",
-]
-
-[[checks]]
-id = "exact-migration-index"
-type = "exact_text"
+id = "exact-migration-index-destinations"
+type = "markdown_targets"
 path = "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md"
-expected = """# Rust Cross-Platform Standards
-
-Canonical Rust target selection, configuration placement, and evidence policy
-moved to the
-[Rust Cross-Platform profile](../../profiles/languages/rust/cross-platform.md).
-Generic target support and semantic-fidelity policy remains in
-[Cross-Platform](../../topics/cross-platform.md).
-"""
-
+required = ["profiles/languages/rust/cross-platform.md", "topics/cross-platform.md"]
 [[checks]]
 id = "dispositions"
 type = "table"
@@ -191,17 +92,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0726", "STD-0727", "STD-0728", "STD-0729", "STD-0730"]
-
-[[checks]]
-id = "accepted-finding"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = ["| F047 | Resolved in Milestone 7.4b7e |"]
-prohibited = []
-
-[[checks]]
-id = "removed-authority"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["registered `rust-target-configuration` suite"]
-prohibited = ["verify-rust-target-configuration.sh"]

@@ -36,6 +36,8 @@ class ContractCompilerTest(unittest.TestCase):
                 "review_proposal",
                 "apply_proposal",
                 "recover_application",
+                "verify_repository",
+                "verify_proposal",
             ),
         )
         self.assertEqual(
@@ -208,12 +210,16 @@ class ContractCompilerTest(unittest.TestCase):
     def test_inputs_are_copied_before_compilation(self) -> None:
         schema, interface = canonical_inputs()
         expected_schema = copy.deepcopy(schema)
+        expected_operations = tuple(item["id"] for item in interface["operations"])
         compiled = compile_contracts(schema, interface)
         schema["title"] = "mutated after compile"
         interface["operations"].clear()
 
         self.assertEqual(compiled.schema["title"], expected_schema["title"])
-        self.assertEqual(len(compiled.interface.operations), 16)
+        self.assertEqual(
+            tuple(item.id for item in compiled.interface.operations),
+            expected_operations,
+        )
 
 
 if __name__ == "__main__":

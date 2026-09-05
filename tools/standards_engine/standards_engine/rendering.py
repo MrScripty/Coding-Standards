@@ -21,6 +21,24 @@ def render_text(value: ContractValue | Mapping[str, object]) -> str:
     return renderer(contract)
 
 
+def _verification(value: Mapping[str, object]) -> str:
+    report = _mapping(value.get("verification"))
+    status = "passed" if report.get("passed") else "failed"
+    lines = [
+        f"VERIFICATION {status}",
+        f"SUITES {report.get('suites', 0)} CHECKS {report.get('checks', 0)}",
+    ]
+    revision = _revision_id(value.get("revision"))
+    if revision:
+        lines.append(f"REVISION {revision}")
+    for failure in _items(report, "failures"):
+        location = "/".join(
+            str(failure[key]) for key in ("suite", "check") if failure.get(key)
+        )
+        lines.append(f"{failure['code']} {location}: {failure['message']}")
+    return "\n".join(lines) + "\n"
+
+
 def _pending(value: Mapping[str, object]) -> str:
     lines = [f"ANALYSIS {_handle_id(value)}", "STATE needs-action"]
     requirements = _items(value, "fact_requirements")
@@ -218,6 +236,8 @@ _RESULT_RENDERERS: dict[
     str,
     Callable[[Mapping[str, object]], str],
 ] = {
+    "verify-repository-result": _verification,
+    "verify-proposal-result": _verification,
     "pending-result": _pending,
     "complete-result": _complete,
     "analysis-state": _state,

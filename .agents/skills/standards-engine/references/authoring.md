@@ -13,7 +13,9 @@ Repository representation remains private.
    `create_proposal` schema before constructing it.
 3. Call `create_proposal`. Retain both the proposal and exact revision handles.
 4. Use `query_proposal` to read, route, or inspect relationships in that exact
-   projected revision. Call `analyze_proposal` with the revision handle.
+   projected revision. Run `verify_proposal` against that revision and inspect
+   its verification report. Call `analyze_proposal` with the revision handle;
+   a passing checkpoint does not replace semantic review.
 5. Resolve each pending Analysis requirement for which an authorized owner has
    supplied the exact decision and evidence through the public `resolve`
    operation. Otherwise stop and report the pending state. The Engine derives
@@ -47,6 +49,8 @@ The closed edit variants are:
 - `replace-standard-relationships`
 - `put-policy-relationship`
 - `remove-policy-relationship`
+- `put-routing-rule` / `remove-routing-rule`
+- `put-routing-fact` / `remove-routing-fact`
 
 Use `invoke.py --schema create_proposal` for their current exact fields. In
 particular:
@@ -61,11 +65,23 @@ particular:
 - non-standard relationship consumers use an `authoring-target-handle`
   returned by Snapshot-bound relationship discovery.
 
+Before editing routes, use `query` or `query_proposal` with a Router read
+request: `{"kind":"read","target":"router","include_routing":true}`. The
+returned `routing` field supplies editable rule and fact definitions.
+
+Routing edits name canonical rule, fact, and target IDs. A rule supplies its
+applicability expression and a readable condition. The Engine updates the
+selection table and executable projection together. Include related fact and
+rule changes in one change set; referenced facts cannot be removed alone.
+Fact semantic changes increment their revision; prompt-only edits preserve it.
+
 Every evidence reference must identify real, available exact bytes through a
 recognized provider contract, and its digest must be the SHA-256 digest of
 those bytes. A schema-valid placeholder, invented provider contract, or digest
 of unrelated text is not evidence even when proposal-shape validation accepts
-it.
+it. For the local facade, use provider `repository-content`, version `1`,
+with a normalized repository-relative file path as the ID and the digest of
+that file’s bytes. The adapter reads the file and verifies the digest.
 
 Do not infer semantic relatedness, impact, lifecycle meaning, evidence
 sufficiency, or successors from prose. If the user has not decided required
@@ -81,3 +97,17 @@ the local-ref compare-and-swap.
 
 Application does not push a remote. A local applied result is the terminal
 outcome for this workflow.
+
+## Repository Verification
+
+Use `verify_repository` to check the current working tree. Set
+`refresh_verification_inputs` to `false` for a read-only checkpoint. When
+source edits have made the generated suite-input manifest stale, set it to
+`true` to let the Engine rebuild that projection before checking. This option
+requires the bound `standards.verify` authority. Inspect `verification.passed`
+and the reported failures; the result kind alone does not mean success.
+
+Repository verification does not create an accepted Snapshot. Snapshot capture
+still reads the committed revision. Proposal verification materializes an
+isolated candidate and runs the same checkpoint used by application; it does
+not publish a ref or supply review decisions. Application rechecks the candidate.

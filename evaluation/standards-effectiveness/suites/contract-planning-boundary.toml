@@ -69,34 +69,6 @@ op = "eq"
 value = "generated"
 
 [[checks]]
-id = "architecture-boundary"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "Freeze the selected contract shape while parallel work depends on it.",
-  "implementation-phase freeze into an indefinite compatibility promise.",
-]
-prohibited = [
-  "Define shared interfaces/types FIRST",
-  "Append-only changes",
-  "New types can be added, existing cannot change",
-]
-
-[[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/contracts.md"
-required = ["Unknown facts produce an unresolved-contract diagnostic."]
-prohibited = []
-
-[[checks]]
-id = "canonical-owner-detail-1"
-type = "text"
-path = "topics/contracts/evolution.md"
-required = ["internal-coordinated", "distributed-independent"]
-prohibited = []
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

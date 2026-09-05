@@ -50,34 +50,6 @@ all = [
 ]
 
 [[checks]]
-id = "profile-projection"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = [
-  "Select rendering from the authoritative state",
-  "Declarative bindings do not",
-  "none is a universal preference",
-  "pull-style FFI or message drain",
-  "Do not switch between declarative and imperative rendering",
-  "[Frontend mechanism recipes]",
-]
-prohibited = []
-
-[[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/recipes/frontend.md"
-required = [
-  "ID: `reference.recipes.frontend`",
-  "This material is non-normative",
-  "## Illustrative Rendering Mechanisms",
-  "## Illustrative Synchronization Mechanisms",
-  "Neither mechanism is a default",
-  "do not select event delivery, polling",
-]
-prohibited = []
-
-[[checks]]
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/accessibility.md", "topics/concurrency.md", "profiles/languages/typescript.md", "profiles/languages/typescript/async.md", "profiles/applications/frontend.md", "reference/recipes/frontend.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]

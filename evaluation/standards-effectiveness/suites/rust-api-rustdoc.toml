@@ -34,38 +34,18 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
-[[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/api.md"
-required = ["## Rustdoc Expression Mechanisms", "After Documentation selects the documentation trigger, artifact, placement", "audience, and quality contract, and after each content owner supplies its", "toolchain, and evidence claim. Rustdoc form cannot create or weaken the fact it", "Rustdoc forms are not documentation defaults", "applicable owner decision. The Rust Unsafe profile remains authoritative for"]
-prohibited = []
 
 [[checks]]
-id = "source-index"
-type = "exact_text"
+id = "source-index-destinations"
+type = "markdown_targets"
 path = "languages/rust/RUST-API-STANDARDS.md"
-expected = """# Rust API Standards Migration Index
-
-This is a non-normative migration index. Rust API policy has moved to canonical
-owners; this file defines no API, architecture, failure, feature,
-documentation, compatibility, safety, consumer, or mechanism requirement.
-
-- [Rust API mechanisms](../../profiles/languages/rust/api.md)
-- [Contracts](../../topics/contracts.md)
-- [Security](../../topics/security.md)
-- [Architecture](../../topics/architecture.md)
-- [Resilience](../../topics/resilience.md)
-- [Dependencies](../../topics/dependencies.md)
-- [Documentation](../../workflows/documentation.md)
-- [Verification](../../workflows/verification.md)
-- [Library application profile](../../profiles/applications/library.md)
-- [Rust Unsafe profile](../../profiles/languages/rust/unsafe.md)
-"""
+required = ["profiles/applications/library.md", "profiles/languages/rust/api.md", "profiles/languages/rust/unsafe.md", "topics/architecture.md", "topics/contracts.md", "topics/dependencies.md", "topics/resilience.md", "topics/security.md", "workflows/documentation.md", "workflows/verification.md"]
 
 [[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0716\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0716", "languages/rust/RUST-API-STANDARDS.md", "profiles/languages/rust/api.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0716"}]}}]

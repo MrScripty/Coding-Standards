@@ -18,16 +18,3 @@ absent = [
   "tools/standards_analysis/standards_analysis/coverage_authority.py",
   "tools/standards_engine/tests/test_c7_analysis.py",
 ]
-
-[[checks]]
-id = "state-contract"
-type = "text"
-path = "tools/standards_analysis/standards_analysis/state.py"
-required = [
-  "class AnalysisState",
-  "base_snapshot",
-  "proposed_material",
-  "coverage_attestations",
-  "authorization_records",
-]
-prohibited = ["standards_authority"]

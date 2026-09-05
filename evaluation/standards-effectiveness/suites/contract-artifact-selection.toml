@@ -38,26 +38,6 @@ any = [
 ]
 
 [[checks]]
-id = "owner-policy"
-type = "text"
-path = "topics/contracts.md"
-required = [
-  "## Contract Artifact Necessity And Authority Placement",
-  "distinct purpose",
-  "dedicated package is not required",
-  "authority is `unavailable`",
-  "Do not fall back to an inferred mirror",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-authority-removed"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = ["### Packaging Guidance", "### Contract Cost Test"]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

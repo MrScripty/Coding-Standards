@@ -45,28 +45,12 @@ any = [
   { field = "review", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "workflows/implementation.md"
-required = ["## Disabled And Incomplete Behavior", "remove deliberately unsupported capability", "keep incomplete implementation unreachable", "must agree with the selected lifecycle state", "silent no-op", "typed `unavailable`, `unsupported`, or `invalid`"]
-prohibited = []
 
 [[checks]]
-id = "legacy-and-route"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["workflows/implementation.md#disabled-and-incomplete-behavior"]
-prohibited = ["Status: DISABLED", "GOOD: Do not register the route"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0174\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the disabled-features parent with a non-normative route to canonical Implementation lifecycle authority",
-  "STD-0175\tCODING-STANDARDS.md\tworkflows/implementation.md\trefine\trecord owner surfaces reason tracking re-enable or removal conditions and review trigger without a copied documentation template",
-  "STD-0176\tCODING-STANDARDS.md\tworkflows/implementation.md\trefine\tkeep advertised registered and configured surfaces consistent with selected lifecycle state without one configuration-location prescription",
-  "STD-0177\tCODING-STANDARDS.md\tworkflows/implementation.md\trefine\tkeep incomplete behavior unreachable from production and return typed outcomes without registered stubs dummy data silent no-ops or substitute fallback",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0174", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0174"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0175", "CODING-STANDARDS.md", "workflows/implementation.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0175"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0176", "CODING-STANDARDS.md", "workflows/implementation.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0176"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0177", "CODING-STANDARDS.md", "workflows/implementation.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0177"}]}}]

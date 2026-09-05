@@ -44,30 +44,9 @@ id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "reference/recipes/releases.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
-[[checks]]
-id = "recipe-owner"
-type = "text"
-path = "reference/recipes/releases.md"
-required = ["- Level: `REFERENCE`", "does not require git-cliff"]
-prohibited = []
 
 [[checks]]
-id = "workflow-route"
-type = "text"
-path = "workflows/release.md"
-required = ["../reference/recipes/releases.md"]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "exact_text"
+id = "legacy-index-destinations"
+type = "markdown_targets"
 path = "RELEASE-STANDARDS.md"
-expected = """# Release Standards
-
-> Migration index. [Release Workflow](workflows/release.md) is the canonical
-> policy owner. Optional tool examples live in the non-normative
-> [Release Recipe](reference/recipes/releases.md).
-
-This file remains only for existing inbound links while language and profile
-migration continues. It defines no release policy or tool requirement.
-"""
+required = ["reference/recipes/releases.md", "workflows/release.md"]

@@ -39,36 +39,12 @@ any = [
   { field = "result", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "workflows/verification.md"
-required = ["## Acceptance Paths And Boundaries", "name the observable start", "Repository suite labels such as unit", "one path claim plus separate contract", "This sequencing is a planning mechanism", "partial traversal, checklist completion"]
-prohibited = []
 
 [[checks]]
-id = "legacy-routes"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = [
-  "| Acceptance claims, evidence kinds, environments, test design, placement, coverage, test data, async evidence, supporting gates, and diagnosis | [Verification](workflows/verification.md) |",
-  "| Concurrent test resources and asynchronous lifecycle obligations | [Concurrency](topics/concurrency.md) |",
-  "| Native and host binding evidence | [Language Bindings](profiles/boundaries/language-bindings.md) |",
-  "| Replay, recovery, resumption, and idempotency evidence | [Resilience](topics/resilience.md) |",
-]
-prohibited = ["Test complete user workflows", "Write the vertical slice acceptance test before"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0608\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace test categories with a non-normative route to claim-selected evidence kinds paths environments and modes",
-  "STD-0609\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect focused evidence for local observable claims without isolation dependency or per-save duration defaults",
-  "STD-0610\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect integration evidence from real in-scope collaborating interfaces without mock-service or suite-label defaults",
-  "STD-0612\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect user-workflow system and environment evidence from the observable path without realistic-environment slower-suite or complete-workflow slogans",
-  "STD-0613\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\trequire claim-selected producer-to-consumer path and separately owned contract evidence without typecheck unit partial-integration or lower-fidelity substitution",
-  "STD-0614\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tprove named boundary invariants through applicable contract and path claims without universal invariant lists coverage substitution or one-place documentation defaults",
-  "STD-0615\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tstart with the smallest useful objective path and broaden from risk and consumers without test-first one-full-path horizontal-scaling or vertical-slice-template defaults",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0608", "TESTING-STANDARDS.md", "workflows/verification.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0608"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0609", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0609"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0610", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0610"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0612", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0612"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0613", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0613"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0614", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0614"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0615", "TESTING-STANDARDS.md", "workflows/verification.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0615"}]}}]

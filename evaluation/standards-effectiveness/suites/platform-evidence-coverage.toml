@@ -56,20 +56,6 @@ all = [
 ]
 
 [[checks]]
-id = "verification-owner"
-type = "text"
-path = "workflows/verification.md"
-required = ["## Platform Evidence Coverage"]
-prohibited = []
-
-[[checks]]
-id = "verification-owner-detail-1"
-type = "text"
-path = "workflows/verification/platforms.md"
-required = ["record every required target", "result from one target does not prove", "remain explicit and cannot satisfy", "Failure fan-out and early termination", "required target result is missing", "Do not infer Linux and Windows", "fixed pre-commit"]
-prohibited = []
-
-[[checks]]
 id = "dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
@@ -86,10 +72,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0298", "STD-0299"]
-
-[[checks]]
-id = "removed-authority"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["registered `platform-evidence-coverage` suite"]
-prohibited = ["verify-platform-evidence-coverage.sh", "platform-evidence-*.tsv"]

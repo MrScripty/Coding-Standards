@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "profile"
-type = "text"
-path = "profiles/languages/rust/release.md"
-required = ["## Rust Release-Automation Adapter Mechanisms", "Tooling selects the automation", "does not select `cargo-release`"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/rust-release.md"
-required = ["## Cargo-Release Adapter Example", "shared-version = true", "does not recommend `cargo-release`"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "languages/rust/RUST-RELEASE-STANDARDS.md"
-required = []
-prohibited = ["`cargo-release` is recommended"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0818\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t", "STD-0819\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0818", "languages/rust/RUST-RELEASE-STANDARDS.md", "profiles/languages/rust/release.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0818"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0819", "languages/rust/RUST-RELEASE-STANDARDS.md", "reference/recipes/rust-release.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0819"}]}}]

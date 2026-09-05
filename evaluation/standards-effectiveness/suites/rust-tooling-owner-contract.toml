@@ -48,41 +48,6 @@ type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/implementation.md", "workflows/commit.md", "workflows/verification.md", "workflows/tooling.md", "profiles/languages/rust/README.md", "profiles/languages/rust/tooling.md", "reference/recipes/rust-tooling.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
-id = "profile-policy"
-type = "text"
-path = "profiles/languages/rust/tooling.md"
-required = [
-  "## Mechanism Authority",
-  "Generic owners select claims",
-  "cannot create or complete generic policy",
-  "## Typed Outcomes",
-  "Do not fall back to an installed",
-  "## Verification",
-]
-
-[[checks]]
-id = "reference-boundary"
-type = "text"
-path = "reference/recipes/rust-tooling.md"
-required = [
-  "Level: `REFERENCE`",
-  "This material is non-normative",
-  "cannot select tools",
-]
-
-[[checks]]
-id = "router-route"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["profiles/languages/rust/tooling.md"]
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "languages/rust/RUST-TOOLING-STANDARDS.md"
-required = ["(../../profiles/languages/rust/tooling.md)"]
-
-[[checks]]
 id = "disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

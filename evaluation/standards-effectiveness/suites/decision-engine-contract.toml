@@ -32,16 +32,3 @@ outcome = "typed-unavailable"
 field = "contract"
 op = "eq"
 value = "missing"
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = [
-  "registered `decision-engine-contract` suite",
-  "Direct Python engine tests",
-]
-prohibited = [
-  "`check-decision-table.sh` is the reusable semantic-fixture engine",
-  "verify-decision-table-engine.sh",
-]

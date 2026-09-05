@@ -70,35 +70,3 @@ value = "STD-0826"
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/security.md", "profiles/languages/rust/README.md", "profiles/languages/rust/security.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "profile-policy"
-type = "markdown_section_text"
-path = "profiles/languages/rust/security.md"
-heading = "## Panic And Recoverable Error Boundary"
-required = [
-  "Rust API error policy",
-  "production request paths",
-  "typed `unavailable`",
-  "typed `invalid`",
-  "broad catch-all recovery",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "markdown_section_text"
-path = "languages/rust/RUST-SECURITY-STANDARDS.md"
-heading = "## Panic Policy"
-required = ["security.md#panic-and-recoverable-error-boundary"]
-prohibited = [
-  "Production request paths, lifecycle code",
-  "must not use `unwrap()` or `expect()`",
-]
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = ["the registered `rust-security-panic-boundary` suite specialize recoverable-error and"]
-prohibited = ["`verify-rust-security-panic-boundary.sh` specialize recoverable-error and"]

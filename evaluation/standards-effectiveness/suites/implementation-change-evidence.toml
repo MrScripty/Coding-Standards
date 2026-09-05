@@ -30,30 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
-[[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/implementation.md"
-required = ["## Change-Description Evidence", "affected risk", "Do not default to a pull request", "are `invalid`", "is `unavailable`", "`unsupported`; do not substitute"]
-prohibited = []
 
 [[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0698\tTOOLING-STANDARDS.md\tworkflows/implementation.md\tsplit\t"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/implementation.md"
-required = ["ID: `reference.recipes.implementation`", "## Pull-Request Template Example", "mkdir -p .github", "define no fallback"]
-prohibited = []
-
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = []
-prohibited = ["mkdir -p .github", "PULL_REQUEST_TEMPLATE.md"]
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0698", "TOOLING-STANDARDS.md", "workflows/implementation.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0698"}]}}]

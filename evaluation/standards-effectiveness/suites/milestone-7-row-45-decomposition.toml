@@ -30,22 +30,3 @@ expected = [["45", "P37", "mechanical", "STANDARDS-ROUTER.md", "closure-only", "
 field = "train_order"
 op = "eq"
 value = "45"
-
-[[checks]]
-id = "row-45-decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-45-decomposition.md"
-required = [
-  "## Owner Review",
-  "## Exact Outcomes",
-  "## Consumer Audit Impact",
-  "## Ordered Child",
-  "`45.1`",
-  "does not dispose either identifier",
-  "## Bounded Write Set",
-  "## Verification Gates",
-  "complete fail-fast suite",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = []

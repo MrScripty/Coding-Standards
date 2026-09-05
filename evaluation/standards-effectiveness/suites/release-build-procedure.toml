@@ -39,20 +39,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "workflows/release.md"
-required = ["### Build Procedure Selection", "accepted artifact plan", "has no build procedure", "Do not invent universal build action names", "select the exact planned artifact", "compile implicitly through another action", "report success for an inapplicable"]
-prohibited = []
-
-[[checks]]
-id = "launcher-projection"
-type = "text"
-path = "LAUNCHER-STANDARDS.md"
-required = ["[Release](workflows/release.md#build-procedure-selection)"]
-prohibited = ["## Build Standards"]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

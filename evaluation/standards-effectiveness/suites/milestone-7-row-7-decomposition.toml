@@ -90,29 +90,3 @@ header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_stat
 columns = ["owner"]
 order = "source"
 where = { field = "baseline_order", op = "eq", value = "7" }
-
-[[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-7-decomposition.md"
-required = [
-  "mixes Rust workspace and verification mechanics, release artifact composition",
-  "### Child 7.1: Rust Binding Workspace And Evidence Boundary",
-  "### Child 7.2: Binding Artifact Roles And Release Composition",
-  "### Child 7.3: Binding Artifact Compatibility",
-  "### Child 7.4: Binding Surface Contract",
-  "All children must receive exact dispositions in order",
-  "`default-members` exclusion as satisfaction",
-  "same-build provenance as forced lockstep versioning",
-  "automatic export of every technically available operation",
-  "typed diagnostics",
-  "changes no normative or legacy standard",
-]
-prohibited = []
-
-[[checks]]
-id = "resolved-finding"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/issues.md"
-required = ["| F074 | Resolved in Milestone 7.4b8w |"]
-prohibited = []

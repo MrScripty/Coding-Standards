@@ -1,23 +1,26 @@
 schema_version = 1
 id = "tooling-ci-workflow-reference"
 owner = "reference/recipes/tooling.md"
-description = "Complete legacy CI workflow retained only as a non-normative example."
+description = "Navigation destinations for the documented owners; policy meaning requires semantic review."
+
 
 [[checks]]
-id = "reference"
-type = "text"
+id = "reference-destinations"
+type = "markdown_targets"
 path = "reference/recipes/tooling.md"
-required = ["## Complete CI Workflow Example", "This is the complete legacy GitHub Actions example", "# .github/workflows/ci.yml", "actions/checkout@v4", "ci_summary:", "define no fallback"]
-prohibited = []
+required = ["profiles/languages/typescript.md", "topics/dependencies.md", "workflows/tooling.md"]
+
 [[checks]]
-id = "former-source"
-type = "text"
+id = "former-source-destinations"
+type = "markdown_targets"
 path = "TOOLING-STANDARDS.md"
-required = ["defines no provider, trigger, permission, job, gate, cache, command"]
-prohibited = ["# .github/workflows/ci.yml", "actions/checkout@v4", "ci_summary:"]
+required = ["FRONTEND-STANDARDS.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
+
 [[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0693\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0694\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0693", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0693"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0694", "TOOLING-STANDARDS.md", "reference/recipes/tooling.md", "move"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0694"}]}}]

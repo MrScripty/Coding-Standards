@@ -30,44 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
-[[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/documentation.md"
-required = ["## Decision Traceability", "project-owned trigger paths", "evaluates only index state", "Do not default to a `src/` directory", "is `invalid`", "are `unavailable`", "`unsupported`; do not infer"]
-prohibited = []
 
 [[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0696\tTOOLING-STANDARDS.md\tworkflows/documentation.md\tindex\t", "STD-0697\tTOOLING-STANDARDS.md\tworkflows/documentation.md\tsplit\t"]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/documentation.md"
-required = ["## Decision Traceability Examples", "trigger_path", "check-decision-traceability.py --mode staged", "--base-ref"]
-prohibited = ["check-decision-traceability.sh"]
-
-[[checks]]
-id = "hook"
-type = "text"
-path = "templates/lefthook.yml"
-required = ["python3 ./scripts/check-decision-traceability.py --mode staged --map"]
-prohibited = ["check-decision-traceability.sh", "TRACEABILITY_BASE_REF", "TRACEABILITY_HOST_FACING_DIRS", "TRACEABILITY_STRUCTURED_PRODUCER_DIRS", "origin/master", "HEAD~1"]
-
-[[checks]]
-id = "checker-contract"
-type = "text"
-path = "tools/decision_traceability/decision_traceability/check.py"
-required = ["mode=options.mode", "map_path=options.map_path", "base_ref=options.base_ref", "head_ref=options.head_ref"]
-prohibited = ["TRACEABILITY_BASE_REF", "TRACEABILITY_HOST_FACING_DIRS", "TRACEABILITY_STRUCTURED_PRODUCER_DIRS", "origin/master", "HEAD~1"]
-
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = []
-prohibited = ["trigger_path", "check-decision-traceability.py --mode staged", "check-decision-traceability.sh --mode staged", "--base-ref", "TRACEABILITY_BASE_REF", "TRACEABILITY_HOST_FACING_DIRS", "TRACEABILITY_STRUCTURED_PRODUCER_DIRS", "origin/master", "HEAD~1"]
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0696", "TOOLING-STANDARDS.md", "workflows/documentation.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0696"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0697", "TOOLING-STANDARDS.md", "workflows/documentation.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0697"}]}}]

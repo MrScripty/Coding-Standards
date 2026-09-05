@@ -76,33 +76,12 @@ outcome = "direct"
 [checks.rules.when]
 all = [{ field = "meaning", op = "eq", value = "clear" }]
 
-[[checks]]
-id = "owner-detail-1"
-type = "text"
-path = "topics/code-design.md"
-required = ["### Code And Terminology Discipline", "call site may", "Do not apply blanket extraction", "Delete code, aliases, adapters", "Choose names from domain meaning", "Do not fall back to fixed call counts"]
-prohibited = []
 
 [[checks]]
-id = "legacy-and-route"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["CORE-STANDARDS.md#code-and-terminology-discipline"]
-prohibited = ["### Don't Repeat Yourself", "### Be Descriptive"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0158\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the code-style parent with a route to canonical Core code discipline",
-  "STD-0159\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tselect code volume from owned behavior invariants lifecycle and reasoning load without universal brevity",
-  "STD-0160\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tbound change scope by objective ownership and demonstrated need without smallest-diff or incumbent fallback",
-  "STD-0161\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tcreate abstractions only when they own a concern callers can safely ignore without call-count defaults",
-  "STD-0162\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tconsolidate only the same owned contract when copies create divergence risk without blanket DRY",
-  "STD-0163\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdelete unowned unsupported code while preserving only declared consumer state deployment or lifecycle obligations",
-  "STD-0164\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the naming parent with the canonical Core terminology route",
-  "STD-0165\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tderive names from domain role unit ownership lifecycle and observable effect",
-  "STD-0166\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tuse one term per concept and distinguish different concepts without incumbent or copied naming recipes",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0158", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0158"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0159", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0159"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0160", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0160"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0161", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0161"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0162", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0162"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0163", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0163"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0164", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0164"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0165", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0165"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0166", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0166"}]}}]

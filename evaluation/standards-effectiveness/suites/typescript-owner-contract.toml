@@ -38,45 +38,12 @@ any = [
   { field = "evidence", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "profiles/languages/typescript.md"
-required = ["ID: `profile.language.typescript`", "## Public Type Surfaces", "## Runtime Boundaries", "## Contract Type Projection", "## Static Analysis And Compiler Configuration", "Do not require explicit return types for every exported function", "TypeScript types do not validate runtime values", "wrapping every string or"]
-prohibited = []
 
 [[checks]]
-id = "async-route"
-type = "text"
-path = "profiles/languages/typescript/async.md"
-required = ["`profile.language.typescript`"]
-prohibited = []
-
-[[checks]]
-id = "routes-and-legacy"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["[TypeScript profile](profiles/languages/typescript.md)"]
-prohibited = ["// GOOD: Explicit return type", "Don't pass raw `string` or `any`"]
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[TypeScript profile](profiles/languages/typescript.md)"]
-prohibited = []
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0184\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the TypeScript-specific parent with routes to the canonical general and async TypeScript profiles",
-  "STD-0185\tCODING-STANDARDS.md\tprofiles/languages/typescript.md\trefine\tselect explicit annotations or inference from consumer declaration and evidence facts without exported-function or private-function defaults",
-  "STD-0186\tCODING-STANDARDS.md\tprofiles/languages/typescript.md\trefine\tproject contract types from canonical authority and require runtime decoding without copied response raw-primitive any or assertion fallback",
-  "STD-0677\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tgovern TypeScript analysis scope while extracting ESLint Prettier version preset glob and configuration syntax to non-normative Tooling reference",
-  "STD-0678\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tgovern project-boundary and compatibility diagnostics while extracting product-specific flat-config pitfalls to non-normative Tooling reference",
-  "STD-0679\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tselect compiler checks from owned contracts while extracting tsconfig flag examples to non-normative Tooling reference",
-  "STD-0680\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tderive analysis from architecture authority while extracting custom ESLint rule syntax to non-normative Tooling reference",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0184", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0184"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0185", "CODING-STANDARDS.md", "profiles/languages/typescript.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0185"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0186", "CODING-STANDARDS.md", "profiles/languages/typescript.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0186"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0677", "TOOLING-STANDARDS.md", "profiles/languages/typescript.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0677"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0678", "TOOLING-STANDARDS.md", "profiles/languages/typescript.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0678"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0679", "TOOLING-STANDARDS.md", "profiles/languages/typescript.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0679"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0680", "TOOLING-STANDARDS.md", "profiles/languages/typescript.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0680"}]}}]

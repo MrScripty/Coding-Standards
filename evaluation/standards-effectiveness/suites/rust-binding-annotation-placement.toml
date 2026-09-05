@@ -39,32 +39,6 @@ op = "eq"
 value = "missing"
 
 [[checks]]
-id = "rust-profile"
-type = "text"
-path = "profiles/languages/rust/language-bindings.md"
-required = [
-  "Select annotation placement",
-  "independent of framework behavior",
-  "separate schema or interface definition",
-  "Do not prefer co-located proc",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "markdown_section_text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-heading = "### Annotation Approach"
-required = [
-  "language-bindings.md#core-and-adapter-boundary",
-]
-prohibited = [
-  "Prefer proc-macro",
-  "| UniFFI |",
-  "| Tauri Commands |",
-]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

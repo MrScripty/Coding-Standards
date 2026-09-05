@@ -43,37 +43,12 @@ any = [
   { field = "provenance", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "canonical-policy"
-type = "text"
-path = "topics/contracts.md"
-required = ["## Persisted Contract Artifacts"]
-prohibited = []
 
 [[checks]]
-id = "canonical-policy-detail-1"
-type = "text"
-path = "topics/contracts/evolution.md"
-required = ["canonical authority, applicable contract version", "Validation proves that the current artifact satisfies", "Regeneration proves deterministic derivation", "it does not by itself prove that consumers accept", "Do not accept a stale artifact"]
-prohibited = []
-
-[[checks]]
-id = "testing-route-and-legacy"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["topics/contracts.md"]
-prohibited = ["must be validated or regenerated before commit"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0635\tTESTING-STANDARDS.md\ttopics/contracts.md\trefine\trequire canonical authority version derivation provenance and producer-consumer evidence for persisted contract artifacts without stale-shape inferred-authority consumer-guess overwrite producer-snapshot parse-success or regeneration-success fallback"]
-prohibited = []
-
-[[checks]]
-id = "row-18-route"
-type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-required = ["18\t4\tSTD-0635\tTESTING-STANDARDS.md\ttopics/contracts.md\texists\tpre-slice-review\tfocused"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0635", "TESTING-STANDARDS.md", "topics/contracts.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0635"}]}}]

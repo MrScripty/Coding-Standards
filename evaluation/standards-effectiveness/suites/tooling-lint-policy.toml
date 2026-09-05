@@ -30,21 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/tooling.md"
-required = ["## Lint Policy And Orchestration", "existing debt", "Do not default to failing every warning", "unless Verification selected", "typed `invalid`", "typed `unavailable`", "typed `unsupported`"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = []
-prohibited = ["1. **Fail on warnings**"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0674\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0675\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0674", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0674"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0675", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0675"}]}}]

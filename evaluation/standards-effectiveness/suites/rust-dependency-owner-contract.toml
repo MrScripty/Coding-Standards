@@ -46,31 +46,6 @@ type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "workflows/release.md", "topics/contracts.md", "topics/dependencies.md", "profiles/languages/rust/README.md", "profiles/languages/rust/dependencies.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
-id = "profile-policy"
-type = "text"
-path = "profiles/languages/rust/dependencies.md"
-required = [
-  "## Mechanism Authority",
-  "Generic owners select dependency requirements",
-  "Existing manifests",
-  "## Typed Outcomes",
-  "Do not fall back to the incumbent manifest",
-  "## Verification",
-]
-
-[[checks]]
-id = "router-route"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["profiles/languages/rust/dependencies.md"]
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
-required = ["[Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)"]
-
-[[checks]]
 id = "disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

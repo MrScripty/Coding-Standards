@@ -1,69 +1,41 @@
 schema_version = 1
 id = "verification-ownership"
 owner = "workflow.verification"
-description = "Canonical verification ownership, routing, evidence boundaries, and removal of universal timing, taxonomy, and scheduling authority from legacy sources."
+description = "Navigation destinations for the documented owners; policy meaning requires semantic review."
+
 
 [[checks]]
-id = "canonical-workflow-sections"
-type = "text"
+id = "canonical-workflow-sections-destinations"
+type = "markdown_targets"
 path = "workflows/verification.md"
-required = [
-  "\n## Acceptance Is A Set Of Claims\n",
-  "\n## Evidence Kinds\n",
-  "\n## Environment Qualification\n",
-  "\n## Execution Mode\n",
-  "\n## Quality Gates And Execution Location\n",
-  "\n## Smoke Checks\n",
-  "\n## Scheduling And Duration\n",
-  "Startup alone is usually",
-  "evidence and never substitutes",
-]
-prohibited = []
+required = ["workflows/implementation.md", "workflows/verification/gui.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md"]
 
 [[checks]]
-id = "testing-route-and-legacy-removal"
-type = "text"
+id = "testing-route-and-legacy-removal-destinations"
+type = "markdown_targets"
 path = "TESTING-STANDARDS.md"
-required = ["workflows/verification.md"]
-prohibited = [
-  "< 10ms",
-  "< 1s",
-  "< 30s",
-  "CI only",
-  "\n## Verification Layers\n",
-  "\n### Targets\n",
-]
+required = ["STANDARDS-ROUTER.md", "profiles/applications/frontend.md", "profiles/boundaries/language-bindings.md", "topics/concurrency.md", "topics/contracts.md", "topics/performance.md", "topics/resilience.md", "workflows/verification.md"]
 
 [[checks]]
-id = "tooling-route-and-legacy-removal"
-type = "text"
+id = "tooling-route-and-legacy-removal-destinations"
+type = "markdown_targets"
 path = "TOOLING-STANDARDS.md"
-required = ["workflows/verification.md"]
-prohibited = [
-  "| Tests | Affected only | Full suite |",
-  "| Gate | What it catches | Non-negotiable? |",
-]
+required = ["FRONTEND-STANDARDS.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
 
 [[checks]]
-id = "launcher-route"
-type = "text"
+id = "launcher-route-destinations"
+type = "markdown_targets"
 path = "LAUNCHER-STANDARDS.md"
-required = ["workflows/verification.md"]
-prohibited = []
+required = ["profiles/applications/launcher.md", "topics/dependencies.md", "topics/security.md", "workflows/release.md", "workflows/verification.md"]
 
 [[checks]]
-id = "release-route"
-type = "text"
+id = "release-route-destinations"
+type = "markdown_targets"
 path = "RELEASE-STANDARDS.md"
-required = ["workflows/release.md"]
-prohibited = []
+required = ["reference/recipes/releases.md", "workflows/release.md"]
 
 [[checks]]
-id = "release-workflow-boundary"
-type = "text"
+id = "release-workflow-boundary-destinations"
+type = "markdown_targets"
 path = "workflows/release.md"
-required = [
-  "(verification.md)",
-  "does not prove changed feature behavior",
-]
-prohibited = []
+required = ["STANDARDS-ROUTER.md", "reference/recipes/releases.md", "topics/contracts.md", "topics/cross-platform.md", "workflows/release/operations.md", "workflows/verification.md"]

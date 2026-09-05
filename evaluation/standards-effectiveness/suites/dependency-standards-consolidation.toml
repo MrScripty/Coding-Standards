@@ -43,36 +43,6 @@ any = [
 ]
 
 [[checks]]
-id = "owner"
-type = "text"
-path = "topics/dependencies.md"
-required = [
-  "## Compatibility And Lifecycle",
-  "## Features And Footprint",
-  "## Audit And Review",
-  "## Automation And Bootstrap",
-  "version labels and changelogs",
-  "mechanisms, not defaults",
-  "prove only their declared detection contracts",
-  "dependencies themselves",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "DEPENDENCY-STANDARDS.md"
-required = [
-  "# Dependency Standards Migration Index",
-  "[Dependencies](topics/dependencies.md)",
-]
-prohibited = [
-  "Build-or-Depend Decision Matrix",
-  "Transitive Dependency Thresholds",
-  "Example CI Workflow",
-]
-
-[[checks]]
 id = "exact-source-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

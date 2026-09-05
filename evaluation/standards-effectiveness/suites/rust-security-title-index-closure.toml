@@ -44,27 +44,3 @@ expected = [
 field = "source"
 op = "eq"
 value = "languages/rust/RUST-SECURITY-STANDARDS.md"
-
-[[checks]]
-id = "title-body"
-type = "markdown_section_text"
-path = "languages/rust/RUST-SECURITY-STANDARDS.md"
-heading = "# Rust Security Standards"
-scope = "body"
-match_case = "insensitive"
-required = ["Rust-specific security rules for validation, resource limits, network listeners,", "[Security Standards](../../SECURITY-STANDARDS.md)"]
-prohibited = [" must ", " always ", " fallback", " default validator", " default limit", " default queue", " default listener", " default runtime"]
-
-[[checks]]
-id = "generic-security-separation"
-type = "text"
-path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
-required = ["STD-0582"]
-prohibited = ["STD-0821"]
-
-[[checks]]
-id = "row-44-projection"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-44-decomposition.md"
-required = ["registered `rust-security-title-index-closure` suite"]
-prohibited = ["verify-rust-security-title-index-closure.sh"]

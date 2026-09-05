@@ -36,39 +36,3 @@ expected = [
 field = "id"
 op = "eq"
 value = "STD-0482"
-
-[[checks]]
-id = "required-routes"
-type = "markdown_section_text"
-path = "INTEROP-STANDARDS.md"
-heading = "## When These Rules Apply"
-required = [
-  "non-normative routing index",
-  "one boundary can require multiple canonical owners",
-  "profiles/boundaries/interop.md",
-  "profiles/boundaries/ipc.md",
-  "profiles/boundaries/language-bindings.md",
-  "topics/contracts.md",
-  "topics/security.md",
-  "This index defines none of them.",
-]
-prohibited = []
-
-[[checks]]
-id = "prohibited-authority"
-type = "markdown_section_text"
-path = "INTEROP-STANDARDS.md"
-heading = "## When These Rules Apply"
-required = []
-prohibited = [
-  "```",
-  "Key Concerns",
-  "Rust ↔ C",
-  "WebSocket, stdin/stdout",
-  "HTTP REST, gRPC",
-  "must ",
-  "always ",
-  "fallback",
-  "default",
-]
-match_case = "insensitive"

@@ -46,42 +46,6 @@ columns = ["owner"]
 order = "source"
 
 [[checks]]
-id = "root-boundary"
-type = "text"
-path = "README.md"
-required = [
-  "repository entrypoint",
-  "does not select modules or establish canonical ownership",
-  "Unknown applicability is a Router diagnostic",
-  "non-normative repository resources",
-  "establish applicability or ownership.",
-  "Repository license terms are in [LICENSE](LICENSE).",
-  "(CORE-STANDARDS.md)",
-  "[Standards Router](STANDARDS-ROUTER.md)",
-  "(templates/README-TEMPLATE.md)",
-  "(templates/PLAN-TEMPLATE.md)",
-  "(templates/PULL_REQUEST_TEMPLATE.md)",
-  "(LICENSE)",
-]
-prohibited = [
-  "## Documents",
-  "## Templates",
-  "## Customization",
-  "| Document | Purpose | When to Use |",
-  "Ready-to-use configuration",
-  "Replace placeholders",
-  "Add tech-specific rules",
-  "Define your scopes",
-  "Configure tooling",
-  "provided as-is for free use",
-  "scheduled for closure",
-  "Remaining frontend mechanism",
-  "awaiting ordered canonical population",
-  "(workflows/commit.md)",
-  "(topics/contracts.md)",
-]
-
-[[checks]]
 id = "root-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

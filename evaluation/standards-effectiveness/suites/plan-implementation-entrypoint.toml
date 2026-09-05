@@ -35,13 +35,6 @@ type = "git_index_paths"
 tracked = ["prompts/implement-plan.md"]
 
 [[checks]]
-id = "prompt-content"
-type = "text"
-path = "prompts/implement-plan.md"
-required = ["explicitly admitted plan operation", "repository-relative `plan.md` path", "`start`, `continue`, or `verify`", "[`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md)", "[`Implementation Workflow`](../workflows/implementation.md)", "[`Planning Workflow`](../workflows/planning.md)", "owning typed diagnostic"]
-prohibited = ["explicitly admitted plan transition", "Inspect repository status", "exact write set", "Concurrent Workers", "atomic conventional commit", "active plan", "/media/", "/home/"]
-
-[[checks]]
 id = "single-title"
 type = "markdown_heading_cardinality"
 path = "prompts/implement-plan.md"

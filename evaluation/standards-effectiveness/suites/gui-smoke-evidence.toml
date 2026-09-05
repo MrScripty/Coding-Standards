@@ -99,31 +99,6 @@ expected = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "workflows/verification.md"
-required = ["### GUI Smoke Evidence"]
-prohibited = []
-
-[[checks]]
-id = "canonical-owner-detail-1"
-type = "text"
-path = "workflows/verification/gui.md"
-required = ["display or session capability", "sandbox policy", "software rendering, sandbox flags", "state isolation", "bounded process-lifecycle behavior", "verification-only procedure separate from normal interactive startup", "Verification owns its evidence kind", "runner behavior, missing required capability", "does not fall back to startup-only evidence"]
-prohibited = []
-
-[[checks]]
-id = "legacy-removal"
-type = "text"
-path = "LAUNCHER-STANDARDS.md"
-required = []
-prohibited = [
-  "## GUI CI Smoke Requirements",
-  "xvfb",
-  "CI-like environment variables",
-]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

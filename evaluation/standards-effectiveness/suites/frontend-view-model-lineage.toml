@@ -42,63 +42,6 @@ op = "eq"
 value = "unsupported"
 
 [[checks]]
-id = "legacy-routes"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "[Frontend application profile](profiles/applications/frontend.md#projection-authority)",
-  "[Architecture](topics/architecture.md#data-and-state-authority)",
-  "[Verification](workflows/verification.md#selecting-claims)",
-  "[Frontend mechanism recipes](reference/recipes/frontend.md)",
-  "does not require a dedicated class",
-]
-prohibited = []
-
-[[checks]]
-id = "canonical-sections"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = ["## Projection Authority", "## Rendering And Synchronization"]
-prohibited = []
-
-[[checks]]
-id = "reference-section"
-type = "text"
-path = "reference/recipes/frontend.md"
-required = ["## Illustrative Synchronization Mechanisms"]
-prohibited = []
-
-[[checks]]
-id = "legacy-fixed-defaults"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = [
-  "Separate data management from presentation using dedicated view model objects",
-  "Subscribe to data source",
-  "Don't duplicate backend-owned data",
-  "class UserListViewModel",
-  "Forward action to backend",
-  "Same view model for different view implementations",
-]
-match_case = "insensitive"
-
-[[checks]]
-id = "reference-fixed-defaults"
-type = "text"
-path = "reference/recipes/frontend.md"
-required = []
-prohibited = [
-  "Separate data management from presentation using dedicated view model objects",
-  "Subscribe to data source",
-  "Don't duplicate backend-owned data",
-  "class UserListViewModel",
-  "Forward action to backend",
-  "Same view model for different view implementations",
-]
-match_case = "insensitive"
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

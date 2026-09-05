@@ -37,32 +37,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/languages/rust/language-bindings.md"
-required = [
-  "Select native artifact kind and crate output types",
-  "`cdylib`, `staticlib`, `rlib`",
-  "accepted boundary",
-  "Do not prescribe one crate name",
-  "typed `unavailable`",
-  "typed `invalid`",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "markdown_section_text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-heading = "### cdylib Configuration"
-required = ["language-bindings.md#package-and-workspace-placement"]
-prohibited = [
-  "mylib-uniffi/Cargo.toml",
-  "crate-type = [\"cdylib\", \"lib\"]",
-  "cdylib produces",
-]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

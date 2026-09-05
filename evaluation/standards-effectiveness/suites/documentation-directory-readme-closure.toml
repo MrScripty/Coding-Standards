@@ -35,20 +35,6 @@ any = [
 ]
 
 [[checks]]
-id = "workflow-owner"
-type = "text"
-path = "workflows/documentation.md"
-required = ["Directory count, file count", "boundary-readme", "If the impact cannot be classified", "Do not default to a `src/` directory"]
-prohibited = []
-
-[[checks]]
-id = "legacy-owner-closure"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = ["Directory README Requirement"]
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

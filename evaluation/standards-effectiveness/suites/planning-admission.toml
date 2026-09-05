@@ -42,20 +42,6 @@ any = [
 ]
 
 [[checks]]
-id = "planning-workflow"
-type = "text"
-path = "workflows/planning.md"
-required = ["## Explicit Plan Admission", "`start` accepts only `Planned`", "`continue` accepts only `Active`", "`verify` accepts `Implemented` or `Verifying`", "## Concurrent Integration Routing", "Ordinary planning does not require a revision digest", "## Policy Projection Completeness", "semantically distinguishable"]
-prohibited = ["`planning-admission-v1`", "`planning-transition-v1`", "length-delimited", "`complete-transition`", "`restore-prior-state`", "`supersede-transition`"]
-
-[[checks]]
-id = "implementation-consumer"
-type = "text"
-path = "workflows/implementation.md"
-required = ["explicit canonical", "Consume the Planning workflow's path, operation, lifecycle", "only when Router applicability", "selects the Concurrent Plan Integration profile", "Ordinary implementation must", "not request or invent those records", "scan for a plan", "infer an operation"]
-prohibited = ["admission, transition identity,", "compatibility, revision-gate, evidence, and reconciliation decisions"]
-
-[[checks]]
 id = "work-slice-proportionality"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"

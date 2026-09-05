@@ -43,50 +43,6 @@ any = [
 ]
 
 [[checks]]
-id = "owner"
-type = "text"
-path = "topics/diagnostics.md"
-required = [
-  "ID: `topic.diagnostics`",
-  "## Diagnostic Authority",
-  "## Diagnostic Selection",
-  "## Causal Identity And Context",
-  "## Lifecycle And Failure",
-  "## Responsibility Boundaries",
-  "## Typed Outcomes",
-  "not universal requirements",
-  "Diagnostics owns only the generic projection contract",
-  "telemetry product, fixed application layers",
-]
-prohibited = []
-
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/diagnostics.md"
-required = [
-  "ID: `reference.recipes.diagnostics`",
-  "Level: `REFERENCE`",
-  "This material is non-normative",
-  "## Adapting A Mechanism",
-]
-prohibited = []
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Diagnostics](topics/diagnostics.md)"]
-prohibited = []
-
-[[checks]]
-id = "architecture-route"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = ["[Diagnostics](topics/diagnostics.md)"]
-prohibited = []
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

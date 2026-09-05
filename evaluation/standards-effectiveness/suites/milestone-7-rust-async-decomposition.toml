@@ -101,41 +101,6 @@ op = "in"
 values = ["STD-0717", "STD-0718", "STD-0719", "STD-0720", "STD-0721", "STD-0722", "STD-0723", "STD-0724", "STD-0725"]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-rust-async-decomposition.md"
-required = [
-  "[milestone-7-rust-async-slices.tsv](../../../../evaluation/standards-effectiveness/milestone-7-rust-async-slices.tsv)",
-  "Only the first implementation slice is fully specified.",
-  "dropping a Rust future stops polling that future",
-  "does not by itself authorize force-aborting work",
-  "The Rust Async profile does not own domain policy",
-  "## Next Slice 7.4b4d: Rust Async Foundation",
-  "**No fallback:**",
-  "After `7.4b4g`, dependent Rust Security and Rust",
-]
-prohibited = []
-
-[[checks]]
-id = "parent-projection"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-decomposition.md"
-required = ["(milestone-7-rust-async-decomposition.md)"]
-prohibited = []
-
-[[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = [
-  "registered\n`milestone-7-rust-async-decomposition` suite",
-  "nine Rust Async identifiers",
-  "four serial specialization slices",
-  "without nested Bash execution",
-]
-prohibited = ["The focused\ndecomposition checker validates exact ownership"]
-
-[[checks]]
 id = "obsolete-authority"
 type = "path_state"
 present = ["evaluation/standards-effectiveness/suites/milestone-7-rust-async-decomposition.toml"]

@@ -30,27 +30,12 @@ outcome = "typed-unsupported"
 [checks.rules.when]
 all = [{ field = "capability", op = "eq", value = "unsupported" }]
 
+
 [[checks]]
-id = "workflow"
-type = "text"
-path = "workflows/tooling.md"
-required = ["## Tool-Debt Governance", "## Automation Cost And Operational Evidence", "Do not default to a committed snapshot", "Do not default to caching", "is `invalid`", "is `unavailable`", "is `unsupported`"]
-prohibited = []
-[[checks]]
-id = "reference"
-type = "text"
-path = "reference/recipes/tooling.md"
-required = ["## Automation Cost Examples"]
-prohibited = []
-[[checks]]
-id = "former-source"
-type = "text"
-path = "TOOLING-STANDARDS.md"
-required = []
-prohibited = ["Keep a committed baseline snapshot", "actions/setup-node@v4", "actions/upload-artifact@v4", "inside a live matrix run"]
-[[checks]]
-id = "disposition"
-type = "text"
+id = "disposition-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = ["STD-0691\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0692\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0691", "TOOLING-STANDARDS.md", "workflows/tooling.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0691"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0692", "TOOLING-STANDARDS.md", "workflows/tooling.md", "split"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0692"}]}}]

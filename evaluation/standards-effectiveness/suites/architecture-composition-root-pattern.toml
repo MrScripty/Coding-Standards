@@ -46,57 +46,6 @@ op = "eq"
 value = "one"
 
 [[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = [
-  "## Conditional Composition Root",
-  "After Architecture selects independently meaningful implementations",
-  "These labels do not require one composition module",
-  "or owned runtimes may require separate composition boundaries",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-routes"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "[Runtime Composition](topics/architecture.md#runtime-composition)",
-  "[Conditional Composition Root](reference/patterns/architecture.md#conditional-composition-root)",
-  "not a required module",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-fixed-defaults"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = [
-  "Consumers depend on service contracts/facades",
-  "belongs in the composition root",
-  "swap them in the composition root",
-  "const userRepository = new SqlUserRepository",
-  "Feature module reaches outward and self-wires",
-]
-match_case = "insensitive"
-
-[[checks]]
-id = "reference-fixed-defaults"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = []
-prohibited = [
-  "Consumers depend on service contracts/facades",
-  "belongs in the composition root",
-  "swap them in the composition root",
-  "const userRepository = new SqlUserRepository",
-  "Feature module reaches outward and self-wires",
-]
-match_case = "insensitive"
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

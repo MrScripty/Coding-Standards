@@ -39,36 +39,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/applications/frontend.md"
-required = [
-  "Select interaction evidence from the user-observable contract",
-  "A selector or event-dispatch API is not evidence",
-  "require a representative browser environment",
-  "DOM shim do not prove browser integration",
-  "A successful update does not prove cleanup",
-]
-prohibited = []
-
-[[checks]]
-id = "testing-route"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["profiles/applications/frontend.md"]
-prohibited = []
-
-[[checks]]
-id = "frontend-route-and-retired-mechanisms"
-type = "text"
-path = "FRONTEND-STANDARDS.md"
-required = ["profiles/applications/frontend.md"]
-prohibited = [
-  "Use `userEvent` for user flows",
-  "Mock geometry on specific elements",
-]
-
-[[checks]]
 id = "disposition-lineage"
 type = "relation"
 mode = "set"

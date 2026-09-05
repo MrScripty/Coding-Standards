@@ -58,56 +58,6 @@ all = [
 ]
 
 [[checks]]
-id = "canonical-policy"
-type = "text"
-path = "topics/contracts.md"
-required = ["## Protocol Adapter Proof"]
-prohibited = []
-
-[[checks]]
-id = "canonical-policy-detail-1"
-type = "text"
-path = "topics/contracts/protocols.md"
-required = ["producer adapter accepts an already authoritative operation outcome", "consumer adapter treats the received response as unknown", "neither status nor body alone proves the outcome", "application error through successful HTTP transport", "Adapters do not select disclosure", "Do not substitute a generic error"]
-prohibited = []
-
-[[checks]]
-id = "mechanism-reference"
-type = "text"
-path = "reference/recipes/http.md"
-required = [
-  "## Illustrative Producer Adapter",
-  "## Illustrative Consumer Adapter",
-  "## Selected HTTP Success And Error Representations",
-  "Neither example is universally good or bad",
-  "## Conditional Interpretation Claims",
-  "claims, not automatic benefits",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-section"
-type = "markdown_section_text"
-path = "ARCHITECTURE-PATTERNS.md"
-heading = "## HTTP API Error Convention"
-required = [
-  "[Protocol Outcome Projection]",
-  "[Protocol Adapter Proof]",
-  "[HTTP Projection Mechanism Recipes]",
-  "This is a migration index",
-]
-prohibited = [
-  "### Server Implementation",
-  "### Client Implementation",
-  "### Anti-Pattern",
-  "### Benefits",
-  "ApiError:",
-  "Clients must check",
-  "// BAD:",
-  "Uniform error handling",
-]
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]

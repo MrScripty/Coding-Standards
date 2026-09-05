@@ -34,26 +34,3 @@ any = [
   { field = "criticality", op = "eq", value = "missing" },
   { field = "evidence", op = "eq", value = "missing" },
 ]
-
-[[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/resilience.md"
-required = [
-  "ID: `topic.resilience`",
-  "Failure And Recovery Authority",
-  "Criticality And Degradation",
-  "Retry And Recovery",
-  "typed `invalid`",
-  "typed `unsupported`",
-  "typed `unavailable`",
-  "No Fallback",
-]
-prohibited = []
-
-[[checks]]
-id = "router-projection"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["Dependency or service failure, retry, degradation, startup resilience, or recovery semantics"]
-prohibited = []

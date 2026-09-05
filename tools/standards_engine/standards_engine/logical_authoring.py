@@ -11,6 +11,8 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any, Protocol
 
+from tools.standards_applicability.standards_applicability import compile_fact_schema
+
 from tools.repository_git.repository_git import (
     GitRepositoryError,
     RepositoryPath,
@@ -23,6 +25,7 @@ from tools.standards_metadata.standards_metadata import (
     PolicyUnit,
     PolicyUnitTombstone,
     load_canonical_standards_corpus,
+    load_canonical_module_corpus,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     DEFAULT_REGISTRY as POLICY_IMPACT_REGISTRY,
@@ -396,6 +399,57 @@ def _edit(value: object) -> LogicalEdit:
             "policy_units": sorted(normalized_units, key=lambda item: str(item["id"])),
         }
         return _structured(normalized, target=str(standard["id"]), facet="standard")
+    if kind in {
+        "put-routing-rule",
+        "remove-routing-rule",
+        "put-routing-fact",
+        "remove-routing-fact",
+    }:
+        field = "rule" if kind.endswith("rule") else "fact"
+        _exact(raw, {"kind", field, "rationale"}, f"{kind} edit")
+        _text(raw["rationale"], "routing change rationale")
+        value = raw[field]
+        if kind.startswith("put-"):
+            value = _mapping(value, f"routing {field}")
+            fields = (
+                {"id", "target", "when", "condition"}
+                if field == "rule"
+                else {
+                    "id",
+                    "semantic_revision",
+                    "type",
+                    "nullable",
+                    "values",
+                    "aliases",
+                    "meaning",
+                    "prompt",
+                }
+            )
+            _exact(value, fields, f"routing {field}")
+            identifier = _semantic_id(value["id"], f"routing {field} ID")
+            if field == "fact":
+                if (
+                    type(value["semantic_revision"]) is not int
+                    or value["semantic_revision"] < 1
+                ):
+                    raise _invalid(
+                        "AUTHORING.INVALID_SEMANTIC_REVISION",
+                        "routing fact revision must be positive",
+                    )
+                _text(value["meaning"], "routing fact meaning")
+                _text(value["prompt"], "routing fact prompt")
+            if field == "rule":
+                _semantic_id(value["target"], "route target")
+                _mapping(value["when"], "route applicability")
+                condition = _text(value["condition"], "route condition")
+                if any(character in condition for character in "\r\n"):
+                    raise _invalid(
+                        "AUTHORING.INVALID_ARGUMENTS",
+                        "route condition must be one paragraph",
+                    )
+        else:
+            identifier = _semantic_id(value, f"routing {field} ID")
+        return _structured(raw, target=identifier, facet=f"routing-{field}")
     if kind == "revise-standard":
         _exact(raw, {"kind", "standard"}, "revise-standard edit")
         standard = _standard_content(raw["standard"])
@@ -831,7 +885,18 @@ class LogicalAuthoringCompiler:
         repository_paths = selected_repository_paths
         for change_set in program.change_sets:
             before = dict(files)
+            routing_edits = [
+                edit.as_contract()
+                for edit in change_set.edits
+                if edit.as_contract()["kind"] in _ROUTING_EDITS
+            ]
+            routing_applied = False
             for edit in sorted(change_set.edits, key=_projection_order):
+                if edit.as_contract()["kind"] in _ROUTING_EDITS:
+                    if not routing_applied:
+                        _edit_routing(files, routing_edits)
+                        routing_applied = True
+                    continue
                 self._apply_edit(
                     files,
                     edit,
@@ -881,7 +946,14 @@ class LogicalAuthoringCompiler:
             )
         raw = edit.as_contract()
         kind = raw["kind"]
-        if kind == "create-standard":
+        if kind in {
+            "put-routing-rule",
+            "remove-routing-rule",
+            "put-routing-fact",
+            "remove-routing-fact",
+        }:
+            _edit_routing(files, [raw])
+        elif kind == "create-standard":
             self._create_standard(files, raw)
         elif kind == "revise-standard":
             self._revise_standard(files, raw)
@@ -1480,7 +1552,11 @@ def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
     kind = str(edit.as_contract()["kind"])
     priority = {
         "create-standard": 0,
+        "put-routing-fact": 45,
         "revise-standard": 10,
+        "put-routing-rule": 45,
+        "remove-routing-rule": 45,
+        "remove-routing-fact": 45,
         "revise-policy-unit": 20,
         "move-policy-unit": 30,
         "replace-standard-relationships": 40,
@@ -1501,10 +1577,10 @@ def authoring_target_id(snapshot: str, consumer: str) -> str:
 
 def _new_standard_path(standard: str, role: str) -> str:
     parts = standard.split(".")
-    if role == "topic" and len(parts) == 2 and parts[0] == "topic":
-        return f"topics/{parts[1]}.md"
-    if role == "workflow" and len(parts) == 2 and parts[0] == "workflow":
-        return f"workflows/{parts[1]}.md"
+    if role == "topic" and len(parts) >= 2 and parts[0] == "topic":
+        return "topics/" + "/".join(parts[1:]) + ".md"
+    if role == "workflow" and len(parts) >= 2 and parts[0] == "workflow":
+        return "workflows/" + "/".join(parts[1:]) + ".md"
     if role == "reference" and len(parts) >= 3 and parts[0] == "reference":
         return "reference/" + "/".join(parts[1:]) + ".md"
     if role == "profile" and len(parts) >= 3 and parts[0] == "profile":
@@ -2064,6 +2140,13 @@ def _analysis_module_ids(program: LogicalProgram) -> tuple[str, ...]:
             if kind == "create-standard":
                 standard = _mapping(raw["standard"], "standard content")
                 selected.add(str(standard["id"]))
+            elif kind in {
+                "put-routing-rule",
+                "remove-routing-rule",
+                "put-routing-fact",
+                "remove-routing-fact",
+            }:
+                selected.add("router")
             elif kind == "revise-standard":
                 standard = _mapping(raw["standard"], "standard content")
                 selected.add(str(standard["id"]))
@@ -2271,3 +2354,195 @@ __all__ = (
     "StandardsChangeSet",
     "authoring_target_id",
 )
+
+
+_ROUTING_EDITS = frozenset(
+    {
+        "put-routing-rule",
+        "remove-routing-rule",
+        "put-routing-fact",
+        "remove-routing-fact",
+    }
+)
+
+
+def _routing_fact_signature(definition: Mapping[str, object]) -> dict[str, object]:
+    """Use the fact owner's semantics, including unordered values and nonsemantic aliases."""
+    schema = compile_fact_schema(
+        {
+            "kind": "applicability-fact-schema",
+            "id": "router.authoring-fact",
+            "version": 2,
+            "facts": [dict(definition)],
+        }
+    )
+    signature = schema.definitions[0].semantic_projection()
+    del signature["semantic_revision"]
+    return signature
+
+
+def _edit_routing(files: dict[str, bytes], edits: list[Mapping[str, object]]) -> None:
+    path = "evaluation/standards-effectiveness/router-projection.toml"
+    raw = tomllib.loads(files[path].decode("utf-8"))
+    guidance = []
+    for edit in edits:
+        kind = str(edit["kind"])
+        field = "rule" if kind.endswith("rule") else "fact"
+        collection = "rules" if field == "rule" else "facts"
+        value = edit[field]
+        identifier = value["id"] if isinstance(value, Mapping) else value
+        prior = next(
+            (item for item in raw[collection] if item["id"] == identifier), None
+        )
+        if kind.startswith("remove-"):
+            if prior is None:
+                raise _invalid(
+                    "AUTHORING.ROUTING_ENTRY_UNKNOWN", "routing entry does not exist"
+                )
+            raw[collection].remove(prior)
+            if field == "rule":
+                guidance.append((prior["target"], None, None))
+            continue
+        assert isinstance(value, Mapping)
+        if field == "fact":
+            replacement = dict(value)
+            replacement.update(
+                context_kind="task-route",
+                answer_contract="fact-value.v1",
+                evidence_contract="evidence-reference.v1",
+                authorization_capability="standards.analyze",
+            )
+            changed = prior is not None and _routing_fact_signature(
+                prior
+            ) != _routing_fact_signature(replacement)
+            expected_revision = (
+                1 if prior is None else prior["semantic_revision"] + int(changed)
+            )
+            if value["semantic_revision"] != expected_revision:
+                raise _invalid(
+                    "AUTHORING.INVALID_SEMANTIC_REVISION",
+                    "routing fact revision must track its semantic change",
+                )
+
+        else:
+            replacement = {key: value[key] for key in ("id", "target", "when")}
+            guidance.append(
+                (
+                    prior["target"] if prior else None,
+                    value["target"],
+                    value["condition"],
+                )
+            )
+        if prior is None:
+            raw[collection].append(replacement)
+        else:
+            raw[collection][raw[collection].index(prior)] = replacement
+    targets = [rule["target"] for rule in raw["rules"]]
+    if len(set(targets)) != len(targets):
+        raise _invalid(
+            "AUTHORING.DUPLICATE_ROUTE_TARGET", "a route already owns this target"
+        )
+    if guidance:
+        _project_route_guidance(files, guidance, set(targets))
+    header = [
+        f"{key} = {_toml_inline(value)}"
+        for key, value in raw.items()
+        if key not in {"facts", "rules"}
+    ]
+    for name in ("facts", "rules"):
+        for item in sorted(raw[name], key=lambda item: item["id"]):
+            header.extend(["", f"[[{name}]]"])
+            header.extend(
+                f"{key} = {_toml_inline(value)}" for key, value in item.items()
+            )
+    files[path] = ("\n".join(header) + "\n").encode("utf-8")
+
+
+def _project_route_guidance(
+    files: dict[str, bytes],
+    edits: list[tuple[str | None, str | None, str | None]],
+    selected_targets: set[str],
+) -> None:
+    modules = load_canonical_module_corpus(FrozenContentSource(files))
+
+    def target_path(identifier: str) -> str:
+        module = modules.resolve(identifier)
+        if module is None or module.role == "reference":
+            raise _invalid(
+                "AUTHORING.ROUTE_TARGET_UNKNOWN",
+                "route target must be a normative standard",
+            )
+        return module.path
+
+    source = "STANDARDS-ROUTER.md"
+    text = files[source].decode("utf-8")
+    start_marker, end_marker = (
+        "## Workflow Selection",
+        "## S1 Rust Library Bug-Fix Route",
+    )
+    if text.count(start_marker) != 1 or text.count(end_marker) != 1:
+        raise _invalid(
+            "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
+            "route selection boundaries must be unique",
+        )
+    start, end = text.index(start_marker), text.index(end_marker)
+    if end <= start:
+        raise _invalid(
+            "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
+            "route selection boundaries are reversed",
+        )
+    section = text[start:end]
+    original = section.splitlines(keepends=True)
+    lines = original.copy()
+    additions = []
+    retired_links = []
+    for old_target, target, condition in edits:
+        old_path = target_path(old_target) if old_target is not None else None
+        path = target_path(target) if target is not None else None
+        replacement = ""
+        if path is not None:
+            title = files[path].decode("utf-8").splitlines()[0].removeprefix("# ")
+            title = title.replace("|", "\\|")
+            cell = str(condition).replace("\\", "\\\\").replace("|", "\\|")
+            replacement = f"| {cell} | [{title}]({path}) |\n"
+        old_link = (
+            re.compile(r"\[[^]]+\]\(" + re.escape(old_path) + r"(?:#[^)]*)?\)")
+            if old_path is not None
+            else None
+        )
+        rows = [
+            index
+            for index, line in enumerate(original)
+            if line.startswith("|") and old_link and old_link.search(line)
+        ]
+        if old_path is not None and len(rows) != 1:
+            raise _invalid(
+                "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
+                "route target must have exactly one selection row",
+            )
+        if rows:
+            lines[rows[0]] = replacement
+        elif replacement:
+            additions.append(replacement)
+        if old_link is not None and old_target not in selected_targets:
+            retired_links.append(old_link)
+    # Readable explanatory links cannot preserve a removed selection. Row replacements
+    # are already final, so swaps never rewrite each other's new destination.
+    for index, line in enumerate(original):
+        if not line.startswith("|"):
+            for pattern in retired_links:
+                lines[index] = pattern.sub(
+                    lambda match: match[0].split("]", 1)[0][1:], lines[index]
+                )
+    if additions:
+        if "## Additional Routing Rules\n" not in section:
+            lines.extend(
+                [
+                    "\n## Additional Routing Rules\n\n| Condition | Select |\n| --- | --- |\n"
+                ]
+            )
+        else:
+            while lines and not lines[-1].strip():
+                lines.pop()
+        lines.extend([*additions, "\n"])
+    files[source] = (text[:start] + "".join(lines) + text[end:]).encode("utf-8")

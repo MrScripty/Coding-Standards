@@ -51,47 +51,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "topics/accessibility.md"
-required = [
-  "ID: `topic.accessibility`",
-  "## Accessibility Authority",
-  "## Outcome And Modality Selection",
-  "## Responsibility Boundaries",
-  "## Typed Outcomes",
-  "external accessibility standard",
-  "not a universal checklist",
-  "No mechanism, tool, browser",
-]
-prohibited = []
-
-[[checks]]
-id = "reference-boundary"
-type = "text"
-path = "reference/recipes/accessibility.md"
-required = [
-  "ID: `reference.recipes.accessibility`",
-  "This material is non-normative",
-  "## Adapting A Mechanism",
-]
-prohibited = []
-
-[[checks]]
-id = "router-route"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Accessibility](topics/accessibility.md)"]
-prohibited = []
-
-[[checks]]
-id = "legacy-index-route"
-type = "text"
-path = "ACCESSIBILITY-STANDARDS.md"
-required = ["[Accessibility](topics/accessibility.md)"]
-prohibited = []
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

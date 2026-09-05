@@ -45,35 +45,12 @@ any = [
   { field = "artifact_evidence", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "topics/licensing.md"
-required = ["ID: `topic.licensing`", "## Authority And Ownership", "## Compatibility And Obligations", "## Attribution And Provenance", "authoritative terms", "fixed license-name matrix", "designated legal or licensing owner", "Do not require one copied"]
-prohibited = []
 
 [[checks]]
-id = "routes-and-legacy"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["[Licensing](topics/licensing.md)"]
-prohibited = ["| GPL | GPL projects only | Viral license |", "Priority Queue with Decrease-Key"]
-
-[[checks]]
-id = "router"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["[Licensing](topics/licensing.md)"]
-prohibited = []
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0179\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the license-attribution parent with a non-normative route to canonical Licensing authority",
-  "STD-0180\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tderive attribution contents and placement from authoritative terms provenance and distribution facts without copied templates",
-  "STD-0181\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tevaluate compatibility and obligations from authoritative terms and actual activity without fixed license matrices labels or linking slogans",
-  "STD-0182\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tplace file artifact or distribution attribution only where selected obligations require it without file-level template defaults",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0179", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0179"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0180", "CODING-STANDARDS.md", "topics/licensing.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0180"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0181", "CODING-STANDARDS.md", "topics/licensing.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0181"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0182", "CODING-STANDARDS.md", "topics/licensing.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0182"}]}}]

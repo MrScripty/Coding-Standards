@@ -84,59 +84,6 @@ all = [
 ]
 
 [[checks]]
-id = "planning-policy"
-type = "text"
-path = "workflows/planning.md"
-required = ["## Systemic-Finding Re-Planning", "invariant family and canonical owner", "reachable consumer", "consider deletion, consolidation, a smaller Interface", "compare the repaired composition with the original objective", "implementation file inside an already bounded owner", "Stop when the canonical owner"]
-prohibited = []
-
-[[checks]]
-id = "planning-prompt"
-type = "text"
-path = "prompts/planning.md"
-required = [
-  "repeated invariant failure",
-  "Identify the canonical owner and bound the authorities",
-  "Inspect sibling operations only when they share that authority",
-  "Expand only for a new semantic owner",
-  "bounded population has evidence-backed dispositions",
-]
-prohibited = []
-
-[[checks]]
-id = "implementation-prompt"
-type = "text"
-path = "prompts/implement-plan.md"
-required = [
-  "Stop and re-plan",
-  "repeated invariant failure",
-  "Bound the canonical owner",
-  "another file inside an already bounded owner",
-]
-prohibited = []
-
-[[checks]]
-id = "template-projection"
-type = "text"
-path = "templates/PLAN-TEMPLATE.md"
-required = [
-  "## Systemic Finding Audit",
-  "Invariant family and canonical owner",
-  "Bounded authority, representation, and reachable consumer population",
-  "Consumer dispositions",
-  "Evidence-backed stopping condition",
-  "Repaired-composition comparison",
-]
-prohibited = []
-
-[[checks]]
-id = "negative-fixture-preconditions"
-type = "text"
-path = "evaluation/standards-effectiveness/fixtures/planning/systemic-finding-missing-audit.md"
-required = ["# Plan: Systemic Finding Without Audit", "**Plan status:** `Blocked`", "## Objective Acceptance", "## Milestones", "## Re-Plan Triggers", "## Final Acceptance", "Sibling consumers not yet inventoried", "Canonical owner and reachable consumer population not yet bounded", "smaller-Interface, proof-substitution, and composition alternatives"]
-prohibited = ["## Systemic Finding Audit"]
-
-[[checks]]
 id = "registered-consumers"
 type = "path_state"
 present = [

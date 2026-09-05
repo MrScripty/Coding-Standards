@@ -109,24 +109,6 @@ op = "in"
 values = ["STD-0135", "STD-0136", "STD-0137", "STD-0138", "STD-0139", "STD-0140", "STD-0141", "STD-0142", "STD-0143", "STD-0144", "STD-0145", "STD-0146", "STD-0147", "STD-0148", "STD-0149", "STD-0150", "STD-0151", "STD-0152", "STD-0153", "STD-0154", "STD-0155", "STD-0156", "STD-0157", "STD-0158", "STD-0159", "STD-0160", "STD-0161", "STD-0162", "STD-0163", "STD-0164", "STD-0165", "STD-0166", "STD-0167", "STD-0168", "STD-0169", "STD-0170", "STD-0171", "STD-0172", "STD-0173", "STD-0174", "STD-0175", "STD-0176", "STD-0177", "STD-0178", "STD-0179", "STD-0180", "STD-0181", "STD-0182", "STD-0183", "STD-0184", "STD-0185", "STD-0186", "STD-0187", "STD-0188", "STD-0189", "STD-0190", "STD-0191", "STD-0192", "STD-0193", "STD-0194"]
 
 [[checks]]
-id = "decomposition-record"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-15-decomposition.md"
-required = [
-  "not one Core consolidation",
-  "## Ordered Children",
-  "## Owner Closure",
-  "fixed layer diagrams",
-  "no normative or legacy standard",
-  "## Verifier Ownership",
-  "registered `milestone-7-row-15-decomposition` suite",
-]
-prohibited = [
-  "(`Planned`)",
-  "verify-milestone-7-row-15-decomposition.sh",
-]
-
-[[checks]]
 id = "canonical-owner-paths"
 type = "path_state"
 present = [

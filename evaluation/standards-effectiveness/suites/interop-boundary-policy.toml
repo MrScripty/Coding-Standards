@@ -95,38 +95,3 @@ values = ["STD-0465", "STD-0466", "STD-0467", "STD-0468", "STD-0469", "STD-0470"
 id = "metadata-closure"
 type = "metadata_graph"
 paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "profiles/boundaries/interop.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
-
-[[checks]]
-id = "canonical-profile"
-type = "text"
-path = "profiles/boundaries/interop.md"
-required = [
-  "## Foreign Authority",
-  "allocation identity",
-  "initialized readable or writable extent",
-  "provider-guaranteed lifetime",
-  "## Copying Is Not Proof",
-  "## Initialization And Release",
-  "## Thread And Callback Contract",
-  "Return `invalid`",
-  "`unsupported`",
-  "`unavailable`",
-  "## No Fallback",
-]
-prohibited = []
-
-[[checks]]
-id = "router-route"
-type = "text"
-path = "STANDARDS-ROUTER.md"
-required = ["profiles/boundaries/interop.md"]
-prohibited = []
-
-[[checks]]
-id = "legacy-route"
-type = "markdown_section_text"
-path = "INTEROP-STANDARDS.md"
-heading = "# Interop Standards"
-scope = "subtree"
-required = ["profiles/boundaries/interop.md"]
-prohibited = ["```", "JsonSerializer", "IDisposable", "CallDeferred", "Always copy", "Validate before use"]

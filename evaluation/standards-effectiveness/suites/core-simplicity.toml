@@ -56,111 +56,12 @@ any = [
   { field = "deletion_result", op = "eq", value = "incidental" },
 ]
 
-[[checks]]
-id = "owner"
-type = "text"
-path = "CORE-STANDARDS.md"
-required = []
-prohibited = ["composition root", "Tests, types, schemas"]
 
 [[checks]]
-id = "owner-detail-1"
-type = "text"
-path = "topics/code-design.md"
-required = ["### Simple, Easy, And Complection", "**simple** describes an artifact whose distinct concerns\nare not interleaved", "**Easy** describes an approach that is familiar", "To **compose** is only to place concerns together", "Simplicity evidence asks whether independent concerns can be understood and\nchanged independently", "Counts may locate accumulated cost but cannot decide simplicity"]
-prohibited = ["composition root", "Tests, types, schemas"]
-
-[[checks]]
-id = "architecture-owner"
-type = "text"
-path = "topics/architecture.md"
-required = [
-  "## Composed Design Admission",
-  "everything callers, peer Modules, and the composition root must know",
-  "representative changes and every owner each change is semantically forced",
-  "A useful Module has Depth",
-  "Use the deletion test",
-  "A hypothetical Adapter may probe the shape of a possible Seam",
-  "File, type,\nModule, dependency, or test counts are diagnostic inputs, never the verdict",
-]
-prohibited = []
-
-[[checks]]
-id = "workflow-projections"
-type = "text"
-path = "workflows/implementation.md"
-required = ["## Composed-Design Fidelity", "contradicts the recorded admission", "Stop and re-plan"]
-prohibited = ["another Adapter, registry, validator"]
-
-[[checks]]
-id = "planning-projection"
-type = "text"
-path = "workflows/planning.md"
-required = ["composed-design review as `applicable` or `not-applicable`", "answer every artifact probe", "Do not inherit a prior design's composed-design review"]
-prohibited = []
-
-[[checks]]
-id = "verification-projection"
-type = "text"
-path = "workflows/verification.md"
-required = ["## Simplicity Evidence Boundary", "does not establish that the composed\nartifact is simple", "Keep that design\nevidence distinct from reliability evidence"]
-prohibited = []
-
-[[checks]]
-id = "library-projection"
-type = "text"
-path = "profiles/applications/library.md"
-required = ["## Composed-Design Projection", "caller knowledge includes every exported contract", "Keep internal and test Seams private"]
-prohibited = ["A hypothetical Adapter", "materially distinct real implementations"]
-
-[[checks]]
-id = "generated-contract-projection"
-type = "text"
-path = "profiles/boundaries/generated-contract.md"
-required = ["## Composed-Design Projection", "Generation may make authoring easy without making the produced artifact simple", "Automating their coordinated propagation does not prove\nthat they can change independently"]
-prohibited = []
-
-[[checks]]
-id = "prompt-projections"
-type = "text"
-path = "prompts/planning.md"
-required = ["Record composed-design review as `applicable` or `not-applicable`", "use the\n    Architecture admission", "Re-run the applicable admission"]
-prohibited = ["caller and composition-root knowledge", "A hypothetical Adapter"]
-
-[[checks]]
-id = "implementation-prompt-projection"
-type = "text"
-path = "prompts/implement-plan.md"
-required = ["Preserve the plan's admitted composed design", "Follow Implementation's re-plan\nrule"]
-prohibited = ["representative change Locality", "Do not treat passing"]
-
-[[checks]]
-id = "full-review-prompt-projection"
-type = "text"
-path = "prompts/full-codebase-standards-refactor.md"
-required = ["evaluate the\nproduced artifact through the Architecture admission", "record the result\nthrough Planning"]
-prohibited = ["caller and composition-root", "Treat a hypothetical Adapter"]
-
-[[checks]]
-id = "template-projection"
-type = "text"
-path = "templates/PLAN-TEMPLATE.md"
-required = ["**Applicability:** `applicable` or `not-applicable`", "Caller and composition-root knowledge", "Deletion and cumulative machinery result"]
-prohibited = []
-
-[[checks]]
-id = "legacy"
-type = "text"
-path = "CODING-STANDARDS.md"
-required = ["# Coding Standards Legacy Index"]
-prohibited = ["## Simplicity Principle"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0135\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\tconvert the Coding Standards title and introduction into a bounded migration index",
-  "STD-0136\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdefine simplicity by entanglement ownership invariants and reasoning load rather than visible construct counts or smallest-diff fallback",
-]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0135", "CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0135"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0136", "CODING-STANDARDS.md", "CORE-STANDARDS.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0136"}]}}]

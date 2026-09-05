@@ -52,34 +52,6 @@ paths = [
 expected = []
 
 [[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = [
-  "Role: `reference`",
-  "Level: `REFERENCE`",
-  "This material is non-normative",
-  "Pattern presence does not establish applicability",
-  "## Adaptation Boundary",
-  "## Reading A Pattern",
-  "## Typed Outcomes",
-  "[Architecture](../../topics/architecture.md)",
-]
-prohibited = [
-  "Dependencies point inward only",
-  "Organize code into horizontal layers",
-  "single source of truth",
-  "No Optimistic Updates for Backend-Owned Data",
-]
-
-[[checks]]
-id = "canonical-owner-route"
-type = "text"
-path = "topics/architecture.md"
-required = ["[Architecture Pattern Reference](../reference/patterns/architecture.md)"]
-prohibited = []
-
-[[checks]]
 id = "exact-disposition"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

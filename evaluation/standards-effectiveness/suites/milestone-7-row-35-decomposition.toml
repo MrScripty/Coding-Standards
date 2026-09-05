@@ -51,22 +51,6 @@ expected = [
 ]
 
 [[checks]]
-id = "decomposition-report"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-35-decomposition.md"
-required = [
-  "## Owner Contract",
-  "sole authority",
-  "## Exact Ownership",
-  "`35.1`",
-  "`35.2`",
-  "## Bounded Write Sets",
-  "## Typed Outcomes And No Fallback",
-  "## Re-plan Triggers",
-]
-prohibited = []
-
-[[checks]]
 id = "execution-train"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"

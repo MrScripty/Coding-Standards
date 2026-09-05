@@ -41,27 +41,6 @@ any = [
 ]
 
 [[checks]]
-id = "canonical-owner"
-type = "text"
-path = "workflows/verification.md"
-required = [
-  "one coherent observable claim or invariant",
-  "Do not split or combine checks",
-  "preference hierarchy",
-  "not universal requirements",
-  "generation, shrinking, reproducibility",
-  "Never weaken an assertion",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-index"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["workflows/verification.md"]
-prohibited = ["Prefer (in order)", "Always test:"]
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

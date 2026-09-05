@@ -100,33 +100,3 @@ expected = [["STD-0758", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "
 field = "id"
 op = "eq"
 value = "STD-0758"
-
-[[checks]]
-id = "title-body"
-type = "markdown_section_text"
-path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-heading = "# Rust Language Bindings Standards"
-scope = "body"
-match_case = "insensitive"
-required = ["RUST-INTEROP-STANDARDS.md", "RUST-CROSS-PLATFORM-STANDARDS.md", "Contract Evolution And Degraded Outcomes"]
-prohibited = [" must ", " always ", " fallback", " default framework", " default runtime", " default ABI", " default generator"]
-
-[[checks]]
-id = "nested-index-separation"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md"
-required = [
-  "registered `rust-binding-title-index-closure` suite",
-  "registered `rust-binding-index-closure` suite",
-]
-prohibited = [
-  "verify-rust-binding-title-index-closure.sh",
-  "verify-rust-binding-index-closure.sh",
-]
-
-[[checks]]
-id = "row-43-projection"
-type = "text"
-path = "docs/plans/standards-library-effectiveness/reports/milestone-7-row-43-decomposition.md"
-required = ["registered `rust-binding-title-index-closure` suite"]
-prohibited = ["verify-rust-binding-title-index-closure.sh"]

@@ -24,6 +24,60 @@ from tools.repository_git.repository_git import (
 
 
 class FileContractsTest(unittest.TestCase):
+    def test_navigation_contract_accepts_rewording_but_requires_real_links(self):
+        from standards_verifier.checks.markdown_targets import (
+            parse_markdown_targets_check,
+        )
+        from standards_verifier.model import CheckContext, SuiteCatalog
+
+        self.write("topics/policy.md", "# Policy")
+        check = parse_markdown_targets_check(
+            {
+                "id": "navigation",
+                "type": "markdown_targets",
+                "path": "docs/index.md",
+                "required": ["topics/policy.md"],
+            },
+            "files",
+        )
+        context = CheckContext(self.root, "files", SuiteCatalog.empty())
+        for prose in (
+            "See [Policy](../topics/policy.md).",
+            "Different introduction.\n\n[Guidance](../topics/policy.md#detail) concludes this index.",
+        ):
+            self.write("docs/index.md", prose)
+            self.assertEqual(check.run(context), [])
+        self.write("docs/index.md", "The path topics/policy.md appears only as prose.")
+        self.assertEqual(
+            [item.code for item in check.run(context)],
+            ["ASSERT.MARKDOWN_TARGET_MISSING"],
+        )
+
+    def test_registered_suites_do_not_freeze_prose(self):
+        import tomllib
+
+        root = Path(__file__).resolve().parents[3]
+        registry = tomllib.loads(
+            (
+                root / "evaluation/standards-effectiveness/suite-registry.toml"
+            ).read_text()
+        )
+        phrase_kinds = {
+            "text",
+            "exact_text",
+            "markdown_section_text",
+            "table_text_absence",
+        }
+        offending = []
+        for entry in registry["suites"]:
+            suite = tomllib.loads((root / entry["path"]).read_text())
+            offending.extend(
+                (suite["id"], check["id"])
+                for check in suite["checks"]
+                if check["type"] in phrase_kinds
+            )
+        self.assertEqual(offending, [])
+
     def setUp(self) -> None:
         self.temp_dir = tempfile.TemporaryDirectory()
         self.external_dir = tempfile.TemporaryDirectory()
@@ -405,21 +459,19 @@ class FileContractsTest(unittest.TestCase):
             """,
         )
 
-        result = self.result(
-            self.write_heading_policy_suite(prohibited=["Legacy"])
-        )
+        result = self.result(self.write_heading_policy_suite(prohibited=["Legacy"]))
 
         self.assertEqual(result.status, "passed")
 
-    def test_markdown_headings_reports_each_required_and_prohibited_violation(self) -> None:
+    def test_markdown_headings_reports_each_required_and_prohibited_violation(
+        self,
+    ) -> None:
         self.write(
             "docs/index.md",
             "## Missing marker\n## Legacy Migrated\n## Also missing\n",
         )
 
-        result = self.result(
-            self.write_heading_policy_suite(prohibited=["Legacy"])
-        )
+        result = self.result(self.write_heading_policy_suite(prohibited=["Legacy"]))
 
         self.assertEqual(
             [(item.code, item.row) for item in result.diagnostics],
@@ -526,9 +578,7 @@ class FileContractsTest(unittest.TestCase):
             with self.subTest(name=name):
                 self.write("docs/index.md", content)
                 result = self.result(
-                    self.write_heading_cardinality_suite(
-                        cardinality=cardinality
-                    )
+                    self.write_heading_cardinality_suite(cardinality=cardinality)
                 )
                 self.assertEqual(result.status, "passed")
 
@@ -544,9 +594,7 @@ class FileContractsTest(unittest.TestCase):
             with self.subTest(expected=expected, observed=observed):
                 self.write("docs/index.md", content)
                 result = self.result(
-                    self.write_heading_cardinality_suite(
-                        cardinality=expected
-                    )
+                    self.write_heading_cardinality_suite(cardinality=expected)
                 )
                 self.assertEqual(result.exit_code, 1)
                 diagnostic = result.diagnostics[0]
@@ -593,9 +641,7 @@ class FileContractsTest(unittest.TestCase):
         (self.root / "escape").symlink_to(external, target_is_directory=True)
         for path in ("/tmp/index.md", "../index.md", "escape/index.md"):
             with self.subTest(path=path):
-                result = self.result(
-                    self.write_heading_cardinality_suite(path=path)
-                )
+                result = self.result(self.write_heading_cardinality_suite(path=path))
                 self.assertEqual(result.exit_code, 2)
                 self.assertEqual(
                     result.diagnostics[0].code,
@@ -675,9 +721,7 @@ class FileContractsTest(unittest.TestCase):
         subprocess.run(["git", "init", "-q"], cwd=self.root, check=True)
 
         result = self.result(
-            self.write_git_index_suite(
-                tracked=("docs/present.md", "docs/absent.md")
-            )
+            self.write_git_index_suite(tracked=("docs/present.md", "docs/absent.md"))
         )
 
         self.assertEqual(result.exit_code, 1)
@@ -693,9 +737,7 @@ class FileContractsTest(unittest.TestCase):
         self.write("docs/prompt-long.md", "tracked\n")
         self.initialize_git_index("docs/prompt-long.md")
 
-        result = self.result(
-            self.write_git_index_suite(tracked=("docs/prompt.md",))
-        )
+        result = self.result(self.write_git_index_suite(tracked=("docs/prompt.md",)))
 
         self.assertEqual(result.exit_code, 1)
         self.assertEqual(result.diagnostics[0].observed, "absent-untracked")
@@ -929,9 +971,7 @@ class FileContractsTest(unittest.TestCase):
             "## Selected\nrequired text\n# Next\nprohibited\n",
         )
 
-        result = self.result(
-            self.write_section_text_suite(prohibited=["prohibited"])
-        )
+        result = self.result(self.write_section_text_suite(prohibited=["prohibited"]))
 
         self.assertEqual(result.status, "passed")
 
@@ -946,9 +986,7 @@ class FileContractsTest(unittest.TestCase):
             ),
         )
 
-        result = self.result(
-            self.write_section_text_suite(required=["still selected"])
-        )
+        result = self.result(self.write_section_text_suite(required=["still selected"]))
 
         self.assertEqual(result.status, "passed")
 
@@ -1112,9 +1150,7 @@ class FileContractsTest(unittest.TestCase):
             "present/broken",
         ):
             with self.subTest(path=path):
-                result = self.result(
-                    self.write_path_state_suite(absent=[path])
-                )
+                result = self.result(self.write_path_state_suite(absent=[path]))
                 self.assertEqual(result.exit_code, 1)
                 self.assertEqual(
                     result.diagnostics[0].code,
@@ -1126,9 +1162,7 @@ class FileContractsTest(unittest.TestCase):
         self.write("present/b.md", "b\n")
 
         result = self.result(
-            self.write_path_state_suite(
-                absent=["present/a.md", "present/b.md"]
-            )
+            self.write_path_state_suite(absent=["present/a.md", "present/b.md"])
         )
 
         self.assertEqual(
@@ -1149,9 +1183,7 @@ class FileContractsTest(unittest.TestCase):
                     options = {field: [path]}
                     if field == "present":
                         options["absent"] = None
-                    result = self.result(
-                        self.write_path_state_suite(**options)
-                    )
+                    result = self.result(self.write_path_state_suite(**options))
                     self.assertEqual(result.exit_code, 2)
                     self.assertEqual(
                         result.diagnostics[0].code,

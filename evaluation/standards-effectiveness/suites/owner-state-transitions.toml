@@ -124,16 +124,6 @@ any = [
 ]
 
 [[checks]]
-id = "documentation-projection"
-type = "text"
-path = "evaluation/standards-effectiveness/verification-guide.md"
-required = [
-  "registered `owner-state-transitions` suite",
-  "baseline, activation, and shared-owner transition decisions",
-]
-prohibited = ["`verify-owner-state-transitions.sh`"]
-
-[[checks]]
 id = "terminal-authority"
 type = "path_state"
 present = ["evaluation/standards-effectiveness/suites/owner-state-transitions.toml"]

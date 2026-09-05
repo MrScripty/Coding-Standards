@@ -40,57 +40,6 @@ any = [
 ]
 
 [[checks]]
-id = "reference-projection"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = [
-  "## Conditional Monorepo Role Catalog",
-  "These are descriptive labels, not required package kinds",
-  "The arrows follow selected stable contracts",
-  "### Conditional Schema-Sharing Example",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-routes"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = [
-  "[Architecture](topics/architecture.md)",
-  "[Contracts](topics/contracts.md)",
-  "[Architecture Pattern Reference](reference/patterns/architecture.md#conditional-monorepo-role-catalog)",
-]
-prohibited = []
-
-[[checks]]
-id = "legacy-fixed-defaults"
-type = "text"
-path = "ARCHITECTURE-PATTERNS.md"
-required = []
-prohibited = [
-  "assign each package a stable architectural role",
-  "App packages may compose other roles",
-  "Tooling/config packages should support development workflows",
-  "place it in a contracts package",
-  "shared utilities ─",
-]
-match_case = "insensitive"
-
-[[checks]]
-id = "reference-fixed-defaults"
-type = "text"
-path = "reference/patterns/architecture.md"
-required = []
-prohibited = [
-  "assign each package a stable architectural role",
-  "App packages may compose other roles",
-  "Tooling/config packages should support development workflows",
-  "place it in a contracts package",
-  "shared utilities ─",
-]
-match_case = "insensitive"
-
-[[checks]]
 id = "exact-dispositions"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

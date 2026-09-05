@@ -60,26 +60,3 @@ expected = [
   ["performance", "topics/performance.md"],
   ["languages", "profiles/README.md"],
 ]
-
-[[checks]]
-id = "legacy-index-routes"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = [
-  "(workflows/verification.md)",
-  "(topics/concurrency.md)",
-  "(profiles/boundaries/language-bindings.md)",
-  "(topics/resilience.md)",
-  "(topics/contracts.md)",
-  "(profiles/applications/frontend.md)",
-  "(topics/performance.md)",
-  "(STANDARDS-ROUTER.md#language-profiles)",
-  "non-normative compatibility index",
-  "defines no testing policy",
-  "never this index",
-]
-prohibited = [
-  "- [",
-  "Before submitting code",
-  "All new code has corresponding tests",
-]

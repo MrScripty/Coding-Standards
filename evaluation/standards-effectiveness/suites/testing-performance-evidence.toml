@@ -41,34 +41,12 @@ any = [
   { field = "budget", op = "eq", value = "missing" },
 ]
 
-[[checks]]
-id = "canonical-policy"
-type = "text"
-path = "topics/performance.md"
-required = ["## Performance Test Evidence", "An ecosystem harness may improve", "A performance budget names its authority", "not copy a duration, percentage, sample count", "successful harness execution as the required result"]
-prohibited = []
 
 [[checks]]
-id = "testing-route-and-legacy"
-type = "text"
-path = "TESTING-STANDARDS.md"
-required = ["topics/performance.md"]
-prohibited = ["expect(duration).toBeLessThan(100)", "Use the ecosystem's benchmark harness"]
-
-[[checks]]
-id = "dispositions"
-type = "text"
+id = "dispositions-records"
+type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-required = [
-  "STD-0642\tTESTING-STANDARDS.md\ttopics/performance.md\tindex\treplace the performance testing parent with a non-normative route to canonical Performance test evidence",
-  "STD-0643\tTESTING-STANDARDS.md\ttopics/performance.md\trefine\tselect benchmark harness workload environment and measurement capability from the owned claim without ecosystem-harness critical-path or successful-execution defaults",
-  "STD-0644\tTESTING-STANDARDS.md\ttopics/performance.md\trefine\trequire authoritative budget workload metric environment variability baseline and tradeoff evidence without fixed duration percentage sample machine cadence tool or weaker-measurement substitution",
-]
-prohibited = []
-
-[[checks]]
-id = "row-18-route"
-type = "text"
-path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
-required = ["18\t6\tSTD-0642,STD-0643,STD-0644\tTESTING-STANDARDS.md\ttopics/performance.md\texists\tpre-slice-review\tfocused"]
-prohibited = []
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = []
+unique = []
+projections = [{"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0642", "TESTING-STANDARDS.md", "topics/performance.md", "index"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0642"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0643", "TESTING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0643"}]}}, {"columns" = ["id", "source", "target", "disposition"], "order" = "lexical", "expected" = [["STD-0644", "TESTING-STANDARDS.md", "topics/performance.md", "refine"]], "where" = {"all" = [{"field" = "id", "op" = "eq", "value" = "STD-0644"}]}}]

@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 20
+interface_schema_version = 21
 request_contract_version = 5
 result_projection_version = 6
 
@@ -98,3 +98,15 @@ id = "recover_application"
 input_definition = "RecoverApplicationCall"
 result_definitions = ["RecoverApplicationResult", "ApplicationRecoveryRequiredResult", "RejectedResult"]
 capability = "standards.proposal.recover"
+
+[[operations]]
+id = "verify_repository"
+input_definition = "VerifyRepositoryCall"
+result_definitions = ["VerifyRepositoryResult", "RejectedResult"]
+capability = "standards.verify"
+
+[[operations]]
+id = "verify_proposal"
+input_definition = "VerifyProposalCall"
+result_definitions = ["VerifyProposalResult", "RejectedResult"]
+capability = "standards.proposal.read"

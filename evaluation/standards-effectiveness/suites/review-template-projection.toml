@@ -29,13 +29,6 @@ outcome = "typed-unavailable"
 any = [{ field = "summary", op = "ne", value = "yes" }, { field = "verification", op = "ne", value = "yes" }]
 
 [[checks]]
-id = "template-content"
-type = "text"
-path = "templates/PULL_REQUEST_TEMPLATE.md"
-required = ["## Summary", "observable behavior or standards outcome", "## Selected Evidence", "Omit categories that are not material", "Link durable", "## Verification", "is not acceptance evidence"]
-prohibited = ["## Decision Impact", "### Problem", "### Constraints", "### Alternatives", "### Simplicity Review", "### Traceability Links", "## Checklist", "- [ ]", "/media/", "/home/"]
-
-[[checks]]
 id = "disposition-lineage"
 type = "keyed_relation"
 [checks.keys]
