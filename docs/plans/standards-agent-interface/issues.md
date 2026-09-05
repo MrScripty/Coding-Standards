@@ -17,7 +17,9 @@ registration.
 - I5: The live model-visible `propose.change_set` declaration rendered as
   `unknown`. Input reference expansion now exposes authoring structure to the
   Codex MCP consumer, with canonical/recursive validation retained. Final
-  model-visible confirmation awaits reconnection.
+  model-visible reconnection showed nested edits/evidence still abbreviated.
+  Exact canonical input closures are now also emitted in tool descriptions;
+  fresh-client preservation is checked independently of type rendering.
 - I6: Navigation continuations and server instructions named native operations
   absent from the default catalog. Focused projection/guidance is corrected;
   native paths remain explicit. Unit tests and the actual Codex client verify

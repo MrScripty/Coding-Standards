@@ -88,6 +88,25 @@ async def main():
                 "Codex authoring schema: purpose, edits, 14 inline edit variants",
                 flush=True,
             )
+            for name in ("propose", "revise", "resolve_workflow"):
+                documented = json.loads(
+                    toolmap[name]["description"]
+                    .split("```json\n", 1)[1]
+                    .split("\n```", 1)[0]
+                )
+                Draft202012Validator.check_schema(documented)
+                assert set(documented["$defs"]["EvidenceReference"]["required"]) == {
+                    "id",
+                    "digest",
+                    "provider_contract",
+                    "provider_contract_version",
+                }
+                if name != "resolve_workflow":
+                    assert len(documented["$defs"]["StandardEdit"]["oneOf"]) == 14
+            print(
+                "Codex descriptions: exact nested edit/evidence contracts preserved",
+                flush=True,
+            )
 
             async def call(name, arguments):
                 r = await request(

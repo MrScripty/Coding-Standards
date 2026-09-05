@@ -169,6 +169,37 @@ class MCPTest(unittest.TestCase):
                 validator.is_valid({"change_set": {**change, "edits": []}})
             )
 
+    def test_authoring_description_carries_exact_contract_without_type_rendering(self):
+        from tools.standards_engine.standards_engine.mcp import schema_closure
+
+        generated = json.loads(
+            (
+                ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
+            ).read_text()
+        )
+        catalog = {t["name"]: t for t in tool_catalog(ROOT)}
+        for name in ("propose", "revise", "resolve_workflow"):
+            operation = next(op for op in generated["operations"] if op["id"] == name)
+            documented = json.loads(
+                catalog[name]["description"]
+                .split("```json\n", 1)[1]
+                .split("\n```", 1)[0]
+            )
+            self.assertEqual(
+                documented,
+                schema_closure(
+                    generated["$defs"][operation["input_definition"]],
+                    generated["$defs"],
+                ),
+            )
+            self.assertEqual(
+                set(documented["$defs"]["EvidenceReference"]["required"]),
+                {"id", "digest", "provider_contract", "provider_contract_version"},
+            )
+            if name != "resolve_workflow":
+                self.assertEqual(len(documented["$defs"]["StandardEdit"]["oneOf"]), 14)
+            Draft202012Validator.check_schema(documented)
+
     def test_input_projection_preserves_reference_siblings(self):
         schema = input_schema(
             {"$ref": "#/$defs/Name", "minLength": 3},

@@ -99,3 +99,18 @@ The local client check starts no model turn. This conversation needs a reconnect
 to inspect its final model-visible declarations.
 
 **Commit subject:** `fix(standards-engine): expose authoring schemas and focused continuations`
+
+## 2026-09-05: Preserve Nested Authoring Contracts In Tool Descriptions
+
+**Finding:** The live reconnect proved the inline fix was partial: outer
+change-set fields appeared, but nested edits and evidence remained abbreviated
+as `unknown`. Focused guidance and navigation continuations were confirmed.
+
+**Change:** Emit the exact canonical input closure in affected authoring tool
+descriptions, independently of client type rendering. No schema format, domain
+identity, authorization, validation, or persistence contract changes.
+
+**Evidence:** Exact-description schema regression and actual configured Codex
+client preservation check; see [follow-up evidence](reports/client-followups.md).
+
+**Commit subject:** `fix(standards-engine): retain nested input contracts in tool descriptions`

@@ -89,6 +89,14 @@ Reference siblings retain conjunction semantics. Output schemas keep their
 existing reference closures. This is transport presentation, not new domain
 schema authority. Reconnect clients after updating the advertised catalog.
 
+The restarted client can still abbreviate nested fields even with inline
+schemas (`edits: Array<unknown>` and purpose evidence). For `propose`, `revise`,
+and `resolve_workflow`, MCP descriptions therefore include the exact canonical
+input schema and complete reachable definition closure as JSON. This preserves
+field visibility independently of the client's type renderer, without a separate
+discovery operation, hand-authored field list, changed validator, or recursive
+limit. The additional description text is intentional authoring overhead.
+
 ## Public Operations
 
 | Operation | Input | Success result | Expected rejection |

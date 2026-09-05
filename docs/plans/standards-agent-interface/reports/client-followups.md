@@ -52,3 +52,28 @@ are implemented and checked at the public Codex MCP consumer boundary. The
 remaining integration observation is whether this chat's model-visible type
 rendering exposes those fields after reconnecting; raw schema consumption alone
 does not establish that final rendering result.
+
+## Reconnection Observation And Description Projection
+
+The next live reconnection confirmed that guidance now names focused recovery,
+and a direct route call returned only `read` continuations. The displayed
+`change_set` became an object, but `edits` still rendered `Array<unknown>` and
+purpose evidence still rendered `unknown`. Inline schema consumption therefore
+did not fully resolve model-visible authoring structure.
+
+The MCP adapter now includes the exact canonical input schema and complete
+reachable named definitions in descriptions for `propose`, `revise`, and
+`resolve_workflow`. Description text reaches the agent independently of the
+client's abbreviated type rendering. This intentionally costs additional text
+for complex authoring, while avoiding another discovery call or a second schema
+interpreter. The schema and Engine validator are unchanged.
+
+Validation checks that each description round-trips to the exact canonical
+input closure, including evidence fields, all 14 edits, and recursive variants.
+The actual Codex client harness also checks preservation of those descriptions.
+A live session retains old descriptions until reconnecting; final in-session
+confirmation remains distinct from the fresh-process client check.
+
+Description-projection checks passed: 12 MCP tests, the Codex CLI 0.153.4
+fresh-client harness, generated freshness, focused lint/whitespace checks, and
+the Engine checkpoint (73 suites / 121 checks, inputs refreshed by the Engine).

@@ -6886,7 +6886,7 @@
       ]
     },
     {
-      "digest": "sha256:2da3a2f74389bb3db1e56f4916b3677db8197d3ff2ed40624752f0db9bf4b649",
+      "digest": "sha256:cd9d60ed39c2169cf555a7f3751728ddf18e25348d53976df18923dd56100cd5",
       "path": "tools/standards_engine/contracts/README.md",
       "state": "present",
       "uses": [
@@ -7116,7 +7116,7 @@
       ]
     },
     {
-      "digest": "sha256:c638e6e1ea7d5d2441bd938918e9c1940d82fcea6e037d31bf3d182905d5eb87",
+      "digest": "sha256:89ac5e76ff6ba4bea5dc630313c01abe0355fbb4122a2b7bcd54e833abe9d94b",
       "path": "tools/standards_engine/standards_engine/mcp.py",
       "state": "present",
       "uses": [

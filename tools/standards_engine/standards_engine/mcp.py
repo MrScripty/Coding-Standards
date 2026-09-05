@@ -49,6 +49,11 @@ FOCUSED_OPERATIONS = frozenset(
         "resume",
     }
 )
+# These inputs contain nested authoring variants that supported clients may
+# abbreviate as `unknown` even after reference expansion. Preserve the exact
+# input contract in description text, which is visible independently of their
+# type renderer. This is generated documentation, never a second validator.
+INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
     "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
     "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",
@@ -115,10 +120,23 @@ def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
         name = operation["id"]
         if not advanced and name not in FOCUSED_OPERATIONS:
             continue
+        description = DESCRIPTIONS[name]
+        if name in INPUT_CONTRACT_DESCRIPTIONS:
+            schema = schema_closure(
+                definitions[operation["input_definition"]], definitions
+            )
+            description += (
+                "\n\nExact input contract (JSON Schema Draft 2020-12). "
+                "Named definitions include all edit/evidence fields and recursive variants; "
+                "use these fields when the client abbreviates its type declaration.\n"
+                "```json\n"
+                + json.dumps(schema, separators=(",", ":"), sort_keys=True)
+                + "\n```"
+            )
         result.append(
             {
                 "name": name,
-                "description": DESCRIPTIONS[name],
+                "description": description,
                 "annotations": {"readOnlyHint": name in READ_ONLY_OPERATIONS},
                 "inputSchema": input_schema(
                     definitions[operation["input_definition"]], definitions
