@@ -188,10 +188,11 @@ class PurposeProjectionTest(unittest.TestCase):
 
     def test_unexpected_observation_failure_returns_no_private_context(self):
         with patch.object(ApplicationView, "read", side_effect=RuntimeError(PRIVATE)):
-            with self.assertLogs("tools.standards_engine.standards_engine.context_projection", level="ERROR"):
+            with self.assertLogs("tools.standards_engine.standards_engine.context_projection", level="ERROR") as captured:
                 value = self.read()
         self.assertEqual(value["code"], "APPLICATION.INTERNAL_UNAVAILABLE")
         self.assertNotIn(PRIVATE, json.dumps(value))
+        self.assertNotIn(PRIVATE, "\n".join(captured.output))
 
     def test_unsupported_capture_is_preserved_and_classified(self):
         files = {path: value for path, value in self.files.items() if path not in {APPLICATION_CONTENT, DECISION_PROVENANCE}}

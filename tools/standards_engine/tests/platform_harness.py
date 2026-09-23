@@ -172,7 +172,7 @@ def _analysis_request(snapshot: dict[str, object]) -> dict[str, object]:
             }
         ],
         "semantic_proposals": [],
-        "contract_version": 5,
+        "contract_version": 6,
     }
 
 

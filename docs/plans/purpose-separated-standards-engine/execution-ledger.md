@@ -52,3 +52,49 @@ clean implementation commit. ZIP CRC and all replacement hashes passed. The
 artifact includes the exact base, patch, full files, bundle and apply procedure.
 GitHub push remains DNS-blocked, so no PR was created. This evidence update does
 not change source behavior, normative content or the pending acceptance boundary.
+
+## September 23, 2026 — Post-delivery client qualification
+
+Installed the Engine's hash-locked dependencies in Python 3.12 and the official
+MCP Python SDK 1.30.0 in a separate disposable client environment. The SDK's
+pending-workflow and full publication/recovery walkthroughs passed, including
+application-purpose readback and provenance isolation. Codex CLI 0.156.1 passed
+its configured app-server navigation harness against a temporary authoring
+registration. The complete package run covered 477 Python tests and 73
+structural checks after correcting one stale platform-harness contract version.
+
+The installed Codex registration now declares authoring purpose. Its live client
+loads the tool catalog, but automatic route rejects the old accepted `main` as
+an unsupported capture. The real accepted ref and store were preserved; an
+isolated store copy yielded ten proposal heads, five with applied outcomes and
+five without recorded application.
+Candidate-client qualification and this installed boundary are recorded in the
+[implementation evidence](reports/implementation-evidence.md). Code integration,
+old-store disposition, and independent review remain pending.
+
+## September 23, 2026 — Old-store audit and disposition
+
+Used the SQLite online backup API to make a consistent copy of the installed
+store, then verified its integrity and SHA-256 after placing it in a private
+offline archive at
+`/home/jeremy/.local/share/standards-engine/archive/old-store-2026-09-23/`.
+The adjacent `inventory.json` records the owning accepted Engine revision and
+dependency-lock identity, proposal root and revision identities, relevant Git
+revisions, readiness, application selection, application, and outcome links.
+
+The inventory contains ten roots and ten revisions. Five have completed applied
+outcomes. Five have no readiness, application selection, or application record;
+they are deferred drafts, not interrupted publications. No admitted application
+has an unresolved outcome. The deferred revisions are retained for historical
+review and excluded from active cutover. Relevant intent must enter the new
+Engine as new proposals against then-current accepted standards. The old store
+and its proposal records were not edited.
+All five applied candidate commits still exist as Git objects, but none is an
+ancestor of current accepted `main`. The archive inventory records this exact
+reachability; the fresh Engine will capture current accepted `main`.
+
+Independent Standards and Spec reviews found no blocking source or spec issue.
+The Standards review identified an application diagnostic path that could emit
+private exception text to host logs or stderr. That path now reports only the
+exception class, with focused tests for both Engine and MCP boundaries. The
+suite-input projection was regenerated to match the changed source.

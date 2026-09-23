@@ -18,8 +18,9 @@ All implementation commits use Git CLI. Direct remote Git transport is
 unavailable in the execution environment; the user authorized a changed-files
 ZIP instead. No remote implementation push or PR is claimed.
 
-The available interpreter is Python 3.13.5, outside the declared supported
-3.11/3.12 range. Installed jsonschema 4.26.0, referencing 0.37.0, attrs 26.1.0
+At implementation delivery, the available interpreter was Python 3.13.5,
+outside the declared supported 3.11/3.12 range. Installed jsonschema 4.26.0,
+referencing 0.37.0, attrs 26.1.0
 and jsonschema-specifications 2025.9.1 match their locked versions; local
 rpds-py 2026.5.1 differs from pinned 2026.6.3. The dependency lock and supported
 range remain unchanged. Results below are supporting source observations, not
@@ -76,8 +77,9 @@ remote permission system or compatibility adapter was added.
 
 Executed test records are summarized below. Final selected runs passed after the focused repairs described below.
 Structural checks do not execute the package tests or certify prose quality.
-These selected runs are not a claim that the complete Engine suite was executed
-in the supported pinned environment.
+These selected runs did not include the complete Engine suite in the supported
+pinned environment at delivery time. Post-delivery qualification is recorded
+below.
 
 | Observation | Result |
 | --- | --- |
@@ -123,22 +125,73 @@ package and transport observations. Later focused repairs preserve these
 subjects where unaffected and are checked at their changed boundary. These are
 private test-candidate commits, not user-repository main updates.
 
-## Remaining acceptance
-
-The official MCP SDK and configured Codex client are unavailable here. Their
-existing harnesses have been updated for explicit purpose and the supporting
-workflow, but execution in the supported locked environment remains required.
-No independently delegated material review or inspection of the user's installed
-store/pending recovery obligations was performed.
-
 Candidate `a0a425ce93579ff6b0cabb05cc8a6f9b0ffe5f36` passed the corrected
 generated-contract suite and the complete structural checkpoint. A final
 formatting-only adjustment to seven test callers preserved their parsed ASTs.
 
-The plan's C8 installed qualification and C10 independent final review therefore
-remain outstanding. Required evidence is not replaced with the local interpreter,
-a passing structural checkpoint, or the synthetic provenance review decisions.
-The content guide remains gated on code acceptance.
+## Post-delivery client qualification — September 23, 2026
+
+Python 3.12.3 installed the six Engine dependencies from
+`tools/standards_contracts/requirements.lock` with `--require-hashes` and
+`--only-binary=:all:` into a disposable environment. A separate disposable
+client environment installed the official MCP Python SDK 1.30.0. Both
+environments passed `pip check`.
+
+The official SDK pending-workflow harness passed: it refused review before a
+required disposition and accepted explicit resolution. The full SDK walkthrough
+also passed against a disposable repository whose local `main` was the candidate:
+authoring and application catalogs were purpose-separated; interrupted
+publication required cold-process recovery; retry did not republish; stale
+revision review was refused; explicit resume and normal publication succeeded;
+application readback exposed approved content without authoring-only provenance.
+
+Codex CLI 0.156.1 ran `tests/codex_navigation_client.py` through its actual
+app-server client using a temporary `standards-authoring` registration pointing
+at the candidate and the hash-locked Engine Python. It discovered 15 focused
+tools, checked all 20 inline edit variants and the nested evidence schemas,
+then completed route-to-read with the exact snapshot. This did not start a
+model turn or modify the installed Codex configuration.
+
+The CI-defined package run covered 477 Python tests and 73 structural checks.
+One platform-harness fixture initially used request contract version 5 despite
+the branch's version 6 contract; correcting that fixture and rerunning its three
+tests passed. The package run used locally cached pinned dependency versions;
+the separate client qualification used a fresh hash-verified Engine install.
+
+## Remaining acceptance
+
+The user's installed `standards-engine` registration now includes
+`--purpose authoring`. The live Codex client discovers its 15 focused tools and
+validates their schemas, but route returns `SUPPORT.UNSUPPORTED_CAPTURE` because
+the accepted local `main` predates the new content contract. The candidate
+passed route/read in a temporary registration whose local `main` was the exact
+candidate. The real accepted ref was not retargeted to make the test pass.
+The installed store was copied using SQLite's online backup API and retained
+offline with a verified per-revision inventory at
+`/home/jeremy/.local/share/standards-engine/archive/old-store-2026-09-23/`.
+It contains ten proposal roots and ten revisions. Five revisions have an
+application selection, application record, and `applied` outcome; five have no
+readiness, selection, or application record. No admitted application has an
+unresolved outcome. The five deferred drafts are retained for historical review
+and excluded from active cutover. Any useful intent requires a new proposal
+against then-current accepted standards; no stored proposal status was changed.
+The inventory preserves root/revision IDs, relevant Git revisions, and the
+owning accepted Engine revision and dependency lock identity.
+All five applied candidate commits exist as Git objects but are not ancestors
+of current accepted `main`. The inventory records that reachability, and fresh
+snapshots will use current accepted `main` as their source.
+
+Independent Standards and Spec reviews of `git diff main...HEAD` plus the
+working changes found no substantive source-scope mismatch or blocking code
+standard violation. The Standards review identified full exception logging at
+the application boundary as a diagnostic privacy risk. Application paths now
+emit bounded exception class names without exception text or traceback; focused
+tests assert that a private exception message is absent from both the public
+response and diagnostics. The generated suite-input manifest was refreshed.
+
+The plan's C8 installed cutover and C10 independent final review remain
+outstanding. Synthetic provenance review decisions do not certify the real
+standards content. The content guide remains gated on code acceptance.
 
 ## Delivery validation
 

@@ -302,10 +302,14 @@ class MCPServer:
             with redirect_stdout(sys.stderr):
                 with AgentToolFacade.open_repository(self.root, purpose=self.purpose) as facade:
                     value = getattr(facade, name)(arguments)
-        except Exception:
-            traceback.print_exc(file=sys.stderr)
+        except Exception as error:
             if self.purpose is Purpose.APPLICATION:
+                print(
+                    f"Application invocation failed: {type(error).__name__}",
+                    file=sys.stderr,
+                )
                 return {"isError": True, "content": [{"type": "text", "text": "Application observation is unavailable; operator diagnostics retain the failure."}]}
+            traceback.print_exc(file=sys.stderr)
             return {
                 "isError": True,
                 "content": [

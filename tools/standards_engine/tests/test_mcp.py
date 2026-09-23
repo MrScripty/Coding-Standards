@@ -305,6 +305,20 @@ class MCPTest(unittest.TestCase):
             facade.apply_proposal.assert_called_once()
             facade.recover_application.assert_not_called()
 
+    def test_application_failure_diagnostic_omits_private_exception(self):
+        server = MCPServer(ROOT, purpose="application")
+        initialize(server)
+        stderr = io.StringIO()
+        with (
+            patch.object(AgentToolFacade, "open_repository") as opened,
+            redirect_stderr(stderr),
+        ):
+            opened.return_value.__enter__.return_value.read.side_effect = RuntimeError("private diagnostic")
+            response = server.dispatch(request("tools/call", {"name": "read"}))["result"]
+        self.assertTrue(response["isError"])
+        self.assertNotIn("private diagnostic", json.dumps(response) + stderr.getvalue())
+        self.assertIn("RuntimeError", stderr.getvalue())
+
     def test_real_snapshot_read_and_validation_through_server(self):
         server = MCPServer(ROOT, advanced=True, purpose="authoring")
         initialize(server)

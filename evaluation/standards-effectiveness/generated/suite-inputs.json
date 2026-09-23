@@ -7053,7 +7053,7 @@
       ]
     },
     {
-      "digest": "sha256:cda2c10e0de915eb09440847e45c22dada2d5092091c55b3a8700a6bfd79d8de",
+      "digest": "sha256:e25b0bbce6c5cb76359221cb7e8430e68e3de1dbb7e6f2883fe3b463eff87dfb",
       "path": "tools/standards_engine/standards_engine/context_projection.py",
       "state": "present",
       "uses": [
@@ -7111,7 +7111,7 @@
       ]
     },
     {
-      "digest": "sha256:abe942b581905efd080fc8dff845dc92e1f6c27a0e6b5dfc747b02d6544a4881",
+      "digest": "sha256:7ceec1b5fa21922a8d7b3b8d87f7e351488b3393978bcb7d7518c01516c07872",
       "path": "tools/standards_engine/standards_engine/mcp.py",
       "state": "present",
       "uses": [

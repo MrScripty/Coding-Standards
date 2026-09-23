@@ -54,8 +54,10 @@ def public_operation(function: Callable) -> Callable:
         if engine.purpose is Purpose.APPLICATION:
             try:
                 return application_dispatch(engine, function.__name__, call)
-            except Exception:
-                logging.getLogger(__name__).exception("Application observation failed")
+            except Exception as error:
+                logging.getLogger(__name__).error(
+                    "Application observation failed: %s", type(error).__name__
+                )
                 return application_rejection("APPLICATION.INTERNAL_UNAVAILABLE")
         return function(engine, call)
     return invoke
