@@ -7,6 +7,8 @@ import subprocess
 import threading
 import tempfile
 from contextlib import contextmanager
+from collections import OrderedDict
+from collections.abc import Callable
 from pathlib import Path
 from typing import Iterable, Iterator, Literal, Sequence
 
@@ -26,6 +28,10 @@ from .model import (
 DEFAULT_OUTPUT_LIMIT = 64 * 1024 * 1024
 ERROR_OUTPUT_LIMIT = 1024 * 1024
 COMMAND_TIMEOUT_SECONDS = 30
+# A revision-read owner may override these retention budgets. They bound cached
+# payload and entry overhead separately from the existing per-object safety cap.
+DEFAULT_REVISION_CACHE_BYTES = 8 * 1024 * 1024
+DEFAULT_REVISION_CACHE_OBJECTS = 1024
 
 
 def sanitized_git_environment() -> dict[str, str]:
@@ -674,20 +680,44 @@ class GitRepository:
                 "capture paths must be nonempty and unique",
             )
         revision = self.current_revision()
-        return RepositoryCapture(
+        with self.read_session(revision) as reader:
+            return RepositoryCapture(
+                revision,
+                (CapturedFile(path, reader.read_file(path)) for path in selected),
+            )
+
+    def read_session(
+        self,
+        revision: RepositoryRevision,
+        *,
+        max_cached_bytes: int = DEFAULT_REVISION_CACHE_BYTES,
+        max_cached_objects: int = DEFAULT_REVISION_CACHE_OBJECTS,
+    ) -> RevisionReadSession:
+        """Own bounded verified-object reuse for one exact revision read."""
+        return RevisionReadSession(
+            self,
             revision,
-            (CapturedFile(path, self.read_file(revision, path)) for path in selected),
+            max_cached_bytes=max_cached_bytes,
+            max_cached_objects=max_cached_objects,
         )
 
     def read_file(self, revision: RepositoryRevision, path: RepositoryPath) -> bytes:
+        return self._read_file(revision, path, self._object)
+
+    def _read_file(
+        self,
+        revision: RepositoryRevision,
+        path: RepositoryPath,
+        read_object: Callable[[Path, str, str, str], bytes],
+    ) -> bytes:
         algorithm = _algorithm(revision.oid)
-        commit = self._object(self._repository, revision.oid, "commit", algorithm)
+        commit = read_object(self._repository, revision.oid, "commit", algorithm)
         tree_oid = _commit_tree(commit, algorithm)
         repository = self._repository
         traversed: list[str] = []
         index = 0
         while index < len(path.components):
-            tree = self._object(repository, tree_oid, "tree", algorithm)
+            tree = read_object(repository, tree_oid, "tree", algorithm)
             entries = _tree_entries(tree, algorithm)
             component = path.components[index]
             try:
@@ -705,7 +735,7 @@ class GitRepository:
                         "REPOSITORY_GIT.NON_DIRECTORY",
                         f"{component!r} is a file before the requested leaf",
                     )
-                return self._object(repository, oid, "blob", algorithm)
+                return read_object(repository, oid, "blob", algorithm)
             if mode in {"40000", "040000"}:
                 if final:
                     raise unsupported(
@@ -729,7 +759,7 @@ class GitRepository:
                     )
                 repository = nested
                 algorithm = _algorithm(oid)
-                nested_commit = self._object(repository, oid, "commit", algorithm)
+                nested_commit = read_object(repository, oid, "commit", algorithm)
                 tree_oid = _commit_tree(nested_commit, algorithm)
                 index += 1
                 continue
@@ -797,6 +827,102 @@ class GitRepository:
             raise invalid(
                 "REPOSITORY_GIT.HASH_MISMATCH", f"Git object {oid} failed verification"
             )
+        return content
+
+
+class RevisionReadSession:
+    """Single-owner, exact-revision reads; close releases all retained objects.
+
+    Only fully verified object bytes enter the cache. Tree/path interpretation
+    still runs for each requested file. Successful earlier reads establish this
+    operation's immutable input, not ongoing health of the original object store.
+    Every new session verifies its first reads again.
+    """
+
+    def __init__(
+        self,
+        repository: GitRepository,
+        revision: RepositoryRevision,
+        *,
+        max_cached_bytes: int = DEFAULT_REVISION_CACHE_BYTES,
+        max_cached_objects: int = DEFAULT_REVISION_CACHE_OBJECTS,
+    ) -> None:
+        if type(revision) is not RepositoryRevision:
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_REVISION", "read session requires an exact revision"
+            )
+        if any(
+            type(value) is not int or value < 0
+            for value in (max_cached_bytes, max_cached_objects)
+        ):
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_BOUND", "cache bounds must be nonnegative integers"
+            )
+        self._repository = repository
+        self._revision = revision
+        self._max_bytes = max_cached_bytes
+        self._max_objects = max_cached_objects
+        self._objects: OrderedDict[tuple[Path, str, str, str], bytes] = OrderedDict()
+        self._cached_bytes = 0
+        self._closed = False
+
+    @property
+    def revision(self) -> RepositoryRevision:
+        return self._revision
+
+    @property
+    def cached_bytes(self) -> int:
+        """Retained verified payload, excluding the bounded entry bookkeeping."""
+        return self._cached_bytes
+
+    @property
+    def cached_objects(self) -> int:
+        return len(self._objects)
+
+    def close(self) -> None:
+        self._objects.clear()
+        self._cached_bytes = 0
+        self._closed = True
+
+    def __enter__(self) -> RevisionReadSession:
+        self._require_open()
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        self.close()
+
+    def _require_open(self) -> None:
+        if self._closed:
+            raise invalid(
+                "REPOSITORY_GIT.READ_SESSION_CLOSED", "the revision read session is closed"
+            )
+
+    def read_file(self, path: RepositoryPath) -> bytes:
+        self._require_open()
+        return self._repository._read_file(self._revision, path, self._object)
+
+    def _object(
+        self, repository: Path, oid: str, expected_type: str, algorithm: str
+    ) -> bytes:
+        key = (repository, oid, expected_type, algorithm)
+        if key in self._objects:
+            self._objects.move_to_end(key)
+            return self._objects[key]
+        content = self._repository._object(repository, oid, expected_type, algorithm)
+        if (
+            not self._max_objects
+            or len(content) > self._max_bytes
+            or not self._max_bytes
+        ):
+            return content
+        while self._objects and (
+            len(self._objects) >= self._max_objects
+            or self._cached_bytes + len(content) > self._max_bytes
+        ):
+            _key, evicted = self._objects.popitem(last=False)
+            self._cached_bytes -= len(evicted)
+        self._objects[key] = content
+        self._cached_bytes += len(content)
         return content
 
 

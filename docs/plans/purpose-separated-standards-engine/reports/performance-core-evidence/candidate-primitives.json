@@ -1,0 +1,96 @@
+{
+  "measurements": [
+    {
+      "operation": "frame",
+      "wall_s": 0.1994810910000524,
+      "cpu_s": 0.1994869180000003
+    },
+    {
+      "operation": "encode",
+      "wall_s": 0.42273718300020846,
+      "cpu_s": 0.422749171
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 0.5919642209996709,
+      "cpu_s": 0.591757613
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.18341417200008436,
+      "cpu_s": 0.183422003
+    },
+    {
+      "operation": "encode",
+      "wall_s": 0.4075860009997996,
+      "cpu_s": 0.4072926400000001
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 0.5964110240001901,
+      "cpu_s": 0.5964053699999994
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.17937737700003709,
+      "cpu_s": 0.1793687350000006
+    },
+    {
+      "operation": "encode",
+      "wall_s": 0.4019117510001706,
+      "cpu_s": 0.401691005
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 0.6149578619997556,
+      "cpu_s": 0.6098709759999998
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.18078102699973897,
+      "cpu_s": 0.18070006800000016
+    },
+    {
+      "operation": "encode",
+      "wall_s": 0.4220759199997701,
+      "cpu_s": 0.42206962100000034
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 0.5853740640000069,
+      "cpu_s": 0.5851583759999999
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.17432523899969965,
+      "cpu_s": 0.17433270499999942
+    },
+    {
+      "operation": "encode",
+      "wall_s": 0.39285754999991696,
+      "cpu_s": 0.3926363290000001
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 0.5806856019999032,
+      "cpu_s": 0.5806952420000009
+    }
+  ],
+  "source_files": 434,
+  "raw_bytes": 3708262,
+  "content_identity": "snapshot-content:sha256:e95df9fd7e1c346706c40733ef93b39f87a6a29e50fad8fcb993a99fc1f10582",
+  "encoded_sha256": "73cbb95660b04a89dd8fd5f11adb8cadd99f4651ec6836fbd75720bdc8084bc0",
+  "encoded_bytes": 13031223,
+  "capture_retention": {
+    "requests": 6134,
+    "peak_payload_bytes": 3744707,
+    "peak_entries": 524,
+    "closed_payload_bytes": [
+      0
+    ],
+    "closed_entries": [
+      0
+    ],
+    "independent_compiles": 2
+  }
+}

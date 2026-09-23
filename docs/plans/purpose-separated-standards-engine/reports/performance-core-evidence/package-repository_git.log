@@ -1,0 +1,21 @@
+test_branch_revision_is_independent_of_the_checked_out_head (test_repository.GitRepositoryTests.test_branch_revision_is_independent_of_the_checked_out_head) ... ok
+test_candidate_is_isolated_and_published_by_expected_target (test_repository.GitRepositoryTests.test_candidate_is_isolated_and_published_by_expected_target) ... ok
+test_candidate_publication_loses_a_race_at_the_atomic_update (test_repository.GitRepositoryTests.test_candidate_publication_loses_a_race_at_the_atomic_update) ... ok
+test_candidate_publication_rejects_stale_target_and_drift (test_repository.GitRepositoryTests.test_candidate_publication_rejects_stale_target_and_drift) ... ok
+test_candidate_rejects_invalid_topology_and_no_effect (test_repository.GitRepositoryTests.test_candidate_rejects_invalid_topology_and_no_effect) ... ok
+test_current_capture_is_exact_after_worktree_and_head_change (test_repository.GitRepositoryTests.test_current_capture_is_exact_after_worktree_and_head_change) ... ok
+test_environment_and_output_are_bounded (test_repository.GitRepositoryTests.test_environment_and_output_are_bounded) ... ok
+test_explicit_gitlink_repository_is_traversed (test_repository.GitRepositoryTests.test_explicit_gitlink_repository_is_traversed) ... ok
+test_index_observations_are_exact_and_nul_delimited (test_repository.GitRepositoryTests.test_index_observations_are_exact_and_nul_delimited) ... ok
+test_path_and_object_failures_are_typed (test_repository.GitRepositoryTests.test_path_and_object_failures_are_typed) ... ok
+test_read_session_bounds_and_eviction_preserve_verified_reads (test_repository.GitRepositoryTests.test_read_session_bounds_and_eviction_preserve_verified_reads) ... ok
+test_read_session_failures_are_unretained_and_cleanup_is_terminal (test_repository.GitRepositoryTests.test_read_session_failures_are_unretained_and_cleanup_is_terminal) ... ok
+test_read_session_keeps_gitlink_repository_identity (test_repository.GitRepositoryTests.test_read_session_keeps_gitlink_repository_identity) ... ok
+test_read_session_preserves_sha256_and_object_safety_limits (test_repository.GitRepositoryTests.test_read_session_preserves_sha256_and_object_safety_limits) ... ok
+test_read_session_reuses_verified_objects_and_pins_revision (test_repository.GitRepositoryTests.test_read_session_reuses_verified_objects_and_pins_revision) ... ok
+test_uncertain_update_preserves_recovery_required_authority (test_repository.GitRepositoryTests.test_uncertain_update_preserves_recovery_required_authority) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.551s
+
+OK

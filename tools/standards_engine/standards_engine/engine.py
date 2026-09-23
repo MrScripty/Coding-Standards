@@ -14,6 +14,7 @@ from tools.repository_git.repository_git import (
     CandidateFile,
     CandidateCommitMessage,
     GitRepository,
+    RevisionReadSession,
     GitRepositoryError,
     RepositoryPath,
     RepositoryRevision,
@@ -254,16 +255,29 @@ class CompiledSnapshot:
         )
 
 
+@dataclass(frozen=True, slots=True)
+class _EvaluationMaterials:
+    """Verified immutable inputs borrowed only by one analysis operation.
+
+    Decision states, providers, authorization, and live root checks stay outside
+    this value. Publication and recovery obtain their own current observations.
+    """
+
+    base_snapshot: SnapshotId
+    proposed_material: SnapshotMaterialRef | ProjectedRevisionMaterialRef
+    accepted: CompiledSnapshot
+    proposed: CompiledSnapshot
+    revision: ProposalRevision | None = None
+    projection: LogicalProjection | None = None
+
+
 class _GitRevisionSource:
-    def __init__(self, repository: GitRepository, revision: RepositoryRevision) -> None:
-        self._repository = repository
-        self._revision = revision
+    def __init__(self, reader: RevisionReadSession) -> None:
+        self._reader = reader
 
     def read_bytes(self, path: str) -> bytes:
         try:
-            return self._repository.read_file(
-                self._revision, RepositoryPath.parse(path)
-            )
+            return self._reader.read_file(RepositoryPath.parse(path))
         except GitRepositoryError as error:
             if error.failure.kind != "unavailable":
                 raise
@@ -497,11 +511,10 @@ class StandardsEngine:
         del call
         try:
             revision = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-            recording = RecordingContentSource(
-                _GitRevisionSource(self._repository, revision)
-            )
-            first = self._compile(recording)
-            frozen = recording.freeze()
+            with self._repository.read_session(revision) as reader:
+                recording = RecordingContentSource(_GitRevisionSource(reader))
+                first = self._compile(recording)
+                frozen = recording.freeze()
             replay = RecordingContentSource(frozen)
             try:
                 second = self._compile(replay)
@@ -570,9 +583,8 @@ class StandardsEngine:
                 ),
             )
             paths = self._repository.revision_paths(expected)
-            files = {
-                str(path): self._repository.read_file(expected, path) for path in paths
-            }
+            with self._repository.read_session(expected) as reader:
+                files = {str(path): reader.read_file(path) for path in paths}
             compiled = self._compile(FrozenContentSource(files))
             requirements = {
                 coverage_requirement_id(compiled.coverage.requirements[s], v)
@@ -1063,7 +1075,7 @@ class StandardsEngine:
         try:
             revision = self._authoring.read_revision(call.revision.id)
             accepted = self._compiled_snapshot(revision.base_snapshot)
-            projection = self._proposal_projection(revision)
+            projection = self._proposal_projection(revision, accepted)
             proposed = projection.compiled
             semantic_proposals = projection.semantic_proposals
             affected_policy_ids = set(projection.analysis_policy_ids)
@@ -1094,7 +1106,14 @@ class StandardsEngine:
             )
             return self._evaluate_publish_project(
                 state,
-                self._evaluate_compiled(state, accepted, proposed, revision),
+                _EvaluationMaterials(
+                    state.base_snapshot,
+                    state.proposed_material,
+                    accepted,
+                    proposed,
+                    revision,
+                    projection,
+                ),
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
@@ -1588,7 +1607,11 @@ class StandardsEngine:
             base_snapshot = self._snapshot_id(request.base_snapshot)
             proposed_snapshot = self._snapshot_id(request.proposed_snapshot)
             base = self._compiled_snapshot(base_snapshot)
-            proposed = self._compiled_snapshot(proposed_snapshot)
+            proposed = (
+                base
+                if proposed_snapshot == base_snapshot
+                else self._compiled_snapshot(proposed_snapshot)
+            )
             attestations, authorizations = self._repository_decisions(
                 request.changes, base, proposed
             )
@@ -1602,12 +1625,12 @@ class StandardsEngine:
                 domain_contracts=self._domain_contracts(),
                 execution_contracts=self._execution_context.contract_view(),
             )
-            if not isinstance(request.prior_analysis, MissingValue):
-                state = self._reuse_prior(state, request.prior_analysis)
-            return self._evaluate_publish_project(
-                state,
-                self._evaluate_compiled(state, base, proposed),
+            materials = _EvaluationMaterials(
+                state.base_snapshot, state.proposed_material, base, proposed
             )
+            if not isinstance(request.prior_analysis, MissingValue):
+                state = self._reuse_prior(state, request.prior_analysis, materials)
+            return self._evaluate_publish_project(state, materials)
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -1617,8 +1640,9 @@ class StandardsEngine:
     ) -> PendingResult | CompleteResult | RejectedResult:
         try:
             state = self._load_analysis(call.analysis)
-            successor = self._apply_submission(self._evaluate(state), call)
-            return self._evaluate_publish_project(successor)
+            materials = self._evaluation_materials(state)
+            successor = self._apply_submission(self._evaluate(state, materials), call)
+            return self._evaluate_publish_project(successor, materials)
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -1679,16 +1703,22 @@ class StandardsEngine:
     def _compiled_revision(self, revision: ProposalRevision) -> CompiledSnapshot:
         return self._proposal_projection(revision).compiled
 
-    def _proposal_projection(self, revision: ProposalRevision) -> LogicalProjection:
-        capture = self._snapshots.load_content(revision.base_snapshot)
-        base = FrozenContentSource(
-            (str(item.path), item.content) for item in capture.files
+    def _proposal_projection(
+        self,
+        revision: ProposalRevision,
+        accepted: CompiledSnapshot | None = None,
+    ) -> LogicalProjection:
+        accepted = (
+            self._compiled_snapshot(revision.base_snapshot)
+            if accepted is None
+            else accepted
         )
         return self._logical_authoring.compile(
-            base,
+            accepted.source,
             LogicalProgram(revision.change_sets),
             base_snapshot=str(revision.base_snapshot),
             base_repository_paths=revision.base_repository_paths,
+            compiled_base=accepted,
         )
 
     def _validate_logical_revision(self, revision: ProposalRevision) -> None:
@@ -1759,24 +1789,79 @@ class StandardsEngine:
             tuple(authorizations[key] for key in sorted(authorizations)),
         )
 
-    def _evaluate(self, state: DomainAnalysisState) -> AnalysisEvaluation:
+    def _evaluation_materials(self, state: DomainAnalysisState) -> _EvaluationMaterials:
         accepted = self._compiled_snapshot(state.base_snapshot)
         proposed_ref = state.proposed_material
         if isinstance(proposed_ref, SnapshotMaterialRef):
-            proposed = self._compiled_snapshot(proposed_ref.snapshot)
-            revision = None
+            proposed = (
+                accepted
+                if proposed_ref.snapshot == state.base_snapshot
+                else self._compiled_snapshot(proposed_ref.snapshot)
+            )
+            return _EvaluationMaterials(
+                state.base_snapshot, proposed_ref, accepted, proposed
+            )
+        revision = self._authoring.read_revision(proposed_ref.revision_id)
+        if revision.base_snapshot != state.base_snapshot:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.MATERIAL_BASE_MISMATCH",
+                    "invalid",
+                    "Proposal revision and analysis base snapshots differ.",
+                )
+            )
+        projection = self._proposal_projection(revision, accepted)
+        return _EvaluationMaterials(
+            state.base_snapshot,
+            proposed_ref,
+            accepted,
+            projection.compiled,
+            revision,
+            projection,
+        )
+
+    def _evaluate(
+        self,
+        state: DomainAnalysisState,
+        materials: _EvaluationMaterials | None = None,
+    ) -> AnalysisEvaluation:
+        if materials is None:
+            materials = self._evaluation_materials(state)
+        if (
+            materials.base_snapshot != state.base_snapshot
+            or materials.proposed_material != state.proposed_material
+        ):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.MATERIAL_INPUT_MISMATCH",
+                    "invalid",
+                    "Borrowed analysis material belongs to different immutable inputs.",
+                )
+            )
+        # A submission/provider can change live access while the immutable bytes
+        # remain valid. Recheck lifecycle and revision authority at every decision
+        # evaluation; only byte validation and pure compilation are reused.
+        self._snapshots.snapshot(state.base_snapshot)
+        if isinstance(state.proposed_material, SnapshotMaterialRef):
+            if state.proposed_material.snapshot != state.base_snapshot:
+                self._snapshots.snapshot(state.proposed_material.snapshot)
         else:
-            revision = self._authoring.read_revision(proposed_ref.revision_id)
-            if revision.base_snapshot != state.base_snapshot:
+            current = self._authoring.read_revision(state.proposed_material.revision_id)
+            if current != materials.revision:
                 raise AnalysisError(
                     AnalysisFailure(
-                        "ANALYSIS.MATERIAL_BASE_MISMATCH",
+                        "ANALYSIS.MATERIAL_INPUT_MISMATCH",
                         "invalid",
-                        "Proposal revision and analysis base snapshots differ.",
+                        "The current stored revision differs from borrowed analysis material.",
                     )
                 )
-            proposed = self._proposal_projection(revision).compiled
-        return self._evaluate_compiled(state, accepted, proposed, revision)
+        return self._evaluate_compiled(
+            state,
+            materials.accepted,
+            materials.proposed,
+            materials.revision,
+            materials.projection,
+        )
 
     def _evaluate_compiled(
         self,
@@ -1784,10 +1869,16 @@ class StandardsEngine:
         accepted: CompiledSnapshot,
         proposed: CompiledSnapshot,
         revision: ProposalRevision | None = None,
+        projection: LogicalProjection | None = None,
     ) -> AnalysisEvaluation:
         proposed_ref = state.proposed_material
         if isinstance(proposed_ref, ProjectedRevisionMaterialRef):
-            if revision is None or revision.revision_id != proposed_ref.revision_id:
+            if (
+                revision is None
+                or revision.revision_id != proposed_ref.revision_id
+                or projection is None
+                or projection.compiled is not proposed
+            ):
                 raise AnalysisError(
                     AnalysisFailure(
                         "ANALYSIS.MATERIAL_INPUT_MISMATCH",
@@ -1795,7 +1886,7 @@ class StandardsEngine:
                         "Resolved proposal revision does not match the analysis state.",
                     )
                 )
-            self._validate_projected_inputs(state, revision, accepted, proposed)
+            self._validate_projected_inputs(state, accepted, proposed, projection)
         return evaluate_analysis(
             state,
             self._analysis_material(SnapshotMaterialRef(state.base_snapshot), accepted),
@@ -1822,11 +1913,10 @@ class StandardsEngine:
     def _validate_projected_inputs(
         self,
         state: DomainAnalysisState,
-        revision: ProposalRevision,
         accepted: CompiledSnapshot,
         proposed: CompiledSnapshot,
+        projection: LogicalProjection,
     ) -> None:
-        projection = self._proposal_projection(revision)
         semantic_proposals = projection.semantic_proposals
         affected_policy_ids = set(projection.analysis_policy_ids)
         affected_policy_ids.update(str(item["policy"]) for item in semantic_proposals)
@@ -1930,10 +2020,11 @@ class StandardsEngine:
     def _evaluate_publish_project(
         self,
         state: DomainAnalysisState,
-        evaluation: AnalysisEvaluation | None = None,
+        materials: _EvaluationMaterials | None = None,
     ) -> PendingResult | CompleteResult:
-        evaluation = self._evaluate(state) if evaluation is None else evaluation
-        state, evaluation = self._apply_providers(state, evaluation)
+        materials = self._evaluation_materials(state) if materials is None else materials
+        evaluation = self._evaluate(state, materials)
+        state, evaluation = self._apply_providers(state, evaluation, materials)
         self._snapshots.publish_aggregate(
             state.aggregate(self._analysis_children(evaluation))
         )
@@ -1943,6 +2034,7 @@ class StandardsEngine:
         self,
         state: DomainAnalysisState,
         evaluation: AnalysisEvaluation,
+        materials: _EvaluationMaterials,
     ) -> tuple[DomainAnalysisState, AnalysisEvaluation]:
         while evaluation.pending_requirements:
             applied = False
@@ -2071,7 +2163,7 @@ class StandardsEngine:
                             authorization.as_contract(),
                         ),
                     )
-                    evaluation = self._evaluate(state)
+                    evaluation = self._evaluate(state, materials)
                     applied = True
                     break
                 if applied:
@@ -2125,6 +2217,7 @@ class StandardsEngine:
         self,
         state: DomainAnalysisState,
         prior: AnalysisHandle,
+        materials: _EvaluationMaterials,
     ) -> DomainAnalysisState:
         previous = self._load_analysis(prior)
         if previous.execution_contracts != state.execution_contracts:
@@ -2154,7 +2247,7 @@ class StandardsEngine:
                     }
                 )
                 try:
-                    self._evaluate(candidate)
+                    self._evaluate(candidate, materials)
                 except AnalysisError as error:
                     if error.failure.code == "ANALYSIS.INVALID_RETAINED_DECISION":
                         continue

@@ -1,0 +1,17 @@
+test_aliases_normalize_and_conflicting_inputs_reject (test_applicability.ApplicabilityTest.test_aliases_normalize_and_conflicting_inputs_reject) ... ok
+test_all_any_and_not_cover_the_complete_truth_table (test_applicability.ApplicabilityTest.test_all_any_and_not_cover_the_complete_truth_table) ... ok
+test_empty_schema_compiles_fact_free_always (test_applicability.ApplicabilityTest.test_empty_schema_compiles_fact_free_always) ... ok
+test_every_fact_type_binds_through_one_schema (test_applicability.ApplicabilityTest.test_every_fact_type_binds_through_one_schema) ... ok
+test_every_operator_and_fact_state_uses_three_valued_logic (test_applicability.ApplicabilityTest.test_every_operator_and_fact_state_uses_three_valued_logic) ... ok
+test_immutable_mapping_and_sequence_values_bind_at_the_interface (test_applicability.ApplicabilityTest.test_immutable_mapping_and_sequence_values_bind_at_the_interface) ... ok
+test_invalid_schema_expression_and_values_reject (test_applicability.ApplicabilityTest.test_invalid_schema_expression_and_values_reject) ... ok
+test_prompt_and_aliases_do_not_change_semantic_identity (test_applicability.ApplicabilityTest.test_prompt_and_aliases_do_not_change_semantic_identity) ... ok
+test_runtime_module_imports_only_the_standard_library (test_applicability.ApplicabilityTest.test_runtime_module_imports_only_the_standard_library) ... ok
+test_schema_and_program_digests_are_stable_and_schema_bound (test_applicability.ApplicabilityTest.test_schema_and_program_digests_are_stable_and_schema_bound) ... ok
+test_semantic_contract_and_reverse_dependencies_are_exact (test_applicability.ApplicabilityTest.test_semantic_contract_and_reverse_dependencies_are_exact) ... ok
+test_unknown_facts_are_reported_only_when_material (test_applicability.ApplicabilityTest.test_unknown_facts_are_reported_only_when_material) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.012s
+
+OK

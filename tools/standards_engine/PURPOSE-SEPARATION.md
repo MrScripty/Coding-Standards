@@ -56,6 +56,28 @@ application output). Old Analysis records are unsupported under Analysis 7.
 Existing SQLite storage mechanics and Snapshot handle version 5 remain in use;
 there is no automatic deletion, conversion, alternate old reader or dual write.
 
+## Operation-local performance ownership
+
+Capture owns one bounded exact-revision Git read session for its recorded
+first pass, closes that session, and compiles the frozen replay independently.
+Both the requested-path closure and semantic signature still have to agree.
+The selected accepted-main revision stays fixed throughout that capture.
+
+Analysis preparation and resolution borrow verified immutable inputs for the
+current native operation. Identical snapshot roles share one material value;
+distinct roots keep independent lifecycle and content observations. Exact
+proposal projections carry their already-compiled base into logical authoring,
+while changed candidates take the complete compiler path. Retained-decision
+and pre-/post-submission evaluations still run independently, with current
+lifecycle, revision and authorization observations at their existing boundaries.
+The immutable material does not retain provider outcomes or evaluation results.
+
+Each subsequent operation loads and verifies its own captured bytes. Publication
+verification, target compare-and-swap and recovery obtain fresh observations;
+no operation-local material crosses those barriers as permission or readiness.
+The MCP/facade/SQLite lifetime remains per call. There is no cross-call compiled
+cache, persistent derived cache, or alternate identity format in this increment.
+
 ## Application qualification
 
 A declaration identifies an entire canonical module or registered operational

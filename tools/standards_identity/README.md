@@ -28,3 +28,12 @@ codecs. `frame_path_bytes` and `frame_path_byte_set` provide one neutral,
 representation-preserving frame for logical paths and exact bytes; callers
 still own path validity, set membership, and the identity domain. Unframed
 single-file content digests remain SHA-256 over raw bytes.
+
+
+Encoding retains the exact identity-v2 preimage, including arbitrary-size
+integer spelling, Unicode scalar identity, control escaping, key ordering and
+framed lengths. Bounded decimal tokens accelerate the byte domain; string
+encoding batches ordinary spans. Path-byte-set framing retains each validated
+frame once. These are implementation optimizations, with no identity version,
+public representation, digest or supported-domain change. The differential
+preimage tests remain a small independent oracle for future encoder changes.

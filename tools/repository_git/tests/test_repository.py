@@ -713,6 +713,145 @@ class GitRepositoryTests(unittest.TestCase):
             "REPOSITORY_GIT.INVALID_COMMAND",
         )
 
+
+    def test_read_session_reuses_verified_objects_and_pins_revision(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._initialize(root)
+            (root / "a").write_bytes(b"old")
+            (root / "b").write_bytes(b"old")
+            self._commit(root, "base")
+            repository = GitRepository(root)
+            revision = repository.current_revision()
+            with mock.patch.object(repository, "_object", wraps=repository._object) as fetch:
+                with repository.read_session(revision) as session:
+                    self.assertEqual(session.read_file(RepositoryPath.parse("a")), b"old")
+                    self.assertEqual(session.read_file(RepositoryPath.parse("b")), b"old")
+                    self.assertEqual(fetch.call_count, 3)  # commit, tree, shared blob
+                    (root / "a").write_bytes(b"new")
+                    self._commit(root, "advance")
+                    self.assertEqual(session.read_file(RepositoryPath.parse("a")), b"old")
+                    self.assertEqual(fetch.call_count, 3)
+                    self.assertEqual(session.revision, revision)
+                self.assertEqual(session.cached_bytes, 0)
+                self.assertEqual(session.cached_objects, 0)
+                with self.assertRaises(GitRepositoryError) as raised:
+                    session.read_file(RepositoryPath.parse("a"))
+                self.assertEqual(raised.exception.failure.code, "REPOSITORY_GIT.READ_SESSION_CLOSED")
+                with repository.read_session(repository.current_revision()) as new_session:
+                    self.assertEqual(new_session.read_file(RepositoryPath.parse("a")), b"new")
+                self.assertEqual(fetch.call_count, 6)
+
+    def test_read_session_bounds_and_eviction_preserve_verified_reads(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._initialize(root)
+            content = b"large" * 300
+            (root / "a").write_bytes(content)
+            self._commit(root, "base")
+            repository = GitRepository(root)
+            path, revision = RepositoryPath.parse("a"), repository.current_revision()
+            for byte_limit, entry_limit in ((0, 10), (4096, 0), (4096, 1), (256, 10)):
+                with self.subTest(bytes=byte_limit, entries=entry_limit):
+                    with mock.patch.object(repository, "_object", wraps=repository._object) as fetch:
+                        with repository.read_session(revision, max_cached_bytes=byte_limit,
+                                                     max_cached_objects=entry_limit) as session:
+                            self.assertEqual(session.read_file(path), content)
+                            self.assertEqual(session.read_file(path), content)
+                            self.assertLessEqual(session.cached_bytes, byte_limit)
+                            self.assertLessEqual(session.cached_objects, entry_limit)
+                            # Zero budget, eviction, and oversized blobs all take
+                            # the same fully verified read path on a later miss.
+                            self.assertGreater(fetch.call_count, 3)
+            for invalid_bound in (-1, True, 1.5):
+                with self.assertRaises(GitRepositoryError):
+                    repository.read_session(revision, max_cached_bytes=invalid_bound)
+
+    def test_read_session_failures_are_unretained_and_cleanup_is_terminal(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._initialize(root)
+            (root / "a").write_bytes(b"original")
+            self._commit(root, "base")
+            repository = GitRepository(root)
+            revision, path = repository.current_revision(), RepositoryPath.parse("a")
+            oid = self._git(root, "rev-parse", "HEAD:a").strip()
+            blob = root / ".git" / "objects" / oid[:2] / oid[2:]
+            saved = blob.read_bytes()
+            with repository.read_session(revision) as session:
+                blob.unlink()
+                with self.assertRaises(GitRepositoryError):
+                    session.read_file(path)
+                blob.write_bytes(saved)
+                self.assertEqual(session.read_file(path), b"original")
+            # Each fresh owner validates its inputs instead of inheriting an
+            # earlier owner's observation of the repository's health.
+            blob.write_bytes(b"corrupt loose object")
+            with self.assertRaises(GitRepositoryError):
+                with repository.read_session(revision) as failed:
+                    failed.read_file(path)
+            self.assertEqual(failed.cached_objects, 0)
+            self.assertEqual(failed.cached_bytes, 0)
+            blob.write_bytes(saved)
+            for cached in (False, True):
+                with repository.read_session(revision, max_cached_objects=10 if cached else 0) as session:
+                    with self.assertRaises(GitRepositoryError) as error:
+                        session.read_file(RepositoryPath.parse("missing"))
+                    self.assertEqual(error.exception.failure.code, "REPOSITORY_GIT.OBJECT_UNAVAILABLE")
+
+    def test_read_session_keeps_gitlink_repository_identity(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root, nested = Path(directory) / "root", Path(directory) / "nested"
+            root.mkdir(); nested.mkdir()
+            for repo in (root, nested):
+                self._initialize(repo)
+                (repo / "same").write_bytes(b"same")
+                self._commit(repo, "base")
+            nested_oid = self._git(nested, "rev-parse", "HEAD").strip()
+            self._git(root, "update-index", "--add", "--cacheinfo", "160000", nested_oid, "vendor")
+            self._git(root, "commit", "-qm", "gitlink")
+            repository = GitRepository(root, gitlinks=(GitlinkRepository(
+                RepositoryPath.parse("vendor"), nested),))
+            with mock.patch.object(repository, "_object", wraps=repository._object) as fetch:
+                with repository.read_session(repository.current_revision()) as session:
+                    self.assertEqual(session.read_file(RepositoryPath.parse("same")), b"same")
+                    self.assertEqual(session.read_file(RepositoryPath.parse("vendor/same")), b"same")
+                    self.assertEqual(session.read_file(RepositoryPath.parse("vendor/same")), b"same")
+                    shared_oid = self._git(root, "rev-parse", "HEAD:same").strip()
+                    owners = {call.args[0] for call in fetch.call_args_list if call.args[1] == shared_oid}
+                    self.assertEqual(owners, {root.resolve(), nested.resolve()})
+
+
+    def test_read_session_preserves_sha256_and_object_safety_limits(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._git(root, "init", "--quiet", "--object-format=sha256")
+            self._git(root, "config", "user.email", "test@example.invalid")
+            self._git(root, "config", "user.name", "Test")
+            content = b"x" * 8192
+            (root / "a").write_bytes(content)
+            self._commit(root, "sha256 fixture")
+            repository = GitRepository(root)
+            revision = repository.current_revision()
+            self.assertEqual(len(revision.oid), 64)
+            path = RepositoryPath.parse("a")
+            with repository.read_session(revision) as session:
+                self.assertEqual(session.read_file(path), content)
+                self.assertEqual(session.read_file(path), content)
+                self.assertEqual(session.cached_objects, 3)
+            restricted = GitRepository(root, max_object_bytes=512)
+            failures = []
+            for entries in (0, 1024):
+                with restricted.read_session(revision, max_cached_objects=entries) as session:
+                    for _ in range(2):
+                        with self.assertRaises(GitRepositoryError) as error:
+                            session.read_file(path)
+                        failures.append(error.exception.failure.code)
+            self.assertEqual(len(set(failures)), 1)
+            self.assertIn(failures[0], {
+                "REPOSITORY_GIT.OUTPUT_LIMIT", "REPOSITORY_GIT.OBJECT_LIMIT"
+            })
+
     @classmethod
     def _initialize(cls, root: Path) -> None:
         cls._git(root, "init", "-q")

@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 import tomllib
 import unittest
+from unittest import mock
 from pathlib import Path
 
 from tools.repository_git.repository_git import indexed_paths
@@ -18,6 +19,7 @@ from tools.standards_engine.standards_engine.authoring import AuthoringError
 from tools.standards_engine.standards_engine.engine import StandardsEngine
 from tools.standards_metadata.standards_metadata import (
     DirectoryContentSource,
+    FrozenContentSource,
     RecordingContentSource,
     PolicyUnitTombstone,
     file_digest,
@@ -69,6 +71,26 @@ class LogicalAuthoringTests(unittest.TestCase):
         cls.base = recording.freeze()
         cls.compiled = StandardsEngine._compile(cls.base)
         cls.repository_paths = indexed_paths(cls.root)
+
+
+    def test_verified_compiled_base_is_reused_but_candidate_compiles(self) -> None:
+        program = LogicalProgram((self.change_set([self.new_standard_edit()]),))
+        with mock.patch.object(StandardsEngine, "_compile", wraps=StandardsEngine._compile) as compile:
+            compiler = LogicalAuthoringCompiler(compile)
+            ordinary = compiler.compile(self.base, program, base_repository_paths=self.repository_paths)
+            ordinary_count = compile.call_count
+            compile.reset_mock()
+            borrowed = compiler.compile(self.base, program, base_repository_paths=self.repository_paths,
+                                        compiled_base=self.compiled)
+            self.assertEqual(compile.call_count, ordinary_count - 1)
+            self.assertGreater(compile.call_count, 0)
+        self.assertEqual(borrowed.source.files, ordinary.source.files)
+        self.assertEqual(borrowed.semantic_proposals, ordinary.semantic_proposals)
+        self.assertIsNot(borrowed.compiled, self.compiled)
+        with self.assertRaises(AuthoringError) as raised:
+            compiler.compile(FrozenContentSource(dict(self.base.files)), program,
+                             base_repository_paths=self.repository_paths, compiled_base=self.compiled)
+        self.assertEqual(raised.exception.failure.code, "AUTHORING.COMPILED_BASE_MISMATCH")
 
     def change_set(self, edits: list[dict[str, object]]) -> StandardsChangeSet:
         return StandardsChangeSet.from_mapping(

@@ -925,6 +925,7 @@ class LogicalAuthoringCompiler:
         *,
         base_snapshot: str | None = None,
         base_repository_paths: Iterable[str],
+        compiled_base: Any | None = None,
     ) -> LogicalProjection:
         if type(base) is not FrozenContentSource or type(program) is not LogicalProgram:
             raise _invalid(
@@ -942,7 +943,17 @@ class LogicalAuthoringCompiler:
             )
             return self._compile_authorities(FrozenContentSource(current))
 
-        base_compiled = self._compile_authorities(base)
+        if compiled_base is None:
+            base_compiled = self._compile_authorities(base)
+        else:
+            # This internal borrowed proof is usable only with the exact source
+            # it compiled. Changed candidates always take the full compiler path.
+            if getattr(compiled_base, "source", None) is not base:
+                raise _invalid(
+                    "AUTHORING.COMPILED_BASE_MISMATCH",
+                    "compiled base must own the exact supplied frozen source",
+                )
+            base_compiled = compiled_base
         files = dict(base.files)
         repository_paths = selected_repository_paths
         for change_set in program.change_sets:

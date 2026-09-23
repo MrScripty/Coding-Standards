@@ -8,6 +8,23 @@ The package owns no standards semantics, snapshot lifecycle, SQLite storage,
 or public Engine operation. Callers resolve one revision and retain that exact
 value while loaders request files. Worktree changes and later commits cannot
 substitute bytes for the retained revision.
+
+`read_session(revision)` gives one bulk-read owner bounded reuse of fully
+verified Git objects. The owner closes the session when its operation ends.
+Entries are keyed by the configured repository, object ID, expected object type,
+and hash algorithm. Each miss performs the ordinary header, size, framing,
+and object-hash checks. Path, mode and explicit gitlink interpretation still
+run for every file request. A fresh session verifies its first reads again.
+
+The defaults retain at most 8 MiB of object payload and 1,024 entries; callers
+may select smaller bounds or zero retention. Entry bookkeeping is bounded by
+the entry cap separately from payload. Evicted and oversized valid objects use
+the same verified read path. The session is single-owner and contains no child
+process beyond those already owned by an individual Git command. Earlier
+verified objects remain immutable operation inputs; the session is not a
+continuous audit of the underlying disk. Ordinary `read_file` retains its
+independent, uncached observation boundary.
+
 The Adapter can also return the exact sorted path observation for a retained
 commit tree; callers persist that observation when later deterministic
 projections must survive worktree or branch replacement.
