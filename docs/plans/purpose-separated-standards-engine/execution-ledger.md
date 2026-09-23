@@ -98,3 +98,26 @@ The Standards review identified an application diagnostic path that could emit
 private exception text to host logs or stderr. That path now reports only the
 exception class, with focused tests for both Engine and MCP boundaries. The
 suite-input projection was regenerated to match the changed source.
+
+## September 23, 2026 — Accepted-main integration and fresh-store activation
+
+Committed the reviewed repair and audit as `42d67355`, then fast-forwarded
+local accepted `main` to that commit and returned the checkout to the
+implementation branch. The original old SQLite file was moved into the private
+archive alongside the independently verified SQLite backup and inventory.
+Both database files pass integrity checks; the inventory records both hashes.
+
+The new default store contains zero proposal roots and records and a snapshot
+sourced from exact accepted `main` at `42d67355`. The installed Codex
+`standards-engine` registration passed catalog, schema, route, and read checks
+against that fresh store. Application CLI route returned the intended
+`APPLICATION.CONTENT_UNAVAILABLE` result while the production exposure manifest
+remains empty. The code release is accepted; real content qualification remains
+the separate guide's work.
+
+The earlier complete package run passed 477 tests. The post-fix rerun passed
+the first five package groups and advanced through most Engine tests without a
+failure, but was interrupted in a slow case; five focused post-fix regression
+tests passed. The final generated-input and 73-check structural checkpoints
+passed. This qualification limit is recorded rather than treating the
+interrupted run as a complete post-fix pass.

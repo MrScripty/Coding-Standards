@@ -158,14 +158,14 @@ the branch's version 6 contract; correcting that fixture and rerunning its three
 tests passed. The package run used locally cached pinned dependency versions;
 the separate client qualification used a fresh hash-verified Engine install.
 
-## Remaining acceptance
+## Installed cutover and acceptance
 
-The user's installed `standards-engine` registration now includes
-`--purpose authoring`. The live Codex client discovers its 15 focused tools and
-validates their schemas, but route returns `SUPPORT.UNSUPPORTED_CAPTURE` because
-the accepted local `main` predates the new content contract. The candidate
-passed route/read in a temporary registration whose local `main` was the exact
-candidate. The real accepted ref was not retargeted to make the test pass.
+The user's installed `standards-engine` registration includes
+`--purpose authoring`. Before integration it discovered its 15 focused tools
+and validated their schemas but route returned `SUPPORT.UNSUPPORTED_CAPTURE`
+against the old accepted `main`. Candidate route/read passed in a disposable
+clone whose local `main` identified the candidate; the real accepted ref was
+not retargeted for premerge testing.
 The installed store was copied using SQLite's online backup API and retained
 offline with a verified per-revision inventory at
 `/home/jeremy/.local/share/standards-engine/archive/old-store-2026-09-23/`.
@@ -178,8 +178,9 @@ against then-current accepted standards; no stored proposal status was changed.
 The inventory preserves root/revision IDs, relevant Git revisions, and the
 owning accepted Engine revision and dependency lock identity.
 All five applied candidate commits exist as Git objects but are not ancestors
-of current accepted `main`. The inventory records that reachability, and fresh
-snapshots will use current accepted `main` as their source.
+of the pre-cutover accepted `main`. The inventory records that reachability.
+The archive holds both the original database bytes and a consistent SQLite
+backup, with separate verified SHA-256 values and integrity checks.
 
 Independent Standards and Spec reviews of `git diff main...HEAD` plus the
 working changes found no substantive source-scope mismatch or blocking code
@@ -189,9 +190,29 @@ emit bounded exception class names without exception text or traceback; focused
 tests assert that a private exception message is absent from both the public
 response and diagnostics. The generated suite-input manifest was refreshed.
 
-The plan's C8 installed cutover and C10 independent final review remain
-outstanding. Synthetic provenance review decisions do not certify the real
-standards content. The content guide remains gated on code acceptance.
+The corrected candidate passed the 73-check structural checkpoint. Its
+post-fix package run passed the metadata (31), policy-impact (10), contracts
+(23), analysis (100), and verifier (156) groups; the Engine group advanced
+through most tests without a failure, then a slow case was interrupted. The
+earlier complete run passed 477 Python tests. Five focused post-fix tests for
+bounded diagnostics and the platform harness passed, and the generated input
+projection was current. The incomplete repeat is not counted as a complete
+post-fix suite.
+
+Local accepted `main` was fast-forwarded to `42d67355cbbba2d9378cde54b6d4c2d61d493741`;
+the checkout returned to `implementation/purpose-separated-standards-engine`.
+The original old database moved to the private archive after integration. The
+new default store has zero proposal roots and records, passes SQLite integrity
+check, and contains a snapshot sourced from that exact accepted `main` commit.
+The actual installed Codex registration then discovered all 15 tools, validated
+the 20 edit variants and nested evidence contracts, and completed route/read
+on one snapshot. The installed application CLI returned
+`APPLICATION.CONTENT_UNAVAILABLE` against the intentionally empty exposure
+manifest, rather than `SUPPORT.UNSUPPORTED_CAPTURE`.
+
+C8 installed qualification and C10 independent review are complete for the
+code release. Synthetic provenance decisions do not certify real standards
+content; the separate content guide owns that later qualification.
 
 ## Delivery validation
 

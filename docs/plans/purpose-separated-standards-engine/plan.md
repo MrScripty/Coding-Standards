@@ -1,9 +1,9 @@
 # Implementation Plan: Purpose-Separated Standards Engine and Decision Provenance
 
-**Plan status:** `Verifying`
-**Current phase:** M3 — qualify the implemented candidate in the supported installed environment
-**Next slice:** M3/S3 — complete pinned-client qualification and independent integrated review
-**Acceptance status:** `blocked`
+**Plan status:** `Accepted`
+**Current phase:** M3 — code qualification and installed cutover complete
+**Next slice:** Separate standards-content guide, when authorized by its content owner
+**Acceptance status:** `accepted`
 **Prepared:** September 23, 2026
 **Repository:** `MrScripty/Coding-Standards`
 **Inspected baseline:** `366c1d90a24bbfb50973f62b155a5f3396c0f107`
@@ -11,7 +11,7 @@
 **Issues:** [issues.md](issues.md)
 **Separate content guide:** [Positive guidance and decision provenance](../../guides/positive-guidance-and-provenance.md)
 
-This document owns the implementation plan. Executed source observations and remaining qualification are recorded in [implementation evidence](reports/implementation-evidence.md); complete plan acceptance is still pending. The baseline is a research reference, not a requirement to revert a newer checkout. Reconcile material differences at M0. Runtime/code acceptance precedes standards-content migration.
+This document owns the implementation plan. Executed source observations, qualification limits, and installed cutover are recorded in [implementation evidence](reports/implementation-evidence.md). The baseline is a research reference, not a requirement to revert a newer checkout. Runtime/code acceptance precedes standards-content migration.
 
 ## Objective
 
@@ -246,7 +246,7 @@ The exposure tests address a real boundary that current full reads/inspection do
 
 ### M3 — Qualify installation, review, and hand off to content authoring
 
-**Status:** `Verifying`; depends on M2. **Goal:** deliver the code capability required to carry out the separate guide.
+**Status:** `Accepted`; depends on M2. **Goal:** deliver the code capability required to carry out the separate guide.
 
 **Allowed write set:** touched runtime/contract files for ordinary repairs; existing real-client harnesses; installation/cutover documentation; implementation evidence and generated registrations; plan bundle. Normative bodies remain preserved.
 
@@ -261,20 +261,20 @@ The exposure tests address a real boundary that current full reads/inspection do
 
 ## Objective Acceptance
 
-Source evidence is recorded in [implementation evidence](reports/implementation-evidence.md). Pending claims retain their stated qualification limits; the overall plan is blocked on the supported installed environment and independent final review.
+Source and installed cutover evidence is recorded in [implementation evidence](reports/implementation-evidence.md). The separate content guide still owns the quality and eligibility of the real standards corpus.
 
 | ID | Observable criterion | Kind / environment / mode | Deciding evidence | Status | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| C1 | Host purpose is immutable and request input cannot elevate it or grant mutation. | contract + system / representative local host / automated | Independently authored operation matrix; actual facade/MCP/CLI calls; verify rejected mutations produce no canonical change. | `pending` | pending |
-| C2 | Application reads, relationships, full detail, inspection, summaries, schemas, examples, and continuations contain only permitted material. | contract + system / representative / automated | Distinctive synthetic markers and expected permitted fields authored independently of projection code; inspect JSON, text, catalogs, and nested fields. | `pending` | pending |
-| C3 | Required routing closure is complete or explicitly unavailable; hidden support nodes do not alter permitted traversal paths. | integration / not-applicable / automated | Small explicit graph fixtures, required/optional cases, unknown facts, and hidden intermediary cases. | `pending` | pending |
-| C4 | The Engine can publish coordinated guidance/reference/prompt/template/provenance/exposure changes and later provenance-only changes. | system / representative Git + SQLite / automated | Public authoring operations, actual candidate materialization, accepted-ref readback, and independent content assertions. | `pending` | pending |
-| C5 | Supported snapshots reopen after process replacement with matching content and current-purpose enforcement. | system / required-real local processes + store / automated | Two-process capture/read; later source mutation; real store reopening; exact requested subject/revision checks. | `pending` | pending |
-| C6 | Draft exposure cannot become application-visible before reviewed publication; changed content cannot silently retain stale approval. | integration + system / representative / automated | Before/after publication reads; stale bindings; concurrent revisions; withdrawal; interruption/recovery. | `pending` | pending |
-| C7 | One new contract is supported across in-repository consumers; old unsupported formats fail without corrupting retained data. | contract + system / representative / automated | Version/consumer matrix, old-format fixtures, unchanged-store checks, actual startup outcomes. | `pending` | pending |
-| C8 | The installed local transports execute the complete supported workflow with correct catalogs and bounded diagnostics. | release-artifact + system / required-real locked environment and actual MCP client / automated | Existing real-client harness extended for both purposes; installed entrypoint and CLI execution. No paid model turn required. | `blocked` | [Environment limits](reports/implementation-evidence.md#remaining-acceptance) |
-| C9 | Provenance-only changes leave unchanged normative semantics and unrelated impact requirements stable. | integration / not-applicable / automated | Independent before/after domain revisions and local impact expectations; allow changed opaque snapshot identity. | `pending` | pending |
-| C10 | The code release preserves real normative bodies and leaves an executable content-migration path. | acceptance review / inspected repository / manual + automated comparison | One-time scoped diff review; API operation map; empty real-corpus eligibility; independent final review. | `pending` | pending |
+| C1 | Host purpose is immutable and request input cannot elevate it or grant mutation. | contract + system / representative local host / automated | Independently authored operation matrix; actual facade/MCP/CLI calls; verify rejected mutations produce no canonical change. | `accepted` | Purpose projection and transport tests; official SDK catalogs. |
+| C2 | Application reads, relationships, full detail, inspection, summaries, schemas, examples, and continuations contain only permitted material. | contract + system / representative / automated | Distinctive synthetic markers and expected permitted fields authored independently of projection code; inspect JSON, text, catalogs, and nested fields. | `accepted` | Projection tests and SDK application readback. |
+| C3 | Required routing closure is complete or explicitly unavailable; hidden support nodes do not alter permitted traversal paths. | integration / not-applicable / automated | Small explicit graph fixtures, required/optional cases, unknown facts, and hidden intermediary cases. | `accepted` | Required-closure and hidden-intermediary fixtures. |
+| C4 | The Engine can publish coordinated guidance/reference/prompt/template/provenance/exposure changes and later provenance-only changes. | system / representative Git + SQLite / automated | Public authoring operations, actual candidate materialization, accepted-ref readback, and independent content assertions. | `accepted` | Supporting workflow and official SDK publication walkthrough. |
+| C5 | Supported snapshots reopen after process replacement with matching content and current-purpose enforcement. | system / required-real local processes + store / automated | Two-process capture/read; later source mutation; real store reopening; exact requested subject/revision checks. | `accepted` | Cold-process transport tests and SDK recovery walkthrough. |
+| C6 | Draft exposure cannot become application-visible before reviewed publication; changed content cannot silently retain stale approval. | integration + system / representative / automated | Before/after publication reads; stale bindings; concurrent revisions; withdrawal; interruption/recovery. | `accepted` | Supporting workflow, stale-binding fixtures, and SDK interruption/recovery. |
+| C7 | One new contract is supported across in-repository consumers; old unsupported formats fail without corrupting retained data. | contract + system / representative / automated | Version/consumer matrix, old-format fixtures, unchanged-store checks, actual startup outcomes. | `accepted` | Generated contract and old-capture tests; archived old store and fresh live store. |
+| C8 | The installed local transports execute the complete supported workflow with correct catalogs and bounded diagnostics. | release-artifact + system / required-real locked environment and actual MCP client / automated | Existing real-client harness extended for both purposes; installed entrypoint and CLI execution. No paid model turn required. | `accepted` | Python 3.12 hash-locked SDK walkthrough; installed Codex route/read after cutover; application CLI unavailable result. |
+| C9 | Provenance-only changes leave unchanged normative semantics and unrelated impact requirements stable. | integration / not-applicable / automated | Independent before/after domain revisions and local impact expectations; allow changed opaque snapshot identity. | `accepted` | Supporting workflow and analysis impact tests. |
+| C10 | The code release preserves real normative bodies and leaves an executable content-migration path. | acceptance review / inspected repository / manual + automated comparison | One-time scoped diff review; API operation map; empty real-corpus eligibility; independent final review. | `accepted` | Normative diff, empty manifests, operation map, and independent Standards/Spec reviews. |
 
 A marker-absence test proves only sampled disclosure paths; pair it with positive field assertions, operation admission, and the complete bounded entrypoint inventory. Codepoint text equality is used where exact returned content is the contract. Generated freshness proves derived files are current, not that the prose is correct or the exposure boundary works.
 
@@ -293,7 +293,7 @@ PYTHONPATH=. "$ENGINE_PYTHON" -m unittest discover -s tools/standards_policy_imp
 PYTHONPATH=.:tools/standards_verifier "$ENGINE_PYTHON" -m unittest discover -s tools/standards_verifier/tests
 ```
 
-Run additional touched-owner suites from their established READMEs. Execute the repository structural checkpoint separately through the Engine. Regenerate contracts with the existing compiler and generated-input mechanism, then check freshness. The new `--purpose` syntax and new edit schemas are proposed work, not commands claimed to exist today. Retain the supported transport protocol unless a separately evidenced interoperability issue requires changing it.
+Run additional touched-owner suites from their established READMEs. Execute the repository structural checkpoint separately through the Engine. Regenerate contracts with the existing compiler and generated-input mechanism, then check freshness. The implemented `--purpose` syntax and edit schemas are documented in the accepted contract. Retain the supported transport protocol unless a separately evidenced interoperability issue requires changing it.
 
 ## Execution Discipline
 
@@ -305,9 +305,9 @@ Ordinary implementation/test repair continues within the admitted contract. Repl
 
 A new implementation file, additional focused assertion, or unchanged review record is not by itself a reason to reopen design admission. Investigation ends when the fact that could change the decision has been resolved. Independent work continues while a real environment or rollout claim is pending.
 
-## Blockers
+## Delivery boundary
 
-The available Python 3.13 environment is outside the supported locked range. Official MCP SDK/installed-client qualification and independent integrated review remain outstanding. User installation and pending-store recovery facts remain operator-owned. Remote Git push is unavailable; the user selected changed-files ZIP delivery.
+Python 3.12 hash-locked dependencies, the official MCP SDK, the installed Codex client, independent review, and the old-store cutover have been qualified as recorded in implementation evidence. Local accepted `main` contains the code. Remote Git push was unavailable during delivery; the changed-files ZIP remains a fallback artifact, and local acceptance does not claim remote publication.
 
 ## Code-To-Content Handoff
 
@@ -317,8 +317,8 @@ The first content work should migrate Core, the application-relevant Router/fact
 
 ## Final Acceptance
 
-- Acceptance status: `blocked`
-- Final status: `Verifying`
+- Acceptance status: `accepted`
+- Final status: `Accepted`
 - Deferred follow-ups: normative content migration and downstream effectiveness evaluation, owned by the separate guide and existing effectiveness effort.
 
 ## Source baseline
