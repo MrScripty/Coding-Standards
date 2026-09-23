@@ -1,0 +1,60 @@
+name: Purpose-separated Engine verification
+
+on:
+  push:
+    branches: [implementation/purpose-separated-standards-engine]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/**'
+      - '.agents/skills/standards-engine/**'
+      - 'evaluation/standards-effectiveness/**'
+      - '.github/workflows/purpose-separated-engine.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  engine:
+    runs-on: ubuntu-24.04
+    env:
+      PYTHONPATH: .
+      CANDIDATE_SHA: ${{ github.sha }}
+      SOURCE_REPOSITORY: ${{ github.repository }}
+    steps:
+      - name: Obtain exact public source without checkout credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init source
+          git -C source remote add origin "https://github.com/${SOURCE_REPOSITORY}.git"
+          git -C source fetch origin "$CANDIDATE_SHA"
+          git -C source checkout --detach FETCH_HEAD
+          test "$(git -C source rev-parse HEAD)" = "$CANDIDATE_SHA"
+          git -C source bundle create ../source.bundle HEAD
+      - name: Retain exact source for implementation and review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: engine-source-${{ github.sha }}
+          path: source.bundle
+          if-no-files-found: error
+          retention-days: 7
+      - name: Install the locked Engine environment
+        working-directory: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
+          python3 -m venv "$RUNNER_TEMP/engine-env"
+          "$RUNNER_TEMP/engine-env/bin/python" -m pip install --require-hashes --only-binary=:all: -r tools/standards_contracts/requirements.lock
+      - name: Verify implementation and registered structure
+        working-directory: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python="$RUNNER_TEMP/engine-env/bin/python"
+          "$python" -m unittest discover -s tools/standards_metadata/tests
+          "$python" -m unittest discover -s tools/standards_policy_impact/tests
+          PYTHONPATH=.:tools/standards_verifier "$python" -m unittest discover -s tools/standards_verifier/tests
+          "$python" -m unittest discover -s tools/standards_engine/tests
+          PYTHONPATH=.:tools/standards_verifier "$python" tools/standards_verifier/verify.py --complete
