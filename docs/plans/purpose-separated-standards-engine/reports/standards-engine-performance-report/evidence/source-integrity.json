@@ -1,0 +1,56 @@
+{
+  "checkouts": [
+    {
+      "checkout": "Coding-Standards",
+      "head": "8750761133b66297a2bfac4e495fd1c8a893b96a",
+      "branch": "implementation/purpose-separated-standards-engine",
+      "accepted_main": "366c1d90a24bbfb50973f62b155a5f3396c0f107",
+      "tracked_diff": "",
+      "status_porcelain": ""
+    },
+    {
+      "checkout": "benchmark-checkout",
+      "head": "8750761133b66297a2bfac4e495fd1c8a893b96a",
+      "branch": "implementation/purpose-separated-standards-engine",
+      "accepted_main": "8750761133b66297a2bfac4e495fd1c8a893b96a",
+      "tracked_diff": "",
+      "status_porcelain": ""
+    },
+    {
+      "checkout": "qualified-main-checkout",
+      "head": "8750761133b66297a2bfac4e495fd1c8a893b96a",
+      "branch": "main",
+      "accepted_main": "8750761133b66297a2bfac4e495fd1c8a893b96a",
+      "tracked_diff": "",
+      "status_porcelain": ""
+    }
+  ],
+  "selected_source_sha256": {
+    "tools/standards_engine/standards_engine/engine.py": "1c163e2cd93a4354d5ad229ad727b3028d6e00c050a4554c640601e8b1742fbf",
+    "tools/standards_engine/standards_engine/mcp.py": "abe942b581905efd080fc8dff845dc92e1f6c27a0e6b5dfc747b02d6544a4881",
+    "tools/standards_engine/standards_engine/tools.py": "dc4e3add4b93dfb2de4c32aca3c838793cdb18eb49d0a953082cae1dcae57c0c",
+    "tools/standards_engine/standards_engine/context_projection.py": "cda2c10e0de915eb09440847e45c22dada2d5092091c55b3a8700a6bfd79d8de",
+    "tools/standards_identity/standards_identity/encoding.py": "577a30f295d8010df286cacd940fa5a1bae410272d9ed353d9d3298184d4628f",
+    "tools/standards_snapshots/standards_snapshots/module.py": "08dbecc15bf61d139044f50646d22ff8193d889aef75b1c08ae4b88eced438f5",
+    "tools/standards_snapshots/standards_snapshots/store.py": "75ce60863cd2e77f47bf471ba5c36963ad8427159a05396e748b748a2b8b1383",
+    "tools/repository_git/repository_git/repository.py": "ebdc15ffb94a54a4a5d6f56a49fd4d219644ef20f66114e54cb187580347e194",
+    "tools/standards_engine/PURPOSE-SEPARATION.md": "efb6c18daee56f1615f8ade7938590356b4418ab38638ef4cb759eafc28742ec",
+    "tools/standards_engine/tests/platform_harness.py": "6c19218784bdf37c9cb3edd0bc417a8fd42cdb1348cfc76ebf12a1532878a9bb",
+    "CORE-STANDARDS.md": "f6b4320dc96ec702dc3673390b45734767c53704229c8f8ef96dff48b8655900",
+    "STANDARDS-ROUTER.md": "bf74f561c40aaa16387d8559ae2353a686216eaea25c15342d7a534441cd5aeb",
+    "topics/performance.md": "ff1ce8f1e7592c14bbb8f84fd2d6fef2434e861c29ddf517fe5f9ba9d983ae40",
+    "workflows/verification.md": "06ddcd7f0f80c4459f117d242a3f664cdb6e11d7e9649e7ba2f955e5a4cf684c",
+    "topics/architecture.md": "d35471532ba216056a4a88474fac15f2aada1de866ada136efb31ce26dc06036",
+    "topics/architecture/replay.md": "678edd13bdaf6db9604c8dd4e98cc68e358d6e39eba8089d4f0ab69b52a085c5",
+    "topics/concurrency.md": "5b82d0d8ff127750d3c1501ba5fe1e6afb5cb3a3eb55fcfc25040b811d4cf313",
+    "topics/contracts.md": "3190700189e589d7baec3551ff6330ca7afd64d8f425566cb621db9dd1399532",
+    "profiles/boundaries/persistence.md": "9ec9473c865a4293433d0f22d0b82b6089fce9a72b47c7f735612a20faf1734b",
+    "topics/security.md": "6623902d266d7b831ebca661721daea4e238a5bf5b3ab5a49ec9746e3a957f05",
+    "workflows/development-proportionality.md": "2ed335f76610f0f6d896ba0021c2e3d3ba322df4cfffabb6c8108f99b08b698d"
+  },
+  "local_user_path_available": false,
+  "production_source_changes": false,
+  "normative_changes": false,
+  "candidate_optimization_implemented": false,
+  "measurement_wrappers_outside_repository": true
+}

@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 202.64125609397888, "test": "test_analysis.AnalysisWorkflowTest.test_apply_create_and_retire_owns_topology_and_commit", "qualification": "same source SHA; disposable checkout on local main, so nested test clones create main"}

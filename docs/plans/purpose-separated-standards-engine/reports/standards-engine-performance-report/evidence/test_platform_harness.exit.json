@@ -1,0 +1,1 @@
+{"returncode": 1, "elapsed_s": 30.98928213119507, "args": ["--pattern", "test_platform_harness.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

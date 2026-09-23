@@ -1,0 +1,1 @@
+{"returncode": 1, "elapsed_s": 38.43933916091919, "args": ["--pattern", "test_coverage_publication.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

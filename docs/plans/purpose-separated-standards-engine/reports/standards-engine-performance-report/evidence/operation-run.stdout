@@ -1,0 +1,115 @@
+START s0.engine_open_new
+END s0.engine_open_new 0.0036471070000061445 ok
+START s0.facade_construct
+END s0.facade_construct 0.28479900199999975 ok
+START s0.create_snapshot
+END s0.create_snapshot 15.233948413999997 ok
+START s0.query_read_0
+END s0.query_read_0 2.8882569200000034 ok
+START s0.query_read_1
+END s0.query_read_1 2.853243651000014 ok
+START s0.query_read_2
+END s0.query_read_2 2.9450300379999703 ok
+START s0.inspect_policy
+END s0.inspect_policy 2.867906268000013 ok
+START s0.route_explicit
+END s0.route_explicit 3.19512152599998 ok
+START s0.prepare_same_snapshot
+END s0.prepare_same_snapshot 5.993509637000045 ok
+START s0.resolve
+END s0.resolve 12.743021826000017 ok
+START s0.inspect_analysis
+END s0.inspect_analysis 0.00572523200003161 ok
+START s0.inspect_snapshot
+END s0.inspect_snapshot 0.0005627439999784656 ok
+START s0.engine_close
+END s0.engine_close 0.0004285219999928813 ok
+START s0.reopen_0
+END s0.reopen_0 0.004172403000040958 ok
+START s0.reopen_facade_0
+END s0.reopen_facade_0 0.2647701589999656 ok
+START s0.reopened_query_0
+END s0.reopened_query_0 2.841536691999977 ok
+START s0.reopen_1
+END s0.reopen_1 0.004645824000022003 ok
+START s0.reopen_facade_1
+END s0.reopen_facade_1 0.26397920400000885 ok
+START s0.reopened_query_1
+END s0.reopened_query_1 2.861938054999996 ok
+START s1.engine_open_new
+END s1.engine_open_new 0.0018422809999947276 ok
+START s1.facade_construct
+END s1.facade_construct 0.26844384000003174 ok
+START s1.create_snapshot
+END s1.create_snapshot 14.999295378999989 ok
+START s1.query_read_0
+END s1.query_read_0 2.851386198 ok
+START s1.query_read_1
+END s1.query_read_1 2.9156205319999913 ok
+START s1.query_read_2
+END s1.query_read_2 2.8843864529999905 ok
+START s1.inspect_policy
+END s1.inspect_policy 2.939388970999971 ok
+START s1.route_explicit
+END s1.route_explicit 3.29525634700002 ok
+START s1.prepare_same_snapshot
+END s1.prepare_same_snapshot 6.320639734999986 ok
+START s1.resolve
+END s1.resolve 12.120287040999983 ok
+START s1.inspect_analysis
+END s1.inspect_analysis 0.0060321509999994305 ok
+START s1.inspect_snapshot
+END s1.inspect_snapshot 0.0005613210000205981 ok
+START s1.engine_close
+END s1.engine_close 0.0004450470000278983 ok
+START s1.reopen_0
+END s1.reopen_0 0.0040474560000234305 ok
+START s1.reopen_facade_0
+END s1.reopen_facade_0 0.27311807900002805 ok
+START s1.reopened_query_0
+END s1.reopened_query_0 3.0625665750000053 ok
+START s1.reopen_1
+END s1.reopen_1 0.004871230999981435 ok
+START s1.reopen_facade_1
+END s1.reopen_facade_1 0.27991140300002826 ok
+START s1.reopened_query_1
+END s1.reopened_query_1 3.010045933000015 ok
+START s2.engine_open_new
+END s2.engine_open_new 0.0027411379999762175 ok
+START s2.facade_construct
+END s2.facade_construct 0.2879713190000075 ok
+START s2.create_snapshot
+END s2.create_snapshot 16.264606757999957 ok
+START s2.query_read_0
+END s2.query_read_0 3.0195219510000015 ok
+START s2.query_read_1
+END s2.query_read_1 3.0369377220000047 ok
+START s2.query_read_2
+END s2.query_read_2 2.9356448479999813 ok
+START s2.inspect_policy
+END s2.inspect_policy 2.902790402999983 ok
+START s2.route_explicit
+END s2.route_explicit 3.057167095000011 ok
+START s2.prepare_same_snapshot
+END s2.prepare_same_snapshot 5.847683467000024 ok
+START s2.resolve
+END s2.resolve 11.562000888 ok
+START s2.inspect_analysis
+END s2.inspect_analysis 0.005975886999976865 ok
+START s2.inspect_snapshot
+END s2.inspect_snapshot 0.000584817000003568 ok
+START s2.engine_close
+END s2.engine_close 0.0003741510000168091 ok
+START s2.reopen_0
+END s2.reopen_0 0.005199347999962356 ok
+START s2.reopen_facade_0
+END s2.reopen_facade_0 0.3026405969999928 ok
+START s2.reopened_query_0
+END s2.reopened_query_0 3.078581342999996 ok
+START s2.reopen_1
+END s2.reopen_1 0.005793843999981618 ok
+START s2.reopen_facade_1
+END s2.reopen_facade_1 0.3117306949999943 ok
+START s2.reopened_query_1
+END s2.reopened_query_1 3.0525170559999992 ok
+DONE

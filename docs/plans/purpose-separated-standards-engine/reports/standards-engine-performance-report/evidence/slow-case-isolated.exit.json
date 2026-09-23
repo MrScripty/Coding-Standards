@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 139.02410125732422, "args": ["--test", "test_agent_workflow.AgentWorkflowTest.test_normative_proposal_stops_at_real_pending_work"]}

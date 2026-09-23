@@ -1,0 +1,143 @@
+{
+  "observed_distinct_tests": 157,
+  "attempts": 161,
+  "consolidated_statuses": {
+    "pass": 156,
+    "skip": 0,
+    "error": 1,
+    "failure": 0
+  },
+  "per_test_is_not_one_serial_suite_run": true,
+  "scheduler_complete": true,
+  "followup_complete": true,
+  "longest_completed": [
+    {
+      "test": "test_supporting_workflow.SupportingWorkflowTest.test_coordinated_publication_and_provenance_only_revision",
+      "wall_s": 839.06457716,
+      "cpu_s": 617.979156948,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_supporting_workflow.jsonl"
+    },
+    {
+      "test": "test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database",
+      "wall_s": 264.38809278099984,
+      "cpu_s": 153.307691122,
+      "status": "pass",
+      "lane": "disposable-main fixture qualification rerun; concurrent campaign",
+      "source_log": "qualified_audit.jsonl"
+    },
+    {
+      "test": "test_navigation_indexes.NavigationIndexWorkflowTest.test_z_exact_index_proposal_requires_review_and_applies_through_engine",
+      "wall_s": 250.161738701,
+      "cpu_s": 159.509019199,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_navigation_indexes.jsonl"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_apply_create_and_retire_owns_topology_and_commit",
+      "wall_s": 179.66984623599978,
+      "cpu_s": 72.619611824,
+      "status": "pass",
+      "lane": "disposable-main fixture qualification rerun; concurrent campaign",
+      "source_log": "qualified_apply_topology.jsonl"
+    },
+    {
+      "test": "test_evidence_maintenance.EvidenceMaintenanceInterfaceTest.test_preview_and_overlap_preserve_working_tree_then_apply_retires",
+      "wall_s": 170.09449521300007,
+      "cpu_s": 27.811621846999998,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_evidence_maintenance.jsonl"
+    },
+    {
+      "test": "test_navigation_indexes.ProtectedNavigationIndexTest.test_z_declared_sections_survive_verified_index_application",
+      "wall_s": 162.93120885300004,
+      "cpu_s": 115.06860945200003,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_navigation_indexes.jsonl"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_review_composition_publishes_readiness_for_complete_analysis",
+      "wall_s": 124.78088032799997,
+      "cpu_s": 120.680856882,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_analysis.jsonl"
+    },
+    {
+      "test": "test_agent_workflow.AgentWorkflowTest.test_normative_proposal_stops_at_real_pending_work",
+      "wall_s": 119.85453770599997,
+      "cpu_s": 116.38708710799999,
+      "status": "pass",
+      "lane": "isolated serial slow-case reproduction",
+      "source_log": "slow-case-isolated.jsonl"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_relationship_only_proposals_enter_a1c_and_replay_cold",
+      "wall_s": 119.039640512,
+      "cpu_s": 114.099035275,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_analysis.jsonl"
+    },
+    {
+      "test": "test_agent_workflow.AgentWorkflowTest.test_revision_advancement_does_not_retarget_old_context",
+      "wall_s": 106.61506452999993,
+      "cpu_s": 100.177395083,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_agent_workflow.jsonl"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_apply_proposal_composes_real_verification_and_cold_readback",
+      "wall_s": 105.71184679599992,
+      "cpu_s": 37.010024707,
+      "status": "pass",
+      "lane": "disposable-main fixture qualification rerun; concurrent campaign",
+      "source_log": "qualified_apply_cold.jsonl"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_proposal_analysis_derives_inputs_and_replays_exact_revision",
+      "wall_s": 75.324488675,
+      "cpu_s": 72.27664687999999,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_analysis.jsonl"
+    },
+    {
+      "test": "test_agent_workflow.AgentWorkflowTest.test_review_is_explicit_and_current_authorization_is_required",
+      "wall_s": 73.57862857499981,
+      "cpu_s": 70.58365419900001,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_agent_workflow.jsonl"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_equal_transition_is_idempotent_and_different_evidence_branches",
+      "wall_s": 48.434708839999985,
+      "cpu_s": 48.375320581000004,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_analysis.jsonl"
+    },
+    {
+      "test": "test_agent_workflow.AgentWorkflowTest.test_reference_proposal_composes_analysis_without_review_or_application",
+      "wall_s": 45.97590149400003,
+      "cpu_s": 43.901939248000005,
+      "status": "pass",
+      "lane": "isolated stores/checkouts; concurrent module campaign",
+      "source_log": "test_agent_workflow.jsonl"
+    }
+  ],
+  "failures": [
+    {
+      "test": "test_platform_harness.PlatformHarnessTest.test_closed_store_round_trip_uses_public_operations",
+      "status": "error",
+      "source_log": "test_platform_harness.jsonl",
+      "wall_s": 28.083518951000087
+    }
+  ]
+}

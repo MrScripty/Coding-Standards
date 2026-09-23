@@ -319,7 +319,7 @@ The first content work should migrate Core, the application-relevant Router/fact
 
 - Acceptance status: `accepted`
 - Final status: `Accepted`
-- Deferred follow-ups: normative content migration and downstream effectiveness evaluation, owned by the separate guide and existing effectiveness effort.
+- Deferred follow-ups: normative content migration and downstream effectiveness evaluation, owned by the separate guide and existing effectiveness effort; the separately [proposed performance design](reports/standards-engine-performance-report/design.md) requires current-branch qualification before implementation.
 
 ## Source baseline
 

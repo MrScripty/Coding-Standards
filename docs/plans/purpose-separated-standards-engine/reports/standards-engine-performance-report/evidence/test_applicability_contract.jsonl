@@ -1,0 +1,5 @@
+{"event": "start", "test": "test_applicability_contract.ApplicabilityContractTest.test_former_applicability_implementations_are_not_fallbacks", "at": 1790192674.9927163}
+{"event": "end", "test": "test_applicability_contract.ApplicabilityContractTest.test_former_applicability_implementations_are_not_fallbacks", "wall_s": 0.0002383270000336779, "cpu_s": 0.00023688200000027138, "status": "pass", "spans": {}, "setup_s": 1.5430000530614052e-06, "body_s": 0.0001091029998860904, "teardown_s": 1.0119999842572724e-06}
+{"event": "start", "test": "test_applicability_contract.ApplicabilityContractTest.test_runtime_domains_cover_the_public_serialized_applicability_shapes", "at": 1790192674.9929965}
+{"event": "end", "test": "test_applicability_contract.ApplicabilityContractTest.test_runtime_domains_cover_the_public_serialized_applicability_shapes", "wall_s": 0.0011829229999875679, "cpu_s": 0.0011836999999998987, "status": "pass", "spans": {}, "setup_s": 5.609999789157882e-07, "body_s": 0.001134931000024153, "teardown_s": 9.320001481682993e-07}
+{"event": "summary", "total_s": 1.5766220230000272, "run": 2, "errors": 0, "failures": 0, "skips": 0}

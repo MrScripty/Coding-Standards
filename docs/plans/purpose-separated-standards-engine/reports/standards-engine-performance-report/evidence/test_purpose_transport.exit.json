@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 72.52588272094727, "args": ["--pattern", "test_purpose_transport.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}
