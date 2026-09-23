@@ -275,6 +275,67 @@ class LogicalAuthoringTests(unittest.TestCase):
         self.assertEqual(projection.analysis_module_ids, ("topic.architecture",))
         self.assertNotIn("path", change_set.as_contract()["edits"][0])
 
+    def test_whole_module_rescope_preserves_identity_and_explicit_meaning(self):
+        module = self.compiled.corpus.resolve_module("topic.architecture")
+        units = self.compiled.corpus.policy_unit_corpus.for_module(module.module_id)
+        original = dict(self.base.files)[module.path].decode()
+        body = original.split(f"- Canonical owner: `{module.path}`\n\n", 1)[1]
+        selected = "topic.architecture.composed-design-admission"
+        body = body.replace("## Composed Design Admission", "## Composed Artifact Review", 1)
+        edit = {"kind": "revise-standard", "standard": {
+            "id": module.module_id, "title": original.splitlines()[0].removeprefix("# "),
+            "role": module.role, "level": module.level, "applies_when": module.applies_when,
+            "does_not_apply_when": module.excludes, "verification": module.verification, "body": body,
+        }, "scope_updates": [{
+            "policy": unit.id,
+            "heading_path": ["Composed Artifact Review"] if unit.id == selected else list(unit.heading_path),
+            "semantics": {"kind": "preserve", "semantic_revision": unit.semantic_revision,
+                          "intent": "Retain the exact obligation while revising its heading."},
+        } for unit in units]}
+        projected = LogicalAuthoringCompiler(StandardsEngine._compile).compile(
+            self.base, LogicalProgram((self.change_set([edit]),)),
+            base_repository_paths=self.repository_paths,
+        )
+        changed = projected.compiled.corpus.policy_unit_corpus.active_by_id(selected)
+        self.assertEqual(changed.heading_path, ("Composed Artifact Review",))
+        self.assertEqual(changed.semantic_revision, 1)
+        self.assertEqual({unit.id for unit in projected.compiled.corpus.policy_unit_corpus.for_module(module.module_id)}, {unit.id for unit in units})
+        for intent in projected.semantic_proposals:
+            self.assertEqual(intent["accepted_semantic_revision"], intent["proposed_semantic_revision"])
+        invalid = {**edit, "scope_updates": edit["scope_updates"][:-1]}
+        with self.assertRaises(AuthoringError) as rejected:
+            LogicalAuthoringCompiler(StandardsEngine._compile).compile(
+                self.base, LogicalProgram((self.change_set([invalid]),)),
+                base_repository_paths=self.repository_paths,
+            )
+        self.assertEqual(rejected.exception.failure.code, "AUTHORING.SCOPE_DISPOSITIONS_REQUIRED")
+
+    def test_supporting_records_and_withdrawal_use_the_final_candidate(self):
+        from tools.standards_engine.standards_engine.supporting import record_state
+        standard = self.new_standard_edit()
+        identity = standard["standard"]["id"]
+        initial = self.change_set([
+            {"kind": "approve-application-content", "target": identity},
+            {"kind": "put-provenance", "record": {
+                "id": "provenance.logical-fixture", "subject": identity,
+                "origin": "unrecorded", "rationale": "", "evidence": [],
+            }}, standard,
+        ])
+        compiler = LogicalAuthoringCompiler(StandardsEngine._compile)
+        first = compiler.compile(self.base, LogicalProgram((initial,)), base_repository_paths=self.repository_paths)
+        record = first.compiled.supporting.provenance["provenance.logical-fixture"]
+        self.assertEqual(record_state(first.compiled, record), "current")
+        self.assertEqual(first.compiled.supporting.exposure_state(identity, first.compiled.materials[identity].binding), "current")
+        withdrawal = self.change_set([
+            {"kind": "withdraw-application-content", "target": identity},
+            {"kind": "retire-provenance", "id": record.id},
+        ])
+        second = compiler.compile(self.base, LogicalProgram((initial, withdrawal)), base_repository_paths=self.repository_paths)
+        self.assertEqual(second.compiled.supporting.exposure_state(identity, second.compiled.materials[identity].binding), "unreviewed")
+        self.assertTrue(second.compiled.supporting.provenance[record.id].retired)
+        self.assertFalse(first.compiled.supporting.provenance[record.id].retired)
+        self.assertEqual(first.compiled.materials[identity].binding, second.compiled.materials[identity].binding)
+
     def test_compiler_revises_one_registered_policy_and_derives_analysis_input(
         self,
     ) -> None:
@@ -318,7 +379,7 @@ class LogicalAuthoringTests(unittest.TestCase):
         )
         self.assertIsNotNone(unit)
         assert unit is not None
-        self.assertEqual(unit.semantic_revision, 1)
+        self.assertEqual(unit.semantic_revision, 2)
         self.assertEqual(
             unit.content,
             "## Composed Design Admission\n\n" + content,
@@ -420,7 +481,8 @@ class LogicalAuthoringTests(unittest.TestCase):
         assert unit is not None
         self.assertEqual(unit.module, "topic.contracts")
         self.assertEqual(unit.semantic_revision, 1)
-        self.assertEqual(projection.semantic_proposals, ())
+        self.assertEqual(projection.semantic_proposals[0]["accepted_semantic_revision"], 1)
+        self.assertEqual(projection.semantic_proposals[0]["proposed_semantic_revision"], 1)
         self.assertEqual(
             {
                 item.declaration_source
@@ -505,7 +567,7 @@ class LogicalAuthoringTests(unittest.TestCase):
         )
         proposed = projection.compiled.corpus.policy_unit_corpus.active_by_id(unit.id)
         assert proposed is not None
-        self.assertEqual(proposed.semantic_revision, 1)
+        self.assertEqual(proposed.semantic_revision, 2)
         self.assertIn("whenever a material design", proposed.content)
         self.assertEqual(
             projection.semantic_proposals,

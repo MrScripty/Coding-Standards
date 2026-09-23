@@ -43,7 +43,7 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
     raise SystemExit(main())
 """)
 
-        def parameters(interrupted=False):
+        def parameters(interrupted=False, *, purpose="authoring"):
             launch = (
                 [str(interrupted_server)]
                 if interrupted
@@ -51,7 +51,7 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
             )
             return StdioServerParameters(
                 command=engine_python,
-                args=["-P", *launch, "--repo-root", str(repo)],
+                args=["-P", *launch, "--purpose", purpose, "--repo-root", str(repo)],
                 env={**os.environ, "PYTHONPATH": str(ROOT)},
             )
 
@@ -226,6 +226,55 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
                 )
                 assert "Revised fixture text." in readback["content"]
 
+                change = reference_change(repo, "purpose-client")
+                selected = change["edits"][0]["standard"]["id"]
+                change["edits"][0]["requires"] = []
+                change["edits"].extend([
+                    {"kind": "approve-application-content", "target": selected},
+                    {"kind": "put-provenance", "record": {
+                        "id": "provenance.purpose-client", "subject": selected,
+                        "origin": "current-justification", "rationale": "AUTHORING_SDK_MARKER_843015",
+                        "evidence": [evidence(repo)],
+                    }},
+                ])
+                pending = await call(client, "propose", {"change_set": change})
+                seen = set()
+                while pending["status"] == "needs-action":
+                    key = json.dumps(pending["context"], sort_keys=True)
+                    assert key not in seen, pending
+                    seen.add(key)
+                    assert not pending["outcome"].get("fact_requirements"), pending
+                    obligation = next(item for item in pending["outcome"]["obligations"] if item["state"] == "required")
+                    assert "impact-disposition" in obligation["permitted_submissions"], pending
+                    pending = await call(client, "resolve_workflow", {
+                        "context": pending["context"], "submission": {
+                            "kind": "impact-disposition", "obligation": obligation["handle"],
+                            "fingerprint": obligation["fingerprint"], "result": "confirmed",
+                            "rationale": "The isolated SDK fixture approves this exact supporting change.",
+                            "evidence": [evidence(repo)],
+                        },
+                    })
+                assert pending["status"] == "complete", pending
+                ready = await call(client, "review", {"context": pending["context"], "decisions": decisions(repo)})
+                published = await call(client, "apply", {"context": ready["context"]})
+                assert published["status"] == "applied", published
+                author_reason = await call(client, "read", {"target": "provenance.purpose-client"})
+                assert author_reason["record"]["rationale"] == "AUTHORING_SDK_MARKER_843015"
+
+        async with stdio_client(parameters(purpose="application")) as streams:
+            async with ClientSession(*streams, read_timeout_seconds=timedelta(seconds=600)) as client:
+                await client.initialize()
+                application_catalog = await client.list_tools()
+                application_names = {tool.name for tool in application_catalog.tools}
+                assert {"route", "read", "related", "routing_facts", "inspect"} <= application_names
+                assert application_names <= {"route", "read", "related", "routing_facts", "inspect", "query"}
+                visible = await call(client, "read", {"target": selected, "detail": "full"})
+                assert visible["kind"] == "application-read-result", visible
+                assert "This is an isolated workflow test reference." in visible["content"]
+                assert "AUTHORING_SDK_MARKER_843015" not in json.dumps(visible)
+                hidden = await call(client, "read", {"target": "provenance.purpose-client"}, error=True)
+                assert hidden["code"] == "APPLICATION.CONTENT_UNAVAILABLE", hidden
+
         return {
             "client": "official MCP Python SDK",
             "focused_tools": len(names),
@@ -242,6 +291,9 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
             "accepted_text_readback": True,
             "stale_context_rejected": True,
             "resume_explicit": True,
+            "purpose_separated_catalog": True,
+            "application_readback": True,
+            "decision_provenance_isolated": True,
         }
 
 

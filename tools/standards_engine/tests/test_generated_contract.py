@@ -23,6 +23,7 @@ from tools.standards_contracts.standards_contracts import (
 )
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import _generated_contract as generated
+from tools.standards_engine.standards_engine.context_projection import Purpose
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -45,7 +46,7 @@ class GeneratedContractTest(unittest.TestCase):
         )
         from tools.standards_engine.standards_engine.tools import _contracts
 
-        with StandardsEngine.open_repository(REPO_ROOT, durable=False) as engine:
+        with StandardsEngine.open_repository(REPO_ROOT, durable=False, purpose="authoring") as engine:
             facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
             created = facade.create_snapshot({"kind": "create-snapshot"})
             self.assertEqual(created["kind"], "create-snapshot-result", created)
@@ -114,7 +115,7 @@ class GeneratedContractTest(unittest.TestCase):
         )
         from tools.standards_engine.standards_engine.tools import _contracts
 
-        with StandardsEngine.open_repository(REPO_ROOT, durable=False) as engine:
+        with StandardsEngine.open_repository(REPO_ROOT, durable=False, purpose="authoring") as engine:
             facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
             with (
                 mock.patch.object(
@@ -149,6 +150,7 @@ class GeneratedContractTest(unittest.TestCase):
         with StandardsEngine.open_repository(
             REPO_ROOT, durable=False,
             execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer(REPO_ROOT)),
+            purpose="authoring",
         ) as engine:
             facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
             with mock.patch(
@@ -169,7 +171,7 @@ class GeneratedContractTest(unittest.TestCase):
     def test_router_read_exposes_editable_definitions_only_when_requested(self):
         from tools.standards_engine.standards_engine.tools import _contracts
 
-        with StandardsEngine.open_repository(REPO_ROOT, durable=False) as engine:
+        with StandardsEngine.open_repository(REPO_ROOT, durable=False, purpose="authoring") as engine:
             facade = AgentToolFacade(engine, _contracts(REPO_ROOT))
             created = facade.create_snapshot({"kind": "create-snapshot"})
             self.assertEqual(created["kind"], "create-snapshot-result", created)
@@ -259,11 +261,11 @@ class GeneratedContractTest(unittest.TestCase):
             self.assertEqual(observed["condition"], rule["condition"])
 
     def test_local_facade_binds_always_allow_authorization(self) -> None:
-        engine = SimpleNamespace(close=lambda: None)
+        engine = SimpleNamespace(close=lambda: None, purpose=Purpose.AUTHORING)
         with mock.patch.object(
             StandardsEngine, "open_repository", return_value=engine
         ) as open_repository:
-            facade = AgentToolFacade.open_repository(REPO_ROOT)
+            facade = AgentToolFacade.open_repository(REPO_ROOT, purpose="authoring")
 
         self.assertIs(facade._engine, engine)
         context = open_repository.call_args.kwargs["execution_context"]
@@ -338,7 +340,7 @@ class GeneratedContractTest(unittest.TestCase):
     def test_interface_operations_bind_generated_calls_results_and_facade(self) -> None:
         schema, interface = _canonical_contracts()
         contracts = compile_contracts(schema, interface)
-        facade = AgentToolFacade(object(), contracts)
+        facade = AgentToolFacade(SimpleNamespace(purpose=Purpose.AUTHORING), contracts)
         for operation in contracts.interface.operations:
             with self.subTest(operation=operation.id):
                 self.assertEqual(
@@ -373,6 +375,7 @@ class GeneratedContractTest(unittest.TestCase):
             (),
         )
         engine = SimpleNamespace(
+            purpose=Purpose.AUTHORING,
             prepare=lambda call: observed.append(call) or rejected,
         )
         facade = AgentToolFacade(engine, contracts)

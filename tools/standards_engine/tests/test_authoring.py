@@ -107,7 +107,7 @@ def _authoring(
 
 
 def _engine_with_stub_authoring(snapshots: SnapshotModule) -> StandardsEngine:
-    engine = StandardsEngine(object(), snapshots)  # type: ignore[arg-type]
+    engine = StandardsEngine(object(), snapshots, purpose="authoring")  # type: ignore[arg-type]
     engine._authoring = _authoring(snapshots)
     return engine
 
@@ -608,7 +608,7 @@ from pathlib import Path
 from tools.standards_engine.standards_engine import AgentToolFacade
 
 request = json.loads(sys.stdin.read())
-with AgentToolFacade.open_repository(Path(request["root"])) as facade:
+with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring") as facade:
     print(json.dumps(facade.find_proposals({"kind": "find-proposals"}), sort_keys=True))
 """
             environment = dict(os.environ)
@@ -921,7 +921,7 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                 AggregateRecord(revision_id, "proposal-revision", payload, (base,)),
             )
             with AgentToolFacade(
-                StandardsEngine(object(), snapshots),  # type: ignore[arg-type]
+                StandardsEngine(object(), snapshots, purpose="authoring"),  # type: ignore[arg-type]
                 _contracts(REPOSITORY_ROOT),
             ) as facade:
                 rejected = facade.find_proposals({"kind": "find-proposals"})

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 30,
+  "interface_schema_version": 31,
   "examples": [
     {
       "name": "create-snapshot",
@@ -164,7 +164,7 @@
         "analysis": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 6
+          "schema_version": 7
         },
         "decisions": [
           {
@@ -314,7 +314,7 @@
             }
           ],
           "semantic_proposals": [],
-          "contract_version": 5
+          "contract_version": 6
         }
       }
     },
@@ -325,7 +325,7 @@
         "handle": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 6
+          "schema_version": 7
         }
       }
     },
@@ -561,7 +561,7 @@
         "context": {
           "kind": "analysis-handle",
           "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 6
+          "schema_version": 7
         },
         "decisions": [
           {
@@ -647,6 +647,46 @@
           "kind": "proposal-revision-handle",
           "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "application-read",
+      "definition": "ApplicationReadCall",
+      "value": {
+        "target": "core"
+      }
+    },
+    {
+      "name": "application-query",
+      "definition": "ApplicationQueryCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "request": {
+          "kind": "read",
+          "target": "core",
+          "detail": "full"
+        }
+      }
+    },
+    {
+      "name": "application-inspect",
+      "definition": "ApplicationInspectCall",
+      "value": {
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "core",
+          "schema_version": 5
         }
       }
     }

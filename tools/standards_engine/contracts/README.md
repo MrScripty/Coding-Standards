@@ -1,4 +1,22 @@
-# Standards Engine A2 Contracts
+# Standards Engine Contracts
+
+## Current contract: interface 31
+
+Required host purpose selects application or authoring operation variants. The
+canonical interface declares each variant's exact input/result roots, and the
+compiler generates their shared schema authority. Application projections have
+closed result fields and bounded errors; their catalogs omit authoring schemas.
+
+New logical edits maintain decision provenance, registered prompt/template
+content, and exact application exposure. Whole-standard revisions can explicitly
+update all registered scopes through `scope_updates`. Analysis request 6 /
+result-state 7 accept explicit equal-revision preservation or next-revision
+semantic change against the actual compiled candidate. Older Analysis records
+are not reinterpreted. Unchanged Snapshot/storage primitives retain their own
+versions. See [the implementation contract](../PURPOSE-SEPARATION.md).
+
+The version notes below document earlier design increments, not supported
+compatibility paths or the current purpose-less launch contract.
 
 This directory owns the serialized public shape of the Standards Engine
 interface. Runtime policy meaning, identity construction, persistence,

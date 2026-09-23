@@ -12,6 +12,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus,
     ContentSourceInput,
+    SupportingContent,
 )
 
 from .metadata import metadata_dependency_source
@@ -27,6 +28,7 @@ def standards_navigation_registry(
     policy_impact_registry: str = POLICY_IMPACT_REGISTRY,
     *,
     compiled_policy_impact: CompiledPolicyImpactSet | None = None,
+    supporting: SupportingContent | None = None,
 ) -> EdgeRegistry:
     """Build the explicit graph view used for canonical standards navigation."""
 
@@ -43,6 +45,9 @@ def standards_navigation_registry(
         PolicyUnitGraphSource(corpus.policy_unit_corpus),
         PolicyImpactSource(compiled),
     )
+    if supporting is not None:
+        from tools.standards_policy_impact.standards_policy_impact import DecisionProvenanceSource
+        sources = (*sources, DecisionProvenanceSource(supporting))
     return EdgeRegistry(
         Path("/"),
         sources,

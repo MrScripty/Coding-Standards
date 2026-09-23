@@ -1,9 +1,17 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from types import MappingProxyType
 from typing import Mapping
+
+
+@dataclass(frozen=True, slots=True)
+class OperationVariant:
+    """Named wire projection; the composition boundary selects the variant."""
+
+    input_definition: str
+    result_definitions: tuple[str, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -13,8 +21,21 @@ class OperationContract:
     result_definitions: tuple[str, ...]
     capability: str | None
     capability_by_submission: Mapping[str, str]
+    variants: Mapping[str, OperationVariant] = field(default_factory=dict)
+
+    def select_variant(self, name: str) -> OperationContract:
+        variant = self.variants[name]
+        return replace(self, input_definition=variant.input_definition,
+                       result_definitions=variant.result_definitions, variants={})
+
+    @property
+    def roots(self) -> tuple[str, ...]:
+        return (self.input_definition, *self.result_definitions,
+                *(root for variant in self.variants.values()
+                  for root in (variant.input_definition, *variant.result_definitions)))
 
     def __post_init__(self) -> None:
+        object.__setattr__(self, "variants", MappingProxyType(dict(self.variants)))
         object.__setattr__(
             self,
             "capability_by_submission",
@@ -74,5 +95,6 @@ __all__ = (
     "FieldProjection",
     "InterfaceContract",
     "OperationContract",
+    "OperationVariant",
     "ProjectionArtifacts",
 )

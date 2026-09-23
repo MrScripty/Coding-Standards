@@ -38,3 +38,11 @@ Run focused tests with:
 ```bash
 python3 -m unittest discover -s tools/standards_policy_impact/tests
 ```
+
+## Descriptive decision provenance
+
+`DecisionProvenanceSource` derives neutral graph nodes and descriptive subject
+and supersession edges from captured provenance records. Each record owns its
+subject association once. The `decision-provenance` group has no normative
+prerequisite or automatic impact-propagation meaning. Purpose-specific Engine
+views select eligible topology before traversal; the generic graph stays neutral.

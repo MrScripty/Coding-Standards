@@ -367,6 +367,9 @@ class ReplaceStandardRelationships:
 def _edit(value: object) -> LogicalEdit:
     raw = _mapping(value, "logical edit")
     kind = raw.get("kind")
+    from .supporting_authoring import SUPPORT_EDIT_KINDS, parse_edit
+    if kind in SUPPORT_EDIT_KINDS:
+        return parse_edit(raw)
     if kind == "revise-policy-unit":
         return RevisePolicyUnit.from_mapping(raw)
     if kind == "replace-standard-relationships":
@@ -456,7 +459,20 @@ def _edit(value: object) -> LogicalEdit:
         _text(raw["rationale"], "coverage audit rationale")
         return _structured(raw, target=policy, facet="coverage-audit")
     if kind == "revise-standard":
-        _exact(raw, {"kind", "standard"}, "revise-standard edit")
+        fields = {"kind", "standard"} | ({"scope_updates"} if "scope_updates" in raw else set())
+        _exact(raw, fields, "revise-standard edit")
+        if "scope_updates" in raw:
+            if not isinstance(raw["scope_updates"], list):
+                raise _invalid("AUTHORING.INVALID_SCOPE", "Scope updates require an array.")
+            for update in raw["scope_updates"]:
+                update = _mapping(update, "scope update")
+                _exact(update, {"policy", "heading_path", "semantics"}, "scope update")
+                _semantic_id(update["policy"], "policy")
+                if not isinstance(update["heading_path"], list) or not update["heading_path"]:
+                    raise _invalid("AUTHORING.INVALID_SCOPE", "A scope needs a heading path.")
+                for heading in update["heading_path"]:
+                    _text(heading, "heading")
+                _semantic_intent(update["semantics"])
         standard = _standard_content(raw["standard"])
         return _structured(raw, target=str(standard["id"]), facet="standard")
     if kind == "rewrite-navigation-index":
@@ -931,13 +947,18 @@ class LogicalAuthoringCompiler:
         repository_paths = selected_repository_paths
         for change_set in program.change_sets:
             before = dict(files)
+            from .supporting_authoring import SUPPORT_EDIT_KINDS, begin_edits, finish_edits
+            support_edits = [edit.as_contract() for edit in change_set.edits
+                             if edit.as_contract()["kind"] in SUPPORT_EDIT_KINDS]
+            begin_edits(files, support_edits, base_compiled, base_snapshot)
             routing_edits = [
                 edit.as_contract()
                 for edit in change_set.edits
                 if edit.as_contract()["kind"] in _ROUTING_EDITS
             ]
             routing_applied = False
-            for edit in sorted(change_set.edits, key=_projection_order):
+            for edit in sorted((edit for edit in change_set.edits
+                                if edit.as_contract()["kind"] not in SUPPORT_EDIT_KINDS), key=_projection_order):
                 if edit.as_contract()["kind"] in _ROUTING_EDITS:
                     if not routing_applied:
                         _edit_routing(files, routing_edits)
@@ -950,6 +971,7 @@ class LogicalAuthoringCompiler:
                     base_snapshot,
                     compile_current,
                 )
+            finish_edits(files, support_edits, base_compiled, base_snapshot, compile_current)
             if files == before and not any(
                 edit.as_contract()["kind"] == "audit-policy-unit"
                 for edit in change_set.edits
@@ -1017,7 +1039,7 @@ class LogicalAuthoringCompiler:
         elif kind == "create-standard":
             self._create_standard(files, raw)
         elif kind == "revise-standard":
-            self._revise_standard(files, raw)
+            self._revise_standard(files, raw, base_compiled.corpus)
         elif kind == "rewrite-navigation-index":
             from .navigation_indexes import rewrite_index
 
@@ -1120,6 +1142,7 @@ class LogicalAuthoringCompiler:
     def _revise_standard(
         files: dict[str, bytes],
         edit: Mapping[str, object],
+        base_corpus: Any,
     ) -> None:
         corpus = load_canonical_standards_corpus(FrozenContentSource(files))
         standard = _mapping(edit["standard"], "standard content")
@@ -1142,6 +1165,23 @@ class LogicalAuthoringCompiler:
             module.specializes,
             module.path,
         )
+        if "scope_updates" in edit:
+            updates = edit["scope_updates"]
+            units = corpus.policy_unit_corpus.for_module(module.module_id)
+            if ({item["policy"] for item in updates} != {unit.id for unit in units}
+                    or len(updates) != len(units)):
+                raise _invalid("AUTHORING.SCOPE_DISPOSITIONS_REQUIRED",
+                               "A whole-module rescope addresses each registered policy exactly once.")
+            by_id = {unit.id: unit for unit in units}
+            for update in updates:
+                unit = by_id[update["policy"]]
+                active, retired = _policy_sidecar(files[unit.source])
+                declaration = _active_declaration(active, unit.id)
+                declaration["heading_path"] = list(update["heading_path"])
+                declaration["semantic_revision"] = _semantic_revision(
+                    unit.id, unit, update["semantics"], base_corpus)
+                files[unit.source] = _render_policy_sidecar(active, retired)
+
 
     @staticmethod
     def _replace_standard_relationships(
@@ -1900,16 +1940,16 @@ def _semantic_revision(
     if (
         semantics["accepted_semantic_revision"] != accepted.semantic_revision
         or semantics["proposed_semantic_revision"] != accepted.semantic_revision + 1
-        or current.semantic_revision != accepted.semantic_revision
+        or current.semantic_revision not in {accepted.semantic_revision, accepted.semantic_revision + 1}
     ):
         raise _invalid(
             "AUTHORING.INVALID_SEMANTIC_REVISION",
             "semantic change must bind the base accepted revision and its single proposed successor",
         )
-    # A1c keeps the accepted semantic revision in the proposed corpus. The
-    # requested successor is carried separately by SemanticProposal until an
-    # accepted application materializes it.
-    return accepted.semantic_revision
+    # The proposed corpus is the exact publication candidate. Its declared
+    # revision already carries the reviewed successor, so publication does not
+    # rewrite metadata or invalidate application/provenance bindings afterward.
+    return int(semantics["proposed_semantic_revision"])
 
 
 def _impact_registry(content: bytes) -> dict[str, object]:
@@ -2257,28 +2297,35 @@ def _semantic_proposals(
     compiled: Any,
     program: LogicalProgram,
 ) -> tuple[dict[str, object], ...]:
-    semantic_intents: dict[str, tuple[int | None, str]] = {}
+    # Revision equality is an explicit preservation decision; a next revision
+    # declares changed meaning. Both bind exact candidate structure for review.
+    semantic_intents: dict[str, tuple[int | None, int, str]] = {}
+
+    def retain(policy: str, semantics: Mapping[str, object]) -> None:
+        if semantics["kind"] == "change":
+            semantic_intents[policy] = (
+                int(semantics["accepted_semantic_revision"]),
+                int(semantics["proposed_semantic_revision"]), str(semantics["intent"]),
+            )
+        elif policy not in semantic_intents:
+            revision = int(semantics["semantic_revision"])
+            semantic_intents[policy] = (revision, revision, str(semantics["intent"]))
+
     for change_set in program.change_sets:
         for edit in change_set.edits:
             if isinstance(edit, RevisePolicyUnit):
-                if edit.semantics["kind"] == "change":
-                    semantic_intents[edit.policy] = (
-                        int(edit.semantics["accepted_semantic_revision"]),
-                        str(edit.semantics["intent"]),
-                    )
+                retain(edit.policy, edit.semantics)
             elif isinstance(edit, StructuredEdit):
                 raw = edit.as_contract()
                 if raw["kind"] == "create-standard":
-                    for unit_value in raw["policy_units"]:  # type: ignore[union-attr]
+                    for unit_value in raw["policy_units"]:
                         unit = _mapping(unit_value, "new policy unit")
-                        semantic_intents[str(unit["id"])] = (None, str(unit["intent"]))
+                        semantic_intents[str(unit["id"])] = (None, 1, str(unit["intent"]))
+                elif raw["kind"] == "revise-standard":
+                    for update in raw.get("scope_updates", []):
+                        retain(update["policy"], update["semantics"])
                 elif raw["kind"] == "move-policy-unit":
-                    semantics = _mapping(raw["semantics"], "policy semantic intent")
-                    if semantics["kind"] == "change":
-                        semantic_intents[str(raw["policy"])] = (
-                            int(semantics["accepted_semantic_revision"]),
-                            str(semantics["intent"]),
-                        )
+                    retain(str(raw["policy"]), _mapping(raw["semantics"], "policy semantic intent"))
     base_corpus = base_compiled.corpus
     proposed_corpus = compiled.corpus
     proposals: list[dict[str, object]] = []
@@ -2301,8 +2348,11 @@ def _semantic_proposals(
             )
         if semantic is None:
             continue
-        accepted_revision, intent = semantic
-        expected_revision = 1 if accepted is None else accepted.semantic_revision + 1
+        accepted_revision, proposed_revision, intent = semantic
+        allowed_revisions = {1} if accepted is None else {
+            accepted.semantic_revision, accepted.semantic_revision + 1}
+        if proposed_revision not in allowed_revisions:
+            raise _invalid("AUTHORING.INVALID_SEMANTIC_REVISION", "Bind preservation or the next semantic revision.")
         if accepted_revision != (
             None if accepted is None else accepted.semantic_revision
         ):
@@ -2310,17 +2360,16 @@ def _semantic_proposals(
                 "AUTHORING.INVALID_SEMANTIC_REVISION",
                 f"semantic intent for {policy!r} does not bind the base revision",
             )
-        corpus_revision = 1 if accepted is None else accepted.semantic_revision
-        if proposed.semantic_revision != corpus_revision:
+        if proposed.semantic_revision != proposed_revision:
             raise _invalid(
                 "AUTHORING.INVALID_SEMANTIC_REVISION",
-                f"proposed corpus for {policy!r} must retain accepted revision {corpus_revision}",
+                f"proposed corpus for {policy!r} must contain declared revision {proposed_revision}",
             )
         proposals.append(
             {
                 "policy": policy,
                 "accepted_semantic_revision": accepted_revision,
-                "proposed_semantic_revision": expected_revision,
+                "proposed_semantic_revision": proposed_revision,
                 "intent": intent,
                 "structural_digest": proposed.structural_digest,
             }

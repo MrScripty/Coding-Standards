@@ -19,6 +19,7 @@ STANDARDS_SPECIALIZES = "standards-specializes"
 
 class ChangeKind(str, Enum):
     NAVIGATION_INDEX = "navigation-index"
+    SUPPORTING_CONTENT = "supporting-content"
     MODULE = "module"
     MODIFICATION = "modification"
     ADDITION = "addition"
@@ -258,6 +259,7 @@ def classify_changes(
     accepted_module_ids: Iterable[str] = (),
     proposed_module_ids: Iterable[str] = (),
     changed_navigation_ids: Iterable[str] = (),
+    changed_supporting_ids: Iterable[str] = (),
 ) -> tuple[ClassifiedChange, ...]:
     selected = tuple(descriptors)
     proposals = tuple(semantic_proposals)
@@ -286,6 +288,7 @@ def classify_changes(
     accepted_modules = set(accepted_module_ids)
     proposed_modules = set(proposed_module_ids)
     navigation_ids = set(changed_navigation_ids)
+    supporting_ids = set(changed_supporting_ids)
     results: list[ClassifiedChange] = []
     for descriptor in selected:
         identities = set((*descriptor.accepted_ids, *descriptor.proposed_ids))
@@ -322,6 +325,7 @@ def classify_changes(
                 accepted_modules,
                 proposed_modules,
                 navigation_ids,
+                supporting_ids,
             )
         )
 
@@ -344,7 +348,15 @@ def _classify_change(
     accepted_modules: set[str],
     proposed_modules: set[str],
     navigation_ids: set[str],
+    supporting_ids: set[str],
 ) -> ClassifiedChange:
+    if descriptor.kind is ChangeKind.SUPPORTING_CONTENT:
+        if (len(descriptor.accepted_ids) != 1 or descriptor.accepted_ids != descriptor.proposed_ids
+                or descriptor.accepted_module is not None or descriptor.proposed_module is not None
+                or descriptor.scope.kind != "whole-artifact"
+                or descriptor.accepted_ids[0] not in supporting_ids):
+            raise _shape_error(ChangeKind.SUPPORTING_CONTENT)
+        return ClassifiedChange(descriptor, (), GraphSeedSelection((), (), (), ()))
     if descriptor.kind is ChangeKind.NAVIGATION_INDEX:
         if (
             len(descriptor.accepted_ids) != 1
@@ -456,18 +468,20 @@ def _modification(
             "identity, locator, ownership, or lifecycle changes are not modifications",
             observed=policy_id,
         )
-    if before.semantic_revision != after.semantic_revision:
+    if before.semantic_revision != after.semantic_revision and policy_id not in proposals:
         raise _error(
             "CHANGE.ACCEPTED_REVISION_MUTATED",
-            "a proposed snapshot must retain the accepted semantic revision",
+            "a changed semantic revision requires an exact explicit proposal",
             observed=policy_id,
         )
 
     semantic = proposals.get(policy_id)
     if semantic is not None:
         _semantic_overlay(semantic, before.semantic_revision, after)
-        classification = ChangeClassification.SEMANTICALLY_CHANGED
-        semantic_state = SemanticState.PROPOSED
+        preserved = semantic.proposed_semantic_revision == before.semantic_revision
+        classification = (ChangeClassification.REPRESENTATION_ONLY_CANDIDATE if preserved
+                          else ChangeClassification.SEMANTICALLY_CHANGED)
+        semantic_state = SemanticState.ACCEPTED_UNCHANGED if preserved else SemanticState.PROPOSED
         proposed_revision = semantic.proposed_semantic_revision
     elif before.representation_digest == after.representation_digest:
         classification = ChangeClassification.UNCHANGED
@@ -660,10 +674,10 @@ def _move(
             "a move cannot alter identity aliases or predecessor/successor lifecycle",
             observed=policy_id,
         )
-    if before.semantic_revision != after.semantic_revision:
+    if before.semantic_revision != after.semantic_revision and policy_id not in proposals:
         raise _error(
             "CHANGE.ACCEPTED_REVISION_MUTATED",
-            "a proposed move must retain the accepted semantic revision",
+            "a moved semantic revision requires an exact explicit proposal",
             observed=policy_id,
         )
     classification, state, proposed_revision = _classify_existing(
@@ -888,15 +902,16 @@ def _semantic_overlay(
     accepted_revision: int | None,
     proposed: PolicyUnit,
 ) -> None:
-    expected = 1 if accepted_revision is None else accepted_revision + 1
+    supported = {1} if accepted_revision is None else {accepted_revision, accepted_revision + 1}
     if (
         proposal.accepted_semantic_revision != accepted_revision
-        or proposal.proposed_semantic_revision != expected
+        or proposal.proposed_semantic_revision not in supported
+        or proposal.proposed_semantic_revision != proposed.semantic_revision
         or proposal.structural_digest != proposed.structural_digest
     ):
         raise _error(
             "CHANGE.SEMANTIC_PROPOSAL_MISMATCH",
-            "semantic proposal must bind exact accepted revision, next revision, and proposed structure",
+            "semantic proposal must bind the accepted revision, preservation or next revision, and exact proposed structure",
             observed=proposal.policy,
         )
 
@@ -908,9 +923,10 @@ def _classify_existing(
 ) -> tuple[ChangeClassification, SemanticState, int | None]:
     if semantic is not None:
         _semantic_overlay(semantic, accepted.semantic_revision, proposed)
+        preserved = semantic.proposed_semantic_revision == accepted.semantic_revision
         return (
-            ChangeClassification.SEMANTICALLY_CHANGED,
-            SemanticState.PROPOSED,
+            ChangeClassification.REPRESENTATION_ONLY_CANDIDATE if preserved else ChangeClassification.SEMANTICALLY_CHANGED,
+            SemanticState.ACCEPTED_UNCHANGED if preserved else SemanticState.PROPOSED,
             semantic.proposed_semantic_revision,
         )
     if accepted.representation_digest == proposed.representation_digest:

@@ -57,12 +57,17 @@ The closed edit variants are:
 - `put-routing-fact` / `remove-routing-fact`
 - `audit-policy-unit`
 - `rewrite-navigation-index`
+- `put-provenance` / `retire-provenance`
+- `approve-application-content` / `withdraw-application-content`
+- `revise-operational-artifact`
 
 Use the `propose` tool definition for their current exact fields. In
 particular:
 
 - whole-standard body changes must include companion policy-unit semantic
-  decisions when registered policy meaning changes;
+  decisions when registered policy meaning changes; `scope_updates` supplies a
+  complete registered-scope disposition when a whole-module rewrite changes
+  headings or explicitly preserves meaning across structural changes;
 - preserved policy meaning uses the schema's preserve variant, while changed
   meaning states accepted and proposed semantic revisions plus intent;
 - relationship changes state their meaning, applicability, evidence owner,
@@ -184,3 +189,13 @@ in the evidence record; unregistered text still receives ordinary whole-artifact
 change analysis. Use `retire-policy-unit` instead only when the normative policy
 itself is being retired. Maintenance prunes claims against the final candidate's
 requirements, including claims invalidated by the registration changes.
+
+## Purpose-separated supporting content
+
+Use the [implementation operation map](../../../../tools/standards_engine/PURPOSE-SEPARATION.md#authoring-operation-map)
+for the code-to-content handoff. Read operational aids to obtain their captured
+authoring target. Submit provenance content and an explicit exposure decision
+in the same coherent change as applicable; the Engine binds final candidate
+content. Provenance-only maintenance retains unchanged normative revisions.
+Application eligibility starts empty and becomes active only after reviewed
+publication, not after merely creating a draft.

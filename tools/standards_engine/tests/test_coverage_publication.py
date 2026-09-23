@@ -28,6 +28,7 @@ class EngineAuditPublicationTest(unittest.TestCase):
                 repository,
                 store_path=root / "engine.sqlite3",
                 execution_context=context,
+                purpose="authoring",
             ) as engine:
                 facade = AgentToolFacade(engine, _contracts(repository))
                 initial = facade.verify_repository(
@@ -207,6 +208,7 @@ class EngineAuditPublicationTest(unittest.TestCase):
                 repository,
                 store_path=root / "independent.sqlite3",
                 execution_context=context,
+                purpose="authoring",
             ) as cold:
                 facade = AgentToolFacade(cold, _contracts(repository))
                 captured = facade.create_snapshot({"kind": "create-snapshot"})

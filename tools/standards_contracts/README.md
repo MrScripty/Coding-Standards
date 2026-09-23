@@ -34,3 +34,12 @@ python -m pip install \
 
 Runtime retrieval, custom vocabularies, validator keyword overrides, and a
 repository implementation of JSON Schema are outside this module.
+
+## Named operation variants
+
+An operation may declare named input/result variants in the canonical interface.
+Their roots participate in the same exact reachable schema closure and generated
+projection. Variants select wire shape; their names do not grant permissions or
+change the operation's capability authority. The Engine host selects the
+application variant, while authoring uses the base operation. Transport code
+consumes these definitions rather than maintaining a second schema.

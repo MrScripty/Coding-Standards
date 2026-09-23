@@ -15,6 +15,7 @@ from .model import (
     FieldProjection,
     InterfaceContract,
     OperationContract,
+    OperationVariant,
     ProjectionArtifacts,
 )
 from .runtime import ContractRuntime
@@ -61,6 +62,7 @@ _OPERATION_KEYS = frozenset(
         "result_definitions",
         "capability",
         "capability_by_submission",
+        "variants",
     }
 )
 _ASCII_PATTERN = re.compile(r"\A[\x20-\x7e]*\Z")
@@ -150,7 +152,7 @@ def compile_contracts(
     roots = {
         definition
         for operation in parsed_interface.operations
-        for definition in (operation.input_definition, *operation.result_definitions)
+        for definition in operation.roots
     }
     reachable = _reachable_definitions(definitions, roots)
     unreachable = sorted(definitions.keys() - reachable)
@@ -251,6 +253,7 @@ def _parse_interface(
                 result_definitions=tuple(results),
                 capability=capability if has_capability else None,
                 capability_by_submission=selected_map,
+                variants=_operation_variants(raw.get("variants", {}), definitions),
             )
         )
     operation_ids = [item.id for item in operations]
@@ -262,7 +265,9 @@ def _parse_interface(
         raise failure(
             "CONTRACT.INVALID_INTERFACE", "operations must have unique nonempty IDs"
         )
-    for operation in operations:
+    selections = (selected for operation in operations
+                  for selected in (operation, *(operation.select_variant(name) for name in operation.variants)))
+    for operation in selections:
         if not operation.capability_by_submission:
             continue
         submission = (
@@ -289,6 +294,25 @@ def _parse_interface(
         result_projection_version=versions[3],
         operations=tuple(operations),
     )
+
+
+def _operation_variants(value: object, definitions: Mapping[str, object]) -> dict[str, OperationVariant]:
+    if not isinstance(value, dict):
+        raise failure("CONTRACT.INVALID_INTERFACE", "operation variants must be a mapping")
+    selected = {}
+    for name, variant in value.items():
+        if (not isinstance(name, str) or re.fullmatch(r"[a-z][a-z0-9-]*", name) is None
+                or not isinstance(variant, dict)
+                or set(variant) != {"input_definition", "result_definitions"}):
+            raise failure("CONTRACT.INVALID_INTERFACE", "operation variant fields are invalid")
+        input_name, results = variant["input_definition"], variant["result_definitions"]
+        if (not isinstance(input_name, str) or input_name not in definitions
+                or not isinstance(results, list) or not results
+                or not all(isinstance(item, str) and item in definitions for item in results)
+                or len(set(results)) != len(results)):
+            raise failure("CONTRACT.INVALID_INTERFACE", "operation variant roots are invalid")
+        selected[name] = OperationVariant(input_name, tuple(results))
+    return selected
 
 
 def _union_discriminants(
@@ -721,6 +745,13 @@ def _agent_tools(
             selected["capability_by_submission"] = dict(
                 operation.capability_by_submission
             )
+        if operation.variants:
+            selected["variants"] = {
+                name: {"input_definition": variant.input_definition,
+                       "result_definitions": list(variant.result_definitions),
+                       "input_schema": {"$ref": f"#/$defs/{variant.input_definition}"}}
+                for name, variant in operation.variants.items()
+            }
         operations.append(selected)
     return {
         "schema_version": interface.schema_version,

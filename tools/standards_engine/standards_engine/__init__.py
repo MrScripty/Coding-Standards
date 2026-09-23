@@ -2,6 +2,7 @@
 
 from ._generated_contract import *  # noqa: F403
 from ._generated_contract import __all__ as _contract_all
+from .context_projection import Purpose
 from .engine import StandardsEngine
 from .rendering import render_text
 from .tools import AgentToolFacade
@@ -9,6 +10,7 @@ from .tools import AgentToolFacade
 __all__ = (
     *_contract_all,
     "AgentToolFacade",
+    "Purpose",
     "StandardsEngine",
     "render_text",
 )

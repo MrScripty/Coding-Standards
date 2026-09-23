@@ -15,6 +15,7 @@ import traceback
 from typing import TextIO
 
 from .tools import AgentToolFacade
+from .context_projection import Purpose, qualified_operations
 
 
 PROTOCOL_VERSION = "2025-11-25"
@@ -90,6 +91,16 @@ DESCRIPTIONS = {
 }
 
 
+APPLICATION_DESCRIPTIONS = {
+    "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Reuse the returned snapshot.",
+    "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
+    "related": "Discover selected relationships among qualified guidance and examples in one snapshot.",
+    "routing_facts": "Read the reviewed vocabulary for routing a task. Supply known facts and retain unresolved conditions.",
+    "query": "Route, read, or traverse qualified guidance within the supplied snapshot.",
+    "inspect": "Inspect a permitted policy or relationship handle within its captured snapshot.",
+}
+
+
 def schema_closure(root: dict, definitions: dict) -> dict:
     """Make a standalone schema containing only reachable local definitions."""
     selected: dict = {}
@@ -112,15 +123,16 @@ def schema_closure(root: dict, definitions: dict) -> dict:
     return {**root, "$defs": selected}
 
 
-def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
+def tool_catalog(root: Path, *, purpose: Purpose | str, advanced: bool = False) -> list[dict]:
     contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
     definitions = contract["$defs"]
     result = []
-    for operation in contract["operations"]:
+    purpose = Purpose(purpose)
+    for operation in qualified_operations(contract, purpose):
         name = operation["id"]
         if not advanced and name not in FOCUSED_OPERATIONS:
             continue
-        description = DESCRIPTIONS[name]
+        description = APPLICATION_DESCRIPTIONS[name] if purpose is Purpose.APPLICATION else DESCRIPTIONS[name]
         if name in INPUT_CONTRACT_DESCRIPTIONS:
             schema = schema_closure(
                 definitions[operation["input_definition"]], definitions
@@ -137,7 +149,7 @@ def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
             {
                 "name": name,
                 "description": description,
-                "annotations": {"readOnlyHint": name in READ_ONLY_OPERATIONS},
+                "annotations": {"readOnlyHint": purpose is Purpose.APPLICATION or name in READ_ONLY_OPERATIONS},
                 "inputSchema": input_schema(
                     definitions[operation["input_definition"]], definitions
                 ),
@@ -193,13 +205,18 @@ class ProtocolError(Exception):
 
 
 class MCPServer:
-    def __init__(self, root: Path, *, advanced: bool = False) -> None:
+    def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False) -> None:
         self.root = root.resolve()
+        self._purpose = Purpose(purpose)
         self.advanced = advanced
-        self.tools = tool_catalog(self.root, advanced=advanced)
+        self.tools = tool_catalog(self.root, purpose=self.purpose, advanced=advanced)
         self.names = {tool["name"] for tool in self.tools}
         self.initialized = False
         self.ready = False
+
+    @property
+    def purpose(self) -> Purpose:
+        return self._purpose
 
     def dispatch(self, message: object) -> dict | None:
         identifier = None
@@ -253,8 +270,10 @@ class MCPServer:
             return {
                 "protocolVersion": PROTOCOL_VERSION,
                 "capabilities": {"tools": {"listChanged": False}},
-                "serverInfo": {"name": "standards-engine", "version": "0.1.0"},
+                "serverInfo": {"name": "standards-engine", "version": "0.2.0"},
                 "instructions": (
+                    "Use route and read to obtain applicable guidance. Reuse returned snapshots for consistent observations."
+                    if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
                     + (
                         " Native advanced operations use recover_application with readiness."
@@ -281,10 +300,12 @@ class MCPServer:
             # Opening per call matches the reference transport and avoids keeping
             # store state alive across idle client sessions. No operation retries.
             with redirect_stdout(sys.stderr):
-                with AgentToolFacade.open_repository(self.root) as facade:
+                with AgentToolFacade.open_repository(self.root, purpose=self.purpose) as facade:
                     value = getattr(facade, name)(arguments)
         except Exception:
             traceback.print_exc(file=sys.stderr)
+            if self.purpose is Purpose.APPLICATION:
+                return {"isError": True, "content": [{"type": "text", "text": "Application observation is unavailable; operator diagnostics retain the failure."}]}
             return {
                 "isError": True,
                 "content": [
@@ -304,7 +325,7 @@ class MCPServer:
         return {
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
-            "isError": value.get("kind") == "rejected-result"
+            "isError": value.get("kind") in {"rejected-result", "application-rejected-result"}
             or value.get("status") == "rejected",
         }
 
@@ -331,14 +352,15 @@ def main() -> int:
         description="Serve Standards Engine tools over MCP stdio."
     )
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument("--purpose", choices=[value.value for value in Purpose], required=True)
     parser.add_argument(
         "--advanced",
         action="store_true",
-        help="Expose the complete native and focused catalog.",
+        help="Expose additional operations within the configured purpose.",
     )
     arguments = parser.parse_args()
     serve(
-        MCPServer(arguments.repo_root, advanced=arguments.advanced),
+        MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced),
         sys.stdin,
         sys.stdout,
     )

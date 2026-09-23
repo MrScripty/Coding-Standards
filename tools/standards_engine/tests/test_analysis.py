@@ -283,6 +283,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             REPO_ROOT,
             store_path=cls.store,
             execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+            purpose="authoring",
         )
         created = cls.engine.create_snapshot(
             CreateSnapshotCall.from_value({"kind": "create-snapshot"})
@@ -307,6 +308,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 repository,
                 store_path=store,
                 execution_context=context,
+                purpose="authoring",
             )
             facade = AgentToolFacade(engine, _contracts(repository))
             try:
@@ -459,6 +461,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 repository,
                 store_path=store,
                 execution_context=context,
+                purpose="authoring",
             )
             try:
                 cold_facade = AgentToolFacade(reopened, _contracts(repository))
@@ -510,6 +513,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 repository,
                 store_path=store,
                 execution_context=context,
+                purpose="authoring",
             )
             facade = AgentToolFacade(engine, _contracts(repository))
             standard_path = "topics/logical-application-test.md"
@@ -691,6 +695,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     repository,
                     store_path=store,
                     execution_context=context,
+                    purpose="authoring",
                 )
                 facade = AgentToolFacade(engine, _contracts(repository))
                 self.assertEqual(
@@ -825,6 +830,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     repository,
                     store_path=store,
                     execution_context=context,
+                    purpose="authoring",
                 )
                 facade = AgentToolFacade(engine, _contracts(repository))
                 self.assertEqual(
@@ -936,6 +942,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             REPO_ROOT,
             store_path=self.store,
             execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+            purpose="authoring",
         )
         try:
             replayed = reopened._evaluate(reopened._load_analysis(initial.handle))
@@ -1126,6 +1133,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             REPO_ROOT,
             store_path=self.store,
             execution_context=AnalysisExecutionContext(ExactAuthorizer()),
+            purpose="authoring",
         )
         try:
             replayed = reopened._evaluate(reopened._load_analysis(results[0].handle))
@@ -1851,7 +1859,7 @@ from tools.standards_engine.standards_engine import InspectCall, StandardsEngine
 
 request = json.loads(sys.stdin.read())
 engine = StandardsEngine.open_repository(
-    Path(request["root"]), store_path=Path(request["store"])
+    Path(request["root"]), store_path=Path(request["store"]), purpose="authoring"
 )
 try:
     result = [
@@ -1910,6 +1918,7 @@ finally:
             engine = StandardsEngine.open_repository(
                 REPO_ROOT,
                 store_path=Path(temporary) / "standards.sqlite3",
+                purpose="authoring",
             )
             try:
                 with mock.patch.object(
@@ -1949,7 +1958,7 @@ finally:
             {
                 "kind": "analysis-handle",
                 "id": state.analysis_id,
-                "schema_version": 6,
+                "schema_version": 7,
             }
         )
 
@@ -1973,7 +1982,7 @@ finally:
                 }
             ],
             "semantic_proposals": [],
-            "contract_version": 5,
+            "contract_version": 6,
         }
         if prior is not None:
             request["prior_analysis"] = prior

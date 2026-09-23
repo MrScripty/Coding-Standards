@@ -29,7 +29,7 @@ jobs:
           git init source
           git -C source remote add origin "https://github.com/${SOURCE_REPOSITORY}.git"
           git -C source fetch origin "$CANDIDATE_SHA"
-          git -C source checkout --detach FETCH_HEAD
+          git -C source checkout -b main FETCH_HEAD
           test "$(git -C source rev-parse HEAD)" = "$CANDIDATE_SHA"
           git -C source bundle create ../source.bundle HEAD
       - name: Retain exact source for implementation and review
@@ -55,6 +55,8 @@ jobs:
           python="$RUNNER_TEMP/engine-env/bin/python"
           "$python" -m unittest discover -s tools/standards_metadata/tests
           "$python" -m unittest discover -s tools/standards_policy_impact/tests
+          "$python" -m unittest discover -s tools/standards_contracts/tests
+          "$python" -m unittest discover -s tools/standards_analysis/tests
           PYTHONPATH=.:tools/standards_verifier "$python" -m unittest discover -s tools/standards_verifier/tests
           "$python" -m unittest discover -s tools/standards_engine/tests
           PYTHONPATH=.:tools/standards_verifier "$python" tools/standards_verifier/verify.py --complete

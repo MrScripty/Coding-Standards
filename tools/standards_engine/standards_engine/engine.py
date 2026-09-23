@@ -85,6 +85,8 @@ from tools.standards_metadata.standards_metadata import (
     ModuleMetadata,
     PolicyUnit,
     RecordingContentSource,
+    SupportingContent,
+    load_supporting_content,
     load_canonical_standards_corpus,
     markdown_structural_digest,
 )
@@ -138,6 +140,8 @@ from ._generated_contract import (
     MaintainEvidenceCall,
     MaintainEvidenceResult,
     NavigationIndexesResult,
+    ProvenanceReadResult,
+    OperationalReadResult,
     VerifyRepositoryCall,
     VerifyRepositoryResult,
     VerifyProposalCall,
@@ -214,6 +218,7 @@ from .logical_authoring import (
     authoring_target_id,
 )
 from .navigation_indexes import NavigationIndex
+from .context_projection import Purpose, public_operation
 
 
 DEFAULT_STORE = ".standards-engine/snapshots-v1.sqlite3"
@@ -229,6 +234,8 @@ class CompiledSnapshot:
     router: RouterProjection
     coverage: CoverageDefinitionIndex
     repository_coverage: RepositoryCoverageDecisions
+    supporting: SupportingContent
+    materials: Mapping[str, object]
     navigation_indexes: tuple[NavigationIndex, ...] = ()
 
     def semantic_signature(self) -> tuple[object, ...]:
@@ -242,6 +249,8 @@ class CompiledSnapshot:
             self.coverage,
             self.repository_coverage,
             self.navigation_indexes,
+            self.supporting,
+            self.materials,
         )
 
 
@@ -416,9 +425,11 @@ class StandardsEngine:
         repository: GitRepository,
         snapshots: SnapshotModule,
         *,
+        purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
         temporary_store: tempfile.TemporaryDirectory[str] | None = None,
     ) -> None:
+        self._purpose = Purpose(purpose)
         self._repository = repository
         self._snapshots = snapshots
         self._logical_authoring = LogicalAuthoringCompiler(self._compile)
@@ -438,8 +449,10 @@ class StandardsEngine:
         *,
         durable: bool = True,
         store_path: Path | None = None,
+        purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
     ) -> StandardsEngine:
+        selected_purpose = Purpose(purpose)
         selected_root = root.resolve()
         temporary = None
         if store_path is None:
@@ -451,9 +464,14 @@ class StandardsEngine:
         return cls(
             GitRepository(selected_root),
             SnapshotModule.open(store_path.resolve()),
+            purpose=selected_purpose,
             execution_context=execution_context,
             temporary_store=temporary,
         )
+
+    @property
+    def purpose(self) -> Purpose:
+        return self._purpose
 
     def close(self) -> None:
         self._snapshots.close()
@@ -467,12 +485,18 @@ class StandardsEngine:
     def __exit__(self, *_: object) -> None:
         self.close()
 
+    @public_operation
     def create_snapshot(
+        self, call: CreateSnapshotCall
+    ) -> CreateSnapshotResult | RejectedResult:
+        return self._capture_snapshot(call)
+
+    def _capture_snapshot(
         self, call: CreateSnapshotCall
     ) -> CreateSnapshotResult | RejectedResult:
         del call
         try:
-            revision = self._repository.current_revision()
+            revision = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
             recording = RecordingContentSource(
                 _GitRevisionSource(self._repository, revision)
             )
@@ -513,6 +537,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def maintain_evidence(
         self, call: MaintainEvidenceCall
     ) -> MaintainEvidenceResult | RejectedResult:
@@ -649,6 +674,7 @@ class StandardsEngine:
                 "Evidence maintenance could not complete; inspect working-tree state before retrying.",
             )
 
+    @public_operation
     def verify_repository(
         self, call: VerifyRepositoryCall
     ) -> VerifyRepositoryResult | RejectedResult:
@@ -685,6 +711,7 @@ class StandardsEngine:
                 "Repository verification could not execute.",
             )
 
+    @public_operation
     def verify_proposal(
         self, call: VerifyProposalCall
     ) -> VerifyProposalResult | RejectedResult:
@@ -771,6 +798,7 @@ class StandardsEngine:
                 "Proposal verification could not execute.",
             )
 
+    @public_operation
     def find_snapshots(
         self, call: FindSnapshotsCall
     ) -> FindSnapshotsResult | RejectedResult:
@@ -797,6 +825,7 @@ class StandardsEngine:
         except SnapshotError as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def create_proposal(
         self, call: CreateProposalCall
     ) -> CreateProposalResult | RejectedResult:
@@ -815,6 +844,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def find_proposals(
         self, call: FindProposalsCall
     ) -> FindProposalsResult | RejectedResult:
@@ -836,6 +866,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def revise_proposal(
         self, call: ReviseProposalCall
     ) -> ReviseProposalResult | RejectedResult:
@@ -854,6 +885,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def delete_snapshot(
         self, call: DeleteSnapshotCall
     ) -> DeleteSnapshotResult | RejectedResult:
@@ -869,6 +901,7 @@ class StandardsEngine:
         except SnapshotError as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def undelete_snapshot(
         self, call: UndeleteSnapshotCall
     ) -> UndeleteSnapshotResult | RejectedResult:
@@ -882,71 +915,85 @@ class StandardsEngine:
         except SnapshotError as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def propose(self, call: ProposeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import propose
 
         return propose(self, call)
 
+    @public_operation
     def revise(self, call: ReviseCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "revise", call)
 
+    @public_operation
     def analyze(self, call: AnalyzeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "analyze", call)
 
+    @public_operation
     def resolve_workflow(self, call: ResolveWorkflowCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "resolve_workflow", call)
 
+    @public_operation
     def review(self, call: ReviewCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "review", call)
 
+    @public_operation
     def apply(self, call: ApplyCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "apply", call)
 
+    @public_operation
     def recover(self, call: RecoverCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "recover", call)
 
+    @public_operation
     def workflow_status(self, call: WorkflowStatusCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "workflow_status", call)
 
+    @public_operation
     def resume(self, call: ResumeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
         return advance(self, "resume", call)
 
+    @public_operation
     def route(self, call: RouteCall) -> AgentRouteResult | RejectedResult:
         from .agent_navigation import navigate
 
         return navigate(self, "route", call)
 
+    @public_operation
     def routing_facts(self, call: RoutingFactsCall) -> RoutingFactsResult | RejectedResult:
         from .agent_navigation import routing_facts
 
         return routing_facts(self, call)
 
+    @public_operation
     def read(self, call: ReadCall) -> ReadResult | CompactReadResult | RejectedResult:
         from .agent_navigation import navigate
 
         return navigate(self, "read", call)
 
+    @public_operation
     def related(self, call: RelatedCall) -> RelatedResult | RejectedResult:
         from .agent_navigation import navigate
 
         return navigate(self, "related", call)
 
+    @public_operation
     def query(self, call: QueryCall) -> QueryResult | RejectedResult:
         try:
             compiled = self._compiled_snapshot(self._snapshot_id(call.snapshot))
@@ -964,6 +1011,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def query_proposal(
         self, call: QueryProposalCall
     ) -> QueryProposalResult | RejectedResult:
@@ -987,6 +1035,10 @@ class StandardsEngine:
                     if isinstance(value, RejectedResult)
                     else NavigationIndexesResult.from_value(value)
                     if value["kind"] == "navigation-indexes-result"
+                    else ProvenanceReadResult.from_value(value)
+                    if value["kind"] == "provenance-read-result"
+                    else OperationalReadResult.from_value(value)
+                    if value["kind"] == "operational-read-result"
                     else ProposalReadResult.from_value(value)
                 )
             if isinstance(call.request, RelatedRequest):
@@ -1004,6 +1056,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def analyze_proposal(
         self, call: AnalyzeProposalCall
     ) -> PendingResult | CompleteResult | RejectedResult:
@@ -1050,6 +1103,7 @@ class StandardsEngine:
     def _review_requires_change(cls, state: DomainAnalysisState) -> bool:
         return any(cls._plain(item).get("result") == "requires-change" for item in state.dispositions)
 
+    @public_operation
     def review_proposal(
         self, call: ReviewProposalCall
     ) -> ReviewProposalResult | RejectedResult:
@@ -1126,6 +1180,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def apply_proposal(
         self, call: ApplyProposalCall
     ) -> ApplyProposalResult | ApplicationRecoveryRequiredResult | RejectedResult:
@@ -1466,6 +1521,7 @@ class StandardsEngine:
             )
         )
 
+    @public_operation
     def recover_application(
         self, call: RecoverApplicationCall
     ) -> RecoverApplicationResult | ApplicationRecoveryRequiredResult | RejectedResult:
@@ -1523,6 +1579,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def prepare(
         self, call: PrepareCall
     ) -> PendingResult | CompleteResult | RejectedResult:
@@ -1554,6 +1611,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def resolve(
         self, call: ResolveCall
     ) -> PendingResult | CompleteResult | RejectedResult:
@@ -1564,6 +1622,7 @@ class StandardsEngine:
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
+    @public_operation
     def inspect(self, call: InspectCall) -> InspectionResult | RejectedResult:
         try:
             handle = call.handle
@@ -1646,10 +1705,13 @@ class StandardsEngine:
 
         corpus = load_canonical_standards_corpus(source)
         impact = compile_policy_impact(source, corpus)
+        supporting = load_supporting_content(source)
         graph = standards_navigation_registry(
-            source, corpus, compiled_policy_impact=impact
+            source, corpus, compiled_policy_impact=impact, supporting=supporting
         )
         router = load_router_projection(source, corpus.module_corpus)
+        from .supporting import build_materials
+        materials = build_materials(source, corpus, impact, router, supporting)
         coverage = compile_coverage_definitions(
             corpus, impact, load_coverage_horizon(source, corpus, impact)
         )
@@ -1662,6 +1724,8 @@ class StandardsEngine:
             router,
             coverage,
             repository_coverage,
+            supporting,
+            materials,
             load_indexes(source, corpus),
         )
 
@@ -1743,6 +1807,7 @@ class StandardsEngine:
         reference: SnapshotMaterialRef | ProjectedRevisionMaterialRef,
         compiled: CompiledSnapshot,
     ) -> AnalysisMaterial:
+        from .supporting import review_authorities
         return AnalysisMaterial(
             reference,
             compiled.source,
@@ -1751,6 +1816,7 @@ class StandardsEngine:
             compiled.policy_impact,
             compiled.coverage,
             tuple(item.review for item in compiled.navigation_indexes),
+            review_authorities(compiled),
         )
 
     def _validate_projected_inputs(
@@ -1837,7 +1903,12 @@ class StandardsEngine:
             and item.review.representation_digest
             != before_indexes[item.id].review.representation_digest
         )
-        changes = (*policy_changes, *module_changes, *navigation_changes)
+        from .supporting import review_authorities
+        from tools.standards_analysis.standards_analysis import generate_supporting_content_obligations
+        supporting_changes = tuple(
+            ChangeDescriptor(ChangeKind.SUPPORTING_CONTENT, (item.target,), (item.target,), scope)
+            for item in generate_supporting_content_obligations(review_authorities(accepted), review_authorities(proposed)))
+        changes = (*policy_changes, *module_changes, *navigation_changes, *supporting_changes)
         if not changes:
             return derive_change_descriptors(
                 accepted.corpus.policy_unit_corpus,
@@ -2683,7 +2754,7 @@ class StandardsEngine:
         return {
             "kind": "analysis-handle",
             "id": analysis_id,
-            "schema_version": 6,
+            "schema_version": 7,
         }
 
     @classmethod
@@ -2698,7 +2769,7 @@ class StandardsEngine:
             "analysis": cls._analysis_handle(analysis_id),
             "child_kind": child_kind,
             "child_id": child_id,
-            "schema_version": 6,
+            "schema_version": 7,
         }
 
     @staticmethod
@@ -2749,14 +2820,8 @@ class StandardsEngine:
             self._route_value(_QueryProjection.snapshot(snapshot), compiled, request)
         )
 
-    def _route_value(
-        self,
-        projection: _QueryProjection,
-        compiled: CompiledSnapshot,
-        request: RouteRequest,
-        *,
-        explain: bool = False,
-    ) -> dict[str, object]:
+    @staticmethod
+    def _routing_selection(compiled: CompiledSnapshot, request):
         facts = compiled.router.fact_schema.bind(request.as_contract()["facts"])
         selected = set(compiled.router.base_modules)
         unresolved: set[str] = set()
@@ -2826,6 +2891,17 @@ class StandardsEngine:
                 target, compiled.corpus, compiled.graph
             ),
         )
+        return facts, rule_results, ordered, entries, unresolved
+
+    def _route_value(
+        self,
+        projection: _QueryProjection,
+        compiled: CompiledSnapshot,
+        request: RouteRequest,
+        *,
+        explain: bool = False,
+    ) -> dict[str, object]:
+        facts, rule_results, ordered, entries, unresolved = self._routing_selection(compiled, request)
         reading_plan = [
             projection.reading_plan_entry(item.as_contract()) for item in entries
         ]
@@ -2878,6 +2954,10 @@ class StandardsEngine:
             if isinstance(value, RejectedResult)
             else NavigationIndexesResult.from_value(value)
             if value["kind"] == "navigation-indexes-result"
+            else ProvenanceReadResult.from_value(value)
+            if value["kind"] == "provenance-read-result"
+            else OperationalReadResult.from_value(value)
+            if value["kind"] == "operational-read-result"
             else ReadResult.from_value(value)
         )
 
@@ -2888,7 +2968,11 @@ class StandardsEngine:
         request: ReadRequest,
     ) -> dict[str, object] | RejectedResult:
         from .navigation_indexes import DIRECTORY
+        from .supporting import read_supporting
 
+        support = read_supporting(compiled, projection, request.target)
+        if support is not None:
+            return support
         if request.target == DIRECTORY or request.target.startswith("navigation."):
             indexes = tuple(
                 item
@@ -3032,6 +3116,9 @@ class StandardsEngine:
                 scope,
             ),
             "content": content,
+            "application_exposure": compiled.supporting.exposure_state(module.module_id, compiled.materials[module.module_id].binding),
+            "provenance": [item.id for item in compiled.supporting.provenance.values()
+                           if item.subject in {target, module.module_id}],
             "requires": list(module.requires),
             "specializes": list(module.specializes),
             "related": relationships,
@@ -3079,6 +3166,14 @@ class StandardsEngine:
         request: RelatedRequest,
     ) -> dict[str, object] | RejectedResult:
         selected = _resolve_policy(compiled.corpus, request.target)
+        if selected is None and request.target in compiled.supporting.provenance:
+            relationships = self._relationships_from_targets(
+                projection, compiled, (request.target,), tuple(request.groups),
+                Direction.parse(request.direction), request.transitive)
+            return {**projection.result("related"), "target": request.target,
+                    "policy_unit_mapping": {"state": "incomplete", "reason": "no-policy-units", "policy_units": []},
+                    "relationships": relationships, "next_operations": [],
+                    "summary": f"Found {len(relationships)} declared relationships."}
         if selected is None:
             artifact = compiled.policy_impact.artifacts.get(request.target)
             if artifact is None:

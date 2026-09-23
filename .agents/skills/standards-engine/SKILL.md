@@ -1,9 +1,13 @@
 ---
 name: standards-engine
-description: Navigate, analyze, and author this repository's coding standards through the Standards Engine. Use when an agent needs to route or read standards, inspect related policies, propose or revise a standards change, review or apply a proposal, verify standards, or recover an application; do not use for ordinary source-code edits.
+description: Maintain this repository's coding standards through an authoring-purpose Standards Engine connection. Use when an agent needs to route or read standards, inspect related policies, propose or revise a standards change, review or apply a proposal, verify standards, or recover an application; do not use for ordinary source-code edits.
 ---
 
-# Standards Engine
+# Standards Engine Authoring
+
+This skill is maintenance material for standards authors. Ordinary application
+agents use their application-purpose tool catalog and approved guidance, rather
+than loading this authoring skill.
 
 Use the generated public Interface. The Engine is the sole writer of standards
 Markdown, metadata, supplementary projections, SQLite state, and local Git
@@ -12,7 +16,7 @@ Engine request into direct file, SQL, or Git mutations.
 
 ## Use The Agent Tools
 
-Use the `standards-engine` MCP tools. The client supplies each operation's
+Use the `standards-authoring` MCP tools (or the host's explicitly configured authoring-purpose registration). The client supplies each operation's
 current input schema; call the named tool directly with structured arguments.
 Tool-name prefixes vary by client; operation names match the Engine contract
 (for example, `route`, `read`, and `propose`).

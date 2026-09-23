@@ -1,5 +1,18 @@
 # Standards Engine
 
+## Current purpose-separated interface
+
+Version 0.2.0 / interface 31 requires host-selected `application` or `authoring`
+purpose. Application views use exact reviewed content declarations; the real
+corpus intentionally starts unqualified in this code release. Authoring retains
+the complete workflow and adds provenance, registered operational-aid editing
+and explicit application exposure decisions. Analysis request 6 / state 7 bind
+explicit preservation or change to the actual candidate semantic revision.
+
+See [Purpose separation and code-to-content handoff](PURPOSE-SEPARATION.md) for
+the supported operation map, replay guarantees, empty-corpus bootstrap and
+breaking cutover. The underlying implementation description follows.
+
 `tools/standards_engine/` is the typed composition facade for standards
 navigation, immutable analysis, and controlled authoring. Callers use canonical
 IDs, authored policy title/body content, explicit semantics, and opaque handles.
@@ -10,7 +23,7 @@ for evidence catalog maintenance.
 
 Agents use the MCP stdio server in `standards_engine/mcp.py`. Its default catalog exposes
 focused navigation and context-based authoring with generated input/output
-schemas. `--advanced` exposes the complete native catalog. See
+schemas. `--advanced` exposes native operations within the configured purpose. See
 [agent connection setup](../../.agents/skills/standards-engine/references/environment.md).
 The existing `.agents/skills/standards-engine/scripts/invoke.py` remains the
 reference/debugging transport.

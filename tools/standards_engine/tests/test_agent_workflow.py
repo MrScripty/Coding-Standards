@@ -24,6 +24,11 @@ def prepare_repository(destination):
         ["git", "clone", "--quiet", "--no-hardlinks", str(ROOT), str(destination)],
         check=True,
     )
+    branch = subprocess.check_output(
+        ["git", "branch", "--show-current"], cwd=destination, text=True
+    ).strip()
+    if branch != "main":
+        subprocess.run(["git", "branch", "-m", "main"], cwd=destination, check=True)
     for path in (
         "a1-interface.toml",
         "a1-contract.schema.json",
@@ -96,6 +101,7 @@ class AgentWorkflowTest(unittest.TestCase):
             execution_context=AnalysisExecutionContext(
                 LocalAlwaysAllowAuthorizer(cls.root)
             ),
+            purpose="authoring",
         )
         cls.facade = AgentToolFacade(cls.engine, _contracts(cls.root))
         result = cls.facade.create_snapshot({"kind": "create-snapshot"})
@@ -183,7 +189,7 @@ class AgentWorkflowTest(unittest.TestCase):
                 self.facade.workflow_status({"context": context})["kind"],
                 "rejected-result",
             )
-        with StandardsEngine.open_repository(self.root, durable=False) as foreign:
+        with StandardsEngine.open_repository(self.root, durable=False, purpose="authoring") as foreign:
             facade = AgentToolFacade(foreign, _contracts(self.root))
             self.assertEqual(
                 facade.workflow_status({"context": created["context"]})["kind"],
@@ -192,7 +198,7 @@ class AgentWorkflowTest(unittest.TestCase):
 
     def test_review_is_explicit_and_current_authorization_is_required(self):
         created = self.propose("review")
-        with StandardsEngine.open_repository(self.root) as denied_engine:
+        with StandardsEngine.open_repository(self.root, purpose="authoring") as denied_engine:
             denied = AgentToolFacade(denied_engine, _contracts(self.root)).review(
                 {"context": created["context"], "decisions": decisions(self.root)}
             )

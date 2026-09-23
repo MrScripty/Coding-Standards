@@ -26,7 +26,7 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
         self.accepted = self.root / "accepted"
         self.proposed = self.root / "proposed"
         self.write_fixture(self.accepted, intro="Stable intro.", policy="Policy text.")
-        self.write_fixture(self.proposed, intro="Stable intro.", policy="Changed policy text.")
+        self.write_fixture(self.proposed, intro="Stable intro.", policy="Changed policy text.", revision=2)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -36,7 +36,7 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
 
-    def write_fixture(self, root: Path, *, intro: str, policy: str) -> None:
+    def write_fixture(self, root: Path, *, intro: str, policy: str, revision: int = 1) -> None:
         self.write(
             root,
             "module.md",
@@ -75,14 +75,14 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
         self.write(
             root,
             "units/module.toml",
-            """
+            f"""
             schema_version = 1
 
             [[policy_unit]]
             id = "workflow.test.policy"
             module = "workflow.test"
             heading_path = ["Policy"]
-            semantic_revision = 1
+            semantic_revision = {revision}
             """,
         )
 
@@ -151,6 +151,7 @@ class UnmappedNormativeObligationTest(unittest.TestCase):
             self.proposed,
             intro="Changed unmapped normative text.",
             policy="Changed policy text.",
+            revision=2,
         )
         accepted, proposed = self.corpora()
         obligations = generate_unmapped_normative_obligations(

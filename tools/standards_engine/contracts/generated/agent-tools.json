@@ -152,7 +152,7 @@
           "const": "analysis-child-handle"
         },
         "schema_version": {
-          "const": 6
+          "const": 7
         }
       },
       "required": [
@@ -262,7 +262,7 @@
           "const": "analysis-handle"
         },
         "schema_version": {
-          "const": 6
+          "const": 7
         }
       },
       "required": [
@@ -316,7 +316,7 @@
           "type": "array"
         },
         "contract_version": {
-          "const": 5
+          "const": 6
         },
         "kind": {
           "const": "analysis-request"
@@ -367,7 +367,7 @@
           "uniqueItems": true
         },
         "contract_version": {
-          "const": 6
+          "const": 7
         },
         "coverage_attestations": {
           "items": {
@@ -507,6 +507,13 @@
         }
       ]
     },
+    "ApplicationExposureState": {
+      "enum": [
+        "unreviewed",
+        "current",
+        "needs-review"
+      ]
+    },
     "ApplicationHandle": {
       "additionalProperties": false,
       "properties": {
@@ -530,6 +537,255 @@
     "ApplicationId": {
       "pattern": "^application:sha256:[0-9a-f]{64}$",
       "type": "string"
+    },
+    "ApplicationInspectCall": {
+      "additionalProperties": false,
+      "properties": {
+        "handle": {
+          "$ref": "#/$defs/SnapshotChildHandle"
+        }
+      },
+      "required": [
+        "handle"
+      ],
+      "type": "object"
+    },
+    "ApplicationNextOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "handle": {
+          "$ref": "#/$defs/SnapshotChildHandle"
+        },
+        "operation": {
+          "enum": [
+            "read",
+            "related",
+            "routing_facts",
+            "route",
+            "query",
+            "inspect"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "operation",
+        "snapshot"
+      ],
+      "type": "object"
+    },
+    "ApplicationPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "handle": {
+          "$ref": "#/$defs/SnapshotChildHandle"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "level": {
+          "enum": [
+            "MUST",
+            "SHOULD",
+            "PROFILE",
+            "REFERENCE"
+          ]
+        },
+        "role": {
+          "enum": [
+            "core",
+            "router",
+            "topic",
+            "workflow",
+            "profile",
+            "reference",
+            "prompt",
+            "template"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "handle",
+        "role",
+        "level"
+      ],
+      "type": "object"
+    },
+    "ApplicationQueryCall": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/ApplicationQueryRequest"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "snapshot",
+        "request"
+      ],
+      "type": "object"
+    },
+    "ApplicationQueryRequest": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/RouteRequest"
+        },
+        {
+          "$ref": "#/$defs/ApplicationReadRequest"
+        },
+        {
+          "$ref": "#/$defs/RelatedRequest"
+        }
+      ]
+    },
+    "ApplicationQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "fact": {
+          "$ref": "#/$defs/AuthoredRoutingFact"
+        }
+      },
+      "required": [
+        "fact"
+      ],
+      "type": "object"
+    },
+    "ApplicationReadCall": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "ApplicationReadRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "kind": {
+          "const": "read"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "type": "object"
+    },
+    "ApplicationReadResult": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "application-read-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/ApplicationNextOperation"
+          },
+          "type": "array"
+        },
+        "policy": {
+          "$ref": "#/$defs/ApplicationPolicy"
+        },
+        "purpose": {
+          "const": "application"
+        },
+        "related": {
+          "items": {
+            "$ref": "#/$defs/ApplicationRelationship"
+          },
+          "type": "array"
+        },
+        "requires": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array"
+        },
+        "scope": {
+          "$ref": "#/$defs/ReviewScope"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "specializes": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "snapshot",
+        "policy",
+        "content",
+        "scope",
+        "requires",
+        "specializes",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "ApplicationReadingEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "enum": [
+            "normative",
+            "contextual"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ReviewScope"
+        },
+        "state": {
+          "const": "selected"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "target",
+        "scope",
+        "authority",
+        "state"
+      ],
+      "type": "object"
     },
     "ApplicationRecoveryRequiredResult": {
       "additionalProperties": false,
@@ -566,6 +822,209 @@
         "code",
         "outcome",
         "message"
+      ],
+      "type": "object"
+    },
+    "ApplicationRejectedResult": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "APPLICATION.CONTENT_UNAVAILABLE",
+            "APPLICATION.INPUT_INVALID",
+            "APPLICATION.OPERATION_UNAVAILABLE",
+            "APPLICATION.INTERNAL_UNAVAILABLE",
+            "APPLICATION.UNSUPPORTED_CAPTURE"
+          ]
+        },
+        "kind": {
+          "const": "application-rejected-result"
+        },
+        "message": {
+          "type": "string"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/ApplicationNextOperation"
+          },
+          "type": "array"
+        },
+        "outcome": {
+          "enum": [
+            "invalid",
+            "unsupported",
+            "unavailable"
+          ]
+        },
+        "purpose": {
+          "const": "application"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "code",
+        "outcome",
+        "message",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "ApplicationRelatedResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "application-related-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/ApplicationNextOperation"
+          },
+          "type": "array"
+        },
+        "purpose": {
+          "const": "application"
+        },
+        "relationships": {
+          "items": {
+            "$ref": "#/$defs/ApplicationRelationship"
+          },
+          "type": "array"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "snapshot",
+        "target",
+        "relationships",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "ApplicationRelationship": {
+      "additionalProperties": false,
+      "properties": {
+        "direction": {
+          "enum": [
+            "incoming",
+            "outgoing"
+          ]
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array"
+        },
+        "handle": {
+          "$ref": "#/$defs/SnapshotChildHandle"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "handle",
+        "source",
+        "target",
+        "relation",
+        "groups",
+        "direction"
+      ],
+      "type": "object"
+    },
+    "ApplicationRouteResult": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "application-route-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/ApplicationNextOperation"
+          },
+          "type": "array"
+        },
+        "purpose": {
+          "const": "application"
+        },
+        "reading_plan": {
+          "items": {
+            "$ref": "#/$defs/ApplicationReadingEntry"
+          },
+          "type": "array"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "needs-facts"
+          ]
+        },
+        "unresolved_questions": {
+          "items": {
+            "$ref": "#/$defs/ApplicationQuestion"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "snapshot",
+        "status",
+        "reading_plan",
+        "unresolved_questions",
+        "next_operations"
+      ],
+      "type": "object"
+    },
+    "ApplicationRoutingFactsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/AuthoredRoutingFact"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "const": "application-routing-facts-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/ApplicationNextOperation"
+          },
+          "type": "array"
+        },
+        "purpose": {
+          "const": "application"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "snapshot",
+        "facts",
+        "next_operations"
       ],
       "type": "object"
     },
@@ -617,6 +1076,29 @@
       ],
       "type": "object"
     },
+    "ApproveApplicationContentEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "approve-application-content"
+        },
+        "target": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CanonicalId"
+            },
+            {
+              "$ref": "#/$defs/AuthoringTargetHandle"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "type": "object"
+    },
     "AuditPolicyUnitEdit": {
       "additionalProperties": false,
       "properties": {
@@ -634,6 +1116,72 @@
         "kind",
         "policy",
         "rationale"
+      ],
+      "type": "object"
+    },
+    "AuthoredDecisionProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "alternatives": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "type": "array"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "limits": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "origin": {
+          "enum": [
+            "documented-original",
+            "reconstructed-history",
+            "current-justification",
+            "unrecorded"
+          ]
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "reconsideration": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "supersedes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "subject",
+        "origin",
+        "rationale",
+        "evidence"
       ],
       "type": "object"
     },
@@ -919,7 +1467,8 @@
             "move",
             "split",
             "merge",
-            "navigation-index"
+            "navigation-index",
+            "supporting-content"
           ]
         },
         "proposed_ids": {
@@ -1093,6 +1642,9 @@
     "CompactReadResult": {
       "additionalProperties": false,
       "properties": {
+        "application_exposure": {
+          "$ref": "#/$defs/ApplicationExposureState"
+        },
         "content": {
           "type": "string"
         },
@@ -1113,6 +1665,12 @@
         },
         "policy": {
           "$ref": "#/$defs/PolicySummary"
+        },
+        "provenance": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array"
         },
         "requires": {
           "items": {
@@ -1814,6 +2372,85 @@
         "decision_contract",
         "schema_version",
         "dependencies"
+      ],
+      "type": "object"
+    },
+    "DecisionProvenanceRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "alternatives": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "type": "array"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "limits": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "origin": {
+          "enum": [
+            "documented-original",
+            "reconstructed-history",
+            "current-justification",
+            "unrecorded"
+          ]
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "reconsideration": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "retired": {
+          "type": "boolean"
+        },
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "subject_binding": {
+          "$ref": "#/$defs/Digest"
+        },
+        "supersedes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "subject",
+        "origin",
+        "rationale",
+        "evidence",
+        "assumptions",
+        "limits",
+        "alternatives",
+        "reconsideration",
+        "supersedes",
+        "subject_binding",
+        "retired"
       ],
       "type": "object"
     },
@@ -2605,7 +3242,8 @@
             "audit-coverage",
             "unmapped-normative-change",
             "structured-scope-analysis-unsupported",
-            "navigation-index-change"
+            "navigation-index-change",
+            "supporting-content-change"
           ]
         },
         "question": {
@@ -3156,6 +3794,59 @@
       "pattern": "^obligation:sha256:[0-9a-f]{64}$",
       "type": "string"
     },
+    "OperationalReadResult": {
+      "additionalProperties": false,
+      "properties": {
+        "application_exposure": {
+          "$ref": "#/$defs/ApplicationExposureState"
+        },
+        "authority": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SnapshotHandle"
+            },
+            {
+              "$ref": "#/$defs/ProposalRevisionHandle"
+            }
+          ]
+        },
+        "canonical_id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "content": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "operational-read-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "type": "array"
+        },
+        "role": {
+          "enum": [
+            "prompt",
+            "template"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "authority",
+        "target",
+        "canonical_id",
+        "role",
+        "content",
+        "application_exposure",
+        "next_operations"
+      ],
+      "type": "object"
+    },
     "PendingResult": {
       "additionalProperties": false,
       "properties": {
@@ -3475,6 +4166,30 @@
       ],
       "type": "object"
     },
+    "PolicyScopeUpdate": {
+      "additionalProperties": false,
+      "properties": {
+        "heading_path": {
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "semantics": {
+          "$ref": "#/$defs/PolicySemanticIntent"
+        }
+      },
+      "required": [
+        "policy",
+        "heading_path",
+        "semantics"
+      ],
+      "type": "object"
+    },
     "PolicySemanticIntent": {
       "oneOf": [
         {
@@ -3680,6 +4395,9 @@
     "ProposalReadResult": {
       "additionalProperties": false,
       "properties": {
+        "application_exposure": {
+          "$ref": "#/$defs/ApplicationExposureState"
+        },
         "content": {
           "type": "string"
         },
@@ -3697,6 +4415,12 @@
         },
         "policy": {
           "$ref": "#/$defs/ProposalPolicySummary"
+        },
+        "provenance": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array"
         },
         "related": {
           "items": {
@@ -3928,6 +4652,48 @@
       ],
       "type": "object"
     },
+    "ProvenanceReadResult": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SnapshotHandle"
+            },
+            {
+              "$ref": "#/$defs/ProposalRevisionHandle"
+            }
+          ]
+        },
+        "kind": {
+          "const": "provenance-read-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "type": "array"
+        },
+        "record": {
+          "$ref": "#/$defs/DecisionProvenanceRecord"
+        },
+        "state": {
+          "enum": [
+            "current",
+            "needs-review",
+            "retired"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "authority",
+        "record",
+        "state",
+        "next_operations"
+      ],
+      "type": "object"
+    },
     "ProvenanceRecord": {
       "additionalProperties": false,
       "properties": {
@@ -3994,6 +4760,22 @@
         "contract",
         "contract_version",
         "input_digest"
+      ],
+      "type": "object"
+    },
+    "PutDecisionProvenanceEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "put-provenance"
+        },
+        "record": {
+          "$ref": "#/$defs/AuthoredDecisionProvenance"
+        }
+      },
+      "required": [
+        "kind",
+        "record"
       ],
       "type": "object"
     },
@@ -4180,6 +4962,12 @@
         },
         {
           "$ref": "#/$defs/NavigationIndexesResult"
+        },
+        {
+          "$ref": "#/$defs/ProvenanceReadResult"
+        },
+        {
+          "$ref": "#/$defs/OperationalReadResult"
         }
       ]
     },
@@ -4209,6 +4997,12 @@
         },
         {
           "$ref": "#/$defs/NavigationIndexesResult"
+        },
+        {
+          "$ref": "#/$defs/ProvenanceReadResult"
+        },
+        {
+          "$ref": "#/$defs/OperationalReadResult"
         }
       ]
     },
@@ -4325,6 +5119,9 @@
     "ReadResult": {
       "additionalProperties": false,
       "properties": {
+        "application_exposure": {
+          "$ref": "#/$defs/ApplicationExposureState"
+        },
         "content": {
           "type": "string"
         },
@@ -4342,6 +5139,12 @@
         },
         "policy": {
           "$ref": "#/$defs/PolicySummary"
+        },
+        "provenance": {
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          },
+          "type": "array"
         },
         "related": {
           "items": {
@@ -5016,6 +5819,22 @@
       ],
       "type": "object"
     },
+    "RetireDecisionProvenanceEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "kind": {
+          "const": "retire-provenance"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "type": "object"
+    },
     "RetirePolicyUnitEdit": {
       "additionalProperties": false,
       "properties": {
@@ -5237,6 +6056,30 @@
       ],
       "type": "object"
     },
+    "ReviseOperationalArtifactEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "revise-operational-artifact"
+        },
+        "target": {
+          "$ref": "#/$defs/AuthoringTargetHandle"
+        },
+        "title": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "required": [
+        "kind",
+        "target",
+        "title",
+        "body"
+      ],
+      "type": "object"
+    },
     "RevisePolicyUnitEdit": {
       "additionalProperties": false,
       "properties": {
@@ -5310,6 +6153,12 @@
       "properties": {
         "kind": {
           "const": "revise-standard"
+        },
+        "scope_updates": {
+          "items": {
+            "$ref": "#/$defs/PolicyScopeUpdate"
+          },
+          "type": "array"
         },
         "standard": {
           "$ref": "#/$defs/StandardContent"
@@ -5840,6 +6689,21 @@
         },
         {
           "$ref": "#/$defs/RewriteNavigationIndexEdit"
+        },
+        {
+          "$ref": "#/$defs/PutDecisionProvenanceEdit"
+        },
+        {
+          "$ref": "#/$defs/RetireDecisionProvenanceEdit"
+        },
+        {
+          "$ref": "#/$defs/ApproveApplicationContentEdit"
+        },
+        {
+          "$ref": "#/$defs/WithdrawApplicationContentEdit"
+        },
+        {
+          "$ref": "#/$defs/ReviseOperationalArtifactEdit"
         }
       ]
     },
@@ -6120,6 +6984,29 @@
       ],
       "type": "object"
     },
+    "WithdrawApplicationContentEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "withdraw-application-content"
+        },
+        "target": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CanonicalId"
+            },
+            {
+              "$ref": "#/$defs/AuthoringTargetHandle"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "type": "object"
+    },
     "WorkflowContext": {
       "oneOf": [
         {
@@ -6262,7 +7149,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 30,
+  "interface_schema_version": 31,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -6322,7 +7209,21 @@
       "result_definitions": [
         "QueryResult",
         "RejectedResult"
-      ]
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "ApplicationQueryCall",
+          "input_schema": {
+            "$ref": "#/$defs/ApplicationQueryCall"
+          },
+          "result_definitions": [
+            "ApplicationRouteResult",
+            "ApplicationReadResult",
+            "ApplicationRelatedResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     },
     {
       "capability": "standards.analyze",
@@ -6365,7 +7266,20 @@
       "result_definitions": [
         "InspectionResult",
         "RejectedResult"
-      ]
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "ApplicationInspectCall",
+          "input_schema": {
+            "$ref": "#/$defs/ApplicationInspectCall"
+          },
+          "result_definitions": [
+            "ApplicationReadResult",
+            "ApplicationRelatedResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     },
     {
       "capability": "standards.proposal.author",
@@ -6512,7 +7426,19 @@
       "result_definitions": [
         "AgentRouteResult",
         "RejectedResult"
-      ]
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "RouteCall",
+          "input_schema": {
+            "$ref": "#/$defs/RouteCall"
+          },
+          "result_definitions": [
+            "ApplicationRouteResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     },
     {
       "capability": "standards.read",
@@ -6525,8 +7451,22 @@
         "CompactReadResult",
         "ReadResult",
         "NavigationIndexesResult",
-        "RejectedResult"
-      ]
+        "RejectedResult",
+        "ProvenanceReadResult",
+        "OperationalReadResult"
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "ApplicationReadCall",
+          "input_schema": {
+            "$ref": "#/$defs/ApplicationReadCall"
+          },
+          "result_definitions": [
+            "ApplicationReadResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     },
     {
       "capability": "standards.read",
@@ -6538,7 +7478,19 @@
       "result_definitions": [
         "RelatedResult",
         "RejectedResult"
-      ]
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "RelatedCall",
+          "input_schema": {
+            "$ref": "#/$defs/RelatedCall"
+          },
+          "result_definitions": [
+            "ApplicationRelatedResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     },
     {
       "capability": "standards.read",
@@ -6550,7 +7502,19 @@
       "result_definitions": [
         "RoutingFactsResult",
         "RejectedResult"
-      ]
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "RoutingFactsCall",
+          "input_schema": {
+            "$ref": "#/$defs/RoutingFactsCall"
+          },
+          "result_definitions": [
+            "ApplicationRoutingFactsResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     },
     {
       "capability": "standards.proposal.author",
@@ -6666,7 +7630,7 @@
       ]
     }
   ],
-  "request_contract_version": 5,
-  "result_projection_version": 6,
+  "request_contract_version": 6,
+  "result_projection_version": 7,
   "schema_version": 1
 }

@@ -98,6 +98,7 @@ class NavigationTest(unittest.TestCase):
         cls.engine = StandardsEngine.open_repository(
             REPO_ROOT,
             store_path=Path(cls.temporary.name) / "standards.sqlite3",
+            purpose="authoring",
         )
         created = cls.engine.create_snapshot(
             CreateSnapshotCall.from_value({"kind": "create-snapshot"})
@@ -288,7 +289,7 @@ class NavigationTest(unittest.TestCase):
             )
             engine = StandardsEngine.open_repository(
                 root, store_path=Path(temporary) / "standards.sqlite3"
-            )
+            , purpose="authoring")
             try:
                 created = engine.create_snapshot(
                     CreateSnapshotCall.from_value({"kind": "create-snapshot"})

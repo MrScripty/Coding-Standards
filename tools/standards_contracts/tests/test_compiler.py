@@ -12,6 +12,15 @@ from support import canonical_inputs
 
 
 class ContractCompilerTest(unittest.TestCase):
+    def test_operation_variants_preserve_submission_capability_coverage(self):
+        schema, interface = canonical_inputs()
+        resolve = next(operation for operation in interface["operations"] if operation["id"] == "resolve")
+        resolve["variants"] = {"mismatched": {"input_definition": "CreateSnapshotCall",
+                                              "result_definitions": ["RejectedResult"]}}
+        with self.assertRaises(ContractError) as rejected:
+            compile_contracts(schema, interface)
+        self.assertEqual(rejected.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
+
     def test_canonical_schema_and_interface_have_one_exact_public_closure(self) -> None:
         schema, interface = canonical_inputs()
         compiled = compile_contracts(schema, interface)
@@ -197,3 +206,36 @@ class ContractCompilerTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OperationVariantTest(unittest.TestCase):
+    def test_variant_has_its_own_closed_roots_and_immutable_selection(self):
+        schema, interface = canonical_inputs()
+        compiled = compile_contracts(schema, interface)
+        read = next(op for op in compiled.interface.operations if op.id == "read")
+        selected = read.select_variant("application")
+        self.assertEqual(selected.input_definition, "ApplicationReadCall")
+        self.assertIn("ApplicationReadResult", selected.result_definitions)
+        self.assertNotIn("ReadResult", selected.result_definitions)
+        self.assertEqual(selected.capability, read.capability)
+        with self.assertRaises(TypeError):
+            read.variants["other"] = read.variants["application"]
+        with self.assertRaises(KeyError):
+            read.select_variant("missing")
+        projected = compiled.project().agent_tools
+        projected_read = next(op for op in projected["operations"] if op["id"] == "read")
+        self.assertEqual(projected_read["variants"]["application"]["input_definition"], selected.input_definition)
+
+    def test_variant_rejects_unknown_definitions_fields_and_duplicate_results(self):
+        for replacement in (
+            {"input_definition": "Missing", "result_definitions": ["ApplicationReadResult"]},
+            {"input_definition": "ApplicationReadCall", "result_definitions": ["ApplicationReadResult"] * 2},
+            {"input_definition": "ApplicationReadCall", "result_definitions": []},
+            {"input_definition": "ApplicationReadCall", "result_definitions": ["ApplicationReadResult"], "capability": "extra"},
+        ):
+            schema, interface = canonical_inputs()
+            read = next(op for op in interface["operations"] if op["id"] == "read")
+            read["variants"]["application"] = replacement
+            with self.subTest(replacement=replacement), self.assertRaises(ContractError) as caught:
+                compile_contracts(schema, interface)
+            self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")

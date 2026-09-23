@@ -218,6 +218,7 @@ def produce(repository: Path, store: Path, manifest_path: Path) -> dict[str, obj
         repository,
         store_path=store,
         execution_context=AnalysisExecutionContext(HarnessAuthorizer()),
+        purpose="authoring",
     )
     facade = _FacadeSession(engine)
     try:
@@ -405,7 +406,7 @@ def _concurrent_probe(
 
 def probe(repository: Path, store: Path, manifest_path: Path) -> dict[str, object]:
     manifest = _load_manifest(manifest_path)
-    engine = StandardsEngine.open_repository(repository, store_path=store)
+    engine = StandardsEngine.open_repository(repository, store_path=store, purpose="authoring")
     facade = _FacadeSession(engine)
     try:
         snapshot = manifest["snapshot"]
@@ -440,7 +441,7 @@ def consume(store: Path, manifest_path: Path) -> dict[str, object]:
     _verify_store(store, manifest)
     with tempfile.TemporaryDirectory() as temporary:
         repository = _temporary_repository(Path(temporary))
-        engine = StandardsEngine.open_repository(repository, store_path=store)
+        engine = StandardsEngine.open_repository(repository, store_path=store, purpose="authoring")
         facade = _FacadeSession(engine)
         try:
             snapshot = manifest["snapshot"]
