@@ -64,13 +64,20 @@ Both the requested-path closure and semantic signature still have to agree.
 The selected accepted-main revision stays fixed throughout that capture.
 
 Analysis preparation and resolution borrow verified immutable inputs for the
-current native operation. Identical snapshot roles share one material value;
-distinct roots keep independent lifecycle and content observations. Exact
-proposal projections carry their already-compiled base into logical authoring,
-while changed candidates take the complete compiler path. Retained-decision
-and pre-/post-submission evaluations still run independently, with current
-lifecycle, revision and authorization observations at their existing boundaries.
-The immutable material does not retain provider outcomes or evaluation results.
+current operation. Identical snapshot roles share one material value; distinct
+roots keep independent lifecycle and content observations. Focused proposal
+creation, revision, analysis and resolution pass one explicit proposal-material
+scope through preflight, prospective validation and native analysis. It retains
+one verified base and only the most recent exact projection; changing revisions
+replaces that projection. Authoring receives its pure preparation dependency
+per invocation while retaining ownership of durable roots and conditional writes.
+
+Each material access checks current snapshot lifecycle. Stored revisions, heads,
+authorization and pre-/post-submission decisions retain their independent checks.
+Changed candidates take the complete compiler path; capture's two passes remain
+independent. Scope cleanup releases retained references on success or failure.
+The scope contains no provider outcomes or evaluation results. Nested public
+re-entry constructs its own scope, and public request shapes remain unchanged.
 
 Each subsequent operation loads and verifies its own captured bytes. Publication
 verification, target compare-and-swap and recovery obtain fresh observations;

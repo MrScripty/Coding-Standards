@@ -1,0 +1,32 @@
+{
+  "baseline_revision": "63338566110bf8de9d0a84fddf3322cc6bb6c0c9",
+  "candidate_source_hashes": {
+    "tools/standards_engine/standards_engine/agent_workflow.py": "c133d520bc82c951e6f9be3ee6e6b7ca2ecdc7cde4c38b8c4ee1a42533a494d9",
+    "tools/standards_engine/standards_engine/authoring.py": "6761c6b11a3904052b873c0db8d83127bb8080f0dc73fff3c6a2d26620bcd538",
+    "tools/standards_engine/standards_engine/engine.py": "1c40aeafc3b247b8acded59b4b9fd9bb99c8eb00d59b795f8b60cce03243a196",
+    "tools/standards_engine/standards_engine/operation_materials.py": "fff7a6cba434679b8d95f89d1eb17e25013b9887047c2dd7ab632d3b4d84a6fe",
+    "tools/standards_engine/tests/test_agent_workflow.py": "d429509a1fead84d65a885d098e9dd5d8b78ca8e975b2a4727c3041ae01c81f6",
+    "tools/standards_engine/tests/test_authoring.py": "7246399d408485f0f135b4f07b964bc9e2c6c1e0ff6d55a970d5e5aef0cd8d37",
+    "tools/standards_engine/tests/test_nested_materials.py": "ab107415318aba18acdef76bc5da969ff4343317beb3097872e7f7acf5901020"
+  },
+  "captured_corpus": {
+    "content_id": "snapshot-content:sha256:b4bd401f3eec9938044b0971b0804c131de8b45fae3fbc764b92fa63ac446a35",
+    "files": 434,
+    "source_bytes": 3733667,
+    "source_revision": "63338566110bf8de9d0a84fddf3322cc6bb6c0c9"
+  },
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "sqlite": "3.46.1",
+  "git": "git version 2.47.3",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "dependencies": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0",
+    "jsonschema-specifications": "2025.9.1",
+    "rpds-py": "2026.5.1",
+    "typing-extensions": "4.16.0"
+  },
+  "method": "Three complete sequences per side, baseline then candidate serially. Full regression/package processes finished before these measurements. Both sides use the exact committed baseline as fixture source. Operation wall times exclude fixture capture, imports, and facade setup. Span timings are inclusive. The final production-source hashes match the qualification candidate and measured candidate.",
+  "probe_sha256": "9c49f0c4136072888d5f0c54c622f31e024f2cd6319cd11222e5e24db7daf3df"
+}

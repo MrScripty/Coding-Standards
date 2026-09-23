@@ -92,11 +92,41 @@ def _change_set_contract(
     }
 
 
+class _FixturePreparation:
+    """Supply the synthetic corpus/validator used by coordination-only tests."""
+
+    def __init__(self, validate_revision, observe_repository_paths):
+        self.validate_revision = validate_revision
+        self.repository_paths = observe_repository_paths
+
+
+class _FixtureAuthoring(AuthoringModule):
+    """Run real durable coordination with explicitly fixture-owned preparation.
+
+    Engine integration tests elsewhere use real ProposalMaterials. These tests
+    exercise a two-file synthetic corpus and injected validation failures.
+    """
+
+    def __init__(self, snapshots, *, validate_revision, observe_repository_paths, **options):
+        super().__init__(snapshots, **options)
+        self.preparation = _FixturePreparation(validate_revision, observe_repository_paths)
+
+    def create_proposal(self, base_snapshot, change_set, *, preparation=None):
+        return super().create_proposal(
+            base_snapshot, change_set, preparation=self.preparation
+        )
+
+    def revise_proposal(self, expected_revision, change_set, *, preparation=None):
+        return super().revise_proposal(
+            expected_revision, change_set, preparation=self.preparation
+        )
+
+
 def _authoring(
     snapshots: SnapshotModule,
     **options: object,
 ) -> AuthoringModule:
-    return AuthoringModule(
+    return _FixtureAuthoring(
         snapshots,
         validate_revision=lambda _revision: None,
         observe_repository_paths=lambda snapshot: (
@@ -674,7 +704,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
                         )
                     )
 
-            engine._authoring = AuthoringModule(
+            engine._authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=validate_revision,
                 observe_repository_paths=lambda snapshot: (
@@ -804,7 +834,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
                     )
                 )
 
-            authoring = AuthoringModule(
+            authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=reject_unavailable,
                 observe_repository_paths=lambda snapshot: (
@@ -945,7 +975,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
             proposal_id = ProposalId.from_uuid(
                 uuid.UUID("00000000-0000-4000-8000-000000000001")
             )
-            authoring = AuthoringModule(
+            authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=lambda _revision: None,
                 observe_repository_paths=lambda snapshot: (
@@ -999,7 +1029,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
                 )
             )
             now = [2_000_000_000]
-            authoring = AuthoringModule(
+            authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=lambda _revision: None,
                 observe_repository_paths=lambda snapshot: (

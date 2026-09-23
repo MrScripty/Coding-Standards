@@ -219,6 +219,7 @@ from .logical_authoring import (
     authoring_target_id,
 )
 from .navigation_indexes import NavigationIndex
+from .operation_materials import ProposalMaterials
 from .context_projection import Purpose, public_operation
 
 
@@ -447,11 +448,7 @@ class StandardsEngine:
         self._repository = repository
         self._snapshots = snapshots
         self._logical_authoring = LogicalAuthoringCompiler(self._compile)
-        self._authoring = AuthoringModule(
-            snapshots,
-            validate_revision=self._validate_logical_revision,
-            observe_repository_paths=self._repository_paths_for_snapshot,
-        )
+        self._authoring = AuthoringModule(snapshots)
         self._execution_context = execution_context or AnalysisExecutionContext()
         self._application_verifier = run_complete_verification
         self._temporary_store = temporary_store
@@ -841,10 +838,17 @@ class StandardsEngine:
     def create_proposal(
         self, call: CreateProposalCall
     ) -> CreateProposalResult | RejectedResult:
+        with ProposalMaterials(self) as materials:
+            return self._create_proposal(call, materials)
+
+    def _create_proposal(
+        self, call: CreateProposalCall, materials: ProposalMaterials
+    ) -> CreateProposalResult | RejectedResult:
         try:
             summary, revision = self._authoring.create_proposal(
                 self._snapshot_id(call.base_snapshot),
                 StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                preparation=materials,
             )
             return CreateProposalResult.from_value(
                 {
@@ -882,10 +886,17 @@ class StandardsEngine:
     def revise_proposal(
         self, call: ReviseProposalCall
     ) -> ReviseProposalResult | RejectedResult:
+        with ProposalMaterials(self) as materials:
+            return self._revise_proposal(call, materials)
+
+    def _revise_proposal(
+        self, call: ReviseProposalCall, materials: ProposalMaterials
+    ) -> ReviseProposalResult | RejectedResult:
         try:
             summary, revision = self._authoring.revise_proposal(
                 call.expected_revision.id,
                 StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                preparation=materials,
             )
             return ReviseProposalResult.from_value(
                 {
@@ -931,25 +942,29 @@ class StandardsEngine:
     def propose(self, call: ProposeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import propose
 
-        return propose(self, call)
+        with ProposalMaterials(self) as materials:
+            return propose(self, call, materials)
 
     @public_operation
     def revise(self, call: ReviseCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "revise", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "revise", call, materials)
 
     @public_operation
     def analyze(self, call: AnalyzeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "analyze", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "analyze", call, materials)
 
     @public_operation
     def resolve_workflow(self, call: ResolveWorkflowCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "resolve_workflow", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "resolve_workflow", call, materials)
 
     @public_operation
     def review(self, call: ReviewCall) -> WorkflowResult | RejectedResult:
@@ -973,7 +988,8 @@ class StandardsEngine:
     def workflow_status(self, call: WorkflowStatusCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "workflow_status", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "workflow_status", call, materials)
 
     @public_operation
     def resume(self, call: ResumeCall) -> WorkflowResult | RejectedResult:
@@ -1072,10 +1088,16 @@ class StandardsEngine:
     def analyze_proposal(
         self, call: AnalyzeProposalCall
     ) -> PendingResult | CompleteResult | RejectedResult:
+        with ProposalMaterials(self) as materials:
+            return self._analyze_proposal(call, materials)
+
+    def _analyze_proposal(
+        self, call: AnalyzeProposalCall, materials: ProposalMaterials
+    ) -> PendingResult | CompleteResult | RejectedResult:
         try:
             revision = self._authoring.read_revision(call.revision.id)
-            accepted = self._compiled_snapshot(revision.base_snapshot)
-            projection = self._proposal_projection(revision, accepted)
+            accepted = materials.compiled(revision.base_snapshot)
+            projection = materials.projection(revision)
             proposed = projection.compiled
             semantic_proposals = projection.semantic_proposals
             affected_policy_ids = set(projection.analysis_policy_ids)
@@ -1638,9 +1660,14 @@ class StandardsEngine:
     def resolve(
         self, call: ResolveCall
     ) -> PendingResult | CompleteResult | RejectedResult:
+        return self._resolve(call)
+
+    def _resolve(
+        self, call: ResolveCall, operation: ProposalMaterials | None = None
+    ) -> PendingResult | CompleteResult | RejectedResult:
         try:
             state = self._load_analysis(call.analysis)
-            materials = self._evaluation_materials(state)
+            materials = self._evaluation_materials(state, operation)
             successor = self._apply_submission(self._evaluate(state, materials), call)
             return self._evaluate_publish_project(successor, materials)
         except self._domain_errors() as error:
@@ -1721,14 +1748,6 @@ class StandardsEngine:
             compiled_base=accepted,
         )
 
-    def _validate_logical_revision(self, revision: ProposalRevision) -> None:
-        self._proposal_projection(revision)
-
-    def _repository_paths_for_snapshot(self, snapshot: SnapshotId) -> tuple[str, ...]:
-        capture = self._snapshots.load_content(snapshot)
-        revision = RepositoryRevision(capture.source_revision)
-        return tuple(str(path) for path in self._repository.revision_paths(revision))
-
     @staticmethod
     def _compile(source: ContentSource) -> CompiledSnapshot:
         from .navigation_indexes import load_indexes
@@ -1789,8 +1808,13 @@ class StandardsEngine:
             tuple(authorizations[key] for key in sorted(authorizations)),
         )
 
-    def _evaluation_materials(self, state: DomainAnalysisState) -> _EvaluationMaterials:
-        accepted = self._compiled_snapshot(state.base_snapshot)
+    def _evaluation_materials(
+        self, state: DomainAnalysisState, operation: ProposalMaterials | None = None
+    ) -> _EvaluationMaterials:
+        accepted = (
+            self._compiled_snapshot(state.base_snapshot)
+            if operation is None else operation.compiled(state.base_snapshot)
+        )
         proposed_ref = state.proposed_material
         if isinstance(proposed_ref, SnapshotMaterialRef):
             proposed = (
@@ -1810,7 +1834,10 @@ class StandardsEngine:
                     "Proposal revision and analysis base snapshots differ.",
                 )
             )
-        projection = self._proposal_projection(revision, accepted)
+        projection = (
+            self._proposal_projection(revision, accepted)
+            if operation is None else operation.projection(revision)
+        )
         return _EvaluationMaterials(
             state.base_snapshot,
             proposed_ref,

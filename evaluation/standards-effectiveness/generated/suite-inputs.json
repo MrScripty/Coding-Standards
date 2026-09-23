@@ -7029,7 +7029,7 @@
       ]
     },
     {
-      "digest": "sha256:cb143a833e9eff04624e7d4343107fbc4e23c09e471777f3c65644ec3ab9c1d4",
+      "digest": "sha256:c133d520bc82c951e6f9be3ee6e6b7ca2ecdc7cde4c38b8c4ee1a42533a494d9",
       "path": "tools/standards_engine/standards_engine/agent_workflow.py",
       "state": "present",
       "uses": [
@@ -7041,7 +7041,7 @@
       ]
     },
     {
-      "digest": "sha256:20052ac23cc68680ceead0b9c822bc05494ea6cbb3b139fc7903d861d113bda7",
+      "digest": "sha256:6761c6b11a3904052b873c0db8d83127bb8080f0dc73fff3c6a2d26620bcd538",
       "path": "tools/standards_engine/standards_engine/authoring.py",
       "state": "present",
       "uses": [
@@ -7065,7 +7065,7 @@
       ]
     },
     {
-      "digest": "sha256:c934cec565312dfcf92351d7fb042091dc641e60591e1bdb98ba32faf4dd5ea4",
+      "digest": "sha256:1c40aeafc3b247b8acded59b4b9fd9bb99c8eb00d59b795f8b60cce03243a196",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7125,6 +7125,18 @@
     {
       "digest": "sha256:0c8b56d1a914306f954eaa9c24fb78d56415912f8668f486d9f88982d84e57c2",
       "path": "tools/standards_engine/standards_engine/navigation_indexes.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:fff7a6cba434679b8d95f89d1eb17e25013b9887047c2dd7ab632d3b4d84a6fe",
+      "path": "tools/standards_engine/standards_engine/operation_materials.py",
       "state": "present",
       "uses": [
         {
@@ -13254,7 +13266,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:8d4d7663b51117f0cadb45bb83fb9da288e200c485dc59af2f92d1b1edbb2c8a",
+    "digest": "sha256:c78cf869a7d3432df7de066412b97a860d9f07c25d333186129e5f0b1dd25c19",
     "uses": [
       {
         "check": "python-package-contract",

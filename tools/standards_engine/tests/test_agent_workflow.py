@@ -275,7 +275,7 @@ class AgentWorkflowTest(unittest.TestCase):
                 "next_operations": [],
             }
         )
-        with patch.object(self.engine, "analyze_proposal", return_value=failure):
+        with patch.object(self.engine, "_analyze_proposal", return_value=failure):
             result = self.facade.propose(
                 {
                     "snapshot": self.snapshot,
