@@ -10,7 +10,7 @@ These are bounded implementation or rollout facts, not claims of newly reproduce
 | PSE-04 | known boundary | Content owner | Existing standards contain unreviewed mixed prose. Code alone cannot establish positive application content. | Start the real application-exposure manifest empty; migrate content through the separate guide after code acceptance. |
 | PSE-05 | pending | Host owner | An application agent may have independent checkout/store/log access. | Confirm the deployment boundary; Engine-mediated guarantees do not imply OS isolation or context erasure. |
 | PSE-06 | implemented | Authoring owner | Prompts/templates and whole-module rewrites must be editable through the final Engine contract. | Runtime and tested operation map include scope_updates and registered prompt/template editing; independent C10 review remains pending. |
-| PSE-07 | pending | Verification owner | Existing failures could mask a changed claim. | Record where each affected baseline check stops; repair the obstruction, add a discriminator, or keep the claim unverified. |
+| PSE-07 | resolved for selected source checks | Verification owner | Existing failures could mask a changed claim. | Final selected runs pass after recorded fixture and implementation repairs. Full supported-environment qualification remains PSE-02. |
 
 No item authorizes unrelated repository cleanup or a normative-content change during code implementation. Block only the dependent action when its required fact is unavailable.
 

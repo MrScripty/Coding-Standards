@@ -38,3 +38,17 @@ variants remain owned by the existing contract compiler.
 The next accepted action is installed qualification and independent review.
 Local implementation and artifact packaging do not authorize the standards
 content migration while those requirements remain pending.
+
+## September 23, 2026 — Final source verification and ZIP validation
+
+Local Git CLI commit `ea4f643fbed938281e2a03e31963c995f0bcdcbb` contains the
+implementation. The final navigation-index suite passed 14 tests, the existing
+coverage-publication suite passed one test, and the focused authoring workflow
+passed six tests. Final selected test processes completed normally.
+
+The delivery patch recreated the intended index in a clean base checkout; the
+incremental bundle fast-forwarded a separate disposable branch to the exact
+clean implementation commit. ZIP CRC and all replacement hashes passed. The
+artifact includes the exact base, patch, full files, bundle and apply procedure.
+GitHub push remains DNS-blocked, so no PR was created. This evidence update does
+not change source behavior, normative content or the pending acceptance boundary.

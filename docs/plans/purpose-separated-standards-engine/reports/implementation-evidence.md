@@ -74,9 +74,10 @@ remote permission system or compatibility adapter was added.
 
 ## Supporting tests
 
-Executed test records are summarized below. Final packaging reconciles their
-results and any focused repairs. Structural checks do not execute the package
-tests or certify prose quality.
+Executed test records are summarized below. Final selected runs passed after the focused repairs described below.
+Structural checks do not execute the package tests or certify prose quality.
+These selected runs are not a claim that the complete Engine suite was executed
+in the supported pinned environment.
 
 | Observation | Result |
 | --- | --- |
@@ -87,12 +88,15 @@ tests or certify prose quality.
 | Logical authoring suite | 23 passed |
 | Existing low-level authoring suite | 13 passed |
 | Engine analysis/publication workflow suite | 14 passed |
+| Existing coverage-publication suite | 1 passed |
 | Generated-contract/facade suite after explicit-purpose fixture repair | 15 passed |
 | MCP transport unit suite | 12 passed |
 | Purpose projection suite | 14 passed |
 | Real CLI/stdin-stdout transport and cold SQLite reads | 4 passed |
 | Existing focused agent navigation | 11 passed |
+| Existing focused agent authoring workflow | 6 passed |
 | Existing native navigation | 7 passed |
+| Navigation-index suite, including verified index publication | 14 passed |
 | Renderer suite after purpose/publication distinction | 10 passed |
 | Coordinated publication followed by provenance-only publication | 1 passed using real Git, SQLite and the complete publication checkpoint |
 | Full structural checkpoint | 73 suites passed; zero failed or blocked |
@@ -135,6 +139,19 @@ The plan's C8 installed qualification and C10 independent final review therefore
 remain outstanding. Required evidence is not replaced with the local interpreter,
 a passing structural checkpoint, or the synthetic provenance review decisions.
 The content guide remains gated on code acceptance.
+
+## Delivery validation
+
+The implementation commit is `ea4f643fbed938281e2a03e31963c995f0bcdcbb`, created
+on the existing dedicated branch with Git CLI. The changed-files ZIP provides
+complete replacement files, a full-index patch, an incremental Git bundle,
+base/result hashes and application instructions. In separate disposable clones,
+patch application reproduced the intended index and bundle import fast-forwarded
+to the exact clean commit. Archive CRC and replacement-file hashes also passed.
+
+The explicit Git CLI push to the existing GitHub branch failed with
+`Could not resolve host: github.com`. The fallback archive is the delivery;
+no remote push or pull request is reported.
 
 ## Handoff
 
