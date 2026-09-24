@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v24",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v32",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -21,6 +21,12 @@
     },
     {
       "$ref": "#/$defs/ApplicationReadCall"
+    },
+    {
+      "$ref": "#/$defs/ApplicationReadManyCall"
+    },
+    {
+      "$ref": "#/$defs/ApplicationReadManyResult"
     },
     {
       "$ref": "#/$defs/ApplicationReadResult"
@@ -129,6 +135,12 @@
     },
     {
       "$ref": "#/$defs/ReadCall"
+    },
+    {
+      "$ref": "#/$defs/ReadManyCall"
+    },
+    {
+      "$ref": "#/$defs/ReadManyResult"
     },
     {
       "$ref": "#/$defs/ReadResult"
@@ -6589,7 +6601,8 @@
             "APPLICATION.INPUT_INVALID",
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
-            "APPLICATION.UNSUPPORTED_CAPTURE"
+            "APPLICATION.UNSUPPORTED_CAPTURE",
+            "APPLICATION.RESULT_LIMIT"
           ]
         },
         "outcome": {
@@ -7358,6 +7371,170 @@
         },
         "semantics": {
           "$ref": "#/$defs/PolicySemanticIntent"
+        }
+      }
+    },
+    "ReadManyItem": {
+      "type": "object",
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "include_routing": {
+          "type": "boolean"
+        },
+        "include_coverage": {
+          "type": "boolean",
+          "description": "Include current repository attestation status for registered policy units in this read scope."
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact preserves exact policy and essential authority; full includes all relationship rows."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReadManyCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "items"
+      ],
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ReadManyItem"
+          }
+        }
+      }
+    },
+    "ReadManyResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "snapshot",
+        "items"
+      ],
+      "properties": {
+        "kind": {
+          "const": "read-many-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/CompactReadResult"
+              },
+              {
+                "$ref": "#/$defs/ReadResult"
+              },
+              {
+                "$ref": "#/$defs/NavigationIndexesResult"
+              },
+              {
+                "$ref": "#/$defs/ProvenanceReadResult"
+              },
+              {
+                "$ref": "#/$defs/OperationalReadResult"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ApplicationReadManyItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ]
+        }
+      }
+    },
+    "ApplicationReadManyCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "items"
+      ],
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ApplicationReadManyItem"
+          }
+        }
+      }
+    },
+    "ApplicationReadManyResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "snapshot",
+        "items",
+        "purpose"
+      ],
+      "properties": {
+        "kind": {
+          "const": "application-read-many-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ApplicationReadResult"
+              }
+            ]
+          }
+        },
+        "purpose": {
+          "const": "application"
         }
       }
     }

@@ -133,6 +133,13 @@ async def main(server_name):
             assert read["kind"] == "compact-read-result", read
             assert read["snapshot"] == routed["snapshot"]
             assert all(i["operation"] in toolmap for i in read["next_operations"])
+            grouped = await call("read_many", {
+                "snapshot": routed["snapshot"],
+                "items": [{"target": op["target"]}, {"target": op["target"], "detail": "full"}],
+            })
+            assert grouped["kind"] == "read-many-result", grouped
+            assert grouped["items"][0] == read
+            assert all(item["snapshot"] == routed["snapshot"] for item in grouped["items"])
             print(
                 "Codex route -> read: available continuations, same snapshot, exact content returned",
                 flush=True,

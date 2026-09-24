@@ -13,7 +13,7 @@ Authorization remains the existing independent injected contract. The local
 facade is an owner-operated always-allow authorization adapter for admitted
 authoring operations; this release does not supply a multi-user access service.
 
-Application operations are `route`, `read`, `related`, `routing_facts`, `query`
+Application operations are `route`, `read`, `read_many`, `related`, `routing_facts`, `query`
 and `inspect`. The focused MCP catalog omits native `query`; `--advanced` can
 expose it within the same purpose. Authoring retains the complete existing
 workflow. Canonical interface operation variants own each purpose's input and
@@ -132,6 +132,31 @@ server processes retain separate fixed-purpose resources. Stream EOF or failure
 releases the server-owned interface, catalog and cache; closing a borrowing Engine
 closes its store without releasing the owner's cache.
 
+## Bounded grouped reads
+
+`read_many` takes one explicit snapshot and 1–32 ordered `items`. Each item has a
+`target` and optional `detail`; authoring also permits the single-read coverage
+and routing options. Exact duplicate requests are invalid. Reuse the snapshot
+returned by routing or a single read, and select only the needed guidance.
+
+The result contains the original snapshot and ordered single-read results.
+One complete durable content/identity validation supplies the whole operation;
+current snapshot lifecycle is checked before every item and before return.
+Purpose, exposure, prerequisite and item-option checks use the ordinary read
+projection. Any failed item or lifecycle observation rejects the entire set.
+No item content is returned on failure. A new independent call verifies durable
+content again. This is a new explicit operation, not a change to single reads.
+
+The complete domain result is bounded to 2 MiB in the transport's default JSON
+encoding (ASCII escaping and default separators); protocol framing, alternate
+pretty-printing and MCP's duplicate structured/text encodings are outside that
+payload bound. A larger set returns `READ_MANY.RESULT_LIMIT` in authoring or
+`APPLICATION.RESULT_LIMIT` in application. Select fewer items or smaller policy
+scopes; the Engine neither truncates material nor substitutes partial success.
+`read_many` uses the named operation through MCP, the reference CLI and the
+native facade; it is not a new request variant inside `query` or `query_proposal`.
+Restart clients/servers after the interface update to discover the new operation.
+
 ## Application qualification
 
 A declaration identifies an entire canonical module or registered operational
@@ -217,7 +242,7 @@ those same bytes. The Engine does not rewrite semantic versions after review.
 
 ## Versions and coordinated cutover
 
-Current Engine package/transport implementation: 0.2.0. Engine interface: 31.
+Current Engine package/transport implementation: 0.2.0. Engine interface: 32.
 Analysis request: 6; result/state and Analysis handles: 7. The semantic-revision
 interpretation change belongs to Analysis 7. Unchanged Snapshot, proposal,
 readiness, application and generic identity/storage contracts keep their

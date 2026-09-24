@@ -32,6 +32,11 @@ accepted authority and returns its handle. `read` defaults to compact exact
 policy content and essential metadata; `detail: "full"` returns all relationship
 rows. Native `query` remains available.
 
+`read_many` reads a selected set using one explicit snapshot. It accepts 1–32
+ordered unique items, applies the existing purpose-qualified single-read behavior,
+and returns all results or one bounded rejection. Its complete JSON domain
+payload is limited to 2 MiB. See [the grouped-read contract](PURPOSE-SEPARATION.md#bounded-grouped-reads).
+
 Navigation reads immutable snapshots; proposal analysis, review, verification,
 and application operate on exact revision handles. Proposal creation and
 revision each carry one atomic

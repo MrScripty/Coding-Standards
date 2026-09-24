@@ -1,0 +1,65 @@
+{
+  "production_sources": [
+    {
+      "path": "tools/repository_git/repository_git/batch.py",
+      "delivered_sha256": "45e07721da5c893ff0c4ebcbe34ed0e0e37386bdbdcc6a053aff8db5b52bf75b",
+      "final_qualification_sha256": "45e07721da5c893ff0c4ebcbe34ed0e0e37386bdbdcc6a053aff8db5b52bf75b",
+      "same": true
+    },
+    {
+      "path": "tools/repository_git/repository_git/repository.py",
+      "delivered_sha256": "66ef50088989f4c896287ef7f15920d1f68aa3e82e02af16b3e9cb29c88a3ecb",
+      "final_qualification_sha256": "66ef50088989f4c896287ef7f15920d1f68aa3e82e02af16b3e9cb29c88a3ecb",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/_generated_contract.py",
+      "delivered_sha256": "b023eeef004835e52ab836d27f435dfef6a0d783957fc956857e1140f4c2d213",
+      "final_qualification_sha256": "b023eeef004835e52ab836d27f435dfef6a0d783957fc956857e1140f4c2d213",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/agent_navigation.py",
+      "delivered_sha256": "00eac297060bbcbad9b70768f1dd04e4f8a05db0eb824a0ab67a4f9042d4de55",
+      "final_qualification_sha256": "00eac297060bbcbad9b70768f1dd04e4f8a05db0eb824a0ab67a4f9042d4de55",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/context_projection.py",
+      "delivered_sha256": "f8da1bd1da13767122b76ee201fa37c62704739719a8c01cb4356c23cc997fb6",
+      "final_qualification_sha256": "f8da1bd1da13767122b76ee201fa37c62704739719a8c01cb4356c23cc997fb6",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/engine.py",
+      "delivered_sha256": "7790c66981e1b88986e186c521c2ab51e00c37f62cd096897063ae55504cc1c0",
+      "final_qualification_sha256": "7790c66981e1b88986e186c521c2ab51e00c37f62cd096897063ae55504cc1c0",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/mcp.py",
+      "delivered_sha256": "3f87dbdd3157f6b98baeb6bf78c4cfdf8cfefb65be2a13e5c55e0bb58e295bb6",
+      "final_qualification_sha256": "3f87dbdd3157f6b98baeb6bf78c4cfdf8cfefb65be2a13e5c55e0bb58e295bb6",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/rendering.py",
+      "delivered_sha256": "1b7e525f8b0b1628013c18769a0639eeb12980b5541e8115e61573246e1bda3e",
+      "final_qualification_sha256": "1b7e525f8b0b1628013c18769a0639eeb12980b5541e8115e61573246e1bda3e",
+      "same": true
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/tools.py",
+      "delivered_sha256": "c25f973967eb949de4a3168635ef36bac111d75a3f1f38000ba198d3926bde93",
+      "final_qualification_sha256": "c25f973967eb949de4a3168635ef36bac111d75a3f1f38000ba198d3926bde93",
+      "same": true
+    }
+  ],
+  "full_campaign_mcp_formatting": {
+    "path": "tools/standards_engine/standards_engine/mcp.py",
+    "before_sha256": "38ad14683d21188b95eb8e458da5cee49ea5d84be560a0ff38b13d4f5b4dd449",
+    "after_sha256": "3f87dbdd3157f6b98baeb6bf78c4cfdf8cfefb65be2a13e5c55e0bb58e295bb6",
+    "parsed_ast_equal": true
+  },
+  "source_main": "366c1d90a24bbfb50973f62b155a5f3396c0f107"
+}

@@ -44,6 +44,20 @@ Files under [`examples/`](examples/) are reviewed authored fixtures. Each
 example names one reachable schema definition and supplies one value. They do
 not define fields, defaults, variants, identity, or runtime semantics.
 
+## Grouped Reading (Interface 32)
+
+`read_many` declares authoring and application operation variants. Both require
+an explicit snapshot and 1–32 unique ordered read items. Each item uses the
+corresponding single-read options without a separate snapshot. Success returns
+that snapshot and ordered single-read result objects; failures return one normal
+purpose-qualified rejection and no item results. The Engine additionally enforces
+a 2 MiB serialized domain-result bound (documented in PURPOSE-SEPARATION.md).
+
+This public addition changes the interface version and generated projections;
+Snapshot, Analysis, identity and store contracts keep their independent versions.
+The schema/compiler remain the sole shape authority. Transport catalogs expose
+one additional focused operation; existing query variants retain their scope.
+
 ## Focused Agent Navigation
 
 Interface version 30 adds `rewrite-navigation-index` to the proposal edit

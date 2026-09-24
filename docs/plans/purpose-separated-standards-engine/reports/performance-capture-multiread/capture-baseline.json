@@ -1,0 +1,66 @@
+{
+  "source_commit": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+  "fixture_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "python_binary_sha256": "e59d0124ff06c248546876e01fcfb1ea3cda63534949f94a9372bfcfe3bfc3f5",
+  "observations": [
+    {
+      "label": "sample-0",
+      "seconds": 2.000777889000119,
+      "parent_cpu_seconds": 1.202563377,
+      "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+      "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+      "files": 437,
+      "source_bytes": 3757063,
+      "store_bytes": 4530176
+    },
+    {
+      "label": "sample-1",
+      "seconds": 1.9806353500000569,
+      "parent_cpu_seconds": 1.2397191200000002,
+      "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+      "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+      "files": 437,
+      "source_bytes": 3757063,
+      "store_bytes": 4530176
+    },
+    {
+      "label": "sample-2",
+      "seconds": 2.2334635510001135,
+      "parent_cpu_seconds": 1.2946092030000003,
+      "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+      "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+      "files": 437,
+      "source_bytes": 3757063,
+      "store_bytes": 4530176
+    }
+  ],
+  "attribution": {
+    "label": "attribution-only",
+    "seconds": 2.156517116000032,
+    "parent_cpu_seconds": 1.3071809409999995,
+    "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+    "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+    "files": 437,
+    "source_bytes": 3757063,
+    "store_bytes": 4530176,
+    "counts": {
+      "git_processes": 529,
+      "full_compiles": 2,
+      "git_batch_processes": 527,
+      "tree_parses": 3872,
+      "source_reads": 1140
+    },
+    "peak_session_retention": {
+      "bytes": 3793805,
+      "entries": 527
+    },
+    "session_count": 1,
+    "closed_session_bytes": [
+      0
+    ],
+    "closed_session_entries": [
+      0
+    ]
+  }
+}

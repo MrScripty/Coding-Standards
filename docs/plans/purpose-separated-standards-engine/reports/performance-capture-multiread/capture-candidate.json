@@ -1,0 +1,66 @@
+{
+  "source_commit": "3d92a78b3343204e686ed75d31172c1d02b24f11",
+  "fixture_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "python_binary_sha256": "e59d0124ff06c248546876e01fcfb1ea3cda63534949f94a9372bfcfe3bfc3f5",
+  "observations": [
+    {
+      "label": "sample-0",
+      "seconds": 0.6580945979999342,
+      "parent_cpu_seconds": 0.616518533,
+      "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+      "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+      "files": 437,
+      "source_bytes": 3757063,
+      "store_bytes": 4530176
+    },
+    {
+      "label": "sample-1",
+      "seconds": 0.6945829159999448,
+      "parent_cpu_seconds": 0.656972232,
+      "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+      "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+      "files": 437,
+      "source_bytes": 3757063,
+      "store_bytes": 4530176
+    },
+    {
+      "label": "sample-2",
+      "seconds": 0.6611960109999018,
+      "parent_cpu_seconds": 0.6220192300000003,
+      "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+      "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+      "files": 437,
+      "source_bytes": 3757063,
+      "store_bytes": 4530176
+    }
+  ],
+  "attribution": {
+    "label": "attribution-only",
+    "seconds": 0.6940271039998152,
+    "parent_cpu_seconds": 0.633667682,
+    "content_id": "snapshot-content:sha256:99a23add9dfa4f48711c1945dc0d133cf00dc44808f2ac9cfc00481690dc49f3",
+    "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+    "files": 437,
+    "source_bytes": 3757063,
+    "store_bytes": 4530176,
+    "counts": {
+      "git_processes": 3,
+      "full_compiles": 2,
+      "git_batch_processes": 1,
+      "tree_parses": 89,
+      "source_reads": 1140
+    },
+    "peak_session_retention": {
+      "bytes": 4007360,
+      "entries": 527
+    },
+    "session_count": 1,
+    "closed_session_bytes": [
+      0
+    ],
+    "closed_session_entries": [
+      0
+    ]
+  }
+}

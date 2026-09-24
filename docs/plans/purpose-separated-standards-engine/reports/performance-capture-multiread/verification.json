@@ -1,0 +1,107 @@
+{
+  "tested_commit": "3d92a78b3343204e686ed75d31172c1d02b24f11",
+  "runs": [
+    {
+      "package": "standards_engine",
+      "tests": 211,
+      "unittest_seconds": 522.251,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "graph_engine",
+      "tests": 37,
+      "unittest_seconds": 0.206,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "repository_git",
+      "tests": 28,
+      "unittest_seconds": 2.82,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_analysis",
+      "tests": 100,
+      "unittest_seconds": 0.897,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_applicability",
+      "tests": 12,
+      "unittest_seconds": 0.022,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_contracts",
+      "tests": 23,
+      "unittest_seconds": 28.672,
+      "skipped": 1,
+      "successful": true
+    },
+    {
+      "package": "standards_graph",
+      "tests": 2,
+      "unittest_seconds": 0.097,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_identity",
+      "tests": 16,
+      "unittest_seconds": 0.185,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_metadata",
+      "tests": 31,
+      "unittest_seconds": 0.342,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_policy_impact",
+      "tests": 10,
+      "unittest_seconds": 0.384,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_snapshots",
+      "tests": 23,
+      "unittest_seconds": 0.075,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "package": "standards_verifier",
+      "tests": 168,
+      "unittest_seconds": 5.605,
+      "skipped": 0,
+      "successful": true
+    }
+  ],
+  "total_run": 661,
+  "passed": 660,
+  "skipped": 1,
+  "final_focused_runs": [
+    {
+      "suite": "test_mcp",
+      "tests": 13,
+      "passed": 13
+    },
+    {
+      "suite": "test_read_many",
+      "tests": 12,
+      "passed": 12
+    }
+  ],
+  "full_engine_process": "one serial 211-test process; supporting packages ran in a separate process during the early part of Engine qualification; durations are not a paired suite benchmark",
+  "qualification_root_main": "candidate commit; real/source accepted main preserved",
+  "excluded_trial": "A final MCP rerun from source checkout failed SUPPORT.UNSUPPORTED_CAPTURE because its accepted main remains the older contract; correct disposable candidate context reran all 13 successfully without changing runtime capture semantics."
+}

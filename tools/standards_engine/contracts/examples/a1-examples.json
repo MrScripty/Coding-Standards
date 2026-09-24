@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 31,
+  "interface_schema_version": 32,
   "examples": [
     {
       "name": "create-snapshot",
@@ -688,6 +688,46 @@
           "child_id": "core",
           "schema_version": 5
         }
+      }
+    },
+    {
+      "name": "read-many",
+      "definition": "ReadManyCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "items": [
+          {
+            "target": "core"
+          },
+          {
+            "target": "router",
+            "detail": "full"
+          }
+        ]
+      }
+    },
+    {
+      "name": "application-read-many",
+      "definition": "ApplicationReadManyCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "items": [
+          {
+            "target": "core"
+          },
+          {
+            "target": "router",
+            "detail": "full"
+          }
+        ]
       }
     }
   ]

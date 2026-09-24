@@ -26,6 +26,7 @@ class Purpose(str, Enum):
 APPLICATION_CALLS = {
     "route": c.RouteCall,
     "read": c.ApplicationReadCall,
+    "read_many": c.ApplicationReadManyCall,
     "related": c.RelatedCall,
     "routing_facts": c.RoutingFactsCall,
     "query": c.ApplicationQueryCall,
@@ -36,6 +37,7 @@ APPLICATION_CALLS = {
 def application_rejection(code: str = "APPLICATION.CONTENT_UNAVAILABLE", outcome: str = "unavailable"):
     messages = {
         "APPLICATION.CONTENT_UNAVAILABLE": "The requested guidance is awaiting application publication.",
+        "APPLICATION.RESULT_LIMIT": "Select fewer items or narrower policy scopes within the 2 MiB reading limit.",
         "APPLICATION.INPUT_INVALID": "Supply arguments from this interface's published contract.",
         "APPLICATION.OPERATION_UNAVAILABLE": "This interface provides application navigation operations.",
         "APPLICATION.INTERNAL_UNAVAILABLE": "The requested application observation could not be established.",
@@ -247,6 +249,9 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             values = checked.request.as_contract()
             operation = values.pop("kind")
             checked = checked.request
+        if operation == "read_many":
+            from .agent_navigation import read_many
+            return read_many(engine, checked, compiled, application_view=view)
         if operation == "read":
             return view.read(values["target"], values.get("detail", "compact"))
         if operation == "related":

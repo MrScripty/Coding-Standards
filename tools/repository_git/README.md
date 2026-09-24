@@ -9,21 +9,30 @@ or public Engine operation. Callers resolve one revision and retain that exact
 value while loaders request files. Worktree changes and later commits cannot
 substitute bytes for the retained revision.
 
-`read_session(revision)` gives one bulk-read owner bounded reuse of fully
-verified Git objects. The owner closes the session when its operation ends.
-Entries are keyed by the configured repository, object ID, expected object type,
-and hash algorithm. Each miss performs the ordinary header, size, framing,
-and object-hash checks. Path, mode and explicit gitlink interpretation still
-run for every file request. A fresh session verifies its first reads again.
+`read_session(revision)` owns one bounded batch reader and an LRU of verified
+objects and decoded trees. Requests remain pinned to the selected revision.
+Each cache miss reads a frame from `git cat-file --batch`, then checks header,
+size, type, body framing and object hash. Decoded trees retain that verified
+object's interpretation; path/mode/gitlink decisions still run for every file.
+A fresh session verifies its first reads again. Ordinary `read_file` retains
+its independent one-shot observation boundary.
 
-The defaults retain at most 8 MiB of object payload and 1,024 entries; callers
-may select smaller bounds or zero retention. Entry bookkeeping is bounded by
-the entry cap separately from payload. Evicted and oversized valid objects use
-the same verified read path. The session is single-owner and contains no child
-process beyond those already owned by an individual Git command. Earlier
-verified objects remain immutable operation inputs; the session is not a
-continuous audit of the underlying disk. Ordinary `read_file` retains its
-independent, uncached observation boundary.
+The defaults retain at most 8 MiB of raw payload plus accounted decoded-tree
+allocations, and 1,024 entries. Entry bookkeeping is bounded separately by the
+entry cap. Oversized values use the same verified uncached path. A session owns
+at most one child at a time: crossing an explicit gitlink repository closes the
+previous child's stream and lazily starts the selected one. This bounds process
+and pipe population independently of the number of repository mappings.
+
+A dedicated exchange worker and bounded stderr drain keep blocking pipe work
+inside the existing per-command timeout. Each request gets its own deadline;
+there is no total capture deadline. Normal close verifies stdout EOF and exit
+status and joins workers. Exceptions abort the owned child (and its process
+group on POSIX), join workers and release retained state. A later explicit read
+can reopen a failed stream; there is no automatic request replay. Callers use
+the session context manager and complete it before accepting a capture.
+Earlier verified objects are immutable operation inputs, not a continuous audit
+of the source disk. The session remains single-owner, not a concurrent connection.
 
 The Adapter can also return the exact sorted path observation for a retained
 commit tree; callers persist that observation when later deterministic
@@ -49,8 +58,8 @@ index are not staging authority.
 
 Candidate blobs and the constructed commit must fit the same object bound used
 by exact reads, so publication cannot create content that a subsequent Adapter
-read rejects by size. All Git subprocesses receive a sanitized environment,
-bounded output, and a fixed timeout. Missing objects are `unavailable`;
+read rejects by size. Git commands and individual batch exchanges receive a sanitized environment,
+bounded output, and the existing command timeout. Missing objects are `unavailable`;
 malformed or contradictory objects are `invalid`; unsupported object modes,
 path encodings, and output sizes are `unsupported`.
 

@@ -679,6 +679,80 @@
       ],
       "type": "object"
     },
+    "ApplicationReadManyCall": {
+      "additionalProperties": false,
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ApplicationReadManyItem"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "snapshot",
+        "items"
+      ],
+      "type": "object"
+    },
+    "ApplicationReadManyItem": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "ApplicationReadManyResult": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ApplicationReadResult"
+              }
+            ]
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "application-read-many-result"
+        },
+        "purpose": {
+          "const": "application"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "items",
+        "purpose"
+      ],
+      "type": "object"
+    },
     "ApplicationReadRequest": {
       "additionalProperties": false,
       "properties": {
@@ -834,7 +908,8 @@
             "APPLICATION.INPUT_INVALID",
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
-            "APPLICATION.UNSUPPORTED_CAPTURE"
+            "APPLICATION.UNSUPPORTED_CAPTURE",
+            "APPLICATION.RESULT_LIMIT"
           ]
         },
         "kind": {
@@ -5093,6 +5168,96 @@
       ],
       "type": "object"
     },
+    "ReadManyCall": {
+      "additionalProperties": false,
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ReadManyItem"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "snapshot",
+        "items"
+      ],
+      "type": "object"
+    },
+    "ReadManyItem": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "description": "Compact preserves exact policy and essential authority; full includes all relationship rows.",
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "include_coverage": {
+          "description": "Include current repository attestation status for registered policy units in this read scope.",
+          "type": "boolean"
+        },
+        "include_routing": {
+          "type": "boolean"
+        },
+        "target": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "ReadManyResult": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/CompactReadResult"
+              },
+              {
+                "$ref": "#/$defs/ReadResult"
+              },
+              {
+                "$ref": "#/$defs/NavigationIndexesResult"
+              },
+              {
+                "$ref": "#/$defs/ProvenanceReadResult"
+              },
+              {
+                "$ref": "#/$defs/OperationalReadResult"
+              }
+            ]
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "read-many-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "items"
+      ],
+      "type": "object"
+    },
     "ReadRequest": {
       "additionalProperties": false,
       "properties": {
@@ -7149,7 +7314,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 31,
+  "interface_schema_version": 32,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -7628,6 +7793,30 @@
         "WorkflowResult",
         "RejectedResult"
       ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "read_many",
+      "input_definition": "ReadManyCall",
+      "input_schema": {
+        "$ref": "#/$defs/ReadManyCall"
+      },
+      "result_definitions": [
+        "ReadManyResult",
+        "RejectedResult"
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "ApplicationReadManyCall",
+          "input_schema": {
+            "$ref": "#/$defs/ApplicationReadManyCall"
+          },
+          "result_definitions": [
+            "ApplicationReadManyResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     }
   ],
   "request_contract_version": 6,

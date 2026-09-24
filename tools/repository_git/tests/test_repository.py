@@ -723,7 +723,8 @@ class GitRepositoryTests(unittest.TestCase):
             self._commit(root, "base")
             repository = GitRepository(root)
             revision = repository.current_revision()
-            with mock.patch.object(repository, "_object", wraps=repository._object) as fetch:
+            with mock.patch.object(repository_module.RevisionReadSession, "_fetch", autospec=True,
+                                   side_effect=repository_module.RevisionReadSession._fetch) as fetch:
                 with repository.read_session(revision) as session:
                     self.assertEqual(session.read_file(RepositoryPath.parse("a")), b"old")
                     self.assertEqual(session.read_file(RepositoryPath.parse("b")), b"old")
@@ -753,7 +754,8 @@ class GitRepositoryTests(unittest.TestCase):
             path, revision = RepositoryPath.parse("a"), repository.current_revision()
             for byte_limit, entry_limit in ((0, 10), (4096, 0), (4096, 1), (256, 10)):
                 with self.subTest(bytes=byte_limit, entries=entry_limit):
-                    with mock.patch.object(repository, "_object", wraps=repository._object) as fetch:
+                    with mock.patch.object(repository_module.RevisionReadSession, "_fetch", autospec=True,
+                                   side_effect=repository_module.RevisionReadSession._fetch) as fetch:
                         with repository.read_session(revision, max_cached_bytes=byte_limit,
                                                      max_cached_objects=entry_limit) as session:
                             self.assertEqual(session.read_file(path), content)
@@ -812,13 +814,14 @@ class GitRepositoryTests(unittest.TestCase):
             self._git(root, "commit", "-qm", "gitlink")
             repository = GitRepository(root, gitlinks=(GitlinkRepository(
                 RepositoryPath.parse("vendor"), nested),))
-            with mock.patch.object(repository, "_object", wraps=repository._object) as fetch:
+            with mock.patch.object(repository_module.RevisionReadSession, "_fetch", autospec=True,
+                                   side_effect=repository_module.RevisionReadSession._fetch) as fetch:
                 with repository.read_session(repository.current_revision()) as session:
                     self.assertEqual(session.read_file(RepositoryPath.parse("same")), b"same")
                     self.assertEqual(session.read_file(RepositoryPath.parse("vendor/same")), b"same")
                     self.assertEqual(session.read_file(RepositoryPath.parse("vendor/same")), b"same")
                     shared_oid = self._git(root, "rev-parse", "HEAD:same").strip()
-                    owners = {call.args[0] for call in fetch.call_args_list if call.args[1] == shared_oid}
+                    owners = {call.args[1] for call in fetch.call_args_list if call.args[2] == shared_oid}
                     self.assertEqual(owners, {root.resolve(), nested.resolve()})
 
 

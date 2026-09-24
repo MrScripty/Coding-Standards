@@ -25,6 +25,7 @@ from .context_projection import Purpose, qualified_operations
 PROTOCOL_VERSION = "2025-11-25"
 READ_ONLY_OPERATIONS = frozenset(
     {
+        "read_many",
         "workflow_status",
         "resume",
         "find_snapshots",
@@ -38,6 +39,7 @@ FOCUSED_OPERATIONS = frozenset(
     {
         "route",
         "read",
+        "read_many",
         "related",
         "routing_facts",
         "inspect",
@@ -59,6 +61,7 @@ FOCUSED_OPERATIONS = frozenset(
 # type renderer. This is generated documentation, never a second validator.
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
+    "read_many": "Read 1–32 selected items from one explicit snapshot in request order. Each item accepts the single-read options. The complete JSON result is limited to 2 MiB; a failed item rejects the whole request. Use the snapshot returned by route or read.",
     "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
     "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",
     "analyze": "Analyze the exact draft context and return pending requirements or complete analysis with a new context.",
@@ -95,6 +98,7 @@ DESCRIPTIONS = {
 
 
 APPLICATION_DESCRIPTIONS = {
+    "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
     "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Reuse the returned snapshot.",
     "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
     "related": "Discover selected relationships among qualified guidance and examples in one snapshot.",

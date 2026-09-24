@@ -125,6 +125,8 @@ from ._generated_contract import (
     RoutingFactsResult,
     AgentRouteResult,
     ReadCall,
+    ReadManyCall,
+    ReadManyResult,
     RelatedCall,
     CompactReadResult,
     AnalyzeProposalCall,
@@ -1023,6 +1025,17 @@ class StandardsEngine:
         from .agent_navigation import navigate
 
         return navigate(self, "read", call)
+
+    @public_operation
+    def read_many(self, call: ReadManyCall) -> ReadManyResult | RejectedResult:
+        """One verified snapshot supplies the complete bounded reading set."""
+        from .agent_navigation import read_many
+
+        try:
+            compiled = self._compiled_snapshot(self._snapshot_id(call.snapshot))
+            return read_many(self, call, compiled)
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
 
     @public_operation
     def related(self, call: RelatedCall) -> RelatedResult | RejectedResult:

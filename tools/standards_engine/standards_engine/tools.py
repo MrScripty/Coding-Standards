@@ -360,6 +360,12 @@ class AgentToolFacade:
             return call
         return self._result("read", self._engine.read(call))
 
+    def read_many(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("read_many", arguments, generated_contract.ReadManyCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("read_many", self._engine.read_many(call))
+
     def related(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("related", arguments, generated_contract.RelatedCall)
         if isinstance(call, dict):

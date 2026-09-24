@@ -266,12 +266,20 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
                 await client.initialize()
                 application_catalog = await client.list_tools()
                 application_names = {tool.name for tool in application_catalog.tools}
-                assert {"route", "read", "related", "routing_facts", "inspect"} <= application_names
-                assert application_names <= {"route", "read", "related", "routing_facts", "inspect", "query"}
+                assert {"route", "read", "read_many", "related", "routing_facts", "inspect"} <= application_names
+                assert application_names <= {"route", "read", "read_many", "related", "routing_facts", "inspect", "query"}
                 visible = await call(client, "read", {"target": selected, "detail": "full"})
                 assert visible["kind"] == "application-read-result", visible
                 assert "This is an isolated workflow test reference." in visible["content"]
                 assert "AUTHORING_SDK_MARKER_843015" not in json.dumps(visible)
+                grouped = await call(client, "read_many", {
+                    "snapshot": visible["snapshot"],
+                    "items": [{"target": selected, "detail": "full"}, {"target": selected}],
+                })
+                assert grouped["kind"] == "application-read-many-result", grouped
+                assert grouped["items"][0] == visible
+                assert all(item["snapshot"] == visible["snapshot"] for item in grouped["items"])
+                assert "AUTHORING_SDK_MARKER_843015" not in json.dumps(grouped)
                 hidden = await call(client, "read", {"target": "provenance.purpose-client"}, error=True)
                 assert hidden["code"] == "APPLICATION.CONTENT_UNAVAILABLE", hidden
 
