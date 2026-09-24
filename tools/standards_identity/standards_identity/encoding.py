@@ -16,6 +16,8 @@ _DECIMAL_CHUNK_WIDTH = 9
 # Exact decimal tokens for the byte domain; larger integers retain the
 # arbitrary-precision encoder and its independence from Python's digit limit.
 _BYTE_TOKENS = tuple(str(value).encode("ascii") for value in range(256))
+# Bound the temporary join index for large byte arrays; encoded output remains exact.
+_BYTE_CHUNK_SIZE = 64 * 1024
 _SURROGATE = re.compile(r"[\ud800-\udfff]")
 _ESCAPED_CHARACTER = re.compile(r'["\\\x00-\x1f]')
 _STRING_ESCAPES = {
@@ -25,15 +27,38 @@ _STRING_ESCAPES = {
 }
 
 
-@dataclass(frozen=True, slots=True, init=False)
+@dataclass(frozen=True, slots=True, init=False, eq=False, repr=False)
 class IdentityArray:
-    values: tuple[IdentityValue, ...]
+    # Exact bytes already prove the element domain and immutable ownership.
+    # Other iterables retain the existing validated tuple representation.
+    _values: tuple[IdentityValue, ...] | bytes
 
     def __init__(self, values: Iterable[IdentityValue]) -> None:
-        immutable = tuple(values)
-        for value in immutable:
-            _validate_value(value)
-        object.__setattr__(self, "values", immutable)
+        if type(values) is bytes:
+            immutable = values
+        else:
+            immutable = tuple(values)
+            for value in immutable:
+                _validate_value(value)
+        object.__setattr__(self, "_values", immutable)
+
+    @property
+    def values(self) -> tuple[IdentityValue, ...]:
+        """Expose the same immutable element sequence for either storage form."""
+        return tuple(self._values)
+
+    def __eq__(self, other: object) -> bool:
+        if type(other) is not type(self):
+            return NotImplemented
+        if type(self._values) is type(other._values):
+            return self._values == other._values
+        return self.values == other.values
+
+    def __hash__(self) -> int:
+        return hash((self.values,))
+
+    def __repr__(self) -> str:
+        return f"IdentityArray(values={self.values!r})"
 
 
 @dataclass(frozen=True, slots=True, init=False)
@@ -195,7 +220,9 @@ def _encode(value: IdentityValue) -> bytes:
     if value_type is str:
         return _encode_string(value)
     if value_type is IdentityArray:
-        return b"[" + b",".join(_encode(item) for item in value.values) + b"]"
+        if type(value._values) is bytes:
+            return _encode_byte_array(value._values)
+        return b"[" + b",".join(_encode(item) for item in value._values) + b"]"
     if value_type is IdentityObject:
         encoded_members = (
             _encode_string(key) + b":" + _encode(member_value)
@@ -203,6 +230,15 @@ def _encode(value: IdentityValue) -> bytes:
         )
         return b"{" + b",".join(encoded_members) + b"}"
     raise AssertionError("validated identity value has an unknown type")
+
+
+def _encode_byte_array(value: bytes) -> bytes:
+    """Emit identity-v2 integer-array syntax with bounded per-byte join scratch."""
+    chunks = (
+        b",".join(map(_BYTE_TOKENS.__getitem__, value[start : start + _BYTE_CHUNK_SIZE]))
+        for start in range(0, len(value), _BYTE_CHUNK_SIZE)
+    )
+    return b"[" + b",".join(chunks) + b"]"
 
 
 def _encode_integer(value: int) -> bytes:

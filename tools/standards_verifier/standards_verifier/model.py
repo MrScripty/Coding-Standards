@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Literal, Protocol, TypeAlias
 
 from .diagnostics import Diagnostic
+from .input_sources import DirectoryInputs, SuiteInputSource
 
 
 class Check(Protocol):
@@ -13,7 +14,7 @@ class Check(Protocol):
     def run(self, context: "CheckContext") -> list[Diagnostic]: ...
 
     def authority_inputs(
-        self, context: "CheckContext"
+        self, context: "CheckInputContext"
     ) -> tuple["CheckAuthorityInput", ...]: ...
 
 
@@ -99,6 +100,17 @@ class SuiteCatalog:
 @dataclass(frozen=True, slots=True)
 class CheckContext:
     repo_root: Path
+    suite_id: str
+    catalog: SuiteCatalog
+
+    @property
+    def inputs(self) -> SuiteInputSource:
+        return DirectoryInputs(self.repo_root)
+
+
+@dataclass(frozen=True, slots=True)
+class CheckInputContext:
+    inputs: SuiteInputSource
     suite_id: str
     catalog: SuiteCatalog
 

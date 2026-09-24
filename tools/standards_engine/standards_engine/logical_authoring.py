@@ -3,7 +3,6 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-import tempfile
 import tomllib
 from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
@@ -16,7 +15,6 @@ from tools.standards_applicability.standards_applicability import compile_fact_s
 from tools.repository_git.repository_git import (
     GitRepositoryError,
     RepositoryPath,
-    git_output,
 )
 from tools.standards_metadata.standards_metadata import (
     CANONICAL_MODULE_CORPUS,
@@ -33,7 +31,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 from tools.standards_verifier.standards_verifier import (
     EngineError,
-    suite_input_projection_bytes,
+    suite_input_projection_bytes_from_content,
 )
 
 from .authoring import AuthoringError, AuthoringFailure
@@ -2436,26 +2434,9 @@ def _refresh_suite_input_projection(
                 | (current_paths - base_file_paths)
             )
         )
-        with tempfile.TemporaryDirectory(
-            prefix="coding-standards-logical-authoring-"
-        ) as temporary:
-            root = Path(temporary)
-            for raw_path in proposed_paths:
-                path = RepositoryPath.parse(raw_path)
-                destination = root.joinpath(*path.components)
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.touch()
-            for raw_path, content in files.items():
-                path = RepositoryPath.parse(raw_path)
-                destination = root.joinpath(*path.components)
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_bytes(content)
-            git_output(root, ("init", "--quiet"))
-            git_output(root, ("add", "--force", "--all", "--"))
-            files[_SUITE_INPUTS] = suite_input_projection_bytes(
-                root,
-                repository_paths=proposed_paths,
-            )
+        files[_SUITE_INPUTS] = suite_input_projection_bytes_from_content(
+            FrozenContentSource(files), repository_paths=proposed_paths,
+        )
         return proposed_paths
     except AuthoringError:
         raise
@@ -2475,7 +2456,7 @@ def _refresh_suite_input_projection(
         raise _error(
             "AUTHORING.PROJECTION_UNAVAILABLE",
             "unavailable",
-            "canonical suite-input projection could not be materialized",
+            "canonical suite-input projection could not be compiled",
         ) from error
 
 

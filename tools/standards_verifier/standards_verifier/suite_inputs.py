@@ -4,17 +4,13 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Sequence
 
-from tools.repository_git.repository_git import (
-    GitRepositoryError,
-    RepositoryPath,
-    indexed_paths,
-)
 from tools.standards_identity.standards_identity import (
     IdentityArray,
     IdentityObject,
     encode_identity_value,
 )
 from tools.standards_metadata.standards_metadata import (
+    FrozenContentSource,
     SUITE_INPUT_CONTRACT,
     SUITE_INPUT_SCHEMA_VERSION,
     RepositoryIndexObservation,
@@ -28,8 +24,8 @@ from tools.standards_metadata.standards_metadata import (
 
 from .config import extend_catalog, load_registry_catalog
 from .diagnostics import Diagnostic, EngineError
-from .model import CheckContext, CheckFileInput, CheckRepositoryIndexInput
-from .paths import contained_file, contained_path
+from .model import CheckInputContext, CheckFileInput, CheckRepositoryIndexInput
+from .input_sources import DirectoryInputs, FrozenInputs, SuiteInputSource
 
 
 DEFAULT_REGISTRY = "evaluation/standards-effectiveness/suite-registry.toml"
@@ -56,13 +52,19 @@ def compile_suite_input_manifest(
     *,
     repository_paths: Sequence[str] | None = None,
 ) -> SuiteInputManifest:
-    repo_root = root.resolve()
-    catalog = load_registry_catalog(repo_root, registry_path)
-    catalog = extend_catalog(repo_root, catalog, catalog.suite_ids)
+    return _compile_suite_input_manifest(DirectoryInputs(root, repository_paths), registry_path)
+
+
+def _compile_suite_input_manifest(
+    inputs: SuiteInputSource,
+    registry_path: str,
+) -> SuiteInputManifest:
+    catalog = load_registry_catalog(inputs, registry_path)
+    catalog = extend_catalog(inputs, catalog, catalog.suite_ids)
     file_uses: dict[tuple[str, str], set[SuiteInputUse]] = {}
     index_uses: set[SuiteInputUse] = set()
     for suite in catalog.suites:
-        context = CheckContext(repo_root, suite.id, catalog)
+        context = CheckInputContext(inputs, suite.id, catalog)
         for check in suite.checks:
             for declaration in check.authority_inputs(context):
                 use = SuiteInputUse(suite.id, check.id, declaration.role)
@@ -96,11 +98,9 @@ def compile_suite_input_manifest(
     files = []
     for (path, state), uses in sorted(file_uses.items()):
         if state == "present":
-            source = contained_file(repo_root, path)
-            digest: str | None = file_digest(source.read_bytes())
+            digest: str | None = file_digest(inputs.read_bytes(path))
         else:
-            candidate = contained_path(repo_root, path)
-            if candidate.exists() or candidate.is_symlink():
+            if inputs.exists(path):
                 raise EngineError(
                     Diagnostic(
                         "INPUT.EXPECTED_ABSENT",
@@ -112,30 +112,26 @@ def compile_suite_input_manifest(
             digest = None
         files.append(SuiteFileInput(path, state, digest, tuple(sorted(uses))))
 
-    registry = contained_file(repo_root, registry_path)
+    registry = inputs.read_bytes(registry_path)
     suites = tuple(
         SuiteDefinitionInput(
             entry.id,
             entry.path,
-            file_digest(contained_file(repo_root, entry.path).read_bytes()),
+            file_digest(inputs.read_bytes(entry.path)),
             entry.requires,
         )
         for entry in catalog.entries
     )
     index = None
     if index_uses:
-        observed_paths = (
-            indexed_paths(repo_root)
-            if repository_paths is None
-            else _repository_path_observation(repository_paths)
-        )
+        observed_paths = inputs.indexed_paths()
         index = RepositoryIndexObservation(
             repository_index_digest(observed_paths),
             tuple(sorted(index_uses)),
         )
     return SuiteInputManifest(
         registry_path,
-        file_digest(registry.read_bytes()),
+        file_digest(registry),
         suites,
         tuple(files),
         index,
@@ -163,30 +159,15 @@ def suite_input_projection_bytes(
     )
 
 
-def _repository_path_observation(paths: Sequence[str]) -> tuple[str, ...]:
-    try:
-        selected = tuple(
-            sorted(
-                str(RepositoryPath.parse(path)) for path in paths if type(path) is str
-            )
-        )
-    except GitRepositoryError as error:
-        raise EngineError(
-            Diagnostic(
-                "INPUT.INVALID_REPOSITORY_PATH",
-                "invalid",
-                "explicit repository path observation is invalid",
-            )
-        ) from error
-    if len(selected) != len(paths) or len(set(selected)) != len(selected):
-        raise EngineError(
-            Diagnostic(
-                "INPUT.INVALID_REPOSITORY_PATHS",
-                "invalid",
-                "explicit repository path observation must contain unique strings",
-            )
-        )
-    return selected
+def suite_input_projection_bytes_from_content(
+    source: FrozenContentSource,
+    *,
+    repository_paths: Sequence[str],
+) -> bytes:
+    """Compile the exact manifest from captured bytes and explicit membership."""
+    return suite_input_manifest_bytes(
+        _compile_suite_input_manifest(FrozenInputs(source, repository_paths), DEFAULT_REGISTRY)
+    )
 
 
 def check_suite_input_projection(

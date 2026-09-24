@@ -29,6 +29,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 
 from .diagnostics import Diagnostic, EngineError
 from .paths import contained_file
+from .input_sources import SuiteInputSource, input_source
 
 
 POLICY_GROUP = "policy-impact"
@@ -306,7 +307,7 @@ def load_registered_policy_impact(
     from .repository_graph import load_repository_registry
 
     try:
-        corpus = load_canonical_standards_corpus(root.resolve())
+        corpus = load_canonical_standards_corpus(input_source(root))
         compiled = compile_policy_impact(
             root.resolve(), corpus, DEFAULT_POLICY_REGISTRY
         )
@@ -383,8 +384,8 @@ def _adapter_input_sources(
     )
 
 
-def canonical_policy_impact_inputs(root: Path) -> tuple[str, ...]:
-    corpus = load_canonical_standards_corpus(root.resolve())
+def canonical_policy_impact_inputs(root: Path | SuiteInputSource) -> tuple[str, ...]:
+    corpus = load_canonical_standards_corpus(input_source(root))
     return tuple(
         sorted(
             {
@@ -398,11 +399,11 @@ def canonical_policy_impact_inputs(root: Path) -> tuple[str, ...]:
 
 
 def registered_policy_impact_inputs(
-    root: Path,
+    root: Path | SuiteInputSource,
     source_registry_path: str,
     suite_paths: Mapping[str, str],
 ) -> tuple[str, ...]:
-    repository = root.resolve()
+    repository = input_source(root)
     corpus = load_canonical_standards_corpus(repository)
     compiled = compile_policy_impact(repository, corpus, DEFAULT_POLICY_REGISTRY)
     return _adapter_input_sources(

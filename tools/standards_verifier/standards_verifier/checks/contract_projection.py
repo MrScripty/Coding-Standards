@@ -11,7 +11,7 @@ from tools.standards_contracts.standards_contracts import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from ..paths import contained_file
 
 
@@ -25,7 +25,7 @@ class ContractProjectionCheck:
     examples: str
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         return (
             *present_inputs("schema", self.schema),

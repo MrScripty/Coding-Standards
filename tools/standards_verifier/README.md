@@ -61,3 +61,18 @@ and arbitrary document budgets have been retired. Git history and captured
 snapshots preserve historical observations; the current runner no longer executes
 those retired check kinds. Shared TSV projections remain where navigation and
 routing checks consume real inventories.
+
+## Suite-input authority
+
+The canonical manifest compiler consumes check-owned declarations through a
+`CheckInputContext`, separately from filesystem check execution. Directory inputs
+retain physical containment and symlink checks. Frozen inputs carry exact bytes
+plus explicit regular-file repository membership; an indexed file whose bytes
+were not captured is unavailable, rather than empty. Both adapters use the same
+registry parsing, declarations, hashing and manifest serializer.
+
+Engine logical authoring calls `suite_input_projection_bytes_from_content` with
+its frozen candidate and computed path population. It creates no temporary Git
+repository for that derivation. Full verification and publication continue to
+execute against the actual candidate checkout, including safe-path package and
+entrypoint processes. The manifest representation and schema version are unchanged.

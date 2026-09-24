@@ -13,7 +13,7 @@ from tools.standards_graph.standards_graph import (
     METADATA_REQUIRES,
     metadata_dependency_registry,
 )
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from .table import read_table_rows
 
 
@@ -41,9 +41,9 @@ class MetadataRouteCheck:
     selections: tuple[RouteSelection, ...]
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
-        corpus = load_canonical_module_corpus(context.repo_root)
+        corpus = load_canonical_module_corpus(context.inputs)
         return (
             *present_inputs("routing-cases", self.path),
             *present_inputs("routing-expectations", self.expectations_path),

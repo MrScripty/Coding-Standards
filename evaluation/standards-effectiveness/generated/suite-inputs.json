@@ -7099,7 +7099,7 @@
       ]
     },
     {
-      "digest": "sha256:6f4eb0303a5a9bf44d28457e5829bb9e3b3d7b67bd13db7dc43f7202758fca53",
+      "digest": "sha256:f9471723773b3a23e50548e459c2965a67bc769d6504000b524e1ef05863f36a",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -7316,7 +7316,7 @@
       ]
     },
     {
-      "digest": "sha256:d1031886e125b743e5fa71e17d502aeddebe3a8184c76ee0976676fc5fc09a1f",
+      "digest": "sha256:1838ceb220964296fe1af9f0e25ea91b076972a8ee452c684da13e0f6db86709",
       "path": "tools/standards_identity/README.md",
       "state": "present",
       "uses": [
@@ -7362,7 +7362,7 @@
       ]
     },
     {
-      "digest": "sha256:4c69fdefc956148e3628ea56dbbe2cb3c3a7860b20aa3a27bb8593d6d54ee84e",
+      "digest": "sha256:611655e641a65b8e7d0986f0af34a792b4b8a977523bee683553f8e0e48804f1",
       "path": "tools/standards_identity/standards_identity/encoding.py",
       "state": "present",
       "uses": [
@@ -7800,7 +7800,7 @@
       ]
     },
     {
-      "digest": "sha256:a35c3a8ab48c2693c481cfe101790096193d0358e5d7d8ff01142c0599282da0",
+      "digest": "sha256:32b8f1d3c681bcc9cbcb81fc68a57d668653a266b2abb7d8b8ac28a815f95ef1",
       "path": "tools/standards_verifier/README.md",
       "state": "present",
       "uses": [
@@ -7829,7 +7829,7 @@
       ]
     },
     {
-      "digest": "sha256:3eb159c0cee572e4d2d90adc5660f5fe4fbb6b0da7f3705d7c83ee992e5c40e5",
+      "digest": "sha256:df0fe1fded4e6acfa85c0342285064016cf70f7aeb6e351ae7cf4c26f81b2c0f",
       "path": "tools/standards_verifier/standards_verifier/__init__.py",
       "state": "present",
       "uses": [
@@ -7863,7 +7863,7 @@
       ]
     },
     {
-      "digest": "sha256:2d11fc002cb956e3eb82e15f3e3bda01a36d71816e318a2f199383452f38f9cd",
+      "digest": "sha256:84eeaaaadec2526b56e1d17efac213ff4fd30dfc44bc3e4fb5776486a5c32b64",
       "path": "tools/standards_verifier/standards_verifier/checks/contract_projection.py",
       "state": "present",
       "uses": [
@@ -7904,7 +7904,7 @@
       ]
     },
     {
-      "digest": "sha256:6960efd3b3d28ef8a48568a47664a00eb935d483f66cc52860cd5c0cb28a6dd4",
+      "digest": "sha256:56caef06f81ab095f10a5a174022f9ea7c1a362cdb9c4b50fd45a4ee054cdf15",
       "path": "tools/standards_verifier/standards_verifier/checks/markdown_link_coverage.py",
       "state": "present",
       "uses": [
@@ -7921,7 +7921,7 @@
       ]
     },
     {
-      "digest": "sha256:71f7e3097e33f7280843f1aa4b76efd364e4f0fb37d55c88ae673996417b007a",
+      "digest": "sha256:2a594dda5c4cb718a16e0cd09ed04df4b16f841004a170442c3bb4c36864ab3c",
       "path": "tools/standards_verifier/standards_verifier/checks/markdown_links.py",
       "state": "present",
       "uses": [
@@ -7938,7 +7938,7 @@
       ]
     },
     {
-      "digest": "sha256:8e8e2ff5c47360b2f2c38edb81424d4e79fc23fe477248102d5a8e83ca3e8471",
+      "digest": "sha256:4973ad8da5931d0905096ef51b420c8276a9171cc5c568ce3a003db4476ba136",
       "path": "tools/standards_verifier/standards_verifier/checks/markdown_targets.py",
       "state": "present",
       "uses": [
@@ -7950,7 +7950,7 @@
       ]
     },
     {
-      "digest": "sha256:f6d3d63013659308e52a6d721d1d4ff92df40754f3167b5d23e5953176e34c73",
+      "digest": "sha256:dea89749eea74df0b1194907d5507d6dc74cf1e74c18e1861e4a5e3c99613dcd",
       "path": "tools/standards_verifier/standards_verifier/checks/metadata.py",
       "state": "present",
       "uses": [
@@ -7967,7 +7967,7 @@
       ]
     },
     {
-      "digest": "sha256:851911aac82981be25f52c9bad00a8f7a05ad0c048c8fef20320dfe72a8ed69d",
+      "digest": "sha256:42a7223e6aad21bf6bf4239c0e37751b6c0f5499db78e2b3725d0cec95525812",
       "path": "tools/standards_verifier/standards_verifier/checks/metadata_route.py",
       "state": "present",
       "uses": [
@@ -7984,7 +7984,7 @@
       ]
     },
     {
-      "digest": "sha256:c30aca2b9009746a5427013c8d6904c345d9e4a963d2ff5d1d70cc5358d08ac8",
+      "digest": "sha256:c7266c0564b9ee02944fc4eb12d66cc20d604fd4ddb7f051ed77d01e9fe4466e",
       "path": "tools/standards_verifier/standards_verifier/checks/plan_contract.py",
       "state": "present",
       "uses": [
@@ -7996,7 +7996,7 @@
       ]
     },
     {
-      "digest": "sha256:20922eebbb39c5f2638379c226fc599af35c27193c891259b3ca554cb6a60a06",
+      "digest": "sha256:e28442711d42d69bdb9348ec01923daefd49cec2be8850239c9489fb6cb71dc9",
       "path": "tools/standards_verifier/standards_verifier/checks/policy_impact.py",
       "state": "present",
       "uses": [
@@ -8025,7 +8025,7 @@
       ]
     },
     {
-      "digest": "sha256:ac32e996f52a566e7f43c2ff8915895880a9c2331ab2a59ffeeb913232f1d0ca",
+      "digest": "sha256:a292b6d7aa44f3cbc2b1876ca46935aa7c1edf602b49fddf47308eba5ec7dca5",
       "path": "tools/standards_verifier/standards_verifier/checks/python_package_contract.py",
       "state": "present",
       "uses": [
@@ -8042,7 +8042,7 @@
       ]
     },
     {
-      "digest": "sha256:74dcf361fd2edc4f10f4a3e54494d54b19fad403972178002b9db56c437857f0",
+      "digest": "sha256:439b9ee8fe5cdd890cf8a7b3b43a6f19293c9e456579c68b5fab556543a65fe8",
       "path": "tools/standards_verifier/standards_verifier/checks/table.py",
       "state": "present",
       "uses": [
@@ -8071,7 +8071,7 @@
       ]
     },
     {
-      "digest": "sha256:e332ea621d15ab9bad13ccf4d45b02a0ee1438f0565c4fd904bec352706024b1",
+      "digest": "sha256:45e5a3af333253b2a93d5c0f3802b803be3603b37a61c557a0794a2459b7c8f6",
       "path": "tools/standards_verifier/standards_verifier/config.py",
       "state": "present",
       "uses": [
@@ -8141,7 +8141,7 @@
       ]
     },
     {
-      "digest": "sha256:0c69936169e0fd48fd39e8a17d1b29a8820903455a793b3ac7c023d44f974ac7",
+      "digest": "sha256:a2daac9fcba96192e64bd0161c9af3f3878e6f833078415700eddc30698c2aec",
       "path": "tools/standards_verifier/standards_verifier/graph_adapters.py",
       "state": "present",
       "uses": [
@@ -8153,7 +8153,19 @@
       ]
     },
     {
-      "digest": "sha256:53e0107d7cb1157e932e44ee3f57aa939fd36c935874f01404c857400d49441d",
+      "digest": "sha256:c54c8c8967dec15675b3a9dfc5c0bcca118a63edf0eec0f99038221cda134ca7",
+      "path": "tools/standards_verifier/standards_verifier/input_sources.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:5b5b87b7eee4dfa98776459ac50e02af29b62eb602842e0b547a190b74acbe02",
       "path": "tools/standards_verifier/standards_verifier/model.py",
       "state": "present",
       "uses": [
@@ -8182,7 +8194,7 @@
       ]
     },
     {
-      "digest": "sha256:2420957b12eeeb4f3798323673721b9cd0d405e645244f5ecb4243b1b495726d",
+      "digest": "sha256:d2505473e3c78783c7c3f50f4072e4830c80ae9d91cbb2b09ece8aa85b68612e",
       "path": "tools/standards_verifier/standards_verifier/policy_impact.py",
       "state": "present",
       "uses": [
@@ -8199,7 +8211,7 @@
       ]
     },
     {
-      "digest": "sha256:18c266b532daaeefc6b44357eba6641337c18cd6c3830c5ca1281834848dfc89",
+      "digest": "sha256:717bc3fe807cd00a6da5b147a0a7923c009ac594157a76ed43e18feabb8413d7",
       "path": "tools/standards_verifier/standards_verifier/python_packages.py",
       "state": "present",
       "uses": [
@@ -8233,7 +8245,7 @@
       ]
     },
     {
-      "digest": "sha256:282995be0fa59b57588e153ea8eae5007e6e31d5b72970d1fb44c11d18f2f21b",
+      "digest": "sha256:9c2e21a210ce0ad4ca076e9ed73645ca34b929abbdfae4a822dc31bd0b266cae",
       "path": "tools/standards_verifier/standards_verifier/suite_inputs.py",
       "state": "present",
       "uses": [
@@ -13266,7 +13278,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:c78cf869a7d3432df7de066412b97a860d9f07c25d333186129e5f0b1dd25c19",
+    "digest": "sha256:d39d6edf3f798f07bfdd360876a1361a025c9492615f6e49ca19f44fa79d6aa0",
     "uses": [
       {
         "check": "python-package-contract",

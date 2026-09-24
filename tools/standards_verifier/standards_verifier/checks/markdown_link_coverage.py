@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from ..paths import contained_file
 from .markdown_links import local_markdown_targets
 from .table import (
@@ -22,7 +22,7 @@ class MarkdownLinkCoverageCheck:
     members: ProjectedTableSource
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         projected = read_projected_table_rows(context, self.id, self.members)
         members = tuple(value.partition("#")[0] for (value,) in projected if value)

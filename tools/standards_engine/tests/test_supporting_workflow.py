@@ -107,16 +107,19 @@ class SupportingWorkflowTest(unittest.TestCase):
         self.assertEqual(first["kind"], "application-read-result", first)
         self.assertIn(PUBLIC, first["content"])
         self.assertNotIn(PRIVATE, json.dumps(first))
-        self.assertEqual(self.app.read({"target": REFERENCE})["kind"], "application-read-result")
+        # Reads in this interval observe the same accepted publication.
+        published_snapshot = first["snapshot"]
+        self.assertNotEqual(published_snapshot, snapshot)
+        self.assertEqual(self.app.read({"snapshot": published_snapshot, "target": REFERENCE})["kind"], "application-read-result")
         for aid in aids:
-            exposed = self.app.read({"target": aid["canonical_id"]})
+            exposed = self.app.read({"snapshot": published_snapshot, "target": aid["canonical_id"]})
             self.assertEqual(exposed["kind"], "application-read-result", exposed)
             self.assertIn(PUBLIC, exposed["content"])
         before = subprocess.check_output(["git", "show", "main:topics/purpose-fixture.md"], cwd=self.root)
         revisions_before = {unit.id: unit.semantic_revision for unit in
                             load_canonical_standards_corpus(self.root).policy_units}
         old_snapshot = first["snapshot"]
-        next_change = self.author.propose({"change_set": self.change([
+        next_change = self.author.propose({"snapshot": published_snapshot, "change_set": self.change([
             {"kind": "put-provenance", "record": {**record, "rationale": PRIVATE + "_REVISED"}},
         ])})
         self.assertEqual(len(next_change["outcome"]["obligations"]), 1, next_change)
@@ -130,5 +133,6 @@ class SupportingWorkflowTest(unittest.TestCase):
         current = self.author.read({"target": REASON})
         self.assertEqual(historical["record"]["rationale"], PRIVATE)
         self.assertEqual(current["record"]["rationale"], PRIVATE + "_REVISED")
-        self.assertEqual(self.app.read({"target": RULE})["content"], first["content"])
-        self.assertEqual(self.app.read({"target": REASON})["kind"], "application-rejected-result")
+        self.assertNotEqual(current["snapshot"], old_snapshot)
+        self.assertEqual(self.app.read({"snapshot": current["snapshot"], "target": RULE})["content"], first["content"])
+        self.assertEqual(self.app.read({"snapshot": current["snapshot"], "target": REASON})["kind"], "application-rejected-result")

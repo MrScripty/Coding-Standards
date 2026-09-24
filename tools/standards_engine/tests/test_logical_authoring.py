@@ -92,6 +92,20 @@ class LogicalAuthoringTests(unittest.TestCase):
                              base_repository_paths=self.repository_paths, compiled_base=self.compiled)
         self.assertEqual(raised.exception.failure.code, "AUTHORING.COMPILED_BASE_MISMATCH")
 
+    def test_manifest_projection_uses_captured_inputs_without_staging(self) -> None:
+        program = LogicalProgram((self.change_set([self.new_standard_edit()]),))
+        compiler = LogicalAuthoringCompiler(StandardsEngine._compile)
+        with mock.patch("tempfile.TemporaryDirectory", side_effect=AssertionError("temporary staging")), \
+             mock.patch("subprocess.run", side_effect=AssertionError("Git staging")):
+            projection = compiler.compile(
+                self.base, program, base_repository_paths=self.repository_paths,
+                compiled_base=self.compiled,
+            )
+        self.assertNotEqual(projection.source.files, self.base.files)
+        self.assertTrue(projection.source.read_bytes(
+            "evaluation/standards-effectiveness/generated/suite-inputs.json"
+        ))
+
     def change_set(self, edits: list[dict[str, object]]) -> StandardsChangeSet:
         return StandardsChangeSet.from_mapping(
             {
