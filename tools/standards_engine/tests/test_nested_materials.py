@@ -11,6 +11,7 @@ from tools.standards_analysis.standards_analysis import AnalysisExecutionContext
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import _generated_contract as c
 from tools.standards_engine.standards_engine.logical_authoring import StandardsChangeSet
+from tools.standards_engine.standards_engine import logical_authoring as logical
 from tools.standards_engine.standards_engine.operation_materials import ProposalMaterials
 from tools.standards_engine.standards_engine.tools import LocalAlwaysAllowAuthorizer, _contracts
 from tools.standards_engine.tests.test_agent_workflow import (
@@ -90,12 +91,17 @@ class NestedMaterialTests(unittest.TestCase):
 
     def test_revise_compiles_only_old_and_new_projections(self):
         proposed = self.propose()
-        with self.counts() as counts:
+        self.assertIsNone(self.engine._compiled_cache)
+        with self.counts() as counts, patch.object(
+            logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection,
+        ) as refresh:
             revised = self.facade.revise({
                 "context": proposed["context"], "change_set": self.change(revision=True),
             })
         self.assertEqual(revised["status"], "complete", revised)
         self.assert_counts(counts, projections=2, evaluations=2)
+        # One preflight replay plus one suffix; not a second replay of edit one.
+        self.assertEqual(refresh.call_count, 2)
         self.assertNotEqual(revised["revision"], proposed["revision"])
         self.assertEqual(self.facade.workflow_status({"context": proposed["context"]})["status"], "stale")
         target = self.change()["edits"][0]["standard"]["id"]
@@ -186,12 +192,12 @@ class NestedMaterialTests(unittest.TestCase):
         nested = []
         entered = False
 
-        def reenter(revision, accepted=None, *, reuse=False):
+        def reenter(revision, accepted=None, *, reuse=False, predecessor=None):
             nonlocal entered
             if not entered:
                 entered = True
                 nested.append(self.facade.analyze_proposal({"revision": second["revision"]}))
-            return project(revision, accepted, reuse=reuse)
+            return project(revision, accepted, reuse=reuse, predecessor=predecessor)
 
         with patch.object(self.engine._snapshots, "load_content", wraps=self.engine._snapshots.load_content) as loads:
             with patch.object(self.engine, "_proposal_projection", side_effect=reenter):

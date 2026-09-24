@@ -1760,6 +1760,7 @@ class StandardsEngine:
         accepted: CompiledSnapshot | None = None,
         *,
         reuse: bool = False,
+        predecessor: LogicalProjection | None = None,
     ) -> LogicalProjection:
         accepted = (
             self._compiled_snapshot(revision.base_snapshot)
@@ -1768,7 +1769,7 @@ class StandardsEngine:
         )
         if reuse and self._compiled_cache is not None:
             return self._compiled_cache.project_verified(
-                revision, accepted, self._logical_authoring
+                revision, accepted, self._logical_authoring, predecessor=predecessor,
             )
         return self._logical_authoring.compile(
             accepted.source,
@@ -1776,6 +1777,7 @@ class StandardsEngine:
             base_snapshot=str(revision.base_snapshot),
             base_repository_paths=revision.base_repository_paths,
             compiled_base=accepted,
+            predecessor=predecessor if reuse else None,
         )
 
     @staticmethod

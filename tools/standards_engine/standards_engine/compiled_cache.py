@@ -91,14 +91,19 @@ class CompiledSnapshotCache:
         revision: ProposalRevision,
         base: CompiledSnapshot,
         compiler: LogicalAuthoringCompiler,
+        *,
+        predecessor: LogicalProjection | None = None,
     ) -> LogicalProjection:
-        """Reuse only the replay of exact, independently verified draft inputs.
+        """Construct exact verified drafts from cached output or a matching prefix.
 
+        Prefix admission remains with the logical compiler. The optional local
+        predecessor and existing retained entries supply computation, not authority.
         The caller reads the stored revision/root and verifies base content before
         entering. Prospective revisions may also be compiled before publication;
         a cached pure projection is never evidence that a revision was published.
         Snapshot and projection entries share one LRU and one retention budget.
         """
+        from .authoring import ProposalRevision
         from .logical_authoring import LogicalProgram
 
         if self._closed:
@@ -108,8 +113,6 @@ class CompiledSnapshotCache:
         implementation = compiler.compilation_identity
         eligible = (
             implementation is not None
-            and all(isinstance(item, FunctionType) and not item.__closure__
-                    for item in implementation)
             and type(base.source) is FrozenContentSource
         )
         key = None
@@ -130,11 +133,26 @@ class CompiledSnapshotCache:
                 return replace(retained, semantic_proposals=deepcopy(retained.semantic_proposals))
         else:
             self._misses += 1
+        if key is not None and predecessor is None and revision.ordinal > 1:
+            previous = ProposalRevision(
+                revision.proposal, revision.ordinal - 1, revision.base_snapshot,
+                revision.base_repository_paths, revision.change_sets[:-1],
+            )
+            previous_key = (
+                "proposal", base.source.files,
+                encode_identity_value(previous.identity_material()), implementation,
+            )
+            # Borrow from the existing bounded store, without retaining another
+            # entry or promoting a computational prefix over the final result.
+            previous_entry = self._entries.get(previous_key)
+            if previous_entry is not None:
+                predecessor = cast("LogicalProjection", previous_entry[0])
         result = compiler.compile(
             base.source, LogicalProgram(revision.change_sets),
             base_snapshot=str(revision.base_snapshot),
             base_repository_paths=revision.base_repository_paths,
             compiled_base=base,
+            predecessor=predecessor,
         )
         if key is None:
             self._uncached += 1

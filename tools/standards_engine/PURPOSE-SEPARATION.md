@@ -148,8 +148,9 @@ existing canonical representation of the complete revision (original snapshot,
 repository membership, proposal identity, ordinal and all change sets), and the
 installed replay recipe. Static compiler implementations qualify; custom stateful
 adapters execute cold. The compiler's original accepted base remains the semantic
-comparison authority. A miss replays the entire program with all normal checks;
-this is not incremental successor construction.
+comparison authority. On an exact-revision miss, an eligible verified prefix may
+supply successor construction as described below. Without one, the entire program
+replays with all normal checks.
 
 Retained semantic-intent maps are private copies. Each operation receives fresh
 intent maps and result envelopes while sharing read-only sources and compiled
@@ -164,6 +165,41 @@ Main advancement affects new captures, never the base of an existing draft. Old
 explicit revisions retain historical meaning and can have live stale status.
 Corruption, quarantine, purge or missing/replaced stores reject before projection
 reuse. Server restart reconstructs cold, and close releases both entry kinds.
+
+### Incremental successor construction
+
+The logical compiler can copy a previously verified projection and execute only
+its appended change sets. Eligibility binds the exact original frozen base,
+original snapshot identity, complete base repository membership, canonical
+change-set prefix, installed compiler identity, projected bytes and projected
+membership. The compiler snapshots the program representation into immutable
+inputs, then issues continuation provenance only after successful final compilation
+and cumulative analysis. Caller-owned edit mappings and semantic-intent maps cannot
+rewrite that provenance.
+
+The operation-local owner may offer its last projection. The existing bounded
+cache may offer the immediate predecessor of the same proposal on an exact
+successor miss. Both feed the same compiler-owned eligibility check; neither
+adds a cache, persistent checkpoint, store format or compatibility mode. An
+incompatible or absent prefix selects complete replay, including after eviction
+or restart. A cold focused workflow may first reconstruct its predecessor during
+preflight and then use that newly verified material for the suffix in the same
+operation; it still pays for the first reconstruction.
+
+Successors use a new file table with immutable byte values. All edit semantics,
+manifest membership calculations and cumulative analysis retain the original
+accepted base. Final authority compilation, semantic successor validation and
+complete-program policy/module analysis still run. This is a computation reuse
+boundary, not a new accepted baseline or authorization/publication proof. The
+independent review, candidate-verification, application and recovery paths above
+continue to select full replay.
+
+The deciding structural claim is suffix-only edit execution and manifest
+regeneration for a simple append with an eligible predecessor. Canonical program
+comparison, final compilation, retention accounting and complete analysis remain
+whole-material work. Representative successor-admission latency qualification is
+tracked in the [incremental successor report](../../docs/plans/purpose-separated-standards-engine/reports/performance-incremental-successors.md);
+it is distinct from repeated-read latency or focused-test duration.
 
 ## Bounded grouped reads
 

@@ -7065,7 +7065,7 @@
       ]
     },
     {
-      "digest": "sha256:5fe033c834a88415ac477ef8d09bc97e9b189be2cff986e142c782005a1b4f50",
+      "digest": "sha256:c3368aaa78434e7ba12227f404c0eec501269cf74111c3e0e05adb6b822011e6",
       "path": "tools/standards_engine/standards_engine/compiled_cache.py",
       "state": "present",
       "uses": [
@@ -7089,7 +7089,7 @@
       ]
     },
     {
-      "digest": "sha256:ff1c3e9569fa7e60b37357608ade12b1a0abc5c287f6d8d4bbc7a4302196a759",
+      "digest": "sha256:374525c89c87953541d735211925469beb2f3204075681f67a0b3a083931e005",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7123,7 +7123,7 @@
       ]
     },
     {
-      "digest": "sha256:81f99ed06fefd6c7caa4ac344bac92adf23ca9e1941d12f06c46c00cba8af2bc",
+      "digest": "sha256:3593999d7823cecb4e4e87403052ec7e1e84e3b982cad28fc43319fdee875f5f",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -7159,8 +7159,20 @@
       ]
     },
     {
-      "digest": "sha256:bae7ea7900cfc3b8aaf837d0ec9275692d9cc53bd10087a5e6a94e2ac8a624f9",
+      "digest": "sha256:49c87769596d165b73aa76bd280f10dd0f75902c314bc5114414d5a6033a163c",
       "path": "tools/standards_engine/standards_engine/operation_materials.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2188fd6ca71176ae31db92cfbf4c1be0286b09c6025d5eed75a1dac4b3af3518",
+      "path": "tools/standards_engine/standards_engine/projection_continuation.py",
       "state": "present",
       "uses": [
         {
@@ -13302,7 +13314,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:9245138cf21822d5b31afdeec6862bbff9ace948c2597b7d7f6d02d643385ea4",
+    "digest": "sha256:4ae8659dfa416f5ac33e74e4c5fd0ff77cc41c4f6d70f43d0ee746f8b9b57ad7",
     "uses": [
       {
         "check": "python-package-contract",

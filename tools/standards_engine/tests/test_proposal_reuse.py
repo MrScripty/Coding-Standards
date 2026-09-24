@@ -119,6 +119,122 @@ class ProposalReuseTest(unittest.TestCase):
         refresh.assert_not_called()
         self.assertEqual(evaluate.call_count, 2)
 
+    def successor_change(self):
+        change = reference_change(self.root, "projection-cache", revision=True)
+        change["edits"][0]["standard"]["body"] += "Incremental successor.\n"
+        return change
+
+    def test_native_revision_uses_warm_exact_predecessor_without_preflight_replay(self):
+        old = self.query()
+        with (
+            patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh,
+            patch.object(self.engine._snapshots, "load_content", wraps=self.engine._snapshots.load_content) as load,
+            patch.object(self.engine._authoring, "read_revision", wraps=self.engine._authoring.read_revision) as read,
+            patch.object(logical.LogicalAuthoringCompiler, "_apply_edit", autospec=True,
+                         side_effect=logical.LogicalAuthoringCompiler._apply_edit) as edit,
+        ):
+            revised = self.facade.revise_proposal({
+                "kind": "revise-proposal",
+                "expected_revision": self.latest["revision"], "change_set": self.successor_change(),
+            })
+        self.assertEqual(revised["kind"], "revise-proposal-result", revised)
+        self.assertEqual(refresh.call_count, 1)
+        self.assertEqual(edit.call_count, 1)
+        self.assertGreaterEqual(read.call_count, 1)
+        self.assertEqual(load.call_count, 1)
+        self.assertIn("Incremental successor.", self.query(revised)["content"])
+        self.assertEqual(self.query(), old)
+        self.assertEqual(self.facade.workflow_status({"context": self.latest["context"]})["status"], "stale")
+
+    def test_native_revision_with_a_new_cache_reconstructs_the_complete_program(self):
+        self.query()
+        cache = CompiledSnapshotCache(self.root, "authoring")
+        self.addCleanup(cache.close)
+        with self.open_engine(cache) as engine:
+            facade = AgentToolFacade(engine, self.interface)
+            with patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh:
+                revised = facade.revise_proposal({
+                    "kind": "revise-proposal",
+                    "expected_revision": self.latest["revision"], "change_set": self.successor_change(),
+                })
+            self.assertEqual(revised["kind"], "revise-proposal-result", revised)
+            self.assertEqual(refresh.call_count, 3)
+
+    def test_evicted_predecessor_selects_full_replay_without_changing_the_result(self):
+        cache = CompiledSnapshotCache(self.root, "authoring", max_entries=1)
+        self.addCleanup(cache.close)
+        with self.open_engine(cache) as engine:
+            facade = AgentToolFacade(engine, self.interface)
+            warm = facade.query_proposal({
+                "revision": self.latest["revision"], "request": {"kind": "read", "target": self.target},
+            })
+            self.assertEqual(warm["kind"], "proposal-read-result", warm)
+            with patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh:
+                revised = facade.revise_proposal({
+                    "kind": "revise-proposal",
+                    "expected_revision": self.latest["revision"], "change_set": self.successor_change(),
+                })
+            self.assertEqual(revised["kind"], "revise-proposal-result", revised)
+            # Fresh original-base compilation occupies the sole slot before
+            # successor construction; the draft was therefore evicted.
+            self.assertEqual(refresh.call_count, 3)
+            self.assertLessEqual(cache.statistics["entries"], 1)
+            self.assertIn("Incremental successor.", facade.query_proposal({
+                "revision": revised["revision"], "request": {"kind": "read", "target": self.target},
+            })["content"])
+
+    def test_invalid_native_suffix_keeps_the_exact_predecessor_and_head(self):
+        old = self.query()
+        no_effect = reference_change(self.root, "projection-cache", revision=True)
+        with patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh:
+            rejected = self.facade.revise_proposal({
+                "kind": "revise-proposal",
+                "expected_revision": self.latest["revision"], "change_set": no_effect,
+            })
+            self.assertEqual(rejected["code"], "AUTHORING.NO_EFFECT", rejected)
+            refresh.assert_not_called()
+            self.assertEqual(self.query(), old)
+            refresh.assert_not_called()
+        self.assertEqual(self.facade.workflow_status({"context": self.latest["context"]})["status"], "complete")
+
+    def test_stale_native_head_is_rejected_before_continuation(self):
+        self.query()
+        with patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh:
+            rejected = self.facade.revise_proposal({
+                "kind": "revise-proposal",
+                "expected_revision": self.first["revision"], "change_set": self.successor_change(),
+            })
+        self.assertEqual(rejected["code"], "AUTHORING.REVISION_STALE", rejected)
+        refresh.assert_not_called()
+
+    def test_cumulative_review_obligations_match_a_fresh_engine_after_continuation(self):
+        warm = self.facade.workflow_status({"context": self.normative["context"]})
+        self.assertEqual(warm["status"], "needs-action", warm)
+        change = reference_change(self.root, "projection-normative", revision=True)
+        change["edits"][0]["standard"].update(
+            id="topic.projection-normative", role="topic", level="MUST",
+        )
+        revised = self.facade.revise({"context": self.normative["context"], "change_set": change})
+        self.assertEqual(revised["status"], "needs-action", revised)
+        with StandardsEngine.open_repository(
+            self.root, store_path=self.store, purpose="authoring",
+            execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer(self.root)),
+        ) as engine:
+            cold = AgentToolFacade(engine, self.interface).workflow_status({"context": revised["context"]})
+        self.assertEqual(cold["status"], revised["status"])
+        self.assertTrue(revised["outcome"]["obligations"])
+        self.assertEqual(cold["outcome"]["obligations"], revised["outcome"]["obligations"])
+
+    def test_independent_projection_boundary_ignores_an_offered_predecessor(self):
+        base = self.engine._compiled_snapshot(SnapshotId(self.snapshot["id"]))
+        first = self.engine._authoring.read_revision(self.first["revision"]["id"])
+        latest = self.engine._authoring.read_revision(self.latest["revision"]["id"])
+        prefix = self.engine._proposal_projection(first, base, reuse=True)
+        with patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh:
+            replayed = self.engine._proposal_projection(latest, base, predecessor=prefix)
+        self.assertEqual(refresh.call_count, 2)
+        self.assertEqual(replayed.source.files, self.engine._proposal_projection(latest, base).source.files)
+
     def test_new_revision_misses_while_old_results_and_stale_status_stay_exact(self):
         old = self.query()
         change = reference_change(self.root, "projection-cache", revision=True)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 import subprocess
 import tempfile
 import tomllib
@@ -16,6 +17,7 @@ from tools.standards_engine.standards_engine.logical_authoring import (
     authoring_target_id,
 )
 from tools.standards_engine.standards_engine.authoring import AuthoringError
+from tools.standards_engine.standards_engine import logical_authoring as logical
 from tools.standards_engine.standards_engine.engine import StandardsEngine
 from tools.standards_metadata.standards_metadata import (
     DirectoryContentSource,
@@ -91,6 +93,172 @@ class LogicalAuthoringTests(unittest.TestCase):
             compiler.compile(FrozenContentSource(dict(self.base.files)), program,
                              base_repository_paths=self.repository_paths, compiled_base=self.compiled)
         self.assertEqual(raised.exception.failure.code, "AUTHORING.COMPILED_BASE_MISMATCH")
+
+    def continuation_change(self, index: int) -> StandardsChangeSet:
+        edit = self.new_standard_edit()
+        edit["standard"].update(
+            id="reference.testing.logical-continuation", role="reference",
+            level="REFERENCE", body=f"Independent continuation revision {index}.\n",
+        )
+        edit["policy_units"] = []
+        if index > 1:
+            edit["kind"] = "revise-standard"
+            for key in ("requires", "specializes", "policy_units"):
+                del edit[key]
+        return self.change_set([edit])
+
+    def compile_continuation(self, changes, *, predecessor=None, compiler=None, **kwargs):
+        compiler = compiler or LogicalAuthoringCompiler(StandardsEngine._compile)
+        return compiler.compile(
+            self.base, LogicalProgram(tuple(changes)),
+            base_repository_paths=self.repository_paths, compiled_base=self.compiled,
+            predecessor=predecessor, **kwargs,
+        )
+
+    def assert_same_projection(self, actual, expected) -> None:
+        self.assertEqual(actual.source.files, expected.source.files)
+        self.assertEqual(actual.repository_paths, expected.repository_paths)
+        self.assertEqual(actual.semantic_proposals, expected.semantic_proposals)
+        self.assertEqual(actual.analysis_policy_ids, expected.analysis_policy_ids)
+        self.assertEqual(actual.analysis_module_ids, expected.analysis_module_ids)
+        self.assertEqual(actual.compiled.source.files, expected.compiled.source.files)
+
+    def test_successor_executes_only_suffix_at_growing_history_lengths(self) -> None:
+        for length in (1, 4, 12, 32):
+            with self.subTest(history=length):
+                prefix = tuple(self.continuation_change(i) for i in range(1, length + 1))
+                predecessor = self.compile_continuation(prefix)
+                self.assertIsNotNone(predecessor._continuation)
+                original_files = predecessor.source.files
+                program = (*prefix, self.continuation_change(length + 1))
+                with mock.patch.object(
+                    logical, "_refresh_suite_input_projection",
+                    wraps=logical._refresh_suite_input_projection,
+                ) as refresh:
+                    cold = self.compile_continuation(program)
+                    self.assertEqual(refresh.call_count, length + 1)
+                    refresh.reset_mock()
+                    warm = self.compile_continuation(program, predecessor=predecessor)
+                    self.assertEqual(refresh.call_count, 1)
+                self.assert_same_projection(warm, cold)
+                self.assertEqual(predecessor.source.files, original_files)
+                self.assertIsNot(warm.compiled, predecessor.compiled)
+                self.assertIsNot(warm.compiled, self.compiled)
+
+    def test_successor_preserves_cumulative_original_base_semantics(self) -> None:
+        policy = "topic.architecture.composed-design-admission"
+        def revision(body):
+            return self.change_set([{
+                "kind": "revise-policy-unit", "policy": policy,
+                "title": "Composed Design Admission", "body": body,
+                "semantics": {"kind": "change", "accepted_semantic_revision": 1,
+                              "proposed_semantic_revision": 2,
+                              "intent": "Clarify the composed-design decision."},
+            }])
+        relationship = self.new_relationship()
+        relationship["source_policy"] = policy
+        prefix = (revision("Use a deep Module for the first decision.\n"),
+                  self.change_set([self.new_standard_edit()]),
+                  self.change_set([{"kind": "put-policy-relationship", "relationship": relationship}]))
+        predecessor = self.compile_continuation(prefix)
+        program = (*prefix, revision("Use a stable Interface for the final decision.\n"),
+                   self.change_set([{
+                       "kind": "replace-standard-relationships",
+                       "standard": "topic.architecture",
+                       "requires": ["core"], "specializes": [],
+                       "rationale": "Narrow architecture prerequisites to core.",
+                   }]))
+        warm = self.compile_continuation(program, predecessor=predecessor)
+        cold = self.compile_continuation(program)
+        self.assert_same_projection(warm, cold)
+        self.assertIn(policy, warm.analysis_policy_ids)
+        self.assertIn("topic.logical-authoring-test", warm.analysis_module_ids)
+        self.assertIn("topic.logical-authoring-test.policy", {item["policy"] for item in warm.semantic_proposals})
+        proposal = next(item for item in warm.semantic_proposals if item["policy"] == policy)
+        self.assertEqual(proposal["accepted_semantic_revision"], 1)
+        self.assertEqual(proposal["proposed_semantic_revision"], 2)
+        self.assertEqual(warm.compiled.corpus.resolve_policy_unit(policy).semantic_revision, 2)
+        self.assertEqual(self.compiled.corpus.resolve_policy_unit(policy).semantic_revision, 1)
+
+    def test_invalid_and_no_effect_suffixes_preserve_the_predecessor(self) -> None:
+        prefix = (self.continuation_change(1),)
+        predecessor = self.compile_continuation(prefix)
+        files = predecessor.source.files
+        no_effect = self.continuation_change(2).as_contract()
+        no_effect["edits"][0]["standard"]["body"] = "Independent continuation revision 1.\n"
+        unavailable = self.continuation_change(2).as_contract()
+        unavailable["edits"][0]["standard"]["id"] = "reference.testing.missing-successor"
+        for raw in (no_effect, unavailable):
+            with self.subTest(kind=raw["edits"][0]["standard"]["id"]):
+                program = (*prefix, StandardsChangeSet.from_mapping(raw))
+                failures = []
+                for seed in (None, predecessor):
+                    with self.assertRaises(AuthoringError) as raised:
+                        self.compile_continuation(program, predecessor=seed)
+                    failures.append(raised.exception.failure)
+                self.assertEqual(failures[0], failures[1])
+                self.assertEqual(predecessor.source.files, files)
+        valid = self.compile_continuation(
+            (*prefix, self.continuation_change(3)), predecessor=predecessor,
+        )
+        self.assert_same_projection(valid, self.compile_continuation((*prefix, self.continuation_change(3))))
+
+    def test_unproven_or_changed_predecessor_material_selects_full_replay(self) -> None:
+        prefix = (self.continuation_change(1),)
+        predecessor = self.compile_continuation(prefix)
+        program = (*prefix, self.continuation_change(2))
+        altered = dict(predecessor.source.files)
+        altered["untrusted.md"] = b"not a verified projection"
+        candidates = (
+            replace(predecessor, _continuation=None),
+            replace(predecessor, source=FrozenContentSource(altered)),
+            replace(predecessor, repository_paths=(*predecessor.repository_paths, "untrusted.md")),
+        )
+        expected = self.compile_continuation(program)
+        for seed in candidates:
+            with self.subTest(seed=seed._continuation is None), mock.patch.object(
+                logical, "_refresh_suite_input_projection",
+                wraps=logical._refresh_suite_input_projection,
+            ) as refresh:
+                actual = self.compile_continuation(program, predecessor=seed)
+                self.assertEqual(refresh.call_count, 2)
+                self.assert_same_projection(actual, expected)
+
+    def test_changed_history_snapshot_or_compiler_recipe_replays(self) -> None:
+        prefix = (self.continuation_change(1),)
+        predecessor = self.compile_continuation(prefix)
+        changed = prefix[0].as_contract()
+        changed["purpose"]["rationale"] = "A distinct exact logical program."
+        def alternate(source):
+            return StandardsEngine._compile(source)
+        cases = (
+            ((StandardsChangeSet.from_mapping(changed), self.continuation_change(2)), {}),
+            ((*prefix, self.continuation_change(2)), {"base_snapshot": "snapshot:other"}),
+            ((*prefix, self.continuation_change(2)), {"compiler": LogicalAuthoringCompiler(alternate)}),
+        )
+        for program, kwargs in cases:
+            with self.subTest(changed=tuple(kwargs)), mock.patch.object(
+                logical, "_refresh_suite_input_projection",
+                wraps=logical._refresh_suite_input_projection,
+            ) as refresh:
+                actual = self.compile_continuation(program, predecessor=predecessor, **kwargs)
+                self.assertEqual(refresh.call_count, 2)
+            self.assert_same_projection(actual, self.compile_continuation(program, **kwargs))
+
+    def test_caller_owned_nested_changes_cannot_rewrite_compilation_provenance(self) -> None:
+        prefix = self.continuation_change(1)
+        predecessor = self.compile_continuation((prefix,))
+        original_proof = predecessor._continuation
+        caller = prefix.as_contract()
+        caller["edits"][0]["standard"]["body"] = "Changed prefix bytes.\n"
+        changed = StandardsChangeSet.from_mapping(caller)
+        program = (changed, self.continuation_change(2))
+        with mock.patch.object(logical, "_refresh_suite_input_projection",
+                               wraps=logical._refresh_suite_input_projection) as refresh:
+            actual = self.compile_continuation(program, predecessor=predecessor)
+            self.assertEqual(refresh.call_count, 2)
+        self.assert_same_projection(actual, self.compile_continuation(program))
+        self.assertIs(predecessor._continuation, original_proof)
 
     def test_manifest_projection_uses_captured_inputs_without_staging(self) -> None:
         program = LogicalProgram((self.change_set([self.new_standard_edit()]),))
@@ -765,6 +933,11 @@ class LogicalAuthoringTests(unittest.TestCase):
             base_repository_paths=self.repository_paths,
         )
 
+        predecessor = self.compile_continuation((create,))
+        continued = self.compile_continuation((create, retire), predecessor=predecessor)
+        self.assert_same_projection(continued, projection)
+        self.assert_suite_input_projection_is_canonical(continued)
+
         self.assertIsNone(
             projection.compiled.corpus.resolve_module("topic.logical-authoring-test")
         )
@@ -836,13 +1009,11 @@ class LogicalAuthoringTests(unittest.TestCase):
                 )
             )
 
-        with self.assertRaises(AuthoringError) as raised:
-            LogicalAuthoringCompiler(StandardsEngine._compile).compile(
-                self.base,
-                LogicalProgram((create, self.change_set(retire_edits))),
-                base_repository_paths=self.repository_paths,
-            )
-        self.assertEqual(raised.exception.failure.code, "AUTHORING.INVALID_SUCCESSOR")
+        predecessor = self.compile_continuation((create,))
+        for seed in (None, predecessor):
+            with self.subTest(continued=seed is not None), self.assertRaises(AuthoringError) as raised:
+                self.compile_continuation((create, self.change_set(retire_edits)), predecessor=seed)
+            self.assertEqual(raised.exception.failure.code, "AUTHORING.INVALID_SUCCESSOR")
 
     def test_retirement_requires_and_applies_complete_relationship_dispositions(
         self,

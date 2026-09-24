@@ -5,9 +5,9 @@ import json
 import re
 import tomllib
 from collections.abc import Callable, Iterable, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
-from types import MappingProxyType
+from types import FunctionType, MappingProxyType
 from typing import Any, Protocol
 
 from tools.standards_applicability.standards_applicability import compile_fact_schema
@@ -35,6 +35,7 @@ from tools.standards_verifier.standards_verifier import (
 )
 
 from .authoring import AuthoringError, AuthoringFailure
+from .projection_continuation import ProjectionContinuation, ProjectionInputs
 
 
 _CANONICAL_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]*$")
@@ -903,6 +904,9 @@ class LogicalProjection:
     analysis_policy_ids: tuple[str, ...]
     analysis_module_ids: tuple[str, ...]
     repository_paths: tuple[str, ...]
+    _continuation: ProjectionContinuation | None = field(
+        default=None, repr=False, compare=False,
+    )
 
 
 class LogicalAuthoringCompiler:
@@ -921,13 +925,17 @@ class LogicalAuthoringCompiler:
         """Identify the installed replay recipe; stateful adapters remain cold.
 
         Only this exact owner, with its original compile method, exposes an
-        identity. Its authority compiler is checked for statelessness by the
-        retention owner. No instance, bound method or caller callback is retained.
+        identity. Both compilers must be stateless installed functions. No
+        instance, bound method or stateful caller callback supplies reuse proof.
         """
         if (
             type(self) is not LogicalAuthoringCompiler
             or set(vars(self)) != {"_compile_authorities"}
             or getattr(self.compile, "__func__", None) is not type(self).compile
+            or not all(
+                isinstance(item, FunctionType) and not item.__closure__
+                for item in (type(self).compile, self._compile_authorities)
+            )
         ):
             return None
         return type(self).compile, self._compile_authorities
@@ -940,7 +948,15 @@ class LogicalAuthoringCompiler:
         base_snapshot: str | None = None,
         base_repository_paths: Iterable[str],
         compiled_base: Any | None = None,
+        predecessor: LogicalProjection | None = None,
     ) -> LogicalProjection:
+        """Compile the complete program, optionally continuing a verified prefix.
+
+        Predecessor bytes are only a private computational starting point. The
+        original base owns edit semantics, manifest membership and cumulative
+        analysis; every candidate still receives final authority compilation.
+        Missing or incompatible provenance selects the ordinary full replay.
+        """
         if type(base) is not FrozenContentSource or type(program) is not LogicalProgram:
             raise _invalid(
                 "AUTHORING.INVALID_LOGICAL_PROGRAM",
@@ -968,9 +984,35 @@ class LogicalAuthoringCompiler:
                     "compiled base must own the exact supplied frozen source",
                 )
             base_compiled = compiled_base
-        files = dict(base.files)
+        implementation = self.compilation_identity
+        inputs = (
+            ProjectionInputs(
+                base.files, base_snapshot, selected_repository_paths,
+                tuple(_canonical_json(item.as_contract()) for item in program.change_sets),
+                implementation,
+            )
+            if implementation is not None else None
+        )
+        prefix_length = 0
+        selected_source = base
         repository_paths = selected_repository_paths
-        for change_set in program.change_sets:
+        if (
+            inputs is not None
+            and type(predecessor) is LogicalProjection
+            and type(predecessor.source) is FrozenContentSource
+            and type(predecessor._continuation) is ProjectionContinuation
+        ):
+            prefix_length = predecessor._continuation.prefix_length(
+                inputs, projected_files=predecessor.source.files,
+                repository_paths=predecessor.repository_paths,
+            )
+            if prefix_length:
+                selected_source = predecessor.source
+                repository_paths = predecessor.repository_paths
+        # Copy only the file table: every value is an immutable byte string.
+        # Neither a failed suffix nor a sibling successor can mutate its prefix.
+        files = dict(selected_source.files)
+        for change_set in program.change_sets[prefix_length:]:
             before = dict(files)
             from .supporting_authoring import SUPPORT_EDIT_KINDS, begin_edits, finish_edits
             support_edits = [edit.as_contract() for edit in change_set.edits
@@ -1020,6 +1062,8 @@ class LogicalAuthoringCompiler:
             _analysis_policy_ids(base_compiled, compiled, program),
             _analysis_module_ids(program),
             repository_paths,
+            ProjectionContinuation(inputs, source.files, repository_paths)
+            if inputs is not None else None,
         )
 
     def _apply_edit(
