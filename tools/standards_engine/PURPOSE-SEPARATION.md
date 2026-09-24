@@ -84,7 +84,8 @@ verification, target compare-and-swap and recovery obtain fresh observations;
 no operation-local material crosses those barriers as permission or readiness.
 Each facade/Engine/SQLite lifetime remains per call. MCP now owns the installed
 interface and a bounded cache of pure snapshot compilation as described below.
-Operation-local proposal state, evaluations and permissions remain per-call.
+Operation-local workflow state, evaluations and permissions remain per-call.
+Exact draft projection retention is described separately below.
 
 ## Process-owned pure reuse
 
@@ -97,7 +98,8 @@ publication keeps the installed interface valid. Standalone facades prepare thei
 own interface unless their trusted owner supplies an already prepared one.
 
 One MCP process also owns a repository/purpose-scoped compilation cache with a
-two-entry and 32 MiB accounted-retention limit. Keys contain the exact verified
+two-entry and 32 MiB accounted-retention limit shared by snapshot and draft
+projection entries. Snapshot keys contain the exact verified
 captured paths, bytes and source revision, plus the installed compiler function.
 Python dictionary equality distinguishes hash collisions. Each new operation
 opens and validates its store, checks snapshot lifecycle and verifies complete
@@ -131,6 +133,37 @@ is not a thread-safety guarantee for concurrent use of one Engine. Independent
 server processes retain separate fixed-purpose resources. Stream EOF or failure
 releases the server-owned interface, catalog and cache; closing a borrowing Engine
 closes its store without releasing the owner's cache.
+
+## Exact draft projection reuse
+
+Draft reads, analysis, status, creation/revision preparation and focused resolution
+can retain the pure projection of one exact immutable proposal revision. They use
+the existing compilation-cache owner and its shared two-entry / 32 MiB budget.
+One base plus one current draft fits the measured workload; older entries can be
+evicted normally. The runtime adds no persistent cache or new wire format.
+
+Each new public call reads the actual stored revision/root and fully validates its
+original captured base before lookup. The key binds exact base bytes/paths, the
+existing canonical representation of the complete revision (original snapshot,
+repository membership, proposal identity, ordinal and all change sets), and the
+installed replay recipe. Static compiler implementations qualify; custom stateful
+adapters execute cold. The compiler's original accepted base remains the semantic
+comparison authority. A miss replays the entire program with all normal checks;
+this is not incremental successor construction.
+
+Retained semantic-intent maps are private copies. Each operation receives fresh
+intent maps and result envelopes while sharing read-only sources and compiled
+structures. Status and pre-/post-submission evaluations still run. Authorization,
+evidence, snapshot lifecycle, proposal-head observations and conditional writes
+remain current. A prospective projection retained before a failed publication is
+only reusable computation: its handle still requires a real stored revision/root.
+
+Review, candidate verification, application and recovery retain their existing
+fresh replay paths. New snapshot capture retains both independent compiler passes.
+Main advancement affects new captures, never the base of an existing draft. Old
+explicit revisions retain historical meaning and can have live stale status.
+Corruption, quarantine, purge or missing/replaced stores reject before projection
+reuse. Server restart reconstructs cold, and close releases both entry kinds.
 
 ## Bounded grouped reads
 

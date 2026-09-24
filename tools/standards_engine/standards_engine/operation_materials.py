@@ -62,7 +62,7 @@ class ProposalMaterials:
         accepted = self.compiled(revision.base_snapshot)
         if self._projection is not None and self._projection[0] == revision:
             return self._projection[1]
-        projection = self._engine._proposal_projection(revision, accepted)
+        projection = self._engine._proposal_projection(revision, accepted, reuse=True)
         # A revision change replaces, rather than accumulates, retained output.
         self._projection = (revision, projection)
         return projection

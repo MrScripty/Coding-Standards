@@ -7065,7 +7065,7 @@
       ]
     },
     {
-      "digest": "sha256:834629773d98efb9dbc8461c9926eb58851b9ab5ebfa94938a08d410ce2d02a5",
+      "digest": "sha256:5fe033c834a88415ac477ef8d09bc97e9b189be2cff986e142c782005a1b4f50",
       "path": "tools/standards_engine/standards_engine/compiled_cache.py",
       "state": "present",
       "uses": [
@@ -7089,7 +7089,7 @@
       ]
     },
     {
-      "digest": "sha256:7790c66981e1b88986e186c521c2ab51e00c37f62cd096897063ae55504cc1c0",
+      "digest": "sha256:ff1c3e9569fa7e60b37357608ade12b1a0abc5c287f6d8d4bbc7a4302196a759",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7123,7 +7123,7 @@
       ]
     },
     {
-      "digest": "sha256:f9471723773b3a23e50548e459c2965a67bc769d6504000b524e1ef05863f36a",
+      "digest": "sha256:81f99ed06fefd6c7caa4ac344bac92adf23ca9e1941d12f06c46c00cba8af2bc",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -7159,7 +7159,7 @@
       ]
     },
     {
-      "digest": "sha256:fff7a6cba434679b8d95f89d1eb17e25013b9887047c2dd7ab632d3b4d84a6fe",
+      "digest": "sha256:bae7ea7900cfc3b8aaf837d0ec9275692d9cc53bd10087a5e6a94e2ac8a624f9",
       "path": "tools/standards_engine/standards_engine/operation_materials.py",
       "state": "present",
       "uses": [
@@ -13302,7 +13302,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:a61573877dbf8758c052973548c08f55e5e22ebf2effe449f40f37d0036f8094",
+    "digest": "sha256:9245138cf21822d5b31afdeec6862bbff9ace948c2597b7d7f6d02d643385ea4",
     "uses": [
       {
         "check": "python-package-contract",

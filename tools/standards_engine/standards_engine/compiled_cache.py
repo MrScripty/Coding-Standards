@@ -8,29 +8,35 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from collections.abc import Callable, Mapping
+from copy import deepcopy
+from dataclasses import replace
 from enum import Enum
 from pathlib import Path, PurePath
 import re
 import sys
 from types import FunctionType, MappingProxyType
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
+from tools.standards_identity.standards_identity import encode_identity_value
 from tools.standards_metadata.standards_metadata import FrozenContentSource
 from tools.standards_snapshots.standards_snapshots import CapturedContent
 
 from .context_projection import Purpose
 
 if TYPE_CHECKING:
+    from .authoring import ProposalRevision
     from .engine import CompiledSnapshot
+    from .logical_authoring import LogicalAuthoringCompiler, LogicalProjection
 
 
 class CompiledSnapshotCache:
-    """Retain at most a representative base/proposed pair for one serial owner.
+    """Retain a bounded mix of snapshot and exact draft material for one owner.
 
-    A key contains the exact *already verified* capture and compiler callable.
-    Equality includes bytes, paths and source revision; a Python hash collision
-    cannot identify different material. No snapshot lifecycle or access decision
-    is stored here. Each caller performs its complete durable read first.
+    Snapshot keys bind the exact verified capture and compiler. Draft keys also
+    bind the complete logical revision and installed replay recipe. Equality
+    distinguishes different material even after a Python hash collision. Current
+    lifecycle, root and access decisions remain with the caller, which performs
+    complete durable validation before consulting this pure reuse mechanism.
     """
 
     def __init__(
@@ -44,7 +50,7 @@ class CompiledSnapshotCache:
         self._max_entries = max_entries
         self._max_bytes = max_bytes
         self._entries: OrderedDict[
-            tuple[CapturedContent, Callable], tuple[CompiledSnapshot, int]
+            tuple[object, ...], tuple[object, int]
         ] = OrderedDict()
         self._bytes = 0
         self._closed = False
@@ -70,23 +76,90 @@ class CompiledSnapshotCache:
             return compiler(FrozenContentSource(
                 (str(item.path), item.content) for item in capture.files
             ))
-        key = (capture, compiler)
-        existing = self._entries.get(key)
+        key = ("snapshot", capture, compiler)
+        existing = self._lookup(key)
         if existing is not None:
-            self._hits += 1
-            self._entries.move_to_end(key)
-            return existing[0]
-        self._misses += 1
+            return cast("CompiledSnapshot", existing)
         result = compiler(FrozenContentSource(
             (str(item.path), item.content) for item in capture.files
         ))
+        self._retain(key, result)
+        return result
+
+    def project_verified(
+        self,
+        revision: ProposalRevision,
+        base: CompiledSnapshot,
+        compiler: LogicalAuthoringCompiler,
+    ) -> LogicalProjection:
+        """Reuse only the replay of exact, independently verified draft inputs.
+
+        The caller reads the stored revision/root and verifies base content before
+        entering. Prospective revisions may also be compiled before publication;
+        a cached pure projection is never evidence that a revision was published.
+        Snapshot and projection entries share one LRU and one retention budget.
+        """
+        from .logical_authoring import LogicalProgram
+
+        if self._closed:
+            raise ValueError("Compilation cache is closed.")
+        if self._purpose is not Purpose.AUTHORING:
+            raise ValueError("Proposal material requires authoring purpose.")
+        implementation = compiler.compilation_identity
+        eligible = (
+            implementation is not None
+            and all(isinstance(item, FunctionType) and not item.__closure__
+                    for item in implementation)
+            and type(base.source) is FrozenContentSource
+        )
+        key = None
+        if eligible and self._max_entries and self._max_bytes:
+            # Exact values rather than a mutable proposal head or a claimed ID.
+            # The existing canonical codec binds the whole program, membership,
+            # original base, ordinal and proposal identity without a new format.
+            key = (
+                "proposal", base.source.files,
+                encode_identity_value(revision.identity_material()),
+                implementation,
+            )
+            existing = self._lookup(key)
+            if existing is not None:
+                retained = cast("LogicalProjection", existing)
+                # Semantic intent maps historically belong to each operation.
+                # Preserve that ownership while sharing read-only compiled data.
+                return replace(retained, semantic_proposals=deepcopy(retained.semantic_proposals))
+        else:
+            self._misses += 1
+        result = compiler.compile(
+            base.source, LogicalProgram(revision.change_sets),
+            base_snapshot=str(revision.base_snapshot),
+            base_repository_paths=revision.base_repository_paths,
+            compiled_base=base,
+        )
+        if key is None:
+            self._uncached += 1
+        else:
+            # Keep the retained intent independent of the cold caller's maps too.
+            self._retain(key, replace(result, semantic_proposals=deepcopy(result.semantic_proposals)))
+        return result
+
+    def _lookup(self, key: tuple[object, ...]) -> object | None:
+        existing = self._entries.get(key)
+        if existing is None:
+            self._misses += 1
+            return None
+        self._hits += 1
+        self._entries.move_to_end(key)
+        return existing[0]
+
+    def _retain(self, key: tuple[object, ...], result: object) -> None:
         size = (
             _retained_size((key, result), self._max_bytes)
             if self._max_entries and self._max_bytes else None
         )
         if size is None:
             self._uncached += 1
-            return result
+            return
         while self._entries and (
             len(self._entries) >= self._max_entries or self._bytes + size > self._max_bytes
         ):
@@ -95,7 +168,6 @@ class CompiledSnapshotCache:
             self._evictions += 1
         self._entries[key] = (result, size)
         self._bytes += size
-        return result
 
     @property
     def statistics(self) -> dict[str, int]:

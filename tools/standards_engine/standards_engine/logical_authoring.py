@@ -916,6 +916,22 @@ class LogicalAuthoringCompiler:
             )
         self._compile_authorities = compile_authorities
 
+    @property
+    def compilation_identity(self) -> tuple[Callable, Callable] | None:
+        """Identify the installed replay recipe; stateful adapters remain cold.
+
+        Only this exact owner, with its original compile method, exposes an
+        identity. Its authority compiler is checked for statelessness by the
+        retention owner. No instance, bound method or caller callback is retained.
+        """
+        if (
+            type(self) is not LogicalAuthoringCompiler
+            or set(vars(self)) != {"_compile_authorities"}
+            or getattr(self.compile, "__func__", None) is not type(self).compile
+        ):
+            return None
+        return type(self).compile, self._compile_authorities
+
     def compile(
         self,
         base: FrozenContentSource,

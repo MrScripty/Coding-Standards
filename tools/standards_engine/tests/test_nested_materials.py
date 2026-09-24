@@ -186,12 +186,12 @@ class NestedMaterialTests(unittest.TestCase):
         nested = []
         entered = False
 
-        def reenter(revision, accepted=None):
+        def reenter(revision, accepted=None, *, reuse=False):
             nonlocal entered
             if not entered:
                 entered = True
                 nested.append(self.facade.analyze_proposal({"revision": second["revision"]}))
-            return project(revision, accepted)
+            return project(revision, accepted, reuse=reuse)
 
         with patch.object(self.engine._snapshots, "load_content", wraps=self.engine._snapshots.load_content) as loads:
             with patch.object(self.engine, "_proposal_projection", side_effect=reenter):

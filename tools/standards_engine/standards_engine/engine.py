@@ -1067,7 +1067,7 @@ class StandardsEngine:
     ) -> QueryProposalResult | RejectedResult:
         try:
             revision = self._authoring.read_revision(call.revision.id)
-            compiled = self._proposal_projection(revision).compiled
+            compiled = self._proposal_projection(revision, reuse=True).compiled
             projection = _QueryProjection.proposal(
                 call.revision,
                 SnapshotHandle.from_value(
@@ -1758,12 +1758,18 @@ class StandardsEngine:
         self,
         revision: ProposalRevision,
         accepted: CompiledSnapshot | None = None,
+        *,
+        reuse: bool = False,
     ) -> LogicalProjection:
         accepted = (
             self._compiled_snapshot(revision.base_snapshot)
             if accepted is None
             else accepted
         )
+        if reuse and self._compiled_cache is not None:
+            return self._compiled_cache.project_verified(
+                revision, accepted, self._logical_authoring
+            )
         return self._logical_authoring.compile(
             accepted.source,
             LogicalProgram(revision.change_sets),

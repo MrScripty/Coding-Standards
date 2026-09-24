@@ -1,0 +1,528 @@
+{
+  "source": "/mnt/data/projection-work/baseline",
+  "head": "2dd2ce1bd8e1129a5662be7c76bf864778fb2010",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "executable_sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+  "packages": {
+    "jsonschema": "4.26.0",
+    "rpds-py": "2026.5.1"
+  },
+  "observations": [
+    {
+      "history": 1,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 0.8252453310001329,
+      "cpu_seconds": 0.825256996,
+      "counts": {
+        "durable_loads": 1,
+        "full_compiles": 2,
+        "manifest_refreshes": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 0,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.6772969569999532,
+      "cpu_seconds": 0.6771146009999998,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 1,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.5871132489999127,
+      "cpu_seconds": 0.5871066060000003,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 2,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.7331052619999809,
+      "cpu_seconds": 0.7331184679999998,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 3,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.577514625999811,
+      "cpu_seconds": 0.5775044819999997,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 4,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.674513399000034,
+      "cpu_seconds": 0.6745039559999997,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 5,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 3,
+      "operation": "query_proposal",
+      "wall_seconds": 0.5973127830000067,
+      "cpu_seconds": 0.5973147769999994,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 6,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 3,
+      "operation": "workflow_status",
+      "wall_seconds": 0.7142770100001599,
+      "cpu_seconds": 0.7142709710000004,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 1,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516576,
+        "hits": 7,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 1.3974846010000874,
+      "cpu_seconds": 1.397368191,
+      "counts": {
+        "durable_loads": 1,
+        "full_compiles": 2,
+        "manifest_refreshes": 4
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 0,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 1.2615727759998663,
+      "cpu_seconds": 1.2597261150000003,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 1,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 1.1949334420000923,
+      "cpu_seconds": 1.1948195949999985,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 2,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 1.2641281300000173,
+      "cpu_seconds": 1.2639281780000005,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 3,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 1.265096627000048,
+      "cpu_seconds": 1.2650780259999994,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 4,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 1.278719454000111,
+      "cpu_seconds": 1.27864192,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 5,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 3,
+      "operation": "query_proposal",
+      "wall_seconds": 1.1562655379998432,
+      "cpu_seconds": 1.1561566700000014,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 6,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 3,
+      "operation": "workflow_status",
+      "wall_seconds": 1.2626330069999767,
+      "cpu_seconds": 1.2609624739999994,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 4,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516240,
+        "hits": 7,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 3.0216830789997857,
+      "cpu_seconds": 3.0213914089999996,
+      "counts": {
+        "durable_loads": 1,
+        "full_compiles": 2,
+        "manifest_refreshes": 12
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 0,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 2.8113570130001335,
+      "cpu_seconds": 2.8113040950000006,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 1,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 2.6934243580001294,
+      "cpu_seconds": 2.6923423090000007,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 2,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 2.995833120000043,
+      "cpu_seconds": 2.995540836,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 3,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 2.6479470550000315,
+      "cpu_seconds": 2.647566284,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 4,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 2.575289874999953,
+      "cpu_seconds": 2.575092601999998,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 5,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 3,
+      "operation": "query_proposal",
+      "wall_seconds": 2.5372157290000814,
+      "cpu_seconds": 2.5371333149999984,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 6,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 3,
+      "operation": "workflow_status",
+      "wall_seconds": 2.806694661000165,
+      "cpu_seconds": 2.806585959000003,
+      "counts": {
+        "durable_loads": 1,
+        "manifest_refreshes": 12,
+        "full_compiles": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 1,
+        "accounted_bytes": 6516208,
+        "hits": 7,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    }
+  ]
+}
