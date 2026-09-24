@@ -2,9 +2,9 @@
 
 **Status:** implemented and locally qualified; supported installed qualification and independent review are separate.
 
-**Branch:** `implementation/purpose-separated-standards-engine`  
-**Base:** `2aef993edc8a47ce474468c641cc2e542e3ec8da`  
-**Tested implementation commit:** `de85f5adfda221fe88fbf0dba12b34aa2e410cf6`  
+**Branch:** `implementation/purpose-separated-standards-engine`
+**Base:** `2aef993edc8a47ce474468c641cc2e542e3ec8da`
+**Tested implementation commit:** `de85f5adfda221fe88fbf0dba12b34aa2e410cf6`
 **Evidence date:** September 23, 2026 (America/Vancouver).
 
 ## Objective and bounded admission
