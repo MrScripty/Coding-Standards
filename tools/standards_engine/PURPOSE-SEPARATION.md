@@ -82,8 +82,55 @@ re-entry constructs its own scope, and public request shapes remain unchanged.
 Each subsequent operation loads and verifies its own captured bytes. Publication
 verification, target compare-and-swap and recovery obtain fresh observations;
 no operation-local material crosses those barriers as permission or readiness.
-The MCP/facade/SQLite lifetime remains per call. There is no cross-call compiled
-cache, persistent derived cache, or alternate identity format in this increment.
+Each facade/Engine/SQLite lifetime remains per call. MCP now owns the installed
+interface and a bounded cache of pure snapshot compilation as described below.
+Operation-local proposal state, evaluations and permissions remain per-call.
+
+## Process-owned pure reuse
+
+The MCP server compiles its installed API interface once. Discovery and invocation
+consume that same contract, and every request still uses the complete generated
+decoder and current purpose-qualified result checks. The interface describes the
+installed implementation, not the accepted standards revision. Replacing Engine
+code or its API schema requires a controlled process restart. Ordinary standards
+publication keeps the installed interface valid. Standalone facades prepare their
+own interface unless their trusted owner supplies an already prepared one.
+
+One MCP process also owns a repository/purpose-scoped compilation cache with a
+two-entry and 32 MiB accounted-retention limit. Keys contain the exact verified
+captured paths, bytes and source revision, plus the installed compiler function.
+Python dictionary equality distinguishes hash collisions. Each new operation
+opens and validates its store, checks snapshot lifecycle and verifies complete
+content identity before lookup. Missing, quarantined, purged, replaced or corrupt
+storage therefore remains observable. Equal verified inputs may share pure
+compilation even when obtained from distinct store roots; store-specific handles,
+access checks and result envelopes remain fresh. No store facts enter the cache.
+
+Successful full compilation is eligible for retention. The cache has no negative
+entries, response objects, live authorization/provider outcomes, mutable proposal
+heads, readiness or publication outcomes. Snapshot-bound attestations and exposure
+declarations remain part of that historical material; they grant no new access.
+Eviction, oversized inputs and entries whose retained size cannot be established use the normal verified computation. The accounting
+walk charges reachable Python data once per entry, includes captured bytes and
+mapping tables, and conservatively charges inter-entry sharing separately. It
+materializes pathlib value caches before accounting. Imported implementation
+code and bounded LRU bookkeeping are separate from the per-entry budget. The
+budget is not a process-RSS or transient-working-memory limit.
+
+Capture always resolves accepted main and runs both independent live/frozen
+compiler passes and closure checks. Neither pass consults the cache. A later
+explicit read may reuse only a compilation of its own fully verified capture.
+Advancing main affects new captures; historical snapshots preserve their captured
+material. Publication candidate verification and recovery keep their existing
+fresh observations. Each new process starts empty and reconstructs correctly.
+
+The transport retains serial dispatch and opens/closes a fresh facade and SQLite
+connection for each call. Pure cached structures are read-only through their
+owned interfaces; each response and continuation is newly constructed. The cache
+is not a thread-safety guarantee for concurrent use of one Engine. Independent
+server processes retain separate fixed-purpose resources. Stream EOF or failure
+releases the server-owned interface, catalog and cache; closing a borrowing Engine
+closes its store without releasing the owner's cache.
 
 ## Application qualification
 

@@ -220,6 +220,7 @@ from .logical_authoring import (
 )
 from .navigation_indexes import NavigationIndex
 from .operation_materials import ProposalMaterials
+from .compiled_cache import CompiledSnapshotCache
 from .context_projection import Purpose, public_operation
 
 
@@ -443,8 +444,12 @@ class StandardsEngine:
         purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
         temporary_store: tempfile.TemporaryDirectory[str] | None = None,
+        compiled_cache: CompiledSnapshotCache | None = None,
     ) -> None:
         self._purpose = Purpose(purpose)
+        if compiled_cache is not None:
+            compiled_cache.require_scope(repository.root, self._purpose)
+        self._compiled_cache = compiled_cache
         self._repository = repository
         self._snapshots = snapshots
         self._logical_authoring = LogicalAuthoringCompiler(self._compile)
@@ -462,9 +467,12 @@ class StandardsEngine:
         store_path: Path | None = None,
         purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
+        compiled_cache: CompiledSnapshotCache | None = None,
     ) -> StandardsEngine:
         selected_purpose = Purpose(purpose)
         selected_root = root.resolve()
+        if compiled_cache is not None:
+            compiled_cache.require_scope(selected_root, selected_purpose)
         temporary = None
         if store_path is None:
             if durable:
@@ -478,6 +486,7 @@ class StandardsEngine:
             purpose=selected_purpose,
             execution_context=execution_context,
             temporary_store=temporary,
+            compiled_cache=compiled_cache,
         )
 
     @property
@@ -1721,6 +1730,8 @@ class StandardsEngine:
 
     def _compiled_snapshot(self, snapshot: SnapshotId) -> CompiledSnapshot:
         capture = self._snapshots.load_content(snapshot)
+        if self._compiled_cache is not None:
+            return self._compiled_cache.compile_verified(capture, self._compile)
         return self._compile(
             FrozenContentSource(
                 (str(item.path), item.content) for item in capture.files

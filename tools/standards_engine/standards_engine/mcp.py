@@ -8,18 +8,21 @@ from __future__ import annotations
 
 import argparse
 from contextlib import redirect_stdout
+from copy import deepcopy
 import json
 from pathlib import Path
 import sys
 import traceback
 from typing import TextIO
 
+from tools.standards_contracts.standards_contracts import CompiledContracts
+
 from .tools import AgentToolFacade
+from .compiled_cache import CompiledSnapshotCache
 from .context_projection import Purpose, qualified_operations
 
 
 PROTOCOL_VERSION = "2025-11-25"
-CONTRACT_PATH = "tools/standards_engine/contracts/generated/agent-tools.json"
 READ_ONLY_OPERATIONS = frozenset(
     {
         "workflow_status",
@@ -123,8 +126,13 @@ def schema_closure(root: dict, definitions: dict) -> dict:
     return {**root, "$defs": selected}
 
 
-def tool_catalog(root: Path, *, purpose: Purpose | str, advanced: bool = False) -> list[dict]:
-    contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
+def tool_catalog(
+    root: Path, *, purpose: Purpose | str, advanced: bool = False,
+    interface: CompiledContracts | None = None,
+) -> list[dict]:
+    # Discovery and invocation share the same installed schema authority.
+    selected = interface if interface is not None else AgentToolFacade.load_interface(root)
+    contract = selected.project().agent_tools
     definitions = contract["$defs"]
     result = []
     purpose = Purpose(purpose)
@@ -209,14 +217,27 @@ class MCPServer:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
         self.advanced = advanced
-        self.tools = tool_catalog(self.root, purpose=self.purpose, advanced=advanced)
+        self._interface = AgentToolFacade.load_interface(self.root)
+        self.tools = tool_catalog(
+            self.root, purpose=self.purpose, advanced=advanced, interface=self._interface
+        )
         self.names = {tool["name"] for tool in self.tools}
+        self._compiled_cache = CompiledSnapshotCache(self.root, self.purpose)
+        self._closed = False
         self.initialized = False
         self.ready = False
 
     @property
     def purpose(self) -> Purpose:
         return self._purpose
+
+    def close(self) -> None:
+        """Release only process-owned pure resources; each call closes its store."""
+        self._compiled_cache.close()
+        self._interface = None
+        self.tools.clear()
+        self.names.clear()
+        self._closed = True
 
     def dispatch(self, message: object) -> dict | None:
         identifier = None
@@ -255,6 +276,8 @@ class MCPServer:
             }
 
     def _request(self, method: str, params: dict) -> dict:
+        if self._closed:
+            raise ProtocolError(-32000, "The server is closed.")
         if method == "ping":
             return {}
         if method == "initialize":
@@ -287,7 +310,7 @@ class MCPServer:
         if method == "tools/list":
             if "cursor" in params:
                 raise ProtocolError(-32602, "This catalog has no continuation cursor.")
-            return {"tools": self.tools}
+            return {"tools": deepcopy(self.tools)}
         if method != "tools/call":
             raise ProtocolError(-32601, "Method not found.")
         name = params.get("name")
@@ -300,7 +323,10 @@ class MCPServer:
             # Opening per call matches the reference transport and avoids keeping
             # store state alive across idle client sessions. No operation retries.
             with redirect_stdout(sys.stderr):
-                with AgentToolFacade.open_repository(self.root, purpose=self.purpose) as facade:
+                with AgentToolFacade.open_repository(
+                    self.root, purpose=self.purpose, interface=self._interface,
+                    compiled_cache=self._compiled_cache,
+                ) as facade:
                     value = getattr(facade, name)(arguments)
         except Exception as error:
             if self.purpose is Purpose.APPLICATION:
@@ -335,20 +361,23 @@ class MCPServer:
 
 
 def serve(server: MCPServer, source: TextIO, destination: TextIO) -> None:
-    for line in source:
-        try:
-            message = json.loads(line)
-        except (ValueError, RecursionError):
-            response = {
-                "jsonrpc": "2.0",
-                "id": None,
-                "error": {"code": -32700, "message": "Invalid JSON."},
-            }
-        else:
-            response = server.dispatch(message)
-        if response is not None:
-            destination.write(json.dumps(response) + "\n")
-            destination.flush()
+    try:
+        for line in source:
+            try:
+                message = json.loads(line)
+            except (ValueError, RecursionError):
+                response = {
+                    "jsonrpc": "2.0",
+                    "id": None,
+                    "error": {"code": -32700, "message": "Invalid JSON."},
+                }
+            else:
+                response = server.dispatch(message)
+            if response is not None:
+                destination.write(json.dumps(response) + "\n")
+                destination.flush()
+    finally:
+        server.close()
 
 
 def main() -> int:

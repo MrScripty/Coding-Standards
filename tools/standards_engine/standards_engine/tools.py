@@ -32,6 +32,7 @@ from tools.standards_metadata.standards_metadata import (
 from . import _generated_contract as generated_contract
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
+from .compiled_cache import CompiledSnapshotCache
 from .context_projection import Purpose, application_rejection
 from ._generated_contract import (
     MaintainEvidenceCall,
@@ -147,7 +148,11 @@ class AgentToolFacade:
         }
 
     @classmethod
-    def open_repository(cls, root: Path, *, purpose: Purpose | str) -> AgentToolFacade:
+    def open_repository(
+        cls, root: Path, *, purpose: Purpose | str,
+        interface: CompiledContracts | None = None,
+        compiled_cache: CompiledSnapshotCache | None = None,
+    ) -> AgentToolFacade:
         repo_root = root.resolve()
         engine = StandardsEngine.open_repository(
             repo_root,
@@ -155,12 +160,22 @@ class AgentToolFacade:
                 LocalAlwaysAllowAuthorizer(repo_root)
             ),
             purpose=purpose,
+            compiled_cache=compiled_cache,
         )
         try:
-            return cls(engine, _contracts(repo_root))
+            return cls(engine, interface if interface is not None else _contracts(repo_root))
         except Exception:
             engine.close()
             raise
+
+    @staticmethod
+    def load_interface(root: Path) -> CompiledContracts:
+        """Prepare the installed API once for an owning server process.
+
+        The caller owns the immutable implementation lifetime. Request decoding
+        and purpose-qualified projection remain per-call work.
+        """
+        return _contracts(root.resolve())
 
     def close(self) -> None:
         self._engine.close()

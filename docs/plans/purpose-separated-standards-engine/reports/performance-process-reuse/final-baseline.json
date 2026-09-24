@@ -1,0 +1,339 @@
+{
+  "source": "/mnt/data/interface-work/baseline",
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "corpus": {
+    "files": 436,
+    "bytes": 3747165,
+    "content_id": "snapshot-content:sha256:48852a7cf384b41ea39182169465521e22aef3addc6f3d77cd39ccdb8c784ae5",
+    "source_revision": "b81a5aae2eb72fb976b0570a4dab76d30e531fe4"
+  },
+  "observations": [
+    {
+      "repeat": 0,
+      "operation": "initialize",
+      "seconds": 0.006167545999915092,
+      "spans": []
+    },
+    {
+      "repeat": 0,
+      "operation": "read_first",
+      "seconds": 0.6329637369999546,
+      "cpu": 0.6318216699999999,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.263798898999994
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15312219699990237
+        },
+        {
+          "name": "compile",
+          "seconds": 0.19430730099998073
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 0,
+      "operation": "read_repeat",
+      "seconds": 0.6687986470001306,
+      "cpu": 0.6679860520000003,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2926456469999721
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15969725699983428
+        },
+        {
+          "name": "compile",
+          "seconds": 0.19253551099996002
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 0,
+      "operation": "read_other",
+      "seconds": 0.7268398649998744,
+      "cpu": 0.7257669320000004,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.35367749800002457
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.1540714370000842
+        },
+        {
+          "name": "compile",
+          "seconds": 0.19923962999996547
+        }
+      ],
+      "content_size": 17601
+    },
+    {
+      "repeat": 0,
+      "operation": "read_full",
+      "seconds": 0.6281915839999783,
+      "cpu": 0.6271876880000002,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.26197744299997794
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15052015399987795
+        },
+        {
+          "name": "compile",
+          "seconds": 0.18336530999999923
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 0,
+      "operation": "route",
+      "seconds": 0.817805781000061,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2586689480001496
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15357917599999382
+        },
+        {
+          "name": "compile",
+          "seconds": 0.18759590500008017
+        }
+      ]
+    },
+    {
+      "repeat": 1,
+      "operation": "initialize",
+      "seconds": 0.006368097999938982,
+      "spans": []
+    },
+    {
+      "repeat": 1,
+      "operation": "read_first",
+      "seconds": 0.6605068700000629,
+      "cpu": 0.6596841089999996,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2697183860000223
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.16306392000001324
+        },
+        {
+          "name": "compile",
+          "seconds": 0.2040212370000063
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 1,
+      "operation": "read_repeat",
+      "seconds": 0.6701822420000099,
+      "cpu": 0.6691387229999997,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.3094467999999324
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15528474600000663
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1811088980000477
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 1,
+      "operation": "read_other",
+      "seconds": 0.6120387349999419,
+      "cpu": 0.6110515019999996,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2617194249999102
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15321830199991382
+        },
+        {
+          "name": "compile",
+          "seconds": 0.17772469499982435
+        }
+      ],
+      "content_size": 17601
+    },
+    {
+      "repeat": 1,
+      "operation": "read_full",
+      "seconds": 0.6181734920000963,
+      "cpu": 0.617482496,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.25574302599989096
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15179559000011977
+        },
+        {
+          "name": "compile",
+          "seconds": 0.18054032899999584
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 1,
+      "operation": "route",
+      "seconds": 0.8068153030001213,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2561027340000237
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.1579876430000695
+        },
+        {
+          "name": "compile",
+          "seconds": 0.18420011800003522
+        }
+      ]
+    },
+    {
+      "repeat": 2,
+      "operation": "initialize",
+      "seconds": 0.006395395000026838,
+      "spans": []
+    },
+    {
+      "repeat": 2,
+      "operation": "read_first",
+      "seconds": 0.6269803929999398,
+      "cpu": 0.6260117090000001,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.27623542900005305
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.14946125599999505
+        },
+        {
+          "name": "compile",
+          "seconds": 0.17911691800009066
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 2,
+      "operation": "read_repeat",
+      "seconds": 0.6068956389999585,
+      "cpu": 0.6062379,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.25756802199998674
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.14951377400007004
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1779703709999012
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 2,
+      "operation": "read_other",
+      "seconds": 0.6151434169998993,
+      "cpu": 0.6141119689999996,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2595952760000273
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.1547648170001139
+        },
+        {
+          "name": "compile",
+          "seconds": 0.18268731900002422
+        }
+      ],
+      "content_size": 17601
+    },
+    {
+      "repeat": 2,
+      "operation": "read_full",
+      "seconds": 0.6127912130000368,
+      "cpu": 0.6121391669999987,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2507211360000383
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.15562243900012618
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1777055319998908
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 2,
+      "operation": "route",
+      "seconds": 0.8107210670000313,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2583658949999972
+        },
+        {
+          "name": "load_content",
+          "seconds": 0.1564252180000949
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1781281690000469
+        }
+      ]
+    }
+  ]
+}
