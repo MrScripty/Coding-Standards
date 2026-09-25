@@ -67,6 +67,14 @@ A frozen capture created with the actual baseline interface-33 compiler contains
 
 ## Environment and limits
 
+### Complete-checkout qualification
+
+The delivered patch applied cleanly to the local implementation branch and was committed as `3a86d078`. A Python 3.12.3 environment with the repository's locked contract dependencies passed the 28 new registration/preview/MCP tests, the cold-process publication test (one test in 69.447 seconds), metadata (43), policy impact (10), contracts (52), analysis (114), and verifier (168) suites. The complete Engine suite passed all **311 tests in 501.610 seconds** against the committed candidate. Canonical contract projection freshness passed. Regenerating verification inputs through a temporary Engine store produced the packaged manifest and passed 73 suites and 121 structural checks.
+
+The user's actual installed server and preserved proposal were not accessed. Supported local code qualification therefore does not establish the separate installed-user-proposal claim.
+
+### Original package environment
+
 Local runtime was Python **3.13.5**, outside the repository's declared Python 3.11/3.12 qualification. Installed jsonschema 4.26.0, referencing 0.37.0, attrs 26.1.0, jsonschema-specifications 2025.9.1 and typing-extensions 4.16.0 match the named lock versions. Local rpds-py is **2026.5.1** rather than locked **2026.6.3**. Test outcomes establish their local observed behavior; they do not substitute for the supported pinned-environment check.
 
 The baseline read path, metadata, graph, schema, actual compiler, full/incremental replay, real MCP, SQLite and Git publication mechanisms were exercised. The report does not claim an independent external model review, a CI run of this patch, or a successful resume/publication of the user's actual preserved proposal.
@@ -83,4 +91,4 @@ Known separately scoped issues are automatic catalog replacement and large repea
 
 ## Handoff
 
-See `APPLY.md` in the delivery package for base checks, integration, generators, exact focused tests, supported-environment qualification, MCP restart and example logical registrations. The code is ready for that qualification. The plan remains `Verifying` while external deployment/user-proposal claims are pending.
+See `APPLY.md` in the delivery package for base checks, integration, generators, MCP restart and example logical registrations. The local supported-environment checks are recorded above. The plan remains `Verifying` while external deployment/user-proposal claims are pending.

@@ -1,9 +1,9 @@
 # Proposal-Scoped Consumer Registration And Application Preview
 
 **Plan status:** `Verifying`
-**Acceptance status:** local code evidence recorded; supported installation and user-proposal qualification pending
-**Current phase:** Source implementation and local verification complete; installed qualification and handoff remain.
-**Next slice:** Qualify interface 34 in the supported installed environment and resume the preserved proposal through the returned Engine workflow.
+**Acceptance status:** supported local code evidence recorded; installed-user-proposal qualification pending
+**Current phase:** Source implementation and supported local verification complete; installed qualification and handoff remain.
+**Next slice:** Replace the installed Engine process, confirm interface 34, and resume the preserved proposal through the returned Engine workflow.
 **Canonical plan:** `docs/plans/proposal-consumers-and-preview/plan.md`; operation: `verify`.
 **Source baseline:** `9091bc72ac146b47d613b1836fbd8a89bd46f9ba`.
 **Composed-design review:** `applicable`; admission below.
@@ -93,7 +93,7 @@ An additional changed file requires a concrete consumer obligation, not an unrel
 
 ### M2 — Public workflow qualification and handoff
 
-**Status:** `Verifying`; local public workflow, package and checkpoint observations passed as recorded, while supported-environment and user-store observations remain external. Verify the exact new catalog and public workflow in disposable Git/SQLite stores: register policy and three consumers, add relationships/provenance, read authoring documentation, preview qualified candidate, review/apply, then compare published application content. Exercise cold replay without rereading source files. Run affected package suites, structural checkpoint and generated freshness; record interpreter/dependency scope precisely.
+**Status:** `Verifying`; supported local public workflow, package and checkpoint observations passed as recorded, while installed-user-store observation remains external. Verify the exact new catalog and public workflow in disposable Git/SQLite stores: register policy and three consumers, add relationships/provenance, read authoring documentation, preview qualified candidate, review/apply, then compare published application content. Exercise cold replay without rereading source files. Run affected package suites, structural checkpoint and generated freshness; record interpreter/dependency scope precisely.
 
 Package complete changed files, patch, checksums and installation guidance. The user's actual reviewed draft remains a separate installed acceptance observation. No success claim about it is inferred from test fixtures.
 
@@ -106,14 +106,14 @@ Package complete changed files, patch, checksums and installation guidance. The 
 | C3: Registered Markdown documentation under normal or hidden directories is editable without exposing source-code writes. | integration | deterministic actual metadata/compiler | automated | passed locally |
 | C4: Candidate previews use application checks and exact revision identity; ordinary application clients remain excluded from drafts. | contract/system | actual local MCP process | automated | passed locally |
 | C5: A coordinated disposable proposal passes analysis/review/verification/application and readback. | user-workflow | complete local Git/SQLite/transport | automated | passed locally |
-| C6: Generated contracts, affected tests, structural checks and package reproduction pass with environment limits recorded. | contract/release-artifact | recorded local environment | automated | passed locally |
+| C6: Generated contracts, affected tests, structural checks and package reproduction pass with environment limits recorded. | contract/release-artifact | supported local Python 3.12.3 environment | automated | passed; full Engine suite 311/311 |
 | C7: The installed current Engine resumes the user's preserved proposal and clears the reported gap. | user-workflow | user's installation and store | manual | pending: external |
 
 ## Repair, Blockers And Replan Triggers
 
 Repair test failures inside the admitted owners without restarting planning. Replan only if a required change alters input authority, retained-state meaning, application disclosure, code-write scope or atomic publication. A test that does not reach the changed behavior supplies no evidence for that behavior.
 
-The local interpreter is Python 3.13.5 with rpds-py 2026.5.1, outside the repository's pinned Python 3.11/3.12 and rpds-py 2026.6.3 qualification. Keep execution evidence useful but distinguish it from pinned deployment acceptance. The actual user store and independent model reviewer are unavailable here.
+The original package runtime was Python 3.13.5 with rpds-py 2026.5.1, outside the repository's pinned Python 3.11/3.12 and rpds-py 2026.6.3 qualification. The local integration used Python 3.12.3 and the locked contract dependencies; see [verification](reports/verification.md). The actual user store and independent model reviewer were not accessed.
 
 ## Handoff
 

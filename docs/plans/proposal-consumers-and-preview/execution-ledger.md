@@ -35,3 +35,9 @@ pinned-runtime qualification or installed-user-proposal success is claimed.
 The code slice is implemented. The overall plan remains Verifying for the
 external installation/proposal handoff. Catalog hot reload and general workflow
 response compaction retain separate dispositions.
+
+## September 24, 2026 — Complete-checkout integration and supported runtime
+
+Applied the archive patch to the complete local implementation branch and committed candidate `3a86d078` as MrScripty. The temporary-store Engine refresh reproduced the packaged verification-input manifest and passed 73 suites and 121 structural checks. Canonical contract projection freshness passed.
+
+With Python 3.12.3 and the repository's locked contract dependencies, the 28 new focused tests and one cold-process MCP publication test passed. The metadata (43), policy-impact (10), contracts (52), analysis (114) and verifier (168) suites passed. The full Engine suite then passed all 311 tests against the committed candidate. This clean supported-runtime run supersedes the original package's mixed broad-run evidence for code qualification. The installed server and preserved proposal were not accessed; C7 remains pending.
