@@ -2044,11 +2044,10 @@ def _ensure_policy_sidecar(files: dict[str, bytes], module: str) -> str:
             return path
     path = _policy_sidecar_path(module)
     if path in sources:
-        units, _ = _policy_sidecar(files[path])
-        if not units:
-            # Retiring the last active unit leaves the registered owner and its
-            # tombstones intact. Reuse that owner for a fresh policy identity.
-            return path
+        # Registered storage can outlive a policy's move to another module.
+        # Declaration fields own current module identity; reuse this file and
+        # preserve all of its active declarations and tombstones when appending.
+        return path
     if path in files:
         raise _invalid(
             "AUTHORING.PROJECTION_DISAGREEMENT",

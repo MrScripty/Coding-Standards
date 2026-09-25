@@ -7135,7 +7135,7 @@
       ]
     },
     {
-      "digest": "sha256:c13c22e0612adcabcc7c185964ba5641c5e545e16a4792d5fe3b62cdd818537f",
+      "digest": "sha256:20595c637c8cb5e537322a467839232b4088c4b970ddd11ae32af6ee6c69b2c3",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -13326,7 +13326,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:ae569bce7aa23d04cf81d33e83815a0b7b417f798d677e31641ec716c67f1ccc",
+    "digest": "sha256:75c69a59bbe132a7b5ccfaf8a7b7309c6d3895bb87d48511217f9b4fff5a127a",
     "uses": [
       {
         "check": "python-package-contract",

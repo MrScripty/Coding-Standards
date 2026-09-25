@@ -6,21 +6,27 @@ verification inputs. Contract-only tests live in test_registration_contract.py.
 from __future__ import annotations
 
 import copy
+from dataclasses import replace
 import tomllib
 import unittest
 
 from tools.standards_engine.standards_engine.authoring import AuthoringError
+from tools.standards_engine.standards_engine import logical_authoring as logical
 from tools.standards_engine.standards_engine.engine import StandardsEngine
 from tools.standards_engine.standards_engine.logical_authoring import (
     LogicalAuthoringCompiler, LogicalProgram, StandardsChangeSet,
 )
 from tools.standards_engine.tests import test_logical_authoring as fixture
-from tools.standards_metadata.standards_metadata import MetadataError
+from tools.standards_metadata.standards_metadata import (
+    FrozenContentSource, MetadataError, POLICY_UNIT_REGISTRY,
+)
 
 
 MODULE = "topic.registration-fixture"
 EXISTING = MODULE + ".existing"
 ADDED = MODULE + ".added"
+DESTINATION = "topic.registration-destination"
+MOVED = MODULE + ".moved"
 EVIDENCE = {
     "id": "evidence:registration-fixture", "digest": "sha256:" + "1" * 64,
     "provider_contract": "standards-evidence", "provider_contract_version": "1",
@@ -82,6 +88,47 @@ class PolicyRegistrationTests(unittest.TestCase):
                 shared.base, LogicalProgram([change([create_owner(populated)])]),
                 base_repository_paths=shared.repository_paths, compiled_base=shared.compiled,
             )
+
+    @classmethod
+    def moved_storage_base(cls):
+        """Capture valid legacy placement independently of selector behavior.
+
+        Fixture-only relocation leaves the declaration's logical module and
+        identity unchanged. The real metadata compiler validates the result.
+        """
+        if "_moved_storage" in cls.__dict__:
+            return cls._moved_storage
+        shared = fixture.LogicalAuthoringTests
+        destination = create_owner(False)
+        destination["standard"].update({
+            "id": DESTINATION, "title": "Registration Destination",
+            "body": "## Moved Scope\n\nPreserve the moved decision.\n\n"
+                    "## Further Scope\n\nIdentify a separate decision.\n",
+        })
+        moved = unit(MOVED, "Moved Scope")
+        moved["aliases"] = [MOVED + ".alias"]
+        destination["policy_units"] = [moved]
+        created = LogicalAuthoringCompiler(StandardsEngine._compile).compile(
+            shared.base, LogicalProgram([change([create_owner(False), destination])]),
+            base_repository_paths=shared.repository_paths, compiled_base=shared.compiled,
+        )
+        files = dict(created.source.files)
+        original = created.compiled.corpus.resolve_policy_unit(MOVED).source
+        target = logical._policy_sidecar_path(MODULE)
+        if target in files:
+            raise AssertionError("The synthetic origin must start without a sidecar.")
+        files[target] = files.pop(original)
+        logical._set_registry_list(files, POLICY_UNIT_REGISTRY, "sources", original, present=False)
+        logical._set_registry_list(files, POLICY_UNIT_REGISTRY, "sources", target, present=True)
+        paths = logical._refresh_suite_input_projection(
+            files, frozenset(dict(created.source.files)), created.repository_paths,
+        )
+        source = FrozenContentSource(files)
+        cls._moved_storage = replace(
+            created, source=source, compiled=StandardsEngine._compile(source),
+            repository_paths=paths, _continuation=None,
+        )
+        return cls._moved_storage
 
     def project(self, changes, *, populated=False, base=None, predecessor=None):
         base = self.owners[populated] if base is None else base
@@ -256,6 +303,86 @@ class PolicyRegistrationTests(unittest.TestCase):
         projected = self.project([selected])
         self.assertEqual(projected.compiled.corpus.resolve_policy_unit(ADDED).heading_path,
                          ("Additional Scope",))
+
+    def test_registration_reuses_storage_after_its_policy_changed_modules(self):
+        base = self.moved_storage_base()
+        before = dict(base.source.files)
+        old = base.compiled.corpus.resolve_policy_unit(MOVED)
+        self.assertEqual(old.module, DESTINATION)
+        self.assertEqual(old.source, logical._policy_sidecar_path(MODULE))
+        self.assertFalse(base.compiled.corpus.policy_unit_corpus.for_module(MODULE))
+        projected = self.project([change([register()])], base=base)
+        added = projected.compiled.corpus.resolve_policy_unit(ADDED)
+        self.assertEqual(added.source, old.source)
+        self.assertEqual(projected.compiled.corpus.resolve_policy_unit(MOVED), old)
+        self.assertEqual(projected.compiled.corpus.resolve_policy_unit(MOVED + ".alias"), old)
+        for owner in (MODULE, DESTINATION):
+            path = base.compiled.corpus.resolve_module(owner).path
+            self.assertEqual(projected.source.read_bytes(path), before[path])
+        self.assertEqual(projected.source.read_bytes(POLICY_UNIT_REGISTRY), before[POLICY_UNIT_REGISTRY])
+        self.assertEqual(dict(base.source.files), before)
+
+    def test_grouped_registration_shares_moved_storage_across_logical_owners(self):
+        base = self.moved_storage_base()
+        other = register(DESTINATION + ".additional", "Further Scope")
+        other["standard"] = DESTINATION
+        edits = [register(), other]
+        projected = self.project([change(edits)], base=base)
+        reversed_projection = self.project([change(list(reversed(edits)))], base=base)
+        self.assertEqual(projected.source.files, reversed_projection.source.files)
+        self.assertEqual({projected.compiled.corpus.resolve_policy_unit(identity).source
+                          for identity in (MOVED, ADDED, DESTINATION + ".additional")},
+                         {logical._policy_sidecar_path(MODULE)})
+        self.assertEqual(projected.compiled.corpus.resolve_policy_unit(MOVED),
+                         base.compiled.corpus.resolve_policy_unit(MOVED))
+
+    def test_moved_storage_composes_with_rewrite_relationship_and_provenance(self):
+        base = self.moved_storage_base()
+        standard = create_owner(False)["standard"]
+        standard["body"] = standard["body"].replace("Additional Scope", "Reviewed Scope")
+        edits = [
+            {"kind": "revise-standard", "standard": standard, "scope_updates": []},
+            register(heading="Reviewed Scope"), relationship(),
+            {"kind": "put-provenance", "record": {
+                "id": "provenance.moved-storage", "subject": ADDED,
+                "origin": "current-justification", "rationale": "Private fixture evidence.",
+                "evidence": [EVIDENCE],
+            }},
+        ]
+        projected = self.project([change(edits)], base=base)
+        self.assertEqual(projected.compiled.corpus.resolve_policy_unit(MOVED),
+                         base.compiled.corpus.resolve_policy_unit(MOVED))
+        self.assertEqual(projected.compiled.corpus.resolve_policy_unit(ADDED).heading_path,
+                         ("Reviewed Scope",))
+        self.assertEqual(projected.compiled.supporting.provenance[
+            "provenance.moved-storage"].subject, ADDED)
+        self.assertTrue(any(value.source == ADDED
+                            for value in projected.compiled.policy_impact.semantics.values()))
+
+    def test_moved_storage_full_and_incremental_replay_agree_and_keep_base(self):
+        base = self.moved_storage_base()
+        before = dict(base.source.files)
+        prefix = (change([register()]),)
+        previous = self.project(prefix, base=base)
+        previous_files = dict(previous.source.files)
+        other = register(DESTINATION + ".additional", "Further Scope")
+        other["standard"] = DESTINATION
+        program = (*prefix, change([other, relationship()]))
+        cold = self.project(program, base=base)
+        warm = self.project(program, base=base, predecessor=previous)
+        self.assertEqual(warm.source.files, cold.source.files)
+        self.assertEqual(warm.repository_paths, cold.repository_paths)
+        self.assertEqual(warm.semantic_proposals, cold.semantic_proposals)
+        self.assertEqual(warm.analysis_policy_ids, cold.analysis_policy_ids)
+        self.assertEqual(warm.analysis_module_ids, cold.analysis_module_ids)
+        self.assertEqual(warm.compiled.corpus.resolve_policy_unit(MOVED),
+                         base.compiled.corpus.resolve_policy_unit(MOVED))
+        failed = (*prefix, change([register(MODULE + ".missing", "Absent Scope")]))
+        for seed in (None, previous):
+            with self.subTest(incremental=seed is not None), self.assertRaises(MetadataError):
+                self.project(failed, base=base, predecessor=seed)
+        self.assertEqual(dict(previous.source.files), previous_files)
+        self.assertEqual(dict(base.source.files), before)
 
     def test_later_preservation_keeps_original_absent_identity_semantics(self):
         program = [change([register()]), change([{
