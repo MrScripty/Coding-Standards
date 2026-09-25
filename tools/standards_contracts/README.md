@@ -43,3 +43,24 @@ projection. Variants select wire shape; their names do not grant permissions or
 change the operation's capability authority. The Engine host selects the
 application variant, while authoring uses the base operation. Transport code
 consumes these definitions rather than maintaining a second schema.
+
+## Post-validation union construction
+
+`ContractRuntime` keeps complete root validation as the instance-acceptance
+boundary. It derives construction selectors from its private schema copy for
+object unions whose branches share a required string property with disjoint
+`const` or all-string `enum` values. After the root succeeds, that property
+selects the original branch (and its generated type) without repeating branch
+validation. Direct generated-model construction uses the same root boundary.
+
+The selector planner follows only bare same-resource definition aliases.
+Overlapping or absent tags, optional tags, scalar unions, reference siblings,
+and unrecognized forms retain the existing validator-backed selection path.
+Nested resource scopes also retain that path. These restrictions limit an
+optimization; they neither expand nor narrow the admitted schema profile.
+
+Selectors belong to one runtime and its copied schema, not to a request or
+process-global cache. They retain no instance values. Schema changes construct
+new selectors; current permission, lifecycle, and publication decisions remain
+outside this module. Error adaptation, strict JSON checks, omission, defaults,
+and generated serialization keep their existing owners.

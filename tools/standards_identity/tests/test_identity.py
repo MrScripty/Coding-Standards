@@ -3,6 +3,8 @@ from __future__ import annotations
 import hashlib
 import json
 import struct
+import random
+from unittest import mock
 import unittest
 from pathlib import Path
 
@@ -32,6 +34,73 @@ def _identity_value(value: object):
 
 
 class IdentityEncodingTest(unittest.TestCase):
+
+    def test_byte_tokens_and_string_spans_match_independent_preimages(self) -> None:
+        # This oracle is intentionally expressed per scalar, independently of
+        # the production span encoder. It fixes the unchanged identity-v2 wire.
+        def reference(value):
+            if value is None:
+                return b"null"
+            if type(value) is bool:
+                return b"true" if value else b"false"
+            if type(value) is int:
+                return str(value).encode("ascii")
+            if type(value) is str:
+                body = []
+                for char in value:
+                    codepoint = ord(char)
+                    if char in ('"', "\\"):
+                        body.append(b"\\" + char.encode("ascii"))
+                    elif codepoint < 32:
+                        body.append(("\\u%04x" % codepoint).encode("ascii"))
+                    else:
+                        body.append(char.encode("utf-8"))
+                return b'"' + b"".join(body) + b'"'
+            if type(value) is IdentityArray:
+                return b"[" + b",".join(map(reference, value.values)) + b"]"
+            return b"{" + b",".join(
+                reference(key) + b":" + reference(member)
+                for key, member in value.members
+            ) + b"}"
+
+        cases = [IdentityArray(range(256)), IdentityArray((-257, -1, 256, 257)),
+                 "", '"\\', "".join(map(chr, range(32))),
+                 "plain text" * 1000,
+                 "\x1f\x20\x7f\x80\u07ff\u0800\ud7ff\ue000\uffff\U0010ffff"]
+        rng = random.Random(9317)
+        alphabet = ('"', "\\", "\x00", "\n", "é", "e\u0301", "漢", "\U0001f680", "a")
+        for _ in range(128):
+            text = "".join(rng.choices(alphabet, k=rng.randrange(80)))
+            cases.append(IdentityObject((("text", text), ("bytes", IdentityArray(
+                rng.randrange(-1024, 1024) for _ in range(32))))))
+        for value in cases:
+            expected = reference(value)
+            self.assertEqual(encode_identity_value(value), expected)
+            domain, prefix = b"encoding:test", b"sample"
+            frame = (b"coding-standards:identity:v2\0" + struct.pack(">I", len(domain))
+                     + domain + struct.pack(">I", len(prefix)) + prefix
+                     + struct.pack(">Q", len(expected)) + expected)
+            self.assertEqual(hash_identity("encoding:test", "sample", value),
+                             "sample:sha256:" + hashlib.sha256(frame).hexdigest())
+
+    def test_path_frames_are_constructed_once_and_keep_empty_file_content(self) -> None:
+        import tools.standards_identity.standards_identity.encoding as encoding
+        entries = [(('é', 'a'), b''), (('a',), bytes(range(256)))]
+        with mock.patch.object(encoding, 'frame_path_bytes', wraps=frame_path_bytes) as frame:
+            selected = frame_path_byte_set(entries)
+        self.assertEqual(frame.call_count, len(entries))
+        expected = IdentityArray((frame_path_bytes(('a',), bytes(range(256))),
+                                  frame_path_bytes(('é', 'a'), b'')))
+        self.assertEqual(encode_identity_value(selected), encode_identity_value(expected))
+        for entries in ([], [(('a',), b'a'), (('a',), b'b')]):
+            with self.assertRaises(IdentityError) as raised:
+                frame_path_byte_set(entries)
+            self.assertEqual(raised.exception.failure.code, 'IDENTITY.INVALID_PATH_SET')
+        for char in ('\ud800', '\udfff'):
+            with self.assertRaises(IdentityError) as raised:
+                encode_identity_value('prefix' + char + 'suffix')
+            self.assertEqual(raised.exception.failure.code, 'IDENTITY.INVALID_UNICODE')
+
     def test_authored_identity_v2_fixture_matrix(self) -> None:
         corpus = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
         self.assertEqual(corpus["schema_version"], 2)

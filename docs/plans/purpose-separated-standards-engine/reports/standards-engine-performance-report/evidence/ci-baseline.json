@@ -1,0 +1,54 @@
+{
+  "classification": "existing external CI log, not a newly executed run",
+  "run_id": 35895666852,
+  "job_id": 107298850681,
+  "head_sha": "8750761133b66297a2bfac4e495fd1c8a893b96a",
+  "run_url": "https://github.com/MrScripty/Coding-Standards/actions/runs/35895666852",
+  "job_url": "https://github.com/MrScripty/Coding-Standards/actions/runs/35895666852/job/107298850681",
+  "retrieval": "GitHub.fetch_workflow_job_logs",
+  "python": "3.12, asserted by workflow",
+  "dependency_installation": "--require-hashes --only-binary=:all: from tools/standards_contracts/requirements.lock; rpds-py 2026.6.3 installed",
+  "suites": [
+    {
+      "suite": "metadata",
+      "tests": 31,
+      "seconds": 0.35,
+      "outcome": "OK"
+    },
+    {
+      "suite": "policy-impact",
+      "tests": 10,
+      "seconds": 0.431,
+      "outcome": "OK"
+    },
+    {
+      "suite": "contracts",
+      "tests": 23,
+      "seconds": 26.27,
+      "outcome": "OK"
+    },
+    {
+      "suite": "analysis-domain",
+      "tests": 100,
+      "seconds": 1.413,
+      "outcome": "OK"
+    },
+    {
+      "suite": "verifier",
+      "tests": 156,
+      "seconds": 5.491,
+      "outcome": "OK"
+    },
+    {
+      "suite": "engine",
+      "tests": 157,
+      "seconds": 2946.09,
+      "outcome": "FAILED errors=1"
+    }
+  ],
+  "error_test": "test_platform_harness.PlatformHarnessTest.test_closed_store_round_trip_uses_public_operations",
+  "error": "prepare rejected with INTERFACE.INVALID_ARGUMENTS (invalid): CONTRACT.INVALID_INSTANCE: value does not satisfy the selected public contract",
+  "log_last_engine_summary_at": "2026-09-23T18:16:59.6505035Z",
+  "per_test_timings_available": false,
+  "final_structural_command_reached": false
+}

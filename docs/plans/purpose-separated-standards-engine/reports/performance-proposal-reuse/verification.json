@@ -1,0 +1,312 @@
+{
+  "initial_campaign": {
+    "success": false,
+    "results": [
+      {
+        "package": "standards_engine",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_engine/tests"
+        ],
+        "returncode": 1,
+        "wall_seconds": 541.495150882,
+        "tests": 232,
+        "unittest_seconds": 540.716,
+        "skipped": 0
+      },
+      {
+        "package": "graph_engine",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/graph_engine/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.22067430499987495,
+        "tests": 37,
+        "unittest_seconds": 0.15,
+        "skipped": 0
+      },
+      {
+        "package": "repository_git",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/repository_git/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 2.94203097899981,
+        "tests": 28,
+        "unittest_seconds": 2.846,
+        "skipped": 0
+      },
+      {
+        "package": "standards_analysis",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_analysis/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 1.2570018960000198,
+        "tests": 100,
+        "unittest_seconds": 0.763,
+        "skipped": 0
+      },
+      {
+        "package": "standards_applicability",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_applicability/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.10110776400006216,
+        "tests": 12,
+        "unittest_seconds": 0.032,
+        "skipped": 0
+      },
+      {
+        "package": "standards_contracts",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_contracts/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 24.983117884999956,
+        "tests": 23,
+        "unittest_seconds": 24.855,
+        "skipped": 1
+      },
+      {
+        "package": "standards_graph",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_graph/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.1775817550001193,
+        "tests": 2,
+        "unittest_seconds": 0.079,
+        "skipped": 0
+      },
+      {
+        "package": "standards_identity",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_identity/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.1950812009999936,
+        "tests": 16,
+        "unittest_seconds": 0.118,
+        "skipped": 0
+      },
+      {
+        "package": "standards_metadata",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_metadata/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.8283773769999243,
+        "tests": 31,
+        "unittest_seconds": 0.414,
+        "skipped": 0
+      },
+      {
+        "package": "standards_policy_impact",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_policy_impact/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.5260782510001718,
+        "tests": 10,
+        "unittest_seconds": 0.434,
+        "skipped": 0
+      },
+      {
+        "package": "standards_snapshots",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_snapshots/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 0.17879146499990384,
+        "tests": 23,
+        "unittest_seconds": 0.105,
+        "skipped": 0
+      },
+      {
+        "package": "standards_verifier",
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_verifier/tests"
+        ],
+        "returncode": 0,
+        "wall_seconds": 6.031305341999996,
+        "tests": 168,
+        "unittest_seconds": 5.686,
+        "skipped": 0
+      }
+    ]
+  },
+  "corrected_fixture_and_followup": {
+    "success": true,
+    "results": [
+      {
+        "name": "nested-final",
+        "returncode": 0,
+        "wall_seconds": 29.48828068099988,
+        "tests": 11,
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_engine/tests",
+          "-p",
+          "test_nested_materials.py"
+        ]
+      },
+      {
+        "name": "proposal-final",
+        "returncode": 0,
+        "wall_seconds": 52.286256933999994,
+        "tests": 21,
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/standards_engine/tests",
+          "-p",
+          "test_proposal_reuse.py"
+        ]
+      },
+      {
+        "name": "warm-recovery-final",
+        "returncode": 0,
+        "wall_seconds": 34.419682730999966,
+        "tests": null,
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "/mnt/data/projection-work/qualified-final/docs/plans/purpose-separated-standards-engine/reports/performance-process-reuse/validate_warm_recovery.py",
+          "--source",
+          "/mnt/data/projection-work/qualified-final",
+          "--output",
+          "/mnt/data/projection-work/evidence/warm-recovery-final.json"
+        ]
+      },
+      {
+        "name": "baseline-final",
+        "returncode": 0,
+        "wall_seconds": 38.97925158699991,
+        "tests": null,
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "/mnt/data/projection-work/measure_proposals.py",
+          "--source",
+          "/mnt/data/projection-work/baseline",
+          "--fixture",
+          "/mnt/data/projection-work/workload/repo",
+          "--output",
+          "/mnt/data/projection-work/evidence/baseline-final.json",
+          "--repeats",
+          "3"
+        ]
+      },
+      {
+        "name": "candidate-final",
+        "returncode": 0,
+        "wall_seconds": 11.514479575999985,
+        "tests": null,
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "/mnt/data/projection-work/measure_proposals.py",
+          "--source",
+          "/mnt/data/projection-work/repo",
+          "--fixture",
+          "/mnt/data/projection-work/workload/repo",
+          "--output",
+          "/mnt/data/projection-work/evidence/candidate-final.json",
+          "--repeats",
+          "3"
+        ]
+      },
+      {
+        "name": "stdio-final",
+        "returncode": 0,
+        "wall_seconds": 64.85418001699986,
+        "tests": null,
+        "command": [
+          "/mnt/data/projection-work/env/bin/python",
+          "/mnt/data/projection-work/measure_proposal_stdio.py",
+          "--baseline",
+          "/mnt/data/projection-work/baseline",
+          "--candidate",
+          "/mnt/data/projection-work/repo",
+          "--fixture",
+          "/mnt/data/projection-work/workload/repo",
+          "--output",
+          "/mnt/data/projection-work/evidence/stdio-final.json",
+          "--repeats",
+          "3"
+        ]
+      }
+    ]
+  },
+  "coverage": {
+    "engine_distinct_tests": 232,
+    "supporting_tests": 450,
+    "supporting_skips": 1,
+    "interpretation": "Initial full run had one old spy-signature error. Its entire unchanged-assertion module and all new cache regressions passed after the adapter repair. Production runtime sources are unchanged across that repair."
+  }
+}

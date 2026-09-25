@@ -1,0 +1,156 @@
+[
+  {
+    "package": "graph_engine",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/graph_engine/tests",
+      "-v"
+    ],
+    "elapsed": 0.3108587429999261,
+    "exit": 0
+  },
+  {
+    "package": "repository_git",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/repository_git/tests",
+      "-v"
+    ],
+    "elapsed": 2.9379715210000086,
+    "exit": 0
+  },
+  {
+    "package": "standards_analysis",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_analysis/tests",
+      "-v"
+    ],
+    "elapsed": 1.520688199999995,
+    "exit": 0
+  },
+  {
+    "package": "standards_applicability",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_applicability/tests",
+      "-v"
+    ],
+    "elapsed": 0.1011078039999802,
+    "exit": 0
+  },
+  {
+    "package": "standards_contracts",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_contracts/tests",
+      "-v"
+    ],
+    "elapsed": 28.819086434000155,
+    "exit": 0
+  },
+  {
+    "package": "standards_graph",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_graph/tests",
+      "-v"
+    ],
+    "elapsed": 0.23012377899999592,
+    "exit": 0
+  },
+  {
+    "package": "standards_identity",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_identity/tests",
+      "-v"
+    ],
+    "elapsed": 0.2763602950001314,
+    "exit": 0
+  },
+  {
+    "package": "standards_metadata",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_metadata/tests",
+      "-v"
+    ],
+    "elapsed": 0.8619135810001808,
+    "exit": 0
+  },
+  {
+    "package": "standards_policy_impact",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_policy_impact/tests",
+      "-v"
+    ],
+    "elapsed": 0.49905596600001445,
+    "exit": 0
+  },
+  {
+    "package": "standards_snapshots",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_snapshots/tests",
+      "-v"
+    ],
+    "elapsed": 0.16544800600013332,
+    "exit": 0
+  },
+  {
+    "package": "standards_verifier",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_verifier/tests",
+      "-v"
+    ],
+    "elapsed": 5.963659173999986,
+    "exit": 0
+  }
+]

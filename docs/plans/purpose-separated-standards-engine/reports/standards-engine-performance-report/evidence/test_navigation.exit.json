@@ -1,0 +1,1 @@
+{"returncode": 1, "elapsed_s": 106.81849074363708, "args": ["--pattern", "test_navigation.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

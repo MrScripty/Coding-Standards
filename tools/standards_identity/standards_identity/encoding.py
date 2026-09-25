@@ -13,17 +13,52 @@ _DOMAIN = re.compile(r"[a-z0-9][a-z0-9.:-]*\Z", re.ASCII)
 _ID_PREFIX = re.compile(r"[a-z][a-z0-9.-]*\Z", re.ASCII)
 _DECIMAL_CHUNK_BASE = 1_000_000_000
 _DECIMAL_CHUNK_WIDTH = 9
+# Exact decimal tokens for the byte domain; larger integers retain the
+# arbitrary-precision encoder and its independence from Python's digit limit.
+_BYTE_TOKENS = tuple(str(value).encode("ascii") for value in range(256))
+# Bound the temporary join index for large byte arrays; encoded output remains exact.
+_BYTE_CHUNK_SIZE = 64 * 1024
+_SURROGATE = re.compile(r"[\ud800-\udfff]")
+_ESCAPED_CHARACTER = re.compile(r'["\\\x00-\x1f]')
+_STRING_ESCAPES = {
+    '"': '\\"',
+    "\\": "\\\\",
+    **{chr(value): f"\\u{value:04x}" for value in range(32)},
+}
 
 
-@dataclass(frozen=True, slots=True, init=False)
+@dataclass(frozen=True, slots=True, init=False, eq=False, repr=False)
 class IdentityArray:
-    values: tuple[IdentityValue, ...]
+    # Exact bytes already prove the element domain and immutable ownership.
+    # Other iterables retain the existing validated tuple representation.
+    _values: tuple[IdentityValue, ...] | bytes
 
     def __init__(self, values: Iterable[IdentityValue]) -> None:
-        immutable = tuple(values)
-        for value in immutable:
-            _validate_value(value)
-        object.__setattr__(self, "values", immutable)
+        if type(values) is bytes:
+            immutable = values
+        else:
+            immutable = tuple(values)
+            for value in immutable:
+                _validate_value(value)
+        object.__setattr__(self, "_values", immutable)
+
+    @property
+    def values(self) -> tuple[IdentityValue, ...]:
+        """Expose the same immutable element sequence for either storage form."""
+        return tuple(self._values)
+
+    def __eq__(self, other: object) -> bool:
+        if type(other) is not type(self):
+            return NotImplemented
+        if type(self._values) is type(other._values):
+            return self._values == other._values
+        return self.values == other.values
+
+    def __hash__(self) -> int:
+        return hash((self.values,))
+
+    def __repr__(self) -> str:
+        return f"IdentityArray(values={self.values!r})"
 
 
 @dataclass(frozen=True, slots=True, init=False)
@@ -137,19 +172,18 @@ def frame_path_byte_set(
     entries: Iterable[tuple[Iterable[str], bytes]],
 ) -> IdentityArray:
     """Frame a path-keyed byte set in codepoint path order."""
-    selected: list[tuple[tuple[str, ...], bytes]] = []
+    selected: list[tuple[tuple[str, ...], IdentityObject]] = []
     for path, content in entries:
         components = tuple(path)
-        frame_path_bytes(components, content)
-        selected.append((components, content))
+        selected.append((components, frame_path_bytes(components, content)))
     selected.sort(key=lambda item: tuple(tuple(map(ord, part)) for part in item[0]))
-    paths = tuple(path for path, _content in selected)
+    paths = tuple(path for path, _frame in selected)
     if not selected or len(set(paths)) != len(paths):
         raise invalid(
             "IDENTITY.INVALID_PATH_SET",
             "path-byte set must be nonempty with unique paths",
         )
-    return IdentityArray(frame_path_bytes(path, content) for path, content in selected)
+    return IdentityArray(frame for _path, frame in selected)
 
 
 def _validate_value(value: object) -> None:
@@ -168,13 +202,11 @@ def _validate_value(value: object) -> None:
 
 
 def _validate_scalar_string(value: str) -> None:
-    for character in value:
-        codepoint = ord(character)
-        if 0xD800 <= codepoint <= 0xDFFF:
-            raise invalid(
-                "IDENTITY.INVALID_UNICODE",
-                "strings must contain Unicode scalar values",
-            )
+    if _SURROGATE.search(value) is not None:
+        raise invalid(
+            "IDENTITY.INVALID_UNICODE",
+            "strings must contain Unicode scalar values",
+        )
 
 
 def _encode(value: IdentityValue) -> bytes:
@@ -184,11 +216,13 @@ def _encode(value: IdentityValue) -> bytes:
     if value_type is bool:
         return b"true" if value else b"false"
     if value_type is int:
-        return _encode_integer(value)
+        return _BYTE_TOKENS[value] if 0 <= value < 256 else _encode_integer(value)
     if value_type is str:
         return _encode_string(value)
     if value_type is IdentityArray:
-        return b"[" + b",".join(_encode(item) for item in value.values) + b"]"
+        if type(value._values) is bytes:
+            return _encode_byte_array(value._values)
+        return b"[" + b",".join(_encode(item) for item in value._values) + b"]"
     if value_type is IdentityObject:
         encoded_members = (
             _encode_string(key) + b":" + _encode(member_value)
@@ -196,6 +230,15 @@ def _encode(value: IdentityValue) -> bytes:
         )
         return b"{" + b",".join(encoded_members) + b"}"
     raise AssertionError("validated identity value has an unknown type")
+
+
+def _encode_byte_array(value: bytes) -> bytes:
+    """Emit identity-v2 integer-array syntax with bounded per-byte join scratch."""
+    chunks = (
+        b",".join(map(_BYTE_TOKENS.__getitem__, value[start : start + _BYTE_CHUNK_SIZE]))
+        for start in range(0, len(value), _BYTE_CHUNK_SIZE)
+    )
+    return b"[" + b",".join(chunks) + b"]"
 
 
 def _encode_integer(value: int) -> bytes:
@@ -216,19 +259,10 @@ def _encode_integer(value: int) -> bytes:
 
 
 def _encode_string(value: str) -> bytes:
-    chunks = [b'"']
-    for character in value:
-        codepoint = ord(character)
-        if character == '"':
-            chunks.append(b'\\"')
-        elif character == "\\":
-            chunks.append(b"\\\\")
-        elif codepoint <= 0x1F:
-            chunks.append(f"\\u{codepoint:04x}".encode("ascii"))
-        else:
-            chunks.append(character.encode("utf-8"))
-    chunks.append(b'"')
-    return b"".join(chunks)
+    # The pattern copies ordinary Unicode segments as a whole. Controls keep
+    # identity-v2's lowercase \u00xx spelling rather than JSON's short escapes.
+    escaped = _ESCAPED_CHARACTER.sub(lambda match: _STRING_ESCAPES[match[0]], value)
+    return b'"' + escaped.encode("utf-8") + b'"'
 
 
 __all__ = (

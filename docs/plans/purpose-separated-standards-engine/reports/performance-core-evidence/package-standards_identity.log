@@ -1,0 +1,16 @@
+test_authored_identity_v2_fixture_matrix (test_identity.IdentityEncodingTest.test_authored_identity_v2_fixture_matrix) ... ok
+test_boolean_and_integer_are_distinct_and_unbounded (test_identity.IdentityEncodingTest.test_boolean_and_integer_are_distinct_and_unbounded) ... ok
+test_byte_tokens_and_string_spans_match_independent_preimages (test_identity.IdentityEncodingTest.test_byte_tokens_and_string_spans_match_independent_preimages) ... ok
+test_domain_and_prefix_grammar_is_closed (test_identity.IdentityEncodingTest.test_domain_and_prefix_grammar_is_closed) ... ok
+test_encodes_every_supported_value_with_exact_bytes (test_identity.IdentityEncodingTest.test_encodes_every_supported_value_with_exact_bytes) ... ok
+test_hash_uses_exact_domain_separated_length_frame (test_identity.IdentityEncodingTest.test_hash_uses_exact_domain_separated_length_frame) ... ok
+test_path_byte_frames_preserve_exact_paths_and_bytes (test_identity.IdentityEncodingTest.test_path_byte_frames_preserve_exact_paths_and_bytes) ... ok
+test_path_frames_are_constructed_once_and_keep_empty_file_content (test_identity.IdentityEncodingTest.test_path_frames_are_constructed_once_and_keep_empty_file_content) ... ok
+test_preserves_array_order_and_rejects_duplicate_object_keys (test_identity.IdentityEncodingTest.test_preserves_array_order_and_rejects_duplicate_object_keys) ... ok
+test_preserves_unicode_codepoints_and_sorts_keys_by_codepoint (test_identity.IdentityEncodingTest.test_preserves_unicode_codepoints_and_sorts_keys_by_codepoint) ... ok
+test_rejects_mutable_floating_subclass_and_invalid_unicode_values (test_identity.IdentityEncodingTest.test_rejects_mutable_floating_subclass_and_invalid_unicode_values) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.021s
+
+OK

@@ -1,0 +1,18 @@
+{
+  "test_analysis.py": 1,
+  "test_navigation_indexes.py": 0,
+  "test_logical_authoring.py": 0,
+  "test_supporting_workflow.py": 0,
+  "test_agent_workflow.py": 0,
+  "test_applicability_contract.py": 0,
+  "test_authoring.py": 0,
+  "test_coverage_publication.py": 1,
+  "test_evidence_maintenance.py": 0,
+  "test_generated_contract.py": 0,
+  "test_mcp.py": 0,
+  "test_navigation.py": 1,
+  "test_platform_harness.py": 1,
+  "test_purpose_projection.py": 0,
+  "test_purpose_transport.py": 0,
+  "test_rendering.py": 0
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "implementation": "baseline",
+    "sample": 0,
+    "wall_seconds": 16.87522402400009
+  },
+  {
+    "implementation": "baseline",
+    "sample": 1,
+    "wall_seconds": 16.646487868000122
+  },
+  {
+    "implementation": "baseline",
+    "sample": 2,
+    "wall_seconds": 16.800245859999677
+  },
+  {
+    "implementation": "candidate",
+    "sample": 0,
+    "wall_seconds": 4.674613561999877
+  },
+  {
+    "implementation": "candidate",
+    "sample": 1,
+    "wall_seconds": 4.732154522999963
+  },
+  {
+    "implementation": "candidate",
+    "sample": 2,
+    "wall_seconds": 4.684537466999927
+  }
+]

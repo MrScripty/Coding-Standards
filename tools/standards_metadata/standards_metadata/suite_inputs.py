@@ -3,7 +3,9 @@ from __future__ import annotations
 import hashlib
 import json
 import tomllib
-from dataclasses import dataclass
+from collections.abc import Mapping
+from dataclasses import dataclass, field
+from types import MappingProxyType
 
 from tools.standards_identity.standards_identity import (
     IdentityArray,
@@ -172,6 +174,12 @@ class SuiteInputManifest:
     suites: tuple[SuiteDefinitionInput, ...]
     files: tuple[SuiteFileInput, ...]
     repository_index: RepositoryIndexObservation | None
+    # The loader publishes this read-only index only after all source checks.
+    # It is derived state: replacement, equality, hashing and the wire form
+    # continue to depend solely on the manifest's declared inputs.
+    _dependencies: Mapping[str, SuiteDependencyProjection] | None = field(
+        default=None, init=False, repr=False, compare=False,
+    )
 
     def as_projection(self) -> dict[str, object]:
         return {
@@ -191,7 +199,18 @@ class SuiteInputManifest:
         }
 
     def dependency(self, suite_id: str) -> SuiteDependencyProjection:
-        definitions = {suite.id: suite for suite in self.suites}
+        if self._dependencies is not None:
+            return self._dependencies[suite_id]
+        # Directly constructed manifests retain the ordinary derivation path.
+        return self._derive_dependency(
+            suite_id, {suite.id: suite for suite in self.suites},
+        )
+
+    def _derive_dependency(
+        self,
+        suite_id: str,
+        definitions: Mapping[str, SuiteDefinitionInput],
+    ) -> SuiteDependencyProjection:
         if suite_id not in definitions:
             raise KeyError(suite_id)
         selected: set[str] = set()
@@ -620,8 +639,14 @@ def load_suite_input_manifest(
                 "repository-index observation requires sorted registered uses",
                 path=path,
             )
-    for suite in manifest.suites:
-        manifest.dependency(suite.id)
+    definitions = {suite.id: suite for suite in manifest.suites}
+    dependencies = {
+        suite.id: manifest._derive_dependency(suite.id, definitions)
+        for suite in manifest.suites
+    }
+    # Retain the projections that validation already derives. Finish the whole
+    # index before publishing the manifest; subsequent reads never grow it.
+    object.__setattr__(manifest, "_dependencies", MappingProxyType(dependencies))
     return manifest
 
 

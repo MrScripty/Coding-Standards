@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 2.7268269062042236, "args": ["--pattern", "test_rendering.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

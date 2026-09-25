@@ -32,6 +32,11 @@ accepted authority and returns its handle. `read` defaults to compact exact
 policy content and essential metadata; `detail: "full"` returns all relationship
 rows. Native `query` remains available.
 
+`read_many` reads a selected set using one explicit snapshot. It accepts 1–32
+ordered unique items, applies the existing purpose-qualified single-read behavior,
+and returns all results or one bounded rejection. Its complete JSON domain
+payload is limited to 2 MiB. See [the grouped-read contract](PURPOSE-SEPARATION.md#bounded-grouped-reads).
+
 Navigation reads immutable snapshots; proposal analysis, review, verification,
 and application operate on exact revision handles. Proposal creation and
 revision each carry one atomic
@@ -164,3 +169,14 @@ the locked Engine Python; it requires `codex` on PATH and `standards-engine`
 configured for this checkout. It checks inline authoring fields and follows
 focused route/read continuations with exact snapshot reuse in an ephemeral
 client thread. It does not modify standards or apply proposals.
+
+
+### Completing admitted publication
+
+The interface-35 recovery contract distinguishes observation from explicit
+completion. Carry the original readiness into `recover`. Select `observe` for
+receipt reconciliation, or `complete-publication` on an authorized Git-writable
+host to verify and re-establish the exact admitted candidate. Current permissions,
+proposal head, candidate identity and expected-target CAS remain required. The
+existing application and store are preserved. See [the recovery contract](PURPOSE-SEPARATION.md#admitted-publication-recovery-interface-35)
+and [implementation evidence](../../docs/plans/admitted-publication-recovery/verification.md).

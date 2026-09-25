@@ -156,7 +156,19 @@ Begin after code claims C1–C10 are accepted. Verify the actual installed purpo
 
 Required capabilities are complete module/metadata revision, scoped policy revision with stable identities, reference creation/revision, registered prompt/template editing, provenance maintenance, explicit exposure approval/withdrawal, relationship updates, and coherent reviewed publication. Verify a whole-module rewrite preserves or explicitly dispositions existing policy-unit scopes and previously unmapped content.
 
+The handoff also exercises explicit policy-unit registration within an existing standard, both for a module with no registered units and for an owner with established units. Prove registration together with an optional whole-module rewrite, consumer relationships and provenance through reviewed publication and cold readback. Registration preserves existing identities and requires the real coverage dispositions. The [registration correction plan](../plans/existing-policy-registration/plan.md) owns the code capability and its acceptance; a schema entry alone does not satisfy this handoff.
+
 A missing necessary content operation returns to the code workstream as a bounded implementation gap. It is not a reason to bypass the Engine and edit canonical files directly.
+
+H0 also verifies proposal-local registration of tracked fixture and documentation
+consumers for policy scopes created in that draft. Use canonical candidate IDs
+for their relationships. Registered Markdown skill references are eligible for
+controlled authoring without granting source-code edit access. Inspect candidate
+application content with authoring `preview_application`, bound to an exact
+revision; ordinary application `query_proposal` is intentionally unavailable.
+This preview applies the same exposure and dependency checks but does not publish
+or certify the content. Refresh the running MCP process and client catalog, then
+check the installed interface and these operation schemas before continuing.
 
 ### H1 — Inventory one coherent migration boundary
 

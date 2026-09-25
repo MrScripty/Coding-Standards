@@ -210,6 +210,14 @@ def _clone_tracked_worktree(destination: Path) -> None:
         )
 
 
+    # This disposable fixture accepts the exact materialized candidate. Its
+    # source may be checked out on any development branch.
+    subprocess.run(
+        ("git", "-C", str(destination), "checkout", "--quiet", "-B", "main", "HEAD"),
+        check=True,
+    )
+
+
 class ExactAuthorizer:
     contract = AuthorizationAuthorityContract(
         "issuer.fixture",
@@ -1286,6 +1294,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 return_value=mock.Mock(
                     source=mock.Mock(files=tuple(projected_files.items())),
                     repository_paths=projection.repository_paths,
+                    captured_consumer_files=projection.captured_consumer_files,
                 ),
             ),
             mock.patch.object(
@@ -1519,7 +1528,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine._authoring,
                 "admit_application",
-                return_value=mock.Mock(application_id="application:sha256:" + "f" * 64),
+                return_value=mock.Mock(application_id="application:sha256:" + "f" * 64,
+                                       candidate=candidate.revision, expected_target=readiness.expected_target),
             ),
             mock.patch.object(
                 self.engine._repository,
@@ -1561,6 +1571,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    RepositoryRevision("e" * 40),
                 ),
             ),
             mock.patch.object(
@@ -1571,7 +1582,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine._authoring,
                 "admit_application",
-                return_value=mock.Mock(application_id="application:sha256:" + "e" * 64),
+                return_value=mock.Mock(application_id="application:sha256:" + "e" * 64,
+                                       candidate=candidate.revision, expected_target=readiness.expected_target),
             ),
             mock.patch.object(
                 self.engine._repository,
@@ -1968,11 +1980,137 @@ finally:
         self.assertEqual(result.code, "ANALYSIS.DOMAIN_CONTRACT_UNSUPPORTED")
         self.assertEqual(result.outcome, "unsupported")
 
-    def prepare(self, *, prior: dict[str, object] | None = None):
+
+    def test_same_snapshot_material_is_loaded_once_per_decision_operation(self) -> None:
+        with mock.patch.object(self.engine, "_compiled_snapshot",
+                               wraps=self.engine._compiled_snapshot) as load:
+            pending = self.prepare()
+            self.assertIsInstance(pending, PendingResult)
+            self.assertEqual(load.call_count, 1)
+        submission = self.disposition_submission(pending, "reuse-input-review")
+        authorizer = self.engine._execution_context.authorization
+        with (mock.patch.object(self.engine, "_compiled_snapshot",
+                                wraps=self.engine._compiled_snapshot) as load,
+              mock.patch.object(self.engine, "_evaluate_compiled",
+                                wraps=self.engine._evaluate_compiled) as evaluate,
+              mock.patch.object(authorizer, "authorize", wraps=authorizer.authorize) as authorize):
+            result = self.engine.resolve(submission)
+            self.assertIsInstance(result, (PendingResult, CompleteResult))
+            self.assertEqual(load.call_count, 1)
+            self.assertEqual(evaluate.call_count, 2)
+            before, after = (call.args[0] for call in evaluate.call_args_list)
+            self.assertNotEqual(before.analysis_id, after.analysis_id)
+            self.assertGreater(authorize.call_count, 0)
+            result_again = self.engine.resolve(submission)
+            self.assertEqual(result_again.as_contract(), result.as_contract())
+            self.assertEqual(load.call_count, 2)  # a fresh proof for a new operation
+            self.assertEqual(evaluate.call_count, 4)
+
+    def test_distinct_snapshot_roots_retain_distinct_material_and_lifecycle(self) -> None:
+        capture = self.engine._snapshots.load_content(self.engine._snapshot_id(self.snapshot))
+        other = self.engine._snapshots.create_snapshot(capture).snapshot
+        proposed = self.engine._snapshot_handle(other)
+        with mock.patch.object(self.engine, "_compiled_snapshot",
+                               wraps=self.engine._compiled_snapshot) as load:
+            result = self.prepare(proposed=proposed)
+            self.assertIsInstance(result, PendingResult)
+            self.assertEqual(load.call_count, 2)
+            self.assertEqual({str(call.args[0]) for call in load.call_args_list},
+                             {self.snapshot.id, str(other)})
+        self.engine._snapshots.delete_snapshot(other)
+        rejected = self.prepare(proposed=proposed)
+        self.assertIsInstance(rejected, RejectedResult)
+        self.assertIsInstance(self.prepare(), PendingResult)
+
+
+    def test_prior_decisions_reuse_material_but_recheck_each_decision(self) -> None:
+        pending = self.prepare()
+        resolved = self.engine.resolve(self.disposition_submission(pending, "prior-input-review"))
+        self.assertIsInstance(resolved, (PendingResult, CompleteResult))
+        with (mock.patch.object(self.engine, "_compiled_snapshot",
+                                wraps=self.engine._compiled_snapshot) as load,
+              mock.patch.object(self.engine, "_evaluate_compiled",
+                                wraps=self.engine._evaluate_compiled) as evaluate):
+            reused = self.prepare(prior=resolved.handle.as_contract())
+        self.assertIsInstance(reused, (PendingResult, CompleteResult))
+        self.assertEqual(load.call_count, 1)
+        self.assertGreaterEqual(evaluate.call_count, 2)
+        self.assertEqual(reused.handle, resolved.handle)
+
+    def test_current_authorization_is_not_reused_with_material(self) -> None:
+        pending = self.prepare()
+        submission = self.disposition_submission(pending, "current-authorization-review")
+        authorizer = self.engine._execution_context.authorization
+        with mock.patch.object(authorizer, "authorize",
+                               return_value=AuthorizationDenied("Denied now.")):
+            denied = self.engine.resolve(submission)
+        self.assertIsInstance(denied, RejectedResult)
+        self.assertIsInstance(self.engine.resolve(submission), (PendingResult, CompleteResult))
+
+    def test_lifecycle_change_during_authorization_blocks_post_submission_evaluation(self) -> None:
+        pending = self.prepare()
+        submission = self.disposition_submission(pending, "lifecycle-during-review")
+        authorizer = self.engine._execution_context.authorization
+        original = authorizer.authorize
+        snapshot = self.engine._snapshot_id(self.snapshot)
+
+        def quarantine(request):
+            claim = original(request)
+            self.engine._snapshots.delete_snapshot(snapshot)
+            return claim
+
+        try:
+            with mock.patch.object(authorizer, "authorize", side_effect=quarantine):
+                rejected = self.engine.resolve(submission)
+            self.assertIsInstance(rejected, RejectedResult)
+            self.assertEqual(rejected.outcome, "unavailable")
+        finally:
+            self.engine._snapshots.undelete_snapshot(snapshot)
+        self.assertIsInstance(self.engine.resolve(submission), (PendingResult, CompleteResult))
+
+    def test_proposal_analysis_uses_one_projection_and_one_verified_base(self) -> None:
+        capture = self.engine._snapshots.load_content(self.engine._snapshot_id(self.snapshot))
+        planning = next(item.content.decode("utf-8") for item in capture.files
+                        if str(item.path) == "workflows/planning.md")
+        body = _section_body(planning, WRITTEN_PLAN_TITLE) + "\nUse the selected acceptance evidence."
+        created = self.engine.create_proposal(CreateProposalCall.from_value({
+            "kind": "create-proposal", "base_snapshot": self.snapshot.as_contract(),
+            "change_set": _policy_change_set(policy=POLICY, title=WRITTEN_PLAN_TITLE,
+                body=body, accepted_revision=1, proposed_revision=2,
+                purpose="Exercise exact compiled proposal inputs."),
+        }))
+        self.assertIsInstance(created, CreateProposalResult)
+        with (mock.patch.object(self.engine, "_compiled_snapshot",
+                                wraps=self.engine._compiled_snapshot) as load,
+              mock.patch.object(self.engine, "_proposal_projection",
+                                wraps=self.engine._proposal_projection) as project):
+            result = self.engine.analyze_proposal(AnalyzeProposalCall.from_value({
+                "revision": created.revision.as_contract()}))
+        self.assertIsInstance(result, PendingResult)
+        self.assertEqual(load.call_count, 1)
+        self.assertEqual(project.call_count, 1)
+
+    def test_capture_compiles_live_and_frozen_sources_independently(self) -> None:
+        sources = []
+        original = self.engine._compile
+
+        def observe(source):
+            sources.append(source)
+            return original(source)
+
+        with mock.patch.object(self.engine, "_compile", side_effect=observe):
+            result = self.engine.create_snapshot(CreateSnapshotCall(kind="create-snapshot"))
+        self.assertIsInstance(result, CreateSnapshotResult)
+        self.assertEqual(len(sources), 2)
+        self.assertIsNot(sources[0], sources[1])
+        self.assertEqual(sources[0].requested_paths, sources[1].requested_paths)
+
+    def prepare(self, *, prior: dict[str, object] | None = None,
+                proposed: dict[str, object] | None = None):
         request: dict[str, object] = {
             "kind": "analysis-request",
             "base_snapshot": self.snapshot.as_contract(),
-            "proposed_snapshot": self.snapshot.as_contract(),
+            "proposed_snapshot": self.snapshot.as_contract() if proposed is None else proposed,
             "changes": [
                 {
                     "kind": "modification",

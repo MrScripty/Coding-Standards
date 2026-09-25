@@ -1,0 +1,11 @@
+{
+  "kind": "verify-repository-result",
+  "refreshed_verification_inputs": true,
+  "verification": {
+    "checks": 121,
+    "exit_code": 0,
+    "failures": [],
+    "passed": true,
+    "suites": 73
+  }
+}

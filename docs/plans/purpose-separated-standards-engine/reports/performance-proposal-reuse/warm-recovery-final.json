@@ -1,0 +1,42 @@
+{
+  "outcome": "passed",
+  "seconds": 34.02609723399996,
+  "scenario": "tools.standards_engine.tests.test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database",
+  "caches_before_close": [
+    {
+      "entries": 2,
+      "accounted_bytes": 13607337,
+      "hits": 11,
+      "misses": 2,
+      "evictions": 0,
+      "uncached": 0
+    },
+    {
+      "entries": 1,
+      "accounted_bytes": 6533024,
+      "hits": 0,
+      "misses": 1,
+      "evictions": 0,
+      "uncached": 0
+    }
+  ],
+  "scope": "Original assertions unchanged; first Engine warms through review, live-evidence rejection, interrupted apply and recovery. Second Engine uses a fresh cache and independent database.",
+  "caches_after_close": [
+    {
+      "entries": 0,
+      "accounted_bytes": 0,
+      "hits": 11,
+      "misses": 2,
+      "evictions": 0,
+      "uncached": 0
+    },
+    {
+      "entries": 0,
+      "accounted_bytes": 0,
+      "hits": 0,
+      "misses": 1,
+      "evictions": 0,
+      "uncached": 0
+    }
+  ]
+}

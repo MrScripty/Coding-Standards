@@ -1,0 +1,221 @@
+{
+  "source_commit": "3d92a78b3343204e686ed75d31172c1d02b24f11",
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "corpus": {
+    "files": 437,
+    "bytes": 3757909,
+    "content_id": "snapshot-content:sha256:a177446c7cec932ff6c35c0997905fecabf44187fe84b52205818a2d8217ecf3",
+    "source_revision": "bac7dc3dc39fbf519429ea91bff1e02e65925299",
+    "synthetic_approvals": [
+      "core",
+      "topic.architecture",
+      "topic.contracts",
+      "workflow.development-proportionality",
+      "workflow.implementation",
+      "workflow.planning",
+      "workflow.verification"
+    ]
+  },
+  "targets": [
+    "core",
+    "workflow.implementation",
+    "workflow.planning",
+    "workflow.verification",
+    "topic.contracts",
+    "topic.architecture"
+  ],
+  "observations": [
+    {
+      "purpose": "authoring",
+      "repeat": 0,
+      "operation": "six_reads",
+      "seconds": 1.1121734369999103,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 0,
+      "operation": "read_many",
+      "seconds": 0.24931760899994515,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 1,
+      "operation": "read_many",
+      "seconds": 0.24342684599992026,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 1,
+      "operation": "six_reads",
+      "seconds": 1.139775008000015,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 2,
+      "operation": "six_reads",
+      "seconds": 1.151454208999894,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 2,
+      "operation": "read_many",
+      "seconds": 0.26619081400008326,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 3,
+      "operation": "read_many",
+      "seconds": 0.2609236640000745,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 3,
+      "operation": "six_reads",
+      "seconds": 1.0992856069999561,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 4,
+      "operation": "six_reads",
+      "seconds": 1.115447205999999,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "authoring",
+      "repeat": 4,
+      "operation": "read_many",
+      "seconds": 0.2402914360000068,
+      "ordered_items_sha256": "f9d49151937af5a22032024df31cc6330db605d72490a5798f57477c830defcf",
+      "item_json_bytes": 94316
+    },
+    {
+      "purpose": "application",
+      "repeat": 0,
+      "operation": "six_reads",
+      "seconds": 1.0514371639999354,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 0,
+      "operation": "read_many",
+      "seconds": 0.18259409300003426,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 1,
+      "operation": "read_many",
+      "seconds": 0.17693527900019035,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 1,
+      "operation": "six_reads",
+      "seconds": 1.0582228639998448,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 2,
+      "operation": "six_reads",
+      "seconds": 1.0827503269999852,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 2,
+      "operation": "read_many",
+      "seconds": 0.1840112820000286,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 3,
+      "operation": "read_many",
+      "seconds": 0.21883916400020098,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 3,
+      "operation": "six_reads",
+      "seconds": 1.0405755130000216,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 4,
+      "operation": "six_reads",
+      "seconds": 1.048103645999845,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    },
+    {
+      "purpose": "application",
+      "repeat": 4,
+      "operation": "read_many",
+      "seconds": 0.1796942979999585,
+      "ordered_items_sha256": "6ad90d4d806671ae19546e47d866ceb9a7da1c2b81a909bea9679e708343b13e",
+      "item_json_bytes": 92644
+    }
+  ],
+  "server_startup": [
+    {
+      "purpose": "authoring",
+      "initialize_seconds": 0.6307419339998432
+    },
+    {
+      "purpose": "application",
+      "initialize_seconds": 0.6154904979998719
+    }
+  ],
+  "separate_dispatch_counts": [
+    {
+      "purpose": "authoring",
+      "operation": "six_reads",
+      "complete_loads": 6
+    },
+    {
+      "purpose": "authoring",
+      "operation": "read_many",
+      "complete_loads": 1
+    },
+    {
+      "purpose": "application",
+      "operation": "six_reads",
+      "complete_loads": 6
+    },
+    {
+      "purpose": "application",
+      "operation": "read_many",
+      "complete_loads": 1
+    }
+  ]
+}

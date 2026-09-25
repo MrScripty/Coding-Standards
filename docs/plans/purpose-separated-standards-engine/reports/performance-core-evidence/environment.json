@@ -1,0 +1,20 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "sqlite": "3.46.1",
+  "git": "git version 2.47.3",
+  "packages": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.37.0",
+    "rpds-py": "2026.5.1",
+    "typing-extensions": "4.16.0"
+  },
+  "base": "90a3c8f13f517ad1dc32342fa10a4f1af181ed81",
+  "branch": "implementation/purpose-separated-standards-engine",
+  "accepted_main": "366c1d90a24bbfb50973f62b155a5f3396c0f107",
+  "qualification": "Supporting local run; Python 3.13 and rpds-py differ from the supported pinned environment.",
+  "cpu_quota": "400000 100000",
+  "memory_limit": "4294967296"
+}

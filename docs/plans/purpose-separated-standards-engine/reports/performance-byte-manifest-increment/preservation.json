@@ -1,0 +1,8 @@
+{
+  "base": "2aef993edc8a47ce474468c641cc2e542e3ec8da",
+  "implementation": "de85f5adfda221fe88fbf0dba12b34aa2e410cf6",
+  "changed_protected_files": [],
+  "local_main": "366c1d90a24bbfb50973f62b155a5f3396c0f107",
+  "wire_schemas_and_dependency_locks": "unchanged",
+  "normative_content_and_real_support_manifests": "unchanged"
+}

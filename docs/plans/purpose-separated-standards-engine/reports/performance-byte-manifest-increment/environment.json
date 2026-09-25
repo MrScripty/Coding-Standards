@@ -1,0 +1,31 @@
+{
+  "base": "2aef993edc8a47ce474468c641cc2e542e3ec8da",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "executable": "/mnt/data/next-performance-env/bin/python",
+  "executable_sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+  "packages": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.37.0",
+    "rpds-py": "2026.5.1",
+    "typing-extensions": "4.16.0"
+  },
+  "qualification": "Isolated core dependencies; Python 3.13.5 and rpds-py 2026.5.1, not pinned supported qualification",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "machine": "x86_64",
+  "logical_cpus": 5,
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "sqlite": "3.46.1",
+  "git": "git version 2.47.3",
+  "cpu_pinning": false,
+  "os_page_cache_cold": false,
+  "cgroup_cpu_max": "400000 100000",
+  "cgroup_memory_max": "4294967296"
+}

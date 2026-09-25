@@ -1,0 +1,20 @@
+operation,n,median_wall_s,min_wall_s,max_wall_s,median_cpu_s,execution_scope
+engine_open_new,3,0.0027411379999762175,0.0018422809999947276,0.0036471070000061445,0.0027405539999989514,isolated serial; three sweeps; same Python process except Engine/facade reopen
+facade_construct,3,0.28479900199999975,0.26844384000003174,0.2879713190000075,0.28477422699999977,isolated serial; three sweeps; same Python process except Engine/facade reopen
+create_snapshot,3,15.233948413999997,14.999295378999989,16.264606757999957,7.102598803,isolated serial; three sweeps; same Python process except Engine/facade reopen
+query_read_0,3,2.8882569200000034,2.851386198,3.0195219510000015,2.8849322369999992,isolated serial; three sweeps; same Python process except Engine/facade reopen
+query_read_1,3,2.9156205319999913,2.853243651000014,3.0369377220000047,2.913406662,isolated serial; three sweeps; same Python process except Engine/facade reopen
+query_read_2,3,2.9356448479999813,2.8843864529999905,2.9450300379999703,2.9350780249999993,isolated serial; three sweeps; same Python process except Engine/facade reopen
+inspect_policy,3,2.902790402999983,2.867906268000013,2.939388970999971,2.902447487999993,isolated serial; three sweeps; same Python process except Engine/facade reopen
+route_explicit,3,3.19512152599998,3.057167095000011,3.29525634700002,3.193528937,isolated serial; three sweeps; same Python process except Engine/facade reopen
+prepare_same_snapshot,3,5.993509637000045,5.847683467000024,6.320639734999986,5.984644828,isolated serial; three sweeps; same Python process except Engine/facade reopen
+resolve,3,12.120287040999983,11.562000888,12.743021826000017,12.10947603999999,isolated serial; three sweeps; same Python process except Engine/facade reopen
+inspect_analysis,3,0.005975886999976865,0.00572523200003161,0.0060321509999994305,0.005976785000001428,isolated serial; three sweeps; same Python process except Engine/facade reopen
+inspect_snapshot,3,0.0005627439999784656,0.0005613210000205981,0.000584817000003568,0.0005629659999968339,isolated serial; three sweeps; same Python process except Engine/facade reopen
+engine_close,3,0.0004285219999928813,0.0003741510000168091,0.0004450470000278983,0.00042585300000297366,isolated serial; three sweeps; same Python process except Engine/facade reopen
+reopen_0,3,0.004172403000040958,0.0040474560000234305,0.005199347999962356,0.0041745460000015555,isolated serial; three sweeps; same Python process except Engine/facade reopen
+reopen_facade_0,3,0.27311807900002805,0.2647701589999656,0.3026405969999928,0.27287609100000054,isolated serial; three sweeps; same Python process except Engine/facade reopen
+reopened_query_0,3,3.0625665750000053,2.841536691999977,3.078581342999996,3.059746089000001,isolated serial; three sweeps; same Python process except Engine/facade reopen
+reopen_1,3,0.004871230999981435,0.004645824000022003,0.005793843999981618,0.004871661999999333,isolated serial; three sweeps; same Python process except Engine/facade reopen
+reopen_facade_1,3,0.27991140300002826,0.26397920400000885,0.3117306949999943,0.27973826100000565,isolated serial; three sweeps; same Python process except Engine/facade reopen
+reopened_query_1,3,3.010045933000015,2.861938054999996,3.0525170559999992,3.0062666049999933,isolated serial; three sweeps; same Python process except Engine/facade reopen

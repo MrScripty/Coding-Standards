@@ -1,0 +1,68 @@
+[
+  {
+    "package": "graph_engine",
+    "run": 37,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "repository_git",
+    "run": 16,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_analysis",
+    "run": 100,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_applicability",
+    "run": 12,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_contracts",
+    "run": 23,
+    "skipped": 1,
+    "status": "passed"
+  },
+  {
+    "package": "standards_graph",
+    "run": 2,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_identity",
+    "run": 11,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_metadata",
+    "run": 31,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_policy_impact",
+    "run": 10,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_snapshots",
+    "run": 23,
+    "skipped": 0,
+    "status": "passed"
+  },
+  {
+    "package": "standards_verifier",
+    "run": 156,
+    "skipped": 0,
+    "status": "passed"
+  }
+]

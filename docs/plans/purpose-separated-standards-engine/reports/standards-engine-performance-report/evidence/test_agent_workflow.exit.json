@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 249.3859453201294, "args": ["--pattern", "test_agent_workflow.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

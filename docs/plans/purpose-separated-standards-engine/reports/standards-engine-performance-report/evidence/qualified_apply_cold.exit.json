@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 129.70028138160706, "test": "test_analysis.AnalysisWorkflowTest.test_apply_proposal_composes_real_verification_and_cold_readback", "qualification": "same source SHA; disposable checkout on local main, so nested test clones create main"}

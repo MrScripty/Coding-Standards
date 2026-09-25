@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from typing import Callable, Mapping, Protocol
 
 
@@ -11,11 +12,11 @@ def render_text(value: ContractValue | Mapping[str, object]) -> str:
     """Render a deterministic human projection of one typed engine result."""
     contract = value.as_contract() if hasattr(value, "as_contract") else dict(value)
     kind = str(contract.get("kind", "unknown"))
+    if kind in {"read-many-result", "application-read-many-result"}:
+        return json.dumps(contract) + "\n"
     if contract.get("purpose") == "application":
-        import json
         return json.dumps(contract, ensure_ascii=False, indent=2) + "\n"
     if kind in {"provenance-read-result", "operational-read-result"}:
-        import json
         return json.dumps(contract, ensure_ascii=False, indent=2) + "\n"
     if kind == "fact-observation":
         return _observation(contract)

@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import re
 import tomllib
+from collections.abc import Iterable
 from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Any, Mapping
@@ -557,18 +558,38 @@ def derive_coverage_view(
     representation_digest: str | None = None,
     structural_digest: str | None = None,
 ) -> CoverageViewDefinition:
-    relationships = tuple(
-        sorted(
-            (
-                edge_id,
-                semantics.dependency_fingerprint,
-                semantics.relation,
-                semantics.applicability_program.dependency_digest,
-            )
-            for edge_id, semantics in compiled.semantics.items()
-            if semantics.source == unit.id
-        )
+    edge_ids = (
+        edge_id for edge_id, semantics in compiled.semantics.items()
+        if semantics.source == unit.id
     )
+    return _derive_coverage_view(
+        unit, compiled, horizon, edge_ids,
+        semantic_revision=semantic_revision,
+        representation_digest=representation_digest,
+        structural_digest=structural_digest,
+    )
+
+
+def _derive_coverage_view(
+    unit: PolicyUnit,
+    compiled: CompiledPolicyImpactSet,
+    horizon: CoverageHorizon,
+    edge_ids: Iterable[str],
+    *,
+    semantic_revision: int | None = None,
+    representation_digest: str | None = None,
+    structural_digest: str | None = None,
+) -> CoverageViewDefinition:
+    relationships = []
+    for edge_id in edge_ids:
+        semantics = compiled.semantics[edge_id]
+        relationships.append((
+            edge_id,
+            semantics.dependency_fingerprint,
+            semantics.relation,
+            semantics.applicability_program.dependency_digest,
+        ))
+    relationships.sort()
     local_members: dict[str, CoverageHorizonMember] = {}
     for edge_id, _fingerprint, _relation, _program in relationships:
         semantics = compiled.semantics[edge_id]
@@ -651,8 +672,19 @@ def compile_coverage_definitions(
     compiled: CompiledPolicyImpactSet,
     horizon: CoverageHorizon,
 ) -> CoverageDefinitionIndex:
+    # Group only the selected policies' edge identities. This preparation is
+    # private to this compilation and never outlives or replaces its graph.
+    edges_by_source: dict[str, list[str]] = {
+        unit.id: [] for unit in corpus.policy_units
+    }
+    if edges_by_source:
+        for edge_id, semantics in compiled.semantics.items():
+            if semantics.source in edges_by_source:
+                edges_by_source[semantics.source].append(edge_id)
     views = {
-        unit.id: derive_coverage_view(unit, compiled, horizon)
+        unit.id: _derive_coverage_view(
+            unit, compiled, horizon, edges_by_source[unit.id],
+        )
         for unit in corpus.policy_units
     }
     requirements = {

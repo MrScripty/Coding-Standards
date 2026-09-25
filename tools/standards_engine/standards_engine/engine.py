@@ -5,6 +5,7 @@ import json
 import re
 import tempfile
 import tomllib
+from contextlib import AbstractContextManager
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,8 +13,10 @@ from pathlib import Path
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
 from tools.repository_git.repository_git import (
     CandidateFile,
+    MaterializedCandidate,
     CandidateCommitMessage,
     GitRepository,
+    RevisionReadSession,
     GitRepositoryError,
     RepositoryPath,
     RepositoryRevision,
@@ -124,6 +127,8 @@ from ._generated_contract import (
     RoutingFactsResult,
     AgentRouteResult,
     ReadCall,
+    ReadManyCall,
+    ReadManyResult,
     RelatedCall,
     CompactReadResult,
     AnalyzeProposalCall,
@@ -165,6 +170,8 @@ from ._generated_contract import (
     PolicyInspectionResult,
     QueryCall,
     QueryProposalCall,
+    PreviewApplicationCall,
+    PreviewApplicationResult,
     QueryProposalResult,
     QueryResult,
     RecoverApplicationCall,
@@ -196,6 +203,7 @@ from .authoring import (
     APPLICATION_CAPABILITY,
     APPLICATION_RECOVERY_CAPABILITY,
     AuthoringError,
+    AuthoringFailure,
     AuthoringModule,
     CANONICAL_TARGET_BRANCH,
     FindProposalsRequest,
@@ -218,6 +226,8 @@ from .logical_authoring import (
     authoring_target_id,
 )
 from .navigation_indexes import NavigationIndex
+from .operation_materials import ProposalMaterials
+from .compiled_cache import CompiledSnapshotCache
 from .context_projection import Purpose, public_operation
 
 
@@ -254,16 +264,29 @@ class CompiledSnapshot:
         )
 
 
+@dataclass(frozen=True, slots=True)
+class _EvaluationMaterials:
+    """Verified immutable inputs borrowed only by one analysis operation.
+
+    Decision states, providers, authorization, and live root checks stay outside
+    this value. Publication and recovery obtain their own current observations.
+    """
+
+    base_snapshot: SnapshotId
+    proposed_material: SnapshotMaterialRef | ProjectedRevisionMaterialRef
+    accepted: CompiledSnapshot
+    proposed: CompiledSnapshot
+    revision: ProposalRevision | None = None
+    projection: LogicalProjection | None = None
+
+
 class _GitRevisionSource:
-    def __init__(self, repository: GitRepository, revision: RepositoryRevision) -> None:
-        self._repository = repository
-        self._revision = revision
+    def __init__(self, reader: RevisionReadSession) -> None:
+        self._reader = reader
 
     def read_bytes(self, path: str) -> bytes:
         try:
-            return self._repository.read_file(
-                self._revision, RepositoryPath.parse(path)
-            )
+            return self._reader.read_file(RepositoryPath.parse(path))
         except GitRepositoryError as error:
             if error.failure.kind != "unavailable":
                 raise
@@ -428,16 +451,16 @@ class StandardsEngine:
         purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
         temporary_store: tempfile.TemporaryDirectory[str] | None = None,
+        compiled_cache: CompiledSnapshotCache | None = None,
     ) -> None:
         self._purpose = Purpose(purpose)
+        if compiled_cache is not None:
+            compiled_cache.require_scope(repository.root, self._purpose)
+        self._compiled_cache = compiled_cache
         self._repository = repository
         self._snapshots = snapshots
         self._logical_authoring = LogicalAuthoringCompiler(self._compile)
-        self._authoring = AuthoringModule(
-            snapshots,
-            validate_revision=self._validate_logical_revision,
-            observe_repository_paths=self._repository_paths_for_snapshot,
-        )
+        self._authoring = AuthoringModule(snapshots)
         self._execution_context = execution_context or AnalysisExecutionContext()
         self._application_verifier = run_complete_verification
         self._temporary_store = temporary_store
@@ -451,9 +474,12 @@ class StandardsEngine:
         store_path: Path | None = None,
         purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
+        compiled_cache: CompiledSnapshotCache | None = None,
     ) -> StandardsEngine:
         selected_purpose = Purpose(purpose)
         selected_root = root.resolve()
+        if compiled_cache is not None:
+            compiled_cache.require_scope(selected_root, selected_purpose)
         temporary = None
         if store_path is None:
             if durable:
@@ -467,6 +493,7 @@ class StandardsEngine:
             purpose=selected_purpose,
             execution_context=execution_context,
             temporary_store=temporary,
+            compiled_cache=compiled_cache,
         )
 
     @property
@@ -497,11 +524,10 @@ class StandardsEngine:
         del call
         try:
             revision = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-            recording = RecordingContentSource(
-                _GitRevisionSource(self._repository, revision)
-            )
-            first = self._compile(recording)
-            frozen = recording.freeze()
+            with self._repository.read_session(revision) as reader:
+                recording = RecordingContentSource(_GitRevisionSource(reader))
+                first = self._compile(recording)
+                frozen = recording.freeze()
             replay = RecordingContentSource(frozen)
             try:
                 second = self._compile(replay)
@@ -570,9 +596,8 @@ class StandardsEngine:
                 ),
             )
             paths = self._repository.revision_paths(expected)
-            files = {
-                str(path): self._repository.read_file(expected, path) for path in paths
-            }
+            with self._repository.read_session(expected) as reader:
+                files = {str(path): reader.read_file(path) for path in paths}
             compiled = self._compile(FrozenContentSource(files))
             requirements = {
                 coverage_requirement_id(compiled.coverage.requirements[s], v)
@@ -721,6 +746,7 @@ class StandardsEngine:
             projection = self._proposal_projection(revision)
             base = self._snapshots.load_content(revision.base_snapshot)
             base_files = {str(item.path): item.content for item in base.files}
+            base_files.update(projection.captured_consumer_files)
             proposed_files = dict(projection.source.files)
             base_paths = set(revision.base_repository_paths)
             proposed_paths = set(projection.repository_paths)
@@ -829,10 +855,20 @@ class StandardsEngine:
     def create_proposal(
         self, call: CreateProposalCall
     ) -> CreateProposalResult | RejectedResult:
+        with ProposalMaterials(self) as materials:
+            return self._create_proposal(call, materials)
+
+    def _create_proposal(
+        self, call: CreateProposalCall, materials: ProposalMaterials
+    ) -> CreateProposalResult | RejectedResult:
         try:
             summary, revision = self._authoring.create_proposal(
                 self._snapshot_id(call.base_snapshot),
-                StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                self._prepare_consumer_sources(
+                    StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                    self._snapshot_id(call.base_snapshot), materials,
+                ),
+                preparation=materials,
             )
             return CreateProposalResult.from_value(
                 {
@@ -841,6 +877,37 @@ class StandardsEngine:
                     "revision": self._proposal_revision_handle(revision.revision_id),
                 }
             )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
+    def _prepare_consumer_sources(
+        self, change_set: StandardsChangeSet, snapshot: SnapshotId,
+        materials: ProposalMaterials,
+    ) -> StandardsChangeSet:
+        """Retain original consumer inputs before admitting a logical revision."""
+        if not any(edit.as_contract()["kind"] == "register-consumer" for edit in change_set.edits):
+            return change_set
+        from .consumer_authoring import bind_sources
+
+        paths = materials.repository_paths(snapshot)
+        summary = self._snapshots.snapshot(snapshot)
+        with self._repository.read_session(RepositoryRevision(summary.source_revision)) as session:
+            return bind_sources(
+                change_set, str(snapshot), paths,
+                lambda path: session.read_file(RepositoryPath.parse(path)),
+            )
+
+    @public_operation
+    def preview_application(
+        self, call: PreviewApplicationCall,
+    ) -> PreviewApplicationResult | RejectedResult:
+        from .context_projection import preview_application
+
+        try:
+            with ProposalMaterials(self) as materials:
+                revision = self._authoring.read_revision(call.revision.id)
+                projection = materials.projection(revision)
+                return preview_application(self, projection.compiled, call)
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -870,10 +937,21 @@ class StandardsEngine:
     def revise_proposal(
         self, call: ReviseProposalCall
     ) -> ReviseProposalResult | RejectedResult:
+        with ProposalMaterials(self) as materials:
+            return self._revise_proposal(call, materials)
+
+    def _revise_proposal(
+        self, call: ReviseProposalCall, materials: ProposalMaterials
+    ) -> ReviseProposalResult | RejectedResult:
         try:
             summary, revision = self._authoring.revise_proposal(
                 call.expected_revision.id,
-                StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                self._prepare_consumer_sources(
+                    StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                    self._authoring.read_revision(call.expected_revision.id).base_snapshot,
+                    materials,
+                ),
+                preparation=materials,
             )
             return ReviseProposalResult.from_value(
                 {
@@ -919,25 +997,29 @@ class StandardsEngine:
     def propose(self, call: ProposeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import propose
 
-        return propose(self, call)
+        with ProposalMaterials(self) as materials:
+            return propose(self, call, materials)
 
     @public_operation
     def revise(self, call: ReviseCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "revise", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "revise", call, materials)
 
     @public_operation
     def analyze(self, call: AnalyzeCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "analyze", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "analyze", call, materials)
 
     @public_operation
     def resolve_workflow(self, call: ResolveWorkflowCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "resolve_workflow", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "resolve_workflow", call, materials)
 
     @public_operation
     def review(self, call: ReviewCall) -> WorkflowResult | RejectedResult:
@@ -961,7 +1043,8 @@ class StandardsEngine:
     def workflow_status(self, call: WorkflowStatusCall) -> WorkflowResult | RejectedResult:
         from .agent_workflow import advance
 
-        return advance(self, "workflow_status", call)
+        with ProposalMaterials(self) as materials:
+            return advance(self, "workflow_status", call, materials)
 
     @public_operation
     def resume(self, call: ResumeCall) -> WorkflowResult | RejectedResult:
@@ -986,6 +1069,17 @@ class StandardsEngine:
         from .agent_navigation import navigate
 
         return navigate(self, "read", call)
+
+    @public_operation
+    def read_many(self, call: ReadManyCall) -> ReadManyResult | RejectedResult:
+        """One verified snapshot supplies the complete bounded reading set."""
+        from .agent_navigation import read_many
+
+        try:
+            compiled = self._compiled_snapshot(self._snapshot_id(call.snapshot))
+            return read_many(self, call, compiled)
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
 
     @public_operation
     def related(self, call: RelatedCall) -> RelatedResult | RejectedResult:
@@ -1017,7 +1111,7 @@ class StandardsEngine:
     ) -> QueryProposalResult | RejectedResult:
         try:
             revision = self._authoring.read_revision(call.revision.id)
-            compiled = self._proposal_projection(revision).compiled
+            compiled = self._proposal_projection(revision, reuse=True).compiled
             projection = _QueryProjection.proposal(
                 call.revision,
                 SnapshotHandle.from_value(
@@ -1060,10 +1154,16 @@ class StandardsEngine:
     def analyze_proposal(
         self, call: AnalyzeProposalCall
     ) -> PendingResult | CompleteResult | RejectedResult:
+        with ProposalMaterials(self) as materials:
+            return self._analyze_proposal(call, materials)
+
+    def _analyze_proposal(
+        self, call: AnalyzeProposalCall, materials: ProposalMaterials
+    ) -> PendingResult | CompleteResult | RejectedResult:
         try:
             revision = self._authoring.read_revision(call.revision.id)
-            accepted = self._compiled_snapshot(revision.base_snapshot)
-            projection = self._proposal_projection(revision)
+            accepted = materials.compiled(revision.base_snapshot)
+            projection = materials.projection(revision)
             proposed = projection.compiled
             semantic_proposals = projection.semantic_proposals
             affected_policy_ids = set(projection.analysis_policy_ids)
@@ -1094,7 +1194,14 @@ class StandardsEngine:
             )
             return self._evaluate_publish_project(
                 state,
-                self._evaluate_compiled(state, accepted, proposed, revision),
+                _EvaluationMaterials(
+                    state.base_snapshot,
+                    state.proposed_material,
+                    accepted,
+                    proposed,
+                    revision,
+                    projection,
+                ),
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
@@ -1225,82 +1332,10 @@ class StandardsEngine:
                     "unavailable",
                     "The configured main branch no longer matches the readiness target.",
                 )
-            projection = self._proposal_projection(revision)
-            base_capture = self._snapshots.load_content(revision.base_snapshot)
-            base_files = {str(item.path): item.content for item in base_capture.files}
-            proposed_files = dict(projection.source.files)
-            base_paths = set(revision.base_repository_paths)
-            proposed_paths = set(projection.repository_paths)
-            self._publish_coverage_into_candidate(
-                readiness,
-                revision,
-                projection,
-                base_files,
-                proposed_files,
-                proposed_paths,
-            )
-            added_paths = proposed_paths - base_paths
-            removed_paths = base_paths - proposed_paths
-            uncaptured_existing_paths = (
-                set(proposed_files) - set(base_files)
-            ) & base_paths
-            if (
-                not added_paths <= set(proposed_files)
-                or not removed_paths <= set(base_files)
-                or uncaptured_existing_paths
-            ):
-                return self._reject(
-                    "APPLICATION.TOPOLOGY_INVALID",
-                    "invalid",
-                    "The logical projection does not contain exact authority for its topology change.",
-                )
-            candidate_files = tuple(
-                CandidateFile(
-                    RepositoryPath.parse(path),
-                    content,
-                    _CANONICAL_AUTHORITY_EXECUTABLE,
-                )
-                for path, content in sorted(proposed_files.items())
-                if path in added_paths or base_files.get(path) != content
-            )
-            with self._repository.materialize_candidate(
-                readiness.expected_target,
-                candidate_files,
-                removals=tuple(
-                    RepositoryPath.parse(path) for path in sorted(removed_paths)
-                ),
-                commit=proposal_commit_message(revision),
-            ) as candidate:
-                try:
-                    verification = self._application_verifier(candidate.root)
-                except OSError:
-                    return self._reject(
-                        "APPLICATION.VERIFICATION_UNAVAILABLE",
-                        "unavailable",
-                        "The complete candidate verification could not be executed.",
-                    )
-                if type(verification) is not CompleteVerificationResult:
-                    return self._reject(
-                        "APPLICATION.VERIFICATION_INVALID",
-                        "invalid",
-                        "The complete verifier returned an invalid result.",
-                    )
-                if verification.exit_code != 0:
-                    outcome = {
-                        3: "unavailable",
-                        4: "unsupported",
-                    }.get(verification.exit_code, "invalid")
-                    code = {
-                        "unavailable": "APPLICATION.VERIFICATION_UNAVAILABLE",
-                        "unsupported": "APPLICATION.VERIFICATION_UNSUPPORTED",
-                        "invalid": "APPLICATION.VERIFICATION_FAILED",
-                    }[outcome]
-                    return self._reject(
-                        code,
-                        outcome,
-                        "The exact candidate did not pass the complete verification checkpoint.",
-                        details=_verification_failure_details(verification),
-                    )
+            with self._application_candidate(readiness, revision) as candidate:
+                verification_failure = self._verify_application_candidate(candidate)
+                if verification_failure is not None:
+                    return verification_failure
                 if (
                     self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
                     != readiness.expected_target
@@ -1316,46 +1351,9 @@ class StandardsEngine:
                     authorization.as_contract(),
                     candidate.revision,
                 )
-                try:
-                    publication = self._repository.publish_candidate(
-                        candidate,
-                        readiness.expected_target,
-                    )
-                except GitRepositoryError as error:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.PUBLICATION_UNAVAILABLE",
-                        "Canonical publication did not establish an applied result after "
-                        f"admission ({error.failure.code}).",
-                    )
-                if publication == "stale":
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.RECOVERY_TARGET_DIVERGED",
-                        "The configured main branch changed after application admission.",
-                    )
-                try:
-                    observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-                except GitRepositoryError:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.OBSERVATION_UNAVAILABLE",
-                        "The canonical target could not be observed after publication.",
-                    )
-                if observed != candidate.revision:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.OBSERVATION_UNAVAILABLE",
-                        "The canonical target did not retain the candidate after publication.",
-                    )
-                try:
-                    self._authoring.record_applied(application)
-                except SnapshotError:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
-                        "The applied outcome could not be recorded durably.",
-                    )
+                failure = self._publish_admitted_application(application, candidate)
+                if failure is not None:
+                    return failure
                 return ApplyProposalResult.from_value(
                     {
                         "kind": "apply-proposal-result",
@@ -1367,6 +1365,133 @@ class StandardsEngine:
                 )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def _application_candidate(
+        self, readiness: ProposalReadiness, revision: ProposalRevision,
+    ) -> AbstractContextManager[MaterializedCandidate]:
+        """Reconstruct from original captured authority, never the live worktree."""
+        projection = self._proposal_projection(revision)
+        base_capture = self._snapshots.load_content(revision.base_snapshot)
+        base_files = {str(item.path): item.content for item in base_capture.files}
+        base_files.update(projection.captured_consumer_files)
+        proposed_files = dict(projection.source.files)
+        base_paths = set(revision.base_repository_paths)
+        proposed_paths = set(projection.repository_paths)
+        self._publish_coverage_into_candidate(
+            readiness,
+            revision,
+            projection,
+            base_files,
+            proposed_files,
+            proposed_paths,
+        )
+        added_paths = proposed_paths - base_paths
+        removed_paths = base_paths - proposed_paths
+        uncaptured_existing_paths = (
+            set(proposed_files) - set(base_files)
+        ) & base_paths
+        if (
+            not added_paths <= set(proposed_files)
+            or not removed_paths <= set(base_files)
+            or uncaptured_existing_paths
+        ):
+            raise AuthoringError(AuthoringFailure(
+                "APPLICATION.TOPOLOGY_INVALID", "invalid",
+                "The logical projection does not contain exact authority for its topology change.",
+            ))
+        candidate_files = tuple(
+            CandidateFile(
+                RepositoryPath.parse(path),
+                content,
+                _CANONICAL_AUTHORITY_EXECUTABLE,
+            )
+            for path, content in sorted(proposed_files.items())
+            if path in added_paths or base_files.get(path) != content
+        )
+        return self._repository.materialize_candidate(
+            readiness.expected_target,
+            candidate_files,
+            removals=tuple(
+                RepositoryPath.parse(path) for path in sorted(removed_paths)
+            ),
+            commit=proposal_commit_message(revision),
+        )
+
+    def _verify_application_candidate(
+        self, candidate: MaterializedCandidate,
+    ) -> RejectedResult | None:
+        try:
+            verification = self._application_verifier(candidate.root)
+        except OSError:
+            return self._reject(
+                "APPLICATION.VERIFICATION_UNAVAILABLE",
+                "unavailable",
+                "The complete candidate verification could not be executed.",
+            )
+        if type(verification) is not CompleteVerificationResult:
+            return self._reject(
+                "APPLICATION.VERIFICATION_INVALID",
+                "invalid",
+                "The complete verifier returned an invalid result.",
+            )
+        if verification.exit_code != 0:
+            outcome = {
+                3: "unavailable",
+                4: "unsupported",
+            }.get(verification.exit_code, "invalid")
+            code = {
+                "unavailable": "APPLICATION.VERIFICATION_UNAVAILABLE",
+                "unsupported": "APPLICATION.VERIFICATION_UNSUPPORTED",
+                "invalid": "APPLICATION.VERIFICATION_FAILED",
+            }[outcome]
+            return self._reject(
+                code,
+                outcome,
+                "The exact candidate did not pass the complete verification checkpoint.",
+                details=_verification_failure_details(verification),
+            )
+        return None
+
+    def _publish_admitted_application(
+        self, application: ProposalApplication, candidate: MaterializedCandidate,
+    ) -> ApplicationRecoveryRequiredResult | None:
+        """One expected-target attempt, followed by exact outcome observation."""
+        try:
+            publication = self._repository.publish_candidate(
+                candidate, application.expected_target,
+            )
+        except GitRepositoryError as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.PUBLICATION_UNAVAILABLE",
+                "Canonical publication did not establish an applied result after "
+                f"admission ({error.failure.code}).",
+                details=_recovery_failure_details(error),
+            )
+        try:
+            observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+        except GitRepositoryError as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.OBSERVATION_UNAVAILABLE",
+                "The canonical target could not be observed after publication.",
+                details=_recovery_failure_details(error),
+            )
+        if observed != application.candidate:
+            return self._application_recovery_required(
+                application,
+                "APPLICATION.RECOVERY_TARGET_DIVERGED" if publication == "stale"
+                else "APPLICATION.OBSERVATION_UNAVAILABLE",
+                "The canonical target did not retain the admitted candidate; "
+                "observe it again before selecting a recovery action.",
+            )
+        try:
+            self._authoring.record_applied(application)
+        except SnapshotError as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
+                "The applied outcome could not be recorded durably.",
+                details=_recovery_failure_details(error),
+            )
+        return None
 
     def _publish_coverage_into_candidate(
         self,
@@ -1549,11 +1674,12 @@ class StandardsEngine:
                 return self._recovered_application(application)
             try:
                 observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-            except GitRepositoryError:
+            except GitRepositoryError as error:
                 return self._application_recovery_required(
                     application,
                     "APPLICATION.OBSERVATION_UNAVAILABLE",
                     "The canonical target could not be observed during recovery.",
+                    details=_recovery_failure_details(error),
                 )
             if observed == application.candidate:
                 try:
@@ -1566,10 +1692,15 @@ class StandardsEngine:
                     )
                 return self._recovered_application(application)
             if observed == application.expected_target:
+                if call.as_contract().get("action", "observe") == "complete-publication":
+                    return self._complete_admitted_application(application)
                 return self._application_recovery_required(
                     application,
                     "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
-                    "The current target cannot establish whether publication occurred.",
+                    "The target is at the admitted expected revision; this does not establish "
+                    "whether publication previously occurred. Select complete-publication "
+                    "to revalidate and re-establish the exact admitted candidate on an "
+                    "authorized Git-writable host.",
                 )
             return self._application_recovery_required(
                 application,
@@ -1578,6 +1709,75 @@ class StandardsEngine:
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def _complete_admitted_application(
+        self, application: ProposalApplication,
+    ) -> RecoverApplicationResult | ApplicationRecoveryRequiredResult:
+        """Re-establish one admitted candidate; preserve its selection on failure."""
+        try:
+            readiness, revision = self._authoring.application_revision(application.readiness_id)
+            self._authorize_recovery_completion(application)
+            state = self._load_analysis(
+                AnalysisHandle.from_value(self._analysis_handle(readiness.analysis_id))
+            )
+            evaluation = self._evaluate(state)
+            if not evaluation.complete or self._review_requires_change(state):
+                raise AuthoringError(AuthoringFailure(
+                    "APPLICATION.RECOVERY_REVIEW_UNAVAILABLE", "unavailable",
+                    "The admitted review must remain complete for publication.",
+                ))
+            with self._application_candidate(readiness, revision) as candidate:
+                if candidate.revision != application.candidate:
+                    raise AuthoringError(AuthoringFailure(
+                        "APPLICATION.RECOVERY_CANDIDATE_MISMATCH", "invalid",
+                        "Reconstruction differs from the exact admitted candidate.",
+                    ))
+                failure = self._verify_application_candidate(candidate)
+                if failure is not None:
+                    return self._application_recovery_required(
+                        application, "APPLICATION.RECOVERY_BLOCKED", failure.message,
+                        details={"cause_code": failure.code, "cause_outcome": failure.outcome,
+                                 **failure.details},
+                    )
+                # Verification may take time. Re-observe durable selection/head and
+                # current permission immediately before the only write attempt.
+                self._authoring.application_revision(application.readiness_id)
+                selected = self._authoring.read_selected_application(application.readiness_id)
+                if selected != application:
+                    raise AuthoringError(AuthoringFailure(
+                        "APPLICATION.RECOVERY_SELECTION_MISMATCH", "invalid",
+                        "Recovery requires the original selected application.",
+                    ))
+                if self._authoring.application_outcome(application) is not None:
+                    return self._recovered_application(application)
+                self._authorize_recovery_completion(application)
+                self._repository.validate_candidate(candidate)
+                failure = self._publish_admitted_application(application, candidate)
+                return failure if failure is not None else self._recovered_application(application)
+        except self._domain_errors() as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.RECOVERY_BLOCKED",
+                "The admitted application is preserved; complete the reported "
+                "recovery prerequisite before another explicit completion attempt.",
+                details=_recovery_failure_details(error),
+            )
+
+    def _authorize_recovery_completion(self, application: ProposalApplication) -> None:
+        for action, subject_kind, subject, capability in (
+            ("recover-application", "proposal-application-recovery",
+             application_recovery_subject, APPLICATION_RECOVERY_CAPABILITY),
+            ("apply-proposal", "proposal-application",
+             application_subject, APPLICATION_CAPABILITY),
+        ):
+            construct_authorization_record(
+                self._execution_context,
+                AuthorizationRequest(
+                    action, subject_kind,
+                    subject(application.readiness_id, application.revision_id,
+                            application.expected_target),
+                    capability, (),
+                ),
+            )
 
     @public_operation
     def prepare(
@@ -1588,7 +1788,11 @@ class StandardsEngine:
             base_snapshot = self._snapshot_id(request.base_snapshot)
             proposed_snapshot = self._snapshot_id(request.proposed_snapshot)
             base = self._compiled_snapshot(base_snapshot)
-            proposed = self._compiled_snapshot(proposed_snapshot)
+            proposed = (
+                base
+                if proposed_snapshot == base_snapshot
+                else self._compiled_snapshot(proposed_snapshot)
+            )
             attestations, authorizations = self._repository_decisions(
                 request.changes, base, proposed
             )
@@ -1602,12 +1806,12 @@ class StandardsEngine:
                 domain_contracts=self._domain_contracts(),
                 execution_contracts=self._execution_context.contract_view(),
             )
-            if not isinstance(request.prior_analysis, MissingValue):
-                state = self._reuse_prior(state, request.prior_analysis)
-            return self._evaluate_publish_project(
-                state,
-                self._evaluate_compiled(state, base, proposed),
+            materials = _EvaluationMaterials(
+                state.base_snapshot, state.proposed_material, base, proposed
             )
+            if not isinstance(request.prior_analysis, MissingValue):
+                state = self._reuse_prior(state, request.prior_analysis, materials)
+            return self._evaluate_publish_project(state, materials)
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -1615,10 +1819,16 @@ class StandardsEngine:
     def resolve(
         self, call: ResolveCall
     ) -> PendingResult | CompleteResult | RejectedResult:
+        return self._resolve(call)
+
+    def _resolve(
+        self, call: ResolveCall, operation: ProposalMaterials | None = None
+    ) -> PendingResult | CompleteResult | RejectedResult:
         try:
             state = self._load_analysis(call.analysis)
-            successor = self._apply_submission(self._evaluate(state), call)
-            return self._evaluate_publish_project(successor)
+            materials = self._evaluation_materials(state, operation)
+            successor = self._apply_submission(self._evaluate(state, materials), call)
+            return self._evaluate_publish_project(successor, materials)
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -1670,6 +1880,8 @@ class StandardsEngine:
 
     def _compiled_snapshot(self, snapshot: SnapshotId) -> CompiledSnapshot:
         capture = self._snapshots.load_content(snapshot)
+        if self._compiled_cache is not None:
+            return self._compiled_cache.compile_verified(capture, self._compile)
         return self._compile(
             FrozenContentSource(
                 (str(item.path), item.content) for item in capture.files
@@ -1679,25 +1891,31 @@ class StandardsEngine:
     def _compiled_revision(self, revision: ProposalRevision) -> CompiledSnapshot:
         return self._proposal_projection(revision).compiled
 
-    def _proposal_projection(self, revision: ProposalRevision) -> LogicalProjection:
-        capture = self._snapshots.load_content(revision.base_snapshot)
-        base = FrozenContentSource(
-            (str(item.path), item.content) for item in capture.files
+    def _proposal_projection(
+        self,
+        revision: ProposalRevision,
+        accepted: CompiledSnapshot | None = None,
+        *,
+        reuse: bool = False,
+        predecessor: LogicalProjection | None = None,
+    ) -> LogicalProjection:
+        accepted = (
+            self._compiled_snapshot(revision.base_snapshot)
+            if accepted is None
+            else accepted
         )
+        if reuse and self._compiled_cache is not None:
+            return self._compiled_cache.project_verified(
+                revision, accepted, self._logical_authoring, predecessor=predecessor,
+            )
         return self._logical_authoring.compile(
-            base,
+            accepted.source,
             LogicalProgram(revision.change_sets),
             base_snapshot=str(revision.base_snapshot),
             base_repository_paths=revision.base_repository_paths,
+            compiled_base=accepted,
+            predecessor=predecessor if reuse else None,
         )
-
-    def _validate_logical_revision(self, revision: ProposalRevision) -> None:
-        self._proposal_projection(revision)
-
-    def _repository_paths_for_snapshot(self, snapshot: SnapshotId) -> tuple[str, ...]:
-        capture = self._snapshots.load_content(snapshot)
-        revision = RepositoryRevision(capture.source_revision)
-        return tuple(str(path) for path in self._repository.revision_paths(revision))
 
     @staticmethod
     def _compile(source: ContentSource) -> CompiledSnapshot:
@@ -1759,24 +1977,87 @@ class StandardsEngine:
             tuple(authorizations[key] for key in sorted(authorizations)),
         )
 
-    def _evaluate(self, state: DomainAnalysisState) -> AnalysisEvaluation:
-        accepted = self._compiled_snapshot(state.base_snapshot)
+    def _evaluation_materials(
+        self, state: DomainAnalysisState, operation: ProposalMaterials | None = None
+    ) -> _EvaluationMaterials:
+        accepted = (
+            self._compiled_snapshot(state.base_snapshot)
+            if operation is None else operation.compiled(state.base_snapshot)
+        )
         proposed_ref = state.proposed_material
         if isinstance(proposed_ref, SnapshotMaterialRef):
-            proposed = self._compiled_snapshot(proposed_ref.snapshot)
-            revision = None
+            proposed = (
+                accepted
+                if proposed_ref.snapshot == state.base_snapshot
+                else self._compiled_snapshot(proposed_ref.snapshot)
+            )
+            return _EvaluationMaterials(
+                state.base_snapshot, proposed_ref, accepted, proposed
+            )
+        revision = self._authoring.read_revision(proposed_ref.revision_id)
+        if revision.base_snapshot != state.base_snapshot:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.MATERIAL_BASE_MISMATCH",
+                    "invalid",
+                    "Proposal revision and analysis base snapshots differ.",
+                )
+            )
+        projection = (
+            self._proposal_projection(revision, accepted)
+            if operation is None else operation.projection(revision)
+        )
+        return _EvaluationMaterials(
+            state.base_snapshot,
+            proposed_ref,
+            accepted,
+            projection.compiled,
+            revision,
+            projection,
+        )
+
+    def _evaluate(
+        self,
+        state: DomainAnalysisState,
+        materials: _EvaluationMaterials | None = None,
+    ) -> AnalysisEvaluation:
+        if materials is None:
+            materials = self._evaluation_materials(state)
+        if (
+            materials.base_snapshot != state.base_snapshot
+            or materials.proposed_material != state.proposed_material
+        ):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.MATERIAL_INPUT_MISMATCH",
+                    "invalid",
+                    "Borrowed analysis material belongs to different immutable inputs.",
+                )
+            )
+        # A submission/provider can change live access while the immutable bytes
+        # remain valid. Recheck lifecycle and revision authority at every decision
+        # evaluation; only byte validation and pure compilation are reused.
+        self._snapshots.snapshot(state.base_snapshot)
+        if isinstance(state.proposed_material, SnapshotMaterialRef):
+            if state.proposed_material.snapshot != state.base_snapshot:
+                self._snapshots.snapshot(state.proposed_material.snapshot)
         else:
-            revision = self._authoring.read_revision(proposed_ref.revision_id)
-            if revision.base_snapshot != state.base_snapshot:
+            current = self._authoring.read_revision(state.proposed_material.revision_id)
+            if current != materials.revision:
                 raise AnalysisError(
                     AnalysisFailure(
-                        "ANALYSIS.MATERIAL_BASE_MISMATCH",
+                        "ANALYSIS.MATERIAL_INPUT_MISMATCH",
                         "invalid",
-                        "Proposal revision and analysis base snapshots differ.",
+                        "The current stored revision differs from borrowed analysis material.",
                     )
                 )
-            proposed = self._proposal_projection(revision).compiled
-        return self._evaluate_compiled(state, accepted, proposed, revision)
+        return self._evaluate_compiled(
+            state,
+            materials.accepted,
+            materials.proposed,
+            materials.revision,
+            materials.projection,
+        )
 
     def _evaluate_compiled(
         self,
@@ -1784,10 +2065,16 @@ class StandardsEngine:
         accepted: CompiledSnapshot,
         proposed: CompiledSnapshot,
         revision: ProposalRevision | None = None,
+        projection: LogicalProjection | None = None,
     ) -> AnalysisEvaluation:
         proposed_ref = state.proposed_material
         if isinstance(proposed_ref, ProjectedRevisionMaterialRef):
-            if revision is None or revision.revision_id != proposed_ref.revision_id:
+            if (
+                revision is None
+                or revision.revision_id != proposed_ref.revision_id
+                or projection is None
+                or projection.compiled is not proposed
+            ):
                 raise AnalysisError(
                     AnalysisFailure(
                         "ANALYSIS.MATERIAL_INPUT_MISMATCH",
@@ -1795,7 +2082,7 @@ class StandardsEngine:
                         "Resolved proposal revision does not match the analysis state.",
                     )
                 )
-            self._validate_projected_inputs(state, revision, accepted, proposed)
+            self._validate_projected_inputs(state, accepted, proposed, projection)
         return evaluate_analysis(
             state,
             self._analysis_material(SnapshotMaterialRef(state.base_snapshot), accepted),
@@ -1822,11 +2109,10 @@ class StandardsEngine:
     def _validate_projected_inputs(
         self,
         state: DomainAnalysisState,
-        revision: ProposalRevision,
         accepted: CompiledSnapshot,
         proposed: CompiledSnapshot,
+        projection: LogicalProjection,
     ) -> None:
-        projection = self._proposal_projection(revision)
         semantic_proposals = projection.semantic_proposals
         affected_policy_ids = set(projection.analysis_policy_ids)
         affected_policy_ids.update(str(item["policy"]) for item in semantic_proposals)
@@ -1930,10 +2216,11 @@ class StandardsEngine:
     def _evaluate_publish_project(
         self,
         state: DomainAnalysisState,
-        evaluation: AnalysisEvaluation | None = None,
+        materials: _EvaluationMaterials | None = None,
     ) -> PendingResult | CompleteResult:
-        evaluation = self._evaluate(state) if evaluation is None else evaluation
-        state, evaluation = self._apply_providers(state, evaluation)
+        materials = self._evaluation_materials(state) if materials is None else materials
+        evaluation = self._evaluate(state, materials)
+        state, evaluation = self._apply_providers(state, evaluation, materials)
         self._snapshots.publish_aggregate(
             state.aggregate(self._analysis_children(evaluation))
         )
@@ -1943,6 +2230,7 @@ class StandardsEngine:
         self,
         state: DomainAnalysisState,
         evaluation: AnalysisEvaluation,
+        materials: _EvaluationMaterials,
     ) -> tuple[DomainAnalysisState, AnalysisEvaluation]:
         while evaluation.pending_requirements:
             applied = False
@@ -2071,7 +2359,7 @@ class StandardsEngine:
                             authorization.as_contract(),
                         ),
                     )
-                    evaluation = self._evaluate(state)
+                    evaluation = self._evaluate(state, materials)
                     applied = True
                     break
                 if applied:
@@ -2125,6 +2413,7 @@ class StandardsEngine:
         self,
         state: DomainAnalysisState,
         prior: AnalysisHandle,
+        materials: _EvaluationMaterials,
     ) -> DomainAnalysisState:
         previous = self._load_analysis(prior)
         if previous.execution_contracts != state.execution_contracts:
@@ -2154,7 +2443,7 @@ class StandardsEngine:
                     }
                 )
                 try:
-                    self._evaluate(candidate)
+                    self._evaluate(candidate, materials)
                 except AnalysisError as error:
                     if error.failure.code == "ANALYSIS.INVALID_RETAINED_DECISION":
                         continue
@@ -3461,6 +3750,8 @@ class StandardsEngine:
         application: ProposalApplication,
         code: str,
         message: str,
+        *,
+        details: Mapping[str, object] | None = None,
     ) -> ApplicationRecoveryRequiredResult:
         return ApplicationRecoveryRequiredResult.from_value(
             {
@@ -3470,6 +3761,7 @@ class StandardsEngine:
                 "code": code,
                 "outcome": "unavailable",
                 "message": message,
+                **({"details": dict(details)} if details is not None else {}),
             }
         )
 
@@ -3531,6 +3823,12 @@ class StandardsEngine:
                 details={key: value for key, value in diagnostic.as_dict().items()
                          if key not in {"code", "outcome", "message"}},
             )
+        if isinstance(error, GitRepositoryError) and error.failure.command is not None:
+            return cls._reject(
+                error.failure.code, error.failure.kind,
+                "The Git command failed; inspect the bounded command observation.",
+                details=_recovery_failure_details(error),
+            )
         failure = getattr(error, "failure", None)
         if failure is None:
             raise error
@@ -3563,6 +3861,20 @@ class StandardsEngine:
                 "next_operations": [],
             }
         )
+
+
+def _recovery_failure_details(error: Exception) -> dict[str, object]:
+    """Project owned diagnostic fields, preserving raw error text privately."""
+    failure = getattr(error, "failure", None)
+    if failure is None:
+        return {"cause_code": type(error).__name__}
+    details: dict[str, object] = {
+        "cause_code": failure.code,
+        "cause_outcome": getattr(failure, "outcome", getattr(failure, "kind", "unavailable")),
+    }
+    if isinstance(error, GitRepositoryError) and failure.command is not None:
+        details.update({f"git_{key}": value for key, value in failure.command.as_contract().items()})
+    return details
 
 
 def _verification_failure_details(

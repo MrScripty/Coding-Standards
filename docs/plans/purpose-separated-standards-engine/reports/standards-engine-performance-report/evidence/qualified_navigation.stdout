@@ -1,0 +1,2 @@
+START test_navigation.NavigationTest.test_live_worktree_mutation_cannot_change_snapshot_reads
+END test_navigation.NavigationTest.test_live_worktree_mutation_cannot_change_snapshot_reads 23.633 pass

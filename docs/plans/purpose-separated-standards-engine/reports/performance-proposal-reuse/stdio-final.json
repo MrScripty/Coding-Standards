@@ -1,0 +1,330 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "executable_sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+  "observations": [
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "operation": "initialization",
+      "wall_seconds": 0.6160213130001466
+    },
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.8905703899999935,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 2.739713920999975,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 2.7555031019999205,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 2.690861086000041,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 2.5473295060000964,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 0,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 2.635224705999917,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "operation": "initialization",
+      "wall_seconds": 0.6222455590000209
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.785306965000018,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.3055896329999541,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.19540566699993178,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28874681100001,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.19413544400003957,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 0,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.2831834829999025,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "operation": "initialization",
+      "wall_seconds": 0.6256709520000641
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.814401781000015,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.3219053329999042,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.19215867299999445,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.29004855299990595,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.19281509000006736,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 1,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.2951541410000118,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "operation": "initialization",
+      "wall_seconds": 0.5732917230000112
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.7956150580000667,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 2.648928900000101,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 2.490718859000026,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 2.6540319319999526,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 2.6931998620000286,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 1,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 2.790701533999936,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "operation": "initialization",
+      "wall_seconds": 0.62190619099988
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.81690493699989,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 2.6910319449998497,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 2.633001178000086,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 2.7574505549998776,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 2.5598277569999937,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "baseline",
+      "sample": 2,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 2.7201232970001,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "operation": "initialization",
+      "wall_seconds": 0.6265571010001167
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.801389307999898,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.31236002300011023,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.1865453460000026,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28475041199999396,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.18965904799983946,
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8"
+    },
+    {
+      "implementation": "candidate",
+      "sample": 2,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.2832762289999664,
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95"
+    }
+  ]
+}

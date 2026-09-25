@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from ..paths import contained_file
 from .markdown_links import local_markdown_targets
 
@@ -18,7 +18,7 @@ class MarkdownTargetsCheck:
     required: tuple[str, ...]
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         return present_inputs("markdown", self.path) + present_inputs(
             "target", *self.required

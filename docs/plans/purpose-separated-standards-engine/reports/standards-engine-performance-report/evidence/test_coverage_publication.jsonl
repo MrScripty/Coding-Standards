@@ -1,0 +1,3 @@
+{"event": "start", "test": "test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database", "at": 1790192685.047487}
+{"event": "end", "test": "test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database", "wall_s": 35.84236262799982, "cpu_s": 3.2044950429999997, "status": "failure", "spans": {"tools.standards_engine.standards_engine.tools._contracts": {"calls": 1, "inclusive_s": 0.32440961099996457}}, "setup_s": 1.452000105928164e-06, "body_s": 35.840825042999995, "teardown_s": 2.9850000373699004e-06}
+{"event": "summary", "total_s": 37.308470527000054, "run": 1, "errors": 0, "failures": 1, "skips": 0}

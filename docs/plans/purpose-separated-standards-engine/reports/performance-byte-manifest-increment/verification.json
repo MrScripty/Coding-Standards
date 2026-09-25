@@ -1,0 +1,206 @@
+[
+  {
+    "package": "standards_engine",
+    "seconds": 447.3258253590002,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_engine/tests"
+    ],
+    "tests": 178,
+    "unittest_seconds": 446.654,
+    "skipped": 0
+  },
+  {
+    "package": "graph_engine",
+    "seconds": 0.2619696850001674,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/graph_engine/tests"
+    ],
+    "tests": 37,
+    "unittest_seconds": 0.163,
+    "skipped": 0
+  },
+  {
+    "package": "repository_git",
+    "seconds": 1.551024043000325,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/repository_git/tests"
+    ],
+    "tests": 16,
+    "unittest_seconds": 1.466,
+    "skipped": 0
+  },
+  {
+    "package": "standards_analysis",
+    "seconds": 1.214660425999682,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_analysis/tests"
+    ],
+    "tests": 100,
+    "unittest_seconds": 0.667,
+    "skipped": 0
+  },
+  {
+    "package": "standards_applicability",
+    "seconds": 0.06773129900011554,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_applicability/tests"
+    ],
+    "tests": 12,
+    "unittest_seconds": 0.014,
+    "skipped": 0
+  },
+  {
+    "package": "standards_contracts",
+    "seconds": 22.7793129759998,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_contracts/tests"
+    ],
+    "tests": 23,
+    "unittest_seconds": 22.665,
+    "skipped": 1
+  },
+  {
+    "package": "standards_graph",
+    "seconds": 0.1809301900002538,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_graph/tests"
+    ],
+    "tests": 2,
+    "unittest_seconds": 0.067,
+    "skipped": 0
+  },
+  {
+    "package": "standards_identity",
+    "seconds": 0.19765231199971822,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_identity/tests"
+    ],
+    "tests": 16,
+    "unittest_seconds": 0.121,
+    "skipped": 0
+  },
+  {
+    "package": "standards_metadata",
+    "seconds": 0.7223698359998707,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_metadata/tests"
+    ],
+    "tests": 31,
+    "unittest_seconds": 0.304,
+    "skipped": 0
+  },
+  {
+    "package": "standards_policy_impact",
+    "seconds": 0.49996840699986933,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_policy_impact/tests"
+    ],
+    "tests": 10,
+    "unittest_seconds": 0.375,
+    "skipped": 0
+  },
+  {
+    "package": "standards_snapshots",
+    "seconds": 0.151160493000134,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_snapshots/tests"
+    ],
+    "tests": 23,
+    "unittest_seconds": 0.071,
+    "skipped": 0
+  },
+  {
+    "package": "standards_verifier",
+    "seconds": 5.9437179609999475,
+    "returncode": 0,
+    "command": [
+      "/mnt/data/next-performance-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-v",
+      "-s",
+      "tools/standards_verifier/tests"
+    ],
+    "tests": 168,
+    "unittest_seconds": 5.501,
+    "skipped": 0
+  }
+]

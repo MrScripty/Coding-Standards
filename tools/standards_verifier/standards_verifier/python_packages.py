@@ -19,6 +19,9 @@ from tools.repository_git.repository_git import (
 )
 
 
+from .input_sources import SuiteInputSource, input_source
+from .diagnostics import EngineError
+
 _PYTHON_RANGE = ">=3.11,<3.13"
 _DEPENDENCY_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
 _IMPORT_MACHINERY_ROOTS = frozenset(
@@ -90,14 +93,13 @@ def _dependency_name(requirement: str) -> str:
 
 
 def _load_contract(
-    root: Path,
+    root: Path | SuiteInputSource,
     manifest: str,
 ) -> tuple[PythonPackageContract | None, list[PythonPackageFinding]]:
     findings: list[PythonPackageFinding] = []
     try:
-        with (root / manifest).open("rb") as source:
-            raw = tomllib.load(source)
-    except (OSError, tomllib.TOMLDecodeError) as error:
+        raw = tomllib.loads(input_source(root).read_bytes(manifest).decode("utf-8"))
+    except (OSError, tomllib.TOMLDecodeError, EngineError) as error:
         return None, [
             PythonPackageFinding(
                 "PYTHON_PACKAGE.MANIFEST_UNAVAILABLE",
@@ -1219,9 +1221,9 @@ def audit_python_packages(root: Path) -> tuple[PythonPackageFinding, ...]:
     return tuple(findings)
 
 
-def python_package_authority_paths(root: Path) -> tuple[str, ...]:
-    repository = root.resolve()
-    indexed = indexed_paths(repository)
+def python_package_authority_paths(root: Path | SuiteInputSource) -> tuple[str, ...]:
+    repository = input_source(root)
+    indexed = repository.indexed_paths()
     selected = {
         path
         for path in indexed

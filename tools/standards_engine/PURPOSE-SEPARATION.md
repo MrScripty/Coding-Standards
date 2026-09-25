@@ -13,7 +13,7 @@ Authorization remains the existing independent injected contract. The local
 facade is an owner-operated always-allow authorization adapter for admitted
 authoring operations; this release does not supply a multi-user access service.
 
-Application operations are `route`, `read`, `related`, `routing_facts`, `query`
+Application operations are `route`, `read`, `read_many`, `related`, `routing_facts`, `query`
 and `inspect`. The focused MCP catalog omits native `query`; `--advanced` can
 expose it within the same purpose. Authoring retains the complete existing
 workflow. Canonical interface operation variants own each purpose's input and
@@ -55,6 +55,176 @@ Old captures lacking the support contract return
 application output). Old Analysis records are unsupported under Analysis 7.
 Existing SQLite storage mechanics and Snapshot handle version 5 remain in use;
 there is no automatic deletion, conversion, alternate old reader or dual write.
+
+## Operation-local performance ownership
+
+Capture owns one bounded exact-revision Git read session for its recorded
+first pass, closes that session, and compiles the frozen replay independently.
+Both the requested-path closure and semantic signature still have to agree.
+The selected accepted-main revision stays fixed throughout that capture.
+
+Analysis preparation and resolution borrow verified immutable inputs for the
+current operation. Identical snapshot roles share one material value; distinct
+roots keep independent lifecycle and content observations. Focused proposal
+creation, revision, analysis and resolution pass one explicit proposal-material
+scope through preflight, prospective validation and native analysis. It retains
+one verified base and only the most recent exact projection; changing revisions
+replaces that projection. Authoring receives its pure preparation dependency
+per invocation while retaining ownership of durable roots and conditional writes.
+
+Each material access checks current snapshot lifecycle. Stored revisions, heads,
+authorization and pre-/post-submission decisions retain their independent checks.
+Changed candidates take the complete compiler path; capture's two passes remain
+independent. Scope cleanup releases retained references on success or failure.
+The scope contains no provider outcomes or evaluation results. Nested public
+re-entry constructs its own scope, and public request shapes remain unchanged.
+
+Each subsequent operation loads and verifies its own captured bytes. Publication
+verification, target compare-and-swap and recovery obtain fresh observations;
+no operation-local material crosses those barriers as permission or readiness.
+Each facade/Engine/SQLite lifetime remains per call. MCP now owns the installed
+interface and a bounded cache of pure snapshot compilation as described below.
+Operation-local workflow state, evaluations and permissions remain per-call.
+Exact draft projection retention is described separately below.
+
+## Process-owned pure reuse
+
+The MCP server compiles its installed API interface once. Discovery and invocation
+consume that same contract, and every request still uses the complete generated
+decoder and current purpose-qualified result checks. The interface describes the
+installed implementation, not the accepted standards revision. Replacing Engine
+code or its API schema requires a controlled process restart. Ordinary standards
+publication keeps the installed interface valid. Standalone facades prepare their
+own interface unless their trusted owner supplies an already prepared one.
+
+One MCP process also owns a repository/purpose-scoped compilation cache with a
+two-entry and 32 MiB accounted-retention limit shared by snapshot and draft
+projection entries. Snapshot keys contain the exact verified
+captured paths, bytes and source revision, plus the installed compiler function.
+Python dictionary equality distinguishes hash collisions. Each new operation
+opens and validates its store, checks snapshot lifecycle and verifies complete
+content identity before lookup. Missing, quarantined, purged, replaced or corrupt
+storage therefore remains observable. Equal verified inputs may share pure
+compilation even when obtained from distinct store roots; store-specific handles,
+access checks and result envelopes remain fresh. No store facts enter the cache.
+
+Successful full compilation is eligible for retention. The cache has no negative
+entries, response objects, live authorization/provider outcomes, mutable proposal
+heads, readiness or publication outcomes. Snapshot-bound attestations and exposure
+declarations remain part of that historical material; they grant no new access.
+Eviction, oversized inputs and entries whose retained size cannot be established use the normal verified computation. The accounting
+walk charges reachable Python data once per entry, includes captured bytes and
+mapping tables, and conservatively charges inter-entry sharing separately. It
+materializes pathlib value caches before accounting. Imported implementation
+code and bounded LRU bookkeeping are separate from the per-entry budget. The
+budget is not a process-RSS or transient-working-memory limit.
+
+Capture always resolves accepted main and runs both independent live/frozen
+compiler passes and closure checks. Neither pass consults the cache. A later
+explicit read may reuse only a compilation of its own fully verified capture.
+Advancing main affects new captures; historical snapshots preserve their captured
+material. Publication candidate verification and recovery keep their existing
+fresh observations. Each new process starts empty and reconstructs correctly.
+
+The transport retains serial dispatch and opens/closes a fresh facade and SQLite
+connection for each call. Pure cached structures are read-only through their
+owned interfaces; each response and continuation is newly constructed. The cache
+is not a thread-safety guarantee for concurrent use of one Engine. Independent
+server processes retain separate fixed-purpose resources. Stream EOF or failure
+releases the server-owned interface, catalog and cache; closing a borrowing Engine
+closes its store without releasing the owner's cache.
+
+## Exact draft projection reuse
+
+Draft reads, analysis, status, creation/revision preparation and focused resolution
+can retain the pure projection of one exact immutable proposal revision. They use
+the existing compilation-cache owner and its shared two-entry / 32 MiB budget.
+One base plus one current draft fits the measured workload; older entries can be
+evicted normally. The runtime adds no persistent cache or new wire format.
+
+Each new public call reads the actual stored revision/root and fully validates its
+original captured base before lookup. The key binds exact base bytes/paths, the
+existing canonical representation of the complete revision (original snapshot,
+repository membership, proposal identity, ordinal and all change sets), and the
+installed replay recipe. Static compiler implementations qualify; custom stateful
+adapters execute cold. The compiler's original accepted base remains the semantic
+comparison authority. On an exact-revision miss, an eligible verified prefix may
+supply successor construction as described below. Without one, the entire program
+replays with all normal checks.
+
+Retained semantic-intent maps are private copies. Each operation receives fresh
+intent maps and result envelopes while sharing read-only sources and compiled
+structures. Status and pre-/post-submission evaluations still run. Authorization,
+evidence, snapshot lifecycle, proposal-head observations and conditional writes
+remain current. A prospective projection retained before a failed publication is
+only reusable computation: its handle still requires a real stored revision/root.
+
+Review, candidate verification, application and recovery retain their existing
+fresh replay paths. New snapshot capture retains both independent compiler passes.
+Main advancement affects new captures, never the base of an existing draft. Old
+explicit revisions retain historical meaning and can have live stale status.
+Corruption, quarantine, purge or missing/replaced stores reject before projection
+reuse. Server restart reconstructs cold, and close releases both entry kinds.
+
+### Incremental successor construction
+
+The logical compiler can copy a previously verified projection and execute only
+its appended change sets. Eligibility binds the exact original frozen base,
+original snapshot identity, complete base repository membership, canonical
+change-set prefix, installed compiler identity, projected bytes and projected
+membership. The compiler snapshots the program representation into immutable
+inputs, then issues continuation provenance only after successful final compilation
+and cumulative analysis. Caller-owned edit mappings and semantic-intent maps cannot
+rewrite that provenance.
+
+The operation-local owner may offer its last projection. The existing bounded
+cache may offer the immediate predecessor of the same proposal on an exact
+successor miss. Both feed the same compiler-owned eligibility check; neither
+adds a cache, persistent checkpoint, store format or compatibility mode. An
+incompatible or absent prefix selects complete replay, including after eviction
+or restart. A cold focused workflow may first reconstruct its predecessor during
+preflight and then use that newly verified material for the suffix in the same
+operation; it still pays for the first reconstruction.
+
+Successors use a new file table with immutable byte values. All edit semantics,
+manifest membership calculations and cumulative analysis retain the original
+accepted base. Final authority compilation, semantic successor validation and
+complete-program policy/module analysis still run. This is a computation reuse
+boundary, not a new accepted baseline or authorization/publication proof. The
+independent review, candidate-verification, application and recovery paths above
+continue to select full replay.
+
+The deciding structural claim is suffix-only edit execution and manifest
+regeneration for a simple append with an eligible predecessor. Canonical program
+comparison, final compilation, retention accounting and complete analysis remain
+whole-material work. Representative successor-admission latency qualification is
+tracked in the [incremental successor report](../../docs/plans/purpose-separated-standards-engine/reports/performance-incremental-successors.md);
+it is distinct from repeated-read latency or focused-test duration.
+
+## Bounded grouped reads
+
+`read_many` takes one explicit snapshot and 1–32 ordered `items`. Each item has a
+`target` and optional `detail`; authoring also permits the single-read coverage
+and routing options. Exact duplicate requests are invalid. Reuse the snapshot
+returned by routing or a single read, and select only the needed guidance.
+
+The result contains the original snapshot and ordered single-read results.
+One complete durable content/identity validation supplies the whole operation;
+current snapshot lifecycle is checked before every item and before return.
+Purpose, exposure, prerequisite and item-option checks use the ordinary read
+projection. Any failed item or lifecycle observation rejects the entire set.
+No item content is returned on failure. A new independent call verifies durable
+content again. This is a new explicit operation, not a change to single reads.
+
+The complete domain result is bounded to 2 MiB in the transport's default JSON
+encoding (ASCII escaping and default separators); protocol framing, alternate
+pretty-printing and MCP's duplicate structured/text encodings are outside that
+payload bound. A larger set returns `READ_MANY.RESULT_LIMIT` in authoring or
+`APPLICATION.RESULT_LIMIT` in application. Select fewer items or smaller policy
+scopes; the Engine neither truncates material nor substitutes partial success.
+`read_many` uses the named operation through MCP, the reference CLI and the
+native facade; it is not a new request variant inside `query` or `query_proposal`.
+Restart clients/servers after the interface update to discover the new operation.
 
 ## Application qualification
 
@@ -111,6 +281,7 @@ the current generated schema; this table is a navigation aid, not a validator.
 | Read a complete owner or scoped policy | Authoring `read`; inspect metadata/relationships as needed |
 | Revise module body and metadata | `revise-standard` |
 | Relocate/rescope registered headings in a full rewrite | `revise-standard.scope_updates`, with all existing scope identities and explicit semantics |
+| Register a selected scope within an existing owner | `register-policy-unit`, using the existing canonical module ID and a new policy declaration |
 | Revise one policy scope | `revise-policy-unit` |
 | Create/revise a supplementary reference | `create-standard` / `revise-standard` with the existing reference role |
 | Inspect an existing registered prompt/template | Authoring `read` returns its opaque target handle |
@@ -124,6 +295,19 @@ the current generated schema; this table is a navigation aid, not a validator.
 | Change Router decisions or presentation | Existing routing rule/fact edits |
 | Inspect a draft | Authoring `query_proposal` against its exact revision |
 | Publish the reviewed candidate | Existing explicit `review`, then `apply`; follow `recover` on recovery-required |
+
+Existing-owner registration supports modules with zero or more registered
+policies. It preserves existing prose and declarations, and can follow a
+whole-module rewrite in the same candidate. New scopes are selected explicitly;
+module and existing-policy edits precede the registration group, then consumer
+relationships resolve against the completed registry. Existing canonical scope,
+identity and lifecycle validation applies. Registration alone issues no coverage
+certificate. The same logical program is replayed after restart or through an
+eligible incremental successor; storage and handle editions are unchanged.
+
+The [registration qualification plan](../../docs/plans/existing-policy-registration/plan.md)
+tracks the current source correction and its outstanding full-checkout/MCP
+acceptance. Interface 33 availability does not by itself certify that qualification.
 
 The Engine resolves unordered same-change-set references against the final
 candidate. It stages retirement and withdrawal privately before dependent owner
@@ -141,7 +325,7 @@ those same bytes. The Engine does not rewrite semantic versions after review.
 
 ## Versions and coordinated cutover
 
-Current Engine package/transport implementation: 0.2.0. Engine interface: 31.
+Current Engine package/transport implementation: 0.2.0. Engine interface: 35.
 Analysis request: 6; result/state and Analysis handles: 7. The semantic-revision
 interpretation change belongs to Analysis 7. Unchanged Snapshot, proposal,
 readiness, application and generic identity/storage contracts keep their
@@ -149,12 +333,14 @@ existing independent versions. Updating one implementation does not couple all
 version domains.
 
 Before replacing an installed Engine, inspect active proposals, readiness and
-recovery-required work through its current authoring interface. Complete an
-existing recovery obligation with its owning version, or retain its exact store
-with an explicit operator disposition. Keep retained store bytes and Git history.
-Then install the new code and reconnect clients with purpose-selected launch
-configuration. An explicitly chosen fresh store may capture the accepted source;
-store selection does not convert old proposal records into new-format state.
+recovery-required work through its current authoring interface. A replacement
+supporting the same retained record formats can resume them through its documented
+recovery path; interface 35 preserves those formats. When a retained format is
+unsupported, complete its recovery with the owning implementation or preserve its
+exact store under an explicit operator disposition. Keep store bytes and Git
+history. Install current code/schemas and reconnect with purpose-selected launch
+configuration. A fresh store does not carry an admitted application and is not a
+recovery procedure. Store selection never converts old proposal records.
 
 For pre-merge qualification, use a disposable clone whose local `main` identifies
 the exact candidate. Avoid retargeting the user's real accepted branch merely to
@@ -179,3 +365,77 @@ purposes and interrupted-publication recovery using a separately supplied client
 environment. The configured Codex adapter test names the authoring registration
 with `--server`. Pinned-platform/client acceptance and independent review are
 reported separately from supporting tests in another Python environment.
+
+## Proposal consumer inputs and application preview (interface 34)
+
+Use `register-consumer` inside `propose` or `revise` to declare an existing
+tracked consumer. The Engine captures its original proposal-base bytes before
+admission, retaining them in the immutable logical edit. Replay uses those bytes,
+not the working tree or a later accepted revision. Registration, newly created
+policy scopes and their consumer relationships can share one candidate. An
+explicit relationship uses the registered canonical consumer ID. Registration
+neither claims complete coverage nor creates a review certificate.
+
+The content editor supports registered Markdown documentation as well as prompts
+and templates. Hidden directories have the same repository containment and
+tracked-file requirements. Fixture and implementation consumers remain read-only
+through this editor. Original file bytes supply publication's baseline; an
+unchanged registered source is not rewritten. Fixture bytes, unrelated policy
+identities and prior proposal records remain intact.
+
+An authoring caller uses `preview_application` with the exact draft revision and
+one application read, route or related request. Candidate results carry that
+revision, without published-snapshot or snapshot-child handles. Their
+continuations remain candidate previews. The same application view enforces
+qualification, prerequisite closure and graph filtering. A missing qualification
+is a candidate-application rejection, not partial acceptance. Normal application
+sessions retain their published-only operation set.
+
+`maintain_evidence` remains accepted-repository maintenance, not draft mutation.
+Use logical registration for draft-only scopes. After installing this change,
+restart the actual MCP server and reconnect the client; initialization reports
+the current interface edition and configured purpose. Existing workflow-response verbosity
+and hot catalog replacement are not changed by this capability.
+
+
+## Admitted publication recovery (interface 35)
+
+Use `recover` with the original readiness context after an interrupted or failed
+publication. Its default `observe` action reads the exact selected application;
+it may record a durable applied outcome when the target is already the candidate,
+but it performs no Git write. The native equivalent is `recover_application`.
+
+When the target is still the expected revision, an authorized operator can select
+`action: "complete-publication"`. This action reconstructs from the original
+captured proposal and reviewed coverage, requires the exact already-admitted
+commit ID, reruns complete verification, checks current readiness and both recovery
+and application permission, and makes one expected-target publication attempt.
+It keeps the existing application selection. Changed candidate content, stale
+readiness, inaccessible evidence, denied authority and a competing target stay
+explicitly unresolved. A target already at the candidate is reconciled without
+another write. A failed outcome write after Git success is completed by the next
+observation. Focused and native repeated recovery return the applied result.
+
+An unchanged target does not establish that no prior publication occurred.
+Explicit completion authorizes re-establishing the candidate at that target; it
+is not a historical exactly-once claim. The Engine never removes a lock, changes
+permissions, resets the store, forces the branch, or substitutes a newer draft.
+
+The implementation process needs a Git-writable authorized host for the same
+repository and store. Install Engine source without moving the real accepted ref
+merely for installation: an admitted application is still bound to its original
+expected target. Restart the server process and reconnect before reading the
+interface-35 recovery schema. Install the current code and interface schemas
+together in the implementation checkout, while leaving its accepted `main` at
+the admitted expected revision. The facade loads interface schemas from
+`--repo-root`; selecting a different Python module path alone does not update
+those schemas. Store selection must remain unchanged if the installed host used
+a nondefault store. Handoff data is the exact readiness/context, not a fabricated
+handle assembled from a truncated identifier.
+
+Authoring failure details carry the Git operation, exit code and recognized
+fixed stderr phrase when available. Raw stderr can contain sensitive paths or
+hook output and stays in the private Git exception, not the MCP response. Earlier
+uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
+observation from the supported operation on the correct host. Ordinary application
+interfaces still cannot call either recovery operation or read its diagnostics.

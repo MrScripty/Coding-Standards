@@ -1,0 +1,29 @@
+E..
+======================================================================
+ERROR: test_closed_store_round_trip_uses_public_operations (test_platform_harness.PlatformHarnessTest.test_closed_store_round_trip_uses_public_operations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/engine-performance/harness/run_timed_suite.py", line 36, in timed
+    try:return _fn(self,*args,**kwargs)
+               ~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/unittest/case.py", line 606, in _callTestMethod
+    if method() is not None:
+       ~~~~~~^^
+  File "/mnt/data/engine-performance/module-checkouts/test_platform_harness/tools/standards_engine/tests/test_platform_harness.py", line 26, in test_closed_store_round_trip_uses_public_operations
+    produced = produce(REPOSITORY_ROOT, producer_store, producer_manifest)
+  File "/mnt/data/engine-performance/module-checkouts/test_platform_harness/tools/standards_engine/tests/platform_harness.py", line 254, in produce
+    prepared = _expect(
+        facade.call(
+    ...<4 lines>...
+        "prepare",
+    )
+  File "/mnt/data/engine-performance/module-checkouts/test_platform_harness/tools/standards_engine/tests/platform_harness.py", line 149, in _expect
+    raise HarnessError(
+    ...<2 lines>...
+    )
+tools.standards_engine.tests.platform_harness.HarnessError: prepare rejected with INTERFACE.INVALID_ARGUMENTS (invalid): CONTRACT.INVALID_INSTANCE: value does not satisfy the selected public contract
+
+----------------------------------------------------------------------
+Ran 3 tests in 28.085s
+
+FAILED (errors=1)

@@ -1,0 +1,36 @@
+[
+  {
+    "side": "baseline",
+    "returncode": 0,
+    "seconds": 82.25928002899991,
+    "command": [
+      "/opt/pyvenv/bin/python",
+      "/mnt/data/nested-reuse-work/repo/docs/plans/purpose-separated-standards-engine/reports/performance-nested-increment/measure_nested.py",
+      "--source",
+      "/mnt/data/nested-reuse-work/baseline-repo",
+      "--fixture-source",
+      "/mnt/data/nested-reuse-work/baseline-repo",
+      "--output",
+      "/mnt/data/nested-reuse-work/evidence/final-baseline.jsonl",
+      "--repeats",
+      "3"
+    ]
+  },
+  {
+    "side": "candidate",
+    "returncode": 0,
+    "seconds": 56.43830427900002,
+    "command": [
+      "/opt/pyvenv/bin/python",
+      "/mnt/data/nested-reuse-work/repo/docs/plans/purpose-separated-standards-engine/reports/performance-nested-increment/measure_nested.py",
+      "--source",
+      "/mnt/data/nested-reuse-work/repo",
+      "--fixture-source",
+      "/mnt/data/nested-reuse-work/baseline-repo",
+      "--output",
+      "/mnt/data/nested-reuse-work/evidence/final-candidate.jsonl",
+      "--repeats",
+      "3"
+    ]
+  }
+]

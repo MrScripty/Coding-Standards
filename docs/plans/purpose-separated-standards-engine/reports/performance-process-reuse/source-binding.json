@@ -1,0 +1,14 @@
+{
+  "base_commit": "b81a5aae2eb72fb976b0570a4dab76d30e531fe4",
+  "base_tree": "3dee4d4cfe2e1a16c6a442557f6f7609ada416ff",
+  "final_focused_qualification_commit": "0df48da8ceb9d461e1cac7be21c5a4e0b8ca97b6",
+  "files_sha256": {
+    "tools/standards_engine/standards_engine/tools.py": "2f38454dfebd1bd5813f380f093c97a3cca584be8de2db9a3482ce0dec9a761c",
+    "tools/standards_engine/standards_engine/mcp.py": "648cb500ff3a53aaa95793768d254395528157178d7ebbab4dc33fd40ae78b98",
+    "tools/standards_engine/standards_engine/engine.py": "6a57f1f1b179cbe85c4491d8fcf8baabc25c1c3587261973067fbaa800d49f7e",
+    "tools/standards_engine/standards_engine/compiled_cache.py": "834629773d98efb9dbc8461c9926eb58851b9ab5ebfa94938a08d410ce2d02a5",
+    "tools/standards_engine/tests/test_process_reuse.py": "13880c3f3fb9ae476037f3ccc7ebe63a71b20dbf00c486ce9adaf47040e6e6aa"
+  },
+  "python_3_11_grammar": "passed; this is not Python 3.11 execution",
+  "scope": "Private disposable candidate main. Exact production and new regression hashes match the delivered source."
+}

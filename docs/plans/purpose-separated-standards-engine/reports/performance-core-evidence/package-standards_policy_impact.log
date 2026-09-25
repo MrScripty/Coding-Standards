@@ -1,0 +1,15 @@
+test_compiled_authority_joins_module_and_policy_unit_graph_sources (test_compiler.PolicyImpactCompilerTest.test_compiled_authority_joins_module_and_policy_unit_graph_sources) ... ok
+test_conditional_relationship_compiles_and_evaluates_one_program (test_compiler.PolicyImpactCompilerTest.test_conditional_relationship_compiles_and_evaluates_one_program) ... ok
+test_consumer_review_requires_the_new_contract_and_legacy_suites_still_load (test_compiler.PolicyImpactCompilerTest.test_consumer_review_requires_the_new_contract_and_legacy_suites_still_load) ... ok
+test_contract_derived_relation_target_matrix_is_complete (test_compiler.PolicyImpactCompilerTest.test_contract_derived_relation_target_matrix_is_complete) ... ok
+test_contract_owns_required_evidence_and_decodes_optionals_strictly (test_compiler.PolicyImpactCompilerTest.test_contract_owns_required_evidence_and_decodes_optionals_strictly) ... ok
+test_edge_identity_is_injective_for_separator_bearing_ids (test_compiler.PolicyImpactCompilerTest.test_edge_identity_is_injective_for_separator_bearing_ids) ... ok
+test_invalid_declarations_reject_with_typed_failures (test_compiler.PolicyImpactCompilerTest.test_invalid_declarations_reject_with_typed_failures) ... ok
+test_relationship_sources_require_exact_active_owner_policy_units (test_compiler.PolicyImpactCompilerTest.test_relationship_sources_require_exact_active_owner_policy_units) ... ok
+test_repository_declarations_compile_one_graph_and_semantics_view (test_compiler.PolicyImpactCompilerTest.test_repository_declarations_compile_one_graph_and_semantics_view) ... ok
+test_v1_and_dual_authority_inputs_reject_without_compatibility (test_compiler.PolicyImpactCompilerTest.test_v1_and_dual_authority_inputs_reject_without_compatibility) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.331s
+
+OK

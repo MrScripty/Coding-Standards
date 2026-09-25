@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 31,
+  "interface_schema_version": 35,
   "examples": [
     {
       "name": "create-snapshot",
@@ -687,6 +687,81 @@
           "child_kind": "policy",
           "child_id": "core",
           "schema_version": 5
+        }
+      }
+    },
+    {
+      "name": "read-many",
+      "definition": "ReadManyCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "items": [
+          {
+            "target": "core"
+          },
+          {
+            "target": "router",
+            "detail": "full"
+          }
+        ]
+      }
+    },
+    {
+      "name": "application-read-many",
+      "definition": "ApplicationReadManyCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "items": [
+          {
+            "target": "core"
+          },
+          {
+            "target": "router",
+            "detail": "full"
+          }
+        ]
+      }
+    },
+    {
+      "name": "register-existing-policy-unit",
+      "definition": "RegisterPolicyUnitEdit",
+      "value": {
+        "kind": "register-policy-unit",
+        "standard": "topic.contracts",
+        "policy_unit": {
+          "id": "topic.contracts.registration-example",
+          "heading_chain": [
+            "Example Scope"
+          ],
+          "semantic_revision": 1,
+          "intent": "Give the explicitly selected existing scope a stable review identity.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      }
+    },
+    {
+      "name": "preview-qualified-candidate",
+      "definition": "PreviewApplicationCall",
+      "value": {
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "schema_version": 1
+        },
+        "request": {
+          "kind": "read",
+          "target": "core",
+          "detail": "compact"
         }
       }
     }

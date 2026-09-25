@@ -75,7 +75,7 @@ class PurposeTransportTest(unittest.TestCase):
     def test_cli_catalog_schema_example_and_denial_share_the_purpose(self):
         listing = self.cli("application", "--list")
         self.assertEqual(listing.returncode, 0, listing.stderr)
-        self.assertEqual(set(listing.stdout.splitlines()), {"route", "read", "related", "routing_facts", "query", "inspect"})
+        self.assertEqual(set(listing.stdout.splitlines()), {"route", "read", "read_many", "related", "routing_facts", "query", "inspect"})
         for option in ("--schema", "--example"):
             result = self.cli("application", option, "read")
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -106,7 +106,7 @@ class PurposeTransportTest(unittest.TestCase):
         self.assertEqual(process.stderr, "")
         self.assertNotIn(PRIVATE, process.stdout)
         values = {value["id"]: value for value in map(json.loads, process.stdout.splitlines())}
-        self.assertEqual({tool["name"] for tool in values[2]["result"]["tools"]}, {"route", "read", "related", "routing_facts", "query", "inspect"})
+        self.assertEqual({tool["name"] for tool in values[2]["result"]["tools"]}, {"route", "read", "read_many", "related", "routing_facts", "query", "inspect"})
         allowed = values[3]["result"]
         self.assertFalse(allowed["isError"])
         self.assertEqual(allowed["structuredContent"]["content"], self.expected)

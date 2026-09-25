@@ -1,4 +1,4 @@
-from .errors import FailureKind, GitRepositoryError, GitRepositoryFailure
+from .errors import FailureKind, GitCommandObservation, GitRepositoryError, GitRepositoryFailure
 from .model import (
     CandidateCommitMessage,
     CandidateFile,
@@ -14,6 +14,7 @@ from .repository import (
     COMMAND_TIMEOUT_SECONDS,
     DEFAULT_OUTPUT_LIMIT,
     GitRepository,
+    RevisionReadSession,
     git_command,
     git_output,
     indexed_paths,
@@ -30,7 +31,9 @@ __all__ = (
     "CapturedFile",
     "FailureKind",
     "GitCommandResult",
+    "GitCommandObservation",
     "GitRepository",
+    "RevisionReadSession",
     "GitRepositoryError",
     "GitRepositoryFailure",
     "GitlinkRepository",

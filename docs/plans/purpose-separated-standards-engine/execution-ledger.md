@@ -121,3 +121,15 @@ failure, but was interrupted in a slow case; five focused post-fix regression
 tests passed. The final generated-input and 73-check structural checkpoints
 passed. This qualification limit is recorded rather than treating the
 interrupted run as a complete post-fix pass.
+
+## September 23, 2026 — Performance design evidence imported
+
+Imported the [performance design and measurement package](reports/standards-engine-performance-report/README.md)
+from `standards-engine-performance-design-and-evidence.zip`. ZIP integrity and
+all packaged SHA-256 checks passed. The package proposes optimizations and
+contains no production code patch. Its measurements target `87507611` in a
+separate environment; the current branch includes later cutover commits and
+the platform-harness contract-version repair described above. Its timings and
+targets therefore remain supporting design evidence, not measured results for
+the current installed Engine. This import makes no runtime, store, or standards
+content change.

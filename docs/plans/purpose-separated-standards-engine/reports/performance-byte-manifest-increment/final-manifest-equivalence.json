@@ -1,0 +1,11 @@
+{
+  "exact_bytes": true,
+  "actual_content_inputs": 417,
+  "repository_paths": 1165,
+  "manifest_bytes": 406921,
+  "manifest_sha256": "2b7979b930bac05dabc5eab2547f81d3e618d3fae49962cbfa093f2440c7ad63",
+  "ambient_path_existence_reads": 0,
+  "filesystem_content_reads": 0,
+  "subprocess_runs": 0,
+  "temporary_materializations": 0
+}

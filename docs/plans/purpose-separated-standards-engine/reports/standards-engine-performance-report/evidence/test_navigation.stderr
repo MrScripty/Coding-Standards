@@ -1,0 +1,20 @@
+.E.....
+======================================================================
+ERROR: test_live_worktree_mutation_cannot_change_snapshot_reads (test_navigation.NavigationTest.test_live_worktree_mutation_cannot_change_snapshot_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/engine-performance/harness/run_timed_suite.py", line 36, in timed
+    try:return _fn(self,*args,**kwargs)
+               ~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/unittest/case.py", line 606, in _callTestMethod
+    if method() is not None:
+       ~~~~~~^^
+  File "/mnt/data/engine-performance/module-checkouts/test_navigation/tools/standards_engine/tests/test_navigation.py", line 297, in test_live_worktree_mutation_cannot_change_snapshot_reads
+    snapshot = created.snapshot.snapshot
+               ^^^^^^^^^^^^^^^^
+AttributeError: 'RejectedResult' object has no attribute 'snapshot'
+
+----------------------------------------------------------------------
+Ran 7 tests in 104.021s
+
+FAILED (errors=1)

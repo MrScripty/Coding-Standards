@@ -23,6 +23,7 @@ from .authoring import (
 
 if TYPE_CHECKING:
     from .engine import StandardsEngine
+    from .operation_materials import ProposalMaterials
 
 
 ACTIONS = {
@@ -40,6 +41,7 @@ INPUTS = {
     "revise": ["change_set"],
     "resolve_workflow": ["submission"],
     "review": ["decisions"],
+    "recover": ["action"],
 }
 
 
@@ -94,7 +96,18 @@ def bind(engine: StandardsEngine, context: c.WorkflowContext) -> BoundWorkflow:
     return BoundWorkflow(context, revision, analysis, readiness)
 
 
-def view(engine, bound, outcome=None):
+def publication_status(engine, readiness):
+    """A rejected action leaves the durable admitted lifecycle intact."""
+    try:
+        application = engine._authoring.read_selected_application(readiness.readiness_id)
+    except AuthoringError as error:
+        if error.failure.code != "APPLICATION.NOT_ADMITTED":
+            raise
+        return "ready"
+    return "applied" if engine._authoring.application_outcome(application) is not None else "recovery-required"
+
+
+def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None):
     context = bound.context.as_contract()
     status = "draft"
     if isinstance(outcome, c.ApplicationRecoveryRequiredResult):
@@ -103,24 +116,19 @@ def view(engine, bound, outcome=None):
         status = "applied"
     elif isinstance(outcome, c.RejectedResult):
         status = "rejected"
+        if bound.readiness is not None:
+            admitted = publication_status(engine, bound.readiness)
+            if admitted in ("recovery-required", "applied"):
+                status = admitted
     elif bound.readiness is not None:
-        status = "ready"
-        try:
-            application = engine._authoring.read_selected_application(
-                bound.readiness.readiness_id
-            )
-        except AuthoringError as error:
-            if error.failure.code != "APPLICATION.NOT_ADMITTED":
-                raise
-        else:
-            status = (
-                "applied"
-                if engine._authoring.application_outcome(application) is not None
-                else "recovery-required"
-            )
+        status = publication_status(engine, bound.readiness)
     elif bound.analysis is not None:
         if not isinstance(outcome, (c.PendingResult, c.CompleteResult)):
-            outcome = engine._analysis_result(engine._evaluate(bound.analysis))
+            inputs = (
+                None if materials is None
+                else engine._evaluation_materials(bound.analysis, materials)
+            )
+            outcome = engine._analysis_result(engine._evaluate(bound.analysis, inputs))
         status = "needs-action" if isinstance(outcome, c.PendingResult) else "complete"
         if status == "complete" and engine._review_requires_change(bound.analysis):
             status = "requires-change"
@@ -148,17 +156,17 @@ def view(engine, bound, outcome=None):
     return c.WorkflowResult.from_value(result)
 
 
-def analyze_revision(engine, revision):
-    result = engine.analyze_proposal(c.AnalyzeProposalCall(revision))
+def analyze_revision(engine, revision, materials: ProposalMaterials):
+    result = engine._analyze_proposal(c.AnalyzeProposalCall(revision), materials)
     context = (
         result.handle
         if isinstance(result, (c.PendingResult, c.CompleteResult))
         else revision
     )
-    return view(engine, bind(engine, context), result)
+    return view(engine, bind(engine, context), result, materials)
 
 
-def propose(engine, call):
+def propose(engine, call, materials: ProposalMaterials):
     try:
         arguments = call.as_contract()
         snapshot = arguments.get("snapshot")
@@ -169,28 +177,29 @@ def propose(engine, call):
             if isinstance(captured, c.RejectedResult):
                 return captured
             snapshot = captured.as_contract()["snapshot"]["snapshot"]
-        result = engine.create_proposal(
+        result = engine._create_proposal(
             c.CreateProposalCall.from_value(
                 {
                     "kind": "create-proposal",
                     "base_snapshot": snapshot,
                     "change_set": arguments["change_set"],
                 }
-            )
+            ),
+            materials,
         )
         if isinstance(result, c.RejectedResult):
             return result
-        return analyze_revision(engine, result.revision)
+        return analyze_revision(engine, result.revision, materials)
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)
 
 
-def advance(engine, operation, call):
+def advance(engine, operation, call, materials: ProposalMaterials | None = None):
     try:
         bound = bind(engine, call.context)
         if operation == "workflow_status":
-            return view(engine, bound)
-        current = view(engine, bound)
+            return view(engine, bound, materials=materials)
+        current = view(engine, bound, materials=materials)
         if operation == "resume" and current.status not in (
             "applied",
             "recovery-required",
@@ -200,7 +209,10 @@ def advance(engine, operation, call):
                 engine._proposal_revision_handle(revision.revision_id)
             )
             return view(engine, bind(engine, context))
-        if operation not in {item.operation for item in current.next_operations}:
+        if (
+            operation not in {item.operation for item in current.next_operations}
+            and not (operation == "recover" and current.status == "applied" and bound.readiness is not None)
+        ):
             return engine._reject(
                 "WORKFLOW.OPERATION_NOT_AVAILABLE",
                 "invalid",
@@ -210,28 +222,32 @@ def advance(engine, operation, call):
         revision = current.revision
         arguments = call.as_contract()
         if operation == "revise":
-            result = engine.revise_proposal(
+            assert materials is not None
+            result = engine._revise_proposal(
                 c.ReviseProposalCall.from_value(
                     {
                         "kind": "revise-proposal",
                         "expected_revision": revision.as_contract(),
                         "change_set": arguments["change_set"],
                     }
-                )
+                ),
+                materials,
             )
             if isinstance(result, c.RejectedResult):
-                return view(engine, bound, result)
-            return analyze_revision(engine, result.revision)
+                return view(engine, bound, result, materials)
+            return analyze_revision(engine, result.revision, materials)
         if operation == "analyze":
-            return analyze_revision(engine, revision)
+            assert materials is not None
+            return analyze_revision(engine, revision, materials)
         if operation == "resolve_workflow":
-            result = engine.resolve(
+            result = engine._resolve(
                 c.ResolveCall.from_value(
                     {
                         "analysis": engine._analysis_handle(bound.analysis.analysis_id),
                         "submission": arguments["submission"],
                     }
-                )
+                ),
+                materials,
             )
             context = (
                 result.handle
@@ -266,6 +282,7 @@ def advance(engine, operation, call):
                     {
                         "kind": "recover-application",
                         "readiness": call.context.as_contract(),
+                        "action": arguments.get("action", "observe"),
                     }
                 )
             )
@@ -275,7 +292,7 @@ def advance(engine, operation, call):
                 "WORKFLOW.OPERATION_INVALID", "Unsupported workflow operation."
             )
         return view(
-            engine, bound if context == call.context else bind(engine, context), result
+            engine, bound if context == call.context else bind(engine, context), result, materials
         )
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)

@@ -2,12 +2,10 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
-from ..paths import contained_file
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
@@ -43,23 +41,19 @@ def _paths(value: Any, suite: str, check: str) -> tuple[str, ...]:
 class LocalMarkdownTarget:
     destination: str
     repository_path: str
-    resolved_path: Path
 
 
 def local_markdown_targets(
-    context: CheckContext,
+    context: CheckContext | CheckInputContext,
     check_id: str,
     display_path: str,
 ) -> tuple[LocalMarkdownTarget, ...]:
-    root = context.repo_root.resolve()
-    source = contained_file(
-        root,
-        display_path,
-        suite=context.suite_id,
-        check=check_id,
-    )
+    inputs = context.inputs
+    raw = inputs.read_bytes(display_path, suite=context.suite_id, check=check_id)
     try:
-        content = source.read_text(encoding="utf-8")
+        # Preserve the universal-newline text semantics of the filesystem reader.
+        # Manifest digests still bind the original bytes, not this parsing view.
+        content = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
     except UnicodeDecodeError as error:
         raise EngineError(
             Diagnostic(
@@ -79,41 +73,14 @@ def local_markdown_targets(
             continue
 
         target = destination.split("#", 1)[0]
-        if not target:
-            candidate = source
-        else:
-            relative = PurePosixPath(target)
-            if relative.is_absolute():
-                raise EngineError(
-                    Diagnostic(
-                        "PATH.LINK_OUTSIDE_REPOSITORY",
-                        "invalid",
-                        "Markdown link target must be repository-relative",
-                        suite=context.suite_id,
-                        check=check_id,
-                        path=display_path,
-                        observed=destination,
-                    )
-                )
-            candidate = (source.parent / Path(*relative.parts)).resolve(strict=False)
-
-        if not candidate.is_relative_to(root):
-            raise EngineError(
-                Diagnostic(
-                    "PATH.LINK_OUTSIDE_REPOSITORY",
-                    "invalid",
-                    "Markdown link target escapes the repository root",
-                    suite=context.suite_id,
-                    check=check_id,
-                    path=display_path,
-                    observed=destination,
-                )
-            )
+        candidate = inputs.link_target(
+            display_path, target, suite=context.suite_id, check=check_id,
+            destination=destination,
+        )
         targets.append(
             LocalMarkdownTarget(
                 destination=destination,
-                repository_path=candidate.relative_to(root).as_posix(),
-                resolved_path=candidate,
+                repository_path=candidate,
             )
         )
     return tuple(targets)
@@ -125,7 +92,7 @@ class MarkdownLinksCheck:
     paths: tuple[str, ...] | None
     members: ProjectedTableSource | None
 
-    def _selected_paths(self, context: CheckContext) -> tuple[str, ...]:
+    def _selected_paths(self, context: CheckContext | CheckInputContext) -> tuple[str, ...]:
         if self.members is None:
             if self.paths is None:
                 raise TypeError("Markdown link paths or members are required")
@@ -134,7 +101,7 @@ class MarkdownLinksCheck:
         return tuple(value for (value,) in projected)
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         paths = self._selected_paths(context)
         target_paths = tuple(
@@ -168,7 +135,7 @@ class MarkdownLinksCheck:
                 ]
         for display_path in paths:
             for target in local_markdown_targets(context, self.id, display_path):
-                if not target.resolved_path.exists():
+                if not context.inputs.exists(target.repository_path):
                     raise EngineError(
                         Diagnostic(
                             "INPUT.LINK_TARGET_UNAVAILABLE",

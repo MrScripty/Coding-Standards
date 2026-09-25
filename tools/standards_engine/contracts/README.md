@@ -1,6 +1,24 @@
 # Standards Engine Contracts
 
-## Current contract: interface 31
+## Current contract: interface 35
+
+
+Interface 35 adds an explicit `action` to `recover` and `recover_application`.
+Omission or `observe` reconciles an existing applied candidate without Git
+writes. `complete-publication` is a deliberate request to re-establish the same
+admitted candidate at its exact expected target. It requires current recovery
+and application permission, a current reviewed proposal, exact reconstruction,
+and complete verification before the existing Git compare-and-swap. It never
+creates a replacement application or changes the candidate selected by readiness.
+A repeated recovery of an already-applied readiness returns that same outcome.
+
+Recovery-required results may include scalar `details`: `cause_code`,
+`cause_outcome`, and `git_operation`, `git_exit_code`, `git_reason`, and
+`git_stderr_excerpt` for a failed command. The excerpt is a recognized fixed
+phrase, not arbitrary stderr or a path. Unrecognized output is `unclassified`.
+A permission-denied observation identifies Git's error, not its host-level cause.
+`APPLICATION.RECOVERY_BLOCKED` preserves an admission whose current completion
+prerequisite failed. The original readiness/application/store formats are unchanged.
 
 Required host purpose selects application or authoring operation variants. The
 canonical interface declares each variant's exact input/result roots, and the
@@ -14,6 +32,32 @@ result-state 7 accept explicit equal-revision preservation or next-revision
 semantic change against the actual compiled candidate. Older Analysis records
 are not reinterpreted. Unchanged Snapshot/storage primitives retain their own
 versions. See [the implementation contract](../PURPOSE-SEPARATION.md).
+
+Interface 34 adds proposal-local `register-consumer` and authoring-only
+`preview_application`. A registration names a canonical consumer ID, an existing
+tracked repository path, artifact kind and evidence/projection authority. The
+Engine binds exact original-revision bytes privately before admitting the edit;
+callers supply no captured bytes. Relationships may select candidate consumer
+IDs, including registrations in the same change set. Registry declarations,
+relationships and coverage reviews retain separate meanings.
+
+Registered Markdown documentation, including hidden-directory skill references,
+can use `revise-operational-artifact` alongside prompts and templates. That edit
+accepts a canonical registered ID or returned exact target. Fixture and source
+consumers do not acquire an editing capability.
+
+`preview_application` accepts an exact proposal revision and one application
+read/route/related request. It applies normal exposure and prerequisite checks,
+returns explicitly candidate-bound results, and provides preview-only
+continuations. It is absent from ordinary application catalogs. Preflight still
+checks structure rather than returning an application view. Preview does not
+certify coverage, accept review, issue exposure approval or publish the draft.
+
+Consumer capture uses the existing immutable revision aggregate; snapshot/store
+and unrelated handle versions are unchanged. Restart the installed MCP process
+and reconnect its client after updating the Engine. Initialization reports the
+installed interface and purpose. Read the new tool and edit schemas rather than
+inferring a live update from files on disk.
 
 The version notes below document earlier design increments, not supported
 compatibility paths or the current purpose-less launch contract.
@@ -43,6 +87,20 @@ The compiler produces these disposable projections:
 Files under [`examples/`](examples/) are reviewed authored fixtures. Each
 example names one reachable schema definition and supplies one value. They do
 not define fields, defaults, variants, identity, or runtime semantics.
+
+## Grouped Reading (Interface 32)
+
+`read_many` declares authoring and application operation variants. Both require
+an explicit snapshot and 1–32 unique ordered read items. Each item uses the
+corresponding single-read options without a separate snapshot. Success returns
+that snapshot and ordered single-read result objects; failures return one normal
+purpose-qualified rejection and no item results. The Engine additionally enforces
+a 2 MiB serialized domain-result bound (documented in PURPOSE-SEPARATION.md).
+
+This public addition changes the interface version and generated projections;
+Snapshot, Analysis, identity and store contracts keep their independent versions.
+The schema/compiler remain the sole shape authority. Transport catalogs expose
+one additional focused operation; existing query variants retain their scope.
 
 ## Focused Agent Navigation
 
