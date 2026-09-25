@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 35
+interface_schema_version = 36
 request_contract_version = 6
 result_projection_version = 7
 
@@ -213,3 +213,22 @@ id = "preview_application"
 input_definition = "PreviewApplicationCall"
 result_definitions = ["PreviewApplicationResult", "RejectedResult"]
 capability = "standards.proposal.read"
+
+[[operations]]
+id = "resolve_many"
+input_definition = "ResolveManyCall"
+result_definitions = ["WorkflowResult", "RejectedResult"]
+capability_by_submission = { "provide-fact" = "standards.analyze", "consumer-disposition" = "standards.review.consumer", "impact-disposition" = "standards.review.impact", "coverage-attestation" = "standards.review.audit" }
+
+[[operations]]
+id = "workflow_details"
+input_definition = "WorkflowDetailsCall"
+result_definitions = ["WorkflowDetailsResult", "RejectedResult"]
+capability = "standards.read"
+
+[[operations]]
+id = "runtime_info"
+input_definition = "RuntimeInfoCall"
+result_definitions = ["RuntimeInfoResult", "RejectedResult"]
+capability = "standards.read"
+variants = { "application" = { "input_definition" = "RuntimeInfoCall", "result_definitions" = ["RuntimeInfoResult", "ApplicationRejectedResult"] } }

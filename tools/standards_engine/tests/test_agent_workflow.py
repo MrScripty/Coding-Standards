@@ -115,7 +115,7 @@ class AgentWorkflowTest(unittest.TestCase):
 
     def propose(self, label):
         result = self.facade.propose(
-            {
+            {"detail": "full",
                 "snapshot": self.snapshot,
                 "change_set": reference_change(self.root, label),
             }
@@ -148,34 +148,34 @@ class AgentWorkflowTest(unittest.TestCase):
             ["git", "-C", str(self.root), "rev-parse", "main"]
         )
         self.assertEqual(before, after)
-        status = self.facade.workflow_status({"context": result["context"]})
+        status = self.facade.workflow_status({"detail": "full", "context": result["context"]})
         self.assertEqual(status, result)
         self.assertEqual(
-            self.facade.apply({"context": result["context"]})["code"],
+            self.facade.apply({"detail": "full", "context": result["context"]})["code"],
             "WORKFLOW.OPERATION_NOT_AVAILABLE",
         )
 
     def test_revision_advancement_does_not_retarget_old_context(self):
         original = self.propose("revision")
         changed = self.facade.revise(
-            {
+            {"detail": "full",
                 "context": original["context"],
                 "change_set": reference_change(self.root, "revision", revision=True),
             }
         )
         self.assertEqual(changed["status"], "complete", changed)
         self.assertNotEqual(changed["revision"], original["revision"])
-        stale = self.facade.workflow_status({"context": original["context"]})
+        stale = self.facade.workflow_status({"detail": "full", "context": original["context"]})
         self.assertEqual(stale["status"], "stale")
         self.assertEqual(stale["revision"], original["revision"])
         denied = self.facade.review(
-            {"context": original["context"], "decisions": decisions(self.root)}
+            {"detail": "full", "context": original["context"], "decisions": decisions(self.root)}
         )
         self.assertEqual(denied["code"], "WORKFLOW.OPERATION_NOT_AVAILABLE")
-        resumed = self.facade.resume({"context": original["context"]})
+        resumed = self.facade.resume({"detail": "full", "context": original["context"]})
         self.assertEqual(resumed["context"], changed["revision"])
         self.assertEqual(resumed["status"], "draft")
-        analyzed = self.facade.analyze({"context": resumed["context"]})
+        analyzed = self.facade.analyze({"detail": "full", "context": resumed["context"]})
         self.assertEqual(analyzed["context"], changed["context"])
 
     def test_context_is_immutable_existing_identity_and_foreign_records_reject(self):
@@ -186,13 +186,13 @@ class AgentWorkflowTest(unittest.TestCase):
             {**created["context"], "revision": created["revision"]},
         ):
             self.assertEqual(
-                self.facade.workflow_status({"context": context})["kind"],
+                self.facade.workflow_status({"detail": "full", "context": context})["kind"],
                 "rejected-result",
             )
         with StandardsEngine.open_repository(self.root, durable=False, purpose="authoring") as foreign:
             facade = AgentToolFacade(foreign, _contracts(self.root))
             self.assertEqual(
-                facade.workflow_status({"context": created["context"]})["kind"],
+                facade.workflow_status({"detail": "full", "context": created["context"]})["kind"],
                 "rejected-result",
             )
 
@@ -200,20 +200,20 @@ class AgentWorkflowTest(unittest.TestCase):
         created = self.propose("review")
         with StandardsEngine.open_repository(self.root, purpose="authoring") as denied_engine:
             denied = AgentToolFacade(denied_engine, _contracts(self.root)).review(
-                {"context": created["context"], "decisions": decisions(self.root)}
+                {"detail": "full", "context": created["context"], "decisions": decisions(self.root)}
             )
             # Opening with no adapter must never manufacture review authority.
             self.assertIn(denied["kind"], ("workflow-result", "rejected-result"))
             outcome = denied.get("outcome", denied)
             self.assertEqual(outcome["kind"], "rejected-result", denied)
         ready = self.facade.review(
-            {"context": created["context"], "decisions": decisions(self.root)}
+            {"detail": "full", "context": created["context"], "decisions": decisions(self.root)}
         )
         self.assertEqual(ready["status"], "ready", ready)
         self.assertEqual(ready["context"]["kind"], "readiness-handle")
         self.assertEqual(ready["revision"], created["revision"])
         self.assertEqual(
-            self.facade.workflow_status({"context": ready["context"]})["status"],
+            self.facade.workflow_status({"detail": "full", "context": ready["context"]})["status"],
             "ready",
         )
 
@@ -277,7 +277,7 @@ class AgentWorkflowTest(unittest.TestCase):
         )
         with patch.object(self.engine, "_analyze_proposal", return_value=failure):
             result = self.facade.propose(
-                {
+                {"detail": "full",
                     "snapshot": self.snapshot,
                     "change_set": reference_change(self.root, "partial"),
                 }
@@ -285,7 +285,7 @@ class AgentWorkflowTest(unittest.TestCase):
         self.assertEqual(result["status"], "rejected")
         self.assertEqual(result["context"], result["revision"])
         self.assertEqual(result["outcome"], failure.as_contract())
-        status = self.facade.workflow_status({"context": result["context"]})
+        status = self.facade.workflow_status({"detail": "full", "context": result["context"]})
         self.assertEqual(status["status"], "draft")
 
     def test_normative_proposal_stops_at_real_pending_work(self):
@@ -296,7 +296,7 @@ class AgentWorkflowTest(unittest.TestCase):
         change["edits"][0]["standard"]["body"] = (
             "This isolated fixture requires an explicit semantic impact decision.\n"
         )
-        result = self.facade.propose({"snapshot": self.snapshot, "change_set": change})
+        result = self.facade.propose({"detail": "full", "snapshot": self.snapshot, "change_set": change})
         self.assertEqual(result["status"], "needs-action", result)
         self.assertEqual(result["outcome"]["kind"], "pending-result")
         self.assertTrue(
@@ -304,7 +304,7 @@ class AgentWorkflowTest(unittest.TestCase):
         )
         self.assertNotIn("review", {n["operation"] for n in result["next_operations"]})
         invalid = self.facade.review(
-            {"context": result["context"], "decisions": decisions(self.root)}
+            {"detail": "full", "context": result["context"], "decisions": decisions(self.root)}
         )
         self.assertEqual(invalid["code"], "WORKFLOW.OPERATION_NOT_AVAILABLE")
         obligation = result["outcome"]["obligations"][0]
@@ -321,17 +321,17 @@ class AgentWorkflowTest(unittest.TestCase):
             "evidence": [{**evidence(self.root), "digest": "sha256:" + "0" * 64}],
         }
         rejected = self.facade.resolve_workflow(
-            {"context": result["context"], "submission": bad}
+            {"detail": "full", "context": result["context"], "submission": bad}
         )
         self.assertEqual(rejected["outcome"]["kind"], "rejected-result")
         self.assertEqual(rejected["context"], result["context"])
         resolved = self.facade.resolve_workflow(
-            {"context": result["context"], "submission": submission}
+            {"detail": "full", "context": result["context"], "submission": submission}
         )
         self.assertEqual(resolved["status"], "complete", resolved)
         self.assertNotEqual(resolved["context"], result["context"])
         changed = self.facade.resolve_workflow(
-            {
+            {"detail": "full",
                 "context": result["context"],
                 "submission": {**submission, "result": "requires-change"},
             }

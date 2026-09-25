@@ -109,10 +109,14 @@ from .trust import (
 )
 
 from .coverage_publication import render_engine_coverage_receipt
+from .router_guidance import RouterGuidance, RoutingSelectionRow, parse_router_guidance
 
 
 __all__ = (
     "render_engine_coverage_receipt",
+    "RouterGuidance",
+    "RoutingSelectionRow",
+    "parse_router_guidance",
     "ANALYSIS_CONTRACT_VERSION",
     "CHANGE_GRAPH_GROUPS",
     "CONSUMER_REVIEW_CONTRACT",

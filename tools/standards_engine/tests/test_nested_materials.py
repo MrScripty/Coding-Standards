@@ -51,7 +51,7 @@ class NestedMaterialTests(unittest.TestCase):
         return value
 
     def propose(self, *, suffix="", normative=False):
-        result = self.facade.propose({
+        result = self.facade.propose({"detail": "full",
             "snapshot": self.snapshot, "change_set": self.change(suffix, normative=normative),
         })
         self.assertEqual(result["status"], "needs-action" if normative else "complete", result)
@@ -87,7 +87,7 @@ class NestedMaterialTests(unittest.TestCase):
             proposed = self.propose()
         self.assert_counts(counts)
         self.assertEqual(proposed["context"], proposed["outcome"]["handle"])
-        self.assertEqual(self.facade.workflow_status({"context": proposed["context"]}), proposed)
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": proposed["context"]}), proposed)
 
     def test_revise_compiles_only_old_and_new_projections(self):
         proposed = self.propose()
@@ -95,7 +95,7 @@ class NestedMaterialTests(unittest.TestCase):
         with self.counts() as counts, patch.object(
             logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection,
         ) as refresh:
-            revised = self.facade.revise({
+            revised = self.facade.revise({"detail": "full",
                 "context": proposed["context"], "change_set": self.change(revision=True),
             })
         self.assertEqual(revised["status"], "complete", revised)
@@ -103,7 +103,7 @@ class NestedMaterialTests(unittest.TestCase):
         # One preflight replay plus one suffix; not a second replay of edit one.
         self.assertEqual(refresh.call_count, 2)
         self.assertNotEqual(revised["revision"], proposed["revision"])
-        self.assertEqual(self.facade.workflow_status({"context": proposed["context"]})["status"], "stale")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": proposed["context"]})["status"], "stale")
         target = self.change()["edits"][0]["standard"]["id"]
         old = self.facade.query_proposal({"revision": proposed["revision"], "request": {"kind": "read", "target": target}})
         new = self.facade.query_proposal({"revision": revised["revision"], "request": {"kind": "read", "target": target}})
@@ -113,7 +113,7 @@ class NestedMaterialTests(unittest.TestCase):
     def test_resolution_reuses_material_with_three_fresh_evaluations(self):
         proposed = self.propose(normative=True)
         with self.counts() as counts:
-            resolved = self.facade.resolve_workflow({
+            resolved = self.facade.resolve_workflow({"detail": "full",
                 "context": proposed["context"], "submission": self.submission(proposed),
             })
         self.assertEqual(resolved["status"], "complete", resolved)
@@ -125,12 +125,12 @@ class NestedMaterialTests(unittest.TestCase):
         submission = self.submission(proposed)
         bad = {**submission, "evidence": [{**evidence(self.root), "digest": "sha256:" + "0" * 64}]}
         with self.counts() as counts:
-            rejected = self.facade.resolve_workflow({"context": proposed["context"], "submission": bad})
+            rejected = self.facade.resolve_workflow({"detail": "full", "context": proposed["context"], "submission": bad})
         self.assertEqual(rejected["outcome"]["kind"], "rejected-result", rejected)
         self.assertEqual(rejected["context"], proposed["context"])
         self.assert_counts(counts, evaluations=2)
         with self.counts() as fresh:
-            resolved = self.facade.resolve_workflow({"context": proposed["context"], "submission": submission})
+            resolved = self.facade.resolve_workflow({"detail": "full", "context": proposed["context"], "submission": submission})
         self.assertEqual(resolved["status"], "complete", resolved)
         self.assert_counts(fresh, evaluations=3)
 
@@ -146,7 +146,7 @@ class NestedMaterialTests(unittest.TestCase):
 
         try:
             with patch.object(self.engine._execution_context.authorization, "authorize", side_effect=quarantine):
-                result = self.facade.resolve_workflow({
+                result = self.facade.resolve_workflow({"detail": "full",
                     "context": proposed["context"], "submission": self.submission(proposed),
                 })
             outcome = result.get("outcome", result)
@@ -154,7 +154,7 @@ class NestedMaterialTests(unittest.TestCase):
             self.assertEqual(outcome["outcome"], "unavailable")
         finally:
             self.engine._snapshots.undelete_snapshot(snapshot)
-        self.assertEqual(self.facade.workflow_status({"context": proposed["context"]})["status"], "needs-action")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": proposed["context"]})["status"], "needs-action")
 
     def test_head_change_after_preflight_still_rejects_stale_revision(self):
         proposed = self.propose()
@@ -167,14 +167,14 @@ class NestedMaterialTests(unittest.TestCase):
             return revise(expected, change_set, preparation=preparation)
 
         with patch.object(self.engine._authoring, "revise_proposal", side_effect=advance_head):
-            result = self.facade.revise({"context": proposed["context"], "change_set": self.change(revision=True)})
+            result = self.facade.revise({"detail": "full", "context": proposed["context"], "change_set": self.change(revision=True)})
         self.assertEqual(result["outcome"]["code"], "AUTHORING.REVISION_STALE", result)
-        self.assertEqual(self.facade.workflow_status({"context": proposed["context"]})["status"], "stale")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": proposed["context"]})["status"], "stale")
 
     def test_analyze_and_query_each_start_with_fresh_material(self):
         proposed = self.propose()
         with self.counts() as counts:
-            analyzed = self.facade.analyze({"context": proposed["revision"]})
+            analyzed = self.facade.analyze({"detail": "full", "context": proposed["revision"]})
         self.assertEqual(analyzed["context"], proposed["context"])
         self.assert_counts(counts)
         with self.counts() as fresh:
@@ -201,7 +201,7 @@ class NestedMaterialTests(unittest.TestCase):
 
         with patch.object(self.engine._snapshots, "load_content", wraps=self.engine._snapshots.load_content) as loads:
             with patch.object(self.engine, "_proposal_projection", side_effect=reenter):
-                outer = self.facade.analyze({"context": first["revision"]})
+                outer = self.facade.analyze({"detail": "full", "context": first["revision"]})
         self.assertEqual(loads.call_count, 2)
         self.assertEqual(outer["context"], first["context"])
         self.assertEqual(nested[0]["handle"], second["context"])
@@ -230,7 +230,7 @@ class NestedMaterialTests(unittest.TestCase):
             return compile_source(source)
 
         with patch.object(self.engine, "_compile", side_effect=compile):
-            result = self.facade.propose({"change_set": self.change()})
+            result = self.facade.propose({"detail": "full", "change_set": self.change()})
         self.assertEqual(result["status"], "complete", result)
         recorders = [source for source in sources if isinstance(source, RecordingContentSource)]
         self.assertEqual(len(recorders), 2)
@@ -241,7 +241,7 @@ class NestedMaterialTests(unittest.TestCase):
         with StandardsEngine.open_repository(self.root, purpose="application") as application:
             facade = AgentToolFacade(application, _contracts(self.root))
             with patch.object(ProposalMaterials, "__init__", side_effect=AssertionError("authoring preparation")):
-                denied = facade.propose({"snapshot": self.snapshot, "change_set": self.change()})
+                denied = facade.propose({"detail": "full", "snapshot": self.snapshot, "change_set": self.change()})
         self.assertEqual(denied["kind"], "application-rejected-result", denied)
 
 

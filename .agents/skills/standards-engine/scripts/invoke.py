@@ -139,8 +139,15 @@ def main(argv: list[str] | None = None) -> int:
                 "Engine runtime dependencies are unavailable; read "
                 ".agents/skills/standards-engine/references/environment.md"
             ) from error
-        with AgentToolFacade.open_repository(root, purpose=arguments.purpose) as facade:
-            result = getattr(facade, str(operation["id"]))(request)
+        if operation["id"] == "runtime_info":
+            from tools.standards_engine.standards_engine.mcp import tool_catalog
+            from tools.standards_engine.standards_engine.runtime_identity import RuntimeIdentity
+            interface = AgentToolFacade.load_interface(root)
+            result = RuntimeIdentity(root, arguments.purpose, interface,
+                tool_catalog(root, purpose=arguments.purpose, interface=interface)).invoke(request)
+        else:
+            with AgentToolFacade.open_repository(root, purpose=arguments.purpose) as facade:
+                result = getattr(facade, str(operation["id"]))(request)
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0
     except Exception as error:

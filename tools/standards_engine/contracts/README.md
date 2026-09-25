@@ -1,6 +1,16 @@
 # Standards Engine Contracts
 
-## Current contract: interface 35
+## Current contract: interface 36
+
+
+Interface 36 adds `resolve_many`, `workflow_details`, and `runtime_info`.
+Focused workflow calls select compact Analysis summaries by default and accept
+`detail: full` for complete diagnostic results. Batched submissions keep the
+existing per-variant capability contract, current evidence checks and explicit
+publication boundary. Detail pages use observation-bound continuation arguments,
+record-count and payload bounds. Runtime identity is available to both purposes
+without standards-store access. See [the full workflow contract](../PURPOSE-SEPARATION.md#routing-and-review-workflow-interface-36).
+
 
 
 Interface 35 adds an explicit `action` to `recover` and `recover_application`.
@@ -214,6 +224,9 @@ limit. The additional description text is intentional authoring overhead.
 | `propose` | `ProposeCall` | `WorkflowResult` | `RejectedResult` |
 | `revise` | `ReviseCall` | `WorkflowResult` | `RejectedResult` |
 | `analyze` | `AnalyzeCall` | `WorkflowResult` | `RejectedResult` |
+| `resolve_many` | `ResolveManyCall` | `WorkflowResult` | `RejectedResult` |
+| `workflow_details` | `WorkflowDetailsCall` | `WorkflowDetailsResult` | `RejectedResult` |
+| `runtime_info` | `RuntimeInfoCall` | `RuntimeInfoResult` | Purpose-qualified rejection |
 | `resolve_workflow` | `ResolveWorkflowCall` | `WorkflowResult` | `RejectedResult` |
 | `review` | `ReviewCall` | `WorkflowResult` | `RejectedResult` |
 | `apply` | `ApplyCall` | `WorkflowResult` | `RejectedResult` |

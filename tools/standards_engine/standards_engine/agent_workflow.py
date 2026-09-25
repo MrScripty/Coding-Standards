@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 
 ACTIONS = {
     "draft": ("analyze", "revise"),
-    "needs-action": ("resolve_workflow", "revise"),
+    "needs-action": ("resolve_many", "resolve_workflow", "revise"),
     "complete": ("review", "revise"),
     "requires-change": ("revise",),
     "ready": ("apply", "revise"),
@@ -40,6 +40,7 @@ ACTIONS = {
 INPUTS = {
     "revise": ["change_set"],
     "resolve_workflow": ["submission"],
+    "resolve_many": ["submissions"],
     "review": ["decisions"],
     "recover": ["action"],
 }
@@ -107,7 +108,7 @@ def publication_status(engine, readiness):
     return "applied" if engine._authoring.application_outcome(application) is not None else "recovery-required"
 
 
-def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None):
+def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None, *, detail="compact"):
     context = bound.context.as_contract()
     status = "draft"
     if isinstance(outcome, c.ApplicationRecoveryRequiredResult):
@@ -152,18 +153,21 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
         ],
     }
     if outcome is not None:
-        result["outcome"] = outcome.as_contract()
+        from .workflow_presentation import summarize
+        result["outcome"] = (summarize(outcome)
+                             if detail == "compact" and isinstance(outcome, (c.PendingResult, c.CompleteResult))
+                             else outcome.as_contract())
     return c.WorkflowResult.from_value(result)
 
 
-def analyze_revision(engine, revision, materials: ProposalMaterials):
+def analyze_revision(engine, revision, materials: ProposalMaterials, *, detail="compact"):
     result = engine._analyze_proposal(c.AnalyzeProposalCall(revision), materials)
     context = (
         result.handle
         if isinstance(result, (c.PendingResult, c.CompleteResult))
         else revision
     )
-    return view(engine, bind(engine, context), result, materials)
+    return view(engine, bind(engine, context), result, materials, detail=detail)
 
 
 def propose(engine, call, materials: ProposalMaterials):
@@ -189,7 +193,7 @@ def propose(engine, call, materials: ProposalMaterials):
         )
         if isinstance(result, c.RejectedResult):
             return result
-        return analyze_revision(engine, result.revision, materials)
+        return analyze_revision(engine, result.revision, materials, detail=arguments.get("detail", "compact"))
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)
 
@@ -197,8 +201,9 @@ def propose(engine, call, materials: ProposalMaterials):
 def advance(engine, operation, call, materials: ProposalMaterials | None = None):
     try:
         bound = bind(engine, call.context)
+        detail = call.as_contract().get("detail", "compact")
         if operation == "workflow_status":
-            return view(engine, bound, materials=materials)
+            return view(engine, bound, materials=materials, detail=detail)
         current = view(engine, bound, materials=materials)
         if operation == "resume" and current.status not in (
             "applied",
@@ -208,7 +213,7 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
             context = c.ProposalRevisionHandle.from_value(
                 engine._proposal_revision_handle(revision.revision_id)
             )
-            return view(engine, bind(engine, context))
+            return view(engine, bind(engine, context), detail=detail)
         if (
             operation not in {item.operation for item in current.next_operations}
             and not (operation == "recover" and current.status == "applied" and bound.readiness is not None)
@@ -234,11 +239,11 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
                 materials,
             )
             if isinstance(result, c.RejectedResult):
-                return view(engine, bound, result, materials)
-            return analyze_revision(engine, result.revision, materials)
+                return view(engine, bound, result, materials, detail=detail)
+            return analyze_revision(engine, result.revision, materials, detail=arguments.get("detail", "compact"))
         if operation == "analyze":
             assert materials is not None
-            return analyze_revision(engine, revision, materials)
+            return analyze_revision(engine, revision, materials, detail=detail)
         if operation == "resolve_workflow":
             result = engine._resolve(
                 c.ResolveCall.from_value(
@@ -292,7 +297,7 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
                 "WORKFLOW.OPERATION_INVALID", "Unsupported workflow operation."
             )
         return view(
-            engine, bound if context == call.context else bind(engine, context), result, materials
+            engine, bound if context == call.context else bind(engine, context), result, materials, detail=detail
         )
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)

@@ -270,7 +270,7 @@ class NavigationIndexFixture(unittest.TestCase):
 
     def propose(self, change=None):
         return self.facade.propose(
-            {"snapshot": self.snapshot, "change_set": change or self.change()}
+            {"detail": "full", "snapshot": self.snapshot, "change_set": change or self.change()}
         )
 
 
@@ -310,7 +310,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
     def test_cross_snapshot_handle_is_not_an_authorization_to_retarget(self):
         other = self.facade.read({"target": "navigation-indexes"})
         result = self.facade.propose(
-            {"snapshot": other["authority"], "change_set": self.change()}
+            {"detail": "full", "snapshot": other["authority"], "change_set": self.change()}
         )
         self.assertEqual(
             (result["outcome"] if result["kind"] == "workflow-result" else result)[
@@ -414,7 +414,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
         self.assertEqual(obligation["reasons"][0]["kind"], "navigation-index-change")
         self.assertEqual(
             self.facade.review(
-                {"context": proposed["context"], "decisions": decisions(self.root)}
+                {"detail": "full", "context": proposed["context"], "decisions": decisions(self.root)}
             )["code"],
             "WORKFLOW.OPERATION_NOT_AVAILABLE",
         )
@@ -430,7 +430,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
         self.assertIn("](workflows/tooling.md)", content)
         self.assertEqual((self.root / "TOOLING-STANDARDS.md").read_bytes(), original)
         resolved = self.facade.resolve_workflow(
-            {
+            {"detail": "full",
                 "context": proposed["context"],
                 "submission": {
                     "kind": "impact-disposition",
@@ -444,7 +444,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
         )
         self.assertEqual(resolved["status"], "complete", resolved)
         ready = self.facade.review(
-            {"context": resolved["context"], "decisions": decisions(self.root)}
+            {"detail": "full", "context": resolved["context"], "decisions": decisions(self.root)}
         )
         self.assertEqual(ready["status"], "ready", ready)
         checked = self.facade.verify_proposal(
@@ -455,7 +455,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
             }
         )
         self.assertTrue(checked["verification"]["passed"], checked)
-        applied = self.facade.apply({"context": ready["context"]})
+        applied = self.facade.apply({"detail": "full", "context": ready["context"]})
         self.assertEqual(applied["status"], "applied", applied)
         self.assertEqual(
             self.facade.read({"target": "navigation.tooling"})["indexes"][0]["content"],
@@ -473,7 +473,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
         unchanged["edits"][0]["entrypoint"] = current["indexes"][0]["entrypoint"]
         unchanged["edits"][0].pop("retargets")
         rejected = self.facade.propose(
-            {"snapshot": current["authority"], "change_set": unchanged}
+            {"detail": "full", "snapshot": current["authority"], "change_set": unchanged}
         )
         self.assertEqual(rejected["code"], "AUTHORING.NO_EFFECT", rejected)
 
@@ -549,7 +549,7 @@ class ProtectedNavigationIndexTest(NavigationIndexFixture):
             self.assertIn(f"]({destination})", content)
         obligation = proposed["outcome"]["obligations"][0]
         resolved = self.facade.resolve_workflow(
-            {
+            {"detail": "full",
                 "context": proposed["context"],
                 "submission": {
                     "kind": "impact-disposition",
@@ -563,10 +563,10 @@ class ProtectedNavigationIndexTest(NavigationIndexFixture):
         )
         self.assertEqual(resolved["status"], "complete", resolved)
         ready = self.facade.review(
-            {"context": resolved["context"], "decisions": decisions(self.root)}
+            {"detail": "full", "context": resolved["context"], "decisions": decisions(self.root)}
         )
         self.assertEqual(ready["status"], "ready", ready)
-        applied = self.facade.apply({"context": ready["context"]})
+        applied = self.facade.apply({"detail": "full", "context": ready["context"]})
         self.assertEqual(applied["status"], "applied", applied)
         self.assertEqual(
             self.facade.read({"target": "navigation.coding"})["indexes"][0]["content"],

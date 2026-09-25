@@ -41,12 +41,12 @@ class ProposalReuseTest(unittest.TestCase):
             captured = facade.create_snapshot({"kind": "create-snapshot"})
             assert captured["kind"] == "create-snapshot-result", captured
             cls.snapshot = captured["snapshot"]["snapshot"]
-            cls.first = facade.propose({
+            cls.first = facade.propose({"detail": "full",
                 "snapshot": cls.snapshot,
                 "change_set": reference_change(cls.root, "projection-cache"),
             })
             assert cls.first["status"] == "complete", cls.first
-            cls.latest = facade.revise({
+            cls.latest = facade.revise({"detail": "full",
                 "context": cls.first["context"],
                 "change_set": reference_change(cls.root, "projection-cache", revision=True),
             })
@@ -55,7 +55,7 @@ class ProposalReuseTest(unittest.TestCase):
             change["edits"][0]["standard"].update(
                 id="topic.projection-normative", role="topic", level="MUST",
             )
-            cls.normative = facade.propose({"snapshot": cls.snapshot, "change_set": change})
+            cls.normative = facade.propose({"detail": "full", "snapshot": cls.snapshot, "change_set": change})
             assert cls.normative["status"] == "needs-action", cls.normative
         cls.seed = cls.root / ".standards-engine/snapshots-v1.sqlite3"
         cls.target = "reference.testing.projection-cache"
@@ -112,8 +112,8 @@ class ProposalReuseTest(unittest.TestCase):
             patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh,
             patch.object(self.engine, "_evaluate", wraps=self.engine._evaluate) as evaluate,
         ):
-            first = self.facade.workflow_status({"context": self.latest["context"]})
-            second = self.facade.workflow_status({"context": self.latest["context"]})
+            first = self.facade.workflow_status({"detail": "full", "context": self.latest["context"]})
+            second = self.facade.workflow_status({"detail": "full", "context": self.latest["context"]})
         self.assertEqual(first, second)
         self.assertEqual(first["status"], "complete", first)
         refresh.assert_not_called()
@@ -144,7 +144,7 @@ class ProposalReuseTest(unittest.TestCase):
         self.assertEqual(load.call_count, 1)
         self.assertIn("Incremental successor.", self.query(revised)["content"])
         self.assertEqual(self.query(), old)
-        self.assertEqual(self.facade.workflow_status({"context": self.latest["context"]})["status"], "stale")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": self.latest["context"]})["status"], "stale")
 
     def test_native_revision_with_a_new_cache_reconstructs_the_complete_program(self):
         self.query()
@@ -195,7 +195,7 @@ class ProposalReuseTest(unittest.TestCase):
             refresh.assert_not_called()
             self.assertEqual(self.query(), old)
             refresh.assert_not_called()
-        self.assertEqual(self.facade.workflow_status({"context": self.latest["context"]})["status"], "complete")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": self.latest["context"]})["status"], "complete")
 
     def test_stale_native_head_is_rejected_before_continuation(self):
         self.query()
@@ -208,19 +208,19 @@ class ProposalReuseTest(unittest.TestCase):
         refresh.assert_not_called()
 
     def test_cumulative_review_obligations_match_a_fresh_engine_after_continuation(self):
-        warm = self.facade.workflow_status({"context": self.normative["context"]})
+        warm = self.facade.workflow_status({"detail": "full", "context": self.normative["context"]})
         self.assertEqual(warm["status"], "needs-action", warm)
         change = reference_change(self.root, "projection-normative", revision=True)
         change["edits"][0]["standard"].update(
             id="topic.projection-normative", role="topic", level="MUST",
         )
-        revised = self.facade.revise({"context": self.normative["context"], "change_set": change})
+        revised = self.facade.revise({"detail": "full", "context": self.normative["context"], "change_set": change})
         self.assertEqual(revised["status"], "needs-action", revised)
         with StandardsEngine.open_repository(
             self.root, store_path=self.store, purpose="authoring",
             execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer(self.root)),
         ) as engine:
-            cold = AgentToolFacade(engine, self.interface).workflow_status({"context": revised["context"]})
+            cold = AgentToolFacade(engine, self.interface).workflow_status({"detail": "full", "context": revised["context"]})
         self.assertEqual(cold["status"], revised["status"])
         self.assertTrue(revised["outcome"]["obligations"])
         self.assertEqual(cold["outcome"]["obligations"], revised["outcome"]["obligations"])
@@ -239,12 +239,12 @@ class ProposalReuseTest(unittest.TestCase):
         old = self.query()
         change = reference_change(self.root, "projection-cache", revision=True)
         change["edits"][0]["standard"]["body"] += "Independent third revision.\n"
-        revised = self.facade.revise({"context": self.latest["context"], "change_set": change})
+        revised = self.facade.revise({"detail": "full", "context": self.latest["context"], "change_set": change})
         self.assertEqual(revised["status"], "complete", revised)
         self.assertNotEqual(revised["revision"], self.latest["revision"])
         self.assertEqual(self.query(), old)
         self.assertIn("Independent third revision.", self.query(revised)["content"])
-        self.assertEqual(self.facade.workflow_status({"context": self.latest["context"]})["status"], "stale")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": self.latest["context"]})["status"], "stale")
 
     def test_request_and_response_mutation_cannot_change_the_next_result(self):
         first = self.query()
@@ -391,14 +391,14 @@ class ProposalReuseTest(unittest.TestCase):
             (*old.change_sets, logical.StandardsChangeSet.from_mapping(change)),
         )
         with patch.object(self.engine._snapshots, "advance_aggregate_root", return_value="stale"):
-            result = self.facade.revise({"context": self.latest["context"], "change_set": change})
+            result = self.facade.revise({"detail": "full", "context": self.latest["context"], "change_set": change})
         self.assertEqual(result["outcome"]["code"], "AUTHORING.REVISION_STALE", result)
         observed = self.facade.query_proposal({
             "revision": self.engine._proposal_revision_handle(prospective.revision_id),
             "request": {"kind": "read", "target": self.target},
         })
         self.assertEqual(observed["outcome"], "unavailable", observed)
-        self.assertEqual(self.facade.workflow_status({"context": self.latest["context"]})["status"], "complete")
+        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": self.latest["context"]})["status"], "complete")
 
     def test_compiler_recipe_changes_miss_and_unknown_instance_state_stays_cold(self):
         base = self.engine._compiled_snapshot(SnapshotId(self.snapshot["id"]))
@@ -446,13 +446,13 @@ class ProposalReuseTest(unittest.TestCase):
 
     def test_authorization_and_invalid_evidence_remain_fresh_on_warm_status(self):
         context = self.normative["context"]
-        self.facade.workflow_status({"context": context})
+        self.facade.workflow_status({"detail": "full", "context": context})
         obligation = self.normative["outcome"]["obligations"][0]
         submission = {"kind": "impact-disposition", "obligation": obligation["handle"],
                       "result": "confirmed", "rationale": "Reviewed isolated test scope.",
                       "fingerprint": obligation["fingerprint"], "evidence": [evidence(self.root)]}
         bad = {**submission, "evidence": [{**evidence(self.root), "digest": "sha256:" + "0" * 64}]}
-        rejected = self.facade.resolve_workflow({"context": context, "submission": bad})
+        rejected = self.facade.resolve_workflow({"detail": "full", "context": context, "submission": bad})
         self.assertEqual(rejected["outcome"]["code"], "ANALYSIS.EVIDENCE_DIGEST_MISMATCH", rejected)
         authorize = self.engine._execution_context.authorization.authorize
         def quarantine(request):
@@ -460,14 +460,14 @@ class ProposalReuseTest(unittest.TestCase):
             self.engine._snapshots.delete_snapshot(SnapshotId(self.snapshot["id"]))
             return decision
         with patch.object(self.engine._execution_context.authorization, "authorize", side_effect=quarantine) as calls:
-            rejected = self.facade.resolve_workflow({"context": context, "submission": submission})
+            rejected = self.facade.resolve_workflow({"detail": "full", "context": context, "submission": submission})
         self.assertTrue(calls.call_count)
         self.assertEqual(rejected.get("outcome", rejected)["outcome"], "unavailable", rejected)
 
     def test_review_keeps_fresh_replay_instead_of_borrowing_a_draft_entry(self):
         self.query()
         with patch.object(logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection) as refresh:
-            reviewed = self.facade.review({"context": self.latest["context"], "decisions": decisions(self.root)})
+            reviewed = self.facade.review({"detail": "full", "context": self.latest["context"], "decisions": decisions(self.root)})
         self.assertEqual(reviewed["status"], "ready", reviewed)
         self.assertGreaterEqual(refresh.call_count, 2)
 
@@ -506,7 +506,14 @@ class ProposalReuseTest(unittest.TestCase):
             self.assertEqual(rows[0], rows[1])
             self.assertEqual(json.loads(rows[0]["content"][0]["text"]), rows[0]["structuredContent"])
             observed.append(rows[0])
-        self.assertEqual(observed[0], observed[1])
+        self.assertNotEqual(
+            observed[0]["_meta"]["standards-engine/runtime"]["instance_id"],
+            observed[1]["_meta"]["standards-engine/runtime"]["instance_id"],
+        )
+        self.assertEqual(
+            {key: value for key, value in observed[0].items() if key != "_meta"},
+            {key: value for key, value in observed[1].items() if key != "_meta"},
+        )
 
 
 if __name__ == "__main__":

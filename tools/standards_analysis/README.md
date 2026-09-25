@@ -74,3 +74,14 @@ without importing a suite's unrelated inputs; suite evidence adds the selected
 suite closure. Neither relationship ownership nor a passing graph check supplies
 an audit decision. The current repository has no stored certificates following
 the September 2026 retirement; review-required is the expected state.
+
+### Router guidance representation
+
+`parse_router_guidance` returns immutable canonical selection rows and exact
+source spans from Router's unfenced top-level two-column pipe tables. Normative
+module links in destination cells are selections; references are optional help.
+Display headings and surrounding prose carry no executable identity. The Router
+loader, readable Engine routing and route-authoring projection consume this one
+representation. Executable applicability and target agreement remain owned by
+the existing Router projection. This narrow representation is not a general
+Markdown parsing API.

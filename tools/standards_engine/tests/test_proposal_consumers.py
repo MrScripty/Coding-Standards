@@ -82,9 +82,9 @@ class ConsumerInputTests(unittest.TestCase):
 class ConsumerCompilerTests(unittest.TestCase):
     """Real metadata, graph, coverage and logical replay over captured authority."""
     snapshot = 'snapshot:consumer-fixture'
-    fixture_path = 'tools/standards_engine/tests/test_navigation.py'
-    second_path = 'tools/standards_analysis/tests/test_routing.py'
-    doc_path = '.agents/skills/standards-engine/references/authoring.md'
+    fixture_path = 'tools/standards_engine/tests/test_publication_recovery.py'
+    second_path = 'tools/standards_analysis/tests/test_reading.py'
+    doc_path = 'docs/plans/admitted-publication-recovery/verification.md'
     policy = 'topic.consumer-fixture.owned'
     owner = 'topic.consumer-fixture'
     document = 'documentation.consumer-fixture'

@@ -43,10 +43,12 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(process.returncode,0,process.stderr)
         self.assertEqual(process.stderr,'')
         responses={row['id']:row for row in map(json.loads,process.stdout.splitlines())}
-        self.assertIn('interface 35;',responses[1]['result']['instructions'])
+        self.assertIn('interface 36;',responses[1]['result']['instructions'])
         return responses[2]
 
     def call(self,name,arguments,purpose='authoring',error=False):
+        if name in {"propose", "revise", "analyze", "resolve_workflow", "workflow_status", "resume"}:
+            arguments = {"detail": "full", **arguments}
         self.calls.append(name)
         response=self.rpc('tools/call',{'name':name,'arguments':arguments},purpose)
         self.assertNotIn('error',response,response)

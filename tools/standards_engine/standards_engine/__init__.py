@@ -5,6 +5,7 @@ from ._generated_contract import __all__ as _contract_all
 from .context_projection import Purpose
 from .engine import StandardsEngine
 from .rendering import render_text
+from .runtime_identity import RuntimeIdentity
 from .tools import AgentToolFacade
 
 __all__ = (
@@ -12,5 +13,6 @@ __all__ = (
     "AgentToolFacade",
     "Purpose",
     "StandardsEngine",
+    "RuntimeIdentity",
     "render_text",
 )

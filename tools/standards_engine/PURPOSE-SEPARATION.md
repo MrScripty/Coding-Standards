@@ -325,7 +325,7 @@ those same bytes. The Engine does not rewrite semantic versions after review.
 
 ## Versions and coordinated cutover
 
-Current Engine package/transport implementation: 0.2.0. Engine interface: 35.
+Current Engine package/transport implementation: 0.2.0. Engine interface: 36.
 Analysis request: 6; result/state and Analysis handles: 7. The semantic-revision
 interpretation change belongs to Analysis 7. Unchanged Snapshot, proposal,
 readiness, application and generic identity/storage contracts keep their
@@ -439,3 +439,100 @@ hook output and stays in the private Git exception, not the MCP response. Earlie
 uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
 observation from the supported operation on the correct host. Ordinary application
 interfaces still cannot call either recovery operation or read its diagnostics.
+
+## Routing and review workflow (interface 36)
+
+### Router presentation
+
+Router selection is declared by unfenced top-level two-column pipe tables.
+Canonical normative-module links in the destination cell identify selected
+modules. Header text, section headings and surrounding prose are presentation;
+a historical example heading is not an executable delimiter. Reference-module
+links are optional help. Code fences, indented code, HTML comments and non-table
+prose do not declare selections.
+
+The existing Analysis routing owner parses these exact rows for the Router
+loader, `read(include_routing)` and logical route edits. The explicit executable
+facts/rules still own applicability, and their target agreement is verified.
+Edits preserve all text outside selected rows, and new rows join an existing
+normative selection table. Ambiguous duplicate rows reject an individual edit.
+Unsupported link paths or missing canonical targets remain explicit failures.
+No Router body, policy identity or routing fact is automatically migrated.
+
+### Decisions and concise workflow views
+
+Focused workflow results default to `detail: compact`. A pending or complete
+Analysis is represented by its exact handle, truthful work counts and a
+`workflow_details` link; publication, readiness, recovery and errors retain
+relevant fields. `detail: full` selects complete diagnostic output. Native
+analysis operations retain their full result contract.
+
+`resolve_many` is authoring-only. Supply one exact current proposal Analysis
+`context` and 1–128 explicitly authored `submissions` (up to 256 KiB of JSON
+submission material). All work handles bind that original context. Required
+work newly revealed by a decision is retrieved in the next round rather than
+invented as a handle on the old analysis. Duplicate targets and foreign work
+reject before authorization.
+
+Each item uses the ordinary single-decision validator with current evidence and
+authority. The staged successor is evaluated before the next item. Only the
+final Analysis aggregate is published, conditionally on the proposal head still
+matching. A rejected batch records none of its intermediate Analysis states.
+External authority/provider observations are not part of a global transaction.
+No review, readiness, apply or implicit Git write is included in decision batching.
+
+Example flow (obtain actual field values and handles from current results):
+
+```text
+workflow_details({analysis: context, section: "pending_obligations", limit: 8})
+resolve_many({context: context, submissions: [explicit_decision_1, explicit_decision_2]})
+```
+
+Each `pending_obligations` item contains the complete `obligation` plus its
+submission `work` handle. Coverage work is a coverage-requirement handle;
+consumer/impact work is an obligation handle. `fact_requirements` supplies the
+actual fact definition and work. Preserve every decision's fingerprint, evidence,
+rationale and authority requirements. Registration is distinct from coverage.
+
+Other detail sections expose all obligations, current coverage certificates,
+recorded dispositions/facts, reading plan and changed policy units. Requests
+select at most 16 records (default 8). The 64 KiB JSON domain-result limit is
+independent of MCP framing and its text/structured duplication. Oversized items
+are rejected, never truncated. Use smaller pages or existing targeted inspection.
+
+Follow the exact `next` arguments. A nonzero offset requires the returned
+`observation` digest. It binds the exact analysis, section and complete observed
+items, preventing accidental mixing of contexts or sections. Historical details
+remain snapshot-bound; decision and publication owners perform live evidence
+validation. Lifecycle failures remain explicit. Pages are observations, not approvals or
+new mutable workflow records. Explicit full analysis remains available.
+
+### Running implementation and catalog
+
+`runtime_info` is available to either purpose without opening Git or the
+standards store. MCP initialization, tool listings, tool results and unknown-tool
+errors expose the same opaque instance/interface/catalog metadata. The operation
+also compares a supplied `expected_catalog` digest and observes on-disk runtime
+installation state.
+
+Runtime identity binds startup-selected code/package and interface inputs. It
+excludes standards text, Git refs, authoring databases and user paths. It assumes
+a coherent installation before startup, not concurrent replacement during import.
+A disk change produces `restart-required`; unreadable inputs produce `unavailable`.
+A matching installation with a differing client catalog requests `refresh-tools`.
+The server cannot inspect or clear the client's private cache.
+
+After replacing implementation files, stop the old process, install coherently,
+start the new process, reconnect and inspect `runtime_info`/`tools/list` before
+mutations. Check the new instance ID as well as interface 36 and the catalog digest.
+`listChanged` remains false: no hot reload is implemented. Content publication
+alone does not require an implementation restart. Standalone native facade
+catalog identity describes its native operation contract; compare catalogs within
+the same transport/purpose. The reference CLI uses the focused MCP catalog identity.
+
+Interface 36 changes the focused result contract and adds three operations. It
+preserves Analysis 7, original Snapshot/SQLite representations, readiness, exact
+candidate recovery and the current coverage-authorization semantics. Existing
+native or explicit-full diagnostics are current features, not a dual-version
+compatibility implementation. Local migrated standards and receipts stay owned
+by their accepted publication.

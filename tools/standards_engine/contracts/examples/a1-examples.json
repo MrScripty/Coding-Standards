@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 35,
+  "interface_schema_version": 36,
   "examples": [
     {
       "name": "create-snapshot",
@@ -764,6 +764,73 @@
           "detail": "compact"
         }
       }
+    },
+    {
+      "name": "resolve-many",
+      "definition": "ResolveManyCall",
+      "value": {
+        "context": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "submissions": [
+          {
+            "kind": "impact-disposition",
+            "obligation": {
+              "kind": "analysis-child-handle",
+              "analysis": {
+                "kind": "analysis-handle",
+                "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "schema_version": 7
+              },
+              "child_kind": "obligation",
+              "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "schema_version": 7
+            },
+            "result": "confirmed",
+            "rationale": "Explicit review of this example scope.",
+            "fingerprint": {
+              "decision_kind": "unmapped-normative-change",
+              "decision_contract": "decision-contract.unmapped-normative-change.v1",
+              "schema_version": 1,
+              "dependencies": [
+                {
+                  "class": "representation",
+                  "identity": "example-scope",
+                  "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+                }
+              ]
+            },
+            "evidence": [
+              {
+                "id": "example-evidence",
+                "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+                "provider_contract": "repository-content",
+                "provider_contract_version": "1"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "workflow-details",
+      "definition": "WorkflowDetailsCall",
+      "value": {
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "section": "pending_obligations",
+        "limit": 8
+      }
+    },
+    {
+      "name": "runtime-info",
+      "definition": "RuntimeInfoCall",
+      "value": {}
     }
   ]
 }

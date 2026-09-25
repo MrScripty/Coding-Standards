@@ -67,6 +67,7 @@ from tools.standards_analysis.standards_analysis import (
     load_coverage_horizon,
     load_repository_coverage_decisions,
     load_router_projection,
+    parse_router_guidance,
     plain_record,
 )
 from tools.standards_applicability.standards_applicability import (
@@ -113,6 +114,9 @@ from tools.standards_snapshots.standards_snapshots import (
 
 from ._generated_contract import (
     WorkflowResult,
+    ResolveManyCall,
+    WorkflowDetailsCall,
+    WorkflowDetailsResult,
     ProposeCall,
     ReviseCall,
     AnalyzeCall,
@@ -1020,6 +1024,19 @@ class StandardsEngine:
 
         with ProposalMaterials(self) as materials:
             return advance(self, "resolve_workflow", call, materials)
+
+    @public_operation
+    def resolve_many(self, call: ResolveManyCall) -> WorkflowResult | RejectedResult:
+        from .decision_batch import resolve_many
+
+        with ProposalMaterials(self) as materials:
+            return resolve_many(self, call, materials)
+
+    @public_operation
+    def workflow_details(self, call: WorkflowDetailsCall) -> WorkflowDetailsResult | RejectedResult:
+        from .workflow_presentation import details
+
+        return details(self, call)
 
     @public_operation
     def review(self, call: ReviewCall) -> WorkflowResult | RejectedResult:
@@ -2471,7 +2488,8 @@ class StandardsEngine:
             if requirement is None:
                 self._not_applicable()
             evidence = self._evidence(submission.evidence)
-            requirement.fact.bind(submission.value.as_contract())
+            value = submission.as_contract()["value"]
+            requirement.fact.bind(value)
             authorization = construct_authorization_record(
                 self._execution_context,
                 AuthorizationRequest(
@@ -2484,7 +2502,7 @@ class StandardsEngine:
             )
             observation = {
                 "requirement_id": requirement.id,
-                "value": submission.value.as_contract(),
+                "value": value,
                 "evidence": [item.as_contract() for item in evidence],
                 "authorization_id": authorization.reference["id"],
             }
@@ -3358,39 +3376,19 @@ class StandardsEngine:
             document = compiled.source.read_bytes(compiled.router.source).decode(
                 "utf-8"
             )
-            section = document.split("## Workflow Selection", 1)[1].split(
-                "## S1 Rust Library Bug-Fix Route", 1
-            )[0]
+            guidance = parse_router_guidance(document, compiled.corpus.module_corpus)
             rules = []
             for rule in compiled.router.rules:
-                owner = compiled.corpus.resolve_module(rule.target)
-                assert owner is not None
-                pattern = re.compile(
-                    r"\[[^]]+\]\(" + re.escape(owner.path) + r"(?:#[^)]*)?\)"
-                )
-                rows = [
-                    line
-                    for line in section.splitlines()
-                    if line.startswith("|") and pattern.search(line)
-                ]
+                rows = [row for row in guidance.rows if rule.target in row.targets]
                 if len(rows) != 1:
                     return self._reject(
-                        "NAVIGATION.ROUTING_GUIDANCE_AMBIGUOUS",
-                        "invalid",
+                        "NAVIGATION.ROUTING_GUIDANCE_AMBIGUOUS", "invalid",
                         "A routing rule requires exactly one readable selection row.",
                     )
-                rules.append(
-                    {
-                        "id": rule.id,
-                        "target": rule.target,
-                        "when": rule.program.as_expression(),
-                        "condition": re.sub(
-                            r"\\([\\|])",
-                            r"\1",
-                            re.split(r"(?<!\\)\|", rows[0], maxsplit=2)[1].strip(),
-                        ),
-                    }
-                )
+                rules.append({
+                    "id": rule.id, "target": rule.target,
+                    "when": rule.program.as_expression(), "condition": rows[0].condition,
+                })
             from .agent_navigation import fact_definitions
 
             facts = fact_definitions(compiled.router)

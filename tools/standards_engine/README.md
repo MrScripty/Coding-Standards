@@ -180,3 +180,13 @@ host to verify and re-establish the exact admitted candidate. Current permission
 proposal head, candidate identity and expected-target CAS remain required. The
 existing application and store are preserved. See [the recovery contract](PURPOSE-SEPARATION.md#admitted-publication-recovery-interface-35)
 and [implementation evidence](../../docs/plans/admitted-publication-recovery/verification.md).
+
+## Review workflow and deployment identity
+
+Interface 36 supports atomic final-state decision batches with `resolve_many`,
+compact focused results and paged `workflow_details`. `runtime_info` reports the
+actual running process, interface and catalog, including installation drift.
+The shared Router parser selects canonical table destinations independently of
+display headings. [The current contract](PURPOSE-SEPARATION.md#routing-and-review-workflow-interface-36)
+records limits, evidence, publication and restart semantics. These changes leave
+normative meaning, review authority and retained user state with their existing owners.

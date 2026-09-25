@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import tomllib
-import re
 from dataclasses import dataclass
-from pathlib import PurePosixPath
 
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
@@ -21,6 +19,7 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 from .errors import AnalysisError, AnalysisFailure
+from .router_guidance import parse_router_guidance
 
 
 ROUTER_PROJECTION = "evaluation/standards-effectiveness/router-projection.toml"
@@ -199,31 +198,4 @@ def _router_table_targets(
         ) from error
     except UnicodeDecodeError as error:
         raise _error(str(error), path=source_path) from error
-    start_marker = "## Workflow Selection"
-    end_marker = "## S1 Rust Library Bug-Fix Route"
-    if text.count(start_marker) != 1 or text.count(end_marker) != 1:
-        raise _error("Router selection section boundaries are ambiguous", path=source_path)
-    selection = text.split(start_marker, 1)[1].split(end_marker, 1)[0]
-    by_path = {module.path: module.module_id for module in modules.modules}
-    targets: set[str] = set()
-    for destination in re.findall(r"\[[^]]+\]\(([^)#]+)(?:#[^)]*)?\)", selection):
-        logical = PurePosixPath(destination)
-        if (
-            not destination
-            or logical.is_absolute()
-            or ".." in logical.parts
-            or destination.startswith("./")
-            or str(logical) != destination
-        ):
-            raise _error("Router selection link escapes the repository", path=source_path)
-        module_id = by_path.get(str(logical))
-        if module_id is None:
-            raise _error(
-                "Router selection link does not resolve to a canonical module",
-                path=source_path,
-                field=destination,
-            )
-        targets.add(module_id)
-    if not targets:
-        raise _error("Router selection tables contain no canonical targets", path=source_path)
-    return targets
+    return set(parse_router_guidance(text, modules, source_path=source_path).targets)

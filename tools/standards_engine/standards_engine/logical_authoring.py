@@ -2710,7 +2710,7 @@ def _edit_routing(files: dict[str, bytes], edits: list[Mapping[str, object]]) ->
             "AUTHORING.DUPLICATE_ROUTE_TARGET", "a route already owns this target"
         )
     if guidance:
-        _project_route_guidance(files, guidance, set(targets))
+        _project_route_guidance(files, guidance)
     header = [
         f"{key} = {_toml_inline(value)}"
         for key, value in raw.items()
@@ -2728,7 +2728,6 @@ def _edit_routing(files: dict[str, bytes], edits: list[Mapping[str, object]]) ->
 def _project_route_guidance(
     files: dict[str, bytes],
     edits: list[tuple[str | None, str | None, str | None]],
-    selected_targets: set[str],
 ) -> None:
     modules = load_canonical_module_corpus(FrozenContentSource(files))
 
@@ -2741,75 +2740,40 @@ def _project_route_guidance(
             )
         return module.path
 
+    from tools.standards_analysis.standards_analysis import parse_router_guidance
+
     source = "STANDARDS-ROUTER.md"
     text = files[source].decode("utf-8")
-    start_marker, end_marker = (
-        "## Workflow Selection",
-        "## S1 Rust Library Bug-Fix Route",
-    )
-    if text.count(start_marker) != 1 or text.count(end_marker) != 1:
-        raise _invalid(
-            "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
-            "route selection boundaries must be unique",
-        )
-    start, end = text.index(start_marker), text.index(end_marker)
-    if end <= start:
-        raise _invalid(
-            "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
-            "route selection boundaries are reversed",
-        )
-    section = text[start:end]
-    original = section.splitlines(keepends=True)
-    lines = original.copy()
+    guidance = parse_router_guidance(text, modules)
+    replacements = []
     additions = []
-    retired_links = []
+    occupied = set()
     for old_target, target, condition in edits:
-        old_path = target_path(old_target) if old_target is not None else None
-        path = target_path(target) if target is not None else None
+        rows = [row for row in guidance.rows if old_target in row.targets] if old_target else []
+        if old_target is not None and (len(rows) != 1 or len(rows[0].targets) != 1):
+            raise _invalid(
+                "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
+                "An edited route target requires one independently editable selection row.",
+            )
         replacement = ""
-        if path is not None:
+        if target is not None:
+            path = target_path(target)
             title = files[path].decode("utf-8").splitlines()[0].removeprefix("# ")
             title = title.replace("|", "\\|")
             cell = str(condition).replace("\\", "\\\\").replace("|", "\\|")
             replacement = f"| {cell} | [{title}]({path}) |\n"
-        old_link = (
-            re.compile(r"\[[^]]+\]\(" + re.escape(old_path) + r"(?:#[^)]*)?\)")
-            if old_path is not None
-            else None
-        )
-        rows = [
-            index
-            for index, line in enumerate(original)
-            if line.startswith("|") and old_link and old_link.search(line)
-        ]
-        if old_path is not None and len(rows) != 1:
-            raise _invalid(
-                "AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS",
-                "route target must have exactly one selection row",
-            )
         if rows:
-            lines[rows[0]] = replacement
+            row = rows[0]
+            if row.start in occupied:
+                raise _invalid("AUTHORING.ROUTING_GUIDANCE_AMBIGUOUS", "A selection row has conflicting edits.")
+            occupied.add(row.start)
+            replacements.append((row.start, row.end, replacement))
         elif replacement:
             additions.append(replacement)
-        if old_link is not None and old_target not in selected_targets:
-            retired_links.append(old_link)
-    # Readable explanatory links cannot preserve a removed selection. Row replacements
-    # are already final, so swaps never rewrite each other's new destination.
-    for index, line in enumerate(original):
-        if not line.startswith("|"):
-            for pattern in retired_links:
-                lines[index] = pattern.sub(
-                    lambda match: match[0].split("]", 1)[0][1:], lines[index]
-                )
     if additions:
-        if "## Additional Routing Rules\n" not in section:
-            lines.extend(
-                [
-                    "\n## Additional Routing Rules\n\n| Condition | Select |\n| --- | --- |\n"
-                ]
-            )
-        else:
-            while lines and not lines[-1].strip():
-                lines.pop()
-        lines.extend([*additions, "\n"])
-    files[source] = (text[:start] + "".join(lines) + text[end:]).encode("utf-8")
+        offset = guidance.insertion_offset
+        prefix = "" if offset == 0 or text[offset - 1] == "\n" else "\n"
+        replacements.append((offset, offset, prefix + "".join(additions)))
+    for start, end, replacement in sorted(replacements, reverse=True):
+        text = text[:start] + replacement + text[end:]
+    files[source] = text.encode("utf-8")

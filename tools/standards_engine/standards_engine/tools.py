@@ -320,6 +320,28 @@ class AgentToolFacade:
             return call
         return self._result("resolve_workflow", self._engine.resolve_workflow(call))
 
+    def runtime_info(self, arguments: object) -> dict[str, object]:
+        from .runtime_identity import RuntimeIdentity
+        from .context_projection import qualified_operations
+
+        if not hasattr(self, "_runtime_identity"):
+            self._runtime_identity = RuntimeIdentity(
+                self._engine._repository.root, self._engine.purpose, self._contracts,
+                qualified_operations(self._contracts.project().agent_tools, self._engine.purpose))
+        return self._runtime_identity.invoke(arguments)
+
+    def resolve_many(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("resolve_many", arguments, generated_contract.ResolveManyCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("resolve_many", self._engine.resolve_many(call))
+
+    def workflow_details(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("workflow_details", arguments, generated_contract.WorkflowDetailsCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("workflow_details", self._engine.workflow_details(call))
+
     def review(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("review", arguments, generated_contract.ReviewCall)
         if isinstance(call, dict):

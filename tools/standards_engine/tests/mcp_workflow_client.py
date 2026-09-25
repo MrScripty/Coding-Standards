@@ -58,6 +58,8 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
         calls = []
 
         async def call(client, name, arguments, *, error=False):
+            if name in {"propose", "revise", "analyze", "resolve_workflow", "workflow_status", "resume"}:
+                arguments = {"detail": "full", **arguments}
             result = await client.call_tool(name, arguments)
             calls.append(name)
             assert bool(result.isError) == error, result

@@ -19,6 +19,7 @@ from tools.standards_contracts.standards_contracts import CompiledContracts
 
 from .tools import AgentToolFacade
 from .compiled_cache import CompiledSnapshotCache
+from .runtime_identity import RuntimeIdentity
 from .context_projection import Purpose, qualified_operations
 
 
@@ -27,6 +28,8 @@ READ_ONLY_OPERATIONS = frozenset(
     {
         "read_many",
         "workflow_status",
+        "workflow_details",
+        "runtime_info",
         "resume",
         "find_snapshots",
         "find_proposals",
@@ -50,10 +53,13 @@ FOCUSED_OPERATIONS = frozenset(
         "revise",
         "analyze",
         "resolve_workflow",
+        "resolve_many",
         "review",
         "apply",
         "recover",
         "workflow_status",
+        "workflow_details",
+        "runtime_info",
         "resume",
     }
 )
@@ -63,6 +69,9 @@ FOCUSED_OPERATIONS = frozenset(
 # type renderer. This is generated documentation, never a second validator.
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
+    "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
+    "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Arguments are limited to 256 KiB. Compact results are default; use workflow_details for pending work.",
+    "workflow_details": "Read a live Analysis section in pages of 1–16 records (default 8, up to 64 KiB per page). Follow the exact next arguments; observation bindings detect evidence changes between pages. Detail reads do not decide or publish.",
     "read_many": "Read 1–32 selected items from one explicit snapshot in request order. Each item accepts the single-read options. The complete JSON result is limited to 2 MiB; a failed item rejects the whole request. Use the snapshot returned by route or read.",
     "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
     "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",
@@ -70,7 +79,7 @@ DESCRIPTIONS = {
     "resolve_workflow": "Supply one actual evidence or owner-decision submission for pending workflow context. Return the new immutable context and Engine-derived continuations.",
     "review": "Explicitly accept complete analysis using three evidence-backed review decisions. Requires user authorization. Returns readiness as context, without applying.",
     "apply": "Explicitly verify and locally publish the exact accepted workflow context. Requires user authorization. Recovery-required continues only through recover; never retry an interrupted apply.",
-    "recover": "Explicitly observe the application bound to readiness context after recovery-required. Requires current recovery authority. Never verifies, publishes, retries, or rolls back.",
+    "recover": "Use observe to inspect the original admitted application, or explicitly select complete-publication to revalidate and publish that same candidate. Preserve the original readiness and current recovery authority.",
     "workflow_status": "Reconstruct the exact workflow context and legal continuations from durable Engine records. Does not select newer revisions or perform mutation.",
     "resume": "Explicitly select the current revision of the proposal identified by context. Returns a draft context; analysis is a separate next action. Recovery-required must be recovered first.",
     "routing_facts": "Discover snapshot-bound registered routing facts, meanings, types, allowed values, nullability and aliases. Supply known facts to route; missing facts remain unknown. Omit snapshot to capture new accepted authority.",
@@ -94,13 +103,14 @@ DESCRIPTIONS = {
     "review_proposal": "Accept complete current proposal analysis with explicit evidence-backed review decisions; return content-bound readiness. Requires user authorization for review.",
     "verify_proposal": "Verify the exact proposal candidate. Coverage audits require readiness. Verification does not supply review decisions or publish.",
     "apply_proposal": "Verify and publish the exact accepted readiness to the local canonical ref. Requires user authorization for application. On recovery-required use recover_application with the same readiness; never retry apply. Does not push a remote.",
-    "recover_application": "Observe the durable application selected by readiness after recovery-required. Does not retry or publish; preserve the same readiness handle.",
+    "recover_application": "Observe the original admitted application or explicitly authorize complete-publication after revalidation. Preserve the selected readiness and application identity.",
     "verify_repository": "Verify the working tree. Refreshing generated verification inputs is a mutation; inspect verification.passed.",
     "maintain_evidence": "Maintain the accepted repository evidence catalog at an exact revision. For draft-only consumers use register-consumer in propose/revise with separate policy relationships. This operation does not edit a proposal or certify coverage.",
 }
 
 
 APPLICATION_DESCRIPTIONS = {
+    "runtime_info": DESCRIPTIONS["runtime_info"],
     "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
     "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Reuse the returned snapshot.",
     "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
@@ -214,9 +224,10 @@ def input_schema(root: dict, definitions: dict) -> dict:
 
 
 class ProtocolError(Exception):
-    def __init__(self, code: int, message: str) -> None:
+    def __init__(self, code: int, message: str, data: dict | None = None) -> None:
         super().__init__(message)
         self.code = code
+        self.data = data
 
 
 class MCPServer:
@@ -229,6 +240,7 @@ class MCPServer:
             self.root, purpose=self.purpose, advanced=advanced, interface=self._interface
         )
         self.names = {tool["name"] for tool in self.tools}
+        self._runtime_identity = RuntimeIdentity(self.root, self.purpose, self._interface, self.tools)
         self._compiled_cache = CompiledSnapshotCache(self.root, self.purpose)
         self._closed = False
         self.initialized = False
@@ -242,6 +254,7 @@ class MCPServer:
         """Release only process-owned pure resources; each call closes its store."""
         self._compiled_cache.close()
         self._interface = None
+        self._runtime_identity = None
         self.tools.clear()
         self.names.clear()
         self._closed = True
@@ -279,7 +292,8 @@ class MCPServer:
             return {
                 "jsonrpc": "2.0",
                 "id": identifier,
-                "error": {"code": error.code, "message": str(error)},
+                "error": {"code": error.code, "message": str(error),
+                          **({"data": error.data} if error.data is not None else {})},
             }
 
     def _request(self, method: str, params: dict) -> dict:
@@ -300,7 +314,8 @@ class MCPServer:
             return {
                 "protocolVersion": PROTOCOL_VERSION,
                 "capabilities": {"tools": {"listChanged": False}},
-                "serverInfo": {"name": "standards-engine", "version": "0.2.0"},
+                "serverInfo": {"name": "standards-engine", "version": self._runtime_identity.implementation_version},
+                "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
                 "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. " + (
                     "Use route and read to obtain applicable guidance. Reuse returned snapshots for consistent observations."
                     if self.purpose is Purpose.APPLICATION else
@@ -317,15 +332,20 @@ class MCPServer:
         if method == "tools/list":
             if "cursor" in params:
                 raise ProtocolError(-32602, "This catalog has no continuation cursor.")
-            return {"tools": deepcopy(self.tools)}
+            return {"tools": deepcopy(self.tools),
+                    "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()}}
         if method != "tools/call":
             raise ProtocolError(-32601, "Method not found.")
         name = params.get("name")
         if not isinstance(name, str) or name not in self.names:
-            raise ProtocolError(-32602, "Unknown Standards Engine tool.")
+            raise ProtocolError(-32602, "Tool unavailable in this running catalog; inspect runtime_info and refresh tools or restart/reconnect after an upgrade.",
+                                self._runtime_identity.metadata())
         arguments = params.get("arguments", {})
         if not isinstance(arguments, dict):
             raise ProtocolError(-32602, "Tool arguments must be an object.")
+        if name == "runtime_info":
+            value = self._runtime_identity.invoke(arguments)
+            return self._tool_result(value)
         try:
             # Opening per call matches the reference transport and avoids keeping
             # store state alive across idle client sessions. No operation retries.
@@ -359,7 +379,11 @@ class MCPServer:
                     }
                 ],
             }
+        return self._tool_result(value)
+
+    def _tool_result(self, value: dict) -> dict:
         return {
+            "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
             "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result"}

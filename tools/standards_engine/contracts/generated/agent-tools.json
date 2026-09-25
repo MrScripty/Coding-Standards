@@ -440,6 +440,13 @@
       "properties": {
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -1116,6 +1123,13 @@
       "properties": {
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -5044,6 +5058,13 @@
         "change_set": {
           "$ref": "#/$defs/StandardsChangeSet"
         },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
         }
@@ -5821,6 +5842,13 @@
         },
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -6326,6 +6354,34 @@
       ],
       "type": "object"
     },
+    "ResolveManyCall": {
+      "additionalProperties": false,
+      "description": "Resolve ordered decisions bound to one original analysis. Validate every item before publishing a final immutable successor; an invalid batch persists no intermediate decisions.",
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "submissions": {
+          "items": {
+            "$ref": "#/$defs/Submission"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "context",
+        "submissions"
+      ],
+      "type": "object"
+    },
     "ResolveNextOperation": {
       "additionalProperties": false,
       "properties": {
@@ -6363,6 +6419,13 @@
         "context": {
           "$ref": "#/$defs/WorkflowContext"
         },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
         "submission": {
           "$ref": "#/$defs/Submission"
         }
@@ -6378,6 +6441,13 @@
       "properties": {
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -6502,6 +6572,13 @@
           "minItems": 3,
           "type": "array",
           "uniqueItems": true
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -6614,6 +6691,13 @@
         },
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -6997,6 +7081,87 @@
         "kind",
         "rule",
         "facts"
+      ],
+      "type": "object"
+    },
+    "RuntimeInfoCall": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_catalog": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "RuntimeInfoResult": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "reuse",
+            "restart-and-reconnect",
+            "refresh-tools",
+            "check-installation"
+          ]
+        },
+        "catalog_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "client_catalog_state": {
+          "enum": [
+            "unspecified",
+            "matches",
+            "differs"
+          ]
+        },
+        "implementation_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "implementation_version": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "installation_state": {
+          "enum": [
+            "current",
+            "restart-required",
+            "unavailable"
+          ]
+        },
+        "instance_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "interface_version": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "kind": {
+          "const": "runtime-info-result"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "schema_digest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "interface_version",
+        "implementation_version",
+        "instance_id",
+        "implementation_digest",
+        "catalog_digest",
+        "schema_digest",
+        "installation_state",
+        "client_catalog_state",
+        "action"
       ],
       "type": "object"
     },
@@ -7586,6 +7751,50 @@
       ],
       "type": "object"
     },
+    "WorkflowAnalysisSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "details": {
+          "$ref": "#/$defs/WorkflowDetailsLink"
+        },
+        "handle": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "kind": {
+          "const": "workflow-analysis-summary"
+        },
+        "pending_facts": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "required_obligations": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sections": {
+          "items": {
+            "$ref": "#/$defs/WorkflowSectionCount"
+          },
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "needs-action",
+            "complete"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "handle",
+        "status",
+        "required_obligations",
+        "pending_facts",
+        "sections",
+        "details"
+      ],
+      "type": "object"
+    },
     "WorkflowContext": {
       "oneOf": [
         {
@@ -7614,7 +7823,8 @@
             "apply",
             "recover",
             "workflow_status",
-            "resume"
+            "resume",
+            "resolve_many"
           ]
         },
         "required_inputs": {
@@ -7623,7 +7833,8 @@
               "change_set",
               "submission",
               "decisions",
-              "action"
+              "action",
+              "submissions"
             ]
           },
           "type": "array",
@@ -7634,6 +7845,144 @@
         "operation",
         "context",
         "required_inputs"
+      ],
+      "type": "object"
+    },
+    "WorkflowDetailItem": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Obligation"
+        },
+        {
+          "$ref": "#/$defs/FactRequirementWork"
+        },
+        {
+          "$ref": "#/$defs/CoverageCertificate"
+        },
+        {
+          "$ref": "#/$defs/DispositionRecord"
+        },
+        {
+          "$ref": "#/$defs/FactObservation"
+        },
+        {
+          "$ref": "#/$defs/ReadingPlanEntry"
+        },
+        {
+          "$ref": "#/$defs/ChangedPolicyUnit"
+        },
+        {
+          "$ref": "#/$defs/WorkflowObligationWork"
+        }
+      ]
+    },
+    "WorkflowDetailsCall": {
+      "additionalProperties": false,
+      "description": "Read one live analysis section (default eight items). Continuations require the returned observation digest; changed observations reject paging rather than skip items.",
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "limit": {
+          "maximum": 16,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "observation": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "section": {
+          "$ref": "#/$defs/WorkflowSection"
+        }
+      },
+      "required": [
+        "analysis",
+        "section"
+      ],
+      "type": "object"
+    },
+    "WorkflowDetailsLink": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "operation": {
+          "const": "workflow_details"
+        }
+      },
+      "required": [
+        "operation",
+        "analysis"
+      ],
+      "type": "object"
+    },
+    "WorkflowDetailsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/WorkflowDetailItem"
+          },
+          "maxItems": 16,
+          "type": "array"
+        },
+        "kind": {
+          "const": "workflow-details-result"
+        },
+        "next": {
+          "$ref": "#/$defs/WorkflowDetailsCall"
+        },
+        "observation": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "section": {
+          "$ref": "#/$defs/WorkflowSection"
+        },
+        "total": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "analysis",
+        "section",
+        "observation",
+        "offset",
+        "total",
+        "items"
+      ],
+      "type": "object"
+    },
+    "WorkflowObligationWork": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "workflow-obligation-work"
+        },
+        "obligation": {
+          "$ref": "#/$defs/Obligation"
+        },
+        "work": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        }
+      },
+      "required": [
+        "kind",
+        "obligation",
+        "work"
       ],
       "type": "object"
     },
@@ -7665,6 +8014,9 @@
         },
         {
           "$ref": "#/$defs/RejectedResult"
+        },
+        {
+          "$ref": "#/$defs/WorkflowAnalysisSummary"
         }
       ]
     },
@@ -7716,11 +8068,47 @@
       ],
       "type": "object"
     },
+    "WorkflowSection": {
+      "enum": [
+        "pending_obligations",
+        "obligations",
+        "fact_requirements",
+        "coverage_certificates",
+        "dispositions",
+        "fact_observations",
+        "reading_plan",
+        "changed_units"
+      ]
+    },
+    "WorkflowSectionCount": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "section": {
+          "$ref": "#/$defs/WorkflowSection"
+        }
+      },
+      "required": [
+        "section",
+        "count"
+      ],
+      "type": "object"
+    },
     "WorkflowStatusCall": {
       "additionalProperties": false,
       "properties": {
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "detail": {
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         }
       },
       "required": [
@@ -7729,7 +8117,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 35,
+  "interface_schema_version": 36,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -8244,6 +8632,59 @@
         "PreviewApplicationResult",
         "RejectedResult"
       ]
+    },
+    {
+      "capability_by_submission": {
+        "consumer-disposition": "standards.review.consumer",
+        "coverage-attestation": "standards.review.audit",
+        "impact-disposition": "standards.review.impact",
+        "provide-fact": "standards.analyze"
+      },
+      "id": "resolve_many",
+      "input_definition": "ResolveManyCall",
+      "input_schema": {
+        "$ref": "#/$defs/ResolveManyCall"
+      },
+      "result_definitions": [
+        "WorkflowResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "workflow_details",
+      "input_definition": "WorkflowDetailsCall",
+      "input_schema": {
+        "$ref": "#/$defs/WorkflowDetailsCall"
+      },
+      "result_definitions": [
+        "WorkflowDetailsResult",
+        "RejectedResult"
+      ]
+    },
+    {
+      "capability": "standards.read",
+      "id": "runtime_info",
+      "input_definition": "RuntimeInfoCall",
+      "input_schema": {
+        "$ref": "#/$defs/RuntimeInfoCall"
+      },
+      "result_definitions": [
+        "RuntimeInfoResult",
+        "RejectedResult"
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "RuntimeInfoCall",
+          "input_schema": {
+            "$ref": "#/$defs/RuntimeInfoCall"
+          },
+          "result_definitions": [
+            "RuntimeInfoResult",
+            "ApplicationRejectedResult"
+          ]
+        }
+      }
     }
   ],
   "request_contract_version": 6,

@@ -44,6 +44,7 @@ _SCHEMA_KEYS = frozenset(
         "minLength",
         "pattern",
         "minimum",
+        "maximum",
     }
 )
 _INTERFACE_KEYS = frozenset(
@@ -270,11 +271,16 @@ def _parse_interface(
     for operation in selections:
         if not operation.capability_by_submission:
             continue
-        submission = (
-            definitions[operation.input_definition]
-            .get("properties", {})
-            .get("submission", {})
-        )
+        properties = definitions[operation.input_definition].get("properties", {})
+        submission = properties.get("submission")
+        batch = properties.get("submissions")
+        if submission is not None and batch is not None:
+            raise failure("CONTRACT.INVALID_INTERFACE", "Select one submission field per operation.")
+        if batch is not None:
+            if batch.get("type") != "array":
+                raise failure("CONTRACT.INVALID_INTERFACE", "Batch submissions require an array.")
+            submission = batch.get("items")
+        submission = {} if submission is None else submission
         reference = submission.get("$ref")
         if not isinstance(reference, str):
             raise failure(

@@ -59,7 +59,7 @@ class SupportingWorkflowTest(unittest.TestCase):
             self.assertFalse(outcome.get("fact_requirements"), outcome)
             obligation = next(item for item in outcome["obligations"] if item["state"] == "required")
             self.assertIn("impact-disposition", obligation["permitted_submissions"], obligation)
-            proposed = self.author.resolve_workflow({"context": proposed["context"], "submission": {
+            proposed = self.author.resolve_workflow({"detail": "full", "context": proposed["context"], "submission": {
                 "kind": "impact-disposition", "obligation": obligation["handle"], "result": "confirmed",
                 "rationale": "The fixture owner confirms this exact isolated support/content change.",
                 "evidence": [evidence(self.root)], "fingerprint": obligation["fingerprint"],
@@ -69,15 +69,15 @@ class SupportingWorkflowTest(unittest.TestCase):
 
     def publish(self, proposed):
         complete = self.resolve(proposed)
-        ready = self.author.review({"context": complete["context"], "decisions": decisions(self.root)})
+        ready = self.author.review({"detail": "full", "context": complete["context"], "decisions": decisions(self.root)})
         self.assertEqual(ready.get("status"), "ready", ready)
-        applied = self.author.apply({"context": ready["context"]})
+        applied = self.author.apply({"detail": "full", "context": ready["context"]})
         self.assertEqual(applied.get("status"), "applied", applied)
         return applied
 
     def test_coordinated_publication_and_provenance_only_revision(self):
         snapshot = self.author.create_snapshot({"kind": "create-snapshot"})["snapshot"]["snapshot"]
-        empty = self.app.read({"snapshot": snapshot, "target": "core"})
+        empty = self.app.read({"snapshot": snapshot, "target": "topic.security"})
         self.assertEqual(empty["code"], "APPLICATION.CONTENT_UNAVAILABLE", empty)
         aids = []
         for target in ("prompts/planning.md", "templates/PLAN-TEMPLATE.md"):
@@ -96,7 +96,7 @@ class SupportingWorkflowTest(unittest.TestCase):
                  "title": lines[0].lstrip("# "), "body": "\n".join(lines[1:]).lstrip() + "\n\n" + PUBLIC + "\n"},
                 {"kind": "approve-application-content", "target": aid["target"]},
             ])
-        proposed = self.author.propose({"snapshot": snapshot, "change_set": self.change(edits)})
+        proposed = self.author.propose({"detail": "full", "snapshot": snapshot, "change_set": self.change(edits)})
         self.assertEqual(proposed.get("status"), "needs-action", proposed)
         draft = self.author.query_proposal({"revision": proposed["revision"], "request": {"kind": "read", "target": REASON}})
         self.assertEqual(draft["record"]["rationale"], PRIVATE, draft)
@@ -119,7 +119,7 @@ class SupportingWorkflowTest(unittest.TestCase):
         revisions_before = {unit.id: unit.semantic_revision for unit in
                             load_canonical_standards_corpus(self.root).policy_units}
         old_snapshot = first["snapshot"]
-        next_change = self.author.propose({"snapshot": published_snapshot, "change_set": self.change([
+        next_change = self.author.propose({"detail": "full", "snapshot": published_snapshot, "change_set": self.change([
             {"kind": "put-provenance", "record": {**record, "rationale": PRIVATE + "_REVISED"}},
         ])})
         self.assertEqual(len(next_change["outcome"]["obligations"]), 1, next_change)

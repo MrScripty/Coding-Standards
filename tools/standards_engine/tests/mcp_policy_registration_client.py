@@ -78,6 +78,8 @@ async def walkthrough(engine_python: str) -> dict[str, object]:
             }, "edits": edits}
 
         async def call(client, name, arguments, *, error=False):
+            if name in {"propose", "revise", "analyze", "resolve_workflow", "workflow_status", "resume"}:
+                arguments = {"detail": "full", **arguments}
             result = await client.call_tool(name, arguments)
             calls.append(name)
             require(bool(result.isError) == error, result)
