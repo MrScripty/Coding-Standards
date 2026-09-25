@@ -2259,6 +2259,27 @@
       },
       "additionalProperties": false
     },
+    "RegisterPolicyUnitEdit": {
+      "type": "object",
+      "description": "Register an explicitly selected policy scope in an existing standard. The Engine owns declaration placement and validates the final candidate.",
+      "required": [
+        "kind",
+        "standard",
+        "policy_unit"
+      ],
+      "properties": {
+        "kind": {
+          "const": "register-policy-unit"
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "policy_unit": {
+          "$ref": "#/$defs/NewPolicyUnit"
+        }
+      },
+      "additionalProperties": false
+    },
     "ReviseStandardEdit": {
       "type": "object",
       "required": [
@@ -2689,6 +2710,9 @@
       "oneOf": [
         {
           "$ref": "#/$defs/CreateStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/RegisterPolicyUnitEdit"
         },
         {
           "$ref": "#/$defs/ReviseStandardEdit"

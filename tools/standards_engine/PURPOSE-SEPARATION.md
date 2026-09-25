@@ -281,6 +281,7 @@ the current generated schema; this table is a navigation aid, not a validator.
 | Read a complete owner or scoped policy | Authoring `read`; inspect metadata/relationships as needed |
 | Revise module body and metadata | `revise-standard` |
 | Relocate/rescope registered headings in a full rewrite | `revise-standard.scope_updates`, with all existing scope identities and explicit semantics |
+| Register a selected scope within an existing owner | `register-policy-unit`, using the existing canonical module ID and a new policy declaration |
 | Revise one policy scope | `revise-policy-unit` |
 | Create/revise a supplementary reference | `create-standard` / `revise-standard` with the existing reference role |
 | Inspect an existing registered prompt/template | Authoring `read` returns its opaque target handle |
@@ -294,6 +295,19 @@ the current generated schema; this table is a navigation aid, not a validator.
 | Change Router decisions or presentation | Existing routing rule/fact edits |
 | Inspect a draft | Authoring `query_proposal` against its exact revision |
 | Publish the reviewed candidate | Existing explicit `review`, then `apply`; follow `recover` on recovery-required |
+
+Existing-owner registration supports modules with zero or more registered
+policies. It preserves existing prose and declarations, and can follow a
+whole-module rewrite in the same candidate. New scopes are selected explicitly;
+module and existing-policy edits precede the registration group, then consumer
+relationships resolve against the completed registry. Existing canonical scope,
+identity and lifecycle validation applies. Registration alone issues no coverage
+certificate. The same logical program is replayed after restart or through an
+eligible incremental successor; storage and handle editions are unchanged.
+
+The [registration qualification plan](../../docs/plans/existing-policy-registration/plan.md)
+tracks the current source correction and its outstanding full-checkout/MCP
+acceptance. Interface 33 availability does not by itself certify that qualification.
 
 The Engine resolves unordered same-change-set references against the final
 candidate. It stages retirement and withdrawal privately before dependent owner
@@ -311,7 +325,7 @@ those same bytes. The Engine does not rewrite semantic versions after review.
 
 ## Versions and coordinated cutover
 
-Current Engine package/transport implementation: 0.2.0. Engine interface: 32.
+Current Engine package/transport implementation: 0.2.0. Engine interface: 33.
 Analysis request: 6; result/state and Analysis handles: 7. The semantic-revision
 interpretation change belongs to Analysis 7. Unchanged Snapshot, proposal,
 readiness, application and generic identity/storage contracts keep their

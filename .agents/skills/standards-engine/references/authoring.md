@@ -46,6 +46,7 @@ The closed edit variants are:
 
 - `create-standard`
 - `revise-standard`
+- `register-policy-unit`
 - `revise-policy-unit`
 - `move-policy-unit`
 - `retire-policy-unit`
@@ -99,6 +100,41 @@ Do not infer semantic relatedness, impact, lifecycle meaning, evidence
 sufficiency, or successors from prose. If the user has not decided required
 meaning, stop at the typed rejection or ask for that decision instead of
 manufacturing closure.
+
+## Register A Scope In An Existing Standard
+
+Use `register-policy-unit` to bind a selected existing scope to a fresh stable
+policy ID. Supply the existing canonical `standard` and the schema's
+`policy_unit` declaration: ID, heading chain, revision one, explicit intent,
+aliases, predecessors and successors. Registry paths and generated bindings
+remain Engine-owned. The declaration uses the same validated policy shape as
+`create-standard`.
+
+Registration preserves the standard's body. It supports both previously
+unmapped modules and owners that already contain policy units, preserving
+existing identities, aliases and tombstones. Select one uniquely resolved,
+non-overlapping scope and an available identity. Existing lifecycle and lineage
+validation remains authoritative.
+
+A coherent change set may revise a module, register selected additional scopes,
+and add relationships and provenance for those scopes. Module and existing
+policy content changes run first; registrations are validated together before
+consumer relationships and final supporting bindings. `scope_updates` describes
+the policies registered before those new registrations. Input edit order does
+not change this staging.
+
+Registration establishes an identity, not audited coverage. Resolve the actual
+consumer, impact and coverage obligations before review and publication. A
+rejected registration leaves the current proposal revision and accepted source
+unchanged. Use the returned status and current contract for recovery or revision.
+
+After installing interface 33, restart the Engine process and refresh the client
+catalog. Reopen preserved work with `workflow_status`; use `resume` only to select
+its explicit current revision when needed. A previous review remains historical
+evidence, while changed candidates receive current analysis and affected review.
+`resume` selects a proposal revision; it does not promise to rebase an old source
+snapshot. Follow any returned stale-base disposition rather than editing a store
+or carrying old readiness onto changed material.
 
 ## Navigation Index Correction
 

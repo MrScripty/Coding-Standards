@@ -373,6 +373,15 @@ def _edit(value: object) -> LogicalEdit:
         return RevisePolicyUnit.from_mapping(raw)
     if kind == "replace-standard-relationships":
         return ReplaceStandardRelationships.from_mapping(raw)
+    if kind == "register-policy-unit":
+        _exact(raw, {"kind", "standard", "policy_unit"}, "register-policy-unit edit")
+        standard = _semantic_id(raw["standard"], "standard ID")
+        unit = _new_policy_unit(raw["policy_unit"])
+        return _structured(
+            {"kind": kind, "standard": standard, "policy_unit": unit},
+            target=str(unit["id"]),
+            facet="policy",
+        )
     if kind == "create-standard":
         _exact(
             raw,
@@ -1024,8 +1033,16 @@ class LogicalAuthoringCompiler:
                 if edit.as_contract()["kind"] in _ROUTING_EDITS
             ]
             routing_applied = False
+            registrations = [edit.as_contract() for edit in change_set.edits
+                             if edit.as_contract()["kind"] == "register-policy-unit"]
+            registrations_applied = False
             for edit in sorted((edit for edit in change_set.edits
                                 if edit.as_contract()["kind"] not in SUPPORT_EDIT_KINDS), key=_projection_order):
+                if edit.as_contract()["kind"] == "register-policy-unit":
+                    if not registrations_applied:
+                        self._register_policy_units(files, registrations)
+                        registrations_applied = True
+                    continue
                 if edit.as_contract()["kind"] in _ROUTING_EDITS:
                     if not routing_applied:
                         _edit_routing(files, routing_edits)
@@ -1206,6 +1223,55 @@ class LogicalAuthoringCompiler:
             _set_registry_list(
                 files, POLICY_UNIT_REGISTRY, "sources", sidecar, present=True
             )
+
+    @staticmethod
+    def _register_policy_units(
+        files: dict[str, bytes],
+        edits: Iterable[Mapping[str, object]],
+    ) -> None:
+        # Resolve owners after content edits, then stage the complete group.
+        # The canonical loader validates all new identities and scopes together,
+        # rather than observing a half-registered same-change-set corpus.
+        corpus = load_canonical_standards_corpus(FrozenContentSource(files))
+        staged: dict[str, tuple[list[dict[str, object]], list[dict[str, object]]]] = {}
+        for edit in edits:
+            standard = str(edit["standard"])
+            module = corpus.resolve_module(standard)
+            if module is None or module.module_id != standard:
+                raise _error(
+                    "AUTHORING.STANDARD_UNAVAILABLE",
+                    "unavailable",
+                    f"standard {standard!r} is unavailable",
+                )
+            unit = _mapping(edit["policy_unit"], "new policy unit")
+            identity = str(unit["id"])
+            if (
+                corpus.resolve_policy_unit(identity) is not None
+                or corpus.resolve_module(identity) is not None
+                or any(corpus.resolve_module(alias) is not None for alias in unit["aliases"])
+            ):
+                raise _invalid(
+                    "AUTHORING.POLICY_UNIT_EXISTS",
+                    f"policy identity {identity!r} is already reserved",
+                )
+            sidecar = _ensure_policy_sidecar(files, standard)
+            if sidecar not in staged:
+                staged[sidecar] = _policy_sidecar(files[sidecar])
+            active, _ = staged[sidecar]
+            active.append({
+                "id": identity,
+                "module": standard,
+                "heading_path": unit["heading_chain"],
+                "semantic_revision": 1,
+                "aliases": unit["aliases"],
+                "predecessors": unit["predecessors"],
+                "successors": unit["successors"],
+            })
+        for sidecar, (active, retired) in staged.items():
+            files[sidecar] = _render_policy_sidecar(active, retired)
+        # Validate the complete registration group before any relationship can
+        # consume it. Outer projection ownership keeps failed candidates private.
+        load_canonical_standards_corpus(FrozenContentSource(files))
 
     @staticmethod
     def _revise_standard(
@@ -1740,6 +1806,7 @@ def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
         "remove-routing-fact": 45,
         "revise-policy-unit": 20,
         "move-policy-unit": 30,
+        "register-policy-unit": 35,
         "replace-standard-relationships": 40,
         "put-policy-relationship": 40,
         "remove-policy-relationship": 40,
@@ -1976,10 +2043,16 @@ def _ensure_policy_sidecar(files: dict[str, bytes], module: str) -> str:
         if any(item.get("module") == module for item in units):
             return path
     path = _policy_sidecar_path(module)
+    if path in sources:
+        units, _ = _policy_sidecar(files[path])
+        if not units:
+            # Retiring the last active unit leaves the registered owner and its
+            # tombstones intact. Reuse that owner for a fresh policy identity.
+            return path
     if path in files:
         raise _invalid(
             "AUTHORING.PROJECTION_DISAGREEMENT",
-            "derived policy-unit sidecar already exists but is unregistered",
+            "derived policy-unit sidecar already exists without the selected owner",
         )
     files[path] = _render_policy_sidecar([], [])
     _set_registry_list(files, POLICY_UNIT_REGISTRY, "sources", path, present=True)
@@ -2338,6 +2411,7 @@ def _analysis_module_ids(program: LogicalProgram) -> tuple[str, ...]:
             elif kind in {
                 "replace-standard-relationships",
                 "retire-standard",
+                "register-policy-unit",
             }:
                 selected.add(str(raw["standard"]))
     return tuple(sorted(selected))
@@ -2390,6 +2464,9 @@ def _semantic_proposals(
                     for unit_value in raw["policy_units"]:
                         unit = _mapping(unit_value, "new policy unit")
                         semantic_intents[str(unit["id"])] = (None, 1, str(unit["intent"]))
+                elif raw["kind"] == "register-policy-unit":
+                    unit = _mapping(raw["policy_unit"], "new policy unit")
+                    semantic_intents[str(unit["id"])] = (None, 1, str(unit["intent"]))
                 elif raw["kind"] == "revise-standard":
                     for update in raw.get("scope_updates", []):
                         retain(update["policy"], update["semantics"])

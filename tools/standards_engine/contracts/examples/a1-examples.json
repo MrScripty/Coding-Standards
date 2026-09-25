@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 32,
+  "interface_schema_version": 33,
   "examples": [
     {
       "name": "create-snapshot",
@@ -728,6 +728,25 @@
             "detail": "full"
           }
         ]
+      }
+    },
+    {
+      "name": "register-existing-policy-unit",
+      "definition": "RegisterPolicyUnitEdit",
+      "value": {
+        "kind": "register-policy-unit",
+        "standard": "topic.contracts",
+        "policy_unit": {
+          "id": "topic.contracts.registration-example",
+          "heading_chain": [
+            "Example Scope"
+          ],
+          "semantic_revision": 1,
+          "intent": "Give the explicitly selected existing scope a stable review identity.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
       }
     }
   ]

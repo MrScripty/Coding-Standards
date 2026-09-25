@@ -6905,7 +6905,7 @@
       ]
     },
     {
-      "digest": "sha256:f72b766a17224da7599267e47a9d40e25a15e2b4b1dd8c2a846dd2e167979c02",
+      "digest": "sha256:6856c158929e7065e75f5ed340cce525eafe1270ecde291b4bf9e7dbaa5f9c63",
       "path": "tools/standards_engine/contracts/a1-contract.schema.json",
       "state": "present",
       "uses": [
@@ -6922,7 +6922,7 @@
       ]
     },
     {
-      "digest": "sha256:e7bdf6aff70f72506955a902de1ffb829762bf8b37003d20f2bff5a110c024f2",
+      "digest": "sha256:1430092f0624180829df0545890ebe9319ca0fe5edcc11ccb1c0b2c20d88242d",
       "path": "tools/standards_engine/contracts/a1-interface.toml",
       "state": "present",
       "uses": [
@@ -6939,7 +6939,7 @@
       ]
     },
     {
-      "digest": "sha256:4b6a6a9bec925e778d0d34919233a03011221d200872f42e2ce4698c2fa4791f",
+      "digest": "sha256:1e942ce60dacb00694b2991f959741bdc3ea1477ed8e4b8da6e3e4c96633d8f5",
       "path": "tools/standards_engine/contracts/examples/a1-examples.json",
       "state": "present",
       "uses": [
@@ -6956,7 +6956,7 @@
       ]
     },
     {
-      "digest": "sha256:f4739057451b802feac32c05f64e7f4d3ac918fdc643609fb9f1d5c99dc2943a",
+      "digest": "sha256:dfdb04014603f07e827e788f06ee21600b86d3367c70f0a4ccbfd0b985797d9e",
       "path": "tools/standards_engine/contracts/generated/agent-tools.json",
       "state": "present",
       "uses": [
@@ -7019,7 +7019,7 @@
       ]
     },
     {
-      "digest": "sha256:b023eeef004835e52ab836d27f435dfef6a0d783957fc956857e1140f4c2d213",
+      "digest": "sha256:79745695054664b96f17eae432509e6250ea0c4e7f1d2905cf7b3431a0290823",
       "path": "tools/standards_engine/standards_engine/_generated_contract.py",
       "state": "present",
       "uses": [
@@ -7135,7 +7135,7 @@
       ]
     },
     {
-      "digest": "sha256:3593999d7823cecb4e4e87403052ec7e1e84e3b982cad28fc43319fdee875f5f",
+      "digest": "sha256:c13c22e0612adcabcc7c185964ba5641c5e545e16a4792d5fe3b62cdd818537f",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -13326,7 +13326,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:3817f1cc9e0eb5ff9d5c828a7dcbf684c428726bfc88c29facbb4825fadbeb00",
+    "digest": "sha256:ae569bce7aa23d04cf81d33e83815a0b7b417f798d677e31641ec716c67f1ccc",
     "uses": [
       {
         "check": "python-package-contract",

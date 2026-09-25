@@ -156,6 +156,8 @@ Begin after code claims C1–C10 are accepted. Verify the actual installed purpo
 
 Required capabilities are complete module/metadata revision, scoped policy revision with stable identities, reference creation/revision, registered prompt/template editing, provenance maintenance, explicit exposure approval/withdrawal, relationship updates, and coherent reviewed publication. Verify a whole-module rewrite preserves or explicitly dispositions existing policy-unit scopes and previously unmapped content.
 
+The handoff also exercises explicit policy-unit registration within an existing standard, both for a module with no registered units and for an owner with established units. Prove registration together with an optional whole-module rewrite, consumer relationships and provenance through reviewed publication and cold readback. Registration preserves existing identities and requires the real coverage dispositions. The [registration correction plan](../plans/existing-policy-registration/plan.md) owns the code capability and its acceptance; a schema entry alone does not satisfy this handoff.
+
 A missing necessary content operation returns to the code workstream as a bounded implementation gap. It is not a reason to bypass the Engine and edit canonical files directly.
 
 ### H1 — Inventory one coherent migration boundary
