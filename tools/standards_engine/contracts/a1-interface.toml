@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 33
+interface_schema_version = 34
 request_contract_version = 6
 result_projection_version = 7
 
@@ -207,3 +207,9 @@ input_definition = "ReadManyCall"
 result_definitions = ["ReadManyResult", "RejectedResult"]
 capability = "standards.read"
 variants = { "application" = { "input_definition" = "ApplicationReadManyCall", "result_definitions" = ["ApplicationReadManyResult", "ApplicationRejectedResult"] } }
+
+[[operations]]
+id = "preview_application"
+input_definition = "PreviewApplicationCall"
+result_definitions = ["PreviewApplicationResult", "RejectedResult"]
+capability = "standards.proposal.read"

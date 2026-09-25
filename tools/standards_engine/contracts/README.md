@@ -1,6 +1,6 @@
 # Standards Engine Contracts
 
-## Current contract: interface 31
+## Current contract: interface 34
 
 Required host purpose selects application or authoring operation variants. The
 canonical interface declares each variant's exact input/result roots, and the
@@ -14,6 +14,32 @@ result-state 7 accept explicit equal-revision preservation or next-revision
 semantic change against the actual compiled candidate. Older Analysis records
 are not reinterpreted. Unchanged Snapshot/storage primitives retain their own
 versions. See [the implementation contract](../PURPOSE-SEPARATION.md).
+
+Interface 34 adds proposal-local `register-consumer` and authoring-only
+`preview_application`. A registration names a canonical consumer ID, an existing
+tracked repository path, artifact kind and evidence/projection authority. The
+Engine binds exact original-revision bytes privately before admitting the edit;
+callers supply no captured bytes. Relationships may select candidate consumer
+IDs, including registrations in the same change set. Registry declarations,
+relationships and coverage reviews retain separate meanings.
+
+Registered Markdown documentation, including hidden-directory skill references,
+can use `revise-operational-artifact` alongside prompts and templates. That edit
+accepts a canonical registered ID or returned exact target. Fixture and source
+consumers do not acquire an editing capability.
+
+`preview_application` accepts an exact proposal revision and one application
+read/route/related request. It applies normal exposure and prerequisite checks,
+returns explicitly candidate-bound results, and provides preview-only
+continuations. It is absent from ordinary application catalogs. Preflight still
+checks structure rather than returning an application view. Preview does not
+certify coverage, accept review, issue exposure approval or publish the draft.
+
+Consumer capture uses the existing immutable revision aggregate; snapshot/store
+and unrelated handle versions are unchanged. Restart the installed MCP process
+and reconnect its client after updating the Engine. Initialization reports the
+installed interface and purpose. Read the new tool and edit schemas rather than
+inferring a live update from files on disk.
 
 The version notes below document earlier design increments, not supported
 compatibility paths or the current purpose-less launch contract.

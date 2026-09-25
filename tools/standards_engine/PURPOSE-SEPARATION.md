@@ -325,7 +325,7 @@ those same bytes. The Engine does not rewrite semantic versions after review.
 
 ## Versions and coordinated cutover
 
-Current Engine package/transport implementation: 0.2.0. Engine interface: 33.
+Current Engine package/transport implementation: 0.2.0. Engine interface: 34.
 Analysis request: 6; result/state and Analysis handles: 7. The semantic-revision
 interpretation change belongs to Analysis 7. Unchanged Snapshot, proposal,
 readiness, application and generic identity/storage contracts keep their
@@ -363,3 +363,34 @@ purposes and interrupted-publication recovery using a separately supplied client
 environment. The configured Codex adapter test names the authoring registration
 with `--server`. Pinned-platform/client acceptance and independent review are
 reported separately from supporting tests in another Python environment.
+
+## Proposal consumer inputs and application preview (interface 34)
+
+Use `register-consumer` inside `propose` or `revise` to declare an existing
+tracked consumer. The Engine captures its original proposal-base bytes before
+admission, retaining them in the immutable logical edit. Replay uses those bytes,
+not the working tree or a later accepted revision. Registration, newly created
+policy scopes and their consumer relationships can share one candidate. An
+explicit relationship uses the registered canonical consumer ID. Registration
+neither claims complete coverage nor creates a review certificate.
+
+The content editor supports registered Markdown documentation as well as prompts
+and templates. Hidden directories have the same repository containment and
+tracked-file requirements. Fixture and implementation consumers remain read-only
+through this editor. Original file bytes supply publication's baseline; an
+unchanged registered source is not rewritten. Fixture bytes, unrelated policy
+identities and prior proposal records remain intact.
+
+An authoring caller uses `preview_application` with the exact draft revision and
+one application read, route or related request. Candidate results carry that
+revision, without published-snapshot or snapshot-child handles. Their
+continuations remain candidate previews. The same application view enforces
+qualification, prerequisite closure and graph filtering. A missing qualification
+is a candidate-application rejection, not partial acceptance. Normal application
+sessions retain their published-only operation set.
+
+`maintain_evidence` remains accepted-repository maintenance, not draft mutation.
+Use logical registration for draft-only scopes. After installing this change,
+restart the actual MCP server and reconnect the client; initialization reports
+interface 34 and the configured purpose. Existing workflow-response verbosity
+and hot catalog replacement are not changed by this capability.

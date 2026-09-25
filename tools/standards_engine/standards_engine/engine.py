@@ -168,6 +168,8 @@ from ._generated_contract import (
     PolicyInspectionResult,
     QueryCall,
     QueryProposalCall,
+    PreviewApplicationCall,
+    PreviewApplicationResult,
     QueryProposalResult,
     QueryResult,
     RecoverApplicationCall,
@@ -741,6 +743,7 @@ class StandardsEngine:
             projection = self._proposal_projection(revision)
             base = self._snapshots.load_content(revision.base_snapshot)
             base_files = {str(item.path): item.content for item in base.files}
+            base_files.update(projection.captured_consumer_files)
             proposed_files = dict(projection.source.files)
             base_paths = set(revision.base_repository_paths)
             proposed_paths = set(projection.repository_paths)
@@ -858,7 +861,10 @@ class StandardsEngine:
         try:
             summary, revision = self._authoring.create_proposal(
                 self._snapshot_id(call.base_snapshot),
-                StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                self._prepare_consumer_sources(
+                    StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                    self._snapshot_id(call.base_snapshot), materials,
+                ),
                 preparation=materials,
             )
             return CreateProposalResult.from_value(
@@ -868,6 +874,37 @@ class StandardsEngine:
                     "revision": self._proposal_revision_handle(revision.revision_id),
                 }
             )
+        except self._domain_errors() as error:
+            return self._domain_rejection(error)
+
+    def _prepare_consumer_sources(
+        self, change_set: StandardsChangeSet, snapshot: SnapshotId,
+        materials: ProposalMaterials,
+    ) -> StandardsChangeSet:
+        """Retain original consumer inputs before admitting a logical revision."""
+        if not any(edit.as_contract()["kind"] == "register-consumer" for edit in change_set.edits):
+            return change_set
+        from .consumer_authoring import bind_sources
+
+        paths = materials.repository_paths(snapshot)
+        summary = self._snapshots.snapshot(snapshot)
+        with self._repository.read_session(RepositoryRevision(summary.source_revision)) as session:
+            return bind_sources(
+                change_set, str(snapshot), paths,
+                lambda path: session.read_file(RepositoryPath.parse(path)),
+            )
+
+    @public_operation
+    def preview_application(
+        self, call: PreviewApplicationCall,
+    ) -> PreviewApplicationResult | RejectedResult:
+        from .context_projection import preview_application
+
+        try:
+            with ProposalMaterials(self) as materials:
+                revision = self._authoring.read_revision(call.revision.id)
+                projection = materials.projection(revision)
+                return preview_application(self, projection.compiled, call)
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 
@@ -906,7 +943,11 @@ class StandardsEngine:
         try:
             summary, revision = self._authoring.revise_proposal(
                 call.expected_revision.id,
-                StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                self._prepare_consumer_sources(
+                    StandardsChangeSet.from_mapping(call.change_set.as_contract()),
+                    self._authoring.read_revision(call.expected_revision.id).base_snapshot,
+                    materials,
+                ),
                 preparation=materials,
             )
             return ReviseProposalResult.from_value(
@@ -1291,6 +1332,7 @@ class StandardsEngine:
             projection = self._proposal_projection(revision)
             base_capture = self._snapshots.load_content(revision.base_snapshot)
             base_files = {str(item.path): item.content for item in base_capture.files}
+            base_files.update(projection.captured_consumer_files)
             proposed_files = dict(projection.source.files)
             base_paths = set(revision.base_repository_paths)
             proposed_paths = set(projection.repository_paths)

@@ -160,6 +160,16 @@ The handoff also exercises explicit policy-unit registration within an existing 
 
 A missing necessary content operation returns to the code workstream as a bounded implementation gap. It is not a reason to bypass the Engine and edit canonical files directly.
 
+H0 also verifies proposal-local registration of tracked fixture and documentation
+consumers for policy scopes created in that draft. Use canonical candidate IDs
+for their relationships. Registered Markdown skill references are eligible for
+controlled authoring without granting source-code edit access. Inspect candidate
+application content with authoring `preview_application`, bound to an exact
+revision; ordinary application `query_proposal` is intentionally unavailable.
+This preview applies the same exposure and dependency checks but does not publish
+or certify the content. Refresh the running MCP process and client catalog, then
+check the installed interface and these operation schemas before continuing.
+
 ### H1 — Inventory one coherent migration boundary
 
 Read the actual canonical owner, its rule scopes, metadata, dependencies, and current exposure state through the Engine. Traverse the relevant declared consumer and support relationships. Identify materially affected prompts, templates, references, routing facts/descriptions, and existing evidence owners.

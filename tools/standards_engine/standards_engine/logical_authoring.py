@@ -369,6 +369,9 @@ def _edit(value: object) -> LogicalEdit:
     from .supporting_authoring import SUPPORT_EDIT_KINDS, parse_edit
     if kind in SUPPORT_EDIT_KINDS:
         return parse_edit(raw)
+    if kind == "register-consumer":
+        from .consumer_authoring import parse_registration
+        return parse_registration(raw)
     if kind == "revise-policy-unit":
         return RevisePolicyUnit.from_mapping(raw)
     if kind == "replace-standard-relationships":
@@ -829,7 +832,7 @@ def _contains_null(value: object) -> bool:
 
 def _relationship_consumer(value: object) -> object:
     if type(value) is str:
-        return _semantic_id(value, "relationship consumer")
+        return _canonical_id(value, "relationship consumer")
     raw = _mapping(value, "relationship consumer handle")
     _exact(
         raw,
@@ -916,6 +919,7 @@ class LogicalProjection:
     _continuation: ProjectionContinuation | None = field(
         default=None, repr=False, compare=False,
     )
+    captured_consumer_files: tuple[tuple[str, bytes], ...] = ()
 
 
 class LogicalAuthoringCompiler:
@@ -972,7 +976,11 @@ class LogicalAuthoringCompiler:
                 "logical compilation requires exact frozen content and program values",
             )
         selected_repository_paths = _repository_paths(base_repository_paths)
-        base_file_paths = frozenset(dict(base.files))
+        from .consumer_authoring import captured_sources
+        consumer_files = captured_sources(
+            program, base_snapshot, dict(base.files), selected_repository_paths,
+        )
+        base_file_paths = frozenset(dict(base.files)) | frozenset(dict(consumer_files))
 
         def compile_current(current: dict[str, bytes]) -> Any:
             _refresh_suite_input_projection(
@@ -1021,6 +1029,9 @@ class LogicalAuthoringCompiler:
         # Copy only the file table: every value is an immutable byte string.
         # Neither a failed suffix nor a sibling successor can mutate its prefix.
         files = dict(selected_source.files)
+        for path, content in consumer_files:
+            # A prefix may already contain an explicitly revised guidance file.
+            files.setdefault(path, content)
         for change_set in program.change_sets[prefix_length:]:
             before = dict(files)
             from .supporting_authoring import SUPPORT_EDIT_KINDS, begin_edits, finish_edits
@@ -1081,6 +1092,7 @@ class LogicalAuthoringCompiler:
             repository_paths,
             ProjectionContinuation(inputs, source.files, repository_paths)
             if inputs is not None else None,
+            captured_consumer_files=consumer_files,
         )
 
     def _apply_edit(
@@ -1122,6 +1134,10 @@ class LogicalAuthoringCompiler:
             "remove-routing-fact",
         }:
             _edit_routing(files, [raw])
+        elif kind == "register-consumer":
+            from .consumer_authoring import register_consumer
+
+            register_consumer(files, raw)
         elif kind == "create-standard":
             self._create_standard(files, raw)
         elif kind == "revise-standard":
@@ -1807,6 +1823,7 @@ def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
         "revise-policy-unit": 20,
         "move-policy-unit": 30,
         "register-policy-unit": 35,
+        "register-consumer": 36,
         "replace-standard-relationships": 40,
         "put-policy-relationship": 40,
         "remove-policy-relationship": 40,
@@ -2293,11 +2310,8 @@ def _remove_compiled_relationship(files: dict[str, bytes], semantics: Any) -> No
 
 def _resolve_consumer(value: object, compiled: Any, base_snapshot: str | None) -> str:
     if type(value) is str:
-        if value in compiled.policy_impact.artifacts:
-            raise _invalid(
-                "AUTHORING.TARGET_HANDLE_REQUIRED",
-                "non-standard relationship consumers require a Snapshot-bound authoring target handle",
-            )
+        # The containing proposal/snapshot already binds the candidate catalog.
+        # Canonical IDs also address consumers first declared in this candidate.
         return value
     handle = _mapping(value, "authoring target handle")
     snapshot = _mapping(handle["snapshot"], "authoring target snapshot")

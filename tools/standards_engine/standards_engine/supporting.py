@@ -11,6 +11,8 @@ from tools.standards_metadata.standards_metadata import (
 )
 from tools.standards_policy_impact.standards_policy_impact import CompiledPolicyImpactSet, thaw
 
+from .consumer_authoring import GUIDANCE_KINDS
+
 if TYPE_CHECKING:
     from .engine import CompiledSnapshot
 
@@ -56,7 +58,7 @@ def build_materials(source: ContentSource, corpus: CanonicalStandardsCorpus,
             text, content_digest(record), module.requires, module.specializes,
         )
     for artifact in impact.artifacts.values():
-        if artifact.artifact_kind not in {"prompt", "template"}:
+        if artifact.artifact_kind not in GUIDANCE_KINDS:
             continue
         if artifact.id in materials:
             raise material_error("Operational aids and standards have distinct identities.")
@@ -146,7 +148,7 @@ def review_authorities(compiled: CompiledSnapshot):
             f"application-exposure:{entry.target}", content_digest(entry.as_contract()),
             content_digest({"declaration": entry.as_contract(), "material": material.binding})))
     for material in compiled.materials.values():
-        if material.role in {"prompt", "template"}:
+        if material.role in GUIDANCE_KINDS:
             result.append(SupportingContentAuthority(
                 f"operational-aid:{material.id}", content_digest(material.content), material.binding))
     return tuple(sorted(result, key=lambda item: item.id))
@@ -159,7 +161,7 @@ def read_supporting(compiled: CompiledSnapshot, projection, target: str):
         return {"kind": "provenance-read-result", "authority": projection.authority.as_contract(),
                 "record": record.as_contract(), "state": record_state(compiled, record), "next_operations": []}
     selected = resolve_material(compiled, target)
-    if selected is None or selected[0].role not in {"prompt", "template"}:
+    if selected is None or selected[0].role not in GUIDANCE_KINDS:
         return None
     material = selected[0]
     return {"kind": "operational-read-result", "authority": projection.authority.as_contract(),

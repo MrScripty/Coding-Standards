@@ -9,6 +9,7 @@ from tools.standards_metadata.standards_metadata import (
     FrozenContentSource, load_supporting_content,
 )
 from .supporting import subject_binding
+from .consumer_authoring import GUIDANCE_KINDS
 
 SUPPORT_EDIT_KINDS = frozenset({"put-provenance", "retire-provenance",
                               "approve-application-content", "withdraw-application-content",
@@ -53,13 +54,11 @@ def parse_edit(raw: Mapping[str, object]):
         return _structured(raw, target=target if isinstance(target, str) else target["id"], facet="application-exposure")
     _exact(raw, {"kind", "target", "title", "body"}, kind)
     target = _relationship_consumer(raw["target"])
-    if isinstance(target, str):
-        raise _invalid("AUTHORING.TARGET_HANDLE_REQUIRED", "Operational aids use a returned authoring target.")
     title = _text(raw["title"], "title")
     if "\n" in title or "\r" in title:
         raise _invalid("AUTHORING.INVALID_TITLE", "Operational titles occupy one line.")
     _text(raw["body"], "body")
-    return _structured(raw, target=target["id"], facet="operational-aid")
+    return _structured(raw, target=target if isinstance(target, str) else target["id"], facet="operational-aid")
 
 
 def _write(files, records, entries):
@@ -101,13 +100,16 @@ def finish_edits(files, edits, base, snapshot, compile_current):
     from .logical_authoring import _resolve_consumer, _invalid, _unsupported
     if not edits:
         return
+    current = compile_current(files)
     for edit in edits:
         if edit["kind"] != "revise-operational-artifact":
             continue
-        target = _resolve_consumer(edit["target"], base, snapshot)
-        artifact = base.policy_impact.artifacts.get(target)
-        if artifact is None or artifact.artifact_kind not in {"prompt", "template"}:
-            raise _unsupported("AUTHORING.OPERATIONAL_TARGET_REQUIRED", "Select a registered prompt or template.")
+        target = _resolve_consumer(edit["target"], current, snapshot)
+        artifact = current.policy_impact.artifacts.get(target)
+        if artifact is None or artifact.artifact_kind not in GUIDANCE_KINDS:
+            raise _unsupported("AUTHORING.OPERATIONAL_TARGET_REQUIRED", "Select registered Markdown guidance.")
+        if not artifact.repository_path.lower().endswith(".md"):
+            raise _unsupported("AUTHORING.OPERATIONAL_TARGET_REQUIRED", "Guidance revision owns Markdown content.")
         # Registration owns the path. Requests supply neither paths nor raw files.
         files[artifact.repository_path] = f"# {edit['title']}\n\n{edit['body'].rstrip()}\n".encode("utf-8")
     current = compile_current(files)
@@ -119,7 +121,7 @@ def finish_edits(files, edits, base, snapshot, compile_current):
             record = DecisionProvenance.from_mapping(raw)
             records[record.id] = record
         elif edit["kind"] == "approve-application-content":
-            target = _resolve_consumer(edit["target"], base, snapshot)
+            target = _resolve_consumer(edit["target"], current, snapshot)
             material = current.materials.get(target)
             if material is None:
                 raise _invalid("AUTHORING.EXPOSURE_TARGET_REQUIRED", "Qualify a complete module or registered operational aid.")

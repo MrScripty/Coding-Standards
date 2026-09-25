@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 33,
+  "interface_schema_version": 34,
   "examples": [
     {
       "name": "create-snapshot",
@@ -746,6 +746,22 @@
           "aliases": [],
           "predecessors": [],
           "successors": []
+        }
+      }
+    },
+    {
+      "name": "preview-qualified-candidate",
+      "definition": "PreviewApplicationCall",
+      "value": {
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "schema_version": 1
+        },
+        "request": {
+          "kind": "read",
+          "target": "core",
+          "detail": "compact"
         }
       }
     }

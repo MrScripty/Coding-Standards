@@ -72,9 +72,12 @@ class _UnqualifiedContent(Exception):
 class ApplicationView:
     """Build application values from the qualified portion of one snapshot."""
 
-    def __init__(self, compiled: CompiledSnapshot, snapshot: c.SnapshotHandle):
+    def __init__(self, compiled: CompiledSnapshot,
+                 authority: c.SnapshotHandle | c.ProposalRevisionHandle):
         self.compiled = compiled
-        self.snapshot = snapshot.as_contract()
+        self.authority = authority.as_contract()
+        self.candidate = isinstance(authority, c.ProposalRevisionHandle)
+        self.snapshot = None if self.candidate else self.authority
         self.eligible = frozenset(
             identity for identity, material in compiled.materials.items()
             if compiled.supporting.exposure_state(identity, material.binding) == "current"
@@ -121,17 +124,34 @@ class ApplicationView:
                 "child_kind": kind, "child_id": identity, "schema_version": 5}
 
     def _next_read(self, identity: str) -> dict:
+        if self.candidate:
+            return {"operation": "preview_application", "revision": self.authority,
+                    "request": {"kind": "read", "target": identity}}
         return {"operation": "read", "target": identity, "snapshot": self.snapshot}
 
     def _result(self, kind: str, **fields) -> dict:
-        return {"kind": kind, "purpose": "application", "snapshot": self.snapshot, **fields}
+        anchor = {"revision": self.authority} if self.candidate else {"snapshot": self.snapshot}
+        return {"kind": "candidate-" + kind if self.candidate else kind,
+                "purpose": "application", **anchor, **fields}
+
+    def _decode(self, value: dict):
+        types = {
+            "application-read-result": c.ApplicationReadResult,
+            "application-related-result": c.ApplicationRelatedResult,
+            "application-route-result": c.ApplicationRouteResult,
+            "candidate-application-read-result": c.CandidateApplicationReadResult,
+            "candidate-application-related-result": c.CandidateApplicationRelatedResult,
+            "candidate-application-route-result": c.CandidateApplicationRouteResult,
+        }
+        return types[value["kind"]].from_value(value)
 
     def read(self, target: str, detail: str = "compact"):
         material, unit = self._require(target)
         identity = unit.id if unit is not None else material.id
         value = self._result(
             "application-read-result",
-            policy={"id": identity, "handle": self._child("policy", identity),
+            policy={"id": identity,
+                    **({} if self.candidate else {"handle": self._child("policy", identity)}),
                     "role": material.role, "level": material.level},
             content=unit.content if unit is not None else material.content,
             scope={"kind": "structured", "heading_path": list(unit.heading_path)} if unit else {"kind": "whole-artifact"},
@@ -140,7 +160,7 @@ class ApplicationView:
         )
         if detail == "full":
             value["related"] = self.relationships(identity, None, Direction.BOTH, False)
-        return c.ApplicationReadResult.from_value(value)
+        return self._decode(value)
 
     def _scope_targets(self, target: str) -> tuple[str, ...]:
         module = self.compiled.corpus.resolve_module(target)
@@ -164,7 +184,7 @@ class ApplicationView:
                 pairs = ((view.edge, view.direction) for view in views)
             for edge, way in pairs:
                 key = f"{way.value}:{edge.id}"
-                selected[key] = {"handle": self._child("relationship", key),
+                selected[key] = {**({} if self.candidate else {"handle": self._child("relationship", key)}),
                                  "source": edge.source, "target": edge.target,
                                  "relation": edge.relation, "groups": list(edge.groups), "direction": way.value}
         return [selected[key] for key in sorted(selected)]
@@ -174,7 +194,7 @@ class ApplicationView:
         identity = unit.id if unit else material.id
         relationships = self.relationships(identity, groups, Direction.parse(direction), transitive)
         neighbors = sorted({entry[key] for entry in relationships for key in ("source", "target")} - set(self._scope_targets(identity)))
-        return c.ApplicationRelatedResult.from_value(self._result(
+        return self._decode(self._result(
             "application-related-result", target=identity, relationships=relationships,
             next_operations=[self._next_read(item) for item in neighbors],
         ))
@@ -191,7 +211,7 @@ class ApplicationView:
         target = edge.target if way == "incoming" else edge.source
         relationships = [entry for entry in self.relationships(target, tuple(edge.groups), Direction.parse(way), False)
                          if entry["handle"]["child_id"] == handle.child_id]
-        return c.ApplicationRelatedResult.from_value(self._result(
+        return self._decode(self._result(
             "application-related-result", target=target, relationships=relationships,
             next_operations=[self._next_read(edge.source), self._next_read(edge.target)],
         ))
@@ -215,11 +235,32 @@ class ApplicationView:
             reading.append({"target": entry.target, "scope": entry.scope.as_contract(),
                             "authority": entry.authority, "state": "selected"})
         facts = {fact["id"]: fact for fact in fact_definitions(self.compiled.router)}
-        return c.ApplicationRouteResult.from_value(self._result(
+        return self._decode(self._result(
             "application-route-result", status="needs-facts" if unresolved else "complete",
             reading_plan=reading, unresolved_questions=[{"fact": facts[key]} for key in sorted(unresolved)],
             next_operations=[self._next_read(entry["target"]) for entry in reading],
         ))
+
+
+def preview_application(engine: StandardsEngine, compiled: CompiledSnapshot,
+                        call: c.PreviewApplicationCall):
+    """Use application eligibility and field selection at an exact draft revision."""
+    view = ApplicationView(compiled, call.revision)
+    request = call.request.as_contract()
+    try:
+        if request["kind"] == "read":
+            return view.read(request["target"], request.get("detail", "compact"))
+        if request["kind"] == "related":
+            return view.related(request["target"], tuple(request["groups"]),
+                                request["direction"], request["transitive"])
+        return view.route(engine, call.request)
+    except (_UnqualifiedContent, GraphError):
+        result = application_rejection().as_contract()
+        return c.CandidateApplicationRejectedResult.from_value({
+            **result, "kind": "candidate-application-rejected-result",
+            "revision": call.revision.as_contract(),
+            "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+        })
 
 
 def application_dispatch(engine: StandardsEngine, operation: str, call):

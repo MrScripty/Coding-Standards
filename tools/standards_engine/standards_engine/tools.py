@@ -216,6 +216,14 @@ class AgentToolFacade:
             return call
         return self._result("revise_proposal", self._engine.revise_proposal(call))
 
+    def preview_application(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "preview_application", arguments, generated_contract.PreviewApplicationCall,
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result("preview_application", self._engine.preview_application(call))
+
     def query_proposal(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("query_proposal", arguments, QueryProposalCall)
         if isinstance(call, dict):

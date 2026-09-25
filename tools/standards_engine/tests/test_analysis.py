@@ -1294,6 +1294,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 return_value=mock.Mock(
                     source=mock.Mock(files=tuple(projected_files.items())),
                     repository_paths=projection.repository_paths,
+                    captured_consumer_files=projection.captured_consumer_files,
                 ),
             ),
             mock.patch.object(

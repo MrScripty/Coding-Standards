@@ -32,6 +32,7 @@ READ_ONLY_OPERATIONS = frozenset(
         "find_proposals",
         "query",
         "query_proposal",
+        "preview_application",
         "inspect",
     }
 )
@@ -44,6 +45,7 @@ FOCUSED_OPERATIONS = frozenset(
         "routing_facts",
         "inspect",
         "query_proposal",
+        "preview_application",
         "propose",
         "revise",
         "analyze",
@@ -86,14 +88,15 @@ DESCRIPTIONS = {
     "create_proposal": "Propose an atomic standards change with explicit domain intent and evidence against a snapshot.",
     "find_proposals": "Find durable proposals and their current revision handles.",
     "revise_proposal": "Append an atomic change to the exact expected proposal revision; stale revisions are rejected.",
-    "query_proposal": "Read, route, or traverse standards within an exact immutable proposal revision.",
+    "query_proposal": "Read, route, or traverse authoring content within an exact immutable proposal revision. Use preview_application to inspect its qualified application view.",
+    "preview_application": "Inspect an exact unpublished revision through the ordinary application qualification and filtering rules. Supply one read, route, or related request. Results and continuations stay bound to the draft; this operation neither publishes content nor approves review or exposure.",
     "analyze_proposal": "Analyze an exact proposal revision and return unresolved consequences or complete analysis.",
     "review_proposal": "Accept complete current proposal analysis with explicit evidence-backed review decisions; return content-bound readiness. Requires user authorization for review.",
     "verify_proposal": "Verify the exact proposal candidate. Coverage audits require readiness. Verification does not supply review decisions or publish.",
     "apply_proposal": "Verify and publish the exact accepted readiness to the local canonical ref. Requires user authorization for application. On recovery-required use recover_application with the same readiness; never retry apply. Does not push a remote.",
     "recover_application": "Observe the durable application selected by readiness after recovery-required. Does not retry or publish; preserve the same readiness handle.",
     "verify_repository": "Verify the working tree. Refreshing generated verification inputs is a mutation; inspect verification.passed.",
-    "maintain_evidence": "Preview or apply explicit evidence catalog maintenance with exact review evidence. Does not change normative standards or issue attestations.",
+    "maintain_evidence": "Maintain the accepted repository evidence catalog at an exact revision. For draft-only consumers use register-consumer in propose/revise with separate policy relationships. This operation does not edit a proposal or certify coverage.",
 }
 
 
@@ -298,7 +301,7 @@ class MCPServer:
                 "protocolVersion": PROTOCOL_VERSION,
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": "standards-engine", "version": "0.2.0"},
-                "instructions": (
+                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. " + (
                     "Use route and read to obtain applicable guidance. Reuse returned snapshots for consistent observations."
                     if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
@@ -359,7 +362,7 @@ class MCPServer:
         return {
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
-            "isError": value.get("kind") in {"rejected-result", "application-rejected-result"}
+            "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result"}
             or value.get("status") == "rejected",
         }
 
