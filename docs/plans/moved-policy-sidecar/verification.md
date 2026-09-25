@@ -1,8 +1,16 @@
 # Moved-Policy Sidecar Repair: Execution And Verification
 
 **Source implementation:** Complete for the bounded selector correction.
-**Plan status:** `Verifying`; canonical-compiler and installed-workflow evidence remain outstanding.
+**Plan status:** `Verifying`; canonical-compiler evidence is satisfied and installed-workflow evidence remains outstanding.
 **Baseline:** `b14e807e9e129c1226669973cbb425cd0476dde5`, implementation branch.
+
+## Complete-Checkout Integration
+
+The ZIP and its SHA256 manifest passed integrity checks. Its patch applied cleanly to the complete local implementation branch. The generated suite-input manifest was refreshed through the Engine's temporary-store verifier; 73 suites and 121 structural checks passed. The only manifest changes were the logical-authoring source digest and repository-index digest.
+
+The new focused sidecar suite passed all 10 tests. Four newly supplied compiler cases initially failed in their shared fixture before reaching the selector: `created.source.files` yields `(path, bytes)` pairs, while `_refresh_suite_input_projection` requires a set of path strings. Changing the fixture to pass its path keys made all four pass. The complete registration suite passed 18 tests, logical authoring passed 31, and metadata passed 43. No production change was needed beyond the supplied selector correction.
+
+The code and package evidence were committed as `c56674a2` under MrScripty. The full Engine suite then passed all 295 tests in 377.921 seconds against that committed candidate. The actual installed server and proposal store were not accessed.
 
 ## Source And Preserved State
 
@@ -44,7 +52,7 @@ The focused source runner executes the actual AST bodies of the selector and its
 
 No network calls, fabricated module implementations or fallbacks were added to production. The supplementary source runner is a package-local diagnostic, not a new permanent repository verification framework.
 
-## Integration Regressions Added, Not Executed Here
+## Integration Regressions Originally Supplied For Later Execution
 
 `test_policy_registration.py` gains a synthetic legacy-storage fixture. It creates two modules through the actual logical compiler, retains the second module's policy declaration in the first module's sidecar, refreshes fixture inputs using the owning projector, and recompiles that frozen fixture with the real Engine. No fixture creation touches real accepted source or the user's store.
 
@@ -59,8 +67,8 @@ The pure selector suite additionally covers tombstones, mixed logical owners, ex
 
 ## Remaining Acceptance And Resume
 
-S1 and S2 have focused source-level evidence; S3 requires the full canonical compiler and replay checks; S4 is established by the package reproduction record; S5 requires the actual installed workflow. The plan remains `Verifying` until the latter claims are established at their named boundaries.
+S1 and S2 now have focused and complete-checkout evidence; S3's canonical compiler and replay checks passed; S4 is established by the package reproduction record. S5 still requires the actual installed workflow. The plan remains `Verifying` until that external claim is established at its named boundary.
 
-Apply and verify the patch in the complete checkout, refresh generated verification inputs through the existing owner, and restart the MCP server process before reconnecting. A catalog reporting interface 33 identifies the wire contract, not the implementation revision; qualify the corrected behavior itself.
+The patch was applied and verified in the complete checkout, and generated verification inputs were refreshed through their existing owner. Restart the installed MCP server process before reconnecting. A catalog reporting interface 33 identifies the wire contract, not the implementation revision; qualify the corrected behavior itself.
 
 Inspect and resume the exact preserved proposal through supported operations. Follow any current stale-base or review obligations. Retained material review remains useful evidence, while readiness and publication remain the existing Engine's responsibility. This package does not authorize or attempt real standards publication.

@@ -1,9 +1,9 @@
 # Moved-Policy Sidecar Reuse
 
 **Plan status:** `Verifying`
-**Acceptance status:** `pending canonical-compiler and installed-workflow evidence`
-**Current phase:** Source correction complete; full-checkout and installed qualification remain.
-**Next slice:** Run the supplied canonical compiler regressions in the complete supported checkout, then verify the retained draft through the refreshed MCP.
+**Acceptance status:** `canonical-compiler evidence satisfied; installed-workflow evidence pending`
+**Current phase:** Local code and complete-checkout qualification complete; installed workflow remains separate.
+**Next slice:** Install the corrected Engine, restart the server, and verify the retained draft through the refreshed MCP.
 **Canonical plan:** `docs/plans/moved-policy-sidecar/plan.md`; operation: `continue` the existing registration repair.
 **Source baseline:** `MrScripty/Coding-Standards@b14e807e9e129c1226669973cbb425cd0476dde5`.
 **Composed-design review:** Applicable and bounded below.
@@ -66,17 +66,17 @@ No real standards, declaration files, Router text, registry entries, application
 
 | Claim | Kind | Environment | Mode | Status |
 | --- | --- | --- | --- | --- |
-| S1: A registered derived path with foreign-owned active declarations is reusable without selection-time mutation. | focused | deterministic | automated | satisfied at isolated source boundary |
-| S2: Existing preference, tombstones, mixed ownership, collision rejection and parse failures remain intact. | focused | deterministic | automated | satisfied at isolated source boundary |
-| S3: Canonical registration, relationships/provenance and full/incremental replay preserve old declarations and accepted inputs. | integration | complete supported checkout | automated | pending: complete checkout unavailable |
+| S1: A registered derived path with foreign-owned active declarations is reusable without selection-time mutation. | focused | deterministic | automated | satisfied by focused selector and canonical compiler tests |
+| S2: Existing preference, tombstones, mixed ownership, collision rejection and parse failures remain intact. | focused | deterministic | automated | satisfied by focused selector and canonical compiler tests |
+| S3: Canonical registration, relationships/provenance and full/incremental replay preserve old declarations and accepted inputs. | integration | complete supported checkout | automated | satisfied: four new compiler regressions and all 18 registration tests passed |
 | S4: The package changes only the admitted files and applies exactly to their verified baseline. | release-artifact | deterministic | automated | satisfied by package reproduction record |
 | S5: The installed Engine can advance the retained coordinated draft without the reported projection disagreement. | user-workflow | user's actual installation/store | manual | pending: external installation |
 
-Source-only execution can prove the pure selector's behavior but does not satisfy S3 or S5. Keep the plan `Verifying` where those claims await the supported checkout or the user's installed workflow. Compilation, packaging and syntax results establish their named properties only.
+The complete-checkout tests now satisfy S3, and the committed candidate passed the full 295-test Engine suite. Keep the plan `Verifying` while S5 awaits the actual installed workflow; the disposable fixtures do not access the user's proposal store.
 
 ## Handoff
 
-Apply the patch after comparing current local changes, regenerate verification inputs through the existing generator, and run the normal focused and affected integration tests. Restart the MCP server process and reconnect the client so calls execute the corrected implementation; the catalog remains interface 33 because the wire contract is unchanged.
+The patch was applied to the local implementation branch, verification inputs were regenerated through their owner, and focused and affected integration tests passed. Restart the installed MCP server process and reconnect its client so calls execute the corrected implementation; the catalog remains interface 33 because the wire contract is unchanged.
 
 Use the existing proposal store. Inspect the exact saved revision through supported status/resume operations, reconcile any accepted-branch drift, and obtain current analysis/readiness before publication. Preserve historical reviews while letting the Engine identify any newly affected obligations. No database reset, raw store modification, premature application, or automatic new proposal is part of this repair.
 
