@@ -1,0 +1,9 @@
+test_apply_create_and_retire_owns_topology_and_commit (tools.standards_engine.tests.test_analysis.AnalysisWorkflowTest.test_apply_create_and_retire_owns_topology_and_commit) ... ok
+test_apply_proposal_composes_real_verification_and_cold_readback (tools.standards_engine.tests.test_analysis.AnalysisWorkflowTest.test_apply_proposal_composes_real_verification_and_cold_readback) ... ok
+test_review_verify_apply_recover_and_read_without_original_database (tools.standards_engine.tests.test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database) ... ok
+test_live_worktree_mutation_cannot_change_snapshot_reads (tools.standards_engine.tests.test_navigation.NavigationTest.test_live_worktree_mutation_cannot_change_snapshot_reads) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 308.839s
+
+OK

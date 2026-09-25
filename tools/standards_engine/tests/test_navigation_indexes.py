@@ -143,7 +143,7 @@ class NavigationIndexFixture(unittest.TestCase):
             shutil.copyfile(ROOT / relative, cls.root / relative)
         cls.seed_legacy_fixture()
         subprocess.run(["git", "add", "--all"], cwd=cls.root, check=True)
-        with AgentToolFacade.open_repository(cls.root) as fixture_facade:
+        with AgentToolFacade.open_repository(cls.root, purpose="authoring") as fixture_facade:
             refreshed = fixture_facade.verify_repository(
                 {"kind": "verify-repository", "refresh_verification_inputs": True}
             )
@@ -164,7 +164,7 @@ class NavigationIndexFixture(unittest.TestCase):
             cwd=cls.root,
             check=True,
         )
-        cls.facade = AgentToolFacade.open_repository(cls.root)
+        cls.facade = AgentToolFacade.open_repository(cls.root, purpose="authoring")
         directory = cls.facade.read({"target": "navigation-indexes"})
         assert directory["kind"] == "navigation-indexes-result", directory
         cls.frontend = next(
@@ -383,6 +383,8 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
                 "-P",
                 "-m",
                 "tools.standards_engine.standards_engine.mcp",
+                "--purpose",
+                "authoring",
                 "--repo-root",
                 str(self.root),
             ],

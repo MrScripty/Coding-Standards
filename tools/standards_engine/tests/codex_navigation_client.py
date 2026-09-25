@@ -1,10 +1,11 @@
 """Check configured MCP schemas/navigation through Codex without a model turn.
 
 Run with the locked Engine Python from the repository root. Requires the Codex
-CLI and a standards-engine MCP configuration pointing at this checkout. Creates
+CLI and an authoring-purpose MCP configuration pointing at this checkout. Creates
 an ephemeral client thread, captures a standards snapshot, and reads policy.
 """
 
+import argparse
 import asyncio
 import json
 import sys
@@ -15,7 +16,7 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).resolve().parents[3]
 
 
-async def main():
+async def main(server_name):
     with tempfile.TemporaryFile(mode="w+") as log:
         process = await asyncio.create_subprocess_exec(
             "codex",
@@ -65,7 +66,7 @@ async def main():
             tid = thread["thread"]["id"]
             inventory = await request("mcpServerStatus/list", {"threadId": tid})
             server = next(
-                s for s in inventory["data"] if s["name"] == "standards-engine"
+                s for s in inventory["data"] if s["name"] == server_name
             )
             toolmap = server["tools"]
             print("Codex tools:", sorted(toolmap), flush=True)
@@ -76,16 +77,14 @@ async def main():
                 "purpose",
                 "edits",
             }
-            assert (
-                len(
-                    shape["properties"]["change_set"]["properties"]["edits"]["items"][
-                        "oneOf"
-                    ]
-                )
-                == 15
-            )
+            canonical = json.loads((ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text())
+            variants = canonical["$defs"]["StandardEdit"]["oneOf"]
+            assert len(shape["properties"]["change_set"]["properties"]["edits"]["items"]["oneOf"]) == len(variants)
+            assert {"PutDecisionProvenanceEdit", "RetireDecisionProvenanceEdit",
+                    "ApproveApplicationContentEdit", "WithdrawApplicationContentEdit",
+                    "ReviseOperationalArtifactEdit"} <= {item["$ref"].rsplit("/", 1)[-1] for item in variants}
             print(
-                "Codex authoring schema: purpose, edits, 15 inline edit variants",
+                f"Codex authoring schema: purpose, edits, {len(variants)} inline edit variants",
                 flush=True,
             )
             for name in ("propose", "revise", "resolve_workflow"):
@@ -102,7 +101,7 @@ async def main():
                     "provider_contract_version",
                 }
                 if name != "resolve_workflow":
-                    assert len(documented["$defs"]["StandardEdit"]["oneOf"]) == 15
+                    assert documented["$defs"]["StandardEdit"]["oneOf"] == variants
             print(
                 "Codex descriptions: exact nested edit/evidence contracts preserved",
                 flush=True,
@@ -113,7 +112,7 @@ async def main():
                     "mcpServer/tool/call",
                     {
                         "threadId": tid,
-                        "server": "standards-engine",
+                        "server": server_name,
                         "tool": name,
                         "arguments": arguments,
                     },
@@ -134,6 +133,13 @@ async def main():
             assert read["kind"] == "compact-read-result", read
             assert read["snapshot"] == routed["snapshot"]
             assert all(i["operation"] in toolmap for i in read["next_operations"])
+            grouped = await call("read_many", {
+                "snapshot": routed["snapshot"],
+                "items": [{"target": op["target"]}, {"target": op["target"], "detail": "full"}],
+            })
+            assert grouped["kind"] == "read-many-result", grouped
+            assert grouped["items"][0] == read
+            assert all(item["snapshot"] == routed["snapshot"] for item in grouped["items"])
             print(
                 "Codex route -> read: available continuations, same snapshot, exact content returned",
                 flush=True,
@@ -152,4 +158,7 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--server", default="standards-authoring", help="Configured authoring-purpose MCP registration")
+    arguments = parser.parse_args()
+    asyncio.run(main(arguments.server))

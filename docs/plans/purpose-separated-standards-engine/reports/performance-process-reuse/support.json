@@ -1,0 +1,79 @@
+[
+  {
+    "package": "graph_engine",
+    "returncode": 0,
+    "seconds": 0.2713069240001005,
+    "tests": 37,
+    "skipped": 0
+  },
+  {
+    "package": "repository_git",
+    "returncode": 0,
+    "seconds": 1.4816052880000825,
+    "tests": 16,
+    "skipped": 0
+  },
+  {
+    "package": "standards_analysis",
+    "returncode": 0,
+    "seconds": 1.2024484620001203,
+    "tests": 100,
+    "skipped": 0
+  },
+  {
+    "package": "standards_applicability",
+    "returncode": 0,
+    "seconds": 0.06562526700008675,
+    "tests": 12,
+    "skipped": 0
+  },
+  {
+    "package": "standards_contracts",
+    "returncode": 0,
+    "seconds": 23.717944660000057,
+    "tests": 23,
+    "skipped": 1
+  },
+  {
+    "package": "standards_graph",
+    "returncode": 0,
+    "seconds": 0.16668000899994695,
+    "tests": 2,
+    "skipped": 0
+  },
+  {
+    "package": "standards_identity",
+    "returncode": 0,
+    "seconds": 0.18750458500016975,
+    "tests": 16,
+    "skipped": 0
+  },
+  {
+    "package": "standards_metadata",
+    "returncode": 0,
+    "seconds": 0.7032010290001836,
+    "tests": 31,
+    "skipped": 0
+  },
+  {
+    "package": "standards_policy_impact",
+    "returncode": 0,
+    "seconds": 0.4470718279999346,
+    "tests": 10,
+    "skipped": 0
+  },
+  {
+    "package": "standards_snapshots",
+    "returncode": 0,
+    "seconds": 0.13230375700004515,
+    "tests": 23,
+    "skipped": 0
+  },
+  {
+    "package": "standards_verifier",
+    "returncode": 0,
+    "seconds": 4.424347185999977,
+    "tests": 168,
+    "skipped": 0
+  }
+]

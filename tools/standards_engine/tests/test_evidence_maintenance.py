@@ -257,6 +257,7 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                 execution_context=AnalysisExecutionContext(
                     LocalAlwaysAllowAuthorizer(repository)
                 ),
+                purpose="authoring",
             ) as engine:
                 facade = AgentToolFacade(engine, _contracts(repository))
                 refreshed = facade.verify_repository(

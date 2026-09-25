@@ -8,6 +8,32 @@ The package owns no standards semantics, snapshot lifecycle, SQLite storage,
 or public Engine operation. Callers resolve one revision and retain that exact
 value while loaders request files. Worktree changes and later commits cannot
 substitute bytes for the retained revision.
+
+`read_session(revision)` owns one bounded batch reader and an LRU of verified
+objects and decoded trees. Requests remain pinned to the selected revision.
+Each cache miss reads a frame from `git cat-file --batch`, then checks header,
+size, type, body framing and object hash. Decoded trees retain that verified
+object's interpretation; path/mode/gitlink decisions still run for every file.
+A fresh session verifies its first reads again. Ordinary `read_file` retains
+its independent one-shot observation boundary.
+
+The defaults retain at most 8 MiB of raw payload plus accounted decoded-tree
+allocations, and 1,024 entries. Entry bookkeeping is bounded separately by the
+entry cap. Oversized values use the same verified uncached path. A session owns
+at most one child at a time: crossing an explicit gitlink repository closes the
+previous child's stream and lazily starts the selected one. This bounds process
+and pipe population independently of the number of repository mappings.
+
+A dedicated exchange worker and bounded stderr drain keep blocking pipe work
+inside the existing per-command timeout. Each request gets its own deadline;
+there is no total capture deadline. Normal close verifies stdout EOF and exit
+status and joins workers. Exceptions abort the owned child (and its process
+group on POSIX), join workers and release retained state. A later explicit read
+can reopen a failed stream; there is no automatic request replay. Callers use
+the session context manager and complete it before accepting a capture.
+Earlier verified objects are immutable operation inputs, not a continuous audit
+of the source disk. The session remains single-owner, not a concurrent connection.
+
 The Adapter can also return the exact sorted path observation for a retained
 commit tree; callers persist that observation when later deterministic
 projections must survive worktree or branch replacement.
@@ -32,8 +58,8 @@ index are not staging authority.
 
 Candidate blobs and the constructed commit must fit the same object bound used
 by exact reads, so publication cannot create content that a subsequent Adapter
-read rejects by size. All Git subprocesses receive a sanitized environment,
-bounded output, and a fixed timeout. Missing objects are `unavailable`;
+read rejects by size. Git commands and individual batch exchanges receive a sanitized environment,
+bounded output, and the existing command timeout. Missing objects are `unavailable`;
 malformed or contradictory objects are `invalid`; unsupported object modes,
 path encodings, and output sizes are `unsupported`.
 
@@ -47,3 +73,13 @@ The write-capable re-evaluation is recorded in the
 [A2 decision](../../docs/decisions/standards-engine-a2.md#repository-git-dependency-re-evaluation).
 Re-evaluate again before materially extending the selected local publication
 contract.
+
+
+Command failures retain their raw bounded stderr in the private exception and
+provide a `GitCommandObservation` for disclosure-safe callers. This observation
+contains a fixed operation identity, exit code and recognized fixed phrase; an
+unrecognized stderr is explicitly unclassified. It does not infer host permissions
+or implement retry policy. Expected-target publication retains this observation
+when update-ref fails and the branch remains unchanged. Callers own explicit
+recovery intent and durable application identity; the adapter continues to accept
+only active candidates issued by its own materialization scope.

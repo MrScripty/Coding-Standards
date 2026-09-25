@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 2.7882161140441895, "args": ["--pattern", "test_applicability_contract.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

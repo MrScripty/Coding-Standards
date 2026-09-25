@@ -1,0 +1,32 @@
+{
+  "implementation_commit": "443d38e14bd7d4b2e279195bd0b62bc96cccd5d8",
+  "test_spy_repair_commit": "68eb97c0dd59fb9f833d0b3e4e90bdb7271345bf",
+  "source_hashes": {
+    "tools/standards_engine/standards_engine/compiled_cache.py": {
+      "sha256": "5fe033c834a88415ac477ef8d09bc97e9b189be2cff986e142c782005a1b4f50",
+      "python_3_11_grammar": true
+    },
+    "tools/standards_engine/standards_engine/engine.py": {
+      "sha256": "ff1c3e9569fa7e60b37357608ade12b1a0abc5c287f6d8d4bbc7a4302196a759",
+      "python_3_11_grammar": true
+    },
+    "tools/standards_engine/standards_engine/logical_authoring.py": {
+      "sha256": "81f99ed06fefd6c7caa4ac344bac92adf23ca9e1941d12f06c46c00cba8af2bc",
+      "python_3_11_grammar": true
+    },
+    "tools/standards_engine/standards_engine/operation_materials.py": {
+      "sha256": "bae7ea7900cfc3b8aaf837d0ec9275692d9cc53bd10087a5e6a94e2ac8a624f9",
+      "python_3_11_grammar": true
+    },
+    "tools/standards_engine/tests/test_nested_materials.py": {
+      "sha256": "2dd08a17f1a1f2b3869b3e552924afb6e4e91c70e5f86e63cce7eac975afd707",
+      "python_3_11_grammar": true
+    },
+    "tools/standards_engine/tests/test_proposal_reuse.py": {
+      "sha256": "4493f55b8773f59ee1e99ac4a54f84524f70526d4e457a1acbe13c04a0c92460",
+      "python_3_11_grammar": true
+    }
+  },
+  "normative_and_wire_and_lock_preservation": true,
+  "limits": "Grammar parsing is not execution on Python 3.11. The later evidence commit does not change runtime Python."
+}

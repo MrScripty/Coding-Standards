@@ -6,7 +6,7 @@ import time
 import uuid
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, Protocol
 
 from tools.repository_git.repository_git import (
     CandidateCommitMessage,
@@ -627,6 +627,14 @@ class ProposalPage:
     continuation: ProposalId | None
 
 
+class ProposalPreparation(Protocol):
+    """Operation-owned pure preparation; publication remains Authoring-owned."""
+
+    def repository_paths(self, snapshot: SnapshotId) -> Iterable[str]: ...
+
+    def validate_revision(self, revision: ProposalRevision) -> None: ...
+
+
 class AuthoringModule:
     """Owns immutable proposal material and proposal-head coordination."""
 
@@ -634,24 +642,10 @@ class AuthoringModule:
         self,
         snapshots: SnapshotModule,
         *,
-        validate_revision: Callable[[ProposalRevision], None],
-        observe_repository_paths: Callable[[SnapshotId], Iterable[str]],
         now: Callable[[], int] | None = None,
         proposal_id_factory: Callable[[], ProposalId] | None = None,
     ) -> None:
         self._snapshots = snapshots
-        if not callable(validate_revision):
-            raise _invalid(
-                "AUTHORING.INVALID_REVISION_VALIDATOR",
-                "Authoring requires one prospective revision validator",
-            )
-        self._validate_revision = validate_revision
-        if not callable(observe_repository_paths):
-            raise _invalid(
-                "AUTHORING.INVALID_PATH_OBSERVER",
-                "Authoring requires one base-revision path observer",
-            )
-        self._observe_repository_paths = observe_repository_paths
         self._now = now or (lambda: int(time.time()))
         self._proposal_id_factory = proposal_id_factory or (
             lambda: ProposalId.from_uuid(uuid.uuid4())
@@ -661,6 +655,8 @@ class AuthoringModule:
         self,
         base_snapshot: SnapshotId,
         change_set: StandardsChangeSet,
+        *,
+        preparation: ProposalPreparation,
     ) -> tuple[ProposalSummary, ProposalRevision]:
         proposal = self._proposal_id_factory()
         if type(proposal) is not ProposalId:
@@ -672,10 +668,10 @@ class AuthoringModule:
             proposal,
             1,
             base_snapshot,
-            self._observe_repository_paths(base_snapshot),
+            preparation.repository_paths(base_snapshot),
             (change_set,),
         )
-        self._validate_revision(revision)
+        preparation.validate_revision(revision)
         root = AggregateRoot(
             str(proposal),
             PROPOSAL_KIND,
@@ -721,6 +717,8 @@ class AuthoringModule:
         self,
         expected_revision: str,
         change_set: StandardsChangeSet,
+        *,
+        preparation: ProposalPreparation,
     ) -> tuple[ProposalSummary, ProposalRevision]:
         expected = self.read_revision(expected_revision)
         root = self._snapshots.load_aggregate_root(str(expected.proposal))
@@ -736,7 +734,7 @@ class AuthoringModule:
             expected.base_repository_paths,
             (*expected.change_sets, change_set),
         )
-        self._validate_revision(revision)
+        preparation.validate_revision(revision)
         advanced = self._snapshots.advance_aggregate_root(
             str(expected.proposal), expected_revision, revision.aggregate()
         )
@@ -1592,6 +1590,7 @@ __all__ = (
     "ProposalApplicationSelection",
     "ProposalId",
     "ProposalPage",
+    "ProposalPreparation",
     "ProposalReadiness",
     "ProposalRevision",
     "ProposalSummary",

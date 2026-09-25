@@ -46,7 +46,12 @@ def suite_dependency_registry(
         registry_path,
         include_path_aliases=include_path_aliases,
     )
-    return EdgeRegistry(root, (source,))
+    # Declaration-only cycle validation has symbolic IDs, not ambient aliases.
+    # Executable catalogs retain physical aliases for their selected checkout.
+    return EdgeRegistry(
+        root, (source,),
+        logical_artifacts=None if include_path_aliases else (),
+    )
 
 
 def suite_dependency_source(

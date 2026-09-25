@@ -34,3 +34,13 @@ python3 -m unittest discover -s tools/standards_metadata/tests
 
 The [module metadata schema](metadata-schema.md) documents authored fields,
 grammar, invariants, and the validation boundary.
+
+## Supporting-content input
+
+`supporting_content.py` loads the explicit application-exposure and
+decision-provenance manifests through the same `ContentSource` as other
+canonical material. It validates shape, identities, exact bindings, origin
+representation and supersession. Runtime source capture is independent from
+editorial review: an empty application manifest qualifies nothing. Missing
+required manifests identify an unsupported older capture. See the
+[Engine content contract](../standards_engine/PURPOSE-SEPARATION.md).

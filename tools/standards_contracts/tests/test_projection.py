@@ -313,8 +313,8 @@ class ContractProjectionTest(unittest.TestCase):
         self.assertEqual(
             tools["interface_schema_version"], interface["interface_schema_version"]
         )
-        self.assertEqual(tools["request_contract_version"], 5)
-        self.assertEqual(tools["result_projection_version"], 6)
+        self.assertEqual(tools["request_contract_version"], interface["request_contract_version"])
+        self.assertEqual(tools["result_projection_version"], interface["result_projection_version"])
         json.dumps(tools)
 
 

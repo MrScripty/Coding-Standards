@@ -1,0 +1,486 @@
+{
+  "source": "/mnt/data/projection-work/repo",
+  "head": "68eb97c0dd59fb9f833d0b3e4e90bdb7271345bf",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "executable_sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+  "packages": {
+    "jsonschema": "4.26.0",
+    "rpds-py": "2026.5.1"
+  },
+  "observations": [
+    {
+      "history": 1,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 0.8224129840000387,
+      "cpu_seconds": 0.822402063,
+      "counts": {
+        "durable_loads": 1,
+        "full_compiles": 2,
+        "manifest_refreshes": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 0,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.2843976990000101,
+      "cpu_seconds": 0.2843747139999999,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 2,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.19272818699982963,
+      "cpu_seconds": 0.19273389600000002,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 4,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28982939700017596,
+      "cpu_seconds": 0.28981875700000015,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 6,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.20274338900003386,
+      "cpu_seconds": 0.20273995699999992,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 8,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.30536392300018633,
+      "cpu_seconds": 0.3053499049999999,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 10,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 3,
+      "operation": "query_proposal",
+      "wall_seconds": 0.20519528299996637,
+      "cpu_seconds": 0.20519408299999986,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "aff0ad86d75b9ccbc3f49b0df358912bcb2dcd27bb1302377b14dc6c2597a0aa",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 12,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 1,
+      "iteration": 3,
+      "operation": "workflow_status",
+      "wall_seconds": 0.3060294530000647,
+      "cpu_seconds": 0.3060369650000001,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "c0d7c5042771a21a45efcd35c0ac683794935c39f8d9d2febbdf116318a124ea",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13607851,
+        "hits": 14,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 1.339784138999903,
+      "cpu_seconds": 1.3394530190000005,
+      "counts": {
+        "durable_loads": 1,
+        "full_compiles": 2,
+        "manifest_refreshes": 4
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 0,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28535178600009203,
+      "cpu_seconds": 0.285358617,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 2,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.18627454200009197,
+      "cpu_seconds": 0.18626961700000066,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 4,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28760294500011696,
+      "cpu_seconds": 0.2875961330000001,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 6,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.1870546220000051,
+      "cpu_seconds": 0.1870605629999993,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 8,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.30427593800004615,
+      "cpu_seconds": 0.30427747999999966,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 10,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 3,
+      "operation": "query_proposal",
+      "wall_seconds": 0.19193290500015792,
+      "cpu_seconds": 0.19192314200000027,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "b41fa65585b1290f248a241da37493c2ee619a90b98b2db77c19afda0db0ee7f",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 12,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 4,
+      "iteration": 3,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28298754999991615,
+      "cpu_seconds": 0.2829874229999998,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "5a3813efa7e83b83ca2576985a2853293633668eb178a0b7fe53d33a09236214",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13610078,
+        "hits": 14,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 0,
+      "operation": "query_proposal",
+      "wall_seconds": 2.798210487999995,
+      "cpu_seconds": 2.7979661690000004,
+      "counts": {
+        "durable_loads": 1,
+        "full_compiles": 2,
+        "manifest_refreshes": 12
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 0,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 0,
+      "operation": "workflow_status",
+      "wall_seconds": 0.2855314670000553,
+      "cpu_seconds": 0.285520687,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 2,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 1,
+      "operation": "query_proposal",
+      "wall_seconds": 0.18680512800006,
+      "cpu_seconds": 0.18681052099999995,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 4,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 1,
+      "operation": "workflow_status",
+      "wall_seconds": 0.3082281030001468,
+      "cpu_seconds": 0.30822770199999994,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 6,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 2,
+      "operation": "query_proposal",
+      "wall_seconds": 0.1891482730000007,
+      "cpu_seconds": 0.18914540099999932,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 8,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 2,
+      "operation": "workflow_status",
+      "wall_seconds": 0.2844511349999266,
+      "cpu_seconds": 0.2844501770000001,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 10,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 3,
+      "operation": "query_proposal",
+      "wall_seconds": 0.1885727040000802,
+      "cpu_seconds": 0.18856881399999992,
+      "counts": {
+        "durable_loads": 1
+      },
+      "result_sha256": "ff3f61183c458b2f5685429be6545cc2c2cb9a2b2ffd3750e3d1bb8306016cc8",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 12,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "history": 12,
+      "iteration": 3,
+      "operation": "workflow_status",
+      "wall_seconds": 0.28192434799984767,
+      "cpu_seconds": 0.2819315920000012,
+      "counts": {
+        "durable_loads": 1,
+        "decision_evaluations": 1
+      },
+      "result_sha256": "142d5c70bf22a93e54216fc2da7bdb05560c79bb4fe581772d71ee0db3fddb95",
+      "cache": {
+        "entries": 2,
+        "accounted_bytes": 13616068,
+        "hits": 14,
+        "misses": 2,
+        "evictions": 0,
+        "uncached": 0
+      }
+    }
+  ]
+}

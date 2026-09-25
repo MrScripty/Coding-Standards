@@ -1,0 +1,18 @@
+{
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "executable_sha256": "e59d0124ff06c248546876e01fcfb1ea3cda63534949f94a9372bfcfe3bfc3f5",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "git": "git version 2.47.3",
+  "sqlite": "3.46.1",
+  "packages": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.37.0",
+    "rpds-py": "2026.5.1",
+    "typing-extensions": "4.16.0"
+  },
+  "official_mcp_sdk_available": false,
+  "codex_available": false,
+  "scope": "local isolated supporting qualification, not supported pinned Python 3.11/3.12 or installed client acceptance"
+}

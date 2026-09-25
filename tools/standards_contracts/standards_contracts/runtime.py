@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from .errors import ContractError, ContractFailure
+from .union_selection import compile_union_selectors
 
 
 class GeneratedModel(Protocol):
@@ -66,6 +67,7 @@ class ContractRuntime:
         self._validator = Draft202012Validator(selected_schema, registry=registry)
         self._definitions = selected_schema["$defs"]
         self._models = dict(model_types)
+        self._union_selectors = compile_union_selectors(selected_schema)
 
     def validate(self, definition: str, value: object) -> None:
         node = self._definitions[definition]
@@ -108,6 +110,10 @@ class ContractRuntime:
 
         variants = node.get("oneOf")
         if isinstance(variants, list):
+            selector = self._union_selectors.get(id(node))
+            branch = selector.select(value) if selector is not None else None
+            if branch is not None:
+                return self._decode_node(branch, value)
             selected = [
                 variant
                 for variant in variants

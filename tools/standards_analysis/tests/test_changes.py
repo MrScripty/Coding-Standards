@@ -86,6 +86,21 @@ def descriptor(
 
 
 class ChangeClassificationTest(unittest.TestCase):
+    def test_explicit_preservation_binds_new_structure_without_advancing_meaning(self):
+        before = unit()
+        after = unit(representation=DIGEST_C, structural=DIGEST_C)
+        change = descriptor(ChangeKind.MODIFICATION, (before.id,), (before.id,))
+        preservation = SemanticProposal(before.id, 3, 3,
+                                        "The reviewed wording preserves the obligation.", DIGEST_C)
+        result = classify_changes(corpus(before), corpus(after), (change,), (preservation,))[0]
+        selected = result.changed_units[0]
+        self.assertEqual(selected.classification, ChangeClassification.REPRESENTATION_ONLY_CANDIDATE)
+        self.assertEqual(selected.semantic_state, SemanticState.ACCEPTED_UNCHANGED)
+        self.assertEqual(selected.proposed_semantic_revision, 3)
+        with self.assertRaises(AnalysisError):
+            classify_changes(corpus(before), corpus(after), (change,),
+                             (SemanticProposal(before.id, 3, 3, "Preserve", DIGEST_B),))
+
     def test_derives_modification_move_addition_and_removal(self) -> None:
         modified = unit("workflow.test.modified")
         moved = unit("workflow.test.moved", heading=("Before",))
@@ -258,7 +273,7 @@ class ChangeClassificationTest(unittest.TestCase):
 
     def test_semantic_modification_binds_overlay_and_exact_graph_groups(self) -> None:
         before = unit()
-        after = unit(representation=DIGEST_B, structural=DIGEST_C)
+        after = unit(representation=DIGEST_B, structural=DIGEST_C, revision=4)
         result = classify_changes(
             corpus(before),
             corpus(after),

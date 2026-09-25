@@ -1,7 +1,7 @@
 schema_version = 1
-interface_schema_version = 30
-request_contract_version = 5
-result_projection_version = 6
+interface_schema_version = 35
+request_contract_version = 6
+result_projection_version = 7
 
 [[operations]]
 id = "create_snapshot"
@@ -32,6 +32,7 @@ id = "query"
 input_definition = "QueryCall"
 result_definitions = ["QueryResult", "RejectedResult"]
 capability = "standards.read"
+variants = { "application" = { "input_definition" = "ApplicationQueryCall", "result_definitions" = ["ApplicationRouteResult", "ApplicationReadResult", "ApplicationRelatedResult", "ApplicationRejectedResult"] } }
 
 [[operations]]
 id = "prepare"
@@ -43,13 +44,14 @@ capability = "standards.analyze"
 id = "resolve"
 input_definition = "ResolveCall"
 result_definitions = ["PendingResult", "CompleteResult", "RejectedResult"]
-capability_by_submission = { provide-fact = "standards.analyze", consumer-disposition = "standards.review.consumer", impact-disposition = "standards.review.impact", coverage-attestation = "standards.review.audit" }
+capability_by_submission = { "provide-fact" = "standards.analyze", "consumer-disposition" = "standards.review.consumer", "impact-disposition" = "standards.review.impact", "coverage-attestation" = "standards.review.audit" }
 
 [[operations]]
 id = "inspect"
 input_definition = "InspectCall"
 result_definitions = ["InspectionResult", "RejectedResult"]
 capability = "standards.read"
+variants = { "application" = { "input_definition" = "ApplicationInspectCall", "result_definitions" = ["ApplicationReadResult", "ApplicationRelatedResult", "ApplicationRejectedResult"] } }
 
 [[operations]]
 id = "create_proposal"
@@ -122,24 +124,28 @@ id = "route"
 input_definition = "RouteCall"
 result_definitions = ["AgentRouteResult", "RejectedResult"]
 capability = "standards.read"
+variants = { "application" = { "input_definition" = "RouteCall", "result_definitions" = ["ApplicationRouteResult", "ApplicationRejectedResult"] } }
 
 [[operations]]
 id = "read"
 input_definition = "ReadCall"
-result_definitions = ["CompactReadResult", "ReadResult", "NavigationIndexesResult", "RejectedResult"]
+result_definitions = ["CompactReadResult", "ReadResult", "NavigationIndexesResult", "RejectedResult", "ProvenanceReadResult", "OperationalReadResult"]
 capability = "standards.read"
+variants = { "application" = { "input_definition" = "ApplicationReadCall", "result_definitions" = ["ApplicationReadResult", "ApplicationRejectedResult"] } }
 
 [[operations]]
 id = "related"
 input_definition = "RelatedCall"
 result_definitions = ["RelatedResult", "RejectedResult"]
 capability = "standards.read"
+variants = { "application" = { "input_definition" = "RelatedCall", "result_definitions" = ["ApplicationRelatedResult", "ApplicationRejectedResult"] } }
 
 [[operations]]
 id = "routing_facts"
 input_definition = "RoutingFactsCall"
 result_definitions = ["RoutingFactsResult", "RejectedResult"]
 capability = "standards.read"
+variants = { "application" = { "input_definition" = "RoutingFactsCall", "result_definitions" = ["ApplicationRoutingFactsResult", "ApplicationRejectedResult"] } }
 
 [[operations]]
 id = "propose"
@@ -163,7 +169,7 @@ capability = "standards.analyze"
 id = "resolve_workflow"
 input_definition = "ResolveWorkflowCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
-capability_by_submission = { provide-fact = "standards.analyze", consumer-disposition = "standards.review.consumer", impact-disposition = "standards.review.impact", coverage-attestation = "standards.review.audit" }
+capability_by_submission = { "provide-fact" = "standards.analyze", "consumer-disposition" = "standards.review.consumer", "impact-disposition" = "standards.review.impact", "coverage-attestation" = "standards.review.audit" }
 
 [[operations]]
 id = "review"
@@ -194,3 +200,16 @@ id = "resume"
 input_definition = "ResumeCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
 capability = "standards.read"
+
+[[operations]]
+id = "read_many"
+input_definition = "ReadManyCall"
+result_definitions = ["ReadManyResult", "RejectedResult"]
+capability = "standards.read"
+variants = { "application" = { "input_definition" = "ApplicationReadManyCall", "result_definitions" = ["ApplicationReadManyResult", "ApplicationRejectedResult"] } }
+
+[[operations]]
+id = "preview_application"
+input_definition = "PreviewApplicationCall"
+result_definitions = ["PreviewApplicationResult", "RejectedResult"]
+capability = "standards.proposal.read"

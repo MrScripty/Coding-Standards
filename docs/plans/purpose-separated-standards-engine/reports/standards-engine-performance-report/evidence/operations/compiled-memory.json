@@ -1,0 +1,6 @@
+{
+  "retained_tracemalloc_bytes": 3649110,
+  "peak_tracemalloc_bytes": 3985733,
+  "capture_bytes": 3708028,
+  "note": "single compilation allocation increment; excludes prior imports and existing captured byte objects; not process RSS cap"
+}

@@ -164,6 +164,17 @@ class TextRenderingTest(unittest.TestCase):
             f"PROPOSAL REVIEW {revision} {readiness} [ready]\n",
         )
 
+    def test_application_purpose_is_distinct_from_authoring_publication(self):
+        import json
+        from tools.standards_engine.standards_engine.context_projection import application_rejection
+        rejected = application_rejection()
+        self.assertEqual(json.loads(render_text(rejected)), rejected.as_contract())
+        publication = {"kind": "application-recovery-required-result",
+                       "application": {"id": "application:fixture"},
+                       "status": "recovery-required", "code": "APPLICATION.RECOVERY_REQUIRED"}
+        self.assertEqual(render_text(publication),
+                         "PROPOSAL APPLICATION application:fixture [recovery-required] APPLICATION.RECOVERY_REQUIRED\n")
+
     def test_unknown_result_variant_is_a_programming_error(self) -> None:
         with self.assertRaisesRegex(ValueError, "unsupported Standards Engine"):
             render_text({"kind": "future-result"})

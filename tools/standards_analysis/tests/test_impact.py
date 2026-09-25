@@ -660,6 +660,7 @@ class ImpactSelectionTest(unittest.TestCase):
         after = policy_unit(
             representation="sha256:" + "c" * 64,
             structural="sha256:" + "d" * 64,
+            revision=4,
         )
         change = classify_changes(
             corpus(before),

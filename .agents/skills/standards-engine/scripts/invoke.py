@@ -19,6 +19,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("operation", nargs="?")
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument("--purpose", choices=("application", "authoring"), required=True)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--list", action="store_true", dest="list_operations")
     mode.add_argument("--example", action="store_true")
@@ -112,7 +113,8 @@ def main(argv: list[str] | None = None) -> int:
     root = arguments.repo_root.resolve()
     try:
         contract = _object(root / GENERATED_CONTRACT)
-        operations = _operations(contract)
+        from tools.standards_engine.standards_engine.context_projection import qualified_operations
+        operations = _operations({"operations": qualified_operations(contract, arguments.purpose)})
         if arguments.list_operations:
             print("\n".join(sorted(operations)))
             return 0
@@ -137,18 +139,16 @@ def main(argv: list[str] | None = None) -> int:
                 "Engine runtime dependencies are unavailable; read "
                 ".agents/skills/standards-engine/references/environment.md"
             ) from error
-        with AgentToolFacade.open_repository(root) as facade:
+        with AgentToolFacade.open_repository(root, purpose=arguments.purpose) as facade:
             result = getattr(facade, str(operation["id"]))(request)
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0
-    except (
-        AttributeError,
-        json.JSONDecodeError,
-        OSError,
-        TypeError,
-        ValueError,
-    ) as error:
-        print(f"standards-engine invocation error: {error}", file=sys.stderr)
+    except Exception as error:
+        # The CLI is an output boundary. Application callers receive a bounded
+        # outcome even when loading malformed private authority fails.
+        message = ("Application invocation is unavailable; use the published interface contract."
+                   if arguments.purpose == "application" else f"standards-engine invocation error: {error}")
+        print(message, file=sys.stderr)
         return 2
 
 

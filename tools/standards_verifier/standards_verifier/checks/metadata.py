@@ -9,7 +9,7 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 
 
 @dataclass(frozen=True, slots=True)
@@ -26,7 +26,7 @@ class MetadataGraphCheck:
     cases: tuple[MetadataCase, ...] | None
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         paths = self.paths or tuple(
             path for case in self.cases or () for path in case.paths

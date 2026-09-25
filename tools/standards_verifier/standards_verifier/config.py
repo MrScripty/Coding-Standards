@@ -9,13 +9,12 @@ from .checks import parse_check
 from .diagnostics import Diagnostic, EngineError
 from .graph_adapters import SUITE_DEPENDENCIES, suite_dependency_registry
 from .model import RegistryEntry, Suite, SuiteCatalog
-from .paths import contained_file
+from .input_sources import SuiteInputSource, input_source
 
 
-def _load_toml(path: Path, display_path: str) -> dict[str, Any]:
+def _load_toml(content: bytes, display_path: str) -> dict[str, Any]:
     try:
-        with path.open("rb") as handle:
-            value = tomllib.load(handle)
+        value = tomllib.loads(content.decode("utf-8"))
     except tomllib.TOMLDecodeError as error:
         raise EngineError(Diagnostic("CONFIG.INVALID_TOML", "invalid", str(error), path=display_path)) from error
     if not isinstance(value, dict):
@@ -23,9 +22,8 @@ def _load_toml(path: Path, display_path: str) -> dict[str, Any]:
     return value
 
 
-def load_registry(root: Path, registry_path: str) -> tuple[RegistryEntry, ...]:
-    path = contained_file(root, registry_path)
-    raw = _load_toml(path, registry_path)
+def load_registry(root: Path | SuiteInputSource, registry_path: str) -> tuple[RegistryEntry, ...]:
+    raw = _load_toml(input_source(root).read_bytes(registry_path), registry_path)
     if set(raw) != {"schema_version", "suites"}:
         unknown = sorted(set(raw) - {"schema_version", "suites"})
         raise EngineError(Diagnostic("CONFIG.REGISTRY_FIELDS", "invalid", "registry requires exactly schema_version and suites", path=registry_path, field=unknown[0] if unknown else None))
@@ -59,15 +57,16 @@ def load_registry(root: Path, registry_path: str) -> tuple[RegistryEntry, ...]:
                 raise EngineError(Diagnostic("CONFIG.SELF_DEPENDENCY", "invalid", "suite cannot depend on itself", suite=entry.id, path=registry_path))
             if dependency not in known:
                 raise EngineError(Diagnostic("CONFIG.UNKNOWN_DEPENDENCY", "unavailable", "suite dependency is not registered", suite=entry.id, path=registry_path, observed=dependency))
-    _validate_acyclic(root, entries, registry_path)
+    _validate_acyclic(entries, registry_path)
     return tuple(entries)
 
 
 def _validate_acyclic(
-    root: Path, entries: list[RegistryEntry], registry_path: str
+    entries: list[RegistryEntry], registry_path: str
 ) -> None:
+    # This graph contains symbolic suite IDs only; its coordinate root is not read.
     graph = suite_dependency_registry(
-        root,
+        Path("/"),
         entries,
         registry_path,
         include_path_aliases=False,
@@ -86,9 +85,8 @@ def _validate_acyclic(
         )
 
 
-def load_suite(root: Path, entry: RegistryEntry) -> Suite:
-    path = contained_file(root, entry.path, suite=entry.id)
-    raw = _load_toml(path, entry.path)
+def load_suite(root: Path | SuiteInputSource, entry: RegistryEntry) -> Suite:
+    raw = _load_toml(input_source(root).read_bytes(entry.path, suite=entry.id), entry.path)
     allowed = {"schema_version", "id", "owner", "description", "checks"}
     if set(raw) != allowed:
         unknown = sorted(set(raw) - allowed)
@@ -112,12 +110,12 @@ def load_suite(root: Path, entry: RegistryEntry) -> Suite:
     return Suite(entry.id, owner, description, checks)
 
 
-def load_registry_catalog(root: Path, registry_path: str) -> SuiteCatalog:
+def load_registry_catalog(root: Path | SuiteInputSource, registry_path: str) -> SuiteCatalog:
     return SuiteCatalog(registry_path, load_registry(root, registry_path), ())
 
 
 def extend_catalog(
-    root: Path,
+    root: Path | SuiteInputSource,
     catalog: SuiteCatalog,
     suite_ids: Iterable[str],
 ) -> SuiteCatalog:

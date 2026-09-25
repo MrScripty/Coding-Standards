@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import csv
+import io
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
-from ..paths import contained_file
+from ..model import CheckContext, CheckInputContext
+from ..input_sources import SuiteInputSource, input_source
 from .predicates import Predicate, parse_predicate
 
 
@@ -49,16 +50,16 @@ class ProjectedTableSource:
 
 
 def read_table_rows(
-    root: Path,
+    root: Path | SuiteInputSource,
     path: str,
     header: tuple[str, ...],
     *,
     suite: str,
     check: str,
 ) -> list[dict[str, str]]:
-    source = contained_file(root, path, suite=suite, check=check)
+    content = input_source(root).read_bytes(path, suite=suite, check=check)
     try:
-        with source.open("r", encoding="utf-8", newline="") as handle:
+        with io.StringIO(content.decode("utf-8"), newline="") as handle:
             values = list(csv.reader(handle, delimiter="\t"))
     except UnicodeDecodeError as error:
         raise EngineError(
@@ -139,12 +140,12 @@ def project_table_rows(
 
 
 def read_projected_table_rows(
-    context: CheckContext,
+    context: CheckContext | CheckInputContext,
     check: str,
     source: ProjectedTableSource,
 ) -> tuple[tuple[str, ...], ...]:
     rows = read_table_rows(
-        context.repo_root,
+        context.inputs,
         source.path,
         source.header,
         suite=context.suite_id,

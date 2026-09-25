@@ -16,8 +16,8 @@ from .errors import AnalysisError, AnalysisFailure
 from .keys import analysis_identity, analysis_key, analysis_key_bytes, raw_digest
 
 
-ANALYSIS_CONTRACT_VERSION = 6
-ANALYSIS_IDENTITY_DOMAIN = "coding-standards:analysis:v6"
+ANALYSIS_CONTRACT_VERSION = 7
+ANALYSIS_IDENTITY_DOMAIN = "coding-standards:analysis:v7"
 ANALYSIS_AGGREGATE_KIND = "analysis-state"
 ANALYSIS_STATE_FIELDS = {
     "base_snapshot",
@@ -457,7 +457,7 @@ def analysis_handle(analysis_id: str) -> dict[str, object]:
     return {
         "kind": "analysis-handle",
         "id": analysis_id,
-        "schema_version": 6,
+        "schema_version": 7,
     }
 
 
@@ -471,7 +471,7 @@ def child_handle(
         "analysis": analysis_handle(analysis_id),
         "child_kind": child_kind,
         "child_id": child_id,
-        "schema_version": 6,
+        "schema_version": 7,
     }
 
 

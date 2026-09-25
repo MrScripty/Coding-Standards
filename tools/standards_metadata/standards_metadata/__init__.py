@@ -45,7 +45,14 @@ from .suite_inputs import (
     load_suite_input_manifest,
     suite_input_manifest_bytes,
 )
+from .supporting_content import (
+    APPLICATION_CONTENT, DECISION_PROVENANCE, ApplicationExposure, DecisionProvenance,
+    SupportingContent, content_digest, load_supporting_content,
+)
+
 __all__ = (
+    "APPLICATION_CONTENT", "DECISION_PROVENANCE", "ApplicationExposure",
+    "DecisionProvenance", "SupportingContent", "content_digest", "load_supporting_content",
     "CANONICAL_MODULE_CORPUS",
     "POLICY_UNIT_REGISTRY",
     "CanonicalModuleCorpus",

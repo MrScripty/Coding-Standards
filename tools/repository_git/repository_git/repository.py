@@ -3,14 +3,24 @@ from __future__ import annotations
 import hashlib
 import os
 import stat
+import sys
+from dataclasses import dataclass
+from types import MappingProxyType
+from collections.abc import Mapping
 import subprocess
 import threading
 import tempfile
 from contextlib import contextmanager
+from collections import OrderedDict
+from collections.abc import Callable
 from pathlib import Path
 from typing import Iterable, Iterator, Literal, Sequence
 
-from .errors import GitRepositoryError, invalid, unavailable, unsupported
+from .errors import (
+    GitCommandObservation, GitRepositoryError, GitRepositoryFailure,
+    invalid, unavailable, unsupported,
+)
+from .batch import VerifiedBatchReader, object_size, verified_body
 from .model import (
     CandidateCommitMessage,
     CandidateFile,
@@ -26,6 +36,10 @@ from .model import (
 DEFAULT_OUTPUT_LIMIT = 64 * 1024 * 1024
 ERROR_OUTPUT_LIMIT = 1024 * 1024
 COMMAND_TIMEOUT_SECONDS = 30
+# A revision-read owner may override these retention budgets. They bound cached
+# payload and entry overhead separately from the existing per-object safety cap.
+DEFAULT_REVISION_CACHE_BYTES = 8 * 1024 * 1024
+DEFAULT_REVISION_CACHE_OBJECTS = 1024
 
 
 def sanitized_git_environment() -> dict[str, str]:
@@ -95,12 +109,36 @@ def git_output(
         max_output_bytes=max_output_bytes,
     )
     if result.returncode != 0:
-        detail = result.stderr.decode("utf-8", "replace").strip()
-        raise unavailable(
-            "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
-            f"Git exited with {result.returncode}: {detail}",
-        )
+        raise _failed_command(arguments, result)
     return result.stdout
+
+
+def _failed_command(arguments: Sequence[str], result: GitCommandResult) -> GitRepositoryError:
+    """Retain raw output privately and project only fixed observed phrases."""
+    stderr = result.stderr.decode("utf-8", "replace").strip()
+    operation = arguments[0] if arguments and arguments[0] in {
+        "fetch", "update-ref", "rev-parse", "clone", "commit-tree", "hash-object",
+        "read-tree", "write-tree", "update-index", "checkout", "cat-file",
+    } else "git-command"
+    reason, excerpt = "unclassified", ""
+    # These are diagnostic observations, not permission decisions. Their fixed
+    # excerpts reveal neither paths nor arbitrary hook/configuration output.
+    for phrase, classification in (
+        ("Permission denied", "permission-denied"),
+        ("insufficient permission", "permission-denied"),
+        ("Read-only file system", "read-only-filesystem"),
+        ("Operation not permitted", "operation-not-permitted"),
+        ("File exists", "path-exists"),
+        ("unable to auto-detect email address", "identity-unavailable"),
+    ):
+        if phrase in stderr:
+            reason, excerpt = classification, phrase
+            break
+    return GitRepositoryError(GitRepositoryFailure(
+        "unavailable", "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+        f"Git exited with {result.returncode}: {stderr}",
+        GitCommandObservation(operation, result.returncode, reason, excerpt),
+    ))
 
 
 def indexed_paths(root: Path) -> tuple[str, ...]:
@@ -482,6 +520,9 @@ class GitRepository:
             branch,
             expected,
             candidate.revision,
+            rejected_command=_failed_command(
+                ("update-ref", target, candidate.revision.oid, expected.oid), updated
+            ),
         )
 
     def validate_candidate(self, candidate: MaterializedCandidate) -> None:
@@ -504,6 +545,7 @@ class GitRepository:
         candidate: RepositoryRevision,
         *,
         prior_error: GitRepositoryError | None = None,
+        rejected_command: GitRepositoryError | None = None,
     ) -> Literal["updated", "stale"]:
         try:
             observed = self.branch_revision(branch)
@@ -521,10 +563,12 @@ class GitRepository:
             ) from prior_error
         if observed != expected:
             return "stale"
-        raise unavailable(
-            "REPOSITORY_GIT.PUBLICATION_UNAVAILABLE",
+        failure = GitRepositoryFailure(
+            "unavailable", "REPOSITORY_GIT.PUBLICATION_UNAVAILABLE",
             "Git rejected the expected-target update while the target remained unchanged",
+            None if rejected_command is None else rejected_command.failure.command,
         )
+        raise GitRepositoryError(failure) from rejected_command
 
     def _copy_verification_refs(self, candidate_root: Path) -> None:
         output = git_output(
@@ -674,21 +718,48 @@ class GitRepository:
                 "capture paths must be nonempty and unique",
             )
         revision = self.current_revision()
-        return RepositoryCapture(
+        with self.read_session(revision) as reader:
+            return RepositoryCapture(
+                revision,
+                (CapturedFile(path, reader.read_file(path)) for path in selected),
+            )
+
+    def read_session(
+        self,
+        revision: RepositoryRevision,
+        *,
+        max_cached_bytes: int = DEFAULT_REVISION_CACHE_BYTES,
+        max_cached_objects: int = DEFAULT_REVISION_CACHE_OBJECTS,
+    ) -> RevisionReadSession:
+        """Own bounded verified-object reuse for one exact revision read."""
+        return RevisionReadSession(
+            self,
             revision,
-            (CapturedFile(path, self.read_file(revision, path)) for path in selected),
+            max_cached_bytes=max_cached_bytes,
+            max_cached_objects=max_cached_objects,
         )
 
     def read_file(self, revision: RepositoryRevision, path: RepositoryPath) -> bytes:
+        return self._read_file(revision, path, self._object)
+
+    def _read_file(
+        self,
+        revision: RepositoryRevision,
+        path: RepositoryPath,
+        read_object: Callable[[Path, str, str, str], bytes],
+        read_tree: Callable[[Path, str, str], Mapping[str, tuple[str, str]]] | None = None,
+    ) -> bytes:
         algorithm = _algorithm(revision.oid)
-        commit = self._object(self._repository, revision.oid, "commit", algorithm)
+        commit = read_object(self._repository, revision.oid, "commit", algorithm)
         tree_oid = _commit_tree(commit, algorithm)
         repository = self._repository
         traversed: list[str] = []
         index = 0
         while index < len(path.components):
-            tree = self._object(repository, tree_oid, "tree", algorithm)
-            entries = _tree_entries(tree, algorithm)
+            entries = (
+                read_tree(repository, tree_oid, algorithm) if read_tree is not None
+                else _tree_entries(read_object(repository, tree_oid, "tree", algorithm), algorithm)
+            )
             component = path.components[index]
             try:
                 mode, oid = entries[component]
@@ -705,7 +776,7 @@ class GitRepository:
                         "REPOSITORY_GIT.NON_DIRECTORY",
                         f"{component!r} is a file before the requested leaf",
                     )
-                return self._object(repository, oid, "blob", algorithm)
+                return read_object(repository, oid, "blob", algorithm)
             if mode in {"40000", "040000"}:
                 if final:
                     raise unsupported(
@@ -729,7 +800,7 @@ class GitRepository:
                     )
                 repository = nested
                 algorithm = _algorithm(oid)
-                nested_commit = self._object(repository, oid, "commit", algorithm)
+                nested_commit = read_object(repository, oid, "commit", algorithm)
                 tree_oid = _commit_tree(nested_commit, algorithm)
                 index += 1
                 continue
@@ -761,43 +832,140 @@ class GitRepository:
                     ) from error
             raise
         header, separator, remainder = output.partition(b"\n")
-        if not separator:
-            raise invalid("REPOSITORY_GIT.INVALID_OBJECT", "batch header is incomplete")
-        if header == f"{oid} missing".encode("ascii"):
-            raise unavailable(
-                "REPOSITORY_GIT.OBJECT_UNAVAILABLE", f"Git object {oid} is unavailable"
-            )
-        fields = header.split(b" ")
-        if len(fields) != 3 or fields[0] != oid.encode("ascii"):
-            raise invalid(
-                "REPOSITORY_GIT.INVALID_OBJECT", "batch header is contradictory"
-            )
+        size = object_size(header + separator, oid, expected_type, self._max_object_bytes)
+        return verified_body(remainder, size, oid, expected_type, algorithm)
+
+
+
+@dataclass(frozen=True, slots=True)
+class _RetainedObject:
+    content: bytes
+    entries: Mapping[str, tuple[str, str]] | None
+    size: int
+
+
+class RevisionReadSession:
+    """One exact-revision owner for verified objects, decoded trees and a child.
+
+    A session uses at most one batch child at a time. Switching an explicitly
+    mapped repository closes the preceding stream; cached objects stay keyed by
+    repository/type/algorithm. Fresh sessions perform fresh first-read validation.
+    """
+
+    def __init__(
+        self, repository: GitRepository, revision: RepositoryRevision, *,
+        max_cached_bytes: int = DEFAULT_REVISION_CACHE_BYTES,
+        max_cached_objects: int = DEFAULT_REVISION_CACHE_OBJECTS,
+    ) -> None:
+        if type(revision) is not RepositoryRevision:
+            raise invalid("REPOSITORY_GIT.INVALID_REVISION", "read session requires an exact revision")
+        if any(type(value) is not int or value < 0 for value in (max_cached_bytes, max_cached_objects)):
+            raise invalid("REPOSITORY_GIT.INVALID_BOUND", "cache bounds must be nonnegative integers")
+        self._repository, self._revision = repository, revision
+        self._max_bytes, self._max_objects = max_cached_bytes, max_cached_objects
+        self._objects: OrderedDict[tuple[Path, str, str, str], _RetainedObject] = OrderedDict()
+        self._cached_bytes = 0
+        self._reader: tuple[Path, VerifiedBatchReader] | None = None
+        self._closed = False
+
+    @property
+    def revision(self) -> RepositoryRevision:
+        return self._revision
+
+    @property
+    def cached_bytes(self) -> int:
+        """Raw payload plus decoded-tree allocations; entry count bounds bookkeeping."""
+        return self._cached_bytes
+
+    @property
+    def cached_objects(self) -> int:
+        return len(self._objects)
+
+    def close(self, *, abort: bool = False) -> None:
+        if self._closed:
+            return
+        self._closed = True
         try:
-            observed_type = fields[1].decode("ascii")
-            size = int(fields[2])
-        except (UnicodeDecodeError, ValueError) as error:
-            raise invalid("REPOSITORY_GIT.INVALID_OBJECT", str(error)) from error
-        if observed_type != expected_type:
-            raise invalid(
-                "REPOSITORY_GIT.TYPE_MISMATCH",
-                f"expected {expected_type}, observed {observed_type}",
-            )
-        if size < 0 or size > self._max_object_bytes:
-            raise unsupported(
-                "REPOSITORY_GIT.OBJECT_LIMIT",
-                f"Git object exceeds {self._max_object_bytes} bytes",
-            )
-        if len(remainder) != size + 1 or remainder[-1:] != b"\n":
-            raise invalid(
-                "REPOSITORY_GIT.INVALID_OBJECT", "batch body length is invalid"
-            )
-        content = remainder[:-1]
-        object_header = f"{expected_type} {len(content)}\0".encode("ascii")
-        if hashlib.new(algorithm, object_header + content).hexdigest() != oid:
-            raise invalid(
-                "REPOSITORY_GIT.HASH_MISMATCH", f"Git object {oid} failed verification"
-            )
+            if self._reader is not None:
+                reader = self._reader[1]
+                reader.abort() if abort else reader.close()
+        finally:
+            self._reader = None
+            self._objects.clear()
+            self._cached_bytes = 0
+
+    def __enter__(self) -> RevisionReadSession:
+        self._require_open()
+        return self
+
+    def __exit__(self, exc_type: object, *_: object) -> None:
+        self.close(abort=exc_type is not None)
+
+    def _require_open(self) -> None:
+        if self._closed:
+            raise invalid("REPOSITORY_GIT.READ_SESSION_CLOSED", "the revision read session is closed")
+
+    def read_file(self, path: RepositoryPath) -> bytes:
+        self._require_open()
+        return self._repository._read_file(self._revision, path, self._object, self._tree)
+
+    def _fetch(self, repository: Path, oid: str, expected_type: str, algorithm: str) -> bytes:
+        if self._reader is not None and self._reader[0] != repository:
+            previous, self._reader = self._reader, None
+            previous[1].close()
+        if self._reader is None:
+            self._reader = (repository, VerifiedBatchReader(
+                ("git", "-C", str(repository), "cat-file", "--batch"),
+                environment=sanitized_git_environment(),
+                object_limit=self._repository._max_object_bytes,
+                stderr_limit=ERROR_OUTPUT_LIMIT, timeout=COMMAND_TIMEOUT_SECONDS,
+            ))
+        try:
+            return self._reader[1].read(oid, expected_type, algorithm)
+        except BaseException:
+            self._reader[1].abort()
+            self._reader = None
+            raise
+
+    def _retain(self, key: tuple[Path, str, str, str], entry: _RetainedObject) -> None:
+        if not self._max_objects or not self._max_bytes or entry.size > self._max_bytes:
+            return
+        prior = self._objects.pop(key, None)
+        if prior is not None:
+            self._cached_bytes -= prior.size
+        while self._objects and (len(self._objects) >= self._max_objects
+                                 or self._cached_bytes + entry.size > self._max_bytes):
+            _, evicted = self._objects.popitem(last=False)
+            self._cached_bytes -= evicted.size
+        self._objects[key] = entry
+        self._cached_bytes += entry.size
+
+    def _object(self, repository: Path, oid: str, expected_type: str, algorithm: str) -> bytes:
+        key = (repository, oid, expected_type, algorithm)
+        if key in self._objects:
+            self._objects.move_to_end(key)
+            return self._objects[key].content
+        content = self._fetch(repository, oid, expected_type, algorithm)
+        self._retain(key, _RetainedObject(content, None, len(content)))
         return content
+
+    def _tree(self, repository: Path, oid: str, algorithm: str) -> Mapping[str, tuple[str, str]]:
+        key = (repository, oid, "tree", algorithm)
+        entry = self._objects.get(key)
+        if entry is not None and entry.entries is not None:
+            self._objects.move_to_end(key)
+            return entry.entries
+        content = self._object(repository, oid, "tree", algorithm)
+        decoded = _tree_entries(content, algorithm)
+        # The tree schema owns these exact built-in containers. Count every
+        # referenced string conservatively even when Python shares an object.
+        size = len(content) + sys.getsizeof(decoded) + sum(
+            sys.getsizeof(name) + sys.getsizeof(pair) + sum(map(sys.getsizeof, pair))
+            for name, pair in decoded.items()
+        )
+        entries = MappingProxyType(decoded)
+        self._retain(key, _RetainedObject(content, entries, size + sys.getsizeof(entries)))
+        return entries
 
 
 def _run_bounded(
@@ -915,11 +1083,7 @@ def _git_output_with_environment(
         environment=environment,
     )
     if result.returncode != 0:
-        detail = result.stderr.decode("utf-8", "replace").strip()
-        raise unavailable(
-            "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
-            f"Git exited with {result.returncode}: {detail}",
-        )
+        raise _failed_command(arguments, result)
     return result.stdout
 
 

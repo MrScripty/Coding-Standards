@@ -1,0 +1,2 @@
+START test_analysis.AnalysisWorkflowTest.test_apply_create_and_retire_owns_topology_and_commit
+END test_analysis.AnalysisWorkflowTest.test_apply_create_and_retire_owns_topology_and_commit 179.67 pass

@@ -1,0 +1,36 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "dependencies": [
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.5.1"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0"
+    }
+  ],
+  "qualification": "Local Python 3.13.5, not supported pinned 3.11/3.12. rpds-py differs from lock.",
+  "executable": "/mnt/data/interface-work/env/bin/python",
+  "executable_sha256": "e59d0124ff06c248546876e01fcfb1ea3cda63534949f94a9372bfcfe3bfc3f5",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "git": "git version 2.47.3",
+  "baseline_commit": "b81a5aae2eb72fb976b0570a4dab76d30e531fe4",
+  "performance_run_policy": "Baseline then candidate, three samples each, no other package/test jobs running. Fresh processes, not guaranteed cold OS caches."
+}

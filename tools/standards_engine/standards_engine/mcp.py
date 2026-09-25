@@ -8,25 +8,31 @@ from __future__ import annotations
 
 import argparse
 from contextlib import redirect_stdout
+from copy import deepcopy
 import json
 from pathlib import Path
 import sys
 import traceback
 from typing import TextIO
 
+from tools.standards_contracts.standards_contracts import CompiledContracts
+
 from .tools import AgentToolFacade
+from .compiled_cache import CompiledSnapshotCache
+from .context_projection import Purpose, qualified_operations
 
 
 PROTOCOL_VERSION = "2025-11-25"
-CONTRACT_PATH = "tools/standards_engine/contracts/generated/agent-tools.json"
 READ_ONLY_OPERATIONS = frozenset(
     {
+        "read_many",
         "workflow_status",
         "resume",
         "find_snapshots",
         "find_proposals",
         "query",
         "query_proposal",
+        "preview_application",
         "inspect",
     }
 )
@@ -34,10 +40,12 @@ FOCUSED_OPERATIONS = frozenset(
     {
         "route",
         "read",
+        "read_many",
         "related",
         "routing_facts",
         "inspect",
         "query_proposal",
+        "preview_application",
         "propose",
         "revise",
         "analyze",
@@ -55,6 +63,7 @@ FOCUSED_OPERATIONS = frozenset(
 # type renderer. This is generated documentation, never a second validator.
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
+    "read_many": "Read 1–32 selected items from one explicit snapshot in request order. Each item accepts the single-read options. The complete JSON result is limited to 2 MiB; a failed item rejects the whole request. Use the snapshot returned by route or read.",
     "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
     "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",
     "analyze": "Analyze the exact draft context and return pending requirements or complete analysis with a new context.",
@@ -79,14 +88,26 @@ DESCRIPTIONS = {
     "create_proposal": "Propose an atomic standards change with explicit domain intent and evidence against a snapshot.",
     "find_proposals": "Find durable proposals and their current revision handles.",
     "revise_proposal": "Append an atomic change to the exact expected proposal revision; stale revisions are rejected.",
-    "query_proposal": "Read, route, or traverse standards within an exact immutable proposal revision.",
+    "query_proposal": "Read, route, or traverse authoring content within an exact immutable proposal revision. Use preview_application to inspect its qualified application view.",
+    "preview_application": "Inspect an exact unpublished revision through the ordinary application qualification and filtering rules. Supply one read, route, or related request. Results and continuations stay bound to the draft; this operation neither publishes content nor approves review or exposure.",
     "analyze_proposal": "Analyze an exact proposal revision and return unresolved consequences or complete analysis.",
     "review_proposal": "Accept complete current proposal analysis with explicit evidence-backed review decisions; return content-bound readiness. Requires user authorization for review.",
     "verify_proposal": "Verify the exact proposal candidate. Coverage audits require readiness. Verification does not supply review decisions or publish.",
     "apply_proposal": "Verify and publish the exact accepted readiness to the local canonical ref. Requires user authorization for application. On recovery-required use recover_application with the same readiness; never retry apply. Does not push a remote.",
     "recover_application": "Observe the durable application selected by readiness after recovery-required. Does not retry or publish; preserve the same readiness handle.",
     "verify_repository": "Verify the working tree. Refreshing generated verification inputs is a mutation; inspect verification.passed.",
-    "maintain_evidence": "Preview or apply explicit evidence catalog maintenance with exact review evidence. Does not change normative standards or issue attestations.",
+    "maintain_evidence": "Maintain the accepted repository evidence catalog at an exact revision. For draft-only consumers use register-consumer in propose/revise with separate policy relationships. This operation does not edit a proposal or certify coverage.",
+}
+
+
+APPLICATION_DESCRIPTIONS = {
+    "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
+    "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Reuse the returned snapshot.",
+    "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
+    "related": "Discover selected relationships among qualified guidance and examples in one snapshot.",
+    "routing_facts": "Read the reviewed vocabulary for routing a task. Supply known facts and retain unresolved conditions.",
+    "query": "Route, read, or traverse qualified guidance within the supplied snapshot.",
+    "inspect": "Inspect a permitted policy or relationship handle within its captured snapshot.",
 }
 
 
@@ -112,15 +133,21 @@ def schema_closure(root: dict, definitions: dict) -> dict:
     return {**root, "$defs": selected}
 
 
-def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
-    contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
+def tool_catalog(
+    root: Path, *, purpose: Purpose | str, advanced: bool = False,
+    interface: CompiledContracts | None = None,
+) -> list[dict]:
+    # Discovery and invocation share the same installed schema authority.
+    selected = interface if interface is not None else AgentToolFacade.load_interface(root)
+    contract = selected.project().agent_tools
     definitions = contract["$defs"]
     result = []
-    for operation in contract["operations"]:
+    purpose = Purpose(purpose)
+    for operation in qualified_operations(contract, purpose):
         name = operation["id"]
         if not advanced and name not in FOCUSED_OPERATIONS:
             continue
-        description = DESCRIPTIONS[name]
+        description = APPLICATION_DESCRIPTIONS[name] if purpose is Purpose.APPLICATION else DESCRIPTIONS[name]
         if name in INPUT_CONTRACT_DESCRIPTIONS:
             schema = schema_closure(
                 definitions[operation["input_definition"]], definitions
@@ -137,7 +164,7 @@ def tool_catalog(root: Path, *, advanced: bool = False) -> list[dict]:
             {
                 "name": name,
                 "description": description,
-                "annotations": {"readOnlyHint": name in READ_ONLY_OPERATIONS},
+                "annotations": {"readOnlyHint": purpose is Purpose.APPLICATION or name in READ_ONLY_OPERATIONS},
                 "inputSchema": input_schema(
                     definitions[operation["input_definition"]], definitions
                 ),
@@ -193,13 +220,31 @@ class ProtocolError(Exception):
 
 
 class MCPServer:
-    def __init__(self, root: Path, *, advanced: bool = False) -> None:
+    def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False) -> None:
         self.root = root.resolve()
+        self._purpose = Purpose(purpose)
         self.advanced = advanced
-        self.tools = tool_catalog(self.root, advanced=advanced)
+        self._interface = AgentToolFacade.load_interface(self.root)
+        self.tools = tool_catalog(
+            self.root, purpose=self.purpose, advanced=advanced, interface=self._interface
+        )
         self.names = {tool["name"] for tool in self.tools}
+        self._compiled_cache = CompiledSnapshotCache(self.root, self.purpose)
+        self._closed = False
         self.initialized = False
         self.ready = False
+
+    @property
+    def purpose(self) -> Purpose:
+        return self._purpose
+
+    def close(self) -> None:
+        """Release only process-owned pure resources; each call closes its store."""
+        self._compiled_cache.close()
+        self._interface = None
+        self.tools.clear()
+        self.names.clear()
+        self._closed = True
 
     def dispatch(self, message: object) -> dict | None:
         identifier = None
@@ -238,6 +283,8 @@ class MCPServer:
             }
 
     def _request(self, method: str, params: dict) -> dict:
+        if self._closed:
+            raise ProtocolError(-32000, "The server is closed.")
         if method == "ping":
             return {}
         if method == "initialize":
@@ -253,8 +300,10 @@ class MCPServer:
             return {
                 "protocolVersion": PROTOCOL_VERSION,
                 "capabilities": {"tools": {"listChanged": False}},
-                "serverInfo": {"name": "standards-engine", "version": "0.1.0"},
-                "instructions": (
+                "serverInfo": {"name": "standards-engine", "version": "0.2.0"},
+                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. " + (
+                    "Use route and read to obtain applicable guidance. Reuse returned snapshots for consistent observations."
+                    if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
                     + (
                         " Native advanced operations use recover_application with readiness."
@@ -268,7 +317,7 @@ class MCPServer:
         if method == "tools/list":
             if "cursor" in params:
                 raise ProtocolError(-32602, "This catalog has no continuation cursor.")
-            return {"tools": self.tools}
+            return {"tools": deepcopy(self.tools)}
         if method != "tools/call":
             raise ProtocolError(-32601, "Method not found.")
         name = params.get("name")
@@ -281,9 +330,18 @@ class MCPServer:
             # Opening per call matches the reference transport and avoids keeping
             # store state alive across idle client sessions. No operation retries.
             with redirect_stdout(sys.stderr):
-                with AgentToolFacade.open_repository(self.root) as facade:
+                with AgentToolFacade.open_repository(
+                    self.root, purpose=self.purpose, interface=self._interface,
+                    compiled_cache=self._compiled_cache,
+                ) as facade:
                     value = getattr(facade, name)(arguments)
-        except Exception:
+        except Exception as error:
+            if self.purpose is Purpose.APPLICATION:
+                print(
+                    f"Application invocation failed: {type(error).__name__}",
+                    file=sys.stderr,
+                )
+                return {"isError": True, "content": [{"type": "text", "text": "Application observation is unavailable; operator diagnostics retain the failure."}]}
             traceback.print_exc(file=sys.stderr)
             return {
                 "isError": True,
@@ -304,26 +362,29 @@ class MCPServer:
         return {
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
-            "isError": value.get("kind") == "rejected-result"
+            "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result"}
             or value.get("status") == "rejected",
         }
 
 
 def serve(server: MCPServer, source: TextIO, destination: TextIO) -> None:
-    for line in source:
-        try:
-            message = json.loads(line)
-        except (ValueError, RecursionError):
-            response = {
-                "jsonrpc": "2.0",
-                "id": None,
-                "error": {"code": -32700, "message": "Invalid JSON."},
-            }
-        else:
-            response = server.dispatch(message)
-        if response is not None:
-            destination.write(json.dumps(response) + "\n")
-            destination.flush()
+    try:
+        for line in source:
+            try:
+                message = json.loads(line)
+            except (ValueError, RecursionError):
+                response = {
+                    "jsonrpc": "2.0",
+                    "id": None,
+                    "error": {"code": -32700, "message": "Invalid JSON."},
+                }
+            else:
+                response = server.dispatch(message)
+            if response is not None:
+                destination.write(json.dumps(response) + "\n")
+                destination.flush()
+    finally:
+        server.close()
 
 
 def main() -> int:
@@ -331,14 +392,15 @@ def main() -> int:
         description="Serve Standards Engine tools over MCP stdio."
     )
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument("--purpose", choices=[value.value for value in Purpose], required=True)
     parser.add_argument(
         "--advanced",
         action="store_true",
-        help="Expose the complete native and focused catalog.",
+        help="Expose additional operations within the configured purpose.",
     )
     arguments = parser.parse_args()
     serve(
-        MCPServer(arguments.repo_root, advanced=arguments.advanced),
+        MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced),
         sys.stdin,
         sys.stdout,
     )

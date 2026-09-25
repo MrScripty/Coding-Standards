@@ -1,0 +1,285 @@
+{
+  "source": "/mnt/data/interface-work/repo",
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "corpus": {
+    "files": 436,
+    "bytes": 3747165,
+    "content_id": "snapshot-content:sha256:48852a7cf384b41ea39182169465521e22aef3addc6f3d77cd39ccdb8c784ae5",
+    "source_revision": "b81a5aae2eb72fb976b0570a4dab76d30e531fe4"
+  },
+  "observations": [
+    {
+      "repeat": 0,
+      "operation": "initialize",
+      "seconds": 0.28823670399992807,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.27295136700013245
+        }
+      ]
+    },
+    {
+      "repeat": 0,
+      "operation": "read_first",
+      "seconds": 0.3908776690000195,
+      "cpu": 0.39036076799999986,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.15264709100006257
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1918777770001725
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 0,
+      "operation": "read_repeat",
+      "seconds": 0.17881003200000123,
+      "cpu": 0.17855910900000005,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.15692990499996995
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 0,
+      "operation": "read_other",
+      "seconds": 0.16646399599994766,
+      "cpu": 0.16633457500000004,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.14919980599984228
+        }
+      ],
+      "content_size": 17601
+    },
+    {
+      "repeat": 0,
+      "operation": "read_full",
+      "seconds": 0.18280390499990062,
+      "cpu": 0.18256525899999998,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.15409010699977443
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 0,
+      "operation": "route",
+      "seconds": 0.3807934199999181,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.159077907999972
+        }
+      ]
+    },
+    {
+      "repeat": 0,
+      "operation": "cache_statistics",
+      "seconds": 0,
+      "stats": {
+        "entries": 1,
+        "accounted_bytes": 6465033,
+        "hits": 4,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "repeat": 1,
+      "operation": "initialize",
+      "seconds": 0.2757893560001321,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2609818029998223
+        }
+      ]
+    },
+    {
+      "repeat": 1,
+      "operation": "read_first",
+      "seconds": 0.3840765749998809,
+      "cpu": 0.38376053,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.14769780799997534
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1949534139998832
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 1,
+      "operation": "read_repeat",
+      "seconds": 0.1671994010000617,
+      "cpu": 0.16703066999999994,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.14723738399993636
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 1,
+      "operation": "read_other",
+      "seconds": 0.16304629600017506,
+      "cpu": 0.16303526300000026,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.14629375300000902
+        }
+      ],
+      "content_size": 17601
+    },
+    {
+      "repeat": 1,
+      "operation": "read_full",
+      "seconds": 0.1760634110000865,
+      "cpu": 0.17590700700000017,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.14843920499993146
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 1,
+      "operation": "route",
+      "seconds": 0.35190553999996155,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.14677781199998208
+        }
+      ]
+    },
+    {
+      "repeat": 1,
+      "operation": "cache_statistics",
+      "seconds": 0,
+      "stats": {
+        "entries": 1,
+        "accounted_bytes": 6465017,
+        "hits": 4,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    },
+    {
+      "repeat": 2,
+      "operation": "initialize",
+      "seconds": 0.2721619330000067,
+      "spans": [
+        {
+          "name": "interface",
+          "seconds": 0.2565942249998443
+        }
+      ]
+    },
+    {
+      "repeat": 2,
+      "operation": "read_first",
+      "seconds": 0.39650924099987606,
+      "cpu": 0.3961694859999998,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.1704660610000701
+        },
+        {
+          "name": "compile",
+          "seconds": 0.1800155039998117
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 2,
+      "operation": "read_repeat",
+      "seconds": 0.17780863999996654,
+      "cpu": 0.1776472130000002,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.15534518599997682
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 2,
+      "operation": "read_other",
+      "seconds": 0.17137406899996677,
+      "cpu": 0.171373451,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.1532312329998149
+        }
+      ],
+      "content_size": 17601
+    },
+    {
+      "repeat": 2,
+      "operation": "read_full",
+      "seconds": 0.18012109299979784,
+      "cpu": 0.1799730179999992,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.15143581799998174
+        }
+      ],
+      "content_size": 8172
+    },
+    {
+      "repeat": 2,
+      "operation": "route",
+      "seconds": 0.367399794999983,
+      "spans": [
+        {
+          "name": "load_content",
+          "seconds": 0.15281867899989265
+        }
+      ]
+    },
+    {
+      "repeat": 2,
+      "operation": "cache_statistics",
+      "seconds": 0,
+      "stats": {
+        "entries": 1,
+        "accounted_bytes": 6465001,
+        "hits": 4,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    }
+  ]
+}

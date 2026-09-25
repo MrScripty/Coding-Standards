@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from ..policy_impact import (
     canonical_policy_impact_inputs,
     load_policy_impact,
@@ -27,13 +27,13 @@ class PolicyImpactCheck:
     cases: tuple[PolicyImpactCase, ...] | None
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         if self.source_registry is not None:
             return present_inputs(
                 "registered-policy-impact",
                 *registered_policy_impact_inputs(
-                    context.repo_root,
+                    context.inputs,
                     self.source_registry,
                     dict(context.catalog.suite_paths),
                 ),
@@ -41,7 +41,7 @@ class PolicyImpactCheck:
         return (
             *present_inputs(
                 "canonical-policy-impact",
-                *canonical_policy_impact_inputs(context.repo_root),
+                *canonical_policy_impact_inputs(context.inputs),
             ),
             *present_inputs(
                 "fixture-manifest", *(case.manifest for case in self.cases or ())

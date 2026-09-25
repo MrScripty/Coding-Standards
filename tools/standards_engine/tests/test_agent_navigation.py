@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[3]
 class AgentNavigationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.engine = StandardsEngine.open_repository(ROOT, durable=False)
+        cls.engine = StandardsEngine.open_repository(ROOT, durable=False, purpose="authoring")
         cls.facade = AgentToolFacade(cls.engine, _contracts(ROOT))
         cls.created = cls.facade.create_snapshot({"kind": "create-snapshot"})
         assert cls.created["kind"] == "create-snapshot-result", cls.created
@@ -175,7 +175,7 @@ class AgentNavigationTest(unittest.TestCase):
     def test_focused_read_continuations_are_callable_against_exact_snapshot(self):
         from tools.standards_engine.standards_engine.mcp import tool_catalog
 
-        catalog = {item["name"] for item in tool_catalog(ROOT)}
+        catalog = {item["name"] for item in tool_catalog(ROOT, purpose="authoring")}
         native = self.facade.query(
             {
                 "snapshot": self.snapshot,

@@ -1,0 +1,2 @@
+START test_analysis.AnalysisWorkflowTest.test_apply_proposal_composes_real_verification_and_cold_readback
+END test_analysis.AnalysisWorkflowTest.test_apply_proposal_composes_real_verification_and_cold_readback 105.712 pass

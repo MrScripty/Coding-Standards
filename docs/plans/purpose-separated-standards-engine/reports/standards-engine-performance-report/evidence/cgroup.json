@@ -1,0 +1,6 @@
+{
+  "/sys/fs/cgroup/cpu.max": "400000 100000",
+  "/sys/fs/cgroup/memory.max": "4294967296",
+  "/sys/fs/cgroup/memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+  "/sys/fs/cgroup/pids.events": "max 0"
+}

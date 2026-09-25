@@ -1,0 +1,44 @@
+         40969277 function calls (29835125 primitive calls) in 11.115 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   11.115   11.115 module.py:205(_content_id)
+        1    0.000    0.000    9.433    9.433 encoding.py:78(hash_identity)
+        1    0.000    0.000    9.424    9.424 encoding.py:72(encode_identity_value)
+3710951/1    1.002    0.000    9.424    9.424 encoding.py:180(_encode)
+3711820/2    1.602    0.000    9.423    4.712 {method 'join' of 'bytes' objects}
+3710951/435    0.717    0.000    9.421    0.022 encoding.py:191(<genexpr>)
+     1302    0.002    0.000    9.418    0.007 encoding.py:193(<genexpr>)
+  3708028    4.278    0.000    7.241    0.000 encoding.py:201(_encode_integer)
+        1    0.003    0.003    1.682    1.682 encoding.py:136(frame_path_byte_set)
+      868    0.002    0.000    1.677    0.002 encoding.py:113(frame_path_bytes)
+ 1737/869    0.871    0.001    1.672    0.002 encoding.py:22(__init__)
+      435    0.000    0.000    0.801    0.002 encoding.py:152(<genexpr>)
+  7421467    0.781    0.000    0.788    0.000 encoding.py:155(_validate_value)
+  3734861    0.491    0.000    0.491    0.000 {method 'encode' of 'str' objects}
+  3708028    0.375    0.000    0.375    0.000 {method 'pop' of 'list' objects}
+  3739517    0.351    0.000    0.351    0.000 {method 'append' of 'list' objects}
+  3708028    0.324    0.000    0.324    0.000 {built-in method builtins.divmod}
+  3708028    0.268    0.000    0.268    0.000 encoding.py:211(<genexpr>)
+     2488    0.012    0.000    0.021    0.000 encoding.py:218(_encode_string)
+      868    0.011    0.000    0.015    0.000 encoding.py:33(__init__)
+     4976    0.006    0.000    0.009    0.000 encoding.py:170(_validate_scalar_string)
+        1    0.007    0.007    0.007    0.007 {built-in method _hashlib.openssl_sha256}
+    80493    0.005    0.000    0.005    0.000 {built-in method builtins.ord}
+      869    0.001    0.000    0.003    0.000 {method 'sort' of 'list' objects}
+      434    0.000    0.000    0.001    0.000 encoding.py:145(<lambda>)
+      868    0.001    0.000    0.001    0.000 {built-in method builtins.any}
+     2054    0.001    0.000    0.001    0.000 encoding.py:145(<genexpr>)
+     1736    0.001    0.000    0.001    0.000 encoding.py:58(<lambda>)
+     4108    0.001    0.000    0.001    0.000 encoding.py:121(<genexpr>)
+      435    0.000    0.000    0.000    0.000 module.py:207(<genexpr>)
+     1736    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+     1744    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      435    0.000    0.000    0.000    0.000 encoding.py:146(<genexpr>)
+        1    0.000    0.000    0.000    0.000 {method 'hexdigest' of '_hashlib.HASH' objects}
+        2    0.000    0.000    0.000    0.000 {method 'fullmatch' of 're.Pattern' objects}
+        3    0.000    0.000    0.000    0.000 {built-in method _struct.pack}
+
+

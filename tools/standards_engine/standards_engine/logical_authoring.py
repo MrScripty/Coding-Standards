@@ -3,12 +3,11 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-import tempfile
 import tomllib
 from collections.abc import Callable, Iterable, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
-from types import MappingProxyType
+from types import FunctionType, MappingProxyType
 from typing import Any, Protocol
 
 from tools.standards_applicability.standards_applicability import compile_fact_schema
@@ -16,7 +15,6 @@ from tools.standards_applicability.standards_applicability import compile_fact_s
 from tools.repository_git.repository_git import (
     GitRepositoryError,
     RepositoryPath,
-    git_output,
 )
 from tools.standards_metadata.standards_metadata import (
     CANONICAL_MODULE_CORPUS,
@@ -33,10 +31,11 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 from tools.standards_verifier.standards_verifier import (
     EngineError,
-    suite_input_projection_bytes,
+    suite_input_projection_bytes_from_content,
 )
 
 from .authoring import AuthoringError, AuthoringFailure
+from .projection_continuation import ProjectionContinuation, ProjectionInputs
 
 
 _CANONICAL_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]*$")
@@ -367,10 +366,25 @@ class ReplaceStandardRelationships:
 def _edit(value: object) -> LogicalEdit:
     raw = _mapping(value, "logical edit")
     kind = raw.get("kind")
+    from .supporting_authoring import SUPPORT_EDIT_KINDS, parse_edit
+    if kind in SUPPORT_EDIT_KINDS:
+        return parse_edit(raw)
+    if kind == "register-consumer":
+        from .consumer_authoring import parse_registration
+        return parse_registration(raw)
     if kind == "revise-policy-unit":
         return RevisePolicyUnit.from_mapping(raw)
     if kind == "replace-standard-relationships":
         return ReplaceStandardRelationships.from_mapping(raw)
+    if kind == "register-policy-unit":
+        _exact(raw, {"kind", "standard", "policy_unit"}, "register-policy-unit edit")
+        standard = _semantic_id(raw["standard"], "standard ID")
+        unit = _new_policy_unit(raw["policy_unit"])
+        return _structured(
+            {"kind": kind, "standard": standard, "policy_unit": unit},
+            target=str(unit["id"]),
+            facet="policy",
+        )
     if kind == "create-standard":
         _exact(
             raw,
@@ -456,7 +470,20 @@ def _edit(value: object) -> LogicalEdit:
         _text(raw["rationale"], "coverage audit rationale")
         return _structured(raw, target=policy, facet="coverage-audit")
     if kind == "revise-standard":
-        _exact(raw, {"kind", "standard"}, "revise-standard edit")
+        fields = {"kind", "standard"} | ({"scope_updates"} if "scope_updates" in raw else set())
+        _exact(raw, fields, "revise-standard edit")
+        if "scope_updates" in raw:
+            if not isinstance(raw["scope_updates"], list):
+                raise _invalid("AUTHORING.INVALID_SCOPE", "Scope updates require an array.")
+            for update in raw["scope_updates"]:
+                update = _mapping(update, "scope update")
+                _exact(update, {"policy", "heading_path", "semantics"}, "scope update")
+                _semantic_id(update["policy"], "policy")
+                if not isinstance(update["heading_path"], list) or not update["heading_path"]:
+                    raise _invalid("AUTHORING.INVALID_SCOPE", "A scope needs a heading path.")
+                for heading in update["heading_path"]:
+                    _text(heading, "heading")
+                _semantic_intent(update["semantics"])
         standard = _standard_content(raw["standard"])
         return _structured(raw, target=str(standard["id"]), facet="standard")
     if kind == "rewrite-navigation-index":
@@ -805,7 +832,7 @@ def _contains_null(value: object) -> bool:
 
 def _relationship_consumer(value: object) -> object:
     if type(value) is str:
-        return _semantic_id(value, "relationship consumer")
+        return _canonical_id(value, "relationship consumer")
     raw = _mapping(value, "relationship consumer handle")
     _exact(
         raw,
@@ -889,6 +916,10 @@ class LogicalProjection:
     analysis_policy_ids: tuple[str, ...]
     analysis_module_ids: tuple[str, ...]
     repository_paths: tuple[str, ...]
+    _continuation: ProjectionContinuation | None = field(
+        default=None, repr=False, compare=False,
+    )
+    captured_consumer_files: tuple[tuple[str, bytes], ...] = ()
 
 
 class LogicalAuthoringCompiler:
@@ -902,6 +933,26 @@ class LogicalAuthoringCompiler:
             )
         self._compile_authorities = compile_authorities
 
+    @property
+    def compilation_identity(self) -> tuple[Callable, Callable] | None:
+        """Identify the installed replay recipe; stateful adapters remain cold.
+
+        Only this exact owner, with its original compile method, exposes an
+        identity. Both compilers must be stateless installed functions. No
+        instance, bound method or stateful caller callback supplies reuse proof.
+        """
+        if (
+            type(self) is not LogicalAuthoringCompiler
+            or set(vars(self)) != {"_compile_authorities"}
+            or getattr(self.compile, "__func__", None) is not type(self).compile
+            or not all(
+                isinstance(item, FunctionType) and not item.__closure__
+                for item in (type(self).compile, self._compile_authorities)
+            )
+        ):
+            return None
+        return type(self).compile, self._compile_authorities
+
     def compile(
         self,
         base: FrozenContentSource,
@@ -909,14 +960,27 @@ class LogicalAuthoringCompiler:
         *,
         base_snapshot: str | None = None,
         base_repository_paths: Iterable[str],
+        compiled_base: Any | None = None,
+        predecessor: LogicalProjection | None = None,
     ) -> LogicalProjection:
+        """Compile the complete program, optionally continuing a verified prefix.
+
+        Predecessor bytes are only a private computational starting point. The
+        original base owns edit semantics, manifest membership and cumulative
+        analysis; every candidate still receives final authority compilation.
+        Missing or incompatible provenance selects the ordinary full replay.
+        """
         if type(base) is not FrozenContentSource or type(program) is not LogicalProgram:
             raise _invalid(
                 "AUTHORING.INVALID_LOGICAL_PROGRAM",
                 "logical compilation requires exact frozen content and program values",
             )
         selected_repository_paths = _repository_paths(base_repository_paths)
-        base_file_paths = frozenset(dict(base.files))
+        from .consumer_authoring import captured_sources
+        consumer_files = captured_sources(
+            program, base_snapshot, dict(base.files), selected_repository_paths,
+        )
+        base_file_paths = frozenset(dict(base.files)) | frozenset(dict(consumer_files))
 
         def compile_current(current: dict[str, bytes]) -> Any:
             _refresh_suite_input_projection(
@@ -926,18 +990,70 @@ class LogicalAuthoringCompiler:
             )
             return self._compile_authorities(FrozenContentSource(current))
 
-        base_compiled = self._compile_authorities(base)
-        files = dict(base.files)
+        if compiled_base is None:
+            base_compiled = self._compile_authorities(base)
+        else:
+            # This internal borrowed proof is usable only with the exact source
+            # it compiled. Changed candidates always take the full compiler path.
+            if getattr(compiled_base, "source", None) is not base:
+                raise _invalid(
+                    "AUTHORING.COMPILED_BASE_MISMATCH",
+                    "compiled base must own the exact supplied frozen source",
+                )
+            base_compiled = compiled_base
+        implementation = self.compilation_identity
+        inputs = (
+            ProjectionInputs(
+                base.files, base_snapshot, selected_repository_paths,
+                tuple(_canonical_json(item.as_contract()) for item in program.change_sets),
+                implementation,
+            )
+            if implementation is not None else None
+        )
+        prefix_length = 0
+        selected_source = base
         repository_paths = selected_repository_paths
-        for change_set in program.change_sets:
+        if (
+            inputs is not None
+            and type(predecessor) is LogicalProjection
+            and type(predecessor.source) is FrozenContentSource
+            and type(predecessor._continuation) is ProjectionContinuation
+        ):
+            prefix_length = predecessor._continuation.prefix_length(
+                inputs, projected_files=predecessor.source.files,
+                repository_paths=predecessor.repository_paths,
+            )
+            if prefix_length:
+                selected_source = predecessor.source
+                repository_paths = predecessor.repository_paths
+        # Copy only the file table: every value is an immutable byte string.
+        # Neither a failed suffix nor a sibling successor can mutate its prefix.
+        files = dict(selected_source.files)
+        for path, content in consumer_files:
+            # A prefix may already contain an explicitly revised guidance file.
+            files.setdefault(path, content)
+        for change_set in program.change_sets[prefix_length:]:
             before = dict(files)
+            from .supporting_authoring import SUPPORT_EDIT_KINDS, begin_edits, finish_edits
+            support_edits = [edit.as_contract() for edit in change_set.edits
+                             if edit.as_contract()["kind"] in SUPPORT_EDIT_KINDS]
+            begin_edits(files, support_edits, base_compiled, base_snapshot)
             routing_edits = [
                 edit.as_contract()
                 for edit in change_set.edits
                 if edit.as_contract()["kind"] in _ROUTING_EDITS
             ]
             routing_applied = False
-            for edit in sorted(change_set.edits, key=_projection_order):
+            registrations = [edit.as_contract() for edit in change_set.edits
+                             if edit.as_contract()["kind"] == "register-policy-unit"]
+            registrations_applied = False
+            for edit in sorted((edit for edit in change_set.edits
+                                if edit.as_contract()["kind"] not in SUPPORT_EDIT_KINDS), key=_projection_order):
+                if edit.as_contract()["kind"] == "register-policy-unit":
+                    if not registrations_applied:
+                        self._register_policy_units(files, registrations)
+                        registrations_applied = True
+                    continue
                 if edit.as_contract()["kind"] in _ROUTING_EDITS:
                     if not routing_applied:
                         _edit_routing(files, routing_edits)
@@ -950,6 +1066,7 @@ class LogicalAuthoringCompiler:
                     base_snapshot,
                     compile_current,
                 )
+            finish_edits(files, support_edits, base_compiled, base_snapshot, compile_current)
             if files == before and not any(
                 edit.as_contract()["kind"] == "audit-policy-unit"
                 for edit in change_set.edits
@@ -973,6 +1090,9 @@ class LogicalAuthoringCompiler:
             _analysis_policy_ids(base_compiled, compiled, program),
             _analysis_module_ids(program),
             repository_paths,
+            ProjectionContinuation(inputs, source.files, repository_paths)
+            if inputs is not None else None,
+            captured_consumer_files=consumer_files,
         )
 
     def _apply_edit(
@@ -1014,10 +1134,14 @@ class LogicalAuthoringCompiler:
             "remove-routing-fact",
         }:
             _edit_routing(files, [raw])
+        elif kind == "register-consumer":
+            from .consumer_authoring import register_consumer
+
+            register_consumer(files, raw)
         elif kind == "create-standard":
             self._create_standard(files, raw)
         elif kind == "revise-standard":
-            self._revise_standard(files, raw)
+            self._revise_standard(files, raw, base_compiled.corpus)
         elif kind == "rewrite-navigation-index":
             from .navigation_indexes import rewrite_index
 
@@ -1117,9 +1241,59 @@ class LogicalAuthoringCompiler:
             )
 
     @staticmethod
+    def _register_policy_units(
+        files: dict[str, bytes],
+        edits: Iterable[Mapping[str, object]],
+    ) -> None:
+        # Resolve owners after content edits, then stage the complete group.
+        # The canonical loader validates all new identities and scopes together,
+        # rather than observing a half-registered same-change-set corpus.
+        corpus = load_canonical_standards_corpus(FrozenContentSource(files))
+        staged: dict[str, tuple[list[dict[str, object]], list[dict[str, object]]]] = {}
+        for edit in edits:
+            standard = str(edit["standard"])
+            module = corpus.resolve_module(standard)
+            if module is None or module.module_id != standard:
+                raise _error(
+                    "AUTHORING.STANDARD_UNAVAILABLE",
+                    "unavailable",
+                    f"standard {standard!r} is unavailable",
+                )
+            unit = _mapping(edit["policy_unit"], "new policy unit")
+            identity = str(unit["id"])
+            if (
+                corpus.resolve_policy_unit(identity) is not None
+                or corpus.resolve_module(identity) is not None
+                or any(corpus.resolve_module(alias) is not None for alias in unit["aliases"])
+            ):
+                raise _invalid(
+                    "AUTHORING.POLICY_UNIT_EXISTS",
+                    f"policy identity {identity!r} is already reserved",
+                )
+            sidecar = _ensure_policy_sidecar(files, standard)
+            if sidecar not in staged:
+                staged[sidecar] = _policy_sidecar(files[sidecar])
+            active, _ = staged[sidecar]
+            active.append({
+                "id": identity,
+                "module": standard,
+                "heading_path": unit["heading_chain"],
+                "semantic_revision": 1,
+                "aliases": unit["aliases"],
+                "predecessors": unit["predecessors"],
+                "successors": unit["successors"],
+            })
+        for sidecar, (active, retired) in staged.items():
+            files[sidecar] = _render_policy_sidecar(active, retired)
+        # Validate the complete registration group before any relationship can
+        # consume it. Outer projection ownership keeps failed candidates private.
+        load_canonical_standards_corpus(FrozenContentSource(files))
+
+    @staticmethod
     def _revise_standard(
         files: dict[str, bytes],
         edit: Mapping[str, object],
+        base_corpus: Any,
     ) -> None:
         corpus = load_canonical_standards_corpus(FrozenContentSource(files))
         standard = _mapping(edit["standard"], "standard content")
@@ -1142,6 +1316,23 @@ class LogicalAuthoringCompiler:
             module.specializes,
             module.path,
         )
+        if "scope_updates" in edit:
+            updates = edit["scope_updates"]
+            units = corpus.policy_unit_corpus.for_module(module.module_id)
+            if ({item["policy"] for item in updates} != {unit.id for unit in units}
+                    or len(updates) != len(units)):
+                raise _invalid("AUTHORING.SCOPE_DISPOSITIONS_REQUIRED",
+                               "A whole-module rescope addresses each registered policy exactly once.")
+            by_id = {unit.id: unit for unit in units}
+            for update in updates:
+                unit = by_id[update["policy"]]
+                active, retired = _policy_sidecar(files[unit.source])
+                declaration = _active_declaration(active, unit.id)
+                declaration["heading_path"] = list(update["heading_path"])
+                declaration["semantic_revision"] = _semantic_revision(
+                    unit.id, unit, update["semantics"], base_corpus)
+                files[unit.source] = _render_policy_sidecar(active, retired)
+
 
     @staticmethod
     def _replace_standard_relationships(
@@ -1631,6 +1822,8 @@ def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
         "remove-routing-fact": 45,
         "revise-policy-unit": 20,
         "move-policy-unit": 30,
+        "register-policy-unit": 35,
+        "register-consumer": 36,
         "replace-standard-relationships": 40,
         "put-policy-relationship": 40,
         "remove-policy-relationship": 40,
@@ -1867,10 +2060,15 @@ def _ensure_policy_sidecar(files: dict[str, bytes], module: str) -> str:
         if any(item.get("module") == module for item in units):
             return path
     path = _policy_sidecar_path(module)
+    if path in sources:
+        # Registered storage can outlive a policy's move to another module.
+        # Declaration fields own current module identity; reuse this file and
+        # preserve all of its active declarations and tombstones when appending.
+        return path
     if path in files:
         raise _invalid(
             "AUTHORING.PROJECTION_DISAGREEMENT",
-            "derived policy-unit sidecar already exists but is unregistered",
+            "derived policy-unit sidecar already exists without the selected owner",
         )
     files[path] = _render_policy_sidecar([], [])
     _set_registry_list(files, POLICY_UNIT_REGISTRY, "sources", path, present=True)
@@ -1900,16 +2098,16 @@ def _semantic_revision(
     if (
         semantics["accepted_semantic_revision"] != accepted.semantic_revision
         or semantics["proposed_semantic_revision"] != accepted.semantic_revision + 1
-        or current.semantic_revision != accepted.semantic_revision
+        or current.semantic_revision not in {accepted.semantic_revision, accepted.semantic_revision + 1}
     ):
         raise _invalid(
             "AUTHORING.INVALID_SEMANTIC_REVISION",
             "semantic change must bind the base accepted revision and its single proposed successor",
         )
-    # A1c keeps the accepted semantic revision in the proposed corpus. The
-    # requested successor is carried separately by SemanticProposal until an
-    # accepted application materializes it.
-    return accepted.semantic_revision
+    # The proposed corpus is the exact publication candidate. Its declared
+    # revision already carries the reviewed successor, so publication does not
+    # rewrite metadata or invalidate application/provenance bindings afterward.
+    return int(semantics["proposed_semantic_revision"])
 
 
 def _impact_registry(content: bytes) -> dict[str, object]:
@@ -2112,11 +2310,8 @@ def _remove_compiled_relationship(files: dict[str, bytes], semantics: Any) -> No
 
 def _resolve_consumer(value: object, compiled: Any, base_snapshot: str | None) -> str:
     if type(value) is str:
-        if value in compiled.policy_impact.artifacts:
-            raise _invalid(
-                "AUTHORING.TARGET_HANDLE_REQUIRED",
-                "non-standard relationship consumers require a Snapshot-bound authoring target handle",
-            )
+        # The containing proposal/snapshot already binds the candidate catalog.
+        # Canonical IDs also address consumers first declared in this candidate.
         return value
     handle = _mapping(value, "authoring target handle")
     snapshot = _mapping(handle["snapshot"], "authoring target snapshot")
@@ -2229,6 +2424,7 @@ def _analysis_module_ids(program: LogicalProgram) -> tuple[str, ...]:
             elif kind in {
                 "replace-standard-relationships",
                 "retire-standard",
+                "register-policy-unit",
             }:
                 selected.add(str(raw["standard"]))
     return tuple(sorted(selected))
@@ -2257,28 +2453,38 @@ def _semantic_proposals(
     compiled: Any,
     program: LogicalProgram,
 ) -> tuple[dict[str, object], ...]:
-    semantic_intents: dict[str, tuple[int | None, str]] = {}
+    # Revision equality is an explicit preservation decision; a next revision
+    # declares changed meaning. Both bind exact candidate structure for review.
+    semantic_intents: dict[str, tuple[int | None, int, str]] = {}
+
+    def retain(policy: str, semantics: Mapping[str, object]) -> None:
+        if semantics["kind"] == "change":
+            semantic_intents[policy] = (
+                int(semantics["accepted_semantic_revision"]),
+                int(semantics["proposed_semantic_revision"]), str(semantics["intent"]),
+            )
+        elif policy not in semantic_intents:
+            revision = int(semantics["semantic_revision"])
+            semantic_intents[policy] = (revision, revision, str(semantics["intent"]))
+
     for change_set in program.change_sets:
         for edit in change_set.edits:
             if isinstance(edit, RevisePolicyUnit):
-                if edit.semantics["kind"] == "change":
-                    semantic_intents[edit.policy] = (
-                        int(edit.semantics["accepted_semantic_revision"]),
-                        str(edit.semantics["intent"]),
-                    )
+                retain(edit.policy, edit.semantics)
             elif isinstance(edit, StructuredEdit):
                 raw = edit.as_contract()
                 if raw["kind"] == "create-standard":
-                    for unit_value in raw["policy_units"]:  # type: ignore[union-attr]
+                    for unit_value in raw["policy_units"]:
                         unit = _mapping(unit_value, "new policy unit")
-                        semantic_intents[str(unit["id"])] = (None, str(unit["intent"]))
+                        semantic_intents[str(unit["id"])] = (None, 1, str(unit["intent"]))
+                elif raw["kind"] == "register-policy-unit":
+                    unit = _mapping(raw["policy_unit"], "new policy unit")
+                    semantic_intents[str(unit["id"])] = (None, 1, str(unit["intent"]))
+                elif raw["kind"] == "revise-standard":
+                    for update in raw.get("scope_updates", []):
+                        retain(update["policy"], update["semantics"])
                 elif raw["kind"] == "move-policy-unit":
-                    semantics = _mapping(raw["semantics"], "policy semantic intent")
-                    if semantics["kind"] == "change":
-                        semantic_intents[str(raw["policy"])] = (
-                            int(semantics["accepted_semantic_revision"]),
-                            str(semantics["intent"]),
-                        )
+                    retain(str(raw["policy"]), _mapping(raw["semantics"], "policy semantic intent"))
     base_corpus = base_compiled.corpus
     proposed_corpus = compiled.corpus
     proposals: list[dict[str, object]] = []
@@ -2301,8 +2507,11 @@ def _semantic_proposals(
             )
         if semantic is None:
             continue
-        accepted_revision, intent = semantic
-        expected_revision = 1 if accepted is None else accepted.semantic_revision + 1
+        accepted_revision, proposed_revision, intent = semantic
+        allowed_revisions = {1} if accepted is None else {
+            accepted.semantic_revision, accepted.semantic_revision + 1}
+        if proposed_revision not in allowed_revisions:
+            raise _invalid("AUTHORING.INVALID_SEMANTIC_REVISION", "Bind preservation or the next semantic revision.")
         if accepted_revision != (
             None if accepted is None else accepted.semantic_revision
         ):
@@ -2310,17 +2519,16 @@ def _semantic_proposals(
                 "AUTHORING.INVALID_SEMANTIC_REVISION",
                 f"semantic intent for {policy!r} does not bind the base revision",
             )
-        corpus_revision = 1 if accepted is None else accepted.semantic_revision
-        if proposed.semantic_revision != corpus_revision:
+        if proposed.semantic_revision != proposed_revision:
             raise _invalid(
                 "AUTHORING.INVALID_SEMANTIC_REVISION",
-                f"proposed corpus for {policy!r} must retain accepted revision {corpus_revision}",
+                f"proposed corpus for {policy!r} must contain declared revision {proposed_revision}",
             )
         proposals.append(
             {
                 "policy": policy,
                 "accepted_semantic_revision": accepted_revision,
-                "proposed_semantic_revision": expected_revision,
+                "proposed_semantic_revision": proposed_revision,
                 "intent": intent,
                 "structural_digest": proposed.structural_digest,
             }
@@ -2376,26 +2584,9 @@ def _refresh_suite_input_projection(
                 | (current_paths - base_file_paths)
             )
         )
-        with tempfile.TemporaryDirectory(
-            prefix="coding-standards-logical-authoring-"
-        ) as temporary:
-            root = Path(temporary)
-            for raw_path in proposed_paths:
-                path = RepositoryPath.parse(raw_path)
-                destination = root.joinpath(*path.components)
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.touch()
-            for raw_path, content in files.items():
-                path = RepositoryPath.parse(raw_path)
-                destination = root.joinpath(*path.components)
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_bytes(content)
-            git_output(root, ("init", "--quiet"))
-            git_output(root, ("add", "--force", "--all", "--"))
-            files[_SUITE_INPUTS] = suite_input_projection_bytes(
-                root,
-                repository_paths=proposed_paths,
-            )
+        files[_SUITE_INPUTS] = suite_input_projection_bytes_from_content(
+            FrozenContentSource(files), repository_paths=proposed_paths,
+        )
         return proposed_paths
     except AuthoringError:
         raise
@@ -2415,7 +2606,7 @@ def _refresh_suite_input_projection(
         raise _error(
             "AUTHORING.PROJECTION_UNAVAILABLE",
             "unavailable",
-            "canonical suite-input projection could not be materialized",
+            "canonical suite-input projection could not be compiled",
         ) from error
 
 

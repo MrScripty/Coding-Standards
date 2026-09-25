@@ -1,0 +1,33 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "executable_sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "sqlite": "3.46.1",
+  "git": "git version 2.47.3",
+  "dependencies": {
+    "attrs": "26.1.0",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.37.0",
+    "rpds-py": "2026.5.1",
+    "typing-extensions": "4.16.0"
+  },
+  "fixture": {
+    "source_revision": "2dd2ce1bd8e1129a5662be7c76bf864778fb2010",
+    "captured_files": 438,
+    "captured_bytes": 3796413,
+    "content_id": "snapshot-content:sha256:7fe09d2cadb34a547b52362239268dd86ab43ed9c679b9768e20644a87e1ec5b",
+    "store_bytes": 5885952,
+    "history_lengths": [
+      1,
+      4,
+      12
+    ],
+    "type": "Synthetic non-normative reference; real immutable proposal and analysis records; original accepted base remains fixed."
+  },
+  "limits": [
+    "Python 3.13.5 is outside supported 3.11/3.12.",
+    "rpds-py 2026.5.1 differs from pinned 2026.6.3.",
+    "Official SDK, configured Codex and independent reviewer were unavailable."
+  ]
+}

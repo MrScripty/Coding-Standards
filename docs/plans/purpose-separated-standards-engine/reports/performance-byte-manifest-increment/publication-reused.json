@@ -1,0 +1,17 @@
+{
+  "source": "/mnt/data/next-performance-qualification",
+  "test_source": "/mnt/data/next-performance-qualification",
+  "fixture_source": "/mnt/data/next-performance-baseline",
+  "tests": 1,
+  "successful": true,
+  "body_seconds": 51.25129755299986,
+  "total_seconds": 52.15833841800031,
+  "counts": {
+    "capture": 4,
+    "checkpoint": 2
+  },
+  "checkpoint_seconds": [
+    5.881440428000133,
+    5.709668811000029
+  ]
+}

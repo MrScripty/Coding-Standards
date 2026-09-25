@@ -1,0 +1,141 @@
+{
+  "engine_full_run": {
+    "tests": 199,
+    "returncode": 0,
+    "unittest_seconds": 497.8,
+    "scope": "Complete serial Engine discovery, before final conservative unknown-Mapping rejection and expanded byte-pressure subcases."
+  },
+  "final_new_module_rerun": {
+    "tests": 21,
+    "returncode": 0,
+    "unittest_seconds": 73.844,
+    "scope": "All new regressions after the final accounting tightening and byte-pressure cases; original full-run assertions are retained."
+  },
+  "supporting_packages": [
+    {
+      "package": "graph_engine",
+      "returncode": 0,
+      "seconds": 0.2713069240001005,
+      "tests": 37,
+      "skipped": 0
+    },
+    {
+      "package": "repository_git",
+      "returncode": 0,
+      "seconds": 1.4816052880000825,
+      "tests": 16,
+      "skipped": 0
+    },
+    {
+      "package": "standards_analysis",
+      "returncode": 0,
+      "seconds": 1.2024484620001203,
+      "tests": 100,
+      "skipped": 0
+    },
+    {
+      "package": "standards_applicability",
+      "returncode": 0,
+      "seconds": 0.06562526700008675,
+      "tests": 12,
+      "skipped": 0
+    },
+    {
+      "package": "standards_contracts",
+      "returncode": 0,
+      "seconds": 23.717944660000057,
+      "tests": 23,
+      "skipped": 1
+    },
+    {
+      "package": "standards_graph",
+      "returncode": 0,
+      "seconds": 0.16668000899994695,
+      "tests": 2,
+      "skipped": 0
+    },
+    {
+      "package": "standards_identity",
+      "returncode": 0,
+      "seconds": 0.18750458500016975,
+      "tests": 16,
+      "skipped": 0
+    },
+    {
+      "package": "standards_metadata",
+      "returncode": 0,
+      "seconds": 0.7032010290001836,
+      "tests": 31,
+      "skipped": 0
+    },
+    {
+      "package": "standards_policy_impact",
+      "returncode": 0,
+      "seconds": 0.4470718279999346,
+      "tests": 10,
+      "skipped": 0
+    },
+    {
+      "package": "standards_snapshots",
+      "returncode": 0,
+      "seconds": 0.13230375700004515,
+      "tests": 23,
+      "skipped": 0
+    },
+    {
+      "package": "standards_verifier",
+      "returncode": 0,
+      "seconds": 4.424347185999977,
+      "tests": 168,
+      "skipped": 0
+    }
+  ],
+  "distinct_tests_with_successful_evidence": 637,
+  "passed": 636,
+  "skipped": 1,
+  "independent_implementation_review": "not performed",
+  "official_sdk_and_configured_client": "not present; real raw MCP stdio tested",
+  "qualification_limit": "Python 3.13.5, not declared supported 3.11/3.12; rpds-py 2026.5.1 differs from 2026.6.3 pin.",
+  "warm_recovery_validation": {
+    "outcome": "passed",
+    "seconds": 34.65131413100016,
+    "scenario": "tools.standards_engine.tests.test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database",
+    "caches_before_close": [
+      {
+        "entries": 1,
+        "accounted_bytes": 6476032,
+        "hits": 10,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      },
+      {
+        "entries": 1,
+        "accounted_bytes": 6488242,
+        "hits": 0,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    ],
+    "scope": "Original assertions unchanged; first Engine warms through review, live-evidence rejection, interrupted apply and recovery. Second Engine uses a fresh cache and independent database.",
+    "caches_after_close": [
+      {
+        "entries": 0,
+        "accounted_bytes": 0,
+        "hits": 10,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      },
+      {
+        "entries": 0,
+        "accounted_bytes": 0,
+        "hits": 0,
+        "misses": 1,
+        "evictions": 0,
+        "uncached": 0
+      }
+    ]
+  }
+}

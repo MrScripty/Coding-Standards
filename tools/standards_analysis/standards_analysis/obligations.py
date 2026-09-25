@@ -200,6 +200,22 @@ def generate_navigation_index_obligations(
     accepted: Iterable[NavigationIndexAuthority],
     proposed: Iterable[NavigationIndexAuthority],
 ) -> tuple[Obligation, ...]:
+    return _material_obligations(accepted, proposed, "navigation-index-change")
+
+
+@dataclass(frozen=True, slots=True)
+class SupportingContentAuthority:
+    """One support record and the actual subject/consumer material reviewed with it."""
+    id: str
+    representation_digest: str
+    review_digest: str
+
+
+def generate_supporting_content_obligations(accepted, proposed) -> tuple[Obligation, ...]:
+    return _material_obligations(accepted, proposed, "supporting-content-change")
+
+
+def _material_obligations(accepted, proposed, kind: str) -> tuple[Obligation, ...]:
     before = {item.id: item for item in accepted}
     after = {item.id: item for item in proposed}
     obligations = []
@@ -219,11 +235,11 @@ def generate_navigation_index_obligations(
             if item is not None
         )
         fingerprint = DecisionFingerprint(
-            "navigation-index-change",
-            "decision-contract.navigation-index-change.v1",
+            kind,
+            f"decision-contract.{kind}.v1",
             dependencies,
         )
-        reason = {"kind": "navigation-index-change", "source": identity}
+        reason = {"kind": kind, "source": identity}
         identifying = {
             "target": identity,
             "scope": {"kind": "whole-artifact"},

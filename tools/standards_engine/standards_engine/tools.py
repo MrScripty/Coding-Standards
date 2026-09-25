@@ -32,6 +32,8 @@ from tools.standards_metadata.standards_metadata import (
 from . import _generated_contract as generated_contract
 from ._generated_contract import decode_contract
 from .engine import StandardsEngine
+from .compiled_cache import CompiledSnapshotCache
+from .context_projection import Purpose, application_rejection
 from ._generated_contract import (
     MaintainEvidenceCall,
     VerifyRepositoryCall,
@@ -131,7 +133,10 @@ class AgentToolFacade:
         self._engine = engine
         self._contracts = contracts
         self._operations = {
-            operation.id: operation for operation in contracts.interface.operations
+            operation.id: (operation.select_variant("application")
+                           if engine.purpose is Purpose.APPLICATION else operation)
+            for operation in contracts.interface.operations
+            if engine.purpose is Purpose.AUTHORING or "application" in operation.variants
         }
         schema = contracts.schema
         self._handle_versions = self._derive_handle_versions(schema)
@@ -139,23 +144,38 @@ class AgentToolFacade:
             operation.id: self._concrete_model_types(
                 schema, operation.result_definitions
             )
-            for operation in contracts.interface.operations
+            for operation in self._operations.values()
         }
 
     @classmethod
-    def open_repository(cls, root: Path) -> AgentToolFacade:
+    def open_repository(
+        cls, root: Path, *, purpose: Purpose | str,
+        interface: CompiledContracts | None = None,
+        compiled_cache: CompiledSnapshotCache | None = None,
+    ) -> AgentToolFacade:
         repo_root = root.resolve()
         engine = StandardsEngine.open_repository(
             repo_root,
             execution_context=AnalysisExecutionContext(
                 LocalAlwaysAllowAuthorizer(repo_root)
             ),
+            purpose=purpose,
+            compiled_cache=compiled_cache,
         )
         try:
-            return cls(engine, _contracts(repo_root))
+            return cls(engine, interface if interface is not None else _contracts(repo_root))
         except Exception:
             engine.close()
             raise
+
+    @staticmethod
+    def load_interface(root: Path) -> CompiledContracts:
+        """Prepare the installed API once for an owning server process.
+
+        The caller owns the immutable implementation lifetime. Request decoding
+        and purpose-qualified projection remain per-call work.
+        """
+        return _contracts(root.resolve())
 
     def close(self) -> None:
         self._engine.close()
@@ -195,6 +215,14 @@ class AgentToolFacade:
         if isinstance(call, dict):
             return call
         return self._result("revise_proposal", self._engine.revise_proposal(call))
+
+    def preview_application(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection(
+            "preview_application", arguments, generated_contract.PreviewApplicationCall,
+        )
+        if isinstance(call, dict):
+            return call
+        return self._result("preview_application", self._engine.preview_application(call))
 
     def query_proposal(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("query_proposal", arguments, QueryProposalCall)
@@ -340,6 +368,12 @@ class AgentToolFacade:
             return call
         return self._result("read", self._engine.read(call))
 
+    def read_many(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("read_many", arguments, generated_contract.ReadManyCall)
+        if isinstance(call, dict):
+            return call
+        return self._result("read_many", self._engine.read_many(call))
+
     def related(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("related", arguments, generated_contract.RelatedCall)
         if isinstance(call, dict):
@@ -377,13 +411,19 @@ class AgentToolFacade:
     def _call_or_rejection(
         self, operation: str, arguments: object, expected_type: type
     ) -> object:
+        if self._engine.purpose is Purpose.APPLICATION and operation not in self._operations:
+            return application_rejection("APPLICATION.OPERATION_UNAVAILABLE", "unsupported").as_contract()
         try:
             return self._decode_call(operation, arguments, expected_type)
         except InterfaceVersionError as error:
+            if self._engine.purpose is Purpose.APPLICATION:
+                return application_rejection("APPLICATION.UNSUPPORTED_CAPTURE", "unsupported").as_contract()
             return self._rejected(
                 "INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error)
             )
         except (ContractError, KeyError, TypeError, ValueError) as error:
+            if self._engine.purpose is Purpose.APPLICATION:
+                return application_rejection("APPLICATION.INPUT_INVALID", "invalid").as_contract()
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
 
     def _decode_call(self, operation: str, arguments: object, expected_type):
@@ -391,6 +431,7 @@ class AgentToolFacade:
         value = self._mapping(arguments)
         self._require_supported_handle_versions(value)
         call = decode_contract(contract.input_definition, value)
+        expected_type = generated_contract.MODEL_TYPES[contract.input_definition]
         if not isinstance(call, expected_type):
             raise RuntimeError(
                 f"generated {contract.input_definition} decoder returned the wrong type"

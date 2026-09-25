@@ -98,6 +98,7 @@ class NavigationTest(unittest.TestCase):
         cls.engine = StandardsEngine.open_repository(
             REPO_ROOT,
             store_path=Path(cls.temporary.name) / "standards.sqlite3",
+            purpose="authoring",
         )
         created = cls.engine.create_snapshot(
             CreateSnapshotCall.from_value({"kind": "create-snapshot"})
@@ -286,9 +287,15 @@ class NavigationTest(unittest.TestCase):
                 ("git", "clone", "-q", "--no-hardlinks", str(REPO_ROOT), str(root)),
                 check=True,
             )
+            # The disposable fixture accepts its cloned candidate regardless
+            # of the branch checked out in the source repository.
+            subprocess.run(
+                ("git", "-C", str(root), "checkout", "--quiet", "-B", "main", "HEAD"),
+                check=True,
+            )
             engine = StandardsEngine.open_repository(
                 root, store_path=Path(temporary) / "standards.sqlite3"
-            )
+            , purpose="authoring")
             try:
                 created = engine.create_snapshot(
                     CreateSnapshotCall.from_value({"kind": "create-snapshot"})

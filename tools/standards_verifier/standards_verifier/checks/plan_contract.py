@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckAuthorityInput, CheckContext, present_inputs
+from ..model import CheckAuthorityInput, CheckContext, CheckInputContext, present_inputs
 from ..paths import contained_file
 
 
@@ -239,7 +239,7 @@ class PlanContractCheck:
     message: str | None
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         return present_inputs("plan-contract", self.path)
 

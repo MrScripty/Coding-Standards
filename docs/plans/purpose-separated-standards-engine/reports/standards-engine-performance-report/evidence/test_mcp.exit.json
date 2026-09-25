@@ -1,0 +1,1 @@
+{"returncode": 0, "elapsed_s": 34.889617681503296, "args": ["--pattern", "test_mcp.py", "--exclude", "/mnt/data/engine-performance/evidence/completed-for-parallel.json"]}

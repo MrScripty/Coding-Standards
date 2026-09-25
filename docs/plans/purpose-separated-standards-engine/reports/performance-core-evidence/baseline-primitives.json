@@ -1,0 +1,84 @@
+{
+  "measurements": [
+    {
+      "operation": "frame",
+      "wall_s": 0.3542716259998997,
+      "cpu_s": 0.3542401350000002
+    },
+    {
+      "operation": "encode",
+      "wall_s": 2.2585284789997786,
+      "cpu_s": 2.2583101139999995
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 2.5700200419998964,
+      "cpu_s": 2.5697220819999993
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.34647268599997005,
+      "cpu_s": 0.34647334300000043
+    },
+    {
+      "operation": "encode",
+      "wall_s": 2.1951994189998913,
+      "cpu_s": 2.1947111340000003
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 2.5718008080000345,
+      "cpu_s": 2.5712051739999993
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.3486741819999679,
+      "cpu_s": 0.3486636479999987
+    },
+    {
+      "operation": "encode",
+      "wall_s": 2.17477081800007,
+      "cpu_s": 2.174548075999999
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 2.499481810999896,
+      "cpu_s": 2.498770166
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.3381363930000134,
+      "cpu_s": 0.33814517600000116
+    },
+    {
+      "operation": "encode",
+      "wall_s": 2.2139923720001207,
+      "cpu_s": 2.213663727
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 2.6015323480000916,
+      "cpu_s": 2.601077283000002
+    },
+    {
+      "operation": "frame",
+      "wall_s": 0.34871706800004176,
+      "cpu_s": 0.34854363999999904
+    },
+    {
+      "operation": "encode",
+      "wall_s": 2.2807073979997767,
+      "cpu_s": 2.2802547639999986
+    },
+    {
+      "operation": "complete_identity",
+      "wall_s": 2.6848036970000067,
+      "cpu_s": 2.684090725000001
+    }
+  ],
+  "source_files": 434,
+  "raw_bytes": 3708262,
+  "content_identity": "snapshot-content:sha256:e95df9fd7e1c346706c40733ef93b39f87a6a29e50fad8fcb993a99fc1f10582",
+  "encoded_sha256": "73cbb95660b04a89dd8fd5f11adb8cadd99f4651ec6836fbd75720bdc8084bc0",
+  "encoded_bytes": 13031223
+}

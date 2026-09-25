@@ -11,6 +11,7 @@ from ..diagnostics import Diagnostic, EngineError
 from ..model import (
     CheckAuthorityInput,
     CheckContext,
+    CheckInputContext,
     CheckRepositoryIndexInput,
     present_inputs,
 )
@@ -29,13 +30,13 @@ class PythonPackageContractCheck:
     fixtures: str
 
     def authority_inputs(
-        self, context: CheckContext
+        self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
         return (
             *present_inputs("package-fixtures", self.fixtures),
             *present_inputs(
                 "package-contract-input",
-                *python_package_authority_paths(context.repo_root),
+                *python_package_authority_paths(context.inputs),
             ),
             CheckRepositoryIndexInput("package-source-membership"),
         )

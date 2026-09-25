@@ -1,0 +1,96 @@
+{
+  "source": "/mnt/data/interface-work/baseline",
+  "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+  "observations": [
+    {
+      "repeat": 0,
+      "operation": "process_initialize",
+      "seconds": 0.31861344799995095,
+      "rss_bytes": 35110912
+    },
+    {
+      "repeat": 0,
+      "operation": "read_cold",
+      "seconds": 0.6521691020000162,
+      "rss_bytes": 59179008
+    },
+    {
+      "repeat": 0,
+      "operation": "read_warm",
+      "seconds": 0.6297903710001265,
+      "rss_bytes": 60256256
+    },
+    {
+      "repeat": 0,
+      "operation": "read_other",
+      "seconds": 0.6147646410001926,
+      "rss_bytes": 60973056
+    },
+    {
+      "repeat": 0,
+      "operation": "read_warm_again",
+      "seconds": 0.6560644999999568,
+      "rss_bytes": 61214720
+    },
+    {
+      "repeat": 1,
+      "operation": "process_initialize",
+      "seconds": 0.32317135700009203,
+      "rss_bytes": 35151872
+    },
+    {
+      "repeat": 1,
+      "operation": "read_cold",
+      "seconds": 0.6151544140000169,
+      "rss_bytes": 59158528
+    },
+    {
+      "repeat": 1,
+      "operation": "read_warm",
+      "seconds": 0.6100092729998323,
+      "rss_bytes": 60252160
+    },
+    {
+      "repeat": 1,
+      "operation": "read_other",
+      "seconds": 0.6204875409998749,
+      "rss_bytes": 60985344
+    },
+    {
+      "repeat": 1,
+      "operation": "read_warm_again",
+      "seconds": 0.6180173049999667,
+      "rss_bytes": 61214720
+    },
+    {
+      "repeat": 2,
+      "operation": "process_initialize",
+      "seconds": 0.30339593999997305,
+      "rss_bytes": 35266560
+    },
+    {
+      "repeat": 2,
+      "operation": "read_cold",
+      "seconds": 0.6167820139999094,
+      "rss_bytes": 59232256
+    },
+    {
+      "repeat": 2,
+      "operation": "read_warm",
+      "seconds": 0.5957390329999726,
+      "rss_bytes": 60309504
+    },
+    {
+      "repeat": 2,
+      "operation": "read_other",
+      "seconds": 0.5931139879999137,
+      "rss_bytes": 61059072
+    },
+    {
+      "repeat": 2,
+      "operation": "read_warm_again",
+      "seconds": 0.6145124739998664,
+      "rss_bytes": 61284352
+    }
+  ]
+}

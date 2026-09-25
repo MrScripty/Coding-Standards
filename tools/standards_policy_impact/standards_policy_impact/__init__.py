@@ -20,7 +20,10 @@ from .model import (
     RelationshipKind,
     thaw,
 )
+from .provenance import DecisionProvenanceSource
+
 __all__ = (
+    "DecisionProvenanceSource",
     "DEFAULT_AUTHORING_CONTRACT",
     "CATALOG_SOURCE_ID",
     "DEFAULT_REGISTRY",

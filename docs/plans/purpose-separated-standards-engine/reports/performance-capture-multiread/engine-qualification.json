@@ -1,0 +1,16 @@
+[
+  {
+    "package": "standards_engine",
+    "command": [
+      "/mnt/data/capture-env/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/standards_engine/tests",
+      "-v"
+    ],
+    "elapsed": 523.1531623640001,
+    "exit": 0
+  }
+]

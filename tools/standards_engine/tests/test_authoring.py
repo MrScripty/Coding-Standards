@@ -92,11 +92,41 @@ def _change_set_contract(
     }
 
 
+class _FixturePreparation:
+    """Supply the synthetic corpus/validator used by coordination-only tests."""
+
+    def __init__(self, validate_revision, observe_repository_paths):
+        self.validate_revision = validate_revision
+        self.repository_paths = observe_repository_paths
+
+
+class _FixtureAuthoring(AuthoringModule):
+    """Run real durable coordination with explicitly fixture-owned preparation.
+
+    Engine integration tests elsewhere use real ProposalMaterials. These tests
+    exercise a two-file synthetic corpus and injected validation failures.
+    """
+
+    def __init__(self, snapshots, *, validate_revision, observe_repository_paths, **options):
+        super().__init__(snapshots, **options)
+        self.preparation = _FixturePreparation(validate_revision, observe_repository_paths)
+
+    def create_proposal(self, base_snapshot, change_set, *, preparation=None):
+        return super().create_proposal(
+            base_snapshot, change_set, preparation=self.preparation
+        )
+
+    def revise_proposal(self, expected_revision, change_set, *, preparation=None):
+        return super().revise_proposal(
+            expected_revision, change_set, preparation=self.preparation
+        )
+
+
 def _authoring(
     snapshots: SnapshotModule,
     **options: object,
 ) -> AuthoringModule:
-    return AuthoringModule(
+    return _FixtureAuthoring(
         snapshots,
         validate_revision=lambda _revision: None,
         observe_repository_paths=lambda snapshot: (
@@ -107,7 +137,7 @@ def _authoring(
 
 
 def _engine_with_stub_authoring(snapshots: SnapshotModule) -> StandardsEngine:
-    engine = StandardsEngine(object(), snapshots)  # type: ignore[arg-type]
+    engine = StandardsEngine(object(), snapshots, purpose="authoring")  # type: ignore[arg-type]
     engine._authoring = _authoring(snapshots)
     return engine
 
@@ -608,7 +638,7 @@ from pathlib import Path
 from tools.standards_engine.standards_engine import AgentToolFacade
 
 request = json.loads(sys.stdin.read())
-with AgentToolFacade.open_repository(Path(request["root"])) as facade:
+with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring") as facade:
     print(json.dumps(facade.find_proposals({"kind": "find-proposals"}), sort_keys=True))
 """
             environment = dict(os.environ)
@@ -674,7 +704,7 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                         )
                     )
 
-            engine._authoring = AuthoringModule(
+            engine._authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=validate_revision,
                 observe_repository_paths=lambda snapshot: (
@@ -804,7 +834,7 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                     )
                 )
 
-            authoring = AuthoringModule(
+            authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=reject_unavailable,
                 observe_repository_paths=lambda snapshot: (
@@ -921,7 +951,7 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                 AggregateRecord(revision_id, "proposal-revision", payload, (base,)),
             )
             with AgentToolFacade(
-                StandardsEngine(object(), snapshots),  # type: ignore[arg-type]
+                StandardsEngine(object(), snapshots, purpose="authoring"),  # type: ignore[arg-type]
                 _contracts(REPOSITORY_ROOT),
             ) as facade:
                 rejected = facade.find_proposals({"kind": "find-proposals"})
@@ -945,7 +975,7 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
             proposal_id = ProposalId.from_uuid(
                 uuid.UUID("00000000-0000-4000-8000-000000000001")
             )
-            authoring = AuthoringModule(
+            authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=lambda _revision: None,
                 observe_repository_paths=lambda snapshot: (
@@ -999,7 +1029,7 @@ with AgentToolFacade.open_repository(Path(request["root"])) as facade:
                 )
             )
             now = [2_000_000_000]
-            authoring = AuthoringModule(
+            authoring = _FixtureAuthoring(
                 snapshots,
                 validate_revision=lambda _revision: None,
                 observe_repository_paths=lambda snapshot: (

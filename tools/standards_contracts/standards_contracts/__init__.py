@@ -7,6 +7,7 @@ from .model import (
     FieldProjection,
     InterfaceContract,
     OperationContract,
+    OperationVariant,
     ProjectionArtifacts,
 )
 from .runtime import (
@@ -42,6 +43,7 @@ __all__ = (
     "MISSING",
     "MissingValue",
     "OperationContract",
+    "OperationVariant",
     "ProjectionArtifacts",
     "compile_contracts",
     "freeze_json",

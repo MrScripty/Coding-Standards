@@ -1,0 +1,17 @@
+F
+======================================================================
+FAIL: test_review_verify_apply_recover_and_read_without_original_database (test_coverage_publication.EngineAuditPublicationTest.test_review_verify_apply_recover_and_read_without_original_database)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/engine-performance/harness/run_timed_suite.py", line 36, in timed
+    try:return _fn(self,*args,**kwargs)
+               ~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'rejected-result' != 'create-snapshot-result'
+- rejected-result
++ create-snapshot-result
+ : {'kind': 'rejected-result', 'code': 'REPOSITORY_GIT.COMMAND_UNAVAILABLE', 'outcome': 'unavailable', 'message': 'Git exited with 128: fatal: Needed a single revision', 'details': {}, 'next_operations': []}
+
+----------------------------------------------------------------------
+Ran 1 test in 35.843s
+
+FAILED (failures=1)

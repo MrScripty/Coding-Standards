@@ -1,102 +1,100 @@
 # Agent Tool Connection
 
-Use Python 3.11 or 3.12. Prefer an existing isolated environment that was
-installed from `tools/standards_contracts/requirements.lock` with hashes
-enforced.
-
-When no such environment exists, create one outside the repository:
+Use Python 3.11 or 3.12 and an isolated environment installed from
+`tools/standards_contracts/requirements.lock` with hashes enforced. Preserve the
+pins and select the environment explicitly:
 
 ```bash
-python3 -m venv /tmp/coding-standards-engine
-/tmp/coding-standards-engine/bin/python -m pip install \
+python3 -m venv /absolute/path/to/engine-environment
+/absolute/path/to/engine-environment/bin/python -m pip install \
   --require-hashes --only-binary=:all: \
   -r tools/standards_contracts/requirements.lock
 ```
 
-Use that environment’s Python executable in the MCP server configuration. Dependency installation may require network or package-cache
-authorization; request it when required. If the locked environment cannot be
-created, report the dependency boundary as unavailable. Do not install into the
-repository, relax hashes, choose alternate versions, or implement a fallback
-validator.
+Dependency installation requires the operator's available package cache or network
+and its relevant authorization. An unavailable locked environment leaves that
+qualification pending rather than selecting replacement versions.
 
-## MCP Stdio Server
+## Purpose-specific MCP registrations
 
-Register a local stdio server named `standards-engine` in the agent client's
-MCP settings. Replace the absolute paths below with the installed interpreter
-and repository checkout. `PYTHONPATH` selects the code; `--repo-root` selects
-the standards repository, independently of the client's working directory.
+Choose purpose in host configuration. Application agents receive the application
+registration; standards maintainers use a separate authoring registration. Use a
+new application session after authoring. The Engine cannot erase prior context.
 
 ```json
 {
   "mcpServers": {
-    "standards-engine": {
-      "command": "/tmp/coding-standards-engine/bin/python",
-      "args": [
-        "-P", "-m", "tools.standards_engine.standards_engine.mcp",
-        "--repo-root", "/absolute/path/to/Coding-Standards"
-      ],
+    "standards": {
+      "command": "/absolute/path/to/engine-environment/bin/python",
+      "args": ["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", "/absolute/path/to/Coding-Standards", "--purpose", "application"],
+      "env": {"PYTHONPATH": "/absolute/path/to/Coding-Standards"}
+    },
+    "standards-authoring": {
+      "command": "/absolute/path/to/engine-environment/bin/python",
+      "args": ["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", "/absolute/path/to/Coding-Standards", "--purpose", "authoring"],
       "env": {"PYTHONPATH": "/absolute/path/to/Coding-Standards"}
     }
   }
 }
 ```
 
-For Codex, the equivalent entry in `config.toml` is:
+These are separate intended audiences, not two registrations every agent should
+receive. Translate the command, arguments and environment to the client's actual
+configuration format. Reconnect after the breaking contract update. Verify the
+application catalog contains navigation and the authoring catalog contains the
+required maintenance workflow. `--advanced` adds only operations admitted by the
+configured purpose.
 
-```toml
-[mcp_servers.standards-engine]
-command = "/absolute/path/to/engine-environment/bin/python"
-args = ["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", "/absolute/path/to/Coding-Standards"]
-env = { PYTHONPATH = "/absolute/path/to/Coding-Standards" }
-tool_timeout_sec = 600
+The local server remains synchronous MCP stdio with protocol `2025-11-25`;
+requests execute serially and immutable Engine handles survive reconnection.
+The current implementation is 0.2.0 and Engine interface 31. No network listener,
+paid model turn, remote publication or extra server dependency is introduced.
+The existing local authoring authorization adapter is owner-operated and
+always-allow; explicit user authorization still governs requested changes.
+
+The canonical checkout, store and private logs belong behind the host boundary.
+An application agent with separate filesystem or database access could bypass
+Engine-mediated exposure. This release supplies neither OS sandboxing nor a
+remote multi-user permission service.
+
+## Bootstrap and cutover
+
+New automatic snapshots read accepted local `main`. The code release initially
+contains empty application-approval and provenance manifests. Application reads
+therefore return a bounded unavailable result until the separate content work
+reviews and publishes the required material. Authoring can read the unchanged
+standards once the code candidate is integrated into accepted main.
+
+Use a disposable clone with candidate `main` for pre-merge qualification. Preserve
+active installed proposals and recovery obligations before cutover. Old Analysis
+records/captures outside the new supported contract are explicitly unsupported;
+there is no automatic store deletion or conversion. See the complete
+[implementation contract and cutover guide](../../../../tools/standards_engine/PURPOSE-SEPARATION.md).
+
+## Reference CLI
+
+The same purpose boundary applies to list, schema, example and invocation:
+
+```bash
+PYTHONPATH=. /absolute/path/to/engine-environment/bin/python -P \
+  .agents/skills/standards-engine/scripts/invoke.py \
+  --purpose application --list
+
+printf '%s\n' '{"target":"core"}' | \
+  PYTHONPATH=. /absolute/path/to/engine-environment/bin/python -P \
+  .agents/skills/standards-engine/scripts/invoke.py \
+  --purpose application read
 ```
 
-Use a persistent isolated environment for an ongoing installation; `/tmp` is
-suitable for a temporary trial. The longer call timeout accommodates proposal
-verification and application. See [Codex MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
+Use `--purpose authoring` only in the authorized maintenance environment. Inspect
+returned domain outcomes; CLI exit zero means the structured invocation completed,
+not that a pending claim or rejected operation was accepted. Malformed/unsupported
+CLI selection exits with a bounded error.
 
-Client configuration formats differ; preserve the command, arguments, and
-environment when translating these examples. Reconnect the client after
-registration or an Engine contract update. Confirm that `route`, `read`, and
-`propose` are available before starting a standards workflow.
+## Client qualification
 
-The server supports MCP protocol `2025-11-25` over newline-delimited stdio,
-with initialization, ping, tool discovery, and tool calls. It needs no additional
-Python dependencies. It runs requests serially and opens the durable Engine
-facade for each call; snapshots and proposal handles survive reconnection.
-Only protocol messages go to stdout; diagnostics go to stderr. No network
-listener or remote publication is introduced.
-
-Tool schemas are derived from the generated Engine contract, with only reachable
-definitions included. Domain results are preserved as `structuredContent` and
-JSON text for client compatibility. Rejections set `isError`; pending and
-recovery-required states remain typed domain results. Transport failures are
-errors with unknown domain outcome, never permission to retry a mutation.
-
-This is the existing owner-operated local always-allow authorization adapter.
-Connecting the server exposes the full authoring interface as well as reading;
-user authorization for the requested operation still governs agent behavior.
-The server does not supply semantic decisions or implicit review approval.
-
-For debugging without an MCP client, run the existing `scripts/invoke.py`
-transport from the repository root with `PYTHONPATH=.`. Its `--list`, `--schema`,
-and `--example` options remain available; routine MCP use needs none of them.
-
-Protocol references: [tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools),
-[stdio transport](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports),
-and [lifecycle](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle).
-
-## Advanced Native Operations
-
-The default catalog exposes 15 focused tools. Add `--advanced` to the server
-arguments and reconnect when native snapshot administration, accepted-snapshot
-Analysis, verification preflight, or evidence maintenance is required. That
-catalog exposes all supported generated native and focused operations. The
-reference CLI also retains all native operations; there is no automatic fallback
-from a rejected focused call to a native mutation.
-
-Workflow contexts reference existing immutable revision, analysis, or readiness
-records. Reconnection requires no transport session recovery or context cache.
-`workflow-result` preserves the native outcome and provides Engine-derived next
-operations. A rejected nested outcome sets MCP `isError`; pending or recovery
-outcomes retain their explicit status.
+The real stdio/CLI tests use actual processes and SQLite. The optional official
+MCP SDK harness requires the SDK in a separate client environment and the locked
+Engine Python supplied through `--engine-python`. The optional Codex test uses
+`--server standards-authoring` (or the actual configured authoring name) and does
+not start a model turn. These checks do not certify the content's editorial quality.

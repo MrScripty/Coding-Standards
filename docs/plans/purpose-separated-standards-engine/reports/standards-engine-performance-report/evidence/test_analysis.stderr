@@ -1,0 +1,59 @@
+EE............
+======================================================================
+ERROR: test_apply_create_and_retire_owns_topology_and_commit (test_analysis.AnalysisWorkflowTest.test_apply_create_and_retire_owns_topology_and_commit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/engine-performance/harness/run_timed_suite.py", line 36, in timed
+    try:return _fn(self,*args,**kwargs)
+               ~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/unittest/case.py", line 606, in _callTestMethod
+    if method() is not None:
+       ~~~~~~^^
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/standards_engine/tests/test_analysis.py", line 599, in test_apply_create_and_retire_owns_topology_and_commit
+    initial = engine._repository.branch_revision("main")
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/repository_git/repository_git/repository.py", line 211, in branch_revision
+    return self._revision(f"refs/heads/{branch}^{{commit}}")
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/repository_git/repository_git/repository.py", line 658, in _revision
+    output = git_output(
+        self._repository,
+        ("rev-parse", "--verify", "--end-of-options", revision),
+        max_output_bytes=256,
+    )
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/repository_git/repository_git/repository.py", line 99, in git_output
+    raise unavailable(
+    ...<2 lines>...
+    )
+tools.repository_git.repository_git.errors.GitRepositoryError: REPOSITORY_GIT.COMMAND_UNAVAILABLE: Git exited with 128: fatal: Needed a single revision
+
+======================================================================
+ERROR: test_apply_proposal_composes_real_verification_and_cold_readback (test_analysis.AnalysisWorkflowTest.test_apply_proposal_composes_real_verification_and_cold_readback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/engine-performance/harness/run_timed_suite.py", line 36, in timed
+    try:return _fn(self,*args,**kwargs)
+               ~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/unittest/case.py", line 606, in _callTestMethod
+    if method() is not None:
+       ~~~~~~^^
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/standards_engine/tests/test_analysis.py", line 315, in test_apply_proposal_composes_real_verification_and_cold_readback
+    expected = engine._repository.branch_revision("main")
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/repository_git/repository_git/repository.py", line 211, in branch_revision
+    return self._revision(f"refs/heads/{branch}^{{commit}}")
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/repository_git/repository_git/repository.py", line 658, in _revision
+    output = git_output(
+        self._repository,
+        ("rev-parse", "--verify", "--end-of-options", revision),
+        max_output_bytes=256,
+    )
+  File "/mnt/data/engine-performance/module-checkouts/test_analysis/tools/repository_git/repository_git/repository.py", line 99, in git_output
+    raise unavailable(
+    ...<2 lines>...
+    )
+tools.repository_git.repository_git.errors.GitRepositoryError: REPOSITORY_GIT.COMMAND_UNAVAILABLE: Git exited with 128: fatal: Needed a single revision
+
+----------------------------------------------------------------------
+Ran 14 tests in 524.967s
+
+FAILED (errors=2)
