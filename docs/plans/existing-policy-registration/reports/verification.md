@@ -1,7 +1,7 @@
 # Existing-Policy Registration — Implementation And Verification
 
-**Source implementation:** delivered.
-**Objective acceptance:** blocked on complete-checkout and installed-boundary evidence.
+**Source implementation:** integrated in the local code branch.
+**Objective acceptance:** satisfied for the code capability in the complete checkout; installed deployment and the preserved content proposal remain separate.
 **Date:** September 24, 2026.
 **Upstream baseline:** `5a9dcb08effda50a485e6ae08d9fe4c349c74eda`, branch `implementation/purpose-separated-standards-engine`.
 
@@ -9,9 +9,9 @@
 
 The delivered patch was applied to the complete local checkout on the same implementation branch. The archive integrity and patch hash matched its manifest, `git apply --check` succeeded, and only the declared patch files were staged. A Python 3.12.3 environment with the repository's locked contract dependencies ran the new contract tests (8 passed), the new full-compiler registration tests (14 passed), and the focused logical-authoring (31), metadata (43), policy-impact (10), contracts (52), and analysis (114) suites successfully. Canonical public-contract projection freshness passed.
 
-The temporary-store repository verification refreshed the tracked `suite-inputs.json` through its owner and passed 73 suites and 121 structural checks. The manifest diff contains the expected changed contract/source digests and repository-index digest. A precommit run of the full Engine suite passed 280 of 281 tests. Its sole failure was `test_main_advancement_and_cold_historical_read_use_exact_captures`: that fixture clones committed `HEAD`, then copies the new contract files from the working tree, leaving the clone's committed verification manifest stale. Recheck this case after committing the candidate, as the package's application instructions require.
+The temporary-store repository verification refreshed the tracked `suite-inputs.json` through its owner and passed 73 suites and 121 structural checks. The manifest diff contains the expected changed contract/source digests and repository-index digest. A precommit run of the full Engine suite passed 280 of 281 tests. Its sole failure was `test_main_advancement_and_cold_historical_read_use_exact_captures`: that fixture clones committed `HEAD`, then copies the new contract files from the working tree, leaving the clone's committed verification manifest stale. After committing candidate `e7fc783b`, that case passed alone and the full Engine suite passed all 281 tests in 371.421 seconds.
 
-The official MCP SDK client walkthrough has not run in this checkout. The available Python environments do not contain the `mcp` client package, and a download attempt failed DNS resolution. This qualification has not opened the installed proposal store or published real standards content.
+The official MCP Python SDK 1.30.0 was installed into a temporary client directory and the supplied walkthrough passed against a disposable repository and store. Its result records registration in previously unmapped and populated owners, same-candidate rewrite with relationship/provenance, reviewed publication, cold pending-workflow and snapshot readback, rejected-revision isolation, and application-purpose provenance filtering. This qualification has not opened the installed proposal store or published real standards content.
 
 ## Implemented behavior
 
@@ -25,7 +25,7 @@ Interface edition 33 replaces edition 32 for discovery of the expanded edit voca
 
 Technical authoring documentation and the guide's H0 handoff now explicitly include registration within existing modules. The rest of the standards-content migration remains separate. This source package does not certify H0: actual consumer qualification below is still required.
 
-## Source and environment boundary
+## Original delivery environment boundary
 
 Direct repository download was unavailable. Source was reconstructed from existing delivery archives and a small number of retrieved baseline files. Before editing, each of the nine existing files included in the patch was checked against its published Git blob identity at the baseline. All matched. New files are the plan/evidence and feature tests. No recovered dependency file is distributed as a feature change.
 
@@ -33,7 +33,7 @@ The reconstruction is **not a complete Git checkout**. It lacks the graph engine
 
 The blocked proposal `503f233b-5c9f-442f-a04f-99f330142bae` was never opened, edited, published or reset. No real normative body, policy-unit declaration, consumer relationship or application exposure approval was changed. No upstream commit or push is claimed.
 
-## Executed evidence
+## Original delivery evidence
 
 | Observation | Result | Proof boundary |
 | --- | --- | --- |
@@ -60,19 +60,19 @@ python isolated_registration_probe.py /path/to/recovered/source
 
 Raw outputs, baseline rejection, and the one-off probe are included in the ZIP's `verification/` directory. The full-checkout attempt is retained separately from successful logs.
 
-## Supplied but unexecuted acceptance coverage
+## Originally supplied but unexecuted acceptance coverage
 
 `test_policy_registration.py` contains fourteen integration cases using the existing real compiler/capture fixture. It starts from an already-created module so registration is actually against existing authority. It covers empty and populated policy mappings, unchanged prose/aliases, multiple registrations, same-candidate rewrite and relationships/provenance, tombstone-only owners, unavailable/reserved identities, scope/alias/lineage rejection, failed candidate isolation, mutation resistance and full/incremental replay equivalence.
 
 `mcp_policy_registration_client.py` extends the existing official SDK qualification approach. It creates and publishes synthetic owners in a disposable repository, registers a policy in an accepted previously unmapped owner, resumes that pending workflow after process replacement, then registers another scope alongside a rewrite, consumer relationship and provenance. It includes explicit fixture coverage/consumer/impact decisions, reviewed publication, a rejected successor preserving its predecessor, cold historical/current readback and application-purpose rationale isolation. The harness has no option for selecting the user's real repository/store as its mutation target.
 
-Neither file has been runtime-qualified in this environment. Their Python syntax is checked. Run them with the full source and supported environments before claiming the blocker resolved end to end. A future failure requires an ordinary bounded repair; a syntax pass is not a substitute for that execution.
+At original delivery, neither file had been runtime-qualified in the partial reconstruction. Both were subsequently exercised in the complete checkout as recorded above.
 
-## Generated verification inputs
+## Original delivery state of generated verification inputs
 
-The repository's complete `suite-inputs.json` manifest was deliberately **not** regenerated from a partial tree or manually edited. The schema's generated Python and tool definitions are included and current. The full verification-input manifest must be regenerated through its existing owner in the complete checkout, after adding these new files to its tracked membership. The package's application instructions show a temporary-store native invocation so this does not require opening the preserved production proposal store.
+The repository's complete `suite-inputs.json` manifest was deliberately **not** regenerated from the partial delivery tree or manually edited. It was regenerated through its existing owner in the complete checkout using the package's temporary-store native invocation, without opening the preserved production proposal store.
 
-The complete structural checkpoint, full package suites, official MCP walkthrough, installed Codex catalog and any independent external code review remain outstanding. This report is an implementation/self-review record, not independent acceptance.
+At original package delivery, the complete structural checkpoint, full package suites, official MCP walkthrough, installed Codex catalog and any independent external code review remained outstanding. The first three have since passed in the complete checkout as recorded above. Installed client/catalog qualification and any independent review remain deployment or review activities outside this code integration.
 
 ## Material self-review
 
@@ -82,7 +82,7 @@ The added public operation is intentionally a logical edit within `propose`/`rev
 
 ## Integration and resume boundary
 
-Apply the patch to a reviewed local code branch, refresh the verification-input projection with a temporary verification store, and run the supplied full-checkout tests. Commit the candidate before the SDK walkthrough clones it. Integrate the qualified code using the repository's normal process, then restart the server and refresh the client catalog for interface 33.
+The patch was applied to the local implementation branch, the verification-input projection was refreshed through a temporary store, and the candidate was committed before the SDK walkthrough cloned it. Installation into the actual Engine process and client catalog refresh for interface 33 remain deployment steps.
 
 Read the preserved proposal's actual state through supported authoring operations. `workflow_status` reconstructs its exact context; `resume` selects its explicit current revision where needed. It does not rebase the original accepted source. A changed accepted base may require the Engine's supported stale-state disposition or a new proposal carrying the preserved draft/evidence against current authority. Keep the original records and follow returned decisions rather than editing stored bytes.
 

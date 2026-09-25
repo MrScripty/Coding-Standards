@@ -1,9 +1,9 @@
 # Existing-Standard Policy Registration
 
-**Plan status:** `Verifying`
-**Acceptance status:** `blocked`
-**Current phase:** Full-checkout and real-MCP qualification of the implemented source.
-**Next slice:** Run the canonical compiler, replay and MCP publication regressions in a full supported checkout; repair any findings before content migration.
+**Plan status:** `Accepted`
+**Acceptance status:** `satisfied` for the code capability.
+**Current phase:** Qualified local source integrated; installed deployment and preserved content-proposal work remain separate.
+**Next slice:** Install the qualified Engine, refresh the client catalog, and inspect the preserved proposal through supported authoring operations before continuing the content migration.
 **Repository baseline:** `MrScripty/Coding-Standards@5a9dcb08effda50a485e6ae08d9fe4c349c74eda`.
 **Admission:** The owner requested this plan and its implementation. Canonical plan path: `docs/plans/existing-policy-registration/plan.md`; operation: `start`.
 **Composed-design review:** applicable; see below.
@@ -25,7 +25,7 @@ No backward-compatibility layer is required. Extend the current contract coheren
 
 ## Baseline and bounded findings
 
-The existing `create-standard` can introduce initial policy units, `revise-standard.scope_updates` addresses the registered set, and `revise-policy-unit`/`put-policy-relationship` require registered identities. The parser and projection lack registration on an existing standard. The affected source was recovered from prior delivery archives and checked against published Git blob identities. Direct Git download is unavailable in this environment; the recovered tree is partial. Full-repository and installed-MCP acceptance are distinct from checks that can run against the available files.
+At baseline, `create-standard` could introduce initial policy units, `revise-standard.scope_updates` addressed the registered set, and `revise-policy-unit`/`put-policy-relationship` required registered identities. The parser and projection lacked registration on an existing standard. The affected source was recovered from prior delivery archives and checked against published Git blob identities. That delivery tree was partial; the later complete-checkout and real-MCP qualification is recorded in the [verification report](reports/verification.md).
 
 ## Binding Decisions
 
@@ -85,7 +85,7 @@ Preserve prior operations, existing policy identities/tombstones, prose, review 
 
 ### M2 — Qualify and hand off
 
-**Status:** `Blocked`. **Goal:** prove source and consumer behavior at their actual boundaries and provide a safe patch package.
+**Status:** `Completed`. **Goal:** prove source and consumer behavior at their actual boundaries and provide a safe patch package.
 
 Write set: M1 corrective changes, evidence/plan lifecycle, package manifest and delivery instructions outside the repository. Run available focused checks; run full-checkout logical/contract/package suites and real MCP publication when dependencies are present. Bind each result to the actual source and environment. Report missing environmental evidence explicitly rather than treating an isolated test as installed acceptance. Provide complete changed files and a base-bound patch, hashes, plan, tests and installation/resume instructions. No push, production publication, live proposal mutation or store reset is part of delivery.
 
@@ -94,17 +94,17 @@ Write set: M1 corrective changes, evidence/plan lifecycle, package manifest and 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | R1 | Current schema and generated models admit the new edit and reject malformed declarations; projections are current. | contract | not-applicable | automated | satisfied | [Contract evidence](reports/verification.md) |
-| R2 | Existing standards with zero or other units retain prose, identities and tombstones after registration. | integration | representative | automated | blocked | Canonical metadata/compiler run requires a full checkout; isolated owner probes are supporting only. |
-| R3 | Same-candidate rewrite, registrations, relationships and provenance resolve correctly independent of edit ordering. | integration | representative | automated | blocked | Complete authority compiler is unavailable locally. |
-| R4 | Invalid candidates preserve accepted and predecessor state; full replay and incremental construction agree. | integration | representative | automated | blocked | Full compiler/replay regressions are supplied but unexecuted. |
-| R5 | Real MCP discovers, authors, resolves, reviews, publishes, restarts and reads the registration in an isolated repository. | system | required-real | automated | blocked | Full checkout, supported locked interpreter and actual client processes are required. |
+| R2 | Existing standards with zero or other units retain prose, identities and tombstones after registration. | integration | representative | automated | satisfied | Fourteen canonical registration tests and the [MCP walkthrough](reports/verification.md) passed. |
+| R3 | Same-candidate rewrite, registrations, relationships and provenance resolve correctly independent of edit ordering. | integration | representative | automated | satisfied | Canonical registration tests and the [MCP walkthrough](reports/verification.md) passed. |
+| R4 | Invalid candidates preserve accepted and predecessor state; full replay and incremental construction agree. | integration | representative | automated | satisfied | Canonical replay tests and the full 281-test Engine suite passed; see [verification](reports/verification.md). |
+| R5 | Real MCP discovers, authors, resolves, reviews, publishes, restarts and reads the registration in an isolated repository. | system | required-real | automated | satisfied | Official MCP Python SDK 1.30.0 walkthrough passed in a disposable clone; see [verification](reports/verification.md). |
 | R6 | ZIP patch reproduces the intended changed-file tree and excludes real normative content and the external proposal store. | release-artifact | not-applicable | automated | satisfied | [Package round-trip evidence](reports/verification.md) |
 
-For R2–R4 use the canonical metadata, graph, analysis and logical compiler in a supported Python 3.11/3.12 environment. R5 additionally uses the existing official MCP SDK qualification environment, actual local subprocesses, Git and SQLite. The available Python 3.13 observations do not qualify that installed environment.
+R2–R4 were qualified with the canonical metadata, graph, analysis and logical compiler in Python 3.12.3. R5 additionally used the official MCP Python SDK 1.30.0, actual local subprocesses, Git and SQLite. The original Python 3.13 observations remain delivery evidence only.
 
 ## Blockers
 
-A complete Git checkout and supported locked runtime are unavailable here. Direct source download is unavailable and the recovered source omits modules needed by Engine startup. This blocks R2–R5; it does not turn the passed contract/isolated checks into acceptance. The installed user store and proposal are outside this environment.
+The original delivery environment lacked a complete Git checkout and supported runtime. The local integration used the complete checkout and a Python 3.12.3 environment with the locked contract dependencies; R2–R5 now have canonical and MCP evidence. The installed user store and proposal were not accessed and remain a separate deployment boundary.
 
 ## Re-Plan Triggers
 
@@ -114,13 +114,13 @@ A required operation or invariant that cannot be expressed with these owners tri
 
 Add the regression before production changes and show that the baseline rejects the new edit. Derive focused expectations from the intended behavior, not copied generated outputs. Validate runtime and schema separately. Use a full-checkout MCP client to exercise actual publication, with explicit fixture decisions confined to disposable test repositories.
 
-The plan is `Accepted` only when all required claims have matching evidence. Source implementation can be delivered as `Implemented`/`Verifying` with environment-gated evidence explicitly outstanding. Resume the preserved content proposal only after installing the candidate, refreshing the MCP contract and satisfying H0. Earlier Core text/review evidence remains historical evidence; the revised candidate receives the affected current review rather than inheriting old readiness.
+All required code-capability claims now have matching evidence. Resume the preserved content proposal only after installing the candidate, refreshing the MCP contract and satisfying the separate content handoff. Earlier Core text/review evidence remains historical evidence; the revised candidate receives the affected current review rather than inheriting old readiness.
 
 ## Systemic Finding Audit
 
 The bounded invariant family is explicit policy identity authoring through the public logical-edit contract. Inspect the parser, registration representation, projection ordering, semantic/coverage inputs, generated schemas, proposal consumers and actual MCP path. The missing operation spans these projections of one owner; it is not evidence that all standards or graph mechanisms need redesign.
 
-The new edit reuses the existing declaration/metadata authority and the existing authoring lifecycle. Sibling creation, revision and retirement operations establish preserved contracts; only the shared tombstone-sidecar reuse case needed a corrective change. Generated outputs come from the existing compiler. Code inspection and isolated observations support the composition, while full consumer acceptance remains blocked. Stop expansion when these named consumers are qualified or a specific new consequence changes scope.
+The new edit reuses the existing declaration/metadata authority and the existing authoring lifecycle. Sibling creation, revision and retirement operations establish preserved contracts; only the shared tombstone-sidecar reuse case needed a corrective change. Generated outputs come from the existing compiler. The canonical tests and official MCP client now qualify the named consumers.
 
 ## Version And Material Boundaries
 
@@ -130,12 +130,12 @@ Canonical policy identity/scope belongs to metadata; edit intent and atomic stag
 
 ## Repository Isolation
 
-All work occurs in a disposable partial reconstruction under `/mnt/data/policy-registration-work`. It is not the user's checkout or installed MCP store. ZIP integration is owned by the user's repository integrator. No upstream branch, remote, live proposal, shared history or user workspace is modified. Temporary repositories used to prove patch application contain only package-selected fixture files and confer no upstream commit identity.
+The initial package was built in a disposable partial reconstruction under `/mnt/data/policy-registration-work`. Integration then occurred in this complete local checkout on the implementation branch. The MCP walkthrough used a separate disposable clone and store; the installed proposal store and remote branch were not changed.
 
 ## Final Acceptance
 
-- Acceptance status: `blocked`.
-- Source status: `Implemented`; the new contract, projection, tests and technical handoff are supplied.
+- Acceptance status: `satisfied` for R1–R6 in the complete checkout and disposable MCP client.
+- Source status: `Integrated` in the local implementation branch; the new contract, projection, tests and technical handoff are committed.
 - Deferred independent feature work: `none`.
-- Required outstanding work: canonical full-checkout/replay tests, generated suite-input refresh, structural checks and actual MCP publication qualification.
-- Final plan status: `Verifying`. Accept after R1–R6 are satisfied; the content guide's H0 remains closed until then.
+- Required deployment work: install the qualified Engine, refresh/reconnect the actual client catalog, and inspect the preserved proposal through supported authoring operations. Real standards-content migration and review remain separate.
+- Final plan status: `Accepted` for the code correction. The content guide's H0 still requires its own installed-client and content-workflow evidence.
