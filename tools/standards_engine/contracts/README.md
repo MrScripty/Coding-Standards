@@ -1,6 +1,24 @@
 # Standards Engine Contracts
 
-## Current contract: interface 34
+## Current contract: interface 35
+
+
+Interface 35 adds an explicit `action` to `recover` and `recover_application`.
+Omission or `observe` reconciles an existing applied candidate without Git
+writes. `complete-publication` is a deliberate request to re-establish the same
+admitted candidate at its exact expected target. It requires current recovery
+and application permission, a current reviewed proposal, exact reconstruction,
+and complete verification before the existing Git compare-and-swap. It never
+creates a replacement application or changes the candidate selected by readiness.
+A repeated recovery of an already-applied readiness returns that same outcome.
+
+Recovery-required results may include scalar `details`: `cause_code`,
+`cause_outcome`, and `git_operation`, `git_exit_code`, `git_reason`, and
+`git_stderr_excerpt` for a failed command. The excerpt is a recognized fixed
+phrase, not arbitrary stderr or a path. Unrecognized output is `unclassified`.
+A permission-denied observation identifies Git's error, not its host-level cause.
+`APPLICATION.RECOVERY_BLOCKED` preserves an admission whose current completion
+prerequisite failed. The original readiness/application/store formats are unchanged.
 
 Required host purpose selects application or authoring operation variants. The
 canonical interface declares each variant's exact input/result roots, and the

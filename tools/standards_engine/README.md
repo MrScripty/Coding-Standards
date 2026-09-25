@@ -169,3 +169,14 @@ the locked Engine Python; it requires `codex` on PATH and `standards-engine`
 configured for this checkout. It checks inline authoring fields and follows
 focused route/read continuations with exact snapshot reuse in an ephemeral
 client thread. It does not modify standards or apply proposals.
+
+
+### Completing admitted publication
+
+The interface-35 recovery contract distinguishes observation from explicit
+completion. Carry the original readiness into `recover`. Select `observe` for
+receipt reconciliation, or `complete-publication` on an authorized Git-writable
+host to verify and re-establish the exact admitted candidate. Current permissions,
+proposal head, candidate identity and expected-target CAS remain required. The
+existing application and store are preserved. See [the recovery contract](PURPOSE-SEPARATION.md#admitted-publication-recovery-interface-35)
+and [implementation evidence](../../docs/plans/admitted-publication-recovery/verification.md).

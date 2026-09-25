@@ -874,8 +874,15 @@
             "APPLICATION.OBSERVATION_UNAVAILABLE",
             "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
             "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
-            "APPLICATION.RECOVERY_TARGET_DIVERGED"
+            "APPLICATION.RECOVERY_TARGET_DIVERGED",
+            "APPLICATION.RECOVERY_BLOCKED"
           ]
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ScalarValue"
+          },
+          "type": "object"
         },
         "kind": {
           "const": "application-recovery-required-result"
@@ -5759,7 +5766,15 @@
     },
     "RecoverApplicationCall": {
       "additionalProperties": false,
+      "description": "Recover an admitted application. Observation performs no Git writes. Explicit completion reconstructs and verifies the exact admitted candidate before one compare-and-swap attempt.",
       "properties": {
+        "action": {
+          "description": "Omit or select observe to reconcile only. Explicit complete-publication revalidates and attempts the same admitted candidate against its original expected target; it requires current publication authorization.",
+          "enum": [
+            "observe",
+            "complete-publication"
+          ]
+        },
         "kind": {
           "const": "recover-application"
         },
@@ -5795,7 +5810,15 @@
     },
     "RecoverCall": {
       "additionalProperties": false,
+      "description": "Recover an admitted application. Observation performs no Git writes. Explicit completion reconstructs and verifies the exact admitted candidate before one compare-and-swap attempt.",
       "properties": {
+        "action": {
+          "description": "Omit or select observe to reconcile only. Explicit complete-publication revalidates and attempts the same admitted candidate against its original expected target; it requires current publication authorization.",
+          "enum": [
+            "observe",
+            "complete-publication"
+          ]
+        },
         "context": {
           "$ref": "#/$defs/WorkflowContext"
         }
@@ -7599,7 +7622,8 @@
             "enum": [
               "change_set",
               "submission",
-              "decisions"
+              "decisions",
+              "action"
             ]
           },
           "type": "array",
@@ -7705,7 +7729,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 34,
+  "interface_schema_version": 35,
   "operations": [
     {
       "capability": "standards.snapshot.create",

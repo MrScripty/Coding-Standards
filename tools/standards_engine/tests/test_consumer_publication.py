@@ -43,7 +43,7 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(process.returncode,0,process.stderr)
         self.assertEqual(process.stderr,'')
         responses={row['id']:row for row in map(json.loads,process.stdout.splitlines())}
-        self.assertIn('interface 34;',responses[1]['result']['instructions'])
+        self.assertIn('interface 35;',responses[1]['result']['instructions'])
         return responses[2]
 
     def call(self,name,arguments,purpose='authoring',error=False):
@@ -146,6 +146,52 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(self.call('preview_application',{'revision':revision,'request':{'kind':'read','target':F.owner,'detail':'full'}}),preview)
         self.assertNotEqual(subprocess.check_output(['git','rev-parse','main'],cwd=self.root),before)
 
+    def test_failed_publication_observe_and_explicit_cold_completion(self):
+        from tools.standards_engine.tests.test_agent_workflow import reference_change
+        change = reference_change(self.root, "recovery-publication")
+        change["edits"][0]["requires"] = []
+        identity = change["edits"][0]["standard"]["id"]
+        change["edits"].append({"kind": "approve-application-content", "target": identity})
+        change["edits"].append({"kind": "audit-policy-unit", "policy": "workflow.commit.commit-message",
+                                "rationale": "Qualify deterministic reconstruction of a reviewed coverage receipt."})
+        proposed = self.call("propose", {"change_set": change})
+        complete = self.complete(proposed)
+        ready = self.call("review", {"context": complete["context"], "decisions": decisions(self.root)})
+        self.assertEqual(ready["status"], "ready", ready)
+        before = subprocess.check_output(["git", "rev-parse", "main"], cwd=self.root)
+        lock = self.root / ".git/refs/heads/main.lock"
+        lock.write_bytes(b"owned by this isolated recovery test\n")
+        failed = self.call("apply", {"context": ready["context"]})
+        self.assertEqual(failed["status"], "recovery-required", failed)
+        application = failed["outcome"]["application"]
+        diagnostic = failed["outcome"]["details"]
+        self.assertEqual(diagnostic["git_operation"], "update-ref")
+        self.assertEqual(diagnostic["git_stderr_excerpt"], "File exists")
+        self.assertEqual(subprocess.check_output(["git", "rev-parse", "main"], cwd=self.root), before)
+        observed = self.call("recover", {"context": ready["context"], "action": "observe"})
+        self.assertEqual(observed["outcome"]["code"], "APPLICATION.RECOVERY_TARGET_UNCERTAIN")
+        self.assertEqual(observed["outcome"]["application"], application)
+        # Only the test owner releases its synthetic lock; the Engine never does.
+        lock.unlink()
+        local = self.root / "unpublished-local-note.txt"
+        local.write_bytes(b"independent local data\n")
+        recovered = self.call("recover", {"context": ready["context"], "action": "complete-publication"})
+        self.assertEqual(recovered["status"], "applied", recovered)
+        self.assertEqual(recovered["outcome"]["application"], application)
+        published = subprocess.check_output(["git", "rev-parse", "main"], cwd=self.root)
+        self.assertNotEqual(published, before)
+        again = self.call("recover_application", {
+            "kind": "recover-application", "readiness": ready["context"],
+            "action": "complete-publication",
+        })
+        self.assertEqual(again["application"], application)
+        self.assertEqual(subprocess.check_output(["git", "rev-parse", "main"], cwd=self.root), published)
+        exposed = self.call("read", {"target": identity}, purpose="application")
+        self.assertIn("isolated workflow test reference", exposed["content"])
+        self.assertEqual(local.read_bytes(), b"independent local data\n")
+        self.assertNotIn("unpublished-local-note.txt", subprocess.check_output(
+            ["git", "ls-tree", "-r", "--name-only", "main"], cwd=self.root, text=True))
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     unittest.main()

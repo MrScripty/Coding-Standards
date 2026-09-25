@@ -1528,7 +1528,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine._authoring,
                 "admit_application",
-                return_value=mock.Mock(application_id="application:sha256:" + "f" * 64),
+                return_value=mock.Mock(application_id="application:sha256:" + "f" * 64,
+                                       candidate=candidate.revision, expected_target=readiness.expected_target),
             ),
             mock.patch.object(
                 self.engine._repository,
@@ -1570,6 +1571,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    RepositoryRevision("e" * 40),
                 ),
             ),
             mock.patch.object(
@@ -1580,7 +1582,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
             mock.patch.object(
                 self.engine._authoring,
                 "admit_application",
-                return_value=mock.Mock(application_id="application:sha256:" + "e" * 64),
+                return_value=mock.Mock(application_id="application:sha256:" + "e" * 64,
+                                       candidate=candidate.revision, expected_target=readiness.expected_target),
             ),
             mock.patch.object(
                 self.engine._repository,

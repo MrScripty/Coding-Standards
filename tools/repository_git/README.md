@@ -73,3 +73,13 @@ The write-capable re-evaluation is recorded in the
 [A2 decision](../../docs/decisions/standards-engine-a2.md#repository-git-dependency-re-evaluation).
 Re-evaluate again before materially extending the selected local publication
 contract.
+
+
+Command failures retain their raw bounded stderr in the private exception and
+provide a `GitCommandObservation` for disclosure-safe callers. This observation
+contains a fixed operation identity, exit code and recognized fixed phrase; an
+unrecognized stderr is explicitly unclassified. It does not infer host permissions
+or implement retry policy. Expected-target publication retains this observation
+when update-ref fails and the branch remains unchanged. Callers own explicit
+recovery intent and durable application identity; the adapter continues to accept
+only active candidates issued by its own materialization scope.

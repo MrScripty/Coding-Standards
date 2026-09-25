@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 34,
+  "interface_schema_version": 35,
   "examples": [
     {
       "name": "create-snapshot",

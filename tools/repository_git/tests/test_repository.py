@@ -594,6 +594,91 @@ class GitRepositoryTests(unittest.TestCase):
             )
             self.assertEqual(repository.branch_revision("main"), competing)
 
+    def test_rejected_update_preserves_command_observation_and_can_complete(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"accepted\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            file = CandidateFile(RepositoryPath.parse("value.txt"), b"proposed\n", False)
+            with repository.materialize_candidate(expected, (file,), commit=_COMMIT) as candidate:
+                lock = root / ".git/refs/heads/main.lock"
+                lock.write_bytes(b"test-owned lock\n")
+                with self.assertRaises(GitRepositoryError) as failure:
+                    repository.publish_candidate(candidate, expected)
+                self.assertEqual(repository.branch_revision("main"), expected)
+                observation = failure.exception.failure.command.as_contract()
+                self.assertEqual(observation, {
+                    "operation": "update-ref", "exit_code": 128,
+                    "reason": "path-exists", "stderr_excerpt": "File exists",
+                })
+                self.assertNotIn(str(root), str(observation))
+                lock.unlink()
+                self.assertEqual(repository.publish_candidate(candidate, expected), "updated")
+                self.assertEqual(repository.branch_revision("main"), candidate.revision)
+
+    def test_command_diagnostics_retain_only_fixed_observed_phrases(self) -> None:
+        from tools.repository_git.repository_git import GitCommandResult
+        cases = (
+            (b"Permission denied", "permission-denied", "Permission denied"),
+            (b"insufficient permission", "permission-denied", "insufficient permission"),
+            (b"Read-only file system", "read-only-filesystem", "Read-only file system"),
+            (b"Operation not permitted", "operation-not-permitted", "Operation not permitted"),
+            (b"File exists", "path-exists", "File exists"),
+            (b"unable to auto-detect email address", "identity-unavailable", "unable to auto-detect email address"),
+            (b"unknown hook output", "unclassified", ""),
+        )
+        for body, reason, excerpt in cases:
+            with self.subTest(reason=reason):
+                raw = b"PRIVATE_CREDENTIAL_3861 /private/path https://secret.invalid/ " + body
+                with (mock.patch.object(repository_module, "git_command", return_value=GitCommandResult(128, b"", raw)),
+                      self.assertRaises(GitRepositoryError) as failure):
+                    git_output(Path("/tmp"), ("fetch", "local"))
+                observation = failure.exception.failure.command.as_contract()
+                self.assertEqual(observation["operation"], "fetch")
+                self.assertEqual(observation["reason"], reason)
+                self.assertEqual(observation["stderr_excerpt"], excerpt)
+                self.assertNotIn("PRIVATE_CREDENTIAL", str(observation))
+                self.assertNotIn("/private/path", str(observation))
+                self.assertIn("PRIVATE_CREDENTIAL", failure.exception.failure.message)
+
+    def test_diagnostic_for_missing_subcommand_is_bounded(self) -> None:
+        from tools.repository_git.repository_git import GitCommandResult
+        with (mock.patch.object(repository_module, "git_command",
+                                return_value=GitCommandResult(1, b"", b"usage output")),
+              self.assertRaises(GitRepositoryError) as failure):
+            git_output(Path("/tmp"), ())
+        self.assertEqual(failure.exception.failure.command.operation, "git-command")
+        self.assertEqual(failure.exception.failure.command.stderr_excerpt, "")
+
+    @unittest.skipIf(os.name != "posix" or getattr(os, "geteuid", lambda: 0)() == 0,
+                     "POSIX unprivileged permissions are required")
+    def test_real_readonly_ref_directory_reports_permission_denied(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"accepted\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            file = CandidateFile(RepositoryPath.parse("value.txt"), b"proposed\n", False)
+            with repository.materialize_candidate(expected, (file,), commit=_COMMIT) as candidate:
+                refs = root / ".git/refs/heads"
+                mode = refs.stat().st_mode
+                refs.chmod(0o555)
+                try:
+                    with self.assertRaises(GitRepositoryError) as failure:
+                        repository.publish_candidate(candidate, expected)
+                    self.assertEqual(failure.exception.failure.command.reason, "permission-denied")
+                    self.assertEqual(repository.branch_revision("main"), expected)
+                finally:
+                    refs.chmod(mode)
+                self.assertEqual(repository.publish_candidate(candidate, expected), "updated")
+
     def test_path_and_object_failures_are_typed(self) -> None:
         for raw in ("", "/absolute", "../outside", "a//b", ".git/config"):
             with self.subTest(raw=raw), self.assertRaises(GitRepositoryError) as raised:

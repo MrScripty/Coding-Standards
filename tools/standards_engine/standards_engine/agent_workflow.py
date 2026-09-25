@@ -41,6 +41,7 @@ INPUTS = {
     "revise": ["change_set"],
     "resolve_workflow": ["submission"],
     "review": ["decisions"],
+    "recover": ["action"],
 }
 
 
@@ -95,6 +96,17 @@ def bind(engine: StandardsEngine, context: c.WorkflowContext) -> BoundWorkflow:
     return BoundWorkflow(context, revision, analysis, readiness)
 
 
+def publication_status(engine, readiness):
+    """A rejected action leaves the durable admitted lifecycle intact."""
+    try:
+        application = engine._authoring.read_selected_application(readiness.readiness_id)
+    except AuthoringError as error:
+        if error.failure.code != "APPLICATION.NOT_ADMITTED":
+            raise
+        return "ready"
+    return "applied" if engine._authoring.application_outcome(application) is not None else "recovery-required"
+
+
 def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None):
     context = bound.context.as_contract()
     status = "draft"
@@ -104,21 +116,12 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
         status = "applied"
     elif isinstance(outcome, c.RejectedResult):
         status = "rejected"
+        if bound.readiness is not None:
+            admitted = publication_status(engine, bound.readiness)
+            if admitted in ("recovery-required", "applied"):
+                status = admitted
     elif bound.readiness is not None:
-        status = "ready"
-        try:
-            application = engine._authoring.read_selected_application(
-                bound.readiness.readiness_id
-            )
-        except AuthoringError as error:
-            if error.failure.code != "APPLICATION.NOT_ADMITTED":
-                raise
-        else:
-            status = (
-                "applied"
-                if engine._authoring.application_outcome(application) is not None
-                else "recovery-required"
-            )
+        status = publication_status(engine, bound.readiness)
     elif bound.analysis is not None:
         if not isinstance(outcome, (c.PendingResult, c.CompleteResult)):
             inputs = (
@@ -206,7 +209,10 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
                 engine._proposal_revision_handle(revision.revision_id)
             )
             return view(engine, bind(engine, context))
-        if operation not in {item.operation for item in current.next_operations}:
+        if (
+            operation not in {item.operation for item in current.next_operations}
+            and not (operation == "recover" and current.status == "applied" and bound.readiness is not None)
+        ):
             return engine._reject(
                 "WORKFLOW.OPERATION_NOT_AVAILABLE",
                 "invalid",
@@ -276,6 +282,7 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
                     {
                         "kind": "recover-application",
                         "readiness": call.context.as_contract(),
+                        "action": arguments.get("action", "observe"),
                     }
                 )
             )

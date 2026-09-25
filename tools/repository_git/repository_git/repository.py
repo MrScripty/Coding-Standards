@@ -16,7 +16,10 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Iterable, Iterator, Literal, Sequence
 
-from .errors import GitRepositoryError, invalid, unavailable, unsupported
+from .errors import (
+    GitCommandObservation, GitRepositoryError, GitRepositoryFailure,
+    invalid, unavailable, unsupported,
+)
 from .batch import VerifiedBatchReader, object_size, verified_body
 from .model import (
     CandidateCommitMessage,
@@ -106,12 +109,36 @@ def git_output(
         max_output_bytes=max_output_bytes,
     )
     if result.returncode != 0:
-        detail = result.stderr.decode("utf-8", "replace").strip()
-        raise unavailable(
-            "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
-            f"Git exited with {result.returncode}: {detail}",
-        )
+        raise _failed_command(arguments, result)
     return result.stdout
+
+
+def _failed_command(arguments: Sequence[str], result: GitCommandResult) -> GitRepositoryError:
+    """Retain raw output privately and project only fixed observed phrases."""
+    stderr = result.stderr.decode("utf-8", "replace").strip()
+    operation = arguments[0] if arguments and arguments[0] in {
+        "fetch", "update-ref", "rev-parse", "clone", "commit-tree", "hash-object",
+        "read-tree", "write-tree", "update-index", "checkout", "cat-file",
+    } else "git-command"
+    reason, excerpt = "unclassified", ""
+    # These are diagnostic observations, not permission decisions. Their fixed
+    # excerpts reveal neither paths nor arbitrary hook/configuration output.
+    for phrase, classification in (
+        ("Permission denied", "permission-denied"),
+        ("insufficient permission", "permission-denied"),
+        ("Read-only file system", "read-only-filesystem"),
+        ("Operation not permitted", "operation-not-permitted"),
+        ("File exists", "path-exists"),
+        ("unable to auto-detect email address", "identity-unavailable"),
+    ):
+        if phrase in stderr:
+            reason, excerpt = classification, phrase
+            break
+    return GitRepositoryError(GitRepositoryFailure(
+        "unavailable", "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+        f"Git exited with {result.returncode}: {stderr}",
+        GitCommandObservation(operation, result.returncode, reason, excerpt),
+    ))
 
 
 def indexed_paths(root: Path) -> tuple[str, ...]:
@@ -493,6 +520,9 @@ class GitRepository:
             branch,
             expected,
             candidate.revision,
+            rejected_command=_failed_command(
+                ("update-ref", target, candidate.revision.oid, expected.oid), updated
+            ),
         )
 
     def validate_candidate(self, candidate: MaterializedCandidate) -> None:
@@ -515,6 +545,7 @@ class GitRepository:
         candidate: RepositoryRevision,
         *,
         prior_error: GitRepositoryError | None = None,
+        rejected_command: GitRepositoryError | None = None,
     ) -> Literal["updated", "stale"]:
         try:
             observed = self.branch_revision(branch)
@@ -532,10 +563,12 @@ class GitRepository:
             ) from prior_error
         if observed != expected:
             return "stale"
-        raise unavailable(
-            "REPOSITORY_GIT.PUBLICATION_UNAVAILABLE",
+        failure = GitRepositoryFailure(
+            "unavailable", "REPOSITORY_GIT.PUBLICATION_UNAVAILABLE",
             "Git rejected the expected-target update while the target remained unchanged",
+            None if rejected_command is None else rejected_command.failure.command,
         )
+        raise GitRepositoryError(failure) from rejected_command
 
     def _copy_verification_refs(self, candidate_root: Path) -> None:
         output = git_output(
@@ -1050,11 +1083,7 @@ def _git_output_with_environment(
         environment=environment,
     )
     if result.returncode != 0:
-        detail = result.stderr.decode("utf-8", "replace").strip()
-        raise unavailable(
-            "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
-            f"Git exited with {result.returncode}: {detail}",
-        )
+        raise _failed_command(arguments, result)
     return result.stdout
 
 

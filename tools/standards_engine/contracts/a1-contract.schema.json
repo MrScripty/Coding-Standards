@@ -3308,9 +3308,17 @@
         },
         "readiness": {
           "$ref": "#/$defs/ReadinessHandle"
+        },
+        "action": {
+          "enum": [
+            "observe",
+            "complete-publication"
+          ],
+          "description": "Omit or select observe to reconcile only. Explicit complete-publication revalidates and attempts the same admitted candidate against its original expected target; it requires current publication authorization."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "Recover an admitted application. Observation performs no Git writes. Explicit completion reconstructs and verifies the exact admitted candidate before one compare-and-swap attempt."
     },
     "RecoverApplicationResult": {
       "type": "object",
@@ -3358,7 +3366,8 @@
             "APPLICATION.OBSERVATION_UNAVAILABLE",
             "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
             "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
-            "APPLICATION.RECOVERY_TARGET_DIVERGED"
+            "APPLICATION.RECOVERY_TARGET_DIVERGED",
+            "APPLICATION.RECOVERY_BLOCKED"
           ]
         },
         "outcome": {
@@ -3366,6 +3375,12 @@
         },
         "message": {
           "$ref": "#/$defs/NonEmptyString"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ScalarValue"
+          }
         }
       },
       "additionalProperties": false
@@ -6286,11 +6301,19 @@
       "properties": {
         "context": {
           "$ref": "#/$defs/WorkflowContext"
+        },
+        "action": {
+          "enum": [
+            "observe",
+            "complete-publication"
+          ],
+          "description": "Omit or select observe to reconcile only. Explicit complete-publication revalidates and attempts the same admitted candidate against its original expected target; it requires current publication authorization."
         }
       },
       "required": [
         "context"
-      ]
+      ],
+      "description": "Recover an admitted application. Observation performs no Git writes. Explicit completion reconstructs and verifies the exact admitted candidate before one compare-and-swap attempt."
     },
     "WorkflowStatusCall": {
       "type": "object",
@@ -6342,7 +6365,8 @@
             "enum": [
               "change_set",
               "submission",
-              "decisions"
+              "decisions",
+              "action"
             ]
           }
         }
@@ -7449,7 +7473,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -7531,7 +7555,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"

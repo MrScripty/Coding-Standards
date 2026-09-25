@@ -325,7 +325,7 @@ those same bytes. The Engine does not rewrite semantic versions after review.
 
 ## Versions and coordinated cutover
 
-Current Engine package/transport implementation: 0.2.0. Engine interface: 34.
+Current Engine package/transport implementation: 0.2.0. Engine interface: 35.
 Analysis request: 6; result/state and Analysis handles: 7. The semantic-revision
 interpretation change belongs to Analysis 7. Unchanged Snapshot, proposal,
 readiness, application and generic identity/storage contracts keep their
@@ -333,12 +333,14 @@ existing independent versions. Updating one implementation does not couple all
 version domains.
 
 Before replacing an installed Engine, inspect active proposals, readiness and
-recovery-required work through its current authoring interface. Complete an
-existing recovery obligation with its owning version, or retain its exact store
-with an explicit operator disposition. Keep retained store bytes and Git history.
-Then install the new code and reconnect clients with purpose-selected launch
-configuration. An explicitly chosen fresh store may capture the accepted source;
-store selection does not convert old proposal records into new-format state.
+recovery-required work through its current authoring interface. A replacement
+supporting the same retained record formats can resume them through its documented
+recovery path; interface 35 preserves those formats. When a retained format is
+unsupported, complete its recovery with the owning implementation or preserve its
+exact store under an explicit operator disposition. Keep store bytes and Git
+history. Install current code/schemas and reconnect with purpose-selected launch
+configuration. A fresh store does not carry an admitted application and is not a
+recovery procedure. Store selection never converts old proposal records.
 
 For pre-merge qualification, use a disposable clone whose local `main` identifies
 the exact candidate. Avoid retargeting the user's real accepted branch merely to
@@ -392,5 +394,48 @@ sessions retain their published-only operation set.
 `maintain_evidence` remains accepted-repository maintenance, not draft mutation.
 Use logical registration for draft-only scopes. After installing this change,
 restart the actual MCP server and reconnect the client; initialization reports
-interface 34 and the configured purpose. Existing workflow-response verbosity
+the current interface edition and configured purpose. Existing workflow-response verbosity
 and hot catalog replacement are not changed by this capability.
+
+
+## Admitted publication recovery (interface 35)
+
+Use `recover` with the original readiness context after an interrupted or failed
+publication. Its default `observe` action reads the exact selected application;
+it may record a durable applied outcome when the target is already the candidate,
+but it performs no Git write. The native equivalent is `recover_application`.
+
+When the target is still the expected revision, an authorized operator can select
+`action: "complete-publication"`. This action reconstructs from the original
+captured proposal and reviewed coverage, requires the exact already-admitted
+commit ID, reruns complete verification, checks current readiness and both recovery
+and application permission, and makes one expected-target publication attempt.
+It keeps the existing application selection. Changed candidate content, stale
+readiness, inaccessible evidence, denied authority and a competing target stay
+explicitly unresolved. A target already at the candidate is reconciled without
+another write. A failed outcome write after Git success is completed by the next
+observation. Focused and native repeated recovery return the applied result.
+
+An unchanged target does not establish that no prior publication occurred.
+Explicit completion authorizes re-establishing the candidate at that target; it
+is not a historical exactly-once claim. The Engine never removes a lock, changes
+permissions, resets the store, forces the branch, or substitutes a newer draft.
+
+The implementation process needs a Git-writable authorized host for the same
+repository and store. Install Engine source without moving the real accepted ref
+merely for installation: an admitted application is still bound to its original
+expected target. Restart the server process and reconnect before reading the
+interface-35 recovery schema. Install the current code and interface schemas
+together in the implementation checkout, while leaving its accepted `main` at
+the admitted expected revision. The facade loads interface schemas from
+`--repo-root`; selecting a different Python module path alone does not update
+those schemas. Store selection must remain unchanged if the installed host used
+a nondefault store. Handoff data is the exact readiness/context, not a fabricated
+handle assembled from a truncated identifier.
+
+Authoring failure details carry the Git operation, exit code and recognized
+fixed stderr phrase when available. Raw stderr can contain sensitive paths or
+hook output and stays in the private Git exception, not the MCP response. Earlier
+uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
+observation from the supported operation on the correct host. Ordinary application
+interfaces still cannot call either recovery operation or read its diagnostics.

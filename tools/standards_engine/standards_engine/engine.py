@@ -5,6 +5,7 @@ import json
 import re
 import tempfile
 import tomllib
+from contextlib import AbstractContextManager
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,6 +13,7 @@ from pathlib import Path
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
 from tools.repository_git.repository_git import (
     CandidateFile,
+    MaterializedCandidate,
     CandidateCommitMessage,
     GitRepository,
     RevisionReadSession,
@@ -201,6 +203,7 @@ from .authoring import (
     APPLICATION_CAPABILITY,
     APPLICATION_RECOVERY_CAPABILITY,
     AuthoringError,
+    AuthoringFailure,
     AuthoringModule,
     CANONICAL_TARGET_BRANCH,
     FindProposalsRequest,
@@ -1329,83 +1332,10 @@ class StandardsEngine:
                     "unavailable",
                     "The configured main branch no longer matches the readiness target.",
                 )
-            projection = self._proposal_projection(revision)
-            base_capture = self._snapshots.load_content(revision.base_snapshot)
-            base_files = {str(item.path): item.content for item in base_capture.files}
-            base_files.update(projection.captured_consumer_files)
-            proposed_files = dict(projection.source.files)
-            base_paths = set(revision.base_repository_paths)
-            proposed_paths = set(projection.repository_paths)
-            self._publish_coverage_into_candidate(
-                readiness,
-                revision,
-                projection,
-                base_files,
-                proposed_files,
-                proposed_paths,
-            )
-            added_paths = proposed_paths - base_paths
-            removed_paths = base_paths - proposed_paths
-            uncaptured_existing_paths = (
-                set(proposed_files) - set(base_files)
-            ) & base_paths
-            if (
-                not added_paths <= set(proposed_files)
-                or not removed_paths <= set(base_files)
-                or uncaptured_existing_paths
-            ):
-                return self._reject(
-                    "APPLICATION.TOPOLOGY_INVALID",
-                    "invalid",
-                    "The logical projection does not contain exact authority for its topology change.",
-                )
-            candidate_files = tuple(
-                CandidateFile(
-                    RepositoryPath.parse(path),
-                    content,
-                    _CANONICAL_AUTHORITY_EXECUTABLE,
-                )
-                for path, content in sorted(proposed_files.items())
-                if path in added_paths or base_files.get(path) != content
-            )
-            with self._repository.materialize_candidate(
-                readiness.expected_target,
-                candidate_files,
-                removals=tuple(
-                    RepositoryPath.parse(path) for path in sorted(removed_paths)
-                ),
-                commit=proposal_commit_message(revision),
-            ) as candidate:
-                try:
-                    verification = self._application_verifier(candidate.root)
-                except OSError:
-                    return self._reject(
-                        "APPLICATION.VERIFICATION_UNAVAILABLE",
-                        "unavailable",
-                        "The complete candidate verification could not be executed.",
-                    )
-                if type(verification) is not CompleteVerificationResult:
-                    return self._reject(
-                        "APPLICATION.VERIFICATION_INVALID",
-                        "invalid",
-                        "The complete verifier returned an invalid result.",
-                    )
-                if verification.exit_code != 0:
-                    outcome = {
-                        3: "unavailable",
-                        4: "unsupported",
-                    }.get(verification.exit_code, "invalid")
-                    code = {
-                        "unavailable": "APPLICATION.VERIFICATION_UNAVAILABLE",
-                        "unsupported": "APPLICATION.VERIFICATION_UNSUPPORTED",
-                        "invalid": "APPLICATION.VERIFICATION_FAILED",
-                    }[outcome]
-                    return self._reject(
-                        code,
-                        outcome,
-                        "The exact candidate did not pass the complete verification checkpoint.",
-                        details=_verification_failure_details(verification),
-                    )
+            with self._application_candidate(readiness, revision) as candidate:
+                verification_failure = self._verify_application_candidate(candidate)
+                if verification_failure is not None:
+                    return verification_failure
                 if (
                     self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
                     != readiness.expected_target
@@ -1421,46 +1351,9 @@ class StandardsEngine:
                     authorization.as_contract(),
                     candidate.revision,
                 )
-                try:
-                    publication = self._repository.publish_candidate(
-                        candidate,
-                        readiness.expected_target,
-                    )
-                except GitRepositoryError as error:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.PUBLICATION_UNAVAILABLE",
-                        "Canonical publication did not establish an applied result after "
-                        f"admission ({error.failure.code}).",
-                    )
-                if publication == "stale":
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.RECOVERY_TARGET_DIVERGED",
-                        "The configured main branch changed after application admission.",
-                    )
-                try:
-                    observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-                except GitRepositoryError:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.OBSERVATION_UNAVAILABLE",
-                        "The canonical target could not be observed after publication.",
-                    )
-                if observed != candidate.revision:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.OBSERVATION_UNAVAILABLE",
-                        "The canonical target did not retain the candidate after publication.",
-                    )
-                try:
-                    self._authoring.record_applied(application)
-                except SnapshotError:
-                    return self._application_recovery_required(
-                        application,
-                        "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
-                        "The applied outcome could not be recorded durably.",
-                    )
+                failure = self._publish_admitted_application(application, candidate)
+                if failure is not None:
+                    return failure
                 return ApplyProposalResult.from_value(
                     {
                         "kind": "apply-proposal-result",
@@ -1472,6 +1365,133 @@ class StandardsEngine:
                 )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def _application_candidate(
+        self, readiness: ProposalReadiness, revision: ProposalRevision,
+    ) -> AbstractContextManager[MaterializedCandidate]:
+        """Reconstruct from original captured authority, never the live worktree."""
+        projection = self._proposal_projection(revision)
+        base_capture = self._snapshots.load_content(revision.base_snapshot)
+        base_files = {str(item.path): item.content for item in base_capture.files}
+        base_files.update(projection.captured_consumer_files)
+        proposed_files = dict(projection.source.files)
+        base_paths = set(revision.base_repository_paths)
+        proposed_paths = set(projection.repository_paths)
+        self._publish_coverage_into_candidate(
+            readiness,
+            revision,
+            projection,
+            base_files,
+            proposed_files,
+            proposed_paths,
+        )
+        added_paths = proposed_paths - base_paths
+        removed_paths = base_paths - proposed_paths
+        uncaptured_existing_paths = (
+            set(proposed_files) - set(base_files)
+        ) & base_paths
+        if (
+            not added_paths <= set(proposed_files)
+            or not removed_paths <= set(base_files)
+            or uncaptured_existing_paths
+        ):
+            raise AuthoringError(AuthoringFailure(
+                "APPLICATION.TOPOLOGY_INVALID", "invalid",
+                "The logical projection does not contain exact authority for its topology change.",
+            ))
+        candidate_files = tuple(
+            CandidateFile(
+                RepositoryPath.parse(path),
+                content,
+                _CANONICAL_AUTHORITY_EXECUTABLE,
+            )
+            for path, content in sorted(proposed_files.items())
+            if path in added_paths or base_files.get(path) != content
+        )
+        return self._repository.materialize_candidate(
+            readiness.expected_target,
+            candidate_files,
+            removals=tuple(
+                RepositoryPath.parse(path) for path in sorted(removed_paths)
+            ),
+            commit=proposal_commit_message(revision),
+        )
+
+    def _verify_application_candidate(
+        self, candidate: MaterializedCandidate,
+    ) -> RejectedResult | None:
+        try:
+            verification = self._application_verifier(candidate.root)
+        except OSError:
+            return self._reject(
+                "APPLICATION.VERIFICATION_UNAVAILABLE",
+                "unavailable",
+                "The complete candidate verification could not be executed.",
+            )
+        if type(verification) is not CompleteVerificationResult:
+            return self._reject(
+                "APPLICATION.VERIFICATION_INVALID",
+                "invalid",
+                "The complete verifier returned an invalid result.",
+            )
+        if verification.exit_code != 0:
+            outcome = {
+                3: "unavailable",
+                4: "unsupported",
+            }.get(verification.exit_code, "invalid")
+            code = {
+                "unavailable": "APPLICATION.VERIFICATION_UNAVAILABLE",
+                "unsupported": "APPLICATION.VERIFICATION_UNSUPPORTED",
+                "invalid": "APPLICATION.VERIFICATION_FAILED",
+            }[outcome]
+            return self._reject(
+                code,
+                outcome,
+                "The exact candidate did not pass the complete verification checkpoint.",
+                details=_verification_failure_details(verification),
+            )
+        return None
+
+    def _publish_admitted_application(
+        self, application: ProposalApplication, candidate: MaterializedCandidate,
+    ) -> ApplicationRecoveryRequiredResult | None:
+        """One expected-target attempt, followed by exact outcome observation."""
+        try:
+            publication = self._repository.publish_candidate(
+                candidate, application.expected_target,
+            )
+        except GitRepositoryError as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.PUBLICATION_UNAVAILABLE",
+                "Canonical publication did not establish an applied result after "
+                f"admission ({error.failure.code}).",
+                details=_recovery_failure_details(error),
+            )
+        try:
+            observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+        except GitRepositoryError as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.OBSERVATION_UNAVAILABLE",
+                "The canonical target could not be observed after publication.",
+                details=_recovery_failure_details(error),
+            )
+        if observed != application.candidate:
+            return self._application_recovery_required(
+                application,
+                "APPLICATION.RECOVERY_TARGET_DIVERGED" if publication == "stale"
+                else "APPLICATION.OBSERVATION_UNAVAILABLE",
+                "The canonical target did not retain the admitted candidate; "
+                "observe it again before selecting a recovery action.",
+            )
+        try:
+            self._authoring.record_applied(application)
+        except SnapshotError as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
+                "The applied outcome could not be recorded durably.",
+                details=_recovery_failure_details(error),
+            )
+        return None
 
     def _publish_coverage_into_candidate(
         self,
@@ -1654,11 +1674,12 @@ class StandardsEngine:
                 return self._recovered_application(application)
             try:
                 observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
-            except GitRepositoryError:
+            except GitRepositoryError as error:
                 return self._application_recovery_required(
                     application,
                     "APPLICATION.OBSERVATION_UNAVAILABLE",
                     "The canonical target could not be observed during recovery.",
+                    details=_recovery_failure_details(error),
                 )
             if observed == application.candidate:
                 try:
@@ -1671,10 +1692,15 @@ class StandardsEngine:
                     )
                 return self._recovered_application(application)
             if observed == application.expected_target:
+                if call.as_contract().get("action", "observe") == "complete-publication":
+                    return self._complete_admitted_application(application)
                 return self._application_recovery_required(
                     application,
                     "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
-                    "The current target cannot establish whether publication occurred.",
+                    "The target is at the admitted expected revision; this does not establish "
+                    "whether publication previously occurred. Select complete-publication "
+                    "to revalidate and re-establish the exact admitted candidate on an "
+                    "authorized Git-writable host.",
                 )
             return self._application_recovery_required(
                 application,
@@ -1683,6 +1709,75 @@ class StandardsEngine:
             )
         except self._domain_errors() as error:
             return self._domain_rejection(error)
+
+    def _complete_admitted_application(
+        self, application: ProposalApplication,
+    ) -> RecoverApplicationResult | ApplicationRecoveryRequiredResult:
+        """Re-establish one admitted candidate; preserve its selection on failure."""
+        try:
+            readiness, revision = self._authoring.application_revision(application.readiness_id)
+            self._authorize_recovery_completion(application)
+            state = self._load_analysis(
+                AnalysisHandle.from_value(self._analysis_handle(readiness.analysis_id))
+            )
+            evaluation = self._evaluate(state)
+            if not evaluation.complete or self._review_requires_change(state):
+                raise AuthoringError(AuthoringFailure(
+                    "APPLICATION.RECOVERY_REVIEW_UNAVAILABLE", "unavailable",
+                    "The admitted review must remain complete for publication.",
+                ))
+            with self._application_candidate(readiness, revision) as candidate:
+                if candidate.revision != application.candidate:
+                    raise AuthoringError(AuthoringFailure(
+                        "APPLICATION.RECOVERY_CANDIDATE_MISMATCH", "invalid",
+                        "Reconstruction differs from the exact admitted candidate.",
+                    ))
+                failure = self._verify_application_candidate(candidate)
+                if failure is not None:
+                    return self._application_recovery_required(
+                        application, "APPLICATION.RECOVERY_BLOCKED", failure.message,
+                        details={"cause_code": failure.code, "cause_outcome": failure.outcome,
+                                 **failure.details},
+                    )
+                # Verification may take time. Re-observe durable selection/head and
+                # current permission immediately before the only write attempt.
+                self._authoring.application_revision(application.readiness_id)
+                selected = self._authoring.read_selected_application(application.readiness_id)
+                if selected != application:
+                    raise AuthoringError(AuthoringFailure(
+                        "APPLICATION.RECOVERY_SELECTION_MISMATCH", "invalid",
+                        "Recovery requires the original selected application.",
+                    ))
+                if self._authoring.application_outcome(application) is not None:
+                    return self._recovered_application(application)
+                self._authorize_recovery_completion(application)
+                self._repository.validate_candidate(candidate)
+                failure = self._publish_admitted_application(application, candidate)
+                return failure if failure is not None else self._recovered_application(application)
+        except self._domain_errors() as error:
+            return self._application_recovery_required(
+                application, "APPLICATION.RECOVERY_BLOCKED",
+                "The admitted application is preserved; complete the reported "
+                "recovery prerequisite before another explicit completion attempt.",
+                details=_recovery_failure_details(error),
+            )
+
+    def _authorize_recovery_completion(self, application: ProposalApplication) -> None:
+        for action, subject_kind, subject, capability in (
+            ("recover-application", "proposal-application-recovery",
+             application_recovery_subject, APPLICATION_RECOVERY_CAPABILITY),
+            ("apply-proposal", "proposal-application",
+             application_subject, APPLICATION_CAPABILITY),
+        ):
+            construct_authorization_record(
+                self._execution_context,
+                AuthorizationRequest(
+                    action, subject_kind,
+                    subject(application.readiness_id, application.revision_id,
+                            application.expected_target),
+                    capability, (),
+                ),
+            )
 
     @public_operation
     def prepare(
@@ -3655,6 +3750,8 @@ class StandardsEngine:
         application: ProposalApplication,
         code: str,
         message: str,
+        *,
+        details: Mapping[str, object] | None = None,
     ) -> ApplicationRecoveryRequiredResult:
         return ApplicationRecoveryRequiredResult.from_value(
             {
@@ -3664,6 +3761,7 @@ class StandardsEngine:
                 "code": code,
                 "outcome": "unavailable",
                 "message": message,
+                **({"details": dict(details)} if details is not None else {}),
             }
         )
 
@@ -3725,6 +3823,12 @@ class StandardsEngine:
                 details={key: value for key, value in diagnostic.as_dict().items()
                          if key not in {"code", "outcome", "message"}},
             )
+        if isinstance(error, GitRepositoryError) and error.failure.command is not None:
+            return cls._reject(
+                error.failure.code, error.failure.kind,
+                "The Git command failed; inspect the bounded command observation.",
+                details=_recovery_failure_details(error),
+            )
         failure = getattr(error, "failure", None)
         if failure is None:
             raise error
@@ -3757,6 +3861,20 @@ class StandardsEngine:
                 "next_operations": [],
             }
         )
+
+
+def _recovery_failure_details(error: Exception) -> dict[str, object]:
+    """Project owned diagnostic fields, preserving raw error text privately."""
+    failure = getattr(error, "failure", None)
+    if failure is None:
+        return {"cause_code": type(error).__name__}
+    details: dict[str, object] = {
+        "cause_code": failure.code,
+        "cause_outcome": getattr(failure, "outcome", getattr(failure, "kind", "unavailable")),
+    }
+    if isinstance(error, GitRepositoryError) and failure.command is not None:
+        details.update({f"git_{key}": value for key, value in failure.command.as_contract().items()})
+    return details
 
 
 def _verification_failure_details(
