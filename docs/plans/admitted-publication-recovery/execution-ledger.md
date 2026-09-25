@@ -33,3 +33,18 @@ is not publication acceptance on the user's restricted host. R6 and the overall
 plan remain verifying until the operator-qualified installation and live result
 are established. Final packaging evidence is retained in verification.md and the
 ZIP's checks directory.
+
+## 2026-09-24 — Complete-checkout integration
+
+Applied the package to the exact baseline and committed the source repair as
+`5e7c04a8` under MrScripty. The supported Python 3.12.3 environment used locked
+contract dependencies, including rpds-py 2026.6.3. Repository Git (32), focused
+recovery (14), affected Engine tests (55), and the separate cold-process
+publication test (1) passed. Contract projection freshness and both complete
+structural verification paths passed 73 suites / 121 checks. The generated
+suite-input manifest matched the supplied version.
+
+The committed-head interface-34-to-35 probe completed the original admission.
+The changed-evidence probe blocked the same application and preserved its target.
+Only disposable repositories and stores were used. Operator-host qualification
+and actual live recovery remain pending.

@@ -71,6 +71,27 @@ These observations are complete for the named local environment. They do not
 claim the supported locked deployment, the user's actual client, or the user's
 likely sandbox error has been reproduced exactly.
 
+## Complete-checkout integration on supported Python
+
+The supplied patch was applied to the exact baseline and committed as
+`5e7c04a8` under MrScripty. Integration used Python 3.12.3 with the repository's
+locked contract dependencies, including rpds-py 2026.6.3. Archive integrity,
+patch applicability, and the staged whitespace check passed. No live store,
+readiness, or accepted target was changed.
+
+Repository Git passed 32 tests; focused recovery passed 14; the affected Engine
+modules passed 55; and the real cold-process publication test passed separately.
+The canonical contract projection was fresh. The Engine repository verification
+and direct complete verifier each passed 73 suites / 121 checks. Regenerating the
+suite-input manifest produced no difference from the supplied patch.
+
+The committed-head cross-edition probe passed: an interface-34 admission was
+completed with interface 35 while retaining its application, expected target,
+and store. The separate changed-evidence probe passed by blocking completion,
+retaining the same application and leaving the target unchanged. These local
+results qualify the source integration; operator-host installation and the
+preserved live application remain pending.
+
 ## Evidence
 
 | Check | Actual observation |

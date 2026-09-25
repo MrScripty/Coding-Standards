@@ -2,7 +2,7 @@
 
 **Plan status:** `Verifying`
 **Acceptance status:** `pending`
-**Current phase:** Source implementation and local qualification complete; supported operator-host qualification remains pending.
+**Current phase:** Source implementation and supported Python 3.12 local qualification complete; operator-host qualification remains pending.
 **Next slice:** Install current code and schemas without advancing the admitted target; verify the supported locked host, then use the original readiness to observe and explicitly complete the preserved application.
 **Canonical plan:** `docs/plans/admitted-publication-recovery/plan.md`; operation: `verify` the installed handoff.
 **Source baseline:** `MrScripty/Coding-Standards@2c406a8cbe0cecad6b4d83e1f431e74bb8618f16`.
@@ -96,4 +96,4 @@ Source delivery can finish with R6 explicitly pending. It cannot claim the user'
 
 ## Blockers And Replan Triggers
 
-The user's Git-writable host and actual store are unavailable here. The downloaded source is complete; local Python may differ from supported 3.11/3.12. Replan only if exact candidate replay cannot reconstruct the admitted identity, existing records cannot preserve required authority, or the selected completion promise needs additional persistent state. Keep catalog hot reload and 84-decision response overhead as separate findings.
+The user's Git-writable host and actual store are unavailable here. The downloaded source is complete and local integration passed on supported Python 3.12 with locked dependencies. Replan only if exact candidate replay cannot reconstruct the admitted identity, existing records cannot preserve required authority, or the selected completion promise needs additional persistent state. Keep catalog hot reload and 84-decision response overhead as separate findings.
