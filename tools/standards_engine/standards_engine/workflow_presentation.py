@@ -15,6 +15,7 @@ from . import analysis_projection
 
 if TYPE_CHECKING:
     from .engine import StandardsEngine
+    from .operation_materials import ProposalMaterials
 
 
 PAGE_BYTES = 64 * 1024
@@ -43,7 +44,7 @@ def summarize(outcome: c.PendingResult | c.CompleteResult) -> dict[str, object]:
 
 
 def details(
-    engine: StandardsEngine, call: c.WorkflowDetailsCall,
+    engine: StandardsEngine, call: c.WorkflowDetailsCall, materials: ProposalMaterials,
 ) -> c.WorkflowDetailsResult | c.RejectedResult:
     """Project one bounded section of an immutable Analysis without publishing it."""
     try:
@@ -60,7 +61,10 @@ def details(
                 "Full detail retrieves one complete record; omit limit or select 1.",
             )
         state = engine._load_analysis(call.analysis)
-        evaluation = engine._evaluate(state)
+        # Reuse exact immutable inputs, not an earlier evaluation or page. The
+        # material/evaluation owners retain durable, lifecycle and revision checks.
+        inputs = engine._evaluation_materials(state, materials)
+        evaluation = engine._evaluate(state, inputs)
         if section == "pending_obligations":
             items = [{"kind": "workflow-obligation-work",
                       "obligation": analysis_projection._obligation_projection(state, item),

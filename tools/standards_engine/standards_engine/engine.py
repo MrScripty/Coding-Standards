@@ -1034,7 +1034,8 @@ class StandardsEngine:
     def workflow_details(self, call: WorkflowDetailsCall) -> WorkflowDetailsResult | RejectedResult:
         from .workflow_presentation import details
 
-        return details(self, call)
+        with ProposalMaterials(self) as materials:
+            return details(self, call, materials)
 
     @public_operation
     def review(self, call: ReviewCall) -> WorkflowResult | RejectedResult:

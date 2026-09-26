@@ -562,6 +562,15 @@ schema, generated consumers and runtime together and restart/reconnect clients.
 Analysis, Snapshot, readiness, application and SQLite representations do not
 change. The existing full-result and compact/batch choices remain available.
 
+Detail requests use the existing operation-owned material scope for both
+snapshot-backed and proposal-backed Analysis. Each call loads the exact stored
+Analysis, verifies its captured inputs and checks current lifecycle/revision
+state. An eligible exact draft projection can avoid replaying the same history;
+evaluation, whole-section observation binding and page construction remain fresh.
+Cold, evicted and disabled-cache reads reconstruct the same result. Compact and
+explicit full-record reads share this path; the independent review, candidate
+verification, application and recovery replay boundaries are unchanged.
+
 Compact status reconstruction projects counts directly from the already evaluated
 Analysis instead of constructing and serializing a full result only to discard
 its detail. Evaluation, current lifecycle and proposal-head checks still run.

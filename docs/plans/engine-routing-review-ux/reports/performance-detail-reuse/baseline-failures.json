@@ -1,0 +1,81 @@
+{
+  "records": [
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_coverage_exclusions_require_exact_evidence_before_resolution",
+      "description": "StopIteration while selecting coverage-attestation from fixture output; the expected work is absent in the current corpus.",
+      "baseline": "8fef41d18c524c7ac6a1a16f242cc3f549c791a2",
+      "execution": {
+        "command": [
+          "/mnt/data/workflow-detail-work/env/bin/python",
+          "-m",
+          "unittest",
+          "tools.standards_engine.tests.test_analysis.AnalysisWorkflowTest.test_coverage_exclusions_require_exact_evidence_before_resolution",
+          "-v"
+        ],
+        "cwd": "/mnt/data/workflow-detail-work/baseline",
+        "started_unix": 1790387645.713561,
+        "returncode": 1,
+        "elapsed_seconds": 1.41070640800001
+      },
+      "log": "baseline-coverage-control.log"
+    },
+    {
+      "test": "test_analysis.AnalysisWorkflowTest.test_proposal_analysis_derives_inputs_and_replays_exact_revision",
+      "description": "Hard-coded semantic transition 1 to 2 for a policy whose accepted revision is already 2; AUTHORING.INVALID_SEMANTIC_REVISION.",
+      "baseline": "8fef41d18c524c7ac6a1a16f242cc3f549c791a2",
+      "execution": {
+        "command": [
+          "/mnt/data/workflow-detail-work/env/bin/python",
+          "-m",
+          "unittest",
+          "tools.standards_engine.tests.test_analysis.AnalysisWorkflowTest.test_proposal_analysis_derives_inputs_and_replays_exact_revision",
+          "-v"
+        ],
+        "cwd": "/mnt/data/workflow-detail-work/baseline",
+        "started_unix": 1790387565.269805,
+        "returncode": 1,
+        "elapsed_seconds": 3.572173993999968
+      },
+      "log": "baseline-analysis-control.log"
+    },
+    {
+      "test": "test_navigation.NavigationTest.test_proposal_query_projects_every_request_from_an_exact_revision",
+      "description": "The same obsolete hard-coded policy revision transition; AUTHORING.INVALID_SEMANTIC_REVISION.",
+      "baseline": "8fef41d18c524c7ac6a1a16f242cc3f549c791a2",
+      "execution": {
+        "command": [
+          "/mnt/data/workflow-detail-work/env/bin/python",
+          "-m",
+          "unittest",
+          "tools.standards_engine.tests.test_navigation.NavigationTest.test_proposal_query_projects_every_request_from_an_exact_revision",
+          "-v"
+        ],
+        "cwd": "/mnt/data/workflow-detail-work/baseline",
+        "started_unix": 1790387890.0593536,
+        "returncode": 1,
+        "elapsed_seconds": 5.468608690999986
+      },
+      "log": "baseline-navigation-control.log"
+    },
+    {
+      "test": "test_process_reuse.ProcessReuseTest.test_real_stdio_restarts_read_the_same_retained_snapshot",
+      "description": "The assertion compares full MCP envelopes from fresh servers, including intentionally different runtime instance IDs.",
+      "baseline": "8fef41d18c524c7ac6a1a16f242cc3f549c791a2",
+      "execution": {
+        "command": [
+          "/mnt/data/workflow-detail-work/env/bin/python",
+          "-m",
+          "unittest",
+          "tools.standards_engine.tests.test_process_reuse.ProcessReuseTest.test_real_stdio_restarts_read_the_same_retained_snapshot",
+          "-v"
+        ],
+        "cwd": "/mnt/data/workflow-detail-work/baseline",
+        "started_unix": 1790388037.5216594,
+        "returncode": 1,
+        "elapsed_seconds": 4.602441352999904
+      },
+      "log": "baseline-process-control.log"
+    }
+  ],
+  "disposition": "Preserved for separate fixture maintenance; none of their assertions or owning production rules is changed by this update. Baseline reproduction is not a claim that the full suite passes."
+}

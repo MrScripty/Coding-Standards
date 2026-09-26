@@ -1,0 +1,20 @@
+{
+  "machine": "x86_64",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "cpu_count": 5,
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "external_source_zip_sha256": "9b45798a2a535c0d19f3a20cab0701ec1d48c612ecb8a4a9c531835d384285c7",
+  "/sys/fs/cgroup/cpu.max": "400000 100000",
+  "/sys/fs/cgroup/memory.max": "4294967296",
+  "/sys/fs/cgroup/memory.high": "max",
+  "/sys/fs/cgroup/cpuset.cpus.effective": "0-4",
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "git": "git version 2.47.3",
+  "filesystem": "overlayfs"
+}

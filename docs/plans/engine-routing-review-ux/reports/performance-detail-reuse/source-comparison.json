@@ -1,0 +1,28 @@
+{
+  "base": "8fef41d18c524c7ac6a1a16f242cc3f549c791a2",
+  "production": {
+    "tools/standards_engine/standards_engine/engine.py": {
+      "base_sha256": "4922e5ed478e32465578a3d97fbf600c5c614416b22aff99abcbb51a8e94f190",
+      "candidate_sha256": "82f3de7bf798690bfaf321e8cb8e960778a39e6175eb81d475ee7a4b2beefb83",
+      "changed_functions": [
+        "StandardsEngine.workflow_details"
+      ]
+    },
+    "tools/standards_engine/standards_engine/workflow_presentation.py": {
+      "base_sha256": "86ecd4a88e67c8fbdbcf80f574c49d3208d8064682210c2ff33b883aa0858001",
+      "candidate_sha256": "c4175ce2f782063050b36e2f335f5d2d7c733a7704bd1fe2c3d62e27a1d7eaf8",
+      "changed_functions": [
+        "details"
+      ]
+    }
+  },
+  "all_changed_files": [
+    "docs/plans/engine-routing-review-ux/reports/performance-detail-reuse/measure_details.py",
+    "evaluation/standards-effectiveness/generated/suite-inputs.json",
+    "tools/standards_engine/PURPOSE-SEPARATION.md",
+    "tools/standards_engine/standards_engine/engine.py",
+    "tools/standards_engine/standards_engine/workflow_presentation.py",
+    "tools/standards_engine/tests/test_workflow_detail_reuse.py"
+  ],
+  "observation_scope": "Production hashes and staged write set during the full test run, before evidence-only files and the equivalent bounded assertion adjustment."
+}
