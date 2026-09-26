@@ -6,13 +6,12 @@ validate instances nor interpret arbitrary JSON Schema constraints.
 """
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping
+from collections.abc import Mapping
 from dataclasses import dataclass
-import re
 from types import MappingProxyType
 
-
-_LOCAL_DEFINITION = re.compile(r"#/\$defs/([A-Za-z][A-Za-z0-9]*)\Z")
+from .errors import ContractError
+from .schema_structure import local_definition_name, schema_nodes
 
 
 @dataclass(frozen=True, slots=True)
@@ -36,7 +35,7 @@ def compile_union_selectors(schema: Mapping[str, object]) -> dict[int, StringDis
     nested resource scope stays entirely on the existing reference path.
     """
     definitions = schema.get("$defs", {})
-    nodes = list(_schema_nodes(schema))
+    nodes = list(schema_nodes(schema))
     if not isinstance(definitions, Mapping) or any(
         node is not schema and "$id" in node for node in nodes
     ):
@@ -51,38 +50,22 @@ def compile_union_selectors(schema: Mapping[str, object]) -> dict[int, StringDis
     return selectors
 
 
-def _schema_nodes(schema: Mapping[str, object]) -> Iterator[Mapping[str, object]]:
-    pending = [schema]
-    seen: set[int] = set()
-    while pending:
-        node = pending.pop()
-        if not isinstance(node, Mapping) or id(node) in seen:
-            continue
-        seen.add(id(node))
-        yield node
-        for keyword in ("$defs", "properties"):
-            children = node.get(keyword)
-            if isinstance(children, Mapping):
-                pending.extend(children.values())
-        variants = node.get("oneOf")
-        if isinstance(variants, list):
-            pending.extend(variants)
-        pending.extend(node.get(keyword) for keyword in ("items", "additionalProperties"))
-
-
 def _local_object(
     node: object, definitions: Mapping[str, object],
 ) -> Mapping[str, object] | None:
     seen: set[str] = set()
     while isinstance(node, Mapping) and "$ref" in node:
         reference = node["$ref"]
-        match = _LOCAL_DEFINITION.fullmatch(reference) if type(reference) is str else None
         # Reference siblings and other reference forms keep their existing
         # interpretation; the planner follows only bare same-resource aliases.
-        if set(node) != {"$ref"} or match is None or reference in seen:
+        if set(node) != {"$ref"} or type(reference) is not str or reference in seen:
+            return None
+        try:
+            name = local_definition_name(reference)
+        except ContractError:
             return None
         seen.add(reference)
-        node = definitions.get(match[1])
+        node = definitions.get(name)
     if isinstance(node, Mapping) and node.get("type") == "object":
         return node
     return None

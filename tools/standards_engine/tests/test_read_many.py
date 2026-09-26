@@ -20,7 +20,7 @@ from tools.standards_engine.standards_engine import _generated_contract as c
 from tools.standards_engine.standards_engine import agent_navigation
 from tools.standards_engine.standards_engine.context_projection import ApplicationView
 from tools.standards_engine.standards_engine.compiled_cache import CompiledSnapshotCache
-from tools.standards_engine.standards_engine.mcp import tool_catalog
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.tests import test_purpose_projection as fixture
 from tools.standards_snapshots.standards_snapshots import CapturedContent, SnapshotFile, SnapshotId, SnapshotPath
 
@@ -185,7 +185,7 @@ class ReadManyTest(unittest.TestCase):
 
     def test_schema_discovery_is_purpose_specific(self):
         for purpose in ("application", "authoring"):
-            catalog = {item["name"]: item for item in tool_catalog(self.root, purpose=purpose, interface=self.interface)}
+            catalog = {item["name"]: item for item in tool_catalog(self.interface, purpose=purpose)}
             tool = catalog["read_many"]
             self.assertTrue(tool["annotations"]["readOnlyHint"])
             if purpose == "application":

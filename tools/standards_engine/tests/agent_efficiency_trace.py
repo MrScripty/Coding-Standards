@@ -15,11 +15,12 @@ import sys
 import tempfile
 
 from tools.standards_engine.standards_engine import StandardsEngine
-from tools.standards_engine.standards_engine.mcp import tool_catalog
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
 from tools.standards_engine.tests.test_agent_workflow import decisions
 from tools.standards_engine.tests.test_request_evidence import shared
 from tools.standards_engine.tests.test_review_workflow_ux import decision, topic_change
+from tools.standards_engine.standards_engine.tools import AgentToolFacade
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -147,7 +148,7 @@ def measure() -> dict:
     catalogs = []
     for purpose in ("application", "authoring"):
         for mode in ("compatibility", "native"):
-            catalog = tool_catalog(ROOT, purpose=purpose, schema_mode=mode)
+            catalog = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose=purpose, schema_mode=mode)
             catalogs.append({"purpose": purpose, "schema_mode": mode,
                              "catalog_bytes": encoded_bytes(catalog), "tool_count": len(catalog),
                              "description_bytes": sum(len(t["description"].encode()) for t in catalog),

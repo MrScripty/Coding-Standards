@@ -4,6 +4,7 @@ import copy
 import json
 import keyword
 import re
+import unicodedata
 from collections.abc import Mapping
 
 from jsonschema import Draft202012Validator, SchemaError
@@ -19,6 +20,9 @@ from .model import (
     ProjectionArtifacts,
 )
 from .runtime import ContractRuntime
+from .schema_structure import (
+    direct_schema_references, local_definition_name, referenced_definitions, schema_children,
+)
 
 _DIALECT = "https://json-schema.org/draft/2020-12/schema"
 _SCHEMA_KEYS = frozenset(
@@ -166,7 +170,7 @@ def compile_contracts(
 
     root_refs = {
         reference.rsplit("/", 1)[1]
-        for reference in _direct_refs(selected_schema.get("oneOf", []))
+        for reference in direct_schema_references({"oneOf": selected_schema.get("oneOf", [])})
     }
     if root_refs != roots:
         raise failure(
@@ -351,15 +355,15 @@ def _check_projection_profile(schema: Mapping[str, object]) -> None:
                     schema_pointer=_pointer((*path, key)),
                 )
             reference = node.get("$ref")
-            if isinstance(reference, str) and not re.fullmatch(
-                r"#/\$defs/[A-Za-z][A-Za-z0-9]*", reference
-            ):
-                raise failure(
-                    "CONTRACT.UNSUPPORTED_REFERENCE",
-                    "only same-resource $defs references are supported",
-                    outcome="unsupported",
-                    schema_pointer=_pointer((*path, "$ref")),
-                )
+            if isinstance(reference, str):
+                try:
+                    local_definition_name(reference)
+                except ContractError as error:
+                    raise failure(
+                        error.failure.code, error.failure.message,
+                        outcome=error.failure.outcome,
+                        schema_pointer=_pointer((*path, "$ref")),
+                    ) from None
             pattern = node.get("pattern")
             if isinstance(pattern, str) and not _supported_pattern(pattern):
                 raise failure(
@@ -394,17 +398,8 @@ def _check_projection_profile(schema: Mapping[str, object]) -> None:
                         outcome="unsupported",
                         schema_pointer=_pointer((*path, "additionalProperties")),
                     )
-            for key, item in node.items():
-                if key in {"$defs", "properties"}:
-                    for name, child in item.items():
-                        visit(child, (*path, key, name))
-                elif key in {"oneOf"}:
-                    for index, child in enumerate(item):
-                        visit(child, (*path, key, index))
-                elif key in {"items", "additionalProperties"} and isinstance(
-                    item, dict
-                ):
-                    visit(item, (*path, key))
+            for relative, child in schema_children(node):
+                visit(child, (*path, *relative))
 
     visit(schema, ())
 
@@ -464,36 +459,14 @@ def _supported_pattern(pattern: str) -> bool:
 
 
 def _definition_references(node: object) -> set[str]:
-    return {reference.rsplit("/", 1)[1] for reference in _direct_refs(node)}
-
-
-def _direct_refs(node: object) -> set[str]:
-    selected: set[str] = set()
-    pending = [node]
-    while pending:
-        current = pending.pop()
-        if isinstance(current, dict):
-            reference = current.get("$ref")
-            if isinstance(reference, str):
-                selected.add(reference)
-            pending.extend(current.values())
-        elif isinstance(current, list):
-            pending.extend(current)
-    return selected
+    return {reference.rsplit("/", 1)[1] for reference in direct_schema_references(node)}
 
 
 def _reachable_definitions(
     definitions: Mapping[str, object], roots: set[str]
 ) -> set[str]:
-    selected: set[str] = set()
-    pending = list(roots)
-    while pending:
-        name = pending.pop()
-        if name in selected:
-            continue
-        selected.add(name)
-        pending.extend(_definition_references(definitions[name]) - selected)
-    return selected
+    root = {"oneOf": [{"$ref": f"#/$defs/{name}"} for name in sorted(roots)]}
+    return set(referenced_definitions(root, definitions))
 
 
 def _project_definition(name: str, node: Mapping[str, object]) -> DefinitionProjection:
@@ -579,6 +552,12 @@ def _literal_annotation(values: tuple[object, ...]) -> str:
 
 def _python_name(value: str) -> str:
     selected = value.replace("-", "_")
+    # Preserve existing ordinary names. Escape wire spellings that Python cannot
+    # bind verbatim, normalizes lexically, or name-mangles inside a class. The
+    # existing per-object collision check also covers clashes with escaped names.
+    if (not selected.isidentifier() or selected.startswith("__")
+            or unicodedata.normalize("NFKC", selected) != selected):
+        selected = "field_" + value.encode("utf-8").hex()
     return selected + "_" if keyword.iskeyword(selected) else selected
 
 

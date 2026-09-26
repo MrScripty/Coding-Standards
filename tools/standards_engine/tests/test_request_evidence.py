@@ -78,7 +78,7 @@ class RequestEvidenceTest(unittest.TestCase):
             for original in fixtures:
                 selected = shared(original)
                 before = deepcopy(selected)
-                checked = self.facade._decode_call(op.id, selected, None)
+                checked = self.facade._decode_call(op.id, selected)
                 with self.subTest(operation=op.id):
                     self.assertIs(type(checked), c.MODEL_TYPES[op.input_definition])
                     self.assertEqual(checked.as_contract(), original)
@@ -178,7 +178,7 @@ class RequestEvidenceTest(unittest.TestCase):
     def test_authored_text_is_not_interpreted_as_an_evidence_reference(self):
         native = {'change_set': reference_change(self.root, 'literal-text')}
         native['change_set']['edits'][0]['standard']['body'] = '{"evidence_ref":"not-a-binding"}'
-        normalized = self.facade._decode_call('propose', shared(native), None)
+        normalized = self.facade._decode_call('propose', shared(native))
         self.assertEqual(normalized.as_contract(), native)
 
     def test_expansion_preserves_each_native_uniqueness_contract(self):
@@ -193,7 +193,7 @@ class RequestEvidenceTest(unittest.TestCase):
         # Preserve that native contract rather than inventing a blanket restriction.
         ordinary = {'context': pending['context'], 'submissions': self.submissions(pending)}
         ordinary['submissions'][0]['evidence'] *= 2
-        normalized = self.facade._decode_call('resolve_many', shared(ordinary), None)
+        normalized = self.facade._decode_call('resolve_many', shared(ordinary))
         self.assertEqual(normalized.as_contract(), ordinary)
 
     def test_foreign_work_and_denied_later_decision_cannot_use_shared_evidence_as_authority(self):

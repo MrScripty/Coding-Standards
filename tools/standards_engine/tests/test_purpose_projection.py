@@ -207,9 +207,9 @@ class PurposeProjectionTest(unittest.TestCase):
         self.assertEqual(self.engine._snapshots.load_content(captured.snapshot), before)
 
     def test_catalog_has_no_authoring_schema_closure(self):
-        from tools.standards_engine.standards_engine.mcp import tool_catalog
+        from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
         for advanced in (False, True):
-            catalog = tool_catalog(ROOT, purpose="application", advanced=advanced)
+            catalog = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='application', advanced=advanced)
             names = {tool["name"] for tool in catalog}
             self.assertLessEqual(names, {"route", "read", "read_many", "related", "routing_facts", "query", "inspect", "runtime_info"})
             serialized = json.dumps(catalog)

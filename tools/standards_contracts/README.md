@@ -41,7 +41,8 @@ An operation may declare named input/result variants in the canonical interface.
 Their roots participate in the same exact reachable schema closure and generated
 projection. Variants select wire shape; their names do not grant permissions or
 change the operation's capability authority. The Engine host selects the
-application variant, while authoring uses the base operation. Transport code
+application variant; the authoring facade selects the agent input variant where
+declared and normalizes it to the base domain operation. Transport code
 consumes these definitions rather than maintaining a second schema.
 
 ## Post-validation union construction
@@ -64,3 +65,26 @@ process-global cache. They retain no instance values. Schema changes construct
 new selectors; current permission, lifecycle, and publication decisions remain
 outside this module. Error adaptation, strict JSON checks, omission, defaults,
 and generated serialization keep their existing owners.
+
+## Schema structure and projection ownership
+
+`schema_structure.py` owns structural traversal and same-resource definition
+closure for the admitted projection profile. The compiler's profile check,
+reachability analysis, post-validation union selectors, MCP schema presentation
+and CLI inspection share that owner. Property maps are traversed through their
+values; field names such as `$ref` are ordinary names. `const`, `enum` and
+`default` payloads are copied as instance data, never dereferenced. The traversal
+also recognizes the MCP adapter's emitted `allOf` for reference siblings; this
+neither admits `allOf` in canonical contracts nor implements its evaluation.
+Canonical admission remains closed in the compiler. Validation and reference
+semantics remain with jsonschema/referencing, including recursive validation.
+
+`schema_closure` returns an independent standalone schema. The lower-level
+`referenced_definitions` selects borrowed definitions without mutating them.
+Neither helper loads resources or creates a second validator.
+
+Generated Python preserves wire names through its explicit field mapping. Existing
+ordinary Python names retain their spelling; invalid identifiers, names subject
+to Python lexical normalization and class-private names use a deterministic
+UTF-8 hex escape. Per-object collision checks also apply to escaped names.
+Defaults remain annotations and never inject values into decoded requests.

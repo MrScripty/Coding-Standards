@@ -225,3 +225,27 @@ The trace uses disposable repositories, real cold MCP stdio calls and explicit
 fixture-owned decisions. It compares selection-plus-read to composed routing and
 inline to shared evidence, verifies exact outcomes and stops before publication.
 Use the supported locked environment for release qualification.
+
+
+## Catalog and transport ownership
+
+`mcp_catalog.tool_catalog` builds tool definitions from an already compiled
+interface plus explicit purpose, focused/advanced selection and schema mode. It
+performs no installation loading, store access or connection management. MCP and
+CLI composition load the interface; `mcp.py` owns protocol handling and stdio
+lifetime. Schema locations and reference closure belong to the contracts package;
+the catalog adapter owns client presentation, including lossless inlining.
+
+The schema-location cleanup preserves interface 39 and the current complete
+catalogs in both schema modes. It repairs literal-data handling and generated
+field names without changing existing wire definitions, handles, Analysis,
+readiness, recovery, evidence normalization or purpose filtering. Restart the
+server after replacing implementation files; preserve all user stores.
+
+Compatibility retirement remains an explicit deployment decision. Qualify each
+supported client/version, including model-visible nested inputs, then transition
+its launch configuration or explicitly retire its support. At that cutover,
+remove the workaround and obsolete mode selection together. A single
+reference-preserving presentation can be selected then; the correctness repair
+does not change clients' configured schema mode or introduce another mode.
+See [the cleanup record](../../docs/plans/schema-projection-cleanup/plan.md).

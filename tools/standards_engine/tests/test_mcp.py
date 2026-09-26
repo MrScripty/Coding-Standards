@@ -14,12 +14,8 @@ from unittest.mock import patch
 from jsonschema import Draft202012Validator
 
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
-from tools.standards_engine.standards_engine.mcp import (
-    MCPServer,
-    serve,
-    tool_catalog,
-    input_schema,
-)
+from tools.standards_engine.standards_engine.mcp import MCPServer, serve
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog, input_schema
 from tools.standards_engine.standards_engine.tools import _contracts
 
 
@@ -52,7 +48,7 @@ def initialize(server):
 
 class MCPTest(unittest.TestCase):
     def test_catalog_schemas_validate_authored_examples_and_resolve_refs(self):
-        catalog = {tool["name"]: tool for tool in tool_catalog(ROOT, advanced=True, purpose="authoring")}
+        catalog = {tool["name"]: tool for tool in tool_catalog(AgentToolFacade.load_interface(ROOT), advanced=True, purpose='authoring')}
         contract = json.loads(
             (
                 ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
@@ -88,7 +84,7 @@ class MCPTest(unittest.TestCase):
                     Draft202012Validator(tool["inputSchema"]).validate(example["value"])
 
     def test_default_catalog_focuses_navigation_and_workflows(self):
-        catalog = {t["name"] for t in tool_catalog(ROOT, purpose="authoring")}
+        catalog = {t["name"] for t in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring')}
         self.assertTrue(
             {
                 "route",
@@ -109,7 +105,7 @@ class MCPTest(unittest.TestCase):
         )
 
     def test_authoring_inputs_expose_structure_and_preserve_recursive_validation(self):
-        catalog = {tool["name"]: tool for tool in tool_catalog(ROOT, purpose="authoring")}
+        catalog = {tool["name"]: tool for tool in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring')}
         generated = json.loads(
             (
                 ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
@@ -170,14 +166,14 @@ class MCPTest(unittest.TestCase):
             )
 
     def test_authoring_description_carries_exact_contract_without_type_rendering(self):
-        from tools.standards_engine.standards_engine.mcp import schema_closure
+        from tools.standards_contracts.standards_contracts import schema_closure
 
         generated = json.loads(
             (
                 ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
             ).read_text()
         )
-        catalog = {t["name"]: t for t in tool_catalog(ROOT, purpose="authoring")}
+        catalog = {t["name"]: t for t in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring')}
         for name in ("propose", "revise", "resolve_workflow"):
             operation = next(op for op in generated["operations"] if op["id"] == name)
             operation = {**operation, **operation.get("variants", {}).get("agent", {})}

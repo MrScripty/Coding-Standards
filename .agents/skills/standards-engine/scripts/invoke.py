@@ -67,27 +67,10 @@ def _schema_closure(
     root = operation.get("input_schema")
     if not isinstance(root, Mapping):
         raise ValueError("operation has no input schema")
-    selected: dict[str, object] = {}
+    from tools.standards_contracts.standards_contracts import schema_closure
 
-    def visit(value: object) -> None:
-        if isinstance(value, Mapping):
-            reference = value.get("$ref")
-            if isinstance(reference, str) and reference.startswith("#/$defs/"):
-                name = reference.rsplit("/", 1)[-1]
-                if name not in selected:
-                    definition = definitions.get(name)
-                    if definition is None:
-                        raise ValueError(f"missing generated definition: {name}")
-                    selected[name] = definition
-                    visit(definition)
-            for child in value.values():
-                visit(child)
-        elif isinstance(value, list):
-            for child in value:
-                visit(child)
-
-    visit(root)
-    return {"input_schema": root, "$defs": selected}
+    standalone = schema_closure(root, definitions)
+    return {"input_schema": root, "$defs": standalone["$defs"]}
 
 
 def _examples(root: Path, operation: Mapping[str, object]) -> list[object]:
@@ -140,11 +123,11 @@ def main(argv: list[str] | None = None) -> int:
                 ".agents/skills/standards-engine/references/environment.md"
             ) from error
         if operation["id"] == "runtime_info":
-            from tools.standards_engine.standards_engine.mcp import tool_catalog
+            from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
             from tools.standards_engine.standards_engine.runtime_identity import RuntimeIdentity
             interface = AgentToolFacade.load_interface(root)
             result = RuntimeIdentity(root, arguments.purpose, interface,
-                tool_catalog(root, purpose=arguments.purpose, interface=interface)).invoke(request)
+                tool_catalog(interface, purpose=arguments.purpose)).invoke(request)
         else:
             with AgentToolFacade.open_repository(root, purpose=arguments.purpose) as facade:
                 result = getattr(facade, str(operation["id"]))(request)

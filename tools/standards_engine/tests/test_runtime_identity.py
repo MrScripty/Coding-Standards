@@ -13,7 +13,8 @@ import unittest
 from unittest.mock import patch
 
 from tools.standards_engine.standards_engine import RuntimeIdentity
-from tools.standards_engine.standards_engine.mcp import MCPServer, tool_catalog
+from tools.standards_engine.standards_engine.mcp import MCPServer
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.standards_engine.tools import AgentToolFacade
 from tools.standards_engine.tests.test_mcp import ROOT, initialize, request
 
@@ -115,7 +116,7 @@ class RuntimeIdentityTests(unittest.TestCase):
             self.assertEqual(result['catalog_digest'], observed['catalog_digest'])
             self.assertFalse((root / '.git').exists())
             self.assertFalse((root / '.standards-engine').exists())
-            catalog = {item['name'] for item in tool_catalog(root, purpose='application')}
+            catalog = {item['name'] for item in tool_catalog(AgentToolFacade.load_interface(root), purpose='application')}
             self.assertIn('runtime_info', catalog)
             self.assertNotIn('resolve_many', catalog)
             self.assertNotIn('workflow_details', catalog)

@@ -8,7 +8,8 @@ import unittest
 
 from jsonschema import Draft202012Validator
 
-from tools.standards_engine.standards_engine.mcp import MCPServer, tool_catalog
+from tools.standards_engine.standards_engine.mcp import MCPServer
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.standards_engine.tools import _contracts
 from tools.standards_engine.tests.test_mcp import initialize, request
 
@@ -22,8 +23,7 @@ class SchemaPresentationTest(unittest.TestCase):
         cls.schema = cls.interface.schema
         cls.examples = json.loads((ROOT / 'tools/standards_engine/contracts/examples/a1-examples.json').read_text())['examples']
         cls.catalogs = {
-            (purpose, mode): {t['name']: t for t in tool_catalog(
-                ROOT, purpose=purpose, advanced=True, interface=cls.interface, schema_mode=mode)}
+            (purpose, mode): {t['name']: t for t in tool_catalog(cls.interface, purpose=purpose, advanced=True, schema_mode=mode)}
             for purpose in ('authoring', 'application') for mode in ('compatibility', 'native')
         }
 

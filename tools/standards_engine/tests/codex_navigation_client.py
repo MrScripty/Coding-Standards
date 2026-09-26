@@ -12,6 +12,7 @@ import sys
 import tempfile
 from pathlib import Path
 from jsonschema import Draft202012Validator
+from tools.standards_engine.standards_engine.tools import AgentToolFacade
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -70,8 +71,8 @@ async def main(server_name, schema_mode):
             )
             toolmap = server["tools"]
             print("Codex tools:", sorted(toolmap), flush=True)
-            from tools.standards_engine.standards_engine.mcp import tool_catalog
-            expected = tool_catalog(ROOT, purpose="authoring", schema_mode=schema_mode)
+            from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
+            expected = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode)
             examples = json.loads((ROOT / "tools/standards_engine/contracts/examples/a1-examples.json").read_text())["examples"]
             for tool in expected:
                 observed = toolmap[tool["name"]]

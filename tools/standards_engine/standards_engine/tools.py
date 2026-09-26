@@ -34,27 +34,6 @@ from ._generated_contract import decode_contract
 from .engine import StandardsEngine
 from .compiled_cache import CompiledSnapshotCache
 from .context_projection import Purpose, application_rejection
-from ._generated_contract import (
-    MaintainEvidenceCall,
-    VerifyRepositoryCall,
-    VerifyProposalCall,
-    AnalyzeProposalCall,
-    ApplyProposalCall,
-    CreateSnapshotCall,
-    CreateProposalCall,
-    DeleteSnapshotCall,
-    FindSnapshotsCall,
-    FindProposalsCall,
-    InspectCall,
-    PrepareCall,
-    QueryCall,
-    QueryProposalCall,
-    RecoverApplicationCall,
-    ReviewProposalCall,
-    ReviseProposalCall,
-    ResolveCall,
-    UndeleteSnapshotCall,
-)
 
 
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
@@ -192,95 +171,85 @@ class AgentToolFacade:
         self.close()
 
     def create_snapshot(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("create_snapshot", arguments, CreateSnapshotCall)
+        call = self._call_or_rejection("create_snapshot", arguments)
         if isinstance(call, dict):
             return call
         return self._result("create_snapshot", self._engine.create_snapshot(call))
 
     def find_snapshots(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("find_snapshots", arguments, FindSnapshotsCall)
+        call = self._call_or_rejection("find_snapshots", arguments)
         if isinstance(call, dict):
             return call
         return self._result("find_snapshots", self._engine.find_snapshots(call))
 
     def create_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("create_proposal", arguments, CreateProposalCall)
+        call = self._call_or_rejection("create_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("create_proposal", self._engine.create_proposal(call))
 
     def find_proposals(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("find_proposals", arguments, FindProposalsCall)
+        call = self._call_or_rejection("find_proposals", arguments)
         if isinstance(call, dict):
             return call
         return self._result("find_proposals", self._engine.find_proposals(call))
 
     def revise_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("revise_proposal", arguments, ReviseProposalCall)
+        call = self._call_or_rejection("revise_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("revise_proposal", self._engine.revise_proposal(call))
 
     def preview_application(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "preview_application", arguments, generated_contract.PreviewApplicationCall,
-        )
+        call = self._call_or_rejection("preview_application", arguments)
         if isinstance(call, dict):
             return call
         return self._result("preview_application", self._engine.preview_application(call))
 
     def query_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("query_proposal", arguments, QueryProposalCall)
+        call = self._call_or_rejection("query_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("query_proposal", self._engine.query_proposal(call))
 
     def maintain_evidence(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "maintain_evidence", arguments, MaintainEvidenceCall
-        )
+        call = self._call_or_rejection("maintain_evidence", arguments)
         if isinstance(call, dict):
             return call
         return self._result("maintain_evidence", self._engine.maintain_evidence(call))
 
     def verify_repository(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "verify_repository", arguments, VerifyRepositoryCall
-        )
+        call = self._call_or_rejection("verify_repository", arguments)
         if isinstance(call, dict):
             return call
         return self._result("verify_repository", self._engine.verify_repository(call))
 
     def verify_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("verify_proposal", arguments, VerifyProposalCall)
+        call = self._call_or_rejection("verify_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("verify_proposal", self._engine.verify_proposal(call))
 
     def analyze_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "analyze_proposal", arguments, AnalyzeProposalCall
-        )
+        call = self._call_or_rejection("analyze_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("analyze_proposal", self._engine.analyze_proposal(call))
 
     def review_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("review_proposal", arguments, ReviewProposalCall)
+        call = self._call_or_rejection("review_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("review_proposal", self._engine.review_proposal(call))
 
     def apply_proposal(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("apply_proposal", arguments, ApplyProposalCall)
+        call = self._call_or_rejection("apply_proposal", arguments)
         if isinstance(call, dict):
             return call
         return self._result("apply_proposal", self._engine.apply_proposal(call))
 
     def recover_application(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "recover_application", arguments, RecoverApplicationCall
-        )
+        call = self._call_or_rejection("recover_application", arguments)
         if isinstance(call, dict):
             return call
         return self._result(
@@ -288,39 +257,37 @@ class AgentToolFacade:
         )
 
     def delete_snapshot(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("delete_snapshot", arguments, DeleteSnapshotCall)
+        call = self._call_or_rejection("delete_snapshot", arguments)
         if isinstance(call, dict):
             return call
         return self._result("delete_snapshot", self._engine.delete_snapshot(call))
 
     def undelete_snapshot(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection(
-            "undelete_snapshot", arguments, UndeleteSnapshotCall
-        )
+        call = self._call_or_rejection("undelete_snapshot", arguments)
         if isinstance(call, dict):
             return call
         return self._result("undelete_snapshot", self._engine.undelete_snapshot(call))
 
     def propose(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("propose", arguments, generated_contract.ProposeCall)
+        call = self._call_or_rejection("propose", arguments)
         if isinstance(call, dict):
             return call
         return self._result("propose", self._engine.propose(call))
 
     def revise(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("revise", arguments, generated_contract.ReviseCall)
+        call = self._call_or_rejection("revise", arguments)
         if isinstance(call, dict):
             return call
         return self._result("revise", self._engine.revise(call))
 
     def analyze(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("analyze", arguments, generated_contract.AnalyzeCall)
+        call = self._call_or_rejection("analyze", arguments)
         if isinstance(call, dict):
             return call
         return self._result("analyze", self._engine.analyze(call))
 
     def resolve_workflow(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("resolve_workflow", arguments, generated_contract.ResolveWorkflowCall)
+        call = self._call_or_rejection("resolve_workflow", arguments)
         if isinstance(call, dict):
             return call
         return self._result("resolve_workflow", self._engine.resolve_workflow(call))
@@ -336,112 +303,110 @@ class AgentToolFacade:
         return self._runtime_identity.invoke(arguments)
 
     def resolve_many(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("resolve_many", arguments, generated_contract.ResolveManyCall)
+        call = self._call_or_rejection("resolve_many", arguments)
         if isinstance(call, dict):
             return call
         return self._result("resolve_many", self._engine.resolve_many(call))
 
     def workflow_details(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("workflow_details", arguments, generated_contract.WorkflowDetailsCall)
+        call = self._call_or_rejection("workflow_details", arguments)
         if isinstance(call, dict):
             return call
         return self._result("workflow_details", self._engine.workflow_details(call))
 
     def review(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("review", arguments, generated_contract.ReviewCall)
+        call = self._call_or_rejection("review", arguments)
         if isinstance(call, dict):
             return call
         return self._result("review", self._engine.review(call))
 
     def apply(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("apply", arguments, generated_contract.ApplyCall)
+        call = self._call_or_rejection("apply", arguments)
         if isinstance(call, dict):
             return call
         return self._result("apply", self._engine.apply(call))
 
     def recover(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("recover", arguments, generated_contract.RecoverCall)
+        call = self._call_or_rejection("recover", arguments)
         if isinstance(call, dict):
             return call
         return self._result("recover", self._engine.recover(call))
 
     def workflow_status(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("workflow_status", arguments, generated_contract.WorkflowStatusCall)
+        call = self._call_or_rejection("workflow_status", arguments)
         if isinstance(call, dict):
             return call
         return self._result("workflow_status", self._engine.workflow_status(call))
 
     def resume(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("resume", arguments, generated_contract.ResumeCall)
+        call = self._call_or_rejection("resume", arguments)
         if isinstance(call, dict):
             return call
         return self._result("resume", self._engine.resume(call))
 
     def route(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("route", arguments, generated_contract.RouteCall)
+        call = self._call_or_rejection("route", arguments)
         if isinstance(call, dict):
             return call
         return self._result("route", self._engine.route(call))
 
     def routing_facts(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("routing_facts", arguments, generated_contract.RoutingFactsCall)
+        call = self._call_or_rejection("routing_facts", arguments)
         if isinstance(call, dict):
             return call
         return self._result("routing_facts", self._engine.routing_facts(call))
 
     def read(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("read", arguments, generated_contract.ReadCall)
+        call = self._call_or_rejection("read", arguments)
         if isinstance(call, dict):
             return call
         return self._result("read", self._engine.read(call))
 
     def read_many(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("read_many", arguments, generated_contract.ReadManyCall)
+        call = self._call_or_rejection("read_many", arguments)
         if isinstance(call, dict):
             return call
         return self._result("read_many", self._engine.read_many(call))
 
     def related(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("related", arguments, generated_contract.RelatedCall)
+        call = self._call_or_rejection("related", arguments)
         if isinstance(call, dict):
             return call
         return self._result("related", self._engine.related(call))
 
     def query(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("query", arguments, QueryCall)
+        call = self._call_or_rejection("query", arguments)
         if isinstance(call, dict):
             return call
         result = self._engine.query(call)
         return self._result("query", result)
 
     def prepare(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("prepare", arguments, PrepareCall)
+        call = self._call_or_rejection("prepare", arguments)
         if isinstance(call, dict):
             return call
         result = self._engine.prepare(call)
         return self._result("prepare", result)
 
     def resolve(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("resolve", arguments, ResolveCall)
+        call = self._call_or_rejection("resolve", arguments)
         if isinstance(call, dict):
             return call
         result = self._engine.resolve(call)
         return self._result("resolve", result)
 
     def inspect(self, arguments: object) -> dict[str, object]:
-        call = self._call_or_rejection("inspect", arguments, InspectCall)
+        call = self._call_or_rejection("inspect", arguments)
         if isinstance(call, dict):
             return call
         result = self._engine.inspect(call)
         return self._result("inspect", result)
 
-    def _call_or_rejection(
-        self, operation: str, arguments: object, expected_type: type
-    ) -> object:
+    def _call_or_rejection(self, operation: str, arguments: object) -> object:
         if self._engine.purpose is Purpose.APPLICATION and operation not in self._operations:
             return application_rejection("APPLICATION.OPERATION_UNAVAILABLE", "unsupported").as_contract()
         try:
-            return self._decode_call(operation, arguments, expected_type)
+            return self._decode_call(operation, arguments)
         except InterfaceVersionError as error:
             if self._engine.purpose is Purpose.APPLICATION:
                 return application_rejection("APPLICATION.UNSUPPORTED_CAPTURE", "unsupported").as_contract()
@@ -453,28 +418,30 @@ class AgentToolFacade:
                 return application_rejection("APPLICATION.INPUT_INVALID", "invalid").as_contract()
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
 
-    def _decode_call(self, operation: str, arguments: object, expected_type):
+    def _decode_call(self, operation: str, arguments: object):
         contract = self._operation(operation)
         value = self._mapping(arguments)
         self._require_supported_handle_versions(value)
         native = self._native_operations[operation]
         agent_evidence = self._engine.purpose is Purpose.AUTHORING and "agent" in native.variants
-        if agent_evidence and "evidence" not in value:
-            # Table-less requests use the unchanged native shape. References
-            # without a local table are invalid, never resolved from other calls.
-            return decode_contract(native.input_definition, value)
-        call = decode_contract(contract.input_definition, value)
-        expected_type = generated_contract.MODEL_TYPES[contract.input_definition]
+        has_table = agent_evidence and "evidence" in value
+        # Table-less requests keep the unchanged native validation fast path.
+        # Missing local references cannot resolve through another request.
+        definition = (
+            native.input_definition if agent_evidence and not has_table
+            else contract.input_definition
+        )
+        call = decode_contract(definition, value)
+        expected_type = generated_contract.MODEL_TYPES[definition]
         if not isinstance(call, expected_type):
-            raise RuntimeError(
-                f"generated {contract.input_definition} decoder returned the wrong type"
-            )
-        if agent_evidence:
+            raise RuntimeError(f"generated {definition} decoder returned the wrong type")
+        if has_table:
             from .request_evidence import expand_request_evidence
 
-            # Wire convenience ends here. Domain operations receive their original
-            # validated native type, with exact complete evidence references.
+            # Wire convenience ends here. The native decoder validates the complete
+            # expanded request before domain operations observe any submission.
             call = decode_contract(native.input_definition, expand_request_evidence(call))
+
         return call
 
     def _result(self, operation: str, result) -> dict[str, object]:

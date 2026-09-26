@@ -28,3 +28,12 @@ presentation, bounded routed content and request-local evidence reuse. It is
 gates are recorded in its [verification](agent-interface-efficiency/verification.md)
 and [findings](agent-interface-efficiency/issues.md). This bounded code-maintenance
 slice does not close or replace Standards Library Effectiveness acceptance.
+
+## Schema Projection Cleanup
+
+[Schema Projection Correctness and Ownership](schema-projection-cleanup/plan.md)
+repairs schema/data traversal, consolidates its contracts owner and separates MCP
+catalog construction from transport. It preserves interface 39 and existing
+client mode behavior. Verification and client-dependent compatibility retirement
+are recorded in that plan's ledger and findings; this slice does not close the
+Standards Library Effectiveness objective.

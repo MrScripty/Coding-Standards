@@ -173,9 +173,9 @@ class AgentNavigationTest(unittest.TestCase):
         self.assertEqual(invalid["kind"], "rejected-result")
 
     def test_focused_read_continuations_are_callable_against_exact_snapshot(self):
-        from tools.standards_engine.standards_engine.mcp import tool_catalog
+        from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 
-        catalog = {item["name"] for item in tool_catalog(ROOT, purpose="authoring")}
+        catalog = {item["name"] for item in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring')}
         native = self.facade.query(
             {
                 "snapshot": self.snapshot,

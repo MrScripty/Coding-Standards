@@ -19,6 +19,13 @@ from .runtime import (
     model_as_contract,
 )
 
+from .schema_structure import (
+    local_definition_name,
+    map_schema_children,
+    referenced_definitions,
+    schema_closure,
+)
+
 
 def render_repository_projections() -> dict[Path, str]:
     from .projection import render_repository_projections as render
@@ -47,6 +54,10 @@ __all__ = (
     "ProjectionArtifacts",
     "compile_contracts",
     "freeze_json",
+    "local_definition_name",
+    "map_schema_children",
+    "referenced_definitions",
+    "schema_closure",
     "model_as_contract",
     "projection_main",
     "render_repository_projections",

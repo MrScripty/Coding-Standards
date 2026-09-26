@@ -5,7 +5,8 @@ from pathlib import Path
 import unittest
 
 from tools.standards_engine.standards_engine.logical_authoring import StandardsChangeSet
-from tools.standards_engine.standards_engine.mcp import tool_catalog
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
+from tools.standards_engine.standards_engine.tools import AgentToolFacade
 
 ROOT = Path(__file__).resolve().parents[3]
 EVIDENCE = {"id": "evidence:consumer-test", "digest": "sha256:" + "1" * 64,
@@ -30,9 +31,9 @@ class ConsumerInterfaceTests(unittest.TestCase):
         self.assertEqual(result.edits[0].as_contract()["kind"], "register-consumer")
 
     def test_authoring_catalog_exposes_candidate_preview(self):
-        authoring = {item["name"] for item in tool_catalog(ROOT, purpose="authoring")}
+        authoring = {item["name"] for item in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring')}
         self.assertIn("preview_application", authoring)
-        application = {item["name"] for item in tool_catalog(ROOT, purpose="application")}
+        application = {item["name"] for item in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='application')}
         self.assertNotIn("preview_application", application)
 
 
