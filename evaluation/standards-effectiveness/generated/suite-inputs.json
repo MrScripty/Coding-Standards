@@ -7249,6 +7249,18 @@
       ]
     },
     {
+      "digest": "sha256:0d3d55525f5d9a8e4323c5df7fb7841c27d536dc9d163db57295ec2525b0a01d",
+      "path": "tools/standards_engine/standards_engine/analysis_projection.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
       "digest": "sha256:6761c6b11a3904052b873c0db8d83127bb8080f0dc73fff3c6a2d26620bcd538",
       "path": "tools/standards_engine/standards_engine/authoring.py",
       "state": "present",
@@ -7297,7 +7309,7 @@
       ]
     },
     {
-      "digest": "sha256:4d7172b79c8cb33e944d50954c5a2dbf80c7a128d587ee11ab4d1be9e2728335",
+      "digest": "sha256:9f36fc4a9bb3aaa6c14bd42357eaeb754db734fd4ae7fa0776f053872816c585",
       "path": "tools/standards_engine/standards_engine/decision_batch.py",
       "state": "present",
       "uses": [
@@ -7309,7 +7321,7 @@
       ]
     },
     {
-      "digest": "sha256:ed85b973f16a77287ea14e0d3e672dc16b562113a186fda9108aafc77dcb58d4",
+      "digest": "sha256:4922e5ed478e32465578a3d97fbf600c5c614416b22aff99abcbb51a8e94f190",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7355,7 +7367,7 @@
       ]
     },
     {
-      "digest": "sha256:58b06f1ed0598a9bb78505f0c4e077296b163078dcb7ec6ec106e8bce0aeaaa4",
+      "digest": "sha256:62065f7f5f397891ddd3d409985edb25666a232d232c88bc2e644ad47d5aec45",
       "path": "tools/standards_engine/standards_engine/mcp.py",
       "state": "present",
       "uses": [
@@ -7473,7 +7485,7 @@
       ]
     },
     {
-      "digest": "sha256:64407c4b3055f2f4d0eeb1b0ff31d1598bcfcbfe786af88bb80f677b5a93ef0a",
+      "digest": "sha256:351337d72c6c59cdf00e70d581e4516257197cb0cca969e6234b1c235fdd8976",
       "path": "tools/standards_engine/standards_engine/workflow_presentation.py",
       "state": "present",
       "uses": [
@@ -13622,7 +13634,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:eafeb317cdce5d479b498842e3b9320a866fddd065c99e8fa2c323f85a5a3869",
+    "digest": "sha256:1ad6765dcf5cfeed332799bc4c05cab0f395dc55ea90c9c3a00428f4ba753a4e",
     "uses": [
       {
         "check": "python-package-contract",

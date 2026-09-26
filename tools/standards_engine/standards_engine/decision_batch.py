@@ -5,6 +5,7 @@ import json
 from typing import TYPE_CHECKING
 
 from . import _generated_contract as c
+from . import analysis_projection
 from .agent_workflow import bind, view
 
 if TYPE_CHECKING:
@@ -49,7 +50,7 @@ External authorizer/evidence observations remain ordinary per-decision effects.
         selectable = {
             ("fact-requirement", item.id) for item in evaluation.pending_requirements
         } | {
-            ("obligation", engine._obligation_child_id(item.id))
+            ("obligation", analysis_projection._obligation_child_id(item.id))
             for item in evaluation.obligations if item.state == "required"
         } | {
             ("coverage-requirement", item.requirement_id) for item in evaluation.coverage
@@ -75,22 +76,22 @@ External authorizer/evidence observations remain ordinary per-decision effects.
             # original context. The ordinary validator still checks current work,
             # fingerprint, evidence, capability and authorization at each step.
             work, _ = _work(raw)
-            work["analysis"] = engine._analysis_handle(evaluation.state.analysis_id)
+            work["analysis"] = analysis_projection._analysis_handle(evaluation.state.analysis_id)
             local = c.ResolveCall.from_value({
-                "analysis": engine._analysis_handle(evaluation.state.analysis_id),
+                "analysis": analysis_projection._analysis_handle(evaluation.state.analysis_id),
                 "submission": raw,
             })
             successor = engine._apply_submission(evaluation, local)
             evaluation = engine._evaluate(successor, inputs)
         state, evaluation = engine._apply_providers(evaluation.state, evaluation, inputs)
-        record = state.aggregate(engine._analysis_children(evaluation))
+        record = state.aggregate(analysis_projection._analysis_children(evaluation))
         published = engine._snapshots.publish_aggregate_if_root_head(
             str(bound.revision.proposal), bound.revision.revision_id, record)
         if published == "stale":
             return engine._reject("WORKFLOW.STALE_CONTEXT", "invalid",
                                   "The proposal advanced before the decision batch was recorded.")
-        context = c.AnalysisHandle.from_value(engine._analysis_handle(state.analysis_id))
-        return view(engine, bind(engine, context), engine._analysis_result(evaluation), materials,
+        context = c.AnalysisHandle.from_value(analysis_projection._analysis_handle(state.analysis_id))
+        return view(engine, bind(engine, context), analysis_projection._analysis_result(evaluation), materials,
                     detail=arguments.get("detail", "compact"))
     except engine._domain_errors() as error:
         rejected = engine._domain_rejection(error).as_contract()

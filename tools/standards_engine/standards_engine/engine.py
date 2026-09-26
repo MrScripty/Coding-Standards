@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import re
 import tempfile
 import tomllib
 from contextlib import AbstractContextManager
@@ -57,7 +56,6 @@ from tools.standards_analysis.standards_analysis import (
     RoutingRuleCause,
     analysis_value_digest,
     canonical_target_authority,
-    child_id as analysis_child_id,
     compile_coverage_definitions,
     coverage_requirement_id,
     compile_reading_plan,
@@ -68,7 +66,6 @@ from tools.standards_analysis.standards_analysis import (
     load_repository_coverage_decisions,
     load_router_projection,
     parse_router_guidance,
-    plain_record,
 )
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
@@ -112,6 +109,7 @@ from tools.standards_snapshots.standards_snapshots import (
     SnapshotSummary,
 )
 
+from . import analysis_projection
 from ._generated_contract import (
     WorkflowResult,
     ResolveManyCall,
@@ -2625,194 +2623,13 @@ class StandardsEngine:
             ),
         )
 
-    def _analysis_result(
-        self, evaluation: AnalysisEvaluation
-    ) -> PendingResult | CompleteResult:
-        state = evaluation.state
-        handle = self._analysis_handle(state.analysis_id)
-        context = self._context_projection(evaluation)
-        changed_units = [
-            unit.as_contract()
-            for change in evaluation.changes
-            for unit in change.changed_units
-        ]
-        if not evaluation.complete:
-            requirements = [
-                self._requirement_work(state, item)
-                for item in evaluation.pending_requirements
-            ]
-            obligations = [
-                self._obligation_projection(state, item)
-                for item in evaluation.obligations
-            ]
-            next_operations = [
-                {
-                    "operation": "resolve",
-                    "request_kind": "provide-fact",
-                    "target": item.fact.id,
-                    "work": self._analysis_child_handle(
-                        state.analysis_id, "fact-requirement", item.id
-                    ),
-                    "analysis": handle,
-                }
-                for item in evaluation.pending_requirements
-            ]
-            next_operations.extend(
-                {
-                    "operation": "resolve",
-                    "request_kind": item.permitted_submissions[0],
-                    "target": item.target,
-                    "work": self._obligation_work_handle(evaluation, item),
-                    "analysis": handle,
-                }
-                for item in evaluation.obligations
-                if item.state == "required"
-            )
-            return PendingResult.from_value(
-                {
-                    "kind": "pending-result",
-                    "handle": handle,
-                    "status": "needs-action",
-                    "context": context,
-                    "changes": [self._plain(item) for item in state.changes],
-                    "changed_units": changed_units,
-                    "obligations": obligations,
-                    "fact_requirements": requirements,
-                    "reading_plan": [
-                        item.as_contract() for item in evaluation.reading_plan
-                    ],
-                    "next_operations": next_operations,
-                    "summary": "The bounded analysis requires additional decisions.",
-                }
-            )
-        certificates = [
-            self._certificate_projection(state, item)
-            for item in evaluation.coverage
-            if item.certificate is not None
-        ]
-        return CompleteResult.from_value(
-            {
-                "kind": "complete-result",
-                "handle": handle,
-                "status": "complete",
-                "context": context,
-                "changes": [self._plain(item) for item in state.changes],
-                "changed_units": changed_units,
-                "coverage_certificates": certificates,
-                "fact_observations": self._observation_projections(state),
-                "dispositions": self._disposition_projections(state),
-                "reading_plan": [
-                    item.as_contract() for item in evaluation.reading_plan
-                ],
-                "completion": {
-                    "required_coverage_subjects": [
-                        item.subject for item in evaluation.coverage
-                    ],
-                    "certificate_subjects": [
-                        item.subject
-                        for item in evaluation.coverage
-                        if item.certificate is not None
-                    ],
-                    "reached_consumer_obligations": [
-                        item.id
-                        for item in evaluation.reached_obligations
-                        if item.kind == "consumer-review"
-                    ],
-                    "disposition_obligations": [
-                        str(self._plain(item)["obligation_id"])
-                        for item in state.dispositions
-                    ],
-                    "required_fact_requirements": [
-                        f"fact-requirement:{item.id}"
-                        for item in evaluation.requirements
-                    ],
-                    "observed_fact_requirements": [
-                        f"fact-requirement:{self._plain(item)['requirement_id']}"
-                        for item in state.fact_observations
-                        if self._plain(item)["requirement_id"]
-                        in {value.id for value in evaluation.requirements}
-                    ],
-                    "non_consumer_obligations_resolved": True,
-                    "applicability_resolved": True,
-                    "authorization_valid": True,
-                    "evidence_valid": True,
-                },
-                "summary": "The bounded analysis is complete.",
-            }
-        )
+    # Existing Engine-local callers retain these entry names; projection logic
+    # has one implementation and receives no Engine or storage authority.
+    _analysis_result = staticmethod(analysis_projection._analysis_result)
 
-    def _analysis_children(
-        self,
-        evaluation: AnalysisEvaluation,
-    ) -> tuple[tuple[str, str, dict[str, object]], ...]:
-        state = evaluation.state
-        children: list[tuple[str, str, dict[str, object]]] = [
-            ("context", evaluation.context_id, self._context_projection(evaluation))
-        ]
-        children.extend(
-            (
-                "fact-requirement",
-                item.id,
-                self._requirement_projection(state, item),
-            )
-            for item in evaluation.requirements
-        )
-        children.extend(
-            (
-                "obligation",
-                self._obligation_child_id(item.id),
-                self._obligation_projection(state, item),
-            )
-            for item in evaluation.obligations
-        )
-        children.extend(
-            (
-                "coverage-requirement",
-                item.requirement_id,
-                self._coverage_requirement_projection(state, item),
-            )
-            for item in evaluation.coverage
-        )
-        children.extend(
-            (
-                "coverage-certificate",
-                item.certificate_id,
-                self._certificate_projection(state, item),
-            )
-            for item in evaluation.coverage
-            if item.certificate_id is not None
-        )
-        children.extend(
-            (
-                "fact-observation",
-                value["handle"]["child_id"],
-                value,
-            )
-            for value in self._observation_projections(state)
-        )
-        return tuple(children)
+    _analysis_children = staticmethod(analysis_projection._analysis_children)
 
-    def _obligation_work_handle(
-        self,
-        evaluation: AnalysisEvaluation,
-        obligation: object,
-    ) -> dict[str, object]:
-        if obligation.kind == "audit-coverage":
-            coverage = next(
-                item
-                for item in evaluation.coverage
-                if item.subject == obligation.target
-            )
-            return self._analysis_child_handle(
-                evaluation.state.analysis_id,
-                "coverage-requirement",
-                coverage.requirement_id,
-            )
-        return self._analysis_child_handle(
-            evaluation.state.analysis_id,
-            "obligation",
-            self._obligation_child_id(obligation.id),
-        )
+    _obligation_work_handle = staticmethod(analysis_projection._obligation_work_handle)
 
     def _state_projection(self, state: DomainAnalysisState) -> dict[str, object]:
         value: dict[str, object] = {
@@ -2841,164 +2658,23 @@ class StandardsEngine:
         )
         return value
 
-    def _context_projection(
-        self,
-        evaluation: AnalysisEvaluation,
-    ) -> dict[str, object]:
-        return {
-            "kind": "analysis-context",
-            "handle": self._analysis_child_handle(
-                evaluation.state.analysis_id,
-                "context",
-                evaluation.context_id,
-            ),
-            **dict(evaluation.context),
-        }
+    _context_projection = staticmethod(analysis_projection._context_projection)
 
-    def _requirement_projection(
-        self,
-        state: DomainAnalysisState,
-        requirement: object,
-    ) -> dict[str, object]:
-        value = dict(requirement.projection)
-        context_id = str(value.pop("context_id"))
-        return {
-            "kind": "fact-requirement",
-            "handle": self._analysis_child_handle(
-                state.analysis_id,
-                "fact-requirement",
-                requirement.id,
-            ),
-            **value,
-            "context": self._analysis_child_handle(
-                state.analysis_id,
-                "context",
-                context_id,
-            ),
-        }
+    _requirement_projection = staticmethod(analysis_projection._requirement_projection)
 
-    def _requirement_work(
-        self,
-        state: DomainAnalysisState,
-        requirement: object,
-    ) -> dict[str, object]:
-        return {
-            "requirement": self._requirement_projection(state, requirement),
-            "prompt": requirement.prompt,
-            "dependent_programs": list(requirement.dependent_programs),
-        }
+    _requirement_work = staticmethod(analysis_projection._requirement_work)
 
-    def _obligation_projection(
-        self,
-        state: DomainAnalysisState,
-        obligation: object,
-    ) -> dict[str, object]:
-        value = obligation.as_contract()
-        identifier = str(value.pop("id"))
-        value["handle"] = self._analysis_child_handle(
-            state.analysis_id,
-            "obligation",
-            self._obligation_child_id(identifier),
-        )
-        return value
+    _obligation_projection = staticmethod(analysis_projection._obligation_projection)
 
-    def _coverage_requirement_projection(
-        self,
-        state: DomainAnalysisState,
-        coverage: object,
-    ) -> dict[str, object]:
-        value = dict(coverage.requirement)
-        value.pop("view_digest")
-        return {
-            "kind": "coverage-requirement",
-            "handle": self._analysis_child_handle(
-                state.analysis_id,
-                "coverage-requirement",
-                coverage.requirement_id,
-            ),
-            **value,
-        }
+    _coverage_requirement_projection = staticmethod(
+        analysis_projection._coverage_requirement_projection
+    )
 
-    def _certificate_projection(
-        self,
-        state: DomainAnalysisState,
-        coverage: object,
-    ) -> dict[str, object]:
-        if coverage.certificate is None or coverage.certificate_id is None:
-            raise RuntimeError("certificate projection requires a certificate")
-        value = dict(coverage.certificate)
-        value.pop("attestation_digest")
-        requirement_id = str(value.pop("requirement_id"))
-        return {
-            "kind": "coverage-certificate",
-            "handle": self._analysis_child_handle(
-                state.analysis_id,
-                "coverage-certificate",
-                coverage.certificate_id,
-            ),
-            "requirement": self._analysis_child_handle(
-                state.analysis_id,
-                "coverage-requirement",
-                requirement_id,
-            ),
-            **value,
-        }
+    _certificate_projection = staticmethod(analysis_projection._certificate_projection)
 
-    def _observation_projections(
-        self,
-        state: DomainAnalysisState,
-    ) -> list[dict[str, object]]:
-        authorizations = self._authorization_references(state)
-        result = []
-        for record in state.fact_observations:
-            value = self._plain(record)
-            identifier = analysis_child_id(value)
-            projected = {
-                "kind": "fact-observation",
-                "handle": self._analysis_child_handle(
-                    state.analysis_id,
-                    "fact-observation",
-                    identifier,
-                ),
-                "requirement": self._analysis_child_handle(
-                    state.analysis_id,
-                    "fact-requirement",
-                    str(value["requirement_id"]),
-                ),
-                "value": value["value"],
-                "evidence": value["evidence"],
-                "authorization": authorizations[str(value["authorization_id"])],
-            }
-            if value.get("provider") is not None:
-                projected["provider"] = value["provider"]
-            result.append(projected)
-        return result
+    _observation_projections = staticmethod(analysis_projection._observation_projections)
 
-    def _disposition_projections(
-        self,
-        state: DomainAnalysisState,
-    ) -> list[dict[str, object]]:
-        authorizations = self._authorization_references(state)
-        result = []
-        for record in state.dispositions:
-            value = self._plain(record)
-            obligation_id = str(value["obligation_id"])
-            result.append(
-                {
-                    "obligation": self._analysis_child_handle(
-                        state.analysis_id,
-                        "obligation",
-                        self._obligation_child_id(obligation_id),
-                    ),
-                    "kind": value["kind"],
-                    "result": value["result"],
-                    "rationale": value["rationale"],
-                    "evidence": value["evidence"],
-                    "authorization": authorizations[str(value["authorization_id"])],
-                    "fingerprint": value["fingerprint"],
-                }
-            )
-        return result
+    _disposition_projections = staticmethod(analysis_projection._disposition_projections)
 
     def _attestation_projections(
         self,
@@ -3027,15 +2703,7 @@ class StandardsEngine:
             )
         return result
 
-    def _authorization_references(
-        self,
-        state: DomainAnalysisState,
-    ) -> dict[str, dict[str, object]]:
-        return {
-            str(value["reference"]["id"]): dict(value["reference"])
-            for record in state.authorization_records
-            for value in (self._plain(record),)
-        }
+    _authorization_references = staticmethod(analysis_projection._authorization_references)
 
     @staticmethod
     def _domain_contracts() -> tuple[dict[str, str], ...]:
@@ -3052,39 +2720,13 @@ class StandardsEngine:
             {"id": "standards-policy-impact", "version": "2"},
         )
 
-    @staticmethod
-    def _plain(value: object) -> dict[str, object]:
-        return plain_record(value)
+    _plain = staticmethod(analysis_projection._plain)
 
-    @staticmethod
-    def _analysis_handle(analysis_id: str) -> dict[str, object]:
-        return {
-            "kind": "analysis-handle",
-            "id": analysis_id,
-            "schema_version": 7,
-        }
+    _analysis_handle = staticmethod(analysis_projection._analysis_handle)
 
-    @classmethod
-    def _analysis_child_handle(
-        cls,
-        analysis_id: str,
-        child_kind: str,
-        child_id: str,
-    ) -> dict[str, object]:
-        return {
-            "kind": "analysis-child-handle",
-            "analysis": cls._analysis_handle(analysis_id),
-            "child_kind": child_kind,
-            "child_id": child_id,
-            "schema_version": 7,
-        }
+    _analysis_child_handle = staticmethod(analysis_projection._analysis_child_handle)
 
-    @staticmethod
-    def _obligation_child_id(obligation_id: str) -> str:
-        prefix = "obligation:"
-        if not obligation_id.startswith(prefix):
-            raise RuntimeError("obligation identity has an invalid domain")
-        return obligation_id.removeprefix(prefix)
+    _obligation_child_id = staticmethod(analysis_projection._obligation_child_id)
 
     @staticmethod
     def _current_child(

@@ -60,7 +60,8 @@ class PurposeProjectionTest(unittest.TestCase):
             material = compiled.materials[pending.pop()]
             for dependency in (*material.requires, *material.specializes):
                 if dependency not in eligible:
-                    eligible.add(dependency); pending.append(dependency)
+                    eligible.add(dependency)
+                    pending.append(dependency)
         entries = [{"target": key, "binding": compiled.materials[key].binding} for key in sorted(eligible)]
         records = [{"id": "provenance.fixture", "subject": "core", "subject_binding": subject_binding(compiled, "core"),
                     "origin": "current-justification", "rationale": PRIVATE, "evidence": []}]
@@ -78,7 +79,8 @@ class PurposeProjectionTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.engine.close(); cls.temporary.cleanup()
+        cls.engine.close()
+        cls.temporary.cleanup()
 
     def read(self, **fields):
         return self.facade.read({"snapshot": self.snapshot, "target": "core", **fields})
@@ -209,7 +211,7 @@ class PurposeProjectionTest(unittest.TestCase):
         for advanced in (False, True):
             catalog = tool_catalog(ROOT, purpose="application", advanced=advanced)
             names = {tool["name"] for tool in catalog}
-            self.assertLessEqual(names, {"route", "read", "read_many", "related", "routing_facts", "query", "inspect"})
+            self.assertLessEqual(names, {"route", "read", "read_many", "related", "routing_facts", "query", "inspect", "runtime_info"})
             serialized = json.dumps(catalog)
             for hidden in ("rationale", "ChangePurpose", "DecisionProvenanceRecord", "ProposalRevisionHandle"):
                 self.assertNotIn(hidden, serialized)

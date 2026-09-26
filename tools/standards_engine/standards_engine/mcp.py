@@ -71,7 +71,14 @@ INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"
 DESCRIPTIONS = {
     "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
     "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Arguments are limited to 256 KiB. Compact results are default; use workflow_details for pending work.",
-    "workflow_details": "Read a live Analysis section in pages of 1–16 records (default 8, up to 64 KiB per page). Follow the exact next arguments; observation bindings detect evidence changes between pages. Detail reads do not decide or publish.",
+    "workflow_details": (
+        "Read one immutable Analysis section in pages of 1–16 records "
+        "(default 8, up to 64 KiB per page). Follow the exact next arguments; "
+        "observation bindings prevent mixing Analysis contexts, sections, or "
+        "their projected contents. Paging does not check live evidence "
+        "freshness. Decision and publication operations own current evidence "
+        "and authorization checks. Detail reads do not decide or publish."
+    ),
     "read_many": "Read 1–32 selected items from one explicit snapshot in request order. Each item accepts the single-read options. The complete JSON result is limited to 2 MiB; a failed item rejects the whole request. Use the snapshot returned by route or read.",
     "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
     "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",

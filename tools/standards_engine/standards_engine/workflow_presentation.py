@@ -11,6 +11,7 @@ import json
 from typing import TYPE_CHECKING
 
 from . import _generated_contract as c
+from . import analysis_projection
 
 if TYPE_CHECKING:
     from .engine import StandardsEngine
@@ -42,7 +43,7 @@ def summarize(outcome: c.PendingResult | c.CompleteResult) -> dict[str, object]:
 
 
 def details(engine: StandardsEngine, call: c.WorkflowDetailsCall):
-    """Read one bounded section of a fresh evaluation without publishing it."""
+    """Project one bounded section of an immutable Analysis without publishing it."""
     try:
         state = engine._load_analysis(call.analysis)
         evaluation = engine._evaluate(state)
@@ -51,20 +52,20 @@ def details(engine: StandardsEngine, call: c.WorkflowDetailsCall):
         offset, limit = arguments.get("offset", 0), arguments.get("limit", 8)
         if section == "pending_obligations":
             items = [{"kind": "workflow-obligation-work",
-                      "obligation": engine._obligation_projection(state, item),
-                      "work": engine._obligation_work_handle(evaluation, item)}
+                      "obligation": analysis_projection._obligation_projection(state, item),
+                      "work": analysis_projection._obligation_work_handle(evaluation, item)}
                      for item in evaluation.obligations if item.state == "required"]
         elif section == "obligations":
-            items = [engine._obligation_projection(state, item) for item in evaluation.obligations]
+            items = [analysis_projection._obligation_projection(state, item) for item in evaluation.obligations]
         elif section == "fact_requirements":
-            items = [engine._requirement_work(state, item) for item in evaluation.pending_requirements]
+            items = [analysis_projection._requirement_work(state, item) for item in evaluation.pending_requirements]
         elif section == "coverage_certificates":
-            items = [engine._certificate_projection(state, item) for item in evaluation.coverage
+            items = [analysis_projection._certificate_projection(state, item) for item in evaluation.coverage
                      if item.certificate is not None]
         elif section == "dispositions":
-            items = engine._disposition_projections(state)
+            items = analysis_projection._disposition_projections(state)
         elif section == "fact_observations":
-            items = engine._observation_projections(state)
+            items = analysis_projection._observation_projections(state)
         elif section == "reading_plan":
             items = [item.as_contract() for item in evaluation.reading_plan]
         else:  # The generated enum exhausts the selected sections.

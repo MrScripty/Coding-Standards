@@ -106,6 +106,73 @@ class ReviewWorkflowTests(unittest.TestCase):
         records = self.facade.workflow_details({'analysis': batched['context'], 'section': 'dispositions'})
         self.assertEqual(records['total'], 4)
 
+    def test_historical_pages_survive_evidence_edits_but_decisions_revalidate(self):
+        original = self.proposed('historical-evidence', 4)
+        first = self.facade.workflow_details({
+            'analysis': original['context'],
+            'section': 'pending_obligations',
+            'limit': 1,
+        })
+        self.assertEqual(first['kind'], 'workflow-details-result', first)
+        submitted = decision(self.root, first['items'][0]['obligation'])
+        evidence_path = self.root / 'tools/standards_engine/README.md'
+        original_bytes = evidence_path.read_bytes()
+        try:
+            evidence_path.write_bytes(original_bytes + b'\nEvidence changed after paging.\n')
+            with patch.object(
+                self.engine._snapshots, 'publish_aggregate_if_root_head',
+                wraps=self.engine._snapshots.publish_aggregate_if_root_head,
+            ) as publish:
+                second = self.facade.workflow_details(first['next'])
+                self.assertEqual(second['kind'], 'workflow-details-result', second)
+                self.assertEqual(second['observation'], first['observation'])
+                self.assertEqual(second['analysis'], original['context'])
+                self.assertEqual(second['offset'], 1)
+                rejected = self.facade.resolve_many({
+                    'context': original['context'], 'submissions': [submitted],
+                })
+                self.assertEqual(rejected['kind'], 'rejected-result', rejected)
+                self.assertEqual(rejected['code'], 'ANALYSIS.EVIDENCE_DIGEST_MISMATCH')
+                publish.assert_not_called()
+        finally:
+            evidence_path.write_bytes(original_bytes)
+        self.assertEqual(self.facade.workflow_status({'context': original['context']}), original)
+
+    def test_single_full_and_compact_batch_remain_workload_options(self):
+        for count in (1, 4):
+            with self.subTest(decisions=count):
+                original = self.facade.propose({
+                    'snapshot': self.snapshot,
+                    'change_set': topic_change(self.root, f'options-{count}', count),
+                    'detail': 'full',
+                })
+                self.assertEqual(original['outcome']['kind'], 'pending-result', original)
+                submitted = [decision(self.root, item) for item in original['outcome']['obligations']]
+                self.assertEqual(len(submitted), count)
+                batched = self.facade.resolve_many({
+                    'context': original['context'], 'submissions': submitted,
+                })
+                self.assertEqual(batched['status'], 'complete', batched)
+                self.assertEqual(batched['outcome']['kind'], 'workflow-analysis-summary')
+                serial = original
+                for _ in submitted:
+                    # Full results already expose actionable work: no page call is needed.
+                    obligation = next(item for item in serial['outcome']['obligations']
+                                      if item['state'] == 'required')
+                    serial = self.facade.resolve_workflow({
+                        'context': serial['context'],
+                        'submission': decision(self.root, obligation),
+                        'detail': 'full',
+                    })
+                self.assertEqual(serial['status'], 'complete', serial)
+                self.assertEqual(serial['outcome']['kind'], 'complete-result')
+                self.assertEqual(serial['context'], batched['context'])
+                full_batch = self.facade.resolve_many({
+                    'context': original['context'], 'submissions': submitted,
+                    'detail': 'full',
+                })
+                self.assertEqual(full_batch, serial)
+
     def test_bad_last_decision_leaves_no_partial_analysis(self):
         original = self.proposed('invalid-last')
         submitted = [decision(self.root, item) for item in self.work(original)]
@@ -121,8 +188,10 @@ class ReviewWorkflowTests(unittest.TestCase):
     def test_duplicates_foreign_and_unknown_handles_reject_before_authorization(self):
         original = self.proposed('invalid-handles')
         valid = decision(self.root, self.work(original)[0])
-        foreign = deepcopy(valid); foreign['obligation']['analysis']['id'] = 'analysis:sha256:' + '0'*64
-        unknown = deepcopy(valid); unknown['obligation']['child_id'] = 'sha256:' + '0'*64
+        foreign = deepcopy(valid)
+        foreign['obligation']['analysis']['id'] = 'analysis:sha256:' + '0'*64
+        unknown = deepcopy(valid)
+        unknown['obligation']['child_id'] = 'sha256:' + '0'*64
         for values in ([valid, valid], [foreign], [unknown]):
             with patch.object(self.engine, '_apply_submission', side_effect=AssertionError('early authorization')):
                 result = self.facade.resolve_many({'context': original['context'], 'submissions': values})
@@ -148,7 +217,8 @@ class ReviewWorkflowTests(unittest.TestCase):
         for values in ([], [valid]*129):
             result = self.facade.resolve_many({'context': original['context'], 'submissions': values})
             self.assertEqual(result['kind'], 'rejected-result')
-        oversized = deepcopy(valid); oversized['rationale'] = 'x' * (256 * 1024)
+        oversized = deepcopy(valid)
+        oversized['rationale'] = 'x' * (256 * 1024)
         result = self.facade.resolve_many({'context': original['context'], 'submissions': [oversized]})
         self.assertEqual(result['code'], 'WORKFLOW.INPUT_LIMIT')
         for limit in (0, 17):
