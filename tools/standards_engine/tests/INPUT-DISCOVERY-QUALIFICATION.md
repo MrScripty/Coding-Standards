@@ -47,7 +47,8 @@ thread and MCP tools path, not a manually posted authoring request.
 
 The task supplies semantic intent and a real fixture evidence reference. It does
 not supply argument-schema examples or generated call payloads. The model must
-use describe_input for all five authoring operations, create and revise a test
+use describe_input for all five authoring operation roots, reuse shared definitions
+within the same verified runtime/catalog, create and revise a test
 proposal, resolve one decision and then a multiple-decision batch, reuse evidence,
 and explicitly review to readiness. The harness validates observed model-authored
 arguments/results, requires every used definition to have been retrieved before
@@ -79,3 +80,59 @@ must confirm the requested exposure surface and absence of outside schema source
 Compatibility removal requires an accepted direct or discovery path for every
 supported deployment (or explicit retirement of that deployment), plus integration
 review. Full schemas reaching the client are insufficient on their own.
+
+
+## Replay an existing run after observer correction
+
+Observer version 2 tracks shared definitions once per exact runtime, purpose,
+catalog and isolated thread/turn. Each operation keeps its own input-root binding.
+Definition content must match the canonical declaration. Calls may reuse already
+retrieved definitions from another operation; repeated discovery is not required.
+A definition arriving after a call starts is too late. Context compaction clears
+acquired-shape evidence because this observer cannot prove which exact definitions
+survived it. Successful output alone cannot supply missing discovery evidence.
+
+Use the matching interface-40 source checkout with the corrected observer. The
+original stock harness directory must contain `events.jsonl`, `qualification.json`
+and its retained `repository`. No model, Codex process, or Engine tool is run by
+replay. Git is used only to read the retained fixture's main ref.
+
+```sh
+PYTHONPATH=. /path/to/locked/python -m tools.standards_engine.tests.replay_discovery_qualification \
+  --evidence-dir /private/original-discovery-run \
+  --output /private/discovery-observer-v2.json
+```
+
+The output must be a new file outside the original directory. It is created with
+owner-only permissions; existing files and aliases are refused. Keep the original
+observer verdict, independent review, and corrected replay verdict together in the
+acceptance record. The new report records source hashes and observer-code hashes.
+It never relabels the old result or overwrites logs. Repeated assessments require
+separate output paths.
+
+Replay correlates RPC requests and replies, requires one fresh thread/turn, verifies
+catalog and runtime preflight against this checkout, checks model-authored calls in
+chronological order, and validates four independent post-turn readbacks. It compares
+the retained fixture's current main ref with the recorded initial ref. The report
+names that current observation; it does not prove that no unrecorded external process
+ever moved and restored a ref. It also cannot authenticate a caller-edited transcript
+or establish the effective client surface from an operator label alone. Review the
+original provenance and surface evidence separately.
+
+Missing or mismatched starts, unfinished tool calls, unexpected scripted RPCs,
+incomplete transcripts, source/catalog drift or unavailable fixture
+state produce unavailable/failed qualification rather than inferred success. A
+source mismatch needs the exact matching checkout, not removal of the identity
+checks. Rerun the existing preserved trace first; another paid model run is needed
+only when the original evidence cannot decide the claim. The CLI does not remove
+compatibility or grant acceptance.
+
+Additional automated checks:
+
+```sh
+PYTHONPATH=. python -m unittest tools.standards_engine.tests.test_model_discovery_qualification tools.standards_engine.tests.test_replay_discovery_qualification tools.standards_engine.tests.test_replay_discovery_workflow
+```
+
+The final suite feeds real Engine outcomes through a synthetic client event stream
+and replays them in a cold process. It is integration evidence for the observer,
+not a substitute for actual model/client qualification.

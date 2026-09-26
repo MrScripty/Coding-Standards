@@ -11,10 +11,18 @@ from unittest.mock import patch
 from tools.standards_engine.standards_engine.context_projection import Purpose
 from tools.standards_engine.standards_engine.tools import AgentToolFacade
 from tools.standards_engine.tests.codex_discovery_client import (
-    AUTHORING_OPERATIONS, _arguments_visible, _matches_readback, assess_model_items, main,
+    AUTHORING_OPERATIONS, _arguments_visible, _matches_readback, assess_model_items as _assess_model_items, main, model_observations,
 )
 
 ROOT = Path(__file__).resolve().parents[3]
+DIALECT = 'https://json-schema.org/draft/2020-12/schema'
+RUNTIME = {'instance_id': 'fixture-instance', 'purpose': 'authoring',
+           'catalog_digest': 'sha256:' + 'a' * 64, 'schema_digest': 'sha256:' + 'b' * 64,
+           'implementation_digest': 'sha256:' + 'c' * 64, 'interface_version': 40}
+
+
+def assess_model_items(items, server, catalog, contracts, **kwargs):
+    return _assess_model_items(items, server, catalog, contracts, RUNTIME, **kwargs)
 
 
 def observed_fixture():
@@ -28,14 +36,17 @@ def observed_fixture():
         'submissions': {'type': 'array', 'items': {'$ref': '#/$defs/FixtureItem'}}},
         'additionalProperties': False}
     definitions = {'FixtureCall': definition, 'FixtureItem': {'type': 'object'}}
-    contracts = {name: {'$ref': '#/$defs/FixtureCall', '$defs': definitions} for name in names}
+    contracts = {name: {'$schema': DIALECT, '$ref': '#/$defs/FixtureCall', '$defs': definitions} for name in names}
     events = []
     def add(name, args, value):
         events.append({'id': str(len(events)), 'type': 'mcpToolCall', 'server': 'fixture',
             'tool': name, 'arguments': args, 'status': 'completed', 'error': None,
-            'result': {'structuredContent': value, 'isError': False}})
+            'result': {'structuredContent': value, 'isError': False,
+                       '_meta': {'standards-engine/runtime': deepcopy(RUNTIME)}}})
     for name in AUTHORING_OPERATIONS:
-        add('describe_input', {'operation': name}, {'kind': 'input-contract-result', 'root': 'FixtureCall', 'records': [{'name': key, 'schema_json': json.dumps(value)} for key, value in definitions.items()]})
+        add('describe_input', {'operation': name}, {'kind': 'input-contract-result', 'root': 'FixtureCall', 'operation': name,
+            'purpose': 'authoring', 'catalog_digest': RUNTIME['catalog_digest'],
+            'interface_version': 40, 'dialect': DIALECT, 'records': [{'name': key, 'schema_json': json.dumps(value)} for key, value in definitions.items()]})
         args = {'evidence': {'review': {}}, 'evidence_ref': 'review'}
         if name == 'resolve_many':
             args['submissions'] = [{}, {}]
@@ -138,3 +149,126 @@ class ModelDiscoveryQualificationTest(unittest.TestCase):
         self.assertEqual(runtime['catalog_digest'], discovered['catalog_digest'])
         self.assertEqual(facade.describe_input({'operation': 'query', 'selector': discovered['root'],
             'expected_catalog': runtime['catalog_digest']})['kind'], 'input-contract-result')
+
+
+class SharedDiscoveryQualificationTest(unittest.TestCase):
+    def shared_fixture(self):
+        catalog, events, contracts = observed_fixture()
+        # Acquire the batch element once during propose. Later operations still
+        # discover their root; common definitions do not need retransmission.
+        for event in events[2:]:
+            if event['tool'] == 'describe_input':
+                event['result']['structuredContent']['records'] = [
+                    r for r in event['result']['structuredContent']['records']
+                    if r['name'] != 'FixtureItem']
+        return catalog, events, contracts
+
+    def test_prior_shared_definition_is_usable_by_later_operation(self):
+        catalog, events, contracts = self.shared_fixture()
+        result = assess_model_items(events, 'fixture', catalog, contracts)
+        self.assertEqual(result['status'], 'passed', result)
+        self.assertEqual(result['observer_version'], 2)
+        self.assertEqual(result['calls']['describe_input'], 5)
+
+    def test_never_discovered_shared_definition_is_rejected_at_use(self):
+        catalog, events, contracts = self.shared_fixture()
+        events[0]['result']['structuredContent']['records'].pop()
+        result = assess_model_items(events, 'fixture', catalog, contracts)
+        self.assertIn('resolve_many: used input shapes were not acquired through discovery before use.', result['failures'])
+
+    def test_later_discovery_cannot_retroactively_satisfy_a_call(self):
+        catalog, events, contracts = self.shared_fixture()
+        record = events[0]['result']['structuredContent']['records'].pop()
+        events[-2]['result']['structuredContent']['records'].append(record)
+        result = assess_model_items(events, 'fixture', catalog, contracts)
+        self.assertIn('resolve_many: used input shapes were not acquired through discovery before use.', result['failures'])
+
+    def test_same_name_changed_definition_is_not_credited(self):
+        catalog, events, contracts = self.shared_fixture()
+        events[0]['result']['structuredContent']['records'][-1]['schema_json'] = '{"type":"string"}'
+        result = assess_model_items(events, 'fixture', catalog, contracts)
+        self.assertIn('An observed discovery record differed from the installed contract.', result['failures'])
+        self.assertIn('resolve_many: used input shapes were not acquired through discovery before use.', result['failures'])
+
+    def test_foreign_source_purpose_catalog_or_instance_is_not_credited(self):
+        catalog, events, contracts = self.shared_fixture()
+        for key in RUNTIME:
+            with self.subTest(field=key):
+                altered = deepcopy(events)
+                altered[0]['result']['_meta']['standards-engine/runtime'][key] = 'foreign'
+                result = assess_model_items(altered, 'fixture', catalog, contracts)
+                self.assertIn('Tool result did not match the qualified runtime/source/purpose/catalog.', result['failures'])
+
+    def test_discovery_envelope_must_match_the_operation_and_catalog(self):
+        catalog, events, contracts = self.shared_fixture()
+        for key in ('root', 'operation', 'dialect', 'purpose', 'catalog_digest', 'interface_version'):
+            with self.subTest(field=key):
+                altered = deepcopy(events)
+                altered[0]['result']['structuredContent'][key] = 'different'
+                result = assess_model_items(altered, 'fixture', catalog, contracts)
+                self.assertIn('Discovery did not identify the expected operation root.', result['failures'])
+
+    def test_shared_definition_cache_never_survives_an_assessment(self):
+        catalog, events, contracts = self.shared_fixture()
+        self.assertEqual(assess_model_items(events, 'fixture', catalog, contracts)['status'], 'passed')
+        events[0]['result']['structuredContent']['records'].pop()
+        self.assertEqual(assess_model_items(events, 'fixture', catalog, contracts)['status'], 'failed')
+
+    def test_compaction_requires_reacquisition_not_assumed_memory(self):
+        catalog, events, contracts = self.shared_fixture()
+        events.insert(2, {'id': 'compacted', 'type': 'contextCompaction'})
+        result = assess_model_items(events, 'fixture', catalog, contracts)
+        self.assertIn('resolve_many: used input shapes were not acquired through discovery before use.', result['failures'])
+
+    def test_boolean_and_number_literal_definitions_are_distinct(self):
+        contract = {'$ref': '#/$defs/Flag', '$defs': {'Flag': {'const': True}}}
+        self.assertFalse(_arguments_visible(contract, True, {'Flag': {'const': 1}}))
+
+    def test_key_order_is_not_a_definition_change(self):
+        contract = {'$ref': '#/$defs/Text', '$defs': {'Text': {'type': 'string', 'minLength': 1}}}
+        self.assertTrue(_arguments_visible(contract, 'text', {'Text': {'minLength': 1, 'type': 'string'}}))
+
+    def test_discovery_completing_after_action_start_does_not_count(self):
+        catalog, items, contracts = self.shared_fixture()
+        # Root for propose completes at index zero. A proposal already started
+        # before that completion must not be credited with its later arrival.
+        starts = {i['id']: n for n, i in enumerate(items)}
+        starts[items[1]['id']] = 0
+        result = assess_model_items(items, 'fixture', catalog, contracts, started_before=starts)
+        self.assertIn('propose: used input shapes were not acquired through discovery before use.', result['failures'])
+
+    def test_observations_keep_one_thread_and_turn_and_require_call_start(self):
+        _, items, _ = self.shared_fixture()
+        events = []
+        for item in items:
+            for method in ('item/started', 'item/completed'):
+                events.append({'method': method, 'params': {'threadId': 'thread', 'turnId': 'turn', 'item': item}})
+        foreign = deepcopy(events[0]); foreign['params']['threadId'] = 'other'
+        selected, starts = model_observations([foreign, *events], 'thread', 'turn')
+        self.assertEqual(selected, items)
+        self.assertEqual(starts, {i['id']: n for n, i in enumerate(items)})
+        with self.assertRaisesRegex(ValueError, 'no observed start'):
+            model_observations(events[1:], 'thread', 'turn')
+        with self.assertRaisesRegex(ValueError, 'duplicate started'):
+            model_observations([events[0], *events], 'thread', 'turn')
+
+
+    def test_started_tools_require_matching_terminal_observations(self):
+        _, items, _ = self.shared_fixture()
+        def event(method, item):
+            return {'method': method, 'params': {'threadId': 'thread', 'turnId': 'turn', 'item': item}}
+        with self.assertRaisesRegex(ValueError, 'no completed observation'):
+            model_observations([event('item/started', items[0])], 'thread', 'turn')
+        with self.assertRaisesRegex(ValueError, 'completion identity differs'):
+            model_observations([event('item/started', items[0]),
+                event('item/completed', {**items[0], 'tool': 'apply'})], 'thread', 'turn')
+        with self.assertRaisesRegex(ValueError, 'completion identity differs'):
+            model_observations([event('item/started', items[0]),
+                event('item/completed', {'id': items[0]['id'], 'type': 'agentMessage'})], 'thread', 'turn')
+
+    def test_duplicate_schema_members_are_not_credited(self):
+        catalog, events, contracts = self.shared_fixture()
+        events[0]['result']['structuredContent']['records'][-1]['schema_json'] = '{"type":"string","type":"object"}'
+        result = assess_model_items(events, 'fixture', catalog, contracts)
+        self.assertIn('An observed discovery record was not complete JSON.', result['failures'])
+        self.assertEqual(result['status'], 'failed')

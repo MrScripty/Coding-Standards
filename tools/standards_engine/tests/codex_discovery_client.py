@@ -31,6 +31,68 @@ from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
 
 ROOT = Path(__file__).resolve().parents[3]
 AUTHORING_OPERATIONS = ('propose', 'revise', 'resolve_workflow', 'resolve_many', 'review')
+OBSERVER_VERSION = 2
+RUNTIME_FIELDS = ('instance_id', 'purpose', 'catalog_digest', 'schema_digest',
+                  'implementation_digest', 'interface_version')
+
+
+def read_recorded_json(text: str):
+    """Recorded schemas and events are JSON, with unambiguous member names."""
+    def unique(pairs):
+        value = {}
+        for key, item in pairs:
+            if key in value:
+                raise ValueError('Duplicate JSON member in recorded evidence.')
+            value[key] = item
+        return value
+    def invalid_constant(_):
+        raise ValueError('Non-JSON numeric constant in recorded evidence.')
+    return json.loads(text, object_pairs_hook=unique, parse_constant=invalid_constant)
+
+
+def _same_json(left: object, right: object) -> bool:
+    # Python equality conflates True/1; discovered documents must preserve the
+    # canonical JSON representation, apart from object-key order.
+    return json.dumps(left, sort_keys=True, allow_nan=False) == json.dumps(
+        right, sort_keys=True, allow_nan=False)
+
+
+def model_observations(events: list[dict], thread_id: str, turn_id: str):
+    """Select one thread/turn and retain when each call began.
+
+    A completed discovery can teach a later call, not an already running call.
+    Unknown/missing start observations fail closed at the acceptance boundary.
+    """
+    items, starts, pending = [], {}, {}
+    for event in events:
+        params = event.get('params', {})
+        if params.get('threadId') != thread_id or params.get('turnId') != turn_id:
+            continue
+        method = event.get('method')
+        if method == 'item/started':
+            item = params.get('item', {})
+            identity = item.get('id')
+            if not isinstance(identity, str) or identity in starts:
+                raise ValueError('Missing or duplicate started item identity.')
+            starts[identity] = len(items)
+            pending[identity] = (item.get('type'), item.get('server'), item.get('tool'))
+        elif method == 'item/completed':
+            item = params.get('item')
+            if not isinstance(item, dict):
+                raise ValueError('Malformed completed item.')
+            identity = item.get('id')
+            if item.get('type') == 'mcpToolCall' and identity not in starts:
+                raise ValueError('MCP call has no observed start; before-use coverage is unavailable.')
+            began = pending.pop(identity, None)
+            if item.get('type') == 'mcpToolCall' or (began and began[0] == 'mcpToolCall'):
+                if began != (item.get('type'), item.get('server'), item.get('tool')):
+                    raise ValueError('MCP completion identity differs from its observed start.')
+            items.append(item)
+    if any(item[0] not in {'userMessage', 'agentMessage', 'reasoning', 'plan', 'contextCompaction'}
+           for item in pending.values()):
+        raise ValueError('Started tool has no completed observation; effects are unresolved.')
+    return items, starts
+
 
 
 def _arguments_visible(contract: dict, arguments: object, records: dict) -> bool:
@@ -51,7 +113,7 @@ def _arguments_visible(contract: dict, arguments: object, records: dict) -> bool
             return True
         if '$ref' in schema:
             name = schema['$ref'].removeprefix('#/$defs/')
-            if name not in definitions or records.get(name) != definitions[name]:
+            if name not in definitions or not _same_json(records.get(name), definitions[name]):
                 return False
             key = (name, id(value))
             if key not in seen:
@@ -77,20 +139,36 @@ def _arguments_visible(contract: dict, arguments: object, records: dict) -> bool
     return observe({'$ref': contract['$ref']}, arguments)
 
 
-def assess_model_items(items: list[dict], server: str, catalog: dict, contracts: dict) -> dict:
-    """Assess observed tool events, never an agent's self-reported success."""
+def assess_model_items(items: list[dict], server: str, catalog: dict, contracts: dict,
+                       runtime: dict, *, started_before: dict[str, int] | None = None) -> dict:
+    """Assess one already isolated session against its verified runtime.
+
+    Records are scoped to this invocation and exact source/purpose/catalog, not
+    the operation that returned them. Direct synthetic tests use serial completion
+    order; live/replay callers supply start observations for concurrent calls.
+    """
     failures = []
     calls = []
     discovered = set()
     acquired = {}
+    acquired_at = {}
+    roots_at = {}
+    if any(key not in runtime for key in RUNTIME_FIELDS):
+        raise ValueError('Qualification requires an exact runtime binding.')
     seen_ids = set()
-    for item in items:
-        if item.get('id') in seen_ids:
+    for position, item in enumerate(items):
+        if not isinstance(item.get('id'), str) or item.get('id') in seen_ids:
             failures.append('Duplicate completed item identity.')
             continue
         seen_ids.add(item.get('id'))
         kind = item.get('type')
-        if kind in {'userMessage', 'agentMessage', 'reasoning', 'plan', 'contextCompaction'}:
+        if kind == 'contextCompaction':
+            # The observer cannot establish which exact definitions survived.
+            acquired.clear()
+            acquired_at.clear()
+            roots_at.clear()
+            continue
+        if kind in {'userMessage', 'agentMessage', 'reasoning', 'plan'}:
             continue
         if kind == 'functionCallOutput' and item.get('name') == 'exec' and item.get('namespace') == 'functions':
             # Code Mode's execution wrapper is not a filesystem command. Its
@@ -98,6 +176,10 @@ def assess_model_items(items: list[dict], server: str, catalog: dict, contracts:
             continue
         if kind != 'mcpToolCall' or item.get('server') != server:
             failures.append(f'Non-fixture or unqualified tool surface: {kind}.')
+            continue
+        observed_runtime = ((item.get('result') or {}).get('_meta') or {}).get('standards-engine/runtime', {})
+        if any(not _same_json(observed_runtime.get(key), runtime[key]) for key in RUNTIME_FIELDS):
+            failures.append('Tool result did not match the qualified runtime/source/purpose/catalog.')
             continue
         name = item.get('tool')
         if name not in catalog:
@@ -109,6 +191,7 @@ def assess_model_items(items: list[dict], server: str, catalog: dict, contracts:
         calls.append((name, arguments, value))
         if item.get('status') != 'completed' or item.get('error') is not None or result.get('isError'):
             failures.append(f'{name}: client reported failure.')
+            continue
         if not Draft202012Validator(catalog[name]['inputSchema']).is_valid(arguments):
             failures.append(f'{name}: invalid model-authored arguments.')
             continue
@@ -117,29 +200,42 @@ def assess_model_items(items: list[dict], server: str, catalog: dict, contracts:
             continue
         if 'rejected' in value.get('kind', '') or value.get('status') in {'rejected', 'stale', 'recovery-required'}:
             failures.append(f'{name}: unresolved domain failure.')
+            continue
         if name == 'describe_input':
             if value.get('kind') != 'input-contract-result' or not value.get('records'):
                 failures.append('Discovery returned no input records.')
             else:
                 target = arguments['operation']
                 contract = contracts.get(target)
-                if contract is None or value.get('root') != contract['$ref'].rsplit('/', 1)[-1]:
+                if (contract is None or value.get('root') != contract['$ref'].rsplit('/', 1)[-1]
+                    or value.get('operation') != target
+                    or value.get('dialect') != contract.get('$schema')
+                    or any(not _same_json(value.get(key), runtime[key])
+                           for key in ('purpose', 'catalog_digest', 'interface_version'))):
                     failures.append('Discovery did not identify the expected operation root.')
                     continue
-                records = acquired.setdefault(target, {})
+                records = {}
                 for record in value['records']:
                     try:
-                        definition = json.loads(record['schema_json'])
+                        definition = read_recorded_json(record['schema_json'])
                     except (KeyError, TypeError, ValueError):
                         failures.append('An observed discovery record was not complete JSON.')
                         continue
-                    if record['name'] not in contract['$defs'] or definition != contract['$defs'][record['name']]:
+                    if record['name'] not in contract['$defs'] or not _same_json(definition, contract['$defs'][record['name']]):
                         failures.append('An observed discovery record differed from the installed contract.')
                         continue
                     records[record['name']] = definition
+                # Definitions are canonical across this catalog; an operation
+                # remains bound to its own root rather than owning shared types.
+                for definition_name, definition in records.items():
+                    acquired[definition_name] = definition
+                    acquired_at.setdefault(definition_name, position)
+                roots_at.setdefault(target, position)
                 discovered.add(target)
         elif name in AUTHORING_OPERATIONS:
-            if name not in discovered or not _arguments_visible(contracts[name], arguments, acquired.get(name, {})):
+            start = position if started_before is None else started_before.get(item['id'], -1)
+            visible = {key: value for key, value in acquired.items() if acquired_at[key] < start}
+            if roots_at.get(name, len(items)) >= start or not _arguments_visible(contracts[name], arguments, visible):
                 failures.append(f'{name}: used input shapes were not acquired through discovery before use.')
         if name in {'apply', 'recover'}:
             failures.append('Publication/recovery is outside this fixture task.')
@@ -161,6 +257,7 @@ def assess_model_items(items: list[dict], server: str, catalog: dict, contracts:
     if len(ready) != 1 or ready[0].get('status') != 'ready':
         failures.append('Exact review readiness was not observed.')
     return {
+        'observer_version': OBSERVER_VERSION,
         'status': 'failed' if failures else 'passed', 'failures': failures,
         'calls': dict(counts), 'discovered_operations': sorted(discovered),
         'request_json_bytes': sum(len(json.dumps(a).encode()) for _, a, _ in calls),
@@ -179,11 +276,53 @@ def _matches_readback(value: dict, revision: dict, target: str, title: str, body
             and parts[3].strip() == body)
 
 
+def input_contracts(interface, toolmap: dict) -> dict:
+    """The same canonical input roots for live observation and trace replay."""
+    projection = interface.project().agent_tools
+    return {operation['id']: schema_closure(
+        {'$schema': interface.schema['$schema'], '$ref': '#/$defs/' + operation['input_definition']},
+        projection['$defs']) for operation in qualified_operations(projection, 'authoring')
+        if operation['id'] in toolmap}
+
+
+def fixture_contents(prefix: str) -> dict[str, tuple[str, str]]:
+    return {**{f'{prefix}-{i}': (f'Discovery Test {i}',
+               'This isolated test scope requires an explicit owner decision.') for i in range(3)},
+            f'reference.{prefix}-extra': ('Discovery Reference', 'This is contextual test material only.')}
+
+
+def fixture_failures(items: list[dict], server: str, prefix: str,
+                     readbacks: dict, initial_main: str, observed_main: str) -> list[str]:
+    """Exact task outcome remains separate from input-discovery coverage."""
+    failures = []
+    calls = [i for i in items if i.get('type') == 'mcpToolCall' and i.get('server') == server]
+    for operation, expected_ids in [('propose', {f'{prefix}-{i}' for i in range(3)}),
+                                    ('revise', {f'reference.{prefix}-extra'})]:
+        selected = [i.get('arguments', {}) for i in calls if i.get('tool') == operation]
+        edits = selected[0].get('change_set', {}).get('edits', []) if len(selected) == 1 else []
+        if (len(edits) != len(expected_ids) or any(edit.get('kind') != 'create-standard' for edit in edits)
+            or {edit.get('standard', {}).get('id') for edit in edits} != expected_ids):
+            failures.append(f'{operation}: edits did not match the isolated task write set.')
+    revisions = [i['result']['structuredContent'].get('revision') for i in calls
+                 if i.get('tool') == 'review' and
+                 (i.get('result') or {}).get('structuredContent', {}).get('status') == 'ready']
+    if len(revisions) != 1 or revisions[0] is None:
+        failures.append('No exact readiness revision was available for independent readback.')
+    else:
+        for target, (title, body) in fixture_contents(prefix).items():
+            if not _matches_readback(readbacks.get(target, {}), revisions[0], target, title, body):
+                failures.append(f'Readback did not preserve requested fixture content: {target}.')
+    if observed_main != initial_main:
+        failures.append('Fixture publication occurred; the task required unchanged main.')
+    return failures
+
+
 def scenario(server: str, fixture: Path, prefix: str) -> str:
     reference = evidence(fixture)
     return f'''Qualify input-contract discovery using only the {server} MCP tools in
-this fresh session. Obtain each of the five authoring operations' argument shapes
-through describe_input before using it. Select relevant definitions rather than
+this fresh session. Obtain each of the five authoring operations' input roots
+through describe_input before using it. Reuse already retrieved shared definitions
+within this unchanged catalog. Select relevant definitions rather than
 reading unrelated schema alternatives. Repository files, schema/example files,
 shell, web, other servers and subagents are outside this task. Do not ask for
 clarification or infer success from your own text; report exact unavailable outcomes.
@@ -232,11 +371,7 @@ async def run(arguments) -> dict:
     interface = AgentToolFacade.load_interface(fixture)
     catalog = tool_catalog(interface, purpose='authoring', schema_mode=arguments.schema_mode)
     toolmap = {tool['name']: tool for tool in catalog}
-    projection = interface.project().agent_tools
-    contracts = {operation['id']: schema_closure(
-        {'$schema': interface.schema['$schema'], '$ref': '#/$defs/' + operation['input_definition']},
-        projection['$defs']) for operation in qualified_operations(projection, 'authoring')
-        if operation['id'] in toolmap}
+    contracts = input_contracts(interface, toolmap)
     identity = RuntimeIdentity(fixture, 'authoring', interface, catalog).metadata()
     original_main = subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip()
     version = subprocess.check_output([arguments.codex, '--version'], text=True).strip()
@@ -249,9 +384,10 @@ async def run(arguments) -> dict:
         '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--schema-mode", arguments.schema_mode])}',
         '-c', f'mcp_servers.{server}.env.PYTHONPATH={json.dumps(str(ROOT))}'])
     events = []
-    report = {'status': 'unavailable', 'client_version': version, 'requested_model': arguments.model,
+    report = {'observer_version': OBSERVER_VERSION, 'status': 'unavailable', 'client_version': version, 'requested_model': arguments.model,
               'requested_surface': arguments.surface, 'schema_mode': arguments.schema_mode,
-              'catalog_digest': identity['catalog_digest'], 'fixture_main': original_main}
+              'catalog_digest': identity['catalog_digest'], 'fixture_main': original_main,
+              'server': server, 'fixture_prefix': prefix}
     process = None
     with (output/'stderr.log').open('w') as stderr, (output/'events.jsonl').open('w') as transcript:
         try:
@@ -314,35 +450,25 @@ async def run(arguments) -> dict:
             report['runtime'] = runtime
             turn = await rpc('turn/start', {'threadId': tid, 'input': [{'type': 'text', 'text': prompt}]})
             turn_id = turn['turn']['id']
+            report.update(thread_id=tid, turn_id=turn_id)
             while not any(e.get('method') == 'turn/completed' and e['params']['turn']['id'] == turn_id for e in events):
                 await receive()
             terminal = next(e['params']['turn'] for e in events if e.get('method') == 'turn/completed' and e['params']['turn']['id'] == turn_id)
-            items = [e['params']['item'] for e in events if e.get('method') == 'item/completed' and e['params'].get('turnId') == turn_id]
-            report.update(assess_model_items(items, server, toolmap, contracts))
+            items, starts = model_observations(events, tid, turn_id)
+            report.update(assess_model_items(items, server, toolmap, contracts, runtime, started_before=starts))
             if terminal.get('status') != 'completed':
                 report['failures'].append('The real model turn did not complete successfully.')
             calls = [i for i in items if i.get('type') == 'mcpToolCall' and i.get('server') == server]
-            for operation, expected_ids in [('propose', {f'{prefix}-{i}' for i in range(3)}),
-                                            ('revise', {f'reference.{prefix}-extra'})]:
-                selected = [i.get('arguments', {}) for i in calls if i.get('tool') == operation]
-                edits = selected[0].get('change_set', {}).get('edits', []) if len(selected) == 1 else []
-                if (len(edits) != len(expected_ids) or any(edit.get('kind') != 'create-standard' for edit in edits)
-                    or {edit.get('standard', {}).get('id') for edit in edits} != expected_ids):
-                    report['failures'].append(f'{operation}: edits did not match the isolated task write set.')
             revisions = [i['result']['structuredContent'].get('revision') for i in calls if i.get('tool') == 'review' and i.get('result', {}).get('structuredContent', {}).get('status') == 'ready']
+            readbacks = {}
             if len(revisions) == 1 and revisions[0] is not None:
-                for target in [f'{prefix}-{i}' for i in range(3)] + [f'reference.{prefix}-extra']:
+                for target in fixture_contents(prefix):
                     value = await call('query_proposal', {'revision': revisions[0], 'request': {'kind': 'read', 'target': target}})
                     (output/(target+'.json')).write_text(json.dumps(value, indent=2))
-                    expected = ('This is contextual test material only.' if target.startswith('reference.') else
-                                'This isolated test scope requires an explicit owner decision.')
-                    title = 'Discovery Reference' if target.startswith('reference.') else 'Discovery Test ' + target.rsplit('-', 1)[-1]
-                    if not _matches_readback(value, revisions[0], target, title, expected):
-                        report['failures'].append('Readback did not preserve requested fixture content.')
-            else:
-                report['failures'].append('No exact readiness revision was available for independent readback.')
-            if subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip() != original_main:
-                report['failures'].append('Fixture publication occurred; the task required unchanged main.')
+                    readbacks[target] = value
+            observed_main = subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip()
+            report['observed_main'] = observed_main
+            report['failures'].extend(fixture_failures(items, server, prefix, readbacks, original_main, observed_main))
             report['status'] = 'failed' if report['failures'] else 'passed'
         except Exception as error:
             report.update(status='unavailable', failure=f'{type(error).__name__}: {error}')

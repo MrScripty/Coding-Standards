@@ -49,3 +49,36 @@
   generated files match the delivery; only integration evidence was appended.
   The delivery ZIP and unrelated deletion are excluded from the commit. CI,
   independent review and actual-model discovery qualification remain open.
+
+## Observer reconciliation (version 2)
+
+The reported native workflow reached readiness, but the original observer incorrectly
+owned shared definitions per operation. The bounded correction and remaining
+acceptance dispositions are in [observer reconciliation](observer-reconciliation.md).
+The repair shares canonical definitions only within the exact recorded runtime and
+session, adds read-only chronological replay, and preserves original verdicts.
+The user's original trace was not available here; fixture replay is labeled as such.
+No compatibility branch, production API, stored authority or user configuration changes.
+
+## Host integration (2026-09-26)
+
+- Applied the observer-reconciliation delivery after `7f0a59f1`. Eight files match
+  the delivery exactly; two maintenance records preserve earlier integration notes
+  and add these observations. All ten Git modes match the manifest. Runtime,
+  schemas, catalog, deployment configuration and compatibility are unchanged.
+- Locked CPython 3.12.3: 48 focused observer/replay/discovery tests, 62 contracts
+  tests and 168 verifier tests passed (278 total, no skips). Generated contract
+  freshness and all 121 structural checks across 73 suites passed. Tests used an
+  isolated checkout preserving the user's unrelated tracked ZIP deletion.
+- Replayed the preserved real Codex 0.157.1 / gpt-6-astra native session with
+  observer v2, without another model call or Engine mutation: **passed**, zero
+  failures, eight discovery calls, five authoring calls and four verified readbacks.
+  The fixture main remains `7f0a59f14855c7aeec847eba5b84a7a3db289333`.
+- Replay binds events SHA-256
+  `d3f8d5bad93e4331b32bca94812205d1cbbc2283489578e55b0e6751ef674995`
+  and the original failed report SHA-256
+  `35f42ccfbb909b3c48772697225e369c479fe18d4d23e4d4b51c382e92c6d4b7`.
+  The new private verdict is retained beside the original evidence archive as
+  `/tmp/native-discovery-qualification-20260926-results/observer-v2.json`; original
+  and independent verdicts remain unchanged. This closes Q5 for that recorded
+  session, not compatibility retirement, remote CI or independent review.
